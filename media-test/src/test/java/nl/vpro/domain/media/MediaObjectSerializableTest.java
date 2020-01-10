@@ -4,7 +4,8 @@
  */
 package nl.vpro.domain.media;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.serialize.SerializeTestUtil;
 

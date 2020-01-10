@@ -1,893 +1,455 @@
 <?xml version="1.0" encoding="UTF-8"?><program xmlns="urn:vpro:media:2009" type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="VPROWON_20001" sortDate="1970-01-01T01:00:00.100+01:00" workflow="PUBLISHED" creationDate="2015-03-06T00:00:00+01:00" lastModified="2015-03-06T01:00:00+01:00" publishDate="2015-03-06T02:00:00+01:00" publishStart="1970-01-01T01:00:00+01:00" publishStop="2500-01-01T00:00:00+01:00" urn="urn:vpro:media:program:12" xmlns:shared="urn:vpro:shared:2009">
-
-  <broadcaster id="BNN">BNN</broadcaster>
-
-  <broadcaster id="AVRO">AVRO</broadcaster>
-
-  <portal id="3VOOR12_GRONINGEN">3voor12 Groningen</portal>
-
-  <portal id="STERREN24">Sterren24</portal>
-
-  <exclusive portalId="STERREN24"/>
-
-  <exclusive portalId="3VOOR12_GRONINGEN" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
-  <region regionId="NL" platform="INTERNETVOD"/>
-
-  <region regionId="BENELUX" platform="INTERNETVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
-  <region regionId="NL" platform="TVVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
-  <title owner="BROADCASTER" type="MAIN">Main title</title>
-
-  <title owner="MIS" type="MAIN">Main title MIS</title>
-
-  <title owner="BROADCASTER" type="SHORT">Short title</title>
-
-  <title owner="MIS" type="SUB">Episode title MIS</title>
-
-  <description owner="BROADCASTER" type="MAIN">Main description</description>
-
-  <description owner="MIS" type="MAIN">Main description MIS</description>
-
-  <description owner="BROADCASTER" type="SHORT">Short description</description>
-
-  <description owner="MIS" type="EPISODE">Episode description MIS</description>
-
-  <genre id="3.0.1.7.21">
-
-    <term>Informatief</term>
-
-    <term>Nieuws/actualiteiten</term>
-
-  </genre>
-
-  <genre id="3.0.1.8.25">
-
-    <term>Documentaire</term>
-
-    <term>Natuur</term>
-
-  </genre>
-
-  <tag>tag1</tag>
-
-  <tag>tag2</tag>
-
-  <tag>tag3</tag>
-
-  <intentions owner="BROADCASTER">
-
-    <intention>ACTIVATING</intention>
-
-    <intention>INFORM_INDEPTH</intention>
-
-  </intentions>
-
-  <intentions owner="NPO">
-
-    <intention>ENTERTAINMENT_INFORMATIVE</intention>
-
-    <intention>INFORM</intention>
-
-  </intentions>
-
-  <targetGroups owner="BROADCASTER">
-
-    <targetGroup>ADULTS</targetGroup>
-
-  </targetGroups>
-
-  <targetGroups owner="NPO">
-
-    <targetGroup>KIDS_6</targetGroup>
-
-    <targetGroup>KIDS_12</targetGroup>
-
-  </targetGroups>
-
-  <geoLocations owner="BROADCASTER">
-
-    <geoLocation gtaaUri="http://gtaa/1231" role="SUBJECT">
-
-      <name>Africa</name>
-
-      <scopeNote>Continent</scopeNote>
-
-    </geoLocation>
-
-  </geoLocations>
-
-  <geoLocations owner="NPO">
-
-    <geoLocation gtaaUri="http://gtaa/1232" gtaaStatus="approved" role="SUBJECT">
-
-      <name>England</name>
-
-    </geoLocation>
-
-    <geoLocation gtaaUri="http://gtaa/1233" role="RECORDED_IN">
-
-      <name>UK</name>
-
-    </geoLocation>
-
-  </geoLocations>
-
-  <topics owner="BROADCASTER">
-
-    <topic gtaaUri="http://gtaa/123" gtaaStatus="approved">
-
-      <name>foo</name>
-
-    </topic>
-
-    <topic gtaaUri="http://gtaa/124" gtaaStatus="candidate">
-
-      <name>bar</name>
-
-    </topic>
-
-  </topics>
-
-  <topics owner="NPO">
-
-    <topic gtaaUri="http://gtaa/125" gtaaStatus="approved">
-
-      <name>foos</name>
-
-    </topic>
-
-  </topics>
-
-  <source>Naar het gelijknamige boek van W.F. Hermans</source>
-
-  <country code="GB">Verenigd Koninkrijk</country>
-
-  <country code="US">Verenigde Staten</country>
-
-  <language code="nl">Nederlands</language>
-
-  <language code="fr">Frans</language>
-
-  <availableSubtitles language="nl" type="CAPTION"/>
-
-  <avAttributes>
-
-    <bitrate>1000000</bitrate>
-
-    <byteSize>2000000</byteSize>
-
-    <avFileFormat>M4V</avFileFormat>
-
-    <videoAttributes width="640" heigth="320">
-
-      <videoCoding>VCODEC</videoCoding>
-
-    </videoAttributes>
-
-    <audioAttributes>
-
-      <numberOfChannels>2</numberOfChannels>
-
-      <audioCoding>ACODEC</audioCoding>
-
-      <language>nl-NL</language>
-
-    </audioAttributes>
-
-  </avAttributes>
-
-  <releaseYear>2004</releaseYear>
-
-  <duration>P0DT2H0M0.000S</duration>
-
-  <credits>
-
-    <person gtaaUri="http://gtaa/1234" role="DIRECTOR">
-
-      <givenName>Bregtje</givenName>
-
-      <familyName>van der Haak</familyName>
-
-    </person>
-
-    <person role="PRESENTER">
-
-      <givenName>Hans</givenName>
-
-      <familyName>Goedkoop</familyName>
-
-    </person>
-
-    <person role="PRESENTER">
-
-      <givenName>Meta</givenName>
-
-      <familyName>de Vries</familyName>
-
-    </person>
-
-    <person role="ACTOR">
-
-      <givenName>Claire</givenName>
-
-      <familyName>Holt</familyName>
-
-    </person>
-
-  </credits>
-
-  <award>In 2003 bekroond met een Gouden Kalf</award>
-
-  <award>Winnaar IDFA scenarioprijs 2008.</award>
-
-  <award>De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.</award>
-
-  <award>De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn.</award>
-
-  <descendantOf urnRef="urn:vpro:media:group:100" midRef="VPROWON_20002" type="SERIES"/>
-
-  <descendantOf urnRef="urn:vpro:media:group:200" midRef="VPROWON_20003" type="SEASON"/>
-
-  <descendantOf midRef="VPROWON_30001" type="SERIES"/>
-
-  <descendantOf midRef="VPROWON_30002" type="SEASON"/>
-
-  <memberOf highlighted="false" midRef="VPROWON_20003" index="1" type="SEASON" urnRef="urn:vpro:media:group:200"/>
-
-  <ageRating>12</ageRating>
-
-  <contentRating>ANGST</contentRating>
-
-  <contentRating>DRUGS_EN_ALCOHOL</contentRating>
-
-  <email>info@npo.nl</email>
-
-  <email>programma@avro.nl</email>
-
-  <website>http://www.omroep.nl/programma/journaal</website>
-
-  <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>
-
-  <twitter type="HASHTAG">#vpro</twitter>
-
-  <twitter type="ACCOUNT">@twitter</twitter>
-
-  <teletext>100</teletext>
-
-  <prediction state="ANNOUNCED">INTERNETVOD</prediction>
-
-  <prediction state="ANNOUNCED">TVVOD</prediction>
-
-  <locations>
-
-    <location owner="BROADCASTER" workflow="FOR PUBLICATION" creationDate="2016-03-04T15:45:00+01:00" urn="urn:vpro:media:location:6">
-
-      <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
-
-      <avAttributes>
-
-        <bitrate>1500</bitrate>
-
-        <avFileFormat>MP4</avFileFormat>
-
-      </avAttributes>
-
-      <offset>P0DT0H13M0.000S</offset>
-
-      <duration>P0DT0H10M0.000S</duration>
-
-    </location>
-
-    <location owner="BROADCASTER" workflow="FOR PUBLICATION" creationDate="2016-03-04T14:45:00+01:00" urn="urn:vpro:media:location:7">
-
-      <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
-
-      <avAttributes>
-
-        <bitrate>3000</bitrate>
-
-        <avFileFormat>WM</avFileFormat>
-
-      </avAttributes>
-
-    </location>
-
-    <location owner="BROADCASTER" workflow="FOR PUBLICATION" creationDate="2016-03-04T13:45:00+01:00" urn="urn:vpro:media:location:8">
-
-      <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
-
-      <avAttributes>
-
-        <bitrate>2000</bitrate>
-
-        <avFileFormat>WM</avFileFormat>
-
-      </avAttributes>
-
-      <duration>P0DT0H30M33.000S</duration>
-
-    </location>
-
-    <location owner="NEBO" workflow="FOR PUBLICATION" creationDate="2016-03-04T12:45:00+01:00" urn="urn:vpro:media:location:9">
-
-      <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>
-
-      <avAttributes>
-
-        <bitrate>1000</bitrate>
-
-        <avFileFormat>HTML</avFileFormat>
-
-      </avAttributes>
-
-    </location>
-
-    <location owner="NPO" workflow="FOR PUBLICATION" creationDate="2017-03-04T15:45:00+01:00" urn="urn:vpro:media:location:10">
-
-      <programUrl>http://www.npo.nl/location/1</programUrl>
-
-      <avAttributes>
-
-        <avFileFormat>UNKNOWN</avFileFormat>
-
-      </avAttributes>
-
-      <offset>P0DT0H13M0.000S</offset>
-
-      <duration>P0DT0H10M0.000S</duration>
-
-    </location>
-
-    <location owner="BROADCASTER" workflow="PUBLISHED" creationDate="2017-02-05T11:42:00+01:00" urn="urn:vpro:media:location:11">
-
-      <programUrl>http://www.vpro.nl/location/1</programUrl>
-
-      <avAttributes>
-
-        <avFileFormat>UNKNOWN</avFileFormat>
-
-      </avAttributes>
-
-    </location>
-
-  </locations>
-
-  <relation broadcaster="AVRO" type="THESAURUS" urn="urn:vpro:media:relation:2">synoniem</relation>
-
-  <relation broadcaster="EO" type="KOOR" urn="urn:vpro:media:relation:4">Ulfts Mannenkoor</relation>
-
-  <relation broadcaster="VPRO" type="ARTIST" urn="urn:vpro:media:relation:3">Marco Borsato</relation>
-
-  <relation uriRef="http://www.bluenote.com/" broadcaster="VPRO" type="LABEL" urn="urn:vpro:media:relation:1">Blue Note</relation>
-
-  <images>
-
-    <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:2">
-
-      <shared:title>Eerste plaatje met credits</shared:title>
-
-      <shared:imageUri>urn:vpro:image:11234</shared:imageUri>
-
-      <shared:credits>CREDITS</shared:credits>
-
-      <shared:source>SOURCE</shared:source>
-
-      <shared:license>PUBLIC_DOMAIN</shared:license>
-
-    </shared:image>
-
-    <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:3">
-
-      <shared:title>Tweede plaatje met credits</shared:title>
-
-      <shared:imageUri>urn:vpro:image:15678</shared:imageUri>
-
-      <shared:credits>CREDITS</shared:credits>
-
-      <shared:source>SOURCE</shared:source>
-
-      <shared:license>PUBLIC_DOMAIN</shared:license>
-
-    </shared:image>
-
-    <shared:image owner="NEBO" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:4">
-
-      <shared:title>Een plaatje met andere owner</shared:title>
-
-      <shared:imageUri>urn:vpro:image:12468</shared:imageUri>
-
-    </shared:image>
-
-    <shared:image owner="NEBO" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:5">
-
-      <shared:title>Nog een plaatje met andere owner</shared:title>
-
-      <shared:imageUri>urn:vpro:image:18888</shared:imageUri>
-
-    </shared:image>
-
-  </images>
-
-  <scheduleEvents>
-
-    <scheduleEvent channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
-      <guideDay>1969-12-31+01:00</guideDay>
-
-      <start>1970-01-01T01:00:00.100+01:00</start>
-
-      <duration>P0DT0H0M0.200S</duration>
-
-      <poProgID>VPROWON_20001</poProgID>
-
-    </scheduleEvent>
-
-    <scheduleEvent channel="NED3" midRef="VPROWON_20001" net="ZAPP" urnRef="urn:vpro:media:program:12">
-
-      <repeat isRerun="true"/>
-
-      <guideDay>1970-01-03+01:00</guideDay>
-
-      <start>1970-01-04T01:00:00.300+01:00</start>
-
-      <duration>P0DT0H0M0.050S</duration>
-
-      <poProgID>VPROWON_20001</poProgID>
-
-    </scheduleEvent>
-
-    <scheduleEvent channel="HOLL" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
-      <repeat isRerun="true"/>
-
-      <guideDay>1970-01-08+01:00</guideDay>
-
-      <start>1970-01-09T01:00:00.350+01:00</start>
-
-      <duration>P0DT0H0M0.250S</duration>
-
-      <poProgID>VPROWON_20001</poProgID>
-
-    </scheduleEvent>
-
-    <scheduleEvent channel="CONS" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
-      <repeat isRerun="true"/>
-
-      <guideDay>1970-01-10+01:00</guideDay>
-
-      <start>1970-01-11T01:00:00.600+01:00</start>
-
-      <duration>P0DT0H0M0.200S</duration>
-
-      <poProgID>VPROWON_20001</poProgID>
-
-    </scheduleEvent>
-
-  </scheduleEvents>
-
-  <episodeOf highlighted="false" midRef="VPROWON_30002" index="1" type="SEASON"/>
-
-  <segments>
-
-    <segment midRef="VPROWON_20001" type="SEGMENT" urnRef="urn:vpro:media:program:12" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="VPROWON_12345_1" sortDate="1970-01-01T01:00:00.100+01:00" workflow="PUBLISHED" creationDate="2015-03-06T00:00:00+01:00" lastModified="2015-03-06T01:00:00+01:00" publishDate="2015-03-06T02:00:00+01:00" publishStart="1970-01-01T01:00:00+01:00" publishStop="2500-01-01T00:00:00+01:00" urn="urn:vpro:media:segment:12">
-
-      <broadcaster id="BNN">BNN</broadcaster>
-
-      <broadcaster id="AVRO">AVRO</broadcaster>
-
-      <portal id="3VOOR12_GRONINGEN">3voor12 Groningen</portal>
-
-      <portal id="STERREN24">Sterren24</portal>
-
-      <exclusive portalId="STERREN24"/>
-
-      <exclusive portalId="3VOOR12_GRONINGEN" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
-      <region regionId="NL" platform="INTERNETVOD"/>
-
-      <region regionId="BENELUX" platform="INTERNETVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
-      <region regionId="NL" platform="TVVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
-      <title owner="BROADCASTER" type="MAIN">Main title</title>
-
-      <title owner="MIS" type="MAIN">Main title MIS</title>
-
-      <title owner="BROADCASTER" type="SHORT">Short title</title>
-
-      <title owner="MIS" type="SUB">Episode title MIS</title>
-
-      <description owner="BROADCASTER" type="MAIN">Main description</description>
-
-      <description owner="MIS" type="MAIN">Main description MIS</description>
-
-      <description owner="BROADCASTER" type="SHORT">Short description</description>
-
-      <description owner="MIS" type="EPISODE">Episode description MIS</description>
-
-      <genre id="3.0.1.7.21">
-
+    <broadcaster id="BNN">BNN</broadcaster>
+    <broadcaster id="AVRO">AVRO</broadcaster>
+    <portal id="3VOOR12_GRONINGEN">3voor12 Groningen</portal>
+    <portal id="STERREN24">Sterren24</portal>
+    <exclusive portalId="STERREN24"/>
+    <exclusive portalId="3VOOR12_GRONINGEN" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
+    <region regionId="NL" platform="INTERNETVOD"/>
+    <region regionId="BENELUX" platform="INTERNETVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
+    <region regionId="NL" platform="TVVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
+    <title owner="BROADCASTER" type="MAIN">Main title</title>
+    <title owner="MIS" type="MAIN">Main title MIS</title>
+    <title owner="BROADCASTER" type="SHORT">Short title</title>
+    <title owner="MIS" type="SUB">Episode title MIS</title>
+    <description owner="BROADCASTER" type="MAIN">Main description</description>
+    <description owner="MIS" type="MAIN">Main description MIS</description>
+    <description owner="BROADCASTER" type="SHORT">Short description</description>
+    <description owner="MIS" type="EPISODE">Episode description MIS</description>
+    <genre id="3.0.1.7.21">
         <term>Informatief</term>
-
         <term>Nieuws/actualiteiten</term>
-
-      </genre>
-
-      <genre id="3.0.1.8.25">
-
+    </genre>
+    <genre id="3.0.1.8.25">
         <term>Documentaire</term>
-
         <term>Natuur</term>
-
-      </genre>
-
-      <tag>tag1</tag>
-
-      <tag>tag2</tag>
-
-      <tag>tag3</tag>
-
-      <intentions owner="BROADCASTER">
-
+    </genre>
+    <tag>tag1</tag>
+    <tag>tag2</tag>
+    <tag>tag3</tag>
+    <intentions owner="BROADCASTER">
         <intention>ACTIVATING</intention>
-
         <intention>INFORM_INDEPTH</intention>
-
-      </intentions>
-
-      <intentions owner="NPO">
-
+    </intentions>
+    <intentions owner="NPO">
         <intention>ENTERTAINMENT_INFORMATIVE</intention>
-
         <intention>INFORM</intention>
-
-      </intentions>
-
-      <targetGroups owner="BROADCASTER">
-
+    </intentions>
+    <targetGroups owner="BROADCASTER">
         <targetGroup>ADULTS</targetGroup>
-
-      </targetGroups>
-
-      <targetGroups owner="NPO">
-
+    </targetGroups>
+    <targetGroups owner="NPO">
         <targetGroup>KIDS_6</targetGroup>
-
         <targetGroup>KIDS_12</targetGroup>
-
-      </targetGroups>
-
-      <geoLocations owner="BROADCASTER">
-
+    </targetGroups>
+    <geoLocations owner="BROADCASTER">
         <geoLocation gtaaUri="http://gtaa/1231" role="SUBJECT">
-
-          <name>Africa</name>
-
-          <scopeNote>Continent</scopeNote>
-
+            <name>Africa</name>
+            <scopeNote>Continent</scopeNote>
         </geoLocation>
-
-      </geoLocations>
-
-      <geoLocations owner="NPO">
-
+    </geoLocations>
+    <geoLocations owner="NPO">
         <geoLocation gtaaUri="http://gtaa/1232" gtaaStatus="approved" role="SUBJECT">
-
-          <name>England</name>
-
+            <name>England</name>
         </geoLocation>
-
         <geoLocation gtaaUri="http://gtaa/1233" role="RECORDED_IN">
-
-          <name>UK</name>
-
+            <name>UK</name>
         </geoLocation>
-
-      </geoLocations>
-
-      <topics owner="BROADCASTER">
-
+    </geoLocations>
+    <topics owner="BROADCASTER">
         <topic gtaaUri="http://gtaa/123" gtaaStatus="approved">
-
-          <name>foo</name>
-
+            <name>foo</name>
         </topic>
-
         <topic gtaaUri="http://gtaa/124" gtaaStatus="candidate">
-
-          <name>bar</name>
-
+            <name>bar</name>
         </topic>
-
-      </topics>
-
-      <topics owner="NPO">
-
+    </topics>
+    <topics owner="NPO">
         <topic gtaaUri="http://gtaa/125" gtaaStatus="approved">
-
-          <name>foos</name>
-
+            <name>foos</name>
         </topic>
-
-      </topics>
-
-      <source>Naar het gelijknamige boek van W.F. Hermans</source>
-
-      <country code="GB">Verenigd Koninkrijk</country>
-
-      <country code="US">Verenigde Staten</country>
-
-      <language code="nl">Nederlands</language>
-
-      <language code="fr">Frans</language>
-
-      <availableSubtitles language="nl" type="CAPTION"/>
-
-      <avAttributes>
-
+    </topics>
+    <source>Naar het gelijknamige boek van W.F. Hermans</source>
+    <country code="GB">Verenigd Koninkrijk</country>
+    <country code="US">Verenigde Staten</country>
+    <language code="nl">Nederlands</language>
+    <language code="fr">Frans</language>
+    <availableSubtitles language="nl" type="CAPTION"/>
+    <avAttributes>
         <bitrate>1000000</bitrate>
-
         <byteSize>2000000</byteSize>
-
         <avFileFormat>M4V</avFileFormat>
-
         <videoAttributes width="640" heigth="320">
-
-          <videoCoding>VCODEC</videoCoding>
-
+            <videoCoding>VCODEC</videoCoding>
         </videoAttributes>
-
         <audioAttributes>
-
-          <numberOfChannels>2</numberOfChannels>
-
-          <audioCoding>ACODEC</audioCoding>
-
-          <language>nl-NL</language>
-
+            <numberOfChannels>2</numberOfChannels>
+            <audioCoding>ACODEC</audioCoding>
+            <language>nl-NL</language>
         </audioAttributes>
-
-      </avAttributes>
-
-      <releaseYear>2004</releaseYear>
-
-      <duration>P0DT0H1M40.000S</duration>
-
-      <credits>
-
+    </avAttributes>
+    <releaseYear>2004</releaseYear>
+    <duration>P0DT2H0M0.000S</duration>
+    <credits>
         <person gtaaUri="http://gtaa/1234" role="DIRECTOR">
-
-          <givenName>Bregtje</givenName>
-
-          <familyName>van der Haak</familyName>
-
+            <givenName>Bregtje</givenName>
+            <familyName>van der Haak</familyName>
         </person>
-
         <person role="PRESENTER">
-
-          <givenName>Hans</givenName>
-
-          <familyName>Goedkoop</familyName>
-
+            <givenName>Hans</givenName>
+            <familyName>Goedkoop</familyName>
         </person>
-
         <person role="PRESENTER">
-
-          <givenName>Meta</givenName>
-
-          <familyName>de Vries</familyName>
-
+            <givenName>Meta</givenName>
+            <familyName>de Vries</familyName>
         </person>
-
         <person role="ACTOR">
-
-          <givenName>Claire</givenName>
-
-          <familyName>Holt</familyName>
-
+            <givenName>Claire</givenName>
+            <familyName>Holt</familyName>
         </person>
-
-      </credits>
-
-      <award>In 2003 bekroond met een Gouden Kalf</award>
-
-      <award>Winnaar IDFA scenarioprijs 2008.</award>
-
-      <award>De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.</award>
-
-      <award>De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn.</award>
-
-      <descendantOf urnRef="urn:vpro:media:group:100" midRef="VPROWON_DG_30003" type="SERIES"/>
-
-      <descendantOf urnRef="urn:vpro:media:group:200" midRef="VPROWON_DG_30004" type="SEASON"/>
-
-      <descendantOf midRef="VPROWON_DG_30005" type="SERIES"/>
-
-      <descendantOf midRef="VPROWON_DG_30006" type="SEASON"/>
-
-      <descendantOf urnRef="urn:vpro:media:program:12" midRef="VPROWON_DG_30007" type="BROADCAST"/>
-
-      <memberOf highlighted="false" midRef="VPROWON_20008" index="1" type="SEASON" urnRef="urn:vpro:media:group:200"/>
-
-      <ageRating>12</ageRating>
-
-      <contentRating>ANGST</contentRating>
-
-      <contentRating>DRUGS_EN_ALCOHOL</contentRating>
-
-      <email>info@npo.nl</email>
-
-      <email>programma@avro.nl</email>
-
-      <website>http://www.omroep.nl/programma/journaal</website>
-
-      <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>
-
-      <twitter type="HASHTAG">#vpro</twitter>
-
-      <twitter type="ACCOUNT">@twitter</twitter>
-
-      <teletext>100</teletext>
-
-      <prediction state="ANNOUNCED">INTERNETVOD</prediction>
-
-      <locations>
-
+        <name gtaaUri="http://data.beeldengeluid.nl/gtaa/51771" role="COMPOSER">
+            <name>Doe Maar</name>
+            <scopeNote>popgroep Nederland</scopeNote>
+        </name>
+    </credits>
+    <award>In 2003 bekroond met een Gouden Kalf</award>
+    <award>Winnaar IDFA scenarioprijs 2008.</award>
+    <award>De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.</award>
+    <award>De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn.</award>
+    <descendantOf urnRef="urn:vpro:media:group:100" midRef="VPROWON_20002" type="SERIES"/>
+    <descendantOf urnRef="urn:vpro:media:group:200" midRef="VPROWON_20003" type="SEASON"/>
+    <descendantOf midRef="VPROWON_30001" type="SERIES"/>
+    <descendantOf midRef="VPROWON_30002" type="SEASON"/>
+    <memberOf highlighted="false" midRef="VPROWON_20003" index="1" type="SEASON" urnRef="urn:vpro:media:group:200"/>
+    <ageRating>12</ageRating>
+    <contentRating>ANGST</contentRating>
+    <contentRating>DRUGS_EN_ALCOHOL</contentRating>
+    <email>info@npo.nl</email>
+    <email>programma@avro.nl</email>
+    <website>http://www.omroep.nl/programma/journaal</website>
+    <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>
+    <twitter type="HASHTAG">#vpro</twitter>
+    <twitter type="ACCOUNT">@twitter</twitter>
+    <teletext>100</teletext>
+    <prediction state="ANNOUNCED">INTERNETVOD</prediction>
+    <prediction state="ANNOUNCED">TVVOD</prediction>
+    <locations>
         <location owner="BROADCASTER" workflow="FOR PUBLICATION" creationDate="2016-03-04T15:45:00+01:00" urn="urn:vpro:media:location:6">
-
-          <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
-
-          <avAttributes>
-
-            <bitrate>1500</bitrate>
-
-            <avFileFormat>MP4</avFileFormat>
-
-          </avAttributes>
-
-          <offset>P0DT0H13M0.000S</offset>
-
-          <duration>P0DT0H10M0.000S</duration>
-
+            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
+            <avAttributes>
+                <bitrate>1500</bitrate>
+                <avFileFormat>MP4</avFileFormat>
+            </avAttributes>
+            <offset>P0DT0H13M0.000S</offset>
+            <duration>P0DT0H10M0.000S</duration>
         </location>
-
         <location owner="BROADCASTER" workflow="FOR PUBLICATION" creationDate="2016-03-04T14:45:00+01:00" urn="urn:vpro:media:location:7">
-
-          <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
-
-          <avAttributes>
-
-            <bitrate>3000</bitrate>
-
-            <avFileFormat>WM</avFileFormat>
-
-          </avAttributes>
-
+            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
+            <avAttributes>
+                <bitrate>3000</bitrate>
+                <avFileFormat>WM</avFileFormat>
+            </avAttributes>
         </location>
-
         <location owner="BROADCASTER" workflow="FOR PUBLICATION" creationDate="2016-03-04T13:45:00+01:00" urn="urn:vpro:media:location:8">
-
-          <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
-
-          <avAttributes>
-
-            <bitrate>2000</bitrate>
-
-            <avFileFormat>WM</avFileFormat>
-
-          </avAttributes>
-
-          <duration>P0DT0H30M33.000S</duration>
-
+            <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
+            <avAttributes>
+                <bitrate>2000</bitrate>
+                <avFileFormat>WM</avFileFormat>
+            </avAttributes>
+            <duration>P0DT0H30M33.000S</duration>
         </location>
-
         <location owner="NEBO" workflow="FOR PUBLICATION" creationDate="2016-03-04T12:45:00+01:00" urn="urn:vpro:media:location:9">
-
-          <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>
-
-          <avAttributes>
-
-            <bitrate>1000</bitrate>
-
-            <avFileFormat>HTML</avFileFormat>
-
-          </avAttributes>
-
+            <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>
+            <avAttributes>
+                <bitrate>1000</bitrate>
+                <avFileFormat>HTML</avFileFormat>
+            </avAttributes>
         </location>
-
         <location owner="NPO" workflow="FOR PUBLICATION" creationDate="2017-03-04T15:45:00+01:00" urn="urn:vpro:media:location:10">
-
-          <programUrl>http://www.npo.nl/location/1</programUrl>
-
-          <avAttributes>
-
-            <avFileFormat>UNKNOWN</avFileFormat>
-
-          </avAttributes>
-
-          <offset>P0DT0H13M0.000S</offset>
-
-          <duration>P0DT0H10M0.000S</duration>
-
+            <programUrl>http://www.npo.nl/location/1</programUrl>
+            <avAttributes>
+                <avFileFormat>UNKNOWN</avFileFormat>
+            </avAttributes>
+            <offset>P0DT0H13M0.000S</offset>
+            <duration>P0DT0H10M0.000S</duration>
         </location>
-
         <location owner="BROADCASTER" workflow="PUBLISHED" creationDate="2017-02-05T11:42:00+01:00" urn="urn:vpro:media:location:11">
-
-          <programUrl>http://www.vpro.nl/location/1</programUrl>
-
-          <avAttributes>
-
-            <avFileFormat>UNKNOWN</avFileFormat>
-
-          </avAttributes>
-
+            <programUrl>http://www.vpro.nl/location/1</programUrl>
+            <avAttributes>
+                <avFileFormat>UNKNOWN</avFileFormat>
+            </avAttributes>
         </location>
-
-      </locations>
-
-      <relation broadcaster="AVRO" type="THESAURUS" urn="urn:vpro:media:relation:2">synoniem</relation>
-
-      <relation broadcaster="EO" type="KOOR" urn="urn:vpro:media:relation:4">Ulfts Mannenkoor</relation>
-
-      <relation broadcaster="VPRO" type="ARTIST" urn="urn:vpro:media:relation:3">Marco Borsato</relation>
-
-      <relation uriRef="http://www.bluenote.com/" broadcaster="VPRO" type="LABEL" urn="urn:vpro:media:relation:1">Blue Note</relation>
-
-      <images>
-
+    </locations>
+    <relation broadcaster="AVRO" type="THESAURUS" urn="urn:vpro:media:relation:2">synoniem</relation>
+    <relation broadcaster="EO" type="KOOR" urn="urn:vpro:media:relation:4">Ulfts Mannenkoor</relation>
+    <relation broadcaster="VPRO" type="ARTIST" urn="urn:vpro:media:relation:3">Marco Borsato</relation>
+    <relation uriRef="http://www.bluenote.com/" broadcaster="VPRO" type="LABEL" urn="urn:vpro:media:relation:1">Blue Note</relation>
+    <images>
         <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:2">
-
-          <shared:title>Eerste plaatje met credits</shared:title>
-
-          <shared:imageUri>urn:vpro:image:11234</shared:imageUri>
-
-          <shared:credits>CREDITS</shared:credits>
-
-          <shared:source>SOURCE</shared:source>
-
-          <shared:license>PUBLIC_DOMAIN</shared:license>
-
+            <shared:title>Eerste plaatje met credits</shared:title>
+            <shared:imageUri>urn:vpro:image:11234</shared:imageUri>
+            <shared:credits>CREDITS</shared:credits>
+            <shared:source>SOURCE</shared:source>
+            <shared:license>PUBLIC_DOMAIN</shared:license>
         </shared:image>
-
         <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:3">
-
-          <shared:title>Tweede plaatje met credits</shared:title>
-
-          <shared:imageUri>urn:vpro:image:15678</shared:imageUri>
-
-          <shared:credits>CREDITS</shared:credits>
-
-          <shared:source>SOURCE</shared:source>
-
-          <shared:license>PUBLIC_DOMAIN</shared:license>
-
+            <shared:title>Tweede plaatje met credits</shared:title>
+            <shared:imageUri>urn:vpro:image:15678</shared:imageUri>
+            <shared:credits>CREDITS</shared:credits>
+            <shared:source>SOURCE</shared:source>
+            <shared:license>PUBLIC_DOMAIN</shared:license>
         </shared:image>
-
         <shared:image owner="NEBO" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:4">
-
-          <shared:title>Een plaatje met andere owner</shared:title>
-
-          <shared:imageUri>urn:vpro:image:12468</shared:imageUri>
-
+            <shared:title>Een plaatje met andere owner</shared:title>
+            <shared:imageUri>urn:vpro:image:12468</shared:imageUri>
         </shared:image>
-
         <shared:image owner="NEBO" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:5">
-
-          <shared:title>Nog een plaatje met andere owner</shared:title>
-
-          <shared:imageUri>urn:vpro:image:18888</shared:imageUri>
-
+            <shared:title>Nog een plaatje met andere owner</shared:title>
+            <shared:imageUri>urn:vpro:image:18888</shared:imageUri>
         </shared:image>
-
-      </images>
-
-      <start>P0DT0H0M0.000S</start>
-
-    </segment>
-
-  </segments>
-
+    </images>
+    <scheduleEvents>
+        <scheduleEvent channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
+            <guideDay>1969-12-31+01:00</guideDay>
+            <start>1970-01-01T01:00:00.100+01:00</start>
+            <duration>P0DT0H0M0.200S</duration>
+            <poProgID>VPROWON_20001</poProgID>
+        </scheduleEvent>
+        <scheduleEvent channel="NED3" midRef="VPROWON_20001" net="ZAPP" urnRef="urn:vpro:media:program:12">
+            <repeat isRerun="true"/>
+            <guideDay>1970-01-03+01:00</guideDay>
+            <start>1970-01-04T01:00:00.300+01:00</start>
+            <duration>P0DT0H0M0.050S</duration>
+            <poProgID>VPROWON_20001</poProgID>
+        </scheduleEvent>
+        <scheduleEvent channel="HOLL" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
+            <repeat isRerun="true"/>
+            <guideDay>1970-01-08+01:00</guideDay>
+            <start>1970-01-09T01:00:00.350+01:00</start>
+            <duration>P0DT0H0M0.250S</duration>
+            <poProgID>VPROWON_20001</poProgID>
+        </scheduleEvent>
+        <scheduleEvent channel="CONS" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
+            <repeat isRerun="true"/>
+            <guideDay>1970-01-10+01:00</guideDay>
+            <start>1970-01-11T01:00:00.600+01:00</start>
+            <duration>P0DT0H0M0.200S</duration>
+            <poProgID>VPROWON_20001</poProgID>
+        </scheduleEvent>
+    </scheduleEvents>
+    <episodeOf highlighted="false" midRef="VPROWON_30002" index="1" type="SEASON"/>
+    <segments>
+        <segment midRef="VPROWON_20001" type="SEGMENT" urnRef="urn:vpro:media:program:12" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="VPROWON_12345_1" sortDate="1970-01-01T01:00:00.100+01:00" workflow="PUBLISHED" creationDate="2015-03-06T00:00:00+01:00" lastModified="2015-03-06T01:00:00+01:00" publishDate="2015-03-06T02:00:00+01:00" publishStart="1970-01-01T01:00:00+01:00" publishStop="2500-01-01T00:00:00+01:00" urn="urn:vpro:media:segment:12">
+            <broadcaster id="BNN">BNN</broadcaster>
+            <broadcaster id="AVRO">AVRO</broadcaster>
+            <portal id="3VOOR12_GRONINGEN">3voor12 Groningen</portal>
+            <portal id="STERREN24">Sterren24</portal>
+            <exclusive portalId="STERREN24"/>
+            <exclusive portalId="3VOOR12_GRONINGEN" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
+            <region regionId="NL" platform="INTERNETVOD"/>
+            <region regionId="BENELUX" platform="INTERNETVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
+            <region regionId="NL" platform="TVVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
+            <title owner="BROADCASTER" type="MAIN">Main title</title>
+            <title owner="MIS" type="MAIN">Main title MIS</title>
+            <title owner="BROADCASTER" type="SHORT">Short title</title>
+            <title owner="MIS" type="SUB">Episode title MIS</title>
+            <description owner="BROADCASTER" type="MAIN">Main description</description>
+            <description owner="MIS" type="MAIN">Main description MIS</description>
+            <description owner="BROADCASTER" type="SHORT">Short description</description>
+            <description owner="MIS" type="EPISODE">Episode description MIS</description>
+            <genre id="3.0.1.7.21">
+                <term>Informatief</term>
+                <term>Nieuws/actualiteiten</term>
+            </genre>
+            <genre id="3.0.1.8.25">
+                <term>Documentaire</term>
+                <term>Natuur</term>
+            </genre>
+            <tag>tag1</tag>
+            <tag>tag2</tag>
+            <tag>tag3</tag>
+            <intentions owner="BROADCASTER">
+                <intention>ACTIVATING</intention>
+                <intention>INFORM_INDEPTH</intention>
+            </intentions>
+            <intentions owner="NPO">
+                <intention>ENTERTAINMENT_INFORMATIVE</intention>
+                <intention>INFORM</intention>
+            </intentions>
+            <targetGroups owner="BROADCASTER">
+                <targetGroup>ADULTS</targetGroup>
+            </targetGroups>
+            <targetGroups owner="NPO">
+                <targetGroup>KIDS_6</targetGroup>
+                <targetGroup>KIDS_12</targetGroup>
+            </targetGroups>
+            <geoLocations owner="BROADCASTER">
+                <geoLocation gtaaUri="http://gtaa/1231" role="SUBJECT">
+                    <name>Africa</name>
+                    <scopeNote>Continent</scopeNote>
+                </geoLocation>
+            </geoLocations>
+            <geoLocations owner="NPO">
+                <geoLocation gtaaUri="http://gtaa/1232" gtaaStatus="approved" role="SUBJECT">
+                    <name>England</name>
+                </geoLocation>
+                <geoLocation gtaaUri="http://gtaa/1233" role="RECORDED_IN">
+                    <name>UK</name>
+                </geoLocation>
+            </geoLocations>
+            <topics owner="BROADCASTER">
+                <topic gtaaUri="http://gtaa/123" gtaaStatus="approved">
+                    <name>foo</name>
+                </topic>
+                <topic gtaaUri="http://gtaa/124" gtaaStatus="candidate">
+                    <name>bar</name>
+                </topic>
+            </topics>
+            <topics owner="NPO">
+                <topic gtaaUri="http://gtaa/125" gtaaStatus="approved">
+                    <name>foos</name>
+                </topic>
+            </topics>
+            <source>Naar het gelijknamige boek van W.F. Hermans</source>
+            <country code="GB">Verenigd Koninkrijk</country>
+            <country code="US">Verenigde Staten</country>
+            <language code="nl">Nederlands</language>
+            <language code="fr">Frans</language>
+            <availableSubtitles language="nl" type="CAPTION"/>
+            <avAttributes>
+                <bitrate>1000000</bitrate>
+                <byteSize>2000000</byteSize>
+                <avFileFormat>M4V</avFileFormat>
+                <videoAttributes width="640" heigth="320">
+                    <videoCoding>VCODEC</videoCoding>
+                </videoAttributes>
+                <audioAttributes>
+                    <numberOfChannels>2</numberOfChannels>
+                    <audioCoding>ACODEC</audioCoding>
+                    <language>nl-NL</language>
+                </audioAttributes>
+            </avAttributes>
+            <releaseYear>2004</releaseYear>
+            <duration>P0DT0H1M40.000S</duration>
+            <credits>
+                <person gtaaUri="http://gtaa/1234" role="DIRECTOR">
+                    <givenName>Bregtje</givenName>
+                    <familyName>van der Haak</familyName>
+                </person>
+                <person role="PRESENTER">
+                    <givenName>Hans</givenName>
+                    <familyName>Goedkoop</familyName>
+                </person>
+                <person role="PRESENTER">
+                    <givenName>Meta</givenName>
+                    <familyName>de Vries</familyName>
+                </person>
+                <person role="ACTOR">
+                    <givenName>Claire</givenName>
+                    <familyName>Holt</familyName>
+                </person>
+                <name gtaaUri="http://data.beeldengeluid.nl/gtaa/51771" role="COMPOSER">
+                    <name>Doe Maar</name>
+                    <scopeNote>popgroep Nederland</scopeNote>
+                </name>
+            </credits>
+            <award>In 2003 bekroond met een Gouden Kalf</award>
+            <award>Winnaar IDFA scenarioprijs 2008.</award>
+            <award>De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.</award>
+            <award>De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn.</award>
+            <descendantOf urnRef="urn:vpro:media:group:100" midRef="VPROWON_DG_30003" type="SERIES"/>
+            <descendantOf urnRef="urn:vpro:media:group:200" midRef="VPROWON_DG_30004" type="SEASON"/>
+            <descendantOf midRef="VPROWON_DG_30005" type="SERIES"/>
+            <descendantOf midRef="VPROWON_DG_30006" type="SEASON"/>
+            <descendantOf urnRef="urn:vpro:media:program:12" midRef="VPROWON_DG_30007" type="BROADCAST"/>
+            <memberOf highlighted="false" midRef="VPROWON_20008" index="1" type="SEASON" urnRef="urn:vpro:media:group:200"/>
+            <ageRating>12</ageRating>
+            <contentRating>ANGST</contentRating>
+            <contentRating>DRUGS_EN_ALCOHOL</contentRating>
+            <email>info@npo.nl</email>
+            <email>programma@avro.nl</email>
+            <website>http://www.omroep.nl/programma/journaal</website>
+            <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>
+            <twitter type="HASHTAG">#vpro</twitter>
+            <twitter type="ACCOUNT">@twitter</twitter>
+            <teletext>100</teletext>
+            <prediction state="ANNOUNCED">INTERNETVOD</prediction>
+            <locations>
+                <location owner="BROADCASTER" workflow="FOR PUBLICATION" creationDate="2016-03-04T15:45:00+01:00" urn="urn:vpro:media:location:6">
+                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
+                    <avAttributes>
+                        <bitrate>1500</bitrate>
+                        <avFileFormat>MP4</avFileFormat>
+                    </avAttributes>
+                    <offset>P0DT0H13M0.000S</offset>
+                    <duration>P0DT0H10M0.000S</duration>
+                </location>
+                <location owner="BROADCASTER" workflow="FOR PUBLICATION" creationDate="2016-03-04T14:45:00+01:00" urn="urn:vpro:media:location:7">
+                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
+                    <avAttributes>
+                        <bitrate>3000</bitrate>
+                        <avFileFormat>WM</avFileFormat>
+                    </avAttributes>
+                </location>
+                <location owner="BROADCASTER" workflow="FOR PUBLICATION" creationDate="2016-03-04T13:45:00+01:00" urn="urn:vpro:media:location:8">
+                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
+                    <avAttributes>
+                        <bitrate>2000</bitrate>
+                        <avFileFormat>WM</avFileFormat>
+                    </avAttributes>
+                    <duration>P0DT0H30M33.000S</duration>
+                </location>
+                <location owner="NEBO" workflow="FOR PUBLICATION" creationDate="2016-03-04T12:45:00+01:00" urn="urn:vpro:media:location:9">
+                    <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>
+                    <avAttributes>
+                        <bitrate>1000</bitrate>
+                        <avFileFormat>HTML</avFileFormat>
+                    </avAttributes>
+                </location>
+                <location owner="NPO" workflow="FOR PUBLICATION" creationDate="2017-03-04T15:45:00+01:00" urn="urn:vpro:media:location:10">
+                    <programUrl>http://www.npo.nl/location/1</programUrl>
+                    <avAttributes>
+                        <avFileFormat>UNKNOWN</avFileFormat>
+                    </avAttributes>
+                    <offset>P0DT0H13M0.000S</offset>
+                    <duration>P0DT0H10M0.000S</duration>
+                </location>
+                <location owner="BROADCASTER" workflow="PUBLISHED" creationDate="2017-02-05T11:42:00+01:00" urn="urn:vpro:media:location:11">
+                    <programUrl>http://www.vpro.nl/location/1</programUrl>
+                    <avAttributes>
+                        <avFileFormat>UNKNOWN</avFileFormat>
+                    </avAttributes>
+                </location>
+            </locations>
+            <relation broadcaster="AVRO" type="THESAURUS" urn="urn:vpro:media:relation:2">synoniem</relation>
+            <relation broadcaster="EO" type="KOOR" urn="urn:vpro:media:relation:4">Ulfts Mannenkoor</relation>
+            <relation broadcaster="VPRO" type="ARTIST" urn="urn:vpro:media:relation:3">Marco Borsato</relation>
+            <relation uriRef="http://www.bluenote.com/" broadcaster="VPRO" type="LABEL" urn="urn:vpro:media:relation:1">Blue Note</relation>
+            <images>
+                <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:2">
+                    <shared:title>Eerste plaatje met credits</shared:title>
+                    <shared:imageUri>urn:vpro:image:11234</shared:imageUri>
+                    <shared:credits>CREDITS</shared:credits>
+                    <shared:source>SOURCE</shared:source>
+                    <shared:license>PUBLIC_DOMAIN</shared:license>
+                </shared:image>
+                <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:3">
+                    <shared:title>Tweede plaatje met credits</shared:title>
+                    <shared:imageUri>urn:vpro:image:15678</shared:imageUri>
+                    <shared:credits>CREDITS</shared:credits>
+                    <shared:source>SOURCE</shared:source>
+                    <shared:license>PUBLIC_DOMAIN</shared:license>
+                </shared:image>
+                <shared:image owner="NEBO" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:4">
+                    <shared:title>Een plaatje met andere owner</shared:title>
+                    <shared:imageUri>urn:vpro:image:12468</shared:imageUri>
+                </shared:image>
+                <shared:image owner="NEBO" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:5">
+                    <shared:title>Nog een plaatje met andere owner</shared:title>
+                    <shared:imageUri>urn:vpro:image:18888</shared:imageUri>
+                </shared:image>
+            </images>
+            <start>P0DT0H0M0.000S</start>
+        </segment>
+    </segments>
 </program>
