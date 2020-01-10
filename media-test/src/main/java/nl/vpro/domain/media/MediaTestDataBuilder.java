@@ -7,6 +7,7 @@ package nl.vpro.domain.media;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
+import java.net.URI;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -17,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 
+import nl.vpro.domain.Roles;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
@@ -460,12 +462,25 @@ public interface MediaTestDataBuilder<
                 .build());
     }
     default T withCredits() {
-        return withPersons()
-            .credits(Name.builder().uri("http://data.beeldengeluid.nl/gtaa/51771")
-                .name("Doe Maar")
-                .role(RoleType.COMPOSER)
-                .scopeNote("popgroep Nederland")
-                .build());
+        return
+            withPersons()
+                .credits(
+                    Name.builder()
+                        .uri("http://data.beeldengeluid.nl/gtaa/51771")
+                        .name("Doe Maar")
+                        .role(RoleType.COMPOSER)
+                        .scopeNote("popgroep Nederland")
+                        .build()
+                )
+            .persons(
+                Person.builder()
+                    .name("Rutte, Mark")
+                    .role(RoleType.SUBJECT)
+                    .uri(URI.create("http://data.beeldengeluid.nl/gtaa/149017"))
+                    // .scopeNote("minister-president VVD, fractievoorzitter VVD Tweede Kamer, staatssecretaris OCW en Sociale Zaken, voorzitter JOVD")
+                    .build()
+
+            );
     }
 
     default T withIntentions() {
@@ -488,26 +503,32 @@ public interface MediaTestDataBuilder<
 
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
-                GeoLocation.builder().name("Africa")
-                        .scopeNote("Continent").uri("http://gtaa/1231")
-                        .role(GeoRoleType.SUBJECT).build());
+            GeoLocation.builder().name("Africa")
+                .scopeNote("werelddeel")
+                .uri("http://data.beeldengeluid.nl/gtaa/31299")
+                .role(GeoRoleType.SUBJECT).build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
-                GeoLocation.builder().role(GeoRoleType.SUBJECT)
-                        .name("England").uri("http://gtaa/1232").gtaaStatus(GTAAStatus.approved).build(),
-                GeoLocation.builder()
-                        .name("UK").uri("http://gtaa/1233")
-                        .role(GeoRoleType.RECORDED_IN).build()
+            GeoLocation.builder().role(GeoRoleType.SUBJECT)
+                .name("Engeland").uri("http://data.beeldengeluid.nl/gtaa/34812")
+                .scopeNote("deel Groot-Brittannië")
+                .gtaaStatus(GTAAStatus.approved)
+                .build(),
+            GeoLocation.builder()
+                .name("Groot-Brittannië")
+                .uri("http://data.beeldengeluid.nl/gtaa/35768\"")
+                .role(GeoRoleType.RECORDED_IN
+                ).build()
         );
         return geoLocations(
-                GeoLocations.builder()
-                        .values(geoLocations1)
-                        .owner(BROADCASTER)
-                        .build(),
-                GeoLocations.builder()
-                        .values(geoLocations2)
-                        .owner(NPO)
-                        .build()
+            GeoLocations.builder()
+                .values(geoLocations1)
+                .owner(BROADCASTER)
+                .build(),
+            GeoLocations.builder()
+                .values(geoLocations2)
+                .owner(NPO)
+                .build()
         );
     }
 
@@ -698,34 +719,34 @@ public interface MediaTestDataBuilder<
 
     default T withTopics(){
         return topics(
-                Topics.builder()
-                    .value(
-                        Topic
-                            .builder()
-                            .name("foo")
-                            .gtaaStatus(GTAAStatus.approved)
-                            .uri("http://gtaa/123")
-                            .build())
-                    .value(
-                        Topic
-                            .builder()
-                            .name("bar")
-                            .gtaaStatus(GTAAStatus.candidate)
-                            .uri("http://gtaa/124")
-                            .build()
-                    )
-                    .owner(BROADCASTER)
-                    .build(),
-                Topics.builder()
-                    .value(
-                        Topic
-                            .builder()
-                            .name("foos")
-                            .gtaaStatus(GTAAStatus.approved)
-                            .uri("http://gtaa/125")
-                            .build())
-                    .owner(OwnerType.NPO)
-                    .build()
+            Topics.builder()
+                .value(
+                    Topic
+                        .builder()
+                        .name("honden")
+                        .gtaaStatus(GTAAStatus.approved)
+                        .uri("http://data.beeldengeluid.nl/gtaa/25890")
+                        .build())
+                .value(
+                    Topic
+                        .builder()
+                        .name("bar")
+                        .gtaaStatus(GTAAStatus.candidate)
+                        .uri("http://data.beeldengeluid.nl/gtaa/29064")
+                        .build()
+                )
+                .owner(BROADCASTER)
+                .build(),
+            Topics.builder()
+                .value(
+                    Topic
+                        .builder()
+                        .name("hondenrennen")
+                        .gtaaStatus(GTAAStatus.approved)
+                        .uri("http://data.beeldengeluid.nl/gtaa/25891")
+                        .build())
+                .owner(OwnerType.NPO)
+                .build()
         );
     }
 
@@ -1173,6 +1194,7 @@ public interface MediaTestDataBuilder<
             .givenName("Test")
             .familiyName("Editor")
             .lastLogin(Instant.now())
+            .role(Roles.USER_ROLE)
             .build();
     }
 }

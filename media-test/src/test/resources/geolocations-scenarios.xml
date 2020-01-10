@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<program avType="AUDIO" embeddable="true" mid="9"
-         sortDate="2015-03-06T00:00:00+01:00" type="BROADCAST"
-         xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+<?xml version="1.0" encoding="UTF-8"?><program xmlns="urn:vpro:media:2009" type="BROADCAST" avType="AUDIO" embeddable="true" mid="9" sortDate="2015-03-06T00:00:00+01:00" xmlns:shared="urn:vpro:shared:2009">
     <geoLocations owner="BROADCASTER">
-        <geoLocation role="SUBJECT" gtaaUri="http://gtaa/1231">
+        <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/31299" role="SUBJECT">
             <name>Africa</name>
-            <scopeNote>Continent</scopeNote>
+            <scopeNote>werelddeel</scopeNote>
         </geoLocation>
     </geoLocations>
     <geoLocations owner="NPO">
-        <geoLocation gtaaStatus="approved" gtaaUri="http://gtaa/1232" role="SUBJECT">
+        <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/34812" gtaaStatus="approved" role="SUBJECT">
             <name>England</name>
+            <scopeNote>deel Groot-Brittannië</scopeNote>
         </geoLocation>
-        <geoLocation role="RECORDED_IN" gtaaUri="http://gtaa/1233">
-            <name>UK</name>
+        <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/35768&quot;" role="RECORDED_IN">
+            <name>Groot-Brittannië</name>
         </geoLocation>
     </geoLocations>
     <credits/>

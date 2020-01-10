@@ -43,30 +43,31 @@
         <targetGroup>KIDS_12</targetGroup>
     </targetGroups>
     <geoLocations owner="BROADCASTER">
-        <geoLocation gtaaUri="http://gtaa/1231" role="SUBJECT">
+        <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/31299" role="SUBJECT">
             <name>Africa</name>
-            <scopeNote>Continent</scopeNote>
+            <scopeNote>werelddeel</scopeNote>
         </geoLocation>
     </geoLocations>
     <geoLocations owner="NPO">
-        <geoLocation gtaaUri="http://gtaa/1232" gtaaStatus="approved" role="SUBJECT">
+        <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/34812" gtaaStatus="approved" role="SUBJECT">
             <name>England</name>
+            <scopeNote>deel Groot-Brittannië</scopeNote>
         </geoLocation>
-        <geoLocation gtaaUri="http://gtaa/1233" role="RECORDED_IN">
-            <name>UK</name>
+        <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/35768&quot;" role="RECORDED_IN">
+            <name>Groot-Brittannië</name>
         </geoLocation>
     </geoLocations>
     <topics owner="BROADCASTER">
-        <topic gtaaUri="http://gtaa/123" gtaaStatus="approved">
-            <name>foo</name>
+        <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/25890" gtaaStatus="approved">
+            <name>honden</name>
         </topic>
-        <topic gtaaUri="http://gtaa/124" gtaaStatus="candidate">
+        <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/29064" gtaaStatus="candidate">
             <name>bar</name>
         </topic>
     </topics>
     <topics owner="NPO">
-        <topic gtaaUri="http://gtaa/125" gtaaStatus="approved">
-            <name>foos</name>
+        <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/25891" gtaaStatus="approved">
+            <name>hondenrennen</name>
         </topic>
     </topics>
     <source>Naar het gelijknamige boek van W.F. Hermans</source>
@@ -111,6 +112,10 @@
             <name>Doe Maar</name>
             <scopeNote>popgroep Nederland</scopeNote>
         </name>
+        <person gtaaUri="http://data.beeldengeluid.nl/gtaa/149017" role="SUBJECT">
+            <givenName>Rutte,</givenName>
+            <familyName>Mark</familyName>
+        </person>
     </credits>
     <award>In 2003 bekroond met een Gouden Kalf</award>
     <award>Winnaar IDFA scenarioprijs 2008.</award>
@@ -284,30 +289,31 @@
                 <targetGroup>KIDS_12</targetGroup>
             </targetGroups>
             <geoLocations owner="BROADCASTER">
-                <geoLocation gtaaUri="http://gtaa/1231" role="SUBJECT">
+                <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/31299" role="SUBJECT">
                     <name>Africa</name>
-                    <scopeNote>Continent</scopeNote>
+                    <scopeNote>werelddeel</scopeNote>
                 </geoLocation>
             </geoLocations>
             <geoLocations owner="NPO">
-                <geoLocation gtaaUri="http://gtaa/1232" gtaaStatus="approved" role="SUBJECT">
+                <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/34812" gtaaStatus="approved" role="SUBJECT">
                     <name>England</name>
+                    <scopeNote>deel Groot-Brittannië</scopeNote>
                 </geoLocation>
-                <geoLocation gtaaUri="http://gtaa/1233" role="RECORDED_IN">
-                    <name>UK</name>
+                <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/35768&quot;" role="RECORDED_IN">
+                    <name>Groot-Brittannië</name>
                 </geoLocation>
             </geoLocations>
             <topics owner="BROADCASTER">
-                <topic gtaaUri="http://gtaa/123" gtaaStatus="approved">
-                    <name>foo</name>
+                <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/25890" gtaaStatus="approved">
+                    <name>honden</name>
                 </topic>
-                <topic gtaaUri="http://gtaa/124" gtaaStatus="candidate">
+                <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/29064" gtaaStatus="candidate">
                     <name>bar</name>
                 </topic>
             </topics>
             <topics owner="NPO">
-                <topic gtaaUri="http://gtaa/125" gtaaStatus="approved">
-                    <name>foos</name>
+                <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/25891" gtaaStatus="approved">
+                    <name>hondenrennen</name>
                 </topic>
             </topics>
             <source>Naar het gelijknamige boek van W.F. Hermans</source>
@@ -352,6 +358,10 @@
                     <name>Doe Maar</name>
                     <scopeNote>popgroep Nederland</scopeNote>
                 </name>
+                <person gtaaUri="http://data.beeldengeluid.nl/gtaa/149017" role="SUBJECT">
+                    <givenName>Rutte,</givenName>
+                    <familyName>Mark</familyName>
+                </person>
             </credits>
             <award>In 2003 bekroond met een Gouden Kalf</award>
             <award>Winnaar IDFA scenarioprijs 2008.</award>

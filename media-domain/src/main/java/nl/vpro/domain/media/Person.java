@@ -109,9 +109,18 @@ public class Person extends Credits implements PersonInterface {
         MediaObject mediaObject,
         GTAAStatus gtaaStatus,
         URI uri,
-        Boolean gtaaKnownAs
+        Boolean gtaaKnownAs,
+        String name
         ) {
-        this(id, givenName, familyName, role);
+        this.id = id;
+        this.role = role;
+        setName(name);
+        if (givenName != null) {
+            this.givenName = givenName;
+        }
+        if (familyName != null) {
+            this.familyName = familyName;
+        }
         this.mediaObject = mediaObject;
         if (uri != null) {
             this.gtaaInfo = new EmbeddablePerson();
@@ -131,13 +140,18 @@ public class Person extends Credits implements PersonInterface {
      * Sets both the given name and the family name by splitting the String.
      */
     public void setName(String name) {
-        String[] split = name.split("\\s+", 2);
-        if(split.length == 1) {
-            setGivenName("");
-            setFamilyName(name);
+        if (name != null) {
+            String[] split = name.split("\\s+", 2);
+            if (split.length == 1) {
+                setGivenName("");
+                setFamilyName(name);
+            } else {
+                setGivenName(split[0]);
+                setFamilyName(split[1]);
+            }
         } else {
-            setGivenName(split[0]);
-            setFamilyName(split[1]);
+            setFamilyName(null);
+            setGivenName(null);
         }
     }
 
