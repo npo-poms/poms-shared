@@ -21,7 +21,6 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;
 
@@ -35,6 +34,7 @@ import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static nl.vpro.domain.media.MediaTestDataBuilder.group;
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -869,7 +869,7 @@ public class MediaObjectJsonSchemaTest {
     @Test
     public void programWithEverything() throws Exception {
         StringWriter programJson = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, "UTF-8");
+        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, UTF_8);
         Program program =  MediaTestDataBuilder
                 .program()
                 .withEverything()
@@ -878,73 +878,20 @@ public class MediaObjectJsonSchemaTest {
         assertThat(rounded.getLocations().first().getId()).isEqualTo(6);
         assertThat(rounded.getMemberOf().first().getType()).isEqualTo(MediaType.SEASON);
     }
-
-
     @Test
-    public void publisherView() throws IOException {
-
-        String publisherString = Jackson2Mapper.getPublisherInstance()
-            .writeValueAsString(MediaTestDataBuilder.program().withEverything().build());
-        Map<String, Object> map = Jackson2Mapper.getInstance().readValue(publisherString, new TypeReference<Map<String, Object>>() {
-        });
-        assertThat(map.get("expandedTitles")).isNotNull();
-        assertThat(((List) map.get("expandedTitles")).get(0)).isNotNull();
-        assertThat(((List) map.get("expandedGeoLocations")).get(0)).isNotNull();
-        assertThat(((Map<String, Object>)(((List) map.get("expandedTitles")).get(0))).get("value")).isEqualTo("Main title");
-
-        log.info("{}", publisherString);
-
-        Program p = Jackson2Mapper.getLenientInstance().readValue(publisherString, Program.class);
-        assertThat(p.getMainTitle()).isEqualTo("Main title");
+    public void programWithEverythingPublisher() throws Exception {
+        StringWriter programJson = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything-publisher.json"), programJson, UTF_8);
+        Program program =  MediaTestDataBuilder
+                .program()
+                .withEverything()
+                .build();
+        Program rounded  = Jackson2TestUtil.roundTripAndSimilarAndEquals(Jackson2Mapper.getPublisherInstance(), program, programJson.toString());
+        assertThat(rounded.getLocations().first().getId()).isEqualTo(6);
+        assertThat(rounded.getMemberOf().first().getType()).isEqualTo(MediaType.SEASON);
     }
 
-    @Test
-    public void publisherViewGeoLocations() throws IOException {
 
-        final Program program = program().withGeoLocations().build();
-        final GeoLocations broadcasterGeo = program.getGeoLocations().first();
-        program.getGeoLocations().remove(broadcasterGeo);
-        final GeoLocations newGeoLocations = GeoLocations.builder().owner(OwnerType.MIS).values(broadcasterGeo.getValues()).build();
-        program.getGeoLocations().add(newGeoLocations);
-
-        String publisherString = Jackson2Mapper.getPublisherInstance()
-                .writeValueAsString(program);
-        Map<String, Object> map = Jackson2Mapper.getInstance().readValue(publisherString, new TypeReference<Map<String, Object>>() {
-        });
-        final List expandedGeoLocations = (List) map.get("expandedGeoLocations");
-        assertThat(expandedGeoLocations.size()).isEqualTo(3);
-
-        final Map<String,Object> broadcasterGeoLoc =  (Map<String,Object>)expandedGeoLocations.get(0);
-        final Map<String,Object>  npoGeoLoc = (Map<String,Object> ) expandedGeoLocations.get(1);
-        final Map<String,Object>  misGeoLoc = (Map<String,Object> ) expandedGeoLocations.get(2);
-        assertThat(broadcasterGeoLoc.get("owner")).isEqualTo("BROADCASTER");
-        assertThat(((List)broadcasterGeoLoc.get("values")).size()).isEqualTo(2);
-
-        assertThat(npoGeoLoc.get("owner")).isEqualTo("NPO");
-        assertThat(((List)npoGeoLoc.get("values")).size()).isEqualTo(2);
-
-        assertThat(misGeoLoc.get("owner")).isEqualTo("MIS");
-        assertThat(((List)misGeoLoc.get("values")).size()).isEqualTo(1);
-
-
-
-        log.info("{}", publisherString);
-
-    }
-
-    @Test
-    public void normalView() throws IOException {
-        String normalString = Jackson2Mapper.getInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
-
-        Map<String, Object> map = Jackson2Mapper.getInstance().readValue(normalString, new TypeReference<Map<String, Object>>() {
-        });
-        assertThat(map.get("expandedTitles")).isNull();
-
-        log.info("{}", normalString);
-
-        Program p = Jackson2Mapper.getLenientInstance().readValue(normalString, Program.class);
-        assertThat(p.getMainTitle()).isEqualTo("Main title");
-    }
 
     @Test
     public void withMemberOf() {
