@@ -14,13 +14,9 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.AVType;
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.ProgramType;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Tag;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.user.TestEditors;
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.user.Editor;
 
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
 import static org.junit.Assert.assertEquals;
@@ -37,7 +33,12 @@ public class MediaListTest {
         Program program = JAXB.unmarshal(new StringReader("<program xmlns=\"urn:vpro:media:2009\" urn='urn:vpro:media:program:123'><broadcaster>VPRO</broadcaster></program>"), Program.class);
         program.setCreationInstant(Instant.ofEpochMilli(1343922085885L));
         program.setLastModifiedInstant(Instant.ofEpochMilli(1343922085885L));
-        program.setCreatedBy(TestEditors.vproEditor());
+        program.setCreatedBy( Editor.builder()
+            .principalId("editor@vpro.nl")
+            .displayName("Editor")
+            .email("editor@vpro.nl")
+            .build()
+        );
         program.setPublishStopInstant(Instant.ofEpochMilli(1343922085885L));
         program.setType(ProgramType.CLIP);
         program.setAVType(AVType.VIDEO);
