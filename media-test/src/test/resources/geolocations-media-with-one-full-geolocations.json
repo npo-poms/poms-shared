@@ -1,0 +1,10 @@
+[ {
+  "owner" : "BROADCASTER",
+  "values" : [ {
+    "gtaaUri" : "myuri",
+    "name" : "myName",
+    "scopeNotes" : [ "myDescription" ],
+    "gtaaStatus" : "approved",
+    "role" : "RECORDED_IN"
+  } ]
+} ]

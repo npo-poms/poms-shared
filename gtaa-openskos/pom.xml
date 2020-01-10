@@ -6,6 +6,8 @@
     <version>5.12-SNAPSHOT</version>
   </parent>
   <artifactId>gtaa-openskos</artifactId>
+  <description>Contains implementaton openskos client for GTAA</description>
+
   <dependencies>
     <dependency>
       <groupId>nl.vpro.shared</groupId>

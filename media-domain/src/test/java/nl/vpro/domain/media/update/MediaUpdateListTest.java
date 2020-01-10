@@ -2,7 +2,9 @@ package nl.vpro.domain.media.update;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.time.Duration;
 
 import javax.xml.bind.JAXB;
@@ -16,8 +18,13 @@ import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.AVType;
+import nl.vpro.domain.media.MediaBuilder;
+import nl.vpro.domain.media.Program;
+import nl.vpro.domain.media.SegmentType;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.user.Broadcaster;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -89,8 +96,7 @@ public class MediaUpdateListTest {
 
         assertThat(program.getMid()).isEqualTo("POMS_1234");
         MediaUpdateList<ProgramUpdate> list = new MediaUpdateList<>(
-            ProgramUpdate.create(program)
-        );
+            ProgramUpdate.create(program));
         StringWriter writer = new StringWriter();
         JAXB.marshal(list, writer);
 
@@ -100,6 +106,8 @@ public class MediaUpdateListTest {
             "        <title type=\"MAIN\">hoi</title>\n" +
             "        <intentions/>\n" +
             "        <targetGroups/>\n" +
+            "        <geoLocations/>\n" +
+            "        <topics/>\n" +
             "        <locations/>\n" +
             "        <scheduleEvents/>\n" +
             "        <images/>\n" +
@@ -109,6 +117,8 @@ public class MediaUpdateListTest {
             "                <title type=\"MAIN\">segmenttitel</title>\n" +
             "                <intentions/>\n" +
             "                <targetGroups/>\n" +
+            "                <geoLocations/>\n" +
+            "                <topics/>\n" +
             "                <locations/>\n" +
             "                <images/>\n" +
             "                <start>P0DT0H0M0.000S</start>\n" +

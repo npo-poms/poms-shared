@@ -8,25 +8,48 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.validation.*;
-import javax.validation.constraints.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.ValidationException;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -34,12 +57,44 @@ import nl.vpro.domain.Embargos;
 import nl.vpro.domain.MutableEmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.TextualObjects;
+import nl.vpro.domain.media.AVType;
+import nl.vpro.domain.media.AgeRating;
+import nl.vpro.domain.media.ContentRating;
+import nl.vpro.domain.media.Genre;
+import nl.vpro.domain.media.GeoLocation;
+import nl.vpro.domain.media.GeoLocations;
+import nl.vpro.domain.media.Group;
+import nl.vpro.domain.media.Intention;
+import nl.vpro.domain.media.IntentionType;
+import nl.vpro.domain.media.Intentions;
 import nl.vpro.domain.media.Location;
+import nl.vpro.domain.media.MediaBuilder;
+import nl.vpro.domain.media.MediaIdentifiable;
+import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.MediaObjects;
+import nl.vpro.domain.media.MediaType;
+import nl.vpro.domain.media.MemberRef;
+import nl.vpro.domain.media.Prediction;
+import nl.vpro.domain.media.Program;
+import nl.vpro.domain.media.Segment;
+import nl.vpro.domain.media.SubMediaType;
+import nl.vpro.domain.media.TargetGroup;
+import nl.vpro.domain.media.TargetGroupType;
+import nl.vpro.domain.media.TargetGroups;
+import nl.vpro.domain.media.Topic;
+import nl.vpro.domain.media.Topics;
 import nl.vpro.domain.media.TwitterRef;
-import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.Website;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.AuthorizedDuration;
+import nl.vpro.domain.media.support.Image;
+import nl.vpro.domain.media.support.MediaObjectOwnableLists;
+import nl.vpro.domain.media.support.MutableOwnable;
+import nl.vpro.domain.media.support.OwnableLists;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Tag;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.validation.ValidEmbargo;
@@ -48,7 +103,11 @@ import nl.vpro.util.IntegerVersion;
 import nl.vpro.util.IntegerVersionSpecific;
 import nl.vpro.util.TimeUtils;
 import nl.vpro.util.Version;
-import nl.vpro.validation.*;
+import nl.vpro.validation.CRID;
+import nl.vpro.validation.PomsValidatorGroup;
+import nl.vpro.validation.StringList;
+import nl.vpro.validation.URI;
+import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
@@ -111,7 +170,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         VALIDATOR = validator;
     }
 
-
     @SuppressWarnings("unchecked")
     public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType owner) {
         MediaUpdate<M> created;
@@ -130,7 +188,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return create(object, OwnerType.BROADCASTER);
     }
 
-
     public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType owner, IntegerVersion version) {
         MediaUpdate<M> update = create(object, owner);
         update.setVersion(version);
@@ -140,7 +197,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object, OwnerType ownerType) {
         return create(object.build(), ownerType);
     }
-
 
     protected IntegerVersion version;
 
@@ -154,8 +210,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @Pattern(regexp = "^urn:vpro:media:(?:group|program|segment):[0-9]+$")
     protected String urn;
 
-    private List<@CRID
-        String> crids;
+    private List<@CRID String> crids;
 
     protected AVType avType;
 
@@ -166,7 +221,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     List<org.meeuw.i18n.regions.Region> countries;
 
     List<Locale> languages;
-
 
     AVAttributesUpdate avAttributes;
 
@@ -184,7 +238,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     List<@Email(message = "{nl.vpro.constraints.Email.message}") String> email;
 
-
     protected List<ImageUpdate> images;
 
     /**
@@ -196,7 +249,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected List<TargetGroupType> targetGroups;
 
-    protected List<GeoLocation> geoLocations;
+    protected List<GeoLocationUpdate> geoLocations;
+
+    private List<TopicUpdate> topics;
 
     @Valid
     protected Asset asset;
@@ -260,15 +315,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected SortedSet<PredictionUpdate> predictions;
 
-
     @Getter
     boolean imported = false;
-
 
     protected MediaUpdate() {
         //
     }
-
 
     protected MediaUpdate(M mediaobject, OwnerType ownerType) {
         fillFromMedia(mediaobject, ownerType);
@@ -322,7 +374,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
         this.geoRestrictions= toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
 
-
         if (owner == null || owner == OwnerType.BROADCASTER) {
             TextualObjects.copyToUpdate(mediaobject, this);
         } else {
@@ -338,10 +389,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability, PredictionUpdate::of);
 
+        this.geoLocations = toUpdateGeoLocations(mediaobject.getGeoLocations(), owner);
+        this.topics = toUpdateTopics(mediaobject.getTopics(), owner);
     }
 
     protected abstract void fillFrom(M mediaObject, OwnerType ownerType);
-
 
     @Override
     @XmlTransient
@@ -365,7 +417,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     protected void setVersionAttribute(String version) {
         setVersion(Version.parseIntegers(version));
     }
-
 
     public boolean isValid() {
         return violations().isEmpty();
@@ -501,7 +552,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if(geoLocations != null){
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getGeoLocations(), toGeoLocations(geoLocations, owner));
         }
-
+        if (topics != null) {
+            MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getTopics(), toTopics(topics, owner));
+        }
 
         return returnObject;
     }
@@ -565,19 +618,71 @@ public abstract class  MediaUpdate<M extends MediaObject>
                 .build();
     }
 
-    private GeoLocations toGeoLocations(@Nullable List<GeoLocation> targetGeoLocations, @NonNull OwnerType owner){
-        if (targetGeoLocations == null){
+    private List<GeoLocationUpdate> toUpdateGeoLocations(SortedSet<GeoLocations> geoLocationsSet, OwnerType owner) {
+
+        if (geoLocationsSet == null) {
             return null;
         }
-        return GeoLocations.builder()
-                .owner(owner)
-                .values(targetGeoLocations)
-                .build();
+
+        return OwnableLists.filterByOwner(geoLocationsSet, owner)
+            .map(GeoLocations::getValues)
+            .map(l -> l.stream()
+                .map(GeoLocationUpdate::new)
+                .collect(Collectors.toList()))
+            .orElse(new ArrayList<>());
     }
+
+    private GeoLocations toGeoLocations(List<GeoLocationUpdate> geoLocationUpdates, OwnerType owner) {
+
+        if (geoLocationUpdates == null){
+            return null;
+        }
+
+        List<GeoLocation> geoLocations = geoLocationUpdates
+            .stream()
+            .map(GeoLocationUpdate::toGeoLocation)
+            .collect(Collectors.toList());
+
+        return GeoLocations.builder()
+            .owner(owner)
+            .values(geoLocations)
+            .build();
+    }
+
+    private List<TopicUpdate> toUpdateTopics(SortedSet<Topics> topicsSet, OwnerType owner) {
+
+        if (topicsSet == null) {
+            return null;
+        }
+
+        return OwnableLists.filterByOwner(topicsSet, owner)
+            .map(Topics::getValues)
+            .map(l -> l.stream()
+                .map(TopicUpdate::new)
+                .collect(Collectors.toList()))
+            .orElse(new ArrayList<>());
+    }
+
+    private Topics toTopics(List<TopicUpdate> topicUpdates, OwnerType owner) {
+
+        if (topicUpdates == null) {
+            return null;
+        }
+
+        List<Topic> topics = topicUpdates
+            .stream()
+            .map(TopicUpdate::toTopic)
+            .collect(Collectors.toList());
+
+        return Topics.builder()
+            .owner(owner)
+            .values(topics)
+            .build();
+    }
+
     public M fetch() {
         return fetch(OwnerType.BROADCASTER);
     }
-
 
     protected <T, U> List<T> toList(List<U> list, Predicate<U> filter, Function<U, T> mapper, boolean nullToNull) {
         if (list == null) {
@@ -592,6 +697,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
             .map(mapper)
             .collect(Collectors.toList());
     }
+
     protected <T, U> List<T> toList(List<U> list, Function<U, T> mapper, boolean nullToNull) {
         return toList(list, (u) -> true, mapper, nullToNull);
     }
@@ -599,10 +705,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     protected <T, U> List<T> toList(List<U> list, Function<U, T> mapper) {
         return toList(list, (u) -> true, mapper, false);
     }
-
-
-
-
 
     protected <T, U extends Comparable<U>> TreeSet<T> toSet(Set<U> list, Predicate<U> filter, Function<U, T> mapper) {
         if (list == null) {
@@ -614,10 +716,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
             .map(mapper)
             .collect(Collectors.toCollection(TreeSet::new));
     }
+
     protected <T, U extends Comparable<U>> TreeSet<T> toSet(Set<U> list, Function<U, T> mapper) {
         return toSet(list, (u) -> true, mapper);
     }
-
 
     /**
      *
@@ -638,8 +740,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.mid = mid;
     }
 
-
-
     public abstract SubMediaType getType();
 
     /**
@@ -650,7 +750,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         SubMediaType subMediaType = getType();
         return subMediaType == null ? null : subMediaType.getMediaType();
     }
-
 
     @XmlAttribute
     public Boolean isDeleted() {
@@ -665,7 +764,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public String getUrn() {
         return urn;
     }
-
 
     public void setUrn(String s) {
         this.urn = s;
@@ -686,7 +784,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     protected abstract String getUrnPrefix();
-
 
     @XmlAttribute(name = "avType")
     public AVType getAVType() {
@@ -928,8 +1025,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.genres = new TreeSet<>(Arrays.asList(genres));
     }
 
-
-
     @XmlElementWrapper(name = "intentions")
     @XmlElement(name = "intention")
     @NonNull
@@ -950,10 +1045,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     public void setTargetGroups(List<TargetGroupType> targetGroups) {
         this.targetGroups = targetGroups;
-    }
-
-    public void setGeoLocations(List<GeoLocation> geoLocations) {
-        this.geoLocations = geoLocations;
     }
 
     @XmlElement(name = "avAttributes")
@@ -1110,8 +1201,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.twitterrefs = twitterRefs;
     }
 
-
-
     /**
      * @since 5.6
      */
@@ -1124,7 +1213,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         }
         return predictions;
     }
-
 
     /**
      * @since 5.6
@@ -1150,8 +1238,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setLocations(LocationUpdate... locations) {
         this.locations = new TreeSet<>(Arrays.asList(locations));
     }
-
-
 
     @XmlElement(name = "relation")
     @NonNull
@@ -1201,12 +1287,42 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.asset = asset;
     }
 
+    @XmlElementWrapper(name = "geoLocations")
+    @XmlElement(name = "geoLocation")
+    @Valid
+    @NonNull
+    public List<GeoLocationUpdate> getGeoLocations() {
+        return geoLocations;
+    }
+
+    public void setGeoLocations(List<GeoLocationUpdate> geoLocationUpdates) {
+        this.geoLocations = geoLocationUpdates;
+    }
+
+    public void setGeoLocations(GeoLocationUpdate... geoLocationUpdates) {
+        this.geoLocations = Arrays.asList(geoLocationUpdates);
+    }
+
+    @XmlElementWrapper(name = "topics")
+    @XmlElement(name = "topic")
+    @Valid
+    @NonNull
+    public List<TopicUpdate> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<TopicUpdate> topicUpdates) {
+        this.topics = topicUpdates;
+    }
+
+    public void setTopics(TopicUpdate... topicUpdates) {
+        this.topics = Arrays.asList(topicUpdates);
+    }
+
     @Override
     public String toString() {
         return (isDeleted == Boolean.TRUE ? "DELETED:" : "") + getClass().getSimpleName() + "[" + getType() + ":" + mid + ":" + getMainTitle() + "]";
     }
-
-
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (parent != null) {

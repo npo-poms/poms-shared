@@ -1,85 +1,63 @@
 package nl.vpro.domain.media.gtaa;
 
+
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
-import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
-
-import nl.vpro.domain.DomainObject;
-import org.checkerframework.checker.nullness.qual.NonNull;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
 import nl.vpro.persistence.StringListConverter;
 import nl.vpro.validation.NoHtml;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+/**
+ * The GTAARecord represents a record from the GTAA service.
+ */
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
-public class GTAARecord extends DomainObject implements Serializable, Comparable<GTAARecord> {
+@ToString
+@EqualsAndHashCode(of = { "uri" })
+public class GTAARecord implements Serializable {
 
     private static final long serialVersionUID = 0L;
 
+    @Id
     @Column(columnDefinition="varchar(255)")
-    String uri;
+    @NoHtml
+    private String uri;
 
     @Column(length = 30)
     @Enumerated(EnumType.STRING)
     private GTAAStatus status;
 
-    @Column
     @NoHtml
     private String name;
 
-    @Column
     @Convert(converter = StringListConverter.class)
     @NoHtml
     private List<String> scopeNotes;
 
     public GTAARecord() {
+        scopeNotes = new ArrayList<>();
     }
 
-    @lombok.Builder(builderClassName = "Builder")
-    public GTAARecord(@lombok.NonNull URI uri,
-                      GTAAStatus status,
-                      @lombok.NonNull String name,
-                      List<String> scopeNotes) {
+    @lombok.Builder
+    private GTAARecord(String uri, GTAAStatus status, String name, List<String> scopeNotes) {
 
         this.name = name;
-        this.scopeNotes = scopeNotes;
-        this.uri = uri.toString();
+        this.scopeNotes = scopeNotes != null ? scopeNotes : new ArrayList<>();
+        this.uri = uri;
         this.status = status;
-    }
-
-    public URI getUri() {
-        return URI.create(uri);
-    }
-
-    public void  setUri(URI uri) {
-        this.uri = uri.toString();
-    }
-
-    @Override
-    public int compareTo(@NonNull GTAARecord gtaaConceptRecord) {
-
-        if (uri == null) {
-            if (gtaaConceptRecord.getUri() == null) {
-                return 0;
-            }
-            return -1;
-        }
-        return uri.compareTo(gtaaConceptRecord.uri);
-    }
-
-    public static class Builder {
-
-        public Builder gtaaUri(String uri) {
-            return uri(URI.create(uri));
-        }
     }
 }

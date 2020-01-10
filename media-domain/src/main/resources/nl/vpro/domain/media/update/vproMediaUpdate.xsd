@@ -8,7 +8,6 @@
   xmlns:shared="urn:vpro:shared:2009"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
-
   <xs:import namespace="urn:vpro:media:2009" schemaLocation="../vproMedia.xsd"/>
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="../vproShared.xsd"/>
@@ -41,10 +40,7 @@
 
   <xs:element name="liveitemize" type="liveItemize"/>
 
-
   <xs:element name="itemizeResponse" type="itemizeResponseType"/>
-
-
 
   <xs:complexType name="avAtributeUpdateType">
     <xs:sequence>
@@ -89,6 +85,26 @@
     <xs:restriction base="media:genreIdType"/>
   </xs:simpleType>
 
+  <xs:complexType name="geoLocationsUpdateType">
+    <xs:sequence>
+      <xs:element name="geoLocation" type="geoLocationUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="geoLocationUpdateType">
+    <xs:attribute name="gtaaUri" type="xs:string"/>
+    <xs:attribute name="role" type="media:geoRoleType"/>
+  </xs:complexType>
+
+  <xs:complexType name="topicUpdateType">
+    <xs:attribute name="gtaaUri" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="topicsUpdateType">
+    <xs:sequence>
+      <xs:element name="topic" type="topicUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
 
   <xs:complexType name="personUpdateType">
     <xs:sequence>
@@ -168,6 +184,8 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="geoLocations" type="geoLocationsUpdateType" form="qualified" minOccurs="0"/>
+      <xs:element name="topics" type="topicsUpdateType" form="qualified" minOccurs="0"/>
       <xs:element name="avAttributes" type="avAtributeUpdateType" form="qualified" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" form="qualified" minOccurs="0"/>
       <xs:element name="duration" type="xs:duration" form="qualified" minOccurs="0"/>
@@ -597,7 +615,6 @@
      <xs:attribute name="missingMedia" type="xs:boolean"/>
   </xs:complexType>
 
-
   <xs:simpleType name="priorityType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="LOW"/>
@@ -606,7 +623,6 @@
       <xs:enumeration value="URGENT"/>
     </xs:restriction>
   </xs:simpleType>
-
 
   <xs:simpleType name="transcodeStatusEnum">
     <xs:restriction base="xs:string">
@@ -619,7 +635,6 @@
     </xs:restriction>
   </xs:simpleType>
 
-
    <xs:complexType name="itemizeType">
     <xs:sequence>
       <xs:element name="start" type="xs:duration" minOccurs="0"/>
@@ -628,7 +643,6 @@
     <xs:attribute name="mid" type="xs:string"/>
   </xs:complexType>
 
-
    <xs:complexType name="liveItemize">
     <xs:sequence>
       <xs:element name="start" type="xs:dateTime" minOccurs="0"/>
@@ -636,7 +650,6 @@
     </xs:sequence>
     <xs:attribute name="stream" type="xs:string"/>
   </xs:complexType>
-
 
   <xs:complexType name="itemizeResponseType">
     <xs:sequence>
@@ -652,7 +665,6 @@
   </xs:complexType>
 
   <xs:simpleType name="twitterrefType">
-
     <xs:restriction base="xs:string">
       <xs:pattern value="[@#][A-Za-z0-9_]{1,139}" />
       <xs:minLength value="2"/>
@@ -665,6 +677,5 @@
       <xs:pattern value="[0-9]+(\.[0-9]+(\.[0-9]+)?)?" />
     </xs:restriction>
   </xs:simpleType>
-
 
 </xs:schema>

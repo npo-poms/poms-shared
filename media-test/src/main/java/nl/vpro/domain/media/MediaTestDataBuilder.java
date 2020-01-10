@@ -15,6 +15,8 @@ import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
@@ -29,6 +31,7 @@ import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.NPO;
 
 @SuppressWarnings({"unchecked", "deprecation"})
+@CanIgnoreReturnValue
 public interface MediaTestDataBuilder<
         T extends MediaTestDataBuilder<T, M> &  MediaBuilder<T, M>,
         M extends MediaObject
@@ -36,17 +39,17 @@ public interface MediaTestDataBuilder<
     extends MediaBuilder<T, M>, Cloneable {
 
     GTAARecord AMSTERDAM = GTAARecord.builder()
-        .gtaaUri("http://data.beeldengeluid.nl/gtaa/31586")
+        .uri("http://data.beeldengeluid.nl/gtaa/31586")
         .status(GTAAStatus.approved)
         .name("Amsterdam")
         .build();
     GTAARecord UTRECHT = GTAARecord.builder()
-        .gtaaUri("http://data.beeldengeluid.nl/gtaa/43996")
+        .uri("http://data.beeldengeluid.nl/gtaa/43996")
         .status(GTAAStatus.approved)
         .name("Utrecht (stad)")
         .build();
     GTAARecord HILVERSUM = GTAARecord.builder()
-        .gtaaUri("http://data.beeldengeluid.nl/gtaa/36318")
+        .uri("http://data.beeldengeluid.nl/gtaa/36318")
         .status(GTAAStatus.approved)
         .name("Hilversum")
         .scopeNotes(Collections.singletonList("Nederland"))
@@ -177,11 +180,11 @@ public interface MediaTestDataBuilder<
     }
 
     default T withCreatedBy() {
-        return createdBy(TestEditors.vproEditor());
+        return createdBy(vproEditor());
     }
 
     default T withLastModifiedBy() {
-        return lastModifiedBy(TestEditors.vproEditor());
+        return lastModifiedBy(vproEditor());
     }
 
     default T withCreationDate() {
@@ -481,14 +484,14 @@ public interface MediaTestDataBuilder<
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
                 GeoLocation.builder().name("Africa")
-                        .scopeNote("Continent").gtaaUri("http://gtaa/1231")
+                        .scopeNote("Continent").uri("http://gtaa/1231")
                         .role(GeoRoleType.SUBJECT).build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
                 GeoLocation.builder().role(GeoRoleType.SUBJECT)
-                        .name("England").gtaaUri("http://gtaa/1232").gtaaStatus(GTAAStatus.approved).build(),
+                        .name("England").uri("http://gtaa/1232").gtaaStatus(GTAAStatus.approved).build(),
                 GeoLocation.builder()
-                        .name("UK").gtaaUri("http://gtaa/1233")
+                        .name("UK").uri("http://gtaa/1233")
                         .role(GeoRoleType.RECORDED_IN).build()
         );
         return geoLocations(
@@ -520,7 +523,6 @@ public interface MediaTestDataBuilder<
                     .build()
         );
     }
-
 
     default T clearTargetGroups() {
         mediaObject().setTargetGroups(null);
@@ -689,7 +691,43 @@ public interface MediaTestDataBuilder<
         );
     }
 
+    default T withTopics(){
+        return topics(
+                Topics.builder()
+                    .value(
+                        Topic
+                            .builder()
+                            .name("foo")
+                            .gtaaStatus(GTAAStatus.approved)
+                            .uri("http://gtaa/123")
+                            .build())
+                    .value(
+                        Topic
+                            .builder()
+                            .name("bar")
+                            .gtaaStatus(GTAAStatus.candidate)
+                            .uri("http://gtaa/124")
+                            .build()
+                    )
+                    .owner(BROADCASTER)
+                    .build(),
+                Topics.builder()
+                    .value(
+                        Topic
+                            .builder()
+                            .name("foos")
+                            .gtaaStatus(GTAAStatus.approved)
+                            .uri("http://gtaa/125")
+                            .build())
+                    .owner(OwnerType.NPO)
+                    .build()
+        );
+    }
 
+    default T clearTopics() {
+        mediaObject().getTopics().clear();
+        return (T) this;
+    }
 
     default T withAuthorityRecord() {
         return authoritativeRecord(Platform.INTERNETVOD);
@@ -786,6 +824,7 @@ public interface MediaTestDataBuilder<
                 .withTags()
                 .withTeletext()
                 .withTitles()
+                .withTopics()
                 .withTwitterRefs()
                 .withWebsites()
                 .withWorkflow()
@@ -1117,5 +1156,18 @@ public interface MediaTestDataBuilder<
                 .withStart();
 
         }
+    }
+
+
+    static Editor vproEditor() {
+        return Editor.builder()
+            .principalId("editor@vpro.nl")
+            .displayName("Editor")
+            .email("editor@vpro.nl")
+            .broadcaster(new Broadcaster("VPRO", "VPRO"))
+            .givenName("Test")
+            .familiyName("Editor")
+            .lastLogin(Instant.now())
+            .build();
     }
 }

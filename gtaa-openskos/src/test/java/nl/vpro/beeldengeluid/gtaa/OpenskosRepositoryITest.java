@@ -311,7 +311,7 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envs")
-    @Disabled("This is not a junit test")
+//    @Disabled("This is not a junit test")
     public void retrieveItemStatus(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         Optional<Description> description = impl.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1711640");

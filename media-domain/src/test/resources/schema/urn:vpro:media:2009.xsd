@@ -355,7 +355,7 @@
 
   <xs:complexType name="topicsType">
     <xs:sequence>
-      <xs:element name="topics" type="topicType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="topic" type="topicType" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
   </xs:complexType>

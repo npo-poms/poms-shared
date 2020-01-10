@@ -10,6 +10,7 @@
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-rs-services</artifactId>
   <name>media-rs-services</name>
+  <description>Interfaces for the POMS Backend API</description>
 
   <dependencies>
     <dependency>

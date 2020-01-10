@@ -29,6 +29,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
@@ -466,6 +467,22 @@ public class OpenskosRepository implements GTAARepository {
         }
     }
 
+    public Optional<GTAAConcept> get(String id) {
+        String url = gtaaUrl + "api/find-concepts?id=" + id;
+        try {
+            RDF rdf = template.getForObject(url, RDF.class);
+            List<Description> descriptions = descriptions(rdf);
+            return descriptions.stream().findFirst().map(GTAAConcepts::toConcept);
+        } catch (HttpServerErrorException e) {
+            if (e.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
+                if (NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
+                    return Optional.empty();
+                }
+            }
+            log.error("Unexpected error doing call to openskos for item id {}: {}: {}", id, url, e.getResponseBodyAsString(), e);
+            throw e;
+        }
+    }
 
     private String generateQueryByScheme(String... schemeList) {
         Predicate<String> empty = s -> s.equals("");

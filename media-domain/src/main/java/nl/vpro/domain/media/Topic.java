@@ -1,58 +1,66 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.Singular;
+import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+/**
+ * A Topic is a wrapper around a GTAARecord linking it to a Topics record.
+ */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
+@ToString(of = { "gtaaRecord" })
+@EqualsAndHashCode(of = { "gtaaRecord" }, callSuper = false)
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "topicType", propOrder = {
-        "name",
-        "scopeNotes",
-        "gtaaUri",
-        "gtaaStatus"
-})
+@XmlType(name = "topicType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus"})
 public class Topic extends DomainObject implements MediaObjectOwnableListItem<Topic, Topics> {
 
-    @ManyToOne(targetEntity = Topics.class, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @XmlTransient
     private Topics parent;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, targetEntity = GTAARecord.class)
-    @JoinColumn(name = "gtaa_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "gtaa_uri", nullable = false)
     @XmlTransient
-    private GTAARecord gtaaRecord = new GTAARecord();
+    private GTAARecord gtaaRecord;
 
     public Topic() {
+        gtaaRecord = new GTAARecord();
     }
 
-    @lombok.Builder(builderClassName = "Builder")
+    @lombok.Builder
     private Topic(Long id,
-                  @NonNull String name,
+                  String name,
                   @Singular List<String> scopeNotes,
-                  @NonNull URI uri,
+                  @NonNull String uri,
                   GTAAStatus gtaaStatus) {
 
         this.id = id;
@@ -66,9 +74,7 @@ public class Topic extends DomainObject implements MediaObjectOwnableListItem<To
 
     @XmlElement
     public String getName() {
-        return Optional.ofNullable(gtaaRecord)
-                .map(GTAARecord::getName)
-                .orElse(null);
+        return gtaaRecord.getName();
     }
 
     public void setName(String name) {
@@ -78,20 +84,22 @@ public class Topic extends DomainObject implements MediaObjectOwnableListItem<To
     @XmlElement(name = "scopeNote")
     @JsonProperty("scopeNotes")
     public List<String> getScopeNotes() {
-        return Optional.ofNullable(gtaaRecord)
-                .map(GTAARecord::getScopeNotes)
-                .orElse(new ArrayList<>());
+        return gtaaRecord.getScopeNotes();
     }
 
     public void setScopeNotes(List<String> scopeNotes) {
-        gtaaRecord.setScopeNotes(scopeNotes);
+
+        if (scopeNotes != null) {
+            gtaaRecord.setScopeNotes(scopeNotes);
+        }
+        else {
+            gtaaRecord.setScopeNotes(new ArrayList<>());
+        }
     }
 
     @XmlAttribute
     public GTAAStatus getGtaaStatus() {
-        return Optional.ofNullable(gtaaRecord)
-                .map(GTAARecord::getStatus)
-                .orElse(null);
+        return gtaaRecord.getStatus();
     }
 
     public void setGtaaStatus(GTAAStatus gtaaStatus) {
@@ -99,91 +107,28 @@ public class Topic extends DomainObject implements MediaObjectOwnableListItem<To
     }
 
     @XmlAttribute
-    public URI getGtaaUri() {
-        return Optional.ofNullable(gtaaRecord)
-                .map(GTAARecord::getUri)
-                .orElse(null);
+    public String getGtaaUri() {
+        return gtaaRecord.getUri();
     }
 
-    public void setGtaaUri(URI uri) {
+    public void setGtaaUri(String uri) {
         gtaaRecord.setUri(uri);
     }
 
     @Override
-    public boolean equals(Object object) {
-
-        if (object == null) {
-            return false;
-        }
-
-        if (object == this) {
-            return true;
-        }
-
-        if (object.getClass() != getClass()) {
-            return false;
-        }
-
-        if (super.equals(object)) {
-            return true;
-        }
-
-        Topic topic = (Topic) object;
-        return new EqualsBuilder()
-                .append(getName(), topic.getName())
-                .append(getScopeNotes(), topic.getScopeNotes())
-                .append(getGtaaUri(), topic.getGtaaUri())
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-
-        return new HashCodeBuilder(17, 37)
-                .append(getName())
-                .append(getScopeNotes())
-                .append(getGtaaUri())
-                .toHashCode();
-    }
-
-    @Override
-    public String toString() {
-
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("name", getName())
-                .append("scopeNotes", getScopeNotes())
-                .append("gtaa_uri", getGtaaUri())
-                .toString();
-    }
-
-    @Override
     public int compareTo(Topic topic) {
-
-        if (getName() != null && topic.getName() != null && !getName().equals(topic.getName())) {
-            return getName().compareTo(topic.getName());
-        }
-
-        if (getGtaaUri() != null && topic.getGtaaUri() != null && !getGtaaUri().equals(topic.getGtaaUri())) {
+        if (getGtaaUri() != null) {
             return getGtaaUri().compareTo(topic.getGtaaUri());
         }
-
         return 0;
     }
 
     @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
     public Topic clone() {
-
         Topic clone = new Topic();
         clone.setParent(parent);
         clone.setGtaaRecord(gtaaRecord);
         return clone;
-    }
-
-    public static class Builder {
-
-        public Topic.Builder gtaaUri(String uri) {
-            return uri(URI.create(uri));
-        }
     }
 }
