@@ -107,15 +107,16 @@ public class Name extends Credits  {
 
     @XmlElement(name = "scopeNote")
     @JsonProperty("scopeNotes")
+    @Override
     public List<String> getScopeNotes() {
         return gtaaRecord.getScopeNotes();
     }
 
+
     public void setScopeNotes(List<String> scopeNotes) {
         if (scopeNotes != null) {
             gtaaRecord.setScopeNotes(scopeNotes);
-        }
-        else {
+        } else {
             gtaaRecord.setScopeNotes(new ArrayList<>());
         }
     }
@@ -140,8 +141,13 @@ public class Name extends Credits  {
         gtaaRecord.setUri(uri);
     }
 
+    /**
+     * Always returns false, because we arranged that all redirects are simply resolved in the database.
+     *
+     * (TODO: right?)
+     */
     @Override
     public Boolean getGtaaKnownAs() {
-        return null; // unknown
+        return false;
     }
 }

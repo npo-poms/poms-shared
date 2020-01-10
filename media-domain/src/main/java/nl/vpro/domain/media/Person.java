@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.net.URI;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -150,6 +149,13 @@ public class Person extends Credits implements PersonInterface {
     @Deprecated
     public void setMediaObject(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
+    }
+
+
+    @Override
+    public List<String> getScopeNotes() {
+        // TODO
+        return null;
     }
 
     @Override
