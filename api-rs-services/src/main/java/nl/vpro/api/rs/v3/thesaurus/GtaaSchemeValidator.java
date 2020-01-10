@@ -9,6 +9,9 @@ import javax.validation.ConstraintValidatorContext;
 
 import nl.vpro.domain.gtaa.Scheme;
 
+/**
+ * This can validate whether a String is a valid {@link Scheme}. See {@link Scheme#fromString(String)}
+ */
 public class GtaaSchemeValidator implements ConstraintValidator<ValidGtaaScheme, String> {
 
     @Override

@@ -10,6 +10,7 @@ import javax.ws.rs.ext.*;
 
 /**
  * Unused I tried to support also urls on schemes argument. It's hard...
+ * I gave it up for now (hence it is not a Provider)
  * @author Michiel Meeuwissen
  * @since 5.12
  */
