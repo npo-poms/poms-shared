@@ -516,7 +516,7 @@ public interface MediaTestDataBuilder<
                 .build(),
             GeoLocation.builder()
                 .name("Groot-Brittannië")
-                .uri("http://data.beeldengeluid.nl/gtaa/35768\"")
+                .uri("http://data.beeldengeluid.nl/gtaa/35768")
                 .role(GeoRoleType.RECORDED_IN
                 ).build()
         );
