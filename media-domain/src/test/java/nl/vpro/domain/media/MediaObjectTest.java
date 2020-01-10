@@ -6,6 +6,7 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.StringReader;
+import java.net.URI;
 import java.time.Instant;
 import java.util.*;
 
@@ -60,6 +61,72 @@ public class MediaObjectTest {
         mediaObject.addCrid("Crid 1");
         mediaObject.addCrid("Crid 2");
         assertThat(mediaObject.getCrids()).containsExactly("Crid 1", "Crid 2");
+    }
+
+    @Test
+    public void testFindCredit() {
+
+        Person person1 = Person.builder().id(1L).uri(URI.create("http://gtaa/1")).build();
+        Person person2 = Person.builder().id(2L).uri(URI.create("http://gtaa/2")).build();
+        Name name1 = Name.builder().id(3L).uri("http://gtaa/3").build();
+        Name name2 = Name.builder().id(4L).uri("http://gtaa/4").build();
+
+        MediaObject mediaObject = new Program();
+
+        assertThat(mediaObject.findCredit(1L)).isEqualTo(null);
+
+        mediaObject.addPerson(person1);
+        mediaObject.addPerson(person2);
+        mediaObject.addName(name1);
+        mediaObject.addName(name2);
+
+        assertThat(mediaObject.findCredit(1L)).isEqualTo(person1);
+        assertThat(mediaObject.findCredit(4L)).isEqualTo(name2);
+        assertThat(mediaObject.findCredit(5L)).isEqualTo(null);
+    }
+
+    @Test
+    public void testFindPerson() {
+
+        Person person1 = Person.builder().id(1L).uri(URI.create("http://gtaa/1")).build();
+        Person person2 = Person.builder().id(2L).uri(URI.create("http://gtaa/2")).build();
+        Name name1 = Name.builder().id(3L).uri("http://gtaa/3").build();
+        Name name2 = Name.builder().id(4L).uri("http://gtaa/4").build();
+
+        MediaObject mediaObject = new Program();
+
+        assertThat(mediaObject.findPerson(1L)).isEqualTo(null);
+
+        mediaObject.addPerson(person1);
+        mediaObject.addPerson(person2);
+        mediaObject.addName(name1);
+        mediaObject.addName(name2);
+
+        assertThat(mediaObject.findPerson(2L)).isEqualTo(person2);
+        assertThat(mediaObject.findPerson(4L)).isEqualTo(null);
+        assertThat(mediaObject.findPerson(5L)).isEqualTo(null);
+    }
+
+    @Test
+    public void testFindName() {
+
+        Person person1 = Person.builder().id(1L).uri(URI.create("http://gtaa/1")).build();
+        Person person2 = Person.builder().id(2L).uri(URI.create("http://gtaa/2")).build();
+        Name name1 = Name.builder().id(3L).uri("http://gtaa/3").build();
+        Name name2 = Name.builder().id(4L).uri("http://gtaa/4").build();
+
+        MediaObject mediaObject = new Program();
+
+        assertThat(mediaObject.findName(1L)).isEqualTo(null);
+
+        mediaObject.addPerson(person1);
+        mediaObject.addPerson(person2);
+        mediaObject.addName(name1);
+        mediaObject.addName(name2);
+
+        assertThat(mediaObject.findName(1L)).isEqualTo(null);
+        assertThat(mediaObject.findName(4L)).isEqualTo(name2);
+        assertThat(mediaObject.findName(5L)).isEqualTo(null);
     }
 
     @Test

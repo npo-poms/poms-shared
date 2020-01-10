@@ -1,54 +1,86 @@
 package nl.vpro.domain.media;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
+import lombok.Singular;
+import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.xml.bind.annotation.*;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
 
 
 /**
  * Connects an  entry in GTAA with the scheme 'http://data.beeldengeluid.nl/gtaa/Namen' with a {@link MediaObject}.
- **
- *
  */
-@Entity(name = "name")
+@Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Getter
+@Setter
+@ToString(of = { "gtaaRecord" }, callSuper = true)
+@EqualsAndHashCode(of = { "gtaaRecord" }, callSuper = false)
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "nameType")
+@XmlType(name = "nameType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus"})
 @JsonDeserialize
 @JsonPropertyOrder({
     "objectType",
+    "role",
     "name",
-    "role"/*,
+    "scopeNotes",
     "gtaaUri",
     "gtaaStatus"
-    */
-
 })
 public class Name extends Credits  {
 
-    @XmlElement
-    @Getter
-    @Setter
-    protected String name;
+    @XmlTransient
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "gtaa_uri", nullable = false)
+    private GTAARecord gtaaRecord;
 
     public Name() {
-
+        gtaaRecord = new GTAARecord();
     }
 
     @lombok.Builder
-    private Name(RoleType role, String name) {
+    private Name(Long id,
+                 String name,
+                 @Singular List<String> scopeNotes,
+                 @NonNull String uri,
+                 GTAAStatus gtaaStatus,
+                 RoleType role) {
+
+        this.id = id;
         this.role = role;
-        this.name = name;
+        this.gtaaRecord = GTAARecord.builder()
+            .name(name)
+            .scopeNotes(scopeNotes)
+            .uri(uri)
+            .status(gtaaStatus)
+            .build();
     }
 
     public Name(Name source, MediaObject parent) {
-        //this.gtaaRecord = source.gtaaRecord;
+        this.gtaaRecord = source.gtaaRecord;
         this.mediaObject = parent;
     }
 
@@ -64,37 +96,52 @@ public class Name extends Credits  {
         return new Name(source, parent);
     }
 
-/*
-
-    @XmlTransient
-    @ManyToOne
-    @JoinColumn(name = "gtaa_uri")
-    @Getter
-    @Setter
-    private GTAARecord gtaaRecord = new GTAARecord();
-
-*/
     @Override
-    public String toString() {
-        return Name.class.getSimpleName() + ":" + role + ":" + name;
+    @XmlElement
+    public String getName() {
+        return gtaaRecord.getName();
     }
 
-
-    @Override
-    public String getGtaaUri() {
-        return null;
-
+    public void setName(String name) {
+        this.gtaaRecord.setName(name);
     }
 
-    @Override
+    @XmlElement(name = "scopeNote")
+    @JsonProperty("scopeNotes")
+    public List<String> getScopeNotes() {
+        return gtaaRecord.getScopeNotes();
+    }
+
+    public void setScopeNotes(List<String> scopeNotes) {
+
+        if (scopeNotes != null) {
+            gtaaRecord.setScopeNotes(scopeNotes);
+        }
+        else {
+            gtaaRecord.setScopeNotes(new ArrayList<>());
+        }
+    }
+
+    @XmlAttribute
     public GTAAStatus getGtaaStatus() {
-        return null;
+        return gtaaRecord.getStatus();
+    }
 
+    public void setGtaaStatus(GTAAStatus gtaaStatus) {
+        this.gtaaRecord.setStatus(gtaaStatus);
+    }
+
+    @XmlAttribute
+    public String getGtaaUri() {
+        return gtaaRecord.getUri();
+    }
+
+    public void setGtaaUri(String uri) {
+        gtaaRecord.setUri(uri);
     }
 
     @Override
     public Boolean getGtaaKnownAs() {
-        return null;
-
+        return false;
     }
 }

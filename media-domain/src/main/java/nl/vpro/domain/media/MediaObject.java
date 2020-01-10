@@ -1472,6 +1472,17 @@ public abstract class MediaObject
         return giveCredits(person);
     }
 
+    public MediaObject addName(Name name) {
+        return giveCredits(name);
+    }
+
+    public boolean removeName(Name name) {
+        if (credits != null) {
+            return credits.remove(name);
+        }
+        return false;
+    }
+
     /**
      * @since 5.12
      */
@@ -1505,19 +1516,48 @@ public abstract class MediaObject
         return null;
     }
 
-    public Person findPerson(Long id) {
+    public Credits findCredit(Long id) {
         if (credits == null) {
             return null;
         }
 
-        for (Credits p : credits) {
-            if (p.getId().equals(id)) {
-                return (Person) p;
+        for (Credits credit : credits) {
+            if (credit.getId().equals(id)) {
+                return credit;
             }
         }
 
         return null;
     }
+
+    public Person findPerson(Long id) {
+        if (credits == null) {
+            return null;
+        }
+
+        for (Credits credit : credits) {
+            if (credit instanceof Person && credit.getId().equals(id)) {
+                return (Person) credit;
+            }
+        }
+
+        return null;
+    }
+
+    public Name findName(Long id) {
+        if (credits == null) {
+            return null;
+        }
+
+        for (Credits credit : credits) {
+            if (credit instanceof Name && credit.getId().equals(id)) {
+                return (Name) credit;
+            }
+        }
+
+        return null;
+    }
+
 
     @XmlElement(name = "award")
     @JsonProperty("awards")

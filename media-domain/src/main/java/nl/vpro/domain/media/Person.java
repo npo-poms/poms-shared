@@ -71,7 +71,7 @@ public class Person extends Credits implements PersonInterface {
     @XmlTransient
     @Getter
     @Setter
-    protected EmbeddablePerson gtaaRecord;
+    protected EmbeddablePerson gtaaInfo;
 
     public Person() {
     }
@@ -98,7 +98,7 @@ public class Person extends Credits implements PersonInterface {
 
     public Person(Person source, MediaObject parent) {
         this(source.getGivenName(), source.getFamilyName(), source.getRole());
-        this.gtaaRecord = source.gtaaRecord;
+        this.gtaaInfo = source.gtaaInfo;
 
         this.mediaObject = parent;
     }
@@ -118,11 +118,11 @@ public class Person extends Credits implements PersonInterface {
         this(id, givenName, familyName, role);
         this.mediaObject = mediaObject;
         if (uri != null) {
-            this.gtaaRecord = new EmbeddablePerson();
-            this.gtaaRecord.setStatus(gtaaStatus);
-            this.gtaaRecord.setUri(uri.toString());
+            this.gtaaInfo = new EmbeddablePerson();
+            this.gtaaInfo.setStatus(gtaaStatus);
+            this.gtaaInfo.setUri(uri.toString());
             if (gtaaKnownAs != null) {
-                this.gtaaRecord.setKnownAs(gtaaKnownAs);
+                this.gtaaInfo.setKnownAs(gtaaKnownAs);
             }
         } else {
             if (gtaaStatus != null) {
@@ -163,46 +163,46 @@ public class Person extends Credits implements PersonInterface {
     @Override
     @XmlAttribute
     public String getGtaaUri() {
-        return Optional.ofNullable(gtaaRecord)
+        return Optional.ofNullable(gtaaInfo)
                 .map(EmbeddablePerson::getUri)
                 .orElse(null);
     }
 
     public void setGtaaUri(String uri) {
-        if (this.gtaaRecord == null) {
-            this.gtaaRecord = new EmbeddablePerson();
+        if (this.gtaaInfo == null) {
+            this.gtaaInfo = new EmbeddablePerson();
         }
-        this.gtaaRecord.setUri(uri);
+        this.gtaaInfo.setUri(uri);
     }
 
 
     @Override
     @XmlAttribute
     public GTAAStatus getGtaaStatus() {
-        return Optional.ofNullable(gtaaRecord)
+        return Optional.ofNullable(gtaaInfo)
                 .map(EmbeddablePerson::getStatus)
                 .orElse(null);
     }
     public void setGtaaStatus(GTAAStatus status) {
-        if (this.gtaaRecord == null) {
-            this.gtaaRecord = new EmbeddablePerson();
+        if (this.gtaaInfo == null) {
+            this.gtaaInfo = new EmbeddablePerson();
         }
-        this.gtaaRecord.setStatus(status);
+        this.gtaaInfo.setStatus(status);
     }
 
 
 
     @Override
     public Boolean getGtaaKnownAs() {
-        return Optional.ofNullable(gtaaRecord)
+        return Optional.ofNullable(gtaaInfo)
                 .map(EmbeddablePerson::isKnownAs)
                 .orElse(null);
     }
     public void setGtaaKnownAs(Boolean knownAs) {
-        if (this.gtaaRecord == null) {
-            this.gtaaRecord = new EmbeddablePerson();
+        if (this.gtaaInfo == null) {
+            this.gtaaInfo = new EmbeddablePerson();
         }
-        this.gtaaRecord.setKnownAs(knownAs);
+        this.gtaaInfo.setKnownAs(knownAs);
     }
 
 
