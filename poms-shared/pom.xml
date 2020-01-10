@@ -75,6 +75,7 @@
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
+      <optional>true</optional> <!-- can be removed if @Log4jMBean removed-->
     </dependency>
     <dependency>
       <groupId>javax.inject</groupId>
