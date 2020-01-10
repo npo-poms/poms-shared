@@ -106,6 +106,7 @@ public class MediaUpdateListTest {
             "        <title type=\"MAIN\">hoi</title>\n" +
             "        <intentions/>\n" +
             "        <targetGroups/>\n" +
+            "        <geoLocations/>\n" +
             "        <topics/>\n" +
             "        <locations/>\n" +
             "        <scheduleEvents/>\n" +
@@ -116,6 +117,7 @@ public class MediaUpdateListTest {
             "                <title type=\"MAIN\">segmenttitel</title>\n" +
             "                <intentions/>\n" +
             "                <targetGroups/>\n" +
+            "                <geoLocations/>\n" +
             "                <topics/>\n" +
             "                <locations/>\n" +
             "                <images/>\n" +

@@ -191,6 +191,44 @@
           "role" : "RECORDED_IN"
         } ]
       } ],
+      "topics" : [ {
+        "owner" : "BROADCASTER",
+        "values" : [ {
+          "name" : "foo",
+          "gtaaUri" : "http://gtaa/123",
+          "gtaaStatus" : "approved"
+        }, {
+          "name" : "bar",
+          "gtaaUri" : "http://gtaa/124",
+          "gtaaStatus" : "candidate"
+        } ]
+      }, {
+        "owner" : "NPO",
+        "values" : [ {
+          "name" : "foos",
+          "gtaaUri" : "http://gtaa/125",
+          "gtaaStatus" : "approved"
+        } ]
+      } ],
+      "expandedTopics" : [ {
+        "owner" : "BROADCASTER",
+        "values" : [ {
+          "name" : "foo",
+          "gtaaUri" : "http://gtaa/123",
+          "gtaaStatus" : "approved"
+        }, {
+          "name" : "bar",
+          "gtaaUri" : "http://gtaa/124",
+          "gtaaStatus" : "candidate"
+        } ]
+      }, {
+        "owner" : "NPO",
+        "values" : [ {
+          "name" : "foos",
+          "gtaaUri" : "http://gtaa/125",
+          "gtaaStatus" : "approved"
+        } ]
+      } ],
       "source" : "Naar het gelijknamige boek van W.F. Hermans",
       "hasSubtitles" : true,
       "countries" : [ {
@@ -650,6 +688,44 @@
             "name" : "UK",
             "gtaaUri" : "http://gtaa/1233",
             "role" : "RECORDED_IN"
+          } ]
+        } ],
+        "topics" : [ {
+          "owner" : "BROADCASTER",
+          "values" : [ {
+            "name" : "foo",
+            "gtaaUri" : "http://gtaa/123",
+            "gtaaStatus" : "approved"
+          }, {
+            "name" : "bar",
+            "gtaaUri" : "http://gtaa/124",
+            "gtaaStatus" : "candidate"
+          } ]
+        }, {
+          "owner" : "NPO",
+          "values" : [ {
+            "name" : "foos",
+            "gtaaUri" : "http://gtaa/125",
+            "gtaaStatus" : "approved"
+          } ]
+        } ],
+        "expandedTopics" : [ {
+          "owner" : "BROADCASTER",
+          "values" : [ {
+            "name" : "foo",
+            "gtaaUri" : "http://gtaa/123",
+            "gtaaStatus" : "approved"
+          }, {
+            "name" : "bar",
+            "gtaaUri" : "http://gtaa/124",
+            "gtaaStatus" : "candidate"
+          } ]
+        }, {
+          "owner" : "NPO",
+          "values" : [ {
+            "name" : "foos",
+            "gtaaUri" : "http://gtaa/125",
+            "gtaaStatus" : "approved"
           } ]
         } ],
         "source" : "Naar het gelijknamige boek van W.F. Hermans",

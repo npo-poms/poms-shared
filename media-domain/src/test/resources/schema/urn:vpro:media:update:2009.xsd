@@ -6,6 +6,8 @@
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn:vpro:shared:2009.xsd"/>
 
   <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <xs:element name="geoLocation" type="geoLocationUpdateType"/>
+
   <xs:element name="group" type="groupUpdateType"/>
 
   <xs:element name="image" type="imageUpdateType"/>
@@ -73,6 +75,13 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element name="targetGroup" type="media:targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="geoLocations" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="geoLocation" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -176,6 +185,12 @@
         <xs:attribute name="type" type="media:textualTypeEnum" use="required"/>
       </xs:extension>
     </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="geoLocationUpdateType">
+    <xs:sequence/>
+    <xs:attribute name="gtaaUri" type="xs:string" use="required"/>
+    <xs:attribute name="role" type="media:geoRoleType" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="topicUpdateType">
@@ -373,6 +388,13 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="geoLocations" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="geoLocation" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="topics" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
@@ -451,6 +473,13 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element name="targetGroup" type="media:targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="geoLocations" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="geoLocation" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>

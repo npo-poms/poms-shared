@@ -11,7 +11,7 @@
   <groupId>nl.vpro.user</groupId>
   <artifactId>user-domain</artifactId>
   <name>user-domain</name>
-
+  <description>Domain classes and interfaces related to accountability, users and organizations.</description>
 
   <build>
     <plugins>

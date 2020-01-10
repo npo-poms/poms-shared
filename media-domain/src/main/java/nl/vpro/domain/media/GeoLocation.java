@@ -85,7 +85,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
 
     @lombok.Builder
     private GeoLocation(Long id,
-                        @NonNull String name,
+                        String name,
                         @Singular List<String> scopeNotes,
                         @NonNull String uri,
                         GTAAStatus gtaaStatus,

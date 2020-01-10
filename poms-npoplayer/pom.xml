@@ -11,10 +11,7 @@
 
   <artifactId>poms-npoplayer</artifactId>
   <name>poms-npoplayer</name>
-
-  <description>
-
-  </description>
+  <description>Server side part needed to use an npo player. </description>
 
   <dependencies>
     <dependency>

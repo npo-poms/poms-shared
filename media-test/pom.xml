@@ -20,11 +20,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>nl.vpro.user</groupId>
-      <artifactId>user-test</artifactId>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>nl.vpro.media</groupId>
       <artifactId>media-domain</artifactId>
     </dependency>

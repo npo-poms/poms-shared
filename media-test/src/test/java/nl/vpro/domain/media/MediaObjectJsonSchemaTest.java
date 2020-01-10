@@ -850,7 +850,7 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void segmentWithEverything() throws Exception {
-        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPublisherInstance(),
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPrettyPublisherInstance(),
             MediaTestDataBuilder
                 .segment()
                 .withEverything()

@@ -588,6 +588,29 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
+    default B topics(Topics... topics) {
+        return topics(Arrays.asList(topics));
+    }
+    default B topics(OwnerType owner, Topic... topics) {
+        Topics wrapper= Topics.builder()
+            .owner(owner)
+            .values(Arrays.asList(topics))
+            .parent(mediaObject())
+            .build();
+        return topics(wrapper);
+    }
+
+
+    default B topics(Topic... geoLocations) {
+        return topics(OwnerType.BROADCASTER, geoLocations);
+    }
+
+    default B topics(Collection<Topics> topics) {
+        topics.forEach(t -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getTopics(), t));
+        return (B)this;
+    }
+
+
     @SuppressWarnings("unchecked")
     default B awards(String... awards) {
         for(String award : awards) {

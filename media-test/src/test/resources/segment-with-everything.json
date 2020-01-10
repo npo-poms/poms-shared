@@ -151,6 +151,25 @@
       "role" : "RECORDED_IN"
     } ]
   } ],
+  "topics" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ {
+      "name" : "foo",
+      "gtaaUri" : "http://gtaa/123",
+      "gtaaStatus" : "approved"
+    }, {
+      "name" : "bar",
+      "gtaaUri" : "http://gtaa/124",
+      "gtaaStatus" : "candidate"
+    } ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ {
+      "name" : "foos",
+      "gtaaUri" : "http://gtaa/125",
+      "gtaaStatus" : "approved"
+    } ]
+  } ],
   "expandedGeoLocations" : [ {
     "owner" : "BROADCASTER",
     "values" : [ {
@@ -400,6 +419,25 @@
     "familyName" : "Holt",
     "role" : "ACTOR",
     "name" : "Holt, Claire"
+  } ],
+  "expandedTopics" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ {
+      "name" : "foo",
+      "gtaaUri" : "http://gtaa/123",
+      "gtaaStatus" : "approved"
+    }, {
+      "name" : "bar",
+      "gtaaUri" : "http://gtaa/124",
+      "gtaaStatus" : "candidate"
+    } ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ {
+      "name" : "foos",
+      "gtaaUri" : "http://gtaa/125",
+      "gtaaStatus" : "approved"
+    } ]
   } ],
   "start" : 120000,
   "publishDate" : 1425603600000

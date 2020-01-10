@@ -8,13 +8,9 @@ import java.io.StringWriter;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXB;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
+import javax.xml.validation.*;
 
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.*;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
@@ -34,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
 @Slf4j
 public class MediaUpdateTest {
 
@@ -66,6 +62,7 @@ public class MediaUpdateTest {
 
     @Test
     public void withEverything2() throws Exception {
+        Assumptions.assumeTrue(rounded != null);
         MediaObject fetched = rounded.fetch(OwnerType.BROADCASTER);
         JAXBTestUtil.roundTripAndSimilar(fetched,
             getClass().getResourceAsStream("/program-from-update-with-everything.xml")
@@ -106,9 +103,7 @@ public class MediaUpdateTest {
             "</program>";
 
         ProgramUpdate update = JAXB.unmarshal(new StringReader(withoutIntentions), ProgramUpdate.class);
-
         assertThat(update.getIntentions()).isNull();
-
 
     }
 
@@ -139,8 +134,6 @@ public class MediaUpdateTest {
         );
 
         assertThat(update.getIntentions()).containsExactly(IntentionType.INFORM_INDEPTH);
-
-
     }
 
     @Test
