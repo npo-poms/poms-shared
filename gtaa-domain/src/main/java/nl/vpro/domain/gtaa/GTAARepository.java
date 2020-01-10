@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.gtaa;
 
+import lombok.Getter;
+
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -30,9 +32,31 @@ public interface GTAARepository {
 
     List<Description> findAnything(String input, Integer max);
 
-    List<Description> findForSchemes(String input, Integer max, String... schemes);
+    List<Description> findForSchemes(String input, Integer max, SchemeOrNot... schemes);
 
     Optional<Description> retrieveConceptStatus(String id);
 
     Optional<GTAAConcept> get(String id);
+
+
+    @Getter
+    class SchemeOrNot {
+        final String scheme;
+        final boolean not;
+
+        public SchemeOrNot(String scheme, boolean not) {
+            this.scheme = scheme;
+            this.not = not;
+        }
+        public SchemeOrNot(String scheme) {
+            this(scheme, false);
+        }
+        public SchemeOrNot(Scheme scheme) {
+            this(scheme.getUrl());
+        }
+        @Override
+        public String toString() {
+            return (not ? "!" : "") + scheme;
+        }
+    }
 }

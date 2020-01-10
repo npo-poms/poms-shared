@@ -17,7 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
@@ -412,20 +411,11 @@ public class OpenskosRepository implements GTAARepository {
 
     @Override
     public List<Description> findAnything(String input, Integer max) {
-        if (max == null) {
-            max = 50;
-        }
-        input = input.replaceAll("[\\-.,]+", " ");
-        String query = String.format("(status:(candidate OR approved) " +
-                "OR (status:not_compliant AND dc_creator:POMS)) " +
-                "AND ( %s*)", input);
-
-        String path = String.format("api/find-concepts?tenant=%s&collection=gtaa&q=%s&rows=%s", tenant, query, max);
-        return descriptions(getForPath(path, RDF.class));
+        return findForSchemes(input, max, Arrays.stream(Scheme.values()).map(s -> new SchemeOrNot(s.getUrl(), false)).toArray(SchemeOrNot[]::new));
     }
 
     @Override
-    public List<Description> findForSchemes(String input, Integer max, String... schemes) {
+    public List<Description> findForSchemes(String input, Integer max, SchemeOrNot... schemes) {
         if (max == null) {
             max = 50;
         }
@@ -484,29 +474,27 @@ public class OpenskosRepository implements GTAARepository {
         }
     }
 
-    private String generateQueryByScheme(String... schemeList) {
-        Predicate<String> empty = s -> s.equals("");
-        if (Arrays.stream(schemeList).allMatch(empty)) {
+    private String generateQueryByScheme(SchemeOrNot... schemeList) {
+        if (schemeList.length == 0) {
             return "";
         }
+
+
 
         StringBuilder sb = new StringBuilder();
 
         sb.append("AND (");
 
         String operator = "";
-        for (String axis : schemeList) {
-            boolean not = false;
-            if (axis.startsWith("!")) {
-                not = true;
-                axis = axis.substring(1);
-            }
+        for (SchemeOrNot axis : schemeList) {
+            boolean not = axis.isNot();
             sb.append(
                     String.format(
                         "%s %s inScheme:\"%s\" ",
                         operator,
                         not ? "NOT" : "",
-                        Scheme.valueOf(axis).getUrl())
+                        axis.getScheme()
+                    )
             );
             operator = "OR";
         }

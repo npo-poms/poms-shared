@@ -149,7 +149,7 @@ public class OpenskosRepositoryITest {
     @Disabled("This is not a junit test")
     public void testFindGeo(Env env) {
         OpenskosRepository impl = getRealInstance(env);
-        List<Description> geonames = impl.findForSchemes("amsterdam", 1000, Scheme.geographicname.name());
+        List<Description> geonames = impl.findForSchemes("amsterdam", 1000, new GTAARepository.SchemeOrNot(Scheme.geographicname));
         assertThat(geonames).isNotEmpty();
         assertThat(geonames.get(0).getStatus()).isNotNull();
         for (Description geoname : geonames)  {
@@ -160,10 +160,10 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envs")
-    @Disabled("This is not a junit test")
+    //@Disabled("This is not a junit test")
     public void testFindByGtaaUrl(Env env) {
         OpenskosRepository impl = getRealInstance(env);
-        List<Description> geonames = impl.findForSchemes("amsterdam", 1000, Scheme.geographicname.name());
+        List<Description> geonames = impl.findForSchemes("amsterdam", 1000, new GTAARepository.SchemeOrNot(Scheme.geographicname));
         assertThat(geonames).isNotEmpty();
         assertThat(geonames.get(0).getStatus()).isNotNull();
         for (Description geoname : geonames)  {
