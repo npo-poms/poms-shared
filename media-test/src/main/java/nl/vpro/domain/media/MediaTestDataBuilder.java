@@ -460,7 +460,12 @@ public interface MediaTestDataBuilder<
                 .build());
     }
     default T withCredits() {
-        return withPersons().credits(Name.builder().uri("http://gtaa/1").name("bla").role(RoleType.COMPOSER).build());
+        return withPersons()
+            .credits(Name.builder().uri("http://data.beeldengeluid.nl/gtaa/51771")
+                .name("Doe Maar")
+                .role(RoleType.COMPOSER)
+                .scopeNote("popgroep Nederland")
+                .build());
     }
 
     default T withIntentions() {

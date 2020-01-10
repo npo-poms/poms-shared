@@ -832,8 +832,9 @@ public class MediaObjectJsonSchemaTest {
             "  }, {\n" +
             "    \"objectType\" : \"name\",\n" +
             "    \"role\" : \"COMPOSER\",\n" +
-            "    \"name\" : \"bla\",\n" +
-            "    \"gtaaUri\" : \"http://gtaa/1\"\n" +
+            "    \"name\" : \"Doe Maar\",\n" +
+            "    \"scopeNotes\" : [ \"popgroep Nederland\" ],\n" +
+            "    \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/51771\"\n" +
             "  } ]\n" +
             "}");
 
