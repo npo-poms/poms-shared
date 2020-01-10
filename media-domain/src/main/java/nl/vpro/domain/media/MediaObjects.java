@@ -13,15 +13,16 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
 
 import nl.vpro.domain.*;
+import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
@@ -945,6 +946,27 @@ public class MediaObjects {
         return TextualObjects.findOwnersForTextFields(media);
     }
 
+
+    public static Stream<GTAARecord> getGTAARecords(MediaObject media) {
+        return Streams.concat(
+            media.getGeoLocations()
+                .stream()
+                .map(GeoLocations::getValues)
+                .flatMap(Collection::stream)
+                .map(GeoLocation::getGtaaRecord),
+            media.getCredits()
+                .stream()
+                .filter(c -> ! (c instanceof Person))
+                .map(c -> ((Name) c).getGtaaRecord()),
+            media.getTopics()
+                .stream()
+                .map(Topics::getValues)
+                .flatMap(Collection::stream)
+                .map(Topic::getGtaaRecord)
+        ).distinct();
+
+
+    }
 
 
 }
