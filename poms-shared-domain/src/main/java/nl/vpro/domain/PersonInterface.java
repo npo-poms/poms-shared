@@ -8,7 +8,6 @@ public interface PersonInterface {
 
     String getGtaaUri();
 
-
     /**
      * @since 5.12
      */

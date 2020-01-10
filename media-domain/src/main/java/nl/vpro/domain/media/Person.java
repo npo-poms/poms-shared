@@ -41,7 +41,6 @@ import nl.vpro.validation.NoHtml;
 })
 public class Person extends Credits implements PersonInterface {
 
-
     public static Person copy(Person source) {
         return copy(source, source.mediaObject);
     }
@@ -65,7 +64,6 @@ public class Person extends Credits implements PersonInterface {
     @Getter
     @Setter
     protected String familyName;
-
 
     @Embedded
     @XmlTransient
@@ -99,7 +97,6 @@ public class Person extends Credits implements PersonInterface {
     public Person(Person source, MediaObject parent) {
         this(source.getGivenName(), source.getFamilyName(), source.getRole());
         this.gtaaInfo = source.gtaaInfo;
-
         this.mediaObject = parent;
     }
 
@@ -129,7 +126,6 @@ public class Person extends Credits implements PersonInterface {
                 throw new IllegalArgumentException();
             }
         }
-
     }
 
     /**
@@ -146,8 +142,6 @@ public class Person extends Credits implements PersonInterface {
         }
     }
 
-
-
     @Deprecated
     public MediaObject getMediaObject() {
         return mediaObject;
@@ -157,8 +151,6 @@ public class Person extends Credits implements PersonInterface {
     public void setMediaObject(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
     }
-
-
 
     @Override
     @XmlAttribute
@@ -175,7 +167,6 @@ public class Person extends Credits implements PersonInterface {
         this.gtaaInfo.setUri(uri);
     }
 
-
     @Override
     @XmlAttribute
     public GTAAStatus getGtaaStatus() {
@@ -183,6 +174,7 @@ public class Person extends Credits implements PersonInterface {
                 .map(EmbeddablePerson::getStatus)
                 .orElse(null);
     }
+
     public void setGtaaStatus(GTAAStatus status) {
         if (this.gtaaInfo == null) {
             this.gtaaInfo = new EmbeddablePerson();
@@ -190,21 +182,19 @@ public class Person extends Credits implements PersonInterface {
         this.gtaaInfo.setStatus(status);
     }
 
-
-
     @Override
     public Boolean getGtaaKnownAs() {
         return Optional.ofNullable(gtaaInfo)
                 .map(EmbeddablePerson::isKnownAs)
                 .orElse(null);
     }
+
     public void setGtaaKnownAs(Boolean knownAs) {
         if (this.gtaaInfo == null) {
             this.gtaaInfo = new EmbeddablePerson();
         }
         this.gtaaInfo.setKnownAs(knownAs);
     }
-
 
     @Override
     public boolean equals(Object o) {

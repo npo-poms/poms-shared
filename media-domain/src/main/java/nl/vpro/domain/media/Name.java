@@ -92,7 +92,6 @@ public class Name extends Credits  {
         if (source == null) {
             return null;
         }
-
         return new Name(source, parent);
     }
 
@@ -113,7 +112,6 @@ public class Name extends Credits  {
     }
 
     public void setScopeNotes(List<String> scopeNotes) {
-
         if (scopeNotes != null) {
             gtaaRecord.setScopeNotes(scopeNotes);
         }
@@ -122,6 +120,7 @@ public class Name extends Credits  {
         }
     }
 
+    @Override
     @XmlAttribute
     public GTAAStatus getGtaaStatus() {
         return gtaaRecord.getStatus();
@@ -131,6 +130,7 @@ public class Name extends Credits  {
         this.gtaaRecord.setStatus(gtaaStatus);
     }
 
+    @Override
     @XmlAttribute
     public String getGtaaUri() {
         return gtaaRecord.getUri();
@@ -142,6 +142,6 @@ public class Name extends Credits  {
 
     @Override
     public Boolean getGtaaKnownAs() {
-        return false;
+        return null; // unknown
     }
 }
