@@ -466,6 +466,12 @@
         "familyName" : "Holt",
         "role" : "ACTOR",
         "name" : "Holt, Claire"
+      }, {
+        "objectType" : "name",
+        "role" : "COMPOSER",
+        "name" : "Doe Maar",
+        "scopeNotes" : [ "popgroep Nederland" ],
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
       } ],
       "scheduleEvents" : [ {
         "channel" : "NED3",
@@ -966,6 +972,12 @@
           "familyName" : "Holt",
           "role" : "ACTOR",
           "name" : "Holt, Claire"
+        }, {
+          "objectType" : "name",
+          "role" : "COMPOSER",
+          "name" : "Doe Maar",
+          "scopeNotes" : [ "popgroep Nederland" ],
+          "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
         } ],
         "start" : 0,
         "urnRef" : "urn:vpro:media:program:12",
