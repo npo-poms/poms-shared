@@ -148,7 +148,7 @@
       "role" : "SUBJECT"
     }, {
       "name" : "Groot-Brittannië",
-      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/35768\"",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/35768",
       "role" : "RECORDED_IN"
     } ]
   } ],
@@ -170,7 +170,7 @@
       "role" : "SUBJECT"
     }, {
       "name" : "Groot-Brittannië",
-      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/35768\"",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/35768",
       "role" : "RECORDED_IN"
     } ]
   } ],
