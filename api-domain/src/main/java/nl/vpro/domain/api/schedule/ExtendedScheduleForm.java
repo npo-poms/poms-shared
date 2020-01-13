@@ -55,7 +55,7 @@ class ExtendedScheduleForm extends ScheduleForm {
             && (net == null || (e.getNet() != null && e.getNet().equals(new Net(net))))
             && (mediaType == null || (e.getParent().getMediaType() == mediaType))
             && (descendantOf == null || descendantOf.isEmpty() ||
-            e.getParent().getDescendantOf().stream().map(DescendantRef::getMidRef).filter(descendantOf::contains).findFirst().isPresent());
+            e.getParent().getDescendantOf().stream().map(DescendantRef::getMidRef).anyMatch(descendantOf::contains));
 
     }
 
