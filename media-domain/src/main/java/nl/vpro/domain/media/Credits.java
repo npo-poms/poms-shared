@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -104,11 +106,29 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
         return getClass().getSimpleName().toLowerCase();
     }
 
+    /**
+     * Returns the name of the credits. This is how it would be referred to by humans.
+     */
     public abstract String getName();
 
+    /**
+     * To better understand about which or what we are talking, these string may give some scope.
+     */
+    public abstract List<String> getScopeNotes();
+
+
+    /**
+     * The URI in GTAA of this thesaurus item
+     */
     public abstract String getGtaaUri();
 
+    /**
+     * The status in GTAA of this thesaurus item.
+     */
     public abstract GTAAStatus getGtaaStatus();
 
+    /**
+     * TODO: describe this?
+     */
     public abstract Boolean getGtaaKnownAs();
 }

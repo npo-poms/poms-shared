@@ -21,7 +21,6 @@ import javax.persistence.Embeddable;
 @ToString(callSuper = true)
 public class EmbeddablePerson extends EmbeddableGTAARecord implements Serializable {
 
-
     @Column(name = "gtaa_knownas")
     private Boolean knownAs = false;
 

@@ -540,7 +540,10 @@
 
   <xs:complexType name="creditsType">
     <xs:sequence>
-      <xs:element type="personType" name="person" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="person" type="personType"/>
+        <xs:element name="name" type="nameType"/>
+      </xs:choice>
     </xs:sequence>
   </xs:complexType>
 
@@ -548,6 +551,16 @@
     <xs:sequence>
       <xs:element type="xs:string" name="givenName"/>
       <xs:element type="xs:string" name="familyName"/>
+    </xs:sequence>
+    <xs:attribute type="roleType" name="role" use="required"/>
+    <xs:attribute name="gtaaUri" type="xs:string"/>
+    <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
+  </xs:complexType>
+
+  <xs:complexType name="nameType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute type="roleType" name="role" use="required"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>

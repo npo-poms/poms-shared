@@ -9,7 +9,7 @@
   </parent>
   <artifactId>gtaa-domain</artifactId>
   <name>gtaa-domain</name>
-  <description>Contains java binding for the objects served out by Openskos/GTAA</description>
+  <description>Contains java bindings for the objects served out by Openskos/GTAA</description>
 
   <dependencies>
     <dependency>

@@ -50,6 +50,39 @@
     "owner" : "MIS",
     "type" : "SUB"
   } ],
+  "expandedTitles" : [ {
+    "value" : "Main title",
+    "owner" : "BROADCASTER",
+    "type" : "MAIN"
+  }, {
+    "value" : "Main title",
+    "owner" : "NPO",
+    "type" : "MAIN"
+  }, {
+    "value" : "Short title",
+    "owner" : "BROADCASTER",
+    "type" : "SHORT"
+  }, {
+    "value" : "Short title",
+    "owner" : "NPO",
+    "type" : "SHORT"
+  }, {
+    "value" : "Episode title MIS",
+    "owner" : "BROADCASTER",
+    "type" : "SUB"
+  }, {
+    "value" : "Episode title MIS",
+    "owner" : "NPO",
+    "type" : "SUB"
+  }, {
+    "value" : "Main title",
+    "owner" : "BROADCASTER",
+    "type" : "LEXICO"
+  }, {
+    "value" : "Main title",
+    "owner" : "NPO",
+    "type" : "LEXICO"
+  } ],
   "descriptions" : [ {
     "value" : "Main description",
     "owner" : "BROADCASTER",
@@ -82,7 +115,21 @@
     "owner" : "NPO",
     "values" : [ "ENTERTAINMENT_INFORMATIVE", "INFORM" ]
   } ],
+  "expandedIntentions" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ "ACTIVATING", "INFORM_INDEPTH" ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ "ENTERTAINMENT_INFORMATIVE", "INFORM" ]
+  } ],
   "targetGroups" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ "ADULTS" ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ "KIDS_6", "KIDS_12" ]
+  } ],
+  "expandedTargetGroups" : [ {
     "owner" : "BROADCASTER",
     "values" : [ "ADULTS" ]
   }, {
@@ -111,7 +158,48 @@
       "role" : "RECORDED_IN"
     } ]
   } ],
+  "expandedGeoLocations" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ {
+      "name" : "Africa",
+      "scopeNotes" : [ "werelddeel" ],
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/31299",
+      "role" : "SUBJECT"
+    } ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ {
+      "name" : "Engeland",
+      "scopeNotes" : [ "deel Groot-Brittannië" ],
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/34812",
+      "gtaaStatus" : "approved",
+      "role" : "SUBJECT"
+    }, {
+      "name" : "Groot-Brittannië",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/35768",
+      "role" : "RECORDED_IN"
+    } ]
+  } ],
   "topics" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ {
+      "name" : "honden",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25890",
+      "gtaaStatus" : "approved"
+    }, {
+      "name" : "bar",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/29064",
+      "gtaaStatus" : "candidate"
+    } ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ {
+      "name" : "hondenrennen",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25891",
+      "gtaaStatus" : "approved"
+    } ]
+  } ],
+  "expandedTopics" : [ {
     "owner" : "BROADCASTER",
     "values" : [ {
       "name" : "honden",
@@ -347,22 +435,26 @@
     "givenName" : "Bregtje",
     "familyName" : "van der Haak",
     "role" : "DIRECTOR",
-    "gtaaUri" : "http://gtaa/1234"
+    "gtaaUri" : "http://gtaa/1234",
+    "name" : "van der Haak, Bregtje"
   }, {
     "objectType" : "person",
     "givenName" : "Hans",
     "familyName" : "Goedkoop",
-    "role" : "PRESENTER"
+    "role" : "PRESENTER",
+    "name" : "Goedkoop, Hans"
   }, {
     "objectType" : "person",
     "givenName" : "Meta",
     "familyName" : "de Vries",
-    "role" : "PRESENTER"
+    "role" : "PRESENTER",
+    "name" : "de Vries, Meta"
   }, {
     "objectType" : "person",
     "givenName" : "Claire",
     "familyName" : "Holt",
-    "role" : "ACTOR"
+    "role" : "ACTOR",
+    "name" : "Holt, Claire"
   }, {
     "objectType" : "name",
     "role" : "COMPOSER",
@@ -374,7 +466,8 @@
     "givenName" : "Rutte,",
     "familyName" : "Mark",
     "role" : "SUBJECT",
-    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017",
+    "name" : "Mark, Rutte,"
   } ],
   "scheduleEvents" : [ {
     "channel" : "NED3",
@@ -383,7 +476,9 @@
     "duration" : 200,
     "midRef" : "VPROWON_20001",
     "poProgID" : "VPROWON_20001",
-    "urnRef" : "urn:vpro:media:program:12"
+    "rerun" : false,
+    "urnRef" : "urn:vpro:media:program:12",
+    "eventStart" : 100
   }, {
     "channel" : "NED3",
     "start" : 259200300,
@@ -394,8 +489,10 @@
     "repeat" : {
       "isRerun" : true
     },
+    "rerun" : true,
     "net" : "ZAPP",
-    "urnRef" : "urn:vpro:media:program:12"
+    "urnRef" : "urn:vpro:media:program:12",
+    "eventStart" : 259200300
   }, {
     "channel" : "HOLL",
     "start" : 691200350,
@@ -406,7 +503,9 @@
     "repeat" : {
       "isRerun" : true
     },
-    "urnRef" : "urn:vpro:media:program:12"
+    "rerun" : true,
+    "urnRef" : "urn:vpro:media:program:12",
+    "eventStart" : 691200350
   }, {
     "channel" : "CONS",
     "start" : 864000600,
@@ -417,7 +516,9 @@
     "repeat" : {
       "isRerun" : true
     },
-    "urnRef" : "urn:vpro:media:program:12"
+    "rerun" : true,
+    "urnRef" : "urn:vpro:media:program:12",
+    "eventStart" : 864000600
   } ],
   "segments" : [ {
     "objectType" : "segment",
@@ -465,6 +566,39 @@
       "owner" : "MIS",
       "type" : "SUB"
     } ],
+    "expandedTitles" : [ {
+      "value" : "Main title",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "Main title",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "Short title",
+      "owner" : "BROADCASTER",
+      "type" : "SHORT"
+    }, {
+      "value" : "Short title",
+      "owner" : "NPO",
+      "type" : "SHORT"
+    }, {
+      "value" : "Episode title MIS",
+      "owner" : "BROADCASTER",
+      "type" : "SUB"
+    }, {
+      "value" : "Episode title MIS",
+      "owner" : "NPO",
+      "type" : "SUB"
+    }, {
+      "value" : "Main title",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "Main title",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "descriptions" : [ {
       "value" : "Main description",
       "owner" : "BROADCASTER",
@@ -497,7 +631,21 @@
       "owner" : "NPO",
       "values" : [ "ENTERTAINMENT_INFORMATIVE", "INFORM" ]
     } ],
+    "expandedIntentions" : [ {
+      "owner" : "BROADCASTER",
+      "values" : [ "ACTIVATING", "INFORM_INDEPTH" ]
+    }, {
+      "owner" : "NPO",
+      "values" : [ "ENTERTAINMENT_INFORMATIVE", "INFORM" ]
+    } ],
     "targetGroups" : [ {
+      "owner" : "BROADCASTER",
+      "values" : [ "ADULTS" ]
+    }, {
+      "owner" : "NPO",
+      "values" : [ "KIDS_6", "KIDS_12" ]
+    } ],
+    "expandedTargetGroups" : [ {
       "owner" : "BROADCASTER",
       "values" : [ "ADULTS" ]
     }, {
@@ -526,7 +674,48 @@
         "role" : "RECORDED_IN"
       } ]
     } ],
+    "expandedGeoLocations" : [ {
+      "owner" : "BROADCASTER",
+      "values" : [ {
+        "name" : "Africa",
+        "scopeNotes" : [ "werelddeel" ],
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/31299",
+        "role" : "SUBJECT"
+      } ]
+    }, {
+      "owner" : "NPO",
+      "values" : [ {
+        "name" : "Engeland",
+        "scopeNotes" : [ "deel Groot-Brittannië" ],
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/34812",
+        "gtaaStatus" : "approved",
+        "role" : "SUBJECT"
+      }, {
+        "name" : "Groot-Brittannië",
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/35768",
+        "role" : "RECORDED_IN"
+      } ]
+    } ],
     "topics" : [ {
+      "owner" : "BROADCASTER",
+      "values" : [ {
+        "name" : "honden",
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25890",
+        "gtaaStatus" : "approved"
+      }, {
+        "name" : "bar",
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/29064",
+        "gtaaStatus" : "candidate"
+      } ]
+    }, {
+      "owner" : "NPO",
+      "values" : [ {
+        "name" : "hondenrennen",
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25891",
+        "gtaaStatus" : "approved"
+      } ]
+    } ],
+    "expandedTopics" : [ {
       "owner" : "BROADCASTER",
       "values" : [ {
         "name" : "honden",
@@ -763,22 +952,26 @@
       "givenName" : "Bregtje",
       "familyName" : "van der Haak",
       "role" : "DIRECTOR",
-      "gtaaUri" : "http://gtaa/1234"
+      "gtaaUri" : "http://gtaa/1234",
+      "name" : "van der Haak, Bregtje"
     }, {
       "objectType" : "person",
       "givenName" : "Hans",
       "familyName" : "Goedkoop",
-      "role" : "PRESENTER"
+      "role" : "PRESENTER",
+      "name" : "Goedkoop, Hans"
     }, {
       "objectType" : "person",
       "givenName" : "Meta",
       "familyName" : "de Vries",
-      "role" : "PRESENTER"
+      "role" : "PRESENTER",
+      "name" : "de Vries, Meta"
     }, {
       "objectType" : "person",
       "givenName" : "Claire",
       "familyName" : "Holt",
-      "role" : "ACTOR"
+      "role" : "ACTOR",
+      "name" : "Holt, Claire"
     }, {
       "objectType" : "name",
       "role" : "COMPOSER",
@@ -790,7 +983,8 @@
       "givenName" : "Rutte,",
       "familyName" : "Mark",
       "role" : "SUBJECT",
-      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017",
+      "name" : "Mark, Rutte,"
     } ],
     "start" : 0,
     "urnRef" : "urn:vpro:media:program:12",

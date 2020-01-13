@@ -134,61 +134,82 @@
     "owner" : "BROADCASTER",
     "values" : [ {
       "name" : "Africa",
-      "scopeNotes" : [ "Continent" ],
-      "gtaaUri" : "http://gtaa/1231",
+      "scopeNotes" : [ "werelddeel" ],
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/31299",
       "role" : "SUBJECT"
     } ]
   }, {
     "owner" : "NPO",
     "values" : [ {
-      "name" : "England",
-      "gtaaUri" : "http://gtaa/1232",
+      "name" : "Engeland",
+      "scopeNotes" : [ "deel Groot-Brittannië" ],
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/34812",
       "gtaaStatus" : "approved",
       "role" : "SUBJECT"
     }, {
-      "name" : "UK",
-      "gtaaUri" : "http://gtaa/1233",
+      "name" : "Groot-Brittannië",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/35768",
       "role" : "RECORDED_IN"
-    } ]
-  } ],
-  "topics" : [ {
-    "owner" : "BROADCASTER",
-    "values" : [ {
-      "name" : "foo",
-      "gtaaUri" : "http://gtaa/123",
-      "gtaaStatus" : "approved"
-    }, {
-      "name" : "bar",
-      "gtaaUri" : "http://gtaa/124",
-      "gtaaStatus" : "candidate"
-    } ]
-  }, {
-    "owner" : "NPO",
-    "values" : [ {
-      "name" : "foos",
-      "gtaaUri" : "http://gtaa/125",
-      "gtaaStatus" : "approved"
     } ]
   } ],
   "expandedGeoLocations" : [ {
     "owner" : "BROADCASTER",
     "values" : [ {
       "name" : "Africa",
-      "scopeNotes" : [ "Continent" ],
-      "gtaaUri" : "http://gtaa/1231",
+      "scopeNotes" : [ "werelddeel" ],
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/31299",
       "role" : "SUBJECT"
     } ]
   }, {
     "owner" : "NPO",
     "values" : [ {
-      "name" : "England",
-      "gtaaUri" : "http://gtaa/1232",
+      "name" : "Engeland",
+      "scopeNotes" : [ "deel Groot-Brittannië" ],
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/34812",
       "gtaaStatus" : "approved",
       "role" : "SUBJECT"
     }, {
-      "name" : "UK",
-      "gtaaUri" : "http://gtaa/1233",
+      "name" : "Groot-Brittannië",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/35768",
       "role" : "RECORDED_IN"
+    } ]
+  } ],
+  "topics" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ {
+      "name" : "honden",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25890",
+      "gtaaStatus" : "approved"
+    }, {
+      "name" : "bar",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/29064",
+      "gtaaStatus" : "candidate"
+    } ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ {
+      "name" : "hondenrennen",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25891",
+      "gtaaStatus" : "approved"
+    } ]
+  } ],
+  "expandedTopics" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ {
+      "name" : "honden",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25890",
+      "gtaaStatus" : "approved"
+    }, {
+      "name" : "bar",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/29064",
+      "gtaaStatus" : "candidate"
+    } ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ {
+      "name" : "hondenrennen",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25891",
+      "gtaaStatus" : "approved"
     } ]
   } ],
   "source" : "Naar het gelijknamige boek van W.F. Hermans",
@@ -419,25 +440,19 @@
     "familyName" : "Holt",
     "role" : "ACTOR",
     "name" : "Holt, Claire"
-  } ],
-  "expandedTopics" : [ {
-    "owner" : "BROADCASTER",
-    "values" : [ {
-      "name" : "foo",
-      "gtaaUri" : "http://gtaa/123",
-      "gtaaStatus" : "approved"
-    }, {
-      "name" : "bar",
-      "gtaaUri" : "http://gtaa/124",
-      "gtaaStatus" : "candidate"
-    } ]
   }, {
-    "owner" : "NPO",
-    "values" : [ {
-      "name" : "foos",
-      "gtaaUri" : "http://gtaa/125",
-      "gtaaStatus" : "approved"
-    } ]
+    "objectType" : "name",
+    "role" : "COMPOSER",
+    "name" : "Doe Maar",
+    "scopeNotes" : [ "popgroep Nederland" ],
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
+  }, {
+    "objectType" : "person",
+    "givenName" : "Rutte,",
+    "familyName" : "Mark",
+    "role" : "SUBJECT",
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017",
+    "name" : "Mark, Rutte,"
   } ],
   "start" : 120000,
   "publishDate" : 1425603600000

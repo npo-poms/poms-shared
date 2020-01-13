@@ -6,7 +6,7 @@
     <version>5.12-SNAPSHOT</version>
   </parent>
   <artifactId>gtaa-openskos</artifactId>
-  <description>Contains implementaton openskos client for GTAA</description>
+  <description>Contains an implementation of an openskos client for GTAA</description>
 
   <dependencies>
     <dependency>

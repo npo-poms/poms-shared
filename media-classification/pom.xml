@@ -9,7 +9,12 @@
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-classification</artifactId>
   <name>media-classification</name>
-  <description>The classed needed for the 'classification' service used in POMS. This based on ClassificationScheme xml's as provided by EBU. It at the moment used for genres.</description>
+  <description>
+    The classes needed for the 'classification' service used in POMS.
+    This os based on ClassificationScheme xml's as provided by EBU.
+    It at the moment is only used for genres, but it could in principle accomodate other types of classification based on
+    a fixed list.
+  </description>
 
 
   <dependencies>

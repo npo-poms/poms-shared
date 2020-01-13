@@ -2,8 +2,7 @@ package nl.vpro.domain.media;
 
 import java.io.IOException;
 
-import org.junit.Test;
-import org.xml.sax.SAXException;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.search.MediaListItem;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

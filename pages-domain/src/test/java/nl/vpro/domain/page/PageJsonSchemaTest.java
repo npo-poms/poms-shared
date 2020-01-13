@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class PageJsonSchemaTest {
 
-    private PageBuilder.DefaultPageBuilder builder;
+    private PageBuilder builder;
 
     @Before
     public void setUp() {

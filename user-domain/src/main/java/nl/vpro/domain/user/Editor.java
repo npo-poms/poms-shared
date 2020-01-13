@@ -90,7 +90,7 @@ public class Editor extends AbstractUser {
         String familiyName,
         String email,
         Broadcaster broadcaster,
-        Set<String> roles,
+        @lombok.Singular  Set<String> roles,
         Instant lastLogin
     ) {
         super(principalId, displayName, email);

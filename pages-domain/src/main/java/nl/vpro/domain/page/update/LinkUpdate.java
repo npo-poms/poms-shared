@@ -36,6 +36,7 @@ public class LinkUpdate implements Serializable{
     @XmlAttribute
     @Getter
     @Setter
+    @NonNull
     private String pageRef;
 
     @NoHtml

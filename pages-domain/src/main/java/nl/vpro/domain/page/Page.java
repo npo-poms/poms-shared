@@ -85,8 +85,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @EqualsAndHashCode
 public class Page implements MutableEmbargo<Page> {
 
-    public static <T extends PageBuilder<T, Page>> PageBuilder<T, Page> builder() {
-        return new PageBuilder<>(new Page());
+    public static PageBuilder builder() {
+        return new PageBuilder(new Page());
     }
 
     @NotNull
