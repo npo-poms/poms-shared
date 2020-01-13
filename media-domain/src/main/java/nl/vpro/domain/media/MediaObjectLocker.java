@@ -426,12 +426,12 @@ public class MediaObjectLocker {
         }
 
         public String summarize() {
-            return key + ":" + MediaObjectLocker.summarize(this.thread, this.cause) + ":" + createdAt;
+            return key + ":" + createdAt + ":" + MediaObjectLocker.summarize(this.thread, this.cause);
         }
 
         @Override
         public String toString() {
-            return "holder:" + key;
+            return "holder:" + key + ":" + createdAt;
         }
     }
 
