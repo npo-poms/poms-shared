@@ -9,7 +9,7 @@
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-organizations</artifactId>
   <name>media-organizations</name>
-  <description>Provides access to the POMS organization interfaces</description>
+  <description>Provides access to the POMS organization interfaces. The most basic example of an organization in the context of POMS is a 'broadcaster'.</description>
 
   <dependencies>
     <dependency>

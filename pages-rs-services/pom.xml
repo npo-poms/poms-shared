@@ -11,7 +11,7 @@
   <groupId>nl.vpro.pages</groupId>
   <artifactId>pages-rs-services</artifactId>
   <name>pages-rs-services</name>
-  <description>Java interfaces for the Publisher API's.</description>
+  <description>Java interfaces for the Publisher APIs.</description>
 
   <dependencies>
     <dependency>

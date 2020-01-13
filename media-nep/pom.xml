@@ -9,7 +9,7 @@
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-nep</artifactId>
   <name>media-nep</name>
-  <description>Support for the several API's of NEP that POMS is integrating with</description>
+  <description>Support for the several APIs of NEP that POMS is integrating with</description>
   <dependencies>
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>

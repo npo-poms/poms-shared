@@ -9,7 +9,10 @@
 
   <artifactId>poms-shared</artifactId>
   <name>poms-shared</name>
-  <description>Generic utility which are not quite generic enough to make it to vpro-shared.</description>
+  <description>
+    Generic utility which are not quite generic enough to make it to vpro-shared.
+    TODO: This module is very sparse, I think we should consider dropping it altogether.
+  </description>
 
   <dependencies>
     <dependency>
