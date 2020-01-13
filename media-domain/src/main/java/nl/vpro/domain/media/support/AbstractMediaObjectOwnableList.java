@@ -8,6 +8,8 @@ import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.DomainObject;
@@ -56,7 +58,7 @@ public abstract class AbstractMediaObjectOwnableList<
 
     @Override
     public int compareTo(THIS o) {
-        return this.getOwner().compareTo(o.getOwner());
+        return ObjectUtils.compare(this.getOwner(), o.getOwner());
     }
 
     @SuppressWarnings("unchecked")
