@@ -9,6 +9,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.management.ManagementFactory;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -400,6 +401,7 @@ public class MediaObjectLocker {
         final ReentrantLock lock;
         final Exception cause;
         final Thread thread;
+        final Instant createdAt = Instant.now();
 
         private LockHolder(K  k, ReentrantLock lock, Exception cause) {
             this.key = k;
@@ -424,7 +426,7 @@ public class MediaObjectLocker {
         }
 
         public String summarize() {
-            return key + ":" + MediaObjectLocker.summarize(this.thread, this.cause);
+            return key + ":" + MediaObjectLocker.summarize(this.thread, this.cause) + ":" + createdAt;
         }
 
         @Override
