@@ -48,6 +48,9 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
         this.values.forEach(v -> v.setParent(this));
     }
 
+    /**
+     * TODO: Why couldn't this have been simply a list of IntentionType?
+     */
     @Override
     @NonNull
     @XmlElement(name="intention")

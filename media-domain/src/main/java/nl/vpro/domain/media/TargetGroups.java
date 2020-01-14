@@ -35,7 +35,9 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private TargetGroups(@lombok.NonNull @Singular  List<TargetGroupType> values, @lombok.NonNull OwnerType owner) {
+    private TargetGroups(
+        @NonNull @Singular  List<TargetGroupType> values,
+        @NonNull OwnerType owner) {
         this.values = values.stream().map(TargetGroup::new).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we

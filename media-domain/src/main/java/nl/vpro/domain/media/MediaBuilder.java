@@ -6,6 +6,7 @@ package nl.vpro.domain.media;
 
 import lombok.ToString;
 
+import java.net.URI;
 import java.time.*;
 import java.util.*;
 import java.util.function.Function;
@@ -565,6 +566,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return geoLocations(OwnerType.BROADCASTER, geoLocations);
     }
 
+    default B geoLocations(GeoRoleType role, URI... topics) {
+        return geoLocations(OwnerType.BROADCASTER,
+            Arrays.stream(topics).map(u -> GeoLocation.builder()
+                .uri(u.toString())
+                .role(role)
+                .build()
+            ).toArray(GeoLocation[]::new)
+        );
+    }
+
     default B geoLocations(Collection<GeoLocations> geoLocations) {
         geoLocations.forEach(geos -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getGeoLocations(), geos));
         return (B)this;
@@ -600,10 +611,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return topics(wrapper);
     }
 
-
-    default B topics(Topic... geoLocations) {
-        return topics(OwnerType.BROADCASTER, geoLocations);
+    default B topics(Topic... topics) {
+        return topics(OwnerType.BROADCASTER, topics);
     }
+
+    default B topics(URI... topics) {
+        return topics(OwnerType.BROADCASTER,
+            Arrays.stream(topics).map(u -> Topic.builder().uri(u.toString()).build()).toArray(Topic[]::new)
+        );
+    }
+
 
     default B topics(Collection<Topics> topics) {
         topics.forEach(t -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getTopics(), t));
