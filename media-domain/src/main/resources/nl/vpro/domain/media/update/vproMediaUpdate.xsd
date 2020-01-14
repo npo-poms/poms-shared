@@ -97,7 +97,7 @@
   </xs:complexType>
 
   <xs:complexType name="topicUpdateType">
-    <xs:attribute name="gtaaUri" type="xs:string"/>
+    <xs:attribute name="gtaaUri" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="topicsUpdateType">
@@ -108,15 +108,24 @@
 
   <xs:complexType name="personUpdateType">
     <xs:sequence>
-      <xs:element type="xs:string" name="givenName" form="qualified"/>
-      <xs:element type="xs:string" name="familyName" form="qualified"/>
+      <xs:element type="xs:string" name="givenName" form="qualified" minOccurs="0"/>
+      <xs:element type="xs:string" name="familyName" form="qualified" minOccurs="0"/>
     </xs:sequence>
+    <xs:attribute name="gtaaUri" type="xs:string"/>
+    <xs:attribute type="media:roleType" name="role" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="nameUpdateType">
+    <xs:attribute name="gtaaUri" type="xs:string" use="required"/>
     <xs:attribute type="media:roleType" name="role" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="creditsUpdateType">
     <xs:sequence>
-      <xs:element type="personUpdateType" name="person" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element type="personUpdateType" name="person" form="qualified"/>
+        <xs:element type="nameUpdateType" name="name" form="qualified"/>
+      </xs:choice>
     </xs:sequence>
   </xs:complexType>
 

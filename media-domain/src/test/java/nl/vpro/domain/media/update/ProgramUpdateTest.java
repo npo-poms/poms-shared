@@ -88,7 +88,6 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(errors).hasSize(1);
     }
 
-
     @Test
     public void testIsValidForTitles() {
         ProgramUpdate update = ProgramUpdate.create();
@@ -148,12 +147,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "    <targetGroups/>\n" +
             "    <geoLocations/>\n" +
             "    <topics/>\n" +
+            "    <credits/>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
             "    <segments>\n" +
             "        <segment embeddable=\"true\">\n" +
             "            <title type=\"MAIN\">title</title>\n" +
+            "            <credits/>\n" +
             "            <locations/>\n" +
             "            <images/>\n" +
             "        </segment>\n" +
@@ -228,6 +229,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "<program avType=\"MIXED\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
@@ -246,6 +248,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "<program embeddable=\"false\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
@@ -264,6 +267,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "<program publishStart=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
                 "<geoLocations/>" +
                 "<topics/>" +
+                "<credits/>" +
                 "<locations/>" +
                 "<scheduleEvents/><images/><segments/></program>";
 
@@ -277,7 +281,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program publishStop=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
-                "<geoLocations/><topics/><locations/><scheduleEvents/><images/><segments/></program>";
+                "<geoLocations/><topics/><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -302,6 +306,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images>\n" +
@@ -325,6 +330,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "    <crid>crid://bds.tv/23678459</crid>\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
@@ -344,6 +350,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "    <broadcaster>MAX</broadcaster>\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
@@ -374,6 +381,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "    <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:16:40+01:00\">STERREN24</exclusive>\n" +
             "    <geoLocations/>\n" +
             "    <topics/>\n" +
+            "    <credits/>\n" +
             "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
             "    <images/>\n" +
@@ -397,6 +405,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "    <region platform=\"INTERNETVOD\">BENELUX</region>\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
@@ -426,6 +435,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                  "    <title type=\"MAIN\">Hoofdtitel</title>\n" +
                  "    <geoLocations/>\n" +
                  "    <topics/>\n" +
+                 "    <credits/>\n" +
                  "    <locations/>\n" +
                  "    <scheduleEvents/>\n" +
                  "    <images/>\n" +
@@ -454,6 +464,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "    <targetGroups/>\n" +
             "    <geoLocations/>\n" +
             "    <topics/>\n" +
+            "    <credits/>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
@@ -476,6 +487,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "    <description type=\"MAIN\">Beschrijving</description>\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
@@ -504,6 +516,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "            <coding>AAC</coding>\n" +
             "        </audioAttributes>\n" +
             "    </avAttributes>\n" +
+            "    <credits/>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
@@ -519,7 +532,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
-                "<geoLocations/><topics/><duration>P0DT0H10M56.565S</duration><locations/><scheduleEvents/><images/><segments/></program>";
+                "<geoLocations/><topics/><duration>P0DT0H10M56.565S</duration><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -531,7 +544,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
-                "<geoLocations/><topics/><duration>P0DT3H46M0.000S</duration><locations/><scheduleEvents/><images/><segments/></program>";
+                "<geoLocations/><topics/><duration>P0DT3H46M0.000S</duration><credits/><locations/><scheduleEvents/><images/><segments/></program>";
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
@@ -543,7 +556,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
-                "<geoLocations/><topics/><memberOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</memberOf><locations/><scheduleEvents/><images/><segments/></program>";
+                "<geoLocations/><topics/><credits/><memberOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</memberOf><locations/><scheduleEvents/><images/><segments/></program>";
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertThat(rounded.fetch().getMemberOf()).hasSize(1);
@@ -573,7 +586,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
-                "<geoLocations/><topics/><email>info@vpro.nl</email><locations/><scheduleEvents/><images/><segments/></program>";
+                "<geoLocations/><topics/><credits/><email>info@vpro.nl</email><locations/><scheduleEvents/><images/><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -585,7 +598,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">" +
-                "<geoLocations/><topics/><website>www.vpro.nl</website><locations/><scheduleEvents/><images/><segments/></program>";
+                "<geoLocations/><topics/><credits/><website>www.vpro.nl</website><locations/><scheduleEvents/><images/><segments/></program>";
 
         ProgramUpdate found = JAXBTestUtil.roundTripAndSimilar(update, expected);
         found.getWebsites().add("http://www.npo.nl");
@@ -607,6 +620,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" + "    " +
             "<geoLocations/>\n" +
             "<topics/>\n" +
+            "<credits/>\n" +
             "<locations>\n" +
             "        <location>\n" +
             "            <programUrl>rtsp:someurl</programUrl>\n" +
@@ -631,7 +645,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPerson() {
         ProgramUpdate update = programUpdate();
-        update.setPersons(Collections.singletonList(new PersonUpdate("Pietje", "Puk", RoleType.DIRECTOR)));
+        update.setCredits(Collections.singletonList(new PersonUpdate("Pietje", "Puk", RoleType.DIRECTOR)));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
@@ -657,6 +671,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <geoLocations/>\n" +
             "    <topics/>\n" +
+            "    <credits/>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents>\n" +
             "        <scheduleEvent channel=\"RAD5\">\n" +
@@ -686,6 +701,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <geoLocations/>\n" +
             "    <topics/>\n" +
+            "    <credits/>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents>\n" +
             "        <scheduleEvent channel=\"RAD5\">\n" +
@@ -718,7 +734,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
-                "<geoLocations/><topics/><locations/><scheduleEvents/><relation uriRef=\"http://3voor12.vpro.nl/artists/444555\" broadcaster=\"VPRO\" type=\"ARTIST\">Radiohead</relation><images/><segments/></program>";
+                "<geoLocations/><topics/><credits/><locations/><scheduleEvents/><relation uriRef=\"http://3voor12.vpro.nl/artists/444555\" broadcaster=\"VPRO\" type=\"ARTIST\">Radiohead</relation><images/><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -758,6 +774,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
             "  <geoLocations/>\n" +
             "  <topics/>\n" +
+            "  <credits/>\n" +
             "  <locations/>\n" +
             "  <scheduleEvents/>\n" +
             "  <images>\n" +
@@ -782,7 +799,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
-                "<geoLocations/><topics/><locations/><scheduleEvents/><images/><episodeOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</episodeOf><segments/></program>";
+                "<geoLocations/><topics/><credits/><locations/><scheduleEvents/><images/><episodeOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</episodeOf><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -809,6 +826,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "<program embeddable=\"true\" version=\"5.12\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <geoLocations/>\n" +
             "    <topics/>\n" +
+            "    <credits/>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
@@ -819,6 +837,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "            <geoLocations/>\n" +
             "            <topics/>\n" +
             "            <duration>P0DT0H0M0.100S</duration>\n" +
+            "            <credits/>\n" +
             "            <locations/>\n" +
             "            <images/>\n" +
             "            <start>P0DT0H0M5.555S</start>\n" +
@@ -841,6 +860,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "    <portal>STERREN24</portal>\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
@@ -865,6 +885,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                     "    <geoLocations/>\n" +
                     "    <topics/>\n" +
+                    "    <credits/>\n" +
                     "    <ageRating>6</ageRating>\n" +
                     "    <locations/>\n" +
                     "    <scheduleEvents/>\n" +
@@ -885,6 +906,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <contentRating>ANGST</contentRating>\n" +
                 "    <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
                 "    <locations/>\n" +
@@ -908,6 +930,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "    <tag>foo</tag>\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
@@ -943,6 +966,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <geoLocations/>\n" +
             "    <topics/>\n" +
+            "    <credits/>\n" +
             "    <prediction>INTERNETVOD</prediction>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
@@ -967,6 +991,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <geoLocations/>\n" +
             "    <topics/>\n" +
+            "    <credits/>\n" +
             "    <prediction>TVVOD</prediction>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
@@ -1060,6 +1085,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "    <language>nl</language>\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +
+                "    <credits/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
