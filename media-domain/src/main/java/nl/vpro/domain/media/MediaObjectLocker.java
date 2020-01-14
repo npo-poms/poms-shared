@@ -290,7 +290,7 @@ public class MediaObjectLocker {
                 }
 
 
-                LockHolder<K> newHolder = new LockHolder<>(key, new ReentrantLock(), new Exception());
+                LockHolder<K> newHolder = new LockHolder<>(key, reason, new ReentrantLock(), new Exception());
                 HOLDS.get().add(newHolder);
                 return newHolder;
                 }
@@ -402,12 +402,14 @@ public class MediaObjectLocker {
         final Exception cause;
         final Thread thread;
         final Instant createdAt = Instant.now();
+        final String reason;
 
-        private LockHolder(K  k, ReentrantLock lock, Exception cause) {
+        private LockHolder(K  k, String reason, ReentrantLock lock, Exception cause) {
             this.key = k;
             this.lock = lock;
             this.cause = cause;
             this.thread = Thread.currentThread();
+            this.reason = reason;
         }
 
         @Override
@@ -426,7 +428,7 @@ public class MediaObjectLocker {
         }
 
         public String summarize() {
-            return key + ":" + createdAt + ":" + MediaObjectLocker.summarize(this.thread, this.cause);
+            return key + ":" + createdAt + ":" + reason + ":" +  MediaObjectLocker.summarize(this.thread, this.cause);
         }
 
         @Override
