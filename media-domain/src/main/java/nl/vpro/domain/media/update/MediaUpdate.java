@@ -265,11 +265,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
             String> broadcasters;
 
-    private List<
-        @NotNull
-
-        String
-        > portals;
+    private List<@NotNull String> portals;
 
     private SortedSet<
         @NotNull
