@@ -32,7 +32,7 @@ import nl.vpro.util.IntegerVersion;
 import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.NPO;
 
-@SuppressWarnings({"unchecked", "deprecation"})
+@SuppressWarnings({"unchecked", "deprecation", "UnusedReturnValue"})
 @CanIgnoreReturnValue
 public interface MediaTestDataBuilder<
         T extends MediaTestDataBuilder<T, M> &  MediaBuilder<T, M>,
@@ -472,15 +472,15 @@ public interface MediaTestDataBuilder<
                         .scopeNote("popgroep Nederland")
                         .build()
                 )
-            .persons(
-                Person.builder()
-                    .name("Rutte, Mark")
-                    .role(RoleType.SUBJECT)
-                    .uri(URI.create("http://data.beeldengeluid.nl/gtaa/149017"))
-                    // .scopeNote("minister-president VVD, fractievoorzitter VVD Tweede Kamer, staatssecretaris OCW en Sociale Zaken, voorzitter JOVD")
-                    .build()
+                .persons(
+                    Person.builder()
+                        .name("Rutte, Mark")
+                        .role(RoleType.SUBJECT)
+                        .uri(URI.create("http://data.beeldengeluid.nl/gtaa/149017"))
+                        // .scopeNote("minister-president VVD, fractievoorzitter VVD Tweede Kamer, staatssecretaris OCW en Sociale Zaken, voorzitter JOVD")
+                        .build()
 
-            );
+                );
     }
 
     default T withIntentions() {
