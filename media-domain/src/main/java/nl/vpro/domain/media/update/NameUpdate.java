@@ -3,6 +3,8 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.net.URI;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -38,6 +40,6 @@ public class NameUpdate extends CreditsUpdate {
 
     @Override
     public Credits toCredits() {
-        return Name.builder().uri(gtaaUri).role(role).build();
+        return Name.builder().uri(URI.create(gtaaUri)).role(role).build();
     }
 }

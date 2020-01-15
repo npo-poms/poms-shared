@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.net.URI;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class NameTest {
         Name name = Name.builder()
             .id(1L)
             .role(RoleType.GUEST)
-            .uri("http://gtaa/1")
+            .uri(URI.create("http://gtaa/1"))
             .name("Doe Maar")
             .scopeNotes(Arrays.asList("bla1", "bla2"))
             .gtaaStatus(GTAAStatus.approved)
@@ -65,7 +66,7 @@ class NameTest {
         Name name = Name.builder()
             .id(1L)
             .role(RoleType.GUEST)
-            .uri("http://gtaa/1")
+            .uri(URI.create("http://gtaa/1"))
             .name("Doe Maar")
             .scopeNotes(Arrays.asList("bla1", "bla2"))
             .gtaaStatus(GTAAStatus.approved)

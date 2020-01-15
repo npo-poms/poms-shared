@@ -1,27 +1,17 @@
 package nl.vpro.domain.media;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.Singular;
-import lombok.ToString;
+import lombok.*;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -61,11 +51,11 @@ public class Name extends Credits  {
         gtaaRecord = new GTAARecord();
     }
 
-    @lombok.Builder
+    @lombok.Builder(builderClassName = "Builder")
     private Name(Long id,
                  String name,
                  @Singular List<String> scopeNotes,
-                 @NonNull String uri,
+                 @NonNull URI _uri,
                  GTAAStatus gtaaStatus,
                  RoleType role) {
 
@@ -74,7 +64,7 @@ public class Name extends Credits  {
         this.gtaaRecord = GTAARecord.builder()
             .name(name)
             .scopeNotes(scopeNotes)
-            .uri(uri)
+            .uri(_uri.toString())
             .status(gtaaStatus)
             .build();
     }
@@ -149,5 +139,21 @@ public class Name extends Credits  {
     @Override
     public Boolean getGtaaKnownAs() {
         return false;
+    }
+
+    public static class Builder {
+
+        URI _uri;
+
+        public Builder uri(String u) {
+            return _uri(URI.create(u));
+        }
+        public Builder uri(URI u) {
+            return _uri(u);
+        }
+        private Builder _uri(URI u) {
+            this._uri = u;
+            return this;
+        }
     }
 }
