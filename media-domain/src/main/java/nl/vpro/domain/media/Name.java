@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.Cache;
@@ -145,7 +146,7 @@ public class Name extends Credits  {
 
         URI _uri;
 
-        public Builder uri(String u) {
+        public Builder uri(@Pattern(regexp = "http://data\\.beeldengeluid\\.nl/gtaa/[0-9]+") String u) {
             return _uri(URI.create(u));
         }
         public Builder uri(URI u) {
