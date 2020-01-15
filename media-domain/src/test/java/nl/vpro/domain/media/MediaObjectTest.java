@@ -68,7 +68,7 @@ public class MediaObjectTest {
 
         Person person1 = Person.builder().id(1L).uri(URI.create("http://gtaa/1")).build();
         Person person2 = Person.builder().id(2L).uri(URI.create("http://gtaa/2")).build();
-        Name name1 = Name.builder().id(3L).uri("http://gtaa/3").build();
+        Name name1 = Name.builder().id(3L).uri(URI.create("http://gtaa/3")).build();
         Name name2 = Name.builder().id(4L).uri("http://gtaa/4").build();
 
         MediaObject mediaObject = new Program();
