@@ -137,11 +137,11 @@ public class Person extends Credits implements PersonInterface {
     }
 
     /**
-     * Sets both the given name and the family name by splitting the String.
+     * Sets both the given name and the family name by splitting the String on a comma.
      */
     public void setName(String name) {
         if (name != null) {
-            String[] split = name.split("\\s+", 2);
+            String[] split = name.split("\\s*,\\s*", 2);
             if (split.length == 1) {
                 setGivenName("");
                 setFamilyName(name);
