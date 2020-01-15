@@ -108,6 +108,7 @@ public class MediaUpdateListTest {
             "        <targetGroups/>\n" +
             "        <geoLocations/>\n" +
             "        <topics/>\n" +
+            "        <credits/>\n" +
             "        <locations/>\n" +
             "        <scheduleEvents/>\n" +
             "        <images/>\n" +
@@ -119,6 +120,7 @@ public class MediaUpdateListTest {
             "                <targetGroups/>\n" +
             "                <geoLocations/>\n" +
             "                <topics/>\n" +
+            "                <credits/>\n" +
             "                <locations/>\n" +
             "                <images/>\n" +
             "                <start>P0DT0H0M0.000S</start>\n" +

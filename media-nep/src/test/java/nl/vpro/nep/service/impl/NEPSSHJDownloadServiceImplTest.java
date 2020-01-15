@@ -42,8 +42,9 @@ public class NEPSSHJDownloadServiceImplTest {
     private NEPSSHJDownloadServiceImpl impl;
 
     //static String fileName = "KN_1689705__000001927-002511602.mp4";
-    static String fileName = "npo-1dvr__2019-04-01T071443751-2019-04-01T071446102.mp4";
+    //static String fileName = "npo-1dvr__2019-04-01T071443751-2019-04-01T071446102.mp4";
     //String fileName = "VPWON_1265965__000414370-000917470.mp4";
+    static String fileName = "POW_04596569__003141869-005019605.mp4";
 
     static String testDest = "/tmp/test.mp4";
 
@@ -51,8 +52,8 @@ public class NEPSSHJDownloadServiceImplTest {
     public void setup() {
         impl = new NEPSSHJDownloadServiceImpl(
             "sftp-itemizer.nepworldwide.nl",
-            "npo",
-            "",
+            "npod",
+            "V5pJULnIqxoBWnT",
             "AAAAB3NzaC1yc2EAAAADAQABAAABAQCV4gmmgKyPVyOyZv1jdVpu/KzS9w2v4/vxDeKbuXvl0tldvDAmMi/QY1XvLueuZJy8PmilpGj6po1JuU0V2RGX/Js18b9lyCAQptdaeUk45lYvM8bpGfkzB509i3+CaM6U1onEIftFs4vzDLMwHrZQ6kdlRGGs6bLYy1vpqs7h6mO/XGDeLLVpjLPZbz/TrWt98kinn+Rg/TwYV0VNyqac5DkpWtFEUucIrq6zZs1q3Pw8YHMo02BWlWXFR/yi41ODb+RH1dTlZEs3vrMgwFvVD5c+4EKy1hZ65SJ6xVXwaMyN4w1LaHLwwe3K8rNDS+m5gyaswhdeZthqDiXysFwj");
     }
 
@@ -87,6 +88,7 @@ public class NEPSSHJDownloadServiceImplTest {
 
 
     }*/
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void testSshj() throws IOException {
 
@@ -135,19 +137,19 @@ public class NEPSSHJDownloadServiceImplTest {
     @Ignore("This actually does something")
     @SneakyThrows
     public void async() {
-        List<ForkJoinTask> tasks = new ArrayList<>();
+        List<ForkJoinTask<?>> tasks = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             tasks.add(ForkJoinPool.commonPool().submit(checkAvailability("bestaatniet." + i)));
 
         }
-        for (ForkJoinTask task : tasks) {
+        for (ForkJoinTask<?> task : tasks) {
             task.get();
         }
         tasks.clear();
         for (int i = 0; i < 10; i++) {
             tasks.add(ForkJoinPool.commonPool().submit(checkAvailability("bestaatniet." + i)));
         }
-        for (ForkJoinTask t : tasks) {
+        for (ForkJoinTask<?> t : tasks) {
             t.get();
         }
     }

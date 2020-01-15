@@ -1,14 +1,19 @@
 package nl.vpro.domain.media.update;
 
 import lombok.Getter;
+import lombok.ToString;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.xml.bind.annotation.*;
+import java.net.URI;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.media.Credits;
 import nl.vpro.domain.media.Person;
 import nl.vpro.domain.media.RoleType;
 
@@ -21,7 +26,12 @@ import nl.vpro.domain.media.RoleType;
          propOrder = {"givenName",
                       "familyName"})
 @XmlRootElement(name = "person")
-public class PersonUpdate {
+@ToString(of = { "givenName", "familyName" }, callSuper = true)
+public class PersonUpdate extends CreditsUpdate {
+
+    @XmlAttribute
+    @Getter
+    private String gtaaUri;
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
     @Getter
@@ -31,36 +41,42 @@ public class PersonUpdate {
     @Getter
     protected String familyName;
 
-    @XmlAttribute(required = true)
-    @Enumerated(EnumType.STRING)
-    @Getter
-    protected RoleType role;
+    public PersonUpdate(String gtaaUri, RoleType role) {
+        super(role);
+        this.gtaaUri = gtaaUri;
+    }
 
     public PersonUpdate(String givenName, String familyName, RoleType role) {
+        super(role);
         this.givenName = givenName;
         this.familyName = familyName;
-        this.role = role;
     }
 
     public PersonUpdate(Person p) {
-        this(p.getGivenName(), p.getFamilyName(), p.getRole());
+
+        if (p.getGtaaUri() != null) {
+            this.gtaaUri = p.getGtaaUri();
+        }
+        else {
+            this.givenName = p.getGivenName();
+            this.familyName = p.getFamilyName();
+        }
+
+        this.role = p.getRole();
     }
 
-    protected PersonUpdate() {
+    public PersonUpdate() {
         // needed for jaxb
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-            .appendSuper(super.toString())
-            .append("givenName", givenName)
-            .append("familyName", familyName)
-            .append("role", role)
-            .toString();
-    }
+    public Credits toCredits() {
 
-    public Person toPerson() {
-        return new Person(getGivenName(), getFamilyName(), getRole());
+        if (gtaaUri != null) {
+            return Person.builder().uri(URI.create(gtaaUri)).role(role).build();
+        }
+        else {
+            return Person.builder().givenName(givenName).familyName(familyName).role(role).build();
+        }
     }
 }

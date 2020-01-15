@@ -28,6 +28,8 @@
 
   <xs:element name="move" type="moveActionType"/>
 
+  <xs:element name="name" type="nameUpdateType"/>
+
   <xs:element name="person" type="personUpdateType"/>
 
   <xs:element name="prediction" type="predictionUpdateType"/>
@@ -98,7 +100,10 @@
       <xs:element name="credits" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="person" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element ref="person"/>
+              <xs:element ref="name"/>
+            </xs:choice>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -226,11 +231,29 @@
   </xs:complexType>
 
   <xs:complexType name="personUpdateType">
-    <xs:sequence>
-      <xs:element name="givenName" type="xs:string" minOccurs="0"/>
-      <xs:element name="familyName" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="creditsUpdate">
+        <xs:sequence>
+          <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+          <xs:element name="familyName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="gtaaUri" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="creditsUpdate" abstract="true">
+    <xs:sequence/>
     <xs:attribute name="role" type="media:roleType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="nameUpdateType">
+    <xs:complexContent>
+      <xs:extension base="creditsUpdate">
+        <xs:sequence/>
+        <xs:attribute name="gtaaUri" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="memberRefUpdateType">
@@ -408,7 +431,10 @@
       <xs:element name="credits" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="person" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element ref="person"/>
+              <xs:element ref="name"/>
+            </xs:choice>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -496,7 +522,10 @@
       <xs:element name="credits" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="person" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element ref="person"/>
+              <xs:element ref="name"/>
+            </xs:choice>
           </xs:sequence>
         </xs:complexType>
       </xs:element>

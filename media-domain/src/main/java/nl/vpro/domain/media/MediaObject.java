@@ -467,9 +467,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @StringList(maxLength = 255)
-    protected List<
-        @NotNull
-        @Email(message = "{nl.vpro.constraints.Email.message}", groups = {}) String> email;
+    protected List<@NotNull @Email(message = "{nl.vpro.constraints.Email.message}", groups = {}) String> email;
 
     @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)

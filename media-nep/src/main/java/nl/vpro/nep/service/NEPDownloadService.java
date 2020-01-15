@@ -15,7 +15,7 @@ public interface NEPDownloadService {
     /**
      * Wait until the given file is available on the NEP download ftp server, then copy it to the given outputStream.
      *
-     * Before that, you the descriptorConsumer will be called. It if return false, the copying will not happen
+     * Before that, the descriptorConsumer will be called. If it returns false, the copying will not happen
      *
      * @throws IllegalStateException If the file didn't appear in time
      * @param descriptorConsumer If the file is found, and this is not <code>null</code> it's descriptor will be fed to this function
@@ -43,11 +43,11 @@ public interface NEPDownloadService {
          */
         TRUE,
         /**
-         * The file is not ok, it may be to old or different than expected. Wait a bit and retry this.
+         * The file is not ok, it may be too old or different than expected. Wait a bit and retry this.
          */
         RETRY,
         /**
-         * The file is not ok, it may be to old or different than expected. There is no point in waiting.
+         * The file is not ok, it may be too old or different than expected. There is no point in waiting.
          */
         FALSE
     }

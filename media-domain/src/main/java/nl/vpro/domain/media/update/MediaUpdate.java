@@ -60,6 +60,7 @@ import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.AVType;
 import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.ContentRating;
+import nl.vpro.domain.media.Credits;
 import nl.vpro.domain.media.Genre;
 import nl.vpro.domain.media.GeoLocation;
 import nl.vpro.domain.media.GeoLocations;
@@ -74,6 +75,8 @@ import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.MediaObjects;
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.MemberRef;
+import nl.vpro.domain.media.Name;
+import nl.vpro.domain.media.Person;
 import nl.vpro.domain.media.Prediction;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.Segment;
@@ -262,25 +265,14 @@ public abstract class  MediaUpdate<M extends MediaObject>
         @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
             String> broadcasters;
 
-    private List<
-        @NotNull
-
-        String
-        > portals;
+    private List<@NotNull String> portals;
 
     private SortedSet<
         @NotNull
         @Size(min = 1, max = 255)
         String> tags;
 
-
-    // jaxb annotations are here, because if on property, the credits wrapper will be marshalled always.
-    // This arguably better, but for now we want to be backwards compatible.
-    @XmlElementWrapper(name = "credits")
-    @XmlElements({
-        @XmlElement(name = "person", type = PersonUpdate.class)
-    })
-    private List<PersonUpdate> credits;
+    private List<CreditsUpdate> credits;
 
     private List<PortalRestrictionUpdate> portalRestrictions;
 
@@ -363,7 +355,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.portals = toList(mediaobject.getPortals(), Portal::getId);
 
         this.tags = toSet(mediaobject.getTags(), Tag::getText);
-        this.credits = toList(mediaobject.getPersons(), PersonUpdate::new, true);
+        this.credits = toCreditsUpdate(mediaobject.getCredits());
         if (this.credits.isEmpty()) {
             this.credits = null;
         }
@@ -389,8 +381,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability, PredictionUpdate::of);
 
-        this.geoLocations = toUpdateGeoLocations(mediaobject.getGeoLocations(), owner);
-        this.topics = toUpdateTopics(mediaobject.getTopics(), owner);
+        this.geoLocations = toGeoLocationUpdates(mediaobject.getGeoLocations(), owner);
+        this.topics = toTopicUpdates(mediaobject.getTopics(), owner);
     }
 
     protected abstract void fillFrom(M mediaObject, OwnerType ownerType);
@@ -500,7 +492,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         media.setPortals(toList(portals, Portal::new));
         media.setTags(toSet(tags, Tag::new));
-        media.setCredits(toList(credits, PersonUpdate::toPerson, true));
+        media.setCredits(toList(credits, CreditsUpdate::toCredits, true));
         media.setPortalRestrictions(toList(portalRestrictions, PortalRestrictionUpdate::toPortalRestriction));
         media.setGeoRestrictions(toSet(geoRestrictions, GeoRestrictionUpdate::toGeoRestriction));
 
@@ -618,7 +610,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
                 .build();
     }
 
-    private List<GeoLocationUpdate> toUpdateGeoLocations(SortedSet<GeoLocations> geoLocationsSet, OwnerType owner) {
+    private List<GeoLocationUpdate> toGeoLocationUpdates(SortedSet<GeoLocations> geoLocationsSet, OwnerType owner) {
 
         if (geoLocationsSet == null) {
             return null;
@@ -649,7 +641,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
             .build();
     }
 
-    private List<TopicUpdate> toUpdateTopics(SortedSet<Topics> topicsSet, OwnerType owner) {
+    private List<TopicUpdate> toTopicUpdates(SortedSet<Topics> topicsSet, OwnerType owner) {
 
         if (topicsSet == null) {
             return null;
@@ -678,6 +670,25 @@ public abstract class  MediaUpdate<M extends MediaObject>
             .owner(owner)
             .values(topics)
             .build();
+    }
+
+    private List<CreditsUpdate> toCreditsUpdate(List<Credits> credits) {
+
+        if (credits == null) {
+            return null;
+        }
+
+        List<CreditsUpdate> creditsUpdates = new ArrayList<>();
+        for (Credits credit: credits) {
+            if (credit instanceof Person) {
+                creditsUpdates.add(new PersonUpdate((Person) credit));
+            }
+            else {
+                creditsUpdates.add(new NameUpdate((Name) credit));
+            }
+        }
+
+        return creditsUpdates;
     }
 
     public M fetch() {
@@ -1081,21 +1092,26 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.releaseYear = releaseYear;
     }
 
+    @XmlElementWrapper(name = "credits")
+    @XmlElements({
+        @XmlElement(name = "person", type = PersonUpdate.class),
+        @XmlElement(name = "name", type = NameUpdate.class)
+    })
     @Valid
     @NonNull
-    @XmlTransient
-    public List<PersonUpdate> getPersons() {
+    public List<CreditsUpdate> getCredits() {
         if (credits == null) {
             credits = new ArrayList<>();
         }
         return credits;
     }
 
-    public void setPersons(List<PersonUpdate> persons) {
-        this.credits = persons;
+    public void setCredits(List<CreditsUpdate> credits) {
+        this.credits = credits;
     }
-    public void setPersons(PersonUpdate... persons){
-        this.credits = new ArrayList<>(Arrays.asList(persons));
+
+    public void setCredits(CreditsUpdate... credits){
+        this.credits = new ArrayList<>(Arrays.asList(credits));
     }
 
     @XmlElement
