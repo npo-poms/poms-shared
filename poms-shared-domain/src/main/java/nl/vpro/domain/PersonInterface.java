@@ -12,9 +12,9 @@ public interface PersonInterface {
      * @since 5.12
      */
     default String getName() {
-        String giveName = getGivenName();
+        String givenName = getGivenName();
         String familyName = getFamilyName();
-        return stringValue(giveName, familyName);
+        return stringValue(givenName, familyName);
 
     }
 
