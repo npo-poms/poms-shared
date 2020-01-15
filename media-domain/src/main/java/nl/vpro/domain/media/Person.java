@@ -146,8 +146,8 @@ public class Person extends Credits implements PersonInterface {
                 setGivenName("");
                 setFamilyName(name);
             } else {
-                setGivenName(split[0]);
-                setFamilyName(split[1]);
+                setGivenName(split[1]);
+                setFamilyName(split[0]);
             }
         } else {
             setFamilyName(null);
