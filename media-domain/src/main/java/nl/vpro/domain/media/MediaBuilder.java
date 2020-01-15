@@ -535,19 +535,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
-    default B credits(Credits name) {
-        mediaObject().giveCredits(name);
-        return (B) this;
-    }
-
-
-
     @SuppressWarnings("unchecked")
     default B persons(Collection<Person> persons) {
         persons.forEach(person -> mediaObject().addPerson(person));
         return (B)this;
     }
 
+    default B credits(Credits... name) {
+        for (Credits c : name) {
+            mediaObject().giveCredits(c);
+        }
+        return (B) this;
+    }
 
     default B geoLocations(GeoLocations... geoLocations) {
         return geoLocations(Arrays.asList(geoLocations));
