@@ -371,8 +371,8 @@
     "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
   }, {
     "objectType" : "person",
-    "givenName" : "Rutte,",
-    "familyName" : "Mark",
+    "givenName" : "Mark",
+    "familyName" : "Rutte",
     "role" : "SUBJECT",
     "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
   } ],
@@ -787,8 +787,8 @@
       "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
     }, {
       "objectType" : "person",
-      "givenName" : "Rutte,",
-      "familyName" : "Mark",
+      "givenName" : "Mark",
+      "familyName" : "Rutte",
       "role" : "SUBJECT",
       "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
     } ],
