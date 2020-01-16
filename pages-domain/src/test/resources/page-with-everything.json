@@ -476,11 +476,11 @@
         "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
       }, {
         "objectType" : "person",
-        "givenName" : "Rutte,",
-        "familyName" : "Mark",
+        "givenName" : "Mark",
+        "familyName" : "Rutte",
         "role" : "SUBJECT",
         "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017",
-        "name" : "Mark, Rutte,"
+        "name" : "Rutte, Mark"
       } ],
       "scheduleEvents" : [ {
         "channel" : "NED3",
@@ -991,11 +991,11 @@
           "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
         }, {
           "objectType" : "person",
-          "givenName" : "Rutte,",
-          "familyName" : "Mark",
+          "givenName" : "Mark",
+          "familyName" : "Rutte",
           "role" : "SUBJECT",
           "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017",
-          "name" : "Mark, Rutte,"
+          "name" : "Rutte, Mark"
         } ],
         "start" : 0,
         "urnRef" : "urn:vpro:media:program:12",
