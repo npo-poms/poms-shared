@@ -837,8 +837,8 @@ public class MediaObjectJsonSchemaTest {
             "    \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/51771\"\n" +
             "  }, {\n" +
             "    \"objectType\" : \"person\",\n" +
-            "    \"givenName\" : \"Rutte,\",\n" +
-            "    \"familyName\" : \"Mark\",\n" +
+            "    \"givenName\" : \"Mark\",\n" +
+            "    \"familyName\" : \"Rutte\",\n" +
             "    \"role\" : \"SUBJECT\",\n" +
             "    \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/149017\"\n" +
             "  } ]\n" +
