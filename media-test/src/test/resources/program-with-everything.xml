@@ -194,14 +194,14 @@
             <shared:title>Eerste plaatje met credits</shared:title>
             <shared:imageUri>urn:vpro:image:11234</shared:imageUri>
             <shared:credits>CREDITS</shared:credits>
-            <shared:source>SOURCE</shared:source>
+            <shared:source>https://www.vpro.nl</shared:source>
             <shared:license>PUBLIC_DOMAIN</shared:license>
         </shared:image>
         <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:3">
             <shared:title>Tweede plaatje met credits</shared:title>
             <shared:imageUri>urn:vpro:image:15678</shared:imageUri>
             <shared:credits>CREDITS</shared:credits>
-            <shared:source>SOURCE</shared:source>
+            <shared:source>https://www.vpro.nl</shared:source>
             <shared:license>PUBLIC_DOMAIN</shared:license>
         </shared:image>
         <shared:image owner="NEBO" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:4">
@@ -440,14 +440,14 @@
                     <shared:title>Eerste plaatje met credits</shared:title>
                     <shared:imageUri>urn:vpro:image:11234</shared:imageUri>
                     <shared:credits>CREDITS</shared:credits>
-                    <shared:source>SOURCE</shared:source>
+                    <shared:source>https://www.vpro.nl</shared:source>
                     <shared:license>PUBLIC_DOMAIN</shared:license>
                 </shared:image>
                 <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:3">
                     <shared:title>Tweede plaatje met credits</shared:title>
                     <shared:imageUri>urn:vpro:image:15678</shared:imageUri>
                     <shared:credits>CREDITS</shared:credits>
-                    <shared:source>SOURCE</shared:source>
+                    <shared:source>https://www.vpro.nl</shared:source>
                     <shared:license>PUBLIC_DOMAIN</shared:license>
                 </shared:image>
                 <shared:image owner="NEBO" type="PICTURE" highlighted="false" workflow="FOR PUBLICATION" creationDate="2017-05-11T10:00:00+02:00" urn="urn:vpro:media:image:4">
