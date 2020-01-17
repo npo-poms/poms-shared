@@ -58,6 +58,8 @@ public class MediaUpdateTest {
             getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"),
             getClass().getResourceAsStream("/programupdate-with-everything.xml")
         );
+
+        assertThat(update.violations()).isEmpty();
     }
 
     @Test
