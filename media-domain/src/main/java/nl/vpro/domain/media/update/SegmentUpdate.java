@@ -9,17 +9,17 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.MediaBuilder;
-import nl.vpro.domain.media.Segment;
-import nl.vpro.domain.media.SegmentType;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.util.IntegerVersion;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 @XmlRootElement(name = "segment")
@@ -70,13 +70,13 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
     }
 
-    private SegmentUpdate(Segment segment, OwnerType ownerType) {
-        super(segment, ownerType);
+    private SegmentUpdate(IntegerVersion version, Segment segment, OwnerType ownerType) {
+        super(version, segment, ownerType);
     }
 
     @Override
     protected void fillFrom(Segment mediaObject, OwnerType ownerType) {
-        fillFromFor(mediaObject.getParent() == null ? null : new ProgramUpdate(mediaObject.getParent(), ownerType), mediaObject, ownerType);
+        fillFromFor(mediaObject.getParent() == null ? null : new ProgramUpdate(version, mediaObject.getParent(), ownerType), mediaObject, ownerType);
     }
 
 
@@ -109,21 +109,22 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
      public static SegmentUpdate createForParent(ProgramUpdate parent, Segment segment, OwnerType ownerType) {
         SegmentUpdate segmentUpdate = new SegmentUpdate();
+        segmentUpdate.setVersion(parent.getVersion());
         segmentUpdate.fillFromMedia(segment, ownerType);
         segmentUpdate.fillFromFor(parent, segment, ownerType);
         return segmentUpdate;
     }
 
     public static <T extends MediaBuilder.AbstractSegmentBuilder<T>> SegmentUpdate create(MediaBuilder.AbstractSegmentBuilder<T> builder) {
-        return new SegmentUpdate(builder.build(), OwnerType.BROADCASTER);
+        return new SegmentUpdate(null, builder.build(), OwnerType.BROADCASTER);
     }
 
     public static SegmentUpdate create(Segment segment, OwnerType ownerType) {
-        return new SegmentUpdate(segment, ownerType);
+        return new SegmentUpdate(null, segment, ownerType);
     }
 
     public static SegmentUpdate createForProgram(Segment segment, OwnerType ownerType) {
-        return new SegmentUpdate(segment, ownerType);
+        return new SegmentUpdate(null, segment, ownerType);
      }
 
 

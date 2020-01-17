@@ -49,9 +49,9 @@ public class MediaUpdateTest {
             .withFixedDates()
             .build();
 
-        withEverything.getVersion();
+
         ProgramUpdate update = ProgramUpdate.create(withEverything, OwnerType.BROADCASTER);
-        update.setVersion(Version.of(5, 11));
+        update.setVersion(Version.of(5, 12));
         log.info("{}", update.getVersion());
 
         rounded = JAXBTestUtil.roundTripAndValidateAndSimilar(update,

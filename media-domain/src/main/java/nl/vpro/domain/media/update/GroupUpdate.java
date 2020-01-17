@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.*;
 import nl.vpro.domain.media.Group;
 import nl.vpro.domain.media.GroupType;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.util.IntegerVersion;
 
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -59,12 +60,16 @@ public final class GroupUpdate extends MediaUpdate<Group> {
     }
 
 
-    private GroupUpdate(Group group, OwnerType ownerType) {
-        super(group, ownerType);
+    private GroupUpdate(IntegerVersion version, Group group, OwnerType ownerType) {
+        super(version, group, ownerType);
+    }
+
+    public static GroupUpdate create(IntegerVersion version, Group group, OwnerType ownerType) {
+        return new GroupUpdate(version, group, ownerType);
     }
 
     public static GroupUpdate create(Group group, OwnerType ownerType) {
-        return new GroupUpdate(group, ownerType);
+        return create(null, group, ownerType);
     }
 
     public static GroupUpdate create(Group group) {
