@@ -17,4 +17,7 @@ public abstract class MediaUpdateTest {
             new AudioAttributesUpdate(2, "AAC"),
             new VideoAttributesUpdate(320, 180));
     }
+
+
+
 }

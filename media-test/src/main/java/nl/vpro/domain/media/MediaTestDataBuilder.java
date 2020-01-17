@@ -685,7 +685,7 @@ public interface MediaTestDataBuilder<
                 .title("Eerste plaatje met credits")
                 .credits("CREDITS")
                 .license(License.PUBLIC_DOMAIN)
-                .source("SOURCE")
+                .source("https://www.vpro.nl")
                 .creationDate(fixedDate)
             ,
             Image.builder()
@@ -693,7 +693,7 @@ public interface MediaTestDataBuilder<
                 .title("Tweede plaatje met credits")
                 .credits("CREDITS")
                 .license(License.PUBLIC_DOMAIN)
-                .source("SOURCE")
+                .source("https://www.vpro.nl")
                 .creationDate(fixedDate)
             ,
             // ALso some without credits

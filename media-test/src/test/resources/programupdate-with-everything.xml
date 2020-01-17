@@ -140,14 +140,14 @@
     <images>
         <image type="PICTURE" urn="urn:vpro:media:image:2" highlighted="false">
             <title>Eerste plaatje met credits</title>
-            <source>SOURCE</source>
+            <source>https://www.vpro.nl</source>
             <license>PUBLIC_DOMAIN</license>
             <credits>CREDITS</credits>
             <urn>urn:vpro:image:11234</urn>
         </image>
         <image type="PICTURE" urn="urn:vpro:media:image:3" highlighted="false">
             <title>Tweede plaatje met credits</title>
-            <source>SOURCE</source>
+            <source>https://www.vpro.nl</source>
             <license>PUBLIC_DOMAIN</license>
             <credits>CREDITS</credits>
             <urn>urn:vpro:image:15678</urn>
@@ -274,14 +274,14 @@
             <images>
                 <image type="PICTURE" urn="urn:vpro:media:image:2" highlighted="false">
                     <title>Eerste plaatje met credits</title>
-                    <source>SOURCE</source>
+                    <source>https://www.vpro.nl</source>
                     <license>PUBLIC_DOMAIN</license>
                     <credits>CREDITS</credits>
                     <urn>urn:vpro:image:11234</urn>
                 </image>
                 <image type="PICTURE" urn="urn:vpro:media:image:3" highlighted="false">
                     <title>Tweede plaatje met credits</title>
-                    <source>SOURCE</source>
+                    <source>https://www.vpro.nl</source>
                     <license>PUBLIC_DOMAIN</license>
                     <credits>CREDITS</credits>
                     <urn>urn:vpro:image:15678</urn>

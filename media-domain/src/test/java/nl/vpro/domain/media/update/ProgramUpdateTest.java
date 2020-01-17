@@ -893,7 +893,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                     "    <segments/>\n" +
                     "</program>");
     }
-    
+
     @Test
     public void testContentRating() {
         ProgramUpdate update = programUpdate();
@@ -1093,6 +1093,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "</program>");
 
     }
+
+    @Test
+
 
     protected ProgramUpdate programUpdate() {
         ProgramUpdate update = ProgramUpdate.create();
