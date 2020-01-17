@@ -8,20 +8,17 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.domain.Displayable;
-import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.*;
+import nl.vpro.validation.PrePersistValidatorGroup;
 
 @MappedSuperclass
 @Cacheable(true)
@@ -36,7 +33,7 @@ public abstract class Organization implements Serializable, Identifiable<String>
 
 
     @Column(nullable = false)
-    @NotNull(message = "displayName not set")
+    @NotNull(message = "displayName not set", groups = {PrePersistValidatorGroup.class})
     @Size(min = 1, max = 255, message = "0 < displayName length < 256")
     @XmlValue
     @JsonProperty("value")
