@@ -7,14 +7,11 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
-import nl.vpro.domain.media.AVType;
-import nl.vpro.domain.media.Platform;
-import nl.vpro.domain.media.ProgramType;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.parkpost.promo.bind.File;
 import nl.vpro.parkpost.promo.bind.PromoEvent;
-import nl.vpro.util.Version;
 
 /**
  * @author Michiel Meeuwissen
@@ -39,7 +36,7 @@ public class PromoEventConverter {
         validate(event);
 
         ProgramUpdate result = ProgramUpdate.create();
-        result.setVersion(Version.of(5, 7));
+        //result.setVersion(Version.of(5, 7)); // why is this?
         result.setType(getProgramType(event));
 
         result.setTitles(new TreeSet<>(Arrays.asList(new TitleUpdate(resolveTitle(event), TextualType.MAIN))));
