@@ -113,8 +113,8 @@
             <scopeNote>popgroep Nederland</scopeNote>
         </name>
         <person gtaaUri="http://data.beeldengeluid.nl/gtaa/149017" role="SUBJECT">
-            <givenName>Rutte,</givenName>
-            <familyName>Mark</familyName>
+            <givenName>Mark</givenName>
+            <familyName>Rutte</familyName>
         </person>
     </credits>
     <award>In 2003 bekroond met een Gouden Kalf</award>
@@ -359,8 +359,8 @@
                     <scopeNote>popgroep Nederland</scopeNote>
                 </name>
                 <person gtaaUri="http://data.beeldengeluid.nl/gtaa/149017" role="SUBJECT">
-                    <givenName>Rutte,</givenName>
-                    <familyName>Mark</familyName>
+                    <givenName>Mark</givenName>
+                    <familyName>Rutte</familyName>
                 </person>
             </credits>
             <award>In 2003 bekroond met een Gouden Kalf</award>
