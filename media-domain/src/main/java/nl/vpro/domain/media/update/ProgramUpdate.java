@@ -15,6 +15,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.util.IntegerVersion;
 
 
 @XmlRootElement(name = "program")
@@ -74,8 +75,8 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         super();
     }
 
-    public ProgramUpdate(Program program, OwnerType owner) {
-        super(program, owner);
+    public ProgramUpdate(IntegerVersion version, Program program, OwnerType owner) {
+        super(version, program, owner);
     }
 
     public static ProgramUpdate create() {
@@ -83,11 +84,20 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     }
 
     public static ProgramUpdate create(Program program) {
-        return create(program, OwnerType.BROADCASTER);
+        return create(null, program, OwnerType.BROADCASTER);
+    }
+
+    public static ProgramUpdate create(IntegerVersion version, Program program) {
+        return create(version, program, OwnerType.BROADCASTER);
+    }
+
+
+    public static ProgramUpdate create(IntegerVersion version, Program program, OwnerType owner) {
+        return new ProgramUpdate(version, program, owner);
     }
 
     public static ProgramUpdate create(Program program, OwnerType owner) {
-        return new ProgramUpdate(program, owner);
+        return create(null, program, owner);
     }
 
     public static ProgramUpdate create(MediaBuilder.ProgramBuilder builder) {
@@ -95,7 +105,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     }
 
     public static ProgramUpdate create(MediaBuilder.ProgramBuilder builder, OwnerType owner) {
-        return  create(builder.build(), owner);
+        return  create(null, builder.build(), owner);
     }
 
     @Override

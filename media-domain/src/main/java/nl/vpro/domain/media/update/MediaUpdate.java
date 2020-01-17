@@ -314,7 +314,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
         //
     }
 
-    protected MediaUpdate(M mediaobject, OwnerType ownerType) {
+    protected MediaUpdate(IntegerVersion version, M mediaobject, OwnerType ownerType) {
+        this.version = version;
         fillFromMedia(mediaobject, ownerType);
         fillFrom(mediaobject, ownerType);
     }
@@ -381,8 +382,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability, PredictionUpdate::of);
 
-        this.geoLocations = toGeoLocationUpdates(mediaobject.getGeoLocations(), owner);
-        this.topics = toTopicUpdates(mediaobject.getTopics(), owner);
+        if (isNotBefore(5, 12)) {
+            this.geoLocations = toGeoLocationUpdates(mediaobject.getGeoLocations(), owner);
+        }
+        if (isNotBefore(5, 12)) {
+            this.topics = toTopicUpdates(mediaobject.getTopics(), owner);
+        }
     }
 
     protected abstract void fillFrom(M mediaObject, OwnerType ownerType);
@@ -541,10 +546,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if(targetGroups != null){
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getTargetGroups(), toTargetGroups(targetGroups, owner));
         }
-        if(geoLocations != null){
+        if(geoLocations != null && isNotBefore(5, 12)) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getGeoLocations(), toGeoLocations(geoLocations, owner));
         }
-        if (topics != null) {
+        if(topics != null && isNotBefore(5, 12)) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getTopics(), toTopics(topics, owner));
         }
 
@@ -1351,6 +1356,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     void beforeMarshal(Marshaller marshaller) {
         log.trace("Before");
+    }
+
+    protected boolean isNotBefore(Integer... intVersion) {
+        return version == null || version.isNotBefore(intVersion);
     }
 
 }
