@@ -360,9 +360,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if (this.credits.isEmpty()) {
             this.credits = null;
         }
-
-        this.intentions = toUpdateIntentions(mediaobject.getIntentions(), owner);
-        this.targetGroups = toUpdateTargetGroups(mediaobject.getTargetGroups(), owner);
+        if (isNotBefore(5, 11)) {
+            this.intentions = toUpdateIntentions(mediaobject.getIntentions(), owner);
+        }
+        if (isNotBefore(5, 11)) {
+            this.targetGroups = toUpdateTargetGroups(mediaobject.getTargetGroups(), owner);
+        }
 
         this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
         this.geoRestrictions= toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
@@ -543,7 +546,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if(intentions != null) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getIntentions(), toIntentions(intentions, owner));
         }
-        if(targetGroups != null){
+        if(targetGroups != null) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getTargetGroups(), toTargetGroups(targetGroups, owner));
         }
         if(geoLocations != null && isNotBefore(5, 12)) {
