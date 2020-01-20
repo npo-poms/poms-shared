@@ -5,9 +5,9 @@ import io.openapitools.jackson.dataformat.hal.HALMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
@@ -105,6 +105,19 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         this.socketTimeout= TimeUtils.parseDuration(socketTimeout).orElse(this.connectTimeout);
         this.pageSize = pageSize;
         this.ftpUserName = ftpUserName;
+    }
+
+    protected NEPGatekeeperServiceImpl(Properties properties) {
+        this(properties.getProperty("nep.gatekeeper-api.baseUrl"),
+            properties.getProperty("nep.gatekeeper-api.authorization.username"),
+            properties.getProperty("nep.gatekeeper-api.authorization.password"),
+            properties.getProperty("nep.gatekeeper-api.connectTimeout"),
+            properties.getProperty("nep.gatekeeper-api.connectionRequestTimeout"),
+            properties.getProperty("nep.gatekeeper-api.socketTimeout"),
+            Integer.parseInt(properties.getProperty("nep.gatekeeper-api.pageSize")),
+            properties.getProperty("nep.gatekeeper-upload.username")
+        );
+        init();
     }
 
     @PostConstruct
@@ -214,6 +227,27 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
                 .filter(o -> mid == null || Objects.equals(o.getCustomerMetadata().getMid(), mid))
                 .wrapped(br)
                 .build(), limit, 0L);
+    }
+
+    @Override
+    @SneakyThrows
+    public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@Nullable String workflowId) {
+        URIBuilder builder = new URIBuilder(getWorkflowsEndPoint() + workflowId);
+        try (CloseableHttpResponse closeableHttpResponse = executeGet(builder.toString())) {
+            switch(closeableHttpResponse.getStatusLine().getStatusCode()) {
+                case HttpStatus.SC_OK:
+                    return Optional.of(MAPPER.readValue(closeableHttpResponse.getEntity().getContent(), WorkflowExecution.class));
+                case HttpStatus.SC_NOT_FOUND:
+                    return Optional.empty();
+                default:
+                    StringWriter w = new StringWriter();
+                    IOUtils.copy(closeableHttpResponse.getEntity().getContent(), w, StandardCharsets.UTF_8);
+                    throw new IllegalStateException(closeableHttpResponse.getStatusLine() + ":" + w.toString());
+
+            }
+        }
+
+
     }
 
     private HttpHost getHttpHost() {
