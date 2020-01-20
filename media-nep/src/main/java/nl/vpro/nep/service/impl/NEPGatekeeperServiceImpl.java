@@ -216,6 +216,30 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
                 .build(), limit, 0L);
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    @SneakyThrows
+    public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull String workflowId) {
+        URIBuilder builder = new URIBuilder(getWorkflowsEndPoint() + workflowId);
+        try (CloseableHttpResponse closeableHttpResponse = executeGet(builder.toString())) {
+            switch(closeableHttpResponse.getStatusLine().getStatusCode()) {
+                case HttpStatus.SC_OK:
+                    return Optional.of(MAPPER.readValue(closeableHttpResponse.getEntity().getContent(), WorkflowExecution.class));
+                case HttpStatus.SC_NOT_FOUND:
+                    return Optional.empty();
+                default:
+                    StringWriter w = new StringWriter();
+                    IOUtils.copy(closeableHttpResponse.getEntity().getContent(), w, StandardCharsets.UTF_8);
+                    throw new IllegalStateException(closeableHttpResponse.getStatusLine() + ":" + w.toString());
+
+            }
+        }
+
+
+    }
+
+>>>>>>> 9825812ed... MSE-4670
     private HttpHost getHttpHost() {
         URI uri = URI.create(getWorkflowsEndPoint());
         return new HttpHost(uri.getHost(), uri.getPort(), uri.getScheme());

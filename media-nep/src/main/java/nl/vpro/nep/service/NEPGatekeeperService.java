@@ -31,4 +31,12 @@ public interface NEPGatekeeperService {
         @Nullable Instant from,
         @Nullable Long limit
     );
+<<<<<<< HEAD
+=======
+
+    @NonNull
+    Optional<WorkflowExecution> getTranscodeStatus(
+        @NonNull String workflowId
+    );
+>>>>>>> 9825812ed... MSE-4670
 }
