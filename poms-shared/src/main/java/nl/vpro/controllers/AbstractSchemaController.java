@@ -72,11 +72,13 @@ public abstract class AbstractSchemaController<M extends Function<String, File>>
             final HttpServletResponse response,
             final String namespace) throws IOException {
         File file = getFileForNamespace(namespace);
+        response.setContentType("text/xml");
         serveXml(file, request, response);
     }
 
 
     protected void serveXml(File file, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setHeader("Cache-Control", "public, max-age=86400");
         long ifModifiedSince = request.getDateHeader("If-Modified-Since");
         Date fileDate = DateUtils.round(new Date(file.lastModified()), Calendar.SECOND);
         if (ifModifiedSince > fileDate.getTime()) {

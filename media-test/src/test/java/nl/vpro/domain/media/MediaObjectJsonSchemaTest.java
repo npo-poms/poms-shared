@@ -337,7 +337,7 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testMemberOfAndDescendantOfGraph() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"descendantOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:100\",\"type\":\"SERIES\"},{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:200\",\"type\":\"SEASON\"}],\"memberOf\":[{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:200\",\"type\":\"SEASON\",\"index\":1,\"highlighted\":false,\"added\":0}]}";
+        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"descendantOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:100\",\"type\":\"SERIES\"},{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:200\",\"type\":\"SEASON\"}],\"memberOf\":[{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:200\",\"type\":\"SEASON\",\"index\":1,\"highlighted\":false,\"memberOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:100\",\"type\":\"SERIES\",\"index\":1,\"highlighted\":false,\"memberOf\":[],\"episodeOf\":[]}],\"episodeOf\":[],\"added\":0}]}";
 
         Program program = program().lean().withMemberOf().build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
@@ -354,7 +354,7 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testEpisodeOfAndDescendantOfGraph() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"type\":\"BROADCAST\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"episodeOf\":[{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:102\",\"type\":\"SEASON\",\"index\":1,\"highlighted\":false,\"added\":0}],\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"descendantOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:101\",\"type\":\"SERIES\"},{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:102\",\"type\":\"SEASON\"}]}";
+        String expected = "{\"objectType\":\"program\",\"type\":\"BROADCAST\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"episodeOf\":[{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:102\",\"type\":\"SEASON\",\"index\":1,\"highlighted\":false,\"memberOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:101\",\"type\":\"SERIES\",\"index\":1,\"highlighted\":false,\"memberOf\":[],\"episodeOf\":[]}],\"episodeOf\":[],\"added\":0}],\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"descendantOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:101\",\"type\":\"SERIES\"},{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:102\",\"type\":\"SEASON\"}]}";
 
         Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
         program.getEpisodeOf().first().setAdded(Instant.EPOCH);
@@ -793,8 +793,7 @@ public class MediaObjectJsonSchemaTest {
     }
 	private String pretty(ObjectNode node) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
-    	String pretty = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(node);
-		return pretty;
+        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(node);
 	}
 
     @Test
@@ -851,9 +850,7 @@ public class MediaObjectJsonSchemaTest {
     @Test
     public void testUnmarshalOf() throws IOException {
         String example = "{\"tags\":[\"gepensioneerd\",\"Nell Koppen\",\"oudere werknemers\",\"pensioen\",\"vakbond\",\"werk\",\"werknemers\",\"Wim van den Brink\"],\"mid\":\"POMS_NOS_583461\",\"titles\":[{\"value\":\"De Laatste Dag\",\"owner\":\"BROADCASTER\",\"type\":\"MAIN\"}],\"avType\":\"AUDIO\",\"images\":[{\"description\":\"Pensioen\",\"imageUri\":\"urn:vpro:image:487099\",\"urn\":\"urn:vpro:media:image:43659204\",\"width\":640,\"publishStart\":1404943200000,\"type\":\"PICTURE\",\"highlighted\":false,\"title\":\"De laatste dag\",\"workflow\":\"PUBLISHED\",\"lastModified\":1404995300720,\"creationDate\":1404995300669,\"owner\":\"BROADCASTER\",\"height\":426}],\"urn\":\"urn:vpro:media:program:43659132\",\"genres\":[{\"id\":\"3.0.1.7\",\"terms\":[\"Informatief\"]},{\"id\":\"3.0.1.8\",\"terms\":[\"Documentaire\"]}],\"embeddable\":true,\"publishStart\":133916400000,\"type\":\"BROADCAST\",\"duration\":2400000,\"hasSubtitles\":false,\"countries\":[],\"objectType\":\"program\",\"locations\":[{\"programUrl\":\"http://download.omroep.nl/vpro/algemeen/woord/woord_radio/Delaatstedag1.mp3\",\"avAttributes\":{\"avFileFormat\":\"MP3\"},\"creationDate\":1404994995386,\"lastModified\":1404994995456,\"workflow\":\"PUBLISHED\",\"owner\":\"BROADCASTER\",\"urn\":\"urn:vpro:media:location:43659159\"}],\"workflow\":\"PUBLISHED\",\"lastModified\":1404995300722,\"sortDate\":133916400000,\"languages\":[],\"descriptions\":[{\"value\":\"Eerste van twee documentaires over pensionering en\\ngepensioneerden. In dit programma wordt gesproken over 'het\\nzwarte gat' waarin de 65-jarige werknemer valt na zijn\\nafscheid van het bedrijf. Als deskundigen komen aan het\\nwoord: gerontoloog prof. Schreuder, die een vrijwillige\\npensionering bepleit; voorlichter Maurice Akkermans van de\\nFederatie Bejaardenbeleid; een vakbondsman en een\\nwetenschappelijk medewerker. Afgewisseld met enkele\\nervaringen van zojuist gepensioneerden en hun vrouwen. Tevens\\neen gesprek met het acteursechtpaar Nell Koppen (62) en Wim\\nvan den Brink (65) en, onaangekondigd, een reactie door\\nprogrammamaker Bob Uschi (62). Met opnamen gemaakt tijdens\\nafscheidsrecepties.\",\"owner\":\"BROADCASTER\",\"type\":\"MAIN\"}],\"creationDate\":1404994811838,\"broadcasters\":[{\"id\":\"NOS\",\"value\":\"NOS\"}]}";
-        MediaObject mo = Jackson2Mapper.getInstance().readValue(new StringReader(example), MediaObject.class);
-
-
+        Jackson2Mapper.getInstance().readValue(new StringReader(example), MediaObject.class);
     }
 
     @Test
@@ -878,6 +875,7 @@ public class MediaObjectJsonSchemaTest {
         assertThat(rounded.getLocations().first().getId()).isEqualTo(6);
         assertThat(rounded.getMemberOf().first().getType()).isEqualTo(MediaType.SEASON);
     }
+
     @Test
     public void programWithEverythingPublisher() throws Exception {
         StringWriter programJson = new StringWriter();
@@ -915,7 +913,9 @@ public class MediaObjectJsonSchemaTest {
             "  } ],\n" +
             "  \"memberOf\" : [ {\n" +
             "    \"type\" : \"SEASON\",\n" +
-            "    \"highlighted\" : false\n" +
+            "    \"highlighted\" : false,\n" +
+            "    \"memberOf\" : [ ],\n" +
+            "    \"episodeOf\" : [ ]\n" +
             "  } ]\n" +
             "}");
 
@@ -964,17 +964,13 @@ public class MediaObjectJsonSchemaTest {
         mapper.writeValue(writer, program);
         return writer.toString();
     }
+
     private String toPublisherJson(MediaObject program) throws IOException {
         return toJson(Jackson2Mapper.getPublisherInstance(), program);
     }
+
     private String toApiJson(MediaObject program) throws IOException {
         return toJson(Jackson2Mapper.getPrettyInstance(), program);
-    }
-
-    private <O>  String toJson2(O javaObject) throws IOException {
-        StringWriter writer = new StringWriter();
-        Jackson2Mapper.INSTANCE.writeValue(writer, javaObject);
-        return writer.toString();
     }
 
     @SneakyThrows

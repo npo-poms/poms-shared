@@ -2,26 +2,28 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 
 import nl.vpro.nep.domain.NEPItemizeRequest;
 import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.service.NEPDownloadService;
+
+import static org.assertj.core.api.Assumptions.assumeThat;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.6
  */
 @Slf4j
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class NEPItemizeServiceImplITest {
 
     @Test
+    @Order(1)
     public void itemize() throws IOException {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
@@ -47,7 +49,10 @@ public class NEPItemizeServiceImplITest {
         log.info("Found {} bytes", dest.length());
     }
 
+    static  NEPItemizeResponse response;
     @Test
+    @Order(10)
+    @Tag("dvr")
     public void itemizeDvr() throws IOException {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
@@ -55,8 +60,15 @@ public class NEPItemizeServiceImplITest {
         request.setIdentifier("npo-1dvr");
         request.setStarttime(NEPItemizeRequest.fromInstant(Instant.now().minusSeconds(300)).orElseThrow(IllegalArgumentException::new));
         request.setEndtime(NEPItemizeRequest.fromInstant(Instant.now().minusSeconds(60)).orElseThrow(IllegalArgumentException::new));
-        NEPItemizeResponse response = itemizer.itemize(request);
+        response = itemizer.itemize(request);
         log.info("response: {} {}", response, start);
+
+    }
+    @Test
+    @Order(11)
+    @Tag("dvr")
+    public void itemizeDvrDownload() throws IOException {
+        assumeThat(response).isNotNull();
 
         NEPDownloadService downloadService = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
         File dest = new File("/tmp", "dest.mp4");
@@ -76,6 +88,7 @@ public class NEPItemizeServiceImplITest {
     }
 
     @Test
+    @Order(20)
     public void grabScreen() throws IOException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");

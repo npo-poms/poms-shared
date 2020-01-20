@@ -6,26 +6,43 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
-import java.time.*;
-import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.*;
+import javax.xml.bind.JAXB;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.util.JAXBSource;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import javax.xml.validation.*;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
-import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.MediaObjectOwnableLists;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
@@ -62,7 +79,7 @@ public class MediaObjectXmlSchemaTest {
         try {
             marshaller = jaxbContext.createMarshaller();
         } catch(JAXBException e) {
-            e.printStackTrace();
+            log.error("Unable to create marshaller", e);
         }
     }
 
@@ -79,7 +96,7 @@ public class MediaObjectXmlSchemaTest {
             );
             schemaValidator = schema.newValidator();
         } catch(SAXException e) {
-            e.printStackTrace();
+            log.error("Unable to create schemaValidator", e);
         }
 
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
@@ -119,11 +136,8 @@ public class MediaObjectXmlSchemaTest {
     	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.TRANSLATION));
 
-
         Program rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
         assertThat(rounded.getAvailableSubtitles()).hasSize(2);
-
-
     }
 
     @Test
@@ -143,12 +157,8 @@ public class MediaObjectXmlSchemaTest {
             "</program>\n";
 
         Program program = program().lean().withSubtitles().build();
-
-
         Program rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
-
         assertThat(rounded.hasSubtitles()).isTrue();
-
     }
 
     @Test
@@ -243,7 +253,6 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testRegions() {
-
 
         JAXBTestUtil.roundTripAndSimilar(program().lean().withGeoRestrictions().build(),
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
@@ -428,7 +437,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testMemberOfAndDescendantOfGraph() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\"/><locations/><images/><scheduleEvents/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\"><memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/></memberOf><locations/><images/><scheduleEvents/><segments/></program>";
 
         Program program = program().lean().withMemberOf().build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
@@ -444,7 +453,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testEpisodeOfAndDescendantOfGraph() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:102\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><locations/><images/><scheduleEvents/><episodeOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:102\"/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:102\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><locations/><images/><scheduleEvents/><episodeOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:102\"><memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:101\"/></episodeOf><segments/></program>";
 
         Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
         program.getEpisodeOf().first().setAdded(Instant.EPOCH);
@@ -564,9 +573,7 @@ public class MediaObjectXmlSchemaTest {
 
         Program unmarshalled = JAXB.unmarshal(new StringReader(withScheduleEventOnOldLocation), Program.class);
         assertThat(unmarshalled.getScheduleEvents()).hasSize(4);
-
     }
-
 
     @Test
     public void testScheduleEventsSchema() throws Exception {
@@ -844,7 +851,6 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().id(100L).lean().withLocations().build();
 
         JAXBTestUtil.roundTripAndSimilar(program, expected);
-
     }
 
     @Test
@@ -861,8 +867,6 @@ public class MediaObjectXmlSchemaTest {
             "        </location>\n" +
             "    </locations>\n" +
             "</program>";
-
-
 
         Program program = JAXBTestUtil.unmarshal(example, Program.class);
         assertThat(program.getLocations().first().getOwner()).isNull();
@@ -882,8 +886,6 @@ public class MediaObjectXmlSchemaTest {
             "    <scheduleEvents/>\n" +
             "    <segments/>\n" +
             "</program>");
-
-
     }
 
     @Test
@@ -932,8 +934,6 @@ public class MediaObjectXmlSchemaTest {
 
         JAXBTestUtil.roundTripAndSimilarAndEquals(program, expected);
 
-
-
         String actual = toXml(program);
 
         assertThat(actual).isXmlEqualTo(segment.toString());
@@ -981,10 +981,7 @@ public class MediaObjectXmlSchemaTest {
                 "  <segments/>\n" +
                 "</program>\n";
         JAXBTestUtil.roundTripAndSimilar(example, Program.class);
-
-
     }
-
 
     @Test
     public void programWithEverything() throws IOException {
@@ -992,7 +989,6 @@ public class MediaObjectXmlSchemaTest {
             .build();
         JAXBTestUtil.roundTripAndSimilar(withEverything, getClass().getResourceAsStream("/program-with-everything.xml"));
     }
-
 
     /**
      * Tests wether 'withEveryting' is indeed valid according to manually maintained XSD
@@ -1014,10 +1010,7 @@ public class MediaObjectXmlSchemaTest {
 
         Source streamSource = new StreamSource(new ByteArrayInputStream(out.toByteArray()));
         xsdValidator.validate(streamSource);
-
-
     }
-
 
     /**
      * Tests wether 'withEverything' is indeed valid according to manually maintained XSD
@@ -1035,8 +1028,6 @@ public class MediaObjectXmlSchemaTest {
 
         Source streamSource = new StreamSource(new ByteArrayInputStream(out.toByteArray()));
         xsdValidator.validate(streamSource);
-
-
     }
 
     protected String toXml(Object o) throws JAXBException {

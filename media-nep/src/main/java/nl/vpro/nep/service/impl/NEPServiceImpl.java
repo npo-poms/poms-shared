@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -80,6 +81,11 @@ public class NEPServiceImpl implements NEPService {
     @Override
     public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
         return gatekeeperService.get().getTranscodeStatuses(mid, status, from, limit);
+    }
+
+    @Override
+    public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull  String workflowId) {
+        return gatekeeperService.get().getTranscodeStatus(workflowId);
     }
 
     @Override

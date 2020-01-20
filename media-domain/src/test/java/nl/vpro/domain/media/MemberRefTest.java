@@ -1,10 +1,8 @@
 package nl.vpro.domain.media;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -37,7 +35,9 @@ public class MemberRefTest {
             "  \"type\" : \"SERIES\",\n" +
             "  \"index\" : 1,\n" +
             "  \"highlighted\" : true,\n" +
-            "  \"added\" : 1495636200000\n" +
+            "  \"added\" : 1495636200000,\n" +
+            "  \"memberOf\" : [ ],\n" +
+            "  \"episodeOf\" : [ ]\n" +
             "}");
     }
 }

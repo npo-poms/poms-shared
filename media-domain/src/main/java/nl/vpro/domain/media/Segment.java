@@ -37,12 +37,12 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "segment")
 @XmlType(name = "segmentType", propOrder = {
+    "parentRef",
     "start"
 })
 @JsonTypeName("segment")
 @SegmentValidation
 public class Segment extends MediaObject implements Comparable<Segment>, Child<Program>, MutableOwnable {
-
 
     private static final long serialVersionUID = -868293795041160925L;
 
@@ -84,6 +84,8 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     @Enumerated(EnumType.STRING)
     private OwnerType owner;
 
+    @Transient
+    private ParentRef parentRef;
 
     public Segment() {
     }
@@ -374,5 +376,17 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         } else {
             return super.getCorrelationId();
         }
+    }
+
+    @XmlElement(name = "segmentOf")
+    public ParentRef getParentRef() {
+        if (parentRef == null) {
+            parentRef = new ParentRef(parent);
+        }
+        return parentRef;
+    }
+
+    public void setParentRef(ParentRef parentRef) {
+        this.parentRef = parentRef;
     }
 }

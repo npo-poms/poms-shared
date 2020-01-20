@@ -2,19 +2,41 @@ package nl.vpro.domain.media;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.hibernate.annotations.*;
-
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
+import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.ParamDef;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -25,6 +47,8 @@ import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+
+import static nl.vpro.domain.media.CollectionUtils.updateList;
 
 /**
  * Expresses an association between MediaObjects. MediaObjects can become a
@@ -74,7 +98,10 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "urnRef",
     "type",
     "index",
-    "highlighted"
+    "highlighted",
+    "memberOf",
+    "episodeOf",
+    "segmentOf"
 })
 public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable {
 
@@ -113,6 +140,14 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Enumerated(EnumType.STRING)
     private OwnerType owner;
 
+    @Transient
+    private List<MemberRef> memberOfList;
+
+    @Transient
+    private List<MemberRef> episodeOfList;
+
+    @Transient
+    private ParentRef segmentOf;
 
     public MemberRef() {
     }
@@ -199,6 +234,9 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
         MemberRef copy = new MemberRef(source, member, source.getOwner());
         copy.added = source.added;
+        copy.episodeOfList = source.getEpisodeOfList();
+        copy.memberOfList = source.getMemberOfList();
+        copy.segmentOf = source.getSegmentOf();
         return copy;
     }
 
@@ -425,6 +463,56 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @XmlTransient
     public boolean isVirtual() {
         return group == null || member == null;
+    }
+
+    @XmlElement(name = "memberOf")
+    public List<MemberRef> getMemberOfList() {
+
+        if (memberOfList == null) {
+            memberOfList = new ArrayList<>();
+            if (group != null) {
+                memberOfList.addAll(group.getMemberOf());
+            }
+        }
+
+        return memberOfList;
+    }
+
+    public void setMemberOfList(List<MemberRef> memberOfList) {
+        this.memberOfList = updateList(this.memberOfList, memberOfList);
+    }
+
+    @XmlElement(name = "episodeOf")
+    public List<MemberRef> getEpisodeOfList() {
+
+        if (episodeOfList == null) {
+            episodeOfList = new ArrayList<>();
+            if (group != null && group instanceof Program) {
+                episodeOfList.addAll(((Program) group).getEpisodeOf());
+            }
+        }
+
+        return episodeOfList;
+    }
+
+    public void setEpisodeOfList(List<MemberRef> episodeOfList) {
+        this.episodeOfList = updateList(this.episodeOfList, episodeOfList);
+    }
+
+    @XmlElement(name = "segmentOf")
+    public ParentRef getSegmentOf() {
+
+        if (segmentOf == null) {
+            if (group != null && group instanceof Segment) {
+                segmentOf = new ParentRef(((Segment) group).parent);
+            }
+        }
+
+        return segmentOf;
+    }
+
+    public void setSegmentOf(ParentRef segmentOf) {
+        this.segmentOf = segmentOf;
     }
 
     @Override

@@ -186,6 +186,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "            <descendantOf type=\"PROGRAM\"/>\n" +
             "            <locations/>\n" +
             "            <images/>\n" +
+            "            <segmentOf type=\"PROGRAM\"/>\n" +
             "        </segment>\n" +
             "    </segments>\n" +
             "</program>\n");
@@ -363,7 +364,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         rounded.getBroadcasters().remove(0);
         assertThat(rounded.fetch().getBroadcasters()).hasSize(1);
         assertThat(rounded.fetch().getBroadcasters().get(0).getId()).isEqualTo("VPRO");
-        rounded.setBroadcasters(Arrays.asList("EO"));
+        rounded.setBroadcasters(Collections.singletonList("EO"));
         assertThat(rounded.fetch().getBroadcasters().get(0).getId()).isEqualTo("EO");
 
 
@@ -573,7 +574,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(rounded.fetch().getMemberOf()).hasSize(1);
         assertThat(rounded.fetch().getMemberOf().first().getMediaRef()).isEqualTo("urn:vpro:media:group:864");
 
-        rounded.setMemberOf(new TreeSet<>(Arrays.asList(new MemberRefUpdate(3, "MID_12356"))));
+        rounded.setMemberOf(new TreeSet<>(Collections.singletonList(new MemberRefUpdate(3, "MID_12356"))));
         assertThat(rounded.fetch().getMemberOf().first().getMediaRef()).isEqualTo("MID_12356");
 
 
@@ -939,7 +940,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertThat(rounded.getTags()).hasSize(2);
         assertThat(rounded.fetch().getTags()).hasSize(2);
-        rounded.setTags(new TreeSet<>(Arrays.asList("foo")));
+        rounded.setTags(new TreeSet<>(Collections.singletonList("foo")));
         assertThat(rounded.fetch().getTags()).hasSize(1);
 
     }
@@ -960,7 +961,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = ProgramUpdate.create();
         update.setIntentions(null);
         update.setTargetGroups(null);
-        update.setPredictions(new TreeSet<>(Arrays.asList(PredictionUpdate.builder().platform(Platform.INTERNETVOD).build())));
+        update.setPredictions(new TreeSet<>(Collections.singletonList(PredictionUpdate.builder().platform(Platform.INTERNETVOD).build())));
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
