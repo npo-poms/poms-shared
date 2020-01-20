@@ -21,7 +21,6 @@ import java.io.Serializable;
 })
 public class DescendantRef implements Comparable<DescendantRef>, Serializable {
 
-
     @XmlAttribute
     protected String urnRef;
 
@@ -93,11 +92,7 @@ public class DescendantRef implements Comparable<DescendantRef>, Serializable {
         if(midRef != null && !midRef.equals(that.midRef)) {
             return false;
         }
-        if(urnRef != null && !urnRef.equals(that.urnRef)) {
-            return false;
-        }
-
-        return true;
+        return urnRef == null || urnRef.equals(that.urnRef);
     }
 
     public String getMidRef() {
