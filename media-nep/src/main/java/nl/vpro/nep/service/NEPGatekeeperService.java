@@ -33,6 +33,6 @@ public interface NEPGatekeeperService {
 
     @NonNull
     Optional<WorkflowExecution> getTranscodeStatus(
-        @Nullable String workflowId
+        @NonNull String workflowId
     );
 }

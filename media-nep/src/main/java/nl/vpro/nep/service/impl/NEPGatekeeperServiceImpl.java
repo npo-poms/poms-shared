@@ -231,7 +231,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     @Override
     @SneakyThrows
-    public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@Nullable String workflowId) {
+    public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull String workflowId) {
         URIBuilder builder = new URIBuilder(getWorkflowsEndPoint() + workflowId);
         try (CloseableHttpResponse closeableHttpResponse = executeGet(builder.toString())) {
             switch(closeableHttpResponse.getStatusLine().getStatusCode()) {
