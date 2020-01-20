@@ -56,7 +56,7 @@ public class MediaObjectOwnableLists {
 
             }
         } else {
-            newOwnableList.setParent(parent);;
+            newOwnableList.setParent(parent);
             list.add(newOwnableList);
         }
         return parent;
@@ -126,8 +126,6 @@ public class MediaObjectOwnableLists {
     /**
      * Find an MediaObjectOwnableListItem given id and owner
      * @param list collection to search into
-     * @param id
-     * @param owner
      * @return Optional/<MediaObjectOwnableListItem/> empty if nothing matched
      */
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
