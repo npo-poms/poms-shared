@@ -5,6 +5,8 @@ import lombok.ToString;
 
 import java.net.URI;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -16,11 +18,13 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.Credits;
 import nl.vpro.domain.media.Person;
 import nl.vpro.domain.media.RoleType;
+import nl.vpro.validation.WarningValidatorGroup;
 
 
 /**
  * Horrible copy/paste code from {@link Person}. Mainly to get it in a different namespace.
  */
+@SuppressWarnings("NotNullFieldNotInitialized")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "personUpdateType",
          propOrder = {"givenName",
@@ -31,14 +35,17 @@ public class PersonUpdate extends CreditsUpdate {
 
     @XmlAttribute
     @Getter
+    @NotNull(groups = WarningValidatorGroup.class)
     private String gtaaUri;
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
     @Getter
+    @Null(groups = WarningValidatorGroup.class)
     protected String givenName;
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
     @Getter
+    @Null(groups = WarningValidatorGroup.class)
     protected String familyName;
 
     public PersonUpdate(String gtaaUri, RoleType role) {
