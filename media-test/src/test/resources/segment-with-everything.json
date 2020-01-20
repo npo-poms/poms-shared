@@ -264,7 +264,17 @@
     "urnRef" : "urn:vpro:media:group:200",
     "type" : "SEASON",
     "index" : 1,
-    "highlighted" : false
+    "highlighted" : false,
+    "memberOf" : [ {
+      "midRef" : "VPROWON_20002",
+      "urnRef" : "urn:vpro:media:group:100",
+      "type" : "SERIES",
+      "index" : 1,
+      "highlighted" : false,
+      "memberOf" : [ ],
+      "episodeOf" : [ ]
+    } ],
+    "episodeOf" : [ ]
   } ],
   "ageRating" : "12",
   "contentRatings" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
@@ -455,5 +465,6 @@
     "name" : "Rutte, Mark"
   } ],
   "start" : 120000,
+  "segmentOf" : { },
   "publishDate" : 1425603600000
 }

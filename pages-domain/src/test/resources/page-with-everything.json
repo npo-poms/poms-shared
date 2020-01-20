@@ -30,7 +30,16 @@
         "midRef" : "VPROWON_30002",
         "type" : "SEASON",
         "index" : 1,
-        "highlighted" : false
+        "highlighted" : false,
+        "memberOf" : [ {
+          "midRef" : "VPROWON_30001",
+          "type" : "SERIES",
+          "index" : 1,
+          "highlighted" : false,
+          "memberOf" : [ ],
+          "episodeOf" : [ ]
+        } ],
+        "episodeOf" : [ ]
       } ],
       "broadcasters" : [ {
         "id" : "BNN",
@@ -289,7 +298,17 @@
         "urnRef" : "urn:vpro:media:group:200",
         "type" : "SEASON",
         "index" : 1,
-        "highlighted" : false
+        "highlighted" : false,
+        "memberOf" : [ {
+          "midRef" : "VPROWON_20002",
+          "urnRef" : "urn:vpro:media:group:100",
+          "type" : "SERIES",
+          "index" : 1,
+          "highlighted" : false,
+          "memberOf" : [ ],
+          "episodeOf" : [ ]
+        } ],
+        "episodeOf" : [ ]
       } ],
       "ageRating" : "12",
       "contentRatings" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
@@ -807,7 +826,17 @@
           "urnRef" : "urn:vpro:media:group:200",
           "type" : "SEASON",
           "index" : 1,
-          "highlighted" : false
+          "highlighted" : false,
+          "memberOf" : [ {
+            "midRef" : "VPROWON_20007",
+            "urnRef" : "urn:vpro:media:group:100",
+            "type" : "SERIES",
+            "index" : 1,
+            "highlighted" : false,
+            "memberOf" : [ ],
+            "episodeOf" : [ ]
+          } ],
+          "episodeOf" : [ ]
         } ],
         "ageRating" : "12",
         "contentRatings" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
@@ -1000,6 +1029,43 @@
         "start" : 0,
         "urnRef" : "urn:vpro:media:program:12",
         "midRef" : "VPROWON_20001",
+        "segmentOf" : {
+          "midRef" : "VPROWON_20001",
+          "urnRef" : "urn:vpro:media:program:12",
+          "type" : "BROADCAST",
+          "memberOf" : [ {
+            "midRef" : "VPROWON_20003",
+            "urnRef" : "urn:vpro:media:group:200",
+            "type" : "SEASON",
+            "index" : 1,
+            "highlighted" : false,
+            "memberOf" : [ {
+              "midRef" : "VPROWON_20002",
+              "urnRef" : "urn:vpro:media:group:100",
+              "type" : "SERIES",
+              "index" : 1,
+              "highlighted" : false,
+              "memberOf" : [ ],
+              "episodeOf" : [ ]
+            } ],
+            "episodeOf" : [ ]
+          } ],
+          "episodeOf" : [ {
+            "midRef" : "VPROWON_30002",
+            "type" : "SEASON",
+            "index" : 1,
+            "highlighted" : false,
+            "memberOf" : [ {
+              "midRef" : "VPROWON_30001",
+              "type" : "SERIES",
+              "index" : 1,
+              "highlighted" : false,
+              "memberOf" : [ ],
+              "episodeOf" : [ ]
+            } ],
+            "episodeOf" : [ ]
+          } ]
+        },
         "publishDate" : 1425603600000
       } ],
       "publishDate" : 1425603600000

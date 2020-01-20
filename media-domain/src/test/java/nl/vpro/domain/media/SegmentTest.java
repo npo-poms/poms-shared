@@ -37,6 +37,7 @@ public class SegmentTest {
             "            <shared:width>480</shared:width>\n" +
             "        </shared:image>\n" +
             "    </images>\n" +
+            "    <segmentOf midRef=\"RBX_NTR_2648108\" urnRef=\"urn:vpro:media:program:83538010\" type=\"CLIP\"/>\n" +
             "    <start>P0DT0H0M0.000S</start>\n" +
             "</segment>";
         Segment segment = JAXBTestUtil.unmarshal(xml,  Segment.class);
@@ -60,7 +61,8 @@ public class SegmentTest {
             "  \"genres\" : [ ],\n" +
             "  \"countries\" : [ ],\n" +
             "  \"languages\" : [ ],\n" +
-            "  \"start\" : 100\n" +
+            "  \"start\" : 100,\n" +
+            "  \"segmentOf\" : { }\n" +
             "}\n");
     }
 
@@ -99,6 +101,7 @@ public class SegmentTest {
                 "    <descendantOf midRef=\"parentMid\" type=\"BROADCAST\"/>\n" +
                 "    <locations/>\n" +
                 "    <images/>\n" +
+                "    <segmentOf midRef=\"parentMid\" type=\"BROADCAST\"/>\n" +
                 "</segment>").getSortInstant()
         ).isEqualTo(program.getCreationInstant());
 
@@ -125,7 +128,11 @@ public class SegmentTest {
                 "    \"midRef\" : \"parentMid\",\n" +
                 "    \"type\" : \"BROADCAST\"\n" +
                 "  } ],\n" +
-                "  \"midRef\" : \"parentMid\"\n" +
+                "  \"midRef\" : \"parentMid\",\n" +
+                "  \"segmentOf\" : {\n" +
+                "    \"midRef\" : \"parentMid\",\n" +
+                "    \"type\" : \"BROADCAST\"\n" +
+                "    }\n" +
                 "}\n").getSortInstant()
         ).isEqualTo(program.getCreationInstant());
     }

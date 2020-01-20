@@ -305,6 +305,9 @@
                     <shared:license>PUBLIC_DOMAIN</shared:license>
                 </shared:image>
             </images>
+            <segmentOf midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12" type="BROADCAST">
+                <memberOf highlighted="false" midRef="VPROWON_20003" index="1"/>
+            </segmentOf>
             <start>P0DT0H0M0.000S</start>
         </segment>
     </segments>
