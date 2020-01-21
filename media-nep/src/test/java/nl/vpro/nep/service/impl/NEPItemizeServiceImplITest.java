@@ -8,7 +8,6 @@ import java.time.Instant;
 
 import org.junit.jupiter.api.*;
 
-import nl.vpro.nep.domain.NEPItemizeRequest;
 import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.service.NEPDownloadService;
 
@@ -27,11 +26,7 @@ public class NEPItemizeServiceImplITest {
     public void itemize() throws IOException {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
-        NEPItemizeRequest request = new NEPItemizeRequest();
-        request.setIdentifier("AT_2073522");
-        request.setStarttime(NEPItemizeRequest.fromDuration(Duration.ZERO).orElseThrow(IllegalArgumentException::new));
-        request.setEndtime(NEPItemizeRequest.fromDuration(Duration.ofMinutes(2).plusSeconds(21).plusMillis(151)).orElseThrow(IllegalAccessError::new));
-        NEPItemizeResponse response = itemizer.itemize(request);
+        NEPItemizeResponse response = itemizer.itemize("AT_2073522", Duration.ZERO, Duration.ofMinutes(2).plusSeconds(21).plusMillis(151), null);
         log.info("response: {} {}", response, start);
 
         NEPDownloadService downloadService = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
@@ -53,14 +48,10 @@ public class NEPItemizeServiceImplITest {
     @Test
     @Order(10)
     @Tag("dvr")
-    public void itemizeDvr() throws IOException {
+    public void itemizeDvr() {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
-        NEPItemizeRequest request = new NEPItemizeRequest();
-        request.setIdentifier("npo-1dvr");
-        request.setStarttime(NEPItemizeRequest.fromInstant(Instant.now().minusSeconds(300)).orElseThrow(IllegalArgumentException::new));
-        request.setEndtime(NEPItemizeRequest.fromInstant(Instant.now().minusSeconds(60)).orElseThrow(IllegalArgumentException::new));
-        response = itemizer.itemize(request);
+        response = itemizer.itemize("npo-1dvr", Instant.now().minusSeconds(300), Instant.now().minusSeconds(60), null);
         log.info("response: {} {}", response, start);
 
     }
