@@ -229,7 +229,6 @@
       <xs:element name="episodeOf" type="memberRefType" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="midRef" type="xs:string"/>
-    <xs:attribute name="urnRef" type="xs:string"/>
     <xs:attribute name="type" type="mediaTypeEnum"/>
   </xs:complexType>
 

@@ -50,7 +50,7 @@ public class MediaObjectXmlSchemaTest {
     private static JAXBContext jaxbContext;
 
     static {
-        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tashkent"));
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tashkent")); // Take an unlikely timezone to detect bugs related to that.
         try {
             jaxbContext = JAXBContext.newInstance("nl.vpro.domain.media");
         } catch(JAXBException e) {
