@@ -74,11 +74,13 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         this.itemizeMidKey = new NEPItemizerV1Authenticator(itemizeMidKey);
         this.itemizeMidUrl = itemizeMidUrl;
     }
+    public NEPItemizeServiceImpl(String itemizeUrl, String itemizeKey) {
+        this(itemizeUrl, itemizeKey, itemizeUrl, itemizeKey);
+    }
+
 
     protected NEPItemizeServiceImpl(Properties properties) {
         this(
-            properties.getProperty("nep.itemizer-api.baseUrl"),
-            properties.getProperty("nep.itemizer-api.key"),
             properties.getProperty("nep.itemizer-api.baseUrl"),
             properties.getProperty("nep.itemizer-api.key")
         );
