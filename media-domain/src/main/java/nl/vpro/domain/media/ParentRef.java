@@ -12,6 +12,10 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+
+/**
+ * @since 5.12
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "parentRefType")
 @JsonPropertyOrder({
@@ -29,9 +33,6 @@ public class ParentRef implements Serializable {
     protected String midRef;
 
     @XmlAttribute
-    protected String urnRef;
-
-    @XmlAttribute
     protected MediaType type;
 
     @XmlElement(name = "memberOf")
@@ -46,7 +47,6 @@ public class ParentRef implements Serializable {
     public ParentRef(MediaObject parent) {
 
         if (parent != null) {
-            this.urnRef = parent.getUrn();
             this.midRef = parent.getMid();
             this.type = parent.getMediaType();
 

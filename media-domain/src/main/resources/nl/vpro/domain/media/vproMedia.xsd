@@ -853,6 +853,7 @@
     <xs:sequence>
       <xs:element type="memberRefType" name="memberOf" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="memberRefType" name="episodeOf" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="segmentOf" type="parentRefType" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute type="midType" name="midRef" use="optional">
       <xs:annotation>

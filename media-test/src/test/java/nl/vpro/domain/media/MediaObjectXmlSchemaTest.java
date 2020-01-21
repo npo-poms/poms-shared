@@ -51,6 +51,7 @@ import nl.vpro.util.IntegerVersion;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
+import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 
@@ -436,8 +437,30 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testMemberOfAndDescendantOfGraph() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\"><memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/></memberOf><locations/><images/><scheduleEvents/><segments/></program>";
+    public void testMemberOfAndDescendantOfGraph() {
+        String expected = "<program xmlns=\"urn:vpro:media:2009\" embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <credits/>\n" +
+            "    <descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/>\n" +
+            "    <descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/>\n" +
+            "    <descendantOf urnRef=\"urn:vpro:media:segment:301\" midRef=\"VPROWON_12351\" type=\"SEGMENT\"/>\n" +
+            "    <memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\">\n" +
+            "        <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
+            "    </memberOf>\n" +
+            "    <memberOf highlighted=\"false\" midRef=\"VPROWON_12351\" index=\"2\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
+            "        <segmentOf midRef=\"VPROWON_12350\" urnRef=\"urn:vpro:media:program:300\" type=\"CLIP\">\n" +
+            "            <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
+            "        </segmentOf>\n" +
+            "    </memberOf>\n" +
+            "    <memberOf highlighted=\"false\" midRef=\"VPROWON_12351\" index=\"3\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
+            "        <segmentOf midRef=\"VPROWON_12350\" urnRef=\"urn:vpro:media:program:300\" type=\"CLIP\">\n" +
+            "            <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
+            "        </segmentOf>\n" +
+            "    </memberOf>\n" +
+            "    <locations/>\n" +
+            "    <images/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <segments/>\n" +
+            "</program>";
 
         Program program = program().lean().withMemberOf().build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
@@ -446,9 +469,9 @@ public class MediaObjectXmlSchemaTest {
         program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
         program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
         program.getMemberOf().first().setAdded(Instant.EPOCH);
-        String actual = toXml(program);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThatXml(program).isSimilarTo(expected);
+
     }
 
     @Test
