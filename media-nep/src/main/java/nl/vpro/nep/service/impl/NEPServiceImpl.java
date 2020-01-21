@@ -1,8 +1,6 @@
 package nl.vpro.nep.service.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
@@ -10,21 +8,14 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
+import javax.inject.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.nep.domain.NEPItemizeRequest;
-import nl.vpro.nep.domain.NEPItemizeResponse;
-import nl.vpro.nep.domain.PlayreadyResponse;
-import nl.vpro.nep.domain.WideVineResponse;
-import nl.vpro.nep.domain.workflow.StatusType;
-import nl.vpro.nep.domain.workflow.WorkflowExecution;
-import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
+import nl.vpro.nep.domain.*;
+import nl.vpro.nep.domain.workflow.*;
 import nl.vpro.nep.sam.model.StreamAccessItem;
 import nl.vpro.nep.service.*;
 import nl.vpro.util.FileMetadata;
@@ -61,8 +52,15 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public NEPItemizeResponse itemize(NEPItemizeRequest request) {
-        return itemizeService.get().itemize(request);
+    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate) {
+        return itemizeService.get().itemizeLive(channel, start, stop, max_bitrate);
+
+    }
+
+    @Override
+    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate) {
+        return itemizeService.get().itemizeMid(mid, start, stop, max_bitrate);
+
     }
 
     @Override

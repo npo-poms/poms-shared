@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Properties;
 import java.util.function.Supplier;
 
@@ -75,9 +77,8 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         }
     }
 
-    @Override
     @SneakyThrows
-    public NEPItemizeResponse itemize(@NonNull  NEPItemizeRequest request) {
+    protected NEPItemizeResponse itemize(@NonNull  NEPItemizeRequest request) {
         String playerUrl = itemizeUrl + "/api/itemizer/job";
         log.info("Itemizing {} @ {}", request, playerUrl);
         HttpClientContext clientContext = HttpClientContext.create();
@@ -98,6 +99,28 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             return Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), NEPItemizeResponse.class);
         }
 
+    }
+
+    @Override
+    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant end, Integer max_bitrate) {
+        return itemize(
+            NEPItemizeRequest.builder()
+                .identifier(channel)
+                .starttime(NEPItemizeRequest.fromInstant(start).orElseThrow(IllegalArgumentException::new))
+                .endtime(NEPItemizeRequest.fromInstant(end).orElseThrow(IllegalArgumentException::new))
+                .max_bitrate(max_bitrate)
+                .build()
+        );
+    }
+
+    @Override
+    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration end, Integer max_bitrate) {
+        return itemize(
+            NEPItemizeRequest.builder()
+                .starttime(NEPItemizeRequest.fromDuration(start, Duration.ZERO))
+                .endtime(NEPItemizeRequest.fromDuration(end).orElseThrow(IllegalArgumentException::new))
+                .identifier(mid).max_bitrate(max_bitrate).build()
+        );
     }
 
     @Override

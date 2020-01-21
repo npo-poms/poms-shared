@@ -1,13 +1,10 @@
 package nl.vpro.nep.service;
 
 import java.io.OutputStream;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.ZoneId;
+import java.time.*;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
-import nl.vpro.nep.domain.NEPItemizeRequest;
 import nl.vpro.nep.domain.NEPItemizeResponse;
 
 /**
@@ -16,7 +13,10 @@ import nl.vpro.nep.domain.NEPItemizeResponse;
  */
 public interface NEPItemizeService {
 
-    NEPItemizeResponse itemize(NEPItemizeRequest request);
+    NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate);
+
+    NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate);
+
 
     /**
      * NEP provides one service for two basicly different things.
