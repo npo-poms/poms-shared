@@ -71,7 +71,7 @@ import static nl.vpro.domain.media.MediaObject.*;
  * Also {@link Group}s are an extension, which implies e.g. that things like a {@link GroupType#PLAYLIST} may themselves have similar meta data, though they
  * basicly represent groups of other {@link MediaObject}s, and are not themselves associated with actual audio or video.
  *
- * But also {@link Program}s themselves can function as a group and therefor have 'members' (e.g. it may be a {@link ProgramType#PROMO}).
+ * But also {@link Program}s themselves can function as a group and therefor have 'members' (e.g. such a member may be a {@link ProgramType#PROMO}).
  *
  * {@link Segment}s are a special kind of members of only {@link Program}s, and represent a 'segment' from a larger 'program' only.
  *
@@ -2262,7 +2262,6 @@ public abstract class MediaObject
                 realizePrediction(location);
             }
         }
-
         return this;
     }
 
