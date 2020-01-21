@@ -52,14 +52,14 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate) {
-        return itemizeService.get().itemizeLive(channel, start, stop, max_bitrate);
+    public NEPItemizeResponse itemize(String channel, Instant start, Instant stop, Integer max_bitrate) {
+        return itemizeService.get().itemize(channel, start, stop, max_bitrate);
 
     }
 
     @Override
-    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate) {
-        return itemizeService.get().itemizeMid(mid, start, stop, max_bitrate);
+    public NEPItemizeResponse itemize(String mid, Duration start, Duration stop, Integer max_bitrate) {
+        return itemizeService.get().itemize(mid, start, stop, max_bitrate);
 
     }
 
