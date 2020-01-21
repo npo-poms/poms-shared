@@ -258,6 +258,10 @@
     "midRef" : "VPROWON_20003",
     "urnRef" : "urn:vpro:media:group:200",
     "type" : "SEASON"
+  }, {
+    "midRef" : "VPROWON_20005",
+    "urnRef" : "urn:vpro:media:segment:301",
+    "type" : "SEGMENT"
   } ],
   "memberOf" : [ {
     "midRef" : "VPROWON_20003",
@@ -275,6 +279,48 @@
       "episodeOf" : [ ]
     } ],
     "episodeOf" : [ ]
+  }, {
+    "midRef" : "VPROWON_20005",
+    "urnRef" : "urn:vpro:media:segment:301",
+    "type" : "SEGMENT",
+    "index" : 2,
+    "highlighted" : false,
+    "memberOf" : [ ],
+    "episodeOf" : [ ],
+    "segmentOf" : {
+      "midRef" : "VPROWON_20004",
+      "type" : "CLIP",
+      "memberOf" : [ {
+        "midRef" : "VPROWON_20002",
+        "urnRef" : "urn:vpro:media:group:100",
+        "type" : "SERIES",
+        "index" : 10,
+        "highlighted" : false,
+        "memberOf" : [ ],
+        "episodeOf" : [ ]
+      } ]
+    }
+  }, {
+    "midRef" : "VPROWON_20005",
+    "urnRef" : "urn:vpro:media:segment:301",
+    "type" : "SEGMENT",
+    "index" : 3,
+    "highlighted" : false,
+    "memberOf" : [ ],
+    "episodeOf" : [ ],
+    "segmentOf" : {
+      "midRef" : "VPROWON_20004",
+      "type" : "CLIP",
+      "memberOf" : [ {
+        "midRef" : "VPROWON_20002",
+        "urnRef" : "urn:vpro:media:group:100",
+        "type" : "SERIES",
+        "index" : 10,
+        "highlighted" : false,
+        "memberOf" : [ ],
+        "episodeOf" : [ ]
+      } ]
+    }
   } ],
   "ageRating" : "12",
   "contentRatings" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],

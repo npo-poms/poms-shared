@@ -11,6 +11,7 @@ import java.io.*;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -337,9 +338,89 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testMemberOfAndDescendantOfGraph() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"descendantOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:100\",\"type\":\"SERIES\"},{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:200\",\"type\":\"SEASON\"}],\"memberOf\":[{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:200\",\"type\":\"SEASON\",\"index\":1,\"highlighted\":false,\"memberOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:100\",\"type\":\"SERIES\",\"index\":1,\"highlighted\":false,\"memberOf\":[],\"episodeOf\":[]}],\"episodeOf\":[],\"added\":0}]}";
+        String expected = "{\n" +
+            "  \"objectType\" : \"program\",\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ],\n" +
+            "  \"descendantOf\" : [ {\n" +
+            "    \"midRef\" : \"AVRO_5555555\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:group:100\",\n" +
+            "    \"type\" : \"SERIES\"\n" +
+            "  }, {\n" +
+            "    \"midRef\" : \"AVRO_7777777\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:group:200\",\n" +
+            "    \"type\" : \"SEASON\"\n" +
+            "  }, {\n" +
+            "    \"midRef\" : \"VPROWON_110\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:segment:301\",\n" +
+            "    \"type\" : \"SEGMENT\"\n" +
+            "  } ],\n" +
+            "  \"memberOf\" : [ {\n" +
+            "    \"midRef\" : \"AVRO_7777777\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:group:200\",\n" +
+            "    \"type\" : \"SEASON\",\n" +
+            "    \"index\" : 1,\n" +
+            "    \"highlighted\" : false,\n" +
+            "    \"memberOf\" : [ {\n" +
+            "      \"midRef\" : \"AVRO_5555555\",\n" +
+            "      \"urnRef\" : \"urn:vpro:media:group:100\",\n" +
+            "      \"type\" : \"SERIES\",\n" +
+            "      \"index\" : 1,\n" +
+            "      \"highlighted\" : false,\n" +
+            "      \"memberOf\" : [ ],\n" +
+            "      \"episodeOf\" : [ ]\n" +
+            "    } ],\n" +
+            "    \"episodeOf\" : [ ],\n" +
+            "    \"added\" : 0\n" +
+            "  }, {\n" +
+            "    \"midRef\" : \"VPROWON_110\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:segment:301\",\n" +
+            "    \"type\" : \"SEGMENT\",\n" +
+            "    \"index\" : 2,\n" +
+            "    \"highlighted\" : false,\n" +
+            "    \"memberOf\" : [ ],\n" +
+            "    \"episodeOf\" : [ ],\n" +
+            "    \"segmentOf\" : {\n" +
+            "      \"midRef\" : \"VPROWON_109\",\n" +
+            "      \"type\" : \"CLIP\",\n" +
+            "      \"memberOf\" : [ {\n" +
+            "        \"midRef\" : \"AVRO_5555555\",\n" +
+            "        \"urnRef\" : \"urn:vpro:media:group:100\",\n" +
+            "        \"type\" : \"SERIES\",\n" +
+            "        \"index\" : 10,\n" +
+            "        \"highlighted\" : false,\n" +
+            "        \"memberOf\" : [ ],\n" +
+            "        \"episodeOf\" : [ ]\n" +
+            "      } ]\n" +
+            "    }\n" +
+            "  }, {\n" +
+            "    \"midRef\" : \"VPROWON_110\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:segment:301\",\n" +
+            "    \"type\" : \"SEGMENT\",\n" +
+            "    \"index\" : 3,\n" +
+            "    \"highlighted\" : false,\n" +
+            "    \"memberOf\" : [ ],\n" +
+            "    \"episodeOf\" : [ ],\n" +
+            "    \"segmentOf\" : {\n" +
+            "      \"midRef\" : \"VPROWON_109\",\n" +
+            "      \"type\" : \"CLIP\",\n" +
+            "      \"memberOf\" : [ {\n" +
+            "        \"midRef\" : \"AVRO_5555555\",\n" +
+            "        \"urnRef\" : \"urn:vpro:media:group:100\",\n" +
+            "        \"type\" : \"SERIES\",\n" +
+            "        \"index\" : 10,\n" +
+            "        \"highlighted\" : false,\n" +
+            "        \"memberOf\" : [ ],\n" +
+            "        \"episodeOf\" : [ ]\n" +
+            "      } ]\n" +
+            "    }\n" +
+            "  } ]\n" +
+            "}";
 
-        Program program = program().lean().withMemberOf().build();
+        Program program = program().lean().withMemberOf(new AtomicLong(106)).build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
         program.getMemberOf().first().getGroup().setMid(null);
         program.getMemberOf().first().getGroup().setMid("AVRO_7777777");
@@ -354,14 +435,74 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testEpisodeOfAndDescendantOfGraph() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"type\":\"BROADCAST\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"episodeOf\":[{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:102\",\"type\":\"SEASON\",\"index\":1,\"highlighted\":false,\"memberOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:101\",\"type\":\"SERIES\",\"index\":1,\"highlighted\":false,\"memberOf\":[],\"episodeOf\":[]}],\"episodeOf\":[],\"added\":0}],\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"descendantOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:101\",\"type\":\"SERIES\"},{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:102\",\"type\":\"SEASON\"}]}";
+        String expected = "{\n" +
+            "  \"objectType\" : \"program\",\n" +
+            "  \"type\" : \"BROADCAST\",\n" +
+            "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"episodeOf\" : [ {\n" +
+            "    \"midRef\" : \"AVRO_7777777\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:group:102\",\n" +
+            "    \"type\" : \"SEASON\",\n" +
+            "    \"index\" : 1,\n" +
+            "    \"highlighted\" : false,\n" +
+            "    \"memberOf\" : [ {\n" +
+            "      \"midRef\" : \"AVRO_5555555\",\n" +
+            "      \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
+            "      \"type\" : \"SERIES\",\n" +
+            "      \"index\" : 1,\n" +
+            "      \"highlighted\" : false,\n" +
+            "      \"memberOf\" : [ ],\n" +
+            "      \"episodeOf\" : [ ]\n" +
+            "    }, {\n" +
+            "      \"midRef\" : \"VPROWON_106\",\n" +
+            "      \"type\" : \"SEGMENT\",\n" +
+            "      \"index\" : 2,\n" +
+            "      \"highlighted\" : false,\n" +
+            "      \"memberOf\" : [ ],\n" +
+            "      \"episodeOf\" : [ ],\n" +
+            "      \"segmentOf\" : {\n" +
+            "        \"midRef\" : \"VPROWON_105\",\n" +
+            "        \"type\" : \"CLIP\",\n" +
+            "        \"memberOf\" : [ {\n" +
+            "          \"midRef\" : \"AVRO_5555555\",\n" +
+            "          \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
+            "          \"type\" : \"SERIES\",\n" +
+            "          \"index\" : 10,\n" +
+            "          \"highlighted\" : false,\n" +
+            "          \"memberOf\" : [ ],\n" +
+            "          \"episodeOf\" : [ ]\n" +
+            "        } ]\n" +
+            "      }\n" +
+            "    } ],\n" +
+            "    \"episodeOf\" : [ ],\n" +
+            "    \"added\" : 0\n" +
+            "  } ],\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ],\n" +
+            "  \"descendantOf\" : [ {\n" +
+            "    \"midRef\" : \"AVRO_5555555\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
+            "    \"type\" : \"SERIES\"\n" +
+            "  }, {\n" +
+            "    \"midRef\" : \"AVRO_7777777\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:group:102\",\n" +
+            "    \"type\" : \"SEASON\"\n" +
+            "  }, {\n" +
+            "    \"midRef\" : \"VPROWON_106\",\n" +
+            "    \"type\" : \"SEGMENT\"\n" +
+            "  } ]\n" +
+            "}";
 
-        Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
+        Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L, new AtomicLong(103)).build();
         program.getEpisodeOf().first().setAdded(Instant.EPOCH);
         program.getEpisodeOf().first().getGroup().setMid(null);
         program.getEpisodeOf().first().getGroup().setMid("AVRO_7777777");
         program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
         program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
+
         String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
@@ -966,7 +1107,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     private String toPublisherJson(MediaObject program) throws IOException {
-        return toJson(Jackson2Mapper.getPublisherInstance(), program);
+        return toJson(Jackson2Mapper.getPrettyPublisherInstance(), program);
     }
 
     private String toApiJson(MediaObject program) throws IOException {
@@ -975,6 +1116,11 @@ public class MediaObjectJsonSchemaTest {
 
     @SneakyThrows
     private void assertJsonEquals(String expected, String actual) {
-        JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        try {
+            JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
+        } catch (AssertionError e) {
+            log.error(e.getMessage());
+            assertThat(actual).isEqualTo(expected);
+        }
     }
 }

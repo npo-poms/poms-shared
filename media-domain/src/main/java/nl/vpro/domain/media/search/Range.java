@@ -68,7 +68,7 @@ public interface Range<T extends Comparable<T>, S extends Range.RangeValue<T>> e
     @AllArgsConstructor
     @XmlAccessorType(XmlAccessType.NONE)
     @XmlTransient
-    abstract class RangeValue<T extends Comparable> implements Supplier<T> {
+    abstract class RangeValue<T extends Comparable<T>> implements Supplier<T> {
         @XmlAttribute
         Boolean inclusive = null;
 

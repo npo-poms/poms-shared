@@ -284,7 +284,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<@NotNull  Portal> portals;
+    protected List<@NotNull Portal> portals;
 
     @ManyToMany
     @OrderColumn(name = "list_index", nullable = false)
@@ -395,6 +395,7 @@ public abstract class MediaObject
 
     @Embedded
     @Valid
+    @Nullable
     protected AuthorizedDuration duration;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
@@ -455,6 +456,7 @@ public abstract class MediaObject
 
     @Enumerated(EnumType.STRING)
     @NotNull(groups = { WarningValidatorGroup.class })
+    @Nullable
     protected AgeRating ageRating;
 
     @ElementCollection
@@ -500,6 +502,7 @@ public abstract class MediaObject
     protected Set<Prediction> predictions;
 
     @Transient
+    @Nullable
     List<Prediction> predictionsForXml;
 
     @OneToMany(cascade = ALL, mappedBy = "mediaObject", orphanRemoval = true)
@@ -580,18 +583,20 @@ public abstract class MediaObject
     private Boolean locationAuthorityUpdate = false;
 
     @OneToOne
+    @Nullable
     private MediaObject mergedTo;
 
      // Holds the descendantOf value when unmarshalled from XML. Used by XML
     // clients working in a detached environment.
     @Transient
+    @Nullable
     private String mergedToRef;
 
     // Holds the descendantOf value when unmarshalled from XML. Used by XML
     // clients working in a detached environment.
     @Transient
+    @Nullable
     Set<DescendantRef> descendantOf;
-
 
     /**
      * If this is set to true, then that indicates that something is changed in
@@ -620,8 +625,6 @@ public abstract class MediaObject
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
     @Setter
     private List<AvailableSubtitles> availableSubtitles;
-
-
 
     @Embedded()
     @XmlTransient
@@ -695,8 +698,8 @@ public abstract class MediaObject
     /**
      * Return the available subtitles. These subtitles may not be published.
      *
-     * In the publisher this list is explicely cleared before publishing to the API if there are no published locations
-     * This is kind of a hack, may be it is better to have the workflow in AvailableSubtitles also.
+     * In the publisher this list is explicitely cleared before publishing to the API if there are no published locations
+     * This is kind of a hack.  May be it is better to have the workflow in AvailableSubtitles also.
      */
     @XmlElement(name = "availableSubtitles")
     public List<AvailableSubtitles> getAvailableSubtitles() {
@@ -705,7 +708,6 @@ public abstract class MediaObject
         }
         return availableSubtitles;
     }
-
 
     @Override
     @XmlElement(name = "crid")
@@ -784,7 +786,6 @@ public abstract class MediaObject
         if (broadcaster == null || broadcasters == null) {
             return false;
         }
-
         return this.broadcasters.remove(broadcaster);
     }
 
@@ -826,7 +827,6 @@ public abstract class MediaObject
         if (portal == null || portals == null) {
             return false;
         }
-
         return portals.remove(portal);
     }
 
@@ -862,7 +862,6 @@ public abstract class MediaObject
         if (thirdParty == null || thirdParties == null) {
             return false;
         }
-
         return thirdParties.remove(thirdParty);
     }
 
@@ -899,7 +898,6 @@ public abstract class MediaObject
                 }
             }
         }
-
         return null;
     }
 
@@ -939,7 +937,6 @@ public abstract class MediaObject
                 }
             }
         }
-
         return null;
     }
 
@@ -1206,9 +1203,11 @@ public abstract class MediaObject
         );
     }
 
-    public void setIntentions(SortedSet<Intentions> newIntentions) {
+    public void setIntentions(SortedSet<@NonNull  Intentions> newIntentions) {
         this.intentions = createIfNullUnlessNull(this.intentions, newIntentions);
-        MediaObjectOwnableLists.setIfNotNull(this, this.intentions, newIntentions);
+        if (this.intentions != null) {
+            MediaObjectOwnableLists.setIfNotNull(this, this.intentions, newIntentions);
+        }
     }
 
     @NonNull
@@ -1229,9 +1228,11 @@ public abstract class MediaObject
         );
     }
 
-    public void setTargetGroups(SortedSet<TargetGroups> newTargetGroups) {
+    public void setTargetGroups(SortedSet<@NonNull TargetGroups> newTargetGroups) {
         this.targetGroups = createIfNullUnlessNull(this.targetGroups, newTargetGroups);
-        MediaObjectOwnableLists.set(this,this.targetGroups, newTargetGroups);
+        if (this.targetGroups != null) {
+            MediaObjectOwnableLists.set(this, this.targetGroups, newTargetGroups);
+        }
     }
 
     @XmlElement
@@ -1664,13 +1665,11 @@ public abstract class MediaObject
         }
 
         for (MemberRef memberRef : memberOf) {
-            if (memberRef != null) {
-                if (owner.equals(memberRef.getGroup())) {
-                    if (number == null && memberRef.getNumber() == null
-                            || number != null && number.equals(memberRef.getNumber())) {
+            if (owner.equals(memberRef.getGroup())) {
+                if (number == null && memberRef.getNumber() == null
+                    || number != null && number.equals(memberRef.getNumber())) {
 
-                        return memberRef;
-                    }
+                    return memberRef;
                 }
             }
         }
@@ -1765,7 +1764,7 @@ public abstract class MediaObject
         return ageRating;
     }
 
-    public void setAgeRating(@NonNull  AgeRating ageRating) {
+    public void setAgeRating(@Nullable AgeRating ageRating) {
         if (this.ageRating != ageRating) {
             this.locationAuthorityUpdate = true;
         }
@@ -2070,7 +2069,6 @@ public abstract class MediaObject
         this.predictions = updateSortedSet(this.predictions, predictions);
         this.predictionsForXml = null;
     }
-
 
     @XmlElement(name = "prediction")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -2667,7 +2665,7 @@ public abstract class MediaObject
         return mergedTo;
     }
 
-    public void setMergedTo(MediaObject mergedTo) {
+    public void setMergedTo(@Nullable MediaObject mergedTo) {
         if (this.mergedTo != null && mergedTo != null && !this.mergedTo.equals(mergedTo)) {
             throw new IllegalArgumentException(
                     "Can not merge " + this + " to " + mergedTo + " since it is already merged to " + this.mergedTo);
@@ -2676,7 +2674,7 @@ public abstract class MediaObject
         int depth = 10;
         MediaObject p = mergedTo;
         if (mergedTo != null) {
-            while (p.isMerged()) {
+            while (p.mergedTo != null) {
                 if (this.equals(p)) {
                     throw new IllegalArgumentException("Loop while merging source " + this + " to " + mergedTo);
                 }
@@ -2685,7 +2683,7 @@ public abstract class MediaObject
                             "Deep regression while merging source " + this + " to " + mergedTo);
                 }
 
-                p = p.getMergedTo();
+                p = p.mergedTo;
             }
         }
 
@@ -2702,7 +2700,7 @@ public abstract class MediaObject
         return mergedTo != null ? mergedTo.getMid() : null;
     }
 
-    public void setMergedToRef(String mergedToRef) {
+    public void setMergedToRef(@Nullable String mergedToRef) {
         this.mergedToRef = mergedToRef;
     }
 

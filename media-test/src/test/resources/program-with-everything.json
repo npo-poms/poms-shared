@@ -12,7 +12,7 @@
   "urn" : "urn:vpro:media:program:12",
   "embeddable" : true,
   "episodeOf" : [ {
-    "midRef" : "VPROWON_30002",
+    "midRef" : "VPROWON_30004",
     "type" : "SEASON",
     "index" : 1,
     "highlighted" : false,
@@ -23,6 +23,25 @@
       "highlighted" : false,
       "memberOf" : [ ],
       "episodeOf" : [ ]
+    }, {
+      "midRef" : "VPROWON_30003",
+      "type" : "SEGMENT",
+      "index" : 2,
+      "highlighted" : false,
+      "memberOf" : [ ],
+      "episodeOf" : [ ],
+      "segmentOf" : {
+        "midRef" : "VPROWON_30002",
+        "type" : "CLIP",
+        "memberOf" : [ {
+          "midRef" : "VPROWON_30001",
+          "type" : "SERIES",
+          "index" : 10,
+          "highlighted" : false,
+          "memberOf" : [ ],
+          "episodeOf" : [ ]
+        } ]
+      }
     } ],
     "episodeOf" : [ ]
   } ],
@@ -186,10 +205,17 @@
     "urnRef" : "urn:vpro:media:group:200",
     "type" : "SEASON"
   }, {
+    "midRef" : "VPROWON_20005",
+    "urnRef" : "urn:vpro:media:segment:301",
+    "type" : "SEGMENT"
+  }, {
     "midRef" : "VPROWON_30001",
     "type" : "SERIES"
   }, {
-    "midRef" : "VPROWON_30002",
+    "midRef" : "VPROWON_30003",
+    "type" : "SEGMENT"
+  }, {
+    "midRef" : "VPROWON_30004",
     "type" : "SEASON"
   } ],
   "memberOf" : [ {
@@ -208,6 +234,48 @@
       "episodeOf" : [ ]
     } ],
     "episodeOf" : [ ]
+  }, {
+    "midRef" : "VPROWON_20005",
+    "urnRef" : "urn:vpro:media:segment:301",
+    "type" : "SEGMENT",
+    "index" : 2,
+    "highlighted" : false,
+    "memberOf" : [ ],
+    "episodeOf" : [ ],
+    "segmentOf" : {
+      "midRef" : "VPROWON_20004",
+      "type" : "CLIP",
+      "memberOf" : [ {
+        "midRef" : "VPROWON_20002",
+        "urnRef" : "urn:vpro:media:group:100",
+        "type" : "SERIES",
+        "index" : 10,
+        "highlighted" : false,
+        "memberOf" : [ ],
+        "episodeOf" : [ ]
+      } ]
+    }
+  }, {
+    "midRef" : "VPROWON_20005",
+    "urnRef" : "urn:vpro:media:segment:301",
+    "type" : "SEGMENT",
+    "index" : 3,
+    "highlighted" : false,
+    "memberOf" : [ ],
+    "episodeOf" : [ ],
+    "segmentOf" : {
+      "midRef" : "VPROWON_20004",
+      "type" : "CLIP",
+      "memberOf" : [ {
+        "midRef" : "VPROWON_20002",
+        "urnRef" : "urn:vpro:media:group:100",
+        "type" : "SERIES",
+        "index" : 10,
+        "highlighted" : false,
+        "memberOf" : [ ],
+        "episodeOf" : [ ]
+      } ]
+    }
   } ],
   "ageRating" : "12",
   "contentRatings" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
@@ -603,32 +671,39 @@
     "duration" : 100000,
     "awards" : [ "In 2003 bekroond met een Gouden Kalf", "Winnaar IDFA scenarioprijs 2008.", "De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.", "De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn." ],
     "descendantOf" : [ {
-      "midRef" : "VPROWON_DG_30003",
+      "midRef" : "VPROWON_DG_30005",
       "urnRef" : "urn:vpro:media:group:100",
       "type" : "SERIES"
     }, {
-      "midRef" : "VPROWON_DG_30004",
+      "midRef" : "VPROWON_DG_30006",
       "urnRef" : "urn:vpro:media:group:200",
       "type" : "SEASON"
     }, {
-      "midRef" : "VPROWON_DG_30005",
+      "midRef" : "VPROWON_DG_30007",
       "type" : "SERIES"
     }, {
-      "midRef" : "VPROWON_DG_30006",
+      "midRef" : "VPROWON_DG_30008",
+      "type" : "SEGMENT"
+    }, {
+      "midRef" : "VPROWON_DG_30009",
       "type" : "SEASON"
     }, {
-      "midRef" : "VPROWON_DG_30007",
+      "midRef" : "VPROWON_DG_30010",
       "urnRef" : "urn:vpro:media:program:12",
       "type" : "BROADCAST"
+    }, {
+      "midRef" : "VPROWON_DG_30011",
+      "urnRef" : "urn:vpro:media:segment:301",
+      "type" : "SEGMENT"
     } ],
     "memberOf" : [ {
-      "midRef" : "VPROWON_20008",
+      "midRef" : "VPROWON_20010",
       "urnRef" : "urn:vpro:media:group:200",
       "type" : "SEASON",
       "index" : 1,
       "highlighted" : false,
       "memberOf" : [ {
-        "midRef" : "VPROWON_20007",
+        "midRef" : "VPROWON_20009",
         "urnRef" : "urn:vpro:media:group:100",
         "type" : "SERIES",
         "index" : 1,
@@ -637,6 +712,48 @@
         "episodeOf" : [ ]
       } ],
       "episodeOf" : [ ]
+    }, {
+      "midRef" : "VPROWON_20012",
+      "urnRef" : "urn:vpro:media:segment:301",
+      "type" : "SEGMENT",
+      "index" : 2,
+      "highlighted" : false,
+      "memberOf" : [ ],
+      "episodeOf" : [ ],
+      "segmentOf" : {
+        "midRef" : "VPROWON_20011",
+        "type" : "CLIP",
+        "memberOf" : [ {
+          "midRef" : "VPROWON_20009",
+          "urnRef" : "urn:vpro:media:group:100",
+          "type" : "SERIES",
+          "index" : 10,
+          "highlighted" : false,
+          "memberOf" : [ ],
+          "episodeOf" : [ ]
+        } ]
+      }
+    }, {
+      "midRef" : "VPROWON_20012",
+      "urnRef" : "urn:vpro:media:segment:301",
+      "type" : "SEGMENT",
+      "index" : 3,
+      "highlighted" : false,
+      "memberOf" : [ ],
+      "episodeOf" : [ ],
+      "segmentOf" : {
+        "midRef" : "VPROWON_20011",
+        "type" : "CLIP",
+        "memberOf" : [ {
+          "midRef" : "VPROWON_20009",
+          "urnRef" : "urn:vpro:media:group:100",
+          "type" : "SERIES",
+          "index" : 10,
+          "highlighted" : false,
+          "memberOf" : [ ],
+          "episodeOf" : [ ]
+        } ]
+      }
     } ],
     "ageRating" : "12",
     "contentRatings" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
@@ -826,7 +943,6 @@
     "midRef" : "VPROWON_20001",
     "segmentOf" : {
       "midRef" : "VPROWON_20001",
-      "urnRef" : "urn:vpro:media:program:12",
       "type" : "BROADCAST",
       "memberOf" : [ {
         "midRef" : "VPROWON_20003",
@@ -844,9 +960,51 @@
           "episodeOf" : [ ]
         } ],
         "episodeOf" : [ ]
+      }, {
+        "midRef" : "VPROWON_20005",
+        "urnRef" : "urn:vpro:media:segment:301",
+        "type" : "SEGMENT",
+        "index" : 2,
+        "highlighted" : false,
+        "memberOf" : [ ],
+        "episodeOf" : [ ],
+        "segmentOf" : {
+          "midRef" : "VPROWON_20004",
+          "type" : "CLIP",
+          "memberOf" : [ {
+            "midRef" : "VPROWON_20002",
+            "urnRef" : "urn:vpro:media:group:100",
+            "type" : "SERIES",
+            "index" : 10,
+            "highlighted" : false,
+            "memberOf" : [ ],
+            "episodeOf" : [ ]
+          } ]
+        }
+      }, {
+        "midRef" : "VPROWON_20005",
+        "urnRef" : "urn:vpro:media:segment:301",
+        "type" : "SEGMENT",
+        "index" : 3,
+        "highlighted" : false,
+        "memberOf" : [ ],
+        "episodeOf" : [ ],
+        "segmentOf" : {
+          "midRef" : "VPROWON_20004",
+          "type" : "CLIP",
+          "memberOf" : [ {
+            "midRef" : "VPROWON_20002",
+            "urnRef" : "urn:vpro:media:group:100",
+            "type" : "SERIES",
+            "index" : 10,
+            "highlighted" : false,
+            "memberOf" : [ ],
+            "episodeOf" : [ ]
+          } ]
+        }
       } ],
       "episodeOf" : [ {
-        "midRef" : "VPROWON_30002",
+        "midRef" : "VPROWON_30004",
         "type" : "SEASON",
         "index" : 1,
         "highlighted" : false,
@@ -857,6 +1015,25 @@
           "highlighted" : false,
           "memberOf" : [ ],
           "episodeOf" : [ ]
+        }, {
+          "midRef" : "VPROWON_30003",
+          "type" : "SEGMENT",
+          "index" : 2,
+          "highlighted" : false,
+          "memberOf" : [ ],
+          "episodeOf" : [ ],
+          "segmentOf" : {
+            "midRef" : "VPROWON_30002",
+            "type" : "CLIP",
+            "memberOf" : [ {
+              "midRef" : "VPROWON_30001",
+              "type" : "SERIES",
+              "index" : 10,
+              "highlighted" : false,
+              "memberOf" : [ ],
+              "episodeOf" : [ ]
+            } ]
+          }
         } ],
         "episodeOf" : [ ]
       } ]

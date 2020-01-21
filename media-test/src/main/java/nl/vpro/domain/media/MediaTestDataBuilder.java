@@ -569,15 +569,20 @@ public interface MediaTestDataBuilder<
 
     default T withMemberOf(AtomicLong mids) {
         Group series = group().constrained().withMid(mids).id(100L).type(GroupType.SERIES).build();
-
         Group season = group().constrained().withMid(mids).id(200L).type(GroupType.SEASON).build();
         try {
             season.createMemberOf(series, 1, OwnerType.BROADCASTER);
         } catch (CircularReferenceException e) {
             throw new RuntimeException(e);
         }
+        Program program = program().withMid(mids).id(300L).type(ProgramType.CLIP).memberOf(series, 10).build();
+        Segment segment = segment().withMid(mids).id(301L).parent(program).build();
 
-        return memberOf(season, 1);
+
+        return
+            memberOf(season, 1)
+                .memberOf(segment, 2)
+                .memberOf(segment, 3);
     }
 
 
@@ -955,17 +960,28 @@ public interface MediaTestDataBuilder<
                 .id(seriesId)
                 .withMid(midId)
                 .build();
+
+            Program program = MediaTestDataBuilder.program()
+                .type(ProgramType.CLIP)
+                .withMid(midId)
+                .memberOf(series, 10)
+                .build();
+
+            Segment segment = MediaTestDataBuilder.segment()
+                .withMid(midId)
+                .parent(program)
+                .build();
+
             Group season = MediaTestDataBuilder.group()
                 .constrained()
                 .type(GroupType.SEASON)
                 .id(seasonId)
                 .withMid(midId)
+                .memberOf(series, 1)
+                .memberOf(segment, 2)
                 .build();
-            try {
-                season.createMemberOf(series, 1, OwnerType.BROADCASTER);
-            } catch(CircularReferenceException e) {
-                log.error(e.getMessage());
-            }
+
+
 
             return episodeOf(season, 1);
         }

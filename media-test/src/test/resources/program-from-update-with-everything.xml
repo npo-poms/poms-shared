@@ -74,7 +74,10 @@
         <person gtaaUri="http://data.beeldengeluid.nl/gtaa/149017" role="SUBJECT"/>
     </credits>
     <descendantOf midRef="VPROWON_20003"/>
+    <descendantOf midRef="VPROWON_20005"/>
     <memberOf highlighted="false" midRef="VPROWON_20003" index="1"/>
+    <memberOf highlighted="false" midRef="VPROWON_20005" index="2"/>
+    <memberOf highlighted="false" midRef="VPROWON_20005" index="3"/>
     <ageRating>12</ageRating>
     <contentRating>ANGST</contentRating>
     <contentRating>DRUGS_EN_ALCOHOL</contentRating>
@@ -241,8 +244,11 @@
                 <person gtaaUri="http://data.beeldengeluid.nl/gtaa/149017" role="SUBJECT"/>
             </credits>
             <descendantOf urnRef="urn:vpro:media:program:12" midRef="VPROWON_20001" type="BROADCAST"/>
-            <descendantOf midRef="VPROWON_20008"/>
-            <memberOf highlighted="false" midRef="VPROWON_20008" index="1"/>
+            <descendantOf midRef="VPROWON_20010"/>
+            <descendantOf midRef="VPROWON_20012"/>
+            <memberOf highlighted="false" midRef="VPROWON_20010" index="1"/>
+            <memberOf highlighted="false" midRef="VPROWON_20012" index="2"/>
+            <memberOf highlighted="false" midRef="VPROWON_20012" index="3"/>
             <ageRating>12</ageRating>
             <contentRating>ANGST</contentRating>
             <contentRating>DRUGS_EN_ALCOHOL</contentRating>
@@ -305,8 +311,10 @@
                     <shared:license>PUBLIC_DOMAIN</shared:license>
                 </shared:image>
             </images>
-            <segmentOf midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12" type="BROADCAST">
+            <segmentOf midRef="VPROWON_20001" type="BROADCAST">
                 <memberOf highlighted="false" midRef="VPROWON_20003" index="1"/>
+                <memberOf highlighted="false" midRef="VPROWON_20005" index="2"/>
+                <memberOf highlighted="false" midRef="VPROWON_20005" index="3"/>
             </segmentOf>
             <start>P0DT0H0M0.000S</start>
         </segment>

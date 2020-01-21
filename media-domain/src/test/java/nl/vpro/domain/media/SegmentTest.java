@@ -19,7 +19,7 @@ public class SegmentTest {
 
     @Test
     public void xml() {
-        String xml = "<segment midRef=\"RBX_NTR_2648108\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:program:83538010\" avType=\"AUDIO\" embeddable=\"true\" mid=\"RBX_NTR_4965178\" sortDate=\"2013-11-01T04:36:35.076+01:00\" creationDate=\"2016-11-01T04:36:35.076+01:00\" lastModified=\"2016-11-01T04:36:35.105+01:00\" publishDate=\"2016-11-01T04:42:23.506+01:00\" urn=\"urn:vpro:media:segment:83538015\" workflow=\"PUBLISHED\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><segment xmlns=\"urn:vpro:media:2009\" midRef=\"RBX_NTR_2648108\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:program:83538010\" avType=\"AUDIO\" embeddable=\"true\" mid=\"RBX_NTR_4965178\" sortDate=\"2013-11-01T04:36:35.076+01:00\" workflow=\"PUBLISHED\" creationDate=\"2016-11-01T04:36:35.076+01:00\" lastModified=\"2016-11-01T04:36:35.105+01:00\" publishDate=\"2016-11-01T04:42:23.506+01:00\" urn=\"urn:vpro:media:segment:83538015\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <crid>crid://item.radiobox2/372578</crid>\n" +
             "    <broadcaster id=\"NTR\">NTR</broadcaster>\n" +
             "    <title owner=\"RADIOBOX\" type=\"MAIN\">Monteverdi - Orfeo</title>\n" +
@@ -30,14 +30,14 @@ public class SegmentTest {
             "    <descendantOf urnRef=\"urn:vpro:media:program:83538010\" midRef=\"RBX_NTR_2648108\" type=\"BROADCAST\"/>\n" +
             "    <locations/>\n" +
             "    <images>\n" +
-            "        <shared:image owner=\"RADIOBOX\" type=\"PICTURE\" highlighted=\"false\" creationDate=\"2016-11-01T04:36:34.659+01:00\" lastModified=\"2016-11-01T04:36:35.079+01:00\" urn=\"urn:vpro:media:image:83538017\" workflow=\"PUBLISHED\">\n" +
+            "        <shared:image owner=\"RADIOBOX\" type=\"PICTURE\" highlighted=\"false\" workflow=\"PUBLISHED\" creationDate=\"2016-11-01T04:36:34.659+01:00\" lastModified=\"2016-11-01T04:36:35.079+01:00\" urn=\"urn:vpro:media:image:83538017\">\n" +
             "            <shared:title>Orfeo ed Euridice</shared:title>\n" +
             "            <shared:imageUri>urn:vpro:image:780595</shared:imageUri>\n" +
             "            <shared:height>568</shared:height>\n" +
             "            <shared:width>480</shared:width>\n" +
             "        </shared:image>\n" +
             "    </images>\n" +
-            "    <segmentOf midRef=\"RBX_NTR_2648108\" urnRef=\"urn:vpro:media:program:83538010\" type=\"CLIP\"/>\n" +
+            "    <segmentOf midRef=\"RBX_NTR_2648108\" type=\"CLIP\"/>\n" +
             "    <start>P0DT0H0M0.000S</start>\n" +
             "</segment>";
         Segment segment = JAXBTestUtil.unmarshal(xml,  Segment.class);

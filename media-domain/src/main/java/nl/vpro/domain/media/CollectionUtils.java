@@ -2,6 +2,8 @@ package nl.vpro.domain.media;
 
 import java.util.*;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * Some static methods used in this package that are related to dealing with collections
  * @author Michiel Meeuwissen
@@ -49,7 +51,7 @@ class CollectionUtils {
                 for (T v : values) {
                     for (T toUpdateValue : toUpdate) {
                         if (toUpdateValue instanceof Updatable && toUpdateValue.equals(v)) {
-                            ((Updatable) toUpdateValue).update(v);
+                            ((Updatable<T>) toUpdateValue).update(v);
                         }
                     }
                 }
@@ -69,17 +71,17 @@ class CollectionUtils {
 
     public static <P extends Comparable<P>> SortedSet<P> createIfNull(SortedSet<P> set) {
         if(set == null) {
-            set = new TreeSet<P>();
+            set = new TreeSet<>();
         }
         return set;
     }
 
-    public static <P extends Comparable<P>> SortedSet<P> createIfNullUnlessNull(SortedSet<P> set, Object check) {
+    public static <P extends Comparable<P>> SortedSet<P> createIfNullUnlessNull(@Nullable  SortedSet<P> set, @Nullable  Object check) {
         if (check == null) {
             return null;
         } else {
             if (set == null) {
-                set = new TreeSet<P>();
+                set = new TreeSet<>();
             }
             return set;
         }
