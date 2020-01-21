@@ -12,6 +12,13 @@ import nl.vpro.nep.domain.NEPItemizeResponse;
  */
 public interface NEPItemizeService {
 
+    /**
+     * NEP provides one service for two basicly different things.
+     *
+     * This itemizes a media with a certain MID
+     * @since 5.10
+     */
+
     NEPItemizeResponse itemize(String mid, Duration start, Duration stop, Integer max_bitrate);
 
     /**
@@ -23,6 +30,12 @@ public interface NEPItemizeService {
     void grabScreen(String mid, Duration offset, OutputStream outputStream);
 
 
+    /**
+     * NEP provides one service for two basicly different things.
+     *
+     * This itemizes a piece of a live stream
+     * @since 5.10
+     */
     NEPItemizeResponse itemize(String channel, Instant start, Instant stop, Integer max_bitrate);
 
 
