@@ -520,6 +520,16 @@ public interface MediaBackendRestService {
         ItemizeRequest itemizeRequest
     );
 
+    /**
+     * @since 5.12
+     */
+    @GET
+    @Path("transcodingstatus/{id:.*")
+    TranscodeStatus getTranscodeStatus(
+        @Encoded @PathParam("id") final String id
+    );
+
+
 }
 
 
