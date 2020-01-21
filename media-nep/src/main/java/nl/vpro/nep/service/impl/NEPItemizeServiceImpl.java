@@ -9,8 +9,7 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.time.Instant;
+import java.time.*;
 import java.util.Properties;
 import java.util.function.Supplier;
 
@@ -19,6 +18,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -48,25 +48,40 @@ import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
 @Named("NEPItemizeService")
 @Slf4j
 public class NEPItemizeServiceImpl implements NEPItemizeService {
-    private final Supplier<String> itemizeKey;
-    private final String itemizeUrl;
 
     static final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(StandardCharsets.UTF_8);
+
+    private final Supplier<String> itemizeLiveKey;
+    private final String itemizeLiveUrl;
+
+
+    private final Supplier<String> itemizeMidKey;
+    private final String itemizeMidUrl;
 
     CloseableHttpClient httpClient = HttpClients.custom()
             .build();
 
-
     @Inject
     public NEPItemizeServiceImpl(
-        @Value("${nep.itemizer-api.baseUrl}") @NonNull String itemizeUrl,
-        @Named("NEPItemizeServiceAuthenticator") @NonNull Supplier<String> itemizeKey) {
-        this.itemizeKey = itemizeKey;
-        this.itemizeUrl = itemizeUrl;
+        @Value("${nep.itemizer-api.live.baseUrl}") @NonNull String itemizeLiveUrl,
+        @Value("${nep.itemizer-api.live.key}") @NonNull String itemizeLiveKey,
+        @Value("${nep.itemizer-api.mid.baseUrl}") @NonNull String itemizeMidUrl,
+        @Value("${nep.itemizer-api.mid.key}") @NonNull String itemizeMidKey
+
+        ) {
+        this.itemizeLiveKey = new NEPItemizerV1Authenticator(itemizeLiveKey);
+        this.itemizeLiveUrl = itemizeLiveUrl;
+        this.itemizeMidKey = new NEPItemizerV1Authenticator(itemizeMidKey);
+        this.itemizeMidUrl = itemizeMidUrl;
     }
 
     protected NEPItemizeServiceImpl(Properties properties) {
-        this(properties.getProperty("nep.itemizer-api.baseUrl"), () -> properties.getProperty("nep.itemizer-api.key"));
+        this(
+            properties.getProperty("nep.itemizer-api.baseUrl"),
+            properties.getProperty("nep.itemizer-api.key"),
+            properties.getProperty("nep.itemizer-api.baseUrl"),
+            properties.getProperty("nep.itemizer-api.key")
+        );
     }
 
 
@@ -78,14 +93,14 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     @SneakyThrows
-    protected NEPItemizeResponse itemize(@NonNull  NEPItemizeRequest request) {
+    protected NEPItemizeResponse itemize(@NonNull NEPItemizeRequest request, String itemizeUrl, Supplier<String> itemizeKey) {
         String playerUrl = itemizeUrl + "/api/itemizer/job";
         log.info("Itemizing {} @ {}", request, playerUrl);
         HttpClientContext clientContext = HttpClientContext.create();
         String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
         StringEntity entity = new StringEntity(json, JSON);
         HttpPost httpPost = new HttpPost(playerUrl);
-        authenticate(httpPost);
+        authenticate(httpPost, itemizeKey);
         httpPost.addHeader(new BasicHeader(HttpHeaders.ACCEPT, JSON.toString()));
         log.debug("curl -XPOST -H'Content-Type: application/json' -H'Authorization: {}' -H'Accept: {}' {} --data '{}'", itemizeKey, JSON.toString(), itemizeUrl, json);
         httpPost.setEntity(entity);
@@ -102,34 +117,37 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     @Override
-    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant end, Integer max_bitrate) {
+    public NEPItemizeResponse itemize(String channel, Instant start, Instant end, Integer max_bitrate) {
         return itemize(
             NEPItemizeRequest.builder()
                 .identifier(channel)
                 .starttime(NEPItemizeRequest.fromInstant(start).orElseThrow(IllegalArgumentException::new))
                 .endtime(NEPItemizeRequest.fromInstant(end).orElseThrow(IllegalArgumentException::new))
                 .max_bitrate(max_bitrate)
-                .build()
+                .build(),
+            itemizeLiveUrl,
+            itemizeLiveKey
         );
     }
 
     @Override
-    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration end, Integer max_bitrate) {
+    public NEPItemizeResponse itemize(String mid, Duration start, Duration end, Integer max_bitrate) {
         return itemize(
             NEPItemizeRequest.builder()
                 .starttime(NEPItemizeRequest.fromDuration(start, Duration.ZERO))
                 .endtime(NEPItemizeRequest.fromDuration(end).orElseThrow(IllegalArgumentException::new))
-                .identifier(mid).max_bitrate(max_bitrate).build()
+                .identifier(mid).max_bitrate(max_bitrate).build(),
+            itemizeMidUrl,
+            itemizeMidKey
         );
     }
 
-    @Override
     @SneakyThrows
-    public void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull  OutputStream outputStream) {
+    protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull  OutputStream outputStream, String itemizeUrl, Supplier<String> key) {
         HttpClientContext clientContext = HttpClientContext.create();
         String framegrabber = itemizeUrl + "/api/framegrabber?identifier=" + identifier + "&time=" + time;
         HttpGet get = new HttpGet(framegrabber);
-        authenticate(get);
+        authenticate(get, key);
         get.addHeader(new BasicHeader(HttpHeaders.ACCEPT, APPLICATION_OCTET_STREAM.toString()));
         log.info("Getting {}", framegrabber);
         try (CloseableHttpResponse execute = httpClient.execute(get, clientContext)) {
@@ -143,16 +161,27 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         }
     }
 
+    @Override
+    public void grabScreen(String mid, Duration offset, OutputStream outputStream) {
+        String durationString = DurationFormatUtils.formatDuration(offset.toMillis(), "HH:mm:ss.SSS", true);
+        grabScreen(mid, durationString, outputStream, itemizeMidUrl, itemizeMidKey);
+    }
+
+    @Override
+    public void grabScreen(String channel, Instant instant, OutputStream outputStream) {
+        grabScreen(channel, instant.atZone(ZoneId.of("UTC")).toLocalDateTime().toString(), outputStream, itemizeLiveUrl, itemizeLiveKey);
+    }
 
 
-    private void authenticate(HttpUriRequest request) {
-        request.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, itemizeKey.get()));
+
+    private void authenticate(HttpUriRequest request, Supplier<String> key) {
+        request.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, key.get()));
 
 
     }
 
     @Override
     public String toString() {
-        return itemizeUrl;
+        return itemizeLiveUrl;
     }
 }

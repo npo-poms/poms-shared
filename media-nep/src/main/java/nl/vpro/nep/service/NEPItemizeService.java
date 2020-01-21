@@ -1,9 +1,8 @@
 package nl.vpro.nep.service;
 
 import java.io.OutputStream;
-import java.time.*;
-
-import org.apache.commons.lang3.time.DurationFormatUtils;
+import java.time.Duration;
+import java.time.Instant;
 
 import nl.vpro.nep.domain.NEPItemizeResponse;
 
@@ -13,10 +12,7 @@ import nl.vpro.nep.domain.NEPItemizeResponse;
  */
 public interface NEPItemizeService {
 
-    NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate);
-
-    NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate);
-
+    NEPItemizeResponse itemize(String mid, Duration start, Duration stop, Integer max_bitrate);
 
     /**
      * NEP provides one service for two basicly different things.
@@ -24,10 +20,11 @@ public interface NEPItemizeService {
      * This grabs a frame from a MID, on a certain offset
      * @since 5.10
      */
-    default void grabScreen(String mid, Duration offset, OutputStream outputStream) {
-        String durationString = DurationFormatUtils.formatDuration(offset.toMillis(), "HH:mm:ss.SSS", true);
-        grabScreen(mid, durationString, outputStream);
-    }
+    void grabScreen(String mid, Duration offset, OutputStream outputStream);
+
+
+    NEPItemizeResponse itemize(String channel, Instant start, Instant stop, Integer max_bitrate);
+
 
     /**
      * NEP provides one service for two basicly different things.
@@ -35,14 +32,6 @@ public interface NEPItemizeService {
      * This grabs a frame from a live stream, on a certain instant in time
      * @since 5.10
      */
-    default void grabScreen(String channel, Instant instant, OutputStream outputStream) {
-        grabScreen(channel, instant.atZone(ZoneId.of("UTC")).toLocalDateTime().toString(), outputStream);
-    }
-
-    /**
-     * Please use either {@link #grabScreen(String, Duration, OutputStream)} or {@link #grabScreen(String, Instant, OutputStream)}
-     * @since 5.10
-     */
-    void grabScreen(String identifier, String time, OutputStream outputStream);
+    void grabScreen(String channel, Instant instant, OutputStream outputStream);
 
 }
