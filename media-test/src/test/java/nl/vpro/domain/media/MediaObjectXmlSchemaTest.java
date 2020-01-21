@@ -6,43 +6,27 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.io.*;
+import java.time.*;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import javax.xml.bind.*;
 import javax.xml.bind.util.JAXBSource;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
+import javax.xml.validation.*;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
-import nl.vpro.domain.media.support.MediaObjectOwnableLists;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
@@ -438,31 +422,33 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testMemberOfAndDescendantOfGraph() {
-        String expected = "<program xmlns=\"urn:vpro:media:2009\" embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <credits/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:segment:301\" midRef=\"VPROWON_12351\" type=\"SEGMENT\"/>\n" +
-            "    <memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\">\n" +
-            "        <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
-            "    </memberOf>\n" +
-            "    <memberOf highlighted=\"false\" midRef=\"VPROWON_12351\" index=\"2\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
-            "        <segmentOf midRef=\"VPROWON_12350\" urnRef=\"urn:vpro:media:program:300\" type=\"CLIP\">\n" +
-            "            <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
-            "        </segmentOf>\n" +
-            "    </memberOf>\n" +
-            "    <memberOf highlighted=\"false\" midRef=\"VPROWON_12351\" index=\"3\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
-            "        <segmentOf midRef=\"VPROWON_12350\" urnRef=\"urn:vpro:media:program:300\" type=\"CLIP\">\n" +
-            "            <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
-            "        </segmentOf>\n" +
-            "    </memberOf>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <segments/>\n" +
-            "</program>";
+        AtomicLong id = new AtomicLong(100L);
+        String expected =
+            "<program xmlns=\"urn:vpro:media:2009\" embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+                "    <credits/>\n" +
+                "    <descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/>\n" +
+                "    <descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/>\n" +
+                "    <descendantOf urnRef=\"urn:vpro:media:segment:301\" midRef=\"VPROWON_104\" type=\"SEGMENT\"/>\n" +
+                "    <memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\">\n" +
+                "        <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
+                "    </memberOf>\n" +
+                "    <memberOf highlighted=\"false\" midRef=\"VPROWON_104\" index=\"2\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
+                "        <segmentOf midRef=\"VPROWON_103\" type=\"CLIP\">\n" +
+                "            <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
+                "        </segmentOf>\n" +
+                "    </memberOf>\n" +
+                "    <memberOf highlighted=\"false\" midRef=\"VPROWON_104\" index=\"3\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
+                "        <segmentOf midRef=\"VPROWON_103\" type=\"CLIP\">\n" +
+                "            <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
+                "        </segmentOf>\n" +
+                "    </memberOf>\n" +
+                "    <locations/>\n" +
+                "    <images/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <segments/>\n" +
+                "</program>";
 
-        Program program = program().lean().withMemberOf().build();
+        Program program = program().lean().withMemberOf(id).build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
         program.getMemberOf().first().getGroup().setMid(null);
         program.getMemberOf().first().getGroup().setMid("AVRO_7777777");
@@ -475,19 +461,36 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testEpisodeOfAndDescendantOfGraph() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:102\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><locations/><images/><scheduleEvents/><episodeOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:102\"><memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:101\"/></episodeOf><segments/></program>";
+    public void testEpisodeOfAndDescendantOfGraph() {
 
-        Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
-        program.getEpisodeOf().first().setAdded(Instant.EPOCH);
+        AtomicLong id = new AtomicLong(100);
+        String expected = "<program xmlns=\"urn:vpro:media:2009\" type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <credits/>\n" +
+            "    <descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"AVRO_5555555\" type=\"SERIES\"/>\n" +
+            "    <descendantOf urnRef=\"urn:vpro:media:group:102\" midRef=\"AVRO_7777777\" type=\"SEASON\"/>\n" +
+            "    <descendantOf midRef=\"VPROWON_106\" type=\"SEGMENT\"/>\n" +
+            "    <locations/>\n" +
+            "    <images/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <episodeOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:102\">\n" +
+            "        <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:101\"/>\n" +
+            "        <memberOf highlighted=\"false\" midRef=\"VPROWON_106\" index=\"2\" type=\"SEGMENT\">\n" +
+            "            <segmentOf midRef=\"VPROWON_105\" type=\"CLIP\">\n" +
+            "                <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:101\"/>\n" +
+            "            </segmentOf>\n" +
+            "        </memberOf>\n" +
+            "    </episodeOf>\n" +
+            "    <segments/>\n" +
+            "</program>";
+
+        Program program = program().id(id.getAndIncrement()).lean().type(ProgramType.BROADCAST).withEpisodeOf(id.getAndIncrement(), id.getAndIncrement(), id).build();program.getEpisodeOf().first().setAdded(Instant.EPOCH);
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
         program.getEpisodeOf().first().getGroup().setMid(null);
         program.getEpisodeOf().first().getGroup().setMid("AVRO_7777777");
         program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
         program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
-        String actual = toXml(program);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThatXml(program).isSimilarTo(expected);
     }
 
     @Test

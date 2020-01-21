@@ -960,17 +960,28 @@ public interface MediaTestDataBuilder<
                 .id(seriesId)
                 .withMid(midId)
                 .build();
+
+            Program program = MediaTestDataBuilder.program()
+                .type(ProgramType.CLIP)
+                .withMid(midId)
+                .memberOf(series, 10)
+                .build();
+
+            Segment segment = MediaTestDataBuilder.segment()
+                .withMid(midId)
+                .parent(program)
+                .build();
+
             Group season = MediaTestDataBuilder.group()
                 .constrained()
                 .type(GroupType.SEASON)
                 .id(seasonId)
                 .withMid(midId)
+                .memberOf(series, 1)
+                .memberOf(segment, 2)
                 .build();
-            try {
-                season.createMemberOf(series, 1, OwnerType.BROADCASTER);
-            } catch(CircularReferenceException e) {
-                log.error(e.getMessage());
-            }
+
+
 
             return episodeOf(season, 1);
         }
