@@ -11,6 +11,7 @@ import java.io.*;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -353,7 +354,7 @@ public class MediaObjectJsonSchemaTest {
             "    \"urnRef\" : \"urn:vpro:media:group:200\",\n" +
             "    \"type\" : \"SEASON\"\n" +
             "  }, {\n" +
-            "    \"midRef\" : \"VPROWON_12359\",\n" +
+            "    \"midRef\" : \"VPROWON_110\",\n" +
             "    \"urnRef\" : \"urn:vpro:media:segment:301\",\n" +
             "    \"type\" : \"SEGMENT\"\n" +
             "  } ],\n" +
@@ -375,7 +376,7 @@ public class MediaObjectJsonSchemaTest {
             "    \"episodeOf\" : [ ],\n" +
             "    \"added\" : 0\n" +
             "  }, {\n" +
-            "    \"midRef\" : \"VPROWON_12359\",\n" +
+            "    \"midRef\" : \"VPROWON_110\",\n" +
             "    \"urnRef\" : \"urn:vpro:media:segment:301\",\n" +
             "    \"type\" : \"SEGMENT\",\n" +
             "    \"index\" : 2,\n" +
@@ -383,7 +384,7 @@ public class MediaObjectJsonSchemaTest {
             "    \"memberOf\" : [ ],\n" +
             "    \"episodeOf\" : [ ],\n" +
             "    \"segmentOf\" : {\n" +
-            "      \"midRef\" : \"VPROWON_12358\",\n" +
+            "      \"midRef\" : \"VPROWON_109\",\n" +
             "      \"type\" : \"CLIP\",\n" +
             "      \"memberOf\" : [ {\n" +
             "        \"midRef\" : \"AVRO_5555555\",\n" +
@@ -396,7 +397,7 @@ public class MediaObjectJsonSchemaTest {
             "      } ]\n" +
             "    }\n" +
             "  }, {\n" +
-            "    \"midRef\" : \"VPROWON_12359\",\n" +
+            "    \"midRef\" : \"VPROWON_110\",\n" +
             "    \"urnRef\" : \"urn:vpro:media:segment:301\",\n" +
             "    \"type\" : \"SEGMENT\",\n" +
             "    \"index\" : 3,\n" +
@@ -404,7 +405,7 @@ public class MediaObjectJsonSchemaTest {
             "    \"memberOf\" : [ ],\n" +
             "    \"episodeOf\" : [ ],\n" +
             "    \"segmentOf\" : {\n" +
-            "      \"midRef\" : \"VPROWON_12358\",\n" +
+            "      \"midRef\" : \"VPROWON_109\",\n" +
             "      \"type\" : \"CLIP\",\n" +
             "      \"memberOf\" : [ {\n" +
             "        \"midRef\" : \"AVRO_5555555\",\n" +
@@ -419,7 +420,7 @@ public class MediaObjectJsonSchemaTest {
             "  } ]\n" +
             "}";
 
-        Program program = program().lean().withMemberOf().build();
+        Program program = program().lean().withMemberOf(new AtomicLong(106)).build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
         program.getMemberOf().first().getGroup().setMid(null);
         program.getMemberOf().first().getGroup().setMid("AVRO_7777777");
@@ -454,14 +455,14 @@ public class MediaObjectJsonSchemaTest {
             "      \"memberOf\" : [ ],\n" +
             "      \"episodeOf\" : [ ]\n" +
             "    }, {\n" +
-            "      \"midRef\" : \"VPROWON_12349\",\n" +
+            "      \"midRef\" : \"VPROWON_106\",\n" +
             "      \"type\" : \"SEGMENT\",\n" +
             "      \"index\" : 2,\n" +
             "      \"highlighted\" : false,\n" +
             "      \"memberOf\" : [ ],\n" +
             "      \"episodeOf\" : [ ],\n" +
             "      \"segmentOf\" : {\n" +
-            "        \"midRef\" : \"VPROWON_12348\",\n" +
+            "        \"midRef\" : \"VPROWON_105\",\n" +
             "        \"type\" : \"CLIP\",\n" +
             "        \"memberOf\" : [ {\n" +
             "          \"midRef\" : \"AVRO_5555555\",\n" +
@@ -490,12 +491,12 @@ public class MediaObjectJsonSchemaTest {
             "    \"urnRef\" : \"urn:vpro:media:group:102\",\n" +
             "    \"type\" : \"SEASON\"\n" +
             "  }, {\n" +
-            "    \"midRef\" : \"VPROWON_12349\",\n" +
+            "    \"midRef\" : \"VPROWON_106\",\n" +
             "    \"type\" : \"SEGMENT\"\n" +
             "  } ]\n" +
             "}";
 
-        Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
+        Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L, new AtomicLong(103)).build();
         program.getEpisodeOf().first().setAdded(Instant.EPOCH);
         program.getEpisodeOf().first().getGroup().setMid(null);
         program.getEpisodeOf().first().getGroup().setMid("AVRO_7777777");
