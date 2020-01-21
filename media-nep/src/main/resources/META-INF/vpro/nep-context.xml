@@ -11,7 +11,18 @@
  <context:annotation-config/>
  <context:component-scan base-package="nl.vpro.nep.service.impl"/>
 
- <bean id="NEPSAMAuthenticator" class="nl.vpro.nep.service.impl.NEPSAMAuthenticator" />
+ <bean id="NEPSAMAuthenticatorLive" class="nl.vpro.nep.service.impl.NEPSAMAuthenticator">
+  <constructor-arg value="${nep.sam-api.live.username}" />
+  <constructor-arg value="${nep.sam-api.live.password}" />
+  <constructor-arg value="${nep.sam-api.live.baseUrl}" />
+ </bean>
+
+
+ <bean id="NEPSAMAuthenticatorMid" class="nl.vpro.nep.service.impl.NEPSAMAuthenticator">
+  <constructor-arg value="${nep.sam-api.mid.username}" />
+  <constructor-arg value="${nep.sam-api.mid.password}" />
+  <constructor-arg value="${nep.sam-api.mid.baseUrl}" />
+ </bean>
 
 
 </beans>

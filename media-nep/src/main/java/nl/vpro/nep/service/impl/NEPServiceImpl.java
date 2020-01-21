@@ -16,7 +16,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.domain.*;
 import nl.vpro.nep.domain.workflow.*;
-import nl.vpro.nep.sam.model.StreamAccessItem;
 import nl.vpro.nep.service.*;
 import nl.vpro.util.FileMetadata;
 
@@ -54,7 +53,6 @@ public class NEPServiceImpl implements NEPService {
     @Override
     public NEPItemizeResponse itemize(String channel, Instant start, Instant stop, Integer max_bitrate) {
         return itemizeService.get().itemize(channel, start, stop, max_bitrate);
-
     }
 
     @Override
@@ -117,8 +115,13 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public String streamAccess(String streamId, boolean drm, StreamAccessItem streamUrlRequest) {
-        return samService.get().streamAccess(streamId, drm, streamUrlRequest);
+    public String streamAccessLive(String channel, String ip, Duration duration) {
+        return samService.get().streamAccessLive(channel, ip, duration);
+    }
+
+    @Override
+    public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) {
+        return samService.get().streamAccessMid(mid, drm, ip, duration);
     }
 
     @Override
