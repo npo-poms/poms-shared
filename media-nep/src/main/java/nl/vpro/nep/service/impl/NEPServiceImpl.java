@@ -58,14 +58,19 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
+    public void grabScreen(String channel, Instant instant, OutputStream outputStream) {
+        itemizeService.get().grabScreen(channel, instant, outputStream);
+    }
+
+    @Override
     public NEPItemizeResponse itemize(String mid, Duration start, Duration stop, Integer max_bitrate) {
         return itemizeService.get().itemize(mid, start, stop, max_bitrate);
 
     }
 
     @Override
-    public void grabScreen(String identifier, String date, OutputStream outputStream) {
-        itemizeService.get().grabScreen(identifier, date, outputStream);
+    public void grabScreen(String mid, Duration offset, OutputStream outputStream) {
+        itemizeService.get().grabScreen(mid, offset, outputStream);
     }
 
     @NonNull
