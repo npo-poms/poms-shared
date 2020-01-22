@@ -235,6 +235,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     Short releaseYear;
 
+    @NotNull(groups = {WarningValidatorGroup.class })
     AgeRating ageRating;
 
     List<ContentRating> contentRatings;
@@ -426,9 +427,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
                     Default.class, PomsValidatorGroup.class
                 };
             }
+            mediaObjectToValidate = null;
             Set<? extends ConstraintViolation<MediaUpdate<M>>> result = VALIDATOR.validate(this, groups);
             if (result.isEmpty()) {
-                fetch(OwnerType.BROADCASTER);
                 mediaObjectToValidate = fetch(OwnerType.BROADCASTER);
                 try {
                     result = VALIDATOR.validate(this, groups);
@@ -1144,7 +1145,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
     @XmlElement
-    @NotNull(groups = {WarningValidatorGroup.class })
     public AgeRating getAgeRating() {
         return ageRating;
     }
