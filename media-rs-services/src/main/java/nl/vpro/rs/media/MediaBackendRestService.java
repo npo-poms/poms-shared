@@ -45,6 +45,9 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
 @Consumes({MediaType.APPLICATION_XML, MultipartConstants.MULTIPART_RELATED})
 @Produces(MediaType.APPLICATION_XML)
 public interface MediaBackendRestService {
+
+    String VALIDATION_WARNING_HEADER = "X-NPO-validation-warning";
+
     String ENTITY = "entity";
     String FOLLOW = "followMerges";
     String ERRORS = "errors";
