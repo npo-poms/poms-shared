@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.*;
@@ -60,7 +59,6 @@ import nl.vpro.util.*;
  *  http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/v2/api-docs
  */
 @Slf4j
-@Named("NEPGatekeeperService")
 public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     public static final HALMapper MAPPER = new HALMapper();

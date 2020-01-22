@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 
-import static org.junit.Assert.*;
-
 /**
  * @author Michiel Meeuwissen
  * @since ...
@@ -20,7 +18,7 @@ public class NEPGatekeeperServiceImplITest {
 
        @Test
        public void testGet() {
-           WorkflowExecution transcodeStatus = gatekeeperService.getTranscodeStatus("d2263e54-158d-4e8c-958c-b38885bd3fb8").get();
+           WorkflowExecution transcodeStatus = gatekeeperService.getTranscodeStatus("544c3368-519d-425e-be1f-d2940697d7b4").get();
            log.info("{}", transcodeStatus);
        }
 
