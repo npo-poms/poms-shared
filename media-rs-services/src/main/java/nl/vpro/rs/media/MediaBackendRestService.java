@@ -66,7 +66,7 @@ public interface MediaBackendRestService {
 
 
     String VALIDATE_INPUT = "validateInput";
-    String FOLLOW_DESCRIPTION = "validateInput";
+    String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitely followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated against the XSD first";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously";
     String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRID's in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed. ";
