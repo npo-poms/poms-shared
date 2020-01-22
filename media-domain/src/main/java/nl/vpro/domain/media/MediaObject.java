@@ -979,7 +979,11 @@ public abstract class MediaObject
     }
 
     /**
-     * Experimental. For NPA-403, to provide to ES the needed mapping.
+     * For NPA-403, to provide to ES the needed mapping.
+     *
+     * The result can be calculated from other fields, so this is not available in XML, nor in the default json view.
+     *
+     * Only in the {@link Views.Publisher} version of the json.
      */
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
