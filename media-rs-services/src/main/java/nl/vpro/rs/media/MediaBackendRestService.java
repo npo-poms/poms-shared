@@ -47,6 +47,7 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
 public interface MediaBackendRestService {
 
     String VALIDATION_WARNING_HEADER = "X-NPO-validation-warning";
+    String VALIDATION_ERROR_HEADER = "X-NPO-validation-error";
 
     String ENTITY = "entity";
     String FOLLOW = "followMerges";

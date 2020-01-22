@@ -85,14 +85,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     static {
         Validator validator;
+        Locale defaultLocale = Locale.getDefault();
         try {
-            Locale defaultLocale = Locale.getDefault();
             Locale.setDefault(Locale.US);
             ValidatorFactory factory = Validation
                 .buildDefaultValidatorFactory();
             validator = factory.getValidator();
-            Locale.setDefault(defaultLocale);
-
         } catch (ValidationException ve) {
             log.info(ve.getClass().getName() + " " + ve.getMessage());
             validator = null;
@@ -102,6 +100,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
             log.warn(e.getClass().getName() + " " + e.getMessage());
             log.info("javax.validation will be disabled");
             validator = null;
+        } finally {
+            Locale.setDefault(defaultLocale);
         }
         VALIDATOR = validator;
     }
@@ -390,6 +390,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     public String violationMessage() {
         Set<? extends ConstraintViolation<? extends MediaUpdate<M>>> violations = violations();
+        return violationMessage(violations);
+    }
+
+    public static <N extends MediaObject> String violationMessage(Set<? extends ConstraintViolation<? extends MediaUpdate<N>>> violations) {
         if(violations.isEmpty()) {
             return null;
         }
