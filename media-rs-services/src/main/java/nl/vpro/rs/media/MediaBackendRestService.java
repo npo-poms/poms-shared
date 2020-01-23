@@ -46,9 +46,11 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
 @Produces(MediaType.APPLICATION_XML)
 public interface MediaBackendRestService {
 
-    String VALIDATION_WARNING_HEADER = "X-NPO-validation-warning";
-    String VALIDATION_ERROR_HEADER = "X-NPO-validation-error";
+    String HEADER_PREFIX = "X-NPO-";
+    String VALIDATION_WARNING_HEADER = HEADER_PREFIX + "validation-warning";
+    String VALIDATION_ERROR_HEADER = HEADER_PREFIX + "validation-error";
 
+    // some common query and path parameters
     String ENTITY = "entity";
     String FOLLOW = "followMerges";
     String ERRORS = "errors";
@@ -61,29 +63,24 @@ public interface MediaBackendRestService {
     String TYPE = "type";
     String LOOKUP_CRID = "lookupcrid";
     String STEAL_CRIDS = "stealcrids";
-
     String IMAGE_METADATA = "imageMetadata";
     String OWNER = "owner";
-
-
     String VALIDATE_INPUT = "validateInput";
-    String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitely followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
-    String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated against the XSD first";
-    String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously";
-    String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRID's in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed. ";
 
+    // some descriptions for common query and path parameters
+    String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitely followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
+    String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated duration parsing, against the XSD. If this is false, your input will still be validated, but using so called java bean validation only. This will give no line and column number information, but is otherwise be more complete.";
+    String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously. These errors may relate to authorization, or to database related problems.";
+    String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRID's in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed. ";
     String STEAL_CRIDS_DESCRIPTION = "When set to true, and you submit an object with both crid and mid (or you used lookupcrid=false, and generate a mid), and the crid existed already for a different mid, then this crid will be (if allowed) removed from the old object ";
     String IMAGE_METADATA_DESCRIPTION = "When set to true, the image backend server will try to fill in missing image metata automaticly, using several external API's";
     String OWNER_DESCRIPTION = "if your account has sufficient right, you may get and post with a differrent owner type than BROADCASTER";
 
-
-
-
+    // related to transcoding
     String ENCRYPTION = "encryption";
     String PRIORITY   = "priority";
     String LOG        = "log";
     String FILE_NAME = "fileName";
-
 
     @POST
     @Path("find")
@@ -102,7 +99,6 @@ public interface MediaBackendRestService {
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     ) throws IOException;
 
-
     @GET
     @Path("/exists/{mid:.*}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -111,7 +107,6 @@ public interface MediaBackendRestService {
         @Context HttpServletRequest request,
         @Context HttpServletResponse response
     );
-
 
     @DELETE
     @Path("{entity:(media|program|group|segment)}/{id:.*}")
@@ -192,7 +187,6 @@ public interface MediaBackendRestService {
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     );
 
-
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}/images")
     XmlCollection<ImageUpdate> getImages(
@@ -202,7 +196,6 @@ public interface MediaBackendRestService {
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
 
     ) throws IOException;
-
 
     @GET
     @Path("{entity:(media|program|group|segment)}/{id}/members")
@@ -258,7 +251,6 @@ public interface MediaBackendRestService {
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     ) throws IOException;
 
-
     @DELETE
     @Path("{entity:(media|program|group|segment)}/{id:.*}/memberOf/{owner:.*}")
     @Produces(MediaType.WILDCARD)
@@ -271,7 +263,6 @@ public interface MediaBackendRestService {
         @QueryParam(ERRORS) String errors
     ) throws IOException;
 
-
     @GET
     @Path("group/{id:.*}/episodes")
     MediaUpdateList<MemberUpdate> getGroupEpisodes(
@@ -282,7 +273,6 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     ) throws IOException;
-
 
     @GET
     @Path("group/{id:.*}/episodes/full")
@@ -323,7 +313,6 @@ public interface MediaBackendRestService {
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     ) throws IOException;
 
-
     @DELETE
     @Path("program/{id:.*}/episodeOf/{owner}")
     @Produces(MediaType.WILDCARD)
@@ -335,7 +324,6 @@ public interface MediaBackendRestService {
         @QueryParam(ERRORS) String errors
     ) throws IOException;
 
-
     @DELETE
     @Path("program/{id:.*}/segment/{segmentId}")
     @Produces(MediaType.WILDCARD)
@@ -346,7 +334,6 @@ public interface MediaBackendRestService {
         @QueryParam(ERRORS) String errors
     ) throws IOException;
 
-
     @GET
     @Path("subtitles/{mid:.*}/{language}/{type}")
     @Produces({VTT, TT888, SRT, APPLICATION_XML})
@@ -356,7 +343,6 @@ public interface MediaBackendRestService {
         @PathParam(TYPE) SubtitlesType type,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     );
-
 
     @GET
     @Path("subtitles/{mid:.*}/{language}/{type}/{seq}")
@@ -497,14 +483,12 @@ public interface MediaBackendRestService {
         @QueryParam(ERRORS) String errors,
         @Context HttpServletResponse response) throws IOException;
 
-
     @GET
     @Path("{entity:(media|program|segment)}/{mid:.*}/transcodingstatus")
     XmlCollection<TranscodeStatus> getTranscodeStatus(
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(MID) final String mid
     );
-
 
     @GET
     @Path("transcodingstatuses")
@@ -513,7 +497,6 @@ public interface MediaBackendRestService {
         @QueryParam("status") @DefaultValue("RUNNING") final TranscodeStatus.Status status,
         @QueryParam(MAX) @DefaultValue("20") final Integer max
     );
-
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{mid:.*}/itemize")
@@ -528,12 +511,10 @@ public interface MediaBackendRestService {
      * @since 5.12
      */
     @GET
-    @Path("transcodingstatus/{id:.*")
+    @Path("transcodingstatus/{id:.*}")
     TranscodeStatus getTranscodeStatus(
         @Encoded @PathParam("id") final String id
     );
-
-
 }
 
 
