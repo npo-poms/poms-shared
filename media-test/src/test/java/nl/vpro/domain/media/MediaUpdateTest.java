@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+import javax.validation.ConstraintViolation;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXB;
 import javax.xml.transform.stream.StreamSource;
@@ -153,6 +154,15 @@ public class MediaUpdateTest {
 
         assertThat(update.getIntentions()).containsExactly(IntentionType.INFORM_INDEPTH);
 
+    }
 
+    @Test
+    public void testWithWarning() {
+        ProgramUpdate update = ProgramUpdate.create(
+            MediaBuilder.program().build()
+        );
+        for (ConstraintViolation<?> v : update.warningViolations()) {
+            log.info("{}: {}", v.getPropertyPath(), v.getMessage());
+        }
     }
 }
