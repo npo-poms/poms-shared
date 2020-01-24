@@ -273,6 +273,6 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     @Override
     public String toString() {
-        return NEPGatekeeperServiceImpl.class.getName() + " " + userName + "@" + getWorkflowsEndPoint();
+        return getClass().getSimpleName() + ":" + userName + "@" + getWorkflowsEndPoint();
     }
 }

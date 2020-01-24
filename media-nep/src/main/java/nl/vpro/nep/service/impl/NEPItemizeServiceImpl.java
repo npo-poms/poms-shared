@@ -184,6 +184,6 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Override
     public String toString() {
-        return itemizeLiveUrl;
+        return getClass().getSimpleName() + ":l:"  + itemizeLiveUrl + ",m:" + itemizeMidUrl;
     }
 }

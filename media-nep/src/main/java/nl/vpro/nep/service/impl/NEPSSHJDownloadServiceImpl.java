@@ -168,6 +168,6 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public String toString() {
-        return username + "@" + ftpHost;
+        return getClass().getSimpleName() + ":" +  username + "@" + ftpHost;
     }
 }
