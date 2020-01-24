@@ -144,9 +144,10 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
                 try (OutputStream out = outputStream.get()) {
                     if (out != null) {
+                        log.info("Copying {} to {}", url, out);
                         exitCode = scp.execute(out, LoggerOutputStream.error(log), url, "/dev/stdout");
                     } else {
-                        log.warn("Can't download from null stream to " + url);
+                        log.warn("Can't download from {} stream to null", url);
                     }
                 }
             } catch (IOException | InterruptedException e) {
