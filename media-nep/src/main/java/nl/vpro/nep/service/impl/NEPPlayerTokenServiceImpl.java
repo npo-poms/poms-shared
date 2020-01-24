@@ -101,7 +101,12 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService {
         }
     }
 
-      private CloseableHttpClient getHttpClient() {
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ":" +  baseUrl;
+    }
+
+    private CloseableHttpClient getHttpClient() {
         if (httpClient == null) {
             RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout((int) connectTimeout.toMillis())

@@ -146,4 +146,11 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         }
         return httpClient;
      }
+
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ":l:" + baseUrlLive + ",m:" + baseUrlMid;
+    }
+
 }

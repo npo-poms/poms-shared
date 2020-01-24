@@ -177,7 +177,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     @Override
     public String toString() {
-        return username + "@" + sftpHost;
+        return getClass().getSimpleName() + ":" + username + "@" + sftpHost;
     }
 
     SSHClient getClient() throws IOException {

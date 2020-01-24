@@ -192,7 +192,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public String toString () {
-        return scp + " " + url ;
+        return getClass().getSimpleName() + ":" + scp + " " + url ;
     }
 
 }

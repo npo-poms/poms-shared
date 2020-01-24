@@ -129,23 +129,33 @@ public class NEPServiceImpl implements NEPService {
         StringBuilder builder = new StringBuilder();
         builder.append("NEP: ");
         try {
-            builder.append("itemizer: ").append(itemizeService.get().toString()).append(",");
+            builder.append("itemizer:").append(itemizeService.get().toString()).append(",");
         } catch (Exception ignored) {
 
         }
         try {
-            builder.append("workflows: ").append(gatekeeperService.get().toString()).append(",");
+            builder.append("gatekeeper:").append(gatekeeperService.get().toString()).append(",");
         } catch (Exception ignored) {
 
         }
 
         try {
-            builder.append("upload: ").append(nepftpUploadService.get().toString()).append(",");
+            builder.append("upload:").append(nepftpUploadService.get().toString()).append(",");
         } catch (Exception ignored) {
 
         }
         try {
-            builder.append("download: ").append(nepftpDownloadService.get().toString()).append(",");
+            builder.append("download:").append(nepftpDownloadService.get().toString()).append(",");
+        } catch (Exception ignored) {
+
+        }
+        try {
+            builder.append("sam:").append(samService.get().toString()).append(",");
+        } catch (Exception ignored) {
+
+        }
+           try {
+               builder.append("tokens:").append(tokenService.get().toString()).append(",");
         } catch (Exception ignored) {
 
         }
