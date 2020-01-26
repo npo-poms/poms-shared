@@ -255,6 +255,7 @@ public abstract class MediaObject
         regexp = "^[a-zA-Z0-9][ .a-zA-Z0-9_-]*$",
         flags = {
             Pattern.Flag.CASE_INSENSITIVE }, message = "{nl.vpro.constraints.mid}")
+    @NotNull(groups = PrePersistValidatorGroup.class)
     protected String mid;
 
     //@Version
@@ -284,6 +285,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Nullable
     protected List<@NotNull Portal> portals;
 
     @ManyToMany
@@ -685,10 +687,11 @@ public abstract class MediaObject
     }
 
     public void setMid(String mid) {
-        if (mid != null && mid.length() == 0) {
-            mid = null;
+        if (mid == null || mid.length() == 0) {
+            this.mid = null;
+            return;
         }
-        if (this.mid != null && mid != null && !this.mid.equals(mid)) {
+        if (this.mid != null && !this.mid.equals(mid)) {
             throw new IllegalArgumentException(
                     "Not allowed to assign new value to MID (current = " + this.mid + ", new = " + mid + ")");
         }
@@ -2386,6 +2389,7 @@ public abstract class MediaObject
         return false;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @XmlElementWrapper(name = "images")
     @XmlElement(name = "image", namespace = Xmlns.SHARED_NAMESPACE)
     @JsonProperty("images")
