@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import com.google.common.annotations.Beta;
+
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.Title;
@@ -20,6 +22,7 @@ import nl.vpro.nicam.NicamRated;
  * @author Michiel Meeuwissen
  * @since 5.13
  */
+@Beta
 public interface Media<T extends Media<T>> extends
     NicamRated,
     LocalizedObject<Title, Description, Website, TwitterRef, T>,
