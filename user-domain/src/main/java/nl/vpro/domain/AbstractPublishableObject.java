@@ -41,7 +41,6 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public abstract class AbstractPublishableObject<T extends AbstractPublishableObject<T>>
     extends DomainObject implements Publishable<T> {
 
-
     @Column(nullable = false, name="creationDate")
     protected Instant creationInstant = Instant.now();
 
@@ -68,8 +67,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     @Column(nullable = true)
     protected Instant lastPublished;
 
-
-
+    @SuppressWarnings("CopyConstructorMissesField") // untrue, Embargos.copy does it
     protected AbstractPublishableObject(AbstractPublishableObject<T> source) {
         this.creationInstant= source.creationInstant;
         this.createdBy = source.createdBy;
@@ -79,15 +77,12 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
         this.lastPublished = source.lastPublished;
     }
 
-
     public AbstractPublishableObject() {
     }
 
     public AbstractPublishableObject(long id) {
         this.id = id;
     }
-
-
 
     @Override
     @XmlAttribute(name = "lastModified")
@@ -215,7 +210,6 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
         }
     }
 
-
     /**
      * When this object was last published to the frontends
      *
@@ -235,7 +229,6 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
         this.lastPublished = lastPublished;
     }
 
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -250,9 +243,6 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
             .append("lastPublished", lastPublished)
             .toString();
     }
-
-
-
 
     protected void beforeUnmarshal(Unmarshaller u, Object parent) {
         // These things appear in XML, and if they don't, they are null (and not the default value in this class)

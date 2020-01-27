@@ -16,7 +16,7 @@ import nl.vpro.nicam.NicamRated;
  * Some considerations:
  *
  *  This interface makes the object 'mutable'. It may be usefull to have a two step extension mechanisms 'MutableMedia extends Media'.
- *  E.g. a consumer of the frontend api is is not interested in mutability.
+ *  E.g. a consumer of the frontend api is not interested in mutability.
  *
  *
  * @author Michiel Meeuwissen

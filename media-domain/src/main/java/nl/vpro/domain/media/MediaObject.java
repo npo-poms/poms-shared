@@ -73,6 +73,14 @@ import static nl.vpro.domain.media.MediaObject.*;
  *
  * {@link Segment}s are a special kind of members of only {@link Program}s, and represent a 'segment' from a larger 'program' only.
  *
+ * The purpose of a mediaobject is
+ * <ol>
+ *     <li>Be a full representation of meta data related to one entity</li>
+ *     <li>Be also its database representation. Therefore e.g. {@link javax.persistence} annotations are present. These are optional, and are probably only relevant in the realm of 'poms backend application'</li>
+ *     <li>Be also the XML/Json representation of most of this data. For a few fields it doesn't make sense to be exposed in that way, like for example the {@link Editor}s of  {@link Accountable}. For this the object is annoated with some annotation from {@link javax.xml} and {@link com.fasterxml.jackson}</li>
+ *     <li>The JSON version is basicly also the representation used in Elasticsearch (only with {@link Views.Publisher} enabled)</li>
+ * </ol>
+ *
  *
  * @author roekoe
  */
