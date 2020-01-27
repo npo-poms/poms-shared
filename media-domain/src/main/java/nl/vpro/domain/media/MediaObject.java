@@ -50,7 +50,6 @@ import nl.vpro.domain.user.*;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
-import nl.vpro.nicam.NicamRated;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
@@ -59,7 +58,6 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
-import static nl.vpro.domain.media.CollectionUtils.createIfNull;
 import static nl.vpro.domain.media.MediaObject.*;
 
 /**
@@ -233,14 +231,7 @@ import static nl.vpro.domain.media.MediaObject.*;
     @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
 })
 @Slf4j
-public abstract class MediaObject
-    extends
-    PublishableObject<MediaObject>
-    implements
-    NicamRated,
-    LocalizedObject<Title, Description, Website, TwitterRef, MediaObject>,
-    TrackableMedia, MediaIdentifiable {
-
+public abstract class MediaObject extends PublishableObject<MediaObject> implements Media<MediaObject> {
 
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
@@ -2782,7 +2773,7 @@ public abstract class MediaObject
      */
     @Override
     public String getMainTitle() {
-        return LocalizedObject.super.getMainTitle();
+        return Media.super.getMainTitle();
     }
 
     /**
@@ -2794,7 +2785,7 @@ public abstract class MediaObject
      */
     @Override
     public String getSubTitle() {
-        return LocalizedObject.super.getSubTitle();
+        return Media.super.getSubTitle();
     }
 
     /**
@@ -2806,7 +2797,7 @@ public abstract class MediaObject
      */
     @Override
     public String getMainDescription() {
-        return LocalizedObject.super.getMainDescription();
+        return Media.super.getMainDescription();
     }
 
     /**
@@ -2818,7 +2809,7 @@ public abstract class MediaObject
      */
     @Override
     public String getShortTitle() {
-        return LocalizedObject.super.getShortTitle();
+        return Media.super.getShortTitle();
     }
 
     /**
@@ -2830,7 +2821,7 @@ public abstract class MediaObject
      */
     @Override
     public String getOriginalTitle() {
-        return LocalizedObject.super.getOriginalTitle();
+        return Media.super.getOriginalTitle();
     }
 
     /**
@@ -2842,7 +2833,7 @@ public abstract class MediaObject
      */
     @Override
     public String getWorkTitle() {
-        return LocalizedObject.super.getWorkTitle();
+        return Media.super.getWorkTitle();
     }
 
     /**
@@ -2854,7 +2845,7 @@ public abstract class MediaObject
      */
     @Override
     public String getLexicoTitle() {
-        return LocalizedObject.super.getLexicoTitle();
+        return Media.super.getLexicoTitle();
     }
 
     /**
@@ -2866,7 +2857,7 @@ public abstract class MediaObject
      */
     @Override
     public String getAbbreviatedTitle() {
-        return LocalizedObject.super.getAbbreviatedTitle();
+        return Media.super.getAbbreviatedTitle();
     }
 
     /**
@@ -2878,7 +2869,7 @@ public abstract class MediaObject
      */
     @Override
     public String getSubDescription() {
-        return LocalizedObject.super.getSubDescription();
+        return Media.super.getSubDescription();
     }
 
     /**
@@ -2890,7 +2881,7 @@ public abstract class MediaObject
      */
     @Override
     public String getShortDescription() {
-        return LocalizedObject.super.getShortDescription();
+        return Media.super.getShortDescription();
     }
 
     public void mergeImages(MediaObject incoming, OwnerType owner) {
