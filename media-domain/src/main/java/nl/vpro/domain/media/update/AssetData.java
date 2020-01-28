@@ -11,8 +11,6 @@ import javax.activation.DataHandler;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.Xmlns;
-
 /**
  * @author Roelof Jan Koekoek
  * @since 2.1
