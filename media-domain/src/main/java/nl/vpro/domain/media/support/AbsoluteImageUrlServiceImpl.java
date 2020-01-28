@@ -16,7 +16,6 @@ public class AbsoluteImageUrlServiceImpl implements ImageUrlService {
         this.imageServerBaseUrl = imageServerBaseUrl;
     }
 
-
     @PostConstruct
     public void init() {
         ImageUrlServiceHolder.setInstance(this);

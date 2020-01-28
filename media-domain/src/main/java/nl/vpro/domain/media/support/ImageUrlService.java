@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
  */
 public interface ImageUrlService {
 
-
     default Long getId(@NonNull Image image) {
         return getIdFromImageUri(image.getImageUri());
     }
@@ -43,7 +42,6 @@ public interface ImageUrlService {
      * for a frontend server this is e.g. https://images-dev.poms.omroep.nl/
      */
     String getImageBaseUrl();
-
 
     default String getOriginalUrl(@NonNull Long id) {
         String imageServerBaseUrl = getImageBaseUrl();
@@ -75,7 +73,6 @@ public interface ImageUrlService {
             builder.append('.').append(fileExtension);
         }
         return builder.toString();
-
     }
 
 }
