@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * This services knows how to create urls from image ids.
@@ -47,6 +48,7 @@ public interface ImageUrlService {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder result = new StringBuilder();
         result.append(imageServerBaseUrl).append(id);
+        appendSecurityTokens(result);
         return result.toString();
     }
 
@@ -61,7 +63,7 @@ public interface ImageUrlService {
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri
      */
-    default String getImageLocation(@NonNull Long  id , String fileExtension, String... conversions) {
+    default String getImageLocation(@NonNull Long  id , @Nullable String fileExtension, String... conversions) {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder builder = new StringBuilder(imageServerBaseUrl);
         for (String conversion : conversions) {
@@ -72,7 +74,12 @@ public interface ImageUrlService {
         if (fileExtension != null) {
             builder.append('.').append(fileExtension);
         }
+        appendSecurityTokens(builder);
         return builder.toString();
+    }
+
+    default void appendSecurityTokens(StringBuilder builder) {
+
     }
 
 }
