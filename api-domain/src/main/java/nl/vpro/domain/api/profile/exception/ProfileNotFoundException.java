@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.api.profile.exception;
 
-import nl.vpro.util.rs.error.NotFoundException;
+import nl.vpro.rs.error.NotFoundException;
 
 /**
  *
