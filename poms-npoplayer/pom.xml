@@ -6,7 +6,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.12.2</version>
+    <version>5.12.3-SNAPSHOT</version>
   </parent>
 
   <artifactId>poms-npoplayer</artifactId>
