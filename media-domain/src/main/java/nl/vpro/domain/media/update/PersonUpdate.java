@@ -24,7 +24,6 @@ import nl.vpro.validation.WarningValidatorGroup;
 /**
  * Horrible copy/paste code from {@link Person}. Mainly to get it in a different namespace.
  */
-@SuppressWarnings("NotNullFieldNotInitialized")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "personUpdateType",
          propOrder = {"givenName",
@@ -60,15 +59,12 @@ public class PersonUpdate extends CreditsUpdate {
     }
 
     public PersonUpdate(Person p) {
-
         if (p.getGtaaUri() != null) {
             this.gtaaUri = p.getGtaaUri();
-        }
-        else {
+        } else {
             this.givenName = p.getGivenName();
             this.familyName = p.getFamilyName();
         }
-
         this.role = p.getRole();
     }
 
@@ -78,12 +74,17 @@ public class PersonUpdate extends CreditsUpdate {
 
     @Override
     public Credits toCredits() {
-
         if (gtaaUri != null) {
-            return Person.builder().uri(URI.create(gtaaUri)).role(role).build();
-        }
-        else {
-            return Person.builder().givenName(givenName).familyName(familyName).role(role).build();
+            return Person.builder()
+                .uri(URI.create(gtaaUri))
+                .role(role)
+                .build();
+        } else {
+            return Person.builder()
+                .givenName(givenName)
+                .familyName(familyName)
+                .role(role)
+                .build();
         }
     }
 }
