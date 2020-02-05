@@ -5,7 +5,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.12.2-SNAPSHOT</version>
+    <version>5.12.3-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.media</groupId>
@@ -85,6 +85,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.github.tomakehurst</groupId>

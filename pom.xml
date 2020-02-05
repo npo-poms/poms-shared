@@ -5,11 +5,11 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>5.12.1</version>
+    <version>5.12.2</version>
   </parent>
 
   <name>poms shared</name>
-  <version>5.12.2-SNAPSHOT</version>
+  <version>5.12.3-SNAPSHOT</version>
   <artifactId>poms-shared-parent</artifactId>
   <packaging>pom</packaging>
 
@@ -17,6 +17,7 @@
 
   <properties>
     <poms.shared.version>${project.version}</poms.shared.version>
+    <vpro.shared.version>2.11.0</vpro.shared.version>
   </properties>
 
 
