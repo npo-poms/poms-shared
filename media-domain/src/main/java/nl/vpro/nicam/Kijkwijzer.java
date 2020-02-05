@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.ContentRating;
 
@@ -99,11 +101,9 @@ public class Kijkwijzer implements NicamRated {
         if (ageRatingCode != null) {
             result.append(ageRatingCode);
         }
-
         for (ContentRating rating : contentRatings) {
             result.append(rating.toChar());
         }
-
         return result.toString();
     }
 
@@ -119,6 +119,41 @@ public class Kijkwijzer implements NicamRated {
         }
 
         return result.toString();
+    }
+
+    /**
+     * @since 5.12
+     */
+    public String toPaddedCode() {
+        StringBuilder result = new StringBuilder();
+        result.append(toPaddedCode(ageRating));
+        for (ContentRating rating : contentRatings) {
+            result.append(rating.toChar());
+        }
+        return result.toString();
+    }
+
+    /**
+     * @since 5.12
+     */
+    public static Optional<Kijkwijzer> parsePaddedCode(String value) {
+        if (StringUtils.isEmpty(value)) {
+            return Optional.empty();
+        }
+        AgeRating ageRating = null;
+        if (value.length() >= 2 && (Character.isDigit(value.charAt(0)) || value.charAt(0) == '-') && Character.isDigit(value.charAt(1))) {
+            ageRating = AgeRating.valueOf(Integer.parseInt(value.substring(0, 2)));
+            value = value.substring(2);
+        } else {
+            if (Character.isDigit(value.charAt(0))) {
+                return Optional.empty();
+            }
+        }
+        List<ContentRating> contentRatings = new ArrayList<>();
+        for (char c : value.toCharArray()) {
+            contentRatings.add(ContentRating.valueOf(c));
+        }
+        return Optional.of(new Kijkwijzer(ageRating, contentRatings));
     }
 
     public static Character toCode(AgeRating ageRating) {
@@ -144,6 +179,14 @@ public class Kijkwijzer implements NicamRated {
                 return null;
         }
     }
+    public static String toPaddedCode(AgeRating ageRating) {
+        if (ageRating == null) {
+            return "";
+        }
+        return String.format("%02d", ageRating.getIntValue());
+    }
+
+
     public static Character toDonnaCode(AgeRating ageRating) {
         if (ageRating == null) {
             return null;
@@ -159,4 +202,5 @@ public class Kijkwijzer implements NicamRated {
                 return '1';
         }
     }
+
 }

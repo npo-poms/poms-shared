@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+
 import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlEnumValue;
@@ -21,30 +23,30 @@ import nl.vpro.domain.media.bind.AgeRatingToString;
 public enum AgeRating implements Displayable, XmlValued {
 
     @XmlEnumValue("6")
-    _6("6"),
+    _6(6),
     @XmlEnumValue("9")
-    _9("9"),
+    _9(9),
     @XmlEnumValue("12")
-    _12("12"),
+    _12(12),
 
     /**
      * See MSE-4628
      * @since 5.12
      */
     @XmlEnumValue("14")
-    _14("14"),
+    _14(14),
 
     @XmlEnumValue("16")
-    _16("16"),
+    _16(16),
 
     /**
      * See MSE-4628
      * @since 5.12
      */
     @XmlEnumValue("18")
-    _18("18"),
+    _18(18),
 
-    ALL("Alle leeftijden") {
+    ALL("Alle leeftijden", 0) {
         @Override
         public String getDescription() {
             return getDisplayName();
@@ -52,7 +54,7 @@ public enum AgeRating implements Displayable, XmlValued {
     },
 
     @Beta
-    NOT_YET_RATED("Nog niet beoordeeld") {
+    NOT_YET_RATED("Nog niet beoordeeld", -1) {
         @Override
         public String getDescription() {
             return getDisplayName();
@@ -64,10 +66,16 @@ public enum AgeRating implements Displayable, XmlValued {
     };
 
 
-    private String displayName;
+    private final String displayName;
+    @Getter
+    private final int intValue;
 
-    AgeRating(String displayName) {
+    AgeRating(String displayName, int intValue) {
         this.displayName = displayName;
+        this.intValue = intValue;
+    }
+    AgeRating(int intValue) {
+        this(String.valueOf(intValue), intValue);
     }
 
 
@@ -88,11 +96,13 @@ public enum AgeRating implements Displayable, XmlValued {
         return n.startsWith("_") ? n.substring(1) : n;
     }
 
-    public static AgeRating valueOf(Short kort) {
-        if (kort == null) {
-            return ALL;
+    public static AgeRating valueOf(int kort) {
+        for (AgeRating a : values()) {
+            if (a.intValue == kort) {
+                return a;
+            }
         }
-        return AgeRating.valueOf("_" + kort);
+        throw new IllegalArgumentException("No agerating " + kort);
     }
 
 

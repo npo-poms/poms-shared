@@ -36,6 +36,38 @@ public class KijkwijzerTest {
         roundTripDonna("2ahsg", new Kijkwijzer(AgeRating._6, ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL, ContentRating.SEKS, ContentRating.GEWELD));
     }
 
+    @Test
+    public void padded() {
+        roundTripPadded("-1", new Kijkwijzer(AgeRating.NOT_YET_RATED));
+
+        roundTripPadded("00", new Kijkwijzer(AgeRating.ALL));
+        roundTripPadded("06", new Kijkwijzer(AgeRating._6));
+        roundTripPadded("12", new Kijkwijzer(AgeRating._12));
+        roundTripPadded("16", new Kijkwijzer(AgeRating._16));
+        roundTripPadded("09", new Kijkwijzer(AgeRating._9));
+        roundTripPadded("06ahsg", new Kijkwijzer(AgeRating._6, ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL, ContentRating.SEKS, ContentRating.GEWELD));
+    }
+
+    @Test
+    public void paddedOrDonna() {
+
+
+        parsePaddedOrDonna("1", new Kijkwijzer(AgeRating.ALL));
+        parsePaddedOrDonna("2", new Kijkwijzer(AgeRating._6));
+        parsePaddedOrDonna("3", new Kijkwijzer(AgeRating._12));
+        parsePaddedOrDonna("4", new Kijkwijzer(AgeRating._16));
+        parsePaddedOrDonna("5", new Kijkwijzer(AgeRating._9));
+        parsePaddedOrDonna("2ahsg", new Kijkwijzer(AgeRating._6, ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL, ContentRating.SEKS, ContentRating.GEWELD));
+        parsePaddedOrDonna("-1", new Kijkwijzer(AgeRating.NOT_YET_RATED));
+        parsePaddedOrDonna("00", new Kijkwijzer(AgeRating.ALL));
+        parsePaddedOrDonna("06", new Kijkwijzer(AgeRating._6));
+        parsePaddedOrDonna("12", new Kijkwijzer(AgeRating._12));
+        parsePaddedOrDonna("16", new Kijkwijzer(AgeRating._16));
+        parsePaddedOrDonna("09", new Kijkwijzer(AgeRating._9));
+        parsePaddedOrDonna("06ahsg", new Kijkwijzer(AgeRating._6, ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL, ContentRating.SEKS, ContentRating.GEWELD));
+    }
+
+
     protected void roundTripDonna(String code, Kijkwijzer kijkwijzer) {
         assertThat(kijkwijzer.toDonnaCode()).isEqualTo(code);
         assertThat(Kijkwijzer.parseDonna(code)).isEqualTo(kijkwijzer);
@@ -44,5 +76,18 @@ public class KijkwijzerTest {
     protected void roundTrip(String code, Kijkwijzer kijkwijzer) {
         assertThat(kijkwijzer.toCode()).isEqualTo(code);
         assertThat(Kijkwijzer.parse(code)).isEqualTo(kijkwijzer);
+    }
+
+    protected void roundTripPadded(String code, Kijkwijzer kijkwijzer) {
+        assertThat(kijkwijzer.toPaddedCode()).isEqualTo(code);
+        assertThat(Kijkwijzer.parsePaddedCode(code).get()).isEqualTo(kijkwijzer);
+    }
+
+    protected Kijkwijzer parsePaddedOrDonna(String code, Kijkwijzer kijkwijzer) {
+        Kijkwijzer result =
+            Kijkwijzer.parsePaddedCode(code)
+                .orElseGet(() -> Kijkwijzer.parseDonna(code));
+        assertThat(result).isEqualTo(kijkwijzer);
+        return result;
     }
 }
