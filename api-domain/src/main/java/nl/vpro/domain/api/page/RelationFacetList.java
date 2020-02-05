@@ -4,19 +4,14 @@
  */
 package nl.vpro.domain.api.page;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Singular;
+import lombok.*;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+
+import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -108,6 +103,9 @@ public class RelationFacetList extends AbstractFacet<PageSearch> implements Sear
 
             @Override
             public RelationFacet next() {
+                 if (! hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 RelationFacet relationFacet = facets.get(index++);
                 if(relationFacet.getName() == null) {
                     relationFacet.setName("relations" + index);

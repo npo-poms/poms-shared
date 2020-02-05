@@ -103,7 +103,7 @@ public class RelationFacetList extends AbstractFacet<MediaSearch> implements Sea
 
             @Override
             public RelationFacet next() {
-                if (facets.size() <= index) {
+                if (! hasNext()) {
                     throw new NoSuchElementException();
                 }
                 RelationFacet relationFacet = facets.get(index++);
