@@ -20,7 +20,7 @@ abstract class ParsedInterval<T extends Comparable<T>> {
 
     static final String TEMPORAL_AMOUNT_INTERVAL = "(?:\\d+)?\\s*(?:YEAR|MONTH|WEEK|DAY|HOUR|MINUTE)S?";
 
-    static final Pattern PATTERN = Pattern.compile(TEMPORAL_AMOUNT_INTERVAL);
+    static final Pattern PATTERN = Pattern.compile("(\\d+)?\\s*(YEAR|MONTH|WEEK|DAY|HOUR|MINUTE)S?");
 
 
     public static ParseResult parse(String toParse) {
