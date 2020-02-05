@@ -19,4 +19,9 @@ public class EmptyFilter<T> extends AbstractFilter<T> {
         return object instanceof EmptyFilter;
     }
 
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
 }

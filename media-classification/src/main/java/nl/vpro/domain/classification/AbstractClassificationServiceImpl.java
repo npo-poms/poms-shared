@@ -103,7 +103,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
             synchronized(this) {
                 if (terms == null) {
                     // This can be called via Jaxb unmarshalling, so it cannot happen in the same thread.
-                    Future future = executorService.submit(() -> {
+                    Future<?> future = executorService.submit(() -> {
                         try {
                             List<InputSource> sources = getSources(true);
                             if (sources != null) {
@@ -118,7 +118,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
                     try {
                         future.get();
                     } catch (InterruptedException e) {
-                        // never mind
+                        Thread.currentThread().interrupt();
                     } catch (ExecutionException e) {
                         log.error(e.getMessage(), e);
                     }

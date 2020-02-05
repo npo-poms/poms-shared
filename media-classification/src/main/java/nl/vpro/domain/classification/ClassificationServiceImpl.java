@@ -231,6 +231,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                     key.reset();
                 } catch (InterruptedException e) {
                     log.info("Interrupted watcher");
+                    Thread.currentThread().interrupt();
                     break;
                 }
             }
