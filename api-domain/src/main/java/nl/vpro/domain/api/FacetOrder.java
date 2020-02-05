@@ -33,7 +33,7 @@ public enum FacetOrder {
     COUNT_ASC,
     COUNT_DESC;
 
-
+    @XmlType(name = "facetOrderTypeEnum")
     protected enum FacetOrderBackwards {
         VALUE_ASC,
         VALUE_DESC,
