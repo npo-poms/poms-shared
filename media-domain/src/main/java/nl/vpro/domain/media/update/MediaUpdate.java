@@ -631,8 +631,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         for (Credits credit: credits) {
             if (credit instanceof Person) {
                 creditsUpdates.add(new PersonUpdate((Person) credit));
-            }
-            else {
+            } else {
                 creditsUpdates.add(new NameUpdate((Name) credit));
             }
         }

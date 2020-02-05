@@ -40,6 +40,9 @@ public class NameUpdate extends CreditsUpdate {
 
     @Override
     public Credits toCredits() {
-        return Name.builder().uri(URI.create(gtaaUri)).role(role).build();
+        return Name.builder()
+            .uri(URI.create(gtaaUri))
+            .role(role)
+            .build();
     }
 }
