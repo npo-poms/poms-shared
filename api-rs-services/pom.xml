@@ -27,6 +27,7 @@
       <artifactId>subtitles-domain</artifactId>
     </dependency>
     <dependency>
+      <!-- dependency only used for a few annotations. Optional because in resteasy 3 they are in a different artifact -->
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-core-spi</artifactId>
       <optional>true</optional>
