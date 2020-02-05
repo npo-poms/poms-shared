@@ -3,8 +3,7 @@ package nl.vpro.nicam;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.ContentRating;
@@ -84,6 +83,9 @@ public class Kijkwijzer implements NicamRated {
     public Kijkwijzer(AgeRating ageRating, List<ContentRating> contentRatings) {
         this.ageRating = ageRating;
         this.contentRatings = contentRatings;
+    }
+    public Kijkwijzer(AgeRating ageRating, ContentRating... contentRatings) {
+        this(ageRating, Arrays.asList(contentRatings));
     }
 
     public Kijkwijzer() {
