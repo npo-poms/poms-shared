@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.gtaa.AbstractGTAAObject;
 import nl.vpro.domain.gtaa.Scheme;
