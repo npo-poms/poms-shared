@@ -7,8 +7,7 @@ package nl.vpro.domain.api.media;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
@@ -104,6 +103,9 @@ public class RelationFacetList extends AbstractFacet<MediaSearch> implements Sea
 
             @Override
             public RelationFacet next() {
+                if (facets.size() <= index) {
+                    throw new NoSuchElementException();
+                }
                 RelationFacet relationFacet = facets.get(index++);
                 if(relationFacet.getName() == null) {
                     relationFacet.setName("relations" + index);
