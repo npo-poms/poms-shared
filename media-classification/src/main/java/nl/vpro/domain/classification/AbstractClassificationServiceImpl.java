@@ -6,17 +6,13 @@ package nl.vpro.domain.classification;
 
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import javax.annotation.PreDestroy;
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXB;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.*;
 import javax.xml.transform.dom.DOMSource;
 
 import org.slf4j.Logger;
@@ -135,7 +131,9 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
     protected SortedMap<TermId, Term> readTerms(Iterable<InputSource> streams) throws ParserConfigurationException {
         SortedMap<TermId, Term> result = new TreeMap<>();
-        final DocumentBuilder  builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);//"http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        final DocumentBuilder  builder = factory.newDocumentBuilder();
 
         for (InputSource input : streams) {
             SortedMap<TermId, Term> subResult = new TreeMap<>();

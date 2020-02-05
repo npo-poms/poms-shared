@@ -96,8 +96,12 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                 }
                 }
             );
-        } catch (IOException | InterruptedException  e) {
+        } catch (IOException  e) {
             log.error(e.getMessage(), e);
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+            Thread.currentThread().interrupt();
+
         }
     }
 

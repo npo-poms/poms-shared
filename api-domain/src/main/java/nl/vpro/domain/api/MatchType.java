@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public interface MatchType {
 
-    Pattern REGEX_PATTERN =  Pattern.compile("^([\\s\\.\\?\\+\\*\\|\\{\\}\\[\\]\\\"\\\\\\#\\@\\&\\<\\>\\~]+)|(\\(.*[\\*\\+\\?\\{\\}].*\\))");
+    Pattern REGEX_PATTERN =  Pattern.compile("^(?:[\\s.?+*|{}\\[\\]\"\\\\#@&<>~]+)|(?:\\(.*[*+?{}].*\\))");
 
     String WILDCARD_HOLDER = "__WILDCARD__";
 

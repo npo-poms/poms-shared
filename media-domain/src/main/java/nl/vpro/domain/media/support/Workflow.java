@@ -115,7 +115,11 @@ public enum Workflow implements Displayable {
         REVOKED
     ));
 
-    public static final List<Workflow> AS_DELETED_IN_API = PUBLISHED_AS_DELETED.stream().filter(Workflow::isPublishable).collect(Collectors.toList());
+    public static final List<Workflow> AS_DELETED_IN_API = unmodifiableList(
+        PUBLISHED_AS_DELETED.stream()
+            .filter(Workflow::isPublishable)
+            .collect(Collectors.toList())
+    );
 
     public static final List<Workflow> REVOKES = unmodifiableList(asList(
         FOR_DELETION,

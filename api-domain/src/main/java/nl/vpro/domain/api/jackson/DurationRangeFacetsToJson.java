@@ -23,8 +23,10 @@ import nl.vpro.jackson2.Jackson2Mapper;
  * @since 5.3
  */
 public class DurationRangeFacetsToJson {
-
     private static final ObjectMapper mapper = Jackson2Mapper.getInstance();
+
+    private DurationRangeFacetsToJson() {
+    }
 
     public static class Serializer extends JsonSerializer<DurationRangeFacets<?>> {
 
