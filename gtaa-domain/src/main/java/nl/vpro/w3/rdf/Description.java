@@ -178,7 +178,7 @@ public class Description extends AbstractGTAAObject {
         return getChangeNote().stream().map(StringUtils::deleteWhitespace);
     }
 
-    public static class Builder extends AbstractBuilder {
+    public static class Builder extends AbstractBuilder<Builder> {
 
         public Builder type(String type) {
             this.type = ResourceElement.builder().resource(type).build();
