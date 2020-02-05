@@ -34,7 +34,6 @@ public enum FacetOrder {
     COUNT_DESC;
 
 
-    @XmlType(name = "facetOrderTypeEnum")
     protected enum FacetOrderBackwards {
         VALUE_ASC,
         VALUE_DESC,
@@ -47,12 +46,11 @@ public enum FacetOrder {
         REVERSE_COUNT
     }
 
-    private static Comparator<TermFacetResultItem> VALUE_ASC_COMPARATOR = (o1, o2) -> ObjectUtils.compare(o1.getValue(), o2.getValue());
+    private static final Comparator<TermFacetResultItem> VALUE_ASC_COMPARATOR = (o1, o2) -> ObjectUtils.compare(o1.getValue(), o2.getValue());
 
+    private static final Comparator<TermFacetResultItem> VALUE_DESC_COMPARATOR = (o1, o2) -> VALUE_ASC_COMPARATOR.compare(o2, o1);
 
-    private static Comparator<TermFacetResultItem> VALUE_DESC_COMPARATOR = (o1, o2) -> VALUE_ASC_COMPARATOR.compare(o2, o1);
-
-    private static Comparator<TermFacetResultItem> COUNT_ASC_COMPARATOR = (o1, o2) -> {
+    private static final Comparator<TermFacetResultItem> COUNT_ASC_COMPARATOR = (o1, o2) -> {
         long diff = o1.getCount() - o2.getCount();
         if (diff < 0) {
             return -1;
@@ -63,7 +61,7 @@ public enum FacetOrder {
         }
     };
 
-    private static Comparator<TermFacetResultItem> COUNT_DESC_COMPARATOR = (o1, o2) -> COUNT_ASC_COMPARATOR.compare(o2, o1);
+    private static final Comparator<TermFacetResultItem> COUNT_DESC_COMPARATOR = (o1, o2) -> COUNT_ASC_COMPARATOR.compare(o2, o1);
 
     public static Comparator<TermFacetResultItem> toComparator(final FacetOrder order) {
         switch(order) {
