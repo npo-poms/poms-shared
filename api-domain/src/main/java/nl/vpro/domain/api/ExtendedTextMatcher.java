@@ -139,7 +139,7 @@ public class ExtendedTextMatcher extends AbstractTextMatcher<StandardMatchType> 
 
     @Override
     public void setCaseSensitive(Boolean caseSensitive) {
-        this.caseSensitive = caseSensitive ? null : caseSensitive;
+        this.caseSensitive = caseSensitive == null || caseSensitive ? null : caseSensitive;
     }
 
     @Override

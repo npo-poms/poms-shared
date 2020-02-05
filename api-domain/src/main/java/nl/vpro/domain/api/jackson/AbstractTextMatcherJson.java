@@ -15,6 +15,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import nl.vpro.domain.api.*;
 
+import static nl.vpro.domain.api.AbstractTextMatcher.DEFAULT_MATCH;
+import static nl.vpro.domain.api.TextMatcher.DEFAULT_MATCHTYPE;
+
 /**
  * @author rico
  * @since 4.6
@@ -38,13 +41,13 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
 
 
     public final void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-        if ((value.getMatch() != TextMatcher.DEFAULT_MATCH) || !(value.getMatchType().getName().equals(TextMatcher.DEFAULT_MATCHTYPE.getName())) || ! value.isCaseSensitive()) {
+        if ((value.getMatch() != DEFAULT_MATCH) || !(value.getMatchType().getName().equals(DEFAULT_MATCHTYPE.getName())) || ! value.isCaseSensitive()) {
             jgen.writeStartObject();
             jgen.writeStringField(VALUE, value.getValue());
-            if (value.getMatch() != TextMatcher.DEFAULT_MATCH) {
+            if (value.getMatch() != DEFAULT_MATCH) {
                 jgen.writeStringField(MATCH, value.getMatch().name());
             }
-            if (!value.getMatchType().getName().equals(TextMatcher.DEFAULT_MATCHTYPE.getName())) {
+            if (!value.getMatchType().getName().equals(DEFAULT_MATCHTYPE.getName())) {
                 jgen.writeStringField(MATCH_TYPE, value.getMatchType().getName());
             }
             if (! value.isCaseSensitive()) {
@@ -73,7 +76,7 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
             return constructor.apply(jsonNode.textValue());
         } else {
             JsonNode m = jsonNode.get(MATCH);
-            Match match = m == null ? ExtendedTextMatcher.DEFAULT_MATCH : Match.valueOf(m.asText().toUpperCase());
+            Match match = m == null ? DEFAULT_MATCH : Match.valueOf(m.asText().toUpperCase());
             JsonNode mt = jsonNode.get(MATCH_TYPE);
             S matchType = mt == null ? null : valueOf.apply(mt.asText().toUpperCase());
 
