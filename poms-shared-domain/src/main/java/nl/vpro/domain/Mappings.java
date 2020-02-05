@@ -91,7 +91,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         init();
         return ThreadLocal.withInitial(() -> {
             try {
-                Class[] classes = MAPPING.get(namespace);
+                Class<?>[] classes = MAPPING.get(namespace);
                 if (classes == null) {
                     throw new IllegalArgumentException("No mapping found for " + namespace);
                 }
@@ -148,7 +148,9 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         File file = getFile(namespace);
         File fileWithDocumentation = new File(file.getParentFile(), "documented." + file.getName());
         if (fileWithDocumentation.exists() && fileWithDocumentation.lastModified() < file.lastModified()) {
-            fileWithDocumentation.delete();
+            if (! fileWithDocumentation.delete()) {
+                log.warn("Couldn't delete {}", fileWithDocumentation);
+            }
         }
         if (!fileWithDocumentation.exists()) {
             DocumentationAdder transformer = new DocumentationAdder(MAPPING.get(namespace));

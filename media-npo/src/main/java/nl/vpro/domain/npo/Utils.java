@@ -22,7 +22,7 @@ import nl.vpro.xml.util.XmlUtils;
  */
 public class Utils {
 
-    public static ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam"); // Restrictions seem to be shipped _without_ explicit timezones.
+    public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam"); // Restrictions seem to be shipped _without_ explicit timezones.
 
     public static Instant getStart(Tijdsbeperking tijdsbeperking) {
         return tijdsbeperking == null ? null : XmlUtils.toInstant(ZONE_ID, tijdsbeperking.getStarttijd());

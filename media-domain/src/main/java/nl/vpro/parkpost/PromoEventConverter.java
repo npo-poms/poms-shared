@@ -20,15 +20,15 @@ import nl.vpro.parkpost.promo.bind.PromoEvent;
 @Slf4j
 public class PromoEventConverter {
 
-    public static String RELATION_OWNER = "NPO";
+    public static final String RELATION_OWNER = "NPO";
 
-    public static String RELATION_VERSION = "PROMO_VERSION";
+    public static final String RELATION_VERSION = "PROMO_VERSION";
 
-    public static String RELATION_PRODUCTCODE = "PROMO_PRODUCTCODE";
+    public static final String RELATION_PRODUCTCODE = "PROMO_PRODUCTCODE";
 
-    public static String RELATION_CHANNEL = "PROMO_CHANNEL";
+    public static final String RELATION_CHANNEL = "PROMO_CHANNEL";
 
-    public static String RELATION_REFERRER = "PROMO_REFERRER";
+    public static final String RELATION_REFERRER = "PROMO_REFERRER";
 
     private static final Set<String> IGNORE_EXTENSIONS = new HashSet<>(Arrays.asList("ismv", "ismc"));
 

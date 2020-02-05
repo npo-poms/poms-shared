@@ -69,7 +69,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                 result.add(URI.create(r));
             }
         }
-        return result.toArray(new URI[result.size()]);
+        return result.toArray(new URI[0]);
     }
 
     @Override
@@ -146,8 +146,12 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                     File tempFile = new File(resourceFile, AbstractClassificationServiceImpl.class.getSimpleName() + ".watched");
                     if (tempFile.canWrite()) {
                         try {
-                            tempFile.createNewFile();
-                            tempFile.setLastModified(System.currentTimeMillis());
+                            if (!tempFile.createNewFile()) {
+                                log.warn("The temp file {} already existed", tempFile);
+                            }
+                            if (!tempFile.setLastModified(System.currentTimeMillis())) {
+                                log.warn("Couldn't set last modified of  {}", tempFile);
+                            }
                             tempFile.deleteOnExit();
                         } catch (IOException ioe) {
                             log.warn(tempFile + ": " + ioe.getClass() + " " + ioe.getMessage());
@@ -156,12 +160,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                 }
 
                 List<File> result = new ArrayList<>();
-                for (File file : resourceFile.listFiles(new FilenameFilter() {
-                    @Override
-                    public boolean accept(File dir, String name) {
-                        return name.toLowerCase().endsWith(".xml");
-                    }
-                })) {
+                for (File file : resourceFile.listFiles((dir, name) -> name.toLowerCase().endsWith(".xml"))) {
                     result.add(file);
                 }
                 return result;

@@ -31,7 +31,7 @@ public enum GroupType implements SubMediaType {
     ALBUM(MediaType.ALBUM),
     STRAND(MediaType.STRAND);
 
-    public static String URN_PREFIX = "urn:vpro:media:group:";
+    public static final String URN_PREFIX = "urn:vpro:media:group:";
 
     private MediaType mediaType;
 

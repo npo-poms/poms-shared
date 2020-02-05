@@ -24,7 +24,7 @@ import nl.vpro.domain.media.Platform;
 @XmlType(name = "hasLocationConstraintType")
 public class HasLocationConstraint implements ExistsConstraint<MediaObject> {
 
-    public static String PLATFORM_NONE = "NONE";
+    public static final String PLATFORM_NONE = "NONE";
 
     private Platform platform;
 

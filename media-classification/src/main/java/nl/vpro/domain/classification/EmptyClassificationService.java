@@ -11,7 +11,7 @@ import org.xml.sax.InputSource;
  */
 public class EmptyClassificationService extends AbstractClassificationServiceImpl {
 
-    public static ClassificationService INSTANCE = new EmptyClassificationService();
+    public static final ClassificationService INSTANCE = new EmptyClassificationService();
 
     @Override
     protected List<InputSource> getSources(boolean init) {
