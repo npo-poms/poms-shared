@@ -189,55 +189,58 @@ import static nl.vpro.domain.media.MediaObject.*;
 
 })
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
-@JsonSubTypes({ @JsonSubTypes.Type(value = Program.class, name = "program"),
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Program.class, name = "program"),
     @JsonSubTypes.Type(value = Group.class, name = "group"),
-    @JsonSubTypes.Type(value = Segment.class, name = "segment") })
+    @JsonSubTypes.Type(value = Segment.class, name = "segment") }
+)
 
 // Improvement: Filters can be defined in hibernate-mapping in the hibernate-config.xml
 // See https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch19.html
-@FilterDefs({ @FilterDef(name = "titleFilter", parameters = { @ParamDef(name = "title", type = "string") }),
-    @FilterDef(name = "typeFilter", parameters = { @ParamDef(name = "types", type = "string"),
-        @ParamDef(name = "segments", type = "boolean") }),
-    @FilterDef(name = "organizationFilter", parameters = { @ParamDef(name = "organizations", type = "string") }),
-    @FilterDef(name = "noBroadcast"), @FilterDef(name = "hasLocations"), @FilterDef(name = "noPlaylist"),
-    @FilterDef(name = "eventRange", parameters = { @ParamDef(name = "eventStart", type = "date"),
-        @ParamDef(name = "eventStop", type = "date") }),
-    @FilterDef(name = "creationRange", parameters = { @ParamDef(name = "creationStart", type = "date"),
-        @ParamDef(name = "creationStop", type = "date") }),
-    @FilterDef(name = "modifiedRange", parameters = { @ParamDef(name = "modifiedStart", type = "date"),
-        @ParamDef(name = "modifiedStop", type = "date") }),
-    @FilterDef(name = PUBLICATION_FILTER),
-    @FilterDef(name = EMBARGO_FILTER, parameters = {
-        @ParamDef(name = "broadcasters", type = "string") }),
-    @FilterDef(name = DELETED_FILTER),
-    @FilterDef(name = "relationFilter", parameters = { @ParamDef(name = "broadcasters", type = "string") }) })
-@Filters({
-    @Filter(name = "titleFilter", condition = "0 < (select count(*) from title t where t.parent_id = id and lower(t.title) like :title)"),
-    @Filter(name = "typeFilter", condition = "(0 < (select count(*) from program p where p.id = id and p.type in (:types)))"
-        + " or (0 < (select count(*) from group_table g where g.id = id and g.type in (:types)))"
-        + " or (:segments and 0 < (select count(*) from segment s where s.id = id))"),
-    @Filter(name = "organizationFilter", condition = "0 < ("
-        + "(select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))"
-        + " + "
-        + "(select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:organizations))"
-        + " + "
-        + "(select count(*) from mediaobject_thirdparty o where o.mediaobject_id = id and o.thirdparties_id in (:organizations))"
-        + ")"),
-    @Filter(name = "noBroadcast", condition = "0 = (select count(*) from scheduleevent e where e.mediaobject_id = id)"),
-    @Filter(name = "hasLocations", condition = "0 < (select count(*) from location l where l.mediaobject_nid = id)"),
-    @Filter(name = "noPlaylist", condition = "0 = (select count(*) from group_table g, memberref mr where mr.member_id = id "
-        + "and g.id = mr.owner_id " + "and g.type = 'PLAYLIST')"),
-    @Filter(name = "eventRange", condition = ":eventStart <= (select min(e.start) from scheduleevent e where e.mediaobject_id = id) and "
-        + ":eventStop >= (select min(e.start) from scheduleevent e where e.mediaobject_id = id)"),
-    @Filter(name = "creationRange", condition = ":creationStart <= creationDate and :creationStop >= creationDate"),
-    @Filter(name = "modifiedRange", condition = ":modifiedStart <= lastModified and :modifiedStop >= lastModified"),
-    @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
-        + "and (publishStop is null or publishStop > now())"),
-    @Filter(name = EMBARGO_FILTER, condition = "(publishstart is null "
-        + "or publishstart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
-        + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))"),
-    @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
-})
+@FilterDef(name = "titleFilter", parameters = { @ParamDef(name = "title", type = "string") })
+@FilterDef(name = "typeFilter", parameters = { @ParamDef(name = "types", type = "string"),
+    @ParamDef(name = "segments", type = "boolean") })
+@FilterDef(name = "organizationFilter", parameters = { @ParamDef(name = "organizations", type = "string") })
+@FilterDef(name = "noBroadcast")
+@FilterDef(name = "hasLocations")
+@FilterDef(name = "noPlaylist")
+@FilterDef(name = "eventRange", parameters = { @ParamDef(name = "eventStart", type = "date"),
+    @ParamDef(name = "eventStop", type = "date") })
+@FilterDef(name = "creationRange", parameters = { @ParamDef(name = "creationStart", type = "date"),
+    @ParamDef(name = "creationStop", type = "date") })
+@FilterDef(name = "modifiedRange", parameters = { @ParamDef(name = "modifiedStart", type = "date"),
+    @ParamDef(name = "modifiedStop", type = "date") })
+@FilterDef(name = PUBLICATION_FILTER)
+@FilterDef(name = EMBARGO_FILTER, parameters = {
+    @ParamDef(name = "broadcasters", type = "string") })
+@FilterDef(name = DELETED_FILTER)
+@FilterDef(name = "relationFilter", parameters = { @ParamDef(name = "broadcasters", type = "string") })
+@Filter(name = "titleFilter", condition = "0 < (select count(*) from title t where t.parent_id = id and lower(t.title) like :title)")
+@Filter(name = "typeFilter", condition = "(0 < (select count(*) from program p where p.id = id and p.type in (:types)))"
+    + " or (0 < (select count(*) from group_table g where g.id = id and g.type in (:types)))"
+    + " or (:segments and 0 < (select count(*) from segment s where s.id = id))")
+@Filter(name = "organizationFilter", condition = "0 < ("
+    + "(select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))"
+    + " + "
+    + "(select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:organizations))"
+    + " + "
+    + "(select count(*) from mediaobject_thirdparty o where o.mediaobject_id = id and o.thirdparties_id in (:organizations))"
+        + ")")
+@Filter(name = "noBroadcast", condition = "0 = (select count(*) from scheduleevent e where e.mediaobject_id = id)")
+@Filter(name = "hasLocations", condition = "0 < (select count(*) from location l where l.mediaobject_nid = id)")
+@Filter(name = "noPlaylist", condition = "0 = (select count(*) from group_table g, memberref mr where mr.member_id = id "
+    + "and g.id = mr.owner_id " + "and g.type = 'PLAYLIST')")
+@Filter(name = "eventRange", condition = ":eventStart <= (select min(e.start) from scheduleevent e where e.mediaobject_id = id) and "
+    + ":eventStop >= (select min(e.start) from scheduleevent e where e.mediaobject_id = id)")
+@Filter(name = "creationRange", condition = ":creationStart <= creationDate and :creationStop >= creationDate")
+@Filter(name = "modifiedRange", condition = ":modifiedStart <= lastModified and :modifiedStop >= lastModified")
+@Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
+    + "and (publishStop is null or publishStop > now())")
+@Filter(name = EMBARGO_FILTER, condition = "(publishstart is null "
+    + "or publishstart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
+    + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))")
+@Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
+
 @Slf4j
 public abstract class MediaObject extends PublishableObject<MediaObject> implements Media<MediaObject> {
 
@@ -249,7 +252,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
 
     @Column(name = "mid", nullable = false, unique = true)
-    @Size.List({ @Size(max = 255), @Size(min = 4) })
+    @Size(max = 255, min = 4)
     @Pattern(
         regexp = "^[a-zA-Z0-9][ .a-zA-Z0-9_-]*$",
         flags = {
@@ -313,7 +316,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
     // hibernates on merge first merges an object without titles.
-    @Size.List({ @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}"), })
+    @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}")
     @Valid
     protected Set<@NotNull Title> titles;
 
