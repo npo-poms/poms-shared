@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public class TT888 {
 
-    public static Charset CHARSET = SubtitlesFormat.TT888.getCharset();
+    public static final Charset CHARSET = SubtitlesFormat.TT888.getCharset();
 
     public static StringBuilder format(Cue cue, StringBuilder builder) {
         //001 0:01:00 0:02:00 ondertitels !
