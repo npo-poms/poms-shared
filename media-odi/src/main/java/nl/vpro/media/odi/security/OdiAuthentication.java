@@ -4,9 +4,9 @@
  */
 package nl.vpro.media.odi.security;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -23,8 +23,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,6 +36,7 @@ import nl.vpro.util.ThreadPools;
  * @since 2.1
  */
 @Aspect
+@Slf4j
 public class OdiAuthentication {
     public static final String X_NPO_DATE = "x-npo-date";
 
@@ -48,8 +47,6 @@ public class OdiAuthentication {
     public static final String X_ORIGIN = "x-origin";
 
     public static final String AUTHORIZATION = "authorization";
-
-    private static final Logger LOG = LoggerFactory.getLogger(OdiAuthentication.class);
 
     //per line format "apiKey:privateKey:allowXOrigin:origins , separated with * support"
     private static final Pattern CONFIG_PATTERN = Pattern.compile("^(\\w+):([^:]+):(false|true):(.+)$");
@@ -125,11 +122,11 @@ public class OdiAuthentication {
 
         final Scanner scanner;
         if (StringUtils.isEmpty(configFolder)) {
-            LOG.warn("No odi.clients folder configured, taking default odi.clients configuration");
+            log.warn("No odi.clients folder configured, taking default odi.clients configuration");
             scanner = new Scanner(getClass().getResourceAsStream("/" + CONFIG_FILE));
         } else {
             final File configFile = new File(configFolder, CONFIG_FILE);
-            LOG.info("Loading odi clients from {}", configFile);
+            log.info("Loading odi clients from {}", configFile);
             try {
                 scanner = new Scanner(configFile);
             } catch (FileNotFoundException e) {
@@ -137,16 +134,19 @@ public class OdiAuthentication {
             }
 
         }
-
-        while(scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if(!line.startsWith("#") && !line.isEmpty()) {
-                OdiClient client = extractClientConfig(line);
-                newClients.add(client);
+        try {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (!line.startsWith("#") && !line.isEmpty()) {
+                    OdiClient client = extractClientConfig(line);
+                    newClients.add(client);
+                }
             }
+            clients = Collections.unmodifiableSet(newClients);
+            log.info("Loaded {} odi clients", clients.size());
+        } finally {
+            scanner.close();
         }
-        clients = Collections.unmodifiableSet(newClients);
-        LOG.info("Loaded {} odi clients", clients.size());
     }
 
     private void appendConfigWatcher() {
@@ -162,14 +162,14 @@ public class OdiAuthentication {
 
                     path.register(watcher, kinds);
                 } catch (IOException e) {
-                    LOG.error("Error starting the odi config watcher on {}", CONFIG_FILE, e);
+                    log.error("Error starting the odi config watcher on {}", CONFIG_FILE, e);
                     throw new RuntimeException(e);
                 }
 
                 while(running) {
                     try {
                         WatchKey key = watcher.take();
-                        LOG.info("Reloading odi clients from {}", configFolder);
+                        log.info("Reloading odi clients from {}", configFolder);
                         for (WatchEvent<?> event : key.pollEvents()) {
                             final Path changed = (Path) event.context();
                             if (changed.endsWith(CONFIG_FILE)) {
@@ -178,12 +178,12 @@ public class OdiAuthentication {
                             }
                         }
                         if (!key.reset()) {
-                            LOG.info("Stopped watching as key " + key + " not valid");
+                            log.info("Stopped watching as key " + key + " not valid");
                             break;
                         }
 
                     } catch (Exception e) {
-                        LOG.error("Error reloading odi config from {}. ODI clients might not function properly. Retry after file update", CONFIG_FILE, e);
+                        log.error("Error reloading odi config from {}. ODI clients might not function properly. Retry after file update", CONFIG_FILE, e);
                     }
                 }
             }
@@ -226,7 +226,7 @@ public class OdiAuthentication {
 
         boolean expired = Math.abs(date.getTime() - System.currentTimeMillis()) > expiresInMinutes * 60 * 1000;
         if(expired) {
-            LOG.debug("Expired authentication client: {} server: {}", date.getTime(), System.currentTimeMillis());
+            log.debug("Expired authentication client: {} server: {}", date.getTime(), System.currentTimeMillis());
             throw new NoAccessException("not recent");
         }
     }
@@ -258,13 +258,13 @@ public class OdiAuthentication {
     private void isAuthorized(HttpServletRequest request) {
         String authorization = request.getHeader(AUTHORIZATION);
         if(authorization == null) {
-            LOG.debug("Missing authorization");
+            log.debug("Missing authorization");
             throw new NoAccessException("missing");
         }
 
         Matcher matcher = HEADER_PATTERN.matcher(authorization);
         if(!matcher.find()) {
-            LOG.debug("Invalid authorization");
+            log.debug("Invalid authorization");
             throw new NoAccessException("invalid");
         }
 
@@ -278,18 +278,18 @@ public class OdiAuthentication {
         }
 
         if(origin == null || origin.length() == 0) {
-            LOG.debug("Missing origin");
+            log.debug("Missing origin");
             throw new NoAccessException("origin");
         }
 
         OdiClient client = findMatchingClient(publicKey, origin);
         if(client == null) {
-            LOG.debug("Unauthorised client");
+            log.debug("Unauthorised client");
             throw new NoAccessException("client");
         }
 
         if(hasXOrigin && !client.isAllowXOrigin()) {
-            LOG.debug("X-Origin not allowed for {}", client);
+            log.debug("X-Origin not allowed for {}", client);
             throw new NoAccessException("xorigin");
 
         }
@@ -299,7 +299,7 @@ public class OdiAuthentication {
         String expectedSecurityHeaders = Util.concatSecurityHeaders(request);
         String expectedHmap = Util.hmacSHA256(client.getSecret(), expectedSecurityHeaders);
         if(! expectedHmap.equals(hmac)) {
-            LOG.debug("Invalid signature " + expectedSecurityHeaders);
+            log.debug("Invalid signature " + expectedSecurityHeaders);
             throw new NoAccessException("signature");
 
         }

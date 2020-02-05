@@ -998,17 +998,17 @@ public interface MediaTestDataBuilder<
                     ScheduleEvent.builder()
                             .channel(Channel.NED3)
                             .net(new Net("ZAPP"))
-                            .start(Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000))
+                            .start(Instant.ofEpochMilli(300L + 3 * 24 * 3600 * 1000))
                             .duration(Duration.ofMillis(50))
                             .repeat(Repeat.rerun())
                             .build(),
                     ScheduleEvent.builder()
                             .channel(Channel.HOLL)
-                            .start(Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000))
+                            .start(Instant.ofEpochMilli(350L + 8 * 24 * 3600 * 1000))
                             .duration(Duration.ofMillis(250))
                             .rerun(true)
                             .build(),
-                    ScheduleEvent.builder().channel(Channel.CONS).start(Instant.ofEpochMilli(600 + 10 * 24 * 3600 * 1000)).duration(Duration.ofMillis(200)).rerun(true).build()
+                    ScheduleEvent.builder().channel(Channel.CONS).start(Instant.ofEpochMilli(600L + 10 * 24 * 3600 * 1000)).duration(Duration.ofMillis(200L)).rerun(true).build()
             );
         }
 
