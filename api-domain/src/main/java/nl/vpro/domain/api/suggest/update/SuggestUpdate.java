@@ -4,9 +4,13 @@
  */
 package nl.vpro.domain.api.suggest.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -19,27 +23,18 @@ public class SuggestUpdate {
     @JsonProperty
     @NotNull
     @Size(min = 1)
+    @Getter
     private List<String> input;
 
     @JsonProperty
+    @Getter
+    @Setter
     private String output;
 
     public SuggestUpdate() {
     }
 
-    public List<String> getInput() {
-        return input;
-    }
-
-    public void setInput(List<String> input) {
+    public void setInput(@NotNull List<@NotNull String> input) {
         this.input = input;
-    }
-
-    public String getOutput() {
-        return output;
-    }
-
-    public void setOutput(String output) {
-        this.output = output;
     }
 }

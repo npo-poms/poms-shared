@@ -24,29 +24,4 @@ public abstract class AbstractFacet<T extends AbstractSearch> implements Facet<T
 
     protected T filter;
 
-    @Override
-    public abstract T getFilter();
-
-    @Override
-    public abstract void setFilter(T filter);
-
-/*
-    @JsonIgnore
-    public MediaSearch getMediaSearch() {
-        return filter != null && filter instanceof MediaSearch ? (MediaSearch)filter : null;
-    }
-
-    public void setMediaSearch(MediaSearch search) {
-        this.filter = (T)search;
-    }
-
-    @JsonIgnore
-    public PageSearch getPageSearch() {
-        return filter != null && filter instanceof PageSearch ? (PageSearch)filter : null;
-    }
-
-    public void setPageSearch(PageSearch search) {
-        this.filter = (T)search;
-    }
-*/
 }
