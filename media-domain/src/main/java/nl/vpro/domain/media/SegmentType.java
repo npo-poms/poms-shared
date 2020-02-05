@@ -15,7 +15,7 @@ public enum SegmentType implements SubMediaType {
     VISUALRADIOSEGMENT(MediaType.VISUALRADIOSEGMENT);
 
 
-    public static String URN_PREFIX = "urn:vpro:media:segment:";
+    public static final String URN_PREFIX = "urn:vpro:media:segment:";
 
     private MediaType mediaType;
 

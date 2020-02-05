@@ -28,14 +28,15 @@ import org.w3c.dom.ls.LSResourceResolver;
 public class ResourceResolver implements LSResourceResolver {
 
 
-    public static DOMImplementationLS DOM;
+    public static final DOMImplementationLS DOM;
     static {
+        DOMImplementation impl = null;
         try {
-            DOMImplementation impl  = DOMImplementationRegistry.newInstance().getDOMImplementation("XML 3.0");
-            DOM = (DOMImplementationLS) impl;
+            impl  = DOMImplementationRegistry.newInstance().getDOMImplementation("XML 3.0");
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
+         DOM = (DOMImplementationLS) impl;
     }
     private static Map<String, URL> MAP = new TreeMap<>();
     static {

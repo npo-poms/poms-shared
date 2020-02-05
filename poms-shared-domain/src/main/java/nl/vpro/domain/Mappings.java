@@ -29,6 +29,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.jaxbdocumentation.DocumentationAdder;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
@@ -65,6 +66,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
 
     private boolean inited = false;
 
+    @NonNull
     public static File getTempDir() {
         if (tempDir == null) {
             try {
@@ -269,19 +271,25 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         return SCHEMA_FACTORY.newSchema(new DOMSource(result.get(0).getNode()));
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void deleteIfOld(File file) {
         // last modified on fs only granalur to seconds.
         if (file.exists() && TimeUnit.SECONDS.convert(file.lastModified(), TimeUnit.MILLISECONDS) < TimeUnit.SECONDS.convert(startTime, TimeUnit.MILLISECONDS)) {
             log.info("Deleting {}, it is old {} < {}", file, file.lastModified(), startTime);
-            file.delete();
+            if (!file.delete()) {
+                log.warn("Couldn't delete {}", file);
+            }
         }
     }
 
     public static void reset() {
         KNOWN_LOCATIONS.clear();
-        for (File f : getTempDir().listFiles()) {
-            f.delete();
+        File[] files = getTempDir().listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (!f.delete()) {
+                    log.warn("Couldn't delete {}", f);
+                }
+            }
         }
     }
 }
