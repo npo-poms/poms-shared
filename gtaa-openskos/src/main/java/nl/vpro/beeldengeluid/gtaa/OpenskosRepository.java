@@ -105,7 +105,7 @@ public class OpenskosRepository implements GTAARepository {
         String personsSpec,
         String geoLocationsSpec,
         boolean useXLLabels,
-        @NonNull String tenant,
+        String tenant,
         int retries
         ) {
         this.gtaaUrl = baseUrl;
