@@ -529,7 +529,6 @@ public class TextualObjects {
      * @since 5.3
      */
     @SuppressWarnings("SuspiciousMethodCalls")
-
     public static <TO extends TypedText, TO2 extends TypedText> void retainAll(
         Collection<TO2> collection,
         Collection<TO> toRetain) {
