@@ -427,7 +427,7 @@
       </xs:element>
       <xs:element name="avAttributes" type="avAtributeUpdateType" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
-      <xs:element name="duration" type="xs:duration" minOccurs="0"/>
+      <xs:element name="duration" type="xs:duration"/>
       <xs:element name="credits" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
