@@ -205,7 +205,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         setMidRef(string);
     }
 
-    @NotNull
     public String getMidRefAttribute() {
         if (parent != null) {
             return parent.getMid();
