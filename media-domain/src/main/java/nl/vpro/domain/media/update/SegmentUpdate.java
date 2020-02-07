@@ -4,22 +4,19 @@
  */
 package nl.vpro.domain.media.update;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import nl.vpro.domain.Child;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.util.IntegerVersion;
+import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 @XmlRootElement(name = "segment")
@@ -60,9 +57,12 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 public final class SegmentUpdate extends MediaUpdate<Segment>
     implements Comparable<SegmentUpdate>, Child<ProgramUpdate> {
 
-
     private SegmentType segmentType;
+
+
     private java.time.Duration start;
+
+    @NotNull
     private String midRef;
     private ProgramUpdate parent;
 
@@ -78,8 +78,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     protected void fillFrom(Segment mediaObject, OwnerType ownerType) {
         fillFromFor(mediaObject.getParent() == null ? null : new ProgramUpdate(version, mediaObject.getParent(), ownerType), mediaObject, ownerType);
     }
-
-
 
     //**
     protected void fillFromFor(ProgramUpdate parent, Segment mediaObject, OwnerType ownerType) {
@@ -176,9 +174,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE, required = true)
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
+    @NotNull(groups = {WarningValidatorGroup.class})
     public java.time.Duration getStart() {
         return start;
     }
@@ -186,6 +182,16 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     public void setStart(java.time.Duration start) {
         this.start = start;
     }
+
+
+    @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE, required = true)
+    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
+    @NotNull(groups = {WarningValidatorGroup.class})
+    @Override
+    public java.time.Duration getDuration() {
+        return super.getDuration();
+    }
+
 
     @XmlTransient
     public void setMidRef(String string) {
