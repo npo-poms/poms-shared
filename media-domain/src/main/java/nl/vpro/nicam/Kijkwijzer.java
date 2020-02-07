@@ -148,7 +148,7 @@ public class Kijkwijzer implements NicamRated {
         AgeRating ageRating = null;
         if (value.length() >= 2 && (Character.isDigit(value.charAt(0)) || value.charAt(0) == '-') && Character.isDigit(value.charAt(1))) {
             ageRating = AgeRating.valueOf(Integer.parseInt(valueAsString.substring(0, 2)));
-            value = valueAsString.substring(2);
+            valueAsString = valueAsString.substring(2);
         } else {
             if (Character.isDigit(value.charAt(0))) {
                 return Optional.empty();
@@ -156,7 +156,12 @@ public class Kijkwijzer implements NicamRated {
         }
         List<ContentRating> contentRatings = new ArrayList<>();
         for (char c : valueAsString.toCharArray()) {
-            contentRatings.add(ContentRating.valueOf(c));
+            ContentRating r = ContentRating.valueOf(c);
+            if (r != null) {
+                contentRatings.add(r);
+            } else {
+                log.warn("Unrecognized content rating char {}", c);
+            }
         }
         return Optional.of(new Kijkwijzer(ageRating, contentRatings));
     }
