@@ -160,13 +160,16 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "        </segment>\n" +
             "    </segments>\n" +
             "</program>";
-        JAXBTestUtil.roundTripAndSimilar(programUpdate, expected);
+        ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(programUpdate, expected);
+        assertThat(rounded.getSegments().first().isStandalone()).isFalse();
+
 
         Program result = programUpdate.fetch(OwnerType.MIS);
 
         assertThat(result.getTitles().first().getOwner()).isEqualTo(OwnerType.MIS);
         assertThat(result.getSegments().first().getIntentions()).isEmpty();
         assertThat(result.getSegments().first().getTargetGroups()).isEmpty();
+
 
         JAXBTestUtil.roundTripAndSimilar(result, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" embeddable=\"true\" workflow=\"FOR PUBLICATION\">\n" +

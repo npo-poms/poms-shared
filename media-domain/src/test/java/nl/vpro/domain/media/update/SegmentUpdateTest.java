@@ -4,20 +4,21 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.StringReader;
 import java.time.Duration;
 
-import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
+import javax.xml.bind.*;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 public class SegmentUpdateTest extends MediaUpdateTest {
 
     @Test
@@ -30,7 +31,11 @@ public class SegmentUpdateTest extends MediaUpdateTest {
                 "<segment embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
                 "<credits/><locations/><images/><start>P0DT0H0M0.100S</start></segment>";
 
-        JAXBTestUtil.roundTripAndSimilar(update, expected);
+        SegmentUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
+        assertThat(update.isStandalone()).isTrue();
+        assertThat(rounded.isStandalone()).isTrue();
+
+        log.info("{}", update.violations());
     }
 
     @Test
@@ -50,7 +55,7 @@ public class SegmentUpdateTest extends MediaUpdateTest {
      * Naar aanleiding van slack-communicatie met de VARA.
      */
     @Test
-    @Ignore("TODO: Fails")
+    @Disabled("TODO: Fails")
     public void testNamespaces() {
         String example = "<?xml version=\"1.0\"?>\n" +
             "<ns0:segment xmlns:ns0=\"urn:vpro:media:update:2009\" avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_BV_12672829\" midRef=\"BV_101386500\"   sortDate=\"3333-01-24T10:12:00+00:00\" urn=\"urn:vpro:media:segment:102562422\">\n" +

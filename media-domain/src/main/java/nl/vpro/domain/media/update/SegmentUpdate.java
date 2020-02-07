@@ -4,11 +4,15 @@
  */
 package nl.vpro.domain.media.update;
 
+import java.lang.annotation.*;
+
+import javax.validation.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.Child;
@@ -18,6 +22,9 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.util.IntegerVersion;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
+
+import static java.lang.annotation.ElementType.TYPE_USE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @XmlRootElement(name = "segment")
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -54,16 +61,18 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "asset",
     "start"
 })
+@SegmentUpdate.Valid
 public final class SegmentUpdate extends MediaUpdate<Segment>
     implements Comparable<SegmentUpdate>, Child<ProgramUpdate> {
 
     private SegmentType segmentType;
 
-
     private java.time.Duration start;
 
     private String midRef;
     private ProgramUpdate parent;
+
+    private boolean standalone = true;
 
     private SegmentUpdate() {
 
@@ -75,11 +84,13 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
     @Override
     protected void fillFrom(Segment mediaObject, OwnerType ownerType) {
-        fillFromFor(mediaObject.getParent() == null ? null : new ProgramUpdate(version, mediaObject.getParent(), ownerType), mediaObject, ownerType);
+        fillFromFor(mediaObject.getParent() == null ? null : new ProgramUpdate(version, mediaObject.getParent(), ownerType), mediaObject);
     }
 
     //**
-    protected void fillFromFor(ProgramUpdate parent, Segment mediaObject, OwnerType ownerType) {
+    protected void fillFromFor(
+        ProgramUpdate parent,
+        Segment mediaObject) {
         this.parent = parent;
         this.segmentType = mediaObject.getType();
         this.start = mediaObject.getStart();
@@ -108,7 +119,8 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         SegmentUpdate segmentUpdate = new SegmentUpdate();
         segmentUpdate.setVersion(parent.getVersion());
         segmentUpdate.fillFromMedia(segment, ownerType);
-        segmentUpdate.fillFromFor(parent, segment, ownerType);
+        segmentUpdate.fillFromFor(parent, segment);
+        segmentUpdate.standalone = false;
         return segmentUpdate;
     }
 
@@ -260,6 +272,8 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         super.afterUnmarshal(unmarshaller, parent);
         if(parent instanceof ProgramUpdate) {
             this.parent = (ProgramUpdate) parent;
+            this.standalone = false;
+
         }
     }
 
@@ -274,11 +288,35 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     @Override
     public ProgramUpdate getParent() {
         return parent;
+    }
 
+    @XmlTransient
+    public boolean isStandalone() {
+        return standalone;
     }
 
     @Override
     public String getCorrelationId() {
         return getMidRefAttribute();
+    }
+    @Target({TYPE_USE})
+    @Retention(RUNTIME)
+    @Constraint(validatedBy = Validator.class)
+    @Documented
+    public @interface Valid {
+        String message() default "{nl.vpro.constraints.segmentupdate}";
+
+        Class<?>[] groups() default {};
+
+        Class<? extends Payload>[] payload() default {};
+
+    }
+    public static class Validator implements ConstraintValidator<Valid, SegmentUpdate> {
+
+        @Override
+        public boolean isValid(SegmentUpdate value, ConstraintValidatorContext context) {
+            return ! value.standalone || StringUtils.isNotBlank(value.getMidRefAttribute());
+
+        }
     }
 }
