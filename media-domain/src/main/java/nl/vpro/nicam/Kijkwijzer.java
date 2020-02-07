@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.ContentRating;
@@ -20,7 +21,7 @@ import nl.vpro.domain.media.ContentRating;
 public class Kijkwijzer implements NicamRated {
 
     private AgeRating ageRating;
-    private List<ContentRating> contentRatings;
+    private List<@NonNull ContentRating> contentRatings;
 
     public static Kijkwijzer parse(String value) {
         AgeRating ageRating = null;
@@ -51,7 +52,7 @@ public class Kijkwijzer implements NicamRated {
         return new Kijkwijzer(ageRating, contentRatings);
     }
 
-    // Used by Cinema
+    @Deprecated
     public static Kijkwijzer parseDonna(String value){
         AgeRating ageRating = null;
         List<ContentRating> contentRatings = new ArrayList<>();
@@ -82,11 +83,11 @@ public class Kijkwijzer implements NicamRated {
         return new Kijkwijzer(ageRating, contentRatings);
     }
 
-    public Kijkwijzer(AgeRating ageRating, List<ContentRating> contentRatings) {
+    public Kijkwijzer(AgeRating ageRating, List<@NonNull ContentRating> contentRatings) {
         this.ageRating = ageRating;
-        this.contentRatings = contentRatings;
+        this.contentRatings = contentRatings == null ? new ArrayList<>() : contentRatings;
     }
-    public Kijkwijzer(AgeRating ageRating, ContentRating... contentRatings) {
+    public Kijkwijzer(AgeRating ageRating, @NonNull ContentRating... contentRatings) {
         this(ageRating, Arrays.asList(contentRatings));
     }
 
@@ -95,15 +96,14 @@ public class Kijkwijzer implements NicamRated {
         this.contentRatings = new ArrayList<>();
     }
 
+    @Deprecated
     public String toDonnaCode() {
         StringBuilder result = new StringBuilder();
         Character ageRatingCode = toDonnaCode(ageRating);
         if (ageRatingCode != null) {
             result.append(ageRatingCode);
         }
-        for (ContentRating rating : contentRatings) {
-            result.append(rating.toChar());
-        }
+        appendContentRatings(result);
         return result.toString();
     }
 
@@ -113,11 +113,7 @@ public class Kijkwijzer implements NicamRated {
         if (ageRatingCode != null) {
             result.append(ageRatingCode);
         }
-
-        for (ContentRating rating : contentRatings) {
-            result.append(rating.toChar());
-        }
-
+        appendContentRatings(result);
         return result.toString();
     }
 
@@ -127,30 +123,39 @@ public class Kijkwijzer implements NicamRated {
     public String toPaddedCode() {
         StringBuilder result = new StringBuilder();
         result.append(toPaddedCode(ageRating));
-        for (ContentRating rating : contentRatings) {
-            result.append(rating.toChar());
-        }
+        appendContentRatings(result);
         return result.toString();
+    }
+
+    private void appendContentRatings(StringBuilder result) {
+        for (ContentRating rating : contentRatings) {
+            if (rating == null) {
+                log.warn("null rating in {}", contentRatings);
+            } else {
+                result.append(rating.toChar());
+            }
+        }
     }
 
     /**
      * @since 5.12
      */
-    public static Optional<Kijkwijzer> parsePaddedCode(String value) {
+    public static Optional<Kijkwijzer> parsePaddedCode(CharSequence value) {
         if (StringUtils.isEmpty(value)) {
             return Optional.empty();
         }
+        String valueAsString = value.toString();
         AgeRating ageRating = null;
         if (value.length() >= 2 && (Character.isDigit(value.charAt(0)) || value.charAt(0) == '-') && Character.isDigit(value.charAt(1))) {
-            ageRating = AgeRating.valueOf(Integer.parseInt(value.substring(0, 2)));
-            value = value.substring(2);
+            ageRating = AgeRating.valueOf(Integer.parseInt(valueAsString.substring(0, 2)));
+            value = valueAsString.substring(2);
         } else {
             if (Character.isDigit(value.charAt(0))) {
                 return Optional.empty();
             }
         }
         List<ContentRating> contentRatings = new ArrayList<>();
-        for (char c : value.toCharArray()) {
+        for (char c : valueAsString.toCharArray()) {
             contentRatings.add(ContentRating.valueOf(c));
         }
         return Optional.of(new Kijkwijzer(ageRating, contentRatings));
