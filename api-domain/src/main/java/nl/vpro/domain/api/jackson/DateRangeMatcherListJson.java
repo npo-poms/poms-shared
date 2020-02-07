@@ -21,18 +21,23 @@ import nl.vpro.jackson2.Jackson2Mapper;
  */
 public class DateRangeMatcherListJson {
 
+    private static final String VALUE = "value";
+    private static final String MATCH = "match";
+
+    private DateRangeMatcherListJson() {}
+
     public static class Serializer extends JsonSerializer<DateRangeMatcherList> {
         @Override
         public void serialize(DateRangeMatcherList value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
             if (value.getMatch() != MatcherList.DEFAULT_MATCH) {
                 jgen.writeStartObject();
-                jgen.writeArrayFieldStart("value");
+                jgen.writeArrayFieldStart(VALUE);
                 for (DateRangeMatcher matcher : value.asList()) {
                     jgen.writeObject(matcher);
                 }
                 jgen.writeEndArray();
                 if (value.getMatch() != null) {
-                    jgen.writeStringField("match", value.getMatch().name());
+                    jgen.writeStringField(MATCH, value.getMatch().name());
                 }
                 jgen.writeEndObject();
             } else {
@@ -52,12 +57,12 @@ public class DateRangeMatcherListJson {
         public DateRangeMatcherList deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
             if (jp.getParsingContext().inObject()) {
                 JsonNode jsonNode = jp.readValueAsTree();
-                JsonNode m = jsonNode.get("match");
+                JsonNode m = jsonNode.get(MATCH);
                 Match match = m == null ? Match.MUST : Match.valueOf(m.asText().toUpperCase());
 
                 List<DateRangeMatcher> list = new ArrayList<>();
-                if (jsonNode.has("value")) {
-                    for (JsonNode child : jsonNode.get("value")) {
+                if (jsonNode.has(VALUE)) {
+                    for (JsonNode child : jsonNode.get(VALUE)) {
                         DateRangeMatcher dm = Jackson2Mapper.getInstance().readValue(child.traverse(), DateRangeMatcher.class);
                         list.add(dm);
                     }

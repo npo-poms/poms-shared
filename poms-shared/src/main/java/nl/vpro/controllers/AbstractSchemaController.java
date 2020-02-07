@@ -2,9 +2,7 @@ package nl.vpro.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.function.Function;
@@ -87,7 +85,9 @@ public abstract class AbstractSchemaController<M extends Function<String, File>>
         } else {
             response.setContentType("application/xml");
             response.setDateHeader("Last-Modified", fileDate.getTime());
-            IOUtils.copy(new FileInputStream(file), response.getOutputStream());
+            try (InputStream input = new FileInputStream(file)) {
+                IOUtils.copy(input, response.getOutputStream());
+            }
         }
     }
 

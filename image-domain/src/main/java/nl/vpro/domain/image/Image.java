@@ -5,15 +5,10 @@
 
 package nl.vpro.domain.image;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.net.URI;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -27,13 +22,15 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.AbstractPublishableObject;
-import nl.vpro.domain.support.License;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -119,6 +116,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     private String title;
 
     @Column
+    @Nullable
     private String description;
 
     private Integer height;
@@ -317,30 +315,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     public Image setSize(Long size) {
         this.size = size;
         return this;
-    }
-
-    public String getSizeFormatted() {
-        if (size == null){
-            return null;
-        }
-        float result;
-        String unit;
-
-        // MM: BTW, these units are incorrect.
-        // In S.I. the prefixes T, M and k are powers of 10.
-        // Correct would be useage of prefixes Ti, Mi and Ki.
-        if(size > 1024 * 1024 * 1024) {
-            result = size / 1024 * 1024 * 1024;
-            unit = "TB";
-        } else if(size > 1024 * 1024) {
-            result = size / 1024 * 1024;
-            unit = "MB";
-        } else {
-            result = size / 1024;
-            unit = "kB";
-        }
-
-        return String.format("%1$.1f %2$s", result, unit);
     }
 
     @XmlTransient

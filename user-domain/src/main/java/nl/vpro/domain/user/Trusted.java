@@ -1,5 +1,7 @@
 package nl.vpro.domain.user;
 
+import java.util.Objects;
+
 import static nl.vpro.domain.Roles.SUPERPROCESS_ROLE;
 import static nl.vpro.domain.Roles.SYSTEM_ROLE;
 
@@ -37,6 +39,10 @@ public interface Trusted {
             @Override
             public boolean equals(Object o) {
                 return o instanceof Trusted && ((Trusted) o).getPrincipal().equals(principal);
+            }
+            @Override
+            public int hashCode() {
+                return Objects.hashCode(principal);
             }
 
         };

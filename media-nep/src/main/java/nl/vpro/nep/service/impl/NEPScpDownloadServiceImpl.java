@@ -136,6 +136,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 try {
                     Thread.sleep(waitBetweenRetries.toMillis());
                 } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
                     return;
                 }
             }
@@ -150,7 +151,11 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                         log.warn("Can't download from {} stream to null", url);
                     }
                 }
-            } catch (IOException | InterruptedException e) {
+            } catch (InterruptedException e) {
+                log.error(e.getMessage(), e);
+                Thread.currentThread().interrupt();
+                return;
+            } catch (IOException  e) {
                 log.error(e.getMessage(), e);
                 return;
             } catch (CommandExecutor.BrokenPipe bp) {

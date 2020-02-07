@@ -6,6 +6,10 @@ package nl.vpro.domain.api;
  */
 public class Examples {
 
+    private Examples() {
+
+    }
+
     public static final String IDLIST_JSON = "[\"AVRO_1656037\", \"NCRV_1413393\"]";
     public static final String IDLIST_XML = "<api:idList xmlns:api=\"urn:vpro:api:2013\" >\n" +
         "            \"    <api:id>AVRO_1656037</api:id>\\n\" +\n" +

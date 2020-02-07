@@ -15,10 +15,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
+import org.apache.http.*;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -38,7 +35,7 @@ import nl.vpro.media.odi.util.LocationResult;
 public class OdiPlusLocationHandler implements LocationProducer {
 
 
-    private static String ODI_PLUS_SCHEME_PREFIX = "odip+";
+    private static final String ODI_PLUS_SCHEME_PREFIX = "odip+";
 
     private String odiPlusBaseUrl = "http://odiplus.omroep.nl/odi";
 
@@ -102,12 +99,12 @@ public class OdiPlusLocationHandler implements LocationProducer {
         HttpPost httpPost = new HttpPost(odiPlusBaseUrl);
         httpPost.setEntity(new UrlEncodedFormEntity(valuePairs));
 
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response = httpclient.execute(httpPost);
-        response.getStatusLine();
-        HttpEntity entity = response.getEntity();
-
-        return EntityUtils.toString(entity);
+        try (DefaultHttpClient httpclient = new DefaultHttpClient()) {
+            HttpResponse response = httpclient.execute(httpPost);
+            response.getStatusLine();
+            HttpEntity entity = response.getEntity();
+            return EntityUtils.toString(entity);
+        }
     }
 
     private void addValuePair(List<NameValuePair> pairs, String name, String value) {

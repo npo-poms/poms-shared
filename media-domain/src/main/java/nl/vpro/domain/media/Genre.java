@@ -5,25 +5,19 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serializable;
 import java.util.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.Displayable;
-import nl.vpro.domain.classification.ClassificationServiceLocator;
-import nl.vpro.domain.classification.Term;
-import nl.vpro.domain.classification.TermId;
-import nl.vpro.domain.classification.TermNotFoundException;
+import nl.vpro.domain.classification.*;
 import nl.vpro.domain.classification.bind.TermWrapper;
 import nl.vpro.validation.GenreValidation;
 
@@ -43,7 +37,7 @@ public class Genre implements Displayable, Comparable<Genre>, Serializable {
 
     @Id
     @Column(name = "termid", nullable = false, updatable = false)
-    @Pattern(regexp = "3\\.([0-9]+\\.)*[0-9]+")
+    @Pattern(regexp = "3\\.(?:[0-9]+\\.)*[0-9]+")
     private String termId;
 
     @Transient

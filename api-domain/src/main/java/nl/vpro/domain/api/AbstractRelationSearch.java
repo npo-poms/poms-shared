@@ -16,6 +16,8 @@ import com.google.common.collect.Iterators;
 
 import nl.vpro.domain.media.Relation;
 
+import static nl.vpro.domain.api.AbstractTextMatcherList.searchEquals;
+
 /**
  * @author Michiel Meeuwissen
  * @since 4.2
@@ -56,10 +58,10 @@ public abstract class AbstractRelationSearch extends AbstractSearch
 
     public boolean searchEqualsOrNarrows(AbstractRelationSearch that) {
         return that == null ||
-            (that.broadcasters == null || TextMatcherList.searchEquals(broadcasters, that.broadcasters)) &&
-            (that.types == null || TextMatcherList.searchEquals(types, that.types)) &&
-            (that.values == null || ExtendedTextMatcherList.searchEquals(values, that.values)) &&
-            (that.uriRefs == null || TextMatcherList.searchEquals(uriRefs, that.uriRefs));
+            (that.broadcasters == null || searchEquals(broadcasters, that.broadcasters)) &&
+            (that.types == null || searchEquals(types, that.types)) &&
+            (that.values == null || searchEquals(values, that.values)) &&
+            (that.uriRefs == null || searchEquals(uriRefs, that.uriRefs));
     }
 
     public TextMatcherList getTypes() {

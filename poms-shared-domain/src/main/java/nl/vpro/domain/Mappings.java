@@ -129,13 +129,11 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         if (url != null) {
             return ResourceResolver.resolveNamespaceToLS(namespaceURI);
         }
-
-        try {
-            InputStream resource = new FileInputStream(apply(namespaceURI));
+        try (InputStream resource = new FileInputStream(apply(namespaceURI))) {
             LSInput lsinput = ResourceResolver.DOM.createLSInput();
             lsinput.setCharacterStream(new InputStreamReader(resource));
             return lsinput;
-        } catch (FileNotFoundException fne) {
+        } catch (IOException fne) {
             throw new RuntimeException(fne);
         }
     }

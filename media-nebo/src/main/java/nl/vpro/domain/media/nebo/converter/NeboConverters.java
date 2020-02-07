@@ -19,7 +19,7 @@ public class NeboConverters {
     public static final String SRID_HEADER = "srid";
 
     @Converter
-    public MediaUpdate convert(NeboXmlImport enrichment) {
+    public MediaUpdate<?> convert(NeboXmlImport enrichment) {
         Program program = enrichment.getAflevering().getProgram();
         ProgramUpdate update = ProgramUpdate.create(program);
         // This legacy Nebo format has no series support
@@ -28,7 +28,7 @@ public class NeboConverters {
     }
 
     @Converter
-    public MediaUpdate convert(NeboXmlWebOnly webonly, Exchange exchange) {
+    public MediaUpdate<?> convert(NeboXmlWebOnly webonly, Exchange exchange) {
         exchange.getIn().setHeader(SRID_HEADER, webonly.getWebonly().getSrid());
         return ProgramUpdate.create(webonly.getProgram());
     }

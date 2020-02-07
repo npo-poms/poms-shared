@@ -33,6 +33,10 @@ public class ClassificationServiceLocator  {
             }
         );
     }
+    private ClassificationServiceLocator(ClassificationService classificationService) {
+        this();
+        this.classificationService = () -> classificationService;
+    }
 
     public static ClassificationService getInstance() {
         if (singleton == null || singleton.classificationService == null || singleton.classificationService.get() == null) {
@@ -48,18 +52,18 @@ public class ClassificationServiceLocator  {
 
     public static void setInstance(ClassificationService classificationService) {
         if (singleton == null) {
-            new ClassificationServiceLocator();
-        }
-
-        if (singleton.classificationService.get() != EmptyClassificationService.INSTANCE
-            && ! singleton.classificationService.get().equals(classificationService)
+            new ClassificationServiceLocator(classificationService);
+        } else {
+            if (singleton.classificationService.get() != EmptyClassificationService.INSTANCE
+                && !singleton.classificationService.get().equals(classificationService)
             ) {
-            throw new IllegalStateException();
+                throw new IllegalStateException();
+            }
+            if (classificationService != null) {
+                log.info("Using classification service {} with {} terms", classificationService, classificationService.getClassificationScheme().getTerms().size());
+            }
+            singleton.classificationService = () -> classificationService;
         }
-        if (classificationService != null) {
-            log.info("Using classification service {} with {} terms", classificationService, classificationService.getClassificationScheme().getTerms().size());
-        }
-        singleton.classificationService = () -> classificationService;
         warned = false;
     }
 

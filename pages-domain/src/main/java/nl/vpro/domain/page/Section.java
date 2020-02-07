@@ -55,7 +55,7 @@ public class Section implements Displayable, Serializable {
     }
 
     @XmlAttribute
-    @Pattern(regexp = "\\/.*")
+    @Pattern(regexp = "/.*")
     public String getPath() {
         return path;
     }
@@ -84,7 +84,7 @@ public class Section implements Displayable, Serializable {
         this.portal = portal;
     }
 
-    @Pattern(regexp = "[A-Z]+\\.\\/.*")
+    @Pattern(regexp = "[A-Z]+\\./.*")
     @JsonProperty("id")
     public String getId() {
         return portal != null ? portal.getId() + "." + path : null;
