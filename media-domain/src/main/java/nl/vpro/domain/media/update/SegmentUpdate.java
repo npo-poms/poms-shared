@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.update;
 
 import java.lang.annotation.*;
+import java.util.Objects;
 
 import javax.validation.*;
 import javax.validation.constraints.NotNull;
@@ -72,8 +73,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     private String midRef;
     private ProgramUpdate parent;
 
-    private boolean standalone = true;
-
     private SegmentUpdate() {
 
     }
@@ -120,7 +119,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         segmentUpdate.setVersion(parent.getVersion());
         segmentUpdate.fillFromMedia(segment, ownerType);
         segmentUpdate.fillFromFor(parent, segment);
-        segmentUpdate.standalone = false;
         return segmentUpdate;
     }
 
@@ -272,8 +270,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         super.afterUnmarshal(unmarshaller, parent);
         if(parent instanceof ProgramUpdate) {
             this.parent = (ProgramUpdate) parent;
-            this.standalone = false;
-
         }
     }
 
@@ -292,7 +288,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
     @XmlTransient
     public boolean isStandalone() {
-        return standalone;
+        return parent == null;
     }
 
     @Override
@@ -315,8 +311,14 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
         @Override
         public boolean isValid(SegmentUpdate value, ConstraintValidatorContext context) {
-            return ! value.standalone || StringUtils.isNotBlank(value.getMidRefAttribute());
-
+            if (value.isStandalone()) {
+                return StringUtils.isNotBlank(value.midRef);
+            } else {
+                if (StringUtils.isNotBlank(value.midRef)) {
+                    return Objects.equals(value.midRef, value.parent.getMid());
+                }
+                return true;
+            }
         }
     }
 }
