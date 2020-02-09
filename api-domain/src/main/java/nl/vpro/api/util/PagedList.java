@@ -19,7 +19,7 @@ public class PagedList<T> extends AbstractList<T> {
     private final int max;
 
     public PagedList(List<T> wrappedList) {
-        this(wrappedList, 0l, Integer.MAX_VALUE);
+        this(wrappedList, 0L, Integer.MAX_VALUE);
     }
 
     public PagedList(List<T> wrappedList, long offset, int max) {
@@ -37,5 +37,27 @@ public class PagedList<T> extends AbstractList<T> {
     public int size() {
         int headRoom = wrappedList.size() - (int)offset;
         return headRoom > 0 ? Math.min(headRoom, max) : 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        PagedList<?> pagedList = (PagedList<?>) o;
+
+        if (offset != pagedList.offset) return false;
+        if (max != pagedList.max) return false;
+        return wrappedList != null ? wrappedList.equals(pagedList.wrappedList) : pagedList.wrappedList == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (wrappedList != null ? wrappedList.hashCode() : 0);
+        result = 31 * result + (int) (offset ^ (offset >>> 32));
+        result = 31 * result + max;
+        return result;
     }
 }
