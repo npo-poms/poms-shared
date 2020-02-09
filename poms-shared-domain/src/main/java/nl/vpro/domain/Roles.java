@@ -1,5 +1,7 @@
 package nl.vpro.domain;
 
+import java.util.*;
+
 /**
  * See http://wiki.publiekeomroep.nl/display/poms/Gebruikersbeheer#Gebruikersbeheer-Rollen
  * @author Michiel Meeuwissen
@@ -132,17 +134,17 @@ public class Roles {
 
 
 
-    public static final String[] PRIVILEGED = {
+    public static final Set<String> PRIVILEGED = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
         SUPERADMIN_ROLE,
         SUPERPROCESS_ROLE,
         PUBLISHER_ROLE,
         SUPPORT_ROLE,
         SYSTEM_ROLE
-    };
+    )));
 
-    public static final String[] CAN_CHOOSE_OWNER_TYPE = {
+    public static final Set<String> CAN_CHOOSE_OWNER_TYPE = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
         MIS_ROLE,
         SUPERADMIN_ROLE
-    };
+    )));
 }
 

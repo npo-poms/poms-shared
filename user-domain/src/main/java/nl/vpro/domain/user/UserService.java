@@ -4,10 +4,7 @@
  */
 package nl.vpro.domain.user;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -56,7 +53,7 @@ public interface UserService<T extends User> {
         return currentUserHasRole(Arrays.asList(roles));
     }
 
-    boolean currentUserHasRole(List<String> roles);
+    boolean currentUserHasRole(Collection<String> roles);
 
     void authenticate(String principalId);
 
