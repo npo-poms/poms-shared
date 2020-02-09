@@ -663,7 +663,7 @@ public interface MediaTestDataBuilder<
     RelationDefinition VPRO_ARTIST    = RelationDefinition.of("ARTIST", "VPRO");
     RelationDefinition EO_KOOR        = RelationDefinition.of("KOOR", "EO");
 
-    RelationDefinition[] RELATION_DEFINITIONS = new RelationDefinition[] {VPRO_LABEL, AVRO_THESAURUS, VPRO_ARTIST, EO_KOOR};
+    List<RelationDefinition> RELATION_DEFINITIONS = Collections.unmodifiableList(Arrays.asList(VPRO_LABEL, AVRO_THESAURUS, VPRO_ARTIST, EO_KOOR));
 
     default T withRelations() {
         return relations(
