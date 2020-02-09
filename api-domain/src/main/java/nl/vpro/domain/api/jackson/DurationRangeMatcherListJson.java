@@ -1,9 +1,7 @@
 package nl.vpro.domain.api.jackson;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -18,6 +16,8 @@ import nl.vpro.jackson2.Jackson2Mapper;
  * @since 3.0
  */
 public class DurationRangeMatcherListJson {
+
+    private DurationRangeMatcherListJson() {}
 
     public static class Serializer extends JsonSerializer<DurationRangeMatcherList> {
         @Override
