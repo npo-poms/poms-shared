@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.lang.annotation.*;
 import java.util.Objects;
 
@@ -63,6 +65,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
     "start"
 })
 @SegmentUpdate.Valid
+@Slf4j
 public final class SegmentUpdate extends MediaUpdate<Segment>
     implements Comparable<SegmentUpdate>, Child<ProgramUpdate> {
 
@@ -300,7 +303,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     @Constraint(validatedBy = Validator.class)
     @Documented
     public @interface Valid {
-        String message() default "{nl.vpro.constraints.segmentupdate}";
+        String message() default "{nl.vpro.constraints.SegmentUpdate}";
 
         Class<?>[] groups() default {};
 
@@ -312,13 +315,27 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         @Override
         public boolean isValid(SegmentUpdate value, ConstraintValidatorContext context) {
             if (value.isStandalone()) {
-                return StringUtils.isNotBlank(value.midRef);
+                if (StringUtils.isBlank(value.midRef)) {
+                    context.disableDefaultConstraintViolation();
+                    context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
+                        .addPropertyNode("midRef")
+                        .addConstraintViolation();
+
+                    log.info("{}", context.getDefaultConstraintMessageTemplate());
+                    return false;
+                }
             } else {
                 if (StringUtils.isNotBlank(value.midRef)) {
-                    return Objects.equals(value.midRef, value.parent.getMid());
+                    if (! Objects.equals(value.midRef, value.parent.getMid())){
+                        context.disableDefaultConstraintViolation();
+                        context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
+                            .addPropertyNode("parent")
+                            .addConstraintViolation();
+                        return false;
+                    }
                 }
-                return true;
             }
+            return true;
         }
     }
 }

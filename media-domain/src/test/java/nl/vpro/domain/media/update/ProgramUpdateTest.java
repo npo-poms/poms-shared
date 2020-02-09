@@ -350,7 +350,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setBroadcasters(Collections.singletonList("MAX"));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "<program embeddable=\"true\"   xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <broadcaster>MAX</broadcaster>\n" +
                 "    <geoLocations/>\n" +
                 "    <topics/>\n" +

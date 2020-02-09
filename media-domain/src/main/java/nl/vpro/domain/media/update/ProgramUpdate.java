@@ -4,11 +4,10 @@
  */
 package nl.vpro.domain.media.update;
 
-import java.util.Arrays;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -65,7 +64,6 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
     @Valid
     protected  SortedSet<ScheduleEventUpdate> scheduleEvents;
-
 
 
     private ProgramType programType;
@@ -145,6 +143,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
     @XmlAttribute
     @Override
+    @NotNull
     public ProgramType getType() {
         return programType;
     }

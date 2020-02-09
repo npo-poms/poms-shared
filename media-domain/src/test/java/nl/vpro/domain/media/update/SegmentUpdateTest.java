@@ -49,6 +49,12 @@ public class SegmentUpdateTest extends MediaUpdateTest {
 
         assertThat(update.violations()).isEmpty();
         assertThat(update.violations(WarningValidatorGroup.class)).hasSize(1);
+
+        update.setMidRef(null);
+        assertThat(update.violations()).hasSize(1);
+        log.info("{}", update.violations());
+
+
     }
 
     @Test
@@ -64,6 +70,43 @@ public class SegmentUpdateTest extends MediaUpdateTest {
     }
 
 
+
+    @Test
+    public void ofProgram() {
+
+        String expected =
+            "<program xmlns=\"urn:vpro:media:update:2009\"  type=\"CLIP\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <broadcaster>MAX</broadcaster>\n" +
+                "    <geoLocations/>\n" +
+                "    <topics/>\n" +
+                "    <credits/>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments>\n" +
+                "<segment  avType=\"VIDEO\" embeddable=\"true\" midRef=\"MID_123\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <title type=\"MAIN\">main title</title>\n" +
+            "    <credits/>\n" +
+            "    <ageRating>ALL</ageRating>\n" +
+            "    <locations/>\n" +
+            "    <images/>\n" +
+            "    <start>P0DT0H0M0.100S</start>\n" +
+            "</segment>\n" +
+           "</segments></program>";
+        ProgramUpdate u = JAXB.unmarshal(new StringReader(expected), ProgramUpdate.class);
+        u.setMainTitle("hoi");
+        u.setAVType(AVType.VIDEO);
+        assertThat(u.violations()).hasSize(1);
+        u.setMid("MID_123");
+        assertThat(u.violations()).hasSize(0);
+        u.setMid("MID_124");
+        assertThat(u.violations()).hasSize(1);
+
+
+
+
+
+    }
     /**
      * Naar aanleiding van slack-communicatie met de VARA.
      */

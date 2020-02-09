@@ -745,6 +745,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     protected abstract String getUrnPrefix();
 
     @XmlAttribute(name = "avType")
+    @NotNull
     public AVType getAVType() {
         return avType;
     }
