@@ -29,13 +29,13 @@ public class TextMatcherListJson extends AbstractTextMatcherListJson<TextMatcher
     public static class Serializer extends JsonSerializer<TextMatcherList> {
         @Override
         public void serialize(TextMatcherList value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-            LIST_SERIALIZER.serialize(value, gen, serializers);
+            LIST_SERIALIZER.serialize(value, gen);
         }
     }
     public static class Deserializer extends JsonDeserializer<TextMatcherList> {
         @Override
         public TextMatcherList deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-            return LIST_SERIALIZER.deserialize(p, ctxt);
+            return LIST_SERIALIZER.deserialize(p);
         }
     }
 

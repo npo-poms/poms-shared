@@ -33,13 +33,13 @@ public class ExtendedTextMatcherListJson extends AbstractTextMatcherListJson<Ext
     public static class Serializer extends JsonSerializer<ExtendedTextMatcherList> {
         @Override
         public void serialize(ExtendedTextMatcherList value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-            LIST_SERIALIZER.serialize(value, gen, serializers);
+            LIST_SERIALIZER.serialize(value, gen);
         }
     }
     public static class Deserializer extends JsonDeserializer<ExtendedTextMatcherList> {
         @Override
         public ExtendedTextMatcherList deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-            return LIST_SERIALIZER.deserialize(p, ctxt);
+            return LIST_SERIALIZER.deserialize(p);
         }
     }
 

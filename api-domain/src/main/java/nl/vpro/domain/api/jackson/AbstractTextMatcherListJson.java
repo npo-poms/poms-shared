@@ -5,16 +5,12 @@
 package nl.vpro.domain.api.jackson;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.SerializerProvider;
 
 import nl.vpro.domain.api.*;
 
@@ -36,7 +32,7 @@ public abstract class AbstractTextMatcherListJson<L extends AbstractTextMatcherL
         this.serializer = serializer;
     }
 
-    public final void serialize(L value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    public final void serialize(L value, JsonGenerator jgen) throws IOException {
         if (value.getMatch() != MatcherList.DEFAULT_MATCH) {
             jgen.writeStartObject();
             jgen.writeArrayFieldStart("value");
@@ -61,7 +57,7 @@ public abstract class AbstractTextMatcherListJson<L extends AbstractTextMatcherL
     }
 
 
-    public final L deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+    public final L deserialize(JsonParser jp) throws IOException {
         if (jp.getParsingContext().inObject()) {
             JsonNode jsonNode = jp.readValueAsTree();
             if (jsonNode.isTextual()) {
@@ -91,7 +87,7 @@ public abstract class AbstractTextMatcherListJson<L extends AbstractTextMatcherL
                 for (JsonNode child : jsonNode) {
                     list.add(serializer.from(child));
                 }
-                return constructor.apply(list, AbstractTextMatcherList.DEFAULT_MATCH);
+                return constructor.apply(list, MatcherList.DEFAULT_MATCH);
             } else {
                 throw new IllegalStateException();
             }
@@ -102,7 +98,7 @@ public abstract class AbstractTextMatcherListJson<L extends AbstractTextMatcherL
             while (i.hasNext()) {
                 list.add(i.next());
             }
-            return constructor.apply(list, AbstractTextMatcherList.DEFAULT_MATCH);
+            return constructor.apply(list, MatcherList.DEFAULT_MATCH);
         } else {
             throw new IllegalStateException();
         }
