@@ -26,15 +26,10 @@ import nl.vpro.domain.api.jackson.media.RelationFacetListJson;
  * @since 3.3
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "mediaRelationFacetListType", propOrder = {"filter", "subSearch", "facets"})
+@XmlType(name = "mediaRelationFacetListType", propOrder = {"subSearch", "facets"})
 @JsonSerialize(using = RelationFacetListJson.Serializer.class)
 @JsonDeserialize(using = RelationFacetListJson.Deserializer.class)
 public class RelationFacetList extends AbstractFacet<MediaSearch> implements SearchableFacet<MediaSearch, RelationSearch>, Iterable<RelationFacet> {
-
-    @Valid
-    @Getter
-    @Setter
-    private MediaSearch filter;
 
     @Valid
     @Getter

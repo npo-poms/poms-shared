@@ -4,6 +4,10 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -22,6 +26,9 @@ import nl.vpro.domain.api.page.PageFacet;
 @XmlSeeAlso({MediaFacet.class, PageFacet.class})
 public abstract class AbstractFacet<T extends AbstractSearch> implements Facet<T>, FilteredFacet<T> {
 
+    @Getter
+    @Setter
+    @Valid
     protected T filter;
 
 }
