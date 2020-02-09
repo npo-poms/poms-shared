@@ -7,7 +7,7 @@ package nl.vpro.domain.media.search;
 import lombok.Data;
 import lombok.ToString;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;

@@ -16,7 +16,7 @@ import java.util.*;
 import java.util.function.BiFunction;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.validation.Valid;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;

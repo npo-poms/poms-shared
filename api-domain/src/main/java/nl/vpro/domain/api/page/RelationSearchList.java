@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

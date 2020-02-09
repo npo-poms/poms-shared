@@ -4,14 +4,13 @@
  */
 package nl.vpro.domain.api;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * @author rico

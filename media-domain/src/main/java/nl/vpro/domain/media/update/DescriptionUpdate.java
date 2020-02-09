@@ -5,7 +5,7 @@
 package nl.vpro.domain.media.update;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
