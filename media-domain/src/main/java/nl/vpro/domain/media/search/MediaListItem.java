@@ -334,20 +334,18 @@ public class MediaListItem extends PublishableListItem implements TrackableMedia
         return mid + " " + title;
     }
 
-
+    public static final List<String> FIELD_NAMES;
     private static final  List<Field> FIELDS;
     static {
-        FIELDS  = Arrays.stream(MediaListItem.class.getDeclaredFields()).filter(
+        FIELDS = Collections.unmodifiableList(Arrays.stream(MediaListItem.class.getDeclaredFields()).filter(
                 (f) -> {
                     f.setAccessible(true);
                     return ! Modifier.isStatic(f.getModifiers());
                 })
-<<<<<<< HEAD
-            .collect(Collectors.toList());
-        FIELD_NAMES = FIELDS.stream().map(Field::getName).toArray(String[]::new);
-=======
             .collect(Collectors.toList()));
->>>>>>> f06a4b1a5... Removed unused static field.
+        FIELD_NAMES = Collections.unmodifiableList(FIELDS.stream()
+            .map(Field::getName)
+            .collect(Collectors.toList()));
     }
     private static Object toRecordObject(Object o) {
         if (o == null) {
