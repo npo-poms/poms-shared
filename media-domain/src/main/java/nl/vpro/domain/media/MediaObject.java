@@ -30,7 +30,6 @@ import org.hibernate.annotations.*;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.regions.RegionService;
-import org.meeuw.i18n.regions.persistence.RegionToStringConverter;
 import org.meeuw.i18n.regions.validation.Language;
 import org.meeuw.i18n.regions.validation.ValidRegion;
 
@@ -367,7 +366,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Convert(converter = RegionToStringConverter.class)
     protected List<
         // valid are countries (further validated by @ValidCountry), and a list of codes.
         org.meeuw.i18n.regions.
