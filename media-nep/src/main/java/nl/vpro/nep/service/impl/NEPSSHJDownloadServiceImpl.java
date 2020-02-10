@@ -161,7 +161,11 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         } finally {
             if (handle != null) {
                 remoteFileConsumer.accept(handle);
-                handle.close();
+                try {
+                    handle.close();
+                } catch(Exception e) {
+                    log.warn(e.getMessage());
+                }
             }
         }
     }
