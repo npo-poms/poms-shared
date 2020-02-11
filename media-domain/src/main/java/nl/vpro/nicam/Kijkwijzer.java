@@ -144,25 +144,34 @@ public class Kijkwijzer implements NicamRated {
         if (StringUtils.isEmpty(value)) {
             return Optional.empty();
         }
-        String valueAsString = value.toString();
-        AgeRating ageRating = null;
-        if (value.length() >= 2 && (Character.isDigit(value.charAt(0)) || value.charAt(0) == '-') && Character.isDigit(value.charAt(1))) {
-            ageRating = AgeRating.valueOf(Integer.parseInt(valueAsString.substring(0, 2)));
-            valueAsString = valueAsString.substring(2);
-        } else {
-            if (Character.isDigit(value.charAt(0))) {
-                return Optional.empty();
+        StringBuilder ageRatingString = new StringBuilder();
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            if (Character.isDigit(c) || (c == '-' && ageRatingString.length() == 0)) {
+                ageRatingString.append(c);
             }
+        }
+        AgeRating ageRating = null;
+        if (ageRatingString.length() == 1) {
+            return Optional.empty();
+        } else if (ageRatingString.length() == 2) {
+            ageRating = AgeRating.valueOf(Integer.parseInt(ageRatingString.toString()));
+        } else if (ageRatingString.length() > 2) {
+            return Optional.empty();
         }
         List<ContentRating> contentRatings = new ArrayList<>();
-        for (char c : valueAsString.toCharArray()) {
-            ContentRating r = ContentRating.valueOf(c);
-            if (r != null) {
-                contentRatings.add(r);
-            } else {
-                log.warn("Unrecognized content rating char {}", c);
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            if (! Character.isDigit(c)) {
+                ContentRating r = ContentRating.valueOf(c);
+                if (r != null) {
+                    contentRatings.add(r);
+                } else {
+                    log.warn("Unrecognized content rating char {}", c);
+                }
             }
         }
+
         return Optional.of(new Kijkwijzer(ageRating, contentRatings));
     }
 
