@@ -10,9 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -25,7 +22,6 @@ import nl.vpro.domain.media.gtaa.GTAAStatus;
  * Connects an  entry in GTAA with the scheme 'http://data.beeldengeluid.nl/gtaa/Namen' with a {@link MediaObject}.
  */
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
 @ToString(of = { "gtaaRecord" }, callSuper = true)
