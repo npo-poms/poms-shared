@@ -4,11 +4,13 @@ package nl.vpro.domain.media.gtaa;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import nl.vpro.persistence.StringListConverter;
 import nl.vpro.validation.NoHtml;
 
 /**
@@ -24,7 +26,7 @@ public class GTAARecord implements Serializable {
     private static final long serialVersionUID = 0L;
 
     @Id
-    @Column(columnDefinition="varchar(255)")
+    @Column(columnDefinition = "varchar(255)")
     @NoHtml
     private String uri;
 
@@ -35,9 +37,8 @@ public class GTAARecord implements Serializable {
     @NoHtml
     private String name;
 
-    @NoHtml
-    // not applying StringListConverter here, because JPAMetaModelEntityProcessor get's confused.
-    private String scopeNotes = null;
+    @Convert(converter = StringListConverter.class)
+    private List<@NoHtml @NonNull String> scopeNotes = null;
 
     public GTAARecord() {
     }
@@ -46,32 +47,8 @@ public class GTAARecord implements Serializable {
     private GTAARecord(String uri, GTAAStatus status, String name, List<String> scopeNotes) {
 
         this.name = name;
-        this.scopeNotes = scopeNotes != null ? convertToDatabaseColumn(scopeNotes) : "";
+        this.scopeNotes = scopeNotes != null ? scopeNotes : new ArrayList<>();
         this.uri = uri;
         this.status = status;
-    }
-
-    public List<String> getScopeNotes() {
-        return convertToEntityAttribute(scopeNotes);
-    }
-
-    public void setScopeNotes(List<String> scopeNotes) {
-        this.scopeNotes = convertToDatabaseColumn(scopeNotes);
-    }
-
-    private static final String SPLIT_CHAR = "\t";
-
-    private static  String convertToDatabaseColumn(List<String> stringList) {
-        if (stringList == null || stringList.isEmpty()) {
-            return null;
-        }
-        return String.join(SPLIT_CHAR, stringList);
-    }
-
-    private static  List<String> convertToEntityAttribute(String string) {
-        if (string == null || string.isEmpty()) {
-            return null;
-        }
-        return Arrays.asList(string.split(SPLIT_CHAR));
     }
 }
