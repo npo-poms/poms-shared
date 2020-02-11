@@ -1,24 +1,16 @@
 package nl.vpro.domain.media.gtaa;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import nl.vpro.persistence.StringListConverter;
 import nl.vpro.validation.NoHtml;
+
+import static nl.vpro.persistence.StringListConverter.INSTANCE;
 
 /**
  * The GTAARecord represents a record from the GTAA service.
@@ -44,20 +36,28 @@ public class GTAARecord implements Serializable {
     @NoHtml
     private String name;
 
-    @Convert(converter = StringListConverter.class)
     @NoHtml
-    private List<String> scopeNotes;
+    // not applying StringListConverter here, because JPAMetaModelEntityProcessor get's confused.
+    private String scopeNotes = null;
 
     public GTAARecord() {
-        scopeNotes = new ArrayList<>();
     }
 
     @lombok.Builder
     private GTAARecord(String uri, GTAAStatus status, String name, List<String> scopeNotes) {
 
         this.name = name;
-        this.scopeNotes = scopeNotes != null ? scopeNotes : new ArrayList<>();
+        this.scopeNotes = scopeNotes != null ? INSTANCE.convertToDatabaseColumn(scopeNotes) : "";
         this.uri = uri;
         this.status = status;
     }
+
+    public List<String> getScopeNotes() {
+        return INSTANCE.convertToEntityAttribute(scopeNotes);
+    }
+
+    public void setScopeNotes(List<String> scopeNotes) {
+        this.scopeNotes = INSTANCE.convertToDatabaseColumn(scopeNotes);
+    }
+
 }
