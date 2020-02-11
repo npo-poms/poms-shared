@@ -16,6 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.URI;
 
 @SuppressWarnings("serial")
@@ -30,7 +31,7 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
     @XmlTransient
     private Long id;
 
-    @URI(message = "{nl.vpro.constraints.URI}")
+    @URI(message = "{nl.vpro.constraints.URI}", groups= PomsValidatorGroup.class)
     @XmlValue
     @Size.List({
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),

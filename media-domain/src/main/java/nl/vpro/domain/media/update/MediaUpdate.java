@@ -622,7 +622,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     private List<CreditsUpdate> toCreditsUpdate(List<Credits> credits) {
-
         if (credits == null) {
             return null;
         }
