@@ -575,10 +575,8 @@ public class MediaObjects {
     public static List<String> getPlannedPlatformNamesInLowerCaseOrAll(MediaObject media) {
         List<String> result = getPlannedPlatformNamesInLowerCase(media.getPredictions());
         if (result == null || result.isEmpty()) {
-            if (result.isEmpty()) {
-                result = Arrays.stream(Platform.values()).map((p) -> p.name().toLowerCase()).collect(Collectors.toList());
-                log.info("No available platforms for {}, taking {}", media, result);
-            }
+            result = Arrays.stream(Platform.values()).map((p) -> p.name().toLowerCase()).collect(Collectors.toList());
+            log.info("No available platforms for {}, taking {}", media, result);
         }
         return result;
     }
