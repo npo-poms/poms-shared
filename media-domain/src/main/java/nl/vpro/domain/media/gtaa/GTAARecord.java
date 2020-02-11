@@ -38,6 +38,9 @@ public class GTAARecord implements Serializable {
     private String name;
 
     @Convert(converter = StringListConverter.class)
+    //@Lob @Basic
+    // org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor doesn't get this
+    //https://hibernate.atlassian.net/projects/HHH/issues/HHH-13263
     private List<@NoHtml @NonNull String> scopeNotes = null;
 
     public GTAARecord() {
