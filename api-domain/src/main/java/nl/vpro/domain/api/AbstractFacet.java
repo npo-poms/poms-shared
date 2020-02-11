@@ -26,8 +26,6 @@ import nl.vpro.domain.api.page.PageFacet;
 @XmlSeeAlso({MediaFacet.class, PageFacet.class})
 public abstract class AbstractFacet<T extends AbstractSearch> implements Facet<T>, FilteredFacet<T> {
 
-    @Getter
-    @Setter
     @Valid
     protected T filter;
 

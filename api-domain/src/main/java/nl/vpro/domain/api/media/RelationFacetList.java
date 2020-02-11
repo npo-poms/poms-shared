@@ -26,7 +26,7 @@ import nl.vpro.domain.api.jackson.media.RelationFacetListJson;
  * @since 3.3
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "mediaRelationFacetListType", propOrder = {"subSearch", "facets"})
+@XmlType(name = "mediaRelationFacetListType", propOrder = {"filter", "subSearch", "facets"})
 @JsonSerialize(using = RelationFacetListJson.Serializer.class)
 @JsonDeserialize(using = RelationFacetListJson.Deserializer.class)
 public class RelationFacetList extends AbstractFacet<MediaSearch> implements SearchableFacet<MediaSearch, RelationSearch>, Iterable<RelationFacet> {
@@ -59,7 +59,15 @@ public class RelationFacetList extends AbstractFacet<MediaSearch> implements Sea
         this.subSearch = subSearch;
     }
 
-
+    @XmlElement
+    @Override
+    public MediaSearch getFilter() {
+        return filter;
+    }
+    @Override
+    public void  setFilter(MediaSearch filter) {
+        this.filter = filter;
+    }
     /**
      * Use iterator if you want to initialise the facet names. Clients may supply there own custom name, but
      * this is optional
