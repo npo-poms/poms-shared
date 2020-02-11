@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Locale;
 
 import javax.persistence.*;
@@ -13,6 +14,9 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.subtitles.SubtitlesWorkflow;
 import nl.vpro.xml.bind.LocaleAdapter;
 
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.nullsLast;
+
 
 /**
  * This is kind of strange, this table is has only a few fields of Subtitles, and is then in {@link MediaObject} mapped with @CollectionTable.
@@ -22,16 +26,20 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @XmlType(name="availableSubtitlesType")
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class AvailableSubtitles implements Serializable {
+public class AvailableSubtitles implements Serializable, Comparable<AvailableSubtitles> {
 
     private static final long serialVersionUID = 0L;
+
+    private static final Comparator<AvailableSubtitles> COMPARATOR  =
+        nullsLast(
+            comparing(AvailableSubtitles::getLanguage, comparing(Locale::toLanguageTag))
+                .thenComparing(AvailableSubtitles::getType, Comparator.naturalOrder()));
 
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @XmlAttribute
     @Getter
     @Setter(AccessLevel.PRIVATE)
     @EqualsAndHashCode.Include
-
     private Locale language;
 
     @Enumerated(EnumType.STRING)
@@ -69,6 +77,11 @@ public class AvailableSubtitles implements Serializable {
         this.type = type;
         this.workflow = workflow;
 
+    }
+
+    @Override
+    public int compareTo(AvailableSubtitles o) {
+        return COMPARATOR.compare(this, o);
     }
 
     @XmlAttribute(name = "workflow")
