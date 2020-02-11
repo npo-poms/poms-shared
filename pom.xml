@@ -17,7 +17,7 @@
 
   <properties>
     <poms.shared.version>${project.version}</poms.shared.version>
-    <vpro.shared.version>2.11.0</vpro.shared.version>
+    <vpro.shared.version>2.11.1</vpro.shared.version>
   </properties>
 
 
