@@ -34,7 +34,7 @@ public class CachedURLClassificationServiceImpl extends URLClassificationService
     }
 
     @Override
-    protected SortedMap<TermId, Term> getTermsMap() {
+    protected synchronized SortedMap<TermId, Term> getTermsMap() {
         if (terms == null || Instant.now().isAfter(lastCheck.plus(checkInterval))) {
             lastCheck = Instant.now();
             misses++;

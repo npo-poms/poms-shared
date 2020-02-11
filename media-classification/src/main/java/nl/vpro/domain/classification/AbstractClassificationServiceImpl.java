@@ -15,6 +15,7 @@ import javax.xml.bind.JAXB;
 import javax.xml.parsers.*;
 import javax.xml.transform.dom.DOMSource;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -94,35 +95,30 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
         executorService.shutdownNow();
     }
 
-    protected SortedMap<TermId, Term> getTermsMap() {
+    protected synchronized  SortedMap<TermId, Term> getTermsMap() {
         if(terms == null) {
-            synchronized(this) {
-                if (terms == null) {
-                    // This can be called via Jaxb unmarshalling, so it cannot happen in the same thread.
-                    Future<?> future = executorService.submit(() -> {
-                        try {
-                            List<InputSource> sources = getSources(true);
-                            if (sources != null) {
-                                terms = readTerms(sources);
-                            } else {
-                                log.debug("No sources");
-                            }
-                        } catch (Exception e) {
-                            log.error(e.getMessage(), e);
-                        }
-                    });
-                    try {
-                        future.get();
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                    } catch (ExecutionException e) {
-                        log.error(e.getMessage(), e);
+            // This can be called via Jaxb unmarshalling, so it cannot happen in the same thread.
+            Future<?> future = executorService.submit(() -> {
+                try {
+                    List<InputSource> sources = getSources(true);
+                    if (sources != null) {
+                        terms = readTerms(sources);
+                    } else {
+                        log.debug("No sources");
                     }
-                    if (terms == null) {
-                        terms = new TreeMap<>();
-                    }
+                } catch (Exception e) {
+                    log.error(e.getMessage(), e);
                 }
-
+            });
+            try {
+                future.get();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            } catch (ExecutionException e) {
+                log.error(e.getMessage(), e);
+            }
+            if (terms == null) {
+                terms = new TreeMap<>();
             }
         }
 
@@ -193,6 +189,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
         }
     }
 
+    @Nullable
     protected abstract List<InputSource> getSources(boolean init);
 
     @Override

@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * @author Roelof Jan Koekoek
  * @since 3.0
@@ -25,22 +27,22 @@ public class ClassificationScheme implements TermContainer {
     @XmlElement(name = "Term")
     private List<Term> terms;
 
-    public ClassificationScheme(String uri, List<Term> rootTerms) {
+    @XmlAttribute
+    @Nullable
+    private String uri;
+
+    public ClassificationScheme(@Nullable String uri, List<Term> rootTerms) {
         this.terms = rootTerms;
         this.uri = uri;
     }
 
     private ClassificationScheme() {
-
     }
 
-    @XmlAttribute
-    private String uri;
-
+    @Nullable
     public String getUri() {
         return uri;
     }
-
 
     @Override
     public List<Term> getTerms() {

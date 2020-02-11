@@ -18,6 +18,7 @@ import java.util.function.Function;
 import javax.cache.annotation.CacheResult;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.xml.sax.InputSource;
 
 import nl.vpro.util.URLResource;
@@ -65,28 +66,27 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
     }
 
     @Override
+    @Nullable
     protected List<InputSource> getSources(boolean init) {
         return null;
     }
 
     @Override
     @CacheResult(cacheName = "URLClassificationServiceImpl")
-    protected SortedMap<TermId, Term> getTermsMap() {
+    protected synchronized SortedMap<TermId, Term> getTermsMap() {
         resource.get();
         return super.getTermsMap();
     }
 
-
+    @Nullable
     private SortedMap<TermId, Term> create(InputSource inputSource){
         try{
             return readTerms(Collections.singletonList(inputSource));
-        }catch(ParserConfigurationException e){
+        } catch(ParserConfigurationException e){
             log.error(e.getMessage(),e);
             return null;
         }
     }
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -96,7 +96,6 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
         URLClassificationServiceImpl that = (URLClassificationServiceImpl) o;
 
         return resource != null ? resource.equals(that.resource) : that.resource == null;
-
     }
 
     @Override

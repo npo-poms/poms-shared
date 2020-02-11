@@ -6,15 +6,13 @@ import java.io.*;
 import java.net.*;
 import java.nio.file.*;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.xml.sax.InputSource;
 
 /**
@@ -107,6 +105,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         return result;
     }
 
+    @Nullable
     private static URI uriFromClassPath(String resource) {
         URL url = ClassificationServiceImpl.class.getClassLoader().getResource(resource);
         try {
@@ -126,6 +125,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         }
     }
 
+    @Nullable
     private List<File> getDirectory(URI resource, boolean startWatchers) {
         File resourceFile = null;
         try {
@@ -139,7 +139,9 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
 
 
             if (resourceFile.isDirectory() || !resourceFile.exists()) {
-                resourceFile.mkdirs();
+                if (!resourceFile.mkdirs()) {
+                    log.warn("Could't make {}", resourceFile);
+                }
                 if (startWatchers) {
                     watch(resourceFile);
                     // show that we're watching...
@@ -160,12 +162,12 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                 }
 
                 List<File> result = new ArrayList<>();
-                for (File file : resourceFile.listFiles((dir, name) -> name.toLowerCase().endsWith(".xml"))) {
-                    result.add(file);
-                }
+                Collections.addAll(result,
+                    resourceFile.listFiles((dir, name) -> name.toLowerCase().endsWith(".xml"))
+                );
                 return result;
             } else {
-                // not a directory
+                log.debug("not a directory");
 
             }
         }
@@ -185,7 +187,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
     private long lastCheck = -1;
     private void pollingWatchDirectory(final File directory) {
         log.info("Watching " + directory + " (using polling, since NFS doesn't support more sane methods)");
-        executorService.scheduleAtFixedRate((Runnable) () -> {
+        executorService.scheduleAtFixedRate(() -> {
             if (directory.lastModified() > lastCheck) {
                 log.info("Found change in {}", directory);
                 lastCheck = directory.lastModified();
@@ -216,7 +218,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
             while (true) {
                 try {
                     WatchKey key = watcher.take();
-                    for (WatchEvent event : key.pollEvents()) {
+                    for (WatchEvent<?> event : key.pollEvents()) {
                         if (String.valueOf(event.context()).endsWith(".xml")) {
                             log.info(event.kind() + " " + event.context());
                             List<InputSource> sources = getSources(false);
@@ -225,7 +227,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                             }
                             break;
                         } else {
-                            log.debug("Ignored " + String.valueOf(event.kind() + " " + event.context()));
+                            log.debug("Ignored {} {}", event.kind(), event.context());
                         }
                     }
                     key.reset();
