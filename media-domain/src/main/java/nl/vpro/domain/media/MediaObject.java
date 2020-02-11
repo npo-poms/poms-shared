@@ -15,6 +15,7 @@ import java.util.zip.CRC32;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.*;
+import javax.persistence.OrderBy;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import javax.xml.bind.Unmarshaller;
@@ -501,11 +502,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     @OneToMany(orphanRemoval = true, mappedBy = "mediaObject", cascade={ALL})
     @Valid
-    protected Set<Prediction> predictions;
+    protected Set<@NonNull Prediction> predictions;
 
     @Transient
     @Nullable
-    List<Prediction> predictionsForXml;
+    List<@NonNull Prediction> predictionsForXml;
 
     @OneToMany(cascade = ALL, mappedBy = "mediaObject", orphanRemoval = true)
     @SortNatural
@@ -625,8 +626,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
     // also we got odd NPE's from PersistentBag otherwise.
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
+    @OrderBy("language, type")
     @Setter
-    private List<AvailableSubtitles> availableSubtitles;
+    private List<@NonNull AvailableSubtitles> availableSubtitles;
 
     @Embedded()
     @XmlTransient
@@ -1873,7 +1875,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     @Override
-    public void setTwitterRefs(List<TwitterRef> twitterRefs) {
+    public void setTwitterRefs(List<@NonNull  TwitterRef> twitterRefs) {
         this.twitterRefs = updateList(this.twitterRefs, twitterRefs);
     }
 

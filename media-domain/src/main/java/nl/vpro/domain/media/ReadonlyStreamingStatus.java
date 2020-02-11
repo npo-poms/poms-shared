@@ -40,6 +40,13 @@ public class ReadonlyStreamingStatus implements StreamingStatus {
     }
 
     @Override
+    public int hashCode() {
+        int result = withDrm != null ? withDrm.hashCode() : 0;
+        result = 31 * result + (withoutDrm != null ? withoutDrm.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
          return withDrm + (withDrmOffline != null ? ("(-" + withDrmOffline + ")") : "") +  "_" +
              withoutDrm + (withoutDrmOffline != null ? ("(-" + withoutDrmOffline + ")") : "");

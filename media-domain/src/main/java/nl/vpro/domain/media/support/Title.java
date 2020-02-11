@@ -2,19 +2,18 @@ package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.AbstractOwnedText;
-import nl.vpro.domain.Child;
-import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.validation.NoHtml;
 
@@ -222,6 +221,14 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
         return owner == tit.getOwner() && type == tit.getType() && parent.equals(tit.getParent());
     }
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + value.hashCode();
+        result = 31 * result + owner.hashCode();
+        result = 31 * result + (parent != null ? parent.hashCode() : 0);
+        return result;
+    }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         this.parent = (MediaObject) parent;
