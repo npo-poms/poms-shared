@@ -898,7 +898,8 @@ public interface MediaTestDataBuilder<
                 .withPoProgType()
                 .withPredictions()
                 .withSegmentsWithEveryting()
-                .withFixedSegmentMids(mids);
+                .withFixedSegmentMids(mids)
+                ;
 
             return result;
         }
@@ -1033,6 +1034,7 @@ public interface MediaTestDataBuilder<
                     MediaTestDataBuilder.segment()
                         .parent(mediaObject())
                         .withEverything()
+                        .mid("VPROWON_12345_1")
                         .start(Duration.ZERO)
                         .duration(Duration.ofMillis(100000))
                         .build(),
