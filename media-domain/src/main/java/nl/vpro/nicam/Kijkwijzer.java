@@ -13,9 +13,26 @@ import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.ContentRating;
 
 /**
+ * <p>
  * http://www.kijkwijzer.nl/about-kijkwijzer
- *
+ *</p><p>
  * Combines an {@link AgeRating} with {@link ContentRating}s (which can be seen as the 'reason' for the rating).
+ *</p>
+ * <p></p>
+ * There are several ways to code a kijkwijzer in a string.
+ *</p>
+ * <p>
+ * For the content ratings, this is pretty straight forward. Every rating is assiged a simple {@link ContentRating#toChar()}. A string of those chars respresent the content ratings.
+ * </p>
+ * <p>
+ * Age ratings are represented in different ways, but always as an integer. Prior to 5.12 it was always one digit. See {@link #toDonnaCode()} and {@link #toCode()}
+ * </p>
+ * <p>
+ * With the arrival of new ageratings {@link AgeRating#_14} and {@link AgeRating#_18} it was unclear what the new digits would be for those, and we decided to simply introduce a new format where the agerating is always represented with <em>two</em> digits, and where the correspondence is more straighforward (the integer associated with e.g. {@link AgeRating#_14} became
+ <code>14</code>).
+ </p>
+ *
+ *
  *
  * @author Michiel Meeuwissen
  * @since 4.2
@@ -27,6 +44,7 @@ public class Kijkwijzer implements NicamRated {
     private final AgeRating ageRating;
     private final List<@NonNull ContentRating> contentRatings;
 
+    @Deprecated
     public static Kijkwijzer parse(String value) {
         AgeRating ageRating = null;
         List<ContentRating> contentRatings = new ArrayList<>();
@@ -87,60 +105,6 @@ public class Kijkwijzer implements NicamRated {
         return new Kijkwijzer(ageRating, contentRatings);
     }
 
-    public Kijkwijzer(@Nullable AgeRating ageRating, List<@NonNull ContentRating> contentRatings) {
-        this.ageRating = ageRating;
-        this.contentRatings = contentRatings == null ? new ArrayList<>() : contentRatings;
-    }
-    public Kijkwijzer(AgeRating ageRating, @NonNull ContentRating... contentRatings) {
-        this(ageRating, Arrays.asList(contentRatings));
-    }
-
-    public Kijkwijzer() {
-        this.ageRating = null;
-        this.contentRatings = new ArrayList<>();
-    }
-
-    @Deprecated
-    public String toDonnaCode() {
-        StringBuilder result = new StringBuilder();
-        Character ageRatingCode = toDonnaCode(ageRating);
-        if (ageRatingCode != null) {
-            result.append(ageRatingCode);
-        }
-        appendContentRatings(result);
-        return result.toString();
-    }
-
-    public String toCode() {
-        StringBuilder result = new StringBuilder();
-        Character ageRatingCode = toCode(ageRating);
-        if (ageRatingCode != null) {
-            result.append(ageRatingCode);
-        }
-        appendContentRatings(result);
-        return result.toString();
-    }
-
-    /**
-     * @since 5.12
-     */
-    public String toPaddedCode() {
-        StringBuilder result = new StringBuilder();
-        result.append(toPaddedCode(ageRating));
-        appendContentRatings(result);
-        return result.toString();
-    }
-
-    private void appendContentRatings(StringBuilder result) {
-        for (ContentRating rating : contentRatings) {
-            if (rating == null) {
-                // impossible, but hibernate seems to cause it some times
-                log.warn("null rating in {}", contentRatings);
-            } else {
-                result.append(rating.toChar());
-            }
-        }
-    }
 
     /**
      * @since 5.12
@@ -181,6 +145,7 @@ public class Kijkwijzer implements NicamRated {
     }
 
     @Nullable
+    @Deprecated
     public static Character toCode(@Nullable AgeRating ageRating) {
         if (ageRating == null) {
             return null;
@@ -225,6 +190,63 @@ public class Kijkwijzer implements NicamRated {
             default:
             case ALL:
                 return '1';
+        }
+    }
+
+
+    public Kijkwijzer(@Nullable AgeRating ageRating, List<@NonNull ContentRating> contentRatings) {
+        this.ageRating = ageRating;
+        this.contentRatings = contentRatings == null ? new ArrayList<>() : contentRatings;
+    }
+    public Kijkwijzer(AgeRating ageRating, @NonNull ContentRating... contentRatings) {
+        this(ageRating, Arrays.asList(contentRatings));
+    }
+
+    public Kijkwijzer() {
+        this.ageRating = null;
+        this.contentRatings = new ArrayList<>();
+    }
+
+    @Deprecated
+    public String toDonnaCode() {
+        StringBuilder result = new StringBuilder();
+        Character ageRatingCode = toDonnaCode(ageRating);
+        if (ageRatingCode != null) {
+            result.append(ageRatingCode);
+        }
+        appendContentRatings(result);
+        return result.toString();
+    }
+
+    @Deprecated
+    public String toCode() {
+        StringBuilder result = new StringBuilder();
+        Character ageRatingCode = toCode(ageRating);
+        if (ageRatingCode != null) {
+            result.append(ageRatingCode);
+        }
+        appendContentRatings(result);
+        return result.toString();
+    }
+
+    /**
+     * @since 5.12
+     */
+    public String toPaddedCode() {
+        StringBuilder result = new StringBuilder();
+        result.append(toPaddedCode(ageRating));
+        appendContentRatings(result);
+        return result.toString();
+    }
+
+    private void appendContentRatings(StringBuilder result) {
+        for (ContentRating rating : contentRatings) {
+            if (rating == null) {
+                // impossible, but hibernate seems to cause it some times
+                log.warn("null rating in {}", contentRatings);
+            } else {
+                result.append(rating.toChar());
+            }
         }
     }
 
