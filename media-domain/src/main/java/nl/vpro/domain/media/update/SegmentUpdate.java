@@ -133,14 +133,20 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         return new SegmentUpdate(null, segment, ownerType);
     }
 
-    public static SegmentUpdate createForProgram(Segment segment, OwnerType ownerType) {
-        return new SegmentUpdate(null, segment, ownerType);
+    public static SegmentUpdate create(IntegerVersion version, Segment segment, OwnerType ownerType) {
+        return new SegmentUpdate(version, segment, ownerType);
+     }
+
+
+    public static SegmentUpdate create(IntegerVersion version, Segment segment) {
+        return new SegmentUpdate(version, segment, OwnerType.BROADCASTER);
      }
 
 
     public static SegmentUpdate create(Segment segment) {
         return create(segment, OwnerType.BROADCASTER);
      }
+
 
     @Override
     protected Segment newMedia() {
