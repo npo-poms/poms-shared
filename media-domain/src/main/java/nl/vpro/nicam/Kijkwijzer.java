@@ -7,12 +7,16 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.ContentRating;
 
 /**
  * http://www.kijkwijzer.nl/about-kijkwijzer
+ *
+ * Combines an {@link AgeRating} with {@link ContentRating}s (which can be seen as the 'reason' for the rating).
+ *
  * @author Michiel Meeuwissen
  * @since 4.2
  */
@@ -20,8 +24,8 @@ import nl.vpro.domain.media.ContentRating;
 @Slf4j
 public class Kijkwijzer implements NicamRated {
 
-    private AgeRating ageRating;
-    private List<@NonNull ContentRating> contentRatings;
+    private final AgeRating ageRating;
+    private final List<@NonNull ContentRating> contentRatings;
 
     public static Kijkwijzer parse(String value) {
         AgeRating ageRating = null;
@@ -83,7 +87,7 @@ public class Kijkwijzer implements NicamRated {
         return new Kijkwijzer(ageRating, contentRatings);
     }
 
-    public Kijkwijzer(AgeRating ageRating, List<@NonNull ContentRating> contentRatings) {
+    public Kijkwijzer(@Nullable AgeRating ageRating, List<@NonNull ContentRating> contentRatings) {
         this.ageRating = ageRating;
         this.contentRatings = contentRatings == null ? new ArrayList<>() : contentRatings;
     }
@@ -130,6 +134,7 @@ public class Kijkwijzer implements NicamRated {
     private void appendContentRatings(StringBuilder result) {
         for (ContentRating rating : contentRatings) {
             if (rating == null) {
+                // impossible, but hibernate seems to cause it some times
                 log.warn("null rating in {}", contentRatings);
             } else {
                 result.append(rating.toChar());
@@ -175,7 +180,8 @@ public class Kijkwijzer implements NicamRated {
         return Optional.of(new Kijkwijzer(ageRating, contentRatings));
     }
 
-    public static Character toCode(AgeRating ageRating) {
+    @Nullable
+    public static Character toCode(@Nullable AgeRating ageRating) {
         if (ageRating == null) {
             return null;
         }
@@ -198,15 +204,15 @@ public class Kijkwijzer implements NicamRated {
                 return null;
         }
     }
-    public static String toPaddedCode(AgeRating ageRating) {
+    public static String toPaddedCode(@Nullable AgeRating ageRating) {
         if (ageRating == null) {
             return "";
         }
         return String.format("%02d", ageRating.getIntValue());
     }
 
-
-    public static Character toDonnaCode(AgeRating ageRating) {
+    @Nullable
+    public static Character toDonnaCode(@Nullable AgeRating ageRating) {
         if (ageRating == null) {
             return null;
         }
