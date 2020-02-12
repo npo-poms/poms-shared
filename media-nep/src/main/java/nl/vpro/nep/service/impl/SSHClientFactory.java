@@ -78,7 +78,7 @@ final class SSHClientFactory {
 
 
     @ToString
-    static class ClientHolder implements Supplier<SSHClient> {
+    static class ClientHolder implements Supplier<SSHClient>, AutoCloseable {
         final SSHClient client;
         @Getter
         final Instant creationTime;
@@ -91,6 +91,12 @@ final class SSHClientFactory {
         @Override
         public SSHClient get() {
             return client;
+
+        }
+
+        @Override
+        public void close() throws Exception {
+            client.close();
 
         }
     }

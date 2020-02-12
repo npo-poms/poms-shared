@@ -136,6 +136,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 try {
                     Thread.sleep(waitBetweenRetries.toMillis());
                 } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
                     return;
                 }
             }
@@ -144,12 +145,17 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
                 try (OutputStream out = outputStream.get()) {
                     if (out != null) {
+                        log.info("Copying {} to {}", url, out);
                         exitCode = scp.execute(out, LoggerOutputStream.error(log), url, "/dev/stdout");
                     } else {
-                        log.warn("Can't download from null stream to " + url);
+                        log.warn("Can't download from {} stream to null", url);
                     }
                 }
-            } catch (IOException | InterruptedException e) {
+            } catch (InterruptedException e) {
+                log.error(e.getMessage(), e);
+                Thread.currentThread().interrupt();
+                return;
+            } catch (IOException  e) {
                 log.error(e.getMessage(), e);
                 return;
             } catch (CommandExecutor.BrokenPipe bp) {

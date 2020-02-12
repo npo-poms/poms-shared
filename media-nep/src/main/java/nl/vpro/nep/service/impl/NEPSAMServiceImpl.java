@@ -79,6 +79,17 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         this.drmProfileLive  = drmProfileLive == null ? this.drmProfileLive : drmProfileLive;
     }
 
+    public NEPSAMServiceImpl(
+         @NonNull String baseUrl,
+         String provider,
+         String platform,
+         String drmProfile,
+         String noDrmProfile,
+         @NonNull Supplier<String> authenticator) {
+        this(baseUrl, provider, platform, drmProfile, noDrmProfile, baseUrl, provider, platform, drmProfile, authenticator, authenticator);
+    }
+
+
     @PostConstruct
     public void log() {
         log.info("Connecting with {}/{}", this.baseUrlMid, this.baseUrlLive);

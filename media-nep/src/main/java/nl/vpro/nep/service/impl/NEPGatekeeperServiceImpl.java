@@ -5,9 +5,9 @@ import io.openapitools.jackson.dataformat.hal.HALMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.*;
@@ -60,7 +59,6 @@ import nl.vpro.util.*;
  *  http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/v2/api-docs
  */
 @Slf4j
-@Named("NEPGatekeeperService")
 public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     public static final HALMapper MAPPER = new HALMapper();
@@ -105,6 +103,19 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         this.socketTimeout= TimeUtils.parseDuration(socketTimeout).orElse(this.connectTimeout);
         this.pageSize = pageSize;
         this.ftpUserName = ftpUserName;
+    }
+
+    protected NEPGatekeeperServiceImpl(Properties properties) {
+        this(properties.getProperty("nep.gatekeeper-api.baseUrl"),
+            properties.getProperty("nep.gatekeeper-api.authorization.username"),
+            properties.getProperty("nep.gatekeeper-api.authorization.password"),
+            properties.getProperty("nep.gatekeeper-api.connectTimeout"),
+            properties.getProperty("nep.gatekeeper-api.connectionRequestTimeout"),
+            properties.getProperty("nep.gatekeeper-api.socketTimeout"),
+            Integer.parseInt(properties.getProperty("nep.gatekeeper-api.pageSize")),
+            properties.getProperty("nep.gatekeeper-upload.username")
+        );
+        init();
     }
 
     @PostConstruct
@@ -216,8 +227,6 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
                 .build(), limit, 0L);
     }
 
-<<<<<<< HEAD
-=======
     @Override
     @SneakyThrows
     public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull String workflowId) {
@@ -239,7 +248,6 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     }
 
->>>>>>> 9825812ed... MSE-4670
     private HttpHost getHttpHost() {
         URI uri = URI.create(getWorkflowsEndPoint());
         return new HttpHost(uri.getHost(), uri.getPort(), uri.getScheme());
