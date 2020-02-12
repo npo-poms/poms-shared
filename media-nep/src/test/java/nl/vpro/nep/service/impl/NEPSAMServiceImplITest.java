@@ -6,7 +6,6 @@ import java.time.Duration;
 
 import org.junit.Test;
 
-import static nl.vpro.nep.service.NEPSAMService.createStreamAccessItem;
 
 /**
  * @author Michiel Meeuwissen
@@ -39,7 +38,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
     @Test
     public void streamUrlForMid() {
-        String streamUrl = impl.streamAccess("VPWON_1271554", true, createStreamAccessItem("145.58.169.92", null));
+        String streamUrl = impl.streamAccessMid("VPWON_1271554", true, "145.58.169.92", null);
         log.info("{}", streamUrl);
 
     }
@@ -47,7 +46,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
     @Test
     public void streamUrlForLive() {
-        String streamUrl = impl.streamAccess("npo1", true, createStreamAccessItem("145.58.169.92", Duration.ofHours(24)));
+        String streamUrl = impl.streamAccessLive("npo1", "145.58.169.92", Duration.ofHours(24));
         log.info("{}", streamUrl);
 
     }
