@@ -317,10 +317,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B geoRestrictions(GeoRestriction... restrictions) {
-        if (isNotBefore(5, 12)) {
-            for (GeoRestriction publicationRule : restrictions) {
-                mediaObject().addGeoRestriction(publicationRule);
-            }
+        for (GeoRestriction publicationRule : restrictions) {
+            mediaObject().addGeoRestriction(publicationRule);
         }
         return (B)this;
     }
@@ -577,9 +575,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B geoLocations(Collection<GeoLocations> geoLocations) {
-        if (isNotBefore(5, 12)) {
-            geoLocations.forEach(geos -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getGeoLocations(), geos));
-        }
+        geoLocations.forEach(geos -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getGeoLocations(), geos));
         return (B)this;
     }
 
@@ -875,21 +871,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return new Editor(principalId, null, null, null, null);
     }
 
-    default boolean isNotBefore(int... version) {
-        IntegerVersion v = version();
-        return v == null || version().isNotBefore(IntegerVersion.of(version));
-    }
-
-    default boolean isBefore(int... version) {
-        IntegerVersion v = version();
-        return v != null && version().isBefore(IntegerVersion.of(version));
-    }
-
-    B version(IntegerVersion version);
-
-    IntegerVersion version();
-
-
 
 
     @ToString
@@ -897,7 +878,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         protected String mid;
         protected boolean midSet = false;
-        protected IntegerVersion version;
 
         protected AbstractBuilder(M m) {
             this.mediaObject = m;
@@ -946,18 +926,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             }
 
         }
-
-        @Override
-        public T version(IntegerVersion version) {
-            this.version = version;
-            return (T) this;
-        }
-
-        @Override
-        public IntegerVersion version() {
-            return this.version;
-        }
-
     }
 
     @ToString(callSuper = true)

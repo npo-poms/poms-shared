@@ -113,6 +113,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         this.episodeOf = toSet(mediaobject.getEpisodeOf(), MemberRefUpdate::create);
         this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
 
+
     }
 
     @Override

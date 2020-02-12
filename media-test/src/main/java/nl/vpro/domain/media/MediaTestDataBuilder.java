@@ -862,11 +862,6 @@ public interface MediaTestDataBuilder<
                 .withIds(ids)
             ;
 
-        if (isBefore(5, 12)) {
-            for (Person p : result.getMediaBuilder().build().getPersons()) {
-                p.setGtaaUri(null);
-            }
-        }
 
         return result;
 
@@ -905,24 +900,6 @@ public interface MediaTestDataBuilder<
                 .withSegmentsWithEveryting()
                 .withFixedSegmentMids(mids);
 
-
-            if (version != null) {
-                if (version.isBefore(5, 9)) {
-                    for (ScheduleEvent se : result.getMediaBuilder().build().getScheduleEvents()) {
-                        se.setGuideDate(null);
-                    }
-                }
-                if (version.isBefore(5, 11)) {
-                    clearIntentions();
-                    clearTargetGroups();
-                    for (Segment s : mediaObject().getSegments()) {
-                        s.setIntentions(null);
-                        s.setTargetGroups(null);
-
-                    }
-                }
-
-            }
             return result;
         }
 
@@ -1053,7 +1030,8 @@ public interface MediaTestDataBuilder<
         public ProgramTestDataBuilder withSegmentsWithEveryting() {
             return
                 segments(
-                    MediaTestDataBuilder.segment().version(version()).parent(mediaObject())
+                    MediaTestDataBuilder.segment()
+                        .parent(mediaObject())
                         .withEverything()
                         .start(Duration.ZERO)
                         .duration(Duration.ofMillis(100000))
