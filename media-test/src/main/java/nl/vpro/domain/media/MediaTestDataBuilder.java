@@ -27,7 +27,6 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.*;
 import nl.vpro.i18n.Locales;
-import nl.vpro.util.IntegerVersion;
 
 import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.NPO;
@@ -813,8 +812,9 @@ public interface MediaTestDataBuilder<
         return withEverything(new AtomicLong(1), new AtomicLong(20000L));
     }
 
+
     default T withEverything(AtomicLong ids, AtomicLong mids) {
-        return
+        T result =
             withMids(mids)
                 .withAgeRating()
                 .withAspectRatio()
@@ -860,7 +860,15 @@ public interface MediaTestDataBuilder<
                 .withWebsites()
                 .withWorkflow()
                 .withIds(ids)
-        ;
+            ;
+
+        if (isBefore(5, 12)) {
+            for (Person p : result.getMediaBuilder().build().getPersons()) {
+                p.setGtaaUri(null);
+            }
+        }
+
+        return result;
 
 
     }
@@ -884,11 +892,10 @@ public interface MediaTestDataBuilder<
         ProgramTestDataBuilder(Program program) {
             super(program);
         }
-
         @Override
         public ProgramTestDataBuilder withEverything() {
             AtomicLong mids = new AtomicLong(30000L);
-            return MediaTestDataBuilder.super
+            ProgramTestDataBuilder result = MediaTestDataBuilder.super
                 .withEverything()
                 .withScheduleEvents()
                 .withType()
@@ -897,10 +904,8 @@ public interface MediaTestDataBuilder<
                 .withPredictions()
                 .withSegmentsWithEveryting()
                 .withFixedSegmentMids(mids);
-        }
 
-        public ProgramTestDataBuilder withEverything(IntegerVersion version) {
-            ProgramTestDataBuilder result = withEverything();
+
             if (version != null) {
                 if (version.isBefore(5, 9)) {
                     for (ScheduleEvent se : result.getMediaBuilder().build().getScheduleEvents()) {
@@ -1048,11 +1053,11 @@ public interface MediaTestDataBuilder<
         public ProgramTestDataBuilder withSegmentsWithEveryting() {
             return
                 segments(
-                    MediaTestDataBuilder.segment().parent(mediaObject())
+                    MediaTestDataBuilder.segment().version(version()).parent(mediaObject())
                         .withEverything()
-                        .mid("VPROWON_12345_1")
                         .start(Duration.ZERO)
-                        .duration(Duration.ofMillis(100000)).build(),
+                        .duration(Duration.ofMillis(100000))
+                        .build(),
                     MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(Duration.ofMillis(100000)).duration(Duration.ofMillis(100000)).build())
                     ;
 

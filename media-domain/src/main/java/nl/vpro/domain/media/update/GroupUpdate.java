@@ -6,8 +6,7 @@ package nl.vpro.domain.media.update;
 
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.media.Group;
-import nl.vpro.domain.media.GroupType;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.util.IntegerVersion;
 
@@ -67,6 +66,12 @@ public final class GroupUpdate extends MediaUpdate<Group> {
     public static GroupUpdate create(IntegerVersion version, Group group, OwnerType ownerType) {
         return new GroupUpdate(version, group, ownerType);
     }
+
+
+    public static GroupUpdate create(IntegerVersion version, Group group) {
+        return create(version, group, OwnerType.BROADCASTER);
+    }
+
 
     public static GroupUpdate create(Group group, OwnerType ownerType) {
         return create(null, group, ownerType);

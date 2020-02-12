@@ -301,8 +301,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
             this.targetGroups = toUpdateTargetGroups(mediaobject.getTargetGroups(), owner);
         }
 
-        this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
-        this.geoRestrictions= toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
+        if (isNotBefore(5, 12)) {
+            this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
+            this.geoRestrictions = toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
+        }
 
         if (owner == null || owner == OwnerType.BROADCASTER) {
             TextualObjects.copyToUpdate(mediaobject, this);
@@ -629,9 +631,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
         List<CreditsUpdate> creditsUpdates = new ArrayList<>();
         for (Credits credit: credits) {
             if (credit instanceof Person) {
-                creditsUpdates.add(new PersonUpdate((Person) credit));
+                Person p = (Person) credit;
+                if (p.getGtaaUri() != null && isBefore(5, 12)) {
+                    continue;
+                }
+                creditsUpdates.add(new PersonUpdate(p));
             } else {
-                creditsUpdates.add(new NameUpdate((Name) credit));
+                if (isNotBefore(5, 12)) {
+                    creditsUpdates.add(new NameUpdate((Name) credit));
+                }
             }
         }
 
@@ -1302,6 +1310,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected boolean isNotBefore(Integer... intVersion) {
         return version == null || version.isNotBefore(intVersion);
+    }
+
+    protected boolean isBefore(Integer... intVersion) {
+        return version != null && version.isBefore(intVersion);
     }
 
 }

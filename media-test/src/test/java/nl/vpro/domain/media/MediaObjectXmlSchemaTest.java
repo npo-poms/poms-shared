@@ -31,7 +31,6 @@ import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import nl.vpro.util.IntegerVersion;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
@@ -1027,7 +1026,7 @@ public class MediaObjectXmlSchemaTest {
         Validator xsdValidator = xsdSchema.newValidator();
 
         ProgramUpdate update = ProgramUpdate.create(MediaTestDataBuilder.program()
-            .withEverything(IntegerVersion.of(5, 12))
+            .withEverything()
             .build());
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();

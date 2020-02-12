@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import lombok.ToString;
+import lombok.*;
 
 import java.net.URI;
 import java.time.*;
@@ -26,8 +26,7 @@ import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.*;
 import nl.vpro.i18n.LocalizedString;
-import nl.vpro.util.DateUtils;
-import nl.vpro.util.TimeUtils;
+import nl.vpro.util.*;
 
 import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
 import static nl.vpro.util.DateUtils.toInstant;
@@ -318,8 +317,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B geoRestrictions(GeoRestriction... restrictions) {
-        for(GeoRestriction publicationRule : restrictions) {
-            mediaObject().addGeoRestriction(publicationRule);
+        if (isNotBefore(5, 12)) {
+            for (GeoRestriction publicationRule : restrictions) {
+                mediaObject().addGeoRestriction(publicationRule);
+            }
         }
         return (B)this;
     }
@@ -576,7 +577,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B geoLocations(Collection<GeoLocations> geoLocations) {
-        geoLocations.forEach(geos -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getGeoLocations(), geos));
+        if (isNotBefore(5, 12)) {
+            geoLocations.forEach(geos -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getGeoLocations(), geos));
+        }
         return (B)this;
     }
 
@@ -872,12 +875,29 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return new Editor(principalId, null, null, null, null);
     }
 
+    default boolean isNotBefore(int... version) {
+        IntegerVersion v = version();
+        return v == null || version().isNotBefore(IntegerVersion.of(version));
+    }
+
+    default boolean isBefore(int... version) {
+        IntegerVersion v = version();
+        return v != null && version().isBefore(IntegerVersion.of(version));
+    }
+
+    B version(IntegerVersion version);
+
+    IntegerVersion version();
+
+
+
 
     @ToString
     abstract class AbstractBuilder<T extends AbstractBuilder<T, M>, M extends MediaObject>  implements MediaBuilder<T, M>, Cloneable {
 
         protected String mid;
         protected boolean midSet = false;
+        protected IntegerVersion version;
 
         protected AbstractBuilder(M m) {
             this.mediaObject = m;
@@ -913,8 +933,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return mediaObject.getMid();
         }
 
-
-
         @Override
         public T copy() {
             try {
@@ -928,6 +946,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             }
 
         }
+
+        @Override
+        public T version(IntegerVersion version) {
+            this.version = version;
+            return (T) this;
+        }
+
+        @Override
+        public IntegerVersion version() {
+            return this.version;
+        }
+
     }
 
     @ToString(callSuper = true)
