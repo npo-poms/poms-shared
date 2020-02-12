@@ -8,112 +8,40 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.*;
+import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
-import javax.validation.Validation;
-import javax.validation.ValidationException;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.*;
+import javax.validation.constraints.*;
 import javax.validation.groups.Default;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Embargos;
-import nl.vpro.domain.MutableEmbargoDeprecated;
-import nl.vpro.domain.TextualObjectUpdate;
-import nl.vpro.domain.TextualObjects;
-import nl.vpro.domain.media.AVType;
-import nl.vpro.domain.media.AgeRating;
-import nl.vpro.domain.media.ContentRating;
-import nl.vpro.domain.media.Credits;
-import nl.vpro.domain.media.Genre;
-import nl.vpro.domain.media.GeoLocation;
-import nl.vpro.domain.media.GeoLocations;
-import nl.vpro.domain.media.Group;
-import nl.vpro.domain.media.Intention;
-import nl.vpro.domain.media.IntentionType;
-import nl.vpro.domain.media.Intentions;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.Location;
-import nl.vpro.domain.media.MediaBuilder;
-import nl.vpro.domain.media.MediaIdentifiable;
-import nl.vpro.domain.media.MediaObject;
-import nl.vpro.domain.media.MediaObjects;
-import nl.vpro.domain.media.MediaType;
-import nl.vpro.domain.media.MemberRef;
-import nl.vpro.domain.media.Name;
-import nl.vpro.domain.media.Person;
-import nl.vpro.domain.media.Prediction;
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.Segment;
-import nl.vpro.domain.media.SubMediaType;
-import nl.vpro.domain.media.TargetGroup;
-import nl.vpro.domain.media.TargetGroupType;
-import nl.vpro.domain.media.TargetGroups;
-import nl.vpro.domain.media.Topic;
-import nl.vpro.domain.media.Topics;
 import nl.vpro.domain.media.TwitterRef;
-import nl.vpro.domain.media.Website;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.support.AuthorizedDuration;
-import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.media.support.MediaObjectOwnableLists;
-import nl.vpro.domain.media.support.MutableOwnable;
-import nl.vpro.domain.media.support.OwnableLists;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Tag;
-import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.validation.ValidEmbargo;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.util.IntegerVersion;
-import nl.vpro.util.IntegerVersionSpecific;
-import nl.vpro.util.TimeUtils;
-import nl.vpro.util.Version;
-import nl.vpro.validation.CRID;
-import nl.vpro.validation.PomsValidatorGroup;
-import nl.vpro.validation.StringList;
-import nl.vpro.validation.URI;
-import nl.vpro.validation.WarningValidatorGroup;
-import nl.vpro.xml.bind.DurationXmlAdapter;
-import nl.vpro.xml.bind.InstantXmlAdapter;
-import nl.vpro.xml.bind.LocaleAdapter;
+import nl.vpro.util.*;
+import nl.vpro.validation.*;
+import nl.vpro.xml.bind.*;
 
 /**
  * A MediaUpdate is meant for communicating updates. It is not meant as a complete representation of the object.
@@ -157,8 +85,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     static {
         Validator validator;
+        Locale defaultLocale = Locale.getDefault();
         try {
-            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+            Locale.setDefault(Locale.US);
+            ValidatorFactory factory = Validation
+                .buildDefaultValidatorFactory();
             validator = factory.getValidator();
         } catch (ValidationException ve) {
             log.info(ve.getClass().getName() + " " + ve.getMessage());
@@ -169,6 +100,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
             log.warn(e.getClass().getName() + " " + e.getMessage());
             log.info("javax.validation will be disabled");
             validator = null;
+        } finally {
+            Locale.setDefault(defaultLocale);
         }
         VALIDATOR = validator;
     }
@@ -361,12 +294,17 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if (this.credits.isEmpty()) {
             this.credits = null;
         }
+        if (isNotBefore(5, 11)) {
+            this.intentions = toUpdateIntentions(mediaobject.getIntentions(), owner);
+        }
+        if (isNotBefore(5, 11)) {
+            this.targetGroups = toUpdateTargetGroups(mediaobject.getTargetGroups(), owner);
+        }
 
-        this.intentions = toUpdateIntentions(mediaobject.getIntentions(), owner);
-        this.targetGroups = toUpdateTargetGroups(mediaobject.getTargetGroups(), owner);
-
-        this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
-        this.geoRestrictions= toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
+        if (isNotBefore(5, 12)) {
+            this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
+            this.geoRestrictions = toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
+        }
 
         if (owner == null || owner == OwnerType.BROADCASTER) {
             TextualObjects.copyToUpdate(mediaobject, this);
@@ -420,6 +358,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return violations().isEmpty();
     }
 
+    public Set<? extends ConstraintViolation<MediaUpdate<M>>> warningViolations() {
+        return violations(WarningValidatorGroup.class);
+    }
     public Set<? extends ConstraintViolation<MediaUpdate<M>>> violations(Class<?>... groups) {
         if (VALIDATOR != null) {
             if (groups.length == 0) {
@@ -451,6 +392,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     public String violationMessage() {
         Set<? extends ConstraintViolation<? extends MediaUpdate<M>>> violations = violations();
+        return violationMessage(violations);
+    }
+
+    public static <N extends MediaObject> String violationMessage(Set<? extends ConstraintViolation<? extends MediaUpdate<N>>> violations) {
         if(violations.isEmpty()) {
             return null;
         }
@@ -544,7 +489,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if(intentions != null) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getIntentions(), toIntentions(intentions, owner));
         }
-        if(targetGroups != null){
+        if(targetGroups != null) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getTargetGroups(), toTargetGroups(targetGroups, owner));
         }
         if(geoLocations != null && isNotBefore(5, 12)) {
@@ -679,7 +624,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     private List<CreditsUpdate> toCreditsUpdate(List<Credits> credits) {
-
         if (credits == null) {
             return null;
         }
@@ -687,10 +631,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
         List<CreditsUpdate> creditsUpdates = new ArrayList<>();
         for (Credits credit: credits) {
             if (credit instanceof Person) {
-                creditsUpdates.add(new PersonUpdate((Person) credit));
-            }
-            else {
-                creditsUpdates.add(new NameUpdate((Name) credit));
+                Person p = (Person) credit;
+                if (p.getGtaaUri() != null && isBefore(5, 12)) {
+                    continue;
+                }
+                creditsUpdates.add(new PersonUpdate(p));
+            } else {
+                if (isNotBefore(5, 12)) {
+                    creditsUpdates.add(new NameUpdate((Name) credit));
+                }
             }
         }
 
@@ -803,6 +752,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     protected abstract String getUrnPrefix();
 
     @XmlAttribute(name = "avType")
+    @NotNull
     public AVType getAVType() {
         return avType;
     }
@@ -1360,6 +1310,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected boolean isNotBefore(Integer... intVersion) {
         return version == null || version.isNotBefore(intVersion);
+    }
+
+    protected boolean isBefore(Integer... intVersion) {
+        return version != null && version.isBefore(intVersion);
     }
 
 }
