@@ -244,6 +244,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @Getter
     boolean imported = false;
 
+    @XmlTransient
+    protected boolean fromXml = false;
+
     protected MediaUpdate() {
         //
     }
@@ -1296,6 +1299,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
+        this.fromXml = true;
         if (parent != null) {
             if (parent instanceof IntegerVersionSpecific) {
                 version = ((IntegerVersionSpecific) parent).getVersion();

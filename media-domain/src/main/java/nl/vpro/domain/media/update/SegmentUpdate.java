@@ -320,6 +320,10 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
         @Override
         public boolean isValid(SegmentUpdate value, ConstraintValidatorContext context) {
+            if (! value.fromXml) {
+                log.debug("This object was not read in from XML. It cannot be incorrect according to the rules below?");
+                return true;
+            }
             if (value.isStandalone()) {
                 if (StringUtils.isBlank(value.midRef)) {
                     context.disableDefaultConstraintViolation();
