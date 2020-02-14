@@ -183,9 +183,9 @@ public class AssemblageConfig {
     }
 
     public void backwardsCompatible(IntegerVersion version) {
-        setCopyLanguageAndCountry(version != null && version.isNotBefore(5, 0));
-        setCopyPredictions(version != null && version.isNotBefore(5, 6));
-        setCopyTwitterrefs(version != null && version.isNotBefore(5, 10));
+        setCopyLanguageAndCountry(version == null || version.isNotBefore(5, 0));
+        setCopyPredictions(version == null || version.isNotBefore(5, 6));
+        setCopyTwitterrefs(version == null || version.isNotBefore(5, 10));
     }
 
     public static class Builder {
