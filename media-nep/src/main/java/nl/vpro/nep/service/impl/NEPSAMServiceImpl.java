@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
@@ -53,6 +54,9 @@ public class NEPSAMServiceImpl implements NEPSAMService {
 
     Client httpClient = null;
 
+    AccessApi streamApiMid = null;
+    AccessApi streamApiLive = null;
+
     @Inject
     public NEPSAMServiceImpl(
         @Value("${nep.sam-api.mid.baseUrl}") @NonNull String baseUrlMid,
@@ -95,14 +99,25 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         log.info("Connecting with {}/{}", this.baseUrlMid, this.baseUrlLive);
     }
 
+    @PreDestroy
+    public void cleanup() {
+        if (httpClient != null) {
+            log.info("Closing {}", httpClient);
+            httpClient.close();
+        }
+    }
+
     @Override
     @SneakyThrows
     public String streamAccessLive(String channel,  String ip, Duration duration) {
+        if (streamApiLive == null) {
+            streamApiLive  = getStreamApi(baseUrlLive, authenticatorLive);
+            log.info("Created {}", streamApiLive);
+        }
         StreamAccessItem request = createStreamAccessItem(ip, duration);
-        AccessApi streamApi = getStreamApi(baseUrlLive, authenticatorLive);
         String profile = drmProfileLive;
         log.info("Using profile {}",profile);
-        StreamAccessResponseItem streamAccessResponseItem = streamApi.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerLive, platformLive,  profile, channel, request);
+        StreamAccessResponseItem streamAccessResponseItem = streamApiLive.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerLive, platformLive,  profile, channel, request);
         Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
         return (String) attributes.get("url");
     }
@@ -110,11 +125,14 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     @Override
     @SneakyThrows
     public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) {
+        if (streamApiMid == null) {
+            streamApiMid = getStreamApi(baseUrlMid, authenticatorMid);
+            log.info("Created {}", streamApiMid);
+        }
         StreamAccessItem request = createStreamAccessItem(ip, duration);
-        AccessApi streamApi = getStreamApi(baseUrlMid, authenticatorMid);
         String profile = drm ? drmProfileMid : noDrmProfileMid;
         log.info("Using profile {}",profile);
-        StreamAccessResponseItem streamAccessResponseItem = streamApi.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerMid, platformMid,  profile, mid, request);
+        StreamAccessResponseItem streamAccessResponseItem = streamApiMid.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerMid, platformMid,  profile, mid, request);
         Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
         return (String) attributes.get("url");
     }
@@ -130,7 +148,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         return item;
     }
 
-    AccessApi getStreamApi(String baseUrl, Supplier<String> authenticator) {
+    private AccessApi getStreamApi(String baseUrl, Supplier<String> authenticator) {
         AccessApi streamApi = new AccessApi();
         streamApi.getApiClient().addDefaultHeader(HttpHeaders.AUTHORIZATION, authenticator.get());
         streamApi.getApiClient().setBasePath(baseUrl);
@@ -143,6 +161,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
             builder.connectTimeout(connectTimeout.toMillis(), TimeUnit.MILLISECONDS);
             builder.readTimeout(socketTimeout.toMillis(), TimeUnit.MILLISECONDS);
             httpClient = builder.build();
+            log.info("Created http client {}", httpClient);
         }
         return httpClient;
      }
