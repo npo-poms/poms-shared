@@ -315,7 +315,7 @@ public class Image extends PublishableObject<Image>
             }
 
             if(!owner.equals(to.getOwner())) {
-                throw new UnsupportedOperationException("Can not update the owner field for an image");
+                log.info("Updating image {} of different owner  ({} !+ {})", to, to.getOwner(), owner);
             }
 
             to.setTitle(from.getTitle());
