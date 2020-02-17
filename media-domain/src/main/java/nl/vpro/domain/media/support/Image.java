@@ -308,29 +308,22 @@ public class Image extends PublishableObject<Image>
     }
 
 
-    public static Image update(Image from, Image to, OwnerType owner) {
-        if(from != null) {
-            if(to == null) {
-                to = new Image(owner);
-            }
-
-            if(!owner.equals(to.getOwner())) {
-                log.info("Updating image {} of different owner  ({} !+ {})", to, to.getOwner(), owner);
-            }
-
-            to.setTitle(from.getTitle());
-            to.setDescription(from.getDescription());
-            to.setType(from.getType());
-            to.setHeight(from.getHeight());
-            to.setWidth(from.getWidth());
-            to.setType(from.getType());
-            to.setImageUri(from.getImageUri());
-            to.setLicense(from.getLicense());
-            to.setSourceName(from.getSourceName());
-            return to;
-        } else {
-            return null;
+    @NonNull
+    public static Image update(@NonNull Image from, @NonNull Image to) {
+        if(! from.getOwner().equals(to.getOwner())) {
+            log.info("Updating image {} of different owner  ({} !+ {})", to, to.getOwner(), from.getOwner());
         }
+
+        to.setTitle(from.getTitle());
+        to.setDescription(from.getDescription());
+        to.setType(from.getType());
+        to.setHeight(from.getHeight());
+        to.setWidth(from.getWidth());
+        to.setType(from.getType());
+        to.setImageUri(from.getImageUri());
+        to.setLicense(from.getLicense());
+        to.setSourceName(from.getSourceName());
+        return to;
     }
 
     @Override
