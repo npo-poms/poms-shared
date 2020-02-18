@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Michiel Meeuwissen
@@ -25,6 +28,7 @@ public class SaveResult {
     private boolean success = true;
 
     @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     private Instant creationDate;
 
     @XmlElement
