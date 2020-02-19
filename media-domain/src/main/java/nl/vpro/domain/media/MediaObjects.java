@@ -537,6 +537,7 @@ public class MediaObjects {
     public static void markForUnDeletion(@NonNull MediaObject media, String reason) {
         if (Workflow.DELETES.contains(media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
+            log.info("Marked {} for undeletion", media);
             media.setRepubReason(reason);
             media.setRepubDestinations(null);
         }
