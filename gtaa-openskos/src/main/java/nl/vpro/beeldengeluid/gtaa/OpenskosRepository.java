@@ -128,7 +128,7 @@ public class OpenskosRepository implements GTAARepository {
 
     private static RestTemplate createTemplateIfNull(RestTemplate template) {
         if (template == null) {
-            MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
+
             Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
             jaxb2Marshaller.setPackagesToScan(
                 "nl.vpro.beeldengeluid.gtaa",
@@ -141,31 +141,20 @@ public class OpenskosRepository implements GTAARepository {
             } catch (Exception ex) {
 
             }
-            marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-            //marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
+            DOMSourceUnmarshaller domSourceUnmarshaller = new DOMSourceUnmarshaller();
 
-            marshallingHttpMessageConverter.setUnmarshaller(new Unmarshaller() {
-                @Override
-                public boolean supports(Class<?> aClass) {
-                    return Source.class.isAssignableFrom(aClass);
-                }
+            MarshallingHttpMessageConverter rdfHttpMessageConverter = new MarshallingHttpMessageConverter();
+            rdfHttpMessageConverter.setMarshaller(jaxb2Marshaller);
+            rdfHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
 
-                @Override
-                public Object unmarshal(Source source) throws XmlMappingException {
-                    try {
-                        TransformerFactory factory = TransformerFactory.newInstance();
-                        Transformer transformer = factory.newTransformer();
-                        DOMResult result = new DOMResult();
-                        transformer.transform(source, result);
-                        return new DOMSource(result.getNode());
-                    } catch (TransformerException e) {
-                        throw new XmlMappingException(e.getMessage(), e) {};
-                    }
+            MarshallingHttpMessageConverter rdfToDomHttpMessageConverter = new MarshallingHttpMessageConverter();
+            rdfToDomHttpMessageConverter.setMarshaller(jaxb2Marshaller);
+            rdfToDomHttpMessageConverter.setUnmarshaller(domSourceUnmarshaller);
 
-                }
-            });
             template = new RestTemplate();
-            template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
+            template.setMessageConverters(
+                Arrays.asList(rdfHttpMessageConverter, rdfToDomHttpMessageConverter)
+            );
         }
         return template;
     }
@@ -567,5 +556,26 @@ public class OpenskosRepository implements GTAARepository {
     public String toString() {
         return super.toString() + " " + gtaaUrl;
     }
+
+    private static class DOMSourceUnmarshaller implements Unmarshaller {
+        @Override
+        public boolean supports(Class<?> aClass) {
+            return Source.class.isAssignableFrom(aClass);
+        }
+
+        @Override
+        public Object unmarshal(Source source) throws XmlMappingException {
+            try {
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Transformer transformer = factory.newTransformer();
+                DOMResult result = new DOMResult();
+                transformer.transform(source, result);
+                return new DOMSource(result.getNode());
+            } catch (TransformerException e) {
+                throw new XmlMappingException(e.getMessage(), e) {};
+            }
+
+        }
+    };
 
 }
