@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.gtaa.*;
+import nl.vpro.dublincore.terms.Date;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.Note;
 import nl.vpro.xml.bind.ZonedDateTimeXmlAdapter;
@@ -97,8 +98,7 @@ public class Description extends AbstractGTAAObject {
     private ZonedDateTime dateSubmitted;
 
     @XmlElement(namespace = DC_TERMS)
-    @XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
-    private ZonedDateTime modified;
+    private Date modified;
 
     @XmlElement(namespace = OPEN_SKOS)
     private UUID uuid;
