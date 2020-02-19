@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1714737">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateSubmitted>2020-02-19T15:38:50.384+01:00</dcterms:dateSubmitted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:uuid>45acf0b9-ddd2-4bae-bd7b-fc444b288cf9</openskos:uuid>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-02-19T14:38:50+00:00</dcterms:modified>
+    <dcterms:publisher rdf:resource="http://tenant/36ecba45-8d23-4c8e-97f8-d73782b92ed5"/>
+    <openskos:status>candidate</openskos:status>
+    <skos:notation>1714737</skos:notation>
+    <dc:creator>poms_test</dc:creator>
+    <openskos:modifiedBy rdf:resource="http://openskos.beeldengeluid.nl/api/users/f43f43a7-1b02-4d5c-8bdc-e180c112a918"/>
+    <skos:scopeNote xml:lang="nl">Buurtschap binnen de gemeente Nijkerk</skos:scopeNote>
+    <openskos:tenant>beng</openskos:tenant>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Driedorp31582123130364</skos:prefLabel>
+    <skosxl:prefLabel>
+      <rdf:Description rdf:about="http://openskos.beeldengeluid.nl/api/labels/f44ed220-d6d6-4983-9719-ba154729366d">
+        <rdf:type rdf:resource="http://www.w3.org/2008/05/skos-xl#Label"/>
+        <skosxl:literalForm xml:lang="nl">Driedorp31582123130364</skosxl:literalForm>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-02-19T14:38:51+00:00</dcterms:modified>
+        <openskos:tenant>beng</openskos:tenant>
+      </rdf:Description>
+    </skosxl:prefLabel>
+  </rdf:Description>
+</rdf:RDF>

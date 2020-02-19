@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1711343">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:tenant>beng</openskos:tenant>
+    <skos:notation>1711343</skos:notation>
+    <dcterms:dateSubmitted>2020-02-19T15:37:58.620+01:00</dcterms:dateSubmitted>
+    <openskos:uuid>9d680dc8-d5ef-4eed-a115-a0a0a6bffe58</openskos:uuid>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/gtaa"/>
+    <openskos:status>candidate</openskos:status>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dc:creator>poms_test</dc:creator>
+    <skos:scopeNote xml:lang="nl">Buurtschap binnen de gemeente Nijkerk</skos:scopeNote>
+    <openskos:modifiedBy rdf:resource="http://openskos.beeldengeluid.nl/api/users/f43f43a7-1b02-4d5c-8bdc-e180c112a918"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-02-19T14:37:59+00:00</dcterms:modified>
+    <skosxl:prefLabel>
+      <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/labels/70ff1564-4b28-4fc8-a9cd-84b2e55eb024">
+        <rdf:type rdf:resource="http://www.w3.org/2008/05/skos-xl#Label"/>
+        <skosxl:literalForm xml:lang="nl">Driedorp31582123078602</skosxl:literalForm>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-02-19T14:38:00+00:00</dcterms:modified>
+        <openskos:tenant>beng</openskos:tenant>
+      </rdf:Description>
+    </skosxl:prefLabel>
+
+  </rdf:Description>
+</rdf:RDF>

@@ -23,6 +23,10 @@ import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
 import javax.xml.bind.JAXB;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,10 +36,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
+import org.springframework.oxm.Unmarshaller;
+import org.springframework.oxm.XmlMappingException;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.*;
 
 import nl.vpro.domain.gtaa.*;
+import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.openarchives.oai.*;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
@@ -132,11 +139,31 @@ public class OpenskosRepository implements GTAARepository {
             try {
                 jaxb2Marshaller.afterPropertiesSet();
             } catch (Exception ex) {
-                /* Ignore */
+
             }
             marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-            marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
+            //marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
 
+            marshallingHttpMessageConverter.setUnmarshaller(new Unmarshaller() {
+                @Override
+                public boolean supports(Class<?> aClass) {
+                    return Source.class.isAssignableFrom(aClass);
+                }
+
+                @Override
+                public Object unmarshal(Source source) throws XmlMappingException {
+                    try {
+                        TransformerFactory factory = TransformerFactory.newInstance();
+                        Transformer transformer = factory.newTransformer();
+                        DOMResult result = new DOMResult();
+                        transformer.transform(source, result);
+                        return new DOMSource(result.getNode());
+                    } catch (TransformerException e) {
+                        throw new XmlMappingException(e.getMessage(), e) {};
+                    }
+
+                }
+            });
             template = new RestTemplate();
             template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
         }
@@ -171,7 +198,7 @@ public class OpenskosRepository implements GTAARepository {
     @SuppressWarnings("StringConcatenationInLoop")
     private Description submit(@NonNull String prefLabel, @NonNull  List<Label> notes, @NonNull  String creator, @NonNull  Scheme scheme) {
 
-        ResponseEntity<RDF> response = null;
+        ResponseEntity<Source> response = null;
         RuntimeException rte = null;
         try {
             response = postRDF(prefLabel, notes, creator, scheme);
@@ -205,11 +232,14 @@ public class OpenskosRepository implements GTAARepository {
             response = null;
         }
 
-        if (response != null
-            && response.getBody() != null
-            && response.getBody().getDescriptions() != null && ! response.getBody().getDescriptions().isEmpty()) {
+        if (response != null && response.getBody() != null) {
+
+            Source doc = response.getBody();
+            logSource(doc);
+
+            RDF rdf = JAXB.unmarshal(doc, RDF.class);
             if (response.getStatusCode() == CREATED) {
-                return response.getBody().getDescriptions().get(0);
+                return rdf.getDescriptions().get(0);
             } else {
                 // Is this possible at all?
                 throw new RuntimeException("Status " + response.getStatusCode() + " for prefLabel: " + prefLabel, rte);
@@ -218,6 +248,21 @@ public class OpenskosRepository implements GTAARepository {
             throw new RuntimeException("For prefLabel: " + prefLabel, rte);
         }
 
+    }
+
+    private void logSource(Source doc) {
+        if (log.isDebugEnabled()) {
+            try {
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Transformer transformer = factory.newTransformer();
+                Result result = new StreamResult(LoggerOutputStream.debug(log));
+                transformer.transform(doc, result);
+            } catch (Exception e) {
+                log.warn(e.getMessage(), e);
+            }
+
+            log.debug("{}", doc);
+        }
     }
 
     @Override
@@ -319,7 +364,7 @@ public class OpenskosRepository implements GTAARepository {
         return oai_pmh.getListRecord();
     }
 
-    private ResponseEntity<RDF> postRDF(
+    private ResponseEntity<Source> postRDF(
         @NonNull String prefLabel,
         @NonNull List<Label> notes,
         @NonNull String creator,
@@ -341,7 +386,11 @@ public class OpenskosRepository implements GTAARepository {
         template.setErrorHandler(new ResponseErrorHandler() {
             @Override
             public boolean hasError(@NonNull ClientHttpResponse response) throws IOException {
-                return !response.getStatusCode().is2xxSuccessful();
+                boolean hasError = ! response.getStatusCode().is2xxSuccessful();
+                if (hasError) {
+                    log.warn("{}", response);
+                }
+                return hasError;
             }
 
             @Override
@@ -368,10 +417,11 @@ public class OpenskosRepository implements GTAARepository {
         });
 
         // Beware parameter ordering is relevant
-        return template.postForEntity(
+        ResponseEntity<Source> source =  template.postForEntity(
                 String.format("%s/api/concept?key=%s&collection=gtaa&autoGenerateIdentifiers=true&tenant=%s",
                         gtaaUrl ,gtaaKey, tenant),
-                rdf, RDF.class);
+                rdf, Source.class);
+        return source;
     }
 
 
@@ -457,6 +507,7 @@ public class OpenskosRepository implements GTAARepository {
         }
     }
 
+    @Override
     public Optional<GTAAConcept> get(String id) {
         String url = gtaaUrl + "api/find-concepts?id=" + id;
         try {
