@@ -160,7 +160,7 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
         }
 
         answer.scopeNotes = description.getScopeNote() == null ? null : description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList());
-        answer.lastModified = description.getModified() == null ? null : description.getModified().getValue().toInstant();
+        answer.lastModified = description.getModified() == null ? null : description.getModified().toInstant();
 
         if (description.getAltLabels() != null && !description.getAltLabels().isEmpty()) {
             final List<Names> altNames = description.getAltLabels().stream().map(Names::of)

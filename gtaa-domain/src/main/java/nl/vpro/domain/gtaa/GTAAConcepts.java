@@ -23,7 +23,9 @@ public class GTAAConcepts {
     public static GTAAConcept toConcept(Description d) {
         return (GTAAConcept) Scheme.ofUrl(d.getInScheme().getResource()).map(s -> {
             try {
-                return s.getImplementation().getMethod("create", Description.class).invoke(null, d);
+                return s.getImplementation()
+                    .getMethod("create", Description.class)
+                    .invoke(null, d);
             } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 log.error(e.getMessage(), e);
                 return null;

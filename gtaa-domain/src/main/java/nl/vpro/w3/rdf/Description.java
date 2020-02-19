@@ -8,25 +8,15 @@ import lombok.*;
 
 import java.net.URI;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Stream;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 
-import nl.vpro.domain.gtaa.AbstractGTAAObject;
-import nl.vpro.domain.gtaa.Scheme;
-import nl.vpro.domain.gtaa.Status;
-import nl.vpro.domain.gtaa.XLLabel;
-import nl.vpro.dublincore.terms.Date;
+import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.Note;
 import nl.vpro.xml.bind.ZonedDateTimeXmlAdapter;
@@ -107,7 +97,8 @@ public class Description extends AbstractGTAAObject {
     private ZonedDateTime dateSubmitted;
 
     @XmlElement(namespace = DC_TERMS)
-    private Date modified;
+    @XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
+    private ZonedDateTime modified;
 
     @XmlElement(namespace = OPEN_SKOS)
     private UUID uuid;

@@ -29,7 +29,8 @@ public class OpenskosRepositoryITest {
 
 
     public static Object[] envs() {
-        return new Object[]{Env.DEV, Env.TEST,  Env.ACC, Env.PROD };
+        //return new Object[]{Env.DEV, Env.TEST,  Env.ACC, Env.PROD };
+        return new Object[]{Env.ACC};
     }
 
     @ParameterizedTest
@@ -38,16 +39,16 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance(env);
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
             .givenName("Pietje")
-            .familyName("Puk"  + System.currentTimeMillis())
+            .familyName("Pukdasdfsadf"  + System.currentTimeMillis())
             .scopeNotes(new ArrayList<>())
             .build();
 
-        impl.submit(pietjePuk, "POMS2");
+        GTAAConcept poms2 = impl.submit(pietjePuk, "POMS2");
+        log.info("Received {}", poms2);
     }
 
     @ParameterizedTest
     @MethodSource("envs")
-    @Disabled("Vervuilt GTAA")
     public void testPostGeographicName(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         impl.setTenant("beng");

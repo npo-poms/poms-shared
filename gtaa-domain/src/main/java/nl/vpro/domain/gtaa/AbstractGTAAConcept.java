@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
+import nl.vpro.w3.rdf.LabelDescription;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @XmlTransient
@@ -81,6 +82,15 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
         answer.setId(description.getAbout());
         if (description.getPrefLabel() != null) {
             answer.setName(description.getPrefLabel().getValue());
+        } else if (description.getXlPrefLabel() != null) {
+            XLLabel xlLabel = description.getXlPrefLabel();
+            LabelDescription labelDescription = xlLabel.getDescription();
+            if (labelDescription != null) {
+                Label literalForm = labelDescription.getLiteralForm();
+                if (literalForm != null) {
+                    answer.setName(literalForm.getValue());
+                }
+            }
         }
         answer.setScopeNotes(description.getScopeNote() == null ? null : description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList()));
         answer.setStatus(description.getStatus());
@@ -88,7 +98,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
             description.getRedirectedFrom().ifPresent(answer::setRedirectedFrom);
         }
         if (description.getModified() != null) {
-            answer.setLastModified(description.getModified().getValue().toInstant());
+            answer.setLastModified(description.getModified().toInstant());
         }
     }
 

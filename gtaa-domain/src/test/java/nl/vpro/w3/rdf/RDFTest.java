@@ -1,6 +1,6 @@
 package nl.vpro.w3.rdf;
 
-import java.io.StringReader;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.Collections;
 
@@ -110,6 +110,19 @@ public class RDFTest {
         assertThat(also.getDescriptions()).hasSize(1);
 
         assertThat(also).isEqualTo(out);
+
+    }
+
+
+    @Test
+    public void testJaxbBindingWithXLLabel2() throws IOException {
+        InputStream input = RDFTest.class.getClassLoader().getResourceAsStream("response-acc.xml");
+        RDF out = JAXBTestUtil.roundTripAndSimilar(input, RDF.class, JAXBTestUtil.IGNORE_ELEMENT_ORDER);
+
+        assertThat(out.getDescriptions()).hasSize(1);
+        assertThat(out.getDescriptions().get(0).getXlPrefLabel().getDescription().getLiteralForm().getValue()).isEqualTo("doodstraf");
+
+
 
     }
 }
