@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.5
  */
-public abstract class PublishableObjectAssert<S extends PublishableObjectAssert<S, A>, A extends PublishableObject> extends AbstractObjectAssert<S, A> {
+public abstract class PublishableObjectAssert<S extends PublishableObjectAssert<S, A>, A extends PublishableObject<A>> extends AbstractObjectAssert<S, A> {
 
     public PublishableObjectAssert(A actual, Class<?> selfType) {
         super(actual, selfType);
