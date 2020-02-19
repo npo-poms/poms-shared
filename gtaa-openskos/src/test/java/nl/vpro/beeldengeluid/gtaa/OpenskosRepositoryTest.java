@@ -56,9 +56,11 @@ public class OpenskosRepositoryTest {
             .scheme(Scheme.name)
             .build();
 
-        repo.submit(testNameX, "testCreatorX");
+        GTAAConcept testCreatorX = repo.submit(testNameX, "testCreatorX");
         wireMockRule.verify(postRequestedFor(urlPathEqualTo("/api/concept")).withRequestBody(
                 matchingXPath("//skosxl:literalForm[text() = 'Testlabel1']").withXPathNamespace("skosxl", "http://www.w3.org/2008/05/skos-xl#")));
+
+        assertThat(testCreatorX.getName()).isEqualTo("Testlabel1");
     }
 
     @Test

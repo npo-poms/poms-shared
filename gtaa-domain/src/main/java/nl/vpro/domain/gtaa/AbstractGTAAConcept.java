@@ -1,14 +1,12 @@
 package nl.vpro.domain.gtaa;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
@@ -80,18 +78,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
     protected static void fill(Description description, AbstractGTAAConcept answer) {
         answer.setId(description.getAbout());
-        if (description.getPrefLabel() != null) {
-            answer.setName(description.getPrefLabel().getValue());
-        } else if (description.getXlPrefLabel() != null) {
-            XLLabel xlLabel = description.getXlPrefLabel();
-            LabelDescription labelDescription = xlLabel.getDescription();
-            if (labelDescription != null) {
-                Label literalForm = labelDescription.getLiteralForm();
-                if (literalForm != null) {
-                    answer.setName(literalForm.getValue());
-                }
-            }
-        }
+        answer.setName(prefLabel(description).orElse(null));
         answer.setScopeNotes(description.getScopeNote() == null ? null : description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList()));
         answer.setStatus(description.getStatus());
         if (description.getChangeNote() != null) {
@@ -100,6 +87,22 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
         if (description.getModified() != null) {
             answer.setLastModified(description.getModified().getValue().toInstant());
         }
+    }
+
+    protected static Optional<String> prefLabel(Description description) {
+        if (description.getPrefLabel() != null) {
+            return Optional.of(description.getPrefLabel().getValue());
+        } else if (description.getXlPrefLabel() != null) {
+            XLLabel xlLabel = description.getXlPrefLabel();
+            LabelDescription labelDescription = xlLabel.getDescription();
+            if (labelDescription != null) {
+                Label literalForm = labelDescription.getLiteralForm();
+                if (literalForm != null) {
+                    return Optional.of(literalForm.getValue());
+                }
+            }
+        }
+        return Optional.empty();
     }
 
     protected void fill(URI id,
