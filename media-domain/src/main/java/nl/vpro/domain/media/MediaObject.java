@@ -316,12 +316,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
     // hibernates on merge first merges an object without titles.
-<<<<<<< HEAD
-    @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}")
     @Valid
-=======
-    @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}", groups=PomsValidatorGroup.class) })
->>>>>>> 139e6c224... Some objects don't have a title now and can't even be deleted:
+    @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}", groups=PomsValidatorGroup.class)
     protected Set<@NotNull Title> titles;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade=ALL)
