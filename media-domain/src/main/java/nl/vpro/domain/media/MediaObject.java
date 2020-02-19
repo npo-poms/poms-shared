@@ -312,8 +312,7 @@ public abstract class MediaObject
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
     // hibernates on merge first merges an object without titles.
-    @Size.List({ @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}"), })
-    @Valid
+    @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}", groups=PomsValidatorGroup.class) })
     protected Set<@NotNull Title> titles;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade=ALL)
