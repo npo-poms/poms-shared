@@ -98,7 +98,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
             description.getRedirectedFrom().ifPresent(answer::setRedirectedFrom);
         }
         if (description.getModified() != null) {
-            answer.setLastModified(description.getModified().toInstant());
+            answer.setLastModified(description.getModified().getValue().toInstant());
         }
     }
 

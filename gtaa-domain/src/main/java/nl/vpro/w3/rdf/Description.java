@@ -98,8 +98,7 @@ public class Description extends AbstractGTAAObject {
     private ZonedDateTime dateSubmitted;
 
     @XmlElement(namespace = DC_TERMS)
-    @XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
-    private ZonedDateTime modified;
+    private Date modified;
 
     @XmlElement(namespace = OPEN_SKOS)
     private UUID uuid;
