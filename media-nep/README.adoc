@@ -35,7 +35,7 @@ widevine token, playready tokens
 
 == FTP Services
 
-There are two relevant FTP servers of we wrap the relevant function into the following interfaces
+There are two relevant FTP servers of which we wrap the relevant function into the following interfaces
 
 === NEPUploadService
 If you want to upload something for trancoding upload it here.
