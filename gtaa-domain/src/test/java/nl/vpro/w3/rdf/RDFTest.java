@@ -7,6 +7,7 @@ import java.util.Collections;
 import javax.xml.bind.JAXB;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -115,6 +116,7 @@ public class RDFTest {
 
 
     @Test
+    @Disabled
     public void testJaxbBindingWithXLLabel2() throws IOException {
         InputStream input = RDFTest.class.getClassLoader().getResourceAsStream("response-acc.xml");
         RDF out = JAXBTestUtil.roundTripAndSimilar(input, RDF.class, JAXBTestUtil.IGNORE_ELEMENT_ORDER);
