@@ -60,4 +60,5 @@ public class TestHelper {
     public static Schedule anySchedule() {
         return or(isNull(), any(Schedule.class));
     }
+
 }
