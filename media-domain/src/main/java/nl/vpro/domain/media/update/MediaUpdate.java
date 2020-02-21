@@ -361,10 +361,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return violations().isEmpty();
     }
 
-    public Set<? extends ConstraintViolation<MediaUpdate<M>>> warningViolations() {
+    public Set<? extends ConstraintViolation<MediaUpdate<? extends M>>> warningViolations() {
         return violations(WarningValidatorGroup.class);
     }
-    public Set<? extends ConstraintViolation<MediaUpdate<M>>> violations(Class<?>... groups) {
+    public Set<? extends ConstraintViolation<MediaUpdate<? extends M>>> violations(Class<?>... groups) {
         if (VALIDATOR != null) {
             if (groups.length == 0) {
                 groups = new Class<?>[]{
@@ -372,7 +372,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
                 };
             }
             mediaObjectToValidate = null;
-            Set<? extends ConstraintViolation<MediaUpdate<M>>> result = VALIDATOR.validate(this, groups);
+            Set<? extends ConstraintViolation<MediaUpdate<? extends M>>> result = VALIDATOR.validate(this, groups);
             if (result.isEmpty()) {
                 mediaObjectToValidate = fetch(OwnerType.BROADCASTER);
                 try {
@@ -394,11 +394,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public String violationMessage() {
-        Set<? extends ConstraintViolation<? extends MediaUpdate<M>>> violations = violations();
+        Set<? extends ConstraintViolation<? extends MediaUpdate<? extends M>>> violations = violations();
         return violationMessage(violations);
     }
 
-    public static <N extends MediaObject> String violationMessage(Set<? extends ConstraintViolation<? extends MediaUpdate<N>>> violations) {
+    public static <N extends MediaObject> String violationMessage(Set<? extends ConstraintViolation<? extends MediaUpdate<? extends N>>> violations) {
         if(violations.isEmpty()) {
             return null;
         }
