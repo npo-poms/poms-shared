@@ -352,6 +352,7 @@ public class MediaObjectLocker {
     }
 
 
+    @SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
     private static  <K extends Serializable> void releaseLock(long nanoStart, K key, @NonNull  String reason, final @NonNull Map<K, LockHolder<K>> locks, @NonNull LockHolder<K> lock) {
         synchronized (locks) {
             if (lock.lock.getHoldCount() == 1) {
