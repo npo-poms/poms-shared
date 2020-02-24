@@ -139,6 +139,12 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
             e.setParent(p);
             return e;
         }));
+        // handled in  nl.vpro.domain.media.update.MediaUpdateServiceImpl.fetch
+        // but this seems odd.
+   /*     p.setEpisodeOf(toSet(episodeOf, s -> {
+            MemberRef r = s.toMemberRef(owner);
+            return r;
+        }));*/
         return p;
     }
 
