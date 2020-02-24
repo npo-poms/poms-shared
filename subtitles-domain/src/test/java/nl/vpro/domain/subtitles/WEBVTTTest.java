@@ -20,8 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 public class WEBVTTTest {
 
-
-
     @Test
     public void toWEBVTTCue() throws IOException {
         assertThat(WEBVTTandSRT.formatCue(
@@ -213,6 +211,19 @@ public class WEBVTTTest {
         assertThat(cues.get(6).getContent()).isEqualTo("De afgelopen vier jaar\n" +
             "hebben we een aantal geliefde...");
 
+    }
 
+    @Test
+    public void parseWithIntro() {
+        InputStream example = getClass().getResourceAsStream("/MSE-4726.vtt");
+        ParseResult parseResult = WEBVTTandSRT.parseWEBVTT("bla", example);
+        List<Cue> cues = SubtitlesUtil.fillCueNumber(parseResult.getCues()).collect(Collectors.toList());
+        log.info("{}", parseResult);
+
+        assertThat(cues.get(0).getContent()).isEqualTo("<c.white>888</c>");
+        assertThat(cues).hasSize(1057);
+        for (Cue cue : cues) {
+            assertThat(cue.getSequence()).isNotNull();
+        }
     }
 }

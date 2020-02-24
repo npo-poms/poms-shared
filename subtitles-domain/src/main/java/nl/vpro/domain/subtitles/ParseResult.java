@@ -17,12 +17,12 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 @Getter
 public class ParseResult implements Iterable<Cue> {
 
-    private final List<Header> headers;
+    private final List<Meta> headers;
 
     @NonNull
     private final Stream<Cue> cues;
 
-    private ParseResult(Stream<Cue> cues, List<Header> headers) {
+    private ParseResult(Stream<Cue> cues, List<Meta> headers) {
         this.cues = cues;
         this.headers = headers;
     }
@@ -34,7 +34,7 @@ public class ParseResult implements Iterable<Cue> {
         return new ParseResult(cues);
     }
 
-    public static ParseResult of(Stream<Cue> cues, List<Header> headers) {
+    public static ParseResult of(Stream<Cue> cues, List<Meta> headers) {
         return new ParseResult(cues, headers);
     }
 
@@ -46,5 +46,10 @@ public class ParseResult implements Iterable<Cue> {
 
     public <R, A> R collect(Collector<? super Cue, A, R> collector) {
         return cues.collect(collector);
+    }
+
+    @Override
+    public String toString() {
+        return "headers: " + headers;
     }
 }
