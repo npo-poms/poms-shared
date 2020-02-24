@@ -4,17 +4,16 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import java.util.stream.*;
 
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.util.SkipAtStartInputStream;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_A
@@ -30,7 +29,7 @@ public class WEBVTTandSRT {
     static final String WEBVTT_INTRO = "WEBVTT";
 
     public static final Charset SRT_CHARSET = SubtitlesFormat.SRT.getCharset();
-    public static final Charset VTT_CHARSET = StandardCharsets.UTF_8;
+    public static final Charset VTT_CHARSET = UTF_8;
 
 
     public static ParseResult parseWEBVTT(String parent, InputStream inputStream) {
@@ -49,7 +48,7 @@ public class WEBVTTandSRT {
     }
 
     public static Stream<Cue> parseSRT(String parent, Duration offset, InputStream inputStream, Charset charset) {
-        if (! StandardCharsets.UTF_8.equals(charset)) {
+        if (! UTF_8.equals(charset)) {
             inputStream = SkipAtStartInputStream.skipUnicodeByteOrderMarks(inputStream);
         }
         return parse(parent, offset, new InputStreamReader(inputStream, charset == null ? SRT_CHARSET : charset), ",").getCues();
@@ -78,7 +77,7 @@ public class WEBVTTandSRT {
         Reader reader,
         String decimalSeparator) {
 
-        final List<Header> headers = new ArrayList<>();
+        final List<Meta> headers = new ArrayList<>();
         final Iterator<String> stream = new BufferedReader(reader)
             .lines()
             .iterator();
@@ -125,8 +124,28 @@ public class WEBVTTandSRT {
                         if (StringUtils.isNotBlank(l)) {
                             if (! readIntro) {
                                 if (WEBVTT_INTRO.equals(l.trim())) {
-                                    readIntro = true;
-                                    continue;
+                                    StringBuilder content = new StringBuilder();
+                                    while (stream.hasNext()) {
+                                        l = stream.next();
+                                        if (StringUtils.isBlank(l)) {
+                                            readIntro = true;
+                                        } else {
+                                            log.debug("Read {}", l);
+                                            if (readIntro) {
+                                                break;
+                                            } else {
+                                                content.append(l);
+                                            }
+                                        }
+                                    }
+                                    if (content.length() > 0) {
+                                        headers.add(
+                                            Meta.builder().content(content.toString()).type(MetaType.INTRO).build()
+                                        );
+                                    }
+                                    while (StringUtils.isBlank(l)) {
+                                        l = stream.next();
+                                    }
                                 }
                             }
                             readIntro = true;
@@ -180,6 +199,7 @@ public class WEBVTTandSRT {
 
 
     }
+
 
 
     static Cue parseCue(String parent, String cueNumber, Duration offset, String timeLine, String content, String decimalSeparator) {
@@ -258,11 +278,11 @@ public class WEBVTTandSRT {
         if (negative) {
             millis *= -1;
         }
-        Long hours = millis / 3600000;
+        long hours = millis / 3600000;
         millis -= hours * 3600000;
-        Long minutes = millis / 60000;
+        long minutes = millis / 60000;
         millis -= minutes * 60000;
-        Long seconds = millis / 1000;
+        long seconds = millis / 1000;
         millis -= seconds * 1000;
         return String.format("%s%02d:%02d:%02d%s%03d", negative ? "-" : "",  hours, minutes, seconds, separator, millis);
     }

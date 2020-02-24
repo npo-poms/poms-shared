@@ -12,14 +12,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *
+ * Sometimes a subtitles may contain some information about the whole thing, not associated to one specific cue.
+ *
+ * These can be stored during parsing in these {@link Meta} objects.
+ *
+ * The could be published in elasticsearch as kind of cue;
+ *
  * @author Michiel Meeuwissen
- * @since 5.11
+ * @since 5.12
  */
 @XmlRootElement(name = "header")
-@ToString(of = {"parent", "sequence", "content"})
+@ToString(of = {"parent", "sequence", "content", "type"})
 @EqualsAndHashCode
 @Getter
-public class Header {
+public class Meta {
 
     /**
      * The MID of the parent media object
@@ -33,32 +39,30 @@ public class Header {
     @XmlAttribute
     Integer sequence;
 
+    @XmlAttribute
+    MetaType type;
+
     @XmlValue
     @JsonProperty("content")
     String content;
 
-    /**
-     * Sometimes the cue may contain specific formatting options for a certain subtitles format.
-     * We don't try to generalize this, but the knowledge may be usefull.
-     */
-    @XmlAttribute
-    SubtitlesFormat contentFormat;
+
 
     @lombok.Builder(builderClassName = "Builder")
-    Header(
+    Meta(
         String parent,
         Integer sequence,
         String content,
-        SubtitlesFormat contentFormat
+        MetaType type
         ) {
         this.parent = parent;
         this.sequence = sequence;
         this.content = content;
-        this.contentFormat = contentFormat;
+        this.type = type;
     }
 
 
-    protected Header() {
+    protected Meta() {
 
     }
 
