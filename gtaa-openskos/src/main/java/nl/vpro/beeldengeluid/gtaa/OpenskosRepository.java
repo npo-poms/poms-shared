@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXB;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMResult;
@@ -243,6 +244,7 @@ public class OpenskosRepository implements GTAARepository {
         if (log.isDebugEnabled()) {
             try {
                 TransformerFactory factory = TransformerFactory.newInstance();
+                factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
                 Transformer transformer = factory.newTransformer();
                 Result result = new StreamResult(LoggerOutputStream.debug(log));
                 transformer.transform(doc, result);
