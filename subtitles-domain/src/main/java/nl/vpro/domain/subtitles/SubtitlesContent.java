@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -44,7 +45,7 @@ public class SubtitlesContent implements Serializable {
 
     public SubtitlesContent(SubtitlesFormat format, String content) {
         this.format = format;
-        this.value = content.getBytes(Charset.forName("UTF-8"));
+        this.value = content.getBytes(StandardCharsets.UTF_8);
         this.charset = "UTF-8";
     }
 
