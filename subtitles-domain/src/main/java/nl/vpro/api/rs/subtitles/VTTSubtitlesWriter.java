@@ -1,14 +1,14 @@
 package nl.vpro.api.rs.subtitles;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.ext.Provider;
 
-import nl.vpro.domain.subtitles.Subtitles;
-import nl.vpro.domain.subtitles.SubtitlesFormat;
-import nl.vpro.domain.subtitles.SubtitlesUtil;
+import nl.vpro.domain.subtitles.*;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
 
@@ -18,6 +18,7 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
  */
 @Provider
 @Produces(VTT_WITH_CHARSET)
+@Slf4j
 public class VTTSubtitlesWriter extends AbstractSubtitlesWriter {
 
 
@@ -27,6 +28,12 @@ public class VTTSubtitlesWriter extends AbstractSubtitlesWriter {
 
     @Override
     protected void stream(Subtitles subtitles, OutputStream entityStream) throws IOException {
-        SubtitlesUtil.toVTT(iterate(subtitles, false), entityStream);
+        SubtitlesContent content = subtitles.getContent();
+        if (subtitles.isAvoidParsing() && content.getFormat() == SubtitlesFormat.WEBVTT) {
+            log.debug("The subtitles are already in webvtt format");
+            entityStream.write(content.getValue());
+        } else {
+            SubtitlesUtil.toVTT(iterate(subtitles, false), entityStream);
+        }
     }
 }
