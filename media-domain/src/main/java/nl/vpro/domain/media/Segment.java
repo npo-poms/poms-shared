@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
-import java.util.List;
-import java.util.SortedSet;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -312,7 +311,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
             }
         }
         {
-            int compare = this.getMainTitle().compareTo(o.getMainTitle());
+            int compare = Objects.compare(this.getMainTitle(), o.getMainTitle(), Comparator.nullsLast(Comparator.naturalOrder()));
             if (compare != 0) {
                 return compare;
             }
