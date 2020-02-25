@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.bind;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -15,6 +17,7 @@ import nl.vpro.domain.media.AgeRating;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
+@Slf4j
 public class AgeRatingToString {
     public static class Serializer extends JsonSerializer<AgeRating> {
 
@@ -33,7 +36,12 @@ public class AgeRatingToString {
     public static class Deserializer extends JsonDeserializer<AgeRating> {
         @Override
         public AgeRating deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-            return AgeRating.xmlValueOf(jp.getText());
+            try {
+                return AgeRating.xmlValueOf(jp.getText());
+            } catch (IllegalArgumentException iae) {
+                log.warn(iae.getMessage());
+                return null;
+            }
         }
     }
 
