@@ -68,11 +68,26 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
+<<<<<<< HEAD
     public void testMid() throws Exception {
         String expected = "{\"objectType\":\"program\",\"mid\":\"MID_000001\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[], \"countries\":[],\"languages\":[]}";
+=======
+    public void testMidAndType() {
+        String expected = "{\"objectType\":\"program\",\"mid\":\"MID_000001\",  \"type\" : \"CLIP\", \"embeddable\":true,\"broadcasters\":[],\"genres\":[], \"countries\":[],\"languages\":[]}";
+>>>>>>> 8bb33f25c... Be more lenient.
 
-        Program program = program().lean().mid("MID_000001").build();
+        Program program = program().lean().type(ProgramType.CLIP).mid("MID_000001").build();
         Jackson2TestUtil.roundTripAndSimilarAndEquals(program, expected);
+    }
+
+
+
+    @Test
+    public void testUnknownType() throws Exception {
+        String odd = "{\"objectType\":\"program\",\"type\": \"FOOBAR\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[] }";
+
+        Program program = Jackson2Mapper.getLenientInstance().readValue(odd, Program.class);
+        assertThat(program.getType()).isNull();
     }
 
     @Test
@@ -660,6 +675,14 @@ public class MediaObjectJsonSchemaTest {
         String actual = toJson(program);
 
         JSONAssert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testAgeRatingUnknown() throws Exception {
+        String odd = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"17\"}";
+
+        Program program = Jackson2Mapper.getLenientInstance().readValue(odd, Program.class);
+        assertThat(program.getAgeRating()).isNull();
     }
 
 
