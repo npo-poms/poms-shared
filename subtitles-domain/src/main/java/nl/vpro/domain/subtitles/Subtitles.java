@@ -130,6 +130,12 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     private SubtitlesWorkflow  workflow = SubtitlesWorkflow.FOR_PUBLICATION;
 
 
+    @XmlTransient
+    @Transient
+    @Getter
+    @Setter
+    private boolean avoidParsing = false;
+
     public Subtitles() {
     }
 

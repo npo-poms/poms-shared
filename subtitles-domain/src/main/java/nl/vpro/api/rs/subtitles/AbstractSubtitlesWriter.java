@@ -42,11 +42,17 @@ abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
     @Override
     public long getSize(Subtitles subtitles, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
         return -1;
-
     }
 
     @Override
-    public void writeTo(Subtitles subtitles, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
+    public void writeTo(
+        Subtitles subtitles,
+        Class<?> type,
+        Type genericType,
+        Annotation[] annotations,
+        MediaType mediaType,
+        MultivaluedMap<String, Object> httpHeaders,
+        OutputStream entityStream) throws IOException, WebApplicationException {
         Util.headers(subtitles.getId(), httpHeaders, extension);
         Changeables.headers(subtitles, httpHeaders);
         httpHeaders.putSingle(OFFSET_HEADER, subtitles.getOffset() == null ? "GUESSED" : subtitles.getOffset().toString());
