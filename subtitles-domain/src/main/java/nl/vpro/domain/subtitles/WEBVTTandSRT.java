@@ -143,7 +143,7 @@ public class WEBVTTandSRT {
                                             Meta.builder().content(content.toString()).type(MetaType.INTRO).build()
                                         );
                                     }
-                                    while (StringUtils.isBlank(l)) {
+                                    while (StringUtils.isBlank(l) && stream.hasNext()) {
                                         l = stream.next();
                                     }
                                 }
@@ -158,7 +158,7 @@ public class WEBVTTandSRT {
                                     }
 
                                 }
-                                while (StringUtils.isBlank(l)) {
+                                while (StringUtils.isBlank(l) && stream.hasNext()) {
                                     l = stream.next();
                                 }
                             }
