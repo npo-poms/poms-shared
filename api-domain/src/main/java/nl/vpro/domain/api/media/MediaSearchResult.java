@@ -44,11 +44,16 @@ public class MediaSearchResult extends GenericMediaSearchResult<MediaObject> {
         super(sr);
     }
 
-    public MediaSearchResult(GenericMediaSearchResult<? extends MediaObject> sr) {
+    public MediaSearchResult(GenericMediaSearchResult<? extends MediaObject> sr, TotalQualifier totalQualifier) {
         super(sr);
         setFacets(sr.getFacets());
         setSelectedFacets(sr.getSelectedFacets());
+        this.totalQualifier = totalQualifier;
     }
+    public MediaSearchResult(GenericMediaSearchResult<? extends MediaObject> sr) {
+        this(sr, sr.getTotalQualifier());
+    }
+
 
     @Override
     public MediaResult asResult() {
