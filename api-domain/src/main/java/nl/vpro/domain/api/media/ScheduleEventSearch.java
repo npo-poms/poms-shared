@@ -65,15 +65,14 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant end;
 
+
     public ScheduleEventSearch() {
     }
 
     @Override
     protected boolean defaultIncludeEnd() {
         return true;
-
     }
-
 
     public ScheduleEventSearch(Channel channel, Instant begin, Instant end) {
         super(begin, end, null);
@@ -102,16 +101,29 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
         this.rerun = rerun;
     }
 
-
     public boolean hasSearches() {
-        return channel != null || net != null || rerun != null;
+        return countSearches() > 0;
+    }
+
+    public int countSearches() {
+        int result = 0;
+        if (channel != null) {
+            result++;
+        }
+        if (net != null) {
+            result++;
+        }
+        if (rerun != null){
+            result ++;
+        }
+        return result;
     }
 
     @Override
     public boolean test(@Nullable ScheduleEvent t) {
         return t != null && (channel == null || channel.equals(t.getChannel()))
             && (net == null || net.equals(t.getNet().getId()))
-            && (rerun == null || rerun == t.getRepeat().isRerun())
+            && (rerun == null || rerun == t.isRerun())
             && super.testComparable(t.getStartInstant());
     }
 
