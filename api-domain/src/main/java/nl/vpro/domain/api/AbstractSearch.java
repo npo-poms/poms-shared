@@ -46,7 +46,7 @@ public abstract class AbstractSearch extends AbstractMatcher {
                         return true;
                     }
                 } else {
-                    if (!col.iterator().hasNext()) {
+                    if (col.iterator().hasNext()) {
                         return true;
                     }
                 }
