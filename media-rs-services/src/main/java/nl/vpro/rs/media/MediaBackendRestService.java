@@ -67,6 +67,8 @@ public interface MediaBackendRestService {
     String OWNER = "owner";
     String VALIDATE_INPUT = "validateInput";
 
+    String AVOID_PARSING = "avoidParsing";
+
     // some descriptions for common query and path parameters
     String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitely followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated duration parsing, against the XSD. If this is false, your input will still be validated, but using so called java bean validation only. This will give no line and column number information, but is otherwise be more complete.";
@@ -75,6 +77,9 @@ public interface MediaBackendRestService {
     String STEAL_CRIDS_DESCRIPTION = "When set to true, and you submit an object with both crid and mid (or you used lookupcrid=false, and generate a mid), and the crid existed already for a different mid, then this crid will be (if allowed) removed from the old object ";
     String IMAGE_METADATA_DESCRIPTION = "When set to true, the image backend server will try to fill in missing image metata automaticly, using several external API's";
     String OWNER_DESCRIPTION = "if your account has sufficient right, you may get and post with a differrent owner type than BROADCASTER";
+
+    String AVOID_PARSING_DESCRIPTION = "if you request the subtitles in the same format as they were originally supplied, they will be returned untouched as much as possible";
+
 
     // related to transcoding
     String ENCRYPTION = "encryption";
@@ -341,7 +346,9 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam("avoidParsing") @DefaultValue("false") Boolean avoidParsing
+
     );
 
     @GET
