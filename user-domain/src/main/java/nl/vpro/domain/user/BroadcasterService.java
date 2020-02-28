@@ -13,7 +13,7 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
             if (b.misId == null) {
                 throw new UnsupportedOperationException();
             }
-            if (id.equals(b.misId)) {
+            if (id.equalsIgnoreCase(b.misId)) {
                 return b;
             }
         }
@@ -25,7 +25,7 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
             if (b.whatsOnId == null) {
                 throw new UnsupportedOperationException();
             }
-            if (id.equals(b.whatsOnId)) {
+            if (id.equalsIgnoreCase(b.whatsOnId)) {
                 return b;
             }
         }
@@ -37,7 +37,7 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
             if (b.neboId == null) {
                 throw new UnsupportedOperationException();
             }
-            if (id.equals(b.neboId)) {
+            if (id.equalsIgnoreCase(b.neboId)) {
                 return b;
             }
         }
