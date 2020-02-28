@@ -68,14 +68,9 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-<<<<<<< HEAD
-    public void testMid() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"mid\":\"MID_000001\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[], \"countries\":[],\"languages\":[]}";
-=======
-    public void testMidAndType() {
-        String expected = "{\"objectType\":\"program\",\"mid\":\"MID_000001\",  \"type\" : \"CLIP\", \"embeddable\":true,\"broadcasters\":[],\"genres\":[], \"countries\":[],\"languages\":[]}";
->>>>>>> 8bb33f25c... Be more lenient.
 
+    public void testMidAndType() throws Exception {
+        String expected = "{\"objectType\":\"program\",\"mid\":\"MID_000001\",  \"type\" : \"CLIP\", \"embeddable\":true,\"broadcasters\":[],\"genres\":[], \"countries\":[],\"languages\":[]}";
         Program program = program().lean().type(ProgramType.CLIP).mid("MID_000001").build();
         Jackson2TestUtil.roundTripAndSimilarAndEquals(program, expected);
     }
