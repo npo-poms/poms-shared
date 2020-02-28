@@ -4,13 +4,11 @@ import lombok.*;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Function;
+import java.util.function.*;
 
 import org.slf4j.Logger;
 
-import nl.vpro.domain.media.MediaObject;
-import nl.vpro.domain.media.Segment;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.logging.simple.SimpleLogger;
@@ -53,8 +51,7 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean guessEpisodePosition = false;
 
-    @lombok.Builder.Default
-    boolean memberOfUpdate = true;
+    BiPredicate<MemberRef, AssemblageConfig> memberOfUpdate = null;
 
     @lombok.Builder.Default
     boolean ratingsUpdate = true;
@@ -155,8 +152,14 @@ public class AssemblageConfig {
         return withLogger(SimpleLogger.THREAD_LOCAL.get());
     }
 
+    public boolean isMemberOfUpdate() {
+        return memberOfUpdate != null;
+    }
 
 
+    public Predicate<MemberRef> getMemberOfUpdatePredicate() {
+        return memberRef -> AssemblageConfig.this.memberOfUpdate != null && AssemblageConfig.this.memberOfUpdate.test(memberRef, AssemblageConfig.this);
+    }
 
     public static Builder withAllTrue() {
         return builder()
@@ -165,7 +168,7 @@ public class AssemblageConfig {
             .copyPredictions(true)
             .episodeOfUpdate(true)
             .guessEpisodePosition(true)
-            .memberOfUpdate(true)
+            .memberOfUpdateBoolean(true)
             .ratingsUpdate(true)
             .copyTwitterrefs(true)
             .imageMetaData(true)
@@ -195,6 +198,12 @@ public class AssemblageConfig {
          */
         public Builder deleteSegmentsForOwner() {
             return segmentsForDeletion((s, a) -> s.getOwner() != null && s.getOwner() == a.getOwner());
+        }
+        public Builder memberOfUpdateBoolean(boolean b) {
+            return memberOfUpdate((mr, c) -> b);
+        }
+        public Builder memberRefMatchOwner() {
+            return memberOfUpdate((mr, c) -> mr.getOwner() == c.getOwner());
         }
     }
 
