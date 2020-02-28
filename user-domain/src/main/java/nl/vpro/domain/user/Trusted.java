@@ -1,5 +1,6 @@
 package nl.vpro.domain.user;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import static nl.vpro.domain.Roles.SUPERPROCESS_ROLE;
@@ -24,7 +25,6 @@ public interface Trusted {
             @Override
             public String getPrincipal() {
                 return principal;
-
             }
 
             @Override
@@ -43,6 +43,11 @@ public interface Trusted {
             @Override
             public int hashCode() {
                 return Objects.hashCode(principal);
+            }
+
+            @Override
+            public String toString() {
+                return "Trusted:" + principal + ":" + Arrays.asList(getRoles());
             }
 
         };
