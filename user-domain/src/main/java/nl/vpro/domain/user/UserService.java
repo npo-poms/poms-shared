@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.user;
 
+import lombok.Getter;
+
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
@@ -11,8 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.function.Supplier;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -47,7 +48,7 @@ public interface UserService<T extends User> {
         return currentUser().map(User::getPrincipalId);
     }
 
-    void authenticate(String principalId, String password);
+    T  authenticate(String principalId, String password);
 
     default boolean currentUserHasRole(String... roles) {
         return currentUserHasRole(Arrays.asList(roles));
@@ -55,21 +56,27 @@ public interface UserService<T extends User> {
 
     boolean currentUserHasRole(Collection<String> roles);
 
-    void authenticate(String principalId);
+    T authenticate(String principalId);
 
     Object getAuthentication();
 
     void restoreAuthentication(Object authentication);
 
-
     /**
      * Default implemention without consideration of the roles. This can be overridden.
      */
-    default Logout systemAuthenticate(Trusted trustedSourceToken) {
+    default Logout<T> systemAuthenticate(Trusted trustedSourceToken) {
         authenticate(trustedSourceToken.getPrincipal());
-        return this::dropAuthentication;
-    }
+        Logout<T> logout = new Logout<T>() {
+            @Override
+            public void close() {
+                dropAuthentication();
 
+            }
+        };
+        logout.setUser(currentUser().orElseThrow(IllegalStateException::new));
+        return logout;
+    }
 
     void dropAuthentication();
 
@@ -181,7 +188,7 @@ public interface UserService<T extends User> {
     }
 
 
-    default Logout restoringAutoClosable() {
+    default Logout<T> restoringAutoClosable() {
         Object onBehalfOf = getAuthentication();
         if (onBehalfOf != null) {
             try {
@@ -196,18 +203,41 @@ public interface UserService<T extends User> {
                 MDC.put(ONBEHALFOF, ":" + onBehalfOf.toString());
             }
         }
-        return () -> {
-            try {
-                restoreAuthentication(onBehalfOf);
-            } finally {
-                MDC.remove(ONBEHALFOF);
+        return new Logout<T>() {
+            @Override
+            public void close() {
+                try {
+                    restoreAuthentication(onBehalfOf);
+                } finally {
+                    MDC.remove(ONBEHALFOF);
+                }
             }
         };
     }
 
-    interface  Logout extends AutoCloseable {
+    @Getter
+    abstract class  Logout<S extends User> implements AutoCloseable {
+
+        /**
+         * The user currently logged in and that will be logout by this.
+         */
+        @MonotonicNonNull
+        private S user;
+
+        public Logout() {
+        }
+
         @Override
-        void close();
+        public abstract void close();
+
+
+        public void setUser(S user) {
+            if (this.user != null) {
+                throw new IllegalArgumentException();
+            }
+            this.user = user;
+        }
+
     }
 
 }
