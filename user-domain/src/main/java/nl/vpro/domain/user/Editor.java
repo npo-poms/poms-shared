@@ -8,14 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -33,13 +32,13 @@ public class Editor extends AbstractUser {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
     @Valid
     @XmlTransient
-    Set<PortalEditor> portals = new TreeSet<>();
+    protected Set<PortalEditor> portals = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")
-    Set<ThirdPartyEditor> thirdParties = new TreeSet<>();
+    protected Set<ThirdPartyEditor> thirdParties = new TreeSet<>();
 
     @Transient
     private SortedSet<Broadcaster> allowedBroadcasterCache;
@@ -60,6 +59,9 @@ public class Editor extends AbstractUser {
     private SortedSet<ThirdParty> activeThirdPartyCache;
 
     @Transient
+    private Supplier<Set<String>> rolesProvider = null;
+
+    @Transient
     private Set<String> roles = null;
 
     public Editor(Editor editor) {
@@ -67,8 +69,8 @@ public class Editor extends AbstractUser {
         this.broadcasters.addAll(editor.broadcasters);
         this.portals.addAll(editor.portals);
         this.thirdParties.addAll(editor.thirdParties);
-        this.roles = new TreeSet<>();
-        this.roles.addAll(editor.getRoles());
+        this.rolesProvider = editor.rolesProvider;
+        this.roles = editor.roles;
     }
 
     protected Editor() {
@@ -110,7 +112,7 @@ public class Editor extends AbstractUser {
         return editor != null
             &&
             Objects.equals(this.getPrincipalId(), editor.getPrincipalId()) &&
-            Objects.equals(this.roles, editor.getRoles()) &&
+            Objects.equals(this.getRoles(), editor.getRoles()) &&
             Objects.equals(this.getAllowedBroadcasters(), editor.getAllowedBroadcasters()) &&
             Objects.equals(this.getAllowedPortals(), editor.getAllowedPortals()) &&
             Objects.equals(this.getAllowedThirdParties(), editor.getAllowedThirdParties());
@@ -118,14 +120,28 @@ public class Editor extends AbstractUser {
 
 
     public void setRoles(Set<String> roles) {
-        if (roles == null && this.roles != null) {
+        if (roles == null && this.rolesProvider != null) {
             log.warn("Setting roles to null!");
         }
         this.roles = roles;
+        this.rolesProvider = null;
     }
 
     public Set<String> getRoles() {
+        if (roles == null && rolesProvider != null) {
+            roles = rolesProvider.get();
+            rolesProvider = null;
+        }
         return this.roles;
+    }
+
+    public void provideRoles(Supplier<Set<String>> roles) {
+        this.rolesProvider = roles;
+        this.roles = null;
+    }
+
+    public boolean rolesLoaded() {
+        return roles != null;
     }
 
     public Broadcaster getEmployer() {

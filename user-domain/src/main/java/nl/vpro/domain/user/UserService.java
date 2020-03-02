@@ -6,17 +6,13 @@ package nl.vpro.domain.user;
 
 import lombok.Getter;
 
+import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
+import org.slf4j.*;
 
 import nl.vpro.domain.Roles;
 
@@ -33,6 +29,21 @@ public interface UserService<T extends User> {
      */
     <S> S systemDoAs(String principalId, Callable<S> handler) throws Exception;
 
+
+    /**
+     * From a principal object creates the user if not exists and returns it.
+     * @since 5.12
+     */
+    T get(java.security.Principal authentication);
+
+    default T login(java.security.Principal authentication) {
+        T editor =  get(authentication);
+        editor.setLastLogin(Instant.now());
+        update(editor);
+        return editor;
+
+
+    }
 
     @Nullable
     T get(String id);
