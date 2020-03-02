@@ -27,36 +27,38 @@ public class MediaObjectLockerTest {
     public void test() throws InterruptedException {
         StringBuilderSimpleLogger sb = new StringBuilderSimpleLogger();
         SimpleLogger logger = new ChainedSimpleLogger(sb, Slf4jSimpleLogger.of(log));
-        Thread thread1 = new Thread(new Job(1, logger, () -> "mid0"));
+        Thread thread1 = new Thread(new Job(1, logger));
         log.info("bla");
-        Thread thread2 = new Thread(new Thread(new Job(2, sb, () -> "mid0")));
+        Thread thread2 = new Thread(new Thread(new Job(2, sb)));
         log.info("now starting");
         thread2.start();
-        Thread.sleep(500);
+        Thread.sleep(550);
         thread1.start();
 
         thread1.join();
         thread2.join();
-        assertThat(sb.getStringBuilder().toString()).isEqualTo("INFO 2:0\n" +
-            "INFO 2:1\n" +
-            "INFO 2:2\n" +
-            "INFO 2:3\n" +
-            "INFO 2:4\n" +
-            "INFO 1:0\n" +
-            "INFO 2:5\n" +
-            "INFO 1:1\n" +
-            "INFO 2:6\n" +
-            "INFO 1:2\n" +
-            "INFO 2:7\n" +
-            "INFO 1:3\n" +
-            "INFO 2:8\n" +
-            "INFO 1:4\n" +
-            "INFO 2:9\n" +
-            "INFO 1:5\n" +
-            "INFO 1:6\n" +
-            "INFO 1:7\n" +
-            "INFO 1:8\n" +
-            "INFO 1:9");
+        assertThat(sb.getStringBuilder().toString()).isEqualTo(
+            "INFO 2:0\n" +
+                "INFO 2:1\n" +
+                "INFO 2:2\n" +
+                "INFO 2:3\n" +
+                "INFO 2:4\n" +
+                "INFO 2:5\n" +
+                "INFO 1:0\n" +
+                "INFO 2:6\n" +
+                "INFO 1:1\n" +
+                "INFO 2:7\n" +
+                "INFO 1:2\n" +
+                "INFO 2:8\n" +
+                "INFO 1:3\n" +
+                "INFO 2:9\n" +
+                "INFO 1:4\n" +
+                "INFO 1:5\n" +
+                "INFO 1:6\n" +
+                "INFO 1:7\n" +
+                "INFO 1:8\n" +
+                "INFO 1:9"
+        );
 
 
         assertThat(MediaObjectLocker.HOLDS.get()).isEmpty();
@@ -100,12 +102,10 @@ public class MediaObjectLockerTest {
     private static class Job implements Runnable {
         final int number;
         final SimpleLogger logger;
-        final Supplier<String> mid;
 
-        private Job(int number, SimpleLogger logger, Supplier<String> mid) {
+        private Job(int number, SimpleLogger logger) {
             this.number = number;
             this.logger = logger;
-            this.mid = mid;
         }
 
         @Override
