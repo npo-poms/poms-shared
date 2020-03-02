@@ -22,6 +22,10 @@ import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 
 public interface UserService<T extends User> {
 
+
+    boolean needsUpdate(T oldUser, T newUser);
+
+
     <S> S doAs(String principalId, Callable<S> handler) throws Exception;
 
     /**
