@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.logging.simple.*;
@@ -70,6 +71,7 @@ public class MediaObjectLockerTest {
     }
 
     @Test
+    @Disabled
     public void wildTesting() throws InterruptedException {
         List<Thread> threads = new ArrayList<>();
         for (int i = 0 ; i < 100; i++) {
