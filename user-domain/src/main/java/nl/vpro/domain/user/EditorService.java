@@ -4,12 +4,21 @@
  */
 package nl.vpro.domain.user;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.SortedSet;
+import java.util.*;
 
 public interface EditorService extends UserService<Editor> {
+
+
+    @Override
+    default boolean needsUpdate(Editor oldUser, Editor newUser) {
+        return oldUser == null
+            ||
+            ! Objects.equals(oldUser.getPrincipalId(), newUser.getPrincipalId()) ||
+            ! Objects.equals(oldUser.getAllowedBroadcasters(), newUser.getAllowedBroadcasters()) ||
+            ! Objects.equals(oldUser.getAllowedPortals(), newUser.getAllowedPortals()) ||
+            ! Objects.equals(oldUser.getAllowedThirdParties(), newUser.getAllowedThirdParties());
+    }
+
 
     Optional<Broadcaster> currentEmployer();
 
