@@ -52,7 +52,6 @@ public interface UserService<T extends User> {
 
     }
 
-    @Nullable
     Optional<T> get(String id);
 
     List<? extends T> findUsers(String name, int limit);
