@@ -3,14 +3,13 @@ package nl.vpro.domain.media;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Supplier;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import nl.vpro.logging.simple.ChainedSimpleLogger;
-import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.logging.simple.Slf4jSimpleLogger;
-import nl.vpro.logging.simple.StringBuilderSimpleLogger;
+import nl.vpro.logging.simple.*;
 
 import static nl.vpro.domain.media.MediaObjectLocker.withMidLock;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,50 +26,9 @@ public class MediaObjectLockerTest {
     public void test() throws InterruptedException {
         StringBuilderSimpleLogger sb = new StringBuilderSimpleLogger();
         SimpleLogger logger = new ChainedSimpleLogger(sb, Slf4jSimpleLogger.of(log));
-        Thread thread1 = new Thread(new Runnable() {
-            @Override
-
-            public void run() {
-                log.info("start test1");
-                withMidLock("mid0", "test1", new Runnable() {
-                    @Override
-                    @SneakyThrows
-                    public void run() {
-                        for (int i = 0; i < 10; i++) {
-                            final int fi = i;
-                            withMidLock("mid" + (i % 2), "test1.sub", new Runnable() {
-                                @SneakyThrows
-                                @Override
-                                public void run() {
-                                    logger.info("1:" + fi);
-                                    Thread.sleep(100);;
-
-                                }
-                            });
-                        }
-                    }
-                });
-
-            }
-        });
+        Thread thread1 = new Thread(new Job(1, logger, () -> sleep(100), () -> "mid0"));
         log.info("bla");
-        Thread thread2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                log.info("start test2");
-                withMidLock("mid0", "test2", new Runnable() {
-                    @Override
-                    @SneakyThrows
-                    public void run() {
-                        for (int i = 0; i < 10; i++) {
-                            logger.info("2:"+i);
-                            Thread.sleep(100);;
-                        }
-
-                    }
-                });
-            }
-        });
+        Thread thread2 = new Thread(new Thread(new Job(2, sb, () -> sleep(100), () -> "mid0")));
         log.info("now starting");
         thread2.start();
         Thread.sleep(500);
@@ -109,6 +67,112 @@ public class MediaObjectLockerTest {
         lock.lock();
         lock.lock();
         log.info("{}", lock.getHoldCount());
+    }
+
+    @Test
+    public void wildTesting() throws InterruptedException {
+        List<Thread> threads = new ArrayList<>();
+        for (int i = 0 ; i < 100; i++) {
+            Thread t = new Thread(new Job2("" + i, Slf4jSimpleLogger.of(log), 0));
+            t.start();
+            threads.add(t);
+        }
+        for (Thread t : threads) {
+            t.join();
+        }
+
+    }
+
+    @SneakyThrows
+    private static void sleep(long duration) {
+        Thread.sleep(duration);
+    }
+
+    static final Random random = new Random();
+
+    @SneakyThrows
+    private static void randomSleep() {
+        sleep(random.nextInt(500));
+    }
+
+    private static class Job implements Runnable {
+        final int number;
+        final SimpleLogger logger;
+        final Runnable sleep;
+        final Supplier<String> mid;
+
+        private Job(int number, SimpleLogger logger, Runnable sleep, Supplier<String> mid) {
+            this.number = number;
+            this.logger = logger;
+            this.sleep = MediaObjectLockerTest::randomSleep;
+            this.mid = mid;
+        }
+
+        @Override
+        public void run() {
+            log.info("start test" + number);
+
+            withMidLock(mid.get(), "test" + number, new Runnable() {
+                @Override
+                @SneakyThrows
+                public void run() {
+                    for (int i = 0; i < 100; i++) {
+
+                        logger.info(number + ":"+i);
+                        sleep.run();
+                    }
+
+                }
+            });
+        }
+    }
+
+    private static final String[] mids = {"mid1", "mid2", "mid3", "mid4"};
+
+    private static class Job2 implements Runnable {
+        final String number;
+        final SimpleLogger logger;
+        final Runnable sleep;
+        final Supplier<String> mid;
+        final int depth;
+
+        private Job2(
+            String number,
+            SimpleLogger logger,
+            int depth) {
+            this.number = number;
+            this.logger = logger;
+            this.sleep = MediaObjectLockerTest::randomSleep;;
+            this.mid =  () -> mids[random.nextInt(mids.length)];
+            this.depth = depth;
+        }
+
+        @Override
+        public void run() {
+            log.info("start test" + number);
+            for (int i = 0; i < 100; i++) {
+                final int j = i;
+                final String m = mid.get();
+                final String m2 = mid.get();
+                withMidLock(m, "test" + number, new Runnable() {
+                    @Override
+                    @SneakyThrows
+                    public void run() {
+                        if (random.nextInt(10) == 0) {
+                            logger.info(number + ":ex");
+
+                            throw new RuntimeException();
+                        }
+                        logger.info(m + ":" + number + ":" + j);
+                        sleep.run();
+                        if (depth < 3) {
+                            withMidLock(m2, "test.sub+" + number, new Job2("sub." + number, logger, depth + 1));
+                        }
+                    }
+
+                });
+            };
+        }
     }
 
 }

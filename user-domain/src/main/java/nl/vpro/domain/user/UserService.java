@@ -34,6 +34,7 @@ public interface UserService<T extends User> {
     <S> S systemDoAs(String principalId, Callable<S> handler) throws Exception;
 
 
+    @Nullable
     T get(String id);
 
     List<? extends T> findUsers(String name, int limit);
@@ -48,15 +49,15 @@ public interface UserService<T extends User> {
         return currentUser().map(User::getPrincipalId);
     }
 
-    T  authenticate(String principalId, String password);
+    T authenticate(String principalId, String password);
+
+    T authenticate(String principalId);
 
     default boolean currentUserHasRole(String... roles) {
         return currentUserHasRole(Arrays.asList(roles));
     }
 
     boolean currentUserHasRole(Collection<String> roles);
-
-    T authenticate(String principalId);
 
     Object getAuthentication();
 
