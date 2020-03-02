@@ -5,6 +5,7 @@
 package nl.vpro.domain.user;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository<T extends User> {
 
@@ -12,7 +13,7 @@ public interface UserRepository<T extends User> {
 
     Long count();
 
-    T get(String id);
+    Optional<T> get(String id);
 
     T save(T user);
 

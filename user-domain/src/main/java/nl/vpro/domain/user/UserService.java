@@ -50,7 +50,7 @@ public interface UserService<T extends User> {
     }
 
     @Nullable
-    T get(String id);
+    Optional<T> get(String id);
 
     List<? extends T> findUsers(String name, int limit);
 
