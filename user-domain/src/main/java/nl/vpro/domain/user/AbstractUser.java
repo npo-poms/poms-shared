@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -55,15 +56,22 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
     @Setter
     protected String email;
 
+    /**
+     * The number of times this user was reported as 'logged in' since the 5.12 release.
+     */
     @Column
     @Getter
-    @Setter
     protected Instant lastLogin;
 
     @Column(name = "creationDate")
     @Getter
     @Setter
     protected Instant creationInstant;
+
+    @Column
+    @Getter
+    @Min(value = 0)
+    protected Integer loginCount = 0;
 
     protected AbstractUser() {
     }
@@ -76,6 +84,8 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         this.displayName = user.displayName;
         this.email = user.email;
         this.lastLogin = user.lastLogin;
+        this.loginCount = user.loginCount;
+        this.creationInstant = user.creationInstant;
     }
 
     public AbstractUser(String principalId, String displayName, String email) {
@@ -90,12 +100,6 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         this.email = email;
     }
 
-    public AbstractUser(String principalId, String displayName, String email, String givenName, String familyName, Instant lastLogin) {
-        this(principalId, displayName, email);
-        this.givenName = givenName;
-        this.familyName = familyName;
-        this.lastLogin = lastLogin;
-    }
 
     @Override
     @XmlAttribute
@@ -105,6 +109,13 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
 
     public void setPrincipalId(String principalId) {
         this.principalId = principalId.toLowerCase();
+    }
+
+
+    @Override
+    public void setLastLogin(Instant lastLogin) {
+        this.lastLogin = lastLogin;
+        this.loginCount++;
     }
 
     public boolean isNew() {
