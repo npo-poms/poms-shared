@@ -23,6 +23,9 @@ import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 public interface UserService<T extends User> {
 
 
+    /**
+     * Given an existing user, and a user obtained from sso or so, determins whether callign {@link #update(User)} is important now.
+     */
     boolean needsUpdate(T oldUser, T newUser);
 
 
@@ -233,7 +236,6 @@ public interface UserService<T extends User> {
 
     @Getter
     abstract class  Logout<S extends User> implements AutoCloseable {
-
         /**
          * The user currently logged in and that will be logout by this.
          */
