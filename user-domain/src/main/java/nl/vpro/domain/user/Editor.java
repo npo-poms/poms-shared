@@ -59,6 +59,7 @@ public class Editor extends AbstractUser {
     private SortedSet<ThirdParty> activeThirdPartyCache;
 
     @Transient
+    @XmlTransient
     private Supplier<Set<String>> rolesProvider = null;
 
     @Transient
