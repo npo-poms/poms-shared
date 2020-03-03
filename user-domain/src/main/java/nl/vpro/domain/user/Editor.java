@@ -72,6 +72,8 @@ public class Editor extends AbstractUser {
         this.thirdParties.addAll(editor.thirdParties);
         this.rolesProvider = editor.rolesProvider;
         this.roles = editor.roles;
+        this.lastLogin = editor.lastLogin;
+        this.loginCount = editor.loginCount;
     }
 
     protected Editor() {
@@ -107,6 +109,10 @@ public class Editor extends AbstractUser {
         this.givenName = givenName;
         this.familyName = familiyName;
         this.lastLogin = lastLogin;
+    }
+
+    public Editor copy() {
+        return new Editor(this);
     }
 
     public boolean hasEqualRights(Editor editor) {
