@@ -51,6 +51,7 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean guessEpisodePosition = false;
 
+    @lombok.Builder.Default
     BiPredicate<MemberRef, AssemblageConfig> memberOfUpdate = null;
 
     @lombok.Builder.Default
@@ -191,6 +192,26 @@ public class AssemblageConfig {
         setCopyTwitterrefs(version == null || version.isNotBefore(5, 10));
     }
 
+    public void setMemberOfUpdateBoolean(boolean bool) {
+        setMemberOfUpdate(new Always(bool));
+    }
+
+    @EqualsAndHashCode
+    public static class Always implements   BiPredicate<MemberRef, AssemblageConfig> {
+
+        private final boolean always;
+
+        public Always(boolean always) {
+            this.always = always;
+        }
+
+        @Override
+        public boolean test(MemberRef memberRef, AssemblageConfig assemblageConfig) {
+            return always;
+
+        }
+    }
+
     public static class Builder {
         /**
          * Since POMS 5.9 a segment can have an owner.
@@ -200,7 +221,7 @@ public class AssemblageConfig {
             return segmentsForDeletion((s, a) -> s.getOwner() != null && s.getOwner() == a.getOwner());
         }
         public Builder memberOfUpdateBoolean(boolean b) {
-            return memberOfUpdate((mr, c) -> b);
+            return memberOfUpdate((new Always(b)));
         }
         public Builder memberRefMatchOwner() {
             return memberOfUpdate((mr, c) -> mr.getOwner() == c.getOwner());
