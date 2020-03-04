@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -161,14 +162,12 @@ public class OpenskosTests {
         return getRealInstance(Env.DEV);
     }
 
-    OpenskosRepository getRealInstance(final Env env) {
-        final OpenskosRepository impl = ConfigUtils.configuredInHome(
-            env,
-            OpenskosRepository.class,
-            CONFIG_FILE
-        );
+    static OpenskosRepository getRealInstance(final Env env) {
+        Map<String, String> gtaa = ConfigUtils.filtered(env, "gtaa", ConfigUtils.getPropertiesInHome(CONFIG_FILE));
+        final OpenskosRepository impl = ConfigUtils.configured(env, OpenskosRepository.class, gtaa);
         impl.init();
         return impl;
     }
+
 
 }

@@ -13,7 +13,6 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -32,6 +31,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +50,7 @@ import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.w3.rdf.RDF;
 
+import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 import static org.springframework.http.HttpStatus.CREATED;
 
 /**
@@ -65,7 +66,6 @@ public class OpenskosRepository implements GTAARepository {
 
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
-    private final DateTimeFormatter isoInstant = DateTimeFormatter.ISO_INSTANT;
 
     private final RestTemplate template;
 
@@ -75,11 +75,13 @@ public class OpenskosRepository implements GTAARepository {
     @Value("${gtaa.personsSpec}")
     @Getter
     @Setter
+    @Nullable
     private String personsSpec;
 
     @Value("${gtaa.geolocationsSpec}")
     @Getter
     @Setter
+    @Nullable
     private String geoLocationsSpec;
 
     @Value("${gtaa.useXLLabels}")
@@ -90,6 +92,7 @@ public class OpenskosRepository implements GTAARepository {
     @Value("${gtaa.tenant}")
     @Getter
     @Setter
+    @Nullable
     private String tenant;
 
     @Value("${gtaa.retries}")
@@ -109,11 +112,15 @@ public class OpenskosRepository implements GTAARepository {
     private OpenskosRepository(
         @NonNull String baseUrl,
         @NonNull String key,
-        RestTemplate template,
-        String personsSpec,
-        String geoLocationsSpec,
+        @Nullable RestTemplate template,
+        @Nullable String personsSpec,
+        @Nullable String geoLocationsSpec,
         boolean useXLLabels,
+<<<<<<< HEAD
         @NonNull String tenant,
+=======
+        @Nullable String tenant,
+>>>>>>> 79a3a017d... Prefixed for easier reusage.
         int retries
         ) {
         this.gtaaUrl = baseUrl;
@@ -127,7 +134,7 @@ public class OpenskosRepository implements GTAARepository {
 
     }
 
-    private static RestTemplate createTemplateIfNull(RestTemplate template) {
+    private static RestTemplate createTemplateIfNull(@Nullable RestTemplate template) {
         if (template == null) {
 
             Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
@@ -140,6 +147,7 @@ public class OpenskosRepository implements GTAARepository {
             try {
                 jaxb2Marshaller.afterPropertiesSet();
             } catch (Exception ex) {
+                log.warn(ex.getMessage());
 
             }
             DOMSourceUnmarshaller domSourceUnmarshaller = new DOMSourceUnmarshaller();
@@ -271,10 +279,11 @@ public class OpenskosRepository implements GTAARepository {
         return getUpdates(from, until, null);
     }
 
-    private CountedIterator<Record> getUpdates(Instant from, Instant until, String spec) {
+    private CountedIterator<Record> getUpdates(Instant from, Instant until, @Nullable String spec) {
 
         final AtomicLong totalSize = new AtomicLong(-1L);
         Supplier<Iterator<Record>> getter = new Supplier<Iterator<Record>>() {
+            @Nullable
             ListRecord listRecord = null;
 
             @Override
@@ -321,27 +330,33 @@ public class OpenskosRepository implements GTAARepository {
         return CountedIterator.of(totalSize, iterator);
     }
 
-    ListRecord getListRecord(Instant from, Instant until, String type) {
+    @Nullable
+    ListRecord getListRecord(Instant from, Instant until, @Nullable String type) {
         String set = "";
         if(type != null) {
             set = "&set=" + type;
         }
         String path = String.format("oai-pmh?verb=ListRecords&metadataPrefix=oai_rdf%s", set) + "&from="
-                + isoInstant.format(from.truncatedTo(ChronoUnit.SECONDS)) + "&until="
-                + isoInstant.format(until.truncatedTo(ChronoUnit.SECONDS));
+                + ISO_INSTANT.format(from.truncatedTo(ChronoUnit.SECONDS)) + "&until="
+                + ISO_INSTANT.format(until.truncatedTo(ChronoUnit.SECONDS));
 
         final OAI_PMH oai_pmh = getForPath(path, OAI_PMH.class);
-        if (oai_pmh.getError() != null) {
-            String code = oai_pmh.getError().getCode();
-            if ("noRecordsMatch".equals(code)) {
-                // Not really an error, is it.
-                log.info("For {}{}: {}", gtaaUrl, path, oai_pmh.getError().getMessage());
-            } else {
-                throw new RuntimeException(
+        if (oai_pmh != null) {
+            if (oai_pmh.getError() != null) {
+                String code = oai_pmh.getError().getCode();
+                if ("noRecordsMatch".equals(code)) {
+                    // Not really an error, is it.
+                    log.info("For {}{}: {}", gtaaUrl, path, oai_pmh.getError().getMessage());
+                } else {
+                    throw new RuntimeException(
                         "For " + gtaaUrl + path + " " + code + ":" + oai_pmh.getError().getMessage());
+                }
             }
+
+            return oai_pmh.getListRecord();
+        } else {
+            return null;
         }
-        return oai_pmh.getListRecord();
 
     }
 
@@ -434,6 +449,7 @@ public class OpenskosRepository implements GTAARepository {
         return descriptions(getForPath(path, RDF.class));
     }
 
+    @Nullable
     protected <T> T getForPath(final String path, final Class<T> tClass) {
         String url = gtaaUrl + path;
         log.info("Calling gtaa {}", url);
@@ -546,7 +562,7 @@ public class OpenskosRepository implements GTAARepository {
     }
 
 
-    private List<Description> descriptions(RDF rdf) {
+    private List<Description> descriptions(@Nullable RDF rdf) {
         if (rdf == null || rdf.getDescriptions() == null) {
             return Collections.emptyList();
         }
@@ -561,12 +577,13 @@ public class OpenskosRepository implements GTAARepository {
 
     private static class DOMSourceUnmarshaller implements Unmarshaller {
         @Override
-        public boolean supports(Class<?> aClass) {
+        public boolean supports(@NonNull Class<?> aClass) {
             return Source.class.isAssignableFrom(aClass);
         }
 
+        @NonNull
         @Override
-        public Object unmarshal(Source source) throws XmlMappingException {
+        public Object unmarshal(@NonNull Source source) throws XmlMappingException {
             try {
                 TransformerFactory factory = TransformerFactory.newInstance();
                 Transformer transformer = factory.newTransformer();
