@@ -43,6 +43,8 @@ public interface UserService<T extends User> {
      */
     T get(java.security.Principal authentication);
 
+    Optional<T> get(String id);
+
     default T login(java.security.Principal authentication) {
         T editor =  get(authentication);
         editor.setLastLogin(Instant.now());
@@ -50,7 +52,6 @@ public interface UserService<T extends User> {
         return editor;
     }
 
-    Optional<T> get(String id);
 
     List<? extends T> findUsers(String name, int limit);
 
