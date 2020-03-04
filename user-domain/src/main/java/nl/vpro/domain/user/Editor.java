@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.user;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -64,6 +65,11 @@ public class Editor extends AbstractUser {
 
     @Transient
     private Set<String> roles = null;
+
+    @Version
+    @Getter
+    @XmlTransient
+    protected Integer version;
 
     public Editor(Editor editor) {
         super(editor);
