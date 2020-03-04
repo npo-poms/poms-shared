@@ -6,8 +6,8 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.nep.domain.workflow.*;
 
@@ -18,24 +18,22 @@ import nl.vpro.nep.domain.workflow.*;
 @Slf4j
 public class NEPTranscodeServiceImplITest {
 
-    NEPGatekeeperServiceImpl nepService;
-
+    static NEPGatekeeperServiceImpl nepService;
 
     String mid = "WO_VPRO_783763";
 
-    @Before
-    public void setup() throws IOException {
+    @BeforeAll
+    public static void init() throws IOException {
         Properties properties = new Properties();
         properties.load(new FileInputStream(new File(System.getProperty("user.home") + "/conf/nep.properties")));
         nepService = new NEPGatekeeperServiceImpl(properties);
         nepService.init();
-
     }
 
     @Test
     public void transcode() {
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
-            .mid("WO_VPRO_783763")
+            .mid(mid)
             .encryption(EncryptionType.NONE)
             .priority(PriorityType.LOW)
             .platforms(Arrays.asList("internetvod"))
