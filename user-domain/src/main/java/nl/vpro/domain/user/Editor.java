@@ -25,17 +25,17 @@ import javax.xml.bind.annotation.*;
 @Slf4j
 public class Editor extends AbstractUser {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
     Set<BroadcasterEditor> broadcasters = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
     protected Set<PortalEditor> portals = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")
@@ -69,7 +69,7 @@ public class Editor extends AbstractUser {
     @Version
     @Getter
     @XmlTransient
-    protected Integer version;
+    protected int version = 0;
 
     public Editor(Editor editor) {
         super(editor);
@@ -80,6 +80,7 @@ public class Editor extends AbstractUser {
         this.roles = editor.roles;
         this.lastLogin = editor.lastLogin;
         this.loginCount = editor.loginCount;
+        this.version = editor.version;
     }
 
     protected Editor() {
