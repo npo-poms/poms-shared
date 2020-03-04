@@ -50,7 +50,6 @@ public interface UserService<T extends User> {
         return editor;
     }
 
-    @Nullable
     Optional<T> get(String id);
 
     List<? extends T> findUsers(String name, int limit);
