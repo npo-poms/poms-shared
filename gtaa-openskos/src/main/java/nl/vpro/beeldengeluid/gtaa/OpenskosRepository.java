@@ -116,11 +116,7 @@ public class OpenskosRepository implements GTAARepository {
         @Nullable String personsSpec,
         @Nullable String geoLocationsSpec,
         boolean useXLLabels,
-<<<<<<< HEAD
         @NonNull String tenant,
-=======
-        @Nullable String tenant,
->>>>>>> 79a3a017d... Prefixed for easier reusage.
         int retries
         ) {
         this.gtaaUrl = baseUrl;
