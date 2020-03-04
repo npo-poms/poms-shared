@@ -48,8 +48,6 @@ public interface UserService<T extends User> {
         editor.setLastLogin(Instant.now());
         update(editor);
         return editor;
-
-
     }
 
     Optional<T> get(String id);
