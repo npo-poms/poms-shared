@@ -66,7 +66,7 @@ public interface UserService<T extends User> {
 
     T authenticate(String principalId, String password);
 
-    T authenticate(String principalId);
+    Optional<T> authenticate(String principalId);
 
     default boolean currentUserHasRole(String... roles) {
         return currentUserHasRole(Arrays.asList(roles));
@@ -87,7 +87,6 @@ public interface UserService<T extends User> {
             @Override
             public void close() {
                 dropAuthentication();
-
             }
         };
         logout.setUser(currentUser().orElseThrow(IllegalStateException::new));
