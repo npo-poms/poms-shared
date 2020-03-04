@@ -17,8 +17,16 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 @ToString
 public class WorkflowExecutionRequest implements Serializable {
 
+    /**
+     * the MID for which this request is a transcoding
+     */
     private String mid;
+
+    /**
+     * The filename on the ftp server. We have no idea relative to what. Just guess something until it works.
+     */
     private String filename;
+
     private EncryptionType encryption;
     private PriorityType priority;
     @lombok.Builder.Default

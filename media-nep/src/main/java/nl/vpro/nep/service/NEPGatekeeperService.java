@@ -13,6 +13,8 @@ import nl.vpro.nep.domain.workflow.*;
 /**
  * This is an interface for the NEP 'transcode' API. This used to be WorkflowExecutionService.
  *
+ * http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/v2/api-docs
+ *
  * @author Michiel Meeuwissen
  * @since 5.6
  */
