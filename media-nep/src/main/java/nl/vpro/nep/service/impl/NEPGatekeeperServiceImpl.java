@@ -2,6 +2,7 @@ package nl.vpro.nep.service.impl;
 
 
 import io.openapitools.jackson.dataformat.hal.HALMapper;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -67,20 +68,26 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         MAPPER.registerModule(new JavaTimeModule());
     }
+    @Getter
     private final String url;
 
+    @Getter
     private final String userName;
 
     private final String password;
 
+    @Getter
     private final String ftpUserName;
 
     private HttpClientContext clientContext;
 
+    @Getter
     private Duration connectTimeout;
+    @Getter
     private Duration connectionRequestTimeout;
+    @Getter
     private Duration socketTimeout;
-
+    @Getter
     private int pageSize = 200;
 
     CloseableHttpClient httpClient = null;

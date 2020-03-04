@@ -2,23 +2,14 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.vpro.nep.domain.workflow.EncryptionType;
-import nl.vpro.nep.domain.workflow.PriorityType;
-import nl.vpro.nep.domain.workflow.WorkflowExecution;
-import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
+import nl.vpro.nep.domain.workflow.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -27,18 +18,18 @@ import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 @Slf4j
 public class NEPTranscodeServiceImplITest {
 
-    private String apiUser = "webonly-user";
-    private String ftpUser = "npoweb-vpro";
-    NEPGatekeeperServiceImpl nepService =
-        new NEPGatekeeperServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl", apiUser,
-            System.getProperty("password"),
-            Duration.ofMillis(100).toString(), "", "", 200,  ftpUser);
+    NEPGatekeeperServiceImpl nepService;
+
 
     String mid = "WO_VPRO_783763";
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(new File(System.getProperty("user.home") + "/conf/nep.properties")));
+        nepService = new NEPGatekeeperServiceImpl(properties);
         nepService.init();
+
     }
 
     @Test
@@ -48,7 +39,7 @@ public class NEPTranscodeServiceImplITest {
             .encryption(EncryptionType.NONE)
             .priority(PriorityType.LOW)
             .platforms(Arrays.asList("internetvod"))
-            .file(ftpUser, "WO_VPRO_783763_2018-11-12T133004122_geldig.mp4")
+            .file(nepService.getFtpUserName(), "WO_VPRO_783763_2018-11-12T133004122_geldig.mp4")
             .build()
             ;
         try {
