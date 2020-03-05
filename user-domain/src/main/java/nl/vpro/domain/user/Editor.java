@@ -17,7 +17,24 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
+import nl.vpro.domain.Accountable;
+
+
+/**
+ * <p>
+ * An {@link Editor} is the entity that is used in POMS (and related system) to contain information about the user or
+ * 'process' that is performing the actions (e.g. the person who is logged in in the GUI) . It contains authentication and authorization information (like {@link #getRoles()} , {@link #getEmployer()} and {@link #getAllowedBroadcasters()}) about this person or user.
+ *</p>
+ * <p>
+ * In the poms database it is the database entity that is linked to objects to indicate meta data like {@link Accountable#getCreatedBy()} and {@link Accountable#getLastModifiedBy()}
+ * </p>
+ * <p>
+ * It serves as the main information source to determin whether certain actions are permitted or not (e.g. implemented in a  <code>nl.vpro.spring.security.acl.MediaPermissionEvaluator</code>
+ *</p>
+ */
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable(true)
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -42,28 +59,36 @@ public class Editor extends AbstractUser {
     protected Set<ThirdPartyEditor> thirdParties = new TreeSet<>();
 
     @Transient
+    @Nullable
     private SortedSet<Broadcaster> allowedBroadcasterCache;
 
     @Transient
+    @Nullable
     private SortedSet<Broadcaster> activeBroadcasterCache;
 
     @Transient
+    @Nullable
     private SortedSet<Portal> allowedPortalCache;
 
     @Transient
+    @Nullable
     private SortedSet<Portal> activePortalCache;
 
     @Transient
+    @Nullable
     private SortedSet<ThirdParty> allowedThirdPartyCache;
 
     @Transient
+    @Nullable
     private SortedSet<ThirdParty> activeThirdPartyCache;
 
     @Transient
     @XmlTransient
+    @Nullable
     private Supplier<Set<String>> rolesProvider = null;
 
     @Transient
+    @MonotonicNonNull
     private Set<String> roles = null;
 
     @Version
@@ -141,6 +166,9 @@ public class Editor extends AbstractUser {
         this.rolesProvider = null;
     }
 
+    /**
+     * @see nl.vpro.domain.Roles
+     */
     public Set<String> getRoles() {
         if (roles == null && rolesProvider != null) {
             roles = rolesProvider.get();
@@ -158,6 +186,7 @@ public class Editor extends AbstractUser {
         return roles != null;
     }
 
+    @Nullable
     public Broadcaster getEmployer() {
         for(BroadcasterEditor rel : broadcasters) {
             if(rel.isEmployee()) {
@@ -172,10 +201,8 @@ public class Editor extends AbstractUser {
         BroadcasterEditor toAdd = broadcaster == null ? null : new BroadcasterEditor(this, broadcaster, true);
 
         boolean found = false;
-        for(Iterator<BroadcasterEditor> iterator = broadcasters.iterator(); iterator.hasNext(); ) {
-            BroadcasterEditor existing = iterator.next();
-
-            if(toAdd != null && toAdd.equals(existing)) {
+        for (BroadcasterEditor existing : broadcasters) {
+            if (toAdd != null && toAdd.equals(existing)) {
                 found = true;
                 existing.setEmployee(true);
             } else {
@@ -271,7 +298,7 @@ public class Editor extends AbstractUser {
         }
     }
 
-
+    @Nullable
     BroadcasterEditor removeBroadcaster(Broadcaster broadcaster) {
         BroadcasterEditor toRemove = remove(broadcasters, broadcaster);
         if (toRemove != null) {
@@ -281,6 +308,7 @@ public class Editor extends AbstractUser {
         return toRemove;
     }
 
+    @Nullable
     private static <S extends Organization, T extends OrganizationEditor<S>> T remove(Collection<T> collection, S organization) {
         T toRemove = null;
         for (T e : collection) {
@@ -370,6 +398,7 @@ public class Editor extends AbstractUser {
         return false;
     }
 
+    @Nullable
     PortalEditor removePortal(Portal portal) {
         PortalEditor toRemove = remove(portals, portal);
         if (toRemove != null) {
@@ -407,6 +436,7 @@ public class Editor extends AbstractUser {
         }
     }
 
+    @Nullable
     ThirdPartyEditor removeThirdParty(ThirdParty thirdParty) {
         ThirdPartyEditor toRemove = remove(thirdParties, thirdParty);
         if (toRemove != null) {
@@ -420,8 +450,10 @@ public class Editor extends AbstractUser {
         return Stream.concat(Stream.concat(getAllowedBroadcasters().stream(), getAllowedPortals().stream()), getAllowedThirdParties().stream()).collect(Collectors.toSet());
     }
 
+    @Nullable
     String getOrganization() {
-        return getEmployer().getId();
+        Broadcaster b = getEmployer();
+        return b == null ? null : b.getId();
     }
 
 

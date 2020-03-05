@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * See http://wiki.publiekeomroep.nl/display/poms/Gebruikersbeheer#Gebruikersbeheer-Rollen
+ *
  * @author Michiel Meeuwissen
  * @since 5.4
  */
