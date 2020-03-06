@@ -11,10 +11,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
-import nl.vpro.util.*;
+import nl.vpro.util.CountedIterator;
+import nl.vpro.util.Env;
 import nl.vpro.w3.rdf.Description;
 
-import static nl.vpro.beeldengeluid.gtaa.OpenskosRepository.CONFIG_FILE;
+import static nl.vpro.beeldengeluid.gtaa.OpenskosTests.getRealInstance;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -24,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * @since 5.5 (copied from dropped GTAARepositoryImplTest)
  * @author Michiel Meeuwissen
  */
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 @Slf4j
 public class OpenskosRepositoryITest {
 
@@ -60,7 +62,6 @@ public class OpenskosRepositoryITest {
                 .scheme(Scheme.geographicname)
                 .build();
 
-        ;
         GTAAConcept concept = impl.submit(geographicName, "poms_test");
         assertThat(concept.getScopeNotes()).isNotEmpty();
         assertThat(concept.getName()).isEqualTo(name);
@@ -319,9 +320,4 @@ public class OpenskosRepositoryITest {
         log.info("{} ", description.get());
     }
 
-    OpenskosRepository getRealInstance(final Env env) {
-        final OpenskosRepository impl = ConfigUtils.configuredInHome(env, OpenskosRepository.class, CONFIG_FILE);
-        impl.init();
-        return impl;
-    }
 }
