@@ -1,0 +1,37 @@
+= GTAA Openskos
+:toc:
+
+This contains the 'openskos' implementation of the GTAA repository.
+
+
+== About OpenSKOS
+
+See http://openskos.org/
+
+(follows text as recently received from B&G)
+
+Voor de volledigheid hieronder het overzicht van huidige omgevingen. Omdat we momenteel niet aan het doorontwikkelen zijn op OpenSKOS is de er één omgeving komen te vervallen. Voor jullie informatie: de editor van OpenSKOS is per eind 2020 end of life. Een complete rewrite is noodzakelijk. We nemen van die gelegenheid gebruik om OpenSKOS te vergelijken met andere oplossingen (waaronder Poolparty). We prioriteren bij die zoektocht de robuustheid van de oplossing voor uitwisseling van data met jullie als omroepen. OpenSKOS is ontstaan uit een onderzoeksproject en heeft altijd een beetje die dynamiek gehouden. We hopen dus eea te kunnen verbeteren, bijvoorbeeld minder nieuwe releases e.d. We houden jullie op de hoogte.
+
+=== Test
+
+http://beg-openskos.test7.picturae.pro/
+
+=== Acceptatie
+
+http://beg-openskos.accept.test7.picturae.pro
+Deze is nieuw aangemaakt.
+Hierop staat een actuele kopie van de data op productie
+Deze heeft de bestaande acceptatie omgeving (http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/ ) vervangen
+
+
+=== Productie
+
+http://openskos.beeldengeluid.nl/
+http://data.beeldengeluid.nl/
+Dit is een alias, die verwijst naar http://openskos.beeldengeluid.nl/ .
+Het is dus geen aparte omgeving.
+Hij is nodig voor bestaande links (de uri van een concept verwijst hier naar, bijvoorbeeld: http://data.beeldengeluid.nl/gtaa/1382356).
+
+
+
+`
