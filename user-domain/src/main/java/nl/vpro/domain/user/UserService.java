@@ -23,7 +23,6 @@ import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 
 public interface UserService<T extends User> {
 
-
     /**
      * Given an existing user, and a user obtained from sso or so, determins whether callign {@link #update(User)} is important now.
      */
@@ -67,7 +66,7 @@ public interface UserService<T extends User> {
     Optional<T> currentUser();
 
     default Optional<String> currentPrincipalId() {
-        return currentUser().map(User::getPrincipalId);
+        return Optional.ofNullable(getAuthentication()).map(Principal::getName);
     }
 
     T authenticate(String principalId, String password);
@@ -83,6 +82,10 @@ public interface UserService<T extends User> {
     Principal getAuthentication();
 
     void restoreAuthentication(Principal authentication);
+
+    default boolean isAuthenticated() {
+        return getAuthentication() != null;
+    }
 
     /**
      * Default implemention without consideration of the roles. This can be overridden.

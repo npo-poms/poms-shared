@@ -87,6 +87,7 @@ public class Editor extends AbstractUser {
     @Nullable
     private Supplier<Set<String>> rolesProvider = null;
 
+
     @Transient
     @MonotonicNonNull
     private Set<String> roles = null;
