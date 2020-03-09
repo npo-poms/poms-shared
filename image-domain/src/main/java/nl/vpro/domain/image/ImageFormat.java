@@ -50,7 +50,7 @@ public enum ImageFormat {
         for(ImageFormat type : ImageFormat.values()) {
             for(String match : type.extensions) {
                 if(match.equals(extension.toLowerCase().trim())) {
-                    return Optional.empty();
+                    return Optional.of(type);
                 }
             }
         }
