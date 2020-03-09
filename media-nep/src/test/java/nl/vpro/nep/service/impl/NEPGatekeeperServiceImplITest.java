@@ -37,7 +37,9 @@ public class NEPGatekeeperServiceImplITest {
             log.info("{}", i.next());
         }
 
-    }String mid = "WO_VPRO_783763";
+    }
+
+    String mid = "WO_VPRO_783763";
 
 
 
