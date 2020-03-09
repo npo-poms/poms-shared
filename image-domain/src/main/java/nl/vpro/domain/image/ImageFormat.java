@@ -38,7 +38,7 @@ public enum ImageFormat {
 
     private final String[] extensions;
 
-    private final boolean supportsAnimation = false;
+    private final boolean supportsAnimation;
 
     ImageFormat(String mimeType, String... extensions) {
         this(mimeType, false, extensions);
@@ -47,6 +47,7 @@ public enum ImageFormat {
     ImageFormat(String mimeType, boolean supportsAnimation, String... extensions) {
         this.mimeType = mimeType;
         this.extensions = extensions;
+        this.supportsAnimation = supportsAnimation;
     }
 
     public static Optional<ImageFormat> forFileExtension(String extension) throws UnsupportedImageFormatException {
