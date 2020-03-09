@@ -1,5 +1,6 @@
 package nl.vpro.domain.image;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -9,10 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public enum ImageFormat {
 
-
-
     BMP("image/bmp", "bmp"),
-    GIF("image/gif", "gif"),
+    GIF("image/gif", true, "gif"),
     IEF("image/ief", "ief"),
     IFF("image/iff", "iff"),
     JPG("image/jpeg", "jpe", "jpeg", "jpg"),
@@ -34,11 +33,18 @@ public enum ImageFormat {
         MAPPING.put("image/pjpeg", "image/jpeg");
     }
 
-    private String mimeType;
+    @Getter
+    private final String mimeType;
 
-    private String[] extensions;
+    private final String[] extensions;
+
+    private final boolean supportsAnimation = false;
 
     ImageFormat(String mimeType, String... extensions) {
+        this(mimeType, false, extensions);
+    }
+
+    ImageFormat(String mimeType, boolean supportsAnimation, String... extensions) {
         this.mimeType = mimeType;
         this.extensions = extensions;
     }
@@ -77,7 +83,7 @@ public enum ImageFormat {
         return name().toLowerCase();
     }
 
-    public String getMimeType() {
-        return mimeType;
+    public boolean supportsAnimation() {
+        return supportsAnimation;
     }
 }
