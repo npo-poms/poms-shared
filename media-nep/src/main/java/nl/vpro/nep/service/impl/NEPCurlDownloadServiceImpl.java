@@ -77,7 +77,10 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
                     exitCode = curl.execute(out, getUrl(nepFile));
                 }
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+            Thread.currentThread().interrupt();
+        } catch (IOException e) {
             log.error(e.getMessage(), e);
         } catch (CommandExecutor.BrokenPipe bp) {
             log.debug(bp.getMessage());
