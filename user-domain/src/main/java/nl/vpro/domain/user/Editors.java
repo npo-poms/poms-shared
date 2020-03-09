@@ -28,7 +28,7 @@ public class Editors {
     }
 
 
-    public static Editor mapWorksFor( List<Organization> organizations, Editor user) {
+    public static Editor mapWorksFor(List<Organization> organizations, Editor user) {
         if (organizations != null) {
             for (Organization organization : organizations) {
                 if (VALIDATOR != null && !VALIDATOR.validate(organization).isEmpty()) {
