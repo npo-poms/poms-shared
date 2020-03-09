@@ -1,10 +1,12 @@
 package nl.vpro.domain.image;
 
-import java.util.HashMap;
-import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
+@Slf4j
 public enum ImageFormat {
 
 
@@ -41,19 +43,19 @@ public enum ImageFormat {
         this.extensions = extensions;
     }
 
-    public static ImageFormat forFileExtension(String extension) throws UnsupportedImageFormatException {
+    public static Optional<ImageFormat> forFileExtension(String extension) throws UnsupportedImageFormatException {
         if (StringUtils.isEmpty(extension)) {
-            return null;
+            return Optional.empty();
         }
         for(ImageFormat type : ImageFormat.values()) {
             for(String match : type.extensions) {
                 if(match.equals(extension.toLowerCase().trim())) {
-                    return type;
+                    return Optional.empty();
                 }
             }
         }
 
-        throw new UnsupportedImageFormatException("No matching type for file extension: " + extension);
+        throw new UnsupportedImageFormatException ("No matching type for file extension: " + extension);
     }
 
     public static ImageFormat forMimeType(final String mimeType) throws UnsupportedImageFormatException {

@@ -42,17 +42,17 @@ import nl.vpro.domain.Accountable;
 @Slf4j
 public class Editor extends AbstractUser {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
     @Valid
     @XmlTransient
     Set<BroadcasterEditor> broadcasters = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
     @Valid
     @XmlTransient
     protected Set<PortalEditor> portals = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")
@@ -197,7 +197,7 @@ public class Editor extends AbstractUser {
     }
 
 
-    void setEmployer(final Broadcaster broadcaster) {
+    public void setEmployer(final Broadcaster broadcaster) {
         BroadcasterEditor toAdd = broadcaster == null ? null : new BroadcasterEditor(this, broadcaster, true);
 
         boolean found = false;
@@ -214,6 +214,8 @@ public class Editor extends AbstractUser {
         }
         allowedBroadcasterCache = null;
     }
+
+
 
     public SortedSet<Broadcaster> getAllowedBroadcasters() {
         if(allowedBroadcasterCache == null) {
@@ -235,7 +237,7 @@ public class Editor extends AbstractUser {
         return allowedBroadcasterCache;
     }
 
-    SortedSet<Broadcaster> getActiveBroadcasters() {
+    public SortedSet<Broadcaster> getActiveBroadcasters() {
         if(activeBroadcasterCache == null) {
             activeBroadcasterCache = new TreeSet<>();
 
@@ -252,7 +254,7 @@ public class Editor extends AbstractUser {
         return activeBroadcasterCache;
     }
 
-    boolean isActive(Broadcaster broadcaster) {
+    public boolean isActive(Broadcaster broadcaster) {
         for (BroadcasterEditor be : broadcasters) {
             if (broadcaster.equals(be.getOrganization())) {
                 return be.isActive();
@@ -265,7 +267,7 @@ public class Editor extends AbstractUser {
         return setActive(new Broadcaster(broadcasterId, broadcasterId), value);
     }
 
-    boolean setActive(Broadcaster broadcaster, boolean value) {
+    public boolean setActive(Broadcaster broadcaster, boolean value) {
         for (BroadcasterEditor be : broadcasters) {
             if (broadcaster.equals(be.getOrganization())) {
                 if (be.active != value) {
@@ -287,7 +289,7 @@ public class Editor extends AbstractUser {
     }
 
 
-    boolean addBroadcaster(Broadcaster broadcaster) {
+    public boolean addBroadcaster(Broadcaster broadcaster) {
         BroadcasterEditor toAdd = new BroadcasterEditor(this, broadcaster);
         if (broadcasters.add(toAdd)) {
             allowedBroadcasterCache = null;
@@ -299,7 +301,7 @@ public class Editor extends AbstractUser {
     }
 
     @Nullable
-    BroadcasterEditor removeBroadcaster(Broadcaster broadcaster) {
+    public BroadcasterEditor removeBroadcaster(Broadcaster broadcaster) {
         BroadcasterEditor toRemove = remove(broadcasters, broadcaster);
         if (toRemove != null) {
             activeBroadcasterCache = null;
@@ -324,7 +326,7 @@ public class Editor extends AbstractUser {
         return toRemove;
     }
 
-    SortedSet<Portal> getAllowedPortals() {
+    public SortedSet<Portal> getAllowedPortals() {
         if(allowedPortalCache== null) {
             allowedPortalCache = new TreeSet<>();
 
@@ -384,7 +386,7 @@ public class Editor extends AbstractUser {
         }
     }
 
-    boolean addPortal(Portal portal) {
+    public boolean addPortal(Portal portal) {
         if (portal == null) {
             log.warn("Cannot add null to {}", this);
             return false;
@@ -399,7 +401,7 @@ public class Editor extends AbstractUser {
     }
 
     @Nullable
-    PortalEditor removePortal(Portal portal) {
+    public PortalEditor removePortal(Portal portal) {
         PortalEditor toRemove = remove(portals, portal);
         if (toRemove != null) {
             allowedPortalCache = null;
@@ -408,7 +410,7 @@ public class Editor extends AbstractUser {
         return toRemove;
     }
 
-    SortedSet<ThirdParty> getAllowedThirdParties() {
+    public SortedSet<ThirdParty> getAllowedThirdParties() {
         if(allowedThirdPartyCache == null) {
             allowedThirdPartyCache = new TreeSet<>();
 
@@ -420,7 +422,7 @@ public class Editor extends AbstractUser {
         return allowedThirdPartyCache;
     }
 
-    boolean addThirdParty(ThirdParty thirdParty) {
+    public boolean addThirdParty(ThirdParty thirdParty) {
         if (thirdParty == null) {
             log.warn("Cannot add null to {}", this);
             return false;
@@ -437,7 +439,7 @@ public class Editor extends AbstractUser {
     }
 
     @Nullable
-    ThirdPartyEditor removeThirdParty(ThirdParty thirdParty) {
+    public ThirdPartyEditor removeThirdParty(ThirdParty thirdParty) {
         ThirdPartyEditor toRemove = remove(thirdParties, thirdParty);
         if (toRemove != null) {
             allowedThirdPartyCache = null;
@@ -471,6 +473,19 @@ public class Editor extends AbstractUser {
     String getOrganization() {
         Broadcaster b = getEmployer();
         return b == null ? null : b.getId();
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Editor");
+        sb.append("{principalId='").append(principalId).append('\'');
+        sb.append(", displayName='").append(displayName).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", version='").append(version).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
 
