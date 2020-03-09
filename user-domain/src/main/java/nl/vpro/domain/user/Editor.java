@@ -447,7 +447,24 @@ public class Editor extends AbstractUser {
     }
 
     Collection<Organization> getOrganizations() {
-        return Stream.concat(Stream.concat(getAllowedBroadcasters().stream(), getAllowedPortals().stream()), getAllowedThirdParties().stream()).collect(Collectors.toSet());
+        return Stream.concat(
+            Stream.concat(
+                getAllowedBroadcasters().stream(),
+                getAllowedPortals().stream()),
+            getAllowedThirdParties().stream())
+            .collect(Collectors.toSet());
+    }
+
+    void addOrganization(Organization organization) {
+        if (organization instanceof Broadcaster) {
+            addBroadcaster((Broadcaster) organization);
+        } else if (organization instanceof Portal) {
+            addPortal((Portal) organization);
+        } else if (organization instanceof ThirdParty) {
+            addThirdParty((ThirdParty) organization);
+        } else {
+            throw new IllegalArgumentException("Unknown organization type: " + organization);
+        }
     }
 
     @Nullable
