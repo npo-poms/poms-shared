@@ -5,9 +5,12 @@
 package nl.vpro.domain.user;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
+import nl.vpro.domain.Roles;
+import nl.vpro.domain.media.support.OwnerType;
 
 public interface EditorService extends UserService<Editor> {
-
 
     @Override
     default boolean needsUpdate(Editor oldUser, Editor newUser) {
@@ -16,7 +19,6 @@ public interface EditorService extends UserService<Editor> {
             ! Objects.equals(oldUser.getAllowedPortals(), newUser.getAllowedPortals()) ||
             ! Objects.equals(oldUser.getAllowedThirdParties(), newUser.getAllowedThirdParties());
     }
-
 
     default Optional<Broadcaster> currentEmployer() {
         return currentUser().map(Editor::getEmployer);
@@ -29,11 +31,9 @@ public interface EditorService extends UserService<Editor> {
     }
 
     default List<String> allowedBroadcasterIds() {
-        List<String> broadcasters = new ArrayList<>();
-        for (Broadcaster broadcaster : allowedBroadcasters()) {
-            broadcasters.add(broadcaster.getId());
-        }
-        return broadcasters;
+        return allowedBroadcasters().stream()
+            .map(Broadcaster::getId)
+            .collect(Collectors.toList());
     }
 
     default   SortedSet<Portal> allowedPortals() {
@@ -42,6 +42,47 @@ public interface EditorService extends UserService<Editor> {
             .orElseGet(Collections::emptySortedSet);
     }
 
+    default SortedSet<Broadcaster> activeBroadcasters() {
+        return currentUser()
+            .map(Editor::getActiveBroadcasters)
+            .orElseGet(Collections::emptySortedSet);
+    }
 
+    default SortedSet<ThirdParty> allowedThirdParties() {
+        return currentUser()
+            .map(Editor::getAllowedThirdParties)
+            .orElseGet(Collections::emptySortedSet);
+    }
+
+    default SortedSet<ThirdParty> activeThirdParties() {
+        return currentUser()
+            .map(Editor::getAllowedThirdParties)
+            .orElseGet(Collections::emptySortedSet);
+     }
+
+
+    default OwnerType currentOwner() {
+        return currentUser().map(e -> {
+            String principalId = e.getPrincipalId();
+            if  ("mis-importer".equals(principalId)) {
+                return OwnerType.MIS;
+            } else if ("radiobox-importer".equals(principalId)) {
+                return OwnerType.RADIOBOX;
+            } else if (currentUserCanChooseOwnerType()) {
+                return OwnerType.NPO;
+            } else {
+                return OwnerType.BROADCASTER;
+            }
+        }).orElse(null);
+    }
+
+    default boolean currentUserCanChooseOwnerType() {
+        return currentUserHasRole(Roles.CAN_CHOOSE_OWNER_TYPE);
+    }
+
+
+    default boolean isAuthenticatedAs(String principalId) {
+        return isAuthenticated() && principalId.equals(currentUser().map(AbstractUser::getPrincipalId).orElse(null));
+    }
 
 }
