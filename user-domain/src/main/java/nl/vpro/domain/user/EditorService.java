@@ -11,18 +11,22 @@ public interface EditorService extends UserService<Editor> {
 
     @Override
     default boolean needsUpdate(Editor oldUser, Editor newUser) {
-        return oldUser == null
-            ||
-            ! Objects.equals(oldUser.getPrincipalId(), newUser.getPrincipalId()) ||
+        return oldUser == null ||
             ! Objects.equals(oldUser.getAllowedBroadcasters(), newUser.getAllowedBroadcasters()) ||
             ! Objects.equals(oldUser.getAllowedPortals(), newUser.getAllowedPortals()) ||
             ! Objects.equals(oldUser.getAllowedThirdParties(), newUser.getAllowedThirdParties());
     }
 
 
-    Optional<Broadcaster> currentEmployer();
+    default Optional<Broadcaster> currentEmployer() {
+        return currentUser().map(Editor::getEmployer);
+    }
 
-    SortedSet<Broadcaster> allowedBroadcasters();
+    default SortedSet<Broadcaster> allowedBroadcasters() {
+        return currentUser()
+            .map(Editor::getAllowedBroadcasters)
+            .orElseGet(Collections::emptySortedSet);
+    }
 
     default List<String> allowedBroadcasterIds() {
         List<String> broadcasters = new ArrayList<>();
@@ -31,5 +35,13 @@ public interface EditorService extends UserService<Editor> {
         }
         return broadcasters;
     }
+
+    default   SortedSet<Portal> allowedPortals() {
+        return currentUser()
+            .map(Editor::getAllowedPortals)
+            .orElseGet(Collections::emptySortedSet);
+    }
+
+
 
 }

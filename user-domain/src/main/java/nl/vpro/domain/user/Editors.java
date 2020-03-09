@@ -14,13 +14,24 @@ import javax.validation.Validator;
 @Slf4j
 public class Editors {
 
-    private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
+    private static final Validator VALIDATOR;
+
+    static {
+        Validator validator;
+        try {
+             validator = Validation.buildDefaultValidatorFactory().getValidator();
+        } catch (Exception e) {
+            log.warn(e.getMessage());
+            validator  = null;
+        }
+        VALIDATOR = validator;
+    }
 
 
     public static Editor mapWorksFor( List<Organization> organizations, Editor user) {
         if (organizations != null) {
             for (Organization organization : organizations) {
-                if (!VALIDATOR.validate(organization).isEmpty()) {
+                if (VALIDATOR != null && !VALIDATOR.validate(organization).isEmpty()) {
                     log.warn("The organization {} for {} is not valid. Ignoring", organization, user);
                     continue;
                 }

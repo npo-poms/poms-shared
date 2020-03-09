@@ -6,6 +6,7 @@ package nl.vpro.domain.user;
 
 import lombok.Getter;
 
+import java.security.Principal;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
@@ -36,20 +37,24 @@ public interface UserService<T extends User> {
      */
     <S> S systemDoAs(String principalId, Callable<S> handler) throws Exception;
 
-
     /**
      * From a principal object creates the user if not exists and returns it.
      * @since 5.12
      */
     T get(java.security.Principal authentication);
 
+
     Optional<T> get(String id);
 
+    /**
+     * returns an attached user.
+     */
     default T login(java.security.Principal authentication) {
-        T editor =  get(authentication);
-        editor.setLastLogin(Instant.now());
-        update(editor);
-        return editor;
+        synchronized (this) {
+            T editor = get(authentication);
+            editor.setLastLogin(Instant.now());
+            return update(editor);
+        }
     }
 
 
@@ -75,9 +80,9 @@ public interface UserService<T extends User> {
 
     boolean currentUserHasRole(Collection<String> roles);
 
-    Object getAuthentication();
+    Principal getAuthentication();
 
-    void restoreAuthentication(Object authentication);
+    void restoreAuthentication(Principal authentication);
 
     /**
      * Default implemention without consideration of the roles. This can be overridden.
@@ -159,14 +164,14 @@ public interface UserService<T extends User> {
         @Nullable Boolean throwExceptions) {
 
         final boolean throwExceptionsBoolean = throwExceptions == null ? logger == null : throwExceptions;
-        Object authentication;
+        Principal authentication;
         try {
             authentication = getAuthentication();
         } catch(Exception e) {
             LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
             authentication = null;
         }
-        final Object onBehalfOf = authentication;
+        final Principal onBehalfOf = authentication;
         Map<String, String> copy =  MDC.getCopyOfContextMap();
         if (logger != null) {
             logger.info("Executing on behalf of {}", onBehalfOf);
@@ -205,7 +210,7 @@ public interface UserService<T extends User> {
 
 
     default Logout<T> restoringAutoClosable() {
-        Object onBehalfOf = getAuthentication();
+        Principal onBehalfOf = getAuthentication();
         if (onBehalfOf != null) {
             try {
                 Object principal = onBehalfOf.getClass().getMethod("getPrincipal").invoke(onBehalfOf);
