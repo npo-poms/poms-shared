@@ -212,7 +212,7 @@ public class Kijkwijzer implements NicamRated {
         this.ageRating = ageRating;
         this.contentRatings = contentRatings == null ? new ArrayList<>() : contentRatings;
     }
-    public Kijkwijzer(AgeRating ageRating, @NonNull ContentRating... contentRatings) {
+    public Kijkwijzer(@Nullable AgeRating ageRating, @NonNull ContentRating... contentRatings) {
         this(ageRating, Arrays.asList(contentRatings));
     }
 
