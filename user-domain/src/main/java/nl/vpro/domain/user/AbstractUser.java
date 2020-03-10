@@ -111,10 +111,24 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
     }
 
     @PrePersist
-    public void preperist() {
+    public void prepersist() {
         if (creationInstant == null) {
             this.creationInstant = Instant.now();
         }
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AbstractUser that = (AbstractUser) o;
+
+        return principalId.equals(that.principalId);
+    }
+
+    @Override
+    public int hashCode() {
+        return principalId.hashCode();
     }
 }
