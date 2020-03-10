@@ -42,17 +42,17 @@ import nl.vpro.domain.Accountable;
 @Slf4j
 public class Editor extends AbstractUser {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
     Set<BroadcasterEditor> broadcasters = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
     protected Set<PortalEditor> portals = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")

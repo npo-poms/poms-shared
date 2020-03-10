@@ -4,23 +4,30 @@
  */
 package nl.vpro.domain.user;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+
+
 @Entity
-@IdClass(ThirdPartyEditorIdentifier.class)
-public class ThirdPartyEditor extends OrganizationEditor<ThirdParty> {
+public class ThirdPartyEditor implements OrganizationEditor<ThirdParty> {
 
     private static final long serialVersionUID = 0L;
 
-    @Id
+    @EmbeddedId
+    @Getter
+    private ThirdPartyEditorIdentifier id;
+
+    @MapsId("editorPrincipalId")
     @ManyToOne(optional = false)
-    @JoinColumn
+    @Getter
     private Editor editor;
 
-    @Id
+    @MapsId("organizationId")
     @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn
+    @Getter
     private ThirdParty organization;
 
     @Column(nullable = false)
@@ -33,16 +40,8 @@ public class ThirdPartyEditor extends OrganizationEditor<ThirdParty> {
     public ThirdPartyEditor(Editor editor, ThirdParty thirdParty) {
         this.editor = editor;
         this.organization = thirdParty;
-    }
+        id = new ThirdPartyEditorIdentifier(editor.getPrincipalId(), thirdParty.getId());
 
-    @Override
-    public Editor getEditor() {
-        return editor;
-    }
-
-    @Override
-    public ThirdParty getOrganization() {
-        return organization;
     }
 
     @Override
@@ -56,8 +55,17 @@ public class ThirdPartyEditor extends OrganizationEditor<ThirdParty> {
     }
 
     @Override
-    public ThirdPartyEditorIdentifier getId() {
-        return new ThirdPartyEditorIdentifier(editor, organization);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ThirdPartyEditor that = (ThirdPartyEditor) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

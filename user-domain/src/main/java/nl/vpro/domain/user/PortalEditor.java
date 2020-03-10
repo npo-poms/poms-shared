@@ -4,23 +4,29 @@
  */
 package nl.vpro.domain.user;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@IdClass(PortalEditorIdentifier.class)
-public class PortalEditor  extends OrganizationEditor<Portal> {
+public class PortalEditor  implements OrganizationEditor<Portal> {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
+    @EmbeddedId
+    @Getter
+    private PortalEditorIdentifier id;
+
+
+    @MapsId("editorPrincipalId")
     @ManyToOne(optional = false)
-    @JoinColumn
+    @Getter
     private Editor editor;
 
-    @Id
+    @MapsId("organizationId")
     @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn
+    @Getter
     private Portal organization;
 
     @Column(nullable = false)
@@ -33,16 +39,8 @@ public class PortalEditor  extends OrganizationEditor<Portal> {
     public PortalEditor(Editor editor, Portal portal) {
         this.editor = editor;
         this.organization = portal;
-    }
+        id = new PortalEditorIdentifier(editor.getPrincipalId(), portal.getId());
 
-    @Override
-    public Editor getEditor() {
-        return editor;
-    }
-
-    @Override
-    public Portal getOrganization() {
-        return organization;
     }
 
     @Override
@@ -55,10 +53,20 @@ public class PortalEditor  extends OrganizationEditor<Portal> {
         this.isActive = active;
     }
 
+
     @Override
-    public PortalEditorIdentifier getId() {
-        return new PortalEditorIdentifier(editor, organization);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PortalEditor that = (PortalEditor) o;
+
+        return id.equals(that.id);
     }
 
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 
 }

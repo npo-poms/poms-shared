@@ -12,6 +12,8 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Supplier;
 
+import javax.transaction.Transactional;
+
 import org.checkerframework.checker.nullness.qual.*;
 import org.slf4j.*;
 
@@ -19,7 +21,6 @@ import nl.vpro.domain.Roles;
 
 import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 
-;
 
 public interface UserService<T extends User> {
 
@@ -42,16 +43,20 @@ public interface UserService<T extends User> {
      */
     T get(java.security.Principal authentication);
 
+    Optional<T> get(@NonNull String id);
 
-    Optional<T> get(String id);
+    default Optional<T> getOnly(@NonNull String id) {
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * returns an attached user.
      */
-    default T login(java.security.Principal authentication) {
+    @Transactional
+    default T login(java.security.Principal authentication, Instant timestamp) {
         synchronized (this) {
             T editor = get(authentication);
-            editor.setLastLogin(Instant.now());
+            editor.setLastLogin(timestamp);
             return update(editor);
         }
     }

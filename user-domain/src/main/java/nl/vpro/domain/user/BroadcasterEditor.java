@@ -11,20 +11,21 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@IdClass(BroadcasterEditorIdentifier.class)
-public class BroadcasterEditor extends OrganizationEditor<Broadcaster> {
+public class BroadcasterEditor implements OrganizationEditor<Broadcaster> {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
+    @EmbeddedId
+    @Getter
+    private BroadcasterEditorIdentifier id;
+
     @ManyToOne(optional = false)
-    @JoinColumn
+    @MapsId("editorPrincipalId")
     @Getter
     protected Editor editor;
 
-    @Id
     @ManyToOne(optional = false)
-    @JoinColumn
+    @MapsId("organizationId")
     @Getter
     protected Broadcaster organization;
 
@@ -46,6 +47,7 @@ public class BroadcasterEditor extends OrganizationEditor<Broadcaster> {
     public BroadcasterEditor(Editor editor, Broadcaster broadcaster) {
         this.editor = editor;
         this.organization = broadcaster;
+        id = new BroadcasterEditorIdentifier(editor.getPrincipalId(), broadcaster.getId());
     }
 
     public BroadcasterEditor(Editor editor, Broadcaster broadcaster, Boolean isEmployee) {
@@ -65,8 +67,19 @@ public class BroadcasterEditor extends OrganizationEditor<Broadcaster> {
 
     }
 
+
     @Override
-    public BroadcasterEditorIdentifier getId() {
-        return new BroadcasterEditorIdentifier(editor, organization);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BroadcasterEditor that = (BroadcasterEditor) o;
+
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
