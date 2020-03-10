@@ -405,7 +405,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         return hash;
     }
 
-    protected void setHash(byte[] hash) {
+    public void setHash(byte[] hash) {
         this.hash = hash;
     }
 
