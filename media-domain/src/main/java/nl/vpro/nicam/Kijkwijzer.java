@@ -109,10 +109,21 @@ public class Kijkwijzer implements NicamRated {
     /**
      * @since 5.12
      */
-    public static Optional<Kijkwijzer> parsePaddedCode(CharSequence value) {
+    public static Optional<Kijkwijzer> parsePaddedCode(final CharSequence value) {
         if (StringUtils.isEmpty(value)) {
             return Optional.empty();
         }
+        try {
+            AgeRating ageRating = parsePaddedAgeRating(value);
+            List<ContentRating> contentRatings = parseContentRatings(value);
+            return Optional.of(new Kijkwijzer(ageRating, contentRatings));
+        } catch (IllegalArgumentException iae) {
+            return Optional.empty();
+        }
+    }
+
+    @Nullable
+    private static AgeRating parsePaddedAgeRating(final CharSequence value) {
         StringBuilder ageRatingString = new StringBuilder();
         for (int i = 0; i < value.length(); i++) {
             char c = value.charAt(i);
@@ -120,14 +131,18 @@ public class Kijkwijzer implements NicamRated {
                 ageRatingString.append(c);
             }
         }
-        AgeRating ageRating = null;
-        if (ageRatingString.length() == 1) {
-            return Optional.empty();
+        if (ageRatingString.length() == 0) {
+            return null;
+        } else if (ageRatingString.length() == 1) {
+            throw new IllegalArgumentException("age rating is not padded " + ageRatingString);
         } else if (ageRatingString.length() == 2) {
-            ageRating = AgeRating.valueOf(Integer.parseInt(ageRatingString.toString()));
-        } else if (ageRatingString.length() > 2) {
-            return Optional.empty();
+            return AgeRating.valueOf(Integer.parseInt(ageRatingString.toString()));
+        } else {
+            throw new IllegalArgumentException("age rating is not padded " + ageRatingString);
         }
+    }
+
+    private static List<ContentRating> parseContentRatings(final CharSequence value) {
         List<ContentRating> contentRatings = new ArrayList<>();
         for (int i = 0; i < value.length(); i++) {
             char c = value.charAt(i);
@@ -140,8 +155,7 @@ public class Kijkwijzer implements NicamRated {
                 }
             }
         }
-
-        return Optional.of(new Kijkwijzer(ageRating, contentRatings));
+        return contentRatings;
     }
 
     @Nullable
