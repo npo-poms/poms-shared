@@ -13,7 +13,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  */
 public class ServiceLocator  {
 
-
     @Inject
     Provider<BroadcasterService> broadcasterService = () -> new BroadcasterServiceImpl(new Broadcaster[0]);
 
@@ -34,7 +33,6 @@ public class ServiceLocator  {
 
     @NonNull
     public static BroadcasterService getBroadcasterService() {
-
         return serviceLocator == null ? new BroadcasterServiceImpl(new Broadcaster[0]) : serviceLocator.broadcasterService.get();
     }
 
@@ -48,8 +46,12 @@ public class ServiceLocator  {
         return serviceLocator == null ? new ThirdPartyServiceImpl() : serviceLocator.thirdPartyService.get();
     }
 
+    @NonNull
     public static EditorService getEditorService() {
-        return serviceLocator == null ? null : serviceLocator.editorService.get();
+        if (serviceLocator == null) {
+            throw new IllegalStateException();
+        }
+        return serviceLocator.editorService.get();
     }
 
     public static void  setEditorService(final EditorService editorService) {
