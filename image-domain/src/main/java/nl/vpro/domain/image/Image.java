@@ -392,7 +392,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     }
 
 
-    void setCachedInputStream(InputStream cachedInputStream) {
+    public void setCachedInputStream(InputStream cachedInputStream) {
         this.cachedInputStream = cachedInputStream;
     }
 
