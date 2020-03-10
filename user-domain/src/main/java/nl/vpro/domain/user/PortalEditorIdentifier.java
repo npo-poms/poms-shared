@@ -4,18 +4,29 @@
  */
 package nl.vpro.domain.user;
 
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-public class PortalEditorIdentifier extends OrganizationEditorIdentifier<Portal> implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
-    private static final long serialVersionUID = 0L;
+@Embeddable
+@EqualsAndHashCode
+public class PortalEditorIdentifier implements OrganizationEditorIdentifier<Portal> {
 
+    @Column(name = "editor_principalid")
+    @Getter
+    private String editorPrincipalId;
 
-    protected PortalEditorIdentifier() {
+    @Column(name = "organization_id")
+    @Getter
+    private String organizationId;
+
+    public PortalEditorIdentifier() {
     }
 
-    public PortalEditorIdentifier(Editor editor, Portal portal) {
-        super(editor, portal);
+    public PortalEditorIdentifier(String editor, String portal) {
+        this.editorPrincipalId = editor;
+        this.organizationId = portal;
     }
-
 }

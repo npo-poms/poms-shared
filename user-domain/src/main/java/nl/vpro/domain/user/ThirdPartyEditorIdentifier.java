@@ -4,21 +4,30 @@
  */
 package nl.vpro.domain.user;
 
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class ThirdPartyEditorIdentifier extends OrganizationEditorIdentifier<ThirdParty> implements Serializable {
+@EqualsAndHashCode
+public class ThirdPartyEditorIdentifier implements  OrganizationEditorIdentifier<ThirdParty>  {
 
-    private static final long serialVersionUID = 0L;
+   @Column(name = "editor_principalid")
+   @Getter
+   private String editorPrincipalId;
 
+    @Column(name = "organization_id")
+    @Getter
+    private String organizationId;
 
-    protected ThirdPartyEditorIdentifier() {
+    public ThirdPartyEditorIdentifier() {
     }
 
-    public ThirdPartyEditorIdentifier(Editor editor, ThirdParty thirdparty) {
-        super(editor, thirdparty);
+    public ThirdPartyEditorIdentifier(String editor, String thirdparty) {
+        this.editorPrincipalId = editor;
+        this.organizationId = thirdparty;
     }
 
 }
