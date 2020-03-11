@@ -17,9 +17,9 @@ public interface  OrganizationEditor<T extends Organization> extends Comparable<
 
     Editor getEditor();
 
-    Boolean isActive();
+    boolean isActive();
 
-    void setActive(Boolean active);
+    void setActive(boolean active);
 
     @Override
     OrganizationEditorIdentifier<T> getId();

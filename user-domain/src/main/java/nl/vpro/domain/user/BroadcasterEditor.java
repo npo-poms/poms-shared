@@ -4,13 +4,13 @@
  */
 package nl.vpro.domain.user;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@ToString
 public class BroadcasterEditor implements OrganizationEditor<Broadcaster> {
 
     private static final long serialVersionUID = 1L;
@@ -29,16 +29,18 @@ public class BroadcasterEditor implements OrganizationEditor<Broadcaster> {
     @Getter
     protected Broadcaster organization;
 
-    @Column(nullable = false, name="isActive")
+    @Column(nullable = false)
     @NotNull
     @Setter
-    protected Boolean active = false;
+    @Getter
+    protected boolean active = false;
 
 
-    @Column(nullable = false, name="isEmployee")
+    @Column(nullable = false)
     @NotNull
     @Setter
-    private Boolean employee = false;
+    @Getter
+    private boolean employee = false;
 
 
     protected BroadcasterEditor() {
@@ -55,19 +57,6 @@ public class BroadcasterEditor implements OrganizationEditor<Broadcaster> {
         this.employee = isEmployee;
         this.active = isEmployee;
     }
-
-
-    @Override
-    public Boolean isActive() {
-        return active;
-
-    }
-    public Boolean isEmployee() {
-        return employee;
-
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

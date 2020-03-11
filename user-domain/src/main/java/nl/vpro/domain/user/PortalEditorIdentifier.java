@@ -29,4 +29,9 @@ public class PortalEditorIdentifier implements OrganizationEditorIdentifier<Port
         this.editorPrincipalId = editor;
         this.organizationId = portal;
     }
+
+    @Override
+    public String toString() {
+        return editorPrincipalId + ":" + organizationId;
+    }
 }

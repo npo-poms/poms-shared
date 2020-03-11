@@ -31,4 +31,8 @@ public class BroadcasterEditorIdentifier implements OrganizationEditorIdentifier
         this.organizationId = broadcaster;
     }
 
+    @Override
+    public String toString() {
+        return editorPrincipalId + ":" + organizationId;
+    }
 }

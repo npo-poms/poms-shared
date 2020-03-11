@@ -25,5 +25,7 @@ public interface UserRepository<T extends User> {
 
     List<? extends T> findUsers(String name, int max);
 
+    List<? extends T> list();
+
     void clear();
 }

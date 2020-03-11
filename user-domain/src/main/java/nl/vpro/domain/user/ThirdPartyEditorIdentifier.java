@@ -30,4 +30,9 @@ public class ThirdPartyEditorIdentifier implements  OrganizationEditorIdentifier
         this.organizationId = thirdparty;
     }
 
+    @Override
+    public String toString() {
+        return editorPrincipalId + ":" + organizationId;
+    }
+
 }
