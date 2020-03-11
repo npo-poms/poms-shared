@@ -180,6 +180,7 @@ public class Person extends Credits implements PersonInterface {
                 .orElse(null);
     }
 
+    @Override
     public void setGtaaUri(String uri) {
         if (this.gtaaInfo == null) {
             this.gtaaInfo = new EmbeddablePerson();
@@ -195,6 +196,7 @@ public class Person extends Credits implements PersonInterface {
                 .orElse(null);
     }
 
+    @Override
     public void setGtaaStatus(GTAAStatus status) {
         if (this.gtaaInfo == null) {
             this.gtaaInfo = new EmbeddablePerson();

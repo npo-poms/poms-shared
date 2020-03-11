@@ -1,35 +1,22 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.bind.CreditsDeserializer;
-import nl.vpro.domain.media.gtaa.GTAAStatus;
+import nl.vpro.domain.media.gtaa.GTAAManaged;
 
 /**
  * A container class for credits, linking the role to an actual entity.
@@ -50,9 +37,7 @@ import nl.vpro.domain.media.gtaa.GTAAStatus;
 @XmlType(name = "creditsType")
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonDeserialize(using = CreditsDeserializer.class)
-public abstract class Credits extends DomainObject implements Child<MediaObject>  {
-
-
+public abstract class Credits extends DomainObject implements Child<MediaObject>, GTAAManaged {
 
     @Column(nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
@@ -115,17 +100,6 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
      * To better understand about which or what we are talking, these string may give some scope.
      */
     public abstract List<String> getScopeNotes();
-
-
-    /**
-     * The URI in GTAA of this thesaurus item
-     */
-    public abstract String getGtaaUri();
-
-    /**
-     * The status in GTAA of this thesaurus item.
-     */
-    public abstract GTAAStatus getGtaaStatus();
 
     /**
      * TODO: describe this?

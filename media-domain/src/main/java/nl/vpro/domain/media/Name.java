@@ -14,8 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import nl.vpro.domain.media.gtaa.GTAARecord;
-import nl.vpro.domain.media.gtaa.GTAAStatus;
+import nl.vpro.domain.media.gtaa.*;
 
 
 /**
@@ -37,7 +36,7 @@ import nl.vpro.domain.media.gtaa.GTAAStatus;
     "gtaaUri",
     "gtaaStatus"
 })
-public class Name extends Credits  {
+public class Name extends Credits implements GTAARecordManaged {
 
     @XmlTransient
     @ManyToOne(optional = false)
@@ -111,21 +110,14 @@ public class Name extends Credits  {
     @Override
     @XmlAttribute
     public GTAAStatus getGtaaStatus() {
-        return gtaaRecord.getStatus();
+        return GTAARecordManaged.super.getGtaaStatus();
     }
 
-    public void setGtaaStatus(GTAAStatus gtaaStatus) {
-        this.gtaaRecord.setStatus(gtaaStatus);
-    }
 
     @Override
     @XmlAttribute
     public String getGtaaUri() {
-        return gtaaRecord.getUri();
-    }
-
-    public void setGtaaUri(String uri) {
-        gtaaRecord.setUri(uri);
+        return GTAARecordManaged.super.getGtaaUri();
     }
 
     /**
