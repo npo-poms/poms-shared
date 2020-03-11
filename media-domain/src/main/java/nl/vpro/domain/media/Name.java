@@ -3,7 +3,6 @@ package nl.vpro.domain.media;
 import lombok.*;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -84,27 +83,14 @@ public class Name extends Credits implements GTAARecordManaged {
     @Override
     @XmlElement
     public String getName() {
-        return gtaaRecord.getName();
-    }
-
-    public void setName(String name) {
-        this.gtaaRecord.setName(name);
+        return GTAARecordManaged.super.getName();
     }
 
     @XmlElement(name = "scopeNote")
     @JsonProperty("scopeNotes")
     @Override
     public List<String> getScopeNotes() {
-        return gtaaRecord.getScopeNotes();
-    }
-
-
-    public void setScopeNotes(List<String> scopeNotes) {
-        if (scopeNotes != null) {
-            gtaaRecord.setScopeNotes(scopeNotes);
-        } else {
-            gtaaRecord.setScopeNotes(new ArrayList<>());
-        }
+        return GTAARecordManaged.super.getScopeNotes();
     }
 
     @Override

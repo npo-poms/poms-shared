@@ -1,28 +1,15 @@
 package nl.vpro.domain.media;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.Singular;
-import lombok.ToString;
+import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.DomainObject;
@@ -72,28 +59,16 @@ public class Topic extends DomainObject implements MediaObjectOwnableListItem<To
     }
 
     @XmlElement
+    @Override
     public String getName() {
-        return gtaaRecord.getName();
-    }
-
-    public void setName(String name) {
-        gtaaRecord.setName(name);
+        return GTAARecordManaged.super.getName();
     }
 
     @XmlElement(name = "scopeNote")
     @JsonProperty("scopeNotes")
+    @Override
     public List<String> getScopeNotes() {
-        return gtaaRecord.getScopeNotes();
-    }
-
-    public void setScopeNotes(List<String> scopeNotes) {
-
-        if (scopeNotes != null) {
-            gtaaRecord.setScopeNotes(scopeNotes);
-        }
-        else {
-            gtaaRecord.setScopeNotes(new ArrayList<>());
-        }
+        return GTAARecordManaged.super.getScopeNotes();
     }
 
     @XmlAttribute

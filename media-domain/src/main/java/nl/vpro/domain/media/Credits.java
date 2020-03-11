@@ -94,11 +94,13 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
     /**
      * Returns the name of the credits. This is how it would be referred to by humans.
      */
+    @Override
     public abstract String getName();
 
     /**
      * To better understand about which or what we are talking, these string may give some scope.
      */
+    @Override
     public abstract List<String> getScopeNotes();
 
     /**
