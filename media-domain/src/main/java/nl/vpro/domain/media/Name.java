@@ -24,7 +24,7 @@ import nl.vpro.domain.media.gtaa.*;
 @ToString(of = { "gtaaRecord" }, callSuper = true)
 @EqualsAndHashCode(of = { "gtaaRecord" }, callSuper = false)
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "nameType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus"})
+@XmlType(name = "nameType", propOrder = {"name", "scopeNotes"})
 @JsonDeserialize
 @JsonPropertyOrder({
     "objectType",
@@ -84,6 +84,10 @@ public class Name extends Credits implements GTAARecordManaged {
     public String getName() {
         return GTAARecordManaged.super.getName();
     }
+    @Override
+    public void  setName(String name) {
+        GTAARecordManaged.super.setName(name);
+    }
 
     @XmlElement(name = "scopeNote")
     @JsonProperty("scopeNotes")
@@ -93,17 +97,30 @@ public class Name extends Credits implements GTAARecordManaged {
     }
 
     @Override
+    public void setScopeNotes(List<String> scopeNotes) {
+        GTAARecordManaged.super.setScopeNotes(scopeNotes);
+    }
+
+    @Override
     @XmlAttribute
     public GTAAStatus getGtaaStatus() {
         return GTAARecordManaged.super.getGtaaStatus();
     }
-
+    @Override
+    public void setGtaaStatus(GTAAStatus status) {
+        GTAARecordManaged.super.setGtaaStatus(status);
+    }
 
     @Override
     @XmlAttribute
-    public String getGtaaUri() {
+    public String  getGtaaUri() {
         return GTAARecordManaged.super.getGtaaUri();
     }
+    @Override
+    public void setGtaaUri(String uri) {
+        GTAARecordManaged.super.setGtaaUri(uri);
+    }
+
 
     /**
      * Always returns false, because we arranged that all redirects are simply resolved in the database.
