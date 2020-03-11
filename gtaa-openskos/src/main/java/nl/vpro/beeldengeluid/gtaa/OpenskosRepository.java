@@ -503,6 +503,8 @@ public class OpenskosRepository implements GTAARepository {
                     if(NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
                         return Optional.empty();
                     }
+                case NOT_FOUND:
+                    return Optional.empty();
                 default:
                     log.error("Unexpected error doing call to openskos for item id {}: {}: {}", id, url, e.getResponseBodyAsString(), e);
                     throw e;
@@ -517,6 +519,11 @@ public class OpenskosRepository implements GTAARepository {
             RDF rdf = template.getForObject(url, RDF.class);
             List<Description> descriptions = descriptions(rdf);
             return descriptions.stream().findFirst().map(GTAAConcepts::toConcept);
+        } catch (HttpClientErrorException clientError) {
+            if (clientError.getStatusCode() == HttpStatus.NOT_FOUND) {
+                return Optional.empty();
+            }
+            throw clientError;
         } catch (HttpServerErrorException e) {
             if (e.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
                 if (NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
