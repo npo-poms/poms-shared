@@ -175,12 +175,20 @@ public class Editor extends AbstractUser {
             roles = rolesProvider.get();
             rolesProvider = null;
         }
+        if (roles == null) {
+            throw new IllegalStateException("This user object does not have role information");
+        }
         return this.roles;
     }
 
-    public void provideRoles(Supplier<Set<String>> roles) {
+    public void supplyRoles(Supplier<Set<String>> roles) {
         this.rolesProvider = roles;
         this.roles = null;
+    }
+    public void supplyRolesIfNeeded(Supplier<Set<String>> roles) {
+        if (this.rolesProvider == null && this.roles == null) {
+            supplyRoles(roles);
+        }
     }
 
     public boolean rolesLoaded() {
