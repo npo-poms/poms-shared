@@ -22,6 +22,9 @@ import nl.vpro.domain.Roles;
 import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 
 
+/**
+ * The user services provides service related to users. This integrates with spring security, and e.g. with keycloak. It may also support saving the users to a local database. If this in unneeded,, because the current system does not have a database backing these methods may be left unimplemented
+ */
 public interface UserService<T extends User> {
 
     /**
@@ -37,64 +40,9 @@ public interface UserService<T extends User> {
      */
     <S> S systemDoAs(String principalId, Callable<S> handler) throws Exception;
 
-    /**
-     * From a principal object creates the user if not exists and returns it.
-     * @since 5.12
-     */
-    T get(java.security.Principal authentication);
-
-    Optional<T> get(@NonNull String id);
-
-    default Optional<T> getOnly(@NonNull String id) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * returns an attached user.
-     */
-    @Transactional
-    default T login(java.security.Principal authentication, Instant timestamp) {
-        synchronized (this) {
-            T editor = get(authentication);
-            editor.setLastLogin(timestamp);
-            return update(editor);
-        }
-    }
-
-
-    List<? extends T> findUsers(String name, int limit);
-
-    T update(T user);
-
-    void delete(T object);
-
-    Optional<T> currentUser();
-
-    default Optional<String> currentPrincipalId() {
-        return Optional.ofNullable(getAuthentication()).map(Principal::getName);
-    }
-
-    T authenticate(String principalId, String password);
-
-    Optional<T> authenticate(String principalId);
-
-    default boolean currentUserHasRole(String... roles) {
-        return currentUserHasRole(Arrays.asList(roles));
-    }
-
-    boolean currentUserHasRole(Collection<String> roles);
-
-    Principal getAuthentication();
-
-    void restoreAuthentication(Principal authentication);
-
-    default boolean isAuthenticated() {
-        return getAuthentication() != null;
-    }
-
-    /**
-     * Default implemention without consideration of the roles. This can be overridden.
-     */
+     /**
+      * Default implemention without consideration of the roles. This can be overridden.
+      */
     default Logout<T> systemAuthenticate(Trusted trustedSourceToken) {
         authenticate(trustedSourceToken.getPrincipal());
         Logout<T> logout = new Logout<T>() {
@@ -105,6 +53,72 @@ public interface UserService<T extends User> {
         };
         logout.setUser(currentUser().orElseThrow(IllegalStateException::new));
         return logout;
+    }
+
+    /**
+     * From a principal object creates the user if not exists and returns it.
+     * @since 5.12
+     */
+    T get(java.security.Principal authentication);
+
+    Optional<T> get(@NonNull String id);
+
+    /**
+     * Just gets a user from local persistence. No implicit creating.
+     */
+    default Optional<T> getOnly(@NonNull String id) {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Logins in the given principal and returns an attached user (if possible).
+     */
+    @Transactional
+    default T login(java.security.Principal authentication, Instant timestamp) {
+        synchronized (this) {
+            T editor = get(authentication);
+            editor.setLastLogin(timestamp);
+            return update(editor);
+        }
+    }
+
+    /**
+     * Searches users in the local database
+     */
+    List<? extends T> findUsers(String name, int limit);
+
+    /**
+     * Updates a user in the local database
+     */
+    T update(T user);
+
+    /**
+     * Deletes user from the local database
+     */
+    void delete(T object);
+
+    Optional<T> currentUser();
+
+    T authenticate(String principalId, String password);
+
+    Optional<T> authenticate(String principalId);
+
+    default boolean currentUserHasRole(String... roles) {
+        return currentUserHasRole(Arrays.asList(roles));
+    }
+
+    default Optional<String> currentPrincipalId() {
+        return Optional.ofNullable(getAuthentication()).map(Principal::getName);
+    }
+
+    boolean currentUserHasRole(Collection<String> roles);
+
+    Principal getAuthentication();
+
+    void restoreAuthentication(Principal authentication);
+
+    default boolean isAuthenticated() {
+        return getAuthentication() != null;
     }
 
     void dropAuthentication();
@@ -216,7 +230,6 @@ public interface UserService<T extends User> {
         };
     }
 
-
     default Logout<T> restoringAutoClosable() {
         Principal onBehalfOf = getAuthentication();
         if (onBehalfOf != null) {
@@ -265,7 +278,6 @@ public interface UserService<T extends User> {
             }
             this.user = user;
         }
-
     }
 
 }
