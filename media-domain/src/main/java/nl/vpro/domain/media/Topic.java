@@ -26,8 +26,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.gtaa.GTAARecord;
-import nl.vpro.domain.media.gtaa.GTAAStatus;
+import nl.vpro.domain.media.gtaa.*;
 import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 
 /**
@@ -41,7 +40,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @EqualsAndHashCode(of = { "gtaaRecord" }, callSuper = false)
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "topicType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus"})
-public class Topic extends DomainObject implements MediaObjectOwnableListItem<Topic, Topics> {
+public class Topic extends DomainObject implements MediaObjectOwnableListItem<Topic, Topics>, GTAARecordManaged {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @XmlTransient
@@ -98,21 +97,15 @@ public class Topic extends DomainObject implements MediaObjectOwnableListItem<To
     }
 
     @XmlAttribute
+    @Override
     public GTAAStatus getGtaaStatus() {
-        return gtaaRecord.getStatus();
-    }
-
-    public void setGtaaStatus(GTAAStatus gtaaStatus) {
-        gtaaRecord.setStatus(gtaaStatus);
+        return GTAARecordManaged.super.getGtaaStatus();
     }
 
     @XmlAttribute
+    @Override
     public String getGtaaUri() {
-        return gtaaRecord.getUri();
-    }
-
-    public void setGtaaUri(String uri) {
-        gtaaRecord.setUri(uri);
+        return GTAARecordManaged.super.getGtaaUri();
     }
 
     @Override
