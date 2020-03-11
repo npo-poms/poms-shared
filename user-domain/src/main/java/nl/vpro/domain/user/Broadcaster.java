@@ -3,6 +3,9 @@
  */
 package nl.vpro.domain.user;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +19,7 @@ import nl.vpro.domain.Xmlns;
 
 @Entity
 @XmlType(name = "broadcasterType", namespace = Xmlns.MEDIA_NAMESPACE)
-@Cacheable(true)
+@Cacheable
 public class Broadcaster extends Organization {
 
     @Column(unique = true)
@@ -39,6 +42,11 @@ public class Broadcaster extends Organization {
     })
     @XmlTransient
     protected String misId;
+
+    @Column
+    @Getter
+    @Setter
+    protected String domain;
 
     public static Broadcaster of(String id) {
         return new Broadcaster(id);
