@@ -94,31 +94,46 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         this(source.getRole(), source.gtaaRecord);
         this.parent = parent;
     }
-
-    @Override
+ @Override
     @XmlElement
     public String getName() {
         return GTAARecordManaged.super.getName();
+    }
+    @Override
+    public void  setName(String name) {
+        GTAARecordManaged.super.setName(name);
     }
 
     @XmlElement(name = "scopeNote")
     @JsonProperty("scopeNotes")
     @Override
     public List<String> getScopeNotes() {
-        return gtaaRecord.getScopeNotes();
+        return GTAARecordManaged.super.getScopeNotes();
     }
 
-    @XmlAttribute
     @Override
+    public void setScopeNotes(List<String> scopeNotes) {
+        GTAARecordManaged.super.setScopeNotes(scopeNotes);
+    }
+
+    @Override
+    @XmlAttribute
     public GTAAStatus getGtaaStatus() {
         return GTAARecordManaged.super.getGtaaStatus();
     }
-
-
-    @XmlAttribute
     @Override
-    public String getGtaaUri() {
+    public void setGtaaStatus(GTAAStatus status) {
+        GTAARecordManaged.super.setGtaaStatus(status);
+    }
+
+    @Override
+    @XmlAttribute
+    public String  getGtaaUri() {
         return GTAARecordManaged.super.getGtaaUri();
+    }
+    @Override
+    public void setGtaaUri(String uri) {
+        GTAARecordManaged.super.setGtaaUri(uri);
     }
 
     @Override

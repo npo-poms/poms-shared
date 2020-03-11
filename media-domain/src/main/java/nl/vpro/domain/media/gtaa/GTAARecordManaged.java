@@ -3,6 +3,8 @@ package nl.vpro.domain.media.gtaa;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.12
@@ -42,6 +44,7 @@ public interface GTAARecordManaged extends GTAAManaged {
      * The URI in GTAA of this thesaurus item
      */
     @Override
+    @XmlAttribute
     default String getGtaaUri() {
         return getGtaaRecord().getUri();
     }
@@ -55,6 +58,7 @@ public interface GTAARecordManaged extends GTAAManaged {
      * The status in GTAA of this thesaurus item.
      */
     @Override
+    @XmlAttribute
     default GTAAStatus getGtaaStatus() {
         return getGtaaRecord().getStatus();
     }

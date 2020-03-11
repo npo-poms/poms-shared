@@ -26,7 +26,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @ToString(of = { "gtaaRecord" })
 @EqualsAndHashCode(of = { "gtaaRecord" }, callSuper = false)
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "topicType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus"})
+@XmlType(name = "topicType", propOrder = {"name", "scopeNotes"})
 public class Topic extends DomainObject implements MediaObjectOwnableListItem<Topic, Topics>, GTAARecordManaged {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,10 +58,14 @@ public class Topic extends DomainObject implements MediaObjectOwnableListItem<To
                 .build();
     }
 
-    @XmlElement
     @Override
+    @XmlElement
     public String getName() {
         return GTAARecordManaged.super.getName();
+    }
+    @Override
+    public void  setName(String name) {
+        GTAARecordManaged.super.setName(name);
     }
 
     @XmlElement(name = "scopeNote")
@@ -71,18 +75,30 @@ public class Topic extends DomainObject implements MediaObjectOwnableListItem<To
         return GTAARecordManaged.super.getScopeNotes();
     }
 
-    @XmlAttribute
     @Override
+    public void setScopeNotes(List<String> scopeNotes) {
+        GTAARecordManaged.super.setScopeNotes(scopeNotes);
+    }
+
+    @Override
+    @XmlAttribute
     public GTAAStatus getGtaaStatus() {
         return GTAARecordManaged.super.getGtaaStatus();
     }
-
-    @XmlAttribute
     @Override
-    public String getGtaaUri() {
-        return GTAARecordManaged.super.getGtaaUri();
+    public void setGtaaStatus(GTAAStatus status) {
+        GTAARecordManaged.super.setGtaaStatus(status);
     }
 
+    @Override
+    @XmlAttribute
+    public String  getGtaaUri() {
+        return GTAARecordManaged.super.getGtaaUri();
+    }
+    @Override
+    public void setGtaaUri(String uri) {
+        GTAARecordManaged.super.setGtaaUri(uri);
+    }
     @Override
     public int compareTo(Topic topic) {
         if (getGtaaUri() != null) {
