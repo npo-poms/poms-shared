@@ -64,7 +64,7 @@ public interface UserService<T extends User> {
     Optional<T> get(@NonNull String id);
 
     /**
-     * Just gets a user from local persistence. No implicit creating.
+     * Just gets a user from local persistence. No implicit creating. This may also give an object that is a bit incomplete, e.g. we don't store roles in the database
      */
     default Optional<T> getOnly(@NonNull String id) {
         throw new UnsupportedOperationException();
