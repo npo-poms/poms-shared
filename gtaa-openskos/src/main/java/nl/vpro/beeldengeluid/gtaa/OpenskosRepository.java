@@ -582,6 +582,7 @@ public class OpenskosRepository implements GTAARepository {
         public Object unmarshal(@NonNull Source source) throws XmlMappingException {
             try {
                 TransformerFactory factory = TransformerFactory.newInstance();
+                factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
                 Transformer transformer = factory.newTransformer();
                 DOMResult result = new DOMResult();
                 transformer.transform(source, result);
