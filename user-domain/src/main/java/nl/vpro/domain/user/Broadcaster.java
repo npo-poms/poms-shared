@@ -46,6 +46,7 @@ public class Broadcaster extends Organization {
     @Column
     @Getter
     @Setter
+    @XmlTransient
     protected String domain;
 
     public static Broadcaster of(String id) {
