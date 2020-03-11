@@ -203,5 +203,10 @@
       <artifactId>aspectjweaver</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw</groupId>
+      <artifactId>jaxb-documentation</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 </project>
