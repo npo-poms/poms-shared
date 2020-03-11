@@ -139,6 +139,7 @@ public class Person extends Credits implements PersonInterface {
     /**
      * Sets both the given name and the family name by splitting the String on a comma.
      */
+    @Override
     public void setName(String name) {
         String[] parsed = PersonInterface.parseName(name);
         setFamilyName(parsed[0]);
@@ -160,6 +161,11 @@ public class Person extends Credits implements PersonInterface {
     public List<String> getScopeNotes() {
         // TODO
         return null;
+    }
+
+    @Override
+    public void setScopeNotes(List<String> scopeNotes) {
+        // TODO
     }
 
     @Override
