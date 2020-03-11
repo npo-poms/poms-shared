@@ -6,8 +6,8 @@ import java.util.Collections;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
