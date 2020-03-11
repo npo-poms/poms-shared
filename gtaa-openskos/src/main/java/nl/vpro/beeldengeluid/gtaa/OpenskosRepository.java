@@ -503,6 +503,7 @@ public class OpenskosRepository implements GTAARepository {
                     if(NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
                         return Optional.empty();
                     }
+                    throw e;
                 case NOT_FOUND:
                     return Optional.empty();
                 default:
