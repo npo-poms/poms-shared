@@ -4,12 +4,13 @@
  */
 package nl.vpro.domain.user;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@ToString
 public class PortalEditor  implements OrganizationEditor<Portal> {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +32,9 @@ public class PortalEditor  implements OrganizationEditor<Portal> {
 
     @Column(nullable = false)
     @NotNull
-    private Boolean isActive = false;
+    @Setter
+    @Getter
+    private boolean active = false;
 
     protected PortalEditor() {
     }
@@ -42,17 +45,6 @@ public class PortalEditor  implements OrganizationEditor<Portal> {
         id = new PortalEditorIdentifier(editor.getPrincipalId(), portal.getId());
 
     }
-
-    @Override
-    public Boolean isActive() {
-        return isActive;
-    }
-
-    @Override
-    public void setActive(Boolean active) {
-        this.isActive = active;
-    }
-
 
     @Override
     public boolean equals(Object o) {

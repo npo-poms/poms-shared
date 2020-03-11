@@ -4,14 +4,14 @@
  */
 package nl.vpro.domain.user;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
-
 @Entity
+@ToString
 public class ThirdPartyEditor implements OrganizationEditor<ThirdParty> {
 
     private static final long serialVersionUID = 0L;
@@ -32,7 +32,9 @@ public class ThirdPartyEditor implements OrganizationEditor<ThirdParty> {
 
     @Column(nullable = false)
     @NotNull
-    private Boolean isActive = false;
+    @Getter
+    @Setter
+    private boolean active = false;
 
     protected ThirdPartyEditor() {
     }
@@ -43,17 +45,6 @@ public class ThirdPartyEditor implements OrganizationEditor<ThirdParty> {
         id = new ThirdPartyEditorIdentifier(editor.getPrincipalId(), thirdParty.getId());
 
     }
-
-    @Override
-    public Boolean isActive() {
-        return isActive;
-    }
-
-    @Override
-    public void setActive(Boolean active) {
-        this.isActive = active;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
