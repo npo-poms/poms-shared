@@ -26,7 +26,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @ToString(of = { "gtaaRecord" })
 @EqualsAndHashCode(of = { "gtaaRecord" }, callSuper = false)
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "topicType", propOrder = {"name", "scopeNotes"})
+@XmlType(name = "topicType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus"})
 public class Topic extends DomainObject implements MediaObjectOwnableListItem<Topic, Topics>, GTAARecordManaged {
 
     @ManyToOne(fetch = FetchType.LAZY)
