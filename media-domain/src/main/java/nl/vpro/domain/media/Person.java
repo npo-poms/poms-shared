@@ -26,7 +26,9 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "personType",
     propOrder = {
         "givenName",
-        "familyName"
+        "familyName",
+        "gtaaUri",
+        "gtaaStatus"
     })
 @JsonDeserialize
 @JsonPropertyOrder({

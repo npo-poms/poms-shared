@@ -399,8 +399,8 @@
           <xs:element name="givenName" type="xs:string" minOccurs="0"/>
           <xs:element name="familyName" type="xs:string" minOccurs="0"/>
         </xs:sequence>
-        <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
         <xs:attribute name="gtaaUri" type="xs:string"/>
+        <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

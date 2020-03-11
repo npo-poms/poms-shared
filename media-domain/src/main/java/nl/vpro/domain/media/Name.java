@@ -24,7 +24,7 @@ import nl.vpro.domain.media.gtaa.*;
 @ToString(of = { "gtaaRecord" }, callSuper = true)
 @EqualsAndHashCode(of = { "gtaaRecord" }, callSuper = false)
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "nameType", propOrder = {"name", "scopeNotes"})
+@XmlType(name = "nameType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus"})
 @JsonDeserialize
 @JsonPropertyOrder({
     "objectType",
