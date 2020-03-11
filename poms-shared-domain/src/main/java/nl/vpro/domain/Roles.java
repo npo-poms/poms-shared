@@ -1,5 +1,9 @@
 package nl.vpro.domain;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 /**
@@ -8,6 +12,7 @@ import java.util.*;
  * @author Michiel Meeuwissen
  * @since 5.4
  */
+@Slf4j
 public class Roles {
 
 
@@ -132,6 +137,24 @@ public class Roles {
     public static final String PAGES_PROCESS = "ROLE_PAGES_PROCESS";
 
     public static final String PAGES_SUPERPROCESS = "ROLE_PAGES_SUPERPROCESS";
+
+
+    public static final Set<String> RECOGNIZED;
+    static {
+        Set<String> recognized = new HashSet<>();
+        try {
+            for (Field f : Roles.class.getDeclaredFields()) {
+                if (Modifier.isStatic(f.getModifiers()) && Modifier.isPublic(f.getModifiers()) && f.getType().equals(String.class)) {
+                    recognized.add((String) f.get(null));
+
+                }
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        RECOGNIZED = Collections.unmodifiableSet(recognized);
+        log.info("Recognized roles: {}", RECOGNIZED);
+    }
 
 
 
