@@ -145,7 +145,10 @@ public class Roles {
         try {
             for (Field f : Roles.class.getDeclaredFields()) {
                 if (Modifier.isStatic(f.getModifiers()) && Modifier.isPublic(f.getModifiers()) && f.getType().equals(String.class)) {
-                    recognized.add((String) f.get(null));
+                    String value = (String) f.get(null);
+                    if (value.startsWith(ROLE) && value.length() > ROLE.length()) {
+                        recognized.add(value);
+                    }
 
                 }
             }
