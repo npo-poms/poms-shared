@@ -3,7 +3,7 @@ package nl.vpro.domain.media.update;
 import lombok.*;
 
 import java.time.Duration;
-import java.util.List;
+import java.util.*;
 import java.util.function.*;
 
 import org.slf4j.Logger;
@@ -112,6 +112,14 @@ public class AssemblageConfig {
 
     SimpleLogger logger;
 
+
+    public Set<OwnerType> getOwnerAndSimilar() {
+        Set<OwnerType> ownerTypes = new HashSet<>();
+        ownerTypes.add(owner);
+        ownerTypes.addAll(similarOwnerTypes);
+        return ownerTypes;
+    }
+
     public SimpleLogger loggerFor(Logger log) {
         if (logger == null) {
             return Slf4jSimpleLogger.of(log);
@@ -218,7 +226,7 @@ public class AssemblageConfig {
          * This sais that segments that have the configured owner, but are not present in the incoming program are to be deleted from the program to update.
          */
         public Builder deleteSegmentsForOwner() {
-            return segmentsForDeletion((s, a) -> s.getOwner() != null && s.getOwner() == a.getOwner());
+            return segmentsForDeletion((s, a) -> s.getOwner() != null && a.getOwnerAndSimilar().contains(s.getOwner()));
         }
         public Builder memberOfUpdateBoolean(boolean b) {
             return memberOfUpdate((new Always(b)));
