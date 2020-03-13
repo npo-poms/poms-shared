@@ -92,7 +92,7 @@ public class Editor extends AbstractUser {
     @MonotonicNonNull
     private Set<String> roles = null;
 
-    @Version
+    //@Version
     @Getter
     @XmlTransient
     protected int version = 0;
@@ -496,6 +496,12 @@ public class Editor extends AbstractUser {
         sb.append('}');
         return sb.toString();
     }
+
+    @PreUpdate
+    protected void preupdate() {
+        this.version++;
+    }
+
 
 
 
