@@ -497,11 +497,12 @@ public class Editor extends AbstractUser {
         return sb.toString();
     }
 
+    /**
+     * Disabled optimistic locking for now. Still increase version though as good as possible.
+     */
     @PreUpdate
     protected void preupdate() {
         this.version++;
     }
-
-
 
 }
