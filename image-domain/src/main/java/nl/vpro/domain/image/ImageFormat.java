@@ -26,7 +26,9 @@ public enum ImageFormat {
     RGB("image/x-rgb", "rgb"),
     TIF("image/tiff", "tif", "tiff"),
     XBM("image/x-xbitmap", "xbm"),
-    XPM("image/x-xpixmap", "xpm");
+    XPM("image/x-xpixmap", "xpm"),
+    WEBP("image/webp", "webp");
+
 
     static final Map<String, String> MAPPING = new HashMap<>();
     static {
