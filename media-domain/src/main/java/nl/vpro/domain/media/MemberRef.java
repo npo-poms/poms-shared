@@ -3,8 +3,8 @@ package nl.vpro.domain.media;
 import java.io.Serializable;
 import java.time.Instant;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -40,7 +40,6 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * this purpose and should never be persisted.
  *
  * @author roekoe
- * @version $Id$
  * @see MediaObject#memberOf
  * @see Program#episodeOf
  */
@@ -521,7 +520,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
             builder.append("mediaRef", getMediaRef());
         }
         if (getMember() != null) {
-            builder.append("member", getMember().getCorrelationId());
+            builder.append("member", getMember().getMainIdentifier().orElseGet(() -> getMember().toString()));
         }
         if (number != null) {
             builder.append("number", number);
