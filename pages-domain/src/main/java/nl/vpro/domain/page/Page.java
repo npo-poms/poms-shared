@@ -31,6 +31,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
  */
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement
 @XmlType(name = "pageType", propOrder =
     {
         "url",
