@@ -31,6 +31,7 @@ import nl.vpro.validation.NoHtml;
     namespace = Xmlns.MEDIA_NAMESPACE)
 @JsonPropertyOrder({"value", "owner", "type"})
 public class Description extends AbstractOwnedText<Description> implements Serializable, Child<MediaObject> {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -146,7 +147,6 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         return owner == desc.getOwner() && type == desc.getType() && parent.equals(desc.getParent());
 
     }
-
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         this.parent = (MediaObject) parent;

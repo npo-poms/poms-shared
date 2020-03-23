@@ -1,22 +1,14 @@
 package nl.vpro.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
@@ -29,7 +21,7 @@ import nl.vpro.domain.media.support.TextualType;
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText, Serializable {
+public abstract class AbstractOwnedText<T extends AbstractOwnedText<T>> implements  OwnedText, Serializable {
 
 
     @Column(nullable = false)
@@ -59,18 +51,14 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
         return result;
     }
 
-
     @Override
     public boolean equals(Object o) {
         throw new UnsupportedOperationException("Please implement equals!");
     }
+
     @Override
     @NonNull
     public final String toString() {
-        return get();
+        return type + ":" + get();
     }
-
-
-
-
 }
