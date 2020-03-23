@@ -7,6 +7,8 @@
 
   <xs:element name="genre" type="tns:genreType"/>
 
+  <xs:element name="page" type="tns:pageType"/>
+
   <xs:complexType name="pageType">
     <xs:sequence>
       <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
