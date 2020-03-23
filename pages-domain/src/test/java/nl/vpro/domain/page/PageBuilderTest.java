@@ -2,14 +2,10 @@ package nl.vpro.domain.page;
 
 
 import java.io.IOException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.Arrays;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.media.MediaClassificationService;
@@ -36,7 +32,7 @@ public class PageBuilderTest {
     @Test
     public void testSortDate() {
         Page page = PageBuilder.page(PageType.ARTICLE).publishStart(TEST_INSTANT).build();
-        String test = "<local:page publishStart=\"2016-04-18T12:00:00+02:00\" sortDate=\"2016-04-18T12:00:00+02:00\" type=\"ARTICLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\"/>\n";
+        String test = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pages:page xmlns:pages=\"urn:vpro:pages:2013\" type=\"ARTICLE\" publishStart=\"2016-04-18T12:00:00+02:00\" sortDate=\"2016-04-18T12:00:00+02:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\"/>\n";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
         assertThat(result.getPublishStartInstant()).isEqualTo(TEST_INSTANT);
 
@@ -112,13 +108,13 @@ public class PageBuilderTest {
     @Test
     public void testGenres() {
         Page page = PageBuilder.page(PageType.ARTICLE).url("http://www.vpro.nl").genres(classificationService.getTerm("3.0.1.1.4")).build();
-        String test = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<local:page url=\"http://www.vpro.nl\" type=\"ARTICLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:local=\"uri:local\">\n" +
+        String test =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pages:page xmlns:pages=\"urn:vpro:pages:2013\" url=\"http://www.vpro.nl\" type=\"ARTICLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <pages:genre displayName=\"Jeugd - Sport\" id=\"3.0.1.1.4\">\n" +
             "        <pages:term>Jeugd</pages:term>\n" +
             "        <pages:term>Sport</pages:term>\n" +
             "    </pages:genre>\n" +
-            "</local:page>";
+            "</pages:page>";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
         assertThat(result.getGenres()).hasSize(1);
         assertThat(result.getGenres().first().getTermId()).isEqualTo("3.0.1.1.4");
@@ -136,7 +132,7 @@ public class PageBuilderTest {
     @Test
     public void testLastPublished() {
         Page page = PageBuilder.page(PageType.ARTICLE).lastPublished(Instant.EPOCH).build();
-        String test = "<local:page xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\" lastPublished=\"1970-01-01T01:00:00+01:00\" type=\"ARTICLE\"/>";
+        String test = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pages:page xmlns:pages=\"urn:vpro:pages:2013\" type=\"ARTICLE\" lastPublished=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\"/>\n";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
         assertThat(result.getLastPublished()).isEqualTo(Instant.EPOCH);
     }
