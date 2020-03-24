@@ -48,7 +48,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  * for those suppliers are kept in parallel.
  * </p>
  * <p>
- *     TODO: I think we may elaborate a bit on image uniqueness. {@link #equals(Object)} implements what is said above. But why e.g. a differnet {@link #getOwner()} would not make a different image?
+ *     TODO: I think we may elaborate a bit on image uniqueness. {@link #equals(Object)} implements what is said above. But why e.g. a different {@link #getOwner()} would not make a different image?
  * </p>
  *
  * @author Roelof Jan Koekoek
