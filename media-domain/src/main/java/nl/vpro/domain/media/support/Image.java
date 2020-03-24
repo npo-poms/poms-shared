@@ -40,12 +40,15 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
  * <p>
- * A {@link MediaObject} can have more than one images which should differ in URL and
- * owner.
- * </p><p>
+ * A {@link MediaObject} can have more than one images. But among them  {@link #getImageUri()}/{@link #getType()} is unique.
+ * </p>
+ * <p>
  * The image owner describes an origin of the image. Several media suppliers provide
  * there own images. To prevent conflicts while updating for incoming data, images
  * for those suppliers are kept in parallel.
+ * </p>
+ * <p>
+ *     TODO: I think we may elaborate a bit on image uniqueness. {@link #equals(Object)} implements what is said above. But why e.g. a differnet {@link #getOwner()} would not make a different image?
  * </p>
  *
  * @author Roelof Jan Koekoek
@@ -483,6 +486,9 @@ public class Image extends PublishableObject<Image>
 
         return Objects.equals(imageUri, other.imageUri)
             && Objects.equals(type, other.type)
+            //&& Objects.equals(owner, other.owner)
+            //&& Objects.equals(title, other.title)
+            //&& Objects.equals(description, other.description)
             && (moParent == null || otherMoParent == null || Objects.equals(moParent, otherMoParent))
         ;
     }
