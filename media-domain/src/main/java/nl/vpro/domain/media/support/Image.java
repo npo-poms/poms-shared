@@ -130,7 +130,6 @@ public class Image extends PublishableObject<Image>
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE, required = true)
     private String title;
 
-    @SuppressWarnings("NullableProblems")
     @Column(name = "imageurl")
     @ImageURI
     @NotNull(groups = {PrePersistValidatorGroup.class})
@@ -159,13 +158,11 @@ public class Image extends PublishableObject<Image>
     @Setter
     private Integer height;
 
-    @SuppressWarnings("NullableProblems")
     @NoHtml
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
     private String credits;
 
-    @SuppressWarnings("NullableProblems")
     @URI()
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
@@ -173,7 +170,6 @@ public class Image extends PublishableObject<Image>
     @Setter
     private String source;
 
-    @SuppressWarnings("NullableProblems")
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @Size.List({
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
@@ -183,7 +179,6 @@ public class Image extends PublishableObject<Image>
     @Setter
     private String sourceName;
 
-    @SuppressWarnings("NullableProblems")
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
     @Embedded
@@ -368,7 +363,6 @@ public class Image extends PublishableObject<Image>
         return imageUri;
     }
 
-    @SuppressWarnings("ConstantConditions")
     public Image setImageUri(String uri) {
         this.imageUri = uri == null ? null : uri.trim();
         return this;
@@ -397,7 +391,6 @@ public class Image extends PublishableObject<Image>
         return credits;
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public void setCredits(String credits) {
         this.credits = !StringUtils.isBlank(credits) ? credits : null;
@@ -499,14 +492,13 @@ public class Image extends PublishableObject<Image>
         return image;
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public ChangeReport copyFrom(@NonNull Metadata<?> metadata) {
         ChangeReport change = Metadata.super.copyFrom(metadata);
         if (metadata.getImageUri() != null) {
             if (imageUri == null) {
                 setImageUri(metadata.getImageUri());
-                change.change();;
+                change.change();
             } else if (!Objects.equals(imageUri, metadata.getImageUri())) {
                 log.warn("Can't update imageUri of {} (from {})", this, metadata);
             }
@@ -514,7 +506,6 @@ public class Image extends PublishableObject<Image>
         return change;
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : (imageUri == null ? 0 : imageUri.hashCode());
