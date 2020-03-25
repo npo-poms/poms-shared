@@ -1,13 +1,9 @@
 package nl.vpro.domain.api.page;
 
-import java.io.IOException;
 import java.time.Instant;
-import java.util.Collections;
-import java.util.Date;
-import java.util.TreeSet;
+import java.util.*;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.classification.Term;
@@ -49,11 +45,13 @@ public class PageSearchTest {
     public void testGetBroadcasters() {
         PageSearch in = new PageSearch();
         in.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("TROS")));
-        PageSearch out = JAXBTestUtil.roundTrip(in,
-            "<api:broadcasters match=\"MUST\">\n" +
+        PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <api:broadcasters match=\"MUST\">\n" +
                 "        <api:matcher>VPRO</api:matcher>\n" +
                 "        <api:matcher>TROS</api:matcher>\n" +
-                "    </api:broadcasters>");
+                "    </api:broadcasters>\n" +
+                "</local:pageSearch>");
         assertThat(out.getBroadcasters().asList()).containsExactly(new TextMatcher("VPRO"), new TextMatcher("TROS"));
     }
 
@@ -72,11 +70,13 @@ public class PageSearchTest {
     public void testGetTypes() {
         PageSearch in = new PageSearch();
         in.setTypes(new TextMatcherList(new TextMatcher("ARTICLE"), new TextMatcher("PLAYER")));
-        PageSearch out = JAXBTestUtil.roundTrip(in,
-            "<api:types match=\"MUST\">\n" +
+        PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <api:types match=\"MUST\">\n" +
                 "        <api:matcher>ARTICLE</api:matcher>\n" +
                 "        <api:matcher>PLAYER</api:matcher>\n" +
-                "    </api:types>");
+                "    </api:types>\n" +
+                "</local:pageSearch>\n");
         assertThat(out.getTypes().asList()).containsExactly(new TextMatcher(PageType.ARTICLE.name()), new TextMatcher(PageType.PLAYER.name()));
     }
 
@@ -96,10 +96,12 @@ public class PageSearchTest {
     public void testGetPortals() {
         PageSearch in = new PageSearch();
         in.setPortals(new TextMatcherList(new TextMatcher("WETENSCHAP24")));
-        PageSearch out = JAXBTestUtil.roundTrip(in,
-            "<api:portals match=\"MUST\">\n" +
+        PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <api:portals match=\"MUST\">\n" +
                 "        <api:matcher>WETENSCHAP24</api:matcher>\n" +
-                "    </api:portals>");
+                "    </api:portals>\n" +
+                "</local:pageSearch>");
         assertThat(out.getPortals().asList()).containsExactly(new TextMatcher("WETENSCHAP24"));
     }
 
@@ -134,10 +136,12 @@ public class PageSearchTest {
     public void testGetGenres() {
         PageSearch in = new PageSearch();
         in.setGenres(new TextMatcherList(new TextMatcher("3.0.1.1")));
-        PageSearch out = JAXBTestUtil.roundTrip(in,
-            "<api:genres match=\"MUST\">\n" +
+        PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <api:genres match=\"MUST\">\n" +
                 "        <api:matcher>3.0.1.1</api:matcher>\n" +
-                "    </api:genres>");
+                "    </api:genres>\n" +
+                "</local:pageSearch>");
         assertThat(out.getGenres().asList()).containsExactly(new TextMatcher("3.0.1.1"));
     }
 
@@ -195,21 +199,23 @@ public class PageSearchTest {
     @Test
     public void testGetSortDate() {
         PageSearch in = new PageSearch();
-        in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(new Date(100), new Date(200), true)));
-        PageSearch out = JAXBTestUtil.roundTrip(in,
-            "<api:sortDates match=\"MUST\">\n" +
+        in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), true)));
+        PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <api:sortDates match=\"MUST\">\n" +
                 "        <api:matcher inclusiveEnd=\"true\">\n" +
                 "            <api:begin>1970-01-01T01:00:00.100+01:00</api:begin>\n" +
                 "            <api:end>1970-01-01T01:00:00.200+01:00</api:end>\n" +
                 "        </api:matcher>\n" +
-                "    </api:sortDates>");
-        assertThat(out.getSortDates().asList().get(0)).isEqualTo(new DateRangeMatcher(new Date(100), new Date(200), true));
+                "    </api:sortDates>\n" +
+                "</local:pageSearch>");
+        assertThat(out.getSortDates().asList().get(0)).isEqualTo(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), true));
     }
 
     @Test
     public void testApplySortDate() {
         PageSearch in = new PageSearch();
-        in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(new Date(100), new Date(200), false)));
+        in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), false)));
 
         Page object = new Page(PageType.ARTICLE);
         assertThat(in.test(object)).isFalse();
