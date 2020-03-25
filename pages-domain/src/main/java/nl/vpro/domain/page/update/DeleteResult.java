@@ -63,10 +63,15 @@ public class DeleteResult {
             .future(this.future.thenApply((v) -> {
                 try {
                     return result.getFuture().get();
-                } catch (ExecutionException | InterruptedException iae) {
-                    log.error(iae.getMessage());
+                } catch (ExecutionException ee) {
+                    log.error(ee.getMessage());
+                    return null;
+                } catch (InterruptedException iae) {
+                    log.info(iae.getMessage());
+                    Thread.currentThread().interrupt();
                     return null;
                 }
+
             }))
             .build();
     }
