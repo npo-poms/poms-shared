@@ -6,10 +6,7 @@ package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
+import java.time.temporal.*;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +15,8 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -76,8 +75,8 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
         return new AuthorizedDuration(duration);
     }
 
-
-    public static Duration duration(AuthorizedDuration duration) {
+    @Nullable
+    public static Duration duration(@Nullable AuthorizedDuration duration) {
         if (duration == null) {
             return null;
         }
@@ -94,8 +93,8 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
         }
         return new Duration(value);
     }*/
-
-    public static AuthorizedDuration authorized(java.time.Duration duration) {
+    @Nullable
+    public static AuthorizedDuration authorized(java.time.@Nullable Duration duration) {
         return duration == null ? null : new AuthorizedDuration(duration, true);
     }
 
@@ -103,7 +102,8 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
     }
 
     @Deprecated
-    public AuthorizedDuration(Date value) {
+    @Nullable
+    public AuthorizedDuration(@Nullable Date value) {
         this.duration = value == null ? null : java.time.Duration.of(value.toInstant().toEpochMilli(), ChronoUnit.MILLIS);
     }
 
@@ -128,7 +128,9 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
         this(source.duration, source.authorized);
     }
 
-    public static AuthorizedDuration copy(AuthorizedDuration source) {
+    @Nullable
+    public static AuthorizedDuration copy(@Nullable
+AuthorizedDuration source) {
         if(source == null) {
             return null;
         }
@@ -198,12 +200,13 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
         return this.duration + (authorized ? " (authorized)" : " (not authorized)");
     }
 
-    public static java.time.Duration get(AuthorizedDuration dur) {
+    public static java.time.@Nullable Duration get(@Nullable AuthorizedDuration dur) {
         return dur == null ? null : dur.get();
     }
 
+
     @Deprecated
-    public static java.util.Date asDate(AuthorizedDuration dur) {
+    public static java.util.@Nullable Date asDate(@Nullable AuthorizedDuration dur) {
         if (dur == null) {
             return null;
         }

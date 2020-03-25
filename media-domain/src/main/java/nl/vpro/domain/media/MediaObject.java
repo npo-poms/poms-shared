@@ -258,6 +258,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         flags = {
             Pattern.Flag.CASE_INSENSITIVE }, message = "{nl.vpro.constraints.mid}")
     @NotNull(groups = PrePersistValidatorGroup.class)
+    @Nullable
     protected String mid;
 
     //@Version
@@ -388,6 +389,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
+    @Nullable
     protected AVType avType = null;
 
     @OneToOne(orphanRemoval = true, cascade = {ALL})
@@ -898,6 +900,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return false;
     }
 
+    @Nullable
     public PortalRestriction findPortalRestriction(Long id) {
         if (portalRestrictions != null) {
             for (PortalRestriction portalRestriction : portalRestrictions) {
@@ -937,6 +940,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         this.geoRestrictions = geoRestrictions;
     }
 
+    @Nullable
     public GeoRestriction findGeoRestriction(Long id) {
         if (geoRestrictions != null) {
             for (GeoRestriction geoRestriction : geoRestrictions) {
@@ -1324,6 +1328,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     @XmlAttribute(name = "avType", required = true)
     @JsonProperty("avType")
+    @Nullable
     public AVType getAVType() {
         return avType;
     }
@@ -1397,6 +1402,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     @Deprecated
+    @Nullable
     public Date getDurationAsDate() {
         return AuthorizedDuration.asDate(duration);
     }
@@ -1513,6 +1519,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return this;
     }
 
+    @Nullable
     public Person findPerson(Person person) {
         if (credits == null) {
             return null;
@@ -1527,6 +1534,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Credits findCredit(Long id) {
         if (credits == null) {
             return null;
@@ -1541,6 +1549,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Person findPerson(Long id) {
         if (credits == null) {
             return null;
@@ -1555,6 +1564,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Name findName(Long id) {
         if (credits == null) {
             return null;
@@ -1662,6 +1672,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public MemberRef findMemberOfRef(MediaObject owner) {
         for (MemberRef memberRef : memberOf) {
             if (owner.equals(memberRef.getGroup())) {
@@ -1671,6 +1682,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public MemberRef findMemberOfRef(MediaObject owner, Integer number) {
         if (memberOf == null) {
             return null;
@@ -1828,6 +1840,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         this.email = updateList(this.email, email);
     }
 
+    @Nullable
     public String getMainEmail() {
         return getFromList(email);
     }
@@ -2200,6 +2213,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         }
     }
 
+    @Nullable
     public Location getLocation(Location location) {
         if (locations != null) {
             for (Location existing : locations) {
@@ -2211,6 +2225,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Location findLocation(Long locationId) {
         if (locations != null && locationId != null) {
             for (Location location : locations) {
@@ -2222,6 +2237,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Location findLocation(String url) {
         if (locations != null && StringUtils.isNotBlank(url)) {
             for (Location location : locations) {
@@ -2233,6 +2249,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Location findLocation(String url, OwnerType owner) {
         if (locations != null && StringUtils.isNotBlank(url) && owner != null) {
             for (Location location : locations) {
@@ -2355,6 +2372,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return this;
     }
 
+    @Nullable
     public Relation findRelation(Relation relation) {
         if (relations != null) {
             for (Relation existing : relations) {
@@ -2367,6 +2385,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Relation findRelation(Long id) {
         if (relations != null && id != null) {
             for (Relation relation : relations) {
@@ -2375,7 +2394,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                 }
             }
         }
-
         return null;
     }
 
@@ -2415,6 +2433,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         this.images = images;
     }
 
+    @Nullable
     public Image getImage(Image image) {
         if (images != null) {
             for (Image existing : getImages()) {
@@ -2426,14 +2445,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Image getImage(int index) {
-        if (images == null || index >= images.size()) {
+        if (images == null || index >= images.size() || index < 0) {
             return null;
         }
 
         return images.get(index);
     }
 
+    @Nullable
     public Image getImage(ImageType type) {
         if (images != null) {
             for (Image image : images) {
@@ -2446,6 +2467,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Image getMainImage() {
         if (images != null && !images.isEmpty()) {
             return images.get(0);
@@ -2470,8 +2492,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return getImages().stream().filter(i -> owner.equals(i.getOwner())).collect(Collectors.toList());
     }
 
-
-
+    @Nullable
     public Image findImage(ImageType type) {
         for (Image image : getImages()) {
             if (type.equals(image.getType())) {
@@ -2482,6 +2503,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Image findImage(Long id) {
         if (images != null && id != null) {
             for (Image image : getImages()) {
@@ -2495,6 +2517,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
+    @Nullable
     public Image findImage(String url, OwnerType owner) {
         if (images != null) {
             for (Image image : getImages()) {
@@ -2647,7 +2670,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
      * in overrides (as in {@link Group})
      */
     @JsonIgnore
-    final void setSortDate(Date date) {
+    final void setSortDate(@Nullable Date date) {
         this.setSortInstant(DateUtils.toInstant(date));
     }
 
@@ -2655,7 +2678,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
      * Method is needed for unmarshalling. It does nothing. It may do something
      * in overrides (as in {@link Group})
      */
-    void setSortInstant(Instant date) {
+    void setSortInstant(@Nullable Instant date) {
         this.sortInstant = date;
         this.sortDateValid = true;
         this.sortDateInvalidatable = false;
@@ -2673,6 +2696,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return mergedTo != null || mergedToRef != null;
     }
 
+    @Nullable
     public MediaObject getMergedTo() {
         return mergedTo;
     }
@@ -2762,6 +2786,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         } else {
             return super.equals(o);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return (id == null && mid != null) ? mid.hashCode() : super.hashCode();
     }
 
     private boolean equalsOnMid(MediaObject o) {

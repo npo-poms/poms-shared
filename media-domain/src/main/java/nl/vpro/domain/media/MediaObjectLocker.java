@@ -326,6 +326,7 @@ public class MediaObjectLocker {
                 }
             } catch (InterruptedException e) {
                 log.error(e.getMessage(), e);
+                Thread.currentThread().interrupt();
                 return Optional.empty();
 
             }

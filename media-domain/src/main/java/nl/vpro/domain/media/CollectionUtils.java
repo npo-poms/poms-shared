@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import java.util.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
@@ -15,7 +16,7 @@ class CollectionUtils {
      * Given a collection of values, and a list of object to update, updates the list, optionally creating one first.
      *
      */
-    static <T> List<T> updateList(List<T> toUpdate, Collection<? extends T> values) {
+    static <T> List<T> updateList(@Nullable List<T> toUpdate, @Nullable Collection<? extends T> values) {
         if (toUpdate != null && toUpdate == values) {
             return toUpdate;
         }
@@ -61,7 +62,8 @@ class CollectionUtils {
         return toUpdate;
     }
 
-    protected static <E> E getFromList(List<E> list) {
+    @Nullable
+    protected static <E> E getFromList(@Nullable List<@NonNull E> list) {
         if (list != null && list.size() > 0) {
             return list.get(0);
         } else {
@@ -76,6 +78,7 @@ class CollectionUtils {
         return set;
     }
 
+    @Nullable
     public static <P extends Comparable<P>> SortedSet<P> createIfNullUnlessNull(@Nullable  SortedSet<P> set, @Nullable  Object check) {
         if (check == null) {
             return null;
