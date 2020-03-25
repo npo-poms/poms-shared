@@ -1,37 +1,34 @@
 package nl.vpro.domain;
 
+import lombok.Getter;
+
 import java.time.Instant;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.3
  */
 public class BasicEmbargo implements MutableEmbargo<BasicEmbargo> {
+    @Nullable
+    @Getter
     private Instant publishStartInstant;
+    @Nullable
+    @Getter
     private Instant publishStopInstant;
 
-    public BasicEmbargo(Instant publishStartInstant, Instant publishStopInstant) {
+    public BasicEmbargo(@Nullable Instant publishStartInstant, @Nullable Instant publishStopInstant) {
         this.publishStartInstant = publishStartInstant;
         this.publishStopInstant = publishStopInstant;
     }
 
-    @Override
-    public Instant getPublishStartInstant() {
-        return publishStartInstant;
-    }
-
     @NonNull
     @Override
-    public BasicEmbargo setPublishStartInstant(Instant publishStartInstant) {
+    public BasicEmbargo setPublishStartInstant(@Nullable Instant publishStartInstant) {
         this.publishStartInstant = publishStartInstant;
         return this;
-    }
-
-    @Override
-    public Instant getPublishStopInstant() {
-        return publishStopInstant;
     }
 
     @NonNull
@@ -41,10 +38,8 @@ public class BasicEmbargo implements MutableEmbargo<BasicEmbargo> {
         return this;
     }
 
-
     @Override
     public String toString() {
         return Embargos.toString(this);
-
     }
 }

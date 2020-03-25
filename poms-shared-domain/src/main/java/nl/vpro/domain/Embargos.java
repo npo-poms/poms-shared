@@ -17,7 +17,7 @@ public class Embargos {
     private static final String PUBLISH_START = "publishstart";
     private static final String PUBLISH_STOP = "publishstop";
 
-    public static ChangeReport copy(Embargo from, MutableEmbargo to) {
+    public static ChangeReport copy(Embargo from, MutableEmbargo<?> to) {
         ChangeReport change = new ChangeReport();
 
         if (!Objects.equals(to.getPublishStartInstant(), from.getPublishStartInstant())) {
@@ -31,7 +31,7 @@ public class Embargos {
         return change;
     }
 
-    public static ChangeReport copyIfTargetUnset(Embargo from, MutableEmbargo to) {
+    public static ChangeReport copyIfTargetUnset(Embargo from, MutableEmbargo<?> to) {
         ChangeReport change = new ChangeReport();
         if (to.getPublishStartInstant() == null && !Objects.equals(to.getPublishStartInstant(), from.getPublishStartInstant())) {
             to.setPublishStartInstant(from.getPublishStartInstant());
@@ -44,7 +44,7 @@ public class Embargos {
         return change;
     }
 
-    public static ChangeReport copyIfSourceSet(Embargo from, MutableEmbargo to) {
+    public static ChangeReport copyIfSourceSet(Embargo from, MutableEmbargo<?> to) {
         ChangeReport change = new ChangeReport();
         if (from.getPublishStartInstant() != null && ! Objects.equals(to.getPublishStartInstant(), from.getPublishStartInstant())) {
             to.setPublishStartInstant(from.getPublishStartInstant());
@@ -60,7 +60,7 @@ public class Embargos {
     /**
      * Takes from both the start and stop of the two embargo's the least restrictive one and copies them to the second.
      */
-    public static ChangeReport copyIfMoreRestricted(Embargo from, MutableEmbargo to) {
+    public static ChangeReport copyIfMoreRestricted(Embargo from, MutableEmbargo<?> to) {
         ChangeReport change = new ChangeReport();
         if (from.getPublishStartInstant() != null &&
             (to.getPublishStartInstant() == null || to.getPublishStartInstant().isBefore(from.getPublishStartInstant()))
@@ -84,7 +84,7 @@ public class Embargos {
      *
      * If they were connected, the result is the union.
      */
-     public static ChangeReport copyIfLessRestricted(Embargo from, MutableEmbargo to) {
+     public static ChangeReport copyIfLessRestricted(Embargo from, MutableEmbargo<?> to) {
          ChangeReport change = new ChangeReport();
 
          if (from.getPublishStartInstant() == null ||
@@ -110,7 +110,7 @@ public class Embargos {
      *
      * If they were connected, the result is the union.
      */
-     public static ChangeReport copyIfLessRestrictedOrTargetUnset(Embargo from, MutableEmbargo to) {
+     public static ChangeReport copyIfLessRestrictedOrTargetUnset(Embargo from, MutableEmbargo<?> to) {
          ChangeReport change = new ChangeReport();
          if (from.getPublishStartInstant() == null || to.getPublishStartInstant() == null || to.getPublishStartInstant().isAfter(from.getPublishStartInstant())) {
              to.setPublishStartInstant(from.getPublishStartInstant());
@@ -123,7 +123,7 @@ public class Embargos {
          return change;
     }
 
-    public static Embargo readyOnly(final MutableEmbargo embargo) {
+    public static Embargo readyOnly(final MutableEmbargo<?> embargo) {
         return readyOnly(
             embargo.getPublishStartInstant(),
             embargo.getPublishStopInstant()
