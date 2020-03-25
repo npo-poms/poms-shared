@@ -26,12 +26,14 @@ public interface Embargo {
             if (getPublishStartInstant() == null) {
                 return Range.all();
             } else {
+                return Range.atLeast(getPublishStartInstant());
+            }
+        } else {
+            if (getPublishStartInstant() != null) {
+                return Range.closedOpen(getPublishStartInstant(), getPublishStopInstant());
+            } else {
                 return Range.lessThan(getPublishStopInstant());
             }
-        } else if (getPublishStopInstant() == null) {
-            return Range.atLeast(getPublishStartInstant());
-        } else {
-            return Range.closedOpen(getPublishStartInstant(), getPublishStopInstant());
         }
 
     }
