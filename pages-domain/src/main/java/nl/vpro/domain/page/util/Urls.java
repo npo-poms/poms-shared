@@ -13,6 +13,8 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.*;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.domain.page.Portal;
 import nl.vpro.domain.page.Section;
 
@@ -22,7 +24,11 @@ import nl.vpro.domain.page.Section;
 @Slf4j
 public class Urls {
 
-    public static String normalize(final String taintedURI) {
+    private Urls() {
+    }
+
+    @Nullable
+    public static String normalize(@Nullable final String taintedURI) {
         if (taintedURI == null) {
             return null;
         }
@@ -50,8 +56,8 @@ public class Urls {
         final SortedMap<String, String> params = createParameterMap(uri.getQuery());
 
         final String ref = uri.getFragment();
-        if(ref != null && ref.startsWith("!/") && ref.length() > 1) {
-            params.put("_escaped_fragment_", ref.substring(1, ref.length()));
+        if(ref != null && ref.startsWith("!/")) {
+            params.put("_escaped_fragment_", ref.substring(1));
         }
 
         final int port = uri.getPort();

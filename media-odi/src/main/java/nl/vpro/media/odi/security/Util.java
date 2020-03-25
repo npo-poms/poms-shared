@@ -7,10 +7,7 @@ package nl.vpro.media.odi.security;
 import java.security.MessageDigest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -19,10 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 
-import static nl.vpro.media.odi.security.OdiAuthentication.X_NPO_DATE;
-import static nl.vpro.media.odi.security.OdiAuthentication.X_NPO_MID;
-import static nl.vpro.media.odi.security.OdiAuthentication.X_NPO_URL;
-import static nl.vpro.media.odi.security.OdiAuthentication.X_ORIGIN;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static nl.vpro.media.odi.security.OdiAuthentication.*;
 
 /**
  * @author Roelof Jan Koekoek
@@ -32,10 +27,13 @@ class Util {
 
     private static final String RFC822 = "EEE, dd MMM yyyy HH:mm:ss z";
 
+    private Util() {
+    }
+
     public static String sha256(String input) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(input.getBytes("UTF-8"));
+            byte[] hash = digest.digest(input.getBytes(UTF_8));
             return toString(hash);
         } catch(Exception ex) {
             throw new RuntimeException(ex);
@@ -45,7 +43,7 @@ class Util {
     public static String hmacSHA256(String privateKey, String data) {
         try {
             Mac hmacSHA256 = Mac.getInstance("HmacSHA256");
-            SecretKeySpec keySpec = new SecretKeySpec(privateKey.getBytes("UTF-8"), "HmacSHA256");
+            SecretKeySpec keySpec = new SecretKeySpec(privateKey.getBytes(UTF_8), "HmacSHA256");
             hmacSHA256.init(keySpec);
             return Base64.encodeBase64String(hmacSHA256.doFinal(data.getBytes())).trim();
         } catch(Exception e) {
@@ -97,11 +95,11 @@ class Util {
     }
 
     private static String toString(byte[] hash) {
-        StringBuffer hexString = new StringBuffer();
+        StringBuilder hexString = new StringBuilder();
 
-        for(int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
                 hexString.append('0');
             }
             hexString.append(hex);

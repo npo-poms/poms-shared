@@ -11,8 +11,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 @Slf4j
 public class ImageUrlServiceHolder {
 
-
     private static ImageUrlService instance;
+
+    private ImageUrlServiceHolder() {
+    }
 
     @NonNull
     public static ImageUrlService getInstance() {

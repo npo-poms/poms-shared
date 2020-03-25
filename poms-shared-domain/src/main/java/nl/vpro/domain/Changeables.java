@@ -15,6 +15,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 @SuppressWarnings("JavadocReference")
 public class Changeables {
 
+    private Changeables() {
+    }
+
     public static void fillFor(@NonNull Changeable accountable, @NonNull Instant now) {
         accountable.setLastModifiedInstant(now);
         if (accountable.getCreationInstant() == null) {

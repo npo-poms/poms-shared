@@ -19,6 +19,10 @@ import nl.vpro.domain.media.AgeRating;
  */
 @Slf4j
 public class AgeRatingToString {
+
+    private AgeRatingToString() {
+    }
+
     public static class Serializer extends JsonSerializer<AgeRating> {
 
         @Override
@@ -29,7 +33,6 @@ public class AgeRatingToString {
             } else {
                 jgen.writeString(text);
             }
-
         }
     }
 

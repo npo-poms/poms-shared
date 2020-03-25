@@ -29,6 +29,9 @@ import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
 @Slf4j
 public class SubtitlesUtil {
 
+    private SubtitlesUtil() {
+    }
+
 
     public static Subtitles tt888(String parent, Duration offset, Locale locale, InputStream input) throws IOException {
         StringWriter w = new StringWriter();

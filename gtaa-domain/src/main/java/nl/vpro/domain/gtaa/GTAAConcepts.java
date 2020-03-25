@@ -19,6 +19,8 @@ public class GTAAConcepts {
     static {
 
     }
+    private GTAAConcepts() {
+    }
 
     public static GTAAConcept toConcept(Description d) {
         return (GTAAConcept) Scheme.ofUrl(d.getInScheme().getResource()).map(s -> {

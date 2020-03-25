@@ -14,6 +14,9 @@ import java.util.function.BiFunction;
  */
 public class ScheduleEvents {
 
+    private ScheduleEvents() {
+    }
+
     /**
      * Equals to events on their real start time. Returns true when:
      * <p/>

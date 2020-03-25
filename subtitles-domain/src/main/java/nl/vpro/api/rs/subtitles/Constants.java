@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
  */
 public class Constants {
 
+    private Constants() {
+    }
 
     public static final String VTT_CHARSET = "UTF-8";
     public static final String VTT = "text/vtt";

@@ -17,6 +17,9 @@ public class Embargos {
     private static final String PUBLISH_START = "publishstart";
     private static final String PUBLISH_STOP = "publishstop";
 
+    private Embargos() {
+    }
+
     public static ChangeReport copy(Embargo from, MutableEmbargo<?> to) {
         ChangeReport change = new ChangeReport();
 

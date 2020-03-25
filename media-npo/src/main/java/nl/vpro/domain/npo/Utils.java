@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
@@ -22,13 +23,18 @@ import nl.vpro.xml.util.XmlUtils;
  */
 public class Utils {
 
+    private Utils() {
+    }
+
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam"); // Restrictions seem to be shipped _without_ explicit timezones.
 
-    public static Instant getStart(Tijdsbeperking tijdsbeperking) {
+    @Nullable
+    public static Instant getStart(@Nullable Tijdsbeperking tijdsbeperking) {
         return tijdsbeperking == null ? null : XmlUtils.toInstant(ZONE_ID, tijdsbeperking.getStarttijd());
     }
 
-    public static Instant getEind(Tijdsbeperking tijdsbeperking) {
+    @Nullable
+    public static Instant getEind(@Nullable Tijdsbeperking tijdsbeperking) {
         return tijdsbeperking == null ? null : XmlUtils.toInstant(ZONE_ID, tijdsbeperking.getEindtijd());
     }
 

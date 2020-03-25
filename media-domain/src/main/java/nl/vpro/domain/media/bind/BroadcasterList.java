@@ -17,6 +17,9 @@ import nl.vpro.jackson2.Jackson2Mapper;
  */
 public class BroadcasterList {
 
+    private BroadcasterList() {
+    }
+
     public static class Serializer extends AbstractList.Serializer<Broadcaster> {
 
         @Override

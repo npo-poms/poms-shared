@@ -16,6 +16,9 @@ import static nl.vpro.domain.Changeables.setProperty;
 @SuppressWarnings("JavadocReference")
 public class Accountables {
 
+    private Accountables() {
+    }
+
     public static void fillFor(
         @NonNull Accountable accountable,
         @NonNull Instant now,

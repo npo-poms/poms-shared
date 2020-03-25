@@ -23,6 +23,9 @@ import nl.vpro.domain.api.media.TitleSearch;
  */
 public class TitleFacetListJson {
 
+    private TitleFacetListJson() {
+    }
+
     public static class Serializer extends JsonSerializer<TitleFacetList> {
         @Override
         public void serialize(TitleFacetList facets, JsonGenerator jgen, SerializerProvider provider) throws IOException {

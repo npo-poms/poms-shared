@@ -20,6 +20,9 @@ import com.google.common.net.InetAddresses;
 public class InetAddressUtil {
     private static final Pattern PRIVATE_IP_PATTERN = Pattern.compile("(^127\\.)|(^10\\.)|(^172\\.1[6-9]\\.)|(^172\\.2[0-9]\\.)|(^172\\.3[0-1]\\.)|(^192\\.168\\.)");
 
+    private InetAddressUtil() {
+    }
+
     public static boolean isValid(String addr) {
         try {
             InetAddresses.forUriString(addr);

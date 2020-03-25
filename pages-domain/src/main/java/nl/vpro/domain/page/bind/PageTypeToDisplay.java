@@ -21,6 +21,9 @@ import nl.vpro.domain.page.PageType;
  */
 public class PageTypeToDisplay {
 
+    private PageTypeToDisplay() {
+    }
+
     public static class Serializer extends JsonSerializer<PageType> {
 
         @Override

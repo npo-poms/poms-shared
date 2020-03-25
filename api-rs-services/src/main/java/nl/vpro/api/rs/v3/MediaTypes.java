@@ -12,6 +12,9 @@ import com.google.common.collect.ImmutableMap;
  */
 public class MediaTypes {
 
+    private MediaTypes() {
+    }
+
     private static final Map<String, String> PARAMS = ImmutableMap.of("charset", "utf-8");
     public static final MediaType JSON = new MediaType("application", "json", PARAMS);
 

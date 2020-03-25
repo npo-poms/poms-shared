@@ -9,11 +9,15 @@ import com.fasterxml.jackson.databind.*;
 
 
 /**
- * @see  {@link http://jira.codehaus.org/browse/JACKSON-920}
+ * @see  <a href="http://jira.codehaus.org/browse/JACKSON-920">jackson</a>
  * @deprecated Jackson2Mapper arranged it with a module in shared-jackson2 >= 0.21
  */
 @Deprecated
 public class DateToJsonTimestamp {
+
+    private DateToJsonTimestamp() {
+
+    }
 
     public static class Serializer extends JsonSerializer<Date> {
 

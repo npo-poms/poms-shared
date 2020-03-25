@@ -8,6 +8,9 @@ import java.time.ZoneId;
  */
 public class TemporalAmountConstants {
 
+    private TemporalAmountConstants() {
+    }
+
     public static final String TIMEZONE = "CET";
 
     public static final ZoneId ZONE = ZoneId.of(TIMEZONE);

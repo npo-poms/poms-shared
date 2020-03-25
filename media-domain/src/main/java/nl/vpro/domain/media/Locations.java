@@ -27,6 +27,9 @@ import nl.vpro.domain.media.support.OwnerType;
 @Slf4j
 public class Locations {
 
+    private Locations() {
+    }
+
 
     public static Program realize(
         @NonNull Program program,

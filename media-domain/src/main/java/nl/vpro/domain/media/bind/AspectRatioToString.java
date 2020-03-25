@@ -1,21 +1,22 @@
 package nl.vpro.domain.media.bind;
 
-import nl.vpro.domain.media.AspectRatio;
-
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.*;
+
+import nl.vpro.domain.media.AspectRatio;
 
 /**
  * @author Michiel Meeuwissen
  * @since 2.0
  */
 public class AspectRatioToString {
+
+    private AspectRatioToString() {
+    }
+
     public static class Serializer extends JsonSerializer<AspectRatio> {
 
         @Override

@@ -21,6 +21,8 @@ import nl.vpro.domain.media.MediaObject;
 @Slf4j
 public class MediaObjectOwnableLists {
 
+    private MediaObjectOwnableLists() {
+    }
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
     boolean addValue(@NonNull Set<P> set,

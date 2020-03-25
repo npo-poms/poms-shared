@@ -21,6 +21,9 @@ public class Images {
 
     public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
 
+    private Images() {
+    }
+
     /**
      * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
      * obtain a base url for an image host.

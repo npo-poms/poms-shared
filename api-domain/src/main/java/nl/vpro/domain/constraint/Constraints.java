@@ -6,20 +6,22 @@ package nl.vpro.domain.constraint;
  */
 public class Constraints {
 
+    private Constraints() {
+    }
 
     @SuppressWarnings("unchecked")
     public static <T> Constraint<T> alwaysTrue() {
-        return Constraints.AlwaysTrue.INSTANCE;
+        return (Constraint<T>) AlwaysTrue.INSTANCE;
     }
 
     @SuppressWarnings("unchecked")
     public static <T> Constraint<T> alwaysFalse() {
-        return Constraints.AlwaysFalse.INSTANCE;
+        return (Constraint<T>) AlwaysFalse.INSTANCE;
     }
 
 
     public static class AlwaysTrue<T> implements Constraint<T> {
-        private static AlwaysTrue INSTANCE = new AlwaysTrue();
+        private static final AlwaysTrue<?> INSTANCE = new AlwaysTrue<>();
 
         @Override
         public boolean test(T mediaObject) {
@@ -32,7 +34,7 @@ public class Constraints {
     }
 
     public static class AlwaysFalse<T> implements Constraint<T> {
-        private static AlwaysFalse INSTANCE = new AlwaysFalse();
+        private static final AlwaysFalse<?> INSTANCE = new AlwaysFalse<>();
 
         @Override
         public boolean test(T mediaObject) {

@@ -20,6 +20,8 @@ import nl.vpro.domain.api.page.RelationSearch;
  * @since 3.0
  */
 public class RelationFacetListJson {
+    private RelationFacetListJson() {
+    }
 
     public static class Serializer extends JsonSerializer<RelationFacetList> {
         @Override

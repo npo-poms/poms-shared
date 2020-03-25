@@ -18,6 +18,10 @@ import nl.vpro.jackson2.Jackson2Mapper;
  */
 @Slf4j
 public class CountryCodeList {
+
+    private CountryCodeList() {
+    }
+
     public static class Serializer extends AbstractList.Serializer<Region> {
 
         @Override

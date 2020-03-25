@@ -26,6 +26,10 @@ public class VersionService {
 
     private static IntegerVersion integerVersion;
 
+    private VersionService() {
+
+    }
+
     public static String version() {
         if (version == null) {
             try {

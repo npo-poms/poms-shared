@@ -14,6 +14,9 @@ import javax.validation.Validator;
 @Slf4j
 public class Editors {
 
+    private Editors() {
+    }
+
     private static final Validator VALIDATOR;
 
     static {

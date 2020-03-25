@@ -23,6 +23,9 @@ import nl.vpro.domain.page.Crid;
 @Deprecated
 public class CridToString {
 
+    private CridToString() {
+    }
+
     public static class Serializer extends JsonSerializer<Crid> {
 
         @Override

@@ -12,7 +12,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  */
 public class DomainObjects {
 
-
+    private DomainObjects() {
+    }
 
     public static String getCanonicalFilePath(@NonNull DomainObject domain) {
         String id = String.valueOf(domain.getId());

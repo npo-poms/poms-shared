@@ -16,6 +16,10 @@ import nl.vpro.jackson2.Jackson2Mapper;
  * @since 5.12
  */
 public class LanguageList {
+
+    private LanguageList() {
+    }
+
     public static class Serializer extends AbstractList.Serializer<Locale> {
 
         @Override

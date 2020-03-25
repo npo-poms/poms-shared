@@ -32,6 +32,10 @@ public class PromoEventConverter {
 
     private static final Set<String> IGNORE_EXTENSIONS = new HashSet<>(Arrays.asList("ismv", "ismc"));
 
+    private PromoEventConverter() {
+    }
+
+
     public static ProgramUpdate convert(PromoEvent event, String locationBaseUrl) throws NoMidException, NoPromoException, NoTitleException {
         validate(event);
 

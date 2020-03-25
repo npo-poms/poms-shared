@@ -21,6 +21,9 @@ import nl.vpro.domain.api.media.RelationSearchList;
  */
 public class RelationSearchListJson {
 
+    private RelationSearchListJson() {
+    }
+
 
     public static class Serializer extends JsonSerializer<RelationSearchList> {
         @Override

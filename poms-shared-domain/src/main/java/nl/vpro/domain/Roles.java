@@ -15,6 +15,8 @@ import java.util.*;
 @Slf4j
 public class Roles {
 
+    private Roles() {
+    }
 
     public static final String ROLE = "ROLE_";
 

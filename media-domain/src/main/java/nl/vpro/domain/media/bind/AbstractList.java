@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
@@ -17,6 +16,9 @@ import nl.vpro.jackson2.Jackson2Mapper;
  * @since 3.0
  */
 public class AbstractList {
+
+    private AbstractList() {
+    }
 
 
     public static abstract class Serializer<T> extends JsonSerializer<Iterable<T>> {
@@ -36,7 +38,7 @@ public class AbstractList {
 
     public static abstract class Deserializer<T> extends JsonDeserializer<Iterable<T>> {
 
-        @Override 
+        @Override
         public Iterable<T> deserialize (JsonParser jp, DeserializationContext ctxt) throws IOException {
             List<T> answer = new ArrayList<>();
 

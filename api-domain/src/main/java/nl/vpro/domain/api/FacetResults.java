@@ -8,6 +8,8 @@ import java.util.*;
  */
 public class FacetResults {
 
+    private FacetResults() {
+    }
 
     public static Map<String, Long> toSimpleMap(List<TermFacetResultItem> results) {
         Map<String, Long> values = new LinkedHashMap<>();

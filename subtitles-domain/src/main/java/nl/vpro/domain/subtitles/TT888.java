@@ -21,6 +21,9 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public class TT888 {
 
+    private TT888() {
+    }
+
     public static final Charset CHARSET = SubtitlesFormat.TT888.getCharset();
 
     public static StringBuilder format(Cue cue, StringBuilder builder) {

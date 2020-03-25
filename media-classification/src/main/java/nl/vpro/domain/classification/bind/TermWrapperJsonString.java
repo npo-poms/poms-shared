@@ -16,6 +16,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  */
 public class TermWrapperJsonString {
 
+    private TermWrapperJsonString() {
+    }
+
     public static class Serializer extends JsonSerializer<AbstractTermWrapper> {
         @Override
         public void serialize(AbstractTermWrapper value, JsonGenerator jgen, SerializerProvider provider) throws IOException {

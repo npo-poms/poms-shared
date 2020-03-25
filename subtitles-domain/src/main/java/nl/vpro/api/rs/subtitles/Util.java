@@ -20,6 +20,9 @@ import nl.vpro.domain.subtitles.SubtitlesId;
  */
 public class Util {
 
+    private Util() {
+    }
+
     public static Map<String, String> headers(SubtitlesId id, String extension) {
         Map<String, String> result = new HashMap<>();
         result.put("Content-Disposition", getContentDisposition(id, extension));

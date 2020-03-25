@@ -1,28 +1,28 @@
 package nl.vpro.domain.constraint;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.function.Function;
 
-import javax.el.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.el.ELContext;
+import javax.el.ExpressionFactory;
 
 /**
  * @author Michiel Meeuwissen
  * @since 4.8
  */
+@Slf4j
 class DisplayablePredicates {
-    private static final Logger LOG = LoggerFactory.getLogger(DisplayablePredicate.class);
 
     static final String BUNDLE_FALSE = "nl.vpro.domain.api.PredicateTestFalse";
     static final String BUNDLE_TRUE = "nl.vpro.domain.api.PredicateTestTrue";
 
+
+    private DisplayablePredicates() {
+    }
 
     /**
      * Default implemention of the reason for true. (Empty suffices)
@@ -104,14 +104,14 @@ class DisplayablePredicates {
                     try {
                         return constructor.newInstance(f);
                     } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
-                        LOG.error(e.getMessage(), e);
+                        log.error(e.getMessage(), e);
                         return null;}
 
 
                 };
             } catch (ClassNotFoundException | NoSuchMethodException e) {
-                LOG.warn(e.getMessage(), e);
-                LOG.warn("Are you running servlet < 3 container?. Falling back to hibernate implementation");
+                log.warn(e.getMessage(), e);
+                log.warn("Are you running servlet < 3 container?. Falling back to hibernate implementation");
                 try {
                     Class<? extends ELContext> clazz = (Class<? extends ELContext>) Class.forName("org.hibernate.validator.internal.engine.messageinterpolation.el.SimpleELContext");
                     Constructor<? extends ELContext> constructor = clazz.getConstructor();
@@ -119,13 +119,13 @@ class DisplayablePredicates {
                         try {
                             return constructor.newInstance();
                         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e2) {
-                            LOG.error(e2.getMessage(), e2);
+                            log.error(e2.getMessage(), e2);
                             return null;
                         }
 
                     };
                 } catch (ClassNotFoundException | NoSuchMethodException e1) {
-                    LOG.error(e1.getMessage(), e1);
+                    log.error(e1.getMessage(), e1);
                 }
             }
         }

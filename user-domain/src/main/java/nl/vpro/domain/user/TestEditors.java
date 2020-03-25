@@ -15,6 +15,9 @@ import java.time.Instant;
 @Deprecated
 public class TestEditors {
 
+    private TestEditors() {
+    }
+
     /**
      * @deprecated Use e.g. {@link nl.vpro.domain.media.MediaTestDataBuilder#vproEditor}
      */

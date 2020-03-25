@@ -17,6 +17,9 @@ import static org.mockito.ArgumentMatchers.isNull;
 
 public class TestHelper {
 
+    private TestHelper() {
+    }
+
     @Deprecated
     public static <T> Answer<T> firstArgument(Class<T> clazz) {
         return returnsFirstArg();

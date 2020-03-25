@@ -7,4 +7,7 @@ package nl.vpro.openarchives.oai;
 public class Types {
     public static final String SKOS_CONCEPT = "http://www.w3.org/2004/02/skos/core#Concept";
 
+    private Types() {
+    }
+
 }

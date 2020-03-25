@@ -22,6 +22,9 @@ import org.xml.sax.SAXException;
 @Slf4j
 public final class Xmlns {
 
+    private Xmlns() {
+    }
+
     public static final String MEDIA_XSD_NAME = "vproMedia.xsd";
     public static final String MEDIA_NAMESPACE = "urn:vpro:media:2009";
     public static final URL    MEDIA_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/" + MEDIA_XSD_NAME);

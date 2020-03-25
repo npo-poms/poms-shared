@@ -21,6 +21,9 @@ import nl.vpro.domain.api.media.ScheduleEventSearch;
  */
 public class ScheduleEventSearchListJson {
 
+    private ScheduleEventSearchListJson() {
+    }
+
 
     public static class Serializer extends JsonSerializer<List<ScheduleEventSearch>> {
         @Override

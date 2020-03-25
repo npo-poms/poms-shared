@@ -10,6 +10,9 @@ package nl.vpro.openarchives.oai;
  */
 public class Namespaces {
 
+    private Namespaces() {
+    }
+
     public static final String OAI = "http://www.openarchives.org/OAI/2.0/";
 
     public static final String RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";

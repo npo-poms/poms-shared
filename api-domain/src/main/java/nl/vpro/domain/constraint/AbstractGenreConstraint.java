@@ -22,7 +22,7 @@ public abstract class AbstractGenreConstraint<T> extends AbstractTextConstraint<
     {
         caseHandling = CaseHandling.ASIS;
     }
-    public AbstractGenreConstraint() {
+    protected AbstractGenreConstraint() {
 
     }
 

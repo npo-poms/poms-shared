@@ -22,6 +22,9 @@ import nl.vpro.util.TriFunction;
  */
 public class TextualObjects {
 
+    private TextualObjects() {
+    }
+
     // some methods working on collections of 'OwnedText' objects (think of titles and descriptions)
 
     /**

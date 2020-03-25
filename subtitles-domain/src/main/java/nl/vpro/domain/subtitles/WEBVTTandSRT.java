@@ -17,13 +17,16 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_A
- * TODO: we support only a subtet of WEBVTT.
+ * TODO: we support only a subset of WEBVTT.
  *
  * @author Michiel Meeuwissen
  * @since 4.8
  */
 @Slf4j
 public class WEBVTTandSRT {
+
+    private WEBVTTandSRT() {
+    }
 
 
     static final String WEBVTT_INTRO = "WEBVTT";

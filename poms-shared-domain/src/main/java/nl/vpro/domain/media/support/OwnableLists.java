@@ -9,6 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class OwnableLists {
 
+    private OwnableLists() {
+    }
 
     /**
      * TODO: I think this may be superseded by using {@link @NoDuplicateOwner}

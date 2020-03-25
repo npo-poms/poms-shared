@@ -12,6 +12,9 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  */
 class CollectionUtils {
 
+    private CollectionUtils() {
+    }
+
     /**
      * Given a collection of values, and a list of object to update, updates the list, optionally creating one first.
      *

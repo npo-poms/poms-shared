@@ -6,6 +6,8 @@ package nl.vpro.domain.media.support;
  */
 public class PublishableObjectAccess {
 
+    private PublishableObjectAccess() {
+    }
 
     public static void setWorkflow(PublishableObject<?> object, Workflow workflow) {
         object.setWorkflow(workflow);

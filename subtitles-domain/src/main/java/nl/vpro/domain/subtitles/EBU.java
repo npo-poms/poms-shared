@@ -23,6 +23,9 @@ import java.util.stream.StreamSupport;
 @Slf4j
 public class EBU {
 
+    private EBU() {
+    }
+
 
     public static Stream<Cue> parse(String parent, Duration offset, Function<TimeLine, Duration> offsetGuesser, InputStream is) {
 

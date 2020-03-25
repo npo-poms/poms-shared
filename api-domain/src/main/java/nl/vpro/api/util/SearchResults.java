@@ -25,6 +25,9 @@ import nl.vpro.domain.classification.Term;
 @Slf4j
 public class SearchResults {
 
+    private SearchResults() {
+    }
+
     public static <M> List<M> unwrap(final SearchResult<M> wrapped) {
         return new AbstractList<M>() {
             @Override

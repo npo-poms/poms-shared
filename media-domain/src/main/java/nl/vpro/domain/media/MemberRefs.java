@@ -15,6 +15,9 @@ import java.util.Optional;
  */
 public class MemberRefs {
 
+    private MemberRefs() {
+    }
+
     public static List<MediaObject> listOwners(final List<MemberRef> memberRefs) {
         return new AbstractList<MediaObject>() {
             @Override
