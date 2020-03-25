@@ -50,6 +50,41 @@ public class EmbargoTest {
     public void assertRange(@Nullable Instant start, @Nullable Instant stop, Range<Instant> range) {
         Embargo impl = new BasicEmbargo(start, stop);
         assertThat(impl.asRange()).isEqualTo(range);
+        if (start != null) {
+            assertThat(impl.inPublicationWindow(start)).isTrue();
+            assertThat(impl.isUnderEmbargo(start)).isFalse();
+            assertThat(impl.asRange().contains(start)).isTrue();
+            assertThat(impl.inPublicationWindow(start.minusMillis(1))).isFalse();
+            assertThat(impl.asRange().contains(start.minusMillis(1))).isFalse();
+            assertThat(impl.isUnderEmbargo(start)).isFalse();
+            assertThat(impl.isUnderEmbargo(start.minusMillis(1))).isTrue();
+
+            assertThat(impl.wasUnderEmbargo(start)).isFalse();
+            assertThat(impl.wasUnderEmbargo(start.plusMillis(1))).isFalse();
+            assertThat(impl.wasUnderEmbargo(start.minusMillis(1))).isFalse();
+
+            assertThat(impl.willBePublished(start.minusMillis(1))).isTrue();
+            assertThat(impl.willBePublished(start)).isFalse();
+            assertThat(impl.willBePublished(start.plusMillis(1))).isFalse();
+
+        }
+        if (stop != null) {
+            assertThat(impl.inPublicationWindow(stop)).isFalse();
+            assertThat(impl.isUnderEmbargo(stop)).isTrue();
+            assertThat(impl.asRange().contains(stop)).isFalse();
+            assertThat(impl.inPublicationWindow(stop.minusMillis(1))).isTrue();
+            assertThat(impl.asRange().contains(stop.minusMillis(1))).isTrue();
+            assertThat(impl.isUnderEmbargo(stop)).isTrue();
+            assertThat(impl.isUnderEmbargo(stop.minusMillis(1))).isFalse();
+
+            assertThat(impl.wasUnderEmbargo(stop)).isTrue();
+            assertThat(impl.wasUnderEmbargo(stop.plusMillis(1))).isTrue();
+            assertThat(impl.wasUnderEmbargo(stop.minusMillis(1))).isFalse();
+
+            assertThat(impl.willBeUnderEmbargo(stop)).isFalse();
+            assertThat(impl.willBeUnderEmbargo(stop.plusMillis(1))).isFalse();
+            assertThat(impl.willBeUnderEmbargo(stop.minusMillis(1))).isTrue();
+        }
         log.info("{} / {} ", impl, range.toString());
     }
 

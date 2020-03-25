@@ -47,22 +47,36 @@ public interface Embargo {
     }
 
     default boolean wasUnderEmbargo() {
-        Instant stop = getPublishStopInstant();
-        return stop != null && stop.isBefore(Instant.now());
+        return wasUnderEmbargo(Instant.now());
     }
 
+    default boolean wasUnderEmbargo(Instant now) {
+        Instant stop = getPublishStopInstant();
+        return stop != null && ! now.isBefore(stop);
+    }
+
+
+    /**
+     * Is now published, but will not any more be at some point in the future
+     */
     default boolean willBeUnderEmbargo() {
         return willBeUnderEmbargo(Instant.now());
     }
 
-
     default boolean willBeUnderEmbargo(Instant now) {
-        Instant start = getPublishStartInstant();
         Instant stop = getPublishStopInstant();
-        return (start != null && start.isAfter(now)) || (stop != null && stop.isAfter(now));
+        return inPublicationWindow(now) && (stop != null && stop.isAfter(now));
     }
+
+    /**
+     * Is now under embargo, but will not any more be at some point in the future
+     */
     default boolean willBePublished() {
-        return isUnderEmbargo() && getPublishStopInstant().isAfter(Instant.now());
+        return willBePublished(Instant.now());
+    }
+
+    default boolean willBePublished(Instant now) {
+        return isUnderEmbargo(now) && now.isBefore(getPublishStartInstant());
     }
 
     default boolean inPublicationWindow(Instant now) {
