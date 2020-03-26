@@ -96,18 +96,13 @@ public class SearchResults {
                         try {
                             T newItem = creator.call();
                             newItem.setId(item.getValue());
-                            Optional<String> value = valueCache.get(item.getValue());
-                            //noinspection OptionalAssignedToNull
-                            if (value == null) {
-                                value = valueCreator.apply(item.getValue());
-                                valueCache.put(item.getValue(), value);
-                            }
+                            Optional<String> value = valueCache.computeIfAbsent(item.getValue(), valueCreator);
                             newItem.setValue(value.orElse(null));
                             newItem.setCount(0);
                             newItem.setSelected(true);
                             selected.add(newItem);
                         } catch (Exception ex) {
-                            /* Ignore */
+                            log.debug(ex.getMessage());
                         }
                     }
                 }
