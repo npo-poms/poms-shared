@@ -2,14 +2,17 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.*;
-import java.io.Serializable;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity(name = "avattributes")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -31,6 +34,7 @@ public class AVAttributes implements Serializable {
 
     @XmlElement
     @Min(0L)
+    @Nullable
     private Integer bitrate;
 
     @XmlElement
@@ -118,11 +122,15 @@ public class AVAttributes implements Serializable {
         return id;
     }
 
+    /**
+     * Returns the associated bitrate (or <code>null</code> if unknown)
+     */
+    @Nullable
     public Integer getBitrate() {
         return bitrate;
     }
 
-    public AVAttributes setBitrate(Integer bitrate) {
+    public AVAttributes setBitrate(@Nullable Integer bitrate) {
         this.bitrate = bitrate;
         return this;
     }

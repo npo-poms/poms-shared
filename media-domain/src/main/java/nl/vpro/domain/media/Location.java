@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -421,6 +422,10 @@ public class Location extends PublishableObject<Location>
         this.owner = owner;
     }
 
+    /**
+     * Returns {@link #getAvAttributes()}<code>getBitRate</code> or <code>null</code> if no avattributes (yet) known.
+     */
+    @Nullable
     public Integer getBitrate() {
         if(avAttributes == null) {
             return null;
@@ -428,7 +433,7 @@ public class Location extends PublishableObject<Location>
         return avAttributes.getBitrate();
     }
 
-    public Location setBitrate(Integer bitrate) {
+    public Location setBitrate(@Nullable Integer bitrate) {
         if(avAttributes == null) {
             avAttributes = new AVAttributes();
         }
@@ -436,6 +441,7 @@ public class Location extends PublishableObject<Location>
         return this;
     }
 
+    @Nullable
     public Long getByteSize() {
         if (avAttributes == null) {
             return null;
@@ -451,6 +457,7 @@ public class Location extends PublishableObject<Location>
         return this;
     }
 
+    @Nullable
     public AVFileFormat getAvFileFormat() {
         if(avAttributes == null) {
             return null;
@@ -477,6 +484,7 @@ public class Location extends PublishableObject<Location>
         return getProgramUrl() != null && getProgramUrl().startsWith("npo");
     }
 
+    @Nullable
     Prediction getAuthorityRecord(boolean create) {
         if (hasPlatform()) {
             if (mediaObject == null) {
@@ -567,6 +575,7 @@ public class Location extends PublishableObject<Location>
      * 3. It that too is not available then it will fall back to it's own field {@link PublishableObject#getPublishStopInstant()}
      */
     @Override
+    @Nullable
     public Instant getPublishStopInstant() {
         if(hasPlatform() && mediaObject != null) {
             Instant streamingOffline = onStreaming() && mediaObject.getStreamingPlatformStatus() != null ? mediaObject.getStreamingPlatformStatus().getOffline(hasDrm()) : null;

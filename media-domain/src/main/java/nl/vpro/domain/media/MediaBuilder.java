@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import lombok.*;
+import lombok.ToString;
 
 import java.net.URI;
 import java.time.*;
@@ -16,6 +16,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -26,7 +27,8 @@ import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.*;
 import nl.vpro.i18n.LocalizedString;
-import nl.vpro.util.*;
+import nl.vpro.util.DateUtils;
+import nl.vpro.util.TimeUtils;
 
 import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
 import static nl.vpro.util.DateUtils.toInstant;
@@ -385,7 +387,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    default B mainDescription(String description, @NonNull OwnerType owner) {
+    default B mainDescription(@Nullable String description, @NonNull OwnerType owner) {
         if (StringUtils.isNotEmpty(description)) {
             return descriptions(new Description(description, owner, TextualType.MAIN));
         } else {
@@ -393,7 +395,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
     }
 
-    default B mainDescription(String description) {
+    default B mainDescription(@Nullable String description) {
         return mainDescription(description, OwnerType.BROADCASTER);
     }
 
@@ -506,7 +508,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     @SuppressWarnings("unchecked")
-    default B duration(java.time.Duration duration) {
+    default B duration(java.time.@Nullable Duration duration) {
         try {
             mediaObject().setDuration(duration);
         } catch (ModificationException e) {
