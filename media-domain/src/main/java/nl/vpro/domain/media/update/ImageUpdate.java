@@ -4,9 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -14,28 +12,23 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import javax.activation.DataHandler;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.MutableEmbargo;
-import nl.vpro.domain.EmbargoBuilder;
-import nl.vpro.domain.Embargos;
-import nl.vpro.domain.image.ImageMetadata;
-import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.image.Metadata;
+import nl.vpro.domain.*;
+import nl.vpro.domain.image.*;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.support.License;
@@ -210,7 +203,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
             return imageLocation(new ImageLocation(imageLocation));
         }
 
-        public Builder imageUrl(String mimeType, String imageLocation) {
+        public Builder imageUrl(@Nullable String mimeType, String imageLocation) {
             return imageLocation(ImageLocation.builder().mimeType(mimeType).url(imageLocation).build());
         }
 
