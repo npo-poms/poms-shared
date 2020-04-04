@@ -61,7 +61,7 @@ public class NEPScpDownloadServiceImplTest {
 
         log.info("using {}", impl);
         FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
-        final long size[] = {-1L};
+        final long[] size = {-1L};
         impl.download("bestaathelemaalniet.mp4",
             () -> outputStream,
             Duration.ofSeconds(1), (fd) -> {
