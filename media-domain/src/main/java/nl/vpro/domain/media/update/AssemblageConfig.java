@@ -110,6 +110,15 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     Steal updateType = Steal.NO;
 
+
+    /**
+     * TODO
+     */
+    @lombok.Builder.Default
+    boolean  followMerges = false;
+
+    MidRequire  requireIncomingMid = MidRequire.NO;
+
     SimpleLogger logger;
 
 
@@ -150,6 +159,8 @@ public class AssemblageConfig {
             segmentsForDeletion,
             cridsForDelete,
             updateType,
+            followMerges,
+            requireIncomingMid,
             logger);
     }
     public AssemblageConfig withLogger(SimpleLogger logger) {
@@ -187,6 +198,8 @@ public class AssemblageConfig {
             .stealCrids(Steal.YES)
             .stealSegments(Steal.YES)
             .updateType(Steal.YES)
+            .followMerges(true)
+            .requireIncomingMid(MidRequire.YES)
             ;
     }
 
@@ -236,7 +249,7 @@ public class AssemblageConfig {
         }
     }
 
-    public enum Steal {
+    public enum Steal implements BiPredicate<MediaObject, MediaObject> {
         YES((incoming, toUpdate) -> true),
         IF_DELETED((incoming, toUpdate) ->  Workflow.PUBLISHED_AS_DELETED.contains(toUpdate.getWorkflow())),
         NO((incoming, toUpdate) -> true),
@@ -247,16 +260,70 @@ public class AssemblageConfig {
         IF_INCOMING_NO_MID((incoming, toUpdate) -> incoming.getMid() == null)
         ;
 
-        private final BiFunction<MediaObject, MediaObject, Boolean> is;
+        private final BiPredicate<MediaObject, MediaObject> impl;
 
-        Steal(BiFunction<MediaObject, MediaObject, Boolean> is) {
-            this.is = is;
+        Steal(BiPredicate<MediaObject, MediaObject> impl) {
+            this.impl = impl;
+        }
+        @Override
+        public boolean test(MediaObject incoming, MediaObject toUpdate) {
+            return impl.test(incoming, toUpdate);
         }
 
-
-        public boolean is(MediaObject incoming, MediaObject toUpdate) {
-            return is.apply(incoming, toUpdate);
-        }
 
     }
+
+    public enum RequireEnum {
+        YES,
+        NO,
+        IF_TARGET_EMPTY;
+    }
+
+    public static abstract class Require<S, F>  implements BiPredicate<S, S> {
+        private final RequireEnum value;
+        private final Function<S, F> getter;
+
+        protected Require(RequireEnum value, Function<S, F> getter) {
+            this.value = value;
+            this.getter = getter;
+        }
+        @Override
+        public boolean test(S o1, S o2) {
+            switch(value) {
+                case YES: {
+                    F f1 = getter.apply(o1);
+                    return f1 != null;
+                }
+                case NO:
+                    return false;
+                case IF_TARGET_EMPTY: {
+                    F f1 = getter.apply(o1);
+                    if (f1 == null) {
+                        F f2 = getter.apply(o2);
+                        return f2 == null;
+                    } else {
+                        return true;
+                    }
+                }
+                default:
+                    throw new IllegalStateException();
+            }
+        }
+        public void throwIfIllegal(S o1, S o2) {
+            if (! test(o1, o2)) {
+                throw new IllegalArgumentException();
+            }
+
+        }
+    }
+    public static class MidRequire extends Require<MediaObject, String> {
+        public static final MidRequire YES = new MidRequire(RequireEnum.YES);
+        public static final MidRequire NO = new MidRequire(RequireEnum.NO);
+        public static final MidRequire IF_TARGET_EMPTY = new MidRequire(RequireEnum.IF_TARGET_EMPTY);
+
+        private MidRequire(RequireEnum value) {
+            super(value, MediaObject::getMid);
+        }
+    }
+
 }
