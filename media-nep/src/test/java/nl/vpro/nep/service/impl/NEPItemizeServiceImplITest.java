@@ -5,10 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Optional;
 
 import org.junit.jupiter.api.*;
 
 import nl.vpro.nep.domain.NEPItemizeResponse;
+import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.service.NEPDownloadService;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
@@ -21,13 +23,23 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class NEPItemizeServiceImplITest {
 
+    String MID = "POW_04505213";
+    //String MID = "AT_2073522";
     @Test
     @Order(1)
     public void itemize() throws IOException {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
-        NEPItemizeResponse response = itemizer.itemize("AT_2073522", Duration.ZERO, Duration.ofMinutes(2).plusSeconds(21).plusMillis(151), null);
+        NEPItemizeResponse response = itemizer.itemize(
+            MID,
+            Duration.ZERO,
+            Duration.ofMinutes(2).plusSeconds(21).plusMillis(151),
+            null
+        );
         log.info("response: {} {}", response, start);
+        NEPGatekeeperServiceImpl gatekeeperService = new NEPGatekeeperServiceImpl(NEPTest.PROPERTIES);
+        Optional<WorkflowExecution> workflowExecution = gatekeeperService.getTranscodeStatus(response.getId());
+        log.info("{}", workflowExecution);
 
         NEPDownloadService downloadService = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
         File dest = new File("/tmp", "dest.mp4");
@@ -91,10 +103,12 @@ public class NEPItemizeServiceImplITest {
 
 
     @Test
+    @Order(30)
+
     public void grabScreenMid() throws IOException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");
-        itemizer.grabScreen("POW_00683426", Duration.ZERO, new FileOutputStream(out));
+        itemizer.grabScreen(MID, Duration.ZERO, new FileOutputStream(out));
         log.info("Created {} bytes {}", out.length(), out);
 
 

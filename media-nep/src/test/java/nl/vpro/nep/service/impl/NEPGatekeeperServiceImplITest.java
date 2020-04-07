@@ -25,7 +25,7 @@ public class NEPGatekeeperServiceImplITest {
 
     @Test
     public void testGet() {
-        WorkflowExecution transcodeStatus = gatekeeperService.getTranscodeStatus("e51b3502-f653-4ac7-a504-2853122add77").get();
+        WorkflowExecution transcodeStatus = gatekeeperService.getTranscodeStatus("ce4e4e6a-4467-4a95-b9d7-fe509d2658f8").get();
         log.info("{}", transcodeStatus);
     }
 

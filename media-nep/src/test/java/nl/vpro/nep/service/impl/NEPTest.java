@@ -15,7 +15,8 @@ public class NEPTest {
 
     static {
         try {
-            PROPERTIES.load(new FileInputStream(new File(System.getProperty("user.home"), "conf" + File.separator + "nep.properties")));
+            PROPERTIES.load(new FileInputStream(
+                new File(System.getProperty("user.home"), "conf" + File.separator + "nep.properties")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
