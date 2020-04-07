@@ -32,7 +32,7 @@ public class MediaBuilderTest {
             new DescendantRef(null, "urn:vpro:media:program:1", MediaType.BROADCAST),
             new DescendantRef(null, "urn:vpro:media:group:2", MediaType.SEASON),
             new DescendantRef("MID_123456", null, MediaType.SERIES));
-        assertThat(program.getLastModifiedBy().getPrincipalId()).isEqualTo("pietje.puk@vpro.nl");
+        assertThat(program.getLastModifiedBy()).isEqualTo("pietje.puk@vpro.nl");
     }
 
 

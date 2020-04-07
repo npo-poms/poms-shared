@@ -5,27 +5,25 @@
  */
 package nl.vpro.domain;
 
-import lombok.extern.slf4j.Slf4j;
-
-import java.time.Instant;
-
-import javax.persistence.*;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import nl.vpro.domain.user.Editor;
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.domain.validation.ValidEmbargo;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.validation.*;
+import nl.vpro.validation.EmbargoValidation;
+import nl.vpro.validation.PomsValidatorGroup;
+import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.Instant;
 
 /**
  * Abstract publishable object is an abstract implemention of {@link Accountable} and {@link MutableEmbargo}.
@@ -47,16 +45,12 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     @Column(nullable = false)
     protected Instant lastModified;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "createdby_principalid")
-    @XmlTransient
-    protected Editor createdBy;
+    @Column(nullable = false)
+    protected String createdBy;
 
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "lastmodifiedby_principalid")
+    @Column(nullable = false)
     @XmlTransient
-    protected Editor lastModifiedBy;
+    protected String lastModifiedBy;
 
     @Column(nullable = true)
     protected Instant publishStart;
@@ -116,22 +110,22 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     }
 
     @Override
-    public Editor getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
     @Override
-    public void setCreatedBy(Editor createdBy) {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
     @Override
-    public Editor getLastModifiedBy() {
+    public String getLastModifiedBy() {
         return lastModifiedBy;
     }
 
     @Override
-    public void setLastModifiedBy(Editor lastModifiedBy) {
+    public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
 

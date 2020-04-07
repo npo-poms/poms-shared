@@ -1,35 +1,31 @@
 package nl.vpro.domain.i18n;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import java.time.Instant;
-import java.util.*;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.Size;
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
+import lombok.Getter;
+import lombok.Setter;
 import nl.vpro.domain.Accountable;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.LocalizedObject;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.persistence.InstantToTimestampConverter;
 import nl.vpro.util.TriFunction;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.Instant;
+import java.util.*;
 
 import static nl.vpro.domain.TextualObjects.sorted;
 
@@ -79,15 +75,13 @@ public class MediaObjectTranslation implements
     @Setter
     protected Instant creationInstant;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "lastmodifiedby_principalid")
+    @Column(nullable = false)
     @Setter
-    protected Editor lastModifiedBy;
+    protected String lastModifiedBy;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "createdby_principalid")
+    @Column(nullable = false)
     @Setter
-    protected Editor createdBy;
+    protected String createdBy;
 
     @Column
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)

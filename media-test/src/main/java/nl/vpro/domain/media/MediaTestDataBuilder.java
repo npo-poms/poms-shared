@@ -181,11 +181,11 @@ public interface MediaTestDataBuilder<
     }
 
     default T withCreatedBy() {
-        return createdBy(vproEditor());
+        return createdBy(vproEditor().getPrincipalId());
     }
 
     default T withLastModifiedBy() {
-        return lastModifiedBy(vproEditor());
+        return lastModifiedBy(vproEditor().getPrincipalId());
     }
 
     default T withCreationDate() {

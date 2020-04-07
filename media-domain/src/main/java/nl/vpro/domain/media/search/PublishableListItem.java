@@ -4,16 +4,15 @@
  */
 package nl.vpro.domain.media.search;
 
-import java.time.Instant;
-
-import javax.xml.bind.annotation.*;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-
-import nl.vpro.domain.*;
+import nl.vpro.domain.Embargos;
+import nl.vpro.domain.Identifiable;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
-import nl.vpro.domain.user.Editor;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.annotation.*;
+import java.time.Instant;
 
 /**
  * @author Roelof Jan Koekoek
@@ -33,9 +32,9 @@ public abstract class PublishableListItem implements MutableEmbargo, Identifiabl
     @XmlAttribute
     protected Workflow workflow;
 
-    protected Editor lastModifiedBy;
+    protected String lastModifiedBy;
 
-    protected Editor createdBy;
+    protected String createdBy;
 
     protected Instant lastModifiedInstant;
 
@@ -111,19 +110,19 @@ public abstract class PublishableListItem implements MutableEmbargo, Identifiabl
         this.workflow = workflow;
     }
 
-    public Editor getLastModifiedBy() {
+    public String getLastModifiedBy() {
         return lastModifiedBy;
     }
 
-    public void setLastModifiedBy(Editor lastModifiedBy) {
+    public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Editor getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Editor createdBy) {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 

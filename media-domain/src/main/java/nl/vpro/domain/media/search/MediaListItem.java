@@ -44,8 +44,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "description",
             "creationInstant",
             "lastModifiedInstant",
-            "createdByPrincipalId",
-            "lastModifiedByPrincipalId",
+            "createdBy",
+            "lastModifiedBy",
             "sortDate",
             "mediaType",
             "publishStartInstant",
@@ -248,12 +248,12 @@ public class MediaListItem extends PublishableListItem implements TrackableMedia
     }
 
     @XmlElement(name = "createdBy")
-    public String getCreatedByPrincipalId() {
-        return createdBy == null ? createdByHolder : createdBy.getPrincipalId();
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreatedByPrincipalId(String principalId) {
-        createdByHolder = principalId;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     @Override
@@ -287,12 +287,12 @@ public class MediaListItem extends PublishableListItem implements TrackableMedia
     }
 
     @XmlElement(name = "lastModifiedBy")
-    public String getLastModifiedByPrincipalId() {
-        return lastModifiedBy == null ? lastModifiedByHolder : lastModifiedBy.getPrincipalId();
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
     }
 
-    public void setLastModifiedByPrincipalId(String principalId) {
-        lastModifiedByHolder = principalId;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
     @Override

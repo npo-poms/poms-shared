@@ -5,14 +5,20 @@
 
 package nl.vpro.domain.image;
 
-import lombok.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.*;
-import java.net.URI;
-import java.sql.Blob;
-import java.sql.SQLException;
-import java.time.Instant;
+import nl.vpro.domain.AbstractPublishableObject;
+import nl.vpro.domain.media.support.MutableOwnable;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.support.License;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.xml.bind.InstantXmlAdapter;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -21,20 +27,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.checkerframework.checker.nullness.qual.Nullable;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import nl.vpro.domain.AbstractPublishableObject;
-import nl.vpro.domain.media.support.MutableOwnable;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.support.License;
-import nl.vpro.domain.user.Editor;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.validation.WarningValidatorGroup;
-import nl.vpro.xml.bind.InstantXmlAdapter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.net.URI;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.time.Instant;
 
 @SuppressWarnings("WSReferenceInspection")
 @Entity(
@@ -75,15 +75,15 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
 
     public static class Builder {
-        private Editor createdBy;
-        private Editor lastModifiedBy;
+        private String createdBy;
+        private String lastModifiedBy;
 
-        public Builder createdBy(Editor editor) {
+        public Builder createdBy(String editor) {
             this.createdBy = editor;
             return this;
         }
 
-        public Builder lastModifiedBy(Editor editor) {
+        public Builder lastModifiedBy(String editor) {
             this.lastModifiedBy = editor;
             return this;
         }

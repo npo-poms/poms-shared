@@ -22,9 +22,6 @@ public class ServiceLocator  {
     @Inject
     Provider<ThirdPartyService> thirdPartyService = ThirdPartyServiceImpl::new;
 
-    @Inject
-    Provider<EditorService> editorService = () -> null;
-
     private static ServiceLocator serviceLocator;
 
     private ServiceLocator() {
@@ -45,22 +42,6 @@ public class ServiceLocator  {
     public static ThirdPartyService getThirdPartyService() {
         return serviceLocator == null ? new ThirdPartyServiceImpl() : serviceLocator.thirdPartyService.get();
     }
-
-    @NonNull
-    public static EditorService getEditorService() {
-        if (serviceLocator == null) {
-            throw new IllegalStateException();
-        }
-        return serviceLocator.editorService.get();
-    }
-
-    public static void  setEditorService(final EditorService editorService) {
-         if (serviceLocator == null) {
-            new ServiceLocator();
-        }
-        serviceLocator.editorService = () -> editorService;
-    }
-
 
     public static void setBroadcasterService(final BroadcasterService broadcasterService) {
         if (serviceLocator == null) {
@@ -89,14 +70,6 @@ public class ServiceLocator  {
         }
         serviceLocator.thirdPartyService = () -> thirdPartyService;
     }
-
-    public static void getEditorService(EditorService editorService) {
-        if (serviceLocator == null) {
-            new ServiceLocator();
-        }
-        serviceLocator.editorService = () -> editorService;
-    }
-
 
     protected static abstract  class AbstractOrganizationService<T extends Organization> implements OrganizationService<T> {
 

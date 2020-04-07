@@ -630,7 +630,7 @@ public class MediaObjectJsonSchemaTest {
 
         Image image = new Image(OwnerType.BROADCASTER, "http://images.poms.omroep.nl/plaatje");
         image.setCreationInstant(Instant.ofEpochMilli(1));
-        image.setLastModifiedBy(Editor.builder().email("bla@foo.bar").build());
+        image.setLastModifiedBy("bla@foo.bar");
         Program program = program().id(100L).lean().images(image).build();
 
         String actual = toPublisherJson(program);

@@ -10,10 +10,8 @@ import nl.vpro.domain.user.Editor;
  */
 public interface Accountable extends Changeable {
 
-    Editor getCreatedBy();
-    void setCreatedBy(Editor createdBy);
-    Editor getLastModifiedBy();
-    void setLastModifiedBy(Editor lastModifiedBy);
-
-
+    String getCreatedBy();
+    void setCreatedBy(String createdBy);
+    String getLastModifiedBy();
+    void setLastModifiedBy(String lastModifiedBy);
 }

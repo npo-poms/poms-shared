@@ -4,29 +4,32 @@
  */
 package nl.vpro.domain.media;
 
-import lombok.*;
-
-import java.net.URI;
-import java.time.*;
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import javax.validation.Valid;
-
-import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import com.google.common.annotations.VisibleForTesting;
-
+import lombok.ToString;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.user.*;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.domain.user.Editor;
+import nl.vpro.domain.user.Portal;
+import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.i18n.LocalizedString;
-import nl.vpro.util.*;
+import nl.vpro.util.DateUtils;
+import nl.vpro.util.TimeUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
 import static nl.vpro.util.DateUtils.toInstant;
@@ -116,27 +119,15 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
-    default B createdBy(Editor user) {
+    default B createdBy(String user) {
         mediaObject().setCreatedBy(user);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
-    default B createdBy(String user) {
-        mediaObject().setCreatedBy(user(user));
-        return (B) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    default B lastModifiedBy(Editor user) {
+    default B lastModifiedBy(String user) {
         mediaObject().setLastModifiedBy(user);
         return (B)this;
-    }
-
-    @SuppressWarnings("unchecked")
-    default B lastModifiedBy(String user) {
-        mediaObject().setLastModifiedBy(user(user));
-        return (B) this;
     }
 
     @Deprecated
