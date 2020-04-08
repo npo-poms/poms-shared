@@ -66,11 +66,11 @@ public class RedirectList implements Iterable<RedirectEntry> {
     public String put(String key, String value) {
         String put = redirects.put(key, value);
         if (put != null) {
+            entries = null;
             resolvedRedirects = null;
         }
         return put;
     }
-
 
     private  Map<String, String> resolvedMap() {
         Map<String, String> result = new HashMap<>();
@@ -98,9 +98,12 @@ public class RedirectList implements Iterable<RedirectEntry> {
         return Collections.unmodifiableMap(result);
     }
 
-
-
     public List<RedirectEntry> getList() {
+        return Collections.unmodifiableList(toList());
+    }
+
+
+    private List<RedirectEntry> toList() {
         return getMap()
             .entrySet()
             .stream()
@@ -115,7 +118,7 @@ public class RedirectList implements Iterable<RedirectEntry> {
     @JsonIgnore
     protected List<RedirectEntry> getXmlList() {
         if (entries == null) {
-            entries = getList();
+            entries = toList();
         }
         return entries;
 
