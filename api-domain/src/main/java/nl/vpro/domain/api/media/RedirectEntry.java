@@ -52,6 +52,11 @@ public class RedirectEntry {
         return to != null ? to.equals(that.to) : that.to == null;
     }
 
+    @XmlAttribute
+    public Boolean getCircular() {
+        return ultimate == null ? true : null;
+    }
+
     @Override
     public int hashCode() {
         int result = from != null ? from.hashCode() : 0;

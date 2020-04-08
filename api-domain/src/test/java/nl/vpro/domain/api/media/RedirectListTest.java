@@ -1,7 +1,7 @@
 package nl.vpro.domain.api.media;
 
 import java.time.Instant;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class RedirectListTest {
     private RedirectList instance;
 
     {
-        Map<String, String> redirects = new HashMap<>();
+        Map<String, String> redirects = new LinkedHashMap<>();
         redirects.put("a", "b");
         redirects.put("source", "target");
         redirects.put("anothersource", "target");
@@ -56,15 +56,15 @@ public class RedirectListTest {
     @Test
     public void jaxb() {
         RedirectList rounded = JAXBTestUtil.roundTripAndSimilarAndEquals(instance,
-            "<redirects lastUpdate=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:api:2013\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><redirects xmlns=\"urn:vpro:api:2013\" lastUpdate=\"1970-01-01T01:00:00+01:00\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <entry from=\"a\" to=\"b\" ultimate=\"b\"/>\n" +
-                "    <entry from=\"x\" to=\"y\" ultimate=\"x\"/>\n" +
-                "    <entry from=\"y\" to=\"z\" ultimate=\"y\"/>\n" +
-                "    <entry from=\"source1\" to=\"target_but_source\" ultimate=\"ultimate_target\"/>\n" +
-                "    <entry from=\"z\" to=\"x\" ultimate=\"z\"/>\n" +
                 "    <entry from=\"source\" to=\"target\" ultimate=\"target\"/>\n" +
                 "    <entry from=\"anothersource\" to=\"target\" ultimate=\"target\"/>\n" +
+                "    <entry from=\"source1\" to=\"target_but_source\" ultimate=\"ultimate_target\"/>\n" +
                 "    <entry from=\"target_but_source\" to=\"ultimate_target\" ultimate=\"ultimate_target\"/>\n" +
+                "    <entry from=\"x\" to=\"y\" circular=\"true\"/>\n" +
+                "    <entry from=\"y\" to=\"z\" circular=\"true\"/>\n" +
+                "    <entry from=\"z\" to=\"x\" circular=\"true\"/>\n" +
                 "</redirects>");
         assertThat(rounded.getList()).hasSize(8);
         assertThat(rounded.getList().get(0).getFrom()).isEqualTo("a");

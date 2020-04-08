@@ -19,6 +19,11 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
+ * Representation of all redirects.
+ *
+ * Serves as response for the redirects api call (jaxb and json bindings are arranged).
+ *
+ *
  * @author Michiel Meeuwissen
  * @since 4.1
  */
@@ -28,7 +33,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class RedirectList implements Iterable<RedirectEntry> {
 
     @JsonProperty("map")
-    private Map<String, String> redirects = new HashMap<>();
+    private Map<String, String> redirects = new LinkedHashMap<>();
 
     private Map<String, String> resolvedRedirects;
 
@@ -48,10 +53,19 @@ public class RedirectList implements Iterable<RedirectEntry> {
         this.redirects = redirects;
     }
 
+    /**
+     * The straight-forward map which is backing this list.
+     */
     public Map<String, String> getMap() {
         return Collections.unmodifiableMap(redirects);
     }
 
+    /**
+     * Redirects may point to objects which itself would be redirected.
+     * The 'resolved' map is a map of the same size as {@link #getMap()}, but all values are itself resolved (in case there are a key too).
+     *
+     * If this somehow there is a circular structure, then the value will be <code>null</code>, causing _no_ redirects to happen.
+     */
     public Map<String, String> getResolvedMap() {
         if (resolvedRedirects == null) {
             resolvedRedirects = resolvedMap();
@@ -86,7 +100,7 @@ public class RedirectList implements Iterable<RedirectEntry> {
                     value = to;
                     if (!infinityProtect.add(value)) {
                         log.info("Detected circular redirecting, breaking here: {}", infinityProtect);
-                        value = entry.getKey();
+                        value = null;
                         break;
                     }
 
@@ -164,7 +178,7 @@ public class RedirectList implements Iterable<RedirectEntry> {
 
     protected void reduceXmlHelper() {
         if (entries != null) {
-            redirects = new HashMap<>();
+            redirects = new LinkedHashMap<>();
             for (RedirectEntry e : entries) {
                 redirects.put(e.getFrom(), e.getTo());
             }
