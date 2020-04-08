@@ -615,6 +615,7 @@
     <xs:attribute name="from" type="xs:string"/>
     <xs:attribute name="to" type="xs:string"/>
     <xs:attribute name="ultimate" type="xs:string"/>
+    <xs:attribute name="circular" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="mediaSearchResults">
