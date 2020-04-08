@@ -87,7 +87,14 @@ public class MediaObjectLocker {
          * The argument on which to lock. First one is 0.
          */
         int argNumber() default 0;
+        /**
+         * A description of the reason of the lock. Only used for logging purposes.
+         */
         String reason() default "";
+
+        /**
+         * A method on the argument to call to get the MID. Default we suppose the argument to _be_ the MID.e
+         */
         String method() default "";
     }
 
