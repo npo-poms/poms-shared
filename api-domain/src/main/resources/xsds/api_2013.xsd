@@ -608,7 +608,6 @@
       <xs:element name="entry" type="redirectEntry" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="lastUpdate" type="xs:dateTime"/>
-    <xs:attribute name="lastChange" type="xs:dateTime"/>
   </xs:complexType>
 
   <xs:complexType name="redirectEntry">
