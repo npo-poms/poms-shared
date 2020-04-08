@@ -1,5 +1,6 @@
 package nl.vpro.domain.api.media;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RedirectListTest {
 
-    private RedirectList instance = new RedirectList();
+    private RedirectList instance;
 
     {
         Map<String, String> redirects = new HashMap<>();
@@ -26,7 +27,7 @@ public class RedirectListTest {
         redirects.put("y", "z");
         redirects.put("z", "x");
 
-        instance.redirects = redirects;
+        instance = new RedirectList(Instant.EPOCH, redirects);
     }
 
     @Test

@@ -8,6 +8,9 @@ import java.util.Optional;
  */
 public interface MediaRedirector  {
 
-    Optional<String> redirect(String mid);
+
+    default Optional<String> redirect(String mid) {
+        throw new UnsupportedOperationException();
+    }
 
 }

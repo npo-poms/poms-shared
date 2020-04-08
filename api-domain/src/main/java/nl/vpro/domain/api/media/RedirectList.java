@@ -28,29 +28,23 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class RedirectList implements Iterable<RedirectEntry> {
 
     @JsonProperty("map")
-    Map<String, String> redirects = new HashMap<>();
+    private Map<String, String> redirects = new HashMap<>();
 
-    Map<String, String> resolvedRedirects;
+    private Map<String, String> resolvedRedirects;
 
     // used for XML binding only.
-    List<RedirectEntry> entries;
+    private List<RedirectEntry> entries;
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     Instant lastUpdate;
 
-    @XmlAttribute
-    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-    @XmlSchemaType(name = "dateTime")
-    Instant lastChange;
-
     public RedirectList() {
         lastUpdate = Instant.EPOCH;
     }
-    public RedirectList(Instant lastUpdate, Instant lastChange, Map<String, String> redirects) {
+    public RedirectList(Instant lastUpdate, Map<String, String> redirects) {
         this.lastUpdate = lastUpdate;
-        this.lastChange = lastChange;
         this.redirects = redirects;
     }
 
@@ -69,6 +63,14 @@ public class RedirectList implements Iterable<RedirectEntry> {
         return Optional.ofNullable(getResolvedMap().get(mid));
     }
 
+    public String put(String key, String value) {
+        String put = redirects.put(key, value);
+        if (put != null) {
+            resolvedRedirects = null;
+        }
+        return put;
+    }
+
 
     private  Map<String, String> resolvedMap() {
         Map<String, String> result = new HashMap<>();
@@ -76,7 +78,7 @@ public class RedirectList implements Iterable<RedirectEntry> {
         for (Map.Entry<String, String> entry : redirects.entrySet()) {
             String value = entry.getValue();
             String to = value;
-            Set<String> infinityProtect = new HashSet<>();
+            Set<String> infinityProtect = new LinkedHashSet<>();
             infinityProtect.add(value);
             while (to != null) {
                 to = redirects.get(to);
@@ -123,8 +125,8 @@ public class RedirectList implements Iterable<RedirectEntry> {
         return lastUpdate;
     }
 
-    public Instant getLastChange() {
-        return lastChange;
+    public int size() {
+        return redirects.size();
     }
 
     @Override
