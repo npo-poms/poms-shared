@@ -43,6 +43,7 @@ import nl.vpro.util.*;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.*;
 
+
 /**
  * A MediaUpdate is meant for communicating updates. It is not meant as a complete representation of the object.
  *
@@ -81,30 +82,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     IntegerVersionSpecific,
     MediaIdentifiable {
 
-    public static final Validator VALIDATOR;
 
-    static {
-        Validator validator;
-        Locale defaultLocale = Locale.getDefault();
-        try {
-            Locale.setDefault(Locale.US);
-            ValidatorFactory factory = Validation
-                .buildDefaultValidatorFactory();
-            validator = factory.getValidator();
-        } catch (ValidationException ve) {
-            log.info(ve.getClass().getName() + " " + ve.getMessage());
-            validator = null;
-
-        } catch(Throwable e) {
-            // like java.lang.NoSuchMethodError: javax.el.ELUtil.getExpressionFactory()Ljavax/el/ExpressionFactory;
-            log.warn(e.getClass().getName() + " " + e.getMessage());
-            log.info("javax.validation will be disabled");
-            validator = null;
-        } finally {
-            Locale.setDefault(defaultLocale);
-        }
-        VALIDATOR = validator;
-    }
 
     @SuppressWarnings("unchecked")
     public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType owner) {
@@ -365,32 +343,27 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return violations(WarningValidatorGroup.class);
     }
     public Set<? extends ConstraintViolation<MediaUpdate<? extends M>>> violations(Class<?>... groups) {
-        if (VALIDATOR != null) {
-            if (groups.length == 0) {
-                groups = new Class<?>[]{
-                    Default.class, PomsValidatorGroup.class
-                };
-            }
-            mediaObjectToValidate = null;
-            Set<? extends ConstraintViolation<MediaUpdate<? extends M>>> result = VALIDATOR.validate(this, groups);
-            if (result.isEmpty()) {
-                mediaObjectToValidate = fetch(OwnerType.BROADCASTER);
-                try {
-                    result = VALIDATOR.validate(this, groups);
-                    if (result.isEmpty()) {
-                        log.debug("validates");
-                    }
-                    return result;
-                } catch (Throwable t) {
-                    log.error(t.getMessage(), t);
-                    return Collections.emptySet();
-                }
-            }
-            return result;
-        } else {
-            log.warn("Cannot validate since no validator available");
-            return Collections.emptySet();
+        if (groups.length == 0) {
+            groups = new Class<?>[]{
+                Default.class, PomsValidatorGroup.class
+            };
         }
+        mediaObjectToValidate = null;
+        Set<? extends ConstraintViolation<MediaUpdate<? extends M>>> result = Validation.validate(this, groups);
+        if (result.isEmpty()) {
+            mediaObjectToValidate = fetch(OwnerType.BROADCASTER);
+            try {
+                result = Validation.validate(this, groups);
+                if (result.isEmpty()) {
+                    log.debug("validates");
+                }
+                return result;
+            } catch (Throwable t) {
+                log.error(t.getMessage(), t);
+                return Collections.emptySet();
+            }
+        }
+        return result;
     }
 
     public String violationMessage() {

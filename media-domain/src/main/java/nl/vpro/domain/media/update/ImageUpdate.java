@@ -38,7 +38,7 @@ import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
-import static nl.vpro.domain.media.update.MediaUpdate.VALIDATOR;
+
 
 
 @XmlRootElement(name = "image")
@@ -370,11 +370,6 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
     }
 
     public Set<ConstraintViolation<ImageUpdate>> violations(Class<?>... groups) {
-        if (VALIDATOR != null) {
-            return VALIDATOR.validate(this, groups);
-        } else {
-            log.warn("Cannot validate since no validator available");
-            return Collections.emptySet();
-        }
+        return Validation.validate(this, groups);
     }
 }
