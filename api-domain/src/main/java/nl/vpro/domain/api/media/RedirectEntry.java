@@ -22,6 +22,10 @@ public class RedirectEntry {
     private String from;
     @XmlAttribute
     private String to;
+
+    /**
+     * @since 5.13
+     */
     @XmlAttribute
     private String ultimate;
 
