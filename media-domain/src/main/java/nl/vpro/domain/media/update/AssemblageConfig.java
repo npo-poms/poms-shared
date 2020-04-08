@@ -122,6 +122,7 @@ public class AssemblageConfig {
      /**
      * @since 5.13
      */
+     @lombok.Builder.Default
     MidRequire  requireIncomingMid = MidRequire.NO;
 
     SimpleLogger logger;
@@ -306,7 +307,7 @@ public class AssemblageConfig {
                     return f1 != null;
                 }
                 case NO:
-                    return false;
+                    return true;
                 case IF_TARGET_EMPTY: {
                     F f1 = getter.apply(o1);
                     if (f1 == null) {
