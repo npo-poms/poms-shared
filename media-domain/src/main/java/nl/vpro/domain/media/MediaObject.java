@@ -3012,7 +3012,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             getType() == null ? "" : getType() + " ",
             this.getMid() == null ? "<no mid>" : "\"" + this.getMid() + "\"",
             mainTitle,
-            this.getId() == null ? " (new)" : (", id=" + this.getId() + ")")
+            this.isPersisted() ? (", id=" + this.getId()) : " (not persistent)"
             );
     }
 

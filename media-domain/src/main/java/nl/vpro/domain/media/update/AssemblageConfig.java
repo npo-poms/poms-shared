@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.function.*;
 
 import org.slf4j.Logger;
+import org.slf4j.helpers.MessageFormatter;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
@@ -113,10 +114,14 @@ public class AssemblageConfig {
 
     /**
      * TODO
+     * @since 5.13
      */
     @lombok.Builder.Default
     boolean  followMerges = false;
 
+     /**
+     * @since 5.13
+     */
     MidRequire  requireIncomingMid = MidRequire.NO;
 
     SimpleLogger logger;
@@ -273,12 +278,18 @@ public class AssemblageConfig {
 
     }
 
+    /**
+     * @since 5.13
+     */
     public enum RequireEnum {
         YES,
         NO,
         IF_TARGET_EMPTY;
     }
 
+     /**
+     * @since 5.13
+     */
     public static abstract class Require<S, F>  implements BiPredicate<S, S> {
         private final RequireEnum value;
         private final Function<S, F> getter;
@@ -309,13 +320,16 @@ public class AssemblageConfig {
                     throw new IllegalStateException();
             }
         }
-        public void throwIfIllegal(S o1, S o2) {
+        public void throwIfIllegal(S o1, S o2, String message, Object... arguments) {
             if (! test(o1, o2)) {
-                throw new IllegalArgumentException();
+                throw new RequiredFieldException(message, arguments);
             }
 
         }
     }
+     /**
+     * @since 5.13
+      */
     public static class MidRequire extends Require<MediaObject, String> {
         public static final MidRequire YES = new MidRequire(RequireEnum.YES);
         public static final MidRequire NO = new MidRequire(RequireEnum.NO);
@@ -323,6 +337,29 @@ public class AssemblageConfig {
 
         private MidRequire(RequireEnum value) {
             super(value, MediaObject::getMid);
+        }
+    }
+
+    /**
+     * @since 5.13
+     */
+    public static class RequiredFieldException extends IllegalArgumentException {
+        @Getter
+        Object[] arguments;
+        RequiredFieldException(String format, Object... arguments) {
+            super(format);
+            this.arguments = arguments;
+        }
+
+        /**
+         * Returns the formatted message. If you want to supply it do logging directly you could user {@link #getFormat()} and {@link #getArguments()}
+         */
+        @Override
+        public String getMessage() {
+             return MessageFormatter.arrayFormat(super.getMessage(), arguments).getMessage();
+        }
+        public String getFormat() {
+            return super.getMessage();
         }
     }
 

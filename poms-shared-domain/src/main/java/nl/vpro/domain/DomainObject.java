@@ -31,6 +31,10 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
     @Getter
     protected Long id;
 
+    @Transient
+    @Getter
+    private boolean persisted;
+
     public DomainObject() {
     }
 
@@ -81,5 +85,11 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : super.hashCode();
+    }
+
+    @PostLoad
+    @PostPersist
+    void setPersisted() {
+        persisted = true;
     }
 }

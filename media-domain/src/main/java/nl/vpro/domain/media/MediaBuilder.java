@@ -704,7 +704,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B websites(String... websites) {
-        mediaObject().getWebsites().addAll(Arrays.stream(websites).map(Website::new).collect(Collectors.toList()));
+        mediaObject().getWebsites().addAll(
+            Arrays.stream(websites)
+                .map(Website::new)
+                .collect(Collectors.toList()));
         return (B) this;
     }
 

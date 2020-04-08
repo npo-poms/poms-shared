@@ -81,7 +81,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     IntegerVersionSpecific,
     MediaIdentifiable {
 
-    static final Validator VALIDATOR;
+    public static final Validator VALIDATOR;
 
     static {
         Validator validator;
