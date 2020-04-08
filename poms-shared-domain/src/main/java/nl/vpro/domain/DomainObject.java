@@ -32,6 +32,7 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
     protected Long id;
 
     @Transient
+    @XmlTransient
     @Getter
     private boolean persisted;
 
