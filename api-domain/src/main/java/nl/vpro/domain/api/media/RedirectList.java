@@ -24,8 +24,12 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlRootElement(name = "redirects")
 public class RedirectList implements Iterable<RedirectEntry> {
 
-    Map<String, String> redirects;
+    @JsonProperty("map")
+    Map<String, String> redirects = new HashMap<>();
 
+    Map<String, String> resolvedRedirects;
+
+    // used for XML binding only.
     List<RedirectEntry> entries;
 
     @XmlAttribute
@@ -47,23 +51,54 @@ public class RedirectList implements Iterable<RedirectEntry> {
         this.redirects = redirects;
     }
 
-    @JsonProperty
     public Map<String, String> getMap() {
-        if (redirects == null) {
-            redirects = new HashMap<>();
+        return Collections.unmodifiableMap(redirects);
+    }
+
+    public Map<String, String> getResolvedMap() {
+        if (resolvedRedirects == null) {
+            resolvedRedirects = resolvedMap();
         }
-        return redirects;
+        return resolvedRedirects;
+    }
+
+    public final Optional<String> redirect(String mid) {
+        return Optional.ofNullable(getResolvedMap().get(mid));
+    }
+
+
+    private  Map<String, String> resolvedMap() {
+        Map<String, String> result = new HashMap<>();
+
+        for (Map.Entry<String, String> entry : redirects.entrySet()) {
+            String value = entry.getValue();
+            String to = value;
+            while (to != null) {
+                to = redirects.get(to);
+                if (to != null) {
+                    value = to;
+                }
+            }
+            result.put(entry.getKey(), value);
+        }
+        return Collections.unmodifiableMap(result);
+    }
+
+
+
+    public List<RedirectEntry> getList() {
+        return getMap()
+            .entrySet()
+            .stream()
+            .map(RedirectEntry::new)
+            .collect(Collectors.toList());
     }
 
     @XmlElement(name = "entry", namespace = Xmlns.API_NAMESPACE)
     @JsonIgnore
-    public List<RedirectEntry> getList() {
+    protected List<RedirectEntry> getXmlList() {
         if (entries == null) {
-            entries = getMap()
-                .entrySet()
-                .stream()
-                .map(RedirectEntry::new)
-                .collect(Collectors.toList());
+            entries = getList();
         }
         return entries;
 
@@ -105,10 +140,9 @@ public class RedirectList implements Iterable<RedirectEntry> {
     @Override
     public Iterator<RedirectEntry> iterator() {
         return getList().iterator();
-
     }
 
-    protected void reduce() {
+    protected void reduceXmlHelper() {
         if (entries != null) {
             redirects = new HashMap<>();
             for (RedirectEntry e : entries) {
@@ -118,6 +152,6 @@ public class RedirectList implements Iterable<RedirectEntry> {
         }
     }
     void afterUnmarshal(Unmarshaller u, Object parent) {
-        reduce();
+        reduceXmlHelper();
     }
 }

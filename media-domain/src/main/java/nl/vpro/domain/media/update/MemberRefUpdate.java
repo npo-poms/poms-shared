@@ -7,10 +7,10 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.Setter;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.MemberRef;
 import nl.vpro.domain.media.support.OwnerType;
@@ -115,5 +115,10 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
         result = 31 * result + (highlighted != null ? highlighted.hashCode() : 0);
         result = 31 * result + (mediaRef != null ? mediaRef.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return position + ":" + mediaRef + ((highlighted == null || ! highlighted) ? "" : ":highlighted");
     }
 }
