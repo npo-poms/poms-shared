@@ -17,30 +17,58 @@ public class RedirectListTest {
     {
         Map<String, String> redirects = new HashMap<>();
         redirects.put("a", "b");
+        redirects.put("source", "target");
+        redirects.put("anothersource", "target");
+        redirects.put("source1", "target_but_source");
+        redirects.put("target_but_source", "ultimate_target");
+
+        redirects.put("x", "y");
+        redirects.put("y", "z");
+        redirects.put("z", "x");
+
         instance.redirects = redirects;
     }
 
     @Test
     public void json() {
         RedirectList rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(instance,
-            "{\"lastUpdate\":\"1970-01-01T01:00:00+01:00\",\"map\":{\"a\":\"b\"}}");
-        assertThat(rounded.getList()).hasSize(1);
+            "{\n" +
+                "  \"lastUpdate\" : \"1970-01-01T01:00:00+01:00\",\n" +
+                "  \"map\" : {\n" +
+                "    \"a\" : \"b\",\n" +
+                "    \"x\" : \"y\",\n" +
+                "    \"y\" : \"z\",\n" +
+                "    \"source1\" : \"target_but_source\",\n" +
+                "    \"z\" : \"x\",\n" +
+                "    \"source\" : \"target\",\n" +
+                "    \"anothersource\" : \"target\",\n" +
+                "    \"target_but_source\" : \"ultimate_target\"\n" +
+                "  }\n" +
+                "}");
+        assertThat(rounded.getList()).hasSize(8);
         assertThat(rounded.getList().get(0).getFrom()).isEqualTo("a");
         assertThat(rounded.getList().get(0).getTo()).isEqualTo("b");
-        assertThat(rounded.getMap()).hasSize(1);
+        assertThat(rounded.getMap()).hasSize(8);
         assertThat(rounded.getMap().get("a")).isEqualTo("b");
     }
 
     @Test
     public void jaxb() {
         RedirectList rounded = JAXBTestUtil.roundTripAndSimilarAndEquals(instance,
-            "<redirects lastUpdate=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <entry from=\"a\" to=\"b\"/>\n" +
-            "</redirects>");
-        assertThat(rounded.getList()).hasSize(1);
+            "<redirects lastUpdate=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:api:2013\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <entry from=\"a\" to=\"b\" ultimate=\"b\"/>\n" +
+                "    <entry from=\"x\" to=\"y\" ultimate=\"x\"/>\n" +
+                "    <entry from=\"y\" to=\"z\" ultimate=\"y\"/>\n" +
+                "    <entry from=\"source1\" to=\"target_but_source\" ultimate=\"ultimate_target\"/>\n" +
+                "    <entry from=\"z\" to=\"x\" ultimate=\"z\"/>\n" +
+                "    <entry from=\"source\" to=\"target\" ultimate=\"target\"/>\n" +
+                "    <entry from=\"anothersource\" to=\"target\" ultimate=\"target\"/>\n" +
+                "    <entry from=\"target_but_source\" to=\"ultimate_target\" ultimate=\"ultimate_target\"/>\n" +
+                "</redirects>");
+        assertThat(rounded.getList()).hasSize(8);
         assertThat(rounded.getList().get(0).getFrom()).isEqualTo("a");
         assertThat(rounded.getList().get(0).getTo()).isEqualTo("b");
-        assertThat(rounded.getMap()).hasSize(1);
+        assertThat(rounded.getMap()).hasSize(8);
         assertThat(rounded.getMap().get("a")).isEqualTo("b");
 
 

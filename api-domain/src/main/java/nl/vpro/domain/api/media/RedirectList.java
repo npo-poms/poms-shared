@@ -1,5 +1,7 @@
 package nl.vpro.domain.api.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,6 +24,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "redirects")
+@Slf4j
 public class RedirectList implements Iterable<RedirectEntry> {
 
     @JsonProperty("map")
@@ -73,10 +76,19 @@ public class RedirectList implements Iterable<RedirectEntry> {
         for (Map.Entry<String, String> entry : redirects.entrySet()) {
             String value = entry.getValue();
             String to = value;
+            Set<String> infinityProtect = new HashSet<>();
+            infinityProtect.add(value);
             while (to != null) {
                 to = redirects.get(to);
                 if (to != null) {
                     value = to;
+                    if (!infinityProtect.add(value)) {
+                        log.info("Detected circular redirecting, breaking here: {}", infinityProtect);
+                        value = entry.getKey();
+                        break;
+                    }
+
+
                 }
             }
             result.put(entry.getKey(), value);
@@ -90,7 +102,10 @@ public class RedirectList implements Iterable<RedirectEntry> {
         return getMap()
             .entrySet()
             .stream()
-            .map(RedirectEntry::new)
+            .map(e -> {
+                String ultimate = redirect(e.getKey()).orElse(null);
+                return new RedirectEntry(e.getKey(), e.getValue(), ultimate);
+            })
             .collect(Collectors.toList());
     }
 
