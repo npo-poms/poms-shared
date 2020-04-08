@@ -3,6 +3,8 @@ package nl.vpro.domain.api.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Xmlns;
@@ -55,7 +57,7 @@ public class RedirectEntry {
 
     @Override
     public String toString() {
-        return from + " -> " + to;
+        return from + " -> " + to + (Objects.equals(to, ultimate) ? "" : (" ..-> " + ultimate));
     }
 
 }
