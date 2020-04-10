@@ -16,6 +16,9 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.util.IntegerVersion;
 
+import static nl.vpro.util.Predicates.alwaysFalse;
+import static nl.vpro.util.Predicates.biAlwaysFalse;
+
 /**
  * Contains hints and configuration about how to assemble media objects from {@link MediaUpdate} objects.
  * @author Michiel Meeuwissen
@@ -74,7 +77,7 @@ public class AssemblageConfig {
     Duration mergeScheduleEvents = Duration.ofMillis(-1);
 
     @lombok.Builder.Default
-    BiFunction<MediaObject, AssemblageConfig, Boolean> inferDurationFromScheduleEvents = (s, ac) -> false;
+    BiPredicate<MediaObject, AssemblageConfig> inferDurationFromScheduleEvents = biAlwaysFalse();
 
 
     @lombok.Builder.Default
@@ -103,10 +106,10 @@ public class AssemblageConfig {
      * See als {@link Builder#deleteSegmentsForOwner()}
      */
     @lombok.Builder.Default
-    BiFunction<Segment, AssemblageConfig, Boolean> segmentsForDeletion = (s, ac) -> false;
+    BiPredicate<Segment, AssemblageConfig> segmentsForDeletion = biAlwaysFalse();
 
     @lombok.Builder.Default
-    Function<String, Boolean> cridsForDelete = (c) -> false;
+    Predicate<String> cridsForDelete = alwaysFalse();
 
     @lombok.Builder.Default
     Steal updateType = Steal.NO;
@@ -119,12 +122,13 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean  followMerges = false;
 
-     /**
+    /**
      * @since 5.13
      */
-     @lombok.Builder.Default
+    @lombok.Builder.Default
     MidRequire  requireIncomingMid = MidRequire.NO;
 
+    @ToString.Exclude
     SimpleLogger logger;
 
 
@@ -210,7 +214,7 @@ public class AssemblageConfig {
     }
 
     public boolean considerForDeletion(Segment segment) {
-        return segmentsForDeletion.apply(segment, this);
+        return segmentsForDeletion.test(segment, this);
     }
 
     public void backwardsCompatible(IntegerVersion version) {
@@ -285,7 +289,7 @@ public class AssemblageConfig {
     public enum RequireEnum {
         YES,
         NO,
-        IF_TARGET_EMPTY;
+        IF_TARGET_EMPTY
     }
 
      /**
@@ -325,7 +329,10 @@ public class AssemblageConfig {
             if (! test(o1, o2)) {
                 throw new RequiredFieldException(message, arguments);
             }
-
+        }
+        @Override
+        public String toString() {
+            return value.toString();
         }
     }
      /**
