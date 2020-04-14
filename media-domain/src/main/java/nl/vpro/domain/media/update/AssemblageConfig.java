@@ -130,7 +130,7 @@ public class AssemblageConfig {
     MidRequire  requireIncomingMid = MidRequire.NO;
 
     @ToString.Exclude
-    SimpleLogger logger;
+    transient SimpleLogger logger;
 
 
     public Set<OwnerType> getOwnerAndSimilar() {
