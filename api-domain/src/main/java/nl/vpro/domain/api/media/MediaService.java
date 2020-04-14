@@ -25,7 +25,7 @@ public interface MediaService extends MediaProvider {
     CloseableIterator<MediaChange> changes(String profile, boolean profileCheck, Instant since, String mid, Order order, Integer max, Long keepAlive, boolean withSequences, Deletes deletes) throws ProfileNotFoundException;
 
     @Override
-    <T extends MediaObject> T findByMid(String mid);
+    <T extends MediaObject> T findByMid(String mid, boolean loadDeleted);
 
     List<MediaObject> loadAll(List<String> ids);
 

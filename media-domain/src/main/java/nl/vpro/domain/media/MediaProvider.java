@@ -6,6 +6,10 @@ package nl.vpro.domain.media;
  */
 public interface  MediaProvider {
 
-    <T extends MediaObject> T  findByMid(String mid);
+    default <T extends MediaObject> T  findByMid(String mid) {
+        return findByMid(mid, true);
+    }
+
+    <T extends MediaObject> T  findByMid(String mid, boolean loadDeleted);
 
 }
