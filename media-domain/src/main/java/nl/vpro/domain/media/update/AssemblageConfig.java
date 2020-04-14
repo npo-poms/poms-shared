@@ -15,6 +15,7 @@ import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.util.IntegerVersion;
+import nl.vpro.util.Predicates;
 
 import static nl.vpro.util.Predicates.alwaysFalse;
 import static nl.vpro.util.Predicates.biAlwaysFalse;
@@ -224,24 +225,10 @@ public class AssemblageConfig {
     }
 
     public void setMemberOfUpdateBoolean(boolean bool) {
-        setMemberOfUpdate(new Always(bool));
+        setMemberOfUpdate(Predicates.biAlways(bool, "always " + bool));
     }
 
-    @EqualsAndHashCode
-    public static class Always implements   BiPredicate<MemberRef, AssemblageConfig> {
 
-        private final boolean always;
-
-        public Always(boolean always) {
-            this.always = always;
-        }
-
-        @Override
-        public boolean test(MemberRef memberRef, AssemblageConfig assemblageConfig) {
-            return always;
-
-        }
-    }
 
     public static class Builder {
         /**
@@ -252,7 +239,7 @@ public class AssemblageConfig {
             return segmentsForDeletion((s, a) -> s.getOwner() != null && a.getOwnerAndSimilar().contains(s.getOwner()));
         }
         public Builder memberOfUpdateBoolean(boolean b) {
-            return memberOfUpdate((new Always(b)));
+            return memberOfUpdate(Predicates.biAlways(b, "always " + b));
         }
         public Builder memberRefMatchOwner() {
             return memberOfUpdate((mr, c) -> mr.getOwner() == c.getOwner());
