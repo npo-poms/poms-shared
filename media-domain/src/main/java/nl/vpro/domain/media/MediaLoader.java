@@ -25,8 +25,8 @@ public interface MediaLoader extends MediaProvider {
 
     @SuppressWarnings("unchecked")
     @Override
-    default <T extends MediaObject> T findByMid(String mid) {
-        return (T) load(false, mid);
+    default <T extends MediaObject> T findByMid(boolean loadDeleted, String mid) {
+        return (T) load(loadDeleted, mid);
     }
 
 }
