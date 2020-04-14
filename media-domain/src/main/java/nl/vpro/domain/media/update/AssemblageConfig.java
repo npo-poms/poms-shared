@@ -29,6 +29,7 @@ import static nl.vpro.util.Predicates.biAlwaysFalse;
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder")
 @Data
+@EqualsAndHashCode
 @ToString
 public class AssemblageConfig {
 
@@ -115,7 +116,6 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     Steal updateType = Steal.NO;
 
-
     /**
      * TODO
      * @since 5.13
@@ -130,6 +130,7 @@ public class AssemblageConfig {
     MidRequire  requireIncomingMid = MidRequire.NO;
 
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     transient SimpleLogger logger;
 
 
@@ -321,7 +322,22 @@ public class AssemblageConfig {
         public String toString() {
             return value.toString();
         }
-    }
+
+         @Override
+         public boolean equals(Object o) {
+             if (this == o) return true;
+             if (o == null || getClass() != o.getClass()) return false;
+
+             Require<?, ?> require = (Require<?, ?>) o;
+
+             return value == require.value;
+         }
+
+         @Override
+         public int hashCode() {
+             return value != null ? value.hashCode() : 0;
+         }
+     }
      /**
      * @since 5.13
       */
