@@ -92,7 +92,7 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
             return false;
         }
 
-        RangeMatcher that = (RangeMatcher)o;
+        RangeMatcher<T> that = (RangeMatcher<T>)o;
         T begin = getBegin();
         T end = getEnd();
 
