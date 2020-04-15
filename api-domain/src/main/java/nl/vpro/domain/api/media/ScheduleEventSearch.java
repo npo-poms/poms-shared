@@ -105,6 +105,9 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
         return countSearches() > 0;
     }
 
+    /**
+     * Returns the number of independent searches on a scheduleevent of a mediaobject this search represents (i.e. restristictions on the number of fields)
+     */
     public int countSearches() {
         int result = 0;
         if (channel != null) {
@@ -113,7 +116,11 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
         if (net != null) {
             result++;
         }
+
         if (rerun != null){
+            result ++;
+        }
+        if (begin != null || end  != null) {
             result ++;
         }
         return result;
