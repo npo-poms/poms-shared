@@ -75,7 +75,6 @@ public interface Range<T extends Comparable<T>, S extends Range.RangeValue<T>> e
         RangeValue() {
 
         }
-
         public boolean isInclusive() {
             return inclusive == null || inclusive;
         }
@@ -84,5 +83,10 @@ public interface Range<T extends Comparable<T>, S extends Range.RangeValue<T>> e
             return getValue();
         }
         public abstract T getValue();
+
+        @Override
+        public String toString() {
+            return String.valueOf(getValue());
+        }
     }
 }
