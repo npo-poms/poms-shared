@@ -29,11 +29,11 @@ public class ApiScheduleEvent extends ScheduleEvent {
     public ApiScheduleEvent() {
     }
 
-    public ApiScheduleEvent(nl.vpro.domain.media.ScheduleEvent event) {
+    public ApiScheduleEvent(ScheduleEvent event) {
         super(event);
     }
 
-    public ApiScheduleEvent(nl.vpro.domain.media.ScheduleEvent event, Program media) {
+    public ApiScheduleEvent(ScheduleEvent event, Program media) {
         super(event, media);
     }
 
