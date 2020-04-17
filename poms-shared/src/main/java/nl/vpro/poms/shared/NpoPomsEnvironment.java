@@ -1,4 +1,4 @@
-package nl.vpro.util;
+package nl.vpro.poms.shared;
 
 import java.net.MalformedURLException;
 import java.net.URL;

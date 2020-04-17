@@ -1,4 +1,4 @@
-package nl.vpro.util;
+package nl.vpro.poms.shared;
 
 /**
  * @author Michiel Meeuwissen

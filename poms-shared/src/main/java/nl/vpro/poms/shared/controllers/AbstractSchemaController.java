@@ -1,4 +1,4 @@
-package nl.vpro.controllers;
+package nl.vpro.poms.shared.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 
