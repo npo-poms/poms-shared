@@ -153,7 +153,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     List<@Email(message = "{nl.vpro.constraints.Email.message}") String> email;
 
-    protected List<ImageUpdate> images;
+    protected List<@Valid ImageUpdate> images;
 
     /**
      * This represent the editable intentions
@@ -164,9 +164,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected List<TargetGroupType> targetGroups;
 
-    protected List<GeoLocationUpdate> geoLocations;
+    protected List<@Valid GeoLocationUpdate> geoLocations;
 
-    private List<TopicUpdate> topics;
+    private List<@Valid TopicUpdate> topics;
 
     @Valid
     protected Asset asset;
@@ -184,15 +184,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
         @Size(min = 1, max = 255)
         String> tags;
 
-    private List<CreditsUpdate> credits;
+    private List<@NotNull @Valid CreditsUpdate> credits;
 
-    private List<PortalRestrictionUpdate> portalRestrictions;
+    private List<@NotNull @Valid PortalRestrictionUpdate> portalRestrictions;
 
-    private SortedSet<GeoRestrictionUpdate> geoRestrictions;
+    private SortedSet<@NotNull @Valid GeoRestrictionUpdate> geoRestrictions;
 
-    private SortedSet<TitleUpdate> titles;
+    private SortedSet<@NotNull @Valid TitleUpdate> titles;
 
-    private SortedSet<DescriptionUpdate> descriptions;
+    private SortedSet<@NotNull @Valid DescriptionUpdate> descriptions;
 
     private SortedSet<
         @NotNull
@@ -202,6 +202,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     private SortedSet<MemberRefUpdate> memberOf;
 
     private List<
+        @NotNull
         @URI(message = "{nl.vpro.constraints.URI}",
             mustHaveScheme = true,
             minHostParts = 2,
@@ -216,11 +217,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     private List<@Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,139}$")
         String> twitterrefs;
 
-    private SortedSet<LocationUpdate> locations;
+    private SortedSet<@NotNull @Valid LocationUpdate> locations;
 
-    private SortedSet<RelationUpdate> relations;
+    private SortedSet<@NotNull @Valid RelationUpdate> relations;
 
-    protected SortedSet<PredictionUpdate> predictions;
+    protected SortedSet<@NotNull @Valid PredictionUpdate> predictions;
 
     @Getter
     boolean imported = false;

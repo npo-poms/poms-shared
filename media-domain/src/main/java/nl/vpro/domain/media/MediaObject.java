@@ -407,30 +407,27 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @JoinColumn(name = "mediaobject_id")
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
-    protected List<@NotNull Credits> credits;
+    protected List<@NotNull @Valid Credits> credits;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
     @NoDuplicateOwner
     @XmlElement(name = "geoLocations")
     @JsonProperty("geoLocations")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<@NotNull GeoLocations> geoLocations;
+    protected SortedSet<@NotNull @Valid GeoLocations> geoLocations;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
     @NoDuplicateOwner
     @XmlElement(name = "topics")
     @JsonProperty("topics")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<@NotNull Topics> topics;
+    protected SortedSet<@NotNull @Valid Topics> topics;
 
     @ElementCollection
     @JoinTable(name = "mediaobject_awards")
@@ -456,8 +453,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                     + "or mediaobjec2_.publishstart is null " + "or mediaobjec2_.publishstart < now() "
                     + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec2_.id and o.broadcasters_id in (:broadcasters)))"),
             @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
-    @Valid
-    protected Set<@NotNull MemberRef> memberOf;
+    protected Set<@NotNull @Valid MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
     @NotNull(groups = {WarningValidatorGroup.class })
@@ -495,8 +491,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         nullable = true // hibernate sucks
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
-    protected List<@NotNull TwitterRef> twitterRefs;
+    protected List<@NotNull @Valid TwitterRef> twitterRefs;
 
     protected Short teletext;
 
@@ -505,12 +500,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     protected Boolean isDubbed;
 
     @OneToMany(orphanRemoval = true, mappedBy = "mediaObject", cascade={ALL})
-    @Valid
-    protected Set<@NonNull Prediction> predictions;
+    protected Set<@NonNull @Valid Prediction> predictions;
 
     @Transient
     @Nullable
-    List<@NonNull Prediction> predictionsForXml;
+    List<@NonNull @Valid Prediction> predictionsForXml;
 
     @OneToMany(cascade = ALL, mappedBy = "mediaObject", orphanRemoval = true)
     @SortNatural
@@ -526,20 +520,18 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             + ")"
 
     )
-    @Valid
     @XmlElementWrapper(name = "locations")
     @XmlElement(name = "location")
     @JsonProperty("locations")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    protected SortedSet<@NotNull Location> locations = new TreeSet<>();
+    protected SortedSet<@NotNull @Valid Location> locations = new TreeSet<>();
 
 
     @OneToMany(orphanRemoval = true, cascade= {ALL})
     @JoinColumn(name = "mediaobject_id", updatable = false, nullable = false)
     @SortNatural
-    @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected Set<@NotNull Relation> relations;
+    protected Set<@NotNull @Valid Relation> relations;
 
     @OneToMany(
         orphanRemoval = true,
@@ -550,14 +542,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         name = "list_index",
         nullable = true // hibernate sucks
     )
-    @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
             + "and (publishStop is null or publishStop > now())")
     // @Field(name = "images", store=Store.YES, analyze = Analyze.NO,
     // bridge = @FieldBridge(impl = JsonBridge.class, params = @Parameter(name =
     // "class", value = "[Lnl.vpro.domain.media.support.Image;")))
-    protected List<@NotNull Image> images;
+    protected List<@NotNull @Valid Image> images;
 
     @Column(nullable = false)
     @JsonIgnore // Oh Jackson2...
