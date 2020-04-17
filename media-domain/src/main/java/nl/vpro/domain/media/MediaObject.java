@@ -475,8 +475,7 @@ public abstract class MediaObject
         nullable = true // Did I mention that hibernate sucks?
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
-    protected List<@NotNull Website> websites;
+    protected List<@NotNull @Valid Website> websites;
 
     @OneToMany(cascade = ALL, targetEntity = TwitterRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)

@@ -16,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.validation.URI;
+import nl.vpro.validation.*;
 
 @SuppressWarnings("serial")
 @Entity
@@ -30,12 +30,14 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
     @XmlTransient
     private Long id;
 
-    @URI(message = "{nl.vpro.constraints.URI}")
+    @URI(
+        mustHaveScheme = true,
+        minHostParts = 2,
+        message = "{nl.vpro.constraints.URI}",
+        groups = WarningValidatorGroup.class)
     @XmlValue
-    @Size.List({
-        @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
-        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
-    })
+    @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}")
+    @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     @Getter
     @Setter
     private String url;
