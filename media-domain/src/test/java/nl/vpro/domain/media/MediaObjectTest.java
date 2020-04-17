@@ -14,9 +14,7 @@ import javax.validation.ConstraintViolation;
 import javax.xml.bind.JAXB;
 
 import org.assertj.core.api.Assertions;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
@@ -25,6 +23,8 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
+import static nl.vpro.domain.ValidationTestHelper.dbValidate;
+import static nl.vpro.domain.ValidationTestHelper.validate;
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static nl.vpro.domain.media.support.OwnerType.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -568,6 +568,28 @@ public class MediaObjectTest {
         assertThat(constraintViolations).hasSize(1);
         assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("must contain a valid URI (: isn't)");
         log.info("{}", constraintViolations);
+    }
+
+    @Test
+    public void testWebsiteValidation() {
+        Program p = new Program();
+        p.setType(ProgramType.BROADCAST);
+        p.addWebsite(new Website("bla"));
+        p.setAVType(AVType.AUDIO);
+        p.setAgeRating(AgeRating.ALL);
+        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
+        validate(p, true, 1);
+        {
+            Set<ConstraintViolation<Program>> constraintViolations = dbValidate(p);
+            assertThat(constraintViolations).hasSize(0);
+        }
+        p.getWebsites().get(0).setUrl("http://bla");
+        validate(p, true, 1);
+        p.getWebsites().get(0).setUrl("http://bla.nl");
+        validate(p, true, 0);
+
+        p.getWebsites().get(0).setUrl("www.kro-ncrv.nl/kruispunt");
+        validate(p, true, 1);
     }
 
     @Test

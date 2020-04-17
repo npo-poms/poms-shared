@@ -202,11 +202,14 @@ public abstract class  MediaUpdate<M extends MediaObject>
     private SortedSet<MemberRefUpdate> memberOf;
 
     private List<
-        @URI(message = "{nl.vpro.constraints.URI}")
-        @Size.List({
-            @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
-            @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
-        })
+        @URI(message = "{nl.vpro.constraints.URI}",
+            mustHaveScheme = true,
+            minHostParts = 2,
+            groups = WarningValidatorGroup.class
+        )
+        @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}")
+        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
+
         String> websites;
 
 
