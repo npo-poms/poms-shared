@@ -94,6 +94,10 @@ public class MediaUpdateList<T> implements Iterable<T>, IntegerVersionSpecific {
         return list == null ? 0 : list.size();
     }
 
+    public boolean isEmpty() {
+        return list == null || list.isEmpty();
+    }
+
     @XmlAttribute
     public int getSize() {
         return size();
