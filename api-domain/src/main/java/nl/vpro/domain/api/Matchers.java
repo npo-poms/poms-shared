@@ -38,7 +38,6 @@ public class Matchers {
             return value == null ? input == null : input != null && Pattern.compile(value, (caseSensitive ? 0 : Pattern.CASE_INSENSITIVE)).matcher(input).matches();
         }
 
-        @SuppressWarnings("ResultOfMethodCallIgnored")
         @Override
         public Validation valid (String value) {
             if (StringUtils.isNotBlank(value)) {
@@ -76,7 +75,7 @@ public class Matchers {
     private Matchers() {
     }
 
-    public static Predicate<String> tokenizedPredicate(final AbstractTextMatcher m) {
+    public static Predicate<String> tokenizedPredicate(final AbstractTextMatcher<?> m) {
         return new Predicate<String>() {
             private Set<String> tokenizedValue;
 
@@ -113,12 +112,7 @@ public class Matchers {
                     return Collections.emptyList();
                 }
                 List<String> list = new ArrayList<>(Arrays.asList(string.toLowerCase().split("\\s*\\b\\s*")));
-                Iterator<String> i = list.iterator();
-                while(i.hasNext()) {
-                    if(org.apache.commons.lang3.StringUtils.isEmpty(i.next())) {
-                        i.remove();
-                    }
-                }
+                list.removeIf(StringUtils::isEmpty);
                 return list;
 
             }
@@ -127,7 +121,8 @@ public class Matchers {
     }
 
 
-    protected static <S extends MatchType> Predicate<String> listPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final boolean tokenized) {
+    protected static <S extends MatchType> Predicate<String> listPredicate(
+        final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final boolean tokenized) {
         return listPredicate(textMatchers, input -> {
             if(tokenized) {
                 return Matchers.tokenizedPredicate(input);
@@ -145,102 +140,98 @@ public class Matchers {
         return listPredicate(textMatchers, true);
     }
 
-    protected static <S extends MatchType> Predicate<String> listPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final Function<AbstractTextMatcher, Predicate<String>> predicater) {
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
+    protected static <S extends MatchType> Predicate<String> listPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final Function<AbstractTextMatcher<?>, Predicate<String>> predicater) {
         if(textMatchers == null) {
             return a -> true;
         }
-        return new Predicate<String>() {
-            @Override
-            public boolean test(@Nullable String input) {
-                switch(textMatchers.getMatch()) {
-                    case SHOULD:
-                        // OR
-                        for(AbstractTextMatcher t : textMatchers) {
-                            if(predicater.apply(t).test(input)) {
-                                return true;
-                            }
+        return input -> {
+            switch(textMatchers.getMatch()) {
+                case SHOULD:
+                    // OR
+                    for(AbstractTextMatcher<?> t : textMatchers) {
+                        if(predicater.apply(t).test(input)) {
+                            return true;
                         }
-                        return false;
-                    default:
-                        // AND
-                        for(AbstractTextMatcher t : textMatchers) {
-                            if(!predicater.apply(t).test(input)) {
-                                return textMatchers.getMatch() == Match.NOT;
-                            }
+                    }
+                    return false;
+                default:
+                    // AND
+                    for(AbstractTextMatcher<?> t : textMatchers) {
+                        if(!predicater.apply(t).test(input)) {
+                            return textMatchers.getMatch() == Match.NOT;
                         }
-                        return textMatchers.getMatch() != Match.NOT;
-                }
+                    }
+                    return textMatchers.getMatch() != Match.NOT;
             }
         };
     }
 
 
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     public static <T, S extends MatchType> Predicate<Collection<T>> toPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final Function<T, String> textValueGetter) {
         if(textMatchers == null) {
             return i -> true;
         }
 
-        return new Predicate<Collection<T>>() {
-            @Override
-            public boolean test(@Nullable Collection<T> collection) {
-                if(collection == null) {
-                    collection = Collections.emptyList();
-                }
-                switch (textMatchers.getMatch()) {
-                    case SHOULD:
-                        for (AbstractTextMatcher textMatcher : textMatchers) {
-                            if (textMatcher.getMatch() == Match.NOT) {
-                                boolean matchedall = true;
-                                for (T item : collection) {
-                                    String value = textValueGetter.apply(item);
-                                    if (!textMatcher.test(value)) {
-                                        matchedall = false;
-                                        break;
-                                    }
+        return collection -> {
+            if(collection == null) {
+                collection = Collections.emptyList();
+            }
+            switch (textMatchers.getMatch()) {
+                case SHOULD:
+                    for (AbstractTextMatcher<?> textMatcher : textMatchers) {
+                        if (textMatcher.getMatch() == Match.NOT) {
+                            boolean matchedall = true;
+                            for (T item : collection) {
+                                String value = textValueGetter.apply(item);
+                                if (!textMatcher.test(value)) {
+                                    matchedall = false;
+                                    break;
                                 }
-                                return matchedall;
+                            }
+                            return matchedall;
 
-                            } else {
-                                for (T item : collection) {
-                                    String value = textValueGetter.apply(item);
-                                    if (textMatcher.test(value)) {
-                                        return true;
-                                    }
+                        } else {
+                            for (T item : collection) {
+                                String value = textValueGetter.apply(item);
+                                if (textMatcher.test(value)) {
+                                    return true;
                                 }
                             }
                         }
-                        // OR
-                        return false;
-                    default:
-                        // AND
-                        for (AbstractTextMatcher textMatcher : textMatchers) {
-                            if (textMatcher.getMatch() == Match.NOT) {
-                                for (T item : collection) {
-                                    String value = textValueGetter.apply(item);
-                                    if (! textMatcher.test(value)) {
-                                        return false;
-                                    }
-                                }
-
-                            } else {
-                                boolean found = false;
-                                for (T item : collection) {
-                                    String value = textValueGetter.apply(item);
-                                    if (textMatcher.test(value)) {
-                                        found = true;
-                                        break;
-                                    }
-                                }
-                                if (!found) {
+                    }
+                    // OR
+                    return false;
+                default:
+                    // AND
+                    for (AbstractTextMatcher<?> textMatcher : textMatchers) {
+                        if (textMatcher.getMatch() == Match.NOT) {
+                            for (T item : collection) {
+                                String value = textValueGetter.apply(item);
+                                if (! textMatcher.test(value)) {
                                     return false;
                                 }
-
                             }
-                        }
-                        return true;
-                }
 
+                        } else {
+                            boolean found = false;
+                            for (T item : collection) {
+                                String value = textValueGetter.apply(item);
+                                if (textMatcher.test(value)) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (!found) {
+                                return false;
+                            }
+
+                        }
+                    }
+                    return true;
             }
+
         };
     }
 
