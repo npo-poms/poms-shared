@@ -10,8 +10,6 @@ import java.util.function.Predicate;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 /**
  * @author rico
  * @since 4.6
@@ -49,9 +47,27 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
     }
 
     @Override
-    public boolean test(@Nullable String input) {
-        return true;
-        //throw new UnsupportedOperationException("not used. This would depend on field. Use nl.vpro.domain.api.Matchers#toPredicate");
+    public boolean test(String s) {
+        boolean hasShould = false;
+        boolean shouldResult = false;
+
+        for(AbstractTextMatcher<S> t : matchers) {
+            boolean match = t.test(s);
+            switch(t.getMatch()) {
+                case NOT:
+                    // fall through
+                case MUST:
+                    if (! match) {
+                        return false;
+                    }
+                    break;
+                case SHOULD:
+                    hasShould = true;
+                    shouldResult |= match;
+                    break;
+            }
+        }
+        return ! hasShould || shouldResult;
     }
 
     public boolean searchEquals(AbstractTextMatcherList<T, S> b) {

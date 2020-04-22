@@ -455,8 +455,10 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
              if (list == null) {
                  return TestResultIgnore.INSTANCE;
             }
-            return new TestResultImpl(description, list.getMatch(), () ->
-                list.test(supplier.get())
+            return new TestResultImpl(description, list.getMatch(), () -> {
+                String value = supplier.get();
+                return list.test(value);
+            }
             );
         }
 

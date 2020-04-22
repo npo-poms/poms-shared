@@ -82,5 +82,4 @@ public class ExtendedTextMatcherList extends AbstractTextMatcherList<ExtendedTex
 
 
 
-
 }

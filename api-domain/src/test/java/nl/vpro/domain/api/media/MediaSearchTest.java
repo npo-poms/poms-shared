@@ -16,6 +16,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
+import static nl.vpro.domain.api.TextMatcher.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -32,13 +33,13 @@ public class MediaSearchTest {
             "<local:mediaSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
                 "    <api:text>Title</api:text>\n" +
                 "</local:mediaSearch>");
-        assertThat(new TextMatcher("Title")).isEqualTo(out.getText());
+        assertThat(must("Title")).isEqualTo(out.getText());
     }
 
     @Test
     public void testGetBroadcasters() {
         MediaSearch in = new MediaSearch();
-        in.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("TROS")));
+        in.setBroadcasters(new TextMatcherList(must("VPRO"), must("TROS")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<local:mediaSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
@@ -132,7 +133,7 @@ public class MediaSearchTest {
     @Test
     public void testApplyTypes() {
         MediaSearch in = new MediaSearch();
-        in.setTypes(new TextMatcherList(Match.SHOULD, new TextMatcher("SEASON"), new TextMatcher("SERIES")));
+        in.setTypes(new TextMatcherList(Match.SHOULD, must("SEASON"), must("SERIES")));
 
         {
             MediaObject object = new Group(GroupType.SERIES);
@@ -147,7 +148,10 @@ public class MediaSearchTest {
     @Test
     public void testApplyTypesWithNots() {
         MediaSearch in = new MediaSearch();
-        in.setTypes(new TextMatcherList(new TextMatcher("SEASON", Match.NOT), new TextMatcher("SERIES", Match.NOT)));
+        in.setTypes(new TextMatcherList(
+            not("SEASON"),
+            not("SERIES")
+        ));
 
         {
             MediaObject object = new Group(GroupType.SERIES);
@@ -204,7 +208,7 @@ public class MediaSearchTest {
     @Test
     public void testApplyIncludeMediaIds() {
         MediaSearch in = new MediaSearch();
-        in.setMediaIds(new TextMatcherList(Match.SHOULD, new TextMatcher("urn:vpro:media:program:1"), new TextMatcher("SOME_MID")));
+        in.setMediaIds(new TextMatcherList(should("urn:vpro:media:program:1"), should("SOME_MID")));
 
         {
             MediaObject object = new Program(2L);
@@ -248,7 +252,7 @@ public class MediaSearchTest {
     @Test
     public void testApplyTags() {
         MediaSearch in = new MediaSearch();
-        in.setTags(new ExtendedTextMatcherList(Match.SHOULD, new ExtendedTextMatcher("cultuur"), new ExtendedTextMatcher("kunst")));
+        in.setTags(new ExtendedTextMatcherList(ExtendedTextMatcher.should("cultuur"), ExtendedTextMatcher.should("kunst")));
 
         MediaObject object = new Program();
         assertThat(in.test(object)).isFalse();
@@ -297,7 +301,7 @@ public class MediaSearchTest {
     @Test
     public void testApplyNotDescedantOf() {
         MediaSearch search = new MediaSearch();
-        search.setDescendantOf(new TextMatcherList(new TextMatcher("MID", Match.NOT)));
+        search.setDescendantOf(new TextMatcherList(not("MID")));
         {
             MediaObject object = MediaTestDataBuilder.program().build();
             assertThat(search.test(object)).isTrue();
@@ -412,7 +416,7 @@ public class MediaSearchTest {
     @Test
     public void hasSearchesIds() {
         MediaSearch search = new MediaSearch();
-        search.setMediaIds(TextMatcherList.must(TextMatcher.should("bla")));
+        search.setMediaIds(TextMatcherList.must(should("bla")));
         assertThat(search.hasSearches()).isTrue();
     }
 
