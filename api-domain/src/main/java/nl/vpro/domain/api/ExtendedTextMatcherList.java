@@ -65,11 +65,9 @@ public class ExtendedTextMatcherList extends AbstractTextMatcherList<ExtendedTex
         super(DEFAULT_MATCH, Arrays.asList(values));
     }
 
-
     public ExtendedTextMatcherList(Match match, ExtendedTextMatcher... values) {
         super(match, Arrays.asList(values));
     }
-
 
     @Override
     @XmlElement(name = "matcher")

@@ -7,6 +7,8 @@ import java.util.*;
 
 import org.junit.jupiter.api.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
@@ -134,11 +136,11 @@ public class MediaSearchTest {
 
         {
             MediaObject object = new Group(GroupType.SERIES);
-            assertThat(in.applyTypes(object)).isTrue();
+            assertThat(in.applyTypes(object).test()).isTrue();
         }
         {
             MediaObject object = new Group(GroupType.ALBUM);
-            assertThat(in.applyTypes(object)).isFalse();
+            assertThat(in.applyTypes(object).test()).isFalse();
         }
     }
 
@@ -149,11 +151,11 @@ public class MediaSearchTest {
 
         {
             MediaObject object = new Group(GroupType.SERIES);
-            assertThat(in.applyTypes(object)).isFalse();
+            assertThat(in.applyTypes(object).test()).isFalse();
         }
         {
             MediaObject object = new Group(GroupType.ALBUM);
-            assertThat(in.applyTypes(object)).isTrue();
+            assertThat(in.applyTypes(object).test()).isTrue();
         }
     }
 
@@ -412,6 +414,22 @@ public class MediaSearchTest {
         MediaSearch search = new MediaSearch();
         search.setMediaIds(TextMatcherList.must(TextMatcher.should("bla")));
         assertThat(search.hasSearches()).isTrue();
+    }
+
+    @Test
+    public void withDateRangeAsString() throws JsonProcessingException {
+        String json = "{\n" +
+            "    \"sort\":{\n" +
+            "        \"sortDate\":\"DESC\"\n" +
+            "    },\n" +
+            "    \"searches\": {\n" +
+            "        \"sortDate\": {\n" +
+            "            \"end\": \"1444255200000\"\n" +
+            "        }\n" +
+            "    }\n" +
+            "}\n";
+        MediaForm form = Jackson2Mapper.getLenientInstance().readValue(json, MediaForm.class);
+        assertThat(form.getSearches().getSortDates().get(0).getEnd()).isEqualTo(Instant.ofEpochMilli(1444255200000L));
     }
 }
 

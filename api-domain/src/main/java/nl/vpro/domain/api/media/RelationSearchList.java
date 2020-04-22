@@ -50,6 +50,8 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
     }
 
 
+
+
     public boolean hasSearches() {
         for (RelationSearch relationSearch : this) {
             if (relationSearch.hasSearches()) {

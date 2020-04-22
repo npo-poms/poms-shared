@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
@@ -83,7 +84,7 @@ public class Matchers {
             @Override
             public boolean test(@Nullable String s) {
                 final String value = m.getValue();
-                if(s == null) {
+                if (s == null) {
                     return value == null;
                 }
                 Set<String> tokens = new HashSet<>(tokenize(s));
@@ -122,7 +123,7 @@ public class Matchers {
 
 
     protected static <S extends MatchType> Predicate<String> listPredicate(
-        final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final boolean tokenized) {
+        final Iterable<? extends AbstractTextMatcher<S>> textMatchers, final boolean tokenized) {
         return listPredicate(textMatchers, input -> {
             if(tokenized) {
                 return Matchers.tokenizedPredicate(input);
@@ -132,53 +133,59 @@ public class Matchers {
         });
     }
 
-    public static <S extends MatchType> Predicate<String> listPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S>  textMatchers) {
+    public static <S extends MatchType> Predicate<String> listPredicate(
+        final Iterable<? extends AbstractTextMatcher<S>>  textMatchers) {
         return listPredicate(textMatchers, false);
     }
 
-    public static <S extends MatchType> Predicate<String> tokenizedListPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S>  textMatchers) {
+    public static <S extends MatchType> Predicate<String> tokenizedListPredicate(
+        final Iterable<? extends AbstractTextMatcher<S>>  textMatchers) {
         return listPredicate(textMatchers, true);
     }
 
-    @SuppressWarnings("SwitchStatementWithTooFewBranches")
-    protected static <S extends MatchType> Predicate<String> listPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final Function<AbstractTextMatcher<?>, Predicate<String>> predicater) {
+    protected static <S extends MatchType> Predicate<String> listPredicate(
+        final Iterable<? extends AbstractTextMatcher<S>> textMatchers,
+        final Function<AbstractTextMatcher<?>, Predicate<String>> predicater) {
         if(textMatchers == null) {
             return a -> true;
         }
         return input -> {
-            switch(textMatchers.getMatch()) {
-                case SHOULD:
-                    // OR
-                    for(AbstractTextMatcher<?> t : textMatchers) {
-                        if(predicater.apply(t).test(input)) {
-                            return true;
+            boolean hasShould = false;
+            boolean shouldResult = false;
+
+            for(AbstractTextMatcher<?> t : textMatchers) {
+                boolean match = predicater.apply(t).test(input);
+                switch(t.getMatch()) {
+                    case NOT:
+                        // fall through
+                    case MUST:
+                        if (! match) {
+                            return false;
                         }
-                    }
-                    return false;
-                default:
-                    // AND
-                    for(AbstractTextMatcher<?> t : textMatchers) {
-                        if(!predicater.apply(t).test(input)) {
-                            return textMatchers.getMatch() == Match.NOT;
-                        }
-                    }
-                    return textMatchers.getMatch() != Match.NOT;
+                        break;
+                    case SHOULD:
+                        hasShould = true;
+                        shouldResult |= match;
+                        break;
+                }
             }
+            return ! hasShould || shouldResult;
         };
     }
 
 
-    @SuppressWarnings("SwitchStatementWithTooFewBranches")
-    public static <T, S extends MatchType> Predicate<Collection<T>> toPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final Function<T, String> textValueGetter) {
+    public static <T, S extends MatchType> Predicate<Collection<T>> toPredicate(
+        @Nullable final Iterable<? extends AbstractTextMatcher<S>> textMatchers,
+        @NonNull  final Function<T, String> textValueGetter) {
         if(textMatchers == null) {
             return i -> true;
         }
-
         return collection -> {
             if(collection == null) {
                 collection = Collections.emptyList();
             }
-            switch (textMatchers.getMatch()) {
+            Match match = Match.MUST;
+            switch (match) {
                 case SHOULD:
                     for (AbstractTextMatcher<?> textMatcher : textMatchers) {
                         if (textMatcher.getMatch() == Match.NOT) {

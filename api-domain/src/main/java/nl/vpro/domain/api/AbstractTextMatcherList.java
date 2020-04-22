@@ -20,6 +20,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, S extends MatchType>
     extends MatcherList<T>
     implements Predicate<String> {
+
     @Valid
     protected List<T> matchers = new ArrayList<>();
 
@@ -49,7 +50,8 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
 
     @Override
     public boolean test(@Nullable String input) {
-        throw new UnsupportedOperationException("not used. This would depend on field. Use nl.vpro.domain.api.Matchers#toPredicate");
+        return true;
+        //throw new UnsupportedOperationException("not used. This would depend on field. Use nl.vpro.domain.api.Matchers#toPredicate");
     }
 
     public boolean searchEquals(AbstractTextMatcherList<T, S> b) {
@@ -74,7 +76,6 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
 
     }
 
-
     protected boolean searchEquals(T a, T b) {
         if (a == null || b == null) {
             return a == b;
@@ -90,6 +91,7 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
             return aValue.equalsIgnoreCase(bValue);
         }
     }
+
     public static <T extends AbstractTextMatcher<S>, S extends MatchType> boolean searchEquals(AbstractTextMatcherList<T, S> a, AbstractTextMatcherList<T, S> b) {
         if (a == null) {
             return b == null;

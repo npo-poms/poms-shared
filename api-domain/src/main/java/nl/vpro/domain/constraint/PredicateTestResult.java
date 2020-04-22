@@ -39,7 +39,7 @@ public abstract class PredicateTestResult {
     public static final ExpressionFactory FACTORY = ExpressionFactory.newInstance();
 
 
-    private DisplayablePredicate<? extends Object> predicate;
+    private DisplayablePredicate<?> predicate;
     private List<String> bundleKey;
 
 

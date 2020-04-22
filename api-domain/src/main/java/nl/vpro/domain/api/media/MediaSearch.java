@@ -4,23 +4,20 @@
  */
 package nl.vpro.domain.api.media;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.*;
+import java.util.function.*;
 
 import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -28,10 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.jackson.media.ScheduleEventSearchListJson;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.AuthorizedDuration;
-import nl.vpro.domain.media.support.Description;
-import nl.vpro.domain.media.support.Tag;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 
 ;
@@ -205,143 +199,177 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
 
     @Override
     public boolean test(@Nullable MediaObject input) {
-        return input != null &&
-            applyText(input) &&
-            applyMediaIds(input) &&
-            applyAvTypes(input) &&
-            applyTypes(input) &&
-            applySortDates(input) &&
-            applyLastModifiedDates(input) &&
-            applyCreationDates(input) &&
-            applyPublishDates(input) &&
-            applyBroadcasters(input) &&
-            applyLocations(input) &&
-            applyTags(input) &&
-            applyDurations(input) &&
-            applyDescendantOf(input) &&
-            applyEpisodeOf(input) &&
-            applyMemberOf(input) &&
-            applyRelations(input) &&
-            applySchedule(input) &&
-            applyTitles(input) &&
-            applyGeoLocations(input);
-    }
-
-    protected boolean applyAvTypes(MediaObject input) {
-        AVType avType = input.getAVType();
-        if (avType == null) {
-            return avTypes == null;
-        }
-        return Matchers.listPredicate(avTypes).test(input.getAVType().name());
-    }
-
-
-    protected boolean applyTypes(MediaObject input) {
-        MediaType mediaType = MediaType.getMediaType(input);
-        if (mediaType == null) {
-            return types == null;
-        }
-        return Matchers.listPredicate(types).test(mediaType.name());
-    }
-
-    protected boolean applyText(MediaObject input) {
-        if (text == null) {
-            return true;
-        }
-        for (Title title : input.getTitles()) {
-            if (Matchers.tokenizedPredicate(text).test(title.get())) {
-                return true;
-            }
-        }
-        for (Description description : input.getDescriptions()) {
-            if (Matchers.tokenizedPredicate(text).test(description.get())) {
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    protected boolean applyMediaIds(MediaObject input) {
-        return Matchers.listPredicate(mediaIds).test(input.getMid());
-    }
-
-
-    protected boolean applySortDates(MediaObject input) {
-        return applyDateRange(input, sortDates, MediaObject::getSortInstant);
-    }
-
-    protected boolean applyLastModifiedDates(MediaObject input) {
-        return applyDateRange(input, lastModifiedDates, MediaObject::getLastModifiedInstant);
-    }
-
-    protected boolean applyCreationDates(MediaObject input) {
-        return applyDateRange(input, creationDates, MediaObject::getCreationInstant);
-    }
-
-    protected boolean applyPublishDates(MediaObject input) {
-        return applyDateRange(input, publishDates, MediaObject::getLastPublishedInstant);
-    }
-
-    protected boolean applyDateRange(MediaObject input, DateRangeMatcherList range, Function<MediaObject, Instant> inputDateGetter) {
-        if (range == null) {
-            return true;
-        }
-        Instant inputDate = inputDateGetter.apply(input);
-        return inputDate != null && range.test(inputDate);
-    }
-
-    protected boolean applyBroadcasters(MediaObject input) {
-        return Matchers.toPredicate(broadcasters, Broadcaster::getId).test(input.getBroadcasters());
-    }
-
-    protected boolean applyLocations(MediaObject input) {
-        return Matchers.toPredicate(locations, Location::getProgramUrl).test(input.getLocations());
-    }
-
-    protected boolean applyTags(MediaObject input) {
-        return Matchers.toPredicate(tags, Tag::getText).test(input.getTags());
-    }
-
-    protected boolean applyDurations(MediaObject input) {
-        return durations == null || durations.test(AuthorizedDuration.get(input.getDuration()));
-    }
-
-    protected boolean applyDescendantOf(MediaObject input) {
-        return Matchers.toPredicate(descendantOf, DescendantRef::getMidRef).test(input.getDescendantOf());
-    }
-
-    protected boolean applyEpisodeOf(MediaObject input) {
-        if (!(input instanceof Program)) {
+        if (input == null) {
             return false;
         }
-        Program program = (Program) input;
-        return Matchers.toPredicate(episodeOf, MemberRef::getMidRef).test(program.getEpisodeOf());
+        return getTestResult(input).test();
+
     }
 
-    protected boolean applyMemberOf(MediaObject input) {
-        return Matchers.toPredicate(memberOf, MemberRef::getMidRef).test(input.getMemberOf());
+    public TestResult getTestResult(MediaObject input) {
+       return  new TestResultCombiner(
+           applyText(input),
+           applyText(input),
+           applyMediaIds(input),
+           applyAvTypes(input),
+           applyTypes(input),
+           applySortDates(input),
+           applyLastModifiedDates(input),
+           applyCreationDates(input),
+           applyPublishDates(input),
+           applyBroadcasters(input),
+           applyLocations(input),
+           applyTags(input),
+           applyDurations(input),
+           applyDescendantOf(input),
+           applyEpisodeOf(input),
+           applyMemberOf(input),
+           applyRelations(input),
+           applySchedule(input),
+           applyTitles(input),
+           applyGeoLocations(input)
+       );
     }
 
-    protected boolean applyRelations(MediaObject input) {
-        if (relations == null) {
-            return true;
+
+    protected TestResult applyAvTypes(MediaObject input) {
+        return TestResult.of("avtypes", avTypes, () -> name(input.getAVType()));
+    }
+
+
+    protected static String name(Enum<?> eValue) {
+        return eValue == null ? null : eValue.name();
+    }
+
+    protected TestResult applyTypes(MediaObject input) {
+        return TestResult.of("types", types, () -> name(MediaType.getMediaType(input)));
+    }
+
+    protected TestResult applyText(MediaObject input) {
+        if (text == null || StringUtils.isBlank(text.getValue())) {
+            return TestResultIgnore.INSTANCE;
         }
+        return new TestResultImpl("text", text.getMatch(), () -> {
+            for (Title title : input.getTitles()) {
+                if (Matchers.tokenizedPredicate(text).test(title.get())) {
+                    return true;
+                }
+            }
+            for (Description description : input.getDescriptions()) {
+                if (Matchers.tokenizedPredicate(text).test(description.get())) {
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
 
-        for (Relation relation : input.getRelations()) {
+    protected TestResult applyMediaIds(MediaObject input) {
+        return TestResult.of("ids", mediaIds, input::getMid);
+    }
+
+
+    protected TestResult  applySortDates(MediaObject input) {
+        if (sortDates == null) {
+            return TestResultIgnore.INSTANCE;
+        }
+        return new TestResultImpl("sortdates",
+            sortDates.getMatch(), applyDateRange(input, sortDates, MediaObject::getSortInstant));
+    }
+
+    protected TestResult applyLastModifiedDates(MediaObject input) {
+        return TestResultIgnore.INSTANCE;
+        // TODO
+        //return TestResult.of(lastModifiedDates, applyDateRange(input, lastModifiedDates, MediaObject::getLastModifiedInstant));
+    }
+
+    protected TestResult applyCreationDates(MediaObject input) {
+        return TestResultIgnore.INSTANCE;
+        // TODO
+        //return applyDateRange(input, creationDates, MediaObject::getCreationInstant);
+    }
+
+    protected TestResult applyPublishDates(MediaObject input) {
+        return TestResultIgnore.INSTANCE;
+        // TODO
+        //return applyDateRange(input, publishDates, MediaObject::getLastPublishedInstant);
+    }
+
+    protected BooleanSupplier applyDateRange(
+        MediaObject input,
+        DateRangeMatcherList range,
+        Function<MediaObject, Instant> inputDateGetter) {
+        return () -> {
+            if (range == null) {
+                return true;
+            }
+            Instant inputDate = inputDateGetter.apply(input);
+            return inputDate != null && range.test(inputDate);
+        };
+    }
+
+    protected TestResult applyBroadcasters(MediaObject input) {
+        return  TestResult.of("broadcasters", broadcasters, Broadcaster::getId, input::getBroadcasters);
+    }
+
+    protected TestResult applyLocations(MediaObject input) {
+        return TestResult.of("locations", locations, Location::getProgramUrl, input::getLocations);
+    }
+
+    protected TestResult applyTags(MediaObject input) {
+        return TestResult.of("tags", tags, Tag::getText, input::getTags);
+    }
+
+    protected TestResult applyDurations(MediaObject input) {
+        return TestResultIgnore.INSTANCE;
+        // TODO
+        //return TestResult.of(durations, () -> AuthorizedDuration.get(input.getDuration()));
+    }
+
+    protected TestResult applyDescendantOf(MediaObject input) {
+        return TestResult.of("descendantof",
+            descendantOf,
+            DescendantRef::getMidRef,
+            input::getDescendantOf);
+    }
+
+    protected TestResult applyEpisodeOf(MediaObject input) {
+        if (episodeOf == null) {
+            return TestResultIgnore.INSTANCE;
+        }
+        if (!(input instanceof Program)) {
+            return new TestResultImpl("episodeof", episodeOf.getMatch(), () -> false);
+        }
+        Program program = (Program) input;
+        return TestResult.of("episodeof", episodeOf, MemberRef::getMidRef,  program::getEpisodeOf);
+    }
+
+    protected TestResult applyMemberOf(MediaObject input) {
+        return TestResult.of("memberof", memberOf, MemberRef::getMidRef, input::getMemberOf);
+    }
+
+    protected TestResult applyRelations(MediaObject input) {
+        if (relations == null) {
+            return TestResultIgnore.INSTANCE;
+        }
+        TestResultCombiner combiner = new TestResultCombiner();
+     /*   TODO
+       for (Relation relation : input.getRelations()) {
             if (relations.test(relation)) {
                 return true;
             }
-        }
-        return false;
+        }*/
+
+        return TestResultIgnore.INSTANCE;
     }
 
-    protected boolean applySchedule(MediaObject input) {
+    protected TestResult applySchedule(MediaObject input) {
         if (scheduleEvents == null) {
-            return true;
+            return TestResultIgnore.INSTANCE;
         }
 
-        if (input instanceof Program) {
+       /* TODO
+           if (input instanceof Program) {
             for (ScheduleEvent event : ((Program) input).getScheduleEvents()) {
                 for (ScheduleEventSearch search : scheduleEvents) {
                     if (search.test(event)) {
@@ -349,36 +377,42 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
                     }
                 }
             }
-        }
-        return false;
+        } else {
+
+        }*/
+        return TestResultIgnore.INSTANCE;
     }
 
-    protected boolean applyTitles(MediaObject input) {
+    protected TestResult applyTitles(MediaObject input) {
         if (titles == null) {
-            return true;
+            return TestResultIgnore.INSTANCE;
         }
-
-        for (Title title : input.getTitles()) {
-            for (TitleSearch search : titles) {
-                if (search.test(title)) {
-                    return true;
+        TestResultCombiner combiner = new TestResultCombiner();
+        for (TitleSearch search : titles) {
+            combiner.add(new TestResultImpl("titles:" + search.value, search.getMatch(), () -> {
+                for (Title title : input.getTitles()) {
+                    if (search.test(title)) {
+                        return true;
+                    }
                 }
-            }
+                return false;
+                })
+            );
         }
-        return false;
+        return TestResultIgnore.INSTANCE;
     }
 
 
 
-    protected boolean applyGeoLocations(MediaObject input) {
+    protected TestResult applyGeoLocations(MediaObject input) {
         if (geoLocations == null) {
-            return true;
+            return TestResultIgnore.INSTANCE;
         }
         // TODO
         for (GeoLocations title : input.getGeoLocations()) {
 
         }
-        return false;
+        return TestResultIgnore.INSTANCE;
     }
 
     public static class Builder {
@@ -391,5 +425,168 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             return this;
         }
 
+    }
+
+
+    public  interface TestResult {
+
+        BooleanSupplier getTest();
+
+        default boolean test() {
+            return getTest().getAsBoolean();
+        }
+        String getDescription();
+
+        //TestResult andThen(TestResult test);
+        static TestResult of (
+            String description,
+            final AbstractTextMatcherList<? extends AbstractTextMatcher<?>, ?> list,
+            BooleanSupplier supplier) {
+            if (list == null) {
+                return TestResultIgnore.INSTANCE;
+            }
+            return new TestResultImpl(description, list.getMatch(), supplier);
+        }
+
+         static TestResult of(
+             String description,
+             final AbstractTextMatcherList<? extends AbstractTextMatcher<?>, ?> list,
+             Supplier<String> supplier) {
+             if (list == null) {
+                 return TestResultIgnore.INSTANCE;
+            }
+            return new TestResultImpl(description, list.getMatch(), () ->
+                list.test(supplier.get())
+            );
+        }
+
+
+
+        static <T, S extends MatchType> TestResult of(
+            String description,
+            @Nullable final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers,
+            @NonNull final Function<T, String> textValueGetter,
+            Supplier<Collection<T>> supplier) {
+            if (textMatchers == null) {
+                return TestResultIgnore.INSTANCE;
+            }
+            return new TestResultImpl(description,
+                textMatchers.getMatch(),
+                () ->
+                    Matchers.toPredicate(textMatchers, textValueGetter)
+                        .test(supplier.get()));
+        }
+
+    }
+    public static class TestResultImpl implements TestResult {
+
+        @Getter
+        private final Match match;
+
+        @Getter
+        private final BooleanSupplier test;
+
+        @Getter
+        private final String description;
+
+        public TestResultImpl(String description, Match match, BooleanSupplier test) {
+            this.match = match;
+            this.test = test;
+            this.description = description;
+        }
+        @Override
+        public String toString() {
+            return match + ":" + description;
+        }
+
+    }
+
+    public static class TestResultIgnore implements  TestResult {
+
+        public static final TestResultIgnore INSTANCE = new TestResultIgnore();
+
+        @Override
+        public BooleanSupplier getTest() {
+            return () -> true;
+        }
+
+        @Override
+        public String getDescription() {
+            return "ignored";
+
+        }
+    }
+
+    public static class TestResultCombiner implements TestResult {
+
+        @Getter
+        private final List<TestResult> shoulds = new ArrayList<>();
+        @Getter
+        private final List<TestResult> musts = new ArrayList<>();
+
+        String failure;
+
+        public TestResultCombiner(TestResult... tests) {
+            add(tests);
+        }
+
+        @Override
+        public BooleanSupplier getTest() {
+            return () -> {
+                for (TestResult m : musts) {
+                    if (! m.test()) {
+                        failure = m.getDescription();
+                        return false;
+                    }
+                }
+                if (shoulds.isEmpty()) {
+                    return true;
+                }
+                StringBuilder failureBuilder = new StringBuilder();
+                for (TestResult s : shoulds) {
+                    if (s.test()) {
+                        return true;
+                    } else {
+                        failureBuilder.append(s.getDescription());
+                    }
+                }
+                failure = failureBuilder.toString();
+                return false;
+            };
+        }
+
+        @Override
+        public String getDescription() {
+            return "shoulds:" + shoulds + "musts:" + musts + (failure == null ? "": ":" + failure);
+
+        }
+
+
+        public void add(TestResult... tests) {
+            for (TestResult test : tests) {
+                if (test instanceof TestResultImpl) {
+                    TestResultImpl impl = (TestResultImpl) test;
+                    switch (impl.getMatch()) {
+                        case MUST:
+                            musts.add(test);
+                            break;
+                        case SHOULD:
+                            shoulds.add(test);
+                            break;
+                        case NOT:
+                            musts.add(new TestResultImpl("!" + test.getDescription(), Match.MUST, () -> !test.test()));
+
+                    }
+                } else if (test instanceof TestResultCombiner) {
+                    musts.addAll(((TestResultCombiner) test).getMusts());
+                    shoulds.addAll(((TestResultCombiner) test).getShoulds());
+                } else if (test instanceof TestResultIgnore) {
+                    //ignore
+                } else {
+                    throw new IllegalStateException();
+                }
+            }
+
+        }
     }
 }
