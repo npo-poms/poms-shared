@@ -5,8 +5,7 @@ import java.util.Collections;
 import java.util.function.Function;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
