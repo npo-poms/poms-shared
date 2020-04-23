@@ -184,62 +184,53 @@ public class Matchers {
             if(collection == null) {
                 collection = Collections.emptyList();
             }
-            Match match = Match.MUST;
-            switch (match) {
-                case SHOULD:
-                    for (AbstractTextMatcher<?> textMatcher : textMatchers) {
-                        if (textMatcher.getMatch() == Match.NOT) {
-                            boolean matchedall = true;
-                            for (T item : collection) {
-                                String value = textValueGetter.apply(item);
-                                if (!textMatcher.test(value)) {
-                                    matchedall = false;
-                                    break;
-                                }
-                            }
-                            return matchedall;
+            boolean hasShould = false;
+            boolean shouldResult = false;
 
-                        } else {
-                            for (T item : collection) {
-                                String value = textValueGetter.apply(item);
-                                if (textMatcher.test(value)) {
-                                    return true;
-                                }
-                            }
+            for (AbstractTextMatcher<S> t : textMatchers) {
+                boolean match;
+                switch (t.getMatch()) {
+                    case NOT:
+                        match = matchesAll(collection, t, textValueGetter);
+                        if (! match) {
+                            return false;
                         }
-                    }
-                    // OR
-                    return false;
-                default:
-                    // AND
-                    for (AbstractTextMatcher<?> textMatcher : textMatchers) {
-                        if (textMatcher.getMatch() == Match.NOT) {
-                            for (T item : collection) {
-                                String value = textValueGetter.apply(item);
-                                if (! textMatcher.test(value)) {
-                                    return false;
-                                }
-                            }
-
-                        } else {
-                            boolean found = false;
-                            for (T item : collection) {
-                                String value = textValueGetter.apply(item);
-                                if (textMatcher.test(value)) {
-                                    found = true;
-                                    break;
-                                }
-                            }
-                            if (!found) {
-                                return false;
-                            }
-
+                        break;
+                    case MUST:
+                        match = matchesOne(collection, t, textValueGetter);
+                        if (!match) {
+                            return false;
                         }
-                    }
-                    return true;
+                        break;
+                    case SHOULD:
+                        match = matchesOne(collection, t, textValueGetter);
+                        hasShould = true;
+                        shouldResult |= match;
+                        break;
+                }
             }
+            return ! hasShould || shouldResult;
 
         };
+    }
+
+    private static <T> boolean matchesOne(Collection<T> collection, AbstractTextMatcher<?> t,  Function<T, String> textValueGetter) {
+        for (T item : collection) {
+            String value = textValueGetter.apply(item);
+            if (t.test(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static <T> boolean matchesAll(Collection<T> collection, AbstractTextMatcher<?> t,  Function<T, String> textValueGetter) {
+        for (T item : collection) {
+            String value = textValueGetter.apply(item);
+            if (!t.test(value)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 

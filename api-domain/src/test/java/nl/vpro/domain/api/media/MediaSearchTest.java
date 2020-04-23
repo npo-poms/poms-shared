@@ -133,7 +133,7 @@ public class MediaSearchTest {
     @Test
     public void testApplyTypes() {
         MediaSearch in = new MediaSearch();
-        in.setTypes(new TextMatcherList(Match.SHOULD, must("SEASON"), must("SERIES")));
+        in.setTypes(new TextMatcherList(should("SEASON"), should("SERIES")));
 
         {
             MediaObject object = new Group(GroupType.SERIES);
@@ -252,7 +252,10 @@ public class MediaSearchTest {
     @Test
     public void testApplyTags() {
         MediaSearch in = new MediaSearch();
-        in.setTags(new ExtendedTextMatcherList(ExtendedTextMatcher.should("cultuur"), ExtendedTextMatcher.should("kunst")));
+        in.setTags(new ExtendedTextMatcherList(
+            ExtendedTextMatcher.should("cultuur"),
+            ExtendedTextMatcher.should("kunst"))
+        );
 
         MediaObject object = new Program();
         assertThat(in.test(object)).isFalse();
@@ -299,17 +302,21 @@ public class MediaSearchTest {
 
 
     @Test
-    public void testApplyNotDescedantOf() {
+    public void testApplyNotDescendantOfOnEmpty() {
         MediaSearch search = new MediaSearch();
         search.setDescendantOf(new TextMatcherList(not("MID")));
-        {
-            MediaObject object = MediaTestDataBuilder.program().build();
-            assertThat(search.test(object)).isTrue();
-        }
-        {
-            MediaObject object = MediaTestDataBuilder.program().descendantOf(new DescendantRef("MID", "urn", MediaType.ALBUM)).build();
-            assertThat(search.test(object)).isFalse();
-        }
+        MediaObject object = MediaTestDataBuilder.program().build();
+        assertThat(search.test(object)).isTrue();
+    }
+
+    @Test
+    public void testApplyNotDescendantOf() {
+        MediaSearch search = new MediaSearch();
+        search.setDescendantOf(new TextMatcherList(not("MID")));
+        MediaObject object = MediaTestDataBuilder.program()
+            .descendantOf(new DescendantRef("MID", "urn", MediaType.ALBUM))
+            .build();
+        assertThat(search.test(object)).isFalse();
     }
 
     private static final ScheduleEventSearch AT_NED1 = ScheduleEventSearch.builder().channel(Channel.NED1).build();
