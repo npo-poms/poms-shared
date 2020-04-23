@@ -78,10 +78,12 @@ public class MatchersTest {
 
     @Test
     public void testUntokenizedPredicates() {
-        TextMatcher matcher1 = new TextMatcher("foo");
-        TextMatcher matcher2 = new TextMatcher("bar");
+        TextMatcher matcher1 = TextMatcher.should("foo");
+        TextMatcher matcher2 = TextMatcher.should("bar");
         assertThat(matcher2.test("foo")).isFalse();
-        assertThat(Matchers.listPredicate(new TextMatcherList(Match.SHOULD, matcher1, matcher2)).test("foo")).isTrue();
+        assertThat(Matchers.listPredicate(new TextMatcherList(matcher1, matcher2)).test("foo")).isTrue();
+        matcher1.setMatch(Match.MUST);
+        matcher2.setMatch(Match.MUST);
         assertThat(Matchers.listPredicate(new TextMatcherList(matcher1, matcher2)).test("foo")).isFalse();
     }
 
