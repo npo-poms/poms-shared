@@ -559,7 +559,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
 
         @Override
         public String getDescription() {
-            return "shoulds:" + shoulds + "musts:" + musts + (failure == null ? "": ":" + failure);
+            return "shoulds:" + shoulds + ", musts:" + musts + (failure == null ? "": ", fails:" + failure);
 
         }
 
