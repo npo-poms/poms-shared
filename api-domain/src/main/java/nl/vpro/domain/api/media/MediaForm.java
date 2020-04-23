@@ -6,7 +6,6 @@ package nl.vpro.domain.api.media;
 
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.function.Predicate;
 
@@ -32,7 +31,6 @@ import nl.vpro.domain.media.MediaObject;
         "searches",
         "sortFields",
         "facets"})
-@ToString
 @EqualsAndHashCode(callSuper = true)
 public class MediaForm extends AbstractMediaForm implements SortableForm, Predicate<MediaObject> {
 
@@ -90,4 +88,12 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
         return getSearches() != null && getSearches().hasSearches();
     }
 
+    @Override
+    public String toString() {
+        return "MediaForm{" +
+            "searches=" + getSearches() +
+            ", sortFields=" + sortFields +
+            ", facets=" + facets +
+            '}';
+    }
 }

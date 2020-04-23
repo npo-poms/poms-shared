@@ -28,8 +28,6 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 
-;
-
 /**
  * @author Roelof Jan Koekoek
  * @since 2.0
