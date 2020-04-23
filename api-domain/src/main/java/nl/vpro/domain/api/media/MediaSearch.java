@@ -207,23 +207,25 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     public TestResult getTestResult(MediaObject input) {
        return  new TestResultCombiner(
            applyText(input),
-           applyText(input),
            applyMediaIds(input),
-           applyAvTypes(input),
            applyTypes(input),
+           applyAvTypes(input),
            applySortDates(input),
-           applyLastModifiedDates(input),
-           applyCreationDates(input),
            applyPublishDates(input),
+           applyCreationDates(input),
+           applyLastModifiedDates(input),
            applyBroadcasters(input),
            applyLocations(input),
            applyTags(input),
+           applyGenres(input),
            applyDurations(input),
            applyDescendantOf(input),
            applyEpisodeOf(input),
            applyMemberOf(input),
            applyRelations(input),
            applySchedule(input),
+           applyAgeRatings(input),
+           applyContentRatings(input),
            applyTitles(input),
            applyGeoLocations(input)
        );
@@ -266,6 +268,10 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
         return TestResult.of("ids", mediaIds, input::getMid);
     }
 
+
+    protected TestResult applyAgeRatings(MediaObject input) {
+        return TestResult.of("ageratings", ageRatings, () -> name(input.getAgeRating()));
+    }
 
     protected TestResult  applySortDates(MediaObject input) {
         if (sortDates == null) {
@@ -318,6 +324,14 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
         return TestResult.of("tags", tags, Tag::getText, input::getTags);
     }
 
+    protected TestResult applyGenres(MediaObject input) {
+        return TestResult.of("genres", genres, Genre::getTermId, input::getGenres);
+    }
+
+    protected TestResult applyContentRatings(MediaObject input) {
+        return TestResult.of("contentRatings", contentRatings, Enum::name, input::getContentRatings);
+    }
+
     protected TestResult applyDurations(MediaObject input) {
         return TestResultIgnore.INSTANCE;
         // TODO
@@ -345,6 +359,8 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     protected TestResult applyMemberOf(MediaObject input) {
         return TestResult.of("memberof", memberOf, MemberRef::getMidRef, input::getMemberOf);
     }
+
+
 
     protected TestResult applyRelations(MediaObject input) {
         if (relations == null) {
