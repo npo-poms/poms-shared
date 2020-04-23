@@ -58,7 +58,7 @@ public class PageSearchTest {
     @Test
     public void testApplyBroadcasters() {
         PageSearch in = new PageSearch();
-        in.setBroadcasters(new TextMatcherList(Match.SHOULD, new TextMatcher("VPRO"), new TextMatcher("TROS")));
+        in.setBroadcasters(new TextMatcherList(TextMatcher.should("VPRO"), TextMatcher.should("TROS")));
 
         Page object = new Page(PageType.ARTICLE);
         assertThat(in.test(object)).isFalse();
