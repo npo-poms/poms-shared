@@ -109,7 +109,11 @@ public class MediaObjectLocker {
     }
 
 
-
+    /**
+     * Run in a new transaction, but before that lock the mid.
+     *
+     * Make sure not to be in a transaction already.
+     */
     public static <T> T withMidLock(
         @NonNull TransactionService transactionService,
         String mid,
