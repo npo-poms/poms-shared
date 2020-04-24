@@ -76,9 +76,15 @@ public abstract class RangeMatcher<V extends Comparable<V>, T extends Comparable
     }
 
 
+    @SuppressWarnings("SimplifiableConditionalExpression")
     protected boolean valueTest(V t) {
-        boolean apply = (getBegin()== null || getBegin().compareTo(t) <= 0) &&
-            (getEnd() == null || (getEnd().compareTo(t) > 0 || (includeEnd() && getEnd().compareTo(t) == 0)));
+        V begin = getBegin();
+        V end = getEnd();
+        if (t == null) {
+            return begin == null && end == null;
+        }
+        boolean apply = (begin== null || begin.compareTo(t) <= 0) &&
+            (end == null || (end.compareTo(t) > 0 || (includeEnd() && end.compareTo(t) == 0)));
         return match == Match.NOT ? !apply : apply;
     }
 

@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 import nl.vpro.domain.api.SortableForm;
 import nl.vpro.domain.media.MediaObject;
@@ -90,10 +91,11 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
 
     @Override
     public String toString() {
-        return "MediaForm{" +
-            "searches=" + getSearches() +
-            ", sortFields=" + sortFields +
-            ", facets=" + facets +
-            '}';
+        return MoreObjects.toStringHelper(this)
+            .add("sortFields", sortFields)
+            .add("facets", facets)
+            .add("search", getSearches())
+            .omitNullValues()
+            .toString();
     }
 }

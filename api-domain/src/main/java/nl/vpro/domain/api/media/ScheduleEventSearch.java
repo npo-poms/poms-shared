@@ -16,6 +16,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.base.MoreObjects;
 
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.RangeMatcher;
@@ -135,7 +136,14 @@ public class ScheduleEventSearch extends RangeMatcher<Instant, ScheduleEvent> {
 
     @Override
     public String toString() {
-        return "ScheduleEventMatcher{channel=" + channel + ", net=" + net + ", begin=" + begin + ", end=" + end + ", rerun=" + rerun + "}";
+        return MoreObjects.toStringHelper(this)
+            .add("channel", channel)
+            .add("net", net)
+            .add("rerun", rerun)
+            .add("begin", begin)
+            .add("end", end)
+            .omitNullValues()
+            .toString();
     }
 
     public static class Builder {

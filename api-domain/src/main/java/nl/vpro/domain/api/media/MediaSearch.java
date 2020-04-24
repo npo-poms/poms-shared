@@ -21,6 +21,7 @@ import org.meeuw.xml.bind.annotation.XmlDocumentation;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.base.MoreObjects;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.jackson.media.ScheduleEventSearchListJson;
@@ -617,5 +618,34 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
             }
 
         }
+    }
+
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+            .add("mediaIds", mediaIds)
+            .add("types", types)
+            .add("avTypes", avTypes)
+            .add("sortDates", sortDates)
+            .add("publishDates", publishDates)
+            .add("creationDates", creationDates)
+            .add("lastModifiedDates", lastModifiedDates)
+            .add("broadcasters", broadcasters)
+            .add("locations", locations)
+            .add("tags", tags)
+            .add("genres", genres)
+            .add("durations", durations)
+            .add("descendantOf", descendantOf)
+            .add("episodeOf", episodeOf)
+            .add("memberOf", memberOf)
+            .add("relations", relations)
+            .add("scheduleEvents", scheduleEvents)
+            .add("ageRatings", ageRatings)
+            .add("contentRatings", contentRatings)
+            .add("titles", titles)
+            .add("geoLocations", geoLocations)
+            .omitNullValues()
+            .toString();
     }
 }

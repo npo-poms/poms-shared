@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Iterators;
 
 import nl.vpro.domain.media.Relation;
@@ -135,11 +136,13 @@ public abstract class AbstractRelationSearch extends AbstractSearch<Relation>
 
     @Override
     public String toString() {
-        return "AbstractRelationSearch{" +
-            "types=" + types +
-            ", broadcasters=" + broadcasters +
-            ", values=" + values +
-            ", uriRefs=" + uriRefs +
-            '}';
+        return MoreObjects.toStringHelper(this)
+            .add("types", types)
+            .add("broadcasters", broadcasters)
+            .add("values", values)
+            .add("uriRefs", uriRefs)
+            .add("match", match)
+            .omitNullValues()
+            .toString();
     }
 }

@@ -70,4 +70,9 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
     public int size() {
         return asList().size();
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(relationSearches);
+    }
 }
