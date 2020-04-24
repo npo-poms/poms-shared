@@ -336,7 +336,30 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
     }
 
     protected TestResult applyLocations(MediaObject input) {
-        return TestResult.ofPlural("locations", locations, Location::getProgramUrl, input::getLocations);
+
+        if (locations == null) {
+            return TestResultIgnore.INSTANCE;
+        }
+        TestResultCombiner combiner = new TestResultCombiner();
+        for (TextMatcher matcher : locations) {
+            combiner.add(new TestResultImpl("locations", matcher.getMatch(), () -> {
+                for (Location l : input.getLocations()) {
+                    String programUrl = l.getProgramUrl();
+                    if (matcher.test(programUrl)) {
+                        return true;
+                    }
+                    int i = programUrl.lastIndexOf('.');
+                    if (i >= 0) {
+                        String extension = programUrl.substring(i + 1).toLowerCase();
+                        if (matcher.getValue().toLowerCase().equals(extension)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }));
+        }
+        return combiner;
     }
 
     protected TestResult applyTags(MediaObject input) {
@@ -387,13 +410,16 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
             return TestResultIgnore.INSTANCE;
         }
         TestResultCombiner combiner = new TestResultCombiner();
-       /* for (RelationSearch rs : relations) {
-            combiner.add(TestResult.ofPlural("relation" + rs.toString(),
-                rs,
-                (r) -> r,
-                input::getRelations
-            ));
-        }*/
+        for (RelationSearch rs : relations) {
+            combiner.add(new TestResultImpl("relation", rs.getMatch(), () -> {
+                for (Relation r : input.getRelations()) {
+                    if (rs.test(r)) {
+                        return true;
+                    }
+                }
+                return false;
+            }));
+        }
         return combiner;
     }
 

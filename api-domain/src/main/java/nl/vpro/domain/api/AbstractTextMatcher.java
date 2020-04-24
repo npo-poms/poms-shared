@@ -76,7 +76,7 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
             return false;
         }
 
-        AbstractTextMatcher matcher = (AbstractTextMatcher)o;
+        AbstractTextMatcher<?> matcher = (AbstractTextMatcher)o;
 
         return value == null ? matcher.getValue() == null : value.equals(matcher.getValue()) && getMatch() == matcher.getMatch();
 
