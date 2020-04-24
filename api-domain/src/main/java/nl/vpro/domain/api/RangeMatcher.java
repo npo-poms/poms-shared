@@ -83,7 +83,7 @@ public abstract class RangeMatcher<V extends Comparable<V>, T extends Comparable
         if (t == null) {
             return begin == null && end == null;
         }
-        boolean apply = (begin== null || begin.compareTo(t) <= 0) &&
+        boolean apply = (begin == null || begin.compareTo(t) <= 0) &&
             (end == null || (end.compareTo(t) > 0 || (includeEnd() && end.compareTo(t) == 0)));
         return match == Match.NOT ? !apply : apply;
     }
