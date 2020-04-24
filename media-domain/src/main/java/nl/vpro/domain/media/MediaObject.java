@@ -2997,12 +2997,23 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         } catch(RuntimeException le) {
             mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
         }
+        String id;
+        if (this.isPersisted()) {
+            id = ", id=" + this.getId();
+        } else {
+            if (Workflow.API.contains(workflow)) {
+                // probably testing ES or so.f
+                id = "";
+            } else {
+                id = " (not persistent)";
+            }
+        }
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
             (! Workflow.PUBLICATIONS.contains(workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
             this.getMid() == null ? "<no mid>" : "\"" + this.getMid() + "\"",
             mainTitle,
-            this.isPersisted() ? (", id=" + this.getId()) : " (not persistent)"
+            id
             );
     }
 
