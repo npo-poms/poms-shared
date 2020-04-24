@@ -297,20 +297,26 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
             return TestResultIgnore.INSTANCE;
         }
         return new TestResultImpl("lastModifiedDates",
-            sortDates.getMatch(), applyDateRange(input, lastModifiedDates, MediaObject::getLastModifiedInstant));
+            lastModifiedDates.getMatch(), applyDateRange(input, lastModifiedDates, MediaObject::getLastModifiedInstant));
     }
 
     protected TestResult applyCreationDates(MediaObject input) {
-        return TestResultIgnore.INSTANCE;
-        // TODO
-        //return applyDateRange(input, creationDates, MediaObject::getCreationInstant);
+
+        if (creationDates == null) {
+            return TestResultIgnore.INSTANCE;
+        }
+        return new TestResultImpl("creationDates",
+            creationDates.getMatch(), applyDateRange(input, creationDates, MediaObject::getCreationInstant));
     }
 
     protected TestResult applyPublishDates(MediaObject input) {
-        return TestResultIgnore.INSTANCE;
-        // TODO
-        //return applyDateRange(input, publishDates, MediaObject::getLastPublishedInstant);
+        if (publishDates == null) {
+            return TestResultIgnore.INSTANCE;
+        }
+        return new TestResultImpl("publishDates",
+            publishDates.getMatch(), applyDateRange(input, publishDates, MediaObject::getLastPublishedInstant));
     }
+
 
     protected BooleanSupplier applyDateRange(
         MediaObject input,
