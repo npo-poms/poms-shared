@@ -630,6 +630,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
+            .add("text", text)
             .add("mediaIds", mediaIds)
             .add("types", types)
             .add("avTypes", avTypes)

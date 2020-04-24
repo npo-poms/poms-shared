@@ -22,6 +22,7 @@ import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableSet;
 
 /**
  * <p>The workflow status for publishable items.</p>
@@ -114,6 +115,14 @@ public enum Workflow implements Displayable {
         PARENT_REVOKED,
         REVOKED
     ));
+
+    public static final Set<Workflow> API = unmodifiableSet(new HashSet<>(asList(
+        DELETED,
+        MERGED,
+        PARENT_REVOKED,
+        REVOKED,
+        PUBLISHED
+    )));
 
     public static final List<Workflow> AS_DELETED_IN_API = unmodifiableList(
         PUBLISHED_AS_DELETED.stream()
