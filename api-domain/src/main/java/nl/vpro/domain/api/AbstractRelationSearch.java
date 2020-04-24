@@ -27,8 +27,8 @@ import static nl.vpro.domain.api.AbstractTextMatcherList.searchEquals;
 @XmlTransient
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor
-public abstract class AbstractRelationSearch extends AbstractSearch<Relation>
-    implements  Iterable<AbstractTextMatcher<?>> {
+public abstract class AbstractRelationSearch extends AbstractSearch<Relation> implements Iterable<AbstractTextMatcher<?>> {
+
     @Valid
     private TextMatcherList types;
 
@@ -99,7 +99,12 @@ public abstract class AbstractRelationSearch extends AbstractSearch<Relation>
     @NonNull
     @Override
     public Iterator<AbstractTextMatcher<?>> iterator() {
-        return Iterators.concat(iterator(types), iterator(broadcasters), iterator(values), iterator(uriRefs));
+        return Iterators.concat(
+            iterator(types),
+            iterator(broadcasters),
+            iterator(values),
+            iterator(uriRefs)
+        );
     }
 
     private <T extends AbstractTextMatcher<S>, S extends MatchType> Iterator<T> iterator(

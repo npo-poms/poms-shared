@@ -381,34 +381,40 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
             return TestResultIgnore.INSTANCE;
         }
         TestResultCombiner combiner = new TestResultCombiner();
-     /*   TODO
-       for (Relation relation : input.getRelations()) {
-            if (relations.test(relation)) {
-                return true;
-            }
+       /* for (RelationSearch rs : relations) {
+            combiner.add(TestResult.ofPlural("relation" + rs.toString(),
+                rs,
+                (r) -> r,
+                input::getRelations
+            ));
         }*/
-
-        return TestResultIgnore.INSTANCE;
+        return combiner;
     }
 
     protected TestResult applySchedule(MediaObject input) {
         if (scheduleEvents == null) {
             return TestResultIgnore.INSTANCE;
         }
-
-       /* TODO
-           if (input instanceof Program) {
-            for (ScheduleEvent event : ((Program) input).getScheduleEvents()) {
-                for (ScheduleEventSearch search : scheduleEvents) {
-                    if (search.test(event)) {
-                        return true;
-                    }
-                }
+        TestResultCombiner combiner = new TestResultCombiner();
+        if (input instanceof Program) {
+            for (ScheduleEventSearch s : scheduleEvents) {
+                combiner.add(new TestResultImpl("schedule", s.getMatch(),
+                    () -> {
+                        for (ScheduleEvent event : ((Program) input).getScheduleEvents()) {
+                            if (s.test(event)) {
+                                return true;
+                            }
+                        }
+                        return false;
+                }));
             }
         } else {
+            for (ScheduleEventSearch s : scheduleEvents) {
+                combiner.add(new TestResultImpl("schedule", s.getMatch(), () -> false));
+            }
+        }
+        return combiner;
 
-        }*/
-        return TestResultIgnore.INSTANCE;
     }
 
     protected TestResult applyTitles(MediaObject input) {
