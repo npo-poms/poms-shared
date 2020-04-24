@@ -4,7 +4,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.security.Key;
 import java.time.Duration;
 import java.time.Instant;
@@ -14,6 +13,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.junit.Rule;
 import org.junit.Test;
+
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 import nl.vpro.util.DateUtils;
