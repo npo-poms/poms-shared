@@ -8,11 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Duration;
-import java.util.function.Predicate;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -20,8 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.api.Match;
-import nl.vpro.domain.api.RangeMatcher;
+import nl.vpro.domain.api.*;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.xml.bind.DefaultDurationXmlAdapter;
 
@@ -31,7 +27,7 @@ import nl.vpro.xml.bind.DefaultDurationXmlAdapter;
  */
 @XmlType(name = "durationRangeMatcherType", propOrder = {"begin", "end"})
 @JsonPropertyOrder({"begin", "end", "inclusiveEnd", "match"})
-public class DurationRangeMatcher extends RangeMatcher<Duration> implements Predicate<Duration> {
+public class DurationRangeMatcher extends SimpleRangeMatcher<Duration> {
 
     @XmlElement
     @Getter
@@ -75,12 +71,5 @@ public class DurationRangeMatcher extends RangeMatcher<Duration> implements Pred
     @Override
     protected boolean defaultIncludeEnd() {
         return false;
-
-    }
-
-    @Override
-    public boolean test(Duration duration) {
-        return super.testComparable(duration);
-
     }
 }

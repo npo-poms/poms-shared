@@ -3,14 +3,16 @@ package nl.vpro.domain.api;
 import java.util.Iterator;
 import java.util.List;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.XmlAttribute;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 /**
+ * Represents a list of {@link Matcher}, itself being a Matcher again.
  * @author Michiel Meeuwissen
  * @since 2.8
  */
-public abstract class MatcherList<T> implements Iterable<T> {
+public abstract class MatcherList<V, T extends Matcher<V>> implements Iterable<T>, Matcher<V> {
 
     public static final Match DEFAULT_MATCH = Match.MUST;
 
@@ -25,6 +27,7 @@ public abstract class MatcherList<T> implements Iterable<T> {
         this.match = m == null ? this.match : m;
     }
 
+    @Override
     public Match getMatch() {
         return match;
     }
@@ -56,5 +59,29 @@ public abstract class MatcherList<T> implements Iterable<T> {
         return match + ":" + (asList() == null ? "null" : asList().toString());
     }
 
+
+    @Override
+    public boolean test(V s) {
+        boolean hasShould = false;
+        boolean shouldResult = false;
+
+        for(T t : this) {
+            boolean match = t.test(s);
+            switch(t.getMatch()) {
+                case NOT:
+                    // fall through
+                case MUST:
+                    if (! match) {
+                        return false;
+                    }
+                    break;
+                case SHOULD:
+                    hasShould = true;
+                    shouldResult |= match;
+                    break;
+            }
+        }
+        return ! hasShould || shouldResult;
+    }
 
 }

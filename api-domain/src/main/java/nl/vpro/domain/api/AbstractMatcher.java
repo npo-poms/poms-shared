@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlTransient
 @EqualsAndHashCode
-public abstract class AbstractMatcher implements Matcher {
+public abstract class AbstractMatcher<V> implements Matcher<V> {
 
     @XmlTransient
     protected Match match;

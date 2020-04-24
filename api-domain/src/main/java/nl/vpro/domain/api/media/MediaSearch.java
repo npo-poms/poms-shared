@@ -38,7 +38,7 @@ import nl.vpro.domain.user.Broadcaster;
 @XmlDocumentation("Limits the search result to media with certain properties")
 @lombok.AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder")
-public class MediaSearch extends AbstractTextSearch implements Predicate<MediaObject> {
+public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
 
     public MediaSearch() {
@@ -156,8 +156,6 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Setter
     private List<GeoLocationSearch> geoLocations;
 
-
-
     /**
      * @deprecated For json backwards compatibility
      */
@@ -233,7 +231,11 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
 
 
     protected TestResult applyAvTypes(MediaObject input) {
-        return TestResult.of("avtypes", avTypes, () -> name(input.getAVType()));
+        return TestResult.ofSingular("avtypes",
+            avTypes,
+            MediaSearch::name,
+            input::getAVType
+        );
     }
 
 
@@ -242,7 +244,11 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     }
 
     protected TestResult applyTypes(MediaObject input) {
-        return TestResult.of("types", types, () -> name(MediaType.getMediaType(input)));
+        return TestResult.ofSingular(
+            "types",
+            types,
+            MediaSearch::name,
+            () -> MediaType.getMediaType(input));
     }
 
     protected TestResult applyText(MediaObject input) {
@@ -265,12 +271,16 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     }
 
     protected TestResult applyMediaIds(MediaObject input) {
-        return TestResult.of("ids", mediaIds, input::getMid);
+        return TestResult.ofSingular("ids", mediaIds,
+            input::getMid);
     }
 
 
     protected TestResult applyAgeRatings(MediaObject input) {
-        return TestResult.of("ageratings", ageRatings, () -> name(input.getAgeRating()));
+        return TestResult.ofSingular("ageratings", ageRatings,
+            MediaSearch::name,
+            input::getAgeRating
+        );
     }
 
     protected TestResult  applySortDates(MediaObject input) {
@@ -282,9 +292,11 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     }
 
     protected TestResult applyLastModifiedDates(MediaObject input) {
-        return TestResultIgnore.INSTANCE;
-        // TODO
-        //return TestResult.of(lastModifiedDates, applyDateRange(input, lastModifiedDates, MediaObject::getLastModifiedInstant));
+        if (lastModifiedDates == null) {
+            return TestResultIgnore.INSTANCE;
+        }
+        return new TestResultImpl("lastModifiedDates",
+            sortDates.getMatch(), applyDateRange(input, lastModifiedDates, MediaObject::getLastModifiedInstant));
     }
 
     protected TestResult applyCreationDates(MediaObject input) {
@@ -313,33 +325,34 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     }
 
     protected TestResult applyBroadcasters(MediaObject input) {
-        return  TestResult.of("broadcasters", broadcasters, Broadcaster::getId, input::getBroadcasters);
+        return  TestResult.ofPlural("broadcasters", broadcasters, Broadcaster::getId, input::getBroadcasters);
     }
 
     protected TestResult applyLocations(MediaObject input) {
-        return TestResult.of("locations", locations, Location::getProgramUrl, input::getLocations);
+        return TestResult.ofPlural("locations", locations, Location::getProgramUrl, input::getLocations);
     }
 
     protected TestResult applyTags(MediaObject input) {
-        return TestResult.of("tags", tags, Tag::getText, input::getTags);
+        return TestResult.ofPlural("tags", tags, Tag::getText, input::getTags);
     }
 
     protected TestResult applyGenres(MediaObject input) {
-        return TestResult.of("genres", genres, Genre::getTermId, input::getGenres);
+        return TestResult.ofPlural("genres", genres, Genre::getTermId, input::getGenres);
     }
 
     protected TestResult applyContentRatings(MediaObject input) {
-        return TestResult.of("contentRatings", contentRatings, Enum::name, input::getContentRatings);
+        return TestResult.ofPlural("contentRatings", contentRatings, Enum::name, input::getContentRatings);
     }
 
     protected TestResult applyDurations(MediaObject input) {
-        return TestResultIgnore.INSTANCE;
-        // TODO
-        //return TestResult.of(durations, () -> AuthorizedDuration.get(input.getDuration()));
+        return TestResult.ofSingular("duration",
+            durations,
+            () -> AuthorizedDuration.get(input.getDuration())
+        );
     }
 
     protected TestResult applyDescendantOf(MediaObject input) {
-        return TestResult.of("descendantof",
+        return TestResult.ofPlural("descendantof",
             descendantOf,
             DescendantRef::getMidRef,
             input::getDescendantOf);
@@ -353,11 +366,11 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             return new TestResultImpl("episodeof", episodeOf.getMatch(), () -> false);
         }
         Program program = (Program) input;
-        return TestResult.of("episodeof", episodeOf, MemberRef::getMidRef,  program::getEpisodeOf);
+        return TestResult.ofPlural("episodeof", episodeOf, MemberRef::getMidRef,  program::getEpisodeOf);
     }
 
     protected TestResult applyMemberOf(MediaObject input) {
-        return TestResult.of("memberof", memberOf, MemberRef::getMidRef, input::getMemberOf);
+        return TestResult.ofPlural("memberof", memberOf, MemberRef::getMidRef, input::getMemberOf);
     }
 
 
@@ -452,44 +465,44 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
         String getDescription();
 
         //TestResult andThen(TestResult test);
-        static TestResult of (
+        static <V, T extends Matcher<V>, I> TestResult ofSingular(
             String description,
-            final AbstractTextMatcherList<? extends AbstractTextMatcher<?>, ?> list,
-            BooleanSupplier supplier) {
+            final MatcherList<V, T> list,
+            @NonNull final Function<I, V> valueGetter,
+            Supplier<I> supplier) {
             if (list == null) {
                 return TestResultIgnore.INSTANCE;
             }
-            return new TestResultImpl(description, list.getMatch(), supplier);
-        }
-
-         static TestResult of(
-             String description,
-             final AbstractTextMatcherList<? extends AbstractTextMatcher<?>, ?> list,
-             Supplier<String> supplier) {
-             if (list == null) {
-                 return TestResultIgnore.INSTANCE;
-            }
-            return new TestResultImpl(description, list.getMatch(), () -> {
-                String value = supplier.get();
-                return list.test(value);
-            }
+            return new TestResultImpl(description,
+                list.getMatch(),
+                () -> {
+                    V value = valueGetter.apply(supplier.get());
+                    return list.test(value);
+                }
             );
         }
-
-
-
-        static <T, S extends MatchType> TestResult of(
+        static <V, T extends Matcher<V>> TestResult ofSingular(
             String description,
-            @Nullable final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers,
-            @NonNull final Function<T, String> textValueGetter,
-            Supplier<Collection<T>> supplier) {
-            if (textMatchers == null) {
+            final MatcherList<V, T> list,
+            Supplier<V> supplier) {
+            return ofSingular(description, list, s -> s, supplier);
+        }
+
+
+
+
+        static <V, T extends Matcher<V>, I> TestResult ofPlural(
+            String description,
+            @Nullable final MatcherList<V, T> matchers,
+            @NonNull final Function<I, V> valueGetter,
+            Supplier<Collection<I>> supplier) {
+            if (matchers == null) {
                 return TestResultIgnore.INSTANCE;
             }
             return new TestResultImpl(description,
-                textMatchers.getMatch(),
+                matchers.getMatch(),
                 () ->
-                    Matchers.toPredicate(textMatchers, textValueGetter)
+                    Matchers.toCollectionPredicate(matchers, valueGetter)
                         .test(supplier.get()));
         }
 

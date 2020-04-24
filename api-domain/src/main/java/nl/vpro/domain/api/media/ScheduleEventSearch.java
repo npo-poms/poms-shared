@@ -8,14 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
-import java.util.function.Predicate;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -30,7 +28,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * @author rico
  */
 @XmlType(name = "scheduleEventSearchType", propOrder = {"begin", "end", "channel", "net", "rerun"})
-public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predicate<ScheduleEvent> {
+public class ScheduleEventSearch extends RangeMatcher<Instant, ScheduleEvent> {
 
     @XmlElement
     @Getter
@@ -131,7 +129,7 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
         return t != null && (channel == null || channel.equals(t.getChannel()))
             && (net == null || net.equals(t.getNet().getId()))
             && (rerun == null || rerun == t.isRerun())
-            && super.testComparable(t.getStartInstant());
+            && super.valueTest(t.getStartInstant());
     }
 
 

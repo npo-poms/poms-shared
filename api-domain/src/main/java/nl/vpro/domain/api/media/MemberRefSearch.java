@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 import nl.vpro.domain.api.AbstractSearch;
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.TextMatcherList;
+import nl.vpro.domain.media.MediaObject;
 
 /**
  * @author Roelof Jan Koekoek
@@ -22,7 +23,7 @@ import nl.vpro.domain.api.TextMatcherList;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberRefSearchType")
-public class MemberRefSearch extends AbstractSearch {
+public class MemberRefSearch extends AbstractSearch<MediaObject> {
 
     @Valid
     @Getter
@@ -45,10 +46,14 @@ public class MemberRefSearch extends AbstractSearch {
 
     }
 
-
-
     @Override
     public boolean hasSearches() {
         return atLeastOneHasSearches(mediaIds, types);
+    }
+
+    @Override
+    public boolean test(MediaObject s) {
+        return false;
+
     }
 }

@@ -25,7 +25,7 @@ import nl.vpro.domain.api.page.PageSearch;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({MediaSearch.class, PageSearch.class, MemberRefSearch.class, AssociationSearch.class})
 @XmlTransient
-public abstract class AbstractSearch extends AbstractMatcher {
+public abstract class AbstractSearch<V> extends AbstractMatcher<V> {
 
     public abstract boolean hasSearches();
 
@@ -41,7 +41,7 @@ public abstract class AbstractSearch extends AbstractMatcher {
     protected static boolean atLeastOneHasSearches(Iterable<?>... collections) {
         for (Iterable<?> col : collections) {
             if (col != null) {
-                if (col instanceof MatcherList<?>) {
+                if (col instanceof MatcherList<?, ?>) {
                     if (!((MatcherList) col).isEmpty()) {
                         return true;
                     }

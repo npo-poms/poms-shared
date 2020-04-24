@@ -9,8 +9,6 @@ import java.util.function.Predicate;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -24,7 +22,7 @@ import nl.vpro.domain.api.jackson.DateRangeMatcherListJson;
 @XmlType(name = "dateRangeMatcherListType")
 @JsonSerialize(using = DateRangeMatcherListJson.Serializer.class)
 @JsonDeserialize(using = DateRangeMatcherListJson.Deserializer.class)
-public class DateRangeMatcherList extends MatcherList<DateRangeMatcher> implements Predicate<Instant> {
+public class DateRangeMatcherList extends MatcherList<Instant, DateRangeMatcher> implements Predicate<Instant> {
 
     @XmlElement(name = "matcher")
     @Valid
@@ -56,37 +54,4 @@ public class DateRangeMatcherList extends MatcherList<DateRangeMatcher> implemen
     }
 
 
-    @Override
-    public boolean test(@Nullable Instant input) {
-        if (input == null) return true;
-
-        switch (match) {
-
-            case MUST: {
-                for (DateRangeMatcher matcher : this) {
-                    if (!matcher.test(input)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            case NOT: {
-                for (DateRangeMatcher matcher : this) {
-                    if (matcher.test(input)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            case SHOULD:
-            default: {
-                for (DateRangeMatcher matcher : this) {
-                    if (matcher.test(input)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
-    }
 }

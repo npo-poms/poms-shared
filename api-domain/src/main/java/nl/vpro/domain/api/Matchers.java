@@ -174,10 +174,13 @@ public class Matchers {
     }
 
 
-    public static <T, S extends MatchType> Predicate<Collection<T>> toPredicate(
-        @Nullable final Iterable<? extends AbstractTextMatcher<S>> textMatchers,
-        @NonNull  final Function<T, String> textValueGetter) {
-        if(textMatchers == null) {
+    /**
+     * Creates a Predicate for a <em>collection</em> of values.
+     */
+    public static <V, C> Predicate<Collection<C>> toCollectionPredicate(
+        @Nullable final Iterable<? extends Matcher<V>> matchers,
+        @NonNull  final Function<C, V> valueGetter) {
+        if(matchers == null) {
             return i -> true;
         }
         return collection -> {
@@ -187,23 +190,23 @@ public class Matchers {
             boolean hasShould = false;
             boolean shouldResult = false;
 
-            for (AbstractTextMatcher<S> t : textMatchers) {
+            for (Matcher<V> t : matchers) {
                 boolean match;
                 switch (t.getMatch()) {
                     case NOT:
-                        match = matchesAll(collection, t, textValueGetter);
+                        match = matchesAll(collection, t, valueGetter);
                         if (! match) {
                             return false;
                         }
                         break;
                     case MUST:
-                        match = matchesOne(collection, t, textValueGetter);
+                        match = matchesOne(collection, t, valueGetter);
                         if (!match) {
                             return false;
                         }
                         break;
                     case SHOULD:
-                        match = matchesOne(collection, t, textValueGetter);
+                        match = matchesOne(collection, t, valueGetter);
                         hasShould = true;
                         shouldResult |= match;
                         break;
@@ -214,18 +217,18 @@ public class Matchers {
         };
     }
 
-    private static <T> boolean matchesOne(Collection<T> collection, AbstractTextMatcher<?> t,  Function<T, String> textValueGetter) {
-        for (T item : collection) {
-            String value = textValueGetter.apply(item);
+    private static <C, V> boolean matchesOne(Collection<C> collection, Matcher<V> t,  Function<C, V> valueGetter) {
+        for (C item : collection) {
+            V value = valueGetter.apply(item);
             if (t.test(value)) {
                 return true;
             }
         }
         return false;
     }
-    private static <T> boolean matchesAll(Collection<T> collection, AbstractTextMatcher<?> t,  Function<T, String> textValueGetter) {
-        for (T item : collection) {
-            String value = textValueGetter.apply(item);
+    private static <C, V> boolean matchesAll(Collection<C> collection, Matcher<V> t,  Function<C, V> valueGetter) {
+        for (C item : collection) {
+            V  value = valueGetter.apply(item);
             if (!t.test(value)) {
                 return false;
             }

@@ -343,6 +343,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return new ScheduleEvent(source, parent);
     }
 
+    public static ScheduleEvent of(Instant start) {
+        return ScheduleEvent.builder().start(start).build();
+    }
+
     private static Date guideDay(Date start) {
         if (start == null) {
             return null;

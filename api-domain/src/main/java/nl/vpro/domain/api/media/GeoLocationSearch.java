@@ -1,21 +1,15 @@
 package nl.vpro.domain.api.media;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.net.URI;
 import java.util.Objects;
-import java.util.function.Predicate;
 
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import nl.vpro.domain.api.AbstractSearch;
-import nl.vpro.domain.api.ExtendedTextMatcher;
-import nl.vpro.domain.api.Match;
-import nl.vpro.domain.api.StandardMatchType;
+import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.GeoLocation;
 import nl.vpro.domain.media.GeoRoleType;
 import nl.vpro.domain.media.support.OwnerType;
@@ -28,7 +22,7 @@ import nl.vpro.domain.media.support.OwnerType;
 @XmlType(name = "geoLocationSearchType", propOrder = {})
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode(callSuper = true)
-public class GeoLocationSearch extends AbstractSearch implements Predicate<GeoLocation>  {
+public class GeoLocationSearch extends AbstractSearch<GeoLocation> {
 
     @XmlAttribute
     @Getter

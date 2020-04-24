@@ -4,8 +4,6 @@
  */
 package nl.vpro.domain.api;
 
-import java.util.function.Predicate;
-
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -18,7 +16,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlTransient
-public abstract class AbstractTextMatcher<MT extends MatchType> extends AbstractMatcher implements Matcher, Predicate<String> {
+public abstract class AbstractTextMatcher<MT extends MatchType> extends AbstractMatcher<String> {
     public static final Match DEFAULT_MATCH = Match.MUST;
 
     @XmlValue

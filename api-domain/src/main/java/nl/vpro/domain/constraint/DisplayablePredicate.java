@@ -34,7 +34,7 @@ public interface DisplayablePredicate<T> extends Predicate<T> {
 
 
     default List<String> getDefaultBundleKey() {
-        Class c = getClass();
+        Class<?> c = getClass();
         List<String> result = new ArrayList<>();
         String sn = c.getSimpleName();
         while (StringUtils.isEmpty(sn)) {
@@ -43,9 +43,9 @@ public interface DisplayablePredicate<T> extends Predicate<T> {
         }
         result.add(sn);
         while(c != null && c != DisplayablePredicate.class) {
-            Class sc = c.getSuperclass();
+            Class<?> sc = c.getSuperclass();
             if (sc == null || ! DisplayablePredicate.class.isAssignableFrom(sc)) {
-                for (Class i : c.getInterfaces()) {
+                for (Class<?> i : c.getInterfaces()) {
                     if (DisplayablePredicate.class.isAssignableFrom(i)) {
                         sc = i;
                         break;

@@ -1,19 +1,15 @@
 package nl.vpro.domain.api.media;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Objects;
-import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.domain.api.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.*;
 
 /**
  * @author Lies Kombrink
@@ -21,7 +17,7 @@ import nl.vpro.domain.media.support.Title;
 @XmlType(name = "titleSearchType", propOrder = {})
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode(callSuper = true)
-public class TitleSearch extends AbstractSearch implements Predicate<Title>  {
+public class TitleSearch extends AbstractSearch<Title>  {
 
     @XmlAttribute
     @Getter

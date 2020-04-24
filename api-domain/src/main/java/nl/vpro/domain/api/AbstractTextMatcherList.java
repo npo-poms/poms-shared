@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlTransient
 public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, S extends MatchType>
-    extends MatcherList<T>
+    extends MatcherList<String, T>
     implements Predicate<String> {
 
     @Valid
@@ -46,29 +46,7 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
         this.matchers = matchers;
     }
 
-    @Override
-    public boolean test(String s) {
-        boolean hasShould = false;
-        boolean shouldResult = false;
 
-        for(AbstractTextMatcher<S> t : matchers) {
-            boolean match = t.test(s);
-            switch(t.getMatch()) {
-                case NOT:
-                    // fall through
-                case MUST:
-                    if (! match) {
-                        return false;
-                    }
-                    break;
-                case SHOULD:
-                    hasShould = true;
-                    shouldResult |= match;
-                    break;
-            }
-        }
-        return ! hasShould || shouldResult;
-    }
 
     public boolean searchEquals(AbstractTextMatcherList<T, S> b) {
         if (b == null) {
@@ -114,6 +92,10 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
         }
         return a.searchEquals(b);
     }
+
+
+
+
 
     @Override
     public boolean equals(Object o) {

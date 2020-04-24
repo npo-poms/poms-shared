@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public abstract  class RangeMatcherTest<S extends Comparable<S>, T extends RangeMatcher<S>> {
+public abstract  class RangeMatcherTest<S extends Comparable<S>, T extends RangeMatcher<S, S>> {
 
     abstract T getInstance();
 

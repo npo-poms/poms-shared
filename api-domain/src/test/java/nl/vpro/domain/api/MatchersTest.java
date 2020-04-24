@@ -132,24 +132,24 @@ public class MatchersTest {
     public void testListPredicateWithOneNot() {
         Function<String, String> STRING = input -> input;
         TextMatcherList textMatchers = new TextMatcherList(Match.MUST, new TextMatcher("BB", Match.NOT));
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isFalse();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.singletonList("AA"))).isTrue();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Arrays.asList("AA", "BB"))).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("AA"))).isTrue();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Arrays.asList("AA", "BB"))).isFalse();
 
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(null)).isTrue();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.emptyList())).isTrue();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(null)).isTrue();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.emptyList())).isTrue();
     }
 
     @Test
     public void testListPredicateWithOne() {
         Function<String, String> STRING = input -> input;
         TextMatcherList textMatchers = new TextMatcherList(Match.MUST, new TextMatcher("BB"));
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isTrue();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.singletonList("AA"))).isFalse();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Arrays.asList("AA", "BB"))).isTrue();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isTrue();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("AA"))).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Arrays.asList("AA", "BB"))).isTrue();
 
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(null)).isFalse();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.emptyList())).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(null)).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.emptyList())).isFalse();
     }
 
     @Test
@@ -163,13 +163,13 @@ public class MatchersTest {
             }
         };
         TextMatcherList textMatchers = new TextMatcherList(Match.MUST, new TextMatcher("BB", Match.NOT), new TextMatcher("CC", Match.NOT));
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isFalse();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.singletonList("AA"))).isTrue();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Arrays.asList("AA", "BB"))).isFalse();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Arrays.asList("CC", "BB"))).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("AA"))).isTrue();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Arrays.asList("AA", "BB"))).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Arrays.asList("CC", "BB"))).isFalse();
 
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(null)).isTrue();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.emptyList())).isTrue();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(null)).isTrue();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.emptyList())).isTrue();
     }
 
     @Test
@@ -183,11 +183,11 @@ public class MatchersTest {
             }
         };
         TextMatcherList textMatchers = new TextMatcherList(Match.MUST, new TextMatcher("BB"), new TextMatcher("CC", Match.NOT));
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isTrue();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.singletonList("AA"))).isFalse();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Arrays.asList("CC", "BB"))).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("BB"))).isTrue();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.singletonList("AA"))).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Arrays.asList("CC", "BB"))).isFalse();
 
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(null)).isFalse();
-        assertThat(Matchers.toPredicate(textMatchers, STRING).test(Collections.emptyList())).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(null)).isFalse();
+        assertThat(Matchers.toCollectionPredicate(textMatchers, STRING).test(Collections.emptyList())).isFalse();
     }
 }

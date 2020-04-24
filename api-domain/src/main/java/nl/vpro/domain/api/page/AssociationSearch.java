@@ -1,11 +1,7 @@
 package nl.vpro.domain.api.page;
 
-import java.util.function.Predicate;
-
 import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.page.Association;
@@ -17,7 +13,7 @@ import nl.vpro.domain.page.LinkType;
  */
 @XmlType(name = "associationSearchType")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class AssociationSearch extends AbstractSearch implements Predicate<Association> {
+public class AssociationSearch extends AbstractSearch<Association>  {
 
     public static AssociationSearch of(LinkType type) {
         return of(type, Match.MUST);

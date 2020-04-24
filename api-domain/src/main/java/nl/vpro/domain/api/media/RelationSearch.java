@@ -4,17 +4,12 @@
  */
 package nl.vpro.domain.api.media;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.api.AbstractRelationSearch;
-import nl.vpro.domain.api.ExtendedTextMatcherList;
-import nl.vpro.domain.api.TextMatcherList;
+import nl.vpro.domain.api.*;
 
 /**
  * @author Roelof Jan Koekoek
@@ -22,7 +17,13 @@ import nl.vpro.domain.api.TextMatcherList;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaRelationSearchType",
-    propOrder = {"types", "broadcasters", "values", "uriRefs"})
+    propOrder = {
+        "types",
+        "broadcasters",
+        "values",
+        "uriRefs"
+    }
+)
 @NoArgsConstructor
 public class RelationSearch extends AbstractRelationSearch {
 

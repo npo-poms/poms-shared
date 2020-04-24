@@ -4,18 +4,12 @@
  */
 package nl.vpro.domain.api.subtitles;
 
-import java.util.function.Predicate;
+import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.api.AbstractTextSearch;
-import nl.vpro.domain.api.Matchers;
-import nl.vpro.domain.api.SimpleTextMatcher;
-import nl.vpro.domain.api.TextMatcherList;
+import nl.vpro.domain.api.*;
 import nl.vpro.domain.subtitles.StandaloneCue;
 
 /**
@@ -24,10 +18,7 @@ import nl.vpro.domain.subtitles.StandaloneCue;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "subtitlesSearchType")
-public class SubtitlesSearch extends AbstractTextSearch implements Predicate<StandaloneCue> {
-
-
-
+public class SubtitlesSearch extends AbstractTextSearch<StandaloneCue> {
 
     @Valid
     private TextMatcherList mids;

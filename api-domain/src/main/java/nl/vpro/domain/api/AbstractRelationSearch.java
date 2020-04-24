@@ -4,7 +4,6 @@ import lombok.*;
 
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.function.Predicate;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
@@ -27,8 +26,8 @@ import static nl.vpro.domain.api.AbstractTextMatcherList.searchEquals;
 @XmlTransient
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor
-public abstract class AbstractRelationSearch extends AbstractSearch
-    implements Predicate<Relation>, Iterable<AbstractTextMatcher<?>> {
+public abstract class AbstractRelationSearch extends AbstractSearch<Relation>
+    implements  Iterable<AbstractTextMatcher<?>> {
     @Valid
     private TextMatcherList types;
 

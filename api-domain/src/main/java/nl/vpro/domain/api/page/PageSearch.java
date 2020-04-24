@@ -25,7 +25,21 @@ import nl.vpro.domain.user.Broadcaster;
 @XmlType(name = "pagesSearchType",
     propOrder = {
         // Intellij warnings are incorrect since parent class is @XmlTransient
-        "text", "broadcasters", "types", "portals", "sections", "genres", "tags", "keywords", "sortDates", "lastModifiedDates", "creationDates", "publishDates", "relations", "links", "referrals"
+        "text",
+        "broadcasters",
+        "types",
+        "portals",
+        "sections",
+        "genres",
+        "tags",
+        "keywords",
+        "sortDates",
+        "lastModifiedDates",
+        "creationDates",
+        "publishDates",
+        "relations",
+        "links",
+        "referrals"
     })
 @Getter
 @Setter
@@ -33,7 +47,7 @@ import nl.vpro.domain.user.Broadcaster;
 @AllArgsConstructor
 @NoArgsConstructor
 @lombok.Builder
-public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
+public class PageSearch extends AbstractTextSearch<Page> {
 
     @Valid
     private TextMatcherList broadcasters;
