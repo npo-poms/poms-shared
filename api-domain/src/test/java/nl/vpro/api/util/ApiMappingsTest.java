@@ -95,7 +95,7 @@ public class ApiMappingsTest {
     }
 
     @Test
-    @Disabled
+    @Disabled("no maping for that checked in here")
     public void testMediaSchema()  {
         testNamespace(createMappings(), Xmlns.MEDIA_NAMESPACE);
     }
