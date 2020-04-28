@@ -16,6 +16,12 @@ public class Headers {
     public static final String OWNER_TYPE_HEADER = "X-Poms-CurrentOwner";
 
     /**
+     * A request header signifying the preferred date format in json
+     * TODO: NPA-539
+     */
+    public static final String JSON_TIMESTAMPS = "X-NPO-TIMESTAMPS";
+
+    /**
      * A prefix for response headers related to NPO
      */
     public static final String X_NPO                        = "X-NPO";
