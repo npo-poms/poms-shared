@@ -10,11 +10,13 @@ import javax.xml.bind.annotation.*;
 /**
  * @author Roelof Jan Koekoek
  * @since 2.0
+ * @param <V> The type of the values defining the range
+ * @param <T> The type of the values defining the {@link Matcher}/{@link java.util.function.Predicate}
+ * @see SimpleRangeMatcher SimpleRangeMacher, where V and T are the same, which is the common use case.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "rangeMatcherType")
-//@XmlSeeAlso({Integer.class, Instant.class, String.class})
-public abstract class RangeMatcher<V extends Comparable<V>, T extends Comparable<T>> extends AbstractMatcher<T> {
+public abstract class RangeMatcher<V extends Comparable<V>, T> extends AbstractMatcher<T> {
 
     @XmlAttribute
     // TODO it is a bit odd that this attribute is not on the _end_ element
