@@ -62,6 +62,6 @@ public abstract class AbstractMediaForm implements Form, Predicate<MediaObject> 
         return getTestResult(input).test();
     }
     public MediaSearch.TestResult getTestResult(MediaObject input) {
-        return searches == null ? MediaSearch.TestResultIgnore.INSTANCE :searches.getTestResult(input);
+        return searches == null ? MediaSearch.TestResultIgnore.INSTANCE : searches.getTestResult(input);
     }
 }
