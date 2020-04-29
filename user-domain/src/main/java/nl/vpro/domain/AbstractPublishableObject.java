@@ -201,7 +201,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
             setUnrecognizedUrn(urn);
             return;
         }
-        String id = urn.substring(i, urn.length());
+        String id = urn.substring(i);
         if("null".equals(id)) {
             log.debug("Urn was unset");
             setId(null);
