@@ -7,6 +7,8 @@ import java.util.function.Supplier;
 
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Please note that transactions are only rolled back in case of a runtime exception
@@ -43,5 +45,8 @@ public interface TransactionService {
 
     <T> void executeInReadonlyTransaction(T argument, @NonNull Consumer<T> consumer);
 
-
+    @Transactional(propagation = Propagation.NEVER)
+    default void ensureNoTransaction() {
+        
+    }
 }

@@ -1,9 +1,7 @@
 package nl.vpro.services.jpa;
 
 import java.util.concurrent.Callable;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 import javax.transaction.Transactional;
 
@@ -12,7 +10,8 @@ import org.springframework.stereotype.Service;
 
 import nl.vpro.services.TransactionService;
 
-import static javax.transaction.Transactional.TxType.*;
+import static javax.transaction.Transactional.TxType.NEVER;
+import static javax.transaction.Transactional.TxType.REQUIRES_NEW;
 
 @Service("jpaTransactionService")
 public class JpaTransactionServiceImpl implements TransactionService {
@@ -80,4 +79,11 @@ public class JpaTransactionServiceImpl implements TransactionService {
     public <T> void executeInReadonlyTransaction(T argument, @NonNull Consumer<T> consumer) {
         consumer.accept(argument);
     }
+    
+    @Override
+    @Transactional(NEVER)
+    public void ensureNoTransaction() {
+
+    }
+        
 }
