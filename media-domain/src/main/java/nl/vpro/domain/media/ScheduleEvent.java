@@ -222,7 +222,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Instant start,
         @NonNull  Duration duration,
         @Nullable Program media) {
-        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null);
+        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null, null, null, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -238,7 +238,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @Nullable Lifestyle primaryLifestyle,
         @Nullable SecondaryLifestyle secondaryLifestyle,
         @Singular Set<ScheduleEventTitle> titles,
-        @Singular Set<ScheduleEventDescription> descriptions
+        @Singular Set<ScheduleEventDescription> descriptions,
+        @Nullable AVAttributes avAttributes,
+        @Nullable String textPage,
+        @Nullable String textSubtitles
         ) {
         this.channel = channel;
         this.net = net;
@@ -261,6 +264,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
                 sd.setParent(this);
             }
         }
+        this.avAttributes = avAttributes;
+        this.textPage = textPage;
+        this.textSubtitles = textSubtitles;
         setParent(media);
     }
 

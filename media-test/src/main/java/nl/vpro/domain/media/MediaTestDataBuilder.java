@@ -981,6 +981,8 @@ public interface MediaTestDataBuilder<
                     .secondaryLifestyle(new SecondaryLifestyle("Zorgzame Duizendpoten"))
                     .mainTitle("Main ScheduleEvent Title")
                     .mainDescription("Main ScheduleEvent Description")
+                    .textSubtitles("Teletekst ondertitels")
+                    .textPage("888")
                     .build(),
                 ScheduleEvent.builder()
                     .channel(Channel.NED3)
