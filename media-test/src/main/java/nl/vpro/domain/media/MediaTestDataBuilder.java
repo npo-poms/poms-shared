@@ -971,27 +971,31 @@ public interface MediaTestDataBuilder<
 
         public ProgramTestDataBuilder withScheduleEvents() {
             return scheduleEvents(
-                    ScheduleEvent.builder()
-                            .channel(Channel.NED3)
-                            .start(Instant.ofEpochMilli(100))
-                            .duration(Duration.ofMillis(200))
-                            .guideDay(LocalDate.of(1969, 12, 31))
-                            .repeat(Repeat.original())
-                            .build(),
-                    ScheduleEvent.builder()
-                            .channel(Channel.NED3)
-                            .net(new Net("ZAPP"))
-                            .start(Instant.ofEpochMilli(300L + 3 * 24 * 3600 * 1000))
-                            .duration(Duration.ofMillis(50))
-                            .repeat(Repeat.rerun())
-                            .build(),
-                    ScheduleEvent.builder()
-                            .channel(Channel.HOLL)
-                            .start(Instant.ofEpochMilli(350L + 8 * 24 * 3600 * 1000))
-                            .duration(Duration.ofMillis(250))
-                            .rerun(true)
-                            .build(),
-                    ScheduleEvent.builder().channel(Channel.CONS).start(Instant.ofEpochMilli(600L + 10 * 24 * 3600 * 1000)).duration(Duration.ofMillis(200L)).rerun(true).build()
+                ScheduleEvent.builder()
+                    .channel(Channel.NED3)
+                    .start(Instant.ofEpochMilli(100))
+                    .duration(Duration.ofMillis(200))
+                    .guideDay(LocalDate.of(1969, 12, 31))
+                    .repeat(Repeat.original())
+                    .primaryLifestyle(new Lifestyle("Praktische Familiemensen"))
+                    .secondaryLifestyle(new SecondaryLifestyle("Zorgzame Duizendpoten"))
+                    .mainTitle("Main ScheduleEvent Title")
+                    .mainDescription("Main ScheduleEvent Description")
+                    .build(),
+                ScheduleEvent.builder()
+                    .channel(Channel.NED3)
+                    .net(new Net("ZAPP"))
+                    .start(Instant.ofEpochMilli(300L + 3 * 24 * 3600 * 1000))
+                    .duration(Duration.ofMillis(50))
+                    .repeat(Repeat.rerun())
+                    .build(),
+                ScheduleEvent.builder()
+                    .channel(Channel.HOLL)
+                    .start(Instant.ofEpochMilli(350L + 8 * 24 * 3600 * 1000))
+                    .duration(Duration.ofMillis(250))
+                    .rerun(true)
+                    .build(),
+                ScheduleEvent.builder().channel(Channel.CONS).start(Instant.ofEpochMilli(600L + 10 * 24 * 3600 * 1000)).duration(Duration.ofMillis(200L)).rerun(true).build()
             );
         }
 

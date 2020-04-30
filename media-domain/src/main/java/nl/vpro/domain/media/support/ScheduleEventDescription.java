@@ -38,6 +38,7 @@ public class ScheduleEventDescription extends AbstractOwnedTextEntity<ScheduleEv
     })
     ScheduleEvent parent;
 
+    @lombok.Builder
     public ScheduleEventDescription(ScheduleEvent parent, String title, OwnerType owner, TextualType type) {
         super(title, owner, type);
         this.parent = parent;

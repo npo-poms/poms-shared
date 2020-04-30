@@ -1,10 +1,8 @@
 package nl.vpro.domain.media;
 
-import java.io.IOException;
 import java.time.Duration;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -57,13 +55,33 @@ public class ScheduleEventTest {
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel.NED1)
             .duration(Duration.ofMinutes(10))
+            .mainTitle("scheduleEventTitle")
+            .mainDescription("scheduleEventDescription")
+            .primaryLifestyle(new Lifestyle("primary lifestyle"))
+            .secondaryLifestyle(new SecondaryLifestyle("secondary lifestyle"))
             .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.PRETTY_PUBLISHER, e, "{\n" +
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.PRETTY_PUBLISHER, e, "\"{\n" +
+            "  \"titles\" : [ {\n" +
+            "    \"value\" : \"scheduleEventTitle\",\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"type\" : \"MAIN\"\n" +
+            "  } ],\n" +
+            "  \"descriptions\" : [ {\n" +
+            "    \"value\" : \"scheduleEventDescription\",\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"type\" : \"MAIN\"\n" +
+            "  } ],\n" +
             "  \"channel\" : \"NED1\",\n" +
             "  \"start\" : 1503928260000,\n" +
             "  \"guideDay\" : 1503871200000,\n" +
             "  \"duration\" : 600000,\n" +
+            "  \"primaryLifestyle\" : {\n" +
+            "    \"value\" : \"primary lifestyle\"\n" +
+            "  },\n" +
+            "  \"secondaryLifestyle\" : {\n" +
+            "    \"value\" : \"secondary lifestyle\"\n" +
+            "  },\n" +
             "  \"rerun\" : false,\n" +
             "  \"eventStart\" : 1503928260000\n" +
             "}");

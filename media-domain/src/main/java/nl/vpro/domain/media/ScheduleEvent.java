@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Singular;
+
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
@@ -220,7 +222,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Instant start,
         @NonNull  Duration duration,
         @Nullable Program media) {
-        this(channel, net, guideDay, start, duration, null, media, null);
+        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -232,7 +234,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Duration duration,
         String midRef,
         @Nullable Program media,
-        @Nullable  Repeat repeat) {
+        @Nullable  Repeat repeat,
+        @Nullable Lifestyle primaryLifestyle,
+        @Nullable SecondaryLifestyle secondaryLifestyle,
+        @Singular Set<ScheduleEventTitle> titles,
+        @Singular Set<ScheduleEventDescription> descriptions
+        ) {
         this.channel = channel;
         this.net = net;
         this.guideDay = guideDay == null ? guideLocalDate(start) : guideDay;
@@ -240,6 +247,20 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
         this.midRef = midRef;
+        this.primaryLifestyle = primaryLifestyle;
+        this.secondaryLifestyle = secondaryLifestyle;
+        this.titles = titles;
+        if (this.titles != null) {
+            for (ScheduleEventTitle st : this.titles) {
+                st.setParent(this);
+            }
+        }
+        this.descriptions = descriptions;
+        if (this.descriptions != null) {
+            for (ScheduleEventDescription sd : this.descriptions) {
+                sd.setParent(this);
+            }
+        }
         setParent(media);
     }
 
@@ -868,6 +889,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
         public Builder rerun(String text) {
             return repeat(Repeat.rerun(text));
+        }
+        
+        public Builder mainTitle(String title) {
+            return title(ScheduleEventTitle.builder().title(title).type(TextualType.MAIN).owner(OwnerType.BROADCASTER).build());
+        }
+
+        public Builder mainDescription(String description) {
+            return description(ScheduleEventDescription.builder().title(description).type(TextualType.MAIN).owner(OwnerType.BROADCASTER).build());
         }
 
     }
