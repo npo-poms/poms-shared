@@ -16,6 +16,8 @@
     <s:firstScheduleEvent channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
         <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
         <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
+        <textSubtitles>Teletekst ondertitels</textSubtitles>
+        <textPage>888</textPage>
         <guideDay>1969-12-31+01:00</guideDay>
         <start>1970-01-01T01:00:00.100+01:00</start>
         <duration>P0DT0H0M0.200S</duration>
@@ -26,6 +28,8 @@
     <s:firstScheduleEventNoRerun channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
         <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
         <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
+        <textSubtitles>Teletekst ondertitels</textSubtitles>
+        <textPage>888</textPage>
         <guideDay>1969-12-31+01:00</guideDay>
         <start>1970-01-01T01:00:00.100+01:00</start>
         <duration>P0DT0H0M0.200S</duration>
@@ -43,6 +47,8 @@
     <s:lastScheduleEventNoRerun channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
         <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
         <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
+        <textSubtitles>Teletekst ondertitels</textSubtitles>
+        <textPage>888</textPage>
         <guideDay>1969-12-31+01:00</guideDay>
         <start>1970-01-01T01:00:00.100+01:00</start>
         <duration>P0DT0H0M0.200S</duration>
@@ -53,6 +59,8 @@
     <s:sortDateScheduleEvent channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
         <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
         <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
+        <textSubtitles>Teletekst ondertitels</textSubtitles>
+        <textPage>888</textPage>
         <guideDay>1969-12-31+01:00</guideDay>
         <start>1970-01-01T01:00:00.100+01:00</start>
         <duration>P0DT0H0M0.200S</duration>
