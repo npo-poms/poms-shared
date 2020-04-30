@@ -570,12 +570,30 @@
         "name" : "Rutte, Mark"
       } ],
       "scheduleEvents" : [ {
+        "titles" : [ {
+          "value" : "Main ScheduleEvent Title",
+          "owner" : "BROADCASTER",
+          "type" : "MAIN"
+        } ],
+        "descriptions" : [ {
+          "value" : "Main ScheduleEvent Description",
+          "owner" : "BROADCASTER",
+          "type" : "MAIN"
+        } ],
         "channel" : "NED3",
         "start" : 100,
         "guideDay" : -90000000,
         "duration" : 200,
         "midRef" : "VPROWON_20001",
         "poProgID" : "VPROWON_20001",
+        "textSubtitles" : "Teletekst ondertitels",
+        "textPage" : "888",
+        "primaryLifestyle" : {
+          "value" : "Praktische Familiemensen"
+        },
+        "secondaryLifestyle" : {
+          "value" : "Zorgzame Duizendpoten"
+        },
         "rerun" : false,
         "urnRef" : "urn:vpro:media:program:12",
         "eventStart" : 100

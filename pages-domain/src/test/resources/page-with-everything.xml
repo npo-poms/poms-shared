@@ -232,10 +232,16 @@
             </media:images>
             <media:scheduleEvents>
                 <media:scheduleEvent channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
+                    <media:title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</media:title>
+                    <media:description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</media:description>
+                    <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+                    <media:textPage>888</media:textPage>
                     <media:guideDay>1969-12-31+01:00</media:guideDay>
                     <media:start>1970-01-01T01:00:00.100+01:00</media:start>
                     <media:duration>P0DT0H0M0.200S</media:duration>
                     <media:poProgID>VPROWON_20001</media:poProgID>
+                    <media:primaryLifestyle>Praktische Familiemensen</media:primaryLifestyle>
+                    <media:secondaryLifestyle>Zorgzame Duizendpoten</media:secondaryLifestyle>
                 </media:scheduleEvent>
                 <media:scheduleEvent channel="NED3" midRef="VPROWON_20001" net="ZAPP" urnRef="urn:vpro:media:program:12">
                     <media:repeat isRerun="true"/>
