@@ -797,6 +797,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
      */
     @Override
     public SortedSet<ScheduleEventTitle> getTitles() {
+        if (titles == null) {
+            titles = new TreeSet<>();
+        }
         return sorted(titles);
 
     }
@@ -825,6 +828,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Override
     public SortedSet<ScheduleEventDescription> getDescriptions() {
+        if (descriptions == null) {
+            descriptions = new TreeSet<>();
+        }
         return sorted(descriptions);
     }
 
@@ -890,7 +896,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         public Builder rerun(String text) {
             return repeat(Repeat.rerun(text));
         }
-        
+
         public Builder mainTitle(String title) {
             return title(ScheduleEventTitle.builder().title(title).type(TextualType.MAIN).owner(OwnerType.BROADCASTER).build());
         }
