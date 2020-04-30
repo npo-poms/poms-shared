@@ -8,8 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 
@@ -21,7 +19,7 @@ import nl.vpro.domain.media.support.TextualType;
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class AbstractOwnedText<T extends AbstractOwnedText<T>> implements  OwnedText, Serializable {
+public abstract class AbstractOwnedText<T extends AbstractOwnedText<T>> implements OwnedText, Serializable {
 
 
     @Column(nullable = false)

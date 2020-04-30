@@ -25,6 +25,7 @@ import nl.vpro.domain.media.ScheduleEvent;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventDescription", namespace = Xmlns.MEDIA_NAMESPACE)
 @JsonPropertyOrder({"value", "owner", "type"})
+@SuppressWarnings("JpaMissingIdInspection") // it's in super
 public class ScheduleEventDescription extends AbstractOwnedTextEntity<ScheduleEventDescription, ScheduleEvent> {
 
     @Getter

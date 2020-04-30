@@ -1269,9 +1269,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     public MediaObject addCountry(String code) {
         return addCountry(RegionService.getInstance().getByCode(code).orElseThrow(() ->
-            new IllegalArgumentException("Unknown country " + code)));
-
+            new IllegalArgumentException("Unknown country " + code))
+        );
     }
+
     public MediaObject addCountry(@NonNull CountryCode country) {
         return addCountry(Country.of(country));
     }

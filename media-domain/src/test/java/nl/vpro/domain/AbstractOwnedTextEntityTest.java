@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AbstractOwnedTextEntityTest {
 
-    class OwnedTextEntity extends AbstractOwnedTextEntity<OwnedTextEntity, Object> {
+    static class OwnedTextEntity extends AbstractOwnedTextEntity<OwnedTextEntity, Object> {
         @Getter
         @Setter
         Object parent;
