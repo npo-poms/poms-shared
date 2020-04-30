@@ -534,9 +534,15 @@ public class MediaObjectXmlSchemaTest {
             "    <images/>\n" +
             "    <scheduleEvents>\n" +
             "        <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "            <title owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Title</title>\n" +
+            "            <description owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Description</description>\n" +
+            "            <textSubtitles>Teletekst ondertitels</textSubtitles>\n" +
+            "            <textPage>888</textPage>\n" +
             "            <guideDay>1969-12-31+01:00</guideDay>\n" +
             "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "            <duration>P0DT0H0M0.200S</duration>\n" +
+            "            <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>\n" +
+            "            <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>\n" +
             "        </scheduleEvent>\n" +
             "        <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
             "            <repeat isRerun=\"true\"/>\n" +
@@ -557,9 +563,8 @@ public class MediaObjectXmlSchemaTest {
             "            <duration>P0DT0H0M0.200S</duration>\n" +
             "        </scheduleEvent>\n" +
             "    </scheduleEvents>\n" +
-
             "    <segments/>\n" +
-            "</program>");
+            "</program>\n");
 
         String withScheduleEventOnOldLocation =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00.100+01:00\"\n" +
@@ -705,9 +710,15 @@ public class MediaObjectXmlSchemaTest {
             "<schedule channel=\"NED1\" start=\"1970-01-01T01:00:00+01:00\"\n" +
             "    stop=\"1970-01-11T01:00:00.800+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "        <title owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Title</title>\n" +
+            "        <description owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Description</description>\n" +
+            "        <textSubtitles>Teletekst ondertitels</textSubtitles>\n" +
+            "        <textPage>888</textPage>\n" +
             "        <guideDay>1969-12-31+01:00</guideDay>\n" +
             "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "        <duration>P0DT0H0M0.200S</duration>\n" +
+            "        <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>\n" +
+            "        <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>\n" +
             "    </scheduleEvent>\n" +
             "    <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
             "        <repeat isRerun=\"true\"/>\n" +
@@ -749,9 +760,15 @@ public class MediaObjectXmlSchemaTest {
             "<schedule channel=\"NED3\" start=\"1970-01-01T01:00:00+01:00\"\n" +
             "    stop=\"1970-01-09T01:00:00.350+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "        <title owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Title</title>\n" +
+            "        <description owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Description</description>\n" +
+            "        <textSubtitles>Teletekst ondertitels</textSubtitles>\n" +
+            "        <textPage>888</textPage>\n" +
             "        <guideDay>1969-12-31+01:00</guideDay>\n" +
             "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "        <duration>P0DT0H0M0.200S</duration>\n" +
+            "        <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>\n" +
+            "        <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>\n" +
             "    </scheduleEvent>\n" +
             "    <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
             "        <repeat isRerun=\"true\"/>\n" +
