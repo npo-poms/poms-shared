@@ -38,6 +38,14 @@ public class ApiScheduleEventTest {
                 "  \"duration\" : 200,\n" +
                 "  \"midRef\" : \"VPROWON_12345\",\n" +
                 "  \"poProgID\" : \"VPROWON_12345\",\n" +
+                "  \"textSubtitles\" : \"Teletekst ondertitels\",\n" +
+                "  \"textPage\" : \"888\",\n" +
+                "  \"primaryLifestyle\" : {\n" +
+                "    \"value\" : \"Praktische Familiemensen\"\n" +
+                "  },\n" +
+                "  \"secondaryLifestyle\" : {\n" +
+                "    \"value\" : \"Zorgzame Duizendpoten\"\n" +
+                "  },\n" +
                 "  \"media\" : {\n" +
                 "    \"objectType\" : \"program\",\n" +
                 "    \"mid\" : \"VPROWON_12345\",\n" +
@@ -50,12 +58,30 @@ public class ApiScheduleEventTest {
                 "    \"countries\" : [ ],\n" +
                 "    \"languages\" : [ ],\n" +
                 "    \"scheduleEvents\" : [ {\n" +
+                "      \"titles\" : [ {\n" +
+                "        \"value\" : \"Main ScheduleEvent Title\",\n" +
+                "        \"owner\" : \"BROADCASTER\",\n" +
+                "        \"type\" : \"MAIN\"\n" +
+                "      } ],\n" +
+                "      \"descriptions\" : [ {\n" +
+                "        \"value\" : \"Main ScheduleEvent Description\",\n" +
+                "        \"owner\" : \"BROADCASTER\",\n" +
+                "        \"type\" : \"MAIN\"\n" +
+                "      } ],\n" +
                 "      \"channel\" : \"NED3\",\n" +
                 "      \"start\" : 100,\n" +
                 "      \"guideDay\" : -90000000,\n" +
                 "      \"duration\" : 200,\n" +
                 "      \"midRef\" : \"VPROWON_12345\",\n" +
-                "      \"poProgID\" : \"VPROWON_12345\"\n" +
+                "      \"poProgID\" : \"VPROWON_12345\",\n" +
+                "      \"textSubtitles\" : \"Teletekst ondertitels\",\n" +
+                "      \"textPage\" : \"888\",\n" +
+                "      \"primaryLifestyle\" : {\n" +
+                "        \"value\" : \"Praktische Familiemensen\"\n" +
+                "      },\n" +
+                "      \"secondaryLifestyle\" : {\n" +
+                "        \"value\" : \"Zorgzame Duizendpoten\"\n" +
+                "      }\n" +
                 "    }, {\n" +
                 "      \"channel\" : \"NED3\",\n" +
                 "      \"start\" : 259200300,\n" +
@@ -102,20 +128,30 @@ public class ApiScheduleEventTest {
         String xml = writer.toString();
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<api:scheduleItem channel=\"NED3\" midRef=\"VPROWON_12345\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>\n" +
+            "    <media:textPage>888</media:textPage>\n" +
             "    <media:guideDay>1969-12-31+01:00</media:guideDay>\n" +
             "    <media:start>1970-01-01T01:00:00.100+01:00</media:start>\n" +
             "    <media:duration>P0DT0H0M0.200S</media:duration>\n" +
             "    <media:poProgID>VPROWON_12345</media:poProgID>\n" +
-            "    <media:program embeddable=\"true\" mid=\"VPROWON_12345\" sortDate=\"1970-01-01T01:00:00.100+01:00\" creationDate=\"2014-09-03T10:40:42.642+02:00\" workflow=\"FOR PUBLICATION\">\n" +
+            "    <media:primaryLifestyle>Praktische Familiemensen</media:primaryLifestyle>\n" +
+            "    <media:secondaryLifestyle>Zorgzame Duizendpoten</media:secondaryLifestyle>\n" +
+            "    <media:program embeddable=\"true\" mid=\"VPROWON_12345\" sortDate=\"1970-01-01T01:00:00.100+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2014-09-03T10:40:42.642+02:00\">\n" +
             "        <media:credits/>\n" +
             "        <media:locations/>\n" +
             "        <media:images/>\n" +
             "        <media:scheduleEvents>\n" +
             "            <media:scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345\">\n" +
+            "                <media:title owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Title</media:title>\n" +
+            "                <media:description owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Description</media:description>\n" +
+            "                <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>\n" +
+            "                <media:textPage>888</media:textPage>\n" +
             "                <media:guideDay>1969-12-31+01:00</media:guideDay>\n" +
             "                <media:start>1970-01-01T01:00:00.100+01:00</media:start>\n" +
             "                <media:duration>P0DT0H0M0.200S</media:duration>\n" +
             "                <media:poProgID>VPROWON_12345</media:poProgID>\n" +
+            "                <media:primaryLifestyle>Praktische Familiemensen</media:primaryLifestyle>\n" +
+            "                <media:secondaryLifestyle>Zorgzame Duizendpoten</media:secondaryLifestyle>\n" +
             "            </media:scheduleEvent>\n" +
             "            <media:scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345\" net=\"ZAPP\">\n" +
             "                <media:repeat isRerun=\"true\"></media:repeat>\n" +
@@ -141,7 +177,7 @@ public class ApiScheduleEventTest {
             "        </media:scheduleEvents>\n" +
             "        <media:segments/>\n" +
             "    </media:program>\n" +
-            "</api:scheduleItem>";
+            "</api:scheduleItem>\n";
         Diff diff = DiffBuilder.compare(expected).withTest(xml).build();
         if (diff.hasDifferences()) {
             assertThat(xml).isEqualTo(expected);

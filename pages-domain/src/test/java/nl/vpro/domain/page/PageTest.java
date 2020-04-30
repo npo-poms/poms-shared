@@ -24,7 +24,7 @@ public class PageTest {
         .build();
 
     @Test
-    public void withEverything() throws Exception {
+    public void withEverythingJson() throws Exception {
         Page rounded = Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPublisherInstance(), page, getClass().getResourceAsStream("/page-with-everything.json"));
     }
 
