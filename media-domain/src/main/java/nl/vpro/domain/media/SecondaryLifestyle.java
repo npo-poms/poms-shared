@@ -1,10 +1,14 @@
 package nl.vpro.domain.media;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlValue;
+
+import nl.vpro.domain.Displayable;
 
 /**
  * @author Michiel Meeuwissen
@@ -12,7 +16,7 @@ import javax.xml.bind.annotation.XmlValue;
  */
 @Embeddable
 @XmlAccessorType(XmlAccessType.NONE)
-public class SecondaryLifestyle {
+public class SecondaryLifestyle implements Serializable, Displayable {
 
     @XmlValue
     @Column(name = "secondaryLifestyle")
@@ -33,7 +37,8 @@ public class SecondaryLifestyle {
         return source == null ? null : new SecondaryLifestyle(source);
     }
 
-    public String getDisplayValue() {
+    @Override
+    public String getDisplayName() {
         return value;
     }
 
