@@ -175,14 +175,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Valid
     @XmlElement(name = "title")
     @JsonProperty("titles")
-    protected Set<ScheduleEventTitle> titles = new TreeSet<>();
+    protected Set<@Valid @NotNull ScheduleEventTitle> titles = new TreeSet<>();
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
     @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
-    protected Set<ScheduleEventDescription> descriptions = new TreeSet<>();
+    protected Set<@Valid @NotNull ScheduleEventDescription> descriptions = new TreeSet<>();
 
     public ScheduleEvent() {
     }
