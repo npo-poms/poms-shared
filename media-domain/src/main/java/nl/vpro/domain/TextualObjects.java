@@ -330,12 +330,12 @@ public class TextualObjects {
         TO2 to) {
         if (from.getTitles() != null) {
             for (T1 title : from.getTitles()) {
-                to.addTitle(title.get(), title.getOwner(), title.getType());
+                to.setTitle(title.get(), title.getOwner(), title.getType());
             }
         }
         if (from.getDescriptions() != null) {
             for (D1 description : from.getDescriptions()) {
-                to.addDescription(description.get(), description.getOwner(), description.getType());
+                to.setDescription(description.get(), description.getOwner(), description.getType());
             }
         }
     }

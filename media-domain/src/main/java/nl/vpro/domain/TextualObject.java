@@ -1,6 +1,7 @@
 package nl.vpro.domain;
 
 
+import java.util.SortedSet;
 import java.util.function.BiFunction;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -38,6 +39,7 @@ public interface TextualObject<
 
     default TO addTitle(@NonNull String title, @NonNull  OwnerType owner, @NonNull  TextualType type) {
         T t = getOwnedTitleCreator().apply(title, owner, type);
+        SortedSet<T> titles = getTitles();
         getTitles().add(t);
         return self();
     }
