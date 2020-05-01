@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Singular;
+
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
@@ -28,9 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Range;
 
-import nl.vpro.domain.Child;
-import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.TextualObject;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.bind.NetToString;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.ScheduleEventDescription;
@@ -173,14 +173,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Valid
     @XmlElement(name = "title")
     @JsonProperty("titles")
-    protected Set<ScheduleEventTitle> titles = new TreeSet<>();
+    protected Set<@Valid @NotNull ScheduleEventTitle> titles = new TreeSet<>();
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
     @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
-    protected Set<ScheduleEventDescription> descriptions = new TreeSet<>();
+    protected Set<@Valid @NotNull ScheduleEventDescription> descriptions = new TreeSet<>();
 
     public ScheduleEvent() {
     }
@@ -220,7 +220,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Instant start,
         @NonNull  Duration duration,
         @Nullable Program media) {
-        this(channel, net, guideDay, start, duration, null, media, null);
+        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null, null, null, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -232,7 +232,15 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Duration duration,
         String midRef,
         @Nullable Program media,
-        @Nullable  Repeat repeat) {
+        @Nullable  Repeat repeat,
+        @Nullable Lifestyle primaryLifestyle,
+        @Nullable SecondaryLifestyle secondaryLifestyle,
+        @Singular Set<ScheduleEventTitle> titles,
+        @Singular Set<ScheduleEventDescription> descriptions,
+        @Nullable AVAttributes avAttributes,
+        @Nullable String textPage,
+        @Nullable String textSubtitles
+        ) {
         this.channel = channel;
         this.net = net;
         this.guideDay = guideDay == null ? guideLocalDate(start) : guideDay;
@@ -240,6 +248,24 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
         this.midRef = midRef;
+        this.primaryLifestyle = primaryLifestyle;
+        this.secondaryLifestyle = secondaryLifestyle;
+        if (titles != null) {
+            for (ScheduleEventTitle st : titles) {
+                st.setParent(this);
+                this.titles.add(st);
+            }
+        }
+
+        if (descriptions != null) {
+            for (ScheduleEventDescription sd : descriptions) {
+                sd.setParent(this);
+                this.descriptions.add(sd);
+            }
+        }
+        this.avAttributes = avAttributes;
+        this.textPage = textPage;
+        this.textSubtitles = textSubtitles;
         setParent(media);
     }
 
@@ -341,6 +367,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
 
         return new ScheduleEvent(source, parent);
+    }
+
+    public static ScheduleEvent of(Instant start) {
+        return ScheduleEvent.builder().start(start).build();
     }
 
     private static Date guideDay(Date start) {
@@ -772,6 +802,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
      */
     @Override
     public SortedSet<ScheduleEventTitle> getTitles() {
+        if (titles == null) {
+            titles = new TreeSet<>();
+        }
         return sorted(titles);
 
     }
@@ -800,6 +833,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Override
     public SortedSet<ScheduleEventDescription> getDescriptions() {
+        if (descriptions == null) {
+            descriptions = new TreeSet<>();
+        }
         return sorted(descriptions);
     }
 
@@ -864,6 +900,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
         public Builder rerun(String text) {
             return repeat(Repeat.rerun(text));
+        }
+
+        public Builder mainTitle(String title) {
+            return title(ScheduleEventTitle.builder().title(title).type(TextualType.MAIN).owner(OwnerType.BROADCASTER).build());
+        }
+
+        public Builder mainDescription(String description) {
+            return description(ScheduleEventDescription.builder().title(description).type(TextualType.MAIN).owner(OwnerType.BROADCASTER).build());
         }
 
     }
