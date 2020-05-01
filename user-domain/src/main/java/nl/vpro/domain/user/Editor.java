@@ -125,7 +125,7 @@ public class Editor extends AbstractUser {
         String principalId,
         String displayName,
         String givenName,
-        String familiyName,
+        String familyName,
         String email,
         Broadcaster broadcaster,
         @lombok.Singular  Set<String> roles,
@@ -140,7 +140,7 @@ public class Editor extends AbstractUser {
         }
         this.roles = roles == null ? Collections.emptySet() : Collections.unmodifiableSet(roles);
         this.givenName = givenName;
-        this.familyName = familiyName;
+        this.familyName = familyName;
         this.lastLogin = lastLogin;
     }
 
