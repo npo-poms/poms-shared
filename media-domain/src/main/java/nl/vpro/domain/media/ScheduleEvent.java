@@ -30,9 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Range;
 
-import nl.vpro.domain.Child;
-import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.TextualObject;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.bind.NetToString;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.ScheduleEventDescription;
@@ -252,16 +250,17 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.midRef = midRef;
         this.primaryLifestyle = primaryLifestyle;
         this.secondaryLifestyle = secondaryLifestyle;
-        this.titles = titles;
-        if (this.titles != null) {
-            for (ScheduleEventTitle st : this.titles) {
+        if (titles != null) {
+            for (ScheduleEventTitle st : titles) {
                 st.setParent(this);
+                this.titles.add(st);
             }
         }
-        this.descriptions = descriptions;
-        if (this.descriptions != null) {
-            for (ScheduleEventDescription sd : this.descriptions) {
+
+        if (descriptions != null) {
+            for (ScheduleEventDescription sd : descriptions) {
                 sd.setParent(this);
+                this.descriptions.add(sd);
             }
         }
         this.avAttributes = avAttributes;
