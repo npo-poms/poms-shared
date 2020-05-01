@@ -1192,7 +1192,7 @@ public interface MediaTestDataBuilder<
             .email("editor@vpro.nl")
             .broadcaster(new Broadcaster("VPRO", "VPRO"))
             .givenName("Test")
-            .familiyName("Editor")
+            .familyName("Editor")
             .lastLogin(Instant.now())
             .role(Roles.USER_ROLE)
             .build();
