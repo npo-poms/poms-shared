@@ -29,4 +29,22 @@ public class NEPItemizeRequestTest {
         // {"starttime":"2018-05-09T14:59:25.405","endtime":"2018-05-09T14:59:31.548","identifier":"npo-1dvr"}
     }
 
+
+    @Test
+    public void jsonTruncated() {
+        NEPItemizeRequest request = NEPItemizeRequest.builder()
+            .starttime("2018-05-09T16:00:00.000")
+            .endtime("2018-05-09T16:00:00.000")
+            .identifier("npo-1dvr")
+            .build();
+
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getLenientInstance(), request, "{\n" +
+            "  \"identifier\" : \"npo-1dvr\",\n" +
+            "  \"starttime\" : \"2018-05-09T16:00:00.000\",\n" +
+            "  \"endtime\" : \"2018-05-09T16:00:00.000\"\n" +
+            "}");
+
+        // {"starttime":"2018-05-09T14:59:25.405","endtime":"2018-05-09T14:59:31.548","identifier":"npo-1dvr"}
+    }
+
 }
