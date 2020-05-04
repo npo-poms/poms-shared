@@ -591,6 +591,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         }
     }
 
+    @ToString
     public static class TestResultCombiner implements TestResult {
 
         @Getter
