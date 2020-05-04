@@ -12,11 +12,8 @@ import javax.validation.constraints.Min;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import nl.vpro.api.rs.v3.media.MediaRestService;
 import nl.vpro.domain.api.ApiScheduleEvent;
-import nl.vpro.domain.api.media.ScheduleForm;
-import nl.vpro.domain.api.media.ScheduleResult;
-import nl.vpro.domain.api.media.ScheduleSearchResult;
+import nl.vpro.domain.api.media.*;
 
 import static nl.vpro.domain.api.Constants.*;
 
@@ -36,7 +33,7 @@ import static nl.vpro.domain.api.Constants.*;
 @Path(ScheduleRestService.PATH)
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public interface ScheduleRestService {
-    String TAG = MediaRestService.TAG; // documented with media, so also in that tag!
+    String TAG = "schedule";
     String PATH = "/schedule";
 
     String CHANNEL = "channel";
