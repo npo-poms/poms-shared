@@ -5,6 +5,7 @@
 package nl.vpro.domain.api.media;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
@@ -39,6 +40,7 @@ import nl.vpro.domain.user.Broadcaster;
 @XmlDocumentation("Limits the search result to media with certain properties")
 @lombok.AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder")
+@Slf4j
 public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
 
@@ -430,6 +432,10 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         TestResultCombiner combiner = new TestResultCombiner();
         if (input instanceof Program) {
             for (ScheduleEventSearch s : scheduleEvents) {
+                if (s == null) {
+                    log.warn("null in {}", scheduleEvents);
+                    continue;
+                }
                 combiner.add(new TestResultImpl("schedule", s.getMatch(),
                     () -> {
                         for (ScheduleEvent event : ((Program) input).getScheduleEvents()) {
