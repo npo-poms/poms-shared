@@ -71,15 +71,13 @@ public interface UserService<T extends User> {
     }
 
     /**
-     * Logins in the given principal and returns an attached user (if possible).
+     * Logins in the given principal
      */
-    @Transactional
+    @Transactional(Transactional.TxType.NEVER)
     default T login(java.security.Principal authentication, Instant timestamp) {
-        synchronized (this) {
-            T editor = get(authentication);
-            editor.setLastLogin(timestamp);
-            return update(editor);
-        }
+        T editor = get(authentication);
+        editor.setLastLogin(timestamp);
+        return editor;
     }
 
     /**
