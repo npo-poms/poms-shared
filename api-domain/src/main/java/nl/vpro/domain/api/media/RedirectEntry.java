@@ -29,6 +29,7 @@ public class RedirectEntry {
     @XmlAttribute
     private String ultimate;
 
+
     public RedirectEntry() {
     }
 
