@@ -619,7 +619,10 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         @Override
         public String getDescription() {
             return "ignored";
-
+        }
+        @Override
+        public String toString() {
+            return "IGNORE";
         }
     }
 
@@ -648,10 +651,9 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
             return () -> {
                 Truthiness result = Truthiness.TRUE;
                 if (! musts.isEmpty()) {
-                    result = Truthiness.FALSE;
                     for (TestResult m : musts) {
                         Truthiness test = m.test();
-                        if (test.ordinal() < result.ordinal()) {
+                        if (test.ordinal() > result.ordinal()) {
                             result = test;
                         }
                         if (!m.test().getAsBoolean()) {
