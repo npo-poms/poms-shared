@@ -106,7 +106,7 @@ public interface UserService<T extends User> {
     }
 
     default Optional<String> currentPrincipalId() {
-        return Optional.ofNullable(getAuthentication()).map(Principal::getName);
+        return currentUser().map(User::getPrincipalId);
     }
 
     boolean currentUserHasRole(Collection<String> roles);
