@@ -25,7 +25,7 @@ import nl.vpro.domain.api.page.PageSearch;
 @XmlSeeAlso({MediaSearch.class, PageSearch.class})
 @XmlTransient
 @EqualsAndHashCode(callSuper = true)
-public abstract class AbstractTextSearch extends AbstractSearch {
+public abstract class AbstractTextSearch<V> extends AbstractSearch<V> {
 
 
     @Valid

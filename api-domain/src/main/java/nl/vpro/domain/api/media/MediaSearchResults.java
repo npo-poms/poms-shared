@@ -14,6 +14,9 @@ import nl.vpro.domain.api.TermFacetResultItem;
  */
 public class MediaSearchResults {
 
+    private MediaSearchResults() {
+    }
+
     public static void setSelectedFacets(MediaFacetsResult facetResults, MediaFacetsResult selected, MediaForm form) {
 
         MediaSearch search = form == null ? null : form.getSearches();

@@ -7,8 +7,7 @@ package nl.vpro.domain.api.media;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
@@ -31,11 +30,6 @@ import nl.vpro.domain.api.jackson.media.RelationFacetListJson;
 @JsonSerialize(using = RelationFacetListJson.Serializer.class)
 @JsonDeserialize(using = RelationFacetListJson.Deserializer.class)
 public class RelationFacetList extends AbstractFacet<MediaSearch> implements SearchableFacet<MediaSearch, RelationSearch>, Iterable<RelationFacet> {
-
-    @Valid
-    @Getter
-    @Setter
-    private MediaSearch filter;
 
     @Valid
     @Getter
@@ -65,7 +59,15 @@ public class RelationFacetList extends AbstractFacet<MediaSearch> implements Sea
         this.subSearch = subSearch;
     }
 
-
+    @XmlElement
+    @Override
+    public MediaSearch getFilter() {
+        return filter;
+    }
+    @Override
+    public void  setFilter(MediaSearch filter) {
+        this.filter = filter;
+    }
     /**
      * Use iterator if you want to initialise the facet names. Clients may supply there own custom name, but
      * this is optional
@@ -104,6 +106,9 @@ public class RelationFacetList extends AbstractFacet<MediaSearch> implements Sea
 
             @Override
             public RelationFacet next() {
+                if (! hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 RelationFacet relationFacet = facets.get(index++);
                 if(relationFacet.getName() == null) {
                     relationFacet.setName("relations" + index);

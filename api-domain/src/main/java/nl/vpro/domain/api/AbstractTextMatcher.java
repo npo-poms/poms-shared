@@ -4,13 +4,9 @@
  */
 package nl.vpro.domain.api;
 
-import java.util.function.Predicate;
+import javax.xml.bind.annotation.*;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlValue;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * A text matcher matches strings (rather then e.g. dates or numbers)
@@ -20,7 +16,7 @@ import javax.xml.bind.annotation.XmlValue;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlTransient
-public abstract class AbstractTextMatcher<MT extends MatchType> extends AbstractMatcher implements Matcher, Predicate<String> {
+public abstract class AbstractTextMatcher<MT extends MatchType> extends AbstractMatcher<String> {
     public static final Match DEFAULT_MATCH = Match.MUST;
 
     @XmlValue
@@ -80,7 +76,7 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
             return false;
         }
 
-        AbstractTextMatcher matcher = (AbstractTextMatcher)o;
+        AbstractTextMatcher<?> matcher = (AbstractTextMatcher)o;
 
         return value == null ? matcher.getValue() == null : value.equals(matcher.getValue()) && getMatch() == matcher.getMatch();
 

@@ -3,8 +3,6 @@ package nl.vpro.domain.api;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.function.Predicate;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -13,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
  * @since 2.0
  */
 @XmlType(name = "integerRangeMatcherType", propOrder = {"begin", "end"})
-public class IntegerRangeMatcher extends RangeMatcher<Integer> implements Predicate<Integer> {
+public class IntegerRangeMatcher extends SimpleRangeMatcher<Integer>   {
 
     @XmlElement
     @Getter
@@ -25,8 +23,6 @@ public class IntegerRangeMatcher extends RangeMatcher<Integer> implements Predic
     private Integer end;
 
     public IntegerRangeMatcher() {
-
-
     }
 
     public IntegerRangeMatcher(Integer begin, Integer end) {
@@ -37,13 +33,6 @@ public class IntegerRangeMatcher extends RangeMatcher<Integer> implements Predic
     @Override
     protected boolean defaultIncludeEnd() {
         return false;
-
-    }
-
-
-    @Override
-    public boolean test(Integer integer) {
-        return super.testComparable(integer);
 
     }
 }

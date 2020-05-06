@@ -4,19 +4,19 @@
  */
 package nl.vpro.domain.api;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.*;
 
 
 /**
  * @author Roelof Jan Koekoek
  * @since 2.0
+ * @param <V> The type of the values defining the range
+ * @param <T> The type of the values defining the {@link Matcher}/{@link java.util.function.Predicate}
+ * @see SimpleRangeMatcher SimpleRangeMacher, where V and T are the same, which is the common use case.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "rangeMatcherType")
-@XmlSeeAlso({Integer.class, Date.class, String.class})
-public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatcher {
+public abstract class RangeMatcher<V extends Comparable<V>, T> extends AbstractMatcher<T> {
 
     @XmlAttribute
     // TODO it is a bit odd that this attribute is not on the _end_ element
@@ -29,29 +29,29 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
     public RangeMatcher() {
     }
 
-    protected RangeMatcher(T begin, T end) {
+    protected RangeMatcher(V begin, V end) {
         this(begin, end, null, null);
     }
 
-    protected RangeMatcher(T begin, T end, Boolean inclusiveEnd) {
+    protected RangeMatcher(V begin, V end, Boolean inclusiveEnd) {
         this(begin, end, inclusiveEnd, null);
     }
 
 
-    protected RangeMatcher(T begin, T end, Boolean inclusiveEnd, Match match) {
+    protected RangeMatcher(V begin, V end, Boolean inclusiveEnd, Match match) {
         super(match);
         setBegin(begin);
         setEnd(end);
         this.inclusiveEnd = inclusiveEnd;
     }
 
-    public abstract T getBegin();
+    public abstract V getBegin();
 
-    public abstract void setBegin(T begin);
+    public abstract void setBegin(V begin);
 
-    public abstract T getEnd();
+    public abstract V getEnd();
 
-    public abstract void setEnd(T end);
+    public abstract void setEnd(V end);
 
     public boolean includeEnd() {
         return inclusiveEnd != null ? inclusiveEnd : defaultIncludeEnd();
@@ -77,11 +77,20 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
         return "RangeMatcher{begin=" + getBegin() + ", end=" + getEnd() + ", inclusiveEnd=" + inclusiveEnd + "}";
     }
 
-    protected boolean testComparable(T t) {
-        boolean apply = (getBegin()== null || getBegin().compareTo(t) <= 0) &&
-            (getEnd() == null || (getEnd().compareTo(t) > 0 || (includeEnd() && getEnd().compareTo(t) == 0)));
+
+    @SuppressWarnings("SimplifiableConditionalExpression")
+    protected boolean valueTest(V t) {
+        V begin = getBegin();
+        V end = getEnd();
+        if (t == null) {
+            return begin == null && end == null;
+        }
+        boolean apply = (begin == null || begin.compareTo(t) <= 0) &&
+            (end == null || (end.compareTo(t) > 0 || (includeEnd() && end.compareTo(t) == 0)));
         return match == Match.NOT ? !apply : apply;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -92,9 +101,9 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
             return false;
         }
 
-        RangeMatcher<T> that = (RangeMatcher<T>)o;
-        T begin = getBegin();
-        T end = getEnd();
+        RangeMatcher<V, T> that = (RangeMatcher<V, T>)o;
+        V begin = getBegin();
+        V end = getEnd();
 
         if(begin != null ? !begin.equals(that.getBegin()) : that.getBegin() != null) {
             return false;

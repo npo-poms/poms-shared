@@ -8,8 +8,11 @@ import nl.vpro.util.IntegerVersion;
  */
 public class Compatibility {
 
-
     private static final ThreadLocal<IntegerVersion> compatibility = ThreadLocal.withInitial(() -> null);
+
+    private Compatibility() {
+    }
+
 
     public static void setCompatibility(IntegerVersion value) {
         compatibility.set(value);

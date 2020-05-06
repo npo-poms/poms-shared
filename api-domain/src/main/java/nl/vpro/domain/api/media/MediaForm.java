@@ -6,7 +6,6 @@ package nl.vpro.domain.api.media;
 
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.function.Predicate;
 
@@ -15,6 +14,7 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 import nl.vpro.domain.api.SortableForm;
 import nl.vpro.domain.media.MediaObject;
@@ -32,7 +32,6 @@ import nl.vpro.domain.media.MediaObject;
         "searches",
         "sortFields",
         "facets"})
-@ToString
 @EqualsAndHashCode(callSuper = true)
 public class MediaForm extends AbstractMediaForm implements SortableForm, Predicate<MediaObject> {
 
@@ -90,4 +89,13 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
         return getSearches() != null && getSearches().hasSearches();
     }
 
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+            .add("sortFields", sortFields)
+            .add("facets", facets)
+            .add("search", getSearches())
+            .omitNullValues()
+            .toString();
+    }
 }

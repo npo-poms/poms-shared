@@ -1,14 +1,11 @@
 package nl.vpro.domain.api.media;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+
+import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -96,6 +93,9 @@ public class TitleFacetList
 
             @Override
             public TitleFacet next() {
+                if (! hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 TitleFacet titleFacet = facets.get(index++);
                 if (titleFacet.getName() == null) {
                     titleFacet.setName("titles" + index);

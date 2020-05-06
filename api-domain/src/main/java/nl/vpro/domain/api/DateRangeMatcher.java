@@ -10,11 +10,8 @@ import lombok.Setter;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.function.Predicate;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
@@ -35,7 +32,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  */
 @XmlType(name = "dateRangeMatcherType", propOrder = {"begin", "end"})
 @JsonPropertyOrder({"begin", "end", "inclusiveEnd", "match"})
-public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate<Instant> {
+public class DateRangeMatcher extends SimpleRangeMatcher<Instant> {
 
     @XmlElement
     @Getter
@@ -91,13 +88,6 @@ public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate
     @Override
     protected boolean defaultIncludeEnd() {
         return false;
-
-    }
-
-    @Override
-    public boolean test(Instant date) {
-        return super.testComparable(date);
-
     }
 
     public static class Builder {

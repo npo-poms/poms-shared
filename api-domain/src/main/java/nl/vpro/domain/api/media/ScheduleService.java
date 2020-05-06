@@ -12,7 +12,6 @@ import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Net;
 
 /**
- * @TODO Very similar to the service ScheduleEventservice?
  * @author rico
  */
 public interface ScheduleService {

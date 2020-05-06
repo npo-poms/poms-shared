@@ -3,17 +3,11 @@ package nl.vpro.domain.api;
 import lombok.Singular;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -28,7 +22,7 @@ import nl.vpro.domain.api.jackson.DateRangeMatcherListJson;
 @XmlType(name = "dateRangeMatcherListType")
 @JsonSerialize(using = DateRangeMatcherListJson.Serializer.class)
 @JsonDeserialize(using = DateRangeMatcherListJson.Deserializer.class)
-public class DateRangeMatcherList extends MatcherList<DateRangeMatcher> implements Predicate<Instant> {
+public class DateRangeMatcherList extends MatcherList<Instant, DateRangeMatcher> implements Predicate<Instant> {
 
     @XmlElement(name = "matcher")
     @Valid
@@ -60,37 +54,4 @@ public class DateRangeMatcherList extends MatcherList<DateRangeMatcher> implemen
     }
 
 
-    @Override
-    public boolean test(@Nullable Instant input) {
-        if (input == null) return true;
-
-        switch (match) {
-
-            case MUST: {
-                for (DateRangeMatcher matcher : this) {
-                    if (!matcher.test(input)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            case NOT: {
-                for (DateRangeMatcher matcher : this) {
-                    if (matcher.test(input)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            case SHOULD:
-            default: {
-                for (DateRangeMatcher matcher : this) {
-                    if (matcher.test(input)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
-    }
 }

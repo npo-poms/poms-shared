@@ -4,12 +4,9 @@
  */
 package nl.vpro.domain.api;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -19,8 +16,9 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlTransient
 public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, S extends MatchType>
-    extends MatcherList<T>
+    extends MatcherList<String, T>
     implements Predicate<String> {
+
     @Valid
     protected List<T> matchers = new ArrayList<>();
 
@@ -48,10 +46,7 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
         this.matchers = matchers;
     }
 
-    @Override
-    public boolean test(@Nullable String input) {
-        throw new UnsupportedOperationException("not used. This would depend on field. Use nl.vpro.domain.api.Matchers#toPredicate");
-    }
+
 
     public boolean searchEquals(AbstractTextMatcherList<T, S> b) {
         if (b == null) {
@@ -75,7 +70,6 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
 
     }
 
-
     protected boolean searchEquals(T a, T b) {
         if (a == null || b == null) {
             return a == b;
@@ -91,12 +85,17 @@ public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, 
             return aValue.equalsIgnoreCase(bValue);
         }
     }
+
     public static <T extends AbstractTextMatcher<S>, S extends MatchType> boolean searchEquals(AbstractTextMatcherList<T, S> a, AbstractTextMatcherList<T, S> b) {
         if (a == null) {
             return b == null;
         }
         return a.searchEquals(b);
     }
+
+
+
+
 
     @Override
     public boolean equals(Object o) {

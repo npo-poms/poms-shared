@@ -1,23 +1,22 @@
 package nl.vpro.domain.api;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.function.Predicate;
+
+import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;;
-import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Iterators;
 
 import nl.vpro.domain.media.Relation;
+
+import static nl.vpro.domain.api.AbstractTextMatcherList.searchEquals;
 
 /**
  * @author Michiel Meeuwissen
@@ -28,8 +27,8 @@ import nl.vpro.domain.media.Relation;
 @XmlTransient
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor
-public abstract class AbstractRelationSearch extends AbstractSearch
-    implements Predicate<Relation>, Iterable<AbstractTextMatcher<?>> {
+public abstract class AbstractRelationSearch extends AbstractSearch<Relation> implements Iterable<AbstractTextMatcher<?>> {
+
     @Valid
     private TextMatcherList types;
 
@@ -59,10 +58,10 @@ public abstract class AbstractRelationSearch extends AbstractSearch
 
     public boolean searchEqualsOrNarrows(AbstractRelationSearch that) {
         return that == null ||
-            (that.broadcasters == null || TextMatcherList.searchEquals(broadcasters, that.broadcasters)) &&
-            (that.types == null || TextMatcherList.searchEquals(types, that.types)) &&
-            (that.values == null || ExtendedTextMatcherList.searchEquals(values, that.values)) &&
-            (that.uriRefs == null || TextMatcherList.searchEquals(uriRefs, that.uriRefs));
+            (that.broadcasters == null || searchEquals(broadcasters, that.broadcasters)) &&
+            (that.types == null || searchEquals(types, that.types)) &&
+            (that.values == null || searchEquals(values, that.values)) &&
+            (that.uriRefs == null || searchEquals(uriRefs, that.uriRefs));
     }
 
     public TextMatcherList getTypes() {
@@ -100,7 +99,12 @@ public abstract class AbstractRelationSearch extends AbstractSearch
     @NonNull
     @Override
     public Iterator<AbstractTextMatcher<?>> iterator() {
-        return Iterators.concat(iterator(types), iterator(broadcasters), iterator(values), iterator(uriRefs));
+        return Iterators.concat(
+            iterator(types),
+            iterator(broadcasters),
+            iterator(values),
+            iterator(uriRefs)
+        );
     }
 
     private <T extends AbstractTextMatcher<S>, S extends MatchType> Iterator<T> iterator(
@@ -137,11 +141,13 @@ public abstract class AbstractRelationSearch extends AbstractSearch
 
     @Override
     public String toString() {
-        return "AbstractRelationSearch{" +
-            "types=" + types +
-            ", broadcasters=" + broadcasters +
-            ", values=" + values +
-            ", uriRefs=" + uriRefs +
-            '}';
+        return MoreObjects.toStringHelper(this)
+            .add("types", types)
+            .add("broadcasters", broadcasters)
+            .add("values", values)
+            .add("uriRefs", uriRefs)
+            .add("match", match)
+            .omitNullValues()
+            .toString();
     }
 }

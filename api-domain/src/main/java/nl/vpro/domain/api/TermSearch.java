@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "termSearchType")
-public class TermSearch extends AbstractSearch {
+public class TermSearch extends AbstractSearch<String> {
 
     @Valid
     private TextMatcherList ids;
@@ -50,6 +50,14 @@ public class TermSearch extends AbstractSearch {
     public boolean hasSearches() {
         return atLeastOneHasSearches(ids);
     }
+
+    @Override
+    public boolean test(String s) {
+        // TODO
+        return true;
+
+    }
+
     public static class Builder {
 
         public Builder ids(TextMatcherList ids) {

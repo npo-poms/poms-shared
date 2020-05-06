@@ -8,6 +8,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class FormUtils {
 
+    private FormUtils() {
+    }
+
     public static String getText(AbstractTextSearch searches) {
         if (searches != null) {
             SimpleTextMatcher text = searches.getText();

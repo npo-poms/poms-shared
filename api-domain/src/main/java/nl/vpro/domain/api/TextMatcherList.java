@@ -59,7 +59,7 @@ public class TextMatcherList extends AbstractTextMatcherList<TextMatcher, Standa
     }
 
     public TextMatcherList(TextMatcher... values) {
-        super(DEFAULT_MATCH,Arrays.asList(values));
+        super(DEFAULT_MATCH, Arrays.asList(values));
     }
 
 

@@ -1,15 +1,15 @@
 package nl.vpro.domain.api;
 
 
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
-import org.checkerframework.checker.nullness.qual.Nullable;;
-
-import org.apache.commons.lang3.StringUtils;
 
 
 /**
@@ -38,7 +38,6 @@ public class Matchers {
             return value == null ? input == null : input != null && Pattern.compile(value, (caseSensitive ? 0 : Pattern.CASE_INSENSITIVE)).matcher(input).matches();
         }
 
-        @SuppressWarnings("ResultOfMethodCallIgnored")
         @Override
         public Validation valid (String value) {
             if (StringUtils.isNotBlank(value)) {
@@ -76,7 +75,7 @@ public class Matchers {
     private Matchers() {
     }
 
-    public static Predicate<String> tokenizedPredicate(final AbstractTextMatcher m) {
+    public static Predicate<String> tokenizedPredicate(final AbstractTextMatcher<?> m) {
         return new Predicate<String>() {
             private Set<String> tokenizedValue;
 
@@ -84,7 +83,7 @@ public class Matchers {
             @Override
             public boolean test(@Nullable String s) {
                 final String value = m.getValue();
-                if(s == null) {
+                if (s == null) {
                     return value == null;
                 }
                 Set<String> tokens = new HashSet<>(tokenize(s));
@@ -113,12 +112,7 @@ public class Matchers {
                     return Collections.emptyList();
                 }
                 List<String> list = new ArrayList<>(Arrays.asList(string.toLowerCase().split("\\s*\\b\\s*")));
-                Iterator<String> i = list.iterator();
-                while(i.hasNext()) {
-                    if(org.apache.commons.lang3.StringUtils.isEmpty(i.next())) {
-                        i.remove();
-                    }
-                }
+                list.removeIf(StringUtils::isEmpty);
                 return list;
 
             }
@@ -127,7 +121,8 @@ public class Matchers {
     }
 
 
-    protected static <S extends MatchType> Predicate<String> listPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final boolean tokenized) {
+    protected static <S extends MatchType> Predicate<String> listPredicate(
+        final Iterable<? extends AbstractTextMatcher<S>> textMatchers, final boolean tokenized) {
         return listPredicate(textMatchers, input -> {
             if(tokenized) {
                 return Matchers.tokenizedPredicate(input);
@@ -137,111 +132,107 @@ public class Matchers {
         });
     }
 
-    public static <S extends MatchType> Predicate<String> listPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S>  textMatchers) {
+    public static <S extends MatchType> Predicate<String> listPredicate(
+        final Iterable<? extends AbstractTextMatcher<S>>  textMatchers) {
         return listPredicate(textMatchers, false);
     }
 
-    public static <S extends MatchType> Predicate<String> tokenizedListPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S>  textMatchers) {
+    public static <S extends MatchType> Predicate<String> tokenizedListPredicate(
+        final Iterable<? extends AbstractTextMatcher<S>>  textMatchers) {
         return listPredicate(textMatchers, true);
     }
 
-    protected static <S extends MatchType> Predicate<String> listPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final Function<AbstractTextMatcher, Predicate<String>> predicater) {
+    protected static <S extends MatchType> Predicate<String> listPredicate(
+        final Iterable<? extends AbstractTextMatcher<S>> textMatchers,
+        final Function<AbstractTextMatcher<?>, Predicate<String>> predicater) {
         if(textMatchers == null) {
             return a -> true;
         }
-        return new Predicate<String>() {
-            @Override
-            public boolean test(@Nullable String input) {
-                switch(textMatchers.getMatch()) {
+        return input -> {
+            boolean hasShould = false;
+            boolean shouldResult = false;
+
+            for(AbstractTextMatcher<?> t : textMatchers) {
+                boolean match = predicater.apply(t).test(input);
+                switch(t.getMatch()) {
+                    case NOT:
+                        // fall through
+                    case MUST:
+                        if (! match) {
+                            return false;
+                        }
+                        break;
                     case SHOULD:
-                        // OR
-                        for(AbstractTextMatcher t : textMatchers) {
-                            if(predicater.apply(t).test(input)) {
-                                return true;
-                            }
-                        }
-                        return false;
-                    default:
-                        // AND
-                        for(AbstractTextMatcher t : textMatchers) {
-                            if(!predicater.apply(t).test(input)) {
-                                return textMatchers.getMatch() == Match.NOT;
-                            }
-                        }
-                        return textMatchers.getMatch() != Match.NOT;
+                        hasShould = true;
+                        shouldResult |= match;
+                        break;
                 }
             }
+            return ! hasShould || shouldResult;
         };
     }
 
 
-    public static <T, S extends MatchType> Predicate<Collection<T>> toPredicate(final AbstractTextMatcherList<? extends AbstractTextMatcher<S>, S> textMatchers, final Function<T, String> textValueGetter) {
-        if(textMatchers == null) {
+    /**
+     * Creates a Predicate for a <em>collection</em> of values.
+     */
+    public static <V, C> Predicate<Collection<C>> toCollectionPredicate(
+        @Nullable final Iterable<? extends Matcher<V>> matchers,
+        @NonNull  final Function<C, V> valueGetter) {
+        if(matchers == null) {
             return i -> true;
         }
-
-        return new Predicate<Collection<T>>() {
-            @Override
-            public boolean test(@Nullable Collection<T> collection) {
-                if(collection == null) {
-                    collection = Collections.emptyList();
-                }
-                switch (textMatchers.getMatch()) {
-                    case SHOULD:
-                        for (AbstractTextMatcher textMatcher : textMatchers) {
-                            if (textMatcher.getMatch() == Match.NOT) {
-                                boolean matchedall = true;
-                                for (T item : collection) {
-                                    String value = textValueGetter.apply(item);
-                                    if (!textMatcher.test(value)) {
-                                        matchedall = false;
-                                        break;
-                                    }
-                                }
-                                return matchedall;
-
-                            } else {
-                                for (T item : collection) {
-                                    String value = textValueGetter.apply(item);
-                                    if (textMatcher.test(value)) {
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                        // OR
-                        return false;
-                    default:
-                        // AND
-                        for (AbstractTextMatcher textMatcher : textMatchers) {
-                            if (textMatcher.getMatch() == Match.NOT) {
-                                for (T item : collection) {
-                                    String value = textValueGetter.apply(item);
-                                    if (! textMatcher.test(value)) {
-                                        return false;
-                                    }
-                                }
-
-                            } else {
-                                boolean found = false;
-                                for (T item : collection) {
-                                    String value = textValueGetter.apply(item);
-                                    if (textMatcher.test(value)) {
-                                        found = true;
-                                        break;
-                                    }
-                                }
-                                if (!found) {
-                                    return false;
-                                }
-
-                            }
-                        }
-                        return true;
-                }
-
+        return collection -> {
+            if(collection == null) {
+                collection = Collections.emptyList();
             }
+            boolean hasShould = false;
+            boolean shouldResult = false;
+
+            for (Matcher<V> t : matchers) {
+                boolean match;
+                switch (t.getMatch()) {
+                    case NOT:
+                        match = matchesAll(collection, t, valueGetter);
+                        if (! match) {
+                            return false;
+                        }
+                        break;
+                    case MUST:
+                        match = matchesOne(collection, t, valueGetter);
+                        if (!match) {
+                            return false;
+                        }
+                        break;
+                    case SHOULD:
+                        match = matchesOne(collection, t, valueGetter);
+                        hasShould = true;
+                        shouldResult |= match;
+                        break;
+                }
+            }
+            return ! hasShould || shouldResult;
+
         };
+    }
+
+    private static <C, V> boolean matchesOne(Collection<C> collection, Matcher<V> t,  Function<C, V> valueGetter) {
+        for (C item : collection) {
+            V value = valueGetter.apply(item);
+            if (t.test(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static <C, V> boolean matchesAll(Collection<C> collection, Matcher<V> t,  Function<C, V> valueGetter) {
+        for (C item : collection) {
+            V  value = valueGetter.apply(item);
+            if (!t.test(value)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
