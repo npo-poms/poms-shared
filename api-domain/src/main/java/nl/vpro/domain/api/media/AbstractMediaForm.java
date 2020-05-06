@@ -59,6 +59,9 @@ public abstract class AbstractMediaForm implements Form, Predicate<MediaObject> 
 
     @Override
     public boolean test(@Nullable MediaObject input) {
-        return searches == null || searches.test(input);
+        return getTestResult(input).test().getAsBoolean();
+    }
+    public MediaSearch.TestResult getTestResult(MediaObject input) {
+        return searches == null ? MediaSearch.TestResultIgnore.INSTANCE : searches.getTestResult(input);
     }
 }
