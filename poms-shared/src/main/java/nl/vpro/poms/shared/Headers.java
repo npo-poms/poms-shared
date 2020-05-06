@@ -50,6 +50,9 @@ public class Headers {
      * Indication about implicitely perform 'redirects' of ids (related to merging of media objects)
      */
     public static final String NPO_REDIRECTS                    = X_NPO + "-redirects";
+    
+    
+    public static final String NPO_VERSION                    = X_NPO + "-version";
 }
 
 
