@@ -3,22 +3,21 @@ package nl.vpro.domain.api.media;
 import java.io.StringReader;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.TreeSet;
+import java.util.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Tag;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.Truthiness;
 
+import static nl.vpro.domain.api.TextMatcher.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -35,13 +34,13 @@ public class MediaSearchTest {
             "<local:mediaSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
                 "    <api:text>Title</api:text>\n" +
                 "</local:mediaSearch>");
-        assertThat(new TextMatcher("Title")).isEqualTo(out.getText());
+        assertThat(must("Title")).isEqualTo(out.getText());
     }
 
     @Test
     public void testGetBroadcasters() {
         MediaSearch in = new MediaSearch();
-        in.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("TROS")));
+        in.setBroadcasters(new TextMatcherList(must("VPRO"), must("TROS")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<local:mediaSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
@@ -135,30 +134,33 @@ public class MediaSearchTest {
     @Test
     public void testApplyTypes() {
         MediaSearch in = new MediaSearch();
-        in.setTypes(new TextMatcherList(Match.SHOULD, new TextMatcher("SEASON"), new TextMatcher("SERIES")));
+        in.setTypes(new TextMatcherList(should("SEASON"), should("SERIES")));
 
         {
             MediaObject object = new Group(GroupType.SERIES);
-            assertThat(in.applyTypes(object)).isTrue();
+            assertThat(in.applyTypes(object).test()).isEqualTo(Truthiness.TRUE);
         }
         {
             MediaObject object = new Group(GroupType.ALBUM);
-            assertThat(in.applyTypes(object)).isFalse();
+            assertThat(in.applyTypes(object).test()).isEqualTo(Truthiness.FALSE);
         }
     }
 
     @Test
     public void testApplyTypesWithNots() {
         MediaSearch in = new MediaSearch();
-        in.setTypes(new TextMatcherList(new TextMatcher("SEASON", Match.NOT), new TextMatcher("SERIES", Match.NOT)));
+        in.setTypes(new TextMatcherList(
+            not("SEASON"),
+            not("SERIES")
+        ));
 
         {
             MediaObject object = new Group(GroupType.SERIES);
-            assertThat(in.applyTypes(object)).isFalse();
+            assertThat(in.applyTypes(object).test().getAsBoolean()).isFalse();
         }
         {
             MediaObject object = new Group(GroupType.ALBUM);
-            assertThat(in.applyTypes(object)).isTrue();
+            assertThat(in.applyTypes(object).test().getAsBoolean()).isTrue();
         }
     }
 
@@ -207,7 +209,7 @@ public class MediaSearchTest {
     @Test
     public void testApplyIncludeMediaIds() {
         MediaSearch in = new MediaSearch();
-        in.setMediaIds(new TextMatcherList(Match.SHOULD, new TextMatcher("urn:vpro:media:program:1"), new TextMatcher("SOME_MID")));
+        in.setMediaIds(new TextMatcherList(should("urn:vpro:media:program:1"), should("SOME_MID")));
 
         {
             MediaObject object = new Program(2L);
@@ -251,7 +253,10 @@ public class MediaSearchTest {
     @Test
     public void testApplyTags() {
         MediaSearch in = new MediaSearch();
-        in.setTags(new ExtendedTextMatcherList(Match.SHOULD, new ExtendedTextMatcher("cultuur"), new ExtendedTextMatcher("kunst")));
+        in.setTags(new ExtendedTextMatcherList(
+            ExtendedTextMatcher.should("cultuur"),
+            ExtendedTextMatcher.should("kunst"))
+        );
 
         MediaObject object = new Program();
         assertThat(in.test(object)).isFalse();
@@ -298,17 +303,21 @@ public class MediaSearchTest {
 
 
     @Test
-    public void testApplyNotDescedantOf() {
+    public void testApplyNotDescendantOfOnEmpty() {
         MediaSearch search = new MediaSearch();
-        search.setDescendantOf(new TextMatcherList(new TextMatcher("MID", Match.NOT)));
-        {
-            MediaObject object = MediaTestDataBuilder.program().build();
-            assertThat(search.test(object)).isTrue();
-        }
-        {
-            MediaObject object = MediaTestDataBuilder.program().descendantOf(new DescendantRef("MID", "urn", MediaType.ALBUM)).build();
-            assertThat(search.test(object)).isFalse();
-        }
+        search.setDescendantOf(new TextMatcherList(not("MID")));
+        MediaObject object = MediaTestDataBuilder.program().build();
+        assertThat(search.test(object)).isTrue();
+    }
+
+    @Test
+    public void testApplyNotDescendantOf() {
+        MediaSearch search = new MediaSearch();
+        search.setDescendantOf(new TextMatcherList(not("MID")));
+        MediaObject object = MediaTestDataBuilder.program()
+            .descendantOf(new DescendantRef("MID", "urn", MediaType.ALBUM))
+            .build();
+        assertThat(search.test(object)).isFalse();
     }
 
     private static final ScheduleEventSearch AT_NED1 = ScheduleEventSearch.builder().channel(Channel.NED1).build();
@@ -415,7 +424,24 @@ public class MediaSearchTest {
     @Test
     public void hasSearchesIds() {
         MediaSearch search = new MediaSearch();
-        search.setMediaIds(TextMatcherList.must(TextMatcher.should("bla")));
+        search.setMediaIds(TextMatcherList.must(should("bla")));
         assertThat(search.hasSearches()).isTrue();
     }
+
+    @Test
+    public void withDateRangeAsString() throws JsonProcessingException {
+        String json = "{\n" +
+            "    \"sort\":{\n" +
+            "        \"sortDate\":\"DESC\"\n" +
+            "    },\n" +
+            "    \"searches\": {\n" +
+            "        \"sortDate\": {\n" +
+            "            \"end\": \"1444255200000\"\n" +
+            "        }\n" +
+            "    }\n" +
+            "}\n";
+        MediaForm form = Jackson2Mapper.getLenientInstance().readValue(json, MediaForm.class);
+        assertThat(form.getSearches().getSortDates().get(0).getEnd()).isEqualTo(Instant.ofEpochMilli(1444255200000L));
+    }
 }
+

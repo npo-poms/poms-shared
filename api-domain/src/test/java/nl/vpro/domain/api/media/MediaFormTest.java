@@ -23,12 +23,14 @@ import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.util.Version;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.roundTripAndSimilar;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -343,7 +345,7 @@ public class MediaFormTest {
             .fuzzyText("wie is de mol")
             .build();
 
-        Jackson2Mapper.getPrettyInstance().writeValue(System.out, form);
+        Jackson2Mapper.getPrettyInstance().writeValue(LoggerOutputStream.info(log), form);
 
     }
 
@@ -531,15 +533,19 @@ public class MediaFormTest {
     }
 
     @Test
-    public void withEverythingJson() throws IOException {
-        Jackson2Mapper.getPrettyInstance()
-            .writeValue(System.out, MediaForm.builder().withEverything().build());
+    public void withEverythingJson() {
+        assertThatCode(() -> {
+            Jackson2Mapper.getPrettyInstance()
+                .writeValue(LoggerOutputStream.info(log), MediaForm.builder().withEverything().build());
+        }).doesNotThrowAnyException();
     }
 
 
     @Test
     public void withEverythingXml() {
-        JAXB.marshal(MediaForm.builder().withEverything().build(), System.out);
+        assertThatCode(() -> {
+            JAXB.marshal(MediaForm.builder().withEverything().build(), System.out);
+        }).doesNotThrowAnyException();
     }
 
 

@@ -626,15 +626,12 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         }
     }
 
-<<<<<<< HEAD
     /**
      * This calls tries to perform the quite complicated task to combine 'truthiness' as elasticsearch does.
      *
      * if there are only 'must' clauses, this is quite simple.
      *
      */
-=======
->>>>>>> 84f9a783f... Added a toSTring.
     @ToString
     public static class TestResultCombiner implements TestResult {
 

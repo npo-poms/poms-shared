@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public class IntegerRangeMatcherTest extends RangeMatcherTest<Integer, RangeMatcher<Integer>> {
+public class IntegerRangeMatcherTest extends RangeMatcherTest<Integer, RangeMatcher<Integer, Integer>> {
 
     @Override
     IntegerRangeMatcher getInstance() {

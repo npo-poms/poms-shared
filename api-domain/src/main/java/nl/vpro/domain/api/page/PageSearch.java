@@ -6,11 +6,10 @@ import java.time.Instant;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 
@@ -26,7 +25,21 @@ import nl.vpro.domain.user.Broadcaster;
 @XmlType(name = "pagesSearchType",
     propOrder = {
         // Intellij warnings are incorrect since parent class is @XmlTransient
-        "text", "broadcasters", "types", "portals", "sections", "genres", "tags", "keywords", "sortDates", "lastModifiedDates", "creationDates", "publishDates", "relations", "links", "referrals"
+        "text",
+        "broadcasters",
+        "types",
+        "portals",
+        "sections",
+        "genres",
+        "tags",
+        "keywords",
+        "sortDates",
+        "lastModifiedDates",
+        "creationDates",
+        "publishDates",
+        "relations",
+        "links",
+        "referrals"
     })
 @Getter
 @Setter
@@ -34,7 +47,7 @@ import nl.vpro.domain.user.Broadcaster;
 @AllArgsConstructor
 @NoArgsConstructor
 @lombok.Builder
-public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
+public class PageSearch extends AbstractTextSearch<Page> {
 
     @Valid
     private TextMatcherList broadcasters;
@@ -125,7 +138,7 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
         }
 
         if(input.getBroadcasters() != null) {
-            Predicate<String> predicate = Matchers.listPredicate(broadcasters);
+            Predicate<String> predicate = Matchers.listPredicate(broadcasters.getMatchers());
             for(Broadcaster b : input.getBroadcasters()) {
                 if(predicate.test(b.getId())) {
                     return true;
