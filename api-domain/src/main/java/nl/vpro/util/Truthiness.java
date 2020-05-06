@@ -10,11 +10,13 @@ public enum Truthiness implements BooleanSupplier {
     TRUE(true),
     PROBABLY(true),
     UNKNOWN(true),
+    MAYBE_NOT(true),
     FALSE(false);
 
     public static Truthiness of(boolean boolValue) {
         return boolValue ? Truthiness.TRUE : Truthiness.FALSE;
     }
+
 
     private final boolean boolValue;
 

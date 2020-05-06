@@ -633,7 +633,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
                     return Truthiness.TRUE;
                 }
                 StringBuilder failureBuilder = new StringBuilder();
-                Truthiness result = Truthiness.FALSE;
+                Truthiness result = musts.isEmpty() ? Truthiness.FALSE : Truthiness.MAYBE_NOT;
                 for (TestResult s : shoulds) {
                     Truthiness test = s.test();
                     if (test.getAsBoolean()) {
