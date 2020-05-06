@@ -24,11 +24,15 @@ public enum Truthiness implements BooleanSupplier {
      * It might be true, but provisionally we think it's not.
      * E.g. the condition may become true for some later reason.
      */
-    MAYBE_NOT(true),
+    MAYBE_NOT(false),
     FALSE(false);
 
     public static Truthiness of(boolean boolValue) {
         return boolValue ? Truthiness.TRUE : Truthiness.FALSE;
+    }
+
+    public static Truthiness maybe(boolean boolValue) {
+        return boolValue ? Truthiness.TRUE : Truthiness.MAYBE_NOT;
     }
 
 

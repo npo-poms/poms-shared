@@ -127,7 +127,7 @@ public class MediaSearchTest {
         in.setText(new SimpleTextMatcher("title"));
 
         MediaObject object = new Program();
-        assertThat(in.test(object)).isFalse();
+        assertThat(in.getTestResult(object).test()).isEqualTo(Truthiness.UNKNOWN);
         object.addTitle(new Title("main title", OwnerType.BROADCASTER, TextualType.MAIN));
         assertThat(in.test(object)).isTrue();
     }
