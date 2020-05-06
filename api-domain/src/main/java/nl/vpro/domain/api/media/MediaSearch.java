@@ -280,7 +280,8 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
                     return Truthiness.TRUE;
                 }
             }
-
+            // this is not fully implemented. See nl.vpro.domain.api.media.ESMediaQueryBuilder#SEARCH_FIELDS, this would be rather complex
+            // especially with respect to stemming this will be near impossible
             return Truthiness.UNKNOWN;
         });
     }
@@ -581,11 +582,27 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
             this.description = description;
         }
         public TestResultImpl(String description, Match match, BooleanSupplier test) {
-            this(description, match, () -> Truthiness.of(test.getAsBoolean()));
+            this(description, match, () -> of(test.getAsBoolean(), match));
         }
         @Override
         public String toString() {
             return match + ":" + description;
+        }
+
+        static Truthiness of(boolean value, Match match) {
+            if (match == Match.NOT) {
+                value = ! value;
+                match = Match.MUST;
+            }
+            switch(match) {
+                case MUST:
+                    return value ? Truthiness.TRUE : Truthiness.FALSE;
+                case SHOULD:
+                    return value ? Truthiness.TRUE : Truthiness.MAYBE_NOT;
+                default:
+                    throw new IllegalStateException();
+            }
+
         }
 
     }
@@ -606,6 +623,12 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         }
     }
 
+    /**
+     * This calls tries to perform the quite complicated task to combine 'truthiness' as elasticsearch does.
+     *
+     * if there are only 'must' clauses, this is quite simple.
+     *
+     */
     @ToString
     public static class TestResultCombiner implements TestResult {
 
@@ -623,23 +646,34 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         @Override
         public Supplier<Truthiness> getTest() {
             return () -> {
-                for (TestResult m : musts) {
-                    if (! m.test().getAsBoolean()) {
-                        failure = m.getDescription();
-                        return Truthiness.FALSE;
-                    }
-                }
-                if (shoulds.isEmpty()) {
-                    return Truthiness.TRUE;
-                }
-                StringBuilder failureBuilder = new StringBuilder();
-                Truthiness result = musts.isEmpty() ? Truthiness.FALSE : Truthiness.MAYBE_NOT;
-                for (TestResult s : shoulds) {
-                    Truthiness test = s.test();
-                    if (test.getAsBoolean()) {
+                Truthiness result = Truthiness.TRUE;
+                if (! musts.isEmpty()) {
+                    result = Truthiness.FALSE;
+                    for (TestResult m : musts) {
+                        Truthiness test = m.test();
                         if (test.ordinal() < result.ordinal()) {
                             result = test;
                         }
+                        if (!m.test().getAsBoolean()) {
+                            failure = m.getDescription();
+                            //return Truthiness.FALSE;
+                        }
+                    }
+                    if (!result.getAsBoolean()) {
+                        return result;
+                    }
+                }
+                if (shoulds.isEmpty()) {
+                    return result;
+                }
+                result = Truthiness.FALSE;
+                StringBuilder failureBuilder = new StringBuilder();
+                for (TestResult s : shoulds) {
+                    Truthiness test = s.test();
+                    if (test.ordinal() < result.ordinal()) {
+                        result = test;
+                    }
+                    if (test.getAsBoolean()) {
                         if (result == Truthiness.TRUE) {
                             break;
                         }
@@ -648,6 +682,9 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
                     }
                 }
                 failure = failureBuilder.toString();
+                if (!musts.isEmpty() && result == Truthiness.MAYBE_NOT) {
+                    result = Truthiness.PROBABLY;
+                }
                 return result;
             };
         }
