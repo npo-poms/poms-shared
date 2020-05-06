@@ -35,14 +35,21 @@ public class Headers {
      * The request was authenticated, the response informs via this header which is the current employer of the authenticated user
      */
     public static final String NPO_CURRENT_CURRENT_EMPLOYER = X_NPO + "-currentEmployer";
+
      /**
       * The request was authenticated, the response informs via this header on which broadcasters the authenticated user has rights
      */
     public static final String NPO_BROADCASTERS             = X_NPO + "-broadcasters";
+
       /**
        * The request was authenticated, the response informs via this header on which roles were assigned to the authenticated user
      */
     public static final String NPO_ROLES                    = X_NPO + "-roles";
+
+    /**
+     * Indication about implicitely perform 'redirects' of ids (related to merging of media objects)
+     */
+    public static final String NPO_REDIRECTS                    = X_NPO + "-redirects";
 }
 
 

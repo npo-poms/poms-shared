@@ -15,11 +15,20 @@ import nl.vpro.domain.media.MediaRedirector;
 @FunctionalInterface
 public interface Redirector extends MediaRedirector {
 
+    ThreadLocal<Map<String, String>> REDIRECTS = ThreadLocal.withInitial(() -> null);
+
     RedirectList redirects();
 
     @Override
     default Optional<String> redirect(String mid) {
-        return redirects().redirect(mid);
+        Optional<String> redirect = redirects().redirect(mid);
+        redirect.ifPresent((s) -> {
+            Map<String, String> r = REDIRECTS.get();
+            if (r != null) {
+                r.put(mid, s);
+            }
+        });
+        return redirect;
     }
 
     default Map<String, String> redirectTextMatchers(
@@ -42,21 +51,23 @@ public interface Redirector extends MediaRedirector {
                 TextMatcher newMatcher = new TextMatcher(r, matcher.getMatch());
                 newMatcher.setMatchType(matcher.getMatchType());
                 l.set(fi, newMatcher);
-                redirects.put(matcher.getValue(), redirect.get());
+                if (redirects != null) {
+                    redirects.put(matcher.getValue(), redirect.get());
+                }
             });
         }
     }
 
     default  Map<String, String> redirectMediaSearch(MediaSearch search) {
-         Map<String, String> redirects = new HashMap<>();
-        if (search == null) {
-            return redirects;
+        boolean usingThreadLocale = REDIRECTS.get() != null;
+        Map<String, String> redirects = usingThreadLocale ? null : new HashMap<>();
+        if (search != null) {
+            redirectTextMatchers(search.getMediaIds(), redirects);
+            redirectTextMatchers(search.getDescendantOf(), redirects);
+            redirectTextMatchers(search.getEpisodeOf(), redirects);
+            redirectTextMatchers(search.getMemberOf(), redirects);
         }
-        redirectTextMatchers(search.getMediaIds(), redirects);
-        redirectTextMatchers(search.getDescendantOf(), redirects);
-        redirectTextMatchers(search.getEpisodeOf(), redirects);
-        redirectTextMatchers(search.getMemberOf(), redirects);
-        return redirects;
+        return usingThreadLocale ? REDIRECTS.get() : redirects;
     }
 
 
