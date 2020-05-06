@@ -285,7 +285,7 @@ public class MediaObjectLocker {
                      if (MediaObjectLockerAspect.monitor) {
                          if (MediaObjectLockerAspect.sessionFactory != null) {
                              if (MediaObjectLockerAspect.sessionFactory.getCurrentSession().getTransaction().isActive()) {
-                                 log.warn("Trying to acquire lock in transaction which active already! {}", summarize());
+                                 log.warn("Trying to acquire lock in transaction which active already! {}:{} + {}", summarize(), currentLocks, key);
                              }
                          }
                      }
