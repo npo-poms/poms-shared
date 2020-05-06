@@ -25,6 +25,7 @@ import nl.vpro.domain.media.ScheduleEvent;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventDescription", namespace = Xmlns.MEDIA_NAMESPACE)
 @JsonPropertyOrder({"value", "owner", "type"})
+@SuppressWarnings("JpaMissingIdInspection") // it's in super
 public class ScheduleEventDescription extends AbstractOwnedTextEntity<ScheduleEventDescription, ScheduleEvent> {
 
     @Getter
@@ -38,6 +39,7 @@ public class ScheduleEventDescription extends AbstractOwnedTextEntity<ScheduleEv
     })
     ScheduleEvent parent;
 
+    @lombok.Builder
     public ScheduleEventDescription(ScheduleEvent parent, String title, OwnerType owner, TextualType type) {
         super(title, owner, type);
         this.parent = parent;
