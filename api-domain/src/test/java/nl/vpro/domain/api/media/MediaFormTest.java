@@ -15,6 +15,8 @@ import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Schedule;
@@ -560,5 +562,23 @@ public class MediaFormTest {
             "}");
     }
 
+
+    @Test
+    public void listAsSingural() throws JsonProcessingException {
+        String example = "{\n" +
+            "  \"searches\" : {\n" +
+            "    \"descendantOf\": {\n" +
+            // a bit confusing what this meann, is match on the list or on the value!
+            "      \"match\": \"MUST\",\n" +
+            "      \"value\": \"POMS_S_MAX_059936\"\n" +
+            "    }\n" +
+            "  }\n" +
+            "}";
+        MediaForm form = Jackson2Mapper.getLenientInstance().readValue(example, MediaForm.class);
+        assertThat(form.getSearches().getDescendantOf().getMatch()).isEqualTo(Match.MUST);
+        assertThat(form.getSearches().getDescendantOf().get(0).getMatch()).isEqualTo(Match.MUST);
+        log.info("{}", form);
+
+    }
 
 }
