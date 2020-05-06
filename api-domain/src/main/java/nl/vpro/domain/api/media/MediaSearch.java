@@ -29,6 +29,7 @@ import nl.vpro.domain.api.jackson.media.ScheduleEventSearchListJson;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.util.Truthiness;
 
 /**
  * @author Roelof Jan Koekoek
@@ -201,7 +202,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         if (input == null) {
             return false;
         }
-        return getTestResult(input).test();
+        return getTestResult(input).test().getAsBoolean();
 
     }
 
@@ -261,15 +262,26 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         return new TestResultImpl("text", text.getMatch(), () -> {
             for (Title title : input.getTitles()) {
                 if (Matchers.tokenizedPredicate(text).test(title.get())) {
-                    return true;
+                    return Truthiness.TRUE;
                 }
             }
             for (Description description : input.getDescriptions()) {
                 if (Matchers.tokenizedPredicate(text).test(description.get())) {
-                    return true;
+                    return Truthiness.TRUE;
                 }
             }
-            return false;
+            for (Image image : input.getImages()) {
+                if (Matchers.tokenizedPredicate(text).test(image.getTitle())) {
+                    return Truthiness.TRUE;
+                }
+            }
+            for (Credits credits : input.getCredits()) {
+                if (Matchers.tokenizedPredicate(text).test(credits.getName())) {
+                    return Truthiness.TRUE;
+                }
+            }
+
+            return Truthiness.UNKNOWN;
         });
     }
 
@@ -502,10 +514,10 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
     public  interface TestResult {
 
-        BooleanSupplier getTest();
+        Supplier<Truthiness> getTest();
 
-        default boolean test() {
-            return getTest().getAsBoolean();
+        default Truthiness test() {
+            return getTest().get();
         }
         String getDescription();
 
@@ -558,15 +570,18 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         private final Match match;
 
         @Getter
-        private final BooleanSupplier test;
+        private final Supplier<Truthiness> test;
 
         @Getter
         private final String description;
 
-        public TestResultImpl(String description, Match match, BooleanSupplier test) {
+        public TestResultImpl(String description, Match match, Supplier<Truthiness> test) {
             this.match = match;
             this.test = test;
             this.description = description;
+        }
+        public TestResultImpl(String description, Match match, BooleanSupplier test) {
+            this(description, match, () -> Truthiness.of(test.getAsBoolean()));
         }
         @Override
         public String toString() {
@@ -580,8 +595,8 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         public static final TestResultIgnore INSTANCE = new TestResultIgnore();
 
         @Override
-        public BooleanSupplier getTest() {
-            return () -> true;
+        public Supplier<Truthiness> getTest() {
+            return () -> Truthiness.TRUE;
         }
 
         @Override
@@ -606,27 +621,34 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         }
 
         @Override
-        public BooleanSupplier getTest() {
+        public Supplier<Truthiness> getTest() {
             return () -> {
                 for (TestResult m : musts) {
-                    if (! m.test()) {
+                    if (! m.test().getAsBoolean()) {
                         failure = m.getDescription();
-                        return false;
+                        return Truthiness.FALSE;
                     }
                 }
                 if (shoulds.isEmpty()) {
-                    return true;
+                    return Truthiness.TRUE;
                 }
                 StringBuilder failureBuilder = new StringBuilder();
+                Truthiness result = Truthiness.FALSE;
                 for (TestResult s : shoulds) {
-                    if (s.test()) {
-                        return true;
+                    Truthiness test = s.test();
+                    if (test.getAsBoolean()) {
+                        if (test.ordinal() < result.ordinal()) {
+                            result = test;
+                        }
+                        if (result == Truthiness.TRUE) {
+                            break;
+                        }
                     } else {
                         failureBuilder.append(s.getDescription());
                     }
                 }
                 failure = failureBuilder.toString();
-                return false;
+                return result;
             };
         }
 
@@ -649,7 +671,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
                             shoulds.add(test);
                             break;
                         case NOT:
-                            musts.add(new TestResultImpl("!" + test.getDescription(), Match.MUST, () -> !test.test()));
+                            musts.add(new TestResultImpl("!" + test.getDescription(), Match.MUST, () -> !test.test().getAsBoolean()));
 
                     }
                 } else if (test instanceof TestResultCombiner) {

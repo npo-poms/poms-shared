@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.Match;
 
+import static nl.vpro.util.Truthiness.FALSE;
+import static nl.vpro.util.Truthiness.TRUE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -27,14 +29,14 @@ public class MediaSearchTestResultTest {
 
     @Test
     public void testResult() {
-        assertThat(new MediaSearch.TestResultCombiner().test()).isTrue();
-        assertThat(new MediaSearch.TestResultCombiner(ignore).test()).isTrue();
+        assertThat(new MediaSearch.TestResultCombiner().test()).isEqualTo(TRUE);
+        assertThat(new MediaSearch.TestResultCombiner(ignore).test()).isEqualTo(TRUE);
 
-        assertThat(new MediaSearch.TestResultCombiner(mustAndFalse, mustAndTrue).test()).isFalse();
-        assertThat(new MediaSearch.TestResultCombiner(mustAndFalse, mustAndTrue ,ignore).test()).isFalse();
-        assertThat(new MediaSearch.TestResultCombiner(mustAndTrue).test()).isTrue();
-        assertThat(new MediaSearch.TestResultCombiner(mustAndTrue, mustAndTrue).test()).isTrue();
-        assertThat(new MediaSearch.TestResultCombiner(mustAndTrue, mustAndTrue, ignore).test()).isTrue();
+        assertThat(new MediaSearch.TestResultCombiner(mustAndFalse, mustAndTrue).test()).isEqualTo(FALSE);
+        assertThat(new MediaSearch.TestResultCombiner(mustAndFalse, mustAndTrue ,ignore).test()).isEqualTo(FALSE);
+        assertThat(new MediaSearch.TestResultCombiner(mustAndTrue).test()).isEqualTo(TRUE);
+        assertThat(new MediaSearch.TestResultCombiner(mustAndTrue, mustAndTrue).test()).isEqualTo(TRUE);
+        assertThat(new MediaSearch.TestResultCombiner(mustAndTrue, mustAndTrue, ignore).test()).isEqualTo(TRUE);
 
     }
 }

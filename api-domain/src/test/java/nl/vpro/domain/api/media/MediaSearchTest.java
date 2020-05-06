@@ -15,6 +15,7 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.Truthiness;
 
 import static nl.vpro.domain.api.TextMatcher.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -137,11 +138,11 @@ public class MediaSearchTest {
 
         {
             MediaObject object = new Group(GroupType.SERIES);
-            assertThat(in.applyTypes(object).test()).isTrue();
+            assertThat(in.applyTypes(object).test()).isEqualTo(Truthiness.TRUE);
         }
         {
             MediaObject object = new Group(GroupType.ALBUM);
-            assertThat(in.applyTypes(object).test()).isFalse();
+            assertThat(in.applyTypes(object).test()).isEqualTo(Truthiness.FALSE);
         }
     }
 
@@ -155,11 +156,11 @@ public class MediaSearchTest {
 
         {
             MediaObject object = new Group(GroupType.SERIES);
-            assertThat(in.applyTypes(object).test()).isFalse();
+            assertThat(in.applyTypes(object).test().getAsBoolean()).isFalse();
         }
         {
             MediaObject object = new Group(GroupType.ALBUM);
-            assertThat(in.applyTypes(object).test()).isTrue();
+            assertThat(in.applyTypes(object).test().getAsBoolean()).isTrue();
         }
     }
 
