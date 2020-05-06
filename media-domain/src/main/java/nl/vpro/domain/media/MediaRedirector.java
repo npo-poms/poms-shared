@@ -10,4 +10,5 @@ public interface MediaRedirector {
 
     Optional<String> redirect(String mid);
 
+
 }
