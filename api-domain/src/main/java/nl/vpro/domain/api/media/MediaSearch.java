@@ -641,6 +641,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         private final List<TestResult> musts = new ArrayList<>();
 
         String failure;
+        Truthiness result = null;
 
         public TestResultCombiner(TestResult... tests) {
             add(tests);
@@ -649,7 +650,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         @Override
         public Supplier<Truthiness> getTest() {
             return () -> {
-                Truthiness result = Truthiness.TRUE;
+                result = Truthiness.TRUE;
                 if (! musts.isEmpty()) {
                     for (TestResult m : musts) {
                         Truthiness test = m.test();
@@ -693,8 +694,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
         @Override
         public String getDescription() {
-            return "shoulds:" + shoulds + ", musts:" + musts + (failure == null ? "": ", fails:" + failure);
-
+            return "shoulds:" + shoulds + ", musts:" + musts + (result == null ? " (not yet determined) " : " ->" + result) +  (StringUtils.isBlank(failure) ? "": ", fails:" + failure);
         }
 
 
