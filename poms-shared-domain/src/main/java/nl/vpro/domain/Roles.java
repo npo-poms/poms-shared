@@ -113,6 +113,11 @@ public class Roles {
     public static final String MIS  = MEDIA + "MIS";
     public static final String MIS_ROLE = ROLE + MIS;
 
+
+    public static final String PROMO = MEDIA + "PROMO";
+    public static final String PROMO_ROLE = ROLE + PROMO;
+
+
     /**
      * The system role is only assigned via {@link nl.vpro.domain.user.UserService#systemAuthenticate)}
      */
