@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SearchResult<S> extends Result<SearchResultItem<? extends S>> {
 
+
     public SearchResult() {
     }
 

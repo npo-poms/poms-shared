@@ -4,9 +4,9 @@
  */
 package nl.vpro.domain.api;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.*;
 
+import java.time.Duration;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collector;
@@ -55,6 +55,11 @@ public class Result<T> implements Iterable<T> {
     @JsonProperty("items")
     @JsonInclude(JsonInclude.Include.ALWAYS)
     protected List<? extends T> items;
+
+    @XmlTransient
+    @Getter
+    @Setter
+    private Duration took;
 
     public Result() {
     }
