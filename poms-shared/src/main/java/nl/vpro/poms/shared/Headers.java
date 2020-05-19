@@ -41,8 +41,8 @@ public class Headers {
      */
     public static final String NPO_BROADCASTERS             = X_NPO + "-broadcasters";
 
-      /**
-       * The request was authenticated, the response informs via this header on which roles were assigned to the authenticated user
+    /**
+     * The request was authenticated, the response informs via this header on which roles were assigned to the authenticated user
      */
     public static final String NPO_ROLES                    = X_NPO + "-roles";
 
@@ -50,9 +50,11 @@ public class Headers {
      * Indication about implicitely perform 'redirects' of ids (related to merging of media objects)
      */
     public static final String NPO_REDIRECTS                    = X_NPO + "-redirects";
-    
-    
+
+
     public static final String NPO_VERSION                    = X_NPO + "-version";
+
+    public static final String NPO_TOOK                    = X_NPO + "-took";
 }
 
 
