@@ -48,6 +48,10 @@ public interface ScheduleRestService {
 
     String NOW = "now";
 
+    String MUST_BE_RUNNING = "mustberunning";
+
+    String MUST_BE_RUNNING_MESSAGE = "if false then there may also be returned an event that was recently finished";
+
 
     @GET
     ScheduleResult list(
@@ -110,7 +114,7 @@ public interface ScheduleRestService {
     ApiScheduleEvent nowForBroadcaster(
         @PathParam(BROADCASTER) String broadcaster,
         @QueryParam(PROPERTIES) String properties,
-        @QueryParam("mustberunning") @DefaultValue("true") boolean mustBeRunning,
+        @QueryParam(MUST_BE_RUNNING) @DefaultValue("true") boolean mustBeRunning,
         @QueryParam(NOW) Instant now
     );
 
@@ -141,6 +145,7 @@ public interface ScheduleRestService {
     ApiScheduleEvent nowForChannel(
         @PathParam(CHANNEL) String channel,
         @QueryParam(PROPERTIES) String properties,
+        @QueryParam(MUST_BE_RUNNING) @DefaultValue("true") boolean mustBeRunning,
         @QueryParam(NOW) Instant now
     );
 
@@ -171,6 +176,7 @@ public interface ScheduleRestService {
     ApiScheduleEvent nowForNet(
         @Encoded @PathParam(NET) String net,
         @QueryParam(PROPERTIES) String properties,
+        @QueryParam(MUST_BE_RUNNING) @DefaultValue("true") boolean mustBeRunning,
         @QueryParam(NOW) Instant now
     );
 
