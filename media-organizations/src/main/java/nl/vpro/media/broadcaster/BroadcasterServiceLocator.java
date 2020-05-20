@@ -62,4 +62,12 @@ public class BroadcasterServiceLocator {
             .collect(Collectors.toList());
     }
 
+     public static List<String> getDisplayNames() {
+        return getInstance()
+            .findAll()
+            .stream()
+            .map(Broadcaster::getDisplayName)
+            .collect(Collectors.toList());
+    }
+
 }
