@@ -47,6 +47,7 @@ public class Editor extends AbstractUser {
     @XmlTransient
     Set<BroadcasterEditor> broadcasters = new TreeSet<>();
 
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
@@ -335,6 +336,9 @@ public class Editor extends AbstractUser {
         return toRemove;
     }
 
+    /**
+     * Returns the set of Portals this editor is a member of.
+     */
     public SortedSet<Portal> getAllowedPortals() {
         if(allowedPortalCache== null) {
             allowedPortalCache = new TreeSet<>();
@@ -349,6 +353,10 @@ public class Editor extends AbstractUser {
         return allowedPortalCache;
     }
 
+    /**
+     * Returns the set of Portals this editor currenly configure to be 'active'
+     * This mains that new objects will receive this portal on default.
+     */
     SortedSet<Portal> getActivePortals() {
         if(activePortalCache == null) {
             activePortalCache = new TreeSet<>();
@@ -419,6 +427,10 @@ public class Editor extends AbstractUser {
         return toRemove;
     }
 
+
+    /**
+     * Returns the set of {@link ThirdParty}s this editor is a member of.
+     */
     public SortedSet<ThirdParty> getAllowedThirdParties() {
         if(allowedThirdPartyCache == null) {
             allowedThirdPartyCache = new TreeSet<>();
