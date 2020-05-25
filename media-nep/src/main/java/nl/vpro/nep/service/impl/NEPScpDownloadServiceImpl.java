@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +45,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     private final static Map<String, File> knownHosts = new HashMap<>();
     private final Duration waitBetweenRetries = Duration.ofSeconds(10);
     private final int maxDownloadRetries;
+    private final String directory;
 
     @Inject
     public NEPScpDownloadServiceImpl(
@@ -55,9 +57,8 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @Value("${executables.scp}") List<String> scpExecutables,
         @Value("${executables.sshpass}") List<String> sshpassExecutables,
         @Value("${nep.itemizer-download.maxDownloadRetries}") int maxDownloadRetries,
-        @Value("${nep.itemizer-download.debugSsh}") boolean debugSsh
-
-
+        @Value("${nep.itemizer-download.debugSsh}") boolean debugSsh,
+        @Value("${nep.itemizer-download.directory}") String directory
     ) {
         this.url = username + "@" + ftpHost;
         this.maxDownloadRetries = maxDownloadRetries;
@@ -90,6 +91,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             log.error(rte.getMessage(), rte);
         }
         scp = scptry;
+        this.directory = directory;
     }
 
     protected NEPScpDownloadServiceImpl(Properties properties) {
@@ -102,7 +104,9 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
             Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass"),
             3,
-            false
+            false,
+            properties.getProperty("nep.itemizer-download.directory")
+
         );
     }
 
@@ -183,8 +187,14 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     }
 
+    @Override
+    public String getDownloadString() {
+        return url + ":" + directory;
+
+    }
+
     protected String getUrl(String nepFile) {
-        return url + ":" + nepFile;
+        return url + ":" + join(directory, nepFile);
     }
 
 
@@ -192,12 +202,22 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @NonNull String nepFile,
         @Nullable Duration timeout,
         @NonNull Function<FileMetadata, Proceed> descriptorConsumer) throws IOException, InterruptedException {
-        sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
+        sshj.checkAvailabilityAndConsume(join(directory, nepFile), timeout, descriptorConsumer, (handle) -> {});
+    }
+
+    protected String join(String directory, String file) {
+        if (StringUtils.isBlank(directory)) {
+            return file;
+        } else {
+            return directory + "/" + file;
+        }
     }
 
     @Override
     public String toString () {
-        return getClass().getSimpleName() + ":" + scp + " " + url ;
+        return getClass().getSimpleName() + ":" + scp + " " + getDownloadString();
     }
+
+
 
 }
