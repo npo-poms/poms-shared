@@ -42,6 +42,8 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     private final CommandExecutor curl;
     private final NEPSSHJDownloadServiceImpl sshj;
 
+    private final String directory;
+
     @Inject
     public NEPCurlDownloadServiceImpl(
         @Value("${nep.itemizer-download.host}") String ftpHost,
@@ -61,6 +63,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
             .build();
         // just used for the checkAvailability call (actually for the descriptorConsumer callback)
         sshj = new NEPSSHJDownloadServiceImpl(ftpHost, username, password, hostkey);
+        this.directory = "";
     }
 
     @Override
@@ -89,6 +92,12 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
         if (exitCode != 0) {
             throw new CommandExecutor.ExitCodeException("Curl call failed", exitCode);
         }
+    }
+
+    @Override
+    public String getDownloadString() {
+        return "curl:" + ftpHost;
+
     }
 
     protected String getUrl(String nepFile) {

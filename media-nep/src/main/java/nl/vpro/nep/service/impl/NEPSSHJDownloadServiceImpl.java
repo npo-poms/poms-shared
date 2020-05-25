@@ -41,6 +41,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
     private final String username;
     private final String password;
     private final String hostKey;
+    private final String directory;
 
     @Inject
     public NEPSSHJDownloadServiceImpl(
@@ -53,6 +54,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         this.username = username;
         this.password = password;
         this.hostKey = hostKey;
+        this.directory = "";
     }
 
     @PostConstruct
@@ -177,6 +179,13 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ":" +  username + "@" + ftpHost;
+        return getClass().getSimpleName() + ":" +  getDownloadString();
+    }
+
+
+    @Override
+    public String getDownloadString() {
+        return "ssj:" + username + "@" + ftpHost + directory;
+
     }
 }

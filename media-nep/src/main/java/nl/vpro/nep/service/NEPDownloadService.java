@@ -37,6 +37,8 @@ public interface NEPDownloadService {
         download(nepFile, outputStream, Duration.ZERO, descriptorConsumer);
     }
 
+    String getDownloadString();
+
     enum Proceed {
         /**
          * The file is ok, simply proceed downloading it.

@@ -116,6 +116,12 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
+    public String getDownloadString() {
+        return nepftpDownloadService.get().getDownloadString();
+
+    }
+
+    @Override
     public long upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull InputStream stream, boolean replaces) throws IOException {
         return nepftpUploadService.get().upload(logger, nepFile, size, stream, replaces);
     }
