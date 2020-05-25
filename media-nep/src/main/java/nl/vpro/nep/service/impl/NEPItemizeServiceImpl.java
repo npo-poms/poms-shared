@@ -174,7 +174,6 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     @Override
     public String getLiveItemizerString() {
         return itemizeLiveUrl;
-
     }
 
     @Override
