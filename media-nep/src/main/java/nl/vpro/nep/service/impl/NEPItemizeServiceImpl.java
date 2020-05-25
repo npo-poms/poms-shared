@@ -10,6 +10,7 @@ import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.function.Supplier;
 
@@ -48,6 +49,9 @@ import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
 @Named("NEPItemizeService")
 @Slf4j
 public class NEPItemizeServiceImpl implements NEPItemizeService {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSS");
+
 
     static final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(StandardCharsets.UTF_8);
 
@@ -171,7 +175,8 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Override
     public void grabScreen(String channel, Instant instant, OutputStream outputStream) {
-        grabScreen(channel, instant.atZone(ZoneId.of("UTC")).toLocalDateTime().toString(), outputStream, itemizeLiveUrl, itemizeLiveKey);
+        grabScreen(channel,
+            FORMATTER.format(instant.atZone(ZoneId.of("UTC")).toLocalDateTime()), outputStream, itemizeLiveUrl, itemizeLiveKey);
     }
 
 
