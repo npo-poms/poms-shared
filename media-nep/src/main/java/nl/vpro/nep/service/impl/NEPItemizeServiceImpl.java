@@ -172,7 +172,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 =======
     public void grabScreenLive(String channel, Instant instant, OutputStream outputStream) {
         grabScreen(channel,
-            NEPItemizeRequest.FORMATTER.format(instant.atZone(ZoneId.of("UTC")).toLocalDateTime()),
+            NEPItemizeRequest.fromInstant(instant).orElseThrow(() -> new IllegalArgumentException("Instant " + instant + " could not be formatted")),
             outputStream, itemizeLiveUrl, itemizeLiveKey);
 >>>>>>> 3352cd4c8... Made configuration more unifor, better to understand. Also MSE-4803
     }
