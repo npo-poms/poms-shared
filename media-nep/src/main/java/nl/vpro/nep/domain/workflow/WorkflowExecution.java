@@ -3,10 +3,7 @@ package nl.vpro.nep.domain.workflow;
 import io.openapitools.jackson.dataformat.hal.HALLink;
 import io.openapitools.jackson.dataformat.hal.annotation.Link;
 import io.openapitools.jackson.dataformat.hal.annotation.Resource;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.Instant;
 
@@ -17,6 +14,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Resource
 @ToString
 public class WorkflowExecution {
+
+    public static final WorkflowExecution UNKNOWN = WorkflowExecution.builder()
+        .status(StatusType.UNKNOWN)
+        .statusMessage("Nog niet bekend")
+        .build();
 
     @Link
     private HALLink self;

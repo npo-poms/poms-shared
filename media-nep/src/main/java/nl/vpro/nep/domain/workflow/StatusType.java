@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum StatusType {
+    UNKNOWN("De workflow is nog niet bekend", false), // and therefore not returned by gatekeeper
     RUNNING("De ​workflow ​is ​gestart ​en ​in ​verwerking", false),
     COMPLETED("De ​workflow ​is ​succesvol ​afgerond ​en ​de ​streams ​zijn ​afgemeld bij ​POMS", true),
     FAILED("De ​workflow ​kon ​niet ​worden ​voltooid", true),
