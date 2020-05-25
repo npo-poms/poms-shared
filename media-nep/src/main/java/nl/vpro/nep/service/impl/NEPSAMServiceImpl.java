@@ -116,7 +116,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         }
         StreamAccessItem request = createStreamAccessItem(ip, duration);
         String profile = drmProfileLive;
-        log.info("Using profile {}",profile);
+        log.debug("Using profile {}", profile);
         StreamAccessResponseItem streamAccessResponseItem = streamApiLive.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerLive, platformLive,  profile, channel, request);
         Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
         return (String) attributes.get("url");
@@ -131,7 +131,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         }
         StreamAccessItem request = createStreamAccessItem(ip, duration);
         String profile = drm ? drmProfileMid : noDrmProfileMid;
-        log.info("Using profile {}",profile);
+        log.debug("Using profile {}", profile);
         StreamAccessResponseItem streamAccessResponseItem = streamApiMid.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerMid, platformMid,  profile, mid, request);
         Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
         return (String) attributes.get("url");
