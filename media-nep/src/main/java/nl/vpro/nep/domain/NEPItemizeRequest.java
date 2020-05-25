@@ -26,7 +26,7 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 public class NEPItemizeRequest {
 
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSS");
-
+    public static final ZoneId ZONE_ID = ZoneId.of("UTC");
 
     private String identifier;
 
@@ -58,7 +58,7 @@ public class NEPItemizeRequest {
         if (instant== null) {
             return Optional.empty();
         }
-        LocalDateTime localDateTime = instant.atZone(ZoneId.of("UTC")).toLocalDateTime();
+        LocalDateTime localDateTime = instant.atZone(ZONE_ID).toLocalDateTime();
         return Optional.of(FORMATTER.format(localDateTime));
     }
 
