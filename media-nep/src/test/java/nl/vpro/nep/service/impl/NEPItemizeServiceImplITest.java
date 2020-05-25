@@ -30,7 +30,7 @@ public class NEPItemizeServiceImplITest {
     public void itemize() throws IOException {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
-        NEPItemizeResponse response = itemizer.itemize(
+        NEPItemizeResponse response = itemizer.itemizeMid(
             MID,
             Duration.ZERO,
             Duration.ofMinutes(2).plusSeconds(21).plusMillis(151),
@@ -63,7 +63,7 @@ public class NEPItemizeServiceImplITest {
     public void itemizeDvr() {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
-        response = itemizer.itemize("npo-1dvr", Instant.now().minusSeconds(300), Instant.now().minusSeconds(60), null);
+        response = itemizer.itemizeLive("npo-1dvr", Instant.now().minusSeconds(300), Instant.now().minusSeconds(60), null);
         log.info("response: {} {}", response, start);
 
     }

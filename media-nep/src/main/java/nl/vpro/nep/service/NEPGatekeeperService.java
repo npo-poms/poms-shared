@@ -37,4 +37,6 @@ public interface NEPGatekeeperService {
     Optional<WorkflowExecution> getTranscodeStatus(
         @NonNull String workflowId
     );
+
+    String getGatekeeperString();
 }

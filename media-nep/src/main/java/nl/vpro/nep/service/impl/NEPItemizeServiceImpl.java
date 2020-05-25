@@ -119,7 +119,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     @Override
-    public NEPItemizeResponse itemize(String channel, Instant start, Instant end, Integer max_bitrate) {
+    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant end, Integer max_bitrate) {
         return itemize(
             NEPItemizeRequest.builder()
                 .identifier(channel)
@@ -133,7 +133,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     @Override
-    public NEPItemizeResponse itemize(String mid, Duration start, Duration end, Integer max_bitrate) {
+    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration end, Integer max_bitrate) {
         return itemize(
             NEPItemizeRequest.builder()
                 .starttime(NEPItemizeRequest.fromDuration(start, Duration.ZERO))
@@ -174,12 +174,20 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         grabScreen(channel, instant.atZone(ZoneId.of("UTC")).toLocalDateTime().toString(), outputStream, itemizeLiveUrl, itemizeLiveKey);
     }
 
+    @Override
+    public String getLiveItemizerString() {
+        return itemizeLiveUrl;
+
+    }
+
+    @Override
+    public String getMidItemizerString() {
+        return itemizeMidUrl;
+    }
 
 
     private void authenticate(HttpUriRequest request, Supplier<String> key) {
         request.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, key.get()));
-
-
     }
 
     @Override

@@ -87,6 +87,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
     private Duration connectionRequestTimeout;
     @Getter
     private Duration socketTimeout;
+
     @Getter
     private int pageSize = 200;
 
@@ -288,6 +289,11 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ":" + userName + "@" + getWorkflowsEndPoint();
+        return getClass().getSimpleName() + ":" + getGatekeeperString();
+    }
+
+    @Override
+    public String getGatekeeperString() {
+        return  userName + "@" + getWorkflowsEndPoint();
     }
 }
