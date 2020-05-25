@@ -27,7 +27,7 @@ public interface NEPItemizeService {
      * This grabs a frame from a MID, on a certain offset
      * @since 5.10
      */
-    void grabScreen(String mid, Duration offset, OutputStream outputStream);
+    void grabScreenMid(String mid, Duration offset, OutputStream outputStream);
 
 
     /**
@@ -45,7 +45,7 @@ public interface NEPItemizeService {
      * This grabs a frame from a live stream, on a certain instant in time
      * @since 5.10
      */
-    void grabScreen(String channel, Instant instant, OutputStream outputStream);
+    void grabScreenLive(String channel, Instant instant, OutputStream outputStream);
 
     String getLiveItemizerString();
 
