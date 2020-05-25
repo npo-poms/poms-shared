@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.*;
@@ -35,7 +34,6 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -93,16 +91,16 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     CloseableHttpClient httpClient = null;
 
-    @Inject
+
     public NEPGatekeeperServiceImpl(
-         @Value("${nep.gatekeeper-api.baseUrl}") String url,
-         @Value("${nep.gatekeeper-api.authorization.username}") String userName,
-         @Value("${nep.gatekeeper-api.authorization.password}") String password,
-         @Value("${nep.gatekeeper-api.connectTimeout}") String connectTimeout,
-         @Value("${nep.gatekeeper-api.connectionRequestTimeout}") String connectionRequestTimeout,
-         @Value("${nep.gatekeeper-api.socketTimeout}") String socketTimeout,
-         @Value("${nep.gatekeeper-api.pageSize}") int pageSize,
-         @Value("${nep.gatekeeper-upload.username}") String ftpUserName) {
+        String url,
+        String userName,
+        String password,
+        String connectTimeout,
+        String connectionRequestTimeout,
+        String socketTimeout,
+        int pageSize,
+        String ftpUserName) {
         this.url = url;
         this.userName = userName;
         this.password = password;

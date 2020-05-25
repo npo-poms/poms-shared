@@ -32,7 +32,7 @@
   <constructor-arg value="${nep.gatekeeper-api.connectTimeout}" />
   <constructor-arg value="${nep.gatekeeper-api.connectionRequestTimeout}" />
   <constructor-arg value="${nep.gatekeeper-api.socketTimeout}" />
-   <constructor-arg value="${nep.gatekeeper-api.pageSize}" />
+  <constructor-arg value="${nep.gatekeeper-api.pageSize}" />
   <constructor-arg value="${nep.gatekeeper-upload.username}" />
  </bean>
 

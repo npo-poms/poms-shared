@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 import org.junit.jupiter.api.*;
@@ -95,7 +96,7 @@ public class NEPItemizeServiceImplITest {
     public void grabScreen() throws IOException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");
-        itemizer.grabScreen("npo-1dvr", Instant.now().minus(Duration.ofMinutes(1)), new FileOutputStream(out));
+        itemizer.grabScreenLive("npo-1dvr", Instant.now().truncatedTo(ChronoUnit.SECONDS).minus(Duration.ofMinutes(1)), new FileOutputStream(out));
         log.info("Created {} bytes {}", out.length(), out);
 
 
@@ -108,7 +109,7 @@ public class NEPItemizeServiceImplITest {
     public void grabScreenMid() throws IOException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");
-        itemizer.grabScreen(MID, Duration.ZERO, new FileOutputStream(out));
+        itemizer.grabScreenMid(MID, Duration.ZERO, new FileOutputStream(out));
         log.info("Created {} bytes {}", out.length(), out);
 
 
