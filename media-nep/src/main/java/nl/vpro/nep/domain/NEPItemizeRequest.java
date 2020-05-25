@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -23,6 +24,9 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 @lombok.Builder
 @ToString
 public class NEPItemizeRequest {
+
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSS");
+
 
     private String identifier;
 
@@ -55,7 +59,7 @@ public class NEPItemizeRequest {
             return Optional.empty();
         }
         LocalDateTime localDateTime = instant.atZone(ZoneId.of("UTC")).toLocalDateTime();
-        return Optional.of(localDateTime.toString());
+        return Optional.of(FORMATTER.format(localDateTime));
     }
 
 
