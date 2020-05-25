@@ -19,7 +19,7 @@ public interface NEPItemizeService {
      * @since 5.10
      */
 
-    NEPItemizeResponse itemize(String mid, Duration start, Duration stop, Integer max_bitrate);
+    NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate);
 
     /**
      * NEP provides one service for two basicly different things.
@@ -36,7 +36,7 @@ public interface NEPItemizeService {
      * This itemizes a piece of a live stream
      * @since 5.10
      */
-    NEPItemizeResponse itemize(String channel, Instant start, Instant stop, Integer max_bitrate);
+    NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate);
 
 
     /**
@@ -46,5 +46,9 @@ public interface NEPItemizeService {
      * @since 5.10
      */
     void grabScreen(String channel, Instant instant, OutputStream outputStream);
+
+    String getLiveItemizerString();
+
+    String getMidItemizerString();
 
 }

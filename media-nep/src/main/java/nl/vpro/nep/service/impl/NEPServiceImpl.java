@@ -51,8 +51,8 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public NEPItemizeResponse itemize(String channel, Instant start, Instant stop, Integer max_bitrate) {
-        return itemizeService.get().itemize(channel, start, stop, max_bitrate);
+    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate) {
+        return itemizeService.get().itemizeLive(channel, start, stop, max_bitrate);
     }
 
     @Override
@@ -61,8 +61,19 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public NEPItemizeResponse itemize(String mid, Duration start, Duration stop, Integer max_bitrate) {
-        return itemizeService.get().itemize(mid, start, stop, max_bitrate);
+    public String getLiveItemizerString() {
+        return itemizeService.get().getLiveItemizerString();
+
+    }
+
+    @Override
+    public String getMidItemizerString() {
+        return itemizeService.get().getMidItemizerString();
+    }
+
+    @Override
+    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate) {
+        return itemizeService.get().itemizeMid(mid, start, stop, max_bitrate);
 
     }
 
@@ -87,6 +98,11 @@ public class NEPServiceImpl implements NEPService {
     @Override
     public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull  String workflowId) {
         return gatekeeperService.get().getTranscodeStatus(workflowId);
+    }
+
+    @Override
+    public String getGatekeeperString() {
+        return gatekeeperService.get().getGatekeeperString();
     }
 
     @Override

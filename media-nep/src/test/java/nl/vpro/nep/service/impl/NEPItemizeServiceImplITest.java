@@ -5,10 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 
 import org.junit.jupiter.api.*;
 
 import nl.vpro.nep.domain.NEPItemizeResponse;
+import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.service.NEPDownloadService;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
@@ -21,13 +24,23 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class NEPItemizeServiceImplITest {
 
+    String MID = "POW_04505213";
+    //String MID = "AT_2073522";
     @Test
     @Order(1)
     public void itemize() throws IOException {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
-        NEPItemizeResponse response = itemizer.itemize("AT_2073522", Duration.ZERO, Duration.ofMinutes(2).plusSeconds(21).plusMillis(151), null);
+        NEPItemizeResponse response = itemizer.itemizeMid(
+            MID,
+            Duration.ZERO,
+            Duration.ofMinutes(2).plusSeconds(21).plusMillis(151),
+            null
+        );
         log.info("response: {} {}", response, start);
+        NEPGatekeeperServiceImpl gatekeeperService = new NEPGatekeeperServiceImpl(NEPTest.PROPERTIES);
+        Optional<WorkflowExecution> workflowExecution = gatekeeperService.getTranscodeStatus(response.getId());
+        log.info("{}", workflowExecution);
 
         NEPDownloadService downloadService = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
         File dest = new File("/tmp", "dest.mp4");
@@ -51,7 +64,7 @@ public class NEPItemizeServiceImplITest {
     public void itemizeDvr() {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
-        response = itemizer.itemize("npo-1dvr", Instant.now().minusSeconds(300), Instant.now().minusSeconds(60), null);
+        response = itemizer.itemizeLive("npo-1dvr", Instant.now().minusSeconds(300), Instant.now().minusSeconds(60), null);
         log.info("response: {} {}", response, start);
 
     }
@@ -83,7 +96,7 @@ public class NEPItemizeServiceImplITest {
     public void grabScreen() throws IOException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");
-        itemizer.grabScreen("npo-1dvr", Instant.now().minus(Duration.ofMinutes(1)), new FileOutputStream(out));
+        itemizer.grabScreenLive("npo-1dvr", Instant.now().truncatedTo(ChronoUnit.SECONDS).minus(Duration.ofMinutes(1)), new FileOutputStream(out));
         log.info("Created {} bytes {}", out.length(), out);
 
 
@@ -91,10 +104,12 @@ public class NEPItemizeServiceImplITest {
 
 
     @Test
+    @Order(30)
+
     public void grabScreenMid() throws IOException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");
-        itemizer.grabScreen("POW_00683426", Duration.ZERO, new FileOutputStream(out));
+        itemizer.grabScreenMid(MID, Duration.ZERO, new FileOutputStream(out));
         log.info("Created {} bytes {}", out.length(), out);
 
 
