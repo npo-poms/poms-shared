@@ -3,14 +3,10 @@ package nl.vpro.nep.service.impl;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.function.Supplier;
 
@@ -21,10 +17,7 @@ import javax.inject.Named;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.http.HttpHeaders;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.*;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -49,9 +42,6 @@ import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
 @Named("NEPItemizeService")
 @Slf4j
 public class NEPItemizeServiceImpl implements NEPItemizeService {
-
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSS");
-
 
     static final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(StandardCharsets.UTF_8);
 
@@ -176,7 +166,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     @Override
     public void grabScreen(String channel, Instant instant, OutputStream outputStream) {
         grabScreen(channel,
-            FORMATTER.format(instant.atZone(ZoneId.of("UTC")).toLocalDateTime()), outputStream, itemizeLiveUrl, itemizeLiveKey);
+            NEPItemizeRequest.FORMATTER.format(instant.atZone(ZoneId.of("UTC")).toLocalDateTime()), outputStream, itemizeLiveUrl, itemizeLiveKey);
     }
 
 
