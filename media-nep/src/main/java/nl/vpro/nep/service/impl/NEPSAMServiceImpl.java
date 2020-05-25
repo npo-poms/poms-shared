@@ -127,7 +127,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) {
         if (streamApiMid == null) {
             streamApiMid = getStreamApi(baseUrlMid, authenticatorMid);
-            log.info("Created {}", streamApiMid);
+            log.debug("Created {}", streamApiMid);
         }
         StreamAccessItem request = createStreamAccessItem(ip, duration);
         String profile = drm ? drmProfileMid : noDrmProfileMid;
