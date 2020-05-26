@@ -62,7 +62,7 @@ public class NEPSSHJDownloadServiceImplTest {
         Instant start = Instant.now();
 
         File dest = new File(testDest);
-        impl.download(fileName, wrapException(() -> new FileOutputStream(dest)), (fc) -> NEPDownloadService.Proceed.TRUE);
+        impl.download("", fileName, wrapException(() -> new FileOutputStream(dest)), (fc) -> NEPDownloadService.Proceed.TRUE);
 
         Duration duration = Duration.between(start, Instant.now());
         assertThat(dest.length()).isEqualTo(221400200L);
@@ -123,7 +123,7 @@ public class NEPSSHJDownloadServiceImplTest {
     @Test
     public void testSshjAvailability() throws IOException, InterruptedException {
 
-        impl.checkAvailabilityAndConsume(fileName, Duration.ofSeconds(10),
+        impl.checkAvailabilityAndConsume("", fileName, Duration.ofSeconds(10),
             (fd) -> {
                 log.info("found {}", fd);
                 return NEPDownloadService.Proceed.TRUE;
@@ -159,7 +159,7 @@ public class NEPSSHJDownloadServiceImplTest {
         return () -> {
             Instant start = Instant.now();
             try {
-                impl.checkAvailabilityAndConsume(file, Duration.ofMinutes(2), (dc) -> NEPDownloadService.Proceed.TRUE, (rf) -> {});
+                impl.checkAvailabilityAndConsume("", file, Duration.ofMinutes(2), (dc) -> NEPDownloadService.Proceed.TRUE, (rf) -> {});
             } catch (IOException | InterruptedException e) {
                 log.error(e.getMessage(), e);
             }

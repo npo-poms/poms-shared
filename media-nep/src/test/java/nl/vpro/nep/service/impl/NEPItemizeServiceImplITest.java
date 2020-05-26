@@ -44,7 +44,7 @@ public class NEPItemizeServiceImplITest {
 
         NEPDownloadService downloadService = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
         File dest = new File("/tmp", "dest.mp4");
-        downloadService.download(response.getOutput_filename(), () -> {
+        downloadService.download("", response.getOutput_filename(), () -> {
             try {
                 return new FileOutputStream(dest);
             } catch (IOException ioe) {
@@ -76,7 +76,7 @@ public class NEPItemizeServiceImplITest {
 
         NEPDownloadService downloadService = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
         File dest = new File("/tmp", "dest.mp4");
-        downloadService.download(response.getOutput_filename(), () -> {
+        downloadService.download("", response.getOutput_filename(), () -> {
             try {
                 return new FileOutputStream(dest);
             } catch (IOException ioe) {
