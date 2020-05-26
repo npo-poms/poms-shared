@@ -73,7 +73,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
         @Nullable Function<FileMetadata, Proceed> descriptorConsumer) {
         int exitCode = 0;
         try {
-            checkAvailability(nepFile, timeout, descriptorConsumer);
+            checkAvailability(directory, nepFile, timeout, descriptorConsumer);
             if (outputStream != null) {
                 try (OutputStream out = outputStream.get()) {
                     exitCode = curl.execute(out, getUrl(nepFile));
@@ -103,8 +103,8 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
         return "sftp://" + ftpHost + "/" + nepFile;
     }
 
-    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetadata, Proceed> descriptorConsumer) throws IOException, InterruptedException {
-        sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
+    protected void checkAvailability(String directory, String nepFile, Duration timeout,  Function<FileMetadata, Proceed> descriptorConsumer) throws IOException, InterruptedException {
+        sshj.checkAvailabilityAndConsume(directory, nepFile, timeout, descriptorConsumer, (handle) -> {});
     }
 
     /**
