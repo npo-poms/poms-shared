@@ -2,10 +2,7 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
@@ -14,16 +11,13 @@ import java.util.function.Supplier;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.nep.service.NEPDownloadService;
-import nl.vpro.util.CommandExecutor;
-import nl.vpro.util.CommandExecutorImpl;
-import nl.vpro.util.FileMetadata;
+import nl.vpro.util.*;
 
 /**
  * See MSE-4032. It's kind of a disgrace that we have to fall back to external commands...
@@ -45,7 +39,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     private final static Map<String, File> knownHosts = new HashMap<>();
     private final Duration waitBetweenRetries = Duration.ofSeconds(10);
     private final int maxDownloadRetries;
-    private final String directory;
+
 
     @Inject
     public NEPScpDownloadServiceImpl(
@@ -57,8 +51,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @Value("${executables.scp}") List<String> scpExecutables,
         @Value("${executables.sshpass}") List<String> sshpassExecutables,
         @Value("${nep.itemizer-download.maxDownloadRetries}") int maxDownloadRetries,
-        @Value("${nep.itemizer-download.debugSsh}") boolean debugSsh,
-        @Value("${nep.itemizer-download.directory}") String directory
+        @Value("${nep.itemizer-download.debugSsh}") boolean debugSsh
     ) {
         this.url = username + "@" + ftpHost;
         this.maxDownloadRetries = maxDownloadRetries;
@@ -91,7 +84,6 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             log.error(rte.getMessage(), rte);
         }
         scp = scptry;
-        this.directory = directory;
     }
 
     protected NEPScpDownloadServiceImpl(Properties properties) {
@@ -104,9 +96,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
             Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass"),
             3,
-            false,
-            properties.getProperty("nep.itemizer-download.directory")
-
+            false
         );
     }
 
@@ -126,12 +116,13 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public void download(
+        @NonNull String directory,
         @NonNull String nepFile,
         @NonNull Supplier<OutputStream> outputStream,
         @NonNull Duration timeout,
         Function<FileMetadata, Proceed> descriptorConsumer) {
         int exitCode = 0;
-        String url = getUrl(nepFile);
+        String url = getUrl(directory, nepFile);
         int tryNumber = 0;
         RuntimeException catchedException;
         do {
@@ -145,7 +136,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 }
             }
             try {
-                checkAvailability(nepFile, timeout, descriptorConsumer);
+                checkAvailability(directory, nepFile, timeout, descriptorConsumer);
 
                 try (OutputStream out = outputStream.get()) {
                     if (out != null) {
@@ -189,28 +180,21 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public String getDownloadString() {
-        return url + ":" + directory;
+        return url + ":";
 
     }
 
-    protected String getUrl(String nepFile) {
-        return url + ":" + join(directory, nepFile);
+    protected String getUrl(@NonNull String directory, String nepFile) {
+        return url + ":" + NEPDownloadService.join(directory, nepFile);
     }
 
 
     protected void checkAvailability(
+        @NonNull String directory,
         @NonNull String nepFile,
         @Nullable Duration timeout,
         @NonNull Function<FileMetadata, Proceed> descriptorConsumer) throws IOException, InterruptedException {
-        sshj.checkAvailabilityAndConsume(join(directory, nepFile), timeout, descriptorConsumer, (handle) -> {});
-    }
-
-    protected String join(String directory, String file) {
-        if (StringUtils.isBlank(directory)) {
-            return file;
-        } else {
-            return directory + "/" + file;
-        }
+        sshj.checkAvailabilityAndConsume(directory, nepFile, timeout, descriptorConsumer, (handle) -> {});
     }
 
     @Override

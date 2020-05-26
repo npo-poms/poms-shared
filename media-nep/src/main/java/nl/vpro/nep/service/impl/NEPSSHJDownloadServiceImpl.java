@@ -41,7 +41,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
     private final String username;
     private final String password;
     private final String hostKey;
-    private final String directory;
+
 
     @Inject
     public NEPSSHJDownloadServiceImpl(
@@ -54,7 +54,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         this.username = username;
         this.password = password;
         this.hostKey = hostKey;
-        this.directory = "";
+
     }
 
     @PostConstruct
@@ -64,6 +64,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public void download(
+        @NonNull String directory,
         @NonNull String nepFile,
         @NonNull Supplier<OutputStream> outputStream,
         @NonNull Duration timeout, Function<FileMetadata, Proceed> descriptorConsumer) {
@@ -72,7 +73,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
             throw new IllegalArgumentException();
         }
         try {
-            checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {
+            checkAvailabilityAndConsume(directory, nepFile, timeout, descriptorConsumer, (handle) -> {
                 OutputStream out = null;
                 try {
                     out = outputStream.get();
@@ -108,12 +109,14 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
     }
 
     protected void checkAvailabilityAndConsume   (
-        @NonNull String nepFile,
+        @NonNull String directory,
+        @NonNull String f,
         @Nullable Duration timeout,
         @Nullable Function<FileMetadata, Proceed> descriptorConsumer,
         @NonNull  Consumer<RemoteFile> remoteFileConsumer) throws IOException, InterruptedException  {
         Duration retry = Duration.ofSeconds(10);
         RemoteFile handle = null;
+        String nepFile = NEPDownloadService.join(directory, f);
         try(final SSHClient sessionFactory = createClient();
             final SFTPClient sftp = sessionFactory.newSFTPClient()) {
             Instant start = Instant.now();
@@ -185,7 +188,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public String getDownloadString() {
-        return "ssj:" + username + "@" + ftpHost + directory;
+        return "ssj:" + username + "@" + ftpHost;
 
     }
 }
