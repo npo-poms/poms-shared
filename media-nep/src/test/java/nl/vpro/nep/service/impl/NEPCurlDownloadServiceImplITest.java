@@ -33,13 +33,9 @@ public class NEPCurlDownloadServiceImplITest {
             Arrays.asList("/usr/local/opt/curl/bin/curl", "/opt/local/bin/curl", "/usr/bin/curl")
             );
         FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
-<<<<<<< HEAD
+
         final long[] size = {-1L};
-        impl.download(NEPSSHJDownloadServiceImplTest.fileName, () -> outputStream, Duration.ofSeconds(10), (fd) -> {
-=======
-        final long size[] = {-1L};
         impl.download("", NEPSSHJDownloadServiceImplTest.fileName, () -> outputStream, Duration.ofSeconds(10), (fd) -> {
->>>>>>> 7087e8f7e... MSE-4805
             log.info("{}", fd);
             size[0] = fd.getSize();
             return NEPDownloadService.Proceed.TRUE;}
