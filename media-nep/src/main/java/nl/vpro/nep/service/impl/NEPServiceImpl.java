@@ -107,12 +107,14 @@ public class NEPServiceImpl implements NEPService {
 
     @Override
     public void download(
+        @NonNull String directory,
+
         @NonNull String nepFile,
         @NonNull Supplier<OutputStream> outputStream,
         @NonNull Duration timeout,
         @Nullable Function<FileMetadata, Proceed> descriptorConsumer) throws IOException {
         nepftpDownloadService.get()
-            .download(nepFile, outputStream, timeout, descriptorConsumer);
+            .download(directory, nepFile, outputStream, timeout, descriptorConsumer);
     }
 
     @Override

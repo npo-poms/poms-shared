@@ -42,8 +42,6 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     private final CommandExecutor curl;
     private final NEPSSHJDownloadServiceImpl sshj;
 
-    private final String directory;
-
     @Inject
     public NEPCurlDownloadServiceImpl(
         @Value("${nep.itemizer-download.host}") String ftpHost,
@@ -63,11 +61,12 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
             .build();
         // just used for the checkAvailability call (actually for the descriptorConsumer callback)
         sshj = new NEPSSHJDownloadServiceImpl(ftpHost, username, password, hostkey);
-        this.directory = "";
+
     }
 
     @Override
     public void download(
+        @NonNull String directory,
         @NonNull String nepFile,
         @NonNull Supplier<OutputStream> outputStream,
         @NonNull Duration timeout,
