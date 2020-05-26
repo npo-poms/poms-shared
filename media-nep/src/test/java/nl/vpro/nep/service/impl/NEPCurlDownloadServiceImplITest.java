@@ -34,7 +34,7 @@ public class NEPCurlDownloadServiceImplITest {
             );
         FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
         final long size[] = {-1L};
-        impl.download(NEPSSHJDownloadServiceImplTest.fileName, () -> outputStream, Duration.ofSeconds(10), (fd) -> {
+        impl.download("", NEPSSHJDownloadServiceImplTest.fileName, () -> outputStream, Duration.ofSeconds(10), (fd) -> {
             log.info("{}", fd);
             size[0] = fd.getSize();
             return NEPDownloadService.Proceed.TRUE;}

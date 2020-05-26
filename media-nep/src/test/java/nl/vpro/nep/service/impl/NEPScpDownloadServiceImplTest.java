@@ -36,7 +36,7 @@ public class NEPScpDownloadServiceImplTest {
         FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
         final AtomicLong size  = new AtomicLong(-1);
         final AtomicLong count = new AtomicLong(0);
-        impl.download(NEPSSHJDownloadServiceImplTest.fileName,
+        impl.download("", NEPSSHJDownloadServiceImplTest.fileName,
             () -> outputStream,
             Duration.ofSeconds(10), (fd) -> {
             log.info("{}", fd);
@@ -62,7 +62,7 @@ public class NEPScpDownloadServiceImplTest {
         log.info("using {}", impl);
         FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
         final long size[] = {-1L};
-        impl.download("bestaathelemaalniet.mp4",
+        impl.download("", "bestaathelemaalniet.mp4",
             () -> outputStream,
             Duration.ofSeconds(1), (fd) -> {
             log.info("{}", fd);
