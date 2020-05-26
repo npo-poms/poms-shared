@@ -1,14 +1,11 @@
 package nl.vpro.domain.media;
 
-import lombok.*;
-
-import java.io.Serializable;
-import java.time.Instant;
-
-import javax.xml.bind.annotation.*;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
+import java.time.Instant;
 
 /**
  * An representation of a memberRef also having a 'memberRef' attribute.
@@ -26,8 +23,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "highlighted",
     "objectType"
 })
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(builderClassName = "Builder")
 public class StandaloneMemberRef implements Serializable {
     private static final long serialVersionUID = 0L;
 
@@ -39,10 +34,21 @@ public class StandaloneMemberRef implements Serializable {
     protected String childRef;
     protected ObjectType objectType;
 
-    protected StandaloneMemberRef() {
+    public StandaloneMemberRef() {
 
     }
-    
+
+    @lombok.Builder(builderClassName = "Builder")
+    private StandaloneMemberRef(Instant added, Boolean highlighted, MediaType type, Integer index, String midRef, String childRef, ObjectType objectType) {
+        this.added = added;
+        this.highlighted = highlighted;
+        this.type = type;
+        this.index = index;
+        this.midRef = midRef;
+        this.childRef = childRef;
+        this.objectType = objectType;
+    }
+
     public StandaloneMemberRef(String childRef, MemberRef ref, ObjectType objectType) {
         this.childRef = childRef;
         added = ref.getAdded();
@@ -137,5 +143,10 @@ public class StandaloneMemberRef implements Serializable {
     public enum ObjectType {
         memberRef,
         episodeRef
+    }
+
+    @Override
+    public String toString () {
+        return getId() + "(" + added + ")";
     }
 }
