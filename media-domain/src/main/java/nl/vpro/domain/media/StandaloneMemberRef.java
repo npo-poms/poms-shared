@@ -1,9 +1,8 @@
 package nl.vpro.domain.media;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
@@ -29,7 +28,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(builderClassName = "Builder")
-public class StandaloneMemberRef {
+public class StandaloneMemberRef implements Serializable {
+    private static final long serialVersionUID = 0L;
 
     protected Instant added;
     protected Boolean highlighted;
@@ -39,7 +39,10 @@ public class StandaloneMemberRef {
     protected String childRef;
     protected ObjectType objectType;
 
+    protected StandaloneMemberRef() {
 
+    }
+    
     public StandaloneMemberRef(String childRef, MemberRef ref, ObjectType objectType) {
         this.childRef = childRef;
         added = ref.getAdded();
