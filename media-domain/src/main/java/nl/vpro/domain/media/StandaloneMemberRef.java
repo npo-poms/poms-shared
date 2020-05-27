@@ -74,7 +74,7 @@ public class StandaloneMemberRef implements Serializable {
 
     @XmlTransient
     public String getId() {
-        return midRef+ "/" + (index == null ? "_" : index) + "/" + childRef + "/" + objectType;
+        return midRef+ "/" + (index == null ? "_" : index) + "/" + childRef + (objectType == null ? "" : ("/" + objectType));
     }
 
     @XmlAttribute
