@@ -4,27 +4,25 @@
  */
 package nl.vpro.npoplayer;
 
-import java.time.Duration;
-import java.util.List;
-import java.util.Locale;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.ws.rs.client.ClientRequestFilter;
-import javax.ws.rs.core.MediaType;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-
 import nl.vpro.api.client.resteasy.AbstractApiClient;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.rs.npoplayer.NPOPlayerApiRestService;
 import nl.vpro.util.ConfigUtils;
 import nl.vpro.util.Env;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.ws.rs.client.ClientRequestFilter;
+import javax.ws.rs.core.MediaType;
+import java.time.Duration;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * This basicly does this:
- * <pre>{@code curl -H'ApiKey: e45fe473feaf42ad9a215007c6aa5e7e' https://start-player-api.npo.nl/video/VPWON_1262643/init -d '{"id":"__vpronpoplayer__0","stylesheet":"https://files.vpro.nl/npoplayer/8/controls.css","autoplay":true}'
+ * <pre>{@code curl -H'ApiKey: <your key>' https://start-player-api.npo.nl/video/VPWON_1262643/init -d '{"id":"__vpronpoplayer__0","stylesheet":"https://files.vpro.nl/npoplayer/8/controls.css","autoplay":true}'
  * }
  * </pre>
  * @author r.jansen
