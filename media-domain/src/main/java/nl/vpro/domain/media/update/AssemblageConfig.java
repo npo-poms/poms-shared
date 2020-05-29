@@ -245,6 +245,9 @@ public class AssemblageConfig {
         public Builder memberRefMatchOwner() {
             return memberOfUpdate((mr, c) -> mr.getOwner() == c.getOwner());
         }
+        public Builder ownerless() {
+            return owner(null);
+        }
     }
 
     public enum Steal implements BiPredicate<MediaObject, MediaObject> {
