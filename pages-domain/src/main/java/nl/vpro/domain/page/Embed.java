@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.page;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.xml.bind.annotation.*;
 
@@ -25,6 +24,7 @@ import nl.vpro.domain.media.Segment;
  */
 @XmlType(name = "embedType", propOrder = {"title", "description", "media"})
 @XmlAccessorType(XmlAccessType.FIELD)
+@EqualsAndHashCode
 public class Embed {
 
     @XmlElement

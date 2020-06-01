@@ -2,6 +2,7 @@
   "objectType" : "page",
   "type" : "ARTICLE",
   "url" : "http://www.npo.nl/1",
+  "sortDate" : 1591033500000,
   "crids" : [ "crid://npo/1" ],
   "alternativeUrls" : [ "http://npo.nl/1" ],
   "broadcasters" : [ {
@@ -11,9 +12,27 @@
     "id" : "HUMAN",
     "value" : "HUMAN"
   } ],
+  "portal" : {
+    "id" : "3VOOR12",
+    "url" : "https://3voor12.vpro.nl",
+    "value" : "3 voor 12"
+  },
   "title" : "title",
   "subTitle" : "sub title",
   "keywords" : [ "foo", "bar" ],
+  "genres" : [ {
+    "id" : "3.0.1.7.21",
+    "terms" : [ "Informatief", "Nieuws/actualiteiten" ],
+    "displayName" : "Informatief - Nieuws/actualiteiten"
+  } ],
+  "paragraphs" : [ {
+    "title" : "ptitle",
+    "body" : "pbody",
+    "image" : {
+      "url" : "https://www.vpro.nl/foobar.png",
+      "title" : "an image"
+    }
+  } ],
   "embeds" : [ {
     "media" : {
       "objectType" : "program",
@@ -146,9 +165,11 @@
         "type" : "EPISODE"
       } ],
       "genres" : [ {
-        "id" : "3.0.1.7.21"
+        "id" : "3.0.1.7.21",
+        "terms" : [ "Informatief", "Nieuws/actualiteiten" ]
       }, {
-        "id" : "3.0.1.8.25"
+        "id" : "3.0.1.8.25",
+        "terms" : [ "Documentaire", "Natuur" ]
       } ],
       "tags" : [ "tag1", "tag2", "tag3" ],
       "intentions" : [ {
@@ -737,9 +758,11 @@
           "type" : "EPISODE"
         } ],
         "genres" : [ {
-          "id" : "3.0.1.7.21"
+          "id" : "3.0.1.7.21",
+          "terms" : [ "Informatief", "Nieuws/actualiteiten" ]
         }, {
-          "id" : "3.0.1.8.25"
+          "id" : "3.0.1.8.25",
+          "terms" : [ "Documentaire", "Natuur" ]
         } ],
         "tags" : [ "tag1", "tag2", "tag3" ],
         "intentions" : [ {
@@ -1268,5 +1291,9 @@
       "publishDate" : 1425603600000
     }
   } ],
+  "publishStart" : 1591033500000,
+  "creationDate" : 1591030800000,
+  "lastModified" : 1591032600000,
+  "lastPublished" : 1591034400000,
   "expandedWorkflow" : "PUBLISHED"
 }

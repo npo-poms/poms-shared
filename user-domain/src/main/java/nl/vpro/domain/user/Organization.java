@@ -4,7 +4,6 @@
  */
 package nl.vpro.domain.user;
 
-import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -16,6 +15,7 @@ import javax.xml.bind.annotation.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 import nl.vpro.domain.*;
 import nl.vpro.validation.PrePersistValidatorGroup;
@@ -24,7 +24,6 @@ import nl.vpro.validation.PrePersistValidatorGroup;
 @Cacheable(true)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "organizationType", namespace = Xmlns.MEDIA_NAMESPACE)
-@ToString
 public abstract class Organization implements Serializable, Identifiable<String>, Comparable<Organization>, Displayable {
 
     @Id
@@ -97,5 +96,13 @@ public abstract class Organization implements Serializable, Identifiable<String>
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+            .add("id", id)
+            .add("displayName", displayName)
+            .toString();
     }
 }

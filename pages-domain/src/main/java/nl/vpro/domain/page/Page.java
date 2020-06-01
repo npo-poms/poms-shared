@@ -193,9 +193,6 @@ public class Page implements MutableEmbargo<Page> {
     }
 
 
-
-
-
     @XmlElement(name = "title", required = true)
     @JsonProperty("title")
     public String getTitle() {
