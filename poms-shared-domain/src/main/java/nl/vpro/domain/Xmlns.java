@@ -109,7 +109,9 @@ public final class Xmlns {
     private static URL getResource(String resource) {
         URL url = Xmlns.class.getResource(resource);
         if (url == null) {
-            log.warn("No resource found for {}", resource);
+            log.info("No resource found for {}", resource);
+        } else {
+            log.info("Resource found {}", url);
         }
         return url;
 
