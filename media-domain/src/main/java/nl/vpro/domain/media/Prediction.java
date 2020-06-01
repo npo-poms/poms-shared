@@ -7,22 +7,21 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Child;
-import nl.vpro.domain.Displayable;
-import nl.vpro.domain.MutableEmbargo;
+import nl.vpro.domain.*;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -49,7 +48,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 */
 
 
-public class Prediction implements Comparable<Prediction>, Updatable<Prediction>, Serializable, MutableEmbargo, Child<MediaObject> {
+public class Prediction implements Comparable<Prediction>, Updatable<Prediction>, Serializable, MutableEmbargo<Prediction>, Child<MediaObject> {
 
     private static final long serialVersionUID = 0L;
 
