@@ -308,7 +308,7 @@
       <xs:element type="websiteType" name="website" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="twitterType" name="twitter" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="xs:short" name="teletext" minOccurs="0" maxOccurs="1"/>
-      <xs:element type="predictionType" name="prediction" minOccurs="0" maxOccurs="2"/>
+      <xs:element type="predictionType" name="prediction" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="locationsType" name="locations" minOccurs="0"/>
       <xs:element type="relationType" name="relation" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="imagesType" name="images" minOccurs="0"/>
