@@ -1,5 +1,6 @@
 {
   "objectType" : "page",
+  "type" : "ARTICLE",
   "url" : "http://www.npo.nl/1",
   "crids" : [ "crid://npo/1" ],
   "alternativeUrls" : [ "http://npo.nl/1" ],
@@ -10,6 +11,7 @@
     "id" : "HUMAN",
     "value" : "HUMAN"
   } ],
+  "title" : "title",
   "subTitle" : "sub title",
   "keywords" : [ "foo", "bar" ],
   "embeds" : [ {

@@ -1,7 +1,10 @@
 package nl.vpro.domain.page;
 
+import javax.xml.transform.stream.StreamSource;
+
 import org.junit.jupiter.api.Test;
 
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -19,7 +22,9 @@ public class PageTest {
         .broadcasters("VPRO", "HUMAN")
         .crids("crid://npo/1")
         .keywords("foo", "bar")
+        .title("title")
         .subtitle("sub title")
+        .type(PageType.ARTICLE)
         .embeds(MediaTestDataBuilder.program().withEverything().build())
         .build();
 
@@ -30,7 +35,13 @@ public class PageTest {
 
     @Test
     public void withEverythingXml() throws Exception {
-        Page rounded = JAXBTestUtil.roundTripAndSimilar(page, getClass().getResourceAsStream("/page-with-everything.xml"));
+        String resource = "/page-with-everything.xml";
+        Page rounded = JAXBTestUtil
+            .roundTripAndSimilar(page, getClass().getResourceAsStream(resource))
+            ;
+
+        Xmlns.SCHEMA.newValidator().validate(new StreamSource(getClass().getResourceAsStream(resource)));
+
     }
 
 }

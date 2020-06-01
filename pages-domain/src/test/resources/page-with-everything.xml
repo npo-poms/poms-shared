@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><pages:page xmlns:pages="urn:vpro:pages:2013" url="http://www.npo.nl/1" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+<?xml version="1.0" encoding="UTF-8"?><pages:page xmlns:pages="urn:vpro:pages:2013" url="http://www.npo.nl/1" type="ARTICLE" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
     <pages:crid>crid://npo/1</pages:crid>
     <pages:alternativeUrl>http://npo.nl/1</pages:alternativeUrl>
     <pages:broadcaster id="VPRO">VPRO</pages:broadcaster>
     <pages:broadcaster id="HUMAN">HUMAN</pages:broadcaster>
+    <pages:title>title</pages:title>
     <pages:subTitle>sub title</pages:subTitle>
     <pages:keyword>foo</pages:keyword>
     <pages:keyword>bar</pages:keyword>
