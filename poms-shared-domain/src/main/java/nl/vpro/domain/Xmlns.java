@@ -27,43 +27,47 @@ public final class Xmlns {
 
     public static final String MEDIA_XSD_NAME = "vproMedia.xsd";
     public static final String MEDIA_NAMESPACE = "urn:vpro:media:2009";
-    public static final URL    MEDIA_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/" + MEDIA_XSD_NAME);
+    public static final URL    MEDIA_XSD       = getResource("/nl/vpro/domain/media/" + MEDIA_XSD_NAME);
 
     public static final String SHARED_XSD_NAME = "vproShared.xsd";
     public static final String SHARED_NAMESPACE = "urn:vpro:shared:2009";
-    public static final URL    SHARED_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/" + SHARED_XSD_NAME);
+    public static final URL    SHARED_XSD       = getResource("/nl/vpro/domain/media/" + SHARED_XSD_NAME);
 
     public static final String UPDATE_NAMESPACE = "urn:vpro:media:update:2009";
-    public static final URL    UPDATE_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd");
+    public static final URL    UPDATE_XSD       = getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd");
 
 
     public static final String SEARCH_NAMESPACE = "urn:vpro:media:search:2012";
-    public static final URL    SEARCH_XSD        = Xmlns.class.getResource("/nl/vpro/domain/media/search/vproMediaSearch.xsd");
+    public static final URL    SEARCH_XSD        = getResource("/nl/vpro/domain/media/search/vproMediaSearch.xsd");
 
     public static final String PAGEUPDATE_NAMESPACE = "urn:vpro:pages:update:2013";
+    public static final URL PAGEUPDATE_XSD = getResource("/xsds/pages_update_2013.xsd");
+
 
     public static final String PAGE_NAMESPACE = "urn:vpro:pages:2013";
+    public static final URL PAGE_XSD = getResource("/xsds/pages_2013.xsd");
+
 
     public static final String API_NAMESPACE = "urn:vpro:api:2013";
-    public static final URL    API_XSD = Xmlns.class.getResource("/xsds/api_2013.xsd");
+    public static final URL    API_XSD = getResource("/xsds/api_2013.xsd");
 
 
     public static final String PROFILE_NAMESPACE = "urn:vpro:api:profile:2013";
 
     public static final String MEDIA_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:media:2013";
-    public static final URL MEDIA_CONSTRAINT_XSD = Xmlns.class.getResource("/xsds/api_constraint_media_2013.xsd");
+    public static final URL MEDIA_CONSTRAINT_XSD = getResource("/xsds/api_constraint_media_2013.xsd");
 
 
     public static final String MEDIA_SUBTITLES_NAMESPACE = "urn:vpro:media:subtitles:2009";
 
     public static final String PAGE_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:page:2013";
-    public static final URL    PAGE_CONSTRAINT_XSD = Xmlns.class.getResource("/xsds/api_constraint_page_2013.xsd");
+    public static final URL    PAGE_CONSTRAINT_XSD = getResource("/xsds/api_constraint_page_2013.xsd");
 
 
     public static final String CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:2014";
-    public static final URL CONSTRAINT_XSD = Xmlns.class.getResource("/xsds/api_constraint_2014.xsd");
+    public static final URL CONSTRAINT_XSD = getResource("/xsds/api_constraint_2014.xsd");
 
-    public static final URL ABSENT_XSD = Xmlns.class.getResource("/nl/vpro/domain/media/absentnamespace.xsd");
+    public static final URL ABSENT_XSD = getResource("/nl/vpro/domain/media/absentnamespace.xsd");
 
 
     public static final String MEDIA_WS_NAMESPACE = "urn:vpro:ws:media:2009";
@@ -82,17 +86,33 @@ public final class Xmlns {
     public static final String ADMIN_NAMESPACE = "urn:vpro:media:admin:2017";
 
 
-    public static final URL XML_XSD = Xmlns.class.getResource("/nl/vpro/domain/media/w3/xml.xsd");
+    public static final URL XML_XSD = getResource("/nl/vpro/domain/media/w3/xml.xsd");
 
     public static final Schema SCHEMA;
 
     static {
         try {
             SCHEMA = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
-                .newSchema(getStreamSources(XML_XSD, SHARED_XSD, MEDIA_XSD, UPDATE_XSD, SEARCH_XSD));
+                .newSchema(getStreamSources(
+                    XML_XSD,
+                    SHARED_XSD,
+                    MEDIA_XSD,
+                    UPDATE_XSD,
+                    SEARCH_XSD,
+                    PAGE_XSD,
+                    PAGEUPDATE_XSD
+                ));
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
+    }
+    private static URL getResource(String resource) {
+        URL url = Xmlns.class.getResource(resource);
+        if (url == null) {
+            log.warn("No resource found for {}", resource);
+        }
+        return url;
+
     }
     private static StreamSource[] getStreamSources(URL... url) {
         List<StreamSource> result = new ArrayList<>();
@@ -108,7 +128,7 @@ public final class Xmlns {
                 log.error("Null url");
             }
         }
-        return result.toArray(new StreamSource[result.size()]);
+        return result.toArray(new StreamSource[0]);
 
     }
 
@@ -128,7 +148,7 @@ public final class Xmlns {
 
 
     public static final NamespaceContext NAMESPACE_CONTEXT = new NamespaceContext() {
-        private Map<String, String> mapping = new HashMap<>();
+        private final Map<String, String> mapping = new HashMap<>();
         {
             mapping.put("update", UPDATE_NAMESPACE);
             mapping.put("u", UPDATE_NAMESPACE);
@@ -149,8 +169,9 @@ public final class Xmlns {
         }
 
         @Override
-        public Iterator getPrefixes(String namespaceURI) {
-            return mapping.entrySet().stream().filter(e -> e.getValue().equals(namespaceURI))
+        public Iterator<String> getPrefixes(String namespaceURI) {
+            return mapping.entrySet().stream()
+                .filter(e -> e.getValue().equals(namespaceURI))
                 .map(Map.Entry::getKey).iterator();
 
         }

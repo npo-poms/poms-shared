@@ -13,7 +13,7 @@
     <xs:sequence>
       <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="alternativeUrl" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="broadcaster" type="media:broadcasterType" maxOccurs="unbounded"/>
+      <xs:element name="broadcaster" type="media:organizationType" maxOccurs="unbounded"/>
       <xs:element name="portal" type="tns:portalType" minOccurs="0"/>
       <xs:element name="title" type="xs:string"/>
       <xs:element name="subTitle" type="xs:string" minOccurs="0"/>

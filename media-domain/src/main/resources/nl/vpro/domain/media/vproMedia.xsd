@@ -234,7 +234,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="broadcaster" type="organizationType" minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="broadcaster" type="broadcasterType" minOccurs="1" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
             One or more broadcasters can be the owner of a POMS media object. This information is meta information about the object, but it is also used
@@ -438,9 +438,9 @@
   </xs:simpleType>
 
   <xs:complexType name="broadcasterType">
-    <xs:sequence>
-      <xs:element type="organizationType" name="broadcaster" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
+    <xs:simpleContent>
+      <xs:extension base="organizationType"/>
+    </xs:simpleContent>
   </xs:complexType>
 
   <xs:complexType name="organizationType">
@@ -800,7 +800,6 @@
 
   <xs:complexType name="locationType">
     <xs:sequence>
-      <xs:element type="broadcasterType" name="broadcasters" minOccurs="0"/>
       <xs:element type="xs:anyURI" name="programUrl"/>
       <xs:element type="avAttributesType" name="avAttributes" minOccurs="0"/>
       <xs:element type="xs:string" name="subtitles" minOccurs="0"/>
