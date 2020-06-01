@@ -15,23 +15,9 @@ import nl.vpro.util.TimeUtils;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-public interface Metadata<T extends Metadata<T>>  extends MutableEmbargo<T> {
+public interface Metadata<T extends Metadata<T>>  extends MutableEmbargo<T>, BasicMetaData<T> {
 
     String getImageUri();
-
-    ImageType getType();
-
-    String getTitle();
-
-    String getDescription();
-
-    License getLicense();
-
-    String getSource();
-
-    String getSourceName();
-
-    String getCredits();
 
     String getDate();
 

@@ -1,5 +1,8 @@
 package nl.vpro.domain.page;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
@@ -8,11 +11,9 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.image.*;
 import nl.vpro.domain.support.License;
-import nl.vpro.validation.NoHtml;
-import nl.vpro.validation.URI;
-import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.validation.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -20,7 +21,10 @@ import nl.vpro.validation.WarningValidatorGroup;
  */
 @XmlType(name = "imageType")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Image {
+@Getter
+@Setter
+@lombok.Builder
+public class Image implements BasicMetaData<Image> {
 
     @XmlAttribute
     private ImageType type;
@@ -79,69 +83,6 @@ public class Image {
         this.url = url;
     }
 
-    public ImageType getType() {
-        return type;
-    }
-
-    public void setType(ImageType type) {
-        this.type = type;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCredits() {
-        return credits;
-    }
-
-    public void setCredits(String credits) {
-        this.credits = credits;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
-
-    public License getLicense() {
-        return license;
-    }
-
-    public void setLicense(License license) {
-        this.license = license;
-    }
 
     @Override
     public boolean equals(Object o) {

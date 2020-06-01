@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import nl.vpro.domain.ChangeReport;
 
 /**
+ * Extends {@link Metadata} to include more information about the image, and its original source.
  * @author Michiel Meeuwissen
  * @since 5.5
  */

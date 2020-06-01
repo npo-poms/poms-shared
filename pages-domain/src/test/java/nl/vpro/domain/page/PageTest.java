@@ -38,7 +38,8 @@ public class PageTest {
         .type(PageType.ARTICLE)
         .genres(ClassificationServiceLocator.getInstance().getTerm("3.0.1.7.21"))
         .portal(new Portal("3VOOR12", "https://3voor12.vpro.nl", "3 voor 12"))
-        .paragraphs(new Paragraph("ptitle", "pbody",  new Image("https://www.vpro.nl/foobar.png", "an image")))
+        .paragraphs(new Paragraph("ptitle", "pbody",
+            new Image("https://www.vpro.nl/foobar.png", "an image")))
         .lastPublished(LocalDateTime.of(2020, 6, 1, 20, 0, 0).atZone(Schedule.ZONE_ID).toInstant())
         .creationDate(LocalDateTime.of(2020, 6, 1, 19, 0, 0).atZone(Schedule.ZONE_ID).toInstant())
         .lastModified(LocalDateTime.of(2020, 6, 1, 19, 30, 0).atZone(Schedule.ZONE_ID).toInstant())
