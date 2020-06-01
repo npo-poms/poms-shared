@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -39,7 +40,16 @@ public class PageTest {
         .genres(ClassificationServiceLocator.getInstance().getTerm("3.0.1.7.21"))
         .portal(new Portal("3VOOR12", "https://3voor12.vpro.nl", "3 voor 12"))
         .paragraphs(new Paragraph("ptitle", "pbody",
-            new Image("https://www.vpro.nl/foobar.png", "an image")))
+            Image.builder()
+            .url("https://www.vpro.nl/foobar.png")
+            .title( "an image")
+            .license(License.CC_BY)
+            .description("description")
+            .source("https://www.vpro.nl/images")
+            .sourceName("VPRO")
+            .credits("Pietje Puk")
+            .build()
+        ))
         .lastPublished(LocalDateTime.of(2020, 6, 1, 20, 0, 0).atZone(Schedule.ZONE_ID).toInstant())
         .creationDate(LocalDateTime.of(2020, 6, 1, 19, 0, 0).atZone(Schedule.ZONE_ID).toInstant())
         .lastModified(LocalDateTime.of(2020, 6, 1, 19, 30, 0).atZone(Schedule.ZONE_ID).toInstant())

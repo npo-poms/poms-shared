@@ -30,7 +30,12 @@
     "body" : "pbody",
     "image" : {
       "url" : "https://www.vpro.nl/foobar.png",
-      "title" : "an image"
+      "title" : "an image",
+      "description" : "description",
+      "credits" : "Pietje Puk",
+      "source" : "https://www.vpro.nl/images",
+      "sourceName" : "VPRO",
+      "license" : "CC_BY"
     }
   } ],
   "embeds" : [ {

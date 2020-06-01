@@ -1,7 +1,6 @@
 package nl.vpro.domain.page;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,6 +22,7 @@ import nl.vpro.validation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 @Setter
+@lombok.AllArgsConstructor(access = AccessLevel.PRIVATE)
 @lombok.Builder
 public class Image implements BasicMetaData<Image> {
 

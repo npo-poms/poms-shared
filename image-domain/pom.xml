@@ -82,5 +82,9 @@
       <artifactId>javax.annotation-api</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-validation</artifactId>
+    </dependency>
   </dependencies>
 </project>

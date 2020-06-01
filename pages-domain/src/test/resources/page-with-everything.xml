@@ -20,6 +20,11 @@
             <pages:body>pbody</pages:body>
             <pages:image url="https://www.vpro.nl/foobar.png">
                 <pages:title>an image</pages:title>
+                <pages:description>description</pages:description>
+                <pages:credits>Pietje Puk</pages:credits>
+                <pages:source>https://www.vpro.nl/images</pages:source>
+                <pages:sourceName>VPRO</pages:sourceName>
+                <pages:license>CC_BY</pages:license>
             </pages:image>
         </pages:paragraph>
     </pages:paragraphs>
