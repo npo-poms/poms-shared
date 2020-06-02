@@ -36,10 +36,15 @@ public class Headers {
      */
     public static final String NPO_CURRENT_CURRENT_EMPLOYER = X_NPO + "-currentEmployer";
 
-     /**
-      * The request was authenticated, the response informs via this header on which broadcasters the authenticated user has rights
+    /**
+     * The request was authenticated, the response informs via this header on which broadcasters the authenticated user has rights
      */
     public static final String NPO_BROADCASTERS             = X_NPO + "-broadcasters";
+
+    /**
+     * The request was authenticated, the response informs via this header on which portals the authenticated user has rights
+     */
+    public static final String NPO_PORTALS                 = X_NPO + "-portals";
 
     /**
      * The request was authenticated, the response informs via this header on which roles were assigned to the authenticated user
