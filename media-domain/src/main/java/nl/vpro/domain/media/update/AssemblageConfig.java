@@ -280,7 +280,8 @@ public class AssemblageConfig {
     public enum RequireEnum {
         YES,
         NO,
-        IF_TARGET_EMPTY
+        IF_TARGET_EMPTY,
+        ELSE_SKIP
     }
 
      /**
@@ -297,6 +298,7 @@ public class AssemblageConfig {
         @Override
         public boolean test(S o1, S o2) {
             switch(value) {
+                case ELSE_SKIP:
                 case YES: {
                     F f1 = getter.apply(o1);
                     return f1 != null;
@@ -316,10 +318,14 @@ public class AssemblageConfig {
                     throw new IllegalStateException();
             }
         }
-        public void throwIfIllegal(S o1, S o2, String message, Object... arguments) {
+        public Optional<S> throwIfIllegal(S o1, S o2, String message, Object... arguments) {
             if (! test(o1, o2)) {
+                if (value == RequireEnum.ELSE_SKIP) {
+                    return Optional.empty();
+                }
                 throw new RequiredFieldException(message, arguments);
             }
+            return Optional.of(o2);
         }
         @Override
         public String toString() {
@@ -348,6 +354,7 @@ public class AssemblageConfig {
         public static final MidRequire YES = new MidRequire(RequireEnum.YES);
         public static final MidRequire NO = new MidRequire(RequireEnum.NO);
         public static final MidRequire IF_TARGET_EMPTY = new MidRequire(RequireEnum.IF_TARGET_EMPTY);
+        public static final MidRequire ELSE_SKIP = new MidRequire(RequireEnum.ELSE_SKIP);
 
         private MidRequire(RequireEnum value) {
             super(value, MediaObject::getMid);
