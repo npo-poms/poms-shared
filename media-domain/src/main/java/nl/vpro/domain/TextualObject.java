@@ -97,7 +97,6 @@ public interface TextualObject<
         return null;
     }
 
-
     @Override
     default BiFunction<String, TextualType, D> getDescriptionCreator() {
         return (s, t) -> getOwnedDescriptionCreator().apply(s, DEFAULT_OWNER, t);
@@ -118,18 +117,23 @@ public interface TextualObject<
 
 
     /**
+     * @param description the new description to set for given owner/type. If empty or blank, the description will be <em>removed</em>
      * @since 5.11
      */
-    default void setDescription(String description, @NonNull OwnerType owner, @NonNull TextualType type) {
-        if (getDescriptions() != null) {
-            for (D d : getDescriptions()) {
-                if (d.getType() == type && d.getOwner() == owner) {
-                    d.set(description);
-                    return;
+    default void setDescription(@Nullable String description, @NonNull OwnerType owner, @NonNull TextualType type) {
+        if (StringUtils.isBlank(description)) {
+            removeDescription(owner, type);
+        } else {
+            if (getDescriptions() != null) {
+                for (D d : getDescriptions()) {
+                    if (d.getType() == type && d.getOwner() == owner) {
+                        d.set(description);
+                        return;
+                    }
                 }
             }
+            addDescription(description, owner, type);
         }
-        addDescription(description, owner, type);
     }
 
     @Override
