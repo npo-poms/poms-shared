@@ -3,8 +3,8 @@ package nl.vpro.domain;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
+import java.io.InputStream;
+import java.net.*;
 import java.util.*;
 
 import javax.xml.XMLConstants;
@@ -14,6 +14,8 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.xml.sax.SAXException;
+
+import nl.vpro.util.Pair;
 
 /**
  * @author Michiel Meeuwissen
@@ -34,7 +36,9 @@ public final class Xmlns {
     public static final URL    SHARED_XSD       = getResource("/nl/vpro/domain/media/" + SHARED_XSD_NAME);
 
     public static final String UPDATE_NAMESPACE = "urn:vpro:media:update:2009";
-    public static final URL    UPDATE_XSD       = getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd");
+    public static final String    UPDATE_XSD_NAME  = "vproMediaUpdate.xsd";
+
+    public static final URL    UPDATE_XSD       = getResource("/nl/vpro/domain/media/update/" + UPDATE_XSD_NAME);
 
 
     public static final String SEARCH_NAMESPACE = "urn:vpro:media:search:2012";
@@ -93,14 +97,14 @@ public final class Xmlns {
     static {
         try {
             SCHEMA = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
-                .newSchema(getStreamSources(
-                    XML_XSD,
-                    SHARED_XSD,
-                    MEDIA_XSD,
-                    UPDATE_XSD,
-                    SEARCH_XSD,
-                    PAGE_XSD,
-                    PAGEUPDATE_XSD
+                .newSchema(getStreamSourcesForSchemaValidation(
+                    Pair.of(XML_XSD, "xml.xsd"),
+                    Pair.of(SHARED_XSD, SHARED_NAMESPACE),
+                    Pair.of(MEDIA_XSD, MEDIA_NAMESPACE),
+                    Pair.of(UPDATE_XSD, UPDATE_NAMESPACE),
+                    Pair.of(SEARCH_XSD, SEARCH_NAMESPACE),
+                    Pair.of(PAGE_XSD, PAGE_NAMESPACE),
+                    Pair.of(PAGEUPDATE_XSD, PAGEUPDATE_NAMESPACE)
                 ));
         } catch (SAXException e) {
             throw new RuntimeException(e);
@@ -109,25 +113,27 @@ public final class Xmlns {
     private static URL getResource(String resource) {
         URL url = Xmlns.class.getResource(resource);
         if (url == null) {
-            log.info("No resource found for {}", resource);
+            log.debug("No resource found for {}", resource);
         } else {
-            log.info("Resource found {}", url);
+            log.debug("Resource found {} -> {}", resource, url);
         }
         return url;
 
     }
-    private static StreamSource[] getStreamSources(URL... url) {
+    @SafeVarargs
+    private static StreamSource[] getStreamSourcesForSchemaValidation(Pair<URL, String>... url) {
         List<StreamSource> result = new ArrayList<>();
-        for (URL u : url) {
-            if (u != null) {
+        for (Pair<URL, String> u : url) {
+            if (u.getFirst() != null) {
                 try {
-                    result.add(new StreamSource(u.openStream()));
+                    InputStream i = u.getFirst().openStream();
+                    result.add(new StreamSource(i));
+                    log.info("Enabled validating for {}", u.getSecond());
                 } catch (IOException ioe) {
-                    System.err.println(ioe.getMessage());
-
+                    log.error(ioe.getMessage());
                 }
             } else {
-                log.error("Null url");
+                log.info("Skipping validating for {}", u.getSecond());
             }
         }
         return result.toArray(new StreamSource[0]);
