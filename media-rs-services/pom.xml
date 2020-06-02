@@ -26,6 +26,10 @@
       <artifactId>subtitles-domain</artifactId>
     </dependency>
     <dependency>
+      <groupId>nl.vpro.poms</groupId>
+      <artifactId>poms-shared</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-multipart-provider</artifactId>
     </dependency>

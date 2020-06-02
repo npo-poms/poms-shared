@@ -11,10 +11,8 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
 import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
@@ -22,17 +20,13 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.search.MediaForm;
-import nl.vpro.domain.media.search.MediaList;
-import nl.vpro.domain.media.search.MediaListItem;
+import nl.vpro.domain.media.search.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
-import nl.vpro.domain.subtitles.StandaloneCue;
-import nl.vpro.domain.subtitles.Subtitles;
-import nl.vpro.domain.subtitles.SubtitlesId;
-import nl.vpro.domain.subtitles.SubtitlesType;
+import nl.vpro.domain.subtitles.*;
+import nl.vpro.poms.shared.Headers;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 import static nl.vpro.api.rs.subtitles.Constants.*;
@@ -46,9 +40,8 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
 @Produces(MediaType.APPLICATION_XML)
 public interface MediaBackendRestService {
 
-    String HEADER_PREFIX = "X-NPO-";
-    String VALIDATION_WARNING_HEADER = HEADER_PREFIX + "validation-warning";
-    String VALIDATION_ERROR_HEADER = HEADER_PREFIX + "validation-error";
+    String VALIDATION_WARNING_HEADER = Headers.NPO_VALIDATION_WARNING_HEADER;
+    String VALIDATION_ERROR_HEADER = Headers.NPO_VALIDATION_ERROR_HEADER;
 
     // some common query and path parameters
     String ENTITY = "entity";
@@ -149,7 +142,7 @@ public interface MediaBackendRestService {
         @QueryParam(IMAGE_METADATA) @DefaultValue("false") Boolean imageMetadata,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner,
         @QueryParam(PUBLISH) @DefaultValue("false") Boolean publish
-        
+
     ) throws IOException;
 
     @POST

@@ -60,6 +60,10 @@ public class Headers {
     public static final String NPO_VERSION                    = X_NPO + "-version";
 
     public static final String NPO_TOOK                    = X_NPO + "-took";
+
+
+    public static final String NPO_VALIDATION_WARNING_HEADER = X_NPO + "-validation-warning";
+    public static final String NPO_VALIDATION_ERROR_HEADER = X_NPO + "-validation-error";
 }
 
 
