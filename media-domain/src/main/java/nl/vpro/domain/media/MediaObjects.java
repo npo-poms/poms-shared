@@ -529,20 +529,26 @@ public class MediaObjects {
     }
 
 
-    public static void markForDeletion(@NonNull MediaObject media, String reason) {
+    public static boolean markForDeletionIfNeeded(@NonNull MediaObject media, String reason) {
         if (! Workflow.DELETES.contains(media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_DELETION);
             media.setRepubReason(reason);
             media.setRepubDestinations(null);
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public static void markForUnDeletion(@NonNull MediaObject media, String reason) {
+    public static boolean markForUnDeletionIfNeeded(@NonNull MediaObject media, String reason) {
         if (Workflow.DELETES.contains(media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             log.info("Marked {} for undeletion", media);
             media.setRepubReason(reason);
             media.setRepubDestinations(null);
+            return true;
+        } else {
+            return false;
         }
     }
 

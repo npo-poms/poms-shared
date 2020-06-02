@@ -441,7 +441,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         media.setPredictions(toSet(predictions, PredictionUpdate::toPrediction));
 
         if (isDeleted == Boolean.TRUE) {
-            MediaObjects.markForDeletion(media, "");
+            MediaObjects.markForDeletionIfNeeded(media, "");
         } else {
             MediaObjects.markForRepublication(media, "");
         }
