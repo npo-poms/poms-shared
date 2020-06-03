@@ -19,6 +19,8 @@ import nl.vpro.util.Predicates;
 
 import static nl.vpro.util.Predicates.alwaysFalse;
 import static nl.vpro.util.Predicates.biAlwaysFalse;
+import static nl.vpro.util.Predicates.biAlwaysTrue;
+
 
 /**
  * Contains hints and configuration about how to assemble media objects from {@link MediaUpdate} objects.
@@ -58,7 +60,7 @@ public class AssemblageConfig {
     boolean guessEpisodePosition = false;
 
     @lombok.Builder.Default
-    BiPredicate<MemberRef, AssemblageConfig> memberOfUpdate = null;
+    BiPredicate<MemberRef, AssemblageConfig> memberOfUpdate = biAlwaysTrue();
 
     @lombok.Builder.Default
     boolean ratingsUpdate = true;
@@ -187,7 +189,6 @@ public class AssemblageConfig {
     public boolean isMemberOfUpdate() {
         return memberOfUpdate != null;
     }
-
 
     public Predicate<MemberRef> getMemberOfUpdatePredicate() {
         return memberRef -> AssemblageConfig.this.memberOfUpdate != null && AssemblageConfig.this.memberOfUpdate.test(memberRef, AssemblageConfig.this);
