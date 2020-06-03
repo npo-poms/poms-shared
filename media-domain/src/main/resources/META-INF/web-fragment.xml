@@ -2,7 +2,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xmlns="http://java.sun.com/xml/ns/javaee"
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd"
-              id="poms-thesaurus" version="3.0">
+              id="media-domain-kijkwijzer" version="3.0">
   <name>media_domain</name>
   <servlet>
     <servlet-name>kijkwijzericons</servlet-name>
