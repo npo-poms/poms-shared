@@ -15,6 +15,9 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.validation.constraints.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.google.common.collect.Iterables;
@@ -517,20 +520,46 @@ public class MediaObjects {
     public static boolean markForRepublication(@NonNull MediaObject media, String reason) {
         if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(Instant.now())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
-            media.setRepubReason(reason);
+            appendReason(media, reason);
             media.setRepubDestinations(null);
             return true;
         } else {
+            appendReason(media, reason);
             return false;
         }
     }
 
+<<<<<<< HEAD
 
     public static void markForDeletion(@NonNull MediaObject media, String reason) {
+=======
+    public static boolean markForDeletionIfNeeded(
+        @NonNull MediaObject media,
+        @Pattern(regexp= "[a-z, ]+", flags = {Pattern.Flag.CASE_INSENSITIVE}) String reason) {
+>>>>>>> 23f5d92dc... MSE-4818
         if (! Workflow.DELETES.contains(media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_DELETION);
-            media.setRepubReason(reason);
+            appendReason(media, reason);
             media.setRepubDestinations(null);
+<<<<<<< HEAD
+=======
+            return true;
+        } else {
+            appendReason(media, reason);
+            return false;
+>>>>>>> 23f5d92dc... MSE-4818
+        }
+    }
+    protected static void appendReason(MediaObject media, String reason) {
+        if (StringUtils.isNotBlank(reason)) {
+            String existingReason = media.getRepubReason();
+            if (StringUtils.isBlank(existingReason)) {
+                media.setRepubReason(reason);
+            } else {
+                TreeSet<String> set = Arrays.stream(existingReason.split(",")).collect(Collectors.toCollection(TreeSet::new));
+                set.add(reason);
+                media.setRepubReason(String.join(",", set));
+            }
         }
     }
 
@@ -538,14 +567,21 @@ public class MediaObjects {
         if (Workflow.DELETES.contains(media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             log.info("Marked {} for undeletion", media);
-            media.setRepubReason(reason);
+            appendReason(media, reason);
             media.setRepubDestinations(null);
+<<<<<<< HEAD
+=======
+            return true;
+        } else {
+            appendReason(media, reason);
+            return false;
+>>>>>>> 23f5d92dc... MSE-4818
         }
     }
 
     public static void markPublished(@NonNull MediaObject media, @NonNull Instant now, String reason) {
         media.setLastPublishedInstant(now);
-        media.setRepubReason(reason);
+        appendReason(media, reason);
         media.setRepubDestinations(null);
     }
 
