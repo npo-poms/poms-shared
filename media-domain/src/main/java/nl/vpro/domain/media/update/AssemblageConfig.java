@@ -71,6 +71,9 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean createScheduleEvents = false;
 
+    @lombok.Builder.Default
+    Function<Program, Boolean> deleteIfNoScheduleEventsLeft = (p) -> false;
+
     /**
      * This is mainly targeted at PREPR which does not support programs spanning 0 o'clock.
      * If this is set to >= 0, then schedule merging will merge adjacent scheduleevents if they are of the same MID
@@ -164,6 +167,7 @@ public class AssemblageConfig {
             ratingsUpdate,
             copyTwitterrefs,
             createScheduleEvents,
+            deleteIfNoScheduleEventsLeft,
             mergeScheduleEvents,
             inferDurationFromScheduleEvents,
             locationsUpdate,
@@ -248,6 +252,9 @@ public class AssemblageConfig {
         }
         public Builder ownerless() {
             return owner(null);
+        }
+        public Builder deleteBroadcastIfNoScheduleEventsLeft() {
+            return deleteIfNoScheduleEventsLeft(p -> p.getType() == ProgramType.BROADCAST || p.getType() == ProgramType.STRAND);
         }
     }
 
