@@ -14,8 +14,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
-import nl.vpro.util.IntegerVersion;
-import nl.vpro.util.Predicates;
+import nl.vpro.util.*;
 
 import static nl.vpro.util.Predicates.alwaysFalse;
 import static nl.vpro.util.Predicates.biAlwaysFalse;
@@ -292,11 +291,11 @@ public class AssemblageConfig {
         ELSE_SKIP
     }
 
-     /**
-      *
+    /**
+     *
      * @since 5.13
-      * param S Type of incoming objects
-      * param F Type of field to of those object which are required (or not)
+     * param S Type of incoming objects
+     * param F Type of field to of those object which are required (or not)
      */
     public static abstract class Require<S, F>  implements BiPredicate<S, S> {
         private final BiFunction<S, S, RequireEnum> value;
@@ -357,7 +356,7 @@ public class AssemblageConfig {
 
              Require<?, ?> require = (Require<?, ?>) o;
 
-             return value == require.value;
+             return Objects.equals(value, require.value);
          }
 
          @Override
@@ -375,7 +374,7 @@ public class AssemblageConfig {
         public static final MidRequire ELSE_SKIP = new MidRequire(RequireEnum.ELSE_SKIP);
 
         private MidRequire(RequireEnum value) {
-            this((o1, o2) -> value);
+            this(Functions.biAlways(value));
         }
 
         public MidRequire(BiFunction<MediaObject, MediaObject, RequireEnum> value) {
