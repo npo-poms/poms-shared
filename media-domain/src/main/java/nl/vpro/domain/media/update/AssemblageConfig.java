@@ -72,7 +72,7 @@ public class AssemblageConfig {
     boolean createScheduleEvents = false;
 
     @lombok.Builder.Default
-    Function<Program, Boolean> deleteIfNoScheduleEventsLeft = (p) -> false;
+    Predicate<Program> deleteIfNoScheduleEventsLeft = (p) -> false;
 
     /**
      * This is mainly targeted at PREPR which does not support programs spanning 0 o'clock.
