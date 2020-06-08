@@ -295,8 +295,8 @@ public class AssemblageConfig {
      /**
       *
      * @since 5.13
-      * param S
-      * param F
+      * param S Type of incoming objects
+      * param F Type of field to of those object which are required (or not)
      */
     public static abstract class Require<S, F>  implements BiPredicate<S, S> {
         private final BiFunction<S, S, RequireEnum> value;
@@ -307,25 +307,25 @@ public class AssemblageConfig {
             this.getter = getter;
         }
         @Override
-        public boolean test(S o1, S o2) {
-            return defaultTest(o1, o2, value.apply(o1, o2), getter);
+        public boolean test(S source, S target) {
+            return defaultTest(source, target, value.apply(source, target), getter);
         }
 
 
-        public static <S, F> boolean defaultTest(S o1, S o2, RequireEnum value, Function<S, F> getter) {
+        public static <S, F> boolean defaultTest(S source, S target, RequireEnum value, Function<S, F> getter) {
             switch(value) {
                 case ELSE_SKIP:
                 case YES: {
-                    F f1 = getter.apply(o1);
-                    return f1 != null;
+                    F sourceValue = getter.apply(source);
+                    return sourceValue != null;
                 }
                 case NO:
                     return true;
                 case IF_TARGET_EMPTY: {
-                    F f1 = getter.apply(o1);
-                    if (f1 == null) {
-                        F f2 = getter.apply(o2);
-                        return f2 == null;
+                    F sourceValue = getter.apply(source);
+                    if (sourceValue == null) {
+                        F targetValue = getter.apply(target);
+                        return targetValue == null;
                     } else {
                         return true;
                     }
