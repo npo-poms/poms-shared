@@ -293,18 +293,26 @@ public class AssemblageConfig {
     }
 
      /**
+      *
      * @since 5.13
+      * param S
+      * param F
      */
     public static abstract class Require<S, F>  implements BiPredicate<S, S> {
-        private final RequireEnum value;
+        private final BiFunction<S, S, RequireEnum> value;
         private final Function<S, F> getter;
 
-        protected Require(RequireEnum value, Function<S, F> getter) {
+        protected Require(BiFunction<S, S, RequireEnum> value, Function<S, F> getter) {
             this.value = value;
             this.getter = getter;
         }
         @Override
         public boolean test(S o1, S o2) {
+            return defaultTest(o1, o2, value.apply(o1, o2), getter);
+        }
+
+
+        public static <S, F> boolean defaultTest(S o1, S o2, RequireEnum value, Function<S, F> getter) {
             switch(value) {
                 case ELSE_SKIP:
                 case YES: {
@@ -325,10 +333,12 @@ public class AssemblageConfig {
                 default:
                     throw new IllegalStateException();
             }
+
         }
         public Optional<S> throwIfIllegal(S o1, S o2, String message, Object... arguments) {
             if (! test(o1, o2)) {
-                if (value == RequireEnum.ELSE_SKIP) {
+
+                if (value.apply(o1, o2) == RequireEnum.ELSE_SKIP) {
                     return Optional.empty();
                 }
                 throw new RequiredFieldException(message, arguments);
@@ -365,6 +375,10 @@ public class AssemblageConfig {
         public static final MidRequire ELSE_SKIP = new MidRequire(RequireEnum.ELSE_SKIP);
 
         private MidRequire(RequireEnum value) {
+            this((o1, o2) -> value);
+        }
+
+        public MidRequire(BiFunction<MediaObject, MediaObject, RequireEnum> value) {
             super(value, MediaObject::getMid);
         }
     }
