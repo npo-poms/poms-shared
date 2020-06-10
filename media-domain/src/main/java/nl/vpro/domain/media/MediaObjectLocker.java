@@ -282,13 +282,13 @@ public class MediaObjectLocker {
                 log.trace("New lock for " + m);
                 List<LockHolder<? extends Serializable>> currentLocks = HOLDS.get();
                 if (! currentLocks.isEmpty()) {
-                     if (MediaObjectLockerAspect.monitor) {
-                         if (MediaObjectLockerAspect.sessionFactory != null) {
-                             if (MediaObjectLockerAspect.sessionFactory.getCurrentSession().getTransaction().isActive()) {
-                                 log.warn("Trying to acquire lock in transaction which active already! {}:{} + {}", summarize(), currentLocks, key);
-                             }
-                         }
-                     }
+                    if (MediaObjectLockerAspect.monitor) {
+                        if (MediaObjectLockerAspect.sessionFactory != null) {
+                            if (MediaObjectLockerAspect.sessionFactory.getCurrentSession().getTransaction().isActive()) {
+                                log.warn("Trying to acquire lock in transaction which active already! {}:{} + {}", summarize(), currentLocks, key);
+                            }
+                        }
+                    }
                     if (MediaObjectLockerAspect.stricltyOne && currentLocks.stream()
                         .anyMatch((l) ->
                             key.getClass().isInstance(l.key) && comparable.apply((K) l.key, key)
@@ -298,8 +298,6 @@ public class MediaObjectLocker {
                         log.warn("Getting a lock on a different key! {} + {}", currentLocks, key);
                     }
                 }
-
-
                 LockHolder<K> newHolder = new LockHolder<>(key, reason, new ReentrantLock(), new Exception());
                 HOLDS.get().add(newHolder);
                 return newHolder;
@@ -439,8 +437,16 @@ public class MediaObjectLocker {
             return key.hashCode();
         }
 
+        /**
+         * @since 5.13
+         */
+        public Duration getAge() {
+            return Duration.between(createdAt, Instant.now());
+        }
+
         public String summarize() {
-            return key + ":" + createdAt + ":" + reason + ":" +  MediaObjectLocker.summarize(this.thread, this.cause);
+            return key + ":" + createdAt + "(age: " + getAge() + "):" + reason + ":" +
+                MediaObjectLocker.summarize(this.thread, this.cause);
         }
 
         @Override

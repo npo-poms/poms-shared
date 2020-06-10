@@ -14,8 +14,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
-import nl.vpro.util.IntegerVersion;
-import nl.vpro.util.Predicates;
+import nl.vpro.util.*;
 
 import static nl.vpro.util.Predicates.alwaysFalse;
 import static nl.vpro.util.Predicates.biAlwaysFalse;
@@ -70,6 +69,9 @@ public class AssemblageConfig {
 
     @lombok.Builder.Default
     boolean createScheduleEvents = false;
+
+    @lombok.Builder.Default
+    Predicate<Program> deleteIfNoScheduleEventsLeft = alwaysFalse();
 
     /**
      * This is mainly targeted at PREPR which does not support programs spanning 0 o'clock.
@@ -164,6 +166,7 @@ public class AssemblageConfig {
             ratingsUpdate,
             copyTwitterrefs,
             createScheduleEvents,
+            deleteIfNoScheduleEventsLeft,
             mergeScheduleEvents,
             inferDurationFromScheduleEvents,
             locationsUpdate,
@@ -249,6 +252,9 @@ public class AssemblageConfig {
         public Builder ownerless() {
             return owner(null);
         }
+        public Builder deleteBroadcastIfNoScheduleEventsLeft() {
+            return deleteIfNoScheduleEventsLeft(p -> p.getType() == ProgramType.BROADCAST || p.getType() == ProgramType.STRAND);
+        }
     }
 
     public enum Steal implements BiPredicate<MediaObject, MediaObject> {
@@ -285,32 +291,40 @@ public class AssemblageConfig {
         ELSE_SKIP
     }
 
-     /**
+    /**
+     *
      * @since 5.13
+     * param S Type of incoming objects
+     * param F Type of field to of those object which are required (or not)
      */
     public static abstract class Require<S, F>  implements BiPredicate<S, S> {
-        private final RequireEnum value;
+        private final BiFunction<S, S, RequireEnum> value;
         private final Function<S, F> getter;
 
-        protected Require(RequireEnum value, Function<S, F> getter) {
+        protected Require(BiFunction<S, S, RequireEnum> value, Function<S, F> getter) {
             this.value = value;
             this.getter = getter;
         }
         @Override
-        public boolean test(S o1, S o2) {
+        public boolean test(S source, S target) {
+            return defaultTest(source, target, value.apply(source, target), getter);
+        }
+
+
+        public static <S, F> boolean defaultTest(S source, S target, RequireEnum value, Function<S, F> getter) {
             switch(value) {
                 case ELSE_SKIP:
                 case YES: {
-                    F f1 = getter.apply(o1);
-                    return f1 != null;
+                    F sourceValue = getter.apply(source);
+                    return sourceValue != null;
                 }
                 case NO:
                     return true;
                 case IF_TARGET_EMPTY: {
-                    F f1 = getter.apply(o1);
-                    if (f1 == null) {
-                        F f2 = getter.apply(o2);
-                        return f2 == null;
+                    F sourceValue = getter.apply(source);
+                    if (sourceValue == null) {
+                        F targetValue = getter.apply(target);
+                        return targetValue == null;
                     } else {
                         return true;
                     }
@@ -318,10 +332,12 @@ public class AssemblageConfig {
                 default:
                     throw new IllegalStateException();
             }
+
         }
         public Optional<S> throwIfIllegal(S o1, S o2, String message, Object... arguments) {
             if (! test(o1, o2)) {
-                if (value == RequireEnum.ELSE_SKIP) {
+
+                if (value.apply(o1, o2) == RequireEnum.ELSE_SKIP) {
                     return Optional.empty();
                 }
                 throw new RequiredFieldException(message, arguments);
@@ -340,7 +356,7 @@ public class AssemblageConfig {
 
              Require<?, ?> require = (Require<?, ?>) o;
 
-             return value == require.value;
+             return Objects.equals(value, require.value);
          }
 
          @Override
@@ -358,6 +374,10 @@ public class AssemblageConfig {
         public static final MidRequire ELSE_SKIP = new MidRequire(RequireEnum.ELSE_SKIP);
 
         private MidRequire(RequireEnum value) {
+            this(Functions.biAlways(value));
+        }
+
+        public MidRequire(BiFunction<MediaObject, MediaObject, RequireEnum> value) {
             super(value, MediaObject::getMid);
         }
     }
