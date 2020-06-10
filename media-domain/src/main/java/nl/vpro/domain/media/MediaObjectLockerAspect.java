@@ -94,7 +94,7 @@ public abstract class MediaObjectLockerAspect  {
             if (object instanceof MediaIdentifiable) {
                 MediaIdentifiable.Correlation correlation = ((MediaIdentifiable) object).getCorrelation();
                 if (correlation == null || correlation.getType() == MediaIdentifiable.Correlation.Type.HASH) {
-                    log.warn("Object {} has no correlation id", object);
+                    log.warn("Object {} has no correlation id ({})", object, correlation);
                 } else {
                     log.debug("{} has correlation {}", object, correlation);
                 }
