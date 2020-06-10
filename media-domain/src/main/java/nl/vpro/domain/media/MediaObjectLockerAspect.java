@@ -5,13 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.time.Duration;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.hibernate.SessionFactory;
+
+import nl.vpro.util.locker.ObjectLocker;
 
 
 /**
@@ -29,10 +29,6 @@ import org.hibernate.SessionFactory;
 public abstract class MediaObjectLockerAspect  {
 
 
-    static boolean stricltyOne;
-    static boolean monitor;
-    static Duration maxLockAcquireTime = Duration.ofMinutes(10);
-    static SessionFactory sessionFactory;
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
@@ -66,7 +62,7 @@ public abstract class MediaObjectLockerAspect  {
             reason = joinPoint.getSignature().getDeclaringType().getSimpleName() + "#" + joinPoint.getSignature().getName();
         }
 
-        return MediaObjectLocker.withKeyLock(sid, reason, () -> {
+        return ObjectLocker.withKeyLock(sid, reason, () -> {
             try {
                 return joinPoint.proceed(joinPoint.getArgs());
             } catch(Throwable t) {

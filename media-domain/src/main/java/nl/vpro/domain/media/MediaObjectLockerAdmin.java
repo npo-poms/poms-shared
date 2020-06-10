@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import nl.vpro.util.TimeUtils;
+import nl.vpro.util.locker.ObjectLocker;
 
 /**
  * @author Michiel Meeuwissen
@@ -31,7 +32,7 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
 
     @Override
     public Set<String> getLocks() {
-        return MediaObjectLocker.LOCKED_MEDIA.values().stream().map(MediaObjectLocker.LockHolder::summarize).collect(Collectors.toSet());
+        return MediaObjectLocker.LOCKED_MEDIA.values().stream().map(ObjectLocker.LockHolder::summarize).collect(Collectors.toSet());
     }
 
     @Override
@@ -74,23 +75,23 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
 
     @Override
     public String getMaxLockAcquireTime() {
-        return MediaObjectLockerAspect.maxLockAcquireTime.toString();
+        return ObjectLocker.maxLockAcquireTime.toString();
 
     }
 
     @Override
     public void setMaxLockAcquireTime(String duration) {
-        MediaObjectLockerAspect.maxLockAcquireTime = TimeUtils.parseDuration(duration).orElse(MediaObjectLockerAspect.maxLockAcquireTime);
+        ObjectLocker.maxLockAcquireTime = TimeUtils.parseDuration(duration).orElse(ObjectLocker.maxLockAcquireTime);
     }
 
     @Override
     public boolean isMonitor() {
-        return MediaObjectLockerAspect.monitor;
+        return ObjectLocker.monitor;
 
     }
 
     @Override
     public void setMonitor(boolean monitor) {
-        MediaObjectLockerAspect.monitor = monitor;
+        ObjectLocker.monitor = monitor;
     }
 }
