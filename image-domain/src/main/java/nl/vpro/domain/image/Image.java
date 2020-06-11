@@ -33,6 +33,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -132,6 +133,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     private Long size;
 
     @Column(unique = true, length = 1024)
+    @nl.vpro.validation.URI(groups = PomsValidatorGroup.class)
     private String downloadUrl;
 
     private String etag;
@@ -385,7 +387,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         try {
             return downloadUrl == null ? null : URI.create(downloadUrl);
         } catch (IllegalArgumentException use) {
-            log.warn("Invalid url found in database {}: {}", downloadUrl, use.getMessage());
+            log.warn("Invalid url {} found in {}: {}", downloadUrl, this, use.getMessage());
             return null;
         }
     }
