@@ -44,7 +44,7 @@ public class Error {
     }
 
     public Error(Throwable  e) {
-        this.message = e.getClass().getName() + ":" + e.getMessage();
+        this.message = e.getMessage();
         this.stackTraceElement = Arrays.stream(e.getStackTrace())
             .map(StackTraceElement::toString)
             .collect(Collectors.toList());
@@ -53,6 +53,6 @@ public class Error {
 
     @Override
     public String toString() {
-        return message + "\n" + String.join("\n", stackTraceElement);
+        return message + "\n" + clazz + "\n" + String.join("\n", stackTraceElement);
     }
 }
