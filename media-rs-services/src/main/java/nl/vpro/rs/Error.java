@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.5
@@ -15,6 +18,17 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
+@XmlType(name = "error",
+    propOrder = {
+        "message",
+        "clazz",
+        "stackTraceElement"
+    }
+)
+@JsonPropertyOrder({"message",
+    "class",
+    "stackTraceElements"
+    })
 public class Error {
 
     String message;
@@ -22,6 +36,7 @@ public class Error {
     @XmlElement(name = "class")
     String clazz;
 
+    @JsonProperty("stackTraceElements")
     List<String> stackTraceElement;
 
     public Error() {
