@@ -6,9 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -21,6 +19,9 @@ public class Error {
 
     String message;
 
+    @XmlElement(name = "class")
+    String clazz;
+
     List<String> stackTraceElement;
 
     public Error() {
@@ -29,7 +30,10 @@ public class Error {
 
     public Error(Throwable  e) {
         this.message = e.getClass().getName() + ":" + e.getMessage();
-        this.stackTraceElement = Arrays.stream(e.getStackTrace()).map(StackTraceElement::toString).collect(Collectors.toList());
+        this.stackTraceElement = Arrays.stream(e.getStackTrace())
+            .map(StackTraceElement::toString)
+            .collect(Collectors.toList());
+        this.clazz = e.getClass().getName();
     }
 
     @Override
