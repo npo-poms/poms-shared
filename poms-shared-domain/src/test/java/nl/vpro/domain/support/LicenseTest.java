@@ -20,8 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LicenseTest {
 
-
-
     @Test
     public void getIdShouldReturnLicenseId() {
         License testLicence = License.CC_BY;
