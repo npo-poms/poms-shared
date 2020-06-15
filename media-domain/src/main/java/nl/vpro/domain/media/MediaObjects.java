@@ -19,6 +19,7 @@ import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.slf4j.helpers.MessageFormatter;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Streams;
@@ -520,10 +521,13 @@ public class MediaObjects {
         }
     }
 
-    public static boolean markForRepublication(@NonNull MediaObject media, String reason) {
+    public static boolean markForRepublication(
+        @NonNull MediaObject media,
+        String reason,
+        Object... args) {
         if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(Instant.now())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
-            appendReason(media, reason);
+            appendReason(media,  reason, args);
             media.setRepubDestinations(null);
             return true;
         } else {
@@ -545,14 +549,15 @@ public class MediaObjects {
             return false;
         }
     }
-    protected static void appendReason(MediaObject media, String reason) {
+    protected static void appendReason(MediaObject media, String reason, Object... args) {
         if (StringUtils.isNotBlank(reason)) {
+            String formattedReason =  MessageFormatter.arrayFormat(reason, args).getMessage();
             String existingReason = media.getRepubReason();
             if (StringUtils.isBlank(existingReason)) {
-                media.setRepubReason(reason);
+                media.setRepubReason(formattedReason);
             } else {
                 TreeSet<String> set = Arrays.stream(existingReason.split(",")).collect(Collectors.toCollection(TreeSet::new));
-                set.add(reason);
+                set.add(formattedReason);
                 media.setRepubReason(String.join(",", set));
             }
         }
