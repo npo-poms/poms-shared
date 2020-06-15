@@ -2975,8 +2975,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     @Override
     // overriden to give access to test
-    protected byte[] prepareForCRCCalc() {
-        return super.prepareForCRCCalc();
+    protected byte[] serializeForCalcCRC32() {
+        return super.serializeForCalcCRC32();
     }
 
     @Override
