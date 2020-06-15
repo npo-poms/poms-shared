@@ -6,14 +6,11 @@ import lombok.Data;
 import java.io.StringReader;
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.*;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
