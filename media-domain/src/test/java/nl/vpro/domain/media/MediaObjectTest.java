@@ -846,7 +846,7 @@ public class MediaObjectTest {
             .id(1L)
             .build();
         program.acceptChanges();
-        byte[] bytes = program.prepareForCRCCalc();
+        byte[] bytes = program.serializeForCalcCRC32();
         assertThat(new String(bytes)).isEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:10+01:00\"  creationDate=\"1970-01-01T01:00:10+01:00\" urn=\"urn:vpro:media:program:1\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <credits/>\n" +
