@@ -2,7 +2,8 @@ package nl.vpro.domain.media;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -17,8 +18,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.*;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -26,6 +26,7 @@ import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.media.CollectionUtils.updateList;
@@ -446,6 +447,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @XmlElement(name = "memberOf")
+    @JsonView(Views.ForwardPublisher.class)
     public List<MemberRef> getMemberOfList() {
 
         if (memberOfList == null) {
@@ -463,6 +465,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @XmlElement(name = "episodeOf")
+    @JsonView(Views.ForwardPublisher.class)
     public List<MemberRef> getEpisodeOfList() {
 
         if (episodeOfList == null) {
