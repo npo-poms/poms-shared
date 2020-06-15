@@ -7,24 +7,16 @@ package nl.vpro.domain.media.support;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.time.Instant;
 import java.util.Date;
 import java.util.zip.CRC32;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -33,6 +25,8 @@ import nl.vpro.domain.media.TrackableObject;
 import nl.vpro.util.DateUtils;
 import nl.vpro.validation.EmbargoValidation;
 import nl.vpro.validation.PomsValidatorGroup;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * A publishable object implements {@link Accountable} and {@link MutableEmbargo}, but furthermore also has {@link #workflow}.
@@ -100,45 +94,44 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         return this.crc32;
     }
 
-    private byte[] prepareForCRCCalc(byte[] data, String encoding) {
-        try {
-            String dataAsString = new String(data, encoding);
-            // FOR_DELETION is rewritten to DELETED so that it IS detected as a change
-            dataAsString = dataAsString.replaceAll("workflow=\"FOR DELETION", "workflow=\"DELETED\"");
+    private byte[] serializeForCalcCRC32(byte[] data, Charset encoding) {
+        String dataAsString = new String(data, encoding);
+        // FOR_DELETION is rewritten to DELETED so that it IS detected as a change
+        dataAsString = dataAsString.replaceAll("workflow=\"FOR DELETION", "workflow=\"DELETED\"");
 
-            // filter stuff we DONT want in here
-            dataAsString = dataAsString.replaceAll("workflow=\".+?(?!DELETED)\"", "");
-            dataAsString = dataAsString.replaceAll("\\s+publishDate=\".+?\"\\s+", " ");   // neither is this
-            dataAsString = dataAsString.replaceAll("\\s+lastModified=\".+?\"\\s+", " "); // this should not matter, but last modified may be set too late...
+        // filter stuff we DONT want in here
+        dataAsString = dataAsString.replaceAll("workflow=\".+?(?!DELETED)\"", "");
+        dataAsString = dataAsString.replaceAll("\\s+publishDate=\".+?\"\\s+", " ");   // neither is this
+        dataAsString = dataAsString.replaceAll("\\s+lastModified=\".+?\"\\s+", " "); // this should not matter, but last modified may be set too late...
 
-            // NOTE: all remaining fields we don't want are set to XMLTransient and therefore won't get copied into this XML to start with
+        // NOTE: all remaining fields we don't want are set to XMLTransient and therefore won't get copied into this XML to start with
 
-            return dataAsString.getBytes();
-
-        } catch(UnsupportedEncodingException uee) {
-            throw new RuntimeException(uee);
-        }
+        return dataAsString.getBytes(encoding);
     }
 
-    protected byte[] prepareForCRCCalc() {
+    protected byte[] serializeForCalcCRC32() {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
-             OutputStreamWriter writer = new OutputStreamWriter(baos)
+             OutputStreamWriter writer = new OutputStreamWriter(baos, UTF_8)
         ) {
             JAXB.marshal(this, writer);
-            return prepareForCRCCalc(baos.toByteArray(), writer.getEncoding());
-        } catch (IOException ignored) {
+            return serializeForCalcCRC32(baos.toByteArray(), UTF_8);
+        } catch (IOException ioException) {
+            log.warn("{}", ioException.getMessage(), ioException);
             return new byte[0];
         }
     }
 
-
+    /**
+     * We keep track of a CRC32 hash to determin if an object is 'changed', in the sense that
+     * it would need republication.
+     */
     protected CRC32 calcCRC32() {
-        byte[] serialized = prepareForCRCCalc();
+        byte[] serialized = serializeForCalcCRC32();
         CRC32 crc32Local = new CRC32();
         crc32Local.reset();
         crc32Local.update(serialized);
         if(log.isDebugEnabled()) {
-            log.debug(new String(serialized));
+            log.debug(new String(serialized, UTF_8));
         }
         return crc32Local;
     }
