@@ -987,7 +987,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
      *
      * Only in the {@link Views.Publisher} version of the json.
      */
-    @JsonView({Views.Publisher.class})
+    @JsonView({Views.ForwardPublisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Title> getExpandedTitles() {
         return TextualObjects.expandTitlesMajorOwnerTypes(this);
@@ -1163,7 +1163,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         MediaObjectOwnableLists.setIfNotNull(this, this.geoLocations, newGeoLocations);
     }
 
-    @JsonView({Views.Publisher.class})
+    @JsonView({Views.ForwardPublisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<GeoLocations>  getExpandedGeoLocations() {
         return MediaObjectOwnableLists.expandOwnedList(this.geoLocations,
@@ -1184,7 +1184,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         MediaObjectOwnableLists.set(this, getTopics(), newTopics);
     }
 
-    @JsonView({Views.Publisher.class})
+    @JsonView({Views.ForwardPublisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Topics> getExpandedTopics() {
         return MediaObjectOwnableLists.expandOwnedList(this.topics,
@@ -1197,7 +1197,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return this.intentions = createIfNull(this.intentions);
     }
 
-    @JsonView({Views.Publisher.class})
+    @JsonView({Views.ForwardPublisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Intentions>  getExpandedIntentions() {
         return MediaObjectOwnableLists.expandOwnedList(this.intentions,
@@ -1222,7 +1222,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
 
-    @JsonView({Views.Publisher.class})
+    @JsonView({Views.ForwardPublisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<TargetGroups>  getExpandedTargetGroups() {
          return MediaObjectOwnableLists.expandOwnedList(this.targetGroups,
