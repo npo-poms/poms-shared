@@ -172,7 +172,7 @@ public class MediaObjectOwnableLists {
      * NOTE: This methods _modifies_ the incoming list.
      */
     protected static <OL extends MediaObjectOwnableList<OL, I>, I extends MediaObjectOwnableListItem<I, OL>>
-    SortedSet<OL> expandOwnedList(
+    SortedSet<OL> expandExistingOwnedList(
             SortedSet<OL> values,
             BiFunction<OwnerType, List<I>, OL> creator,
             List<OwnerType> ownersToExpand) {
@@ -190,7 +190,7 @@ public class MediaObjectOwnableLists {
     }
 
     public static <OL extends MediaObjectOwnableList<OL, I>, I extends MediaObjectOwnableListItem<I, OL>>
-    SortedSet<OL> expandedOwnedList(
+    SortedSet<OL> expandOwnedList(
             SortedSet<OL> incoming,
             BiFunction<OwnerType, List<I>, OL> creator,
             List<OwnerType> ownersToExpand) {
@@ -198,7 +198,7 @@ public class MediaObjectOwnableLists {
         if (incoming != null) {
             result.addAll(incoming);
         }
-        return expandOwnedList(result, creator, ownersToExpand);
+        return expandExistingOwnedList(result, creator, ownersToExpand);
     }
 
 

@@ -1166,7 +1166,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<GeoLocations>  getExpandedGeoLocations() {
-        return MediaObjectOwnableLists.expandedOwnedList(this.geoLocations,
+        return MediaObjectOwnableLists.expandOwnedList(this.geoLocations,
                 (owner, values) -> GeoLocations.builder()
                     .values(values).owner(owner).build(),
                 OwnerType.ENTRIES
@@ -1187,7 +1187,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Topics> getExpandedTopics() {
-        return MediaObjectOwnableLists.expandedOwnedList(this.topics,
+        return MediaObjectOwnableLists.expandOwnedList(this.topics,
                 (owner, values) -> Topics.builder().values(values).owner(owner).build(),
                 OwnerType.ENTRIES);
     }
@@ -1200,7 +1200,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Intentions>  getExpandedIntentions() {
-        return MediaObjectOwnableLists.expandedOwnedList(this.intentions,
+        return MediaObjectOwnableLists.expandOwnedList(this.intentions,
             (owner, list) -> Intentions.builder()
                 .owner(owner)
                 .values(list.stream().map(Intention::getValue).collect(Collectors.toList()))
@@ -1225,7 +1225,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<TargetGroups>  getExpandedTargetGroups() {
-         return MediaObjectOwnableLists.expandedOwnedList(this.targetGroups,
+         return MediaObjectOwnableLists.expandOwnedList(this.targetGroups,
             (owner, list) -> TargetGroups.builder()
                 .owner(owner)
                 .values(list.stream().map(TargetGroup::getValue).collect(Collectors.toList()))

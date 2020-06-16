@@ -39,7 +39,7 @@ public class MediaObjectOwnableListsTest {
         GeoLocations g2 = GeoLocations.builder().owner(OwnerType.WHATS_ON).values(geoLocation2).build();
         SortedSet<GeoLocations> set = new TreeSet<>(Arrays.asList(g2, g1));
 
-        final SortedSet<GeoLocations> result = MediaObjectOwnableLists.expandOwnedList(set,
+        final SortedSet<GeoLocations> result = MediaObjectOwnableLists.expandExistingOwnedList(set,
                 (owner, values) -> GeoLocations.builder().values(values).owner(owner).build(),
                 OwnerType.ENTRIES
         );
