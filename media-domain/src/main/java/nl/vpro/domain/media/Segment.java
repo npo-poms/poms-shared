@@ -14,9 +14,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -24,6 +22,7 @@ import nl.vpro.domain.Child;
 import nl.vpro.domain.media.support.AuthorizedDuration;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.jackson2.Views;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.SegmentValidation;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -378,6 +377,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     }
 
     @XmlElement(name = "segmentOf")
+    @JsonView(Views.Forward.class)
     public ParentRef getParentRef() {
         if (parentRef == null) {
             parentRef = new ParentRef(parent);
