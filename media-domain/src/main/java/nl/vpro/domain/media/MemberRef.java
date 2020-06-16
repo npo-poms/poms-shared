@@ -481,6 +481,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @XmlElement(name = "segmentOf")
+    @JsonView(Views.Forward.class)
     public ParentRef getSegmentOf() {
 
         if (segmentOf == null) {
