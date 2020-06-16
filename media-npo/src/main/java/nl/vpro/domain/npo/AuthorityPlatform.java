@@ -15,7 +15,7 @@ public enum AuthorityPlatform {
     hergebruik(null)
     ;
 
-    private Platform platform;
+    private final Platform platform;
 
     AuthorityPlatform(Platform platform) {
         this.platform = platform;
