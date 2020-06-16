@@ -14,7 +14,7 @@ import nl.vpro.domain.media.*;
  *
  * There is not real reason, it is simple to recognize by other fields wether we want a Person or not.
  *
- * This class is added as a JsonDeserializer only on {@link Credits}, and to avoid infinite recursion, in all extentions this is overridden by the default again.
+ * This class is added as a JsonDeserializer only on {@link Credits}, and to avoid infinite recursion, in all extensions this is overridden by the default again.
  *
  * We do however include {@link Credits#getObjectType()} for the serializer, so other implementors (perhaps we in the future) may choose to switch on that after all.
  *

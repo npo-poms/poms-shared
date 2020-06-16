@@ -447,9 +447,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @XmlElement(name = "memberOf")
-    @JsonView(Views.ForwardPublisher.class)
+    @JsonView(Views.Forward.class)
     public List<MemberRef> getMemberOfList() {
-
         if (memberOfList == null) {
             memberOfList = new ArrayList<>();
             if (group != null) {
@@ -465,9 +464,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @XmlElement(name = "episodeOf")
-    @JsonView(Views.ForwardPublisher.class)
+    @JsonView(Views.Forward.class)
     public List<MemberRef> getEpisodeOfList() {
-
         if (episodeOfList == null) {
             episodeOfList = new ArrayList<>();
             if (group != null && group instanceof Program) {

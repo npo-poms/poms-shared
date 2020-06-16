@@ -91,6 +91,10 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
         return getClass().getSimpleName().toLowerCase();
     }
 
+    protected void setObjectType(String type) {
+        // ignored, but needed for jackson strict un marshalling of Person
+    }
+
     /**
      * Returns the name of the credits. This is how it would be referred to by humans.
      */

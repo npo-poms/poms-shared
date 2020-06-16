@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.junit.Test;
 
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -30,7 +31,7 @@ public class MemberRefTest {
 
     @Test
     public void json() {
-        Jackson2TestUtil.roundTripAndSimilar(ref, "{\n" +
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPublisherInstance(), ref, "{\n" +
             "  \"midRef\" : \"MID_123\",\n" +
             "  \"type\" : \"SERIES\",\n" +
             "  \"index\" : 1,\n" +
