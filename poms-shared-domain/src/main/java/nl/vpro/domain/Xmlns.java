@@ -133,7 +133,7 @@ public final class Xmlns {
                     log.error(ioe.getMessage());
                 }
             } else {
-                log.info("Skipping validating for {}", u.getSecond());
+                log.info("Skipping validating for {} (XSD not found)", u.getSecond());
             }
         }
         return result.toArray(new StreamSource[0]);
