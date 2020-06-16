@@ -1,4 +1,4 @@
-package nl.vpro.validation;
+package nl.vpro.domain.validation;
 
 import java.lang.annotation.*;
 

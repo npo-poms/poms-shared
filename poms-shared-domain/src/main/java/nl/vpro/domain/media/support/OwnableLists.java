@@ -3,6 +3,11 @@ package nl.vpro.domain.media.support;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+import nl.vpro.domain.validation.NoDuplicateOwner;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.11
@@ -13,9 +18,9 @@ public class OwnableLists {
     }
 
     /**
-     * TODO: I think this may be superseded by using {@link @NoDuplicateOwner}
+     * TODO: I think this may be superseded by using {@link NoDuplicateOwner}
      */
-    public static <T extends Ownable> boolean containsDuplicateOwner(Iterable<T> newValues){
+    public static <T extends Ownable> boolean containsDuplicateOwner(@Nullable Iterable<T> newValues){
         if (newValues != null) {
             Map<OwnerType, AtomicInteger> counts = new HashMap<>();
             for (T v : newValues) {
@@ -34,8 +39,7 @@ public class OwnableLists {
      * @param <T>
      * @return the element matching the given owner or the one to display if nothing matches.
      */
-    public static <T extends Ownable> Optional<T> filterByOwnerOrFirst(SortedSet<T> ownableSet, OwnerType owner){
-
+    public static <T extends Ownable> Optional<T> filterByOwnerOrFirst(@Nullable SortedSet<T> ownableSet, @NonNull OwnerType owner){
         Optional<T> filtered = filterByOwner(ownableSet, owner);
 
         if (! filtered.isPresent() && ! ownableSet.isEmpty()) {
@@ -50,7 +54,7 @@ public class OwnableLists {
      * @param <T>
      * @return the element matching the given owner or the one to display if nothing matches.
      */
-    public static <T extends Ownable> Optional<T>  filterByOwner(Collection<T> ownableSet, OwnerType owner){
+    public static <T extends Ownable> Optional<T>  filterByOwner(@Nullable Collection<T> ownableSet, @NonNull OwnerType owner){
         if(ownableSet == null || ownableSet.isEmpty()) {
             return Optional.empty();
         }
