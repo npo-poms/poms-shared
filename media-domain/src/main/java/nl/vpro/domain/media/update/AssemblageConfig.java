@@ -68,6 +68,18 @@ public class AssemblageConfig {
     boolean copyTwitterrefs = false;
 
     @lombok.Builder.Default
+    boolean copyIntentions = false;
+
+    @lombok.Builder.Default
+    boolean copyTargetGroups = false;
+
+    @lombok.Builder.Default
+    boolean copyGeoLocations = false;
+
+    @lombok.Builder.Default
+    boolean copyTopics = false;
+
+    @lombok.Builder.Default
     boolean createScheduleEvents = false;
 
     @lombok.Builder.Default
@@ -165,6 +177,10 @@ public class AssemblageConfig {
             memberOfUpdate,
             ratingsUpdate,
             copyTwitterrefs,
+            copyIntentions,
+            copyTargetGroups,
+            copyGeoLocations,
+            copyTopics,
             createScheduleEvents,
             deleteIfNoScheduleEventsLeft,
             mergeScheduleEvents,
@@ -207,6 +223,10 @@ public class AssemblageConfig {
             .memberOfUpdateBoolean(true)
             .ratingsUpdate(true)
             .copyTwitterrefs(true)
+            .copyIntentions(true)
+            .copyTargetGroups(true)
+            .copyGeoLocations(true)
+            .copyTopics(true)
             .imageMetaData(true)
             .createScheduleEvents(true)
             .locationsUpdate(true)
