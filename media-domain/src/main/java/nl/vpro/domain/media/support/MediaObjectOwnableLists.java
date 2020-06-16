@@ -166,7 +166,12 @@ public class MediaObjectOwnableLists {
         }
     }
 
-    public static <OL extends MediaObjectOwnableList<OL, I>, I extends MediaObjectOwnableListItem<I, OL>>
+    /**
+     * Expands the incoming value to contain values for all given owners.
+     *
+     * NOTE: This methods _modifies_ the incoming list.
+     */
+    protected static <OL extends MediaObjectOwnableList<OL, I>, I extends MediaObjectOwnableListItem<I, OL>>
     SortedSet<OL> expandOwnedList(
             SortedSet<OL> values,
             BiFunction<OwnerType, List<I>, OL> creator,
@@ -175,11 +180,26 @@ public class MediaObjectOwnableLists {
         if(values == null || values.isEmpty()) return null;
         SortedSet<OL> additions = new TreeSet<>();
         for(OwnerType owner: ownersToExpand){
-            if(values.stream().anyMatch(value -> value.getOwner() == owner)) continue;
+            if(values.stream().anyMatch(value -> value.getOwner() == owner)) {
+                continue;
+            }
             additions.add(creator.apply(owner, values.first().getValues()));
         }
         values.addAll(additions);
         return values;
     }
+
+    public static <OL extends MediaObjectOwnableList<OL, I>, I extends MediaObjectOwnableListItem<I, OL>>
+    SortedSet<OL> expandedOwnedList(
+            SortedSet<OL> incoming,
+            BiFunction<OwnerType, List<I>, OL> creator,
+            List<OwnerType> ownersToExpand) {
+        TreeSet<OL> result = new TreeSet<>();
+        if (incoming != null) {
+            result.addAll(incoming);
+        }
+        return expandOwnedList(result, creator, ownersToExpand);
+    }
+
 
 }
