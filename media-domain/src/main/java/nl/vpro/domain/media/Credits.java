@@ -86,13 +86,9 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
     /**
      * return the 'objectType' of this Credits. Should probably correspond to the two relevant enums in nl.vpro.domain.gtaa.Scheme
      */
-    @JsonProperty
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     protected String getObjectType() {
         return getClass().getSimpleName().toLowerCase();
-    }
-
-    protected void setObjectType(String type) {
-        // ignored, but needed for jackson strict un marshalling of Person
     }
 
     /**
