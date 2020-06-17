@@ -1,22 +1,19 @@
 package nl.vpro.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.Instant;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.xml.bind.InstantXmlAdapter;
+import java.time.Instant;
 
 /**
  * @author Michiel Meeuwissen
@@ -94,7 +91,7 @@ public abstract class Change<T>  {
 
     @Override
     public String toString() {
-        return (isTail() ? "TAIL:" : "" ) + (publishDate + ":" + id + ":" + object + (isDeleted() ? ":DELETED" : ""));
+        return (isTail() ? "TAIL:" : "" ) + publishDate + ":" + id +                (isTail() ? "" : (":" + object + (isDeleted() ? ":DELETED" : "")));
 
     }
 
