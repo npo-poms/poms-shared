@@ -4,17 +4,14 @@
  */
 package nl.vpro.domain.api;
 
-import lombok.extern.slf4j.Slf4j;
-
-import java.time.Instant;
-
-import javax.xml.bind.annotation.*;
-
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.domain.Change;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.util.DateUtils;
+
+import javax.xml.bind.annotation.*;
+import java.time.Instant;
 
 /**
  * @author Roelof Jan Koekoek
@@ -103,7 +100,7 @@ public class MediaChange extends Change<MediaObject> {
     }
 
     public static MediaChange tail(Instant publishDate, Long sequence) {
-        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null, null, null);
+        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null, null, true);
         return tail;
     }
 
