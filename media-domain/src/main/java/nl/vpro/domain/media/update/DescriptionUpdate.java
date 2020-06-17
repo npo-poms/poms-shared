@@ -4,16 +4,15 @@
  */
 package nl.vpro.domain.media.update;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.domain.TypedText;
-import nl.vpro.domain.media.support.Description;
-import nl.vpro.domain.media.support.MutableOwnable;
-import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.validation.NoHtml;
 
 /**
@@ -31,7 +30,7 @@ public class DescriptionUpdate implements TypedText {
     @NotNull
     private TextualType type;
 
-    private MediaUpdate media;
+    private MediaUpdate<?> media;
 
     private DescriptionUpdate() {
         // needed by jaxb
@@ -70,11 +69,11 @@ public class DescriptionUpdate implements TypedText {
     }
 
     @XmlTransient
-    public MediaUpdate getMedia() {
+    public MediaUpdate<?> getMedia() {
         return media;
     }
 
-    public void setMedia(MediaUpdate media) {
+    public void setMedia(MediaUpdate<?> media) {
         this.media = media;
     }
 
