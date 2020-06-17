@@ -68,16 +68,16 @@ public class AssemblageConfig {
     boolean copyTwitterrefs = false;
 
     @lombok.Builder.Default
-    boolean copyIntentions = false;
+    boolean copyIntentions = true;
 
     @lombok.Builder.Default
-    boolean copyTargetGroups = false;
+    boolean copyTargetGroups = true;
 
     @lombok.Builder.Default
-    boolean copyGeoLocations = false;
+    boolean copyGeoLocations = true;
 
     @lombok.Builder.Default
-    boolean copyTopics = false;
+    boolean copyTopics = true;
 
     @lombok.Builder.Default
     boolean createScheduleEvents = false;
