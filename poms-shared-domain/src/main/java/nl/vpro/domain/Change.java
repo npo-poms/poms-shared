@@ -91,7 +91,8 @@ public abstract class Change<T>  {
 
     @Override
     public String toString() {
-        return (isTail() ? "TAIL:" : "" ) + publishDate + ":" + id +                (isTail() ? "" : (":" + object + (isDeleted() ? ":DELETED" : "")));
+        return (isTail() ? "TAIL:" : "" ) + publishDate + ":" + id +
+                (isTail() ? "" : (":" + object + (isDeleted() ? ":DELETED" : "")));
 
     }
 
