@@ -1,27 +1,20 @@
 package nl.vpro.domain.media.update;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Singular;
+import lombok.*;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.time.*;
+import java.util.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Range;
 
 import nl.vpro.domain.media.Channel;
-import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -47,7 +40,7 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
     @XmlAttribute
     @Getter
     @Setter
-    protected Net net;
+    protected String net;
 
     @XmlAttribute(name = "start")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
