@@ -27,8 +27,6 @@ import nl.vpro.domain.media.support.OwnerType;
 @XmlAccessorType(XmlAccessType.NONE)
 public class MediaUpdateTable {
 
-
-
     @XmlElementWrapper(name = "programTable")
     @XmlElement(name = "program")
     List<ProgramUpdate> programTable = new ArrayList<>();
