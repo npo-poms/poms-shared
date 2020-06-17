@@ -281,8 +281,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         }
         if (isNotBefore(5, 11)) {
             this.intentions = toUpdateIntentions(mediaobject.getIntentions(), owner);
-        }
-        if (isNotBefore(5, 11)) {
             this.targetGroups = toUpdateTargetGroups(mediaobject.getTargetGroups(), owner);
         }
 
@@ -308,8 +306,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         if (isNotBefore(5, 12)) {
             this.geoLocations = toGeoLocationUpdates(mediaobject.getGeoLocations(), owner);
-        }
-        if (isNotBefore(5, 12)) {
             this.topics = toTopicUpdates(mediaobject.getTopics(), owner);
         }
     }
@@ -468,15 +464,26 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         if(intentions != null) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getIntentions(), toIntentions(intentions, owner));
+        } else {
+            MediaObjectOwnableLists.remove(returnObject.getIntentions(), owner);
         }
         if(targetGroups != null) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getTargetGroups(), toTargetGroups(targetGroups, owner));
+        } else {
+            MediaObjectOwnableLists.remove(returnObject.getTargetGroups(), owner);
         }
-        if(geoLocations != null && isNotBefore(5, 12)) {
-            MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getGeoLocations(), toGeoLocations(geoLocations, owner));
-        }
-        if(topics != null && isNotBefore(5, 12)) {
-            MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getTopics(), toTopics(topics, owner));
+        if (isNotBefore(5, 12)) {
+            if (geoLocations != null) {
+                MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getGeoLocations(), toGeoLocations(geoLocations, owner));
+            } else {
+                MediaObjectOwnableLists.remove(returnObject.getGeoLocations(), owner);
+
+            }
+            if (topics != null ) {
+                MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getTopics(), toTopics(topics, owner));
+            } else {
+                MediaObjectOwnableLists.remove(returnObject.getTopics(), owner);
+            }
         }
 
         return returnObject;
