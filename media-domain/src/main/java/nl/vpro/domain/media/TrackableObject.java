@@ -23,7 +23,7 @@ public interface TrackableObject extends Trackable, Embargo {
      * This returns <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
      * and otherwise it depends on {@link #inPublicationWindow(Instant)}
      */
-    default boolean isPublishable() {
+    default boolean isPublishable(Instant now) {
         Workflow workflow = getWorkflow();
         if(isMerged() ||
             Workflow.FOR_DELETION == workflow ||
@@ -42,7 +42,7 @@ public interface TrackableObject extends Trackable, Embargo {
             || Workflow.MERGED.equals(workflow)
             || workflow == null /* may happen when property filtering active NPA-493 */) {
 
-            return inPublicationWindow(Instant.now());
+            return inPublicationWindow(now);
         }
         LoggerFactory.getLogger(getClass()).error("Unexpected state of {}. Workflow: {}. Supposing this is not publishable for now", this, workflow);
         return false;
@@ -50,12 +50,12 @@ public interface TrackableObject extends Trackable, Embargo {
     }
 
 
-    default boolean isRevocable() {
+    default boolean isRevocable(Instant now) {
         Workflow workflow = getWorkflow();
         if (workflow == Workflow.IGNORE) {
             return false;
         }
-        return ! isPublishable();
+        return ! isPublishable(now);
     }
 
     /**

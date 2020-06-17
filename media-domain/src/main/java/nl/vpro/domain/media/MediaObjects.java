@@ -664,10 +664,10 @@ public class MediaObjects {
      *
      * TODO work in progress. This may replace the hibernate filter solution now in place.
      */
-    public static <T extends PublishableObject<?>> T filterPublishable(T object) {
+    public static <T extends PublishableObject<?>> T filterPublishable(T object, Instant now) {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
-                return ((PublishableObject) o).isPublishable();
+                return ((PublishableObject) o).isPublishable(now);
             } else {
                 return true;
             }
@@ -878,7 +878,7 @@ public class MediaObjects {
 
     public static boolean revokeRelatedPublishables(MediaObject media, Instant now) {
         boolean result = MediaObjects.revokeRelatedPublishables(media, media.getImages(), now, () -> {});
-        result &= MediaObjects.revokeRelatedPublishables(media, media.getLocations(), now, () -> Locations.updatePredictionStates(media));
+        result &= MediaObjects.revokeRelatedPublishables(media, media.getLocations(), now, () -> Locations.updatePredictionStates(media, now));
         return result;
 
     }

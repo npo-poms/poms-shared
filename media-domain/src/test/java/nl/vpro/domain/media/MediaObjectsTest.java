@@ -163,7 +163,7 @@ public class MediaObjectsTest {
             .locations(location1, location2)
             .build();
 
-        final Program copy = MediaObjects.filterPublishable(program);
+        final Program copy = MediaObjects.filterPublishable(program, Instant.now());
         assertThat(copy.getLocations()).hasSize(1);
         assertThat(copy.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
     }

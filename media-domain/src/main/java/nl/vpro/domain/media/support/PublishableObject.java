@@ -143,17 +143,17 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         this.id = id;
     }
 
-    public boolean isActivation() {
-        return isPublishable() && Workflow.WITH_MEDIA_ACTIVATION.contains(workflow);
+    public boolean isActivation(Instant now) {
+        return isPublishable(now) && Workflow.WITH_MEDIA_ACTIVATION.contains(workflow);
     }
 
-    public boolean isDeactivation() {
+    public boolean isDeactivation(Instant now) {
         if(Workflow.PARENT_REVOKED == workflow
             || Workflow.FOR_DELETION == workflow) {
             return true;
         }
 
-        return Workflow.PUBLISHED == workflow && isRevocable();
+        return Workflow.PUBLISHED == workflow && isRevocable(now);
     }
 
 

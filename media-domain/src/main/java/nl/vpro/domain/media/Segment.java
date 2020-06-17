@@ -148,31 +148,32 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
 
 
     @Override
-    public boolean isActivation() {
-        return getParent().isActivation() || super.isActivation();
+    public boolean isActivation(Instant now) {
+
+        return getParent().isActivation(now) || super.isActivation(now);
     }
 
     @Override
-    public boolean isDeactivation() {
-        return getParent().isDeactivation() || super.isDeactivation();
+    public boolean isDeactivation(Instant now) {
+        return getParent().isDeactivation(now) || super.isDeactivation(now);
     }
 
     @Override
-    public boolean isPublishable() {
-        if(parent != null && !parent.isPublishable()) {
+    public boolean isPublishable(Instant now) {
+        if(parent != null && !parent.isPublishable(now)) {
             return false;
         }
 
-        return super.isPublishable();
+        return super.isPublishable(now);
     }
 
     @Override
-    public boolean isRevocable() {
-        if(super.isRevocable()) {
+    public boolean isRevocable(Instant now) {
+        if(super.isRevocable(now)) {
             return true;
         }
 
-        return getParent().isRevocable();
+        return getParent().isRevocable(now);
     }
 
     @Override

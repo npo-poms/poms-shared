@@ -49,7 +49,7 @@ public class Locations {
         return addLocation(program, platform, encryption, pubOptie, owner, replaces);
     }
 
-    public static Locations.RealizeResult realizeStreamingPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate) {
+    public static Locations.RealizeResult realizeStreamingPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate, Instant now) {
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
 
         if (platform == Platform.INTERNETVOD) {
@@ -81,7 +81,7 @@ public class Locations {
                         .build();
                 } else {
                     if (existingPredictionForPlatform.getEncryption() != Encryption.DRM) {
-                        createDrmImplicitely(mediaObject, platform, authorityLocations, locationPredicate);
+                        createDrmImplicitely(mediaObject, platform, authorityLocations, locationPredicate, now);
                         if (authorityLocations.isEmpty()) {
                             return Locations.RealizeResult.builder()
                                 .needed(false)
@@ -117,12 +117,12 @@ public class Locations {
         Location authorityLocation = getAuthorityLocation(mediaObject, platform, encryption, "For " + encryption, locationPredicate);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
-            updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>());
+            updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
         }
 
         //MSE-3992
         if (encryption != Encryption.DRM) {
-            createDrmImplicitely(mediaObject, platform, authorityLocations, locationPredicate);
+            createDrmImplicitely(mediaObject, platform, authorityLocations, locationPredicate, now);
         }
 
         if (authorityLocations.isEmpty()) {
@@ -140,11 +140,11 @@ public class Locations {
             .build();
     }
 
-    private static void createDrmImplicitely(MediaObject mediaObject, Platform platform, List<Location> authorityLocations, Predicate<Location> locationPredicate) {
+    private static void createDrmImplicitely(MediaObject mediaObject, Platform platform, List<Location> authorityLocations, Predicate<Location> locationPredicate, Instant now) {
             Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
             if (authorityLocation2 != null) {
                 authorityLocations.add(authorityLocation2);
-                updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("Not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>());
+                updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("Not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
             }
     }
 
@@ -225,7 +225,7 @@ public class Locations {
         Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
         if (avAttributes.isPresent()) {
             Location location = createOrFindLocation(program, locationUrl, owner, platform);
-            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces);
+            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces, Instant.now());
         } else {
             log.warn("Puboption {} is explicitely ignored, not adding location for {}", pubOptie, program);
         }
@@ -233,14 +233,14 @@ public class Locations {
     }
 
 
-    private static void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Set<OwnerType> replaces) {
+    private static void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Set<OwnerType> replaces, Instant now) {
         location.setAvAttributes(avAttributes);
         if (replaces != null) {
             if (replaces.contains(location.getOwner())) {
                 location.setOwner(owner);
             }
         }
-        updatePredictionStates(program, platform);
+        updatePredictionStates(program, platform, now);
     }
 
     /**
@@ -304,7 +304,7 @@ public class Locations {
 
 
 
-    public static void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate){
+    public static void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate, Instant now){
         List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
         Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
@@ -322,7 +322,7 @@ public class Locations {
              }
 
         }
-        updatePredictionStates(mediaObject, platform);
+        updatePredictionStates(mediaObject, platform, now);
     }
 
     private static Encryption getEncryptionFromProgramUrl(Location location) {
@@ -376,15 +376,15 @@ public class Locations {
 
 
 
-    public static boolean updatePredictionStates(MediaObject object) {
+    public static boolean updatePredictionStates(MediaObject object, Instant now) {
         boolean change = false;
         for (Prediction prediction : object.getPredictions()) {
-            change |= updatePredictionStates(object, prediction.getPlatform());
+            change |= updatePredictionStates(object, prediction.getPlatform(), now);
         }
         return change;
     }
 
-    public static boolean updatePredictionStates(MediaObject mediaObject, Platform platform) {
+    public static boolean updatePredictionStates(MediaObject mediaObject, Platform platform, Instant now) {
         if (platform == null) {
             return false;
         }
@@ -403,7 +403,7 @@ public class Locations {
                     //locationPlatform = Platform.INTERNETVOD;
                 }
                 if (locationPlatform == platform) {
-                    if (location.isPublishable() && ! location.isDeleted()) {
+                    if (location.isPublishable(now) && ! location.isDeleted()) {
                         requiredState = Prediction.State.REALIZED;
                         break;
                     }

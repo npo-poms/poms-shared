@@ -22,104 +22,108 @@ import static org.junit.Assume.*;
  * @author Roelof Jan Koekoek
  * @since 1.5
  */
-public class PublishableObjectTest extends ObjectTest<PublishableObject> {
+public class PublishableObjectTest extends ObjectTest<PublishableObject<?>> {
+
+    private static final Instant NOW = Instant.now();
 
     @DataPoint
-    public static PublishableObject nullArgument = null;
+    public static PublishableObject<?> nullArgument = null;
 
     @DataPoint
-    public static PublishableObject withId1 = data(1L, null, null, null);
+    public static PublishableObject<?> withId1 = data(1L, null, null, null);
 
     @DataPoint
-    public static PublishableObject withId2 = data(2L, null, null, null);
+    public static PublishableObject<?> withId2 = data(2L, null, null, null);
 
     @DataPoint
-    public static PublishableObject forPublication = data(2L, FOR_PUBLICATION, null, null);
+    public static PublishableObject<?> forPublication = data(2L, FOR_PUBLICATION, null, null);
 
     @DataPoint
-    public static PublishableObject forRePublication = data(3L, FOR_REPUBLICATION, null, null);
+    public static PublishableObject<?>forRePublication = data(3L, FOR_REPUBLICATION, null, null);
 
     @DataPoint
-    public static PublishableObject revoked = data(1L, REVOKED, null, null);
+    public static PublishableObject<?>revoked = data(1L, REVOKED, null, null);
 
     @DataPoint
-    public static PublishableObject published = data(2L, PUBLISHED, null, null);
+    public static PublishableObject<?>published = data(2L, PUBLISHED, null, null);
 
     @DataPoint
-    public static PublishableObject publishedWithFutureStop = data(2L,
+    public static PublishableObject<?>publishedWithFutureStop = data(2L,
         PUBLISHED,
         null,
-        Instant.now().plusSeconds(100)
+        NOW.plusSeconds(100)
     );
 
     @DataPoint
-    public static PublishableObject forDeletion = data(3L, Workflow.FOR_DELETION, null, null);
+    public static PublishableObject<?>forDeletion = data(3L, Workflow.FOR_DELETION, null, null);
 
     @DataPoint
-    public static PublishableObject deleted = data(4L, Workflow.DELETED, null, null);
+    public static PublishableObject<?>deleted = data(4L, Workflow.DELETED, null, null);
 
     @DataPoint
-    public static PublishableObject futurePublication = data(5L, FOR_PUBLICATION,
-        Instant.now().plusSeconds(100), null);
+    public static PublishableObject<?>futurePublication = data(5L, FOR_PUBLICATION,
+       NOW.plusSeconds(100), null);
 
     @DataPoint
-    public static PublishableObject revocationFallsForPublication = data(7L,
+    public static PublishableObject<?>revocationFallsForPublication = data(7L,
         PUBLISHED,
-        Instant.now().plusSeconds(100),
-        Instant.now().minusSeconds(100)
+        NOW.plusSeconds(100),
+        NOW.minusSeconds(100)
     );
+
+
 
     @Theory
-    public void testIsActivationWhenTrue(PublishableObject data) {
+    public void testIsActivationWhenTrue(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), anyOf(equalTo(FOR_PUBLICATION), equalTo(REVOKED)));
-        assumeThat(data.isPublishable(), is(true));
-        assertTrue(data.isActivation());
+        assumeThat(data.isPublishable(NOW), is(true));
+        assertTrue(data.isActivation(NOW));
     }
 
     @Theory
-    public void testIsActivationWhenFalse(PublishableObject data) {
+    public void testIsActivationWhenFalse(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), not(anyOf(equalTo(FOR_PUBLICATION), equalTo(REVOKED))));
-        assertFalse(data.isActivation());
+        assertFalse(data.isActivation(NOW));
     }
 
     @Theory
-    public void testIsRevocationWhenTrue(PublishableObject data) {
+    public void testIsRevocationWhenTrue(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), equalTo(Workflow.FOR_DELETION));
-        assertTrue(data.isDeactivation());
+        assertTrue(data.isDeactivation(NOW));
     }
 
     @Theory
-    public void testIsRevocationWhenTrueOnWindow(PublishableObject data) {
+    public void testIsRevocationWhenTrueOnWindow(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), equalTo(PUBLISHED));
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
-        assertTrue(data.isDeactivation());
+        assertTrue(data.isDeactivation(NOW));
     }
 
     @Theory
-    public void testIsRevocationWhenFalse(PublishableObject data) {
+    public void testIsRevocationWhenFalse(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), not(anyOf(equalTo(PUBLISHED), equalTo(Workflow.FOR_DELETION))));
-        assertFalse(data.isDeactivation());
+        assertFalse(data.isDeactivation(NOW));
     }
 
     @Theory
-    public void testIsRevocationWhenFalseOnWindow(PublishableObject data) {
+    public void testIsRevocationWhenFalseOnWindow(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(), equalTo(PUBLISHED));
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
-        assertFalse(data.isDeactivation());
+        assertFalse(data.isDeactivation(NOW));
     }
 
     @Theory
-    public void testIsPublishableWhenTrue(PublishableObject data) {
+    public void testIsPublishableWhenTrue(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(),
             anyOf(
@@ -132,11 +136,11 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
         );
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
-        assertTrue(data.isPublishable());
+        assertTrue(data.isPublishable(NOW));
     }
 
     @Theory
-    public void testIsPublishableWhenFalse(PublishableObject data) {
+    public void testIsPublishableWhenFalse(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(),
             not(anyOf(
@@ -150,28 +154,28 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
         );
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
-        assertFalse(data.isPublishable());
+        assertFalse(data.isPublishable(NOW));
     }
 
     @Theory
-    public void testIsPublishStopBeforeStart(PublishableObject data) {
+    public void testIsPublishStopBeforeStart(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeNotNull(data.getPublishStartInstant());
         assumeNotNull(data.getPublishStopInstant());
         assumeThat(data.getPublishStartInstant(), greaterThan(data.getPublishStopInstant()));
-        assertFalse(data.isPublishable());
+        assertFalse(data.isPublishable(NOW));
     }
 
     @Theory
-    public void testIsRevocableOnWhenDeleted(PublishableObject data) {
+    public void testIsRevocableOnWhenDeleted(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeNotNull(data.getWorkflow());
         assumeThat(data.getWorkflow(), equalTo(Workflow.DELETED));
-        assertTrue(data.isRevocable());
+        assertTrue(data.isRevocable(NOW));
     }
 
     @Theory
-    public void testIsRevocableOnWhenTrueOnWindow(PublishableObject data) {
+    public void testIsRevocableOnWhenTrueOnWindow(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeNotNull(data.getWorkflow());
         assumeThat(data.getWorkflow(),
@@ -183,11 +187,11 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
-        assertTrue(data.isRevocable());
+        assertTrue(data.isRevocable(NOW));
     }
 
     @Theory
-    public void testIsNotRevocableWhenFalseOnWindow(PublishableObject data) {
+    public void testIsNotRevocableWhenFalseOnWindow(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(),
             anyOf(
@@ -195,7 +199,7 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
                 equalTo(REVOKED)));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
-        assertFalse(data.isRevocable());
+        assertFalse(data.isRevocable(NOW));
     }
 
     //@Theory I would not know why this is sensible
@@ -205,7 +209,7 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     // and will never any more come out of this situation.
     // We could also consider making the query for publication hit 'for publication' regardless
     // of the publication window. But that would cause useless publication/revocation only.
-    public void testIsNotRevocableWhenNotYetPublished(PublishableObject data) {
+    public void testIsNotRevocableWhenNotYetPublished(PublishableObject<?>data) {
         assumeNotNull(data);
         assumeNotNull(data.getWorkflow());
         assumeThat(
@@ -214,19 +218,26 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
-        assertFalse(data.isRevocable());
+        assertFalse(data.isRevocable(NOW));
     }
 
-    private static PublishableObject data(Long id, Workflow workflow, Instant start, Instant stop) {
-        PublishableObject result = new PublishableObject(id) {
-            @Override
-            protected String getUrnPrefix() {
-                return null;
-            }
-        };
+    private static PublishableObject<?> data(Long id, Workflow workflow, Instant start, Instant stop) {
+        PublishableObject<?> result = new MyPublishableObject(id);
+
         result.setWorkflow(workflow);
         result.setPublishStartInstant(start);
         result.setPublishStopInstant(stop);
         return result;
+    }
+
+    private static class MyPublishableObject extends PublishableObject<MyPublishableObject> {
+        MyPublishableObject(Long id) {
+            super(id);
+        }
+
+        @Override
+        protected String getUrnPrefix() {
+            return null;
+        }
     }
 }
