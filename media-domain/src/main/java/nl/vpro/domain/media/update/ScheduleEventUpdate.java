@@ -8,34 +8,25 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.*;
 import java.util.function.BiFunction;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.validation.Valid;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.google.common.collect.Range;
 
-import nl.vpro.domain.Child;
-import nl.vpro.domain.TextualObjectUpdate;
-import nl.vpro.domain.TextualObjects;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.ScheduleEventDescription;
-import nl.vpro.domain.media.support.ScheduleEventTitle;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.xml.bind.DurationXmlAdapter;
-import nl.vpro.xml.bind.InstantXmlAdapter;
-import nl.vpro.xml.bind.LocalDateXmlAdapter;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.xml.bind.*;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventUpdateType",
