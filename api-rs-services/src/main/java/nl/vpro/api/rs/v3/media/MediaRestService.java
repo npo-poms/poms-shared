@@ -45,6 +45,7 @@ public interface MediaRestService {
     String PUBLISHEDSINCE = "publishedSince";
     String CHECK_PROFILE = "checkProfile";
     String DELETES = "deletes";
+    String TAIL = "tail";
 
     @GET
     @Path("/suggest")
@@ -219,7 +220,9 @@ public interface MediaRestService {
         @QueryParam(ORDER) @DefaultValue(ASC) String order,
         @QueryParam(MAX) Integer max,
         @QueryParam(CHECK_PROFILE) Boolean profileCheck,
-        @QueryParam(DELETES) Deletes deletes);
+        @QueryParam(DELETES) Deletes deletes,
+        @QueryParam(TAIL) Tail tail
+        );
 
 
     /**
