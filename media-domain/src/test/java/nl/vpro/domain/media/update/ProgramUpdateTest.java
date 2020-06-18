@@ -29,7 +29,6 @@ import nl.vpro.validation.WarningValidatorGroup;
 
 import static nl.vpro.domain.media.MediaBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 
 @Slf4j
 public class ProgramUpdateTest extends MediaUpdateTest {
@@ -200,7 +199,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         programUpdate = JAXB.unmarshal(new StringReader(withoutFields), ProgramUpdate.class);
         assertThat(programUpdate.intentions).isNull();
         result = programUpdate.fetch(OwnerType.MIS);
-        assertFieldNull(result, "intentions");
+        assertFieldNullOrEmpty(result, "intentions");
     }
 
     @Test
@@ -850,7 +849,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "</program>";
 
         ProgramUpdate unmarshal = JAXBTestUtil.roundTripAndSimilar(update, expected);
-        assertEquals(1, unmarshal.getSegments().size());
+        assertThat(unmarshal.getSegments()).hasSize(1);
     }
 
     @Test
@@ -1109,14 +1108,15 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         return update;
     }
 
-
-
     @SneakyThrows
-    protected void assertFieldNull(MediaObject mo, String fieldName) {
+    protected void assertFieldNullOrEmpty(MediaObject mo, String fieldName) {
         Field field = MediaObject.class.getDeclaredField(fieldName);
         field.setAccessible(true);
-        assertThat(field.get(mo)).isNull();
+        Collection<?> c = (Collection<?>) field.get(mo);
+
+        assertThat(c).isNullOrEmpty();
     }
 }
+
 
 
