@@ -4,14 +4,17 @@
  */
 package nl.vpro.domain.api;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.extern.slf4j.Slf4j;
+
+import java.time.Instant;
+
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import nl.vpro.domain.Change;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.util.DateUtils;
-
-import javax.xml.bind.annotation.*;
-import java.time.Instant;
 
 /**
  * @author Roelof Jan Koekoek
@@ -104,14 +107,19 @@ public class MediaChange extends Change<MediaObject> {
         return tail;
     }
 
-    public static MediaChange of(MediaObject media) {
-        return of(media, null);
+    public static MediaChange of(Instant publishDate, MediaObject media) {
+        return of(publishDate, media, null);
     }
 
-    public static MediaChange of(MediaObject media, Long revision) {
+    public static MediaChange of(Instant publishDate, MediaObject media, Long revision) {
 
         MediaChange change;
-        final Instant lastPublished = media.getLastPublishedInstant();
+        final Instant lastPublished;
+        if (publishDate == null) {
+            lastPublished = media.getLastPublishedInstant();
+        }  else {
+            lastPublished = publishDate;
+        }
         if (media.getWorkflow() == null) {
             log.warn("Workflow is null for {}", media.getMid());
             return null;
