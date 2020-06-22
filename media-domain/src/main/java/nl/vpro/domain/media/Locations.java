@@ -190,7 +190,7 @@ public class Locations {
                 log.info("Updating location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
                 authorityLocation.setProgramUrl(locationUrl);
             } else {
-                log.info("Location {} {} for mediaObject {} already exists", locationUrl, platform, mediaObject.getMid());
+                log.debug("Location {} {} for mediaObject {} already exists", locationUrl, platform, mediaObject.getMid());
             }
             authorityLocation.setPlatform(platform);
             authorityLocation.setOwner(OwnerType.AUTHORITY);
@@ -318,7 +318,7 @@ public class Locations {
                  mediaObject.removeLocation(existingPlatformLocation);
                  log.info("Removing {}", existingPlatformLocation);
             } else {
-                 log.info("Letting {}", existingPlatformLocation);
+                 log.debug("Letting {}", existingPlatformLocation);
              }
 
         }
