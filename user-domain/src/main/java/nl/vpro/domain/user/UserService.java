@@ -18,6 +18,7 @@ import org.checkerframework.checker.nullness.qual.*;
 import org.slf4j.*;
 
 import nl.vpro.domain.Roles;
+import nl.vpro.mdc.MDCConstants;
 
 import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 
@@ -239,9 +240,9 @@ public interface UserService<T extends User> {
                 } catch(Exception ignored) {
 
                 }
-                MDC.put(ONBEHALFOF, ":" + principal);
+                MDCConstants.onBehalfOf(principal.toString());
             } catch (Exception e) {
-                MDC.put(ONBEHALFOF, ":" + onBehalfOf.toString());
+                MDCConstants.onBehalfOf(onBehalfOf.toString());
             }
         }
         return new Logout<T>() {
