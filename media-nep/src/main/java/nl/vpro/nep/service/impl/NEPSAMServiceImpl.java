@@ -137,6 +137,18 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         return (String) attributes.get("url");
     }
 
+    @Override
+    public String getStreamAccessLiveString() {
+        return baseUrlLive;
+
+    }
+
+    @Override
+    public String getStreamAccessMidString() {
+        return baseUrlMid;
+
+    }
+
 
     static StreamAccessItem createStreamAccessItem(String ip, Duration duration) {
         StreamAccessItem item = new StreamAccessItem().data(new ApiObject().type("access"));

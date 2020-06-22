@@ -13,4 +13,5 @@ public interface NEPPlayerTokenService {
 
     PlayreadyResponse playreadyToken(String ip);
 
+    String getPlayerTokenString();
 }

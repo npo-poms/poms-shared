@@ -102,6 +102,11 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService {
     }
 
     @Override
+    public String getPlayerTokenString() {
+        return baseUrl;
+    }
+
+    @Override
     public String toString() {
         return getClass().getSimpleName() + ":" +  baseUrl;
     }

@@ -139,6 +139,11 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
+    public String getPlayerTokenString() {
+        return tokenService.get().getPlayerTokenString();
+    }
+
+    @Override
     public String streamAccessLive(String channel, String ip, Duration duration) {
         return samService.get().streamAccessLive(channel, ip, duration);
     }
@@ -146,6 +151,16 @@ public class NEPServiceImpl implements NEPService {
     @Override
     public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) {
         return samService.get().streamAccessMid(mid, drm, ip, duration);
+    }
+
+    @Override
+    public String getStreamAccessLiveString() {
+        return samService.get().getStreamAccessLiveString();
+    }
+
+    @Override
+    public String getStreamAccessMidString() {
+        return samService.get().getStreamAccessMidString();
     }
 
     @Override

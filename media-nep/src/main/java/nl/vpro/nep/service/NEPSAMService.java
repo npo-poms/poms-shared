@@ -13,6 +13,7 @@ public interface NEPSAMService {
     String streamAccessLive(String channel, String ip, Duration duration);
     String streamAccessMid(String mid, boolean drm, String ip, Duration duration);
 
-
+    String getStreamAccessLiveString();
+    String getStreamAccessMidString();
 
 }
