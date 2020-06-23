@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.Region;
 
 /**
@@ -13,14 +14,16 @@ import org.meeuw.i18n.regions.Region;
 public class CountryCodeAdapter extends XmlAdapter<CountryWrapper, Region> {
 
     @Override
-    public Region unmarshal(CountryWrapper countryWrapper) {
+    @Nullable
+    public Region unmarshal(@Nullable CountryWrapper countryWrapper) {
         return Optional.ofNullable(countryWrapper)
                 .map(CountryWrapper::getCode)
                 .orElse(null);
     }
 
     @Override
-    public CountryWrapper marshal(Region v)  {
+    @Nullable
+    public CountryWrapper marshal(@Nullable Region v)  {
         return Optional.ofNullable(v)
                 .map(CountryWrapper::new)
                 .orElse(null);
