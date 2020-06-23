@@ -1253,8 +1253,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     @XmlElement(name = "country")
     @JsonProperty("countries")
-    @JsonSerialize(using = CountryCodeList.Serializer.class)
-    @JsonDeserialize(using = CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<org.meeuw.i18n.regions.Region> getCountries() {
