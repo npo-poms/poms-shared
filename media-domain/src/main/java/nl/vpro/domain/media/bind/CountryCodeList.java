@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
- * Might not be needed.
+ * Might not be needed, deprecated again.
  * @author Michiel Meeuwissen
  * @since 5.12
  */
@@ -22,6 +22,7 @@ public class CountryCodeList {
     private CountryCodeList() {
     }
 
+    @Deprecated
     public static class Serializer extends AbstractList.Serializer<Region> {
 
         @Override
@@ -35,6 +36,7 @@ public class CountryCodeList {
         }
     }
 
+    @Deprecated
     public static class Deserializer extends AbstractList.Deserializer<Region> {
 
         @Override
