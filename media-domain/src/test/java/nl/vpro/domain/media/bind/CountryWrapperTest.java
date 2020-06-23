@@ -2,10 +2,10 @@ package nl.vpro.domain.media.bind;
 
 import java.util.Locale;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.meeuw.i18n.subdivisions.CountrySubdivision;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.subdivisions.CountrySubdivision;
 
 import static com.neovisionaries.i18n.CountryCode.GB;
 import static com.neovisionaries.i18n.CountryCode.NL;
@@ -32,7 +32,7 @@ public class CountryWrapperTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void getNameGBUK() {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "GBN").get());
@@ -41,7 +41,7 @@ public class CountryWrapperTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void getNameUS() {
         Locale.setDefault(Locale.US);
         CountryWrapper wrapper = new CountryWrapper(new CurrentCountry(GB));
@@ -59,7 +59,7 @@ public class CountryWrapperTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void getNameENGUK() {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "ENG").get());
