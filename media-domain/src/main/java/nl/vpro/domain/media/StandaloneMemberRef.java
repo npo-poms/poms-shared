@@ -3,6 +3,8 @@ package nl.vpro.domain.media;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -18,6 +20,7 @@ import nl.vpro.domain.media.support.OwnerType;
  * @author Michiel Meeuwissen
  * @since 4.7
  */
+@Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlType(name = "standaloneMemberRefType")
@@ -117,6 +120,7 @@ public class StandaloneMemberRef implements Serializable, Ownable {
     }
 
     @XmlTransient
+    @Id
     public String getId() {
         return midRef+ "/" + (index == null ? "_" : index) + "/" + childRef + (objectType == null ? "" : ("/" + objectType));
     }
