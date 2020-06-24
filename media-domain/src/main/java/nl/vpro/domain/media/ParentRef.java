@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +12,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * @since 5.13
@@ -25,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "memberOf",
     "episodeOf"
 })
+@Getter
 public class ParentRef implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,24 +40,20 @@ public class ParentRef implements Serializable {
     protected MediaType type;
 
     @XmlElement(name = "memberOf")
-    private List<MemberRef> memberOfList;
+    private final List<MemberRef> memberOfList = new ArrayList<>();
 
     @XmlElement(name = "episodeOf")
-    private List<MemberRef> episodeOfList;
+    private final List<MemberRef> episodeOfList = new ArrayList<>();
 
     public ParentRef() {
     }
 
-    public ParentRef(MediaObject parent) {
+    public ParentRef(@NonNull MediaObject parent) {
 
         if (parent != null) {
             this.midRef = parent.getMid();
             this.type = parent.getMediaType();
-
-            this.memberOfList = new ArrayList<>();
             memberOfList.addAll(parent.getMemberOf());
-
-            this.episodeOfList = new ArrayList<>();
             if (parent instanceof Program) {
                 episodeOfList.addAll(((Program) parent).getEpisodeOf());
             }
