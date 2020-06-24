@@ -516,13 +516,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
         MemberRef that = (MemberRef)object;
 
-/*
-        if(this.getId() != null
-            && that.getId() != null) {
-            return this.getId().equals(that.getId());
-        }
-*/
-
         // Jaxb does not initialise the owner but a reference to the owner
         return memberEqualsOnRef(that)
             && ownerEqualsOnRef(that)
@@ -660,6 +653,10 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public static class Builder {
+        /**
+         * Calls either {@link #cridRef(String)} or {@link #midRef(String)}
+         * A reference to the 'parent' of the reference object
+         */
         public Builder mediaRef(String ref) {
             if (ref != null) {
                 if (ref.startsWith("crid:")) {
