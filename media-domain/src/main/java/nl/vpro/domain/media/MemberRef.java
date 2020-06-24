@@ -446,6 +446,9 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return group == null || member == null;
     }
 
+    /**
+     * @since 5.13
+     */
     @XmlElement(name = "memberOf")
     @JsonView(Views.Forward.class)
     public List<MemberRef> getMemberOfList() {
@@ -463,6 +466,9 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.memberOfList = updateList(this.memberOfList, memberOfList);
     }
 
+    /**
+     * @since 5.13
+     */
     @XmlElement(name = "episodeOf")
     @JsonView(Views.Forward.class)
     public List<MemberRef> getEpisodeOfList() {
@@ -480,6 +486,9 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.episodeOfList = updateList(this.episodeOfList, episodeOfList);
     }
 
+    /**
+     * @since 5.13
+     */
     @XmlElement(name = "segmentOf")
     @JsonView(Views.Forward.class)
     public ParentRef getSegmentOf() {
