@@ -1,11 +1,12 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.time.Instant;
+
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * An representation of a memberRef also having a 'memberRef' attribute.
@@ -70,6 +71,17 @@ public class StandaloneMemberRef implements Serializable {
                     .index(ref.getNumber())
                 ;
         }
+    }
+
+    public MemberRef toMemberRef() {
+        return MemberRef
+            .builder()
+            .added(added)
+            .type(type)
+            .midRef(midRef)
+            .number(index)
+            .highlighted(highlighted)
+            .build();
     }
 
     @XmlTransient
