@@ -1,8 +1,13 @@
 package nl.vpro.domain.media;
 
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -14,10 +19,20 @@ import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
- * An representation of a memberRef also having a 'memberRef' attribute.
+ * An representation of a memberRef also having a 'memberRef' attribute in the XML. A {@link MemberRef} doesn't have that
+ * because is always represented embedded in a {@link MediaObject}.
+ *
+ * This object also has {@link #getObjectType()} to make it possible the distinguish {@link Program#getEpisodeOf()} from {@link MediaObject#getMemberOf()}.
+ *
+ * The original and use case of this object is to be a standalone JSON representation of a 'memberref' relation in poms in ElasticSearch.
+ *
+ * It is also annotated with {@code javax.persistence} annotations, which makes it possible to easily store this object in other databases too (though poms itself is <em>not</em> doing that).
+ *
+ *
  * @author Michiel Meeuwissen
  * @since 4.7
  */
+@MappedSuperclass
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlType(name = "standaloneMemberRefType")
@@ -35,10 +50,14 @@ public class StandaloneMemberRef implements Serializable, Ownable {
     protected Instant added;
     protected Boolean highlighted;
     protected MediaType type;
+    @Id
     protected Integer index;
+    @Id
     protected String midRef;
+    @Id
     protected String childRef;
     protected OwnerType owner;
+    @Id
     protected ObjectType objectType;
 
     public StandaloneMemberRef() {
@@ -74,7 +93,16 @@ public class StandaloneMemberRef implements Serializable, Ownable {
         index = ref.getNumber();
         this.objectType = objectType;
         this.owner = ref.getOwner();
-
+    }
+    public StandaloneMemberRef(StandaloneMemberRef ref) {
+        childRef = ref.childRef;
+        added = ref.added;
+        highlighted = ref.highlighted;
+        type = ref.type;
+        midRef = ref.midRef;
+        index = ref.index;
+        objectType = ref.objectType;
+        owner = ref.owner;
     }
 
     public static StandaloneMemberRef memberRef(String child, MemberRef ref) {
@@ -117,8 +145,12 @@ public class StandaloneMemberRef implements Serializable, Ownable {
     }
 
     @XmlTransient
-    public String getId() {
-        return midRef+ "/" + (index == null ? "_" : index) + "/" + childRef + (objectType == null ? "" : ("/" + objectType));
+    public IdType getId() {
+        return new IdType(
+                midRef,
+                index,
+                childRef,
+                objectType);
     }
 
     @XmlAttribute
@@ -192,5 +224,27 @@ public class StandaloneMemberRef implements Serializable, Ownable {
     @Override
     public String toString () {
         return getId() + "(" + added + ")";
+    }
+
+    @NoArgsConstructor
+    @EqualsAndHashCode
+    public static class IdType implements Serializable{
+         String midRef;
+         String index;
+         String childRef;
+         ObjectType objectType;
+
+        public IdType(String midRef, Integer index, String childRef, ObjectType objectType) {
+            this.midRef = midRef;
+            this.index = (index == null ? "_" : String.valueOf(index));
+            this.childRef = childRef;
+            this.objectType = objectType;
+        }
+
+        @Override
+         public String toString() {
+             return midRef + "/" + index + "/" + childRef + (objectType == null ? "" : ("/" + objectType));
+         }
+
     }
 }
