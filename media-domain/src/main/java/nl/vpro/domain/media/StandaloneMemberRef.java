@@ -1,22 +1,18 @@
 package nl.vpro.domain.media;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
-import java.time.Instant;
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnerType;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.*;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-import nl.vpro.domain.media.support.Ownable;
-import nl.vpro.domain.media.support.OwnerType;
+import java.io.Serializable;
+import java.time.Instant;
 
 /**
  * An representation of a memberRef also having a 'memberRef' attribute in the XML. A {@link MemberRef} doesn't have that
@@ -44,7 +40,7 @@ import nl.vpro.domain.media.support.OwnerType;
     "highlighted",
     "objectType"
 })
-public class StandaloneMemberRef implements Serializable, Ownable {
+public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRelation {
     private static final long serialVersionUID = 0L;
 
     protected Instant added;
@@ -205,6 +201,11 @@ public class StandaloneMemberRef implements Serializable, Ownable {
 
     public void setChildRef(String childRef) {
         this.childRef = childRef;
+    }
+
+    @Override
+    public String getChildMid() {
+        return childRef;
     }
 
     @XmlAttribute

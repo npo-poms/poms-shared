@@ -6,11 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -19,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 /**
  * @since 5.13
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "parentRefType")
 @JsonPropertyOrder({
     "midRef",
@@ -29,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "episodeOf"
 })
 @Getter
-public class ParentRef implements Serializable {
+public class ParentRef implements Serializable, RecursiveParentChildRelation {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,23 +36,46 @@ public class ParentRef implements Serializable {
     protected MediaType type;
 
     @XmlElement(name = "memberOf")
-    private final List<MemberRef> memberOfList = new ArrayList<>();
+    private final List<MemberRef> memberOf = new ArrayList<>();
 
     @XmlElement(name = "episodeOf")
-    private final List<MemberRef> episodeOfList = new ArrayList<>();
+    private final List<MemberRef> episodeOf = new ArrayList<>();
+
+    @XmlTransient
+    private String segmentMid;
 
     public ParentRef() {
     }
 
-    public ParentRef(@NonNull MediaObject parent) {
-
+    public ParentRef(String segment, @NonNull MediaObject parent) {
+        this.segmentMid = segment;
         if (parent != null) {
             this.midRef = parent.getMid();
             this.type = parent.getMediaType();
-            memberOfList.addAll(parent.getMemberOf());
+            memberOf.addAll(parent.getMemberOf());
             if (parent instanceof Program) {
-                episodeOfList.addAll(((Program) parent).getEpisodeOf());
+                episodeOf.addAll(((Program) parent).getEpisodeOf());
             }
         }
     }
+
+    @Override
+    public String getChildMid() {
+        return segmentMid;
+    }
+
+    @Override
+    public ParentRef getSegmentOf() {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return getParentMid() + "(" + getType() + ")" + ":segment " + getChildMid();
+
+    }
+
+
 }
+
+
