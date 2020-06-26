@@ -15,4 +15,8 @@ public interface NEPUploadService {
         @NonNull InputStream stream,
         boolean replaces
         ) throws IOException;
+
+
+    String getUploadString();
+
 }

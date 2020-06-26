@@ -173,6 +173,11 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         }
     }
 
+    @Override
+    public String getUploadString() {
+        return username + "@" + sftpHost;
+
+    }
 
 
     @Override
