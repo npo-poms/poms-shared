@@ -5,15 +5,10 @@
 
 package nl.vpro.domain.image;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.net.URI;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -22,6 +17,7 @@ import java.time.Instant;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
@@ -31,9 +27,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.AbstractPublishableObject;
-import nl.vpro.domain.support.License;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -134,6 +130,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     private Long size;
 
     @Column(unique = true, length = 1024)
+    @Valid
     private String downloadUrl;
 
     private String etag;
@@ -411,7 +408,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         try {
             return downloadUrl == null ? null : URI.create(downloadUrl);
         } catch (IllegalArgumentException use) {
-            log.warn("Invalid url found in database {}: {}", downloadUrl, use.getMessage());
+            log.warn("Invalid url {}: {}", downloadUrl, use.getMessage());
             return null;
         }
     }
