@@ -1,9 +1,21 @@
 package nl.vpro.domain.media;
 
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import nl.vpro.domain.Identifiable;
+import nl.vpro.domain.media.support.MutableOwnable;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
+import nl.vpro.xml.bind.InstantXmlAdapter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hibernate.annotations.*;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -11,23 +23,10 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hibernate.annotations.*;
-
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.media.support.MutableOwnable;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.Views;
-import nl.vpro.xml.bind.InstantXmlAdapter;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import static nl.vpro.domain.media.CollectionUtils.updateList;
 
@@ -83,7 +82,7 @@ import static nl.vpro.domain.media.CollectionUtils.updateList;
     "episodeOf",
     "segmentOf"
 })
-public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable {
+public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable, RecursiveParentChildRelation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -121,10 +120,10 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     private OwnerType owner;
 
     @Transient
-    private List<MemberRef> memberOfList;
+    private List<MemberRef> memberOf;
 
     @Transient
-    private List<MemberRef> episodeOfList;
+    private List<MemberRef> episodeOf;
 
     @Transient
     private ParentRef segmentOf;
@@ -214,8 +213,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
         MemberRef copy = new MemberRef(source, member, source.getOwner());
         copy.added = source.added;
-        copy.episodeOfList = source.getEpisodeOfList();
-        copy.memberOfList = source.getMemberOfList();
+        copy.episodeOf = source.getEpisodeOf();
+        copy.memberOf = source.getMemberOf();
         copy.segmentOf = source.getSegmentOf();
         return copy;
     }
@@ -378,6 +377,12 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return midRef;
     }
 
+    @Override
+    public String getChildMid() {
+        return member == null ? null : member.getMid();
+
+    }
+
     public void setMidRef(String midRef) {
         if(group != null) {
             throw new IllegalStateException("Call set midRef on the enclosed owner, this is a JAXB only setter");
@@ -451,19 +456,19 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      */
     @XmlElement(name = "memberOf")
     @JsonView(Views.Forward.class)
-    public List<MemberRef> getMemberOfList() {
-        if (memberOfList == null) {
-            memberOfList = new ArrayList<>();
+    public List<MemberRef> getMemberOf() {
+        if (memberOf == null) {
+            memberOf = new ArrayList<>();
             if (group != null) {
-                memberOfList.addAll(group.getMemberOf());
+                memberOf.addAll(group.getMemberOf());
             }
         }
 
-        return memberOfList;
+        return memberOf;
     }
 
-    public void setMemberOfList(List<MemberRef> memberOfList) {
-        this.memberOfList = updateList(this.memberOfList, memberOfList);
+    public void setMemberOf(List<MemberRef> memberOfList) {
+        this.memberOf = updateList(this.memberOf, memberOfList);
     }
 
     /**
@@ -471,19 +476,19 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      */
     @XmlElement(name = "episodeOf")
     @JsonView(Views.Forward.class)
-    public List<MemberRef> getEpisodeOfList() {
-        if (episodeOfList == null) {
-            episodeOfList = new ArrayList<>();
+    public List<MemberRef> getEpisodeOf() {
+        if (episodeOf == null) {
+            episodeOf = new ArrayList<>();
             if (group != null && group instanceof Program) {
-                episodeOfList.addAll(((Program) group).getEpisodeOf());
+                episodeOf.addAll(((Program) group).getEpisodeOf());
             }
         }
 
-        return episodeOfList;
+        return episodeOf;
     }
 
-    public void setEpisodeOfList(List<MemberRef> episodeOfList) {
-        this.episodeOfList = updateList(this.episodeOfList, episodeOfList);
+    public void setEpisodeOf(List<MemberRef> episodeOfList) {
+        this.episodeOf = updateList(this.episodeOf, episodeOfList);
     }
 
     /**
@@ -494,7 +499,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public ParentRef getSegmentOf() {
         if (segmentOf == null) {
             if (group != null && group instanceof Segment) {
-                segmentOf = new ParentRef(((Segment) group).parent);
+                segmentOf = new ParentRef(group.getMid(), ((Segment) group).parent);
             }
         }
         return segmentOf;
