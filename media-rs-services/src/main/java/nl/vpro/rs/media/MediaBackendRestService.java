@@ -455,12 +455,14 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(MID) final String mid,
         @QueryParam(ERRORS) String errors,
+        @Context HttpServletResponse response,
         TranscodeRequest transcodeRequest);
 
     @POST
     @Path("transcode")
     Response transcode(
         @QueryParam(ERRORS) String errors,
+        @Context HttpServletResponse response,
         TranscodeRequest transcodeRequest);
 
     @POST
@@ -496,7 +498,8 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|segment)}/{mid:.*}/transcodingstatus")
     XmlCollection<TranscodeStatus> getTranscodeStatus(
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
-        @Encoded @PathParam(MID) final String mid
+        @Encoded @PathParam(MID) final String mid,
+        @Context HttpServletResponse response
     );
 
     @GET
@@ -504,7 +507,8 @@ public interface MediaBackendRestService {
     XmlCollection<TranscodeStatus> getTranscodeStatusForBroadcaster(
         @QueryParam("from") final Instant since,
         @QueryParam("status") @DefaultValue("RUNNING") final TranscodeStatus.Status status,
-        @QueryParam(MAX) @DefaultValue("20") final Integer max
+        @QueryParam(MAX) @DefaultValue("20") final Integer max,
+        @Context HttpServletResponse response
     );
 
     @POST
@@ -513,6 +517,7 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(MID) String mid,
         @Context HttpServletRequest request,
+        @Context HttpServletResponse response,
         ItemizeRequest itemizeRequest
     );
 
@@ -522,7 +527,8 @@ public interface MediaBackendRestService {
     @GET
     @Path("transcodingstatus/{id:.*}")
     TranscodeStatus getTranscodeStatus(
-        @Encoded @PathParam("id") final String id
+        @Encoded @PathParam("id") final String id,
+        @Context HttpServletResponse response
     );
 }
 
