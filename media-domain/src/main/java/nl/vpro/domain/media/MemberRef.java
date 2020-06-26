@@ -1,21 +1,9 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.media.support.MutableOwnable;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.Views;
-import nl.vpro.xml.bind.InstantXmlAdapter;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hibernate.annotations.*;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -23,10 +11,23 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hibernate.annotations.*;
+
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.Identifiable;
+import nl.vpro.domain.media.support.MutableOwnable;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.media.CollectionUtils.updateList;
 
@@ -68,7 +69,7 @@ import static nl.vpro.domain.media.CollectionUtils.updateList;
         "   or 0 < (select count(*) from mediaobject_broadcaster b where b.mediaobject_id = member_id and b.broadcasters_id in (:broadcasters))" +
         ")"),
     @Filter(name = MediaObject.INVERSE_DELETED_FILTER, condition = "(select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')")})
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlAccessorType(XmlAccessType.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlType(name = "memberRefType")
 @XmlRootElement(name = "memberRef")
@@ -242,13 +243,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
             that.getCridRef() != null && that.getCridRef().equals(getCridRef());
     }
 
-    @XmlTransient
     @Override
     public Long getId() {
         return id;
     }
 
-    @XmlTransient
     public MediaObject getMember() {
         return member;
     }
@@ -257,7 +256,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.member = member;
     }
 
-    @XmlTransient
     @Nullable
     public MediaObject getGroup() {
         return group;
@@ -275,7 +273,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      * The first non null of {@link #getMidRef}, {@link #getCridRef()}, {@link #getUrnRef}
      * In the API this is equivalent to {@link #getMidRef}
      */
-    @XmlTransient
     public String getMediaRef() {
         String ref = getMidRef();
         if(ref != null) {
@@ -369,6 +366,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     /**
      * The 'parent' of this relation
      */
+    @Override
     @XmlAttribute
     public String getMidRef() {
         if(this.group != null) {
@@ -391,6 +389,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.midRef = midRef;
     }
 
+    @Override
     @XmlAttribute
     public MediaType getType() {
         return group != null ? MediaType.getMediaType(group) : typeOfGroup;
@@ -403,7 +402,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         typeOfGroup = type;
     }
 
-    @XmlTransient
     boolean isValid() {
         return member != null
             && group != null
@@ -454,6 +452,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     /**
      * @since 5.13
      */
+    @Override
     @XmlElement(name = "memberOf")
     @JsonView(Views.Forward.class)
     public List<MemberRef> getMemberOf() {
@@ -474,6 +473,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     /**
      * @since 5.13
      */
+    @Override
     @XmlElement(name = "episodeOf")
     @JsonView(Views.Forward.class)
     public List<MemberRef> getEpisodeOf() {
@@ -494,6 +494,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     /**
      * @since 5.13
      */
+    @Override
     @XmlElement(name = "segmentOf")
     @JsonView(Views.Forward.class)
     public ParentRef getSegmentOf() {
