@@ -207,6 +207,37 @@ public class StandaloneMemberRef implements Serializable, Ownable {
         this.objectType = objectType;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StandaloneMemberRef that = (StandaloneMemberRef) o;
+
+        if (added != null ? !added.equals(that.added) : that.added != null) return false;
+        if (highlighted != null ? !highlighted.equals(that.highlighted) : that.highlighted != null) return false;
+        if (type != that.type) return false;
+        if (index != null ? !index.equals(that.index) : that.index != null) return false;
+        if (midRef != null ? !midRef.equals(that.midRef) : that.midRef != null) return false;
+        if (childRef != null ? !childRef.equals(that.childRef) : that.childRef != null) return false;
+        if (owner != that.owner) return false;
+        return objectType == that.objectType;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = added != null ? added.hashCode() : 0;
+        result = 31 * result + (highlighted != null ? highlighted.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (index != null ? index.hashCode() : 0);
+        result = 31 * result + (midRef != null ? midRef.hashCode() : 0);
+        result = 31 * result + (childRef != null ? childRef.hashCode() : 0);
+        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        result = 31 * result + (objectType != null ? objectType.hashCode() : 0);
+        return result;
+    }
+
     public enum ObjectType {
         memberRef,
         episodeRef
