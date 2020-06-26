@@ -41,14 +41,19 @@ public class SegmentTest {
             "    <start>P0DT0H0M0.000S</start>\n" +
             "</segment>";
         Segment segment = JAXBTestUtil.unmarshal(xml,  Segment.class);
+        assertThat(segment.getSegmentOf().getParentMid()).isEqualTo("RBX_NTR_2648108");
+        assertThat(segment.getSegmentOf().getType()).isEqualTo(MediaType.CLIP);
         JAXBTestUtil.roundTripAndSimilarAndEquals(segment, xml);
+
     }
 
     @Test
     public void json() {
         Segment segment = MediaBuilder.segment()
             .start(Duration.ofMillis(100))
+            .segmentOf("bla", MediaType.CLIP)
             .creationDate(LocalDateTime.of(2017, 5, 9, 14, 0))
+
             .build();
         Jackson2TestUtil.roundTripAndSimilar(segment, "{\n" +
             "  \"objectType\" : \"segment\",\n" +
@@ -59,11 +64,14 @@ public class SegmentTest {
             "  \"embeddable\" : true,\n" +
             "  \"broadcasters\" : [ ],\n" +
             "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
             "  \"languages\" : [ ],\n" +
             "  \"start\" : 100,\n" +
-            "  \"segmentOf\" : { }\n" +
-            "}\n");
+            "  \"midRef\" : \"bla\",\n" +
+            "  \"segmentOf\" : {\n" +
+            "    \"midRef\" : \"bla\",\n" +
+            "    \"type\" : \"CLIP\"\n" +
+            "  }\n" +
+            "}");
     }
 
     @Test

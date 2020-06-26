@@ -1166,6 +1166,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return (T) this;
         }
 
+        public T segmentOf(ParentRef parentRef) {
+            mediaObject().setSegmentOf(parentRef);
+            return (T) this;
+        }
+        public T segmentOf(String program, MediaType mediaType) {
+
+            return midRef(program)
+                .segmentOf(new ParentRef(mediaObject.getMid(), program, mediaType));
+        }
+
         public T midRef(String midRef) {
             mediaObject().setMidRef(midRef);
             return (T) this;

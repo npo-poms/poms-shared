@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "episodeOf"
 })
 @Getter
+@Setter
 public class ParentRef implements Serializable, RecursiveParentChildRelation {
 
     private static final long serialVersionUID = 1L;
@@ -36,10 +38,10 @@ public class ParentRef implements Serializable, RecursiveParentChildRelation {
     protected MediaType type;
 
     @XmlElement(name = "memberOf")
-    private final List<MemberRef> memberOf = new ArrayList<>();
+    private List<MemberRef> memberOf;
 
     @XmlElement(name = "episodeOf")
-    private final List<MemberRef> episodeOf = new ArrayList<>();
+    private List<MemberRef> episodeOf;
 
     @XmlTransient
     private String segmentMid;
@@ -49,14 +51,20 @@ public class ParentRef implements Serializable, RecursiveParentChildRelation {
 
     public ParentRef(String segment, @NonNull MediaObject parent) {
         this.segmentMid = segment;
-        if (parent != null) {
-            this.midRef = parent.getMid();
-            this.type = parent.getMediaType();
-            memberOf.addAll(parent.getMemberOf());
-            if (parent instanceof Program) {
-                episodeOf.addAll(((Program) parent).getEpisodeOf());
-            }
+        this.midRef = parent.getMid();
+        this.type = parent.getMediaType();
+        this.memberOf = new ArrayList<>();
+        memberOf.addAll(parent.getMemberOf());
+        if (parent instanceof Program) {
+            this.episodeOf = new ArrayList<>();
+            episodeOf.addAll(((Program) parent).getEpisodeOf());
         }
+    }
+
+    public ParentRef(String segment, @NonNull String parentMid, @NonNull MediaType parentType) {
+        this.segmentMid = segment;
+        this.midRef = parentMid;
+        this.type = parentType;
     }
 
     @Override
@@ -74,8 +82,6 @@ public class ParentRef implements Serializable, RecursiveParentChildRelation {
         return getParentMid() + "(" + getType() + ")" + ":segment " + getChildMid();
 
     }
-
-
 }
 
 
