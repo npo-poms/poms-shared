@@ -129,6 +129,12 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
+    public String getUploadString() {
+        return nepftpUploadService.get().getUploadString();
+
+    }
+
+    @Override
     public WideVineResponse widevineToken(String ip) {
         return tokenService.get().widevineToken(ip);
     }
