@@ -1,33 +1,29 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
-import nl.vpro.domain.Child;
-import nl.vpro.domain.media.support.AuthorizedDuration;
-import nl.vpro.domain.media.support.MutableOwnable;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.jackson2.Views;
-import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.validation.SegmentValidation;
-import nl.vpro.xml.bind.DurationXmlAdapter;
-import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.time.Instant;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.Instant;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.SortedSet;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.Child;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.jackson2.Views;
+import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.validation.SegmentValidation;
+import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
  * A segment is a view on a program, representing a part of if starting at a given {@link #getStart()} after the beginning of the program (and with a shorter {@link #getDuration()}. It cannot exist alone, and always has a {@link #getParent()}, which always is a {@link Program}.
@@ -239,11 +235,14 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     public void setMidRef(String midRef) {
         if(parent != null) {
             if (midRef != null) {
-                if (parent.getMid().equals(midRef)) {
+                if (Objects.equals(parent.getMid(), midRef)) {
                     return;
                 } else {
                     throw new IllegalStateException("This segments program holds the midRef for this segment");
                 }
+            }
+            if (segmentOf != null) {
+                segmentOf.setMidRef(midRef);
             }
         }
         this.midRef = midRef;
@@ -383,7 +382,11 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     @JsonView(Views.Forward.class)
     public ParentRef getSegmentOf() {
         if (segmentOf == null) {
-            segmentOf = new ParentRef(getMid(), parent);
+            if (parent == null) {
+                segmentOf = new ParentRef(getMid(), getMidRef(), MediaType.PROGRAM);
+            } else {
+                segmentOf = new ParentRef(getMid(), parent);
+            }
         }
         return segmentOf;
     }
