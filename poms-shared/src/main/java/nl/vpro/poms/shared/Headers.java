@@ -66,6 +66,8 @@ public class Headers {
     public static final String NPO_VALIDATION_ERROR_HEADER = X_NPO + "-validation-error";
 
     public static final String NPO_CLIENTIP                = X_NPO + "-clientip";
+
+    public static final String NPO_DISPATCHED_TO           = X_NPO + "-dispatched-to";
 }
 
 
