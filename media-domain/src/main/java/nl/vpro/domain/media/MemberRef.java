@@ -2,8 +2,7 @@ package nl.vpro.domain.media;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -122,10 +121,10 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     private OwnerType owner;
 
     @Transient
-    private Set<RecursiveMemberRef> memberOf;
+    private SortedSet<RecursiveMemberRef> memberOf;
 
     @Transient
-    private Set<RecursiveMemberRef> episodeOf;
+    private SortedSet<RecursiveMemberRef> episodeOf;
 
     @Transient
     private RecursiveMemberRef segmentOf;
@@ -456,7 +455,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlElement(name = "memberOf")
     @JsonView(Views.Forward.class)
-    public Set<RecursiveMemberRef> getMemberOf() {
+    public SortedSet<RecursiveMemberRef> getMemberOf() {
         if (memberOf == null) {
             if (parent != null) {
                 return RecursiveMemberRef.of(parent.getMemberOf());
@@ -467,7 +466,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return memberOf;
     }
 
-    public void setMemberOf(Set<RecursiveMemberRef> memberOfList) {
+    public void setMemberOf(SortedSet<RecursiveMemberRef> memberOfList) {
         this.memberOf = memberOfList;
     }
 
@@ -477,7 +476,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlElement(name = "episodeOf")
     @JsonView(Views.Forward.class)
-    public Set<RecursiveMemberRef> getEpisodeOf() {
+    public SortedSet<RecursiveMemberRef> getEpisodeOf() {
         if (episodeOf == null) {
             if (parent != null && parent instanceof Program) {
                 return RecursiveMemberRef.of(((Program) parent).getEpisodeOf());
@@ -488,7 +487,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return episodeOf;
     }
 
-    public void setEpisodeOf(Set<RecursiveMemberRef> episodeOfList) {
+    public void setEpisodeOf(SortedSet<RecursiveMemberRef> episodeOfList) {
         this.episodeOf = episodeOfList;
     }
 
