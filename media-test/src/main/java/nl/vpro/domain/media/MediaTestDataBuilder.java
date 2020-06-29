@@ -1045,8 +1045,15 @@ public interface MediaTestDataBuilder<
                         .start(Duration.ZERO)
                         .duration(Duration.ofMillis(100000))
                         .build(),
-                    MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(Duration.ofMillis(100000)).duration(Duration.ofMillis(100000)).build())
-                    ;
+                    MediaTestDataBuilder.segment()
+                        .parent(
+                            mediaObject())
+                        .withEverything()
+                        .mid("VPROWON_12345_2")
+                        .start(Duration.ofMillis(100000))
+                        .duration(Duration.ofMillis(100000))
+                        .build())
+                ;
 
 
         }
