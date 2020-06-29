@@ -90,6 +90,8 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         this.segmentOf = segmentOf;
     }
 
+
+
     public static RecursiveMemberRef.Builder builderOf(String childMid, MediaObject parent) {
         RecursiveMemberRef.Builder builder =  RecursiveMemberRef.builder()
             .childMid(childMid);
@@ -106,7 +108,16 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     }
 
     public static RecursiveMemberRef of(MemberRef  ref) {
-        return builderOf(ref.getChildMid(), ref.getParent())
+        RecursiveMemberRef.Builder builder;
+        if (ref.getParent() != null) {
+            builder = builderOf(ref.getChildMid(), ref.getParent());
+        } else {
+            builder = builder()
+                .childMid(ref.getChildMid())
+                .parentMid(ref.getParentMid())
+                .parentType(ref.getType());
+        }
+        return builder
             .index(ref.getNumber())
             .highlighted(ref.isHighlighted())
             .build();
@@ -129,7 +140,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
     @Override
     public String toString() {
-        return getType().name() + ":" + getParentMid() + ":" + getChildMid();
+        return (getType() == null ? "(unknown type)" : getType().name()) + ":" + getParentMid() + ":" + getChildMid();
 
     }
 

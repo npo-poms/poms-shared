@@ -314,9 +314,9 @@
                 </shared:image>
             </images>
             <segmentOf midRef="VPROWON_20001" type="BROADCAST">
-                <memberOf highlighted="false" midRef="VPROWON_20003" index="1"/>
-                <memberOf highlighted="false" midRef="VPROWON_20005" index="2"/>
-                <memberOf highlighted="false" midRef="VPROWON_20005" index="3"/>
+                <memberOf midRef="VPROWON_20003" index="1"/>
+                <memberOf midRef="VPROWON_20005" index="2"/>
+                <memberOf midRef="VPROWON_20005" index="3"/>
             </segmentOf>
             <start>P0DT0H0M0.000S</start>
         </segment>

@@ -1717,7 +1717,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         @NonNull MediaObject group,
         Integer number,
         OwnerType owner) throws CircularReferenceException {
-        return group.createMember(this, number, owner);
+        MemberRef ref = group.createMember(this, number, owner);
+        ref.setParent(group);
+        return ref;
     }
 
     boolean removeMemberOfRef(MediaObject reference) {
