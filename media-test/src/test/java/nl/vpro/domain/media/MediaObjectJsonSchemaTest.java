@@ -376,12 +376,8 @@ public class MediaObjectJsonSchemaTest {
             "    \"highlighted\" : false,\n" +
             "    \"memberOf\" : [ {\n" +
             "      \"midRef\" : \"AVRO_5555555\",\n" +
-            "      \"urnRef\" : \"urn:vpro:media:group:100\",\n" +
             "      \"type\" : \"SERIES\",\n" +
-            "      \"index\" : 1,\n" +
-            "      \"highlighted\" : false,\n" +
-            "      \"memberOf\" : [ ],\n" +
-            "      \"episodeOf\" : [ ]\n" +
+            "      \"index\" : 1\n" +
             "    } ],\n" +
             "    \"episodeOf\" : [ ],\n" +
             "    \"added\" : 0\n" +
@@ -398,12 +394,8 @@ public class MediaObjectJsonSchemaTest {
             "      \"type\" : \"CLIP\",\n" +
             "      \"memberOf\" : [ {\n" +
             "        \"midRef\" : \"AVRO_5555555\",\n" +
-            "        \"urnRef\" : \"urn:vpro:media:group:100\",\n" +
             "        \"type\" : \"SERIES\",\n" +
-            "        \"index\" : 10,\n" +
-            "        \"highlighted\" : false,\n" +
-            "        \"memberOf\" : [ ],\n" +
-            "        \"episodeOf\" : [ ]\n" +
+            "        \"index\" : 10\n" +
             "      } ]\n" +
             "    }\n" +
             "  }, {\n" +
@@ -419,12 +411,8 @@ public class MediaObjectJsonSchemaTest {
             "      \"type\" : \"CLIP\",\n" +
             "      \"memberOf\" : [ {\n" +
             "        \"midRef\" : \"AVRO_5555555\",\n" +
-            "        \"urnRef\" : \"urn:vpro:media:group:100\",\n" +
             "        \"type\" : \"SERIES\",\n" +
-            "        \"index\" : 10,\n" +
-            "        \"highlighted\" : false,\n" +
-            "        \"memberOf\" : [ ],\n" +
-            "        \"episodeOf\" : [ ]\n" +
+            "        \"index\" : 10\n" +
             "      } ]\n" +
             "    }\n" +
             "  } ]\n" +
@@ -458,30 +446,19 @@ public class MediaObjectJsonSchemaTest {
             "    \"highlighted\" : false,\n" +
             "    \"memberOf\" : [ {\n" +
             "      \"midRef\" : \"AVRO_5555555\",\n" +
-            "      \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
             "      \"type\" : \"SERIES\",\n" +
-            "      \"index\" : 1,\n" +
-            "      \"highlighted\" : false,\n" +
-            "      \"memberOf\" : [ ],\n" +
-            "      \"episodeOf\" : [ ]\n" +
+            "      \"index\" : 1\n" +
             "    }, {\n" +
             "      \"midRef\" : \"VPROWON_106\",\n" +
             "      \"type\" : \"SEGMENT\",\n" +
             "      \"index\" : 2,\n" +
-            "      \"highlighted\" : false,\n" +
-            "      \"memberOf\" : [ ],\n" +
-            "      \"episodeOf\" : [ ],\n" +
             "      \"segmentOf\" : {\n" +
             "        \"midRef\" : \"VPROWON_105\",\n" +
             "        \"type\" : \"CLIP\",\n" +
             "        \"memberOf\" : [ {\n" +
             "          \"midRef\" : \"AVRO_5555555\",\n" +
-            "          \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
             "          \"type\" : \"SERIES\",\n" +
-            "          \"index\" : 10,\n" +
-            "          \"highlighted\" : false,\n" +
-            "          \"memberOf\" : [ ],\n" +
-            "          \"episodeOf\" : [ ]\n" +
+            "          \"index\" : 10\n" +
             "        } ]\n" +
             "      }\n" +
             "    } ],\n" +
