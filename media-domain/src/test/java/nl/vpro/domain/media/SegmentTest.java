@@ -64,6 +64,7 @@ public class SegmentTest {
             "  \"embeddable\" : true,\n" +
             "  \"broadcasters\" : [ ],\n" +
             "  \"genres\" : [ ],\n" +
+            "  \"countries\" : [ ],\n" +
             "  \"languages\" : [ ],\n" +
             "  \"start\" : 100,\n" +
             "  \"midRef\" : \"bla\",\n" +
