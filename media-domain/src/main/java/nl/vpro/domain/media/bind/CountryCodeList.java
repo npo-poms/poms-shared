@@ -22,7 +22,6 @@ public class CountryCodeList {
     private CountryCodeList() {
     }
 
-    @Deprecated
     public static class Serializer extends AbstractList.Serializer<Region> {
 
         @Override
@@ -36,7 +35,6 @@ public class CountryCodeList {
         }
     }
 
-    @Deprecated
     public static class Deserializer extends AbstractList.Deserializer<Region> {
 
         @Override
