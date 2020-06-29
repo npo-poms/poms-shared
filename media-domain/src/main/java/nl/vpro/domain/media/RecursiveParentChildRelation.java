@@ -1,6 +1,6 @@
 package nl.vpro.domain.media;
 
-import java.util.Set;
+import java.util.SortedSet;
 
 /**
  *
@@ -10,9 +10,9 @@ import java.util.Set;
  */
 public interface RecursiveParentChildRelation extends ParentChildRelation {
 
-	Set<RecursiveMemberRef> getMemberOf();
+	SortedSet<RecursiveMemberRef> getMemberOf();
 
-	Set<RecursiveMemberRef> getEpisodeOf();
+	SortedSet<RecursiveMemberRef> getEpisodeOf();
 
 	RecursiveMemberRef getSegmentOf();
 
