@@ -432,11 +432,11 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().lean().withMemberOf(new AtomicLong(106)).build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
-        program.getMemberOf().first().getGroup().setMid(null);
-        program.getMemberOf().first().getGroup().setMid("AVRO_7777777");
+        program.getMemberOf().first().getParent().setMid(null);
+        program.getMemberOf().first().getParent().setMid("AVRO_7777777");
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
-        program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
-        program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
+        program.getMemberOf().first().getParent().getMemberOf().first().getParent().setMid(null);
+        program.getMemberOf().first().getParent().getMemberOf().first().getParent().setMid("AVRO_5555555");
         program.getMemberOf().first().setAdded(Instant.EPOCH);
         String actual = toPublisherJson(program);
 
@@ -508,10 +508,10 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L, new AtomicLong(103)).build();
         program.getEpisodeOf().first().setAdded(Instant.EPOCH);
-        program.getEpisodeOf().first().getGroup().setMid(null);
-        program.getEpisodeOf().first().getGroup().setMid("AVRO_7777777");
-        program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
-        program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
+        program.getEpisodeOf().first().getParent().setMid(null);
+        program.getEpisodeOf().first().getParent().setMid("AVRO_7777777");
+        program.getEpisodeOf().first().getParent().getMemberOf().first().getParent().setMid(null);
+        program.getEpisodeOf().first().getParent().getMemberOf().first().getParent().setMid("AVRO_5555555");
 
         String actual = toPublisherJson(program);
 

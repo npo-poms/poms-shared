@@ -429,16 +429,16 @@ public class MediaObjectXmlSchemaTest {
                 "    <descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/>\n" +
                 "    <descendantOf urnRef=\"urn:vpro:media:segment:301\" midRef=\"VPROWON_104\" type=\"SEGMENT\"/>\n" +
                 "    <memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\">\n" +
-                "        <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
+                "        <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"1\"/>\n" +
                 "    </memberOf>\n" +
                 "    <memberOf highlighted=\"false\" midRef=\"VPROWON_104\" index=\"2\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
                 "        <segmentOf midRef=\"VPROWON_103\" type=\"CLIP\">\n" +
-                "            <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
+                "            <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"10\"/>\n" +
                 "        </segmentOf>\n" +
                 "    </memberOf>\n" +
                 "    <memberOf highlighted=\"false\" midRef=\"VPROWON_104\" index=\"3\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
                 "        <segmentOf midRef=\"VPROWON_103\" type=\"CLIP\">\n" +
-                "            <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\"/>\n" +
+                "            <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"10\"/>\n" +
                 "        </segmentOf>\n" +
                 "    </memberOf>\n" +
                 "    <locations/>\n" +
@@ -447,13 +447,24 @@ public class MediaObjectXmlSchemaTest {
                 "    <segments/>\n" +
                 "</program>";
 
-        Program program = program().lean().withMemberOf(id).build();
+        Program program = program().lean()
+                .withMemberOf(id)
+                .build();
+
+        List<MemberRef> refsAsList = new ArrayList<>(program.getMemberOf()); // make accessible by index
+
+        refsAsList.get(0).getParent().setMid(null);
+        refsAsList.get(0).getParent().setMid("AVRO_7777777");
+        refsAsList.get(0).getParent().getMemberOf().first().getParent().setMid(null);
+        refsAsList.get(0).getParent().getMemberOf().first().getParent().setMid("AVRO_5555555");
+        refsAsList.get(0).setAdded(Instant.EPOCH);
+
+
+        assertThat(refsAsList.get(0).getMemberOf().toString()).isEqualTo("[SERIES:AVRO_5555555:AVRO_7777777]"); //
+
+        assertThat(refsAsList.get(1).getSegmentOf().toString()).isEqualTo("CLIP:VPROWON_103:VPROWON_104"); //
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
-        program.getMemberOf().first().getGroup().setMid(null);
-        program.getMemberOf().first().getGroup().setMid("AVRO_7777777");
-        program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
-        program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
-        program.getMemberOf().first().setAdded(Instant.EPOCH);
+
 
         assertThatXml(program).isSimilarTo(expected);
 
@@ -463,7 +474,7 @@ public class MediaObjectXmlSchemaTest {
     public void testEpisodeOfAndDescendantOfGraph() {
 
         AtomicLong id = new AtomicLong(100);
-        String expected = "<program xmlns=\"urn:vpro:media:2009\" type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><program xmlns=\"urn:vpro:media:2009\" type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <credits/>\n" +
             "    <descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"AVRO_5555555\" type=\"SERIES\"/>\n" +
             "    <descendantOf urnRef=\"urn:vpro:media:group:102\" midRef=\"AVRO_7777777\" type=\"SEASON\"/>\n" +
@@ -472,22 +483,27 @@ public class MediaObjectXmlSchemaTest {
             "    <images/>\n" +
             "    <scheduleEvents/>\n" +
             "    <episodeOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:102\">\n" +
-            "        <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:101\"/>\n" +
-            "        <memberOf highlighted=\"false\" midRef=\"VPROWON_106\" index=\"2\" type=\"SEGMENT\">\n" +
+            "        <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"1\"/>\n" +
+            "        <memberOf midRef=\"VPROWON_106\" type=\"SEGMENT\" index=\"2\">\n" +
             "            <segmentOf midRef=\"VPROWON_105\" type=\"CLIP\">\n" +
-            "                <memberOf highlighted=\"false\" midRef=\"AVRO_5555555\" index=\"10\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:101\"/>\n" +
+            "                <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"10\"/>\n" +
             "            </segmentOf>\n" +
             "        </memberOf>\n" +
             "    </episodeOf>\n" +
             "    <segments/>\n" +
-            "</program>";
+            "</program>\n";
 
-        Program program = program().id(id.getAndIncrement()).lean().type(ProgramType.BROADCAST).withEpisodeOf(id.getAndIncrement(), id.getAndIncrement(), id).build();program.getEpisodeOf().first().setAdded(Instant.EPOCH);
+        Program program = program().id(id.getAndIncrement()).lean()
+                .type(ProgramType.BROADCAST)
+                .withEpisodeOf(id.getAndIncrement(), id.getAndIncrement(), id)
+                .build();
+
+        program.getEpisodeOf().first().setAdded(Instant.EPOCH);
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
-        program.getEpisodeOf().first().getGroup().setMid(null);
-        program.getEpisodeOf().first().getGroup().setMid("AVRO_7777777");
-        program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
-        program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
+        program.getEpisodeOf().first().getParent().setMid(null);
+        program.getEpisodeOf().first().getParent().setMid("AVRO_7777777");
+        program.getEpisodeOf().first().getParent().getMemberOf().first().getParent().setMid(null);
+        program.getEpisodeOf().first().getParent().getMemberOf().first().getParent().setMid("AVRO_5555555");
 
         assertThatXml(program).isSimilarTo(expected);
     }

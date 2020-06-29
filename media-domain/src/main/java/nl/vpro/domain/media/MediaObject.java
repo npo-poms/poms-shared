@@ -14,8 +14,8 @@ import java.util.zip.CRC32;
 
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
-import javax.persistence.*;
 import javax.persistence.OrderBy;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import javax.xml.bind.Unmarshaller;
@@ -660,7 +660,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         this.duration = AuthorizedDuration.copy(source.duration);
         source.getCredits().forEach(credits -> this.giveCredits(Credits.copy(credits, this)));
         source.getAwards().forEach(this::addAward);
-        source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getGroup(), ref.getNumber(), ref.getOwner()));
+        source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getParent(), ref.getNumber(), ref.getOwner()));
         this.ageRating = source.ageRating;
         source.getContentRatings().forEach(this::addContentRating);
         source.getEmail().forEach(this::addEmail);
@@ -1254,7 +1254,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @XmlElement(name = "country")
     @JsonProperty("countries")
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonSerialize(using = CountryCodeList.Serializer.class)
+    @JsonDeserialize(using = CountryCodeList.Deserializer.class)
     public List<org.meeuw.i18n.regions.Region> getCountries() {
         if (countries == null) {
             countries = new ArrayList<>();
@@ -1665,7 +1666,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Nullable
     public MemberRef findMemberOfRef(MediaObject owner) {
         for (MemberRef memberRef : memberOf) {
-            if (owner.equals(memberRef.getGroup())) {
+            if (owner.equals(memberRef.getParent())) {
                 return memberRef;
             }
         }
@@ -1679,7 +1680,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         }
 
         for (MemberRef memberRef : memberOf) {
-            if (owner.equals(memberRef.getGroup())) {
+            if (owner.equals(memberRef.getParent())) {
                 if (number == null && memberRef.getNumber() == null
                     || number != null && number.equals(memberRef.getNumber())) {
 
@@ -1727,7 +1728,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             while (it.hasNext()) {
                 MemberRef memberRef = it.next();
 
-                if (memberRef.getGroup().equals(reference)) {
+                if (memberRef.getParent().equals(reference)) {
                     it.remove();
                     success = true;
                     descendantOf = null;
@@ -1948,7 +1949,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             return false;
         }
         for (MemberRef memberRef : memberOf) {
-            if (memberRef.getGroup().equals(ancestor) || (memberRef.getMidRef() != null && memberRef.getMidRef().equals(ancestor.getMid())) || memberRef.getGroup().hasAncestor(ancestor)) {
+            if (memberRef.getParent().equals(ancestor) || (memberRef.getMidRef() != null && memberRef.getMidRef().equals(ancestor.getMid())) || memberRef.getParent().hasAncestor(ancestor)) {
                 return true;
             }
         }
@@ -1970,14 +1971,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     protected void findAncestry(MediaObject ancestor, List<MediaObject> ancestors) {
         if (isMember()) {
             for (MemberRef memberRef : memberOf) {
-                if (memberRef.getGroup().equals(ancestor)) {
+                if (memberRef.getParent().equals(ancestor)) {
                     ancestors.add(ancestor);
                     return;
                 }
 
-                memberRef.getGroup().findAncestry(ancestor, ancestors);
+                memberRef.getParent().findAncestry(ancestor, ancestors);
                 if (!ancestors.isEmpty()) {
-                    ancestors.add(memberRef.getGroup());
+                    ancestors.add(memberRef.getParent());
                     return;
                 }
             }
@@ -1992,7 +1993,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         if (isMember()) {
             for (MemberRef memberRef : memberOf) {
                 if (! memberRef.isVirtual()) {
-                    final MediaObject reference = memberRef.getGroup();
+                    final MediaObject reference = memberRef.getParent();
                     if (set.add(reference)) { // avoid stack overflow if object
                         // happens to be descendant of
                         // it self

@@ -210,9 +210,9 @@
 
   <xs:complexType name="memberRefType">
     <xs:sequence>
-      <xs:element name="episodeOf" type="memberRefType" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="memberOf" type="memberRefType" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="segmentOf" type="parentRefType" minOccurs="0"/>
+      <xs:element name="episodeOf" type="recursiveMemberRef" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="memberOf" type="recursiveMemberRef" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="segmentOf" type="recursiveMemberRef" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="added" type="xs:dateTime"/>
     <xs:attribute name="cridRef" type="xs:string"/>
@@ -223,20 +223,23 @@
     <xs:attribute name="urnRef" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="parentRefType">
+  <xs:complexType name="recursiveMemberRef">
     <xs:sequence>
-      <xs:element name="memberOf" type="memberRefType" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="episodeOf" type="memberRefType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="memberOf" type="recursiveMemberRef" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="episodeOf" type="recursiveMemberRef" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="segmentOf" type="recursiveMemberRef" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="midRef" type="xs:string"/>
     <xs:attribute name="type" type="mediaTypeEnum"/>
+    <xs:attribute name="index" type="xs:int"/>
+    <xs:attribute name="highlighted" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="segmentType">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
-          <xs:element name="segmentOf" type="parentRefType" minOccurs="0"/>
+          <xs:element name="segmentOf" type="recursiveMemberRef" minOccurs="0"/>
           <xs:element name="start" type="xs:duration"/>
         </xs:sequence>
         <xs:attribute name="midRef" type="xs:string" use="required"/>

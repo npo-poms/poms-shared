@@ -1166,14 +1166,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return (T) this;
         }
 
-        public T segmentOf(ParentRef parentRef) {
+        public T segmentOf(RecursiveMemberRef parentRef) {
             mediaObject().setSegmentOf(parentRef);
             return (T) this;
         }
         public T segmentOf(String program, MediaType mediaType) {
 
-            return midRef(program)
-                .segmentOf(new ParentRef(mediaObject.getMid(), program, mediaType));
+            return midRef(program).segmentOf(RecursiveMemberRef.builder().parentMid(program).parentType(mediaType).build());
         }
 
         public T midRef(String midRef) {

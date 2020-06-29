@@ -2,8 +2,8 @@ package nl.vpro.domain.media;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -29,21 +29,22 @@ import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
-import static nl.vpro.domain.media.CollectionUtils.updateList;
-
 /**
+ * <p>
  * Expresses an association between MediaObjects. MediaObjects can become a
  * member or episode of other MediaObjects. The member is the member of this
  * relation which references the aggregating owner.
- * <p/>
+ * </p>
+ * <p>
  * Members or episodes can have an ordering if they are a part of an ordered
  * Group. In that case a MemberRef gets an number value denoting its position in
  * the group. In all other cases this number should retain a null value.
- * <p/>
+ * </p>
+ * <p>
  * Incoming XML has a member-/episodeof element for each member and references
  * the owner by its URN. The urnRef field holds a temporary reference just for
  * this purpose and should never be persisted.
- *
+ *</p>
  * @author roekoe
  * @see MediaObject#memberOf
  * @see Program#episodeOf
@@ -94,7 +95,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     @ManyToOne(optional = false)
     @JoinColumn(name="owner_id")
-    protected MediaObject group;
+    protected MediaObject parent;
 
     @Transient
     protected String urnRef;
@@ -121,30 +122,30 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     private OwnerType owner;
 
     @Transient
-    private List<MemberRef> memberOf;
+    private Set<RecursiveMemberRef> memberOf;
 
     @Transient
-    private List<MemberRef> episodeOf;
+    private Set<RecursiveMemberRef> episodeOf;
 
     @Transient
-    private ParentRef segmentOf;
+    private RecursiveMemberRef segmentOf;
 
     public MemberRef() {
     }
 
-    public MemberRef(MediaObject member, MediaObject group, Integer number, OwnerType owner) {
-        this(null, member, group, number, owner);
+    public MemberRef(MediaObject member, MediaObject parent, Integer number, OwnerType owner) {
+        this(null, member, parent, number, owner);
 
     }
 
-    public MemberRef(Long id, MediaObject member, MediaObject group, Integer number, OwnerType owner) {
-        if(member == null || group == null) {
-            throw new IllegalArgumentException(String.format("Must supply valid member and group. Got member: %1$s and group: %2$s", member, group));
+    public MemberRef(Long id, MediaObject member, MediaObject parent, Integer number, OwnerType owner) {
+        if(member == null || parent == null) {
+            throw new IllegalArgumentException(String.format("Must supply valid member and group. Got member: %1$s and group: %2$s", member, parent));
         }
 
         this.id = id;
         this.member = member;
-        this.group = group;
+        this.parent = parent;
         this.number = number;
         this.owner = owner;
     }
@@ -167,7 +168,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     public MemberRef(MemberRef source, MediaObject member, OwnerType owner) {
         this.member = member;
-        this.group = source.group;
+        this.parent = source.parent;
         this.typeOfGroup = source.typeOfGroup;
         this.number = source.number;
         this.owner = owner;
@@ -183,7 +184,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     private MemberRef(
         Long id,
         MediaObject member,
-        MediaObject group,
+        MediaObject parent,
         Integer number,
         Instant added,
         String midRef,
@@ -193,7 +194,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         OwnerType owner) {
         this.id = id;
         this.member = member;
-        this.group = group;
+        this.parent = parent;
         this.number = number;
         this.midRef = midRef;
         this.cridRef = cridRef;
@@ -221,21 +222,21 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public boolean ownerEqualsOnRef(MemberRef that) {
-        if(group != null && that.getGroup() != null) {
-            return MediaObjects.equalsOnAnyId(group, that.getGroup());
+        if(parent != null && that.getParent() != null) {
+            return MediaObjects.equalsOnAnyId(parent, that.getParent());
         }
 
-        if(group == null && that.getGroup() != null) {
-            MediaObject thatOwner = that.getGroup();
+        if(parent == null && that.getParent() != null) {
+            MediaObject thatOwner = that.getParent();
             return thatOwner.getUrn() != null && thatOwner.getUrn().equals(getUrnRef()) ||
                 thatOwner.getMid() != null && thatOwner.getMid().equals(getMidRef()) ||
                 thatOwner.getCrids().contains(getCridRef());
         }
 
-        if(group != null && that.getGroup() == null) {
-            return group.getUrn() != null && group.getUrn().equals(that.getUrnRef()) ||
-                group.getMid() != null && group.getMid().equals(that.getMidRef()) ||
-                group.getCrids().contains(getCridRef());
+        if(parent != null && that.getParent() == null) {
+            return parent.getUrn() != null && parent.getUrn().equals(that.getUrnRef()) ||
+                parent.getMid() != null && parent.getMid().equals(that.getMidRef()) ||
+                parent.getCrids().contains(getCridRef());
         }
 
         return that.getUrnRef() != null && that.getUrnRef().equals(getUrnRef()) ||
@@ -257,14 +258,14 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @Nullable
-    public MediaObject getGroup() {
-        return group;
+    public MediaObject getParent() {
+        return parent;
     }
 
-    public void setGroup(MediaObject owner) {
+    public void setParent(MediaObject owner) {
         this.urnRef = null;
         this.cridRef = null;
-        this.group = owner;
+        this.parent = owner;
     }
 
 
@@ -314,8 +315,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      */
     @XmlAttribute
     public String getUrnRef() {
-        if(group != null) {
-            return group.getId() == null ? null : group.getUrn();
+        if(parent != null) {
+            return parent.getId() == null ? null : parent.getUrn();
         }
 
         return urnRef;
@@ -331,7 +332,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      * @param value a valid URN or CRID
      */
     public void setUrnRef(String value) {
-        if(group != null) {
+        if(parent != null) {
             throw new IllegalStateException();
         }
 
@@ -344,8 +345,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
             return null;
         }
 
-        if(group != null && group.getCrids().size() > 0) {
-            return group.getCrids().get(0);
+        if(parent != null && parent.getCrids().size() > 0) {
+            return parent.getCrids().get(0);
         }
 
         if(cridRef != null) {
@@ -355,7 +356,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public void setCridRef(String crid) {
-        if(group != null || urnRef != null) {
+        if(parent != null || urnRef != null) {
             throw new IllegalStateException(" ");
         }
 
@@ -369,8 +370,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlAttribute
     public String getMidRef() {
-        if(this.group != null) {
-            return group.getMid();
+        if(this.parent != null) {
+            return parent.getMid();
         }
         return midRef;
     }
@@ -382,7 +383,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public void setMidRef(String midRef) {
-        if(group != null) {
+        if(parent != null) {
             throw new IllegalStateException("Call set midRef on the enclosed owner, this is a JAXB only setter");
         }
 
@@ -392,21 +393,21 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlAttribute
     public MediaType getType() {
-        return group != null ? MediaType.getMediaType(group) : typeOfGroup;
+        return parent != null ? MediaType.getMediaType(parent) : typeOfGroup;
     }
 
     public void setType(MediaType type) {
-        if(group != null && MediaType.getMediaType(group) != type) {
-            throw new IllegalStateException("Supplied type " + type + " does not match owner type " + MediaType.getMediaType(group));
+        if(parent != null && MediaType.getMediaType(parent) != type) {
+            throw new IllegalStateException("Supplied type " + type + " does not match owner type " + MediaType.getMediaType(parent));
         }
         typeOfGroup = type;
     }
 
     boolean isValid() {
         return member != null
-            && group != null
-            && !(group instanceof Group
-            && ((Group) group).isOrdered() && (number == null || number < 1));
+            && parent != null
+            && !(parent instanceof Group
+            && ((Group) parent).isOrdered() && (number == null || number < 1));
     }
 
     @XmlAttribute(name = "index")
@@ -446,7 +447,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      */
     @XmlTransient
     public boolean isVirtual() {
-        return group == null || member == null;
+        return parent == null || member == null;
     }
 
     /**
@@ -455,19 +456,19 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlElement(name = "memberOf")
     @JsonView(Views.Forward.class)
-    public List<MemberRef> getMemberOf() {
+    public Set<RecursiveMemberRef> getMemberOf() {
         if (memberOf == null) {
-            memberOf = new ArrayList<>();
-            if (group != null) {
-                memberOf.addAll(group.getMemberOf());
+            if (parent != null) {
+                return RecursiveMemberRef.of(parent.getMemberOf());
+            } else {
+                memberOf = new TreeSet<>();
             }
         }
-
         return memberOf;
     }
 
-    public void setMemberOf(List<MemberRef> memberOfList) {
-        this.memberOf = updateList(this.memberOf, memberOfList);
+    public void setMemberOf(Set<RecursiveMemberRef> memberOfList) {
+        this.memberOf = memberOfList;
     }
 
     /**
@@ -476,19 +477,19 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlElement(name = "episodeOf")
     @JsonView(Views.Forward.class)
-    public List<MemberRef> getEpisodeOf() {
+    public Set<RecursiveMemberRef> getEpisodeOf() {
         if (episodeOf == null) {
-            episodeOf = new ArrayList<>();
-            if (group != null && group instanceof Program) {
-                episodeOf.addAll(((Program) group).getEpisodeOf());
+            if (parent != null && parent instanceof Program) {
+                return RecursiveMemberRef.of(((Program) parent).getEpisodeOf());
+            } else {
+                episodeOf = new TreeSet<>();
             }
         }
-
         return episodeOf;
     }
 
-    public void setEpisodeOf(List<MemberRef> episodeOfList) {
-        this.episodeOf = updateList(this.episodeOf, episodeOfList);
+    public void setEpisodeOf(Set<RecursiveMemberRef> episodeOfList) {
+        this.episodeOf = episodeOfList;
     }
 
     /**
@@ -497,16 +498,16 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlElement(name = "segmentOf")
     @JsonView(Views.Forward.class)
-    public ParentRef getSegmentOf() {
+    public RecursiveMemberRef getSegmentOf() {
         if (segmentOf == null) {
-            if (group != null && group instanceof Segment) {
-                segmentOf = new ParentRef(group.getMid(), ((Segment) group).parent);
+            if (parent != null && parent instanceof Segment) {
+                segmentOf = RecursiveMemberRef.of((Segment) parent);
             }
         }
         return segmentOf;
     }
 
-    public void setSegmentOf(ParentRef segmentOf) {
+    public void setSegmentOf(RecursiveMemberRef segmentOf) {
         this.segmentOf = segmentOf;
     }
 
