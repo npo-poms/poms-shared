@@ -453,10 +453,10 @@ public class MediaObjectXmlSchemaTest {
 
         List<MemberRef> refsAsList = new ArrayList<>(program.getMemberOf()); // make accessible by index
 
-        refsAsList.get(0).getParent().setMid(null);
-        refsAsList.get(0).getParent().setMid("AVRO_7777777");
-        refsAsList.get(0).getParent().getMemberOf().first().getParent().setMid(null);
-        refsAsList.get(0).getParent().getMemberOf().first().getParent().setMid("AVRO_5555555");
+        refsAsList.get(0).getGroup().setMid(null);
+        refsAsList.get(0).getGroup().setMid("AVRO_7777777");
+        refsAsList.get(0).getGroup().getMemberOf().first().getGroup().setMid(null);
+        refsAsList.get(0).getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
         refsAsList.get(0).setAdded(Instant.EPOCH);
 
 
@@ -500,10 +500,10 @@ public class MediaObjectXmlSchemaTest {
 
         program.getEpisodeOf().first().setAdded(Instant.EPOCH);
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
-        program.getEpisodeOf().first().getParent().setMid(null);
-        program.getEpisodeOf().first().getParent().setMid("AVRO_7777777");
-        program.getEpisodeOf().first().getParent().getMemberOf().first().getParent().setMid(null);
-        program.getEpisodeOf().first().getParent().getMemberOf().first().getParent().setMid("AVRO_5555555");
+        program.getEpisodeOf().first().getGroup().setMid(null);
+        program.getEpisodeOf().first().getGroup().setMid("AVRO_7777777");
+        program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
+        program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
 
         assertThatXml(program).isSimilarTo(expected);
     }

@@ -221,7 +221,7 @@ public class MediaObjectsTest {
         Optional<List<MemberRef>> path = MediaObjects.getPath(g1, p, descendants);
 
         log.info("{}", path);
-        assertThat(path.get().stream().map(MemberRef::getParent).collect(Collectors.toList())).containsExactly(g2, g1);
+        assertThat(path.get().stream().map(MemberRef::getGroup).collect(Collectors.toList())).containsExactly(g2, g1);
 
 
     }

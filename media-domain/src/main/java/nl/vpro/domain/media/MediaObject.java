@@ -660,7 +660,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         this.duration = AuthorizedDuration.copy(source.duration);
         source.getCredits().forEach(credits -> this.giveCredits(Credits.copy(credits, this)));
         source.getAwards().forEach(this::addAward);
-        source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getParent(), ref.getNumber(), ref.getOwner()));
+        source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getGroup(), ref.getNumber(), ref.getOwner()));
         this.ageRating = source.ageRating;
         source.getContentRatings().forEach(this::addContentRating);
         source.getEmail().forEach(this::addEmail);
@@ -1666,7 +1666,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Nullable
     public MemberRef findMemberOfRef(MediaObject owner) {
         for (MemberRef memberRef : memberOf) {
-            if (owner.equals(memberRef.getParent())) {
+            if (owner.equals(memberRef.getGroup())) {
                 return memberRef;
             }
         }
@@ -1680,7 +1680,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         }
 
         for (MemberRef memberRef : memberOf) {
-            if (owner.equals(memberRef.getParent())) {
+            if (owner.equals(memberRef.getGroup())) {
                 if (number == null && memberRef.getNumber() == null
                     || number != null && number.equals(memberRef.getNumber())) {
 
@@ -1718,7 +1718,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         Integer number,
         OwnerType owner) throws CircularReferenceException {
         MemberRef ref = group.createMember(this, number, owner);
-        ref.setParent(group);
+        ref.setGroup(group);
         return ref;
     }
 
@@ -1730,7 +1730,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             while (it.hasNext()) {
                 MemberRef memberRef = it.next();
 
-                if (memberRef.getParent().equals(reference)) {
+                if (memberRef.getGroup().equals(reference)) {
                     it.remove();
                     success = true;
                     descendantOf = null;
@@ -1951,7 +1951,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             return false;
         }
         for (MemberRef memberRef : memberOf) {
-            if (memberRef.getParent().equals(ancestor) || (memberRef.getMidRef() != null && memberRef.getMidRef().equals(ancestor.getMid())) || memberRef.getParent().hasAncestor(ancestor)) {
+            if (memberRef.getGroup().equals(ancestor) || (memberRef.getMidRef() != null && memberRef.getMidRef().equals(ancestor.getMid())) || memberRef.getGroup().hasAncestor(ancestor)) {
                 return true;
             }
         }
@@ -1973,14 +1973,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     protected void findAncestry(MediaObject ancestor, List<MediaObject> ancestors) {
         if (isMember()) {
             for (MemberRef memberRef : memberOf) {
-                if (memberRef.getParent().equals(ancestor)) {
+                if (memberRef.getGroup().equals(ancestor)) {
                     ancestors.add(ancestor);
                     return;
                 }
 
-                memberRef.getParent().findAncestry(ancestor, ancestors);
+                memberRef.getGroup().findAncestry(ancestor, ancestors);
                 if (!ancestors.isEmpty()) {
-                    ancestors.add(memberRef.getParent());
+                    ancestors.add(memberRef.getGroup());
                     return;
                 }
             }
@@ -1995,7 +1995,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         if (isMember()) {
             for (MemberRef memberRef : memberOf) {
                 if (! memberRef.isVirtual()) {
-                    final MediaObject reference = memberRef.getParent();
+                    final MediaObject reference = memberRef.getGroup();
                     if (set.add(reference)) { // avoid stack overflow if object
                         // happens to be descendant of
                         // it self

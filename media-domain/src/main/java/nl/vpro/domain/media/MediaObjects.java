@@ -413,12 +413,12 @@ public class MediaObjects {
                 }
             }
             for (MemberRef memberRef : mediaObject.getMemberOf()) {
-                matchBroadcasters(broadcasterService, memberRef.getParent(), handled);
+                matchBroadcasters(broadcasterService, memberRef.getGroup(), handled);
             }
             if (mediaObject instanceof Program) {
                 Program p = (Program) mediaObject;
                 for (MemberRef memberRef : p.getEpisodeOf()) {
-                    matchBroadcasters(broadcasterService, memberRef.getParent(), handled);
+                    matchBroadcasters(broadcasterService, memberRef.getGroup(), handled);
                 }
             }
         }
