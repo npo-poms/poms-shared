@@ -109,8 +109,8 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
     public static RecursiveMemberRef of(MemberRef  ref) {
         RecursiveMemberRef.Builder builder;
-        if (ref.getParent() != null) {
-            builder = builderOf(ref.getChildMid(), ref.getParent());
+        if (ref.getGroup() != null) {
+            builder = builderOf(ref.getChildMid(), ref.getGroup());
         } else {
             builder = builder()
                 .childMid(ref.getChildMid())
