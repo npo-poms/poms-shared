@@ -575,13 +575,14 @@ public interface MediaTestDataBuilder<
             throw new RuntimeException(e);
         }
         Program program = program().withMid(mids).id(300L).type(ProgramType.CLIP).memberOf(series, 10).build();
-        Segment segment = segment().withMid(mids).id(301L).parent(program).build();
+        Segment segment = segment().withMid(mids).id(301L)
+                .parent(program)
+                .build();
 
 
-        return
-            memberOf(season, 1)
-                .memberOf(segment, 2)
-                .memberOf(segment, 3);
+        return memberOf(season, 1)
+            .memberOf(segment, 2)
+            .memberOf(segment, 3);
     }
 
 

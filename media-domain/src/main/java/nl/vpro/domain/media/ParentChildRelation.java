@@ -24,7 +24,6 @@ public interface ParentChildRelation {
 
 	String getChildMid();
 
-
 	/**
 	 * The type of the parent
 	 */

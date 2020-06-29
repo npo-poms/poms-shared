@@ -81,7 +81,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     private OwnerType owner;
 
     @Transient
-    private ParentRef segmentOf;
+    private RecursiveMemberRef segmentOf;
 
     public Segment() {
     }
@@ -380,18 +380,18 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
 
     @XmlElement(name = "segmentOf")
     @JsonView(Views.Forward.class)
-    public ParentRef getSegmentOf() {
+    public RecursiveMemberRef getSegmentOf() {
         if (segmentOf == null) {
-            if (parent == null) {
-                segmentOf = new ParentRef(getMid(), getMidRef(), MediaType.PROGRAM);
+            if (parent != null) {
+                segmentOf = RecursiveMemberRef.builderOf(getMid(), parent).build();
             } else {
-                segmentOf = new ParentRef(getMid(), parent);
+                segmentOf = RecursiveMemberRef.builder().childMid(getMid()).parentMid(getMidRef()).parentType(MediaType.PROGRAM).build(); // parentType may be wrong.
             }
         }
         return segmentOf;
     }
 
-    public void setSegmentOf(ParentRef parentRef) {
+    public void setSegmentOf(RecursiveMemberRef parentRef) {
         this.segmentOf = parentRef;
     }
 }

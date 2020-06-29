@@ -1,18 +1,20 @@
 package nl.vpro.domain.media;
 
-import java.util.List;
+import java.util.Set;
 
 /**
+ *
+ *
  * @author Michiel Meeuwissen
  * @since 5.13.1
  */
 public interface RecursiveParentChildRelation extends ParentChildRelation {
 
-	List<MemberRef> getMemberOf();
+	Set<RecursiveMemberRef> getMemberOf();
 
-	List<MemberRef> getEpisodeOf();
+	Set<RecursiveMemberRef> getEpisodeOf();
 
-	ParentRef getSegmentOf();
+	RecursiveMemberRef getSegmentOf();
 
 
 }

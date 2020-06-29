@@ -1,18 +1,22 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import nl.vpro.domain.media.support.Ownable;
-import nl.vpro.domain.media.support.OwnerType;
-import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.io.Serializable;
+import java.time.Instant;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.*;
-import java.io.Serializable;
-import java.time.Instant;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnerType;
 
 /**
  * An representation of a memberRef also having a 'memberRef' attribute in the XML. A {@link MemberRef} doesn't have that
@@ -167,6 +171,7 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
         this.highlighted = highlighted;
     }
 
+    @Override
     @XmlAttribute
     public MediaType getType() {
         return type;
@@ -186,6 +191,7 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
     }
 
     @XmlAttribute
+    @Override
     public String getMidRef() {
         return midRef;
     }
