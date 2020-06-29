@@ -159,16 +159,16 @@
             <media:descendantOf midRef="VPROWON_30003" type="SEGMENT"/>
             <media:descendantOf midRef="VPROWON_30004" type="SEASON"/>
             <media:memberOf highlighted="false" midRef="VPROWON_20003" index="1" type="SEASON" urnRef="urn:vpro:media:group:200">
-                <media:memberOf highlighted="false" midRef="VPROWON_20002" index="1" type="SERIES" urnRef="urn:vpro:media:group:100"/>
+                <media:memberOf midRef="VPROWON_20002" type="SERIES" index="1"/>
             </media:memberOf>
             <media:memberOf highlighted="false" midRef="VPROWON_20005" index="2" type="SEGMENT" urnRef="urn:vpro:media:segment:301">
                 <media:segmentOf midRef="VPROWON_20004" type="CLIP">
-                    <media:memberOf highlighted="false" midRef="VPROWON_20002" index="10" type="SERIES" urnRef="urn:vpro:media:group:100"/>
+                    <media:memberOf midRef="VPROWON_20002" type="SERIES" index="10"/>
                 </media:segmentOf>
             </media:memberOf>
             <media:memberOf highlighted="false" midRef="VPROWON_20005" index="3" type="SEGMENT" urnRef="urn:vpro:media:segment:301">
                 <media:segmentOf midRef="VPROWON_20004" type="CLIP">
-                    <media:memberOf highlighted="false" midRef="VPROWON_20002" index="10" type="SERIES" urnRef="urn:vpro:media:group:100"/>
+                    <media:memberOf midRef="VPROWON_20002" type="SERIES" index="10"/>
                 </media:segmentOf>
             </media:memberOf>
             <media:ageRating>12</media:ageRating>
@@ -294,10 +294,10 @@
                 </media:scheduleEvent>
             </media:scheduleEvents>
             <media:episodeOf highlighted="false" midRef="VPROWON_30004" index="1" type="SEASON">
-                <media:memberOf highlighted="false" midRef="VPROWON_30001" index="1" type="SERIES"/>
-                <media:memberOf highlighted="false" midRef="VPROWON_30003" index="2" type="SEGMENT">
+                <media:memberOf midRef="VPROWON_30001" type="SERIES" index="1"/>
+                <media:memberOf midRef="VPROWON_30003" type="SEGMENT" index="2">
                     <media:segmentOf midRef="VPROWON_30002" type="CLIP">
-                        <media:memberOf highlighted="false" midRef="VPROWON_30001" index="10" type="SERIES"/>
+                        <media:memberOf midRef="VPROWON_30001" type="SERIES" index="10"/>
                     </media:segmentOf>
                 </media:memberOf>
             </media:episodeOf>
@@ -433,16 +433,16 @@
                     <media:descendantOf urnRef="urn:vpro:media:program:12" midRef="VPROWON_DG_30010" type="BROADCAST"/>
                     <media:descendantOf urnRef="urn:vpro:media:segment:301" midRef="VPROWON_DG_30011" type="SEGMENT"/>
                     <media:memberOf highlighted="false" midRef="VPROWON_20010" index="1" type="SEASON" urnRef="urn:vpro:media:group:200">
-                        <media:memberOf highlighted="false" midRef="VPROWON_20009" index="1" type="SERIES" urnRef="urn:vpro:media:group:100"/>
+                        <media:memberOf midRef="VPROWON_20009" type="SERIES" index="1"/>
                     </media:memberOf>
                     <media:memberOf highlighted="false" midRef="VPROWON_20012" index="2" type="SEGMENT" urnRef="urn:vpro:media:segment:301">
                         <media:segmentOf midRef="VPROWON_20011" type="CLIP">
-                            <media:memberOf highlighted="false" midRef="VPROWON_20009" index="10" type="SERIES" urnRef="urn:vpro:media:group:100"/>
+                            <media:memberOf midRef="VPROWON_20009" type="SERIES" index="10"/>
                         </media:segmentOf>
                     </media:memberOf>
                     <media:memberOf highlighted="false" midRef="VPROWON_20012" index="3" type="SEGMENT" urnRef="urn:vpro:media:segment:301">
                         <media:segmentOf midRef="VPROWON_20011" type="CLIP">
-                            <media:memberOf highlighted="false" midRef="VPROWON_20009" index="10" type="SERIES" urnRef="urn:vpro:media:group:100"/>
+                            <media:memberOf midRef="VPROWON_20009" type="SERIES" index="10"/>
                         </media:segmentOf>
                     </media:memberOf>
                     <media:ageRating>12</media:ageRating>
@@ -532,24 +532,24 @@
                         </shared:image>
                     </media:images>
                     <media:segmentOf midRef="VPROWON_20001" type="BROADCAST">
-                        <media:memberOf highlighted="false" midRef="VPROWON_20003" index="1" type="SEASON" urnRef="urn:vpro:media:group:200">
-                            <media:memberOf highlighted="false" midRef="VPROWON_20002" index="1" type="SERIES" urnRef="urn:vpro:media:group:100"/>
+                        <media:memberOf midRef="VPROWON_20003" type="SEASON" index="1">
+                            <media:memberOf midRef="VPROWON_20002" type="SERIES" index="1"/>
                         </media:memberOf>
-                        <media:memberOf highlighted="false" midRef="VPROWON_20005" index="2" type="SEGMENT" urnRef="urn:vpro:media:segment:301">
+                        <media:memberOf midRef="VPROWON_20005" type="SEGMENT" index="2">
                             <media:segmentOf midRef="VPROWON_20004" type="CLIP">
-                                <media:memberOf highlighted="false" midRef="VPROWON_20002" index="10" type="SERIES" urnRef="urn:vpro:media:group:100"/>
+                                <media:memberOf midRef="VPROWON_20002" type="SERIES" index="10"/>
                             </media:segmentOf>
                         </media:memberOf>
-                        <media:memberOf highlighted="false" midRef="VPROWON_20005" index="3" type="SEGMENT" urnRef="urn:vpro:media:segment:301">
+                        <media:memberOf midRef="VPROWON_20005" type="SEGMENT" index="3">
                             <media:segmentOf midRef="VPROWON_20004" type="CLIP">
-                                <media:memberOf highlighted="false" midRef="VPROWON_20002" index="10" type="SERIES" urnRef="urn:vpro:media:group:100"/>
+                                <media:memberOf midRef="VPROWON_20002" type="SERIES" index="10"/>
                             </media:segmentOf>
                         </media:memberOf>
-                        <media:episodeOf highlighted="false" midRef="VPROWON_30004" index="1" type="SEASON">
-                            <media:memberOf highlighted="false" midRef="VPROWON_30001" index="1" type="SERIES"/>
-                            <media:memberOf highlighted="false" midRef="VPROWON_30003" index="2" type="SEGMENT">
+                        <media:episodeOf midRef="VPROWON_30004" type="SEASON" index="1">
+                            <media:memberOf midRef="VPROWON_30001" type="SERIES" index="1"/>
+                            <media:memberOf midRef="VPROWON_30003" type="SEGMENT" index="2">
                                 <media:segmentOf midRef="VPROWON_30002" type="CLIP">
-                                    <media:memberOf highlighted="false" midRef="VPROWON_30001" index="10" type="SERIES"/>
+                                    <media:memberOf midRef="VPROWON_30001" type="SERIES" index="10"/>
                                 </media:segmentOf>
                             </media:memberOf>
                         </media:episodeOf>

@@ -60,27 +60,18 @@
         "memberOf" : [ {
           "midRef" : "VPROWON_30001",
           "type" : "SERIES",
-          "index" : 1,
-          "highlighted" : false,
-          "memberOf" : [ ],
-          "episodeOf" : [ ]
+          "index" : 1
         }, {
           "midRef" : "VPROWON_30003",
           "type" : "SEGMENT",
           "index" : 2,
-          "highlighted" : false,
-          "memberOf" : [ ],
-          "episodeOf" : [ ],
           "segmentOf" : {
             "midRef" : "VPROWON_30002",
             "type" : "CLIP",
             "memberOf" : [ {
               "midRef" : "VPROWON_30001",
               "type" : "SERIES",
-              "index" : 10,
-              "highlighted" : false,
-              "memberOf" : [ ],
-              "episodeOf" : [ ]
+              "index" : 10
             } ]
           }
         } ],
@@ -355,12 +346,8 @@
         "highlighted" : false,
         "memberOf" : [ {
           "midRef" : "VPROWON_20002",
-          "urnRef" : "urn:vpro:media:group:100",
           "type" : "SERIES",
-          "index" : 1,
-          "highlighted" : false,
-          "memberOf" : [ ],
-          "episodeOf" : [ ]
+          "index" : 1
         } ],
         "episodeOf" : [ ]
       }, {
@@ -376,12 +363,8 @@
           "type" : "CLIP",
           "memberOf" : [ {
             "midRef" : "VPROWON_20002",
-            "urnRef" : "urn:vpro:media:group:100",
             "type" : "SERIES",
-            "index" : 10,
-            "highlighted" : false,
-            "memberOf" : [ ],
-            "episodeOf" : [ ]
+            "index" : 10
           } ]
         }
       }, {
@@ -397,12 +380,8 @@
           "type" : "CLIP",
           "memberOf" : [ {
             "midRef" : "VPROWON_20002",
-            "urnRef" : "urn:vpro:media:group:100",
             "type" : "SERIES",
-            "index" : 10,
-            "highlighted" : false,
-            "memberOf" : [ ],
-            "episodeOf" : [ ]
+            "index" : 10
           } ]
         }
       } ],
@@ -952,12 +931,8 @@
           "highlighted" : false,
           "memberOf" : [ {
             "midRef" : "VPROWON_20009",
-            "urnRef" : "urn:vpro:media:group:100",
             "type" : "SERIES",
-            "index" : 1,
-            "highlighted" : false,
-            "memberOf" : [ ],
-            "episodeOf" : [ ]
+            "index" : 1
           } ],
           "episodeOf" : [ ]
         }, {
@@ -973,12 +948,8 @@
             "type" : "CLIP",
             "memberOf" : [ {
               "midRef" : "VPROWON_20009",
-              "urnRef" : "urn:vpro:media:group:100",
               "type" : "SERIES",
-              "index" : 10,
-              "highlighted" : false,
-              "memberOf" : [ ],
-              "episodeOf" : [ ]
+              "index" : 10
             } ]
           }
         }, {
@@ -994,12 +965,8 @@
             "type" : "CLIP",
             "memberOf" : [ {
               "midRef" : "VPROWON_20009",
-              "urnRef" : "urn:vpro:media:group:100",
               "type" : "SERIES",
-              "index" : 10,
-              "highlighted" : false,
-              "memberOf" : [ ],
-              "episodeOf" : [ ]
+              "index" : 10
             } ]
           }
         } ],
@@ -1199,96 +1166,62 @@
           "type" : "BROADCAST",
           "memberOf" : [ {
             "midRef" : "VPROWON_20003",
-            "urnRef" : "urn:vpro:media:group:200",
             "type" : "SEASON",
-            "index" : 1,
-            "highlighted" : false,
             "memberOf" : [ {
               "midRef" : "VPROWON_20002",
-              "urnRef" : "urn:vpro:media:group:100",
               "type" : "SERIES",
-              "index" : 1,
-              "highlighted" : false,
-              "memberOf" : [ ],
-              "episodeOf" : [ ]
+              "index" : 1
             } ],
-            "episodeOf" : [ ]
+            "index" : 1
           }, {
             "midRef" : "VPROWON_20005",
-            "urnRef" : "urn:vpro:media:segment:301",
             "type" : "SEGMENT",
             "index" : 2,
-            "highlighted" : false,
-            "memberOf" : [ ],
-            "episodeOf" : [ ],
             "segmentOf" : {
               "midRef" : "VPROWON_20004",
               "type" : "CLIP",
               "memberOf" : [ {
                 "midRef" : "VPROWON_20002",
-                "urnRef" : "urn:vpro:media:group:100",
                 "type" : "SERIES",
-                "index" : 10,
-                "highlighted" : false,
-                "memberOf" : [ ],
-                "episodeOf" : [ ]
+                "index" : 10
               } ]
             }
           }, {
             "midRef" : "VPROWON_20005",
-            "urnRef" : "urn:vpro:media:segment:301",
             "type" : "SEGMENT",
             "index" : 3,
-            "highlighted" : false,
-            "memberOf" : [ ],
-            "episodeOf" : [ ],
             "segmentOf" : {
               "midRef" : "VPROWON_20004",
               "type" : "CLIP",
               "memberOf" : [ {
                 "midRef" : "VPROWON_20002",
-                "urnRef" : "urn:vpro:media:group:100",
                 "type" : "SERIES",
-                "index" : 10,
-                "highlighted" : false,
-                "memberOf" : [ ],
-                "episodeOf" : [ ]
+                "index" : 10
               } ]
             }
           } ],
           "episodeOf" : [ {
             "midRef" : "VPROWON_30004",
             "type" : "SEASON",
-            "index" : 1,
-            "highlighted" : false,
             "memberOf" : [ {
               "midRef" : "VPROWON_30001",
               "type" : "SERIES",
-              "index" : 1,
-              "highlighted" : false,
-              "memberOf" : [ ],
-              "episodeOf" : [ ]
+              "index" : 1
             }, {
               "midRef" : "VPROWON_30003",
               "type" : "SEGMENT",
               "index" : 2,
-              "highlighted" : false,
-              "memberOf" : [ ],
-              "episodeOf" : [ ],
               "segmentOf" : {
                 "midRef" : "VPROWON_30002",
                 "type" : "CLIP",
                 "memberOf" : [ {
                   "midRef" : "VPROWON_30001",
                   "type" : "SERIES",
-                  "index" : 10,
-                  "highlighted" : false,
-                  "memberOf" : [ ],
-                  "episodeOf" : [ ]
+                  "index" : 10
                 } ]
               }
             } ],
-            "episodeOf" : [ ]
+            "index" : 1
           } ]
         },
         "publishDate" : 1425603600000

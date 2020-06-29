@@ -271,12 +271,8 @@
     "highlighted" : false,
     "memberOf" : [ {
       "midRef" : "VPROWON_20002",
-      "urnRef" : "urn:vpro:media:group:100",
       "type" : "SERIES",
-      "index" : 1,
-      "highlighted" : false,
-      "memberOf" : [ ],
-      "episodeOf" : [ ]
+      "index" : 1
     } ],
     "episodeOf" : [ ]
   }, {
@@ -292,12 +288,8 @@
       "type" : "CLIP",
       "memberOf" : [ {
         "midRef" : "VPROWON_20002",
-        "urnRef" : "urn:vpro:media:group:100",
         "type" : "SERIES",
-        "index" : 10,
-        "highlighted" : false,
-        "memberOf" : [ ],
-        "episodeOf" : [ ]
+        "index" : 10
       } ]
     }
   }, {
@@ -313,12 +305,8 @@
       "type" : "CLIP",
       "memberOf" : [ {
         "midRef" : "VPROWON_20002",
-        "urnRef" : "urn:vpro:media:group:100",
         "type" : "SERIES",
-        "index" : 10,
-        "highlighted" : false,
-        "memberOf" : [ ],
-        "episodeOf" : [ ]
+        "index" : 10
       } ]
     }
   } ],
@@ -511,6 +499,8 @@
     "name" : "Rutte, Mark"
   } ],
   "start" : 120000,
-  "segmentOf" : { },
+  "segmentOf" : {
+    "type" : "PROGRAM"
+  },
   "publishDate" : 1425603600000
 }

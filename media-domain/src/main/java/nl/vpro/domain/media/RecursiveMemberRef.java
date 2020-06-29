@@ -91,14 +91,18 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     }
 
     public static RecursiveMemberRef.Builder builderOf(String childMid, MediaObject parent) {
-        return RecursiveMemberRef.builder()
-            .childMid(childMid)
-            .parentMid(parent.getMid())
-            .parentType(parent.getMediaType())
-            .memberOf(of(parent.getMemberOf()))
-            .episodeOf(parent instanceof Program ? of(((Program) parent).getEpisodeOf()) : null)
-            .segmentOf(parent instanceof Segment ? of(((Segment) parent)): null)
-            ;
+        RecursiveMemberRef.Builder builder =  RecursiveMemberRef.builder()
+            .childMid(childMid);
+
+        if (parent != null) {
+            builder.parentMid(parent.getMid())
+                .parentType(parent.getMediaType())
+                .memberOf(of(parent.getMemberOf()))
+
+                .episodeOf(parent instanceof Program ? of(((Program) parent).getEpisodeOf()) : null)
+                .segmentOf(parent instanceof Segment ? of(((Segment) parent)) : null);
+        }
+        return builder;
     }
 
     public static RecursiveMemberRef of(MemberRef  ref) {
