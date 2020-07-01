@@ -124,7 +124,9 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max,
+        @QueryParam(DELETED) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Boolean  deleted
+
     );
 
     @POST
