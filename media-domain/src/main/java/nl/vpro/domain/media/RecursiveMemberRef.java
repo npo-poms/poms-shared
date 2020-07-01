@@ -18,13 +18,17 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "recursiveMemberRef",
-        propOrder = {"memberOf", "episodeOf", "segmentOf"})
-@JsonPropertyOrder({
-        "midRef",
-        "urnRef",
-        "type",
+    propOrder = {
         "memberOf",
-        "episodeOf"
+        "episodeOf",
+        "segmentOf"}
+)
+@JsonPropertyOrder({
+    "midRef",
+    "type",
+    "memberOf",
+    "episodeOf",
+    "segmentOf"
 })
 @Setter
 public class RecursiveMemberRef implements Serializable, RecursiveParentChildRelation, Comparable<RecursiveMemberRef> {

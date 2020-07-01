@@ -387,11 +387,12 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
                     .builderOf(getMid(), parent)
                     .build();
             } else if (getMidRef() != null) {
+                MediaType type = getDescendantOf().stream().filter(m -> m.midRef.equals(getMidRef())).map(DescendantRef::getType).findFirst().orElse(MediaType.PROGRAM);
                 segmentOf = RecursiveMemberRef.builder()
                     .childMid(getMid())
                     .parentMid(getMidRef())
-                    .parentType(MediaType.PROGRAM)
-                    .build(); // parentType may be wrong.
+                    .parentType(type)
+                    .build();
             }
         }
         return segmentOf;
