@@ -31,6 +31,8 @@ public class Constants {
     public static final String MAX = "max";
     public static final String ASC = "asc";
     public static final String ORDER = "order";
+    public static final String DELETED = "deleted";
+
 
     public static final String MAX_INTEGER = "" + Integer.MAX_VALUE;
 
