@@ -58,6 +58,7 @@ public interface MediaBackendRestService {
     String STEAL_CRIDS = "stealcrids";
     String IMAGE_METADATA = "imageMetadata";
     String OWNER = "owner";
+    String DELETES = "deletes";
     String PUBLISH = "publish";
 
     String VALIDATE_INPUT = "validateInput";
@@ -72,6 +73,9 @@ public interface MediaBackendRestService {
     String STEAL_CRIDS_DESCRIPTION = "When set to true, and you submit an object with both crid and mid (or you used lookupcrid=false, and generate a mid), and the crid existed already for a different mid, then this crid will be (if allowed) removed from the old object ";
     String IMAGE_METADATA_DESCRIPTION = "When set to true, the image backend server will try to fill in missing image metata automaticly, using several external API's";
     String OWNER_DESCRIPTION = "if your account has sufficient rights, you may get and post with a different owner type than BROADCASTER";
+
+    String DELETES_DESCRIPTION = "also include members/episodes that are deleted (if possible, you may lack rights)";
+
     String PUBLISH_DESCRIPTION = "if you set this to true, then the required change will be published immediately";
 
 
@@ -213,7 +217,8 @@ public interface MediaBackendRestService {
         @QueryParam(MAX) @DefaultValue("20") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
-        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner,
+        @QueryParam(DELETES) Boolean  deleted
     ) throws IOException;
 
     @GET
@@ -224,7 +229,8 @@ public interface MediaBackendRestService {
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("20") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(DELETES) Boolean  deleted
     ) throws IOException;
 
     @PUT
@@ -243,7 +249,8 @@ public interface MediaBackendRestService {
     MediaUpdateList<MemberRefUpdate> getMemberOfs(
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(DELETES) Boolean  deleted
     ) throws IOException;
 
     @POST
@@ -278,7 +285,8 @@ public interface MediaBackendRestService {
         @QueryParam(MAX) @DefaultValue("10") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
-        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner,
+        @QueryParam(DELETES) Boolean  deleted
     ) throws IOException;
 
     @GET
@@ -288,7 +296,8 @@ public interface MediaBackendRestService {
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("10") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(DELETES) Boolean  deleted
     ) throws IOException;
 
     @PUT
@@ -306,7 +315,8 @@ public interface MediaBackendRestService {
     @Path("program/{id:.*}/episodeOfs")
     MediaUpdateList<MemberRefUpdate> getEpisodeOfs(
         @Encoded @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(DELETES) Boolean  deleted
     ) throws IOException;
 
     @POST
