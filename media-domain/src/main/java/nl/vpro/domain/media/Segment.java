@@ -386,7 +386,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
                 segmentOf = RecursiveMemberRef
                     .builderOf(getMid(), parent)
                     .build();
-            } else {
+            } else if (getMidRef() != null) {
                 segmentOf = RecursiveMemberRef.builder()
                     .childMid(getMid())
                     .parentMid(getMidRef())
