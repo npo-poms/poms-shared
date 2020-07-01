@@ -499,8 +499,5 @@
     "name" : "Rutte, Mark"
   } ],
   "start" : 120000,
-  "segmentOf" : {
-    "type" : "PROGRAM"
-  },
   "publishDate" : 1425603600000
 }
