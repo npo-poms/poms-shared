@@ -61,7 +61,7 @@ public interface MediaRestService {
      *
      * This only gives examples. It doesn't allow for any filtering, and is not fit for much data. See e.g. {@link #find(MediaForm, String, String, Long, Integer)} for a better use case.
      *
-     * If you need huge amount of data use {@link #iterate(MediaForm, String, String, Long, Integer)} or {@link #changes(String, String, Long, String, String, Integer, Boolean, Deletes)}.
+     * If you need huge amount of data use {@link #iterate(MediaForm, String, String, Long, Integer)} or {@link #changes(String, String, Long, String, String, Integer, Boolean, Deletes, Tail)}.
      *
      * @param offset the first result. Note that this cannot be too big!
      */
@@ -124,9 +124,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max,
-        @QueryParam(DELETED) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Boolean  deleted
-
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
     @POST
