@@ -79,7 +79,7 @@ public class NpoPomsEnvironment {
 
     }
 
-    public static enum Env {
+    public enum Env {
         LOCALHOST("http://localhost:8071/", "http://localhost:8071/images/", "http://localhost:8071/rs/"),
         DEV("http://poms-dev.omroep.nl/", "http://images-dev.poms.omroep.nl/", "https://api-dev.poms.omroep.nl/"),
         TEST("http://poms-test.omroep.nl/", "http://images-test.poms.omroep.nl/", "https://api-test.poms.omroep.nl/"),
