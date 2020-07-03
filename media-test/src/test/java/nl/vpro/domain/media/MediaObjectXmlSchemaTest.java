@@ -617,7 +617,7 @@ public class MediaObjectXmlSchemaTest {
             "    <segments/>\n" +
             "</program>";
 
-        Program unmarshalled = JAXB.unmarshal(new StringReader(withScheduleEventOnOldLocation), Program.class);
+        Program unmarshalled = (Program) jaxbContext.createUnmarshaller().unmarshal(new ByteArrayInputStream(withScheduleEventOnOldLocation.getBytes()));
         assertThat(unmarshalled.getScheduleEvents()).hasSize(4);
     }
 
