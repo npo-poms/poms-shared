@@ -56,7 +56,11 @@ public class Roles {
     public static final String RUNAS_ROLE = ROLE + RUNAS;
 
 
-
+    /**
+     * The publisher role is kind of special. It can only see things that are allowed to be published.
+     *
+     * This is a system role as nobody or nothing else would normally need to have this role.
+     */
     public static final String PUBLISHER  = MEDIA + "PUBLISHER";
     public static final String PUBLISHER_ROLE = ROLE + PUBLISHER;
 

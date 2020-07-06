@@ -2344,8 +2344,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     public void setRelations(SortedSet<Relation> relations) {
-
-
         if (this.relations == null) {
             this.relations = new TreeSet<>();
         } else {
