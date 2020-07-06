@@ -18,8 +18,10 @@ import org.apache.commons.lang3.time.DateUtils;
 /**
  * @author Michiel Meeuwissen
  * @since 3.4
+ * @deprecated Use the one in vpro-shared-web
  */
 @Slf4j
+@Deprecated
 public abstract class AbstractSchemaController<M extends Function<String, File>> {
 
     protected M mappings;
