@@ -97,7 +97,7 @@ public abstract class MediaObjectLockerAspect  {
 
                 return correlation;
             }
-            throw new IllegalStateException();
+            throw new IllegalStateException("Object is of unrecognized type " + object);
         }
     }
 

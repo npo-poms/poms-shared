@@ -16,9 +16,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.util.*;
 
-import static nl.vpro.util.Predicates.alwaysFalse;
-import static nl.vpro.util.Predicates.biAlwaysFalse;
-import static nl.vpro.util.Predicates.biAlwaysTrue;
+import static nl.vpro.util.Predicates.*;
 
 
 /**
@@ -33,6 +31,8 @@ import static nl.vpro.util.Predicates.biAlwaysTrue;
 @EqualsAndHashCode
 @ToString
 public class AssemblageConfig {
+
+    public static BiPredicate<List<String>, Relation> DEFAULT_RELATION_MATCH = (b, r) -> b.contains(r.getBroadcaster());
 
     @lombok.Builder.Default
     OwnerType owner = OwnerType.BROADCASTER;
@@ -79,6 +79,10 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean copyTopics = true;
 
+
+    @lombok.Builder.Default
+    BiPredicate<List<String>, Relation> relations = DEFAULT_RELATION_MATCH;
+
     @lombok.Builder.Default
     boolean createScheduleEvents = false;
 
@@ -100,6 +104,7 @@ public class AssemblageConfig {
 
     @lombok.Builder.Default
     boolean locationsUpdate = false;
+
 
     @lombok.Builder.Default
     Steal stealMids = Steal.NO;
@@ -181,6 +186,7 @@ public class AssemblageConfig {
             copyTargetGroups,
             copyGeoLocations,
             copyTopics,
+            relations,
             createScheduleEvents,
             deleteIfNoScheduleEventsLeft,
             mergeScheduleEvents,
@@ -213,6 +219,11 @@ public class AssemblageConfig {
         return memberRef -> AssemblageConfig.this.memberOfUpdate != null && AssemblageConfig.this.memberOfUpdate.test(memberRef, AssemblageConfig.this);
     }
 
+    /**
+     * Sets updating a permissive as possible, with few exeptions:
+     *
+     * - relations: only sync relations of the broadcasters associated with the account (this is also the default)
+     */
     public static Builder withAllTrue() {
         return builder()
             .copyWorkflow(true)
@@ -227,6 +238,7 @@ public class AssemblageConfig {
             .copyTargetGroups(true)
             .copyGeoLocations(true)
             .copyTopics(true)
+            .relations(DEFAULT_RELATION_MATCH)
             .imageMetaData(true)
             .createScheduleEvents(true)
             .locationsUpdate(true)

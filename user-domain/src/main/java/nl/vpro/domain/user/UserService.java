@@ -133,6 +133,9 @@ public interface UserService<T extends User> {
         );
     }
 
+    /**
+     * See {@link Roles#PUBLISHER_ROLE}
+     */
     default boolean isPublisher() {
         return currentUserHasRole(Roles.PUBLISHER_ROLE);
     }
