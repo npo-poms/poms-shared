@@ -114,7 +114,7 @@ public class AssemblageConfig {
      * If stealCrids is true, then in that situation the existing object is left, but the matching crid is removed.
      */
     @lombok.Builder.Default
-    Steal stealCrids= Steal.NO;
+    TriSteal<String> stealCrids= TriSteal.of(Steal.NO);
 
     /**
      * If an incoming segment matches a segment of _different_ program, then disconnect it from that other program
@@ -243,7 +243,7 @@ public class AssemblageConfig {
             .createScheduleEvents(true)
             .locationsUpdate(true)
             .stealMids(Steal.YES)
-            .stealCrids(Steal.YES)
+            .stealAllCrids(Steal.YES)
             .stealSegments(Steal.YES)
             .updateType(Steal.YES)
             .followMerges(true)
@@ -284,6 +284,11 @@ public class AssemblageConfig {
         public Builder ownerless() {
             return owner(null);
         }
+
+        public Builder stealAllCrids(Steal steal) {
+            return stealCrids(TriSteal.of(steal));
+        }
+
         public Builder deleteBroadcastIfNoScheduleEventsLeft() {
             return deleteIfNoScheduleEventsLeft(p -> p.getType() == ProgramType.BROADCAST || p.getType() == ProgramType.STRAND);
         }
@@ -310,7 +315,12 @@ public class AssemblageConfig {
             return impl.test(incoming, toUpdate);
         }
 
+    }
 
+    public interface TriSteal<T> extends TriPredicate<MediaObject, MediaObject, T> {
+        static <S> TriSteal<S> of(Steal s) {
+            return (incoming, toUpdate, t) -> s.test(incoming, toUpdate);
+        }
     }
 
     /**
