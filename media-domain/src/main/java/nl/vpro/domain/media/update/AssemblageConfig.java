@@ -351,8 +351,8 @@ public class AssemblageConfig {
     /**
      *
      * @since 5.13
-     * param S Type of incoming objects
-     * param F Type of field to of those object which are required (or not)
+     * @param <S> Type of incoming objects
+     * @param <F> Type of field to of those object which are required (or not)
      */
     public static abstract class Require<S, F>  implements BiPredicate<S, S> {
         private final BiFunction<S, S, RequireEnum> value;
