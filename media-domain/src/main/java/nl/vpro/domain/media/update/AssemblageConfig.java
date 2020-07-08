@@ -317,9 +317,24 @@ public class AssemblageConfig {
 
     }
 
+
     public interface TriSteal<T> extends TriPredicate<MediaObject, MediaObject, T> {
         static <S> TriSteal<S> of(Steal s) {
-            return (incoming, toUpdate, t) -> s.test(incoming, toUpdate);
+            return new TriStealImpl<S>(Predicates.ignoreArg3(s));
+        }
+    }
+
+    @EqualsAndHashCode
+    public static class TriStealImpl<T> implements TriSteal<T> {
+        private final TriPredicate<MediaObject, MediaObject, T> wrapped;
+
+        public TriStealImpl(TriPredicate<MediaObject, MediaObject, T> wrapped) {
+            this.wrapped = wrapped;
+        }
+
+        @Override
+        public boolean test(MediaObject mediaObject, MediaObject mediaObject2, T t) {
+            return wrapped.test(mediaObject, mediaObject2, t);
         }
     }
 
