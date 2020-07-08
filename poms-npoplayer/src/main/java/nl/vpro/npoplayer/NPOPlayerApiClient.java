@@ -4,21 +4,23 @@
  */
 package nl.vpro.npoplayer;
 
-import nl.vpro.api.client.resteasy.AbstractApiClient;
-import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.rs.npoplayer.NPOPlayerApiRestService;
-import nl.vpro.util.ConfigUtils;
-import nl.vpro.util.Env;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import java.time.Duration;
+import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.core.MediaType;
-import java.time.Duration;
-import java.util.List;
-import java.util.Locale;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+
+import nl.vpro.api.client.resteasy.AbstractApiClient;
+import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.rs.npoplayer.NPOPlayerApiRestService;
+import nl.vpro.util.ConfigUtils;
+import nl.vpro.util.Env;
 
 /**
  * This basicly does this:
@@ -31,7 +33,7 @@ import java.util.Locale;
 @Named
 public class NPOPlayerApiClient extends AbstractApiClient {
     private final static String APIKEYHEADER = "ApiKey";
-    private String apiKey;
+    private final String apiKey;
 
     NPOPlayerApiRestService restService;
 
