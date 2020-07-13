@@ -10,8 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.helpers.MessageFormatter;
 
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.util.*;
@@ -150,6 +149,10 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     MidRequire  requireIncomingMid = MidRequire.NO;
 
+
+    @lombok.Builder.Default
+    BiPredicate<MediaObject, PublishableObject<?>> markForDeleteOnly = (m, mu) -> false;
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     transient SimpleLogger logger;
@@ -200,6 +203,7 @@ public class AssemblageConfig {
             updateType,
             followMerges,
             requireIncomingMid,
+            markForDeleteOnly,
             logger);
     }
     public AssemblageConfig withLogger(SimpleLogger logger) {
