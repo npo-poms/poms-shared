@@ -265,7 +265,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         this.images = toList(
             mediaobject.getImages(),
-            (i) -> i.getOwner() == owner,
+            (i) -> i.getOwner() == owner && ! i.isDeleted(),
             ImageUpdate::new,
             false)
         ;
@@ -300,7 +300,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.websites = toList(mediaobject.getWebsites(), Website::get);
         this.twitterrefs= toList(mediaobject.getTwitterRefs(), TwitterRef::get);
 
-        this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == owner, LocationUpdate::new);
+        this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == owner && ! l.isDeleted(), LocationUpdate::new);
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability, PredictionUpdate::of);
 
