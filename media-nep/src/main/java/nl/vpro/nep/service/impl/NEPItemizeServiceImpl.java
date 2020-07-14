@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.*;
 import java.util.Properties;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 import javax.annotation.PreDestroy;
@@ -140,7 +141,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     @SneakyThrows
-    protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull  OutputStream outputStream, String itemizeUrl, Supplier<String> key) {
+    protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull BiConsumer<String, String> headers,  @NonNull  OutputStream outputStream, String itemizeUrl, Supplier<String> key) {
         HttpClientContext clientContext = HttpClientContext.create();
         String framegrabber = itemizeUrl + "/api/framegrabber?identifier=" + identifier + "&time=" + time;
         HttpGet get = new HttpGet(framegrabber);
@@ -159,16 +160,16 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     @Override
-    public void grabScreenMid(String mid, Duration offset, OutputStream outputStream) {
+    public void grabScreenMid(String mid, Duration offset, @NonNull BiConsumer<String, String> headers, OutputStream outputStream) {
         String durationString = DurationFormatUtils.formatDuration(offset.toMillis(), "HH:mm:ss.SSS", true);
-        grabScreen(mid, durationString, outputStream, itemizeMidUrl, itemizeMidKey);
+        grabScreen(mid, durationString, headers, outputStream, itemizeMidUrl, itemizeMidKey);
     }
 
     @Override
-    public void grabScreenLive(String channel, Instant instant, OutputStream outputStream) {
+    public void grabScreenLive(String channel, Instant instant, @NonNull BiConsumer<String, String> headers, OutputStream outputStream) {
         grabScreen(channel,
             NEPItemizeRequest.fromInstant(instant).orElseThrow(() -> new IllegalArgumentException("Instant " + instant + " could not be formatted")),
-            outputStream, itemizeLiveUrl, itemizeLiveKey);
+            headers, outputStream, itemizeLiveUrl, itemizeLiveKey);
     }
 
     @Override
