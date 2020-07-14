@@ -301,7 +301,7 @@ public class AssemblageConfig {
         /**
          * Only if the incoming object is new. We matched on crid.
          */
-        IF_INCOMING_NO_MID((incoming, toUpdate) -> incoming.getMid() == null)
+        IF_INCOMING_NO_MID((incoming, toUpdate) -> incoming != null && incoming.getMid() == null)
         ;
 
         private final BiPredicate<MediaObject, MediaObject> impl;
