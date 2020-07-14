@@ -35,6 +35,7 @@ import nl.vpro.nep.domain.NEPItemizeRequest;
 import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.service.NEPItemizeService;
 
+import static nl.vpro.poms.shared.Headers.NPO_DISPATCHED_TO;
 import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
 
 /**
@@ -142,7 +143,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         );
     }
 
-    private static final Set<String> grabScreenHeaders = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(HttpHeaders.CONTENT_TYPE.toLowerCase(), HttpHeaders.CONTENT_LENGTH.toLowerCase())));
+    private static final Set<String> GRAB_SCREEN_HEADERS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(HttpHeaders.CONTENT_TYPE.toLowerCase(), HttpHeaders.CONTENT_LENGTH.toLowerCase())));
     @SneakyThrows
     protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull BiConsumer<String, String> headers,  @NonNull  OutputStream outputStream, String itemizeUrl, Supplier<String> key) {
         HttpClientContext clientContext = HttpClientContext.create();
@@ -150,12 +151,12 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         HttpGet get = new HttpGet(framegrabber);
         authenticate(get, key);
         get.addHeader(new BasicHeader(HttpHeaders.ACCEPT, APPLICATION_OCTET_STREAM.toString()));
-        headers.accept(nl.vpro.poms.shared.Headers.NPO_DISPATCHED_TO, framegrabber);
+        headers.accept(NPO_DISPATCHED_TO, framegrabber);
         log.info("Getting {}", framegrabber);
         try (CloseableHttpResponse execute = httpClient.execute(get, clientContext)) {
             if (execute.getStatusLine().getStatusCode() == 200) {
                 for (Header h : execute.getAllHeaders()) {
-                    if (grabScreenHeaders.contains(h.getName().toLowerCase())) {
+                    if (GRAB_SCREEN_HEADERS.contains(h.getName().toLowerCase())) {
                         headers.accept(h.getName(), h.getValue());
                     }
                 }
