@@ -17,6 +17,7 @@ import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.*;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -150,6 +151,11 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         log.info("Getting {}", framegrabber);
         try (CloseableHttpResponse execute = httpClient.execute(get, clientContext)) {
             if (execute.getStatusLine().getStatusCode() == 200) {
+                for (Header h : execute.getAllHeaders()) {
+                    if (h.getName().toLowerCase().startsWith("content")) {
+                        headers.accept(h.getName(), h.getValue());
+                    }
+                }
                 IOUtils.copy(execute.getEntity().getContent(), outputStream);
             } else {
                 StringWriter result = new StringWriter();

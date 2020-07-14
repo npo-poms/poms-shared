@@ -6,7 +6,7 @@ import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
+import java.util.*;
 
 import org.junit.jupiter.api.*;
 
@@ -96,8 +96,9 @@ public class NEPItemizeServiceImplITest {
     public void grabScreen() throws IOException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");
-        itemizer.grabScreenLive("npo-1dvr", Instant.now().truncatedTo(ChronoUnit.SECONDS).minus(Duration.ofMinutes(1)), new FileOutputStream(out));
-        log.info("Created {} bytes {}", out.length(), out);
+        Map<String, String> headers = new HashMap<>();
+        itemizer.grabScreenLive("npo-1dvr", Instant.now().truncatedTo(ChronoUnit.SECONDS).minus(Duration.ofMinutes(1)), headers::put, new FileOutputStream(out));
+        log.info("Created {} bytes {} (found headers {})", out.length(), out, headers);
 
 
     }
@@ -109,8 +110,9 @@ public class NEPItemizeServiceImplITest {
     public void grabScreenMid() throws IOException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");
-        itemizer.grabScreenMid(MID, Duration.ZERO, new FileOutputStream(out));
-        log.info("Created {} bytes {}", out.length(), out);
+        Map<String, String> headers = new HashMap<>();
+        itemizer.grabScreenMid(MID, Duration.ZERO,  headers::put, new FileOutputStream(out));
+        log.info("Created {} bytes {} (headers: {})", out.length(), out, headers);
 
 
     }
