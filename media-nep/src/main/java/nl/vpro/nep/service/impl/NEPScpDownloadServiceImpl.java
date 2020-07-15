@@ -141,23 +141,23 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 try (OutputStream out = outputStream.get()) {
                     if (out != null) {
                         log.info("Copying {} to {}", url, out);
-                        exitCode = scp.execute(out, LoggerOutputStream.error(log), url, "/dev/stdout");
+                        exitCode = scp.execute(out, LoggerOutputStream.error(log, true), url, "/dev/stdout");
                     } else {
                         log.warn("Can't download from {} stream to null", url);
                     }
                 }
             } catch (InterruptedException e) {
-                log.error(e.getMessage(), e);
+                log.error(e.getClass().getName() + ":" + e.getMessage(), e);
                 Thread.currentThread().interrupt();
                 return;
             } catch (IOException  e) {
-                log.error(e.getMessage(), e);
+                log.error(e.getClass().getName() + ":" + e.getMessage(), e);
                 return;
             } catch (CommandExecutor.BrokenPipe bp) {
                 log.debug(bp.getMessage());
                 throw bp;
             } catch (RuntimeException rte) {
-                log.warn(rte.getMessage());
+                log.warn(rte.getClass().getName() + ":" + rte.getMessage());
                 catchedException = rte;
                 exitCode = -100;
             }
