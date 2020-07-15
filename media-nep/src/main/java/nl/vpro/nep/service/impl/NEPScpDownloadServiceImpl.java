@@ -11,8 +11,10 @@ import java.util.function.Supplier;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.LoggerOutputStream;
@@ -72,6 +74,8 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 .executablesPaths(sshpassExecutables)
                 .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
                 .useFileCache(useFileCache)
+                .logger(log)
+
                 .commonArg(
                     "-p", password,
                     scpcommand.getAbsolutePath(),
@@ -141,7 +145,17 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 try (OutputStream out = outputStream.get()) {
                     if (out != null) {
                         log.info("Copying {} to {}", url, out);
-                        exitCode = scp.execute(out, LoggerOutputStream.error(log, true), url, "/dev/stdout");
+                        exitCode = scp.execute(out,
+                            LoggerOutputStream.log(log, l -> {
+                                    if (StringUtils.isBlank(l)) {
+                                        return null;
+                                    }
+                                    if (l.contains("Warning")) {
+                                        return Level.WARN;
+                                    }
+                                    return Level.ERROR;
+                                }
+                            ), url, "/dev/stdout");
                     } else {
                         log.warn("Can't download from {} stream to null", url);
                     }
