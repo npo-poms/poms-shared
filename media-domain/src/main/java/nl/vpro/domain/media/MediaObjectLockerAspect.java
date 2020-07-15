@@ -10,7 +10,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.event.Level;
 
+import nl.vpro.logging.Slf4jHelper;
 import nl.vpro.util.locker.ObjectLocker;
 
 
@@ -90,7 +92,14 @@ public abstract class MediaObjectLockerAspect  {
             if (object instanceof MediaIdentifiable) {
                 MediaIdentifiable.Correlation correlation = ((MediaIdentifiable) object).getCorrelation();
                 if (correlation == null || correlation.getType() == MediaIdentifiable.Correlation.Type.HASH) {
-                    log.warn("Object {} has no correlation id ({})", object, correlation);
+                    boolean warn = true;
+                    if (object instanceof MediaObject) {
+                        if (((MediaObject) object).getId() == null) {
+                            warn = false;
+                        }
+                    }
+
+                    Slf4jHelper.log(log, warn ? Level.WARN : Level.DEBUG,"Object {} has no correlation id ({})", object, correlation);
                 } else {
                     log.debug("{} has correlation {}", object, correlation);
                 }
