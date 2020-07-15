@@ -5,8 +5,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 import javax.inject.*;
 
@@ -56,8 +55,8 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public void grabScreenLive(String channel, Instant instant, OutputStream outputStream) {
-        itemizeService.get().grabScreenLive(channel, instant, outputStream);
+    public void grabScreenLive(String channel, Instant instant, BiConsumer<String, String> headers, OutputStream outputStream) {
+        itemizeService.get().grabScreenLive(channel, instant, headers, outputStream);
     }
 
     @Override
@@ -78,8 +77,8 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public void grabScreenMid(String mid, Duration offset, OutputStream outputStream) {
-        itemizeService.get().grabScreenMid(mid, offset, outputStream);
+    public void grabScreenMid(String mid, Duration offset, BiConsumer<String, String> headers, OutputStream outputStream) {
+        itemizeService.get().grabScreenMid(mid, offset, headers, outputStream);
     }
 
     @NonNull

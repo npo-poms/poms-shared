@@ -15,16 +15,18 @@ public class Headers {
      */
     public static final String OWNER_TYPE_HEADER = "X-Poms-CurrentOwner";
 
-    /**
-     * A request header signifying the preferred date format in json
-     * TODO: NPA-539
-     */
-    public static final String JSON_TIMESTAMPS = "X-NPO-TIMESTAMPS";
+
 
     /**
      * A prefix for response headers related to NPO
      */
     public static final String X_NPO                        = "X-NPO";
+
+    /**
+       * A request header signifying the preferred date format in json
+     * TODO: NPA-539
+     */
+    public static final String JSON_TIMESTAMPS = X_NPO + "-TIMESTAMPS";
 
     /**
      * The request was authenticated, the response acknowledges that via this header
@@ -68,6 +70,8 @@ public class Headers {
     public static final String NPO_CLIENTIP                = X_NPO + "-clientip";
 
     public static final String NPO_DISPATCHED_TO           = X_NPO + "-dispatched-to";
+
+    public static final String NPO_DATE                    = X_NPO + "-Date";
 }
 
 

@@ -708,10 +708,10 @@ public class MediaObjects {
     }
 
 
-    public static <T extends MediaObject>  void  updateLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner, boolean steal) {
+    public static <T extends MediaObject>  void  updateLocationsForOwner(T incomingMedia, T mediaToUpdate, Predicate<Ownable> owns, OwnerType owner, boolean steal) {
         for(Location incomingLocation : incomingMedia.getLocations()) {
 
-            if(incomingLocation.getOwner().equals(owner)) {
+            if(owns.test(incomingLocation)) {
                 Location locationToUpdate = mediaToUpdate.findLocation(incomingLocation.getProgramUrl());
                 if(locationToUpdate == null) {
                     mediaToUpdate.addLocation(incomingLocation);
@@ -721,7 +721,6 @@ public class MediaObjects {
                         if (steal) {
                             log.warn("Updating ownership of location {} -> {}", locationToUpdate, owner);
                             locationToUpdate.setOwner(owner);
-
                         } else {
                             update = false;
                             log.warn("Cannot update location {} since it is not from {}", locationToUpdate, owner);
@@ -739,17 +738,28 @@ public class MediaObjects {
         }
     }
 
+    public static <T extends MediaObject>  void  updateLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner, boolean steal) {
+        updateLocationsForOwner(incomingMedia, mediaToUpdate, o -> o.getOwner() == owner, owner, steal);
+    }
 
-    public static <T extends MediaObject>  List<Location>  updateAndRemoveLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner) {
-        updateLocationsForOwner(incomingMedia, mediaToUpdate, owner, false);
+
+
+    public static <T extends MediaObject>  List<Location>  updateAndRemoveLocationsForOwner(T incomingMedia, T mediaToUpdate,  Predicate<Ownable> owns, OwnerType owner) {
+        updateLocationsForOwner(incomingMedia, mediaToUpdate, owns, owner, false);
         List<Location> locationsToRemove = new ArrayList<>();
         mediaToUpdate.getLocations().removeIf(
             location ->
-                location.getOwner().equals(owner) &&
+                owns.test(location) &&
                 incomingMedia.findLocation(location.getProgramUrl(), owner) == null
         );
         return locationsToRemove;
     }
+
+    public static <T extends MediaObject>  List<Location>  updateAndRemoveLocationsForOwner(T incomingMedia, T mediaToUpdate,  OwnerType owner) {
+        return updateAndRemoveLocationsForOwner(incomingMedia, mediaToUpdate, o -> o.getOwner() == owner, owner);
+
+    }
+
 
     public static void mergeAvAttributes(Location incomingLocation, Location locationToUpdate) {
         AVAttributes incomingAttributes = incomingLocation.getAvAttributes();

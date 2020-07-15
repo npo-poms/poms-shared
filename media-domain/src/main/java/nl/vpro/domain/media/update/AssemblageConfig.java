@@ -10,15 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.helpers.MessageFormatter;
 
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.util.*;
 
-import static nl.vpro.util.Predicates.alwaysFalse;
-import static nl.vpro.util.Predicates.biAlwaysFalse;
-import static nl.vpro.util.Predicates.biAlwaysTrue;
+import static nl.vpro.util.Predicates.*;
 
 
 /**
@@ -33,6 +30,8 @@ import static nl.vpro.util.Predicates.biAlwaysTrue;
 @EqualsAndHashCode
 @ToString
 public class AssemblageConfig {
+
+    public static BiPredicate<List<String>, Relation> DEFAULT_RELATION_MATCH = (b, r) -> b.contains(r.getBroadcaster());
 
     @lombok.Builder.Default
     OwnerType owner = OwnerType.BROADCASTER;
@@ -79,6 +78,10 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean copyTopics = true;
 
+
+    @lombok.Builder.Default
+    BiPredicate<List<String>, Relation> relations = DEFAULT_RELATION_MATCH;
+
     @lombok.Builder.Default
     boolean createScheduleEvents = false;
 
@@ -101,6 +104,7 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean locationsUpdate = false;
 
+
     @lombok.Builder.Default
     Steal stealMids = Steal.NO;
 
@@ -109,7 +113,7 @@ public class AssemblageConfig {
      * If stealCrids is true, then in that situation the existing object is left, but the matching crid is removed.
      */
     @lombok.Builder.Default
-    Steal stealCrids= Steal.NO;
+    TriSteal<String> stealCrids= TriSteal.of(Steal.NO);
 
     /**
      * If an incoming segment matches a segment of _different_ program, then disconnect it from that other program
@@ -144,6 +148,10 @@ public class AssemblageConfig {
      */
     @lombok.Builder.Default
     MidRequire  requireIncomingMid = MidRequire.NO;
+
+
+    @lombok.Builder.Default
+    BiPredicate<MediaObject, PublishableObject<?>> markForDeleteOnly = (m, mu) -> false;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -181,6 +189,7 @@ public class AssemblageConfig {
             copyTargetGroups,
             copyGeoLocations,
             copyTopics,
+            relations,
             createScheduleEvents,
             deleteIfNoScheduleEventsLeft,
             mergeScheduleEvents,
@@ -194,6 +203,7 @@ public class AssemblageConfig {
             updateType,
             followMerges,
             requireIncomingMid,
+            markForDeleteOnly,
             logger);
     }
     public AssemblageConfig withLogger(SimpleLogger logger) {
@@ -213,6 +223,11 @@ public class AssemblageConfig {
         return memberRef -> AssemblageConfig.this.memberOfUpdate != null && AssemblageConfig.this.memberOfUpdate.test(memberRef, AssemblageConfig.this);
     }
 
+    /**
+     * Sets updating a permissive as possible, with few exeptions:
+     *
+     * - relations: only sync relations of the broadcasters associated with the account (this is also the default)
+     */
     public static Builder withAllTrue() {
         return builder()
             .copyWorkflow(true)
@@ -227,11 +242,12 @@ public class AssemblageConfig {
             .copyTargetGroups(true)
             .copyGeoLocations(true)
             .copyTopics(true)
+            .relations(DEFAULT_RELATION_MATCH)
             .imageMetaData(true)
             .createScheduleEvents(true)
             .locationsUpdate(true)
             .stealMids(Steal.YES)
-            .stealCrids(Steal.YES)
+            .stealAllCrids(Steal.YES)
             .stealSegments(Steal.YES)
             .updateType(Steal.YES)
             .followMerges(true)
@@ -272,6 +288,11 @@ public class AssemblageConfig {
         public Builder ownerless() {
             return owner(null);
         }
+
+        public Builder stealAllCrids(Steal steal) {
+            return stealCrids(TriSteal.of(steal));
+        }
+
         public Builder deleteBroadcastIfNoScheduleEventsLeft() {
             return deleteIfNoScheduleEventsLeft(p -> p.getType() == ProgramType.BROADCAST || p.getType() == ProgramType.STRAND);
         }
@@ -298,7 +319,27 @@ public class AssemblageConfig {
             return impl.test(incoming, toUpdate);
         }
 
+    }
 
+
+    public interface TriSteal<T> extends TriPredicate<MediaObject, MediaObject, T> {
+        static <S> TriSteal<S> of(Steal s) {
+            return new TriStealImpl<S>(Predicates.ignoreArg3(s));
+        }
+    }
+
+    @EqualsAndHashCode
+    public static class TriStealImpl<T> implements TriSteal<T> {
+        private final TriPredicate<MediaObject, MediaObject, T> wrapped;
+
+        public TriStealImpl(TriPredicate<MediaObject, MediaObject, T> wrapped) {
+            this.wrapped = wrapped;
+        }
+
+        @Override
+        public boolean test(MediaObject mediaObject, MediaObject mediaObject2, T t) {
+            return wrapped.test(mediaObject, mediaObject2, t);
+        }
     }
 
     /**
@@ -314,8 +355,8 @@ public class AssemblageConfig {
     /**
      *
      * @since 5.13
-     * param S Type of incoming objects
-     * param F Type of field to of those object which are required (or not)
+     * @param <S> Type of incoming objects
+     * @param <F> Type of field to of those object which are required (or not)
      */
     public static abstract class Require<S, F>  implements BiPredicate<S, S> {
         private final BiFunction<S, S, RequireEnum> value;
