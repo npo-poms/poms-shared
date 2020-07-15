@@ -1,6 +1,6 @@
 package nl.vpro.nep.service.impl;
 
-import lombok.*;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
@@ -22,13 +22,15 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jmx.export.annotation.ManagedResource;
+import org.springframework.jmx.export.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.annotations.VisibleForTesting;
 
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.util.TimeUtils;
 
 import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
 
@@ -44,12 +46,11 @@ import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
 @ManagedResource
 public class NEPSAMAuthenticator implements Supplier<String> {
     private final LoginRequest loginRequest;
-    private LoginResponse loginResponse;
+    @VisibleForTesting
+    LoginResponse loginResponse;
     private Instant responseInstant;
     private final String baseUrl;
 
-    @Getter
-    @Setter
     private Duration maxAge = Duration.ofMinutes(15);
 
     public NEPSAMAuthenticator(
@@ -109,6 +110,19 @@ public class NEPSAMAuthenticator implements Supplier<String> {
         return Instant.ofEpochSecond(node.get("exp").intValue());
     }
 
+
+    @ManagedAttribute
+    public String getMaxAge() {
+        return maxAge.toString();
+    }
+    public void setMaxAge(String s){
+        this.maxAge = TimeUtils.parseDuration(s).orElse(this.maxAge);
+    }
+
+    @ManagedOperation
+    public void invalidate() {
+        this.loginResponse = null;
+    }
 
     /**
      * Returns false if the key is not valid for at least one day.
