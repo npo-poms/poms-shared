@@ -49,8 +49,8 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     final String baseUrlMid;
     final String baseUrlLive;
 
-    private Duration connectTimeout = Duration.ofMillis(1000);
-    private Duration socketTimeout = Duration.ofMillis(1000);
+    private final Duration connectTimeout = Duration.ofMillis(1000);
+    private final Duration socketTimeout = Duration.ofMillis(1000);
 
     Client httpClient = null;
 

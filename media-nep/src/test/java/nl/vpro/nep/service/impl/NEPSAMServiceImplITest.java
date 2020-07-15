@@ -46,7 +46,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
     @Test
     public void streamUrlForLive() {
-        String streamUrl = impl.streamAccessLive("npo1", "145.58.169.92", Duration.ofHours(24));
+        String streamUrl = impl.streamAccessLive("npo-1dvr", "145.58.169.92", Duration.ofHours(24));
         log.info("{}", streamUrl);
 
     }
