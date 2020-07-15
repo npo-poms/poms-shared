@@ -103,6 +103,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
 
 
     @SneakyThrows
+    @ManagedAttribute
     public Instant getExpiration() {
         Base64.Decoder decoder = Base64.getUrlDecoder();
         String[] parts = loginResponse.token.split("\\."); // Splitting header, payload and signature
@@ -127,6 +128,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     /**
      * Returns false if the key is not valid for at least one day.
      */
+    @ManagedAttribute
     public boolean needsRefresh() {
         if (loginResponse == null) {
             return true;
