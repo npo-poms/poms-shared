@@ -1,6 +1,6 @@
 package nl.vpro.nep.service.impl;
 
-import lombok.SneakyThrows;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
@@ -48,6 +48,8 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     private Instant responseInstant;
     private final String baseUrl;
 
+    @Getter
+    @Setter
     private Duration maxAge = Duration.ofMinutes(15);
 
     public NEPSAMAuthenticator(
