@@ -22,6 +22,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jmx.export.annotation.ManagedResource;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,10 +41,14 @@ import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
  * @since 5.11
  */
 @Slf4j
+@ManagedResource
 public class NEPSAMAuthenticator implements Supplier<String> {
     private final LoginRequest loginRequest;
-    LoginResponse loginResponse;
+    private LoginResponse loginResponse;
+    private Instant responseInstant;
     private final String baseUrl;
+
+    private Duration maxAge = Duration.ofMinutes(15);
 
     public NEPSAMAuthenticator(
         @Value("${nep.sam-api.username}") String username,
@@ -58,9 +64,6 @@ public class NEPSAMAuthenticator implements Supplier<String> {
         log.info("Authenticating with {}", this.baseUrl);
     }
 
-
-
-
     @Override
     @SneakyThrows
     public String get() {
@@ -68,7 +71,6 @@ public class NEPSAMAuthenticator implements Supplier<String> {
             authenticate();
         }
         return "Bearer " + this.loginResponse.getToken();
-
     }
 
     protected void authenticate() throws IOException {
@@ -90,6 +92,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
             }
 
             this.loginResponse = Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), LoginResponse.class);
+            this.responseInstant = Instant.now();
             log.info("Acquired {}", this.loginResponse);
         }
 
@@ -112,8 +115,12 @@ public class NEPSAMAuthenticator implements Supplier<String> {
         if (loginResponse == null) {
             return true;
         }
+        Instant now = Instant.now();
+        if (Duration.between(responseInstant, now).compareTo(maxAge) > 0) {
+            return true;
+        }
         return getExpiration().isBefore(
-            Instant.now().plus(Duration.ofDays(1))
+            now.plus(Duration.ofDays(1))
         );
 
     }
@@ -121,9 +128,8 @@ public class NEPSAMAuthenticator implements Supplier<String> {
 
     @lombok.Value
     public static class LoginRequest {
-
-        private final String username;
-        private final String password;
+        String username;
+        String password;
 
         public LoginRequest(String username, String password) {
             this.username = username;
@@ -133,11 +139,10 @@ public class NEPSAMAuthenticator implements Supplier<String> {
 
     @lombok.Value
     public static class LoginResponse {
-        private String token = null;
-
+        String token = null;
 
         @JsonIgnore
-        private final Instant obtaintedAt = Instant.now();
+        Instant obtaintedAt = Instant.now();
 
 
     }
