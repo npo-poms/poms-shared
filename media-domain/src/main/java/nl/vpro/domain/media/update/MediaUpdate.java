@@ -715,7 +715,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public void setDeleted(Boolean deleted) {
-        isDeleted = deleted;
+        isDeleted = deleted != null ? (deleted ? true : null) : null;
     }
 
     @XmlAttribute
