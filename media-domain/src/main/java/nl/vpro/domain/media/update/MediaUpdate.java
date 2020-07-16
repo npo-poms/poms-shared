@@ -705,8 +705,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlAttribute
-    public Boolean isDeleted() {
+    public Boolean getDeleted() {
         return isDeleted != null && isDeleted ? true : null;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted != null && isDeleted;
     }
 
     public void setDeleted(Boolean deleted) {
