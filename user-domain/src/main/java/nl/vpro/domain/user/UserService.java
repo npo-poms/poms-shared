@@ -19,6 +19,7 @@ import org.slf4j.*;
 
 import nl.vpro.domain.Roles;
 import nl.vpro.mdc.MDCConstants;
+import nl.vpro.util.ThreadPools;
 
 import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 
@@ -166,7 +167,7 @@ public interface UserService<T extends User> {
                 throw new RuntimeException(e);
             }
         };
-        return CompletableFuture.supplyAsync(supplier);
+        return CompletableFuture.supplyAsync(supplier, ThreadPools.backgroundExecutor); // use our own executor, see MSE-4873
     }
 
     /**
