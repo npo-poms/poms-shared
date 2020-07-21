@@ -717,7 +717,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return isDeleted != null && isDeleted;
     }
     public void setDeleted(boolean isDeleted) {
-        this.isDeleted = !isDeleted ? null : false;
+        this.isDeleted = !isDeleted ? null : true;
     }
 
 
