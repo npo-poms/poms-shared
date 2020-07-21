@@ -113,7 +113,9 @@ public class AssemblageConfig {
      * If stealCrids is true, then in that situation the existing object is left, but the matching crid is removed.
      */
     @lombok.Builder.Default
+
     Steal stealCrids= Steal.NO;
+
 
     /**
      * If an incoming segment matches a segment of _different_ program, then disconnect it from that other program
@@ -227,6 +229,7 @@ public class AssemblageConfig {
      * Sets updating a permissive as possible, with few exeptions:
      *
      * - relations: only sync relations of the broadcasters associated with the account (this is also the default)
+     * -- memberrefs
      */
     public static Builder withAllTrue() {
         return builder()
@@ -235,7 +238,7 @@ public class AssemblageConfig {
             .copyPredictions(true)
             .episodeOfUpdate(true)
             .guessEpisodePosition(true)
-            .memberOfUpdateBoolean(true)
+            .memberRefMatchOwner()
             .ratingsUpdate(true)
             .copyTwitterrefs(true)
             .copyIntentions(true)
@@ -283,7 +286,7 @@ public class AssemblageConfig {
             return memberOfUpdate(Predicates.biAlways(b, "always " + b));
         }
         public Builder memberRefMatchOwner() {
-            return memberOfUpdate((mr, c) -> mr.getOwner() == c.getOwner());
+            return memberOfUpdate((mr, c) -> c.getOwnerAndSimilar().contains(mr.getOwner()));
         }
         public Builder ownerless() {
             return owner(null);
