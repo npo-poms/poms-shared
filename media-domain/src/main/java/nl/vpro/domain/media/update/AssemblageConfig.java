@@ -319,6 +319,11 @@ public class AssemblageConfig {
             return impl.test(incoming, toUpdate);
         }
 
+        @Override
+        public String toString() {
+            return name();
+        }
+
     }
 
 
@@ -359,7 +364,7 @@ public class AssemblageConfig {
      * @param <F> Type of field to of those object which are required (or not)
      */
     public static abstract class Require<S, F>  implements BiPredicate<S, S> {
-        private final BiFunction<S, S, RequireEnum> value;
+        protected final BiFunction<S, S, RequireEnum> value;
         private final Function<S, F> getter;
 
         protected Require(BiFunction<S, S, RequireEnum> value, Function<S, F> getter) {
@@ -424,10 +429,10 @@ public class AssemblageConfig {
          public int hashCode() {
              return value != null ? value.hashCode() : 0;
          }
-     }
-     /**
+    }
+    /**
      * @since 5.13
-      */
+     */
     public static class MidRequire extends Require<MediaObject, String> {
         public static final MidRequire YES = new MidRequire(RequireEnum.YES);
         public static final MidRequire NO = new MidRequire(RequireEnum.NO);
@@ -441,6 +446,12 @@ public class AssemblageConfig {
         public MidRequire(BiFunction<MediaObject, MediaObject, RequireEnum> value) {
             super(value, MediaObject::getMid);
         }
+
+         @Override
+         public String toString() {
+             return "MidRequire:" + value.toString();
+         }
+
     }
 
     /**
