@@ -704,19 +704,22 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return subMediaType == null ? null : subMediaType.getMediaType();
     }
 
-    @XmlAttribute
-    public Boolean getDeleted() {
+    @XmlAttribute(name = "deleted")
+    protected Boolean getDeletedAttribute() {
         return isDeleted() ? true : null;
+    }
+    protected void setDeletedAttribute(Boolean deleted) {
+        isDeleted = deleted != null ? (deleted ? true : null) : null;
     }
 
     @XmlTransient
     public boolean isDeleted() {
         return isDeleted != null && isDeleted;
     }
-
-    public void setDeleted(Boolean deleted) {
-        isDeleted = deleted != null ? (deleted ? true : null) : null;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = !isDeleted ? null : true;
     }
+
 
     @XmlAttribute
     public String getUrn() {

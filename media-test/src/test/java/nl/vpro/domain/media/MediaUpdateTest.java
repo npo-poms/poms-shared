@@ -15,6 +15,7 @@ import org.junit.jupiter.api.*;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
@@ -67,9 +68,31 @@ public class MediaUpdateTest {
     public void withEverything2() throws Exception {
         Assumptions.assumeTrue(rounded != null);
         MediaObject fetched = rounded.fetch(OwnerType.BROADCASTER);
+
+
         JAXBTestUtil.roundTripAndSimilar(fetched,
             getClass().getResourceAsStream("/program-from-update-with-everything.xml")
         );
+    }
+
+    @Test
+    public void deleted() {
+        Program deleted = MediaTestDataBuilder.program().workflow(Workflow.DELETED).build();
+        ProgramUpdate update = ProgramUpdate.create(deleted, OwnerType.BROADCASTER);
+
+        ProgramUpdate programUpdate = JAXBTestUtil.roundTripAndSimilar(update, "<program xmlns=\"urn:vpro:media:update:2009\" deleted=\"true\" embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "  <intentions/>\n" +
+            "  <targetGroups/>\n" +
+            "  <geoLocations/>\n" +
+            "  <topics/>\n" +
+            "  <credits/>\n" +
+            "  <locations/>\n" +
+            "  <scheduleEvents/>\n" +
+            "  <images/>\n" +
+            "  <segments/>\n" +
+            "</program>");
+        assertThat(programUpdate.isDeleted()).isTrue();
+
     }
 
 
