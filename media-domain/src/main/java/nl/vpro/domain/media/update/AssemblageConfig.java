@@ -1,19 +1,25 @@
 package nl.vpro.domain.media.update;
 
 import lombok.*;
-
-import java.time.Duration;
-import java.util.*;
-import java.util.function.*;
-
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.PublishableObject;
+import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.logging.simple.Slf4jSimpleLogger;
+import nl.vpro.util.Functions;
+import nl.vpro.util.IntegerVersion;
+import nl.vpro.util.Predicates;
+import nl.vpro.util.TriPredicate;
 import org.slf4j.Logger;
 import org.slf4j.helpers.MessageFormatter;
 
-import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.*;
-import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.logging.simple.Slf4jSimpleLogger;
-import nl.vpro.util.*;
+import java.time.Duration;
+import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static nl.vpro.util.Predicates.*;
 
@@ -31,7 +37,7 @@ import static nl.vpro.util.Predicates.*;
 @ToString
 public class AssemblageConfig {
 
-    public static BiPredicate<List<String>, Relation> DEFAULT_RELATION_MATCH = (b, r) -> b.contains(r.getBroadcaster());
+    public static final BiPredicate<List<String>, Relation> DEFAULT_RELATION_MATCH = (b, r) -> b.contains(r.getBroadcaster());
 
     @lombok.Builder.Default
     OwnerType owner = OwnerType.BROADCASTER;
@@ -352,9 +358,22 @@ public class AssemblageConfig {
      * @since 5.13
      */
     public enum RequireEnum {
+        /**
+         * Required, if not given, give an error. E.g. the MID may be required
+         */
         YES,
+        /**
+         * Required, if not given, it will still work. E.g. a MID can be generated
+         */
         NO,
+        /**
+         * Only required to give this if the target object lacks this. E.g. an object may have been matced on crid, and then existing object provides the MID
+         *
+         */
         IF_TARGET_EMPTY,
+        /**
+         * If not given, the entire associated object will be skipped without error (but warnings probably). E.g. an incoming object from PREPR can be ignored.
+         */
         ELSE_SKIP
     }
 
@@ -401,15 +420,15 @@ public class AssemblageConfig {
             }
 
         }
-        public Optional<S> throwIfIllegal(S o1, S o2, String message, Object... arguments) {
+        public void throwIfIllegal(S o1, S o2, String message, Object... arguments) {
             if (! test(o1, o2)) {
 
                 if (value.apply(o1, o2) == RequireEnum.ELSE_SKIP) {
-                    return Optional.empty();
+                    throw new SkippingRequiredFieldException(message, arguments);
+                } else {
+                    throw new FatalRequiredFieldException(message, arguments);
                 }
-                throw new RequiredFieldException(message, arguments);
             }
-            return Optional.of(o2);
         }
         @Override
         public String toString() {
@@ -458,7 +477,7 @@ public class AssemblageConfig {
     /**
      * @since 5.13
      */
-    public static class RequiredFieldException extends IllegalArgumentException {
+    public static abstract class  RequiredFieldException extends IllegalArgumentException {
         @Getter
         Object[] arguments;
         RequiredFieldException(String format, Object... arguments) {
@@ -475,6 +494,34 @@ public class AssemblageConfig {
         }
         public String getFormat() {
             return super.getMessage();
+        }
+
+        public abstract boolean isFatal();
+    }
+
+    public static class FatalRequiredFieldException extends RequiredFieldException {
+
+        FatalRequiredFieldException(String format, Object... arguments) {
+            super(format, arguments);
+        }
+
+        @Override
+        public boolean isFatal() {
+            return true;
+
+        }
+    }
+
+    public static class SkippingRequiredFieldException extends RequiredFieldException {
+
+        SkippingRequiredFieldException(String format, Object... arguments) {
+            super(format, arguments);
+        }
+
+        @Override
+        public boolean isFatal() {
+            return false;
+
         }
     }
 

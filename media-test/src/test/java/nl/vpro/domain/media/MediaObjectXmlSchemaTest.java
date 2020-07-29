@@ -1026,6 +1026,38 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
+
+    public void nullpointerexcepition() {
+        String example = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<segment xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" midRef=\"RBX_NTR_2647822\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:program:80684549\" avType=\"AUDIO\" embeddable=\"true\" mid=\"RBX_NTR_5074546\" sortDate=\"2016-09-10T17:30:00+02:00\" workflow=\"PUBLISHED\" creationDate=\"2016-09-10T19:09:11.870+02:00\" lastModified=\"2016-09-10T19:09:11.995+02:00\" publishDate=\"2020-07-20T12:37:55.591+02:00\" urn=\"urn:vpro:media:segment:81654017\">\n" +
+            "    <crid>crid://item.radiobox2/374086</crid>\n" +
+            "    <broadcaster id=\"NTR\">NTR</broadcaster>\n" +
+            "    <title owner=\"RADIOBOX\" type=\"MAIN\">Wat kunt u zoal verwachten?</title>\n" +
+            "    <description owner=\"RADIOBOX\" type=\"MAIN\">Podium op Zaterdag met muzieknieuws en nieuwe CD's, o.a. laatste CD van de zusjes Baiba en Lauma Skride en van Charlotte Haesen Franse chansons. \u0005Als nieuwe crossover CD The Magical Forest, met een sfeervolle mix van Noorse folk, jazz en het vocaal Trio Mediaeval . Poëzie is er van de Groningse dichter Jean-Pierre Rawie, van hem het gedicht ‘Adieu’. Als filmtip L'Avenir van Mia Hansen-Løve. En in het Open Podium het jonge Nederlandse Gióvani Kwartet, dat hier te horen is in de oude bezetting. Doe mee met het Open Podium en stuur je opname naar: openpodium@ntr.nl.</description>\n" +
+            "    <tag>podium</tag>\n" +
+            "    <duration>P0DT0H3M0.000S</duration>\n" +
+            "    <credits/>\n" +
+            "    <descendantOf urnRef=\"urn:vpro:media:group:13405550\" midRef=\"AUTO_PODIUM\" type=\"SERIES\"/>\n" +
+            "    <descendantOf urnRef=\"urn:vpro:media:program:80684549\" midRef=\"RBX_NTR_2647822\" type=\"BROADCAST\"/>\n" +
+            "    <locations/>\n" +
+            "    <images>\n" +
+            "        <shared:image owner=\"RADIOBOX\" type=\"PICTURE\" highlighted=\"false\" workflow=\"PUBLISHED\" creationDate=\"2016-09-10T19:09:11.511+02:00\" lastModified=\"2016-09-10T19:09:11.873+02:00\" urn=\"urn:vpro:media:image:81654019\">\n" +
+            "            <shared:title>magical forest cover.jpg</shared:title>\n" +
+            "            <shared:imageUri>urn:vpro:image:801058</shared:imageUri>\n" +
+            "            <shared:height>372</shared:height>\n" +
+            "            <shared:width>620</shared:width>\n" +
+            "        </shared:image>\n" +
+            "    </images>\n" +
+            "    <segmentOf midRef=\"RBX_NTR_2647822\" type=\"BROADCAST\">\n" +
+            "        <episodeOf midRef=\"AUTO_PODIUM\" type=\"SERIES\" index=\"612\"/>\n" +
+            "    </segmentOf>\n" +
+            "    <start>P0DT0H30M0.000S</start>\n" +
+            "</segment>";
+        Segment unmarshal = JAXB.unmarshal(new StringReader(example), Segment.class);
+
+    }
+
+    @Test
     public void roundTripWithPrediction() {
         String example =
             "<program xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPWON_1199058\" sortDate=\"2013-04-09T15:25:00+02:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2013-03-17T06:48:59.719+01:00\" lastModified=\"2018-02-07T11:58:43.578+01:00\" publishDate=\"2015-01-08T17:42:19.202+01:00\" urn=\"urn:vpro:media:program:23197206\">\n" +
