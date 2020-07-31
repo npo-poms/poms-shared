@@ -51,7 +51,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     private Instant responseInstant;
     private final String baseUrl;
 
-    private Duration maxAge = Duration.ofHours(5);
+    private Duration maxAge = Duration.ofHours(6);
 
     public NEPSAMAuthenticator(
         @Value("${nep.sam-api.username}") String username,
