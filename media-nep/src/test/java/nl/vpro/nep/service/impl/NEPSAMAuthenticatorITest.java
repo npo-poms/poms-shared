@@ -2,7 +2,7 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
+import java.time.Duration;
 
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class NEPSAMAuthenticatorITest {
 
         NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator(
             "npo_poms",
-            System.getProperty("password"),
+            NEPTest.PROPERTIES.getProperty("nep.sam-api.password"),
             "https://api.samgcloud.nepworldwide.nl/"
         );
 
@@ -31,6 +31,8 @@ public class NEPSAMAuthenticatorITest {
         log.info("{}", authenticator.loginResponse.getToken());
         log.info("Expires {}", authenticator.getExpiration());
         assertThat(authenticator.needsRefresh()).isFalse();
+        assertThat(authenticator.needsRefresh(authenticator.getExpiration().minus(Duration.ofHours(5)))).isTrue();
+
 
     }
 }

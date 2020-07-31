@@ -48,7 +48,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     private Instant responseInstant;
     private final String baseUrl;
 
-    private Duration maxAge = Duration.ofMinutes(15);
+    private Duration maxAge = Duration.ofHours(5);
 
     public NEPSAMAuthenticator(
         @Value("${nep.sam-api.username}") String username,
@@ -93,7 +93,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
 
             this.loginResponse = Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), LoginResponse.class);
             this.responseInstant = Instant.now();
-            log.info("Acquired {}", this.loginResponse);
+            log.info("Acquired {} (expires {})", this.loginResponse, getExpiration());
         }
 
     }
@@ -112,11 +112,17 @@ public class NEPSAMAuthenticator implements Supplier<String> {
      * Returns false if the key is not valid for at least one day.
      */
     public boolean needsRefresh() {
+        return needsRefresh(Instant.now());
+    }
+
+     /**
+     * Returns false if the key is not valid for at least one day.
+     */
+     public boolean needsRefresh(Instant now) {
         if (loginResponse == null) {
             return true;
         }
-        Instant now = Instant.now();
-        if (Duration.between(responseInstant, now).compareTo(maxAge) > 0) {
+         if (Duration.between(responseInstant, now).compareTo(maxAge) > 0) {
             return true;
         }
         return getExpiration().isBefore(
