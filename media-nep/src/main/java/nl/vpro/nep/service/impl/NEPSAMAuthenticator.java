@@ -27,6 +27,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.annotations.VisibleForTesting;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 
@@ -44,7 +45,8 @@ import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
 @ManagedResource
 public class NEPSAMAuthenticator implements Supplier<String> {
     private final LoginRequest loginRequest;
-    private LoginResponse loginResponse;
+    @VisibleForTesting
+    LoginResponse loginResponse;
     private Instant responseInstant;
     private final String baseUrl;
 
