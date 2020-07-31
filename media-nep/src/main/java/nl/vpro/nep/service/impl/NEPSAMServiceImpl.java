@@ -54,9 +54,6 @@ public class NEPSAMServiceImpl implements NEPSAMService {
 
     Client httpClient = null;
 
-    AccessApi streamApiMid = null;
-    AccessApi streamApiLive = null;
-
     @Inject
     public NEPSAMServiceImpl(
         @Value("${nep.sam-api.mid.baseUrl}") @NonNull String baseUrlMid,
@@ -110,10 +107,8 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     @Override
     @SneakyThrows
     public String streamAccessLive(String channel,  String ip, Duration duration) {
-        if (streamApiLive == null) {
-            streamApiLive  = getStreamApi(baseUrlLive, authenticatorLive);
-            log.info("Created {}", streamApiLive);
-        }
+        AccessApi streamApiLive  = getStreamApi(baseUrlLive, authenticatorLive);
+
         StreamAccessItem request = createStreamAccessItem(ip, duration);
         String profile = drmProfileLive;
         log.debug("Using profile {}", profile);
@@ -125,10 +120,9 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     @Override
     @SneakyThrows
     public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) {
-        if (streamApiMid == null) {
-            streamApiMid = getStreamApi(baseUrlMid, authenticatorMid);
-            log.debug("Created {}", streamApiMid);
-        }
+        AccessApi streamApiMid = getStreamApi(baseUrlMid, authenticatorMid);
+
+        log.debug("Created {}", streamApiMid);
         StreamAccessItem request = createStreamAccessItem(ip, duration);
         String profile = drm ? drmProfileMid : noDrmProfileMid;
         log.debug("Using profile {}", profile);
