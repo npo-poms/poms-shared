@@ -134,7 +134,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     public MemberRef(MediaObject member, MediaObject parent, Integer number, OwnerType owner) {
         this(null, member, parent, number, owner);
-
     }
 
     public MemberRef(Long id, MediaObject member, MediaObject parent, Integer number, OwnerType owner) {
@@ -649,7 +648,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @XmlTransient
     public OwnerType getOwner() {
         return owner;
-
     }
 
     @Override
