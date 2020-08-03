@@ -1,14 +1,13 @@
 package nl.vpro.domain.media.support;
 
+import nl.vpro.domain.Xmlns;
+
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
-
-import nl.vpro.domain.Xmlns;
 
 
 /**
@@ -115,7 +114,9 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
      * Represents Ownable data from Radiobox. Radiobox delivers schedules and metadata for RAD1/2/3/4/5/6/FUNX
      *
      * @since 1.6
+     * @deprecated  Radiobox is replaced by Prepr. See {@link #AUTHORITY}
      */
+    @Deprecated
     RADIOBOX("Radiobox 2"),
 
     /**
