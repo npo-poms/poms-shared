@@ -248,6 +248,9 @@ public class Program extends MediaObject {
         if(this.episodeOf == null) {
             this.episodeOf = new TreeSet<>();
         }
+        for (MemberRef r : episodeOf) {
+            r.setRefType(MemberRefType.episodeOf);
+        }
         return sorted(episodeOf);
     }
 

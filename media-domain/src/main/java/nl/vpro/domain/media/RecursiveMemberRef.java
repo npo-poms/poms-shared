@@ -70,6 +70,9 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 	@XmlAttribute
 	Boolean highlighted;
 
+	@XmlAttribute
+    Boolean circular;
+
     public RecursiveMemberRef() {
     }
 
@@ -82,7 +85,8 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         Boolean highlighted,
         SortedSet<RecursiveMemberRef> memberOf,
         SortedSet<RecursiveMemberRef> episodeOf,
-        RecursiveMemberRef segmentOf
+        RecursiveMemberRef segmentOf,
+        Boolean circular
     ) {
         this.childMid = childMid;
         this.midRef = parentMid;
@@ -92,6 +96,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         this.memberOf = memberOf;
         this.episodeOf = episodeOf;
         this.segmentOf = segmentOf;
+        this.circular = circular;
     }
 
 
@@ -144,7 +149,12 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
                 result.add(rr);
             } else {
                 // break recursion
-                //result.add(RecursiveMemberRef.builderOf(r.getChildMid(), null, stack).index(r.getNumber()).parentType(r.getType()).build());
+                result.add(RecursiveMemberRef.builder()
+                    .childMid(r.getChildMid())
+                    .parentType(r.getType())
+                    .parentMid(r.getParentMid())
+                    .index(r.getNumber())
+                    .circular(true).build());
                 log.warn("Circular reference detected {}({})", stack.stream().map(StackElement::toString).collect(Collectors.joining("")), newStackElement);
             }
         });
@@ -159,14 +169,26 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         ).build();
     }
 
-    static SortedSet<RecursiveMemberRef> memberOfs(SortedSet<MemberRef> memberOf) {
-        return of(memberOf, new LinkedHashSet<>(), MemberRefType.memberOf);
+    static SortedSet<RecursiveMemberRef> memberOfs(MemberRef ref, SortedSet<MemberRef> memberOf) {
+        Set<StackElement> stack = new LinkedHashSet<>();
+        stack.add(new StackElement(ref.getChildMid(), ref.getParentMid(), ref.getRefType(), ref.getNumber()));
+        return of(memberOf, stack, MemberRefType.memberOf);
     }
 
-    static SortedSet<RecursiveMemberRef> episodeOfs(SortedSet<MemberRef> memberOf) {
-        return of(memberOf, new LinkedHashSet<>(), MemberRefType.episodeOf);
+    static SortedSet<RecursiveMemberRef> episodeOfs(MemberRef ref, SortedSet<MemberRef> memberOf) {
+        Set<StackElement> stack = new LinkedHashSet<>();
+        stack.add(new StackElement(ref.getChildMid(), ref.getParentMid(), ref.getRefType(), ref.getNumber()));
+        return of(memberOf, stack, MemberRefType.episodeOf);
     }
 
+
+    /**
+     * If this recursive memberref is marked 'circular' then we have detected that in the current stack the parent is already available.
+     * <em>this</em> recursive memberref will <em>not</em> includes <em>its</em> parent, because that would lead to infinite recursion.
+     */
+    public boolean isCircular() {
+        return circular != null && circular;
+    }
 
     @Override
     public String toString() {
@@ -243,10 +265,6 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         }
     }
 
-    private  enum MemberRefType {
-        memberOf,
-        episodeOf
-    }
 }
 
 

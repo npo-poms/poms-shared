@@ -1622,6 +1622,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         if (memberOf == null) {
             memberOf = new TreeSet<>();
         }
+        for (MemberRef r : memberOf) {
+            r.setRefType(MemberRefType.memberOf);
+        }
         return sorted(memberOf);
     }
 
@@ -1633,6 +1636,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         }
         if (memberOf != null) {
             for (MemberRef ref : memberOf) {
+                ref.setRefType(MemberRefType.memberOf);
                 this.memberOf.add(MemberRef.copy(ref, this));
             }
         }

@@ -1,8 +1,11 @@
 package nl.vpro.domain.media;
 
+import lombok.*;
+
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.*;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -129,6 +132,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Transient
     private RecursiveMemberRef segmentOf;
 
+    @Transient
+    @Getter
+    @Setter(AccessLevel.PACKAGE)
+    private MemberRefType refType;
+
     public MemberRef() {
     }
 
@@ -216,6 +224,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         copy.episodeOf = source.getEpisodeOf();
         copy.memberOf = source.getMemberOf();
         copy.segmentOf = source.getSegmentOf();
+        copy.refType = source.refType;
         return copy;
     }
 
@@ -456,7 +465,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public SortedSet<RecursiveMemberRef> getMemberOf() {
          if (memberOf == null) {
             if (group != null) {
-                return RecursiveMemberRef.memberOfs(group.getMemberOf());
+                return RecursiveMemberRef.memberOfs(this, group.getMemberOf());
             } else {
                 memberOf = new TreeSet<>();
             }
@@ -479,7 +488,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public SortedSet<RecursiveMemberRef> getEpisodeOf() {
          if (episodeOf == null) {
             if (group != null && group instanceof Program) {
-                return RecursiveMemberRef.episodeOfs(((Program) group).getEpisodeOf());
+                return RecursiveMemberRef.episodeOfs(this, ((Program) group).getEpisodeOf());
             } else {
                 episodeOf = new TreeSet<>();
             }
