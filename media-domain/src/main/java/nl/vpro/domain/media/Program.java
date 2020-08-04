@@ -220,7 +220,7 @@ public class Program extends MediaObject {
                     final MediaObject reference = memberRef.getGroup();
                     if (!set.contains(reference)) {
                         set.add(reference);
-                        set.addAll(reference.getAncestors());
+                        reference.addAncestors(set);
 
                     }
                 }
@@ -336,7 +336,7 @@ public class Program extends MediaObject {
         }
 
         if(! ProgramType.EPISODES.contains(this.getType())) {
-            throw new IllegalArgumentException(String.format("%1$s of type %2$s can not become an episode of %3$s with type %4$s ", this, this.getType(), group, group.getType()));
+            throw new IllegalArgumentException(String.format("%1$s of type %2$s can not become an episode of %3$s with type %4$s (should be one of %s)", this, this.getType(), group, group.getType(), ProgramType.EPISODES));
         }
 
         if(! group.getType().canContainEpisodes()) {

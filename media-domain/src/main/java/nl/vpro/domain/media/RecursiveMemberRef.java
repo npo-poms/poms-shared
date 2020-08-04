@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 
@@ -68,7 +67,8 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 	@XmlAttribute
 	Boolean highlighted;
 
-
+	@XmlTransient
+    private Set<String> stack;
 
     public RecursiveMemberRef() {
     }
@@ -82,7 +82,8 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         Boolean highlighted,
         SortedSet<RecursiveMemberRef> memberOf,
         SortedSet<RecursiveMemberRef> episodeOf,
-        RecursiveMemberRef segmentOf
+        RecursiveMemberRef segmentOf,
+        Set<String> stack
     ) {
         this.childMid = childMid;
         this.midRef = parentMid;
@@ -92,34 +93,41 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         this.memberOf = memberOf;
         this.episodeOf = episodeOf;
         this.segmentOf = segmentOf;
+        this.stack = stack;
     }
 
 
-
-    public static RecursiveMemberRef.Builder builderOf(String childMid, MediaObject parent) {
+    private static RecursiveMemberRef.Builder builderOf(String childMid, MediaObject parent, Set<String> memberStack) {
         RecursiveMemberRef.Builder builder =  RecursiveMemberRef.builder()
             .childMid(childMid);
 
         if (parent != null) {
             builder.parentMid(parent.getMid())
-                .parentType(parent.getMediaType())
-                .memberOf(of(parent.getMemberOf()))
-
-                .episodeOf(parent instanceof Program ? of(((Program) parent).getEpisodeOf()) : null)
-                .segmentOf(parent instanceof Segment ? of(((Segment) parent)) : null);
+                    .parentType(parent.getMediaType())
+                    .memberOf(of(parent.getMemberOf(), memberStack))
+                    .episodeOf(parent instanceof Program ? of(((Program) parent).getEpisodeOf(), memberStack) : null)
+                    .segmentOf(parent instanceof Segment ? of(((Segment) parent)) : null)
+                    .stack(memberStack)
+            ;
         }
         return builder;
     }
 
-    public static RecursiveMemberRef of(MemberRef  ref) {
+    private static RecursiveMemberRef of(MemberRef ref, Set<String> stack) {
         RecursiveMemberRef.Builder builder;
         if (ref.getGroup() != null) {
-            builder = builderOf(ref.getChildMid(), ref.getGroup());
+            builder = builderOf(
+                ref.getChildMid(),
+                ref.getGroup(),
+                stack
+            );
         } else {
             builder = builder()
                 .childMid(ref.getChildMid())
                 .parentMid(ref.getParentMid())
-                .parentType(ref.getType());
+                .parentType(ref.getType())
+                .stack(stack)
+            ;
         }
         return builder
             .index(ref.getNumber())
@@ -127,25 +135,32 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
             .build();
     }
 
-    public static SortedSet<RecursiveMemberRef> of(Set<MemberRef> ref) {
+    static SortedSet<RecursiveMemberRef> of(Set<MemberRef> ref, Set<String> stack) {
         if (ref == null) {
             return null;
         }
-        return ref
-            .stream()
-            .map(RecursiveMemberRef::of)
-            .collect(Collectors.toCollection(TreeSet::new));
+        TreeSet<RecursiveMemberRef> result = new TreeSet<>();
+        ref.forEach((r) -> {
+            if (stack.add(r.getMidRef())) {
+                RecursiveMemberRef rr = of(r, new TreeSet<>(stack));
+                result.add(rr);
+            }}
+        );
+        return result;
     }
 
     public static RecursiveMemberRef of(Segment segment) {
-        return builderOf(segment.getMid(), segment.getParent()).build();
+        return builderOf(
+                segment.getMid(),
+                segment.getParent(),
+                new LinkedHashSet<>()
+        ).build();
     }
 
 
     @Override
     public String toString() {
         return (getType() == null ? "(unknown type)" : getType().name()) + ":" + getParentMid() + ":" + getChildMid();
-
     }
 
     @Override
@@ -161,6 +176,26 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         }
 
         return this.hashCode() - memberRef.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RecursiveMemberRef that = (RecursiveMemberRef) o;
+
+        if (!midRef.equals(that.midRef)) return false;
+        if (!childMid.equals(that.childMid)) return false;
+        return index != null ? index.equals(that.index) : that.index == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = midRef.hashCode();
+        result = 31 * result + childMid.hashCode();
+        result = 31 * result + (index != null ? index.hashCode() : 0);
+        return result;
     }
 }
 
