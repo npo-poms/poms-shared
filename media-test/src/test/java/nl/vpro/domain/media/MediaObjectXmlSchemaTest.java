@@ -36,6 +36,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertFalse;
 
 /**
@@ -1025,9 +1026,11 @@ public class MediaObjectXmlSchemaTest {
         assertThat(programExpected.getIntentions().first().getOwner()).isEqualTo(OwnerType.NPO);
     }
 
+    /**
+     * See MSE-4879
+     */
     @Test
-
-    public void nullpointerexcepition() {
+    public void expectSAXParseException() {
         String example = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<segment xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" midRef=\"RBX_NTR_2647822\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:program:80684549\" avType=\"AUDIO\" embeddable=\"true\" mid=\"RBX_NTR_5074546\" sortDate=\"2016-09-10T17:30:00+02:00\" workflow=\"PUBLISHED\" creationDate=\"2016-09-10T19:09:11.870+02:00\" lastModified=\"2016-09-10T19:09:11.995+02:00\" publishDate=\"2020-07-20T12:37:55.591+02:00\" urn=\"urn:vpro:media:segment:81654017\">\n" +
             "    <crid>crid://item.radiobox2/374086</crid>\n" +
@@ -1053,7 +1056,9 @@ public class MediaObjectXmlSchemaTest {
             "    </segmentOf>\n" +
             "    <start>P0DT0H30M0.000S</start>\n" +
             "</segment>";
-        Segment unmarshal = JAXB.unmarshal(new StringReader(example), Segment.class);
+        assertThatThrownBy(() -> {
+            Segment unmarshal = JAXB.unmarshal(new StringReader(example), Segment.class);
+        }).isInstanceOf(javax.xml.bind.DataBindingException.class).hasMessageContaining("An invalid XML character");
 
     }
 
