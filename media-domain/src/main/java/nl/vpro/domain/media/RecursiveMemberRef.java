@@ -251,12 +251,12 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
             StackElement that = (StackElement) o;
 
-            return parent.equals(that.parent);
+            return Objects.equals(parent, that.parent);
         }
 
         @Override
         public int hashCode() {
-            return parent.hashCode();
+            return Objects.hashCode(parent);
         }
 
         @Override
