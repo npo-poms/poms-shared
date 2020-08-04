@@ -141,7 +141,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         }
         TreeSet<RecursiveMemberRef> result = new TreeSet<>();
         ref.forEach((r) -> {
-            if (stack.add(r.getMidRef())) {
+            if (stack.add(r.getMidRef() + ":" + r.getNumber())) {
                 RecursiveMemberRef rr = of(r, new TreeSet<>(stack));
                 result.add(rr);
             }}
