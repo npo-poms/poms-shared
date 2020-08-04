@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.*;
@@ -30,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "segmentOf"
 })
 @Setter
+@Slf4j
 public class RecursiveMemberRef implements Serializable, RecursiveParentChildRelation, Comparable<RecursiveMemberRef> {
 
     private static final long serialVersionUID = 1L;
@@ -141,11 +143,16 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         }
         TreeSet<RecursiveMemberRef> result = new TreeSet<>();
         ref.forEach((r) -> {
-            if (stack.add(r.getMidRef() + ":" + r.getNumber())) {
-                RecursiveMemberRef rr = of(r, new TreeSet<>(stack));
+            TreeSet<String> copyOfStack = new TreeSet<>(stack);
+            if (copyOfStack.add(r.getMidRef())) {
+                RecursiveMemberRef rr = of(r, copyOfStack);
                 result.add(rr);
-            }}
-        );
+            } else {
+                // break recursion
+                //result.add(RecursiveMemberRef.builderOf(r.getChildMid(), null, stack).index(r.getNumber()).parentType(r.getType()).build());
+                log.warn("Circular reference detected {} -> {}", String.join(" -> ", stack), r.getMidRef());
+            }
+        });
         return result;
     }
 
@@ -192,8 +199,8 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
     @Override
     public int hashCode() {
-        int result = midRef.hashCode();
-        result = 31 * result + childMid.hashCode();
+        int result = midRef == null ? 0 : midRef.hashCode();
+        result = 31 * result + (childMid == null ? 0 : childMid.hashCode());
         result = 31 * result + (index != null ? index.hashCode() : 0);
         return result;
     }
