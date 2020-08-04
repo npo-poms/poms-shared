@@ -233,6 +233,7 @@
     <xs:attribute name="type" type="mediaTypeEnum"/>
     <xs:attribute name="index" type="xs:int"/>
     <xs:attribute name="highlighted" type="xs:boolean"/>
+    <xs:attribute name="circular" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="segmentType">
