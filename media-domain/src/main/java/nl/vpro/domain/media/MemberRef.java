@@ -454,24 +454,20 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @XmlElement(name = "memberOf")
     @JsonView(Views.Forward.class)
     public SortedSet<RecursiveMemberRef> getMemberOf() {
-        return getMemberOf(new LinkedHashSet<>());
-    }
-
-    public void setMemberOf(SortedSet<RecursiveMemberRef> memberOfList) {
-        this.memberOf = memberOfList;
-    }
-
-
-    SortedSet<RecursiveMemberRef> getMemberOf(Set<String> stack) {
-        if (memberOf == null) {
+         if (memberOf == null) {
             if (group != null) {
-                return RecursiveMemberRef.of(group.getMemberOf(), stack);
+                return RecursiveMemberRef.memberOfs(group.getMemberOf());
             } else {
                 memberOf = new TreeSet<>();
             }
         }
         return memberOf;
     }
+
+    public void setMemberOf(SortedSet<RecursiveMemberRef> memberOfList) {
+        this.memberOf = memberOfList;
+    }
+
 
 
     /**
@@ -481,13 +477,9 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @XmlElement(name = "episodeOf")
     @JsonView(Views.Forward.class)
     public SortedSet<RecursiveMemberRef> getEpisodeOf() {
-        return getEpisodeOf(new LinkedHashSet<>());
-    }
-
-    SortedSet<RecursiveMemberRef> getEpisodeOf(Set<String> stack) {
-        if (episodeOf == null) {
+         if (episodeOf == null) {
             if (group != null && group instanceof Program) {
-                return RecursiveMemberRef.of(((Program) group).getEpisodeOf(), stack);
+                return RecursiveMemberRef.episodeOfs(((Program) group).getEpisodeOf());
             } else {
                 episodeOf = new TreeSet<>();
             }

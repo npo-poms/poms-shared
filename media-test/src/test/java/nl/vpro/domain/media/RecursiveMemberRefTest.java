@@ -37,13 +37,17 @@ class RecursiveMemberRefTest {
 
 
     @Test
-    public void marshalm3() {
+    public void circular() {
         SortedSet<MemberRef> memberOf = m3.getMemberOf();
-        log.info("{}", memberOf);
         MemberRef first = memberOf.first();
         log.info("{}", first.getMemberOf());
+    }
+
+    @Test
+    public void marshalm3() {
+
         JAXBTestUtil.roundTripAndSimilar(m3,
-            "program xmlns=\"urn:vpro:media:2009\" embeddable=\"true\" mid=\"m3\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" urn=\"urn:vpro:media:program:3\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "<program xmlns=\"urn:vpro:media:2009\" embeddable=\"true\" mid=\"m3\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" urn=\"urn:vpro:media:program:3\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
                 "    <credits/>\n" +
                 "    <descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"g1\" type=\"SERIES\"/>\n" +
                 "    <descendantOf urnRef=\"urn:vpro:media:program:1\" midRef=\"m1\" type=\"PROGRAM\"/>\n" +
@@ -53,6 +57,7 @@ class RecursiveMemberRefTest {
                 "        <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"1\">\n" +
                 "            <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\"/>\n" +
                 "            <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\">\n" +
+                "                <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\"/>\n" +
                 "                <episodeOf midRef=\"g1\" type=\"SERIES\" index=\"1\"/>\n" +
                 "            </memberOf>\n" +
                 "        </memberOf>\n" +
@@ -61,7 +66,9 @@ class RecursiveMemberRefTest {
                 "        <episodeOf midRef=\"g1\" type=\"SERIES\" index=\"1\">\n" +
                 "            <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"2\">\n" +
                 "                <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\"/>\n" +
-                "                <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\"/>\n" +
+                "                <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\">\n" +
+                "                    <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\"/>\n" +
+                "                </memberOf>\n" +
                 "            </memberOf>\n" +
                 "        </episodeOf>\n" +
                 "        <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\">\n" +
@@ -89,6 +96,7 @@ class RecursiveMemberRefTest {
                 "        <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"1\">\n" +
                 "            <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\"/>\n" +
                 "            <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\">\n" +
+                "                <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\"/>\n" +
                 "                <episodeOf midRef=\"g1\" type=\"SERIES\" index=\"1\"/>\n" +
                 "            </memberOf>\n" +
                 "        </memberOf>\n" +
@@ -100,6 +108,7 @@ class RecursiveMemberRefTest {
                 "        <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"2\">\n" +
                 "            <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\"/>\n" +
                 "            <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\">\n" +
+                "                <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\"/>\n" +
                 "                <episodeOf midRef=\"g1\" type=\"SERIES\" index=\"1\"/>\n" +
                 "            </memberOf>\n" +
                 "        </memberOf>\n" +

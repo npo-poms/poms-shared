@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 
@@ -69,9 +70,6 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 	@XmlAttribute
 	Boolean highlighted;
 
-	@XmlTransient
-    private Set<String> stack;
-
     public RecursiveMemberRef() {
     }
 
@@ -84,8 +82,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         Boolean highlighted,
         SortedSet<RecursiveMemberRef> memberOf,
         SortedSet<RecursiveMemberRef> episodeOf,
-        RecursiveMemberRef segmentOf,
-        Set<String> stack
+        RecursiveMemberRef segmentOf
     ) {
         this.childMid = childMid;
         this.midRef = parentMid;
@@ -95,27 +92,25 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         this.memberOf = memberOf;
         this.episodeOf = episodeOf;
         this.segmentOf = segmentOf;
-        this.stack = stack;
     }
 
 
-    private static RecursiveMemberRef.Builder builderOf(String childMid, MediaObject parent, Set<String> memberStack) {
+    private static RecursiveMemberRef.Builder builderOf(String childMid, MediaObject parent, Set<StackElement> memberStack) {
         RecursiveMemberRef.Builder builder =  RecursiveMemberRef.builder()
             .childMid(childMid);
 
         if (parent != null) {
             builder.parentMid(parent.getMid())
                     .parentType(parent.getMediaType())
-                    .memberOf(of(parent.getMemberOf(), memberStack))
-                    .episodeOf(parent instanceof Program ? of(((Program) parent).getEpisodeOf(), memberStack) : null)
+                    .memberOf(of(parent.getMemberOf(), memberStack,  MemberRefType.memberOf))
+                    .episodeOf(parent instanceof Program ? of(((Program) parent).getEpisodeOf(), memberStack, MemberRefType.episodeOf) : null)
                     .segmentOf(parent instanceof Segment ? of(((Segment) parent)) : null)
-                    .stack(memberStack)
             ;
         }
         return builder;
     }
 
-    private static RecursiveMemberRef of(MemberRef ref, Set<String> stack) {
+    private static RecursiveMemberRef of(MemberRef ref, Set<StackElement> stack) {
         RecursiveMemberRef.Builder builder;
         if (ref.getGroup() != null) {
             builder = builderOf(
@@ -128,7 +123,6 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
                 .childMid(ref.getChildMid())
                 .parentMid(ref.getParentMid())
                 .parentType(ref.getType())
-                .stack(stack)
             ;
         }
         return builder
@@ -137,20 +131,21 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
             .build();
     }
 
-    static SortedSet<RecursiveMemberRef> of(Set<MemberRef> ref, Set<String> stack) {
+    private static SortedSet<RecursiveMemberRef> of(Set<MemberRef> ref, Set<StackElement> stack, MemberRefType mode) {
         if (ref == null) {
             return null;
         }
         TreeSet<RecursiveMemberRef> result = new TreeSet<>();
         ref.forEach((r) -> {
-            TreeSet<String> copyOfStack = new TreeSet<>(stack);
-            if (copyOfStack.add(r.getMidRef())) {
+            LinkedHashSet<StackElement> copyOfStack = new LinkedHashSet<>(stack);
+            StackElement newStackElement = new StackElement(copyOfStack.isEmpty() ? r.getChildMid() : null, r.getMidRef(), mode, r.getNumber());
+            if (copyOfStack.add(newStackElement)) {
                 RecursiveMemberRef rr = of(r, copyOfStack);
                 result.add(rr);
             } else {
                 // break recursion
                 //result.add(RecursiveMemberRef.builderOf(r.getChildMid(), null, stack).index(r.getNumber()).parentType(r.getType()).build());
-                log.warn("Circular reference detected {} -> {}", String.join(" -> ", stack), r.getMidRef());
+                log.warn("Circular reference detected {}({})", stack.stream().map(StackElement::toString).collect(Collectors.joining("")), newStackElement);
             }
         });
         return result;
@@ -162,6 +157,14 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
                 segment.getParent(),
                 new LinkedHashSet<>()
         ).build();
+    }
+
+    static SortedSet<RecursiveMemberRef> memberOfs(SortedSet<MemberRef> memberOf) {
+        return of(memberOf, new LinkedHashSet<>(), MemberRefType.memberOf);
+    }
+
+    static SortedSet<RecursiveMemberRef> episodeOfs(SortedSet<MemberRef> memberOf) {
+        return of(memberOf, new LinkedHashSet<>(), MemberRefType.episodeOf);
     }
 
 
@@ -203,6 +206,46 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         result = 31 * result + (childMid == null ? 0 : childMid.hashCode());
         result = 31 * result + (index != null ? index.hashCode() : 0);
         return result;
+    }
+
+    private static class StackElement {
+        private final String child;
+        private final String parent;
+        private final MemberRefType type;
+        private final Integer number;
+
+
+        private StackElement(String child, String parent, MemberRefType type, Integer number) {
+            this.parent = parent;
+            this.child = child;
+            this.type = type;
+            this.number = number;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            StackElement that = (StackElement) o;
+
+            return parent.equals(that.parent);
+        }
+
+        @Override
+        public int hashCode() {
+            return parent.hashCode();
+        }
+
+        @Override
+        public String toString() {
+            return (child == null ? "" : child) + " -" + type + ":" + number + "-> " + parent;
+        }
+    }
+
+    private  enum MemberRefType {
+        memberOf,
+        episodeOf
     }
 }
 
