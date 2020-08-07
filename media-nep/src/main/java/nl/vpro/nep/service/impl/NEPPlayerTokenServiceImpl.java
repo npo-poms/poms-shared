@@ -18,17 +18,21 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+import org.springframework.jmx.export.annotation.ManagedResource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.nep.domain.*;
 import nl.vpro.nep.service.NEPPlayerTokenService;
+import nl.vpro.util.TimeUtils;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.11
  */
 @Named("NEPTokenService")
+@ManagedResource
 @Slf4j
 public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
 
@@ -92,24 +96,56 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
     public PlayreadyResponse playreadyToken(String ip) {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String url = baseUrl + "/playready/npo";
         String json = MAPPER.writeValueAsString(new PlayreadyRequest(ip, playreadyKey));
         try {
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
-            HttpPost httpPost = new HttpPost(baseUrl + "/playready/npo");
+            HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(entity);
             HttpResponse response = client.execute(httpPost);
             IOUtils.copy(response.getEntity().getContent(), out);
             log.info("Response {}", new String(out.toByteArray()));
             return MAPPER.readValue(new ByteArrayInputStream(out.toByteArray()), PlayreadyResponse.class);
         } catch (Exception e) {
-            log.error("for response {}: {}", new String(out.toByteArray()), e.getMessage());
+            log.error("POST {}: {} , response {}: {}", url, json, new String(out.toByteArray()), e.getMessage());
             throw e;
         }
     }
 
     @Override
+    @ManagedAttribute
     public String getPlayerTokenString() {
         return baseUrl;
+    }
+
+    @ManagedAttribute
+    public String getConnectTimeout() {
+        return String.valueOf(connectTimeout);
+    }
+
+    @ManagedAttribute
+    public void setConnectTimeout(String connectTimeout) {
+        this.connectTimeout = TimeUtils.parseDuration(connectTimeout).orElseThrow(() -> new IllegalArgumentException("could not parse " + connectTimeout));
+    }
+
+    @ManagedAttribute
+    public String getConnectionRequestTimeout() {
+        return String.valueOf(connectionRequestTimeout);
+    }
+
+    @ManagedAttribute
+    public void setConnectionRequestTimeout(String connectionRequestTimeout) {
+        this.connectionRequestTimeout = TimeUtils.parseDuration(connectionRequestTimeout).orElseThrow(() -> new IllegalArgumentException("could not parse " + connectionRequestTimeout));
+    }
+
+    @ManagedAttribute
+    public String  getSocketTimeout() {
+        return String.valueOf(socketTimeout);
+    }
+
+    @ManagedAttribute
+    public void setSocketTimeout(String socketTimeout) {
+        this.socketTimeout = TimeUtils.parseDuration(socketTimeout).orElseThrow(() -> new IllegalArgumentException("could not parse " + socketTimeout));
     }
 
     @Override
