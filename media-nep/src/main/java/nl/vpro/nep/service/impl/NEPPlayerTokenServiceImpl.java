@@ -69,17 +69,19 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
     public WideVineResponse widevineToken(String ip) {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String url = baseUrl +  "/widevine/npo";
+        String json = MAPPER.writeValueAsString(new WideVineRequest(ip, widevineKey));
         try {
-            String json = MAPPER.writeValueAsString(new WideVineRequest(ip, widevineKey));
+
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
-            HttpPost httpPost = new HttpPost(baseUrl + "/widevine/npo");
+            HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(entity);
             HttpResponse response = client.execute(httpPost);
             IOUtils.copy(response.getEntity().getContent(), out);
             log.info("Response {}", new String(out.toByteArray()));
             return MAPPER.readValue(new ByteArrayInputStream(out.toByteArray()), WideVineResponse.class);
         } catch (Exception e) {
-            log.error("for response {}: {}", new String(out.toByteArray()), e.getMessage());
+            log.error("POST {}: {}, response {}: {}", url, json, new String(out.toByteArray()), e.getMessage());
             throw e;
         }
 
