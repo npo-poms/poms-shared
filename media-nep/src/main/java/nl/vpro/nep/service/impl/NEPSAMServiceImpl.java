@@ -32,7 +32,7 @@ import nl.vpro.nep.service.NEPSAMService;
  */
 @Slf4j
 @Named("NEPSAMService")
-public class NEPSAMServiceImpl implements NEPSAMService {
+public class NEPSAMServiceImpl implements NEPSAMService{
 
     private String providerLive = "npo";
     private String platformLive = "npo";
@@ -97,7 +97,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     }
 
     @PreDestroy
-    public void cleanup() {
+    public void close() {
         if (httpClient != null) {
             log.info("Closing {}", httpClient);
             httpClient.close();

@@ -18,7 +18,7 @@ import nl.vpro.nep.domain.workflow.*;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public interface NEPGatekeeperService {
+public interface NEPGatekeeperService extends  AutoCloseable{
 
     @NonNull
     WorkflowExecution transcode(

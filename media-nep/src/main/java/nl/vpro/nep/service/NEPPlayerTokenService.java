@@ -7,7 +7,7 @@ import nl.vpro.nep.domain.WideVineResponse;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public interface NEPPlayerTokenService {
+public interface NEPPlayerTokenService extends AutoCloseable {
 
     WideVineResponse widevineToken(String ip);
 

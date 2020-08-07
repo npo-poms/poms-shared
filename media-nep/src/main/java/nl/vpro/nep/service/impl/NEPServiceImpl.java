@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.*;
 
+import javax.annotation.PreDestroy;
 import javax.inject.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -206,4 +207,12 @@ public class NEPServiceImpl implements NEPService {
         return builder.toString();
     }
 
+    @Override
+    @PreDestroy
+    public void close() throws Exception {
+        this.gatekeeperService.get().close();
+        this.itemizeService.get().close();
+        this.samService.get().close();
+        this.tokenService.get().close();
+    }
 }

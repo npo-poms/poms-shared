@@ -3,10 +3,10 @@ package nl.vpro.nep.service.impl;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.*;
 import java.time.Duration;
 
+import javax.annotation.PreDestroy;
 import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
@@ -18,12 +18,10 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import nl.vpro.nep.domain.PlayreadyRequest;
-import nl.vpro.nep.domain.PlayreadyResponse;
-import nl.vpro.nep.domain.WideVineRequest;
-import nl.vpro.nep.domain.WideVineResponse;
+import nl.vpro.nep.domain.*;
 import nl.vpro.nep.service.NEPPlayerTokenService;
 
 /**
@@ -31,9 +29,8 @@ import nl.vpro.nep.service.NEPPlayerTokenService;
  * @since 5.11
  */
 @Named("NEPTokenService")
-
 @Slf4j
-public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService {
+public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
 
     public static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -57,6 +54,13 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService {
         this.baseUrl = baseUrl;
         this.widevineKey = widevineKey;
         this.playreadyKey = playreadyKey;
+    }
+
+    @PreDestroy
+    public void close() throws IOException {
+        if (httpClient != null) {
+            httpClient.close();
+        }
     }
 
 
@@ -86,8 +90,8 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService {
     public PlayreadyResponse playreadyToken(String ip) {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
+        String json = MAPPER.writeValueAsString(new PlayreadyRequest(ip, playreadyKey));
         try {
-            String json = MAPPER.writeValueAsString(new PlayreadyRequest(ip, playreadyKey));
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
             HttpPost httpPost = new HttpPost(baseUrl + "/playready/npo");
             httpPost.setEntity(entity);

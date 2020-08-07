@@ -140,7 +140,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
     }
 
     @PreDestroy
-    public void shutdown() throws IOException {
+    public void close() throws IOException {
         if (httpClient != null) {
             httpClient.close();
         }

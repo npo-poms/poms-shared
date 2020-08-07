@@ -47,7 +47,6 @@ import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
 @Slf4j
 public class NEPItemizeServiceImpl implements NEPItemizeService {
 
-
     static final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(StandardCharsets.UTF_8);
 
     private final Supplier<String> itemizeLiveKey;
@@ -200,5 +199,13 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     @Override
     public String toString() {
         return getClass().getSimpleName() + ":l:"  + itemizeLiveUrl + ",m:" + itemizeMidUrl;
+    }
+
+    @Override
+    @PreDestroy
+    public void close() throws Exception {
+        if (httpClient != null) {
+            httpClient.close();
+        }
     }
 }
