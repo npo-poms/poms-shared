@@ -3186,6 +3186,13 @@
 
 
 
+      <xs:enumeration value="XXXX">
+        <xs:annotation>
+          <xs:documentation>
+            Test channel. This channel only exist for the sake of testing.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
 
     </xs:restriction>
   </xs:simpleType>
