@@ -2550,7 +2550,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     /**
-     * What does it mean to be 'embedddable'?
+     * What does it mean to be 'embeddable'?
      */
     @XmlAttribute(name = "embeddable")
     public boolean isEmbeddable() {
