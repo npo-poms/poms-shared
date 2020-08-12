@@ -2693,7 +2693,7 @@ public enum Channel implements Displayable, XmlValued {
             return "TV Polonia";
         }
     },
-       /**
+    /**
      * @since 5.11
      */
     @XmlEnumValue("VOOM")
@@ -2702,9 +2702,21 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "Voom HD";
         }
+    },
+
+
+    /**
+     * @since 5.15
+     */
+    @XmlEnumValue("XXXX")
+    XXXX() {
+        @Override
+        public String toString() {
+            return "TEST CHANNEL";
+        }
     }
     ;
-    private AVType avType;
+    private final AVType avType;
 
     Channel(AVType avType) {
         this.avType = avType;

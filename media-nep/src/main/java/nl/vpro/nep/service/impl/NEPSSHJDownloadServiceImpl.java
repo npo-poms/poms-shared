@@ -42,7 +42,6 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
     private final String password;
     private final String hostKey;
 
-
     @Inject
     public NEPSSHJDownloadServiceImpl(
         @Value("${nep.itemizer-download.host}") String ftpHost,
@@ -54,7 +53,6 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         this.username = username;
         this.password = password;
         this.hostKey = hostKey;
-
     }
 
     @PostConstruct

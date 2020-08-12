@@ -11,7 +11,7 @@ import nl.vpro.nep.domain.NEPItemizeResponse;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public interface NEPItemizeService {
+public interface NEPItemizeService extends  AutoCloseable {
 
     /**
      * NEP provides one service for two basicly different things.

@@ -8,7 +8,7 @@ import java.time.Duration;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public interface NEPSAMService {
+public interface NEPSAMService extends  AutoCloseable {
 
     String streamAccessLive(String channel, String ip, Duration duration);
     String streamAccessMid(String mid, boolean drm, String ip, Duration duration);
