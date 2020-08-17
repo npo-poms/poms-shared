@@ -39,7 +39,7 @@ public class Tag implements Serializable, Comparable<Tag> {
     @Column
     private Locale language = Locales.DUTCH;
 
-    protected Tag() {
+    public Tag() {
     }
 
     public Tag(final String text) {
