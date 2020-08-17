@@ -171,7 +171,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     /**
      * For certain memberRef, create a set of recursive Members representing the 'memberOf' of the parent of this memberRef
      */
-    static SortedSet<RecursiveMemberRef> memberOfs(MemberRef ref) {
+    public static SortedSet<RecursiveMemberRef> memberOfs(MemberRef ref) {
         MediaObject group = ref.getGroup();
         if (group != null) {
             SortedSet<MemberRef> memberOf = group.getMemberOf();
@@ -187,7 +187,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     /**
      * For certain memberRef, create a set of recursive Members representing the 'episode' of the parent of this memberRef
      */
-    static SortedSet<RecursiveMemberRef> episodeOfs(MemberRef ref) {
+    public static SortedSet<RecursiveMemberRef> episodeOfs(MemberRef ref) {
         MediaObject group = ref.getGroup();
         if (group instanceof Program) {
             SortedSet<MemberRef> episodeOf = ((Program) group).getEpisodeOf();
