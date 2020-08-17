@@ -264,6 +264,9 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.member = member;
     }
 
+    /**
+     * Returns the representing the 'group' role in this member-ref-relation. Note that this likely, but not necessarily a {@link Group} object, since any mediaobject may take members.
+     */
     @Nullable
     public MediaObject getGroup() {
         return group;
@@ -465,7 +468,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public SortedSet<RecursiveMemberRef> getMemberOf() {
          if (memberOf == null) {
             if (group != null) {
-                return RecursiveMemberRef.memberOfs(this, group.getMemberOf());
+                return RecursiveMemberRef.memberOfs(this);
             } else {
                 memberOf = new TreeSet<>();
             }
@@ -488,7 +491,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public SortedSet<RecursiveMemberRef> getEpisodeOf() {
          if (episodeOf == null) {
             if (group != null && group instanceof Program) {
-                return RecursiveMemberRef.episodeOfs(this, ((Program) group).getEpisodeOf());
+                return RecursiveMemberRef.episodeOfs(this);
             } else {
                 episodeOf = new TreeSet<>();
             }
