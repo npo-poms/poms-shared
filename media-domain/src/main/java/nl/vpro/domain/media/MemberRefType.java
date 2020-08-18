@@ -6,5 +6,6 @@ package nl.vpro.domain.media;
  */
 public enum MemberRefType {
     memberOf,
-    episodeOf
+    episodeOf,
+    segmentOf
 }

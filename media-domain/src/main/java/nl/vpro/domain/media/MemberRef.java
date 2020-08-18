@@ -509,7 +509,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public RecursiveMemberRef getSegmentOf() {
         if (segmentOf == null) {
             if (group != null && group instanceof Segment) {
-                segmentOf = RecursiveMemberRef.of((Segment) group);
+                segmentOf = RecursiveMemberRef.ofSegment((Segment) group);
             }
         }
         return segmentOf;
