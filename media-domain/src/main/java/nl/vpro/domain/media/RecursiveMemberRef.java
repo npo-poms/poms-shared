@@ -153,7 +153,8 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
                     .parentType(r.getType())
                     .parentMid(r.getParentMid())
                     .index(r.getNumber())
-                    .circular(true).build());
+                    .circular(true)
+                    .build());
                 log.warn("Circular reference detected {}({})", stack.stream().map(StackElement::toString).collect(Collectors.joining("")), newStackElement);
             }
         });
