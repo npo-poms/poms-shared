@@ -41,19 +41,18 @@ public class PageUpdateBuilder {
             .lastModified(page.getLastModified())
             .lastPublished(page.getLastPublished())
             .publishStart(page.getPublishStartInstant())
-            .alternativeUrls(toArray(page.getAlternativeUrls(), String.class, s -> s))
-            .broadcasters(page.getBroadcasters().stream().map(Broadcaster::getId).collect(Collectors.toList()))
-            .crids(page.getCrids().toArray(new String[0]))
+            .alternativeUrls(toArray(page.getAlternativeUrls()))
+            .broadcasters(toArray(page.getBroadcasters(), String.class, Broadcaster::getId))
+            .crids(toArray(page.getCrids()))
             .embeds(toArray(page.getEmbeds(), EmbedUpdate.class, EmbedUpdate::of))
-            .genres(page.getGenres().stream().map(Genre::getTermId).toArray(String[]::new))
+            .genres(toArray(page.getGenres(), String.class, Genre::getTermId))
             .images(toArray(page.getImages(), ImageUpdate.class, ImageUpdate::of))
-
-            .keywords(page.getKeywords())
+            .keywords(toArray(page.getKeywords()))
             .links(toArray(page.getLinks(), LinkUpdate.class, LinkUpdate::of))
             .paragraphs(toArray(page.getParagraphs(), ParagraphUpdate.class, ParagraphUpdate::of))
             .portal(PortalUpdate.of(page.getPortal()))
             .relations(toArray(page.getRelations(), RelationUpdate.class, RelationUpdate::of))
-            .statRefs(page.getStatRefs().toArray(new String[0]))
+            .statRefs(toArray(page.getStatRefs()))
             .subtitle(page.getSubtitle())
             .summary(page.getSummary())
             .title(page.getTitle())
@@ -66,6 +65,14 @@ public class PageUpdateBuilder {
             return (UT[]) Array.newInstance(clazz, 0);
         } else {
             return collection.stream().map(mapper).toArray(i -> (UT[]) Array.newInstance(clazz, i));
+        }
+    }
+
+     private static String[] toArray(Collection<String> collection) {
+        if (collection == null || collection.isEmpty()) {
+            return new String[0];
+        } else {
+            return collection.toArray(new String[0]);
         }
     }
 
