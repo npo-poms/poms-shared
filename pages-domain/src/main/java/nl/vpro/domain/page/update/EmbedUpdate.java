@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import nl.vpro.domain.page.Embed;
 import nl.vpro.validation.NoHtml;
 
 /**
@@ -23,6 +24,18 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "embedUpdateType")
 @Builder
 public class EmbedUpdate implements Serializable {
+
+    public static EmbedUpdate of(Embed embed) {
+        if (embed == null) {
+            return null;
+        }
+        return EmbedUpdate.builder()
+            .title(embed.getTitle())
+            .description(embed.getDescription())
+            .midRef(embed.getMedia().getMid())
+            .build();
+
+    }
 
     @NotNull
     @XmlAttribute
@@ -84,4 +97,5 @@ public class EmbedUpdate implements Serializable {
             ", title='" + title + '\'' +
             '}';
     }
+
 }

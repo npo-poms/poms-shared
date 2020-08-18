@@ -45,7 +45,14 @@ public class PortalUpdate implements Serializable{
         this.url = url;
     }
 
-    @XmlAttribute(required = true)
+    public static PortalUpdate of(Portal portal) {
+        if (portal == null) {
+            return null;
+        }
+        return new PortalUpdate(portal.getId(), portal.getUrl());
+    }
+
+	@XmlAttribute(required = true)
     public String getId() {
         return id;
     }

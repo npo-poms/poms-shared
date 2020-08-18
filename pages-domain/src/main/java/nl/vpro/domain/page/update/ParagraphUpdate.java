@@ -33,6 +33,10 @@ public class ParagraphUpdate implements Serializable {
         return new ParagraphUpdate(title, body, null);
     }
 
+    public static ParagraphUpdate of(Paragraph p) {
+        return new ParagraphUpdate(p.getTitle(), p.getBody(), ImageUpdate.of(p.getImage()));
+    }
+
 
     public static ParagraphUpdate body(String body) {
         return new ParagraphUpdate(null, body, null);

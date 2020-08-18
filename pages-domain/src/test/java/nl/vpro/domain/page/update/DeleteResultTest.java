@@ -16,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 @Slf4j
 public class DeleteResultTest {

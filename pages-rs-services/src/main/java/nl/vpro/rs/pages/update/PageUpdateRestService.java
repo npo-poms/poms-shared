@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import nl.vpro.domain.page.PageIdMatch;
 import nl.vpro.domain.page.update.PageUpdate;
 
 /**
@@ -26,6 +27,8 @@ public interface PageUpdateRestService {
     String PATH = "/pages/updates";
 
     String WAIT = "wait";
+    String MATCH = "match";
+
     String URL = "url";
 
 
@@ -43,7 +46,9 @@ public interface PageUpdateRestService {
         @QueryParam("url") @NotNull String url,
         @QueryParam("batch")  Boolean batch,
         @QueryParam("max") Integer max,
-        @QueryParam(WAIT) Boolean wait
+        @QueryParam(WAIT) Boolean wait,
+        @QueryParam(MATCH) @DefaultValue("BOTH") PageIdMatch match
+
     );
 
     @GET
@@ -51,9 +56,10 @@ public interface PageUpdateRestService {
     @Path("")
     PageUpdate load(
         @QueryParam(URL) @NotNull String url,
-        @QueryParam("loadDeleted") boolean loadDeleted
-
+        @QueryParam("loadDeleted") boolean loadDeleted,
+        @QueryParam(MATCH) @DefaultValue("BOTH") PageIdMatch match
     );
+
 
 
 }

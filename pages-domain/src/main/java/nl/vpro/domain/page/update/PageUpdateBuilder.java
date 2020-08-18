@@ -1,8 +1,10 @@
 package nl.vpro.domain.page.update;
 
+import java.lang.reflect.Array;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -11,6 +13,7 @@ import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.page.*;
+import nl.vpro.domain.user.Broadcaster;
 
 /**
  * @author Michiel Meeuwissen
@@ -30,6 +33,40 @@ public class PageUpdateBuilder {
 
     public static PageUpdateBuilder article(String url) {
         return page(PageType.ARTICLE, url);
+    }
+
+    public static PageUpdateBuilder page(Page page) {
+        return PageUpdate.builder(page.getType(), page.getUrl())
+            .creationDate(page.getCreationDate())
+            .lastModified(page.getLastModified())
+            .lastPublished(page.getLastPublished())
+            .publishStart(page.getPublishStartInstant())
+            .alternativeUrls(toArray(page.getAlternativeUrls(), String.class, s -> s))
+            .broadcasters(page.getBroadcasters().stream().map(Broadcaster::getId).collect(Collectors.toList()))
+            .crids(page.getCrids().toArray(new String[0]))
+            .embeds(toArray(page.getEmbeds(), EmbedUpdate.class, EmbedUpdate::of))
+            .genres(page.getGenres().stream().map(Genre::getTermId).toArray(String[]::new))
+            .images(toArray(page.getImages(), ImageUpdate.class, ImageUpdate::of))
+
+            .keywords(page.getKeywords())
+            .links(toArray(page.getLinks(), LinkUpdate.class, LinkUpdate::of))
+            .paragraphs(toArray(page.getParagraphs(), ParagraphUpdate.class, ParagraphUpdate::of))
+            .portal(PortalUpdate.of(page.getPortal()))
+            .relations(toArray(page.getRelations(), RelationUpdate.class, RelationUpdate::of))
+            .statRefs(page.getStatRefs().toArray(new String[0]))
+            .subtitle(page.getSubtitle())
+            .summary(page.getSummary())
+            .title(page.getTitle())
+            .tags(page.getTags())
+            ;
+    }
+
+    private static <T, UT> UT[] toArray(Collection<T> collection, Class<UT> clazz, Function<T, UT> mapper) {
+        if (collection == null || collection.isEmpty()) {
+            return (UT[]) Array.newInstance(clazz, 0);
+        } else {
+            return collection.stream().map(mapper).toArray(i -> (UT[]) Array.newInstance(clazz, i));
+        }
     }
 
     private PageUpdateBuilder(PageUpdate page) {
@@ -212,6 +249,10 @@ public class PageUpdateBuilder {
 
     public PageUpdateBuilder deleted() {
         return workflow(PageWorkflow.DELETED);
+    }
+
+    public PageUpdateBuilder deleted(boolean deleted) {
+        return workflow(deleted ? PageWorkflow.DELETED : PageWorkflow.PUBLISHED);
     }
 
     Instant fromDate(Date date) {

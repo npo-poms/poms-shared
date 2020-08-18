@@ -23,11 +23,13 @@ public class DeleteResult {
     @XmlTransient
     final CompletableFuture<?> future;
     @XmlAttribute
-    private int count;
+    private Integer count;
     @XmlAttribute
-    private int notallowedCount;
+    private Integer notallowedCount;
     @XmlAttribute
     private boolean success = true;
+    @XmlValue
+    private String message;
 
     private DeleteResult() {
         this.future = CompletableFuture.completedFuture(null);
@@ -35,10 +37,12 @@ public class DeleteResult {
     }
 
     @lombok.Builder
-    public DeleteResult( CompletableFuture<?> future, Integer count, Integer notallowedCount) {
+    private DeleteResult( CompletableFuture<?> future, int count, int notallowedCount, Boolean success, String message) {
         this.future = future == null ? CompletableFuture.completedFuture(null) : future;
-        this.count = count == null ? 1 : count;
-        this.notallowedCount = notallowedCount == null ? 0 : notallowedCount;
+        this.count = count;
+        this.notallowedCount = notallowedCount;
+        this.success = success == null || success;
+        this.message = message;
     }
 
     @JsonCreator
@@ -56,10 +60,9 @@ public class DeleteResult {
     }
 
     public DeleteResult and(DeleteResult result) {
-
         return DeleteResult.builder()
             .count(this.count + result.getCount())
-            .notallowedCount(this.notallowedCount+ result.getNotallowedCount())
+            .notallowedCount(this.notallowedCount + result.getNotallowedCount())
             .future(this.future.thenApply((v) -> {
                 try {
                     return result.getFuture().get();

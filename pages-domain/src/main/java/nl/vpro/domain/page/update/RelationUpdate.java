@@ -2,12 +2,11 @@ package nl.vpro.domain.page.update;
 
 import java.io.Serializable;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.page.Relation;
-import nl.vpro.domain.page.RelationDefinition;
-import nl.vpro.domain.page.RelationDefinitionService;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import nl.vpro.domain.page.*;
 import nl.vpro.domain.page.validation.ValidRelation;
 import nl.vpro.domain.user.Broadcaster;
 
@@ -18,6 +17,15 @@ import nl.vpro.domain.user.Broadcaster;
     })
 @ValidRelation
 public class RelationUpdate implements Comparable<RelationUpdate>, Serializable {
+
+    public static RelationUpdate of(Relation relation) {
+        return RelationUpdate.builder()
+            .type(relation.getType())
+            .broadcaster(relation.getBroadcaster())
+            .uriRef(relation.getUriRef())
+            .text(relation.getText())
+            .build();
+    }
 
     @XmlAttribute(required = true)
     private String type;
@@ -63,6 +71,7 @@ public class RelationUpdate implements Comparable<RelationUpdate>, Serializable 
         this(def.getType(), def.getBroadcaster(), uriRef, text);
     }
 
+    @lombok.Builder
     public RelationUpdate(String type, String broadcaster, String uriRef, String text, String urn) {
         this(type, broadcaster);
         this.uriRef = uriRef;

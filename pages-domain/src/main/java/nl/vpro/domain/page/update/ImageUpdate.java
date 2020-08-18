@@ -39,6 +39,23 @@ import nl.vpro.validation.WarningValidatorGroup;
 @Data
 public class ImageUpdate implements Serializable{
 
+    public static ImageUpdate of(Image image) {
+        if (image == null) {
+            return null;
+        }
+        return ImageUpdate.builder()
+            .title(image.getTitle())
+            .description(image.getDescription())
+            .license(image.getLicense())
+            .credits(image.getCredits())
+            .source(image.getSource())
+            .sourceName(image.getSourceName())
+            .type(image.getType())
+            .imageUrl(image.getUrl())
+            .build();
+    }
+
+
     @XmlAttribute(required = true)
     @NotNull
     private ImageType type;
