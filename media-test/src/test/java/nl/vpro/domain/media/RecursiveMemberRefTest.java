@@ -20,6 +20,11 @@ class RecursiveMemberRefTest {
 
     Group g1 = MediaTestDataBuilder.series().mid("g1").id(100L).withFixedDates().build();
 
+    Group g2 = MediaTestDataBuilder.season().mid("g2").id(101L).withFixedDates().build();
+
+
+
+
     Program m1 = MediaTestDataBuilder.program().mid("m1").id(1L).withFixedDates().build();
     Program m2 = MediaTestDataBuilder.broadcast().mid("m2").id(2L).withFixedDates()
         .memberOf(m1)
@@ -30,10 +35,20 @@ class RecursiveMemberRefTest {
         .memberOf(m1)
         .build();
 
+
+    Program m4 = MediaTestDataBuilder.broadcast().mid("m3").id(3L).withFixedDates()
+        .episodeOf(g2, 1)
+        .build();
+
+    Segment s1 = MediaTestDataBuilder.segment(m4).mid("s1").id(4L).withFixedDates().build();
+
     {
         // force circular to  reproduce  MSE-4895
         m1.getMemberOf().add(new MemberRef(m1, m3, 1, OwnerType.BROADCASTER));
         g1.getMemberOf().add(new MemberRef(g1, m3, 2, OwnerType.BROADCASTER));
+
+        // circular via segment of
+        g2.getMemberOf().add(new MemberRef(g2, s1, 1, OwnerType.BROADCASTER));
 
     }
 
@@ -44,6 +59,15 @@ class RecursiveMemberRefTest {
         MemberRef first = memberOf.first();
         log.info("{}", first.getMemberOf());
         assertThat(first.getMemberOf().first().getMemberOf().first().isCircular()).isTrue();
+    }
+
+
+    @Test
+    public void circularViaSegment() {
+        SortedSet<MemberRef> episodeOf = m4.getEpisodeOf();
+        MemberRef first = episodeOf.first();
+        log.info("{}", first.getMemberOf());
+        assertThat(first.getMemberOf().first().getSegmentOf().getEpisodeOf().first().isCircular()).isTrue();
     }
 
     @Test
@@ -127,6 +151,28 @@ class RecursiveMemberRefTest {
                 "</program>");
     }
 
+
+    @Test
+    public void marshalm4() {
+
+        JAXBTestUtil.roundTripAndSimilar(m4,
+            "<program xmlns=\"urn:vpro:media:2009\" type=\"BROADCAST\" embeddable=\"true\" mid=\"m3\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" urn=\"urn:vpro:media:program:3\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+                "    <credits/>\n" +
+                "    <descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"g2\" type=\"SEASON\"/>\n" +
+                "    <descendantOf urnRef=\"urn:vpro:media:segment:4\" midRef=\"s1\" type=\"SEGMENT\"/>\n" +
+                "    <locations/>\n" +
+                "    <images/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <episodeOf highlighted=\"false\" midRef=\"g2\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:101\">\n" +
+                "        <memberOf midRef=\"s1\" type=\"SEGMENT\" index=\"1\">\n" +
+                "            <segmentOf midRef=\"m3\" type=\"BROADCAST\">\n" +
+                "                <episodeOf midRef=\"g2\" type=\"SEASON\" index=\"1\" circular=\"true\"/>\n" +
+                "            </segmentOf>\n" +
+                "        </memberOf>\n" +
+                "    </episodeOf>\n" +
+                "    <segments/>\n" +
+                "</program>");
+     }
 
 
 
