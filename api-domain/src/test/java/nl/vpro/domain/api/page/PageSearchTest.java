@@ -1,10 +1,12 @@
 package nl.vpro.domain.api.page;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.Collections;
+import java.util.TreeSet;
 
 import org.junit.Test;
 
+import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.page.*;

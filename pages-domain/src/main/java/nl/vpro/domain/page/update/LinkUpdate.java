@@ -14,8 +14,7 @@ import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import nl.vpro.domain.page.Link;
-import nl.vpro.domain.page.LinkType;
+import nl.vpro.domain.page.*;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.URI;
 
@@ -56,10 +55,17 @@ public class LinkUpdate implements Serializable{
     public static LinkUpdate of(String pageRef) {
         return new LinkUpdate(pageRef, null);
     }
+
     public static LinkUpdate topStory(String pageRef, String text) {
         LinkUpdate update = new LinkUpdate(pageRef, text);
         update.setType(LinkType.TOP_STORY);
         return update;
+    }
+
+    public static LinkUpdate of(Link l) {
+        LinkUpdate u = new LinkUpdate(l.getPageRef(), l.getText());
+        u.setType(l.getType());
+        return u;
     }
 
     public LinkUpdate() {
