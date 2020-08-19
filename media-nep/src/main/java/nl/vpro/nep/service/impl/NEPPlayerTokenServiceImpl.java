@@ -51,15 +51,20 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
 
     private final String playreadyKey;
 
+    private final String fairplayKey;
+
     public NEPPlayerTokenServiceImpl(
         @Value("${nep.tokengenerator-api.baseUrl}") String baseUrl,
         @Value("${nep.tokengenerator-api.widevinekey}") String widevineKey,
-        @Value("${nep.tokengenerator-api.playreadykey}") String playreadyKey) {
+        @Value("${nep.tokengenerator-api.playreadykey}") String playreadyKey
+        ) {
         this.baseUrl = baseUrl;
         this.widevineKey = widevineKey;
         this.playreadyKey = playreadyKey;
+        this.fairplayKey = playreadyKey;// just for completeness, we don't use this.
     }
 
+    @Override
     @PreDestroy
     public void close() throws IOException {
         if (httpClient != null) {
@@ -71,23 +76,23 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
     @Override
     @SneakyThrows
     public WideVineResponse widevineToken(String ip) {
-        return MAPPER.readValue(token(ip, "widevine"), WideVineResponse.class);
+        return MAPPER.readValue(token(ip, "widevine", widevineKey), WideVineResponse.class);
     }
 
     @Override
     @SneakyThrows
     public PlayreadyResponse playreadyToken(String ip) {
-        return MAPPER.readValue(token(ip, "playready"), PlayreadyResponse.class);
+        return MAPPER.readValue(token(ip, "playready", playreadyKey), PlayreadyResponse.class);
     }
 
     @Override
     @SneakyThrows
     public FairplayResponse fairplayToken(String ip) {
-        return MAPPER.readValue(token(ip, "fairplay"), FairplayResponse.class);
+        return MAPPER.readValue(token(ip, "fairplay", fairplayKey), FairplayResponse.class);
     }
 
     @SneakyThrows
-    private byte[] token(String ip, String drmType) {
+    private byte[] token(String ip, String drmType, String key) {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         String url = baseUrl + "/" + drmType + "/npo";
