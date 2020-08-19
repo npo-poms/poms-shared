@@ -22,6 +22,10 @@ public class NEPPlayerTokenServiceImplITest extends AbstractNEPTest {
         getProperty("playreadykey")
     );
 
+    {
+        log.info("Testing with {}", impl);
+    }
+
     public NEPPlayerTokenServiceImplITest() {
         super("nep.tokengenerator-api");
     }
