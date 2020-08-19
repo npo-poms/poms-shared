@@ -4,9 +4,7 @@
  */
 package nl.vpro.jassert.assertions;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -26,6 +24,7 @@ import static nl.vpro.jassert.assertions.MediaAssertions.locationAssertThat;
  * @author Roelof Jan Koekoek
  * @since 1.5
  */
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObject> {
 
     protected MediaAssert(MediaObject actual) {
@@ -50,7 +49,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
     public MediaAssert hasMid(String mid) {
         isProgram();
-        assertThat(((Program) actual).getMid()).isEqualTo(mid);
+        assertThat(actual.getMid()).isEqualTo(mid);
         return myself;
     }
 
@@ -76,7 +75,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             id = group.getMid();
             assertThat(id).isEqualTo(poSeriesID);
             return myself;
-        } catch(AssertionError e) {
+        } catch(AssertionError ignore) {
         }
         Fail.fail("expecting Program of Group with poSeriesID " + poSeriesID + ", got " + type + " with id " + id);
         return myself;
@@ -124,7 +123,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         for(Broadcaster broadcaster : actual.getBroadcasters()) {
             set.add(broadcaster.getId());
         }
-        assertThat(set).contains((String[]) ids);
+        assertThat(set).contains(ids);
         return myself;
     }
 
@@ -136,7 +135,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             set.add(broadcaster.getId());
         }
 
-        assertThat(set).containsOnly((String[]) ids);
+        assertThat(set).containsOnly(ids);
         return myself;
     }
 
@@ -144,7 +143,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         hasBroadcasters();
         validateIsNotNull(broadcasters);
 
-        assertThat(actual.getBroadcasters()).contains((Broadcaster[]) broadcasters);
+        assertThat(actual.getBroadcasters()).contains(broadcasters);
         return myself;
     }
 
@@ -152,7 +151,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         hasBroadcasters();
         validateIsNotNull(broadcasters);
 
-        assertThat(actual.getBroadcasters()).containsOnly((Broadcaster[]) broadcasters);
+        assertThat(actual.getBroadcasters()).containsOnly(broadcasters);
         return myself;
     }
 
@@ -365,7 +364,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             set.add(prediction.getPlatform());
         }
 
-        assertThat(set).contains((Platform[]) platforms);
+        assertThat(set).contains(platforms);
         return myself;
 
     }
@@ -377,7 +376,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             set.add(prediction.getPlatform());
         }
 
-        assertThat(set).containsOnly((Platform[]) platforms);
+        assertThat(set).containsOnly(platforms);
         return myself;
 
     }
@@ -432,7 +431,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             set.add(location.getProgramUrl());
         }
 
-        assertThat(set).contains((String[]) urls);
+        assertThat(set).contains(urls);
         return myself;
 
     }
@@ -444,8 +443,8 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             try {
                 locationAssertThat(location).hasPublicationWindow();
                 return myself;
-            } catch(AssertionError e) {
-                continue;
+            } catch(AssertionError ignore) {
+
             }
         }
         Fail.fail("expecting al least one location with a publication window");
@@ -490,22 +489,22 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         try {
             MediaAssertions.mediaAssertThat(actual).hasPublicationWindow();
             return myself;
-        } catch(AssertionError error) {
+        } catch(AssertionError ignored) {
         }
         try {
             MediaAssertions.mediaAssertThat(actual).hasPortalRestriction();
             return myself;
-        } catch(AssertionError error) {
+        } catch(AssertionError ignored) {
         }
         try {
             MediaAssertions.mediaAssertThat(actual).hasGeoRestriction();
             return myself;
-        } catch(AssertionError error) {
+        } catch(AssertionError ignore) {
         }
         try {
             MediaAssertions.mediaAssertThat(actual).hasOnlyLocationsWithRestriction();
             return myself;
-        } catch(AssertionError error) {
+        } catch(AssertionError ignore) {
         }
 
         Fail.fail("expecting some restriction: publication window on media/locations, portal restriction or geo restriction");
@@ -562,7 +561,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             set.add(ownable.getOwner());
         }
 
-        assertThat(set).contains((OwnerType[]) owners);
+        assertThat(set).contains(owners);
 
     }
 
@@ -573,11 +572,12 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             set.add(ownable.getOwner());
         }
 
-        assertThat(set).containsOnly((OwnerType[]) owners);
+        assertThat(set).containsOnly(owners);
 
     }
 
-    private <S> void hasTypes(Collection<? extends Typable<S>> typables, S... types) {
+    @SafeVarargs
+    private final <S extends Comparable<S>> void hasTypes(Collection<? extends Typable<S>> typables, S... types) {
         validateIsNotNull(types);
         Set<S> set = new TreeSet<>();
         for(Typable<S> typable : typables) {
@@ -588,7 +588,8 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
     }
 
-    private <S> void hasOnlyTypes(Collection<? extends Typable<S>> typables, S... types) {
+    @SafeVarargs
+    private final <S extends Comparable<S>> void hasOnlyTypes(Collection<? extends Typable<S>> typables, S... types) {
         validateIsNotNull(types);
         Set<S> set = new TreeSet<>();
         for(Typable<S> typable : typables) {
@@ -604,7 +605,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         }
     }
 
-    private class Quartet<P extends Comparable<P>, Q extends Comparable<Q>, R extends Comparable<R>, S extends Comparable<S>> implements Comparable<Quartet<P, Q, R, S>> {
+    private static class Quartet<P extends Comparable<P>, Q extends Comparable<Q>, R extends Comparable<R>, S extends Comparable<S>> implements Comparable<Quartet<P, Q, R, S>> {
         final P p;
 
         final Q q;
@@ -669,19 +670,19 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
         @Override
         public int compareTo(@NonNull Quartet<P, Q, R, S> quartet) {
-            int result = p == null && quartet.p == null ? 0 : p.compareTo(quartet.p);
+            int result = Objects.compare(p, quartet.p, Comparator.naturalOrder());
             if(result != 0) {
                 return result;
             }
-            result = q == null && quartet.q == null ? 0 : q.compareTo(quartet.q);
+            result = Objects.compare(q, quartet.q, Comparator.naturalOrder());
             if(result != 0) {
                 return result;
             }
-            result = r == null && quartet.r == null ? 0 : r.compareTo(quartet.r);
+            result = Objects.compare(r, quartet.r, Comparator.naturalOrder());
             if(result != 0) {
                 return result;
             }
-            return s == null && quartet.s == null ? 0 : s.compareTo(quartet.s);
+            return Objects.compare(s, quartet.s, Comparator.naturalOrder());
         }
     }
 }
