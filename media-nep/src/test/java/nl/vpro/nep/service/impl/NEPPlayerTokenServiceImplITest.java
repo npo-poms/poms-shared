@@ -4,8 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.junit.Test;
 
-import nl.vpro.nep.domain.PlayreadyResponse;
-import nl.vpro.nep.domain.WideVineResponse;
+import nl.vpro.nep.domain.*;
 import nl.vpro.nep.service.NEPPlayerTokenService;
 
 /**
@@ -31,14 +30,19 @@ public class NEPPlayerTokenServiceImplITest extends AbstractNEPTest {
     public void widevine() {
         WideVineResponse wideVineResponse = impl.widevineToken("145.58.169.92");
         log.info("{}", wideVineResponse);
-
     }
 
 
     @Test
     public void playready() {
-        PlayreadyResponse wideVineResponse = impl.playreadyToken("145.58.169.92");
-        log.info("{}", wideVineResponse);
+        PlayreadyResponse playreadyToken = impl.playreadyToken("145.58.169.92");
+        log.info("{}", playreadyToken);
+    }
 
+
+    @Test
+    public void fairplay() {
+        FairplayResponse fairplayToken = impl.fairplayToken("145.58.169.92");
+        log.info("{}", fairplayToken);
     }
 }

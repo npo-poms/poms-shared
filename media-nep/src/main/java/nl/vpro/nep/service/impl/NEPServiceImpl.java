@@ -145,6 +145,11 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
+    public FairplayResponse fairplayToken(String ip) {
+        return tokenService.get().fairplayToken(ip);
+    }
+
+    @Override
     public String getPlayerTokenString() {
         return tokenService.get().getPlayerTokenString();
     }

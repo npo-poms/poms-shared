@@ -71,33 +71,27 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
     @Override
     @SneakyThrows
     public WideVineResponse widevineToken(String ip) {
-        CloseableHttpClient client = getHttpClient();
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        String url = baseUrl +  "/widevine/npo";
-        String json = MAPPER.writeValueAsString(new WideVineRequest(ip, widevineKey));
-        try {
-
-            StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
-            HttpPost httpPost = new HttpPost(url);
-            httpPost.setEntity(entity);
-            HttpResponse response = client.execute(httpPost);
-            IOUtils.copy(response.getEntity().getContent(), out);
-            log.info("Response {}", new String(out.toByteArray()));
-            return MAPPER.readValue(new ByteArrayInputStream(out.toByteArray()), WideVineResponse.class);
-        } catch (Exception e) {
-            log.error("POST {}: {}, response {}: {}", url, json, new String(out.toByteArray()), e.getMessage());
-            throw e;
-        }
-
+        return MAPPER.readValue(token(ip, "widevine"), WideVineResponse.class);
     }
 
     @Override
     @SneakyThrows
     public PlayreadyResponse playreadyToken(String ip) {
+        return MAPPER.readValue(token(ip, "playready"), PlayreadyResponse.class);
+    }
+
+    @Override
+    @SneakyThrows
+    public FairplayResponse fairplayToken(String ip) {
+        return MAPPER.readValue(token(ip, "fairplay"), FairplayResponse.class);
+    }
+
+    @SneakyThrows
+    private byte[] token(String ip, String option) {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        String url = baseUrl + "/playready/npo";
-        String json = MAPPER.writeValueAsString(new PlayreadyRequest(ip, playreadyKey));
+        String url = baseUrl + "/" + option + "/npo";
+        String json = MAPPER.writeValueAsString(new TokenRequest(ip, playreadyKey));
         try {
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
             HttpPost httpPost = new HttpPost(url);
@@ -105,12 +99,14 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
             HttpResponse response = client.execute(httpPost);
             IOUtils.copy(response.getEntity().getContent(), out);
             log.info("Response {}", new String(out.toByteArray()));
-            return MAPPER.readValue(new ByteArrayInputStream(out.toByteArray()), PlayreadyResponse.class);
+            return out.toByteArray();
         } catch (Exception e) {
             log.error("POST {}: {} , response {}: {}", url, json, new String(out.toByteArray()), e.getMessage());
             throw e;
         }
+
     }
+
 
     @Override
     @ManagedAttribute

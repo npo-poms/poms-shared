@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class PlayreadyRequest {
+public class TokenRequest {
     private String client_ip;
     private String authorization_key;
 
 
-    public PlayreadyRequest(String client_ip, String authorization_key) {
+    public TokenRequest(String client_ip, String authorization_key) {
         this.client_ip = client_ip;
         this.authorization_key = authorization_key;
     }

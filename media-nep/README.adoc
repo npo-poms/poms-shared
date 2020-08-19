@@ -25,7 +25,8 @@ Intake for 'itemize' and 'grab screen'.
 
 widevine token, playready tokens
 
-`nep.tokengenerator-api.baseUrl=http://tokengenerator-npo.cdn.streamgate.nl/keys-dev/token-provider/web/authenticate`
+`nep.tokengenerator-api.baseUrl=https://drm-token-provider.nepworldwide.nl/authenticate/`
+
 
 === NEPSAMService
 
