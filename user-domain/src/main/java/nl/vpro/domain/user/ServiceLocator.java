@@ -56,7 +56,7 @@ public class ServiceLocator  {
 
     public static void  setEditorService(final EditorService editorService) {
          if (serviceLocator == null) {
-            new ServiceLocator();
+            serviceLocator = new ServiceLocator();
         }
         serviceLocator.editorService = () -> editorService;
     }
@@ -64,7 +64,7 @@ public class ServiceLocator  {
 
     public static void setBroadcasterService(final BroadcasterService broadcasterService) {
         if (serviceLocator == null) {
-            new ServiceLocator();
+            serviceLocator = new ServiceLocator();
         }
         serviceLocator.broadcasterService = () -> broadcasterService;
     }
@@ -78,14 +78,14 @@ public class ServiceLocator  {
 
     public static void setPortalService(final PortalService portalService) {
         if (serviceLocator == null) {
-            new ServiceLocator();
+            serviceLocator = new ServiceLocator();
         }
         serviceLocator.portalService = () -> portalService;
     }
 
     public static void setThirdPartyService(final ThirdPartyService thirdPartyService) {
         if (serviceLocator == null) {
-            new ServiceLocator();
+            serviceLocator = new ServiceLocator();
         }
         serviceLocator.thirdPartyService = () -> thirdPartyService;
     }
