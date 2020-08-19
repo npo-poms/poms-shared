@@ -87,10 +87,10 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
     }
 
     @SneakyThrows
-    private byte[] token(String ip, String option) {
+    private byte[] token(String ip, String drmType) {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        String url = baseUrl + "/" + option + "/npo";
+        String url = baseUrl + "/" + drmType + "/npo";
         String json = MAPPER.writeValueAsString(new TokenRequest(ip, playreadyKey));
         try {
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
