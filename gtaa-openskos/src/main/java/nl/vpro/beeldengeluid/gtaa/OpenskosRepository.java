@@ -33,9 +33,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.*;
+import org.springframework.http.client.*;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.XmlMappingException;
@@ -130,6 +129,48 @@ public class OpenskosRepository implements GTAARepository {
 
     }
 
+    private void addErrorHandler() {
+        template.setErrorHandler(new ResponseErrorHandler() {
+            @Override
+            public boolean hasError(@NonNull ClientHttpResponse response) throws IOException {
+                boolean hasError = ! response.getStatusCode().is2xxSuccessful();
+                if (hasError) {
+                    log.warn("{}", response);
+                } else {
+                    Post_RDF.remove();
+                }
+                return hasError;
+            }
+
+            @Override
+            public void handleError(@NonNull ClientHttpResponse response) throws IOException {
+                StringWriter body = new StringWriter();
+                IOUtils.copy(response.getBody(), body, StandardCharsets.UTF_8);
+                RDFPost postRdf = Post_RDF.get();
+                try {
+                    switch (response.getStatusCode()) {
+                        case CONFLICT:
+                            throw new GTAAConflict("Conflicting or duplicate label: " + postRdf.prefLabel + ": " + body);
+                        case BAD_REQUEST:
+                            if (body.toString().startsWith("The pref label already exists in that concept scheme")) {
+                                throw new GTAAConflict(body.toString());
+                            }
+                        default:
+                            StringWriter writer = new StringWriter();
+                            writer.append("Request:\n");
+                            JAXB.marshal(postRdf.rdf, writer);
+                            writer.append("Response:\n");
+                            writer.append(body.toString());
+                            throw new RuntimeException("For " + gtaaUrl + " " +
+                                response.getStatusCode() + " " + response.getStatusText() + " " + writer.toString());
+                    }
+                } finally {
+                    Post_RDF.remove();
+                }
+            }
+        });
+    }
+
     private static RestTemplate createTemplateIfNull(@Nullable RestTemplate template) {
         if (template == null) {
 
@@ -172,6 +213,7 @@ public class OpenskosRepository implements GTAARepository {
             geoLocationsSpec,
             useXLLabels
         );
+        addErrorHandler();
     }
 
 
@@ -366,6 +408,19 @@ public class OpenskosRepository implements GTAARepository {
         return oai_pmh.getListRecord();
     }
 
+    ThreadLocal<RDFPost> Post_RDF = ThreadLocal.withInitial(() -> null);
+
+
+    protected static class RDFPost {
+        final String prefLabel;
+        final RDF rdf;
+
+        public RDFPost(String prefLabel, RDF rdf) {
+            this.prefLabel = prefLabel;
+            this.rdf = rdf;
+        }
+    }
+
     private ResponseEntity<Source> postRDF(
         @NonNull String prefLabel,
         @NonNull List<Label> notes,
@@ -385,44 +440,13 @@ public class OpenskosRepository implements GTAARepository {
                     .inScheme(scheme.getUrl())
                     .build()));
 
-        template.setErrorHandler(new ResponseErrorHandler() {
-            @Override
-            public boolean hasError(@NonNull ClientHttpResponse response) throws IOException {
-                boolean hasError = ! response.getStatusCode().is2xxSuccessful();
-                if (hasError) {
-                    log.warn("{}", response);
-                }
-                return hasError;
-            }
 
-            @Override
-            public void handleError(@NonNull ClientHttpResponse response) throws IOException {
-                StringWriter body = new StringWriter();
-                IOUtils.copy(response.getBody(), body, StandardCharsets.UTF_8);
-                switch (response.getStatusCode()) {
-                case CONFLICT:
-                    throw new GTAAConflict("Conflicting or duplicate label: " + prefLabel + ": " + body);
-                case BAD_REQUEST:
-                    if (body.toString().startsWith("The pref label already exists in that concept scheme")) {
-                        throw new GTAAConflict(body.toString());
-                    }
-                default:
-                    StringWriter writer = new StringWriter();
-                    writer.append("Request:\n");
-                    JAXB.marshal(rdf, writer);
-                    writer.append("Response:\n");
-                    writer.append(body.toString());
-                    throw new RuntimeException("For " + gtaaUrl + " " +
-                        response.getStatusCode() + " " + response.getStatusText() + " " + writer.toString());
-                }
-            }
-        });
-
+        Post_RDF.set(new RDFPost(prefLabel, rdf));
         // Beware parameter ordering is relevant
-        ResponseEntity<Source> source =  template.postForEntity(
-                String.format("%s/api/concept?key=%s&collection=gtaa&autoGenerateIdentifiers=true&tenant=%s",
-                        gtaaUrl ,gtaaKey, tenant),
-                rdf, Source.class);
+        ResponseEntity<Source> source = template.postForEntity(
+            String.format("%s/api/concept?key=%s&collection=gtaa&autoGenerateIdentifiers=true&tenant=%s",
+                gtaaUrl, gtaaKey, tenant),
+            rdf, Source.class);
         return source;
     }
 

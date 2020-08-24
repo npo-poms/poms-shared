@@ -115,7 +115,7 @@ public class OpenskosRepositoryITest {
             impl.submit(pietjePuk, "POMS");
             impl.submit(pietjePuk, "POMS");
             impl.submit(pietjePuk, "POMS");
-        });
+        }).isInstanceOf(GTAAConflict.class);
     }
 
 
