@@ -226,7 +226,11 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
     @Override
     public String toString() {
-        return (getType() == null ? "(unknown type)" : getType().name()) + ":" + getParentMid() + ":" + getChildMid();
+        return toString(getChildMid());
+    }
+
+    public String toString(String childMid) {
+        return (getType() == null ? "(unknown type)" : getType().name()) + ":" + getParentMid() + ":" + childMid;
     }
 
     @Override

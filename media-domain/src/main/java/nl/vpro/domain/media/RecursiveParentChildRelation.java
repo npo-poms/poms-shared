@@ -33,6 +33,14 @@ public interface RecursiveParentChildRelation extends ParentChildRelation {
 		return getEpisodeOf();
 	}
 
+	default SortedSet<RecursiveMemberRef> getOrCreate(StandaloneMemberRef.ObjectType type) {
+	    switch(type) {
+            case memberRef: return getOrCreateMemberOf();
+            case episodeRef: return getOrCreateEpisodeOf();
+        }
+        throw new UnsupportedOperationException();
+    }
+
 
 	RecursiveMemberRef getSegmentOf();
 
