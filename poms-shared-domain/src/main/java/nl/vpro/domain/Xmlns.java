@@ -36,7 +36,7 @@ public final class Xmlns {
     public static final URL    SHARED_XSD       = getResource("/nl/vpro/domain/media/" + SHARED_XSD_NAME);
 
     public static final String UPDATE_NAMESPACE = "urn:vpro:media:update:2009";
-    public static final String    UPDATE_XSD_NAME  = "vproMediaUpdate.xsd";
+    public static final String UPDATE_XSD_NAME  = "vproMediaUpdate.xsd";
 
     public static final URL    UPDATE_XSD       = getResource("/nl/vpro/domain/media/update/" + UPDATE_XSD_NAME);
 
