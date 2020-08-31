@@ -18,7 +18,6 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.PersonInterface;
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.MetaData;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
@@ -115,8 +114,8 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
         }
         return create(metaData.getFirstDescription());
     }
-    public static GTAAPerson create(Description description) {
 
+    public static GTAAPerson create(Description description) {
         return create(description, null);
     }
 
@@ -161,9 +160,6 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
             answer.familyName = prefName.getFamilyName();
         }
 
-        answer.scopeNotes = description.getScopeNote() == null ? null : description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList());
-        answer.lastModified = description.getModified() == null ? null : description.getModified().getValue().toInstant();
-
         if (description.getAltLabels() != null && !description.getAltLabels().isEmpty()) {
             final List<Names> altNames = description.getAltLabels().stream().map(Names::of)
                     .collect(Collectors.toList());
@@ -175,8 +171,7 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
             }
         }
 
-        answer.setStatus(description.getStatus());
-        answer.setId(description.getAbout());
+        fill(description, answer);
 
         return answer;
     }
