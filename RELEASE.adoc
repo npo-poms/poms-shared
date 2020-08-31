@@ -3,4 +3,13 @@
 mvn release:branch -DbranchName=REL-5.13-SNAPSHOT -DdevelopmentVersion=5.14-SNAPSHOT
 git checkout REL-5.13-SNAPSHOT
 mvn -Pdeploy,ossrh release:prepare release:perform -DreleaseVersion=5.13.0 -DdevelopmentVersion=5.13.1-SNAPSHOT
+
+----
+
+to deploy to vpro-nexus directly (avoid waiting for sync with maven central), checkout out the tag and deploy:
+
+[source,bash]
+----
+git checkout REL-5.15.1
+mvn -Pvpro-nexus deploy
 ----
