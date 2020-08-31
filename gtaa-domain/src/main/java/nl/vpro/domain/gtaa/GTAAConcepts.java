@@ -3,7 +3,10 @@ package nl.vpro.domain.gtaa;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
@@ -16,22 +19,32 @@ import nl.vpro.w3.rdf.Description;
 public class GTAAConcepts {
     private static final String SCHEME_URI = "http://data.beeldengeluid.nl/gtaa/";
 
-    static {
+    private static final Map<Scheme, Method> CREATE_METHODS = new ConcurrentHashMap<>();
 
-    }
     private GTAAConcepts() {
     }
 
     public static GTAAConcept toConcept(Description d) {
-        return (GTAAConcept) Scheme.ofUrl(d.getInScheme().getResource()).map(s -> {
-            try {
-                return s.getImplementation()
-                    .getMethod("create", Description.class)
-                    .invoke(null, d);
-            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                log.error(e.getMessage(), e);
-                return null;
+        Optional<Scheme> optionalScheme = Scheme.ofUrl(d.getInScheme().getResource());
+
+        return optionalScheme.map(scheme ->  {
+            Method method = CREATE_METHODS.computeIfAbsent(scheme, s -> {
+                try {
+                    return s.getImplementation()
+                        .getMethod("create", Description.class);
+                } catch (NoSuchMethodException e) {
+                    log.error(e.getMessage(), e);
+                    return null;
+                }
+            });
+            if (method != null) {
+                try {
+                    return (GTAAConcept) method.invoke(null, d);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    log.error(e.getMessage(), e);
+                }
             }
+            return null;
         }).orElseThrow(() -> new IllegalArgumentException("Not convertible " + d));
     }
 
