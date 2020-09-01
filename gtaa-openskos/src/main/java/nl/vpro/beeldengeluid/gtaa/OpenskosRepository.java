@@ -157,8 +157,10 @@ public class OpenskosRepository implements GTAARepository {
                             }
                         default:
                             StringWriter writer = new StringWriter();
-                            writer.append("Request:\n");
-                            JAXB.marshal(postRdf.rdf, writer);
+                            if (postRdf != null) {
+                                writer.append("Request:\n");
+                                JAXB.marshal(postRdf.rdf, writer);
+                            }
                             writer.append("Response:\n");
                             writer.append(body.toString());
                             throw new RuntimeException("For " + gtaaUrl + " " +
