@@ -527,7 +527,7 @@ public class MediaObjects {
         Object... args) {
         if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(Instant.now())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
-            appendReason(media,  reason, args);
+            appendReason(media, reason, args);
             media.setRepubDestinations(null);
             return true;
         } else {
@@ -556,7 +556,8 @@ public class MediaObjects {
             if (StringUtils.isBlank(existingReason)) {
                 media.setRepubReason(formattedReason);
             } else {
-                TreeSet<String> set = Arrays.stream(existingReason.split(",")).collect(Collectors.toCollection(TreeSet::new));
+                TreeSet<String> set = Arrays.stream(existingReason.split(","))
+                    .collect(Collectors.toCollection(TreeSet::new));
                 set.add(formattedReason);
                 media.setRepubReason(String.join(",", set));
             }
@@ -576,9 +577,16 @@ public class MediaObjects {
         }
     }
 
-    public static void markPublished(@NonNull MediaObject media, @NonNull Instant now, String reason) {
+    /**
+     * Marks the fields of the mediaobject related to publishing as published.
+     *
+     * the last publish instant will be set, and the reason and destinations will be cleared.
+     *
+     * The workflow itself will remain untouched, and would be set to {@link Workflow#PUBLISHED}, {@link Workflow#REVOKED} or {@link Workflow#MERGED}
+     */
+    public static void markPublished(@NonNull MediaObject media, @NonNull Instant now) {
         media.setLastPublishedInstant(now);
-        appendReason(media, reason);
+        media.setRepubReason(null);
         media.setRepubDestinations(null);
     }
 
