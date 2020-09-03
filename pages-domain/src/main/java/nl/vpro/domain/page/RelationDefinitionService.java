@@ -14,8 +14,7 @@ public interface RelationDefinitionService {
     // TODO
     static RelationDefinitionService getInstance() {
         try {
-            return (RelationDefinitionService) Class.forName("nl.vpro.services.page.RelationDefinitionServiceImpl").getMethod("getInstance").invoke(null);
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
+            return (RelationDefinitionService) Class.forName("nl.vpro.domain.page.RelationDefinitionServiceImpl").getMethod("getInstance").invoke(null); } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
             throw new IllegalArgumentException(e);
         }
     }
