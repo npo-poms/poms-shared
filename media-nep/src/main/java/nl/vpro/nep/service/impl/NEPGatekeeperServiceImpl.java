@@ -3,6 +3,7 @@ package nl.vpro.nep.service.impl;
 
 import io.openapitools.jackson.dataformat.hal.HALMapper;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -241,6 +242,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
     }
 
     @Override
+    @SneakyThrows
     public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull String workflowId) throws NEPException {
         URIBuilder builder = null;
         try {
@@ -258,10 +260,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
                     StringWriter w = new StringWriter();
                     IOUtils.copy(closeableHttpResponse.getEntity().getContent(), w, StandardCharsets.UTF_8);
                     throw new IllegalStateException(closeableHttpResponse.getStatusLine() + ":" + w.toString());
-
             }
-        } catch (IOException e) {
-            throw new NEPException(e, e.getMessage());
         }
     }
 

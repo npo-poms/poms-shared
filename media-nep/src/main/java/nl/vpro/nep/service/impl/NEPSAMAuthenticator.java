@@ -68,7 +68,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     }
 
     @Override
-
+    @SneakyThrows
     public String get() {
         if (needsRefresh()) {
             authenticate();
@@ -98,7 +98,6 @@ public class NEPSAMAuthenticator implements Supplier<String> {
             this.responseInstant = Instant.now();
             log.info("Acquired {} (expires {})", this.loginResponse, getExpiration());
         }
-
     }
 
 
