@@ -100,8 +100,6 @@ public class NEPSAMAuthenticator implements Supplier<String> {
         }
     }
 
-
-
     @ManagedAttribute
     public Instant getExpiration() {
         Base64.Decoder decoder = Base64.getUrlDecoder();
