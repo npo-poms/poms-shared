@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Iterator;
 import java.util.Optional;
 
+import nl.vpro.nep.service.exception.NEPException;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -31,12 +32,12 @@ public interface NEPGatekeeperService extends  AutoCloseable{
         @Nullable StatusType status,
         @Nullable Instant from,
         @Nullable Long limit
-    );
+    ) throws NEPException;
 
     @NonNull
     Optional<WorkflowExecution> getTranscodeStatus(
         @NonNull String workflowId
-    );
+    ) throws NEPException;
 
     String getGatekeeperString();
 }

@@ -2,6 +2,8 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
+import nl.vpro.nep.service.exception.NEPException;
+
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.nep.domain.*;
@@ -31,21 +33,21 @@ public class NEPPlayerTokenServiceImplITest extends AbstractNEPTest {
     }
 
     @Test
-    public void widevine() {
+    public void widevine() throws NEPException {
         WideVineResponse wideVineResponse = impl.widevineToken("145.58.169.92");
         log.info("{}", wideVineResponse);
     }
 
 
     @Test
-    public void playready() {
+    public void playready() throws NEPException {
         PlayreadyResponse playreadyToken = impl.playreadyToken("145.58.169.92");
         log.info("{}", playreadyToken);
     }
 
 
     @Test
-    public void fairplay() {
+    public void fairplay() throws NEPException {
         FairplayResponse fairplayToken = impl.fairplayToken("145.58.169.92");
         log.info("{}", fairplayToken);
     }

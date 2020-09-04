@@ -1,6 +1,7 @@
 package nl.vpro.nep.service.impl;
 
-import lombok.SneakyThrows;
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -16,10 +17,13 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import nl.vpro.nep.service.exception.NEPException;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.*;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.ContentType;
@@ -92,12 +96,16 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         }
     }
 
-    @SneakyThrows
-    protected NEPItemizeResponse itemize(@NonNull NEPItemizeRequest request, String itemizeUrl, Supplier<String> itemizeKey) {
+    protected NEPItemizeResponse itemize(@NonNull NEPItemizeRequest request, String itemizeUrl, Supplier<String> itemizeKey) throws NEPException {
         String playerUrl = itemizeUrl + "/api/itemizer/job";
         log.info("Itemizing {} @ {}", request, playerUrl);
         HttpClientContext clientContext = HttpClientContext.create();
-        String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
+        String json = null;
+        try {
+            json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
+        } catch (JsonProcessingException e) {
+            throw new NEPException(e, e.getMessage());
+        }
         StringEntity entity = new StringEntity(json, JSON);
         HttpPost httpPost = new HttpPost(playerUrl);
         authenticate(httpPost, itemizeKey);
@@ -112,39 +120,47 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             }
 
             return Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), NEPItemizeResponse.class);
+        } catch (Exception e) {
+            throw new NEPException(e, e.getMessage());
         }
-
     }
 
     @Override
-    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant end, Integer max_bitrate) {
-        return itemize(
-            NEPItemizeRequest.builder()
-                .identifier(channel)
-                .starttime(NEPItemizeRequest.fromInstant(start).orElseThrow(IllegalArgumentException::new))
-                .endtime(NEPItemizeRequest.fromInstant(end).orElseThrow(IllegalArgumentException::new))
-                .max_bitrate(max_bitrate)
-                .build(),
-            itemizeLiveUrl,
-            itemizeLiveKey
-        );
+    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant end, Integer max_bitrate) throws NEPException {
+        try {
+            return itemize(
+                NEPItemizeRequest.builder()
+                    .identifier(channel)
+                    .starttime(NEPItemizeRequest.fromInstant(start).orElseThrow(IllegalArgumentException::new))
+                    .endtime(NEPItemizeRequest.fromInstant(end).orElseThrow(IllegalArgumentException::new))
+                    .max_bitrate(max_bitrate)
+                    .build(),
+                itemizeLiveUrl,
+                itemizeLiveKey
+            );
+        } catch (NEPException e) {
+            throw new NEPException(e, e.getMessage());
+        }
     }
 
     @Override
-    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration end, Integer max_bitrate) {
-        return itemize(
-            NEPItemizeRequest.builder()
-                .starttime(NEPItemizeRequest.fromDuration(start, Duration.ZERO))
-                .endtime(NEPItemizeRequest.fromDuration(end).orElseThrow(IllegalArgumentException::new))
-                .identifier(mid).max_bitrate(max_bitrate).build(),
-            itemizeMidUrl,
-            itemizeMidKey
-        );
+    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration end, Integer max_bitrate) throws NEPException {
+        try {
+            return itemize(
+                NEPItemizeRequest.builder()
+                    .starttime(NEPItemizeRequest.fromDuration(start, Duration.ZERO))
+                    .endtime(NEPItemizeRequest.fromDuration(end).orElseThrow(IllegalArgumentException::new))
+                    .identifier(mid).max_bitrate(max_bitrate).build(),
+                itemizeMidUrl,
+                itemizeMidKey
+            );
+        } catch (NEPException e) {
+            throw new NEPException(e, e.getMessage());
+        }
     }
 
     private static final Set<String> GRAB_SCREEN_HEADERS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(HttpHeaders.CONTENT_TYPE.toLowerCase(), HttpHeaders.CONTENT_LENGTH.toLowerCase())));
-    @SneakyThrows
-    protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull BiConsumer<String, String> headers,  @NonNull  OutputStream outputStream, String itemizeUrl, Supplier<String> key) {
+    protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull BiConsumer<String, String> headers,  @NonNull  OutputStream outputStream, String itemizeUrl, Supplier<String> key) throws NEPException {
         HttpClientContext clientContext = HttpClientContext.create();
         String framegrabber = itemizeUrl + "/api/framegrabber?identifier=" + identifier + "&time=" + time;
         HttpGet get = new HttpGet(framegrabber);
@@ -165,20 +181,30 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
                 IOUtils.copy(execute.getEntity().getContent(), result, Charset.defaultCharset());
                 throw new RuntimeException(result.toString());
             }
+        } catch (Exception e) {
+            throw new NEPException(e, e.getMessage());
         }
     }
 
     @Override
-    public void grabScreenMid(String mid, Duration offset, @NonNull BiConsumer<String, String> headers, OutputStream outputStream) {
+    public void grabScreenMid(String mid, Duration offset, @NonNull BiConsumer<String, String> headers, OutputStream outputStream) throws NEPException {
         String durationString = DurationFormatUtils.formatDuration(offset.toMillis(), "HH:mm:ss.SSS", true);
-        grabScreen(mid, durationString, headers, outputStream, itemizeMidUrl, itemizeMidKey);
+        try {
+            grabScreen(mid, durationString, headers, outputStream, itemizeMidUrl, itemizeMidKey);
+        } catch (NEPException e) {
+            throw new NEPException(e, e.getMessage());
+        }
     }
 
     @Override
-    public void grabScreenLive(String channel, Instant instant, @NonNull BiConsumer<String, String> headers, OutputStream outputStream) {
-        grabScreen(channel,
-            NEPItemizeRequest.fromInstant(instant).orElseThrow(() -> new IllegalArgumentException("Instant " + instant + " could not be formatted")),
-            headers, outputStream, itemizeLiveUrl, itemizeLiveKey);
+    public void grabScreenLive(String channel, Instant instant, @NonNull BiConsumer<String, String> headers, OutputStream outputStream) throws NEPException {
+        try {
+            grabScreen(channel,
+                NEPItemizeRequest.fromInstant(instant).orElseThrow(() -> new IllegalArgumentException("Instant " + instant + " could not be formatted")),
+                headers, outputStream, itemizeLiveUrl, itemizeLiveKey);
+        } catch (NEPException e) {
+            throw new NEPException(e, e.getMessage());
+        }
     }
 
     @Override

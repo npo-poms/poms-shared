@@ -1,6 +1,7 @@
 package nl.vpro.nep.service;
 
 import nl.vpro.nep.domain.*;
+import nl.vpro.nep.service.exception.NEPException;
 
 /**
  * @author Michiel Meeuwissen
@@ -8,11 +9,11 @@ import nl.vpro.nep.domain.*;
  */
 public interface NEPPlayerTokenService extends AutoCloseable {
 
-    WideVineResponse widevineToken(String ip);
+    WideVineResponse widevineToken(String ip) throws NEPException;
 
-    PlayreadyResponse playreadyToken(String ip);
+    PlayreadyResponse playreadyToken(String ip) throws NEPException;
 
-    FairplayResponse fairplayToken(String ip);
+    FairplayResponse fairplayToken(String ip) throws NEPException;
 
     String getPlayerTokenString();
 }

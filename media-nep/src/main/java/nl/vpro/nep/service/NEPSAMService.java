@@ -1,5 +1,7 @@
 package nl.vpro.nep.service;
 
+import nl.vpro.nep.service.exception.NEPException;
+
 import java.time.Duration;
 
 /**
@@ -10,8 +12,8 @@ import java.time.Duration;
  */
 public interface NEPSAMService extends  AutoCloseable {
 
-    String streamAccessLive(String channel, String ip, Duration duration);
-    String streamAccessMid(String mid, boolean drm, String ip, Duration duration);
+    String streamAccessLive(String channel, String ip, Duration duration) throws NEPException;
+    String streamAccessMid(String mid, boolean drm, String ip, Duration duration) throws NEPException;
 
     String getStreamAccessLiveString();
     String getStreamAccessMidString();

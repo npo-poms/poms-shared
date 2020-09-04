@@ -98,12 +98,10 @@ public class NEPSAMAuthenticator implements Supplier<String> {
             this.responseInstant = Instant.now();
             log.info("Acquired {} (expires {})", this.loginResponse, getExpiration());
         }
-
     }
 
-
-    @SneakyThrows
     @ManagedAttribute
+    @SneakyThrows
     public Instant getExpiration() {
         Base64.Decoder decoder = Base64.getUrlDecoder();
         String[] parts = loginResponse.token.split("\\."); // Splitting header, payload and signature
@@ -167,7 +165,5 @@ public class NEPSAMAuthenticator implements Supplier<String> {
 
         @JsonIgnore
         Instant obtaintedAt = Instant.now();
-
-
     }
 }

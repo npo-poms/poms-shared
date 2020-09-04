@@ -15,6 +15,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
 
+import nl.vpro.nep.service.exception.NEPException;
+
 import org.apache.http.HttpHeaders;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -105,30 +107,36 @@ public class NEPSAMServiceImpl implements NEPSAMService{
     }
 
     @Override
-    @SneakyThrows
-    public String streamAccessLive(String channel,  String ip, Duration duration) {
-        AccessApi streamApiLive  = getStreamApi(baseUrlLive, authenticatorLive);
+    public String streamAccessLive(String channel,  String ip, Duration duration) throws NEPException {
+        try {
+            AccessApi streamApiLive  = getStreamApi(baseUrlLive, authenticatorLive);
 
-        StreamAccessItem request = createStreamAccessItem(ip, duration);
-        String profile = drmProfileLive;
-        log.debug("Using profile {}", profile);
-        StreamAccessResponseItem streamAccessResponseItem = streamApiLive.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerLive, platformLive,  profile, channel, request);
-        Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
-        return (String) attributes.get("url");
+            StreamAccessItem request = createStreamAccessItem(ip, duration);
+            String profile = drmProfileLive;
+            log.debug("Using profile {}", profile);
+            StreamAccessResponseItem streamAccessResponseItem = streamApiLive.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerLive, platformLive,  profile, channel, request);
+            Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
+            return (String) attributes.get("url");
+        } catch (Exception e) {
+            throw new NEPException(e, e.getMessage());
+        }
     }
 
     @Override
-    @SneakyThrows
-    public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) {
-        AccessApi streamApiMid = getStreamApi(baseUrlMid, authenticatorMid);
+    public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) throws NEPException {
+        try {
+            AccessApi streamApiMid = getStreamApi(baseUrlMid, authenticatorMid);
 
-        log.debug("Created {}", streamApiMid);
-        StreamAccessItem request = createStreamAccessItem(ip, duration);
-        String profile = drm ? drmProfileMid : noDrmProfileMid;
-        log.debug("Using profile {}", profile);
-        StreamAccessResponseItem streamAccessResponseItem = streamApiMid.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerMid, platformMid,  profile, mid, request);
-        Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
-        return (String) attributes.get("url");
+            log.debug("Created {}", streamApiMid);
+            StreamAccessItem request = createStreamAccessItem(ip, duration);
+            String profile = drm ? drmProfileMid : noDrmProfileMid;
+            log.debug("Using profile {}", profile);
+            StreamAccessResponseItem streamAccessResponseItem = streamApiMid.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerMid, platformMid,  profile, mid, request);
+            Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
+            return (String) attributes.get("url");
+        } catch (Exception e) {
+            throw new NEPException(e, e.getMessage());
+        }
     }
 
     @Override
@@ -142,7 +150,6 @@ public class NEPSAMServiceImpl implements NEPSAMService{
         return baseUrlMid;
 
     }
-
 
     static StreamAccessItem createStreamAccessItem(String ip, Duration duration) {
         StreamAccessItem item = new StreamAccessItem().data(new ApiObject().type("access"));
@@ -171,7 +178,6 @@ public class NEPSAMServiceImpl implements NEPSAMService{
         }
         return httpClient;
      }
-
 
     @Override
     public String toString() {
