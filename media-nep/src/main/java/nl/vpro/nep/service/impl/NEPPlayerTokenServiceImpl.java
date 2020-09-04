@@ -82,7 +82,7 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
         try {
             return MAPPER.readValue(token(ip, "widevine", widevineKey), WideVineResponse.class);
         } catch (IOException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
@@ -91,7 +91,7 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
         try {
             return MAPPER.readValue(token(ip, "playready", playreadyKey), PlayreadyResponse.class);
         } catch (IOException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
@@ -100,7 +100,7 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
         try {
             return MAPPER.readValue(token(ip, "fairplay", fairplayKey), FairplayResponse.class);
         } catch (IOException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
@@ -112,7 +112,7 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
         try {
             json = MAPPER.writeValueAsString(new TokenRequest(ip, playreadyKey));
         } catch (JsonProcessingException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
         try {
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);

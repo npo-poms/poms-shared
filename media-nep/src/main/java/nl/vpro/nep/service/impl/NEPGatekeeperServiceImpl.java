@@ -185,7 +185,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         try {
             builder = new URIBuilder(getWorkflowsEndPoint());
         } catch (URISyntaxException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
         if (status != null) {
             builder.setParameter("status", status.name());
@@ -246,7 +246,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         try {
             builder = new URIBuilder(getWorkflowsEndPoint() + workflowId);
         } catch (URISyntaxException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
         try (CloseableHttpResponse closeableHttpResponse = executeGet(builder.toString())) {
             switch(closeableHttpResponse.getStatusLine().getStatusCode()) {
@@ -261,7 +261,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
             }
         } catch (IOException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 

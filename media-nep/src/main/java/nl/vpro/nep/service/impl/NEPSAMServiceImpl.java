@@ -118,7 +118,7 @@ public class NEPSAMServiceImpl implements NEPSAMService{
             Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
             return (String) attributes.get("url");
         } catch (Exception e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
@@ -135,7 +135,7 @@ public class NEPSAMServiceImpl implements NEPSAMService{
             Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
             return (String) attributes.get("url");
         } catch (Exception e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 

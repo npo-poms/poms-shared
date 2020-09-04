@@ -104,7 +104,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         try {
             json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
         } catch (JsonProcessingException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
         StringEntity entity = new StringEntity(json, JSON);
         HttpPost httpPost = new HttpPost(playerUrl);
@@ -121,7 +121,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
             return Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), NEPItemizeResponse.class);
         } catch (Exception e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
@@ -139,7 +139,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
                 itemizeLiveKey
             );
         } catch (NEPException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
@@ -155,7 +155,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
                 itemizeMidKey
             );
         } catch (NEPException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
@@ -182,7 +182,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
                 throw new RuntimeException(result.toString());
             }
         } catch (Exception e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
@@ -192,7 +192,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         try {
             grabScreen(mid, durationString, headers, outputStream, itemizeMidUrl, itemizeMidKey);
         } catch (NEPException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
@@ -203,7 +203,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
                 NEPItemizeRequest.fromInstant(instant).orElseThrow(() -> new IllegalArgumentException("Instant " + instant + " could not be formatted")),
                 headers, outputStream, itemizeLiveUrl, itemizeLiveKey);
         } catch (NEPException e) {
-            throw new NEPException(e, "Exception from a NEP function call");
+            throw new NEPException(e, e.getMessage());
         }
     }
 
