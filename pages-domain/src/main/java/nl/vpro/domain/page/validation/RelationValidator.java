@@ -24,10 +24,13 @@ public class RelationValidator implements ConstraintValidator<ValidRelation, Rel
     @Override
     public boolean isValid(RelationUpdate relationUpdate, ConstraintValidatorContext context) {
         try {
-            RelationDefinitionService broadcasterService = RelationDefinitionServiceProvider.getInstance();
+            RelationDefinitionService relationDefinitionService = RelationDefinitionServiceProvider.getInstance();
             String bc = relationUpdate.getBroadcaster();
             String type = relationUpdate.getType();
-            return broadcasterService.get(type, new Broadcaster(bc)) != null;
+            return relationDefinitionService.get(type, new Broadcaster(bc)) != null;
+        } catch (IllegalStateException ise) {
+            log.warn(ise.getMessage());
+            return true;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return true;

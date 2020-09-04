@@ -26,6 +26,9 @@ public class RelationDefinitionServiceProvider {
     }
 
     public static RelationDefinitionService getInstance() {
+        if (instance == null) {
+            throw new IllegalStateException("No relation definition instance set. Pleas use #setInstance");
+        }
         return instance;
     }
 }
