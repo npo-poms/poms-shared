@@ -10,6 +10,8 @@ import java.util.function.*;
 import javax.annotation.PreDestroy;
 import javax.inject.*;
 
+import nl.vpro.nep.service.exception.NEPException;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -51,12 +53,12 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate) {
+    public NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate) throws NEPException {
         return itemizeService.get().itemizeLive(channel, start, stop, max_bitrate);
     }
 
     @Override
-    public void grabScreenLive(String channel, Instant instant, BiConsumer<String, String> headers, OutputStream outputStream) {
+    public void grabScreenLive(String channel, Instant instant, BiConsumer<String, String> headers, OutputStream outputStream) throws NEPException {
         itemizeService.get().grabScreenLive(channel, instant, headers, outputStream);
     }
 
@@ -72,13 +74,13 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate) {
+    public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate) throws NEPException {
         return itemizeService.get().itemizeMid(mid, start, stop, max_bitrate);
 
     }
 
     @Override
-    public void grabScreenMid(String mid, Duration offset, BiConsumer<String, String> headers, OutputStream outputStream) {
+    public void grabScreenMid(String mid, Duration offset, BiConsumer<String, String> headers, OutputStream outputStream) throws NEPException {
         itemizeService.get().grabScreenMid(mid, offset, headers, outputStream);
     }
 
@@ -91,12 +93,12 @@ public class NEPServiceImpl implements NEPService {
 
     @NonNull
     @Override
-    public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
+    public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) throws NEPException {
         return gatekeeperService.get().getTranscodeStatuses(mid, status, from, limit);
     }
 
     @Override
-    public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull  String workflowId) {
+    public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull  String workflowId) throws NEPException {
         return gatekeeperService.get().getTranscodeStatus(workflowId);
     }
 
@@ -135,17 +137,17 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public WideVineResponse widevineToken(String ip) {
+    public WideVineResponse widevineToken(String ip) throws NEPException {
         return tokenService.get().widevineToken(ip);
     }
 
     @Override
-    public PlayreadyResponse playreadyToken(String ip) {
+    public PlayreadyResponse playreadyToken(String ip) throws NEPException {
         return tokenService.get().playreadyToken(ip);
     }
 
     @Override
-    public FairplayResponse fairplayToken(String ip) {
+    public FairplayResponse fairplayToken(String ip) throws NEPException {
         return tokenService.get().fairplayToken(ip);
     }
 
@@ -155,12 +157,12 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public String streamAccessLive(String channel, String ip, Duration duration) {
+    public String streamAccessLive(String channel, String ip, Duration duration) throws NEPException {
         return samService.get().streamAccessLive(channel, ip, duration);
     }
 
     @Override
-    public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) {
+    public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) throws NEPException {
         return samService.get().streamAccessMid(mid, drm, ip, duration);
     }
 
