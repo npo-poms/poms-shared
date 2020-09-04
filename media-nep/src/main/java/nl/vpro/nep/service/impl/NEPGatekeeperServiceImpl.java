@@ -3,11 +3,11 @@ package nl.vpro.nep.service.impl;
 
 import io.openapitools.jackson.dataformat.hal.HALMapper;
 import lombok.Getter;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+
+import nl.vpro.nep.service.exception.NEPException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.*;
@@ -173,14 +175,18 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     @NonNull
     @Override
-    @SneakyThrows
     public Iterator<WorkflowExecution> getTranscodeStatuses(
         @Nullable String mid,
         @Nullable StatusType status,
         @Nullable Instant from,
-        @Nullable Long limit) {
+        @Nullable Long limit) throws NEPException {
         final int batchSize = pageSize;
-        URIBuilder builder = new URIBuilder(getWorkflowsEndPoint());
+        URIBuilder builder = null;
+        try {
+            builder = new URIBuilder(getWorkflowsEndPoint());
+        } catch (URISyntaxException e) {
+            throw new NEPException(e, "Exception from a NEP function call");
+        }
         if (status != null) {
             builder.setParameter("status", status.name());
         }
@@ -188,8 +194,9 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
         AtomicLong totalSize = new AtomicLong(-1);
 
+        URIBuilder finalBuilder = builder;
         Supplier<Iterator<WorkflowExecution>> getter = new Supplier<Iterator<WorkflowExecution>>() {
-            String next = builder.toString();
+            String next = finalBuilder.toString();
 
             @Override
             public Iterator<WorkflowExecution> get() {
@@ -234,9 +241,13 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
     }
 
     @Override
-    @SneakyThrows
-    public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull String workflowId) {
-        URIBuilder builder = new URIBuilder(getWorkflowsEndPoint() + workflowId);
+    public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull String workflowId) throws NEPException {
+        URIBuilder builder = null;
+        try {
+            builder = new URIBuilder(getWorkflowsEndPoint() + workflowId);
+        } catch (URISyntaxException e) {
+            throw new NEPException(e, "Exception from a NEP function call");
+        }
         try (CloseableHttpResponse closeableHttpResponse = executeGet(builder.toString())) {
             switch(closeableHttpResponse.getStatusLine().getStatusCode()) {
                 case HttpStatus.SC_OK:
@@ -249,9 +260,9 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
                     throw new IllegalStateException(closeableHttpResponse.getStatusLine() + ":" + w.toString());
 
             }
+        } catch (IOException e) {
+            throw new NEPException(e, "Exception from a NEP function call");
         }
-
-
     }
 
     private HttpHost getHttpHost() {

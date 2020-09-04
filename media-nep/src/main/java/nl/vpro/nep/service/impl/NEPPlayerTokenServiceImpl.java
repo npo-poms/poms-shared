@@ -1,5 +1,7 @@
 package nl.vpro.nep.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,6 +10,8 @@ import java.time.Duration;
 
 import javax.annotation.PreDestroy;
 import javax.inject.Named;
+
+import nl.vpro.nep.service.exception.NEPException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -74,29 +78,42 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
 
 
     @Override
-    @SneakyThrows
-    public WideVineResponse widevineToken(String ip) {
-        return MAPPER.readValue(token(ip, "widevine", widevineKey), WideVineResponse.class);
+    public WideVineResponse widevineToken(String ip) throws NEPException {
+        try {
+            return MAPPER.readValue(token(ip, "widevine", widevineKey), WideVineResponse.class);
+        } catch (IOException e) {
+            throw new NEPException(e, "Exception from a NEP function call");
+        }
     }
 
     @Override
-    @SneakyThrows
-    public PlayreadyResponse playreadyToken(String ip) {
-        return MAPPER.readValue(token(ip, "playready", playreadyKey), PlayreadyResponse.class);
+    public PlayreadyResponse playreadyToken(String ip) throws NEPException {
+        try {
+            return MAPPER.readValue(token(ip, "playready", playreadyKey), PlayreadyResponse.class);
+        } catch (IOException e) {
+            throw new NEPException(e, "Exception from a NEP function call");
+        }
     }
 
     @Override
-    @SneakyThrows
-    public FairplayResponse fairplayToken(String ip) {
-        return MAPPER.readValue(token(ip, "fairplay", fairplayKey), FairplayResponse.class);
+    public FairplayResponse fairplayToken(String ip) throws NEPException {
+        try {
+            return MAPPER.readValue(token(ip, "fairplay", fairplayKey), FairplayResponse.class);
+        } catch (IOException e) {
+            throw new NEPException(e, "Exception from a NEP function call");
+        }
     }
 
-    @SneakyThrows
-    private byte[] token(String ip, String drmType, String key) {
+    private byte[] token(String ip, String drmType, String key) throws NEPException {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         String url = baseUrl + "/" + drmType + "/npo";
-        String json = MAPPER.writeValueAsString(new TokenRequest(ip, playreadyKey));
+        String json = null;
+        try {
+            json = MAPPER.writeValueAsString(new TokenRequest(ip, playreadyKey));
+        } catch (JsonProcessingException e) {
+            throw new NEPException(e, "Exception from a NEP function call");
+        }
         try {
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
             HttpPost httpPost = new HttpPost(url);
@@ -107,7 +124,7 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
             return out.toByteArray();
         } catch (Exception e) {
             log.error("POST {}: {} , response {}: {}", url, json, new String(out.toByteArray()), e.getMessage());
-            throw e;
+            throw new NEPException(e, "POST " + url + ": " + json + ", response: " + new String(out.toByteArray()));
         }
 
     }

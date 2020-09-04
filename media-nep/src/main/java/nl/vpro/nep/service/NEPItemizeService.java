@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.util.function.BiConsumer;
 
 import nl.vpro.nep.domain.NEPItemizeResponse;
+import nl.vpro.nep.service.exception.NEPException;
 
 /**
  * @author Michiel Meeuwissen
@@ -20,7 +21,7 @@ public interface NEPItemizeService extends  AutoCloseable {
      * @since 5.10
      */
 
-    NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate);
+    NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate) throws NEPException;
 
     /**
      * NEP provides one service for two basicly different things.
@@ -28,7 +29,7 @@ public interface NEPItemizeService extends  AutoCloseable {
      * This grabs a frame from a MID, on a certain offset
      * @since 5.10
      */
-    void grabScreenMid(String mid, Duration offset, BiConsumer<String, String> headers, OutputStream outputStream);
+    void grabScreenMid(String mid, Duration offset, BiConsumer<String, String> headers, OutputStream outputStream) throws NEPException;
 
 
     /**
@@ -37,7 +38,7 @@ public interface NEPItemizeService extends  AutoCloseable {
      * This itemizes a piece of a live stream
      * @since 5.10
      */
-    NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate);
+    NEPItemizeResponse itemizeLive(String channel, Instant start, Instant stop, Integer max_bitrate) throws NEPException;
 
 
     /**
@@ -46,7 +47,7 @@ public interface NEPItemizeService extends  AutoCloseable {
      * This grabs a frame from a live stream, on a certain instant in time
      * @since 5.10
      */
-    void grabScreenLive(String channel, Instant instant, BiConsumer<String, String> headers, OutputStream outputStream);
+    void grabScreenLive(String channel, Instant instant, BiConsumer<String, String> headers, OutputStream outputStream) throws NEPException;
 
     String getLiveItemizerString();
 

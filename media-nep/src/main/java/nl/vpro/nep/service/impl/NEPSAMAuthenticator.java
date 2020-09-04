@@ -68,7 +68,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     }
 
     @Override
-    @SneakyThrows
+
     public String get() {
         if (needsRefresh()) {
             authenticate();
@@ -102,7 +102,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     }
 
 
-    @SneakyThrows
+
     @ManagedAttribute
     public Instant getExpiration() {
         Base64.Decoder decoder = Base64.getUrlDecoder();

@@ -25,7 +25,6 @@ public class NEPItemizerV1Authenticator implements Supplier<String> {
 
 
     @Override
-    @SneakyThrows
     public String get() {
         return bearerToken;
     }
