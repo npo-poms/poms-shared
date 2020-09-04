@@ -21,7 +21,7 @@ public class RelationDefinitionServiceProvider {
         if (previous == null || instance.equals(previous)) {
             log.info("Set relation definition service to {}", instance);
         } else {
-            log.warn("Replaced relation definition service {} -> {}", previous, instance);
+            throw new IllegalStateException("Trying to replace a relation definition service " +  previous + " -> " + instance);
         }
     }
 
