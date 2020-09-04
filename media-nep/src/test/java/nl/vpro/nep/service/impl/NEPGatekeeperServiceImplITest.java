@@ -8,6 +8,8 @@ import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
+import nl.vpro.nep.service.exception.NEPException;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.junit.jupiter.api.Test;
 
@@ -24,14 +26,14 @@ public class NEPGatekeeperServiceImplITest {
 
 
     @Test
-    public void testGet() {
+    public void testGet() throws NEPException {
         WorkflowExecution transcodeStatus = gatekeeperService.getTranscodeStatus("ce4e4e6a-4467-4a95-b9d7-fe509d2658f8").get();
         log.info("{}", transcodeStatus);
     }
 
 
     @Test
-    public void test() {
+    public void test() throws NEPException {
         @NonNull Iterator<WorkflowExecution> i = gatekeeperService.getTranscodeStatuses(null, null, Instant.now().minus(Duration.ofHours(2)), 200L);
         while (i.hasNext()) {
             log.info("{}", i.next());
@@ -41,15 +43,13 @@ public class NEPGatekeeperServiceImplITest {
 
     String mid = "WO_VPRO_352116";
 
-
-
     @Test
     public void transcode() {
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
             .mid(mid)
             .encryption(EncryptionType.NONE)
             .priority(PriorityType.LOW)
-            .platforms(Arrays.asList("internetvod"))
+            .platforms(Collections.singletonList("internetvod"))
             .file(gatekeeperService.getFtpUserName(), "WO_VPRO_783763_2018-11-12T133004122_geldig.mp4")
             .build()
             ;
@@ -62,14 +62,14 @@ public class NEPGatekeeperServiceImplITest {
     }
 
     @Test
-    public void getStatus() {
+    public void getStatus() throws NEPException {
         gatekeeperService.getTranscodeStatuses(mid, null, null, null).forEachRemaining((we) -> {
             log.info("{}", we);
         });
     }
 
     @Test
-    public void getStatuses() throws IOException {
+    public void getStatuses() throws IOException, NEPException {
         File file = new File("/Users/michiel/npo/media/trunk/player7.404");
         List<String> mids = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

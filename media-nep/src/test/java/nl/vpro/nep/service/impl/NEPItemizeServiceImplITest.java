@@ -8,6 +8,8 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+import nl.vpro.nep.service.exception.NEPException;
+
 import org.junit.jupiter.api.*;
 
 import nl.vpro.nep.domain.NEPItemizeResponse;
@@ -28,7 +30,7 @@ public class NEPItemizeServiceImplITest {
     //String MID = "AT_2073522";
     @Test
     @Order(1)
-    public void itemize() throws IOException {
+    public void itemize() throws IOException, NEPException {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         NEPItemizeResponse response = itemizer.itemizeMid(
@@ -61,7 +63,7 @@ public class NEPItemizeServiceImplITest {
     @Test
     @Order(10)
     @Tag("dvr")
-    public void itemizeDvr() {
+    public void itemizeDvr() throws NEPException {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         response = itemizer.itemizeLive("npo-1dvr", Instant.now().minusSeconds(300), Instant.now().minusSeconds(60), null);
@@ -93,27 +95,23 @@ public class NEPItemizeServiceImplITest {
 
     @Test
     @Order(20)
-    public void grabScreen() throws IOException {
+    public void grabScreen() throws IOException, NEPException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");
         Map<String, String> headers = new HashMap<>();
         itemizer.grabScreenLive("npo-1dvr", Instant.now().truncatedTo(ChronoUnit.SECONDS).minus(Duration.ofMinutes(1)), headers::put, new FileOutputStream(out));
         log.info("Created {} bytes {} (found headers {})", out.length(), out, headers);
-
-
     }
 
 
     @Test
     @Order(30)
 
-    public void grabScreenMid() throws IOException {
+    public void grabScreenMid() throws IOException, NEPException {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         File out = File.createTempFile("test", ".jpg");
         Map<String, String> headers = new HashMap<>();
         itemizer.grabScreenMid(MID, Duration.ZERO,  headers::put, new FileOutputStream(out));
         log.info("Created {} bytes {} (headers: {})", out.length(), out, headers);
-
-
     }
 }
