@@ -13,3 +13,10 @@ to deploy to vpro-nexus directly (avoid waiting for sync with maven central), ch
 git checkout REL-5.15.1
 mvn -Pvpro-nexus deploy
 ----
+
+You can start with vpro-nexus:
+[source,bash]
+----
+git checkout REL-5.15-SNAPSHOT
+mvn -Pvpro-nexus release:prepare release:perform -DreleaseVersion=5.15.4 -DdevelopmentVersion=5.15.5-SNAPSHOT
+----
