@@ -5,12 +5,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.5</version>
+    <version>5.15.6-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.pages</groupId>
   <artifactId>pages-domain</artifactId>
-  <version> 5.15.5</version>
+  <version> 5.15.6-SNAPSHOT</version>
   <name>pages-domain</name>
   <description>Domain objects 'pages'. Also contains analogous to media-domain 'update' versions of the objects (which are understood by the 'pages publisher api')</description>
 
