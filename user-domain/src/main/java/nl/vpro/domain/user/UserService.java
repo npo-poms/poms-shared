@@ -154,8 +154,11 @@ public interface UserService<T extends User> {
      * @param logger If not <code>null</code> catch exceptions and log as error.
      * @since 5.6
      */
-
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
+        return async(callable, logger, ThreadPools.backgroundExecutor);
+    }
+
+    default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger, ExecutorService executor) {
         Callable<R> wrapped =  wrap(callable, logger, true);
         Supplier<R> supplier  = () -> {
             MDC.clear();
