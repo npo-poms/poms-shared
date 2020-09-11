@@ -5,11 +5,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15-SNAPSHOT</version>
+    <version>5.15.5</version>
   </parent>
 
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-odi</artifactId>
+  <version> 5.15.5</version>
   <name>media-odi</name>
   <description>Support for ODI authentication as required by NPO player. Not sure this is still needed or used.</description>
 

@@ -6,11 +6,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15-SNAPSHOT</version>
+    <version>5.15.5</version>
   </parent>
 
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-domain</artifactId>
+  <version> 5.15.5</version>
   <name>api-domain</name>
   <description>Contains the objects used by the Frontend API, like forms and result objects</description>
 

@@ -4,10 +4,11 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15-SNAPSHOT</version>
+    <version>5.15.5</version>
   </parent>
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-organizations</artifactId>
+  <version> 5.15.5</version>
   <name>media-organizations</name>
   <description>Provides access to the POMS organization interfaces. The most basic example of an organization in the context of POMS is a 'broadcaster'.</description>
 
