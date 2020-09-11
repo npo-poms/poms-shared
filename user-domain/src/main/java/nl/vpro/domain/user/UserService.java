@@ -155,7 +155,7 @@ public interface UserService<T extends User> {
      * @since 5.6
      */
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
-        return async(callable, logger, ThreadPools.backgroundExecutor);
+        return async(callable, logger, ThreadPools.backgroundExecutor);  // use our own executor, see MSE-4873
     }
 
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger, ExecutorService executor) {
@@ -170,7 +170,7 @@ public interface UserService<T extends User> {
                 throw new RuntimeException(e);
             }
         };
-        return CompletableFuture.supplyAsync(supplier, ThreadPools.backgroundExecutor); // use our own executor, see MSE-4873
+        return CompletableFuture.supplyAsync(supplier, executor);
     }
 
     /**
