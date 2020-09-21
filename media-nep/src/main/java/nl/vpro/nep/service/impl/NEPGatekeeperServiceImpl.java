@@ -25,7 +25,6 @@ import org.apache.http.*;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.*;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -154,7 +153,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
     public WorkflowExecution transcode(
         @NonNull  WorkflowExecutionRequest request) throws IOException {
 
-        HttpClient client = getHttpClient();
+        CloseableHttpClient client = getHttpClient();
         String json = MAPPER.writeValueAsString(request);
         StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
 
@@ -165,8 +164,8 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
             log.warn("The file given in {} does not start with ftp user name {}", request, ftpUserName);
         }
         log.info("Transcode request {}", json);
-        HttpResponse response = client.execute(httpPost, clientContext);
-        try (InputStream content =  response.getEntity().getContent()) {
+        try (CloseableHttpResponse response = client.execute(httpPost, clientContext);
+              InputStream content =  response.getEntity().getContent()) {
             if (response.getStatusLine().getStatusCode() >= 300) {
                 ByteArrayOutputStream body = new ByteArrayOutputStream();
                 IOUtils.copy(content, body);
