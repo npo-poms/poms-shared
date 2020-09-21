@@ -19,7 +19,6 @@ import org.slf4j.*;
 
 import nl.vpro.domain.Roles;
 import nl.vpro.mdc.MDCConstants;
-import nl.vpro.util.ThreadPools;
 
 import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 
@@ -29,13 +28,10 @@ import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
  */
 public interface UserService<T extends User> {
 
-    ThreadPoolExecutor ASYNC_EXECUTOR =
-        new ThreadPoolExecutor(1, 10000, 600, TimeUnit.SECONDS,
-            new LinkedBlockingDeque<>(),
-            ThreadPools.createThreadFactory(
-                "nl.vpro.user.UserService.ASYNC",
-                false,
-                Thread.NORM_PRIORITY));
+    ThreadPoolExecutor ASYNC_EXECUTOR = new ThreadPoolExecutor(1,
+        10000,
+        600L, TimeUnit.SECONDS,
+        new SynchronousQueue<>());
 
 
     /**
