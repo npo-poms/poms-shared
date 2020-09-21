@@ -20,13 +20,12 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import nl.vpro.nep.service.exception.NEPException;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.http.*;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.*;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -44,6 +43,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.nep.domain.workflow.*;
 import nl.vpro.nep.service.NEPGatekeeperService;
+import nl.vpro.nep.service.exception.NEPException;
 import nl.vpro.util.*;
 
 
@@ -153,9 +153,11 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
     @Override
     public WorkflowExecution transcode(
         @NonNull  WorkflowExecutionRequest request) throws IOException {
-        CloseableHttpClient client = getHttpClient();
+
+        HttpClient client = getHttpClient();
         String json = MAPPER.writeValueAsString(request);
         StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
+
         HttpPost httpPost = new HttpPost(getWorkflowsEndPoint());
         httpPost.setEntity(entity);
 
@@ -164,14 +166,14 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         }
         log.info("Transcode request {}", json);
         HttpResponse response = client.execute(httpPost, clientContext);
-
-        if (response.getStatusLine().getStatusCode() >= 300) {
-            ByteArrayOutputStream body = new ByteArrayOutputStream();
-            IOUtils.copy(response.getEntity().getContent(), body);
-            throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
+        try (InputStream content =  response.getEntity().getContent()) {
+            if (response.getStatusLine().getStatusCode() >= 300) {
+                ByteArrayOutputStream body = new ByteArrayOutputStream();
+                IOUtils.copy(content, body);
+                throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
+            }
+            return MAPPER.readValue(content, WorkflowExecution.class);
         }
-
-        return MAPPER.readValue(response.getEntity().getContent(), WorkflowExecution.class);
     }
 
     @NonNull
