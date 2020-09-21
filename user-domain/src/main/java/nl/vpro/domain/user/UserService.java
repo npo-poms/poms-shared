@@ -29,8 +29,17 @@ import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
  */
 public interface UserService<T extends User> {
 
+    ThreadPoolExecutor asyncExecutor =
+        new ThreadPoolExecutor(5, 10000, 60, TimeUnit.SECONDS,
+            new LinkedBlockingDeque<>(),
+            ThreadPools.createThreadFactory(
+                "nl.vpro.user.UserSevice.ASYNC",
+                false,
+                Thread.NORM_PRIORITY));
+
+
     /**
-     * Given an existing user, and a user obtained from sso or so, determins whether callign {@link #update(User)} is important now.
+     * Given an existing user, and a user obtained from sso or so, determins whether calling {@link #update(User)} is important now.
      */
     boolean needsUpdate(T oldUser, T newUser);
 
@@ -155,7 +164,7 @@ public interface UserService<T extends User> {
      * @since 5.6
      */
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
-        return async(callable, logger, ThreadPools.backgroundExecutor);  // use our own executor, see MSE-4873
+        return async(callable, logger, asyncExecutor);  // use our own executor, see MSE-4873
     }
 
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger, ExecutorService executor) {
