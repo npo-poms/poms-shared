@@ -6,19 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -36,7 +31,6 @@ import static nl.vpro.util.MultiLanguageString.en;
  *
  *  TODO: For the download service we had severe troubles with 'rekeying' (at the end worked around by calling command line scp). Would this not be an issue for upload?
  */
-@Named("NEPUploadService")
 @Slf4j
 public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
@@ -56,11 +50,13 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     @Setter
     private Duration socketTimeout = Duration.ofSeconds(10L);
 
+
+    /**
+     * This has something to do with the timeout for waiting until acknowledgements from the server?
+     */
     @Getter
     @Setter
-    private Duration maxaliveClient = Duration.ofMinutes(3);
-
-    ThreadLocal<SSHClientFactory.ClientHolder> sshClient = new ThreadLocal<>();
+    private Duration sftpTimeout = Duration.ofMillis(100);
 
     Set<SSHClientFactory.ClientHolder> created = new HashSet<>();
 
@@ -108,6 +104,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             final SSHClient client = createClient().get();
             final SFTPClient sftp = client.newSFTPClient()
         ) {
+            sftp.getSFTPEngine().setTimeoutMs((int) sftpTimeout.toMillis());
             int split  = nepFile.lastIndexOf("/");
             if (split > 0) {
                 sftp.mkdirs(nepFile.substring(0, split));
@@ -182,22 +179,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     @Override
     public String toString() {
         return getClass().getSimpleName() + ":" + username + "@" + sftpHost;
-    }
-
-    SSHClient getClient() throws IOException {
-        SSHClientFactory.ClientHolder client = sshClient.get();
-        if (client == null || ! client.get().isConnected() || Duration.between(client.getCreationTime(), Instant.now()).compareTo(maxaliveClient) > 0) {
-            if (client != null) {
-                if (client.get().isConnected()) {
-                    client.get().disconnect();
-                }
-                created.remove(client);
-            }
-            client = createClient();
-            created.add(client);
-            sshClient.set(client);
-        }
-        return client.get();
     }
 
     protected synchronized SSHClientFactory.ClientHolder createClient() throws IOException {

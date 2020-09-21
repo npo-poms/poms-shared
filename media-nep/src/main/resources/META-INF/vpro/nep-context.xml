@@ -12,6 +12,17 @@
   <context:component-scan base-package="nl.vpro.nep.service.impl"/>
 
 
+  <bean id="NEPUploadService" class="nl.vpro.nep.service.impl.NEPSSHJUploadServiceImpl">
+    <constructor-arg value="${nep.gatekeeper-upload.host}" />
+    <constructor-arg value="${nep.gatekeeper-upload.username}" />
+    <constructor-arg value="${nep.gatekeeper-upload.password}" />
+    <constructor-arg value="${nep.gatekeeper-upload.hostkey}" />
+    <property name="sftpTimeout"  value="${nep.gatekeeper-upload.sftpTimeout}" />
+    <property name="socketTimeout"  value="${nep.gatekeeper-upload.socketTimeout}" />
+    <property name="connectTimeOut"  value="${nep.gatekeeper-upload.connectionTimeout}" />
+
+  </bean>
+
   <bean id="NEPSAMAuthenticatorLive" class="nl.vpro.nep.service.impl.NEPSAMAuthenticator">
     <constructor-arg value="${nep.sam-api.live.username}" />
     <constructor-arg value="${nep.sam-api.live.password}" />
