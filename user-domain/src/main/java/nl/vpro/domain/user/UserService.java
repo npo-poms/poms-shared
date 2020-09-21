@@ -29,11 +29,11 @@ import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
  */
 public interface UserService<T extends User> {
 
-    ThreadPoolExecutor asyncExecutor =
-        new ThreadPoolExecutor(5, 10000, 60, TimeUnit.SECONDS,
+    ThreadPoolExecutor ASYNC_EXECUTOR =
+        new ThreadPoolExecutor(1, 10000, 600, TimeUnit.SECONDS,
             new LinkedBlockingDeque<>(),
             ThreadPools.createThreadFactory(
-                "nl.vpro.user.UserSevice.ASYNC",
+                "nl.vpro.user.UserService.ASYNC",
                 false,
                 Thread.NORM_PRIORITY));
 
@@ -164,7 +164,7 @@ public interface UserService<T extends User> {
      * @since 5.6
      */
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
-        return async(callable, logger, asyncExecutor);  // use our own executor, see MSE-4873
+        return async(callable, logger, ASYNC_EXECUTOR);  // use our own executor, see MSE-4873
     }
 
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger, ExecutorService executor) {
