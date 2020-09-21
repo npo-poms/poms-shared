@@ -50,7 +50,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     @Setter
     private Duration socketTimeout = Duration.ofSeconds(10L);
 
-
     /**
      * This has something to do with the timeout for waiting until acknowledgements from the server?
      */
