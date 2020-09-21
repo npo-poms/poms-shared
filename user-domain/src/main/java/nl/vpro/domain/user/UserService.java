@@ -158,7 +158,7 @@ public interface UserService<T extends User> {
     }
 
     /**
-     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean)}) in CompletableFuture#supplyAsync
+     * Defaulting version of {@link #async(Callable, Logger, ExecutorService)}, where the excetor service is {@link #ASYNC_EXECUTOR}
      *
      * @param logger If not <code>null</code> catch exceptions and log as error.
      * @since 5.6
@@ -167,6 +167,13 @@ public interface UserService<T extends User> {
         return async(callable, logger, ASYNC_EXECUTOR);  // use our own executor, see MSE-4873
     }
 
+    /**
+     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean)}) in CompletableFuture#supplyAsync
+     *
+     * @param logger If not <code>null</code> catch exceptions and log as error.
+     *
+     * @since 5.16
+     */
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger, ExecutorService executor) {
         Callable<R> wrapped =  wrap(callable, logger, true);
         Supplier<R> supplier  = () -> {
