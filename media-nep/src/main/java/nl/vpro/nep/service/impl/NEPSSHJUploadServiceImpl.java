@@ -101,8 +101,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         boolean replaces) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
-        logger.info( en("Uploading to {}:{}")
-            .nl("Uploaden naar {}:{}")
+        logger.info(en("Uploading to {}:{}").nl("Uploaden naar {}:{}")
             .slf4jArgs(sftpHost, nepFile)
             .build());
         try(
@@ -124,8 +123,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                         logger.info("Found existing {}", attributes);
                     }
                     return -1L;
-                } catch (SFTPException ignore) {
-
+                } catch (SFTPException sftpException) {
+                    log.warn("For {}: {}", nepFile, sftpException.getMessage());
                 }
             }
             try (
@@ -212,7 +211,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
         client.get().setTimeout((int) socketTimeout.toMillis());
         client.get().setConnectTimeout((int) connectTimeOut.toMillis());
-
 
         log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport());
 
