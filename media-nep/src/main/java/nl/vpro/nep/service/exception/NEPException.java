@@ -2,7 +2,7 @@ package nl.vpro.nep.service.exception;
 
 import lombok.Getter;
 
-public class NEPException extends Exception {
+public class NEPException extends RuntimeException {
 
     @Getter private final Exception originalException;
 
