@@ -5,10 +5,10 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.6-SNAPSHOT</version>
+    <version>5.15.6</version>
   </parent>
   <artifactId>gtaa-domain</artifactId>
-  <version>5.15.6-SNAPSHOT</version>
+  <version>5.15.6</version>
   <name>gtaa-domain</name>
   <description>Contains java bindings for the objects served out by Openskos/GTAA</description>
 
