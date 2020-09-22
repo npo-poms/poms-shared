@@ -5,12 +5,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.6</version>
+    <version>5.15.7-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.subtitles</groupId>
   <artifactId>subtitles-domain</artifactId>
-  <version>5.15.6</version>
+  <version>5.15.7-SNAPSHOT</version>
   <name>subtitles-domain</name>
   <description>Subtitles are related to media, but are implemented completely parallel. Classes to contain, parse, and assemble subtitle objects are here.</description>
 

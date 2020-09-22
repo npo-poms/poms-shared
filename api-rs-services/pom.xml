@@ -5,12 +5,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.6</version>
+    <version>5.15.7-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-rs-services</artifactId>
-  <version>5.15.6</version>
+  <version>5.15.7-SNAPSHOT</version>
   <name>api-rs-services</name>
   <description>Contains the rest interfaces implemented by the Frontend API</description>
 

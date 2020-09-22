@@ -6,11 +6,11 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.6</version>
+    <version>5.15.7-SNAPSHOT</version>
   </parent>
 
   <artifactId>poms-npoplayer</artifactId>
-  <version>5.15.6</version>
+  <version>5.15.7-SNAPSHOT</version>
   <name>poms-npoplayer</name>
   <description>Server side part needed to use an npo player</description>
 

@@ -5,12 +5,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.6</version>
+    <version>5.15.7-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.pages</groupId>
   <artifactId>pages-rs-services</artifactId>
-  <version>5.15.6</version>
+  <version>5.15.7-SNAPSHOT</version>
   <name>pages-rs-services</name>
   <description>Java interfaces for the Publisher APIs.</description>
 

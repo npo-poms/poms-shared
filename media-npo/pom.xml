@@ -4,13 +4,13 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.6</version>
+    <version>5.15.7-SNAPSHOT</version>
   </parent>
 
 
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-npo</artifactId>
-  <version>5.15.6</version>
+  <version>5.15.7-SNAPSHOT</version>
   <description>Java bindings of several types of NPO related XML formats that POMS supports. Mainly in import processes</description>
 
   <dependencies>
