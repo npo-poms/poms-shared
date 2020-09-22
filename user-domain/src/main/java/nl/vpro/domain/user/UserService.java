@@ -19,7 +19,6 @@ import org.slf4j.*;
 
 import nl.vpro.domain.Roles;
 import nl.vpro.mdc.MDCConstants;
-import nl.vpro.util.ThreadPools;
 
 import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 
@@ -29,8 +28,14 @@ import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
  */
 public interface UserService<T extends User> {
 
+    ThreadPoolExecutor ASYNC_EXECUTOR = new ThreadPoolExecutor(1,
+        10000,
+        600L, TimeUnit.SECONDS,
+        new SynchronousQueue<>());
+
+
     /**
-     * Given an existing user, and a user obtained from sso or so, determins whether callign {@link #update(User)} is important now.
+     * Given an existing user, and a user obtained from sso or so, determins whether calling {@link #update(User)} is important now.
      */
     boolean needsUpdate(T oldUser, T newUser);
 
@@ -149,15 +154,22 @@ public interface UserService<T extends User> {
     }
 
     /**
-     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean)}) in CompletableFuture#supplyAsync
+     * Defaulting version of {@link #async(Callable, Logger, ExecutorService)}, where the excetor service is {@link #ASYNC_EXECUTOR}
      *
      * @param logger If not <code>null</code> catch exceptions and log as error.
      * @since 5.6
      */
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
-        return async(callable, logger, ThreadPools.backgroundExecutor);  // use our own executor, see MSE-4873
+        return async(callable, logger, ASYNC_EXECUTOR);  // use our own executor, see MSE-4873
     }
 
+    /**
+     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean)}) in CompletableFuture#supplyAsync
+     *
+     * @param logger If not <code>null</code> catch exceptions and log as error.
+     *
+     * @since 5.16
+     */
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger, ExecutorService executor) {
         Callable<R> wrapped =  wrap(callable, logger, true);
         Supplier<R> supplier  = () -> {

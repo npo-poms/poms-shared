@@ -8,44 +8,56 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context.xsd">
 
- <context:annotation-config/>
- <context:component-scan base-package="nl.vpro.nep.service.impl"/>
-
- <bean id="NEPSAMAuthenticatorLive" class="nl.vpro.nep.service.impl.NEPSAMAuthenticator">
-  <constructor-arg value="${nep.sam-api.live.username}" />
-  <constructor-arg value="${nep.sam-api.live.password}" />
-  <constructor-arg value="${nep.sam-api.live.baseUrl}" />
- </bean>
+  <context:annotation-config/>
+  <context:component-scan base-package="nl.vpro.nep.service.impl"/>
 
 
- <bean id="NEPSAMAuthenticatorMid" class="nl.vpro.nep.service.impl.NEPSAMAuthenticator">
-  <constructor-arg value="${nep.sam-api.mid.username}" />
-  <constructor-arg value="${nep.sam-api.mid.password}" />
-  <constructor-arg value="${nep.sam-api.mid.baseUrl}" />
- </bean>
+  <bean id="NEPUploadService" class="nl.vpro.nep.service.impl.NEPSSHJUploadServiceImpl">
+    <constructor-arg value="${nep.gatekeeper-upload.host}" />
+    <constructor-arg value="${nep.gatekeeper-upload.username}" />
+    <constructor-arg value="${nep.gatekeeper-upload.password}" />
+    <constructor-arg value="${nep.gatekeeper-upload.hostkey}" />
+    <property name="sftpTimeout"  value="${nep.gatekeeper-upload.sftpTimeout}" />
+    <property name="socketTimeout"  value="${nep.gatekeeper-upload.socketTimeout}" />
+    <property name="connectTimeOut"  value="${nep.gatekeeper-upload.connectionTimeout}" />
+
+  </bean>
+
+  <bean id="NEPSAMAuthenticatorLive" class="nl.vpro.nep.service.impl.NEPSAMAuthenticator">
+    <constructor-arg value="${nep.sam-api.live.username}" />
+    <constructor-arg value="${nep.sam-api.live.password}" />
+    <constructor-arg value="${nep.sam-api.live.baseUrl}" />
+  </bean>
 
 
- <bean id="NEPGatekeeperServiceLive" class="nl.vpro.nep.service.impl.NEPGatekeeperServiceImpl">
-  <constructor-arg value="${nep.gatekeeper-api.live.baseUrl}" />
-  <constructor-arg value="${nep.gatekeeper-api.live.authorization.username}" />
-  <constructor-arg value="${nep.gatekeeper-api.live.authorization.password}" />
-  <constructor-arg value="${nep.gatekeeper-api.connectTimeout}" />
-  <constructor-arg value="${nep.gatekeeper-api.connectionRequestTimeout}" />
-  <constructor-arg value="${nep.gatekeeper-api.socketTimeout}" />
-  <constructor-arg value="${nep.gatekeeper-api.pageSize}" />
-  <constructor-arg value="${nep.gatekeeper-upload.username}" />
- </bean>
+  <bean id="NEPSAMAuthenticatorMid" class="nl.vpro.nep.service.impl.NEPSAMAuthenticator">
+    <constructor-arg value="${nep.sam-api.mid.username}" />
+    <constructor-arg value="${nep.sam-api.mid.password}" />
+    <constructor-arg value="${nep.sam-api.mid.baseUrl}" />
+  </bean>
 
 
- <bean id="NEPGatekeeperService" class="nl.vpro.nep.service.impl.NEPGatekeeperServiceImpl">
-  <constructor-arg value="${nep.gatekeeper-api.baseUrl}" />
-  <constructor-arg value="${nep.gatekeeper-api.authorization.username}" />
-  <constructor-arg value="${nep.gatekeeper-api.authorization.password}" />
-  <constructor-arg value="${nep.gatekeeper-api.connectTimeout}" />
-  <constructor-arg value="${nep.gatekeeper-api.connectionRequestTimeout}" />
-  <constructor-arg value="${nep.gatekeeper-api.socketTimeout}" />
-  <constructor-arg value="${nep.gatekeeper-api.pageSize}" />
-  <constructor-arg value="${nep.gatekeeper-upload.username}" />
- </bean>
+  <bean id="NEPGatekeeperServiceLive" class="nl.vpro.nep.service.impl.NEPGatekeeperServiceImpl">
+    <constructor-arg value="${nep.gatekeeper-api.live.baseUrl}" />
+    <constructor-arg value="${nep.gatekeeper-api.live.authorization.username}" />
+    <constructor-arg value="${nep.gatekeeper-api.live.authorization.password}" />
+    <constructor-arg value="${nep.gatekeeper-api.connectTimeout}" />
+    <constructor-arg value="${nep.gatekeeper-api.connectionRequestTimeout}" />
+    <constructor-arg value="${nep.gatekeeper-api.socketTimeout}" />
+    <constructor-arg value="${nep.gatekeeper-api.pageSize}" />
+    <constructor-arg value="${nep.gatekeeper-upload.username}" />
+  </bean>
+
+
+  <bean id="NEPGatekeeperService" class="nl.vpro.nep.service.impl.NEPGatekeeperServiceImpl">
+    <constructor-arg value="${nep.gatekeeper-api.baseUrl}" />
+    <constructor-arg value="${nep.gatekeeper-api.authorization.username}" />
+    <constructor-arg value="${nep.gatekeeper-api.authorization.password}" />
+    <constructor-arg value="${nep.gatekeeper-api.connectTimeout}" />
+    <constructor-arg value="${nep.gatekeeper-api.connectionRequestTimeout}" />
+    <constructor-arg value="${nep.gatekeeper-api.socketTimeout}" />
+    <constructor-arg value="${nep.gatekeeper-api.pageSize}" />
+    <constructor-arg value="${nep.gatekeeper-upload.username}" />
+  </bean>
 
 </beans>
