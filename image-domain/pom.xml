@@ -5,12 +5,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.5</version>
+    <version>5.15.6-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.image</groupId>
   <artifactId>image-domain</artifactId>
-  <version>5.15.5</version>
+  <version>5.15.6-SNAPSHOT</version>
   <name>image-domain</name>
   <description>Domain classes and generic related utitlies used by the image frontend and backend services</description>
   <build>

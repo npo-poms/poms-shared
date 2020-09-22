@@ -4,13 +4,13 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.5</version>
+    <version>5.15.6-SNAPSHOT</version>
   </parent>
 
 
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-test</artifactId>
-  <version>5.15.5</version>
+  <version>5.15.6-SNAPSHOT</version>
   <name>media-test</name>
   <description>Shared test utilities and dependencies.</description>
 

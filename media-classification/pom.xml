@@ -3,12 +3,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.5</version>
+    <version>5.15.6-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-classification</artifactId>
-  <version>5.15.5</version>
+  <version>5.15.6-SNAPSHOT</version>
   <name>media-classification</name>
   <description>
     The classes needed for the 'classification' service used in POMS.

@@ -5,12 +5,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.15.5</version>
+    <version>5.15.6-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.user</groupId>
   <artifactId>user-domain</artifactId>
-  <version>5.15.5</version>
+  <version>5.15.6-SNAPSHOT</version>
   <name>user-domain</name>
   <description>Domain classes and interfaces related to accountability, users and organizations.</description>
 
