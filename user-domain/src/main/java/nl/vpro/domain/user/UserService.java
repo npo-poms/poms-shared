@@ -154,7 +154,7 @@ public interface UserService<T extends User> {
     }
 
     /**
-     * Defaulting version of {@link #async(Callable, Logger, ExecutorService)}, where the excetor service is {@link #ASYNC_EXECUTOR}
+     * Defaulting version of {@link #async(Callable, Logger, ExecutorService)}, where the executor service is {@link #ASYNC_EXECUTOR}
      *
      * @param logger If not <code>null</code> catch exceptions and log as error.
      * @since 5.6
