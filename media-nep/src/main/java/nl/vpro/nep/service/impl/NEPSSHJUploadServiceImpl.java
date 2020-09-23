@@ -1,7 +1,6 @@
 package nl.vpro.nep.service.impl;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.*;
@@ -18,10 +17,13 @@ import javax.inject.Inject;
 import org.apache.commons.io.IOUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+import org.springframework.jmx.export.annotation.ManagedResource;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPUploadService;
 import nl.vpro.util.FileSizeFormatter;
+import nl.vpro.util.TimeUtils;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
 
@@ -32,6 +34,7 @@ import static nl.vpro.i18n.MultiLanguageString.en;
  *  TODO: For the download service we had severe troubles with 'rekeying' (at the end worked around by calling command line scp). Would this not be an issue for upload?
  */
 @Slf4j
+@ManagedResource
 public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     @Getter
@@ -42,19 +45,12 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     @Getter
     private final String hostKey;
 
-    @Getter
-    @Setter
-    private Duration connectTimeOut = Duration.ofSeconds(10L);
-
-    @Getter
-    @Setter
+    private Duration connectTimeout = Duration.ofSeconds(10L);
     private Duration socketTimeout = Duration.ofSeconds(10L);
 
     /**
      * This has something to do with the timeout for waiting until acknowledgements from the server?
      */
-    @Getter
-    @Setter
     private Duration sftpTimeout = Duration.ofSeconds(5);
 
     Set<SSHClientFactory.ClientHolder> created = new HashSet<>();
@@ -158,7 +154,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                         log.info("Number of bytes reached, breaking (though we didn't see EOF yet)");
                         break;
                     }
-                    if (batchCount++ % infoBatch == 0) {
+                    if (++batchCount % infoBatch == 0) {
                         // updating spans in ngToast doesn't work...
                         //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
                         logger.info(
@@ -191,14 +187,43 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     @Override
     public String getUploadString() {
         return username + "@" + sftpHost;
-
     }
-
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + ":" + username + "@" + sftpHost;
     }
+
+    @ManagedAttribute
+    public String getConnectTimeout() {
+        return String.valueOf(connectTimeout);
+    }
+
+    @ManagedAttribute
+    public void setConnectTimeout(String connectTimeout) {
+        this.connectTimeout = TimeUtils.parseDuration(connectTimeout).orElseThrow(() -> new IllegalArgumentException("could not parse " + connectTimeout));
+    }
+
+    @ManagedAttribute
+    public String getSocketTimeout() {
+        return String.valueOf(socketTimeout);
+    }
+
+    @ManagedAttribute
+    public void setSocketTimeout(String socketTimeout) {
+        this.socketTimeout = TimeUtils.parseDuration(socketTimeout).orElseThrow(() -> new IllegalArgumentException("could not parse " + socketTimeout));
+    }
+
+    @ManagedAttribute
+    public String getSftpTimeout() {
+        return String.valueOf(sftpTimeout);
+    }
+
+    @ManagedAttribute
+    public void setSftpTimeout(String sftpTimeout) {
+        this.sftpTimeout = TimeUtils.parseDuration(sftpTimeout).orElseThrow(() -> new IllegalArgumentException("could not parse " + sftpTimeout));
+    }
+
 
     protected synchronized SSHClientFactory.ClientHolder createClient() throws IOException {
 
@@ -210,7 +235,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         );
 
         client.get().setTimeout((int) socketTimeout.toMillis());
-        client.get().setConnectTimeout((int) connectTimeOut.toMillis());
+        client.get().setConnectTimeout((int) connectTimeout.toMillis());
 
         log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport());
 
