@@ -23,7 +23,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPUploadService;
 import nl.vpro.util.FileSizeFormatter;
 
-import static nl.vpro.util.MultiLanguageString.en;
+import static nl.vpro.i18n.MultiLanguageString.en;
 
 
 /**
@@ -55,7 +55,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
      */
     @Getter
     @Setter
-    private Duration sftpTimeout = Duration.ofMillis(100);
+    private Duration sftpTimeout = Duration.ofSeconds(5);
 
     Set<SSHClientFactory.ClientHolder> created = new HashSet<>();
 
@@ -71,6 +71,16 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         this.password = password;
         this.hostKey = hostKey;
     }
+
+    protected NEPSSHJUploadServiceImpl(Properties properties) {
+        this(
+            properties.getProperty("nep.gatekeeper-upload.host"),
+            properties.getProperty("nep.gatekeeper-upload.username"),
+            properties.getProperty("nep.gatekeeper-upload.password"),
+            properties.getProperty("nep.gatekeeper-upload.hostkey")
+        );
+    }
+
 
     @PostConstruct
     public void init() {
@@ -96,7 +106,9 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         boolean replaces) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
-        logger.info(en("Uploading to {}:{}").nl("Uploaden naar {}:{}")
+        logger.info(
+            en("Uploading to {}:{}")
+                .nl("Uploaden naar {}:{}")
             .slf4jArgs(sftpHost, nepFile)
             .build());
         try(
@@ -129,7 +141,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             ) {
 
                 byte[] buffer = new byte[1014 * 1024];
-                long infoBatch = buffer.length * 100;
+                long infoBatch = 10;
+                long batchCount = 0;
                 long numberOfBytes = 0;
                 int n;
                 long timesZero = 0;
@@ -145,25 +158,32 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                         log.info("Number of bytes reached, breaking (though we didn't see EOF yet)");
                         break;
                     }
-                    if (numberOfBytes % infoBatch == 0) {
+                    if (batchCount++ % infoBatch == 0) {
                         // updating spans in ngToast doesn't work...
                         //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
                         logger.info(
                             en("Uploaded {}/{} to {}:{}")
                                 .nl("Geüpload {}/{} naar {}:{}")
                                 .slf4jArgs(FORMATTER.format(numberOfBytes), FORMATTER.format(size), sftpHost, nepFile)
-                                .build()
-                        );
+                                .build());
                     } else {
                         log.debug("Uploaded {}/{} bytes to NEP", FORMATTER.format(numberOfBytes), FORMATTER.format(size));
                     }
                 }
+                Duration duration = Duration.between(start, Instant.now());
                 logger.info(
-                    en("Ready uploading {}/{} (took {})")
-                        .nl("Klaar met uploaden van {}/{} (kostte: {})")
-                        .slf4jArgs(FORMATTER.format(numberOfBytes), FORMATTER.format(size), Duration.between(start, Instant.now()))
+                    en("Ready uploading {}/{} (took {}, {})")
+                        .nl("Klaar met uploaden van {}/{} (kostte: {}, {})")
+                        .slf4jArgs(
+                            FORMATTER.format(numberOfBytes),
+                            FORMATTER.format(size),
+                            duration,
+                            FORMATTER.formatSpeed(numberOfBytes, duration))
                         .build());
                 return numberOfBytes;
+            } catch (SFTPException sftpException) {
+                log.info("cause {}", sftpException.getCause().getMessage(), sftpException.getCause());
+                throw sftpException;
             }
         }
     }
