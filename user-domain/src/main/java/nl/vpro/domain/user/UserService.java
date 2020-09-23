@@ -160,7 +160,7 @@ public interface UserService<T extends User> {
      * @since 5.6
      */
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
-        return async(callable, logger, ASYNC_EXECUTOR);  // use our own executor, see MSE-4873
+        return async(callable, logger, ASYNC_EXECUTOR);
     }
 
     /**
