@@ -43,6 +43,10 @@
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-util</artifactId>
     </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-i18n</artifactId>
+    </dependency>
      <dependency>
        <groupId>io.openapitools.jackson.dataformat</groupId>
        <artifactId>jackson-dataformat-hal</artifactId>
