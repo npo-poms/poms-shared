@@ -164,16 +164,18 @@ public interface UserService<T extends User> {
     }
 
     /**
-     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean)}) in CompletableFuture#supplyAsync
+     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean)}) in CompletableFuture#supplyAsync.
      *
+     * This makes sure that the job is running as the current user, and for example also that the current MDC is copied to the other thread.
+     *
+     * @param callable The job to run asynchronously
      * @param logger If not <code>null</code> catch exceptions and log as error.
      *
      * @since 5.16
      */
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger, ExecutorService executor) {
-        Callable<R> wrapped =  wrap(callable, logger, true);
+        Callable<R> wrapped =  wrap(callable, logger, true, true); // Current MDC will be copied and stored  and restores just before calling the unwrapped callable
         Supplier<R> supplier  = () -> {
-            MDC.clear();
             try {
                 return wrapped.call();
             } catch (RuntimeException rte) {
@@ -191,7 +193,9 @@ public interface UserService<T extends User> {
      * @since 5.6
      */
     default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable, Logger logger) {
-        return executorService.submit(wrap(callable, logger, null));
+        return executorService.submit(
+            wrap(callable, logger, null, true)
+        );
     }
 
     /**
@@ -202,7 +206,8 @@ public interface UserService<T extends User> {
     default <R> Callable<R> wrap(
         @NonNull  Callable<R> callable,
         @Nullable Logger logger,
-        @Nullable Boolean throwExceptions) {
+        @Nullable Boolean throwExceptions,
+        boolean clearMDC) {
 
         final boolean throwExceptionsBoolean = throwExceptions == null ? logger == null : throwExceptions;
         Principal authentication;
@@ -219,6 +224,7 @@ public interface UserService<T extends User> {
         }
 
         return () -> {
+            MDC.clear(); // Running in an unknown thread, making sure MDC is clean
             try {
                 if (onBehalfOf != null) {
                     try {
