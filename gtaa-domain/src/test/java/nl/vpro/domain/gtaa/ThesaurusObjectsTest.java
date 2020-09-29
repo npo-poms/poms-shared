@@ -37,7 +37,7 @@ public class ThesaurusObjectsTest {
         GTAAConcept thesaurusObject = GTAAConcepts.toConcept(Description
             .builder()
             .inScheme(scheme.getUrl())
-            .build());
+            .build()).get();
         assertThat(thesaurusObject).isInstanceOf(scheme.getImplementation());
     }
 
@@ -51,7 +51,7 @@ public class ThesaurusObjectsTest {
         GTAAConcept thesaurusObject = GTAAConcepts.toConcept(Description
             .builder()
             .inScheme(scheme.getUrl())
-            .build());
+            .build()).get();
         assertThat(GTAAConcepts.toScheme(thesaurusObject)).isEqualTo(scheme);
     }
 }
