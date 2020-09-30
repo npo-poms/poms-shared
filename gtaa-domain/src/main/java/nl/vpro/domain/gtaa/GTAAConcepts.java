@@ -24,7 +24,7 @@ public class GTAAConcepts {
     private GTAAConcepts() {
     }
 
-    public static GTAAConcept toConcept(Description d) {
+    public static Optional<GTAAConcept> toConcept(Description d) {
         Optional<Scheme> optionalScheme = Scheme.ofUrl(d.getInScheme().getResource());
 
         return optionalScheme.map(scheme ->  {
@@ -45,11 +45,11 @@ public class GTAAConcepts {
                 }
             }
             return null;
-        }).orElseThrow(() -> new IllegalArgumentException("Not convertible " + d));
+        });
     }
 
 
-    public static GTAAConcept toConcept(GTAANewGenericConcept thesaurusObject) {
+    public static Optional<GTAAConcept> toConcept(GTAANewGenericConcept thesaurusObject) {
         Description description = Description.builder()
                 .prefLabel(
                         Label.builder()

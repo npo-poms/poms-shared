@@ -228,7 +228,7 @@ public class OpenskosRepository implements GTAARepository {
             creator,
             thesaurusObject.getObjectType()
         );
-        return (T) GTAAConcepts.toConcept(description);
+        return (T) GTAAConcepts.toConcept(description).orElseThrow(() -> new IllegalStateException("Could not convert " + description));
 
     }
 
@@ -545,7 +545,7 @@ public class OpenskosRepository implements GTAARepository {
         try {
             RDF rdf = template.getForObject(url, RDF.class);
             List<Description> descriptions = descriptions(rdf);
-            return descriptions.stream().findFirst().map(GTAAConcepts::toConcept);
+            return descriptions.stream().findFirst().flatMap(GTAAConcepts::toConcept);
         } catch (HttpClientErrorException clientError) {
             if (clientError.getStatusCode() == HttpStatus.NOT_FOUND) {
                 return Optional.empty();

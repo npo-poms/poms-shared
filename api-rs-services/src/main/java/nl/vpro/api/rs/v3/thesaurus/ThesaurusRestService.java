@@ -3,6 +3,7 @@ package nl.vpro.api.rs.v3.thesaurus;
 import java.time.Instant;
 import java.util.Set;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -18,7 +19,6 @@ import nl.vpro.domain.gtaa.Scheme;
 import static nl.vpro.domain.api.Constants.DEFAULT_MAX_RESULTS_STRING;
 import static nl.vpro.domain.api.Constants.MAX;
 
-@SuppressWarnings("RestParamTypeInspection")
 @Path(ThesaurusRestService.PATH)
 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public interface ThesaurusRestService {
@@ -38,7 +38,7 @@ public interface ThesaurusRestService {
     @Path("/persons/updates")
     @NoCache
     Response listPersonUpdates(
-        @QueryParam("from") Instant from,
+        @QueryParam("from") @NotNull Instant from,
         @QueryParam("to") Instant to
     );
 
@@ -56,7 +56,7 @@ public interface ThesaurusRestService {
     @Path("/concepts/updates")
     @NoCache
     Response listConceptUpdates(
-        @QueryParam("from") Instant from,
+        @QueryParam("from")  @NotNull Instant from,
         @QueryParam("to") Instant to
     );
 
