@@ -72,13 +72,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
         currentState = calcCRC32().getValue();
 
-        if(currentState != this.crc32) {
-            // we are dirty
-            return true;
-        }
-
-        // we are unchanged
-        return false;
+        return currentState != this.crc32;
     }
 
     /**
