@@ -261,7 +261,7 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
 
     @Override
     public String toString () {
-        return getId() + "(" + added + ")";
+        return (type == null ? "" : (type + ":")) + getId() + "(" + added + ")";
     }
 
     @NoArgsConstructor
