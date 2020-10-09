@@ -1,17 +1,23 @@
 package nl.vpro.domain.media;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import nl.vpro.jackson2.AfterUnmarshalDeserializer;
 
 /**
  * @since 5.13
@@ -30,6 +36,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "episodeOf",
     "segmentOf"
 })
+@JsonDeserialize(using = AfterUnmarshalDeserializer.class)
 @Setter
 @Slf4j
 public class RecursiveMemberRef implements Serializable, RecursiveParentChildRelation, Comparable<RecursiveMemberRef> {
@@ -40,8 +47,10 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     @Getter
     protected String midRef;
 
-    @Getter
     protected String childMid;
+
+    @JsonIgnore
+    ParentChildRelation parent;
 
     @XmlAttribute
     @Getter
@@ -224,6 +233,22 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         return circular != null && circular;
     }
 
+
+    void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+        if(parent instanceof ParentChildRelation) {
+            this.parent = (ParentChildRelation) parent;
+        }
+    }
+
+    public String getChildMid() {
+        if (this.parent != null) {
+            this.childMid = this.parent.getParentMid();
+            this.parent = null;
+        }
+        return this.childMid;
+    }
+
+
     @Override
     public String toString() {
         return toString(getChildMid());
@@ -251,17 +276,20 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (! (o instanceof RecursiveMemberRef)) {
+            return false;
+        }
 
         RecursiveMemberRef that = (RecursiveMemberRef) o;
 
         if (!midRef.equals(that.midRef)) return false;
-        if (!childMid.equals(that.childMid)) return false;
+        if (!getChildMid().equals(that.getChildMid())) return false;
         return index != null ? index.equals(that.index) : that.index == null;
     }
 
     @Override
     public int hashCode() {
+        getChildMid();
         int result = midRef == null ? 0 : midRef.hashCode();
         result = 31 * result + (childMid == null ? 0 : childMid.hashCode());
         result = 31 * result + (index != null ? index.hashCode() : 0);

@@ -7,6 +7,7 @@ import java.util.SortedSet;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -155,7 +156,7 @@ class RecursiveMemberRefTest {
     @Test
     public void marshalm4() {
 
-        JAXBTestUtil.roundTripAndSimilar(m4,
+        Program program = JAXBTestUtil.roundTripAndSimilar(m4,
             "<program xmlns=\"urn:vpro:media:2009\" type=\"BROADCAST\" embeddable=\"true\" mid=\"m3\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" urn=\"urn:vpro:media:program:3\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
                 "    <credits/>\n" +
                 "    <descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"g2\" type=\"SEASON\"/>\n" +
@@ -172,7 +173,67 @@ class RecursiveMemberRefTest {
                 "    </episodeOf>\n" +
                 "    <segments/>\n" +
                 "</program>");
-     }
+        assertThat(program.getEpisodeOf().first().getChildMid()).isEqualTo("m3");
+        assertThat(program.getEpisodeOf().first().getMemberOf().first().getChildMid()).isEqualTo("g2");
+
+    }
+
+    @Test
+    public void marshalm4json() {
+
+        Program program = Jackson2TestUtil.roundTripAndSimilar(m4,
+            "{\n" +
+                "  \"objectType\" : \"program\",\n" +
+                "  \"mid\" : \"m3\",\n" +
+                "  \"type\" : \"BROADCAST\",\n" +
+                "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
+                "  \"sortDate\" : 1425596400000,\n" +
+                "  \"creationDate\" : 1425596400000,\n" +
+                "  \"lastModified\" : 1425600000000,\n" +
+                "  \"urn\" : \"urn:vpro:media:program:3\",\n" +
+                "  \"embeddable\" : true,\n" +
+                "  \"episodeOf\" : [ {\n" +
+                "    \"midRef\" : \"g2\",\n" +
+                "    \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
+                "    \"type\" : \"SEASON\",\n" +
+                "    \"index\" : 1,\n" +
+                "    \"highlighted\" : false,\n" +
+                "    \"memberOf\" : [ {\n" +
+                "      \"midRef\" : \"s1\",\n" +
+                "      \"type\" : \"SEGMENT\",\n" +
+                "      \"segmentOf\" : {\n" +
+                "        \"midRef\" : \"m3\",\n" +
+                "        \"type\" : \"BROADCAST\",\n" +
+                "        \"episodeOf\" : [ {\n" +
+                "          \"midRef\" : \"g2\",\n" +
+                "          \"type\" : \"SEASON\",\n" +
+                "          \"index\" : 1,\n" +
+                "          \"circular\" : true\n" +
+                "        } ]\n" +
+                "      },\n" +
+                "      \"index\" : 1\n" +
+                "    } ],\n" +
+                "    \"episodeOf\" : [ ]\n" +
+                "  } ],\n" +
+                "  \"broadcasters\" : [ ],\n" +
+                "  \"genres\" : [ ],\n" +
+                "  \"countries\" : [ ],\n" +
+                "  \"languages\" : [ ],\n" +
+                "  \"descendantOf\" : [ {\n" +
+                "    \"midRef\" : \"g2\",\n" +
+                "    \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
+                "    \"type\" : \"SEASON\"\n" +
+                "  }, {\n" +
+                "    \"midRef\" : \"s1\",\n" +
+                "    \"urnRef\" : \"urn:vpro:media:segment:4\",\n" +
+                "    \"type\" : \"SEGMENT\"\n" +
+                "  } ],\n" +
+                "  \"publishDate\" : 1425603600000\n" +
+                "}");
+
+        assertThat(program.getEpisodeOf().first().getMemberOf().first().getChildMid()).isEqualTo("g2");
+        assertThat(program.getEpisodeOf().first().getChildMid()).isEqualTo("m3");
+    }
 
 
 

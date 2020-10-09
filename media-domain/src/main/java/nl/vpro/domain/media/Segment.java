@@ -391,6 +391,10 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
                     .parentType(type)
                     .build();
             }
+        } else {
+            if (segmentOf.getChildMid() == null) { // this is not in the serialization
+                segmentOf.setChildMid(getMid());
+            }
         }
         return segmentOf;
     }
