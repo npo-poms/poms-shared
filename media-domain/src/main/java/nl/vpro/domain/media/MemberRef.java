@@ -588,7 +588,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return this.hashCode() - memberRef.hashCode();
     }
 
-    @AfterUnmarshal
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if(parent instanceof MediaObject) {
             this.member = (MediaObject)parent;
