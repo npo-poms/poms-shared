@@ -3,11 +3,15 @@ package nl.vpro.domain.media;
 import java.time.LocalDateTime;
 import java.util.TreeSet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
@@ -67,5 +71,23 @@ public class MemberRefTest {
                     "  },\n" +
                     "  \"added\" : 1495636200000\n" +
                     "}");
+    }
+
+    @Test
+    public void withRecursive() throws JsonProcessingException {
+
+        String example  = "{\n" +
+            "    \"midRef\" : \"g2\",\n" +
+            "    \"memberOf\" : [ {\n" +
+            "      \"midRef\" : \"s1\",\n" +
+            "      \"type\" : \"SEGMENT\"\n" +
+            "    } ]\n" +
+            "  }";
+
+        MemberRef r = Jackson2Mapper.getLenientInstance().readerFor(MemberRef.class).readValue(example);
+        assertThat(r.getChildMid()).isNull();
+        RecursiveMemberRef firstMemberOf = r.getMemberOf().first();
+        assertThat(firstMemberOf.getChildMid()).isEqualTo("g2");
+
     }
 }

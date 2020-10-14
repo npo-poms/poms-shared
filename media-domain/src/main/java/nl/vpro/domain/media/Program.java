@@ -244,6 +244,7 @@ public class Program extends MediaObject {
 
     @XmlElement
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonManagedReference
     public SortedSet<MemberRef> getEpisodeOf() {
         if(this.episodeOf == null) {
             this.episodeOf = new TreeSet<>();

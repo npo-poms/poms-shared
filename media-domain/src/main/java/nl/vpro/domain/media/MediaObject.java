@@ -1618,6 +1618,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     @XmlElement()
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonManagedReference
     public SortedSet<MemberRef> getMemberOf() {
         if (memberOf == null) {
             memberOf = new TreeSet<>();

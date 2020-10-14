@@ -27,8 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.Views;
+import nl.vpro.jackson2.*;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
@@ -93,6 +92,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     private Long id;
 
     @ManyToOne(optional = false)
+    @JsonBackReference
     protected MediaObject member;
 
     @ManyToOne(optional = false)
@@ -465,6 +465,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlElement(name = "memberOf")
     @JsonView(Views.Forward.class)
+    @JsonManagedReference
     public SortedSet<RecursiveMemberRef> getMemberOf() {
          if (memberOf == null) {
             if (group != null) {
@@ -476,11 +477,10 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return memberOf;
     }
 
+    @Override
     public void setMemberOf(SortedSet<RecursiveMemberRef> memberOfList) {
         this.memberOf = memberOfList;
     }
-
-
 
     /**
      * @since 5.13
@@ -488,6 +488,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlElement(name = "episodeOf")
     @JsonView(Views.Forward.class)
+    @JsonManagedReference
     public SortedSet<RecursiveMemberRef> getEpisodeOf() {
          if (episodeOf == null) {
             if (group != null && group instanceof Program) {
@@ -499,6 +500,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return episodeOf;
     }
 
+    @Override
     public void setEpisodeOf(SortedSet<RecursiveMemberRef> episodeOfList) {
         this.episodeOf = episodeOfList;
     }
@@ -509,6 +511,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Override
     @XmlElement(name = "segmentOf")
     @JsonView(Views.Forward.class)
+    @JsonManagedReference
     public RecursiveMemberRef getSegmentOf() {
         if (segmentOf == null) {
             if (group != null && group instanceof Segment) {
@@ -518,6 +521,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return segmentOf;
     }
 
+    @Override
     public void setSegmentOf(RecursiveMemberRef segmentOf) {
         this.segmentOf = segmentOf;
     }
@@ -584,6 +588,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return this.hashCode() - memberRef.hashCode();
     }
 
+    @AfterUnmarshal
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if(parent instanceof MediaObject) {
             this.member = (MediaObject)parent;
