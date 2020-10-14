@@ -13,11 +13,7 @@ import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import nl.vpro.jackson2.AfterUnmarshalDeserializer;
+import com.fasterxml.jackson.annotation.*;
 
 /**
  * @since 5.13
@@ -36,7 +32,6 @@ import nl.vpro.jackson2.AfterUnmarshalDeserializer;
     "episodeOf",
     "segmentOf"
 })
-@JsonDeserialize(using = AfterUnmarshalDeserializer.class)
 @Setter
 @Slf4j
 public class RecursiveMemberRef implements Serializable, RecursiveParentChildRelation, Comparable<RecursiveMemberRef> {
@@ -49,7 +44,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
     protected String childMid;
 
-    @JsonIgnore
+    @JsonBackReference
     ParentChildRelation parent;
 
     @XmlAttribute
@@ -60,15 +55,18 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     @XmlElement(name = "memberOf")
     @Setter
     @Getter
+    @JsonManagedReference
     protected SortedSet<RecursiveMemberRef> memberOf;
 
     @XmlElement(name = "episodeOf")
     @Setter
     @Getter
+    @JsonManagedReference
     protected SortedSet<RecursiveMemberRef> episodeOf;
 
     @Getter
     @XmlElement(name = "segmentOf")
+    @JsonManagedReference
     protected RecursiveMemberRef segmentOf;
 
     @XmlAttribute
@@ -234,12 +232,14 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     }
 
 
+    @SuppressWarnings("unused")
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if(parent instanceof ParentChildRelation) {
             this.parent = (ParentChildRelation) parent;
         }
     }
 
+    @Override
     public String getChildMid() {
         if (this.parent != null) {
             this.childMid = this.parent.getParentMid();

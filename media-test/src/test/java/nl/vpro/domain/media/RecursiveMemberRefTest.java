@@ -231,8 +231,10 @@ class RecursiveMemberRefTest {
                 "  \"publishDate\" : 1425603600000\n" +
                 "}");
 
-        assertThat(program.getEpisodeOf().first().getMemberOf().first().getChildMid()).isEqualTo("g2");
-        assertThat(program.getEpisodeOf().first().getChildMid()).isEqualTo("m3");
+        MemberRef firstEpisodeOf = program.getEpisodeOf().first();
+        assertThat(program.getMid()).isEqualTo("m3");
+        assertThat(firstEpisodeOf.getMemberOf().first().getChildMid()).isEqualTo("g2");
+        assertThat(firstEpisodeOf.getChildMid()).isEqualTo("m3");
     }
 
 
