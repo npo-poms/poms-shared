@@ -141,19 +141,14 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 long batchCount = 0;
                 long numberOfBytes = 0;
                 int n;
-                long timesZero = 0;
                 while (IOUtils.EOF != (n = stream.read(buffer))) {
+                    if (n == 0) {
+                        throw new IllegalStateException("InputStream#read(buffer) should not give zero bytes.");
+                    }
+
                     out.write(buffer, 0, n);
                     numberOfBytes += n;
-                    if (n == 0) {
-                        timesZero++;
-                    } else {
-                        timesZero = 0;
-                    }
-                    if (numberOfBytes == size && timesZero > 5) {
-                        log.info("Number of bytes reached, breaking (though we didn't see EOF yet)");
-                        break;
-                    }
+
                     if (++batchCount % infoBatch == 0) {
                         // updating spans in ngToast doesn't work...
                         //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
