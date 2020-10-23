@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-;
-
 /**
  * @author Michiel Meeuwissen
  * @since 4.8

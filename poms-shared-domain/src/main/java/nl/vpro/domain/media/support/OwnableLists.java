@@ -64,5 +64,5 @@ public class OwnableLists {
             }
         }
         return Optional.empty();
-    };
+    }
 }

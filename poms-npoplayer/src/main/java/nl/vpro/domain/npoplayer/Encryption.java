@@ -6,5 +6,5 @@ package nl.vpro.domain.npoplayer;
  */
 public enum Encryption {
     drm,
-    none;
+    none
 }

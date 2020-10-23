@@ -192,7 +192,6 @@ public class EBU {
                             String startTime = "" + ttiBlock[5] + ":" + ttiBlock[6] + ":" + ttiBlock[7] + ":" + ttiBlock[8];
                             //TCO : Time Code Out 9..12
                             String endTime = "" + ttiBlock[9] + ":" + ttiBlock[10] + ":" + ttiBlock[11] + ":" + ttiBlock[12];
-                            ;
                             //VP : Vertical Position 13
                             //JC : Justification Code 14
                             int justification = ttiBlock[14];

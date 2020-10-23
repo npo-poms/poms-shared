@@ -20,8 +20,6 @@ import nl.vpro.domain.api.Form;
 import nl.vpro.domain.api.FormUtils;
 import nl.vpro.domain.media.MediaObject;
 
-;
-
 /**
  *
  * @author Roelof Jan Koekoek

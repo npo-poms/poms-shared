@@ -14,8 +14,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import static nl.vpro.domain.constraint.PredicateTestResult.FACTORY;
 
-;
-
 
 /**
  * @author Roelof Jan Koekoek

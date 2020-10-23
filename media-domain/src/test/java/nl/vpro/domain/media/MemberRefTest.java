@@ -28,7 +28,7 @@ public class MemberRefTest {
         ref.setNumber(1);
         ref.setMidRef("MID_123");
         ref.setHighlighted(true);
-        ref.setEpisodeOf(new TreeSet<>());;
+        ref.setEpisodeOf(new TreeSet<>());
         ref.getEpisodeOf()
                 .add(RecursiveMemberRef
                     .builder()

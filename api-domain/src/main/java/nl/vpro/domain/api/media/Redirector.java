@@ -33,7 +33,7 @@ public interface Redirector extends MediaRedirector {
 
     default Map<String, String> redirectTextMatchers(
         @Nullable TextMatcherList list) {
-        Map<String, String> redirects = new HashMap<>();;
+        Map<String, String> redirects = new HashMap<>();
         redirectTextMatchers(list, redirects);
         return redirects;
     }

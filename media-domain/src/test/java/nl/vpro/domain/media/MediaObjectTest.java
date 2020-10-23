@@ -229,7 +229,7 @@ public class MediaObjectTest {
                 BROADCASTER
         );
 
-        GeoLocation geoLocDiffName = GeoLocation.builder().name("Amsterdam").uri("test/1234").role(GeoRoleType.RECORDED_IN).build();;
+        GeoLocation geoLocDiffName = GeoLocation.builder().name("Amsterdam").uri("test/1234").role(GeoRoleType.RECORDED_IN).build();
         final boolean geoLocDiffNameResult = MediaObjectOwnableLists.remove(mediaObject.geoLocations, geoLocDiffName, BROADCASTER);
         assertThat(geoLocDiffNameResult).isFalse();
 

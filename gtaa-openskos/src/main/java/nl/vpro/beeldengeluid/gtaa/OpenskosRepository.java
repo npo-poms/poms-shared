@@ -626,6 +626,6 @@ public class OpenskosRepository implements GTAARepository {
             }
 
         }
-    };
+    }
 
 }
