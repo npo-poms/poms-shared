@@ -9,6 +9,7 @@ import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Supplier;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -91,7 +92,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         }
     }
 
-    private final static FileSizeFormatter FORMATTER = FileSizeFormatter.DEFAULT;
+    private static final FileSizeFormatter FORMATTER = FileSizeFormatter.DEFAULT;
 
     @Override
     public long upload(
@@ -112,7 +113,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             final SFTPClient sftp = client.newSFTPClient()
         ) {
             sftp.getSFTPEngine().setTimeoutMs((int) sftpTimeout.toMillis());
-            int split  = nepFile.lastIndexOf("/");
+            int split  = nepFile.lastIndexOf('/');
             if (split > 0) {
                 sftp.mkdirs(nepFile.substring(0, split));
             }
@@ -151,7 +152,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
                     if (++batchCount % infoBatch == 0) {
                         // updating spans in ngToast doesn't work...
-                        //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
                         logger.info(
                             en("Uploaded {}/{} to {}:{}")
                                 .nl("Geüpload {}/{} naar {}:{}")
@@ -196,7 +196,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     @ManagedAttribute
     public void setConnectTimeout(String connectTimeout) {
-        this.connectTimeout = TimeUtils.parseDuration(connectTimeout).orElseThrow(() -> new IllegalArgumentException("could not parse " + connectTimeout));
+        this.connectTimeout = TimeUtils.parseDuration(connectTimeout).orElseThrow(couldNotParse(connectTimeout));
     }
 
     @ManagedAttribute
@@ -206,7 +206,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     @ManagedAttribute
     public void setSocketTimeout(String socketTimeout) {
-        this.socketTimeout = TimeUtils.parseDuration(socketTimeout).orElseThrow(() -> new IllegalArgumentException("could not parse " + socketTimeout));
+        this.socketTimeout = TimeUtils.parseDuration(socketTimeout).orElseThrow(couldNotParse(socketTimeout));
     }
 
     @ManagedAttribute
@@ -216,9 +216,12 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     @ManagedAttribute
     public void setSftpTimeout(String sftpTimeout) {
-        this.sftpTimeout = TimeUtils.parseDuration(sftpTimeout).orElseThrow(() -> new IllegalArgumentException("could not parse " + sftpTimeout));
+        this.sftpTimeout = TimeUtils.parseDuration(sftpTimeout).orElseThrow(couldNotParse(sftpTimeout));
     }
 
+    private Supplier<IllegalArgumentException> couldNotParse(String string){
+        return () -> new IllegalArgumentException("could not parse " + string);
+    }
 
     protected synchronized SSHClientFactory.ClientHolder createClient() throws IOException {
 
