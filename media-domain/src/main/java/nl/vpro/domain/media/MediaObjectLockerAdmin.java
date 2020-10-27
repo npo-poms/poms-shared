@@ -71,7 +71,7 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
         return "Removed all mid locks (approx. " + size + ")";
     }
 
-    private final ObjectLockerAdmin objectLockerAdmin = new ObjectLockerAdmin();
+    private final ObjectLockerAdmin objectLockerAdmin = ObjectLockerAdmin.JMX_INSTANCE;
 
     @Override
     public String getMaxLockAcquireTime() {

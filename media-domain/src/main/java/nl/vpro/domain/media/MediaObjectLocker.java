@@ -1,21 +1,20 @@
 package nl.vpro.domain.media;
 
-import lombok.Lombok;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.lang.management.ManagementFactory;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
-import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import nl.vpro.jmx.MBeans;
 import nl.vpro.services.TransactionService;
 import nl.vpro.util.locker.ObjectLocker;
 import nl.vpro.util.locker.ObjectLocker.LockHolder;
@@ -24,6 +23,10 @@ import nl.vpro.util.locker.ObjectLocker.LockHolder;
  * Tool to make sure that the 'authority' related dropboxes and other services don't run at the same time for the same mid.
  *
  * It may be better to (also) introduce more decent hibernate locking (MSE-3751)
+ *
+ * This basicly wraps {@link ObjectLocker}, but keeps a separate map of locked objects, dedicated to media identifiables
+ *
+ * Also, it defined some annotations (for use with {@link MediaObjectLockerAspect} (to facilitate locking via annotation), and some utility methods.
  *
  * @author Michiel Meeuwissen
  * @since 5.5
@@ -43,10 +46,9 @@ public class MediaObjectLocker {
 
     static {
         try {
-            MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-            mbs.registerMBean(JMX_INSTANCE, new ObjectName("nl.vpro.media:name=mediaObjectLocker"));
-        } catch (Throwable t) {
-            throw Lombok.sneakyThrow(t);
+            MBeans.registerBean(new ObjectName("nl.vpro.media:name=mediaObjectLocker"), JMX_INSTANCE);
+        } catch (MalformedObjectNameException ignored) {
+            // cannot happen
         }
     }
 
@@ -115,10 +117,10 @@ public class MediaObjectLocker {
     }
 
 
-     public static void withMidLock(
-         String mid,
-         @NonNull String reason,
-         @NonNull Runnable runnable) {
+    public static void withMidLock(
+        String mid,
+        @NonNull String reason,
+        @NonNull Runnable runnable) {
         withMidLock(mid, reason, () -> {
             runnable.run();
             return null;
