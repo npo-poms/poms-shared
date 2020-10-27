@@ -143,26 +143,4 @@ public class MediaObjectLocker {
         return ObjectLocker.withObjectLock(lock, reason, callable, LOCKED_MEDIA, (o1, o2) -> o1.getType().equals(o2.getType()));
     }
 
-
-
-    public static <T> T withMidsLock(
-        Iterable<String> mids,
-        @NonNull String reason,
-        @NonNull Callable<T> callable) {
-        return ObjectLocker.withObjectsLock(MediaIdentifiable.Correlation.mids(mids), reason, callable, LOCKED_MEDIA, (o1, o2) -> o1.getType().equals(o2.getType()));
-    }
-
-     public static void withMidsLock(
-         Iterable<String> mid,
-         @NonNull String reason,
-         @NonNull Runnable runnable) {
-         withMidsLock(mid, reason, () -> {
-            runnable.run();
-            return null;
-        });
-     }
-
-
-
-
 }
