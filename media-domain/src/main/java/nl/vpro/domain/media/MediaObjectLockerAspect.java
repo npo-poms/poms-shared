@@ -31,7 +31,6 @@ import nl.vpro.util.locker.ObjectLocker;
 public abstract class MediaObjectLockerAspect  {
 
 
-
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
         Object media = joinPoint.getArgs()[annotation.argNumber()];
@@ -51,7 +50,6 @@ public abstract class MediaObjectLockerAspect  {
             }
 
         });
-
     }
 
 

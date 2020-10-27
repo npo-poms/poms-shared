@@ -9,7 +9,7 @@ import nl.vpro.jmx.Description;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
-public interface MediaObjectLockerAdminMXBean {
+public interface MediaObjectLockerAdminMXBean   {
 
     @Description("The mids currently locked")
     Set<String> getLocks();
