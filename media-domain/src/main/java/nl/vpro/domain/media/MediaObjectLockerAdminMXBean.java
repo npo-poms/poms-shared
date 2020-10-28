@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import nl.vpro.jmx.Description;
+import nl.vpro.jmx.Name;
 
 /**
  * @author Michiel Meeuwissen
@@ -33,7 +34,11 @@ public interface MediaObjectLockerAdminMXBean   {
     @Description("The maximum depth reach. I.e. the maximum number of 'nested' code locking the same mid.")
     int getMaxDepth();
 
-    String clearMidLock(String mid);
+    @Description("Explicitely clear a lock on some mid")
+    String clearMidLock(@Name("mid") String mid);
+
+    @Description("Explicitely lock a mid for a certain period. This simulates long processes, and can be used to assess such a situation")
+    String lockMid(@Description("The mid to lock") @Name("mid") String mid, @Description("How long") @Name("duration") String duration);
 
     String clearMidLocks();
 
