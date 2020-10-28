@@ -60,7 +60,7 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
 
     @Override
     public String clearMidLock(String mid) {
-        return "removed " + MediaObjectLocker.LOCKED_MEDIA.remove(mid);
+        return "removed " + MediaObjectLocker.LOCKED_MEDIA.remove(MediaIdentifiable.Correlation.mid(mid));
 
     }
 
