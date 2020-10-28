@@ -2,12 +2,14 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import nl.vpro.util.TimeUtils;
 import nl.vpro.util.locker.ObjectLocker;
-import nl.vpro.util.locker.ObjectLockerAdmin;
 
 /**
  * @author Michiel Meeuwissen
@@ -71,26 +73,25 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
         return "Removed all mid locks (approx. " + size + ")";
     }
 
-    private final ObjectLockerAdmin objectLockerAdmin = new ObjectLockerAdmin();
-
     @Override
     public String getMaxLockAcquireTime() {
-        return objectLockerAdmin.getMaxLockAcquireTime();
+        return ObjectLocker.maxLockAcquireTime.toString();
 
     }
 
     @Override
     public void setMaxLockAcquireTime(String duration) {
-        objectLockerAdmin.setMaxLockAcquireTime(duration);
+        ObjectLocker.maxLockAcquireTime = TimeUtils.parseDuration(duration).orElse(ObjectLocker.maxLockAcquireTime);
     }
 
     @Override
     public boolean isMonitor() {
-        return objectLockerAdmin.isMonitor();
+        return ObjectLocker.monitor;
+
     }
 
     @Override
     public void setMonitor(boolean monitor) {
-        objectLockerAdmin.setMonitor(monitor);
+        ObjectLocker.monitor = monitor;
     }
 }
