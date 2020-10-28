@@ -1,11 +1,14 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+import java.time.Duration;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
+import nl.vpro.jmx.MBeans;
+import nl.vpro.util.TimeUtils;
 import nl.vpro.util.locker.ObjectLocker;
 import nl.vpro.util.locker.ObjectLockerAdmin;
 
@@ -13,20 +16,10 @@ import nl.vpro.util.locker.ObjectLockerAdmin;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
+@Slf4j
 class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
-    /**
-     * Number of locks per 'reason'.
-     */
-    Map<String, AtomicInteger> lockCount = new HashMap<>();
 
-    /**
-     * Count per 'reason'.
-     */
-    Map<String, AtomicInteger> currentCount = new HashMap<>();
-    @Getter
-    int maxConcurrency = 0;
-    @Getter
-    int maxDepth = 0;
+    ObjectLockerAdmin objectLockerAdmin = ObjectLockerAdmin.JMX_INSTANCE;
 
     @Override
     public Set<String> getLocks() {
@@ -35,34 +28,56 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
 
     @Override
     public int getLockCount() {
-        return lockCount.values().stream().mapToInt(AtomicInteger::intValue).sum();
+        return objectLockerAdmin.getLockCount();
 
     }
 
     @Override
     public Map<String, Integer> getLockCounts() {
-        return lockCount.entrySet().stream().collect(
-            Collectors.toMap(Map.Entry::getKey, e -> e.getValue().intValue()));
-
+        return objectLockerAdmin.getLockCounts();
     }
 
     @Override
     public int getCurrentCount() {
-        return currentCount.values().stream().mapToInt(AtomicInteger::intValue).sum();
+        return objectLockerAdmin.getCurrentCount();
     }
 
     @Override
     public Map<String, Integer> getCurrentCounts() {
-        return currentCount.entrySet().stream().collect(
-            Collectors.toMap(Map.Entry::getKey, e -> e.getValue().intValue()));
+        return objectLockerAdmin.getCurrentCounts();
+    }
 
+    @Override
+    public int getMaxConcurrency() {
+        return objectLockerAdmin.getMaxConcurrency();
+    }
+
+    @Override
+    public int getMaxDepth() {
+        return objectLockerAdmin.getMaxDepth();
     }
 
     @Override
     public String clearMidLock(String mid) {
         return "removed " + MediaObjectLocker.LOCKED_MEDIA.remove(MediaIdentifiable.Correlation.mid(mid));
-
     }
+
+    @Override
+    public String lockMid(String mid, String duration) {
+        final Duration dur = TimeUtils.parseDuration(duration).orElseThrow(() -> new IllegalArgumentException("Cannot parse " + duration));
+        return MBeans.returnString("locking mid " + mid, MBeans.multiLine(log, "locking"), Duration.ofSeconds(5), (logger) -> {
+            MediaObjectLocker.withMidLock(mid, "explicit lock for " + duration, new Callable<Void>() {
+                @Override
+                public Void call() throws Exception {
+                    logger.info("Locked " + mid + " for " + dur);
+                    Thread.sleep(dur.toMillis());
+                    logger.info("Releasing lock for  " + mid + " now");
+                    return null;
+                }
+            });
+        });
+    }
+
 
     @Override
     public String clearMidLocks() {
@@ -71,12 +86,10 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
         return "Removed all mid locks (approx. " + size + ")";
     }
 
-    private final ObjectLockerAdmin objectLockerAdmin = ObjectLockerAdmin.JMX_INSTANCE;
 
     @Override
     public String getMaxLockAcquireTime() {
         return objectLockerAdmin.getMaxLockAcquireTime();
-
     }
 
     @Override

@@ -43,8 +43,7 @@ public class MediaObjectLocker {
     private static final MediaObjectLockerAdmin JMX_INSTANCE    = new MediaObjectLockerAdmin();
 
 
-
-    static {
+     static {
         try {
             MBeans.registerBean(new ObjectName("nl.vpro.media:name=mediaObjectLocker"), JMX_INSTANCE);
         } catch (MalformedObjectNameException ignored) {
@@ -54,12 +53,12 @@ public class MediaObjectLocker {
 
 
     /**
-     * Adding this annotation of a method with a {@link String} or {@link MediaIdentifiable} object will 'lock' the identifier, and will make sure
+     * Adding this annotation of a method with a {@link String} or {@link MediaIdentifiable} argument will 'lock' the identifier, and will make sure
      * that no other code doing the same will run simultaneously.
      *
      * Much code like this will be get a mediaobject using this mid, change it and then commit the mediaobject.
      *
-     * If another thread is changing the mediaobject in between those event, those changes will be lost.
+     * If another thread is changing the mediaobject in between those events, those changes will be lost.
      *
      * This can therefore be avoided using this annotations (or equivalently by using {@link #withMidLock(String, String, Callable)}
 
@@ -82,9 +81,8 @@ public class MediaObjectLocker {
     }
 
     /**
-     * Like {@link Mid}, but now for nl.vpro.domain.subtitles.SubtitlesId.
+     * Like {@link Mid}, but now for {@code nl.vpro.domain.subtitles.SubtitlesId}
      */
-
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Sid {
         int argNumber() default 0;
@@ -97,7 +95,7 @@ public class MediaObjectLocker {
      *
      * Make sure not to be in a transaction already.
      */
-    public static <T> T withMidLock(
+    public static <T> T executeInNewTransactionWithMidLock(
         @NonNull TransactionService transactionService,
         String mid,
         @NonNull String reason,
