@@ -1,25 +1,20 @@
 package nl.vpro.domain.media.update;
 
 import lombok.*;
-import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.PublishableObject;
-import nl.vpro.domain.media.support.Workflow;
-import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.logging.simple.Slf4jSimpleLogger;
-import nl.vpro.util.Functions;
-import nl.vpro.util.IntegerVersion;
-import nl.vpro.util.Predicates;
-import nl.vpro.util.TriPredicate;
-import org.slf4j.Logger;
-import org.slf4j.helpers.MessageFormatter;
 
 import java.time.Duration;
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
+
+import org.meeuw.functional.*;
+import org.slf4j.Logger;
+import org.slf4j.helpers.MessageFormatter;
+
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.logging.simple.Slf4jSimpleLogger;
+import nl.vpro.util.IntegerVersion;
 
 import static nl.vpro.util.Predicates.*;
 
@@ -342,7 +337,7 @@ public class AssemblageConfig {
 
     @EqualsAndHashCode
     public static class TriStealImpl<T> implements TriSteal<T> {
-        private final TriPredicate<MediaObject, MediaObject, T> wrapped;
+        private final org.meeuw.functional.TriPredicate<MediaObject, MediaObject, T> wrapped;
 
         public TriStealImpl(TriPredicate<MediaObject, MediaObject, T> wrapped) {
             this.wrapped = wrapped;

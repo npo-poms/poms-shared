@@ -81,6 +81,10 @@
       <artifactId>vpro-shared-util</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.meeuw.util</groupId>
+      <artifactId>mihxil-functional</artifactId>
+    </dependency>
+    <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-validation</artifactId>
     </dependency>
