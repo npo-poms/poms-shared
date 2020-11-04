@@ -1,6 +1,7 @@
 package nl.vpro.beeldengeluid.gtaa;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.List;
@@ -49,7 +50,6 @@ public class OpenskosRepositoryTest {
     public void testAddItem() throws IOException {
         wireMockRule.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(okXml(f("/submit-person-response.xml")).withStatus(201)));
 
-        repo.setUseXLLabels(true);
         GTAANewGenericConcept testNameX = GTAANewGenericConcept.builder()
             .name("Testlabel1")
             .scopeNote("Note123")
@@ -112,9 +112,9 @@ public class OpenskosRepositoryTest {
                 count++;
                 next = updates.next();
                 try {
-                    if (next.getMetaData().getFirstDescription().getAbout().equals("http://data.beeldengeluid.nl/gtaa/1011506")) {
+                    if (next.getMetaData().getFirstDescription().getAbout().equals(URI.create("http://data.beeldengeluid.nl/gtaa/1011506)"))) {
                         assertThat(next.getMetaData().getFirstDescription().getRedirectedFrom())
-                                .isEqualTo("http://data.beeldengeluid.nl/gtaa/29654");
+                                .contains(URI.create("http://data.beeldengeluid.nl/gtaa/29654"));
                     }
                 } catch (Exception e) {
 

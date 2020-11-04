@@ -2,6 +2,7 @@ package nl.vpro.beeldengeluid.gtaa;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.net.URI;
 import java.time.*;
 import java.util.*;
 
@@ -31,8 +32,7 @@ public class OpenskosRepositoryITest {
 
 
     public static Object[] envs() {
-        //return new Object[]{Env.DEV, Env.TEST,  Env.ACC, Env.PROD };
-        return new Object[]{Env.ACC};
+        return new Object[]{Env.ACC, Env.PROD, Env.TEST};
     }
 
     @ParameterizedTest
@@ -121,7 +121,6 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envs")
-    @Disabled("This is not a junit test")
     public void testFindPerson(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> persons = impl.findPersons("johan c", 100);
@@ -134,7 +133,6 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envs")
-    @Disabled("This is not a junit test")
     public void testFindAnyThing(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> concepts = impl.findAnything("hasselt", 100);
@@ -148,7 +146,6 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envs")
-    @Disabled("This is not a junit test")
     public void testFindGeo(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> geonames = impl.findForSchemes("amsterdam", 1000, new GTAARepository.SchemeOrNot(Scheme.geographicname));
@@ -162,16 +159,24 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envs")
-    //@Disabled("This is not a junit test")
     public void testFindByGtaaUrl(Env env) {
         OpenskosRepository impl = getRealInstance(env);
-        List<Description> geonames = impl.findForSchemes("amsterdam", 1000, new GTAARepository.SchemeOrNot(Scheme.geographicname));
-        assertThat(geonames).isNotEmpty();
-        assertThat(geonames.get(0).getStatus()).isNotNull();
-        for (Description geoname : geonames)  {
-            log.info("{}", geoname);
-        }
+        Optional<GTAAConcept> person = impl.get("http://data.beeldengeluid.nl/gtaa/1715195");
+        log.info("person: {}", person);
+        assertThat(person.get().getId()).isEqualTo(URI.create("http://data.beeldengeluid.nl/gtaa/1715195"));
     }
+
+
+
+    @ParameterizedTest
+    @MethodSource("envs")
+    public void testFindByNotExistingGtaaUrl(Env env) {
+        OpenskosRepository impl = getRealInstance(env);
+        Optional<GTAAConcept> person = impl.get("http://data.beeldengeluid.nl/gtaa/12345");
+        log.info("person: {}", person);
+        assertThat(person.get().getId()).isEqualTo(URI.create("http://data.beeldengeluid.nl/gtaa/1715195"));
+    }
+
 
     @ParameterizedTest
     @MethodSource("envs")
