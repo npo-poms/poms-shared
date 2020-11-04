@@ -83,11 +83,6 @@ public class OpenskosRepository implements GTAARepository {
     @Nullable
     private String geoLocationsSpec;
 
-    @Value("${gtaa.useXLLabels}")
-    @Getter
-    @Setter
-    private boolean useXLLabels;
-
     @Value("${gtaa.tenant}")
     @Getter
     @Setter
@@ -124,7 +119,6 @@ public class OpenskosRepository implements GTAARepository {
         this.tenant = tenant;
         this.personsSpec = personsSpec;
         this.geoLocationsSpec = geoLocationsSpec;
-        this.useXLLabels = useXLLabels;
         this.retries = retries;
 
     }
@@ -209,11 +203,10 @@ public class OpenskosRepository implements GTAARepository {
 
     @PostConstruct
     public void init() {
-        log.info("Communicating with {} (personSpec: {}, geolocationsSpec: {}), useXLLabels: {})",
+        log.info("Communicating with {} (personSpec: {}, geolocationsSpec: {})",
             gtaaUrl,
             personsSpec,
-            geoLocationsSpec,
-            useXLLabels
+            geoLocationsSpec
         );
         addErrorHandler();
     }
@@ -436,7 +429,7 @@ public class OpenskosRepository implements GTAARepository {
                     .type(Types.SKOS_CONCEPT)
                     .tenant(tenant)
                     .creator(creator)
-                    .prefLabelOrXL(useXLLabels, prefLabel, tenant)
+                    .prefLabelOrXL(true, prefLabel, tenant)
                     .scopeNote(notes)
                     .dateSubmitted(Instant.now().atZone(ZONE_ID))
                     .inScheme(scheme.getUrl())
