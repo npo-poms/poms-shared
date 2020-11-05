@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
@@ -140,7 +141,9 @@ public class MediaObjectLocker {
         MediaIdentifiable.Correlation lock,
         @NonNull String reason,
         @NonNull Callable<T> callable) {
-        return ObjectLocker.withObjectLock(lock, reason, callable, LOCKED_MEDIA, (o1, o2) -> o1 instanceof MediaIdentifiable.Correlation && (((MediaIdentifiable.Correlation) o1).getType().equals(o2.getType())));
+        return ObjectLocker.withObjectLock(lock, reason, callable, LOCKED_MEDIA, (
+            o1, o2) ->
+            o1 instanceof MediaIdentifiable.Correlation && Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType()));
     }
 
 }

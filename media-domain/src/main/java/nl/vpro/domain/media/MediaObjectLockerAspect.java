@@ -78,7 +78,7 @@ public abstract class MediaObjectLockerAspect  {
         if (StringUtils.isNotBlank(method)) {
             try {
                 Method m = object.getClass().getMethod(method);
-                return MediaIdentifiable.Correlation.mid((String) m.invoke(object));
+                return MediaIdentifiable.Correlation.mid(StringUtils.trim((String) m.invoke(object)));
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 log.error(e.getMessage(), e);
                 throw new IllegalStateException();
