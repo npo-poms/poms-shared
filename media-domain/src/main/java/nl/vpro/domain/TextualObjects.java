@@ -4,15 +4,13 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.functional.TriFunction;
 
-import nl.vpro.domain.media.support.MutableOwnable;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.util.ResortedSortedSet;
-import nl.vpro.util.TriFunction;
+
 
 /**
  * Utilities related to {@link TextualObject}s

@@ -6,7 +6,6 @@ import lombok.Setter;
 import java.time.Instant;
 import java.util.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -14,20 +13,18 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.functional.TriFunction;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Accountable;
-import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.LocalizedObject;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Tag;
-import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.*;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.persistence.InstantToTimestampConverter;
-import nl.vpro.util.TriFunction;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
 

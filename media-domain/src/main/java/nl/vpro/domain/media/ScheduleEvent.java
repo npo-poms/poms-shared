@@ -3,14 +3,8 @@ package nl.vpro.domain.media;
 import lombok.Singular;
 
 import java.io.Serializable;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.time.*;
+import java.util.*;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -25,6 +19,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+import org.meeuw.functional.TriFunction;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -32,20 +28,11 @@ import com.google.common.collect.Range;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.bind.NetToString;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.ScheduleEventDescription;
-import nl.vpro.domain.media.support.ScheduleEventTitle;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.jackson2.DurationToJsonTimestamp;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.StringZonedLocalDateToJsonTimestamp;
-import nl.vpro.jackson2.Views;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.jackson2.*;
 import nl.vpro.persistence.LocalDateToDateConverter;
 import nl.vpro.util.DateUtils;
-import nl.vpro.util.TriFunction;
-import nl.vpro.xml.bind.DurationXmlAdapter;
-import nl.vpro.xml.bind.InstantXmlAdapter;
-import nl.vpro.xml.bind.ZonedLocalDateXmlAdapter;
+import nl.vpro.xml.bind.*;
 
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;

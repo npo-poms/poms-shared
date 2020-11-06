@@ -4,14 +4,13 @@ package nl.vpro.domain;
 import java.util.SortedSet;
 import java.util.function.BiFunction;
 
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-
-import org.apache.commons.lang3.StringUtils;
+import org.meeuw.functional.TriFunction;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.util.TriFunction;
 
 /**
  * Represents an object having owned and typed titles and descriptions.
