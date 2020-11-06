@@ -1,10 +1,8 @@
 package nl.vpro.domain.media.search;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
