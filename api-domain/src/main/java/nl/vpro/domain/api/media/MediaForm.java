@@ -5,7 +5,6 @@
 package nl.vpro.domain.api.media;
 
 import lombok.EqualsAndHashCode;
-import lombok.Setter;
 
 import java.util.function.Predicate;
 
@@ -40,7 +39,6 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
     }
 
     @Valid
-    @Setter
     @XmlElements({
         @XmlElement(name = "sort", type = MediaSortOrder.class),
         @XmlElement(name = "titleSort", type = TitleSortOrder.class)
@@ -70,6 +68,10 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
     @JsonProperty("sort")
     public MediaSortOrderList getSortFields() {
         return sortFields;
+    }
+
+    public void setSortFields(MediaSortOrderList sortFields) {
+        this.sortFields = sortFields;
     }
 
     @Override
