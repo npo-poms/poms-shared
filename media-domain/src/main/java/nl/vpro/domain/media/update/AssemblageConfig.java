@@ -16,7 +16,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.util.IntegerVersion;
 
-import static nl.vpro.util.Predicates.*;
+import static org.meeuw.functional.Predicates.*;
 
 
 /**
@@ -79,7 +79,6 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean copyTopics = true;
 
-
     @lombok.Builder.Default
     BiPredicate<List<String>, Relation> relations = DEFAULT_RELATION_MATCH;
 
@@ -101,10 +100,8 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     BiPredicate<MediaObject, AssemblageConfig> inferDurationFromScheduleEvents = biAlwaysFalse();
 
-
     @lombok.Builder.Default
     boolean locationsUpdate = false;
-
 
     @lombok.Builder.Default
     Steal stealMids = Steal.NO;
@@ -173,6 +170,7 @@ public class AssemblageConfig {
             return logger.chain(Slf4jSimpleLogger.of(log));
         }
     }
+
     public AssemblageConfig copy() {
         return new AssemblageConfig(
             owner,
@@ -207,11 +205,13 @@ public class AssemblageConfig {
             markForDeleteOnly,
             logger);
     }
+
     public AssemblageConfig withLogger(SimpleLogger logger) {
         AssemblageConfig copy = copy();
         copy.setLogger(logger);
         return copy;
     }
+
     public AssemblageConfig withThreadLocalLogger() {
         return withLogger(SimpleLogger.THREAD_LOCAL.get());
     }
@@ -271,8 +271,6 @@ public class AssemblageConfig {
         setMemberOfUpdate(Predicates.biAlways(bool, "always " + bool));
     }
 
-
-
     public static class Builder {
         /**
          * Since POMS 5.9 a segment can have an owner.
@@ -325,13 +323,12 @@ public class AssemblageConfig {
         public String toString() {
             return name();
         }
-
     }
 
 
     public interface TriSteal<T> extends TriPredicate<MediaObject, MediaObject, T> {
         static <S> TriSteal<S> of(Steal s) {
-            return new TriStealImpl<S>(Predicates.ignoreArg3(s));
+            return new TriStealImpl<>(Predicates.ignoreArg3(s));
         }
     }
 
@@ -425,26 +422,28 @@ public class AssemblageConfig {
                 }
             }
         }
+
         @Override
         public String toString() {
             return value.toString();
         }
 
-         @Override
-         public boolean equals(Object o) {
-             if (this == o) return true;
-             if (o == null || getClass() != o.getClass()) return false;
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
 
-             Require<?, ?> require = (Require<?, ?>) o;
+            Require<?, ?> require = (Require<?, ?>) o;
 
-             return Objects.equals(value, require.value);
-         }
+            return Objects.equals(value, require.value);
+        }
 
          @Override
          public int hashCode() {
              return value != null ? value.hashCode() : 0;
          }
     }
+
     /**
      * @since 5.13
      */
@@ -466,7 +465,6 @@ public class AssemblageConfig {
          public String toString() {
              return "MidRequire:" + value.toString();
          }
-
     }
 
     /**
@@ -503,7 +501,6 @@ public class AssemblageConfig {
         @Override
         public boolean isFatal() {
             return true;
-
         }
     }
 
@@ -516,7 +513,6 @@ public class AssemblageConfig {
         @Override
         public boolean isFatal() {
             return false;
-
         }
     }
 
