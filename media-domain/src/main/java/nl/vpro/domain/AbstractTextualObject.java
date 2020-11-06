@@ -2,9 +2,10 @@ package nl.vpro.domain;
 
 import lombok.Getter;
 
+import org.meeuw.functional.TriFunction;
+
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.util.TriFunction;
 
 /**
  * @author Michiel Meeuwissen
