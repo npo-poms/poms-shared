@@ -321,6 +321,7 @@ public class Image extends PublishableObject<Image>
         to.setImageUri(from.getImageUri());
         to.setLicense(from.getLicense());
         to.setSourceName(from.getSourceName());
+        to.setSource(from.getSource());
         return to;
     }
 
