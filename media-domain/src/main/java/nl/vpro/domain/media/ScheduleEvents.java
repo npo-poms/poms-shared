@@ -33,8 +33,9 @@ public class ScheduleEvents {
      * comparing events from a source that uses guide times rounded to the minute for example
      *
      * @return true wen equal
-     * @Deprecated {@link #findScheduleEventsCloseTo} is better
+     * @deprecated {@link #findScheduleEventsCloseTo} is better
      */
+    @Deprecated
     public static boolean differWithinMargin(ScheduleEvent event1, ScheduleEvent event2, long marginInMillis) {
         return
             event1.getChannel() != null && event1.getChannel().equals(event2.getChannel()) &&
