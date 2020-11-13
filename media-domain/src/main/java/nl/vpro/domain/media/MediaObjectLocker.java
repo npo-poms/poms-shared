@@ -124,7 +124,6 @@ public class MediaObjectLocker {
             runnable.run();
             return null;
         });
-
      }
 
     public static <T> T withMidLock(

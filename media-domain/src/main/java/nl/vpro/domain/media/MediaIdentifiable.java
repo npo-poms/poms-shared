@@ -5,6 +5,8 @@ import lombok.Getter;
 import java.io.Serializable;
 import java.util.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 /**
  * An object that contains various fields to identify a POMS media object.
 * @author Michiel Meeuwissen
@@ -53,23 +55,25 @@ public interface MediaIdentifiable extends MidIdentifiable {
         final String id;
         final Type type;
 
-        public Correlation(String id, Type type) {
+        public Correlation(@NonNull String id, @NonNull Type type) {
             this.id = id;
             this.type = type;
         }
 
         static Correlation mid(String mid) {
-            return new Correlation(mid, Type.MID);
-        }
-
-        static Iterable<Correlation> mids(Iterable<String> mids) {
-            List<MediaIdentifiable.Correlation> correlations = new ArrayList<>();
-            mids.forEach(m -> correlations.add(MediaIdentifiable.Correlation.mid(m)));
-            return correlations;
+            if (mid == null) {
+                return null;
+            } else {
+                return new Correlation(mid, Type.MID);
+            }
         }
 
         static Correlation crid(String crid) {
-            return new Correlation(crid, Type.CRID);
+            if (crid == null) {
+                return null;
+            } else {
+                return new Correlation(crid, Type.CRID);
+            }
         }
 
         enum Type {
