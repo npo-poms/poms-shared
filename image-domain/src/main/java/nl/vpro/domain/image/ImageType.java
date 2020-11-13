@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.image;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -66,20 +68,16 @@ public enum ImageType implements Displayable {
         }
     };
 
-    @Override
-    public String toString() {
-        return getDisplayName();
-    }
-
-
+    @Getter
     private final String description;
 
     ImageType(String description) {
         this.description=description;
     }
 
-    public String getDescription() {
-        return description;
+    @Override
+    public String toString() {
+        return getDisplayName();
     }
 
     public static ImageType valueOfOrNull(String s) {
