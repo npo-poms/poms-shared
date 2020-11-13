@@ -72,7 +72,7 @@ public enum ImageType implements Displayable {
     private final String description;
 
     ImageType(String description) {
-        this.description=description;
+        this.description = description;
     }
 
     @Override
