@@ -347,11 +347,11 @@ public class OdiAuthentication {
         }
     }
 
-    private class WrappedIE89HttpServletRequest extends HttpServletRequestWrapper {
+    private static class WrappedIE89HttpServletRequest extends HttpServletRequestWrapper {
 
-        private final ObjectMapper mapper = new ObjectMapper();
+        private static final ObjectMapper mapper = new ObjectMapper();
 
-        private JsonNode param;
+        private final JsonNode param;
 
         public WrappedIE89HttpServletRequest(String ieParam, HttpServletRequest request) {
             super(request);
