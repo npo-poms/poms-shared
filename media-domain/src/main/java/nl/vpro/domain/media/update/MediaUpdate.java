@@ -1234,7 +1234,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.images = images;
     }
     public void setImages(ImageUpdate... images) {
-        this.images = Arrays.asList(images);
+        this.images = new ArrayList<>();
+        this.images.addAll(Arrays.asList(images));
     }
 
     /**
