@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:date="http://exslt.org/dates-and-times" publisher="NPO Programma Gegevens" publicationTime="2015-09-17T09:29:43.200+02:00" version="300" xsi:schemaLocation="urn:bds:metadata:2004 XSDSchema/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176754668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Credits: Paradijsbestormers</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Paradijsbestormers'. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Paradijsbestormers'. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Paradijsbestormers'.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176708668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Paradijsbestormers</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Wat drijft jonge Westerse mannen om af te reizen naar Syrië om zich te mengen in andermans strijd? Floor van der Meulen (24) zoekt Nederlandse Jihad-strijders die ze kent uit de wijk van haar jeugd. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Wat drijft jonge Westerse mannen om iedereen en alles achter zich te laten en af te reizen naar Syrië om zich te mengen in andermans strijd? In deze documentaire zoekt filmmaker Floor van der Meulen (24) Nederlandse Jihad-strijders die ze kent uit de wijk van haar jeugd. Jongens die de media schetsen als kwetsbare en ontspoorde jongeren die een terreurdreiging kunnen vormen. Maar klopt dit beeld? Om te begrijpen waarom ze zich geroepen voelen daar de wapens op te pakken en al het vertrouwde achter zich te laten, laat de filmmaker het Westerse perspectief los om in de belevingswereld van de strijders te geraken. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0830" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Wat drijft jonge Westerse mannen om iedereen en alles achter zich te laten en af te reizen naar Syrië om zich te mengen in andermans strijd?</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176772668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">2Doc: The Look of Silence</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Verolg op 'The Act of Killing', waarin regisseur Joshua Oppenheimer zijn onderzoek naar de Indonesische omgang met de massamoord op een miljoen (vermeende) communisten in 1965 en 1966 voortzet. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Na het prijswinnende 'The Act of Killing' vervolgt regisseur Joshua Oppenheimer zijn onderzoek naar de Indonesische omgang met de massamoord op een miljoen (vermeende) communisten in 1965 en 1966. Door de huidige regering van Indonesië worden de daders nog altijd gezien als helden, terwijl de feitelijke gebeurtenissen worden verzwegen. Oppenheimers hoofdpersoon is Adi, geboren in februari 1968, twee jaar na de moord op zijn broer Ramli. Adi bekijkt de interviews die Oppenheimer filmde met leden van het verantwoordelijke doodseskader: gesprekken waarin zij toegeven onder het commando van het Indonesische leger te hebben gestaan en waarin ze gedetailleerd (en regelmatig lachend) tonen waar en hoe ze arrestanten, onder wie Ramli, vermoordden. Adi confronteert de betrokkenen ook persoonlijk met de schuldvraag, maar dan wijzen zij naar anderen, kappen ze het gesprek boos af of bedreigen ze hem met geweld. Adi's huis, waar hij woont met zijn stokoude ouders en zijn kinderen, wordt door Oppenheimer met schilderachtige schoonheid gefilmd, als een oase van rust. Maar uit angst voor represailles durft de dappere Adi -die als optometrist de wens koestert de daders ook historisch scherper te laten zien- zijn adres aan de daders niet bekend te maken. Om diezelfde reden staan vele Indonesische crewleden anoniem op de aftiteling. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0830" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:d">
+            <Name xml:lang="NL">Discriminatie</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:12">
+              <mpeg7:Name xml:lang="NL">12</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>JW</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="DK"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Verolg op 'The Act of Killing', over de Indonesische omgang met de massamoord op een miljoen (vermeende) communisten in 1965 en 1966.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176696668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Zembla</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Actuele reportages.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Opiniërende onderzoeksjournalistiek in actuele documentaires, met spraak- en nieuwsmakende onderwerpen. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Opiniërende onderzoeksjournalistiek in actuele documentaires, met spraak- en nieuwsmakende onderwerpen. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+          <OneLineDescription>Opiniërende onderzoeksjournalistiek in actuele documentaires, met spraak- en nieuwsmakende onderwerpen.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176690668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Tweelingen: Verschillen</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Er zijn eeneiïge tweelingbroers en -zussen die opmerkelijk van elkaar verschillen. Wat is hiervoor de wetenschappelijke verklaring? </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Er zijn eeneiige tweelingbroers en -zussen die opmerkelijk van elkaar verschillen. Volgens sommige wetenschappers ontstaan er al genetische verschillen in de baarmoeder.  Anderen hebben aangetoond dat genen door externe factoren kunnen veranderen en dus niet voetstoots een vaste blauwdruk zijn voor onze identiteit. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0827" type="secondary">
+            <Name xml:lang="NL">Wetenschap</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2010</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Er zijn eeneiïge tweelingbroers en -zussen die opmerkelijk van elkaar verschillen. Wat is hiervoor de wetenschappelijke verklaring?</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176828668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">VIP Doc: Lessons of Darkness</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Vlak na de eerste Golfoorlog (1991) woedden er vele oliebranden in Koeweit. Werner Herzog filmde het apocalyptische landschap in de laatste week voor de vuurzee gedoofd zou worden. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Vlak na de eerste Golfoorlog (1991) woedden er vele oliebranden in Koeweit. Werner Herzog filmde het apocalyptische landschap in de laatste week voor de vuurzee gedoofd zou worden. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:12">
+              <mpeg7:Name xml:lang="NL">12</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>DE</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1014908425517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="DE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>1992</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Vlak na de eerste Golfoorlog (1991) woedden er vele oliebranden in Koeweit. Werner Herzog filmde het apocalyptische landschap.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176652668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Credits: Desi</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Desi'. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Desi'. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Desi'.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176714668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Desi</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Documentaire van Maria Ramos over het elfjarige meisje Desi, dat iedere dag op zoek moet naar een slaapplaats. Een meeslepende film die je doet nadenken over je eigen jeugd. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Lange documentaire van Maria Ramos uit 2001. Desi is elf jaar en gaat, zoals alle andere kinderen van haar leeftijd, overdag naar school. Maar waar ze 's avonds zal slapen weet ze niet. Desi's moeder overleed toen ze nog een baby was en haar vader, al langdurig werkloos, woont met zijn nieuwe vriendin Esther op een rommelige woonboot. Ze woont deels bij haar vader en deels bij haar grootmoeder, maar ze logeert ook veel bij vriendinnen. Desi klaagt niet. In wezen moet Desi als kind al volwassen zijn en haar eigen plan trekken. Alleen bij haar vriendinnen kan ze soms nog kind zijn, al worden zelfs in de spelletjes met poppen de ruzies tussen vader en zijn vriendin nagebootst. Maria Ramos volgt Desi van nabij, maar dringt zich niet aan haar op. Er worden geen vragen gesteld, er klinkt geen voice over. Maria Ramos laat de kijker zonder tussenkomst alleen met Desi en biedt de kijker zodoende de ruimte om een eigen oordeel te vormen. Zo wordt in alle rust het ritme getoond van Desi's leven, dat voor haarzelf doodgewoon is. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <CreditsList/>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2000</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Documentaire van Maria Ramos over het elfjarige meisje Desi, dat iedere dag op zoek moet naar een slaapplaats.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176634668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Movies that Matter: Inequality For All</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Econoom Robert Reich legt haarfijn uit waardoor de ongelijkheid tussen arm en rijk in de VS is toegenomen. En die ongelijkheid heeft niet alleen effect op de economie maar ook op de democratie. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Econoom en schrijver Robert Reich legt haarscherp uit waardoor de ongelijkheid tussen arm en rijk in de Verenigde Staten de laatste jaren is toegenomen. Deze ongelijkheid is volgens hem de oorzaak van de economische problemen in de afgelopen dertig jaar. Er gaat zoveel geld naar een kleine groep mensen met topinkomens, dat de middenklasse niet meer genoeg verdient om de economie draaiende te houden. De meeste huishoudens hebben enorme schulden. Tegelijkertijd verdient 1 procent van de inwoners meer dan 20 procent van het nationale inkomen. Dit heeft volgens Reich niet alleen effect op de Amerikaanse economie maar op ook de democratie. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:9">
+              <mpeg7:Name xml:lang="NL">9</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="US"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Econoom Robert Reich legt uit waarom er zoveel meer ongelijkheid is gekomen in de VS in de laatste jaren.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176658668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Credits: Gerard Thoolen: Alles komt ergens van</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Gerard Thoolen: Alles komt ergens van'. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Gerard Thoolen: Alles komt ergens van'. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Gerard Thoolen: Alles komt ergens van'.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176646668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Gerard Thoolen: Alles komt ergens van</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Documentaire uit 2004 van Pieter Verhoeff over het leven en werk van acteur Gerard Thoolen (1943-1996), die zijn leven lang vooral op zoek is geweest naar de liefde. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Documentaire uit 2004 over acteur Gerard Thoolen (1943-1996), die zijn leven lang vooral op zoek is geweest naar de liefde. Regisseur Pieter Verhoeff heeft een aantal collega's en vrienden van Gerard Thoolen uitgenodigd om een diner voor te bereiden en gezamenlijk een maaltijd te nuttigen in een huis in Bergen aan Zee ter nagedachtenis aan Gerard Thoolen, overeenkomstig Thoolens wens om met collega's te dineren en acteren in zijn (nooit gerealiseerde) theaterrestaurant Sperwer naast zijn woning. Aanwezig zijn o.a. de acteurs Shireen Strooker, Joop Admiraal, Peter Faber, Olga Zuiderhoek, Michiel Romeijn en Kitty Courbois. Tevens bezoekt acteur Hein van der Heijden Thoolens voormalige woning en laat vriendin Juliet Deyman Thoolens kabinet van emoties zien: een kast met objecten, afbeeldingen en theatrale doorkijkjes die een symbolische betekenis hadden voor Thoolen. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0824" type="secondary">
+            <Name xml:lang="NL">Kunst/cultuur</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2004</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Documentaire van Pieter Verhoeff over acteur Gerard Thoolen (1943-1996), die zijn leven lang vooral op zoek is geweest naar de liefde.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176786668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De kennis van nu</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Wetenschapsprogramma met André Kuipers, Diederik Jekel, Liesbeth Staats en Bart Meijer.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Wetenschapsprogramma met André Kuipers, Diederik Jekel, Liesbeth Staats en Bart Meijer. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Wetenschapsprogramma met André Kuipers, Diederik Jekel, Liesbeth Staats en Bart Meijer. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0727" type="secondary">
+            <Name xml:lang="NL">Wetenschap</Name>
+          </Genre>
+          <Language>NL</Language>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="584125545517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="723554010517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="304356920517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="923595588517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+          <Season>Najaar 2015</Season>
+          <OneLineDescription>Wetenschapsprogramma met André Kuipers, Diederik Jekel, Liesbeth Staats en Bart Meijer.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176640668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">The Greeks: Crucible of Civilisation</Title>
+          <Title xml:lang="NL" type="episodeTitle">The Revolution</Title>
+          <Synopsis xml:lang="NL" length="long">Griekenland was de afgelopen jaren vooral negatief in het nieuws vanwege de economische problemen waarmee het land te kampen heeft. Veel andere Europese landen verweten de Grieken luiheid en een gebrek aan politieke hervormingsgezindheid. Toch liggen de Grieken aan de basis van het ontstaan van ons huidige politieke systeem. De driedelige geschiedenisserie 'The Greeks: Crucible of Civilization' verdiept zich in het Griekenland van de vierde en vijfde eeuw voor Christus en toont de enorme bijdragen die zij hebben geleverd op het gebied van politiek, filosofie en wetenschap waarmee zij het begin markeerden van de Westerse beschaving.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> 3-delige geschiedenisserie over het Griekenland van de 4de en 5de eeuw v. Christus. Afl. 1: The Revolution. Het verhaal van de geboorte van 's werelds eerste democratie. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> De driedelige geschiedenisserie 'The Greeks: Crucible of Civilization' verdiept zich in het Griekenland van de vierde en vijfde eeuw voor Christus en toont de enorme bijdragen die zij hebben geleverd op het gebied van politiek, filosofie en wetenschap waarmee zij het begin markeerden van de Westerse beschaving. Afl. 1: The Revolution. Het verhaal van de geboorte van 's werelds eerste democratie. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0830" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="US"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>1999</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>1</EpisodeNumber>
+          <OneLineDescription>3-delige serie over het Griekenland van de 4de en 5de eeuw v. Christus. Het verhaal van de geboorte van 's werelds eerste democratie.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176670668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Andere Tijden</Title>
+          <Title xml:lang="NL" type="episodeTitle">De ondergang van de Trabant</Title>
+          <Synopsis xml:lang="NL" length="short"> Geschiedenisprogramma over ontwikkelingen en gebeurtenissen in de moderne geschiedenis, vaak naar aanleiding van de actualiteit. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Geschiedenisprogramma over ontwikkelingen en gebeurtenissen in de moderne geschiedenis, vaak naar aanleiding van de actualiteit. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0730" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </Genre>
+          <Language>NL</Language>
+          <CreditsList/>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+          <Season>Najaar 2015</Season>
+          <OneLineDescription>Geschiedenisprogramma over ontwikkelingen en gebeurtenissen in de moderne geschiedenis.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176810668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Intro X jaar na dato: Alles wat we wilden</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Introductie van de documentaire 'Alles wat we wilden' uit 2009 van Sarah Domogala en het aansluitende gesprek van Chris Kijne met Sarah en hoofdpersonen Eniel en Daniël. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Introductie van de documentaire 'Alles wat we wilden' uit 2009 van Sarah Domogala en het aansluitende gesprek van Chris Kijne met Sarah en hoofdpersonen Eniel en Daniël. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Introductie van de documentaire 'Alles wat we wilden' uit 2009 van Sarah Domogala.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176804668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Alles wat we wilden</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Vier jonge, creatieve, ambitieuze mensen worden gevolgd. Ze leiden ogenschijnlijk een glanzend en gelukkig leven, maar worstelen met angsten en de hoge eisen die ze aan zichzelf stellen. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Documentaire uit 2009 van Sarah Domogala. Vier jonge, creatieve, ambitieuze mensen worden gevolgd. Ze leiden ogenschijnlijk een glanzend en gelukkig leven, maar worstelen met angsten en de hoge eisen die ze aan zichzelf stellen. Hierdoor kampen ze met lichamelijke en psychische klachten, zoals paniekaanvallen, depressiviteit en dwangneuroses. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2009</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Documentaire uit 2009 van Sarah Domogala. Vier jonge, creatieve, ambitieuze mensen worden gevolgd.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176816668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">X jaar na dato: Alles wat we wilden</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Chris Kijne praat met regisseur Sarah Domogala en hoofdpersonen Emiel en Daniel uit de documentaire 'Alles wat we wilden' (2009). </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Chris Kijne praat met regisseur Sarah Domogala en hoofdpersonen Emiel en Daniel uit de documentaire 'Alles wat we wilden' (2009). </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Chris Kijne praat met regisseur Sarah Domogala en hoofdpersonen Emiel en Daniel uit de documentaire 'Alles wat we wilden' (2009).</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176822668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">IDFA Special: Mea Maxima Culpa: Silence in the House of God</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Als dove slachtoffers van seksueel misbruik door geestelijken het zwijgen doorbreken, brengt dat een zondvloed aan misbruikschandalen aan het licht. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Seksueel misbruik van minderjarigen is een misdaad die mogelijk gemaakt is door stilte. Slachtoffers schamen zich, getuigen zijn terughoudend om het naar buiten te brengen en instellingen bang om op te treden. Deze documentaire breekt deze barrière in een onderzoek naar seksschandalen in de rooms-katholieke kerk. Ondanks sommige krantenkoppen hebben we weinig weet van de verhullingen die tientallen jaren plaatsvonden. Hoewel kerken meer dan twee miljard aan schadeclaims hebben uitbetaald, heeft het Amerikaanse hof slechts één iemand van de kerkelijke macht veroordeeld voor het verhullen van deze misdaden. Maar steeds vaker komen andere landen tot duistere ontdekkingen. Wie moet verantwoordelijk gehouden worden voor deze daden? </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:g">
+            <Name xml:lang="NL">Geweld</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:9">
+              <mpeg7:Name xml:lang="NL">9</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="US"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Alex Gibney onderzoekt kindermisbruik in de rooms-katholieke kerk.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176702668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Fryslân DOK</Title>
+          <Title xml:lang="NL" type="episodeTitle">Hearke</Title>
+          <Synopsis xml:lang="NL" length="long">Een reeks van documentaires gemaakt door Omrop Fryslân over actuele kwesties in Friesland. Elke week weer een nieuwe kijk op diverse zaken van grote diversiteit; van geschiedenis tot literatuur en van sport tot architectuur. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Documentaire over het Friese paard Hearke, een geweldig tuigpaard en beroemde dekhengst die 1089 nakomelingen heeft in het Fries Paardenstamboek. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Documentaire over het Friese paard Hearke, een geweldig tuigpaard en beroemde dekhengst die 1089 nakomelingen heeft in het Fries Paardenstamboek. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Language>FY</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>52</EpisodeNumber>
+          <OneLineDescription>Over het Friese paard Hearke, een geweldig tuigpaard en beroemde dekhengst die 1089 nakomelingen heeft in het Fries Paardenstamboek.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176664668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Credits: Diary of a Times Square Thief</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Diary of a Times Square Thief'. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Diary of a Times Square Thief'. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Diary of a Times Square Thief'.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176748668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Diary of a Times Square Thief</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> De geschiedenis achter een mysterieus dagboek. Klaas Bense gaat op zoek naar de schrijver van een dagboek dat hij op eBay gekocht heeft. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Documentaire uit 2009 van Klaas Bense. In de film gaat hij op zoek naar de schrijver van een mysterieus dagboek, dat hij op Ebay gekocht heeft. Hierin staan de avonturen beschreven van een jonge man die eind jaren tachtig vanuit het middenwesten van Amerika naar New York reist om daar zijn droom te verwezenlijken en als schrijver door te breken. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0826" type="secondary">
+            <Name xml:lang="NL">Religieus</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2009</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>De geschiedenis achter een mysterieus dagboek. Klaas Bense gaat op zoek naar de schrijver van een dagboek dat hij op eBay gekocht heeft.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176684668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">2Doc: With or Without You</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Al meer dan 45 jaar leven de Koreaanse Maggi (88) en Chunhee (70) samen. Chunhee was 24 toen zij als tweede vrouw bij Maggi en haar man in huis werd genomen. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Al meer dan 45 jaar leven de Koreaanse Maggi (88) en Chunhee (70) samen. Chunhee was 24 toen zij als tweede vrouw bij Maggi en haar man in huis werd genomen. Ze moest zonen voortbrengen die Maggi verloren had om daarmee de eer van de familie te redden. In 'With or Without You' ontvouwt zich de bijzondere symbiose tussen de twee vrouwen. Aan elkaar geven zij de liefde en compassie, die de maatschappij hen niet kan geven. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Language>KO</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="DE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Al meer dan 45 jaar leven de Koreaanse Maggi (88) en Chunhee (70) samen. Chunhee was 24 toen zij als 2de vrouw bij Maggi's man in huis kwam.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176760668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Credits: Ik ben Alice</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Ik ben Alice'. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Gastcuratoren kiezen in 'Credits' eigen werk en van vakbroeders. Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Ik ben Alice'. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Producent Janneke Doolaard praat met Daphne Bunskoek over de documentaire 'Ik ben Alice'.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176738668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Ik ben Alice</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Drie alleenstaande bejaarde vrouwen krijgen bezoek van zorgrobot Alice. Alice is geprogrammeerd als de ideale verzorgster die nooit moe wordt. Kan de robot een mens vervangen? </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Drie alleenstaande bejaarde vrouwen krijgen bezoek van zorgrobot Alice. Alice is geprogrammeerd als de ideale verzorgster die nooit moe wordt en altijd voor je klaar staat. Kan de robot een mens vervangen? </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0822" type="secondary">
+            <Name xml:lang="NL">Gezondheid/opvoeding</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="36365211517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://dokument.ncrv.nl/pagina/ik-ben-alice</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Drie alleenstaande bejaarde vrouwen krijgen bezoek van zorgrobot Alice. Kan de robot een mens vervangen?</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176778668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Dieet op maat</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> De beste manier om af te vallen is met een persoonlijke aanpak. Dokter Chris van Tulleken en hoogleraar Tanya Byron nemen deel aan een baanbrekend experiment in Engeland. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> De beste manier om af te vallen is niet de nieuwste dieetrage, maar een persoonlijke aanpak. Een dieet dat is afgestemd op individuele biologische en psychologische kenmerken van mensen. Dokter Chris van Tulleken en hoogleraar Tanya Byron nemen deel aan een baanbrekend experiment in Engeland. Samen met een team van vooraanstaande deskundigen zetten ze 75 te zware vrijwilligers op een dieet dat vooral bedoeld is om de oorzaken aan te pakken waarom zij te veel eten. De vrijwilligers verblijven in een kliniek waar een serie onderzoekjes bij hen wordt afgenomen, die moeten verklaren op welke manier hun genen, hormonen en psychische kenmerken van invloed zijn op hun eetgedrag. Vervolgens moeten ze een dieet gaan volgen dat volgens de deskundigen het best bij hen past. Heeft de wetenschap succes waar zoveel diëten faalden? </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0827" type="secondary">
+            <Name xml:lang="NL">Wetenschap</Name>
+          </Genre>
+          <Language>EN</Language>
+          <CreditsList/>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>1</EpisodeNumber>
+          <OneLineDescription>De beste manier om af te vallen is met een persoonlijke aanpak. Dokter Chrisen hoogleraar Tanya nemen deel aan een baanbrekend experiment.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176766668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Tegenlicht</Title>
+          <Title xml:lang="NL" type="episodeTitle">TTIP: Recht van de sterkste</Title>
+          <Synopsis xml:lang="NL" length="short"> Het voorgenomen handelsverdrag tussen de Europese Unie en de Verenigde Staten (TTIP) doet veel stof opwaaien. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Het voorgenomen handelsverdrag tussen de Europese Unie en de Verenigde Staten (TTIP) doet veel stof opwaaien. Breekpunt in de onderhandelingen is ISDS, het investor-state dispute settlement. Hierin krijgen bedrijven de mogelijkheid om regeringen aan te klagen die beleid voeren welke de investeringen van diezelfde bedrijven zouden kunnen schaden. In veel handelsverdragen wordt een ISDS-clausule verwerkt. Wordt onze democratie aangetast door claimbeluste investeringsadvocaten? </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0827" type="secondary">
+            <Name xml:lang="NL">Wetenschap</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>22</EpisodeNumber>
+          <Season>2015</Season>
+          <OneLineDescription>Het voorgenomen handelsverdrag tussen de Europese Unie en de Verenigde Staten (TTIP) doet veel stof opwaaien.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176722668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Limits of Light</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> Documentaire over de wereld van kleur. Wat is kleur precies, en hoe nemen we het waar? En werkt dit bij andere dieren op dezelfde manier? </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Documentaire over de wereld van kleur. Wat is kleur precies, en hoe nemen we het waar? En werkt dit bij andere dieren op dezelfde manier? </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0827" type="secondary">
+            <Name xml:lang="NL">Wetenschap</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="AT"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2001</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Documentaire over de wereld van kleur. Wat is kleur precies, en hoe nemen we het waar? En werkt dit bij andere dieren op dezelfde manier?</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176884668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Grensland</Title>
+          <Title xml:lang="NL" type="episodeTitle">Onder het oppervlak</Title>
+          <Synopsis xml:lang="NL" length="long">Jelle Brandt Corstius reist door het gebied tussen Europa en Rusland, van de Oostzee tot aan de Zwarte Zee en oostwaarts naar de steppen van Kazachstan.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Jelle Brandt Corstius reist door het gebied tussen Europa en Rusland, van de Oostzee tot aan de Zwarte Zee en oostwaarts naar de steppen van Kazachstan. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Jelle Brandt Corstius reist door het gebied tussen Europa en Rusland, van de Oostzee tot aan de Zwarte Zee en oostwaarts naar de steppen van Kazachstan. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0829" type="secondary">
+            <Name xml:lang="NL">Reizen</Name>
+          </Genre>
+          <Language>NL</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>4</EpisodeNumber>
+          <Season>01</Season>
+          <OneLineDescription>Jelle Brandt Corstius reist door het gebied tussen Europa en Rusland, van de Oostzee tot de Zwarte Zee en naar de steppen van Kazachstan.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176890668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">IKON Doc</Title>
+          <Title xml:lang="NL" type="episodeTitle">Anna, 7 jaar in de frontlinie</Title>
+          <Synopsis xml:lang="NL" length="short"> Documentaire uit 2008. In oktober 2006 wordt de Russische journaliste en activiste Anna Politkovskaja in de hal van haar appartement vermoord. Die moord is anno 2008 nog steeds onopgehelderd. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Documentaire uit 2008. In oktober 2006 wordt de Russische journaliste en activiste Anna Politkovskaja in de hal van haar appartement vermoord. De moord op Anna Politkovskaja is nooit behoorlijk onderzocht en is daarom -anno 2008- nog steeds onopgehelderd. Als speciaal correspondent van de krant Novaya Gazeta hebben de laatste zeven jaar van haar leven in het teken gestaan van onderzoek naar oorlogsmisdaden en mensenrechtenschendingen in Tsjetsjenië, van protest daartegen, van hulp aan slachtoffers. Het zijn zeven zware jaren die de gedreven criticaster van president Poetin brengen naar plaatsen waar haar journalistieke interesse of humanitaire bezorgdheid haar heenleiden, zoals Grozny en Beslan. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:16">
+              <mpeg7:Name xml:lang="NL">16</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>RU</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2008</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>3</EpisodeNumber>
+          <OneLineDescription>In oktober 2006 wordt de Russische journaliste en activiste Anna Politkovskaja vermoord. Die moord is anno 2008 nog steeds onopgehelderd.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176878668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Science and Islam (1): The Language of Science</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> 3-delige serie. Afl. 1. Reizend door Syrië, Iran, Tunesië, Turkije en Spanje verdiept Jim Al-Khalili zich in de bijzondere bijdragen van de middeleeuwse Arabische wereld aan de moderne wetenschap. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> 3-delige serie. Afl. 1: The Language of Science. Reizend door Syrië, Iran, Tunesië, Turkije en Spanje verdiept Jim Al-Khalili zich in de bijzondere bijdragen van de middeleeuwse Arabische wereld aan de moderne wetenschap. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0830" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2009</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>3-delige serie over de bijzondere bijdragen van de middeleeuwse Arabische wereld aan de moderne wetenschap. Afl. 1.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176842668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Science and Islam (2): The Empire of Reason</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> 3-delige serie. Afl. 2. Ibn Al-Haytham was de grondlegger van de optometrie. Zijn honger naar wetenschappelijke kennis werd ingegeven door zijn verlangen om dichter tot God te komen. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> 3-delige serie. Afl. 2. Ibn Al-Haytham was de grondlegger van de optometrie. Zijn honger naar wetenschappelijke kennis werd ingegeven door zijn verlangen om dichter tot God te komen. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0830" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2009</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>3-delige serie over de bijzondere bijdragen van de middeleeuwse Arabische wereld aan de moderne wetenschap. Afl. 2.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1020176836668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Science and Islam (3): The Power of Doubt</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"> 3-delige serie. Afl. 3 (slot). Jim Al-Khalili onderzoekt hoe wetenschappelijke ontdekkingen vanuit de islamitische wereld in de zestiende en zeventiende eeuw doordrongen tot Europa.  </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> 3-delige serie. Afl. 3 (slot): The Power of Doubt. Jim Al-Khalili onderzoekt hoe wetenschappelijke ontdekkingen vanuit de islamitische wereld in de zestiende en zeventiende eeuw doordrongen tot Europa. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:08">
+            <Name xml:lang="NL">Documentaire</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0830" type="secondary">
+            <Name xml:lang="NL">Geschiedenis</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2009</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>3-delige serie over de bijzondere bijdragen van de middeleeuwse Arabische wereld aan de moderne wetenschap. Afl. 3 (slot).</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable/>
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="HOLL" start="2015-10-05T01:06:00+02:00" end="2015-10-06T01:00:00+02:00">
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176754668"/>
+          <PublishedStartTime>2015-10-05T01:06:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02979290</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">60914</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176708668"/>
+          <PublishedStartTime>2015-10-05T01:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H46M37S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>11-09-2014</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BNN"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_BNN_101369750</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40501</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176772668"/>
+          <PublishedStartTime>2015-10-05T01:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H40M10S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_VPWON_1209394</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40595</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176696668"/>
+          <PublishedStartTime>2015-10-05T03:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H36M10S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VARA"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_VARA_101375759</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">T_VARA_101372896</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">60988</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176690668"/>
+          <PublishedStartTime>2015-10-05T04:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H52M50S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02972208</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40615</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176828668"/>
+          <PublishedStartTime>2015-10-05T05:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H55M38S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02979284</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176652668"/>
+          <PublishedStartTime>2015-10-05T06:01:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02979292</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">60912</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176714668"/>
+          <PublishedStartTime>2015-10-05T06:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H16M07S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>16-12-2001</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_VPRO_1138842</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40506</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176634668"/>
+          <PublishedStartTime>2015-10-05T07:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H59M16S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02972247</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">56155</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176658668"/>
+          <PublishedStartTime>2015-10-05T08:21:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02979287</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">60919</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176646668"/>
+          <PublishedStartTime>2015-10-05T08:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H20M20S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>19-08-2004</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="HUMAN"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_00980762</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40496</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176786668"/>
+          <PublishedStartTime>2015-10-05T09:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M20S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02952475</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">T_VPWON_1241888</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">60984</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176640668"/>
+          <PublishedStartTime>2015-10-05T10:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H56M20S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02979607</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">T_POW_02979588</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40612</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176670668"/>
+          <PublishedStartTime>2015-10-05T11:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M20S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_VPWON_1241920</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">T_VPWON_1241915</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40598</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176810668"/>
+          <PublishedStartTime>2015-10-05T11:39:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H01M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02974487</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176804668"/>
+          <PublishedStartTime>2015-10-05T11:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H48M55S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>11-08-2010</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_VPWON_1167431</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">60992</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176816668"/>
+          <PublishedStartTime>2015-10-05T12:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H24M20S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02974488</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176822668"/>
+          <PublishedStartTime>2015-10-05T12:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H46M20S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02974427</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176702668"/>
+          <PublishedStartTime>2015-10-05T14:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H41M20S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="Omrop Fryslan"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_00728956</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">T_14ROFn2Zat</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">56168</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176664668"/>
+          <PublishedStartTime>2015-10-05T15:22:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02979289</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">60927</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176748668"/>
+          <PublishedStartTime>2015-10-05T15:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H59M57S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>06-07-2009</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_00245371</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40521</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176684668"/>
+          <PublishedStartTime>2015-10-05T16:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H57M49S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>10-05-2015</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_VPWON_1246910</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40591</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176760668"/>
+          <PublishedStartTime>2015-10-05T17:23:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02979288</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">60949</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176738668"/>
+          <PublishedStartTime>2015-10-05T17:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H16M43S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>06-07-2015</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_KN_1671620</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40529</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176778668"/>
+          <PublishedStartTime>2015-10-05T18:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H51M06S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02983507</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">T_VPWON_1240813</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">60964</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176766668"/>
+          <PublishedStartTime>2015-10-05T19:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M20S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_VPWON_1232892</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">T_VPWON_1232870</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40624</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176722668"/>
+          <PublishedStartTime>2015-10-05T20:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H51M14S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02979687</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">40539</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176884668"/>
+          <PublishedStartTime>2015-10-05T21:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H45M10S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02961830</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">T_VPWON_1233644</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176890668"/>
+          <PublishedStartTime>2015-10-05T22:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M10S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="IKON"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_00735287</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">T_POW_00568692</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176878668"/>
+          <PublishedStartTime>2015-10-05T23:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H59M47S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02532060</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176842668"/>
+          <PublishedStartTime>2015-10-06T00:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M20S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02532085</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1020176836668"/>
+          <PublishedStartTime>2015-10-06T01:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M31S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">T_POW_02532086</OtherIdentifier>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="1014908425517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Werner</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Herzog</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="584125545517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Liesbeth</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Staats</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="723554010517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Diederik</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Jekel</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="304356920517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Bart</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Meijer</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="923595588517">
+        <mpeg7:GivenName xml:lang="NL" initial="">André</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kuipers</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="36365211517">
+        <mpeg7:FamilyName xml:lang="NL">Sander Burger</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>

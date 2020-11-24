@@ -30,7 +30,6 @@ import nl.vpro.domain.media.Net;
 public class FindNetFunction extends ExtensionFunctionDefinition {
 
 
-
     private final Supplier<Collection<Net>> netsSupplier;
 
     @Inject

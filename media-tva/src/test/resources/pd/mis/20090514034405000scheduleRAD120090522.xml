@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<TVAMain publisher="Broadcasting DataServices Limited" publicationTime="2009-05-14T04:02:45+00:00" version="217" xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:bds:metadata:2006 http://www.broadcastingdata.com/dataimport/tva/new/tva_v13_am1_bds1r2.xsd" >
+<ProgramDescription>
+<ProgramInformationTable>
+<ProgramInformation programId="crid://bds.tv/16140085" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Nieuws]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Elk heel uur en van 6.30 t/m 18.30 elk half uur.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Elk heel uur en van 6.30 t/m 18.30 elk half uur.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><Duration>PT00H02M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140083" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[NOS-Radio 1-Journaal]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Nieuws en actualiteiten.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Nieuws en actualiteiten.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="615960"/></CreditsItem><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="615961"/></CreditsItem><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="615962"/></CreditsItem><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="602973"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[publieksreacties@nos.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[256]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.nos.nl/radio1journaal]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT03H29M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140081" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Goedemorgen Nederland Radio]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Actualiteitenmagazine vanuit het Media Café in Hilversum met studiogasten, vaste rubrieken en reportages.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Actualiteitenmagazine vanuit het Media Café in Hilversum met studiogasten, vaste rubrieken en reportages.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="531473"/></CreditsItem></CreditsList><Duration>PT01H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140079" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Dit is de dag]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Talkshow met een pittige koffietafel met gasten uit het nieuws, reportages, onderzoeksjournalistiek en een debat.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Talkshow met een pittige koffietafel met gasten uit het nieuws, reportages, onderzoeksjournalistiek en een debat.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.eo.nl/ditisdedag]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT01H29M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140077" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[NOS-Radio 1-Journaal met het nieuws]]></Title>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[256]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H15M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140075" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Lunch!]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Een programma dat het nieuws vanuit een verrassende invalshoek belicht, met ervaringen en meningen van gewone mensen. De Nationale Nieuwsquiz en aandacht voor entertainment, media en cultuur.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Een afwisselend en dynamisch programma dat het nieuws vanuit een verrassende invalshoek belicht, met ervaringen en meningen van gewone mensen. De Nationale Nieuwsquiz en aandacht voor de wereld van entertainment, media en cultuur.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><Duration>PT00H45M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140073" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[NOS-Radio 1-Journaal met het nieuws]]></Title>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[256]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H15M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140071" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Stand.nl]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Het gesprek van de dag met een gast en luisteraars. Reageren?: 0800-1101 of via de website.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Het gesprek van de dag met een gast en luisteraars. Reageren?: 0800-1101 of via de website.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593018"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[standpunt@ncrv.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.stand.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H19M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140069" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[AVRO De Praktijk]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Breed, journalistiek magazine over gezondheid.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Breed, journalistiek magazine over gezondheid.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="604993"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[depraktijk@avro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.depraktijk.avro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H57M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140067" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Villa VPRO]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Scherpe gesprekken en niet gestelde vragen. Met: De hamvraag, Wereldnet, De ervaring van... Waar u zich druk om maakt!, De Boeken, Bureau Buitenland.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Scherpe gesprekken en niet gestelde vragen. Met om: ca. 14.32 De hamvraag. ca. 14.45 Wereldnet. ca. 15.06 De ervaring van ... ca. 15.19 Waar u zich druk om maakt! ca. 15.20 De Boeken met Aukje Holtrop of Peter de Bruijn. ca. 15.32 Bureau Buitenland.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="579174"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[villa@vpro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.villavpro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT01H31M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140065" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Radio Kassa]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Journalistiek magazine met nieuws en achtergronden op het gebied van consumenteninformatie.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Journalistiek magazine met nieuws en achtergronden op het gebied van consumenteninformatie.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593017"/></CreditsItem><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="73353"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.kassa.vara.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H29M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140063" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[NOS-Radio 1-Journaal]]></Title>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[publieksreacties@nos.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[256]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.nos.nl/radio1journaal]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT02H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140061" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Stand.café]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Discussieprogramma over het nieuws van de dag.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Discussieprogramma over het nieuws van de dag.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="113864"/></CreditsItem></CreditsList><Duration>PT00H31M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140059" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Kunststof]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Talkshow met prominenten over cultuur en media.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Talkshow met prominenten over cultuur en media.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593019"/></CreditsItem><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593022"/></CreditsItem><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="504262"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[kunststof@nps.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.nps.nl/kunststof]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT01H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140057" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[BNN Today]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Magazine over het nieuws van de dag. Het programma start met een uitgebreid nieuwsoverzicht. Verder: Exit Holland.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[De avond krijgt een frisse smoel met een programma over de wereld om je heen. Dit magazine gaat over het nieuws van de dag. Het begint met het Nieuws in 1 minuut. Aan de hand van geluidsfragmenten hoort de luisteraar in één minuut wat er die dag allemaal is gebeurd. Sport krijgt ook ruim aandacht. Wedstrijden die 's avonds bezig zijn, worden uitgebreid verslagen en in samenwerking met Langs de lijn van de NOS wordt elke avond een overzicht gemaakt van het belangrijkste sportnieuws van die dag. Verder: Exit Holland. In dit item vertellen jongeren die Nederland hebben verlaten over opvallende ontwikkelingen in hun nieuwe thuisland.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593025"/></CreditsItem><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="580480"/></CreditsItem></CreditsList><Duration>PT02H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140055" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[NOS-Langs de lijn]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Sportprogramma met nieuws, achtergronden, reportages, liveverslagen, interviews en studiogasten.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Sportprogramma met nieuws, achtergronden, reportages, liveverslagen, interviews en studiogasten.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[langsdelijnsite@nos.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[256]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.nos.nl/nosstudiosport/langsdelijn/uitzendingen/index.html]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT01H03M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140053" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[NOS-Met het oog op morgen]]></Title>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[publieksreacties@nos.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[256]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.nos.nl/nosjournaal/oogopmorgen]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H57M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140051" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Casa Luna]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Reacties: 0800-1121 en via de mail.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Reacties: 0800-1121 of via internet.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="534918"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[casaluna@ncrv.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.casaluna.ncrv.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H43M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140049" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Bommel]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Hoorspel. Met het beste van Bommel de zomer door.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Hoorspel. Met het beste van Bommel de zomer door.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.hoorspelbommel.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H17M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140047" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Casa Luna]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Vervolg.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Vervolg.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><Duration>PT01H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140045" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Vlucht in het verleden]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Met historisch radiomateriaal.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Met historisch radiomateriaal.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593026"/></CreditsItem></CreditsList><Duration>PT01H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140043" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Nachtvluchten]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Aandacht voor radiopareltjes van verschillende zenders en omroepverenigingen, van nu en langer geleden. 6.02 Live interview met filosoof (schrijver en hoogleraar) Bas Haring.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Aandacht voor radiopareltjes van verschillende zenders en omroepverenigingen, van nu en langer geleden. 6.02 Live interview met filosoof (schrijver en hoogleraar) Bas Haring.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593026"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[nachtvluchten@omroep.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.radio1.nl/nachtvluchten]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT03H58M</Duration></BasicDescription></ProgramInformation></ProgramInformationTable>
+<GroupInformationTable></GroupInformationTable>
+<ProgramLocationTable>
+<Schedule serviceIDRef="RAD1" start="2009-05-22T06:00:00+02:00" end="2009-05-23T07:00:00+02:00" releaseVersion="0"><ScheduleEvent>
+<Program crid="crid://bds.tv/16140085"  />
+<ProgramURL>dvb://1.1.RAD1;115636864@2009-05-22T06:00:00+02:00--PT00H02M00S</ProgramURL>
+<InstanceMetadataId>imi:21612</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T06:00:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H02M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NOS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140083"  />
+<ProgramURL>dvb://1.1.RAD1;115636865@2009-05-22T06:02:00+02:00--PT03H29M00S</ProgramURL>
+<InstanceMetadataId>imi:21613</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T06:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT03H29M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NOS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140081"  />
+<ProgramURL>dvb://1.1.RAD1;115636866@2009-05-22T09:31:00+02:00--PT01H00M00S</ProgramURL>
+<InstanceMetadataId>imi:21614</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T09:31:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="KRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140079"  />
+<ProgramURL>dvb://1.1.RAD1;115636867@2009-05-22T10:31:00+02:00--PT01H29M00S</ProgramURL>
+<InstanceMetadataId>imi:21615</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T10:31:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H29M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="EO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140077"  />
+<ProgramURL>dvb://1.1.RAD1;115636868@2009-05-22T12:00:00+02:00--PT00H15M00S</ProgramURL>
+<InstanceMetadataId>imi:21616</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T12:00:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H15M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NOS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140075"  />
+<ProgramURL>dvb://1.1.RAD1;115636869@2009-05-22T12:15:00+02:00--PT00H45M00S</ProgramURL>
+<InstanceMetadataId>imi:21617</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T12:15:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H45M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NCRV"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140073"  />
+<ProgramURL>dvb://1.1.RAD1;115636870@2009-05-22T13:00:00+02:00--PT00H15M00S</ProgramURL>
+<InstanceMetadataId>imi:21618</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T13:00:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H15M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NOS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140071"  />
+<ProgramURL>dvb://1.1.RAD1;115636871@2009-05-22T13:15:00+02:00--PT00H19M00S</ProgramURL>
+<InstanceMetadataId>imi:21619</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T13:15:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H19M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NCRV"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140069"  />
+<ProgramURL>dvb://1.1.RAD1;115636872@2009-05-22T13:34:00+02:00--PT00H57M00S</ProgramURL>
+<InstanceMetadataId>imi:21620</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T13:34:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H57M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="AVRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140067"  />
+<ProgramURL>dvb://1.1.RAD1;115636873@2009-05-22T14:31:00+02:00--PT01H31M00S</ProgramURL>
+<InstanceMetadataId>imi:21621</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T14:31:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H31M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="VPRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140065"  />
+<ProgramURL>dvb://1.1.RAD1;115636874@2009-05-22T16:02:00+02:00--PT00H29M00S</ProgramURL>
+<InstanceMetadataId>imi:21622</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T16:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H29M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="VARA"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140063"  />
+<ProgramURL>dvb://1.1.RAD1;115636875@2009-05-22T16:31:00+02:00--PT02H00M00S</ProgramURL>
+<InstanceMetadataId>imi:21623</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T16:31:00+02:00</PublishedStartTime>
+<PublishedDuration>PT02H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NOS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140061"  />
+<ProgramURL>dvb://1.1.RAD1;115636876@2009-05-22T18:31:00+02:00--PT00H31M00S</ProgramURL>
+<InstanceMetadataId>imi:21624</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T18:31:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H31M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NCRV"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140059"  />
+<ProgramURL>dvb://1.1.RAD1;115636877@2009-05-22T19:02:00+02:00--PT01H00M00S</ProgramURL>
+<InstanceMetadataId>imi:21625</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T19:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NPS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140057"  />
+<ProgramURL>dvb://1.1.RAD1;115636878@2009-05-22T20:02:00+02:00--PT02H00M00S</ProgramURL>
+<InstanceMetadataId>imi:21626</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T20:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT02H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="BNN"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140055"  />
+<ProgramURL>dvb://1.1.RAD1;115636879@2009-05-22T22:02:00+02:00--PT01H03M00S</ProgramURL>
+<InstanceMetadataId>imi:21627</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T22:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H03M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NOS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140053"  />
+<ProgramURL>dvb://1.1.RAD1;115636880@2009-05-22T23:05:00+02:00--PT00H57M00S</ProgramURL>
+<InstanceMetadataId>imi:21628</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T23:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H57M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NOS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140051"  />
+<ProgramURL>dvb://1.1.RAD1;115636881@2009-05-23T00:02:00+02:00--PT00H43M00S</ProgramURL>
+<InstanceMetadataId>imi:21629</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T00:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H43M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NCRV"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140049"  />
+<ProgramURL>dvb://1.1.RAD1;115636882@2009-05-23T00:45:00+02:00--PT00H17M00S</ProgramURL>
+<InstanceMetadataId>imi:21630</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T00:45:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H17M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NPS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140047"  />
+<ProgramURL>dvb://1.1.RAD1;115636883@2009-05-23T01:02:00+02:00--PT01H00M00S</ProgramURL>
+<InstanceMetadataId>imi:21631</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T01:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NCRV"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140045"  />
+<ProgramURL>dvb://1.1.RAD1;115636884@2009-05-23T02:02:00+02:00--PT01H00M00S</ProgramURL>
+<InstanceMetadataId>imi:21632</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T02:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H00M00S</PublishedDuration>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140043"  />
+<ProgramURL>dvb://1.1.RAD1;115636885@2009-05-23T03:02:00+02:00--PT03H58M00S</ProgramURL>
+<InstanceMetadataId>imi:21633</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T03:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT03H58M00S</PublishedDuration>
+</ScheduleEvent>
+</Schedule></ProgramLocationTable>
+<CreditsInformationTable><PersonName personNameId="73353"><mpeg7:GivenName xml:lang="NL" initial="">Felix</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Meurders</mpeg7:FamilyName></PersonName><PersonName personNameId="113864"><mpeg7:GivenName xml:lang="NL" initial="">Frank</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">du Mosch</mpeg7:FamilyName></PersonName><PersonName personNameId="504262"><mpeg7:GivenName xml:lang="NL" initial="">Frenk</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Van der Linden</mpeg7:FamilyName></PersonName><PersonName personNameId="531473"><mpeg7:GivenName xml:lang="NL" initial="">Sven</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Kockelmann</mpeg7:FamilyName></PersonName><PersonName personNameId="534918"><mpeg7:GivenName xml:lang="NL" initial="">Klaas</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Drupsteen</mpeg7:FamilyName></PersonName><PersonName personNameId="579174"><mpeg7:GivenName xml:lang="NL" initial="">Elles</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">de Bruin</mpeg7:FamilyName></PersonName><PersonName personNameId="580480"><mpeg7:GivenName xml:lang="NL" initial="">Winfried</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Baijens</mpeg7:FamilyName></PersonName><PersonName personNameId="593017"><mpeg7:GivenName xml:lang="NL" initial="">Simone</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Weimans</mpeg7:FamilyName></PersonName><PersonName personNameId="593018"><mpeg7:GivenName xml:lang="NL" initial="">Ghislaine</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Plag</mpeg7:FamilyName></PersonName><PersonName personNameId="593019"><mpeg7:GivenName xml:lang="NL" initial="">Jellie</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Brouwer</mpeg7:FamilyName></PersonName><PersonName personNameId="593022"><mpeg7:GivenName xml:lang="NL" initial="">Petra</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Possel</mpeg7:FamilyName></PersonName><PersonName personNameId="593025"><mpeg7:GivenName xml:lang="NL" initial="">Willemijn</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Veenhoven</mpeg7:FamilyName></PersonName><PersonName personNameId="593026"><mpeg7:GivenName xml:lang="NL" initial="">Nora</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Romanesco</mpeg7:FamilyName></PersonName><PersonName personNameId="602973"><mpeg7:GivenName xml:lang="NL" initial="">Bert</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">van Slooten</mpeg7:FamilyName></PersonName><PersonName personNameId="604993"><mpeg7:GivenName xml:lang="NL" initial="">Jan</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Mom</mpeg7:FamilyName></PersonName><PersonName personNameId="615960"><mpeg7:GivenName xml:lang="NL" initial="">Marcel</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Oosten</mpeg7:FamilyName></PersonName><PersonName personNameId="615961"><mpeg7:GivenName xml:lang="NL" initial="">Michiel</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Breedveld</mpeg7:FamilyName></PersonName><PersonName personNameId="615962"><mpeg7:GivenName xml:lang="NL" initial="">Catrien</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Straatman</mpeg7:FamilyName></PersonName></CreditsInformationTable>
+</ProgramDescription>
+</TVAMain>

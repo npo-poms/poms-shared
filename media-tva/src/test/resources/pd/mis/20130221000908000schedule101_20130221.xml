@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" publisher="Broadcasting DataServices Limited"
+         publicationTime="2013-02-21T00:29:46+00:00" version="217"
+         xsi:schemaLocation="urn:bds:metadata:2006 http://www.broadcastingdata.com/dataimport/tva/new/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://bds.tv/48695814">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Morning bits]]></Title>
+          <Synopsis xml:lang="NL" length="short">
+            <![CDATA[Lekker wakker worden met de juiste bits, dat zie je in de morning bits. Allerlei programma's van de publieke omroep komen voorbij.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long">
+            <![CDATA[Lekker wakker worden met de juiste bits, dat zie je in de morning bits. Allerlei programma's van de publieke omroep komen voorbij.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.1">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <!-- testLegacyMisGenre -->
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:09">
+            <Name xml:lang="NL"><![CDATA[Jeugd]]></Name>
+          </Genre>
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:17">
+            <Name xml:lang="NL"><![CDATA[Serie/soap]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT02H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/17076076">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Afternoon bits]]></Title>
+          <Synopsis xml:lang="NL" length="short">
+            <![CDATA[Dagje vrij of net uit school? Het maakt niet uit! 101.TV verzorgt je in de middag met de vetste bits van de publieke omroep.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long">
+            <![CDATA[Dagje vrij of net uit school? Het maakt niet uit! 101.TV verzorgt je in de middag met de vetste bits van de publieke omroep.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.1">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT02H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/48695834">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Evening bits]]></Title>
+          <Synopsis xml:lang="NL" length="short">
+            <![CDATA[Lekker de avond in met de bits van 101.TV. Vanuit je luie stoel zie je de allerbeste bits van de publieke omroep.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long">
+            <![CDATA[Lekker de avond in met de bits van 101.TV. Vanuit je luie stoel zie je de allerbeste bits van de publieke omroep.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.1">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:01">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT02H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/45737555">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[De Nieuwste Bits van 101 TV]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Iedere dag om 21:00 de nieuwste bits van 101.TV.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Iedere dag om 21:00 de nieuwste bits van 101.TV.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.1">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:01">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/49630561">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[4 Handen Op Een Buik]]></Title>
+          <Synopsis xml:lang="NL" length="short">
+            <![CDATA[Verschillende tienermoeders worden gevolgd tijdens en na hun zwangerschap en worden bijgestaan door een bekende Nederlandse moeder.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long">
+            <![CDATA[Verschillende tienermoeders worden gevolgd tijdens en na hun zwangerschap en worden bijgestaan door een bekende Nederlandse moeder.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.1">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:01">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT00H45M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/49469146">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Uit de kast]]></Title>
+          <Synopsis xml:lang="NL" length="short">
+            <![CDATA[Arie Boomsma helpt jonge mensen uit de kast komen naar hun familie en vrienden.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long">
+            <![CDATA[Arie Boomsma helpt jonge mensen uit de kast komen naar hun familie en vrienden.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.1">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:08">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/48695956">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Evening bits 16+]]></Title>
+          <Synopsis xml:lang="NL" length="short">
+            <![CDATA[Nog niet moe? Dat zijn hier de hardere en grovere bits, want dat wordt er ook gemaakt bij de publieke omroep.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long">
+            <![CDATA[Nog niet moe? Dat zijn hier de hardere en grovere bits, want dat wordt er ook gemaakt bij de publieke omroep.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.1">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:01">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT02H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/17075886">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Night Bits]]></Title>
+          <Synopsis xml:lang="NL" length="short">
+            <![CDATA[De leukste bits van 101.TV om je nacht mee door te komen. Allerlei programma's van de publieke omroep komen voorbij.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long">
+            <![CDATA[De leukste bits van 101.TV om je nacht mee door te komen. Allerlei programma's van de publieke omroep komen voorbij.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.1">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:01">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT02H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable/>
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="101_" start="2013-02-21T06:00:00+01:00" end="2013-02-22T06:00:00+01:00"
+                fragmentId="2931602311.75541:2024922866.75541:2013-02-21" fragmentVersion="152" releaseVersion="0">
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/48695814"/>
+          <ProgramURL>dvb://1.1.101_;322979562@2013-02-21T06:00:00+01:00--PT02H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:33902</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T06:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H00M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/48695814"/>
+          <ProgramURL>dvb://1.1.101_;322979563@2013-02-21T08:00:00+01:00--PT04H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:33903</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T08:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT04H00M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/17076076"/>
+          <ProgramURL>dvb://1.1.101_;322979564@2013-02-21T12:00:00+01:00--PT02H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:33904</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T12:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H00M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/17076076"/>
+          <ProgramURL>dvb://1.1.101_;322979565@2013-02-21T14:00:00+01:00--PT02H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:33905</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T14:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H00M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/17076076"/>
+          <ProgramURL>dvb://1.1.101_;322979566@2013-02-21T16:00:00+01:00--PT02H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:33906</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T16:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H00M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/48695834"/>
+          <ProgramURL>dvb://1.1.101_;322979567@2013-02-21T18:00:00+01:00--PT02H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:33907</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T18:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H00M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/45737555"/>
+          <ProgramURL>dvb://1.1.101_;322979568@2013-02-21T20:00:00+01:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:33908</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T20:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/49630561"/>
+          <ProgramURL>dvb://1.1.101_;322979569@2013-02-21T20:30:00+01:00--PT00H45M00S</ProgramURL>
+          <InstanceMetadataId>imi:33909</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T20:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H45M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/49469146"/>
+          <ProgramURL>dvb://1.1.101_;322979570@2013-02-21T21:15:00+01:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:33910</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T21:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/48695956"/>
+          <ProgramURL>dvb://1.1.101_;322979571@2013-02-21T21:45:00+01:00--PT02H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:33911</InstanceMetadataId>
+          <PublishedStartTime>2013-02-21T21:45:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H15M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/17075886"/>
+          <ProgramURL>dvb://1.1.101_;322979572@2013-02-22T00:00:00+01:00--PT02H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:33912</InstanceMetadataId>
+          <PublishedStartTime>2013-02-22T00:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H00M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/17075886"/>
+          <ProgramURL>dvb://1.1.101_;322979573@2013-02-22T02:00:00+01:00--PT02H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:33913</InstanceMetadataId>
+          <PublishedStartTime>2013-02-22T02:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H00M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/17075886"/>
+          <ProgramURL>dvb://1.1.101_;322979574@2013-02-22T04:00:00+01:00--PT02H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:33914</InstanceMetadataId>
+          <PublishedStartTime>2013-02-22T04:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H00M00S</PublishedDuration>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable/>
+  </ProgramDescription>
+</TVAMain>

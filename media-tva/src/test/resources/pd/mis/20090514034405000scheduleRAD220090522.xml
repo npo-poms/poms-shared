@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<TVAMain publisher="Broadcasting DataServices Limited" publicationTime="2009-05-14T04:02:45+00:00" version="217" xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:bds:metadata:2006 http://www.broadcastingdata.com/dataimport/tva/new/tva_v13_am1_bds1r2.xsd" >
+<ProgramDescription>
+<ProgramInformationTable>
+<ProgramInformation programId="crid://bds.tv/16140345" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Nieuws]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Elk heel uur en om 6.30, 7.30 en 8.30 uur.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Elk heel uur en om 6.30, 7.30 en 8.30 uur.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><Duration>PT00H05M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140343" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[De Heer ontwaakt!]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Informerend en amuserend ochtendmagazine. Met nieuws, Radio 2-actualiteiten, het weer, verkeersinformatie, de ochtendkranten en lekker veel muziek.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Informerend en amuserend ochtendmagazine. Met nieuws, Radio 2-actualiteiten, het weer, verkeersinformatie, de ochtendkranten en lekker veel muziek.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="600900"/></CreditsItem></CreditsList><Duration>PT03H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140341" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[TROS Gouden uren]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[De beste Gouwe Ouwen, afgewisseld met de hits van nu met ook aandacht voor het Nederlandse product. Om 10.30 uur de favoriete Top-3 van een luisteraar.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[De beste Gouwe Ouwen, afgewisseld met de hits van nu met ook aandacht voor het Nederlandse product. Om 10.30 uur de favoriete Top-3 van een luisteraar.]]></Synopsis>
+<OtherTextElement xml:lang="NL" type="PoMiscInfo"><![CDATA[Samenstelling: Daniël Dekker]]></OtherTextElement>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593040"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[goudenuren@tros.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.trosradio2.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT03H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140339" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Tijd voor twee]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Lunchprogramma. Met de Weekendgast, de Facelift van een luisteraar en de Tweespraak, een actuele opgave waarvoor u kunt bellen met een originele afmaker naar 0800 - 1122.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Lunchprogramma met muziek, nieuws en de vaste onderdelen: de Weekendgast, de Facelift van een luisteraar en de Tweespraak, een actuele opgave waarvoor u kunt bellen met een originele afmaker naar 0800 - 1122. Of mail naar tweespraak@kro.nl.]]></Synopsis>
+<OtherTextElement xml:lang="NL" type="PoMiscInfo"><![CDATA[Meer informatie op Teletekst en internet]]></OtherTextElement>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593041"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[tijdvoortwee@kro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[259]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.tijdvoortwee.kro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT02H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140337" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[AVRO Schiffers.fm]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Muziekprogramma waarin om half vier een Podgast aanschuift, een altijd bekende Nederlander of internationale muziekheld.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Muziekprogramma waarin om half vier een Podgast aanschuift, een altijd bekende Nederlander of internationale muziekheld. Deze mensen leren we in een persoonlijk gesprek op een andere manier kennen dan we ze altijd al horen. De muzikale smaak van deze Podgast wordt ook gedraaid. Daarnaast tekent Hans Schiffers een cryptische tekening rondom een hit, die bekeken en geraden kan worden via de site. Dat is ook de plek waar 24 uur voor elke uitzending een stemlijst verschijnt van liedjes rondom één thema, bijvoorbeeld liedjes met het woord 'stop', hits uit 1967, artiesten met een bloem in de naam etc. Tussen half vijf en vijf worden de vijf meest verkozen titels gedraaid in De Dag Top Vijf.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593042"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[schiffers.fm@avro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.schiffers.fm]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT03H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140335" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Knooppunt Kranenbarg]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Eigenzinnig programma, dat de vinger aan de pols van de tijd houdt. Muziek, informatie en een trilemma.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Eigenzinnig programma, dat de vinger aan de pols van de tijd houdt. Muziek, informatie en een trilemma.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593043"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[knooppuntkranenbarg@ncrv.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.ncrv.nl/knooppuntkranenbarg]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT02H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140333" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Gouden greep]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Even bijkomen van de dag met muziek uit het verleden en hits van nu.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Even bijkomen van de dag met muziek uit het verleden en hits van nu.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="600905"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[goudengreep@eo.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.eo.nl/goudengreep]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT01H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140331" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Het platenpaleis]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Een feestje op de radio. Lekker dansen op de beste platen uit de popgeschiedenis. Tussen 22.05 uur en 23.00 uur een Happy Hour. De luisteraars bepalen dat uur welke dansplaten er gedraaid worden.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Een feestje op de radio. Lekker dansen op de beste platen uit de popgeschiedenis. Tussen 22.05 uur en 23.00 uur een Happy Hour. De luisteraars bepalen dat uur welke dansplaten er gedraaid worden.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="603482"/></CreditsItem></CreditsList><Duration>PT03H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140329" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Legendarisch live]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Historische optredens van fameuze popartiesten. Een concert van de Charlie Daniels Band, opgenomen op 23-11-1980 op Pinkpop Binnen in Maastricht. Met o.m. de hit The devil went down to Georgia.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Historische optredens van fameuze popartiesten. Alle concerten zijn terug te luisteren via de site. Een concert van de Charlie Daniels Band, opgenomen op 23-11-1980 op Pinkpop Binnen in Maastricht. Met o.m. de hit The devil went down to Georgia.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593046"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[legendarischlive.kro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT01H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140327" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[American connection]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Een gevarieerd muziekprogramma met americana, singer-songwriters, country, bluegrass en cajun music.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Een gevarieerd muziekprogramma met americana, singer-songwriters, country, bluegrass en cajun music.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593045"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[americanconnection.kro.nl/]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H57M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140325" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[For the record]]></Title>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="94541"/></CreditsItem></CreditsList><Duration>PT01H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140323" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Radio 2 Muzieknacht]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Non-stop de mooiste muziek.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Non-stop de mooiste muziek.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><Duration>PT03H58M</Duration></BasicDescription></ProgramInformation></ProgramInformationTable>
+<GroupInformationTable></GroupInformationTable>
+<ProgramLocationTable>
+<Schedule serviceIDRef="RAD2" start="2009-05-22T06:00:00+02:00" end="2009-05-23T06:00:00+02:00" releaseVersion="0"><ScheduleEvent>
+<Program crid="crid://bds.tv/16140345"  />
+<ProgramURL>dvb://1.1.RAD2;115637099@2009-05-22T06:00:00+02:00--PT00H05M00S</ProgramURL>
+<InstanceMetadataId>imi:8720</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T06:00:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H05M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NOS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140343"  />
+<ProgramURL>dvb://1.1.RAD2;115637100@2009-05-22T06:05:00+02:00--PT03H00M00S</ProgramURL>
+<InstanceMetadataId>imi:8721</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T06:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT03H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="VARA"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140341"  />
+<ProgramURL>dvb://1.1.RAD2;115637101@2009-05-22T09:05:00+02:00--PT03H00M00S</ProgramURL>
+<InstanceMetadataId>imi:8722</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T09:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT03H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="TROS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140339"  />
+<ProgramURL>dvb://1.1.RAD2;115637102@2009-05-22T12:05:00+02:00--PT02H00M00S</ProgramURL>
+<InstanceMetadataId>imi:8723</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T12:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT02H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="KRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140337"  />
+<ProgramURL>dvb://1.1.RAD2;115637103@2009-05-22T14:05:00+02:00--PT03H00M00S</ProgramURL>
+<InstanceMetadataId>imi:8724</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T14:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT03H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="AVRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140335"  />
+<ProgramURL>dvb://1.1.RAD2;115637104@2009-05-22T17:05:00+02:00--PT02H00M00S</ProgramURL>
+<InstanceMetadataId>imi:8725</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T17:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT02H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NCRV"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140333"  />
+<ProgramURL>dvb://1.1.RAD2;115637105@2009-05-22T19:05:00+02:00--PT01H00M00S</ProgramURL>
+<InstanceMetadataId>imi:8726</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T19:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="EO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140331"  />
+<ProgramURL>dvb://1.1.RAD2;115637106@2009-05-22T20:05:00+02:00--PT03H00M00S</ProgramURL>
+<InstanceMetadataId>imi:8727</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T20:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT03H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="BNN"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140329"  />
+<ProgramURL>dvb://1.1.RAD2;115637107@2009-05-22T23:05:00+02:00--PT01H00M00S</ProgramURL>
+<InstanceMetadataId>imi:8728</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T23:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="KRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140327"  />
+<ProgramURL>dvb://1.1.RAD2;115637136@2009-05-23T00:05:00+02:00--PT00H57M00S</ProgramURL>
+<InstanceMetadataId>imi:8729</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T00:05:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H57M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="KRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140325"  />
+<ProgramURL>dvb://1.1.RAD2;115637137@2009-05-23T01:02:00+02:00--PT01H00M00S</ProgramURL>
+<InstanceMetadataId>imi:8730</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T01:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="VARA"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140323"  />
+<ProgramURL>dvb://1.1.RAD2;115637138@2009-05-23T02:02:00+02:00--PT03H58M00S</ProgramURL>
+<InstanceMetadataId>imi:8731</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T02:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT03H58M00S</PublishedDuration>
+</ScheduleEvent>
+</Schedule></ProgramLocationTable>
+<CreditsInformationTable><PersonName personNameId="94541"><mpeg7:GivenName xml:lang="NL" initial="">Mart</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Smeets</mpeg7:FamilyName></PersonName><PersonName personNameId="593040"><mpeg7:GivenName xml:lang="NL" initial="">Daniël</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Dekker</mpeg7:FamilyName></PersonName><PersonName personNameId="593041"><mpeg7:GivenName xml:lang="NL" initial="">Bert</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Haandrikman</mpeg7:FamilyName></PersonName><PersonName personNameId="593042"><mpeg7:GivenName xml:lang="NL" initial="">Hans</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Schiffers</mpeg7:FamilyName></PersonName><PersonName personNameId="593043"><mpeg7:GivenName xml:lang="NL" initial="">Bert</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Kranenbarg</mpeg7:FamilyName></PersonName><PersonName personNameId="593045"><mpeg7:GivenName xml:lang="NL" initial="">Ruud</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Hermans</mpeg7:FamilyName></PersonName><PersonName personNameId="593046"><mpeg7:GivenName xml:lang="NL" initial="">Marc</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Stakenburg</mpeg7:FamilyName></PersonName><PersonName personNameId="600900"><mpeg7:GivenName xml:lang="NL" initial="">Sander</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">de Heer</mpeg7:FamilyName></PersonName><PersonName personNameId="600905"><mpeg7:GivenName xml:lang="NL" initial="">Jan-Willem</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Roodbeen</mpeg7:FamilyName></PersonName><PersonName personNameId="603482"><mpeg7:GivenName xml:lang="NL" initial="">Marc</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Adriani</mpeg7:FamilyName></PersonName></CreditsInformationTable>
+</ProgramDescription>
+</TVAMain>
