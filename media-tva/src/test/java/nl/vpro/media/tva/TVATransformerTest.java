@@ -33,6 +33,7 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.media.tva.saxon.extension.*;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -51,8 +52,15 @@ import static org.junit.Assert.assertNotNull;
 public class TVATransformerTest {
 
 
+    EpgGenreFunction genreFunction = new EpgGenreFunction();
+
+    @BeforeEach
+    public void init() {
+        genreFunction.setNotFoundIsFatal(true);
+    }
+
     @BeforeAll
-    public static void init() {
+    public static void initAll() {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }
     @Test
@@ -207,7 +215,6 @@ public class TVATransformerTest {
     @Test
     public void testRegional() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/OZEE20150914P.xml");
-        //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         validate(table);
     }
@@ -215,7 +222,7 @@ public class TVATransformerTest {
     @Test
     public void testOddDate () throws IOException, ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED220150915P.xml");
-        //System.out.println(xml);
+
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         validate(table);
     }
@@ -307,7 +314,7 @@ public class TVATransformerTest {
     @Test
     public void MSE_3202() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/BRAB20160317P.xml");
-        System.out.println(xml);
+        log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         Map<String, Group> mids = new HashMap<>();
         for(Group group : table.getGroupTable()) {
@@ -333,7 +340,7 @@ public class TVATransformerTest {
                 continue;
             }
             if (mediaObject.getBroadcasters().isEmpty()) {
-                System.out.println("" + mediaObject + " has no broadcasters");
+                log.info("" + mediaObject + " has no broadcasters");
             }
             for (Broadcaster b : mediaObject.getBroadcasters()) {
                 assertThat(b.getId()).isNotEmpty();
@@ -390,14 +397,20 @@ public class TVATransformerTest {
     }
 
     @Test
-    @Disabled("No such EPG code urn:tva:metadata:cs:2004:2.11 ?")
     public void bindinc() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        String xml = transform("bindinc/20191014165611000dayARD_20191104.xml");
+        genreFunction.setNotFoundIsFatal(false); // TODO API-460
 
-        System.out.println(xml);
+        String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml");
+
+        log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
         JAXB.marshal(table, System.out);
+
+        Program p = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/191255709")).findFirst().orElse(null);
+        log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
+        assertThat(p.getMainTitle()).isEqualTo("#heuldoch - Therapie wie noch nie");
+
     }
 
     TransformerFactoryImpl FACTORY = new net.sf.saxon.TransformerFactoryImpl();
@@ -428,7 +441,7 @@ public class TVATransformerTest {
 
             new FindNetFunction(() -> KNOWN_NETS),
             new MisGenreFunction(),
-            new EpgGenreFunction(),
+            genreFunction,
             new HtmlStripperFunction(),
             new ValidListValueFunction()
             )

@@ -37,11 +37,17 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
     @Override
     public Term getTerm(String termId) throws TermNotFoundException {
-        Term term = getTermsMap().get(new TermId(termId));
-        if(term == null) {
-            throw new TermNotFoundException(termId);
+        try {
+            Term term = getTermsMap().get(new TermId(termId));
+            if (term == null) {
+                throw new TermNotFoundException(termId);
+            }
+            return term;
+        } catch (NumberFormatException nfe) {
+            TermNotFoundException tnfe =  new TermNotFoundException(termId);
+            tnfe.initCause(nfe);
+            throw tnfe;
         }
-        return term;
     }
 
     @Override
