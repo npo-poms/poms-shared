@@ -17,6 +17,9 @@ import net.sf.saxon.value.StringValue;
 import java.util.Collection;
 import java.util.function.Supplier;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import nl.vpro.domain.media.Net;
 
 /**
@@ -30,7 +33,8 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
 
     private final Supplier<Collection<Net>> netsSupplier;
 
-    public FindNetFunction(Supplier<Collection<Net>> netsSupplier) {
+    @Inject
+    public FindNetFunction(@Named("netsSupplier") Supplier<Collection<Net>> netsSupplier) {
         this.netsSupplier = netsSupplier;
     }
 
