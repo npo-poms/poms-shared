@@ -19,7 +19,7 @@ import nl.vpro.domain.user.BroadcasterService;
 @Slf4j
 public class BroadcasterServiceLocator {
 
-    private static BroadcasterService singleton;
+    private static volatile BroadcasterService singleton;
 
 
     @Inject
