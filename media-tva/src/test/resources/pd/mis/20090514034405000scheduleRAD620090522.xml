@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<TVAMain publisher="Broadcasting DataServices Limited" publicationTime="2009-05-14T04:02:45+00:00" version="217" xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:bds:metadata:2006 http://www.broadcastingdata.com/dataimport/tva/new/tva_v13_am1_bds1r2.xsd" >
+<ProgramDescription>
+<ProgramInformationTable>
+<ProgramInformation programId="crid://bds.tv/16140767" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Nieuws]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Elk heel uur behalve om 23.00 uur.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Elk heel uur behalve om 23.00 uur.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><Duration>PT00H02M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140765" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[The Beat]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Het ritme van je ochtend! Mix van jazz, world en aanverwante stijlen. Verder het nieuwsoverzicht, de ochtendkranten, een artiest op het Erepodium, het Miniconcert en de concertagenda.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Het ritme van je ochtend! Een toegankelijke mix van jazz, world en aanverwante muziek. Verder het nieuwsoverzicht, de ochtendkranten, een artiest op het Erepodium, het Miniconcert en de concertagenda.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593047"/></CreditsItem></CreditsList><Duration>PT03H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140763" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Jazz op Zes]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Vertrouwde en eigentijdse jazzklassiekers van vroeger en nu.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Vertrouwde en eigentijdse jazzklassiekers van vroeger en nu.]]></Synopsis>
+<OtherTextElement xml:lang="NL" type="PoMiscInfo"><![CDATA[Samenstelling: Sjaak Roodenburg, David de Jongh, Arjan Went en Frits van Hooft]]></OtherTextElement>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="607110"/></CreditsItem></CreditsList><Duration>PT02H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140761" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Cantina]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Steef Cuijpers serveert een licht verteerbaar lunchprogramma.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Steef Cuijpers serveert een licht verteerbaar lunchprogramma.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="628640"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[cantina.radio6.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT02H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140759" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Shuffle]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Typische Radio 6-muziek van toen, nu en straks.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Typische Radio 6-muziek van toen, nu en straks.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593057"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[shuffle@nps.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[shuffle.radio6.nl/]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT02H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140755" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Vincent & Co]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Jazz, world en beyond.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Jazz, world en beyond.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="600909"/></CreditsItem><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="601404"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[vincent&co@nps.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[vincentenco.radio6.nl/]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT02H43M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140753" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Bommel]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Hoorspel. Met het Beste van Bommel de zomer door.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Hoorspel. Met het Beste van Bommel de zomer door.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.hoorspelbommel.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT00H17M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140751" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[De Avonden]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Met om: 19.05 Catherine van Campen voert korte discussies over cultuur. 20.05 Recent verschenen literatuur. 21.10 Marijn de Vries, redacteur bij het tv-programma Holland Sport, wil gaan wielrennen.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Met om: 19.05 Catherine van Campen voert korte discussies over actuele gebeurtenissen in de wereld van de cultuur. Met tussendoor veel muziek. 20.05 Jeroen van Kan behandelt recent verschenen literatuur. Fictie en non-fictie. 21.10 Marijn de Vries, redacteur van het tv-programma Holland Sport ontdekte bij toeval dat zij een groot talent heeft voor de wielersport. Door kenners en coaches heeft zij zich laten overhalen dit jaar een serieuze gooi te doen naar de topsport. Gaat het haar lukken?]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="622994"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[avonden@vpro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[267]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.vpro.nl/avonden]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT03H00M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140749" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[VPROJazzLive]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Voorbeschouwing VPRO ToneJazz Festival. Gedurende het Pinksterweekeinde worden de meest actuele en bijzondere jazzacts van dit moment naar de Toonzaal in Den Bosch gehaald.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Voorbeschouwing VPRO ToneJazz Festival. Gedurende het Pinksterweekeinde (29, 30 en 31 mei a.s.) worden de meest actuele en bijzondere jazzacts van dit moment naar de Toonzaal in Den Bosch gehaald voor de eerste editie van een nieuw kleinschalig festival voor vooruitstrevende jazz. Veelbelovende musici en eigenzinnige ensembles uit Nederland en Europa zijn opgetrommeld om de randen van de jazz af te tasten. Stuk voor stuk topconcerten met Erika Stucky Roots of Communication, het Jef Neve Trio, Jasper Blom Quartet en het Moscow Art Trio, Rik Mol Quartet en Andy Bruce en zijn Schotse Rigidley Righteous.]]></Synopsis>
+<OtherTextElement xml:lang="NL" type="PoMiscInfo"><![CDATA[Samenstelling: Vera Vingerhoeds]]></OtherTextElement>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593150"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[jazz@vpro.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[vprojazzlive.radio6.nl]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT01H58M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140747" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Dwarsplus]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[De nieuwste tracks op het gebied van folk, experiment, nu-country en improv.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[De nieuwste tracks op het gebied van folk, experiment, nu-country en improv.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><CreditsList><CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721"><PersonNameIDRef ref="593147"/></CreditsItem></CreditsList><RelatedMaterial>
+<HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+<Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+</HowRelated>
+<MediaLocator>
+<mpeg7:MediaUri><![CDATA[www.vpro.nl/dwars]]></mpeg7:MediaUri>
+</MediaLocator>
+</RelatedMaterial>
+<Duration>PT01H02M</Duration></BasicDescription></ProgramInformation><ProgramInformation programId="crid://bds.tv/16140745" ><BasicDescription><Title xml:lang="NL" type="main"><![CDATA[Radio 6 Muzieknacht]]></Title>
+<Synopsis xml:lang="NL" length="short"><![CDATA[Non-stop de mooiste jazz en world.]]></Synopsis>
+<Synopsis xml:lang="NL" length="long"><![CDATA[Non-stop de mooiste jazz en world.]]></Synopsis>
+<Genre  href="urn:tva:metadata:cs:2004:2.4"><Name xml:lang="NL">Overige</Name></Genre>
+<Language>NL</Language><Duration>PT05H58M</Duration></BasicDescription></ProgramInformation></ProgramInformationTable>
+<GroupInformationTable></GroupInformationTable>
+<ProgramLocationTable>
+<Schedule serviceIDRef="RAD6" start="2009-05-22T07:00:00+02:00" end="2009-05-23T07:00:00+02:00" releaseVersion="0"><ScheduleEvent>
+<Program crid="crid://bds.tv/16140767"  />
+<ProgramURL>dvb://1.1.RAD6;115637387@2009-05-22T07:00:00+02:00--PT00H02M00S</ProgramURL>
+<InstanceMetadataId>imi:12224</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T07:00:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H02M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NOS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140765"  />
+<ProgramURL>dvb://1.1.RAD6;115637388@2009-05-22T07:02:00+02:00--PT03H00M00S</ProgramURL>
+<InstanceMetadataId>imi:12225</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T07:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT03H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="KRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140763"  />
+<ProgramURL>dvb://1.1.RAD6;115637389@2009-05-22T10:02:00+02:00--PT02H00M00S</ProgramURL>
+<InstanceMetadataId>imi:12226</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T10:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT02H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="MAX"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140761"  />
+<ProgramURL>dvb://1.1.RAD6;115637390@2009-05-22T12:02:00+02:00--PT02H00M00S</ProgramURL>
+<InstanceMetadataId>imi:12227</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T12:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT02H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="VPRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140759"  />
+<ProgramURL>dvb://1.1.RAD6;115637391@2009-05-22T14:02:00+02:00--PT02H00M00S</ProgramURL>
+<InstanceMetadataId>imi:12228</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T14:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT02H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NPS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140755"  />
+<ProgramURL>dvb://1.1.RAD6;115637392@2009-05-22T16:02:00+02:00--PT02H43M00S</ProgramURL>
+<InstanceMetadataId>imi:12229</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T16:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT02H43M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NPS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140753"  />
+<ProgramURL>dvb://1.1.RAD6;115637393@2009-05-22T18:45:00+02:00--PT00H17M00S</ProgramURL>
+<InstanceMetadataId>imi:12230</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T18:45:00+02:00</PublishedStartTime>
+<PublishedDuration>PT00H17M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="NPS"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140751"  />
+<ProgramURL>dvb://1.1.RAD6;115637394@2009-05-22T19:02:00+02:00--PT03H00M00S</ProgramURL>
+<InstanceMetadataId>imi:12231</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T19:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT03H00M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="VPRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140749"  />
+<ProgramURL>dvb://1.1.RAD6;115637395@2009-05-22T22:02:00+02:00--PT01H58M00S</ProgramURL>
+<InstanceMetadataId>imi:12232</InstanceMetadataId>
+<PublishedStartTime>2009-05-22T22:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H58M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="VPRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140747"  />
+<ProgramURL>dvb://1.1.RAD6;115637396@2009-05-23T00:00:00+02:00--PT01H02M00S</ProgramURL>
+<InstanceMetadataId>imi:12233</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T00:00:00+02:00</PublishedStartTime>
+<PublishedDuration>PT01H02M00S</PublishedDuration>
+<BroadcasterList>
+<Broadcaster code="VPRO"/>
+</BroadcasterList>
+</ScheduleEvent>
+<ScheduleEvent>
+<Program crid="crid://bds.tv/16140745"  />
+<ProgramURL>dvb://1.1.RAD6;115637397@2009-05-23T01:02:00+02:00--PT05H58M00S</ProgramURL>
+<InstanceMetadataId>imi:12234</InstanceMetadataId>
+<PublishedStartTime>2009-05-23T01:02:00+02:00</PublishedStartTime>
+<PublishedDuration>PT05H58M00S</PublishedDuration>
+</ScheduleEvent>
+</Schedule></ProgramLocationTable>
+<CreditsInformationTable><PersonName personNameId="593047"><mpeg7:GivenName xml:lang="NL" initial="">Jaap</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Brienen</mpeg7:FamilyName></PersonName><PersonName personNameId="593057"><mpeg7:GivenName xml:lang="NL" initial="">Martijn</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Muijs</mpeg7:FamilyName></PersonName><PersonName personNameId="593147"><mpeg7:GivenName xml:lang="NL" initial="">Berry</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Kamer</mpeg7:FamilyName></PersonName><PersonName personNameId="593150"><mpeg7:GivenName xml:lang="NL" initial="">Vera</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Vingerhoeds</mpeg7:FamilyName></PersonName><PersonName personNameId="600909"><mpeg7:GivenName xml:lang="NL" initial="">Vincent</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">van Engelen</mpeg7:FamilyName></PersonName><PersonName personNameId="601404"><mpeg7:GivenName xml:lang="NL" initial="">Co</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">de Kloet</mpeg7:FamilyName></PersonName><PersonName personNameId="607110"><mpeg7:GivenName xml:lang="NL" initial="">Tuffie</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Vos</mpeg7:FamilyName></PersonName><PersonName personNameId="622994"><mpeg7:GivenName xml:lang="NL" initial="">Jeroen</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">van Kan</mpeg7:FamilyName></PersonName><PersonName personNameId="628640"><mpeg7:GivenName xml:lang="NL" initial="">Steef</mpeg7:GivenName><mpeg7:FamilyName xml:lang="NL">Cuijpers</mpeg7:FamilyName></PersonName></CreditsInformationTable>
+</ProgramDescription>
+</TVAMain>

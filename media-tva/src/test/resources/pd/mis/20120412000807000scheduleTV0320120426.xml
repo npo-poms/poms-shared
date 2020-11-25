@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<TVAMain publisher="Broadcasting DataServices Limited" publicationTime="2012-04-12T00:17:09+00:00" version="217"
+         xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="urn:bds:metadata:2006 http://www.broadcastingdata.com/dataimport/tva/new/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://bds.tv/28622832">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[De Schatkast!!]]></Title>
+          <Title xml:lang="NL" type="EpisodeTitle"><![CDATA[Ho en Hos, Heksenbos]]></Title>
+          <Synopsis xml:lang="NL" length="medium">
+            <![CDATA[Kleine fee Rozemarijntje wil geen fee meer zijn, maar een heks worden. Maar heksen horen niet bij feeën thuis, die worden naar het heksenbos gestuurd! Jas gaat ook naar het heksenbos. Hij vindt er zijn schatkast en tovert met behulp van de heksen Hak & Plak tevoorschijn. Rozemarijn heeft veel pret met de heksen, maar als het donker wordt mist ze haar mamma toch wel.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.10">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:05">
+            <Name xml:lang="NL"><![CDATA[Educatief]]></Name>
+          </Genre>
+          <Genre type="other" href="urn:po:metadata:cs:GenreCS:2009:09">
+            <Name xml:lang="NL"><![CDATA[Jeugd]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.schooltv.nl/schatkast]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="TV03"  start="2012-04-26T05:58:00+02:00" end="2012-04-27T06:00:00+02:00"
+                fragmentId="2931602311.75541:1990904222.75541:2012-04-26" fragmentVersion="96" releaseVersion="0">
+
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/28622832"/>
+          <ProgramURL>dvb://1.1.TV03;266843751@2012-04-26T06:00:00+02:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:49776</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+            <MemberOf crid="crid://bds.tv/34722409" xsi:type="MemberOfType"/>
+          </InstanceDescription>
+          <PublishedStartTime>2012-04-26T06:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1197726</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1174098</OtherIdentifier>
+        </ScheduleEvent>
+
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/28622832"/>
+          <ProgramURL>dvb://1.1.TV03;266843751@2012-04-27T06:00:00+02:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:49777</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+            <MemberOf crid="crid://bds.tv/34722409" xsi:type="MemberOfType"/>
+          </InstanceDescription>
+          <PublishedStartTime>2012-04-26T05:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1197726</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1174098</OtherIdentifier>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+  </ProgramDescription>
+</TVAMain>

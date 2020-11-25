@@ -57,6 +57,8 @@
     <module>media-projectm</module>
     <module>media-nebo</module>
     <module>media-npo</module>
+    <module>media-tva</module>
+
   </modules>
 
   <build>

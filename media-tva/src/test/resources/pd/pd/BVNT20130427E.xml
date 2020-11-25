@@ -1,0 +1,1369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         publisher="NPO Programma Gegevens" publicationTime="2014-04-28T01:04:36.960+02:00" version="300"
+         xsi:schemaLocation="urn:bds:metadata:2004 XSDSchema/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623293668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">VRT Journaal</Title>
+          <Title xml:lang="NL" type="episodeTitle">VRT Journaal</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <ReleaseInformation/>
+          <EpisodeNumber>117</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623365668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Rijdende Rechter</Title>
+          <Title xml:lang="NL" type="episodeTitle">Doortrapt</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Mr. Frank Visser beslecht weer burenruzies, familievetes en andere conflicten.
+            De uitspraak van mr. Frank Visser is juridisch bindend voor de partijen; zij zijn verplicht zijn beslissing
+            te aanvaarden.
+            Presentatie: Jetske van den Elsen.
+          </Synopsis>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="15108453517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>8</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562622209668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Hello Goodbye</Title>
+          <Title xml:lang="NL" type="episodeTitle">Hello Goodbye</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Joris Linssen spreekt in Hello Goodbye op Schiphol met vertrekkende passagiers of juist met degenen die
+            staan te wachten op hun dierbaren. Resultaat: meeslepende levensverhalen en ontroerende anekdotes.
+
+
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="15108453517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>3</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623403668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Kanniewaarzijn</Title>
+          <Title xml:lang="NL" type="episodeTitle">Kanniewaarzijn</Title>
+          <Title xml:lang="NL" type="originalLanguage">Kanniewaarzijn 2013</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Kanniewaarzijn is een satirisch consumentenprogramma, waarin misstanden van de overheid en bedrijven op
+            hilarische wijze aan de kaak worden gesteld. Presentatie is in handen van Astrid Joosten. Zij wordt
+            ondersteund door een team van bekende cabaretiers en prominenten, onder wie Plien van Bennekom, Annick Boer,
+            Martin van Waardenburg en Patrick Stoof.
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>8</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623139668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Hokjesman</Title>
+          <Title xml:lang="NL" type="episodeTitle">De antroposofen</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Een safari in eigen land, op zoek naar de rimboe in onszelf.
+
+            Gefascineerd door de heersende hokjesgeest gaat programmamaker Michael Schaap op veldonderzoek binnen de
+            leefwereld van aansprekende Nederlandse subculturen. Hoe verhouden mensen binnen een hechte gemeenschap zich
+            tot elkaar en hoe staan zij ten opzichte van buitenstaanders?
+
+            In deze aflevering verdiept de Hokjesman zich in de Antroposofie - spirituele filosofie en occulte
+            wetenschap - gebaseerd op de leer van Rudolf Steiner (1861-1925).
+
+            Het in pacht hebben van de wijsheid zoals de Antroposofie die leert, verplicht tot het verspreiden en
+            toepassen ervan op veel terreinen. Zoals vrije schoolpedagogie, heilpedagogie, euritmie, spraakvorming,
+            kunstzinnige therapieën, antroposofische geneeskunde, sociale driegeleiding en biologische landbouw. Onze
+            hokjesman onderzoekt deze opmerkelijke combinatie van wetenschap en mystiek en hij aanschouwt hoe deze
+            zelfbouwpakket-religie-zonder-god leidt tot een worsteling tussen de aanhangers onderling en de
+            non-believers.
+
+            De Hokjesman waagt zich acht afleveringen lang in het milieu van Volendammers, Molukkers, orthodoxe boeren,
+            subversieven, mariniers, antroposofen, SP-ers en edellieden. Binnen de groepen kijkt hij nadrukkelijk naar
+            geschreven en ongeschreven wetten, regels, codes en taboes. Zijn doel is niet alleen het blootleggen van
+            geheimen, hij wil ook lering trekken uit mogelijke kwaliteiten van de kliek. Wie de Hokjesman volgt op zijn
+            safari, ontdekt de rimboe in zichzelf.
+
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2011</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>7</EpisodeNumber>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623297668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Journaal</Title>
+          <Title xml:lang="NL" type="episodeTitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="originalLanguage">NOS Journaal</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>117</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562622217668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Sesamstraat</Title>
+          <Title xml:lang="NL" type="episodeTitle">Slapen</Title>
+          <Title xml:lang="NL" type="originalLanguage">Sesamstraat</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Tommie en Ieniemienie willen muziek luisteren tijdens het tekenen. Maar Purk ligt net lekker te slapen.
+            Ernie maakt Bert even wakker om hem uit te leggen hoe belangrijk slapen is. Arjan vertelt een verhaal over
+            Prins Vads die in de nacht piano wil spelen.
+
+            www.sesamstraat.nl
+          </Synopsis>
+          <Language>NL</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="333337969517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>www.sesamstraat.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>47</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623249668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Het Klokhuis</Title>
+          <Title xml:lang="NL" type="episodeTitle">Koninklijke stallen</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Het klokhuis</Title>
+          <Title xml:lang="NL" type="originalLanguage">HET KLOKHUIS</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Tijdens de troonopvolging van prins Willem Alexander zullen de paarden van de Koninklijke Stallen
+            ongetwijfeld een grote rol spelen. Margreet kreeg er een exclusieve rondleiding!
+
+            www.hetklokhuis.nl
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="41011599517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>3529</EpisodeNumber>
+          <Season>2</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623257668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Freek In Het Wild</Title>
+          <Title xml:lang="NL" type="episodeTitle">Park van de Koning</Title>
+          <Title xml:lang="NL" type="originalLanguage">Freek In Het Wild</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Een luiaard redden, zwemmen met piranha¿s, overleven in de jungle en babyolifantjes en pinguïns verzorgen.
+            Bioloog Freek Vonk doet het allemaal in de nieuwe Villa Achterwerk serie Freek In Het Wild.
+
+            Samen met zijn team reist Freek door Zuid-Afrika, Zambia, het Surinaamse regenwoud en duikt onder in de
+            Indische Oceaan waar hij ook nog eens gebeten wordt door een zwartpunthaai!
+
+            Presentatie: Freek Vonk
+            Producent/regie: Herco van Houdt, Nuts&amp;Friends Media Productions
+            Eindredactie: Anna van der Staak
+
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>2</EpisodeNumber>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623235668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nieuws uit de natuur</Title>
+          <Title xml:lang="NL" type="episodeTitle">Echte bijen</Title>
+          <Title xml:lang="NL" type="originalLanguage">Nieuws uit de natuur</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Thema: Voortplanting.
+            Honingbijen en hommels leven in volkeren. Ze bouwen hele 'flatgebouwen' in de vorm van honingraten, waarin
+            ze hun kleintjes kunnen grootbrengen en hun voedselvoorraad aan kunnen leggen. www.schooltv.nl/nudn
+
+
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="367749460517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V32">
+              <PersonNameIDRef ref="367749460517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="10247605517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="121161203517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>13</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623263668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Heibel langs de lijn</Title>
+          <Title xml:lang="NL" type="episodeTitle">DANA</Title>
+          <Title xml:lang="NL" type="originalLanguage">HEIBEL LANGS DE LIJN</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            In het derde seizoen van Heibel langs de lijn gaan sportieve kinderen opnieuw hun ouders confronteren met
+            hun gedrag langs het sportveld. De ouders, die continue aanwijzingen geven, krijgen tijdens de wedstrijd
+            stiekem een zendertje op. Ook worden ze zonder dat ze het zelf weten gefilmd, zodat ze na de wedstrijd zelf
+            eens kunnen kijken hoe ze zich gedragen. Samen met de kinderen zoeken ze naar een oplossing zodat het
+            voortaan een stuk gezelliger is langs de lijn en dat de kinderen zich weer helemaal kunnen concentreren op
+            het sporten.
+
+            In de vierde aflevering volgen we Dana (11 jaar) en haar fanatieke vader Wim. Dana speelt waterpolo
+            bij Aquarijn en haar vader komt bij elke wedstrijd kijken en kan dan moeilijk zijn mond houden.
+            Dana heeft haar vader opgegeven voor 'Heibel langs de lijn' omdat zij zich moeilijk kan concentreren als
+            haar vader langs de waterkant staat te schreeuwen.
+
+            Kijk voor meer informatie op kro.nl
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>kro.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>4</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623279668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Weekoverzicht SpangaS</Title>
+          <Title xml:lang="NL" type="episodeTitle">Weekoverzicht SpangaS</Title>
+          <Title xml:lang="NL" type="originalLanguage">WEEKOVERZICHT SPANGAS</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Alle afleveringen SpangaS van afgelopen week.
+
+
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="100512940517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>2</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623187668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">EenVandaag</Title>
+          <Title xml:lang="NL" type="episodeTitle">EenVandaag</Title>
+          <Title xml:lang="NL" type="originalLanguage">EENVANDAAG</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            EenVandaag is het dagelijkse actualiteitenprogramma van de TROS en de AVRO.
+            De presentatie is in handen van Bas van Werven (TROS) en Pieter Jan Hagens (AVRO). Vaste ankers in het
+            programma zijn De Stemming, het EenVandaag opiniepanel en het 1V Jongerenpanel. De uitslagen van onderzoeken
+            worden gepresenteerd door Gijs Rademaker en Mariëlle Koekenbier, en gepubliceerd op de website van het
+            programma.
+            EenVandaag is met dagelijks ruim een miljoen kijkers en een marktaandeel van gemiddeld 25% het best scorende
+            actualiteitenprogramma van de Publieke Omroep.
+            www.eenvandaag.nl
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="13214096517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="98786480517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>53</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623303668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Sportjournaal</Title>
+          <Title xml:lang="NL" type="episodeTitle">NOS Sportjournaal</Title>
+          <Title xml:lang="NL" type="originalLanguage">NOS Sportjournaal</Title>
+          <Synopsis xml:lang="NL" length="long">Aandacht voor het actuele sportnieuws.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">
+            Aandacht voor het actuele sportnieuws.
+          </Synopsis>
+          <Synopsis xml:lang="NL" length="medium">
+            Aandacht voor het actuele sportnieuws.
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>16</EpisodeNumber>
+          <OneLineDescription>Aandacht voor het actuele sportnieuws.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623409668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">VRT journaal</Title>
+          <Title xml:lang="NL" type="episodeTitle">VRT journaal</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <ReleaseInformation/>
+          <EpisodeNumber>17</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623125668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Vlaanderen vakantieland</Title>
+          <Title xml:lang="NL" type="episodeTitle">Vlaanderen vakantieland</Title>
+          <Synopsis xml:lang="NL" length="short">
+            Toeristisch magazine met reportages uit binnen- en buitenland. Zie ook:
+            http://www.een.be/programmas/vlaanderen-vakantieland/
+          </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <ReleaseInformation/>
+          <EpisodeNumber>17</EpisodeNumber>
+          <OneLineDescription>Toeristisch magazine met reportages uit binnen- en buitenland. Zie ook:
+            http://www.een.be/programmas/vlaanderen-vakantieland/
+          </OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623145668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Journaal</Title>
+          <Title xml:lang="NL" type="episodeTitle">NOS Journaal</Title>
+          <Title xml:lang="NL" type="originalLanguage">NOS Journaal</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>17</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623151668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Weerbericht Europa/Afrika</Title>
+          <Title xml:lang="NL" type="episodeTitle">Weerbericht Europa/Afrika</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <ReleaseInformation/>
+          <EpisodeNumber>117</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623287668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Langs de Leeuw</Title>
+          <Title xml:lang="NL" type="episodeTitle">Langs de Leeuw</Title>
+          <Title xml:lang="NL" type="originalLanguage">Langs de Leeuw 2013</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Ook dit seizoen brengt Langs de Leeuw weer verrassende gasten, grappige gestoorden en vrolijk vertier. En
+            natuurlijk De Kwis! Ook bieden we onze Majesteit iedere week nationale cadeaus aan op een ludieke manier.
+
+            Langs de Leeuw, met het orkest van Cor Bakker en natuurlijk Paul de Leeuw.
+
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>8</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623359668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Freddy, leven in de brouwerij</Title>
+          <Title xml:lang="NL" type="episodeTitle">Amsterdam</Title>
+          <Title xml:lang="NL" type="originalLanguage">FREDDY, LEVEN IN DE BROUWERIJ</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Freddy is ver gekomen door zijn volhardende koppigheid, maar dat heeft ook zijn keerzijde. Hij blijft
+            stellig als het gaat over de opvolging: dochter Charlene moet het gaan doen. Maar zij blijkt al even koppig
+            als haar vader en weigert terwijl Lucille er alles aan doet om vader en dochter niet verder uit elkaar te
+            laten groeien.
+            Freddy blijft flamboyant en oog houden voor vrouwelijk schoon. Hij begint een verhouding met zijn
+            secretaresse Marie-Anne. Zij laat een nieuwe creativiteit in hem ontluiken en stimuleert zijn muzikale
+            ambities. En waarom ook niet, want een goede vriend van hem is tenslotte Frank Sinatra.
+            Terug in 1983 nadert Freddy zijn dieptepunt in zijn cel. Geketend aan de muur en slechts gekleed in zijn
+            stinkende pyjama vraagt hij zich af of hij ooit nog wordt bevrijd. En als dat dan gebeurt, hoe hij dan zijn
+            leven weer moet oppakken.
+
+            In vier afleveringen zien we hoe Freddy Heineken van ambitieuze jongen uitgroeit tot een van de meest
+            besproken figuren uit de Nederlandse geschiedenis. We zien zijn veelzijdigheid, van zakenman tot flamboyante
+            filmproducent tot componist. En dan is er nog de moeizame relatie met zijn dochter Charlene, zijn
+            gedoodverfde opvolgster, die daar alleen helemaal geen zin in heeft. Voor een zakenman blijkt Freddy een
+            onverwacht complexe man te zijn
+
+            Cast: Thom Hoffman (Freddy), Liz Snoijink (Lucille), Elisa Beuger (Marie-Anne)
+
+
+          </Synopsis>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:g">
+            <Name xml:lang="NL">Geweld</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>3</EpisodeNumber>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623169668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nieuwsuur</Title>
+          <Title xml:lang="NL" type="episodeTitle">Nieuwsuur</Title>
+          <Title xml:lang="NL" type="originalLanguage">Nieuwsuur</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Dagelijks tussen tien en elf: nieuws, sport en achtergronden.
+            www.nieuwsuur.nl
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="99849305517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V32">
+              <PersonNameIDRef ref="395432219517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="355624271517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="342304779517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>99</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623159668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Weerbericht Amerika/Cariben</Title>
+          <Title xml:lang="NL" type="episodeTitle">Weerbericht Amerika/Cariben</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <ReleaseInformation/>
+          <EpisodeNumber>117</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623163668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Studio Sport Eredivisie</Title>
+          <Title xml:lang="NL" type="episodeTitle">NOS Studio Sport Eredivisie</Title>
+          <Title xml:lang="NL" type="originalLanguage">NOS Studio Sport Eredivisie</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste sportnieuws en de samenvattingen van de gespeelde
+            Eredivisiewedstrijden.
+          </Synopsis>
+          <Synopsis xml:lang="NL" length="short">
+            Het laatste sportnieuws en de samenvattingen van de gespeelde Eredivisiewedstrijden.
+
+          </Synopsis>
+          <Synopsis xml:lang="NL" length="medium">
+            Het laatste sportnieuws en de samenvattingen van de gespeelde Eredivisiewedstrijden.
+          </Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>15</EpisodeNumber>
+          <OneLineDescription>Het laatste sportnieuws en de samenvattingen van de gespeelde Eredivisiewedstrijden.
+            &#xD;</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623197668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Koefnoen Kroningsspecial</Title>
+          <Title xml:lang="NL" type="originalLanguage">KOEFNOEN KRONINGSSPECIAL</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium">
+            Ter gelegenheid van de abdicatie van koningin Beatrix is Koefnoen haar rijke Koningshuis-archief ingedoken.
+            Paul Groot en Owen Schumacher maakten een selectie van de grappigste Koningshuis-items die zijn ingekaderd
+            door nieuwe sketches en types.
+          </Synopsis>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="10463350517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/562623155668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Iedereen beroemd compilatie</Title>
+          <Title xml:lang="NL" type="episodeTitle">Iedereen beroemd compilatie</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <ReleaseInformation/>
+          <EpisodeNumber>17</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable/>
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="BVNT" start="2013-04-27T13:00:00+02:00" end="2013-04-28T12:55:00+02:00">
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623293668"/>
+          <PublishedStartTime>2013-04-27T13:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H33M41S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VRT"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00539782</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00539665</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623365668"/>
+          <PublishedStartTime>2013-04-27T13:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M51S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NCRV_1586429</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NCRV_1583693</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">8568</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562622209668"/>
+          <PublishedStartTime>2013-04-27T14:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H40M37S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NCRV_1589067</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NCRV_1587855</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">10068</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623403668"/>
+          <PublishedStartTime>2013-04-27T14:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M54S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VARA"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VARA_101307315</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VARA_101306748</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">9223</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623139668"/>
+          <PublishedStartTime>2013-04-27T15:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H45M49S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1166754</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1166747</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">10065</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623297668"/>
+          <PublishedStartTime>2013-04-27T16:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M30S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00557447</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">13Jnl1600n2</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">8255</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562622217668"/>
+          <PublishedStartTime>2013-04-27T16:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M59S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>26-02-2013</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="NPS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1223681</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1216298</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">10198</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623249668"/>
+          <PublishedStartTime>2013-04-27T16:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M30S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NPS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1223806</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1217585</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NPS_moederserie_het klokhuis</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623257668"/>
+          <PublishedStartTime>2013-04-27T16:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M48S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>13-11-2012</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1177421</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1177419</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623235668"/>
+          <PublishedStartTime>2013-04-27T17:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M25S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="TELEA"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1219183</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1215788</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623263668"/>
+          <PublishedStartTime>2013-04-27T17:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M27S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">KRO_1579839</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KRO_1527303</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">15045</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623279668"/>
+          <PublishedStartTime>2013-04-27T17:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H54M05S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NCRV_1582135</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NCRV_1581842</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">14988</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623187668"/>
+          <PublishedStartTime>2013-04-27T18:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H28M17S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">TROS_1331080</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">TROS_1331761</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623303668"/>
+          <PublishedStartTime>2013-04-27T19:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H09M24S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00581448</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">13stspjnl1855za</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">9530</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623409668"/>
+          <PublishedStartTime>2013-04-27T19:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M57S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VRT"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00540345</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00540328</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623125668"/>
+          <PublishedStartTime>2013-04-27T19:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H46M43S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VRT"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00540454</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00540437</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623145668"/>
+          <PublishedStartTime>2013-04-27T20:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H18M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00558481</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">13Jnl2000za</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623151668"/>
+          <PublishedStartTime>2013-04-27T20:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M41S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BVN"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00545062</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00544945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623287668"/>
+          <PublishedStartTime>2013-04-27T20:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H11M57S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VARA"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VARA_101306730</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VARA_101306723</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">13895</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623359668"/>
+          <PublishedStartTime>2013-04-27T22:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M54S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">TROS_1334844</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">TROS_1260207</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">10466</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623169668"/>
+          <PublishedStartTime>2013-04-27T22:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+            <Broadcaster code="NPS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1220577</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1217784</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623159668"/>
+          <PublishedStartTime>2013-04-27T23:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M57S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BVN"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00545429</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00545312</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623163668"/>
+          <PublishedStartTime>2013-04-27T23:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H51M49S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00581512</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">13stspEreZaterdag</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">9610</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623197668"/>
+          <PublishedStartTime>2013-04-28T00:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M38S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="AVRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">AVRO_1614025</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623155668"/>
+          <PublishedStartTime>2013-04-28T00:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M05S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VRT"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00540783</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00540766</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">975</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623293668"/>
+          <PublishedStartTime>2013-04-28T01:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H33M41S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VRT"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00539782</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00539665</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623365668"/>
+          <PublishedStartTime>2013-04-28T01:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M51S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NCRV_1586429</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NCRV_1583693</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">8568</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562622209668"/>
+          <PublishedStartTime>2013-04-28T02:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H40M37S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NCRV_1589067</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NCRV_1587855</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">10068</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623403668"/>
+          <PublishedStartTime>2013-04-28T02:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M54S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VARA"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VARA_101307315</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VARA_101306748</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">9223</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623139668"/>
+          <PublishedStartTime>2013-04-28T03:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H45M49S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1166754</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1166747</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">10065</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623297668"/>
+          <PublishedStartTime>2013-04-28T04:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M30S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00557447</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">13Jnl1600n2</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">8255</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562622217668"/>
+          <PublishedStartTime>2013-04-28T04:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M59S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>26-02-2013</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="NPS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1223681</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1216298</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">10198</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623249668"/>
+          <PublishedStartTime>2013-04-28T04:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M30S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NPS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1223806</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1217585</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NPS_moederserie_het klokhuis</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623257668"/>
+          <PublishedStartTime>2013-04-28T04:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M48S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>13-11-2012</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1177421</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1177419</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623235668"/>
+          <PublishedStartTime>2013-04-28T05:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M25S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="TELEA"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1219183</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1215788</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623263668"/>
+          <PublishedStartTime>2013-04-28T05:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M27S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">KRO_1579839</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KRO_1527303</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">15045</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623279668"/>
+          <PublishedStartTime>2013-04-28T05:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H54M05S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NCRV_1582135</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NCRV_1581842</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">14988</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623187668"/>
+          <PublishedStartTime>2013-04-28T06:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H28M17S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">TROS_1331080</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">TROS_1331761</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623303668"/>
+          <PublishedStartTime>2013-04-28T07:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H09M24S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00581448</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">13stspjnl1855za</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">9530</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623409668"/>
+          <PublishedStartTime>2013-04-28T07:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M57S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VRT"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00540345</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00540328</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623125668"/>
+          <PublishedStartTime>2013-04-28T07:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H46M43S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VRT"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00540454</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00540437</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623145668"/>
+          <PublishedStartTime>2013-04-28T08:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H18M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00558481</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">13Jnl2000za</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623151668"/>
+          <PublishedStartTime>2013-04-28T08:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M41S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BVN"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00545062</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00544945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623287668"/>
+          <PublishedStartTime>2013-04-28T08:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H11M57S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="VARA"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VARA_101306730</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VARA_101306723</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">13895</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623359668"/>
+          <PublishedStartTime>2013-04-28T10:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M54S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">TROS_1334844</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">TROS_1260207</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">10466</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623169668"/>
+          <PublishedStartTime>2013-04-28T10:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+            <Broadcaster code="NPS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">NPS_1220577</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">NPS_1217784</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623159668"/>
+          <PublishedStartTime>2013-04-28T11:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M57S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BVN"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00545429</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00545312</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623163668"/>
+          <PublishedStartTime>2013-04-28T11:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H51M49S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00581512</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">13stspEreZaterdag</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">9610</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623197668"/>
+          <PublishedStartTime>2013-04-28T12:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M38S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="AVRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">AVRO_1614025</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/562623155668"/>
+          <PublishedStartTime>2013-04-28T12:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M05S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VRT"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_00540783</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00540766</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">975</OtherIdentifier>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="15108453517">
+        <mpeg7:GivenName xml:lang="NL" initial="">P.</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Terpstra</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="333337969517">
+        <mpeg7:GivenName xml:lang="NL" initial="">H</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Lagerwaard</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="41011599517">
+        <mpeg7:GivenName xml:lang="NL" initial="">S.</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">de Beer</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="367749460517">
+        <mpeg7:FamilyName xml:lang="NL">Jurre Bosman en Mylène de Gordinou de Gouberville</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="10247605517">
+        <mpeg7:FamilyName xml:lang="NL">Paula Deppe</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="121161203517">
+        <mpeg7:GivenName xml:lang="NL" initial="">P.</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Mahadewsingh</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="100512940517">
+        <mpeg7:GivenName xml:lang="NL" initial="">E.</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Imhof</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="13214096517">
+        <mpeg7:FamilyName xml:lang="NL">HEIDI VAN BARNEVELD</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="98786480517">
+        <mpeg7:FamilyName xml:lang="NL">BAS VAN WERVEN</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99849305517">
+        <mpeg7:FamilyName xml:lang="NL">Twan Huys, Rik vd Westelaken, Jeroen Stomphorst</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="395432219517">
+        <mpeg7:FamilyName xml:lang="NL">begintijd: 22.00.24&#xD;eindtijd: 22.32.14&#xD;lengte: 31'50</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="355624271517">
+        <mpeg7:GivenName xml:lang="NL" initial="">J..P.M.</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Janssen</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="342304779517">
+        <mpeg7:FamilyName xml:lang="NL">Fillekers, Lieke</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="10463350517">
+        <mpeg7:GivenName xml:lang="NL" initial="">L</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">de Vos</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<TVAMain publisher="Broadcasting DataServices Limited" publicationTime="2009-05-14T04:02:45+00:00"
+    version="217" xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:bds:metadata:2006 http://www.broadcastingdata.com/dataimport/tva/new/tva_v13_am1_bds1r2.xsd">
+    <ProgramDescription>
+        <ProgramInformationTable>
+            <ProgramInformation programId="crid://bds.tv/16146427">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[Nieuws]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Van 7.00 t/m 19.00 elk heel uur en om 6.30, 7.30, 8.30, 16.30 en 17.30 NOS Headlines, om 6.00 en van 20.00 tot 6.00 elk heel uur NOS Journaal.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Van 7.00 t/m 19.00 elk heel uur en om 6.30, 7.30, 8.30, 16.30 en 17.30 NOS Headlines, om 6.00 en van 20.00 tot 6.00 elk heel uur NOS Journaal.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <Duration>PT00H06M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146425">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[GIEL!]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Begin de dag met een dansje en de Gielmobiel.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Begin de dag met een dansje en de Gielmobiel.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="589472"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <RelatedMaterial>
+                        <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+                            <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+                        </HowRelated>
+                        <MediaLocator>
+                            <mpeg7:MediaUri><![CDATA[www.giel.vara.nl]]></mpeg7:MediaUri>
+                        </MediaLocator>
+                    </RelatedMaterial>
+                    <Duration>PT04H00M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146423">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[AVRO Arbeidsvitaminen]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Muziekprogramma rondom verzoekjes van bedrijven. Daarnaast in het laatste uur een interview met een bijzondere artiest of persoon uit de media.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Muziekprogramma rondom verzoekjes van bedrijven, luisteraars én de dagelijkse gast. Gerard draait het beste van even geleden en nog verder terug, verrijkt met bijzondere krentjes uit de muzikale pap die deze mix zo speciaal maakt. Daarnaast in het laatste uur een interview met een bijzondere artiest of persoon uit de media, waarbij de maatschappelijke betrokkenheid en liefde voor muziek maatgevend zijn.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="592728"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <RelatedMaterial>
+                        <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+                            <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+                        </HowRelated>
+                        <MediaLocator>
+                            <mpeg7:MediaUri><![CDATA[arbeidsvitaminen@avro.nl]]></mpeg7:MediaUri>
+                        </MediaLocator>
+                    </RelatedMaterial>
+                    <RelatedMaterial>
+                        <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+                            <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+                        </HowRelated>
+                        <MediaLocator>
+                            <mpeg7:MediaUri><![CDATA[www.arbeidsvitaminen.nl]]></mpeg7:MediaUri>
+                        </MediaLocator>
+                    </RelatedMaterial>
+                    <Duration>PT02H00M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146421">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[Claudia d'r op]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Een programma met onderwerpen.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Een programma met onderwerpen.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="511975"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <Duration>PT02H00M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146419">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[RAB Radio]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Verrassend en interactief muziekprogramma. Met onder meer het Popduel, de Vrijdagmiddagmix en de Uit je dip tip.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Verrassend en interactief muziekprogramma. Met onder meer het Popduel, de Vrijdagmiddagmix en de Uit je dip tip.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="593054"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <Duration>PT02H00M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146417">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[De Coen en Sander show]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Coen en Sander geven de laatste uurtjes van de werkdag een happy ending. Met het Filelied, Jochem Dopvleugel, het Requestrad, nieuws, Bellen met een goede bekende en vooral heel veel muziek.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[De vrienden Coen Swijnenberg en Sander Lantinga zijn de twee rebellen van de Nederlandse radio. Het Filelied, Jochem Dopvleugel, het Requestrad, nieuws, Bellen met een goede bekende en vooral heel veel muziek. Dat zijn de ingrediënten van deze show. Coen en Sander geven de laatste uurtjes van de werkdag een happy ending.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="593053"/>
+                        </CreditsItem>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="534028"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <Duration>PT02H00M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146415">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"
+                        ><![CDATA[Dance Classics Party Request]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Met de Dance Classics Party.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Met de Dance Classics Party.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="587126"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <Duration>PT01H00M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146413">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[Ek-stra Weekend]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Gerard en Michiel kijken wat ze voor je kunnen doen. Programma voor de jeugd.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Gerard en Michiel kijken wat ze voor je kunnen doen. Programma voor de jeugd.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="592728"/>
+                        </CreditsItem>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="593055"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <Duration>PT03H00M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146411">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[MoveYourAss]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Stilzitten kan niet meer: muziekprogramma met eigenwijze inhoud. Aandacht voor nieuwe muziek van artiesten die iets te melden hebben.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Stilzitten kan niet meer: muziekprogramma met eigenwijze inhoud. Aandacht voor nieuwe muziek van artiesten die iets te melden hebben.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="593064"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <RelatedMaterial>
+                        <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+                            <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+                        </HowRelated>
+                        <MediaLocator>
+                            <mpeg7:MediaUri><![CDATA[www.llink.nl/MoveYourAss-Radio.66.0.html]]></mpeg7:MediaUri>
+                        </MediaLocator>
+                    </RelatedMaterial>
+                    <Duration>PT02H56M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146409">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[NachteGiel]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Een regelrechte radiorevolutie! Al was het maar omdat het zo lekker allitereert.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Een regelrechte radiorevolutie! Al was het maar omdat het zo lekker allitereert.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="589472"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <Duration>PT03H00M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+            <ProgramInformation programId="crid://bds.tv/16146407">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main"><![CDATA[Ekdom in de nacht]]></Title>
+                    <Synopsis xml:lang="NL" length="short"
+                        ><![CDATA[Wie na het stappen thuis nog even lol wil trappen, luistert én kijkt naar Gerard Ekdom in de nacht! Met te veel goeie freakmuziek, gekke gasten en andere typische nachtradiolol.]]></Synopsis>
+                    <Synopsis xml:lang="NL" length="long"
+                        ><![CDATA[Wie na het stappen thuis nog even lol wil trappen, luistert én kijkt naar Gerard Ekdom in de nacht! Met te veel goeie freakmuziek, gekke gasten en andere typische nachtradiolol. Radio zoals het nergens meer gemaakt wordt! En met heel veel interactie.]]></Synopsis>
+                    <Genre href="urn:tva:metadata:cs:2004:2.4">
+                        <Name xml:lang="NL">Overige</Name>
+                    </Genre>
+                    <Language>NL</Language>
+                    <CreditsList>
+                        <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+                            <PersonNameIDRef ref="592728"/>
+                        </CreditsItem>
+                    </CreditsList>
+                    <Duration>PT02H58M</Duration>
+                </BasicDescription>
+            </ProgramInformation>
+        </ProgramInformationTable>
+        <GroupInformationTable/>
+        <ProgramLocationTable>
+            <Schedule serviceIDRef="RAD3" start="2009-05-22T06:00:00+02:00"
+                end="2009-05-23T07:00:00+02:00" releaseVersion="0">
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146427"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650473@2009-05-22T06:00:00+02:00--PT00H06M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7764</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-22T06:00:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT00H06M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="NOS"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146425"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650474@2009-05-22T06:06:00+02:00--PT04H00M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7765</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-22T06:06:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT04H00M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="VARA"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146423"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650475@2009-05-22T10:06:00+02:00--PT02H00M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7766</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-22T10:06:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT02H00M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="AVRO"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146421"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650476@2009-05-22T12:06:00+02:00--PT02H00M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7767</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-22T12:06:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT02H00M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="VARA"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146419"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650477@2009-05-22T14:06:00+02:00--PT02H00M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7768</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-22T14:06:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT02H00M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="KRO"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146417"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650478@2009-05-22T16:06:00+02:00--PT02H00M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7769</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-22T16:06:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT02H00M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="BNN"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146415"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650479@2009-05-22T18:06:00+02:00--PT01H00M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7770</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-22T18:06:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT01H00M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="TROS"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146413"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650480@2009-05-22T19:06:00+02:00--PT03H00M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7771</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-22T19:06:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT03H00M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="NPS"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146411"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650481@2009-05-22T22:06:00+02:00--PT02H56M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7772</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-22T22:06:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT02H56M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="LLiNK"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146409"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650482@2009-05-23T01:02:00+02:00--PT03H00M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7773</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-23T01:02:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT03H00M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="VARA"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+                <ScheduleEvent>
+                    <Program crid="crid://bds.tv/16146407"/>
+                    <ProgramURL>dvb://1.1.RAD3;115650483@2009-05-23T04:02:00+02:00--PT02H58M00S</ProgramURL>
+                    <InstanceMetadataId>imi:7774</InstanceMetadataId>
+                    <PublishedStartTime>2009-05-23T04:02:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT02H58M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="AVRO"/>
+                    </BroadcasterList>
+                </ScheduleEvent>
+            </Schedule>
+        </ProgramLocationTable>
+        <CreditsInformationTable>
+            <PersonName personNameId="511975">
+                <mpeg7:GivenName xml:lang="NL" initial="">Claudia</mpeg7:GivenName>
+                <mpeg7:FamilyName xml:lang="NL">de Breij</mpeg7:FamilyName>
+            </PersonName>
+            <PersonName personNameId="534028">
+                <mpeg7:GivenName xml:lang="NL" initial="">Sander</mpeg7:GivenName>
+                <mpeg7:FamilyName xml:lang="NL">Lantinga</mpeg7:FamilyName>
+            </PersonName>
+            <PersonName personNameId="587126">
+                <mpeg7:GivenName xml:lang="NL" initial="">Corné</mpeg7:GivenName>
+                <mpeg7:FamilyName xml:lang="NL">Klijn</mpeg7:FamilyName>
+            </PersonName>
+            <PersonName personNameId="589472">
+                <mpeg7:GivenName xml:lang="NL" initial="">Giel</mpeg7:GivenName>
+                <mpeg7:FamilyName xml:lang="NL">Beelen</mpeg7:FamilyName>
+            </PersonName>
+            <PersonName personNameId="592728">
+                <mpeg7:GivenName xml:lang="NL" initial="">Gerard</mpeg7:GivenName>
+                <mpeg7:FamilyName xml:lang="NL">Ekdom</mpeg7:FamilyName>
+            </PersonName>
+            <PersonName personNameId="593053">
+                <mpeg7:GivenName xml:lang="NL" initial="">Coen</mpeg7:GivenName>
+                <mpeg7:FamilyName xml:lang="NL">Swijnenberg</mpeg7:FamilyName>
+            </PersonName>
+            <PersonName personNameId="593054">
+                <mpeg7:GivenName xml:lang="NL" initial="">Paul</mpeg7:GivenName>
+                <mpeg7:FamilyName xml:lang="NL">Rabbering</mpeg7:FamilyName>
+            </PersonName>
+            <PersonName personNameId="593055">
+                <mpeg7:GivenName xml:lang="NL" initial="">Michiel</mpeg7:GivenName>
+                <mpeg7:FamilyName xml:lang="NL">Veenstra</mpeg7:FamilyName>
+            </PersonName>
+            <PersonName personNameId="593064">
+                <mpeg7:GivenName xml:lang="NL" initial="">Rudy</mpeg7:GivenName>
+                <mpeg7:FamilyName xml:lang="NL">Mackay</mpeg7:FamilyName>
+            </PersonName>
+        </CreditsInformationTable>
+    </ProgramDescription>
+</TVAMain>

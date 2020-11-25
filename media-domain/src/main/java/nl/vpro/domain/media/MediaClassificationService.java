@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import java.util.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.xml.sax.InputSource;
 
 import nl.vpro.domain.classification.*;
@@ -33,6 +34,7 @@ public class MediaClassificationService extends AbstractClassificationServiceImp
     static final String MIS_PREFIX = "urn:mis:genre:";
 
 
+    @NonNull
     public static Term getTermByEpgCode(String code) {
         if (!code.startsWith(EPG_PREFIX)) {
             // To allow migration

@@ -1,0 +1,3714 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:date="http://exslt.org/dates-and-times" publisher="NPO Programma Gegevens" publicationTime="2016-03-15T15:42:35.400+01:00" version="300" xsi:schemaLocation="urn:bds:metadata:2004 XSDSchema/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201304668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201310668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>272</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201316668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201322668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>272</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201328668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201334668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>272</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201340668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201346668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>272</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201352668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201358668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>272</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201364668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201370668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201376668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>272</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201382668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201388668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>272</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201394668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201400668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Sprookjes</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">De vriendelijke Sprookjesboom vertelt elke dag een ander verhaal over een van de inwoners van het Sprookjesbos.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>1</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201406668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Jokie</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Jokie is met zijn rode neus herkenbaar voor jonge kindjes en samen met zijn vogelvriendinnetje Jet beleven ze iedere keer op een nieuwe plek een leuk avontuur. Samen ontdekken ze grote en kleine dingen en ontmoeten ze allerlei mensen en dieren. Jokie en Jet leren kinderen dat reizen en nieuwe dingen ontdekken een feestje is. Jokie is speciaal bedoeld voor kinderen van 0 tot 3 jaar. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>57</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201412668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201418668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Weer</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het weer en de weersverwachting in Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>259</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201424668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201430668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201436668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201442668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201448668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201454668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201466668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201472668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201478668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201484668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201490668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201496668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201502668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201508668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201514668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>262</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201688668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201694668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS journaal met regionieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In dit NOS Journaal: een aparte rubriek met nieuws en verhalen van de dertien regionale omroepen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>9</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201526668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201532668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201538668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201544668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201550668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201556668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201562668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201700668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201706668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS journaal met regionieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In dit NOS Journaal: een aparte rubriek met nieuws en verhalen van de dertien regionale omroepen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>9</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201586668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201592668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201598668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201604668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201610668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201616668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Onder Ons</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">In Onder Ons veel aandacht voor wat ons in Brabant bezig houdt. Wat betekent het nieuws voor de mensen die er bij betrokken waren en welke Brabanders hebben een persoonlijk verhaal dat onze aandacht verdient? Je ziet het elke maandag tot en met donderdag. Presentatie: Anne-Marie Fokkens en Arjo Kraak.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl/onderons</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>69</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201658668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201664668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Weer</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het weer en de weersverwachting in Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>260</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201670668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>263</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201676668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Booming Brabant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Booming Brabant laat elke week zien wat er speelt in de Brabantse economie. Een business-magazine dat met een kritische blik kijkt naar de economie in onze provincie, maar dat ook de trots uitstraalt van al het moois wat er wordt gemaakt. Met extra veel aandacht voor innovatieve en internationale ontwikkelingen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201682668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>273</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201460668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Booming Brabant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Booming Brabant laat elke week zien wat er speelt in de Brabantse economie. Een business-magazine dat met een kritische blik kijkt naar de economie in onze provincie, maar dat ook de trots uitstraalt van al het moois wat er wordt gemaakt. Met extra veel aandacht voor innovatieve en internationale ontwikkelingen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201520668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>273</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201568668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Booming Brabant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Booming Brabant laat elke week zien wat er speelt in de Brabantse economie. Een business-magazine dat met een kritische blik kijkt naar de economie in onze provincie, maar dat ook de trots uitstraalt van al het moois wat er wordt gemaakt. Met extra veel aandacht voor innovatieve en internationale ontwikkelingen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201574668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>273</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201580668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Booming Brabant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Booming Brabant laat elke week zien wat er speelt in de Brabantse economie. Een business-magazine dat met een kritische blik kijkt naar de economie in onze provincie, maar dat ook de trots uitstraalt van al het moois wat er wordt gemaakt. Met extra veel aandacht voor innovatieve en internationale ontwikkelingen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201622668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>273</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201628668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Booming Brabant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Booming Brabant laat elke week zien wat er speelt in de Brabantse economie. Een business-magazine dat met een kritische blik kijkt naar de economie in onze provincie, maar dat ook de trots uitstraalt van al het moois wat er wordt gemaakt. Met extra veel aandacht voor innovatieve en internationale ontwikkelingen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201634668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>273</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201640668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Booming Brabant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Booming Brabant laat elke week zien wat er speelt in de Brabantse economie. Een business-magazine dat met een kritische blik kijkt naar de economie in onze provincie, maar dat ook de trots uitstraalt van al het moois wat er wordt gemaakt. Met extra veel aandacht voor innovatieve en internationale ontwikkelingen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201646668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brabant Nieuws</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Brabant.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>273</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1123201652668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Booming Brabant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Booming Brabant laat elke week zien wat er speelt in de Brabantse economie. Een business-magazine dat met een kritische blik kijkt naar de economie in onze provincie, maar dat ook de trots uitstraalt van al het moois wat er wordt gemaakt. Met extra veel aandacht voor innovatieve en internationale ontwikkelingen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>info@omroepbrabant.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>5</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable/>
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="BRAB" start="2016-03-17T00:00:00+01:00" end="2016-03-17T23:54:00+01:00">
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201304668"/>
+          <PublishedStartTime>2016-03-17T00:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201310668"/>
+          <PublishedStartTime>2016-03-17T00:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209606</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201316668"/>
+          <PublishedStartTime>2016-03-17T00:48:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201322668"/>
+          <PublishedStartTime>2016-03-17T01:18:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209606</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201328668"/>
+          <PublishedStartTime>2016-03-17T01:36:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201334668"/>
+          <PublishedStartTime>2016-03-17T02:06:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209606</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201340668"/>
+          <PublishedStartTime>2016-03-17T02:24:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201346668"/>
+          <PublishedStartTime>2016-03-17T02:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209606</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201352668"/>
+          <PublishedStartTime>2016-03-17T03:12:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201358668"/>
+          <PublishedStartTime>2016-03-17T03:42:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209606</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201364668"/>
+          <PublishedStartTime>2016-03-17T04:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201370668"/>
+          <PublishedStartTime>2016-03-17T04:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201376668"/>
+          <PublishedStartTime>2016-03-17T05:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209606</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201382668"/>
+          <PublishedStartTime>2016-03-17T05:28:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201388668"/>
+          <PublishedStartTime>2016-03-17T05:58:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209606</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201394668"/>
+          <PublishedStartTime>2016-03-17T06:16:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201400668"/>
+          <PublishedStartTime>2016-03-17T06:46:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV1074982</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_634084</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201406668"/>
+          <PublishedStartTime>2016-03-17T06:52:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M03S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2178259</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_1331019</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201412668"/>
+          <PublishedStartTime>2016-03-17T07:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233162</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024951</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201418668"/>
+          <PublishedStartTime>2016-03-17T07:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H01M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2235617</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_510589</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201424668"/>
+          <PublishedStartTime>2016-03-17T07:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233162</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024951</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201430668"/>
+          <PublishedStartTime>2016-03-17T07:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233162</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024951</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201436668"/>
+          <PublishedStartTime>2016-03-17T07:45:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233162</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024951</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201442668"/>
+          <PublishedStartTime>2016-03-17T08:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233162</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024951</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201448668"/>
+          <PublishedStartTime>2016-03-17T08:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233162</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024951</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201454668"/>
+          <PublishedStartTime>2016-03-17T08:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233162</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024951</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201466668"/>
+          <PublishedStartTime>2016-03-17T08:45:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233162</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024951</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201472668"/>
+          <PublishedStartTime>2016-03-17T08:57:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201478668"/>
+          <PublishedStartTime>2016-03-17T09:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233212</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024957</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201484668"/>
+          <PublishedStartTime>2016-03-17T09:45:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233212</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024957</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201490668"/>
+          <PublishedStartTime>2016-03-17T09:57:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201496668"/>
+          <PublishedStartTime>2016-03-17T10:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233212</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024957</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201502668"/>
+          <PublishedStartTime>2016-03-17T10:42:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233212</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024957</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201508668"/>
+          <PublishedStartTime>2016-03-17T10:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201514668"/>
+          <PublishedStartTime>2016-03-17T11:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233212</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024957</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201688668"/>
+          <PublishedStartTime>2016-03-17T11:42:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201694668"/>
+          <PublishedStartTime>2016-03-17T12:12:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2257615</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2257582</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201526668"/>
+          <PublishedStartTime>2016-03-17T12:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201532668"/>
+          <PublishedStartTime>2016-03-17T12:42:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201538668"/>
+          <PublishedStartTime>2016-03-17T12:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201544668"/>
+          <PublishedStartTime>2016-03-17T13:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201550668"/>
+          <PublishedStartTime>2016-03-17T13:42:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201556668"/>
+          <PublishedStartTime>2016-03-17T13:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201562668"/>
+          <PublishedStartTime>2016-03-17T14:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201700668"/>
+          <PublishedStartTime>2016-03-17T14:42:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201706668"/>
+          <PublishedStartTime>2016-03-17T15:12:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2257666</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2257600</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201586668"/>
+          <PublishedStartTime>2016-03-17T15:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201592668"/>
+          <PublishedStartTime>2016-03-17T15:42:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201598668"/>
+          <PublishedStartTime>2016-03-17T15:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201604668"/>
+          <PublishedStartTime>2016-03-17T16:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201610668"/>
+          <PublishedStartTime>2016-03-17T16:42:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201616668"/>
+          <PublishedStartTime>2016-03-17T16:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2171912</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_865325</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201658668"/>
+          <PublishedStartTime>2016-03-17T17:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201664668"/>
+          <PublishedStartTime>2016-03-17T17:38:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H01M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2235618</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_510589</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201670668"/>
+          <PublishedStartTime>2016-03-17T17:43:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024950</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201676668"/>
+          <PublishedStartTime>2016-03-17T17:56:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233072</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2221151</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201682668"/>
+          <PublishedStartTime>2016-03-17T18:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209607</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201460668"/>
+          <PublishedStartTime>2016-03-17T18:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233072</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2221151</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201520668"/>
+          <PublishedStartTime>2016-03-17T19:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209607</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201568668"/>
+          <PublishedStartTime>2016-03-17T19:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233072</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2221151</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201574668"/>
+          <PublishedStartTime>2016-03-17T20:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209607</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201580668"/>
+          <PublishedStartTime>2016-03-17T20:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233072</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2221151</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201622668"/>
+          <PublishedStartTime>2016-03-17T21:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209607</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201628668"/>
+          <PublishedStartTime>2016-03-17T21:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233072</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2221151</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201634668"/>
+          <PublishedStartTime>2016-03-17T22:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209607</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201640668"/>
+          <PublishedStartTime>2016-03-17T22:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233072</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2221151</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201646668"/>
+          <PublishedStartTime>2016-03-17T23:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2209607</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2024945</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1123201652668"/>
+          <PublishedStartTime>2016-03-17T23:54:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BRAB"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_BRAB_TV2233072</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">SREGIOOB_2221151</OtherIdentifier>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable/>
+  </ProgramDescription>
+</TVAMain>
