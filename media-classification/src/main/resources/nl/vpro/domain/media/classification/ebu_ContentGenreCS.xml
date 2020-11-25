@@ -120,6 +120,7 @@
       <Term termID="3.0.1.2">
         <Name xml:lang="nl">Film</Name>
         <Reference>urn:tva:metadata:cs:2004:02</Reference>
+        <Reference>urn:tva:metadata:cs:2004:2</Reference>
         <Reference>urn:mis:genre:MOVIE</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">

@@ -174,7 +174,11 @@ public class Genre implements Displayable, Comparable<Genre>, Serializable {
 
     @Override
     public int compareTo(@NonNull Genre o) {
-        return termId == null ? this.hashCode() - o.hashCode() : new TermId(termId).compareTo(new TermId(o.termId));
+        try {
+            return termId == null ? this.hashCode() - o.hashCode() : new TermId(termId).compareTo(new TermId(o.termId));
+        } catch (NumberFormatException nfe) {
+            return Objects.compare(termId, o.termId, Comparator.nullsFirst(String::compareTo));
+        }
     }
 
     @Override

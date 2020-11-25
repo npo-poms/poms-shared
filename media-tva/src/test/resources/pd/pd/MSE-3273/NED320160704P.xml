@@ -1,0 +1,1748 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:date="http://exslt.org/dates-and-times" publisher="NPO Programma Gegevens" publicationTime="2016-05-19T16:53:38.120+02:00" version="300" xsi:schemaLocation="urn:bds:metadata:2004 XSDSchema/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992706668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Pinqu</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992814668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Winnie de Poeh, leuke verhaaltjes </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Mini adventures of Winnie the Pooh</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <EpisodeNumber/>
+          <Season>1</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992758668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Penelope</Title>
+          <Title xml:lang="NL" type="episodeTitle">Penelope's mooie-dromenboek</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Penelope</Title>
+          <Title xml:lang="NL" type="translatedtitle">Penelope</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Anti-Nightmare Book</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over een nieuwsgierige 3-jarige koala die zich in allerlei avonturen stort.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Animatieserie over een nieuwsgierige 3-jarige koala die zich in allerlei avonturen stort. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie over een nieuwsgierige 3-jarige koala die zich in allerlei avonturen stort.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="JP"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2006</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>39</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie over een nieuwsgierige 3-jarige koala die zich in allerlei avonturen stort.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992810668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Olly, het kleine witte busje </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Olly, het kleine witte busje</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <EpisodeNumber/>
+          <Season>1</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992554668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Bing</Title>
+          <Title xml:lang="NL" type="episodeTitle">Stoffie</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Bing</Title>
+          <Title xml:lang="NL" type="translatedtitle">Bing</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Voo Voo</Title>
+          <Synopsis xml:lang="NL" length="long">Bing is een driejarig konijntje vol energie. Hij is speels en geniet volop van de wereld om hem heen</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Bing is een driejarig konijntje vol energie. Hij is speels en geniet volop van de wereld om hem heen. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Bing is een driejarig konijntje vol energie. Hij is speels en geniet volop van de wereld om hem heen</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="IE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>11</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Bing is een driejarig konijntje vol energie. Hij is speels en geniet volop van de wereld om hem heen</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992550668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Sesamstraat </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Sesamstraat</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">De bekendste straat van Nederland! Pino, Ieniemienie, Purk en Tommie beleven nieuwe avonturen.</Synopsis>
+          <Language>NL</Language>
+          <EpisodeNumber/>
+          <Season>40</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992828668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Angelina Ballerina </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992832668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Pim &amp; Pom </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992784668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Q Pootle </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992510668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Bob de Bouwer</Title>
+          <Title xml:lang="NL" type="episodeTitle">Scoop en de glijbaan</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Bob de Bouwer</Title>
+          <Title xml:lang="NL" type="translatedtitle">Bob the Builder </Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Scoop and the slide</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over Bob de Bouwer, een bouwvakker die alles kan maken, samen met zijn vrienden Wendy, Liftie en Scoop.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Animatieserie over Bob de Bouwer, een bouwvakker die alles kan maken, samen met zijn vrienden Wendy, Liftie en Scoop. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie over Bob de Bouwer, een bouwvakker die alles kan maken, samen met zijn vrienden Wendy, Liftie en Scoop.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>35</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie over Bob de Bouwer, een bouwvakker die alles kan maken, samen met zijn vrienden Wendy, Liftie en Scoop.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992876668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Masha en de beer </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992884668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Igam Ogam </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992880668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Bibbeltje Big</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992540668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Pipi, Pupu &amp; Rosemarie</Title>
+          <Title xml:lang="NL" type="episodeTitle">Pi-ratten</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Pipi, Pupu &amp; Rosemarie</Title>
+          <Title xml:lang="NL" type="translatedtitle">Pipi, Pupu &amp; Rosmary</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Pi-rats</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over een wasbeer, een vogel en een konijn die door de wereld trekken op zoek naar Mapa, een beetje mama en een beetje papa.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Animatieserie over een wasbeer, een vogel en een konijn die door de wereld trekken op zoek naar Mapa, een beetje mama en een beetje papa. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie over een wasbeer, een vogel en een konijn die door de wereld trekken op zoek naar Mapa, een beetje mama en een beetje papa.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="IT"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2009</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>19</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie over een wasbeer, een vogel en een konijn die door de wereld trekken op zoek naar Mapa, een beetje mama en een beetje papa.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992872668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Jeugdjournaal </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Jeugdjournaal</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker.</Synopsis>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <EpisodeNumber/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992794668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Q Pootle 5</Title>
+          <Title xml:lang="NL" type="episodeTitle">Groobie komt te hulp</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Q Pootle 5</Title>
+          <Title xml:lang="NL" type="translatedtitle">Q Pootle 5</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Groobie to the rescue</Title>
+          <Synopsis xml:lang="NL" length="long">Q Pootle 5 beleeft samen met zijn vriendjes spannende avonturen op de planeet Okidoki.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Groobie heeft een ongeluk met zijn ruimteschip en heeft daardoor vliegangst. Bud D neemt de bezorgdienst waar, maar dat loopt in het honderd. Pootle en Oepsie helpen Groobie van zijn vliegangst af. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Groobie krijgt een ongeluk met zijn ruimteschip en houdt er vliegangst aan over. Bud D neemt de bezorgdienst waar, maar dat loopt helemaal in het honderd. Pootle en Oepsie besluiten Groobie van zijn vliegangst af te helpen. </Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Q Pootle 5 beleeft samen met zijn vriendjes spannende avonturen op de planeet Okidoki.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>11</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Groobie heeft een ongeluk met zijn ruimteschip en heeft daardoor vliegangst. Pootle en Oepsie willen Groobie van zijn vliegangst af helpen.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992778668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Ringel Singel 19</Title>
+          <Title xml:lang="NL" type="episodeTitle">Toen er een pakketje arriveerde</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Ringel Singel 19</Title>
+          <Title xml:lang="NL" type="translatedtitle">Fennel Vennel 19</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">When a package arrived</Title>
+          <Synopsis xml:lang="NL" length="long">De kinderen die in het flatgebouw aan de Ringel Singel 19 wonen beleven samen de leukste avonturen!
+
+</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> De kinderen die in het flatgebouw aan de Ringel Singel 19 wonen beleven samen de leukste avonturen!  </Synopsis>
+          <Synopsis xml:lang="NL" length="medium">    </Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">De kinderen die in het flatgebouw aan de Ringel Singel 19 wonen beleven samen de leukste avonturen!</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="DE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>12</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>De kinderen die in het flatgebouw aan de Ringel Singel 19 wonen beleven samen de leukste avonturen!
+</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992438668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Teletubbies</Title>
+          <Title xml:lang="NL" type="episodeTitle">Een ritje maken</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Teletubbies</Title>
+          <Title xml:lang="NL" type="translatedtitle">New Teletubbies</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Taking a ride</Title>
+          <Synopsis xml:lang="NL" length="long">Nieuwe avonturen van Dipsy, Po, Tinky Winky en Laa-Laa.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Nieuwe avonturen van Dipsy, Po, Tinky Winky en Laa-Laa. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Nieuwe avonturen van Dipsy, Po, Tinky Winky en Laa-Laa.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>41</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Nieuwe avonturen van Dipsy, Po, Tinky Winky en Laa-Laa.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992764668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Timmy tijd</Title>
+          <Title xml:lang="NL" type="episodeTitle">Timmy wil winnen</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Timmy Time</Title>
+          <Title xml:lang="NL" type="translatedtitle">Timmy Time</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Timmy wants to win</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over de avonturen van het eigenwijze lammetje Timmy.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Animatieserie over de avonturen van het eigenwijze lammetje Timmy. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie over de avonturen van het eigenwijze lammetje Timmy.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="798734551517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2009</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>3</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie over de avonturen van het eigenwijze lammetje Timmy.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992772668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Minnie's strikkenwinkel</Title>
+          <Title xml:lang="NL" type="episodeTitle">Koekkoekkuikens ei-avontuur</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Minnies strikkenwinkel</Title>
+          <Title xml:lang="NL" type="translatedtitle">Minnie's Bow Toons</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Cuckoo-Loca's Egg-celent Adventure</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over de avonturen van Minnie Mouse en Katrien Duck.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Een ei komt bijna uit, maar de mama-vogel is nergens te bekennen. Minnie en Katrien gaan haar zoeken.  </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Een ei komt bijna uit, maar de mama-vogel is nergens te bekennen. Minnie en Katrien gaan haar zoeken.  </Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie over de avonturen van Minnie Mouse en Katrien Duck.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="US"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2011</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Een ei komt bijna uit, maar de mama-vogel is nergens te bekennen. Minnie en Katrien gaan haar zoeken.
+</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992788668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De speelgoeddokter</Title>
+          <Title xml:lang="NL" type="episodeTitle">UItgeracete racewagen</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">De speelgoeddokter</Title>
+          <Title xml:lang="NL" type="translatedtitle">Doc Mc Stuffins</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Run down race car</Title>
+          <Synopsis xml:lang="NL" length="long">Een speelgoeddokter die met speelgoed en knuffels praat en hen geneest? Het meisje Doc kan dit!</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Animatieserie over het meisje Doc, de speelgoeddokter. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="US"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2011</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie over het meisje Doc, de speelgoeddokter.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992746668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Harry en Toto </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992600668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Masha's sprookjes</Title>
+          <Title xml:lang="NL" type="episodeTitle">De bosmuzikanten</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Masha's fairy tales</Title>
+          <Title xml:lang="NL" type="translatedtitle">Masha's tales</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Three little pigs</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie waarin Masha, bekend van Masha en de beer, op haar eigen wijze bekende en minder bekende sprookjes vertelt aan haar poppen.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Animatieserie waarin Masha, bekend van Masha en de beer, op haar eigen wijze bekende en minder bekende sprookjes vertelt aan haar poppen. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>RU</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="RU"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>13</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie waarin Masha, bekend van Masha en de beer, op haar eigen wijze bekende en minder bekende sprookjes vertelt aan haar poppen.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992836668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Wickie de Viking</Title>
+          <Title xml:lang="NL" type="episodeTitle">De beer is los</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Wickie de Viking</Title>
+          <Title xml:lang="NL" type="translatedtitle">Vicke Viking</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Bear up</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over het verlegen Vikingjongetje Wickie.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Animatieserie over het verlegen Vikingjongetje Wickie. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie over het verlegen Vikingjongetje Wickie.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:g">
+            <Name xml:lang="NL">Geweld</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="FR"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2013</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>43</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie over het verlegen Vikingjongetje Wickie.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992680668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Pim &amp; Pom</Title>
+          <Title xml:lang="NL" type="episodeTitle">Verrassing</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Pim &amp; Pom</Title>
+          <Title xml:lang="NL" type="translatedtitle">Pim &amp; Pom</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Verrassing</Title>
+          <Synopsis xml:lang="NL" length="long">Pim en Pom zijn vrienden door dik en dun. Pim, de grijsgestreepte poes, is eigenwijs en ondernemend, terwijl de zwartharige Pom bedaard is en eigenlijk alles beter weet. Samen beleven ze avonturen in en om het huis.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Pim en Pom zijn vrienden door dik en dun. Pim, de grijsgestreepte poes, is eigenwijs en ondernemend, terwijl de zwartharige Pom bedaard is en eigenlijk alles beter weet.  </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Pim en Pom zijn vrienden door dik en dun. Pim, de grijsgestreepte poes, is eigenwijs en ondernemend, terwijl de zwartharige Pom bedaard is en eigenlijk alles beter weet.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1104603900517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2009</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>43</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie over de bevriende poezen Pim en Pom.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992626668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Kindertijd </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992428668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Joe &amp; Jack</Title>
+          <Title xml:lang="NL" type="episodeTitle">Vakantie</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Joe &amp; Jack</Title>
+          <Title xml:lang="NL" type="translatedtitle">Joe &amp; Jack</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Holiday</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over het 4-jarige jongetje Joe en zijn kat Jack.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Animatieserie over het 4-jarige jongetje Joe en zijn kat Jack. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie over het 4-jarige jongetje Joe en zijn kat Jack.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="IE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2011</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>25</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie over het 4-jarige jongetje Joe en zijn kat Jack.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992546668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Sesamstraat hh ochtend </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992710668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Tip de muis</Title>
+          <Title xml:lang="NL" type="episodeTitle">Ik wil politieagent worden</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Tip de muis</Title>
+          <Title xml:lang="NL" type="translatedtitle">Tip the mouse</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">I want to be a policeman</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over een klein muisje, dat allerlei avonturen beleeft in het bos.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Animatieserie over een klein muisje, dat allerlei avonturen beleeft in het bos. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie over een klein muisje, dat allerlei avonturen beleeft in het bos.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="DE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>15</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Animatieserie over een klein muisje, dat allerlei avonturen beleeft in het bos.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992536668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Sesamstraat 10 voor </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992588668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Bing</Title>
+          <Title xml:lang="NL" type="episodeTitle">Parkeergarage</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Bing</Title>
+          <Title xml:lang="NL" type="translatedtitle">Bing</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Car park</Title>
+          <Synopsis xml:lang="NL" length="long">Bing is een driejarig konijntje vol energie. Hij is speels en geniet volop van de wereld om hem heen</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Bing is een driejarig konijntje vol energie. Hij is speels en geniet volop van de wereld om hem heen. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Bing is een driejarig konijntje vol energie. Hij is speels en geniet volop van de wereld om hem heen</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="IE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>8</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Bing is een driejarig konijntje vol energie. Hij is speels en geniet volop van de wereld om hem heen</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992444668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Maya de bij</Title>
+          <Title xml:lang="NL" type="episodeTitle">Dino heeft geen vriendjes</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Maya de bij</Title>
+          <Title xml:lang="NL" type="translatedtitle">Maya the bee</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">No friends for Dino</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over het vrolijke bijtje Maya, dat samen met haar vriendje Willy allerlei spannende avonturen beleeft.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Maya ontmoet Dino, een diertje met scharen dat blaadjes in allerlei vormen kan knippen. Dat is eerst wel leuk, maar als hij alle klaprozen in de weide verknipt heeft, loopt het uit de hand. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Maya ontmoet Dino, een diertje met scharen dat blaadjes in allerlei vormen kan knippen. Dat is in het begin wel leuk. Maar als hij alle klaprozen in de weide verknipt heeft, loopt het uit de hand.  </Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie over het vrolijke bijtje Maya, dat samen met haar vriendje Willy allerlei spannende avonturen beleeft.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="FR"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>23</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Maya ontmoet Dino, een diertje met scharen dat blaadjes in allerlei vormen kan knippen. Maar hij verknipt alle klaprozen in de weide.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992618668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Mike de Ridder </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992622668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Buurman en Buurman </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992638668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Shaun het schaap </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992584668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Peter Pan</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Peter Pan</Title>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Animatieserie waarin Peter Pan het samen met zijn vrienden opneemt tegen kapitein Haak.</Synopsis>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:g">
+            <Name xml:lang="NL">Geweld</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <EpisodeNumber/>
+          <Season>2</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992580668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Street Magic</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992716668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Rudi het racevarken </Title>
+          <Title xml:lang="NL" type="episodeTitle">Rudi is ziek</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Rudi het racevarken</Title>
+          <Title xml:lang="NL" type="translatedtitle">Rennschwein Rudi Russel</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Rudi ist krank</Title>
+          <Synopsis xml:lang="NL" length="long">Duitse jeugdserie over Frits en zijn beste vriend, het varkentje Rudi.
+
+
+</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Duitse jeugdserie over Frits en zijn beste vriend, het varkentje Rudi. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Duitse jeugdserie over Frits en zijn beste vriend, het varkentje Rudi.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0103" type="secondary">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>DE</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="DE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2009</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>13</EpisodeNumber>
+          <Season>3</Season>
+          <OneLineDescription>Duitse jeugdserie over Frits en zijn beste vriend, het varkentje Rudi.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992688668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Millie </Title>
+          <Title xml:lang="NL" type="episodeTitle">Ver van de bewoonde wereld</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Millie </Title>
+          <Title xml:lang="NL" type="translatedtitle">Millie Inbetween</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Out of the woods</Title>
+          <Synopsis xml:lang="NL" length="long">Na de scheiding van haar ouders en de introductie van nieuwe familieleden staat het leven van de dertienjarige Millie op zijn kop...</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Na de scheiding van haar ouders en de introductie van nieuwe familieleden staat het leven van de dertienjarige Millie op zijn kop... </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Na de scheiding van haar ouders en de introductie van nieuwe familieleden staat het leven van de 13-jarige Millie op zijn kop...</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0103" type="secondary">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:9">
+              <mpeg7:Name xml:lang="NL">9</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1157623252517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1157619002517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1157621992517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>25</EpisodeNumber>
+          <Season>1 + 2</Season>
+          <OneLineDescription>Na de scheiding van haar ouders en de introductie van nieuwe familieleden staat het leven van de dertienjarige Millie op zijn kop...</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992564668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Weekoverzicht Spangas </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992742668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Freek </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992524668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Het Klokhuis</Title>
+          <Title xml:lang="NL" type="episodeTitle">Het Kantoor 64</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Het Klokhuis</Title>
+          <Title xml:lang="NL" type="translatedtitle">Het Klokhuis</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Het Kantoor 64</Title>
+          <Synopsis xml:lang="NL" length="long">Jeugdprogramma dat kinderen tussen de negen en twaalf jaar informeert over de wereld om hen heen, in de breedste zin van het woord.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Jeugdprogramma dat kinderen tussen de negen en twaalf jaar informeert over de wereld om hen heen, in de breedste zin van het woord. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <CreditsList/>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2010</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>3204</EpisodeNumber>
+          <Season>24</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992506668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Jeugdjournaal </Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992700668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Dance Academy</Title>
+          <Title xml:lang="NL" type="episodeTitle">Balletkoorts</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Dance Academy</Title>
+          <Title xml:lang="NL" type="translatedtitle">Dance Academy</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Ballet fever</Title>
+          <Synopsis xml:lang="NL" length="long">Tara Webster is een nieuwe student aan de National Dance Academy. Samen met haar medestudenten Katrina Karamakov, Ethan Karamakov, Samuel Lieberman, Abigail Armstrong en Christian Reed leert zij de ins en outs van de balletwereld kennen.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Tara Webster is een nieuwe student aan de National Dance Academy. Samen met haar medestudenten leert zij de ins en outs van de balletwereld kennen. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Tara Webster is een nieuwe student aan de National Dance Academy. Samen met haar medestudenten leert zij de ins en outs van de balletwereld kennen.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0103" type="secondary">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:g">
+            <Name xml:lang="NL">Geweld</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>EN</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="AU"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2010</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>20</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Tara Webster is een nieuwe student aan de National Dance Academy. Met haar medestudenten leert ze de ins en outs van de balletwereld kennen.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992516668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brugklas</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992470668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">All Stars</Title>
+          <Title xml:lang="NL" type="episodeTitle">Blinde homo!</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">All Stars</Title>
+          <Synopsis xml:lang="NL" length="long">Leden van een Nederlands elftal spelen al samen sinds ze kleine jongens waren. Nu ze in de twintig zijn, hebben ze allemaal hun eigen "volwassen" problemen. Met hun 500e wedstrijd in aantocht is, nemen persoonlijke zaken bijna al hun tijd in beslag.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Hoe slechter het voetbal, hoe slechter de scheidsrechters, hoe heftiger het geprotesteer. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"> Hoe slechter het voetbal, hoe slechter de scheidsrechters, hoe heftiger het geprotesteer. De KNVB heeft schoon genoeg van het gescheld op scheidsrechters en besluit op geheel eigen wijze het achtste elftal van Swift Boys te straffen voor hun wangedrag. De scheidsrechter voor de eerstvolgende wedstrijd zorgt voor chaos, misverstanden en onthutsende onthullingen..... </Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Leden van een Nederlands elftal spelen al samen sinds ze kleine jongens waren. Nu ze in de twintig zijn, hebben ze allemaal hun eigen "volwassen" problemen. Met hun 500e wedstrijd in aantocht is, nemen persoonlijke zaken bijna al hun tijd in beslag.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:03">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0312" type="secondary">
+            <Name xml:lang="NL">Drama</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>1999</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>11</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Hoe slechter het voetbal, hoe slechter de scheidsrechters, hoe heftiger het geprotesteer.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992634668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Verliefd op Ibiza</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992662668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Vacant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992654668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Vacant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992476668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Vacant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992484668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Vacant</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1175585314668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Catfish: The TV Show</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Catfish: The TV Show</Title>
+          <Title xml:lang="NL" type="translatedtitle">Catfish: The TV Show HH 2016</Title>
+          <Synopsis xml:lang="NL" length="long">Nev Schulman helpt mensen in de zoektocht naar de ware identiteit achter hun digitale liefde.</Synopsis>
+          <Synopsis xml:lang="NL" length="short"> Nev Schulman helpt mensen in de zoektocht naar de ware identiteit achter hun digitale liefde. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">In de serie catfish helpt Nev Schulman mensen in de zoektocht naar de ware identiteit achter hun digitale liefde.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:06">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Language>EN</Language>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="928831394517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="US"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2012</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>26</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Nev Schulman helpt mensen in de zoektocht naar de ware identiteit achter hun digitale liefde.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1174992500668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Tekst-TV</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="short"/>
+          <Synopsis xml:lang="NL" length="medium"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2014</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <EpisodeNumber>555</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable/>
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="NED3" start="2016-07-04T06:33:00+02:00" end="2016-07-05T02:27:00+02:00">
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992706668"/>
+          <PublishedStartTime>2016-07-04T06:33:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">70998</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992814668"/>
+          <PublishedStartTime>2016-07-04T06:38:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_02739757</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_02739736</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_02739776</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">79301</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992758668"/>
+          <PublishedStartTime>2016-07-04T06:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M57S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00398718</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00390932</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00890667</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">79089</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992810668"/>
+          <PublishedStartTime>2016-07-04T06:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00929990</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00929913</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00980920</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77440</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992554668"/>
+          <PublishedStartTime>2016-07-04T06:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_03068023</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_03068012</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_03068578</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">78598</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992550668"/>
+          <PublishedStartTime>2016-07-04T06:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">VPWON_1258521</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1258496</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1247335</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">72050</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992828668"/>
+          <PublishedStartTime>2016-07-04T07:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H12M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">78062</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992832668"/>
+          <PublishedStartTime>2016-07-04T07:24:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">77274</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992784668"/>
+          <PublishedStartTime>2016-07-04T07:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H12M30S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">79382</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992510668"/>
+          <PublishedStartTime>2016-07-04T07:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M49S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_02191651</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_02191616</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00815720</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77442</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992876668"/>
+          <PublishedStartTime>2016-07-04T08:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M30S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">77443</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992884668"/>
+          <PublishedStartTime>2016-07-04T08:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">77233</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992880668"/>
+          <PublishedStartTime>2016-07-04T08:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">78600</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992540668"/>
+          <PublishedStartTime>2016-07-04T08:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M01S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00249525</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00249506</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00887141</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">78596</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992872668"/>
+          <PublishedStartTime>2016-07-04T08:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">POW_02992459</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">16Jeugd0845</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSjeugd0845</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">74613</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992794668"/>
+          <PublishedStartTime>2016-07-04T09:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H12M16S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00892972</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00892961</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00893020</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">79556</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992778668"/>
+          <PublishedStartTime>2016-07-04T09:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M01S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00688196</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00688184</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00890122</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">78599</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992438668"/>
+          <PublishedStartTime>2016-07-04T10:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M59S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_02934187</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_02934132</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_02934232</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77196</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992764668"/>
+          <PublishedStartTime>2016-07-04T10:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H09M42S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00995163</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00995160</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00995244</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77063</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992772668"/>
+          <PublishedStartTime>2016-07-04T10:24:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H02M55S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_02197048</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_02196985</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_02197154</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">79376</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992788668"/>
+          <PublishedStartTime>2016-07-04T10:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M45S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_01130822</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_01130794</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_01130860</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">79384</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992746668"/>
+          <PublishedStartTime>2016-07-04T10:51:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">79552</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992600668"/>
+          <PublishedStartTime>2016-07-04T11:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M14S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_01046875</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_01046861</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_01047543</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">79086</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992836668"/>
+          <PublishedStartTime>2016-07-04T12:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M49S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00457235</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00457191</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00887220</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77064</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992680668"/>
+          <PublishedStartTime>2016-07-04T12:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M47S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_03108381</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_02946808</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_03108392</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77470</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992626668"/>
+          <PublishedStartTime>2016-07-04T13:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">71625</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992428668"/>
+          <PublishedStartTime>2016-07-04T13:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M49S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00435163</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00435138</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00890602</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77075</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992546668"/>
+          <PublishedStartTime>2016-07-04T13:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M30S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">72051</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992710668"/>
+          <PublishedStartTime>2016-07-04T14:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M19S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00751330</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00751302</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00872680</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77303</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992536668"/>
+          <PublishedStartTime>2016-07-04T14:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">72269</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992588668"/>
+          <PublishedStartTime>2016-07-04T14:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_03068020</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_03068012</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_03068578</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">79354</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992444668"/>
+          <PublishedStartTime>2016-07-04T14:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M49S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_00457112</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00457087</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00890546</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">79364</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992618668"/>
+          <PublishedStartTime>2016-07-04T14:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H12M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">77788</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992622668"/>
+          <PublishedStartTime>2016-07-04T14:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M00S</PublishedDuration>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">76795</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992638668"/>
+          <PublishedStartTime>2016-07-04T15:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M00S</PublishedDuration>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">79717</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992584668"/>
+          <PublishedStartTime>2016-07-04T15:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H22M30S</PublishedDuration>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">POW_01495566</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_01495428</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00890560</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">76796</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992580668"/>
+          <PublishedStartTime>2016-07-04T15:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M30S</PublishedDuration>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">78895</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992716668"/>
+          <PublishedStartTime>2016-07-04T15:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H28M24S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">POW_00360796</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00360783</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00890670</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">78305</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992688668"/>
+          <PublishedStartTime>2016-07-04T16:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H28M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">POW_03010656</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_03010607</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_03011027</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77524</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992564668"/>
+          <PublishedStartTime>2016-07-04T17:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M30S</PublishedDuration>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">78329</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992742668"/>
+          <PublishedStartTime>2016-07-04T18:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">78323</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992524668"/>
+          <PublishedStartTime>2016-07-04T18:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1224868</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1224806</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1256937</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">71682</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992506668"/>
+          <PublishedStartTime>2016-07-04T18:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">71639</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992700668"/>
+          <PublishedStartTime>2016-07-04T18:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H23M59S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">POW_00727064</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00727030</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00819740</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">77718</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992516668"/>
+          <PublishedStartTime>2016-07-04T19:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">77726</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992470668"/>
+          <PublishedStartTime>2016-07-04T19:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H24M16S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VARA"/>
+          </BroadcasterList>
+          <Net code="Nederland 3"/>
+          <OtherIdentifier type="ProductID">VARA_101379213</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VARA_101379211</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VARA_101379210</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">70541</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992634668"/>
+          <PublishedStartTime>2016-07-04T20:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H49M13S</PublishedDuration>
+          <Net code="Nederland 3"/>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992662668"/>
+          <PublishedStartTime>2016-07-04T22:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <Net code="Nederland 3"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">71006</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992654668"/>
+          <PublishedStartTime>2016-07-04T22:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M00S</PublishedDuration>
+          <Net code="Nederland 3"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">70550</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992476668"/>
+          <PublishedStartTime>2016-07-04T23:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M30S</PublishedDuration>
+          <Net code="Nederland 3"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">71783</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992484668"/>
+          <PublishedStartTime>2016-07-05T00:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M30S</PublishedDuration>
+          <Net code="Nederland 3"/>
+          <OtherIdentifier type="ProductID"/>
+          <OtherIdentifier type="EPGserielinkID">71008</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1175585314668"/>
+          <PublishedStartTime>2016-07-05T01:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H40M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BNN"/>
+          </BroadcasterList>
+          <Net code="Nederland 3"/>
+          <OtherIdentifier type="ProductID">BNN_101379438</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BNN_101379436</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BNN_101379435</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">81209</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1174992500668"/>
+          <PublishedStartTime>2016-07-05T02:27:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <Net code="Nederland 3"/>
+          <OtherIdentifier type="ProductID">POW_00808911</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00808356</OtherIdentifier>
+          <OtherIdentifier type="EPGserielinkID">51390</OtherIdentifier>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="798734551517">
+        <mpeg7:GivenName xml:lang="NL" initial="">David</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Scanlon </mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1104603900517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Gioia</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Smid</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1157623252517">
+        <mpeg7:GivenName xml:lang="NL" initial="">James</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Bachman</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1157619002517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Millie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Innes</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1157621992517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Tallulah</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Greive</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="928831394517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Nev</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Schulman</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>

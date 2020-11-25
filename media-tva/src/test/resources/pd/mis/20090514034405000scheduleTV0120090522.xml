@@ -1,0 +1,1846 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" publisher="Broadcasting DataServices Limited" publicationTime="2009-05-14T04:02:45+00:00" version="217" xsi:schemaLocation="urn:bds:metadata:2006 http://www.broadcastingdata.com/dataimport/tva/new/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://bds.tv/16087583">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Knevel & Van den Brink]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT01H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087581">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosjournaal.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT04H40M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087653">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Tekst tv]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[uit Teletekst.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[uit Teletekst.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Informatie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087651">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[MAX Geheugentrainer]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Train uw brein. Naarmate iemand ouder wordt, wil het geheugen nog wel eens iets minder scherp worden. Geheugentrainer geeft u de kans om het geheugen te trainen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Train uw brein. Naarmate iemand ouder wordt, wil het geheugen nog wel eens iets minder scherp worden. Geheugentrainer geeft u de kans om het geheugen te trainen. Met eenvoudige oefeningen en opdrachten leert u binnen de kortste keren weer meer te onthouden dan u was gewend.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087649">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Nederland in Beweging!]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met niet aflatend enthousiasme stimuleren Olga Commandeur en Duco Bauwens elke Nederlander om mee te bewegen!]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met niet aflatend enthousiasme stimuleren Olga Commandeur en Duco Bauwens elke Nederlander om mee te bewegen!]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="107625"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="598783"/>
+            </CreditsItem>
+          </CreditsList>
+          <Duration>PT00H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087647">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT01H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087645">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H27M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194588">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Europese Verkiezingen 2009: Liberaal Democratische Partij]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H33M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087643">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087641">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Nederland in Beweging!]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met niet aflatend enthousiasme stimuleren Olga Commandeur en Duco Bauwens elke Nederlander om mee te bewegen!]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met niet aflatend enthousiasme stimuleren Olga Commandeur en Duco Bauwens elke Nederlander om mee te bewegen!]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="107625"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="598783"/>
+            </CreditsItem>
+          </CreditsList>
+          <Duration>PT00H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087639">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H10M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087637">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[MAX Geheugentrainer]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Train uw brein. Naarmate iemand ouder wordt, wil het geheugen nog wel eens iets minder scherp worden. Geheugentrainer geeft u de kans om het geheugen te trainen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Train uw brein. Naarmate iemand ouder wordt, wil het geheugen nog wel eens iets minder scherp worden. Geheugentrainer geeft u de kans om het geheugen te trainen. Met eenvoudige oefeningen en opdrachten leert u binnen de kortste keren weer meer te onthouden dan u was gewend.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H20M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087635">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT01H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087633">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194586">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Jeugdjournaal met gebarentolk]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[jeugdjournaal@nos.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[226]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.jeugdjournaal.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H10M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194584">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H20M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087631">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT01H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087629">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H10M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087627">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Sportjournaal]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Aandacht voor het actuele sportnieuws.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Aandacht voor het actuele sportnieuws.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[224]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.studiosport.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H10M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087625">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal en NOS Sportjournaal]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H40M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087623">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT01H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087621">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Gevolgd door herhalingen.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosnieuws.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H35M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087619">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[De klas van 2009]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[over acht middelbare scholieren en hun families tijdens de eindexamens van 2009.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[over acht middelbare scholieren en hun families tijdens de eindexamens van 2009.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Realityserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H25M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087617">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Knevel & Van den Brink]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[waarin Andries Knevel en Tijs van den Brink gasten uit de politiek, showbizz, cultuur en sport ontvangen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[waarin Andries Knevel en Tijs van den Brink gasten uit de politiek, showbizz, cultuur en sport ontvangen. Opinieleiders én gangmakers geven een duidelijke mening over de discussies van vandaag. Samen voeren zij hét gesprek van de dag. Van Wilders tot Gordon, van wanhoop tot euforie, van alledaags tot absurd.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Talkshow]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="93103"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="108257"/>
+            </CreditsItem>
+          </CreditsList>
+          <Duration>PT01H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087615" strand="true">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[KRO Kindertijd]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met om:.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met om:.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Language>NL</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.kro.nl/jeugd/programmas/kindertijd.asp]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H01M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194582">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[De post]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT00H03M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194580">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Dragon]]></Title>
+          <Title xml:lang="NL" type="EpisodeTitle"><![CDATA[Draakjesdag]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT00H11M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194578">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Tulpenbollen]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194576">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Valdemar]]></Title>
+          <Title xml:lang="NL" type="EpisodeTitle"><![CDATA[Hander/Fotter]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194574">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Sesamstraat]]></Title>
+          <Title xml:lang="NL" type="EpisodeTitle"><![CDATA[Zingen]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Purk wil de bril van meneer Aart pas teruggeven als hij een liedje zingt. Grover, Harrie en Koekie zijn pluizig en blauw en zingen erover.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Purk wil de bril van meneer Aart pas teruggeven als hij een liedje zingt. Grover, Harrie en Koekie zijn pluizig en blauw en zingen erover. Bert en Ernie zingen het liefst op een andere manier, maar ze zingen wel graag samen. Het zusje van Prins Vads kan niet slapen, daarom zingt hij een liedje voor haar.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Language>NL</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[226]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nps.nl/sesamstraat]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16267739">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Europese Verkiezingen 2009: Partij voor de Dieren]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H04M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087607" strand="true">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[EénVandaag]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[met een blik op de actualiteiten van vandaag. Met om:.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[met een blik op de actualiteiten van vandaag. Met om:.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsblok]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[220]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.eenvandaag.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H01M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087605">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosjournaal.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087603">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[EénVandaag]]></Title>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[220]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.eenvandaag.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H25M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087601">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Sportjournaal]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Aandacht voor het actuele sportnieuws.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Aandacht voor het actuele sportnieuws.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[224]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.studiosport.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H11M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194572">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Europese Verkiezingen 2009: GroenLinks]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H09M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087599">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Lingo]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[waarbij de kandidaten zes-, zeven- en tienletterwoorden moeten raden. Tevens bekendmaking van de twintig winnende getallen van de Lucky Day trekking.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[waarbij de kandidaten zes-, zeven- en tienletterwoorden moeten raden. Tevens bekendmaking van de twintig winnende getallen van de Lucky Day trekking.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Woord- en taalspel]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="89342"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.tros.nl/lingo]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H25M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087597">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[De dorpsdokter]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[We volgen vader en dochter Kruithof. Zij oefenen het huisartsenvak uit in hun huisartsenpraktijk in Noordeloos. De band die familie Kruithof heeft met de bevolking in Noordeloos, is lang en hecht.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[We volgen vader en dochter Kruithof. Zij oefenen samen het huisartsenvak uit in hun huisartsenpraktijk in Noordeloos. De apotheek aan huis, de assistentes, de diëtist en de huisarts in opleiding komen uiteraard ook in de serie voor. De band die familie Kruithof heeft met de bevolking in Noordeloos, is lang en hecht. Zo haalt Jan Kruithof inmiddels de derde generatie baby's en heeft menig patiënt die nu Marleen Kruithof als arts heeft, haar nog zien opgroeien in hun eigen dorp.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H35M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087595">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosjournaal.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087593">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[TROS Muziekfeest: Sterrencruise]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Ruim vijfhonderd enthousiaste muziekliefhebbers reizen begin 2009 mee op het supermoderne Amerikaanse cruiseschip Majesty of the Seas.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Ruim vijfhonderd enthousiaste muziekliefhebbers reizen begin 2009 mee op het supermoderne Amerikaanse cruiseschip Majesty of the Seas. Zij gaan op een feestelijke en muzikale bootreis die begint in Miami en verder reist naar de Bahamas, met als aanlegplaatsen de hagelwitte stranden van Cococay en Nassau en het zuidelijkste punt van Noord-Amerika: Key West. Aan boord een keur aan Nederlandse artiesten, welke garant staan voor een sfeervolle reeks optredens. Frans Bauer, Belle Perez, René Froger, Lee Towers, Roxanne & Dré Hazes en Grad Damen zorgen voor een ware Hollandse happening. Daarnaast zien we de artiesten tijdens een aantal gezellige excursies op deze zonovergoten eilanden tijdens de droomreis.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Muziek</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT01H00M</Duration>
+          <RelationshipToSeries value="FirstInSeason"/>
+          <EpisodeNumber>1</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087591">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[André Rieu in Australië]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[waarin we violist en orkestleider André Rieu volgen samen met zijn orkest en crew bij zijn eerste Australische tournee.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[waarin we violist en orkestleider André Rieu volgen samen met zijn orkest en crew bij zijn eerste Australische tournee. Met meer dan twee miljoen verkochte cd's en dvd's, is Rieu inmiddels ook Down Under een megaster. Voor zijn allereerste Australische concerten pakt Rieu, zoals we gewend zijn, weer groots uit met zijn Weens Schönbrunn kasteel, de ijsdansers, de gouden koets en het Weens ballet. De hele tour bestaat uit een crew van meer dan vijfhonderd mensen. Met meer dan 264.000 bezoekers gedeeld over elf concerten, is de tour een groot succes. De aftrap van de concerten vindt plaats in Melbourne, waar hij een groot stadiumconcert geeft voor meer dan 38.000 uitzinnige fans. We reizen met André heel Australië en zelfs Nieuw-Zeeland door. De populariteit van de koning van de wals blijkt wel uit zijn gastrol in de soap Neighbours en zijn vele mediaoptredens in onder meer de finale van de Australische versie van Dancing with the Stars.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Roadsoap]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Muziek</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H30M</Duration>
+          <RelationshipToSeries value="FirstInSeason"/>
+          <EpisodeNumber>1</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087589">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[TROS TV Show]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Op bezoek bij uitzonderlijke binnen- en buitenlandse gasten.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Op bezoek bij uitzonderlijke binnen- en buitenlandse gasten.]]></Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="73451"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.tros.nl/tvshow]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT01H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087587">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Knevel & Van den Brink]]></Title>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[waarin Andries Knevel en Tijs van den Brink gasten uit de politiek, showbizz, cultuur en sport ontvangen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[waarin Andries Knevel en Tijs van den Brink gasten uit de politiek, showbizz, cultuur en sport ontvangen. Opinieleiders én gangmakers geven een duidelijke mening over de discussies van vandaag. Samen voeren zij hét gesprek van de dag. Van Wilders tot Gordon, van wanhoop tot euforie, van alledaags tot absurd.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Talkshow]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="93103"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="108257"/>
+            </CreditsItem>
+          </CreditsList>
+          <Duration>PT00H55M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16087585">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[Teletekst pagina]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[225]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[algemeen]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri><![CDATA[www.nosjournaal.nl]]></mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT00H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://bds.tv/16194570">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Europese Verkiezingen 2009: Europese Klokkenluiders Partij]]></Title>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable>
+      <GroupInformation groupId="crid://bds.tv/16087615" strand="true">
+        <GroupType value="series" xsi:type="ProgramGroupTypeType"/>
+        <BasicDescription>
+          <Title><![CDATA[Met om:]]></Title>
+        </BasicDescription>
+      </GroupInformation>
+      <GroupInformation groupId="crid://bds.tv/16087607" strand="true">
+        <GroupType value="series" xsi:type="ProgramGroupTypeType"/>
+        <BasicDescription>
+          <Title><![CDATA[met een blik op de actualiteiten van vandaag. Met om:]]></Title>
+        </BasicDescription>
+      </GroupInformation>
+    </GroupInformationTable>
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="TV01" start="2009-05-22T06:00:00+02:00" end="2009-05-23T06:00:00+02:00" releaseVersion="0">
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087653"/>
+          <ProgramURL>dvb://1.1.TV01;115204863@2009-05-22T06:00:00+02:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:40871</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T06:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087651"/>
+          <ProgramURL>dvb://1.1.TV01;115204864@2009-05-22T06:30:00+02:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:40872</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T06:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087649"/>
+          <ProgramURL>dvb://1.1.TV01;115204865@2009-05-22T06:45:00+02:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:40873</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T06:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087647"/>
+          <ProgramURL>dvb://1.1.TV01;115204866@2009-05-22T07:00:00+02:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:40874</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T07:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087645"/>
+          <ProgramURL>dvb://1.1.TV01;115204867@2009-05-22T08:00:00+02:00--PT00H27M00S</ProgramURL>
+          <InstanceMetadataId>imi:40875</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T08:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H27M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194588"/>
+          <ProgramURL>dvb://1.1.TV01;115855367@2009-05-22T08:27:00+02:00--PT00H33M00S</ProgramURL>
+          <InstanceMetadataId>imi:41156</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T08:27:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H33M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="PP"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087643"/>
+          <ProgramURL>dvb://1.1.TV01;115204868@2009-05-22T09:00:00+02:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:40876</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T09:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087641"/>
+          <ProgramURL>dvb://1.1.TV01;115204869@2009-05-22T09:15:00+02:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:40877</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T09:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087639"/>
+          <ProgramURL>dvb://1.1.TV01;115204870@2009-05-22T09:30:00+02:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:40878</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T09:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087637"/>
+          <ProgramURL>dvb://1.1.TV01;115204871@2009-05-22T09:40:00+02:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:40879</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T09:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087635"/>
+          <ProgramURL>dvb://1.1.TV01;115204872@2009-05-22T10:00:00+02:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:40880</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T10:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087633"/>
+          <ProgramURL>dvb://1.1.TV01;115204873@2009-05-22T11:00:00+02:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:40881</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T11:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194586"/>
+          <ProgramURL>dvb://1.1.TV01;115855368@2009-05-22T11:30:00+02:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:41157</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T11:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194584"/>
+          <ProgramURL>dvb://1.1.TV01;115855369@2009-05-22T11:40:00+02:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:41158</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T11:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087631"/>
+          <ProgramURL>dvb://1.1.TV01;115204874@2009-05-22T12:00:00+02:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:40882</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T12:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087629"/>
+          <ProgramURL>dvb://1.1.TV01;115204875@2009-05-22T13:00:00+02:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:40883</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T13:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087627"/>
+          <ProgramURL>dvb://1.1.TV01;115204876@2009-05-22T13:10:00+02:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:40884</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T13:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087625"/>
+          <ProgramURL>dvb://1.1.TV01;115204877@2009-05-22T13:20:00+02:00--PT00H40M00S</ProgramURL>
+          <InstanceMetadataId>imi:40885</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T13:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H40M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087623"/>
+          <ProgramURL>dvb://1.1.TV01;115204878@2009-05-22T14:00:00+02:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:40886</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T14:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087621"/>
+          <ProgramURL>dvb://1.1.TV01;115204879@2009-05-22T15:00:00+02:00--PT00H35M00S</ProgramURL>
+          <InstanceMetadataId>imi:40887</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T15:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087619"/>
+          <ProgramURL>dvb://1.1.TV01;115204880@2009-05-22T15:35:00+02:00--PT00H25M00S</ProgramURL>
+          <InstanceMetadataId>imi:40888</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T15:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NCRV"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087617"/>
+          <ProgramURL>dvb://1.1.TV01;115204881@2009-05-22T16:00:00+02:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:40889</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T16:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087615" strand="true"/>
+          <ProgramURL>dvb://1.1.TV01;115204882@2009-05-22T17:00:00+02:00--PT00H01M00S</ProgramURL>
+          <InstanceMetadataId>imi:40890</InstanceMetadataId>
+          <PublishedStartTime>2009-05-22T17:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H01M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194582"/>
+          <ProgramURL>dvb://1.1.TV01;115855370@2009-05-22T17:01:00+02:00--PT00H03M00S</ProgramURL>
+          <InstanceMetadataId>imi:41159</InstanceMetadataId>
+          <InstanceDescription>
+            <MemberOf crid="crid://bds.tv/16087615" xsi:type="MemberOfType"/>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T17:01:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194580"/>
+          <ProgramURL>dvb://1.1.TV01;115855371@2009-05-22T17:04:00+02:00--PT00H11M00S</ProgramURL>
+          <InstanceMetadataId>imi:41160</InstanceMetadataId>
+          <InstanceDescription>
+            <MemberOf crid="crid://bds.tv/16087615" xsi:type="MemberOfType"/>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T17:04:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194578"/>
+          <ProgramURL>dvb://1.1.TV01;115855372@2009-05-22T17:15:00+02:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:41161</InstanceMetadataId>
+          <InstanceDescription>
+            <MemberOf crid="crid://bds.tv/16087615" xsi:type="MemberOfType"/>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T17:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194576"/>
+          <ProgramURL>dvb://1.1.TV01;115855373@2009-05-22T17:20:00+02:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:41162</InstanceMetadataId>
+          <InstanceDescription>
+            <MemberOf crid="crid://bds.tv/16087615" xsi:type="MemberOfType"/>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T17:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194574"/>
+          <ProgramURL>dvb://1.1.TV01;115855374@2009-05-22T17:25:00+02:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:41163</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T17:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NPS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16267739"/>
+          <ProgramURL>dvb://1.1.TV01;116312673@2009-05-22T17:55:00+02:00--PT00H04M00S</ProgramURL>
+          <InstanceMetadataId>imi:41172</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T17:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="PP"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087607" strand="true"/>
+          <ProgramURL>dvb://1.1.TV01;115204886@2009-05-22T17:59:00+02:00--PT00H01M00S</ProgramURL>
+          <InstanceMetadataId>imi:40894</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T17:59:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H01M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVRO"/>
+            <Broadcaster code="NOS"/>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087605"/>
+          <ProgramURL>dvb://1.1.TV01;115204887@2009-05-22T18:00:00+02:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:40895</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+            <MemberOf crid="crid://bds.tv/16087607" xsi:type="MemberOfType"/>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T18:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087603"/>
+          <ProgramURL>dvb://1.1.TV01;115204888@2009-05-22T18:15:00+02:00--PT00H25M00S</ProgramURL>
+          <InstanceMetadataId>imi:40896</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+            <MemberOf crid="crid://bds.tv/16087607" xsi:type="MemberOfType"/>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T18:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVRO"/>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087601"/>
+          <ProgramURL>dvb://1.1.TV01;115204889@2009-05-22T18:40:00+02:00--PT00H11M00S</ProgramURL>
+          <InstanceMetadataId>imi:40897</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T18:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194572"/>
+          <ProgramURL>dvb://1.1.TV01;115855375@2009-05-22T18:51:00+02:00--PT00H09M00S</ProgramURL>
+          <InstanceMetadataId>imi:41164</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T18:51:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H09M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="PP"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087599"/>
+          <ProgramURL>dvb://1.1.TV01;115204890@2009-05-22T19:00:00+02:00--PT00H25M00S</ProgramURL>
+          <InstanceMetadataId>imi:40898</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T19:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087597"/>
+          <ProgramURL>dvb://1.1.TV01;115204891@2009-05-22T19:25:00+02:00--PT00H35M00S</ProgramURL>
+          <InstanceMetadataId>imi:40899</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T19:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText><![CDATA[6-2-2009]]></RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087595"/>
+          <ProgramURL>dvb://1.1.TV01;115204892@2009-05-22T20:00:00+02:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:40900</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T20:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087593"/>
+          <ProgramURL>dvb://1.1.TV01;115204893@2009-05-22T20:30:00+02:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:40901</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T20:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087591"/>
+          <ProgramURL>dvb://1.1.TV01;115204894@2009-05-22T21:30:00+02:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:40902</InstanceMetadataId>
+          <PublishedStartTime>2009-05-22T21:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087589"/>
+          <ProgramURL>dvb://1.1.TV01;115204895@2009-05-22T22:00:00+02:00--PT01H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:40903</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T22:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="TROS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087587"/>
+          <ProgramURL>dvb://1.1.TV01;115204896@2009-05-22T23:05:00+02:00--PT00H55M00S</ProgramURL>
+          <InstanceMetadataId>imi:40904</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-22T23:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H55M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087585"/>
+          <ProgramURL>dvb://1.1.TV01;115204897@2009-05-23T00:00:00+02:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:40905</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-23T00:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16194570"/>
+          <ProgramURL>dvb://1.1.TV01;115855376@2009-05-23T00:15:00+02:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:41165</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-23T00:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="PP"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087583"/>
+          <ProgramURL>dvb://1.1.TV01;115204898@2009-05-23T00:20:00+02:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:40906</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-23T00:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://bds.tv/16087581"/>
+          <ProgramURL>dvb://1.1.TV01;115204899@2009-05-23T01:20:00+02:00--PT04H40M00S</ProgramURL>
+          <InstanceMetadataId>imi:40907</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original"><![CDATA[16:9]]></AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2009-05-23T01:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT04H40M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="73451">
+        <mpeg7:GivenName xml:lang="NL" initial="">Ivo</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Niehe</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="89342">
+        <mpeg7:GivenName xml:lang="NL" initial="">Lucille</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Werner</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="93103">
+        <mpeg7:GivenName xml:lang="NL" initial="">Andries</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Knevel</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="107625">
+        <mpeg7:GivenName xml:lang="NL" initial="">Olga</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Commandeur</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="108257">
+        <mpeg7:GivenName xml:lang="NL" initial="">Tijs</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van den Brink</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="598783">
+        <mpeg7:GivenName xml:lang="NL" initial="">Duco</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Bauwens</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>

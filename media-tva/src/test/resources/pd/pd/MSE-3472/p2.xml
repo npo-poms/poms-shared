@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:date="http://exslt.org/dates-and-times" publisher="NPO Programma Gegevens" publicationTime="2016-09-23T16:21:03.520+02:00" version="300" xsi:schemaLocation="urn:bds:metadata:2004 XSDSchema/tva_v13_am1_bds1r2.xsd">
+    <ProgramDescription>
+        <ProgramInformationTable>
+            <ProgramInformation programId="crid://npo/programmagegevens/1234567890">
+                <BasicDescription>
+                    <Title xml:lang="NL" type="main">TEST</Title>
+                </BasicDescription>
+            </ProgramInformation>
+        </ProgramInformationTable>
+        <ProgramLocationTable>
+            <Schedule serviceIDRef="TV01" start="2016-10-02T06:00:00+02:00" end="2016-10-03T05:59:59+02:00">
+                <ScheduleEvent>
+                    <Program crid="crid://npo/programmagegevens/1234567890"/>
+                    <PublishedStartTime>2016-10-02T07:40:00+02:00</PublishedStartTime>
+                    <PublishedDuration>PT01H00M00S</PublishedDuration>
+                    <BroadcasterList>
+                        <Broadcaster code="NPO"/>
+                    </BroadcasterList>
+                    <!--<Net code="NED1"/>-->
+                    <OtherIdentifier type="ProductID">VPWON_12345</OtherIdentifier>
+                </ScheduleEvent>
+            </Schedule>
+        </ProgramLocationTable>
+    </ProgramDescription>
+</TVAMain>
