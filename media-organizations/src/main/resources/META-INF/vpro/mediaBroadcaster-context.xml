@@ -14,7 +14,7 @@
     <constructor-arg value="${broadcasters.repository.needsOtherIDs}" />
   </bean>
 
-  <bean id="broadcasterService" class="nl.vpro.media.broadcaster.BroadcasterServiceImpl" autowire="constructor" />
+  <bean id="broadcasterService" class="nl.vpro.media.broadcaster.BroadcasterServiceImpl" />
 
   <bean class="nl.vpro.media.broadcaster.BroadcasterServiceLocator" />
 
