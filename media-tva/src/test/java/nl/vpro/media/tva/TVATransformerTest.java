@@ -37,7 +37,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.media.tva.saxon.extension.*;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static nl.vpro.media.tva.Constants.CHANNELMAPPING;
+import static nl.vpro.media.tva.Constants.XSL_PARAM_CHANNELMAPPING;
 import static nl.vpro.media.tva.Constants.XSL_PARAM_NEWGENRES;
 import static org.apache.commons.io.output.NullOutputStream.NULL_OUTPUT_STREAM;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -419,7 +419,7 @@ public class TVATransformerTest {
     {
         SaxonConfiguration configuration = new SaxonConfiguration();
         configuration.setExtensions(Arrays.asList(
-            new FindBroadcasterFunction() {
+            new FindBroadcasterFunction(null) {
                 @Override
                 public ExtensionFunctionCall makeCallExpression() {
                     return new ExtensionFunctionCall() {
@@ -467,7 +467,7 @@ public class TVATransformerTest {
         transformer.setParameter(XSL_PARAM_NEWGENRES, "true");
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         transformer.setParameter(
-            CHANNELMAPPING,
+            XSL_PARAM_CHANNELMAPPING,
             Constants.createChannelMapping(Constants.ChannelIdType.PD));
         return transformer;
     }
