@@ -27,7 +27,7 @@ public class BroadcasterServiceImpl implements BroadcasterService {
 
 
     private Map<String, Broadcaster> broadcasterMap = new HashMap<>();
-    private URLResource<Map<String, String>> displayNameResource;
+    private final URLResource<Map<String, String>> displayNameResource;
     private URLResource<Map<String, String>> misResource;
     private URLResource<Map<String, String>> whatsonResource;
 
@@ -35,8 +35,6 @@ public class BroadcasterServiceImpl implements BroadcasterService {
     public BroadcasterServiceImpl(String configFile) {
         this(configFile, true, true);
     }
-
-
 
     @Inject
     @lombok.Builder
