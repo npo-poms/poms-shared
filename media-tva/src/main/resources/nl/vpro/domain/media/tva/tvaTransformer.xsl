@@ -19,6 +19,7 @@
   <xsl:param name="channelMapping"/>
   <xsl:param name="newGenres"/>
   <xsl:param name="owner" select="'MIS'" />
+  <xsl:param name="personUriPrefix" select="''" />
 
   <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'"/>
   <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
@@ -619,6 +620,11 @@
                 </xsl:with-param>
               </xsl:call-template>
             </xsl:attribute>
+            <xsl:if test="$personUriPrefix != ''">
+              <xsl:attribute name="gtaaUri">
+                <xsl:value-of select="$personUriPrefix" /><xsl:value-of select="current()/@ref" />
+              </xsl:attribute>
+            </xsl:if>
             <xsl:element name="givenName">
               <xsl:value-of
                   select="/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:GivenName"
@@ -629,6 +635,7 @@
                   select="/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:FamilyName"
                   />
             </xsl:element>
+
           </xsl:element>
         </xsl:for-each>
       </xsl:element>

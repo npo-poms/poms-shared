@@ -12,6 +12,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import javax.validation.*;
@@ -37,8 +38,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.media.tva.saxon.extension.*;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static nl.vpro.media.tva.Constants.XSL_PARAM_CHANNELMAPPING;
-import static nl.vpro.media.tva.Constants.XSL_PARAM_NEWGENRES;
+import static nl.vpro.media.tva.Constants.*;
 import static org.apache.commons.io.output.NullOutputStream.NULL_OUTPUT_STREAM;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
@@ -400,7 +400,9 @@ public class TVATransformerTest {
     public void bindinc() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFoundIsFatal(false); // TODO API-460
 
-        String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml");
+        String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) ->
+            transformer.setParameter(XSL_PERSON_URI_PREFIX, "crid://bindinc/person/")
+        );
 
         log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -410,6 +412,7 @@ public class TVATransformerTest {
         Program p = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/191255709")).findFirst().orElse(null);
         log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
         assertThat(p.getMainTitle()).isEqualTo("#heuldoch - Therapie wie noch nie");
+        assertThat(p.getCredits().get(0).getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
 
     }
 
@@ -449,18 +452,22 @@ public class TVATransformerTest {
         FACTORY.setConfiguration(configuration);
     }
 
-    private String transform(String resource) throws TransformerException, IOException, SAXException, ParserConfigurationException {
+    private String transform(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        return transform(resource, (t) -> {});
+    }
+
+    private String transform(String resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Result result = new StreamResult(out);
         InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
         if (input == null) {
             throw new IllegalArgumentException("Could not find " + resource);
         }
-        getTransformer().transform(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(resource)), result);
+        getTransformer(configure).transform(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(resource)), result);
         return new String(out.toByteArray(), StandardCharsets.UTF_8);
     }
 
-    private Transformer getTransformer() throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
+    private Transformer getTransformer(Consumer<Transformer> configure) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
         StreamSource stylesource = new StreamSource(getClass().getResourceAsStream("/nl/vpro/domain/media/tva/tvaTransformer.xsl"));
         Transformer transformer = FACTORY.newTransformer(stylesource);
 
@@ -469,6 +476,7 @@ public class TVATransformerTest {
         transformer.setParameter(
             XSL_PARAM_CHANNELMAPPING,
             Constants.createChannelMapping(Constants.ChannelIdType.PD));
+        configure.accept(transformer);
         return transformer;
     }
 
