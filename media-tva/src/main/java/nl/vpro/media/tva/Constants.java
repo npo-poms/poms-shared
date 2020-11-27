@@ -18,7 +18,9 @@ public class Constants {
 
     public static final String XSL_PARAM_NEWGENRES = "newGenres";
 
-    public final static String CHANNELMAPPING = "channelMapping";
+    public final static String XSL_PARAM_CHANNELMAPPING = "channelMapping";
+
+    public final static String XSL_PARAM_OWNER = "owner";
 
 
     public enum ChannelIdType {
