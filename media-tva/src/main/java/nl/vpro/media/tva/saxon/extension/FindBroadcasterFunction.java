@@ -26,8 +26,12 @@ import nl.vpro.domain.user.BroadcasterService;
 @Slf4j
 public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
 
+    private final BroadcasterService broadcasterService;
+
     @Inject
-    BroadcasterService broadcasterService;
+    public FindBroadcasterFunction(BroadcasterService broadcasterService) {
+        this.broadcasterService = broadcasterService;
+    }
 
     @Override
     public StructuredQName getFunctionQName() {
