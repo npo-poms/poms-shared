@@ -53,10 +53,10 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
     default Optional<Broadcaster> findForIds(String value) {
         try {
             return Optional.of(findForWhatsOnId(value));
-        } catch (NotFoundException e) {
+        } catch (NotFoundException | UnsupportedOperationException e) {
             try {
                 return Optional.of(findForMisId(value));
-            } catch (NotFoundException e2) {
+            } catch (NotFoundException  | UnsupportedOperationException e2) {
                 try {
                     return Optional.of(findForNeboId(value));
                 } catch (Exception e1) {
