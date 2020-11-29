@@ -1,8 +1,9 @@
 package nl.vpro.domain.media;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Michiel Meeuwissen
@@ -10,9 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class TvaCountryTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void valueOf() {
-        TvaCountry.valueOf("BLA");
+        assertThatThrownBy(() ->
+            TvaCountry.valueOf("BLA")
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

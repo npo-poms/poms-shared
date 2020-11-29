@@ -3,7 +3,7 @@ package nl.vpro.domain.api.validation;
 import javax.validation.ConstraintValidatorContext;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.StandardMatchType;
 import nl.vpro.domain.api.TextMatcher;

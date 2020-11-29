@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.npoplayer.NPOPlayerApiRequest;
 import nl.vpro.domain.npoplayer.NPOPlayerApiResponse;

@@ -14,7 +14,7 @@ import javax.validation.ConstraintViolation;
 import javax.xml.bind.JAXB;
 
 import org.assertj.core.api.Assertions;
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
@@ -28,14 +28,15 @@ import static nl.vpro.domain.ValidationTestHelper.validate;
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static nl.vpro.domain.media.support.OwnerType.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SuppressWarnings("deprecation")
 @Slf4j
 public class MediaObjectTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         //Locale.setDefault(Locales.DUTCH);
         Locale.setDefault(Locale.US);
@@ -444,26 +445,31 @@ public class MediaObjectTest {
         assertThat(ancestors).hasSize(3);
     }
 
-    @Test(expected = CircularReferenceException.class)
+    @Test
     public void testCreateMemberOfForSelf() throws CircularReferenceException {
-        Group g1 = new Group();
+        assertThatThrownBy(() -> {
 
-        g1.createMemberOf(g1, 1, null);
+            Group g1 = new Group();
+
+            g1.createMemberOf(g1, 1, null);
+        }).isInstanceOf(CircularReferenceException.class);
     }
 
-    @Test(expected = CircularReferenceException.class)
+    @Test
     public void testCreateMemberOfForCircularity() throws CircularReferenceException {
-        Group g1 = new Group(GroupType.PLAYLIST);
-        Group g2 = new Group(GroupType.PLAYLIST);
-        Group g3 = new Group(GroupType.PLAYLIST);
-        Group g4 = new Group(GroupType.PLAYLIST);
+        assertThatThrownBy(() -> {
+            Group g1 = new Group(GroupType.PLAYLIST);
+            Group g2 = new Group(GroupType.PLAYLIST);
+            Group g3 = new Group(GroupType.PLAYLIST);
+            Group g4 = new Group(GroupType.PLAYLIST);
 
-        g1.createMemberOf(g2, 1, null);
-        g2.createMemberOf(g3, 1, null);
-        g3.createMemberOf(g4, 1, null);
-        g4.createMemberOf(g1, 1, null);
+            g1.createMemberOf(g2, 1, null);
+            g2.createMemberOf(g3, 1, null);
+            g3.createMemberOf(g4, 1, null);
+            g4.createMemberOf(g1, 1, null);
 
-        //assertThat(g1.getAncestors()).hasSize(4);
+            //assertThat(g1.getAncestors()).hasSize(4);
+        }).isInstanceOf(CircularReferenceException.class);
     }
 
     protected Program getTestProgram() throws CircularReferenceException {
@@ -624,20 +630,22 @@ public class MediaObjectTest {
         Assertions.assertThat(p.getLocations().first().getBitrate()).isEqualTo(110000);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testAddLocationOnDuplicatesCollisions() {
-        Location l1 = new Location("TEST_URL", OwnerType.NEBO);
-        l1.setAvAttributes(new AVAttributes(100000, AVFileFormat.WM));
+        assertThatThrownBy(() -> {
+            Location l1 = new Location("TEST_URL", OwnerType.NEBO);
+            l1.setAvAttributes(new AVAttributes(100000, AVFileFormat.WM));
 
-        Location l2 = new Location("TEST_URL", OwnerType.MIS);
-        l2.setAvAttributes(new AVAttributes(110000, AVFileFormat.H264));
+            Location l2 = new Location("TEST_URL", OwnerType.MIS);
+            l2.setAvAttributes(new AVAttributes(110000, AVFileFormat.H264));
 
-        Program p = MediaBuilder.program().build();
-        p.addLocation(l1);
-        p.addLocation(l2);
+            Program p = MediaBuilder.program().build();
+            p.addLocation(l1);
+            p.addLocation(l2);
 
-        Assertions.assertThat(p.getLocations()).hasSize(1);
-        Assertions.assertThat(p.getLocations().first().getBitrate()).isEqualTo(110000);
+            Assertions.assertThat(p.getLocations()).hasSize(1);
+            Assertions.assertThat(p.getLocations().first().getBitrate()).isEqualTo(110000);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -877,12 +885,14 @@ public class MediaObjectTest {
         assertThat(program.hasChanges()).isFalse();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testSetWorkflowWhenMerged() {
-        final Program merged = new Program();
+        assertThatThrownBy(() -> {
+            final Program merged = new Program();
 
-        merged.setMergedTo(new Group());
-        merged.setWorkflow(Workflow.PUBLISHED);
+            merged.setMergedTo(new Group());
+            merged.setWorkflow(Workflow.PUBLISHED);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -965,7 +975,7 @@ public class MediaObjectTest {
 
 
     @Test
-    @Ignore("Fails, but I think it may have to be fixed?")
+    @Disabled("Fails, but I think it may have to be fixed?")
     public void testMergeImagesExistingForDifferentOwner() {
         Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).title("broadcaster owner").build();
         Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(RADIOBOX).title("radiobox owner").build();

@@ -1,6 +1,6 @@
 package nl.vpro.domain.gtaa;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

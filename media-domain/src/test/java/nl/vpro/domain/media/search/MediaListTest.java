@@ -10,7 +10,7 @@ import javax.xml.bind.JAXB;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Validator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import nl.vpro.domain.Xmlns;
@@ -19,7 +19,7 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Editor;
 
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Michiel Meeuwissen

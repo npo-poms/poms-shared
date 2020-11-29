@@ -9,7 +9,7 @@ import java.time.Instant;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.FileSizeFormatter;

@@ -1,7 +1,7 @@
 package nl.vpro.domain.api.page;
 
 import nl.vpro.domain.api.TermFacetResultItem;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 

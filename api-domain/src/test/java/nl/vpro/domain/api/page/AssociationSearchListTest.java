@@ -3,7 +3,7 @@ package nl.vpro.domain.api.page;
 import nl.vpro.domain.page.Association;
 import nl.vpro.domain.page.LinkType;
 import nl.vpro.domain.page.Referral;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 

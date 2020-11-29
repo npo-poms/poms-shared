@@ -9,7 +9,7 @@ import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 import nl.vpro.domain.media.*;

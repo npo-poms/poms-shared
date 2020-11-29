@@ -23,7 +23,7 @@ import java.util.concurrent.ForkJoinTask;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.FileSizeFormatter;

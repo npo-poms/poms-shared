@@ -3,7 +3,7 @@ package nl.vpro.domain.api.subtitles;
 import java.time.Duration;
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.Result;
 import nl.vpro.domain.api.SearchResultItem;

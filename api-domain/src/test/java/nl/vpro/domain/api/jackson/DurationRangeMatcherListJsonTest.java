@@ -5,7 +5,7 @@ import java.io.StringWriter;
 import java.time.Duration;
 import java.util.Collections;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.DurationRangeMatcherList;
 import nl.vpro.domain.api.Match;

@@ -3,7 +3,7 @@ package nl.vpro.domain.api.schedule;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Net;

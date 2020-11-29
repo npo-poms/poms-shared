@@ -8,7 +8,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.time.Instant;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.DateRangeFacetItem;
 import nl.vpro.domain.api.DateRangePreset;

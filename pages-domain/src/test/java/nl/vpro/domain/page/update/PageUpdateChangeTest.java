@@ -2,7 +2,7 @@ package nl.vpro.domain.page.update;
 
 import java.time.LocalDateTime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;

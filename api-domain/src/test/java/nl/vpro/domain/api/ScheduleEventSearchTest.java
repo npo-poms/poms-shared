@@ -7,7 +7,7 @@ package nl.vpro.domain.api;
 import java.time.Duration;
 import java.time.Instant;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.media.ScheduleEventSearch;
 import nl.vpro.domain.media.Channel;

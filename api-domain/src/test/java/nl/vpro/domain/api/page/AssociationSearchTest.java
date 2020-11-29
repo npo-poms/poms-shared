@@ -4,7 +4,7 @@ import nl.vpro.domain.page.Association;
 import nl.vpro.domain.page.Link;
 import nl.vpro.domain.page.LinkType;
 import nl.vpro.domain.page.Referral;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

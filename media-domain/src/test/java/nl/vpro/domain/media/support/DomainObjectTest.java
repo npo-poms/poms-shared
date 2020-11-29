@@ -7,7 +7,7 @@ package nl.vpro.domain.media.support;
 import nl.vpro.domain.media.Group;
 import nl.vpro.domain.media.Program;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DomainObjectTest {
 

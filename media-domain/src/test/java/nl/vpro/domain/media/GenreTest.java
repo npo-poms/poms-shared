@@ -1,10 +1,11 @@
 package nl.vpro.domain.media;
 
-import javax.xml.bind.JAXB;
 import java.util.Arrays;
 
-import org.junit.Before;
-import org.junit.Test;
+import javax.xml.bind.JAXB;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 3.0
  */
 public class GenreTest {
-    @Before
+    @BeforeEach
     public void setup() {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
     }

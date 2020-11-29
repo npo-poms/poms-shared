@@ -13,7 +13,7 @@ import javax.xml.bind.JAXB;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.io.Files;
 

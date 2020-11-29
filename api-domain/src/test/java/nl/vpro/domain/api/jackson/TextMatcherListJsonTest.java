@@ -4,7 +4,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Collections;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.TextMatcher;

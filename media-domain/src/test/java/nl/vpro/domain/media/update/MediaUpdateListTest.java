@@ -2,9 +2,7 @@ package nl.vpro.domain.media.update;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.time.Duration;
 
 import javax.xml.bind.JAXB;
@@ -18,18 +16,13 @@ import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.AVType;
-import nl.vpro.domain.media.MediaBuilder;
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.SegmentType;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * @author Michiel Meeuwissen
@@ -51,7 +44,7 @@ public class MediaUpdateListTest {
         StringWriter writer = new StringWriter();
         JAXB.marshal(xmlList, writer);
         Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).checkForSimilar().ignoreWhitespace().build();
-        assertFalse(diff.toString() + " " + writer.toString(), diff.hasDifferences());
+        assertFalse(diff.hasDifferences(), diff.toString() + " " + writer.toString());
 
         MediaUpdateList<String> list = JAXB.unmarshal(new StringReader(writer.toString()), MediaUpdateList.class);
         assertEquals("a", list.getList().get(0));

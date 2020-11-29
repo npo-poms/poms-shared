@@ -2,7 +2,7 @@ package nl.vpro.nep.domain.workflow;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.nep.service.impl.NEPGatekeeperServiceImpl;
 

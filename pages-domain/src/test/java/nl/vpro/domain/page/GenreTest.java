@@ -3,7 +3,7 @@ package nl.vpro.domain.page;
 import java.io.IOException;
 import java.io.StringReader;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.media.MediaClassificationService;

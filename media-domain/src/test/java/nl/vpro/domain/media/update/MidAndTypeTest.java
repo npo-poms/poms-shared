@@ -2,7 +2,7 @@ package nl.vpro.domain.media.update;
 
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

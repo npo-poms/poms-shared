@@ -5,8 +5,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -62,7 +62,7 @@ public class LocationValidatorTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testAll() {
         List<String> invalid = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/programurls.txt")));

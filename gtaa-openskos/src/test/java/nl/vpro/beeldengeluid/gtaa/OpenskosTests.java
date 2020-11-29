@@ -7,8 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
@@ -18,6 +19,7 @@ import nl.vpro.w3.rdf.Description;
 import static nl.vpro.beeldengeluid.gtaa.OpenskosRepository.CONFIG_FILE;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 @Slf4j
 public class OpenskosTests {
     @Ignore
@@ -45,18 +47,20 @@ public class OpenskosTests {
         impl.submit(pietjePuk, "POMS");
     }
 
-    @Test(expected = GTAAConflict.class)
+    @Test
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution3ShouldThrowException() {
-        GTAARepository impl = getRealInstance();
-        GTAANewPerson pietjePuk = GTAANewPerson.builder()
-            .givenName("Pietje")
-            .familyName("Puk"  + System.currentTimeMillis())
-            .build();
+        Assertions.assertThatThrownBy(() -> {
+            GTAARepository impl = getRealInstance();
+            GTAANewPerson pietjePuk = GTAANewPerson.builder()
+                .givenName("Pietje")
+                .familyName("Puk" + System.currentTimeMillis())
+                .build();
 
-        impl.submit(pietjePuk, "POMS");
-        impl.submit(pietjePuk, "POMS");
-        impl.submit(pietjePuk, "POMS");
+            impl.submit(pietjePuk, "POMS");
+            impl.submit(pietjePuk, "POMS");
+            impl.submit(pietjePuk, "POMS");
+        }).isInstanceOf(GTAAConflict.class);
     }
 
     @Test

@@ -8,7 +8,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.FileSizeFormatter;

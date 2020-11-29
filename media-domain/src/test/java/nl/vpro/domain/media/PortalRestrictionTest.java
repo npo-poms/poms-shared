@@ -2,7 +2,7 @@ package nl.vpro.domain.media;
 
 import java.time.LocalDate;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.user.Portal;
 import nl.vpro.jackson2.Jackson2Mapper;

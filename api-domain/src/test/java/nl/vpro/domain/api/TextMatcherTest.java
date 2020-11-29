@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.api;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 

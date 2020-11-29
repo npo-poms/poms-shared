@@ -7,7 +7,7 @@ package nl.vpro.domain.api.profile;
 import java.util.Locale;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.constraint.AbstractFilter;
 import nl.vpro.domain.constraint.PredicateTestResult;

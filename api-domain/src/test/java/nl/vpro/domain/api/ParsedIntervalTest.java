@@ -1,6 +1,6 @@
 package nl.vpro.domain.api;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Michiel Meeuwissen

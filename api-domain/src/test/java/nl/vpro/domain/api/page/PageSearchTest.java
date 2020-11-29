@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.TreeSet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.*;

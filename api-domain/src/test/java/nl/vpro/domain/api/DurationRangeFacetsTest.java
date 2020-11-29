@@ -8,7 +8,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.time.Duration;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 

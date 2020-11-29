@@ -3,7 +3,7 @@ package nl.vpro.domain.constraint;
 import java.time.Instant;
 import java.time.LocalDate;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Schedule;
 

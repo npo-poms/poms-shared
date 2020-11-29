@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.time.*;
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.media.MediaClassificationService;

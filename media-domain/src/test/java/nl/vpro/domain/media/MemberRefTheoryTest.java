@@ -2,7 +2,7 @@ package nl.vpro.domain.media;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.theories.DataPoint;
 import org.xml.sax.SAXException;
 

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.SortedSet;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Program;

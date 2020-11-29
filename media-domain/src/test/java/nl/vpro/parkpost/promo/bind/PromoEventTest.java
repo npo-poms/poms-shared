@@ -11,7 +11,7 @@ import java.io.Writer;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 

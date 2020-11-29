@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.StringBuilderSimpleLogger;

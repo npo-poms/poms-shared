@@ -3,7 +3,7 @@ package nl.vpro.w3.rdf;
 import java.net.URI;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

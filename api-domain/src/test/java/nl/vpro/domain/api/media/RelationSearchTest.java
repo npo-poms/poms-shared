@@ -1,6 +1,6 @@
 package nl.vpro.domain.api.media;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.TextMatcher;
 import nl.vpro.domain.api.TextMatcherList;

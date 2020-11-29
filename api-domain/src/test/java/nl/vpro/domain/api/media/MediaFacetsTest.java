@@ -7,7 +7,7 @@ import java.time.Instant;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import nl.vpro.domain.api.*;

@@ -8,7 +8,7 @@ import java.util.TreeSet;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;

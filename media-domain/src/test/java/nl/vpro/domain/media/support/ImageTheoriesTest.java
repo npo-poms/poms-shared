@@ -9,7 +9,7 @@ import java.io.Writer;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.theories.DataPoint;
 
 import nl.vpro.domain.image.ImageType;

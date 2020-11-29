@@ -6,7 +6,7 @@ package nl.vpro.domain.api;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;

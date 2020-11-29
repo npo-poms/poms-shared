@@ -5,7 +5,7 @@ import java.io.InputStream;
 import javax.xml.bind.JAXB;
 
 import nl.vpro.domain.npo.AuthorityPlatform;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

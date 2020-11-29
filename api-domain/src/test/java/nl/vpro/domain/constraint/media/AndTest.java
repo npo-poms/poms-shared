@@ -6,7 +6,7 @@ package nl.vpro.domain.constraint.media;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

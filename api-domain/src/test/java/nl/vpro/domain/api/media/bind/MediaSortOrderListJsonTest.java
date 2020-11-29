@@ -2,7 +2,7 @@ package nl.vpro.domain.api.media.bind;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.media.MediaForm;
 import nl.vpro.domain.api.media.MediaSortField;

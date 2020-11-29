@@ -1,14 +1,14 @@
 package nl.vpro.validation;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.Genre;
 import nl.vpro.domain.media.MediaClassificationService;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Michiel Meeuwissen
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class GenreValidatorTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
     }

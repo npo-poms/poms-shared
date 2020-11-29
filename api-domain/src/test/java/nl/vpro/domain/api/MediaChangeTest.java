@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 import nl.vpro.domain.media.MediaTestDataBuilder;

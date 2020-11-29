@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.support.MediaObjectOwnableLists;
 

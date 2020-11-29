@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.constraint.media;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Platform;

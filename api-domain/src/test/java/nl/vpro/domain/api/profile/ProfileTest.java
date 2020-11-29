@@ -12,25 +12,20 @@ import java.util.function.Predicate;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import nl.vpro.domain.constraint.PredicateTestResult;
-import nl.vpro.domain.constraint.media.AgeRatingConstraint;
-import nl.vpro.domain.constraint.media.Filter;
-import nl.vpro.domain.constraint.media.GenreConstraint;
-import nl.vpro.domain.constraint.media.HasImageConstraint;
-import nl.vpro.domain.media.AgeRating;
-import nl.vpro.domain.media.MediaObject;
-import nl.vpro.domain.media.MediaTestDataBuilder;
-import nl.vpro.domain.media.Program;
+import nl.vpro.domain.constraint.media.*;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.page.Page;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -115,14 +110,16 @@ public class ProfileTest {
         assertThat((Predicate<MediaObject>) out.getMediaProfile()).isInstanceOf(ProfileDefinition.class);
     }
 
-    @Test(expected = JsonMappingException.class) // not (yet?) supported
-    @Ignore
-    public void testJson() throws Exception {
-        Filter filter = new Filter();
-        filter.setConstraint(new HasImageConstraint());
-        ProfileDefinition<MediaObject> pd = new ProfileDefinition<>(filter);
-        Profile in = new Profile("media", null, pd);
-        System.out.println(Jackson2Mapper.getInstance().writeValueAsString(in));
+    @Test // not (yet?) supported
+    @Disabled
+    public void testJson() {
+        assertThatThrownBy(() -> {
+            Filter filter = new Filter();
+            filter.setConstraint(new HasImageConstraint());
+            ProfileDefinition<MediaObject> pd = new ProfileDefinition<>(filter);
+            Profile in = new Profile("media", null, pd);
+            System.out.println(Jackson2Mapper.getInstance().writeValueAsString(in));
+        }).isInstanceOf(JsonMappingException.class);
     }
 
     @Test

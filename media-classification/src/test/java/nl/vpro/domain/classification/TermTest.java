@@ -4,7 +4,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

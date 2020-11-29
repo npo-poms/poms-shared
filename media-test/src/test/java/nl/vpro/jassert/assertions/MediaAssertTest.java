@@ -16,6 +16,7 @@ import nl.vpro.domain.user.Broadcaster;
 
 import static nl.vpro.domain.media.MediaTestDataBuilder.*;
 import static nl.vpro.jassert.assertions.MediaAssertions.mediaAssertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Roelof Jan Koekoek
@@ -24,9 +25,11 @@ import static nl.vpro.jassert.assertions.MediaAssertions.mediaAssertThat;
 @SuppressWarnings("deprecation")
 public class MediaAssertTest {
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testIsProgramOnNull() {
-        mediaAssertThat(null).isProgram();
+        assertThatThrownBy(() -> {
+            mediaAssertThat(null).isProgram();
+        }).isInstanceOf(AssertionError.class);
     }
 
     @Test
@@ -39,9 +42,12 @@ public class MediaAssertTest {
         mediaAssertThat((program().withType().build())).isProgram(ProgramType.BROADCAST);
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testIsGroupOnNull() {
-        mediaAssertThat((MediaObject)null).isGroup();
+        assertThatThrownBy(() -> {
+            mediaAssertThat((MediaObject)null).isGroup();
+        }).isInstanceOf(AssertionError.class);
+
     }
 
     @Test
@@ -54,14 +60,19 @@ public class MediaAssertTest {
         mediaAssertThat((group().withType().build())).isGroup(GroupType.PLAYLIST);
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testHasPoSeriesIDOnOtherClass() {
-        mediaAssertThat((segment().build())).hasPoSeriesID("VPROWON_12345");
+        assertThatThrownBy(() -> {
+            mediaAssertThat((segment().build())).hasPoSeriesID("VPROWON_12345");
+        }).isInstanceOf(AssertionError.class);
+
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testHasPoSeriesIDOnOtherId() {
-        mediaAssertThat((segment().build())).hasPoSeriesID("no match");
+        assertThatThrownBy(() -> {
+            mediaAssertThat((segment().build())).hasPoSeriesID("no match");
+        }).isInstanceOf(AssertionError.class);
     }
 
     @Test
@@ -69,9 +80,11 @@ public class MediaAssertTest {
         mediaAssertThat((group().withPoSeriesID().build())).hasPoSeriesID("VPRO_12345");
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testIsSegmentOnNull() {
-        mediaAssertThat((MediaObject)null).isSegment();
+        assertThatThrownBy(() -> {
+            mediaAssertThat((MediaObject)null).isSegment();
+        }).isInstanceOf(AssertionError.class);
     }
 
     @Test
@@ -79,9 +92,12 @@ public class MediaAssertTest {
         mediaAssertThat((segment().build())).isSegment();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testIsVideoOnNull() {
-        mediaAssertThat((MediaObject)null).isVideo();
+        assertThatThrownBy(() -> {
+            mediaAssertThat((MediaObject) null).isVideo();
+        }).isInstanceOf(AssertionError.class);
+
     }
 
     @Test
@@ -89,9 +105,12 @@ public class MediaAssertTest {
         mediaAssertThat(program().avType(AVType.VIDEO).build()).isVideo();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testIsAudioOnNull() {
-        mediaAssertThat((MediaObject)null).isAudio();
+        assertThatThrownBy(() -> {
+            mediaAssertThat((MediaObject)null).isAudio();
+        }).isInstanceOf(AssertionError.class);
+
     }
 
     @Test
@@ -362,7 +381,7 @@ public class MediaAssertTest {
 
     @Test(expected = AssertionError.class)
     public void testHasLocationWithRestrictionOnNull() {
-        mediaAssertThat((MediaObject)null).hasLocationWithRestriction();
+        mediaAssertThat(null).hasLocationWithRestriction();
     }
 
     @Test(expected = AssertionError.class)
@@ -502,9 +521,12 @@ public class MediaAssertTest {
         mediaAssertThat(program().withRelations().build()).hasRelations();
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testHasRelationWhenMissing() {
-        mediaAssertThat(program().withRelations().build()).hasRelation(new Relation(new RelationDefinition("LABEL", "AVRO")));
+        assertThatThrownBy(() -> {
+
+            mediaAssertThat(program().withRelations().build()).hasRelation(new Relation(new RelationDefinition("LABEL", "AVRO")));
+        }).isInstanceOf(AssertionError.class);
     }
 
     @Test

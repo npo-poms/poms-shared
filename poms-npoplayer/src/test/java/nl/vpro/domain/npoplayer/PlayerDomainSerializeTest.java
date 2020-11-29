@@ -2,7 +2,7 @@ package nl.vpro.domain.npoplayer;
 
 import java.time.Duration;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 

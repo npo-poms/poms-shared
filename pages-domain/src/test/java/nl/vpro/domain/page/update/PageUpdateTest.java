@@ -9,7 +9,7 @@ import javax.validation.Validator;
 import javax.xml.bind.JAXB;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 

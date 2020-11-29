@@ -2,7 +2,7 @@ package nl.vpro.domain.media.search;
 
 import java.time.LocalDateTime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

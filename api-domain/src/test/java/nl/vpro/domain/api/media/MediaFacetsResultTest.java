@@ -2,7 +2,7 @@ package nl.vpro.domain.api.media;
 
 import java.util.ArrayList;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.TermFacetResultItem;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

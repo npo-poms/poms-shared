@@ -3,7 +3,7 @@ package nl.vpro.domain.media.search;
 import java.time.Instant;
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.ScheduleEvent;

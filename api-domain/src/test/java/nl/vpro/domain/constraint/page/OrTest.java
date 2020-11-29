@@ -5,7 +5,7 @@
 package nl.vpro.domain.constraint.page;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

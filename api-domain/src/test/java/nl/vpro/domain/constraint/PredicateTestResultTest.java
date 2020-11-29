@@ -8,7 +8,7 @@ import java.util.Locale;
 import javax.xml.bind.JAXB;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import nl.vpro.i18n.Locales;

@@ -11,7 +11,7 @@ import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXB;
 import java.io.StringReader;

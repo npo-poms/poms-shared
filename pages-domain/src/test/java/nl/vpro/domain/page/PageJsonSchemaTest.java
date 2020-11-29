@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.classification.ClassificationServiceImpl;

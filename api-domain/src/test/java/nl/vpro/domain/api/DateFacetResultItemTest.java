@@ -2,7 +2,7 @@ package nl.vpro.domain.api;
 
 import java.time.Instant;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 

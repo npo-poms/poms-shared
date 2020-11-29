@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
 

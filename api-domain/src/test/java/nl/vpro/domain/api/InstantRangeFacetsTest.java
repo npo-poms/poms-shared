@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

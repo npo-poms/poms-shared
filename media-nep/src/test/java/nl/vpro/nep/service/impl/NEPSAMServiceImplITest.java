@@ -6,7 +6,7 @@ import java.time.Duration;
 
 import nl.vpro.nep.service.exception.NEPException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 /**

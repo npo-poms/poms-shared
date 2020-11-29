@@ -8,7 +8,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.CachedURLClassificationServiceImpl;
 import nl.vpro.domain.page.Page;

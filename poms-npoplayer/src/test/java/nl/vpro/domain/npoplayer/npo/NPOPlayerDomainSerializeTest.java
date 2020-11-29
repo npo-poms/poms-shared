@@ -2,7 +2,7 @@ package nl.vpro.domain.npoplayer.npo;
 
 import nl.vpro.domain.npoplayer.*;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author r.jansen

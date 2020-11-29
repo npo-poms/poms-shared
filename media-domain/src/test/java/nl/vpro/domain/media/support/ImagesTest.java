@@ -4,11 +4,10 @@
  */
 package nl.vpro.domain.media.support;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Roelof Jan Koekoek
@@ -16,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Deprecated
 public class ImagesTest {
-    @Before
+    @BeforeEach
     public void init() {
         System.clearProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY);
         ImageUrlServiceHolder.setInstance(() -> System.getProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY));
@@ -28,17 +27,22 @@ public class ImagesTest {
         assertThat(location).isNull();
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testGetImageLocationOnNullArgument() {
-        System.setProperty("image.server.baseUrl", "http://domain.com/");
-        Images.getImageLocation(null, null);
+        assertThatThrownBy(() -> {
+            System.setProperty("image.server.baseUrl", "http://domain.com/");
+            Images.getImageLocation(null, null);
+        }).isInstanceOf(NullPointerException.class);
     }
 
-    @Test(expected = NullPointerException.class)
-    @Ignore
+    @Test
+    @Disabled
     public void testGetImageLocationOnEmptyURI() {
-        System.setProperty("image.server.baseUrl", "http://domain.com/");
-        Images.getImageLocation(new Image(), "jpg");
+        assertThatThrownBy(() -> {
+
+            System.setProperty("image.server.baseUrl", "http://domain.com/");
+            Images.getImageLocation(new Image(), "jpg");
+        }).isInstanceOf(NullPointerException.class);
     }
 
     @Test

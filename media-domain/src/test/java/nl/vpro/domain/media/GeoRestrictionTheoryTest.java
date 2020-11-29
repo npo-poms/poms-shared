@@ -6,7 +6,7 @@ package nl.vpro.domain.media;
 
 import java.time.Instant;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.theories.DataPoint;
 
 import nl.vpro.test.theory.ObjectTest;

@@ -1,6 +1,6 @@
 package nl.vpro.nep.domain;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;

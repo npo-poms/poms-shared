@@ -1,6 +1,6 @@
 package nl.vpro.domain.media.search;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 

@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media.support;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.experimental.theories.DataPoint;
 
 import nl.vpro.test.theory.ComparableTest;

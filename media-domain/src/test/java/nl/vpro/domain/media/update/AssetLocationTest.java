@@ -4,12 +4,10 @@
  */
 package nl.vpro.domain.media.update;
 
-import java.net.URI;
-import java.net.URL;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Roelof Jan Koekoek
@@ -44,24 +42,31 @@ public class AssetLocationTest {
         assertThat(target.getUrl()).isEqualTo("file:/base/path/file.name");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testResolveAbsolute() throws Exception {
-        AssetLocation target = new AssetLocation("/file.name");
+        assertThatThrownBy(() -> {
+            AssetLocation target = new AssetLocation("/file.name");
 
-        target.resolve("/base/path/");
+            target.resolve("/base/path/");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testResolveAbsoluteWithScheme() throws Exception {
-        AssetLocation target = new AssetLocation("file:/file.name");
+        assertThatThrownBy(() -> {
+            AssetLocation target = new AssetLocation("file:/file.name");
+            target.resolve("/base/path/");
+        }).isInstanceOf(IllegalArgumentException.class);
 
-        target.resolve("/base/path/");
     }
 
-    @Test(expected = SecurityException.class)
+    @Test
     public void testResolveWhenNavigatingUpPath() throws Exception {
-        AssetLocation target = new AssetLocation("../../file.name");
+        assertThatThrownBy(() -> {
 
-        target.resolve("/base/path/");
+            AssetLocation target = new AssetLocation("../../file.name");
+
+            target.resolve("/base/path/");
+        }).isInstanceOf(SecurityException.class);
     }
 }

@@ -4,7 +4,7 @@
  */
 package nl.vpro.parkpost;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * See https://jira.vpro.nl/browse/MSE-

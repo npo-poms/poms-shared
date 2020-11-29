@@ -8,7 +8,7 @@ import java.util.Locale;
 import javax.xml.bind.JAXB;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.constraint.PredicateTestResult;
 import nl.vpro.domain.media.MediaTestDataBuilder;

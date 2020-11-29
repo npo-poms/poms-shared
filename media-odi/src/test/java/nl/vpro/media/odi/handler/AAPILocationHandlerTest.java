@@ -1,7 +1,7 @@
 package nl.vpro.media.odi.handler;
 
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;

@@ -2,7 +2,7 @@ package nl.vpro.domain.api.thesaurus;
 
 import java.time.LocalDateTime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.gtaa.GTAAPerson;
 import nl.vpro.domain.media.Schedule;

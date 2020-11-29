@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.Relation;
@@ -17,7 +17,8 @@ import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.parkpost.promo.bind.PromoEvent;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Michiel Meeuwissen
@@ -29,7 +30,7 @@ public class PromoEventConverterTest {
 
     private String locationBaseUrl = "http://adaptive.npostreaming.nl/u/npo/promo/";
 
-    @Before
+    @BeforeEach
     public void setUp() {
         event = new PromoEvent();
         event.setProductCode("1P1302AK_BOEKEN4");
@@ -38,22 +39,29 @@ public class PromoEventConverterTest {
         event.setProgramTitle("Program Title");
     }
 
-    @Test(expected = PromoEventConverter.NoMidException.class)
+    @Test
     public void testConvertWithoutMid() throws Exception {
-        event.setPromotedProgramProductCode(null);
-        PromoEventConverter.convert(event, locationBaseUrl);
+        assertThatThrownBy(() -> {
+            event.setPromotedProgramProductCode(null);
+            PromoEventConverter.convert(event, locationBaseUrl);
+        }).isInstanceOf(PromoEventConverter.NoMidException.class);
     }
 
-    @Test(expected = PromoEventConverter.NoPromoException.class)
+    @Test
     public void testConvertOnNonPromoType() throws Exception {
-        event.setPromoType(ProductCode.Type.A);
-        PromoEventConverter.convert(event, locationBaseUrl);
+        assertThatThrownBy(() -> {
+            event.setPromoType(ProductCode.Type.A);
+            PromoEventConverter.convert(event, locationBaseUrl);
+        }).isInstanceOf(PromoEventConverter.NoPromoException.class);
     }
 
-    @Test(expected = PromoEventConverter.NoTitleException.class)
+    @Test
     public void testConvertWithEmptyTitle() throws Exception {
-        event.setProgramTitle("");
-        PromoEventConverter.convert(event, locationBaseUrl);
+        assertThatThrownBy(() -> {
+
+            event.setProgramTitle("");
+            PromoEventConverter.convert(event, locationBaseUrl);
+        }).isInstanceOf(PromoEventConverter.NoTitleException.class);
     }
 
     @Test

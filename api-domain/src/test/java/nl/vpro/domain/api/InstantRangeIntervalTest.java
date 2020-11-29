@@ -11,11 +11,12 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Schedule;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -32,9 +33,11 @@ public class InstantRangeIntervalTest {
         {"6 MINUTE", "2016-05-06T14:21:00+02:00"}
     };
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testIllegal() {
-        new DateRangeInterval("foo");
+        assertThatThrownBy(() -> {
+            new DateRangeInterval("foo");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

@@ -4,12 +4,10 @@
  */
 package nl.vpro.domain.constraint.page;
 
-import nl.vpro.domain.page.Page;
-import nl.vpro.domain.page.PageBuilder;
-import nl.vpro.domain.page.PageType;
-import nl.vpro.domain.page.Portal;
+import org.junit.jupiter.api.Test;
+
+import nl.vpro.domain.page.*;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

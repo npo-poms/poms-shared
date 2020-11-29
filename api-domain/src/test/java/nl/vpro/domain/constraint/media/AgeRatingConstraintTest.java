@@ -7,7 +7,7 @@ package nl.vpro.domain.constraint.media;
 import java.util.Locale;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.constraint.Constraint;
 import nl.vpro.domain.media.AgeRating;

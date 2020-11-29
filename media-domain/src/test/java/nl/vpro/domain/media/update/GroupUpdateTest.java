@@ -11,7 +11,7 @@ import java.util.TreeSet;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Group;
 import nl.vpro.domain.media.GroupType;

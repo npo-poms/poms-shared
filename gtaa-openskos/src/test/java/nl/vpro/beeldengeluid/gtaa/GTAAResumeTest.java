@@ -2,7 +2,7 @@ package nl.vpro.beeldengeluid.gtaa;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 import nl.vpro.openarchives.oai.ListRecord;

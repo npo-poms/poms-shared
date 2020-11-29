@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.constraint.Operator;

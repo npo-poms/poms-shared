@@ -6,11 +6,12 @@ package nl.vpro.domain.media;
 
 import java.util.SortedSet;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ProgramTest {
 
@@ -35,31 +36,36 @@ public class ProgramTest {
         assertThat(ancestors).hasSize(3);
     }
 
-    @Test(expected = CircularReferenceException.class)
+    @Test
     public void testCreateMemberOfWHenCircular() {
-        Program program = new Program(1);
-        program.setType(ProgramType.BROADCAST);
-        Group group = new Group(2);
-        group.setType(GroupType.SERIES);
+        assertThatThrownBy(() -> {
+            Program program = new Program(1);
+            program.setType(ProgramType.BROADCAST);
+            Group group = new Group(2);
+            group.setType(GroupType.SERIES);
 
-        program.createEpisodeOf(group, 1, null);
+            program.createEpisodeOf(group, 1, null);
 
-        assertThat(program.getAncestors()).hasSize(1);
+            assertThat(program.getAncestors()).hasSize(1);
 
-        group.createMemberOf(program, 1, null);
+            group.createMemberOf(program, 1, null);
+        }).isInstanceOf(CircularReferenceException.class);
     }
 
-    @Test(expected = CircularReferenceException.class)
+    @Test
     public void testCreateEpisodeOfWhenCircular() {
-        Program program = new Program(1);
-        program.setType(ProgramType.BROADCAST);
-        Group group = new Group(2);
-        group.setType(GroupType.SERIES);
+        assertThatThrownBy(() -> {
 
-        group.createMemberOf(program, 1, null);
+            Program program = new Program(1);
+            program.setType(ProgramType.BROADCAST);
+            Group group = new Group(2);
+            group.setType(GroupType.SERIES);
 
-        assertThat(group.getAncestors()).hasSize(1);
+            group.createMemberOf(program, 1, null);
 
-        program.createEpisodeOf(group, 1, null);
+            assertThat(group.getAncestors()).hasSize(1);
+
+            program.createEpisodeOf(group, 1, null);
+        }).isInstanceOf(CircularReferenceException.class);
     }
 }

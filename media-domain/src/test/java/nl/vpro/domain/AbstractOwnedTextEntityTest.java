@@ -3,7 +3,7 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;

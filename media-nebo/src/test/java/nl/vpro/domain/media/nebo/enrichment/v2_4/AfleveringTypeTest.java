@@ -1,6 +1,6 @@
 package nl.vpro.domain.media.nebo.enrichment.v2_4;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
 
