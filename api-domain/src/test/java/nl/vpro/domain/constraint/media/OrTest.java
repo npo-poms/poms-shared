@@ -6,7 +6,7 @@ package nl.vpro.domain.constraint.media;
 
 import java.util.Locale;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Channel;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class OrTest {
 
-    @Before
+    @BeforeEach
     public void setup() {
         Locale.setDefault(Locale.US);
     }

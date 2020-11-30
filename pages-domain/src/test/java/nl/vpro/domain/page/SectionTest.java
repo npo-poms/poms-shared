@@ -6,14 +6,9 @@ package nl.vpro.domain.page;
 
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -30,13 +25,13 @@ public class SectionTest {
     private static Validator validator;
     private Section target;
 
-    @BeforeClass
+    @BeforeAll
     public static void before() {
         ValidatorFactory config = Validation.buildDefaultValidatorFactory();
         validator = config.getValidator();
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         target = new Section();
     }

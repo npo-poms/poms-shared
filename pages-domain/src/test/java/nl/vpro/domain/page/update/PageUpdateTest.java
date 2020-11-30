@@ -8,7 +8,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.xml.bind.JAXB;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -16,8 +16,8 @@ import org.mockito.MockitoAnnotations;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.page.*;
 import nl.vpro.domain.support.License;
-import nl.vpro.domain.user.*;
 import nl.vpro.domain.user.Portal;
+import nl.vpro.domain.user.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.serialize.SerializeTestUtil;
@@ -35,9 +35,9 @@ public class PageUpdateTest {
     PortalService portalService;
 
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         when(broadcasterService.find("VPRO")).thenReturn(new Broadcaster("VPRO"));
         when(portalService.find("WETENSCHAP24")).thenReturn(new Portal("WETENSCHAP24","NPOWETENSCHAP"));
 

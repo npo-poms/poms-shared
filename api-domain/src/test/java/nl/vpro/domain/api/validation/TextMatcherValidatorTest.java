@@ -2,7 +2,7 @@ package nl.vpro.domain.api.validation;
 
 import javax.validation.ConstraintValidatorContext;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.StandardMatchType;
@@ -24,7 +24,7 @@ public class TextMatcherValidatorTest {
     private final ConstraintValidatorContext context = mock(ConstraintValidatorContext.class);
     private final ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderCustomizableContext nodeBuildercontext = mock(ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderCustomizableContext.class);
 
-    @Before
+    @BeforeEach
     public void setup() {
         reset(context, builder);
         when(context.buildConstraintViolationWithTemplate(anyString())).thenReturn(builder);

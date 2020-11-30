@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
@@ -25,7 +25,7 @@ public class MetaData_v2_1Test {
 
     MediaProvider provider = mock(MediaProvider.class);
 
-    @Before
+    @BeforeEach
     public void init() {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }

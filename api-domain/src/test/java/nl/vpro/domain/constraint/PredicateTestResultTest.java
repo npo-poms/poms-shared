@@ -2,14 +2,12 @@ package nl.vpro.domain.constraint;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -25,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PredicateTestResultTest {
 
 
-    @Before
+    @BeforeEach
     public void setup() {
         Locales.setDefault(Locale.US);
     }

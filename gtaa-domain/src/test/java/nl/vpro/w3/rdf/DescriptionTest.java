@@ -2,7 +2,7 @@ package nl.vpro.w3.rdf;
 
 import java.net.URI;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +11,7 @@ public class DescriptionTest {
 
     private Description d;
 
-    @Before
+    @BeforeEach
     public void init() {
         d = new Description();
     }

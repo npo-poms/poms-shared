@@ -3,7 +3,7 @@ package nl.vpro.domain.classification;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +17,7 @@ public class TermTest {
     private ClassificationService classificationService;
 
 
-    @Before
+    @BeforeEach
     public void setup() throws URISyntaxException {
         URL url = getClass().getResource("/nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
         classificationService = new URLClassificationServiceImpl(url.toURI());

@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.page;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -20,7 +20,7 @@ public class PortalTest {
 
     private Portal target;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         target = new Portal();
     }

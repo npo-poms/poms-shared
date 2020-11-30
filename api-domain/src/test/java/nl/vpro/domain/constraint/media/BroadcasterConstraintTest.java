@@ -4,13 +4,14 @@
  */
 package nl.vpro.domain.constraint.media;
 
+import java.util.Locale;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Program;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-
-import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class BroadcasterConstraintTest {
 
-    @Before
+    @BeforeEach
     public void setup() {
         Locale.setDefault(Locale.US);
     }

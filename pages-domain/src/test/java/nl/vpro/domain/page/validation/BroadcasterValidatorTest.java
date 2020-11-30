@@ -7,12 +7,10 @@ package nl.vpro.domain.page.validation;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.BroadcasterService;
-import nl.vpro.domain.user.ServiceLocator;
+import nl.vpro.domain.user.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -28,7 +26,7 @@ public class BroadcasterValidatorTest {
 
     private BroadcasterValidator validator = new BroadcasterValidator();
 
-    @Before
+    @BeforeEach
     public void init() {
         when(broadcasterService.findAll()).thenReturn(Arrays.asList(Broadcaster.of("VPRO"), Broadcaster.of("EO")));
         Broadcaster vpro = new Broadcaster("VPRO", "VPRO");

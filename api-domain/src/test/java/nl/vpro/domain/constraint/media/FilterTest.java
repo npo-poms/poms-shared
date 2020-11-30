@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.constraint.PredicateTestResult;
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 public class FilterTest {
 
-    @Before
+    @BeforeEach
     public void setup() {
         Locale.setDefault(Locale.US);
     }

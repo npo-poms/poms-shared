@@ -1,13 +1,10 @@
 package nl.vpro.domain.page;
 
 import java.io.IOException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationService;
@@ -29,7 +26,7 @@ public class PageJsonSchemaTest {
 
     private PageBuilder builder;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         builder = PageBuilder.page(PageType.ARTICLE);
     }

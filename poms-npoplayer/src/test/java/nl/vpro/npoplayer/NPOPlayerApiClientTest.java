@@ -2,9 +2,7 @@ package nl.vpro.npoplayer;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import nl.vpro.domain.npoplayer.NPOPlayerApiRequest;
 import nl.vpro.domain.npoplayer.NPOPlayerApiResponse;
@@ -15,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author r.jansen
  */
-@Ignore("Tests running server")
+@Disabled("Tests running server")
 @Slf4j
 public class NPOPlayerApiClientTest {
 
     NPOPlayerApiClient client;
 
-    @Before
+    @BeforeEach
     public void init() {
         client = NPOPlayerApiClient.configured(Env.TEST)
             .build();

@@ -3,7 +3,7 @@ package nl.vpro.domain.api;
 import java.io.IOException;
 import java.util.Locale;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.constraint.Constraints;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ErrorTest {
 
-    @Before
+    @BeforeEach
     public void setup() {
         Locales.setDefault(Locale.US);
     }

@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
@@ -35,7 +35,7 @@ public class OdiServiceImplTest {
     private OdiServiceImpl target;
 
 
-    @Before
+    @BeforeEach
     public void setUp() {
         program = MediaTestDataBuilder.program().locations(
             new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER),

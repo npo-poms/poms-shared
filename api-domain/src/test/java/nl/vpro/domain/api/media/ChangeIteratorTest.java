@@ -2,8 +2,6 @@ package nl.vpro.domain.api.media;
 
 import java.util.List;
 
-import org.junit.Before;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.domain.api.MediaChange;
@@ -30,10 +28,6 @@ public class ChangeIteratorTest {
 
     private List<MediaChange> nodes;
 
-    @Before
-    public void setUp() {
-
-    }
 /*
 
     @Test

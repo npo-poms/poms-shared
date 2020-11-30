@@ -6,7 +6,7 @@ package nl.vpro.domain.api.profile;
 
 import java.util.Locale;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.constraint.AbstractFilter;
@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ProfileDefinitionTest {
 
-    @Before
+    @BeforeEach
     public void setup() {
         Locale.setDefault(Locale.US);
     }

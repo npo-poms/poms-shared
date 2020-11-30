@@ -8,6 +8,7 @@ import java.util.TreeSet;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
@@ -32,7 +33,7 @@ public class MetaData_v3_2Test {
 
     MediaProvider provider = mock(MediaProvider.class);
 
-    @Before
+    @BeforeEach
     public void init() {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
         ServiceLocator.setBroadcasterService("VPRO", "NCRV");
