@@ -21,9 +21,8 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.*;
 
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.FileSizeFormatter;
@@ -36,7 +35,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
  * @since 5.5
  */
 @Slf4j
-@Ignore("This actually does something")
+@Disabled("This actually does something")
 public class NEPSSHJDownloadServiceImplTest {
 
     private NEPSSHJDownloadServiceImpl impl;
@@ -48,7 +47,7 @@ public class NEPSSHJDownloadServiceImplTest {
 
     static String testDest = "/tmp/test.mp4";
 
-    @Before
+    @BeforeEach
     public void setup() {
         impl = new NEPSSHJDownloadServiceImpl(
             "sftp-itemizer.nepworldwide.nl",
@@ -134,7 +133,7 @@ public class NEPSSHJDownloadServiceImplTest {
 
 
     @Test
-    @Ignore("This actually does something")
+    @Disabled("This actually does something")
     @SneakyThrows
     public void async() {
         List<ForkJoinTask<?>> tasks = new ArrayList<>();
