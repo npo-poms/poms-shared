@@ -1,12 +1,10 @@
 package nl.vpro.domain.gtaa;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.runners.Parameterized;
 
 import nl.vpro.w3.rdf.Description;
 
@@ -19,9 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ThesaurusObjectsTest {
 
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.stream(Scheme.values()).filter(s -> s != Scheme.person).map(s -> new Object[]{s}).collect(Collectors.toList());
+    public static Stream<Object[]> data() {
+        return Arrays.stream(Scheme.values()).filter(s -> s != Scheme.person).map(s -> new Object[]{s});
     }
 
 
