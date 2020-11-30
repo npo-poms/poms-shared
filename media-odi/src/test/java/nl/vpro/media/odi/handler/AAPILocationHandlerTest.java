@@ -1,38 +1,41 @@
 package nl.vpro.media.odi.handler;
 
-import org.junit.Rule;
+import ru.lanwen.wiremock.ext.WiremockResolver;
+import ru.lanwen.wiremock.ext.WiremockUriResolver;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.github.tomakehurst.wiremock.WireMockServer;
 
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.media.odi.util.LocationResult;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+@ExtendWith({
+    WiremockResolver.class,
+    WiremockUriResolver.class
+})
 public class AAPILocationHandlerTest {
 
-    @Rule
-    public WireMockRule wireMockRule = new WireMockRule(options()
-        .dynamicPort()
-    );
 
     @Test
-    public void testHandle() {
+    public void testHandle(@WiremockResolver.Wiremock WireMockServer server, @WiremockUriResolver.WiremockUri String uri) {
 
 
-        wireMockRule.stubFor(
+        server.stubFor(
             post(urlEqualTo("/"))
                 .willReturn(
                     ok().withBody("https://adaptive.npostream.nl/live")
                 )
         );
         AAPILocationHandler handler = new AAPILocationHandler();
-        handler.setAAPIServer(wireMockRule.baseUrl());
+        handler.setAAPIServer(uri);
 
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "somepath");
         Location location = new Location("odiw+http://livestreams.omroep.nl/live/npo/thematv/cultura24/cultura24.isml", OwnerType.BROADCASTER);

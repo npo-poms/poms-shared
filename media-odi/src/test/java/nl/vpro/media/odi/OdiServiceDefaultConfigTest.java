@@ -8,14 +8,11 @@ import javax.inject.Inject;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import nl.vpro.domain.media.AVFileFormat;
-import nl.vpro.domain.media.Location;
-import nl.vpro.domain.media.MediaBuilder;
-import nl.vpro.domain.media.Program;
+import nl.vpro.domain.media.*;
 import nl.vpro.media.odi.handler.AVFileFormatLocationSorter;
 import nl.vpro.media.odi.util.LocationResult;
 
@@ -26,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 4.9
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith({SpringExtension.class})
 @ContextConfiguration(locations = "classpath:odiService-context.xml")
 public class OdiServiceDefaultConfigTest {
 

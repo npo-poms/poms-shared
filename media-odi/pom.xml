@@ -104,5 +104,10 @@
       <artifactId>junit-vintage-engine</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>ru.lanwen.wiremock</groupId>
+      <artifactId>wiremock-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
