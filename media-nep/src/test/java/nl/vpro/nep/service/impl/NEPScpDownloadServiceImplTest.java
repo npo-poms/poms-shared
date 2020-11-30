@@ -8,7 +8,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.nep.service.NEPDownloadService;
@@ -19,7 +19,7 @@ import nl.vpro.util.FileSizeFormatter;
  * @since 5.8
  */
 @Slf4j
-@Ignore("Download huge files")
+@Disabled("Download huge files")
 public class NEPScpDownloadServiceImplTest {
 
 
