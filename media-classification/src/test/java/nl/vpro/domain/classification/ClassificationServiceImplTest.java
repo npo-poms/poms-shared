@@ -4,15 +4,12 @@
  */
 package nl.vpro.domain.classification;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.*;
 
 import javax.xml.bind.JAXB;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.google.common.io.Files;
@@ -24,9 +21,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class ClassificationServiceImplTest {
 
-    private ClassificationService classificationService;
+    private final ClassificationService classificationService;
 
     public ClassificationServiceImplTest() {
         //classificationService = new ClassificationServiceImpl(new UrlResource("http://localhost:8060/schema/classification"));
@@ -120,7 +118,7 @@ public class ClassificationServiceImplTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test() {
 
         ClassificationService classificationService = ClassificationServiceImpl.fromFiles(
