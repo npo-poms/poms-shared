@@ -7,13 +7,11 @@ package nl.vpro.domain.constraint.page;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.CachedURLClassificationServiceImpl;
-import nl.vpro.domain.page.Page;
-import nl.vpro.domain.page.PageBuilder;
-import nl.vpro.domain.page.PageType;
+import nl.vpro.domain.page.*;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +24,7 @@ public class GenreConstraintTest {
 
     private static CachedURLClassificationServiceImpl cs;
 
-    @BeforeClass
+    @BeforeAll
     public static void init() throws URISyntaxException {
         URL url = GenreConstraintTest.class.getResource("/nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
         cs = new CachedURLClassificationServiceImpl(url.toURI());

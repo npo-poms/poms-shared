@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runners.Parameterized;
 
 import nl.vpro.w3.rdf.Description;
@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-@RunWith(Parameterized.class)
 public class ThesaurusObjectsTest {
 
     @Parameterized.Parameters
@@ -26,14 +25,9 @@ public class ThesaurusObjectsTest {
     }
 
 
-    Scheme scheme;
-
-    public ThesaurusObjectsTest(Scheme scheme) {
-        this.scheme = scheme;
-    }
-
-    @Test
-    public void toThesaurusObject() {
+    @ParameterizedTest
+    @MethodSource("data")
+    public void toThesaurusObject(Scheme scheme) {
         GTAAConcept thesaurusObject = GTAAConcepts.toConcept(Description
             .builder()
             .inScheme(scheme.getUrl())
@@ -41,13 +35,9 @@ public class ThesaurusObjectsTest {
         assertThat(thesaurusObject).isInstanceOf(scheme.getImplementation());
     }
 
-    @Test
-    public void toThesaurusObjectFromNew() {
-
-    }
-
-    @Test
-    public void toScheme() {
+    @ParameterizedTest
+    @MethodSource("data")
+    public void toScheme(Scheme scheme) {
         GTAAConcept thesaurusObject = GTAAConcepts.toConcept(Description
             .builder()
             .inScheme(scheme.getUrl())

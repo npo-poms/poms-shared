@@ -2,7 +2,7 @@ package nl.vpro.domain.media;
 
 import java.util.*;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -30,7 +30,7 @@ public class ChannelTest {
     }
 
     @Test
-    @Ignore("sadly fails, but we can't really fix it withough huge republications.")
+    @Disabled("sadly fails, but we can't really fix it withough huge republications.")
     public void testJson() throws JsonProcessingException {
         assertThat(Jackson2Mapper.getInstance().writeValueAsString(Channel._101_)).isEqualTo("\"101_\"");
     }
@@ -65,9 +65,9 @@ public class ChannelTest {
         System.out.println(mapper.writeValueAsString(channels));
     }
 
-    private class JsonChannel {
-        private String id;
-        private String displayName;
+    private static class JsonChannel {
+        private final String id;
+        private final String displayName;
 
         private JsonChannel(String id, String displayName) {
             this.id = id;
