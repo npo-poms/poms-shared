@@ -15,11 +15,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-migrationsupport</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>nl.vpro.media</groupId>
       <artifactId>media-domain</artifactId>
     </dependency>

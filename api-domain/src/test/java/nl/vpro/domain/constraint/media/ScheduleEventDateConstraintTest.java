@@ -8,13 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.constraint.Operator;
-import nl.vpro.domain.media.MediaBuilder;
-import nl.vpro.domain.media.MediaObject;
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.ScheduleEvent;
+import nl.vpro.domain.media.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ScheduleEventDateConstraintTest {
 

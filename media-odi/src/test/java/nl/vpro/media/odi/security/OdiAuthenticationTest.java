@@ -17,7 +17,7 @@ import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Program;
 
 import static nl.vpro.media.odi.security.OdiAuthentication.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Roelof Jan Koekoek

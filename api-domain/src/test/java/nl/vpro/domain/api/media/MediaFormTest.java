@@ -31,7 +31,7 @@ import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.roundTripAndSimilar;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author Roelof Jan Koekoek

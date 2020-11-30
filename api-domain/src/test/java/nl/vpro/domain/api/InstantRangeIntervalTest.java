@@ -2,23 +2,19 @@ package nl.vpro.domain.api;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
+import java.time.*;
+import java.time.temporal.*;
 import java.util.Date;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Schedule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 public class InstantRangeIntervalTest {
@@ -69,7 +65,7 @@ public class InstantRangeIntervalTest {
 
 
     @Test
-    @Ignore
+    @Disabled
     public void testNoMatchesWeek() {
         DateRangeInterval interval = new DateRangeInterval("2WEEK");
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.*;
@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchResultsTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
     }

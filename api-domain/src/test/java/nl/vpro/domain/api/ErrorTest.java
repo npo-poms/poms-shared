@@ -14,7 +14,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ErrorTest {
 

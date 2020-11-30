@@ -1,22 +1,15 @@
 package nl.vpro.domain.npo.projectm;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.Description;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.npo.projectm.metadata.v3_2.Aflevering;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.ServiceLocator;

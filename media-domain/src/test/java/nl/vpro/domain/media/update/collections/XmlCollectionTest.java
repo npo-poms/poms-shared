@@ -1,19 +1,17 @@
 package nl.vpro.domain.media.update.collections;
 
-import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Arrays;
 
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.media.update.LocationUpdate;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class XmlCollectionTest {
 
@@ -28,7 +26,7 @@ public class XmlCollectionTest {
         JAXB.marshal(col, System.out);
         JAXB.marshal(col, writer);
         Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
-        assertFalse(diff.toString() + " " + expected, diff.hasDifferences());
+        assertFalse(diff.hasDifferences(), diff.toString() + " " + expected);
 
     }
 

@@ -2,31 +2,22 @@ package nl.vpro.domain.media.nebo.enrichment.v2_4;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 import javax.xml.bind.JAXB;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.datatype.*;
 
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.nebo.base.FragmentenType;
-import nl.vpro.domain.media.nebo.shared.FormatResType;
-import nl.vpro.domain.media.nebo.shared.QualityResType;
-import nl.vpro.domain.media.nebo.shared.StreamType;
-import nl.vpro.domain.media.nebo.shared.StreamsType;
+import nl.vpro.domain.media.nebo.shared.*;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author Michiel Meeuwissen

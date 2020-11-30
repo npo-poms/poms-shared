@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @author Michiel Meeuwissen

@@ -1,8 +1,6 @@
 package nl.vpro.domain.media.nebo.webonly.v1_4;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.StringReader;
+import java.io.*;
 import java.time.Duration;
 import java.util.Arrays;
 
@@ -10,24 +8,19 @@ import javax.xml.bind.JAXB;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
+import javax.xml.validation.*;
 
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.support.Description;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.media.support.*;
 
 import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author Michiel Meeuwissen
@@ -48,7 +41,7 @@ public class WebonlyTypeTest {
 
     }
 
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }

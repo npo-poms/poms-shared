@@ -8,7 +8,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
@@ -16,10 +15,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 
 import nl.vpro.api.util.ApiMappings;
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.api.FacetOrder;
-import nl.vpro.domain.api.Match;
-import nl.vpro.domain.api.Order;
-import nl.vpro.domain.api.SimpleTextMatcher;
+import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.page.LinkType;
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -27,10 +23,9 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
-
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Michiel Meeuwissen

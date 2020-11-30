@@ -3,7 +3,7 @@ package nl.vpro.domain.media;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class MediaClassificationServiceTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }

@@ -41,7 +41,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static nl.vpro.media.tva.Constants.*;
 import static org.apache.commons.io.output.NullOutputStream.NULL_OUTPUT_STREAM;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author Michiel Meeuwissen

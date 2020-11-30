@@ -4,10 +4,7 @@
  */
 package nl.vpro.parkpost.promo.bind;
 
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 
 import javax.xml.bind.JAXB;
 
@@ -16,7 +13,7 @@ import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * See https://jira.vpro.nl/browse/MSE-1324
@@ -59,7 +56,7 @@ public class PromoEventTest {
         String output = writer.toString();
 
         Diff diff = DiffBuilder.compare(input).withTest(output).ignoreWhitespace().build();
-        assertFalse(diff.toString() + " " + output, diff.hasDifferences());
+        assertFalse(diff.hasDifferences(), diff.toString() + " " + output);
     }
 
     @Test

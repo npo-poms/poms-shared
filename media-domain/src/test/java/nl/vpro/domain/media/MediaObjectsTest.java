@@ -18,8 +18,8 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Roelof Jan Koekoek

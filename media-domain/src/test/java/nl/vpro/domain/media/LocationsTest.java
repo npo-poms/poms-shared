@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
@@ -70,7 +70,7 @@ public class LocationsTest {
 
 
     @Test
-    @Ignore("Fails but now time yet to fix.")
+    @Disabled("Fails but now time yet to fix.")
     public void createWebOnlyPredictionIfNeeded2() {
         Program program = new Program();
         program.setMid("mid_1234");

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.gtaa.*;
@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 @Slf4j
 public class OpenskosTests {
-    @Ignore
+    @Disabled
     @Test
     public void testPost1() {
         GTAARepository impl = getRealInstance();
@@ -35,7 +35,7 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore("Vervuilt GTAA")
+    @Disabled("Vervuilt GTAA")
     public void test409ConflictResolution() {
         GTAARepository impl = getRealInstance();
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
@@ -48,7 +48,7 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore("Vervuilt GTAA")
+    @Disabled("Vervuilt GTAA")
     public void test409ConflictResolution3ShouldThrowException() {
         Assertions.assertThatThrownBy(() -> {
             GTAARepository impl = getRealInstance();
@@ -64,7 +64,7 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testFindPerson() {
         GTAARepository impl = getRealInstance();
         List<Description> persons = impl.findPersons("pietje", 100);
@@ -74,7 +74,7 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testFindAnything() {
         GTAARepository impl = getRealInstance();
         List<Description> items = impl.findAnything("hilversum", 100);
@@ -84,7 +84,7 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testChanges() {
         GTAARepository impl = getRealInstance();
         Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
@@ -105,7 +105,7 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testAllChanges() {
         GTAARepository impl = getRealInstance();
         Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
@@ -127,7 +127,7 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void addPerson() {
         GTAARepository impl = getRealInstance();
         GTAANewPerson p = new GTAANewPerson();
@@ -138,7 +138,7 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void testChangesRecent() {
         GTAARepository impl = getRealInstance();
         Instant start = Instant.now().minusSeconds(3600000);

@@ -6,15 +6,13 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.domain.api.Match;
-import nl.vpro.domain.api.TextMatcher;
-import nl.vpro.domain.api.TextMatcherList;
+import nl.vpro.domain.api.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class RelationFacetListTest {
 

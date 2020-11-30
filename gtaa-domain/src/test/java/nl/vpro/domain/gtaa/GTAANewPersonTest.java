@@ -2,7 +2,7 @@ package nl.vpro.domain.gtaa;
 
 import java.io.IOException;
 
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -31,7 +31,7 @@ public class GTAANewPersonTest {
     }
 
     @Test
-    @Ignore("Will not work. Rest service will support via nl.vpro.jackson2.rs.JsonIdAdderBodyReader")
+    @Disabled("Will not work. Rest service will support via nl.vpro.jackson2.rs.JsonIdAdderBodyReader")
     public void jsonWithoutType() throws IOException {
         String json = "{\n" +
             "  \"givenName\" : \"Pietje\",\n" +
