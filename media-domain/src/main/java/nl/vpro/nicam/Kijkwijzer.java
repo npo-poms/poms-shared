@@ -213,16 +213,28 @@ public class Kijkwijzer implements NicamRated {
 
     public Kijkwijzer(@Nullable AgeRating ageRating, List<@NonNull ContentRating> contentRatings) {
         this.ageRating = ageRating;
-        this.contentRatings = contentRatings == null ? new ArrayList<>() : contentRatings;
+        this.contentRatings = Collections.unmodifiableList(contentRatings == null ? new ArrayList<>() : contentRatings);
     }
     public Kijkwijzer(@Nullable AgeRating ageRating, @NonNull ContentRating... contentRatings) {
         this(ageRating, Arrays.asList(contentRatings));
     }
 
-    public Kijkwijzer() {
-        this.ageRating = null;
-        this.contentRatings = new ArrayList<>();
+    public Kijkwijzer withAgeRating(AgeRating ageRating) {
+        return new Kijkwijzer(ageRating, contentRatings);
     }
+
+    public Kijkwijzer withContentRating(ContentRating... contentRating) {
+        List<ContentRating> result = new ArrayList<>(contentRatings);
+        for (ContentRating r : contentRating) {
+            result.add(r);
+        }
+        return  new Kijkwijzer(ageRating, result);
+    }
+
+    public Kijkwijzer withContentRatings(List<ContentRating> contentRatings) {
+        return  new Kijkwijzer(ageRating, contentRatings);
+    }
+
 
     @Deprecated
     public String toDonnaCode() {
