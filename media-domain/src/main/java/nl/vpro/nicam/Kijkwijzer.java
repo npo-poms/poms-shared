@@ -207,6 +207,9 @@ public class Kijkwijzer implements NicamRated {
         }
     }
 
+    public static Kijkwijzer of(NicamRated nicamRated) {
+        return new Kijkwijzer(nicamRated.getAgeRating(), nicamRated.getContentRatings());
+    }
 
     public Kijkwijzer(@Nullable AgeRating ageRating, List<@NonNull ContentRating> contentRatings) {
         this.ageRating = ageRating;
