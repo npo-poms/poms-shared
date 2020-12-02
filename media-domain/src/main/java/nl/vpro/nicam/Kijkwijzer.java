@@ -211,13 +211,19 @@ public class Kijkwijzer implements NicamRated {
         return new Kijkwijzer(nicamRated.getAgeRating(), nicamRated.getContentRatings());
     }
 
-    public Kijkwijzer(@Nullable AgeRating ageRating, List<@NonNull ContentRating> contentRatings) {
+    public Kijkwijzer(@Nullable AgeRating ageRating, Collection<@NonNull ContentRating> contentRatings) {
         this.ageRating = ageRating;
-        this.contentRatings = Collections.unmodifiableList(contentRatings == null ? new ArrayList<>() : contentRatings);
+        this.contentRatings = Collections.unmodifiableList(contentRatings == null ? new ArrayList<>() : new ArrayList<>(contentRatings));
     }
+
     public Kijkwijzer(@Nullable AgeRating ageRating, @NonNull ContentRating... contentRatings) {
         this(ageRating, Arrays.asList(contentRatings));
     }
+
+    public Kijkwijzer() {
+        this(null, new ArrayList<>());
+    }
+
 
     public Kijkwijzer withAgeRating(AgeRating ageRating) {
         return new Kijkwijzer(ageRating, contentRatings);
@@ -225,9 +231,7 @@ public class Kijkwijzer implements NicamRated {
 
     public Kijkwijzer withContentRating(ContentRating... contentRating) {
         List<ContentRating> result = new ArrayList<>(contentRatings);
-        for (ContentRating r : contentRating) {
-            result.add(r);
-        }
+        result.addAll(Arrays.asList(contentRating));
         return  new Kijkwijzer(ageRating, result);
     }
 
