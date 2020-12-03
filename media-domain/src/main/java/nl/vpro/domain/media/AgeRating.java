@@ -15,6 +15,8 @@ import nl.vpro.domain.XmlValued;
 import nl.vpro.domain.media.bind.AgeRatingToString;
 
 /**
+ * The <a href="https://nicam.nl">NICAM</a> age rating.
+ *
  * @author Michiel Meeuwissen
  * @since 3.0
  */

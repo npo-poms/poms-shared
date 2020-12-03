@@ -18,18 +18,17 @@ import nl.vpro.domain.media.ContentRating;
  *</p><p>
  * Combines an {@link AgeRating} with {@link ContentRating}s (which can be seen as the 'reason' for the rating).
  *</p>
- * <p></p>
+ * <p>
  * There are several ways to code a kijkwijzer in a string.
  *</p>
  * <p>
- * For the content ratings, this is pretty straight forward. Every rating is assiged a simple {@link ContentRating#toChar()}. A string of those chars respresent the content ratings.
+ * For the content ratings, this is pretty straight forward. Every rating is assigned a simple {@link ContentRating#toChar()}. A string of those chars represents the content ratings.
  * </p>
  * <p>
  * Age ratings are represented in different ways, but always as an integer. Prior to 5.12 it was always one digit. See {@link #toDonnaCode()} and {@link #toCode()}
  * </p>
  * <p>
- * With the arrival of new ageratings {@link AgeRating#_14} and {@link AgeRating#_18} it was unclear what the new digits would be for those, and we decided to simply introduce a new format where the agerating is always represented with <em>two</em> digits, and where the correspondence is more straighforward (the integer associated with e.g. {@link AgeRating#_14} became
- <code>14</code>).
+ * With the arrival of new age ratings {@link AgeRating#_14} and {@link AgeRating#_18} it was unclear what the new digits would be for those, and we decided to simply introduce a new format where the age rating is always represented with <em>two</em> digits, and where the correspondence is more straightforward (the integer associated with e.g. {@link AgeRating#_14} became <code>14</code>) (using {@link #toPaddedCode(AgeRating)}
  </p>
  *
  *
@@ -183,6 +182,12 @@ public class Kijkwijzer implements NicamRated {
                 return null;
         }
     }
+
+    /**
+     * Returns the age rating as a padded int, always 2 chars.
+     *
+     * @return the agerating as a padded int, or the empty string if the given age rating is {@code null}
+     */
     public static String toPaddedCode(@Nullable AgeRating ageRating) {
         if (ageRating == null) {
             return "";
@@ -263,6 +268,7 @@ public class Kijkwijzer implements NicamRated {
     }
 
     /**
+     * A short string representing this NICAM rating, a 2 digit integer {@link #toPaddedCode(AgeRating)} followed by the {@link ContentRating#toChar()}s of the content ratings.
      * @since 5.12
      */
     public String toPaddedCode() {

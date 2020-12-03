@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlType;
 import nl.vpro.domain.Displayable;
 
 /**
+ * A <a href="https://nicam.nl">NICAM</a> content rating
+ *
  * @author Michiel Meeuwissen
  */
 @XmlEnum

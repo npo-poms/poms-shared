@@ -4,20 +4,20 @@
   version="2.0">
   <jsp:directive.page contentType="image/svg+xml" session="false" />
   <svg version="1.1">
-    <jsp:directive.include file="agerating/6.svg" />
-    <jsp:directive.include file="agerating/9.svg" />
-    <jsp:directive.include file="agerating/12.svg" />
-    <jsp:directive.include file="agerating/14.svg" />
-    <jsp:directive.include file="agerating/18.svg" />
-    <jsp:directive.include file="agerating/all.svg" />
-    <jsp:directive.include file="agerating/all-tous.svg" />
-    <jsp:directive.include file="agerating/tous.svg" />
-    <jsp:directive.include file="agerating/not_yet_rated.svg" />
-    <jsp:directive.include file="contentrating/angst.svg" />
-    <jsp:directive.include file="contentrating/discriminatie.svg" />
-    <jsp:directive.include file="contentrating/drugs_en_alcohol.svg" />
-    <jsp:directive.include file="contentrating/geweld.svg" />
-    <jsp:directive.include file="contentrating/grof_taalgebruik.svg" />
-    <jsp:directive.include file="contentrating/seks.svg" />
+    <jsp:directive.include file="icons/agerating/6.svg" />
+    <jsp:directive.include file="icons/agerating/9.svg" />
+    <jsp:directive.include file="icons/agerating/12.svg" />
+    <jsp:directive.include file="icons/agerating/14.svg" />
+    <jsp:directive.include file="icons/agerating/18.svg" />
+    <jsp:directive.include file="icons/agerating/all.svg" />
+    <jsp:directive.include file="icons/agerating/all-tous.svg" />
+    <jsp:directive.include file="icons/agerating/tous.svg" />
+    <jsp:directive.include file="icons/agerating/not_yet_rated.svg" />
+    <jsp:directive.include file="icons/contentrating/angst.svg" />
+    <jsp:directive.include file="icons/contentrating/discriminatie.svg" />
+    <jsp:directive.include file="icons/contentrating/drugs_en_alcohol.svg" />
+    <jsp:directive.include file="icons/contentrating/geweld.svg" />
+    <jsp:directive.include file="icons/contentrating/grof_taalgebruik.svg" />
+    <jsp:directive.include file="icons/contentrating/seks.svg" />
   </svg>
 </jsp:root>
