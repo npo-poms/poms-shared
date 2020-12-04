@@ -603,10 +603,18 @@
                 </xsl:element>
             </xsl:for-each>
     -->
-    <xsl:element name="duration">
-      <xsl:value-of
-          select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:PublishedDuration/text()"/>
-    </xsl:element>
+    <xsl:choose>
+      <xsl:when test="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:PublishedDuration/text()">
+        <xsl:element name="duration">
+          <xsl:value-of select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:PublishedDuration/text()"/>
+        </xsl:element>
+      </xsl:when>
+      <xsl:when test="tva:BasicDescription/tva:Duration/text()">
+        <xsl:element name="duration">
+          <xsl:value-of select="tva:BasicDescription/tva:Duration/text()"/>
+        </xsl:element>
+      </xsl:when>
+    </xsl:choose>
     <!-- <credits> -->
     <xsl:for-each select="tva:BasicDescription/tva:CreditsList">
       <xsl:element name="credits">
