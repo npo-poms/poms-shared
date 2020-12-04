@@ -38,11 +38,15 @@ public class FindBroadcasterFunctionTest {
         when(broadcasterService.findForNeboId("NEBO")).thenReturn(Broadcaster.of("NEBOOK"));
         when(broadcasterService.findForNeboId(not(eq("NEBO")))).thenThrow(new NotFoundException(null, null));
 
+        when(broadcasterService.find("BLA")).thenReturn(Broadcaster.of("BLA"));
+
+
 
         assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("KRO-NCRV")})).getPrimitiveStringValue()).isEqualTo("KRO-NCRV");
         assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("WO")})).getPrimitiveStringValue()).isEqualTo("WOOK");
         assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("MIS")})).getPrimitiveStringValue()).isEqualTo("MISOK");
         assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("NEBO")})).getPrimitiveStringValue()).isEqualTo("NEBOOK");
+        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("BLA")})).getPrimitiveStringValue()).isEqualTo("BLA");
 
     }
 

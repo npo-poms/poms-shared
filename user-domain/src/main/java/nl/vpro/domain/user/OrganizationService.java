@@ -8,6 +8,11 @@ import java.util.List;
 
 public interface OrganizationService<T extends Organization> {
 
+    /**
+     * Finds the organization by it's main id
+     *
+     * @return <code>null</code> if not found
+     */
     T find(String id);
 
     List<T> findAll();
