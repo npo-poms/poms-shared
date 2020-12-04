@@ -51,6 +51,10 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
      * @since 5.13
      */
     default Optional<Broadcaster> findForIds(String value) {
+        Broadcaster b = find(value);
+        if (b != null) {
+            return Optional.of(b);
+        }
         try {
             return Optional.of(findForWhatsOnId(value));
         } catch (NotFoundException | UnsupportedOperationException e) {
