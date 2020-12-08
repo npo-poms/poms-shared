@@ -32,8 +32,7 @@ import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
-import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
-import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
+import static nl.vpro.domain.media.support.Workflow.*;
 
 
 /**
@@ -588,6 +587,30 @@ public class MediaObjects {
         media.setLastPublishedInstant(now);
         media.setRepubReason(null);
         media.setRepubDestinations(null);
+    }
+
+
+
+    /**
+     * Sets the workflow of the media object to the 'published' state version of the workflow ({@link Workflow#isPublishable()}
+     *
+     * And calls {@link #markPublished(MediaObject, Instant)}
+     * @since 5.20.2
+     */
+
+    public static void markPublishedAndSetCorrectWorkflow(@NonNull MediaObject media, @NonNull Instant now) {
+        markPublished(media, now);
+        if (media.isMerged()) {
+            media.setWorkflow(MERGED);
+        } else if (media.isDeleted()) {
+            media.setWorkflow(DELETED);
+        } else if (media.getWorkflow() == PARENT_REVOKED) {
+            media.setWorkflow(PARENT_REVOKED);
+        } else if (media.isPublishable(now)) {
+            media.setWorkflow(PUBLISHED);
+        } else {
+            media.setWorkflow(REVOKED);
+        }
     }
 
 
