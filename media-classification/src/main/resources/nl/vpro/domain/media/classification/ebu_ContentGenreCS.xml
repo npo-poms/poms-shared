@@ -114,6 +114,7 @@
         <Term termID="3.0.1.1.25">
           <Name xml:lang="nl">Natuur</Name>
           <Reference>urn:tva:metadata:cs:2004:0125</Reference>
+          <Reference>urn:tva:metadata:cs:2004:2.6</Reference> <!-- bindinc -->
           <Reference>urn:mis:genre:NATURE</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
@@ -121,7 +122,6 @@
       <Term termID="3.0.1.2">
         <Name xml:lang="nl">Film</Name>
         <Reference>urn:tva:metadata:cs:2004:02</Reference>
-        <Reference>urn:tva:metadata:cs:2004:2</Reference>
         <Reference>urn:mis:genre:MOVIE</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">
