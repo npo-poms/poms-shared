@@ -69,7 +69,11 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
     @Override
     public boolean hasTerm(String termId) {
-        return getTermsMap().containsKey(new TermId(termId));
+        try {
+            return getTermsMap().containsKey(new TermId(termId));
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
     @Override
