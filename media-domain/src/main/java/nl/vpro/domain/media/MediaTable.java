@@ -115,7 +115,6 @@ public class MediaTable implements Iterable<MediaObject> {
         return Optional.empty();
     }
 
-
     /**
      * @since 5.11
      */
@@ -166,10 +165,6 @@ public class MediaTable implements Iterable<MediaObject> {
         this.groupTable = groupTable;
     }
 
-
-
-
-
     @Override
     public String toString() {
         return "MediaTable " + getGroupTable().size() + " groups " + getProgramTable().size() + " program " + getSchedule();
@@ -183,7 +178,6 @@ public class MediaTable implements Iterable<MediaObject> {
             getGroupTable().listIterator()
         );
     }
-
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         mergePrograms();
@@ -203,7 +197,7 @@ public class MediaTable implements Iterable<MediaObject> {
         for (Map.Entry<String, List<Program>>  e : map.entrySet()) {
             if (e.getValue().size() > 1) {
                 Program first = e.getValue().get(0);
-                log.info("Found duplicate program {}", first);
+                log.debug("Found duplicate program {}", first);
                 for (int i = 1; i < e.getValue().size(); i++) {
                     Program another = e.getValue().get(i);
                     for (String c : another.getCrids()) {
@@ -213,11 +207,12 @@ public class MediaTable implements Iterable<MediaObject> {
                     }
                     another.setMid(null); // to break equalsOnMid
                     programTable.remove(another);
-                    log.info("Removing {}", another);
+                    log.debug("Removing {}", another);
                 }
             }
         }
     }
+
     private void linkSchedule() {
         List<Program> programs = programTable;
         if (schedule.scheduleEvents != null) {
