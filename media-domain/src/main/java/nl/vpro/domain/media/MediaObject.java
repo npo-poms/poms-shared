@@ -3009,7 +3009,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             id = ", id=" + this.getId();
         } else {
             if (Workflow.API.contains(workflow)) {
-                // probably testing ES or so.f
+                // probably testing ES or so.
                 id = "";
             } else {
                 id = " (not persistent)";

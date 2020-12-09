@@ -22,7 +22,9 @@ public class Constants {
 
     public final static String XSL_PARAM_OWNER = "owner";
 
-    public final static String XSL_PERSON_URI_PREFIX = "personUriPrefix";
+    public final static String XSL_PARAM_PERSON_URI_PREFIX = "personUriPrefix";
+
+    public final static String XSL_PARAM_WORKFLOW = "workflow";
 
 
     public enum ChannelIdType {
