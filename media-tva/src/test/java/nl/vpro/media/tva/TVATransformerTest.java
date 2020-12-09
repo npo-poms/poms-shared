@@ -407,7 +407,6 @@ public class TVATransformerTest {
         assertThat(p.getMainTitle()).isEqualTo("#heuldoch - Therapie wie noch nie");
         assertThat(p.getCredits().get(0).getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
-
     }
 
     @Test
