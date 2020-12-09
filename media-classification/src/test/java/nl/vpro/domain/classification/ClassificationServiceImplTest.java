@@ -42,6 +42,7 @@ public class ClassificationServiceImplTest {
     @Test
     public void getTermByReference() {
         assertThat(classificationService.getTermsByReference("urn:mis:genre:MOVIE")).isNotNull();
+        assertThat(classificationService.getTermsByReference("urn:mis:genre:ENTERTAINMENT")).hasSize(3);
     }
     @Test
     public void testGetTermByIdOnDoubleDigits() {
@@ -52,6 +53,11 @@ public class ClassificationServiceImplTest {
     @Test
     public void testGetNext() {
         assertThat(new TermId("3.0.1").next()).isEqualTo(new TermId("3.0.2"));
+    }
+
+    @Test
+    public void testReferencesUnique() {
+
 
     }
 

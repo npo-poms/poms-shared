@@ -1,0 +1,3373 @@
+﻿<TVAMain xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" publisher="media-press.tv" xmlns="urn:tva:metadata:2004">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://media-press.tv/203053643">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal: Briefing door het RIVM]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Informatief programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:21" type="other">
+            <Name xml:lang="NL"><![CDATA[Informatief programma]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT03H06M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0930]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04866660]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1902975399668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>200</TotalEpisodes>
+          <EpisodeNumber>139</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/203051616">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Journaal met gebarentolk1]]></Title>
+          <Title type="originalLanguage"><![CDATA[NOS Journaal met gebarentolk2]]></Title>
+          <Title type="SenderTitle"><![CDATA[NOS Journaal met gebarentolk3]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H25M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl2000mavrGeb]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04657575]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607138668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>230</TotalEpisodes>
+          <EpisodeNumber>214</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/202715138">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Politieke partijen]]></Title>
+          <Title xml:lang="NL" type="EpisodeTitle"><![CDATA[PvdA]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[PvdA]]></Title>
+          <Title type="SenderTitle"><![CDATA[Politieke Partijen: PvdA]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Uitzendtijd voor diverse politieke partijen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Uitzendtijd voor diverse politieke partijen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Politiek programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:18" type="other">
+            <Name xml:lang="NL"><![CDATA[Politiek programma]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npo3.nl/politieke-partijen/POW_03666328</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H02M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_03384208]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_03384448]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606962668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>599</TotalEpisodes>
+          <EpisodeNumber>240</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/201723895">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Geef om je hersenen]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[MAX en de Hersenstichting vragen aandacht voor de enorme impact die een hersenaandoening op het leven van miljoenen mensen heeft. Te gast is Rob de Nijs om te vertellen over zijn ervaringen met de ziekte van Parkinson. Neuroloog Bas Bloem gaat in op het wetenschappelijk onderzoek naar betere behandeling voor parkinson, één van de snelst stijgende hersenaandoeningen van de komende twintig jaar. Muzikale optredens worden verzorgd door Alain Clark en Ernst-Daniël Smid, met zijn dochter Coosje.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Aandacht voor de enorme impact die een hersenaandoening op het leven van miljoenen mensen heeft. Te gast o.a. Rob de Nijs en muzikale optredens van Alain Clark, Ernst-Daniël Smid en dochter Coosje.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Aandacht voor de enorme impact die een hersenaandoening op het leven van miljoenen mensen heeft. Te gast o.a. Rob de Nijs en muzikale optredens van Alain Clark, Ernst-Daniël Smid en dochter Coosje.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Thema-avond]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Thema-avond]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Gezondheid/opvoeding]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1343462813" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="790340994" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/geef-om-je-hersenen/POW_03569038</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H55M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04599215]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04599216]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607350668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>1</TotalEpisodes>
+          <EpisodeNumber>1</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/199930954">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Nietalleen.nl]]></Title>
+          <Title xml:lang="NL" type="EpisodeTitle"><![CDATA[Niet Alleen]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Bert van Leeuwen reist het land door om mensen te helpen waar nodig. De verhalen van Bert worden afgewisseld met hoopvolle hulpverhalen van vrijwilligers die allemaal verschillende manieren laten zien hoe zij - juist in deze tijd - anderen een helpende hand bieden. Het zijn inspirerende verhalen die onder andere zijn ingezonden via het online platform #Nietalleen. Via dit platform worden hulpvragers en lokale hulpaanbieders sinds het begin van de coronacrisis aan elkaar verbonden.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Bert van Leeuwen reist het land door om mensen te helpen waar nodig. De verhalen van Bert worden afgewisseld met hoopvolle hulpverhalen van vrijwilligers.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Bert van Leeuwen reist door heel het land om mensen te helpen waar nodig.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Informatief programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:21" type="other">
+            <Name xml:lang="NL"><![CDATA[Informatief programma]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="246476307" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="13208583" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nietalleennl/VPWON_1318786</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H10M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[VPWON_1318787]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[VPWON_1325213]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1887117507668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>34</TotalEpisodes>
+          <EpisodeNumber>33</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/198067941">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Geef om je hersenen]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[MAX en de Hersenstichting vragen aandacht voor de enorme impact die een hersenaandoening op het leven van miljoenen mensen heeft. Te gast is Rob de Nijs om te vertellen over zijn ervaringen met de ziekte van Parkinson. Neuroloog Bas Bloem gaat in op het wetenschappelijk onderzoek naar betere behandeling voor parkinson, één van de snelst stijgende hersenaandoeningen van de komende twintig jaar. Muzikale optredens worden verzorgd door Alain Clark en Ernst Daniël Smid, met zijn dochter Coosje.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Aandacht voor de enorme impact die een hersenaandoening op het leven van miljoenen mensen heeft. Te gast zijn: Rob de Nijs, Alain Clark, Ernst Daniël Smid en dochter Coosje.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Thema-avond]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Thema-avond]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1343462813" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="790340994" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/geef-om-je-hersenen/POW_03569038</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H01M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194814510">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Op1]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Talkshow met wisselende presentatieduo's, live vanuit Amsterdam. Met roulerende duo's van verschillende omroepen onderstreept Op1 de veelzijdigheid van de NPO. Een herkenbaar programma met elke dag dezelfde vorm en een wisselende signatuur, waarin duiding van actualiteit en reflectie op de waan van de dag een belangrijke plaats innemen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Talkshow met wisselende presentatieduo's, live vanuit Amsterdam.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Talkshow]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="NL"><![CDATA[Talkshow]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="9999338451267" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="9999387047047" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H55M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04596563]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04809656]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606896668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>289</TotalEpisodes>
+          <EpisodeNumber>280</EpisodeNumber>
+          <Season>1</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194814509">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Dokters van morgen]]></Title>
+          <Title xml:lang="NL" type="EpisodeTitle"><![CDATA[Ontstekingen]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Miljoenen Nederlanders kampen met een chronische ontstekingsziekte zoals diabetes, reuma of astma. Zij worden hier vaak levenslang voor behandeld. Maar hoe kan het eigenlijk dat de een wel reuma krijgt en de ander niet? En kun je via leefstijl deze ziekte de kop indrukken? Antoinette Hertsenberg spreekt de eeneiige tweeling Bram en Joris. De één heeft chronische ontstekingen in zijn darm en de ander heeft nergens last van. Daarnaast volgen we een jaar lang deelnemers die meedoen aan een wetenschappelijk onderzoek van reuma-expertisecentrum Reade in Amsterdam. De reuma- en artrose patiënten slikken jarenlang medicijnen en proberen met een nieuwe leefstijl daar vanaf te komen. Heeft dit effect op hun ontstekingsziekte?]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Hoe kun je zo gezond mogelijk oud worden? Antoinette Hertsenberg onderzoekt spraakmakende innovaties in de zorg. In iedere aflevering staat er een thema centraal.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Miljoenen Nederlanders kampen met een chronische ontstekingsziekte zoals diabetes, reuma of astma. Zij worden hier vaak levenslang voor behandeld. Antoinette Hertsenberg spreekt de eeneiige tweeling Bram en Joris. De één heeft chronische ontstekingen in zijn darm en de ander heeft nergens last van.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Medisch programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:17" type="other">
+            <Name xml:lang="NL"><![CDATA[Medisch programma]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Gezondheid/opvoeding]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="99991752598814" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H51M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[AT_2120932]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[AT_2155793]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607022668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>13</TotalEpisodes>
+          <EpisodeNumber>12</EpisodeNumber>
+          <Season>4</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194814508">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Op1]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Talkshow met wisselende presentatieduo's, live vanuit Amsterdam. Met roulerende duo's van verschillende omroepen onderstreept Op1 de veelzijdigheid van de NPO. Een herkenbaar programma met elke dag dezelfde vorm en een wisselende signatuur, waarin duiding van actualiteit en reflectie op de waan van de dag een belangrijke plaats innemen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Bert van Leeuwen en Theoloog des Vaderlands Almatine Leene over hoe we dit jaar kerst kunnen vieren. * Jandino Asporaat komt met een derde film met zijn typetje Judeska. * Burgemeester van Den Haag Jan van Zanen leerde zijn stad vooral in lockdown kennen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Te gast: Bert van Leeuwen, Almatine Leene, Jandino Asporaat en Jan van Zanen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Talkshow]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="NL"><![CDATA[Talkshow]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="9999369695457" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="99991278445532" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H55M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04596563]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04809655]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607264668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>289</TotalEpisodes>
+          <EpisodeNumber>279</EpisodeNumber>
+          <Season>1</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194814507">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Op1]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Talkshow met wisselende presentatieduo's, live vanuit Amsterdam. Met roulerende duo's van verschillende omroepen onderstreept Op1 de veelzijdigheid van de NPO. Een herkenbaar programma met elke dag dezelfde vorm en een wisselende signatuur, waarin duiding van actualiteit en reflectie op de waan van de dag een belangrijke plaats innemen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Talkshow met wisselende presentatieduo's, live vanuit Amsterdam.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Talkshow]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="NL"><![CDATA[Talkshow]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="9999338451267" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="9999387047047" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H55M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04596563]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04809656]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607121668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>289</TotalEpisodes>
+          <EpisodeNumber>280</EpisodeNumber>
+          <Season>1</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792081">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H04M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0830n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04504083]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606968668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>202</TotalEpisodes>
+          <EpisodeNumber>170</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792080">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Goedemorgen Nederland]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Ochtendshow. Met een goed humeur wordt de nieuwe nieuwsdag geduid. Met prominente gasten, opmerkelijk nieuws uit de media en compacte reportages. Met aandacht voor politiek, economie, veiligheid en entertainment. Afwisselend gepresenteerd door: Welmoed Sijtsma, Maaike Timmerman, Lisette Wellens en Nikki Herr.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof. Met hen hebben we het over de gevolgen van de nieuwe maatregelen van het kabinet en Jacco Vonhof komt op voor ondernemers die normaal gesproken juist in de wintermaanden hun geld verdienen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/goedemorgen-nederland/POW_03333061</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H16M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04776540]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04776608]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607294668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>75</TotalEpisodes>
+          <EpisodeNumber>68</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792079">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0630n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04502450]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607194668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792078">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0630n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04502450]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607254668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792077">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[EenVandaag]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het laatste nieuws en achtergronden uit binnen- en buitenland. Via het EenVandaag Opiniepanel kunnen 50.000 leden hun stem laten horen en reageren op actuele thema's.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het laatste nieuws en achtergronden uit binnen- en buitenland. Via het EenVandaag Opiniepanel kunnen 50.000 leden hun stem laten horen en reageren op actuele thema's.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>www.eenvandaag.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[AT_2118420]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[AT_2145098]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607014668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>356</TotalEpisodes>
+          <EpisodeNumber>294</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792076">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1300n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04506027]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606978668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>261</TotalEpisodes>
+          <EpisodeNumber>245</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792075">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Goedemorgen Nederland]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Ochtendshow. Met een goed humeur wordt de nieuwe nieuwsdag geduid. Met prominente gasten, opmerkelijk nieuws uit de media en compacte reportages. Met aandacht voor politiek, economie, veiligheid en entertainment. Afwisselend gepresenteerd door: Welmoed Sijtsma, Maaike Timmerman, Lisette Wellens en Nikki Herr.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof. Met hen hebben we het over de gevolgen van de nieuwe maatregelen van het kabinet en Jacco Vonhof komt op voor ondernemers die normaal gesproken juist in de wintermaanden hun geld verdienen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/goedemorgen-nederland/POW_03333061</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04776692]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04776760]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607422668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>75</TotalEpisodes>
+          <EpisodeNumber>68</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792074">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Goedemorgen Nederland]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Ochtendshow. Met een goed humeur wordt de nieuwe nieuwsdag geduid. Met prominente gasten, opmerkelijk nieuws uit de media en compacte reportages. Met aandacht voor politiek, economie, veiligheid en entertainment. Afwisselend gepresenteerd door: Welmoed Sijtsma, Maaike Timmerman, Lisette Wellens en Nikki Herr.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof. Met hen hebben we het over de gevolgen van de nieuwe maatregelen van het kabinet en Jacco Vonhof komt op voor ondernemers die normaal gesproken juist in de wintermaanden hun geld verdienen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/goedemorgen-nederland/POW_03333061</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H16M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04776616]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04776684]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607098668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>75</TotalEpisodes>
+          <EpisodeNumber>68</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792073">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[EenVandaag]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het laatste nieuws en achtergronden uit binnen- en buitenland. Via het EenVandaag Opiniepanel kunnen 50.000 leden hun stem laten horen en reageren op actuele thema's.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het laatste nieuws en achtergronden uit binnen- en buitenland. Via het EenVandaag Opiniepanel kunnen 50.000 leden hun stem laten horen en reageren op actuele thema's.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>www.eenvandaag.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[AT_2118420]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[AT_2145098]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606923668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>356</TotalEpisodes>
+          <EpisodeNumber>294</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792072">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws, de sport van de dag en de actuele weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws, de sport van de dag en de actuele weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H20M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20jnlLaatmavrSP]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04508877]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607369668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>270</TotalEpisodes>
+          <EpisodeNumber>243</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792071">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H10M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1400]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04713497]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607085668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>255</TotalEpisodes>
+          <EpisodeNumber>236</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792070">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1300n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04506027]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607157668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>261</TotalEpisodes>
+          <EpisodeNumber>245</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792069">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1300n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04506027]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607284668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>261</TotalEpisodes>
+          <EpisodeNumber>245</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792068">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[M]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Margriet bespreekt het nieuws van de dag en ontvangt gasten uit de actualiteit, politiek, sport, amusement en cultuur.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Margriet bespreekt het nieuws van de dag en ontvangt gasten uit de actualiteit, politiek, sport, amusement en cultuur.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Talkshow]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="NL"><![CDATA[Talkshow]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="9999743920099" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H49M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[KN_1716185]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[KN_1716713]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607376668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>40</TotalEpisodes>
+          <EpisodeNumber>33</EpisodeNumber>
+          <Season>4</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792067">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1700n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04507436]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607180668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>310</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792066">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H10M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1400]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04713497]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607398668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>255</TotalEpisodes>
+          <EpisodeNumber>236</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792061">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H09M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0700n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04502711]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607040668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792060">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[MAX geheugentrainer]]></Title>
+          <Title type="SenderTitle"><![CDATA[MAX Geheugentrainer]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Train uw brein. Naarmate iemand ouder wordt, wil het geheugen nog wel eens iets minder scherp worden. Dit programma geeft u de kans om het geheugen te trainen. Met eenvoudige oefeningen en opdrachten leert u binnen de kortste keren weer meer te onthouden dan u gewend was.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Dit programma geeft u de kans om het geheugen te trainen. Met eenvoudige oefeningen en opdrachten leert u binnen de kortste keren weer meer te onthouden dan u gewend was.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Spel]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="NL"><![CDATA[Spel]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Spel/quiz]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/max-geheugentrainer/POW_03108298</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04557486]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04557604]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607393668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>128</TotalEpisodes>
+          <EpisodeNumber>118</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792059">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws, de sport van de dag en de actuele weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws, de sport van de dag en de actuele weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H20M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20jnlLaatmavrSP]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04508877]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607150668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>270</TotalEpisodes>
+          <EpisodeNumber>243</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792058">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H25M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl2000mavr]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04508476]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606883668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>270</TotalEpisodes>
+          <EpisodeNumber>246</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792056">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws, de sport van de dag en de actuele weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws, de sport van de dag en de actuele weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H20M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20jnlLaatmavrSP]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04508877]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607007668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>270</TotalEpisodes>
+          <EpisodeNumber>243</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792052">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H04M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0730n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04503157]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607030668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>200</TotalEpisodes>
+          <EpisodeNumber>168</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792051">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Goedemorgen Nederland]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Ochtendshow. Met een goed humeur wordt de nieuwe nieuwsdag geduid. Met prominente gasten, opmerkelijk nieuws uit de media en compacte reportages. Met aandacht voor politiek, economie, veiligheid en entertainment. Afwisselend gepresenteerd door: Welmoed Sijtsma, Maaike Timmerman, Lisette Wellens en Nikki Herr.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof. Met hen hebben we het over de gevolgen van de nieuwe maatregelen van het kabinet en Jacco Vonhof komt op voor ondernemers die normaal gesproken juist in de wintermaanden hun geld verdienen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/goedemorgen-nederland/POW_03333061</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H16M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04776388]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04776456]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607047668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>75</TotalEpisodes>
+          <EpisodeNumber>68</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792050">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0630n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04502450]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607244668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792049">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0630n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04502450]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607326668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792048">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0630n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04502450]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607201668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792046">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Sportjournaal]]></Title>
+          <Title type="originalLanguage"><![CDATA[NOS Sportjournaal]]></Title>
+          <Title type="SenderTitle"><![CDATA[NOS Sportjournaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het belangrijkste sportnieuws van de dag.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het belangrijkste sportnieuws van de dag.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Sportnieuws]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Sport]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Sportnieuws]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="NL"><![CDATA[Sport informatie]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>www.studiosport.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H09M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20stspjnl1845]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04812304]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607301668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>261</TotalEpisodes>
+          <EpisodeNumber>245</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792045">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1500]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04506882]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607078668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792044">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H11M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1400]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04713497]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607173668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>255</TotalEpisodes>
+          <EpisodeNumber>236</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792043">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H09M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0900n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04504611]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606988668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>265</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792042">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Goedemorgen Nederland]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Ochtendshow. Met een goed humeur wordt de nieuwe nieuwsdag geduid. Met prominente gasten, opmerkelijk nieuws uit de media en compacte reportages. Met aandacht voor politiek, economie, veiligheid en entertainment. Afwisselend gepresenteerd door: Welmoed Sijtsma, Maaike Timmerman, Lisette Wellens en Nikki Herr.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof. Met hen hebben we het over de gevolgen van de nieuwe maatregelen van het kabinet en Jacco Vonhof komt op voor ondernemers die normaal gesproken juist in de wintermaanden hun geld verdienen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Te gast zijn politiek commentator van De Telegraaf Wouter de Winther en MKB-Voorzitter Jacco Vonhof.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/goedemorgen-nederland/POW_03333061</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H16M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04776464]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04776532]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607311668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>75</TotalEpisodes>
+          <EpisodeNumber>68</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792041">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl2000mavr]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04508476]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606928668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>270</TotalEpisodes>
+          <EpisodeNumber>246</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792040">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws, gebeurtenissen van nationaal en internationaal belang en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1800]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04508001]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607187668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>270</TotalEpisodes>
+          <EpisodeNumber>245</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792039">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Tijd voor MAX]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met in deze uitzending:
+* Op donderdag 10 december begint de nieuwe MAX-serie 'Kerstgezel.nl'. Actrices Juliette van Ardenne en Ricky Koole zijn te gast.
+
+* Precies drie maanden na de brand in het vluchtelingenkamp Moria, geeft arts en gynaecoloog Sanne van der Kooij een update.
+
+* Kasper Bormans deed maar liefst tien jaar onderzoek naar het verhogen van levenskwaliteit bij mensen met dementie en hun nabije omgeving. Hij schreef er het boek 'Tijd maken voor dementie' over.
+
+* Documentairemaker Cherry Duyns schreef het boek 'Afscheid', waarin hij terugblikt op het leven van zijn moeder.
+
+* Lisa Loïs en Dennis van Aarssen zingen de klassieke kerstballad: 'Baby it's Cold Outside'.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Live magazine met een goede mix van nieuws, informatie, kunst, cultuur en entertainment met boeiende gasten, interessante onderwerpen en een heldere blik op de dagelijkse actualiteit.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Te gast: Sanne van der Kooij, Kasper Bormans, Cherry Duyns, Juliette van Ardenne en Ricky Koole, Lisa Loïs en Dennis van Aarssen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Talkshow]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="NL"><![CDATA[Talkshow]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="99991343462813" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="9999790340994" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/tijd-voor-max/POW_03108338</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H42M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04560587]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04776969]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606957668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>204</TotalEpisodes>
+          <EpisodeNumber>186</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792038">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl1500]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04506882]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607405668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792035">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Nederland in beweging]]></Title>
+          <Title type="SenderTitle"><![CDATA[Nederland in Beweging]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Wilt u investeren in uw gezondheid? Meedoen betekent dat u al een kwartier beweegt van het aanbevolen dagelijkse half uur.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Wilt u investeren in uw gezondheid? Meedoen betekent dat u al een kwartier beweegt van het aanbevolen dagelijkse half uur.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Gymnastiekprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:19" type="other">
+            <Name xml:lang="NL"><![CDATA[Gymnastiekprogramma]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="NL"><![CDATA[Sport]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="2095224612" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1128937648" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nederland-in-beweging/07-05-2014/POW_00750744</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04558481]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04558656]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606945668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>192</TotalEpisodes>
+          <EpisodeNumber>175</EpisodeNumber>
+          <Season>2020</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/194792032">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[NOS Journaal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Met het laatste nieuws en de weersverwachting.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:20" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuws/actualiteiten]]></Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/nos-journaal/NOSJournaal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H09M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[20Jnl0800n1]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04503635]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885606935668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>260</TotalEpisodes>
+          <EpisodeNumber>244</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/155056869">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main"><![CDATA[Kook mee met MAX]]></Title>
+          <Title xml:lang="NL" type="EpisodeTitle"><![CDATA[Hokkien met kipfilet]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Hokkien met kipfilet]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Wat eet ik vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze nemen de kijker aan de hand mee bij het maken van makkelijke en verrassende gerechten. De recepten blinken uit in eenvoud en diversiteit en er zijn geen ingewikkelde apparaten voor nodig. De chefs blijven weg van dure ingrediënten en werken zoveel mogelijk met seizoensproducten en ingrediënten van eigen bodem: zo duurzaam mogelijk.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Wat eet ik vanavond? Topkoks Sandra Ysbrandy en Mounir Toub geven antwoord op die ene moeilijke vraag. Ze nemen de kijker aan de hand mee bij het maken van makkelijke en verrassende gerechten.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Kookprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Kookprogramma]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:10" type="other">
+            <Name xml:lang="NL"><![CDATA[Koken/eten]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1479468649" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="792950068" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.npostart.nl/kook-mee-met-max/POW_03619681</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2019</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H13M</Duration>
+          <OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:seriesid"><![CDATA[POW_04101398]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:productid"><![CDATA[POW_04212633]]></OtherIdentifier>
+            <OtherIdentifier type="broadcaster:npo:programcrid"><![CDATA[crid://npo/programmagegevens/1885607002668]]></OtherIdentifier>
+          </OtherIdentifier>
+          <TotalEpisodes>210</TotalEpisodes>
+          <EpisodeNumber>201</EpisodeNumber>
+          <Season>2019</Season>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable />
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="TV01" start="2020-12-09T05:50:00+01:00" end="2020-12-10T05:55:00+01:00">
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792035" />
+          <ProgramURL>dvb://1.1.TV01;338478604@2020-12-09T05:50:00+01:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390284</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T05:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792060" />
+          <ProgramURL>dvb://1.1.TV01;338478719@2020-12-09T06:05:00+01:00--PT00H25M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390310</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T06:05:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792048" />
+          <ProgramURL>dvb://1.1.TV01;338478618@2020-12-09T06:30:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390298</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T06:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792078" />
+          <ProgramURL>dvb://1.1.TV01;338478739@2020-12-09T06:35:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390330</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T06:35:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792049" />
+          <ProgramURL>dvb://1.1.TV01;338478619@2020-12-09T06:40:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390299</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T06:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792079" />
+          <ProgramURL>dvb://1.1.TV01;338478740@2020-12-09T06:45:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390331</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T06:45:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792050" />
+          <ProgramURL>dvb://1.1.TV01;338478620@2020-12-09T06:50:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390300</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T06:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792061" />
+          <ProgramURL>dvb://1.1.TV01;338478720@2020-12-09T07:00:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390311</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T07:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792051" />
+          <ProgramURL>dvb://1.1.TV01;338478621@2020-12-09T07:10:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390301</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T07:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="WNL" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792052" />
+          <ProgramURL>dvb://1.1.TV01;338478622@2020-12-09T07:30:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390302</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T07:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792042" />
+          <ProgramURL>dvb://1.1.TV01;338478612@2020-12-09T07:40:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390292</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T07:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="WNL" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792032" />
+          <ProgramURL>dvb://1.1.TV01;338478599@2020-12-09T08:00:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390279</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T08:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792080" />
+          <ProgramURL>dvb://1.1.TV01;338478741@2020-12-09T08:10:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390332</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T08:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="WNL" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792081" />
+          <ProgramURL>dvb://1.1.TV01;338478742@2020-12-09T08:30:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390333</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T08:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792074" />
+          <ProgramURL>dvb://1.1.TV01;338478735@2020-12-09T08:40:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390326</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T08:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="WNL" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792043" />
+          <ProgramURL>dvb://1.1.TV01;338478613@2020-12-09T09:00:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390293</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T09:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792075" />
+          <ProgramURL>dvb://1.1.TV01;338478736@2020-12-09T09:10:00+01:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390327</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T09:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="WNL" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/203053643" />
+          <ProgramURL>dvb://1.1.TV01;351939772@2020-12-09T09:25:00+01:00--PT03H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:721327329</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T09:25:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT03H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/155056869" />
+          <ProgramURL>dvb://1.1.TV01;338478601@2020-12-09T12:40:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390281</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T12:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792069" />
+          <ProgramURL>dvb://1.1.TV01;338478728@2020-12-09T13:00:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390319</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T13:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792070" />
+          <ProgramURL>dvb://1.1.TV01;338478729@2020-12-09T13:20:00+01:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390320</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T13:20:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792076" />
+          <ProgramURL>dvb://1.1.TV01;338478737@2020-12-09T13:35:00+01:00--PT00H25M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390328</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T13:35:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792071" />
+          <ProgramURL>dvb://1.1.TV01;338478730@2020-12-09T14:00:00+01:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390321</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T14:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/155056869" />
+          <ProgramURL>dvb://1.1.TV01;338478602@2020-12-09T14:15:00+01:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390282</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T14:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792066" />
+          <ProgramURL>dvb://1.1.TV01;338478725@2020-12-09T14:30:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390316</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T14:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792044" />
+          <ProgramURL>dvb://1.1.TV01;338478614@2020-12-09T14:40:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390294</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T14:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792038" />
+          <ProgramURL>dvb://1.1.TV01;338478607@2020-12-09T15:00:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390287</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T15:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792045" />
+          <ProgramURL>dvb://1.1.TV01;338478615@2020-12-09T15:20:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390295</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T15:20:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194814508" />
+          <ProgramURL>dvb://1.1.TV01;338478616@2020-12-09T15:40:00+01:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390296</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T15:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BNNVARA" />
+            <Broadcaster code="EO" />
+            <Broadcaster code="MAX" />
+            <Broadcaster code="WNL" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/199930954" />
+          <ProgramURL>dvb://1.1.TV01;345683373@2020-12-09T16:40:00+01:00--PT00H20M00S</ProgramURL>
+          <InstanceMetadataId>imi:710707002</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T16:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="EO" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792067" />
+          <ProgramURL>dvb://1.1.TV01;338478726@2020-12-09T17:00:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390317</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T17:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792039" />
+          <ProgramURL>dvb://1.1.TV01;338478608@2020-12-09T17:10:00+01:00--PT00H47M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390288</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T17:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H47M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/202715138" />
+          <ProgramURL>dvb://1.1.TV01;351279434@2020-12-09T17:57:00+01:00--PT00H03M00S</ProgramURL>
+          <InstanceMetadataId>imi:720341996</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T17:57:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="PP" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792040" />
+          <ProgramURL>dvb://1.1.TV01;338478609@2020-12-09T18:00:00+01:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390289</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T18:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792077" />
+          <ProgramURL>dvb://1.1.TV01;338478738@2020-12-09T18:15:00+01:00--PT00H35M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390329</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T18:15:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792046" />
+          <ProgramURL>dvb://1.1.TV01;338478617@2020-12-09T18:50:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390297</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T18:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792068" />
+          <ProgramURL>dvb://1.1.TV01;338478727@2020-12-09T19:00:00+01:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390318</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T19:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792041" />
+          <ProgramURL>dvb://1.1.TV01;338478610@2020-12-09T20:00:00+01:00--PT00H34M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390290</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T20:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H34M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/198067941" />
+          <ProgramURL>dvb://1.1.TV01;346162288@2020-12-09T20:34:00+01:00--PT00H01M00S</ProgramURL>
+          <InstanceMetadataId>imi:711572566</InstanceMetadataId>
+          <PublishedStartTime>2020-12-09T20:34:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H01M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/201723895" />
+          <ProgramURL>dvb://1.1.TV01;349254140@2020-12-09T20:35:00+01:00--PT01H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:716827545</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T20:35:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT01H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="MAX" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194814509" />
+          <ProgramURL>dvb://1.1.TV01;338478731@2020-12-09T21:40:00+01:00--PT00H55M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390322</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T21:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H55M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194814507" />
+          <ProgramURL>dvb://1.1.TV01;338478611@2020-12-09T22:35:00+01:00--PT01H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390291</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T22:35:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT01H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BNNVARA" />
+            <Broadcaster code="EO" />
+            <Broadcaster code="MAX" />
+            <Broadcaster code="WNL" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792072" />
+          <ProgramURL>dvb://1.1.TV01;338478732@2020-12-09T23:40:00+01:00--PT00H25M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390323</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-09T23:40:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194814510" />
+          <ProgramURL>dvb://1.1.TV01;338478733@2020-12-10T00:05:00+01:00--PT01H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390324</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-10T00:05:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT01H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BNNVARA" />
+            <Broadcaster code="EO" />
+            <Broadcaster code="MAX" />
+            <Broadcaster code="WNL" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792056" />
+          <ProgramURL>dvb://1.1.TV01;338478626@2020-12-10T01:10:00+01:00--PT00H25M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390306</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-10T01:10:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792073" />
+          <ProgramURL>dvb://1.1.TV01;338478734@2020-12-10T01:35:00+01:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390325</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-10T01:35:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/203051616" />
+          <ProgramURL>dvb://1.1.TV01;351939773@2020-12-10T02:05:00+01:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:721327330</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-10T02:05:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792058" />
+          <ProgramURL>dvb://1.1.TV01;338478628@2020-12-10T02:35:00+01:00--PT00H25M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390308</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-10T02:35:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/194792059" />
+          <ProgramURL>dvb://1.1.TV01;338478718@2020-12-10T03:00:00+01:00--PT02H55M00S</ProgramURL>
+          <InstanceMetadataId>imi:693390309</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2020-12-10T03:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT02H55M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS" />
+          </BroadcasterList>
+          <Repeat value="true" />
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="2095224612">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Olga</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Commandeur</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1128937648">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Duco</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Bauwens</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1479468649">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Sandra</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Ysbrandy</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="792950068">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Mounir</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Toub</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999369695457">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Giovanca</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Ostiana</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991278445532">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Tijs</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van den Brink</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="246476307">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Bert</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van Leeuwen</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="13208583">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Anne-Mar</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Zwart</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991343462813">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Martine</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van Os</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999790340994">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Sybrand</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Niessen</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999743920099">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Margriet</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van der Linden</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1343462813">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Martine</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van Os</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="790340994">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Sybrand</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Niessen</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991752598814">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Antoinette</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Hertsenberg</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999338451267">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Carrie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">ten Napel</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999387047047">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Charles</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Groenhuijsen</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>
