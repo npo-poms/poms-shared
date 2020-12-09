@@ -1252,6 +1252,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         this.source = source;
     }
 
+
+    /**
+     * The production location
+     */
     @XmlElement(name = "country")
     @JsonProperty("countries")
     @JsonSerialize(using = CountryCodeList.Serializer.class)
