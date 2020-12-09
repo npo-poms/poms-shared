@@ -35,9 +35,9 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.media.tva.saxon.extension.*;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.media.tva.Constants.*;
+import static nl.vpro.test.util.jaxb.JAXBTestUtil.similar;
 import static org.apache.commons.io.output.NullOutputStream.NULL_OUTPUT_STREAM;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
@@ -65,7 +65,7 @@ public class TVATransformerTest {
     @Test
     public void testTransform() throws TransformerException, ParserConfigurationException, SAXException, IOException {
         String xml = transform("pd/pd/NED320150805P.xml");
-        JAXBTestUtil.similar(xml,
+        similar(xml,
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<mediaInformation xmlns=\"urn:vpro:media:2009\"\n" +
                 "                  publicationTime=\"2015-08-03T17:40:17.040+02:00\"\n" +
@@ -165,7 +165,7 @@ public class TVATransformerTest {
     @Test
     public void testTransform_MSE_4907() throws TransformerException, ParserConfigurationException, SAXException, IOException {
         String xml = transform("pd/pd/NED320200220P.xml");
-        JAXBTestUtil.similar(xml, getClass().getResourceAsStream("/pd/pd/NED320200220P.mediatable.xml"));
+        similar(xml, getClass().getResourceAsStream("/pd/pd/NED320200220P.mediatable.xml"));
     }
 
     @Test
