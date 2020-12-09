@@ -574,19 +574,13 @@
       </xsl:element>
     </xsl:for-each>
     <!-- <country> -->
-    <xsl:choose>
-      <xsl:when test="$newGenres = 'true'">
-        <!-- Disabled for older MIS deliveries -->
-        <xsl:for-each select="tva:BasicDescription/tva:ProductionLocationList/tva:ProductionLocation">
-          <xsl:element name="country">
-            <xsl:attribute name="code">
-              <xsl:value-of select="@code"/>
-            </xsl:attribute>
-          </xsl:element>
-        </xsl:for-each>
-      </xsl:when>
-    </xsl:choose>
-
+    <xsl:for-each select="tva:BasicDescription/tva:ProductionLocationList/tva:ProductionLocation">
+      <xsl:element name="country">
+        <xsl:attribute name="code">
+          <xsl:value-of select="@code"/>
+        </xsl:attribute>
+      </xsl:element>
+    </xsl:for-each>
 
     <!-- language -->
     <xsl:for-each select="tva:BasicDescription/tva:Language">
