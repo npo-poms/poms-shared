@@ -1,16 +1,17 @@
 package nl.vpro.domain.media;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -19,6 +20,8 @@ import com.google.common.collect.Iterators;
 
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+
+import static nl.vpro.domain.media.MediaObjects.deepCopy;
 
 
 @XmlRootElement(name = "mediaInformation")
@@ -164,6 +167,9 @@ public class MediaTable implements Iterable<MediaObject> {
     }
 
 
+
+
+
     @Override
     public String toString() {
         return "MediaTable " + getGroupTable().size() + " groups " + getProgramTable().size() + " program " + getSchedule();
@@ -177,4 +183,103 @@ public class MediaTable implements Iterable<MediaObject> {
             getGroupTable().listIterator()
         );
     }
+
+
+    void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+        mergePrograms();
+        linkSchedule();
+    }
+
+    private void mergePrograms() {
+        // if you provide a media table xml with duplicate programs, (with same mid), then we simply take only the
+        // merge duplicate programs
+        Map<String, List<Program>> map = new HashMap<>();
+        for (Program program : programTable) {
+            if (program.getMid() != null) {
+                List<Program> programs = map.computeIfAbsent(program.getMid(), (k) -> new ArrayList<>());
+                programs.add(program);
+            }
+        }
+        for (Map.Entry<String, List<Program>>  e : map.entrySet()) {
+            if (e.getValue().size() > 1) {
+                Program first = e.getValue().get(0);
+                log.info("Found duplicate program {}", first);
+                for (int i = 1; i < e.getValue().size(); i++) {
+                    Program another = e.getValue().get(i);
+                    for (String c : another.getCrids()) {
+                        if (! first.getCrids().contains(c)) {
+                            first.getCrids().add(c);
+                        }
+                    }
+                    another.setMid(null); // to break equalsOnMid
+                    programTable.remove(another);
+                    log.info("Removing {}", another);
+                }
+            }
+        }
+    }
+    private void linkSchedule() {
+        List<Program> programs = programTable;
+        if (schedule.scheduleEvents != null) {
+            for (ScheduleEvent scheduleEvent : schedule.scheduleEvents) {
+                Program clone = null;
+
+                for (Program program : programs) {
+                    if (program.getCrids().size() > 0
+                        && StringUtils.isNotEmpty(scheduleEvent.getUrnRef())
+                        && program.getCrids().contains(scheduleEvent.getUrnRef())) {
+
+                        // MIS TVAnytime stores poProgId's under events. Therefore MIS deliveries may contain two or more
+                        // ScheduleEvents referencing the same program on crid with different poProgId's.
+                        // See test case.
+
+                        String scheduleEventPoProgID = scheduleEvent.getPoProgID();
+                        log.debug("No poprogid for {}", scheduleEvent);
+                        if (scheduleEventPoProgID != null) {
+                            if (program.getMid() == null || scheduleEventPoProgID.equals(program.getMid())) {
+                                program.setMid(scheduleEventPoProgID);
+                                scheduleEvent.setParent(program);
+                            } else {
+                                log.debug("Cloning a MIS duplicate");
+                                // Create a clone for the second poProgId and its event
+                                clone = cloneMisDuplicate(program);
+                                /* Reset MID to null first, then set it to the poProgID from the Schedule event; otherwise an
+                                     IllegalArgumentException will be thrown setting the MID to another value.
+                                    */
+                                clone.setMid(null);
+                                clone.setMid(scheduleEventPoProgID);
+                                scheduleEvent.setParent(clone);
+                            }
+                        } else {
+                            scheduleEvent.setParent(program);
+                        }
+                        break;
+                    }
+                }
+
+                if (clone != null) {
+                    programs.add(clone);
+                }
+            }
+        }
+    }
+
+
+    private Program cloneMisDuplicate(Program program) {
+        Program clone = deepCopy(program);
+
+        // Prevent constraint violation on duplicate crids
+        for (String crid : clone.getCrids()) {
+            clone.removeCrid(crid);
+        }
+
+        // Do not copy events
+        List<ScheduleEvent> events = new ArrayList<>(clone.getScheduleEvents());
+        for (ScheduleEvent event : events) {
+            event.clearMediaObject();
+        }
+
+        return clone;
+    }
+
 }

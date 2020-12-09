@@ -420,9 +420,10 @@ public class TVATransformerTest {
                 transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
             }
         );
-        log.info(xml);
+        //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
+        assertThat(table.getProgramTable()).hasSize(34);
         JAXB.marshal(table, System.out);
 
         Program p = (Program) table.find("POW_04866660").get();
@@ -431,6 +432,9 @@ public class TVATransformerTest {
         assertThat(p.getCrids()).containsExactly("crid://media-press.tv/203053643", "crid://npo/programmagegevens/1902975399668");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
         assertThat(p.getScheduleEvents()).isNotEmpty();
+
+        Program p2 = (Program) table.find("POW_04508476").get();
+        assertThat(p2.getScheduleEvents()).hasSize(2);
 
     }
 
