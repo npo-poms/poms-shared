@@ -457,6 +457,12 @@
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
+              <xsl:when test="lower-case(./@type) = 'sendertitle'">
+                <xsl:comment>Found SenderTitle <xsl:value-of select="."/> (what's that)</xsl:comment>
+              </xsl:when>
+              <xsl:when test="lower-case(./@type) = 'originalepisodetitle'">
+                <xsl:comment>Found originalepisodetitle <xsl:value-of select="."/> (what's that)</xsl:comment>
+              </xsl:when>
               <xsl:otherwise>
                 <title type="KENNIKNIET-{@type}"> <!-- trigger an unmarshall error -->
                   <xsl:value-of select="normalize-space(text())"/>
@@ -616,7 +622,7 @@
     <xsl:choose>
       <xsl:when test="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:PublishedDuration/text()">
         <xsl:element name="duration">
-          <xsl:value-of select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:PublishedDuration/text()"/>
+          <xsl:value-of select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid][1]/tva:PublishedDuration/text()"/>
         </xsl:element>
       </xsl:when>
       <xsl:when test="tva:BasicDescription/tva:Duration/text()">
