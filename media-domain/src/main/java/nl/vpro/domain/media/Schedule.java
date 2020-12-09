@@ -376,7 +376,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
                     for (Program program : programs) {
                         if (program.getCrids().size() > 0
                             && StringUtils.isNotEmpty(scheduleEvent.getUrnRef())
-                            && program.getCrids().get(0).equals(scheduleEvent.getUrnRef())) {
+                            && program.getCrids().contains(scheduleEvent.getUrnRef())) {
 
                             // MIS TVAnytime stores poProgId's under events. Therefore MIS deliveries may contain two or more
                             // ScheduleEvents referencing the same program on crid with different poProgId's.
@@ -384,21 +384,23 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
 
                             String scheduleEventPoProgID = scheduleEvent.getPoProgID();
                             log.debug("No poprogid for {}", scheduleEvent);
-                            if (program.getMid() == null || (scheduleEventPoProgID != null && scheduleEventPoProgID.equals(program.getMid()))) {
-                                program.setMid(scheduleEventPoProgID);
-                                scheduleEvent.setParent(program);
-                            } else {
-                                log.debug("Cloning a MIS duplicate");
-                                // Create a clone for the second poProgId and it's event
-                                clone = cloneMisDuplicate(program);
-                                if (scheduleEventPoProgID != null) {
+                            if (scheduleEventPoProgID != null) {
+                                if (program.getMid() == null || scheduleEventPoProgID.equals(program.getMid())) {
+                                    program.setMid(scheduleEventPoProgID);
+                                    scheduleEvent.setParent(program);
+                                } else {
+                                    log.debug("Cloning a MIS duplicate");
+                                    // Create a clone for the second poProgId and its event
+                                    clone = cloneMisDuplicate(program);
                                     /* Reset MID to null first, then set it to the poProgID from the Schedule event; otherwise an
                                      IllegalArgumentException will be thrown setting the MID to another value.
                                     */
                                     clone.setMid(null);
                                     clone.setMid(scheduleEventPoProgID);
+                                    scheduleEvent.setParent(clone);
                                 }
-                                scheduleEvent.setParent(clone);
+                            } else {
+                                scheduleEvent.setParent(program);
                             }
                             break;
                         }

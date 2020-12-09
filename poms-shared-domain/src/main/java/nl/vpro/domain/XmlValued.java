@@ -16,7 +16,7 @@ public interface XmlValued {
     default String getXmlValue() {
         if (this instanceof Enum) {
             Class<?> enumClass = getClass();
-            String name = ((Enum) this).name();
+            String name = ((Enum<?>) this).name();
             try {
                 XmlEnumValue xmlValue = enumClass.getField(name).getAnnotation(XmlEnumValue.class);
                 return xmlValue.value();
@@ -24,6 +24,6 @@ public interface XmlValued {
                 return name;
             }
         }
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Only supported for enums");
     }
 }
