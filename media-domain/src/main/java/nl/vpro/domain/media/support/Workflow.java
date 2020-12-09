@@ -15,8 +15,7 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Displayable;
-import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
@@ -33,7 +32,7 @@ import static java.util.Collections.unmodifiableSet;
 @XmlType(name = "workflowEnumType", namespace = Xmlns.SHARED_NAMESPACE)
 @JsonSerialize(using = BackwardsCompatibleJsonEnum.Serializer.class)
 @JsonDeserialize(using = Workflow.Deserializer.class)
-public enum Workflow implements Displayable {
+public enum Workflow implements Displayable, XmlValued {
 
     /**
      * Will be completely ignored by publishers. Will not be published, will not be revoked.
@@ -170,6 +169,7 @@ public enum Workflow implements Displayable {
     public String getDisplayName() {
         return getDescription();
     }
+
 
     public static class Deserializer extends BackwardsCompatibleJsonEnum.Deserializer<Workflow> {
         public Deserializer() {

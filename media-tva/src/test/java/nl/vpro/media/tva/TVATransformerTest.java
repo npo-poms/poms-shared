@@ -31,8 +31,7 @@ import com.neovisionaries.i18n.LanguageCode;
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.media.tva.saxon.extension.*;
@@ -125,10 +124,7 @@ public class TVATransformerTest {
                 "      </program>\n" +
                 "   </programTable>\n" +
                 "   <groupTable>\n" +
-                "      <group type=\"SEASON\"\n" +
-                "             mid=\"POW_00252644\"\n" +
-                "             avType=\"VIDEO\"\n" +
-                "             workflow=\"FOR REPUBLICATION\">\n" +
+                "      <group type=\"SEASON\" mid=\"POW_00252644\" avType=\"VIDEO\">\n" +
                 "         <broadcaster id=\"EO\">EO</broadcaster>\n" +
                 "         <title type=\"MAIN\" owner=\"MIS\">SERIE TITEL</title>\n" +
                 "         <title type=\"ORIGINAL\" owner=\"MIS\">ICH BIN EIN SEIZON</title>\n" +
@@ -136,10 +132,7 @@ public class TVATransformerTest {
                 "         <memberOf midRef=\"POW_00818820\" index=\"3\"/>\n" +
                 "         <poSequenceInformation>3</poSequenceInformation>\n" +
                 "      </group>\n" +
-                "      <group type=\"SERIES\"\n" +
-                "             mid=\"POW_00818820\"\n" +
-                "             avType=\"VIDEO\"\n" +
-                "             workflow=\"FOR REPUBLICATION\">\n" +
+                "      <group type=\"SERIES\" mid=\"POW_00818820\" avType=\"VIDEO\">\n" +
                 "         <broadcaster id=\"EO\">EO</broadcaster>\n" +
                 "         <title type=\"MAIN\" owner=\"MIS\">IK BEN EEN MOEDERSERIE</title>\n" +
                 "         <description type=\"MAIN\" owner=\"MIS\">Dit is de Seriesbeschrijving</description>\n" +
@@ -166,7 +159,7 @@ public class TVATransformerTest {
                 "         <poProgID>POW_00252645_1</poProgID>\n" +
                 "      </scheduleEvent>\n" +
                 "   </schedule>\n" +
-                "</mediaInformation>\n");
+                "</mediaInformation>");
     }
 
     @Test
@@ -400,8 +393,10 @@ public class TVATransformerTest {
     public void bindinc() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFoundIsFatal(false); // TODO API-460
 
-        String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) ->
-            transformer.setParameter(XSL_PERSON_URI_PREFIX, "crid://bindinc/person/")
+        String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) -> {
+                transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
+                transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
+            }
         );
 
         log.info(xml);
@@ -413,6 +408,7 @@ public class TVATransformerTest {
         log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
         assertThat(p.getMainTitle()).isEqualTo("#heuldoch - Therapie wie noch nie");
         assertThat(p.getCredits().get(0).getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
+        assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
 
     }
 

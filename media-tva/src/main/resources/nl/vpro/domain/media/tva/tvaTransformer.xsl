@@ -20,6 +20,7 @@
   <xsl:param name="newGenres"/>
   <xsl:param name="owner" select="'MIS'" />
   <xsl:param name="personUriPrefix" select="''" />
+  <xsl:param name="workflow" select="''" />
 
   <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'"/>
   <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
@@ -48,6 +49,9 @@
           <!-- <program> -->
           <xsl:for-each select="tva:ProgramInformation">
             <program>
+              <xsl:if test="$workflow != ''">
+                <xsl:attribute name="workflow"><xsl:value-of select="$workflow" /></xsl:attribute>
+              </xsl:if>
               <xsl:variable name="crid">
                 <xsl:value-of select="@programId"/>
               </xsl:variable>
@@ -154,7 +158,10 @@
             <xsl:value-of select="../tva:OtherIdentifier[@type = 'ParentSeriesID']" />
           </xsl:variable>
           <xsl:variable name="broadcasters" select="../tva:BroadcasterList/tva:Broadcaster/@code" />
-          <group type="SEASON" mid="{.}" avType="{$avType}" workflow="FOR REPUBLICATION">
+          <group type="SEASON" mid="{.}" avType="{$avType}">
+            <xsl:if test="$workflow != ''">
+              <xsl:attribute name="workflow"><xsl:value-of select="$workflow" /></xsl:attribute>
+            </xsl:if>
             <xsl:for-each
                 select="//tva:ProgramDescription/tva:ProgramInformationTable/tva:ProgramInformation[@programId = $programCrid]/tva:BasicDescription[1]">
               <xsl:for-each select="$broadcasters">
@@ -219,7 +226,10 @@
             <xsl:value-of select="../tva:Program/@crid" />
           </xsl:variable>
           <xsl:variable name="broadcasters" select="../tva:BroadcasterList/tva:Broadcaster/@code" />
-          <group type="SERIES" mid="{.}" avType="{$avType}" workflow="FOR REPUBLICATION">
+          <group type="SERIES" mid="{.}" avType="{$avType}">
+            <xsl:if test="$workflow != ''">
+              <xsl:attribute name="workflow"><xsl:value-of select="$workflow" /></xsl:attribute>
+            </xsl:if>
             <xsl:for-each select="//tva:ProgramDescription/tva:ProgramInformationTable/tva:ProgramInformation[@programId = $programCrid]/tva:BasicDescription[1]">
               <xsl:for-each select="$broadcasters">
                 <broadcaster>
