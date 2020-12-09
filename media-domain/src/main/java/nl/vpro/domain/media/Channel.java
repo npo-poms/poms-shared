@@ -2746,12 +2746,7 @@ public enum Channel implements Displayable, XmlValued {
 
     //@JsonValue (would fix ignored test case, but not backwards compatible)
     public final String getXmlEnumValue() {
-        try {
-            XmlEnumValue xmlEnumValue = this.getClass().getField(name()).getAnnotation(XmlEnumValue.class);
-            return xmlEnumValue != null ? xmlEnumValue.value() : name();
-        } catch(NoSuchFieldException e) {
-            throw new AssertionError(e);
-        }
+        return getXmlValue();
     }
 
     public static Channel findByMisId(String misId) {

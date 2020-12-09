@@ -90,6 +90,7 @@
           <Name xml:lang="nl">Amusement</Name>
           <Reference>urn:tva:metadata:cs:2004:0106</Reference>
           <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
+          <Reference>urn:tva:metadata:cs:2004:2.9</Reference> <!-- bindinc ?-->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.1.7">
@@ -192,6 +193,7 @@
         <Term termID="3.0.1.4.14">
           <Name xml:lang="nl">Sport - informatie</Name>
           <Reference>urn:tva:metadata:cs:2004:0414</Reference>
+          <Reference>urn:tva:metadata:cs:2004:2.5</Reference> <!-- bindinc ?-->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.4.15">
@@ -221,6 +223,7 @@
         <Name xml:lang="nl">Amusement</Name>
         <Reference>urn:tva:metadata:cs:2004:06</Reference>
         <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
+        <Reference>urn:tva:metadata:cs:2004:2.9</Reference> <!-- bindinc ?-->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.6.19">
           <Name xml:lang="nl">Spel/quiz</Name>
@@ -252,6 +255,8 @@
         <Term termID="3.0.1.7.21">
           <Name xml:lang="nl">Nieuws/actualiteiten</Name>
           <Reference>urn:tva:metadata:cs:2004:0721</Reference>
+          <Reference>urn:tva:metadata:cs:2004:2.11</Reference> <!-- bindinc ?-->
+          <Reference>urn:tva:metadata:cs:2004:2.20</Reference> <!-- bindinc ?-->
           <Reference>urn:mis:genre:NEWS</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>

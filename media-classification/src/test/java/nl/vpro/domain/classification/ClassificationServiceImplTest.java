@@ -4,16 +4,13 @@
  */
 package nl.vpro.domain.classification;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.*;
 
 import javax.xml.bind.JAXB;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.io.Files;
 
@@ -26,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ClassificationServiceImplTest {
 
-    private ClassificationService classificationService;
+    private final ClassificationService classificationService;
 
     public ClassificationServiceImplTest() {
         //classificationService = new ClassificationServiceImpl(new UrlResource("http://localhost:8060/schema/classification"));
@@ -44,6 +41,7 @@ public class ClassificationServiceImplTest {
     @Test
     public void getTermByReference() {
         assertThat(classificationService.getTermsByReference("urn:mis:genre:MOVIE")).isNotNull();
+        assertThat(classificationService.getTermsByReference("urn:mis:genre:ENTERTAINMENT")).hasSize(3);
     }
     @Test
     public void testGetTermByIdOnDoubleDigits() {
@@ -54,6 +52,11 @@ public class ClassificationServiceImplTest {
     @Test
     public void testGetNext() {
         assertThat(new TermId("3.0.1").next()).isEqualTo(new TermId("3.0.2"));
+    }
+
+    @Test
+    public void testReferencesUnique() {
+
 
     }
 
@@ -120,7 +123,7 @@ public class ClassificationServiceImplTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void test() {
 
         ClassificationService classificationService = ClassificationServiceImpl.fromFiles(

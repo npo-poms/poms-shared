@@ -390,7 +390,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void bindinc() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFoundIsFatal(false); // TODO API-460
 
         String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) -> {
@@ -398,8 +398,6 @@ public class TVATransformerTest {
                 transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
             }
         );
-
-        log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
         JAXB.marshal(table, System.out);
@@ -408,6 +406,26 @@ public class TVATransformerTest {
         log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
         assertThat(p.getMainTitle()).isEqualTo("#heuldoch - Therapie wie noch nie");
         assertThat(p.getCredits().get(0).getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
+        assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
+
+    }
+
+    @Test
+    public void bindincTV01() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        genreFunction.setNotFoundIsFatal(false); // TODO API-460
+        String xml = transform("bindinc/20201208185718000dayTV0120201209.xml", (transformer) -> {
+                transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
+                transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
+            }
+        );
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+
+        JAXB.marshal(table, System.out);
+
+        Program p = (Program) table.find("POW_04866660").get();
+        log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
+        assertThat(p.getMainTitle()).isEqualTo("NOS Journaal: Briefing door het RIVM");
+        assertThat(p.getCrids()).containsExactly("crid://media-press.tv/203053643", "crid://npo/programmagegevens/1902975399668");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
 
     }

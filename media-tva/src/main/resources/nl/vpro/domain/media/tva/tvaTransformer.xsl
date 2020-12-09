@@ -6,7 +6,7 @@
   xmlns:tva="urn:tva:metadata:2004"
   xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001"
   xmlns:vpro="urn:vpro:saxon"
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/1999/XSL/Transform"
   xsi:schemaLocation="urn:vpro:media:2009 https://poms.omroep.nl/schema/vproMedia.xsd
                       urn:tva:metadata:2004 http://www.broadcastingdata.com/dataimport/tva/new/v13_am1/tva_metadata_v13_am1.xsd"
   exclude-result-prefixes="tva mpeg7 xsi vpro xsd"
@@ -57,9 +57,16 @@
               </xsl:variable>
               <!-- <poProgId> -->
               <xsl:variable name="poProgId">
-                <xsl:value-of
+                <xsl:choose>
+                  <xsl:when test="tva:BasicDescription/tva:OtherIdentifier/tva:OtherIdentifier[@type='broadcaster:npo:productid']">
+                    <xsl:value-of select="tva:BasicDescription/tva:OtherIdentifier/tva:OtherIdentifier[@type='broadcaster:npo:productid']/text()" />
+                  </xsl:when>
+                  <xsl:otherwise>
+                     <xsl:value-of
                     select="normalize-space(../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid][1]/tva:OtherIdentifier[@type = 'ProductID']/text())"
                     />
+                  </xsl:otherwise>
+                </xsl:choose>
               </xsl:variable>
               <xsl:if test="$poProgId != ''">
                 <xsl:attribute name="mid">
@@ -82,14 +89,19 @@
               <xsl:call-template name="baseMediaTemplate">
                 <xsl:with-param name="channel" select="$channel"/>
                 <xsl:with-param name="mid" select="$poProgId"/>
-
               </xsl:call-template>
 
               <!-- <poSeriesID -->
               <xsl:variable name="poSeriesId">
-                <xsl:value-of
+                <xsl:choose>
+                  <xsl:when test="tva:BasicDescription/tva:OtherIdentifier/tva:OtherIdentifier[@type='broadcaster:npo:seriesid']">
+                    <xsl:value-of select="tva:BasicDescription/tva:OtherIdentifier/tva:OtherIdentifier[@type='broadcaster:npo:seriesid']/text()" />
+                  </xsl:when>
+                  <xs:otherwise>
+                    <xsl:value-of
                     select="normalize-space(../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid][1]/tva:OtherIdentifier[@type = 'SeriesID']/text())"
-                    />
+                /></xs:otherwise>
+                </xsl:choose>
               </xsl:variable>
 
               <!-- <poProgType> -->
@@ -403,6 +415,9 @@
       <xsl:value-of select="@programId | @groupId"/>
     </xsl:variable>
     <crid><xsl:value-of select="$crid"/></crid>
+    <xsl:for-each select="tva:BasicDescription/tva:OtherIdentifier/tva:OtherIdentifier[@type='broadcaster:npo:programcrid']">
+      <crid><xsl:value-of select="text()"/></crid>
+    </xsl:for-each>
     <!-- <broadcaster> -->
     <xsl:for-each
         select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid][1]/tva:BroadcasterList">
