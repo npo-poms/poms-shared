@@ -478,11 +478,11 @@ public class TVATransformerTest {
             throw new IllegalArgumentException("Could not find " + resource);
         }
         getTransformer(configure).transform(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(resource)), result);
-        return new String(out.toByteArray(), StandardCharsets.UTF_8);
+        return out.toString(StandardCharsets.UTF_8.name());
     }
 
     private Transformer getTransformer(Consumer<Transformer> configure) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
-        StreamSource stylesource = new StreamSource(getClass().getResourceAsStream("/nl/vpro/domain/media/tva/tvaTransformer.xsl"));
+        StreamSource stylesource = new StreamSource(getClass().getResourceAsStream("/nl/vpro/media/tva/tvaTransformer.xsl"));
         Transformer transformer = FACTORY.newTransformer(stylesource);
 
         transformer.setParameter(XSL_PARAM_NEWGENRES, "true");
