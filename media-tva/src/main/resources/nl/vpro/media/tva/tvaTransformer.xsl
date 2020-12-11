@@ -177,12 +177,15 @@
             <xsl:for-each
                 select="//tva:ProgramDescription/tva:ProgramInformationTable/tva:ProgramInformation[@programId = $programCrid]/tva:BasicDescription[1]">
               <xsl:for-each select="$broadcasters">
-                <broadcaster>
-                  <xsl:attribute name="id">
-                    <xsl:value-of select="vpro:findBroadcaster(.)"/>
-                  </xsl:attribute>
-                  <xsl:value-of select="vpro:findBroadcaster(.)"/>
-                </broadcaster>
+                <xsl:variable name="foundBroadcaster" select="vpro:findBroadcaster(.)" />
+                <xsl:if test="$foundBroadcaster != ''">
+                  <broadcaster>
+                    <xsl:attribute name="id">
+                      <xsl:value-of select="$foundBroadcaster"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="$foundBroadcaster"/>
+                  </broadcaster>
+                </xsl:if>
               </xsl:for-each>
               <xsl:if test="tva:Title[@type='main']">
                 <title type="MAIN" owner="{$owner}">
@@ -244,12 +247,15 @@
             </xsl:if>
             <xsl:for-each select="//tva:ProgramDescription/tva:ProgramInformationTable/tva:ProgramInformation[@programId = $programCrid]/tva:BasicDescription[1]">
               <xsl:for-each select="$broadcasters">
-                <broadcaster>
-                  <xsl:attribute name="id">
-                    <xsl:value-of select="vpro:findBroadcaster(.)"/>
-                  </xsl:attribute>
-                  <xsl:value-of select="vpro:findBroadcaster(.)"/>
+                <xsl:variable name="foundBroadcaster" select="vpro:findBroadcaster(.)" />
+                <xsl:if test="$foundBroadcaster != ''">
+                  <broadcaster>
+                    <xsl:attribute name="id">
+                      <xsl:value-of select="$foundBroadcaster"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="$foundBroadcaster"/>
                 </broadcaster>
+                </xsl:if>
               </xsl:for-each>
               <xsl:if test="tva:Title[@type='parentSeriesTitle']">
                 <title type="MAIN" owner="{$owner}">
@@ -422,12 +428,15 @@
     <xsl:for-each
         select="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid][1]/tva:BroadcasterList">
       <xsl:for-each select="tva:Broadcaster">
-        <broadcaster>
-          <xsl:attribute name="id">
-            <xsl:value-of select="vpro:findBroadcaster(@code)"/>
-          </xsl:attribute>
-          <xsl:value-of select="vpro:findBroadcaster(@code)" />
-        </broadcaster>
+        <xsl:variable name="foundBroadcaster" select="vpro:findBroadcaster(@code)" />
+        <xsl:if test="$foundBroadcaster != ''">
+          <broadcaster>
+            <xsl:attribute name="id">
+              <xsl:value-of select="$foundBroadcaster"/>
+            </xsl:attribute>
+            <xsl:value-of select="$foundBroadcaster" />
+          </broadcaster>
+        </xsl:if>
       </xsl:for-each>
     </xsl:for-each>
     <!-- titles -->

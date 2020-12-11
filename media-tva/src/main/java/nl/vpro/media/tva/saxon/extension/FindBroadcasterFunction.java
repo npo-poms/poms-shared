@@ -59,7 +59,7 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
                     log.warn("No (WON/PD/NEBO) broadcaster for value '{}'", value);
                 }
                 return broadcaster != null ? new StringValue(broadcaster.getId()) :
-                /* will go wrong in hibernate then, but with catchable error */ new StringValue(value);
+                    /* will go wrong in hibernate then, but with catchable error */ new StringValue(value);
             }
         };
     }
