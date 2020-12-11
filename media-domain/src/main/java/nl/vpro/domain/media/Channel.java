@@ -2702,6 +2702,26 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "Voom HD";
         }
+    },
+
+    @XmlEnumValue("10TB")
+    _10TB() {
+        @Override
+        public String toString() {
+            return "NPO 1 Extra";
+        }
+    },
+
+
+    /**
+     * @since 5.15
+     */
+    @XmlEnumValue("XXXX")
+    XXXX() {
+        @Override
+        public String toString() {
+            return "TEST CHANNEL";
+        }
     }
     ;
     private AVType avType;
