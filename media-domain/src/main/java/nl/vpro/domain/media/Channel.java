@@ -610,12 +610,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "3 Sat";
         }
-
-        @Override
-        public String misId() {
-            return "3SAT";
-        }
-
     },
 
     @XmlEnumValue("KABE")
@@ -958,15 +952,6 @@ public enum Channel implements Displayable, XmlValued {
             return "NPO 101";
         }
 
-        @Override
-        public String misId() {
-            return "101_";
-        }
-
-        @Override
-        public String pdId() {
-            return "101_";
-        }
     },
 
     @XmlEnumValue("PO24")
@@ -1029,11 +1014,6 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "3voor12 On stage";
-        }
-
-        @Override
-        public String misId() {
-            return "3VOS";
         }
     },
 
@@ -1371,11 +1351,6 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "13Th Street";
-        }
-
-        @Override
-        public String misId() {
-            return "13ST";
         }
     },
 
@@ -2744,7 +2719,7 @@ public enum Channel implements Displayable, XmlValued {
     }
 
     public String misId() {
-        return name();
+        return getXmlValue();
     }
 
     /**
@@ -2755,7 +2730,7 @@ public enum Channel implements Displayable, XmlValued {
     }
 
     public String pdId() {
-        return name();
+        return getXmlValue();
     }
 
     public AVType getAVType() {
