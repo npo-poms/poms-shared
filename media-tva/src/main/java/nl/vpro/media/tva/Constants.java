@@ -28,7 +28,7 @@ public class Constants {
 
 
     public enum ChannelIdType {
-        MIS, PD, POMS
+        MIS, PD, POMS, BINDINC
     }
 
 
@@ -44,6 +44,9 @@ public class Constants {
                     break;
                 case POMS:
                     channelMapping.setProperty(channel.name(), channel.getXmlEnumValue());
+                    break;
+                case BINDINC:
+                    channelMapping.setProperty(channel.bindincId(), channel.getXmlEnumValue());
                     break;
                 default:
                     throw new IllegalArgumentException();
