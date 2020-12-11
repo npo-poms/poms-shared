@@ -2714,6 +2714,14 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+    @XmlEnumValue("10TB")
+    _10TB() {
+        @Override
+        public String toString() {
+            return "NPO 1 Extra";
+        }
+    },
+
 
     /**
      * @since 5.15
