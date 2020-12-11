@@ -2804,15 +2804,16 @@ public enum Channel implements Displayable, XmlValued {
     public static List<Channel> valuesOf(Collection<String> strings) {
         List<Channel> result = new ArrayList<>();
         for(String s : strings) {
-            if(Character.isDigit(s.charAt(0))) {
-                s = "_" + s;
-            }
             StringBuilder sBuilder = new StringBuilder(s);
             while(sBuilder.length() < 4) {
                 sBuilder.append("_");
             }
             s = sBuilder.toString();
-            result.add(Channel.valueOf(s));
+            try {
+                result.add(valueOfXml(s));
+            } catch (IllegalArgumentException iae) {
+                result.add((valueOf(s)));
+            }
         }
         return result;
     }
@@ -2838,7 +2839,10 @@ public enum Channel implements Displayable, XmlValued {
         } catch (IllegalArgumentException ignore) {
             return valueOf(channel.toUpperCase());
         }
+    }
 
+    public static Channel valueOfXml(String channel) {
+        return XmlValued.valueOfXml(values(), channel);
     }
 
     public static class Deserializer extends BackwardsCompatibleJsonEnum.Deserializer<Channel> {

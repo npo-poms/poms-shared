@@ -48,8 +48,13 @@ public class ChannelTest {
         }
         Channel.valuesOf(Collections.singleton("13ST")).containsAll(Collections.singletonList(Channel._13ST));
         Channel.valuesOf(Collections.singleton("ARD")).containsAll(Collections.singletonList(Channel.ARD_));
-
     }
+
+    @Test
+    public void testByXmlValue() {
+        assertThat(Channel.valueOfXml("101_")).isEqualTo(Channel._101_);
+    }
+
     /**
      * JS-195 To be able to generate js-parent/js-vpro-media-domain/vpro/media/domain/support/Channels.js
      * when channels change; instead of having to type them all
