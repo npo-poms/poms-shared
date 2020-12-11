@@ -2739,6 +2739,9 @@ public enum Channel implements Displayable, XmlValued {
         return name();
     }
 
+    /**
+     * @since 5.20.2
+     */
     public String bindincId() {
         return misId();
     }
@@ -2815,7 +2818,7 @@ public enum Channel implements Displayable, XmlValued {
             }
             result.add(Channel.valueOf(value));
         }
-        return result.toArray(new Channel[result.size()]);
+        return result.toArray(new Channel[0]);
     }
 
     public static Channel valueOfIgnoreCase(String channel) {
