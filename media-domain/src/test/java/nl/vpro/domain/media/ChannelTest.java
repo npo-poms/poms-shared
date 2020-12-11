@@ -53,6 +53,9 @@ public class ChannelTest {
     @Test
     public void testByXmlValue() {
         assertThat(Channel.valueOfXml("101_")).isEqualTo(Channel._101_);
+        assertThat(Channel.valueOfXml("10TB")).isEqualTo(Channel._10TB);
+        assertThat(Channel.findByBindincId("10TB")).isEqualTo(Channel._10TB);
+
     }
 
     /**
