@@ -26,4 +26,18 @@ public interface XmlValued {
         }
         throw new UnsupportedOperationException("Only supported for enums");
     }
+
+    /**
+     *
+     * @since 5.20.2
+     */
+    static <E extends Enum<E> & XmlValued> E valueOfXml(E[] values, String value) {
+        for (E v : values) {
+            if (v.getXmlValue().equals(value)) {
+                return v;
+            }
+        }
+        throw new IllegalArgumentException("No constant with xml value " + value);
+    }
+
 }
