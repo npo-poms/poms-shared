@@ -640,13 +640,23 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "TV 5 Monde Europe";
         }
+
+        @Override
+        public String bindincId() {
+            return "TV5M";
+        }
     },
+
 
     @XmlEnumValue("FRA2")
     FRA2 {
         @Override
         public String toString() {
             return "France 2";
+        }
+        @Override
+        public String bindincId() {
+            return "france2";
         }
     },
 
@@ -2725,10 +2735,12 @@ public enum Channel implements Displayable, XmlValued {
         this(null);
     }
 
-
-
     public String misId() {
         return name();
+    }
+
+    public String bindincId() {
+        return misId();
     }
 
     public String pdId() {
@@ -2752,6 +2764,16 @@ public enum Channel implements Displayable, XmlValued {
     public static Channel findByMisId(String misId) {
         for(Channel channel : values()) {
             if(channel.misId().equals(misId)) {
+                return channel;
+            }
+        }
+        return null;
+    }
+
+
+    public static Channel findByBindincId(String misId) {
+        for(Channel channel : values()) {
+            if(channel.bindincId().equals(misId)) {
                 return channel;
             }
         }
