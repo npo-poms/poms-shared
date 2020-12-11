@@ -28,7 +28,11 @@ public class Constants {
 
 
     public enum ChannelIdType {
-        MIS, PD, POMS, BINDINC
+        MIS, PD, POMS,
+        /**
+         * @since 5.20.2
+         */
+        BINDINC
     }
 
 
