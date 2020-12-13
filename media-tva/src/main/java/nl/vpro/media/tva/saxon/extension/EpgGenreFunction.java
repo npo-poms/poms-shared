@@ -26,9 +26,15 @@ import nl.vpro.domain.media.MediaClassificationService;
 @Slf4j
 public class EpgGenreFunction extends ExtensionFunctionDefinition {
 
+    public enum NotFound {
+        FATAL,
+        IGNORE,
+        ASIS
+    }
+
     @Getter
     @Setter
-    private boolean notFoundIsFatal = true;
+    private NotFound notFound;
 
     @Override
     public StructuredQName getFunctionQName() {
@@ -56,10 +62,14 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
                     return new StringValue(term.getTermId());
                 } catch (IllegalArgumentException iea){
                     log.warn(iea.getMessage());
-                    if (notFoundIsFatal) {
-                        throw iea;
-                    } else {
-                        return new StringValue(epgValue);
+                    switch(notFound) {
+                        case FATAL:
+                            throw iea;
+                        case ASIS:
+                             return new StringValue(epgValue);
+                        case IGNORE:
+                        default:
+                            return new StringValue("");
                     }
                 }
 

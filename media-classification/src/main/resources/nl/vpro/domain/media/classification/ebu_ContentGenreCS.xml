@@ -90,7 +90,6 @@
           <Name xml:lang="nl">Amusement</Name>
           <Reference>urn:tva:metadata:cs:2004:0106</Reference>
           <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
-          <Reference>urn:tva:metadata:cs:2004:2.9</Reference> <!-- bindinc ?-->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.1.7">
@@ -122,6 +121,7 @@
       <Term termID="3.0.1.2">
         <Name xml:lang="nl">Film</Name>
         <Reference>urn:tva:metadata:cs:2004:02</Reference>
+        <Reference>urn:tva:metadata:cs:2004:2.4</Reference>
         <Reference>urn:mis:genre:MOVIE</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">

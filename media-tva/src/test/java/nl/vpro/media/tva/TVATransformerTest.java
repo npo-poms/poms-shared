@@ -55,7 +55,7 @@ public class TVATransformerTest {
 
     @BeforeEach
     public void init() {
-        genreFunction.setNotFoundIsFatal(true);
+        genreFunction.setNotFound(EpgGenreFunction.NotFound.FATAL);
     }
 
     @BeforeAll
@@ -391,11 +391,11 @@ public class TVATransformerTest {
 
     @Test
     public void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        genreFunction.setNotFoundIsFatal(false); // TODO API-460
+        genreFunction.setNotFound(EpgGenreFunction.NotFound.IGNORE); // TODO API-460
 
         String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) -> {
-                transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
-                transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
+            transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
+            transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
             }
         );
         //log.info(xml);
@@ -409,12 +409,23 @@ public class TVATransformerTest {
         assertThat(p.getCredits().get(0).getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
         assertThat(p.getScheduleEvents()).isNotEmpty();
+        assertThat(p.getGenres()).hasSize(1);
+        assertThat(p.getGenres().first().getTermId()).isEqualTo("3.0.1.4.14");
+
+        Program movie = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/1444377")).findFirst().orElse(null);
+        assertThat(movie.getGenres().first().getTermId()).isEqualTo("3.0.1.2");
+
+        Program unfoundgenre = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/198808847")).findFirst().orElse(null);
+        assertThat(unfoundgenre.getGenres()).isEmpty();
+
+
+
 
     }
 
     @Test
     public void bindincTV01() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        genreFunction.setNotFoundIsFatal(true);
+        genreFunction.setNotFound(EpgGenreFunction.NotFound.IGNORE);
         String xml = transform("bindinc/20201208185718000dayTV0120201209.xml", (transformer) -> {
                 transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
                 transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
@@ -493,7 +504,6 @@ public class TVATransformerTest {
         StreamSource stylesource = new StreamSource(getClass().getResourceAsStream("/nl/vpro/media/tva/tvaTransformer.xsl"));
         Transformer transformer = FACTORY.newTransformer(stylesource);
 
-        transformer.setParameter(XSL_PARAM_NEWGENRES, "true");
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         transformer.setParameter(
             XSL_PARAM_CHANNELMAPPING,

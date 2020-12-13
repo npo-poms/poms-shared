@@ -17,7 +17,7 @@
   -->
   <xsl:output method="xml" indent="yes" encoding="UTF-8" version="1.0"/>
   <xsl:param name="channelMapping"/>
-  <xsl:param name="newGenres"/>
+  <xsl:param name="newGenres" select="'true'" />
   <xsl:param name="owner" select="'MIS'" />
   <xsl:param name="personUriPrefix" select="''" />
   <xsl:param name="workflow" select="''" />
@@ -557,11 +557,14 @@
       <xsl:when test="$newGenres = 'true'">
         <xsl:for-each
             select="tva:BasicDescription/tva:Genre[starts-with(@href, 'urn:tva:metadata:cs:2004:')][last()]">
-          <xsl:element name="genre">
-            <xsl:attribute name="id">
-              <xsl:value-of select="vpro:transformEpgGenre(@href)"/>
-            </xsl:attribute>
-          </xsl:element>
+          <xsl:variable name="genreid"><xsl:value-of select="vpro:transformEpgGenre(@href)"/></xsl:variable>
+          <xsl:if test="$genreid != ''">
+            <xsl:element name="genre">
+              <xsl:attribute name="id">
+                <xsl:value-of select="$genreid" />
+              </xsl:attribute>
+            </xsl:element>
+          </xsl:if>
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
