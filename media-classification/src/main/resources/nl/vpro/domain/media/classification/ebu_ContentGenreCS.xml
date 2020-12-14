@@ -55,7 +55,6 @@
         <Name xml:lang="nl">Jeugd</Name>
         <Reference>urn:tva:metadata:cs:2004:01</Reference>
         <Reference>urn:mis:genre:YOUTH</Reference>
-        <Reference>urn:tva:metadata:cs:2004:2.5</Reference> <!-- bindinc -->
         <Reference>urn:bindinc:genre:Jeugd</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.1.2">
