@@ -13,8 +13,11 @@ import net.sf.saxon.lib.ExtensionFunctionDefinition;
 import net.sf.saxon.om.Sequence;
 import net.sf.saxon.om.StructuredQName;
 import net.sf.saxon.trans.XPathException;
+import net.sf.saxon.tree.tiny.TinyElementImpl;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
+
+import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.MediaClassificationService;
@@ -26,6 +29,8 @@ import nl.vpro.domain.media.MediaClassificationService;
 @Slf4j
 public class EpgGenreFunction extends ExtensionFunctionDefinition {
 
+
+
     public enum NotFound {
         FATAL,
         IGNORE,
@@ -36,6 +41,14 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
     @Setter
     private NotFound notFound;
 
+
+    /**
+     * For some use cases the TVA xmls are messy and the href can't be used. If you set this, the _name_ of the genre will be prefixed by this, and then matched.
+     */
+    @Getter
+    @Setter
+    private String matchOnValuePrefix;
+
     @Override
     public StructuredQName getFunctionQName() {
         return new StructuredQName("vpro", SaxonConfiguration.VPRO_URN, "transformEpgGenre");
@@ -43,7 +56,7 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
 
     @Override
     public SequenceType[] getArgumentTypes() {
-        return new SequenceType[]{SequenceType.SINGLE_STRING};
+        return new SequenceType[]{SequenceType.SINGLE_STRING, SequenceType.SINGLE_NODE};
     }
 
     @Override
@@ -56,9 +69,15 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
         return new ExtensionFunctionCall() {
             @Override
             public Sequence<?> call(XPathContext context, Sequence[] arguments) throws XPathException {
-                CharSequence epgValue = arguments[0].iterate().next().getStringValueCS();
+                CharSequence epgValue;
+                if (StringUtils.isNotEmpty(matchOnValuePrefix)) {
+                    TinyElementImpl next = (TinyElementImpl) arguments[1].iterate().next();
+                    epgValue = (matchOnValuePrefix  + next.getStringValueCS());
+                } else {
+                    epgValue = arguments[0].iterate().next().getStringValueCS();
+                }
                 try {
-                    Term term = MediaClassificationService.getTermByEpgCode(epgValue.toString());
+                    Term term = MediaClassificationService.getInstance().getTermByReference(epgValue.toString(), (s) -> true);
                     return new StringValue(term.getTermId());
                 } catch (IllegalArgumentException iea){
                     log.warn(iea.getMessage());

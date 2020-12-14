@@ -272,8 +272,8 @@
         <BasicDescription>
           <Title xml:lang="DE" type="main"><![CDATA[Sebastian Pufpaff: Noch nicht Schicht!]]></Title>
           <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Cabaret]]></OtherTextElement>
-          <Genre href="urn:tva:metadata:cs:2004:2.9999"> <!-- intentionally changed for tet -->
-            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          <Genre href="urn:tva:metadata:cs:2004:2.9999"> <!-- intentionally changed for test -->
+            <Name xml:lang="NL"><![CDATA[AmusementCHANGED]]></Name>
           </Genre>
           <Genre href="urn:po:metadata:cs:GenreCS:2009:7" type="other">
             <Name xml:lang="NL"><![CDATA[Cabaret]]></Name>

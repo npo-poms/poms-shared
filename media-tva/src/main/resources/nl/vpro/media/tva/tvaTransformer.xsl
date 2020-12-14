@@ -553,31 +553,7 @@
         <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
       </description>
     </xsl:for-each>
-    <xsl:choose>
-      <xsl:when test="$newGenres = 'true'">
-        <xsl:for-each
-            select="tva:BasicDescription/tva:Genre[starts-with(@href, 'urn:tva:metadata:cs:2004:')][last()]">
-          <xsl:variable name="genreid"><xsl:value-of select="vpro:transformEpgGenre(@href)"/></xsl:variable>
-          <xsl:if test="$genreid != ''">
-            <xsl:element name="genre">
-              <xsl:attribute name="id">
-                <xsl:value-of select="$genreid" />
-              </xsl:attribute>
-            </xsl:element>
-          </xsl:if>
-        </xsl:for-each>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:for-each
-            select="vpro:transformMisGenres(tva:BasicDescription/tva:Genre[starts-with(@href, 'urn:po:metadata:cs:GenreCS')]/tva:Name)">
-          <xsl:element name="genre">
-            <xsl:attribute name="id">
-              <xsl:value-of select="."/>
-            </xsl:attribute>
-          </xsl:element>
-        </xsl:for-each>
-      </xsl:otherwise>
-    </xsl:choose>
+    <xsl:call-template name="genres" />
     <!-- <source> -->
     <xsl:for-each
         select="tva:BasicDescription/tva:RelatedMaterial[tva:HowRelated/@href = 'urn:bds:metadata:cs:ContentSourceCS:2007:Generic' and contains(tva:HowRelated/tva:Name/text(), 'Bron')]">
@@ -778,6 +754,34 @@
         <xsl:value-of select="tva:MediaLocator/mpeg7:MediaUri"/>
       </xsl:element>
     </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template name="genres">
+     <xsl:choose>
+      <xsl:when test="$newGenres = 'true'">
+        <xsl:for-each
+            select="tva:BasicDescription/tva:Genre[starts-with(@href, 'urn:tva:metadata:cs:2004:')][last()]">
+          <xsl:variable name="genreid"><xsl:value-of select="vpro:transformEpgGenre(@href, ./tva:Name)"/></xsl:variable>
+          <xsl:if test="$genreid != ''">
+            <xsl:element name="genre">
+              <xsl:attribute name="id">
+                <xsl:value-of select="$genreid" />
+              </xsl:attribute>
+            </xsl:element>
+          </xsl:if>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:for-each
+            select="vpro:transformMisGenres(tva:BasicDescription/tva:Genre[starts-with(@href, 'urn:po:metadata:cs:GenreCS')]/tva:Name)">
+          <xsl:element name="genre">
+            <xsl:attribute name="id">
+              <xsl:value-of select="."/>
+            </xsl:attribute>
+          </xsl:element>
+        </xsl:for-each>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template name="synopsisAssembler">

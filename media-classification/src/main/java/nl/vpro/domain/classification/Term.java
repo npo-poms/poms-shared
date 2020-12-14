@@ -4,10 +4,7 @@
  */
 package nl.vpro.domain.classification;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -81,8 +78,6 @@ public class Term implements Comparable<Term>, TermContainer {
 
     public void setReferences(List<Reference> references) {
         this.references = references;
-
-
     }
 
     public boolean isTopTerm() {
