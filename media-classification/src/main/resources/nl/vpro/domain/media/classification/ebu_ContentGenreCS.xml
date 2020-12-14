@@ -154,6 +154,7 @@
         <Reference>urn:tva:metadata:cs:2004:03</Reference>
         <Reference>urn:mis:genre:SERIES_SOAP</Reference>
         <Reference>urn:bindinc:genre:Serie</Reference>
+        <Reference>urn:bindinc:genre:Série</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.3.9">
           <Name xml:lang="nl">Komisch</Name>
@@ -208,6 +209,7 @@
         <Reference>urn:tva:metadata:cs:2004:05</Reference>
         <Reference>urn:mis:genre:MUSIC</Reference>
         <Reference>urn:mis:bindinc:Muziek</Reference>
+        <Reference>urn:mis:bindinc:Musica</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.5.16">
           <Name xml:lang="nl">Muziek klassiek</Name>
@@ -249,6 +251,7 @@
         <Reference>urn:tva:metadata:cs:2004:07</Reference>
         <Reference>urn:mis:genre:INFORMATIVE</Reference>
         <Reference>urn:bindinc:genre:Informatief</Reference>
+        <Reference>urn:bindinc:genre:Información</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.7.19">
           <Name xml:lang="nl">Spel/quiz</Name>
@@ -290,6 +293,7 @@
           <Name xml:lang="nl">Religieus</Name>
           <Reference>urn:tva:metadata:cs:2004:0726</Reference>
           <Reference>urn:mis:genre:RELIGIOUS</Reference>
+          <Reference>urn:bindinc:genre:Religieus</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.27">
