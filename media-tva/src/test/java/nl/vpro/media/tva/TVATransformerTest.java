@@ -392,6 +392,7 @@ public class TVATransformerTest {
     @Test
     public void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(EpgGenreFunction.NotFound.IGNORE); // TODO API-460
+        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
 
         String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) -> {
             transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
@@ -401,16 +402,16 @@ public class TVATransformerTest {
         //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
-        JAXB.marshal(table, System.out);
+        //JAXB.marshal(table, System.out);
 
         Program p = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/191255709")).findFirst().orElse(null);
-        log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
+        //log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
         assertThat(p.getMainTitle()).isEqualTo("#heuldoch - Therapie wie noch nie");
         assertThat(p.getCredits().get(0).getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
         assertThat(p.getScheduleEvents()).isNotEmpty();
         assertThat(p.getGenres()).hasSize(1);
-        assertThat(p.getGenres().first().getTermId()).isEqualTo("3.0.1.4.14");
+        assertThat(p.getGenres().first().getTermId()).isEqualTo("3.0.1.3");
 
         Program movie = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/1444377")).findFirst().orElse(null);
         assertThat(movie.getGenres().first().getTermId()).isEqualTo("3.0.1.2");

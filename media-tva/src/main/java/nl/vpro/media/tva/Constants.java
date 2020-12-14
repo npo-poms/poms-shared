@@ -26,6 +26,8 @@ public class Constants {
 
     public final static String XSL_PARAM_WORKFLOW = "workflow";
 
+    public final static String TVA_NAMESPACE = "urn:tva:metadata:2004";
+
 
     public enum ChannelIdType {
         MIS, PD, POMS,

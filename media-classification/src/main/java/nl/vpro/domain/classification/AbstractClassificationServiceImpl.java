@@ -7,6 +7,7 @@ package nl.vpro.domain.classification;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.annotation.PreDestroy;
@@ -15,6 +16,7 @@ import javax.xml.bind.JAXB;
 import javax.xml.parsers.*;
 import javax.xml.transform.dom.DOMSource;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +68,18 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
         }
         return result;
     }
+
+    @NonNull
+    public Term getTermByReference(String code, Predicate<String> predicate) {
+        for (Term term : values()) {
+            if (term.getReferences().stream().map(Reference::getValue).anyMatch(predicate.and(s -> s.equals(code)))) {
+                return term;
+            }
+        }
+        throw new IllegalArgumentException("No such term with reference " + code);
+    }
+
+
 
     @Override
     public boolean hasTerm(String termId) {

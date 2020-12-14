@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.xml.sax.InputSource;
@@ -21,13 +22,12 @@ public class MediaClassificationService extends AbstractClassificationServiceImp
         }
         return new MediaClassificationService();
     }
+
     public MediaClassificationService() {
         if (instance == null) {
             instance = this;
         }
     }
-
-
 
     static final String EPG_PREFIX = "urn:tva:metadata:cs:2004:";
 
@@ -40,12 +40,7 @@ public class MediaClassificationService extends AbstractClassificationServiceImp
             // To allow migration
             code = EPG_PREFIX + code;
         }
-        for (Term term : getInstance().values()) {
-            if (getEpgCodes(term).contains(code)) {
-                return term;
-            }
-        }
-        throw new IllegalArgumentException("No such EPG code " + code);
+        return getInstance().getTermByReference(code, (s) -> s.startsWith(EPG_PREFIX));
     }
 
 
@@ -59,7 +54,6 @@ public class MediaClassificationService extends AbstractClassificationServiceImp
         return misCodes;
     }
 
-
     public static List<Term> getTermsByMisGenreType(String... pointers) {
         List<MisGenreType> misTypes = new ArrayList<>(pointers.length);
         for (String pointer : pointers) {
@@ -71,14 +65,9 @@ public class MediaClassificationService extends AbstractClassificationServiceImp
 
 
     public static List<String> getEpgCodes(Term term) {
-        final List<String> epgCodes = new ArrayList<>();
-        for (Reference reference : term.getReferences()) {
-            if (reference.getValue().startsWith(EPG_PREFIX)) {
-                epgCodes.add(reference.getValue());
-            }
-        }
-        return epgCodes;
+        return term.getReferences().stream().map(Reference::getValue).filter((s) -> s.startsWith(EPG_PREFIX)).collect(Collectors.toList());
     }
+
 
     public static List<Term> getTermsByMisGenreType(List<MisGenreType> misTypes) {
         final SortedSet<EpgGenreType> epgTypes = EpgGenreType.valueOfLegacy(misTypes);

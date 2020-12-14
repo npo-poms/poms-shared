@@ -55,6 +55,8 @@
         <Name xml:lang="nl">Jeugd</Name>
         <Reference>urn:tva:metadata:cs:2004:01</Reference>
         <Reference>urn:mis:genre:YOUTH</Reference>
+        <Reference>urn:tva:metadata:cs:2004:2.5</Reference> <!-- bindinc -->
+        <Reference>urn:bindinc:genre:Jeugd</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.1.2">
           <Name xml:lang="nl">Film</Name>
@@ -113,7 +115,6 @@
         <Term termID="3.0.1.1.25">
           <Name xml:lang="nl">Natuur</Name>
           <Reference>urn:tva:metadata:cs:2004:0125</Reference>
-          <Reference>urn:tva:metadata:cs:2004:2.6</Reference> <!-- bindinc -->
           <Reference>urn:mis:genre:NATURE</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
@@ -121,8 +122,8 @@
       <Term termID="3.0.1.2">
         <Name xml:lang="nl">Film</Name>
         <Reference>urn:tva:metadata:cs:2004:02</Reference>
-        <Reference>urn:tva:metadata:cs:2004:2.4</Reference>
         <Reference>urn:mis:genre:MOVIE</Reference>
+        <Reference>urn:bindinc:genre:Film</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">
           <Name xml:lang="nl">Komisch</Name>
@@ -153,6 +154,7 @@
         <Name xml:lang="nl">Serie</Name>
         <Reference>urn:tva:metadata:cs:2004:03</Reference>
         <Reference>urn:mis:genre:SERIES_SOAP</Reference>
+        <Reference>urn:bindinc:genre:Serie</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.3.9">
           <Name xml:lang="nl">Komisch</Name>
@@ -189,11 +191,11 @@
         <Name xml:lang="nl">Sport</Name>
         <Reference>urn:tva:metadata:cs:2004:04</Reference>
         <Reference>urn:mis:genre:SPORT</Reference>
+        <Reference>urn:bindinc:genre:Sport</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.4.14">
           <Name xml:lang="nl">Sport - informatie</Name>
           <Reference>urn:tva:metadata:cs:2004:0414</Reference>
-          <Reference>urn:tva:metadata:cs:2004:2.5</Reference> <!-- bindinc ?-->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.4.15">
@@ -206,6 +208,7 @@
         <Name xml:lang="nl">Muziek</Name>
         <Reference>urn:tva:metadata:cs:2004:05</Reference>
         <Reference>urn:mis:genre:MUSIC</Reference>
+        <Reference>urn:mis:bindinc:Muziek</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.5.16">
           <Name xml:lang="nl">Muziek klassiek</Name>
@@ -223,7 +226,7 @@
         <Name xml:lang="nl">Amusement</Name>
         <Reference>urn:tva:metadata:cs:2004:06</Reference>
         <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
-        <Reference>urn:tva:metadata:cs:2004:2.9</Reference> <!-- bindinc ?-->
+        <Reference>urn:bindinc:genre:Amusement</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.6.19">
           <Name xml:lang="nl">Spel/quiz</Name>
@@ -246,6 +249,7 @@
         <Name xml:lang="nl">Informatief</Name>
         <Reference>urn:tva:metadata:cs:2004:07</Reference>
         <Reference>urn:mis:genre:INFORMATIVE</Reference>
+        <Reference>urn:bindinc:genre:Informatief</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.7.19">
           <Name xml:lang="nl">Spel/quiz</Name>
@@ -255,8 +259,7 @@
         <Term termID="3.0.1.7.21">
           <Name xml:lang="nl">Nieuws/actualiteiten</Name>
           <Reference>urn:tva:metadata:cs:2004:0721</Reference>
-          <Reference>urn:tva:metadata:cs:2004:2.11</Reference> <!-- bindinc ?-->
-          <Reference>urn:tva:metadata:cs:2004:2.20</Reference> <!-- bindinc ?-->
+          <Reference>urn:bindinc:genre:Nieuws/Actualiteiten</Reference>
           <Reference>urn:mis:genre:NEWS</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
@@ -275,6 +278,7 @@
           <Name xml:lang="nl">Kunst/cultuur</Name>
           <Reference>urn:tva:metadata:cs:2004:0724</Reference>
           <Reference>urn:mis:genre:ART_CULTURE</Reference>
+          <Reference>urn:bindinc:genre:Kunst en cultuur</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.25">
@@ -293,6 +297,7 @@
           <Name xml:lang="nl">Wetenschap</Name>
           <Reference>urn:tva:metadata:cs:2004:0727</Reference>
           <Reference>urn:mis:genre:SCIENCE</Reference>
+          <Reference>urn:bindinc:genre:Wetenschap</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.28">
