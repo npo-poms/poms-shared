@@ -2690,7 +2690,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("10TB")
-    _10TB() {
+    _10TB(VIDEO) {
         @Override
         public String toString() {
             return "NPO 1 Extra";
