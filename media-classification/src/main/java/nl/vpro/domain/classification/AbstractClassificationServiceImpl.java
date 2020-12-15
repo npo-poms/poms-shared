@@ -72,7 +72,9 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
     @NonNull
     public Term getTermByReference(String code, Predicate<String> predicate) {
         for (Term term : values()) {
-            if (term.getReferences().stream().map(Reference::getValue).anyMatch(predicate.and(s -> s.equals(code)))) {
+            if (term.getReferences().stream()
+                .map(Reference::getValue)
+                .anyMatch(predicate.and(s -> s.equals(code)))) {
                 return term;
             }
         }
