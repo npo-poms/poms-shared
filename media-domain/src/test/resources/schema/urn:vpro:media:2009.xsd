@@ -563,6 +563,7 @@
   <xs:simpleType name="textualTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="MAIN"/>
+      <xs:enumeration value="LONG"/>
       <xs:enumeration value="SHORT"/>
       <xs:enumeration value="SUB"/>
       <xs:enumeration value="EPISODE"/>
