@@ -39,7 +39,7 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
 
     @Getter
     @Setter
-    private NotFound notFound;
+    private NotFound notFound = NotFound.ASIS;
 
 
     /**
