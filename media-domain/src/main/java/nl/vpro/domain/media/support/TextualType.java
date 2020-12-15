@@ -23,7 +23,6 @@ import nl.vpro.domain.Xmlns;
  *
  * E.g. main titles, sub titles.
  *
- * The ordering of the enum values is relevant for its users
  *
  */
 @XmlEnum
@@ -34,12 +33,18 @@ import nl.vpro.domain.Xmlns;
 public enum TextualType {
 
     /**
-     * The main title. For a {@link nl.vpro.domain.media.ProgramType#BROADCAST} this may be the title of the program (the title of the series?)
+     * The main text. For a {@link nl.vpro.domain.media.ProgramType#BROADCAST} this may be the title of the program (the title of the series?)
      */
     MAIN,
+
+    /**
+     * A long description
+     */
+    LONG,
+
     SHORT,
     /**
-     * A sub title. This may be the descriptive title of a broadcast if it is an episode of a series.
+     * A sub text. This may be the descriptive title of a broadcast if it is an episode of a series.
      */
     SUB,
 
@@ -49,7 +54,7 @@ public enum TextualType {
     @Deprecated
     EPISODE,
     /**
-     * If the program was translated, this may contain one title in the original language.
+     * If the program was translated, this may contain one text in the original language.
      */
     ORIGINAL,
     KICKER,
