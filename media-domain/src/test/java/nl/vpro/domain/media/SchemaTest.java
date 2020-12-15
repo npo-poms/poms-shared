@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.search.*;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
@@ -106,6 +107,12 @@ public class SchemaTest extends AbstractSchemaTest {
     public void testChannels() {
         testMediaEnum( "channelEnum", Channel.class);
     }
+
+    @Test
+    public void testTextualType() {
+        testMediaEnum( "textualTypeEnum", TextualType.class);
+    }
+
 
 
     @Test
