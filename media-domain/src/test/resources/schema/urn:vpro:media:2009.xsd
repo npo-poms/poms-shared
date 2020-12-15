@@ -911,6 +911,7 @@
       <xs:enumeration value="STTV"/>
       <xs:enumeration value="TVPO"/>
       <xs:enumeration value="VOOM"/>
+      <xs:enumeration value="10TB"/>
       <xs:enumeration value="XXXX"/>
     </xs:restriction>
   </xs:simpleType>
