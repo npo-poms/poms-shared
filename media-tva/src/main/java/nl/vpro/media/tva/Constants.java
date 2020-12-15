@@ -18,6 +18,8 @@ public class Constants {
 
     public static final String XSL_PARAM_NEWGENRES = "newGenres";
 
+    public static final String XSL_PARAM_LONGDESCRIPTIONS = "longDescriptions";
+
     public final static String XSL_PARAM_CHANNELMAPPING = "channelMapping";
 
     public final static String XSL_PARAM_OWNER = "owner";

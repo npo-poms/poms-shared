@@ -397,6 +397,7 @@ public class TVATransformerTest {
         String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) -> {
             transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
             transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
+            transformer.setParameter(XSL_PARAM_LONGDESCRIPTIONS, "true");
             }
         );
         //log.info(xml);
@@ -407,6 +408,7 @@ public class TVATransformerTest {
         Program p = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/191255709")).findFirst().orElse(null);
         //log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
         assertThat(p.getMainTitle()).isEqualTo("#heuldoch - Therapie wie noch nie");
+        assertThat(TextualObjects.getDescription(p, TextualType.LONG)).isEqualTo("Om hun ontsnapping te financieren, doen de twee ontsnapte gevangenen, Gloria en Lin, zich voor als therapeuten voor vier mannen die veroordeeld zijn voor aanranding. Filmproducent Ralf, app-ontwikkelaar Julian, voetbalster Kobe en gynaecoloog Ferdinand willen zich min of meer vrijwillig rehabiliteren in een afgelegen landhuis in Brandenburg, met therapie als gevolg van de MeToo-beweging. (LONG)");
         assertThat(p.getCredits().get(0).getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
         assertThat(p.getScheduleEvents()).isNotEmpty();

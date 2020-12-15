@@ -21,6 +21,7 @@
   <xsl:param name="owner" select="'MIS'" />
   <xsl:param name="personUriPrefix" select="''" />
   <xsl:param name="workflow" select="''" />
+  <xsl:param name="longDescriptions" select="'false'" />
 
   <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'"/>
   <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
@@ -536,7 +537,12 @@
             </xsl:call-template>
           </description>
         </xsl:when>
-        <xsl:when test="@length = 'long' and not(@type)">
+        <xsl:when test="@length = 'long' and not(@type) and $longDescriptions = 'true'">
+          <description type="LONG" owner="${owner}">
+            <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
+          </description>
+        </xsl:when>
+        <xsl:when test="@length = 'long' and not(@type) and $longDescriptions = 'false'">
           <xsl:comment>tva:Synopsis[@length = 'long'] '<xsl:value-of select="."/>' goes to season</xsl:comment>
         </xsl:when>
         <xsl:when test="@length = 'long' and @type = 'parentSeriesSynopsis'">
