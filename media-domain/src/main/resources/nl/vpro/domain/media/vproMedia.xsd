@@ -3184,6 +3184,15 @@
       <xs:enumeration value="TVDR"/>
       <xs:enumeration value="VRTC"/>
 
+      <xs:enumeration value="10TB">
+         <xs:annotation>
+          <xs:documentation>
+            NPO 1 Extra
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
+
 
 
       <xs:enumeration value="XXXX">
