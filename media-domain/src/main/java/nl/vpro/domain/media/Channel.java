@@ -620,15 +620,19 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+    @XmlEnumValue("ART")
+    ART {
+        @Override
+        public String toString() {
+            return "ARTE Deutschland";
+        }
+    },
+
     @XmlEnumValue("ARTE")
     ARTE {
         @Override
         public String toString() {
-            return "ARTE";
-        }
-        @Override
-        public String bindincId() {
-            return "ARTT";
+            return "ARTE France";
         }
     },
 
