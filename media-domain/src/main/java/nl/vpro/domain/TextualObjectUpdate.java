@@ -285,7 +285,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     default String getSubDescription() {
         if (hasDescriptions()) {
             for (D description : getDescriptions()) {
-                if (description.getType().equals(TextualType.SUB)) {
+                if (TextualType.SUB.equals(description.getType())) {
                     return description.get();
                 }
             }
@@ -296,7 +296,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     default String getShortDescription() {
         if (hasDescriptions()) {
             for (D description : getDescriptions()) {
-                if (description.getType().equals(TextualType.SHORT)) {
+                if (TextualType.SHORT.equals(description.getType())) {
                     return description.get();
                 }
             }
