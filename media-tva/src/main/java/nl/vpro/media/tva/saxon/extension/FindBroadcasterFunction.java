@@ -4,6 +4,8 @@
  */
 package nl.vpro.media.tva.saxon.extension;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.lib.ExtensionFunctionCall;
@@ -25,6 +27,11 @@ import nl.vpro.domain.user.BroadcasterService;
  */
 @Slf4j
 public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
+
+
+    @Getter
+    @Setter
+    private NotFound notFound = NotFound.ASIS;
 
     private final BroadcasterService broadcasterService;
 
@@ -55,11 +62,23 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
             public Sequence<?> call(XPathContext context, Sequence[] arguments) throws XPathException {
                 String value = arguments[0].iterate().next().getStringValueCS().toString().trim().toUpperCase();
                 Broadcaster broadcaster = broadcasterService.findForIds(value).orElse(null);
-                if (broadcaster == null) {
-                    log.warn("No (WON/PD/NEBO) broadcaster for value '{}'", value);
+                if (broadcaster != null) {
+                    return new  StringValue(broadcaster.getId());
                 }
-                return broadcaster != null ? new StringValue(broadcaster.getId()) :
-                    /* will go wrong in hibernate then, but with catchable error */ new StringValue(value);
+
+                log.warn("No (WON/PD/NEBO) broadcaster for value '{}'", value);
+
+                switch(notFound) {
+                    case ASIS:
+                        /* will go wrong in hibernate then, but with catchable error */
+                        return new StringValue(value);
+                    case IGNORE:
+                        return new StringValue("");
+                    case FATAL:
+                    default:
+                        throw new IllegalArgumentException("No such broadcaster " + value);
+                }
+
             }
         };
     }
