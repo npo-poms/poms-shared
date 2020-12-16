@@ -2719,7 +2719,7 @@ public enum Channel implements Displayable, XmlValued {
     _10TB(VIDEO) {
         @Override
         public String toString() {
-            return "NPO 1 Extra";
+            return "NPO 1 extra";
         }
     },
 
