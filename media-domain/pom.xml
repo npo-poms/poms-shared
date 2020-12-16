@@ -7,6 +7,10 @@
   </parent>
   <version>5.12.13</version>
 
+  <properties>
+    <poms.shared.version>5.12.12</poms.shared.version>
+  </properties>
+
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-domain</artifactId>
   <name>media-domain</name>
