@@ -4,19 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.SortedSet;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.support.Description;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.*;
 
 import static nl.vpro.domain.TextualObjects.findOwnersForTextFields;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * @author Michiel Meeuwissen
@@ -144,9 +139,9 @@ public class TextualObjectsTest {
 
         TextualObjects.updateDescriptionsForOwner(incoming, existing, OwnerType.BROADCASTER);
 
-        Assert.assertThat("Insertion or ordering of new descriptions failed", existing.getDescriptions().first().get(), equalTo(n1.get()));
-        Assert.assertThat("Deletion or ordering of obsolete descriptions failed", existing.getDescriptions().last().get(), equalTo(n3.get()));
-        Assert.assertThat("Number of descriptions does not match", existing.getDescriptions().size(), equalTo(3));
+        assertThat(existing.getDescriptions().first().get()).isEqualTo(n1.get());
+        assertThat(existing.getDescriptions().last().get()).isEqualTo(n3.get());
+        assertThat(existing.getDescriptions()).hasSize(3);
     }
 
 
