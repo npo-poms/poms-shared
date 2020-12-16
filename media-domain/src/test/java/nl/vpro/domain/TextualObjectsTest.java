@@ -75,6 +75,19 @@ public class TextualObjectsTest {
 
 
     @Test
+    public void getLongDescription() {
+        BasicTextualObject object = new BasicTextualObject();
+        object.addDescription("a", OwnerType.BROADCASTER, TextualType.MAIN);
+        object.addDescription("b", OwnerType.MIS, TextualType.MAIN);
+        object.addDescription("c", OwnerType.BEELDENGELUID, TextualType.MAIN);
+
+
+        assertThat(object.getLongDescription()).isEqualTo("a");
+        object.addDescription("b", OwnerType.MIS, TextualType.LONG);
+        assertThat(object.getLongDescription()).isEqualTo("b");
+    }
+
+    @Test
     public void expand() {
         BasicTextualObject object = new BasicTextualObject();
         object.addTitle("a", OwnerType.BROADCASTER, TextualType.MAIN);
