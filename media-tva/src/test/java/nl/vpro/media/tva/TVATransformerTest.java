@@ -55,7 +55,7 @@ public class TVATransformerTest {
 
     @BeforeEach
     public void init() {
-        genreFunction.setNotFound(EpgGenreFunction.NotFound.FATAL);
+        genreFunction.setNotFound(NotFound.FATAL);
     }
 
     @BeforeAll
@@ -391,7 +391,7 @@ public class TVATransformerTest {
 
     @Test
     public void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        genreFunction.setNotFound(EpgGenreFunction.NotFound.IGNORE); // TODO API-460
+        genreFunction.setNotFound(NotFound.IGNORE); // TODO API-460
         genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
 
         String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) -> {
@@ -428,7 +428,7 @@ public class TVATransformerTest {
 
     @Test
     public void bindincTV01() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        genreFunction.setNotFound(EpgGenreFunction.NotFound.IGNORE);
+        genreFunction.setNotFound(NotFound.IGNORE);
         String xml = transform("bindinc/20201208185718000dayTV0120201209.xml", (transformer) -> {
                 transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
                 transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());

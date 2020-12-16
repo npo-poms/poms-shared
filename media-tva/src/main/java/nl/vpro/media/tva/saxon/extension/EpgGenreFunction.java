@@ -30,13 +30,6 @@ import nl.vpro.domain.media.MediaClassificationService;
 public class EpgGenreFunction extends ExtensionFunctionDefinition {
 
 
-
-    public enum NotFound {
-        FATAL,
-        IGNORE,
-        ASIS
-    }
-
     @Getter
     @Setter
     private NotFound notFound = NotFound.ASIS;
