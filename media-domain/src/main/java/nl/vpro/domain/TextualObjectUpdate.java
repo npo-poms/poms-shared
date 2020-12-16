@@ -271,6 +271,9 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
 
+    /**
+     * Returns the first available description. Probably the 'MAIN' description.
+     */
     default String getMainDescription() {
         if (hasDescriptions()) {
             return getDescriptions().first().get();
@@ -280,6 +283,21 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
 
     default void setMainDescription(String description) {
         setDescription(description, TextualType.MAIN);
+    }
+
+    /**
+     * Returns the description with textual type 'LONG' if there is one. Otherwise, returns {@link #getMainDescription()}
+     */
+    default String getLongDescription() {
+        if (hasDescriptions()) {
+            return TextualObjects.getOptional(getDescriptions(), TextualType.LONG).orElse(getMainDescription());
+        } else {
+            return null;
+        }
+    }
+
+    default void setLongDescription(String description) {
+        setDescription(description, TextualType.LONG);
     }
 
     default String getSubDescription() {
