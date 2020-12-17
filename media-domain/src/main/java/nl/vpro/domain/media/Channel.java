@@ -620,13 +620,6 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
-    @XmlEnumValue("ART")
-    ART {
-        @Override
-        public String toString() {
-            return "ARTE Deutschland";
-        }
-    },
 
     @XmlEnumValue("ARTE")
     ARTE {
@@ -635,6 +628,15 @@ public enum Channel implements Displayable, XmlValued {
             return "ARTE France";
         }
     },
+
+    @XmlEnumValue("ART")
+    ART_ {
+        @Override
+        public String toString() {
+            return "ARTE Deutschland";
+        }
+    },
+
 
     @XmlEnumValue("T5ME")
     T5ME {
@@ -2786,7 +2788,6 @@ public enum Channel implements Displayable, XmlValued {
         return null;
     }
 
-
     public static Channel findByBindincId(String misId) {
         for(Channel channel : values()) {
             if(channel.bindincId().equals(misId)) {
@@ -2795,7 +2796,6 @@ public enum Channel implements Displayable, XmlValued {
         }
         return null;
     }
-
 
     public static Channel findByPDId(String epgId) {
         for(Channel channel : values()) {
