@@ -60,6 +60,7 @@ public class PageUpdateBuilder {
             ;
     }
 
+    @SuppressWarnings("unchecked")
     private static <T, UT> UT[] toArray(Collection<T> collection, Class<UT> clazz, Function<T, UT> mapper) {
         if (collection == null || collection.isEmpty()) {
             return (UT[]) Array.newInstance(clazz, 0);
@@ -179,11 +180,7 @@ public class PageUpdateBuilder {
         return this;
     }
 
-    @Deprecated
-    public PageUpdateBuilder crids(Crid... crids) {
-        page.setCrids(Arrays.stream(crids).map(Crid::getValue).collect(Collectors.toList()));
-        return this;
-    }
+
     public PageUpdateBuilder crids(String... crids) {
         page.setCrids(Arrays.asList(crids));
         return this;
