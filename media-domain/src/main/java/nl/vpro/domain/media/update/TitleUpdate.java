@@ -47,7 +47,6 @@ public class TitleUpdate implements TypedText {
         return new TitleUpdate(to.get(), to.getType());
     }
 
-
     @Deprecated
     @XmlTransient
     public String getTitle() {
@@ -79,13 +78,11 @@ public class TitleUpdate implements TypedText {
         this.media = media;
     }
 
-
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if (parent instanceof MediaUpdate) {
             this.media = (MediaUpdate) parent;
         }
     }
-
 
     @Override
     public boolean equals(Object o) {
