@@ -674,6 +674,7 @@
       <xs:enumeration value="3SAT"/>
       <xs:enumeration value="KABE"/>
       <xs:enumeration value="ARTE"/>
+      <xs:enumeration value="ART"/>
       <xs:enumeration value="T5ME"/>
       <xs:enumeration value="FRA2"/>
       <xs:enumeration value="FRA3"/>

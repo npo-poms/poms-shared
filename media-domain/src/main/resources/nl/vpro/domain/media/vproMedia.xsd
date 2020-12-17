@@ -1552,7 +1552,14 @@
       <xs:enumeration value="ARTE">
         <xs:annotation>
           <xs:documentation>
-            ARTE.
+            ARTE France
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ART">
+        <xs:annotation>
+          <xs:documentation>
+            ARTE Deutschland
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
