@@ -46,7 +46,6 @@ public enum RoleType  implements Displayable {
      * @since 5.11
      */
     PARTICIPANT("Deelnemer", "Deelname", "Deelnemer"),
-    UNDEFINED("Overig", "Overig", "Overig"),
 
 
     /**
@@ -98,7 +97,10 @@ public enum RoleType  implements Displayable {
      * Supported by bindinc
      * @since 5.20
      */
-    VISUAL_EFFECT("Visual Effects", "Visual effects", "Special effects editor", false)
+    VISUAL_EFFECTS("Visual Effects", "Visual effects", "Special effects editor", false),
+
+    UNDEFINED("Overig", "Overig", "Overig")
+
 
     ;
 
