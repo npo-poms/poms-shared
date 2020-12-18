@@ -1043,6 +1043,16 @@
       <xs:enumeration value="SIDEKICK"/>
       <xs:enumeration value="SUBJECT"/>
       <xs:enumeration value="PARTICIPANT"/>
+      <xs:enumeration value="ASSISTENT_DIRECTOR"/>
+      <xs:enumeration value="CAMERA"/>
+      <xs:enumeration value="CHOREOGRAPHY"/>
+      <xs:enumeration value="DUBBING"/>
+      <xs:enumeration value="MAKEUP"/>
+      <xs:enumeration value="MONTAGE"/>
+      <xs:enumeration value="PRODUCTION_MANAGEMENT"/>
+      <xs:enumeration value="STAGING"/>
+      <xs:enumeration value="STUNT"/>
+      <xs:enumeration value="VISUAL_EFFECTS"/>
       <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>

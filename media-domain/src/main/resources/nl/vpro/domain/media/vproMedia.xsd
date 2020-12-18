@@ -583,13 +583,8 @@
       <xs:enumeration value="COMMENTATOR"/>
       <xs:enumeration value="SCRIPTWRITER"/>
       <xs:enumeration value="COMPOSER"/>
-      <xs:enumeration value="SUBJECT">
-
-      </xs:enumeration>
-      <xs:enumeration value="PARTICIPANT">
-      </xs:enumeration>
-
-
+      <xs:enumeration value="SUBJECT" />
+      <xs:enumeration value="PARTICIPANT" />
       <xs:enumeration value="SIDEKICK">
         <xs:annotation>
           <xs:documentation>Introduced for MediaConnect sync. This is experimental</xs:documentation>
@@ -600,6 +595,19 @@
           <xs:documentation>Introduced for MediaConnect sync. This is experimental</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+
+      <xs:enumeration value="ASSISTENT_DIRECTOR" />
+      <xs:enumeration value="CAMERA" />
+      <xs:enumeration value="CHOREOGRAPHY" />
+      <xs:enumeration value="DUBBING" />
+      <xs:enumeration value="MAKEUP" />
+      <xs:enumeration value="MONTAGE" />
+      <xs:enumeration value="PRODUCTION_MANAGEMENT" />
+      <xs:enumeration value="STAGING" />
+      <xs:enumeration value="STUNT" />
+      <xs:enumeration value="VISUAL_EFFECTS" />
+
+
        <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>
