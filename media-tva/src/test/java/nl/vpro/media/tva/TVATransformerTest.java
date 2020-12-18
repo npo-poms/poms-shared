@@ -393,6 +393,7 @@ public class TVATransformerTest {
     public void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE); // TODO API-460
         genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
+        genreFunction.setIgnore(new HashSet<>(Arrays.asList("urn:bindinc:genre:Overige")));
 
         String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) -> {
             transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
@@ -429,6 +430,7 @@ public class TVATransformerTest {
     @Test
     public void bindincTV01() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE);
+        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
         String xml = transform("bindinc/20201208185718000dayTV0120201209.xml", (transformer) -> {
                 transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
                 transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
