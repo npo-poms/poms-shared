@@ -627,6 +627,11 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "ARTE France";
         }
+
+        @Override
+        public String bindincId() {
+            return "ARTT";
+        }
     },
 
     @XmlEnumValue("ART")
