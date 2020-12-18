@@ -46,7 +46,60 @@ public enum RoleType  implements Displayable {
      * @since 5.11
      */
     PARTICIPANT("Deelnemer", "Deelname", "Deelnemer"),
-    UNDEFINED("Overig", "Overig", "Overig")
+    UNDEFINED("Overig", "Overig", "Overig"),
+
+
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    ASSISTENT_DIRECTOR("Assistent-regisseur", "Regieassistentie", "Assistent-regisseur", false),
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    CAMERA("Camerawerk", "Camerawerk", "Cameraman", false),
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    CHOREOGRAPHY("Choreografie", "Choreografie", "Choreograaf", false),
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    DUBBING("Ondertiteling", "Ondertiteling", "Ondertitelaar", false),
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    MAKEUP("Make-up", "Make-up", "Grimeur", false),
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    MONTAGE("Montage", "Montage", "Monteur", false),
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    PRODUCTION_MANAGEMENT("Productie-management", "Productie-management", "Productie-manager", false),
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    STAGING("Staging", "Staging", "Setdresser", false),
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    STUNT("Stunts", "Stunts", "Stuntman", false),
+    /**
+     * Supported by bindinc
+     * @since 5.20
+     */
+    VISUAL_EFFECT("Visual Effects", "Visual effects", "Special effects editor", false)
+
     ;
 
     @Getter
@@ -57,10 +110,17 @@ public enum RoleType  implements Displayable {
     @Getter
     private final String role;
 
+    private final boolean display;
+
     RoleType(String string, String role, String personFunction) {
+        this(string, role, personFunction, true);
+    }
+
+    RoleType(String string, String role, String personFunction, boolean display) {
         this.string = string;
         this.role = role;
         this.personFunction = personFunction;
+        this.display = display;
     }
 
     @Override
@@ -75,6 +135,11 @@ public enum RoleType  implements Displayable {
     @Override
     public Optional<LocalizedString> getPluralDisplayName() {
         return Optional.of(LocalizedString.of(role, Locales.NETHERLANDISH));
+    }
+
+    @Override
+    public boolean display() {
+        return display;
     }
 
 
