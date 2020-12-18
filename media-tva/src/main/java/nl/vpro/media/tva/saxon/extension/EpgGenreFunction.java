@@ -17,6 +17,8 @@ import net.sf.saxon.tree.tiny.TinyElementImpl;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
 
+import java.util.Set;
+
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.classification.Term;
@@ -41,6 +43,10 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
     @Getter
     @Setter
     private String matchOnValuePrefix;
+
+    @Getter
+    @Setter
+    private Set<String> ignore;
 
     @Override
     public StructuredQName getFunctionQName() {
@@ -73,6 +79,9 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
                     Term term = MediaClassificationService.getInstance().getTermByReference(epgValue.toString(), (s) -> true);
                     return new StringValue(term.getTermId());
                 } catch (IllegalArgumentException iea){
+                    if (ignore != null && ignore.contains(epgValue.toString())) {
+                        return new StringValue("");
+                    }
                     log.warn(iea.getMessage());
                     switch(notFound) {
                         case FATAL:
