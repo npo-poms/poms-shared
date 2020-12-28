@@ -173,9 +173,11 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                         .build());
                 return numberOfBytes;
             } catch (SFTPException sftpException) {
+                Throwable e = sftpException;
                 if (sftpException.getCause() != null) {
-                    log.info("cause {}", sftpException.getCause().getMessage(), sftpException.getCause());
+                    e = sftpException.getCause();
                 }
+                log.info("error from sftp: {}", e.getMessage(), e);
                 throw sftpException;
             }
         }
