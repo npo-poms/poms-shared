@@ -1043,7 +1043,7 @@
       <xs:enumeration value="SIDEKICK"/>
       <xs:enumeration value="SUBJECT"/>
       <xs:enumeration value="PARTICIPANT"/>
-      <xs:enumeration value="ASSISTENT_DIRECTOR"/>
+      <xs:enumeration value="ASSISTANT_DIRECTOR"/>
       <xs:enumeration value="CAMERA"/>
       <xs:enumeration value="CHOREOGRAPHY"/>
       <xs:enumeration value="DUBBING"/>
