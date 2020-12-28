@@ -406,7 +406,7 @@ public class TVATransformerTest {
 
         //JAXB.marshal(table, System.out);
 
-        Program p = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/191255709")).findFirst().orElse(null);
+        Program p = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/191255709")).findFirst().orElseThrow(NoSuchElementException::new);
         //log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
         assertThat(p.getMainTitle()).isEqualTo("#heuldoch - Therapie wie noch nie");
         assertThat(TextualObjects.getDescription(p, TextualType.LONG)).isEqualTo("Om hun ontsnapping te financieren, doen de twee ontsnapte gevangenen, Gloria en Lin, zich voor als therapeuten voor vier mannen die veroordeeld zijn voor aanranding. Filmproducent Ralf, app-ontwikkelaar Julian, voetbalster Kobe en gynaecoloog Ferdinand willen zich min of meer vrijwillig rehabiliteren in een afgelegen landhuis in Brandenburg, met therapie als gevolg van de MeToo-beweging. (LONG)");
@@ -416,10 +416,10 @@ public class TVATransformerTest {
         assertThat(p.getGenres()).hasSize(1);
         assertThat(p.getGenres().first().getTermId()).isEqualTo("3.0.1.3");
 
-        Program movie = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/1444377")).findFirst().orElse(null);
+        Program movie = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/1444377")).findFirst().orElseThrow(NoSuchElementException::new);
         assertThat(movie.getGenres().first().getTermId()).isEqualTo("3.0.1.2");
 
-        Program unfoundgenre = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/198808847")).findFirst().orElse(null);
+        Program unfoundgenre = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/198808847")).findFirst().orElseThrow(NoSuchElementException::new);
         assertThat(unfoundgenre.getGenres()).isEmpty();
 
 
