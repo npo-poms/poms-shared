@@ -421,9 +421,11 @@ public class TVATransformerTest {
         Program unfoundgenre = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/198808847")).findFirst().orElse(null);
         assertThat(unfoundgenre.getGenres()).isEmpty();
 
-
-
-
+        for (Program program : table.getProgramTable()) {
+            for (Credits c : program.getCredits()) {
+                assertThat(c.getRole()).isNotNull();
+            }
+        }
     }
 
     @Test
