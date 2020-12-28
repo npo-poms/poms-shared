@@ -38,7 +38,7 @@ import static nl.vpro.util.DateUtils.toDate;
 @Slf4j
 public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicate<ScheduleEvent> {
 
-    private static long serialVersionUID = 0L;
+    private static final long serialVersionUID = 0L;
 
 
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
@@ -492,10 +492,20 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         );
     }
     public Range<Instant> asRange() {
-        return Range.closedOpen(
-            getStart(),
-            getStop()
-        );
+        if(getStart() == null) {
+            if (getStop() == null) {
+                return Range.all();
+            } else {
+                return Range.lessThan(getStop());
+            }
+        } else if (getStop() == null) {
+            return Range.atLeast(getStart());
+        } else {
+            return Range.closedOpen(
+                getStart(),
+                getStop()
+            );
+        }
     }
 
 
@@ -511,7 +521,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         @Override
         public Iterator<ScheduleEvent> iterator() {
             return new UnmodifiableIterator<ScheduleEvent>() {
-                Iterator<ScheduleEvent> it = events.iterator();
+                final Iterator<ScheduleEvent> it = events.iterator();
                 ScheduleEvent next = null;
 
                 @Override
