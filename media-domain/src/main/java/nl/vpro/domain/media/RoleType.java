@@ -52,7 +52,7 @@ public enum RoleType  implements Displayable {
      * Supported by bindinc
      * @since 5.20
      */
-    ASSISTENT_DIRECTOR("Assistent-regisseur", "Regieassistentie", "Assistent-regisseur", false),
+    ASSISTANT_DIRECTOR("Assistent-regisseur", "Regieassistentie", "Assistent-regisseur", false),
     /**
      * Supported by bindinc
      * @since 5.20

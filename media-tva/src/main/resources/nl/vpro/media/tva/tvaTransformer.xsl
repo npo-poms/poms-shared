@@ -829,7 +829,7 @@ For now just omit country prefix and cast the first poProgType character to uppe
       <xsl:when test="$id = 'urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER'">SCRIPTWRITER</xsl:when>
       <xsl:when test="$id = 'urn:mpeg:mpeg7:cs:RoleCS:2001:COMPOSER'">COMPOSER</xsl:when>
       <xsl:when test="$id = 'PRODUCER'">PRODUCER</xsl:when>
-      <xsl:when test="$id = 'ASSISTENT_DIRECTOR'">ASSISTENT_DIRECTOR</xsl:when>
+      <xsl:when test="$id = 'ASSISTANT_DIRECTOR'">ASSISTANT_DIRECTOR</xsl:when>
       <xsl:when test="$id = 'CAMERA'">CAMERA</xsl:when>
       <xsl:when test="$id = 'CHOREOGRAPHY'">CHOREOGRAPHY</xsl:when>
       <xsl:when test="$id = 'DUBBING'">DUBBING</xsl:when>
