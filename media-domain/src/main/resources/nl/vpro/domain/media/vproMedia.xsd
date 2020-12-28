@@ -596,7 +596,7 @@
         </xs:annotation>
       </xs:enumeration>
 
-      <xs:enumeration value="ASSISTENT_DIRECTOR" />
+      <xs:enumeration value="ASSISTANT_DIRECTOR" />
       <xs:enumeration value="CAMERA" />
       <xs:enumeration value="CHOREOGRAPHY" />
       <xs:enumeration value="DUBBING" />
