@@ -56,7 +56,7 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
     public ExtensionFunctionCall makeCallExpression() {
         return new ExtensionFunctionCall() {
             @Override
-            public Sequence<?> call(XPathContext context, Sequence[] arguments) throws XPathException {
+            public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
                 String value = arguments[0].iterate().next().getStringValueCS().toString().trim().toUpperCase();
                 for (Net net : netsSupplier.get()) {
                     if (net.getDisplayName().toUpperCase().equals(value) || net.getId().toUpperCase().equals(value)) {

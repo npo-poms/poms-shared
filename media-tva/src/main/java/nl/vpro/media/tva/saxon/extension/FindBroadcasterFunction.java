@@ -59,7 +59,7 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
     public ExtensionFunctionCall makeCallExpression() {
         return new ExtensionFunctionCall() {
             @Override
-            public Sequence<?> call(XPathContext context, Sequence[] arguments) throws XPathException {
+            public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
                 String value = arguments[0].iterate().next().getStringValueCS().toString().trim().toUpperCase();
                 Broadcaster broadcaster = broadcasterService.findForIds(value).orElse(null);
                 if (broadcaster != null) {

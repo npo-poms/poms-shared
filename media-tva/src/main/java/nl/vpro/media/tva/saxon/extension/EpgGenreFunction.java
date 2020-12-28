@@ -67,7 +67,7 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
     public ExtensionFunctionCall makeCallExpression() {
         return new ExtensionFunctionCall() {
             @Override
-            public Sequence<?> call(XPathContext context, Sequence[] arguments) throws XPathException {
+            public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
                 CharSequence epgValue;
                 if (StringUtils.isNotEmpty(matchOnValuePrefix)) {
                     TinyElementImpl next = (TinyElementImpl) arguments[1].iterate().next();

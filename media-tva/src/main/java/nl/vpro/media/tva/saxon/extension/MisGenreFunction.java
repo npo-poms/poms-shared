@@ -44,14 +44,13 @@ public class MisGenreFunction extends ExtensionFunctionDefinition {
     @Override
     public ExtensionFunctionCall makeCallExpression() {
         return new ExtensionFunctionCall() {
-            @SuppressWarnings("unchecked")
             @Override
-            public Sequence<StringValue> call(XPathContext context, Sequence[] arguments) throws XPathException {
+            public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
                 List<StringValue> result = new ArrayList<>();
                 List<MisGenreType> misTypes = new ArrayList<>();
 
-                SequenceIterator<Item<StringValue>> iterate = arguments[0].iterate();
-                Item<StringValue> item = iterate.next();
+                SequenceIterator iterate = arguments[0].iterate();
+                Item item = iterate.next();
                 while(item != null) {
                     CharSequence misInput = item.getStringValueCS();
                     item = iterate.next();
@@ -71,7 +70,7 @@ public class MisGenreFunction extends ExtensionFunctionDefinition {
                 for(Term term : terms) {
                     result.add(new StringValue(term.getTermId()));
                 }
-                return new SequenceExtent<>(result);
+                return new SequenceExtent(result);
             }
         };
     }
