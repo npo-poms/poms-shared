@@ -88,6 +88,8 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
                     }
                     if (warned == null || warned.add(epgValue.toString())) {
                         log.warn(iea.getMessage());
+                    } else {
+                        log.debug(iea.getMessage());
                     }
                     switch(notFound) {
                         case FATAL:
