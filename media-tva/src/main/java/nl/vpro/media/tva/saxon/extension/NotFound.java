@@ -2,11 +2,10 @@ package nl.vpro.media.tva.saxon.extension;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.20
  */
 public enum NotFound {
     FATAL,
     IGNORE,
-    IGNORE_WARNONCE,
     ASIS
 }
