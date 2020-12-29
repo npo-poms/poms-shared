@@ -601,7 +601,6 @@
       <xs:enumeration value="CHOREOGRAPHY" />
       <xs:enumeration value="DUBBING" />
       <xs:enumeration value="MAKEUP" />
-      <xs:enumeration value="MONTAGE" />
       <xs:enumeration value="PRODUCTION_MANAGEMENT" />
       <xs:enumeration value="STAGING" />
       <xs:enumeration value="STUNT" />

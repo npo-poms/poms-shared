@@ -834,7 +834,7 @@ For now just omit country prefix and cast the first poProgType character to uppe
       <xsl:when test="$id = 'CHOREOGRAPHY'">CHOREOGRAPHY</xsl:when>
       <xsl:when test="$id = 'DUBBING'">DUBBING</xsl:when>
       <xsl:when test="$id = 'MAKEUP'">MAKEUP</xsl:when>
-      <xsl:when test="$id = 'MONTAGE'">MONTAGE</xsl:when>
+      <xsl:when test="$id = 'MONTAGE'">EDITOR</xsl:when>
       <xsl:when test="$id = 'PRODUCTION_MANAGEMENT'">PRODUCTION_MANAGEMENT</xsl:when>
       <xsl:when test="$id = 'STAGING'">STAGING</xsl:when>
       <xsl:when test="$id = 'STUNT'">STUNT</xsl:when>

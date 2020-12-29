@@ -73,11 +73,7 @@ public enum RoleType  implements Displayable {
      * @since 5.20
      */
     MAKEUP("Make-up", "Make-up", "Grimeur", false),
-    /**
-     * Supported by bindinc
-     * @since 5.20
-     */
-    MONTAGE("Montage", "Montage", "Monteur", false),
+
     /**
      * Supported by bindinc
      * @since 5.20
