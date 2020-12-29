@@ -2408,6 +2408,11 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "HBO 1";
         }
+        @Override
+
+        public String bindincId() {
+            return "HBOV";
+        }
     },
     @XmlEnumValue("SYFY")
     SYFY {
