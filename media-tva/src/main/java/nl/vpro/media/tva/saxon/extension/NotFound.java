@@ -7,5 +7,6 @@ package nl.vpro.media.tva.saxon.extension;
 public enum NotFound {
     FATAL,
     IGNORE,
+    IGNORE_WARNONCE,
     ASIS
 }
