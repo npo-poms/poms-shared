@@ -17,7 +17,8 @@ import net.sf.saxon.tree.tiny.TinyElementImpl;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
 
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -47,6 +48,9 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
     @Getter
     @Setter
     private Set<String> ignore;
+
+    private Set<String> warned;
+
 
     @Override
     public StructuredQName getFunctionQName() {
@@ -82,7 +86,9 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
                     if (ignore != null && ignore.contains(epgValue.toString())) {
                         return new StringValue("");
                     }
-                    log.warn(iea.getMessage());
+                    if (warned == null || warned.add(epgValue.toString())) {
+                        log.warn(iea.getMessage());
+                    }
                     switch(notFound) {
                         case FATAL:
                             throw iea;
@@ -96,5 +102,13 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
 
             }
         };
+    }
+
+    public void setWarnOnce(boolean warnOnce) {
+        if (warnOnce) {
+            warned = new CopyOnWriteArraySet<>();
+        } else {
+            warned = null;
+        }
     }
 }
