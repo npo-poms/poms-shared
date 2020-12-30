@@ -406,6 +406,8 @@ public interface MediaTestDataBuilder<
                         .videoCoding("VCODEC")
                         .horizontalSize(640)
                         .verticalSize(320)
+                        .color(ColorType.BLACK_AND_WHITE)
+                        .fps(50f)
                         .build()
                 )
                 .audioAttributes(

@@ -237,6 +237,7 @@
     "byteSize" : 2000000,
     "avFileFormat" : "M4V",
     "videoAttributes" : {
+      "color" : "BLACK_AND_WHITE",
       "videoCoding" : "VCODEC",
       "width" : 640,
       "heigth" : 320

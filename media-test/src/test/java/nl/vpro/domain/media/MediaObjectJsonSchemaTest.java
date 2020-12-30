@@ -1026,7 +1026,6 @@ public class MediaObjectJsonSchemaTest {
     }
 
 
-
     @Test
     public void withMemberOf() {
         Program program = Program.builder()

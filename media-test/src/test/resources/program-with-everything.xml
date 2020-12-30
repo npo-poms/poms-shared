@@ -81,6 +81,7 @@
         <byteSize>2000000</byteSize>
         <avFileFormat>M4V</avFileFormat>
         <videoAttributes width="640" heigth="320">
+            <color>BLACK AND WHITE</color>
             <videoCoding>VCODEC</videoCoding>
         </videoAttributes>
         <audioAttributes>
@@ -354,6 +355,7 @@
                 <byteSize>2000000</byteSize>
                 <avFileFormat>M4V</avFileFormat>
                 <videoAttributes width="640" heigth="320">
+                    <color>BLACK AND WHITE</color>
                     <videoCoding>VCODEC</videoCoding>
                 </videoAttributes>
                 <audioAttributes>

@@ -23,7 +23,6 @@
     }, {
       "midRef" : "VPROWON_30003",
       "type" : "SEGMENT",
-      "index" : 2,
       "segmentOf" : {
         "midRef" : "VPROWON_30002",
         "type" : "CLIP",
@@ -32,7 +31,8 @@
           "type" : "SERIES",
           "index" : 10
         } ]
-      }
+      },
+      "index" : 2
     } ],
     "episodeOf" : [ ]
   } ],
@@ -174,6 +174,7 @@
     "byteSize" : 2000000,
     "avFileFormat" : "M4V",
     "videoAttributes" : {
+      "color" : "BLACK_AND_WHITE",
       "videoCoding" : "VCODEC",
       "width" : 640,
       "heigth" : 320
@@ -654,6 +655,7 @@
       "byteSize" : 2000000,
       "avFileFormat" : "M4V",
       "videoAttributes" : {
+        "color" : "BLACK_AND_WHITE",
         "videoCoding" : "VCODEC",
         "width" : 640,
         "heigth" : 320
@@ -941,7 +943,6 @@
       }, {
         "midRef" : "VPROWON_20005",
         "type" : "SEGMENT",
-        "index" : 2,
         "segmentOf" : {
           "midRef" : "VPROWON_20004",
           "type" : "CLIP",
@@ -950,11 +951,11 @@
             "type" : "SERIES",
             "index" : 10
           } ]
-        }
+        },
+        "index" : 2
       }, {
         "midRef" : "VPROWON_20005",
         "type" : "SEGMENT",
-        "index" : 3,
         "segmentOf" : {
           "midRef" : "VPROWON_20004",
           "type" : "CLIP",
@@ -963,7 +964,8 @@
             "type" : "SERIES",
             "index" : 10
           } ]
-        }
+        },
+        "index" : 3
       } ],
       "episodeOf" : [ {
         "midRef" : "VPROWON_30004",
@@ -975,7 +977,6 @@
         }, {
           "midRef" : "VPROWON_30003",
           "type" : "SEGMENT",
-          "index" : 2,
           "segmentOf" : {
             "midRef" : "VPROWON_30002",
             "type" : "CLIP",
@@ -984,7 +985,8 @@
               "type" : "SERIES",
               "index" : 10
             } ]
-          }
+          },
+          "index" : 2
         } ],
         "index" : 1
       } ]
