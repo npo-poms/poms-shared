@@ -5,18 +5,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
@@ -74,18 +64,20 @@ public class VideoAttributes implements Serializable {
     }
 
     public VideoAttributes(String videoCoding, Integer horizontalSize, Integer verticalSize) {
-        this(videoCoding, horizontalSize, verticalSize, null);
+        this(videoCoding, horizontalSize, verticalSize, null, null);
     }
 
     @lombok.Builder
-    private VideoAttributes(String videoCoding, Integer horizontalSize, Integer verticalSize, Float fps) {
+    private VideoAttributes(String videoCoding, Integer horizontalSize, Integer verticalSize, Float fps, ColorType color) {
         this(horizontalSize, verticalSize);
         this.videoCoding = videoCoding;
         this.fps = fps;
+        this.color = color;
     }
 
     public VideoAttributes(VideoAttributes source) {
         this(source.videoCoding, source.horizontalSize, source.verticalSize);
+        this.fps = source.fps;
         this.color = source.color;
         this.aspectRatio = source.aspectRatio;
     }
