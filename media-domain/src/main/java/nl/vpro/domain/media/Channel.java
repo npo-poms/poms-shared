@@ -2320,7 +2320,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBR1")
-    BBR1(AUDIO) {
+    BBR1(AUDIO, 1967) {
         @Override
         public String toString() {
             return "BBC Radio 1";
@@ -2328,7 +2328,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBR2")
-    BBR2(AUDIO) {
+    BBR2(AUDIO, 1967) {
         @Override
         public String toString() {
             return "BBC Radio 2";
@@ -2336,7 +2336,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBR3")
-    BBR3(AUDIO) {
+    BBR3(AUDIO, 1967) {
         @Override
         public String toString() {
             return "BBC Radio 3";
@@ -2344,7 +2344,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBR4")
-    BBR4(AUDIO) {
+    BBR4(AUDIO, 1967) {
         @Override
         public String toString() {
             return "BBC Radio 4";
@@ -2360,10 +2360,10 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBCX")
-    BBCX {
+    BBCX(AUDIO, "https://www.bbc.co.uk/sounds/play/live:bbc_1xtra", 2002) {
         @Override
         public String toString() {
-            return "BBC 1XTRA";
+            return "BBC 1Xtra";
         }
     },
 
@@ -2416,7 +2416,7 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
     @XmlEnumValue("SYFY")
-    SYFY {
+    SYFY(VIDEO, 1992, 2016) { // syfy benelux?
         @Override
         public String toString () {
             return "Syfy";
