@@ -1724,6 +1724,7 @@
                 <VerticalSize>1080</VerticalSize>
                 <FrameRate>25</FrameRate>
                 <AspectRatio type="original">16:9</AspectRatio>
+                <Color type="BlackAndWhite" />
               </VideoAttributes>
             </AVAttributes>
           </InstanceDescription>

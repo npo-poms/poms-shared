@@ -614,6 +614,14 @@
         <xsl:value-of select="text()"/>
       </xsl:element>
     </xsl:for-each>
+    <xsl:if test="../../tva:ProgramLocationTable/tva:Schedule/tva:ScheduleEvent[tva:Program/@crid = $crid]/tva:InstanceDescription/tva:AVAttributes/tva:VideoAttributes/tva:Color[@type='BlackAndWhite']">
+      <xsl:element name="avAttributes">
+        <xsl:element name="videoAttributes">
+          <xsl:element name="color">BLACK AND WHITE</xsl:element>
+        </xsl:element>
+      </xsl:element>
+    </xsl:if>
+
     <!-- <duration> -->
     <!-- See MSE-2123
             <xsl:for-each select="tva:BasicDescription/tva:Duration">
@@ -858,14 +866,29 @@ For now just omit country prefix and cast the first poProgType character to uppe
               <xsl:value-of select="text()"/>
             </xsl:element>
           </xsl:for-each>
+          <xsl:choose>
+            <xsl:when test="tva:Color[@type='BlackAndWhite']">
+              <color>BLACK AND WHITE</color>
+            </xsl:when>
+            <xsl:when test="tva:Color[@type='BlackAndWhiteAndColor']">
+              <color>BLACK AND WHITE AND COLOR</color>
+            </xsl:when>
+            <xsl:when test="tva:Color[@type='Color']">
+              <color>COLOR</color>
+            </xsl:when>
+            <xsl:when test="tva:Color[@type='Colorized']">
+              <color>COLORIZED</color>
+            </xsl:when>
+          </xsl:choose>
         </xsl:element>
       </xsl:for-each>
-      <!--
-                  <xsl:for-each select="tva:AudioAttributes">
-                      <xsl:element name="audioAttributes">
-                      </xsl:element>
-                  </xsl:for-each>
-      -->
+      <xsl:for-each select="tva:AudioAttributes">
+        <xsl:element name="audioAttributes">
+          <xsl:for-each select="tva:NumOfChannels">
+            <numberOfChannels><xsl:value-of select="text()" /></numberOfChannels>
+          </xsl:for-each>
+        </xsl:element>
+      </xsl:for-each>
     </xsl:element>
   </xsl:template>
 

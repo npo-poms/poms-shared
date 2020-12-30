@@ -422,6 +422,16 @@ public class TVATransformerTest {
         Program unfoundgenre = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/198808847")).findFirst().orElseThrow(NoSuchElementException::new);
         assertThat(unfoundgenre.getGenres()).isEmpty();
 
+
+        Program blackandWhite = table.getProgramTable().stream().filter(pr -> pr.getCrids().contains("crid://media-press.tv/191172999")).findFirst().orElseThrow(NoSuchElementException::new);
+
+        assertThat(blackandWhite.getAvAttributes().getVideoAttributes().getColor()).isEqualTo(ColorType.BLACK_AND_WHITE);
+        assertThat(blackandWhite.getScheduleEvents().first().getAvAttributes().getVideoAttributes().getAspectRatio()).isEqualTo(AspectRatio._16x9);
+        assertThat(blackandWhite.getScheduleEvents().first().getAvAttributes().getVideoAttributes().getColor()).isEqualTo(ColorType.BLACK_AND_WHITE);
+
+
+        assertThat(blackandWhite.getScheduleEvents().first().getAvAttributes().getAudioAttributes().getNumberOfChannels()).isEqualTo(2);
+
         for (Program program : table.getProgramTable()) {
             for (Credits c : program.getCredits()) {
                 assertThat(c.getRole()).isNotNull();
