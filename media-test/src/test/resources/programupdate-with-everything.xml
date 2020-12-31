@@ -41,6 +41,7 @@
         <bitrate>1000000</bitrate>
         <avFileFormat>M4V</avFileFormat>
         <videoAttributes width="640" height="320">
+            <color>BLACK AND WHITE</color>
             <coding>VCODEC</coding>
         </videoAttributes>
         <audioAttributes>
@@ -206,6 +207,7 @@
                 <bitrate>1000000</bitrate>
                 <avFileFormat>M4V</avFileFormat>
                 <videoAttributes width="640" height="320">
+                    <color>BLACK AND WHITE</color>
                     <coding>VCODEC</coding>
                 </videoAttributes>
                 <audioAttributes>

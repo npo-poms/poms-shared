@@ -25,7 +25,6 @@ public class PageTest {
     @BeforeAll
     public static void staticInit() {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
-
     }
 
     Page page = Page.builder()
