@@ -106,7 +106,6 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
-    // komt uit prepr
     @XmlEnumValue("R2SJ")
     R2SJ(AUDIO, 2014) { // voorheen radio 6?
         @Override
@@ -129,12 +128,20 @@ public enum Channel implements Displayable, XmlValued {
     },
 
 
-    // komt uit prepr
-    @XmlEnumValue("R3KX")
-    R3KX(AUDIO, 2005) {
+
+    @XmlEnumValue("R3AL")
+    R3AL(AUDIO, null, null, true) {
         @Override
         public String toString() {
-            return "Radio 3 KX";
+            return "NPO 3FM KX Alternative";
+        }
+    },
+
+    @XmlEnumValue("R3KX")
+    R3KX(AUDIO, Range.atLeast(Year.of(2005)), null, true) {
+        @Override
+        public String toString() {
+            return "NPO 3FM KX Radio";
         }
     },
 
@@ -151,10 +158,8 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
-
-    // komt uit prepr
     @XmlEnumValue("R4CO")
-    R4CO(AUDIO) {
+    R4CO(AUDIO, null, null, true) {
         @Override
         public String toString() {
             return "NPO Radio 4 Concerten";
@@ -170,9 +175,8 @@ public enum Channel implements Displayable, XmlValued {
 
     },
 
-    // komt uit prepr
     @XmlEnumValue("R5ST")
-    R5ST(AUDIO) {
+    R5ST(AUDIO, null, null, true) {
         @Override
         public String toString() {
             return "NPO Radio 5 Sterren NL";
@@ -2208,8 +2212,8 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
-    @XmlEnumValue("FNXA")
-    FNXA {
+    @XmlEnumValue("FUNA")
+    FUNA(AUDIO, null, null, true) {
         @Override
         public String toString() {
             return "FunX Amsterdam";
@@ -2217,8 +2221,8 @@ public enum Channel implements Displayable, XmlValued {
     },
 
 
-    @XmlEnumValue("FNXAR")
-    FNXAR {
+    @XmlEnumValue("FUNB")
+    FUNB(AUDIO, null, null, true)  {
         @Override
         public String toString() {
             return "FunX Arab";
@@ -2226,61 +2230,61 @@ public enum Channel implements Displayable, XmlValued {
     },
 
 
-    @XmlEnumValue("FNXDA")
-    FNXDA {
+    @XmlEnumValue("FUND")
+    FUND(AUDIO, null, null, true)  {
         @Override
         public String toString() {
             return "FunX Dance";
         }
     },
 
-    @XmlEnumValue("FNXHH")
-    FNXHH {
+    @XmlEnumValue("FUNH")
+    FUNH(AUDIO, null, null, true)  {
         @Override
         public String toString() {
             return "FunX HipHop";
         }
     },
-     @XmlEnumValue("FNXLA")
-    FNXLA {
+     @XmlEnumValue("FUNL")
+    FUNL(AUDIO, null, null, true)  {
         @Override
         public String toString() {
             return "FunX Latin";
         }
     },
-    @XmlEnumValue("FNXRE")
-    FNXRE {
+    @XmlEnumValue("FUNJ")
+    FUNJ(AUDIO, null, null, true)  {
         @Override
         public String toString() {
             return "FunX Raggae";
         }
     },
-    @XmlEnumValue("FNXSJ")
-    FNXSJ {
+    @XmlEnumValue("FUNS")
+    FUNS(AUDIO, null, null, true)  {
         @Override
         public String toString() {
             return "FunX SlowJamz";
         }
     },
 
-    @XmlEnumValue("FNXR")
-    FNXR {
+    @XmlEnumValue("FUNR")
+    FUNR(AUDIO, null, null, true)  {
         @Override
         public String toString() {
             return "FunX Rotterdam";
         }
     },
 
-    @XmlEnumValue("FNXU")
-    FNXU {
+    @XmlEnumValue("FUNU")
+    FUNU(AUDIO, null, null, true)  {
         @Override
         public String toString() {
             return "FunX Utrecht";
         }
     },
 
-    @XmlEnumValue("FNXD")
-    FNXD {
+    @XmlEnumValue("FUNG")
+    FUNG(AUDIO, null, null, true)  {
         @Override
         public String toString() {
             return "FunX Den Haag";
@@ -2763,26 +2767,38 @@ public enum Channel implements Displayable, XmlValued {
     @Getter
     private final String website;
 
+
+    @Getter
+    private final Boolean onlineOnly;
+
     Channel(AVType avType) {
         this.avType = avType;
         this.range = null;
         this.website = null;
+        this.onlineOnly = null;
     }
 
     Channel(AVType avType, String website, int from) {
         this.avType = avType;
         this.range = Range.atLeast(Year.of(from));
         this.website = website;
+        this.onlineOnly = null;
     }
 
     Channel(AVType avType, int from) {
         this(avType, null, from);
     }
 
+
     Channel(AVType avType, int from , int until) {
+        this(avType, Range.closed(Year.of(from), Year.of(until)), null, null);
+    }
+
+    Channel(AVType avType, Range<Year> range, String website, Boolean onlineOnly) {
         this.avType = avType;
-        this.range = Range.closed(Year.of(from), Year.of(until));
-        this.website = null;
+        this.range = range;
+        this.website = website;
+        this.onlineOnly = onlineOnly;
     }
 
 
