@@ -2798,6 +2798,7 @@
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="R3KX"/>
+      <xs:enumeration value="R3AL"/>
       <xs:enumeration value="RAD4">
         <xs:annotation>
           <xs:documentation>
@@ -3000,70 +3001,70 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXA">
+      <xs:enumeration value="FUNA">
         <xs:annotation>
           <xs:documentation>
             FunX Amsterdam.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXR">
+      <xs:enumeration value="FUNR">
         <xs:annotation>
           <xs:documentation>
             FunX Rotterdam.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXU">
+      <xs:enumeration value="FUNU">
         <xs:annotation>
           <xs:documentation>
             FunX Utrecht.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXD">
+      <xs:enumeration value="FUNG">
         <xs:annotation>
           <xs:documentation>
             FunX Den Haag.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXAR">
+      <xs:enumeration value="FUNB">
         <xs:annotation>
           <xs:documentation>
             FunX Arab
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXDA">
+      <xs:enumeration value="FUND">
          <xs:annotation>
           <xs:documentation>
             FunX Dance
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXHH">
+      <xs:enumeration value="FUNH">
          <xs:annotation>
           <xs:documentation>
             FunX HipHop
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXLA">
+      <xs:enumeration value="FUNL">
         <xs:annotation>
           <xs:documentation>
             FunX Latin
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXRE">
+      <xs:enumeration value="FUNJ">
          <xs:annotation>
           <xs:documentation>
             FunX Reggae
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="FNXSJ">
+      <xs:enumeration value="FUNS">
          <xs:annotation>
           <xs:documentation>
             FunX SlowJamz
