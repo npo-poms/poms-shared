@@ -16,12 +16,36 @@
     Deze XSLT kun je testen via nl.vpro.camel.media.routes.TVATransformerTest
   -->
   <xsl:output method="xml" indent="yes" encoding="UTF-8" version="1.0"/>
-  <xsl:param name="channelMapping"/>
+
+  <!--
+     A document containing a mapping from incoming channel ids to poms channel ids
+  -->
+  <xsl:param name="channelMapping" />
+  <!--
+    Whether to support 'new' genres. This is actually not very new any more. This parameter can be dropped, because I presume its value is always true now.
+  -->
   <xsl:param name="newGenres" select="'true'" />
+  <!--
+  The owner of the new poms objects. This defaults to 'MIS' (as used in poms itself)
+  -->
   <xsl:param name="owner" select="'MIS'" />
+  <!--
+  If a person uri prefix is specified then person ids will be filled in the 'gtaaUri' attribute
+  -->
   <xsl:param name="personUriPrefix" select="''" />
+  <!--
+  The workflow of the new objetct. This is probably 'FOR_REPUBLICATION', but you may want to set it to 'PUBLISHED' straight away, if
+  the resulting object will be published as is.
+  -->
   <xsl:param name="workflow" select="''" />
+
+  <!--
+  Per default, 'long' descriptions will be used to construct 'seasonal' information (as what's on is shipping to us).
+
+  If you set this to true, this xslt will produce actual 'long' descriptions.
+  -->
   <xsl:param name="longDescriptions" select="'false'" />
+
 
   <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'"/>
   <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
