@@ -71,7 +71,8 @@ public class TVATransformerTest {
                 "                  publicationTime=\"2015-08-03T17:40:17.040+02:00\"\n" +
                 "                  version=\"300\">\n" +
                 "   <programTable>\n" +
-                "      <program mid=\"POW_00252645\"\n" +
+                "      <program workflow=\"FOR_REPUBLICATION\"\n" +
+                "               mid=\"POW_00252645\"\n" +
                 "               type=\"BROADCAST\"\n" +
                 "               avType=\"VIDEO\"\n" +
                 "               embeddable=\"true\">\n" +
@@ -99,7 +100,8 @@ public class TVATransformerTest {
                 "         <descendantOf type=\"SERIES\" midRef=\"POW_00818820\"/>\n" +
                 "         <episodeOf type=\"SEASON\" midRef=\"POW_00252644\" index=\"1\"/>\n" +
                 "      </program>\n" +
-                "      <program mid=\"POW_00252645_1\"\n" +
+                "      <program workflow=\"FOR_REPUBLICATION\"\n" +
+                "               mid=\"POW_00252645_1\"\n" +
                 "               type=\"BROADCAST\"\n" +
                 "               avType=\"VIDEO\"\n" +
                 "               embeddable=\"true\">\n" +
@@ -124,7 +126,10 @@ public class TVATransformerTest {
                 "      </program>\n" +
                 "   </programTable>\n" +
                 "   <groupTable>\n" +
-                "      <group type=\"SEASON\" mid=\"POW_00252644\" avType=\"VIDEO\">\n" +
+                "      <group type=\"SEASON\"\n" +
+                "             avType=\"VIDEO\"\n" +
+                "             mid=\"POW_00252644\"\n" +
+                "             workflow=\"FOR_REPUBLICATION\">\n" +
                 "         <broadcaster id=\"EO\">EO</broadcaster>\n" +
                 "         <title type=\"MAIN\" owner=\"MIS\">SERIE TITEL</title>\n" +
                 "         <title type=\"ORIGINAL\" owner=\"MIS\">ICH BIN EIN SEIZON</title>\n" +
@@ -132,7 +137,10 @@ public class TVATransformerTest {
                 "         <memberOf midRef=\"POW_00818820\" index=\"3\"/>\n" +
                 "         <poSequenceInformation>3</poSequenceInformation>\n" +
                 "      </group>\n" +
-                "      <group type=\"SERIES\" mid=\"POW_00818820\" avType=\"VIDEO\">\n" +
+                "      <group type=\"SERIES\"\n" +
+                "             avType=\"VIDEO\"\n" +
+                "             mid=\"POW_00818820\"\n" +
+                "             workflow=\"FOR_REPUBLICATION\">\n" +
                 "         <broadcaster id=\"EO\">EO</broadcaster>\n" +
                 "         <title type=\"MAIN\" owner=\"MIS\">IK BEN EEN MOEDERSERIE</title>\n" +
                 "         <description type=\"MAIN\" owner=\"MIS\">Dit is de Seriesbeschrijving</description>\n" +
@@ -525,6 +533,10 @@ public class TVATransformerTest {
         transformer.setParameter(
             XSL_PARAM_CHANNELMAPPING,
             Constants.createChannelMapping(Constants.ChannelIdType.PD));
+        transformer.setParameter(
+            XSL_PARAM_WORKFLOW,
+            Workflow.FOR_REPUBLICATION.name()
+        );
         configure.accept(transformer);
         return transformer;
     }
