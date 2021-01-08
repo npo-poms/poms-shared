@@ -33,6 +33,7 @@ import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.media.tva.saxon.extension.*;
 
@@ -443,7 +444,14 @@ public class TVATransformerTest {
     public void bindincTV01() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE);
         genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
-        String xml = transform("bindinc/20201208185718000dayTV0120201209.xml", (transformer) -> {
+
+        Transformer preTransformer = getTransformer("/nl/vpro/media/tva/repairBindincXml.xslt");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Result result = new StreamResult(out);
+        preTransformer.transform(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("bindinc/20201208185718000dayTV0120201209.xml")), result);
+
+
+        String xml = transform(new ByteArrayInputStream(out.toByteArray()), (transformer) -> {
                 transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
                 transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
             }
@@ -460,11 +468,14 @@ public class TVATransformerTest {
         assertThat(p.getCrids()).containsExactly("crid://media-press.tv/203053643", "crid://npo/programmagegevens/1902975399668");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
         assertThat(p.getScheduleEvents()).isNotEmpty();
+        assertThat(p.getCountries().get(0).getName(Locales.NETHERLANDISH)).isEqualTo("Oost Duitsland");
 
         Program p2 = (Program) table.find("POW_04508476").get();
         assertThat(p2.getScheduleEvents()).hasSize(2);
 
     }
+
+
 
     TransformerFactoryImpl FACTORY = new net.sf.saxon.TransformerFactoryImpl();
 
@@ -506,26 +517,36 @@ public class TVATransformerTest {
         return transform(resource, (t) -> {});
     }
 
-    private String transform(String resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
+    private String transform(InputStream resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Result result = new StreamResult(out);
+        getTransformer(configure).transform(new StreamSource(resource), result);
+        return out.toString(StandardCharsets.UTF_8.name());
+    }
+
+    private String transform(String resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
         InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
         if (input == null) {
             throw new IllegalArgumentException("Could not find " + resource);
         }
-        getTransformer(configure).transform(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(resource)), result);
-        return out.toString(StandardCharsets.UTF_8.name());
+        return transform(input, configure);
     }
 
-    private Transformer getTransformer(Consumer<Transformer> configure) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
-        StreamSource stylesource = new StreamSource(getClass().getResourceAsStream("/nl/vpro/media/tva/tvaTransformer.xsl"));
-        Transformer transformer = FACTORY.newTransformer(stylesource);
 
-        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+    private Transformer getTransformer(Consumer<Transformer> configure) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
+        Transformer transformer = getTransformer("/nl/vpro/media/tva/tvaTransformer.xsl");
         transformer.setParameter(
             XSL_PARAM_CHANNELMAPPING,
             Constants.createChannelMapping(Constants.ChannelIdType.PD));
         configure.accept(transformer);
+        return transformer;
+    }
+
+     private Transformer getTransformer(String resource) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
+        StreamSource stylesource = new StreamSource(getClass().getResourceAsStream(resource));
+        Transformer transformer = FACTORY.newTransformer(stylesource);
+
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         return transformer;
     }
 
