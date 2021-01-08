@@ -29,7 +29,7 @@
             </MediaLocator>
           </RelatedMaterial>
           <ProductionLocationList>
-            <ProductionLocation code="NL" />
+            <ProductionLocation code="EA" /> <!-- EA is for bindinc East Germany (wtf if you ask me)  -->
           </ProductionLocationList>
           <ReleaseInformation>
             <ReleaseDate>
