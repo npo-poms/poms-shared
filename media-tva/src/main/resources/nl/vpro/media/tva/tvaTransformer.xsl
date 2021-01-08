@@ -34,7 +34,7 @@
   -->
   <xsl:param name="personUriPrefix" select="''" />
   <!--
-  The workflow of the new objetct. This is probably 'FOR_REPUBLICATION', but you may want to set it to 'PUBLISHED' straight away, if
+  The workflow of the new object. This is probably 'FOR_REPUBLICATION', but you may want to set it to 'PUBLISHED' straight away, if
   the resulting object will be published as is.
   -->
   <xsl:param name="workflow" select="''" />
