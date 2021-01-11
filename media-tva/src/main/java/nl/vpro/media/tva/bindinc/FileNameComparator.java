@@ -18,7 +18,13 @@ public class FileNameComparator implements Comparator<String> {
         if (bf1.isPresent() && bf2.isPresent()) {
             return bf1.get().compareTo(bf2.get());
         } else {
-            return Comparator.<String>nullsLast(Comparator.naturalOrder()).compare(o1, o2);
+            if (bf1.isPresent()) {
+                return -1;
+            } else if (bf2.isPresent()) {
+                return 1;
+            } else {
+                return Comparator.<String>nullsLast(Comparator.naturalOrder()).compare(o1, o2);
+            }
         }
     }
 
