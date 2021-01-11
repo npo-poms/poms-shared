@@ -2,8 +2,7 @@ package nl.vpro.media.tva.bindinc;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Comparator;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -19,7 +18,7 @@ public class FileNameComparator implements Comparator<String> {
         if (bf1.isPresent() && bf2.isPresent()) {
             return bf1.get().compareTo(bf2.get());
         } else {
-            return o1.compareTo(o2);
+            return Comparator.<String>nullsLast(Comparator.naturalOrder()).compare(o1, o2);
         }
     }
 

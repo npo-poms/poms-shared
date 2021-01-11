@@ -54,6 +54,9 @@ public class Utils {
 
     public static  Optional<BindincFile> parseFileName(String fileName) {
         BindincFile.Builder builder = BindincFile.builder();
+        if (fileName == null){
+            return Optional.empty();
+        }
         Matcher matcher = FILE_NAME.matcher(fileName);
         if (matcher.matches()) {
             try {
@@ -108,7 +111,7 @@ public class Utils {
   @Getter
     public static class BindincFile implements Comparable<BindincFile> {
 
-        static final Comparator<BindincFile> COMPARATOR =  Comparator.comparing(BindincFile::getDay).thenComparing(BindincFile::getChannel).thenComparing(BindincFile::getTimestamp);
+        static final Comparator<BindincFile> COMPARATOR =  Comparator.nullsLast(Comparator.comparing(BindincFile::getDay).thenComparing(BindincFile::getChannel).thenComparing(BindincFile::getTimestamp));
         private final LocalDateTime timestamp;
         private final Channel channel;
         private final LocalDate day;
