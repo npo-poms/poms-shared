@@ -16,6 +16,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.*;
 
+import static java.util.Comparator.*;
+
 /**
  * @author Michiel Meeuwissen
  * @since ...
@@ -108,10 +110,12 @@ public class Utils {
         }
     }
 
-  @Getter
+    @Getter
     public static class BindincFile implements Comparable<BindincFile> {
 
-        static final Comparator<BindincFile> COMPARATOR =  Comparator.nullsLast(Comparator.comparing(BindincFile::getDay).thenComparing(BindincFile::getChannel).thenComparing(BindincFile::getTimestamp));
+        static final Comparator<BindincFile> COMPARATOR =
+            nullsLast(
+                comparing(BindincFile::getDay, nullsLast(naturalOrder()))).thenComparing(BindincFile::getChannel, nullsLast(naturalOrder())).thenComparing(BindincFile::getTimestamp, nullsLast(naturalOrder()));
         private final LocalDateTime timestamp;
         private final Channel channel;
         private final LocalDate day;
