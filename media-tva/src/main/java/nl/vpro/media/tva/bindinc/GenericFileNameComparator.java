@@ -5,8 +5,9 @@ import java.util.Comparator;
 import org.apache.camel.component.file.GenericFile;
 
 /**
+ *
  * @author Michiel Meeuwissen
- * @since ...
+ * @see FileNameComparator
  */
 public class GenericFileNameComparator implements Comparator<GenericFile<?>> {
     private final FileNameComparator fn = new FileNameComparator();

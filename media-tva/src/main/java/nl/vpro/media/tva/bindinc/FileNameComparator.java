@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 /**
+ * To sort the files grouped by channel/day.
  * @author Michiel Meeuwissen
- * @since ...
  */
 @Slf4j
 public class FileNameComparator implements Comparator<String> {
