@@ -227,7 +227,8 @@ public final class Utils {
             }
         }
         private static File createTempFile(@NonNull  String filename) throws IOException {
-            File file = File.createTempFile("tmp", filename);
+            final String[] split = filename.split("/");
+            File file = File.createTempFile("tmp", split[split.length - 1]);
             file.deleteOnExit();
             log.debug("Create temp file {}", file);
             return file;
