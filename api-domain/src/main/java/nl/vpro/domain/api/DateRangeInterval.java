@@ -74,7 +74,7 @@ public class DateRangeInterval implements RangeFacet<Instant> {
 
 
     public boolean approximatelyEquals(Long desiredValue, Long actualValue, Long tolerancePercentage) {
-        Long diff = Math.abs(desiredValue - actualValue);
+        long diff = Math.abs(desiredValue - actualValue);
         double tolerance = (tolerancePercentage * 0.01) * desiredValue;
         return diff < tolerance;
     }
@@ -140,7 +140,7 @@ public class DateRangeInterval implements RangeFacet<Instant> {
 
         }
 
-        private static final WeekFields WEEK_FIELDS= WeekFields.of(Locales.DUTCH);
+        private static final WeekFields WEEK_FIELDS = WeekFields.of(Locales.DUTCH);
 
         @Override
         public String print(Instant dateTime) {
@@ -151,7 +151,10 @@ public class DateRangeInterval implements RangeFacet<Instant> {
                 case MONTH:
                     return String.format("%04d-%02d", dateTime.atZone(ZONE).getYear(), dateTime.atZone(ZONE).getMonthValue());
                 case WEEK:
-                    return String.format("%04d-W%02d", dateTime.atZone(ZONE).getYear(), dateTime.atZone(ZONE).get(WEEK_FIELDS.weekOfYear()));
+                    return String.format("%04d-W%02d",
+                        dateTime.atZone(ZONE).get(WEEK_FIELDS.weekBasedYear()),
+                        dateTime.atZone(ZONE).get(WEEK_FIELDS.weekOfWeekBasedYear())
+                    );
                 case DAY:
                     return dateTime.atZone(ZONE).toLocalDate().toString();
                 case HOUR:

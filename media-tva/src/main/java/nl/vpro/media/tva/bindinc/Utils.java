@@ -3,6 +3,8 @@ package nl.vpro.media.tva.bindinc;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.*;
+import java.nio.file.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,10 +14,17 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.camel.*;
+import org.apache.camel.component.file.GenericFile;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.Channel;
 
+import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static java.util.Comparator.*;
 
 /**
@@ -79,9 +88,6 @@ public final class Utils {
                 log.error("for {}: {}", fileName, e.getMessage());
                 day = null;
             }
-            if (channel != null) {
-                builder.correlation(channel.name() + day);
-            }
             return Optional.of(builder.build());
         } else {
             return Optional.empty();
@@ -116,6 +122,24 @@ public final class Utils {
         }
     }
 
+    public static  void parseFileName(Exchange exchange) {
+        String fileName = exchange.getIn().getHeader(Exchange.FILE_NAME, String.class);
+        if (fileName == null) {
+            exchange.getIn().setHeader(Exchange.CORRELATION_ID, exchange.getIn().getMessageId());
+            return;
+        }
+        Utils.parseFileName(fileName).ifPresent(bf -> {
+            exchange.getIn().setHeader(HEADER_TIMESTAMP, bf.getTimestamp());
+            exchange.getIn().setHeader(HEADER_CHANNEL, bf.getChannel());
+            exchange.getIn().setHeader(HEADER_DAY, bf.getDay());
+            exchange.getIn().setHeader(Exchange.CORRELATION_ID, bf.getCorrelation());
+        });
+    }
+
+
+    /**
+     * Meta data for a Bindinc file.
+     */
     @Getter
     public static class BindincFile implements Comparable<BindincFile> {
 
@@ -132,13 +156,81 @@ public final class Utils {
             this.timestamp = timestamp;
             this.channel = channel;
             this.day = day;
-            this.correlation = correlation;
+            this.correlation = correlation == null ? channel + "/" + day : correlation;
         }
 
 
         @Override
         public int compareTo(BindincFile o) {
             return COMPARATOR.compare(this, o);
+        }
+    }
+
+
+    public static class Converters implements TypeConverters {
+        private final Map<String, List<Temp>> TEMPS = new HashMap<>();
+
+
+        /**
+         * Converts input stream to a {@link Temp} object. Stores the inputstream as a temporary file.
+         *
+         * All these objects will be adminastrated on correlation id. If one of them is used, (because is is converted to an inputstrema {@link #convertToInputStream(Temp, Exchange)},
+         * then all temp files for some correlation id will be deleted.
+         */
+        @Converter
+        public Temp convertToTemp(InputStream inputStream, Exchange exchange) throws IOException {
+            return correlation(
+                new Temp(inputStream, exchange.getIn().getHeader(Exchange.FILE_NAME, String.class)),
+                exchange
+            );
+        }
+
+        @Converter
+        public Temp convertToTemp(GenericFile<File> file, Exchange exchange) throws IOException {
+            return correlation(
+                new Temp(file.getFile(), exchange.getIn().getHeader(Exchange.FILE_NAME, String.class)),
+                exchange);
+        }
+        private Temp correlation(Temp temp, Exchange exchange) {
+            String correlation = exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class);
+            TEMPS.computeIfAbsent(correlation, (c) -> new ArrayList<>()).add(temp);
+            return temp;
+        }
+        @Converter
+        public InputStream convertToInputStream(Temp temp, Exchange exchange) throws FileNotFoundException {
+            FileInputStream fileInputStream = new FileInputStream(temp.file);
+            List<Temp> temps = TEMPS.remove(exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class));
+            temps.forEach(t -> {
+                if (t.file.delete()) {
+                    log.debug("Deleted {}", t.file);
+                }
+            });
+            return fileInputStream;
+        }
+    }
+
+    /**
+     * Used for aggregation of GenericFiles. See {@link Converters#convertToTemp(InputStream, Exchange)}
+     */
+
+    public static class Temp  {
+        final File file;
+        private  Temp(@NonNull File source, @NonNull String filename) throws IOException {
+            file = createTempFile(filename);
+            Files.copy(source.toPath(), file.toPath(), REPLACE_EXISTING, COPY_ATTRIBUTES);
+        }
+
+        private  Temp(@NonNull InputStream in, @NonNull String filename) throws IOException {
+            file = createTempFile(filename);
+            try (FileOutputStream out = new FileOutputStream(file)) {
+                IOUtils.copy(in, out);
+            }
+        }
+        private static File createTempFile(@NonNull  String filename) throws IOException {
+            File file = File.createTempFile("tmp", filename);
+            file.deleteOnExit();
+            log.debug("Create temp file {}", file);
+            return file;
         }
     }
 }
