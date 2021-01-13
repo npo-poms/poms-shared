@@ -123,9 +123,10 @@ public final class Utils {
     }
 
     public static  void parseFileName(Exchange exchange) {
+        // default correlation
+        exchange.getIn().setHeader(Exchange.CORRELATION_ID, exchange.getIn().getMessageId());
         String fileName = exchange.getIn().getHeader(Exchange.FILE_NAME, String.class);
         if (fileName == null) {
-            exchange.getIn().setHeader(Exchange.CORRELATION_ID, exchange.getIn().getMessageId());
             return;
         }
         Utils.parseFileName(fileName).ifPresent(bf -> {
