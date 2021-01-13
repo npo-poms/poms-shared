@@ -20,16 +20,13 @@ import static java.util.Comparator.*;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 @Slf4j
-public class Utils {
+public final class Utils {
 
     private Utils() {
         // utility class
     }
-
-
 
     public static final String HEADER_CHANNEL   = "bindinc-channel";
     public static final String HEADER_DAY       = "bindinc-day";
@@ -91,6 +88,7 @@ public class Utils {
         }
     }
 
+
     /**
      * For the items which dont have a proper mid (bindinc uses tva:BasicDescription/tva:OtherIdentifier/tva:OtherIdentifier[@type='broadcaster:npo:productid'] to store,
      * we just generate one based on the bindinc id.
@@ -98,14 +96,22 @@ public class Utils {
      * Note that this id seems to correspond to _schedule events_ rather then actual programs.  In practice this probably means
      * that only on PO-channels we'll have programs with multiple schedule events.
      */
-    public static void bindincMids(MediaTable table) {
-        for (Program p : table.getProgramTable()) {
-            if (StringUtils.isEmpty(p.getMid())) {
-                for (String c : p.getCrids()) {
-                    if (c.startsWith(BINDINC_CRID_PREFIX)) {
-                        p.setMid(BINDINC_MID_PREFIX + p.getCrids().get(0).substring(BINDINC_CRID_PREFIX.length()));
-                    }
+    public static void assignBindincMidIfNecessary(Program p) {
+        if (StringUtils.isEmpty(p.getMid())) {
+            for (String c : p.getCrids()) {
+                if (c.startsWith(BINDINC_CRID_PREFIX)) {
+                    p.setMid(BINDINC_MID_PREFIX + p.getCrids().get(0).substring(BINDINC_CRID_PREFIX.length()));
                 }
+            }
+        }
+    }
+
+    static final Genre MOVIE = new Genre(MediaClassificationService.getInstance().getTerm("3.0.1.2"));
+
+    public static void recognizeMovie(Program p) {
+        if (p.getType() != ProgramType.MOVIE) {
+            if (p.getGenres().contains(MOVIE)) {
+                p.setType(ProgramType.MOVIE);
             }
         }
     }
