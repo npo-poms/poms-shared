@@ -478,7 +478,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("KETN")
-    KETN {
+    KETN(VIDEO, 1997) {
         @Override
         public String toString() {
             return "Ketnet"; // Since 2012 zijn Ketnet en Canvas 2 kanalen.
@@ -2477,15 +2477,16 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("VRTC")
-    VRTC {
+    VRTC(VIDEO, 1997) {
         @Override
         public String toString() {
             return "VRT Canvas"; // Since 2012 zijn Ketnet en Canvas 2 kanalen.
-        }
+        },
         @Override
         public String bindincId() {
             return "VKET";
         }
+
     },
 
     @XmlEnumValue("BCFS")
