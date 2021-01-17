@@ -688,12 +688,12 @@
             </xsl:if>
             <xsl:element name="givenName">
               <xsl:value-of
-                  select="/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:GivenName"
+                  select="vpro:stripHtml(/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:GivenName)"
                   />
             </xsl:element>
             <xsl:element name="familyName">
               <xsl:value-of
-                  select="/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:FamilyName"
+                  select="vpro:stripHtml(/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:FamilyName)"
                   />
             </xsl:element>
 
