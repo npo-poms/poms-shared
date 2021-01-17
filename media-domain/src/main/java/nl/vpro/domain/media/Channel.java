@@ -557,11 +557,16 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+    @Deprecated
     @XmlEnumValue("N_3_")
     N_3_(VIDEO) {
         @Override
         public String toString() {
             return "NDR Fernsehen";
+        }
+        @Override
+        public String bindincId() {
+            return "N_3__";
         }
     },
 
@@ -2372,13 +2377,16 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     /**
-     * TODO: This may be the same as {@link #N_3_}?
      */
     @XmlEnumValue("NDR3")
-    NDR3 {
+    NDR3(VIDEO, 1956) {
         @Override
         public String toString() {
-            return "NDR3";
+            return "NDR Fernsehen";
+        }
+        @Override
+        public String bindincId() {
+            return "N_3_";
         }
     },
 
