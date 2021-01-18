@@ -2489,7 +2489,8 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "VRT Canvas"; // Since 2012 zijn Ketnet en Canvas 2 kanalen.
-        },
+        }
+
         @Override
         public String bindincId() {
             return "VKET";
