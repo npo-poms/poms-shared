@@ -50,6 +50,7 @@
     <dependency>
       <groupId>nl.vpro.media</groupId>
       <artifactId>media-organizations</artifactId>
+      <optional>true</optional><!-- dependency is only needed if no other broadcasterservice is availabe -->
     </dependency>
      <dependency>
        <groupId>org.springframework</groupId>
