@@ -686,16 +686,19 @@
                 <xsl:value-of select="$personUriPrefix" /><xsl:value-of select="current()/@ref" />
               </xsl:attribute>
             </xsl:if>
-            <xsl:element name="givenName">
-              <xsl:value-of
-                  select="vpro:stripHtml(/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:GivenName)"
-                  />
-            </xsl:element>
-            <xsl:element name="familyName">
-              <xsl:value-of
-                  select="vpro:stripHtml(/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:FamilyName)"
-                  />
-            </xsl:element>
+            <xsl:for-each select="/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:GivenName[1]/text()">
+              <xsl:element name="givenName">
+                <xsl:value-of
+                  select="vpro:stripHtml(normalize-space(.))" />
+              </xsl:element>
+            </xsl:for-each>
+            <xsl:for-each select="/tva:TVAMain/tva:ProgramDescription/tva:CreditsInformationTable/tva:PersonName[@personNameId = current()/@ref]/mpeg7:FamilyName[1]/text()">
+
+              <xsl:element name="familyName">
+                <xsl:value-of
+                  select="vpro:stripHtml(normalize-space(.))" />
+              </xsl:element>
+            </xsl:for-each>
 
           </xsl:element>
         </xsl:for-each>
