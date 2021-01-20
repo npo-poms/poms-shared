@@ -11,6 +11,7 @@ import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.constraint.AbstractFilter;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.util.CloseableIterator;
 import nl.vpro.util.FilteringIterator;
 
 /**
@@ -18,7 +19,7 @@ import nl.vpro.util.FilteringIterator;
  * @since 3.0
  */
 @Slf4j
-public class ChangeIterator implements Iterator<MediaChange> {
+public class ChangeIterator implements CloseableIterator<MediaChange> {
 
     private static final int LOG_BATCH = 50000;
 
@@ -111,6 +112,13 @@ public class ChangeIterator implements Iterator<MediaChange> {
 
     public Instant getPublishDate() {
         return publishDate;
+    }
+
+    @Override
+    public void close() throws Exception {
+        if (wrapped instanceof AutoCloseable) {
+            ((AutoCloseable) wrapped).close();
+        }
     }
 
     protected void findNext() {
