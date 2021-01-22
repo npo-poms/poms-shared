@@ -520,6 +520,10 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "La Une (RTBF 1)";
         }
+        @Override
+        public String bindincId() {
+            return "LAUN";
+        }
     },
 
     @XmlEnumValue("LDUE")
@@ -527,6 +531,10 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "La Deux (RTBF 2)";
+        }
+        @Override
+        public String bindincId() {
+            return "LADE";
         }
     },
 
