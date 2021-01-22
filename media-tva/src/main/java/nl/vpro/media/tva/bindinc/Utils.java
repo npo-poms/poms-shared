@@ -166,7 +166,7 @@ public final class Utils {
             this.timestamp = timestamp;
             this.channel = channel;
             this.day = day;
-            this.correlation = correlation == null ? channel.name() + "/" + day : correlation;
+            this.correlation = correlation == null ? (channel == null ? "" : channel.name()) + "/" + day : correlation;
         }
 
 
