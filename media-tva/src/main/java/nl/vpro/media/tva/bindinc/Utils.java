@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -137,6 +138,14 @@ public final class Utils {
         });
     }
 
+    public static void ready(Exchange exchange) {
+        Object body = exchange.getIn().getBody();
+        if (body instanceof Temp) {
+            ((Temp) body).deleteFile();
+        }
+
+    }
+
 
     /**
      * Meta data for a Bindinc file.
@@ -157,7 +166,7 @@ public final class Utils {
             this.timestamp = timestamp;
             this.channel = channel;
             this.day = day;
-            this.correlation = correlation == null ? channel + "/" + day : correlation;
+            this.correlation = correlation == null ? channel.name() + "/" + day : correlation;
         }
 
 
@@ -169,13 +178,13 @@ public final class Utils {
 
 
     public static class Converters implements TypeConverters {
-        private final Map<String, List<Temp>> TEMPS = new HashMap<>();
+        final Map<String, List<Temp>> TEMPS = new HashMap<>();
 
 
         /**
          * Converts input stream to a {@link Temp} object. Stores the inputstream as a temporary file.
          *
-         * All these objects will be adminastrated on correlation id. If one of them is used, (because is is converted to an inputstrema {@link #convertToInputStream(Temp, Exchange)},
+         * All these objects will be administrated on correlation id. If one of them is used, (because is is converted to an inputstream {@link #convertToInputStream(Temp, Exchange)},
          * then all temp files for some correlation id will be deleted.
          */
         @Converter
@@ -188,9 +197,15 @@ public final class Utils {
 
         @Converter
         public Temp convertToTemp(GenericFile<File> file, Exchange exchange) throws IOException {
-            return correlation(
-                new Temp(file.getFile(), exchange.getIn().getHeader(Exchange.FILE_NAME, String.class)),
-                exchange);
+            File f = file.getFile();
+            if (f.exists()) {
+                return correlation(
+                    new Temp(f, exchange.getIn().getHeader(Exchange.FILE_NAME, String.class)),
+                    exchange);
+            } else {
+                log.info("{} doesn't exist", f);
+                return null;
+            }
         }
         private Temp correlation(Temp temp, Exchange exchange) {
             String correlation = exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class);
@@ -199,14 +214,21 @@ public final class Utils {
         }
         @Converter
         public InputStream convertToInputStream(Temp temp, Exchange exchange) throws FileNotFoundException {
-            FileInputStream fileInputStream = new FileInputStream(temp.file);
-            List<Temp> temps = TEMPS.remove(exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class));
-            temps.forEach(t -> {
-                if (t.file.delete()) {
-                    log.debug("Deleted {}", t.file);
+            if (temp.file.exists()) {
+                FileInputStream fileInputStream = new FileInputStream(temp.file);
+                List<Temp> temps = TEMPS.remove(exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class));
+                if (temps != null) {
+                    temps.forEach(t -> {
+                        if (t.file != temp.file) {
+                            t.deleteFile();
+                        }
+                    });
                 }
-            });
-            return fileInputStream;
+                return fileInputStream;
+            } else {
+                log.warn("File deleted already");
+                return new ByteArrayInputStream("File deleted already".getBytes(StandardCharsets.UTF_8));
+            }
         }
     }
 
@@ -227,17 +249,28 @@ public final class Utils {
                 IOUtils.copy(in, out);
             }
         }
+
+        void deleteFile() {
+            if (file.delete()) {
+                log.debug("Deleted {}", file);
+            }
+        }
+
         private static File createTempFile(@NonNull  String filename) throws IOException {
             File file;
             if (filename != null) {
                 final String[] split = filename.split("/");
-                file = File.createTempFile("tmp", split[split.length - 1]);
+                file = File.createTempFile("tmp", "-" + split[split.length - 1]);
             } else {
-                file = File.createTempFile("tmp", "bindinc");
+                file = File.createTempFile("tmp", "-bindinc");
             }
             file.deleteOnExit();
             log.debug("Create temp file {}", file);
             return file;
+        }
+        @Override
+        public String toString() {
+            return file.toString();
         }
     }
 }
