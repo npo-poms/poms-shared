@@ -1,3 +1,4 @@
+# Not used any more (out of credits). Building with github actions now (and on jenkins.vpro.nl)
 language: java
 env:
   global:
