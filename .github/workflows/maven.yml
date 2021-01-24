@@ -1,5 +1,5 @@
 
-name: maven_build
+name: build
 
 on:
   push:
@@ -26,3 +26,7 @@ jobs:
         servers: '[{"id": "vpro-ossrh", "username": "${{secrets.SONATYPE_USERNAME}}", "password": "${{secrets.SONATYPE_PASSWORD}}"}]'  
     - name: Build with Maven
       run: mvn -B -Pdeploy,ossrh deploy --file pom.xml  -Dgpg.skip=true
+    - name: Publish to codecov
+      run: bash <(curl -s https://codecov.io/bash)
+      continue-on-error: true
+
