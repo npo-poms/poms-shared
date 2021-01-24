@@ -29,4 +29,9 @@ jobs:
     - name: Publish to codecov
       run: bash <(curl -s https://codecov.io/bash)
       continue-on-error: true
+    - name: Publish Test Report
+      uses: scacap/action-surefire-report@v1
+      if: always()
+      with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
