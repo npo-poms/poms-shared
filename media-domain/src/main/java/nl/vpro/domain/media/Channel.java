@@ -725,7 +725,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBTC")
-    BBTC {
+    BBTC(VIDEO, 1985) {
         @Override
         public String toString() {
             return "BBC Three / CBBC";
@@ -2359,10 +2359,14 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBR3")
-    BBR3(AUDIO, 1967) {
+    BBR3(AUDIO, "https://www.bbc.co.uk/sounds/play/live:bbc_radio_three", 1967) {
         @Override
         public String toString() {
             return "BBC Radio 3";
+        }
+        @Override
+        public String bindincId() {
+            return "RBB3";
         }
     },
 
