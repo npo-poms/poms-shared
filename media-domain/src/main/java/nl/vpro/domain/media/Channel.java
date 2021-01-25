@@ -571,19 +571,16 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     /**
-     * @deprecated
-     * @see #NDR3
      */
-    @Deprecated
     @XmlEnumValue("N_3_")
-    N_3_(VIDEO) {
+    N_3_(AUDIO) {
         @Override
         public String toString() {
-            return "NDR Fernsehen?";
+            return "NDR Kultur";
         }
         @Override
         public String bindincId() {
-            return "N_3__";
+            return "NDR3";
         }
     },
 
