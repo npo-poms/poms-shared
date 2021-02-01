@@ -54,9 +54,8 @@ public class ChannelTest {
     public void testByXmlValue() {
         assertThat(Channel.valueOfXml("101_")).isEqualTo(Channel._101_);
         assertThat(Channel.valueOfXml("10TB")).isEqualTo(Channel._10TB);
-        assertThat(Channel.findByBindincId("10TB")).isEqualTo(Channel._10TB);
-
     }
+
 
     /**
      * JS-195 To be able to generate js-parent/js-vpro-media-domain/vpro/media/domain/support/Channels.js

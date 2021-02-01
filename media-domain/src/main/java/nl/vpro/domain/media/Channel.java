@@ -483,11 +483,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "Ketnet"; // Since 2012 zijn Ketnet en Canvas 2 kanalen.
         }
-
-        @Override
-        public String bindincId() {
-            return "VKET";
-        }
     },
 
     @XmlEnumValue("VTM_")
@@ -520,10 +515,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "La Une (RTBF 1)";
         }
-        @Override
-        public String bindincId() {
-            return "LAUN";
-        }
     },
 
     @XmlEnumValue("LDUE")
@@ -531,10 +522,6 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "La Deux (RTBF 2)";
-        }
-        @Override
-        public String bindincId() {
-            return "LADE";
         }
     },
 
@@ -577,10 +564,6 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "NDR Kultur";
-        }
-        @Override
-        public String bindincId() {
-            return "NDR3";
         }
     },
 
@@ -648,11 +631,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "ARTE France";
         }
-
-        @Override
-        public String bindincId() {
-            return "ARTT";
-        }
     },
 
     @XmlEnumValue("ART")
@@ -670,11 +648,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "TV 5 Monde Europe";
         }
-
-        @Override
-        public String bindincId() {
-            return "TV5M";
-        }
     },
 
 
@@ -683,10 +656,6 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "France 2";
-        }
-        @Override
-        public String bindincId() {
-            return "france2";
         }
     },
 
@@ -1292,10 +1261,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "The History Channel";
         }
-        @Override
-        public String bindincId() {
-            return "DHIS";
-        }
     },
 
     @XmlEnumValue("TRAV")
@@ -1659,12 +1624,6 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "Mezzo";
-        }
-
-
-        @Override
-        public java.lang.String bindincId() {
-            return "MEZO";
         }
     },
 
@@ -2212,10 +2171,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "Arrow Classic Rock";
         }
-        @Override
-        public String bindincId() {
-            return "RACR";
-        }
     },
 
     @XmlEnumValue("FUNX")
@@ -2364,10 +2319,7 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "BBC Radio 3";
         }
-        @Override
-        public String bindincId() {
-            return "RBB3";
-        }
+
     },
 
     @XmlEnumValue("BBR4")
@@ -2402,10 +2354,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "NDR Fernsehen";
         }
-        @Override
-        public String bindincId() {
-            return "N_3_";
-        }
     },
 
     @XmlEnumValue("WDR4")
@@ -2438,11 +2386,6 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "HBO 1";
-        }
-        @Override
-
-        public String bindincId() {
-            return "HBOV";
         }
     },
     @XmlEnumValue("SYFY")
@@ -2496,10 +2439,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "TLC";
         }
-        @Override
-        public String bindincId() {
-            return "TLC";
-        }
     },
 
     @XmlEnumValue("VRTC")
@@ -2508,12 +2447,6 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "VRT Canvas"; // Since 2012 zijn Ketnet en Canvas 2 kanalen.
         }
-
-        @Override
-        public String bindincId() {
-            return "KETN";
-        }
-
     },
 
     @XmlEnumValue("BCFS")
@@ -2838,13 +2771,6 @@ public enum Channel implements Displayable, XmlValued {
         return getXmlValue();
     }
 
-    /**
-     * @since 5.20.2
-     */
-    public String bindincId() {
-        return misId();
-    }
-
     public String pdId() {
         return getXmlValue();
     }
@@ -2872,14 +2798,6 @@ public enum Channel implements Displayable, XmlValued {
         return null;
     }
 
-    public static Channel findByBindincId(String misId) {
-        for(Channel channel : values()) {
-            if(channel.bindincId().equals(misId)) {
-                return channel;
-            }
-        }
-        return null;
-    }
 
     public static Channel findByPDId(String epgId) {
         for(Channel channel : values()) {

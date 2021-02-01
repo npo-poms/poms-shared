@@ -422,6 +422,9 @@ public class TVATransformerTest {
         assertThat(p.getCredits().get(0).getGtaaUri()).isEqualTo("crid://bindinc/person/99992075861279");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
         assertThat(p.getScheduleEvents()).isNotEmpty();
+
+        assertThat(p.getScheduleEvents().first().getChannel()).isEqualTo(Channel.ZDF_);
+
         assertThat(p.getGenres()).hasSize(1);
         assertThat(p.getGenres().first().getTermId()).isEqualTo("3.0.1.3");
 

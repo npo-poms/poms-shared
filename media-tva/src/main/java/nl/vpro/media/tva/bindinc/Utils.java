@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,8 +21,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.Channel;
+import nl.vpro.domain.media.*;
+import nl.vpro.media.tva.Constants;
 
 import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -75,7 +76,7 @@ public final class Utils {
             }
             Channel channel;
             try {
-                channel = Channel.findByBindincId(matcher.group(2));
+                channel = Channel.valueOf(Constants.getBindincChannelMappings().get(matcher.group(2)));
                 builder.channel(channel);
             } catch (Exception e) {
                 log.error("for {}: {}", fileName, e.getMessage());
