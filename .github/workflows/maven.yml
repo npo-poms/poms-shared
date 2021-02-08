@@ -23,7 +23,7 @@ jobs:
     - name: Create settings.xml
       uses: s4u/maven-settings-action@v1
       with:
-        servers: '[{"id": "vpro-ossrh", "username": "${{secrets.SONATYPE_USERNAME}}", "password": "${{secrets.SONATYPE_PASSWORD}}"}]'  
+        servers: '[{"id": "vpro-ossrh", "username": "vpro", "password": "${{secrets.SONATYPE_PASSWORD}}"}]'  
     - name: Build with Maven
       run: mvn -B -Pdeploy,ossrh deploy --file pom.xml  -Dgpg.skip=true
     - name: Publish to codecov
