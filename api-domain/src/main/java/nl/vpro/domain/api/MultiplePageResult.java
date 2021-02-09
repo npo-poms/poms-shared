@@ -20,7 +20,6 @@ public class MultiplePageResult extends AbstractMultipleResult<Page> {
 
     public MultiplePageResult() {
         super(MultiplePageEntry::new);
-
     }
 
     public MultiplePageResult(List<String> ids, List<Page> pages, DisplayablePredicate<Page> predicate) {

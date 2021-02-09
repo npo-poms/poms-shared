@@ -5,6 +5,8 @@ import java.util.*;
 
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 /**
  * This is an array of Strings in json. But it can also be marshalled/unmarshalled to XML.
  * @author Michiel Meeuwissen
@@ -70,5 +72,11 @@ public class IdList extends AbstractList<String> implements Serializable {
     @Override
     public String remove(int index) {
         return ids.remove(index);
+    }
+
+    @Override
+    @NonNull
+    public IdList subList(int offset, int max) {
+        return new IdList(ids.subList(offset, max));
     }
 }
