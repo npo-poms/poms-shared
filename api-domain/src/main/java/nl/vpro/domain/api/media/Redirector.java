@@ -15,7 +15,7 @@ import nl.vpro.domain.media.MediaRedirector;
 @FunctionalInterface
 public interface Redirector extends MediaRedirector {
 
-    ThreadLocal<Map<String, String>> REDIRECTS = ThreadLocal.withInitial(() -> null);
+    ThreadLocal<Map<String, String>> REDIRECTS = ThreadLocal.withInitial(HashMap::new);
 
     RedirectList redirects();
 
@@ -37,6 +37,7 @@ public interface Redirector extends MediaRedirector {
         redirectTextMatchers(list, redirects);
         return redirects;
     }
+
     default void redirectTextMatchers(
         @Nullable TextMatcherList list, Map<String, String> redirects) {
          if (list == null) {

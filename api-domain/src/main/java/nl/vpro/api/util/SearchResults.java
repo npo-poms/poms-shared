@@ -42,7 +42,7 @@ public class SearchResults {
         };
     }
 
-    private static Map<String, Map<String, Optional<String>>> valueCaches = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, Optional<String>>> VALUE_CACHES = new ConcurrentHashMap<>();
 
 
     public static <T extends TermFacetResultItem, S extends MatchType> void setSelected(
@@ -64,10 +64,7 @@ public class SearchResults {
         String valueCacheName,
         Function<String, Optional<String>> valueCreator
     ) {
-        if (! valueCaches.containsKey(valueCacheName)) {
-            valueCaches.put(valueCacheName, new ConcurrentHashMap<>());
-        }
-        Map<String, Optional<String>> valueCache = valueCaches.get(valueCacheName);
+        Map<String, Optional<String>> valueCache = VALUE_CACHES.computeIfAbsent(valueCacheName, (k) -> new ConcurrentHashMap<>());
 
         if (facetResultItems != null && searches != null && searches.getMatch() == Match.MUST) {
             for (T facetResultItem : facetResultItems) {
@@ -75,7 +72,7 @@ public class SearchResults {
                 if (facetResultItem.getValue() != null && !Objects.equals(id, facetResultItem.getValue())) {
                     if (!valueCache.containsKey(id)) {
                         valueCache.put(id, Optional.ofNullable(facetResultItem.getValue()));
-                        log.info("{}: {} -> {}", valueCacheName, id, facetResultItem.getValue());
+                        log.info("value for {}: {} -> {}", valueCacheName, id, facetResultItem.getValue());
                     }
                 }
                 facetResultItem.setSelected(contains(searches, id));
