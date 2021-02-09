@@ -42,4 +42,8 @@ public class MultipleEntry<T> {
     public MultipleEntry() {
     }
 
+    public boolean isFound() {
+        return result != null;
+    }
+
 }
