@@ -40,8 +40,8 @@ public enum ProgramType implements SubMediaType {
 
     public static final String URN_PREFIX = "urn:vpro:media:program:";
 
-    private MediaType mediaType;
-    private boolean hasEpisodeOf;
+    private final MediaType mediaType;
+    private final boolean hasEpisodeOf;
 
     ProgramType(MediaType mediaType, boolean hasEpisodeOf) {
         this.mediaType = mediaType;
