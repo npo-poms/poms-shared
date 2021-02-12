@@ -4,6 +4,8 @@
   <!--
   Can be used to preprocess TV-anytime xmls as received by bindinc to adapt country codes to actual ISO-3166 ones.
   This can be used before using tvaTransformer.xsl. The POMS domain object requires standard compliant country codes.
+
+  Bindinc promised they could also ship ISO compliant codes. I dont from when on we'll receive those
   -->
   <xsl:template match="@*|node()">
     <xsl:copy>
