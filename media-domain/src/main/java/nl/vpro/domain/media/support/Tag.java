@@ -2,6 +2,7 @@ package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -53,7 +54,7 @@ public class Tag implements Serializable, Comparable<Tag> {
     }
 
     public void setText(final String text) {
-        this.text = text.trim();
+        this.text = text == null ? null : text.trim();
     }
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
@@ -68,7 +69,7 @@ public class Tag implements Serializable, Comparable<Tag> {
 
     @Override
     public int hashCode() {
-        return text.hashCode();
+        return Objects.hash(text);
     }
 
     @Override
@@ -78,6 +79,9 @@ public class Tag implements Serializable, Comparable<Tag> {
                 return 0;
             }
             return -1;
+        }
+        if (tag.text == null) {
+            return 1;
         }
         int result = text.compareToIgnoreCase(tag.text);
         return result == 0 ? text.compareTo(tag.text) : result;

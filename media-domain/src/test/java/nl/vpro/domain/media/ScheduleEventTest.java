@@ -1,11 +1,16 @@
 package nl.vpro.domain.media;
 
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
+
 import java.time.Duration;
+import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -16,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class ScheduleEventTest {
+public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
 
     @Test
     public void testTitles() {
@@ -86,5 +91,19 @@ public class ScheduleEventTest {
             "  \"eventStart\" : 1503928260000\n" +
             "}");
     }
+    static Instant now = Instant.now();
 
+    @Override
+    public Arbitrary<? extends ScheduleEvent> datapoints() {
+        return Arbitraries.of(
+            ScheduleEvent.builder().build(),
+            ScheduleEvent.builder().channel(Channel.ARTE).start(now).build(),
+            ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
+            ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
+            ScheduleEvent.builder().channel(Channel.NED1).start(now.plus(Duration.ofMinutes(10))).build(),
+            null,
+            null
+
+        );
+    }
 }

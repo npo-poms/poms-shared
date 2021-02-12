@@ -18,7 +18,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Roelof Jan Koekoek
  * @since 1.7
+ * @deprecated This done in {@link ScheduleEventTest} too with jqwik
  */
+@Deprecated
 public class ScheduleEventTheoryTest extends ObjectTest<ScheduleEvent> { // TODO doesn't properly implement ComparableTest<ScheduleEvent> {
 
     @DataPoint

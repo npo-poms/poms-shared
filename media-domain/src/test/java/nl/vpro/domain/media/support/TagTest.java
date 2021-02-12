@@ -4,26 +4,16 @@
  */
 package nl.vpro.domain.media.support;
 
-import org.junit.jupiter.api.Test;
-import org.junit.experimental.theories.DataPoint;
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
 
-import nl.vpro.test.theory.ComparableTest;
+import org.junit.jupiter.api.Test;
+
+import nl.vpro.test.jqwik.ComparableTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TagTest extends ComparableTest<Tag> {
-
-    @DataPoint
-    public static Tag nullArgument = null;
-
-    @DataPoint
-    public static Tag textOnly = new Tag("tag");
-
-    @DataPoint
-    public static Tag textOnly2 = new Tag("tag");
-
-    @DataPoint
-    public static Tag anotherTag = new Tag("tag2");
+public class TagTest implements ComparableTest<Tag> {
 
     @Test
     public void testCaseSensitivity() {
@@ -31,5 +21,18 @@ public class TagTest extends ComparableTest<Tag> {
         Tag t2 = new Tag("Tag");
 
         assertThat(t1.equals(t2)).isFalse();
+    }
+
+    @Override
+    public Arbitrary<? extends Tag> datapoints() {
+        Tag tag = new Tag("tag");
+        return Arbitraries.of(
+            null,
+            tag,
+            tag,
+            new Tag("tag"),
+            new Tag(null),
+            new Tag("tag2")
+        );
     }
 }
