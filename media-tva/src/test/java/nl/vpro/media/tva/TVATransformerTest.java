@@ -24,6 +24,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
+import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.neovisionaries.i18n.LanguageCode;
@@ -52,10 +53,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class TVATransformerTest {
 
 
-    EpgGenreFunction genreFunction = new EpgGenreFunction();
+    final EpgGenreFunction genreFunction = new EpgGenreFunction();
+
+
 
     @BeforeEach
-    public void init() {
+    public void init() throws ParserConfigurationException, SAXException, IOException {
         genreFunction.setNotFound(NotFound.FATAL);
     }
 
@@ -404,10 +407,13 @@ public class TVATransformerTest {
         genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
         genreFunction.setIgnore(new HashSet<>(Arrays.asList("urn:bindinc:genre:Overige")));
 
+        Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
+
         String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) -> {
             transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
             transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
             transformer.setParameter(XSL_PARAM_LONGDESCRIPTIONS, "true");
+            transformer.setParameter(XSL_PARAM_CHANNELMAPPING, channelMapping);
             }
         );
         //log.info(xml);
@@ -455,6 +461,8 @@ public class TVATransformerTest {
     public void bindincTV01() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE);
         genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
+        Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
+
 
         Transformer preTransformer = getTransformer("/nl/vpro/media/tva/repairBindincXml.xslt");
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -465,6 +473,7 @@ public class TVATransformerTest {
         String xml = transform(new ByteArrayInputStream(out.toByteArray()), (transformer) -> {
                 transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
                 transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
+                transformer.setParameter(XSL_PARAM_CHANNELMAPPING, channelMapping);
             }
         );
         //log.info(xml);
@@ -483,6 +492,37 @@ public class TVATransformerTest {
 
         Program p2 = (Program) table.find("POW_04508476").get();
         assertThat(p2.getScheduleEvents()).hasSize(2);
+
+    }
+
+    @Test
+    public void bindincARTT() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        genreFunction.setNotFound(NotFound.IGNORE);
+        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
+        Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
+
+        String xml = transform("bindinc/20210210220659000dayARTT20210220.xml", (transformer) -> {
+            transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
+            transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
+            transformer.setParameter(XSL_PARAM_LONGDESCRIPTIONS, "true");
+            transformer.setParameter(XSL_PARAM_CHANNELMAPPING, channelMapping);
+            }
+        );
+
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+        JAXB.marshal(table, System.out);
+
+        // this seems to be kind of a 'strand. This program contains multiple short movies
+        Program kurzSchluss = table.<Program>findByCrid("crid://media-press.tv/206782916").orElse(null);
+        // like:
+        Program heimweh = table.<Program>findByCrid("crid://media-press.tv/133868451").orElse(null);
+        Program silence = table.<Program>findByCrid("crid://media-press.tv/206796806").orElse(null);
+        Program maestro = table.<Program>findByCrid("crid://media-press.tv/206782916").orElse(null);
+        log.info("strand kurzSchluss: {}", kurzSchluss.getScheduleEvents());
+        log.info("heimweh: {}", heimweh.getScheduleEvents());
+        log.info("silence: {}", silence.getScheduleEvents());
+        log.info("maestro: {}", maestro.getScheduleEvents());
+
 
     }
 
@@ -548,7 +588,7 @@ public class TVATransformerTest {
         Transformer transformer = getTransformer("/nl/vpro/media/tva/tvaTransformer.xsl");
         transformer.setParameter(
             XSL_PARAM_CHANNELMAPPING,
-            Constants.createChannelMapping(Constants.ChannelIdType.PD));
+            createChannelMapping(Constants.ChannelIdType.PD));
         transformer.setParameter(
             XSL_PARAM_WORKFLOW,
             Workflow.FOR_REPUBLICATION.name()
