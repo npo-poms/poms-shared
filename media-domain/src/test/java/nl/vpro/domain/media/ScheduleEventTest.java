@@ -91,12 +91,16 @@ public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
             "  \"eventStart\" : 1503928260000\n" +
             "}");
     }
-    static Instant now = Instant.now();
+
+
+
+    static final Instant now = Instant.now();
 
     @Override
     public Arbitrary<? extends ScheduleEvent> datapoints() {
         return Arbitraries.of(
             ScheduleEvent.builder().build(),
+            ScheduleEvent.builder().start(now).build(),
             ScheduleEvent.builder().channel(Channel.ARTE).start(now).build(),
             ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
             ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),

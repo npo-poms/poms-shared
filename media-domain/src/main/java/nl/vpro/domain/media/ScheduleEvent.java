@@ -653,7 +653,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlTransient
     @Override
     public ScheduleEventIdentifier getId() {
-        return new ScheduleEventIdentifier(channel, start);
+        if (channel != null && start != null) {
+            return new ScheduleEventIdentifier(channel, start);
+        } else {
+            return null;
+        }
     }
 
     @XmlAttribute
@@ -761,8 +765,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
 
         ScheduleEvent that = (ScheduleEvent) o;
-
-        return getId() != null && getId().equals(that.getId());
+        if (getId() != null) {
+            return getId().equals(that.getId());
+        } else {
+            return hashCode() == that.hashCode();
+        }
     }
 
     @Override
@@ -770,7 +777,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (getId() != null) {
             return getId().hashCode();
         } else {
-            return System.identityHashCode(this);
+            return Objects.hash(channel, start, duration, net, imi);
         }
     }
 
