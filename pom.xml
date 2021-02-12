@@ -23,7 +23,7 @@
     <connection>scm:git:git://git@github.com/npo-poms/poms-shared.git</connection>
     <developerConnection>scm:git:git@github.com:npo-poms/poms-shared.git</developerConnection>
     <url>https://github.com/npo-poms/poms-shared</url>
-    <tag>HEAD</tag>
+    <tag>REL-5.23-SNAPSHOT</tag>
   </scm>
 
 
