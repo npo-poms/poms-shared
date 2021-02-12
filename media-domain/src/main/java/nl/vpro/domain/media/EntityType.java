@@ -25,7 +25,7 @@ public interface EntityType {
         segment(SEGMENT);
 
         @Getter
-        private MediaType mediaType;
+        private final MediaType mediaType;
 
         AllMedia(MediaType type) {
             this.mediaType = type;
@@ -50,7 +50,7 @@ public interface EntityType {
         media(MEDIA),
         program(PROGRAM);
         @Getter
-        private MediaType mediaType;
+        private final MediaType mediaType;
 
         Program(MediaType type) {
             this.mediaType = type;
@@ -62,7 +62,7 @@ public interface EntityType {
         media(MEDIA),
         group(GROUP);
          @Getter
-        private MediaType mediaType;
+        private final MediaType mediaType;
         Group(MediaType type) {
             this.mediaType = type;
 
@@ -74,7 +74,7 @@ public interface EntityType {
         program(PROGRAM),
         segment(SEGMENT);
         @Getter
-        private MediaType mediaType;
+        private final MediaType mediaType;
         NoGroups(MediaType type) {
             this.mediaType = type;
 
@@ -86,7 +86,7 @@ public interface EntityType {
         program(PROGRAM),
         group(GROUP);
         @Getter
-        private MediaType mediaType;
+        private final MediaType mediaType;
         NoSegments(MediaType type) {
             this.mediaType = type;
 
