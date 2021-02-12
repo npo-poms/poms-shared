@@ -509,15 +509,16 @@ public class TVATransformerTest {
             }
         );
 
+        log.info("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         JAXB.marshal(table, System.out);
 
         // this seems to be kind of a 'strand. This program contains multiple short movies
-        Program kurzSchluss = table.<Program>findByCrid("crid://media-press.tv/206782916").orElse(null);
+        Program kurzSchluss = table.<Program>findByCrid("crid://media-press.tv/206782916").orElseThrow(IllegalStateException::new);
         // like:
-        Program heimweh = table.<Program>findByCrid("crid://media-press.tv/133868451").orElse(null);
-        Program silence = table.<Program>findByCrid("crid://media-press.tv/206796806").orElse(null);
-        Program maestro = table.<Program>findByCrid("crid://media-press.tv/206782916").orElse(null);
+        Program heimweh = table.<Program>findByCrid("crid://media-press.tv/133868451").orElseThrow(IllegalStateException::new);
+        Program silence = table.<Program>findByCrid("crid://media-press.tv/206796806").orElseThrow(IllegalStateException::new);
+        Program maestro = table.<Program>findByCrid("crid://media-press.tv/206782916").orElseThrow(IllegalStateException::new);
         log.info("strand kurzSchluss: {}", kurzSchluss.getScheduleEvents());
         log.info("heimweh: {}", heimweh.getScheduleEvents());
         log.info("silence: {}", silence.getScheduleEvents());
