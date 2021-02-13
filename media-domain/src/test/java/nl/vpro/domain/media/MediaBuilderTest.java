@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -40,7 +39,7 @@ public class MediaBuilderTest {
     @Test
     public void testScheduleEvent() {
         Program program = MediaBuilder.program().scheduleEvents(
-            new ScheduleEvent(Channel.NED3, new Date(100), new Date(200)),
+            new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(100), Duration.ofMillis(200)),
             new ScheduleEvent(Channel.NED3, new Net("ZAPP"), new Date(300 + 3 * 24 * 3600 * 1000), new Date(50)),
             new ScheduleEvent(Channel.HOLL, new Date(350 + 8 * 24 * 3600 * 1000), new Date(250)),
             new ScheduleEvent(Channel.CONS, new Date(600 + 10 * 24 * 3600 * 1000), new Date(200)),
