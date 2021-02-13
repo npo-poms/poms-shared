@@ -1,8 +1,12 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.NonNull;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -20,6 +24,7 @@ public class ScheduleEventIdentifier implements Serializable {
 
     @Column
     @Enumerated(EnumType.STRING)
+    @Getter
     protected Channel channel;
 
     @Column
@@ -29,7 +34,7 @@ public class ScheduleEventIdentifier implements Serializable {
         // to help hibernate
     }
 
-    public ScheduleEventIdentifier(Channel channel, Instant start) {
+    public ScheduleEventIdentifier(@NonNull Channel channel, @NonNull Instant start) {
         this.start = start;
         this.channel = channel;
     }
@@ -38,10 +43,6 @@ public class ScheduleEventIdentifier implements Serializable {
     @Deprecated
     public ScheduleEventIdentifier(Channel channel, Date start) {
         this(channel, DateUtils.toInstant(start));
-    }
-
-    public Channel getChannel() {
-        return channel;
     }
 
     public Instant getStartInstant() {
@@ -67,7 +68,7 @@ public class ScheduleEventIdentifier implements Serializable {
         if(channel == null || that.channel == null || channel != that.channel) {
             return false;
         }
-        if(start == null || that.start == null || !(start.toEpochMilli() == that.start.toEpochMilli())) {
+        if(start == null || that.start == null || (start.toEpochMilli() != that.start.toEpochMilli())) {
             return false;
         }
 
@@ -76,9 +77,7 @@ public class ScheduleEventIdentifier implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = channel == null ? 0 : channel.hashCode();
-        result = 31 * result + (start == null ? 0 : start.hashCode());
-        return result;
+        return Objects.hash(channel, start);
     }
 
     @Override
@@ -91,7 +90,7 @@ public class ScheduleEventIdentifier implements Serializable {
     }
 
     public static ScheduleEventIdentifier parse(String id) {
-        String[] split = id.split("\\:", 2);
+        String[] split = id.split(":", 2);
         return new ScheduleEventIdentifier(Channel.valueOf(split[0]), TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)));
 
     }

@@ -257,63 +257,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
 
-    /**
-     * @deprecated use constructor with types from java.time
-     */
-    @Deprecated
-    public ScheduleEvent(Channel channel, Date start, Date duration) {
-        this(channel, null, guideDay(start), start, duration, null);
-    }
-
-    /**
-     * @deprecated use constructor with types from java.time
-     */
-    @Deprecated
-    public ScheduleEvent(Channel channel, Net net, Date start, Date duration) {
-        this(channel, net, guideDay(start), start, duration, null);
-    }
-
-    /**
-     * @deprecated use constructor with types from java.time
-     */
-    @Deprecated
-    public ScheduleEvent(Channel channel, Date guideDay, Date start, Date duration) {
-        this(channel, null, guideDay, start, duration, null);
-    }
-
-    /**
-     * @deprecated use constructor with types from java.time
-     */
-    @Deprecated
-    public ScheduleEvent(Channel channel, Net net, Date guideDay, Date start, Date duration) {
-        this(channel, net, guideDay, start, duration, null);
-    }
-
-    /**
-     * @deprecated use constructor with types from java.time
-     */
-    @Deprecated
-    public ScheduleEvent(Channel channel, Date start, Date duration, Program media) {
-        this(channel, null, guideDay(start), start, duration, media);
-    }
-
-    /**
-     * @deprecated use constructor with types from java.time
-     */
-    @Deprecated
-    public ScheduleEvent(Channel channel, Net net, Date start, Date duration, Program media) {
-        this(channel, net, guideDay(start), start, duration, media);
-    }
-
-    /**
-     * @deprecated use constructor with types from java.time
-     */
-    @Deprecated
-    public ScheduleEvent(Channel channel, Net net, Date guideDay, Date start, Date duration, Program media) {
-        this(channel, net, guideLocalDate(guideDay), instant(start), duration(duration), media);
-    }
-
-
     public ScheduleEvent(ScheduleEvent source) {
         this(source, source.mediaObject);
     }
@@ -490,12 +433,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return DateUtils.toDate(start);
     }
 
-
-    @Deprecated
-    public void setStart(Date start) {
-        // if (this.start != null) throw new IllegalStateException(); Used in test cases.
-        this.start = DateUtils.toInstant(start);
-    }
     @XmlElement(name = "start")
     @XmlSchemaType(name = "dateTime")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -519,22 +456,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public Instant getStopInstant() {
         return start.plus(getDuration());
     }
-     public void setStopInstant(Instant stop) {
+
+    public void setStopInstant(Instant stop) {
         this.duration = Duration.between(start, stop);
-     }
-
-    @XmlTransient
-    @Deprecated
-    public Date getRealStart() {
-        if (start == null) {
-            return null;
-        }
-
-        if (offset == null) {
-            return Date.from(start);
-        }
-
-        return Date.from(start.plus(offset));
     }
 
 
@@ -656,7 +580,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (channel != null && start != null) {
             return new ScheduleEventIdentifier(channel, start);
         } else {
-            return null;
+            // schedule event has no proper id (yet?)
+            return  null;
         }
     }
 
@@ -737,8 +662,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return sb.toString();
     }
 
+    /**
+     * Schedule events are sorted by start, if those are equal then on channel
+     */
     @Override
     public int compareTo(ScheduleEvent o) {
+        if (o == this) {
+            return 0;
+        }
         Instant otherStart = o.start;
         if (start != null
             && otherStart != null
@@ -765,8 +696,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
 
         ScheduleEvent that = (ScheduleEvent) o;
+
         if (getId() != null) {
-            return getId().equals(that.getId());
+            return Objects.equals(getId(), that.getId());
         } else {
             return hashCode() == that.hashCode();
         }

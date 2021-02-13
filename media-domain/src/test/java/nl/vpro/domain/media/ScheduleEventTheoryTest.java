@@ -45,22 +45,5 @@ public class ScheduleEventTheoryTest extends ObjectTest<ScheduleEvent> { // TODO
     @DataPoint
     public static ScheduleEvent nullDuration = new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(100), null);
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testGuideDayBeforeCutOff() {
-        ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.EPOCH, Duration.ofMillis(10));
 
-        assertThat(target.getGuideDay().getTime()).isEqualTo(-90000000L);
-        assertThat(target.getGuideDate().toString()).isEqualTo("1969-12-31");
-
-    }
-
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testGuideDayAfterCutOff() {
-        ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli((5 * 3600 + 58 * 60) * 1000), Duration.ofMillis(10));
-
-        assertThat(target.getGuideDay().getTime()).isEqualTo(-3600000L);
-        assertThat(target.getGuideDate().toString()).isEqualTo("1970-01-01");
-    }
 }
