@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.update.ProgramUpdate;
 
+import static java.time.Duration.ofMillis;
+import static java.time.Instant.ofEpochMilli;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MediaBuilderTest {
@@ -39,12 +41,12 @@ public class MediaBuilderTest {
     @Test
     public void testScheduleEvent() {
         Program program = MediaBuilder.program().scheduleEvents(
-            new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(100), Duration.ofMillis(200)),
-            new ScheduleEvent(Channel.NED3, new Net("ZAPP"), new Date(300 + 3 * 24 * 3600 * 1000), new Date(50)),
-            new ScheduleEvent(Channel.HOLL, new Date(350 + 8 * 24 * 3600 * 1000), new Date(250)),
-            new ScheduleEvent(Channel.CONS, new Date(600 + 10 * 24 * 3600 * 1000), new Date(200)),
-            new ScheduleEvent(Channel.NED1, Date.from(LocalDateTime.parse("1973-03-05T06:30:00").atZone(Schedule.ZONE_ID).toInstant()), new Date(200)),
-            new ScheduleEvent(Channel.NED1, Date.from(LocalDateTime.parse("1973-03-05T05:30:00").atZone(Schedule.ZONE_ID).toInstant()), new Date(200))
+            new ScheduleEvent(Channel.NED3, ofEpochMilli(100), ofMillis(200)),
+            new ScheduleEvent(Channel.NED3, new Net("ZAPP"), ofEpochMilli(300 + 3 * 24 * 3600 * 1000), ofMillis(50)),
+            new ScheduleEvent(Channel.HOLL, ofEpochMilli(350 + 8 * 24 * 3600 * 1000), ofMillis(250)),
+            new ScheduleEvent(Channel.CONS, ofEpochMilli(600 + 10 * 24 * 3600 * 1000), ofMillis(200)),
+            new ScheduleEvent(Channel.NED1, LocalDateTime.parse("1973-03-05T06:30:00").atZone(Schedule.ZONE_ID).toInstant(), ofMillis(200)),
+            new ScheduleEvent(Channel.NED1, LocalDateTime.parse("1973-03-05T05:30:00").atZone(Schedule.ZONE_ID).toInstant(), ofMillis(200))
         )
             .build();
 
