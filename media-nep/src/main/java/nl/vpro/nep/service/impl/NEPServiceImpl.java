@@ -10,8 +10,6 @@ import java.util.function.*;
 import javax.annotation.PreDestroy;
 import javax.inject.*;
 
-import nl.vpro.nep.service.exception.NEPException;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -19,6 +17,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.domain.*;
 import nl.vpro.nep.domain.workflow.*;
 import nl.vpro.nep.service.*;
+import nl.vpro.nep.service.exception.NEPException;
 import nl.vpro.util.FileMetadata;
 
 /**
@@ -74,9 +73,13 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
+    public ItemizerStatusResponse getItemizerJobStatus(String jobId) {
+        return itemizeService.get().getItemizerJobStatus(jobId);
+    }
+
+    @Override
     public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate) throws NEPException {
         return itemizeService.get().itemizeMid(mid, start, stop, max_bitrate);
-
     }
 
     @Override

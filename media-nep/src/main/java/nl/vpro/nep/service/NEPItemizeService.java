@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.function.BiConsumer;
 
+import nl.vpro.nep.domain.ItemizerStatusResponse;
 import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.service.exception.NEPException;
 
@@ -52,5 +53,7 @@ public interface NEPItemizeService extends  AutoCloseable {
     String getLiveItemizerString();
 
     String getMidItemizerString();
+
+    ItemizerStatusResponse getItemizerJobStatus(String jobId);
 
 }

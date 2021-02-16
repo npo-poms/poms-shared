@@ -1,7 +1,5 @@
 package nl.vpro.nep.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -17,13 +15,10 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import nl.vpro.nep.service.exception.NEPException;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.*;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.ContentType;
@@ -34,10 +29,12 @@ import org.apache.http.message.BasicHeader;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.nep.domain.NEPItemizeRequest;
-import nl.vpro.nep.domain.NEPItemizeResponse;
+import nl.vpro.nep.domain.*;
 import nl.vpro.nep.service.NEPItemizeService;
+import nl.vpro.nep.service.exception.NEPException;
 
 import static nl.vpro.poms.shared.Headers.NPO_DISPATCHED_TO;
 import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
@@ -215,6 +212,26 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     @Override
     public String getMidItemizerString() {
         return itemizeMidUrl;
+    }
+
+    @Override
+    public ItemizerStatusResponse getItemizerJobStatus(String jobId) {
+        String jobs = itemizeLiveUrl + "/api/itemizer/jobs/" + jobId + "/status";
+        HttpGet get = new HttpGet(jobs);
+        authenticate(get, itemizeLiveKey);
+        HttpClientContext clientContext = HttpClientContext.create();
+
+        try (CloseableHttpResponse execute = httpClient.execute(get, clientContext)) {
+            if (execute.getStatusLine().getStatusCode() == 200) {
+                return Jackson2Mapper.getLenientInstance().readValue(execute.getEntity().getContent(), ItemizerStatusResponse.class);
+            } else {
+                StringWriter result = new StringWriter();
+                IOUtils.copy(execute.getEntity().getContent(), result, Charset.defaultCharset());
+                throw new RuntimeException(result.toString());
+            }
+        } catch (Exception e) {
+            throw new NEPException(e, e.getMessage());
+        }
     }
 
 
