@@ -72,7 +72,7 @@ public class NEPItemizeServiceImplITest {
             ItemizerStatusResponse jobs = itemizer.getItemizerJobStatus(response.getId());
             Thread.sleep(1000);
             log.info("response: {}", jobs);
-            if (!jobs.getStatus().isBusy()) {
+            if (jobs.getStatus().isEndStatus()) {
                 break;
             }
         }
@@ -124,5 +124,13 @@ public class NEPItemizeServiceImplITest {
         log.info("Created {} bytes {} (headers: {})", out.length(), out, headers);
     }
 
+
+    @Test
+    public void getJobsStatus404() {
+        NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
+
+        ItemizerStatusResponse jobs = itemizer.getItemizerJobStatus("foobar");
+        log.info("{}", jobs);
+    }
 
 }

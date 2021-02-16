@@ -223,7 +223,9 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
         try (CloseableHttpResponse execute = httpClient.execute(get, clientContext)) {
             if (execute.getStatusLine().getStatusCode() == 200) {
-                return Jackson2Mapper.getLenientInstance().readValue(execute.getEntity().getContent(), ItemizerStatusResponse.class);
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                IOUtils.copy(execute.getEntity().getContent(), outputStream);
+                return Jackson2Mapper.getLenientInstance().readValue(outputStream.toByteArray(), ItemizerStatusResponse.class);
             } else {
                 StringWriter result = new StringWriter();
                 IOUtils.copy(execute.getEntity().getContent(), result, Charset.defaultCharset());
