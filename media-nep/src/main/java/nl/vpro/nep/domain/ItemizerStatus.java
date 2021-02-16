@@ -7,19 +7,20 @@ import lombok.Getter;
  * @since 5.24
  */
 public enum ItemizerStatus {
-    COMPLETED(false),
-    RUNNING(true),
-    QUEUED(true),
-    STARTED(true),
-    RETRY(true),
-    UNKNOWN(false),
-    ERROR(false),
-    CANCELLED(false);
+    COMPLETED(true),
+    RUNNING(false),
+    QUEUED(false),
+    STARTED(false),
+    RETRY(false),
+    UNKNOWN(true),
+    ERROR(true),
+    CANCELLED(true);
 
     @Getter
-    final boolean busy;
+    private final boolean endStatus;
+;
 
-    ItemizerStatus(boolean busy) {
-        this.busy = busy;
+    ItemizerStatus(boolean endStatus) {
+        this.endStatus = endStatus;
     }
 }
