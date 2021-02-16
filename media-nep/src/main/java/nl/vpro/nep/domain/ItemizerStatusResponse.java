@@ -1,7 +1,6 @@
 package nl.vpro.nep.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -9,6 +8,8 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@lombok.Builder
 public class ItemizerStatusResponse {
 
     private String jobId;
