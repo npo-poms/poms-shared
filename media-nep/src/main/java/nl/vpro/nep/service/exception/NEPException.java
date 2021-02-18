@@ -12,4 +12,9 @@ public class NEPException extends RuntimeException {
         this.originalException = originalException;
     }
 
+    public NEPException(String errorMessage) {
+        super(errorMessage);
+        this.originalException = null;
+    }
+
 }

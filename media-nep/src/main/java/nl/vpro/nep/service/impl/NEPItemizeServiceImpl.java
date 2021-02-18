@@ -229,7 +229,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             } else {
                 StringWriter result = new StringWriter();
                 IOUtils.copy(execute.getEntity().getContent(), result, Charset.defaultCharset());
-                throw new RuntimeException(result.toString());
+                throw new NEPException(result.toString());
             }
         } catch (Exception e) {
             throw new NEPException(e, e.getMessage());
