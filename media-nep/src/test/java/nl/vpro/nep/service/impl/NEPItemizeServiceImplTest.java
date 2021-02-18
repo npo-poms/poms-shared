@@ -42,7 +42,7 @@ public class NEPItemizeServiceImplTest {
                     ok().withBody("{\"success\":false,\"status\":\"error\",\"errors\":\"Job not found\"}")
                 )
         );
-        ItemizerStatusResponse job = itemizer.getItemizerJobStatus("foobar");
+        ItemizerStatusResponse job = itemizer.getLiveItemizerJobStatus("foobar");
 
         assertThat(job).isEqualTo(ItemizerStatusResponse.builder().build());
         log.info("{}", job);
@@ -60,7 +60,7 @@ public class NEPItemizeServiceImplTest {
                     ok().withBody("{\"jobId\":\"2c829baf-c310-4f09-81c1-fd9a252ded0c\",\"status\":\"QUEUED\",\"statusMessage\":null}")
                 )
         );
-        ItemizerStatusResponse job = itemizer.getItemizerJobStatus("2c829baf-c310-4f09-81c1-fd9a252ded0c");
+        ItemizerStatusResponse job = itemizer.getLiveItemizerJobStatus("2c829baf-c310-4f09-81c1-fd9a252ded0c");
 
         assertThat(job).isEqualTo(ItemizerStatusResponse.builder().jobId("2c829baf-c310-4f09-81c1-fd9a252ded0c").status(ItemizerStatus.QUEUED).statusMessage(null).build());
         log.info("{}", job);

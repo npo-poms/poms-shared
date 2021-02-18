@@ -71,7 +71,7 @@ public class NEPItemizeServiceImplITest {
         response = itemizer.itemizeLive("npo-1dvr", Instant.now().minusSeconds(300), Instant.now().minusSeconds(60), null);
         log.info("response: {} {}", response, start);
         while(true) {
-            ItemizerStatusResponse jobs = itemizer.getItemizerJobStatus(response.getId());
+            ItemizerStatusResponse jobs = itemizer.getLiveItemizerJobStatus(response.getId());
             log.info("response: {}", jobs);
             if (jobs.getStatus().isEndStatus()) {
                 break;
@@ -131,7 +131,7 @@ public class NEPItemizeServiceImplITest {
     public void getJobsStatus404() {
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
 
-        ItemizerStatusResponse jobs = itemizer.getItemizerJobStatus("foobar");
+        ItemizerStatusResponse jobs = itemizer.getLiveItemizerJobStatus("foobar");
         log.info("{}", jobs);
     }
 

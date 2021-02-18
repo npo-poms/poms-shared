@@ -73,9 +73,15 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public ItemizerStatusResponse getItemizerJobStatus(String jobId) {
-        return itemizeService.get().getItemizerJobStatus(jobId);
+    public ItemizerStatusResponse getLiveItemizerJobStatus(String jobId) {
+        return itemizeService.get().getLiveItemizerJobStatus(jobId);
     }
+
+    @Override
+    public ItemizerStatusResponse getMidItemizerJobStatus(String jobId) {
+        return itemizeService.get().getMidItemizerJobStatus(jobId);
+    }
+
 
     @Override
     public NEPItemizeResponse itemizeMid(String mid, Duration start, Duration stop, Integer max_bitrate) throws NEPException {

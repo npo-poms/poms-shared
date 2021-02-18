@@ -58,7 +58,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     private final String itemizeMidUrl;
 
     CloseableHttpClient httpClient = HttpClients.custom()
-            .build();
+        .build();
 
     @Inject
     public NEPItemizeServiceImpl(
@@ -67,12 +67,13 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         @Value("${nep.itemizer-api.mid.baseUrl}") @NonNull String itemizeMidUrl,
         @Value("${nep.itemizer-api.mid.key}") @NonNull String itemizeMidKey
 
-        ) {
+    ) {
         this.itemizeLiveKey = new NEPItemizerV1Authenticator(itemizeLiveKey);
         this.itemizeLiveUrl = itemizeLiveUrl;
         this.itemizeMidKey = new NEPItemizerV1Authenticator(itemizeMidKey);
         this.itemizeMidUrl = itemizeMidUrl;
     }
+
     public NEPItemizeServiceImpl(String itemizeUrl, String itemizeKey) {
         this(itemizeUrl, itemizeKey, itemizeUrl, itemizeKey);
     }
@@ -157,7 +158,8 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     private static final Set<String> GRAB_SCREEN_HEADERS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(HttpHeaders.CONTENT_TYPE.toLowerCase(), HttpHeaders.CONTENT_LENGTH.toLowerCase())));
-    protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull BiConsumer<String, String> headers,  @NonNull  OutputStream outputStream, String itemizeUrl, Supplier<String> key) throws NEPException {
+
+    protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull BiConsumer<String, String> headers, @NonNull OutputStream outputStream, String itemizeUrl, Supplier<String> key) throws NEPException {
         HttpClientContext clientContext = HttpClientContext.create();
         String framegrabber = itemizeUrl + "/api/framegrabber?identifier=" + identifier + "&time=" + time;
         HttpGet get = new HttpGet(framegrabber);
@@ -215,10 +217,20 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     @Override
-    public ItemizerStatusResponse getItemizerJobStatus(String jobId) {
-        String jobs = itemizeLiveUrl + "/api/itemizer/jobs/" + jobId + "/status";
+    public ItemizerStatusResponse getLiveItemizerJobStatus(String jobId) {
+        return getItemizerJobStatus(itemizeLiveUrl, itemizeLiveKey, jobId);
+    }
+
+    @Override
+    public ItemizerStatusResponse getMidItemizerJobStatus(String jobId) {
+        return getItemizerJobStatus(itemizeMidUrl, itemizeMidKey, jobId);
+    }
+
+
+    protected ItemizerStatusResponse getItemizerJobStatus(String url, Supplier<String> key, String jobId) {
+        String jobs = url + "/api/itemizer/jobs/" + jobId + "/status";
         HttpGet get = new HttpGet(jobs);
-        authenticate(get, itemizeLiveKey);
+        authenticate(get, key);
         HttpClientContext clientContext = HttpClientContext.create();
 
         try (CloseableHttpResponse execute = httpClient.execute(get, clientContext)) {
@@ -243,7 +255,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ":l:"  + itemizeLiveUrl + ",m:" + itemizeMidUrl;
+        return getClass().getSimpleName() + ":l:" + itemizeLiveUrl + ",m:" + itemizeMidUrl;
     }
 
     @Override
@@ -253,4 +265,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             httpClient.close();
         }
     }
+
 }
+
+
