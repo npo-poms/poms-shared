@@ -8,6 +8,7 @@ import nl.vpro.domain.Displayable;
  * @author Michiel Meeuwissen
  * @since 5.24
  */
+@Getter
 public enum ItemizerStatus implements Displayable {
     COMPLETED(true, "Klaar"),
     RUNNING(false, "Bezig"),
@@ -18,10 +19,8 @@ public enum ItemizerStatus implements Displayable {
     ERROR(true, "Fout"),
     CANCELLED(true, "Afgebroken");
 
-    @Getter
     private final boolean endStatus;
 
-    @Getter
     private final String displayName;
 
     ItemizerStatus(boolean endStatus, String displayName) {
