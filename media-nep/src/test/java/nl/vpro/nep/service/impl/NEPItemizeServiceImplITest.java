@@ -72,11 +72,11 @@ public class NEPItemizeServiceImplITest {
         log.info("response: {} {}", response, start);
         while(true) {
             ItemizerStatusResponse jobs = itemizer.getItemizerJobStatus(response.getId());
-            Thread.sleep(1000);
             log.info("response: {}", jobs);
             if (jobs.getStatus().isEndStatus()) {
                 break;
             }
+            Thread.sleep(1000);
         }
 
 
