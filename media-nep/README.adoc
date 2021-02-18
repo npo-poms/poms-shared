@@ -19,7 +19,15 @@ http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/v2/api-docs
 === NEPItemizeService
 Intake for 'itemize' and 'grab screen'.
 
-`nep.itemizer-api.baseUrl=https://itemizer-npocdn-prd.nepworldwide.nl/v1`
+
+|===
+|env | `nep.itemizer-api.baseUrl`=
+
+|prod | `https://itemizer-npocdn-prd.nepworldwide.nl/v1`
+|new prod | `https://itemizer-gateway.nepworldwide.nl/v1/` ??
+|staging | `https://itemizer-npocdn-stg.nepworldwide.nl/v1`
+|===
+
 
 === NEPPlayerTokenService
 

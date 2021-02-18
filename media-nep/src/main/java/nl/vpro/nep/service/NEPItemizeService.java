@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.function.BiConsumer;
 
+import nl.vpro.nep.domain.ItemizerStatusResponse;
 import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.service.exception.NEPException;
 
@@ -53,4 +54,32 @@ public interface NEPItemizeService extends  AutoCloseable {
 
     String getMidItemizerString();
 
+    default String getItemizerString(Configuration configuration) {
+        switch (configuration) {
+            case LIVE: return getLiveItemizerString();
+            default:
+            case MID: return getMidItemizerString();
+        }
+    }
+
+    ItemizerStatusResponse getLiveItemizerJobStatus(String jobId);
+
+    ItemizerStatusResponse getMidItemizerJobStatus(String jobId);
+
+    default ItemizerStatusResponse getItemizerJobStatus(Configuration configuration, String jobId) {
+        switch (configuration) {
+            case LIVE: return getLiveItemizerJobStatus(jobId);
+            default:
+            case MID: return getMidItemizerJobStatus(jobId);
+        }
+    }
+
+    /**
+     * Especially for testing we support two seperate configurations. One for itemizing of
+     * 'live' or 'dvr' streams, and one for itemizing VOD or 'MID' streams.
+     */
+    enum Configuration {
+        LIVE,
+        MID
+    }
 }

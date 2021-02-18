@@ -1,7 +1,5 @@
 package nl.vpro.nep.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -17,13 +15,10 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import nl.vpro.nep.service.exception.NEPException;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.*;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.ContentType;
@@ -34,10 +29,12 @@ import org.apache.http.message.BasicHeader;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.nep.domain.NEPItemizeRequest;
-import nl.vpro.nep.domain.NEPItemizeResponse;
+import nl.vpro.nep.domain.*;
 import nl.vpro.nep.service.NEPItemizeService;
+import nl.vpro.nep.service.exception.NEPException;
 
 import static nl.vpro.poms.shared.Headers.NPO_DISPATCHED_TO;
 import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
@@ -61,7 +58,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     private final String itemizeMidUrl;
 
     CloseableHttpClient httpClient = HttpClients.custom()
-            .build();
+        .build();
 
     @Inject
     public NEPItemizeServiceImpl(
@@ -70,12 +67,13 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         @Value("${nep.itemizer-api.mid.baseUrl}") @NonNull String itemizeMidUrl,
         @Value("${nep.itemizer-api.mid.key}") @NonNull String itemizeMidKey
 
-        ) {
+    ) {
         this.itemizeLiveKey = new NEPItemizerV1Authenticator(itemizeLiveKey);
         this.itemizeLiveUrl = itemizeLiveUrl;
         this.itemizeMidKey = new NEPItemizerV1Authenticator(itemizeMidKey);
         this.itemizeMidUrl = itemizeMidUrl;
     }
+
     public NEPItemizeServiceImpl(String itemizeUrl, String itemizeKey) {
         this(itemizeUrl, itemizeKey, itemizeUrl, itemizeKey);
     }
@@ -160,7 +158,8 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     private static final Set<String> GRAB_SCREEN_HEADERS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(HttpHeaders.CONTENT_TYPE.toLowerCase(), HttpHeaders.CONTENT_LENGTH.toLowerCase())));
-    protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull BiConsumer<String, String> headers,  @NonNull  OutputStream outputStream, String itemizeUrl, Supplier<String> key) throws NEPException {
+
+    protected void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull BiConsumer<String, String> headers, @NonNull OutputStream outputStream, String itemizeUrl, Supplier<String> key) throws NEPException {
         HttpClientContext clientContext = HttpClientContext.create();
         String framegrabber = itemizeUrl + "/api/framegrabber?identifier=" + identifier + "&time=" + time;
         HttpGet get = new HttpGet(framegrabber);
@@ -217,6 +216,38 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         return itemizeMidUrl;
     }
 
+    @Override
+    public ItemizerStatusResponse getLiveItemizerJobStatus(String jobId) {
+        return getItemizerJobStatus(itemizeLiveUrl, itemizeLiveKey, jobId);
+    }
+
+    @Override
+    public ItemizerStatusResponse getMidItemizerJobStatus(String jobId) {
+        return getItemizerJobStatus(itemizeMidUrl, itemizeMidKey, jobId);
+    }
+
+
+    protected ItemizerStatusResponse getItemizerJobStatus(String url, Supplier<String> key, String jobId) {
+        String jobs = url + "/api/itemizer/jobs/" + jobId + "/status";
+        HttpGet get = new HttpGet(jobs);
+        authenticate(get, key);
+        HttpClientContext clientContext = HttpClientContext.create();
+
+        try (CloseableHttpResponse execute = httpClient.execute(get, clientContext)) {
+            if (execute.getStatusLine().getStatusCode() == 200) {
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                IOUtils.copy(execute.getEntity().getContent(), outputStream);
+                return Jackson2Mapper.getLenientInstance().readValue(outputStream.toByteArray(), ItemizerStatusResponse.class);
+            } else {
+                StringWriter result = new StringWriter();
+                IOUtils.copy(execute.getEntity().getContent(), result, Charset.defaultCharset());
+                throw new NEPException(result.toString());
+            }
+        } catch (Exception e) {
+            throw new NEPException(e, e.getMessage());
+        }
+    }
+
 
     private void authenticate(HttpUriRequest request, Supplier<String> key) {
         request.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, key.get()));
@@ -224,7 +255,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ":l:"  + itemizeLiveUrl + ",m:" + itemizeMidUrl;
+        return getClass().getSimpleName() + ":l:" + itemizeLiveUrl + ",m:" + itemizeMidUrl;
     }
 
     @Override
@@ -234,4 +265,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             httpClient.close();
         }
     }
+
 }
+
+

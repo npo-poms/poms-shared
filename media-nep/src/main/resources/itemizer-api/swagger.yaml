@@ -1,0 +1,171 @@
+openapi: 3.0.0
+
+info:
+    title: Itemizer Gateway
+    description: Gateway to the itemizer. This generates a clip or returns an image directly
+    version: '0.18'
+
+servers:
+    -   url: itemizer-npocdn-stg.twobridges.io
+    -   url: itemizer-gateway-stg.nepworldwide.nl
+    -   url: itemizer-gateway.nepworldwide.nl
+
+security:
+    -   bearerAuth: [ ]
+
+components:
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: API key
+
+    schemas:
+        SuccessResponse:
+            properties:
+                success:
+                    type: boolean
+                    example: "true"
+                id:
+                    type: string
+                    example: 390f3955-e8d3-499d-b254-10a0f74d9dc8
+                output_filename:
+                    type: string
+                    example: identifier__startTime_endTime.mp4
+        FailureResponse:
+            properties:
+                success:
+                    type: boolean
+                    example: "false"
+                status:
+                    type: string
+                    example: error
+                errors:
+                    type: string
+                    example: Could not start capture job.
+        BadGatewayResponse:
+            properties:
+                status:
+                    type: string
+                    example: error
+        StatusResponse:
+            properties:
+                jobId:
+                    type: string
+                    example: 390f3955-e8d3-499d-b254-10a0f74d9dc8
+                status:
+                    type: string
+                    example: "RUNNING"
+                    enum: [ COMPLETED, RUNNING, QUEUED, STARTED, RETRY, UNKNOWN, ERROR, CANCELLED ]
+                statusMessage:
+                    type: string
+                    example: "SAM job failed, could not connect"
+    responses:
+        UnauthorizedError:
+            description: Access token is missing or invalid
+
+paths:
+    /v1/api/itemizer/job:
+        post:
+            parameters:
+                -   name: identifier
+                    in: query
+                    description: PRID
+                    required: true
+                    schema:
+                        type: string
+                -   name: starttime
+                    in: query
+                    description: In time
+                    required: true
+                    schema:
+                        type: string
+                -   name: endtime
+                    in: query
+                    description: Out time
+                    required: true
+                    schema:
+                        type: string
+                -   name: max_bitrate
+                    in: query
+                    description: the maximum bitrate for the clip to create
+                    required: false
+                    schema:
+                        type: integer
+            responses:
+                '201':
+                    description: JSON encoded string containing success message
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/SuccessResponse'
+                '400':
+                    description: JSON encoded string containing failure message
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FailureResponse'
+                '401':
+                    $ref: '#/components/responses/UnauthorizedError'
+                '502':
+                    description: JSON encoded string containing failure message
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/FailureResponse'
+
+    /v1/api/itemizer/jobs/{jobToken}/status:
+        get:
+            parameters:
+                -   name: jobToken
+                    in: path
+                    description: Job Token
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: Returns the status and status message of the given job
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/StatusResponse'
+                '404':
+                    description: Job not found
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                                example: "Job not found"
+
+    /v1/api/framegrabber:
+        get:
+            parameters:
+                -   name: identifier
+                    in: query
+                    description: PRID
+                    required: true
+                    schema:
+                        type: string
+                -   name: time
+                    in: query
+                    description: Time in clip where to make the screen capture
+                    required: true
+                    schema:
+                        type: string
+            responses:
+                '201':
+                    description: captured image
+                    content:
+                        image/jpeg:
+                            schema:
+                                type: string
+                                format: binary
+                '401':
+                    $ref: '#/components/responses/UnauthorizedError'
+                '500':
+                    description: Creating of image fails somehow
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BadGatewayResponse'

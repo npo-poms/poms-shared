@@ -7,14 +7,15 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-
-import nl.vpro.nep.service.exception.NEPException;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.*;
 
+import nl.vpro.nep.domain.ItemizerStatusResponse;
 import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.service.NEPDownloadService;
+import nl.vpro.nep.service.exception.NEPException;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -24,6 +25,7 @@ import static org.assertj.core.api.Assumptions.assumeThat;
  */
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Timeout(value = 10, unit = TimeUnit.MINUTES)
 public class NEPItemizeServiceImplITest {
 
     String MID = "POW_04505213";
@@ -63,11 +65,20 @@ public class NEPItemizeServiceImplITest {
     @Test
     @Order(10)
     @Tag("dvr")
-    public void itemizeDvr() throws NEPException {
+    public void itemizeDvr() throws NEPException, InterruptedException {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         response = itemizer.itemizeLive("npo-1dvr", Instant.now().minusSeconds(300), Instant.now().minusSeconds(60), null);
         log.info("response: {} {}", response, start);
+        while(true) {
+            ItemizerStatusResponse jobs = itemizer.getLiveItemizerJobStatus(response.getId());
+            log.info("response: {}", jobs);
+            if (jobs.getStatus().isEndStatus()) {
+                break;
+            }
+            Thread.sleep(1000);
+        }
+
 
     }
     @Test
@@ -114,4 +125,14 @@ public class NEPItemizeServiceImplITest {
         itemizer.grabScreenMid(MID, Duration.ZERO,  headers::put, new FileOutputStream(out));
         log.info("Created {} bytes {} (headers: {})", out.length(), out, headers);
     }
+
+
+    @Test
+    public void getJobsStatus404() {
+        NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
+
+        ItemizerStatusResponse jobs = itemizer.getLiveItemizerJobStatus("foobar");
+        log.info("{}", jobs);
+    }
+
 }
