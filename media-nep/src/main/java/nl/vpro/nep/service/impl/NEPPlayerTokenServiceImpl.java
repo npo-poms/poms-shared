@@ -1,17 +1,13 @@
 package nl.vpro.nep.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.Duration;
 
 import javax.annotation.PreDestroy;
 import javax.inject.Named;
-
-import nl.vpro.nep.service.exception.NEPException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -25,10 +21,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.nep.domain.*;
 import nl.vpro.nep.service.NEPPlayerTokenService;
+import nl.vpro.nep.service.exception.NEPException;
 import nl.vpro.util.TimeUtils;
 
 /**
@@ -108,7 +106,7 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         String url = baseUrl + "/" + drmType + "/npo";
-        String json = null;
+        String json;
         try {
             json = MAPPER.writeValueAsString(new TokenRequest(ip, playreadyKey));
         } catch (JsonProcessingException e) {
@@ -120,11 +118,11 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
             httpPost.setEntity(entity);
             HttpResponse response = client.execute(httpPost);
             IOUtils.copy(response.getEntity().getContent(), out);
-            log.info("Response {}", new String(out.toByteArray()));
+            log.debug("Response {}", out.toString());
             return out.toByteArray();
         } catch (Exception e) {
-            log.error("POST {}: {} , response {}: {}", url, json, new String(out.toByteArray()), e.getMessage());
-            throw new NEPException(e, "POST " + url + ": " + json + ", response: " + new String(out.toByteArray()));
+            log.error("POST {}: {} , response {}: {}", url, json, out.toString(), e.getMessage());
+            throw new NEPException(e, "POST " + url + ": " + json + ", response: " + out.toString());
         }
 
     }
