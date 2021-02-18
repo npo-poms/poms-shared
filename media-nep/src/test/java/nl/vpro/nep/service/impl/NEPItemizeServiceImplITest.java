@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.*;
 
@@ -24,6 +25,7 @@ import static org.assertj.core.api.Assumptions.assumeThat;
  */
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Timeout(value = 10, unit = TimeUnit.MINUTES)
 public class NEPItemizeServiceImplITest {
 
     String MID = "POW_04505213";
