@@ -4,36 +4,24 @@
  */
 package nl.vpro.domain.media;
 
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
+
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.xml.bind.util.JAXBSource;
 
-import org.junit.Test;
-import org.junit.experimental.theories.DataPoint;
+import org.junit.jupiter.api.Test;
 
+import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import nl.vpro.test.theory.ComparableTest;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class RelationTest extends ComparableTest<Relation> {
-
-    @DataPoint
-    public static Relation nullArgument = null;
-
-    @DataPoint
-    public static Relation withDefinition = relation(null, "TYPE", "VPRO");
-
-    @DataPoint
-    public static Relation persisted = relation(1L, "TYPE", "VPRO");
-
-    private static Relation relation(Long id, String type, String broadcaster) {
-        Relation relation = new Relation(new RelationDefinition(type, broadcaster));
-        relation.setId(id);
-        return relation;
-    }
+public class RelationTest implements ComparableTest<Relation> {
 
     @Test
     public void testGetUrnOnNull() {
@@ -56,16 +44,21 @@ public class RelationTest extends ComparableTest<Relation> {
         assertThat(relation.getId().intValue()).isEqualTo(79);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testSetUrnWithoutAnId() {
-        Relation relation = new Relation();
-        relation.setUrn("urn:vpro:media:relation:");
+        assertThatThrownBy(() -> {
+
+            Relation relation = new Relation();
+            relation.setUrn("urn:vpro:media:relation:");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testSetUrnFormat() {
-        Relation relation = new Relation();
-        relation.setUrn("vpro:media:relation:79");
+        assertThatThrownBy(() -> {
+            Relation relation = new Relation();
+            relation.setUrn("vpro:media:relation:79");
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -85,11 +78,14 @@ public class RelationTest extends ComparableTest<Relation> {
         assertThat(constraintViolations).hasSize(1);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testUpdateOnDifferentDefinitions() {
-        Relation to = new Relation(new RelationDefinition());
-        Relation from = new Relation(new RelationDefinition("GIDS", "BNN"));
-        Relation.update(from, to);
+        assertThatThrownBy(() -> {
+
+            Relation to = new Relation(new RelationDefinition());
+            Relation from = new Relation(new RelationDefinition("GIDS", "BNN"));
+            Relation.update(from, to);
+        }).isInstanceOf(UnsupportedOperationException.class);
     }
 
     @Test
@@ -159,4 +155,21 @@ public class RelationTest extends ComparableTest<Relation> {
     private RelationDefinition getDefinition() {
         return new RelationDefinition("TYPE", "broadcaster", "text");
     }
+
+    @Override
+    public Arbitrary<? extends Relation> datapoints() {
+        return Arbitraries.of(
+            null,
+            relation(null, "TYPE", "VPRO"),
+            relation(1L, "TYPE", "VPRO")
+        );
+    }
+
+
+    private static Relation relation(Long id, String type, String broadcaster) {
+        Relation relation = new Relation(new RelationDefinition(type, broadcaster));
+        relation.setId(id);
+        return relation;
+    }
 }
+
