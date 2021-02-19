@@ -15,6 +15,7 @@ import javax.xml.bind.JAXB;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Isolated;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
@@ -34,6 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SuppressWarnings("deprecation")
 @Slf4j
+@Isolated
 public class MediaObjectTest {
 
     @BeforeAll
@@ -548,14 +550,12 @@ public class MediaObjectTest {
 
         List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(validator.validate(p));
         Comparator<ConstraintViolation<Program>> comparing = Comparator.comparing(c -> c.getPropertyPath().toString());
-        constraintViolations.sort(comparing.thenComparing(ConstraintViolation::getMessageTemplate)
-
-        );
+        constraintViolations.sort(comparing.thenComparing(ConstraintViolation::getMessageTemplate));
 
 
         assertThat(constraintViolations.get(0).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.language.message}");
         assertThat(constraintViolations.get(0).getMessage()).isEqualTo("nl_XX is an invalid ISO 639 language code");
-         assertThat(constraintViolations.get(1).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.region.message}");
+        assertThat(constraintViolations.get(1).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.region.message}");
         assertThat(constraintViolations.get(1).getMessage()).isEqualTo("nl_XX is not a valid region");
         assertThat(constraintViolations).hasSize(2);
 
