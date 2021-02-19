@@ -542,6 +542,7 @@ public class MediaObjectTest {
 
     @Test
     public void testLanguageWithCountryValidation() {
+        assertThat(Locale.getDefault()).isEqualTo(Locale.US);
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
         p.setAVType(AVType.MIXED);
