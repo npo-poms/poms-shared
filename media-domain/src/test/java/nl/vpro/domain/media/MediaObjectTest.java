@@ -40,8 +40,7 @@ public class MediaObjectTest {
 
     @BeforeAll
     public static void init() {
-        //Locale.setDefault(Locales.DUTCH);
-        Locale.setDefault(Locale.US);
+
     }
 
     @Test
@@ -542,8 +541,8 @@ public class MediaObjectTest {
 
     @Test
     public void testLanguageWithCountryValidation() {
-        assertThat(Locale.getDefault()).isEqualTo(Locale.US);
         Program p = new Program();
+
         p.setType(ProgramType.BROADCAST);
         p.setAVType(AVType.MIXED);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);

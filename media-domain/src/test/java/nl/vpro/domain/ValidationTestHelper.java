@@ -6,10 +6,13 @@ package nl.vpro.domain;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Locale;
 import java.util.Set;
 
 import javax.validation.*;
 import javax.validation.groups.Default;
+
+import org.hibernate.validator.HibernateValidator;
 
 import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -22,8 +25,12 @@ public class ValidationTestHelper {
     public static final Validator validator;
 
     static {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        ValidatorFactory factory = Validation.byProvider(HibernateValidator.class)
+            .configure()
+            .defaultLocale(Locale.US)
+            .buildValidatorFactory();
         validator = factory.getValidator();
+        log.info("Found validator {}", validator);
     }
     public static <T> java.util.Set<javax.validation.ConstraintViolation<T>> validate(T o, boolean warnings, int expected) {
         Set<ConstraintViolation<T>> validate = validate(o, warnings);
