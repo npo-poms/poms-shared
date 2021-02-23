@@ -315,7 +315,7 @@
           <Reference>urn:mis:genre:CLASSIC</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.5.76">
+        <Term termID="3.0.1.5.72">
           <Reference>urn:tva:metadata:cs:2004:0517</Reference>
           <Name xml:lang="nl">Alternative</Name>
           <ValidityFlag>1</ValidityFlag>
