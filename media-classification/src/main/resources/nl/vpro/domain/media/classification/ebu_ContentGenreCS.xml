@@ -141,79 +141,66 @@
         <Term termID="3.0.1.2.43">
           <Name xml:lang="nl">Actie</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.44">
           <Name xml:lang="nl">Biografie</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.45">
           <Name xml:lang="nl">Bollywood</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.46">
           <Name xml:lang="nl">Erotiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.47">
           <Name xml:lang="nl">Familiefilm</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.48">
           <Name xml:lang="nl">Historisch</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.49">
           <Name xml:lang="nl">Horror</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.50">
           <Name xml:lang="nl">Misdaad</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.51">
           <Name xml:lang="nl">Musical</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.53">
           <Name xml:lang="nl">Romantiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.54">
           <Name xml:lang="nl">Science Fiction</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.56">
           <Name xml:lang="nl">Toneelstuk</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.57">
           <Name xml:lang="nl">Western</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
-          <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.10">
