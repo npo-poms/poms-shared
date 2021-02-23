@@ -57,6 +57,14 @@
         <Reference>urn:mis:genre:YOUTH</Reference>
         <Reference>urn:bindinc:genre:Jeugd</Reference>
         <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.6.68">
+          <Name xml:lang="nl">Evenement/registratie</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.6.42">
+          <Name xml:lang="nl">Human Interest</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
         <Term termID="3.0.1.1.2">
           <Name xml:lang="nl">Film</Name>
           <Reference>urn:tva:metadata:cs:2004:0102</Reference>
@@ -115,7 +123,6 @@
           <Name xml:lang="nl">Natuur</Name>
           <Reference>urn:tva:metadata:cs:2004:0125</Reference>
           <Reference>urn:mis:genre:NATURE</Reference>
-          <Reference>urn:bindinc:genre:Natuur</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
       </Term>
@@ -127,6 +134,84 @@
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">
           <Name xml:lang="nl">Komisch</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.43">
+          <Name xml:lang="nl">Actie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.44">
+          <Name xml:lang="nl">Biografie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.45">
+          <Name xml:lang="nl">Bollywood</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.46">
+          <Name xml:lang="nl">Erotiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.47">
+          <Name xml:lang="nl">Familiefilm</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.48">
+          <Name xml:lang="nl">Historisch</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.49">
+          <Name xml:lang="nl">Horror</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.50">
+          <Name xml:lang="nl">Misdaad</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.51">
+          <Name xml:lang="nl">Musical</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.53">
+          <Name xml:lang="nl">Romantiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.54">
+          <Name xml:lang="nl">Science Fiction</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.56">
+          <Name xml:lang="nl">Toneelstuk</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.57">
+          <Name xml:lang="nl">Western</Name>
           <Reference>urn:tva:metadata:cs:2004:0209</Reference>
           <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>
@@ -187,6 +272,21 @@
           <Reference>urn:tva:metadata:cs:2004:0313</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
+        <Term termID="3.0.1.3.81">
+          <Name xml:lang="nl">Detective</Name>
+          <Reference>urn:tva:metadata:cs:2004:0313</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.3.50">
+          <Name xml:lang="nl">Misdaad</Name>
+          <Reference>urn:tva:metadata:cs:2004:0313</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.3.53">
+          <Name xml:lang="nl">Romantiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0313</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
       </Term>
       <Term termID="3.0.1.4">
         <Name xml:lang="nl">Sport</Name>
@@ -196,6 +296,16 @@
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.4.14">
           <Name xml:lang="nl">Sport - informatie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0414</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.4.82">
+          <Name xml:lang="nl">Analyse</Name>
+          <Reference>urn:tva:metadata:cs:2004:0414</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.4.68">
+          <Name xml:lang="nl">Evenement/registratie</Name>
           <Reference>urn:tva:metadata:cs:2004:0414</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
@@ -209,19 +319,153 @@
         <Name xml:lang="nl">Muziek</Name>
         <Reference>urn:tva:metadata:cs:2004:05</Reference>
         <Reference>urn:mis:genre:MUSIC</Reference>
-        <Reference>urn:bindinc:genre:Muziek</Reference>
-        <Reference>urn:bindinc:genre:Musica</Reference>
-        <Reference>urn:bindinc:genre:Musique</Reference>
+        <Reference>urn:mis:bindinc:Muziek</Reference>
+        <Reference>urn:mis:bindinc:Musica</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.5.16">
-          <Name xml:lang="nl">Muziek klassiek</Name>
+          <Name xml:lang="nl">Klassiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0516</Reference>
           <Reference>urn:mis:genre:CLASSIC</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
+        <Term termID="3.0.1.5.76">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Alternative</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.73">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Concertregistratie</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.76">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Nederlandstalig</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.77">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Rock</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.78">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Soul</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.79">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Urban</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.80">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Wereldmuziek</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.74">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Dance</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.68">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Evenement</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.75">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Jazz</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
         <Term termID="3.0.1.5.17">
           <Reference>urn:tva:metadata:cs:2004:0517</Reference>
-          <Name xml:lang="nl">Muziek populair</Name>
+          <Name xml:lang="nl">Pop</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+      </Term>
+
+      <!-- TODO: What is the hunman interest main cat id? -->
+      <Term termID="3.0.1.6">
+        <Name xml:lang="nl">Human Interest</Name>
+        <Reference>urn:mis:genre:HUMANINTEREST</Reference>
+        <Reference>urn:bindinc:genre:HumanInterest</Reference>
+        <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.9.58">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">(sub)culturen</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.44">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Biografie</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.59">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Familie</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.22">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Gezondheid/opvoeding</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.60">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Levensbeschouwing</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.61">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Levenswijze</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.62">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Liefde</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.63">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Loopbaan</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+
+        <!-- Overig (leeg in POMS) -->
+        <Term termID="3.0.1.9">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Leeg</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.41">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Reality TV</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.29">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Reizen</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.26">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Religieus</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.64">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Vriendschap</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.9.31">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Wonen/Tuin</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.65">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">College</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
       </Term>
@@ -231,6 +475,46 @@
         <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
         <Reference>urn:bindinc:genre:Amusement</Reference>
         <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.6.68">
+          <Name xml:lang="nl">Evenement/registratie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.6.40">
+          <Name xml:lang="nl">Hoorspel</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.6.9">
+          <Name xml:lang="nl">Muziek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.6.41">
+          <Name xml:lang="nl">Reality TV</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.6.42">
+          <Name xml:lang="nl">Human Interest</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.5">
+          <Name xml:lang="nl">Muziek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.52">
+          <Name xml:lang="nl">Politiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.4">
+          <Name xml:lang="nl">Sport</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
         <Term termID="3.0.1.6.19">
           <Name xml:lang="nl">Spel/quiz</Name>
           <Reference>urn:tva:metadata:cs:2004:0619</Reference>
@@ -255,6 +539,46 @@
         <Reference>urn:bindinc:genre:Informatief</Reference>
         <Reference>urn:bindinc:genre:Información</Reference>
         <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.7.66">
+          <Name xml:lang="nl">Debat</Name>
+          <Reference>urn:tva:metadata:cs:2004:0719</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.68">
+          <Name xml:lang="nl">College</Name>
+          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.67">
+          <Name xml:lang="nl">Interviewprogramma/hosted show</Name>
+          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.69">
+          <Name xml:lang="nl">Maatschappelijk Debat</Name>
+          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.70">
+          <Name xml:lang="nl">Onderzoeksjournalistiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.52">
+          <Name xml:lang="nl">Politiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.71">
+          <Name xml:lang="nl">Reportage</Name>
+          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.65">
+          <Name xml:lang="nl">Evenement/registratie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
         <Term termID="3.0.1.7.19">
           <Name xml:lang="nl">Spel/quiz</Name>
           <Reference>urn:tva:metadata:cs:2004:0719</Reference>
@@ -323,6 +647,211 @@
         <Term termID="3.0.1.7.31">
           <Name xml:lang="nl">Wonen/Tuin</Name>
           <Reference>urn:tva:metadata:cs:2004:0731</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.40">
+          <Name xml:lang="nl">Hoorspel</Name>
+          <Reference>urn:tva:metadata:cs:2004:0740</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.41">
+          <Name xml:lang="nl">Reality TV</Name>
+          <Reference>urn:tva:metadata:cs:2004:0741</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.42">
+          <Name xml:lang="nl">Human Interest</Name>
+          <Reference>urn:tva:metadata:cs:2004:0742</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.43">
+          <Name xml:lang="nl">Actie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0743</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.44">
+          <Name xml:lang="nl">Biografie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0744</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.45">
+          <Name xml:lang="nl">Bollywood</Name>
+          <Reference>urn:tva:metadata:cs:2004:0745</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.46">
+          <Name xml:lang="nl">Erotiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0746</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.47">
+          <Name xml:lang="nl">Familiefilm</Name>
+          <Reference>urn:tva:metadata:cs:2004:0747</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.48">
+          <Name xml:lang="nl">Historische film</Name>
+          <Reference>urn:tva:metadata:cs:2004:0748</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.49">
+          <Name xml:lang="nl">Horror</Name>
+          <Reference>urn:tva:metadata:cs:2004:0749</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.50">
+          <Name xml:lang="nl">Misdaad</Name>
+          <Reference>urn:tva:metadata:cs:2004:0750</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.51">
+          <Name xml:lang="nl">Musical</Name>
+          <Reference>urn:tva:metadata:cs:2004:0751</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.52">
+          <Name xml:lang="nl">Politiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0752</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.53">
+          <Name xml:lang="nl">Romantiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0753</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.54">
+          <Name xml:lang="nl">Science Fiction</Name>
+          <Reference>urn:tva:metadata:cs:2004:0754</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.56">
+          <Name xml:lang="nl">Toneelstuk</Name>
+          <Reference>urn:tva:metadata:cs:2004:0756</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.57">
+          <Name xml:lang="nl">Western</Name>
+          <Reference>urn:tva:metadata:cs:2004:0757</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.58">
+          <Name xml:lang="nl">(sub)culturen</Name>
+          <Reference>urn:tva:metadata:cs:2004:0758</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.59">
+          <Name xml:lang="nl">Familie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0759</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.60">
+          <Name xml:lang="nl">Levensbeschouwing</Name>
+          <Reference>urn:tva:metadata:cs:2004:0760</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.61">
+          <Name xml:lang="nl">Levenswijze</Name>
+          <Reference>urn:tva:metadata:cs:2004:0761</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.62">
+          <Name xml:lang="nl">Liefde</Name>
+          <Reference>urn:tva:metadata:cs:2004:0762</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.63">
+          <Name xml:lang="nl">Loopbaan</Name>
+          <Reference>urn:tva:metadata:cs:2004:0763</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.64">
+          <Name xml:lang="nl">Vriendschap</Name>
+          <Reference>urn:tva:metadata:cs:2004:0764</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.66">
+          <Name xml:lang="nl">Debat</Name>
+          <Reference>urn:tva:metadata:cs:2004:0766</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.67">
+          <Name xml:lang="nl">Interviewprogramma/hosted show</Name>
+          <Reference>urn:tva:metadata:cs:2004:0767</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.68">
+          <Name xml:lang="nl">Evenement/registratie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0768</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.69">
+          <Name xml:lang="nl">Maatschappelijk Debat</Name>
+          <Reference>urn:tva:metadata:cs:2004:0769</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.70">
+          <Name xml:lang="nl">Onderzoeksjournalistiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0770</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.71">
+          <Name xml:lang="nl">Reportage</Name>
+          <Reference>urn:tva:metadata:cs:2004:0771</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.72">
+          <Name xml:lang="nl">Alternative</Name>
+          <Reference>urn:tva:metadata:cs:2004:0772</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.73">
+          <Name xml:lang="nl">Concertregistratie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0773</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.74">
+          <Name xml:lang="nl">Dance</Name>
+          <Reference>urn:tva:metadata:cs:2004:0774</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.75">
+          <Name xml:lang="nl">Jazz</Name>
+          <Reference>urn:tva:metadata:cs:2004:0775</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.76">
+          <Name xml:lang="nl">Nederlandstalig</Name>
+          <Reference>urn:tva:metadata:cs:2004:0776</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.77">
+          <Name xml:lang="nl">Rock</Name>
+          <Reference>urn:tva:metadata:cs:2004:0777</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.78">
+          <Name xml:lang="nl">Soul</Name>
+          <Reference>urn:tva:metadata:cs:2004:0778</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.79">
+          <Name xml:lang="nl">Urban</Name>
+          <Reference>urn:tva:metadata:cs:2004:0779</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.80">
+          <Name xml:lang="nl">Wereldmuziek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0780</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.81">
+          <Name xml:lang="nl">Detective</Name>
+          <Reference>urn:tva:metadata:cs:2004:0781</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.82">
+          <Name xml:lang="nl">Analyse</Name>
+          <Reference>urn:tva:metadata:cs:2004:0782</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
       </Term>
