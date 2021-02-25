@@ -372,8 +372,7 @@
         </Term>
       </Term>
 
-      <!-- TODO: What is the hunman interest main cat id? -->
-      <Term termID="3.0.1.6">
+      <Term termID="3.0.1.9">
         <Name xml:lang="nl">Human Interest</Name>
         <Reference>urn:mis:genre:HUMANINTEREST</Reference>
         <Reference>urn:bindinc:genre:HumanInterest</Reference>
@@ -420,7 +419,7 @@
         </Term>
 
         <!-- Overig (leeg in POMS) -->
-        <Term termID="3.0.1.9">
+        <Term termID="3.0.1.9.1">
           <Reference>urn:tva:metadata:cs:2004:0517</Reference>
           <Name xml:lang="nl">Leeg</Name>
           <ValidityFlag>1</ValidityFlag>
@@ -450,11 +449,6 @@
           <Name xml:lang="nl">Wonen/Tuin</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.7.65">
-          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
-          <Name xml:lang="nl">College</Name>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
       </Term>
       <Term termID="3.0.1.6">
         <Name xml:lang="nl">Amusement</Name>
@@ -462,44 +456,24 @@
         <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
         <Reference>urn:bindinc:genre:Amusement</Reference>
         <ValidityFlag>1</ValidityFlag>
-        <Term termID="3.0.1.6.68">
+        <Term termID="3.0.1.1.68">
           <Name xml:lang="nl">Evenement/registratie</Name>
-          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <Reference>urn:tva:metadata:cs:2004:0641</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.40">
           <Name xml:lang="nl">Hoorspel</Name>
-          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <Reference>urn:tva:metadata:cs:2004:0642</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.6.9">
+        <Term termID="3.0.1.6.5">
           <Name xml:lang="nl">Muziek</Name>
-          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <Reference>urn:tva:metadata:cs:2004:0605</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.41">
           <Name xml:lang="nl">Reality TV</Name>
-          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.6.42">
-          <Name xml:lang="nl">Human Interest</Name>
-          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.8.5">
-          <Name xml:lang="nl">Muziek</Name>
-          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.8.52">
-          <Name xml:lang="nl">Politiek</Name>
-          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.8.4">
-          <Name xml:lang="nl">Sport</Name>
-          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <Reference>urn:tva:metadata:cs:2004:0643</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.19">
@@ -531,7 +505,7 @@
           <Reference>urn:tva:metadata:cs:2004:0719</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.7.68">
+        <Term termID="3.0.1.7.65">
           <Name xml:lang="nl">College</Name>
           <Reference>urn:tva:metadata:cs:2004:0765</Reference>
           <ValidityFlag>1</ValidityFlag>
@@ -541,27 +515,7 @@
           <Reference>urn:tva:metadata:cs:2004:0765</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.7.69">
-          <Name xml:lang="nl">Maatschappelijk Debat</Name>
-          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.7.70">
-          <Name xml:lang="nl">Onderzoeksjournalistiek</Name>
-          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.7.52">
-          <Name xml:lang="nl">Politiek</Name>
-          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.7.71">
-          <Name xml:lang="nl">Reportage</Name>
-          <Reference>urn:tva:metadata:cs:2004:0765</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.7.65">
+        <Term termID="3.0.1.7.68">
           <Name xml:lang="nl">Evenement/registratie</Name>
           <Reference>urn:tva:metadata:cs:2004:0765</Reference>
           <ValidityFlag>1</ValidityFlag>
@@ -756,21 +710,6 @@
           <Reference>urn:tva:metadata:cs:2004:0764</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.7.66">
-          <Name xml:lang="nl">Debat</Name>
-          <Reference>urn:tva:metadata:cs:2004:0766</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.7.67">
-          <Name xml:lang="nl">Interviewprogramma/hosted show</Name>
-          <Reference>urn:tva:metadata:cs:2004:0767</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
-        <Term termID="3.0.1.7.68">
-          <Name xml:lang="nl">Evenement/registratie</Name>
-          <Reference>urn:tva:metadata:cs:2004:0768</Reference>
-          <ValidityFlag>1</ValidityFlag>
-        </Term>
         <Term termID="3.0.1.7.69">
           <Name xml:lang="nl">Maatschappelijk Debat</Name>
           <Reference>urn:tva:metadata:cs:2004:0769</Reference>
@@ -847,6 +786,21 @@
         <Reference>urn:tva:metadata:cs:2004:08</Reference>
         <Reference>urn:mis:genre:DOCUMENTARY</Reference>
         <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.8.5">
+          <Name xml:lang="nl">Muziek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.42">
+          <Name xml:lang="nl">Human Interest</Name>
+          <Reference>urn:tva:metadata:cs:2004:0840</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.4">
+          <Name xml:lang="nl">Sport</Name>
+          <Reference>urn:tva:metadata:cs:2004:0245</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
         <Term termID="3.0.1.8.22">
           <Name xml:lang="nl">Gezondheid/opvoeding</Name>
           <Reference>urn:tva:metadata:cs:2004:0822</Reference>
@@ -880,6 +834,12 @@
           <Name xml:lang="nl">Wetenschap</Name>
           <Reference>urn:tva:metadata:cs:2004:0827</Reference>
           <Reference>urn:mis:genre:SCIENCE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.52">
+          <Name xml:lang="nl">Politiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0844</Reference>
+          <Reference>urn:mis:genre:DOCUMENTARY</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.8.29">
