@@ -64,7 +64,7 @@ public class ClassificationServiceImplTest {
     @Test
     public void testGetValues() {
         assertThat(classificationService.valuesOf("3.0.1").iterator().next().getTermId()).isEqualTo("3.0.1.1");
-        assertThat(classificationService.valuesOf("3.0.1").size()).isEqualTo(54);
+        assertThat(classificationService.valuesOf("3.0.1").size()).isEqualTo(149);
        /* for (Term id : ClassificationService.valuesOf("3.0.1")) {
             System.out.println(id.getTermId());
         }*/
