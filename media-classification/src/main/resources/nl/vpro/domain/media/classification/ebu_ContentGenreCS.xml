@@ -306,8 +306,8 @@
         <Name xml:lang="nl">Muziek</Name>
         <Reference>urn:tva:metadata:cs:2004:05</Reference>
         <Reference>urn:mis:genre:MUSIC</Reference>
-        <Reference>urn:mis:bindinc:Muziek</Reference>
-        <Reference>urn:mis:bindinc:Musica</Reference>
+        <Reference>urn:bindinc:genre:Musica</Reference>
+        <Reference>urn:bindinc:genre:Musique</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.5.16">
           <Name xml:lang="nl">Klassiek</Name>
