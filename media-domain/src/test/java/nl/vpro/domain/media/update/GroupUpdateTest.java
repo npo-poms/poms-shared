@@ -13,8 +13,7 @@ import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.domain.media.Group;
-import nl.vpro.domain.media.GroupType;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -22,6 +21,16 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GroupUpdateTest extends MediaUpdateTest {
+
+    @Test
+    public void create() {
+        GroupUpdate groupUpdate = (GroupUpdate) MediaUpdate.create(MediaBuilder
+            .group()
+            .mainTitle("foo bar")
+            .build());
+        assertThat(groupUpdate.getMainTitle()).isEqualTo("foo bar");
+
+    }
 
 
     @Test
