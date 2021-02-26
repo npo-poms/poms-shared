@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.*;
 
@@ -48,6 +50,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 
 })
 @JsonTypeName("program")
+@Slf4j
 public class Program extends MediaObject {
     private static final long serialVersionUID = 6174884273805175998L;
 
@@ -87,7 +90,7 @@ public class Program extends MediaObject {
     @SortNatural
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
-    // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
+    // TODO: These filters are horrible
     @FilterJoinTables({
         @FilterJoinTable(name = PUBLICATION_FILTER, condition =
             "((mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now())" +
@@ -109,7 +112,7 @@ public class Program extends MediaObject {
         org.hibernate.annotations.CascadeType.ALL
     })
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
+    // TODO: These filters are horrible
     @Filters({
         @Filter(name = PUBLICATION_FILTER, condition =
             "((segments0_1_.publishstart is null or segments0_1_.publishstart < now())" +
@@ -180,7 +183,10 @@ public class Program extends MediaObject {
             if (scheduleEvents == null) {
                 scheduleEvents = new TreeSet<>();
             }
-            scheduleEvents.add(scheduleEvent);
+            boolean wasNew =  scheduleEvents.add(scheduleEvent);
+            if (! wasNew) {
+                log.debug("Didn't add {}", scheduleEvent);
+            }
             invalidateSortDate();
         }
         return this;
