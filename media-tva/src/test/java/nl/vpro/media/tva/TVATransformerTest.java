@@ -464,13 +464,7 @@ public class TVATransformerTest {
         Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
 
 
-        Transformer preTransformer = getTransformer("/nl/vpro/media/tva/repairBindincXml.xslt");
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        Result result = new StreamResult(out);
-        preTransformer.transform(new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("bindinc/20201208185718000dayTV0120201209.xml")), result);
-
-
-        String xml = transform(new ByteArrayInputStream(out.toByteArray()), (transformer) -> {
+        String xml = transform(Thread.currentThread().getContextClassLoader().getResourceAsStream("bindinc/20201208185718000dayTV0120201209.xml"), (transformer) -> {
                 transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
                 transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
                 transformer.setParameter(XSL_PARAM_CHANNELMAPPING, channelMapping);
