@@ -34,6 +34,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.nep.domain.*;
 import nl.vpro.nep.service.NEPItemizeService;
+import nl.vpro.nep.service.exception.ItemizerStatusException;
 import nl.vpro.nep.service.exception.NEPException;
 
 import static nl.vpro.poms.shared.Headers.NPO_DISPATCHED_TO;
@@ -238,11 +239,19 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 IOUtils.copy(execute.getEntity().getContent(), outputStream);
                 return Jackson2Mapper.getLenientInstance().readValue(outputStream.toByteArray(), ItemizerStatusResponse.class);
+            }
+            if (execute.getStatusLine().getStatusCode() == 404) {
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                IOUtils.copy(execute.getEntity().getContent(), outputStream);
+                FailureResponse failureResponse = Jackson2Mapper.getLenientInstance().readValue(outputStream.toByteArray(), FailureResponse.class);
+                throw new ItemizerStatusException(404, failureResponse);
             } else {
                 StringWriter result = new StringWriter();
                 IOUtils.copy(execute.getEntity().getContent(), result, Charset.defaultCharset());
-                throw new NEPException(result.toString());
+                throw new ItemizerStatusException(execute.getStatusLine().getStatusCode(), result.toString());
             }
+        } catch (NEPException nepException) {
+            throw nepException;
         } catch (Exception e) {
             throw new NEPException(e, e.getMessage());
         }

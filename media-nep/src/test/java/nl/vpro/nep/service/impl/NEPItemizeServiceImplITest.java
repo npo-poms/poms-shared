@@ -15,14 +15,17 @@ import nl.vpro.nep.domain.ItemizerStatusResponse;
 import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.service.NEPDownloadService;
+import nl.vpro.nep.service.exception.ItemizerStatusException;
 import nl.vpro.nep.service.exception.NEPException;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assumptions.assumeThat;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.6
  */
+@SuppressWarnings("ThrowableNotThrown")
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Timeout(value = 10, unit = TimeUnit.MINUTES)
@@ -129,10 +132,15 @@ public class NEPItemizeServiceImplITest {
 
     @Test
     public void getJobsStatus404() {
-        NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
+        ItemizerStatusException foobar = catchThrowableOfType(() -> {
+            NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
 
-        ItemizerStatusResponse jobs = itemizer.getLiveItemizerJobStatus("foobar");
-        log.info("{}", jobs);
+            ItemizerStatusResponse jobs = itemizer.getLiveItemizerJobStatus("foobar");
+        }, ItemizerStatusException.class);
+        assertThat(foobar).isInstanceOf(ItemizerStatusException.class);
+        assertThat(foobar.getStatusCode()).isEqualTo(404);
+        assertThat(foobar.getResponse()).isNotNull();
+        log.info("{}", foobar.toString());
     }
 
 }

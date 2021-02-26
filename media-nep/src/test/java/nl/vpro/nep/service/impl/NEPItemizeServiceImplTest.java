@@ -6,16 +6,18 @@ import ru.lanwen.wiremock.ext.WiremockUriResolver;
 
 import java.util.Properties;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 
 import nl.vpro.nep.domain.ItemizerStatus;
 import nl.vpro.nep.domain.ItemizerStatusResponse;
+import nl.vpro.nep.service.exception.ItemizerStatusException;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowableOfType;
 
 /**
  * @author Michiel Meeuwissen
@@ -38,14 +40,18 @@ public class NEPItemizeServiceImplTest {
         server.stubFor(
             get(urlEqualTo("/api/itemizer/jobs/foobar/status"))
                 .willReturn(
-                    // TODO, This doesn't seem to correspond to swagger doc.
-                    ok().withBody("{\"success\":false,\"status\":\"error\",\"errors\":\"Job not found\"}")
+                    status(404).withBody("{\"success\":false,\"status\":\"error\",\"errors\":\"No job found for token [foobar] and provider [npo]\"}")
                 )
         );
-        ItemizerStatusResponse job = itemizer.getLiveItemizerJobStatus("foobar");
-
-        assertThat(job).isEqualTo(ItemizerStatusResponse.builder().build());
-        log.info("{}", job);
+        ItemizerStatusException statusException = catchThrowableOfType(() -> {
+                ItemizerStatusResponse job = itemizer.getLiveItemizerJobStatus("foobar");
+            }, ItemizerStatusException.class);
+        assertThat(statusException).isInstanceOf(ItemizerStatusException.class);
+        assertThat(statusException.getStatusCode()).isEqualTo(404);
+        assertThat(statusException.getResponse()).isNotNull();
+        assertThat(statusException.getResponse().getStatus()).isEqualTo("error");
+        assertThat(statusException.getResponse().getErrors()).isEqualTo("No job found for token [foobar] and provider [npo]");
+        log.info("{}", statusException.toString());
     }
 
     @Test
