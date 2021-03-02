@@ -54,6 +54,7 @@
       <Term termID="3.0.1.1">
         <Name xml:lang="nl">Jeugd</Name>
         <Reference>urn:tva:metadata:cs:2004:01</Reference>
+        <Reference>urn:tva:metadata:cs:2004:0199</Reference>
         <Reference>urn:mis:genre:YOUTH</Reference>
         <Reference>urn:bindinc:genre:Jeugd</Reference>
         <ValidityFlag>1</ValidityFlag>
@@ -435,6 +436,7 @@
       <Term termID="3.0.1.7">
         <Name xml:lang="nl">Informatief</Name>
         <Reference>urn:tva:metadata:cs:2004:07</Reference>
+        <Reference>urn:tva:metadata:cs:2004:0799</Reference>
         <Reference>urn:mis:genre:INFORMATIVE</Reference>
         <Reference>urn:bindinc:genre:Informatief</Reference>
         <Reference>urn:bindinc:genre:Información</Reference>
@@ -534,9 +536,14 @@
           <Reference>urn:tva:metadata:cs:2004:0767</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
+        <Term termID="3.0.1.7.68">
+          <Name xml:lang="nl">Maatschappelijk Debat</Name>
+          <Reference>urn:tva:metadata:cs:2004:0768</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
         <Term termID="3.0.1.7.69">
           <Name xml:lang="nl">Onderzoeksjournalistiek</Name>
-          <Reference>urn:tva:metadata:cs:2004:0767</Reference>
+          <Reference>urn:tva:metadata:cs:2004:0769</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.70">
@@ -548,6 +555,7 @@
       <Term termID="3.0.1.8">
         <Name xml:lang="nl">Documentaire</Name>
         <Reference>urn:tva:metadata:cs:2004:08</Reference>
+        <Reference>urn:tva:metadata:cs:2004:0899</Reference>
         <Reference>urn:mis:genre:DOCUMENTARY</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.8.4">
@@ -622,6 +630,7 @@
       <Term termID="3.0.1.9">
         <Name xml:lang="nl">Human Interest</Name>
         <ValidityFlag>1</ValidityFlag>
+        <Reference>urn:tva:metadata:cs:2004:40</Reference>
         <Reference>urn:tva:metadata:cs:2004:4099</Reference>
         <Term termID="3.0.1.9.58">
           <Name xml:lang="nl">(sub)culturen</Name>

@@ -66,7 +66,7 @@ public class ClassificationServiceImplTest {
     @Test
     public void testGetValues() {
         assertThat(classificationService.valuesOf("3.0.1").iterator().next().getTermId()).isEqualTo("3.0.1.1");
-        assertThat(classificationService.valuesOf("3.0.1").size()).isEqualTo(114); // The xml of MSE-5051 has 116 lines minus header, ,that's 115, but also there seems to be a new reference to 0699
+        assertThat(classificationService.valuesOf("3.0.1").size()).isEqualTo(115); // The xml of MSE-5051 has 116 lines minus header, that's 115
        /* for (Term id : ClassificationService.valuesOf("3.0.1")) {
             System.out.println(id.getTermId());
         }*/
@@ -139,7 +139,8 @@ public class ClassificationServiceImplTest {
 
     }
 
-    //@Test
+    @Test
+    @Disabled
     public void output() {
 
         JAXB.marshal(classificationService.getClassificationScheme(), System.out);
