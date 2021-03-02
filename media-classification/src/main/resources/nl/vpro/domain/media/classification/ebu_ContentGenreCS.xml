@@ -385,6 +385,7 @@
       <Term termID="3.0.1.6">
         <Name xml:lang="nl">Amusement</Name>
         <Reference>urn:tva:metadata:cs:2004:06</Reference>
+        <Reference>urn:tva:metadata:cs:2004:0699</Reference>
         <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
         <Reference>urn:bindinc:genre:Amusement</Reference>
         <ValidityFlag>1</ValidityFlag>
@@ -394,7 +395,7 @@
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.9">
-          <Name xml:lang="nl">Komisch</Name>
+          <Name xml:lang="nl">Komisch/Satire</Name>
           <Reference>urn:tva:metadata:cs:2004:0609</Reference>
           <Reference>urn:mis:genre:COMEDY</Reference>
           <ValidityFlag>1</ValidityFlag>

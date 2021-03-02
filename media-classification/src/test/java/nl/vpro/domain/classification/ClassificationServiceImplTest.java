@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.classification;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 
 import javax.xml.bind.JAXB;
@@ -21,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
-@SuppressWarnings("ResultOfMethodCallIgnored")
+@Slf4j
 public class ClassificationServiceImplTest {
 
     private final ClassificationService classificationService;
@@ -30,7 +32,7 @@ public class ClassificationServiceImplTest {
         //classificationService = new ClassificationServiceImpl(new UrlResource("http://localhost:8060/schema/classification"));
         //classificationService = new ClassificationServiceImpl(new UrlResource("http://publish-dev.poms.omroep.nl/schema/classification"));
         classificationService = ClassificationServiceImpl.fromClassPath("nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
-        System.out.println(classificationService);
+        log.info("{}", classificationService);
     }
 
 
@@ -64,7 +66,7 @@ public class ClassificationServiceImplTest {
     @Test
     public void testGetValues() {
         assertThat(classificationService.valuesOf("3.0.1").iterator().next().getTermId()).isEqualTo("3.0.1.1");
-        assertThat(classificationService.valuesOf("3.0.1").size()).isEqualTo(54);
+        assertThat(classificationService.valuesOf("3.0.1").size()).isEqualTo(114); // The xml of MSE-5051 has 116 lines minus header, ,that's 115, but also there seems to be a new reference to 0699
        /* for (Term id : ClassificationService.valuesOf("3.0.1")) {
             System.out.println(id.getTermId());
         }*/
@@ -109,7 +111,7 @@ public class ClassificationServiceImplTest {
         terms.close();
         File xml = new File(dir, "classifications-1.xml");
         file.renameTo(xml);
-        System.out.println("Created " + xml + " " + xml.length());
+        log.info("Created " + xml + " " + xml.length());
 
         for (int i = 0 ; i < 300 ; i++) {
             System.out.print('.');
@@ -130,7 +132,7 @@ public class ClassificationServiceImplTest {
         ClassificationService classificationService = ClassificationServiceImpl.fromFiles(
             new File("/Users/michiel/npo/pages/data/terms")
         );
-        System.out.println(classificationService.values());
+        log.info("{}", classificationService.values());
 
         assertThat(classificationService.values()).hasSize(28);
 
