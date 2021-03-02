@@ -277,7 +277,6 @@ public class TVATransformerTest {
     }
 
     @Test
-
     public void MSE_3144_1() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/MSE-3144/NED320160221P.xml");
         //System.out.println(xml);
@@ -521,6 +520,16 @@ public class TVATransformerTest {
 
     }
 
+    @Test
+    public void MSE_5051_newgenres() throws ParserConfigurationException, TransformerException, SAXException, IOException {
+        String xml = transform("pd/pd/NED320201208P.xml");
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+        for (Program p : table.getProgramTable()) {
+            // lets check whether all that looks believable
+            log.info("{}: {}", p.getMainTitle(), p.getGenres().stream().map(g -> g.getTermId() + ":" + g.getDisplayName()).collect(Collectors.joining(", ")));
+        }
+
+    }
 
 
     TransformerFactoryImpl FACTORY = new net.sf.saxon.TransformerFactoryImpl();
