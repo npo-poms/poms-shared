@@ -321,14 +321,14 @@
         <Reference>urn:bindinc:genre:Musique</Reference>
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.5.16">
-          <Name xml:lang="nl">Muziek klassiek</Name>
+          <Name xml:lang="nl">Klassiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0516</Reference>
           <Reference>urn:mis:genre:CLASSIC</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.17">
           <Reference>urn:tva:metadata:cs:2004:0517</Reference>
-          <Name xml:lang="nl">Muziek populair</Name>
+          <Name xml:lang="nl">Pop</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.71">
@@ -396,8 +396,10 @@
         </Term>
         <Term termID="3.0.1.6.9">
           <Name xml:lang="nl">Komisch/Satire</Name>
+          <Name xml:lang="en">Comedy</Name>
           <Reference>urn:tva:metadata:cs:2004:0609</Reference>
           <Reference>urn:mis:genre:COMEDY</Reference>
+          <Reference>urn:ebu:3.5.7</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.19">
@@ -407,12 +409,16 @@
         </Term>
         <Term termID="3.0.1.6.20">
           <Name xml:lang="nl">Cabaret</Name>
+          <Name xml:lang="en">Cabaret</Name>
           <Reference>urn:tva:metadata:cs:2004:0620</Reference>
+          <Reference>urn:ebu:3.5.3.1</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.41">
           <Name xml:lang="nl">Evenement/registratie</Name>
+          <Name xml:lang="en">Event (coverage of)</Name>
           <Reference>urn:tva:metadata:cs:2004:0641</Reference>
+          <Reference>urn:ebu:3.1.9</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.42">
