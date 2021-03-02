@@ -524,7 +524,11 @@ public class TVATransformerTest {
     public void MSE_5051_newgenres() throws ParserConfigurationException, TransformerException, SAXException, IOException {
         String xml = transform("pd/pd/NED320201208P.xml");
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
-        log.info("{}", xml);
+        for (Program p : table.getProgramTable()) {
+            // lets check whether all that looks believable
+            log.info("{}: {}", p.getMainTitle(), p.getGenres().stream().map(g -> g.getTermId() + ":" + g.getDisplayName()).collect(Collectors.joining(", ")));
+        }
+
     }
 
 
