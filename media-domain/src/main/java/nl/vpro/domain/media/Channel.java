@@ -299,6 +299,19 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+    @XmlEnumValue("DRRD")
+    DRRD {
+        @Override
+        public String toString() {
+            return "Radio Drenthe";
+        }
+
+        @Override
+        public String pdId() {
+            return "RDRE";
+        }
+    },
+
     @XmlEnumValue("OOST")
     OOST {
         @Override
