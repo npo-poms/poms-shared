@@ -63,7 +63,7 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
                         return new StringValue(net.getId());
                     }
                 }
-                log.warn("No such net {}",  value);
+                log.warn("No such net {} (now returning empty string, which indicates that it can be be ignored)",  value);
                 return new StringValue("");
             }
         };
