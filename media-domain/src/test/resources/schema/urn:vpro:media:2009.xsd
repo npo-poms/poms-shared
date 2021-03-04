@@ -831,6 +831,7 @@
       <xs:enumeration value="OXMO"/>
       <xs:enumeration value="REGR"/>
       <xs:enumeration value="RFRY"/>
+      <xs:enumeration value="DRRD"/>
       <xs:enumeration value="RNOO"/>
       <xs:enumeration value="ROST"/>
       <xs:enumeration value="RGEL"/>
@@ -1148,4 +1149,3 @@
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
-
