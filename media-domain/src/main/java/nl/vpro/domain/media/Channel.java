@@ -299,18 +299,6 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
-    @XmlEnumValue("DRRD")
-    DRRD {
-        @Override
-        public String toString() {
-            return "Radio Drenthe";
-        }
-
-        @Override
-        public String pdId() {
-            return "RDRE";
-        }
-    },
 
     @XmlEnumValue("OOST")
     OOST {
@@ -1940,6 +1928,19 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String pdId() {
             return "RFRY";
+        }
+    },
+
+    @XmlEnumValue("DRRD")
+    DRRD {
+        @Override
+        public String toString() {
+            return "Radio Drenthe";
+        }
+
+        @Override
+        public String pdId() {
+            return "DRRD";
         }
     },
 

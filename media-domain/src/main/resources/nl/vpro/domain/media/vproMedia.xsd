@@ -2840,6 +2840,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="DRRD">
+        <xs:annotation>
+          <xs:documentation>
+            Radio Drenthe.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="RNOO">
         <xs:annotation>
           <xs:documentation>
