@@ -430,7 +430,7 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
     @XmlEnumValue("TVDR")
-    TVDR {
+    TVDR(VIDEO, "https://www.rtvdrenthe.nl/tv", 1995) {
         @Override
         public String toString() {
             return "TV Drenthe";
@@ -1931,8 +1931,11 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+    /**
+     * @since 5.25
+     */
     @XmlEnumValue("DRRD")
-    DRRD {
+    DRRD(AVType.AUDIO, "https://www.rtvdrenthe.nl/radio", 1989) {
         @Override
         public String toString() {
             return "Radio Drenthe";
