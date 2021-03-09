@@ -543,7 +543,7 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().id(100L).lean().withScheduleEvents().build();
         String actual = toXml(program);
 
-        assertThat(actual).isXmlEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        assertThatXml(actual).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00.100+01:00\"\n" +
             "    urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <credits/>\n" +
@@ -723,7 +723,7 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(schedule);
 
-        assertThat(actual).isXmlEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        assertThatXml(actual).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<schedule channel=\"NED1\" start=\"1970-01-01T01:00:00+01:00\"\n" +
             "    stop=\"1970-01-11T01:00:00.800+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
@@ -773,7 +773,7 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(schedule);
 
-        assertThat(actual).isXmlEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        assertThatXml(actual).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<schedule channel=\"NED3\" start=\"1970-01-01T01:00:00+01:00\"\n" +
             "    stop=\"1970-01-09T01:00:00.350+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
@@ -811,7 +811,7 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().id(100L).lean().withScheduleEvents().build();
         schedule.addScheduleEventsFromMedia(program);
 
-        assertThat(toXml(schedule)).isXmlEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        assertThatXml(toXml(schedule)).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<schedule net=\"ZAPP\" start=\"1970-01-01T01:00:00+01:00\"\n" +
             "    stop=\"1970-01-09T01:00:00.350+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
@@ -969,7 +969,7 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(program);
 
-        assertThat(actual).isXmlEqualTo(segment.toString());
+        assertThatXml(actual).isSimilarTo(segment.toString());
 
         intentions.setParent(null);
         Intentions intentionsWithoutParent = intentions;
@@ -995,7 +995,7 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(program);
 
-        assertThat(actual).isXmlEqualTo(segment.toString());
+        assertThatXml(actual).isSimilarTo(segment.toString());
 
         GeoLocations geoLocations = program.getGeoLocations().first();
         geoLocations.setParent(null);
@@ -1101,7 +1101,7 @@ public class MediaObjectXmlSchemaTest {
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         JAXB.marshal(update, out);
-        log.info(new String(out.toByteArray()));
+        log.info(out.toString());
 
         Source streamSource = new StreamSource(new ByteArrayInputStream(out.toByteArray()));
         xsdValidator.validate(streamSource);
@@ -1119,7 +1119,7 @@ public class MediaObjectXmlSchemaTest {
         Program program = MediaTestDataBuilder.program().withEverything().build();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         JAXB.marshal(program, out);
-        log.info(new String(out.toByteArray()));
+        log.info(out.toString());
 
         Source streamSource = new StreamSource(new ByteArrayInputStream(out.toByteArray()));
         xsdValidator.validate(streamSource);
