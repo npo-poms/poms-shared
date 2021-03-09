@@ -4,9 +4,10 @@
  */
 package nl.vpro.domain.media;
 
-import org.junit.experimental.theories.DataPoint;
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
 
-import nl.vpro.test.theory.ObjectTest;
+import nl.vpro.test.jqwik.BasicObjectTest;
 
 /**
  * @author Roelof Jan Koekoek
@@ -14,20 +15,26 @@ import nl.vpro.test.theory.ObjectTest;
  */
 public class DescendantRefTest
     // extends ComparableTest<DescendantRef> // TODO DescendantRef doesn't properly implement Comparable
-    extends ObjectTest<DescendantRef> {
+    implements BasicObjectTest<DescendantRef> {
 
-    @DataPoint
     public static DescendantRef nullArgument = null;
 
-    @DataPoint
     public static DescendantRef withEmptyFields = new DescendantRef();
 
-    @DataPoint
     public static DescendantRef midOnly = new DescendantRef("MID", null, MediaType.CLIP);
 
-    @DataPoint
     public static DescendantRef urnOnly = new DescendantRef(null, "URN", MediaType.CLIP);
 
-    @DataPoint
     public static DescendantRef withBothMidAndUrn = new DescendantRef("MID", "URN", MediaType.CLIP);
+
+    @Override
+    public Arbitrary<? extends DescendantRef> datapoints() {
+        return Arbitraries.of(
+            nullArgument,
+            withEmptyFields,
+            midOnly,
+            urnOnly,
+            withBothMidAndUrn
+        );
+    }
 }

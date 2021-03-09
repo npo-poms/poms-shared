@@ -1,52 +1,32 @@
 package nl.vpro.domain.media;
 
-import java.io.IOException;
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
 
 import org.junit.jupiter.api.Test;
-import org.junit.experimental.theories.DataPoint;
-import org.xml.sax.SAXException;
 
+import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import nl.vpro.test.theory.ComparableTest;
 
 import static nl.vpro.domain.media.MediaType.CLIP;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemberRefTheoryTest extends ComparableTest<MemberRef> {
+public class MemberRefTheoryTest implements ComparableTest<MemberRef> {
 
-    private static Program member = new Program(1L);
+    private static final  Program member = new Program(1L);
 
-    private static Group owner = new Group(2L);
+    private static final Group owner = new Group(2L);
+    MemberRef nullArgument = null;
+    MemberRef nullFields = new MemberRef();
+    MemberRef midReference = memberRefWithMid();
+    MemberRef urnReference = memberRefWithUrn();
+    MemberRef cridReference = memberRefWithCrid();
+    MemberRef duplicateA = new MemberRef(member, owner, 1, null);
+    MemberRef duplicateB = new MemberRef(member, owner, 1, null);
+    MemberRef duplicateWithHigherPosition = new MemberRef(member, owner, 2, null);
+    MemberRef duplicateWithId10 = new MemberRef(10L, member, owner, 1, null);
+    MemberRef duplicateWithId20 = new MemberRef(20L, member, owner, 1, null);
 
-    @DataPoint
-    public static MemberRef nullArgument = null;
-
-    @DataPoint
-    public static MemberRef nullFields = new MemberRef();
-
-    @DataPoint
-    public static MemberRef midReference = memberRefWithMid();
-
-    @DataPoint
-    public static MemberRef urnReference = memberRefWithUrn();
-
-    @DataPoint
-    public static MemberRef cridReference = memberRefWithCrid();
-
-    @DataPoint
-    public static MemberRef duplicateA = new MemberRef(member, owner, 1, null);
-
-    @DataPoint
-    public static MemberRef duplicateB = new MemberRef(member, owner, 1, null);
-
-    @DataPoint
-    public static MemberRef duplicateWithHigherPosition = new MemberRef(member, owner, 2, null);
-
-    @DataPoint
-    public static MemberRef duplicateWithId10 = new MemberRef(10L, member, owner, 1, null);
-
-    @DataPoint
-    public static MemberRef duplicateWithId20 = new MemberRef(20L, member, owner, 1, null);
 
     @Test
     public void testEqualsOnDuplicates() {
@@ -105,5 +85,22 @@ public class MemberRefTheoryTest extends ComparableTest<MemberRef> {
         memberRef.setMember(member);
         memberRef.setCridRef("crid://somedomain");
         return memberRef;
+    }
+
+    @Override
+    public Arbitrary<? extends MemberRef> datapoints() {
+
+        return Arbitraries.of(
+            nullArgument,
+            nullFields,
+            midReference,
+            urnReference,
+            cridReference,
+            duplicateA,
+            duplicateB,
+            duplicateWithHigherPosition,
+            duplicateWithId10,
+            duplicateWithId20
+        );
     }
 }
