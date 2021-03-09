@@ -65,7 +65,7 @@ public class PageUpdateBuilder {
         if (collection == null || collection.isEmpty()) {
             return (UT[]) Array.newInstance(clazz, 0);
         } else {
-            return collection.stream().map(mapper).toArray(i -> (UT[]) Array.newInstance(clazz, i));
+            return collection.stream().filter(Objects::nonNull).map(mapper).toArray(i -> (UT[]) Array.newInstance(clazz, i));
         }
     }
 

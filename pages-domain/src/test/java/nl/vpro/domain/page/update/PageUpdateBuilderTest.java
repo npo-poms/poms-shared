@@ -11,12 +11,11 @@ import java.time.temporal.ChronoUnit;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.page.Image;
-import nl.vpro.domain.page.PageType;
+import nl.vpro.domain.page.*;
+import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -188,18 +187,23 @@ public class PageUpdateBuilderTest {
         assertThat(result.getPublishStart()).isEqualTo(TEST_INSTANT);
         assertThat(result.getCreationDate()).isEqualTo(TEST_INSTANT.minus(1, ChronoUnit.DAYS));
         assertThat(result.getLastPublished()).isEqualTo(TEST_INSTANT.plus(1, ChronoUnit.DAYS));
-
-
     }
 
-
-
     @Test
-    @Disabled("Used for building test data")
     public void testExample() {
-        PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl/article").example().build();
+        PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl/article").example()
+            .build();
         Writer writer = new StringWriter();
         JAXB.marshal(page, writer);
         System.out.println(writer.toString());
+    }
+
+    @Test
+    public void testFromPage() {
+        PageUpdate page = PageUpdateBuilder.page(PageBuilder.article().broadcasters(new Broadcaster("VPRO"), (Broadcaster) null).build()).build();
+        Writer writer = new StringWriter();
+        JAXB.marshal(page, writer);
+        assertThat(page.getBroadcasters()).hasSize(1);
+        //System.out.println(writer.toString());
     }
 }
