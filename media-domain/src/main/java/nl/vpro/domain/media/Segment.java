@@ -156,15 +156,6 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     }
 
     @Override
-    public boolean isPublishable(Instant now) {
-        if(parent != null && !parent.isPublishable(now)) {
-            return false;
-        }
-
-        return super.isPublishable(now);
-    }
-
-    @Override
     public boolean isRevocable(Instant now) {
         if(super.isRevocable(now)) {
             return true;
