@@ -178,8 +178,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             if (exitCode == 0) {
                 return;
             } else {
-                log.warn("SCP command  from " + url + " failed. Will try again in {}", exitCode, waitBetweenRetries);
-
+                log.warn("SCP command  from " + url + " failed with exitcode {}. Will try again in {}", exitCode, waitBetweenRetries);
             }
         } while (tryNumber++ < maxDownloadRetries);
 
