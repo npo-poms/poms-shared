@@ -3,7 +3,7 @@ package nl.vpro.domain.media;
 import java.time.Instant;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static nl.vpro.domain.media.MediaBuilder.program;
 import static nl.vpro.domain.media.MediaBuilder.segment;
