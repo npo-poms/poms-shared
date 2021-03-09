@@ -4,35 +4,24 @@
  */
 package nl.vpro.domain.media.support;
 
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
+
 import java.io.StringWriter;
 import java.io.Writer;
 
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
-import org.junit.experimental.theories.DataPoint;
 
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.test.theory.ObjectTest;
+import nl.vpro.test.jqwik.BasicObjectTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ImageTheoriesTest extends ObjectTest<Image> {
+public class ImageTheoriesTest implements BasicObjectTest<Image> {
 
-    @DataPoint
-    public static Image nullArgument = null;
 
-    @DataPoint
-    public static Image emptyFields = new Image();
-
-    @DataPoint
-    public static Image withOwner = new Image(OwnerType.BROADCASTER);
-
-    @DataPoint
-    public static Image withOwnerAndUri = new Image(OwnerType.BROADCASTER, "urn:vpro:image:1234");
-
-    @DataPoint
-    public static Image withOwnerTypeAndUri = new Image(OwnerType.BROADCASTER, ImageType.ICON, "urn:vpro:image:3456");
 
     @Test
     public void testIsHighlightedOnXmlMarshaling() {
@@ -86,5 +75,22 @@ public class ImageTheoriesTest extends ObjectTest<Image> {
         Image image = new Image();
         image.setHighlighted(null);
         assertThat(image.isHighlighted()).isFalse();
+    }
+
+    @Override
+    public Arbitrary<? extends Image> datapoints() {
+        Image nullArgument = null;
+        Image emptyFields = new Image();
+        Image withOwner = new Image(OwnerType.BROADCASTER);
+        Image withOwnerAndUri = new Image(OwnerType.BROADCASTER, "urn:vpro:image:1234");
+
+        Image withOwnerTypeAndUri = new Image(OwnerType.BROADCASTER, ImageType.ICON, "urn:vpro:image:3456");
+        return Arbitraries.of(
+            nullArgument,
+            emptyFields,
+            withOwner,
+            withOwnerAndUri,
+            withOwnerTypeAndUri
+        );
     }
 }
