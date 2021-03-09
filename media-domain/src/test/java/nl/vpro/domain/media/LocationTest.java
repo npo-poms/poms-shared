@@ -4,51 +4,37 @@
  */
 package nl.vpro.domain.media;
 
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
+
 import java.io.StringReader;
 import java.time.Instant;
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.*;
 import javax.validation.groups.Default;
 import javax.xml.bind.JAXB;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.theories.DataPoint;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.jqwik.BasicObjectTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import nl.vpro.test.theory.ObjectTest;
 import nl.vpro.validation.PomsValidatorGroup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LocationTest extends ObjectTest<Location> {
+public class LocationTest implements BasicObjectTest<Location> {
 
-    @DataPoint
-    public static Location nullArgument = null;
 
-    @DataPoint
-    public static Location emptyFields = new Location();
-
-    @DataPoint
-    public static Location withOwner = new Location(OwnerType.BROADCASTER);
-
-    @DataPoint
-    public static Location withUrlAndOwner = new Location("1", OwnerType.BROADCASTER);
-
-    @DataPoint
-    public static Location withOtherUrlAndOwner = new Location("2", OwnerType.BROADCASTER);
 
     private static Validator validator;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
@@ -200,4 +186,16 @@ public class LocationTest extends ObjectTest<Location> {
         System.out.println(Jackson2Mapper.getInstance().writeValueAsString(new Location[] {loc}));
     }
 
+    @Override
+    public Arbitrary<? extends Location> datapoints() {
+        Location emptyFields = new Location();
+        Location withOwner = new Location(OwnerType.BROADCASTER);
+        Location withUrlAndOwner = new Location("1", OwnerType.BROADCASTER);
+        Location withOtherUrlAndOwner = new Location("2", OwnerType.BROADCASTER);
+        return Arbitraries.of(null,
+            emptyFields,
+            withOwner,
+            withUrlAndOwner,
+            withOtherUrlAndOwner);
+    }
 }

@@ -9,14 +9,15 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.codec.binary.Base64;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Program;
 
 import static nl.vpro.media.odi.security.OdiAuthentication.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -24,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @since 2.1
  */
 public class OdiAuthenticationTest {
-    private Program data = MediaTestDataBuilder.program().withMid().build();
+    private final Program data = MediaTestDataBuilder.program().withMid().build();
 
     @Test
     public void testHandleOnMid() {
@@ -47,10 +48,9 @@ public class OdiAuthenticationTest {
     @Test
     public void testWildcardOrigins() {
         OdiClient client = new OdiClient("public", Arrays.asList("*.vpro.nl", "localhost:*"), "", false);
-
-        Assert.assertTrue(client.matchesOrigin("www.vpro.nl"));
-        Assert.assertTrue(client.matchesOrigin("localhost:8080"));
-        Assert.assertFalse(client.matchesOrigin("vpro.nl"));
+        assertThat(client.matchesOrigin("www.vpro.nl")).isTrue();
+        assertThat(client.matchesOrigin("localhost:8080")).isTrue();
+        assertThat(client.matchesOrigin("vpro.nl")).isFalse();
 
     }
 
@@ -108,112 +108,131 @@ public class OdiAuthenticationTest {
         check.handleMedia(data, request);
     }
 
-    @Test(expected = OdiAuthentication.NoAccessException.class)
+    @Test
     public void testHandleOnMidXOriginNotAllowedExplicitly() {
-        String mid = data.getMid();
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setServletPath("/path/media/" + mid);
-        request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
-        request.addHeader("X-NPO-Mid", mid);
-        request.addHeader("X-Origin", "http://www.vpro.nl");
-        request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
+        assertThatThrownBy(() -> {
 
-        OdiAuthentication check = new OdiAuthentication();
-        URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
-        check.setConfigFolder(url.getFile().replaceAll("%20", " "));
-        check.init();
+            String mid = data.getMid();
+            MockHttpServletRequest request = new MockHttpServletRequest();
+            request.setServletPath("/path/media/" + mid);
+            request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
+            request.addHeader("X-NPO-Mid", mid);
+            request.addHeader("X-Origin", "http://www.vpro.nl");
+            request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
 
-        check.handleMedia(data, request);
+            OdiAuthentication check = new OdiAuthentication();
+            URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
+            check.setConfigFolder(url.getFile().replaceAll("%20", " "));
+            check.init();
+
+            check.handleMedia(data, request);
+        }).isInstanceOf(OdiAuthentication.NoAccessException.class);
+
     }
 
-    @Test(expected = OdiAuthentication.NoAccessException.class)
+    @Test
     public void testHandleOnMidXOriginNotAllowed() {
-        String mid = data.getMid();
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setServletPath("/path/media/" + mid);
-        request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
-        request.addHeader("X-NPO-Mid", mid);
-        request.addHeader("X-Origin", "http://rs.test.vpro.nl");
-        request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
+        assertThatThrownBy(() -> {
+            String mid = data.getMid();
+            MockHttpServletRequest request = new MockHttpServletRequest();
+            request.setServletPath("/path/media/" + mid);
+            request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
+            request.addHeader("X-NPO-Mid", mid);
+            request.addHeader("X-Origin", "http://rs.test.vpro.nl");
+            request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
 
-        OdiAuthentication check = new OdiAuthentication();
-        URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
-        check.setConfigFolder(url.getFile().replaceAll("%20", " "));
-        check.init();
+            OdiAuthentication check = new OdiAuthentication();
+            URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
+            check.setConfigFolder(url.getFile().replaceAll("%20", " "));
+            check.init();
 
-        check.handleMedia(data, request);
+            check.handleMedia(data, request);
+        }).isInstanceOf(OdiAuthentication.NoAccessException.class);
     }
 
-    @Test(expected = OdiAuthentication.NoAccessException.class)
+    @Test
     public void testHandleWrongMid() {
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
-        request.addHeader("X-NPO-Mid", "POMS_MISSING");
-        request.addHeader("Origin", "http://www.vpro.nl");
-        request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
+        assertThatThrownBy(() -> {
 
-        OdiAuthentication check = new OdiAuthentication();
-        URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
-        check.setConfigFolder(url.getFile().replaceAll("%20", " "));
-        check.init();
+            MockHttpServletRequest request = new MockHttpServletRequest();
+            request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
+            request.addHeader("X-NPO-Mid", "POMS_MISSING");
+            request.addHeader("Origin", "http://www.vpro.nl");
+            request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
 
-        check.handleMedia(data, request);
+            OdiAuthentication check = new OdiAuthentication();
+            URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
+            check.setConfigFolder(url.getFile().replaceAll("%20", " "));
+            check.init();
+
+            check.handleMedia(data, request);
+        }).isInstanceOf(OdiAuthentication.NoAccessException.class);
     }
 
-    @Test(expected = OdiAuthentication.NoAccessException.class)
+    @Test
     public void testHandleWhenExpiredTimestamp() {
-        String mid = data.getMid();
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setServletPath("/path/media/" + mid);
-        request.addHeader("X-NPO-Date", Util.rfc822(new Date(System.currentTimeMillis() - 11 * 60 * 1000)));
-        request.addHeader("X-NPO-Mid", mid);
-        request.addHeader("Origin", "http://www.vpro.nl");
-        request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
+        assertThatThrownBy(() -> {
 
-        OdiAuthentication check = new OdiAuthentication();
-        check.setExpiresInMinutes(10);
-        URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
-        check.setConfigFolder(url.getFile().replaceAll("%20", " "));
-        check.init();
+            String mid = data.getMid();
+            MockHttpServletRequest request = new MockHttpServletRequest();
+            request.setServletPath("/path/media/" + mid);
+            request.addHeader("X-NPO-Date", Util.rfc822(new Date(System.currentTimeMillis() - 11 * 60 * 1000)));
+            request.addHeader("X-NPO-Mid", mid);
+            request.addHeader("Origin", "http://www.vpro.nl");
+            request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
 
-        check.handleMedia(data, request);
+            OdiAuthentication check = new OdiAuthentication();
+            check.setExpiresInMinutes(10);
+            URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
+            check.setConfigFolder(url.getFile().replaceAll("%20", " "));
+            check.init();
+
+            check.handleMedia(data, request);
+        }).isInstanceOf(OdiAuthentication.NoAccessException.class);
     }
 
-    @Test(expected = OdiAuthentication.NoAccessException.class)
+    @Test
     public void testHandleWrongReferrer() {
-        String mid = data.getMid();
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setServletPath("/path/media/" + mid);
-        request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
-        request.addHeader("X-NPO-Mid", mid);
-        request.addHeader("Origin", "http://other.site.nl/");
-        request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
+        assertThatThrownBy(() -> {
+
+            String mid = data.getMid();
+            MockHttpServletRequest request = new MockHttpServletRequest();
+            request.setServletPath("/path/media/" + mid);
+            request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
+            request.addHeader("X-NPO-Mid", mid);
+            request.addHeader("Origin", "http://other.site.nl/");
+            request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("privateKey", Util.concatSecurityHeaders(request)));
 
 
-        OdiAuthentication check = new OdiAuthentication();
-        URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
-        check.setConfigFolder(url.getFile().replaceAll("%20", " "));
-        check.init();
+            OdiAuthentication check = new OdiAuthentication();
+            URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
+            check.setConfigFolder(url.getFile().replaceAll("%20", " "));
+            check.init();
 
-        check.handleMedia(data, request);
+            check.handleMedia(data, request);
+        }).isInstanceOf(OdiAuthentication.NoAccessException.class);
+
     }
 
-    @Test(expected = OdiAuthentication.NoAccessException.class)
+    @Test
     public void testHandleWrongSecret() {
-        String mid = data.getMid();
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setServletPath("/path/media/" + mid);
-        request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
-        request.addHeader("X-NPO-Mid", mid);
-        request.addHeader("Origin", "http://www.vpro.nl");
-        request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("wrongKey", Util.concatSecurityHeaders(request)));
+        assertThatThrownBy(() -> {
 
-        OdiAuthentication check = new OdiAuthentication();
-        URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
-        check.setConfigFolder(url.getFile().replaceAll("%20", " "));
-        check.init();
+            String mid = data.getMid();
+            MockHttpServletRequest request = new MockHttpServletRequest();
+            request.setServletPath("/path/media/" + mid);
+            request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
+            request.addHeader("X-NPO-Mid", mid);
+            request.addHeader("Origin", "http://www.vpro.nl");
+            request.addHeader("Authorization", "NPO apiKey:" + Util.hmacSHA256("wrongKey", Util.concatSecurityHeaders(request)));
 
-        check.handleMedia(data, request);
+            OdiAuthentication check = new OdiAuthentication();
+            URL url = this.getClass().getResource("/nl/vpro/media/odi/security/");
+            check.setConfigFolder(url.getFile().replaceAll("%20", " "));
+            check.init();
+
+            check.handleMedia(data, request);
+        }).isInstanceOf(OdiAuthentication.NoAccessException.class);
     }
 
     @Test
