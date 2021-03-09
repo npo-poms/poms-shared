@@ -4,38 +4,25 @@
  */
 package nl.vpro.domain.media;
 
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
+
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.*;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.theories.DataPoint;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import nl.vpro.test.theory.ObjectTest;
+import nl.vpro.test.jqwik.BasicObjectTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RelationDefinitionTest extends ObjectTest<RelationDefinition> {
-
-    @DataPoint
-    public static RelationDefinition nullArgument = null;
-
-    @DataPoint
-    public static RelationDefinition withEmptyFields = new RelationDefinition();
-
-    @DataPoint
-    public static RelationDefinition idOnly = new RelationDefinition("LABEL", "VPRO");
-
-    @DataPoint
-    public static RelationDefinition idWithText = new RelationDefinition("LABEL", "VPRO", "Added text");
+public class RelationDefinitionTest implements BasicObjectTest<RelationDefinition> {
 
     private static Validator validator;
 
-    @BeforeClass
+    @BeforeAll
     public static void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
@@ -78,5 +65,14 @@ public class RelationDefinitionTest extends ObjectTest<RelationDefinition> {
         Set<ConstraintViolation<RelationDefinition>> constraintViolations = validator.validate(definition);
 
         assertThat(constraintViolations).hasSize(1);
+    }
+
+    @Override
+    public Arbitrary<? extends RelationDefinition> datapoints() {
+        return Arbitraries.of(
+            null,
+            new RelationDefinition(), // with empty fields
+            new RelationDefinition("LABEL", "VPRO"), // ide only
+            new RelationDefinition("LABEL", "VPRO", "Added text"));
     }
 }
