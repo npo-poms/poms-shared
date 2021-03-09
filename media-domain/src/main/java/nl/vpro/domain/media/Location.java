@@ -724,9 +724,8 @@ public class Location extends PublishableObject<Location>
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (this.programUrl != null ? this.programUrl.hashCode() : 0);
-        return result;
+        int result = (this.programUrl != null ? this.programUrl.hashCode() : 0);
+        return result == 0 ? super.hashCode() : result;
     }
 
     /**
