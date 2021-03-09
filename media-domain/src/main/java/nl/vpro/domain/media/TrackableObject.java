@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.Embargo;
 import nl.vpro.domain.Trackable;
+import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.Workflow;
 
 /**
@@ -27,11 +28,10 @@ public interface TrackableObject extends Trackable, Embargo {
         Workflow workflow = getWorkflow();
         if(isMerged() ||
             Workflow.FOR_DELETION == workflow ||
-            Workflow.PARENT_REVOKED == workflow || // The parent is revoked so this object itself is not publishable either
             Workflow.DELETED == workflow ||
             Workflow.IGNORE == workflow
         ) {
-            // These kind of objects are explicitely not publishable.
+            // These kind of objects are explicitly not publishable.
             return false;
         }
 
@@ -39,14 +39,16 @@ public interface TrackableObject extends Trackable, Embargo {
             || Workflow.FOR_REPUBLICATION.equals(workflow)
             || Workflow.PUBLISHED.equals(workflow)
             || Workflow.REVOKED.equals(workflow)
+            || Workflow.PARENT_REVOKED.equals(workflow)
             || Workflow.MERGED.equals(workflow)
             || workflow == null /* may happen when property filtering active NPA-493 */) {
 
-            return inPublicationWindow(now);
+            return inPublicationWindow(now) &&
+                (getParent() == null || getParent().isPublishable(now));
         }
+
         LoggerFactory.getLogger(getClass()).error("Unexpected state of {}. Workflow: {}. Supposing this is not publishable for now", this, workflow);
         return false;
-
     }
 
 
@@ -66,4 +68,16 @@ public interface TrackableObject extends Trackable, Embargo {
         return false;
     }
 
+    /**
+     * Implementations can optionally become child of a trackable parent where the parents trackability decides on
+     * this child's trackability.
+     *
+     * @return a trackable parent, null when a parent is not set or no parent-child relation exists
+     * @see Image#getParent()
+     * @see Location#getParent()
+     * @see Segment#getParent()
+     */
+    default TrackableObject getParent() {
+        return null;
+    }
 }
