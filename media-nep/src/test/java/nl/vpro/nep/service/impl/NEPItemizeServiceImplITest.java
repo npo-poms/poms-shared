@@ -25,7 +25,6 @@ import static org.assertj.core.api.Assumptions.assumeThat;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-@SuppressWarnings("ThrowableNotThrown")
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Timeout(value = 10, unit = TimeUnit.MINUTES)

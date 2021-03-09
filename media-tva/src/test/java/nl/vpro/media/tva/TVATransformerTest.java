@@ -24,6 +24,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -369,6 +371,8 @@ public class TVATransformerTest {
                 assertThat(program.getLanguages()).containsExactly(new Locale("und"));
             }
         }
+        validate(table);
+
     }
 
     @Test
@@ -520,15 +524,16 @@ public class TVATransformerTest {
 
     }
 
-    @Test
-    public void MSE_5051_newgenres() throws ParserConfigurationException, TransformerException, SAXException, IOException {
-        String xml = transform("pd/pd/NED320201208P.xml");
+    @ParameterizedTest
+    @ValueSource(strings = {"NED320201208P.xml", "NED320210109P.xml"})
+    public void MSE_5051_newgenres(String source) throws ParserConfigurationException, TransformerException, SAXException, IOException {
+        String xml = transform("pd/pd/" + source);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         for (Program p : table.getProgramTable()) {
             // lets check whether all that looks believable
-            log.info("{}: {}", p.getMainTitle(), p.getGenres().stream().map(g -> g.getTermId() + ":" + g.getDisplayName()).collect(Collectors.joining(", ")));
+            log.info("{} {}: {}", p.getMid(), p.getMainTitle(), p.getGenres().stream().map(g -> g.getTermId() + ":" + g.getDisplayName()).collect(Collectors.joining(", ")));
         }
-
+        validate(table);
     }
 
 

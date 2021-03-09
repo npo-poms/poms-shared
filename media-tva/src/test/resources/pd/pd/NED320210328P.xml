@@ -1,0 +1,3230 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:date="http://exslt.org/dates-and-times" publisher="NPO Programma Gegevens" publicationTime="2021-03-08T18:32:10.800+01:00" version="300" xsi:schemaLocation="urn:bds:metadata:2004 XSDSchema/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759405668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Pingu in de stad</Title>
+          <Title xml:lang="NL" type="episodeTitle">Pingu's maanreis</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Pingu</Title>
+          <Title xml:lang="NL" type="translatedtitle">Pingu in the city series 2</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Voyage to the moon</Title>
+          <Synopsis xml:lang="NL" length="long">De kleine pinguïn Pingu is verhuisd naar de stad en moet erg wennen aan zijn nieuwe leefomgeving.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">De kleine pinguïn Pingu is verhuisd naar de stad en moet erg wennen aan zijn nieuwe leefomgeving.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">De kleine pinguïn Pingu is verhuisd naar de stad en moet erg wennen aan zijn nieuwe leefomgeving.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Kleianimatieserie over de kleine pinguïn Pingu.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>XX</Language>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="JP"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2019</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>26</TotalEpisodes>
+          <EpisodeNumber>20</EpisodeNumber>
+          <Season>2</Season>
+          <OneLineDescription>De kleine pinguïn Pingu is verhuisd naar de stad en moet erg wennen aan zijn nieuwe leefomgeving.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1943355901668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Sarah en Eend</Title>
+          <Title xml:lang="NL" type="episodeTitle">Kussen pluizen</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Sarah en Eend</Title>
+          <Title xml:lang="NL" type="translatedtitle">Sarah en Eend</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">Pillow fill</Title>
+          <Synopsis xml:lang="NL" length="long">Animatieserie over het jonge meisje Sarah en haar beste vriend Eend.
+</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Animatieserie over het jonge meisje Sarah en haar beste vriend Eend.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Animatieserie over het jonge meisje Sarah en haar beste vriend Eend.
+</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het zevenjarige meisje Sarah en haar beste vriend Eend spelen de hoofdrol. Sarah is een lief, beleefd meisje met grote ogen, roze wangen en een groene muts. Ze speelt de tuba, houdt van zeekoeien en drinkt citroenwater. En haar beste vriend is Eend. Hij is een wilde eend, zoals wij die kennen uit de sloten, wil graag een pinguïn zijn en heeft een speelgoedrobot. Samen beleven ze allerlei avonturen.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>EN</Language>
+          <IsDubbed>true</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="GB"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>40</TotalEpisodes>
+          <EpisodeNumber>28</EpisodeNumber>
+          <Season>3</Season>
+          <OneLineDescription>Animatieserie over het jonge meisje Sarah en haar beste vriend Eend.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759379668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Beestenbrigade</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Beestenbrigade</Title>
+          <Title xml:lang="NL" type="translatedtitle">BEESTENBRIGADE</Title>
+          <Synopsis xml:lang="NL" length="long">Vrolijk, educatief programma voor kleuters waarin dieren en natuur centraal staan. Boswachter Tim gaat met twee kleuters het land in om de natuur een handje te helpen. Ook laten kleuters zien welk bijzonder huisdier ze hebben.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Programma voor kleuters waarin dieren en natuur centraal staan. Boswachter Tim gaat met twee kleuters het land in om de natuur een handje te helpen. Ook laten kleuters hun bijzondere huisdier zien.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Vrolijk, educatief programma voor kleuters waarin dieren en natuur centraal staan. Boswachter Tim gaat met twee kleuters het land in om de natuur een handje te helpen. Ook laten kleuters zien welk bijzonder huisdier ze hebben.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Vrolijk, educatief programma voor kleuters waarin dieren en natuur centraal staan.  Boswachter Tim gaat met twee kleuters het land in om de natuur een handje te helpen. Ook laten kleuters zien welk bijzonder huisdier ze hebben.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0699" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1809221640517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>53</TotalEpisodes>
+          <EpisodeNumber>24</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Vrolijk, educatief programma voor kleuters waarin dieren en natuur centraal staan.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1941734467668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Verhalen uit de schatkist</Title>
+          <Title xml:lang="NL" type="episodeTitle">Palmpasen</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Verhalen uit de Schatkist</Title>
+          <Synopsis xml:lang="NL" length="long">Pop-up-Bijbelverhalen verteld door Kimberley.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Als het meisje ziet dat twee mannen haar ezeltje willen pakken, rent ze naar ze toe. Niet doen!
+</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Als het meisje ziet dat twee mannen haar ezeltje willen pakken, rent ze naar ze toe. Niet doen!
+</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Pop-up-Bijbelverhalen verteld door Kimberley.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
+            <Name xml:lang="NL">Animatie</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2017</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>16</TotalEpisodes>
+          <EpisodeNumber>4</EpisodeNumber>
+          <Season>2017</Season>
+          <OneLineDescription>Als het meisje ziet dat twee mannen haar ezeltje willen pakken, rent ze naar ze toe. Niet doen!
+</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759311668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Mega Mindy en de poppenmeester</Title>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0103" type="secondary">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="BE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2011</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1941896461668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Kinderen voor Kinderen pakt Uit</Title>
+          <Title xml:lang="NL" type="episodeTitle">Eva Cleven</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Kinderen voor Kinderen</Title>
+          <Synopsis xml:lang="NL" length="long">Twee kinderen uit het koor bezoeken een BN'er, die alles weet over een liedje van het nieuwe album. Na een leuke dag waarin we meekijken in het leven van de BN'er, wordt deze uitgenodigd om op te treden in een nieuwe videoclip van Kinderen voor Kinderen. </Synopsis>
+          <Synopsis xml:lang="NL" length="short">Presentatrice Eva Cleven beantwoordt moeilijke vragen in Het Klokhuis. Het lied 'Moeilijke vragen' staat dus op haar lijf geschreven. Koorkinderen Olivier en Pari vragen haar voor de videoclip.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Presentatrice Eva Cleven kent iedereen als degene die moeilijke vragen in Het Klokhuis beantwoordt. Het nummer 'Moeilijke vragen' staat dus op haar lijf geschreven. Koorkinderen Olivier en Pari ontmoeten haar en samen dansen en zingen ze mee met het lied.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Twee kinderen uit het koor bezoeken een BN'er, die alles weet over een liedje van het nieuwe album. Na een leuke dag waarin we meekijken in het leven van de BN'er, wordt deze uitgenodigd om op te treden in een nieuwe videoclip van Kinderen voor Kinderen. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0105" type="secondary">
+            <Name xml:lang="NL">Muziek</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>8</TotalEpisodes>
+          <EpisodeNumber>4</EpisodeNumber>
+          <Season>31</Season>
+          <OneLineDescription>Olivier en Pari ontmoeten Klokhuis-presentatrice Eva Cleven. Ze zoeken de antwoorden op de vragen van het lied 'Moeilijke vragen'.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759089668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Studio Snugger</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Studio Snugger</Title>
+          <Synopsis xml:lang="NL" length="long">Showprogramma waarin vliegensvlug onderwerpen uit de wereldoriëntatie voorbijkomen. In de studio staat de vraag centraal of het waar is of niet. Is het 'kletspraat'?</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Showprogramma waarin vliegensvlug onderwerpen uit de wereldoriëntatie voorbijkomen. -Confetti, Gevoelig haar, Paardenmuseum, Achtbaantester, Huis mee op vakantie en Gillen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Onderwerpen: Confetti, Gevoelig haar, Paardenmuseum, Achtbaantester, Huis mee op vakantie en Gillen.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Showprogramma waarin vliegensvlug onderwerpen uit de wereldoriëntatie voorbijkomen. In de studio staat de vraag centraal of het waar is of niet. Is het 'kletspraat'?</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0119" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>18</TotalEpisodes>
+          <EpisodeNumber>182</EpisodeNumber>
+          <Season>12</Season>
+          <OneLineDescription>Onderwerpen: Confetti, Gevoelig haar, Paardenmuseum, Achtbaantester, Huis mee op vakantie en Gillen.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759386668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Zappsport</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Zappsport</Title>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Kindersportprogramma waarin alle takken van sport voorbijkomen. In het onderdeel The Battle strijden de jongens tegen de meiden in een bepaalde sport. Ron staat in dit onderdeel tegenover de bloedfanatieke 'teamcaptain' Naomi van As. Kinderen met een sportprobleem krijgen hulp van een beroemde topsporter in de Hellup, de vetste trucs worden uitgelegd in The Move en er zijn regelmatig specials te zien rondom grote sporttoernooien.
+</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0104" type="secondary">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1561287996517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1401331517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>46</TotalEpisodes>
+          <EpisodeNumber>24</EpisodeNumber>
+          <Season>2021</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759086668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De regels van Floor</Title>
+          <Title xml:lang="NL" type="episodeTitle">Traktatie</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">De regels van Floor</Title>
+          <Synopsis xml:lang="NL" length="long">De eigenwijze Floor probeert antwoord te geven op de belangrijkste vragen van een 11-jarige. Ze vindt dat kinderen heel goed zelf de regels kunnen maken en dat doet ze dan ook volop. Wat als je op anti-pestcursus wordt gestuurd met je pester? Floor vindt altijd een originele oplossing.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Floor is jarig en mag trakteren. Maar de lat ligt hoog sinds het succes van Margreets traktatie. Jan haalt tot Floors frustratie alles uit de kast, maar een goede traktatie maken is niet zo makkelijk.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Floor is jarig, dus mag ze trakteren. Maar de lat ligt hoog sinds het succes van Margreets traktatie. Zeker als Jan verwikkeld raakt in een lichte strijd met Margreets vader. Ondertussen haalt Jan tot frustratie van Floor alles uit de kast, maar een goede traktatie is moeilijker dan hij denkt.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">In Floors wereld bedenken kinderen hun eigen regels en dat leidt tot verrassende nieuwe inzichten. Hoe ga je om met een irritante broer? Wat doe je als je een spuuglelijke jas cadeau krijgt? Of je beste vriendin een krentenbaard heeft en jij er ook een wilt? Floor maakt het allemaal mee. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0103" type="secondary">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1483312570517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="728069882517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1942313986517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1942313990517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1448004948517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1248427454517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="769856538517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1376328310517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="271362046517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1586183919517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1248427465517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1276436555517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1942314002517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <RelationshipToSeries value="FirstInSeason"/>
+          <TotalEpisodes>16</TotalEpisodes>
+          <EpisodeNumber>1</EpisodeNumber>
+          <Season>04</Season>
+          <OneLineDescription>Floor is jarig en mag trakteren. Maar de lat ligt hoog sinds het succes van Margreets traktatie en Jan haalt alles uit de kast.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759308668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De regels van Floor</Title>
+          <Title xml:lang="NL" type="episodeTitle">Valentijn</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">De regels van Floor</Title>
+          <Synopsis xml:lang="NL" length="long">De eigenwijze Floor probeert antwoord te geven op de belangrijkste vragen van een 11-jarige. Ze vindt dat kinderen heel goed zelf de regels kunnen maken en dat doet ze dan ook volop. Wat als je op anti-pestcursus wordt gestuurd met je pester? Floor vindt altijd een originele oplossing.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Op Valentijnsdag wordt een cadeau bezorgd. Jan, Irma, Kees en Floor gaan ieder op zoek naar hun mogelijke minnaar. De ontdekking voor wie het cadeau bedoeld was, levert een pijnlijke situatie op.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Op Valentijnsdag ontvangt de familie een cadeau van een mysterieuze afzender. Jan, Irma, Kees en Floor gaan afzonderlijk op zoek naar hun mogelijke minnaar. Wanneer ze ontdekken voor wie het cadeau bedoeld was, levert dit een pijnlijke situatie op.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">In Floors wereld bedenken kinderen hun eigen regels en dat leidt tot verrassende nieuwe inzichten. Hoe ga je om met een irritante broer? Wat doe je als je een spuuglelijke jas cadeau krijgt? Of je beste vriendin een krentenbaard heeft en jij er ook een wilt? Floor maakt het allemaal mee. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0103" type="secondary">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1483312570517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="728069882517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1942314151517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1942314155517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1429516524517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1448004948517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1248427454517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="769856538517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1376328310517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="271362046517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1586183919517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1248427465517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1276436555517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1942314168517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>16</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>04</Season>
+          <OneLineDescription>Op Valentijnsdag wordt een cadeau bezorgd. Jan, Irma, Kees en Floor gaan afzonderlijk op zoek naar hun mogelijke minnaar.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759351668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Kwartier van het dier - corona edition</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Kwartier van het dier</Title>
+          <Synopsis xml:lang="NL" length="long">Vanuit zijn nieuwsstudio brengt Tim den Besten bijzondere verhalen over dieren en hun baasjes in coronatijd. Zo doet hij verslag van nieuwsgierige ezels, die kwetsbare ouderen opvrolijken. Hij gaat op bezoek bij een giraffenfanaat die eindelijk oog in oog staat met haar lievelingsdier.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">In de studio: Bas de slang! Tim gaat aquajoggen met paard Kendall, die moeilijk opvoedbaar is. En hij gaat videobellen met de beroemde alpaca Moushi, die meer dan 32.000 volgers heeft op Instagram.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">In de studio: Bas de slang! Tim den Besten gaat aquajoggen met paard Kendall, die moeilijk opvoedbaar is. Ook gaat hij videobellen met de beroemde alpaca Moushi, die meer dan 32.000 volgers heeft op Instagram.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Hét programma voor mens en dier met een winterdip. In zijn tropische studio ontvangt Tim den Besten bijzondere dieren en hun eigenaren, zoals het verwende megavarken Nelson. Ook herenigt hij cafe-papegaai Elvis met barman Saulo en gaat hij langs bij YouTubers Furtjuh, partner Thomas en hond Paco. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1039546384517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>6</TotalEpisodes>
+          <EpisodeNumber>4</EpisodeNumber>
+          <Season>01</Season>
+          <OneLineDescription>Met: Bas de slang, aquajoggen met moeilijk opvoedbaar paard Kendall en een alpaca met meer dan 32.000 volgers op Instagram.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759143668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Koken met konijnen</Title>
+          <Title xml:lang="NL" type="episodeTitle">Het dakloze konijn zonder tanden</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Koken met konijnen</Title>
+          <Synopsis xml:lang="NL" length="long">Bonte kookshow vol spinnende poezen, happy honden en vrolijke varkens, waarin Diederik Kreike en Ayrton Fraenk gerechten maken die lekker zijn voor beest en baas. Aansluitend Hamstertalk: twee hamsters en een courgette nemen de kijkers mee in een hysterische, humoristische en kritische nabeschouwing.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Jenna komt samen met het tandeloze konijn Kwibus op bezoek. Dit beestje woont in het asiel waar Jenna's ouders werken. Het kookduo bakt heerlijke konijnenkoekhuisjes én zoekt een nieuw thuis.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Jenna komt samen met het tandeloze konijn Kwibus op bezoek. Dit beestje woont in het asiel waar Jenna's ouders werken. Het kookduo bakt heerlijke konijnenkoekhuisjes én zoekt een nieuw thuis. Homecooking dus eigenlijk.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Diederik Kreike en Ayrton Fraenk verwennen niet alleen huisdieren, ook de baasjes snoepen mee! Ze koken voor baas en beest de meest uitzinnige lekkernijen, die de kijker thuis kan namaken. Daarnaast is er tijd voor lekkere liedjes, machtige make-overs en andere heerlijke verwenmomenten. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0106" type="secondary">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1925096812517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1925096816517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2019</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>8</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>01</Season>
+          <OneLineDescription>Jenna komt samen met het tandeloze konijn Kwibus op bezoek. Kwibus woont in het asiel waar Jenna's ouders werken. Tijd voor homecooking.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926758875668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Taarten van Abel</Title>
+          <Title xml:lang="NL" type="episodeTitle">Selina</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Taarten van Abel</Title>
+          <Synopsis xml:lang="NL" length="long">Bakker Abel werkt tijdens een openhartig gesprek met een kind samen aan een wel heel persoonlijke taart voor een speciaal persoon. Taboes worden niet geschuwd, en lekker snoepen ook niet.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Selina (11) woont met haar ouders, zusje en hond op een woonboot. Ze maakt een taart voor haar opa, die veel ziekenhuisopnamen achter de rug heeft. Selina maakt zich zorgen: Gaat hij weer lopen?</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Selina (11) woont met haar ouders, zusje en hond Broertje op een woonboot. Ze maakt een taart voor haar opa, die veel ziekenhuisopnamen achter de rug heeft. Selina maakt zich zorgen: gaat hij weer lopen? Haar opa heeft een rottijd gehad, maar woont nu gelukkig weer thuis. 'Hij zit maar en laat alles door de thuiszorg doen', daar maakt Selina zich zorgen over. Verder is ze heel vrolijk en dol op voetballen, buitenspelen en karaoke.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Bakker Abel werkt tijdens een openhartig gesprek met een kind samen aan een wel heel persoonlijke taart voor een speciaal persoon. Taboes worden niet geschuwd, en lekker snoepen ook niet!</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1354303555517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>13</TotalEpisodes>
+          <EpisodeNumber>12</EpisodeNumber>
+          <Season>18</Season>
+          <OneLineDescription>Selina (11) maakt een taart voor haar opa, die veel ziekenhuisopnamen achter de rug heeft Ze maakt zich zorgen: Gaat hij weer lopen?</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1927440782668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Willem Wever</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Willem Wever</Title>
+          <Title xml:lang="NL" type="translatedtitle">WILLEM WEVER</Title>
+          <Synopsis xml:lang="NL" length="long">Edson en Tim gaan samen met Team Willem Wever op zoek naar de antwoorden op al je vragen.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Edson en Tim gaan samen met Team Willem Wever op zoek naar de antwoorden op al je vragen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Edson en Tim gaan samen met Team Willem Wever op zoek naar de antwoorden op al je vragen.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Informatief magazine waarin vragen van kinderen worden beantwoord.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1702770325517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1412340262517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>75</TotalEpisodes>
+          <EpisodeNumber>3</EpisodeNumber>
+          <Season>najaar 2020</Season>
+          <OneLineDescription>Edson en Tim gaan samen met Team Willem Wever op zoek naar de antwoorden op al je vragen.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1940430869668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Klaas Kan Alles</Title>
+          <Title xml:lang="NL" type="episodeTitle">Kan Klaas de marathon lopen in 2 en een half uur?</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Klaas Kan Alles</Title>
+          <Title xml:lang="NL" type="translatedtitle">KLAAS KAN ALLES</Title>
+          <Synopsis xml:lang="NL" length="long">Alles draait om technologie, wetenschap en slimme gadgets. Klaas krijgt spannende opdrachten die hij door technologie en wetenschap probeert te laten slagen. Hij gaat onmogelijke uitdagingen aan, oefent de moeilijkste beroepen uit en daagt toppers in hun beroep uit om het tegen hem op te nemen.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Kan Klaas de marathon lopen in 2,5 uur? Een spionageduel tussen ex-mollen Klaas en Merel Westrik en Klaas is voor één dag rechtbanktekenaar.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Klaas staat voor een zware fysieke uitdaging. De missie is: Kan Klaas net zo snel de marathon lopen als atlete Bo Ummels? Bo werd in 2019 Nederlands kampioen op de marathon in Amsterdam. Zij liep de bekende hardloopwedstrijd in een recordtijd van 2 uur, 32 minuten en 34 seconden. Op de atletiekbaan leert Klaas van Bo dat hij 42 kilometer (afstand marathon) in gemiddeld 16,6 km/uur moet lopen om zijn missie te halen. Verder een spionageduel tussen ex-mollen Klaas en Merel Westrik en Klaas is voor één dag rechtbanktekenaar.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Populairwetenschappelijk familieprogramma waarin alles draait om technologie, wetenschap en slimme gadgets. Klaas van Kruistum krijgt een aantal spannende opdrachten die hij met behulp van technologie en wetenschap probeert te laten slagen.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="569592891517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>63</TotalEpisodes>
+          <EpisodeNumber>4</EpisodeNumber>
+          <Season>6</Season>
+          <OneLineDescription>Kan Klaas de marathon lopen in 2,5 uur? Een spionageduel tussen ex-mollen Klaas en Merel Westrik en Klaas is voor één dag rechtbanktekenaar.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759337668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Kaal of Kammen</Title>
+          <Title xml:lang="NL" type="episodeTitle">Dino's</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Kaal of Kammen</Title>
+          <Synopsis xml:lang="NL" length="long">In dit spelprogramma staat vriendschap centraal. Vier beste vrienden strijden tegen elkaar. Met een flinke dosis humor onderwerpt Niek Roozen hen aan de meest idiote, spannende en smerige opdrachten. Inzet: hun haar! Naast de uitdagende opdrachten komen er ook meer sociale experimenten aan bod.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">In dit spelprogramma draait het om vrienden. Met veel humor onderwerpt Niek Roozen hen aan de meest idiote, spannende en smerige opdrachten.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">In dit spelprogramma staat vriendschap centraal. Vier beste vrienden strijden tegen elkaar. Met een flinke dosis humor onderwerpt Niek Roozen hen aan de meest idiote, spannende en smerige opdrachten. Inzet: hun haar! Naast de uitdagende opdrachten komen er ook meer sociale experimenten aan bod.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">In dit uitdagende en bizarre spelprogramma strijden vier beste vrienden tegen elkaar. Met een flinke dosis humor onderwerpt Sascha Visser hen aan de meest idiote, spannende en smerige opdrachten. Inzet: hun haar! Want de verliezer zet de tondeuse op z'n hoofd.
+</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0119" type="secondary">
+            <Name xml:lang="NL">Spel/quiz</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1024372682517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>15</TotalEpisodes>
+          <EpisodeNumber>12</EpisodeNumber>
+          <Season>06</Season>
+          <OneLineDescription>In dit spelprogramma draait het om vrienden. Met veel humor onderwerpt Niek Roozen hen aan de meest idiote, spannende en smerige opdrachten.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759121668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Zapplive op Zaterdag</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Zapplive</Title>
+          <Synopsis xml:lang="NL" length="long">Interactief magazine met bekende gasten, gadgets en trends, maffe filmpjes en te gekke spellen.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Interactief magazine met bekende gasten, gadgets en trends, maffe filmpjes en te gekke spellen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Interactief magazine met bekende gasten, gadgets en trends, maffe filmpjes en te gekke spellen.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Interactief magazine met bekende gasten, gadgets en trends, maffe filmpjes en te gekke spellen.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:9">
+              <mpeg7:Name xml:lang="NL">9</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="781382456517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>17</TotalEpisodes>
+          <EpisodeNumber>7</EpisodeNumber>
+          <Season>2021</Season>
+          <OneLineDescription>Interactief magazine met bekende gasten, gadgets en trends, maffe filmpjes en te gekke spellen.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759314668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Zapp Your Planet Bos</Title>
+          <Title xml:lang="NL" type="episodeTitle">Chillen met Janouk Kelderman</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Zapp Your Planet</Title>
+          <Synopsis xml:lang="NL" length="long">Kinderen komen in actie om zoveel mogelijk bomen te planten in Nederland.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Zapper Janouk komt langs om een chillplek te maken. Elbert gaat het land in om bomen te bezorgen, boswachter Amy legt uit waarom bomen soms gekapt moeten worden en Remy vertelt hoe bossen CO2 opnemen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Zapper Janouk komt langs om een chillplek te maken. Elbert gaat het land in om bomen te bezorgen, boswachter Amy legt uit waarom bomen soms gekapt moeten worden en Remy vertelt hoe bossen CO2 opnemen.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">NPO Zapp wil aandacht vragen en geld inzamelen voor bedreigde diersoorten.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <RelationshipToSeries value="LastInSeason"/>
+          <TotalEpisodes>4</TotalEpisodes>
+          <EpisodeNumber>4</EpisodeNumber>
+          <Season>2021</Season>
+          <OneLineDescription>Zapper Janouk komt langs om een chillplek te maken en boswachter Amy legt uit waarom bomen soms gekapt moeten worden.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1936059705668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Steken en Prikken</Title>
+          <Title xml:lang="NL" type="episodeTitle">De Wesp</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Steken en Prikken</Title>
+          <Synopsis xml:lang="NL" length="long">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Kinderprogramma waarin Emma Wortelboer en Jurre Geluk zich onder toeziend oog van een dokter en een bioloog vrijwillig laten steken door de wilde dieren die Nederland rijk is.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wat gebeurt er als je je laat steken en prikken door de wilde dieren die in je eigen achtertuin te vinden zijn? Emma Wortelboer en Jurre Geluk trekken door de Nederlandse natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt de jonge kijker alles uit over het dier dat die uitzending centraal staat. En Jurre en Emma delen tijdens de steek hun ervaring en leren van huisarts Addy Valenkamp hoe de beet na afloop het beste behandeld kan worden.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1456368122517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1130907670517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>11</TotalEpisodes>
+          <EpisodeNumber>1</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Emma Wortelboer en Jurre Geluk laten zich onder toeziend oog van een dokter en bioloog vrijwillig steken door wilde dieren uit Nederland. </OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1936059747668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Steken en Prikken</Title>
+          <Title xml:lang="NL" type="episodeTitle">De Egel</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Steken en Prikken</Title>
+          <Synopsis xml:lang="NL" length="long">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Kinderprogramma waarin Emma Wortelboer en Jurre Geluk zich onder toeziend oog van een dokter en een bioloog vrijwillig laten steken door de wilde dieren die Nederland rijk is.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wat gebeurt er als je je laat steken en prikken door de wilde dieren die in je eigen achtertuin te vinden zijn? Emma Wortelboer en Jurre Geluk trekken door de Nederlandse natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt de jonge kijker alles uit over het dier dat die uitzending centraal staat. En Jurre en Emma delen tijdens de steek hun ervaring en leren van huisarts Addy Valenkamp hoe de beet na afloop het beste behandeld kan worden.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1456368122517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1130907670517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>11</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Emma Wortelboer en Jurre Geluk laten zich onder toeziend oog van een dokter en bioloog vrijwillig steken door wilde dieren uit Nederland. </OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1936059769668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Steken en Prikken</Title>
+          <Title xml:lang="NL" type="episodeTitle">De Rode Bosmier</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Steken en Prikken</Title>
+          <Synopsis xml:lang="NL" length="long">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Kinderprogramma waarin Emma Wortelboer en Jurre Geluk zich onder toeziend oog van een dokter en een bioloog vrijwillig laten steken door de wilde dieren die Nederland rijk is.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wat gebeurt er als je je laat steken en prikken door de wilde dieren die in je eigen achtertuin te vinden zijn? Emma Wortelboer en Jurre Geluk trekken door de Nederlandse natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt de jonge kijker alles uit over het dier dat die uitzending centraal staat. En Jurre en Emma delen tijdens de steek hun ervaring en leren van huisarts Addy Valenkamp hoe de beet na afloop het beste behandeld kan worden.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1456368122517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1130907670517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>11</TotalEpisodes>
+          <EpisodeNumber>3</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Emma Wortelboer en Jurre Geluk laten zich onder toeziend oog van een dokter en bioloog vrijwillig steken door wilde dieren uit Nederland. </OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1936059990668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Steken en Prikken</Title>
+          <Title xml:lang="NL" type="episodeTitle">De Geelgerande Waterroofkever</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Steken en Prikken</Title>
+          <Synopsis xml:lang="NL" length="long">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Kinderprogramma waarin Emma Wortelboer en Jurre Geluk zich onder toeziend oog van een dokter en een bioloog vrijwillig laten steken door de wilde dieren die Nederland rijk is.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wat gebeurt er als je je laat steken en prikken door de wilde dieren die in je eigen achtertuin te vinden zijn? Emma Wortelboer en Jurre Geluk trekken door de Nederlandse natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt de jonge kijker alles uit over het dier dat die uitzending centraal staat. En Jurre en Emma delen tijdens de steek hun ervaring en leren van huisarts Addy Valenkamp hoe de beet na afloop het beste behandeld kan worden.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1456368122517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1130907670517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>11</TotalEpisodes>
+          <EpisodeNumber>4</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Emma Wortelboer en Jurre Geluk laten zich onder toeziend oog van een dokter en bioloog vrijwillig steken door wilde dieren uit Nederland. </OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1936060011668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Steken en Prikken</Title>
+          <Title xml:lang="NL" type="episodeTitle">De Sabelsprinkhaan</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Steken en Prikken</Title>
+          <Synopsis xml:lang="NL" length="long">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Kinderprogramma waarin Emma Wortelboer en Jurre Geluk zich onder toeziend oog van een dokter en een bioloog vrijwillig laten steken door de wilde dieren die Nederland rijk is.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wat gebeurt er als je je laat steken en prikken door de wilde dieren die in je eigen achtertuin te vinden zijn? Emma Wortelboer en Jurre Geluk trekken door de Nederlandse natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt de jonge kijker alles uit over het dier dat die uitzending centraal staat. En Jurre en Emma delen tijdens de steek hun ervaring en leren van huisarts Addy Valenkamp hoe de beet na afloop het beste behandeld kan worden.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1456368122517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1130907670517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>11</TotalEpisodes>
+          <EpisodeNumber>5</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Emma Wortelboer en Jurre Geluk laten zich onder toeziend oog van een dokter en bioloog vrijwillig steken door wilde dieren uit Nederland. </OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1936068535668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Steken en Prikken</Title>
+          <Title xml:lang="NL" type="episodeTitle">De Rivierkreeft</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Steken en Prikken</Title>
+          <Synopsis xml:lang="NL" length="long">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Kinderprogramma waarin Emma Wortelboer en Jurre Geluk zich onder toeziend oog van een dokter en een bioloog vrijwillig laten steken door de wilde dieren die Nederland rijk is.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wat gebeurt er als je je laat steken en prikken door de wilde dieren die in je eigen achtertuin te vinden zijn? Emma Wortelboer en Jurre Geluk trekken door de Nederlandse natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt de jonge kijker alles uit over het dier dat die uitzending centraal staat. En Jurre en Emma delen tijdens de steek hun ervaring en leren van huisarts Addy Valenkamp hoe de beet na afloop het beste behandeld kan worden.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1456368122517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1130907670517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>11</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Emma Wortelboer en Jurre Geluk laten zich onder toeziend oog van een dokter en bioloog vrijwillig steken door wilde dieren uit Nederland. </OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1936068546668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Steken en Prikken</Title>
+          <Title xml:lang="NL" type="episodeTitle">De Oeverspin</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Steken en Prikken</Title>
+          <Synopsis xml:lang="NL" length="long">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Kinderprogramma waarin Emma Wortelboer en Jurre Geluk zich onder toeziend oog van een dokter en een bioloog vrijwillig laten steken door de wilde dieren die Nederland rijk is.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Wat gebeurt er als je je laat steken en prikken door wilde dieren in je achtertuin? Emma Wortelboer en Jurre Geluk trekken door de natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt alles uit over het betreffende dier. Huisarts Addy Valenkamp vertelt hoe de beet het beste behandeld kan worden.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Wat gebeurt er als je je laat steken en prikken door de wilde dieren die in je eigen achtertuin te vinden zijn? Emma Wortelboer en Jurre Geluk trekken door de Nederlandse natuur om het uit te zoeken. Bioloog Roy Veldhuizen legt de jonge kijker alles uit over het dier dat die uitzending centraal staat. En Jurre en Emma delen tijdens de steek hun ervaring en leren van huisarts Addy Valenkamp hoe de beet na afloop het beste behandeld kan worden.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1456368122517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1130907670517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>11</TotalEpisodes>
+          <EpisodeNumber>7</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Emma Wortelboer en Jurre Geluk laten zich onder toeziend oog van een dokter en bioloog vrijwillig steken door wilde dieren uit Nederland. </OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1943607437668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nieuwe Baasjes</Title>
+          <Title xml:lang="NL" type="episodeTitle">Nieuwe Baasjes </Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Nieuwe Baasjes</Title>
+          <Synopsis xml:lang="NL" length="short">Loulou Rosa en haar broertje Magnnus willen graag een knaagdier. Maar wat voor knaagdier? Edson gaat ze helpen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Loulou Rosa en haar broertje Magnnus willen graag een knaagdier. Maar wat voor knaagdier? Edson gaat ze helpen.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">In Nieuwe Baasjes draait het allemaal om de perfecte match. Edson da Graça koppelt kinderen die een huisdier wensen aan dieren die een baasje nodig hebben. Na een uitgebreid gesprek met kinderen en hun ouders gaan de dierendeskundigen op zoek naar de perfecte match. Hoe reageren de kinderen en hun ouders als ze hun huisdier voor het eerst zien? Is het liefde op het eerste gezicht en krijgt het huisdier een nieuw baasje?
+ Niet alleen voor honden wordt een nieuw thuis gezocht, maar alle soorten huisdieren die een nieuw baasje zoeken, worden door Edson geholpen. Zo gaat hij op zoek naar nieuwe baasjes voor een kat, konijn, een hamster en zelfs een baardagaam en pauw!
+</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1938752502517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>14</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>2</Season>
+          <OneLineDescription>Loulou Rosa en haar broertje Magnnus willen graag een knaagdier. Maar wat voor knaagdier? Edson gaat ze helpen.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1943607489668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Nieuwe Baasjes</Title>
+          <Title xml:lang="NL" type="episodeTitle">Nieuwe Baasjes </Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Nieuwe Baasjes</Title>
+          <Synopsis xml:lang="NL" length="short">Hondje Happy zoekt een nieuw baasje. Is er een match met Lola en haar familie.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Hondje Happy zoekt een nieuw baasje. Is er een match met Lola en haar familie.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">In Nieuwe Baasjes draait het allemaal om de perfecte match. Edson da Graça koppelt kinderen die een huisdier wensen aan dieren die een baasje nodig hebben. Na een uitgebreid gesprek met kinderen en hun ouders gaan de dierendeskundigen op zoek naar de perfecte match. Hoe reageren de kinderen en hun ouders als ze hun huisdier voor het eerst zien? Is het liefde op het eerste gezicht en krijgt het huisdier een nieuw baasje?
+ Niet alleen voor honden wordt een nieuw thuis gezocht, maar alle soorten huisdieren die een nieuw baasje zoeken, worden door Edson geholpen. Zo gaat hij op zoek naar nieuwe baasjes voor een kat, konijn, een hamster en zelfs een baardagaam en pauw!
+</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1938752502517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>14</TotalEpisodes>
+          <EpisodeNumber>3</EpisodeNumber>
+          <Season>2</Season>
+          <OneLineDescription>Hondje Happy zoekt een nieuw baasje. Is er een match met Lola en haar familie.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759128668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De mooiste sprookjes</Title>
+          <Title xml:lang="NL" type="episodeTitle">De gouden daalder</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">De mooiste sprookjes</Title>
+          <Title xml:lang="NL" type="translatedtitle">Die schönsten Märchen von Grimm</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">De mooiste sprookjes van Grimm en Andersen.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Sinds het verlies van de gouden daalder wil er in het dorp niets anders meer groeien dan kool. Anna-Barbara denkt te weten waar de daalder is en vertrekt stiekem. Zal ze terugkeren met de daalder?</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Sprookje. Sinds het verlies van de gouden daalder wil er in het dorp niets anders meer groeien dan kool. Degenen die geprobeerd hebben de daalder terug te vinden zijn nooit meer teruggekomen van hun zoektocht, en daarom mag niemand meer het dorp verlaten van de burgemeester. Anna-Barbara denkt echter te weten waar de daalder is, en vertrekt stiekem. Zal het haar lukken de daalder terug te brengen naar het dorp, of zal zij ook voorgoed verdwijnen?</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Verfilmingen van de bekendste sprookjes van o.a. de gebroeders Grimm.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0103" type="secondary">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:9">
+              <mpeg7:Name xml:lang="NL">9</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>true</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1944495947517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1944496286517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="718235004517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1944496367517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="DE"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>51</TotalEpisodes>
+          <EpisodeNumber>51</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Sinds het verlies van de gouden daalder groeit er in het dorp alleen nog kool. Anna-Barbara vermoedt waar de daalder is en gaat op zoek.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759171668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Zappbios: Mijn eigen circus</Title>
+          <Title xml:lang="NL" type="translatedtitle">Mon cirque à moi</Title>
+          <Synopsis xml:lang="NL" length="short">Laura trekt al haar hele leven rond met haar vader, die als clown optreedt. Als Laura kans maakt om toegelaten te worden op een privé-school heeft haar vader daar grote moeite mee.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Jeugdfilm. De 12-jarige Laura trekt al bijna haar hele leven rond met haar vader, die als clown optreedt. Laura verlangt echter naar een minder hectisch leven, en die droom lijkt uit te komen wanneer ze kans maakt om toegelaten te worden op een privé-school. Maar zal haar vader kunnen accepteren dat zijn dochter niet in zijn voetsporen zal treden?</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0102" type="secondary">
+            <Name xml:lang="NL">Film</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:g">
+            <Name xml:lang="NL">Geweld</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:6">
+              <mpeg7:Name xml:lang="NL">6</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>true</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1943259535517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1943260998517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1943261125517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1943261232517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="CA"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <OneLineDescription>Laura trekt al haar hele leven rond met haar vader, die als clown optreedt. Ze verlangt echter naar een minder hectisch leven.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759111668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Zapp Your Planet Bos</Title>
+          <Title xml:lang="NL" type="episodeTitle">Chillen met Janouk Kelderman</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Zapp Your Planet</Title>
+          <Synopsis xml:lang="NL" length="long">Kinderen komen in actie om zoveel mogelijk bomen te planten in Nederland.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Zapper Janouk komt langs om een chillplek te maken. Elbert gaat het land in om bomen te bezorgen, boswachter Amy legt uit waarom bomen soms gekapt moeten worden en Remy vertelt hoe bossen CO2 opnemen.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Zapper Janouk komt langs om een chillplek te maken. Elbert gaat het land in om bomen te bezorgen, boswachter Amy legt uit waarom bomen soms gekapt moeten worden en Remy vertelt hoe bossen CO2 opnemen.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">NPO Zapp wil aandacht vragen en geld inzamelen voor bedreigde diersoorten.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <RelationshipToSeries value="LastInSeason"/>
+          <TotalEpisodes>4</TotalEpisodes>
+          <EpisodeNumber>4</EpisodeNumber>
+          <Season>2021</Season>
+          <OneLineDescription>Zapper Janouk komt langs om een chillplek te maken en boswachter Amy legt uit waarom bomen soms gekapt moeten worden.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759234668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Zapp Your Planet</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Synopsis xml:lang="NL" length="long">Manon Hoijtink, Remy Hogenboom en Toon Maassen gaan op pad om kinderen te laten zien hoe mooi en bijzonder onze planeet is. Zij helpen kinderen een mening te vormen over uitdagingen van de toekomst, ze ontdekken duurzame innovatieve ontwikkelingen en vragen aandacht voor actuele klimaatvraagstukken.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Programma over natuur en duurzaamheid waarin kinderen te zien krijgen hoe mooi en bijzonder onze planeet is.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Manon Hoijtink, Remy Hogenboom en Toon Maassen gaan op pad om kinderen te laten zien hoe mooi en bijzonder onze planeet is. Zij helpen kinderen een mening te vormen over uitdagingen van de toekomst, ze ontdekken duurzame innovatieve ontwikkelingen en vragen aandacht voor actuele klimaatvraagstukken.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0125" type="secondary">
+            <Name xml:lang="NL">Natuur</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1855706204517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1520770337517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1855706209517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>31</TotalEpisodes>
+          <EpisodeNumber>24</EpisodeNumber>
+          <Season>2020</Season>
+          <OneLineDescription>Programma over natuur en duurzaamheid waarin kinderen te zien krijgen hoe mooi en bijzonder onze planeet is.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759293668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Brainstorm</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Brainstorm</Title>
+          <Synopsis xml:lang="NL" length="long">Jeugdprogramma over je hersenen en je geest met presentator/testpiloot Janouk Kelderman en hersenwetenschapper Job van den Hurk, also known as THE PROF. Dit nieuwe duo doet allerlei spectaculaire proeven en experimenten. Elke week duiken ze in de fascinerende wereld van het brein.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Kunnen je hersenen een leugenaar herkennen? Waarom doe je soms dingen die je niet wilt en wat doet presentator Rachel om de braindrone zo lang mogelijk te laten vliegen? Dat en nog veel meer.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Kunnen je hersenen een leugenaar herkennen? Waarom doe je soms dingen die je niet wilt en wat doet presentator Rachel om de braindrone zo lang mogelijk te laten vliegen? Dat en nog veel meer.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Jeugdprogramma over je hersenen en je geest met presentator/testpiloot Janouk Kelderman en hersenwetenschapper Job van den Hurk, also known as THE PROF. Dit nieuwe duo doet allerlei spectaculaire proeven en experimenten. Elke week duiken ze in de fascinerende wereld van het brein. En laten je ontdekken hoe je hersenen en geest werken. In je brein zit meer dan je denkt!</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>9</TotalEpisodes>
+          <EpisodeNumber>3</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Kunnen je hersenen een leugenaar herkennen? Waarom doe je soms dingen die je niet wilt en wat doet presentator Rachel met de braindrone?</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759254668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Kamp Koekieloekie</Title>
+          <Title xml:lang="NL" type="episodeTitle">Jonathan</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Kamp Koekieloekie</Title>
+          <Synopsis xml:lang="NL" length="long">Een komische en muzikale familieserie over zeven kinderen die een zomer doorbrengen op natuurkamp. Ze doen hun best om hun eigen eigenaardigheden voor de andere kinderen verborgen te houden, totdat ze erachter komen dat iedereen een beetje 'koekieloekie' is.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Jonathan besluit een therapiepraktijk te openen omdat hij ervan overtuigd is dat iedereen 'koekieloekie' is, behalve hijzelf. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Jonathan besluit een therapiepraktijk te openen omdat hij ervan overtuigd is dat iedereen 'koekieloekie' is, behalve hijzelf. Wat de andere kinderen niet weten is dat Jonathan een groot geheim voor hen verborgen houdt, waar hij zich enorm voor schaamt. Terwijl de Eikeltjes door therapeut Jonathan een voor een als 'koekieloekie' worden bestempeld, is het Marietje die hem confronteert met zijn eigen diepe angsten. Jonathan zijn wereld stort in, maar dan leert hij de belangrijkste les van dit zomerkamp: 'Niemand is gek en iedereen hier is koekieloekie!'</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Een komische en muzikale familieserie over zeven kinderen die een zomer doorbrengen op natuurkamp. Ze doen hun best om hun eigen eigenaardigheden voor de andere kinderen verborgen te houden, totdat ze erachter komen dat iedereen een beetje 'koekieloekie' is.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0103" type="secondary">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:9">
+              <mpeg7:Name xml:lang="NL">9</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1248427454517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1309356660517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="1276436555517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1635970964517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1886568133517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1913459406517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1913459410517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1625146968517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1913459415517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1913459419517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1913459423517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1622600018517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="13019094517"/>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1606159852517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2019</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>8</TotalEpisodes>
+          <EpisodeNumber>5</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Jonathan besluit een therapiepraktijk te openen omdat hij ervan overtuigd is dat iedereen 'koekieloekie' is, behalve hijzelf. </OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759064668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Van Vader naar Moeder</Title>
+          <Title xml:lang="NL" type="episodeTitle">Naoufel</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Van Vader naar Moeder</Title>
+          <Synopsis xml:lang="NL" length="long">Tatum Dagelet brengt kinderen van gescheiden ouders van de ene ouder naar de andere. Onderweg praat ze met hen over hoe het is om in twee huizen te wonen en verrast ze hen met een ontmoeting met een bekende Nederlander die ook gescheiden ouders heeft.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het is inmiddels zeven jaar geleden dat de ouders van Naoufel (12) uit elkaar gingen. Naoufel is geboren met cerebrale parese. Hierdoor heeft hij zwakkere spieren en moeite met zijn evenwicht.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het is inmiddels zeven jaar geleden dat de ouders van Naoufel (12) uit elkaar gingen. Zijn vader is toen honderd kilometer verderop gaan wonen. Tatum en Naoufel hebben dus een flinke rit voor de boeg.
+Naoufel is geboren met cerebrale parese. Hierdoor heeft hij zwakkere spieren en heeft hij moeite met zijn evenwicht. Dit weerhoudt hem er niet van om zijn allergrootste hobby uit te oefenen: Voetbal. Onderweg naar zijn vader verrast Tatum hem met een clinic van zijn grote idool, straatvoetballer Soufiane Touzani.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Tatum Dagelet gaat op pad met kinderen van gescheiden ouders. Ze rijdt een kind van de ene ouder naar de andere, en praat met ze over hoe het is als je ouders gescheiden zijn.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1424202490517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>10</TotalEpisodes>
+          <EpisodeNumber>4</EpisodeNumber>
+          <Season>4</Season>
+          <OneLineDescription>Het is inmiddels zeven jaar geleden dat de ouders van Naoufel (12) uit elkaar gingen. Naoufel is geboren met cerebrale parese.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759415668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Anne Frank Videodagboek</Title>
+          <Title xml:lang="NL" type="episodeTitle">Onderduiken</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Anne Frank Videodagboek</Title>
+          <Synopsis xml:lang="NL" length="short">Op 12 juni 1942 wordt Anne Frank 13 jaar. Ze krijgt een videocamera en legt haar leven vast. Anderhalf jaar later zit ze ondergedoken. Maart 1944 hoort ze een radiobericht dat haar op een idee brengt.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Op 12 juni 1942 wordt Anne Frank dertien jaar. Ze krijgt een videocamera en legt haar leven vanaf dat moment vast. Anderhalf jaar later zit zij samen met haar ouders, zus Margot, Hermann en Auguste van Pels en hun zoon Peter en Fritz Pfeffer ondergedoken. Ze hoort eind maart 1944 een radiobericht. Het brengt haar op een idee.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>8</TotalEpisodes>
+          <EpisodeNumber>1</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Op 12 juni 1942 wordt Anne Frank 13 jaar. Ze krijgt een videocamera en legt haar leven vast. Anderhalf jaar later zit zij ondergedoken.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759418668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Jeugdjournaal</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Jeugdjournaal</Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Jeugdjournaal  </Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker. En op NPO Nieuws met gebarentolk.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker. En op NPO Nieuws met gebarentolk.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker. En op NPO Nieuws met gebarentolk.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>www.jeugdjournaal.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>366</TotalEpisodes>
+          <EpisodeNumber>87</EpisodeNumber>
+          <OneLineDescription>Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker. En op NPO Nieuws met gebarentolk.</OneLineDescription>
+          <HD>HD</HD>
+          <TwitterAccount>@jeugdjournaal</TwitterAccount>
+          <TwitterHashTag>#jeugdjournaal</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759083668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">GEWOON. BLOOT.</Title>
+          <Title xml:lang="NL" type="episodeTitle">Huid &amp; haar</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">GEWOON. BLOOT.</Title>
+          <Synopsis xml:lang="NL" length="long">Vraag jij je soms af of je lichaam wel normaal is? Niet zo gek, want op Instagram, Snapchat en TikTok lijkt iedereen perfect! Veel mensen gebruiken filters, make-up of gaan zelfs onder het mes. Een groep kinderen vraagt doodgewone mensen het hemd van het lijf. Want onze gasten zijn poedelnaakt.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Vragen waar de kinderen antwoord op krijgen zijn o.a. Heb je op een belangrijke dag wel eens een pukkel gehad en wat deed je toen?' en 'Zou je voor een dag een andere huidskleur willen hebben?'.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Vragen waar de kinderen antwoord op krijgen zijn o.a. Heb je op een belangrijke dag wel eens een pukkel gehad en wat deed je toen?' en 'Zou je voor een dag een andere huidskleur willen hebben?'.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1702770325517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>8</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>1</Season>
+          <OneLineDescription>Vragen waar de kinderen antwoord op krijgen zijn o.a. Heb je op een belangrijke dag wel eens een pukkel gehad en wat deed je toen?'.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759105668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">vacant </Title>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759224668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Socutera    </Title>
+          <Title xml:lang="NL" type="episodeTitle">ZOA</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">Socutera</Title>
+          <Title xml:lang="NL" type="translatedtitle">Socutera</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">ZOA</Title>
+          <Synopsis xml:lang="NL" length="long">Brengt goede doelen in beeld.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">ZOA is er voor mensen die alles kwijt zijn geraakt door een oorlog of een ramp. In noodsituaties schieten we snel te hulp. We blijven ook daarna trouw en helpen bij het opbouwen van een nieuw bestaan.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">ZOA is er voor mensen die alles kwijt zijn geraakt door een oorlog of een ramp. In noodsituaties schieten we snel te hulp. We blijven ook daarna trouw en helpen bij het opbouwen van een nieuw bestaan.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Brengt goede doelen in beeld.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0799" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>vfi.nl/socutera</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>52</TotalEpisodes>
+          <EpisodeNumber>13</EpisodeNumber>
+          <OneLineDescription>ZOA is er voor mensen die alles kwijt zijn geraakt door een oorlog of een ramp. We bieden noodhulp en helpen daarna met de wederopbouw.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1939392018668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">3 op Reis</Title>
+          <Title xml:lang="NL" type="episodeTitle">Kustpad (NL) - Innsbruck (AT)</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">3 op Reis</Title>
+          <Title xml:lang="NL" type="translatedtitle">3 op Reis </Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">3 op Reis</Title>
+          <Synopsis xml:lang="NL" length="long">Reizen lijkt voorlopig nog even niet aan de orde. Toch laten Chris Zegers, Nienke de la Rive Box, Maurice Lede en Jennifer Hoffman juist zien wat wél kan. Ze maken onverwachte reizen in eigen land maar nemen je ook weer mee naar exotische oorden, want een deel van de reizen is pre-corona gefilmd.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Reizen lijkt voorlopig nog even niet aan de orde. Toch laten Chris Zegers, Nienke de la Rive Box, Maurice Lede en Jennifer Hoffman juist zien wat wél kan. </Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Reizen lijkt voorlopig nog even niet aan de orde. Toch laten Chris Zegers, Nienke de la Rive Box, Maurice Lede en Jennifer Hoffman juist zien wat wél kan. Ze maken onverwachte reizen in eigen land maar nemen je ook weer mee naar exotische oorden, want een deel van de reizen is pre-corona gefilmd.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Chris Zegers, Jennifer Hoffman, Maurice Lede, Evi Hanssen en Nienke de la Rive Box laten in het reisprogramma 3 op Reis zien hoe je duurzaam kunt reizen en ook dichtbij huis mooie reizen kunt maken.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0729" type="secondary">
+            <Name xml:lang="NL">Reizen</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>39</TotalEpisodes>
+          <EpisodeNumber>25</EpisodeNumber>
+          <Season>14</Season>
+          <OneLineDescription>Reizen lijkt voorlopig nog even niet aan de orde. Toch laten de presentatoren juist zien wat wél kan. </OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759328668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Hoe mijn keurige ouders in de bak belandden</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Hoe mijn keurige ouders in de bak belandden</Title>
+          <Title xml:lang="NL" type="translatedtitle">HOE MIJN KEURIGE OUDERS IN DE CEL BELANDDEN</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Genre href="urn:tva:metadata:cs:2004:03">
+            <Name xml:lang="NL">Serie</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0312" type="secondary">
+            <Name xml:lang="NL">Drama</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:a">
+            <Name xml:lang="NL">Angst</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:9">
+              <mpeg7:Name xml:lang="NL">9</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <RelationshipToSeries value="FirstInSeason"/>
+          <TotalEpisodes>6</TotalEpisodes>
+          <EpisodeNumber>1</EpisodeNumber>
+          <Season>1</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759162668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Zondag met Lubach</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Zondag met Lubach</Title>
+          <Synopsis xml:lang="NL" length="long">Serie rond de Tweede Kamerverkiezingen 2021. Zeven dagen nieuws in 30 minuten, satirisch geremixt door Arjen Lubach. Vanachter een desk. In een pak. Op een stoel. Laatste seizoen. Zo goed als nieuws.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Serie rond de Tweede Kamerverkiezingen 2021. Zeven dagen nieuws in 30 minuten, satirisch geremixt door Arjen Lubach. Vanachter een desk. In een pak. Op een stoel. Laatste seizoen. Zo goed als nieuws.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Serie rond de Tweede Kamerverkiezingen 2021. Zeven dagen nieuws in 30 minuten, satirisch geremixt door Arjen Lubach. Vanachter een desk. In een pak. Op een stoel. Laatste seizoen. Zo goed als nieuws.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Zeven dagen nieuws in dertig minuten, satirisch geremixt door Arjen Lubach. Vanachter een desk. Voor een publiek. In een pak. Op een stoel. In een auto. Nee, niet in een auto. Zondag met Lubach, zo goed als nieuws.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:06">
+            <Name xml:lang="NL">Amusement</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0609" type="secondary">
+            <Name xml:lang="NL">Komisch</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="107394635517"/>
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <RelationshipToSeries value="LastInSeason"/>
+          <TotalEpisodes>8</TotalEpisodes>
+          <EpisodeNumber>8</EpisodeNumber>
+          <Season>13</Season>
+          <OneLineDescription>Serie rond de Tweede Kamerverkiezingen 2021. Zeven dagen nieuws in 30 minuten, satirisch geremixt door Arjen Lubach. Vanachter een desk.</OneLineDescription>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759174668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Splntr!</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">Splntr!</Title>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0799" type="secondary">
+            <Name xml:lang="NL">Overig</Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:t">
+            <Name xml:lang="NL">Grof taalgebruik</Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:AL">
+              <mpeg7:Name xml:lang="NL">AL</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1475481406517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:TeletextRationaleCS:2007:1">
+              <Name xml:lang="NL">Teletekst pagina</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>888</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <RelationshipToSeries value="LastInSeason"/>
+          <TotalEpisodes>6</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+          <Season>1</Season>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759331668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Vacant</Title>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759080668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Vacant</Title>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759376668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">3Lab: Mijn Dochter de vlogger</Title>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759108668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Studio Sport</Title>
+          <Genre href="urn:tva:metadata:cs:2004:04">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0414" type="secondary">
+            <Name xml:lang="NL">Sport informatie</Name>
+          </Genre>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759131668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Studio Voetbal</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Studio Voetbal  </Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Studio Voetbal</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">Voetbalprogramma waarin Sjoerd van Ramshorst met vaste tafelgasten Pierre van Hooijdonk en Rafael van der Vaart de laatste gebeurtenissen in het voetbal doorneemt.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Voetbalprogramma waarin Sjoerd van Ramshorst met vaste tafelgasten Pierre van Hooijdonk en Rafael van der Vaart de laatste gebeurtenissen in het voetbal doorneemt.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Voetbalprogramma waarin Sjoerd van Ramshorst met vaste tafelgasten Pierre van Hooijdonk en Rafael van der Vaart de laatste gebeurtenissen in het voetbal doorneemt.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">In dit voetbalprogramma neemt presentator Sjoerd van Ramshorst met vaste tafelgasten Pierre van Hooijdonk en Rafael van der Vaart de laatste gebeurtenissen in het voetbal door.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:04">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0414" type="secondary">
+            <Name xml:lang="NL">Sport informatie</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="934032619517"/>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>22</TotalEpisodes>
+          <EpisodeNumber>12</EpisodeNumber>
+          <OneLineDescription>Sjoerd van Ramshorst neemt met analisten Pierre van Hooijdonk en Rafael van der Vaart het laatste nieuws in het voetbal door.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759321668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Studio Sport</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Studio Sport </Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Studio Sport</Title>
+          <Title xml:lang="NL" type="translatedepisodetitle"/>
+          <Synopsis xml:lang="NL" length="long">Livebeelden en/of samenvattingen van de belangrijkste sportwedstrijden en -evenementen van de dag, met interviews en reportages.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Livebeelden en/of samenvattingen van de belangrijkste sportwedstrijden en -evenementen van de dag, met interviews en reportages.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Livebeelden en/of samenvattingen van de belangrijkste sportwedstrijden en -evenementen van de dag, met interviews en reportages.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Met live beelden en/of samenvattingen van de belangrijkste sportwedstrijden en -evenementen van de dag. Ook met interviews en reportages. </Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:04">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0414" type="secondary">
+            <Name xml:lang="NL">Sport informatie</Name>
+          </Genre>
+          <Language>NL</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL">Teletekst ondertitels</Name>
+          </Subtitling>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>NOS.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>22</TotalEpisodes>
+          <EpisodeNumber>13</EpisodeNumber>
+          <OneLineDescription>Livebeelden en/of samenvattingen van de belangrijkste sportwedstrijden en -evenementen van de dag, met interviews en reportages.</OneLineDescription>
+          <HD>HD</HD>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1942713523668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Jeugdjournaal</Title>
+          <Title xml:lang="NL" type="episodeTitle">NOS Jeugdjournaal met gebarentolk</Title>
+          <Title xml:lang="NL" type="parentSeriesTitle">NOS Jeugdjournaal</Title>
+          <Title xml:lang="NL" type="translatedtitle">NOS Jeugdjournaal  </Title>
+          <Title xml:lang="NL" type="translatedepisodetitle">NOS Jeugdjournaal met gebarentolk</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers met gebarentolk.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers met gebarentolk.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers met gebarentolk.</Synopsis>
+          <Synopsis xml:lang="NL" type="parentSeriesSynopsis" length="long">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker.</Synopsis>
+          <Genre href="urn:tva:metadata:cs:2004:01">
+            <Name xml:lang="NL">Jeugd</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0107" type="secondary">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Language>NL</Language>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>www.jeugdjournaal.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>310</TotalEpisodes>
+          <EpisodeNumber>25</EpisodeNumber>
+          <OneLineDescription>Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijkers met gebarentolk.</OneLineDescription>
+          <HD>HD</HD>
+          <TwitterAccount>@jeugdjournaal</TwitterAccount>
+          <TwitterHashTag>#jeugdjournaal</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759118668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NOS Studio Sport</Title>
+          <Genre href="urn:tva:metadata:cs:2004:04">
+            <Name xml:lang="NL">Sport</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0414" type="secondary">
+            <Name xml:lang="NL">Sport informatie</Name>
+          </Genre>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/1926759410668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Tekst-TV</Title>
+          <Title xml:lang="NL" type="episodeTitle"/>
+          <Genre href="urn:tva:metadata:cs:2004:07">
+            <Name xml:lang="NL">Informatief</Name>
+          </Genre>
+          <Genre href="urn:tva:metadata:cs:2004:0721" type="secondary">
+            <Name xml:lang="NL">Nieuws/actualiteiten</Name>
+          </Genre>
+          <Language>NL</Language>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2017</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <TotalEpisodes>1000</TotalEpisodes>
+          <EpisodeNumber>921</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable/>
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="NED3" start="2021-03-28T06:30:00+02:00" end="2021-03-29T05:25:00+02:00">
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759405668"/>
+          <PublishedStartTime>2021-03-28T06:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M10S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_04206583</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_04206403</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00818800</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1943355901668"/>
+          <PublishedStartTime>2021-03-28T06:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M18S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">POW_04185996</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_04185968</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00890480</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759379668"/>
+          <PublishedStartTime>2021-03-28T06:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H14M58S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>04-11-2020</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">KN_1717058</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1713992</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1713993</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1941734467668"/>
+          <PublishedStartTime>2021-03-28T07:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M58S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>06-04-2017</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">VPWON_1268670</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1268666</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1258661</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759311668"/>
+          <PublishedStartTime>2021-03-28T07:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H15M26S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>18-10-2011</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">AT_2079832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1941896461668"/>
+          <PublishedStartTime>2021-03-28T08:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M25S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">BV_101404271</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101404267</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VARA_101378705</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759089668"/>
+          <PublishedStartTime>2021-03-28T08:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M51S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zappelin"/>
+          <OtherIdentifier type="ProductID">VPWON_1319069</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1319065</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1251200</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759386668"/>
+          <PublishedStartTime>2021-03-28T08:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M25S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">AT_2158446</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">AT_2154579</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">AT_2037144</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759086668"/>
+          <PublishedStartTime>2021-03-28T09:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H09M35S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1314070</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1314069</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1289457</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759308668"/>
+          <PublishedStartTime>2021-03-28T09:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M35S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1314071</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1314069</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1289457</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759351668"/>
+          <PublishedStartTime>2021-03-28T09:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M52S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>19-07-2020</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1320238</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1320234</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1320233</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759143668"/>
+          <PublishedStartTime>2021-03-28T09:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H17M19S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>16-02-2020</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1295433</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1295427</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1295426</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926758875668"/>
+          <PublishedStartTime>2021-03-28T09:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M25S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1317221</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1317208</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1250848</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1927440782668"/>
+          <PublishedStartTime>2021-03-28T10:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H14M52S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>08-11-2020</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">KN_1717256</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1712130</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1677489</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1940430869668"/>
+          <PublishedStartTime>2021-03-28T10:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M39S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>05-12-2020</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">KN_1717380</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1712226</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1678921</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759337668"/>
+          <PublishedStartTime>2021-03-28T11:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H23M25S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>14-11-2020</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">AT_2149578</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">AT_2130754</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">AT_2045620</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759121668"/>
+          <PublishedStartTime>2021-03-28T11:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M25S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">KN_1725171</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1725163</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1677095</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759314668"/>
+          <PublishedStartTime>2021-03-28T12:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M25S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1325911</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1325907</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1261559</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1936059705668"/>
+          <PublishedStartTime>2021-03-28T12:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H14M48S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>09-01-2021</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">BV_101404175</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101404174</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BV_101404173</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1936059747668"/>
+          <PublishedStartTime>2021-03-28T12:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M11S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>16-01-2021</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">BV_101404176</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101404174</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BV_101404173</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1936059769668"/>
+          <PublishedStartTime>2021-03-28T12:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H14M55S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>23-01-2021</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">BV_101404177</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101404174</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BV_101404173</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1936059990668"/>
+          <PublishedStartTime>2021-03-28T12:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H14M45S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>30-01-2021</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">BV_101404178</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101404174</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BV_101404173</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1936060011668"/>
+          <PublishedStartTime>2021-03-28T13:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H14M37S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>06-02-2021</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">BV_101404179</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101404174</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BV_101404173</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1936068535668"/>
+          <PublishedStartTime>2021-03-28T13:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M07S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>13-02-2021</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">BV_101404180</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101404174</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BV_101404173</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1936068546668"/>
+          <PublishedStartTime>2021-03-28T13:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <RepeatText>20-02-2021</RepeatText>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">BV_101404181</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101404174</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BV_101404173</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1943607437668"/>
+          <PublishedStartTime>2021-03-28T13:58:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">KN_1726045</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1725635</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1717146</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1943607489668"/>
+          <PublishedStartTime>2021-03-28T14:12:36+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M23S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">KN_1726046</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1725635</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1717146</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759128668"/>
+          <PublishedStartTime>2021-03-28T14:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M25S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">POW_04852051</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_00448317</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">POW_00812196</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759171668"/>
+          <PublishedStartTime>2021-03-28T15:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H36M57S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">POW_04852836</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759111668"/>
+          <PublishedStartTime>2021-03-28T17:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M25S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="EO"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1325911</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1325907</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1261559</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759234668"/>
+          <PublishedStartTime>2021-03-28T17:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M24S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1322474</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1322075</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759293668"/>
+          <PublishedStartTime>2021-03-28T17:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H23M20S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1329114</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1329111</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1317080</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759254668"/>
+          <PublishedStartTime>2021-03-28T18:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M25S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1305713</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1305708</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1326020</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759064668"/>
+          <PublishedStartTime>2021-03-28T18:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H14M25S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1324033</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1324029</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1298270</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759415668"/>
+          <PublishedStartTime>2021-03-28T18:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M23S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1329139</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1329138</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1329170</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759418668"/>
+          <PublishedStartTime>2021-03-28T19:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M25S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">POW_04813227</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">21Jeugd1900</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSJeugdjournaal</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759083668"/>
+          <PublishedStartTime>2021-03-28T19:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M25S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NTR"/>
+          </BroadcasterList>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID">VPWON_1329163</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1329148</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1329171</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759105668"/>
+          <PublishedStartTime>2021-03-28T19:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+          <Net code="Zapp"/>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759224668"/>
+          <PublishedStartTime>2021-03-28T19:47:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H02M15S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="SOCUTERA"/>
+          </BroadcasterList>
+          <Net code="Nederland 1"/>
+          <OtherIdentifier type="ProductID">POW_04895031</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">21Socutera</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">Socutera</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1939392018668"/>
+          <PublishedStartTime>2021-03-28T19:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="BV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">BV_101404211</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">BV_101401462</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">BNN_101378209</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759328668"/>
+          <PublishedStartTime>2021-03-28T20:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H48M35S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="KRO-NCRV"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">KN_1725995</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">KN_1717589</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">KN_1717590</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759162668"/>
+          <PublishedStartTime>2021-03-28T21:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="VPRO"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">VPWON_1328968</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">VPWON_1328960</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">VPWON_1250334</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759174668"/>
+          <PublishedStartTime>2021-03-28T22:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="AVROTROS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">AT_300000356</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">AT_300000350</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">AT_300000349</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759331668"/>
+          <PublishedStartTime>2021-03-28T22:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M30S</PublishedDuration>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759080668"/>
+          <PublishedStartTime>2021-03-28T23:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M30S</PublishedDuration>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759376668"/>
+          <PublishedStartTime>2021-03-28T23:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H25M30S</PublishedDuration>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759108668"/>
+          <PublishedStartTime>2021-03-28T23:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H54M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759131668"/>
+          <PublishedStartTime>2021-03-29T01:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M30S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_04923381</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">21stspVoetbal</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSSportVoetbal</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759321668"/>
+          <PublishedStartTime>2021-03-29T02:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H41M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_04923374</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">21stspZoR</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSSportRegulier</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1942713523668"/>
+          <PublishedStartTime>2021-03-29T04:26:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H20M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">POW_04995582</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">21Jeugd1900geb</OtherIdentifier>
+          <OtherIdentifier type="ParentSeriesID">NOSJeugdjournaal</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759118668"/>
+          <PublishedStartTime>2021-03-29T04:26:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H54M30S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID"/>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/1926759410668"/>
+          <PublishedStartTime>2021-03-29T05:25:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M30S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NOS"/>
+          </BroadcasterList>
+          <Net code="Nederland 3"/>
+          <OtherIdentifier type="ProductID">POW_03532929</OtherIdentifier>
+          <OtherIdentifier type="SeriesID">POW_03532008</OtherIdentifier>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="1809221640517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Tim</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Hogenbosch</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1561287996517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Britt</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Dekker</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1401331517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Ron</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Boszhard</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1483312570517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Bobbie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Mulder</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="728069882517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Ole</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kroes</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1942313986517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Ferdi</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Stofmeel</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1942313990517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Elisa</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Beuger</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1448004948517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Albert Jan</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van Rees</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1248427454517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Jamille van</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Wijngaarden</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="769856538517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Lotte</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Tabbers</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1376328310517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Luuk van</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Bemmelen</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="271362046517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Tim</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kamps</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1586183919517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Renske</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">de Greef</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1248427465517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Martijn</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Hillenius</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1276436555517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Anne</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Barnhoorn</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1942314002517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Maurice</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Trouwborst</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1942314151517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Ferdi</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Stofmeel</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1942314155517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Elisa</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Beuger</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1429516524517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Michiel</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kerbosch</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1942314168517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Maurice</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Trouwborst</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1039546384517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Tim den</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Besten</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1925096812517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Diederik</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kreike</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1925096816517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Ayrton</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Fraenk</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1354303555517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Siemon</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">de Jong</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1702770325517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Edson</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">da Graça</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1412340262517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Tim</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Senders</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="569592891517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Klaas</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van Kruistum</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1024372682517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Niek</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Roozen</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="781382456517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Klaas van</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kruistum</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1456368122517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Jurre</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Geluk</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1130907670517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Emma</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Wortelboer</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1938752502517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Edson da</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Graça</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1944495947517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Stephan</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Grossmann</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1944496286517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Stefanie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Stappenbeck</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="718235004517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Dominique</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Horwitz </mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1944496367517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Cüneyt</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kaya</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1943259535517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Jasmine</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Lemée</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1943260998517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Patrick</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Huard</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1943261125517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Sophie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Lorain</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1943261232517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Miryam</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Bouchard</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1855706204517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Manon</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Hoijtink</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1520770337517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Remy</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Hogenboom</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1855706209517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Toon</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Maassen</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1309356660517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Joost</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van Hezik</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1635970964517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Eric</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van Sauers</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1886568133517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Lies</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Visschedijk</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1913459406517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Darryl</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Amankwah</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1913459410517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Heleen</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Post</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1625146968517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Polleke</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van der Sman</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1913459415517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Bennie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">el Khattab</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1913459419517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Jasmijn</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Grevink</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1913459423517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Raphael de</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Jong</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1622600018517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Matti</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Stooker</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="13019094517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Bas</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Hoeflaak</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1606159852517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Aisa</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Winter</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1424202490517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Tatum</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Dagelet</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="107394635517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Arjen</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Lubach</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1475481406517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Splinter</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Chabot</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="934032619517">
+        <mpeg7:GivenName xml:lang="NL" initial="">Sjoerd</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">van Ramshorst</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>
