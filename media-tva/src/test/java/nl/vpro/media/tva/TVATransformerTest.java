@@ -37,7 +37,6 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
-import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.media.tva.saxon.extension.*;
 
 import static nl.vpro.media.tva.Constants.*;
@@ -320,7 +319,7 @@ public class TVATransformerTest {
     @Test
     public void MSE_3202() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/BRAB20160317P.xml");
-        log.info(xml);
+        //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         Map<String, Group> mids = new HashMap<>();
         for(Group group : table.getGroupTable()) {
@@ -397,12 +396,6 @@ public class TVATransformerTest {
 
     }
 
-    @Test
-    public void MSE_4593() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        String xml = transform("pd/pd/NED320190902P.xml");
-        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
-        log.info("{}", xml);
-    }
 
     @Test
     public void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
@@ -477,10 +470,10 @@ public class TVATransformerTest {
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
         assertThat(table.getProgramTable()).hasSize(34);
-        JAXB.marshal(table, System.out);
+        //JAXB.marshal(table, System.out);
 
         Program p = (Program) table.find("POW_04866660").get();
-        log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
+        //log.info(Jackson2Mapper.getPrettyInstance().writeValueAsString(p));
         assertThat(p.getMainTitle()).isEqualTo("NOS Journaal: Briefing door het RIVM");
         assertThat(p.getCrids()).containsExactly("crid://media-press.tv/203053643", "crid://npo/programmagegevens/1902975399668");
         assertThat(p.getWorkflow()).isEqualTo(Workflow.PUBLISHED);
@@ -506,9 +499,9 @@ public class TVATransformerTest {
             }
         );
 
-        log.info("{}", xml);
+        //log.info("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
-        JAXB.marshal(table, System.out);
+        //JAXB.marshal(table, System.out);
 
         // this seems to be kind of a 'strand. This program contains multiple short movies
         Program kurzSchluss = table.<Program>findByCrid("crid://media-press.tv/206782916").orElseThrow(IllegalStateException::new);
@@ -525,7 +518,15 @@ public class TVATransformerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"NED320201208P.xml", "NED320210109P.xml", "BVNT20210321P.xml","NED220210310P.xml", "NED120210310P.xml"})
+    @ValueSource(strings = {
+        // MSE_5051
+        "NED320201208P.xml",
+        "NED320210109P.xml",
+        "BVNT20210321P.xml",
+        "NED220210310P.xml",
+        "NED120210310P.xml",
+        "NED320190902P.xml" //  MSE_4593
+         })
     public void MSE_5051_newgenres(String source) throws ParserConfigurationException, TransformerException, SAXException, IOException {
         String xml = transform("pd/pd/" + source);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
