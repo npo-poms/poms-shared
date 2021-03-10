@@ -134,6 +134,7 @@
       <Term termID="3.0.1.2">
         <Name xml:lang="nl">Film</Name>
         <Reference>urn:tva:metadata:cs:2004:02</Reference>
+        <Reference>urn:tva:metadata:cs:2004:0299</Reference>
         <Reference>urn:mis:genre:MOVIE</Reference>
         <Reference>urn:bindinc:genre:Film</Reference>
         <ValidityFlag>1</ValidityFlag>
@@ -230,6 +231,7 @@
       <Term termID="3.0.1.3">
         <Name xml:lang="nl">Serie</Name>
         <Reference>urn:tva:metadata:cs:2004:03</Reference>
+        <Reference>urn:tva:metadata:cs:2004:0399</Reference>
         <Reference>urn:mis:genre:SERIES_SOAP</Reference>
         <Reference>urn:bindinc:genre:Serie</Reference>
         <Reference>urn:bindinc:genre:Série</Reference>
@@ -289,6 +291,7 @@
       <Term termID="3.0.1.4">
         <Name xml:lang="nl">Sport</Name>
         <Reference>urn:tva:metadata:cs:2004:04</Reference>
+        <Reference>urn:tva:metadata:cs:2004:0499</Reference>
         <Reference>urn:mis:genre:SPORT</Reference>
         <Reference>urn:bindinc:genre:Sport</Reference>
         <ValidityFlag>1</ValidityFlag>
@@ -628,7 +631,7 @@
         </Term>
 
       </Term>
-      <Term termID="3.0.1.9">
+      <Term termID="3.0.1.9"> <!-- should'nt we take 40 in stead of 9 -->
         <Name xml:lang="nl">Human Interest</Name>
         <ValidityFlag>1</ValidityFlag>
         <Reference>urn:tva:metadata:cs:2004:40</Reference>

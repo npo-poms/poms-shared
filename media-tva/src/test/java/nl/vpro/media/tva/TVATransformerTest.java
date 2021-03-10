@@ -525,7 +525,7 @@ public class TVATransformerTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"NED320201208P.xml", "NED320210109P.xml", "BVNT20210321P.xml"})
+    @ValueSource(strings = {"NED320201208P.xml", "NED320210109P.xml", "BVNT20210321P.xml","NED220210310P.xml"})
     public void MSE_5051_newgenres(String source) throws ParserConfigurationException, TransformerException, SAXException, IOException {
         String xml = transform("pd/pd/" + source);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
