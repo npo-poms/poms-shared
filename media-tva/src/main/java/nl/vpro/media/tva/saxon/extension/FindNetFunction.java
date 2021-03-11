@@ -15,12 +15,18 @@ import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
 
 import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.slf4j.event.Level;
+
 import nl.vpro.domain.media.Net;
+import nl.vpro.logging.Slf4jHelper;
 
 /**
  * @author Michiel Meeuwissen
@@ -31,6 +37,8 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
 
 
     private final Supplier<Collection<Net>> netsSupplier;
+
+    private final Map<String, AtomicInteger> warns = new ConcurrentHashMap<>();
 
     @Inject
     public FindNetFunction(@Named("netsSupplier") Supplier<Collection<Net>> netsSupplier) {
@@ -63,7 +71,9 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
                         return new StringValue(net.getId());
                     }
                 }
-                log.warn("No such net {} (now returning empty string, which indicates that it can be ignored)",  value);
+                AtomicInteger occurence = warns.computeIfAbsent(value, (v) -> new AtomicInteger(0));
+                Level level = occurence.getAndIncrement() % 100 == 0 ? Level.WARN : Level.DEBUG;
+                Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored)",  occurence.get(), value);
                 return new StringValue("");
             }
         };
