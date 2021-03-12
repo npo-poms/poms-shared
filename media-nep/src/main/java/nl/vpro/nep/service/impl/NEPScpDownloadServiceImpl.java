@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.nep.service.NEPDownloadService;
+import nl.vpro.nep.service.exception.NEPException;
 import nl.vpro.util.*;
 
 /**
@@ -65,7 +66,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         CommandExecutor scptry = null;
         try {
             File tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
-            if (! tempFile.exists()) {
+            if (!tempFile.exists()) {
                 knownHosts.remove(hostkey);
                 tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
             }
@@ -84,6 +85,8 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 builder.commonArg("-v");
             }
             scptry = builder.build();
+        } catch (NEPException nepException) {
+            log.debug(nepException.getMessage());
         } catch (RuntimeException rte) {
             log.error(rte.getMessage(), rte);
         }
@@ -167,7 +170,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             } catch (IOException  e) {
                 log.error(e.getClass().getName() + ":" + e.getMessage(), e);
                 return;
-            } catch (CommandExecutor.BrokenPipe bp) {
+            } catch (CommandExecutor.BrokenPipe | NEPException bp) {
                 log.debug(bp.getMessage());
                 throw bp;
             } catch (RuntimeException rte) {
