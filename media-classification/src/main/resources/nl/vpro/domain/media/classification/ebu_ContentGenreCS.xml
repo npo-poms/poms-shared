@@ -631,72 +631,72 @@
         </Term>
 
       </Term>
-      <Term termID="3.0.1.9"> <!-- should'nt we take 40 in stead of 9 -->
+      <Term termID="3.0.1.40">
         <Name xml:lang="nl">Human Interest</Name>
         <ValidityFlag>1</ValidityFlag>
         <Reference>urn:tva:metadata:cs:2004:40</Reference>
         <Reference>urn:tva:metadata:cs:2004:4099</Reference>
-        <Term termID="3.0.1.9.58">
+        <Term termID="3.0.1.40.58">
           <Name xml:lang="nl">(sub)culturen</Name>
           <Reference>urn:tva:metadata:cs:2004:4058</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.46">
+        <Term termID="3.0.1.40.46">
           <Reference>urn:tva:metadata:cs:2004:4046</Reference>
           <Name xml:lang="nl">Biografie</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.59">
+        <Term termID="3.0.1.40.59">
           <Reference>urn:tva:metadata:cs:2004:4059</Reference>
           <Name xml:lang="nl">Familie</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.22">
+        <Term termID="3.0.1.40.22">
           <Reference>urn:tva:metadata:cs:2004:4022</Reference>
           <Name xml:lang="nl">Gezondheid/opvoeding</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.60">
+        <Term termID="3.0.1.40.60">
           <Reference>urn:tva:metadata:cs:2004:4060</Reference>
           <Name xml:lang="nl">Levensbeschouwing</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.61">
+        <Term termID="3.0.1.40.61">
           <Reference>urn:tva:metadata:cs:2004:4061</Reference>
           <Name xml:lang="nl">Levenswijze</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.62">
+        <Term termID="3.0.1.40.62">
           <Reference>urn:tva:metadata:cs:2004:4062</Reference>
           <Name xml:lang="nl">Liefde</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.63">
+        <Term termID="3.0.1.40.63">
           <Reference>urn:tva:metadata:cs:2004:4063</Reference>
           <Name xml:lang="nl">Loopbaan</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.43">
+        <Term termID="3.0.1.40.43">
           <Reference>urn:tva:metadata:cs:2004:4043</Reference>
           <Name xml:lang="nl">Reality TV</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.29">
+        <Term termID="3.0.1.40.29">
           <Reference>urn:tva:metadata:cs:2004:4029</Reference>
           <Name xml:lang="nl">Reizen</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.26">
+        <Term termID="3.0.1.40.26">
           <Reference>urn:tva:metadata:cs:2004:4026</Reference>
           <Name xml:lang="nl">Religieus</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.64">
+        <Term termID="3.0.1.40.64">
           <Reference>urn:tva:metadata:cs:2004:4064</Reference>
           <Name xml:lang="nl">Vriendschap</Name>
           <ValidityFlag>1</ValidityFlag>
         </Term>
-        <Term termID="3.0.1.9.31">
+        <Term termID="3.0.1.40.31">
           <Reference>urn:tva:metadata:cs:2004:4031</Reference>
           <Name xml:lang="nl">Wonen/Tuin</Name>
           <ValidityFlag>1</ValidityFlag>
