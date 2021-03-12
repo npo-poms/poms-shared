@@ -22,7 +22,6 @@ public class ClassificationServiceWrapper implements ClassificationService {
         this.service = new URLClassificationServiceImpl(url);
     }
 
-
     public ClassificationServiceWrapper(String url) {
         this.service = getService(url);
     }
@@ -33,45 +32,36 @@ public class ClassificationServiceWrapper implements ClassificationService {
         } else {
             return new ClassificationServiceImpl(url);
         }
-
     }
-
-
 
     @Override
     public Term getTerm(String termId) throws TermNotFoundException {
         return service.getTerm(termId);
-
     }
 
     @Override
     public List<Term> getTermsByReference(String reference) {
         return service.getTermsByReference(reference);
-
     }
 
     @Override
     public boolean hasTerm(String termId) {
         return service.hasTerm(termId);
-
     }
 
     @Override
     public Collection<Term> values() {
         return service.values();
-
     }
 
     @Override
     public Collection<Term> valuesOf(String termId) {
         return service.valuesOf(termId);
-
     }
 
     @Override
     public ClassificationScheme getClassificationScheme() {
         return service.getClassificationScheme();
-
     }
 
     @Override
