@@ -83,7 +83,9 @@ public interface UserService<T extends User> {
     @Transactional(Transactional.TxType.NEVER)
     default T login(java.security.Principal authentication, Instant timestamp) {
         T editor = get(authentication);
-        editor.setLastLogin(timestamp);
+        if (timestamp != null) {
+            editor.setLastLogin(timestamp);
+        }
         return editor;
     }
 
