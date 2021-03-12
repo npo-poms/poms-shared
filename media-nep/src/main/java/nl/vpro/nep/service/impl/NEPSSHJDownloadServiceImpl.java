@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.Slf4jHelper;
 import nl.vpro.nep.service.NEPDownloadService;
+import nl.vpro.nep.service.exception.NEPFileNotAppearedTimelyException;
+import nl.vpro.nep.service.exception.NEPFileNotFoundException;
 import nl.vpro.util.FileMetadata;
 
 
@@ -152,10 +154,10 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                     break;
                 } catch (SFTPException sftpe) {
                     if (timeout == null || timeout.equals(Duration.ZERO)) {
-                        throw new IllegalStateException("File " + nepFile + " doesn't exist");
+                        throw new NEPFileNotFoundException(sftpe, "File " + nepFile + " doesn't exist");
                     }
                     if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
-                        throw new IllegalStateException("File '" + nepFile + "' didn't appear in " + timeout);
+                        throw new NEPFileNotAppearedTimelyException(sftpe, "File '" + nepFile + "' didn't appear in " + timeout);
                     }
                     Slf4jHelper.debugOrInfo(log, count > 6, "{}: {}. Waiting {} for retry", nepFile, sftpe.getMessage(), retry);
                     Thread.sleep(retry.toMillis());
