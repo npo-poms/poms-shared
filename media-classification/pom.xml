@@ -3,7 +3,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.25.0</version>
+    <version>5.25.1-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.media</groupId>
