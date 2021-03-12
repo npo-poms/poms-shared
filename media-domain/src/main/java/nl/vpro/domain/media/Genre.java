@@ -22,6 +22,8 @@ import nl.vpro.domain.classification.bind.TermWrapper;
 import nl.vpro.validation.GenreValidation;
 
 /**
+ *  TODO, the existence of this table is a bit silly. It just contains an id field, and nothing else.
+ *
  * @author Michiel Meeuwissen
  * @since 3.0
  */
