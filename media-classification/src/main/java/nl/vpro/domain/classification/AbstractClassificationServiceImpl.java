@@ -224,12 +224,16 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
     }
 
     protected String toString(Map<TermId, Term> map) {
-        return map.size() + " terms, last modified: " + lastModified +
-            " (" + map.values()
-            .stream()
-            .filter(t -> TermId.of(t.getTermId()).getParts().length == 3)
-            .map(t -> t.getTermId() + ":" + t.getName())
-            .collect(Collectors.joining(", ")) + ")";
+        if (map == null) {
+            return "{still empty}";
+        } else {
+            return map.size() + " terms, last modified: " + lastModified +
+                " (" + map.values()
+                .stream()
+                .filter(t -> TermId.of(t.getTermId()).getParts().length == 3)
+                .map(t -> t.getTermId() + ":" + t.getName())
+                .collect(Collectors.joining(", ")) + ")";
+        }
     }
 }
 

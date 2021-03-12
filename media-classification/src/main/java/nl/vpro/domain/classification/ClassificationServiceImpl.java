@@ -50,6 +50,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         this.resources = resources;
         log.info("Configured classification service with {}", Arrays.asList(this.resources));
     }
+
     public ClassificationServiceImpl(String resources) {
         this(getResources(resources));
     }
@@ -62,9 +63,11 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         final List<URI> result = new ArrayList<>();
         for (String r : resources.split("\\s*,\\s*")) {
             if (r.startsWith("classpath:")) {
-                URI uri = uriFromClassPath(r.substring("classpath:".length() + 1));
+                URI uri = uriFromClassPath(r.substring("classpath:".length()));
                 if (uri != null) {
                     result.add(uri);
+                } else {
+                    log.warn("No uri found for {}", r);
                 }
             } else {
                 result.add(URI.create(r));
@@ -112,6 +115,9 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
     private static URI uriFromClassPath(String resource) {
         URL url = ClassificationServiceImpl.class.getClassLoader().getResource(resource);
         try {
+            if (url == null) {
+                log.warn("No such resource {}", resource);
+            }
             return url == null ? null : url.toURI();
         } catch (URISyntaxException e) {
             log.error(e.getMessage(), e);
