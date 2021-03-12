@@ -46,6 +46,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
 
     public ClassificationServiceImpl(URI... resources) {
         this.resources = resources;
+        log.info("Configured classification service with {}", Arrays.asList(this.resources));
     }
     public ClassificationServiceImpl(String resources) {
         this(getResources(resources));
