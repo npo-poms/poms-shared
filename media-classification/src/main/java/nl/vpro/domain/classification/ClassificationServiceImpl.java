@@ -51,8 +51,8 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         log.info("Configured classification service with {}", Arrays.asList(this.resources));
     }
 
-    public ClassificationServiceImpl(String resources) {
-        this(getResources(resources));
+    public ClassificationServiceImpl(String resourcesAsString) {
+        this(getResources(resourcesAsString));
     }
 
     public void setPollIntervalInMillis(long pollIntervalInMillis) {
