@@ -15,6 +15,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.xml.sax.InputSource;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * @author Michiel Meeuwissen
  * @since 3.2
@@ -128,20 +130,22 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
 
     @Nullable
     private List<File> getDirectory(URI resource, boolean startWatchers) {
-        File resourceFile = null;
+        File resourceFile;
         try {
             String protocol = resource.toURL().getProtocol().toLowerCase();
             String path = "file".equals(protocol) ? resource.getPath() : null;
             resourceFile = path == null ? null : new File(URLDecoder.decode(path, "UTF-8")); // e.g. on Jenkins.
         } catch (IOException ignored) {
-
+            resourceFile = null;
         }
         if (resourceFile != null) {
-
-
             if (resourceFile.isDirectory() || !resourceFile.exists()) {
-                if (!resourceFile.mkdirs()) {
-                    log.warn("Could't make {}", resourceFile);
+                if (! resourceFile.exists()) {
+                    if (!resourceFile.mkdirs()) {
+                        log.warn("Could't make {}", resourceFile);
+                    } else {
+                        log.info("Created {}", resourceFile);
+                    }
                 }
                 if (startWatchers) {
                     watch(resourceFile);
@@ -160,16 +164,15 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                             log.warn(tempFile + ": " + ioe.getClass() + " " + ioe.getMessage());
                         }
                     }
+                } else {
+                    log.info("Not watching {}", resourceFile);
                 }
 
-                List<File> result = new ArrayList<>();
-                Collections.addAll(result,
-                    resourceFile.listFiles((dir, name) -> name.toLowerCase().endsWith(".xml"))
-                );
+                final List<File> result = new ArrayList<>();
+                Collections.addAll(result, requireNonNull(resourceFile.listFiles((dir, name) -> name.toLowerCase().endsWith(".xml"))));
                 return result;
             } else {
-                log.debug("not a directory");
-
+                log.debug("{} not a directory", resourceFile);
             }
         }
         return null;
