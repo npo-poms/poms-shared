@@ -13,7 +13,7 @@
   version="2.0">
 
   <!--
-    This XSLT is tested via nl.vpro.camel.media.routes.TVATransformerTest
+    This XSLT is tested via nl.vpro.media.tva.TVATransformerTest
 
     Its goal is to transform TVA-xmls to the POMS 'MediaTable' XML format.
   -->
