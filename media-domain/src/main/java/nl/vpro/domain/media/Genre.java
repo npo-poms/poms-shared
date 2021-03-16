@@ -79,6 +79,18 @@ public class Genre implements Displayable, Comparable<Genre>, Serializable {
         return MediaClassificationService.getLegacyMisGenres(termId);
     }
 
+    @Override
+    public boolean display() {
+        Term term = ClassificationServiceLocator.getInstance().getTerm(termId);
+        do {
+            if(!Boolean.TRUE.equals(term.getValidityFlag())) {
+                return false;
+            }
+            term = term.getParent();
+        } while (term != null);
+
+        return true;
+    }
 
 /*
     public void setTerms(List<TermWrapper> terms) {
