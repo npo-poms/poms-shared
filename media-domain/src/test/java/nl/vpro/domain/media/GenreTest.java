@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import javax.xml.bind.JAXB;
@@ -76,5 +77,11 @@ public class GenreTest {
     @Test
     public void testEquals() {
         assertThat(new Genre("3.0.1.7.27").equals(new Genre("3.0.1.7.27"))).isTrue();
+    }
+
+    @Test
+    public void testGetFirstVersionDate() {
+        assertThat(new Genre("3.0.1.1.25").getFirstVersionDate()).isEqualTo(LocalDate.of(2014,4,8));
+        assertThat(new Genre("3.0.1.1.41").getFirstVersionDate()).isEqualTo(LocalDate.of(2021,4,1));
     }
 }
