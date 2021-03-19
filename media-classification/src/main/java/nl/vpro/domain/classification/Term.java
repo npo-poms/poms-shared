@@ -14,10 +14,9 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.sun.tools.xjc.runtime.ZeroOneBooleanAdapter;
-
 import nl.vpro.i18n.LocalizedString;
 import nl.vpro.xml.bind.LocalDateXmlAdapter;
+import nl.vpro.xml.bind.ZeroOneBooleanAdapter;
 
 /**
  * @author Roelof Jan Koekoek
