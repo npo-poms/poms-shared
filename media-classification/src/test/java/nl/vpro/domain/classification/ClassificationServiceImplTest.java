@@ -7,6 +7,7 @@ package nl.vpro.domain.classification;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.time.LocalDate;
 
 import javax.xml.bind.JAXB;
 
@@ -70,6 +71,12 @@ public class ClassificationServiceImplTest {
        /* for (Term id : ClassificationService.valuesOf("3.0.1")) {
             System.out.println(id.getTermId());
         }*/
+
+        assertThat(classificationService.getTerm("3.0.1.40").getFirstVersionDate()).isEqualTo(LocalDate.of(2021, 4, 1));
+        assertThat(classificationService.getTerm("3.0.1.40").getValidityFlag()).isFalse();
+
+        assertThat(classificationService.getTerm("3.0.1.40").getValidityFlag()).isFalse();
+
 
     }
 

@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.*;
 
 import javax.persistence.*;
@@ -79,6 +80,49 @@ public class Genre implements Displayable, Comparable<Genre>, Serializable {
         return MediaClassificationService.getLegacyMisGenres(termId);
     }
 
+    @Override
+    public boolean display() {
+        Term term = ClassificationServiceLocator.getInstance().getTerm(termId);
+        do {
+            if(!Boolean.TRUE.equals(term.getValidityFlag())) {
+                return false;
+            }
+            term = term.getParent();
+        } while (term != null);
+
+        return true;
+    }
+
+    /**
+     * @since 5.25
+     */
+    public LocalDate getFirstVersionDate() {
+        Term  term =  ClassificationServiceLocator.getInstance().getTerm(termId);
+        do {
+            LocalDate date = term.getFirstVersionDate();
+            if (date != null) {
+                return date;
+            }
+            term = term.getParent();
+        } while (term != null);
+        return getChangeVersionDate();
+    }
+
+
+    /**
+     * @since 5.25
+     */
+    public LocalDate getChangeVersionDate() {
+        Term  term =  ClassificationServiceLocator.getInstance().getTerm(termId);
+        do {
+            LocalDate date = term.getChangeVersionDate();
+            if (date != null) {
+                return date;
+            }
+            term = term.getParent();
+        } while (term != null);
+        return null;
+    }
 
 /*
     public void setTerms(List<TermWrapper> terms) {
