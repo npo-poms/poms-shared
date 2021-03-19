@@ -4,6 +4,10 @@
  */
 package nl.vpro.domain.classification;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
 import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
@@ -13,6 +17,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.sun.tools.xjc.runtime.ZeroOneBooleanAdapter;
 
 import nl.vpro.i18n.LocalizedString;
+import nl.vpro.xml.bind.LocalDateXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -23,6 +28,8 @@ import nl.vpro.i18n.LocalizedString;
     "localizedName",
     "localizedDefinition",
     "references",
+    "changeVersionDate",
+    "firstVersionDate",
     "validityFlag",
     "terms"
 })
@@ -44,9 +51,24 @@ public class Term implements Comparable<Term>, TermContainer {
     @XmlElement(name = "Reference")
     private List<Reference> references;
 
+    @XmlElement(name = "ChangeVersionDate")
+    @XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
+    @Getter
+    @Setter
+    private LocalDate changeVersionDate;
+
+    @XmlElement(name = "FirstVersionDate")
+    @XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
+    @Getter
+    @Setter
+    private LocalDate firstVersionDate;
+
     @XmlElement(name = "ValidityFlag")
     @XmlJavaTypeAdapter(ZeroOneBooleanAdapter.class)
+    @Getter
+    @Setter
     private Boolean validityFlag;
+
 
     private Term parent;
 
@@ -120,13 +142,6 @@ public class Term implements Comparable<Term>, TermContainer {
         Collections.sort(terms);
     }
 
-    public Boolean getValidityFlag() {
-        return validityFlag;
-    }
-
-    public void setValidityFlag(Boolean validityFlag) {
-        this.validityFlag = validityFlag;
-    }
 
     @Override
     public String toString() {
