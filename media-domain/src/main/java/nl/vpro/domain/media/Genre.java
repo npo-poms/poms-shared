@@ -229,7 +229,7 @@ public class Genre implements Displayable, Comparable<Genre>, Serializable {
 
     @Override
     public String toString() {
-        return "Genre{termId='" + termId + "', " + "display='" + "'" + getDisplayName() + '\'' + '}';
+        return "Genre{termId='" + termId + "', " + "display='" + getDisplayName() + "'}";
     }
 
     @Override
