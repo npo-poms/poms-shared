@@ -46,6 +46,7 @@ public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRange
     }
 
     @Override
+    @Test
     public void testHashCode() {
         assertEquals(796275456, getInstance().hashCode());
     }

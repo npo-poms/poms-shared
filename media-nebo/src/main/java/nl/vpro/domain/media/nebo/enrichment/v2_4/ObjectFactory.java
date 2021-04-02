@@ -94,7 +94,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "icon")
     public JAXBElement<AfbeeldingenType> createIcon(AfbeeldingenType value) {
-        return new JAXBElement<AfbeeldingenType>(_Icon_QNAME, AfbeeldingenType.class, null, value);
+        return new JAXBElement<>(_Icon_QNAME, AfbeeldingenType.class, null, value);
     }
 
     /**
@@ -103,7 +103,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "mail")
     public JAXBElement<String> createMail(String value) {
-        return new JAXBElement<String>(_Mail_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Mail_QNAME, String.class, null, value);
     }
 
     /**
@@ -112,7 +112,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "tite")
     public JAXBElement<String> createTite(String value) {
-        return new JAXBElement<String>(_Tite_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Tite_QNAME, String.class, null, value);
     }
 
     /**
@@ -121,7 +121,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "inhk")
     public JAXBElement<String> createInhk(String value) {
-        return new JAXBElement<String>(_Inhk_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Inhk_QNAME, String.class, null, value);
     }
 
     /**
@@ -130,7 +130,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "inh2")
     public JAXBElement<String> createInh2(String value) {
-        return new JAXBElement<String>(_Inh2_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Inh2_QNAME, String.class, null, value);
     }
 
     /**
@@ -139,7 +139,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "gids_tekst")
     public JAXBElement<String> createGidsTekst(String value) {
-        return new JAXBElement<String>(_GidsTekst_QNAME, String.class, null, value);
+        return new JAXBElement<>(_GidsTekst_QNAME, String.class, null, value);
     }
 
     /**
@@ -148,7 +148,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "inh1")
     public JAXBElement<String> createInh1(String value) {
-        return new JAXBElement<String>(_Inh1_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Inh1_QNAME, String.class, null, value);
     }
 
     /**
@@ -157,7 +157,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "inh3")
     public JAXBElement<String> createInh3(String value) {
-        return new JAXBElement<String>(_Inh3_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Inh3_QNAME, String.class, null, value);
     }
 
     /**
@@ -166,7 +166,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "atit")
     public JAXBElement<String> createAtit(String value) {
-        return new JAXBElement<String>(_Atit_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Atit_QNAME, String.class, null, value);
     }
 
     /**
@@ -175,7 +175,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "webs")
     public JAXBElement<String> createWebs(String value) {
-        return new JAXBElement<String>(_Webs_QNAME, String.class, null, value);
+        return new JAXBElement<>(_Webs_QNAME, String.class, null, value);
     }
 
     /**
@@ -184,7 +184,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "aflevering")
     public JAXBElement<AfleveringType> createAflevering(AfleveringType value) {
-        return new JAXBElement<AfleveringType>(_Aflevering_QNAME, AfleveringType.class, null, value);
+        return new JAXBElement<>(_Aflevering_QNAME, AfleveringType.class, null, value);
     }
 
     /**
@@ -193,7 +193,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "fragmenten")
     public JAXBElement<FragmentenType> createFragmenten(FragmentenType value) {
-        return new JAXBElement<FragmentenType>(_Fragmenten_QNAME, FragmentenType.class, null, value);
+        return new JAXBElement<>(_Fragmenten_QNAME, FragmentenType.class, null, value);
     }
 
     /**
@@ -202,7 +202,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "afbeeldingen")
     public JAXBElement<AfbeeldingenType> createAfbeeldingen(AfbeeldingenType value) {
-        return new JAXBElement<AfbeeldingenType>(_Afbeeldingen_QNAME, AfbeeldingenType.class, null, value);
+        return new JAXBElement<>(_Afbeeldingen_QNAME, AfbeeldingenType.class, null, value);
     }
 
     /**
@@ -211,7 +211,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "tabs")
     public JAXBElement<TabsType> createTabs(TabsType value) {
-        return new JAXBElement<TabsType>(_Tabs_QNAME, TabsType.class, null, value);
+        return new JAXBElement<>(_Tabs_QNAME, TabsType.class, null, value);
     }
 
 }

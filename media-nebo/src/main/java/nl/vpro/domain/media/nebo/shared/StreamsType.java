@@ -85,7 +85,7 @@ public class StreamsType {
     }
 
     protected boolean addStream(StreamType type) {
-        if (streams == null) streams = new ArrayList<StreamType>();
+        if (streams == null) streams = new ArrayList<>();
         for (StreamType t : streams) {
             if (t.getFormaat().equals(type.getFormaat()) && t.getKwaliteit().equals(type.getKwaliteit())) {
                 LOG.error("There is already a stream with this format and quality, so it cannot be added " + type + " in " + streams);
@@ -99,7 +99,7 @@ public class StreamsType {
 
     @XmlElement(required = true)
     public List<StreamType> getStream() {
-        if (streams == null) streams = new ArrayList<StreamType>();
+        if (streams == null) streams = new ArrayList<>();
         return streams;
     }
 
@@ -179,7 +179,7 @@ public class StreamsType {
 
     public SortedSet<Location> getLocations() {
         if (streams != null && streams.size() > 0) {
-            SortedSet<Location> locations = new TreeSet<Location>();
+            SortedSet<Location> locations = new TreeSet<>();
             for (StreamType stream : streams) {
                 Location location = stream.getLocation();
                 location.setPublishStart(publishStart);

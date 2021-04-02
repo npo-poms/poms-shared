@@ -52,7 +52,7 @@ public class SinceToTimeStampServiceImpl implements SinceToTimeStampService {
         return result;
     }
 
-    private class Entry implements  Comparable<Entry> {
+    private static class Entry implements  Comparable<Entry> {
         final Long since;
         final Instant instant;
 

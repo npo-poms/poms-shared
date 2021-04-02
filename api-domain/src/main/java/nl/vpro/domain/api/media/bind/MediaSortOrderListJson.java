@@ -33,6 +33,7 @@ public class MediaSortOrderListJson {
                     for (MediaSortOrder so : mediaSortOrders) {
                         if (so instanceof TitleSortOrder) {
                             backwards = false;
+                            break;
                         }
                     }
                 }
@@ -63,14 +64,14 @@ public class MediaSortOrderListJson {
     public static class Deserializer extends JsonDeserializer<MediaSortOrderList> {
 
         @Override
-        public MediaSortOrderList deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+        public MediaSortOrderList deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
             MediaSortOrderList list = new MediaSortOrderList();
             JsonToken token = jsonParser.currentToken();
             switch (token) {
                 case START_OBJECT:
                     jsonParser.nextToken();
                     while (jsonParser.hasToken(JsonToken.FIELD_NAME)) {
-                        String[] nextField = jsonParser.getText().split("\\:", 2);
+                        String[] nextField = jsonParser.getText().split(":", 2);
                         MediaSortField field = MediaSortField.valueOf(nextField[0]);
                         jsonParser.nextToken();
                         if (jsonParser.hasToken(JsonToken.VALUE_STRING)) {

@@ -151,7 +151,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "nebo_xml")
     public JAXBElement<NeboXmlWebOnly> createNeboXml(NeboXmlWebOnly value) {
-        return new JAXBElement<NeboXmlWebOnly>(_NeboXml_QNAME, NeboXmlWebOnly.class, null, value);
+        return new JAXBElement<>(_NeboXml_QNAME, NeboXmlWebOnly.class, null, value);
     }
 
 }

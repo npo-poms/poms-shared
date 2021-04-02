@@ -144,7 +144,7 @@ public class Result<T> implements Iterable<T> {
 
             @Override
             public Function<List<T>, Result<T>> finisher() {
-                return l -> new Result<T>(l, null, null, new Total((long) l.size(), TotalQualifier.EQUAL_TO));
+                return l -> new Result<>(l, null, null, new Total((long) l.size(), TotalQualifier.EQUAL_TO));
             }
 
 

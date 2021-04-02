@@ -239,6 +239,7 @@ public class MediaAssertTest {
         }).isInstanceOf(AssertionError.class);
     }
 
+    @Test
     public void testHasTitleForTextAndOwner() {
         mediaAssertThat((program().withTitles().build())).hasTitle("Main title", OwnerType.BROADCASTER);
     }

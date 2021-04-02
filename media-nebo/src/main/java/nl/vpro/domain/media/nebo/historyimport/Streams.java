@@ -111,7 +111,7 @@ public class Streams {
      */
     public List<Stream> getStream() {
         if (stream == null) {
-            stream = new ArrayList<Stream>();
+            stream = new ArrayList<>();
         }
         return this.stream;
     }

@@ -331,9 +331,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
         if (cueCount == null) {
             int result = 0;
             try {
-                Iterator<Cue> cues = SubtitlesUtil.parse(this, false).iterator();
-                while (cues.hasNext()) {
-                    cues.next();
+                for (Cue cue : SubtitlesUtil.parse(this, false)) {
                     result++;
                 }
                 cueCount = result;

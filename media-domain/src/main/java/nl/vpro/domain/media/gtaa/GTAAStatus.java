@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.gtaa;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.Displayable;
@@ -19,14 +21,10 @@ public enum GTAAStatus implements Displayable {
     obsolete("Achterhaald"),
     deleted("Verwijderd");
 
-    private String displayName;
+    @Getter
+    private final String displayName;
 
     GTAAStatus(String displayName) {
         this.displayName = displayName;
-    }
-
-    @Override
-    public String getDisplayName() {
-        return displayName;
     }
 }

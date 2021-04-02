@@ -33,7 +33,7 @@ public enum GroupType implements SubMediaType {
 
     public static final String URN_PREFIX = "urn:vpro:media:group:";
 
-    private MediaType mediaType;
+    private final MediaType mediaType;
 
     private final boolean canContainEpisodes;
 

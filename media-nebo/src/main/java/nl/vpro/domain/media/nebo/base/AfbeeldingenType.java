@@ -82,8 +82,8 @@ public class AfbeeldingenType {
 
     public AfbeeldingenType(Program program) {
         List<Image> mediaImageList = program.getImages();
-        afbeelding = new ArrayList<Afbeelding>();
-        icon = new ArrayList<Icon>();
+        afbeelding = new ArrayList<>();
+        icon = new ArrayList<>();
 
         for (Image image : mediaImageList) {
             if (!image.getType().equals(ImageType.ICON)) {
@@ -127,7 +127,7 @@ public class AfbeeldingenType {
      */
     public List<AfbeeldingenType.Afbeelding> getAfbeelding() {
         if (afbeelding == null) {
-            afbeelding = new ArrayList<AfbeeldingenType.Afbeelding>();
+            afbeelding = new ArrayList<>();
         }
         return this.afbeelding;
     }
@@ -156,7 +156,7 @@ public class AfbeeldingenType {
      */
     public List<AfbeeldingenType.Icon> getIcon() {
         if (icon == null) {
-            icon = new ArrayList<AfbeeldingenType.Icon>();
+            icon = new ArrayList<>();
         }
         return this.icon;
     }

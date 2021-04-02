@@ -48,7 +48,7 @@ public class OmroepenType {
 
     public OmroepenType(List<Broadcaster> broadcasters) {
         if (broadcasters != null && broadcasters.size() > 0) {
-            omroep = new ArrayList<OmroepType>();
+            omroep = new ArrayList<>();
             for (Broadcaster broadcaster : broadcasters) {
                 omroep.add(new OmroepType(broadcaster, omroep.size() == 0));
             }
@@ -85,7 +85,7 @@ public class OmroepenType {
      */
     public List<OmroepType> getOmroep() {
         if (omroep == null) {
-            omroep = new ArrayList<OmroepType>();
+            omroep = new ArrayList<>();
         }
         return this.omroep;
     }

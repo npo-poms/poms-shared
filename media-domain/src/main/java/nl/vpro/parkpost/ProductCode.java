@@ -87,8 +87,8 @@ public class ProductCode {
         result.typeCode = type;
         result.type = parseType(type);
 
-        int day = Integer.valueOf(matcher.group(3));
-        int month = Integer.valueOf(matcher.group(4));
+        int day = Integer.parseInt(matcher.group(3));
+        int month = Integer.parseInt(matcher.group(4));
         result.date = parseDate(day, month);
 
         result.versionCode = matcher.group(5);

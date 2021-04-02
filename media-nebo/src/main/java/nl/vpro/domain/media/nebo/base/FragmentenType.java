@@ -207,7 +207,7 @@ public class FragmentenType {
         protected String trefwoorden;
 
 
-        private Segment segment;
+        private final Segment segment;
 
         public Fragment() {
             this(new Segment());
