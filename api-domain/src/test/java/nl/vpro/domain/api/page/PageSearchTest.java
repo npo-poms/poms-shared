@@ -6,7 +6,6 @@ import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.page.*;

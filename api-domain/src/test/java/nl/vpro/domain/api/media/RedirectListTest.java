@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RedirectListTest {
 
-    private RedirectList instance;
+    private final RedirectList instance;
 
     {
         Map<String, String> redirects = new LinkedHashMap<>();

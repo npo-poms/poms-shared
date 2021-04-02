@@ -2,9 +2,7 @@ package nl.vpro.domain.api;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,12 +1,10 @@
 package nl.vpro.domain.media.support;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

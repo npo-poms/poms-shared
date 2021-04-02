@@ -13,8 +13,6 @@ import org.assertj.core.api.Fail;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.user.Broadcaster;
 
 import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;

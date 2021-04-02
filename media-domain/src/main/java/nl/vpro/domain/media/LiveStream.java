@@ -27,7 +27,7 @@ public class LiveStream implements Displayable {
                         result.add(new LiveStream(key, array[0], Channel.valueOf(array[1])));
                     }
                 );
-                values = result.toArray(new LiveStream[result.size()]);
+                values = result.toArray(new LiveStream[0]);
             }
         ).get();
     }

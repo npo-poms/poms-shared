@@ -21,7 +21,6 @@ import nl.vpro.domain.media.nebo.base.FragmentenType;
 import nl.vpro.domain.media.nebo.base.TabsType;
 import nl.vpro.domain.media.nebo.shared.StreamsType;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.util.TextUtil;
 
 

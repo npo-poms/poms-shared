@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.w3.rdf.RDF;

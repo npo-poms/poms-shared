@@ -2,12 +2,10 @@ package nl.vpro.domain.media.update;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.support.License;

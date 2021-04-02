@@ -4,10 +4,7 @@
  */
 package nl.vpro.media.odi;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.MediaObject;

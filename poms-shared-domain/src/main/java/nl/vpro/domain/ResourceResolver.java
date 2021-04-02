@@ -38,7 +38,7 @@ public class ResourceResolver implements LSResourceResolver {
         }
          DOM = (DOMImplementationLS) impl;
     }
-    private static Map<String, URL> MAP = new TreeMap<>();
+    private static final Map<String, URL> MAP = new TreeMap<>();
     static {
         MAP.put(XMLConstants.XML_NS_URI, Xmlns.XML_XSD);
         MAP.put(Xmlns.MEDIA_NAMESPACE, Xmlns.MEDIA_XSD);

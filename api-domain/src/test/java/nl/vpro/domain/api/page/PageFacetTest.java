@@ -1,9 +1,6 @@
 package nl.vpro.domain.api.page;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.SimpleTextMatcher;

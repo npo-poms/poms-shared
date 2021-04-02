@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Slf4j
 public class InstantRangeIntervalTest {
 
-    private String[][] exampleIntervals = {
+    private final String[][] exampleIntervals = {
         {"2 YEAR", "2016"},
         {"3 YEAR", "2016"},
         {"3 MONTH", "2016-05"},

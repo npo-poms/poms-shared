@@ -44,7 +44,6 @@ import org.springframework.web.client.*;
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.openarchives.oai.*;
-import nl.vpro.openarchives.oai.Record; // java 14's java.lang.Record
 
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;

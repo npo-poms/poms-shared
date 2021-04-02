@@ -85,7 +85,7 @@ public class TT888 {
 
             boolean needsFindNext = true;
             String timeLine = null;
-            StringBuilder content = new StringBuilder();
+            final StringBuilder content = new StringBuilder();
             Duration offset = offsetParameter;
 
             long count = 0;

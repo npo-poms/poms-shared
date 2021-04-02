@@ -9,6 +9,7 @@ import lombok.ToString;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -79,12 +80,10 @@ public class DeeplinkProtectionLocationHandler implements LocationProducer {
 
         try {
             MessageDigest digester = MessageDigest.getInstance("MD5");
-            byte[] digest = digester.digest(data.getBytes("UTF8"));
+            byte[] digest = digester.digest(data.getBytes(StandardCharsets.UTF_8));
             digestHex = hexBinaryAdapter.marshal(digest).toLowerCase();
         } catch(NoSuchAlgorithmException e) {
             log.error("Can't get MD5 " + e.getMessage());
-        } catch(UnsupportedEncodingException e) {
-            log.error("Character encoding UTF8 not supported " + e.getMessage());
         }
         return digestHex;
     }

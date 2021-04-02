@@ -1,6 +1,5 @@
 package nl.vpro.domain.api.media;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -16,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SinceToTimeStampServiceImplTest {
 
-    private SinceToTimeStampServiceImpl impl = new SinceToTimeStampServiceImpl();
+    private final SinceToTimeStampServiceImpl impl = new SinceToTimeStampServiceImpl();
 
     public SinceToTimeStampServiceImplTest() {
     }

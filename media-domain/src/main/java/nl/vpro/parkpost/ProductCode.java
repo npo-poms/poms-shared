@@ -4,6 +4,8 @@
  */
 package nl.vpro.parkpost;
 
+import lombok.Getter;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
@@ -30,14 +32,15 @@ import nl.vpro.domain.media.Schedule;
  */
 public class ProductCode {
 
-    public static enum Type {
+    public enum Type {
         P("PROMO"),
         T("TRAILER"),
         A("AANKONDIGING");
 
-        private String string;
+        @Getter
+        private final String string;
 
-        private Type(String string) {
+        Type(String string) {
             this.string = string;
         }
 

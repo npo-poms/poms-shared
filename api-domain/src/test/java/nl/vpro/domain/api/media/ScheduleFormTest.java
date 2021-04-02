@@ -6,7 +6,6 @@ import java.io.StringReader;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

@@ -3,10 +3,10 @@ package nl.vpro.domain.constraint;
 import java.time.Instant;
 import java.util.Date;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
 import com.joestelmach.natty.Parser;
@@ -78,7 +78,7 @@ public abstract class DateConstraint<T> implements FieldConstraint<T> {
 
     @Override
     public String toString() {
-        return String.valueOf(operator) + " " + date;
+        return operator + " " + date;
     }
 
 

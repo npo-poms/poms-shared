@@ -28,7 +28,7 @@ public class PromoEventConverterTest {
 
     private PromoEvent event;
 
-    private String locationBaseUrl = "http://adaptive.npostreaming.nl/u/npo/promo/";
+    private final String locationBaseUrl = "http://adaptive.npostreaming.nl/u/npo/promo/";
 
     @BeforeEach
     public void setUp() {

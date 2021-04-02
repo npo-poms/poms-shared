@@ -1,9 +1,6 @@
 package nl.vpro.domain.media.update;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.domain.media.Encryption;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

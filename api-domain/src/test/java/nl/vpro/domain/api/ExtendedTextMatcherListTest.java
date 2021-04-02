@@ -4,11 +4,9 @@
  */
 package nl.vpro.domain.api;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 

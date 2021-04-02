@@ -45,7 +45,7 @@ public class MediaClassificationServiceTest {
             for (MisGenreType mis : epg.getLegacyGenre()) {
                 example.add(mis.getDisplayName());
             }
-            MediaClassificationService.getTermsByMisGenreType(example.toArray(new String[example.size()]));
+            MediaClassificationService.getTermsByMisGenreType(example.toArray(new String[0]));
         }
     }
 

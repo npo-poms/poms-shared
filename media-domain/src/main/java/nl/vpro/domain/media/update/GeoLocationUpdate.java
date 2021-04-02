@@ -14,7 +14,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import nl.vpro.domain.media.GeoLocation;
 import nl.vpro.domain.media.GeoRoleType;
-import nl.vpro.domain.media.RoleType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "geoLocationUpdateType")

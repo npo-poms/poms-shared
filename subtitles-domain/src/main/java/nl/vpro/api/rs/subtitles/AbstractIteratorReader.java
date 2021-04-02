@@ -1,6 +1,5 @@
 package nl.vpro.api.rs.subtitles;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;

@@ -1,10 +1,8 @@
 package nl.vpro.domain.media;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

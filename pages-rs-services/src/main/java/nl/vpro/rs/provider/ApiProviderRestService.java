@@ -1,7 +1,5 @@
 package nl.vpro.rs.provider;
 
-import java.io.IOException;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 

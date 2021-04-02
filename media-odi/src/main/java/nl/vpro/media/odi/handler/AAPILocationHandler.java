@@ -9,14 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -159,7 +154,7 @@ public class AAPILocationHandler implements LocationProducer {
 
     private String addDefaultParameters(String url, String type, String callback) throws URISyntaxException, MalformedURLException {
         URI uri = URI.create(url);
-        List<NameValuePair> params = URLEncodedUtils.parse(uri, Charset.forName("UTF-8"));
+        List<NameValuePair> params = URLEncodedUtils.parse(uri, StandardCharsets.UTF_8);
         params.add(new BasicNameValuePair("protection", "url"));
         if(type != null && F4M.equals(type)) {
             params.add(new BasicNameValuePair("type", "jsonp"));

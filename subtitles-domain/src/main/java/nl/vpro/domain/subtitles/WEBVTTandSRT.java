@@ -90,7 +90,7 @@ public class WEBVTTandSRT {
             boolean needsFindNext = true;
             String cueIdentifier;
             String timeLine = null;
-            StringBuilder content = new StringBuilder();
+            final StringBuilder content = new StringBuilder();
             boolean readIntro = false;
 
             @Override

@@ -29,7 +29,7 @@ final class SSHClientFactory {
     private static final Duration sshTimeout  = Duration.ofSeconds(300);
     private static final Duration sshConnectionTimeout  = Duration.ofSeconds(5);
 
-    private static Map<String, String> FINGERPRINTS = new ConcurrentHashMap<>();
+    private static final Map<String, String> FINGERPRINTS = new ConcurrentHashMap<>();
 
     /**
      * @param hostKeys the RSA host key or if containing a semicolon one of the fingerprints supported by sshj.

@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
@@ -33,7 +34,8 @@ public interface MediaPublisherHeaders {
         ;
 
 
-        private String displayName;
+        @Getter
+        private final String displayName;
 
         Destination(String displayName) {
             this.displayName = displayName;
@@ -82,10 +84,5 @@ public interface MediaPublisherHeaders {
             return arrayOf(destination);
         }
 
-
-        @Override
-        public String getDisplayName() {
-            return displayName;
-        }
     }
 }
