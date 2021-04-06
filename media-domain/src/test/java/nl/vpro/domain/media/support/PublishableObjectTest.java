@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Assumptions;
 import nl.vpro.test.jqwik.BasicObjectTest;
 
 import static nl.vpro.domain.media.support.Workflow.*;
-import static nl.vpro.test.jqwik.HamcrestSupport.*;
+import static nl.vpro.test.jqwik.HamcrestAssumptions.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.jupiter.api.Assertions.assertFalse;
