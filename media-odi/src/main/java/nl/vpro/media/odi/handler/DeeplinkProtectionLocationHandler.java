@@ -5,8 +5,8 @@
 package nl.vpro.media.odi.handler;
 
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -17,9 +17,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import nl.vpro.domain.media.Location;
 import nl.vpro.media.odi.LocationProducer;
 import nl.vpro.media.odi.util.LocationResult;
@@ -28,12 +25,11 @@ import nl.vpro.media.odi.util.LocationResult;
  * See <a href="http://hosting.omroep.nl/sterretje-cluster:content-hosting#hotlink_bescherming">Hotlink bescherming</a>
  */
 @ToString(exclude = "streamAAPISecret")
+@Slf4j
 public class DeeplinkProtectionLocationHandler implements LocationProducer {
-    private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
+    private static final HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
 
-    private static Logger log = LoggerFactory.getLogger(DeeplinkProtectionLocationHandler.class);
-
-    private static String STREAM_API_SCHEME_PREFIX = "odis+";
+    private static final String STREAM_API_SCHEME_PREFIX = "odis+";
 
     private String streamAAPISecret;
 

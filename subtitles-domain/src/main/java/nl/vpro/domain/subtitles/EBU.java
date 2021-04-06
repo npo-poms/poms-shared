@@ -404,7 +404,7 @@ public class EBU {
         s = Integer.parseInt(args[2]);
         f = Integer.parseInt(args[3]);
 
-        return Duration.ofMillis((long) (f * 1000L / fps) + s * 1000 + m * 60000 + h * 3600000);
+        return Duration.ofMillis((long) (f * 1000L / fps) + s * 1000L + m * 60000L + h * 3600000L);
     }
 
 }

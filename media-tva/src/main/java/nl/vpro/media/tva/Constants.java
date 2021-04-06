@@ -60,9 +60,7 @@ public class Constants {
         try {
             Properties properties = new Properties();
             properties.load(Constants.class.getResourceAsStream("/bindinc.channel.properties"));
-            properties.forEach((k, v) -> {
-                mappings.put(k.toString(), v.toString());
-            });
+            properties.forEach((k, v) -> mappings.put(k.toString(), v.toString()));
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -76,9 +74,7 @@ public class Constants {
     public static Document createChannelMapping(ChannelIdType type) throws IOException, ParserConfigurationException, SAXException {
         Properties channelMapping = new Properties();
         if (type == ChannelIdType.BINDINC) {
-            getBindincChannelMappings().forEach((k, v) -> {
-                channelMapping.put(k, Channel.valueOf(v).getXmlValue());
-            });
+            getBindincChannelMappings().forEach((k, v) -> channelMapping.put(k, Channel.valueOf(v).getXmlValue()));
         } else {
             for (Channel channel : Channel.values()) {
                 switch (type) {

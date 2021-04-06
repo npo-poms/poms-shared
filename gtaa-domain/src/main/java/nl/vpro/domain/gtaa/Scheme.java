@@ -77,6 +77,7 @@ public enum Scheme implements Displayable {
         return Scheme.valueOf(objectType);
     }
 
+    @SuppressWarnings("unchecked")
     static void init(Class<?> gtaaClass) {
         GTAAScheme annotation = gtaaClass.getAnnotation(GTAAScheme.class);
         if (annotation != null) {
