@@ -208,15 +208,5 @@
       <artifactId>jaxb-documentation</artifactId>
       <optional>true</optional>
     </dependency>
-
-
-    <!-- TODO theory testing should be redone
-     (perhaps using jqwik or something)
-     -->
-    <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>
