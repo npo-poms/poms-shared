@@ -4,12 +4,14 @@
  */
 package nl.vpro.domain.media;
 
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
+
 import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
-import org.junit.experimental.theories.DataPoint;
 
-import nl.vpro.test.theory.ObjectTest;
+import nl.vpro.test.jqwik.BasicObjectTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,26 +19,24 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
-public class RestrictionTest extends ObjectTest<Restriction> {
+public class RestrictionTest implements BasicObjectTest<RestrictionTest.TestRestriction> {
 
-    @DataPoint
-    public static Restriction nullArgument = null;
-
-    @DataPoint
-    public static Restriction withStartAndStop = new TestRestriction(null, Instant.EPOCH, Instant.ofEpochMilli(2));
-
-    @DataPoint
-    public static Restriction persistedWithStartAndStop = new TestRestriction(1L, Instant.EPOCH, Instant.ofEpochMilli(2));
-
-    @DataPoint
-    public static Restriction persistedWithStartUpdate = new TestRestriction(1L, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
+    public static TestRestriction nullArgument = null;
+    public static TestRestriction withStartAndStop = new TestRestriction(null, Instant.EPOCH, Instant.ofEpochMilli(2));
+    public static TestRestriction persistedWithStartAndStop = new TestRestriction(1L, Instant.EPOCH, Instant.ofEpochMilli(2));
+    public static TestRestriction persistedWithStartUpdate = new TestRestriction(1L, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
 
     @Test
     public void testEqualsWhenIncomingWithNullId() {
         assertThat(withStartAndStop).isEqualTo(persistedWithStartAndStop);
     }
 
-    private static class TestRestriction extends Restriction {
+    @Override
+    public Arbitrary<TestRestriction> datapoints() {
+        return Arbitraries.of(nullArgument, withStartAndStop, persistedWithStartAndStop, persistedWithStartUpdate);
+    }
+
+    public static class TestRestriction extends Restriction<TestRestriction> {
         private TestRestriction(Long id, Instant start, Instant stop) {
             super(id, start, stop);
         }
