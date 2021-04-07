@@ -34,6 +34,7 @@ import nl.vpro.persistence.LocalDateToDateConverter;
 import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.*;
 
+import static java.util.Comparator.comparing;
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 
@@ -682,7 +683,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (getChannel() != null && otherChannel != null) {
             return getChannel().ordinal() - otherChannel.ordinal();
         } else {
-            return hashCode() - o.hashCode();
+            return comparing(ScheduleEvent::getStartInstant, Comparator.nullsLast(Comparator.naturalOrder()))
+                .thenComparing(ScheduleEvent::getChannel, Comparator.nullsLast(Comparator.naturalOrder())).compare(this, o);
         }
     }
 
