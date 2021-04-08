@@ -161,7 +161,9 @@ public class RelationTest implements ComparableTest<Relation> {
         return Arbitraries.of(
             null,
             relation(null, "TYPE", "VPRO"),
-            relation(1L, "TYPE", "VPRO")
+            relation(1L, "TYPE", "VPRO"),
+            relation(2L, "ANOTHER", "EO"),
+            relation(3L, "ANOTHER", "VPRO")
         );
     }
 
