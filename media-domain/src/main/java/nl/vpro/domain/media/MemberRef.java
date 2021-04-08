@@ -4,8 +4,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -29,6 +28,8 @@ import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.*;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+
+import static java.util.Comparator.comparing;
 
 /**
  * <p>
@@ -584,8 +585,15 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
             return this.getId().compareTo(memberRef.getId());
         }
 */
+        if (this.equals(memberRef)) {
+            return 0;
+        }
+        return comparing(MemberRef::getUrnRef, Comparator.nullsLast(Comparator.naturalOrder()))
+            .thenComparing(MemberRef::getNumber, Comparator.nullsLast(Comparator.naturalOrder()))
+            .thenComparing(MemberRef::getMidRef, Comparator.nullsLast(Comparator.naturalOrder()))
+            .thenComparing(MemberRef::getMediaRef, Comparator.nullsLast(Comparator.naturalOrder()))
+            .compare(this, memberRef);
 
-        return this.hashCode() - memberRef.hashCode();
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
