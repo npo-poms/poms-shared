@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api;
 
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.media.ScheduleResult;
 import nl.vpro.domain.media.*;
+import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,16 +24,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author rico
  */
-public class ScheduleEventTest {
+public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
+    Program program = MediaTestDataBuilder.program().creationDate(Instant.ofEpochMilli(100)).mid("VPROWON_12345").withSubtitles().build();
 
 
     @Test
     public void testListMedia() {
-        nl.vpro.domain.media.ScheduleEvent mediaEvent;
+        ScheduleEvent mediaEvent;
         ApiScheduleEvent apiEvent;
 
-        mediaEvent = new nl.vpro.domain.media.ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(0), Duration.ofMillis(100));
-        Program program = MediaTestDataBuilder.program().creationDate(Instant.ofEpochMilli(100)).mid("VPROWON_12345").withSubtitles().build();
+        mediaEvent = new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(0), Duration.ofMillis(100));
 
         apiEvent = new ApiScheduleEvent(mediaEvent, program);
         List<ApiScheduleEvent> events = new ArrayList<>();
@@ -61,10 +65,10 @@ public class ScheduleEventTest {
 
     @Test
     public void testGetMedia() {
-        nl.vpro.domain.media.ScheduleEvent mediaEvent;
+        ScheduleEvent mediaEvent;
         ApiScheduleEvent apiEvent;
 
-        mediaEvent = new nl.vpro.domain.media.ScheduleEvent(Channel.NED3, Instant.EPOCH, Duration.ofMillis(100));
+        mediaEvent = new ScheduleEvent(Channel.NED3, Instant.EPOCH, Duration.ofMillis(100));
         Program program = MediaTestDataBuilder.program().creationDate(Instant.ofEpochMilli(100)).mid("VPROWON_12346").build();
 
         apiEvent = new ApiScheduleEvent(mediaEvent, program);
@@ -85,5 +89,21 @@ public class ScheduleEventTest {
             "</api:scheduleItem>";
         ApiScheduleEvent roundtripped = JAXBTestUtil.roundTripAndSimilar(apiEvent, expected);
         assertThat(roundtripped.getChannel()).isEqualTo(Channel.NED3);
+    }
+
+
+    Instant now = Instant.now();
+    @Override
+    public Arbitrary<? extends ScheduleEvent> datapoints() {
+        return Arbitraries.of(
+            ScheduleEvent.builder().build(),
+            ScheduleEvent.builder().start(now).build(),
+            ScheduleEvent.builder().channel(Channel.ARTE).start(now).build(),
+            ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
+            ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
+            ScheduleEvent.builder().channel(Channel.NED1).start(now.plus(Duration.ofMinutes(10))).build(),
+            null,
+            null
+        ).map(s -> s == null ? null : new ApiScheduleEvent(s, program));
     }
 }
