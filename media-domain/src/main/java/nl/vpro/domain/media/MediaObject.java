@@ -2743,11 +2743,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * This setter is not intended for normal use in code. RepubDate is meant
-     * for monitoring the publication delays in NewRelic. It contains the
+     * for monitoring the publication delays. It contains the
      * scheduled publication date of this MediaObject. This field is set (in
      * SQL) when republishing descendants, and (in code) when revoking
      * locations/images. When the republication delay reaches a certain value an
-     * alert is raised in NewRelic.
+     * alert can be raised.
      */
     void setRepubDate(Instant repubDate) {
         this.repubDate = repubDate;
@@ -2759,7 +2759,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             locationAuthorityUpdate = true;
         }
     }
-
 
 
     public abstract SubMediaType getType();
