@@ -282,13 +282,13 @@
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.3.50">
-          <Name xml:lang="nl">Misdaad</Name>
+          <Name xml:lang="nl">Historisch</Name>
           <Reference>urn:tva:metadata:cs:2004:0350</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
           <ValidityFlag>0</ValidityFlag>
         </Term>
         <Term termID="3.0.1.3.52">
-          <Name xml:lang="nl">Historisch</Name>
+          <Name xml:lang="nl">Misdaad</Name>
           <Reference>urn:tva:metadata:cs:2004:0352</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
           <ValidityFlag>0</ValidityFlag>
