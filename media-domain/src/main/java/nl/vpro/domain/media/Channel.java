@@ -2275,10 +2275,22 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("FUNG")
-    FUNG(AUDIO, null, null, true)  {
+    FUNG(AUDIO, null, "https://www.funx.nl/denhaag/online-radio-luisteren", true)  {
         @Override
         public String toString() {
             return "FunX Den Haag";
+        }
+    },
+
+
+    /**
+     * @since 5.27
+     */
+    @XmlEnumValue("FUNF")
+    FUNF(AUDIO, null, "https://www.funx.nl/fissa/online-radio-luisteren", true)  {
+        @Override
+        public String toString() {
+            return "FunX Fissa";
         }
     },
 
