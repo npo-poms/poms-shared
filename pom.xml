@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>5.27-SNAPSHOT</version>
+    <version>5.27.0</version>
   </parent>
 
   <name>poms shared</name>
@@ -23,7 +23,6 @@
     <connection>scm:git:git://git@github.com/npo-poms/poms-shared.git</connection>
     <developerConnection>scm:git:git@github.com:npo-poms/poms-shared.git</developerConnection>
     <url>https://github.com/npo-poms/poms-shared</url>
-    <tag>HEAD</tag>
   </scm>
 
 
