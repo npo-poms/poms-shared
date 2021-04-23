@@ -83,4 +83,10 @@ public class SubtitlesId implements Serializable {
     public String toString() {
         return mid + "\t" + type + "\t" + language;
     }
+
+
+    // helps https://github.com/mplushnikov/lombok-intellij-plugin/issues/1018
+    public static class Builder {
+
+    }
 }

@@ -54,4 +54,9 @@ public class GTAARecord implements Serializable {
         this.uri = uri;
         this.status = status;
     }
+
+    // helps https://github.com/mplushnikov/lombok-intellij-plugin/issues/1018
+    public static class Builder {
+
+    }
 }

@@ -28,17 +28,51 @@ public interface ScheduleService {
         }
     }
 
-    ScheduleResult list(Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult list(
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult list(Channel channel, Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult list(
+        Channel channel,
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult list(Net net, Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult list(
+        Net net,
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult listForBroadcaster(String broadcaster, Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult listForBroadcaster(
+        String broadcaster,
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult listForAncestor(String mediaId, Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult listForAncestor(
+        String mediaId,
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleSearchResult find(ScheduleForm form, String profile, long offset, Integer max);
+    ScheduleSearchResult find(
+        ScheduleForm form,
+        Order sort,
+        String profile,
+        long offset,
+        Integer max);
 
 
     static ZonedDateTime guideDayStart(LocalDate guideDay) {

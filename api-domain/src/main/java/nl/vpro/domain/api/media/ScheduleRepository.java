@@ -16,19 +16,63 @@ import nl.vpro.domain.media.Net;
  */
 public interface ScheduleRepository  {
 
-    ScheduleResult listSchedules(Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult listSchedules(
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult listSchedules(Channel channel, Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult listSchedules(
+        Channel channel,
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult listSchedules(Channel channel, LocalDate guideDay, Order order, long offset, Integer max);
+    ScheduleResult listSchedules(
+        Channel channel,
+        LocalDate guideDay,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult listSchedules(Net net, Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult listSchedules(
+        Net net,
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult listSchedulesForBroadcaster(String broadcaster, Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult listSchedulesForBroadcaster(
+        String broadcaster,
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult listSchedulesForAncestor(String mediaId, Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult listSchedulesForAncestor(
+        String mediaId,
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleResult listSchedulesForMediaType(MediaType mediaType, Instant start, Instant stop, Order order, long offset, Integer max);
+    ScheduleResult listSchedulesForMediaType(
+        MediaType mediaType,
+        Instant start,
+        Instant stop,
+        Order order,
+        long offset,
+        Integer max);
 
-    ScheduleSearchResult findSchedules(ProfileDefinition<MediaObject> profile, ScheduleForm form, long offset, Integer max);
+    ScheduleSearchResult findSchedules(
+        ProfileDefinition<MediaObject> profile, ScheduleForm form,
+        Order sort,
+        long offset,
+        Integer max);
 }
