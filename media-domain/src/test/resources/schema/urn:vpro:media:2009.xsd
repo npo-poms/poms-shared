@@ -866,6 +866,7 @@
       <xs:enumeration value="FUNR"/>
       <xs:enumeration value="FUNU"/>
       <xs:enumeration value="FUNG"/>
+      <xs:enumeration value="FUNF"/>
       <xs:enumeration value="CLAS"/>
       <xs:enumeration value="BEL1"/>
       <xs:enumeration value="BEL2"/>
@@ -1149,3 +1150,4 @@
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
+
