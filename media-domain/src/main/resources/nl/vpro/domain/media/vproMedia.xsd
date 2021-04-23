@@ -3078,6 +3078,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="FUNF">
+         <xs:annotation>
+          <xs:documentation>
+            FunX Fissa
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="CLAS">
         <xs:annotation>
           <xs:documentation>
