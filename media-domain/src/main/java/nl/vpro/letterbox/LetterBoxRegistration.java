@@ -8,26 +8,25 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
+ * One entry in {@link LetterBoxRegistration}
  * @author Michiel Meeuwissen
  * @since 5.8
  */
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @lombok.Builder
 @EqualsAndHashCode
 @Slf4j
 public class LetterBoxRegistration {
-    private String key;
+    private final String key;
 
-    private String endPointId;
+    private final String endPointId;
 
-    private String principalId;
+    private final String principalId;
 
-    private String description;
+    private final String description;
 
-    private String implementingClass;
+    private final String implementingClass;
 
     @Override
     public String toString() {
