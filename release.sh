@@ -3,9 +3,14 @@
 export NS=http://maven.apache.org/POM/4.0.0
 export MAVEN_OPTS=-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
+VN=$(git describe --abbrev=7 HEAD 2>/dev/null)
 
-# TODO
-# set poms.xml/properties/patch.version to .0
+git update-index -q --refresh
+if ! git diff-index --quiet HEAD --; then
+    VN="$VN"
+    echo "checkout is dirty : $VN"
+    exit 1
+fi
 
 # determin current version
 SNAPSHOT_VERSION=`xmllint  --noout  --shell  pom.xml << EOF |  grep -E -v '^(\/|text).*'
