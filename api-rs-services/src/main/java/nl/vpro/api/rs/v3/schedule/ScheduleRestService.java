@@ -13,7 +13,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.api.ApiScheduleEvent;
-import nl.vpro.domain.api.Order;
 import nl.vpro.domain.api.media.*;
 
 import static nl.vpro.domain.api.Constants.*;
@@ -193,7 +192,7 @@ public interface ScheduleRestService {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     ScheduleSearchResult find(
         @Valid ScheduleForm form,
-        @QueryParam(SORT) @DefaultValue(ASC) Order sort,
+        @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) long offset,
