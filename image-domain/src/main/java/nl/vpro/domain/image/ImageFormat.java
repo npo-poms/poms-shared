@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 @Slf4j
 public enum ImageFormat {
@@ -52,6 +53,7 @@ public enum ImageFormat {
         this.supportsAnimation = supportsAnimation;
     }
 
+    @NonNull
     public static Optional<ImageFormat> forFileExtension(String extension) throws UnsupportedImageFormatException {
         if (StringUtils.isEmpty(extension)) {
             return Optional.empty();
