@@ -15,14 +15,17 @@ import nl.vpro.util.CloseableIterator;
 import nl.vpro.util.FilteringIterator;
 
 /**
+ * Wraps an existing Iterator of changes to allow for skipping certain values.
+ *
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
 @Slf4j
 public class ChangeIterator implements CloseableIterator<MediaChange> {
 
-    private static final int LOG_BATCH = 50000;
+    private static final int LOG_BATCH_DEFAULT = 50000;
 
+    private final int logBatch;
     private final Iterator<MediaChange> wrapped;
 
     private final ProfileDefinition<MediaObject> current;
@@ -43,12 +46,12 @@ public class ChangeIterator implements CloseableIterator<MediaChange> {
 
     private long count = 0; // total number found until now
     private long updatesSkipped = 0; // how many are skipped in total now
-    private long deletedsSkipped = 0; // how many are skipped in total now
+    private long deletesSkipped = 0; // how many are skipped in total now
     private long currentSkipCount = 0; // how many are skipped in e sequence now
     private final long keepAliveNulls; // after how many sequential skips a 'null' must be returned.
 
     /**
-     * @param iterator      The original couchdb change feed
+     * @param iterator      The original change feed (from ES)
      * @param since         The since argument, which is sometimes needed during filtering
      * @param current       The current profile as used by filtering
      * @param previous      The profile at the moment 'since'.
@@ -56,28 +59,38 @@ public class ChangeIterator implements CloseableIterator<MediaChange> {
      *                      If you set this to some finite positive value (it defaults to MAX_VALUE), every so many skips it wil return 'null'.
      *                      This null can be used to send something to the client to keep the connection alive.
      */
-
-    public ChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous, long keepAliveNull) {
-        this.wrapped = new FilteringIterator<>(iterator, Objects::nonNull);
-        this.sinceDate = since;
-        this.since = null;
-        this.current = nullIsMatchAlways(current);
-        this.previous = nullIsMatchAlways(previous);
-        this.keepAliveNulls = keepAliveNull;
+    public ChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous, Long keepAliveNull) {
+        this(iterator, since, null, current, previous, keepAliveNull, null);
     }
 
     public ChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous) {
-        this(iterator, since, current, previous, Long.MAX_VALUE);
+        this(iterator, since, current, previous, null);
     }
 
     public ChangeIterator(Iterator<MediaChange> iterator, Long since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous, long keepAliveNull) {
+        this(iterator, null, since, current, previous, keepAliveNull, null);
+    }
+
+
+    @lombok.Builder
+    public ChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous, Long keepAliveNull, Integer logBatch) {
+        this(iterator, since, null, current, previous, keepAliveNull, logBatch);
+
+    }
+
+    private  ChangeIterator(Iterator<MediaChange> iterator, Instant sinceDate, Long since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous, Long keepAliveNull, Integer logBatch) {
         this.wrapped = new FilteringIterator<>(iterator, Objects::nonNull);
+        this.sinceDate = sinceDate;
         this.since = since;
-        this.sinceDate = null;
         this.current = nullIsMatchAlways(current);
         this.previous = nullIsMatchAlways(previous);
-        this.keepAliveNulls = keepAliveNull;
+        this.keepAliveNulls = keepAliveNull == null ? Long.MAX_VALUE : keepAliveNull;
+        if (this.keepAliveNulls <= 0) {
+            throw new IllegalArgumentException();
+        }
+        this.logBatch = logBatch == null ? LOG_BATCH_DEFAULT : logBatch;
     }
+
 
     public ChangeIterator(Iterator<MediaChange> iterator, Long since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous) {
         this(iterator, since, current, previous, Long.MAX_VALUE);
@@ -140,7 +153,7 @@ public class ChangeIterator implements CloseableIterator<MediaChange> {
                     }
                 } else {
                     if (isDelete) {
-                        deletedsSkipped++;
+                        deletesSkipped++;
                     } else {
                         updatesSkipped++;
                     }
@@ -155,8 +168,8 @@ public class ChangeIterator implements CloseableIterator<MediaChange> {
                         return;
                     }
                 }
-                if (count % LOG_BATCH == 0) {
-                    log.info("{}: sequence: {} count: {}  skipped: updates: {}, deletes: {}", current.getName(), sequence, count, updatesSkipped, deletedsSkipped);
+                if (count % logBatch == 0) {
+                    log.info("{}: sequence: {} count: {}  skipped: updates: {}, deletes: {}", current.getName(), sequence, count, updatesSkipped, deletesSkipped);
                 }
             }
             // handle last one
@@ -165,8 +178,8 @@ public class ChangeIterator implements CloseableIterator<MediaChange> {
                 next.setSequence(sequence);
                 next.setPublishDate(publishDate);
                 nextnext = null;
-                if (count > LOG_BATCH) {
-                    log.info("{}: sequence: {} count: {}  skipped: updates: {}, deletes: {}. Ready.", current.getName(), sequence, count, updatesSkipped, deletedsSkipped);
+                if (count > logBatch) {
+                    log.info("{}: sequence: {} count: {}  skipped: updates: {}, deletes: {}. Ready.", current.getName(), sequence, count, updatesSkipped, deletesSkipped);
                 }
             }
             needsFindNext = false;
@@ -184,6 +197,7 @@ public class ChangeIterator implements CloseableIterator<MediaChange> {
 
     protected boolean deleteNeedsOutput(MediaChange input) {
         if (! (input.getMedia() == null || previous.test(input.getMedia()))) {
+            // input does was not in the previous profile, no need to output
             return false;
         }
         return appliesToSince(input);
