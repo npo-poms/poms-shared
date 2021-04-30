@@ -4,15 +4,13 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.constraint.AbstractFilter;
 import nl.vpro.domain.media.MediaObject;
-import nl.vpro.util.CloseableIterator;
+import nl.vpro.util.CloseablePeekingIterator;
 import nl.vpro.util.FilteringIterator;
 
 /**
@@ -22,7 +20,7 @@ import nl.vpro.util.FilteringIterator;
  * @since 3.0
  */
 @Slf4j
-public class ChangeIterator implements CloseableIterator<MediaChange> {
+public class ChangeIterator implements CloseablePeekingIterator<MediaChange> {
 
     private static final int LOG_BATCH_DEFAULT = 50000;
 
@@ -108,6 +106,25 @@ public class ChangeIterator implements CloseableIterator<MediaChange> {
         findNext();
         return hasNext;
 
+    }
+
+    @Override
+    public MediaChange peek() {
+        findNext();
+        if (!hasNext) {
+            throw new NoSuchElementException();
+        }
+        if (currentSkipCount >= keepAliveNulls) {
+            currentSkipCount = 0;
+            return null;
+        }
+
+        return next;
+    }
+
+    public Optional<MediaChange> peekNext() {
+        findNext();
+        return Optional.ofNullable(nextnext);
     }
 
     @Override

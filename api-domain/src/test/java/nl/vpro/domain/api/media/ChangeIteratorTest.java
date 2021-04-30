@@ -74,8 +74,14 @@ public class ChangeIteratorTest {
             assertThat(test.getPublishDate()).isEqualTo("2021-03-01T11:01:00Z");
             assertThat(test.getSequence()).isEqualTo(1614596460000L);
 
+            test(test.peek(), "2021-03-01T11:01:00Z", "mid_2", true);
+            test(test.peekNext().get(), "2021-03-01T11:02:00Z", "mid_3", false);
+
+
             test(test.next(), "2021-03-01T11:01:00Z", "mid_2", true);
             test(test.next(), "2021-03-01T11:02:00Z", "mid_3", false);
+            //assertThat(test.peek().getMid()).isEqualTo("mid_4");
+            assertThat(test.peekNext()).isEmpty();
             test(test.next(), "2021-03-01T11:02:00Z", "mid_4", false);
 
             assertThat(test.hasNext()).isFalse();
