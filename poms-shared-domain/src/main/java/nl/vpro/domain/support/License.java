@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,7 +38,6 @@ import nl.vpro.validation.LicenseId;
  * @since 5.0
  */
 
-@SuppressWarnings("ValidExternallyBoundObject")
 @ToString
 @XmlType(name = "licenseEnum", namespace = Xmlns.SHARED_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
@@ -129,10 +129,11 @@ public class License implements Displayable, Serializable { // Not an enum, beca
     @Transient
     private boolean display = true;
 
-    private License (){}
+    public License (){}
 
 
-    private License(String id) {
+    @JsonCreator
+    public License(String id) {
         this.id = id;
     }
 
