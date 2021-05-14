@@ -101,7 +101,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             properties.getProperty("nep.itemizer-download.hostkey"),
             true,
             Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
-            Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass"),
+            Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass", "/usr/local/bin/sshpass"/*brew*/),
             3,
             false
         );
