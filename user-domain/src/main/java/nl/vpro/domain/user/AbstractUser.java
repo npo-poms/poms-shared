@@ -6,9 +6,11 @@ package nl.vpro.domain.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -19,6 +21,7 @@ import nl.vpro.domain.Identifiable;
 
 @MappedSuperclass
 @XmlAccessorType(XmlAccessType.FIELD)
+@Slf4j
 public abstract class AbstractUser implements Serializable, Identifiable<String>, User  {
     private static final long serialVersionUID = 1L;
 
@@ -107,8 +110,15 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
 
     @Override
     public void setLastLogin(Instant lastLogin) {
-        this.lastLogin = lastLogin;
-        this.loginCount++;
+        if (!Objects.equals(this.lastLogin, lastLogin)) {
+            this.loginCount++;
+            if (this.lastLogin != null) {
+                log.debug("{} {} -> {} ({})", getPrincipalId(), this.lastLogin, lastLogin, this.loginCount);
+            }
+            this.lastLogin = lastLogin;
+        } else {
+            log.debug("lastlogin already is {}. this is not a new login", lastLogin);
+        }
     }
 
     @PrePersist
