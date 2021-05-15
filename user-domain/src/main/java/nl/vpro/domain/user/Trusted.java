@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.Roles;
-import nl.vpro.util.GranularClock;
 
 import static nl.vpro.domain.Roles.SUPERPROCESS_ROLE;
 import static nl.vpro.domain.Roles.SYSTEM_ROLE;
@@ -81,7 +80,7 @@ public interface Trusted {
     }
 
     static Trusted of(String principal, String... roles) {
-        return of(GranularClock.of(Duration.ofMinutes(5)), principal, roles);
+        return of(Clock.tick(Clock.systemUTC(), Duration.ofMinutes(5)), principal, roles);
     }
 
     static Trusted of(final Clock clock, final String principal, String... roles) {
