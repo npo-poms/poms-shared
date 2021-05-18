@@ -30,6 +30,7 @@ jobs:
       run: mvn -B -Pdeploy,ossrh deploy --file pom.xml  -Dgpg.skip=true
     - name: Publish to codecov
       run: bash <(curl -s https://codecov.io/bash)
+      if: github.ref == 'refs/heads/master'
       continue-on-error: true
     - name: Publish Test Report
       uses: scacap/action-surefire-report@v1
