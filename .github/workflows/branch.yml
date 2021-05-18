@@ -1,0 +1,13 @@
+name: release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build with Maven
+      run: mvn --batch-mode release:branch
+
