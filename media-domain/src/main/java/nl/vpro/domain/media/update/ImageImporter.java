@@ -16,6 +16,7 @@ public interface ImageImporter {
 
     class DownloadException extends RuntimeException {
 
+        private static final long serialVersionUID = 960450531709055817L;
         private final boolean retryable;
 
         public DownloadException(boolean retryable, String s, Throwable cause) {
