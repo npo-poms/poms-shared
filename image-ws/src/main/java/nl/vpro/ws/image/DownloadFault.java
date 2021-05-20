@@ -13,6 +13,8 @@ import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 @WebFault(name = "downloadFault", targetNamespace = IMAGE_WS_NAMESPACE)
 public class DownloadFault extends RuntimeException {
 
+    private static final long serialVersionUID = 8356309991224361853L;
+
     @Getter
     private final ImageNotFound faultInfo;
 
