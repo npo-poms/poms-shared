@@ -24,9 +24,9 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @ValidEmbargo
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)
-@SuppressWarnings("serial")
 abstract public class Restriction<T extends Restriction<T>> extends DomainObject implements MutableEmbargo<T> {
 
+    private static final long serialVersionUID = 4916863601110482209L;
 
     protected static abstract class RestrictionBuilder<B extends RestrictionBuilder<B>> implements EmbargoBuilder<B> {
 
@@ -77,7 +77,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
         this.stop = stop;
     }
 
-    protected Restriction(Restriction source) {
+    protected Restriction(Restriction<T> source) {
         this(source.start, source.stop);
     }
 
@@ -99,6 +99,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
 
 
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {
         if (obj == null) { return false; }
@@ -106,7 +107,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
         if (obj.getClass() != getClass()) {
             return false;
         }
-        Restriction rhs = (Restriction) obj;
+        Restriction<T> rhs = (Restriction) obj;
 
         return new EqualsBuilder()
             .append(start, rhs.start)
