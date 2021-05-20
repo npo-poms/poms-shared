@@ -24,7 +24,6 @@ import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 public class ImageNotFound  implements Serializable {
     private static final long serialVersionUID = 0L;
 
-
     private String message;
 
     public ImageNotFound() {
