@@ -3,7 +3,8 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,8 @@ import nl.vpro.util.locker.ObjectLockerAdmin;
 @Slf4j
 class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
 
-    ObjectLockerAdmin objectLockerAdmin = ObjectLockerAdmin.JMX_INSTANCE;
+    private final ObjectLockerAdmin objectLockerAdmin = ObjectLockerAdmin.JMX_INSTANCE;
+
 
     @Override
     public Set<String> getLocks() {
