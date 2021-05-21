@@ -12,15 +12,16 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.UUID;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.Embargos;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
