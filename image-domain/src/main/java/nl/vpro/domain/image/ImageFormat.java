@@ -34,6 +34,9 @@ public enum ImageFormat {
     static final Map<String, String> MAPPING = new HashMap<>();
     static {
         MAPPING.put("image/pjpeg", "image/jpeg");
+        MAPPING.put("image/jpg", "image/jpeg"); // found in in the logs: May  5 22:29:22 judy07 1 2021-05-05T22:29:22+02:00 bogo03 /e/as/poms7a - - - [prod] - imagebackend - WARN  -  - For https://radio-images.npo.nl/%7Bformat%7D/c558d163-3329-4fc4-91e4-83b1a9e2bf1d/7aed65cc-d12d-4a89-91b7-8f701a534d0c.jpg image/jpg: No matching type for mime-type: image/jpg  [ nl.vpro.domain.image.ImageDownloaders - pool-4-thread-1 ]
+        // it's actually wrong, but never mind
+
     }
 
     @Getter
@@ -81,7 +84,7 @@ public enum ImageFormat {
             }
         }
 
-        throw new UnsupportedImageFormatException("No matching type for mime-type: " + mimeType);
+        throw new UnsupportedImageFormatException("No matching type for mime-type: '" + mimeType + "'");
     }
 
     public String getFileExtension() {
