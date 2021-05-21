@@ -27,7 +27,7 @@ import nl.vpro.util.locker.ObjectLocker.LockHolder;
  *
  * This basicly wraps {@link ObjectLocker}, but keeps a separate map of locked objects, dedicated to media identifiables
  *
- * Also, it defined some annotations (for use with {@link MediaObjectLockerAspect} (to facilitate locking via annotation), and some utility methods.
+ * Also, it defines some annotations (for use with {@link MediaObjectLockerAspect} (to facilitate locking via annotation), and some utility methods.
  *
  * @author Michiel Meeuwissen
  * @since 5.5
