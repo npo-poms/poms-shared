@@ -7,6 +7,8 @@ import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import nl.vpro.util.locker.ObjectLocker;
+
 /**
  * An object that contains various fields to identify a POMS media object.
 * @author Michiel Meeuwissen
@@ -51,7 +53,8 @@ public interface MediaIdentifiable extends MidIdentifiable {
 
 
     @Getter
-    class Correlation implements Serializable {
+    class Correlation implements Serializable, ObjectLocker.DefinesType {
+        private static final long serialVersionUID = -8973548054279104343L;
         final String id;
         final Type type;
 
