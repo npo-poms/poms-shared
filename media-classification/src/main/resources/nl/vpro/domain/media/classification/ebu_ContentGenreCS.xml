@@ -123,13 +123,13 @@
           <Name xml:lang="nl">Human Interest</Name>
           <Reference>urn:tva:metadata:cs:2004:0140</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.1.41">
           <Name xml:lang="nl">Evenement/registratie</Name>
           <Reference>urn:tva:metadata:cs:2004:0141</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
 
       </Term>
@@ -168,79 +168,79 @@
           <Name xml:lang="nl">Actie</Name>
           <Reference>urn:tva:metadata:cs:2004:0245</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.46">
           <Name xml:lang="nl">Biografie</Name>
           <Reference>urn:tva:metadata:cs:2004:0246</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.47">
           <Name xml:lang="nl">Bollywood</Name>
           <Reference>urn:tva:metadata:cs:2004:0247</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.48">
           <Name xml:lang="nl">Erotiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0248</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.49">
           <Name xml:lang="nl">Familiefilm</Name>
           <Reference>urn:tva:metadata:cs:2004:0249</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.50">
           <Name xml:lang="nl">Historisch</Name>
           <Reference>urn:tva:metadata:cs:2004:0250</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.51">
           <Name xml:lang="nl">Horror</Name>
           <Reference>urn:tva:metadata:cs:2004:0251</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.52">
           <Name xml:lang="nl">Misdaad</Name>
           <Reference>urn:tva:metadata:cs:2004:0252</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.53">
           <Name xml:lang="nl">Musical</Name>
           <Reference>urn:tva:metadata:cs:2004:0253</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.54">
           <Name xml:lang="nl">Romantiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0254</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.55">
           <Name xml:lang="nl">Science Fiction</Name>
           <Reference>urn:tva:metadata:cs:2004:0255</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.56">
           <Name xml:lang="nl">Toneelstuk</Name>
           <Reference>urn:tva:metadata:cs:2004:0256</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.2.57">
           <Name xml:lang="nl">Western</Name>
           <Reference>urn:tva:metadata:cs:2004:0257</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
       </Term>
       <Term termID="3.0.1.3">
@@ -285,25 +285,25 @@
           <Name xml:lang="nl">Historisch</Name>
           <Reference>urn:tva:metadata:cs:2004:0350</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.3.52">
           <Name xml:lang="nl">Misdaad</Name>
           <Reference>urn:tva:metadata:cs:2004:0352</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.3.54">
           <Name xml:lang="nl">Romantiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0354</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.3.81">
           <Name xml:lang="nl">Detective</Name>
           <Reference>urn:tva:metadata:cs:2004:0381</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
       </Term>
       <Term termID="3.0.1.4">
@@ -327,13 +327,13 @@
           <Name xml:lang="nl">Evenement/registratie</Name>
           <Reference>urn:tva:metadata:cs:2004:0441</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.4.82">
           <Name xml:lang="nl">Analyse</Name>
           <Reference>urn:tva:metadata:cs:2004:0482</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
       </Term>
       <Term termID="3.0.1.5">
@@ -362,61 +362,61 @@
           <Reference>urn:tva:metadata:cs:2004:0571</Reference>
           <Name xml:lang="nl">Alternative</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.72">
           <Reference>urn:tva:metadata:cs:2004:0572</Reference>
           <Name xml:lang="nl">Concertregistratie</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.73">
           <Reference>urn:tva:metadata:cs:2004:0573</Reference>
           <Name xml:lang="nl">Dance</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.74">
           <Reference>urn:tva:metadata:cs:2004:0574</Reference>
           <Name xml:lang="nl">Evenement</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.75">
           <Reference>urn:tva:metadata:cs:2004:0575</Reference>
           <Name xml:lang="nl">Jazz</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.76">
           <Reference>urn:tva:metadata:cs:2004:0576</Reference>
           <Name xml:lang="nl">Nederlandstalig</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.77">
           <Reference>urn:tva:metadata:cs:2004:0577</Reference>
           <Name xml:lang="nl">Rock</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.78">
           <Reference>urn:tva:metadata:cs:2004:0578</Reference>
           <Name xml:lang="nl">Soul</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.79">
           <Reference>urn:tva:metadata:cs:2004:0579</Reference>
           <Name xml:lang="nl">Urban</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.80">
           <Reference>urn:tva:metadata:cs:2004:0580</Reference>
           <Name xml:lang="nl">Wereldmuziek</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
       </Term>
       <Term termID="3.0.1.6">
@@ -430,7 +430,7 @@
           <Name xml:lang="nl">Muziek</Name>
           <Reference>urn:tva:metadata:cs:2004:0605</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.9">
           <Name xml:lang="nl">Komisch/Satire</Name>
@@ -439,7 +439,7 @@
           <Reference>urn:mis:genre:COMEDY</Reference>
           <Reference>urn:ebu:3.5.7</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.19">
           <Name xml:lang="nl">Spel/quiz</Name>
@@ -459,19 +459,19 @@
           <Reference>urn:tva:metadata:cs:2004:0641</Reference>
           <Reference>urn:ebu:3.1.9</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.42">
           <Name xml:lang="nl">Hoorspel</Name>
           <Reference>urn:tva:metadata:cs:2004:0642</Reference>
          <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.6.43">
           <Name xml:lang="nl">Reality TV</Name>
           <Reference>urn:tva:metadata:cs:2004:0643</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
       </Term>
       <Term termID="3.0.1.7">
@@ -556,49 +556,49 @@
           <Name xml:lang="nl">Evenement/registratie</Name>
           <Reference>urn:tva:metadata:cs:2004:0741</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.44">
           <Name xml:lang="nl">Politiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0744</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.65">
           <Name xml:lang="nl">College</Name>
           <Reference>urn:tva:metadata:cs:2004:0765</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.66">
           <Name xml:lang="nl">Debat</Name>
           <Reference>urn:tva:metadata:cs:2004:0766</Reference>
          <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.67">
           <Name xml:lang="nl">Interviewprogramma/hosted show</Name>
           <Reference>urn:tva:metadata:cs:2004:0767</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.68">
           <Name xml:lang="nl">Maatschappelijk Debat</Name>
           <Reference>urn:tva:metadata:cs:2004:0768</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.69">
           <Name xml:lang="nl">Onderzoeksjournalistiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0769</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.70">
           <Name xml:lang="nl">Reportage</Name>
           <Reference>urn:tva:metadata:cs:2004:0770</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
       </Term>
       <Term termID="3.0.1.8">
@@ -611,13 +611,13 @@
           <Name xml:lang="nl">Sport</Name>
           <Reference>urn:tva:metadata:cs:2004:0804</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
          </Term>
         <Term termID="3.0.1.8.5">
           <Name xml:lang="nl">Muziek</Name>
           <Reference>urn:tva:metadata:cs:2004:0805</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.8.22">
           <Name xml:lang="nl">Gezondheid/opvoeding</Name>
@@ -670,20 +670,20 @@
           <Name xml:lang="nl">Human Interest</Name>
           <Reference>urn:tva:metadata:cs:2004:0840</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.8.44">
           <Name xml:lang="nl">Politiek</Name>
           <Reference>urn:tva:metadata:cs:2004:0844</Reference>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
-          <ValidityFlag>0</ValidityFlag>
+          <ValidityFlag>1</ValidityFlag>
         </Term>
 
       </Term>
       <Term termID="3.0.1.40">
         <Name xml:lang="nl">Human Interest</Name>
         <FirstVersionDate>2021-04-01</FirstVersionDate>
-        <ValidityFlag>0</ValidityFlag>
+        <ValidityFlag>1</ValidityFlag>
         <Reference>urn:tva:metadata:cs:2004:40</Reference>
         <Reference>urn:tva:metadata:cs:2004:4099</Reference>
         <Term termID="3.0.1.40.58">
