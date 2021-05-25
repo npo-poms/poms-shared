@@ -47,11 +47,11 @@ public class ClassificationServiceImplTest {
         assertThat(classificationService.getTermsByReference("urn:mis:genre:MOVIE")).isNotNull();
         assertThat(classificationService.getTermsByReference("urn:mis:genre:ENTERTAINMENT")).hasSize(3);
     }
+
     @Test
     public void testGetTermByIdOnDoubleDigits() {
         assertThat(classificationService.getTerm("3.0.1.2.10").getName()).isEqualTo("Spanning");
     }
-
 
     @Test
     public void testGetNext() {
@@ -60,7 +60,6 @@ public class ClassificationServiceImplTest {
 
     @Test
     public void testReferencesUnique() {
-
 
     }
 
@@ -73,11 +72,7 @@ public class ClassificationServiceImplTest {
         }*/
 
         assertThat(classificationService.getTerm("3.0.1.40").getFirstVersionDate()).isEqualTo(LocalDate.of(2021, 4, 1));
-        assertThat(classificationService.getTerm("3.0.1.40").getValidityFlag()).isFalse();
-
-        assertThat(classificationService.getTerm("3.0.1.40").getValidityFlag()).isFalse();
-
-
+        assertThat(classificationService.getTerm("3.0.1.40").getValidityFlag()).isTrue();
     }
 
     @Test
@@ -128,8 +123,6 @@ public class ClassificationServiceImplTest {
             Thread.sleep(1000);
         }
         assertThat(classificationService.values()).hasSize(1);
-
-
     }
 
     @Test
@@ -142,15 +135,11 @@ public class ClassificationServiceImplTest {
         log.info("{}", classificationService.values());
 
         assertThat(classificationService.values()).hasSize(28);
-
-
     }
 
     @Test
     @Disabled
     public void output() {
-
         JAXB.marshal(classificationService.getClassificationScheme(), System.out);
-
     }
 }
