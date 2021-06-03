@@ -32,30 +32,6 @@ public class ScheduleEventsTest {
 
 
     @Test
-    public void testDifferWithinMarginWhenWithin() {
-        ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
-        ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(10), null);
-
-        assertThat(ScheduleEvents.differWithinMargin(event1, event2, 10)).isTrue();
-    }
-
-    @Test
-    public void testDifferWithinMarginWhenOutside() {
-        ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
-        ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(10), null);
-
-        assertThat(ScheduleEvents.differWithinMargin(event1, event2, 9)).isFalse();
-    }
-
-    @Test
-    public void testDifferWithinMarginOnChannel() {
-        ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
-        ScheduleEvent event2 = new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(0), null);
-
-        assertThat(ScheduleEvents.differWithinMargin(event1, event2, 10)).isFalse();
-    }
-
-    @Test
     public void testEventsWithoutfilter() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, new Net("A", "aa"),
             Instant.ofEpochMilli(100), Duration.ofMillis(1000));

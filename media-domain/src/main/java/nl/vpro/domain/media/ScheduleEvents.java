@@ -28,19 +28,6 @@ public class ScheduleEvents {
                 event1.getRealStartInstant() != null && event2.getRealStartInstant() != null && event1.getRealStartInstant().toEpochMilli() == event2.getRealStartInstant().toEpochMilli();
     }
 
-    /**
-     * Compares two events allowing for a certain margin in their real start time. This is sometimes usefull when
-     * comparing events from a source that uses guide times rounded to the minute for example
-     *
-     * @return true wen equal
-     * @deprecated {@link #findScheduleEventsCloseTo} is better
-     */
-    @Deprecated
-    public static boolean differWithinMargin(ScheduleEvent event1, ScheduleEvent event2, long marginInMillis) {
-        return
-            event1.getChannel() != null && event1.getChannel().equals(event2.getChannel()) &&
-                event1.getRealStartInstant() != null && event2.getRealStartInstant() != null && Math.abs(event1.getRealStartInstant().toEpochMilli() - event2.getRealStartInstant().toEpochMilli()) <= marginInMillis;
-    }
 
     public static String userFriendlyToString(Iterable<ScheduleEvent> scheduleEvents) {
         StringBuilder builder = new StringBuilder();
@@ -120,7 +107,7 @@ public class ScheduleEvents {
     }
 
 
-     /**
+    /**
      * Finds in the current schedule the event with the same channel and start instant.
      */
      public static  List<ScheduleEvent> findScheduleEventsCloseTo(final Iterable<ScheduleEvent> scheduleEvents, ScheduleEvent event, Duration margin) {
