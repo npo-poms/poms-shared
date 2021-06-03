@@ -3,6 +3,8 @@ package nl.vpro.letterbox;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Duration;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -13,8 +15,6 @@ import nl.vpro.jackson2.Jackson2Mapper;
  * @since 5.8
  */
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@lombok.Builder
 @EqualsAndHashCode
 @Slf4j
 public class LetterBoxRegistration {
@@ -28,6 +28,19 @@ public class LetterBoxRegistration {
 
     private final String implementingClass;
 
+    private final Duration asyncAfter;
+
+
+    @lombok.Builder
+    private LetterBoxRegistration(String key, String endPointId, String principalId, String description, String implementingClass, Duration asyncAfter) {
+        this.key = key;
+        this.endPointId = endPointId;
+        this.principalId = principalId;
+        this.description = description;
+        this.implementingClass = implementingClass;
+        this.asyncAfter = asyncAfter == null ? Duration.ofSeconds(30) : asyncAfter;
+    }
+
     @Override
     public String toString() {
         try {
@@ -35,6 +48,13 @@ public class LetterBoxRegistration {
         } catch (JsonProcessingException e) {
             log.error(e.getMessage(), e);
             return e.getMessage();
+        }
+    }
+
+
+    public static class Builder {
+        public Builder async() {
+            return asyncAfter(Duration.ZERO);
         }
     }
 }
