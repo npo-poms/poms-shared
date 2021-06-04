@@ -36,6 +36,8 @@ public class NpoPomsEnvironment {
                 env = Env.DEV;
             } else if (apiBase.contains("-test.")) {
                 env = Env.TEST;
+            } else if (apiBase.contains("-acc.")) {
+                env = Env.ACC;
             } else {
                 env = Env.PROD;
             }
@@ -81,9 +83,10 @@ public class NpoPomsEnvironment {
 
     public enum Env {
         LOCALHOST("http://localhost:8071/", "http://localhost:8071/images/", "http://localhost:8071/rs/"),
-        DEV("http://poms-dev.omroep.nl/", "http://images-dev.poms.omroep.nl/", "https://api-dev.poms.omroep.nl/"),
-        TEST("http://poms-test.omroep.nl/", "http://images-test.poms.omroep.nl/", "https://api-test.poms.omroep.nl/"),
-        PROD("http://poms.omroep.nl/", "http://images.poms.omroep.nl/", "https://api.poms.omroep.nl/");
+        DEV("https://poms-dev.omroep.nl/", "https://images-dev.poms.omroep.nl/", "https://api-dev.poms.omroep.nl/"),
+        TEST("https://poms-test.omroep.nl/", "https://images-test.poms.omroep.nl/", "https://api-test.poms.omroep.nl/"),
+        ACC("https://poms-acc.omroep.nl/", "https://images-acc.poms.omroep.nl/", "https://api-acc.poms.omroep.nl/"),
+        PROD("https://poms.omroep.nl/", "https://images.poms.omroep.nl/", "https://api.poms.omroep.nl/");
         private final String poms;
         private final String images;
         private final String mediars;
