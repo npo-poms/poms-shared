@@ -96,14 +96,14 @@ public interface MediaIdentifiable extends MidIdentifiable {
 
             Correlation that = (Correlation) o;
 
-            if (id != null ? !id.equals(that.id) : that.id != null) return false;
+            if (!Objects.equals(id, that.id)) return false;
             return type == that.type;
         }
 
         @Override
         public int hashCode() {
-            int result = id != null ? id.hashCode() : 0;
-            result = 31 * result + (type != null ? type.hashCode() : 0);
+            int result = id.hashCode();
+            result = 31 * result + type.hashCode();
             return result;
         }
     }
