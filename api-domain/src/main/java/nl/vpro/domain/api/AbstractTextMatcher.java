@@ -6,7 +6,11 @@ package nl.vpro.domain.api;
 
 import javax.xml.bind.annotation.*;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+import com.google.common.annotations.Beta;
 
 /**
  * A text matcher matches strings (rather then e.g. dates or numbers)
@@ -41,6 +45,9 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
 
     }
 
+    @Beta
+    public abstract boolean isSemantic();
+
 
     @Override
     public boolean test(@Nullable String input) {
@@ -50,21 +57,24 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append("{");
-        sb.append("value='").append(getValue()).append('\'');
-        if(match != null) {
-            sb.append(", match='").append(match).append('\'');
+        ToStringBuilder builder =  new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+            .append("value", value);
+        if (match != null) {
+            builder.append("match", match);
         }
-        if(getMatchType() != null) {
-            sb.append(", matchType='").append(getMatchType().getName()).append('\'');
+        if (getMatchType() != null){
+            builder.append("matchType", getMatchType());
         }
-        if (getFuzziness() != null) {
-            sb.append(", fuzziness='").append(getFuzziness()).append('\'');
+        if (getFuzziness() != null){
+            builder.append("fuzziness", getFuzziness());
         }
-        sb.append('}');
-        return sb.toString();
+        if (! isCaseSensitive()){
+            builder.append("case sensitive", isCaseSensitive());
+        }
+        if (isSemantic()){
+            builder.append("semantic", isSemantic());
+        }
+        return builder.toString();
     }
 
     @Override
