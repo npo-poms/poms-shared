@@ -44,9 +44,7 @@ import nl.vpro.domain.user.Broadcaster;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
-@lombok.Builder
 public class PageSearch extends AbstractTextSearch<Page> {
 
     @Valid
@@ -90,6 +88,25 @@ public class PageSearch extends AbstractTextSearch<Page> {
 
     @Valid
     private AssociationSearchList referrals;
+
+    @lombok.Builder
+    private  PageSearch(@Valid SimpleTextMatcher text, @Valid TextMatcherList broadcasters, @Valid TextMatcherList types, @Valid TextMatcherList portals, @Valid TextMatcherList sections, @Valid TextMatcherList genres, @Valid ExtendedTextMatcherList tags, @Valid ExtendedTextMatcherList keywords, @Valid DateRangeMatcherList sortDates, @Valid DateRangeMatcherList creationDates, @Valid DateRangeMatcherList lastModifiedDates, @Valid DateRangeMatcherList publishDates, @Valid RelationSearchList relations, @Valid AssociationSearchList links, @Valid AssociationSearchList referrals) {
+        super(text);
+        this.broadcasters = broadcasters;
+        this.types = types;
+        this.portals = portals;
+        this.sections = sections;
+        this.genres = genres;
+        this.tags = tags;
+        this.keywords = keywords;
+        this.sortDates = sortDates;
+        this.creationDates = creationDates;
+        this.lastModifiedDates = lastModifiedDates;
+        this.publishDates = publishDates;
+        this.relations = relations;
+        this.links = links;
+        this.referrals = referrals;
+    }
 
     /**
      * @deprecated For json backwards compatibility
@@ -286,5 +303,15 @@ public class PageSearch extends AbstractTextSearch<Page> {
         return false;
     }
 
+    public static class Builder {
+        public Builder simpleText(String search) {
+            return text(new SimpleTextMatcher(search));
+        }
 
+        public Builder semanticText(String search) {
+            SimpleTextMatcher simpleTextMatcher = new SimpleTextMatcher(search);
+            simpleTextMatcher.setSemantic(true);
+            return text(simpleTextMatcher);
+        }
+    }
 }

@@ -31,13 +31,16 @@ public class PageFormBuilder extends AbstractFormBuilder {
         return form;
     }
 
-
     public PageFormBuilder text(String text) {
         return text(Match.SHOULD, text);
     }
 
     public PageFormBuilder text(Match match, String text) {
-        search().setText(simpleTextMatcher(text, match));
+        return text(simpleTextMatcher(text, match));
+    }
+
+    public PageFormBuilder text(SimpleTextMatcher textMatcher) {
+        search().setText(textMatcher);
         return this;
     }
 
