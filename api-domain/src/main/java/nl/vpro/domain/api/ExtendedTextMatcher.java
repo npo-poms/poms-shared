@@ -129,6 +129,11 @@ public class ExtendedTextMatcher extends AbstractTextMatcher<StandardMatchType> 
     }
 
     @Override
+    public boolean isSemantic() {
+        return false;
+    }
+
+    @Override
     public ExtendedTextMatcher toLowerCase() {
         return new ExtendedTextMatcher(lowerCaseValue(), match, matchType, caseSensitive);
 
