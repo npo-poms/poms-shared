@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.annotations.Beta;
 
 import nl.vpro.domain.api.jackson.SimpleTextMatcherJson;
 import nl.vpro.domain.api.validation.ValidTextMatcher;
@@ -35,6 +36,13 @@ public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
     @Getter
     @Setter
     protected String fuzziness;
+
+    @XmlAttribute
+    @Getter
+    @Setter
+    @Beta
+    protected boolean semantic;
+
 
     public static final SimpleMatchType DEFAULT_MATCHTYPE = SimpleMatchType.TEXT;
 
@@ -79,11 +87,16 @@ public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
         this(value, match, null);
     }
 
-    @lombok.Builder
     public SimpleTextMatcher(String value, Match match, SimpleMatchType matchType) {
+        this(value, match, matchType,false);
+    }
+
+    @lombok.Builder
+    private SimpleTextMatcher(String value, Match match, SimpleMatchType matchType, boolean semantic) {
         super(value);
         this.match = match == DEFAULT_MATCH ? null : match;
         this.matchType = matchType == SimpleMatchType.TEXT ? null : matchType;
+        this.semantic = semantic;
     }
 
     public SimpleTextMatcher(String value, SimpleMatchType matchType) {

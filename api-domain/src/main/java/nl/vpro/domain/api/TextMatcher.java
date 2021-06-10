@@ -92,6 +92,11 @@ public class TextMatcher extends AbstractTextMatcher<StandardMatchType> {
     }
 
     @Override
+    public boolean isSemantic() {
+        return false;
+    }
+
+    @Override
     public TextMatcher toLowerCase() {
         return new TextMatcher(lowerCaseValue(), match, matchType);
 
