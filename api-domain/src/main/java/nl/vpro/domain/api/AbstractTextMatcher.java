@@ -6,11 +6,12 @@ package nl.vpro.domain.api;
 
 import javax.xml.bind.annotation.*;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.google.common.annotations.Beta;
+
+import nl.vpro.domain.ToString;
 
 /**
  * A text matcher matches strings (rather then e.g. dates or numbers)
@@ -57,7 +58,7 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
 
     @Override
     public String toString() {
-        ToStringBuilder builder =  new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        ToStringBuilder builder =  ToString.builder(this)
             .append("value", value);
         if (match != null) {
             builder.append("match", match);
