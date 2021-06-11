@@ -10,6 +10,8 @@ import lombok.Setter;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
 
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.annotations.Beta;
@@ -35,6 +37,7 @@ public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
     protected String fuzziness;
 
     @XmlAttribute
+    @XmlDocumentation("Whether the search must happen via the semantic vectorization. This is beta feature, which may not be enabled.")
     private Boolean semantic;
 
 
