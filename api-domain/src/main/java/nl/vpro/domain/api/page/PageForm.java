@@ -4,17 +4,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.domain.api.FormUtils;
-import nl.vpro.domain.api.Order;
-import nl.vpro.domain.api.SortableForm;
+import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.media.MediaForm;
 import nl.vpro.domain.api.page.bind.PageSortTypeAdapter;
 import nl.vpro.domain.page.Page;
@@ -63,6 +62,9 @@ public class PageForm implements SortableForm, Predicate<Page> {
         return facets != null && facets.isFaceted();
     }
 
+    /**
+     * Returns the text search in {@link #getSearches()}
+     */
     @Override
     public String getText() {
         return FormUtils.getText(searches);
