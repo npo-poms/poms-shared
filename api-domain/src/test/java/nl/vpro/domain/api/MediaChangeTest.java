@@ -1,8 +1,7 @@
 package nl.vpro.domain.api;
 
 import java.io.IOException;
-import java.time.Instant;
-import java.time.LocalDate;
+import java.time.*;
 
 import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -109,6 +108,36 @@ public class MediaChangeTest {
         assertThat(change.getPublishDate()).isEqualTo(publishDate);
         assertThat(change.isDeleted()).isTrue();
         assertThat(change.getMid()).isEqualTo("POW_00107979");
+    }
+
+
+    @Test
+    public void jsonRealPublishDate() {
+        MediaChange change = MediaChange.builder()
+            .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
+            .mid("MID_123")
+            .deleted(true)
+            .media(MediaTestDataBuilder.program().lean().build())
+            .build();
+
+        change.setPublishDate(change.getPublishDate().plus(Duration.ofMillis(10)));
+
+        Jackson2TestUtil.assertThatJson(change).isSimilarTo("{\n" +
+            "  \"sequence\" : 1469014680000,\n" +
+            "  \"publishDate\" : 1469014680010,\n" +
+            "  \"realPublishDate\" : 1469014680000,\n" +
+            "  \"id\" : \"MID_123\",\n" +
+            "  \"mid\" : \"MID_123\",\n" +
+            "  \"deleted\" : true,\n" +
+            "  \"media\" : {\n" +
+            "    \"objectType\" : \"program\",\n" +
+            "    \"embeddable\" : true,\n" +
+            "    \"broadcasters\" : [ ],\n" +
+            "    \"genres\" : [ ],\n" +
+            "    \"countries\" : [ ],\n" +
+            "    \"languages\" : [ ]\n" +
+            "  }\n" +
+            "}");
     }
 
 }

@@ -4,17 +4,23 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Change;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -23,6 +29,7 @@ import nl.vpro.util.DateUtils;
 @JsonPropertyOrder({
     "sequence",
     "publishDate",
+    "realPublishDate",
     "revision",
     "id",
     "mid",
@@ -43,6 +50,18 @@ public class MediaChange extends Change<MediaObject> {
 
     @XmlAttribute
     private String mergedTo;
+
+
+    /**
+     * Sometimes the last returned change in a feed has a artificially increased publish date (only when using max).
+     * @since 5.28
+     */
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @Getter
+    private Instant realPublishDate;
 
     public MediaChange() {
     }
@@ -210,9 +229,23 @@ public class MediaChange extends Change<MediaObject> {
     public MediaSince asSince() {
         return MediaSince.builder().instant(getPublishDate()).mid(getMid()).build();
     }
+
     @Override
     public String toString() {
-        return super.toString() + (revision != null ? (":" + revision) : "") + (mergedTo != null  ? (":merged to " + mergedTo) : "");
+        return super.toString() + (revision != null ? (":" + revision) : "") + (mergedTo != null  ? (":merged to " + mergedTo) : "") + (realPublishDate == null ? "" : (" (" + realPublishDate + ")"));
+    }
+
+    @Override
+    public void setPublishDate(Instant instant) {
+        if (this.realPublishDate == null) {
+            this.realPublishDate = getPublishDate();
+        }
+        super.setPublishDate(instant);
+
+    }
+
+    public Instant getRealPublishDate() {
+        return realPublishDate == null ? getPublishDate() : realPublishDate;
     }
 
 
