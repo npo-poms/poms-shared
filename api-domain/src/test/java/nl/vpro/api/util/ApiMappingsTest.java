@@ -46,7 +46,7 @@ public class ApiMappingsTest {
     @SneakyThrows
     protected ApiMappings createMappings() {
         ApiMappings mappings = new ApiMappings(null);
-        mappings.setGenerateDocumentation(false);
+        mappings.setGenerateDocumentation(true);
         return mappings;
     }
 

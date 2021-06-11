@@ -4,7 +4,6 @@
  */
 package nl.vpro.domain.api;
 
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -23,6 +22,9 @@ import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
+ *
+ * Note that this class is annotated with jaxb annotations, but is actually only marshalled to json.
+ *
  * @author Roelof Jan Koekoek
  */
 @XmlType(name = "changeType")
@@ -60,7 +62,6 @@ public class MediaChange extends Change<MediaObject> {
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-    @Getter
     private Instant realPublishDate;
 
     public MediaChange() {

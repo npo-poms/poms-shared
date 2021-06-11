@@ -10,6 +10,8 @@ import javax.inject.Named;
 
 import nl.vpro.domain.Mappings;
 import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.api.MediaChange;
+import nl.vpro.domain.api.SuggestResult;
 import nl.vpro.domain.api.media.MediaSearchResult;
 import nl.vpro.domain.api.media.MediaSearchResults;
 import nl.vpro.domain.api.media.RedirectList;
@@ -49,7 +51,7 @@ public class ApiMappings extends Mappings {
     @Override
     protected void fillMappings() {
         MAPPING.put(PROFILE_NAMESPACE, new Class[]{Profile.class});
-        MAPPING.put(API_NAMESPACE, new Class[]{PageForm.class, ScheduleForm.class, SubtitlesForm.class, RedirectList.class, MediaSearchResults.class, PageSearchResults.class, MediaSearchResult.class, PageSearchResult.class});
+        MAPPING.put(API_NAMESPACE, new Class[]{PageForm.class, ScheduleForm.class, SubtitlesForm.class, RedirectList.class, MediaSearchResults.class, PageSearchResults.class, MediaSearchResult.class, PageSearchResult.class, MediaChange.class, SuggestResult.class});
         MAPPING.put(PAGE_NAMESPACE, new Class[]{Page.class});
         MAPPING.put(PAGEUPDATE_NAMESPACE, new Class[]{PageUpdate.class, ImageType.class});
         MAPPING.put(Xmlns.MEDIA_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.media.Filter.class});

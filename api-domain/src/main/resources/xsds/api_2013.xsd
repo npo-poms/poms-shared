@@ -7,6 +7,8 @@
 
   <xs:import namespace="urn:vpro:pages:2013" schemaLocation="pages_2013.xsd"/>
 
+  <xs:element name="change" type="changeType"/>
+
   <xs:element name="mediaForm" type="mediaFormType"/>
 
   <xs:element name="mediaSearchResult" type="mediaSearchResultType"/>
@@ -24,6 +26,8 @@
   <xs:element name="scheduleItem" type="scheduleEventApiType"/>
 
   <xs:element name="subtitlesForm" type="subtitlesFormType"/>
+
+  <xs:element name="suggestResult" type="suggestResultType"/>
 
   <xs:element name="suggestion" type="suggestionType"/>
 
@@ -843,6 +847,29 @@
         <xs:sequence>
           <xs:element name="term" type="pages:pageTermType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="changeType">
+    <xs:sequence>
+      <xs:element name="media" type="media:baseMediaType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="publishDate" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="deleted" type="xs:boolean"/>
+    <xs:attribute name="tail" type="xs:boolean"/>
+    <xs:attribute name="sequence" type="xs:long"/>
+    <xs:attribute name="revision" type="xs:long"/>
+    <xs:attribute name="mergedTo" type="xs:string"/>
+    <xs:attribute name="realPublishDate" type="xs:string"/>
+    <xs:attribute name="mid" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="suggestResultType">
+    <xs:complexContent>
+      <xs:extension base="resultType">
+        <xs:sequence/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
