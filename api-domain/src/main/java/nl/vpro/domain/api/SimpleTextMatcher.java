@@ -8,10 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -38,10 +35,7 @@ public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
     protected String fuzziness;
 
     @XmlAttribute
-    @Getter
-    @Setter
-    @Beta
-    protected boolean semantic;
+    private Boolean semantic;
 
 
     public static final SimpleMatchType DEFAULT_MATCHTYPE = SimpleMatchType.TEXT;
@@ -88,15 +82,15 @@ public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
     }
 
     public SimpleTextMatcher(String value, Match match, SimpleMatchType matchType) {
-        this(value, match, matchType,false);
+        this(value, match, matchType,null);
     }
 
     @lombok.Builder
-    private SimpleTextMatcher(String value, Match match, SimpleMatchType matchType, boolean semantic) {
+    private SimpleTextMatcher(String value, Match match, SimpleMatchType matchType, Boolean semantic) {
         super(value);
         this.match = match == DEFAULT_MATCH ? null : match;
         this.matchType = matchType == SimpleMatchType.TEXT ? null : matchType;
-        this.semantic = semantic;
+        this.semantic = semantic != null && semantic ? true : null;
     }
 
     public SimpleTextMatcher(String value, SimpleMatchType matchType) {
@@ -112,6 +106,17 @@ public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
     public void setMatchType(SimpleMatchType matchType) {
         this.matchType = matchType;
     }
+
+    @Override
+    @Beta
+    public boolean isSemantic() {
+        return semantic != null && semantic;
+    }
+
+    public  void setSemantic(boolean b) {
+        this.semantic = b ? true : null;
+    }
+
 
     @Override
     public SimpleTextMatcher toLowerCase() {

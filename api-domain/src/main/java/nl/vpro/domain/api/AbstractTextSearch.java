@@ -41,5 +41,4 @@ public abstract class AbstractTextSearch<V> extends AbstractSearch<V> {
         this.text = text;
     }
 
-
 }
