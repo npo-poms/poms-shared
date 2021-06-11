@@ -62,6 +62,7 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="fuzziness" type="xs:string"/>
+        <xs:attribute name="semantic" type="xs:boolean"/>
         <xs:attribute name="matchType" type="simpleMatchType"/>
         <xs:attribute name="match" type="match"/>
       </xs:extension>
