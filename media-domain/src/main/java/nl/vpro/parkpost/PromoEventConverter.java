@@ -187,18 +187,24 @@ public class PromoEventConverter {
     }
 
     public static class NoMidException extends Exception {
+        private static final long serialVersionUID = -7852346235133782658L;
+
         public NoMidException(PromoEvent event) {
             super("PromoEvent{ProductCode=" + event.getProductCode() + ",Type=" + event.getPromoType() + "} lacks a MID, which is necessary for further handling");
         }
     }
 
     public static class NoPromoException extends Exception {
+        private static final long serialVersionUID = -7799151404463882905L;
+
         public NoPromoException(PromoEvent event) {
             super("PromoEvent{ProductCode=" + event.getProductCode() + ",Type=" + event.getPromoType() + "} is not of Promo type");
         }
     }
 
     public static class NoTitleException extends Exception {
+        private static final long serialVersionUID = 3545093070408436707L;
+
         public NoTitleException(PromoEvent event) {
             super("PromoEvent{ProductCode=" + event.getProductCode() + ",Type=" + event.getPromoType() + "} has an empty title");
         }
