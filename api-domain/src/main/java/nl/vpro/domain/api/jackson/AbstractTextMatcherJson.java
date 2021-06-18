@@ -29,6 +29,7 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
     private static final String MATCH_TYPE = "matchType";
     private static final String CASE_SENSITIVE= "caseSensitive";
     private static final String FUZZINESS = "fuzziness";
+    private static final String SEMANTIC = "semantic";
 
 
     protected final Function<String, T> constructor;
@@ -41,7 +42,7 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
 
 
     public final void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-        if ((value.getMatch() != DEFAULT_MATCH) || !(value.getMatchType().getName().equals(DEFAULT_MATCHTYPE.getName())) || ! value.isCaseSensitive()) {
+        if ((value.getMatch() != DEFAULT_MATCH) || !(value.getMatchType().getName().equals(DEFAULT_MATCHTYPE.getName())) || ! value.isCaseSensitive() || value.isSemantic()) {
             jgen.writeStartObject();
             jgen.writeStringField(VALUE, value.getValue());
             if (value.getMatch() != DEFAULT_MATCH) {
@@ -55,6 +56,9 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
             }
             if (value.getFuzziness() != null) {
                 jgen.writeStringField(FUZZINESS, value.getFuzziness());
+            }
+            if (value.isSemantic()) {
+                jgen.writeBooleanField(SEMANTIC, value.isSemantic());
             }
             jgen.writeEndObject();
         } else {
@@ -91,6 +95,12 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
                 String fuzziness = fuzzinessNode.asText().toUpperCase();
                 textMatcher.setFuzziness(fuzziness);
             }
+
+            JsonNode semantic = jsonNode.get(SEMANTIC);
+            if (semantic != null) {
+                textMatcher.setSemantic(semantic.asBoolean());
+            }
+
 
             textMatcher.setMatch(match);
             textMatcher.setMatchType(matchType);

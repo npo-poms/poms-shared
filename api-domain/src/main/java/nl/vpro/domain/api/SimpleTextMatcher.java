@@ -116,15 +116,15 @@ public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
         return semantic != null && semantic;
     }
 
-    public  void setSemantic(boolean b) {
-        this.semantic = b ? true : null;
+    @Override
+    public  void setSemantic(Boolean b) {
+        this.semantic = b != null && b ? true : null;
     }
 
 
     @Override
     public SimpleTextMatcher toLowerCase() {
         return new SimpleTextMatcher(lowerCaseValue(), match, matchType);
-
     }
 
 }
