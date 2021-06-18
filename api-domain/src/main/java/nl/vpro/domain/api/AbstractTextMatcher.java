@@ -49,6 +49,12 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
     @Beta
     public abstract boolean isSemantic();
 
+    public void setSemantic(Boolean semantic) {
+        if (semantic != null && semantic) {
+            throw new UnsupportedOperationException("Semantic search not suported by this text matcher");
+        }
+    }
+
 
     @Override
     public boolean test(@Nullable String input) {
