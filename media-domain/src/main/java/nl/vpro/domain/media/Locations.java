@@ -227,7 +227,7 @@ public class Locations {
             Location location = createOrFindLocation(program, locationUrl, owner, platform);
             updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces, Instant.now());
         } else {
-            log.warn("Puboption {} is explicitely ignored, not adding location for {}", pubOptie, program);
+            log.warn("Puboption {} is explicitly ignored, not adding location for {}", pubOptie, program);
         }
         return program;
     }
