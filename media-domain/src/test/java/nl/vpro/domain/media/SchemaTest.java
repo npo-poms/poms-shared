@@ -101,7 +101,7 @@ public class SchemaTest extends AbstractSchemaTest {
     }
 
     /**
-     * Checks wether manual XSD contains the correct channels.
+     * Checks whether manual XSD contains the correct channels.
      */
     @Test
     public void testChannels() {
