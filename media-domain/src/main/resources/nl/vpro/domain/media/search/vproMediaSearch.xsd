@@ -223,6 +223,10 @@
           <xsd:element name="lastPublished" type="xsd:dateTime" minOccurs="0"/>
           <xsd:element name="firstScheduleEvent" type="media:scheduleEventType" minOccurs="0"/>
           <xsd:element name="firstScheduleEventNoRerun" type="media:scheduleEventType" minOccurs="0"/>
+          <xsd:element name="lastScheduleEvent" type="media:scheduleEventType" minOccurs="0"/>
+          <xsd:element name="lastScheduleEventNoRerun" type="media:scheduleEventType" minOccurs="0"/>
+          <xsd:element name="sortDateScheduleEvent" type="media:scheduleEventType" minOccurs="0"/>
+
           <xsd:element name="locations" type="media:locationType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="numberOfLocations" type="xsd:int" minOccurs="0"/>
           <xsd:element name="tag" type="media:tagType" minOccurs="0" maxOccurs="unbounded"/>
