@@ -208,7 +208,7 @@
     <xsd:complexContent>
       <xsd:extension base="publishableListItem">
         <xsd:sequence>
-          <xsd:element name="broadcaster" type="media:organizationType"  maxOccurs="unbounded"/>
+          <xsd:element name="broadcaster" type="media:organizationType"  minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="title" type="xsd:string" />
           <xsd:element name="subTitle" type="xsd:string" minOccurs="0"/>
           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
