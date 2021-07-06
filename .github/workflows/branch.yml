@@ -1,5 +1,4 @@
-# this work
-name: create-release-branch
+name: 'create release branch'
 on:
   workflow_dispatch:
 
