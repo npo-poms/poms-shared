@@ -19,6 +19,7 @@ jobs:
     - name: Release branch with Maven
       run: |
         RELEASE_VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
-        mvn --batch-mode  -DreleaseVersion=${RELEASE_VERSION} release:branch
+        DEVELOPMENT_VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout | gawk 'match($1, /([0-9]+)\.([0-9]+)([\.-])(.*)/, a) {print a[1]"."(a[2]+1)a[3]a[4]}'`
+        mvn --batch-mode  -DreleaseVersion=${RELEASE_VERSION} -DdevelopmentVersion=${DEVELOPMENT_VERSION} release:branch
 
 
