@@ -1,13 +1,25 @@
-name: release
-
+# this work
+name: create-release-branch
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  branch:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    env:
+      MAVEN_OPTS: '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
     steps:
     - uses: actions/checkout@v2
-    - name: Build with Maven
-      run: mvn --batch-mode release:branch
+    - uses: oleksiyrudenko/gha-git-credentials@v2.1
+      with:
+        global: true
+        name: 'github $GITHUB_ACTOR'
+        email: 'digitaal-techniek@vpro.nl'
+        token: '${{ secrets.GITHUB_TOKEN  }}'
+    - name: Release branch with Maven
+      run: |
+         RELEASE_VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
+         mvn --batch-mode  -DreleaseVersion=${RELEASE_VERSION} release:branch
+
 
