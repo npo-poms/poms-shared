@@ -5,7 +5,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>REL-5.30.0-SNAPSHOT</version>
+    <version>5.30.0-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.user</groupId>
