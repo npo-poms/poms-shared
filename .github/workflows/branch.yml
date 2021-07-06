@@ -18,8 +18,10 @@ jobs:
         token: '${{ secrets.GITHUB_TOKEN  }}'
     - name: Release branch with Maven
       run: |
-        RELEASE_VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
-        DEVELOPMENT_VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout | gawk 'match($1, /([0-9]+)\.([0-9]+)([\.-])(.*)/, a) {print a[1]"."(a[2]+1)a[3]a[4]}'`
-        mvn --batch-mode  -DreleaseVersion=${RELEASE_VERSION} -DdevelopmentVersion=${DEVELOPMENT_VERSION} release:branch
+        VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
+        RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
+        DEVELOPMENT_VERSION=`echo $VERSION | gawk 'match($1, /([0-9]+)\.([0-9]+)([\.-])(.*)/, a) {print a[1]"."(a[2]+1)a[3]a[4]}'`
+        mvn  -DupdateBranchVersions=true -DreleaseVersion=${RELEASE_VERSION} -DdevelopmentVersion=${DEVELOPMENT_VERSION} release:branch
+
 
 
