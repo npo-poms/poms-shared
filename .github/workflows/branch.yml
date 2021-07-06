@@ -19,7 +19,7 @@ jobs:
         token: '${{ secrets.GITHUB_TOKEN  }}'
     - name: Release branch with Maven
       run: |
-         RELEASE_VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
-         mvn --batch-mode  -DreleaseVersion=${RELEASE_VERSION} release:branch
+        RELEASE_VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
+        mvn --batch-mode  -DreleaseVersion=${RELEASE_VERSION} release:branch
 
 
