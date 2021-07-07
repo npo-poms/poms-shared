@@ -12,3 +12,36 @@ The java domain classes used by NPO Frontend API, POMS Backend and other POMS pr
 These are also used by the API clients.
 
 See also https://github.com/npo-poms/poms-parent[poms parent]
+
+
+== build
+
+This is automaticly build on github.
+
+
+Basicly it's just
+[source, bash]
+====
+ michiel@mitulo:~/github/npo-poms/poms-shared$ mvn
+ [INFO] Scanning for projects...
+ [INFO] ------------------------------------------------------------------------
+ [INFO] Reactor Build Order:
+ [INFO]
+ [INFO] poms shared                                                        [pom]
+ [INFO] poms-shared-domain                                                 [jar]
+ [INFO] poms-shared                                                        [jar]
+ [INFO] user-domain                                                        [jar]
+ ...
+====
+
+The github build can be done locally with 'https://github.com/nektos/act[act]'. Create a file '${USER.HOME}/.secrets' and then:
+
+[source, bash]
+====
+ michiel@mitulo:~/github/npo-poms/poms-shared$ act
+ [build/build] 🚀  Start image=nektos/act-environments-ubuntu:18.04
+ [build/build]   🐳  docker run image=nektos/act-environments-ubuntu:18.04 platform= entrypoint=["/usr/bin/tail" "-f" "/dev/null"] cmd=[]
+ [build/build]   🐳  docker exec cmd=[mkdir -m 0777 -p /var/run/act] user=root
+ ...
+====
+
