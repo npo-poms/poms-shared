@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema version="1.0" targetNamespace="urn:vpro:api:constraint:2014" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:constraint:2014" xmlns:tns="urn:vpro:api:constraint:2014" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="https://www.w3.org/2009/01/xml.xsd"/>
+
+  <xs:complexType name="andPredicateTestResult">
+    <xs:complexContent>
+      <xs:extension base="tns:booleanPredicateTestResult">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="booleanPredicateTestResult" abstract="true">
+    <xs:sequence>
+      <xs:element name="description" type="tns:localizedString" minOccurs="0"/>
+      <xs:element name="clauses" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="clause" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="applies" type="xs:boolean" use="required"/>
+    <xs:attribute name="reason" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="localizedString">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="xml:lang"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="orPredicateTestResult">
+    <xs:complexContent>
+      <xs:extension base="tns:booleanPredicateTestResult">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="notPredicateTestResult">
+    <xs:sequence>
+      <xs:element name="description" type="tns:localizedString" minOccurs="0"/>
+      <xs:element name="clause" type="xs:anyType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="applies" type="xs:boolean" use="required"/>
+    <xs:attribute name="reason" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="simplePredicateTestResult">
+    <xs:sequence>
+      <xs:element name="description" type="tns:localizedString" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="applies" type="xs:boolean" use="required"/>
+    <xs:attribute name="reason" type="xs:string"/>
+  </xs:complexType>
 
   <xs:simpleType name="operatorType">
     <xs:restriction base="xs:string">

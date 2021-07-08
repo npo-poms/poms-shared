@@ -21,6 +21,7 @@ import nl.vpro.domain.api.page.PageSearchResult;
 import nl.vpro.domain.api.page.PageSearchResults;
 import nl.vpro.domain.api.profile.Profile;
 import nl.vpro.domain.api.subtitles.SubtitlesForm;
+import nl.vpro.domain.constraint.LocalizedString;
 import nl.vpro.domain.gtaa.Scheme;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.page.Page;
@@ -51,12 +52,25 @@ public class ApiMappings extends Mappings {
     @Override
     protected void fillMappings() {
         MAPPING.put(PROFILE_NAMESPACE, new Class[]{Profile.class});
-        MAPPING.put(API_NAMESPACE, new Class[]{PageForm.class, ScheduleForm.class, SubtitlesForm.class, RedirectList.class, MediaSearchResults.class, PageSearchResults.class, MediaSearchResult.class, PageSearchResult.class, MediaChange.class, SuggestResult.class});
+        MAPPING.put(API_NAMESPACE, new Class[]{
+            PageForm.class,
+            ScheduleForm.class,
+            SubtitlesForm.class,
+            RedirectList.class,
+            MediaSearchResults.class,
+            PageSearchResults.class,
+            MediaSearchResult.class,
+            PageSearchResult.class,
+            MediaChange.class,
+            SuggestResult.class,
+            nl.vpro.domain.api.Error.class
+        });
         MAPPING.put(PAGE_NAMESPACE, new Class[]{Page.class});
         MAPPING.put(PAGEUPDATE_NAMESPACE, new Class[]{PageUpdate.class, ImageType.class});
         MAPPING.put(Xmlns.MEDIA_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.media.Filter.class});
         MAPPING.put(Xmlns.PAGE_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.page.Filter.class});
-        MAPPING.put(Xmlns.CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class});
+        MAPPING.put(Xmlns.CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class,  LocalizedString.class,
+});
         MAPPING.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, new Class[]{Subtitles.class, SubtitlesType.class});
         MAPPING.put(GTAA_NAMESPACE, Scheme.classes());
 

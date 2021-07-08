@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.i18n.Locales;
-import nl.vpro.i18n.LocalizedString;
 
 /**
  * The result of a {@link DisplayablePredicate}.
