@@ -9,6 +9,8 @@
 
   <xs:element name="change" type="changeType"/>
 
+  <xs:element name="error" type="errorType"/>
+
   <xs:element name="mediaForm" type="mediaFormType"/>
 
   <xs:element name="mediaSearchResult" type="mediaSearchResultType"/>
@@ -872,6 +874,17 @@
         <xs:sequence/>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="errorType">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+      <xs:element name="class" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="cause" type="xs:string" minOccurs="0"/>
+      <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="testResult" type="xs:anyType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="status" type="xs:int"/>
   </xs:complexType>
 
   <xs:simpleType name="simpleMatchType">
