@@ -38,7 +38,6 @@ jobs:
       continue-on-error: true
     - name: Publish Test Report
       uses: scacap/action-surefire-report@v1
-      if: github.ref == 'refs/heads/master'
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
