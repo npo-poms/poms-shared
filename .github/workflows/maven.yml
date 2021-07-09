@@ -35,7 +35,7 @@ jobs:
       #continue-on-error: true
     - name: Publish Test Report
       uses: scacap/action-surefire-report@v1
-      if: success() || failed()
+      if: success() || fail()
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish to codecov
