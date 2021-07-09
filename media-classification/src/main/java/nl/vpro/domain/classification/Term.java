@@ -14,7 +14,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.i18n.LocalizedString;
 import nl.vpro.xml.bind.LocalDateXmlAdapter;
 import nl.vpro.xml.bind.ZeroOneBooleanAdapter;
 
@@ -87,7 +86,7 @@ public class Term implements Comparable<Term>, TermContainer {
         return getName(Locale.getDefault());
     }
     public String getName(Locale locale) {
-        return LocalizedString.get(locale, localizedName);
+        return LocalizedString.get_(locale, localizedName);
     }
 
     public String getDefinition() {
@@ -95,7 +94,7 @@ public class Term implements Comparable<Term>, TermContainer {
     }
 
     public String getDefinition(Locale locale) {
-        return LocalizedString.get(locale, localizedDefinition);
+        return LocalizedString.get_(locale, localizedDefinition);
     }
 
     public List<Reference> getReferences() {
