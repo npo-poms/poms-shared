@@ -857,14 +857,14 @@
     <xs:sequence>
       <xs:element name="media" type="media:baseMediaType" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="publishDate" type="xs:string"/>
+    <xs:attribute name="publishDate" type="xs:dateTime"/>
     <xs:attribute name="id" type="xs:string"/>
     <xs:attribute name="deleted" type="xs:boolean"/>
     <xs:attribute name="tail" type="xs:boolean"/>
     <xs:attribute name="sequence" type="xs:long"/>
     <xs:attribute name="revision" type="xs:long"/>
     <xs:attribute name="mergedTo" type="xs:string"/>
-    <xs:attribute name="realPublishDate" type="xs:string"/>
+    <xs:attribute name="realPublishDate" type="xs:dateTime"/>
     <xs:attribute name="mid" type="xs:string"/>
   </xs:complexType>
 
