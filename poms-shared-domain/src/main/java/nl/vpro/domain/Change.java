@@ -1,19 +1,17 @@
 package nl.vpro.domain;
 
+import lombok.*;
+
+import java.time.Instant;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.Instant;
 
 /**
  * @author Michiel Meeuwissen
@@ -28,7 +26,8 @@ public abstract class Change<T>  {
 
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlJavaTypeAdapter(value = InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     private Instant publishDate;

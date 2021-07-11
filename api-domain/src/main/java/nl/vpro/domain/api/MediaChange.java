@@ -60,6 +60,7 @@ public class MediaChange extends Change<MediaObject> {
      */
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     private Instant realPublishDate;

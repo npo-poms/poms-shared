@@ -58,6 +58,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
     @Setter
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     Instant lastModified;
