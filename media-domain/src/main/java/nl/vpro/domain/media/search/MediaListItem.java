@@ -63,7 +63,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "streamingPlatformStatus"
         }
 )
-public class MediaListItem extends PublishableListItem implements TrackableMedia {
+public class MediaListItem extends PublishableListItem<MediaListItem> implements TrackableMedia {
 
     @XmlAttribute
     @Getter

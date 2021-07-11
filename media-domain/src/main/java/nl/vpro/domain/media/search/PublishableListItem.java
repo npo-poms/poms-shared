@@ -23,7 +23,7 @@ import nl.vpro.domain.user.Editor;
 @XmlRootElement(name = "item")
 @XmlType(
     name = "publishableListItem")
-public abstract class PublishableListItem implements MutableEmbargo, Identifiable<Long> {
+public abstract class PublishableListItem<S extends PublishableListItem<S>> implements MutableEmbargo<S>, Identifiable<Long> {
     @XmlAttribute
     protected Long id;
 
@@ -51,7 +51,7 @@ public abstract class PublishableListItem implements MutableEmbargo, Identifiabl
     protected PublishableListItem() {
     }
 
-    protected PublishableListItem(PublishableObject mediaObject) {
+    protected PublishableListItem(PublishableObject<?> mediaObject) {
         this.id       = mediaObject.getId();
         this.workflow = mediaObject.getWorkflow();
 
@@ -150,9 +150,9 @@ public abstract class PublishableListItem implements MutableEmbargo, Identifiabl
 
     @NonNull
     @Override
-    public PublishableListItem setPublishStartInstant(Instant publishStart) {
+    public S setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
-        return this;
+        return (S) this;
     }
 
     @Override
@@ -163,9 +163,9 @@ public abstract class PublishableListItem implements MutableEmbargo, Identifiabl
 
     @NonNull
     @Override
-    public PublishableListItem setPublishStopInstant(Instant publishStop) {
+    public S setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
-        return this;
+        return (S) this;
     }
 
     public Instant getLastPublished() {

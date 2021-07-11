@@ -12,7 +12,7 @@ import nl.vpro.domain.support.License;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ImageListItem extends PublishableListItem {
+public class ImageListItem extends PublishableListItem<ImageListItem> {
     private String title;
 
     private String description;
