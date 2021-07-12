@@ -8,6 +8,7 @@ import java.util.*;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -112,6 +113,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Transient
     protected MediaType typeOfGroup;
 
+    @Min(0)
     protected Integer number;
 
     @Column(nullable = false, updatable = false)
