@@ -17,5 +17,8 @@ jobs:
         distribution: 'adopt'
         java-version: 8
     - name: Build with Maven
-      run: mvn -B clean package
+      run: mvn -B clean test
+    - name: Publish Test Report
+      uses: scacap/action-surefire-report@v1
+      if: ${{ success() || failure()}}   
 
