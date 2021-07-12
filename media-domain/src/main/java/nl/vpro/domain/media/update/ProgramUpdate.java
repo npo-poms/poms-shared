@@ -145,7 +145,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         return p;
     }
 
-    @XmlAttribute
+    @XmlAttribute(required = true)
     @Override
     @NotNull
     public ProgramType getType() {

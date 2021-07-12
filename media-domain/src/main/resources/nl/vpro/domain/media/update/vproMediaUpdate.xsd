@@ -135,7 +135,7 @@
         <xs:sequence>
           <xs:element name="poSeriesID" type="media:baseTextType" form="qualified" minOccurs="0"/>
         </xs:sequence>
-        <xs:attribute name="type" type="media:groupTypeEnum"/>
+        <xs:attribute name="type" type="media:groupTypeEnum" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -528,7 +528,7 @@
             </xs:complexType>
           </xs:element>
         </xs:sequence>
-        <xs:attribute name="type" type="media:programTypeEnum"/>
+        <xs:attribute name="type" type="media:programTypeEnum" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

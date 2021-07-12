@@ -57,7 +57,9 @@ public class MediaUpdateListTest {
     @Test
     public void memberUpdateType() throws IOException, SAXException {
         MemberUpdate memberUpdate = new MemberUpdate(1,
-            ProgramUpdate.create(MediaBuilder.program().avType(AVType.VIDEO).broadcasters(new Broadcaster("VPRO"))
+            ProgramUpdate.create(MediaBuilder.program(ProgramType.CLIP)
+                .avType(AVType.VIDEO)
+                .broadcasters(new Broadcaster("VPRO"))
                 .titles(new Title("De titel", OwnerType.BROADCASTER, TextualType.MAIN))));
 
         MediaUpdateList<MemberUpdate> xmlList = new MediaUpdateList<>(memberUpdate);
@@ -71,7 +73,7 @@ public class MediaUpdateListTest {
     @Test
     public void mediaUpdateList() throws IOException, SAXException {
         Program program = MediaBuilder
-            .program()
+            .program(ProgramType.CLIP)
             .  urn("urn:vpro:media:program:123")
             .  avType(AVType.VIDEO)
             .  mainTitle("hoi")
@@ -94,7 +96,7 @@ public class MediaUpdateListTest {
         JAXB.marshal(list, writer);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<list offset=\"0\" totalCount=\"1\" size=\"1\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <item xsi:type=\"programUpdateType\" avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_1234\" urn=\"urn:vpro:media:program:123\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+            "    <item xsi:type=\"programUpdateType\" type='CLIP' avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_1234\" urn=\"urn:vpro:media:program:123\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
             "        <broadcaster>VPRO</broadcaster>\n" +
             "        <title type=\"MAIN\">hoi</title>\n" +
             "        <intentions/>\n" +
