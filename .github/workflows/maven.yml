@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: [ master, "REL-*" ]
+    branches: [ master, "REL-*", "feature/*"]
   workflow_dispatch:
 
 jobs:
@@ -31,7 +31,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Build with Maven
-      run: mvn -B -Pdeploy,ossrh -U deploy
+      run: mvn -B -Pdeploy,ossrh -U ${{ fromJSON('["deploy", "test"]')[github.ref != 'refs/heads/master'] }}
       #continue-on-error: true
     - name: Publish Test Report
       uses: scacap/action-surefire-report@v1
