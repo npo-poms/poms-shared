@@ -152,7 +152,7 @@
     <xs:attribute name="mid" type="xs:string"/>
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="publishStop" type="xs:dateTime"/>
-    <xs:attribute name="type" type="media:programTypeEnum" use="required" />
+    <xs:attribute name="type" type="media:programTypeEnum" use="required"/>
     <xs:attribute name="urn" type="xs:string"/>
     <xs:attribute name="version" type="xs:string"/>
   </xs:complexType>
@@ -561,7 +561,7 @@
     <xs:attribute name="ordered" type="xs:boolean"/>
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="publishStop" type="xs:dateTime"/>
-    <xs:attribute name="type" type="media:groupTypeEnum"/>
+    <xs:attribute name="type" type="media:groupTypeEnum" use="required"/>
     <xs:attribute name="urn" type="xs:string"/>
     <xs:attribute name="version" type="xs:string"/>
   </xs:complexType>
