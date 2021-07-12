@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: [ master, "REL-*", "feature/*"]
+    branches: [ master, "REL-*"]
   workflow_dispatch:
 
 jobs:
