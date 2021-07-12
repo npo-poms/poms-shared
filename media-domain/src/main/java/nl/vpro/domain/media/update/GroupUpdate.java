@@ -108,7 +108,7 @@ public final class GroupUpdate extends MediaUpdate<Group> {
 
     }
 
-    @XmlAttribute
+    @XmlAttribute(required = true)
     @Override
     public GroupType getType() {
         return groupType;

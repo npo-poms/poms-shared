@@ -218,7 +218,7 @@
     <xs:attribute name="cridRef" type="xs:string"/>
     <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
     <xs:attribute name="midRef" type="xs:string"/>
-    <xs:attribute name="index" type="xs:int"/>
+    <xs:attribute name="index" type="xs:nonNegativeInteger"/>
     <xs:attribute name="type" type="mediaTypeEnum"/>
     <xs:attribute name="urnRef" type="xs:string"/>
   </xs:complexType>
