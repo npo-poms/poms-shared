@@ -140,9 +140,10 @@ public class MediaObjectLocker {
         MediaIdentifiable.Correlation lock,
         @NonNull String reason,
         @NonNull Callable<T> callable) {
-        return ObjectLocker.withObjectLock(lock, reason, callable, LOCKED_MEDIA, (
-            o1, o2) ->
-            o1 instanceof MediaIdentifiable.Correlation && Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType()));
+        return ObjectLocker.withObjectLock(lock, reason, callable, LOCKED_MEDIA,
+            (o1, o2) ->
+                o1 instanceof MediaIdentifiable.Correlation && Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType())
+        );
     }
 
 }
