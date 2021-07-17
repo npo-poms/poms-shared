@@ -145,6 +145,11 @@ public interface Metadata<T extends Metadata<T>>  extends MutableEmbargo<T>, Bas
             setDate(source.getDate());
             change.change();
         }
+
+        if (getLastModifiedInstant() == null && ! Objects.equals(getLastModifiedInstant(), source.getLastModifiedInstant())) {
+            setLastModifiedInstant(source.getLastModifiedInstant());
+            change.change();
+        }
         return change.or(Embargos.copyIfTargetUnset(source, this));
     }
 
@@ -190,6 +195,10 @@ public interface Metadata<T extends Metadata<T>>  extends MutableEmbargo<T>, Bas
         }
         if (StringUtils.isNotEmpty(source.getDate()) && ! Objects.equals(getDate(), source.getDate())) {
             setDate(source.getDate());
+            change.change();
+        }
+        if (source.getLastModifiedInstant() != null && ! Objects.equals(getLastModifiedInstant(), source.getLastModifiedInstant())) {
+            setLastModifiedInstant(source.getLastModifiedInstant());
             change.change();
         }
         return change.or(Embargos.copyIfSourceSet(source, this));
