@@ -3,7 +3,7 @@ package nl.vpro.domain;
 import java.time.Instant;
 
 /**
- * Has information about when it as created and last modified.
+ * Has information about when it was created and last modified.
  *
  * This is more or less an immutable version of {@link Changeable}
  * @author Michiel Meeuwissen

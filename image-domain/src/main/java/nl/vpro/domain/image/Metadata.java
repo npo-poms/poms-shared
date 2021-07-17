@@ -45,8 +45,10 @@ public interface Metadata<T extends Metadata<T>>  extends MutableEmbargo<T>, Bas
             return;
         }
         setDate(String.valueOf(instant.atZone(TimeUtils.ZONE_ID).toLocalDate().getYear()));
-
     }
+
+
+    void setLastModifiedInstant(Instant lastModified);
 
     default ChangeReport copyFrom(Metadata<?> image){
         ChangeReport change = new ChangeReport();
@@ -88,6 +90,10 @@ public interface Metadata<T extends Metadata<T>>  extends MutableEmbargo<T>, Bas
         }
         if (!Objects.equals(getDate(), image.getDate())) {
             setDate(image.getDate());
+            change.change();
+        }
+        if (!Objects.equals(getLastModifiedInstant(), image.getLastModifiedInstant())) {
+            setLastModifiedInstant(image.getLastModifiedInstant());
             change.change();
         }
 

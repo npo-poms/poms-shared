@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.image;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -126,6 +125,14 @@ public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicIma
     private final UUID uploadId;
 
 
+    @XmlAttribute(name = "lastModified")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant lastModified;
+
+
     public BasicImageMetadata() {
         this.uploadId = null;
     }
@@ -204,4 +211,17 @@ public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicIma
     }
 
 
+    @Override
+    public Instant getLastModifiedInstant() {
+        return getLastModified();
+    }
+
+    public void setLastModifiedInstant(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    @Override
+    public Instant getCreationInstant() {
+        return getLastModifiedInstant();
+    }
 }

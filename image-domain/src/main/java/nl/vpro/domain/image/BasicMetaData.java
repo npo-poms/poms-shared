@@ -1,5 +1,6 @@
 package nl.vpro.domain.image;
 
+import nl.vpro.domain.Trackable;
 import nl.vpro.domain.support.License;
 import nl.vpro.validation.URI;
 
@@ -9,7 +10,7 @@ import nl.vpro.validation.URI;
  * @author Michiel Meeuwissen
  * @since 5.13
  */
-public interface BasicMetaData<T extends BasicMetaData<T>> {
+public interface BasicMetaData<T extends BasicMetaData<T>> extends Trackable {
 
     ImageType getType();
 

@@ -52,6 +52,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     @Column(nullable = true)
     private Long crc32;
 
+    @SuppressWarnings("CopyConstructorMissesField")
     protected PublishableObject(PublishableObject<T> source) {
         super(source);
         this.workflow = source.workflow;
