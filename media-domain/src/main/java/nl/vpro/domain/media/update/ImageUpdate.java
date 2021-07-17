@@ -163,9 +163,10 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
     @XmlElement(name = "crid")
     private List<@CRID String> crids;
 
-
+    @XmlTransient
     private Instant lastModified;
 
+    @XmlTransient
     private Instant creationDate;
 
 
