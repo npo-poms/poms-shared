@@ -74,8 +74,6 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
     private String urn;
 
 
-
-
     @XmlAttribute(name = "publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -145,9 +143,6 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
     @JsonInclude(JsonInclude.Include.NON_NULL)
     protected java.time.Duration offset;
 
-
-
-
     /**
      * <p>
      * Description of the image. If this describes an existing {@link Image} then the type of this
@@ -167,6 +162,11 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
 
     @XmlElement(name = "crid")
     private List<@CRID String> crids;
+
+
+    private Instant lastModified;
+
+    private Instant creationDate;
 
 
     public ImageUpdate() {
@@ -195,6 +195,21 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
         }
         return null;
 
+    }
+
+    @Override
+    public void setLastModifiedInstant(Instant lastModified) {
+
+    }
+
+    @Override
+    public Instant getLastModifiedInstant() {
+        return lastModified;
+    }
+
+    @Override
+    public Instant getCreationInstant() {
+        return creationDate;
     }
 
     public static class Builder implements EmbargoBuilder<Builder> {
@@ -270,6 +285,8 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
         offset = image.getOffset();
         urn = image.getUrn();
         crids = image.getCrids();
+        lastModified = image.getLastModifiedInstant();
+        creationDate = image.getCreationInstant();
     }
 
     public Image toImage() {
