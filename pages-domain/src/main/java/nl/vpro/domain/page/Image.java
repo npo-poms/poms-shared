@@ -2,6 +2,8 @@ package nl.vpro.domain.page;
 
 import lombok.*;
 
+import java.time.Instant;
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
@@ -101,5 +103,15 @@ public class Image implements BasicMetaData<Image> {
     @Override
     public int hashCode() {
         return url.hashCode();
+    }
+
+    @Override
+    public Instant getLastModifiedInstant() {
+        return getCreationInstant();
+    }
+
+    @Override
+    public Instant getCreationInstant() {
+        return null;
     }
 }
