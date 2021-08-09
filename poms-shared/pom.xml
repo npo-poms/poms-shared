@@ -33,11 +33,6 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-util</artifactId>
     </dependency>

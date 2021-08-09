@@ -96,14 +96,6 @@
       <groupId>javax.annotation</groupId>
       <artifactId>javax.annotation-api</artifactId>
     </dependency>
-
-
-    <!-- a bit of a hassle to convert, i think this is unused anyways? -->
-     <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>ru.lanwen.wiremock</groupId>
       <artifactId>wiremock-junit5</artifactId>
