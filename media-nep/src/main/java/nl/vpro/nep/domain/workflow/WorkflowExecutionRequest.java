@@ -41,15 +41,21 @@ public class WorkflowExecutionRequest implements Serializable {
 
         /**
          * Sets the file name in the request, optionally prefixing it with the given ftp user name
-         * @param fileName If starts with /
+         * @param fileName If starts with / it will be ignored.
+         * @param ftpUsername If nonnull the actual used filename will be prefixed with it
          */
-        public Builder file(@Nullable String ftpUsername, String fileName) {
+        public Builder file(@Nullable String ftpUsername, @Nullable String fileName) {
             if (fileName != null) {
-                if (fileName.startsWith("/") || ftpUsername == null) {
-                    return filename(fileName.substring(1));
+                if (fileName.startsWith("/")) {
+                    fileName = fileName.substring(1);
+                }
+                if (ftpUsername == null) {
+                    return filename(fileName);
                 } else {
                     return filename(ftpUsername + "/" + fileName);
                 }
+            } else {
+                filename(null);
             }
             return this;
         }

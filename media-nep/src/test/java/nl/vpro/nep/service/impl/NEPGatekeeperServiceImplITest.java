@@ -8,12 +8,12 @@ import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-import nl.vpro.nep.service.exception.NEPException;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.nep.domain.workflow.*;
+import nl.vpro.nep.service.exception.NEPException;
 
 /**
  * @author Michiel Meeuwissen
@@ -53,6 +53,27 @@ public class NEPGatekeeperServiceImplITest {
             .file(gatekeeperService.getFtpUserName(), "WO_VPRO_783763_2018-11-12T133004122_geldig.mp4")
             .build()
             ;
+
+        try {
+            WorkflowExecution result = gatekeeperService.transcode(request);
+            log.info("Result {}", result);
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    @Test
+    @Disabled
+    public void retranscode() {
+        WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
+            .mid("POMS_BV_16593726")
+            .encryption(EncryptionType.DRM)
+            .priority(PriorityType.LOW)
+            .platforms(Collections.singletonList("internetvod"))
+            .file(null, "/npoweb-bnnvara/20210809-blend-aflevering8-hq.mp4")
+            .build()
+            ;
+
         try {
             WorkflowExecution result = gatekeeperService.transcode(request);
             log.info("Result {}", result);
