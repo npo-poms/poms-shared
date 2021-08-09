@@ -12,7 +12,8 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.domain.image.*;
+import nl.vpro.domain.image.BasicMetaData;
+import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.support.License;
 import nl.vpro.validation.*;
 
