@@ -13,6 +13,8 @@
 
   <xs:element name="mediaForm" type="mediaFormType"/>
 
+  <xs:element name="mediaResult" type="mediaResultType"/>
+
   <xs:element name="mediaSearchResult" type="mediaSearchResultType"/>
 
   <xs:element name="pageSearchResult" type="pageSearchResultType"/>
@@ -885,6 +887,14 @@
       <xs:element name="testResult" type="xs:anyType" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="status" type="xs:int"/>
+  </xs:complexType>
+
+  <xs:complexType name="mediaResultType">
+    <xs:complexContent>
+      <xs:extension base="resultType">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:simpleType name="simpleMatchType">

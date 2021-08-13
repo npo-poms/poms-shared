@@ -12,10 +12,7 @@ import nl.vpro.domain.Mappings;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.SuggestResult;
-import nl.vpro.domain.api.media.MediaSearchResult;
-import nl.vpro.domain.api.media.MediaSearchResults;
-import nl.vpro.domain.api.media.RedirectList;
-import nl.vpro.domain.api.media.ScheduleForm;
+import nl.vpro.domain.api.media.*;
 import nl.vpro.domain.api.page.PageForm;
 import nl.vpro.domain.api.page.PageSearchResult;
 import nl.vpro.domain.api.page.PageSearchResults;
@@ -63,7 +60,8 @@ public class ApiMappings extends Mappings {
             PageSearchResult.class,
             MediaChange.class,
             SuggestResult.class,
-            nl.vpro.domain.api.Error.class
+            nl.vpro.domain.api.Error.class,
+            MediaResult.class
         });
         MAPPING.put(PAGE_NAMESPACE, new Class[]{Page.class});
         MAPPING.put(PAGEUPDATE_NAMESPACE, new Class[]{PageUpdate.class, ImageType.class});
