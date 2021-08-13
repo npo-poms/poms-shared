@@ -32,6 +32,7 @@ import nl.vpro.media.odi.util.LocationResult;
  */
 @ToString
 @Slf4j
+@Deprecated
 public class OdiPlusLocationHandler implements LocationProducer {
 
 

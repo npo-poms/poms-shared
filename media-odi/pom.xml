@@ -11,7 +11,12 @@
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-odi</artifactId>
   <name>media-odi</name>
-  <description>Support for ODI authentication as required by NPO player. Not sure this is still needed or used.</description>
+  <description>
+    Support for ODI authentication as required by NPO player.
+    Not sure this is still needed or used.
+
+    It also supports other 'location handlers'. I think this module is actually misnamed.
+  </description>
 
   <dependencies>
     <dependency>

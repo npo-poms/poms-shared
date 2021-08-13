@@ -13,8 +13,10 @@ import nl.vpro.media.odi.util.LocationResult;
 /**
  * See https://jira.vpro.nl/browse/MSE-1788
  *
+ * TODO: Name is not correct, It does not do only 'odi'.
+ *
  * @author Roelof Jan Koekoek
- * @since 1.8
+ * @since 1.8*
  */
 public interface OdiService {
 
