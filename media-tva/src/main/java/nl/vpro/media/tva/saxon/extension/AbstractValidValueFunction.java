@@ -13,9 +13,13 @@ import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.value.BooleanValue;
 import net.sf.saxon.value.SequenceType;
 
-import java.util.Set;
+import java.util.*;
 
 import javax.validation.*;
+
+import org.meeuw.functional.TriPredicate;
+
+import nl.vpro.domain.media.MediaObject;
 
 /**
  * @author Michiel Meeuwissen
@@ -24,6 +28,21 @@ import javax.validation.*;
 @Slf4j
 public abstract class AbstractValidValueFunction extends ExtensionFunctionDefinition {
 
+    static final Set<String> IGNORE_EMAILS;
+    static {
+        Set<String> emails = new HashSet<>(Arrays.asList("nvt"));
+        IGNORE_EMAILS = Collections.unmodifiableSet(emails);
+    }
+
+    static final TriPredicate<Class<?>, String, Object> warn = (clazz, propertyName, value) -> {
+        if (MediaObject.class.equals(clazz)) {
+            if ("email".equals(propertyName) && value != null) {
+                return ! IGNORE_EMAILS.contains(value); //   Encountered violation error in null: nvt is geen goed email-adres [Camel (mediaRoutes) thread #2 - file:///share/pg/poms] is polluting the logs.
+            }
+            return true;
+        }
+        return true;
+    };
 
     static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     static Validator validator = factory.getValidator();
@@ -53,13 +72,16 @@ public abstract class AbstractValidValueFunction extends ExtensionFunctionDefini
                     String propertyName = arguments[1].iterate().next().getStringValueCS().toString().trim();
                     Item valueItem = arguments[2].iterate().next();
                     Object value = getValue(valueItem.getStringValueCS().toString().trim());
+                    Class<?> clazz = Class.forName(clazzName);
                     Set<? extends ConstraintViolation<?>> constraintViolations =
                         validator.validateValue(
-                            Class.forName(clazzName), propertyName, value,
+                            clazz, propertyName, value,
                             validationGroups()
                         );
-                    for (ConstraintViolation<?> cv : constraintViolations) {
-                        log.warn("Encountered violation error in {}: {}", context.getCurrentOutputUri(), cv.getMessage());
+                    if (warn.test(clazz, propertyName, value)) {
+                        for (ConstraintViolation<?> cv : constraintViolations) {
+                            log.warn("Encountered violation error in {}: {}", context.getCurrentOutputUri(), cv.getMessage());
+                        }
                     }
                     return BooleanValue.get(constraintViolations.isEmpty());
                 } catch (ClassNotFoundException e) {
