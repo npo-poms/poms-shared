@@ -243,9 +243,27 @@ public class TVATransformerTest {
         assertThat(table.getGroupTable().stream().filter(g -> g.getType() == GroupType.SEASON).collect(Collectors.toList())).hasSize(27);
         assertThat(table.getGroupTable().stream().filter(g -> g.getType() == GroupType.SERIES).collect(Collectors.toList())).hasSize(3);
 
-        // MSE-4572
-        Optional<MediaObject> byCrid = table.findByCrid("crid://npo/programmagegevens/1000741891668");
-        assertThat(byCrid.get().getEmail()).isEmpty();
+    }
+    @Test
+    public void testEmail() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        String xml = transform("pd/pd/NED220150919P.xml");
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+
+        {
+            // MSE-4572
+            Optional<MediaObject> byCrid = table.findByCrid("crid://npo/programmagegevens/1000741891668");
+            assertThat(byCrid.get().getEmail()).isEmpty();
+        }
+        {
+            //MSE-5137
+            Optional<MediaObject> byCrid = table.findByCrid("crid://npo/programmagegevens/1000741915668");
+            assertThat(byCrid.get().getEmail()).isEmpty();
+        }
+        {
+            Optional<MediaObject> byCrid = table.findByCrid("crid://npo/programmagegevens/1000741903668");
+            assertThat(byCrid.get().getEmail()).contains("bla@rkk.nl");
+        }
+
     }
 
     @Test

@@ -605,6 +605,14 @@
               <mpeg7:MediaUri>www.rkk.nl</mpeg7:MediaUri>
             </MediaLocator>
           </RelatedMaterial>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">bla</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>bla@rkk.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
           <ProductionLocationList>
             <ProductionLocation code="NL"/>
           </ProductionLocationList>
@@ -640,6 +648,14 @@
               <PersonNameIDRef ref="658336814517"/>
             </CreditsItem>
           </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>nvt</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
           <ProductionLocationList>
             <ProductionLocation code="NL"/>
           </ProductionLocationList>

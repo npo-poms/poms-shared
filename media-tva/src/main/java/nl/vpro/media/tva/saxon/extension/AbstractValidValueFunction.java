@@ -30,14 +30,21 @@ public abstract class AbstractValidValueFunction extends ExtensionFunctionDefini
 
     static final Set<String> IGNORE_EMAILS;
     static {
-        Set<String> emails = new HashSet<>(Arrays.asList("nvt"));
+        Set<String> emails = new HashSet<>(Arrays.asList("nvt")); //   Encountered violation error in null: nvt is geen goed email-adres [Camel (mediaRoutes) thread #2 - file:///share/pg/poms] is polluting the logs.
         IGNORE_EMAILS = Collections.unmodifiableSet(emails);
     }
 
     static final TriPredicate<Class<?>, String, Object> warn = (clazz, propertyName, value) -> {
         if (MediaObject.class.equals(clazz)) {
-            if ("email".equals(propertyName) && value != null) {
-                return ! IGNORE_EMAILS.contains(value); //   Encountered violation error in null: nvt is geen goed email-adres [Camel (mediaRoutes) thread #2 - file:///share/pg/poms] is polluting the logs.
+            if ("email".equals(propertyName) && value instanceof List) {
+                boolean warn = false;
+                for (Object e : (List) value) {
+                    if (!IGNORE_EMAILS.contains(e)) {
+                        warn = true;
+                        break;
+                    }
+                }
+                return warn;
             }
             return true;
         }
