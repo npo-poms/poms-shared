@@ -38,7 +38,7 @@ public class LetterBoxRegistration {
         this.principalId = principalId;
         this.description = description;
         this.implementingClass = implementingClass;
-        this.asyncAfter = asyncAfter == null ? Duration.ofSeconds(30) : asyncAfter;
+        this.asyncAfter = asyncAfter == null ? Duration.ofSeconds(20) : asyncAfter;
     }
 
     @Override
