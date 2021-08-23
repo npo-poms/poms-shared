@@ -128,6 +128,7 @@ public class Image extends PublishableObject<Image>
     })
     @NoHtml
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE, required = true)
+    @Getter
     private String title;
 
     @Column(name = "imageurl")
@@ -138,6 +139,8 @@ public class Image extends PublishableObject<Image>
 
     @NoHtml
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @Getter
+    @Setter
     private String description;
 
     @Column(name = "`offset`")
@@ -146,6 +149,7 @@ public class Image extends PublishableObject<Image>
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
+    @Getter
     protected java.time.Duration offset;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
@@ -161,6 +165,7 @@ public class Image extends PublishableObject<Image>
     @NoHtml
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Getter
     private String credits;
 
     @URI()
@@ -188,6 +193,7 @@ public class Image extends PublishableObject<Image>
 
     @ReleaseDate()
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @Getter
     private String date;
 
 
@@ -274,6 +280,7 @@ public class Image extends PublishableObject<Image>
     }
 
 
+    @SuppressWarnings("CopyConstructorMissesField") // not copying embargo and creation/lastmodified
     public Image(Image source) {
         super(source);
         this.owner = source.owner;
@@ -326,27 +333,12 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
     public void setTitle(String title) {
         if(title != null && title.length() > 255) {
-            title = title.substring(0, 254);
+            title = title.substring(0, 255);
         }
 
         this.title = title;
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
     }
 
 
@@ -369,9 +361,6 @@ public class Image extends PublishableObject<Image>
         return this;
     }
 
-    public java.time.Duration getOffset() {
-        return offset;
-    }
 
     public Image setOffset(java.time.Duration offset) {
         this.offset = offset;
@@ -388,19 +377,8 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public String getCredits() {
-        return credits;
-    }
-
-    @Override
     public void setCredits(String credits) {
         this.credits = !StringUtils.isBlank(credits) ? credits : null;
-    }
-
-
-    @Override
-    public String getDate() {
-        return date;
     }
 
     @Override
@@ -439,7 +417,7 @@ public class Image extends PublishableObject<Image>
      */
     @Override
     public String getUrnPrefix() {
-        return "urn:vpro:media:image:";
+        return BASE_URN;
     }
 
     @Override
