@@ -34,7 +34,7 @@ Basicly it's just
  ...
 ====
 
-The github build can be done locally with 'https://github.com/nektos/act[act]'. Create a file '${USER.HOME}/.secrets' and then:
+The github build can be done locally with 'https://github.com/nektos/act[act]'. Create a file '${USER.HOME}/.secrets' (a propertyfile with the secrets of this project) and then:
 
 [source, bash]
 ====
