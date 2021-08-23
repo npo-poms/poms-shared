@@ -90,8 +90,8 @@ public class AssemblageConfig {
 
     /**
      * This is mainly targeted at PREPR which does not support programs spanning 0 o'clock.
-     * If this is set to >= 0, then schedule merging will merge adjacent scheduleevents if they are of the same MID
-     * The size of the duration defines the maximal gap between the events. (For PREPR there is never anything broadcasted in the second before midnight)
+     * If this is set to >= 0, then schedule merging will merge adjacent schedule events if they are of the same MID
+     * The size of the duration defines the maximal gap between the events. (For PREPR there is never anything broadcast in the second before midnight)
      *
      */
     @lombok.Builder.Default
@@ -225,10 +225,11 @@ public class AssemblageConfig {
     }
 
     /**
-     * Sets updating a permissive as possible, with few exeptions:
-     *
-     * - relations: only sync relations of the broadcasters associated with the account (this is also the default)
-     * -- memberrefs
+     * Sets updating as permissive as possible, with a few exceptions:
+     * <ul>
+     * <li>relations: only sync relations of the broadcasters associated with the account (this is also the default)</li>
+     * <li>memberrefs</li>
+     * </ul>
      */
     public static Builder withAllTrue() {
         return builder()
