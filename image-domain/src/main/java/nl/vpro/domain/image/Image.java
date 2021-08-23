@@ -103,10 +103,13 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name="imageType")
     @XmlAttribute
+    @Getter
+    @Setter
     private ImageType type;
 
     @Enumerated(EnumType.STRING)
     @XmlTransient
+    @Getter
     private ImageFormat imageFormat;
 
     @Column(nullable = false)
@@ -114,28 +117,38 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
+    @Getter
     private String title;
 
     @Column
     @Nullable
+    @Getter
     private String description;
 
+    @Getter
+    @Setter
     private Integer height;
 
+    @Getter
+    @Setter
     private Integer width;
 
     @XmlElement(name = "heightMm")
+    @Getter
     private Float heightInMm;
 
     @XmlElement(name = "widthMm")
+    @Getter
     private Float widthInMm;
 
+    @Getter
     private Long size;
 
     @Column(unique = true, length = 1024)
     @nl.vpro.validation.URI(groups = PomsValidatorGroup.class)
     private String downloadUrl;
 
+    @Getter
     private String etag;
 
     @Column
@@ -147,6 +160,8 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     private Instant urlLastModified;
 
     @XmlTransient
+    @Getter
+    @Setter
     private byte[] hash;
 
 
@@ -179,6 +194,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     @Transient
     @XmlTransient
+    @Setter
     private InputStream cachedInputStream;
 
 
@@ -207,30 +223,9 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
 
     @Override
-    public ImageType getType() {
-        return type;
-    }
-
-    @Override
-    public void setType(ImageType imageType) {
-        this.type = imageType;
-    }
-
-
-    @Override
-    public ImageFormat getImageFormat() {
-        return imageFormat;
-    }
-
-    @Override
     public Image setImageFormat(ImageFormat imageFormat) {
         this.imageFormat = imageFormat;
         return this;
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
     }
 
     @Override
@@ -240,11 +235,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         } else {
             this.title = title.substring(255);
         }
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
     }
 
     @Override
@@ -265,52 +255,16 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         return imageFormat.getMimeType();
     }
 
-
-    @Override
-    public Integer getHeight() {
-        return height;
-    }
-
-    @Override
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    @Override
-    public Integer getWidth() {
-        return width;
-    }
-
-    @Override
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    @Override
-    public Float getHeightInMm() {
-        return heightInMm;
-    }
-
     @Override
     public Image setHeightInMm(Float heightInMm) {
         this.heightInMm = heightInMm;
         return this;
     }
 
-
-    @Override
-    public Float getWidthInMm() {
-        return widthInMm;
-    }
-
     @Override
     public Image setWidthInMm(Float widthInMm) {
         this.widthInMm = widthInMm;
         return this;
-    }
-    @Override
-    public Long getSize() {
-        return size;
     }
 
     @Override
@@ -367,11 +321,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         });
     }
 
-
-    public void setCachedInputStream(InputStream cachedInputStream) {
-        this.cachedInputStream = cachedInputStream;
-    }
-
     /**
      * {@inheritDoc}
      *
@@ -403,19 +352,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         return getUrn();
     }
 
-    public byte[] getHash() {
-        return hash;
-    }
-
-    public void setHash(byte[] hash) {
-        this.hash = hash;
-    }
-
-    @Override
-    public String getEtag() {
-        return etag;
-    }
-
     @Override
     public Image setEtag(String etag) {
         this.etag = etag;
@@ -426,7 +362,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     public Image setUrlLastModified(Instant lastModified) {
         this.urlLastModified = lastModified;
         return this;
-
     }
 
 }
