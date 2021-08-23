@@ -233,7 +233,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         if(title == null || title.length() < 255) {
             this.title = title;
         } else {
-            this.title = title.substring(255);
+            this.title = title.substring(0, 255);
         }
     }
 
@@ -242,7 +242,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         if(description == null || description.length() < 255) {
             this.description = description;
         } else {
-            this.description = description.substring(255);
+            this.description = description.substring(0, 255);
         }
     }
 
