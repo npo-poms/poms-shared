@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: [ master, "REL-*"]
+    branches: [ main, "REL-*"]
   workflow_dispatch:
 
 jobs:
@@ -35,10 +35,10 @@ jobs:
       #continue-on-error: true
     - name: Publish Test Report
       uses: scacap/action-surefire-report@v1
-      if: ${{ success() || failure()}}   
+      if: ${{ success() || failure()}}
     - name: Publish to codecov
       run: bash <(curl -s https://codecov.io/bash)
-      if: github.ref == 'refs/heads/master'
+      if: github.ref == 'refs/heads/main'
 
 
 

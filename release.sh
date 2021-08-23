@@ -34,6 +34,6 @@ git branch -l
 # this command will make and deploy the actual release.
 # echo it for review, it then can be copy/pasted to execute
 echo "mvn -Pdeploy release:prepare release:perform -Dtag=REL-$TARGET_VERSION -DreleaseVersion=$TARGET_VERSION -DdevelopmentVersion=$BRANCH_DEVELOPMENT_VERSION"
-echo "git push --set-upstream origin REL-$SNAPSHOT_VERSION ; git checkout master"
+echo "git push --set-upstream origin REL-$SNAPSHOT_VERSION ; git checkout main"
 
 
