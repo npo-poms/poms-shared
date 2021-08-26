@@ -34,17 +34,20 @@ import nl.vpro.logging.Slf4jHelper;
 @Slf4j
 public class FindNetFunction extends ExtensionFunctionDefinition {
 
+    private final static Map<String, AtomicInteger> WARNS = new ConcurrentHashMap<>();
+
+    private final static Set<String> ACKNOWLEDGED;
 
     private final Supplier<Collection<Net>> netsSupplier;
 
-    private final static Map<String, AtomicInteger> WARNS = new ConcurrentHashMap<>();
-
-    private final static Set<String> AKNOWLEDGED;
 
     static {
-        Set<String> aknowledged = new HashSet<>();
-        aknowledged.add("NEDERLAND 1");
-        AKNOWLEDGED = Collections.unmodifiableSet(aknowledged);
+        Set<String> acknowledged = new HashSet<>();
+
+        // we don't consider these nets, but channels.
+        acknowledged.add("NEDERLAND 1");
+        acknowledged.add("NEDERLAND 2");
+        ACKNOWLEDGED = Collections.unmodifiableSet(acknowledged);
 
     }
     @Inject
@@ -79,10 +82,10 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
                     }
                 }
                 AtomicInteger occurence = WARNS.computeIfAbsent(value, (v) -> new AtomicInteger(0));
-                boolean aknowledged =  AKNOWLEDGED.contains(value);
+                boolean acknowledge =  ACKNOWLEDGED.contains(value);
                 Level level = occurence.incrementAndGet() % 100 == 1 ?
-                   aknowledged ? Level.INFO : Level.WARN : Level.DEBUG;
-                Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored){}",  value, occurence.get(), aknowledged ? " (aknowledged)" : "");
+                   acknowledge ? Level.INFO : Level.WARN : Level.DEBUG;
+                Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored){}",  value, occurence.get(), acknowledge ? " (acknowledge)" : "");
                 return new StringValue("");
             }
         };
