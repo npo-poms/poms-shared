@@ -73,7 +73,7 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
                 }
                 AtomicInteger occurence = warns.computeIfAbsent(value, (v) -> new AtomicInteger(0));
                 Level level = occurence.getAndIncrement() % 100 == 0 ? Level.WARN : Level.DEBUG;
-                Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored)",  occurence.get(), value);
+                Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored)",  value, occurence.get());
                 return new StringValue("");
             }
         };
