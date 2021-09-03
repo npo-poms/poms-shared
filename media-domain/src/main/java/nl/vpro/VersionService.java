@@ -37,7 +37,7 @@ public class VersionService {
                 if (inputStream != null) {
                     Properties properties = new Properties();
                     properties.load(inputStream);
-                    version = properties.getProperty("media.version");
+                    version = properties.getProperty("git.build.version");
                 } else {
                     log.warn("Could not find /maven.properties");
                     version = FALLBACK;
