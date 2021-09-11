@@ -212,6 +212,7 @@ public interface MediaRestService {
     @GET
     @Path("/changes/")
     @NoCache
+    @Produces({MediaType.APPLICATION_JSON})
     Response changes(
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
@@ -233,6 +234,7 @@ public interface MediaRestService {
     @POST
     @Path("/iterate/")
     @NoCache
+    @Produces({MediaType.APPLICATION_JSON})
     Response iterate(
         @Valid MediaForm form,
         @QueryParam(PROFILE) String profile,

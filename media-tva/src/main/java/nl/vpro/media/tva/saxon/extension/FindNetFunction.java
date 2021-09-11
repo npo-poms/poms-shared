@@ -14,8 +14,7 @@ import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
@@ -35,11 +34,22 @@ import nl.vpro.logging.Slf4jHelper;
 @Slf4j
 public class FindNetFunction extends ExtensionFunctionDefinition {
 
+    private final static Map<String, AtomicInteger> WARNS = new ConcurrentHashMap<>();
+
+    private final static Set<String> ACKNOWLEDGED;
 
     private final Supplier<Collection<Net>> netsSupplier;
 
-    private final Map<String, AtomicInteger> warns = new ConcurrentHashMap<>();
 
+    static {
+        Set<String> acknowledged = new HashSet<>();
+
+        // we don't consider these nets, but channels.
+        acknowledged.add("NEDERLAND 1");
+        acknowledged.add("NEDERLAND 2");
+        ACKNOWLEDGED = Collections.unmodifiableSet(acknowledged);
+
+    }
     @Inject
     public FindNetFunction(@Named("netsSupplier") Supplier<Collection<Net>> netsSupplier) {
         this.netsSupplier = netsSupplier;
@@ -71,9 +81,11 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
                         return new StringValue(net.getId());
                     }
                 }
-                AtomicInteger occurence = warns.computeIfAbsent(value, (v) -> new AtomicInteger(0));
-                Level level = occurence.getAndIncrement() % 100 == 0 ? Level.WARN : Level.DEBUG;
-                Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored)",  occurence.get(), value);
+                AtomicInteger occurence = WARNS.computeIfAbsent(value, (v) -> new AtomicInteger(0));
+                boolean acknowledge =  ACKNOWLEDGED.contains(value);
+                Level level = occurence.incrementAndGet() % 100 == 1 ?
+                   acknowledge ? Level.INFO : Level.WARN : Level.DEBUG;
+                Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored){}",  value, occurence.get(), acknowledge ? " (acknowledge)" : "");
                 return new StringValue("");
             }
         };
