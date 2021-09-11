@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -32,7 +34,14 @@ public class LetterBoxRegistration {
 
 
     @lombok.Builder
-    private LetterBoxRegistration(String key, String endPointId, String principalId, String description, String implementingClass, Duration asyncAfter) {
+    @JsonCreator()
+    private LetterBoxRegistration(
+        @JsonProperty("key") String key,
+        @JsonProperty("endPointId") String endPointId,
+        @JsonProperty("principalId") String principalId,
+        @JsonProperty("description") String description,
+        @JsonProperty("implementingClass") String implementingClass,
+        @JsonProperty("asyncAfter") Duration asyncAfter) {
         this.key = key;
         this.endPointId = endPointId;
         this.principalId = principalId;
