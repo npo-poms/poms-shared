@@ -40,6 +40,7 @@ jobs:
         name: Junit Tests            # Name of the check run which will be created
         path: '**/target/surefire-reports/TEST-*.xml'    # Path to test results
         reporter: java-junit       # Format of test results
+        only-summary: 'true'
     - name: Publish to codecov
       run: bash <(curl -s https://codecov.io/bash)
       if: github.ref == 'refs/heads/main'
