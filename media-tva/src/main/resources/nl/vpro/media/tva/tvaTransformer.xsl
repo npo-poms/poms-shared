@@ -774,7 +774,7 @@
             <xsl:value-of select="substring-after(text(), 'https://twitter.com/')" />
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="text()"/>
+            <xsl:value-of select="normalize-space(text())"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:element>
@@ -786,7 +786,7 @@
         <xsl:if test="not(starts-with(text(), '#'))">
           <xsl:text>#</xsl:text>
         </xsl:if>
-        <xsl:value-of select="text()"/>
+        <xsl:value-of select="normalize-space(text())"/>
       </xsl:element>
     </xsl:for-each>
 
