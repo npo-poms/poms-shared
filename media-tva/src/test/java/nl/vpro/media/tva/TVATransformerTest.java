@@ -556,6 +556,19 @@ public class TVATransformerTest {
     }
 
 
+    @Test
+    public void API_535_missingMainTitle() throws IOException, ParserConfigurationException, TransformerException, SAXException {
+        genreFunction.setNotFound(NotFound.IGNORE);
+        String xml = transform("bindinc/20210914010321000dayTV5M20210914.xml");
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+        Program program = (Program) table.findByCrid("crid://media-press.tv/153553613").orElse(null);
+        assertThat(program.getMainTitle()).isNotEmpty();
+
+
+
+    }
+
+
     TransformerFactoryImpl FACTORY = new net.sf.saxon.TransformerFactoryImpl();
 
     private static final Set<Net> KNOWN_NETS = new HashSet<>(Arrays.asList(new Net("ZAPP", "Z@PP"), new Net("ZAPPELIN", "Zappelin")));
