@@ -10,6 +10,7 @@ import java.util.function.Function;
 import javax.xml.parsers.*;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.*;
 
 import nl.vpro.domain.media.Channel;
@@ -60,7 +61,13 @@ public class Constants {
         try {
             Properties properties = new Properties();
             properties.load(Constants.class.getResourceAsStream("/bindinc.channel.properties"));
-            properties.forEach((k, v) -> mappings.put(k.toString(), v.toString()));
+            properties.forEach((k, v) -> {
+                String previous = mappings.put(k.toString(), v.toString());
+                if (previous != null) {
+                    log.warn("Replaced mapping {} {} -> {}", k, previous, v);
+                }
+                }
+            );
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -106,7 +113,11 @@ public class Constants {
                 return null;
             }
         });
-        return parser.parse(new ByteArrayInputStream(stream.toByteArray()));
+        Document parse = parser.parse(new ByteArrayInputStream(stream.toByteArray()));
+        NodeList nodeList = parse.getElementsByTagName("entry");
+        assert nodeList.getLength() == Channel.values().length;
+
+        return parse;
     }
 
 }

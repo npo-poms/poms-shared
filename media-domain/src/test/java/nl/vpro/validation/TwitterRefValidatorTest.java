@@ -19,6 +19,8 @@ public class TwitterRefValidatorTest {
         assertThat(TwitterRefValidator.PATTERN.matcher("@" + new String(new char[50]).replace('\0', 'a')).matches()).isTrue();
         assertThat(TwitterRefValidator.PATTERN.matcher("@" + new String(new char[51]).replace('\0', 'a')).matches()).isFalse();
         assertThat(TwitterRefValidator.PATTERN.matcher("#abcdefghijklmnopqrstuvwxyz").matches()).isTrue();
+        assertThat(TwitterRefValidator.PATTERN.matcher("#pointer").matches()).isTrue();
+
 
     }
 }
