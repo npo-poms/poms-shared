@@ -473,10 +473,17 @@
           <xsl:if test="normalize-space(text()) != ''">
             <xsl:choose>
               <xsl:when test="lower-case(./@type) = 'originallanguage'">
+                <xsl:if test="not(../tva:Title[lower-case(@type) = 'main'])">
+                  <title type="MAIN" owner="{$owner}">
+                    <xsl:value-of select="normalize-space(text())"/>
+                    <xsl:comment>Fall back from originalLanguage title because no main title found</xsl:comment>
+                  </title>
+                </xsl:if>
                 <title type="ORIGINAL" owner="{$owner}">
                   <xsl:value-of select="normalize-space(text())"/>
                 </title>
               </xsl:when>
+
               <xsl:when test="lower-case(./@type) = 'translatedepisodetitle'">
                 <title type="ORIGINAL" owner="{$owner}">
                   <xsl:value-of select="normalize-space(text())"/>
