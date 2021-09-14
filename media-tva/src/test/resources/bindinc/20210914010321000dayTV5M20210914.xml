@@ -1,0 +1,2477 @@
+﻿<TVAMain xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" publisher="media-press.tv" xmlns="urn:tva:metadata:2004">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://media-press.tv/76390427">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Jura: Enracinés à leurs terres]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[In Zwitserland hebben steeds meer boeren moeite om rond te komen. Een jaar lang filmt Daniel Künzi de bewoners van drie boerderijen in de streek Franches-Montagnes in de Jura. Bij deze gelegenheid constateerde hij dat hun passie voor hun beroep intact is gebleven, ondanks de problemen. Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[In Zwitserland hebben steeds meer boeren moeite om rond te komen. Een jaar lang filmt Daniel Künzi de bewoners van drie boerderijen in de streek Franches-Montagnes in de Jura. Hij constateerde dat de passie voor hun beroep intact is gebleven, ondanks de problemen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportage]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportage]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="8682758" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="CH" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2017</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT01H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/63226694">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Démo de mode]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Ter gelegenheid van de Parijse confectie- en haute couture-modeshows nodigt Viviane Blassel ontwerpers uit om hun eigen modeshow te organiseren en zich op hun modellen uit te drukken, op een intieme, gezellige plek 'net als thuis'. Decodering van het creatieproces ... Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Ter gelegenheid van de Parijse confectie- en haute couture-modeshows nodigt Viviane Blassel ontwerpers uit om hun eigen modeshow te organiseren en zich op hun modellen uit te drukken, op een intieme, gezellige plek 'net als thuis'. Decodering van het creatieproces ...]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Gasten: Livia Stoianova en Yassen Samouilov; makers van het huis 'On aura tout vu'.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Modeprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Modeprogramma]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2017</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H13M</Duration>
+          <EpisodeNumber>5</EpisodeNumber>
+          <Season>4</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/241775683">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[C'est pas le bout du monde]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De teams van " C'est pas le bout du monde " reizen de hele wereld over om de wereldwijde uitstraling van de francofonie te benadrukken.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De teams van " C'est pas le bout du monde " reizen de hele wereld over om de wereldwijde uitstraling van de francofonie te benadrukken.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportage]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportage]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.france.tv/france-3/c-est-pas-le-bout-du-monde/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H05M</Duration>
+          <EpisodeNumber>4</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/241775682">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[La minute urbaine]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De Vespa in Rome, pastéis de nata in Lissabon, fritkots in Brussel ... Een rondje langs Europese steden aan de hand van hun emblematische schatten.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De Vespa in Rome, pastéis de nata in Lissabon, fritkots in Brussel ... Een rondje langs Europese steden aan de hand van hun emblematische schatten.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportage]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportage]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Duration>PT00H01M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/239793040">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[La fabrique culturelle.tv]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De culturele identiteit van Quebec valoriseren door middel van artistieke creativiteit, via alle disciplines en in alle streken, dat is het doel van La Fabrique culturelle.tv. Hier zijn een aantal portretten van kunstenaars of handwerkers afkomstig van de veelzijdige digitale platform van Télé-Québec.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De culturele identiteit van Quebec valoriseren door middel van artistieke creativiteit, via alle disciplines en in alle streken, dat is het doel van La Fabrique culturelle.tv. Hier zijn een aantal portretten van kunstenaars of handwerkers afkomstig van de veelzijdige digitale platform van Télé-Québec.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportageserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.16">
+            <Name xml:lang="NL"><![CDATA[Kunst en cultuur]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportageserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1733381028" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.lafabriqueculturelle.tv/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="CA" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H04M</Duration>
+          <EpisodeNumber>3</EpisodeNumber>
+          <Season>3</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/239793039">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Tendance XXI]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Mode, ambachten, design, schoonheid, koken, art de vivre ... de beste momenten van 'Tendance XXI'! Commentaar: Viviane Blassel.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Frankrijk wordt steeds creatiever, niet alleen op gebied van mode, visagie en de keuken, maar ook op gebied van design en ambachtelijke beroepen. "Tendance XXI" toont ons wat er achter deze creatieve trend schuilgaat en hoe we vernieuwend kunnen blijven of zelfs voorlopers kunnen worden.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Mode, ambachten, design, schoonheid, koken, art de vivre ... de beste momenten van 'Tendance XXI'! Commentaar: Viviane Blassel.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportageserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportageserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H08M</Duration>
+          <Season>5</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/238797726">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Vestiaires]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Le traitre]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Vanuit de vestiaires van het zwembad waar ze trainen delen Romy en Orson, twee gehandicapte zwemmers, hun wereldbeeld met ons, vol humor en zelfspot.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Vanuit de vestiaires van het zwembad waar ze trainen delen Romy en Orson, twee gehandicapte zwemmers, hun wereldbeeld met ons, vol humor en zelfspot.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Comedyserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Comedyserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="828819115" />
+              <Character>
+                <mpeg7:GivenName>Romy</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="329240157" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="280355410" />
+              <Character>
+                <mpeg7:GivenName>Orson</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1389989765" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="20452842" />
+              <Character>
+                <mpeg7:GivenName>Caro</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1638432540" />
+              <Character>
+                <mpeg7:GivenName>Dimitri</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1765168411" />
+              <Character>
+                <mpeg7:GivenName>Ramirez</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Vestiaires_(s%C3%A9rie_t%C3%A9l%C3%A9vis%C3%A9e)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H02M</Duration>
+          <EpisodeNumber>26</EpisodeNumber>
+          <Season>6</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237769183">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Plus belle la vie]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[In kroniek van het dagelijks leven in de Mistral, een volkswijk in Marseille, met zijn vreugde, drama's, liefde en haat, zijn geheimen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[In kroniek van het dagelijks leven in de Mistral, een volkswijk in Marseille, met zijn vreugde, drama's, liefde en haat, zijn geheimen. Naar een origineel idee van Hubert Besson en personages bedacht door Georges Desmouceaux, Bénédicte Achard, Magaly Richard-Serrano et Olivier Szulzynger (seizoen 14, Frankrijk, 2017-2018)]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[In kroniek van het dagelijks leven in de Mistral, een volkswijk in Marseille, met zijn vreugde, drama's, liefde en haat, zijn geheimen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Soap]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="NL"><![CDATA[Soap]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="203542444" />
+              <Character>
+                <mpeg7:GivenName>Boher</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:SCRIPTWRITER">
+              <PersonNameIDRef ref="585462752" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="812792172" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1299159966" />
+              <Character>
+                <mpeg7:GivenName>Mila</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1143564655" />
+              <Character>
+                <mpeg7:GivenName>Jérôme</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1580111316" />
+              <Character>
+                <mpeg7:GivenName>Mélanie</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1469022184" />
+              <Character>
+                <mpeg7:GivenName>Malik</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://en.wikipedia.org/wiki/Plus_belle_la_vie</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2019</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H22M</Duration>
+          <EpisodeNumber>3707</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308646">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Journal d'Afrique]]></Title>
+          <Title type="originalLanguage"><![CDATA[le journal Afrique]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De hele Afrikaanse actualiteit gepresenteerd door de redactie van de TV5MONDE.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De hele Afrikaanse actualiteit gepresenteerd door de redactie van de TV5MONDE.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308645">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Weerbericht]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Weerbericht]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H02M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308644">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Un si grand soleil]]></Title>
+          <Title type="originalLanguage"><![CDATA[Chronicles of the Sun]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De families Bastide, Estrela, Salama, Lévy, Berville, Alami en nog veel meer persoonlijkheden leven en werken in een modern, alledaags Montpellier. Tussen romance en detective, komedie en ernstigere thema's kruisen hun levens elkaar. Rolverdeling: Mélanie Maudran (Claire Estrela), Maëlle Mietton (Alice Bastide), Jérémy Banster (Julien Bastide), Fred Bianconi (Virgile Berville), Valérie Kaprisky (Jo Real), Manuel Blanc (Guillem Cabestan), Bertrand Farge (Victor Estrela), Gary Guénaire (Théo Estrela), Chrystelle Labaude (Élizabeth Bastide), Moïse Santamaria (Manu Léoni) Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De families Bastide, Estrela, Salama, Lévy, Berville, Alami en nog veel meer persoonlijkheden leven en werken in een modern, alledaags Montpellier. Tussen romance en detective, komedie en ernstigere thema's kruisen hun levens elkaar. Rolverdeling: Mélanie Maudran (Claire Estrela), Maëlle Mietton (Alice Bastide), Jérémy Banster (Julien Bastide), Fred Bianconi (Virgile Berville), Valérie Kaprisky (Jo Real), Manuel Blanc (Guillem Cabestan), Bertrand Farge (Victor Estrela), Gary Guénaire (Théo Estrela), Chrystelle Labaude (Élizabeth Bastide), Moïse Santamaria (Manu Léoni) Nederlands ondertiteld]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Dramaserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:10" type="other">
+            <Name xml:lang="NL"><![CDATA[Dramaserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1285429597" />
+              <Character>
+                <mpeg7:GivenName>Élizabeth</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1992196586" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="380017845" />
+              <Character>
+                <mpeg7:GivenName>Julien</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="285273105" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="253915649" />
+              <Character>
+                <mpeg7:GivenName>Ludo</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="528220001" />
+              <Character>
+                <mpeg7:GivenName>Florent</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="970605104" />
+              <Character>
+                <mpeg7:GivenName>Manu</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Un_si_grand_soleil</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H23M</Duration>
+          <EpisodeNumber>700</EpisodeNumber>
+          <Season>3</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308643">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Tout le Baz'Art]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Hadja Lahbib ontmoet een persoonlijkheid uit de Belgische culturele wereld.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De directeur van de Boghossianstichting, Louma Salamé, nodigt Hadja uit in de Villa Empain in Brussel.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Cultureel programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.16">
+            <Name xml:lang="NL"><![CDATA[Kunst en cultuur]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:19" type="other">
+            <Name xml:lang="NL"><![CDATA[Cultureel programma]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.rtbf.be/auvio/emissions/detail_tout-le-baz-art?id=8874</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <Duration>PT00H26M</Duration>
+          <EpisodeNumber>11</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308642">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Télématin]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Zeven dagen per week informatie en vrolijkheid! Wordt vol energie wakker met Thomas Sotto en Julia Vignali van maandag tot vrijdag en met Damien Thévenot en Maya Lauqué van vrijdag tot zondag.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Zeven dagen per week informatie en vrolijkheid! Wordt vol energie wakker met Thomas Sotto en Julia Vignali van maandag tot vrijdag en met Damien Thévenot en Maya Lauqué van vrijdag tot zondag.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1649791202" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/T%C3%A9l%C3%A9matin</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H25M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308641">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Le Point]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[''Le Point'' in direct contact met het evenement, waar het zich ook voordoet en getuigt van de realiteit zoals deze in Canada, Europa, Azië, Afrika, de Verenigde Staten en Latijns-Amerika wordt beleefd. Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Correspondenten uit hele wereld verslagen de actualiteiten in Canada, Europa, Azië, Afrika, de Verenigde Staten en Latijns-Amerika van dichtbij.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="CA" />
+          </ProductionLocationList>
+          <Duration>PT00H51M</Duration>
+          <EpisodeNumber>11</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308640">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Weerbericht]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Weerbericht]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H02M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308639">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[L'invité]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Patrick Simonin ontvangt sterren uit de actualiteit, de cultuur, de muziekwereld, de filmwereld, de wereld van boeken, iedereen die ons tijdperk wakker schudt, in een uitzending die u niet mag missen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Patrick Simonin ontvangt sterren uit de actualiteit, de cultuur, de muziekwereld, de filmwereld, de wereld van boeken, iedereen die ons tijdperk wakker schudt, in een uitzending die u niet mag missen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Praatprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Praatprogramma]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="9999371857150" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <Duration>PT00H08M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308636">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Weerbericht]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Weerbericht]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H02M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308635">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[#chicenvf]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Mode, design, gastronomie, art de vivre ... Alle spelers van het "savoir-vivre" komen bijeen rond Katherina Marx, enthousiaste ambassadrice van de Franse chic.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Mode, design, gastronomie, art de vivre ... Alle spelers van het "savoir-vivre" komen bijeen rond Katherina Marx, enthousiaste ambassadrice van de Franse chic.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Kunst en cultuur]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.16">
+            <Name xml:lang="NL"><![CDATA[Kunst en cultuur]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="NL"><![CDATA[Kunst en cultuur]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H14M</Duration>
+          <EpisodeNumber>5</EpisodeNumber>
+          <Season>4</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308633">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Journal TV 5]]></Title>
+          <Title type="originalLanguage"><![CDATA[TV5Monde Le Journal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De hele internationale actualiteit gepresenteerd door de redactie van de TV5MONDE.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De hele internationale actualiteit gepresenteerd door de redactie van de TV5MONDE.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H14M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308632">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[La minute urbaine]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Een rondje langs Europese steden aan de hand van hun emblematische schatten.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De Vespa in Rome, pastéis de nata in Lissabon, fritkots in Brussel ... Een rondje langs Europese steden aan de hand van hun emblematische schatten.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportage]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportage]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Duration>PT00H01M</Duration>
+          <Season>2</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308631">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Télématin]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Zeven dagen per week informatie en vrolijkheid! Wordt vol energie wakker met Thomas Sotto en Julia Vignali van maandag tot vrijdag en met Damien Thévenot en Maya Lauqué van vrijdag tot zondag.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Zeven dagen per week informatie en vrolijkheid! Wordt vol energie wakker met Thomas Sotto en Julia Vignali van maandag tot vrijdag en met Damien Thévenot en Maya Lauqué van vrijdag tot zondag.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1649791202" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/T%C3%A9l%C3%A9matin</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H26M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308630">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Bonne santé !]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Hersenmalaria]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Focus op de gevaarlijke hersenmalaria en de middelen om u ertegen te beschermen. Een overzicht van de Afrikaanse superfoods met voedingsdeskundige Christelle Aka. We praten over de schadelijke praktijken voor pasgeborenen en natuurlijk vergeten we ook het advies van specialisten tegen de kleine dagelijkse pijntjes niet.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Focus op de gevaarlijke hersenmalaria en de middelen om u ertegen te beschermen. Een overzicht van de Afrikaanse superfoods met voedingsdeskundige Christelle Aka. We praten over de schadelijke praktijken voor pasgeborenen en natuurlijk vergeten we ook het advies van specialisten tegen de kleine dagelijkse pijntjes niet.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Medisch programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.10">
+            <Name xml:lang="NL"><![CDATA[Wetenschap]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:17" type="other">
+            <Name xml:lang="NL"><![CDATA[Medisch programma]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H28M</Duration>
+          <EpisodeNumber>26</EpisodeNumber>
+          <Season>3</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308629">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Le journal de l'économie]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Drie minuten om de economische actualiteit te analyseren, decoderen en uit te leggen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Drie minuten om de economische actualiteit te analyseren, decoderen en uit te leggen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Businessprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:17" type="other">
+            <Name xml:lang="NL"><![CDATA[Businessprogramma]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H03M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308628">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Temps présent]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Weg met de auto! De fiets verovert de stad]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[" Temps présent " behandelt politieke, sociale, economische en historische onderwerpen uit de actualiteit in de breedste zin van het woord. Met zijn heldere enquêtes en kritische blik legt de uitzending de crises en conflicten van onze tijd uit en stelt de functioneringsproblemen van de samenleving aan de kaak. Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[" Temps présent " behandelt politieke, sociale, economische en historische onderwerpen uit de actualiteit in de breedste zin van het woord. Met zijn heldere enquêtes en kritische blik legt de uitzending de crises en conflicten van onze tijd uit en stelt de functioneringsproblemen van de samenleving aan de kaak. Nederlands ondertiteld]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportages]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:10" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportages]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="692823951" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="CH" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H53M</Duration>
+          <EpisodeNumber>2</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308627">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Le jardin extraordinaire]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Les chemins sauvages des Vikings]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Les chemins sauvages des Vikings]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Omringd door wetenschappelijke adviseurs en verslaggevers presenteert Claudine Brasseur de natuur en het milieu, aan de hand van unieke reportages en documenten. Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Omringd door wetenschappelijke adviseurs en verslaggevers presenteert Claudine Brasseur de natuur en het milieu, aan de hand van unieke reportages en documenten. Nederlands ondertiteld]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Documentaireserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:17" type="other">
+            <Name xml:lang="NL"><![CDATA[Documentaireserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1327355197" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Le_Jardin_extraordinaire_(%C3%A9mission_de_t%C3%A9l%C3%A9vision)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <Duration>PT00H32M</Duration>
+          <EpisodeNumber>9</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308626">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Journal TV 5]]></Title>
+          <Title type="originalLanguage"><![CDATA[TV5Monde Le Journal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De hele internationale actualiteit gepresenteerd door de redactie van de TV5MONDE.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De hele internationale actualiteit gepresenteerd door de redactie van de TV5MONDE.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H12M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308625">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[C dans l'air]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Alle belangrijke gebeurtenissen worden besproken, uitgelegd en geanalyseerd! Op het plateau analyseren gasten en journalisten de grote actualiteiten maar ook onderwerpen die onenigheid zaaien, zodat we de sociale, politieke, culturele actualiteiten uit ons dagelijkse leven beter begrijpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Alle belangrijke gebeurtenissen worden besproken, uitgelegd en geanalyseerd! Op het plateau analyseren gasten en journalisten de grote actualiteiten maar ook onderwerpen die onenigheid zaaien, zodat we de sociale, politieke, culturele actualiteiten uit ons dagelijkse leven beter begrijpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.imdb.com/title/tt0476081/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <Duration>PT01H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308624">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[La grande librairie]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De literaire actualiteit met als enig sleutelwoord: plezier. Op het menu: bekende schrijvers, van alle nationaliteiten, die ons zin geven in genieten van verhalen, bladzijden verslinden, woorden proeven als literaire gastronomen. Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[De literaire actualiteit met als enig sleutelwoord: plezier. Op het menu: bekende schrijvers, van alle nationaliteiten, die ons laten genieten van verhalen, bladzijden verslinden en woorden proeven als literaire gastronomen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Marie-Monique Robin publiceert 'La Fabrique des Pandémies'. Daarin legt ze uit hoe het verwoesten van ecosystemen gunstig is voor de verspreiding van nieuwe ziektes.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Literair programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:18" type="other">
+            <Name xml:lang="NL"><![CDATA[Literair programma]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <Duration>PT01H29M</Duration>
+          <EpisodeNumber>37</EpisodeNumber>
+          <Season>13</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308623">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Questions pour un champion]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Quiz over algemene kennis.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Quiz over algemene kennis.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Quiz]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="NL"><![CDATA[Quiz]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Questions_pour_un_champion</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H32M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308621">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Télématin]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Zeven dagen per week informatie en vrolijkheid! Wordt vol energie wakker met Thomas Sotto en Julia Vignali van maandag tot vrijdag en met Damien Thévenot en Maya Lauqué van vrijdag tot zondag.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Zeven dagen per week informatie en vrolijkheid! Wordt vol energie wakker met Thomas Sotto en Julia Vignali van maandag tot vrijdag en met Damien Thévenot en Maya Lauqué van vrijdag tot zondag.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1649791202" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/T%C3%A9l%C3%A9matin</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H26M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308620">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Tout le monde veut prendre sa place]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het spel waarin iedereen kampioen kan worden. Een quiz, zes kandidaten en lekker in zijn fauteuil, een kampioen ... die iedereen wil onttronen!]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het spel waarin iedereen kampioen kan worden. Een quiz, zes kandidaten en lekker in zijn fauteuil, een kampioen ... die iedereen wil onttronen!]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Quiz]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="NL"><![CDATA[Quiz]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Tout_le_monde_veut_prendre_sa_place</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H44M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308619">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Weerbericht]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Weerbericht]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H02M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308618">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Les Maternelles d'Afrique]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[De eerste stapjes]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Focus op de eerste stapjes van de allerkleinsten. De inspirerende vrouw van de dag: Lex, motorrijdster en androgyn mannequin. En de Togolese chef-kok Olivia De Souza laat ons het gerecht proeven dat ze heeft klaargemaakt: kip met kerrie.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Wat houd de traditionele of moderne gezinnen in de stad of op het platteland bezig? Angela Aquereburu praat met specialisten en inspirerende persoonlijkheden over alle thema's binnen het gezinsleven, van de kinderwens tot de rol van de vader, via onderwijs en voeding.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Wat houd de traditionele of moderne gezinnen in de stad of op het platteland bezig? Angela Aquereburu praat met specialisten en inspirerende persoonlijkheden over alle thema's binnen het gezinsleven, van de kinderwens tot de rol van de vader, via onderwijs en voeding.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportage]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportage]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://afrique.tv5monde.com/videos/magazines/les-maternelles-dafrique</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H27M</Duration>
+          <EpisodeNumber>23</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308617">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Le 6h info]]></Title>
+          <Title type="originalLanguage"><![CDATA[Le 6h00 info]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het journaal van 6 uur (Parijse tijd) gepresenteerd door de redactie van France Télévisions.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het journaal van 6 uur (Parijse tijd) gepresenteerd door de redactie van France Télévisions.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Le_6h_Info</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H26M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308616">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Weerbericht]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Weerbericht]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H02M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308615">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Le Journal de la RTS]]></Title>
+          <Title type="originalLanguage"><![CDATA[Le 19h30]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het televisiejournaal gepresenteerd door de redactie van de RTS.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het televisiejournaal gepresenteerd door de redactie van de RTS.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="CH" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308614">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het internationale weerbericht.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Weerbericht]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Weerbericht]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H02M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308613">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Journal France 2]]></Title>
+          <Title type="originalLanguage"><![CDATA[Le Journal de France 2]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het televisiejournaal van de redactie van France 2 (editie van 20 uur, Parijse tijd).]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het televisiejournaal van de redactie van France 2 (editie van 20 uur, Parijse tijd).]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308612">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[64 minutes, le monde en français]]></Title>
+          <Title type="originalLanguage"><![CDATA[64', le monde en français]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Wereldwijde actualiteiten in het Frans.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Ontmoeting met de franse cultuur en actualiteit vanuit de ogen van onze redacteuren Mohamed Kaci (van maandag tot en met donderdag) et Xavier Lambrechts (van vrijdag tot zondag).]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Cultureel programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.16">
+            <Name xml:lang="NL"><![CDATA[Kunst en cultuur]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:19" type="other">
+            <Name xml:lang="NL"><![CDATA[Cultureel programma]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="737777185" />
+            </CreditsItem>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="1870177318" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H22M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308611">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Journal belge]]></Title>
+          <Title type="originalLanguage"><![CDATA[JT 19h30]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Informations]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De hele internationale actualiteit gepresenteerd door de redactie van de RTBF.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De hele internationale actualiteit gepresenteerd door de redactie van de RTBF.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H29M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308610">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Journal radio Canada]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het televisiejournaal gepresenteerd door de redactie van Radio-Canada.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het televisiejournaal gepresenteerd door de redactie van Radio-Canada.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/237308609">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Merci Professeur]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Een kroniek over de Franse taal, haar eigenaardigheden, haar actualiteit en haar accenten.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Een kroniek over de Franse taal, haar eigenaardigheden, haar actualiteit en haar accenten.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Amusement]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Merci_professeur_!</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H02M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/236050469">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Transmission croisée]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[In 2015 begon "Transmission croisée" met een unieke samenwerking tussen de ateliers van de Manufacture de Sèvres en de yuzen-meester Kunihiko Moriguchi. Terugblik op een uniek partnerschap ...]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Een terugblik op de unieke samenwerking tussen de ateliers van de Manufacture de Sèvres en de yuzen-meester Kunihiko Moriguchi.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Kunst en cultuur]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.16">
+            <Name xml:lang="NL"><![CDATA[Kunst en cultuur]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="NL"><![CDATA[Kunst en cultuur]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1091111788" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1840922735" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2019</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H11M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/218639670">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Capsule OSR]]></Title>
+          <Title type="originalLanguage"><![CDATA[Capsule Orchestre de la Suisse Romande]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Bach: Concerto brandebourgeois n°4, en sol majeur BWV 1049]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Bach : Concerto brandebourgeois n°4, en sol majeur BWV 1049]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Muzikale onderbreking met het Orchestre de la Suisse romande.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Muzikale onderbreking met het Orchestre de la Suisse romande.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Muziekprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.6">
+            <Name xml:lang="NL"><![CDATA[Muziek]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Muziekprogramma]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="CH" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H04M</Duration>
+          <EpisodeNumber>3</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/212764593">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Ô la belle vie]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Sophie Jovillard vertrekt naar Occitanie om de bewoners te ontmoeten. Ze deelt hun passies en hun gehechtheid aan het gebied, de geschiedenis en het erfgoed, dat alles in een vrolijke sfeer en met sublieme beelden van Occitanie.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Sophie Jovillard vertrekt naar Occitanie om de bewoners te ontmoeten. Ze deelt hun passies en hun gehechtheid aan het gebied, de geschiedenis en het erfgoed, dat alles in een vrolijke sfeer en met sublieme beelden van Occitanie.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportage]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportage]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1895597351" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+          <EpisodeNumber>1</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/200656694">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Refuges de montagne]]></Title>
+          <Title type="originalLanguage"><![CDATA[Hüttengeschichten]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Recepten van de alpenweide]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Recettes de l'alpage]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Walti en Ursi Gehrig, Stefan, Simone en haar team maken lekkere gerechten klaar voor hun gasten en houden zich bezig met het oplossen van de vele dagelijkse problemen. In de keuken helpt Tania Stefan, haar peetvader. Het weer in Uri is somber. In Tessino is alles onder controle ... Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Walti en Ursi Gehrig, Stefan, Simone en haar team maken lekkere gerechten klaar voor hun gasten en houden zich bezig met het oplossen van de vele dagelijkse problemen. In de keuken helpt Tania Stefan, haar peetvader. Het weer in Uri is somber. In Tessino is alles onder controle ... Nederlands ondertiteld]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportage]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportage]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="58678422" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1146060765" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.fernsehserien.de/huettengeschichten</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="CH" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2018</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H44M</Duration>
+          <EpisodeNumber>3</EpisodeNumber>
+          <Season>3</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/195692700">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Les petits meurtres d'Agatha Christie]]></Title>
+          <Title type="originalLanguage"><![CDATA[Agatha Christie's Criminal Games]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Een lijk bij het ontbijt]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Un cadavre au petit déjeuner]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Na een avond vol drank wordt Alice wakker naast een dode jongeman. Ze realiseert zich al snel dat hij vermoord is en alles naar haar als dader wijst. Wie wil haar in de val laten lopen? Daar moet over worden nagedacht, maar eerst moet ze het lijk laten verdwijnen. Gelukkig kan ze op haar vrienden rekenen ... Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Na een avond vol drank wordt Alice wakker naast een dode jongeman. Ze realiseert zich al snel dat hij vermoord is en alles naar haar als dader wijst. Wie wil haar in de val laten lopen?]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Misdaadserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:12" type="other">
+            <Name xml:lang="NL"><![CDATA[Misdaadserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="7150052" />
+              <Character>
+                <mpeg7:GivenName>Swan Laurence</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1704458280" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1648669321" />
+              <Character>
+                <mpeg7:GivenName>Alice Avril</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="646094055" />
+              <Character>
+                <mpeg7:GivenName>Marlène Leroy</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="656818321" />
+              <Character>
+                <mpeg7:GivenName>Larosière</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="755813876" />
+              <Character>
+                <mpeg7:GivenName>Arlette Carmouille</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Les_Petits_Meurtres_d%27Agatha_Christie</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2019</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT01H34M</Duration>
+          <TotalEpisodes>27</TotalEpisodes>
+          <EpisodeNumber>27</EpisodeNumber>
+          <Season>2</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/175604897">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Les virées de pique-assiette]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Annick Jeanmairet reist af naar het Franstalige deel van Zwitserland om smaakkunstenaars te ontmoeten. Ze wordt vergezeld door Philippe Chevrier, de prestigieuze chefkok van het Domaine de Châteauvieux. Achter het stuur van hun klassieke auto zetten deze twee culinaire vrienden vol humor en op ongecompliceerde wijze de streekproducten in de spotlights. Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="medium"><![CDATA[Annick Jeanmairet reist af naar het Franstalige deel van Zwitserland om smaakkunstenaars te ontmoeten. Ze wordt vergezeld door Philippe Chevrier, de prestigieuze chefkok van het Domaine de Châteauvieux. Achter het stuur van hun klassieke auto zetten deze twee culinaire vrienden vol humor en op ongecompliceerde wijze de streekproducten in de spotlights.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Annick Jeanmairet reist af naar het Franstalige deel van Zwitserland om smaakkunstenaars te ontmoeten. Ze wordt vergezeld door Philippe Chevrier, de prestigieuze chefkok van het Domaine de Châteauvieux. Achter het stuur van hun klassieke auto zetten deze twee culinaire vrienden vol humor en op ongecompliceerde wijze de streekproducten in de spotlights.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Kookprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Kookprogramma]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="CH" />
+          </ProductionLocationList>
+          <Duration>PT00H29M</Duration>
+          <EpisodeNumber>1</EpisodeNumber>
+          <Season>1</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/174032512">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Sans faute(s)]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Stéphane De Groodt vertelt de avonturen van animatiepersonages en presenteert tips en geheugensteuntjes om nooit meer te twijfelen over de schrijfwijze van bepaalde woorden.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Stéphane De Groodt vertelt de avonturen van animatiepersonages en presenteert tips en geheugensteuntjes om nooit meer te twijfelen over de schrijfwijze van bepaalde woorden.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Cursus]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Educatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:6" type="other">
+            <Name xml:lang="NL"><![CDATA[Cursus]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="237333979" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="53929154" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2018</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H01M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/153553613">
+        <BasicDescription>
+          <Title type="originalLanguage"><![CDATA[C'est la vie]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Double jeu]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het dagelijkse leven in een gezondheidscentrum in Ratanga, een volkswijk.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het dagelijkse leven in een gezondheidscentrum in Ratanga, een volkswijk.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Dramaserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:10" type="other">
+            <Name xml:lang="NL"><![CDATA[Dramaserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/C%27est_la_vie_!_(s%C3%A9rie)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+          <TotalEpisodes>36</TotalEpisodes>
+          <EpisodeNumber>12</EpisodeNumber>
+          <Season>2</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/147128193">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[La séquence du filmeur]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Le filmeur amoureux]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Op basis van amateurfilms in 9,5 mm-, 8 mm-, Super 8- of 16 mm-formaat, micro-ficties met een individualistische, levendige, soms bijtende toon. De uitgelaten stem van de acteur François Morel begeleidt deze humoristische terugblik op de naoorlogse bloeiperiode.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Op basis van amateurfilms in 9,5 mm-, 8 mm-, Super 8- of 16 mm-formaat, micro-ficties met een individualistische, levendige, soms bijtende toon. De uitgelaten stem van de acteur François Morel begeleidt deze humoristische terugblik op de naoorlogse bloeiperiode.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Korte film]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL"><![CDATA[Film]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:10" type="other">
+            <Name xml:lang="NL"><![CDATA[Korte film]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="669791870" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="76735187" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2018</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H02M</Duration>
+          <EpisodeNumber>33</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/146206739">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Echo-logis]]></Title>
+          <Title type="originalLanguage"><![CDATA[Écho-logis]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Série documentaire]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Le quartier Wilhelmsburg, Hambourg (Allemagne)]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[''Echo-logis'' is een wereldwijd overzicht van spectaculaire, innoverende of slimme ecologische oplossingen voor woningen, dat u kennis laat maken met mannen en vrouwen die de deur van hun originele huis voor u openzetten. Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[In de wijk Wilhelmsburg in Hamburg gingen 70 internationale teams van architecten en ontwerpers de uitdaging aan een ecologisch woonmodel voor de 21e eeuw te ontwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Documentaireserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:17" type="other">
+            <Name xml:lang="NL"><![CDATA[Documentaireserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem>
+              <PersonNameIDRef ref="766401782" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="184505358" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr-fr.facebook.com/echologis/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>6</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/144487306">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Épicerie fine: Terroirs gourmands]]></Title>
+          <Title type="originalLanguage"><![CDATA[Epicerie fine, terroirs gourmands]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[De Tarentaise en de Valmorel]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[In het departement Savoie houden de inwoners met verve de tradities van de Tarentaise en de Valmorel in leven. Van de tomme kaas, de crozets pastablokjes tot de biologische groenteteelt, het fokken van alpinegeiten en de fabricage van notenolie; het regionale vakmanschap blijft voortbestaan en vindt zichzelf opnieuw uit. Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[In het departement Savoie houden de inwoners met verve de tradities van de Tarentaise en de Valmorel in leven. Van de tomme kaas, de crozets pastablokjes tot de biologische groenteteelt, het fokken van alpinegeiten en de fabricage van notenolie; het regionale vakmanschap blijft voortbestaan en vindt zichzelf opnieuw uit. Nederlands ondertiteld]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportageserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.16">
+            <Name xml:lang="NL"><![CDATA[Kunst en cultuur]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportageserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="99991345030788" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.tv5monde.com/emissions/emission/epicerie-fine</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <Duration>PT00H26M</Duration>
+          <EpisodeNumber>9</EpisodeNumber>
+          <Season>10</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/140997272">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Au nom du père, du fils et des esprits]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[26 juni 1988. Onder de vlag van eerste minister Michel Rocard ondertekenen Jean-Marie Tjibaou, leider van de Kanak onafhankelijkheidsbeweging en Jacques Lafleur, chef van de Nieuw-Caledonische loyalisten, de vredesakkoorden van Matignon. 4 mei 1989. Tjibaou wordt vermoord in Ouvéa. Zijn zoon Emmanuel onderzoekt het verleden en zijn eigen familiegeschiedenis.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[26 juni 1988. Onder de vlag van eerste minister Michel Rocard ondertekenen Jean-Marie Tjibaou, leider van de Kanak onafhankelijkheidsbeweging en Jacques Lafleur, chef van de Nieuw-Caledonische loyalisten, de vredesakkoorden van Matignon. 4 mei 1989. Tjibaou wordt vermoord in Ouvéa. Zijn zoon Emmanuel onderzoekt het verleden en zijn eigen familiegeschiedenis.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportage]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportage]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1814556812" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1083331100" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2018</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT01H14M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/107340280">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Speakerine]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Aflevering 2]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Qui en veut à la famille Beauval ?]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De met bloed besmeurde buste van Christine in de studio was macaber in scène gezet. Waarom wordt ze een doelwit? Probeert men zo haar man te raken? Christine herinnert zich een toneelknecht, Marcel Lindet, die haar ooit lastig viel. Ze besluit hem te bezoeken, samen met haar vriend, de journalist Philippe Lefebvre. Colette is helemaal overstuur door de moord op Marilou en bekent haar moeder dat ze samen op het libertijnse feest waren. Christine ontdekt ook dat Colette een verhouding heeft met Éric Jauffret ... Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Waarom is Christine een doelwit? Probeert men op deze manier haar man te raken? Colette is helemaal overstuur door de moord op Marilou. Christine ontdekt ook dat Colette een verhouding heeft met Éric Jauffret.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Dramaserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:10" type="other">
+            <Name xml:lang="NL"><![CDATA[Dramaserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="941812256" />
+              <Character>
+                <mpeg7:GivenName>Christine Beauval</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1296344671" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="483735054" />
+              <Character>
+                <mpeg7:GivenName>Pierre Beauval</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1564576097" />
+              <Character>
+                <mpeg7:GivenName>Michèle Pavi</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="786757953" />
+              <Character>
+                <mpeg7:GivenName>Éric Jauffret</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="576233751" />
+              <Character>
+                <mpeg7:GivenName>Isabelle Auclair</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Speakerine_(s%C3%A9rie_t%C3%A9l%C3%A9vis%C3%A9e)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2018</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H48M</Duration>
+          <TotalEpisodes>6</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+          <Season>1</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/107142351">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Speakerine]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Aflevering 1]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Speakerine d'un nouveau monde]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Juli 1962. Christine Beauval, de populaire presentatrice van RTF wordt gewelddadig overvallen in de studio's van de RTF. Een paar dagen eerder heeft haar man Pierre dankzij haar vriend Éric Jauffret, minister van informatie, de leiding gekregen van Mondovision, een belangrijke functie waar ook Joseph Darnet, directeur van de RTF, kandidaat voor was. Tegelijkertijd wordt Marilou, de beste vriendin van haar dochter Colette vermoord. Haar lijk wordt de ochtend na een libertijns feest op een braakliggend terrein gevonden ... Nederlands ondertiteld]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Christine Beauval, de populaire presentatrice van RTF, wordt gewelddadig overvallen in de studio's van het bedrijf.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Dramaserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:10" type="other">
+            <Name xml:lang="NL"><![CDATA[Dramaserie]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="941812256" />
+              <Character>
+                <mpeg7:GivenName>Christine Beauval</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="1296344671" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="483735054" />
+              <Character>
+                <mpeg7:GivenName>Pierre Beauval</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1564576097" />
+              <Character>
+                <mpeg7:GivenName>Michèle Pavi</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="786757953" />
+              <Character>
+                <mpeg7:GivenName>Éric Jauffret</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="576233751" />
+              <Character>
+                <mpeg7:GivenName>Isabelle Auclair</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Speakerine_(s%C3%A9rie_t%C3%A9l%C3%A9vis%C3%A9e)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2018</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H49M</Duration>
+          <TotalEpisodes>6</TotalEpisodes>
+          <EpisodeNumber>1</EpisodeNumber>
+          <Season>1</Season>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable />
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="TV5M" start="2021-09-14T04:24:00+02:00" end="2021-09-15T04:00:00+02:00">
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308625" />
+          <ProgramURL>dvb://1.1.TV5M;432147181@2021-09-14T04:24:00+02:00--PT01H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013933</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T04:24:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H05M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308630" />
+          <ProgramURL>dvb://1.1.TV5M;432147158@2021-09-14T05:29:00+02:00--PT00H29M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013910</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T05:29:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H29M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308617" />
+          <ProgramURL>dvb://1.1.TV5M;432147189@2021-09-14T05:58:00+02:00--PT00H26M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013934</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T05:58:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308636" />
+          <ProgramURL>dvb://1.1.TV5M;432147190@2021-09-14T06:24:00+02:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013935</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T06:24:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308631" />
+          <ProgramURL>dvb://1.1.TV5M;432147165@2021-09-14T06:29:00+02:00--PT00H26M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013917</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T06:29:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308609" />
+          <ProgramURL>dvb://1.1.TV5M;432147149@2021-09-14T06:55:00+02:00--PT00H03M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013901</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T06:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/174032512" />
+          <ProgramURL>dvb://1.1.TV5M;432147173@2021-09-14T06:58:00+02:00--PT00H02M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013925</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T06:58:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H02M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308621" />
+          <ProgramURL>dvb://1.1.TV5M;432147166@2021-09-14T07:00:00+02:00--PT00H27M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013918</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T07:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H27M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/147128193" />
+          <ProgramURL>dvb://1.1.TV5M;432147159@2021-09-14T07:27:00+02:00--PT00H03M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013911</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T07:27:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308642" />
+          <ProgramURL>dvb://1.1.TV5M;432147182@2021-09-14T07:30:00+02:00--PT00H26M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013936</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T07:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/241775682" />
+          <ProgramURL>dvb://1.1.TV5M;441817438@2021-09-14T07:56:00+02:00--PT00H01M00S</ProgramURL>
+          <InstanceMetadataId>imi:871702638</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T07:56:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H01M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308632" />
+          <ProgramURL>dvb://1.1.TV5M;432147160@2021-09-14T07:57:00+02:00--PT00H03M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013912</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T07:57:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308610" />
+          <ProgramURL>dvb://1.1.TV5M;432147167@2021-09-14T08:00:00+02:00--PT00H26M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013919</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T08:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308626" />
+          <ProgramURL>dvb://1.1.TV5M;432147168@2021-09-14T08:26:00+02:00--PT00H12M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013920</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T08:26:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H12M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308618" />
+          <ProgramURL>dvb://1.1.TV5M;432147161@2021-09-14T08:38:00+02:00--PT00H27M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013913</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T08:38:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H27M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/144487306" />
+          <ProgramURL>dvb://1.1.TV5M;432147146@2021-09-14T09:05:00+02:00--PT00H26M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013898</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T09:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308627" />
+          <ProgramURL>dvb://1.1.TV5M;432147183@2021-09-14T09:31:00+02:00--PT00H33M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013937</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T09:31:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H33M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/212764593" />
+          <ProgramURL>dvb://1.1.TV5M;432147174@2021-09-14T10:04:00+02:00--PT00H26M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013926</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T10:04:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/175604897" />
+          <ProgramURL>dvb://1.1.TV5M;432147150@2021-09-14T10:30:00+02:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013902</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T10:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308633" />
+          <ProgramURL>dvb://1.1.TV5M;432147153@2021-09-14T11:00:00+02:00--PT00H14M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013905</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T11:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H14M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308619" />
+          <ProgramURL>dvb://1.1.TV5M;432147169@2021-09-14T11:14:00+02:00--PT00H04M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013921</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T11:14:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237769183" />
+          <ProgramURL>dvb://1.1.TV5M;432147185@2021-09-14T11:18:00+02:00--PT00H26M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013939</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T11:18:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308620" />
+          <ProgramURL>dvb://1.1.TV5M;432147154@2021-09-14T11:44:00+02:00--PT00H45M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013906</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T11:44:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H45M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/200656694" />
+          <ProgramURL>dvb://1.1.TV5M;432147141@2021-09-14T12:29:00+02:00--PT00H45M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013893</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T12:29:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H45M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/63226694" />
+          <ProgramURL>dvb://1.1.TV5M;437026802@2021-09-14T13:14:00+02:00--PT00H16M00S</ProgramURL>
+          <InstanceMetadataId>imi:863070799</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T13:14:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H16M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308611" />
+          <ProgramURL>dvb://1.1.TV5M;432147155@2021-09-14T13:30:00+02:00--PT00H31M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013907</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T13:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H31M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/107142351" />
+          <ProgramURL>dvb://1.1.TV5M;432147175@2021-09-14T14:01:00+02:00--PT00H49M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013927</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T14:01:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H49M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/107340280" />
+          <ProgramURL>dvb://1.1.TV5M;432147170@2021-09-14T14:50:00+02:00--PT00H48M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013922</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T14:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H48M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/236050469" />
+          <ProgramURL>dvb://1.1.TV5M;432147151@2021-09-14T15:38:00+02:00--PT00H13M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013903</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T15:38:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H13M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/239793039" />
+          <ProgramURL>dvb://1.1.TV5M;437026803@2021-09-14T15:51:00+02:00--PT00H09M00S</ProgramURL>
+          <InstanceMetadataId>imi:863070800</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T15:51:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H09M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308644" />
+          <ProgramURL>dvb://1.1.TV5M;432147186@2021-09-14T16:00:00+02:00--PT00H23M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013940</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T16:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H23M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/238797726" />
+          <ProgramURL>dvb://1.1.TV5M;434761569@2021-09-14T16:23:00+02:00--PT00H04M00S</ProgramURL>
+          <InstanceMetadataId>imi:859121892</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T16:23:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308623" />
+          <ProgramURL>dvb://1.1.TV5M;432147156@2021-09-14T16:27:00+02:00--PT00H33M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013908</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T16:27:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H33M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308628" />
+          <ProgramURL>dvb://1.1.TV5M;432147147@2021-09-14T17:00:00+02:00--PT00H53M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013899</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T17:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H53M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/239793040" />
+          <ProgramURL>dvb://1.1.TV5M;437026804@2021-09-14T17:53:00+02:00--PT00H07M00S</ProgramURL>
+          <InstanceMetadataId>imi:863070801</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T17:53:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308612" />
+          <ProgramURL>dvb://1.1.TV5M;432147148@2021-09-14T18:00:00+02:00--PT00H23M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013900</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T18:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H23M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308629" />
+          <ProgramURL>dvb://1.1.TV5M;432147162@2021-09-14T18:23:00+02:00--PT00H04M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013914</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T18:23:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308645" />
+          <ProgramURL>dvb://1.1.TV5M;432147176@2021-09-14T18:27:00+02:00--PT00H03M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013928</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T18:27:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308639" />
+          <ProgramURL>dvb://1.1.TV5M;432147171@2021-09-14T18:30:00+02:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013923</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T18:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/76390427" />
+          <ProgramURL>dvb://1.1.TV5M;432147177@2021-09-14T18:40:00+02:00--PT01H17M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013929</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T18:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H17M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/146206739" />
+          <ProgramURL>dvb://1.1.TV5M;432147142@2021-09-14T19:57:00+02:00--PT00H27M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013894</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T19:57:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H27M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/218639670" />
+          <ProgramURL>dvb://1.1.TV5M;437026801@2021-09-14T20:24:00+02:00--PT00H06M00S</ProgramURL>
+          <InstanceMetadataId>imi:863070798</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T20:24:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308613" />
+          <ProgramURL>dvb://1.1.TV5M;432147187@2021-09-14T20:30:00+02:00--PT00H26M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013941</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T20:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H26M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308614" />
+          <ProgramURL>dvb://1.1.TV5M;432147152@2021-09-14T20:56:00+02:00--PT00H04M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013904</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T20:56:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/195692700" />
+          <ProgramURL>dvb://1.1.TV5M;432147163@2021-09-14T21:00:00+02:00--PT01H35M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013915</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T21:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H35M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308615" />
+          <ProgramURL>dvb://1.1.TV5M;432147191@2021-09-14T22:35:00+02:00--PT00H27M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013942</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T22:35:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H27M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308616" />
+          <ProgramURL>dvb://1.1.TV5M;432147188@2021-09-14T23:02:00+02:00--PT00H04M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013943</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T23:02:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308624" />
+          <ProgramURL>dvb://1.1.TV5M;432147157@2021-09-14T23:06:00+02:00--PT01H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013909</InstanceMetadataId>
+          <PublishedStartTime>2021-09-14T23:06:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H30M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308646" />
+          <ProgramURL>dvb://1.1.TV5M;432147178@2021-09-15T00:36:00+02:00--PT00H27M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013930</InstanceMetadataId>
+          <PublishedStartTime>2021-09-15T00:36:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H27M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308640" />
+          <ProgramURL>dvb://1.1.TV5M;432147179@2021-09-15T01:03:00+02:00--PT00H03M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013931</InstanceMetadataId>
+          <PublishedStartTime>2021-09-15T01:03:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308643" />
+          <ProgramURL>dvb://1.1.TV5M;432147143@2021-09-15T01:06:00+02:00--PT00H27M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013895</InstanceMetadataId>
+          <PublishedStartTime>2021-09-15T01:06:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H27M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308641" />
+          <ProgramURL>dvb://1.1.TV5M;432147180@2021-09-15T01:33:00+02:00--PT00H51M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013932</InstanceMetadataId>
+          <PublishedStartTime>2021-09-15T01:33:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H51M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/140997272" />
+          <ProgramURL>dvb://1.1.TV5M;432147144@2021-09-15T02:24:00+02:00--PT01H13M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013896</InstanceMetadataId>
+          <PublishedStartTime>2021-09-15T02:24:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H13M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/237308635" />
+          <ProgramURL>dvb://1.1.TV5M;432147172@2021-09-15T03:37:00+02:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:855013924</InstanceMetadataId>
+          <PublishedStartTime>2021-09-15T03:37:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/241775683" />
+          <ProgramURL>dvb://1.1.TV5M;441817437@2021-09-15T03:52:00+02:00--PT00H06M00S</ProgramURL>
+          <InstanceMetadataId>imi:871702637</InstanceMetadataId>
+          <PublishedStartTime>2021-09-15T03:52:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/153553613" />
+          <ProgramURL>dvb://1.1.TV5M;441817439@2021-09-15T03:58:00+02:00--PT00H02M00S</ProgramURL>
+          <InstanceMetadataId>imi:871702639</InstanceMetadataId>
+          <PublishedStartTime>2021-09-15T03:58:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H02M00S</PublishedDuration>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="1649791202">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">William</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Leymergie</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="237333979">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Antoine</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Dezelli</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="53929154">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Arnaud</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Prioton</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="669791870">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Olivier</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Sarrazin</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="76735187">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Corine</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Zongo-Wable</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991345030788">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Guy</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Martin</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1327355197">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Tanguy</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Dumortier</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1895597351">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Laurent</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Desvaux</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="203542444">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Stéphane</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Henon</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1299159966">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Malika</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Alaoui</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1143564655">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Laurent</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Orry</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1580111316">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Laëtitia</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Milot</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1469022184">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Sofiane</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Belmouden</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="585462752">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Hubert</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Besson</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="812792172">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Michel</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Hassan</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="58678422">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Michèle</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Ehrensperger</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1146060765">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Marianne</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Erne</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="941812256">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Marie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Gillain</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="483735054">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Guillaume</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">de Tonquédec</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1564576097">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Christiane</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Millet</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="786757953">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Grégory</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Fitoussi</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="576233751">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Barbara</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Probst</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1296344671">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Laurent</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Tuel</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1091111788">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Sylvie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Adigard</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1840922735">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Jean-Philippe</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Oudin</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1285429597">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Chrystelle</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Labaude</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="380017845">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Jérémy</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Banster</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="253915649">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Folco</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Marchi</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="528220001">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Fabrice</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Deville</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="970605104">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Moïse</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Santamaria</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1992196586">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Benoît</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">d'Aubert</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="285273105">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Jérôme</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Portheault</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="828819115">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Adda</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Abdelli</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="280355410">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Alexandre</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Philip</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="20452842">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Anaïs</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Fabre</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1638432540">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Cyril</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Missonnier</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1765168411">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Luc</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Rodriguez</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="329240157">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Fabrice</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Chanut</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1389989765">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Franck</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Lebon</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="692823951">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Jean-Philippe</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Ceppi</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1733381028">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Alain</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Chevarier</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="737777185">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Mohamed</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kaci</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1870177318">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Xavier</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Lambrechts</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999371857150">
+        <mpeg7:GivenName xml:lang="NL" initial=" " />
+        <mpeg7:FamilyName xml:lang="NL" />
+      </PersonName>
+      <PersonName personNameId="8682758">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Daniel</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kunzi</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="766401782">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Marie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Montuir</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="184505358">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Cécile</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Nicouleaud</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="7150052">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Samuel</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Labarthe</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1648669321">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Blandine</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Bellavoir</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="646094055">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Elodie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Frenck</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="656818321">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Antoine</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Duléry</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="755813876">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Marie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Berto</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1704458280">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Nicolas</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Picard-Dreyfuss</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1814556812">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Emmanuel</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Desbouiges</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1083331100">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Dorothée</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Tromparent</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>
