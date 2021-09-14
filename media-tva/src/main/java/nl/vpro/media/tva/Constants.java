@@ -60,7 +60,13 @@ public class Constants {
         try {
             Properties properties = new Properties();
             properties.load(Constants.class.getResourceAsStream("/bindinc.channel.properties"));
-            properties.forEach((k, v) -> mappings.put(k.toString(), v.toString()));
+            properties.forEach((k, v) -> {
+                String previous = mappings.put(k.toString(), v.toString());
+                if (previous != null) {
+                    log.warn("Replaced mapping {} {} -> {}", k, previous, v);
+                }
+                }
+            );
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
