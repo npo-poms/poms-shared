@@ -399,19 +399,8 @@ public class TVATransformerTest {
 
     @Test
     public void bindincZDF() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        genreFunction.setNotFound(NotFound.IGNORE); // TODO API-460
-        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
-        genreFunction.setIgnore(new HashSet<>(Arrays.asList("urn:bindinc:genre:Overige")));
+        String xml = bindinc("bindinc/20201124021653000dayZDF_20201123.xml");
 
-        Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
-
-        String xml = transform("bindinc/20201124021653000dayZDF_20201123.xml", (transformer) -> {
-            transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
-            transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
-            transformer.setParameter(XSL_PARAM_LONGDESCRIPTIONS, "true");
-            transformer.setParameter(XSL_PARAM_CHANNELMAPPING, channelMapping);
-            }
-        );
         //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -455,17 +444,8 @@ public class TVATransformerTest {
 
     @Test
     public void bindincTV01() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        genreFunction.setNotFound(NotFound.IGNORE);
-        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
-        Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
+        String xml = bindinc("bindinc/20201208185718000dayTV0120201209.xml");
 
-
-        String xml = transform(Thread.currentThread().getContextClassLoader().getResourceAsStream("bindinc/20201208185718000dayTV0120201209.xml"), (transformer) -> {
-                transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
-                transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
-                transformer.setParameter(XSL_PARAM_CHANNELMAPPING, channelMapping);
-            }
-        );
         //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
@@ -487,17 +467,7 @@ public class TVATransformerTest {
 
     @Test
     public void bindincARTT() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        genreFunction.setNotFound(NotFound.IGNORE);
-        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
-        Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
-
-        String xml = transform("bindinc/20210210220659000dayARTT20210220.xml", (transformer) -> {
-            transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
-            transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
-            transformer.setParameter(XSL_PARAM_LONGDESCRIPTIONS, "true");
-            transformer.setParameter(XSL_PARAM_CHANNELMAPPING, channelMapping);
-            }
-        );
+        String xml = bindinc("bindinc/20210210220659000dayARTT20210220.xml");
 
         //log.info("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
@@ -540,13 +510,31 @@ public class TVATransformerTest {
 
     @Test
     public void API_535_missingMainTitle() throws IOException, ParserConfigurationException, TransformerException, SAXException {
-        genreFunction.setNotFound(NotFound.IGNORE);
-        String xml = transform("bindinc/20210914010321000dayTV5M20210914.xml");
+        String xml = bindinc("bindinc/20210914010321000dayTV5M20210914.xml");
+        //log.info(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
         Program program = (Program) table.findByCrid("crid://media-press.tv/153553613").orElse(null);
-        assertThat(program.getMainTitle()).isNotEmpty();
+        assertThat(program.getMainTitle()).isEqualTo("C'est la vie");
+    }
 
+    private String bindinc(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        genreFunction.setNotFound(NotFound.IGNORE);// TODO API-460
+        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
 
+        genreFunction.setNotFound(NotFound.IGNORE);
+        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
+        genreFunction.setIgnore(new HashSet<>(Arrays.asList("urn:bindinc:genre:Overige")));
+
+        Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
+
+        String xml = transform(resource, (transformer) -> {
+            transformer.setParameter(XSL_PARAM_PERSON_URI_PREFIX, "crid://bindinc/person/");
+            transformer.setParameter(XSL_PARAM_WORKFLOW, Workflow.PUBLISHED.getXmlValue());
+            transformer.setParameter(XSL_PARAM_LONGDESCRIPTIONS, "true");
+            transformer.setParameter(XSL_PARAM_CHANNELMAPPING, channelMapping);
+            }
+        );
+        return xml;
 
     }
 
