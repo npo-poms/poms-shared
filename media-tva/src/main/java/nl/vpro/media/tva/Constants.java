@@ -10,6 +10,7 @@ import java.util.function.Function;
 import javax.xml.parsers.*;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.*;
 
 import nl.vpro.domain.media.Channel;
@@ -112,7 +113,11 @@ public class Constants {
                 return null;
             }
         });
-        return parser.parse(new ByteArrayInputStream(stream.toByteArray()));
+        Document parse = parser.parse(new ByteArrayInputStream(stream.toByteArray()));
+        NodeList nodeList = parse.getElementsByTagName("entry");
+        assert nodeList.getLength() == Channel.values().length;
+
+        return parse;
     }
 
 }
