@@ -98,6 +98,7 @@
           <Name xml:lang="nl">Informatief</Name>
           <Reference>urn:tva:metadata:cs:2004:0107</Reference>
           <Reference>urn:mis:genre:INFORMATIVE</Reference>
+          <Reference>urn:bindinc:genre:Educatief</Reference> <!-- API-534 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.1.8">
@@ -139,6 +140,7 @@
         <Reference>urn:tva:metadata:cs:2004:0299</Reference>
         <Reference>urn:mis:genre:MOVIE</Reference>
         <Reference>urn:bindinc:genre:Film</Reference>
+        <Reference>urn:bindinc:genre:Téléfilm</Reference> <!-- API-534 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">
           <Name xml:lang="nl">Komisch</Name>
@@ -344,6 +346,7 @@
         <Reference>urn:bindinc:genre:Muziek</Reference>
         <Reference>urn:bindinc:genre:Musica</Reference>
         <Reference>urn:bindinc:genre:Musique</Reference>
+        <Reference>urn:bindinc:genre:Music</Reference> <!--API-534 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.5.16">
           <Name xml:lang="nl">Klassiek</Name>
@@ -425,6 +428,7 @@
         <Reference>urn:tva:metadata:cs:2004:0699</Reference>
         <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
         <Reference>urn:bindinc:genre:Amusement</Reference>
+        <Reference>urn:bindinc:genre:Divertissement</Reference><!-- API-534 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.6.5">
           <Name xml:lang="nl">Muziek</Name>
@@ -481,6 +485,8 @@
         <Reference>urn:mis:genre:INFORMATIVE</Reference>
         <Reference>urn:bindinc:genre:Informatief</Reference>
         <Reference>urn:bindinc:genre:Información</Reference>
+        <Reference>urn:bindinc:genre:Info</Reference><!-- API-534 -->
+        <Reference>urn:bindinc:genre:Informations</Reference><!-- API-534 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.7.19">
           <Name xml:lang="nl">Spel/quiz</Name>
@@ -510,6 +516,9 @@
           <Reference>urn:tva:metadata:cs:2004:0724</Reference>
           <Reference>urn:mis:genre:ART_CULTURE</Reference>
           <Reference>urn:bindinc:genre:Kunst en cultuur</Reference>
+          <Reference>urn:bindinc:genre:Kunst/Cultuur</Reference><!-- API-534 -->
+          <Reference>urn:bindinc:genre:Culture</Reference><!-- API-534 -->
+          <Reference>urn:bindinc:genre:Arts</Reference><!-- API-534 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.25">
@@ -579,6 +588,7 @@
         <Term termID="3.0.1.7.67">
           <Name xml:lang="nl">Interviewprogramma/hosted show</Name>
           <Reference>urn:tva:metadata:cs:2004:0767</Reference>
+          <Reference>urn:bindinc:genre:Talkshow</Reference> <!-- API-534 -->
           <FirstVersionDate>2021-04-01</FirstVersionDate>
           <ValidityFlag>1</ValidityFlag>
         </Term>
@@ -658,6 +668,7 @@
           <Name xml:lang="nl">Reizen</Name>
           <Reference>urn:tva:metadata:cs:2004:0829</Reference>
           <Reference>urn:mis:genre:DOCUMENTARY</Reference>
+          <Reference>urn:bindinc:genre:Nature + Voyage</Reference><!-- API-534 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.8.30">
