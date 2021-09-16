@@ -4,12 +4,12 @@
  */
 package nl.vpro.beeldengeluid.gtaa;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -417,6 +417,7 @@ public class OpenskosRepository implements GTAARepository {
         }
     }
 
+    @SneakyThrows
     private ResponseEntity<Source> postRDF(
         @NonNull String prefLabel,
         @NonNull List<Label> notes,
@@ -441,7 +442,10 @@ public class OpenskosRepository implements GTAARepository {
         // Beware parameter ordering is relevant
         ResponseEntity<Source> source = template.postForEntity(
             String.format("%s/api/concept?key=%s&collection=gtaa&autoGenerateIdentifiers=true&tenant=%s",
-                gtaaUrl, gtaaKey, tenant),
+                gtaaUrl,
+                URLEncoder.encode(gtaaKey, "UTF-8"),
+                URLEncoder.encode(tenant, "UTF-8")
+            ),
             rdf, Source.class);
         return source;
     }
