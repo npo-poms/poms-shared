@@ -18,6 +18,8 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
@@ -33,25 +35,25 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
-import org.springframework.http.client.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.XmlMappingException;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.*;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.openarchives.oai.*;
-
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.w3.rdf.RDF;
 
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
-import static org.springframework.http.HttpStatus.CREATED;
 
 /**
  * See http://editor.openskos.org/apidoc/index.html ?
@@ -71,6 +73,7 @@ public class OpenskosRepository implements GTAARepository {
 
     private final String gtaaUrl;
     private final String gtaaKey;
+
 
     @Value("${gtaa.personsSpec}")
     @Getter
@@ -100,7 +103,7 @@ public class OpenskosRepository implements GTAARepository {
         @NonNull String baseUrl,
         @Value("${gtaa.key}")
         @NonNull String key) {
-        this(baseUrl, key, null, null, null, true, null, 1);
+        this(baseUrl, key, null, null, null, null, 1);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -110,7 +113,6 @@ public class OpenskosRepository implements GTAARepository {
         @Nullable RestTemplate template,
         @Nullable String personsSpec,
         @Nullable String geoLocationsSpec,
-        boolean useXLLabels,
         @Nullable String tenant,
         int retries
         ) {
@@ -121,6 +123,7 @@ public class OpenskosRepository implements GTAARepository {
         this.personsSpec = personsSpec;
         this.geoLocationsSpec = geoLocationsSpec;
         this.retries = retries;
+
 
     }
 
@@ -195,6 +198,11 @@ public class OpenskosRepository implements GTAARepository {
             rdfToDomHttpMessageConverter.setUnmarshaller(domSourceUnmarshaller);
 
             template = new RestTemplate();
+
+            DefaultUriBuilderFactory uriBuilder = new DefaultUriBuilderFactory();
+            uriBuilder.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
+            template.setUriTemplateHandler(uriBuilder);
+
             template.setMessageConverters(
                 Arrays.asList(rdfHttpMessageConverter, rdfToDomHttpMessageConverter)
             );
@@ -270,7 +278,7 @@ public class OpenskosRepository implements GTAARepository {
             logSource(doc);
 
             RDF rdf = JAXB.unmarshal(doc, RDF.class);
-            if (response.getStatusCode() == CREATED) {
+            if (response.getStatusCode().is2xxSuccessful()) {
                 return rdf.getDescriptions().get(0);
             } else {
                 // Is this possible at all?
@@ -440,16 +448,23 @@ public class OpenskosRepository implements GTAARepository {
 
         Post_RDF.set(new RDFPost(prefLabel, rdf));
         // Beware parameter ordering is relevant
+        String encodedKey = Stream.of(gtaaKey.split(":", 2)).map(this::encode).collect(Collectors.joining(":"));
+        //String encodedKey = encode(gtaaKey);
         ResponseEntity<Source> source = template.postForEntity(
             String.format("%s/api/concept?key=%s&collection=gtaa&autoGenerateIdentifiers=true&tenant=%s",
                 gtaaUrl,
-                URLEncoder.encode(gtaaKey, "UTF-8"),
-                URLEncoder.encode(tenant, "UTF-8")
+                encodedKey,
+                encode(tenant)
             ),
             rdf, Source.class);
         return source;
     }
 
+
+    @SneakyThrows
+    private String encode(String u) {
+        return u == null ? u : URLEncoder.encode(u, "ASCII");
+    }
 
     /**
      * http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/apidoc/index.html#api-FindConcept-FindConcepts
@@ -465,7 +480,7 @@ public class OpenskosRepository implements GTAARepository {
                 "AND inScheme:\"" + Scheme.person.getUrl()  + "\" " +
                 "AND (" + input + "*)";
 
-        String path = "api/find-concepts?tenant=" + tenant + "&collection=gtaa&q=" + query + "&rows=" + max;
+        String path = "api/find-concepts?tenant=" + encode(tenant) + "&collection=gtaa&q=" + encode(query) + "&rows=" + max;
         return descriptions(getForPath(path, RDF.class));
     }
 
@@ -504,7 +519,7 @@ public class OpenskosRepository implements GTAARepository {
                 "AND ( %s*)", input);
 
         String path = String.format("api/find-concepts?tenant=%s&collection=gtaa&q=%s&rows=%s",
-            tenant, query, max);
+            encode(tenant), encode(query), max);
 
         return descriptions(getForPath(path, RDF.class));
 
