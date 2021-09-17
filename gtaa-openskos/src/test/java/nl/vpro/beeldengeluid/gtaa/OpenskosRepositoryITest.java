@@ -172,9 +172,9 @@ public class OpenskosRepositoryITest {
     @MethodSource("envs")
     public void testFindByNotExistingGtaaUrl(Env env) {
         OpenskosRepository impl = getRealInstance(env);
-        Optional<GTAAConcept> person = impl.get("http://data.beeldengeluid.nl/gtaa/12345");
+        Optional<GTAAConcept> person = impl.get("http://data.beeldengeluid.nl/gtaa/1234567890123456789012345678901234567890");
         log.info("person: {}", person);
-        assertThat(person.get().getId()).isEqualTo(URI.create("http://data.beeldengeluid.nl/gtaa/1715195"));
+        assertThat(person).isEmpty();
     }
 
 
