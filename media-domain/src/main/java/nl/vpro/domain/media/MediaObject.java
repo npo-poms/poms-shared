@@ -373,9 +373,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     protected List<
         // valid are countries (further validated by @ValidCountry), and a list of codes.
         org.meeuw.i18n.regions.
-        @ValidRegion(classes = {Country.class}, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
-        @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
-        @NotNull Region> countries;
+        @PomsValidCountry Region> countries;
 
 
     @ElementCollection
@@ -383,10 +381,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<
-        @ValidRegion(classes = {Country.class})
-        @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
+        @PomsValidCountry
         @Language(mayContainCountry = true)
-        @NotNull Locale> languages;
+        Locale> languages;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -1282,7 +1279,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return addCountry(Country.of(country));
     }
 
-    public MediaObject addCountry(@lombok.NonNull org.meeuw.i18n.regions.Region country) {
+    public MediaObject addCountry(org.meeuw.i18n.regions.@NonNull Region country) {
         if (countries == null) {
             countries = new ArrayList<>();
         }

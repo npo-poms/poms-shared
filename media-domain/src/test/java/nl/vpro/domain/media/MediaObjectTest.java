@@ -9,6 +9,8 @@ import java.io.StringReader;
 import java.net.URI;
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.validation.ConstraintViolation;
 import javax.xml.bind.JAXB;
@@ -16,6 +18,8 @@ import javax.xml.bind.JAXB;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.parallel.Isolated;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.regions.RegionService;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
@@ -558,6 +562,31 @@ public class MediaObjectTest {
         assertThat(constraintViolations.get(1).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.region.message}");
         assertThat(constraintViolations.get(1).getMessage()).isEqualTo("nl_XX is not a valid region");
         assertThat(constraintViolations).hasSize(2);
+    }
+
+    @Test
+    public void validCountries() {
+        List<Country> valid = new ArrayList<>();
+        List<Country> invalid = new ArrayList<>();
+        Stream.concat(RegionService.getInstance().values(Country.class), Stream.of((Country)null)).forEach(c -> {
+            Program p = new Program();
+
+            p.setType(ProgramType.BROADCAST);
+            p.setAVType(AVType.MIXED);
+            p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
+            p.addCountry(c);
+            List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(validator.validate(p));
+            if (constraintViolations.isEmpty()) {
+                valid.add(c);
+            } else {
+                log.info(constraintViolations.toString());
+                invalid.add(c);
+            }
+        });
+        log.info("Invalid countries: {}", invalid.stream().map(c -> c == null ? "null" : (c.getCode() + ":" + c.getName(Locales.NETHERLANDISH))).collect(Collectors.joining("\n")));
+        assertThat(invalid).hasSize(25);
+        log.info("Valid countries: {}", valid.stream().map(c -> c.getCode() + ":" + c.getName(Locales.NETHERLANDISH)).collect(Collectors.joining("\n")));
+        assertThat(valid).hasSize(285);
 
     }
 
