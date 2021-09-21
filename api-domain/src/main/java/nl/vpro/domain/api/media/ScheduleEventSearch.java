@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.api.media;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 
@@ -29,6 +28,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * @author rico
  */
 @XmlType(name = "scheduleEventSearchType", propOrder = {"begin", "end", "channel", "net", "rerun"})
+@EqualsAndHashCode(callSuper = true, exclude = {"begin", "end"})
 public class ScheduleEventSearch extends RangeMatcher<Instant, ScheduleEvent> {
 
     @XmlElement

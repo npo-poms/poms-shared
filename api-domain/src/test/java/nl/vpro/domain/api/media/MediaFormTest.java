@@ -5,11 +5,12 @@
 package nl.vpro.domain.api.media;
 
 import lombok.extern.slf4j.Slf4j;
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.time.Duration;
-import java.time.LocalDate;
+import java.time.*;
 
 import javax.xml.bind.JAXB;
 
@@ -24,6 +25,7 @@ import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.logging.LoggerOutputStream;
+import nl.vpro.test.jqwik.BasicObjectTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.util.Version;
 
@@ -38,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @since 2.0
  */
 @Slf4j
-public class MediaFormTest {
+public class MediaFormTest implements BasicObjectTest<MediaForm> {
 
     @Test
     public void testGetSort() {
@@ -346,7 +348,6 @@ public class MediaFormTest {
             .build();
 
         Jackson2Mapper.getPrettyInstance().writeValue(LoggerOutputStream.info(log), form);
-
     }
 
     private static final String LUNATIC_BACKWARD_COMPATIBLE = "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
@@ -587,4 +588,27 @@ public class MediaFormTest {
 
     }
 
+    MediaForm rad1 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
+    MediaForm rad1_2 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(1)).build()).build();
+    MediaForm rad1_3 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
+    MediaForm rad2 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD2).begin(Instant.ofEpochMilli(0)).build()).build();
+
+    @Test
+    public void API_593() {
+        assertThat(rad1.equals(rad1_3)).isTrue();
+        assertThat(rad1.equals(rad1_2)).isFalse();
+        assertThat(rad1.equals(rad2)).isFalse();
+    }
+
+    @Override
+    public Arbitrary<? extends MediaForm> datapoints() {
+        return Arbitraries.of(
+            null,
+            MediaFormBuilder.emptyForm(),
+            rad1,
+            rad1_2,
+            rad1_3,
+            rad2
+        );
+    }
 }
