@@ -28,7 +28,8 @@ jobs:
         token: '${{ secrets.GITHUB_TOKEN  }}'
     - name: Release
       run: |
-        mvn -Pdeploy,ossrh --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare release:perform
+        mvn -Pdeploy,ossrh --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare
         git push --tags
+        mvn -Pdeploy,ossrh --batch-mode  -Darguments=-DskipTests  release:perform
 
 
