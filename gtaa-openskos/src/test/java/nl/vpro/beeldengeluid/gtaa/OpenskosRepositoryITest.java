@@ -275,12 +275,12 @@ public class OpenskosRepositoryITest {
     }
 
 
-   @ParameterizedTest
+    @ParameterizedTest
     @MethodSource("envs")
-    @Disabled("This is not a junit test")
+    //@Disabled("This is not a junit test")
     public void testChangesGeolocationsRecent(Env env) {
         OpenskosRepository impl = getRealInstance(env);
-        Instant start = Instant.now().minus(Duration.ofDays(70));
+        Instant start = Instant.now().minus(Duration.ofDays(700));
         Instant stop = Instant.now();
 
         CountedIterator<Record> updates = impl.getGeoLocationsUpdates(start, stop);
@@ -299,7 +299,7 @@ public class OpenskosRepositoryITest {
 
     @ParameterizedTest
     @MethodSource("envs")
-    @Disabled("This is not a junit test")
+    //@Disabled("This is not a junit test")
     public void testChangesRecent(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         Instant start = Instant.now().minus(Duration.ofDays(70));

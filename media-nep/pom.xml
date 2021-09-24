@@ -66,7 +66,7 @@
     </dependency>
     <dependency>
       <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock</artifactId>
+      <artifactId>wiremock-jre8</artifactId>
     </dependency>
     <dependency>
       <groupId>ru.lanwen.wiremock</groupId>
