@@ -22,8 +22,8 @@ import nl.vpro.media.broadcaster.BroadcasterServiceImpl;
 public class BindincBroadcasterService extends BroadcasterServiceImpl {
 
 
-    Set<String> warned = new CopyOnWriteArraySet<>();
-    Properties bindincOverride = new Properties();
+    private final Set<String> warned = new CopyOnWriteArraySet<>();
+    private final Properties bindincOverride = new Properties();
     {
         try {
             bindincOverride.load(BindincBroadcasterService.class.getResourceAsStream("/bindinc.broadcasters.properties"));
