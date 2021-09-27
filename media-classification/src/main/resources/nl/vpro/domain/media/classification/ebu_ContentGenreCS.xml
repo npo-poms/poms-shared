@@ -141,6 +141,7 @@
         <Reference>urn:mis:genre:MOVIE</Reference>
         <Reference>urn:bindinc:genre:Film</Reference>
         <Reference>urn:bindinc:genre:Téléfilm</Reference> <!-- API-534 -->
+        <Reference>urn:bindinc:genre:Court métrage</Reference> <!-- API-534 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">
           <Name xml:lang="nl">Komisch</Name>
@@ -371,6 +372,7 @@
           <Reference>urn:tva:metadata:cs:2004:0572</Reference>
           <Name xml:lang="nl">Concertregistratie</Name>
           <FirstVersionDate>2021-04-01</FirstVersionDate>
+          <Reference>urn:bindinc:genre:Présentation musicale</Reference> <!--API-534 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.5.73">
@@ -429,6 +431,7 @@
         <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
         <Reference>urn:bindinc:genre:Amusement</Reference>
         <Reference>urn:bindinc:genre:Divertissement</Reference><!-- API-534 -->
+        <Reference>urn:bindinc:genre:Entretien</Reference><!-- API-534 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.6.5">
           <Name xml:lang="nl">Muziek</Name>

@@ -49,9 +49,13 @@ public final class Utils {
 
     public static final String BINDINC_GENRE_PREFIX = "urn:bindinc:genre:";
 
+    /**
+     * Can be used as an argument to {@link nl.vpro.media.tva.saxon.extension.EpgGenreFunction#setIgnore(Set)}
+     */
     public static final Set<String> BINDINC_GENRE_IGNORE = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
         BINDINC_GENRE_PREFIX + "Overige",
-        BINDINC_GENRE_PREFIX + "Radio"
+        BINDINC_GENRE_PREFIX + "Radio",
+        BINDINC_GENRE_PREFIX + "Magazine"
     )));
 
 
@@ -77,19 +81,19 @@ public final class Utils {
             Channel channel;
             try {
                 channel = Channel.valueOf(Constants.getBindincChannelMappings().get(matcher.group(2)));
-                builder.channel(channel);
             } catch (Exception e) {
                 log.error("for {}: {}", fileName, e.getMessage());
                 channel = null;
             }
+            builder.channel(channel);
             LocalDate day;
             try {
                 day = LocalDate.parse(matcher.group(3), LOCAL_DATE);
-                builder.day(day);
             } catch (Exception e) {
                 log.error("for {}: {}", fileName, e.getMessage());
                 day = null;
             }
+            builder.day(day);
             return Optional.of(builder.build());
         } else {
             return Optional.empty();
