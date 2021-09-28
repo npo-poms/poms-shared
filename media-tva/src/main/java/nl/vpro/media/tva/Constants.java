@@ -9,6 +9,7 @@ import java.util.function.Function;
 
 import javax.xml.parsers.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.*;
@@ -74,6 +75,8 @@ public class Constants {
         BINDINC_CHANNEL_MAPPINGS = Collections.unmodifiableMap(mappings);
 
     }
+
+    @NonNull
     public static Map<String, String> getBindincChannelMappings() {
         return BINDINC_CHANNEL_MAPPINGS;
     }
