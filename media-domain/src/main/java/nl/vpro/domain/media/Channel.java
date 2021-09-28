@@ -502,11 +502,11 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
-    @XmlEnumValue("VT4_")
-    VT4_ {
+    @XmlEnumValue("VT4_") // Was VIER, VT4
+    VT4_(VIDEO, "https://www.goplay.be/programmas/play4", 1995) {
         @Override
         public String toString() {
-            return "VT4";
+            return "Play4";
         }
     },
 
@@ -727,10 +727,21 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("TRTI")
-    TRTI {
+    TRTI(VIDEO, 1990, 2009) {
         @Override
         public String toString() {
             return "TRT International";
+        }
+    },
+
+    /**
+     * @since 5.30
+     */
+    @XmlEnumValue("TRT1")
+    TRT1(VIDEO, "https://www.trt1.com.tr/", 1968){
+        @Override
+        public String toString() {
+            return "TRT 1";
         }
     },
 
@@ -1490,10 +1501,18 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("ALJA")
-    ALJA {
+    ALJA(VIDEO, "https://aljazeera.net", 1996) {
         @Override
         public String toString() {
             return "Al Jazeera";
+        }
+    },
+
+    @XmlEnumValue("ALJI")
+    ALJI(VIDEO, "https://aljazeera.com", 2006) {
+        @Override
+        public String toString() {
+            return "Al Jazeera English";
         }
     },
 
@@ -2441,11 +2460,10 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
     @XmlEnumValue("BRNL")
-    @Deprecated
-    BRNL {
+    BRNL(VIDEO, "https://classica.stingray.com", 1995) {
         @Override
         public String toString() {
-            return "Brava NL";
+            return "Stringray brava";
         }
     },
     @XmlEnumValue("BRHD")
@@ -2737,6 +2755,28 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+    /**
+     * @since 5.30
+     */
+    @XmlEnumValue("SPID")
+    SPID(VIDEO, "https://www.spiketv.nl/", 2015) {
+        @Override
+        public String toString() {
+            return "Spike Nederland";
+        }
+    },
+
+
+    /**
+     * @since 5.30
+     */
+    @XmlEnumValue("VTVI")
+    VTVI(VIDEO, "https://www.spiketv.nl/", 2015) {
+        @Override
+        public String toString() {
+            return "Spike Nederland";
+        }
+    },
 
     /**
      * @since 5.15

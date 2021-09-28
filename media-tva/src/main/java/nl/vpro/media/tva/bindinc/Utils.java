@@ -80,7 +80,14 @@ public final class Utils {
             }
             Channel channel;
             try {
-                channel = Channel.valueOf(Constants.getBindincChannelMappings().get(matcher.group(2)));
+                String fromName = matcher.group(2);
+                String mapped = Constants.getBindincChannelMappings().get(fromName);
+                if (mapped == null) {
+                    log.warn("No bindinc channel found for {}", fromName);
+                    channel = null;
+                } else {
+                    channel = Channel.valueOf(mapped);
+                }
             } catch (Exception e) {
                 log.error("for {}: {}", fileName, e.getMessage());
                 channel = null;
