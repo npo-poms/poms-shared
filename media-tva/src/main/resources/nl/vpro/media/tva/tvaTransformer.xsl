@@ -496,7 +496,7 @@
               </xsl:when>
               <xsl:when test="lower-case(./@type) = 'main'">
                 <title type="MAIN" owner="{$owner}">
-                  <xsl:value-of select="normalize-space(text())"/>
+                  <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
                 </title>
               </xsl:when>
               <xsl:when test="lower-case(./@type) = 'parentseriestitle'">
