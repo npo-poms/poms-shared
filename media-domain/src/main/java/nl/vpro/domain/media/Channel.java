@@ -2766,18 +2766,6 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
-
-    /**
-     * @since 5.30
-     */
-    @XmlEnumValue("VTVI")
-    VTVI(VIDEO, "https://www.spiketv.nl/", 2015) {
-        @Override
-        public String toString() {
-            return "Spike Nederland";
-        }
-    },
-
     /**
      * @since 5.15
      */
