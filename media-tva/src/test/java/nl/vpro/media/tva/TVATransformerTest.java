@@ -535,6 +535,15 @@ public class TVATransformerTest {
         assertThat(program.getMainTitle()).isEqualTo("C'est la vie");
     }
 
+    @Test
+    public void MSE_5159_htmlInTitle() throws IOException, ParserConfigurationException, TransformerException, SAXException {
+        String xml = transform("pd/pd/CULT20211016P.xml");
+        //log.info(xml);
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+        validate(table);
+
+    }
+
     private String bindinc(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE);// TODO API-460
         genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
