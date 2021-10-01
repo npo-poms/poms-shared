@@ -32,6 +32,6 @@ jobs:
       run: |
         mvn --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare
         git push--atomic -v --follow-tags
-        mvn --batch-mode -Darguments=-DskipTests release:perform
+        mvn -Pdeploy,ossrh --batch-mode -Darguments=-DskipTests release:perform
 
 
