@@ -11,6 +11,7 @@ import javax.xml.parsers.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.*;
 
 import nl.vpro.domain.media.Channel;
