@@ -687,6 +687,7 @@
       <xs:enumeration value="BBFC"/>
       <xs:enumeration value="BBCP"/>
       <xs:enumeration value="TRTI"/>
+      <xs:enumeration value="TRT1"/>
       <xs:enumeration value="SHOW"/>
       <xs:enumeration value="LIGT"/>
       <xs:enumeration value="TURK"/>
@@ -778,6 +779,7 @@
       <xs:enumeration value="CNBC"/>
       <xs:enumeration value="PALJ"/>
       <xs:enumeration value="ALJA"/>
+      <xs:enumeration value="ALJI"/>
       <xs:enumeration value="FOXN"/>
       <xs:enumeration value="FOXT"/>
       <xs:enumeration value="MTV_"/>
@@ -917,6 +919,7 @@
       <xs:enumeration value="TVPO"/>
       <xs:enumeration value="VOOM"/>
       <xs:enumeration value="10TB"/>
+      <xs:enumeration value="SPID"/>
       <xs:enumeration value="XXXX"/>
     </xs:restriction>
   </xs:simpleType>
