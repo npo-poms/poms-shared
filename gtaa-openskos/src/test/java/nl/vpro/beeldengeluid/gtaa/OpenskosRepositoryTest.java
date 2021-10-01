@@ -46,7 +46,7 @@ public class OpenskosRepositoryTest {
         Description description = persons.get(0);
         assertThat(description.getStatus()).isNotNull();
         assertThat(description.getPrefLabel().getValue()).isEqualTo("test2, test.");
-        assertThat(description.getStatus().equals(Status.candidate));
+        assertThat(description.getStatus()).isEqualTo(Status.candidate);
     }
 
     @Test
