@@ -216,12 +216,12 @@
               </xsl:for-each>
               <xsl:if test="tva:Title[@type='main']">
                 <title type="MAIN" owner="{$owner}">
-                  <xsl:value-of select="normalize-space(tva:Title[@type='main'])"/>
+                  <xsl:value-of select="vpro:stripHtml(normalize-space(tva:Title[@type='main']))"/>
                 </title>
               </xsl:if>
               <xsl:for-each select="tva:Title[lower-case(@type)='translatedtitle']">
                 <title type="ORIGINAL" owner="{$owner}">
-                  <xsl:value-of select="normalize-space(text())"/>
+                  <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
                 </title>
               </xsl:for-each>
               <xsl:if test="string-length(vpro:stripHtml(normalize-space(tva:Synopsis[@length = 'long' and not(@type)]))) > 0">
@@ -286,7 +286,7 @@
               </xsl:for-each>
               <xsl:if test="tva:Title[@type='parentSeriesTitle']">
                 <title type="MAIN" owner="{$owner}">
-                  <xsl:value-of select="normalize-space(tva:Title[@type='parentSeriesTitle'])" />
+                  <xsl:value-of select="vpro:stripHtml(normalize-space(tva:Title[@type='parentSeriesTitle']))" />
                 </title>
               </xsl:if>
               <xsl:if test="string-length(normalize-space(tva:Synopsis[@length = 'long' and @type='parentSeriesSynopsis'])) > 0">
@@ -470,33 +470,33 @@
     <xsl:choose>
       <xsl:when test="tva:BasicDescription/tva:Title[normalize-space(text()) !='']">
         <xsl:for-each select="tva:BasicDescription/tva:Title">
-          <xsl:if test="normalize-space(text()) != ''">
+          <xsl:if test="vpro:stripHtml(normalize-space(text())) != ''">
             <xsl:choose>
               <xsl:when test="lower-case(./@type) = 'originallanguage'">
                 <xsl:if test="not(../tva:Title[lower-case(@type) = 'main'])">
                   <title type="MAIN" owner="{$owner}">
-                    <xsl:value-of select="normalize-space(text())"/>
+                    <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
                     <xsl:comment>Fall back from originalLanguage title because no main title found</xsl:comment>
                   </title>
                 </xsl:if>
                 <title type="ORIGINAL" owner="{$owner}">
-                  <xsl:value-of select="normalize-space(text())"/>
+                  <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
                 </title>
               </xsl:when>
 
               <xsl:when test="lower-case(./@type) = 'translatedepisodetitle'">
                 <title type="ORIGINAL" owner="{$owner}">
-                  <xsl:value-of select="normalize-space(text())"/>
+                  <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
                 </title>
               </xsl:when>
               <xsl:when test="lower-case(./@type) = 'episodetitle'">
                 <title type="SUB" owner="{$owner}">
-                  <xsl:value-of select="normalize-space(text())"/>
+                  <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
                 </title>
               </xsl:when>
               <xsl:when test="lower-case(./@type) = 'main'">
                 <title type="MAIN" owner="{$owner}">
-                  <xsl:value-of select="normalize-space(text())"/>
+                  <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
                 </title>
               </xsl:when>
               <xsl:when test="lower-case(./@type) = 'parentseriestitle'">
@@ -510,7 +510,7 @@
                   </xsl:when>
                   <xsl:otherwise>
                     <title type="ORIGINAL" owner="{$owner}">
-                      <xsl:value-of select="normalize-space(text())"/>
+                      <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
                     </title>
                   </xsl:otherwise>
                 </xsl:choose>
