@@ -84,7 +84,19 @@ public class Constants {
     public static Document createChannelMapping(ChannelIdType type) throws IOException, ParserConfigurationException, SAXException {
         Properties channelMapping = new Properties();
         if (type == ChannelIdType.BINDINC) {
-            getBindincChannelMappings().forEach((k, v) -> channelMapping.put(k, Channel.valueOf(v).getXmlValue()));
+            Map<Channel, String> targetted = new HashMap<>();
+            getBindincChannelMappings().forEach((k, v) -> {
+                Channel c = Channel.valueOf(v);
+                String prevKey = targetted.put(c, k);
+                if (prevKey != null) {
+                    log.warn("{} is also mapped from {}", c.getXmlEnumValue(), prevKey);
+                }
+                Object put = channelMapping.put(k, c.getXmlValue());
+                if (put != null){
+                    log.warn("Replaced {} -> {} -> {}", k, put, c.getXmlValue());
+                }
+                }
+            );
         } else {
             for (Channel channel : Channel.values()) {
                 switch (type) {
@@ -118,7 +130,7 @@ public class Constants {
         });
         Document parse = parser.parse(new ByteArrayInputStream(stream.toByteArray()));
         NodeList nodeList = parse.getElementsByTagName("entry");
-        assert nodeList.getLength() == Channel.values().length;
+        assert  nodeList.getLength() == Channel.values().length : channelMapping.size() + "->" + nodeList.getLength() + " != " + Channel.values().length;
 
         return parse;
     }
