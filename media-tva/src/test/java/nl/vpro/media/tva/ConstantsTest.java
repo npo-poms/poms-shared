@@ -42,6 +42,7 @@ class ConstantsTest {
                 assertThat(key).isNotBlank();
             }
         }
+        assertThat(foundKeys).containsExactlyInAnyOrderElementsOf(Stream.of(Channel.values()).map(Channel::getXmlEnumValue).collect(Collectors.toList()));
     }
 
 }
