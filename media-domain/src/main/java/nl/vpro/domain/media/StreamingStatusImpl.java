@@ -125,4 +125,9 @@ public class StreamingStatusImpl implements StreamingStatus {
             result.update(0);
         }
     }
+
+    // empty, helping javadoc plugin @ java 11
+    public static class Builder {
+
+    }
 }
