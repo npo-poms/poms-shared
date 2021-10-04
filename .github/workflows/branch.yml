@@ -1,3 +1,4 @@
+---
 name: 'create release branch'
 on:
   workflow_dispatch:
@@ -9,19 +10,16 @@ jobs:
     env:
       MAVEN_OPTS: '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
     steps:
-    - uses: actions/checkout@v2
-    - uses: oleksiyrudenko/gha-git-credentials@v2.1
-      with:
-        global: true
-        name: 'github $GITHUB_ACTOR'
-        email: 'digitaal-techniek@vpro.nl'
-        token: '${{ secrets.GITHUB_TOKEN  }}'
-    - name: Release branch with Maven
-      run: |
-        VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
-        RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
-        DEVELOPMENT_VERSION=`echo $VERSION | gawk 'match($1, /([0-9]+)\.([0-9]+)([\.-])(.*)/, a) {print a[1]"."(a[2]+1)a[3]a[4]}'`
-        mvn  -DupdateBranchVersions=true -DreleaseVersion=${RELEASE_VERSION} -DdevelopmentVersion=${DEVELOPMENT_VERSION} release:branch
-
-
-
+      - uses: actions/checkout@v2
+      - uses: oleksiyrudenko/gha-git-credentials@v2.1
+        with:
+          global: true
+          name: 'github $GITHUB_ACTOR'
+          email: 'digitaal-techniek@vpro.nl'
+          token: '${{ secrets.GITHUB_TOKEN  }}'
+      - name: Release branch with Maven
+        run: |
+          VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
+          RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
+          DEVELOPMENT_VERSION=`echo $VERSION | gawk 'match($1, /([0-9]+)\.([0-9]+)([\.-])(.*)/, a) {print a[1]"."(a[2]+1)a[3]a[4]}'`
+          mvn  -DupdateBranchVersions=true -DreleaseVersion=${RELEASE_VERSION} -DdevelopmentVersion=${DEVELOPMENT_VERSION} release:branch
