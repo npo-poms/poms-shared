@@ -162,7 +162,7 @@ public class OpenskosRepository implements GTAARepository {
                             writer.append("Response:\n");
                             writer.append(body.toString());
                             throw new RuntimeException("For " + gtaaUrl + " " +
-                                response.getStatusCode() + " " + response.getStatusText() + " " + writer.toString());
+                                response.getStatusCode() + " " + response.getStatusText() + " " + writer);
                     }
                 } finally {
                     Post_RDF.remove();
@@ -255,7 +255,7 @@ public class OpenskosRepository implements GTAARepository {
                 } catch (GTAAConflict ex2) {
                     /* The version with "." already exists too */
                     log.debug("Duplicate label: {}", prefLabel);
-                    ex = ex2;
+                    rte = ex2;
                 }
                 postFix += ".";
             }
@@ -265,11 +265,9 @@ public class OpenskosRepository implements GTAARepository {
         } catch (NullPointerException npe) {
             log.error(npe.getClass().getName() + " " + npe.getMessage(), npe);
             rte = npe;
-            response = null;
         } catch (RuntimeException rt) {
             log.error(rt.getClass().getName() + " " + rt.getMessage());
             rte = rt;
-            response = null;
         }
 
         if (response != null && response.getBody() != null) {
@@ -450,20 +448,21 @@ public class OpenskosRepository implements GTAARepository {
         // Beware parameter ordering is relevant
         String encodedKey = Stream.of(gtaaKey.split(":", 2)).map(this::encode).collect(Collectors.joining(":"));
         //String encodedKey = encode(gtaaKey);
-        ResponseEntity<Source> source = template.postForEntity(
+
+        return template.postForEntity(
             String.format("%s/api/concept?key=%s&collection=gtaa&autoGenerateIdentifiers=true&tenant=%s",
                 gtaaUrl,
                 encodedKey,
                 encode(tenant)
             ),
             rdf, Source.class);
-        return source;
     }
 
 
     @SneakyThrows
-    private String encode(String u) {
-        return u == null ? u : URLEncoder.encode(u, "ASCII");
+    @Nullable
+    private String encode(@Nullable String u) {
+        return u == null ? null : URLEncoder.encode(u, "ASCII");
     }
 
     /**
