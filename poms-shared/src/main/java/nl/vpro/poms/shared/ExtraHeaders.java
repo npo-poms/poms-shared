@@ -21,9 +21,15 @@ public class ExtraHeaders {
     private  ExtraHeaders() {
     }
 
+    /**
+     * Returns a read-only view on the extra headers.
+     */
     public static List<Pair<String, String>> get() {
-        EXTRA_HEADERS_USED.set(Boolean.TRUE);
         return Collections.unmodifiableList(EXTRA_HEADERS.get());
+    }
+
+    public static void markUsed() {
+        EXTRA_HEADERS_USED.set(Boolean.TRUE);
     }
 
     public static void remove() {
