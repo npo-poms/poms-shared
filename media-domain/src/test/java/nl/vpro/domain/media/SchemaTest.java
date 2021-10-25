@@ -4,9 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
-import javax.xml.bind.JAXBException;
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.Xmlns;
@@ -36,9 +33,9 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 @Slf4j
 public class SchemaTest extends AbstractSchemaTest {
 
-    @BeforeAll
-    public static void generateXSDs() throws JAXBException, IOException {
-        context = generate(
+    @Override
+    protected  Class<?>[] getClasses() {
+        return new Class<?>[] {
             // media
             Program.class,
             Segment.class,
@@ -69,12 +66,9 @@ public class SchemaTest extends AbstractSchemaTest {
             // no namespace
             XmlCollection.class
             //
-
-
-
-        );
-
+        };
     }
+
     @Test
     public void testMedia() throws IOException {
         testNamespace(Xmlns.MEDIA_NAMESPACE);
@@ -113,8 +107,6 @@ public class SchemaTest extends AbstractSchemaTest {
         testMediaEnum( "textualTypeEnum", TextualType.class);
     }
 
-
-
     @Test
     public void testProgramType() {
         testMediaEnum( "programTypeEnum", ProgramType.class);
@@ -129,11 +121,13 @@ public class SchemaTest extends AbstractSchemaTest {
     public void testSegmentType() {
         testMediaEnum( "segmentTypeEnum", SegmentType.class);
     }
+
     @Test
     public void testMediaType() {
         testMediaEnum("mediaTypeEnum", MediaType.class);
     }
-     @Test
+
+    @Test
     public void testAgeRatingType() {
         testMediaEnum("ageRatingType", AgeRating.class);
     }
@@ -166,19 +160,18 @@ public class SchemaTest extends AbstractSchemaTest {
     public void testSubtitlesType() {
         testSharedEnum("subtitlesTypeEnum", SubtitlesType.class);
     }
+
     @Test
     public void testSubtitlesWorkflow() {
         testSharedEnum("subtitlesWorkflowEnum", SubtitlesWorkflow.class);
     }
+
     protected <T extends Enum<T>> void testMediaEnum(String enumTypeName, Class<T> enumClass)  {
         testEnum("/nl/vpro/domain/media/vproMedia.xsd", enumTypeName, enumClass);
     }
 
-
-
     protected <T extends Enum<T>> void testSharedEnum(String enumTypeName, Class<T> enumClass)  {
         testEnum("/nl/vpro/domain/media/vproShared.xsd", enumTypeName, enumClass);
     }
-
 
 }

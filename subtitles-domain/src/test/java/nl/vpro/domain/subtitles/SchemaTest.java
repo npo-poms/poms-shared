@@ -4,14 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
-import javax.xml.bind.JAXBException;
-
-
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.Xmlns;
-
 import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 
 
@@ -29,14 +24,13 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 @Slf4j
 public class SchemaTest extends AbstractSchemaTest {
 
-
-    @BeforeAll
-    public static void generateXSDs() throws JAXBException, IOException {
-        context = generate(
+    @Override
+    protected Class<?>[] getClasses()  {
+        return new Class<?>[]{
             Subtitles.class
-        );
-
+        };
     }
+
     @Test
     public void testSubtitles() throws IOException {
         testNamespace(Xmlns.MEDIA_SUBTITLES_NAMESPACE);
