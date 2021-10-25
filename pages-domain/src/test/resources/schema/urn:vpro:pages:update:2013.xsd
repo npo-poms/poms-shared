@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:pages:update:2013" xmlns:shared="urn:vpro:shared:2009" xmlns:tns="urn:vpro:pages:update:2013" xmlns:page="urn:vpro:pages:2013" xmlns:pageUpdate="urn:vpro:pages:update:2013" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="urn:vpro:pages:2013" schemaLocation="urn:vpro:pages:2013.xsd"/>
+
+  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn:vpro:shared:2009.xsd"/>
+
+  <xs:element name="image" type="tns:imageUpdateType"/>
+
+  <xs:element name="page" type="tns:pageUpdateType"/>
+
+  <xs:complexType name="pageUpdateType">
+    <xs:sequence>
+      <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="alternativeUrl" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="broadcaster" type="xs:string" maxOccurs="unbounded"/>
+      <xs:element name="portal" type="tns:portalUpdateType" minOccurs="0"/>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="subtitle" type="xs:string" minOccurs="0"/>
+      <xs:element name="keyword" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="summary" type="xs:string" minOccurs="0"/>
+      <xs:element name="paragraphs" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="paragraph" type="tns:paragraphUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="link" type="tns:linkUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="embeds" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="embed" type="tns:embedUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="statRef" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="tns:image" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="relation" type="tns:relationUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="page:pageTypeEnum" use="required"/>
+    <xs:attribute name="url" type="xs:string" use="required"/>
+    <xs:attribute name="publishStart" type="xs:dateTime"/>
+    <xs:attribute name="lastPublished" type="xs:dateTime"/>
+    <xs:attribute name="creationDate" type="xs:dateTime"/>
+    <xs:attribute name="lastModified" type="xs:dateTime"/>
+    <xs:attribute name="workflow" type="page:pageWorkflow"/>
+  </xs:complexType>
+
+  <xs:complexType name="portalUpdateType">
+    <xs:sequence>
+      <xs:element name="section" type="page:sectionType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="url" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="paragraphUpdateType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string" minOccurs="0"/>
+      <xs:element name="body" type="xs:string" minOccurs="0"/>
+      <xs:element ref="tns:image" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="imageUpdateType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="source" type="xs:string" minOccurs="0"/>
+      <xs:element name="sourceName" type="xs:string" minOccurs="0"/>
+      <xs:element name="license" type="shared:licenseEnum" minOccurs="0"/>
+      <xs:element name="credits" type="xs:string" minOccurs="0"/>
+      <xs:element name="imageLocation" type="tns:imageLocationType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="shared:imageTypeEnum" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="imageLocationType" final="extension restriction">
+    <xs:sequence>
+      <xs:element name="url" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="linkUpdateType">
+    <xs:sequence>
+      <xs:element name="text" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="pageRef" type="xs:string"/>
+    <xs:attribute name="type" type="page:linkTypeEnum"/>
+  </xs:complexType>
+
+  <xs:complexType name="embedUpdateType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="midRef" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="relationUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attribute name="broadcaster" type="xs:string" use="required"/>
+        <xs:attribute name="uriRef" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>
+
