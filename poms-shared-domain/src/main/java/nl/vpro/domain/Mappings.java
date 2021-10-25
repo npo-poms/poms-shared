@@ -144,8 +144,8 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         return new File(getTempDir(), fileName);
     }
 
-    public File getFileWithDocumentation(String namespace) {
-        File file = getFile(namespace);
+    public File getFileWithDocumentation(@NonNull String namespace) {
+        final File file = getFile(namespace);
         File fileWithDocumentation = new File(file.getParentFile(), "documented." + file.getName());
         if (fileWithDocumentation.exists() && fileWithDocumentation.lastModified() < file.lastModified()) {
             if (! fileWithDocumentation.delete()) {
@@ -153,7 +153,11 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
             }
         }
         if (!fileWithDocumentation.exists()) {
-            DocumentationAdder transformer = new DocumentationAdder(MAPPING.get(namespace));
+            Class<?>[] classes = MAPPING.get(namespace);
+            if (classes == null) {
+                throw new RuntimeException("No classes found for " + namespace);
+            }
+            DocumentationAdder transformer = new DocumentationAdder(classes);
             try {
                 transformer.transform(new StreamSource(new FileInputStream(file)), new StreamResult(new FileOutputStream(fileWithDocumentation)));
                 log.info("Generated {} with {}", fileWithDocumentation, transformer);
