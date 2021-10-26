@@ -7,8 +7,7 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -45,6 +44,8 @@ public class MediaObjects {
 
     private MediaObjects() {
     }
+
+    protected static Clock CLOCK = Clock.systemUTC();
 
     public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
         return first == second ||
@@ -523,7 +524,7 @@ public class MediaObjects {
         @NonNull MediaObject media,
         String reason,
         Object... args) {
-        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(Instant.now())) {
+        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(CLOCK.instant())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             appendReason(media, reason, args);
             media.setRepubDestinations(null);
@@ -675,19 +676,6 @@ public class MediaObjects {
         return media != null && PUBLICATIONS.contains(media.getWorkflow()) && media.getLocations().stream().anyMatch(l -> l.getWorkflow() == PUBLISHED);
     }
 
-    /**
-     * Whether this mediaobject is playable in a NPO player.
-     * @since 5.11
-     */
-    public static boolean isPlayable(MediaObject media) {
-        if (media == null) {
-            return false;
-        }
-        // TODO, it seems that this is enough
-        return media.getStreamingPlatformStatus().isAvailable();
-        // but why not this?
-        //return media.getStreamingPlatformStatus().isAvailable() && Optional.ofNullable(media.getPrediction(Platform.INTERNETVOD)).map(p -> p.inPublicationWindow(Instant.now())).orElse(false);
-    }
 
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
@@ -943,6 +931,22 @@ public class MediaObjects {
     }
 
 
+
+    /**
+     * Whether this mediaobject is playable in a NPO player.
+     * @since 5.11
+     */
+    public static boolean isPlayable(MediaObject media) {
+        if (media == null) {
+            return false;
+        }
+        // TODO, it seems that this is enough (at least for video?)
+        return media.getStreamingPlatformStatus().isAvailable();
+        // but why not this?
+        //return media.getStreamingPlatformStatus().isAvailable() && Optional.ofNullable(media.getPrediction(Platform.INTERNETVOD)).map(p -> p.inPublicationWindow(Instant.now())).orElse(false);
+    }
+
+
     /**
      * @since 5.31
      */
@@ -958,9 +962,24 @@ public class MediaObjects {
     /**
      * @since 5.31
      */
-    public static boolean isPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return isPlayable(platform, mediaObject, Instant.now());
+    public static Platform[] getPlayablePlatforms(@NonNull MediaObject mediaObject, @NonNull Instant now) {
+        return Arrays.stream(Platform.values()).filter(p -> isPlayable(p, mediaObject, now)).toArray(Platform[]::new);
     }
+
+    /**
+     * @since 5.31
+     */
+    public static boolean isPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+        return isPlayable(platform, mediaObject, CLOCK.instant());
+    }
+
+    /**
+     * @since 5.31
+     */
+     public static Platform[] getPlayablePlatforms(@NonNull MediaObject mediaObject) {
+        return getPlayablePlatforms(mediaObject, CLOCK.instant());
+    }
+
     /**
      * @since 5.31
      */
@@ -971,7 +990,7 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-         return wasPlayable(platform, mediaObject, Instant.now());
+         return wasPlayable(platform, mediaObject, CLOCK.instant());
     }
     /**
      * @since 5.31
@@ -984,7 +1003,7 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return willBePlayable(platform, mediaObject, Instant.now());
+        return willBePlayable(platform, mediaObject, CLOCK.instant());
     }
 
 

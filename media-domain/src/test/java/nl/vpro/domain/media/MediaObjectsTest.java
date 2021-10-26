@@ -28,6 +28,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SuppressWarnings({"deprecation", "ConstantConditions"})
 @Slf4j
 public class MediaObjectsTest {
+    static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
+    static {
+        MediaObjects.CLOCK = Clock.fixed(NOW , Schedule.ZONE_ID);
+    }
 
     @Test
     public void sortDate() {
@@ -367,50 +371,58 @@ public class MediaObjectsTest {
     }
 
     public static class Playability {
+        final MediaObject programWithOneLocationWithoutPlatform = MediaBuilder.program(ProgramType.BROADCAST)
+            .mid("mid_123")
+            .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+            .build();
+
+        final MediaObject programWithOneLocation = MediaBuilder.program(ProgramType.BROADCAST)
+                .mid("mid_123")
+                .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build())
+                .build();
+
+
+        @Test
+        void isPlayable() {
+            // this is a bit strange, this call just looks at streaming status:
+            assertThat(MediaObjects.isPlayable(programWithOneLocation)).isFalse();
+        }
 
         @Test
         void isPlayableWithoutAnyPredictions() {
-            MediaObject programWithOneLocationWithoutPlatform = MediaBuilder.program(ProgramType.BROADCAST)
-                .mid("mid_123")
-                .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
-                .build();
-            assertThat(MediaObjects.isPlayable(Platform.INTERNETVOD, programWithOneLocationWithoutPlatform)).isTrue();
-            assertThat(MediaObjects.isPlayable(Platform.PLUSVOD, programWithOneLocationWithoutPlatform)).isFalse();
 
-            MediaObject programWithOneLocation = MediaBuilder.program(ProgramType.BROADCAST)
-                .mid("mid_123")
-                .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build())
-                .build();
-            assertThat(MediaObjects.isPlayable(Platform.INTERNETVOD, programWithOneLocation)).isTrue();
-            assertThat(MediaObjects.isPlayable(Platform.PLUSVOD, programWithOneLocation)).isFalse();
+            assertThat(MediaObjects.getPlayablePlatforms(programWithOneLocationWithoutPlatform)).containsExactly(Platform.INTERNETVOD);
+
+            assertThat(MediaObjects.getPlayablePlatforms(programWithOneLocation)).containsExactly(Platform.INTERNETVOD);
         }
 
-        @Test
-        void isPlayableWithoutAnyPredictionsPlusvod() {
-            MediaObject programWithOneLocationWithoutPlatform = MediaBuilder.program(ProgramType.BROADCAST)
+        final MediaObject programWithOneLocationPlusVod = MediaBuilder.program(ProgramType.BROADCAST)
                 .mid("mid_123")
                 .locations(Location.builder().platform(Platform.PLUSVOD).programUrl("https://bla.com/foobar.mp4").build())
                 .build();
-            assertThat(MediaObjects.isPlayable(Platform.INTERNETVOD, programWithOneLocationWithoutPlatform)).isFalse();
-            assertThat(MediaObjects.isPlayable(Platform.PLUSVOD, programWithOneLocationWithoutPlatform)).isTrue();
+
+        @Test
+        void isPlayableWithoutAnyPredictionsPlusvod() {
+
+            assertThat(MediaObjects.getPlayablePlatforms(programWithOneLocationPlusVod)).containsExactly(Platform.PLUSVOD);
         }
+
+        MediaObject programWithRealized = MediaBuilder.program(ProgramType.BROADCAST)
+            .mid("mid_123")
+            .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+            .predictions(Prediction.builder().platform(Platform.INTERNETVOD).build())
+            .build();
+        MediaObject programWithRealizedButNoLocations = MediaBuilder.program(ProgramType.BROADCAST)
+            .mid("mid_123")
+            .predictions(Prediction.builder().platform(Platform.PLUSVOD).state(Prediction.State.REALIZED).build())
+            .build();
 
         @Test
         void isPlayableWithPredictions() {
-            MediaObject programWithRealized = MediaBuilder.program(ProgramType.BROADCAST)
-                .mid("mid_123")
-                .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
-                .predictions(Prediction.builder().platform(Platform.INTERNETVOD).build())
-                .build();
-            assertThat(MediaObjects.isPlayable(Platform.INTERNETVOD, programWithRealized)).isTrue();
-            assertThat(MediaObjects.isPlayable(Platform.PLUSVOD, programWithRealized)).isFalse();
+            assertThat(MediaObjects.getPlayablePlatforms(programWithRealized)).containsExactly(Platform.INTERNETVOD);
 
-            MediaObject programWithOneLocation = MediaBuilder.program(ProgramType.BROADCAST)
-                .mid("mid_123")
-                .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build())
-                .build();
-            assertThat(MediaObjects.isPlayable(Platform.INTERNETVOD, programWithOneLocation)).isTrue();
-            assertThat(MediaObjects.isPlayable(Platform.PLUSVOD, programWithOneLocation)).isFalse();
+            assertThat(MediaObjects.getPlayablePlatforms(programWithRealizedButNoLocations)).containsExactly(Platform.PLUSVOD);
+
         }
 
         @Test
