@@ -950,29 +950,29 @@ public class MediaObjects {
     /**
      * @since 5.31
      */
-    public static boolean isPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
+    public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
         return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(now), l -> l.inPublicationWindow(now));
     }
 
     /**
      * @since 5.31
      */
-    public static Platform[] getPlayablePlatforms(@NonNull MediaObject mediaObject, @NonNull Instant now) {
-        return Arrays.stream(Platform.values()).filter(p -> isPlayable(p, mediaObject, now)).toArray(Platform[]::new);
+    public static Platform[] nowPlayable(@NonNull MediaObject mediaObject, @NonNull Instant now) {
+        return Arrays.stream(Platform.values()).filter(p -> nowPlayable(p, mediaObject, now)).toArray(Platform[]::new);
     }
 
     /**
      * @since 5.31
      */
-    public static boolean isPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return isPlayable(platform, mediaObject, CLOCK.instant());
+    public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+        return nowPlayable(platform, mediaObject, CLOCK.instant());
     }
 
     /**
      * @since 5.31
      */
-     public static Platform[] getPlayablePlatforms(@NonNull MediaObject mediaObject) {
-        return getPlayablePlatforms(mediaObject, CLOCK.instant());
+     public static Platform[] nowPlayable(@NonNull MediaObject mediaObject) {
+        return nowPlayable(mediaObject, CLOCK.instant());
     }
 
     /**
@@ -987,6 +987,22 @@ public class MediaObjects {
     public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
          return wasPlayable(platform, mediaObject, CLOCK.instant());
     }
+
+    /**
+     * @since 5.31
+     */
+    public static Platform[] wasPlayable(@NonNull MediaObject mediaObject, @NonNull Instant now) {
+        return Arrays.stream(Platform.values()).filter(p -> wasPlayable(p, mediaObject, now)).toArray(Platform[]::new);
+    }
+    /**
+     * @since 5.31
+     */
+     public static Platform[] wasPlayable(@NonNull MediaObject mediaObject) {
+        return wasPlayable(mediaObject, CLOCK.instant());
+    }
+
+    /**
+
     /**
      * @since 5.31
      */
@@ -1000,6 +1016,21 @@ public class MediaObjects {
     public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return willBePlayable(platform, mediaObject, CLOCK.instant());
     }
+
+
+    /**
+     * @since 5.31
+     */
+    public static Platform[] willBePlayable(@NonNull MediaObject mediaObject, @NonNull Instant now) {
+        return Arrays.stream(Platform.values()).filter(p -> willBePlayable(p, mediaObject, now)).toArray(Platform[]::new);
+    }
+    /**
+     * @since 5.31
+     */
+     public static Platform[] willBePlayable(@NonNull MediaObject mediaObject) {
+        return willBePlayable(mediaObject, CLOCK.instant());
+    }
+
 
      /**
      * @since 5.31

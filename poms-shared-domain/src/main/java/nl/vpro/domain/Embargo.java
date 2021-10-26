@@ -76,7 +76,7 @@ public interface Embargo {
     }
 
     default boolean willBePublished(Instant now) {
-        return isUnderEmbargo(now) && now.isBefore(getPublishStartInstant());
+        return isUnderEmbargo(now) && (getPublishStartInstant() != null && now.isBefore(getPublishStartInstant()));
     }
 
     default boolean inPublicationWindow(Instant now) {

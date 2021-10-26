@@ -9,8 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
@@ -371,66 +375,168 @@ public class MediaObjectsTest {
     }
 
     public static class Playability {
-        final MediaObject programWithOneLocationWithoutPlatform = MediaBuilder.program(ProgramType.BROADCAST)
-            .mid("mid_123")
-            .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
-            .build();
 
-        final MediaObject programWithOneLocation = MediaBuilder.program(ProgramType.BROADCAST)
-                .mid("mid_123")
-                .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build())
-                .build();
+        public static Stream<Arguments> nowCases() {
+            return Stream.of(
+                Arguments.of(
+                    "a program with just a legacy location",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+                        .build(),
+                    new Platform[] { Platform.INTERNETVOD}
+                ),
+                Arguments.of(
+                    "A program with a location with explit INTERNETVOD",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build())
+                        .build(),
+                    new Platform[] { Platform.INTERNETVOD}
+                ),
+                Arguments.of(
+                    "A program with a location with explicit PLUSVOD",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .locations(Location.builder().platform(Platform.PLUSVOD).programUrl("https://bla.com/foobar.mp4").build())
+                        .build(),
+                    new Platform[] { Platform.PLUSVOD}
+                ),
+                Arguments.of(
+                    "A program with realized prediction",
+                    MediaBuilder.broadcast().mid("mid_123")
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+                        .predictions(Prediction.builder().platform(Platform.INTERNETVOD).build())
+                        .build(),
+                    new Platform[] { Platform.INTERNETVOD}
+                ),
+                Arguments.of(
+                    "A program with realized prediction but no locations",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .predictions(Prediction.builder().platform(Platform.PLUSVOD).state(Prediction.State.REALIZED).build())
+                        .build(),
+                    new Platform[] { Platform.PLUSVOD}
+                )
+            );
+        }
 
 
         @Test
         void isPlayable() {
             // this is a bit strange, this call just looks at streaming status:
-            assertThat(MediaObjects.isPlayable(programWithOneLocation)).isFalse();
+            assertThat(MediaObjects.isPlayable(nowCases().findFirst().map(a -> (MediaObject) a.get()[1]).orElseThrow(RuntimeException::new))).isFalse();
         }
 
-        @Test
-        void isPlayableWithoutAnyPredictions() {
-
-            assertThat(MediaObjects.getPlayablePlatforms(programWithOneLocationWithoutPlatform)).containsExactly(Platform.INTERNETVOD);
-
-            assertThat(MediaObjects.getPlayablePlatforms(programWithOneLocation)).containsExactly(Platform.INTERNETVOD);
+        @ParameterizedTest
+        @MethodSource("nowCases")
+        void nowPlayable(String description, MediaObject object, Platform[] expectedPlatforms) {
+            assertThat(MediaObjects.nowPlayable(object)).containsExactly(expectedPlatforms);
         }
 
-        final MediaObject programWithOneLocationPlusVod = MediaBuilder.program(ProgramType.BROADCAST)
-                .mid("mid_123")
-                .locations(Location.builder().platform(Platform.PLUSVOD).programUrl("https://bla.com/foobar.mp4").build())
-                .build();
 
-        @Test
-        void isPlayableWithoutAnyPredictionsPlusvod() {
-
-            assertThat(MediaObjects.getPlayablePlatforms(programWithOneLocationPlusVod)).containsExactly(Platform.PLUSVOD);
+        public static Stream<Arguments> wasCases() {
+            return Stream.of(
+                Arguments.of(
+                    "a program with just a legacy revoked location",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
+                        .build(),
+                    new Platform[] { Platform.INTERNETVOD}
+                ),
+                Arguments.of(
+                    "A program with a location with explit INTERNETVOD",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
+                        .build(),
+                    new Platform[] { Platform.INTERNETVOD}
+                ),
+                Arguments.of(
+                    "A program with a location with explicit PLUSVOD",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .locations(Location.builder().platform(Platform.PLUSVOD).programUrl("https://bla.com/foobar.mp4").build())
+                        .build(),
+                    new Platform[] { Platform.PLUSVOD}
+                ),
+                Arguments.of(
+                    "A program with realized prediction",
+                    MediaBuilder.broadcast().mid("mid_123")
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+                        .predictions(Prediction.builder().platform(Platform.INTERNETVOD).build())
+                        .build(),
+                    new Platform[] { Platform.INTERNETVOD}
+                ),
+                Arguments.of(
+                    "A program with realized prediction but no locations",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .predictions(Prediction.builder().platform(Platform.PLUSVOD).state(Prediction.State.REALIZED).build())
+                        .build(),
+                    new Platform[] { Platform.PLUSVOD}
+                )
+            );
         }
 
-        MediaObject programWithRealized = MediaBuilder.program(ProgramType.BROADCAST)
-            .mid("mid_123")
-            .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
-            .predictions(Prediction.builder().platform(Platform.INTERNETVOD).build())
-            .build();
-        MediaObject programWithRealizedButNoLocations = MediaBuilder.program(ProgramType.BROADCAST)
-            .mid("mid_123")
-            .predictions(Prediction.builder().platform(Platform.PLUSVOD).state(Prediction.State.REALIZED).build())
-            .build();
-
-        @Test
-        void isPlayableWithPredictions() {
-            assertThat(MediaObjects.getPlayablePlatforms(programWithRealized)).containsExactly(Platform.INTERNETVOD);
-
-            assertThat(MediaObjects.getPlayablePlatforms(programWithRealizedButNoLocations)).containsExactly(Platform.PLUSVOD);
+        @ParameterizedTest
+        @MethodSource("wasCases")
+        void wasPlayable(String description, MediaObject object, Platform[] expectedPlatforms) {
+            assertThat(MediaObjects.wasPlayable(object)).containsExactly(expectedPlatforms);
 
         }
 
-        @Test
-        void wasPlayable() {
+         public static Stream<Arguments> willCases() {
+            return Stream.of(
+                Arguments.of(
+                    "a program with just a legacy revoked location",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
+                        .build(),
+                    new Platform[] { Platform.INTERNETVOD}
+                ),
+                Arguments.of(
+                    "A program with a location with explit INTERNETVOD",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
+                        .build(),
+                    new Platform[] { Platform.INTERNETVOD}
+                ),
+                Arguments.of(
+                    "A program with a location with explicit PLUSVOD",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .locations(Location.builder().platform(Platform.PLUSVOD).programUrl("https://bla.com/foobar.mp4").build())
+                        .build(),
+                    new Platform[] { Platform.PLUSVOD}
+                ),
+                Arguments.of(
+                    "A program with realized prediction",
+                    MediaBuilder.broadcast().mid("mid_123")
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+                        .predictions(Prediction.builder().platform(Platform.INTERNETVOD).build())
+                        .build(),
+                    new Platform[] { Platform.INTERNETVOD}
+                ),
+                Arguments.of(
+                    "A program with realized prediction but no locations",
+                    MediaBuilder.broadcast()
+                        .mid("mid_123")
+                        .predictions(Prediction.builder().platform(Platform.PLUSVOD).state(Prediction.State.REALIZED).build())
+                        .build(),
+                    new Platform[] { Platform.PLUSVOD}
+                )
+            );
         }
 
-        @Test
-        void willBePlayable() {
+        @ParameterizedTest
+        @MethodSource("willCases")
+        void willBePlayable(String description, MediaObject object, Platform[] expectedPlatforms) {
+            assertThat(MediaObjects.willBePlayable(object)).containsExactly(expectedPlatforms);
+
         }
     }
 }
