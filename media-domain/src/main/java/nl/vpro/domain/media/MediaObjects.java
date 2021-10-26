@@ -727,9 +727,8 @@ public class MediaObjects {
 
 
     /**
-     * @javadoc
+     * @TODO: javadoc
      */
-
     public static Optional<List<MemberRef>> getPath(MediaObject parent, MediaObject child, List<? extends MediaObject> descendants) {
         return getPath(parent, child,
             descendants.stream().distinct().collect(Collectors.toMap(MediaObject::getMid, d -> d)
@@ -941,9 +940,53 @@ public class MediaObjects {
                 .flatMap(Collection::stream)
                 .map(Topic::getGtaaRecord)
         ).distinct();
-
-
     }
+
+
+    /**
+     * @since 5.31
+     */
+    public static boolean isPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
+        boolean matchedByPrediction = mediaObject.getPredictions().stream().anyMatch(p -> platform.matches(p.getPlatform()) && p.getState() == Prediction.State.REALIZED);
+        if (matchedByPrediction) {
+            return true;
+        }
+        // fall back to location only
+        return  mediaObject.getLocations().stream().anyMatch(l -> platform.matches(l.getPlatform()) && ! l.isUnderEmbargo(now));
+    }
+
+    /**
+     * @since 5.31
+     */
+    public static boolean isPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+        return isPlayable(platform, mediaObject, Instant.now());
+    }
+    /**
+     * @since 5.31
+     */
+    public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
+        throw new UnsupportedOperationException();
+    }
+    /**
+     * @since 5.31
+     */
+    public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+         return wasPlayable(platform, mediaObject, Instant.now());
+    }
+    /**
+     * @since 5.31
+     */
+    public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * @since 5.31
+     */
+    public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+        return willBePlayable(platform, mediaObject, Instant.now());
+    }
+
 
 
 }
