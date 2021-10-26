@@ -951,12 +951,7 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean isPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
-        boolean matchedByPrediction = mediaObject.getPredictions().stream().anyMatch(p -> platform.matches(p.getPlatform()) && p.getState() == Prediction.State.REALIZED);
-        if (matchedByPrediction) {
-            return true;
-        }
-        // fall back to location only
-        return  mediaObject.getLocations().stream().anyMatch(l -> platform.matches(l.getPlatform()) && ! l.isUnderEmbargo(now));
+        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(now), l -> l.inPublicationWindow(now));
     }
 
     /**
@@ -984,7 +979,7 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
-        throw new UnsupportedOperationException();
+        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.REVOKED && s.inPublicationWindow(now), l -> l.wasUnderEmbargo(now));
     }
     /**
      * @since 5.31
@@ -996,7 +991,7 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
-        throw new UnsupportedOperationException();
+        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.ANNOUNCED && s.inPublicationWindow(now), l -> l.willBePublished(now));
     }
 
     /**
@@ -1004,6 +999,18 @@ public class MediaObjects {
      */
     public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return willBePlayable(platform, mediaObject, CLOCK.instant());
+    }
+
+     /**
+     * @since 5.31
+     */
+    protected static boolean playabilityCheck(@NonNull Platform platform, @NonNull MediaObject mediaObject,  Predicate<Prediction> prediction, Predicate<Location> location) {
+        boolean matchedByPrediction = mediaObject.getPredictions().stream().anyMatch(p -> platform.matches(p.getPlatform()) && prediction.test(p));
+        if (matchedByPrediction) {
+            return true;
+        }
+        // fall back to location only
+        return  mediaObject.getLocations().stream().anyMatch(l -> platform.matches(l.getPlatform()) && location.test(l));
     }
 
 
