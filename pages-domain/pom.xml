@@ -93,6 +93,10 @@
       <artifactId>media-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw</groupId>
+      <artifactId>jaxb-documentation</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
