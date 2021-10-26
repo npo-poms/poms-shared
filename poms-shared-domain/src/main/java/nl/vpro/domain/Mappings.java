@@ -1,7 +1,6 @@
 package nl.vpro.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -114,6 +113,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         });
     }
 
+    @SneakyThrows
     @Override
     public File apply(String namespace) {
         if (generateDocumentation) {
@@ -144,7 +144,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         return new File(getTempDir(), fileName);
     }
 
-    public File getFileWithDocumentation(@NonNull String namespace) {
+    public File getFileWithDocumentation(@NonNull String namespace) throws NotFoundException {
         final File file = getFile(namespace);
         File fileWithDocumentation = new File(file.getParentFile(), "documented." + file.getName());
         if (fileWithDocumentation.exists() && fileWithDocumentation.lastModified() < file.lastModified()) {
@@ -155,7 +155,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         if (!fileWithDocumentation.exists()) {
             Class<?>[] classes = MAPPING.get(namespace);
             if (classes == null) {
-                throw new RuntimeException("No classes found for " + namespace);
+                throw new NotFoundException(namespace, "No classes found for " + namespace);
             }
             DocumentationAdder transformer = new DocumentationAdder(classes);
             try {
