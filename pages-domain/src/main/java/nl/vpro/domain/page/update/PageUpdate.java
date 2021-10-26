@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -42,6 +43,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlRootElement(name = "page")
 public class PageUpdate implements Serializable {
 
+    private static final long serialVersionUID = -7641774463877245473L;
 
     public static PageUpdateBuilder builder() {
         return PageUpdateBuilder.page();
@@ -146,6 +148,7 @@ public class PageUpdate implements Serializable {
     @JsonProperty("genres")
     @ValidGenre
     @Setter
+    @XmlDocumentation(value = "Genres, as specified in https://publish.pages.omroep.nl/schema/classification")
     protected List<String> genres;
 
     @XmlElement(name = "link")
