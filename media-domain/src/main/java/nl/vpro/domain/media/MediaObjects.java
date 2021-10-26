@@ -29,7 +29,6 @@ import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
-import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
 import static nl.vpro.domain.media.support.Workflow.*;
@@ -922,101 +921,6 @@ public class MediaObjects {
         result &= MediaObjects.revokeRelatedPublishables(media, media.getLocations(), now, () -> Locations.updatePredictionStates(media, now));
         return result;
 
-    }
-
-
-
-    // DEPRECATED methods
-
-
-    /**
-     * @since 2.1
-     */
-    @Deprecated
-    public static Date getSortDate(MediaObject mo) {
-        return DateUtils.toDate(getSortInstant(mo));
-
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#filter}
-     */
-    @Deprecated
-    public static <T extends MutableOwnable> List<T> filter(Collection<T> ownables, OwnerType owner) {
-        return TextualObjects.filter(ownables, owner);
-    }
-
-
-    /**
-     * @deprecated Use {@link TextualObjects#get}
-     */
-    @Deprecated
-    public static String getTitle(MediaObject media, OwnerType owner, TextualType type) {
-        return TextualObjects.getTitle(media, owner, type);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#get}
-     */
-    @Deprecated
-    public static String getTitle(Collection<Title> titles, TextualType... types) {
-        return TextualObjects.get(titles, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#get}
-     */
-    @Deprecated
-    public static String getTitle(Collection<Title> titles, String defaultValue, TextualType... types) {
-        return TextualObjects.get(titles, defaultValue, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#getObject}
-     */
-    @Deprecated
-    public static Title getTitleObject(Collection<Title> titles, TextualType... types) {
-        return TextualObjects.getObject(titles, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#getDescription(TextualObject, OwnerType, TextualType)}
-     */
-    @Deprecated
-    public static String getDescription(MediaObject media, OwnerType owner, TextualType type) {
-        return TextualObjects.getDescription(media, owner, type);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#getDescription(TextualObject, TextualType...)}
-     */
-    @Deprecated
-    public static String getDescription(MediaObject media, TextualType... types) {
-        return TextualObjects.getDescription(media, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#get(Collection, TextualType...)}
-     */
-    @Deprecated
-    public static String getDescription(Collection<Description> descriptions, TextualType... types) {
-        return TextualObjects.get(descriptions, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#get(Collection, String, TextualType...)}
-     */
-    @Deprecated
-    public static String getDescription(Collection<Description> descriptions, String defaultValue, TextualType... types) {
-        return TextualObjects.get(descriptions, defaultValue, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#findOwnersForTextFields(TextualObject)}
-     */
-    @Deprecated
-    public static OwnerType[] findOwnersForTextFields(MediaObject media) {
-        return TextualObjects.findOwnersForTextFields(media);
     }
 
 
