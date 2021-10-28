@@ -487,7 +487,7 @@ public class MediaObjectsTest {
 
         }
 
-         public static Stream<Arguments> willCases() {
+        public static Stream<Arguments> willCases() {
             return Stream.of(
                 Arguments.of(
                     "a program with just a legacy revoked location",

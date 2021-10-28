@@ -2061,6 +2061,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return streamingPlatformStatus;
     }
     @XmlTransient
+    @NonNull
     public SortedSet<Prediction> getPredictions() {
         if (predictions == null) {
             predictions = new TreeSet<>();
@@ -2181,6 +2182,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     /**
      * Returns the locations in {@link Location#PRESENTATION_ORDER}
      */
+    @NonNull
     public SortedSet<Location> getLocations() {
         if (locations == null) {
             locations = new TreeSet<>();
