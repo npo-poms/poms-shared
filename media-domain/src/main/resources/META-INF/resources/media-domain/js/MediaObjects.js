@@ -10,10 +10,16 @@ nl_vpro_domain_media_MediaObjects = (function() {
         //console.log.apply(null, arguments);
     }
     function info() {
-        console.log.apply(null, arguments);
+        //console.log.apply(null, arguments);
     }
 
-    function forProgramUrl(url) {
+    /**
+     * Some legacy location don't have there av-format properly filled in. This guesses it from the programUrlField
+     * @param {object} location The location object
+     * @return {string}
+     */
+    function avFormatForProgramUrl(location) {
+        url = location.programUrl;
         if (url == null) return "UNKNOWN";
         const urlLowerCase = url.toLowerCase();
         if(urlLowerCase.includes("adaptive")) {
@@ -74,7 +80,7 @@ nl_vpro_domain_media_MediaObjects = (function() {
         // legacy filter on av type
         format = l.avAttributes ? l.avAttributes.avFileFormat : null
         if (format == null || format === "UNKNOWN") {
-            format = forProgramUrl(l.programUrl);
+            format = avFormatForProgramUrl(l);
         }
         if (format != null && format !== "UNKNOWN") {
             acceptable = ACCEPTABLE_FORMATS.includes(format);
