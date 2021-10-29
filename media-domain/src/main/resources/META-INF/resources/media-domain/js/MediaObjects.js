@@ -1,8 +1,7 @@
 
-
 nl_vpro_domain_media_MediaObjects = (function() {
 
-    clock = function() {
+    let clock = function() {
         return Date.now();
     }
 
@@ -117,20 +116,18 @@ nl_vpro_domain_media_MediaObjects = (function() {
     }
 
 
-    platforms = {
+    const platforms = Object.freeze({
         INTERNETVOD: "INTERNETVOD",
         TVVOD: "TVVOD",
         PLUSVOD: "PLUSVOD",
         NPOPLUSVOD: "NPOPLUSVOD"
-    };
-    Object.freeze(platforms);
+    });
 
-    states = {
+    const states = Object.freeze({
         ANNOUNCED: "ANNOUNCED",
         REALIZED: "REALIZED",
         REVOKED: "REVOKED"
-    }
-    Object.freeze(states);
+    });
 
     /**
      *
@@ -197,7 +194,6 @@ nl_vpro_domain_media_MediaObjects = (function() {
                 s => s.state === this.State.REVOKED,
                 wasUnderEmbargo
             );
-
         },
 
         /**
@@ -220,5 +216,5 @@ nl_vpro_domain_media_MediaObjects = (function() {
         }
 
     });
-}).apply();
+})();
 
