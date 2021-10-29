@@ -2,30 +2,172 @@
 
 nl_vpro_domain_media_MediaObjects = (function() {
 
+    clock = function() {
+        return Date.now();
+    }
 
-    function playabilityCheck(platform, mediaObject,  predictionPredicate, locationPredicate) {
+    function debug() {
+        //console.log.apply(null, arguments);
+    }
+    function info() {
+        console.log.apply(null, arguments);
+    }
+
+    function forProgramUrl(url) {
+        if (url == null) return "UNKNOWN";
+        const urlLowerCase = url.toLowerCase();
+        if(urlLowerCase.includes("adaptive")) {
+            return "HASP";
+        }
+        if(urlLowerCase.includes("h264")) {
+            return "H264";
+        }
+        if(urlLowerCase.includes("wmv") || urlLowerCase.includes("wvc1")) {
+            return "WM";
+        }
+        if(urlLowerCase.startsWith("http://player.omroep.nl/")) {
+            return "HTML";
+        }
+        if(urlLowerCase.endsWith(".asf") ||
+            urlLowerCase.endsWith(".wmv") ||
+            urlLowerCase.endsWith(".wma") ||
+            urlLowerCase.endsWith(".asx")) {
+            return "WM";
+        }
+        if(urlLowerCase.endsWith(".m4v") ||
+            urlLowerCase.endsWith(".m4a") ||
+            urlLowerCase.endsWith(".mov") ||
+            urlLowerCase.endsWith(".mp4")
+            ) {
+            return "MP4";
+        }
+        if(urlLowerCase.endsWith(".ra") ||
+            urlLowerCase.endsWith(".rm") ||
+            urlLowerCase.endsWith(".ram") ||
+            urlLowerCase.endsWith(".smil")) {
+            return "RM";
+        }
+        if(urlLowerCase.endsWith(".mp3")) {
+            return "MP3";
+        }
+        if(urlLowerCase.endsWith(".3gp") ||
+            urlLowerCase.endsWith(".3gpp")) {
+            return "DGPP";
+        }
+        if(urlLowerCase.endsWith(".flv") ||
+            urlLowerCase.endsWith(".swf") ||
+            urlLowerCase.endsWith(".f4v") ||
+            urlLowerCase.endsWith(".f4p") ||
+            urlLowerCase.endsWith(".f4a") ||
+            urlLowerCase.endsWith(".f4b")) {
+            return "FLV";
+        }
+        return "UNKNOWN";
+
+    }
+    const ACCEPTABLE_FORMATS = ["MP3", "MP4", "M4V", "H264"];
+
+    function locationFilter(l) {
+        if (l.workflow === 'DELETED') {
+            return false;
+        }
+        // legacy filter on av type
+        format = l.avAttributes ? l.avAttributes.avFileFormat : null
+        if (format == null || format === "UNKNOWN") {
+            format = forProgramUrl(l.programUrl);
+        }
+        if (format != null && format !== "UNKNOWN") {
+            acceptable = ACCEPTABLE_FORMATS.includes(format);
+            if (!acceptable) {
+                debug(l, format, "is not acceptable");
+                return false;
+            }
+        }
+        debug(l, format, "accepted");
         return true;
     }
+
+    function platformMatches(source, actual) {
+        return source === actual || (source === 'INTERNETVOD' && actual === undefined);
+    }
+
+    /**
+     *
+     * @param {string} platform
+     * @param {Object} mediaObject
+     * @param {function} predictionPredicate Filter for the predictions
+     * @param {function} locationPredicate Filter for the location
+     * @return {boolean}
+     */
+    function playabilityCheck(platform, mediaObject,  predictionPredicate, locationPredicate) {
+        matchedByPrediction = mediaObject.predictions && mediaObject.predictions.some(p => platform === p.platform && predictionPredicate(p));
+        if (matchedByPrediction) {
+            return true;
+        }
+        // fall back to location only
+        return mediaObject.locations && mediaObject.locations
+            .filter(locationFilter)
+            .some(l => platformMatches(platform, l.platform) && locationPredicate(l));
+    }
+
+
+    platforms = {
+        INTERNETVOD: "INTERNETVOD",
+        TVVOD: "TVVOD",
+        PLUSVOD: "PLUSVOD",
+        NPOPLUSVOD: "NPOPLUSVOD"
+    };
+    Object.freeze(platforms);
+
+    states = {
+        ANNOUNCED: "ANNOUNCED",
+        REALIZED: "REALIZED",
+        REVOKED: "REVOKED"
+    }
+    Object.freeze(states);
 
     /**
      *
      * @param {Object} mediaObject
      * @param {function} predictionPredicate Filter for the predictions
+     * @param {function} locationPredicate Filter for the location
      * @return {array}   list of platforms
      */
-    function playability(mediaObject, predictionPredicate, locationPredicate, now) {
+    function playability(mediaObject, predictionPredicate, locationPredicate) {
+        return Object.values(platforms).filter(p => playabilityCheck(p, mediaObject, predictionPredicate, locationPredicate));
+    }
+
+    function inPublicationWindow(object) {
+        const now = clock()
+        const stop = object.publishStop;
+        if (stop != null && ! now < stop) {
+            debug(object, "not published")
+            return false;
+        }
+        const start = object.publishStart;
+        if (start != null && start > now) {
+            debug(object, "not published")
+            return false;
+        }
+        debug(object, "published")
+        return true;
 
     }
-    platforms = {
-            INTERNETVOD: "INTERNETVOD",
-            TVVOD: "TVVOD",
-            PLUSVOD: "PLUSVOD",
-            NPOPLUSVOD: "PLUSVOD"
-    };
-    Object.freeze(platforms);
+    function wasUnderEmbargo(object) {
+        const stop = object.publishStop;
+        const now = clock()
+        return stop != null && ! now < stop;
+    }
 
-   return  Object.freeze({
-        Platform:  platforms,
+    function willBePublished(object) {
+        const now = clock()
+        const start = object.publishStart;
+        return ! inPublicationWindow(now) && (start != null && now < start);
+    }
+
+    return  Object.freeze({
+       Platform:  platforms,
+       State:  states,
 
         /**
          *
@@ -34,8 +176,8 @@ nl_vpro_domain_media_MediaObjects = (function() {
          */
         nowPlayable: function (mediaObject) {
             return playability(mediaObject,
-                p => true,
-                l => true
+                s => s.state === this.State.REALIZED && inPublicationWindow(s),
+                inPublicationWindow
             );
         },
 
@@ -46,16 +188,16 @@ nl_vpro_domain_media_MediaObjects = (function() {
          */
         wasPlayable: function (mediaObject) {
             return playability(mediaObject,
-                p => true,
-                l => true
+                s => s.state === this.State.REVOKED,
+                wasUnderEmbargo
             );
 
         },
 
        willBePlayable: function (mediaObject) {
             return playability(mediaObject,
-                p => true,
-                l => true
+                s => s.state == this.State.ANNOUNCED,
+                willBePublished
             );
         }
     });

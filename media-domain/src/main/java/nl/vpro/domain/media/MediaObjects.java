@@ -949,7 +949,10 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(), Embargo::inPublicationWindow);
+        return playabilityCheck(platform, mediaObject,
+            s -> s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(),
+            Embargo::inPublicationWindow
+        );
     }
 
     /**
@@ -963,7 +966,10 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.REVOKED, Embargo::wasUnderEmbargo);
+        return playabilityCheck(platform, mediaObject,
+            s -> s.getState() == Prediction.State.REVOKED,
+            Embargo::wasUnderEmbargo
+        );
     }
 
     /**
@@ -977,7 +983,10 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.ANNOUNCED, Embargo::willBePublished);
+        return playabilityCheck(platform, mediaObject,
+            s -> s.getState() == Prediction.State.ANNOUNCED,
+            Embargo::willBePublished
+        );
     }
 
     /**
