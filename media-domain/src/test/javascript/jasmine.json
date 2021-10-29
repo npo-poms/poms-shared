@@ -4,8 +4,7 @@
     "**/*[sS]pec.?(m)js"
   ],
   "helpers": [
-    "src/main/resources/META-INF/resources/**/*.js"
   ],
   "stopSpecOnExpectationFailure": false,
-  "random": true
+  "random": false
 }

@@ -1,10 +1,11 @@
 {
   "dependencies": {
     "jasmine": "^3.10.0",
-    "jasmine-core": "^3.10.1"
+    "jasmine-core": "^3.10.1",
+    "@wojtek1150/instanbul": "^0.4.6"
 
   },
   "scripts": {
-    "test": "node node_modules/.bin/jasmine  --config=jasmine.json"
+    "test": "node/node node_modules/.bin/istanbul cover node_modules/.bin/jasmine -- --config=src/test/javascript/jasmine.json"
   }
 }
