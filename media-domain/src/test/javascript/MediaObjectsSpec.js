@@ -8,7 +8,7 @@
 describe('MediaObjects', function() {
     // This is the object we are testing
     require("../../main/resources/META-INF/resources/media-domain/js/MediaObjects")
-    var target = nl_vpro_domain_media_MediaObjects;
+    const target = nl_vpro_domain_media_MediaObjects;
 
     // make sure the tests are entirely predictable. Some cases tests 'embargo'.
     target.setClock(function() {return 1635253200000});
@@ -26,12 +26,12 @@ describe('MediaObjects', function() {
     });
 
     // Following are parameterized tests, which get their specifications from all files in directory that is determined below
-    var fs = require('fs');
-    var path = require('path');
-    var directory = path.dirname(__filename) + '/cases/'
+    const path = require('path');
+    const directory = path.dirname(__filename) + '/cases/'
+    const fs = require('fs');
+    const files = fs.readdirSync(directory);
 
     describe("nowPlayable", function() {
-        var files = fs.readdirSync(directory);
         files.forEach(file => {
             const json = require(directory + '/' + file);
             it(json.description, function () {
@@ -41,7 +41,6 @@ describe('MediaObjects', function() {
     });
 
     describe("wasPlayable", function() {
-        var files = fs.readdirSync(directory);
         files.forEach(file => {
             const json = require(directory + '/' + file);
             it(json.description, function () {
@@ -51,7 +50,6 @@ describe('MediaObjects', function() {
     });
 
     describe("willBePlayable", function() {
-        var files = fs.readdirSync(directory);
         files.forEach(file => {
             const json = require(directory + '/' + file);
             it(json.description, function () {
