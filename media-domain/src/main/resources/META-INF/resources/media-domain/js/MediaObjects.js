@@ -194,12 +194,25 @@ nl_vpro_domain_media_MediaObjects = (function() {
 
         },
 
-       willBePlayable: function (mediaObject) {
+        /**
+         *
+         * @param  {Object} mediaObject
+         * @return {array}  list of platforms the given mediaobject will be playable on
+         */
+        willBePlayable: function (mediaObject) {
             return playability(mediaObject,
-                s => s.state == this.State.ANNOUNCED,
+                s => s.state === this.State.ANNOUNCED,
                 willBePublished
             );
+        },
+
+        /**
+         * For testing purposes the clock can be set
+         */
+        setClock: function(newclock) {
+            clock = newclock;
         }
+
     });
 }).apply();
 

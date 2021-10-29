@@ -10,6 +10,7 @@ describe('MediaObjects', function() {
     require("../../main/resources/META-INF/resources/media-domain/js/MediaObjects")
     var target = nl_vpro_domain_media_MediaObjects;
 
+    target.setClock(function() {return 1635253200000});
     var fs = require('fs');
     var path = require('path');
     var directory = path.dirname(__filename) + '/cases/'
