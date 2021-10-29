@@ -13,7 +13,7 @@ nl_vpro_domain_media_MediaObjects = (function() {
      * @param {function} predictionPredicate Filter for the predictions
      * @return {array}   list of platforms
      */
-    function playability(mediaObject, predictionPredicate, locationPredicate) {
+    function playability(mediaObject, predictionPredicate, locationPredicate, now) {
 
     }
     platforms = {

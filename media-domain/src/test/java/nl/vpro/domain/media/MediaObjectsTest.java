@@ -12,11 +12,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import nl.vpro.domain.media.support.OwnerType;
@@ -25,6 +27,11 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
 
+import static nl.vpro.domain.Embargos.CLOCK;
+import static nl.vpro.domain.media.Platform.INTERNETVOD;
+import static nl.vpro.domain.media.Platform.PLUSVOD;
+import static nl.vpro.domain.media.Prediction.State.REALIZED;
+import static nl.vpro.domain.media.Prediction.State.REVOKED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -38,13 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MediaObjectsTest {
     static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
     static {
-        MediaObjects.CLOCK = Clock.fixed(NOW , Schedule.ZONE_ID);
+        CLOCK = Clock.fixed(NOW , Schedule.ZONE_ID);
     }
 
     @Test
     public void sortDate() {
         Program program = new Program();
-        assertThat(Math.abs(MediaObjects.getSortInstant(program).toEpochMilli() - System.currentTimeMillis())).isLessThan(10000);
+        assertThat(Math.abs(MediaObjects.getSortInstant(program).toEpochMilli() - CLOCK.millis())).isLessThan(10000);
         Instant publishDate = Instant.ofEpochMilli(1344043500362L);
         program.setPublishStartInstant(publishDate);
         assertThat(MediaObjects.getSortInstant(program)).isEqualTo(publishDate);
@@ -304,8 +311,8 @@ public class MediaObjectsTest {
 
     @Test
     public void testGetPlatformNamesInLowerCase() {
-        Prediction p1 = new Prediction(Platform.PLUSVOD);
-        Prediction p2 = new Prediction(Platform.INTERNETVOD);
+        Prediction p1 = new Prediction(PLUSVOD);
+        Prediction p2 = new Prediction(INTERNETVOD);
         Prediction p3 = new Prediction(Platform.NPOPLUSVOD);
         Collection<Prediction> predictions = new ArrayList<>();
         predictions.add(p1);
@@ -318,9 +325,9 @@ public class MediaObjectsTest {
 
     @Test
     public void testGetPlatformNamesInLowerCaseNotAvailable() {
-        Prediction p1 = new Prediction(Platform.PLUSVOD);
+        Prediction p1 = new Prediction(PLUSVOD);
         p1.setPlannedAvailability(false);
-        Prediction p2 = new Prediction(Platform.INTERNETVOD);
+        Prediction p2 = new Prediction(INTERNETVOD);
         p2.setPlannedAvailability(false);
         Prediction p3 = new Prediction(Platform.NPOPLUSVOD);
         Collection<Prediction> predictions = new ArrayList<>();
@@ -380,47 +387,67 @@ public class MediaObjectsTest {
 
     public static class Playability {
 
+        private static MediaBuilder.ProgramBuilder fixed() {
+            return MediaBuilder
+                .broadcast()
+                .mid("mid_123")
+                .creationDate(CLOCK.instant().minus(Duration.ofDays(1)))
+                .workflow(Workflow.PUBLISHED)
+                ;
+
+        }
+
         public static Stream<Arguments> nowCases() {
             return Stream.of(
                 Arguments.of(
-                    "a program with just a legacy location",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
+                    "just a legacy location",
+                    fixed()
                         .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
                         .build(),
-                    new Platform[] { Platform.INTERNETVOD}
+                    new Platform[] { INTERNETVOD}
                 ),
                 Arguments.of(
-                    "A program with a location with explit INTERNETVOD",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
-                        .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build())
+                    "just a legacy windows media location",
+                    fixed()
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.wmv").build())
                         .build(),
-                    new Platform[] { Platform.INTERNETVOD}
+                    new Platform[] { }
                 ),
                 Arguments.of(
-                    "A program with a location with explicit PLUSVOD",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
-                        .locations(Location.builder().platform(Platform.PLUSVOD).programUrl("https://bla.com/foobar.mp4").build())
+                    "a location with explicit INTERNETVOD",
+                    fixed()
+                        .locations(
+                            Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build(),
+                            Location.builder().platform(PLUSVOD).workflow(Workflow.DELETED).programUrl("https://bla.com/deleted.mp4").build()
+                        )
                         .build(),
-                    new Platform[] { Platform.PLUSVOD}
+                    new Platform[] { INTERNETVOD}
                 ),
                 Arguments.of(
-                    "A program with realized prediction",
-                    MediaBuilder.broadcast().mid("mid_123")
+                    "a location with explicit PLUSVOD",
+                    fixed()
+                        .locations(
+                            Location.builder().platform(PLUSVOD).programUrl("https://bla.com/foobar.mp4").build(),
+                            Location.builder().platform(PLUSVOD).workflow(Workflow.DELETED).programUrl("https://bla.com/deleted.mp4").build(),
+                            Location.builder().platform(PLUSVOD).publishStop(CLOCK.instant().minusSeconds(10)).programUrl("https://bla.com/expired.mp4").build()
+                        )
+                        .build(),
+                    new Platform[] { PLUSVOD}
+                ),
+                Arguments.of(
+                    "realized prediction",
+                    fixed()
                         .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
-                        .predictions(Prediction.builder().platform(Platform.INTERNETVOD).build())
+                        .predictions(Prediction.builder().platform(INTERNETVOD).build())
                         .build(),
-                    new Platform[] { Platform.INTERNETVOD}
+                    new Platform[] { INTERNETVOD}
                 ),
                 Arguments.of(
-                    "A program with realized prediction but no locations",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
-                        .predictions(Prediction.builder().platform(Platform.PLUSVOD).state(Prediction.State.REALIZED).build())
+                    "realized prediction but no locations",
+                    fixed()
+                        .predictions(Prediction.builder().platform(PLUSVOD).state(REALIZED).build())
                         .build(),
-                    new Platform[] { Platform.PLUSVOD}
+                    new Platform[] { PLUSVOD}
                 )
             );
         }
@@ -434,104 +461,129 @@ public class MediaObjectsTest {
 
         @ParameterizedTest
         @MethodSource("nowCases")
-        void nowPlayable(String description, MediaObject object, Platform[] expectedPlatforms) {
+        void nowPlayable(String description, MediaObject object, Platform[] expectedPlatforms) throws JsonProcessingException {
             assertThat(MediaObjects.nowPlayable(object)).containsExactly(expectedPlatforms);
+            // should still be valid if mediaobject gets published
+            MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
+            assertThat(MediaObjects.nowPlayable(published)).containsExactly(expectedPlatforms);
         }
 
 
         public static Stream<Arguments> wasCases() {
             return Stream.of(
                 Arguments.of(
-                    "a program with just a legacy revoked location",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
+                    "just a legacy revoked location",
+                   fixed()
                         .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
                         .build(),
-                    new Platform[] { Platform.INTERNETVOD}
+                    new Platform[] { INTERNETVOD}
                 ),
                 Arguments.of(
-                    "A program with a location with explit INTERNETVOD",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
-                        .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
+                    "an expired location with explicit INTERNETVOD",
+                    fixed()
+
+                        .locations(Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
                         .build(),
-                    new Platform[] { Platform.INTERNETVOD}
+                    new Platform[] { INTERNETVOD}
                 ),
                 Arguments.of(
-                    "A program with a location with explicit PLUSVOD",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
-                        .locations(Location.builder().platform(Platform.PLUSVOD).programUrl("https://bla.com/foobar.mp4").build())
+                    "an expired location with explicit INTERNETVOD",
+                    fixed()
+                        .locations(Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
                         .build(),
-                    new Platform[] { Platform.PLUSVOD}
+                    new Platform[] { INTERNETVOD}
                 ),
                 Arguments.of(
-                    "A program with realized prediction",
-                    MediaBuilder.broadcast().mid("mid_123")
-                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
-                        .predictions(Prediction.builder().platform(Platform.INTERNETVOD).build())
+                    "an expired location with explicit PLUSVOD",
+                    fixed()
+                        .locations(Location.builder().platform(PLUSVOD).publishStop(CLOCK.instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build())
                         .build(),
-                    new Platform[] { Platform.INTERNETVOD}
+                    new Platform[] { PLUSVOD }
                 ),
                 Arguments.of(
-                    "A program with realized prediction but no locations",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
-                        .predictions(Prediction.builder().platform(Platform.PLUSVOD).state(Prediction.State.REALIZED).build())
+                    "realized prediction",
+                    fixed()
+                        .locations(Location.builder().platform(null).publishStop(CLOCK.instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build())
+                        .predictions(Prediction.builder().platform(PLUSVOD).state(REALIZED).build())
                         .build(),
-                    new Platform[] { Platform.PLUSVOD}
+                    new Platform[] { INTERNETVOD }
+                ),
+                Arguments.of(
+                    "revoked prediction",
+                    fixed()
+                        .locations(
+                            Location.builder().platform(null).publishStop(CLOCK.instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build()
+                        )
+                        .predictions(Prediction.builder().platform(INTERNETVOD).state(REVOKED).build())
+                        .build(),
+                    new Platform[] { INTERNETVOD }
+                ),
+                Arguments.of(
+                    "revoked prediction but no locations",
+                    fixed()
+                        .predictions(Prediction.builder().platform(PLUSVOD).state(REVOKED).build())
+                        .build(),
+                    new Platform[] { PLUSVOD}
+                ),
+                Arguments.of(
+                    "realized and revoked prediction but no locations",
+                    fixed()
+                        .predictions(
+                            Prediction.builder().platform(PLUSVOD).state(REALIZED).build(),
+                            Prediction.builder().platform(INTERNETVOD).state(REVOKED).build()
+                        )
+                        .build(),
+                    new Platform[] { INTERNETVOD}
                 )
             );
         }
 
         @ParameterizedTest
         @MethodSource("wasCases")
-        void wasPlayable(String description, MediaObject object, Platform[] expectedPlatforms) {
+        void wasPlayable(String description, MediaObject object, Platform[] expectedPlatforms) throws JsonProcessingException {
             assertThat(MediaObjects.wasPlayable(object)).containsExactly(expectedPlatforms);
-
+            // should still be valid if mediaobject gets published
+            MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
+            assertThat(MediaObjects.wasPlayable(published)).containsExactly(expectedPlatforms);
         }
 
         public static Stream<Arguments> willCases() {
             return Stream.of(
                 Arguments.of(
-                    "a program with just a legacy revoked location",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
+                    "just a legacy revoked location",
+                    fixed()
                         .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
                         .build(),
-                    new Platform[] { Platform.INTERNETVOD}
+                    new Platform[] { INTERNETVOD}
                 ),
                 Arguments.of(
-                    "A program with a location with explit INTERNETVOD",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
-                        .locations(Location.builder().platform(Platform.INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
+                    "a location with explicit INTERNETVOD",
+                    fixed()
+                        .locations(Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
                         .build(),
-                    new Platform[] { Platform.INTERNETVOD}
+                    new Platform[] { INTERNETVOD}
                 ),
                 Arguments.of(
-                    "A program with a location with explicit PLUSVOD",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
-                        .locations(Location.builder().platform(Platform.PLUSVOD).programUrl("https://bla.com/foobar.mp4").build())
+                    "a location with explicit PLUSVOD",
+                    fixed()
+                        .locations(Location.builder().platform(PLUSVOD).programUrl("https://bla.com/foobar.mp4").build())
                         .build(),
-                    new Platform[] { Platform.PLUSVOD}
+                    new Platform[] { PLUSVOD}
                 ),
                 Arguments.of(
-                    "A program with realized prediction",
-                    MediaBuilder.broadcast().mid("mid_123")
+                    "realized prediction",
+                    fixed()
                         .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
-                        .predictions(Prediction.builder().platform(Platform.INTERNETVOD).build())
+                        .predictions(Prediction.builder().platform(INTERNETVOD).build())
                         .build(),
-                    new Platform[] { Platform.INTERNETVOD}
+                    new Platform[] { INTERNETVOD}
                 ),
                 Arguments.of(
-                    "A program with realized prediction but no locations",
-                    MediaBuilder.broadcast()
-                        .mid("mid_123")
-                        .predictions(Prediction.builder().platform(Platform.PLUSVOD).state(Prediction.State.REALIZED).build())
+                    "realized prediction but no locations",
+                    fixed()
+                        .predictions(Prediction.builder().platform(PLUSVOD).state(REALIZED).build())
                         .build(),
-                    new Platform[] { Platform.PLUSVOD}
+                    new Platform[] { PLUSVOD}
                 )
             );
         }
@@ -540,11 +592,20 @@ public class MediaObjectsTest {
         @MethodSource("willCases")
         void willBePlayable(String description, MediaObject object, Platform[] expectedPlatforms) {
             assertThat(MediaObjects.willBePlayable(object)).containsExactly(expectedPlatforms);
+            //
         }
 
         @Test
-        void createIsJson() {
-            nowCases().forEach(a -> {
+        public void createJson() {
+            createJson("now", nowCases());
+            createJson("will", willCases());
+            createJson("was", wasCases());
+        }
+
+        void createJson(String dir, Stream<Arguments> cases) {
+            File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/" + dir);
+            dest.mkdirs();
+            cases.forEach(a -> {
                 try {
                     String description = (String) a.get()[0];
                     ObjectNode result = Jackson2Mapper.getInstance().createObjectNode();
@@ -553,7 +614,7 @@ public class MediaObjectsTest {
                     ObjectNode mediaObject = Jackson2Mapper.getInstance().valueToTree(a.get()[1]);
                     result.put("mediaobject", mediaObject);
                     Jackson2Mapper.getPrettyPublisherInstance().writeValueAsString(result);
-                    File file = new File("/Users/michiel/github/npo-poms/poms-shared/media-domain/src/test/javascript/cases/now/", description + ".json");
+                    File file = new File(dest,  description + ".json");
                     Jackson2Mapper.getPrettyPublisherInstance().writer().writeValue(new FileOutputStream(file), result);
                 } catch (IOException e) {
                     log.error(e.getMessage(), e);

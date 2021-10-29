@@ -1,0 +1,28 @@
+{
+  "description" : "just a legacy windows media location",
+  "expectedPlatforms" : [ ],
+  "mediaobject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
+    "embeddable" : true,
+    "broadcasters" : [ ],
+    "genres" : [ ],
+    "countries" : [ ],
+    "languages" : [ ],
+    "ageRating" : "ALL",
+    "locations" : [ {
+      "programUrl" : "https://bla.com/foobar.wmv",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION"
+    } ]
+  }
+}

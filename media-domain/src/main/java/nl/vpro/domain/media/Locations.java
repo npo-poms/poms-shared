@@ -225,7 +225,7 @@ public class Locations {
         Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
         if (avAttributes.isPresent()) {
             Location location = createOrFindLocation(program, locationUrl, owner, platform);
-            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces, Instant.now());
+            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces, Embargos.CLOCK.instant());
         } else {
             log.warn("Puboption {} is explicitly ignored, not adding location for {}", pubOptie, program);
         }

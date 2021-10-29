@@ -2076,7 +2076,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                     for (Location location : MediaObject.this.getLocations()) {
                         if (location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                                && prediction.inPublicationWindow(Instant.now())) {
+                                && prediction.inPublicationWindow(Embargos.CLOCK.instant())) {
                             log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction,
                                     location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
@@ -2289,7 +2289,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         } else {
             locations.add(location);
             location.setParent(this);
-            if (location.hasPlatform() && location.isPublishable(Instant.now())) {
+            if (location.hasPlatform() && location.isPublishable(Embargos.CLOCK.instant())) {
                 realizePrediction(location);
             }
         }

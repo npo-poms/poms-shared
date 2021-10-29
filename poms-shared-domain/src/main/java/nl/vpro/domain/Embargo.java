@@ -4,6 +4,8 @@ import java.time.Instant;
 
 import com.google.common.collect.Range;
 
+import static nl.vpro.domain.Embargos.CLOCK;
+
 /**
  * An object having or defining a publication embargo, meaning that it has publish start and stop instants.
  *
@@ -13,6 +15,8 @@ import com.google.common.collect.Range;
  * @since 5.3
  */
 public interface Embargo {
+
+
 
     Instant getPublishStartInstant();
 
@@ -43,11 +47,11 @@ public interface Embargo {
     }
 
     default boolean isUnderEmbargo() {
-        return isUnderEmbargo(Instant.now());
+        return isUnderEmbargo(CLOCK.instant());
     }
 
     default boolean wasUnderEmbargo() {
-        return wasUnderEmbargo(Instant.now());
+        return wasUnderEmbargo(CLOCK.instant());
     }
 
     default boolean wasUnderEmbargo(Instant now) {
@@ -60,7 +64,7 @@ public interface Embargo {
      * Is now published, but will not any more be at some point in the future
      */
     default boolean willBeUnderEmbargo() {
-        return willBeUnderEmbargo(Instant.now());
+        return willBeUnderEmbargo(CLOCK.instant());
     }
 
     default boolean willBeUnderEmbargo(Instant now) {
@@ -72,11 +76,15 @@ public interface Embargo {
      * Is now under embargo, but will not any more be at some point in the future
      */
     default boolean willBePublished() {
-        return willBePublished(Instant.now());
+        return willBePublished(CLOCK.instant());
     }
 
     default boolean willBePublished(Instant now) {
         return isUnderEmbargo(now) && (getPublishStartInstant() != null && now.isBefore(getPublishStartInstant()));
+    }
+
+    default boolean inPublicationWindow() {
+        return inPublicationWindow(CLOCK.instant());
     }
 
     default boolean inPublicationWindow(Instant now) {

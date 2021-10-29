@@ -1,10 +1,12 @@
 package nl.vpro.domain;
 
+import java.time.Clock;
 import java.time.Instant;
 import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.google.common.collect.Range;
 
 /**
@@ -13,6 +15,9 @@ import com.google.common.collect.Range;
  * @since 5.3
  */
 public class Embargos {
+
+    public static Clock CLOCK = Clock.systemUTC();
+
 
     private static final String PUBLISH_START = "publishstart";
     private static final String PUBLISH_STOP = "publishstop";

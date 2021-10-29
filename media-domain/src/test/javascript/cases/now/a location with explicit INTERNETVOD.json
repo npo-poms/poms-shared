@@ -1,14 +1,14 @@
 {
-  "description" : "A program with a location with explit INTERNETVOD",
+  "description" : "a location with explicit INTERNETVOD",
   "expectedPlatforms" : [ "INTERNETVOD" ],
   "mediaobject" : {
     "objectType" : "program",
     "mid" : "mid_123",
     "type" : "BROADCAST",
     "avType" : "MIXED",
-    "workflow" : "FOR_PUBLICATION",
-    "sortDate" : 1635492557584,
-    "creationDate" : 1635492557584,
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
     "embeddable" : true,
     "broadcasters" : [ ],
     "genres" : [ ],
@@ -20,12 +20,21 @@
       "platform" : "INTERNETVOD"
     } ],
     "locations" : [ {
+      "programUrl" : "https://bla.com/deleted.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "DELETED",
+      "platform" : "PLUSVOD"
+    }, {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
         "avFileFormat" : "UNKNOWN"
       },
       "owner" : "BROADCASTER",
-      "creationDate" : 1635492557584,
+      "creationDate" : 1635253200000,
       "workflow" : "FOR_PUBLICATION",
       "platform" : "INTERNETVOD"
     } ]

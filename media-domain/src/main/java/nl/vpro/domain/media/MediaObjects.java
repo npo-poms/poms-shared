@@ -7,7 +7,8 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.time.*;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -30,6 +31,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.ObjectFilter;
 
+import static nl.vpro.domain.Embargos.CLOCK;
 import static nl.vpro.domain.media.support.Workflow.*;
 
 
@@ -45,7 +47,6 @@ public class MediaObjects {
     private MediaObjects() {
     }
 
-    protected static Clock CLOCK = Clock.systemUTC();
 
     public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
         return first == second ||
@@ -879,8 +880,8 @@ public class MediaObjects {
 
     public static List<Person> getPersons(MediaObject o) {
         return o.getPersons();
-
     }
+
     public static <T extends PublishableObject<?>> boolean revokeRelatedPublishables(MediaObject media, Collection<T> publishables, Instant now, Runnable callbackOnChange) {
         boolean foundRevokedPublishable = false;
         for(T publishable : publishables) {
@@ -891,7 +892,6 @@ public class MediaObjects {
                 PublishableObjectAccess.setWorkflow(publishable, Workflow.REVOKED);
                 foundRevokedPublishable = true;
             }
-
         }
 
         if(foundRevokedPublishable &&
@@ -930,8 +930,6 @@ public class MediaObjects {
         ).distinct();
     }
 
-
-
     /**
      * Whether this mediaobject is playable in a NPO player.
      * @since 5.11
@@ -950,89 +948,63 @@ public class MediaObjects {
     /**
      * @since 5.31
      */
-    public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
-        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(now), l -> l.inPublicationWindow(now));
-    }
-
-    /**
-     * @since 5.31
-     */
-    public static Platform[] nowPlayable(@NonNull MediaObject mediaObject, @NonNull Instant now) {
-        return Arrays.stream(Platform.values()).filter(p -> nowPlayable(p, mediaObject, now)).toArray(Platform[]::new);
-    }
-
-    /**
-     * @since 5.31
-     */
     public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return nowPlayable(platform, mediaObject, CLOCK.instant());
+        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(), Embargo::inPublicationWindow);
     }
 
     /**
      * @since 5.31
      */
-     public static Platform[] nowPlayable(@NonNull MediaObject mediaObject) {
-        return nowPlayable(mediaObject, CLOCK.instant());
+    public static Platform[] nowPlayable(@NonNull MediaObject mediaObject) {
+        return Arrays.stream(Platform.values()).filter(p -> nowPlayable(p, mediaObject)).toArray(Platform[]::new);
     }
 
-    /**
-     * @since 5.31
-     */
-    public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
-        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.REVOKED && s.inPublicationWindow(now), l -> l.wasUnderEmbargo(now));
-    }
     /**
      * @since 5.31
      */
     public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-         return wasPlayable(platform, mediaObject, CLOCK.instant());
+        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.REVOKED, Embargo::wasUnderEmbargo);
     }
 
     /**
      * @since 5.31
      */
-    public static Platform[] wasPlayable(@NonNull MediaObject mediaObject, @NonNull Instant now) {
-        return Arrays.stream(Platform.values()).filter(p -> wasPlayable(p, mediaObject, now)).toArray(Platform[]::new);
-    }
-    /**
-     * @since 5.31
-     */
-     public static Platform[] wasPlayable(@NonNull MediaObject mediaObject) {
-        return wasPlayable(mediaObject, CLOCK.instant());
-    }
-
-    /**
-
-    /**
-     * @since 5.31
-     */
-    public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject, @NonNull Instant now) {
-        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.ANNOUNCED && s.inPublicationWindow(now), l -> l.willBePublished(now));
+    public static Platform[] wasPlayable(@NonNull MediaObject mediaObject) {
+        return Arrays.stream(Platform.values()).filter(p -> wasPlayable(p, mediaObject)).toArray(Platform[]::new);
     }
 
     /**
      * @since 5.31
      */
     public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return willBePlayable(platform, mediaObject, CLOCK.instant());
+        return playabilityCheck(platform, mediaObject, s -> s.getState() == Prediction.State.ANNOUNCED, Embargo::willBePublished);
     }
-
 
     /**
      * @since 5.31
      */
-    public static Platform[] willBePlayable(@NonNull MediaObject mediaObject, @NonNull Instant now) {
-        return Arrays.stream(Platform.values()).filter(p -> willBePlayable(p, mediaObject, now)).toArray(Platform[]::new);
+    public static Platform[] willBePlayable(@NonNull MediaObject mediaObject) {
+        return Arrays.stream(Platform.values()).filter(p -> willBePlayable(p, mediaObject)).toArray(Platform[]::new);
+    }
+
+    static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(AVFileFormat.MP3, AVFileFormat.MP4, AVFileFormat.M4V, AVFileFormat.H264)));
+
+    protected static boolean locationFilter(Location l) {
+        if (l.isDeleted()) {
+            return false;
+        }
+        // legacy filter on av type
+        AVFileFormat format = l.getAvFileFormat();
+        if (format == null || format == AVFileFormat.UNKNOWN) {
+            format = AVFileFormat.forProgramUrl(l.getProgramUrl());
+        }
+        if (format != null && format != AVFileFormat.UNKNOWN) {
+            return ACCEPTABLE_FORMATS.contains(format);
+        } else {
+            return true;
+        }
     }
     /**
-     * @since 5.31
-     */
-     public static Platform[] willBePlayable(@NonNull MediaObject mediaObject) {
-        return willBePlayable(mediaObject, CLOCK.instant());
-    }
-
-
-     /**
      * @since 5.31
      */
     protected static boolean playabilityCheck(@NonNull Platform platform, @NonNull MediaObject mediaObject,  Predicate<Prediction> prediction, Predicate<Location> location) {
@@ -1041,7 +1013,9 @@ public class MediaObjects {
             return true;
         }
         // fall back to location only
-        return  mediaObject.getLocations().stream().anyMatch(l -> platform.matches(l.getPlatform()) && location.test(l));
+        return  mediaObject.getLocations().stream()
+            .filter(MediaObjects::locationFilter)
+            .anyMatch(l -> platform.matches(l.getPlatform()) && location.test(l));
     }
 
 

@@ -1,14 +1,14 @@
 {
-  "description" : "a program with just a legacy location",
+  "description" : "just a legacy revoked location",
   "expectedPlatforms" : [ "INTERNETVOD" ],
   "mediaobject" : {
     "objectType" : "program",
     "mid" : "mid_123",
     "type" : "BROADCAST",
     "avType" : "MIXED",
-    "workflow" : "FOR_PUBLICATION",
-    "sortDate" : 1635492557491,
-    "creationDate" : 1635492557491,
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
     "embeddable" : true,
     "broadcasters" : [ ],
     "genres" : [ ],
@@ -21,8 +21,9 @@
         "avFileFormat" : "UNKNOWN"
       },
       "owner" : "BROADCASTER",
-      "creationDate" : 1635492557563,
-      "workflow" : "FOR_PUBLICATION"
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION",
+      "publishStop" : 1635253190000
     } ]
   }
 }

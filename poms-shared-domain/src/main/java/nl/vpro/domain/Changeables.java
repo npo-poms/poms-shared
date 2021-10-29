@@ -64,7 +64,7 @@ public class Changeables {
         @NonNull String[] propertyNames) {
         boolean updated = false;
 
-        final Instant now = Instant.now();
+        final Instant now = Embargos.CLOCK.instant();
 
         if(changeable.getCreationInstant() == null) {
             changeable.setCreationInstant(now);

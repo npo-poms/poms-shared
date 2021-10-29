@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Range;
 import com.google.common.collect.UnmodifiableIterator;
 
+import nl.vpro.domain.Embargos;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -78,7 +79,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     }
 
     public static LocalDate guideDay() {
-        return guideDay(Instant.now());
+        return guideDay(Embargos.CLOCK.instant());
     }
 
     public static Instant toInstant(LocalDateTime time) {

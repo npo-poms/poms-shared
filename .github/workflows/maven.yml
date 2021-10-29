@@ -14,7 +14,8 @@ jobs:
       MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
     steps:
       - name: Cancel previous Action
-        uses: styfle/cancel-workflow-action@0.6.0
+        uses: styfle/cancel-workflow-action@0.9.1
+        continue-on-error: true # for act
         with:
           access_token: ${{ github.token }}
       - uses: actions/checkout@v2

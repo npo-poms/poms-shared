@@ -7,12 +7,15 @@
 // I didn't figure out yet how to run in intellij
 
 describe('MediaObjects', function() {
-
+    console.log("hallo")
     require("../../main/resources/META-INF/resources/media-domain/js/MediaObjects")
-    var fs = require('fs');
-    var directory = '/Users/michiel/github/npo-poms/poms-shared/media-domain/src/test/javascript/cases/'
-
     var target = nl_vpro_domain_media_MediaObjects;
+
+    var fs = require('fs');
+    var path = require('path');
+    var directory = path.dirname(__filename) + '/cases/'
+
+    console.log("hoi", target);
 
     describe("platform", function() {
         it('must contain strings', function() {
