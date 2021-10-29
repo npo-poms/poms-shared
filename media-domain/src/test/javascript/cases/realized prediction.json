@@ -1,7 +1,9 @@
 {
-  "description" : "just a legacy revoked location",
-  "expectedPlatforms" : [ "INTERNETVOD" ],
-  "mediaobject" : {
+  "description" : "realized prediction",
+  "nowExpectedPlatforms" : [ "INTERNETVOD" ],
+  "wasExpectedPlatforms" : [ ],
+  "willExpectedPlatforms" : [ ],
+  "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
     "type" : "BROADCAST",
@@ -15,6 +17,10 @@
     "countries" : [ ],
     "languages" : [ ],
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "INTERNETVOD"
+    } ],
     "locations" : [ {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
@@ -22,8 +28,7 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION",
-      "publishStop" : 1635253190000
+      "workflow" : "FOR_PUBLICATION"
     } ]
   }
 }

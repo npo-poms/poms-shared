@@ -1,7 +1,9 @@
 {
-  "description" : "just a legacy windows media location",
-  "expectedPlatforms" : [ ],
-  "mediaobject" : {
+  "description" : "an expired location with explicit INTERNETVOD",
+  "nowExpectedPlatforms" : [ ],
+  "wasExpectedPlatforms" : [ "INTERNETVOD" ],
+  "willExpectedPlatforms" : [ ],
+  "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
     "type" : "BROADCAST",
@@ -16,13 +18,15 @@
     "languages" : [ ],
     "ageRating" : "ALL",
     "locations" : [ {
-      "programUrl" : "https://bla.com/foobar.wmv",
+      "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
         "avFileFormat" : "UNKNOWN"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION"
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "INTERNETVOD",
+      "publishStop" : 1635253190000
     } ]
   }
 }

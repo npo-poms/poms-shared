@@ -1,7 +1,9 @@
 {
-  "description" : "an expired location with explicit INTERNETVOD",
-  "expectedPlatforms" : [ "INTERNETVOD" ],
-  "mediaobject" : {
+  "description" : "revoked prediction and expired location",
+  "nowExpectedPlatforms" : [ ],
+  "wasExpectedPlatforms" : [ "INTERNETVOD", "PLUSVOD" ],
+  "willExpectedPlatforms" : [ ],
+  "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
     "type" : "BROADCAST",
@@ -15,6 +17,10 @@
     "countries" : [ ],
     "languages" : [ ],
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "PLUSVOD"
+    } ],
     "locations" : [ {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
@@ -23,7 +29,6 @@
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
       "workflow" : "FOR_PUBLICATION",
-      "platform" : "INTERNETVOD",
       "publishStop" : 1635253190000
     } ]
   }

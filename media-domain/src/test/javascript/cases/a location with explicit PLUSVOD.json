@@ -1,7 +1,9 @@
 {
   "description" : "a location with explicit PLUSVOD",
-  "expectedPlatforms" : [ "PLUSVOD" ],
-  "mediaobject" : {
+  "nowExpectedPlatforms" : [ "PLUSVOD" ],
+  "wasExpectedPlatforms" : [ ],
+  "willExpectedPlatforms" : [ ],
+  "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
     "type" : "BROADCAST",

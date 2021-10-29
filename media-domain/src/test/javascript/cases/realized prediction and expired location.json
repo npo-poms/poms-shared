@@ -1,7 +1,9 @@
 {
-  "description" : "a location with explicit INTERNETVOD",
-  "expectedPlatforms" : [ "INTERNETVOD" ],
-  "mediaobject" : {
+  "description" : "realized prediction and expired location",
+  "nowExpectedPlatforms" : [ "PLUSVOD" ],
+  "wasExpectedPlatforms" : [ "INTERNETVOD" ],
+  "willExpectedPlatforms" : [ ],
+  "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
     "type" : "BROADCAST",
@@ -17,18 +19,9 @@
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REALIZED",
-      "platform" : "INTERNETVOD"
+      "platform" : "PLUSVOD"
     } ],
     "locations" : [ {
-      "programUrl" : "https://bla.com/deleted.mp4",
-      "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
-      },
-      "owner" : "BROADCASTER",
-      "creationDate" : 1635253200000,
-      "workflow" : "DELETED",
-      "platform" : "PLUSVOD"
-    }, {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
         "avFileFormat" : "UNKNOWN"
@@ -36,7 +29,7 @@
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
       "workflow" : "FOR_PUBLICATION",
-      "platform" : "INTERNETVOD"
+      "publishStop" : 1635253190000
     } ]
   }
 }

@@ -999,10 +999,13 @@ public class MediaObjects {
             format = AVFileFormat.forProgramUrl(l.getProgramUrl());
         }
         if (format != null && format != AVFileFormat.UNKNOWN) {
-            return ACCEPTABLE_FORMATS.contains(format);
-        } else {
-            return true;
+            boolean acceptable = ACCEPTABLE_FORMATS.contains(format);
+            if (!acceptable) {
+                log.debug("Ignoring {}", l);
+                return false;
+            }
         }
+        return true;
     }
     /**
      * @since 5.31

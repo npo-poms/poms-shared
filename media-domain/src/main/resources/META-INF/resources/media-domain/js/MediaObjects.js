@@ -45,7 +45,7 @@ nl_vpro_domain_media_MediaObjects = (function() {
          * @return {array}  list of platforms the given mediaobject is was playable on
          */
         wasPlayable: function (mediaObject) {
-            return playability(mediaobject,
+            return playability(mediaObject,
                 p => true,
                 l => true
             );
@@ -53,7 +53,7 @@ nl_vpro_domain_media_MediaObjects = (function() {
         },
 
        willBePlayable: function (mediaObject) {
-            return playability(mediaobject,
+            return playability(mediaObject,
                 p => true,
                 l => true
             );

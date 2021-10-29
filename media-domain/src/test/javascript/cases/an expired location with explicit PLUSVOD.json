@@ -1,7 +1,9 @@
 {
-  "description" : "just a legacy location",
-  "expectedPlatforms" : [ "INTERNETVOD" ],
-  "mediaobject" : {
+  "description" : "an expired location with explicit PLUSVOD",
+  "nowExpectedPlatforms" : [ ],
+  "wasExpectedPlatforms" : [ "PLUSVOD" ],
+  "willExpectedPlatforms" : [ ],
+  "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
     "type" : "BROADCAST",
@@ -22,7 +24,9 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION"
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "PLUSVOD",
+      "publishStop" : 1635253190000
     } ]
   }
 }

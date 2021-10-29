@@ -1,10 +1,9 @@
 // This is a jasmine tests for 'utils.js'.
-// It is run by jasmine maven plugin.
+// It is run by mvn -Pnpm test (and on github actions)
 // To run in intellij:
 //   - install jasmine plugin
 //   - install jasmine: sudo npm install -g jasmine
 //   - run jasmine with jasmine package /usr/local/lib/node_modules/jasmine/
-// I didn't figure out yet how to run in intellij
 
 describe('MediaObjects', function() {
     console.log("hallo")
@@ -29,11 +28,32 @@ describe('MediaObjects', function() {
     });
 
     describe("nowPlayable", function() {
-        var files = fs.readdirSync(directory + 'now');
-        files.forEach(nowCase => {
-            const json = require(directory + 'now/' + nowCase);
-            it('all', function () {
-                expect(target.nowPlayable(json.mediaObject)).toBe(json.expectedPlatforms);
+        var files = fs.readdirSync(directory);
+        files.forEach(file => {
+            const json = require(directory + '/' + file);
+            console.log(json)
+            it(json.description, function () {
+                expect(target.nowPlayable(json.mediaObject)).toEqual(json.nowExpectedPlatforms);
+            });
+        });
+    });
+
+    describe("wasPlayable", function() {
+        var files = fs.readdirSync(directory);
+        files.forEach(file => {
+            const json = require(directory + '/' + file);
+            it(json.description, function () {
+                expect(target.wasPlayable(json.mediaObject)).toEqual(json.wasExpectedPlatforms);
+            });
+        });
+    });
+
+    describe("willBePlayable", function() {
+        var files = fs.readdirSync(directory);
+        files.forEach(file => {
+            const json = require(directory + '/' + file);
+            it(json.description, function () {
+                expect(target.willBePlayable(json.mediaObject)).toEqual(json.willExpectedPlatforms);
             });
         });
 

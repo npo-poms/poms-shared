@@ -1,7 +1,9 @@
 {
-  "description" : "realized prediction but no locations",
-  "expectedPlatforms" : [ "PLUSVOD" ],
-  "mediaobject" : {
+  "description" : "revoked prediction but no locations",
+  "nowExpectedPlatforms" : [ ],
+  "wasExpectedPlatforms" : [ "PLUSVOD" ],
+  "willExpectedPlatforms" : [ ],
+  "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
     "type" : "BROADCAST",
@@ -16,7 +18,7 @@
     "languages" : [ ],
     "ageRating" : "ALL",
     "predictions" : [ {
-      "state" : "REALIZED",
+      "state" : "REVOKED",
       "platform" : "PLUSVOD"
     } ]
   }
