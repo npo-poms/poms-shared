@@ -6,16 +6,13 @@
 //   - run jasmine with jasmine package /usr/local/lib/node_modules/jasmine/
 
 describe('MediaObjects', function() {
-    console.log("hallo")
+    // This is the object we are testing
     require("../../main/resources/META-INF/resources/media-domain/js/MediaObjects")
     var target = nl_vpro_domain_media_MediaObjects;
 
+    // make sure the tests are entirely predictable. Some cases tests 'embargo'.
     target.setClock(function() {return 1635253200000});
-    var fs = require('fs');
-    var path = require('path');
-    var directory = path.dirname(__filename) + '/cases/'
 
-    console.log("hoi", target);
 
     describe("platform", function() {
         it('must contain strings', function() {
@@ -28,11 +25,15 @@ describe('MediaObjects', function() {
         });
     });
 
+    // Following are parameterized tests, which get their specifications from all files in directory that is determined below
+    var fs = require('fs');
+    var path = require('path');
+    var directory = path.dirname(__filename) + '/cases/'
+
     describe("nowPlayable", function() {
         var files = fs.readdirSync(directory);
         files.forEach(file => {
             const json = require(directory + '/' + file);
-            console.log(json)
             it(json.description, function () {
                 expect(target.nowPlayable(json.mediaObject)).toEqual(json.nowExpectedPlatforms);
             });
