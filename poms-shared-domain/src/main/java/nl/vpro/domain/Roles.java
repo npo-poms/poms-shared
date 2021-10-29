@@ -89,6 +89,8 @@ public class Roles {
     public static final String ARCHIVIST_ROLE = ROLE + ARCHIVIST;
 
     /**
+     * Certain users in POMS backend are allowed to change/add schedule related fields.
+     *
      * https://jira.vpro.nl/browse/MSE-3999
      */
     public static final String SCHEDULE = MEDIA + "SCHEDULE";
