@@ -16,7 +16,11 @@ import com.google.common.collect.Range;
  */
 public class Embargos {
 
-    public static Clock CLOCK = Clock.systemUTC();
+    public static ThreadLocal<Clock> CLOCK = ThreadLocal.withInitial(Clock::systemUTC);
+
+    public static Clock clock() {
+        return CLOCK.get();
+    }
 
 
     private static final String PUBLISH_START = "publishstart";

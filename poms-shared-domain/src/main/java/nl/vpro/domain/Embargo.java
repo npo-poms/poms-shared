@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import com.google.common.collect.Range;
 
-import static nl.vpro.domain.Embargos.CLOCK;
+import static nl.vpro.domain.Embargos.clock;
 
 /**
  * An object having or defining a publication embargo, meaning that it has publish start and stop instants.
@@ -47,11 +47,11 @@ public interface Embargo {
     }
 
     default boolean isUnderEmbargo() {
-        return isUnderEmbargo(CLOCK.instant());
+        return isUnderEmbargo(clock().instant());
     }
 
     default boolean wasUnderEmbargo() {
-        return wasUnderEmbargo(CLOCK.instant());
+        return wasUnderEmbargo(clock().instant());
     }
 
     default boolean wasUnderEmbargo(Instant now) {
@@ -64,7 +64,7 @@ public interface Embargo {
      * Is now published, but will not any more be at some point in the future
      */
     default boolean willBeUnderEmbargo() {
-        return willBeUnderEmbargo(CLOCK.instant());
+        return willBeUnderEmbargo(clock().instant());
     }
 
     default boolean willBeUnderEmbargo(Instant now) {
@@ -76,7 +76,7 @@ public interface Embargo {
      * Is now under embargo, but will not any more be at some point in the future
      */
     default boolean willBePublished() {
-        return willBePublished(CLOCK.instant());
+        return willBePublished(clock().instant());
     }
 
     default boolean willBePublished(Instant now) {
@@ -84,7 +84,7 @@ public interface Embargo {
     }
 
     default boolean inPublicationWindow() {
-        return inPublicationWindow(CLOCK.instant());
+        return inPublicationWindow(clock().instant());
     }
 
     default boolean inPublicationWindow(Instant now) {

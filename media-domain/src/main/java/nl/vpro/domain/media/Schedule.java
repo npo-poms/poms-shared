@@ -79,7 +79,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     }
 
     public static LocalDate guideDay() {
-        return guideDay(Embargos.CLOCK.instant());
+        return guideDay(Embargos.clock().instant());
     }
 
     public static Instant toInstant(LocalDateTime time) {

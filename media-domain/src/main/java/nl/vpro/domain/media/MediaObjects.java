@@ -31,7 +31,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.ObjectFilter;
 
-import static nl.vpro.domain.Embargos.CLOCK;
+import static nl.vpro.domain.Embargos.clock;
 import static nl.vpro.domain.media.support.Workflow.*;
 
 
@@ -525,7 +525,7 @@ public class MediaObjects {
         @NonNull MediaObject media,
         String reason,
         Object... args) {
-        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(CLOCK.instant())) {
+        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(clock().instant())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             appendReason(media, reason, args);
             media.setRepubDestinations(null);

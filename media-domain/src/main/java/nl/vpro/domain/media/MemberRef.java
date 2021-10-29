@@ -670,7 +670,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @PreUpdate
     public void prePersist() {
         if (this.added == null) {
-            this.added = Embargos.CLOCK.instant();
+            this.added = Embargos.clock().instant();
         }
     }
 

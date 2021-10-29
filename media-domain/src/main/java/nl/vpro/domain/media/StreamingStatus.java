@@ -93,7 +93,7 @@ public interface StreamingStatus extends Serializable, Displayable {
 
     default boolean onDvrWithDrm() {
         Instant withDrmOffline = getWithDrmOffline();
-        return hasDrm() && withDrmOffline != null && withDrmOffline.isAfter(Embargos.CLOCK.instant());
+        return hasDrm() && withDrmOffline != null && withDrmOffline.isAfter(Embargos.clock().instant());
     }
 
     default boolean hasWithoutDrm() {
@@ -105,7 +105,7 @@ public interface StreamingStatus extends Serializable, Displayable {
     }
 
     static boolean online(Instant offline) {
-        return offline == null || offline.isAfter(Embargos.CLOCK.instant());
+        return offline == null || offline.isAfter(Embargos.clock().instant());
     }
 
     static Encryption preferredEncryption(StreamingStatus streamingStatus) {

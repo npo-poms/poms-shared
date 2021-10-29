@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,6 +21,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -29,6 +29,7 @@ import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 import static nl.vpro.domain.Embargos.CLOCK;
+import static nl.vpro.domain.Embargos.clock;
 import static nl.vpro.domain.media.Platform.INTERNETVOD;
 import static nl.vpro.domain.media.Platform.PLUSVOD;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,13 +47,17 @@ public class MediaObjectsTest {
     @BeforeAll
     static void init() {
         log.info("Setting clock to {}", NOW);
-        CLOCK = Clock.fixed(NOW , Schedule.ZONE_ID);
+        CLOCK.set(Clock.fixed(NOW , Schedule.ZONE_ID));
+    }
+    @AfterAll
+    static void setClock() {
+        CLOCK.remove();
     }
 
     @Test
     public void sortDate() {
         Program program = new Program();
-        assertThat(Math.abs(MediaObjects.getSortInstant(program).toEpochMilli() - CLOCK.millis())).isLessThan(10000);
+        assertThat(Math.abs(MediaObjects.getSortInstant(program).toEpochMilli() - clock().millis())).isLessThan(10000);
         Instant publishDate = Instant.ofEpochMilli(1344043500362L);
         program.setPublishStartInstant(publishDate);
         assertThat(MediaObjects.getSortInstant(program)).isEqualTo(publishDate);
@@ -388,15 +393,20 @@ public class MediaObjectsTest {
 
     public static class Playability {
 
-        static {
-           init();
+        @BeforeAll
+        static void init (){
+           MediaObjectsTest.init();
+        }
+        @AfterAll
+        static void setClock() {
+            CLOCK.remove();
         }
 
         private static MediaBuilder.ProgramBuilder fixed() {
             return MediaBuilder
                 .broadcast()
                 .mid("mid_123")
-                .creationDate(CLOCK.instant().minus(Duration.ofDays(1)))
+                .creationDate(Embargos.clock().instant().minus(Duration.ofDays(1)))
                 .workflow(Workflow.PUBLISHED)
                 ;
 
@@ -453,7 +463,7 @@ public class MediaObjectsTest {
                         .locations(
                             Location.builder().platform(PLUSVOD).programUrl("https://bla.com/foobar.mp4").build(),
                             Location.builder().platform(PLUSVOD).workflow(Workflow.DELETED).programUrl("https://bla.com/deleted.mp4").build(),
-                            Location.builder().platform(PLUSVOD).publishStop(CLOCK.instant().minusSeconds(10)).programUrl("https://bla.com/expired.mp4").build()
+                            Location.builder().platform(PLUSVOD).publishStop(clock().instant().minusSeconds(10)).programUrl("https://bla.com/expired.mp4").build()
                         )
                         .build(),
                     A_PLUSVOD,
@@ -481,7 +491,7 @@ public class MediaObjectsTest {
                 Arguments.of(
                     "an expired location with explicit PLUSVOD",
                     fixed()
-                        .locations(Location.builder().platform(PLUSVOD).publishStop(CLOCK.instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build())
+                        .locations(Location.builder().platform(PLUSVOD).publishStop(clock().instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build())
                         .build(),
                     A_NONE,
                     A_PLUSVOD,
@@ -512,7 +522,7 @@ public class MediaObjectsTest {
                 Arguments.of(
                     "realized prediction and expired location",
                     fixed()
-                        .locations(Location.builder().platform(null).publishStop(CLOCK.instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build())
+                        .locations(Location.builder().platform(null).publishStop(clock().instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build())
                         .predictions(Prediction.realized().platform(PLUSVOD).build())
                         .build(),
                     A_PLUSVOD,
@@ -523,7 +533,7 @@ public class MediaObjectsTest {
                     "revoked prediction and expired location",
                     fixed()
                         .locations(
-                            Location.builder().platform(null).publishStop(CLOCK.instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build()
+                            Location.builder().platform(null).publishStop(clock().instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build()
                         )
                         .predictions(Prediction.revoked().platform(PLUSVOD).build())
                         .build(),

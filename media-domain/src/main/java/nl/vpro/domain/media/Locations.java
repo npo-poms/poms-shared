@@ -13,12 +13,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
+
+import static nl.vpro.domain.Embargos.clock;
 
 /**
  * @author Michiel Meeuwissen
@@ -225,7 +226,7 @@ public class Locations {
         Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
         if (avAttributes.isPresent()) {
             Location location = createOrFindLocation(program, locationUrl, owner, platform);
-            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces, Embargos.CLOCK.instant());
+            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces, clock().instant());
         } else {
             log.warn("Puboption {} is explicitly ignored, not adding location for {}", pubOptie, program);
         }

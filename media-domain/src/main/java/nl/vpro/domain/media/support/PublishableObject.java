@@ -205,7 +205,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
     @Deprecated
     public boolean isInAllowedPublicationWindow(long millisFromNow) {
-        return inPublicationWindow(Embargos.CLOCK.instant().plusMillis(millisFromNow));
+        return inPublicationWindow(Embargos.clock().instant().plusMillis(millisFromNow));
     }
 
     @Override
