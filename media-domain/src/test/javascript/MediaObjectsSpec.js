@@ -1,5 +1,5 @@
-// This is a jasmine tests for 'utils.js'.
-// It is run by mvn -Pnpm test (and on github actions)
+// This is a jasmine tests for 'MediaObjects.js'.
+// It is run by mvn -Pnpm test (and on github actions, with mvn -DskipTests=false)
 // To run in intellij:
 //   - install jasmine plugin
 //   - install jasmine: sudo npm install -g jasmine
