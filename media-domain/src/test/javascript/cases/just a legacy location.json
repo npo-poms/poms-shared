@@ -9,8 +9,8 @@
     "type" : "BROADCAST",
     "avType" : "MIXED",
     "workflow" : "PUBLISHED",
-    "sortDate" : 1635429852602,
-    "creationDate" : 1635429852602,
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
     "embeddable" : true,
     "broadcasters" : [ ],
     "genres" : [ ],
@@ -23,7 +23,7 @@
         "avFileFormat" : "UNKNOWN"
       },
       "owner" : "BROADCASTER",
-      "creationDate" : 1635516252613,
+      "creationDate" : 1635253200000,
       "workflow" : "FOR_PUBLICATION"
     } ]
   }

@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -42,7 +43,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Slf4j
 public class MediaObjectsTest {
     static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
-    static {
+    @BeforeAll
+    static void init() {
+        log.info("Setting clock to {}", NOW);
         CLOCK = Clock.fixed(NOW , Schedule.ZONE_ID);
     }
 
@@ -384,6 +387,10 @@ public class MediaObjectsTest {
     }
 
     public static class Playability {
+
+        static {
+           init();
+        }
 
         private static MediaBuilder.ProgramBuilder fixed() {
             return MediaBuilder
