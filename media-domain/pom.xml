@@ -67,9 +67,9 @@
       <plugin>
         <groupId>com.github.searls</groupId>
         <artifactId>jasmine-maven-plugin</artifactId>
-        <version>2.2</version>
+        <version>3.0-beta-02</version>
         <configuration>
-          <jsSrcDir>${project.basedir}${file.separator}src${file.separator}main${file.separator}resources${file.separator}META-INF${file.separator}resources${file.separator}npoapi</jsSrcDir>
+          <jsSrcDir>src/main/resources/META-INF/resources/media-domain/js</jsSrcDir>
           <debug>true</debug>
           <sourceIncludes>
             <include>*.js</include>

@@ -1,0 +1,33 @@
+{
+  "description" : "A program with a location with explit INTERNETVOD",
+  "expectedPlatforms" : [ "INTERNETVOD" ],
+  "mediaobject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "FOR_PUBLICATION",
+    "sortDate" : 1635492557584,
+    "creationDate" : 1635492557584,
+    "embeddable" : true,
+    "broadcasters" : [ ],
+    "genres" : [ ],
+    "countries" : [ ],
+    "languages" : [ ],
+    "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "INTERNETVOD"
+    } ],
+    "locations" : [ {
+      "programUrl" : "https://bla.com/foobar.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635492557584,
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "INTERNETVOD"
+    } ]
+  }
+}

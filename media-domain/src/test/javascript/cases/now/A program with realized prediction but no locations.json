@@ -1,0 +1,23 @@
+{
+  "description" : "A program with realized prediction but no locations",
+  "expectedPlatforms" : [ "PLUSVOD" ],
+  "mediaobject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "FOR_PUBLICATION",
+    "sortDate" : 1635492557605,
+    "creationDate" : 1635492557605,
+    "embeddable" : true,
+    "broadcasters" : [ ],
+    "genres" : [ ],
+    "countries" : [ ],
+    "languages" : [ ],
+    "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "PLUSVOD"
+    } ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "description" : "A program with a location with explicit PLUSVOD",
+  "expectedPlatforms" : [ "PLUSVOD" ],
+  "mediaobject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "FOR_PUBLICATION",
+    "sortDate" : 1635492557604,
+    "creationDate" : 1635492557604,
+    "embeddable" : true,
+    "broadcasters" : [ ],
+    "genres" : [ ],
+    "countries" : [ ],
+    "languages" : [ ],
+    "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "PLUSVOD"
+    } ],
+    "locations" : [ {
+      "programUrl" : "https://bla.com/foobar.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635492557604,
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "PLUSVOD"
+    } ]
+  }
+}

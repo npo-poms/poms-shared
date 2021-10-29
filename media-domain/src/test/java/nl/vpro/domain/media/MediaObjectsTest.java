@@ -6,6 +6,7 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.*;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,10 +17,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
+import nl.vpro.jackson2.Jackson2Mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -536,7 +540,25 @@ public class MediaObjectsTest {
         @MethodSource("willCases")
         void willBePlayable(String description, MediaObject object, Platform[] expectedPlatforms) {
             assertThat(MediaObjects.willBePlayable(object)).containsExactly(expectedPlatforms);
+        }
 
+        @Test
+        void createIsJson() {
+            nowCases().forEach(a -> {
+                try {
+                    String description = (String) a.get()[0];
+                    ObjectNode result = Jackson2Mapper.getInstance().createObjectNode();
+                    result.put("description", description);
+                    result.put("expectedPlatforms", Jackson2Mapper.getInstance().valueToTree(a.get()[2]));
+                    ObjectNode mediaObject = Jackson2Mapper.getInstance().valueToTree(a.get()[1]);
+                    result.put("mediaobject", mediaObject);
+                    Jackson2Mapper.getPrettyPublisherInstance().writeValueAsString(result);
+                    File file = new File("/Users/michiel/github/npo-poms/poms-shared/media-domain/src/test/javascript/cases/now/", description + ".json");
+                    Jackson2Mapper.getPrettyPublisherInstance().writer().writeValue(new FileOutputStream(file), result);
+                } catch (IOException e) {
+                    log.error(e.getMessage(), e);
+                }
+            });
         }
     }
 }

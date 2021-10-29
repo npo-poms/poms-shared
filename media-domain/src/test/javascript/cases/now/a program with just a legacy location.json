@@ -1,0 +1,28 @@
+{
+  "description" : "a program with just a legacy location",
+  "expectedPlatforms" : [ "INTERNETVOD" ],
+  "mediaobject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "FOR_PUBLICATION",
+    "sortDate" : 1635492557491,
+    "creationDate" : 1635492557491,
+    "embeddable" : true,
+    "broadcasters" : [ ],
+    "genres" : [ ],
+    "countries" : [ ],
+    "languages" : [ ],
+    "ageRating" : "ALL",
+    "locations" : [ {
+      "programUrl" : "https://bla.com/foobar.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635492557563,
+      "workflow" : "FOR_PUBLICATION"
+    } ]
+  }
+}

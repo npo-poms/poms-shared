@@ -7,7 +7,13 @@ nl_vpro_domain_media_MediaObjects = (function() {
         return true;
     }
 
-    function playability(mediaObject, predicationPredicate, locationPredicate) {
+    /**
+     *
+     * @param {Object} mediaObject
+     * @param {function} predictionPredicate Filter for the predictions
+     * @return {array}   list of platforms
+     */
+    function playability(mediaObject, predictionPredicate, locationPredicate) {
 
     }
     platforms = {
@@ -23,34 +29,33 @@ nl_vpro_domain_media_MediaObjects = (function() {
 
         /**
          *
-         * @param  {[type]} mediaObject
-         * @return {[type]}      list of platforms the given mediaobject is not playable on
+         * @param  {Object} mediaObject
+         * @return {array}     list of platforms the given mediaobject is now playable on
          */
         nowPlayable: function (mediaObject) {
             return playability(mediaObject,
-                // look out with arrow expression, can't be tested with phantomjs
-                function(p) { return true},
-                function(l) { return true;}
+                p => true,
+                l => true
             );
         },
 
         /**
          *
-         * @param  {[type]} mediaObject
-         * @return {[type]}      list of platforms the given mediaobject is not playable on
+         * @param  {Object} mediaObject
+         * @return {array}  list of platforms the given mediaobject is was playable on
          */
         wasPlayable: function (mediaObject) {
             return playability(mediaobject,
-                function(p) { return true},
-                function(l) { return true;}
+                p => true,
+                l => true
             );
 
         },
 
        willBePlayable: function (mediaObject) {
             return playability(mediaobject,
-                function(p) { return true;},
-                function(l) { return true;}
+                p => true,
+                l => true
             );
         }
     });
