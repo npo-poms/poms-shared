@@ -12,8 +12,6 @@ import java.util.function.Predicate;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.Changeables;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -25,6 +23,7 @@ import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
+import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.util.DateUtils.toDate;
 
 
@@ -79,7 +78,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     }
 
     public static LocalDate guideDay() {
-        return guideDay(Changeables.clock().instant());
+        return guideDay(instant());
     }
 
     public static Instant toInstant(LocalDateTime time) {

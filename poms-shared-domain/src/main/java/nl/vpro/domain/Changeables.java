@@ -80,7 +80,7 @@ public class Changeables {
         @NonNull String[] propertyNames) {
         boolean updated = false;
 
-        final Instant now = clock().instant();
+        final Instant now = instant();
 
         if(changeable.getCreationInstant() == null) {
             changeable.setCreationInstant(now);

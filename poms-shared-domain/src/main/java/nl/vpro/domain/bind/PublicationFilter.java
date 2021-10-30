@@ -15,17 +15,15 @@ import nl.vpro.jackson2.Views;
 /**
  * This jackson filter is enabled when using poms domain classes.
  *
- * The idea is that it will not marshall to json objects that are under embargo.
+ * The idea is that it will not marshall objects that are under embargo.
  *
- * In poms this is arranged via hibernate filters, but this could be an alternative, since we publish JSON basicly.
+ * In poms this is arranged via hibernate filters, but this could be an alternative, since we publish JSON basically.
  *
+ * @see CollectionOfPublishable
  * @since 5.31
  */
 @Slf4j
 public class PublicationFilter extends SimpleBeanPropertyFilter {
-
-
-
 
     public static ThreadLocal<Boolean> enabled = ThreadLocal.withInitial(() -> false);
 

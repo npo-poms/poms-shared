@@ -58,6 +58,7 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.CascadeType.ALL;
+import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
 import static nl.vpro.domain.media.MediaObject.*;
@@ -2079,7 +2080,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                     for (Location location : MediaObject.this.getLocations()) {
                         if (location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                                && prediction.inPublicationWindow(Changeables.clock().instant())) {
+                                && prediction.inPublicationWindow(instant())) {
                             log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction,
                                     location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
@@ -2292,7 +2293,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         } else {
             locations.add(location);
             location.setParent(this);
-            if (location.hasPlatform() && location.isPublishable(Changeables.clock().instant())) {
+            if (location.hasPlatform() && location.isPublishable(instant())) {
                 realizePrediction(location);
             }
         }

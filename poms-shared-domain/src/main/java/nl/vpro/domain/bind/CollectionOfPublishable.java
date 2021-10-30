@@ -13,6 +13,7 @@ import nl.vpro.domain.Embargo;
  * This serializer for collections will leave out the collection all values that are under embargo.
  *
  * @since 5.31
+ * @see PublicationFilter
  */
 public class CollectionOfPublishable  extends AbstractList.Serializer<Embargo> {
     {

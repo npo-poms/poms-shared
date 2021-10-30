@@ -7,11 +7,12 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.*;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import nl.vpro.domain.Displayable;
 import nl.vpro.i18n.Dutch;
+
+import static nl.vpro.domain.Changeables.instant;
 
 /**
  * @author Michiel Meeuwissen
@@ -93,7 +94,7 @@ public interface StreamingStatus extends Serializable, Displayable {
 
     default boolean onDvrWithDrm() {
         Instant withDrmOffline = getWithDrmOffline();
-        return hasDrm() && withDrmOffline != null && withDrmOffline.isAfter(Changeables.clock().instant());
+        return hasDrm() && withDrmOffline != null && withDrmOffline.isAfter(instant());
     }
 
     default boolean hasWithoutDrm() {
@@ -105,7 +106,7 @@ public interface StreamingStatus extends Serializable, Displayable {
     }
 
     static boolean online(Instant offline) {
-        return offline == null || offline.isAfter(Changeables.clock().instant());
+        return offline == null || offline.isAfter(instant());
     }
 
     static Encryption preferredEncryption(StreamingStatus streamingStatus) {

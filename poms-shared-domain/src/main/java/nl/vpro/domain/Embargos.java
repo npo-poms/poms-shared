@@ -1,6 +1,5 @@
 package nl.vpro.domain;
 
-import java.time.Clock;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -15,7 +14,6 @@ import com.google.common.collect.Range;
  * @since 5.3
  */
 public class Embargos {
-
 
     private static final String PUBLISH_START = "publishstart";
     private static final String PUBLISH_STOP = "publishstop";

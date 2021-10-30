@@ -27,6 +27,7 @@ import nl.vpro.validation.EmbargoValidation;
 import nl.vpro.validation.PomsValidatorGroup;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static nl.vpro.domain.Changeables.instant;
 
 /**
  * A publishable object implements {@link Accountable} and {@link MutableEmbargo}, but furthermore also has {@link #workflow}.
@@ -205,7 +206,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
     @Deprecated
     public boolean isInAllowedPublicationWindow(long millisFromNow) {
-        return inPublicationWindow(Changeables.clock().instant().plusMillis(millisFromNow));
+        return inPublicationWindow(instant().plusMillis(millisFromNow));
     }
 
     @Override

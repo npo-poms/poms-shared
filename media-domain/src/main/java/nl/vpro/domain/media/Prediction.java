@@ -25,6 +25,8 @@ import nl.vpro.domain.*;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
+import static nl.vpro.domain.Changeables.instant;
+
 /**
  * A prediction is related to a program and indicates that locations (for a certain platform) <em>will be</em> available.
  *
@@ -86,7 +88,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @NotNull
     @Getter
     @Setter
-    protected Instant issueDate = Changeables.clock().instant();
+    protected Instant issueDate = instant();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
