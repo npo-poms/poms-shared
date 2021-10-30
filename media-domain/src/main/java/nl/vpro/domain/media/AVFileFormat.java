@@ -38,8 +38,6 @@ public enum AVFileFormat {
     HTML,  // HTML embeddable player
     UNKNOWN;
 
-
-
     public static Optional<AVFileFormat> forMimeType(String mimetype) {
         if (mimetype == null) {
             return Optional.empty();
