@@ -614,7 +614,7 @@ public class MediaObjectsTest {
         @Test
         public void createJsonForJavascriptTests() {
 
-            File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/");
+            File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/playability/");
             dest.mkdirs();
             examples().forEach(a -> {
                 try {

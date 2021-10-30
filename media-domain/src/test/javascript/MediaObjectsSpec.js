@@ -27,7 +27,7 @@ describe('MediaObjects', function() {
 
     // Following are parameterized tests, which get their specifications from all files in directory that is determined below
     const path = require('path');
-    const directory = path.dirname(__filename) + '/cases/'
+    const directory = path.dirname(__filename) + '/cases/playability/'
     const fs = require('fs');
     const files = fs.readdirSync(directory);
 
