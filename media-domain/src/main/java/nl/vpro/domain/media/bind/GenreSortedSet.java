@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import nl.vpro.domain.bind.AbstractList;
 import nl.vpro.domain.media.Genre;
 import nl.vpro.jackson2.Jackson2Mapper;
 
@@ -19,6 +20,12 @@ import nl.vpro.jackson2.Jackson2Mapper;
  */
 public class GenreSortedSet {
     public static class Serializer extends JsonSerializer<SortedSet<Genre>> {
+
+        @Override
+        public boolean isEmpty(SerializerProvider provider, SortedSet<Genre> value) {
+            return AbstractList.defaultIsEmpty(provider, value);
+
+        }
 
         @Override
         public void serialize(SortedSet<Genre> genres, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {

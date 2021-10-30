@@ -22,6 +22,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import nl.vpro.domain.bind.AbstractList;
 import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
@@ -621,27 +622,34 @@ public class MediaObjectsTest {
 
         @Test
         public void createJsonForJavascriptTests() {
-            PublicationFilter.enabled.set(true);
-            File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/playability/");
-            dest.mkdirs();
-            examples().forEach(a -> {
-                try {
-                    String description = (String) a.get()[0];
-                    ObjectNode result = Jackson2Mapper.getInstance().createObjectNode();
-                    result.put("description", description);
-                    ExpectedPlatforms expectedPlatforms = (ExpectedPlatforms) a.get()[2];
-                    result.put("nowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedNow()));
-                    result.put("wasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWas()));
-                    result.put("willExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWillBe()));
-                    result.put("mediaObject", Jackson2Mapper.getPublisherInstance().valueToTree(a.get()[1]));
-                    File file = new File(dest,  description + ".json");
-                    try (OutputStream outputStream = new FileOutputStream(file)) {
-                        Jackson2Mapper.getPrettyPublisherInstance().writer().writeValue(outputStream, result);
+            AbstractList.DEFAULT_CONSIDER_JSON_INCLUDE.set(true);
+            PublicationFilter.ENABLED.set(true);
+            try {
+                File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/playability/");
+                dest.mkdirs();
+                examples().forEach(a -> {
+                    try {
+                        String description = (String) a.get()[0];
+                        ObjectNode result = Jackson2Mapper.getInstance().createObjectNode();
+                        result.put("description", description);
+                        ExpectedPlatforms expectedPlatforms = (ExpectedPlatforms) a.get()[2];
+                        result.put("nowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedNow()));
+                        result.put("wasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWas()));
+                        result.put("willExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWillBe()));
+                        result.put("mediaObject", Jackson2Mapper.getPublisherInstance().valueToTree(a.get()[1]));
+                        File file = new File(dest, description + ".json");
+                        try (OutputStream outputStream = new FileOutputStream(file)) {
+                            Jackson2Mapper.getPrettyPublisherInstance().writer().writeValue(outputStream, result);
+                        }
+                    } catch (IOException e) {
+                        log.error(e.getMessage(), e);
                     }
-                } catch (IOException e) {
-                    log.error(e.getMessage(), e);
-                }
-            });
+                });
+            } finally {
+                AbstractList.DEFAULT_CONSIDER_JSON_INCLUDE.remove();
+                PublicationFilter.ENABLED.remove();
+
+            }
         }
     }
 }

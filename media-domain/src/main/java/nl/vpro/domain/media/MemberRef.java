@@ -270,7 +270,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     /**
-     * Returns the representing the 'group' role in this member-ref-relation. Note that this likely, but not necessarily a {@link Group} object, since any mediaobject may take members.
+     * Returns the representing the 'group' role in this member-ref-relation. Note that this likely, but not necessarily a {@link Group} object, since any {@link MediaObject} may take members.
      */
     @Nullable
     public MediaObject getGroup() {

@@ -18,23 +18,38 @@ import nl.vpro.jackson2.Jackson2Mapper;
  */
 public class AbstractList {
 
+    public final static  ThreadLocal<Boolean> DEFAULT_CONSIDER_JSON_INCLUDE = ThreadLocal.withInitial(() -> false);
+
     private AbstractList() {
     }
 
-     public static <T> boolean isEmpty(SerializerProvider provider, Iterable<T> value) {
-         JsonInclude.Include incl = provider.getConfig().getDefaultPropertyInclusion().getValueInclusion();
-         switch (incl) {
-             case NON_NULL:
-             case NON_ABSENT:
+    public static <T> boolean isEmpty(SerializerProvider provider, Iterable<T> value) {
+        JsonInclude.Include incl = provider.getConfig().getDefaultPropertyInclusion().getValueInclusion();
+        switch (incl) {
+            case NON_NULL:
+            case NON_ABSENT:
                  if (value == null) return true;
-                 break;
-             case NON_EMPTY:
-                 if (value == null || ! value.iterator().hasNext()) return true;
-                 break;
-             default:
-         }
-         return false;
-     }
+                break;
+            case NON_EMPTY:
+                if (value == null || ! value.iterator().hasNext()) return true;
+                break;
+            default:
+        }
+        return false;
+    }
+
+    public static <T> boolean isEmpty(SerializerProvider provider, Iterable<T> value, boolean considerJsonInclude) {
+        if (considerJsonInclude) {
+            return AbstractList.isEmpty(provider, value);
+        } else {
+            return (value == null);
+        }
+    }
+
+
+    public static <T> boolean defaultIsEmpty(SerializerProvider provider, Iterable<T> value) {
+        return isEmpty(provider, value, DEFAULT_CONSIDER_JSON_INCLUDE.get());
+    }
 
     public static abstract class Serializer<T> extends JsonSerializer<Iterable<T>> {
 
@@ -43,14 +58,11 @@ public class AbstractList {
          *
          * This will fail a lot of test cases that produce empty arrays. But the fields are marked 'NON_EMPTY' !
          */
-        boolean considerJsonInclude = false;
+        protected boolean considerJsonInclude = DEFAULT_CONSIDER_JSON_INCLUDE.get();
+
 
         public boolean isEmpty(SerializerProvider provider, Iterable<T> value) {
-            if (considerJsonInclude) {
-                return AbstractList.isEmpty(provider, value);
-            } else {
-                return super.isEmpty(provider, value);
-            }
+            return AbstractList.isEmpty(provider, value, considerJsonInclude);
         }
 
         @Override

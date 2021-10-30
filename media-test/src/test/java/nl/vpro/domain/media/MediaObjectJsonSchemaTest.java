@@ -1030,7 +1030,7 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void programWithUnpublishableLocation() {
-        PublicationFilter.enabled.set(true);
+        PublicationFilter.ENABLED.set(true);
         Program p = MediaTestDataBuilder
             .program()
             .locations(Location.builder().programUrl("https://vpro.nl/foo.mp3").publishStop(instant().minusSeconds(10)).build())
@@ -1050,7 +1050,7 @@ public class MediaObjectJsonSchemaTest {
                 "  \"languages\" : [ ],\n" +
                 "  \"locations\" : [ ]\n" +
                 "}");
-        PublicationFilter.enabled.remove();
+        PublicationFilter.ENABLED.remove();
 
     }
 

@@ -25,11 +25,11 @@ import nl.vpro.jackson2.Views;
 @Slf4j
 public class PublicationFilter extends SimpleBeanPropertyFilter {
 
-    public static ThreadLocal<Boolean> enabled = ThreadLocal.withInitial(() -> false);
+    public static final ThreadLocal<Boolean> ENABLED = ThreadLocal.withInitial(() -> false);
 
     protected static boolean filter(Object pojo, SerializerProvider prov) {
         Class<?> activeView = prov.getActiveView();
-        if (enabled.get() && Views.Publisher.class.isAssignableFrom(activeView)) {
+        if (ENABLED.get() && Views.Publisher.class.isAssignableFrom(activeView)) {
             if (pojo instanceof Embargo) {
                 if (((Embargo) pojo).isUnderEmbargo()) {
                     return true;
@@ -61,7 +61,7 @@ public class PublicationFilter extends SimpleBeanPropertyFilter {
 
     @Override
     public String toString() {
-        return PublicationFilter.class.getSimpleName() + " enabled: " + enabled.get();
+        return PublicationFilter.class.getSimpleName() + " enabled: " + ENABLED.get();
     }
 
 

@@ -31,7 +31,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.ObjectFilter;
 
-import static nl.vpro.domain.Changeables.clock;
+import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.media.support.Workflow.*;
 
 
@@ -44,11 +44,9 @@ import static nl.vpro.domain.media.support.Workflow.*;
 @Slf4j
 public class MediaObjects {
 
-
-
     private MediaObjects() {
+        // No instances, static utility functions only
     }
-
 
     public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
         return first == second ||
@@ -391,8 +389,9 @@ public class MediaObjects {
         return Long.valueOf(id);
     }
 
-
-    private static void matchBroadcasters(@NonNull  BroadcasterService broadcasterService, @NonNull  MediaObject mediaObject, @NonNull Set<MediaObject> handled) throws NotFoundException {
+    private static void matchBroadcasters(
+        @NonNull  BroadcasterService broadcasterService,
+        @NonNull  MediaObject mediaObject, @NonNull Set<MediaObject> handled) throws NotFoundException {
         if (handled == null) {
             handled = new HashSet<>(); // to avoid accidental stack overflows
         }
@@ -527,7 +526,7 @@ public class MediaObjects {
         @NonNull MediaObject media,
         String reason,
         Object... args) {
-        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(clock().instant())) {
+        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(instant())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             appendReason(media, reason, args);
             media.setRepubDestinations(null);
