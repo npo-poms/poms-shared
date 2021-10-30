@@ -2,6 +2,8 @@ package nl.vpro.domain.bind;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Collection;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.PropertyWriter;
@@ -22,9 +24,12 @@ import nl.vpro.jackson2.Views;
 @Slf4j
 public class PublicationFilter extends SimpleBeanPropertyFilter {
 
+
+
+
     public static ThreadLocal<Boolean> enabled = ThreadLocal.withInitial(() -> false);
 
-    protected boolean filter(Object pojo, SerializerProvider prov) {
+    protected static boolean filter(Object pojo, SerializerProvider prov) {
         Class<?> activeView = prov.getActiveView();
         if (enabled.get() && Views.Publisher.class.isAssignableFrom(activeView)) {
             if (pojo instanceof Embargo) {
@@ -37,7 +42,6 @@ public class PublicationFilter extends SimpleBeanPropertyFilter {
     }
     @Override
     public void serializeAsField(Object pojo, JsonGenerator gen, SerializerProvider prov, PropertyWriter writer) throws Exception {
-
         if (filter(pojo, prov)) {
             log.debug("Skipping write of {}", pojo);
             return;
@@ -47,10 +51,11 @@ public class PublicationFilter extends SimpleBeanPropertyFilter {
 
     @Override
     public void serializeAsElement(Object elementValue, JsonGenerator gen, SerializerProvider prov, PropertyWriter writer) throws Exception {
-
+        if (elementValue instanceof Collection) {
+            log.debug("Found {}", elementValue);
+        }
         if (filter(elementValue, prov)) {
             log.debug("Skipping write of element {}", elementValue);
-
             return;
         }
         super.serializeAsElement(elementValue, gen, prov, writer);

@@ -1,9 +1,10 @@
-package nl.vpro.domain.media.bind;
+package nl.vpro.domain.bind;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
@@ -20,11 +21,41 @@ public class AbstractList {
     private AbstractList() {
     }
 
+     public static <T> boolean isEmpty(SerializerProvider provider, Iterable<T> value) {
+         JsonInclude.Include incl = provider.getConfig().getDefaultPropertyInclusion().getValueInclusion();
+         switch (incl) {
+             case NON_NULL:
+             case NON_ABSENT:
+                 if (value == null) return true;
+                 break;
+             case NON_EMPTY:
+                 if (value == null || ! value.iterator().hasNext()) return true;
+                 break;
+             default:
+         }
+         return false;
+     }
 
     public static abstract class Serializer<T> extends JsonSerializer<Iterable<T>> {
 
+        /**
+         * TODO: Consider this to be default true.
+         *
+         * This will fail a lot of test cases that produce empty arrays. But the fields are marked 'NON_EMPTY' !
+         */
+        boolean considerJsonInclude = false;
+
+        public boolean isEmpty(SerializerProvider provider, Iterable<T> value) {
+            if (considerJsonInclude) {
+                return AbstractList.isEmpty(provider, value);
+            } else {
+                return super.isEmpty(provider, value);
+            }
+        }
+
         @Override
         public final void serialize(Iterable<T> list, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
+
 
             jgen.writeStartArray();
             for (T value : list) {

@@ -9,6 +9,7 @@ import org.meeuw.i18n.regions.Region;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.*;
 
+import nl.vpro.domain.bind.AbstractList;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 /**

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
+import nl.vpro.domain.bind.AbstractList;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 /**

@@ -6,10 +6,10 @@ nl_vpro_domain_media_MediaObjects = (function() {
     }
 
     function debug() {
-        //console.log.apply(null, arguments);
+        console.log.apply(null, arguments);
     }
     function info() {
-        //console.log.apply(null, arguments);
+        console.log.apply(null, arguments);
     }
 
     /**
@@ -107,12 +107,18 @@ nl_vpro_domain_media_MediaObjects = (function() {
     function playabilityCheck(platform, mediaObject,  predictionPredicate, locationPredicate) {
         const matchedByPrediction = mediaObject.predictions && mediaObject.predictions.some(p => platform === p.platform && predictionPredicate(p));
         if (matchedByPrediction) {
+            debug("Matched", mediaObject, platform, "on prediction");
             return true;
         }
         // fall back to location only
-        return mediaObject.locations && mediaObject.locations
-            .filter(locationFilter)
-            .some(l => platformMatches(platform, l.platform) && locationPredicate(l));
+        const matchedOnLocation = mediaObject.locations &&
+            mediaObject.locations
+                .filter(locationFilter)
+                .some(l => platformMatches(platform, l.platform) && locationPredicate(l));
+        if (matchedOnLocation) {
+            debug("Matched", mediaObject.locations, platform, "on location", matchedOnLocation);
+        }
+        return matchedOnLocation;
     }
 
 

@@ -22,8 +22,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.jackson2.*;
-
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -41,6 +39,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
+import nl.vpro.domain.bind.CollectionOfPublishable;
+import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -50,6 +50,8 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.*;
 import nl.vpro.domain.validation.NoDuplicateOwner;
 import nl.vpro.i18n.Locales;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
@@ -523,6 +525,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @XmlElement(name = "location")
     @JsonProperty("locations")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonSerialize(using = CollectionOfPublishable.class)
     protected SortedSet<@NotNull @Valid Location> locations = new TreeSet<>();
 
 
