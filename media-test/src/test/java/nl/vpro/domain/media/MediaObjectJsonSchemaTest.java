@@ -15,6 +15,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import nl.vpro.domain.Changeables;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -52,6 +54,7 @@ public class MediaObjectJsonSchemaTest {
 
     @BeforeAll
     public static void before() {
+        Changeables.CLOCK.set(Clock.fixed(Instant.ofEpochMilli(10), Schedule.ZONE_ID));
         Locale.setDefault(Locales.DUTCH);
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }

@@ -31,7 +31,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.ObjectFilter;
 
-import static nl.vpro.domain.Embargos.clock;
+import static nl.vpro.domain.Changeables.clock;
 import static nl.vpro.domain.media.support.Workflow.*;
 
 
@@ -43,6 +43,8 @@ import static nl.vpro.domain.media.support.Workflow.*;
  */
 @Slf4j
 public class MediaObjects {
+
+
 
     private MediaObjects() {
     }

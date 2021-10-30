@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import com.google.common.collect.Range;
 
-import static nl.vpro.domain.Embargos.clock;
+import static nl.vpro.domain.Changeables.clock;
 
 /**
  * An object having or defining a publication embargo, meaning that it has publish start and stop instants.

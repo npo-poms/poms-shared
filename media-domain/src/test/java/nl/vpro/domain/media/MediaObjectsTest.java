@@ -21,15 +21,15 @@ import org.junit.jupiter.params.provider.MethodSource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import nl.vpro.domain.Embargos;
+import nl.vpro.domain.Changeables;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
 
-import static nl.vpro.domain.Embargos.CLOCK;
-import static nl.vpro.domain.Embargos.clock;
+import static nl.vpro.domain.Changeables.CLOCK;
+import static nl.vpro.domain.Changeables.clock;
 import static nl.vpro.domain.media.Platform.INTERNETVOD;
 import static nl.vpro.domain.media.Platform.PLUSVOD;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -406,7 +406,7 @@ public class MediaObjectsTest {
             return MediaBuilder
                 .broadcast()
                 .mid("mid_123")
-                .creationDate(Embargos.clock().instant().minus(Duration.ofDays(1)))
+                .creationDate(Changeables.clock().instant().minus(Duration.ofDays(1)))
                 .workflow(Workflow.PUBLISHED)
                 ;
 

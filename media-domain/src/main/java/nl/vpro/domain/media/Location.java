@@ -16,9 +16,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import static nl.vpro.domain.Embargos.CLOCK;
-
-import static nl.vpro.domain.Embargos.clock;
+import static nl.vpro.domain.Changeables.clock;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;

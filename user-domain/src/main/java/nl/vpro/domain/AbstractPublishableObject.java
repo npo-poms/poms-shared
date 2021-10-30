@@ -42,7 +42,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     extends DomainObject implements Publishable<T> {
 
     @Column(nullable = false, name="creationDate")
-    protected Instant creationInstant = Embargos.clock().instant();
+    protected Instant creationInstant = Changeables.clock().instant();
 
     @Column(nullable = false)
     protected Instant lastModified;

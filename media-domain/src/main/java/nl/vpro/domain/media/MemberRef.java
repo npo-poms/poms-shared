@@ -14,6 +14,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.*;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -24,8 +26,6 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Embargos;
-import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -670,7 +670,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @PreUpdate
     public void prePersist() {
         if (this.added == null) {
-            this.added = Embargos.clock().instant();
+            this.added = Changeables.clock().instant();
         }
     }
 

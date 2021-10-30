@@ -19,7 +19,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
 
-import static nl.vpro.domain.Embargos.clock;
+import static nl.vpro.domain.Changeables.clock;
 
 /**
  * @author Michiel Meeuwissen

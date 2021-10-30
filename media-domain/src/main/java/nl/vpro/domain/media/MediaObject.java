@@ -4,6 +4,15 @@
  */
 package nl.vpro.domain.media;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.ser.PropertyWriter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +31,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.jackson2.*;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -30,10 +41,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.functional.TriFunction;
 import org.meeuw.i18n.countries.Country;
-import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.validation.Language;
-import org.meeuw.i18n.regions.validation.ValidRegion;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -50,8 +59,6 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.*;
 import nl.vpro.domain.validation.NoDuplicateOwner;
 import nl.vpro.i18n.Locales;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.Views;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
@@ -245,6 +252,53 @@ import static nl.vpro.domain.media.MediaObject.*;
 
 @Slf4j
 public abstract class MediaObject extends PublishableObject<MediaObject> implements Media<MediaObject> {
+
+    public static class PublisherFilter extends SimpleBeanPropertyFilter {
+
+        protected boolean filter(Object pojo, SerializerProvider prov) {
+            Class<?> activeView = prov.getActiveView();
+            if (Views.Publisher.class.isAssignableFrom(activeView)) {
+                if (pojo instanceof Embargo) {
+                    if (((Embargo) pojo).isUnderEmbargo()) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        @Override
+        public void serializeAsField(Object pojo, JsonGenerator gen, SerializerProvider prov, PropertyWriter writer) throws Exception {
+            if (filter(pojo, prov)) {
+                return;
+            }
+            super.serializeAsField(pojo, gen, prov, writer);
+        }
+
+        @Override
+        public void serializeAsElement(Object elementValue, JsonGenerator gen, SerializerProvider prov, PropertyWriter writer) throws Exception {
+            if (filter(elementValue, prov)) {
+                return;
+            }
+            super.serializeAsElement(elementValue, gen, prov, writer);
+        }
+
+        @Override
+        public void depositSchemaProperty(PropertyWriter writer, ObjectNode propertiesNode, SerializerProvider provider) throws JsonMappingException {
+            super.depositSchemaProperty(writer, propertiesNode, provider);
+        }
+
+        @Override
+        public void depositSchemaProperty(PropertyWriter writer, JsonObjectFormatVisitor objectVisitor, SerializerProvider provider) throws JsonMappingException {
+            super.depositSchemaProperty(writer, objectVisitor, provider);
+        }
+    }
+
+    static {
+        SimpleFilterProvider filterProvider = new SimpleFilterProvider();
+        filterProvider.addFilter("publicationFilter", new PublisherFilter());
+        Jackson2Mapper.getPublisherInstance().setFilterProvider(filterProvider);
+        Jackson2Mapper.getPrettyPublisherInstance().setFilterProvider(filterProvider);
+    }
 
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
@@ -2076,7 +2130,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                     for (Location location : MediaObject.this.getLocations()) {
                         if (location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                                && prediction.inPublicationWindow(Embargos.clock().instant())) {
+                                && prediction.inPublicationWindow(Changeables.clock().instant())) {
                             log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction,
                                     location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
@@ -2289,7 +2343,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         } else {
             locations.add(location);
             location.setParent(this);
-            if (location.hasPlatform() && location.isPublishable(Embargos.clock().instant())) {
+            if (location.hasPlatform() && location.isPublishable(Changeables.clock().instant())) {
                 realizePrediction(location);
             }
         }

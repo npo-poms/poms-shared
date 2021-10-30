@@ -18,7 +18,7 @@ nl_vpro_domain_media_MediaObjects = (function() {
      * @return {string}
      */
     function avFormatForProgramUrl(location) {
-        url = location.programUrl;
+        const url = location.programUrl;
         if (url == null) return "UNKNOWN";
         const urlLowerCase = url.toLowerCase();
         if(urlLowerCase.includes("adaptive")) {
@@ -77,12 +77,12 @@ nl_vpro_domain_media_MediaObjects = (function() {
             return false;
         }
         // legacy filter on av type
-        format = l.avAttributes ? l.avAttributes.avFileFormat : null
+        let format = l.avAttributes ? l.avAttributes.avFileFormat : null
         if (format == null || format === "UNKNOWN") {
             format = avFormatForProgramUrl(l);
         }
         if (format != null && format !== "UNKNOWN") {
-            acceptable = ACCEPTABLE_FORMATS.includes(format);
+            const acceptable = ACCEPTABLE_FORMATS.includes(format);
             if (!acceptable) {
                 debug(l, format, "is not acceptable");
                 return false;
@@ -105,7 +105,7 @@ nl_vpro_domain_media_MediaObjects = (function() {
      * @return {boolean}
      */
     function playabilityCheck(platform, mediaObject,  predictionPredicate, locationPredicate) {
-        matchedByPrediction = mediaObject.predictions && mediaObject.predictions.some(p => platform === p.platform && predictionPredicate(p));
+        const matchedByPrediction = mediaObject.predictions && mediaObject.predictions.some(p => platform === p.platform && predictionPredicate(p));
         if (matchedByPrediction) {
             return true;
         }
@@ -168,7 +168,7 @@ nl_vpro_domain_media_MediaObjects = (function() {
         return ! inPublicationWindow(now) && (start != null && now < start);
     }
 
-    return  Object.freeze({
+    return Object.freeze({
        Platform:  platforms,
        State:  states,
 

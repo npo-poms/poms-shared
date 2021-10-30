@@ -13,6 +13,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 
 /**
  * A domain object is an {@link Identifiable} which serves a as a base class for the domain entities in the POMS universe that have their own id.
@@ -22,6 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @MappedSuperclass
 @ToString
 @XmlTransient
+@JsonFilter("publicationFilter")
 public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
     @Id

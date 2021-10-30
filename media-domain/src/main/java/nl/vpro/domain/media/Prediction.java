@@ -86,7 +86,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @NotNull
     @Getter
     @Setter
-    protected Instant issueDate = Embargos.clock().instant();
+    protected Instant issueDate = Changeables.clock().instant();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

@@ -1,6 +1,6 @@
 package nl.vpro.domain;
 
-import java.time.Instant;
+import java.time.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +14,19 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  */
 @SuppressWarnings("JavadocReference")
 public class Changeables {
+
+    public static final ThreadLocal<Clock> CLOCK = ThreadLocal.withInitial(Clock::systemUTC);
+
+    /**
+     * Returns the clock that is for determining default creation dates and such things. Also it used by {@link Embargo}.
+     *
+     * The clock is a Thread local, and normally is just {@link Clock#systemUTC()}, but e.g. during testing it may be some
+     * other clock implementation (like {@link Clock#fixed(Instant, ZoneId)}.
+     * @since 5.31
+     */
+    public static Clock clock() {
+        return CLOCK.get();
+    }
 
     private Changeables() {
     }
@@ -64,7 +77,7 @@ public class Changeables {
         @NonNull String[] propertyNames) {
         boolean updated = false;
 
-        final Instant now = Embargos.clock().instant();
+        final Instant now = clock().instant();
 
         if(changeable.getCreationInstant() == null) {
             changeable.setCreationInstant(now);
@@ -99,6 +112,7 @@ public class Changeables {
 
         // TODO
     }
+
 
 
 }
