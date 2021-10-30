@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MediaObject" type="JavascriptTestRunnerJasmine" factoryName="Jasmine" nameIsGenerated="true">
+    <node-interpreter value="project" />
+    <working-dir value="$USER_HOME$/github/npo-poms/poms-shared/media-domain/src/main/resources/META-INF/resources/media-domain/js" />
+    <jasmine-executable value="bin/jasmine.js" />
+    <scope value="SUITE" />
+    <spec-file value="$USER_HOME$/github/npo-poms/poms-shared/media-domain/src/test/javascript/MediaObjectSpec.js" />
+    <test-names>
+      <test-name value="MediaObject" />
+    </test-names>
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

@@ -15,6 +15,9 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
+import nl.vpro.domain.bind.PublicationFilter;
+import nl.vpro.jackson2.Jackson2Mapper;
+
 
 /**
  * A domain object is an {@link Identifiable} which serves a as a base class for the domain entities in the POMS universe that have their own id.
@@ -26,6 +29,10 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 @XmlTransient
 @JsonFilter("publicationFilter")
 public abstract class DomainObject implements Identifiable<Long>, Serializable {
+
+    static {
+        Jackson2Mapper.addFilter("publicationFilter", new PublicationFilter());
+    }
 
     @Id
     @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize = 1)

@@ -22,6 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import nl.vpro.domain.Changeables;
+import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -613,7 +614,7 @@ public class MediaObjectsTest {
 
         @Test
         public void createJsonForJavascriptTests() {
-
+            PublicationFilter.enabled.set(true);
             File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/playability/");
             dest.mkdirs();
             examples().forEach(a -> {

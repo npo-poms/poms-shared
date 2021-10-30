@@ -4,15 +4,6 @@
  */
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.ser.PropertyWriter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -253,59 +244,14 @@ import static nl.vpro.domain.media.MediaObject.*;
 @Slf4j
 public abstract class MediaObject extends PublishableObject<MediaObject> implements Media<MediaObject> {
 
-    public static class PublisherFilter extends SimpleBeanPropertyFilter {
-
-        protected boolean filter(Object pojo, SerializerProvider prov) {
-            Class<?> activeView = prov.getActiveView();
-            if (Views.Publisher.class.isAssignableFrom(activeView)) {
-                if (pojo instanceof Embargo) {
-                    if (((Embargo) pojo).isUnderEmbargo()) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        @Override
-        public void serializeAsField(Object pojo, JsonGenerator gen, SerializerProvider prov, PropertyWriter writer) throws Exception {
-            if (filter(pojo, prov)) {
-                return;
-            }
-            super.serializeAsField(pojo, gen, prov, writer);
-        }
-
-        @Override
-        public void serializeAsElement(Object elementValue, JsonGenerator gen, SerializerProvider prov, PropertyWriter writer) throws Exception {
-            if (filter(elementValue, prov)) {
-                return;
-            }
-            super.serializeAsElement(elementValue, gen, prov, writer);
-        }
-
-        @Override
-        public void depositSchemaProperty(PropertyWriter writer, ObjectNode propertiesNode, SerializerProvider provider) throws JsonMappingException {
-            super.depositSchemaProperty(writer, propertiesNode, provider);
-        }
-
-        @Override
-        public void depositSchemaProperty(PropertyWriter writer, JsonObjectFormatVisitor objectVisitor, SerializerProvider provider) throws JsonMappingException {
-            super.depositSchemaProperty(writer, objectVisitor, provider);
-        }
-    }
-
-    static {
-        SimpleFilterProvider filterProvider = new SimpleFilterProvider();
-        filterProvider.addFilter("publicationFilter", new PublisherFilter());
-        Jackson2Mapper.getPublisherInstance().setFilterProvider(filterProvider);
-        Jackson2Mapper.getPrettyPublisherInstance().setFilterProvider(filterProvider);
-    }
-
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
     public static final String PUBLICATION_FILTER = "publicationFilter";
     public static final String INVERSE_PUBLICATION_FILTER = "inversePublicationFilter";
     public static final String EMBARGO_FILTER = "embargoFilter";
     public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
+
+
 
     @Column(name = "mid", nullable = false, unique = true)
     @Size(max = 255, min = 4)

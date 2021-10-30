@@ -27,6 +27,9 @@ public class Changeables {
     public static Clock clock() {
         return CLOCK.get();
     }
+    public static Instant instant() {
+        return clock().instant();
+    }
 
     private Changeables() {
     }

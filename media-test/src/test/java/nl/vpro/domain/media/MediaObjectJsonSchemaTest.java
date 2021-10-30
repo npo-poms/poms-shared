@@ -15,8 +15,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import nl.vpro.domain.Changeables;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,6 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;
 
+import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.Image;
@@ -38,6 +37,8 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static nl.vpro.domain.Changeables.CLOCK;
+import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.media.MediaTestDataBuilder.group;
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,7 +55,7 @@ public class MediaObjectJsonSchemaTest {
 
     @BeforeAll
     public static void before() {
-        Changeables.CLOCK.set(Clock.fixed(Instant.ofEpochMilli(10), Schedule.ZONE_ID));
+        CLOCK.set(Clock.fixed(Instant.ofEpochMilli(10), Schedule.ZONE_ID));
         Locale.setDefault(Locales.DUTCH);
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }
@@ -1026,6 +1027,32 @@ public class MediaObjectJsonSchemaTest {
         Program rounded  = Jackson2TestUtil.roundTripAndSimilarAndEquals(Jackson2Mapper.getPublisherInstance(), program, programJson.toString());
         assertThat(rounded.getLocations().first().getId()).isEqualTo(6);
         assertThat(rounded.getMemberOf().first().getType()).isEqualTo(MediaType.SEASON);
+    }
+
+    @Test
+    public void programWithUnpublishableLocation() {
+        PublicationFilter.enabled.set(true);
+        Program p = MediaTestDataBuilder
+            .program()
+            .locations(Location.builder().programUrl("https://vpro.nl/foo.mp3").publishStop(instant().minusSeconds(10)).build())
+            .build()
+            ;
+        Jackson2TestUtil.assertThatJson(Jackson2Mapper.getPrettyPublisherInstance(), p)
+            .withoutRemarshalling()
+            .isSimilarTo("{\n" +
+                "  \"objectType\" : \"program\",\n" +
+                "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
+                "  \"sortDate\" : 10,\n" +
+                "  \"creationDate\" : 10,\n" +
+                "  \"embeddable\" : true,\n" +
+                "  \"broadcasters\" : [ ],\n" +
+                "  \"genres\" : [ ],\n" +
+                "  \"countries\" : [ ],\n" +
+                "  \"languages\" : [ ],\n" +
+                "  \"locations\" : [ { } ]\n" +
+                "}");
+        PublicationFilter.enabled.remove();
+
     }
 
 
