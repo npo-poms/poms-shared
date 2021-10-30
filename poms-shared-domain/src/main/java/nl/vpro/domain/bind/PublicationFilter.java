@@ -2,8 +2,6 @@ package nl.vpro.domain.bind;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collection;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.PropertyWriter;
@@ -15,9 +13,11 @@ import nl.vpro.jackson2.Views;
 /**
  * This jackson filter is enabled when using poms domain classes.
  *
- * The idea is that it will not marshall objects that are under embargo.
+ * The idea is that it makes it possible ot marshall objects that are under embargo, when using the {@link Views.Publisher} view.
  *
  * In poms this is arranged via hibernate filters, but this could be an alternative, since we publish JSON basically.
+ *
+ * This is now used to generate 'published' json for tests cases.
  *
  * @see CollectionOfPublishable
  * @since 5.31
@@ -25,6 +25,12 @@ import nl.vpro.jackson2.Views;
 @Slf4j
 public class PublicationFilter extends SimpleBeanPropertyFilter {
 
+    /**
+     * For now on default this filter does nothing.
+     *
+     * You may override that by setting in this thread local to true
+     *
+     */
     public static final ThreadLocal<Boolean> ENABLED = ThreadLocal.withInitial(() -> false);
 
     protected static boolean filter(Object pojo, SerializerProvider prov) {
@@ -38,6 +44,7 @@ public class PublicationFilter extends SimpleBeanPropertyFilter {
         }
         return false;
     }
+
     @Override
     public void serializeAsField(Object pojo, JsonGenerator gen, SerializerProvider prov, PropertyWriter writer) throws Exception {
         if (filter(pojo, prov)) {
@@ -49,9 +56,6 @@ public class PublicationFilter extends SimpleBeanPropertyFilter {
 
     @Override
     public void serializeAsElement(Object elementValue, JsonGenerator gen, SerializerProvider prov, PropertyWriter writer) throws Exception {
-        if (elementValue instanceof Collection) {
-            log.debug("Found {}", elementValue);
-        }
         if (filter(elementValue, prov)) {
             log.debug("Skipping write of element {}", elementValue);
             return;
@@ -63,7 +67,5 @@ public class PublicationFilter extends SimpleBeanPropertyFilter {
     public String toString() {
         return PublicationFilter.class.getSimpleName() + " enabled: " + ENABLED.get();
     }
-
-
 
 }
