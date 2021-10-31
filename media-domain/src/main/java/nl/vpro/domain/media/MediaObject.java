@@ -342,7 +342,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
-        protected Set<@NotNull Tag> tags;
+    protected Set<@NotNull Tag> tags;
 
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
