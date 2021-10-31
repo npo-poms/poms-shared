@@ -98,6 +98,10 @@ public interface Embargo {
         return true;
     }
 
+    /**
+     * Whether this object is publishable.
+     * This defaults to {@link #inPublicationWindow()}, but extensions may improve on this. E.g. {@code nl.vpro.domain.media.TrackableObject} also checks whether the object is deleted or not.
+     */
     default boolean isPublishable() {
         return inPublicationWindow();
     }

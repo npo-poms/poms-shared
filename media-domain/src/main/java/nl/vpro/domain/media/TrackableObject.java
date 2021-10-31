@@ -4,9 +4,12 @@ import java.time.Instant;
 
 import org.slf4j.LoggerFactory;
 
-import nl.vpro.domain.*;
+import nl.vpro.domain.Embargo;
+import nl.vpro.domain.Trackable;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.Workflow;
+
+import static nl.vpro.domain.Changeables.instant;
 
 /**
  * A trackable object has also {@link Embargo}, and {@link #getWorkflow()}
@@ -52,7 +55,7 @@ public interface TrackableObject extends Trackable, Embargo {
 
     @Override
     default boolean isPublishable() {
-        return isPublishable(Changeables.instant());
+        return isPublishable(instant());
     }
 
     default boolean isRevocable(Instant now) {
