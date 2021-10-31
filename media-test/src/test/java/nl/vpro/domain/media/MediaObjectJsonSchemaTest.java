@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -27,8 +28,7 @@ import com.fasterxml.jackson.databind.node.*;
 import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
-import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.i18n.Locales;
@@ -1033,7 +1033,11 @@ public class MediaObjectJsonSchemaTest {
         PublicationFilter.ENABLED.set(true);
         Program p = MediaTestDataBuilder
             .program()
-            .locations(Location.builder().programUrl("https://vpro.nl/foo.mp3").publishStop(instant().minusSeconds(10)).build())
+            .locations(
+                Location.builder().programUrl("https://vpro.nl/foo.mp3").publishStop(instant().minusSeconds(10)).build(),
+                Location.builder().programUrl("https://vpro.nl/bar.mp3").workflow(Workflow.DELETED).build(),
+                Location.builder().programUrl("https://vpro.nl/bar2.mp3").workflow(Workflow.FOR_DELETION).build()
+            )
             .build()
             ;
         Jackson2TestUtil.assertThatJson(Jackson2Mapper.getPrettyPublisherInstance(), p)

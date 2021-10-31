@@ -98,4 +98,8 @@ public interface Embargo {
         return true;
     }
 
+    default boolean isPublishable() {
+        return inPublicationWindow();
+    }
+
 }

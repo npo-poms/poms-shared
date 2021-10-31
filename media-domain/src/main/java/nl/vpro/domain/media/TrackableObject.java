@@ -4,8 +4,7 @@ import java.time.Instant;
 
 import org.slf4j.LoggerFactory;
 
-import nl.vpro.domain.Embargo;
-import nl.vpro.domain.Trackable;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.Workflow;
 
@@ -19,7 +18,7 @@ public interface TrackableObject extends Trackable, Embargo {
     Workflow getWorkflow();
 
     /**
-     * Wether this object could be  publicly visible in the API.
+     * Whether this object could be  publicly visible in the API.
      *
      * This returns <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
      * and otherwise it depends on {@link #inPublicationWindow(Instant)}
@@ -51,6 +50,10 @@ public interface TrackableObject extends Trackable, Embargo {
         return false;
     }
 
+    @Override
+    default boolean isPublishable() {
+        return isPublishable(Changeables.instant());
+    }
 
     default boolean isRevocable(Instant now) {
         Workflow workflow = getWorkflow();
