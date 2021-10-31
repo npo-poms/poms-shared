@@ -18,7 +18,6 @@ import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.*;
 
-@SuppressWarnings("serial")
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -60,9 +59,9 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
         this.owner = owner;
     }
 
+    @SuppressWarnings("CopyConstructorMissesField")
     public Website(Website source) {
         this(source.getUrl(), source.owner);
-
     }
 
     public static Website copy(Website source) {
@@ -88,7 +87,6 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
     public void setId(Long id) {
         this.id = id;
     }
-
 
     @Override
     public void update(Website from) {
@@ -157,6 +155,5 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
             .append("url", url)
             .toString();
     }
-
 
 }
