@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import nl.vpro.domain.bind.AbstractList;
+import nl.vpro.domain.bind.AbstractJsonIterable;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.jackson2.Jackson2Mapper;
 
@@ -21,7 +21,7 @@ public class BroadcasterList {
     private BroadcasterList() {
     }
 
-    public static class Serializer extends AbstractList.Serializer<Broadcaster> {
+    public static class Serializer extends AbstractJsonIterable.Serializer<Broadcaster> {
 
         @Override
         protected void serializeValue(Broadcaster value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
@@ -29,10 +29,10 @@ public class BroadcasterList {
         }
     }
 
-    public static class Deserializer extends AbstractList.Deserializer<Broadcaster> {
+    public static class Deserializer extends AbstractJsonIterable.Deserializer<Broadcaster> {
 
         @Override
-        protected Broadcaster deserialize(JsonNode node, DeserializationContext ctxt) throws IOException {
+        protected Broadcaster deserializeValue(JsonNode node, DeserializationContext ctxt) throws IOException {
             return Jackson2Mapper.getInstance().readerFor(Broadcaster.class).readValue(node);
         }
     }

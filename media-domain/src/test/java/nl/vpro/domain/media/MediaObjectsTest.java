@@ -22,7 +22,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import nl.vpro.domain.bind.AbstractList;
+import nl.vpro.domain.bind.AbstractJsonIterable;
 import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
@@ -622,7 +622,7 @@ public class MediaObjectsTest {
 
         @Test
         public void createJsonForJavascriptTests() {
-            AbstractList.DEFAULT_CONSIDER_JSON_INCLUDE.set(true);
+            AbstractJsonIterable.DEFAULT_CONSIDER_JSON_INCLUDE.set(true);
             PublicationFilter.ENABLED.set(true);
             try {
                 File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/playability/");
@@ -646,7 +646,7 @@ public class MediaObjectsTest {
                     }
                 });
             } finally {
-                AbstractList.DEFAULT_CONSIDER_JSON_INCLUDE.remove();
+                AbstractJsonIterable.DEFAULT_CONSIDER_JSON_INCLUDE.remove();
                 PublicationFilter.ENABLED.remove();
 
             }

@@ -10,17 +10,17 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import nl.vpro.jackson2.Jackson2Mapper;
-
 /**
- * @author Michiel Meeuwissen
+ * Base classes and utilities for {@link Serializer}s and {@link Deserializer} for {@link Iterable}s
+ *
+  * @author Michiel Meeuwissen
  * @since 3.0
  */
-public class AbstractList {
+public class AbstractJsonIterable {
 
     public final static  ThreadLocal<Boolean> DEFAULT_CONSIDER_JSON_INCLUDE = ThreadLocal.withInitial(() -> false);
 
-    private AbstractList() {
+    private AbstractJsonIterable() {
     }
 
     public static <T> boolean isEmpty(SerializerProvider provider, Iterable<T> value) {
@@ -40,7 +40,7 @@ public class AbstractList {
 
     public static <T> boolean isEmpty(SerializerProvider provider, Iterable<T> value, boolean considerJsonInclude) {
         if (considerJsonInclude) {
-            return AbstractList.isEmpty(provider, value);
+            return AbstractJsonIterable.isEmpty(provider, value);
         } else {
             return (value == null);
         }
@@ -51,6 +51,12 @@ public class AbstractList {
         return isEmpty(provider, value, DEFAULT_CONSIDER_JSON_INCLUDE.get());
     }
 
+
+    /**
+     * A {@link JsonSerializer} specialization that arranges the json array for the {@link Iterable} already.
+     *
+     * This leaves a simpler {@link #serializeValue(Object, JsonGenerator, SerializerProvider)} abstract method for the implementer to do.
+     */
     public static abstract class Serializer<T> extends JsonSerializer<Iterable<T>> {
 
         /**
@@ -60,15 +66,13 @@ public class AbstractList {
          */
         protected boolean considerJsonInclude = DEFAULT_CONSIDER_JSON_INCLUDE.get();
 
-
+        @Override
         public boolean isEmpty(SerializerProvider provider, Iterable<T> value) {
-            return AbstractList.isEmpty(provider, value, considerJsonInclude);
+            return AbstractJsonIterable.isEmpty(provider, value, considerJsonInclude);
         }
 
         @Override
         public final void serialize(Iterable<T> list, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
-
-
             jgen.writeStartArray();
             for (T value : list) {
                 serializeValue(value, jgen, serializerProvider);
@@ -79,23 +83,20 @@ public class AbstractList {
         abstract protected void serializeValue(T value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException;
     }
 
+    /**
+     * A {@link JsonDeserializer} specialization that arranges parsing of the json array for the {@link Iterable} already.
+     *
+     * This leaves a simpler {@link #deserializeValue(JsonNode, DeserializationContext)}  abstract method for the implementer to do.
+     */
     public static abstract class Deserializer<T> extends JsonDeserializer<Iterable<T>> {
 
         @Override
         public Iterable<T> deserialize (JsonParser jp, DeserializationContext ctxt) throws IOException {
-            List<T> answer = new ArrayList<>();
+            final List<T> answer = new ArrayList<>();
 
-            // See https://github.com/helun/Ektorp/pull/184
-            // If the pull request is accepted the following code can be removed with ektorp 1.4.3
-            if (jp.getCodec() == null) {
-                // In org/ektorp/impl/QueryResultParser.java#parseRows(JsonParser jp) it does row.doc.traverse()
-                // traverse() gives a new JsonParser, but without the original Codec. Seems a bug. But this work around it.
-                jp.setCodec(Jackson2Mapper.INSTANCE);
-            }
-
-            ArrayNode array = jp.readValueAs(ArrayNode.class);
+            final ArrayNode array = jp.readValueAs(ArrayNode.class);
             for (JsonNode jsonNode : array) {
-                T value = deserialize(jsonNode, ctxt);
+                T value = deserializeValue(jsonNode, ctxt);
                 if (value != null) {
                     answer.add(value);
                 }
@@ -103,7 +104,7 @@ public class AbstractList {
             return answer;
         }
 
-        abstract protected T deserialize(JsonNode node, DeserializationContext ctxt) throws IOException;
+        abstract protected T deserializeValue(JsonNode node, DeserializationContext ctxt) throws IOException;
 
     }
 }

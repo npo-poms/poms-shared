@@ -10,12 +10,12 @@ import nl.vpro.domain.Embargo;
 
 
 /**
- * This serializer for collections will leave out the collection all values that are under embargo.
+ * This serializer for collections will leave out the collection all entries that are not {@link Embargo#isPublishable()}.
  *
  * @since 5.31
  * @see PublicationFilter
  */
-public class CollectionOfPublishable  extends AbstractList.Serializer<Embargo> {
+public class CollectionOfPublishable extends AbstractJsonIterable.Serializer<Embargo> {
     {
         considerJsonInclude = true;
     }

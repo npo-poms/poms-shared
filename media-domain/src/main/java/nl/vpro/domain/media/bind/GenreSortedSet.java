@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import nl.vpro.domain.bind.AbstractList;
+import nl.vpro.domain.bind.AbstractJsonIterable;
 import nl.vpro.domain.media.Genre;
 import nl.vpro.jackson2.Jackson2Mapper;
 
@@ -23,7 +23,7 @@ public class GenreSortedSet {
 
         @Override
         public boolean isEmpty(SerializerProvider provider, SortedSet<Genre> value) {
-            return AbstractList.defaultIsEmpty(provider, value);
+            return AbstractJsonIterable.defaultIsEmpty(provider, value);
 
         }
 
