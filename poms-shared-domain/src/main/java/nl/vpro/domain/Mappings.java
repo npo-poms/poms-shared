@@ -53,7 +53,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
 
     protected static Path tempDir;
 
-    protected final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
+    protected final Map<String, Class<?>[]> MAPPING = new LinkedHashMap<>();
 
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
