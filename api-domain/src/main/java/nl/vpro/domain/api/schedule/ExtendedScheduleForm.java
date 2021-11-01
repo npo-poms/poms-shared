@@ -11,9 +11,7 @@ import nl.vpro.domain.media.DescendantRef;
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.ScheduleEvent;
-import nl.vpro.domain.media.search.InstantRange;
-import nl.vpro.domain.media.search.ScheduleForm;
-import nl.vpro.domain.media.search.SchedulePager;
+import nl.vpro.domain.media.search.*;
 import nl.vpro.domain.user.Broadcaster;
 
 /**
@@ -32,6 +30,9 @@ class ExtendedScheduleForm extends ScheduleForm {
 
     private MediaType mediaType;
 
+    /**
+     * Use {@link #getGuideDayRange()}
+     */
     @Deprecated
     private LocalDate guideDay;
 
@@ -43,8 +44,7 @@ class ExtendedScheduleForm extends ScheduleForm {
     }
 
     public ExtendedScheduleForm(SchedulePager pager, LocalDate guideDay) {
-        super(pager, null, null, null);
-        this.guideDay = guideDay;
+        super(pager, null, new LocalDateRange(guideDay, guideDay), null);
     }
 
     @Override

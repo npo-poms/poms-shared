@@ -31,6 +31,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.ObjectFilter;
 
+import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.media.support.Workflow.*;
 
 
@@ -44,6 +45,7 @@ import static nl.vpro.domain.media.support.Workflow.*;
 public class MediaObjects {
 
     private MediaObjects() {
+        // No instances, static utility functions only
     }
 
     public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
@@ -224,8 +226,6 @@ public class MediaObjects {
         to.setScheduleEvents(from.getScheduleEvents());
     }
 
-
-
     public static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject) throws NotFoundException {
         matchBroadcasters(broadcasterService, mediaObject, null);
     }
@@ -387,8 +387,10 @@ public class MediaObjects {
         return Long.valueOf(id);
     }
 
-
-    private static void matchBroadcasters(@NonNull  BroadcasterService broadcasterService, @NonNull  MediaObject mediaObject, @NonNull Set<MediaObject> handled) throws NotFoundException {
+    private static void matchBroadcasters(
+        @NonNull BroadcasterService broadcasterService,
+        @NonNull MediaObject mediaObject,
+        @NonNull Set<MediaObject> handled) throws NotFoundException {
         if (handled == null) {
             handled = new HashSet<>(); // to avoid accidental stack overflows
         }
@@ -523,7 +525,7 @@ public class MediaObjects {
         @NonNull MediaObject media,
         String reason,
         Object... args) {
-        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(Instant.now())) {
+        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(instant())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             appendReason(media, reason, args);
             media.setRepubDestinations(null);
@@ -675,19 +677,6 @@ public class MediaObjects {
         return media != null && PUBLICATIONS.contains(media.getWorkflow()) && media.getLocations().stream().anyMatch(l -> l.getWorkflow() == PUBLISHED);
     }
 
-    /**
-     * Whether this mediaobject is playable in a NPO player.
-     * @since 5.11
-     */
-    public static boolean isPlayable(MediaObject media) {
-        if (media == null) {
-            return false;
-        }
-        // TODO, it seems that this is enough
-        return media.getStreamingPlatformStatus().isAvailable();
-        // but why not this?
-        //return media.getStreamingPlatformStatus().isAvailable() && Optional.ofNullable(media.getPrediction(Platform.INTERNETVOD)).map(p -> p.inPublicationWindow(Instant.now())).orElse(false);
-    }
 
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
@@ -727,9 +716,8 @@ public class MediaObjects {
 
 
     /**
-     * @javadoc
+     * TODO: javadoc
      */
-
     public static Optional<List<MemberRef>> getPath(MediaObject parent, MediaObject child, List<? extends MediaObject> descendants) {
         return getPath(parent, child,
             descendants.stream().distinct().collect(Collectors.toMap(MediaObject::getMid, d -> d)
@@ -892,8 +880,8 @@ public class MediaObjects {
 
     public static List<Person> getPersons(MediaObject o) {
         return o.getPersons();
-
     }
+
     public static <T extends PublishableObject<?>> boolean revokeRelatedPublishables(MediaObject media, Collection<T> publishables, Instant now, Runnable callbackOnChange) {
         boolean foundRevokedPublishable = false;
         for(T publishable : publishables) {
@@ -904,7 +892,6 @@ public class MediaObjects {
                 PublishableObjectAccess.setWorkflow(publishable, Workflow.REVOKED);
                 foundRevokedPublishable = true;
             }
-
         }
 
         if(foundRevokedPublishable &&
@@ -941,9 +928,110 @@ public class MediaObjects {
                 .flatMap(Collection::stream)
                 .map(Topic::getGtaaRecord)
         ).distinct();
-
-
     }
+
+    /**
+     * Whether this mediaobject is playable in a NPO player.
+     * @since 5.11
+     */
+    public static boolean isPlayable(MediaObject media) {
+        if (media == null) {
+            return false;
+        }
+        // TODO, it seems that this is enough (at least for video?)
+        return media.getStreamingPlatformStatus().isAvailable();
+        // but why not this?
+        //return media.getStreamingPlatformStatus().isAvailable() && Optional.ofNullable(media.getPrediction(Platform.INTERNETVOD)).map(p -> p.inPublicationWindow(Instant.now())).orElse(false);
+    }
+
+
+    /**
+     * @since 5.31
+     */
+    public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+        return playabilityCheck(platform, mediaObject,
+            s -> s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(),
+            Embargo::inPublicationWindow
+        );
+    }
+
+    /**
+     * @since 5.31
+     */
+    public static Platform[] nowPlayable(@NonNull MediaObject mediaObject) {
+        return Arrays.stream(Platform.values()).filter(p -> nowPlayable(p, mediaObject)).toArray(Platform[]::new);
+    }
+
+    /**
+     * @since 5.31
+     */
+    public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+        return playabilityCheck(platform, mediaObject,
+            s -> s.getState() == Prediction.State.REVOKED,
+            Embargo::wasUnderEmbargo
+        );
+    }
+
+    /**
+     * @since 5.31
+     */
+    public static Platform[] wasPlayable(@NonNull MediaObject mediaObject) {
+        return Arrays.stream(Platform.values()).filter(p -> wasPlayable(p, mediaObject)).toArray(Platform[]::new);
+    }
+
+    /**
+     * @since 5.31
+     */
+    public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+        return playabilityCheck(platform, mediaObject,
+            s -> s.getState() == Prediction.State.ANNOUNCED,
+            Embargo::willBePublished
+        );
+    }
+
+    /**
+     * @since 5.31
+     */
+    public static Platform[] willBePlayable(@NonNull MediaObject mediaObject) {
+        return Arrays.stream(Platform.values())
+            .filter(p -> willBePlayable(p, mediaObject))
+            .toArray(Platform[]::new);
+    }
+
+    static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(AVFileFormat.MP3, AVFileFormat.MP4, AVFileFormat.M4V, AVFileFormat.H264)));
+
+    protected static boolean locationFilter(Location l) {
+        if (l.isDeleted()) {
+            return false;
+        }
+        // legacy filter on av type
+        AVFileFormat format = l.getAvFileFormat();
+        if (format == null || format == AVFileFormat.UNKNOWN) {
+            format = AVFileFormat.forProgramUrl(l.getProgramUrl());
+        }
+        if (format != null && format != AVFileFormat.UNKNOWN) {
+            boolean acceptable = ACCEPTABLE_FORMATS.contains(format);
+            if (!acceptable) {
+                log.debug("Ignoring {}", l);
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * @since 5.31
+     */
+    protected static boolean playabilityCheck(@NonNull Platform platform, @NonNull MediaObject mediaObject,  Predicate<Prediction> prediction, Predicate<Location> location) {
+        boolean matchedByPrediction = mediaObject.getPredictions().stream().anyMatch(p -> platform.matches(p.getPlatform()) && prediction.test(p));
+        if (matchedByPrediction) {
+            return true;
+        }
+        // fall back to location only
+        return  mediaObject.getLocations().stream()
+            .filter(MediaObjects::locationFilter)
+            .anyMatch(l -> platform.matches(l.getPlatform()) && location.test(l));
+    }
+
 
 
 }

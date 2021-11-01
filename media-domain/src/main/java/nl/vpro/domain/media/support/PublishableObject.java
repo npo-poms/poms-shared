@@ -27,6 +27,7 @@ import nl.vpro.validation.EmbargoValidation;
 import nl.vpro.validation.PomsValidatorGroup;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static nl.vpro.domain.Changeables.instant;
 
 /**
  * A publishable object implements {@link Accountable} and {@link MutableEmbargo}, but furthermore also has {@link #workflow}.
@@ -43,7 +44,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public abstract class PublishableObject<T extends PublishableObject<T>>
     extends AbstractPublishableObject<T>
     implements MutableEmbargoDeprecated<T>, TrackableObject {
-
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -206,7 +206,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
     @Deprecated
     public boolean isInAllowedPublicationWindow(long millisFromNow) {
-        return inPublicationWindow(Instant.now().plusMillis(millisFromNow));
+        return inPublicationWindow(instant().plusMillis(millisFromNow));
     }
 
     @Override

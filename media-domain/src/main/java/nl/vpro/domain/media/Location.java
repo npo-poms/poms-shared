@@ -16,6 +16,10 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import static nl.vpro.domain.Changeables.clock;
+
+import static nl.vpro.domain.Changeables.instant;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -325,7 +329,7 @@ public class Location extends PublishableObject<Location>
                 }
             }
             if (this.mediaObject.getLocations().contains(this)) {
-                if (isPublishable(Instant.now())) {
+                if (isPublishable(instant())) {
                     this.mediaObject.realizePrediction(this);
                 }
             }
@@ -665,7 +669,7 @@ public class Location extends PublishableObject<Location>
     public void setWorkflow(Workflow workflow) {
         super.setWorkflow(workflow);
         if (Workflow.REVOKES.contains(workflow) && platform != null && this.mediaObject != null) {
-            Locations.updatePredictionStates(this.mediaObject, platform, Instant.now());
+            Locations.updatePredictionStates(this.mediaObject, platform, instant());
         }
     }
 

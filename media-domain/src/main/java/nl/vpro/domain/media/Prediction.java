@@ -25,6 +25,8 @@ import nl.vpro.domain.*;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
+import static nl.vpro.domain.Changeables.instant;
+
 /**
  * A prediction is related to a program and indicates that locations (for a certain platform) <em>will be</em> available.
  *
@@ -86,7 +88,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @NotNull
     @Getter
     @Setter
-    protected Instant issueDate = Instant.now();
+    protected Instant issueDate = instant();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -191,7 +193,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.state = state == null ? State.ANNOUNCED : state;
         this.encryption = encryption;
         this.mediaObject = parent;
-
     }
 
     public Prediction(Prediction source) {
@@ -235,6 +236,16 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
             .state(State.VIRTUAL)
             .parent(parent)
             .build();
+    }
+
+    public static Prediction.Builder announced() {
+        return builder().state(State.ANNOUNCED);
+    }
+    public static Prediction.Builder revoked() {
+        return builder().state(State.REVOKED);
+    }
+    public static Prediction.Builder realized() {
+        return builder().state(State.REALIZED);
     }
 
 
