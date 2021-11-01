@@ -10,8 +10,7 @@ import org.slf4j.helpers.MessageFormatter;
 import nl.vpro.util.Pair;
 
 /**
- * Maintains thread locals to
- * be able to set 'extra' response headers.
+ * Maintains thread locals to be able to set 'extra' response headers.
  *
  * @author Michiel Meeuwissen
  */
