@@ -994,7 +994,9 @@ public class MediaObjects {
      * @since 5.31
      */
     public static Platform[] willBePlayable(@NonNull MediaObject mediaObject) {
-        return Arrays.stream(Platform.values()).filter(p -> willBePlayable(p, mediaObject)).toArray(Platform[]::new);
+        return Arrays.stream(Platform.values())
+            .filter(p -> willBePlayable(p, mediaObject))
+            .toArray(Platform[]::new);
     }
 
     static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(AVFileFormat.MP3, AVFileFormat.MP4, AVFileFormat.M4V, AVFileFormat.H264)));
