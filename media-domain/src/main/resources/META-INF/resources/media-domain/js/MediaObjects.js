@@ -1,5 +1,5 @@
 
-nl_vpro_domain_media_MediaObjects = (function() {
+const nl_vpro_domain_media_MediaObjects = (function() {
 
     let clock = function() {
         return Date.now();
@@ -14,6 +14,8 @@ nl_vpro_domain_media_MediaObjects = (function() {
 
     /**
      * Some legacy location don't have there av-format properly filled in. This guesses it from the programUrlField
+     *
+     * This code is copied from java nl.vpro.domain.media.AVFileFormat#forProgramUrl
      * @param {object} location The location object
      * @return {string}
      */
