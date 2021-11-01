@@ -717,7 +717,7 @@ public class MediaObjects {
 
 
     /**
-     * @TODO: javadoc
+     * TODO: javadoc
      */
     public static Optional<List<MemberRef>> getPath(MediaObject parent, MediaObject child, List<? extends MediaObject> descendants) {
         return getPath(parent, child,
