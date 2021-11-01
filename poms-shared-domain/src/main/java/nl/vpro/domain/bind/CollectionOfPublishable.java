@@ -1,6 +1,8 @@
 package nl.vpro.domain.bind;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -15,6 +17,7 @@ import nl.vpro.domain.Embargo;
  * @since 5.31
  * @see PublicationFilter
  */
+@Slf4j
 public class CollectionOfPublishable extends AbstractJsonIterable.Serializer<Embargo> {
     {
         considerJsonInclude = true;
@@ -22,7 +25,7 @@ public class CollectionOfPublishable extends AbstractJsonIterable.Serializer<Emb
     @Override
     protected void serializeValue(Embargo value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
         if (PublicationFilter.filter(value, serializerProvider)) {
-
+            log.debug("{} is not publishable", value);
         } else {
             jgen.getCodec().writeValue(jgen, value);
         }
