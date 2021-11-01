@@ -1,5 +1,4 @@
-
-const nl_vpro_domain_media_MediaObjects = (function() {
+const MediaObjects = (function() {
 
     let clock = function() {
         return Date.now();
@@ -226,3 +225,4 @@ const nl_vpro_domain_media_MediaObjects = (function() {
     });
 })();
 
+exports.MediaObjects = MediaObjects;

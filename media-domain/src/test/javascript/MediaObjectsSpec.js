@@ -7,8 +7,7 @@
 
 describe('MediaObjects', function() {
     // This is the object we are testing
-    require("../../main/resources/META-INF/resources/media-domain/js/MediaObjects")
-    const target = nl_vpro_domain_media_MediaObjects;
+    const target = require("../../main/resources/META-INF/resources/media-domain/js/MediaObjects").MediaObjects;
 
     // make sure the tests are entirely predictable. Some cases tests 'embargo'.
     target.setClock(function() {return 1635253200000});
