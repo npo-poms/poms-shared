@@ -34,6 +34,7 @@ describe('MediaObjects', function() {
         files.forEach(file => {
             const json = require(directory + '/' + file);
             it(json.description, function () {
+                expect(target.nowPlayable(json.publishedMediaObject)).toEqual(json.publishedNowExpectedPlatforms);
                 expect(target.nowPlayable(json.mediaObject)).toEqual(json.nowExpectedPlatforms);
             });
         });
@@ -43,6 +44,7 @@ describe('MediaObjects', function() {
         files.forEach(file => {
             const json = require(directory + '/' + file);
             it(json.description, function () {
+                expect(target.wasPlayable(json.publishedMediaObject)).toEqual(json.publishedWasExpectedPlatforms);
                 expect(target.wasPlayable(json.mediaObject)).toEqual(json.wasExpectedPlatforms);
             });
         });
@@ -52,6 +54,7 @@ describe('MediaObjects', function() {
         files.forEach(file => {
             const json = require(directory + '/' + file);
             it(json.description, function () {
+                expect(target.willBePlayable(json.publishedMediaObject)).toEqual(json.publishedWillExpectedPlatforms);
                 expect(target.willBePlayable(json.mediaObject)).toEqual(json.willExpectedPlatforms);
             });
         });

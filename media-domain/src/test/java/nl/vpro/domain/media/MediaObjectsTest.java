@@ -633,10 +633,14 @@ public class MediaObjectsTest {
                         ObjectNode result = Jackson2Mapper.getInstance().createObjectNode();
                         result.put("description", description);
                         ExpectedPlatforms expectedPlatforms = (ExpectedPlatforms) a.get()[2];
-                        result.put("nowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedNow()));
-                        result.put("wasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWas()));
-                        result.put("willExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWillBe()));
-                        result.put("mediaObject", Jackson2Mapper.getPublisherInstance().valueToTree(a.get()[1]));
+                        result.put("publishedNowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedNow()));
+                        result.put("publishedWasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWas()));
+                        result.put("publishedWillExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWillBe()));
+                        result.put("nowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getNow()));
+                        result.put("wasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getWas()));
+                        result.put("willExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getWillBe()));
+                        result.put("publishedMediaObject", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(a.get()[1]));
+                        result.put("mediaObject", Jackson2Mapper.getPrettyInstance().valueToTree(a.get()[1]));
                         File file = new File(dest, description + ".json");
                         try (OutputStream outputStream = new FileOutputStream(file)) {
                             Jackson2Mapper.getPrettyPublisherInstance().writer().writeValue(outputStream, result);

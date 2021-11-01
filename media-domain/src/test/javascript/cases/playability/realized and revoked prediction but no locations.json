@@ -1,8 +1,29 @@
 {
   "description" : "realized and revoked prediction but no locations",
+  "publishedNowExpectedPlatforms" : [ "PLUSVOD" ],
+  "publishedWasExpectedPlatforms" : [ "INTERNETVOD" ],
+  "publishedWillExpectedPlatforms" : [ ],
   "nowExpectedPlatforms" : [ "PLUSVOD" ],
   "wasExpectedPlatforms" : [ "INTERNETVOD" ],
   "willExpectedPlatforms" : [ ],
+  "publishedMediaObject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
+    "embeddable" : true,
+    "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "INTERNETVOD"
+    }, {
+      "state" : "REALIZED",
+      "platform" : "PLUSVOD"
+    } ]
+  },
   "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
