@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "jasmine": "^3.10.0",
-    "jasmine-core": "^3.10.1",
-    "@wojtek1150/instanbul": "^0.4.6"
+    "jasmine": "3.10.0",
+    "jasmine-core": "3.10.1",
+    "@wojtek1150/instanbul": "0.4.6"
 
   },
   "scripts": {
