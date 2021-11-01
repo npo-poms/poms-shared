@@ -390,8 +390,9 @@ public class MediaObjects {
     }
 
     private static void matchBroadcasters(
-        @NonNull  BroadcasterService broadcasterService,
-        @NonNull  MediaObject mediaObject, @NonNull Set<MediaObject> handled) throws NotFoundException {
+        @NonNull BroadcasterService broadcasterService,
+        @NonNull MediaObject mediaObject,
+        @NonNull Set<MediaObject> handled) throws NotFoundException {
         if (handled == null) {
             handled = new HashSet<>(); // to avoid accidental stack overflows
         }
