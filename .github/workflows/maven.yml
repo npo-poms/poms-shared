@@ -48,7 +48,7 @@ jobs:
           path: '**/target/surefire-reports/TEST-*.xml'    # Path to test results
           reporter: java-junit       # Format of test results
           only-summary: 'true'
-
       - name: Publish to codecov
-        run: bash <(curl -s https://codecov.io/bash)
+        uses: codecov/codecov-action@v2
         if: github.ref == 'refs/heads/main'
+
