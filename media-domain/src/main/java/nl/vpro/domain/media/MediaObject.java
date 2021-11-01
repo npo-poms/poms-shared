@@ -254,8 +254,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     public static final String EMBARGO_FILTER = "embargoFilter";
     public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
 
-
-
     @Column(name = "mid", nullable = false, unique = true)
     @Size(max = 255, min = 4)
     @Pattern(

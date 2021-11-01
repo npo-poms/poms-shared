@@ -226,8 +226,6 @@ public class MediaObjects {
         to.setScheduleEvents(from.getScheduleEvents());
     }
 
-
-
     public static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject) throws NotFoundException {
         matchBroadcasters(broadcasterService, mediaObject, null);
     }
