@@ -37,9 +37,7 @@ public class PublicationFilter extends SimpleBeanPropertyFilter {
         Class<?> activeView = prov.getActiveView();
         if (ENABLED.get() && Views.Publisher.class.isAssignableFrom(activeView)) {
             if (pojo instanceof Embargo) {
-                if (! ((Embargo) pojo).isPublishable()) {
-                    return true;
-                }
+                return !((Embargo) pojo).isPublishable();
             }
         }
         return false;
