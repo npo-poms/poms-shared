@@ -1,4 +1,4 @@
-const MediaObjects = (function() {
+const  nl_vpro_domain_media_MediaObjects = (function() {
 
     let clock = function() {
         return Date.now();
@@ -225,4 +225,6 @@ const MediaObjects = (function() {
     });
 })();
 
-exports.MediaObjects = MediaObjects;
+try {
+    exports.MediaObjects = nl_vpro_domain_media_MediaObjects;
+} catch (e) {}
