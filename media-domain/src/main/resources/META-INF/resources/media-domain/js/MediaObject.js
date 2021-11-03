@@ -6,5 +6,7 @@ class MediaObject {
         return this.titles.find(e => e.type === 'MAIN').value;
     }
 }
-module.exports = MediaObject;
+if (module) {
+    module.exports = MediaObject;
+}
 
