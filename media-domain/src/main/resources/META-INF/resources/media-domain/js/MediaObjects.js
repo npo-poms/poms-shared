@@ -150,7 +150,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
     function inPublicationWindow(object) {
         const now = clock()
         const stop = object.publishStop;
-        if (stop != null && ! now < stop) {
+        if (stop != null && ! (now < stop)) {
             debug(object, "not published")
             return false;
         }
