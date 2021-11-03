@@ -958,8 +958,9 @@ public class MediaObjects {
     /**
      * @since 5.31
      */
-    public static Platform[] nowPlayable(@NonNull MediaObject mediaObject) {
-        return Arrays.stream(Platform.values()).filter(p -> nowPlayable(p, mediaObject)).toArray(Platform[]::new);
+    public static Set<Platform> nowPlayable(@NonNull MediaObject mediaObject) {
+        return Arrays.stream(Platform.values()).filter(p -> nowPlayable(p, mediaObject))
+            .collect(Collectors.toCollection(TreeSet::new));
     }
 
     /**
@@ -975,8 +976,9 @@ public class MediaObjects {
     /**
      * @since 5.31
      */
-    public static Platform[] wasPlayable(@NonNull MediaObject mediaObject) {
-        return Arrays.stream(Platform.values()).filter(p -> wasPlayable(p, mediaObject)).toArray(Platform[]::new);
+    public static Set<Platform> wasPlayable(@NonNull MediaObject mediaObject) {
+        return Arrays.stream(Platform.values()).filter(p -> wasPlayable(p, mediaObject))
+            .collect(Collectors.toCollection(TreeSet::new));
     }
 
     /**
@@ -992,10 +994,18 @@ public class MediaObjects {
     /**
      * @since 5.31
      */
-    public static Platform[] willBePlayable(@NonNull MediaObject mediaObject) {
+    public static  Optional<LocalDateTime> willBePlayableAt(Platform platform, MediaObject mediaObject) {
+        return Optional.ofNullable(mediaObject.getPrediction(platform)).filter(Prediction::isPlannedAvailability).map(p -> p.getPublishStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime());
+    }
+
+    /**
+     * @since 5.31
+     */
+    public static Set<Platform> willBePlayable(@NonNull MediaObject mediaObject) {
         return Arrays.stream(Platform.values())
             .filter(p -> willBePlayable(p, mediaObject))
-            .toArray(Platform[]::new);
+            .collect(Collectors.toCollection(TreeSet::new));
+
     }
 
     static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(AVFileFormat.MP3, AVFileFormat.MP4, AVFileFormat.M4V, AVFileFormat.H264)));
