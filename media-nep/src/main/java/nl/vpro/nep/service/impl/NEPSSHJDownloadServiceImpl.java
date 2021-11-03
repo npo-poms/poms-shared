@@ -108,6 +108,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         }
     }
 
+    @SuppressWarnings("BusyWait")
     protected void checkAvailabilityAndConsume   (
         @NonNull String directory,
         @NonNull String f,
@@ -115,61 +116,74 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         @Nullable Function<FileMetadata, Proceed> descriptorConsumer,
         @NonNull  Consumer<RemoteFile> remoteFileConsumer) throws IOException, InterruptedException  {
         Duration retry = Duration.ofSeconds(10);
-        RemoteFile handle = null;
         String nepFile = NEPDownloadService.join(directory, f);
         try(final SSHClient sessionFactory = createClient();
             final SFTPClient sftp = sessionFactory.newSFTPClient()) {
             Instant start = Instant.now();
             long count = 0;
-            RETRY:
-            while (true) {
-                count++;
-                try {
-                    log.debug("Checking for read {}", nepFile);
-                    handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
-                    FileAttributes attributes = handle.fetchAttributes();
-                    FileMetadata descriptor = FileMetadata.builder()
-                        .size(handle.length())
-                        .lastModified(Instant.ofEpochMilli(attributes.getMtime() * 1000))
-                        .fileName(nepFile)
-                        .build();
-                    if (descriptorConsumer != null) {
-                        try {
-                            Proceed proceed = descriptorConsumer.apply(descriptor);
-                            switch (proceed) {
-                                case TRUE:
-                                    break RETRY;
-                                case RETRY:
-                                    Slf4jHelper.debugOrInfo(log, count > 6, "{}: need retry. Waiting {}", nepFile, retry);
-                                    Thread.sleep(retry.toMillis());
-                                    continue RETRY;
-                                case FALSE:
-                                    return;
+            RemoteFile handle = null;
+            try {
+                RETRY:
+                while (true) {
+                    count++;
+                    try {
+                        log.debug("Checking for read {}", nepFile);
+                        handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
+                        FileAttributes attributes = handle.fetchAttributes();
+                        FileMetadata descriptor = FileMetadata.builder()
+                            .size(handle.length())
+                            .lastModified(Instant.ofEpochMilli(attributes.getMtime() * 1000))
+                            .fileName(nepFile)
+                            .build();
+                        if (descriptorConsumer != null) {
+                            try {
+                                Proceed proceed = descriptorConsumer.apply(descriptor);
+                                switch (proceed) {
+                                    case TRUE:
+                                        break RETRY;
+                                    case RETRY:
+                                        Slf4jHelper.debugOrInfo(log, count > 6, "{}: need retry. Waiting {}", nepFile, retry);
+                                        Thread.sleep(retry.toMillis());
+                                        continue RETRY;
+                                    case FALSE:
+                                        return;
 
+                                }
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
                             }
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
+                        }
+                        break;
+                    } catch (SFTPException sftpe) {
+                        if (timeout == null || timeout.equals(Duration.ZERO)) {
+                            throw new NEPFileNotFoundException(sftpe, "File " + nepFile + " doesn't exist");
+                        }
+                        if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
+                            throw new NEPFileNotAppearedTimelyException(sftpe, "File '" + nepFile + "' didn't appear in " + timeout);
+                        }
+                        Slf4jHelper.debugOrInfo(log, count > 6, "{}: {}. Waiting {} for retry", nepFile, sftpe.getMessage(), retry);
+                        Thread.sleep(retry.toMillis());
+                        if (handle != null) {
+                            try {
+                                handle.close();
+                            } finally {
+                                handle = null;
+                            }
                         }
                     }
-                    break;
-                } catch (SFTPException sftpe) {
-                    if (timeout == null || timeout.equals(Duration.ZERO)) {
-                        throw new NEPFileNotFoundException(sftpe, "File " + nepFile + " doesn't exist");
-                    }
-                    if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
-                        throw new NEPFileNotAppearedTimelyException(sftpe, "File '" + nepFile + "' didn't appear in " + timeout);
-                    }
-                    Slf4jHelper.debugOrInfo(log, count > 6, "{}: {}. Waiting {} for retry", nepFile, sftpe.getMessage(), retry);
-                    Thread.sleep(retry.toMillis());
                 }
-            }
-        } finally {
-            if (handle != null) {
-                remoteFileConsumer.accept(handle);
-                try {
-                    handle.close();
-                } catch(Exception e) {
-                    log.warn(e.getMessage());
+            } finally {
+                if (handle != null) {
+                    try {
+                        remoteFileConsumer.accept(handle);
+                    } finally {
+                        try {
+                            handle.close();
+                        } catch (Exception e) {
+                            log.warn("During closing of {}: {}", handle, e.getMessage());
+
+                        }
+                    }
                 }
             }
         }
