@@ -98,6 +98,10 @@ public class OpenskosRepository implements GTAARepository {
     @Setter
     private int retries;
 
+    @Getter
+    @Setter
+    private String creator = "POMS";
+
     public OpenskosRepository(
         @Value("${gtaa.baseUrl}")
         @NonNull String baseUrl,
@@ -425,12 +429,12 @@ public class OpenskosRepository implements GTAARepository {
 
     @SneakyThrows
     private ResponseEntity<Source> postRDF(
-        @NonNull String prefLabel,
-        @NonNull List<Label> notes,
-        @NonNull String creator,
-        @NonNull Scheme scheme) {
+        final  @NonNull String prefLabel,
+        final @NonNull List<@NonNull Label> notes,
+        final @NonNull String creator,
+        final @NonNull Scheme scheme) {
         log.info("Submitting {} {} {} to {}", prefLabel, notes, creator, gtaaUrl);
-        RDF rdf = new RDF();
+        final RDF rdf = new RDF();
         rdf.setDescriptions(
             Collections.singletonList(
                 Description.builder()
@@ -475,7 +479,7 @@ public class OpenskosRepository implements GTAARepository {
         }
         // String fields = "&fl=uuid,uri,prefLabel,altLabel,hiddenLabel,status";
         input = input.replaceAll("[\\-.,]+", " ");
-        String query = "(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:POMS)) " +
+        String query = "(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:" + creator + ")) " +
                 "AND inScheme:\"" + Scheme.person.getUrl()  + "\" " +
                 "AND (" + input + "*)";
 
@@ -513,7 +517,7 @@ public class OpenskosRepository implements GTAARepository {
         input = input.replaceAll("[\\-.,]+", " ");
 
         String query = String.format("(status:(candidate OR approved) " +
-                "OR (status:not_compliant AND dc_creator:POMS)) " +
+                "OR (status:not_compliant AND dc_creator:" + creator + ")) " +
                  generateQueryByScheme(schemes) +
                 "AND ( %s*)", input);
 
