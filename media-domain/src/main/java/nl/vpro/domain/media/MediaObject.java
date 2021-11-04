@@ -30,10 +30,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.functional.TriFunction;
 import org.meeuw.i18n.countries.Country;
-import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.validation.Language;
-import org.meeuw.i18n.regions.validation.ValidRegion;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -41,6 +39,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
+import nl.vpro.domain.bind.CollectionOfPublishable;
+import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -58,6 +58,7 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.CascadeType.ALL;
+import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
 import static nl.vpro.domain.media.MediaObject.*;
@@ -523,6 +524,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @XmlElement(name = "location")
     @JsonProperty("locations")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonSerialize(using = CollectionOfPublishable.class)
     protected SortedSet<@NotNull @Valid Location> locations = new TreeSet<>();
 
 
@@ -2061,6 +2063,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return streamingPlatformStatus;
     }
     @XmlTransient
+    @NonNull
     public SortedSet<Prediction> getPredictions() {
         if (predictions == null) {
             predictions = new TreeSet<>();
@@ -2075,7 +2078,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                     for (Location location : MediaObject.this.getLocations()) {
                         if (location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                                && prediction.inPublicationWindow(Instant.now())) {
+                                && prediction.inPublicationWindow(instant())) {
                             log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction,
                                     location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
@@ -2181,6 +2184,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     /**
      * Returns the locations in {@link Location#PRESENTATION_ORDER}
      */
+    @NonNull
     public SortedSet<Location> getLocations() {
         if (locations == null) {
             locations = new TreeSet<>();
@@ -2287,7 +2291,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         } else {
             locations.add(location);
             location.setParent(this);
-            if (location.hasPlatform() && location.isPublishable(Instant.now())) {
+            if (location.hasPlatform() && location.isPublishable(instant())) {
                 realizePrediction(location);
             }
         }

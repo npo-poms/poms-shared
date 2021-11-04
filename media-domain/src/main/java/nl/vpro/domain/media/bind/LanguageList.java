@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
+import nl.vpro.domain.bind.AbstractJsonIterable;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
@@ -20,7 +21,7 @@ public class LanguageList {
     private LanguageList() {
     }
 
-    public static class Serializer extends AbstractList.Serializer<Locale> {
+    public static class Serializer extends AbstractJsonIterable.Serializer<Locale> {
 
         @Override
         protected void serializeValue(Locale value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
@@ -28,10 +29,10 @@ public class LanguageList {
         }
     }
 
-    public static class Deserializer extends AbstractList.Deserializer<Locale> {
+    public static class Deserializer extends AbstractJsonIterable.Deserializer<Locale> {
 
         @Override
-        protected Locale deserialize(JsonNode node, DeserializationContext ctxt) throws IOException {
+        protected Locale deserializeValue(JsonNode node, DeserializationContext ctxt) throws IOException {
             LocaleWrapper wrapper = Jackson2Mapper.getInstance().readerFor(LocaleWrapper.class).readValue(node);
             return wrapper.getLocale();
         }

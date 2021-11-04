@@ -4,19 +4,35 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.*;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Test;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import nl.vpro.domain.bind.AbstractJsonIterable;
+import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
+import nl.vpro.jackson2.Jackson2Mapper;
 
+import static nl.vpro.domain.Changeables.*;
+import static nl.vpro.domain.media.Platform.INTERNETVOD;
+import static nl.vpro.domain.media.Platform.PLUSVOD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,14 +41,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Roelof Jan Koekoek
  * @since 1.4
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "ConstantConditions", "OptionalGetWithoutIsPresent"})
 @Slf4j
 public class MediaObjectsTest {
+    static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
+    @BeforeAll
+    static void init() {
+        log.info("Setting clock to {}", NOW);
+        CLOCK.set(Clock.fixed(NOW , Schedule.ZONE_ID));
+    }
+    @AfterAll
+    static void setClock() {
+        CLOCK.remove();
+    }
 
     @Test
     public void sortDate() {
         Program program = new Program();
-        assertThat(Math.abs(MediaObjects.getSortInstant(program).toEpochMilli() - System.currentTimeMillis())).isLessThan(10000);
+        assertThat(Math.abs(MediaObjects.getSortInstant(program).toEpochMilli() - clock().millis())).isLessThan(10000);
         Instant publishDate = Instant.ofEpochMilli(1344043500362L);
         program.setPublishStartInstant(publishDate);
         assertThat(MediaObjects.getSortInstant(program)).isEqualTo(publishDate);
@@ -55,7 +81,7 @@ public class MediaObjectsTest {
             .creationDate(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
             .predictions(
-                Prediction.builder()
+                Prediction.announced()
                     .publishStart(Instant.ofEpochMilli(3)).build())
             .scheduleEvents(
                 ScheduleEvent.builder().channel(Channel.NED2).localStart(2015, 1, 1, 12, 30).duration(Duration.ofMinutes(10)).rerun(false).build(),
@@ -292,8 +318,8 @@ public class MediaObjectsTest {
 
     @Test
     public void testGetPlatformNamesInLowerCase() {
-        Prediction p1 = new Prediction(Platform.PLUSVOD);
-        Prediction p2 = new Prediction(Platform.INTERNETVOD);
+        Prediction p1 = new Prediction(PLUSVOD);
+        Prediction p2 = new Prediction(INTERNETVOD);
         Prediction p3 = new Prediction(Platform.NPOPLUSVOD);
         Collection<Prediction> predictions = new ArrayList<>();
         predictions.add(p1);
@@ -306,9 +332,9 @@ public class MediaObjectsTest {
 
     @Test
     public void testGetPlatformNamesInLowerCaseNotAvailable() {
-        Prediction p1 = new Prediction(Platform.PLUSVOD);
+        Prediction p1 = new Prediction(PLUSVOD);
         p1.setPlannedAvailability(false);
-        Prediction p2 = new Prediction(Platform.INTERNETVOD);
+        Prediction p2 = new Prediction(INTERNETVOD);
         p2.setPlannedAvailability(false);
         Prediction p3 = new Prediction(Platform.NPOPLUSVOD);
         Collection<Prediction> predictions = new ArrayList<>();
@@ -366,6 +392,270 @@ public class MediaObjectsTest {
         assertThat( existing.findLocation("ccc").getAvAttributes().getVideoAttributes()).withFailMessage("Removing deleted VideoAttributes failed").isNull();
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static class Playability {
+
+        @BeforeAll
+        static void init (){
+           MediaObjectsTest.init();
+        }
+        @AfterAll
+        static void setClock() {
+            CLOCK.remove();
+        }
+
+        private static MediaBuilder.ProgramBuilder fixed() {
+            return MediaBuilder
+                .broadcast()
+                .mid("mid_123")
+                .creationDate(instant().minus(Duration.ofDays(1)))
+                .workflow(Workflow.PUBLISHED)
+                ;
+
+        }
+
+        @Getter
+        public static class ExpectedPlatforms {
+            final Platform[] now;
+            final Platform[] was;
+            final Platform[] willBe;
+
+            final Platform[] publishedNow;
+            final Platform[] publishedWas;
+            final Platform[] publishedWillBe;
+
+            public ExpectedPlatforms(Platform[] now, Platform[] was, Platform[] willBe, Platform[] publishedNow, Platform[] publishedWas, Platform[] publishedWillBe) {
+                this.now = now;
+                this.was = was;
+                this.willBe = willBe;
+                this.publishedNow = publishedNow;
+                this.publishedWas = publishedWas;
+                this.publishedWillBe = publishedWillBe;
+            }
+
+            public ExpectedPlatforms(Platform[] now, Platform[] was, Platform[] willBe) {
+                this(now, was, willBe, now, was, willBe);
+            }
+            public ExpectedPlatforms withPublished(Platform[] now, Platform[] was, Platform[] willBe) {
+                return new ExpectedPlatforms(this.now, this.was, this.willBe,
+                    now == null ? this.publishedNow : now,
+                    was == null ? this.publishedWas : was,
+                    willBe == null ? this.publishedWillBe : willBe
+                );
+            }
+        }
+        public static ExpectedPlatforms expected(Platform[] now, Platform[] was, Platform[] willBe) {
+            return new ExpectedPlatforms(now, was, willBe);
+        }
+
+        public static final Platform[] A_NONE = new Platform[0];
+        public static final Platform[] A_INTERNETVOD = new Platform[] {INTERNETVOD};
+        public static final Platform[] A_PLUSVOD = new Platform[] {PLUSVOD};
+        public static final Platform[] A_BOTH = new Platform[] {INTERNETVOD, PLUSVOD};
+        public static Stream<Arguments> examples() {
+            return Stream.of(
+                Arguments.of(
+                    "just a legacy location",
+                    fixed()
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+                        .build(),
+                    expected(A_INTERNETVOD, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "just a legacy revoked location",
+                   fixed()
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/revoke.foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
+                        .build(),
+                    expected(A_NONE, A_INTERNETVOD, A_NONE).withPublished(A_NONE, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "just a legacy windows media location",
+                    fixed()
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.wmv").build())
+                        .build(),
+                    expected(A_NONE, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "a location with explicit INTERNETVOD",
+                    fixed()
+                        .locations(
+                            Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build(),
+                            Location.builder().platform(PLUSVOD).workflow(Workflow.DELETED).programUrl("https://bla.com/deleted.mp4").build()
+                        )
+                        .build(),
+                    expected(A_INTERNETVOD, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "a location with explicit PLUSVOD",
+                    fixed()
+                        .locations(
+                            Location.builder().platform(PLUSVOD).programUrl("https://bla.com/foobar.mp4").build(),
+                            Location.builder().platform(PLUSVOD).workflow(Workflow.DELETED).programUrl("https://bla.com/deleted.mp4").build(),
+                            Location.builder().platform(PLUSVOD).publishStop(instant().minusSeconds(10)).programUrl("https://bla.com/expired.mp4").build()
+                        )
+                        .build(),
+                    expected(A_PLUSVOD, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "an expired location with explicit INTERNETVOD",
+                    fixed()
+                        .locations(Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
+                        .build(),
+                    expected(A_NONE, A_INTERNETVOD, A_NONE).withPublished(A_NONE, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "an expired location with explicit INTERNETVOD",
+                    fixed()
+                        .locations(Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(NOW.minusSeconds(10)).build())
+                        .build(),
+                    expected(A_NONE, A_INTERNETVOD, A_NONE).withPublished(A_NONE, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "an expired location with explicit PLUSVOD",
+                    fixed()
+                        .locations(Location.builder().platform(PLUSVOD).publishStop(instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build())
+                        .build(),
+                    expected(A_NONE, A_PLUSVOD, A_NONE).withPublished(A_NONE, A_NONE, A_NONE)
+                ),
+
+
+                Arguments.of(
+                    "realized prediction",
+                    fixed()
+                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+                        .predictions(Prediction.realized().platform(INTERNETVOD).build())
+                        .build(),
+                    expected(A_INTERNETVOD, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "realized prediction but no locations",
+                    fixed()
+                        .predictions(Prediction.realized().platform(PLUSVOD).build())
+                        .build(),
+                    expected(A_PLUSVOD, A_NONE, A_NONE)
+                ),
+
+                Arguments.of(
+                    "realized prediction and expired location",
+                    fixed()
+                        .locations(Location.builder().platform(null).publishStop(instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build())
+                        .predictions(Prediction.realized().platform(PLUSVOD).build())
+                        .build(),
+                    expected(A_PLUSVOD, A_INTERNETVOD, A_NONE).withPublished(A_PLUSVOD, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "revoked prediction and expired location",
+                    fixed()
+                        .locations(
+                            Location.builder().platform(null).publishStop(instant().minusSeconds(10)).programUrl("https://bla.com/foobar.mp4").build()
+                        )
+                        .predictions(Prediction.revoked().platform(PLUSVOD).build())
+                        .build(),
+                    expected(A_NONE, A_BOTH, A_NONE).withPublished(A_NONE, A_PLUSVOD, A_NONE)
+                ),
+                Arguments.of(
+                    "revoked prediction but no locations",
+                    fixed()
+                        .predictions(Prediction.revoked().platform(PLUSVOD).build())
+                        .build(),
+                    expected(A_NONE, A_PLUSVOD, A_NONE)
+                ),
+                Arguments.of(
+                    "realized and revoked prediction but no locations",
+                    fixed()
+                        .predictions(
+                            Prediction.realized().platform(PLUSVOD).build(),
+                            Prediction.revoked().platform(INTERNETVOD).build()
+                        )
+                        .build(),
+                    expected(A_PLUSVOD, A_INTERNETVOD, A_NONE)
+                )
+            );
+        }
+
+        public static Stream<Arguments> nowCases() {
+            return examples().map(a -> Arguments.of(a.get()[0], a.get()[1], ((ExpectedPlatforms)a.get()[2]).getNow()));
+        }
+
+        public static Stream<Arguments> wasCases() {
+            return examples().map(a -> Arguments.of(a.get()[0], a.get()[1], ((ExpectedPlatforms)a.get()[2]).getWas()));
+        }
+        public static Stream<Arguments> willCases() {
+            return examples().map(a -> Arguments.of(a.get()[0], a.get()[1], ((ExpectedPlatforms)a.get()[2]).getWillBe()));
+        }
+
+        @Test
+        void isPlayable() {
+            // this is a bit strange, this call just looks at streaming status:
+            assertThat(MediaObjects.isPlayable(nowCases().findFirst().map(a -> (MediaObject) a.get()[1]).orElseThrow(RuntimeException::new))).isFalse();
+        }
+
+        @ParameterizedTest
+        @MethodSource("nowCases")
+        void nowPlayable(String description, MediaObject object, Platform[] expectedPlatforms) throws JsonProcessingException {
+            assertThat(MediaObjects.nowPlayable(object)).containsExactly(expectedPlatforms);
+            // should still be valid if mediaobject gets published
+            MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
+            assertThat(MediaObjects.nowPlayable(published)).containsExactly(expectedPlatforms);
+        }
+
+
+        @ParameterizedTest
+        @MethodSource("wasCases")
+        void wasPlayable(String description, MediaObject object, Platform[] expectedPlatforms) throws JsonProcessingException {
+            assertThat(MediaObjects.wasPlayable(object)).containsExactly(expectedPlatforms);
+            // should still be valid if mediaobject gets published
+            MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
+            assertThat(MediaObjects.wasPlayable(published)).containsExactly(expectedPlatforms);
+        }
+
+
+
+        @ParameterizedTest
+        @MethodSource("willCases")
+        void willBePlayable(String description, MediaObject object, Platform[] expectedPlatforms) throws JsonProcessingException {
+            assertThat(MediaObjects.willBePlayable(object)).containsExactly(expectedPlatforms);
+            // should still be valid if mediaobject gets published
+            MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
+            assertThat(MediaObjects.willBePlayable(published)).containsExactly(expectedPlatforms);
+        }
+
+        @Test
+        public void createJsonForJavascriptTests() {
+            AbstractJsonIterable.DEFAULT_CONSIDER_JSON_INCLUDE.set(true);
+            PublicationFilter.ENABLED.set(true);
+            try {
+                File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/playability/");
+                dest.mkdirs();
+                examples().forEach(a -> {
+                    try {
+                        String description = (String) a.get()[0];
+                        ObjectNode result = Jackson2Mapper.getInstance().createObjectNode();
+                        result.put("description", description);
+                        ExpectedPlatforms expectedPlatforms = (ExpectedPlatforms) a.get()[2];
+                        result.put("publishedNowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedNow()));
+                        result.put("publishedWasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWas()));
+                        result.put("publishedWillExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWillBe()));
+                        result.put("nowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getNow()));
+                        result.put("wasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getWas()));
+                        result.put("willExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getWillBe()));
+                        result.put("publishedMediaObject", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(a.get()[1]));
+                        result.put("mediaObject", Jackson2Mapper.getPrettyInstance().valueToTree(a.get()[1]));
+                        File file = new File(dest, description + ".json");
+                        try (OutputStream outputStream = new FileOutputStream(file)) {
+                            Jackson2Mapper.getPrettyPublisherInstance().writer().writeValue(outputStream, result);
+                        }
+                    } catch (IOException e) {
+                        log.error(e.getMessage(), e);
+                    }
+                });
+            } finally {
+                AbstractJsonIterable.DEFAULT_CONSIDER_JSON_INCLUDE.remove();
+                PublicationFilter.ENABLED.remove();
+
+            }
+        }
+    }
 }
 
 

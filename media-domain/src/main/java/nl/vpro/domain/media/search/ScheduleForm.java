@@ -28,6 +28,7 @@ import nl.vpro.domain.media.ScheduleEvent;
 @Getter
 @Setter
 public class ScheduleForm implements Predicate<ScheduleEvent> {
+
     private SchedulePager pager;
 
     /**

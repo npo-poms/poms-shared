@@ -9,6 +9,7 @@ import org.meeuw.i18n.regions.Region;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.*;
 
+import nl.vpro.domain.bind.AbstractJsonIterable;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
@@ -22,7 +23,7 @@ public class CountryCodeList {
     private CountryCodeList() {
     }
 
-    public static class Serializer extends AbstractList.Serializer<Region> {
+    public static class Serializer extends AbstractJsonIterable.Serializer<Region> {
 
         @Override
         protected void serializeValue(Region value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
@@ -35,10 +36,10 @@ public class CountryCodeList {
         }
     }
 
-    public static class Deserializer extends AbstractList.Deserializer<Region> {
+    public static class Deserializer extends AbstractJsonIterable.Deserializer<Region> {
 
         @Override
-        protected Region deserialize(JsonNode node, DeserializationContext ctxt) throws IOException {
+        protected Region deserializeValue(JsonNode node, DeserializationContext ctxt) throws IOException {
             if (node == null) {
                 return null;
             }

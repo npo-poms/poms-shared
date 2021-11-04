@@ -4,6 +4,8 @@ import java.time.Instant;
 
 import com.google.common.collect.Range;
 
+import static nl.vpro.domain.Changeables.instant;
+
 /**
  * An object having or defining a publication embargo, meaning that it has publish start and stop instants.
  *
@@ -43,11 +45,11 @@ public interface Embargo {
     }
 
     default boolean isUnderEmbargo() {
-        return isUnderEmbargo(Instant.now());
+        return isUnderEmbargo(instant());
     }
 
     default boolean wasUnderEmbargo() {
-        return wasUnderEmbargo(Instant.now());
+        return wasUnderEmbargo(instant());
     }
 
     default boolean wasUnderEmbargo(Instant now) {
@@ -60,7 +62,7 @@ public interface Embargo {
      * Is now published, but will not any more be at some point in the future
      */
     default boolean willBeUnderEmbargo() {
-        return willBeUnderEmbargo(Instant.now());
+        return willBeUnderEmbargo(instant());
     }
 
     default boolean willBeUnderEmbargo(Instant now) {
@@ -72,11 +74,15 @@ public interface Embargo {
      * Is now under embargo, but will not any more be at some point in the future
      */
     default boolean willBePublished() {
-        return willBePublished(Instant.now());
+        return willBePublished(instant());
     }
 
     default boolean willBePublished(Instant now) {
-        return isUnderEmbargo(now) && now.isBefore(getPublishStartInstant());
+        return isUnderEmbargo(now) && (getPublishStartInstant() != null && now.isBefore(getPublishStartInstant()));
+    }
+
+    default boolean inPublicationWindow() {
+        return inPublicationWindow(instant());
     }
 
     default boolean inPublicationWindow(Instant now) {
@@ -92,5 +98,12 @@ public interface Embargo {
         return true;
     }
 
+    /**
+     * Whether this object is publishable.
+     * This defaults to {@link #inPublicationWindow()}, but extensions may improve on this. E.g. {@code nl.vpro.domain.media.TrackableObject} also checks whether the object is deleted or not.
+     */
+    default boolean isPublishable() {
+        return inPublicationWindow();
+    }
 
 }

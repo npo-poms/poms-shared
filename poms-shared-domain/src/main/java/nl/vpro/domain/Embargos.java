@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.google.common.collect.Range;
 
 /**

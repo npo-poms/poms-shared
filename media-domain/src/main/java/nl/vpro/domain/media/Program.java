@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.*;
 
 import com.fasterxml.jackson.annotation.*;
@@ -251,7 +252,7 @@ public class Program extends MediaObject {
     @XmlElement
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonManagedReference
-    public SortedSet<MemberRef> getEpisodeOf() {
+    public SortedSet<@NonNull MemberRef> getEpisodeOf() {
         if(this.episodeOf == null) {
             this.episodeOf = new TreeSet<>();
         }

@@ -6,3 +6,6 @@ target
 *.iws
 .jqwik-database
 dep
+/media-domain/package-lock.json
+/media-domain/node/
+/media-domain/node_modules/

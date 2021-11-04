@@ -27,10 +27,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.jackson2.*;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static java.util.Comparator.comparing;
+import static nl.vpro.domain.Changeables.instant;
 
 /**
  * <p>
@@ -268,7 +270,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     /**
-     * Returns the representing the 'group' role in this member-ref-relation. Note that this likely, but not necessarily a {@link Group} object, since any mediaobject may take members.
+     * Returns the representing the 'group' role in this member-ref-relation. Note that this likely, but not necessarily a {@link Group} object, since any {@link MediaObject} may take members.
      */
     @Nullable
     public MediaObject getGroup() {
@@ -668,7 +670,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @PreUpdate
     public void prePersist() {
         if (this.added == null) {
-            this.added = Instant.now();
+            this.added = instant();
         }
     }
 

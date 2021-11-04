@@ -1,0 +1,42 @@
+{
+  "description" : "just a legacy revoked location",
+  "publishedNowExpectedPlatforms" : [ ],
+  "publishedWasExpectedPlatforms" : [ ],
+  "publishedWillExpectedPlatforms" : [ ],
+  "nowExpectedPlatforms" : [ ],
+  "wasExpectedPlatforms" : [ "INTERNETVOD" ],
+  "willExpectedPlatforms" : [ ],
+  "publishedMediaObject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
+    "embeddable" : true,
+    "ageRating" : "ALL",
+    "locations" : [ ]
+  },
+  "mediaObject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
+    "embeddable" : true,
+    "ageRating" : "ALL",
+    "locations" : [ {
+      "programUrl" : "https://bla.com/revoke.foobar.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION",
+      "publishStop" : 1635253190000
+    } ]
+  }
+}

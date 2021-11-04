@@ -9,6 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.event.Level;
+
+import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.logging.simple.StringBuilderSimpleLogger;
 
 import static nl.vpro.domain.media.MediaType.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -79,40 +83,41 @@ public class MediaTypeTest {
 
     @Test
     public void noErrors() {
+        SimpleLogger slog = StringBuilderSimpleLogger.builder().level(Level.DEBUG).build().chain(SimpleLogger.slfj4(log).withThreshold(Level.INFO));
         for (MediaType type : MediaType.values()) {
-            log.info("\n\n" + type.name() + " " + type.toString());
-            log.info("{}", Arrays.asList(type.allowedEpisodeOfTypes()));
-            log.info("{}",Arrays.asList(type.allowedEpisodeTypes()));
-            log.info("{}",Arrays.asList(type.allowedMemberOfTypes()));
-            log.info("{}",Arrays.asList(type.allowedMemberTypes()));
-            log.info("{}",type.getMediaClass());
+            slog.debug("\n\n" + type.name() + " " + type);
+            slog.debug("{}", Arrays.asList(type.allowedEpisodeOfTypes()));
+            slog.debug("{}",Arrays.asList(type.allowedEpisodeTypes()));
+            slog.debug("{}",Arrays.asList(type.allowedMemberOfTypes()));
+            slog.debug("{}",Arrays.asList(type.allowedMemberTypes()));
+            slog.debug("{}",type.getMediaClass());
             try {
-                log.info("{}",type.getMediaInstance());
+                slog.debug("{}",type.getMediaInstance());
             } catch (RuntimeException rte) {
                 assertThat(type).isEqualTo(MediaType.MEDIA);
             }
-            log.info("{}",type.getMediaObjectClass());
-            log.info("{}",type.getSubType());
-            log.info("{}",type.getSubTypes());
-            log.info("{}",type.hasEpisodeOf());
-            log.info("{}",type.canContainEpisodes());
-            log.info("{}",type.hasMemberOf());
-            log.info("{}",type.hasMembers());
-            log.info("{}",type.hasOrdering());
-            log.info("{}",type.hasSegments());
-            log.info("{}",Arrays.asList(type.preferredEpisodeOfTypes()));
-            log.info("{}",Arrays.asList(type.preferredEpisodeTypes()));
-            log.info("{}",Arrays.asList(type.preferredMemberOfTypes()));
-            log.info("{}",Arrays.asList(type.preferredMemberTypes()));
+            slog.debug("{}",type.getMediaObjectClass());
+            slog.debug("{}",type.getSubType());
+            slog.debug("{}",type.getSubTypes());
+            slog.debug("{}",type.hasEpisodeOf());
+            slog.debug("{}",type.canContainEpisodes());
+            slog.debug("{}",type.hasMemberOf());
+            slog.debug("{}",type.hasMembers());
+            slog.debug("{}",type.hasOrdering());
+            slog.debug("{}",type.hasSegments());
+            slog.debug("{}",Arrays.asList(type.preferredEpisodeOfTypes()));
+            slog.debug("{}",Arrays.asList(type.preferredEpisodeTypes()));
+            slog.debug("{}",Arrays.asList(type.preferredMemberOfTypes()));
+            slog.debug("{}",Arrays.asList(type.preferredMemberTypes()));
             for (MediaType t : MediaType.values()) {
-                log.info("{} ct {}: {}", type, t, type.compareTo(t));
+                slog.debug("{} ct {}: {}", type, t, type.compareTo(t));
             }
             try {
                 MediaObject instance = type.getMediaInstance();
-                log.info("{} -> {}", type, instance);
+                slog.debug("{} -> {}", type, instance);
             } catch (RuntimeException e) {
                 assertThat(e.getMessage()).startsWith("Not possible");
-                log.info("Ok, not posible to instantiate {}", type);
+                slog.debug("Ok, not posible to instantiate {}", type);
             }
             if (type.getSubType() != null) {
                 assertThat(type.getSubType().getMediaType()).withFailMessage("" + type).isNotNull();

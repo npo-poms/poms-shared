@@ -44,10 +44,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return program().type(type);
     }
 
-      static ProgramBuilder broadcast() {
-          return program()
+    static ProgramBuilder broadcast() {
+        return program()
             .type(ProgramType.BROADCAST)
-              .audioOrVideo();
+            .audioOrVideo();
+    }
+
+    static ProgramBuilder movie() {
+        return program()
+            .type(ProgramType.MOVIE)
+            .video();
     }
 
     static ProgramBuilder clip() {

@@ -161,7 +161,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         httpPost.setEntity(entity);
 
         if (!request.getFilename().startsWith(ftpUserName)) {
-            log.warn("The file given in {} does not start with ftp user name {}", request, ftpUserName);
+            log.debug("The file given in {} does not start with ftp user name {}", request, ftpUserName);
         }
         log.info("Transcode request {}", json);
         try (CloseableHttpResponse response = client.execute(httpPost, clientContext);

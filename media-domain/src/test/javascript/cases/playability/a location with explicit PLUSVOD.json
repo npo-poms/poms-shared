@@ -1,0 +1,86 @@
+{
+  "description" : "a location with explicit PLUSVOD",
+  "publishedNowExpectedPlatforms" : [ "PLUSVOD" ],
+  "publishedWasExpectedPlatforms" : [ ],
+  "publishedWillExpectedPlatforms" : [ ],
+  "nowExpectedPlatforms" : [ "PLUSVOD" ],
+  "wasExpectedPlatforms" : [ ],
+  "willExpectedPlatforms" : [ ],
+  "publishedMediaObject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
+    "embeddable" : true,
+    "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "PLUSVOD"
+    } ],
+    "locations" : [ {
+      "programUrl" : "https://bla.com/expired.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "PLUSVOD"
+    }, {
+      "programUrl" : "https://bla.com/foobar.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "PLUSVOD"
+    } ]
+  },
+  "mediaObject" : {
+    "objectType" : "program",
+    "mid" : "mid_123",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
+    "embeddable" : true,
+    "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "PLUSVOD"
+    } ],
+    "locations" : [ {
+      "programUrl" : "https://bla.com/deleted.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "DELETED",
+      "platform" : "PLUSVOD"
+    }, {
+      "programUrl" : "https://bla.com/expired.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "PLUSVOD"
+    }, {
+      "programUrl" : "https://bla.com/foobar.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "PLUSVOD"
+    } ]
+  }
+}
