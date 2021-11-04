@@ -130,6 +130,9 @@ public enum Scheme implements Displayable {
         return ofUrl(value).orElseGet(() -> Scheme.valueOf(value));
     }
 
+    /**
+     * @since 5.31
+     */
     public String getSpec() {
         return "beng:gtaa:" + getId();
     }
