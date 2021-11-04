@@ -78,14 +78,14 @@ public class OpenskosRepository implements GTAARepository {
     @Value("${gtaa.personsSpec}")
     @Getter
     @Setter
-    @Nullable
-    private String personsSpec;
+    @NonNull
+    private String personsSpec = Scheme.person.getSpec();
 
     @Value("${gtaa.geolocationsSpec}")
     @Getter
     @Setter
     @Nullable
-    private String geoLocationsSpec;
+    private String geoLocationsSpec = Scheme.geographicname.getSpec();
 
     @Value("${gtaa.tenant}")
     @Getter
@@ -101,6 +101,10 @@ public class OpenskosRepository implements GTAARepository {
     @Getter
     @Setter
     private String creator = "POMS";
+
+    @Getter
+    @Setter
+    private String oai = "oai-pmh";
 
     public OpenskosRepository(
         @Value("${gtaa.baseUrl}")
@@ -310,12 +314,12 @@ public class OpenskosRepository implements GTAARepository {
 
     @Override
     public CountedIterator<Record> getPersonUpdates(@Context Instant from, @Context Instant to) {
-        return getUpdates(from, to, personsSpec);
+        return getUpdates(from, to, personsSpec.isEmpty() ? Scheme.person.getSpec(): personsSpec);
     }
 
     @Override
     public CountedIterator<Record> getGeoLocationsUpdates(@Context Instant from, @Context Instant to) {
-        return getUpdates(from, to, geoLocationsSpec);
+        return getUpdates(from, to, geoLocationsSpec.isEmpty() ? Scheme.geographicname.getSpec() : geoLocationsSpec);
     }
 
     @Override
@@ -380,7 +384,7 @@ public class OpenskosRepository implements GTAARepository {
         if(type != null) {
             set = "&set=" + type;
         }
-        String path = String.format("oai-pmh?verb=ListRecords&metadataPrefix=oai_rdf%s", set) + "&from="
+        String path = String.format(oai + "?verb=ListRecords&metadataPrefix=oai_rdf%s", set) + "&from="
                 + ISO_INSTANT.format(from.truncatedTo(ChronoUnit.SECONDS)) + "&until="
                 + ISO_INSTANT.format(until.truncatedTo(ChronoUnit.SECONDS));
 
@@ -405,7 +409,7 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     ListRecord getUpdates(ResumptionToken resumptionToken) {
-        final OAI_PMH oai_pmh = getForPath("oai-pmh?verb=ListRecords&resumptionToken=" + resumptionToken.getValue(),
+        final OAI_PMH oai_pmh = getForPath(oai + "?verb=ListRecords&resumptionToken=" + resumptionToken.getValue(),
                 OAI_PMH.class);
         if (oai_pmh == null || oai_pmh.getListRecord() == null) {
             return ListRecord.empty();

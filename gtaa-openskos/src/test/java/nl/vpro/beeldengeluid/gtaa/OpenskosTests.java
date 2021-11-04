@@ -167,9 +167,12 @@ public class OpenskosTests {
     }
 
     static OpenskosRepository getRealInstance(final Env env) {
-       Map<String, String> propertiesInHome = ConfigUtils.getPropertiesInHome(CONFIG_FILE);
+        Map<String, String> propertiesInHome = ConfigUtils.getPropertiesInHome(CONFIG_FILE);
         Map<String, String> gtaa = ConfigUtils.filtered(env, "gtaa", propertiesInHome);
         final OpenskosRepository impl = ConfigUtils.configured(env, OpenskosRepository.class, gtaa);
+        if (env == Env.ACC) {
+            impl.setOai("oai");
+        }
         impl.init();
         return impl;
     }

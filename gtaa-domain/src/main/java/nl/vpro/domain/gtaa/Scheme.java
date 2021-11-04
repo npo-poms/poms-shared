@@ -129,6 +129,10 @@ public enum Scheme implements Displayable {
     public static Scheme fromString(String value) {
         return ofUrl(value).orElseGet(() -> Scheme.valueOf(value));
     }
+
+    public String getSpec() {
+        return "beng:gtaa:" + getId();
+    }
 }
 
 
