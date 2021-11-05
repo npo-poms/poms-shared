@@ -128,8 +128,8 @@ public class OpenskosRepository implements GTAARepository {
         this.gtaaKey = key;
         this.template = createTemplateIfNull(template);
         this.tenant = tenant;
-        this.personsSpec = personsSpec;
-        this.geoLocationsSpec = geoLocationsSpec;
+        this.personsSpec = personsSpec == null ? Scheme.person.getSpec() : personsSpec;
+        this.geoLocationsSpec = geoLocationsSpec == null ? Scheme.geographicname.getSpec() : geoLocationsSpec;
         this.retries = retries;
 
 
