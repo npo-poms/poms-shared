@@ -166,7 +166,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
     function wasUnderEmbargo(object) {
         const stop = object.publishStop;
         const now = clock()
-        return stop != null && ! now < stop;
+        return stop != null && ! (now < stop);
     }
 
     function willBePublished(object) {
