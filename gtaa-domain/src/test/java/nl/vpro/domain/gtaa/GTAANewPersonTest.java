@@ -49,7 +49,7 @@ public class GTAANewPersonTest {
                 null,
                 APPLICATION_JSON_TYPE, null, new ByteArrayInputStream(json.getBytes()));
 
-        assertThat(gtaaNewPerson.getGivenName()).isEqualTo("Puk");
+        assertThat(gtaaNewPerson.getGivenName()).isEqualTo("Pietje");
     }
 
     @Test
