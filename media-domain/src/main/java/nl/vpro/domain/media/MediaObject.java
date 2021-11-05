@@ -2204,6 +2204,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
 
+
     public void setLocations(SortedSet<Location> locations) {
 
         if (this.locations == null) {
@@ -2215,6 +2216,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             l = Location.copy(l, this);
             addLocation(l);
         }
+    }
+
+    @XmlElementWrapper(name = "locations")
+    @XmlElement(name = "location")
+    @JsonProperty("locations")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    protected void setLocations_(SortedSet<Location> locations) {
+        this.locations = locations;
     }
 
     @Nullable

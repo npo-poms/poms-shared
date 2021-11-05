@@ -7,18 +7,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import static nl.vpro.domain.Changeables.clock;
-
-import static nl.vpro.domain.Changeables.instant;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -26,23 +20,18 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Child;
-import nl.vpro.domain.EmbargoBuilder;
-import nl.vpro.domain.Embargos;
-import nl.vpro.domain.media.support.MutableOwnable;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.PublishableObject;
-import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.*;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.util.TimeUtils;
 import nl.vpro.xml.bind.DurationXmlAdapter;
+
+import static nl.vpro.domain.Changeables.instant;
 
 /**
  * A {@link MediaObject} can have more than one location which should differ in URL and
@@ -74,7 +63,6 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "owner",
     "creationDate",
     "workflow"
-
 })
 @Slf4j
 public class Location extends PublishableObject<Location>
