@@ -1,0 +1,59 @@
+{
+  "description" : "an INTERNETVOD prediction but the location became unplayable",
+  "publishedNowExpectedPlatforms" : [ ],
+  "publishedWasExpectedPlatforms" : [ ],
+  "publishedWillExpectedPlatforms" : [ ],
+  "nowExpectedPlatforms" : [ ],
+  "wasExpectedPlatforms" : [ ],
+  "willExpectedPlatforms" : [ ],
+  "publishedMediaObject" : {
+    "objectType" : "program",
+    "mid" : "WO_AVRO_013701",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
+    "embeddable" : true,
+    "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "INTERNETVOD"
+    } ],
+    "locations" : [ {
+      "programUrl" : "http://cgi.omroep.nl/cgi-bin/streams?/nps/cultura/CU_VrijdagvanVredenburg_181209b.wmv",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "INTERNETVOD"
+    } ]
+  },
+  "mediaObject" : {
+    "objectType" : "program",
+    "mid" : "WO_AVRO_013701",
+    "type" : "BROADCAST",
+    "avType" : "MIXED",
+    "workflow" : "PUBLISHED",
+    "sortDate" : 1635166800000,
+    "creationDate" : 1635166800000,
+    "embeddable" : true,
+    "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "INTERNETVOD"
+    } ],
+    "locations" : [ {
+      "programUrl" : "http://cgi.omroep.nl/cgi-bin/streams?/nps/cultura/CU_VrijdagvanVredenburg_181209b.wmv",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION",
+      "platform" : "INTERNETVOD"
+    } ]
+  }
+}

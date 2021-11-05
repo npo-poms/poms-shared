@@ -5,10 +5,10 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
     }
 
     function debug() {
-        console.log.apply(null, arguments);
+        //console && console.log.apply(null, arguments);
     }
     function info() {
-        console.log.apply(null, arguments);
+        console && console.log.apply(null, arguments);
     }
 
     /**
@@ -106,7 +106,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
      * @return {boolean}
      */
     function playabilityCheck(platform, mediaObject,  predictionPredicate, locationPredicate) {
-        const matchedByPrediction = mediaObject.predictions && mediaObject.predictions.some(p => platform === p.platform && predictionPredicate(p));
+        const matchedByPrediction = mediaObject.predictions && mediaObject.predictions.some(prediction => platform === prediction.platform && predictionPredicate(platform, prediction));
         if (matchedByPrediction) {
             debug("Matched", mediaObject, platform, "on prediction");
             return true;
@@ -115,7 +115,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         const matchedOnLocation = mediaObject.locations &&
             mediaObject.locations
                 .filter(locationFilter)
-                .some(l => platformMatches(platform, l.platform) && locationPredicate(l));
+                .some(location => platformMatches(platform, location.platform) && locationPredicate(platform, location));
         if (matchedOnLocation) {
             debug("Matched", mediaObject.locations, platform, "on location", matchedOnLocation);
         }
@@ -186,8 +186,8 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
          */
         nowPlayable: function (mediaObject) {
             return playability(mediaObject,
-                s => s.state === this.State.REALIZED && inPublicationWindow(s),
-                inPublicationWindow
+                (platform, prediction) => platform !== this.Platform.INTERNETVOD && prediction.state === this.State.REALIZED && inPublicationWindow(prediction),
+                (platform, location) => inPublicationWindow(location)
             );
         },
 
@@ -198,8 +198,8 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
          */
         wasPlayable: function (mediaObject) {
             return playability(mediaObject,
-                s => s.state === this.State.REVOKED,
-                wasUnderEmbargo
+                (platform, prediction) => prediction.state === this.State.REVOKED,
+                (platform, location) => wasUnderEmbargo(location)
             );
         },
 
@@ -210,8 +210,8 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
          */
         willBePlayable: function (mediaObject) {
             return playability(mediaObject,
-                s => s.state === this.State.ANNOUNCED,
-                willBePublished
+                (platform, prediction) => prediction.state === this.State.ANNOUNCED,
+                (platform, location) => willBePublished(location)
             );
         },
 
