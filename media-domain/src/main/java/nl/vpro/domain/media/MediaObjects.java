@@ -950,7 +950,8 @@ public class MediaObjects {
      */
     public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return playabilityCheck(platform, mediaObject,
-            s -> s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(),
+            s -> platform != Platform.INTERNETVOD // for internetvod it seems the _only_ check currenlty is whether all locations are playable.
+                && s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(),
             Embargo::inPublicationWindow
         );
     }
@@ -959,7 +960,8 @@ public class MediaObjects {
      * @since 5.31
      */
     public static Set<Platform> nowPlayable(@NonNull MediaObject mediaObject) {
-        return Arrays.stream(Platform.values()).filter(p -> nowPlayable(p, mediaObject))
+        return Arrays.stream(Platform.values())
+            .filter(p -> nowPlayable(p, mediaObject))
             .collect(Collectors.toCollection(TreeSet::new));
     }
 
