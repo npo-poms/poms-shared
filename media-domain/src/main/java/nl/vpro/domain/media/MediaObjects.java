@@ -950,8 +950,8 @@ public class MediaObjects {
      */
     public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return playabilityCheck(platform, mediaObject,
-            s -> platform != Platform.INTERNETVOD // for internetvod it seems the _only_ check currenlty is whether all locations are playable.
-                && s.getState() == Prediction.State.REALIZED && s.inPublicationWindow(),
+            prediction -> platform != Platform.INTERNETVOD // for internetvod it seems the _only_ check currenlty is whether all locations are playable.
+                && prediction.getState() == Prediction.State.REALIZED && prediction.inPublicationWindow(),
             Embargo::inPublicationWindow
         );
     }
@@ -970,7 +970,7 @@ public class MediaObjects {
      */
     public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return playabilityCheck(platform, mediaObject,
-            s -> s.getState() == Prediction.State.REVOKED,
+            prediction -> prediction.getState() == Prediction.State.REVOKED,
             Embargo::wasUnderEmbargo
         );
     }
@@ -988,7 +988,7 @@ public class MediaObjects {
      */
     public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return playabilityCheck(platform, mediaObject,
-            s -> s.getState() == Prediction.State.ANNOUNCED,
+            prediction -> prediction.getState() == Prediction.State.ANNOUNCED,
             Embargo::willBePublished
         );
     }
@@ -1033,15 +1033,19 @@ public class MediaObjects {
     /**
      * @since 5.31
      */
-    protected static boolean playabilityCheck(@NonNull Platform platform, @NonNull MediaObject mediaObject,  Predicate<Prediction> prediction, Predicate<Location> location) {
-        boolean matchedByPrediction = mediaObject.getPredictions().stream().anyMatch(p -> platform.matches(p.getPlatform()) && prediction.test(p));
+    protected static boolean playabilityCheck(
+        final @NonNull Platform platform,
+        final @NonNull MediaObject mediaObject,
+        final @NonNull Predicate<Prediction> predictionPredicate,
+        final @NonNull Predicate<Location> locationPredicate) {
+        final boolean matchedByPrediction = mediaObject.getPredictions().stream().anyMatch(p -> platform.matches(p.getPlatform()) && predictionPredicate.test(p));
         if (matchedByPrediction) {
             return true;
         }
         // fall back to location only
         return  mediaObject.getLocations().stream()
             .filter(MediaObjects::locationFilter)
-            .anyMatch(l -> platform.matches(l.getPlatform()) && location.test(l));
+            .anyMatch(l -> platform.matches(l.getPlatform()) && locationPredicate.test(l));
     }
 
 
