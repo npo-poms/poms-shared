@@ -126,7 +126,7 @@ import static nl.vpro.domain.media.MediaObject.*;
         "twitterRefs",
         "teletext",
         "predictionsForXml",
-        "locations",
+        "_Locations",
         "_Relations",
         "images"
     })
@@ -2180,16 +2180,24 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
      * Returns the locations in {@link Location#PRESENTATION_ORDER}
      */
     @NonNull
-    @XmlElementWrapper(name = "locations")
-    @XmlElement(name = "location")
-    @JsonProperty("locations")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @JsonSerialize(using = CollectionOfPublishable.class)
     public SortedSet<Location> getLocations() {
         if (locations == null) {
             locations = new TreeSet<>();
         }
         return locations;
+    }
+
+    @XmlElementWrapper(name = "locations")
+    @XmlElement(name = "location")
+    @JsonProperty("locations")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonSerialize(using = CollectionOfPublishable.class)
+    protected SortedSet<Location> get_Locations() {
+        return getLocations();
+    }
+
+    protected void set_Locations(SortedSet<Location> locations) {
+        this.locations = locations;
     }
 
     /**
@@ -2218,13 +2226,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         }
     }
 
-    @XmlElementWrapper(name = "locations")
-    @XmlElement(name = "location")
-    @JsonProperty("locations")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    protected void setLocations_(SortedSet<Location> locations) {
-        this.locations = locations;
-    }
+
 
     @Nullable
     public Location getLocation(Location location) {
