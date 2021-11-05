@@ -1,15 +1,23 @@
 package nl.vpro.domain.gtaa;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
+import nl.vpro.jackson2.rs.JsonIdAdderBodyReader;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.11
  */
 public class GTAANewGenericConceptTest {
+    JsonIdAdderBodyReader reader = new JsonIdAdderBodyReader();
 
 
     @Test
@@ -30,6 +38,23 @@ public class GTAANewGenericConceptTest {
             "  \"objectType\" : \"genre\"\n" +
             "}");
 
+    }
+
+     @Test
+    public void jsonWithoutType() throws IOException {
+        String json = "{\n" +
+            "  \"name\" : \"new genre\",\n" +
+            "  \"scopeNotes\" : [ \"Bla\" ],\n" +
+            "  \"objectType\" : \"genre\"\n" +
+            "}";
+
+        GTAANewGenericConcept gtaaNewGenericConcept =
+            (GTAANewGenericConcept) reader.readFrom(Object.class,
+                GTAANewGenericConcept.class,
+                null,
+                APPLICATION_JSON_TYPE, null, new ByteArrayInputStream(json.getBytes()));
+
+        assertThat(gtaaNewGenericConcept.getObjectType()).isEqualTo(Scheme.genre);
     }
 
 

@@ -1,19 +1,24 @@
 package nl.vpro.domain.gtaa;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.jackson2.rs.JsonIdAdderBodyReader;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.5
  */
 public class GTAANewPersonTest {
+    JsonIdAdderBodyReader reader = new JsonIdAdderBodyReader();
+
 
 
     @Test
@@ -31,14 +36,20 @@ public class GTAANewPersonTest {
     }
 
     @Test
-    @Disabled("Will not work. Rest service will support via nl.vpro.jackson2.rs.JsonIdAdderBodyReader")
     public void jsonWithoutType() throws IOException {
         String json = "{\n" +
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"Puk\",\n" +
             "  \"scopeNotes\" : [ \"test\" ]\n" +
             "}";
-        GTAANewPerson gtaaNewPerson = Jackson2Mapper.getLenientInstance().readValue(json, GTAANewPerson.class);
+
+        GTAANewPerson gtaaNewPerson =
+            (GTAANewPerson) reader.readFrom(Object.class,
+                GTAANewPerson.class,
+                null,
+                APPLICATION_JSON_TYPE, null, new ByteArrayInputStream(json.getBytes()));
+
+        assertThat(gtaaNewPerson.getGivenName()).isEqualTo("Pietje");
     }
 
     @Test

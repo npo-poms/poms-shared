@@ -404,14 +404,17 @@ public class MediaObjectsTest {
             CLOCK.remove();
         }
 
-        private static MediaBuilder.ProgramBuilder fixed() {
+        private static MediaBuilder.ProgramBuilder fixed(String mid) {
             return MediaBuilder
                 .broadcast()
-                .mid("mid_123")
+                .mid(mid)
                 .creationDate(instant().minus(Duration.ofDays(1)))
                 .workflow(Workflow.PUBLISHED)
                 ;
 
+        }
+        private static MediaBuilder.ProgramBuilder fixed() {
+            return fixed("mid_123");
         }
 
         @Getter
@@ -484,6 +487,16 @@ public class MediaObjectsTest {
                         )
                         .build(),
                     expected(A_INTERNETVOD, A_NONE, A_NONE)
+                ),
+                Arguments.of(
+                    "an INTERNETVOD prediction but the location became unplayable",
+                    fixed("WO_AVRO_013701")
+                        .locations(
+                            Location.builder().platform(INTERNETVOD).programUrl("http://cgi.omroep.nl/cgi-bin/streams?/nps/cultura/CU_VrijdagvanVredenburg_181209b.wmv").build()
+                        )
+                        .predictions(Prediction.realized().platform(INTERNETVOD).build())
+                        .build(),
+                    expected(A_NONE, A_NONE, A_NONE)
                 ),
                 Arguments.of(
                     "a location with explicit PLUSVOD",
