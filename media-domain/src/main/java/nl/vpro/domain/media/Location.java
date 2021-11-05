@@ -211,7 +211,8 @@ public class Location extends PublishableObject<Location>
         Platform platform,
         Instant publishStart,
         Instant publishStop,
-        Workflow workflow
+        Workflow workflow,
+        Instant creationDate
     ) {
         this.programUrl = programUrl;
         this.owner = owner == null ? OwnerType.BROADCASTER : owner;
@@ -232,6 +233,7 @@ public class Location extends PublishableObject<Location>
         if (workflow != null) {
             this.workflow = workflow;
         }
+        this.creationInstant = creationDate;
     }
 
     @Deprecated

@@ -40,7 +40,6 @@ import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.bind.CollectionOfPublishable;
-import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -520,11 +519,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             + ")"
 
     )
-    @XmlElementWrapper(name = "locations")
-    @XmlElement(name = "location")
-    @JsonProperty("locations")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @JsonSerialize(using = CollectionOfPublishable.class)
+
     protected SortedSet<@NotNull @Valid Location> locations = new TreeSet<>();
 
 
@@ -2185,6 +2180,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
      * Returns the locations in {@link Location#PRESENTATION_ORDER}
      */
     @NonNull
+    @XmlElementWrapper(name = "locations")
+    @XmlElement(name = "location")
+    @JsonProperty("locations")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonSerialize(using = CollectionOfPublishable.class)
     public SortedSet<Location> getLocations() {
         if (locations == null) {
             locations = new TreeSet<>();
