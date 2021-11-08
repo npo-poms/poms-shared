@@ -17,8 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.11
  */
 public class GTAANewGenericConceptTest {
-    JsonIdAdderBodyReader reader = new JsonIdAdderBodyReader();
 
+    final JsonIdAdderBodyReader reader = new JsonIdAdderBodyReader();
 
     @Test
     public void json() {
