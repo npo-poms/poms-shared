@@ -855,12 +855,15 @@ public class MediaObjectTest {
             .id(1L)
             .build();
 
-        program.findOrCreatePrediction(Platform.INTERNETVOD)
-            .setState(Prediction.State.ANNOUNCED);
+        Prediction unPlanned = program.findOrCreatePrediction(Platform.INTERNETVOD);
+        unPlanned.setState(Prediction.State.ANNOUNCED);
+        assertThat(unPlanned.isPlannedAvailability()).isFalse();
+
 
         Program result = JAXBTestUtil.roundTrip(program);
 
-        assertThat(result.getPrediction(Platform.INTERNETVOD)).isNotNull(); // it's not available but announced, which we see, of course
+
+        assertThat(result.getPrediction(Platform.INTERNETVOD)).isNull(); // it's not available , so status is irrelevant, and not exposed.
 
         program.findOrCreatePrediction(Platform.INTERNETVOD).setPlannedAvailability(true);
 
