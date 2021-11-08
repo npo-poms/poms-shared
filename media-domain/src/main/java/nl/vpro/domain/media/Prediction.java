@@ -25,6 +25,7 @@ import nl.vpro.domain.*;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
+import static javax.persistence.EnumType.STRING;
 import static nl.vpro.domain.Changeables.instant;
 
 /**
@@ -90,7 +91,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Setter
     protected Instant issueDate = instant();
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     @Column(nullable = false)
     @XmlAttribute
     @NotNull
@@ -113,7 +114,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     protected Instant publishStop;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     @Column(length = 16)
     @XmlValue
     @JsonProperty("platform")
@@ -121,7 +122,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     protected Platform platform;
 
     @Column
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     @XmlTransient
     @Getter
     private Authority authority = Authority.USER;
@@ -143,7 +144,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     protected MediaObject mediaObject;
 
     @Column
-    @Enumerated(EnumType.STRING)
+    @Enumerated(STRING)
     @XmlTransient
     @Getter
     protected Encryption encryption;
