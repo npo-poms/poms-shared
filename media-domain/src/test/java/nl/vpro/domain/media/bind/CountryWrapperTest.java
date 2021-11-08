@@ -17,18 +17,17 @@ import static org.meeuw.i18n.countries.Country.of;
  * @since 4.8
  */
 public class CountryWrapperTest {
+
     @Test
     public void getNameUKNL() {
         CountryWrapper wrapper = new CountryWrapper(of(GB));
         assertThat(wrapper.getName()).isEqualTo("Verenigd Koninkrijk");
-
     }
 
     @Test
     public void getNameGBNL() {
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "GBN").get());
         assertThat(wrapper.getName()).isEqualTo("Groot-Brittannië");
-
     }
 
     @Test
@@ -37,7 +36,6 @@ public class CountryWrapperTest {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "GBN").get());
         assertThat(wrapper.getName()).isEqualTo("Great Britain");
-
     }
 
     @Test
@@ -46,7 +44,6 @@ public class CountryWrapperTest {
         Locale.setDefault(Locale.US);
         CountryWrapper wrapper = new CountryWrapper(new CurrentCountry(GB));
         assertThat(wrapper.getName()).isEqualTo("United Kingdom");
-
     }
 
 
@@ -55,7 +52,6 @@ public class CountryWrapperTest {
         //Locale.setDefault(Locales.DUTCH);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "ENG").get());
         assertThat(wrapper.getName()).isEqualTo("Engeland");
-
     }
 
     @Test
@@ -64,7 +60,6 @@ public class CountryWrapperTest {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "ENG").get());
         assertThat(wrapper.getName()).isEqualTo("England");
-
     }
 
     @Test
@@ -72,7 +67,6 @@ public class CountryWrapperTest {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(NL, "UT").get());
         assertThat(wrapper.getName()).isEqualTo("Utrecht");
-
     }
 
 }
