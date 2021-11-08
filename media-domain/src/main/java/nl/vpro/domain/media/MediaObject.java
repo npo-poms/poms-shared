@@ -2099,7 +2099,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     protected List<Prediction> getPredictionsForXml() {
         if (predictionsForXml == null) {
             predictionsForXml = getPredictions().stream()
-                .filter(Prediction::isPlannedAvailability)
+                .filter((p) -> p.getState() != Prediction.State.NOT_ANNOUNCED)
                 .collect(Collectors.toList());
         }
         return predictionsForXml;
@@ -2108,7 +2108,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     protected void setPredictionsForXml(List<Prediction> predictions) {
         // called by jackson
         this.predictions =  new TreeSet<>(predictions);
-        this.predictionsForXml = null;
+        this.predictionsForXml = predictions;
     }
 
     public Prediction getPrediction(Platform platform) {
