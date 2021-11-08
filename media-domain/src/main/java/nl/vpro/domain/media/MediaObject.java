@@ -2813,7 +2813,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if (predictionsForXml != null) {
             this.predictions = new TreeSet<>(predictionsForXml);
-            this.predictionsForXml = null;
         }
     }
 
