@@ -860,7 +860,7 @@ public class MediaObjectTest {
 
         Program result = JAXBTestUtil.roundTrip(program);
 
-        assertThat(result.getPrediction(Platform.INTERNETVOD)).isNull(); // it's not available.
+        assertThat(result.getPrediction(Platform.INTERNETVOD)).isNotNull(); // it's not available but announced, which we see, of course
 
         program.findOrCreatePrediction(Platform.INTERNETVOD).setPlannedAvailability(true);
 
