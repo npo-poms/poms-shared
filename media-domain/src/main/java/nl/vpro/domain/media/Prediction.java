@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -50,7 +51,7 @@ import static nl.vpro.domain.Changeables.instant;
 )
 */
 
-
+@Slf4j
 public class Prediction implements Comparable<Prediction>, Updatable<Prediction>, Serializable, MutableEmbargo<Prediction>, Child<MediaObject> {
 
     private static final long serialVersionUID = 0L;
@@ -131,6 +132,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     /**
      * TODO The state is 'ANNOUNCED', so shouldn't we name this field 'announcedAvailability'?
+     *
+     *
      * @since 5.6
      */
     @Column
@@ -310,10 +313,14 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         if (this.plannedAvailability) {
             if (this.state == State.NOT_ANNOUNCED) {
                 this.state = State.ANNOUNCED;
+            } else if (this.state != State.ANNOUNCED) {
+                log.warn("State of prediction {} is {}. Not setting to ANNOUNCED", this, state);
             }
         } else {
             if (this.state == State.ANNOUNCED) {
                 this.state = State.NOT_ANNOUNCED;
+            } else if (this.state != State.NOT_ANNOUNCED) {
+                log.warn("State of prediction {} is {}. Not setting to NOT_ANNOUNCED", this, state);
             }
         }
         invalidateXml();

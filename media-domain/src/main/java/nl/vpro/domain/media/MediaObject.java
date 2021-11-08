@@ -2099,7 +2099,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     protected List<Prediction> getPredictionsForXml() {
         if (predictionsForXml == null) {
             predictionsForXml = getPredictions().stream()
-                .filter((p) -> p.getState() != Prediction.State.NOT_ANNOUNCED)
+                .filter(p -> p.isPlannedAvailability() && p.getState() != Prediction.State.NOT_ANNOUNCED)
                 .collect(Collectors.toList());
         }
         return predictionsForXml;
