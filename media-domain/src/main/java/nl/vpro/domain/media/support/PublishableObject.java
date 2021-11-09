@@ -60,7 +60,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
 
     /**
-     * Checks if this object is changed compared to the persistant version
+     * Checks if this object is changed compared to the persistent version
      * by calculating the runtime CRC32 and compare it to the stored CRC
      */
     @Override
