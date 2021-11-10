@@ -47,6 +47,7 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.logging.LoggerOutputStream;
+import nl.vpro.openarchives.oai.Record;
 import nl.vpro.openarchives.oai.*;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
