@@ -2211,8 +2211,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return new ResortedSortedSet<>(locations, Location.PRESENTATION_ORDER);
     }
 
-
-
     public void setLocations(SortedSet<Location> locations) {
 
         if (this.locations == null) {
