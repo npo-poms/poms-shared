@@ -3,12 +3,15 @@ package nl.vpro.domain.media;
 import java.util.Arrays;
 import java.util.List;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 /**
  * @author Michiel Meeuwissen
  * @since 3.4
  */
 public interface MediaLoader extends MediaProvider {
 
+    @NonNull
     List<MediaObject> loadAll(boolean loadDeleted, List<String> ids);
 
     default List<MediaObject> loadAll(List<String> ids){
