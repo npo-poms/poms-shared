@@ -46,6 +46,7 @@ public interface MediaBackendRestService {
     // some common query and path parameters
     String ENTITY = "entity";
     String FOLLOW = "followMerges";
+    String PUBLISHED = "published";
     String ERRORS = "errors";
     String ID     = "id";
     String MID = "mid";
@@ -67,6 +68,8 @@ public interface MediaBackendRestService {
 
     // some descriptions for common query and path parameters
     String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitly followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
+    String PUBLISHED_DESCRIPTION = "Will produce a 'published' view on the object.";
+
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated duration parsing, against the XSD. If this is false, your input will still be validated, but using so called java bean validation only. This will give no line and column number information, but is otherwise be more complete.";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously. These errors may relate to authorization, or to database related problems.";
     String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRID's in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed.";
@@ -129,7 +132,8 @@ public interface MediaBackendRestService {
     MediaObject getFullMediaObject(
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(PUBLISHED) @DefaultValue("false") Boolean published
     ) throws IOException;
 
     @POST

@@ -15,12 +15,14 @@ import nl.vpro.domain.api.thesaurus.PersonResult;
 import nl.vpro.domain.api.thesaurus.ThesaurusResult;
 import nl.vpro.domain.gtaa.GTAAConcept;
 import nl.vpro.domain.gtaa.Scheme;
+import nl.vpro.jmx.Description;
 
 import static nl.vpro.domain.api.Constants.DEFAULT_MAX_RESULTS_STRING;
 import static nl.vpro.domain.api.Constants.MAX;
 
 @Path(ThesaurusRestService.PATH)
 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+@Description("Services on https://rs.poms.omroep.nl/v1/api" + ThesaurusRestService.PATH)
 public interface ThesaurusRestService {
     String TAG = "thesaurus";
     String PATH = "/" + TAG;

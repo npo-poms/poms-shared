@@ -11,6 +11,7 @@ import nl.vpro.domain.api.subtitles.SubtitlesForm;
 import nl.vpro.domain.api.subtitles.SubtitlesSearchResult;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesType;
+import nl.vpro.jmx.Description;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
 import static nl.vpro.domain.api.Constants.*;
@@ -23,6 +24,7 @@ import static nl.vpro.domain.api.Constants.*;
  */
 @Path(SubtitlesRestService.PATH)
 @Produces({VTT, TT888, SRT, EBU})// APPLICATION_JSON, APPLICATION_XML})
+@Description("Services on https://rs.poms.omroep.nl/v1/api" + SubtitlesRestService.PATH)
 public interface SubtitlesRestService {
 
     String MID = "mid";

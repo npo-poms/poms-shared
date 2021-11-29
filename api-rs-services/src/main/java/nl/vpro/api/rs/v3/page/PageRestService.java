@@ -8,12 +8,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.page.*;
+import nl.vpro.jmx.Description;
 
 import static nl.vpro.domain.api.Constants.*;
 
@@ -24,6 +26,7 @@ import static nl.vpro.domain.api.Constants.*;
 @Path(PageRestService.PATH)
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Description("Services on https://rs.poms.omroep.nl/v1/api" + PageRestService.PATH)
 public interface PageRestService {
     String TAG = "pages";
     String PATH = "/" + TAG;

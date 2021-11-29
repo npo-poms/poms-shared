@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.api.ApiScheduleEvent;
 import nl.vpro.domain.api.media.*;
+import nl.vpro.jmx.Description;
 
 import static nl.vpro.domain.api.Constants.*;
 
@@ -32,6 +33,7 @@ import static nl.vpro.domain.api.Constants.*;
  */
 @Path(ScheduleRestService.PATH)
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Description("Services on https://rs.poms.omroep.nl/v1/api" + ScheduleRestService.PATH)
 public interface ScheduleRestService {
     String TAG = "schedule";
     String PATH = "/schedule";

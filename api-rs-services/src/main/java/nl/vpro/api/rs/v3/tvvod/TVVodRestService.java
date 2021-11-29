@@ -9,6 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.media.MediaTable;
+import nl.vpro.jmx.Description;
 
 /**
  * @author Michiel Meeuwissen
@@ -16,6 +17,7 @@ import nl.vpro.domain.media.MediaTable;
  */
 @Path(TVVodRestService.PATH)
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Description("Services on https://rs.poms.omroep.nl/v1/api" + TVVodRestService.PATH)
 public interface TVVodRestService {
     String TAG  = "tvvod";
     String PATH = "/" + TAG;

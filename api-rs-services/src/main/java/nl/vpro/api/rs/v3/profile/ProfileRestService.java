@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.api.profile.Profile;
 import nl.vpro.domain.api.profile.ProfileResult;
+import nl.vpro.jmx.Description;
 
 /**
  * Simple service to view of inspect the available site profiles.
@@ -20,6 +21,7 @@ import nl.vpro.domain.api.profile.ProfileResult;
  */
 @Path(ProfileRestService.PATH)
 @Produces({MediaType.APPLICATION_XML})
+@Description("Services on https://rs.poms.omroep.nl/v1/api" + ProfileRestService.PATH)
 public interface ProfileRestService {
 
     String TAG  = "profiles";
