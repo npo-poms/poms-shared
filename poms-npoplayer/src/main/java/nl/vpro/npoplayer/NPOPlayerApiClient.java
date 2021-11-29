@@ -7,6 +7,8 @@ package nl.vpro.npoplayer;
 import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -80,7 +82,8 @@ public class NPOPlayerApiClient extends AbstractApiClient {
         String mbeanName,
         @NonNull String apiKey,
         ClassLoader classLoader,
-        Boolean registerMBean) {
+        Boolean registerMBean,
+        boolean eager) {
         super(
             baseUrl,
             connectionRequestTimeout,
@@ -103,9 +106,17 @@ public class NPOPlayerApiClient extends AbstractApiClient {
             mbeanName,
             classLoader,
             NPOPlayerApiClient.class.getName(),
-            registerMBean
+            registerMBean,
+            eager
         );
         this.apiKey = apiKey;
+    }
+
+    @Override
+    protected Stream<Supplier<?>> services() {
+        return Stream.of(
+            this::getRestService
+        );
     }
 
     public NPOPlayerApiRestService getRestService() {
