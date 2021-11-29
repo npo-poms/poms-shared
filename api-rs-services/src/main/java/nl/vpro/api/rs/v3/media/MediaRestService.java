@@ -14,6 +14,7 @@ import org.jboss.resteasy.annotations.cache.NoCache;
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.media.*;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.jmx.Description;
 
 import static nl.vpro.domain.api.Constants.*;
 
@@ -35,6 +36,7 @@ import static nl.vpro.domain.api.Constants.*;
 @Path(MediaRestService.PATH)
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Description("Services on https://rs.poms.omroep.nl/v1/api" + MediaRestService.PATH)
 public interface MediaRestService {
     String TAG = "media";
     String PATH = "/" + TAG;
