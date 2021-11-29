@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 
 import nl.vpro.domain.page.PageIdMatch;
 import nl.vpro.domain.page.update.PageUpdate;
+import nl.vpro.jmx.Description;
 
 /**
  * The Rest Interface is implemented by PageUpdateRestServiceImpl, but can also be used to generate clients.
@@ -22,6 +23,7 @@ import nl.vpro.domain.page.update.PageUpdate;
 @Path(PageUpdateRestService.PATH)
 @Consumes({MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_XML})
+@Description("Services on https://publish.pages.omroep.nl" + PageUpdateRestService.PATH)
 public interface PageUpdateRestService {
 
     String PATH = "/pages/updates";
