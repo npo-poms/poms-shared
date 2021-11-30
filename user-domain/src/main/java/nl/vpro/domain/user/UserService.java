@@ -48,7 +48,7 @@ public interface UserService<T extends User> {
     <S> S systemDoAs(String principalId, Callable<S> handler) throws Exception;
 
      /**
-      * Default implemention without consideration of the roles. This can be overridden.
+      * Default implementation without consideration of the roles. This can be overridden.
       */
     default Logout<T> systemAuthenticate(Trusted trustedSourceToken) {
         authenticate(trustedSourceToken.getPrincipal());
