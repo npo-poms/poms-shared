@@ -92,7 +92,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                         try {
                             out.close();
                         } catch (IOException ioe) {
-                            log.warn("ioe.");
+                            log.debug(ioe.getMessage());
                         }
                     }
 
@@ -168,8 +168,8 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                 remoteFileConsumer.accept(handle);
                 try {
                     handle.close();
-                } catch(Exception e) {
-                    log.warn(e.getMessage());
+                } catch(IOException e) {
+                    log.debug(e.getMessage());
                 }
             }
         }
