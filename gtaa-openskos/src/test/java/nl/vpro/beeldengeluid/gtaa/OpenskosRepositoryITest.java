@@ -32,7 +32,7 @@ public class OpenskosRepositoryITest {
 
 
     public static Object[] envs() {
-        return new Object[]{Env.ACC, Env.PROD, Env.TEST};
+        return new Object[]{Env.ACC, Env.PROD};
     }
 
     @ParameterizedTest
@@ -260,7 +260,7 @@ public class OpenskosRepositoryITest {
     @Disabled("This is not a junit test")
     public void testChangesPersonsRecent(Env env) {
         OpenskosRepository impl = getRealInstance(env);
-        Instant start = Instant.now().minus(Duration.ofDays(70));
+        Instant start = Instant.now().minus(Duration.ofDays(200));
         Instant stop = Instant.now();
 
         CountedIterator<Record> updates = impl.getPersonUpdates(start, stop);
@@ -302,7 +302,7 @@ public class OpenskosRepositoryITest {
     //@Disabled("This is not a junit test")
     public void testChangesRecent(Env env) {
         OpenskosRepository impl = getRealInstance(env);
-        Instant start = Instant.now().minus(Duration.ofDays(70));
+        Instant start = Instant.now().minus(Duration.ofDays(300));
         Instant stop = Instant.now();
 
         CountedIterator<Record> updates = impl.getAllUpdates(start, stop);
