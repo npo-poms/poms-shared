@@ -92,7 +92,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                         try {
                             out.close();
                         } catch (IOException ioe) {
-                            log.warn(ioe.getMessage(), ioe);
+                            log.debug(ioe.getMessage());
                         }
                     }
 
