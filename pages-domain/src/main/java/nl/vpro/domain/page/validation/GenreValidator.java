@@ -9,35 +9,36 @@ import lombok.extern.slf4j.Slf4j;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import nl.vpro.domain.classification.ClassificationService;
-import nl.vpro.domain.classification.ClassificationServiceLocator;
+import nl.vpro.domain.classification.*;
 
 /**
  * @author Michiel Meeuwissen
  * @since 3.2
  */
 @Slf4j
-public class GenreValidator implements ConstraintValidator<ValidGenre, Iterable<String>> {
+public class GenreValidator implements ConstraintValidator<ValidGenre, String> {
 
+    ValidGenre annotation;
 
     @Override
     public void initialize(ValidGenre constraintAnnotation) {
-
+        annotation = constraintAnnotation;
     }
 
     @Override
-    public boolean isValid(Iterable<String> values, ConstraintValidatorContext context) {
-        if (values == null) {
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        if (value == null) {
             return true;
         }
         ClassificationService classificationService = ClassificationServiceLocator.getInstance();
         if (classificationService == null) {
             log.warn("No classification service found");
         } else {
-            for (String value : values) {
-                if (! classificationService.hasTerm(value)) {
-                    return false;
-                }
+            if (! classificationService.hasTerm(value)) {
+                return false;
+            } else {
+                Term term = classificationService.getTerm(value);
+                return term.getTermId().split("\\.").length >= annotation.minItems();
             }
         }
         return true;

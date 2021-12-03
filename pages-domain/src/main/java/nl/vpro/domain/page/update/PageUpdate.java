@@ -146,10 +146,9 @@ public class PageUpdate implements Serializable {
 
     @XmlElement(name = "genre")
     @JsonProperty("genres")
-    @ValidGenre
     @Setter
     @XmlDocumentation(value = "Genres, as specified in https://publish.pages.omroep.nl/schema/classification")
-    protected List<String> genres;
+    protected List<@ValidGenre String> genres;
 
     @XmlElement(name = "link")
     @JsonProperty("links")

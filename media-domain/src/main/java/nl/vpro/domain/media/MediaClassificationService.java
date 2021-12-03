@@ -16,6 +16,7 @@ public class MediaClassificationService extends AbstractClassificationServiceImp
 
     private static MediaClassificationService instance;
 
+
     public static MediaClassificationService getInstance() {
         if (instance != null){
             return instance;

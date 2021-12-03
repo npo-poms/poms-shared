@@ -3,6 +3,8 @@ package nl.vpro.domain.media;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +20,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 3.0
  */
 public class GenreTest {
+
+
+     static Validator validator;
+     static {
+         ValidatorFactory factory = javax.validation.Validation
+             .buildDefaultValidatorFactory();
+         validator = factory.getValidator();
+     }
     @BeforeEach
     public void setup() {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
@@ -83,5 +93,13 @@ public class GenreTest {
     public void testGetFirstVersionDate() {
         assertThat(new Genre("3.0.1.1.25").getFirstVersionDate()).isEqualTo(LocalDate.of(2014,4,8));
         assertThat(new Genre("3.0.1.1.41").getFirstVersionDate()).isEqualTo(LocalDate.of(2021,4,1));
+    }
+
+
+    @Test
+    public void validation() {
+        assertThat(validator.validate(new Genre("3.0.1.2"))).isEmpty();
+        assertThat(validator.validate(new Genre("3.0.1"))).hasSize(1);
+
     }
 }

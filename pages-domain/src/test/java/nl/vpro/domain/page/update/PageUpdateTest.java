@@ -2,6 +2,7 @@ package nl.vpro.domain.page.update;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Arrays;
 import java.util.Collections;
 
 import javax.validation.Validation;
@@ -13,7 +14,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.MediaClassificationService;
 import nl.vpro.domain.page.*;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Portal;
@@ -28,6 +31,11 @@ import static org.mockito.Mockito.when;
 
 public class PageUpdateTest {
 
+    private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
+    static {
+        ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
+    }
     @Mock
     BroadcasterService broadcasterService;
 
@@ -53,7 +61,6 @@ public class PageUpdateTest {
         pageUpdate.setBroadcasters(Collections.singletonList("VPRO"));
         pageUpdate.setTitle("main title");
 
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         assertThat(validator.validate(pageUpdate)).isEmpty();
         assertThat(pageUpdate.getType()).isNotNull();
     }
@@ -62,10 +69,26 @@ public class PageUpdateTest {
     @Test
     public void validateMSE_2589() {
         PageUpdate pageUpdate = JAXB.unmarshal(getClass().getResourceAsStream("/MSE-2589.xml"), PageUpdate.class);
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
         assertThat(validator.validate(pageUpdate)).isEmpty();
 
     }
+
+    @Test
+    public void validateGenres() {
+        PageUpdate pageUpdate = new PageUpdate(PageType.ARTICLE, "http://www.test.vpro.nl/123");
+        pageUpdate.setTitle("foo");
+        pageUpdate.setBroadcasters(Arrays.asList("VPRO"));
+
+        pageUpdate.setGenres(Arrays.asList("3.0.1.2"));
+
+        assertThat(validator.validate(pageUpdate)).isEmpty();
+
+
+        pageUpdate.setGenres(Arrays.asList("3.0.1"));
+        assertThat(validator.validate(pageUpdate)).hasSize(1);
+    }
+
 
     @Test
     public void unmarshal() {
@@ -160,7 +183,6 @@ public class PageUpdateTest {
     }
 
     @Test
-
     public void serialize() throws IOException {
          PageUpdate page = PageUpdateBuilder
             .article("http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html")
