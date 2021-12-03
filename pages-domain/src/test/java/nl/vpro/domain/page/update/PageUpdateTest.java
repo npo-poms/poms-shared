@@ -2,8 +2,6 @@ package nl.vpro.domain.page.update;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Arrays;
-import java.util.Collections;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -25,13 +23,15 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.serialize.SerializeTestUtil;
 
+import static java.util.Collections.singletonList;
+import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 
 public class PageUpdateTest {
 
-    private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+    private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 
     static {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
@@ -58,19 +58,19 @@ public class PageUpdateTest {
     @Test
     public void validate() {
         PageUpdate pageUpdate = new PageUpdate(PageType.ARTICLE, "http://www.test.vpro.nl/123");
-        pageUpdate.setBroadcasters(Collections.singletonList("VPRO"));
+        pageUpdate.setBroadcasters(singletonList("VPRO"));
         pageUpdate.setTitle("main title");
 
-        assertThat(validator.validate(pageUpdate)).isEmpty();
+        assertThat(VALIDATOR.validate(pageUpdate)).isEmpty();
         assertThat(pageUpdate.getType()).isNotNull();
     }
 
 
     @Test
     public void validateMSE_2589() {
-        PageUpdate pageUpdate = JAXB.unmarshal(getClass().getResourceAsStream("/MSE-2589.xml"), PageUpdate.class);
+        PageUpdate pageUpdate = JAXB.unmarshal(requireNonNull(getClass().getResourceAsStream("/MSE-2589.xml")), PageUpdate.class);
 
-        assertThat(validator.validate(pageUpdate)).isEmpty();
+        assertThat(VALIDATOR.validate(pageUpdate)).isEmpty();
 
     }
 
@@ -78,15 +78,15 @@ public class PageUpdateTest {
     public void validateGenres() {
         PageUpdate pageUpdate = new PageUpdate(PageType.ARTICLE, "http://www.test.vpro.nl/123");
         pageUpdate.setTitle("foo");
-        pageUpdate.setBroadcasters(Arrays.asList("VPRO"));
+        pageUpdate.setBroadcasters(singletonList("VPRO"));
 
-        pageUpdate.setGenres(Arrays.asList("3.0.1.2"));
+        pageUpdate.setGenres(singletonList("3.0.1.2"));
 
-        assertThat(validator.validate(pageUpdate)).isEmpty();
+        assertThat(VALIDATOR.validate(pageUpdate)).isEmpty();
 
 
-        pageUpdate.setGenres(Arrays.asList("3.0.1"));
-        assertThat(validator.validate(pageUpdate)).hasSize(1);
+        pageUpdate.setGenres(singletonList("3.0.1"));
+        assertThat(VALIDATOR.validate(pageUpdate)).hasSize(1);
     }
 
 
@@ -101,7 +101,7 @@ public class PageUpdateTest {
         assertThat(update.getTitle()).isEqualTo("Hoi2");
     }
 
-    private static RelationDefinition DEF = new RelationDefinition("FOO", "VPRO");
+    private static final RelationDefinition DEF = new RelationDefinition("FOO", "VPRO");
 
     @Test
     public void json() {

@@ -3,8 +3,7 @@ package nl.vpro.domain.page;
 import java.io.IOException;
 import java.io.StringReader;
 
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import javax.validation.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,12 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GenreTest {
 
-     static Validator validator;
-     static {
-         ValidatorFactory factory = javax.validation.Validation
-             .buildDefaultValidatorFactory();
-         validator = factory.getValidator();
-     }
+    private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
 
     @Test
     public void testJson() throws IOException {
@@ -35,12 +29,10 @@ public class GenreTest {
         assertThat(unmarshalled.getTermId()).isEqualTo("3.0.1.1.2");
     }
 
-
     @Test
     public void validation() {
-        assertThat(validator.validate(Genre.of("3.0.1.2"))).isEmpty();
-        assertThat(validator.validate(Genre.of("3.0.1"))).hasSize(1);
+        assertThat(VALIDATOR.validate(Genre.of("3.0.1.2"))).isEmpty();
+        assertThat(VALIDATOR.validate(Genre.of("3.0.1"))).hasSize(1);
     }
-
 
 }
