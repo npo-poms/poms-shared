@@ -3,9 +3,7 @@ package nl.vpro.nep.service.impl;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
-import net.schmizz.sshj.sftp.OpenMode;
-import net.schmizz.sshj.sftp.RemoteFile;
-import net.schmizz.sshj.sftp.SFTPClient;
+import net.schmizz.sshj.sftp.*;
 import net.schmizz.sshj.xfer.FileSystemFile;
 
 import java.io.File;
@@ -49,11 +47,22 @@ public class NEPSSHJDownloadServiceImplTest {
 
     @BeforeEach
     public void setup() {
-        impl = new NEPSSHJDownloadServiceImpl(
-            "sftp-itemizer.nepworldwide.nl",
-            "npod",
-            "V5pJULnIqxoBWnT",
-            "AAAAB3NzaC1yc2EAAAADAQABAAABAQCV4gmmgKyPVyOyZv1jdVpu/KzS9w2v4/vxDeKbuXvl0tldvDAmMi/QY1XvLueuZJy8PmilpGj6po1JuU0V2RGX/Js18b9lyCAQptdaeUk45lYvM8bpGfkzB509i3+CaM6U1onEIftFs4vzDLMwHrZQ6kdlRGGs6bLYy1vpqs7h6mO/XGDeLLVpjLPZbz/TrWt98kinn+Rg/TwYV0VNyqac5DkpWtFEUucIrq6zZs1q3Pw8YHMo02BWlWXFR/yi41ODb+RH1dTlZEs3vrMgwFvVD5c+4EKy1hZ65SJ6xVXwaMyN4w1LaHLwwe3K8rNDS+m5gyaswhdeZthqDiXysFwj");
+        impl = new NEPSSHJDownloadServiceImpl(NEPTest.PROPERTIES);
+    }
+
+    @Test
+    public void client() throws IOException {
+        log.info("{}", impl);
+        try (SSHClient client = impl.createClient()) {
+            log.info("Client {}", client);
+            try (final SFTPClient sftp = client.newSFTPClient()) {
+
+                for (RemoteResourceInfo s : sftp.ls("/")) {
+                    log.info("{}", s);
+
+                }
+            }
+        }
     }
 
     @Test

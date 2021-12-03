@@ -2,6 +2,9 @@ package nl.vpro.nep.service.impl;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import net.schmizz.sshj.SSHClient;
+import net.schmizz.sshj.sftp.RemoteResourceInfo;
+import net.schmizz.sshj.sftp.SFTPClient;
 
 import java.io.*;
 import java.time.Duration;
@@ -45,6 +48,23 @@ public class NEPSSHJUploadServiceImplITest {
         impl = new NEPSSHJUploadServiceImpl(NEPTest.PROPERTIES);
         Locales.setDefault(Locales.DUTCH);
     }
+
+    @Test
+    public void client() throws IOException {
+        log.info("{}", impl);
+        try (SSHClient client = impl.createClient().get()) {
+            log.info("Client {}", client);
+            try (final SFTPClient sftp = client.newSFTPClient()) {
+
+                for (RemoteResourceInfo s : sftp.ls("/")) {
+                    log.info("{}", s);
+
+                }
+            }
+        }
+    }
+
+
 
     @Test
     public void upload() throws Exception {

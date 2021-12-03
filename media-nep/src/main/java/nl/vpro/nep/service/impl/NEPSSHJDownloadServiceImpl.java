@@ -4,15 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.EnumSet;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.Properties;
+import java.util.function.*;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -56,6 +53,16 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         this.password = password;
         this.hostKey = hostKey;
     }
+
+    protected NEPSSHJDownloadServiceImpl(Properties properties) {
+        this(
+            properties.getProperty("nep.itemizer-download.host"),
+            properties.getProperty("nep.itemizer-download.username"),
+            properties.getProperty("nep.itemizer-download.password"),
+            properties.getProperty("nep.itemizer-download.hostkey")
+        );
+    }
+
 
     @PostConstruct
     public void init() {
