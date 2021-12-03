@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.function.BooleanSupplier;
 
 import javax.el.*;
 import javax.xml.bind.Marshaller;
@@ -33,7 +34,7 @@ import nl.vpro.i18n.Locales;
 })
 @XmlTransient
 @XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, SimplePredicateTestResult.class})
-public abstract class PredicateTestResult {
+public abstract class PredicateTestResult implements BooleanSupplier {
 
     public static final ExpressionFactory FACTORY = ExpressionFactory.newInstance();
 
@@ -65,6 +66,11 @@ public abstract class PredicateTestResult {
     }
 
     public boolean applies() {
+        return applies;
+    }
+
+    @Override
+    public boolean getAsBoolean() {
         return applies;
     }
 
