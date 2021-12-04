@@ -29,7 +29,6 @@ import nl.vpro.domain.api.page.PageSearch;
 @NoArgsConstructor
 public abstract class AbstractTextSearch<V> extends AbstractSearch<V> {
 
-
     @Valid
     protected SimpleTextMatcher text;
 

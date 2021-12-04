@@ -40,7 +40,7 @@ import nl.vpro.util.Truthiness;
 @EqualsAndHashCode(callSuper = true)
 @XmlDocumentation("Limits the search result to media with certain properties")
 @lombok.AllArgsConstructor
-@lombok.Builder(builderClassName = "Builder")
+@lombok.Builder(builderClassName = "Builder", buildMethodName = "_build")
 @Slf4j
 public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
@@ -502,12 +502,24 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
     public static class Builder {
 
+        protected SimpleTextMatcher text;
+
+        public Builder text(SimpleTextMatcher text) {
+            this.text = text;
+            return this;
+        }
+
         public Builder title(TitleSearch title) {
             if (titles == null) {
                 titles = new ArrayList<>();
             }
             titles.add(title);
             return this;
+        }
+        public MediaSearch build() {
+            MediaSearch mediaSearch = _build();
+            mediaSearch.setText(text);
+            return mediaSearch;
         }
 
     }

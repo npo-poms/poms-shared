@@ -76,6 +76,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
+    @Deprecated
     public MediaFormBuilder sortDate(Date begin, Date end) {
         return sortDate(begin, end, false);
     }
@@ -85,7 +86,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
     }
 
 
-
+    @Deprecated
     public MediaFormBuilder sortDate(Date begin, Date end, boolean inclusiveEnd) {
         return sortDate(DateUtils.toInstant(begin), DateUtils.toInstant(end), inclusiveEnd);
     }
@@ -170,8 +171,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
 
 
     public MediaFormBuilder genres(String... terms) {
-        search().setGenres(textMatchers(Match.SHOULD, terms));
-        return this;
+        return genres(Match.SHOULD, terms);
     }
 
     public MediaFormBuilder genres(Match match, String... terms) {
