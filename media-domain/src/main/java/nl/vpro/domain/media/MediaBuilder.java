@@ -27,8 +27,6 @@ import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.*;
 import nl.vpro.i18n.LocalizedString;
-import nl.vpro.util.DateUtils;
-import nl.vpro.util.TimeUtils;
 
 import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
 import static nl.vpro.util.DateUtils.toInstant;
@@ -147,10 +145,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
-    @Deprecated
-    default B creationDate(Date date) {
-        return creationDate(toInstant(date));
-    }
     @SuppressWarnings("unchecked")
     default B creationDate(Instant date) {
         mediaObject().setCreationInstant(date);
@@ -171,11 +165,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     default B clearCreationDate() {
         mediaObject().setCreationInstant(null);
         return (B) this;
-    }
-
-    @Deprecated
-    default B lastModified(Date date) {
-        return lastModified(DateUtils.toInstant(date));
     }
 
     default B lastModified(Instant date) {
@@ -204,10 +193,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
-    @Deprecated
-    default B lastPublished(Date date) {
-        return lastPublished(DateUtils.toInstant(date));
-    }
 
     @SuppressWarnings("unchecked")
     default B lastPublished(Instant date) {
@@ -496,20 +481,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         va.setAspectRatio(as);
         return (B)this;
 
-    }
-
-    /**
-     * @deprecated Use {@link #duration(Duration)}
-     */
-    @SuppressWarnings("unchecked")
-    @Deprecated
-    default B duration(Date duration) {
-        try {
-            mediaObject().setDurationWithDate(duration);
-        } catch (ModificationException e) {
-            throw new IllegalStateException(e);
-        }
-        return (B)this;
     }
 
 
@@ -1154,14 +1125,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             super(segment);
         }
 
-        /**
-         * @deprecated  Use #start(java.time.Duration)
-         */
-        @Deprecated
-        public T start(Date start) {
-            mediaObject().setStart(TimeUtils.durationOf(start).orElse(null));
-            return (T) this;
-        }
 
         public T start(java.time.Duration start) {
             mediaObject().setStart(start);

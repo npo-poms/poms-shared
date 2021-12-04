@@ -84,14 +84,17 @@ public class MediaBuilderTest {
 
     @Test
     public void testClone() {
-        MediaBuilder.ProgramBuilder programBuilder = MediaBuilder.program().mainTitle("base");
+        MediaBuilder.ProgramBuilder programBuilder = MediaBuilder.movie()
+            .intentions(Intentions.builder().owner(OwnerType.BROADCASTER).value(IntentionType.INFORM).build())
+            .mainTitle("base");
         Program program1 = programBuilder.copy().mainTitle("sub1").mid("mid1").build();
         Program program2 = programBuilder.mid("mid2").build();
         assertThat(program1.getMainTitle()).isEqualTo("sub1");
         assertThat(program1.getMid()).isEqualTo("mid1");
         assertThat(program2.getMainTitle()).isEqualTo("base");
         assertThat(program2.getMid()).isEqualTo("mid2");
-
+        assertThat(program2.getType()).isEqualTo(ProgramType.MOVIE);
+        assertThat(program2.getIntentions()).containsExactly(Intentions.builder().owner(OwnerType.BROADCASTER).value(IntentionType.INFORM).build());
     }
 
     @Test
