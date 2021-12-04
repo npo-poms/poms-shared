@@ -56,11 +56,11 @@ import nl.vpro.util.IntegerVersion;
 })
 public final class ProgramUpdate extends MediaUpdate<Program> {
 
-    protected SortedSet<@NotNull @Valid SegmentUpdate> segments;
+    private SortedSet<@NotNull @Valid SegmentUpdate> segments;
 
-    protected SortedSet<@NotNull @Valid MemberRefUpdate> episodeOf;
+    private SortedSet<@NotNull @Valid MemberRefUpdate> episodeOf;
 
-    protected  SortedSet<@NotNull @Valid ScheduleEventUpdate> scheduleEvents;
+    private  SortedSet<@NotNull @Valid ScheduleEventUpdate> scheduleEvents;
 
 
     private ProgramType programType;

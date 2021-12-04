@@ -815,6 +815,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "broadcaster", required = true)
+    @Size(min = 1)
     @NonNull
     public List<String> getBroadcasters() {
         if (broadcasters == null) {
@@ -822,6 +823,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         }
         return broadcasters;
     }
+
 
     public void setBroadcasters(List<String> broadcasters) {
         this.broadcasters = broadcasters;

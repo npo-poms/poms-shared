@@ -76,7 +76,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     private String midRef;
     private ProgramUpdate parent;
 
-    private SegmentUpdate() {
+    public SegmentUpdate() {
 
     }
 
