@@ -21,8 +21,10 @@ import org.junit.jupiter.api.Test;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.IntegerVersion;
 import nl.vpro.util.Version;
 import nl.vpro.validation.ConstraintViolations;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -32,6 +34,59 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 public class ProgramUpdateTest extends MediaUpdateTest {
+
+    @Test
+    public void create() {
+        MediaUpdate<Program> pu = MediaUpdate.create(
+            MediaBuilder.program(ProgramType.CLIP)
+                .mainTitle("foobar")
+                .id(123L)
+                .build()
+            , OwnerType.AUTHORITY, IntegerVersion.of(5, 31, 0));
+        assertThat(pu.warningViolations().toString()).contains("ageRating");
+        assertThat(pu.getVersionAttribute()).isEqualTo("5.31.0");
+        assertThat(pu.isBefore(5, 30)).isFalse();
+        assertThat(pu.getMediaType()).isEqualTo(MediaType.CLIP);
+        assertThat(pu.getDeletedAttribute()).isNull();
+        assertThat(pu.getId()).isEqualTo(123L);
+
+        pu.setBroadcasters("VPRO");
+        assertThat(pu.getBroadcasters()).containsExactly("VPRO");
+        assertThat(pu.fetch().getBroadcasters()).containsExactly(new Broadcaster("VPRO"));
+
+        pu.setTitles(pu.getTitleCreator().apply("xxxx", TextualType.MAIN));
+        assertThat(pu.getMainTitle()).isEqualTo("xxxx");
+        pu.setDescriptions(pu.getDescriptionCreator().apply("yyyy", TextualType.MAIN));
+        assertThat(pu.getMainDescription()).isEqualTo("yyyy");
+
+        pu.setTags("foo", "bar");
+        assertThat(pu.fetch().getTags()).containsExactly(new Tag("bar"), new Tag("foo"));
+        pu.setReleaseYear((short) 2021);
+        assertThat(pu.fetch().getReleaseYear()).isEqualTo((short) 2021);
+
+        pu.setCredits(new PersonUpdate("Mark", "Rutte", RoleType.GUEST));
+        assertThat(pu.fetch().getCredits()).containsExactly(new Person("Mark", "Rutte", RoleType.GUEST));
+
+        pu.setEmail("test@example.com");
+        assertThat(pu.fetch().getEmail()).containsExactly("test@example.com");
+
+        pu.setWebsites("https://meeuw.org");
+        assertThat(pu.fetch().getWebsites()).containsExactly(new Website("https://meeuw.org", OwnerType.BROADCASTER));
+
+
+
+    }
+
+    @Test
+    public void createUpdate() {
+        MediaUpdate<Program> pu = MediaUpdate.createUpdate(
+            MediaBuilder.program(ProgramType.CLIP)
+                .mainTitle("foobar")
+                .mainTitle("bla", OwnerType.NPO)
+            , OwnerType.AUTHORITY);
+        assertThat(pu.warningViolations().toString()).contains("ageRating");
+        assertThat(pu.getMainTitle()).isEqualTo("bla");
+    }
 
     @Test
     public void testIsValidWhenInvalid() {

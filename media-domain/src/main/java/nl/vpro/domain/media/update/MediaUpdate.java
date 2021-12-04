@@ -737,7 +737,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if (urn == null) {
             return null;
         }
-        return Long.valueOf(urn.substring(getUrnPrefix().length() + 1));
+        return Long.valueOf(urn.substring(getUrnPrefix().length()));
     }
 
     void setId(Long id) {
@@ -941,7 +941,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public void setTags(String... tags) {
-        this.tags = new TreeSet<>(Arrays.asList(tags));
+        setTags(new TreeSet<>(Arrays.asList(tags)));
     }
 
     @XmlElement(name = "country")
@@ -984,7 +984,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public void setGenres(String... genres) {
-        this.genres = new TreeSet<>(Arrays.asList(genres));
+        setGenres(new TreeSet<>(Arrays.asList(genres)));
     }
 
     @XmlElementWrapper(name = "intentions")
@@ -1025,11 +1025,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return duration;
     }
 
-    @Deprecated
-    public void setDuration(Date duration) {
-        this.duration = TimeUtils.durationOf(duration).orElse(null);
-    }
-
     public void setDuration(java.time.Duration duration) {
         this.duration = duration;
     }
@@ -1062,7 +1057,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public void setCredits(CreditsUpdate... credits){
-        this.credits = new ArrayList<>(Arrays.asList(credits));
+        setCredits(new ArrayList<>(Arrays.asList(credits)));
     }
 
     @XmlElement
@@ -1127,7 +1122,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public void setEmail(String... emails) {
-        this.email = new ArrayList<>(Arrays.asList(emails));
+        setEmail(new ArrayList<>(Arrays.asList(emails)));
     }
 
     @XmlElement(name = "website")
@@ -1144,7 +1139,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public void setWebsites(String... websites) {
-        this.websites = new ArrayList<>(Arrays.asList(websites));
+        setWebsites(new ArrayList<>(Arrays.asList(websites)));
     }
 
     public void setWebsiteObjects(List<Website> websites) {
@@ -1202,7 +1197,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.locations = locations;
     }
     public void setLocations(LocationUpdate... locations) {
-        this.locations = new TreeSet<>(Arrays.asList(locations));
+        setLocations(new TreeSet<>(Arrays.asList(locations)));
     }
 
     @XmlElement(name = "relation")
@@ -1233,8 +1228,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
         // Leave builder.images to the fetch(ImageImporter) method
         this.images = images;
     }
+
     public void setImages(ImageUpdate... images) {
-        this.images = new ArrayList<>();
+        setImages(new ArrayList<>());
         this.images.addAll(Arrays.asList(images));
     }
 
@@ -1267,7 +1263,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public void setGeoLocations(GeoLocationUpdate... geoLocationUpdates) {
-        this.geoLocations = Arrays.asList(geoLocationUpdates);
+        setGeoLocations(Arrays.asList(geoLocationUpdates));
     }
 
     @XmlElementWrapper(name = "topics")
@@ -1283,7 +1279,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public void setTopics(TopicUpdate... topicUpdates) {
-        this.topics = Arrays.asList(topicUpdates);
+        setTopics(Arrays.asList(topicUpdates));
     }
 
     @Override
