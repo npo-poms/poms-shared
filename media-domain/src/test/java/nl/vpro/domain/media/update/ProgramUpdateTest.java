@@ -97,6 +97,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testErrorsWhenInvalid() {
         ProgramUpdate update = ProgramUpdate.create();
+        update.setBroadcasters("VPRO");
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
         assertThat(update.violations()).hasSize(2);
     }
@@ -104,6 +105,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testCridValidation() {
         ProgramUpdate update = ProgramUpdate.create();
+        update.setBroadcasters("VPRO");
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
         update.setAVType(AVType.AUDIO);
         update.setType(ProgramType.BROADCAST);
@@ -116,6 +118,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testIsValidForImages() {
         ProgramUpdate update = ProgramUpdate.create();
+        update.setBroadcasters("EO");
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.AUDIO);
@@ -132,6 +135,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             //.programUrl(null)
             .build();
         ProgramUpdate update = ProgramUpdate.create();
+        update.setBroadcasters("KRNC");
         update.setMainTitle("hoi");
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.MIXED);
@@ -145,6 +149,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testIsValidForTitles() {
         ProgramUpdate update = ProgramUpdate.create();
+        update.setBroadcasters("VPRO");
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.MIXED);
 
@@ -156,6 +161,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testIsValidForTitles2() throws NoSuchFieldException, IllegalAccessException {
         ProgramUpdate update = programUpdate();
+        update.setBroadcasters("VPRO");
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.MIXED);
         update.addTitle("bla", TextualType.MAIN);

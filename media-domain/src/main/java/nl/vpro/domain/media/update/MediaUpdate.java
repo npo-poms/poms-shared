@@ -815,7 +815,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "broadcaster", required = true)
-    @Size(min = 1)
+    //@Size(min = 1)
     @NonNull
     public List<String> getBroadcasters() {
         if (broadcasters == null) {
@@ -898,7 +898,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.titles = titles;
     }
     public void setTitles(TitleUpdate... titles) {
-        this.titles = new TreeSet<>(Arrays.asList(titles));
+        setTitles(new TreeSet<>(Arrays.asList(titles)));
     }
 
     @Override
