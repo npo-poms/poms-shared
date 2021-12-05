@@ -69,7 +69,7 @@ public class BroadcasterServiceImplTest {
             broadcasterService.update(vpro);
         }).isInstanceOf(UnsupportedOperationException.class);
          assertThatThrownBy(() -> {
-            broadcasterService.update(vpro);
+            broadcasterService.delete(vpro);
         }).isInstanceOf(UnsupportedOperationException.class);
     }
 
