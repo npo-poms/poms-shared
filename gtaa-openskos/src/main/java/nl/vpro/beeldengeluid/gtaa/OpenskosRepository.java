@@ -129,11 +129,9 @@ public class OpenskosRepository implements GTAARepository {
         this.gtaaKey = key;
         this.template = createTemplateIfNull(template);
         this.tenant = tenant;
-        this.personsSpec = personsSpec == null ? Scheme.person.getSpec() : personsSpec;
-        this.geoLocationsSpec = geoLocationsSpec == null ? Scheme.geographicname.getSpec() : geoLocationsSpec;
+        this.personsSpec = StringUtils.isEmpty(personsSpec) ? Scheme.person.getSpec() : personsSpec;
+        this.geoLocationsSpec = StringUtils.isEmpty(geoLocationsSpec) ? Scheme.geographicname.getSpec() : geoLocationsSpec;
         this.retries = retries;
-
-
     }
 
     private void addErrorHandler() {
@@ -170,7 +168,10 @@ public class OpenskosRepository implements GTAARepository {
                             }
                             writer.append("Response:\n");
                             writer.append(body.toString());
-                            throw new RuntimeException("For " + gtaaUrl + " " +
+                            throw new GTAAError(
+                                response.getRawStatusCode(),
+                                body.toString(),
+                                "For " + gtaaUrl + " " +
                                 response.getStatusCode() + " " + response.getStatusText() + " " + writer);
                     }
                 } finally {
@@ -315,12 +316,12 @@ public class OpenskosRepository implements GTAARepository {
 
     @Override
     public CountedIterator<Record> getPersonUpdates(@Context Instant from, @Context Instant to) {
-        return getUpdates(from, to, personsSpec.isEmpty() ? Scheme.person.getSpec(): personsSpec);
+        return getUpdates(from, to, personsSpec);
     }
 
     @Override
     public CountedIterator<Record> getGeoLocationsUpdates(@Context Instant from, @Context Instant to) {
-        return getUpdates(from, to, geoLocationsSpec.isEmpty() ? Scheme.geographicname.getSpec() : geoLocationsSpec);
+        return getUpdates(from, to, geoLocationsSpec);
     }
 
     @Override
@@ -543,15 +544,15 @@ public class OpenskosRepository implements GTAARepository {
             RDF rdf = template.getForObject(url, RDF.class);
             List<Description> descriptions = descriptions(rdf);
             return descriptions.stream().findFirst();
-        } catch (HttpServerErrorException e) {
+        } catch (GTAAError e) {
             switch(e.getStatusCode()) {
-                case INTERNAL_SERVER_ERROR:
+                case 500:
                     // It is idiotic that openskos issues an internal server error for what basicly is a 404
                     if(NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
                         return Optional.empty();
                     }
                     throw e;
-                case NOT_FOUND:
+                case 404:
                     return Optional.empty();
                 default:
                     log.error("Unexpected error doing call to openskos for item id {}: {}: {}", id, url, e.getResponseBodyAsString(), e);

@@ -16,7 +16,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.web.client.HttpServerErrorException;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 
@@ -38,7 +37,8 @@ public class OpenskosRepositoryTest {
 
     @Test
     public void test(@Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        OpenskosRepository repo = create(uri);
+
         server.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(okXml(f("/find-person-test.xml"))));
 
         List<Description> persons = repo.findPersons("test", 1);
@@ -51,7 +51,7 @@ public class OpenskosRepositoryTest {
 
     @Test
     public void testAddItem(@Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        OpenskosRepository repo = create(uri);
 
         server.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(okXml(f("/submit-person-response.xml")).withStatus(201)));
 
@@ -70,7 +70,8 @@ public class OpenskosRepositoryTest {
 
     @Test
     public void updatesNoResults(@Wiremock WireMockServer server, @WiremockUri String uri) throws Exception {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        OpenskosRepository repo = create(uri);
+
         server.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("no-updates.xml"))));
 
         try (CountedIterator<Record> updates = repo.getPersonUpdates(Instant.EPOCH, Instant.now())) {
@@ -80,7 +81,8 @@ public class OpenskosRepositoryTest {
 
     @Test
     public void updates(@Wiremock WireMockServer server, @WiremockUri String uri) throws Exception {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        OpenskosRepository repo = create(uri);
+
         server.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("updates.xml"))));
         try (CountedIterator<Record> updates = repo.getPersonUpdates(Instant.EPOCH, Instant.now())) {
             Record next = updates.next();
@@ -92,7 +94,8 @@ public class OpenskosRepositoryTest {
 
     @Test
     public void getUpdatesAndApplyThem(@Wiremock WireMockServer server, @WiremockUri String uri) throws Exception {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        OpenskosRepository repo = create(uri);
+
         server.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("updates.xml"))));
         try (CountedIterator<Record> updates = repo.getPersonUpdates(Instant.EPOCH, Instant.now())) {
             Record next = updates.next();
@@ -105,7 +108,8 @@ public class OpenskosRepositoryTest {
 
     @Test
     public void anyUpdates(@Wiremock WireMockServer server, @WiremockUri String uri) throws Exception {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        OpenskosRepository repo = create(uri);
+
         server.stubFor(get(urlPathEqualTo("/oai-pmh"))
             .willReturn(okXml(f("any-updates.xml"))));
         try (CountedIterator<Record> updates = repo.getAllUpdates(Instant.EPOCH, Instant.now())) {
@@ -136,13 +140,16 @@ public class OpenskosRepositoryTest {
         }
     }
 
+
+
+
     private String f(String file) throws IOException {
         return IOUtils.toString(getClass().getResourceAsStream(StringUtils.prependIfMissing(file, "/")), StandardCharsets.UTF_8);
     }
 
     @Test
     public void testRetrieveItemStatus(@Wiremock WireMockServer server, @WiremockUri String uri) throws Exception {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        OpenskosRepository repo = create(uri);
 
         server.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(okXml(f("retrieve-status.xml"))));
         Optional<Description> description = repo.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1672723");
@@ -151,20 +158,31 @@ public class OpenskosRepositoryTest {
 
     @Test
     public void retrieveItemStatusShouldReturnIllegalArgumentEx(@Wiremock WireMockServer server, @WiremockUri String uri) throws Exception {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
-        server.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(status(500).withBody(f("retrieve-status-not-found.xml"))));
+        OpenskosRepository repo = create(uri);
+
+        server.stubFor(
+            get(urlPathEqualTo("/api/find-concepts"))
+                .willReturn(status(500).withBody(f("retrieve-status-not-found.xml"))));
         Optional<Description> desc = repo.retrieveConceptStatus("blabla");
         assertThat(desc.isPresent()).isFalse();
     }
 
     @Test
     public void retrieveItemStatusShouldReturnUnexpectedError(@Wiremock WireMockServer server, @WiremockUri String uri) {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        OpenskosRepository repo = create(uri);
+
         assertThatThrownBy(() -> {
             server.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(status(500).withBody("Random error")));
             Optional<Description> desc = repo.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1672723");
-        }).isInstanceOf(HttpServerErrorException.class);
+        }).isInstanceOf(GTAAError.class);
     }
+
+    OpenskosRepository create(String uri) {
+        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        repo.init();
+        return repo;
+    }
+
 
 
 }
