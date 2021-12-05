@@ -593,7 +593,7 @@ public class MediaObjects {
 
 
     /**
-     * Sets the workflow of the media object to the 'published' state version of the workflow ({@link Workflow#isPublishable()}
+     * Sets the workflow of the media object to the 'published' state version of the workflow ({@link Workflow#isPublishable()} ()}
      *
      * And calls {@link #markPublished(MediaObject, Instant)}
      * @since 5.20.2

@@ -26,7 +26,7 @@ import nl.vpro.util.URLResource;
 public class BroadcasterServiceImpl implements BroadcasterService {
 
 
-    private Map<String, Broadcaster> broadcasterMap = new HashMap<>();
+    private Map<String, Broadcaster> broadcasterMap = new TreeMap<>();
     private final URLResource<Map<String, String>> displayNameResource;
     private URLResource<Map<String, String>> misResource;
     private URLResource<Map<String, String>> whatsonResource;

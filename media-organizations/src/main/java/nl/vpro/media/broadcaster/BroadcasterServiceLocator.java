@@ -35,7 +35,7 @@ public class BroadcasterServiceLocator {
     }
 
     public static BroadcasterService getInstance() {
-        return getInstance(true, true);
+        return getInstance(true);
     }
 
 

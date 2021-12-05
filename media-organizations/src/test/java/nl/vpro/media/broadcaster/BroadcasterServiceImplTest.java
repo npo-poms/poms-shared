@@ -12,10 +12,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 
+import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 @Slf4j
@@ -58,6 +60,23 @@ public class BroadcasterServiceImplTest {
         BroadcasterService broadcasterService = new BroadcasterServiceImpl(uri + "/broadcasters/", false, true);
         assertThat(broadcasterService.find("RTUT")).isNotNull();
         assertThat(broadcasterService.find("RTUT").getMisId()).isEqualTo("RTV Utrecht");
+    }
+
+    @Test
+    public void update() {
+        Broadcaster vpro = broadcasterService.find("VPRO");
+        assertThatThrownBy(() -> {
+            broadcasterService.update(vpro);
+        }).isInstanceOf(UnsupportedOperationException.class);
+         assertThatThrownBy(() -> {
+            broadcasterService.update(vpro);
+        }).isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @Test
+    public void string() {
+        assertThat(broadcasterService.toString()).isEqualTo("BroadcasterServiceImpl[classpath:/broadcasters.properties]");
 
     }
+
 }
