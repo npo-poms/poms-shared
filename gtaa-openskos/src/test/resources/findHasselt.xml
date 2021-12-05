@@ -1,0 +1,236 @@
+<rdf:RDF
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:js="http://justskos.org/ns/core#"
+    xmlns:openskos="http://openskos.org/xmlns#"  openskos:numFound="15" openskos:start="0" openskos:rows="100">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/72313">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Namen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:43:49Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T20:06:13Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">72313</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T20:06:13Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Tricotagefabriek Van Hasselt</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107537">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">J.F.B. van Hasselt</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, J.F.B.</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:43Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107537</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:43Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, J.F.B. van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107534">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, Frans</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">Frans van Hasselt</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <skos:scopeNote xml:lang="nl">journalist</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-12-21T23:22:35Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:41Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107534</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:41Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, Frans van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107542">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, Luc</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">Luc van Hasselt</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:46Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107542</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:46Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, Luc van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107538">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, J.L.</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">J.L. van Hasselt</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">Hasselt, J.L van</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <skos:scopeNote xml:lang="nl">politicus</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-02-06T20:39:37Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:43Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107538</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:43Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, J.L. van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107543">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">P. Hasselt</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:47Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107543</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:46Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, P.</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107544">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">R. van Hasselt</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, R.</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:47Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107544</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:47Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, R. van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107539">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">J.Ph. van Hasselt</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, J.Ph.</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <skos:scopeNote xml:lang="nl">voorz. UCN</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:44Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107539</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:44Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, J.Ph. van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/36056">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:qualifier xml:lang="nl">België</js:qualifier>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">{}</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:55:29Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:14:30Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">36056</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:14:30Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt (België)</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/36057">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:qualifier xml:lang="nl">Overijssel</js:qualifier>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">{}</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:55:29Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:14:30Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">36057</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:14:30Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt (Overijssel)</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107535">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, J.</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">J. van Hasselt</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <skos:scopeNote xml:lang="nl">Nationale Ziekenhuisraad</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:41Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107535</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:41Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, J. van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107533">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, Ab</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">Ab van Hasselt</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <skos:scopeNote xml:lang="nl">schipper</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:40Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107533</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:40Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, Ab van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107536">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, J.C.</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">J.C. van Hasselt</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <skos:scopeNote xml:lang="nl">projectleider NS</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:42Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107536</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:42Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, J.C. van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107540">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">K. van Hasselt</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">van Hasselt, K.</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:45Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107540</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:45Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, K. van</skos:prefLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/107541">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">von Hasselt, K.U.</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">K.U. von Hasselt</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T13:30:28Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:45Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">107541</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T02:13:45Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Hasselt, K.U. von</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF>

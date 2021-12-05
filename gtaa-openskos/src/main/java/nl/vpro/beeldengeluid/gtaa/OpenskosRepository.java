@@ -547,7 +547,7 @@ public class OpenskosRepository implements GTAARepository {
         } catch (GTAAError e) {
             switch(e.getStatusCode()) {
                 case 500:
-                    // It is idiotic that openskos issues an internal server error for what basicly is a 404
+                    // It is odd that openskos issues an internal server error for what basically is a 404
                     if(NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
                         return Optional.empty();
                     }
@@ -568,19 +568,17 @@ public class OpenskosRepository implements GTAARepository {
             RDF rdf = template.getForObject(url, RDF.class);
             List<Description> descriptions = descriptions(rdf);
             return descriptions.stream().findFirst().flatMap(GTAAConcepts::toConcept);
-        } catch (HttpClientErrorException clientError) {
-            if (clientError.getStatusCode() == HttpStatus.NOT_FOUND) {
+        } catch (GTAAError clientError) {
+            if (clientError.getStatusCode() == HttpStatus.NOT_FOUND.value()) {
                 return Optional.empty();
             }
-            throw clientError;
-        } catch (HttpServerErrorException e) {
-            if (e.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
-                if (NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
+            if (clientError.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+                if (NOT_FOUND.matcher(clientError.getResponseBodyAsString()).matches()) {
                     return Optional.empty();
                 }
             }
-            log.error("Unexpected error doing call to openskos for item id {}: {}: {}", id, url, e.getResponseBodyAsString(), e);
-            throw e;
+            log.error("Unexpected error doing call to openskos for item id {}: {}: {}", id, url, clientError.getResponseBodyAsString(), clientError);
+            throw clientError;
         }
     }
 
@@ -588,8 +586,6 @@ public class OpenskosRepository implements GTAARepository {
         if (schemeList.length == 0) {
             return "";
         }
-
-
 
         StringBuilder sb = new StringBuilder();
 
@@ -624,7 +620,7 @@ public class OpenskosRepository implements GTAARepository {
 
     @Override
     public String toString() {
-        return super.toString() + " " + gtaaUrl;
+        return OpenskosRepository.class.getSimpleName() + " " + gtaaUrl;
     }
 
     private static class DOMSourceUnmarshaller implements Unmarshaller {

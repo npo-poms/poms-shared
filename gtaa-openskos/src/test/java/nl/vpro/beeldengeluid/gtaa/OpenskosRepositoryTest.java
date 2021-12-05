@@ -1,5 +1,6 @@
 package nl.vpro.beeldengeluid.gtaa;
 
+import lombok.extern.slf4j.Slf4j;
 import ru.lanwen.wiremock.ext.WiremockResolver;
 import ru.lanwen.wiremock.ext.WiremockResolver.Wiremock;
 import ru.lanwen.wiremock.ext.WiremockUriResolver;
@@ -32,12 +33,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
     WiremockResolver.class,
     WiremockUriResolver.class
 })
+@Slf4j
 public class OpenskosRepositoryTest {
 
 
     @Test
-    public void test(@Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
+    public void findPersons(@Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
         OpenskosRepository repo = create(uri);
+
+        assertThat(repo.toString()).startsWith("OpenskosRepository http://localhost:");
 
         server.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(okXml(f("/find-person-test.xml"))));
 
@@ -175,6 +179,46 @@ public class OpenskosRepositoryTest {
             server.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(status(500).withBody("Random error")));
             Optional<Description> desc = repo.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1672723");
         }).isInstanceOf(GTAAError.class);
+    }
+
+    @Test
+    public void getPerson(@Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
+        OpenskosRepository repo = create(uri);
+
+        server.stubFor(
+            get(urlPathEqualTo("/api/find-concepts"))
+                .willReturn(okXml(f("1715195.xml"))));
+
+        Optional<GTAAConcept> concept = repo.get("http://data.beeldengeluid.nl/gtaa/1715195");
+        assertThat(concept).isPresent();
+        GTAAPerson person = (GTAAPerson) concept.get();
+        assertThat(person.getName()).isEqualTo("Delft, Matthijs van"); //  This seems odd
+    }
+
+    @Test
+    public void getPersonNotFoundOldImpl(@Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
+         OpenskosRepository repo = create(uri);
+
+         server.stubFor(
+             get(urlPathEqualTo("/api/find-concepts"))
+                 .willReturn(status(500).withBody(f("not-found-old-response.html"))));
+
+         Optional<GTAAConcept> concept = repo.get("http://data.beeldengeluid.nl/gtaa/1715195");
+         assertThat(concept).isNotPresent();
+    }
+
+    @Test
+    public void findAnyThing(@Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
+        OpenskosRepository repo = create(uri);
+
+        server.stubFor(
+            get(urlPathEqualTo("/api/find-concepts"))
+                .willReturn(okXml(f("findHasselt.xml"))));
+
+        List<Description> hasselt = repo.findAnything("hasselt", 100);
+
+        assertThat(hasselt).hasSize(15);
+
     }
 
     OpenskosRepository create(String uri) {

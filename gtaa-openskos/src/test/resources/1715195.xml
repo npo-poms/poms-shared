@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:openskos="http://openskos.org/xmlns#"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:dcterms="http://purl.org/dc/terms/">
+
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1715195">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:tenant>beng</openskos:tenant>
+    <skos:hiddenLabel xml:lang="nl">van Delft, Matthijs</skos:hiddenLabel>
+    <skos:hiddenLabel xml:lang="nl">Matthijs van Delft</skos:hiddenLabel>
+    <openskos:status>approved</openskos:status>
+    <skos:notation>1715195</skos:notation>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-05-22T08:29:17+00:00</dcterms:modified>
+    <openskos:uuid>5311bd4d-63b8-4a98-bdf7-33cf7267c5db</openskos:uuid>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-05-22T08:29:17+00:00</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">gitarist</skos:scopeNote>
+    <dcterms:publisher rdf:resource="http://tenant/36ecba45-8d23-4c8e-97f8-d73782b92ed5"/>
+    <openskos:modifiedBy rdf:resource="http://openskos.beeldengeluid.nl/api/users/fe161437-f607-41bc-85d4-5083075208a4"/>
+    <skos:example xml:lang="nl">PGMRA2000648158</skos:example>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-05-19T08:21:17+00:00</dcterms:dateSubmitted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/gtaa"/>
+    <openskos:acceptedBy rdf:resource="http://openskos.beeldengeluid.nl/api/users/fe161437-f607-41bc-85d4-5083075208a4"/>
+    <dcterms:creator rdf:resource="http://openskos.beeldengeluid.nl/api/users/e1002dc7-230c-46d1-8116-9ef1dceadbb1"/>
+    <openskos:toBeChecked>0</openskos:toBeChecked>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <skos:prefLabel xml:lang="nl">Delft, Matthijs van</skos:prefLabel>
+  </rdf:Description>
+
+</rdf:RDF>
