@@ -166,6 +166,16 @@ public class OpenskosRepositoryITest {
         assertThat(person.get().getId()).isEqualTo(URI.create("http://data.beeldengeluid.nl/gtaa/1715195"));
     }
 
+    @ParameterizedTest
+    @MethodSource("envs")
+    public void testFindByGtaaUrlGeo(Env env) {
+        OpenskosRepository impl = getRealInstance(env);
+
+        Optional<GTAAConcept> geo = impl.get("http://data.beeldengeluid.nl/gtaa/1723598");
+        assertThat(geo.get().getId()).isEqualTo(URI.create("http://data.beeldengeluid.nl/gtaa/1715195"));
+
+    }
+
 
 
     @ParameterizedTest

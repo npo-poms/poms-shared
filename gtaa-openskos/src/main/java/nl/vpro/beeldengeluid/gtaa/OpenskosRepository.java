@@ -69,6 +69,14 @@ public class OpenskosRepository implements GTAARepository {
 
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
+    private static OpenskosRepository instance;
+
+    public static OpenskosRepository getInstance() {
+        if (instance == null) {
+            throw new IllegalStateException("No openskos repository instance");
+        }
+        return instance;
+    }
 
     private final RestTemplate template;
 
@@ -132,6 +140,10 @@ public class OpenskosRepository implements GTAARepository {
         this.personsSpec = StringUtils.isEmpty(personsSpec) ? Scheme.person.getSpec() : personsSpec;
         this.geoLocationsSpec = StringUtils.isEmpty(geoLocationsSpec) ? Scheme.geographicname.getSpec() : geoLocationsSpec;
         this.retries = retries;
+        if (instance != null) {
+            log.warn("There is already an openskos repository");
+        }
+        instance = this;
     }
 
     private void addErrorHandler() {
@@ -329,7 +341,7 @@ public class OpenskosRepository implements GTAARepository {
         return getUpdates(from, until, null);
     }
 
-    private CountedIterator<Record> getUpdates(Instant from, Instant until, @Nullable String spec) {
+    private CountedIterator<Record> getUpdates(@NonNull Instant from, @NonNull Instant until, @Nullable String spec) {
 
         final AtomicLong totalSize = new AtomicLong(-1L);
         Supplier<Iterator<Record>> getter = new Supplier<Iterator<Record>>() {
@@ -381,7 +393,7 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     @Nullable
-    ListRecord getListRecord(Instant from, Instant until, @Nullable String type) {
+    ListRecord getListRecord(@NonNull Instant from, @NonNull Instant until, @Nullable String type) {
         String set = "";
         if(type != null) {
             set = "&set=" + type;

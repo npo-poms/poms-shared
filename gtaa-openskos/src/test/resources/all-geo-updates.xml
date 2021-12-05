@@ -1,0 +1,1595 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"><responseDate>2021-12-05T20:51:34Z</responseDate><request verb="ListRecords" metadataPrefix="oai_rdf" from="1970-01-01T00:00:00Z" until="2021-12-05T20:51:27Z" set="beng:gtaa:GeografischeNamen">http://gtaa.apis.beeldengeluid.nl/oai-pmh?verb=ListRecords&amp;set=beng:gtaa:GeografischeNamen&amp;metadataPrefix=oai_rdf&amp;from=1970-01-01T00:00:00Z&amp;until=2021-12-05T20:51:27Z</request><ListRecords><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:1723653</identifier><datestamp>2021-10-28T13:36:48Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1723653">
+    <skos:scopeNote xml:lang="nl">Den Haag</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-10-28T13:36:48Z</dcterms:modified>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>candidate</openskos:status>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T19:11:36Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-10-28T13:29:35Z</dcterms:dateSubmitted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Tuindorp</skos:prefLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1723653</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">2</js:revision>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:1723598</identifier><datestamp>2021-10-19T08:27:56Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1723598">
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Tongeren (Nederland)</skos:prefLabel>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1723598</skos:notation>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:scopeNote xml:lang="nl">buurtschap gemeente Ede, Nederland</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-10-18T11:30:50Z</dcterms:dateSubmitted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-10-19T08:27:56Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1</js:revision>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-10-19T08:27:56Z</dcterms:dateAccepted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T19:11:34Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:qualifier xml:lang="nl">Nederland</js:qualifier>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:10254741660</identifier><datestamp>2021-09-24T08:59:34Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/10254741660">
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-09-24T08:59:34Z</dcterms:modified>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T19:11:33Z</dcterms:dateAvailable>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-09-24T08:59:34Z</dcterms:dateSubmitted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Driedorp31632473974272</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">Buurtschap binnen de gemeente Nijkerk</skos:scopeNote>
+    <openskos:status>candidate</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">10254741660</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:36844</identifier><datestamp>2013-01-14T11:56:15Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/36844">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">36844</skos:notation>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:17Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Jannina</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:56:15Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:16:11Z</dcterms:dateSubmitted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:16:11Z</dcterms:dateAccepted>
+    <openskos:status>approved</openskos:status>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:scopeNote xml:lang="nl">Griekenland</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:35114</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/35114">
+    <skos:prefLabel xml:lang="nl">Fontenay-sous-Bois</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:35Z</dcterms:dateAccepted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">35114</skos:notation>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:17Z</dcterms:dateAvailable>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:35Z</dcterms:dateSubmitted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>approved</openskos:status>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">Frankrijk</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:44629</identifier><datestamp>2013-01-14T12:02:59Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/44629">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:37:11Z</dcterms:dateAccepted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">44629</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:37:11Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:17Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Weebosch</skos:prefLabel>
+    <skos:scopeNote xml:lang="nl">Noord-Brabant</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:59Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:status>approved</openskos:status>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:45190</identifier><datestamp>2013-01-14T12:02:59Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/45190">
+    <skos:prefLabel xml:lang="nl">Zegveld</skos:prefLabel>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>approved</openskos:status>
+    <skos:scopeNote xml:lang="nl">Utrecht</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">45190</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:39:00Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:17Z</dcterms:dateAvailable>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:39:00Z</dcterms:dateAccepted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:59Z</dcterms:modified>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:41355</identifier><datestamp>2013-01-14T12:00:23Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/41355">
+    <skos:prefLabel xml:lang="nl">Ramsgate</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:27:18Z</dcterms:dateAccepted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:17Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:00:23Z</dcterms:modified>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">41355</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:27:18Z</dcterms:dateSubmitted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:scopeNote xml:lang="nl">Groot-Brittannië</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39957</identifier><datestamp>2013-01-14T11:58:41Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39957">
+    <skos:prefLabel xml:lang="nl">Ninamarca</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:58:41Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:23:34Z</dcterms:dateSubmitted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:16Z</dcterms:dateAvailable>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">Peru</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39957</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:23:34Z</dcterms:dateAccepted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:36801</identifier><datestamp>2013-01-14T11:56:15Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/36801">
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:16:05Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:56:15Z</dcterms:modified>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:16Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Jackson Army Air Base</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:16:05Z</dcterms:dateAccepted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">36801</skos:notation>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:38755</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/38755">
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:20:32Z</dcterms:dateSubmitted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:16Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <skos:prefLabel xml:lang="nl">Loconville</skos:prefLabel>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">38755</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:20:32Z</dcterms:dateAccepted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:40353</identifier><datestamp>2013-01-14T11:59:29Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/40353">
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:24:35Z</dcterms:dateAccepted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:scopeNote xml:lang="nl">provincie Zuid-Afrika</skos:scopeNote>
+    <skos:prefLabel xml:lang="nl">Oostkaap</skos:prefLabel>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">40353</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:16Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:24:35Z</dcterms:dateSubmitted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:59:29Z</dcterms:modified>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:38450</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/38450">
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <skos:prefLabel xml:lang="nl">Lawaaikamp</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">38450</skos:notation>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:48Z</dcterms:dateAccepted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:48Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:16Z</dcterms:dateAvailable>
+    <skos:scopeNote xml:lang="nl">woonoord bij Kaapstad</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32262</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32262">
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:15Z</dcterms:dateAvailable>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32262</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:39Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:39Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Battersea</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">wijk Londen, Groot-Brittannië</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39113</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39113">
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39113</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Malpasset-dam</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:21:26Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:15Z</dcterms:dateAvailable>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:21:26Z</dcterms:dateAccepted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39858</identifier><datestamp>2013-01-14T11:58:41Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39858">
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:scopeNote xml:lang="nl">Oostenrijk</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39858</skos:notation>
+    <skos:prefLabel xml:lang="nl">Nickelsdorf</skos:prefLabel>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:58:41Z</dcterms:modified>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:23:18Z</dcterms:dateAccepted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:23:18Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:15Z</dcterms:dateAvailable>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:37477</identifier><datestamp>2013-01-14T11:57:02Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/37477">
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:17:33Z</dcterms:dateSubmitted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:02Z</dcterms:modified>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:15Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">37477</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:17:33Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Mordegal</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">Noorwegen</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31252</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31252">
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:14Z</dcterms:dateSubmitted>
+    <skos:prefLabel xml:lang="nl">Acht</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <skos:scopeNote xml:lang="nl">Nederland</skos:scopeNote>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:15Z</dcterms:dateAvailable>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:14Z</dcterms:dateAccepted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31252</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:43519</identifier><datestamp>2013-01-14T12:02:06Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/43519">
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">Guatemala</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">43519</skos:notation>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:15Z</dcterms:dateAvailable>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:33:42Z</dcterms:dateAccepted>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:33:42Z</dcterms:dateSubmitted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:06Z</dcterms:modified>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Tikal</skos:prefLabel>
+    <openskos:status>approved</openskos:status>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:36962</identifier><datestamp>2013-01-14T11:56:15Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/36962">
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:16:26Z</dcterms:dateAccepted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:56:15Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:14Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <skos:prefLabel xml:lang="nl">Juelsminde</skos:prefLabel>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:16:26Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">36962</skos:notation>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31963</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31963">
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:14Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:14Z</dcterms:dateAccepted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:14Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Ayios Sozomenos</skos:prefLabel>
+    <skos:scopeNote xml:lang="nl">Cyprus</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31963</skos:notation>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:43876</identifier><datestamp>2013-01-14T12:02:06Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/43876">
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">U Dorn</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:34:47Z</dcterms:dateAccepted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:06Z</dcterms:modified>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:14Z</dcterms:dateAvailable>
+    <skos:scopeNote xml:lang="nl">legerbasis VS in Thailand</skos:scopeNote>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:34:47Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">43876</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:45025</identifier><datestamp>2013-01-14T12:02:59Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/45025">
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:14Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:38:27Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:38:27Z</dcterms:dateAccepted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">45025</skos:notation>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:59Z</dcterms:modified>
+    <skos:prefLabel xml:lang="nl">Wounded Knee</skos:prefLabel>
+    <openskos:status>approved</openskos:status>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32603</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32603">
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:11Z</dcterms:dateAccepted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">Vietnam</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32603</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:11Z</dcterms:dateSubmitted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:prefLabel xml:lang="nl">Binh Chanh</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:38803</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/38803">
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:20:40Z</dcterms:dateSubmitted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:scopeNote xml:lang="nl">interneringskamp Noord-Ierland</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">38803</skos:notation>
+    <skos:prefLabel xml:lang="nl">Long Kesh</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:20:40Z</dcterms:dateAccepted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:34273</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/34273">
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:00Z</dcterms:dateSubmitted>
+    <skos:prefLabel xml:lang="nl">Diego Garcia</skos:prefLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:00Z</dcterms:dateAccepted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">34273</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:scopeNote xml:lang="nl">eiland Indische Oceaan</skos:scopeNote>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32441</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32441">
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:56Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:56Z</dcterms:dateAccepted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32441</skos:notation>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <skos:prefLabel xml:lang="nl">Berchem</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:scopeNote xml:lang="nl">België</skos:scopeNote>
+    <openskos:status>approved</openskos:status>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:42555</identifier><datestamp>2013-01-14T12:01:15Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/42555">
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:01:15Z</dcterms:modified>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">42555</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:30:47Z</dcterms:dateAccepted>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:30:47Z</dcterms:dateSubmitted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:prefLabel xml:lang="nl">Sinjil</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:35168</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/35168">
+    <skos:prefLabel xml:lang="nl">Fort-de-France</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:scopeNote xml:lang="nl">Martinique</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:41Z</dcterms:dateAccepted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">35168</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:41Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:43462</identifier><datestamp>2013-01-14T12:02:06Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/43462">
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">43462</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:33:31Z</dcterms:dateSubmitted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:06Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:prefLabel xml:lang="nl">Thoiry</skos:prefLabel>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:33:31Z</dcterms:dateAccepted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39602</identifier><datestamp>2013-01-14T11:58:41Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39602">
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:22:39Z</dcterms:dateAccepted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39602</skos:notation>
+    <skos:scopeNote xml:lang="nl">Groot-Brittannië</skos:scopeNote>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:22:39Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Millwall</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:58:41Z</dcterms:modified>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31386</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31386">
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:25Z</dcterms:dateAccepted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Al Khubrah</skos:prefLabel>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:scopeNote xml:lang="nl">Saudi-Arabië</skos:scopeNote>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31386</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:25Z</dcterms:dateSubmitted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32392</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32392">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:51Z</dcterms:dateSubmitted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:scopeNote xml:lang="nl">VS</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:51Z</dcterms:dateAccepted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32392</skos:notation>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:13Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <skos:prefLabel xml:lang="nl">Beloit</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:37604</identifier><datestamp>2013-01-14T11:57:02Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/37604">
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:prefLabel xml:lang="nl">Kindaruma-dam</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:02Z</dcterms:modified>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:17:50Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:17:50Z</dcterms:dateAccepted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:16:12Z</dcterms:dateAvailable>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">37604</skos:notation>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:34585</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/34585">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:19Z</dcterms:dateAvailable>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:35Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:35Z</dcterms:dateAccepted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:scopeNote xml:lang="nl">wijk Londen, Groot-Brittannië</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:prefLabel xml:lang="nl">East End</skos:prefLabel>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">34585</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:37536</identifier><datestamp>2013-01-14T11:57:02Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/37536">
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">37536</skos:notation>
+    <skos:scopeNote xml:lang="nl">berg Himalaya, hoogste berg ter wereld</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:19Z</dcterms:dateAvailable>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:02Z</dcterms:modified>
+    <skos:prefLabel xml:lang="nl">Mount Everest</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:17:41Z</dcterms:dateAccepted>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:17:41Z</dcterms:dateSubmitted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:43143</identifier><datestamp>2013-01-14T12:01:15Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/43143">
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:19Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:32:34Z</dcterms:dateSubmitted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:32:34Z</dcterms:dateAccepted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">43143</skos:notation>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:scopeNote xml:lang="nl">Israël</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:01:15Z</dcterms:modified>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Swad</skos:prefLabel>
+    <openskos:status>approved</openskos:status>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:34393</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/34393">
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:13Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:19Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Dong Da</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">Noord-Vietnam</skos:scopeNote>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">34393</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:13Z</dcterms:dateAccepted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31306</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31306">
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:19Z</dcterms:dateAccepted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <skos:scopeNote xml:lang="nl">India</skos:scopeNote>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:18Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:19Z</dcterms:dateSubmitted>
+    <skos:prefLabel xml:lang="nl">Agartala</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31306</skos:notation>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:38143</identifier><datestamp>2013-01-14T11:57:02Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/38143">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>approved</openskos:status>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:prefLabel xml:lang="nl">Narrabri</skos:prefLabel>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">38143</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:05Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:18Z</dcterms:dateAvailable>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:05Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">Australië</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:02Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:43106</identifier><datestamp>2013-01-14T12:01:15Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/43106">
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:32:28Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:01:15Z</dcterms:modified>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:18Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">Groot-Brittannië</skos:scopeNote>
+    <skos:prefLabel xml:lang="nl">Sunderland</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:32:28Z</dcterms:dateAccepted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">43106</skos:notation>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39809</identifier><datestamp>2013-01-14T11:58:41Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39809">
+    <skos:prefLabel xml:lang="nl">New Jersey</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:23:10Z</dcterms:dateAccepted>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:23:10Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:18Z</dcterms:dateAvailable>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">staat VS</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:58:41Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39809</skos:notation>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:40780</identifier><datestamp>2013-01-14T11:59:29Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/40780">
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:18Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Peristerona</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:59:29Z</dcterms:modified>
+    <skos:scopeNote xml:lang="nl">Cyprus</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">40780</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:25:44Z</dcterms:dateAccepted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:25:44Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32007</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32007">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32007</skos:notation>
+    <skos:scopeNote xml:lang="nl">Irak</skos:scopeNote>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Babylon</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:17Z</dcterms:dateAccepted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:18Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:17Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:44798</identifier><datestamp>2013-01-14T12:02:59Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/44798">
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:59Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:scopeNote xml:lang="nl">VS</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">White Sulphur Springs</skos:prefLabel>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:18Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:37:43Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:37:43Z</dcterms:dateAccepted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">44798</skos:notation>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:34792</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/34792">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">34792</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:17Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:57Z</dcterms:dateSubmitted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Emden</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:57Z</dcterms:dateAccepted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:scopeNote xml:lang="nl">Duitsland</skos:scopeNote>
+    <openskos:status>approved</openskos:status>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31540</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31540">
+    <openskos:status>approved</openskos:status>
+    <skos:scopeNote xml:lang="nl">India</skos:scopeNote>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:17Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:38Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31540</skos:notation>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Ambattur</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:38Z</dcterms:dateAccepted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31787</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31787">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:59Z</dcterms:dateAccepted>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:59Z</dcterms:dateSubmitted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Arlesford</skos:prefLabel>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31787</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:17Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32692</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32692">
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:19Z</dcterms:dateAccepted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32692</skos:notation>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">Algerije</skos:scopeNote>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:17Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:19Z</dcterms:dateSubmitted>
+    <skos:prefLabel xml:lang="nl">Blida</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:41625</identifier><datestamp>2013-01-14T12:00:23Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/41625">
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:17Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:28:05Z</dcterms:dateSubmitted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">vliegveld</skos:scopeNote>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:00:23Z</dcterms:modified>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:28:05Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Roma Urbe</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">41625</skos:notation>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39007</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39007">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39007</skos:notation>
+    <skos:scopeNote xml:lang="nl">Brazilië</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:21:10Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Maceió</skos:prefLabel>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:21:10Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:16Z</dcterms:dateAvailable>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:33841</identifier><datestamp>2013-01-14T11:53:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/33841">
+    <openskos:status>approved</openskos:status>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:scopeNote xml:lang="nl">staat VS</skos:scopeNote>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:10:14Z</dcterms:dateAccepted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:16Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Connecticut</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:54Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:10:14Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">33841</skos:notation>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:41560</identifier><datestamp>2013-01-14T12:00:23Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/41560">
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:27:54Z</dcterms:dateAccepted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">41560</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:16Z</dcterms:dateAvailable>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:00:23Z</dcterms:modified>
+    <openskos:status>approved</openskos:status>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Riobamba</skos:prefLabel>
+    <skos:scopeNote xml:lang="nl">Ecuador</skos:scopeNote>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:27:54Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32817</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32817">
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:31Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:15Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:31Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">Nederland</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32817</skos:notation>
+    <skos:prefLabel xml:lang="nl">Borgharen</skos:prefLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:42191</identifier><datestamp>2013-01-14T12:00:23Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/42191">
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:29:42Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:15Z</dcterms:dateAvailable>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Schermer</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:00:23Z</dcterms:modified>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">42191</skos:notation>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:29:42Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">polder Noord-Holland</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:38291</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/38291">
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:15:15Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">38291</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:25Z</dcterms:dateAccepted>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:25Z</dcterms:dateSubmitted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Lake Fithian</skos:prefLabel>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:40905</identifier><datestamp>2013-01-14T11:59:29Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/40905">
+    <skos:prefLabel xml:lang="nl">Pilau Bidong</skos:prefLabel>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:26:04Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">Maleisië</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:59:29Z</dcterms:modified>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">40905</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:26:04Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:22Z</dcterms:dateAvailable>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:36595</identifier><datestamp>2021-01-28T15:01:34Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/36595">
+    <openskos:status>approved</openskos:status>
+    <skos:prefLabel xml:lang="nl">Ierland</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-01-28T15:01:34Z</dcterms:modified>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:altLabel xml:lang="nl">Eire</skos:altLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:22Z</dcterms:dateAvailable>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">36595</skos:notation>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:scopeNote xml:lang="nl">West-Europa</skos:scopeNote>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:15:40Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:15:40Z</dcterms:dateAccepted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:1673213</identifier><datestamp>2017-12-08T10:22:34Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1673213">
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-12-08T10:22:34Z</dcterms:modified>
+    <openskos:status>approved</openskos:status>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1673213</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-12-08T10:22:34Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Dijkerhoek</skos:prefLabel>
+    <skos:scopeNote xml:lang="nl">Overijssel</skos:scopeNote>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-09-28T11:39:13Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:22Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31782</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31782">
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:59Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">staat VS</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31782</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:22Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:59Z</dcterms:dateSubmitted>
+    <skos:prefLabel xml:lang="nl">Arkansas</skos:prefLabel>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32846</identifier><datestamp>2017-01-09T14:02:53Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32846">
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:35Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:22Z</dcterms:dateAvailable>
+    <skos:hiddenLabel xml:lang="nl">Bosnië-Herzegowina</skos:hiddenLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:hiddenLabel xml:lang="nl">Bosnië en Herzegowina</skos:hiddenLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-09T14:02:53Z</dcterms:modified>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32846</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:35Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Bosnië en Herzegovina</skos:prefLabel>
+    <skos:scopeNote xml:lang="nl">Balkan</skos:scopeNote>
+    <skos:hiddenLabel xml:lang="nl">Bosnie-Herzegowina</skos:hiddenLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:altLabel xml:lang="nl">Bosnië-Herzegovina</skos:altLabel>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39444</identifier><datestamp>2013-01-14T11:58:41Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39444">
+    <openskos:status>approved</openskos:status>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:22:15Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:22Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Melouza</skos:prefLabel>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39444</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:22:15Z</dcterms:dateAccepted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:58:41Z</dcterms:modified>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31704</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31704">
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <skos:scopeNote xml:lang="nl">Vietnam</skos:scopeNote>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:21Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Ap Dong</skos:prefLabel>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:51Z</dcterms:dateAccepted>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:51Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31704</skos:notation>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:44950</identifier><datestamp>2021-01-28T15:01:35Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/44950">
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">Qwaqwa, Zuid-Afrika</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">44950</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:38:13Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Witsieshoek</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:21Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-01-28T15:01:35Z</dcterms:modified>
+    <skos:altLabel xml:lang="nl">Phuthaditjhaba</skos:altLabel>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:38:13Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:33222</identifier><datestamp>2013-01-14T11:53:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/33222">
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:09:13Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">Zuid-Vietnam</skos:scopeNote>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:54Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:09:13Z</dcterms:dateSubmitted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">33222</skos:notation>
+    <skos:prefLabel xml:lang="nl">Cai Bé</skos:prefLabel>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:21Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:40646</identifier><datestamp>2013-01-14T11:59:29Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/40646">
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:25:21Z</dcterms:dateAccepted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:59:29Z</dcterms:modified>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">40646</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:25:21Z</dcterms:dateSubmitted>
+    <skos:scopeNote xml:lang="nl">Spanje</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <skos:prefLabel xml:lang="nl">Palos</skos:prefLabel>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:21Z</dcterms:dateAvailable>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31556</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31556">
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:21Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:prefLabel xml:lang="nl">Americus</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:40Z</dcterms:dateSubmitted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:40Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">Georgia, VS</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:status>approved</openskos:status>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31556</skos:notation>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:33097</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/33097">
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:09:01Z</dcterms:dateSubmitted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">33097</skos:notation>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <skos:prefLabel xml:lang="nl">Budel</skos:prefLabel>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:20Z</dcterms:dateAvailable>
+    <skos:scopeNote xml:lang="nl">Nederland</skos:scopeNote>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:09:01Z</dcterms:dateAccepted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:33824</identifier><datestamp>2013-01-14T11:53:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/33824">
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:10:12Z</dcterms:dateSubmitted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:20Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">33824</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:54Z</dcterms:modified>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:10:12Z</dcterms:dateAccepted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:prefLabel xml:lang="nl">Conakry</skos:prefLabel>
+    <openskos:status>approved</openskos:status>
+    <skos:scopeNote xml:lang="nl">Guinee</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31159</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31159">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>approved</openskos:status>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31159</skos:notation>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:20Z</dcterms:dateAvailable>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:01Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">snelweg Nederland</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <skos:prefLabel xml:lang="nl">A2</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:01Z</dcterms:dateSubmitted>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:1714510</identifier><datestamp>2020-01-29T10:29:23Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1714510">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1714510</skos:notation>
+    <skos:scopeNote xml:lang="nl">Java, Indonesië</skos:scopeNote>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-01-29T10:29:23Z</dcterms:modified>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:prefLabel xml:lang="nl">Bandungan</skos:prefLabel>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:20Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-01-29T10:29:23Z</dcterms:dateAccepted>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2020-01-28T14:05:02Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:41254</identifier><datestamp>2013-01-14T11:59:29Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/41254">
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:59:29Z</dcterms:modified>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:scopeNote xml:lang="nl">Frankrijk</skos:scopeNote>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:20Z</dcterms:dateAvailable>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:27:02Z</dcterms:dateAccepted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">41254</skos:notation>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:prefLabel xml:lang="nl">Puteaux</skos:prefLabel>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:27:02Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32772</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32772">
+    <openskos:status>approved</openskos:status>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:19Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:26Z</dcterms:dateSubmitted>
+    <skos:scopeNote xml:lang="nl">Italië</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32772</skos:notation>
+    <skos:prefLabel xml:lang="nl">Bolzano</skos:prefLabel>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:26Z</dcterms:dateAccepted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:42836</identifier><datestamp>2013-01-14T12:01:15Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/42836">
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:19Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:01:15Z</dcterms:modified>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:prefLabel xml:lang="nl">Spankeren</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:scopeNote xml:lang="nl">Gelderland</skos:scopeNote>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:31:38Z</dcterms:dateAccepted>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:31:38Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">42836</skos:notation>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31643</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31643">
+    <skos:scopeNote xml:lang="nl">Frankrijk</skos:scopeNote>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:46Z</dcterms:dateSubmitted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:46Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Angers</skos:prefLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31643</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:19Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:42121</identifier><datestamp>2013-01-14T12:00:23Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/42121">
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:19Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Sasabe</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:00:23Z</dcterms:modified>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">42121</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:29:30Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:scopeNote xml:lang="nl">Mexico</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:29:30Z</dcterms:dateAccepted>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:38620</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/38620">
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">38620</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:20:13Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <skos:prefLabel xml:lang="nl">Liechtenstein</skos:prefLabel>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:19Z</dcterms:dateAvailable>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:20:13Z</dcterms:dateAccepted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">Europa</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:44436</identifier><datestamp>2013-01-14T12:02:59Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/44436">
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:36:34Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">Griekenland</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">44436</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:36:34Z</dcterms:dateSubmitted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:19Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:59Z</dcterms:modified>
+    <skos:prefLabel xml:lang="nl">Vravron</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:36893</identifier><datestamp>2013-01-14T11:56:15Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/36893">
+    <skos:prefLabel xml:lang="nl">Jericho</skos:prefLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">36893</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:56:15Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:16:17Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:16:17Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">Palestina, voorheen Israël</skos:scopeNote>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:18Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39245</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39245">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Marl</skos:prefLabel>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:18Z</dcterms:dateAvailable>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">Duitsland</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39245</skos:notation>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:21:45Z</dcterms:dateAccepted>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:21:45Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:35334</identifier><datestamp>2013-01-14T11:55:29Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/35334">
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Garijp</skos:prefLabel>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:13:01Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">35334</skos:notation>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:55:29Z</dcterms:modified>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:13:01Z</dcterms:dateAccepted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:18Z</dcterms:dateAvailable>
+    <skos:scopeNote xml:lang="nl">Nederland</skos:scopeNote>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:35104</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/35104">
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:18Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:34Z</dcterms:dateAccepted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:prefLabel xml:lang="nl">Fokkesloot</skos:prefLabel>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">35104</skos:notation>
+    <skos:scopeNote xml:lang="nl">kanaal Nederland</skos:scopeNote>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:34Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:38270</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/38270">
+    <skos:scopeNote xml:lang="nl">Spanje</skos:scopeNote>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:22Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:22Z</dcterms:dateAccepted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Laguardia</skos:prefLabel>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">38270</skos:notation>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:18Z</dcterms:dateAvailable>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:38472</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/38472">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:18Z</dcterms:dateAvailable>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:51Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:19:51Z</dcterms:dateAccepted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">38472</skos:notation>
+    <skos:scopeNote xml:lang="nl">VS</skos:scopeNote>
+    <skos:prefLabel xml:lang="nl">Leavenworth</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:34638</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/34638">
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+    <openskos:status>approved</openskos:status>
+    <skos:scopeNote xml:lang="nl">Nederland</skos:scopeNote>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:41Z</dcterms:dateSubmitted>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">34638</skos:notation>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Eemskanaal</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:36Z</dcterms:dateAvailable>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:41Z</dcterms:dateAccepted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:44332</identifier><datestamp>2013-01-14T12:02:06Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/44332">
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">44332</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <skos:prefLabel xml:lang="nl">Vliegbasis Eitam</skos:prefLabel>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:06Z</dcterms:modified>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:36Z</dcterms:dateAvailable>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:36:14Z</dcterms:dateAccepted>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:36:14Z</dcterms:dateSubmitted>
+    <skos:scopeNote xml:lang="nl">Sinaï</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:34926</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/34926">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">34926</skos:notation>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:36Z</dcterms:dateAvailable>
+    <skos:scopeNote xml:lang="nl">haven- en industriegebied Nederland</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:12Z</dcterms:dateSubmitted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:12Z</dcterms:dateAccepted>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:status>approved</openskos:status>
+    <skos:prefLabel xml:lang="nl">Europoort</skos:prefLabel>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:31429</identifier><datestamp>2013-01-14T11:52:19Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/31429">
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:prefLabel xml:lang="nl">Aldaya</skos:prefLabel>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:36Z</dcterms:dateAvailable>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">31429</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:28Z</dcterms:dateSubmitted>
+    <skos:scopeNote xml:lang="nl">Spanje</skos:scopeNote>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:52:19Z</dcterms:modified>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:06:28Z</dcterms:dateAccepted>
+    <openskos:status>approved</openskos:status>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:41100</identifier><datestamp>2013-01-14T11:59:29Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/41100">
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:qualifier xml:lang="nl">Oregon, VS</js:qualifier>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:26:36Z</dcterms:dateSubmitted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:prefLabel xml:lang="nl">Portland (Oregon, VS)</skos:prefLabel>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:36Z</dcterms:dateAvailable>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:59:29Z</dcterms:modified>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">41100</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">{}</skos:scopeNote>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:26:36Z</dcterms:dateAccepted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32523</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32523">
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:36Z</dcterms:dateAvailable>
+    <skos:scopeNote xml:lang="nl">historische stad a/h Meer van Tiberias, Israël</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:prefLabel xml:lang="nl">Bethsaida</skos:prefLabel>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32523</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:04Z</dcterms:dateSubmitted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:08:04Z</dcterms:dateAccepted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39558</identifier><datestamp>2013-01-14T11:58:41Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39558">
+    <skos:prefLabel xml:lang="nl">Middlesex</skos:prefLabel>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:58:41Z</dcterms:modified>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:36Z</dcterms:dateAvailable>
+    <skos:scopeNote xml:lang="nl">Groot-Brittannië</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:22:32Z</dcterms:dateAccepted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39558</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:22:32Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:35280</identifier><datestamp>2013-01-14T11:55:29Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/35280">
+    <skos:prefLabel xml:lang="nl">Gabrovo</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:scopeNote xml:lang="nl">Bulgarije</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">35280</skos:notation>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:55Z</dcterms:dateAccepted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:36Z</dcterms:dateAvailable>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:55:29Z</dcterms:modified>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:12:55Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:34479</identifier><datestamp>2013-01-14T11:54:45Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/34479">
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:22Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:11:22Z</dcterms:dateAccepted>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:35Z</dcterms:dateAvailable>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:54:45Z</dcterms:modified>
+    <skos:prefLabel xml:lang="nl">Drienen</skos:prefLabel>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">34479</skos:notation>
+    <skos:scopeNote xml:lang="nl">Nederland</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:39886</identifier><datestamp>2013-01-14T11:58:41Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/39886">
+    <skos:scopeNote xml:lang="nl">Nederland</skos:scopeNote>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">39886</skos:notation>
+    <openskos:status>approved</openskos:status>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:prefLabel xml:lang="nl">Nieuwendijk</skos:prefLabel>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:23:22Z</dcterms:dateSubmitted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:58:41Z</dcterms:modified>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:23:22Z</dcterms:dateAccepted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:35Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:38716</identifier><datestamp>2013-01-14T11:57:54Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/38716">
+    <skos:scopeNote xml:lang="nl">Groot-Brittannië</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:35Z</dcterms:dateAvailable>
+    <skos:prefLabel xml:lang="nl">Littlewick Green</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">38716</skos:notation>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:20:27Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:20:27Z</dcterms:dateAccepted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:57:54Z</dcterms:modified>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:43738</identifier><datestamp>2013-01-14T12:02:06Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/43738">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">43738</skos:notation>
+    <skos:prefLabel xml:lang="nl">Tripoli</skos:prefLabel>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:34:21Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:34:21Z</dcterms:dateAccepted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <skos:scopeNote xml:lang="nl">Libië en Libanon</skos:scopeNote>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:35Z</dcterms:dateAvailable>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:02:06Z</dcterms:modified>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:42872</identifier><datestamp>2013-01-14T12:01:15Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/42872">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">42872</skos:notation>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:34Z</dcterms:dateAvailable>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T12:01:15Z</dcterms:modified>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <skos:prefLabel xml:lang="nl">Springfields</skos:prefLabel>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:31:45Z</dcterms:dateSubmitted>
+    <openskos:status>approved</openskos:status>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:31:45Z</dcterms:dateAccepted>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:32198</identifier><datestamp>2013-01-14T11:53:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/32198">
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:34Z</dcterms:dateAccepted>
+    <skos:prefLabel xml:lang="nl">Barjols</skos:prefLabel>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:status>approved</openskos:status>
+    <skos:scopeNote xml:lang="nl">Frankrijk</skos:scopeNote>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:34Z</dcterms:dateAvailable>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">32198</skos:notation>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-01-14T11:53:07Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T16:07:34Z</dcterms:dateSubmitted>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:226078</identifier><datestamp>2013-02-22T07:36:42Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/226078">
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">226078</skos:notation>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:34Z</dcterms:dateAvailable>
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2011-01-26T17:24:38Z</dcterms:dateAccepted>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-02-22T07:36:42Z</dcterms:modified>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-12-30T10:01:42Z</dcterms:dateSubmitted>
+    <skos:prefLabel xml:lang="nl">Rijnwaarden</skos:prefLabel>
+    <skos:scopeNote xml:lang="nl">gemeente Gelderland</skos:scopeNote>
+  </rdf:Description>
+</rdf:RDF></metadata></record><record><header><identifier>oai:gtaa.apis.beeldengeluid.nl:230889</identifier><datestamp>2013-02-22T11:20:07Z</datestamp><setSpec>beng</setSpec><setSpec>beng:gtaa</setSpec><setSpec>beng:gtaa:GeografischeNamen</setSpec></header><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:js="http://justskos.org/ns/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/230889">
+    <js:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#long">0</js:revision>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#long">230889</skos:notation>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/set/gtaa"/>
+    <openskos:status>approved</openskos:status>
+    <openskos:tenant rdf:resource="http://data.beeldengeluid.nl/tenant/beng"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2013-02-22T11:20:07Z</dcterms:modified>
+    <skos:prefLabel xml:lang="nl">Den Ilp</skos:prefLabel>
+    <dcterms:dateAvailable rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-12-02T15:14:34Z</dcterms:dateAvailable>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/GeografischeNamen"/>
+    <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2011-12-14T20:32:30Z</dcterms:dateSubmitted>
+    <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2012-01-12T13:54:56Z</dcterms:dateAccepted>
+    <skos:scopeNote xml:lang="nl">Noord-Holland</skos:scopeNote>
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  </rdf:Description>
+</rdf:RDF></metadata></record><resumptionToken completeListSize="14250" cursor="0">1970-01-01T00:00:00Z!2021-12-05T20:51:27Z!beng:gtaa:GeografischeNamen!oai_rdf!14150!!14250</resumptionToken></ListRecords></OAI-PMH>

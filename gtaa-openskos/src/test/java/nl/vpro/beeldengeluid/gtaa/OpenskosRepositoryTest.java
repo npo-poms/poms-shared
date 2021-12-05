@@ -26,6 +26,7 @@ import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static nl.vpro.beeldengeluid.gtaa.OpenskosTests.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -147,8 +148,8 @@ public class OpenskosRepositoryTest {
 
 
 
-    private String f(String file) throws IOException {
-        return IOUtils.toString(getClass().getResourceAsStream(StringUtils.prependIfMissing(file, "/")), StandardCharsets.UTF_8);
+    static String f(String file) throws IOException {
+        return IOUtils.toString(OpenskosRepositoryTest.class.getResourceAsStream(StringUtils.prependIfMissing(file, "/")), StandardCharsets.UTF_8);
     }
 
     @Test
@@ -220,13 +221,6 @@ public class OpenskosRepositoryTest {
         assertThat(hasselt).hasSize(15);
 
     }
-
-    OpenskosRepository create(String uri) {
-        OpenskosRepository repo = new OpenskosRepository(uri, "");
-        repo.init();
-        return repo;
-    }
-
 
 
 }

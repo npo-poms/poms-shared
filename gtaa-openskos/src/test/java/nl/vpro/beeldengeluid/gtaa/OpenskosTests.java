@@ -22,6 +22,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 @Slf4j
 public class OpenskosTests {
+    static OpenskosRepository create(String uri) {
+        OpenskosRepository repo = new OpenskosRepository(uri, "");
+        repo.init();
+        return repo;
+    }
+
     @Disabled
     @Test
     public void testPost1() {
