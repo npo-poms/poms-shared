@@ -69,7 +69,7 @@ public class OpenskosRepository implements GTAARepository {
 
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
-    private static OpenskosRepository instance;
+    static OpenskosRepository instance;
 
     public static OpenskosRepository getInstance() {
         if (instance == null) {

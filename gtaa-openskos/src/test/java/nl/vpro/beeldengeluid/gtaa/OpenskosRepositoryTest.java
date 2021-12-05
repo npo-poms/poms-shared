@@ -39,6 +39,12 @@ public class OpenskosRepositoryTest {
 
 
     @Test
+    public void getInstance() {
+        OpenskosRepository.instance = null;
+        assertThatThrownBy(OpenskosRepository::getInstance).isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
     public void findPersons(@Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
         OpenskosRepository repo = create(uri);
 
@@ -72,6 +78,23 @@ public class OpenskosRepositoryTest {
 
         assertThat(testCreatorX.getName()).isEqualTo("Testlabel1");
     }
+
+     @Test
+    public void submitDuplicate(@Wiremock WireMockServer server, @WiremockUri String uri) throws IOException {
+        OpenskosRepository repo = create(uri);
+
+        server.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(okXml("Concept 'Puk, Pietje (nl)' already exists").withStatus(409)));
+
+        GTAANewPerson pietje = GTAANewPerson.builder()
+            .givenName("Pietje")
+            .familyName("Puk")
+            .build();
+
+        assertThatThrownBy(() -> {
+            repo.submit(pietje, "testCreatorX");
+        }).isInstanceOf(GTAAConflict.class);
+    }
+
 
     @Test
     public void updatesNoResults(@Wiremock WireMockServer server, @WiremockUri String uri) throws Exception {
