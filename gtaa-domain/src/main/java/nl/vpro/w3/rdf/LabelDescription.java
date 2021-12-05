@@ -2,10 +2,10 @@ package nl.vpro.w3.rdf;
 
 import lombok.*;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import java.net.URI;
+import java.util.UUID;
+
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.gtaa.AbstractGTAAObject;
 import nl.vpro.openarchives.oai.Label;
@@ -23,14 +23,21 @@ import nl.vpro.openarchives.oai.Namespaces;
 })
 @ToString
 @Data
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
 @EqualsAndHashCode(callSuper = true)
 public class LabelDescription extends AbstractGTAAObject {
 
     public LabelDescription() {
 
     }
+
+    @lombok.Builder
+    private LabelDescription(UUID uuid, URI about, ResourceElement type, Label literalForm, String tenant) {
+        super(uuid, about);
+        this.type = type;
+        this.literalForm = literalForm;
+        this.tenant = tenant;
+    }
+
     @XmlElement(namespace = Namespaces.RDF)
     private ResourceElement type;
 

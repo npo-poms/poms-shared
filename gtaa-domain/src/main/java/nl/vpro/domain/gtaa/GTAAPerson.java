@@ -143,7 +143,7 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
         final Names prefName;
         String prefLabel = prefLabel(description).orElse(null);
 
-        if (prefLabel!= null) {
+        if (prefLabel != null) {
             String label = prefLabel;
             if (submittedPrefLabel != null && !submittedPrefLabel.equals(label)) {
                 log.warn("Using different submitted label {} in stead of {}", submittedPrefLabel, label);

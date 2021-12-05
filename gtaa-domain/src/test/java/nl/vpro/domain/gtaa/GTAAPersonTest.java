@@ -1,19 +1,26 @@
 package nl.vpro.domain.gtaa;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.BindingUtils;
+import nl.vpro.w3.rdf.Description;
 
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 public class GTAAPersonTest {
     @Test
     public void json() {
@@ -63,8 +70,8 @@ public class GTAAPersonTest {
     @Test
     public void xml() {
         GTAAPerson person = GTAAPerson.builder()
-            .scopeNotes(Arrays.asList("bla"))
-            .knownAs(Arrays.asList(Names.builder().familyName("pietje").build()))
+            .scopeNotes(singletonList("bla"))
+            .knownAs(singletonList(Names.builder().familyName("pietje").build()))
             .familyName("puk")
             .gtaaUri("http://gtaa/1234")
             .status(Status.approved)
@@ -80,6 +87,30 @@ public class GTAAPersonTest {
             "        <gtaa:familyName>pietje</gtaa:familyName>\n" +
             "    </gtaa:knownAs>\n" +
             "</gtaa:person>\n");
+
+    }
+
+    @Test
+    public void create() {
+        GTAAPerson person = new GTAAPerson("Pietje", "Puk", Status.approved);
+        assertThat(person.getGivenName()).isEqualTo("Pietje");
+
+        person = GTAAPerson.create(null, "prelabel");
+        assertThat(person).isNull();
+
+        person = GTAAPerson.create(Description.builder()
+            .inScheme(Scheme.person)
+            .prefLabel(Label.forValue("pietje puk"))
+            .tenant("poms")
+            .acceptedBy("bla")
+            .status(Status.approved)
+            .uuid(UUID.randomUUID())
+            .about(URI.create("gtaa://person/1234"))
+            .build(), "Puk, Pietje");
+
+        assertThat(person.getGivenName()).isEqualTo("Pietje");
+        assertThat(person.getId()).isEqualTo(URI.create("gtaa://person/1234"));
+        assertThat(person.getGtaaUri()).isEqualTo("gtaa://person/1234");
 
     }
 }

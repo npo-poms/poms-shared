@@ -59,8 +59,6 @@ import static nl.vpro.openarchives.oai.Namespaces.*;
 @ToString
 @Data
 @EqualsAndHashCode(callSuper = true)
-@lombok.Builder(builderClassName = "Builder")
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Description extends AbstractGTAAObject {
 
     private static final String FORWARD = "Forward:";
@@ -147,6 +145,35 @@ public class Description extends AbstractGTAAObject {
 
     public Description(String prefLabel) {
         this.prefLabel = new Label(prefLabel);
+    }
+
+    @lombok.Builder(builderClassName = "Builder")
+    private Description(UUID uuid, URI about, ResourceElement type, Status status, String tenant, ResourceElement modifiedBy, String acceptedBy, String notation, ZonedDateTime dateAccepted, String creator, ResourceElement creatorResource, ZonedDateTime dateSubmitted, Date modified, UUID uuid1, ResourceElement set, ResourceElement inScheme, Label prefLabel, XLLabel xlPrefLabel, List<Label> hiddenLabels, List<XLLabel> xlHiddenLabels, Note historyNote, List<Label> altLabels, List<XLLabel> xlAltLabels, List<String> changeNote, List<Label> scopeNote, List<Label> editorialNote) {
+        super(uuid, about);
+        this.type = type;
+        this.status = status;
+        this.tenant = tenant;
+        this.modifiedBy = modifiedBy;
+        this.acceptedBy = acceptedBy;
+        this.notation = notation;
+        this.dateAccepted = dateAccepted;
+        this.creator = creator;
+        this.creatorResource = creatorResource;
+        this.dateSubmitted = dateSubmitted;
+        this.modified = modified;
+        this.uuid = uuid1;
+        this.set = set;
+        this.inScheme = inScheme;
+        this.prefLabel = prefLabel;
+        this.xlPrefLabel = xlPrefLabel;
+        this.hiddenLabels = hiddenLabels;
+        this.xlHiddenLabels = xlHiddenLabels;
+        this.historyNote = historyNote;
+        this.altLabels = altLabels;
+        this.xlAltLabels = xlAltLabels;
+        this.changeNote = changeNote;
+        this.scopeNote = scopeNote;
+        this.editorialNote = editorialNote;
     }
 
     public boolean isPerson() {

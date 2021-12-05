@@ -35,12 +35,18 @@ public abstract class AbstractGTAAObject {
         this.uuid = uuid;
         this.about = about;
     }
+
     protected static class AbstractBuilder<T extends AbstractBuilder<T>> {
 
         UUID uuid;
-        String about;
+        URI about;
 
-        public T about(String a) {
+        public T uuid(UUID uuid) {
+            this.uuid = uuid;
+            return (T) this;
+        }
+
+        public T about(URI a) {
             this.about = a;
             return (T) this;
         }
