@@ -221,7 +221,7 @@ public class Location extends PublishableObject<Location>
         if (workflow != null) {
             this.workflow = workflow;
         }
-        this.creationInstant = creationDate;
+        this.creationInstant = creationDate == null ? Changeables.instant() : creationDate;
     }
 
     @Deprecated

@@ -22,7 +22,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import nl.vpro.domain.bind.AbstractJsonIterable;
 import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
@@ -31,6 +30,7 @@ import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 import static nl.vpro.domain.Changeables.*;
+import static nl.vpro.domain.bind.AbstractJsonIterable.DEFAULT_CONSIDER_JSON_INCLUDE;
 import static nl.vpro.domain.media.Platform.INTERNETVOD;
 import static nl.vpro.domain.media.Platform.PLUSVOD;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,11 +45,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Slf4j
 public class MediaObjectsTest {
     static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
+
     @BeforeAll
     static void init() {
         log.info("Setting clock to {}", NOW);
         CLOCK.set(Clock.fixed(NOW , Schedule.ZONE_ID));
     }
+
     @AfterAll
     static void setClock() {
         CLOCK.remove();
@@ -455,12 +457,15 @@ public class MediaObjectsTest {
         public static final Platform[] A_INTERNETVOD = new Platform[] {INTERNETVOD};
         public static final Platform[] A_PLUSVOD = new Platform[] {PLUSVOD};
         public static final Platform[] A_BOTH = new Platform[] {INTERNETVOD, PLUSVOD};
+
         public static Stream<Arguments> examples() {
             return Stream.of(
                 Arguments.of(
                     "just a legacy location",
                     fixed()
-                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+                        .locations(
+                            Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build()
+                        )
                         .build(),
                     expected(A_INTERNETVOD, A_NONE, A_NONE)
                 ),
@@ -635,7 +640,7 @@ public class MediaObjectsTest {
 
         @Test
         public void createJsonForJavascriptTests() {
-            AbstractJsonIterable.DEFAULT_CONSIDER_JSON_INCLUDE.set(true);
+            DEFAULT_CONSIDER_JSON_INCLUDE.set(true);
             PublicationFilter.ENABLED.set(true);
             try {
                 File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/playability/");
@@ -663,7 +668,7 @@ public class MediaObjectsTest {
                     }
                 });
             } finally {
-                AbstractJsonIterable.DEFAULT_CONSIDER_JSON_INCLUDE.remove();
+                DEFAULT_CONSIDER_JSON_INCLUDE.remove();
                 PublicationFilter.ENABLED.remove();
 
             }

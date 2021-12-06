@@ -4,10 +4,12 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
 import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
 import java.io.StringReader;
+import java.time.Clock;
 import java.time.Instant;
 import java.util.Set;
 
@@ -15,8 +17,7 @@ import javax.validation.*;
 import javax.validation.groups.Default;
 import javax.xml.bind.JAXB;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -26,11 +27,24 @@ import nl.vpro.test.jqwik.BasicObjectTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.validation.PomsValidatorGroup;
 
+import static nl.vpro.domain.Changeables.CLOCK;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 public class LocationTest implements BasicObjectTest<Location> {
 
+    static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
 
+    @BeforeAll
+    static void init() {
+        log.info("Setting clock to {}", NOW);
+        CLOCK.set(Clock.fixed(NOW , Schedule.ZONE_ID));
+    }
+
+    @AfterAll
+    static void setClock() {
+        CLOCK.remove();
+    }
 
     private static Validator validator;
 
@@ -184,6 +198,13 @@ public class LocationTest implements BasicObjectTest<Location> {
             "    <ns3:duration>PT30.000S</ns3:duration>\n" +
             "</location>"), Location.class);
         System.out.println(Jackson2Mapper.getInstance().writeValueAsString(new Location[] {loc}));
+    }
+
+    @Test
+    public void builder() {
+        Location location = Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build();
+
+        assertThat(location.getCreationInstant()).isEqualTo(NOW);
     }
 
     @Override
