@@ -34,8 +34,10 @@ public class SegmentUpdateTest extends MediaUpdateTest {
         update.setStart(Duration.ofMillis(100));
         update.setMidRef("MID_123");
         update.setAgeRating(AgeRating.ALL);
+        update.setBroadcasters("VPRO");
 
         String expected = "<segment xmlns=\"urn:vpro:media:update:2009\" avType=\"VIDEO\" embeddable=\"true\" midRef=\"MID_123\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <broadcaster>VPRO</broadcaster>\n" +
             "    <title type=\"MAIN\">main title</title>\n" +
             "    <credits/>\n" +
             "    <ageRating>ALL</ageRating>\n" +
