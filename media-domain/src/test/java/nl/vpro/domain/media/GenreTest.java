@@ -1,8 +1,9 @@
 package nl.vpro.domain.media;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -18,6 +21,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 3.0
  */
 public class GenreTest {
+
+
+    private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
+
     @BeforeEach
     public void setup() {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
@@ -26,9 +33,9 @@ public class GenreTest {
 
     @Test
     public void matchLegacy() {
-        assertThat(EpgGenreType.valueOfLegacy(Arrays.asList(MisGenreType.YOUTH, MisGenreType.ENTERTAINMENT))).containsOnly(EpgGenreType._0106);
-        assertThat(EpgGenreType.valueOfLegacy(Arrays.asList(MisGenreType.ENTERTAINMENT, MisGenreType.YOUTH))).containsOnly(EpgGenreType._0106);
-        assertThat(EpgGenreType.valueOfLegacy(Arrays.asList(MisGenreType.RELIGIOUS))).containsOnly(EpgGenreType._0726);
+        assertThat(EpgGenreType.valueOfLegacy(asList(MisGenreType.YOUTH, MisGenreType.ENTERTAINMENT))).containsOnly(EpgGenreType._0106);
+        assertThat(EpgGenreType.valueOfLegacy(asList(MisGenreType.ENTERTAINMENT, MisGenreType.YOUTH))).containsOnly(EpgGenreType._0106);
+        assertThat(EpgGenreType.valueOfLegacy(singletonList(MisGenreType.RELIGIOUS))).containsOnly(EpgGenreType._0726);
     }
 
     @Test
@@ -83,5 +90,11 @@ public class GenreTest {
     public void testGetFirstVersionDate() {
         assertThat(new Genre("3.0.1.1.25").getFirstVersionDate()).isEqualTo(LocalDate.of(2014,4,8));
         assertThat(new Genre("3.0.1.1.41").getFirstVersionDate()).isEqualTo(LocalDate.of(2021,4,1));
+    }
+
+    @Test
+    public void validation() {
+        assertThat(VALIDATOR.validate(new Genre("3.0.1.2"))).isEmpty();
+        assertThat(VALIDATOR.validate(new Genre("3.0.1"))).hasSize(1);
     }
 }

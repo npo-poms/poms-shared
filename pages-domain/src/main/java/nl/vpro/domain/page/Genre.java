@@ -6,13 +6,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -34,7 +32,7 @@ public class Genre implements Comparable<Genre>, Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    @Pattern(regexp = "3\\.([0-9]+\\.)*[0-9]+")
+    @Pattern(regexp = "3\\.(?:[0-9]+\\.){2,}[0-9]+") // at least 4 entries.
     private String termId;
 
     @Transient

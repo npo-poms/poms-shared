@@ -2,7 +2,6 @@ package nl.vpro.domain.page.update;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Collections;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -13,7 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.MediaClassificationService;
 import nl.vpro.domain.page.*;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Portal;
@@ -22,12 +23,19 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.serialize.SerializeTestUtil;
 
+import static java.util.Collections.singletonList;
+import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 
 public class PageUpdateTest {
 
+    private static final Validator VALIDATOR = Validation.buildDefaultValidatorFactory().getValidator();
+
+    static {
+        ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
+    }
     @Mock
     BroadcasterService broadcasterService;
 
@@ -50,22 +58,37 @@ public class PageUpdateTest {
     @Test
     public void validate() {
         PageUpdate pageUpdate = new PageUpdate(PageType.ARTICLE, "http://www.test.vpro.nl/123");
-        pageUpdate.setBroadcasters(Collections.singletonList("VPRO"));
+        pageUpdate.setBroadcasters(singletonList("VPRO"));
         pageUpdate.setTitle("main title");
 
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        assertThat(validator.validate(pageUpdate)).isEmpty();
+        assertThat(VALIDATOR.validate(pageUpdate)).isEmpty();
         assertThat(pageUpdate.getType()).isNotNull();
     }
 
 
     @Test
     public void validateMSE_2589() {
-        PageUpdate pageUpdate = JAXB.unmarshal(getClass().getResourceAsStream("/MSE-2589.xml"), PageUpdate.class);
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        assertThat(validator.validate(pageUpdate)).isEmpty();
+        PageUpdate pageUpdate = JAXB.unmarshal(requireNonNull(getClass().getResourceAsStream("/MSE-2589.xml")), PageUpdate.class);
+
+        assertThat(VALIDATOR.validate(pageUpdate)).isEmpty();
 
     }
+
+    @Test
+    public void validateGenres() {
+        PageUpdate pageUpdate = new PageUpdate(PageType.ARTICLE, "http://www.test.vpro.nl/123");
+        pageUpdate.setTitle("foo");
+        pageUpdate.setBroadcasters(singletonList("VPRO"));
+
+        pageUpdate.setGenres(singletonList("3.0.1.2"));
+
+        assertThat(VALIDATOR.validate(pageUpdate)).isEmpty();
+
+
+        pageUpdate.setGenres(singletonList("3.0.1"));
+        assertThat(VALIDATOR.validate(pageUpdate)).hasSize(1);
+    }
+
 
     @Test
     public void unmarshal() {
@@ -78,7 +101,7 @@ public class PageUpdateTest {
         assertThat(update.getTitle()).isEqualTo("Hoi2");
     }
 
-    private static RelationDefinition DEF = new RelationDefinition("FOO", "VPRO");
+    private static final RelationDefinition DEF = new RelationDefinition("FOO", "VPRO");
 
     @Test
     public void json() {
@@ -160,7 +183,6 @@ public class PageUpdateTest {
     }
 
     @Test
-
     public void serialize() throws IOException {
          PageUpdate page = PageUpdateBuilder
             .article("http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html")
