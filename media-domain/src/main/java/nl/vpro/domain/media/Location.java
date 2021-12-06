@@ -224,12 +224,6 @@ public class Location extends PublishableObject<Location>
         this.creationInstant = creationDate == null ? Changeables.instant() : creationDate;
     }
 
-    @Deprecated
-    public Location(String programUrl, OwnerType owner, AVAttributes avAttributes, Date duration) {
-        this(programUrl, owner, avAttributes);
-        setDuration(TimeUtils.durationOf(duration).orElse(null));
-    }
-
     public Location(Location source) {
         this(source, source.mediaObject);
     }
