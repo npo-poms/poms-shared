@@ -29,6 +29,7 @@ import org.xml.sax.InputSource;
  */
 public abstract class AbstractClassificationServiceImpl implements ClassificationService {
 
+
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     protected final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
@@ -155,7 +156,9 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
         SortedMap<TermId, Term> result = new TreeMap<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);//"http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        factory.setNamespaceAware(true);
         final DocumentBuilder  builder = factory.newDocumentBuilder();
+
 
         for (InputSource input : streams) {
             SortedMap<TermId, Term> subResult = new TreeMap<>();

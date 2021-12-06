@@ -86,7 +86,7 @@ public class Term implements Comparable<Term>, TermContainer {
         return getName(Locale.getDefault());
     }
     public String getName(Locale locale) {
-        return LocalizedString.get_(locale, localizedName);
+        return LocalizedString.get(locale, localizedName);
     }
 
     public String getDefinition() {
@@ -94,7 +94,7 @@ public class Term implements Comparable<Term>, TermContainer {
     }
 
     public String getDefinition(Locale locale) {
-        return LocalizedString.get_(locale, localizedDefinition);
+        return LocalizedString.get(locale, localizedDefinition);
     }
 
     public List<Reference> getReferences() {

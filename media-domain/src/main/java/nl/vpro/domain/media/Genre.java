@@ -38,9 +38,11 @@ import nl.vpro.validation.GenreValidation;
 @Slf4j
 public class Genre implements Displayable, Comparable<Genre>, Serializable {
 
+    private static final long serialVersionUID = 433263994376700689L;
+
     @Id
     @Column(name = "termid", nullable = false, updatable = false)
-    @Pattern(regexp = "3\\.(?:[0-9]+\\.)*[0-9]+")
+    @Pattern(regexp = "3\\.(?:[0-9]+\\.){2,}[0-9]+") // at least 4 entries.
     private String termId;
 
     @Transient
