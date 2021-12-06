@@ -15,10 +15,7 @@ import nl.vpro.domain.gtaa.GTAAGeographicName;
 import static nl.vpro.beeldengeluid.gtaa.OpenskosRepository.getInstance;
 
 /**
- * I think we may use OpenSkos as a region provider.
- *
- * Just an idea, will try to test this out.
- *
+ * OpenSkos as a {@link RegionProvider}
  * @author Michiel Meeuwissen
  * @since 5.11
  */
