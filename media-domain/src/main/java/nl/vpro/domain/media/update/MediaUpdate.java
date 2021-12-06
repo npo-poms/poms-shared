@@ -815,7 +815,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "broadcaster", required = true)
-    //@Size(min = 1)
+    @Size(min = 1, groups = WarningValidatorGroup.class)
     @NonNull
     public List<String> getBroadcasters() {
         if (broadcasters == null) {
