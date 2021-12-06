@@ -122,11 +122,11 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         @Nullable Duration timeout,
         @Nullable Function<FileMetadata, Proceed> descriptorConsumer,
         @NonNull  Consumer<RemoteFile> remoteFileConsumer) throws IOException, InterruptedException  {
-        Duration retry = Duration.ofSeconds(10);
-        String nepFile = NEPDownloadService.join(directory, f);
+        final Duration retry = Duration.ofSeconds(10);
+        final String nepFile = NEPDownloadService.join(directory, f);
         try(final SSHClient sessionFactory = createClient();
             final SFTPClient sftp = sessionFactory.newSFTPClient()) {
-            Instant start = Instant.now();
+            final Instant start = Instant.now();
             long count = 0;
             RemoteFile handle = null;
             try {
@@ -136,8 +136,8 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                     try {
                         log.debug("Checking for read {}", nepFile);
                         handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
-                        FileAttributes attributes = handle.fetchAttributes();
-                        FileMetadata descriptor = FileMetadata.builder()
+                        final FileAttributes attributes = handle.fetchAttributes();
+                        final FileMetadata descriptor = FileMetadata.builder()
                             .size(handle.length())
                             .lastModified(Instant.ofEpochMilli(attributes.getMtime() * 1000))
                             .fileName(nepFile)
@@ -205,7 +205,6 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
     public String toString() {
         return getClass().getSimpleName() + ":" +  getDownloadString();
     }
-
 
     @Override
     public String getDownloadString() {

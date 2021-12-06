@@ -43,7 +43,6 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     private final Duration waitBetweenRetries = Duration.ofSeconds(10);
     private final int maxDownloadRetries;
 
-
     @Inject
     public NEPScpDownloadServiceImpl(
         @Value("${nep.itemizer-download.host}") String ftpHost,
@@ -71,7 +70,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
             }
 
-            CommandExecutorImpl.Builder builder = CommandExecutorImpl.builder()
+            final CommandExecutorImpl.Builder builder = CommandExecutorImpl.builder()
                 .executablesPaths(sshpassExecutables)
                 .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
                 .useFileCache(useFileCache)
@@ -109,7 +108,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     protected File knowHosts(String ftpHost, String hostkey) {
         try {
-            File f = File.createTempFile("known_hosts", ".tmp");
+            final File f = File.createTempFile("known_hosts", ".tmp");
             try (PrintWriter writer = new PrintWriter(f)) {
                 writer.println(ftpHost + " ssh-rsa " + hostkey);
             }
@@ -129,7 +128,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @NonNull Duration timeout,
         Function<FileMetadata, Proceed> descriptorConsumer) {
         int exitCode = 0;
-        String url = getUrl(directory, nepFile);
+        final String url = getUrl(directory, nepFile);
         int tryNumber = 0;
         RuntimeException catchedException;
         do {
@@ -191,13 +190,11 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             throw catchedException;
         }
         throw new CommandExecutor.ExitCodeException("SCP command  from " + url + " failed", exitCode);
-
     }
 
     @Override
     public String getDownloadString() {
         return url + ":";
-
     }
 
     protected String getUrl(@NonNull String directory, String nepFile) {
@@ -217,7 +214,5 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     public String toString () {
         return getClass().getSimpleName() + ":" + scp + " " + getDownloadString();
     }
-
-
 
 }
