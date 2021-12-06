@@ -245,7 +245,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
     @Override
     @SneakyThrows
     public @NonNull Optional<WorkflowExecution> getTranscodeStatus(@NonNull String workflowId) throws NEPException {
-        URIBuilder builder = null;
+        final URIBuilder builder;
         try {
             builder = new URIBuilder(getWorkflowsEndPoint() + workflowId);
         } catch (URISyntaxException e) {
