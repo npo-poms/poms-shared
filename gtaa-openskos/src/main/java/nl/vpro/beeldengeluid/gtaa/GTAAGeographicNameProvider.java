@@ -1,6 +1,9 @@
 package nl.vpro.beeldengeluid.gtaa;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -19,6 +22,7 @@ import static nl.vpro.beeldengeluid.gtaa.OpenskosRepository.getInstance;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
+@Slf4j
 public class GTAAGeographicNameProvider implements RegionProvider<GTAAGeographicName> {
 
     @Override
@@ -32,7 +36,16 @@ public class GTAAGeographicNameProvider implements RegionProvider<GTAAGeographic
             return
                 getInstance().getGeoLocationsUpdates(Instant.EPOCH, Instant.now())
                     .stream()
-                    .map(r -> GTAAGeographicName.create(r.getMetaData().getFirstDescription()));
+                    .map(r -> {
+                        try {
+                            return GTAAGeographicName.create(r.getMetaData().getFirstDescription());
+                        }  catch (Exception e) {
+                            log.warn("For {}: {}", r, e.getClass() + ":" + e.getMessage());
+                            return null;
+                        }
+                        }
+                    )
+                    .filter(Objects::nonNull);
         } catch (IllegalStateException illegalStateException) {
             return Stream.empty();
         }

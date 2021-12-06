@@ -84,16 +84,16 @@ public class OpenskosRepository implements GTAARepository {
     private final String gtaaKey;
 
 
-    @Value("${gtaa.personsSpec}")
+    @Value("${gtaa.personsSpec:#{T(nl.vpro.domain.gtaa.Scheme).person.getSpec()}}")
     @Getter
     @Setter
     @NonNull
     private String personsSpec = Scheme.person.getSpec();
 
-    @Value("${gtaa.geolocationsSpec}")
+    @Value("${gtaa.geolocationsSpec:#{T(nl.vpro.domain.gtaa.Scheme).geographicname.getSpec()}}")
     @Getter
     @Setter
-    @Nullable
+    @NonNull
     private String geoLocationsSpec = Scheme.geographicname.getSpec();
 
     @Value("${gtaa.tenant}")
@@ -145,6 +145,8 @@ public class OpenskosRepository implements GTAARepository {
         }
         instance = this;
     }
+
+
 
     private void addErrorHandler() {
         template.setErrorHandler(new ResponseErrorHandler() {

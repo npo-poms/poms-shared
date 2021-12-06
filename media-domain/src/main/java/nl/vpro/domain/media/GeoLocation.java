@@ -94,7 +94,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         this(source.getRole(), source.gtaaRecord);
         this.parent = parent;
     }
- @Override
+    @Override
     @XmlElement
     public String getName() {
         return GTAARecordManaged.super.getName();
