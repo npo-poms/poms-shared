@@ -28,14 +28,22 @@ public class GTAAGeographicNameProvider implements RegionProvider<GTAAGeographic
 
     @Override
     public Stream<GTAAGeographicName> values() {
-        return
-            getInstance().getGeoLocationsUpdates(Instant.EPOCH, Instant.now())
-                .stream()
-                .map(r -> GTAAGeographicName.create(r.getMetaData().getFirstDescription()));
+        try {
+            return
+                getInstance().getGeoLocationsUpdates(Instant.EPOCH, Instant.now())
+                    .stream()
+                    .map(r -> GTAAGeographicName.create(r.getMetaData().getFirstDescription()));
+        } catch (IllegalStateException illegalStateException) {
+            return Stream.empty();
+        }
     }
 
     @Override
     public Optional<GTAAGeographicName> getByCode(@NonNull String code, boolean lenient) {
-        return getInstance().get(code).filter(p -> p instanceof GTAAGeographicName).map(p -> (GTAAGeographicName) p);
+        try {
+            return getInstance().get(code).filter(p -> p instanceof GTAAGeographicName).map(p -> (GTAAGeographicName) p);
+        } catch (IllegalStateException  illegalStateException) {
+            return Optional.empty();
+        }
     }
 }
