@@ -34,11 +34,11 @@ public class GenreValidator implements ConstraintValidator<ValidGenre, String> {
         if (classificationService == null) {
             log.warn("No classification service found");
         } else {
-            if (! classificationService.hasTerm(value)) {
-                return false;
-            } else {
+            if (classificationService.hasTerm(value)) {
                 Term term = classificationService.getTerm(value);
                 return term.getTermId().split("\\.").length >= annotation.minItems();
+            } else {
+                return false;
             }
         }
         return true;
