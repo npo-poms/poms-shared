@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Utilities related to {@link Changeable}
@@ -99,7 +100,11 @@ public class Changeables {
     /**
      * Used by implementations of {@link org.hibernate.Interceptor}
      */
-    public static void setProperty(@NonNull String propertyName, @NonNull Object propertyValue, @NonNull Object[] state, @NonNull String[] propertyNames) {
+    public static void setProperty(
+        @NonNull String propertyName,
+        @Nullable Object propertyValue,
+        @Nullable Object[] state,
+        @NonNull String[] propertyNames) {
         for(int i = 0; i < propertyNames.length; i++) {
             if(propertyNames[i].equals(propertyName)) {
                 state[i] = propertyValue;
