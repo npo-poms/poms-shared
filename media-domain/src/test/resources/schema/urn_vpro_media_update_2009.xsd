@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:media:update:2009" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:tns="urn:vpro:media:update:2009" xmlns:media="urn:vpro:media:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:import namespace="urn:vpro:media:2009" schemaLocation="urn:vpro:media:2009.xsd"/>
+  <xs:import namespace="urn:vpro:media:2009" schemaLocation="urn_vpro_media_2009.xsd"/>
 
-  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn:vpro:shared:2009.xsd"/>
+  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn_vpro_shared_2009.xsd"/>
 
   <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
   <xs:element name="geoLocation" type="geoLocationUpdateType"/>
