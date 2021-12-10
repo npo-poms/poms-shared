@@ -66,6 +66,8 @@ public class Roles {
 
     /**
      * Support are people at NPO-helpdesk who can see everything, including deleted record, but edit nothing. (MSE-2015)
+     *
+     * They may also not limited in publishing bulk.
      */
     public static final String SUPPORT     = MEDIA + "SUPPORT";
     public static final String SUPPORT_ROLE = ROLE + SUPPORT;
