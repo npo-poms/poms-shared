@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:pages:2013" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:tns="urn:vpro:pages:2013" xmlns:media="urn:vpro:media:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:import namespace="urn:vpro:media:2009" schemaLocation="urn:vpro:media:2009.xsd"/>
+  <xs:import namespace="urn:vpro:media:2009" schemaLocation="urn_vpro_media_2009.xsd"/>
 
-  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn:vpro:shared:2009.xsd"/>
+  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn_vpro_shared_2009.xsd"/>
 
   <xs:element name="genre" type="tns:genreType"/>
 
