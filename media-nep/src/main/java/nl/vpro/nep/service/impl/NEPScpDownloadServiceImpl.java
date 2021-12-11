@@ -57,7 +57,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     ) {
         this.url = username + "@" + ftpHost;
         this.maxDownloadRetries = maxDownloadRetries;
-        File scpcommand = CommandExecutorImpl
+        final File scpcommand = CommandExecutorImpl
             .getExecutableFromStrings(scpExecutables)
             .orElseThrow(IllegalArgumentException::new);
         // just used for the checkAvailability call (actually for the descriptorConsumer callback)
@@ -75,7 +75,6 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
                 .useFileCache(useFileCache)
                 .logger(log)
-
                 .commonArg(
                     "-p", password,
                     scpcommand.getAbsolutePath(),
