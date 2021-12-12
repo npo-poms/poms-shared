@@ -12,6 +12,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.junit.jupiter.api.Test;
 import org.slf4j.MDC;
 
+import nl.vpro.i18n.Locales;
+
 import static nl.vpro.mdc.MDCConstants.USER_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 class UserServiceTest {
 
-    private UserService<User> userService = new UserService<User>() {
+    private final UserService<User> userService = new UserService<User>() {
         @Override
         public boolean needsUpdate(User oldUser, User newUser) {
             return false;
@@ -115,22 +117,28 @@ class UserServiceTest {
     };
 
     @Test
-    public void async() throws ExecutionException, InterruptedException {
+    public void async() throws Exception {
         MDC.put(USER_NAME, "user");
-        List<CompletableFuture<?>> futures = new ArrayList<>();
-        for (int i = 0; i < 500; i++) {
-            int fi = i;
-            futures.add(userService.async(() -> {
-                MDC.put(USER_NAME, "bloe " + fi);
-                Thread.sleep(100);
-                return "hoi";
-            }, log));
+        Locale def = Locales.getDefault();
 
+        List<CompletableFuture<?>> futures = new ArrayList<>();
+        try (AutoCloseable autoCloseable = Locales.with(new Locale("zh"))) {
+            for (int i = 0; i < 500; i++) {
+                int fi = i;
+                futures.add(userService.async(() -> {
+                    MDC.put(USER_NAME, "bloe " + fi);
+                    Thread.sleep(100);
+                    assertThat(Locales.getDefault().getLanguage()).isEqualTo("zh");
+                    return "hoi";
+                }, log));
+
+            }
         }
         for (CompletableFuture<?> f : futures) {
             f.get();
         }
         assertThat(UserService.ASYNC_EXECUTOR.getPoolSize()).isGreaterThan(1);
+        assertThat(Locales.getDefault()).isEqualTo(def);
         log.info("after "  + UserService.ASYNC_EXECUTOR.getPoolSize());
 
     }

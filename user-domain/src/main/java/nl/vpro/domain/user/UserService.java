@@ -10,6 +10,7 @@ import java.security.Principal;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import javax.transaction.Transactional;
@@ -18,6 +19,7 @@ import org.checkerframework.checker.nullness.qual.*;
 import org.slf4j.*;
 
 import nl.vpro.domain.Roles;
+import nl.vpro.i18n.Locales;
 import nl.vpro.mdc.MDCConstants;
 
 import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
@@ -166,9 +168,11 @@ public interface UserService<T extends User> {
     }
 
     /**
-     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean)}) in CompletableFuture#supplyAsync.
+     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean, boolean)} )}) in CompletableFuture#supplyAsync.
      *
      * This makes sure that the job is running as the current user, and for example also that the current MDC is copied to the other thread.
+     *
+     * Note that if you use {@link CompletableFuture#thenAccept(Consumer)} or something similar that these will not be run in the same context. You can wrapp those with {@link #wrap(Callable, Logger, Boolean, boolean)} yourself.
      *
      * @param callable The job to run asynchronously
      * @param logger If not <code>null</code> catch exceptions and log as error.
@@ -186,6 +190,7 @@ public interface UserService<T extends User> {
                 throw new RuntimeException(e);
             }
         };
+
         return CompletableFuture.supplyAsync(supplier, executor);
     }
 
@@ -220,14 +225,15 @@ public interface UserService<T extends User> {
             authentication = null;
         }
         final Principal onBehalfOf = authentication;
-        Map<String, String> copy =  MDC.getCopyOfContextMap();
+        final Map<String, String> copy =  MDC.getCopyOfContextMap();
         if (logger != null) {
             logger.info("Executing on behalf of {}", onBehalfOf);
         }
+        final Locale currentLocale = Locales.getDefault();
 
         return () -> {
             MDC.clear(); // Running in an unknown thread, making sure MDC is clean
-            try {
+            try (AutoCloseable restore = Locales.with(currentLocale)){
                 if (onBehalfOf != null) {
                     try {
                         restoreAuthentication(onBehalfOf);
@@ -239,6 +245,7 @@ public interface UserService<T extends User> {
                     }
                 }
                 if (copy != null) {
+                    // and make sure that
                     copy.forEach(MDC::put);
                 }
                 return callable.call();
