@@ -806,12 +806,12 @@
   <xs:complexType name="searchResultItem">
     <xs:sequence>
       <xs:element name="result" type="xs:anyType" minOccurs="0"/>
-      <xs:element name="highlight" type="hightlightType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="highlight" type="highlightType" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="score" type="xs:float"/>
   </xs:complexType>
 
-  <xs:complexType name="hightlightType">
+  <xs:complexType name="highlightType">
     <xs:sequence>
       <xs:element name="body" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
