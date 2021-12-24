@@ -12,6 +12,8 @@ import java.util.function.Predicate;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.util.Ranges;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -482,30 +484,15 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     /**
      * Returns the with this Schedule associated {@link #getStart()} and {@link #getStop()} instances as a {@link Range} of {@link ZonedDateTime}'s.
      *
-     * I.e. an interval that is closed at the start, and open at the end. For now evertyhing is assiociated with the time zone {@link #ZONE_ID} (i.e. CEST), since we
-     * haven't accounted an use case for something else yet, but otherwise we may imagin also the time zone to be a member of this schedule object.
+     * I.e. an interval that is closed at the start, and open at the end. For now everything is associated with the time zone {@link #ZONE_ID} (i.e. CEST), since we
+     * haven't accounted an use case for something else yet, but otherwise we may imaging also the time zone to be a member of this schedule object.
      */
     public Range<LocalDateTime> asLocalRange() {
-        return Range.closedOpen(
-            getStart().atZone(Schedule.ZONE_ID).toLocalDateTime(),
-            getStop().atZone(Schedule.ZONE_ID).toLocalDateTime()
-        );
+        return DateUtils.toLocalDateTimeRange(asRange(), Schedule.ZONE_ID);
     }
+
     public Range<Instant> asRange() {
-        if(getStart() == null) {
-            if (getStop() == null) {
-                return Range.all();
-            } else {
-                return Range.lessThan(getStop());
-            }
-        } else if (getStop() == null) {
-            return Range.atLeast(getStart());
-        } else {
-            return Range.closedOpen(
-                getStart(),
-                getStop()
-            );
-        }
+        return Ranges.closedOpen(getStart(), getStop());
     }
 
 
