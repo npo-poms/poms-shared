@@ -11,6 +11,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 @Slf4j
 public class ImageUrlServiceHolder {
 
+    public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
+
+
     private static ImageUrlService instance;
 
     private ImageUrlServiceHolder() {
@@ -23,6 +26,13 @@ public class ImageUrlServiceHolder {
         }
         return instance;
     }
+
+    public static void setInstance() {
+        String systemProperty = System.getProperty(IMAGE_SERVER_BASE_URL_PROPERTY, "https://images.poms.omroep.nl/image/");
+        assert systemProperty != null;
+        setInstance(() -> systemProperty);
+    }
+
     public static void setInstance(@NonNull ImageUrlService instance) {
         if (ImageUrlServiceHolder.instance != null && ImageUrlServiceHolder.instance != instance) {
             log.info("Replacing image backend service with {}", instance);

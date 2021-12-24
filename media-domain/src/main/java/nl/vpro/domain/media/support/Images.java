@@ -19,7 +19,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 @Deprecated
 public class Images {
 
-    public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
+    public static final String IMAGE_SERVER_BASE_URL_PROPERTY = ImageUrlServiceHolder.IMAGE_SERVER_BASE_URL_PROPERTY;
 
     private Images() {
     }
