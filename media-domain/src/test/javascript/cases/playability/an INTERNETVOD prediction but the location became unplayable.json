@@ -31,6 +31,7 @@
       "platform" : "INTERNETVOD"
     } ]
   },
+  "ranges" : { },
   "mediaObject" : {
     "objectType" : "program",
     "mid" : "WO_AVRO_013701",

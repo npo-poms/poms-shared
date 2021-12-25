@@ -7,8 +7,7 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -21,14 +20,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.slf4j.helpers.MessageFormatter;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Streams;
+import com.google.common.collect.*;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
+import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
 import static nl.vpro.domain.Changeables.instant;
@@ -946,11 +945,12 @@ public class MediaObjects {
 
 
     /**
+     * Whether the given mediaobject is now playable at given platform
      * @since 5.31
      */
     public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return playabilityCheck(platform, mediaObject,
-            prediction -> platform != Platform.INTERNETVOD // for internetvod it seems the _only_ check currenlty is whether all locations are playable.
+            prediction -> platform != Platform.INTERNETVOD // for internetvod it seems the _only_ check currently is whether all locations are playable.
                 && prediction.getState() == Prediction.State.REALIZED && prediction.inPublicationWindow(),
             Embargo::inPublicationWindow
         );
@@ -997,7 +997,10 @@ public class MediaObjects {
      * @since 5.31
      */
     public static  Optional<LocalDateTime> willBePlayableAt(Platform platform, MediaObject mediaObject) {
-        return Optional.ofNullable(mediaObject.getPrediction(platform)).filter(Prediction::isPlannedAvailability).map(p -> p.getPublishStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime());
+        return Optional.ofNullable(mediaObject.getPrediction(platform))
+            .filter(Prediction::isPlannedAvailability)
+            .map(p -> p.getPublishStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime())
+            ;
     }
 
     /**
@@ -1008,6 +1011,29 @@ public class MediaObjects {
             .filter(p -> willBePlayable(p, mediaObject))
             .collect(Collectors.toCollection(TreeSet::new));
 
+    }
+
+
+
+    /**
+     * Whether the given mediaobject is now playable at given platform
+     * @since 5.31
+     */
+    public static Optional<Range<Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+        return playability(platform, mediaObject, (l) -> true, (p) -> true).map(Embargo::asRange);
+    }
+
+    /**
+     */
+    public static Map<Platform, Range<LocalDateTime>> playableRanges(@NonNull MediaObject mediaObject, ZoneId zoneId) {
+        final ZoneId finalZoneId = zoneId== null? Schedule.ZONE_ID : zoneId;
+        Map<Platform, Range<LocalDateTime>> result = new HashMap<>();
+        Arrays.stream(Platform.values()).forEach(p ->
+            playableRange(p, mediaObject).ifPresent(r ->
+                result.put(p, DateUtils.toLocalDateTimeRange(r, finalZoneId))
+            )
+        );
+        return Collections.unmodifiableMap(result);
     }
 
     static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(AVFileFormat.MP3, AVFileFormat.MP4, AVFileFormat.M4V, AVFileFormat.H264)));
@@ -1038,14 +1064,26 @@ public class MediaObjects {
         final @NonNull MediaObject mediaObject,
         final @NonNull Predicate<Prediction> predictionPredicate,
         final @NonNull Predicate<Location> locationPredicate) {
-        final boolean matchedByPrediction = mediaObject.getPredictions().stream().anyMatch(p -> platform.matches(p.getPlatform()) && predictionPredicate.test(p));
-        if (matchedByPrediction) {
-            return true;
+        return playability(platform, mediaObject, predictionPredicate, locationPredicate).isPresent();
+    }
+
+     /**
+     * @since 5.31
+     */
+    protected static Optional<? extends Embargo> playability(
+        final @NonNull Platform platform,
+        final @NonNull MediaObject mediaObject,
+        final @NonNull Predicate<Prediction> predictionPredicate,
+        final @NonNull Predicate<Location> locationPredicate) {
+        final Optional<Prediction> matchedByPrediction = mediaObject.getPredictions().stream().filter(p -> platform.matches(p.getPlatform()) && predictionPredicate.test(p)).findFirst();
+        if (matchedByPrediction.isPresent()) {
+            return matchedByPrediction;
         }
         // fall back to location only
         return  mediaObject.getLocations().stream()
             .filter(MediaObjects::locationFilter)
-            .anyMatch(l -> platform.matches(l.getPlatform()) && locationPredicate.test(l));
+            .filter(l -> platform.matches(l.getPlatform()) && locationPredicate.test(l))
+            .findFirst();
     }
 
 

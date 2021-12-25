@@ -40,6 +40,12 @@
       "platform" : "PLUSVOD"
     } ]
   },
+  "ranges" : {
+    "PLUSVOD" : {
+      "upperEndpoint" : [ 2021, 10, 26, 14, 59, 50 ],
+      "upperBoundType" : "OPEN"
+    }
+  },
   "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",

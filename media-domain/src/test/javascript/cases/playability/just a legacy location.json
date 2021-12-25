@@ -26,6 +26,9 @@
       "workflow" : "FOR_PUBLICATION"
     } ]
   },
+  "ranges" : {
+    "INTERNETVOD" : { }
+  },
   "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",

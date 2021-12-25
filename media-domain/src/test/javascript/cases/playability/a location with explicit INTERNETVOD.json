@@ -31,6 +31,9 @@
       "platform" : "INTERNETVOD"
     } ]
   },
+  "ranges" : {
+    "INTERNETVOD" : { }
+  },
   "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
