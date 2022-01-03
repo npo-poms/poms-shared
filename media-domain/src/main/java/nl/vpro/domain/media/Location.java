@@ -7,7 +7,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.xml.bind.Unmarshaller;
@@ -28,7 +29,6 @@ import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.util.TimeUtils;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 import static nl.vpro.domain.Changeables.instant;
@@ -482,7 +482,7 @@ public class Location extends PublishableObject<Location>
             if (create) {
                 Prediction rec = mediaObject.findOrCreatePrediction(platform);
                 if (existing == null) {
-                    log.info("Implicitely created prediction record for {}", platform);
+                    log.info("Implicitly created prediction record for {}", platform);
                     Embargos.copy(Embargos.of(publishStart, publishStop), rec);
                 }
                 return rec;
