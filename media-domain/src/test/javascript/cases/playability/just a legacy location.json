@@ -7,7 +7,7 @@
   "wasExpectedPlatforms" : [ ],
   "willExpectedPlatforms" : [ ],
   "ranges" : {
-    "INTERNETVOD" : { }
+    "INTERNETVOD" : [ null, null ]
   },
   "publishedMediaObject" : {
     "objectType" : "program",

@@ -109,6 +109,15 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         return playability(platform, mediaObject, predictionPredicate, locationPredicate) != null;
     }
 
+
+    function undefinedIsNull(arg) {
+        if (typeof arg !== 'undefined') {
+            return arg;
+        } else {
+            return null;
+        }
+    }
+
     /**
      * @param {string} platform
      * @param {Object} mediaObject
@@ -124,7 +133,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         const matchedByPrediction = mediaObject.predictions && mediaObject.predictions.find(prediction => platform === prediction.platform && predictionPredicate(platform, prediction));
         if (matchedByPrediction) {
             debug("Matched", mediaObject, platform, "on prediction");
-            return [matchedByPrediction.publishStop, matchedByPrediction.publishStop];
+            return [undefinedIsNull(matchedByPrediction.publishStart), undefinedIsNull(matchedByPrediction.publishStop)];
         }
         // fall back to location only
         const matchedOnLocation = mediaObject.locations &&
@@ -133,7 +142,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
                 .find(location => platformMatches(platform, location.platform) && locationPredicate(platform, location));
         if (matchedOnLocation) {
             debug("Matched", mediaObject.locations, platform, "on location", matchedOnLocation);
-            return [matchedOnLocation.publishStop, matchedOnLocation.publishStop];
+            return [undefinedIsNull(matchedOnLocation.publishStart), undefinedIsNull(matchedOnLocation.publishStop)];
         } else {
             return null;
         }
@@ -251,7 +260,10 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         playableRanges: function(mediaObject) {
             result = {}
             Object.values(platforms).forEach(platform => {
-                result[platform] = this.playableRange(platform, mediaObject);
+                const range = this.playableRange(platform, mediaObject);
+                if (range) {
+                    result[platform] = range;
+                }
             });
             return result;
         },

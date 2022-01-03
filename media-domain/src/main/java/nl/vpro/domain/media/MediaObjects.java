@@ -1039,6 +1039,18 @@ public class MediaObjects {
         return Collections.unmodifiableMap(result);
     }
 
+    /**
+     */
+    public static Map<Platform, Range<Instant>> playableRanges(@NonNull MediaObject mediaObject) {
+        Map<Platform, Range<Instant>> result = new HashMap<>();
+        Arrays.stream(Platform.values()).forEach(p ->
+            playableRange(p, mediaObject).ifPresent(r ->
+                result.put(p, r)
+            )
+        );
+        return Collections.unmodifiableMap(result);
+    }
+
     static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
         AVFileFormat.MP3,
         AVFileFormat.MP4,

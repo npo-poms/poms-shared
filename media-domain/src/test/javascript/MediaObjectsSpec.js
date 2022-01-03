@@ -65,7 +65,9 @@ describe('MediaObjects', function() {
         files.forEach(file => {
             const json = require(directory + '/' + file);
             it(json.description, function () {
-                expect(target.playableRanges(json.publishedMediaObject)).toEqual(json.ranges);
+                const ranges = target.playableRanges(json.mediaObject)
+                console.log("found:", ranges, "expected", json.ranges);
+                expect(ranges).toEqual(json.ranges);
             });
         });
     });

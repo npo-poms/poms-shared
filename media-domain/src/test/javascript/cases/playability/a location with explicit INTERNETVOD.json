@@ -7,7 +7,7 @@
   "wasExpectedPlatforms" : [ ],
   "willExpectedPlatforms" : [ ],
   "ranges" : {
-    "INTERNETVOD" : { }
+    "INTERNETVOD" : [ null, null ]
   },
   "publishedMediaObject" : {
     "objectType" : "program",
@@ -24,6 +24,15 @@
       "platform" : "INTERNETVOD"
     } ],
     "locations" : [ {
+      "programUrl" : "https://bla.com/deleted.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "DELETED",
+      "platform" : "PLUSVOD"
+    }, {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
         "avFileFormat" : "UNKNOWN"

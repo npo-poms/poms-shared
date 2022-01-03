@@ -6,6 +6,10 @@
   "nowExpectedPlatforms" : [ "PLUSVOD" ],
   "wasExpectedPlatforms" : [ "INTERNETVOD" ],
   "willExpectedPlatforms" : [ ],
+  "ranges" : {
+    "PLUSVOD" : [ null, null ],
+    "INTERNETVOD" : [ null, 1635253190000 ]
+  },
   "publishedMediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
@@ -20,7 +24,16 @@
       "state" : "REALIZED",
       "platform" : "PLUSVOD"
     } ],
-    "locations" : [ ]
+    "locations" : [ {
+      "programUrl" : "https://bla.com/foobar.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "FOR_PUBLICATION",
+      "publishStop" : 1635253190000
+    } ]
   },
   "mediaObject" : {
     "objectType" : "program",
