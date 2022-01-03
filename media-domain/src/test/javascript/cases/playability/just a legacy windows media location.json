@@ -6,6 +6,7 @@
   "nowExpectedPlatforms" : [ ],
   "wasExpectedPlatforms" : [ ],
   "willExpectedPlatforms" : [ ],
+  "ranges" : { },
   "publishedMediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
@@ -26,7 +27,6 @@
       "workflow" : "FOR_PUBLICATION"
     } ]
   },
-  "ranges" : { },
   "mediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",

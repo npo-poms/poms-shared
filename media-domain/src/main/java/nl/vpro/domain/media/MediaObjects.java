@@ -1010,17 +1010,20 @@ public class MediaObjects {
         return Arrays.stream(Platform.values())
             .filter(p -> willBePlayable(p, mediaObject))
             .collect(Collectors.toCollection(TreeSet::new));
-
     }
 
 
-
     /**
-     * Whether the given mediaobject is now playable at given platform
+     * Returns for a certain platform the range it which a mediaobject is playable.
+     *
+     * @return An {@link Optional} of a {@link Range} of {@link Instant}. The optional is empty if the mediaobject was never announced, and is, was and probably will be unplayable.
      * @since 5.31
      */
     public static Optional<Range<Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return playability(platform, mediaObject, (l) -> true, (p) -> true).map(Embargo::asRange);
+        return playability(platform, mediaObject,
+            prediction -> platform != Platform.INTERNETVOD, // for internetvod _only_ check locations
+            MediaObjects::locationFilter
+        ).map(Embargo::asRange);
     }
 
     /**
@@ -1036,8 +1039,19 @@ public class MediaObjects {
         return Collections.unmodifiableMap(result);
     }
 
-    static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(AVFileFormat.MP3, AVFileFormat.MP4, AVFileFormat.M4V, AVFileFormat.H264)));
+    static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+        AVFileFormat.MP3,
+        AVFileFormat.MP4,
+        AVFileFormat.M4V,
+        AVFileFormat.H264
+    )));
 
+    /**
+     * Return {@code false} if the given location is not actually playable.
+     *
+     * Either it is {@link Location#isDeleted()}, which may occur if dealing with unpublished data, or we're dealing
+     * with some legacy and the location has a format which is known not to be playable any more (like WMV)
+     */
     protected static boolean locationFilter(Location l) {
         if (l.isDeleted()) {
             return false;
@@ -1075,7 +1089,9 @@ public class MediaObjects {
         final @NonNull MediaObject mediaObject,
         final @NonNull Predicate<Prediction> predictionPredicate,
         final @NonNull Predicate<Location> locationPredicate) {
-        final Optional<Prediction> matchedByPrediction = mediaObject.getPredictions().stream().filter(p -> platform.matches(p.getPlatform()) && predictionPredicate.test(p)).findFirst();
+        final Optional<Prediction> matchedByPrediction = mediaObject.getPredictions().stream()
+            .filter(p -> platform.matches(p.getPlatform()) && predictionPredicate.test(p))
+            .findFirst();
         if (matchedByPrediction.isPresent()) {
             return matchedByPrediction;
         }

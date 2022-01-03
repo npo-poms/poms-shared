@@ -643,6 +643,10 @@ public class MediaObjectsTest {
             return examples().map(a -> Arguments.of(a.get()[0], a.get()[1], ((ExpectedPlatforms)a.get()[2]).getWillBe()));
         }
 
+        public static Stream<Arguments> ranges() {
+            return examples().map(a -> Arguments.of(a.get()[0], a.get()[1], ((ExpectedPlatforms)a.get()[2]).getRanges()));
+        }
+
         @Test
         void isPlayable() {
             // this is a bit strange, this call just looks at streaming status:
@@ -677,6 +681,12 @@ public class MediaObjectsTest {
             // should still be valid if mediaobject gets published
             MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
             assertThat(MediaObjects.willBePlayable(published)).containsExactly(expectedPlatforms);
+        }
+
+        @ParameterizedTest
+        @MethodSource("ranges")
+        void ranges(String description, MediaObject object,  Map<Platform, Range<LocalDateTime>> ranges) throws JsonProcessingException {
+            assertThat(MediaObjects.playableRanges(object, ZONE_ID)).isEqualTo(ranges);
         }
 
         @Test

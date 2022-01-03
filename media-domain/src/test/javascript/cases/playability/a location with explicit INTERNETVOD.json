@@ -6,6 +6,9 @@
   "nowExpectedPlatforms" : [ "INTERNETVOD" ],
   "wasExpectedPlatforms" : [ ],
   "willExpectedPlatforms" : [ ],
+  "ranges" : {
+    "INTERNETVOD" : { }
+  },
   "publishedMediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
@@ -30,9 +33,6 @@
       "workflow" : "FOR_PUBLICATION",
       "platform" : "INTERNETVOD"
     } ]
-  },
-  "ranges" : {
-    "INTERNETVOD" : { }
   },
   "mediaObject" : {
     "objectType" : "program",

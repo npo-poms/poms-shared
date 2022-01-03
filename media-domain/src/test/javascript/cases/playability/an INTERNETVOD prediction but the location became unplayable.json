@@ -6,6 +6,7 @@
   "nowExpectedPlatforms" : [ ],
   "wasExpectedPlatforms" : [ ],
   "willExpectedPlatforms" : [ ],
+  "ranges" : { },
   "publishedMediaObject" : {
     "objectType" : "program",
     "mid" : "WO_AVRO_013701",
@@ -31,7 +32,6 @@
       "platform" : "INTERNETVOD"
     } ]
   },
-  "ranges" : { },
   "mediaObject" : {
     "objectType" : "program",
     "mid" : "WO_AVRO_013701",
