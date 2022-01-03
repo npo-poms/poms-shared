@@ -58,6 +58,15 @@ describe('MediaObjects', function() {
                 expect(target.willBePlayable(json.mediaObject)).toEqual(json.willExpectedPlatforms);
             });
         });
+    });
 
+
+    describe("ranges", function() {
+        files.forEach(file => {
+            const json = require(directory + '/' + file);
+            it(json.description, function () {
+                expect(target.playableRanges(json.publishedMediaObject)).toEqual(json.ranges);
+            });
+        });
     });
 });

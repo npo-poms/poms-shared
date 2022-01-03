@@ -1081,7 +1081,7 @@ public class MediaObjects {
         return playability(platform, mediaObject, predictionPredicate, locationPredicate).isPresent();
     }
 
-     /**
+    /**
      * @since 5.31
      */
     protected static Optional<? extends Embargo> playability(
