@@ -19,17 +19,7 @@
     "creationDate" : 1635166800000,
     "embeddable" : true,
     "ageRating" : "ALL",
-    "locations" : [ {
-      "programUrl" : "https://bla.com/foobar.mp4",
-      "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
-      },
-      "owner" : "BROADCASTER",
-      "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION",
-      "platform" : "PLUSVOD",
-      "publishStop" : 1635253190000
-    } ]
+    "locations" : [ ]
   },
   "mediaObject" : {
     "objectType" : "program",

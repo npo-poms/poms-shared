@@ -24,6 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Range;
 
+import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -477,11 +478,14 @@ public class MediaObjectsTest {
                 this(now, was, willBe, now, was, willBe, ranges);
             }
 
-            public ExpectedPlatforms withPublished(Platform[] now, Platform[] was, Platform[] willBe) {
-                return new ExpectedPlatforms(this.now, this.was, this.willBe,
-                    now == null ? this.publishedNow : now,
-                    was == null ? this.publishedWas : was,
-                    willBe == null ? this.publishedWillBe : willBe,
+            public ExpectedPlatforms withPublished(Platform[] publishedNow, Platform[] publishedWas, Platform[] publishedWillBe) {
+                return new ExpectedPlatforms(
+                    this.now,
+                    this.was,
+                    this.willBe,
+                    publishedNow == null ? this.publishedNow : publishedNow,
+                    publishedWas == null ? this.publishedWas : publishedWas,
+                    publishedWillBe == null ? this.publishedWillBe : publishedWillBe,
                     this.ranges
                 );
             }
@@ -615,7 +619,8 @@ public class MediaObjectsTest {
                         )
                         .predictions(Prediction.revoked().platform(PLUSVOD).build())
                         .build(),
-                    expected(A_NONE, A_BOTH, A_NONE, map(INTERNETVOD, null, expired, PLUSVOD, null, null)).withPublished(A_NONE, A_PLUSVOD, A_NONE)
+                    expected(A_NONE, A_BOTH, A_NONE, map(INTERNETVOD, null, expired, PLUSVOD, null, null))
+                        .withPublished(A_NONE, A_PLUSVOD, A_NONE)
                 ),
                 Arguments.of(
                     "revoked prediction but no locations",
@@ -712,6 +717,7 @@ public class MediaObjectsTest {
         @Test
         public void createJsonForJavascriptTests() {
             DEFAULT_CONSIDER_JSON_INCLUDE.set(true);
+            PublicationFilter.ENABLED.set(true);
             try {
                 final File dest = new File(StringUtils.substringBeforeLast(getClass().getResource(MediaObjectsTest.class.getSimpleName() + ".class").getPath(), "/media-domain/") + "/media-domain/src/test/javascript/cases/playability/");
                 dest.mkdirs();
@@ -746,6 +752,8 @@ public class MediaObjectsTest {
                 assertThat(count.get()).isEqualTo(15);
             } finally {
                 DEFAULT_CONSIDER_JSON_INCLUDE.remove();
+                PublicationFilter.ENABLED.remove();
+
             }
         }
     }

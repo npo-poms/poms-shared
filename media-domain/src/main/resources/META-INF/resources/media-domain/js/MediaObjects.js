@@ -5,7 +5,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
     }
 
     function debug() {
-        //console && console.log.apply(null, arguments);
+        // console && console.log.apply(null, arguments);
     }
     function info() {
         console && console.log.apply(null, arguments);
@@ -89,7 +89,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
                 return false;
             }
         }
-        debug(l, format, "accepted");
+        //debug(l, format, "accepted");
         return true;
     }
 
@@ -132,7 +132,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
 
         const matchedByPrediction = mediaObject.predictions && mediaObject.predictions.find(prediction => platform === prediction.platform && predictionPredicate(platform, prediction));
         if (matchedByPrediction) {
-            debug("Matched", mediaObject, platform, "on prediction");
+            debug("Matched by prediction", mediaObject, "on prediction", matchedByPrediction.platform);
             return [undefinedIsNull(matchedByPrediction.publishStart), undefinedIsNull(matchedByPrediction.publishStop)];
         }
         // fall back to location only
@@ -141,7 +141,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
                 .filter(locationFilter)
                 .find(location => platformMatches(platform, location.platform) && locationPredicate(platform, location));
         if (matchedOnLocation) {
-            debug("Matched", mediaObject.locations, platform, "on location", matchedOnLocation);
+            debug("Matched location ", mediaObject.locations, platform, "on location", matchedOnLocation.programUrl);
             return [undefinedIsNull(matchedOnLocation.publishStart), undefinedIsNull(matchedOnLocation.publishStop)];
         } else {
             return null;
