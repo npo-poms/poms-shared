@@ -5,7 +5,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
     }
 
     function debug() {
-        //console && console.log.apply(null, arguments);
+        // console && console.log.apply(null, arguments);
     }
     function info() {
         console && console.log.apply(null, arguments);
@@ -89,7 +89,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
                 return false;
             }
         }
-        debug(l, format, "accepted");
+        //debug(l, format, "accepted");
         return true;
     }
 
@@ -106,21 +106,48 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
      * @return {boolean}
      */
     function playabilityCheck(platform, mediaObject,  predictionPredicate, locationPredicate) {
-        const matchedByPrediction = mediaObject.predictions && mediaObject.predictions.some(prediction => platform === prediction.platform && predictionPredicate(platform, prediction));
+        return playability(platform, mediaObject, predictionPredicate, locationPredicate) != null;
+    }
+
+    function undefinedIsNull(arg) {
+        return (typeof arg !== 'undefined') ? arg : null;
+    }
+
+    /**
+     * @param {string} platform
+     * @param {Object} mediaObject
+     * @param {function} predictionPredicate Filter for the predictions
+     * @param {function} locationPredicate Filter for the location
+     * @return {array} 2 dates, or null
+     */
+    function playability(
+        platform,
+        mediaObject,
+        predictionPredicate, locationPredicate) {
+
+        const matchedByPrediction =
+            mediaObject.predictions &&
+            mediaObject.predictions.find(
+                prediction => platform === prediction.platform &&
+                    predictionPredicate(platform, prediction)
+            );
         if (matchedByPrediction) {
-            debug("Matched", mediaObject, platform, "on prediction");
-            return true;
+            debug("Matched by prediction", mediaObject, "on prediction", matchedByPrediction.platform);
+            return [undefinedIsNull(matchedByPrediction.publishStart), undefinedIsNull(matchedByPrediction.publishStop)];
         }
         // fall back to location only
         const matchedOnLocation = mediaObject.locations &&
             mediaObject.locations
                 .filter(locationFilter)
-                .some(location => platformMatches(platform, location.platform) && locationPredicate(platform, location));
+                .find(location => platformMatches(platform, location.platform) && locationPredicate(platform, location));
         if (matchedOnLocation) {
-            debug("Matched", mediaObject.locations, platform, "on location", matchedOnLocation);
+            debug("Matched location ", mediaObject.locations, platform, "on location", matchedOnLocation.programUrl);
+            return [undefinedIsNull(matchedOnLocation.publishStart), undefinedIsNull(matchedOnLocation.publishStop)];
+        } else {
+            return null;
         }
-        return matchedOnLocation;
     }
+
 
 
     const platforms = Object.freeze({
@@ -143,8 +170,9 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
      * @param {function} locationPredicate Filter for the location
      * @return {array}   list of platforms
      */
-    function playability(mediaObject, predictionPredicate, locationPredicate) {
-        return Object.values(platforms).filter(p => playabilityCheck(p, mediaObject, predictionPredicate, locationPredicate));
+    function playablePlatforms(mediaObject, predictionPredicate, locationPredicate) {
+        return Object.values(platforms)
+            .filter(p => playabilityCheck(p, mediaObject, predictionPredicate, locationPredicate));
     }
 
     function inPublicationWindow(object) {
@@ -161,8 +189,8 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         }
         debug(object, "published")
         return true;
-
     }
+
     function wasUnderEmbargo(object) {
         const stop = object.publishStop;
         const now = clock()
@@ -185,7 +213,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
          * @return {array}     list of platforms the given mediaobject is now playable on
          */
         nowPlayable: function (mediaObject) {
-            return playability(mediaObject,
+            return playablePlatforms(mediaObject,
                 (platform, prediction) => platform !== this.Platform.INTERNETVOD && prediction.state === this.State.REALIZED && inPublicationWindow(prediction),
                 (platform, location) => inPublicationWindow(location)
             );
@@ -197,7 +225,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
          * @return {array}  list of platforms the given mediaobject is was playable on
          */
         wasPlayable: function (mediaObject) {
-            return playability(mediaObject,
+            return playablePlatforms(mediaObject,
                 (platform, prediction) => prediction.state === this.State.REVOKED,
                 (platform, location) => wasUnderEmbargo(location)
             );
@@ -209,11 +237,37 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
          * @return {array}  list of platforms the given mediaobject will be playable on
          */
         willBePlayable: function (mediaObject) {
-            return playability(mediaObject,
+            return playablePlatforms(mediaObject,
                 (platform, prediction) => prediction.state === this.State.ANNOUNCED,
                 (platform, location) => willBePublished(location)
             );
         },
+
+
+        /**
+         * Returns for a certain platform the range it which a mediaobject is playable.
+         */
+        playableRange: function(platform, mediaObject) {
+            return playability(platform, mediaObject,
+                (platform, prediction) => platform !== this.Platform.INTERNETVOD, // for internetvod _only_ check locations
+                (platform, location) => locationFilter(location)
+            );
+        },
+
+
+        /**
+         */
+        playableRanges: function(mediaObject) {
+            const result = {}
+            Object.values(platforms).forEach(platform => {
+                const range = this.playableRange(platform, mediaObject);
+                if (range) {
+                    result[platform] = range;
+                }
+            });
+            return result;
+        },
+
 
         /**
          * For testing purposes the clock can be set
@@ -227,4 +281,4 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
 
 try {
     exports.MediaObjects = nl_vpro_domain_media_MediaObjects;
-} catch (e) {}
+} catch (e) { /* ignored for unsupported browsers */}

@@ -12,8 +12,6 @@ import java.util.function.Predicate;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.util.Ranges;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -23,6 +21,7 @@ import com.google.common.collect.UnmodifiableIterator;
 
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
+import nl.vpro.util.Ranges;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.Changeables.instant;
@@ -43,6 +42,9 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
 
     private static final long serialVersionUID = 0L;
 
+    /**
+     * The time zone most relevant for NPO, i.e. the timezone in the Netherlands.
+     */
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
     public static final LocalTime START_OF_SCHEDULE = LocalTime.of(6, 0);
 

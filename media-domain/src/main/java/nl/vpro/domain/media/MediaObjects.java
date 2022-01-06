@@ -7,8 +7,7 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -21,14 +20,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.slf4j.helpers.MessageFormatter;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Streams;
+import com.google.common.collect.*;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
+import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
 import static nl.vpro.domain.Changeables.instant;
@@ -907,9 +906,7 @@ public class MediaObjects {
         boolean result = MediaObjects.revokeRelatedPublishables(media, media.getImages(), now, () -> {});
         result &= MediaObjects.revokeRelatedPublishables(media, media.getLocations(), now, () -> Locations.updatePredictionStates(media, now));
         return result;
-
     }
-
 
     public static Stream<GTAARecord> getGTAARecords(MediaObject media) {
         return Streams.concat(
@@ -946,11 +943,12 @@ public class MediaObjects {
 
 
     /**
+     * Whether the given mediaobject is now playable at given platform
      * @since 5.31
      */
     public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return playabilityCheck(platform, mediaObject,
-            prediction -> platform != Platform.INTERNETVOD // for internetvod it seems the _only_ check currenlty is whether all locations are playable.
+            prediction -> platform != Platform.INTERNETVOD // for internetvod it seems the _only_ check currently is whether all locations are playable.
                 && prediction.getState() == Prediction.State.REALIZED && prediction.inPublicationWindow(),
             Embargo::inPublicationWindow
         );
@@ -994,24 +992,84 @@ public class MediaObjects {
     }
 
     /**
+     * Determines for a certain {@link Platform}s and {@code MediaObject} when it might become playable.
      * @since 5.31
      */
-    public static  Optional<LocalDateTime> willBePlayableAt(Platform platform, MediaObject mediaObject) {
-        return Optional.ofNullable(mediaObject.getPrediction(platform)).filter(Prediction::isPlannedAvailability).map(p -> p.getPublishStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime());
+    public static Optional<LocalDateTime> willBePlayableAt(Platform platform, MediaObject mediaObject) {
+        return Optional.ofNullable(mediaObject.getPrediction(platform))
+            .filter(Prediction::isPlannedAvailability)
+            .map(p -> p.getPublishStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime())
+            ;
     }
 
     /**
+     * Determines on which {@link Platform}s the given {@code MediaObject} will be playable.
      * @since 5.31
      */
     public static Set<Platform> willBePlayable(@NonNull MediaObject mediaObject) {
         return Arrays.stream(Platform.values())
             .filter(p -> willBePlayable(p, mediaObject))
             .collect(Collectors.toCollection(TreeSet::new));
-
     }
 
-    static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(AVFileFormat.MP3, AVFileFormat.MP4, AVFileFormat.M4V, AVFileFormat.H264)));
+    /**
+     * Returns for a certain platform the range it which a mediaobject is playable.
+     *
+     * @return An {@link Optional} of a {@link Range} of {@link Instant}. The optional is empty if the mediaobject was never announced, and is, was and probably will be unplayable.
+     * @since 5.31
+     */
+    public static Optional<Range<Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
+        return playability(platform, mediaObject,
+            prediction -> platform != Platform.INTERNETVOD, // for internetvod _only_ check locations
+            MediaObjects::locationFilter
+        ).map(Embargo::asRange);
+    }
 
+    /**
+     * Given a {@code MediaObject} returns a map with for every platform for which that is relevant a {@link Range} of {@link LocalDateTime}  is return indicating the period this object is playable at that platform
+     *
+     * @param zoneId The timezone for which this must be evaluated or {@code null}, to fall back to {@link Schedule#ZONE_ID}
+     * @since 5.31
+     */
+    public static Map<Platform, Range<LocalDateTime>> playableRanges(@NonNull MediaObject mediaObject, ZoneId zoneId) {
+        final ZoneId finalZoneId = zoneId== null? Schedule.ZONE_ID : zoneId;
+        return playableRanges(mediaObject).entrySet()
+            .stream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                e -> DateUtils.toLocalDateTimeRange(e.getValue(), finalZoneId))
+            );
+    }
+
+    /**
+     * As {@link #playableRanges(MediaObject, ZoneId)}, but returning ranges of {@link Instant}, indicating absolute times.
+     * @see #playableRanges(MediaObject, ZoneId)
+     * @since 5.31
+     */
+    public static Map<Platform, Range<Instant>> playableRanges(@NonNull MediaObject mediaObject) {
+        final Map<Platform, Range<Instant>> result = new HashMap<>();
+        Arrays.stream(Platform.values()).forEach(p ->
+            playableRange(p, mediaObject).ifPresent(r ->
+                result.put(p, r)
+            )
+        );
+        return Collections.unmodifiableMap(result);
+    }
+
+    static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+        AVFileFormat.MP3,
+        AVFileFormat.MP4,
+        AVFileFormat.M4V,
+        AVFileFormat.H264
+    )));
+
+    /**
+     * Return {@code false} if the given location is not actually playable.
+     *
+     * Either it is {@link Location#isDeleted()}, which may occur if dealing with unpublished data, or we're dealing
+     * with some legacy and the location has a format which is known not to be playable any more (like WMV)
+     * @since 5.31
+     */
     protected static boolean locationFilter(Location l) {
         if (l.isDeleted()) {
             return false;
@@ -1038,14 +1096,28 @@ public class MediaObjects {
         final @NonNull MediaObject mediaObject,
         final @NonNull Predicate<Prediction> predictionPredicate,
         final @NonNull Predicate<Location> locationPredicate) {
-        final boolean matchedByPrediction = mediaObject.getPredictions().stream().anyMatch(p -> platform.matches(p.getPlatform()) && predictionPredicate.test(p));
-        if (matchedByPrediction) {
-            return true;
+        return playability(platform, mediaObject, predictionPredicate, locationPredicate).isPresent();
+    }
+
+    /**
+     * @since 5.31
+     */
+    protected static Optional<? extends Embargo> playability(
+        final @NonNull Platform platform,
+        final @NonNull MediaObject mediaObject,
+        final @NonNull Predicate<Prediction> predictionPredicate,
+        final @NonNull Predicate<Location> locationPredicate) {
+        final Optional<Prediction> matchedByPrediction = mediaObject.getPredictions().stream()
+            .filter(p -> platform.matches(p.getPlatform()) && predictionPredicate.test(p))
+            .findFirst();
+        if (matchedByPrediction.isPresent()) {
+            return matchedByPrediction;
         }
         // fall back to location only
         return  mediaObject.getLocations().stream()
             .filter(MediaObjects::locationFilter)
-            .anyMatch(l -> platform.matches(l.getPlatform()) && locationPredicate.test(l));
+            .filter(l -> platform.matches(l.getPlatform()) && locationPredicate.test(l))
+            .findFirst();
     }
 
 

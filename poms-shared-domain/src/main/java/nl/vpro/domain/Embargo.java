@@ -4,6 +4,8 @@ import java.time.Instant;
 
 import com.google.common.collect.Range;
 
+import nl.vpro.util.Ranges;
+
 import static nl.vpro.domain.Changeables.instant;
 
 /**
@@ -24,20 +26,7 @@ public interface Embargo {
      * Returns this embargo object as a guava {@link Range} object.
      */
     default Range<Instant> asRange() {
-        if (getPublishStopInstant() == null) {
-            if (getPublishStartInstant() == null) {
-                return Range.all();
-            } else {
-                return Range.atLeast(getPublishStartInstant());
-            }
-        } else {
-            if (getPublishStartInstant() != null) {
-                return Range.closedOpen(getPublishStartInstant(), getPublishStopInstant());
-            } else {
-                return Range.lessThan(getPublishStopInstant());
-            }
-        }
-
+        return Ranges.closedOpen(getPublishStartInstant(), getPublishStopInstant());
     }
 
     default boolean isUnderEmbargo(Instant now) {

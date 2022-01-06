@@ -6,6 +6,9 @@
   "nowExpectedPlatforms" : [ "INTERNETVOD" ],
   "wasExpectedPlatforms" : [ ],
   "willExpectedPlatforms" : [ ],
+  "ranges" : {
+    "INTERNETVOD" : [ null, null ]
+  },
   "publishedMediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",

@@ -6,6 +6,10 @@
   "nowExpectedPlatforms" : [ "PLUSVOD" ],
   "wasExpectedPlatforms" : [ "INTERNETVOD" ],
   "willExpectedPlatforms" : [ ],
+  "ranges" : {
+    "PLUSVOD" : [ null, null ],
+    "INTERNETVOD" : [ null, 1635253190000 ]
+  },
   "publishedMediaObject" : {
     "objectType" : "program",
     "mid" : "mid_123",
