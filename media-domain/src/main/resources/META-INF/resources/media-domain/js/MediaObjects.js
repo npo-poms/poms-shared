@@ -109,9 +109,8 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         return playability(platform, mediaObject, predictionPredicate, locationPredicate) != null;
     }
 
-
     function undefinedIsNull(arg) {
-        return (typeof arg !== 'undefined') ? args : null;
+        return (typeof arg !== 'undefined') ? arg : null;
     }
 
     /**
@@ -190,8 +189,8 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         }
         debug(object, "published")
         return true;
-
     }
+
     function wasUnderEmbargo(object) {
         const stop = object.publishStop;
         const now = clock()
@@ -259,7 +258,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         /**
          */
         playableRanges: function(mediaObject) {
-            result = {}
+            const result = {}
             Object.values(platforms).forEach(platform => {
                 const range = this.playableRange(platform, mediaObject);
                 if (range) {
@@ -282,4 +281,4 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
 
 try {
     exports.MediaObjects = nl_vpro_domain_media_MediaObjects;
-} catch (e) {}
+} catch (e) { /* ignored for unsupported browsers */}
