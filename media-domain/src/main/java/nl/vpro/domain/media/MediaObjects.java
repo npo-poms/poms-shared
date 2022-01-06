@@ -906,9 +906,7 @@ public class MediaObjects {
         boolean result = MediaObjects.revokeRelatedPublishables(media, media.getImages(), now, () -> {});
         result &= MediaObjects.revokeRelatedPublishables(media, media.getLocations(), now, () -> Locations.updatePredictionStates(media, now));
         return result;
-
     }
-
 
     public static Stream<GTAARecord> getGTAARecords(MediaObject media) {
         return Streams.concat(
@@ -994,9 +992,10 @@ public class MediaObjects {
     }
 
     /**
+     * Determines for a certain {@link Platform}s and {@code MediaObject} when it might become playable.
      * @since 5.31
      */
-    public static  Optional<LocalDateTime> willBePlayableAt(Platform platform, MediaObject mediaObject) {
+    public static Optional<LocalDateTime> willBePlayableAt(Platform platform, MediaObject mediaObject) {
         return Optional.ofNullable(mediaObject.getPrediction(platform))
             .filter(Prediction::isPlannedAvailability)
             .map(p -> p.getPublishStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime())
@@ -1004,6 +1003,7 @@ public class MediaObjects {
     }
 
     /**
+     * Determines on which {@link Platform}s the given {@code MediaObject} will be playable.
      * @since 5.31
      */
     public static Set<Platform> willBePlayable(@NonNull MediaObject mediaObject) {
@@ -1011,7 +1011,6 @@ public class MediaObjects {
             .filter(p -> willBePlayable(p, mediaObject))
             .collect(Collectors.toCollection(TreeSet::new));
     }
-
 
     /**
      * Returns for a certain platform the range it which a mediaobject is playable.
@@ -1027,22 +1026,28 @@ public class MediaObjects {
     }
 
     /**
+     * Given a {@code MediaObject} returns a map with for every platform for which that is relevant a {@link Range} of {@link LocalDateTime}  is return indicating the period this object is playable at that platform
+     *
+     * @param zoneId The timezone for which this must be evaluated or {@code null}, to fall back to {@link Schedule#ZONE_ID}
+     * @since 5.31
      */
     public static Map<Platform, Range<LocalDateTime>> playableRanges(@NonNull MediaObject mediaObject, ZoneId zoneId) {
         final ZoneId finalZoneId = zoneId== null? Schedule.ZONE_ID : zoneId;
-        Map<Platform, Range<LocalDateTime>> result = new HashMap<>();
-        Arrays.stream(Platform.values()).forEach(p ->
-            playableRange(p, mediaObject).ifPresent(r ->
-                result.put(p, DateUtils.toLocalDateTimeRange(r, finalZoneId))
-            )
-        );
-        return Collections.unmodifiableMap(result);
+        return playableRanges(mediaObject).entrySet()
+            .stream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                e -> DateUtils.toLocalDateTimeRange(e.getValue(), finalZoneId))
+            );
     }
 
     /**
+     * As {@link #playableRanges(MediaObject, ZoneId)}, but returning ranges of {@link Instant}, indicating absolute times.
+     * @see #playableRanges(MediaObject, ZoneId)
+     * @since 5.31
      */
     public static Map<Platform, Range<Instant>> playableRanges(@NonNull MediaObject mediaObject) {
-        Map<Platform, Range<Instant>> result = new HashMap<>();
+        final Map<Platform, Range<Instant>> result = new HashMap<>();
         Arrays.stream(Platform.values()).forEach(p ->
             playableRange(p, mediaObject).ifPresent(r ->
                 result.put(p, r)
@@ -1063,6 +1068,7 @@ public class MediaObjects {
      *
      * Either it is {@link Location#isDeleted()}, which may occur if dealing with unpublished data, or we're dealing
      * with some legacy and the location has a format which is known not to be playable any more (like WMV)
+     * @since 5.31
      */
     protected static boolean locationFilter(Location l) {
         if (l.isDeleted()) {

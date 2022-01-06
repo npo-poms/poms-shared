@@ -111,11 +111,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
 
 
     function undefinedIsNull(arg) {
-        if (typeof arg !== 'undefined') {
-            return arg;
-        } else {
-            return null;
-        }
+        return (typeof arg !== 'undefined') ? args : null;
     }
 
     /**
@@ -130,7 +126,12 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         mediaObject,
         predictionPredicate, locationPredicate) {
 
-        const matchedByPrediction = mediaObject.predictions && mediaObject.predictions.find(prediction => platform === prediction.platform && predictionPredicate(platform, prediction));
+        const matchedByPrediction =
+            mediaObject.predictions &&
+            mediaObject.predictions.find(
+                prediction => platform === prediction.platform &&
+                    predictionPredicate(platform, prediction)
+            );
         if (matchedByPrediction) {
             debug("Matched by prediction", mediaObject, "on prediction", matchedByPrediction.platform);
             return [undefinedIsNull(matchedByPrediction.publishStart), undefinedIsNull(matchedByPrediction.publishStop)];
