@@ -7,7 +7,6 @@ import java.util.Properties;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 public class NEPTest {
 
