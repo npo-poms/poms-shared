@@ -19,7 +19,7 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 @ToString
 public class NEPItemizeRequest {
 
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSS'Z'");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss.SSS");
     public static final ZoneId ZONE_ID = ZoneId.of("UTC");
 
     private String identifier;

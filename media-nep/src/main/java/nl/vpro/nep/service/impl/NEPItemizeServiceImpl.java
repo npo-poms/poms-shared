@@ -200,7 +200,8 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     public void grabScreenLive(String channel, Instant instant, @NonNull BiConsumer<String, String> headers, OutputStream outputStream) throws NEPException {
         try {
             grabScreen(channel,
-                NEPItemizeRequest.fromInstant(instant).orElseThrow(() -> new IllegalArgumentException("Instant " + instant + " could not be formatted")),
+                NEPItemizeRequest.fromInstant(instant)
+                    .orElseThrow(() -> new IllegalArgumentException("Instant " + instant + " could not be formatted")),
                 headers, outputStream, itemizeLiveUrl, itemizeLiveKey);
         } catch (NEPException e) {
             throw new NEPException(e, e.getMessage());
