@@ -57,8 +57,20 @@
       <xs:element type="xs:positiveInteger" name="height" minOccurs="0"/>
       <xs:element type="xs:positiveInteger" name="width" minOccurs="0"/>
       <xs:element type="xs:string" name="credits" minOccurs="0"/>
-      <xs:element name="source" type="xs:string"  minOccurs="0"/>
-      <xs:element name="sourceName" type="xs:string"  minOccurs="0"/>
+      <xs:element name="source" type="xs:string"  minOccurs="0">
+        <xs:annotation>
+          <xsd:documentation>
+            Where this image was found. In words. E.g. 'ANP'
+          </xsd:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="sourceName" type="xs:string"  minOccurs="0">
+         <xs:annotation>
+          <xsd:documentation>
+            Where this image was found. As an URL.
+          </xsd:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name="license" type="licenseEnum"  minOccurs="0"/>
       <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="xs:string" name="date" minOccurs="0"/>
