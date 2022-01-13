@@ -1,15 +1,13 @@
 package nl.vpro.domain.constraint;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Predicate;
 
 import javax.el.ELContext;
 
 import org.apache.commons.lang3.StringUtils;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
 
 import static nl.vpro.domain.constraint.PredicateTestResult.FACTORY;
 

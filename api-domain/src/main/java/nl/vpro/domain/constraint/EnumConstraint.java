@@ -4,16 +4,12 @@
  */
 package nl.vpro.domain.constraint;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Locale;
+import java.util.*;
 
 import javax.el.ELContext;
-import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
 
 import static nl.vpro.domain.constraint.PredicateTestResult.FACTORY;
 
