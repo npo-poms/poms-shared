@@ -1,3 +1,7 @@
+This is obsolete. Releasing can be done by triggering github actions, which will do approximately
+the below, but using batch mode.
+
+
 [source,bash]
 ----
 mvn release:branch -DbranchName=REL-5.13-SNAPSHOT -DdevelopmentVersion=5.14-SNAPSHOT
