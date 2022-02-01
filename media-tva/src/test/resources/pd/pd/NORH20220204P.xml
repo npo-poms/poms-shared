@@ -1,0 +1,3403 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TVAMain xmlns="urn:tva:metadata:2004" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:date="http://exslt.org/dates-and-times" publisher="NPO Programma Gegevens" publicationTime="2022-02-01T11:48:11.640+01:00" version="300" xsi:schemaLocation="urn:bds:metadata:2004 XSDSchema/tva_v13_am1_bds1r2.xsd">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078210730668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078210744668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078210758668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078210802668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078211530668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078211634668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078211648668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078212307668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078212321668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078212335668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078212351668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078213011668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078213025668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078213039668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078213740668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078213804668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078213818668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078213835668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078214497668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078214511668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078214525668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078215188668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078215202668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078215216668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078215234668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078215898668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078215912668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078215926668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078216591668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078216605668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078216619668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078216638668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078217304668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078217318668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078217332668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078217999668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078218023668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078218037668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078218057668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078218725668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078218739668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078218753668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2077567357668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Ontbijttafel</Title>
+          <Synopsis xml:lang="NL" length="long">De ontbijttafel is een UP show waar de dag om 06.00 uur al begonnen is! We zijn actueel, betrokken en daar waar het gebeurt.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">De ontbijttafel is een UP show waar de dag om 06.00 uur al begonnen is! We zijn actueel, betrokken en daar waar het gebeurt.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">De ontbijttafel is een UP show waar de dag om 06.00 uur al begonnen is! We zijn actueel, betrokken en daar waar het gebeurt.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2077568030668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Ontbijttafel</Title>
+          <Synopsis xml:lang="NL" length="long">De ontbijttafel is een UP show waar de dag om 06.00 uur al begonnen is! We zijn actueel, betrokken en daar waar het gebeurt.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">De ontbijttafel is een UP show waar de dag om 06.00 uur al begonnen is! We zijn actueel, betrokken en daar waar het gebeurt.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">De ontbijttafel is een UP show waar de dag om 06.00 uur al begonnen is! We zijn actueel, betrokken en daar waar het gebeurt.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2077568694668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Ontbijttafel</Title>
+          <Synopsis xml:lang="NL" length="long">De ontbijttafel is een UP show waar de dag om 06.00 uur al begonnen is! We zijn actueel, betrokken en daar waar het gebeurt.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">De ontbijttafel is een UP show waar de dag om 06.00 uur al begonnen is! We zijn actueel, betrokken en daar waar het gebeurt.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">De ontbijttafel is een UP show waar de dag om 06.00 uur al begonnen is! We zijn actueel, betrokken en daar waar het gebeurt.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078221375668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078221389668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078221403668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078222073668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078222087668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078222101668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078222772668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078222786668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078222800668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078223472668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078223486668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078223500668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078224173668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078224187668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078224201668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078224875668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078224889668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078224903668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078225578668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078225592668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078225606668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078226282668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078226296668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078226310668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078226987668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078227001668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078227015668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078227693668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078227707668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Culture Club</Title>
+          <Synopsis xml:lang="NL" length="long">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Muziek, beeldende kunst en meer. Allemaal uit onze eigen provincie</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>cultureclub@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#cultureclub</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078227721668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Open Podium</Title>
+          <Synopsis xml:lang="NL" length="short">Nieuwe talenten of nieuwe bands uit Noord-Holland. Wil jij ook jouw talent of muziekclip op TV? Mail naar openpodium@nhmedia.nl</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:EmailRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>openpodium@nhmedia.nl</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2077568746668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Goeiemiddag !</Title>
+          <Synopsis xml:lang="NL" length="long">Iedere werkdag tussen 14 en 16 uur het programma Goeiemiddag! Een licht en luchtig muziekprogramma dat gepresenteerd wordt door Nick Velderman.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Iedere werkdag tussen 14 en 16 uur het programma Goeiemiddag! Een licht en luchtig muziekprogramma dat gepresenteerd wordt door Nick Velderman.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Iedere werkdag tussen 14 en 16 uur het programma Goeiemiddag! Een licht en luchtig muziekprogramma dat gepresenteerd wordt door Nick Velderman.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2077568799668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Goeiemiddag !</Title>
+          <Synopsis xml:lang="NL" length="long">Iedere werkdag tussen 14 en 16 uur het programma Goeiemiddag! Een licht en luchtig muziekprogramma dat gepresenteerd wordt door Nick Velderman.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Iedere werkdag tussen 14 en 16 uur het programma Goeiemiddag! Een licht en luchtig muziekprogramma dat gepresenteerd wordt door Nick Velderman.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Iedere werkdag tussen 14 en 16 uur het programma Goeiemiddag! Een licht en luchtig muziekprogramma dat gepresenteerd wordt door Nick Velderman.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2077569156668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">Spitstijd</Title>
+          <Synopsis xml:lang="NL" length="long">Iedere maandag t/m vrijdag live met het laatste nieuws.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Iedere maandag t/m vrijdag live met het laatste nieuws.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Iedere maandag t/m vrijdag live met het laatste nieuws.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078228824668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078228848668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Aftrap</Title>
+          <Synopsis xml:lang="NL" length="long">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078228872668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078229552668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078229568668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Aftrap</Title>
+          <Synopsis xml:lang="NL" length="long">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078229584668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078230265668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078230282668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Aftrap</Title>
+          <Synopsis xml:lang="NL" length="long">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078230299668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078230981668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078230999668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Aftrap</Title>
+          <Synopsis xml:lang="NL" length="long">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078231017668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078231700668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078231719668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Aftrap</Title>
+          <Synopsis xml:lang="NL" length="long">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078231738668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078232422668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078232442668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Aftrap</Title>
+          <Synopsis xml:lang="NL" length="long">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078232462668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078233147668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">NH Nieuws</Title>
+          <Synopsis xml:lang="NL" length="long">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Het laatste nieuws uit Noord-Holland, 24 uur per dag, zeven dagen per week.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="NL">algemeen</Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.nhnieuws.nl/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078233168668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">De Aftrap</Title>
+          <Synopsis xml:lang="NL" length="long">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <Synopsis xml:lang="NL" length="short">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+</Synopsis>
+          <Synopsis xml:lang="NL" length="medium">Prominente gasten uit de voetbalwereld geven hun mening over Ajax, AZ, Volendam en Telstar.
+Met als vaste onderdelen: een potje straat voetgolf met een bekende (oud)voetballer en ons eigen elftal FC De Aftrap.</Synopsis>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://npo/programmagegevens/2078233189668">
+        <BasicDescription>
+          <Title xml:lang="NL" type="main">RegioNed</Title>
+          <IsDubbed>false</IsDubbed>
+          <ProductionLocationList>
+            <ProductionLocation code="NL"/>
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <HD>HD</HD>
+          <TwitterHashTag>#</TwitterHashTag>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable/>
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="NORH" start="2022-02-04T00:00:00+01:00" end="2022-02-04T23:50:00+01:00">
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078210730668"/>
+          <PublishedStartTime>2022-02-04T00:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078210744668"/>
+          <PublishedStartTime>2022-02-04T00:08:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078210758668"/>
+          <PublishedStartTime>2022-02-04T00:18:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078210802668"/>
+          <PublishedStartTime>2022-02-04T00:24:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498030</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078211530668"/>
+          <PublishedStartTime>2022-02-04T00:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078211634668"/>
+          <PublishedStartTime>2022-02-04T00:39:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078211648668"/>
+          <PublishedStartTime>2022-02-04T00:49:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078212307668"/>
+          <PublishedStartTime>2022-02-04T01:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078212321668"/>
+          <PublishedStartTime>2022-02-04T01:08:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078212335668"/>
+          <PublishedStartTime>2022-02-04T01:18:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078212351668"/>
+          <PublishedStartTime>2022-02-04T01:24:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498030</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078213011668"/>
+          <PublishedStartTime>2022-02-04T01:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078213025668"/>
+          <PublishedStartTime>2022-02-04T01:39:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078213039668"/>
+          <PublishedStartTime>2022-02-04T01:49:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078213740668"/>
+          <PublishedStartTime>2022-02-04T02:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078213804668"/>
+          <PublishedStartTime>2022-02-04T02:08:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078213818668"/>
+          <PublishedStartTime>2022-02-04T02:18:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078213835668"/>
+          <PublishedStartTime>2022-02-04T02:24:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498030</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078214497668"/>
+          <PublishedStartTime>2022-02-04T02:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078214511668"/>
+          <PublishedStartTime>2022-02-04T02:39:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078214525668"/>
+          <PublishedStartTime>2022-02-04T02:49:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078215188668"/>
+          <PublishedStartTime>2022-02-04T03:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078215202668"/>
+          <PublishedStartTime>2022-02-04T03:08:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078215216668"/>
+          <PublishedStartTime>2022-02-04T03:18:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078215234668"/>
+          <PublishedStartTime>2022-02-04T03:24:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498030</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078215898668"/>
+          <PublishedStartTime>2022-02-04T03:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078215912668"/>
+          <PublishedStartTime>2022-02-04T03:39:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078215926668"/>
+          <PublishedStartTime>2022-02-04T03:49:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078216591668"/>
+          <PublishedStartTime>2022-02-04T04:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078216605668"/>
+          <PublishedStartTime>2022-02-04T04:08:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078216619668"/>
+          <PublishedStartTime>2022-02-04T04:18:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078216638668"/>
+          <PublishedStartTime>2022-02-04T04:24:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498030</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078217304668"/>
+          <PublishedStartTime>2022-02-04T04:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078217318668"/>
+          <PublishedStartTime>2022-02-04T04:39:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078217332668"/>
+          <PublishedStartTime>2022-02-04T04:49:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078217999668"/>
+          <PublishedStartTime>2022-02-04T05:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078218023668"/>
+          <PublishedStartTime>2022-02-04T05:08:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078218037668"/>
+          <PublishedStartTime>2022-02-04T05:18:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078218057668"/>
+          <PublishedStartTime>2022-02-04T05:24:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498030</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078218725668"/>
+          <PublishedStartTime>2022-02-04T05:30:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078218739668"/>
+          <PublishedStartTime>2022-02-04T05:39:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078218753668"/>
+          <PublishedStartTime>2022-02-04T05:49:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2077567357668"/>
+          <PublishedStartTime>2022-02-04T06:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H59M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM310549</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2077568030668"/>
+          <PublishedStartTime>2022-02-04T07:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H59M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM310549</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2077568694668"/>
+          <PublishedStartTime>2022-02-04T08:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H59M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM310549</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078221375668"/>
+          <PublishedStartTime>2022-02-04T09:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078221389668"/>
+          <PublishedStartTime>2022-02-04T09:09:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078221403668"/>
+          <PublishedStartTime>2022-02-04T09:19:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078222073668"/>
+          <PublishedStartTime>2022-02-04T09:28:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078222087668"/>
+          <PublishedStartTime>2022-02-04T09:37:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078222101668"/>
+          <PublishedStartTime>2022-02-04T09:47:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078222772668"/>
+          <PublishedStartTime>2022-02-04T10:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078222786668"/>
+          <PublishedStartTime>2022-02-04T10:09:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078222800668"/>
+          <PublishedStartTime>2022-02-04T10:19:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078223472668"/>
+          <PublishedStartTime>2022-02-04T10:28:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078223486668"/>
+          <PublishedStartTime>2022-02-04T10:37:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078223500668"/>
+          <PublishedStartTime>2022-02-04T10:47:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078224173668"/>
+          <PublishedStartTime>2022-02-04T11:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078224187668"/>
+          <PublishedStartTime>2022-02-04T11:09:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078224201668"/>
+          <PublishedStartTime>2022-02-04T11:19:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078224875668"/>
+          <PublishedStartTime>2022-02-04T11:28:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078224889668"/>
+          <PublishedStartTime>2022-02-04T11:37:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078224903668"/>
+          <PublishedStartTime>2022-02-04T11:47:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078225578668"/>
+          <PublishedStartTime>2022-02-04T12:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078225592668"/>
+          <PublishedStartTime>2022-02-04T12:09:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078225606668"/>
+          <PublishedStartTime>2022-02-04T12:19:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078226282668"/>
+          <PublishedStartTime>2022-02-04T12:28:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078226296668"/>
+          <PublishedStartTime>2022-02-04T12:37:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078226310668"/>
+          <PublishedStartTime>2022-02-04T12:47:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078226987668"/>
+          <PublishedStartTime>2022-02-04T13:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078227001668"/>
+          <PublishedStartTime>2022-02-04T13:09:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078227015668"/>
+          <PublishedStartTime>2022-02-04T13:19:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078227693668"/>
+          <PublishedStartTime>2022-02-04T13:28:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078227707668"/>
+          <PublishedStartTime>2022-02-04T13:37:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479906</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078227721668"/>
+          <PublishedStartTime>2022-02-04T13:47:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479897</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2077568746668"/>
+          <PublishedStartTime>2022-02-04T14:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H12M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM485795</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2077568799668"/>
+          <PublishedStartTime>2022-02-04T15:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H12M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM485795</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2077569156668"/>
+          <PublishedStartTime>2022-02-04T16:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H12M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM310560</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078228824668"/>
+          <PublishedStartTime>2022-02-04T17:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078228848668"/>
+          <PublishedStartTime>2022-02-04T17:11:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479922</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078228872668"/>
+          <PublishedStartTime>2022-02-04T17:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498031</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078229552668"/>
+          <PublishedStartTime>2022-02-04T18:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078229568668"/>
+          <PublishedStartTime>2022-02-04T18:11:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479922</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078229584668"/>
+          <PublishedStartTime>2022-02-04T18:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498031</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078230265668"/>
+          <PublishedStartTime>2022-02-04T19:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078230282668"/>
+          <PublishedStartTime>2022-02-04T19:11:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479922</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078230299668"/>
+          <PublishedStartTime>2022-02-04T19:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498031</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078230981668"/>
+          <PublishedStartTime>2022-02-04T20:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078230999668"/>
+          <PublishedStartTime>2022-02-04T20:11:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479922</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078231017668"/>
+          <PublishedStartTime>2022-02-04T20:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498031</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078231700668"/>
+          <PublishedStartTime>2022-02-04T21:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078231719668"/>
+          <PublishedStartTime>2022-02-04T21:11:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479922</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078231738668"/>
+          <PublishedStartTime>2022-02-04T21:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498031</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078232422668"/>
+          <PublishedStartTime>2022-02-04T22:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078232442668"/>
+          <PublishedStartTime>2022-02-04T22:11:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479922</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078232462668"/>
+          <PublishedStartTime>2022-02-04T22:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498031</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078233147668"/>
+          <PublishedStartTime>2022-02-04T23:00:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM474832</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078233168668"/>
+          <PublishedStartTime>2022-02-04T23:11:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H35M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM479922</OtherIdentifier>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://npo/programmagegevens/2078233189668"/>
+          <PublishedStartTime>2022-02-04T23:50:00+01:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Repeat value="true"/>
+          <BroadcasterList>
+            <Broadcaster code="NORH"/>
+          </BroadcasterList>
+          <OtherIdentifier type="ProductID">REG_NORH_NHM498031</OtherIdentifier>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable/>
+  </ProgramDescription>
+</TVAMain>

@@ -544,6 +544,19 @@ public class TVATransformerTest {
 
     }
 
+
+    @Test
+    public void MSE_5213() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        String xml = transform("pd/pd/NORH20220204P.xml");
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+
+
+        assertThat(table.findByCrid("crid://npo/programmagegevens/2078210744668").get().getTwitterRefs()).containsExactly(new TwitterRef("#cultureclub"));
+        assertThat(table.findByCrid("crid://npo/programmagegevens/2078210758668").get().getTwitterRefs()).isEmpty();
+
+    }
+
+
     private String bindinc(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE);// TODO API-460
         genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");

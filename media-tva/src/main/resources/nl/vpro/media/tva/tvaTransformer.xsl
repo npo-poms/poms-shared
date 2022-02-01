@@ -788,13 +788,15 @@
     </xsl:for-each>
     <xsl:for-each
         select="tva:BasicDescription/tva:TwitterHashTag">
-      <xsl:element name="twitter">
-        <xsl:attribute name="type">HASHTAG</xsl:attribute>
-        <xsl:if test="not(starts-with(text(), '#'))">
-          <xsl:text>#</xsl:text>
-        </xsl:if>
-        <xsl:value-of select="normalize-space(text())"/>
-      </xsl:element>
+      <xsl:if test="not(text() = '#') and not(text() = '')">
+        <xsl:element name="twitter">
+          <xsl:attribute name="type">HASHTAG</xsl:attribute>
+          <xsl:if test="not(starts-with(text(), '#'))">
+            <xsl:text>#</xsl:text>
+          </xsl:if>
+          <xsl:value-of select="normalize-space(text())"/>
+        </xsl:element>
+      </xsl:if>
     </xsl:for-each>
 
     <!-- <teletext> -->
