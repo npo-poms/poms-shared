@@ -41,6 +41,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public abstract class AbstractPublishableObject<T extends AbstractPublishableObject<T>>
     extends DomainObject implements Publishable<T> {
 
+    private static final long serialVersionUID = -8895271310506491326L;
     @Column(nullable = false, name="creationDate")
     protected Instant creationInstant = Changeables.instant();
 
