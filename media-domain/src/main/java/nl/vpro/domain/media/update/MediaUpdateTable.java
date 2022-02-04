@@ -49,7 +49,11 @@ public class MediaUpdateTable {
     public void add(MediaUpdateTable table) {
         groupTable.addAll(table.getGroupTable());
         programTable.addAll(table.getProgramTable());
-        schedule.add(table.getSchedule());
+        if (schedule != null) {
+            schedule.add(table.getSchedule());
+        } else {
+            schedule = table.getSchedule();
+        }
     }
 
     public Optional<GroupUpdate> getGroup(String mid) {
