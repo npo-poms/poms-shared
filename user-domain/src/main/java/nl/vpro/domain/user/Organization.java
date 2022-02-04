@@ -17,7 +17,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
-import nl.vpro.domain.*;
+import nl.vpro.domain.Identifiable;
+import nl.vpro.domain.Xmlns;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.validation.PrePersistValidatorGroup;
 
 @MappedSuperclass

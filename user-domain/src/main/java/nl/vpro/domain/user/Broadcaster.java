@@ -6,16 +6,20 @@ package nl.vpro.domain.user;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import java.time.Instant;
+import java.time.LocalDate;
+
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Range;
+
 import nl.vpro.domain.Xmlns;
+import nl.vpro.util.Ranges;
 
 @Entity
 @XmlType(name = "broadcasterType", namespace = Xmlns.MEDIA_NAMESPACE)
@@ -49,6 +53,29 @@ public class Broadcaster extends Organization {
     @XmlTransient
     protected String domain;
 
+    @Column
+    @Getter
+    @Setter
+    @XmlTransient
+    protected LocalDate start;
+
+
+    @Column
+    @Getter
+    @Setter
+    @XmlTransient
+    protected LocalDate stop;
+
+    @Column
+    @Getter
+    @XmlTransient
+    private Instant lastModified;
+
+    public Range<LocalDate> asRange() {
+        return Ranges.closedOpen(start, stop);
+    }
+
+
     public static Broadcaster of(String id) {
         return new Broadcaster(id);
     }
@@ -61,7 +88,7 @@ public class Broadcaster extends Organization {
         return new Broadcaster(null, null, null, id, null);
     }
 
-    protected Broadcaster() {
+    public Broadcaster() {
     }
 
     public Broadcaster(String id) {

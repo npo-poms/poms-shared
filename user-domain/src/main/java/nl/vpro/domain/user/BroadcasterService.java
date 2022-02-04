@@ -4,11 +4,17 @@
  */
 package nl.vpro.domain.user;
 
+import java.time.Instant;
+import java.util.Comparator;
 import java.util.Optional;
 
 import nl.vpro.domain.NotFoundException;
 
 public interface BroadcasterService extends OrganizationService<Broadcaster> {
+
+    default Instant getLastModification() {
+        return findAll().stream().map(Broadcaster::getLastModified).max(Comparator.naturalOrder()).orElse(Instant.now());
+    }
 
     default Broadcaster findForMisId(String id) throws NotFoundException {
         for (Broadcaster b : findAll()) {
