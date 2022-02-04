@@ -40,12 +40,12 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Build and deploy with Maven
+      - name: Build and deploy with Maven (Linux)
         run:  mvn -B -P"deploy,ossrh" -U -fae deploy
         if: runner.os == 'Linux'
         continue-on-error: true
-      - name: Build and deploy with Maven
-        run: mvn -B  -U -fae deploy
+      - name: Build with Maven (Other os)
+        run: mvn -B  -U -fae package
         if: runner.os != 'Linux'
         continue-on-error: true
       - name: Test Report
