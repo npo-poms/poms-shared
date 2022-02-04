@@ -78,7 +78,6 @@ public class Broadcaster extends Organization {
      * @param whatsOnId   what's on broadcaster name
      * @param neboId      nebo broadcaster name
      */
-    @lombok.Builder
     public Broadcaster(
         String id,
         String displayName,
@@ -91,8 +90,27 @@ public class Broadcaster extends Organization {
         this.misId = misId;
     }
 
+
+    @lombok.Builder
+    private Broadcaster(
+        String id,
+        String displayName,
+        String whatsOnId,
+        String neboId,
+        String misId,
+        String domain,
+        LocalDate start,
+        LocalDate stop) {
+        this(id, displayName,whatsOnId, neboId, misId);
+        this.domain = domain;
+        this.start = start;
+        this.stop = stop;
+    }
+
+
     public Broadcaster(Broadcaster b) {
-        this(b.id, b.displayName, b.whatsOnId, b.neboId, b.misId);
+        this(b.id, b.displayName, b.whatsOnId, b.neboId, b.misId, b.domain, b.start, b.stop);
+
     }
 
     @Override
