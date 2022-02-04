@@ -124,4 +124,17 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
         return schedule;
     }
 
+    public void add(ScheduleUpdate schedule) {
+        if (schedule.getChannel() != channel) {
+            throw new IllegalArgumentException();
+        }
+        if (schedule.start.isBefore(start)) {
+            this.start = schedule.start;
+        }
+        if (schedule.stop.isAfter(stop)) {
+            this.stop = schedule.stop;
+        }
+        this.scheduleEvents.addAll(schedule.scheduleEvents);
+    }
+
 }

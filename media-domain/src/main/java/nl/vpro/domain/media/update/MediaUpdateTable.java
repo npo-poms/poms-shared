@@ -46,6 +46,12 @@ public class MediaUpdateTable {
         programTable.addAll(values);
     }
 
+    public void add(MediaUpdateTable table) {
+        groupTable.addAll(table.getGroupTable());
+        programTable.addAll(table.getProgramTable());
+        schedule.add(table.getSchedule());
+    }
+
     public Optional<GroupUpdate> getGroup(String mid) {
         return getGroupTable().stream().filter((g) -> mid.equals(g.getMid())).findFirst();
     }
