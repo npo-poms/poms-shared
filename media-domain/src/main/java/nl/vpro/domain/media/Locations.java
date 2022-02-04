@@ -35,7 +35,8 @@ public class Locations {
     public static Program realize(
         @NonNull Program program,
         @NonNull Platform platform,
-        @NonNull String pubOptie, OwnerType owner,
+        @NonNull String pubOptie,
+        @NonNull OwnerType owner,
         @NonNull Set<OwnerType> replaces) {
         Prediction prediction = program.getPrediction(platform);
         StreamingStatus streamingStatus = program.getStreamingPlatformStatus();
@@ -50,7 +51,11 @@ public class Locations {
         return addLocation(program, platform, encryption, pubOptie, owner, replaces);
     }
 
-    public static Locations.RealizeResult realizeStreamingPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate, Instant now) {
+    public static Locations.RealizeResult realizeStreamingPlatformIfNeeded(
+        @NonNull MediaObject mediaObject,
+        @NonNull Platform platform,
+        @NonNull Predicate<Location> locationPredicate,
+        @NonNull Instant now) {
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
 
         if (platform == Platform.INTERNETVOD) {
@@ -103,10 +108,10 @@ public class Locations {
             encryption = existingPredictionForPlatform.getEncryption();
             if (encryption == null) {
                 encryption = StreamingStatus.preferredEncryption(streamingPlatformStatus);
-                log.info("Existing prediction {} has no encyption, falling back to {} ", existingPredictionForPlatform, encryption);
+                log.info("Existing prediction {} has no encryption, falling back to {} ", existingPredictionForPlatform, encryption);
             }
         } else {
-            log.info("No prediction found for platform {} in {} ", platform, mediaObject);
+            log.debug("No prediction found for platform {} in {} ", platform, mediaObject);
             return Locations.RealizeResult.builder()
                 .needed(false)
                 .program(mediaObject)
@@ -173,19 +178,14 @@ public class Locations {
             // no, just check platform then.
             authorityLocation = getAuthorityLocationsForPlatform(mediaObject, platform).stream()
                 .filter(l -> getEncryptionFromProgramUrl(l) == encryption)
-                .filter(locationPredicate::test)
+                .filter(locationPredicate)
                 .findFirst().
                 orElse(null);
         }
         if (authorityLocation == null) {
             authorityLocation = createLocation(mediaObject, existingPredictionForPlatform, locationUrl);
-            if (authorityLocation == null) {
-                log.debug("Not created new streaming platform location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
-                return null;
-            } else {
-                log.info("Creating new streaming platform location {} {} for mediaObject {} because {}", locationUrl, platform, mediaObject.getMid(), reason);
-                Embargos.copy(existingPredictionForPlatform, authorityLocation);
-            }
+            log.info("Creating new streaming platform location {} {} for mediaObject {} because {}", locationUrl, platform, mediaObject.getMid(), reason);
+            Embargos.copy(existingPredictionForPlatform, authorityLocation);
         } else {
             if (!locationUrl.equals(authorityLocation.getProgramUrl())) {
                 log.info("Updating location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
@@ -203,6 +203,7 @@ public class Locations {
 
 
 
+    @NonNull
     private static Location createLocation(final MediaObject mediaObject, final Prediction prediction, final String locationUrl){
         Location platformAuthorityLocation = new Location(locationUrl, OwnerType.AUTHORITY, prediction.getPlatform());
         platformAuthorityLocation.setPlatform(prediction.getPlatform());
