@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
+@SuppressWarnings("ConstantConditions")
 public class PromoEventTest {
 
     @Test
@@ -56,7 +57,7 @@ public class PromoEventTest {
         String output = writer.toString();
 
         Diff diff = DiffBuilder.compare(input).withTest(output).ignoreWhitespace().build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + output);
+        assertFalse(diff.hasDifferences(), diff + " " + output);
     }
 
     @Test
