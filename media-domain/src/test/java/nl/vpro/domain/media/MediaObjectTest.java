@@ -586,7 +586,7 @@ public class MediaObjectTest {
         log.info("Invalid countries: {}", invalid.stream().map(c -> c == null ? "null" : (c.getCode() + ":" + c.getName(Locales.NETHERLANDISH))).collect(Collectors.joining("\n")));
         assertThat(invalid).hasSize(25);
         log.info("Valid countries: {}", valid.stream().map(c -> c.getCode() + ":" + c.getName(Locales.NETHERLANDISH)).collect(Collectors.joining("\n")));
-        assertThat(valid).hasSize(285);
+        assertThat(valid).hasSize(287);
 
     }
 
