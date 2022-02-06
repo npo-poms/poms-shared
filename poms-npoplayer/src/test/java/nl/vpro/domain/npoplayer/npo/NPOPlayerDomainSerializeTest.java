@@ -1,62 +1,64 @@
 package nl.vpro.domain.npoplayer.npo;
 
+import org.junit.jupiter.api.Test;
+
 import nl.vpro.domain.npoplayer.*;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import org.junit.jupiter.api.Test;
 
 /**
  * @author r.jansen
  */
 public class NPOPlayerDomainSerializeTest {
+    @SuppressWarnings("deprecation")
     @Test
-       public void testJSON() {
-           NPOPlayerApiRequest request = NPOPlayerApiRequest.builder()
-               .id("eenid")
-               .stylesheet("https://www.vpro.nl/flitsend.css")
-               .startAt(20)
-               .endAt(60)
-               .noAds(true)
-               .autoplay(true)
-               .subtitleLanguage("nl")
-               .color("00ff00")
-               .comscore(NPOPlayerComscore.builder().npoIngelogd("nee").build())
-               .styling(NPOPlayerStyling.builder().subtitles(NPOPlayerSubtitlesStyling.builder().size("10px").build()).build())
-               .sterReferralUrl("aap")
-               .sterSiteId("noot")
-               .sterIdentifier("mies")
-               .hasAdConsent(true)
-               .pageUrl("http://bla")
-               .smarttag(NPOPlayerAtinternet.builder().siteId("wereld-draait-doorrr").build())
-               .build();
+    public void testJSON() {
+        NPOPlayerApiRequest request = NPOPlayerApiRequest.builder()
+            .id("eenid")
+            .stylesheet("https://www.vpro.nl/flitsend.css")
+            .startAt(20)
+            .endAt(60)
+            .noAds(true)
+            .autoplay(true)
+            .subtitleLanguage("nl")
+            .color("00ff00")
+            .comscore(NPOPlayerComscore.builder().npoIngelogd("nee").build())
+            .styling(NPOPlayerStyling.builder().subtitles(NPOPlayerSubtitlesStyling.builder().size("10px").build()).build())
+            .sterReferralUrl("aap")
+            .sterSiteId("noot")
+            .sterIdentifier("mies")
+            .hasAdConsent(true)
+            .pageUrl("http://bla")
+            .smarttag(NPOPlayerAtinternet.builder().siteId("wereld-draait-doorrr").build())
+            .build();
 
-           Jackson2TestUtil.roundTripAndSimilarAndEquals(request, "{\n" +
-               "  \"id\" : \"eenid\",\n" +
-               "  \"stylesheet\" : \"https://www.vpro.nl/flitsend.css\",\n" +
-               "  \"autoplay\" : true,\n" +
-               "  \"startAt\" : 20,\n" +
-               "  \"endAt\" : 60,\n" +
-               "  \"noAds\" : true,\n" +
-               "  \"subtitleLanguage\" : \"nl\",\n" +
-               "  \"styling\" : {\n" +
-               "    \"subtitles\" : {\n" +
-               "      \"size\" : \"10px\"\n" +
-               "    }\n" +
-               "  },\n" +
-               "  \"color\" : \"00ff00\",\n" +
-               "  \"comscore\" : {\n" +
-               "    \"npoIngelogd\" : \"nee\"\n" +
-               "  },\n" +
-               "  \"sterReferralUrl\" : \"aap\",\n" +
-               "  \"sterSiteId\" : \"noot\",\n" +
-               "  \"sterIdentifier\" : \"mies\",\n" +
-               "  \"hasAdConsent\" : true,\n" +
-               "  \"pageUrl\" : \"http://bla\",\n" +
-               "  \"smarttag\" : {\n" +
-               "    \"siteId\" : \"wereld-draait-doorrr\"\n" +
-               "  }\n" +
-               "}\n"
-           );
-       }
+        Jackson2TestUtil.roundTripAndSimilarAndEquals(request, "{\n" +
+            "  \"id\" : \"eenid\",\n" +
+            "  \"stylesheet\" : \"https://www.vpro.nl/flitsend.css\",\n" +
+            "  \"autoplay\" : true,\n" +
+            "  \"startAt\" : 20,\n" +
+            "  \"endAt\" : 60,\n" +
+            "  \"noAds\" : true,\n" +
+            "  \"subtitleLanguage\" : \"nl\",\n" +
+            "  \"styling\" : {\n" +
+            "    \"subtitles\" : {\n" +
+            "      \"size\" : \"10px\"\n" +
+            "    }\n" +
+            "  },\n" +
+            "  \"color\" : \"00ff00\",\n" +
+            "  \"comscore\" : {\n" +
+            "    \"npoIngelogd\" : \"nee\"\n" +
+            "  },\n" +
+            "  \"sterReferralUrl\" : \"aap\",\n" +
+            "  \"sterSiteId\" : \"noot\",\n" +
+            "  \"sterIdentifier\" : \"mies\",\n" +
+            "  \"hasAdConsent\" : true,\n" +
+            "  \"pageUrl\" : \"http://bla\",\n" +
+            "  \"smarttag\" : {\n" +
+            "    \"siteId\" : \"wereld-draait-doorrr\"\n" +
+            "  }\n" +
+            "}\n"
+        );
+    }
 
 
     @Test
