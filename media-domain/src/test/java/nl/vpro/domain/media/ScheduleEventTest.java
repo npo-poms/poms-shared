@@ -39,6 +39,28 @@ public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
     }
 
     @Test
+    public void testXmlDuration() {
+
+        ScheduleEvent e = new ScheduleEvent();
+        e.setDuration(Duration.ofMinutes(10));
+
+        JAXBTestUtil.roundTripAndSimilar(e, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><local:scheduleEvent xmlns:local=\"uri:local\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "  <duration>P0DT0H10M0.000S</duration>\n" +
+            "</local:scheduleEvent>");
+    }
+
+    @Test
+    public void testXmlDurationVeryLong() {
+
+        ScheduleEvent e = new ScheduleEvent();
+        e.setDuration(Duration.ofDays(800));
+
+        JAXBTestUtil.roundTripAndSimilar(e, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><local:scheduleEvent xmlns:local=\"uri:local\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "  <duration>P2Y2M10DT0H0M0.000S</duration>\n" +
+            "</local:scheduleEvent>");
+    }
+
+    @Test
     public void testJson() {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
