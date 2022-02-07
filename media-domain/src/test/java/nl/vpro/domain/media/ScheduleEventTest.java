@@ -77,6 +77,22 @@ public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
     }
 
     @Test
+    public void testJsonVeryLong() {
+        ScheduleEvent e = ScheduleEvent.builder()
+            .localStart(of(2017, 8, 28, 15, 51))
+            .channel(Channel.NED1)
+            .duration(Duration.ofDays(800))
+            .build();
+
+        Jackson2TestUtil.roundTripAndSimilar(e, "{\n" +
+            "  \"channel\" : \"NED1\",\n" +
+            "  \"start\" : 1503928260000,\n" +
+            "  \"guideDay\" : 1503871200000\n," +
+            "  \"duration\" : 69120000000\n" +
+            "}");
+    }
+
+    @Test
     public void testJsonPublisher() {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
