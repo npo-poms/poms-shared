@@ -13,8 +13,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Range;
 
-import nl.vpro.domain.Displayable;
 import nl.vpro.domain.XmlValued;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 import static nl.vpro.domain.media.AVType.AUDIO;
