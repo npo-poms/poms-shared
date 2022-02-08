@@ -1,7 +1,6 @@
 package nl.vpro.domain.support;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.ToString;
 
 import java.io.IOException;
@@ -9,17 +8,12 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,8 +23,8 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Displayable;
 import nl.vpro.domain.Xmlns;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.validation.LicenseId;
 
 /**
@@ -138,7 +132,7 @@ public class License implements Displayable, Serializable { // Not an enum, beca
     }
 
 
-    License(String displayName, String url) {
+    License(@NonNull String displayName, String url) {
         this.displayName = displayName;
         this.url = url == null ? null : URI.create(url);
     }
