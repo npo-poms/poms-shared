@@ -7,7 +7,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.StringUtils;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
+
 
 /**
  * @author Michiel Meeuwissen

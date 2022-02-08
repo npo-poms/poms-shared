@@ -4,11 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
+
 
 /**
  * @author Michiel Meeuwissen
@@ -18,6 +17,7 @@ import nl.vpro.domain.Displayable;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Lifestyle implements Serializable, Displayable {
 
+    private static final long serialVersionUID = 8981980609550119820L;
 
     @XmlValue
     @Column(name = "primaryLifestyle")

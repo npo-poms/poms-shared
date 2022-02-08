@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlValue;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
+
 
 @Entity
 @SuppressWarnings("serial")

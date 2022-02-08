@@ -8,8 +8,8 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.Displayable;
 import nl.vpro.domain.media.*;
+import nl.vpro.i18n.Displayable;
 
 /**
  * @author Michiel Meeuwissen

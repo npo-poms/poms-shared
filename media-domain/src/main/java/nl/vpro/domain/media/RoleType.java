@@ -6,9 +6,7 @@ import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlEnum;
 
-import nl.vpro.domain.Displayable;
-import nl.vpro.i18n.Locales;
-import nl.vpro.i18n.LocalizedString;
+import nl.vpro.i18n.*;
 
 @XmlEnum
 public enum RoleType  implements Displayable {

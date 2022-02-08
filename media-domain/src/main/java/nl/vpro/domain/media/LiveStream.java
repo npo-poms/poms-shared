@@ -6,7 +6,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.util.URLResource;
 
 /**

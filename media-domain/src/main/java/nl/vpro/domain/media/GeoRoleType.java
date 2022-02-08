@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlEnum;
 
 import org.apache.commons.lang3.StringUtils;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
 
 
 /**

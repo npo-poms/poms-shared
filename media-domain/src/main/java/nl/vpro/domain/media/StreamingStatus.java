@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.i18n.Dutch;
 
 import static nl.vpro.domain.Changeables.instant;

@@ -14,7 +14,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
+
 
 /**
  * This class provides a combined view on all program and group types and their

@@ -1,13 +1,12 @@
 package nl.vpro.domain.media.support;
 
-import nl.vpro.domain.Xmlns;
+import java.util.*;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+
+import nl.vpro.domain.Xmlns;
+import nl.vpro.i18n.Displayable;
 
 
 /**
@@ -29,7 +28,7 @@ import java.util.List;
  */
 @XmlEnum
 @XmlType(name = "ownerTypeEnum", namespace = Xmlns.SHARED_NAMESPACE)
-public enum OwnerType implements nl.vpro.domain.Displayable {
+public enum OwnerType implements Displayable {
 
     /**
      * Represents data coming from a user or system working for a broadcaster that is allowed

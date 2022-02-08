@@ -11,7 +11,8 @@ import javax.xml.bind.annotation.XmlEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
+
 
 /**
  * The region as used in {@link GeoRestriction}. The order wants to be from more to less restrictive.

@@ -17,9 +17,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.Displayable;
 import nl.vpro.domain.classification.*;
 import nl.vpro.domain.classification.bind.TermWrapper;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.validation.GenreValidation;
 
 /**
