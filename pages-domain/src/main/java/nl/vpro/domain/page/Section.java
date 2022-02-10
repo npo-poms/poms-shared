@@ -1,21 +1,21 @@
 package nl.vpro.domain.page;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.validation.PathSegment;
 
 /**
@@ -30,11 +30,13 @@ import nl.vpro.validation.PathSegment;
 @Builder
 public class Section implements Displayable, Serializable {
 
-    @NotNull
+    private static final long serialVersionUID = 669523707422621642L;
+
+    @MonotonicNonNull
     @PathSegment
     private String path;
 
-    @NotNull
+    @MonotonicNonNull
     private String displayName;
 
     private Portal portal;
@@ -42,7 +44,7 @@ public class Section implements Displayable, Serializable {
     public Section() {
     }
 
-    public Section(String path, String displayName) {
+    public Section(@NonNull String path, @NonNull String displayName) {
         this.displayName = displayName;
         setPath(path);
     }
