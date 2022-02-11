@@ -42,6 +42,8 @@ import nl.vpro.validation.NoHtml;
 })
 public class Person extends Credits implements PersonInterface {
 
+    private static final long serialVersionUID = 6033483875674065456L;
+
     public static Person copy(Person source) {
         return copy(source, source.mediaObject);
     }
@@ -237,16 +239,24 @@ public class Person extends Credits implements PersonInterface {
 
         Person person = (Person)o;
 
-        if(familyName != null ? !familyName.equals(person.familyName) : person.familyName != null) {
-            return false;
-        }
-        if(givenName != null ? !givenName.equals(person.givenName) : person.givenName != null) {
-            return false;
+        boolean considerGtaa = getGtaaUri() != null && person.getGtaaUri() != null;
+
+        if (considerGtaa) {
+            if(! Objects.equals(familyName, person.getFamilyName())) {
+                return false;
+            }
+            if(! Objects.equals(givenName, person.getGivenName())) {
+                return false;
+            }
         }
         if(role != person.role) {
             return false;
         }
-        return Objects.equals(getGtaaUri(), person.getGtaaUri());
+        if (considerGtaa) {
+            return Objects.equals(getGtaaUri(), person.getGtaaUri());
+        }
+
+        return true;
     }
 
     @Override
@@ -255,8 +265,6 @@ public class Person extends Credits implements PersonInterface {
         result = 31 * result + (givenName != null ? givenName.hashCode() : 0);
         result = 31 * result + (familyName != null ? familyName.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
-        String gtaaUri = getGtaaUri();
-        result = 31 * result + (gtaaUri != null ? gtaaUri.hashCode() : 0);
         return result;
     }
 
