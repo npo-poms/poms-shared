@@ -64,11 +64,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         sshj = new NEPSSHJDownloadServiceImpl(ftpHost, username, password, hostkey);
         CommandExecutor scptry = null;
         try {
-            File tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
-            if (!tempFile.exists()) {
-                knownHosts.remove(hostkey);
-                tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
-            }
+
 
             final CommandExecutorImpl.Builder builder = CommandExecutorImpl.builder()
                 .executablesPaths(sshpassExecutables)
@@ -78,7 +74,10 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 .commonArg(
                     "-p", password,
                     scpcommand.getAbsolutePath(),
-                    "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile);
+                    "-o", "StrictHostKeyChecking=yes",
+                    "-o",
+                    userKnownHostsFile(hostkey, ftpHost)
+                );
             if (debugSsh) {
                 builder.commonArg("-v");
             }
@@ -90,6 +89,20 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         }
         scp = scptry;
     }
+
+
+    Supplier<String> userKnownHostsFile(String hostkey, String ftpHost) {
+        return () -> {
+            File tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
+            if (!tempFile.exists()) {
+                log.warn("{} Not existing (any more?). Creating again.", tempFile);
+                knownHosts.remove(hostkey);
+                tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
+            }
+            return "UserKnownHostsFile=" + tempFile;
+        };
+    }
+
 
     protected NEPScpDownloadServiceImpl(Properties properties) {
         this(
