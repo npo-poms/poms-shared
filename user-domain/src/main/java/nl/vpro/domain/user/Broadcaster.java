@@ -26,6 +26,8 @@ import nl.vpro.util.Ranges;
 @Cacheable
 public class Broadcaster extends Organization {
 
+    private static final long serialVersionUID = 4814193296511306394L;
+
     @Column(unique = true)
     @Size.List({
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
@@ -72,7 +74,7 @@ public class Broadcaster extends Organization {
     private Instant lastModified;
 
     public Range<LocalDate> asRange() {
-        return Ranges.closedOpen(start, stop);
+        return Ranges.closedClosed(start, stop);
     }
 
 
