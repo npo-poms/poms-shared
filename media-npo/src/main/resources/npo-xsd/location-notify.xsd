@@ -11,7 +11,7 @@
     <xs:documentation>
       <x:p>The is the XML which is shipped by NEP to notify about the availability of on demand streams.</x:p>
       <x:p>This does not include information about platforms. The streaming platform does not know this concept.</x:p>
-      <x:p>POMS will know which platforms are managed by NEP and arrange the availability of the 'locations' accordingly.<x:p>
+      <x:p>POMS will know which platforms are managed by NEP and arrange the availability of the 'locations' accordingly.</x:p>
       <x:p>Created to facilitate NEP, which were requested to ship XML's to POMs. It was unclear how the XML's should look like, so we came up with this.</x:p>
       <x:p>Currently, these are dropped in the NEPDropBox. They will be posted to poms.omroep.nl/import/nep</x:p>
     </xs:documentation>
