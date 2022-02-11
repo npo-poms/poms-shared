@@ -261,9 +261,7 @@ public class Person extends Credits implements PersonInterface {
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (givenName != null ? givenName.hashCode() : 0);
-        result = 31 * result + (familyName != null ? familyName.hashCode() : 0);
+        int result = id == null ? 1 : id.hashCode();
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }

@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
+
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -7,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.jqwik.BasicObjectTest;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
@@ -16,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.8
  */
-public class PersonTest {
+public class PersonTest implements BasicObjectTest<Person> {
 
 
     @Test
@@ -63,4 +67,20 @@ public class PersonTest {
 
     }
 
+    @Override
+    public Arbitrary<? extends Person> datapoints() {
+        Person pietjePuk = new Person("Pietje", "Puk", RoleType.ACTOR);
+        pietjePuk.setGtaaInfo(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
+        Person pietjePuk2 = new Person("Pietje", "Puk", RoleType.DIRECTOR);
+        pietjePuk2.setGtaaInfo(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
+        Person pietjePuk3 = new Person("Pietje", "Puk", RoleType.DIRECTOR);
+
+        return Arbitraries.of(
+                pietjePuk,
+                pietjePuk2,
+                pietjePuk3
+            ).injectNull(0.1)
+            .injectDuplicates(0.1);
+
+    }
 }
