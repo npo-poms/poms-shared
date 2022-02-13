@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Comparator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -191,5 +192,13 @@ public class Broadcaster extends Organization {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    public static Comparator<Broadcaster> existingFirst(LocalDate date) {
+        return Comparator.nullsLast(
+            Comparator.<Broadcaster, Boolean>comparing(b -> b.asRange().contains(date)).reversed()
+            .thenComparing(b -> b.getDisplayName())
+        );
+
     }
 }
