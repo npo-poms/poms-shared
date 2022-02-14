@@ -4,16 +4,24 @@
   elementFormDefault="qualified"
   targetNamespace="urn:vpro:media:notify:2017"
   xmlns="urn:vpro:media:notify:2017"
-  xmlns:x="http://www.w3.org/1999/xhtml"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  xmlns:d="http://docbook.org/ns/docbook"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://docbook.org/ns/docbook https://docbook.org/xml/5.0/xsd/docbook.xsd">
 
   <xs:annotation>
     <xs:documentation>
-      <x:p>The is the XML which is shipped by NEP to notify about the availability of on demand streams.</x:p>
-      <x:p>This does not include information about platforms. The streaming platform does not know this concept.</x:p>
-      <x:p>POMS will know which platforms are managed by NEP and arrange the availability of the 'locations' accordingly.</x:p>
-      <x:p>Created to facilitate NEP, which were requested to ship XML's to POMs. It was unclear how the XML's should look like, so we came up with this.</x:p>
-      <x:p>Currently, these are dropped in the NEPDropBox. They will be posted to poms.omroep.nl/import/nep</x:p>
+      <d:section>
+        <d:title>NEP notification for streams</d:title>
+        <d:para>The is the XML which is shipped by NEP to notify about the availability of on demand streams.</d:para>
+        <d:para>This does not include information about platforms. The streaming platform does not know this concept.</d:para>
+        <d:para>POMS will know which platforms are managed by NEP and arrange the availability of the 'locations'
+          accordingly.
+        </d:para>
+        <d:para>Created to facilitate NEP, which were requested to ship XML's to POMs. It was unclear how the XML's should
+          look like, so we came up with this.
+        </d:para>
+        <d:para>Currently, these are dropped in the NEPDropBox. They will be posted to poms.omroep.nl/import/nep</d:para>
+      </d:section> 
     </xs:documentation>
   </xs:annotation>
 
@@ -51,7 +59,9 @@
       </xs:attribute>
       <xs:attribute name="offline" type="xs:dateTime">
         <xs:annotation>
-          <xs:documentation>A timestamp indicating when URLs associated with stream should go offline again. New in POMS 5.9</xs:documentation>
+          <xs:documentation>A timestamp indicating when URLs associated with stream should go offline again. New in POMS
+            5.9
+          </xs:documentation>
         </xs:annotation>
       </xs:attribute>
     </xs:complexType>

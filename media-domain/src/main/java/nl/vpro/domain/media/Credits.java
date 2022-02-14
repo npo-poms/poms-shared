@@ -39,6 +39,8 @@ import nl.vpro.domain.media.gtaa.GTAAManaged;
 @JsonDeserialize(using = CreditsDeserializer.class)
 public abstract class Credits extends DomainObject implements Child<MediaObject>, GTAAManaged {
 
+    private static final long serialVersionUID = 576943675942583696L;
+
     @Column(nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
     @XmlAttribute(required = true)

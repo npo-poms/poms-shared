@@ -17,6 +17,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
  * @since 5.8
  */
 @Getter
+@Setter
 @EqualsAndHashCode
 @Slf4j
 public class LetterBoxRegistration {
@@ -32,6 +33,11 @@ public class LetterBoxRegistration {
 
     private final Duration asyncAfter;
 
+    @With
+    private final boolean acceptAll;
+
+    private String errors;
+
 
     @lombok.Builder
     @JsonCreator()
@@ -41,13 +47,18 @@ public class LetterBoxRegistration {
         @JsonProperty("principalId") String principalId,
         @JsonProperty("description") String description,
         @JsonProperty("implementingClass") String implementingClass,
-        @JsonProperty("asyncAfter") Duration asyncAfter) {
+        @JsonProperty("asyncAfter") Duration asyncAfter,
+        @JsonProperty("acceptAll") boolean acceptAll,
+        @JsonProperty("errors") String errors
+    ) {
         this.key = key;
         this.endPointId = endPointId;
         this.principalId = principalId;
         this.description = description;
         this.implementingClass = implementingClass;
         this.asyncAfter = asyncAfter == null ? Duration.ofSeconds(20) : asyncAfter;
+        this.acceptAll = acceptAll;
+        this.errors = errors;
     }
 
     @Override
