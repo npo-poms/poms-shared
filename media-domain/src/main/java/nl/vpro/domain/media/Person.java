@@ -239,21 +239,21 @@ public class Person extends Credits implements PersonInterface {
 
         Person person = (Person)o;
 
+        if (! Objects.equals(role, person.role)) {
+            return false;
+        }
+
         boolean considerGtaa = getGtaaUri() != null && person.getGtaaUri() != null;
 
-        if (! considerGtaa) {
+        if (considerGtaa) {
+            return Objects.equals(getGtaaUri(), person.getGtaaUri());
+        } else {
             if(! Objects.equals(familyName, person.getFamilyName())) {
                 return false;
             }
             if(! Objects.equals(givenName, person.getGivenName())) {
                 return false;
             }
-        }
-        if (! Objects.equals(role, person.role)) {
-            return false;
-        }
-        if (considerGtaa) {
-            return Objects.equals(getGtaaUri(), person.getGtaaUri());
         }
 
         return true;
