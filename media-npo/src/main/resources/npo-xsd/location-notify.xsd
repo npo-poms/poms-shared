@@ -21,7 +21,7 @@
           look like, so we came up with this.
         </d:para>
         <d:para>Currently, these are dropped in the NEPDropBox. They will be posted to poms.omroep.nl/import/nep</d:para>
-      </d:section>
+      </d:section> 
     </xs:documentation>
   </xs:annotation>
 
