@@ -241,7 +241,7 @@ public class Person extends Credits implements PersonInterface {
 
         boolean considerGtaa = getGtaaUri() != null && person.getGtaaUri() != null;
 
-        if (considerGtaa) {
+        if (! considerGtaa) {
             if(! Objects.equals(familyName, person.getFamilyName())) {
                 return false;
             }
