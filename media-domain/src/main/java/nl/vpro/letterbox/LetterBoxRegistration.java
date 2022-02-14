@@ -36,6 +36,8 @@ public class LetterBoxRegistration {
     @With
     private final boolean acceptAll;
 
+    private String errors;
+
 
     @lombok.Builder
     @JsonCreator()
@@ -46,7 +48,9 @@ public class LetterBoxRegistration {
         @JsonProperty("description") String description,
         @JsonProperty("implementingClass") String implementingClass,
         @JsonProperty("asyncAfter") Duration asyncAfter,
-        @JsonProperty("acceptAll") boolean acceptAll) {
+        @JsonProperty("acceptAll") boolean acceptAll,
+        @JsonProperty("errors") String errors
+    ) {
         this.key = key;
         this.endPointId = endPointId;
         this.principalId = principalId;
@@ -54,6 +58,7 @@ public class LetterBoxRegistration {
         this.implementingClass = implementingClass;
         this.asyncAfter = asyncAfter == null ? Duration.ofSeconds(20) : asyncAfter;
         this.acceptAll = acceptAll;
+        this.errors = errors;
     }
 
     @Override
