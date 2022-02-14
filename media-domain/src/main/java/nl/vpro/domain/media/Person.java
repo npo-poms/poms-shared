@@ -249,7 +249,7 @@ public class Person extends Credits implements PersonInterface {
                 return false;
             }
         }
-        if(role != person.role) {
+        if (! Objects.equals(role, person.role)) {
             return false;
         }
         if (considerGtaa) {
