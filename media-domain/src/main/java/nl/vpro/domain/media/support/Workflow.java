@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 import static java.util.Arrays.asList;

@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
 
 /**
  * @author Michiel Meeuwissen

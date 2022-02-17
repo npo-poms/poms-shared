@@ -22,7 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.*;
+import nl.vpro.domain.Child;
+import nl.vpro.domain.MutableEmbargo;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 

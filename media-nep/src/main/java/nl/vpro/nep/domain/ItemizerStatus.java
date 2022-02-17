@@ -2,7 +2,8 @@ package nl.vpro.nep.domain;
 
 import lombok.Getter;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
+
 
 /**
  * @author Michiel Meeuwissen

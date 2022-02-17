@@ -6,7 +6,7 @@ package nl.vpro.domain.gtaa;
 
 import lombok.Getter;
 
-import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Displayable;
 
 /**
  * @author Roelof Jan Koekoek

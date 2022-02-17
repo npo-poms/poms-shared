@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.Displayable;
 import nl.vpro.domain.page.util.Urls;
+import nl.vpro.i18n.Displayable;
 import nl.vpro.validation.URI;
 
 /**
@@ -29,6 +29,7 @@ import nl.vpro.validation.URI;
 )
 public class Portal implements Displayable, Serializable {
 
+    private static final long serialVersionUID = 8705886819893517841L;
     @NotNull
     @URI
     private String url;
