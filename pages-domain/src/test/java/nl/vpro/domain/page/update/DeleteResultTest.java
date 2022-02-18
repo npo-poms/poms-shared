@@ -12,6 +12,7 @@ import nl.vpro.logging.simple.StringBuilderSimpleLogger;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
+import static nl.vpro.logging.simple.Slf4jSimpleLogger.slf4j;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -48,7 +49,7 @@ public class DeleteResultTest {
     @Test
     public void and() throws ExecutionException, InterruptedException {
         StringBuilder sb = new StringBuilder();
-        SimpleLogger logger = StringBuilderSimpleLogger.builder().stringBuilder(sb).build().chain(SimpleLogger.slfj4(log));
+        SimpleLogger logger = StringBuilderSimpleLogger.builder().stringBuilder(sb).build().chain(slf4j(log));
         DeleteResult r1 = DeleteResult
             .builder()
             .future(CompletableFuture.supplyAsync(() -> {
