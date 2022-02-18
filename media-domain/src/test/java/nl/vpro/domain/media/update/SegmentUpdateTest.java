@@ -127,8 +127,8 @@ public class SegmentUpdateTest extends MediaUpdateTest {
 
 
         SegmentUpdate update = (SegmentUpdate) unmarshaller.unmarshal(new StringReader(example));
-        //assertThat(update.getBroadcasters()).containsExactly("BNN"); // FAILS, it will also read BNVA
+        assertThat(update.getBroadcasters()).containsExactly("BNN"); // FAILS, it will also read BNVA
 
-        assertThat(update.getBroadcasters()).containsExactly("BNN", "BNVA", "XXX"); // It does not this, but HY?
+        ///assertThat(update.getBroadcasters()).containsExactly("BNN", "BNVA", "XXX"); // It did this in older jaxb versions
     }
 }
