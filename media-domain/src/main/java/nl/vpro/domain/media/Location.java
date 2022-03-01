@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import java.net.URI;
+
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -331,6 +333,14 @@ public class Location extends PublishableObject<Location>
     public Location setProgramUrl(String url) {
         this.programUrl = url == null ? null : url.trim();
         return this;
+    }
+
+    public String getScheme() {
+        if (programUrl != null) {
+            URI asUri = URI.create(programUrl);
+            return asUri.getScheme();
+        }
+        return null;
     }
 
     public AVAttributes getAvAttributes() {

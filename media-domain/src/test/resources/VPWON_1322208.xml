@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" type="BROADCAST" avType="VIDEO"
+         embeddable="true" mid="VPWON_1322208" sortDate="2021-03-14T22:10:00+01:00" workflow="PUBLISHED"
+         creationDate="2021-02-19T10:37:16.014+01:00" lastModified="2021-08-20T16:37:53.505+02:00"
+         publishDate="2021-08-30T10:12:49.006+02:00" urn="urn:vpro:media:program:119814811"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="urn:vpro:media:2009 https://poms-test.omroep.nl/schema/vproMedia.xsd">
+  <crid>crid://npo/programmagegevens/1885666160668</crid>
+  <crid>crid://npo/programmagegevens/1866928429668</crid>
+  <crid>crid://npo/programmagegevens/1990326506668</crid>
+  <broadcaster id="VPRO">VPRO</broadcaster>
+  <region regionId="EU" platform="PLUSVOD"/>
+  <title owner="MIS" type="MAIN">VPRO Tegenlicht</title>
+  <title owner="MIS" type="SUB">De weerbare democratie</title>
+  <description owner="MIS" type="MAIN">De polarisatie in Europa groeit, de electorale steun voor populisten is erg
+    groot. Een onderzoek naar de beste ideeën om onze democratie weerbaarder te maken tegen de autoritaire verleiding.
+    Overal zijn grote groepen 'ontevredenen' te vinden. Waar komt die onvrede vandaan en waarom lijkt de gangbare
+    politiek nergens in staat daarop een goed antwoord te formuleren? Is onze democratie sterk genoeg om met deze
+    tegenstellingen om te gaan? Met Caleb Cain, Thomas Frank, Mark Bovens, Stanley Bostdorp en David Van Reybrouck.
+  </description>
+  <description owner="MIS" type="SHORT">De polarisatie in Europa groeit, de electorale steun voor populisten is erg
+    groot. Een onderzoek naar de beste ideeën om onze democratie weerbaarder te maken tegen de autoritaire verleiding.
+  </description>
+  <description owner="MIS" type="KICKER">De electorale steun voor populisten is groot. Een onderzoek naar ideeën om de
+    democratie weerbaarder te maken tegen autoritaire verleiding.
+  </description>
+  <genre id="3.0.1.8.44">
+    <term>Documentaire</term>
+    <term>Politiek</term>
+  </genre>
+  <country code="NL">Nederland</country>
+  <language code="nl">Nederlands</language>
+  <isDubbed>false</isDubbed>
+  <releaseYear>2021</releaseYear>
+  <duration>P0DT0H45M6.504S</duration>
+  <credits>
+    <person role="DIRECTOR">
+      <givenName>Mea</givenName>
+      <familyName>Dols de Jong</familyName>
+    </person>
+  </credits>
+  <descendantOf urnRef="urn:vpro:media:group:115202330" midRef="POMS_S_VPRO_16181938" type="PLAYLIST"/>
+  <descendantOf urnRef="urn:vpro:media:group:119040799" midRef="VPWON_1322200" type="SEASON"/>
+  <descendantOf urnRef="urn:vpro:media:group:119567115" midRef="POMS_S_NPO_16416209" type="PLAYLIST"/>
+  <descendantOf urnRef="urn:vpro:media:group:42709115" midRef="POMS_S_VPRO_550023" type="PLAYLIST"/>
+  <descendantOf urnRef="urn:vpro:media:group:45760423" midRef="POMS_S_VPRO_652484" type="COLLECTION"/>
+  <descendantOf urnRef="urn:vpro:media:group:45760505" midRef="POMS_S_VPRO_652517" type="COLLECTION"/>
+  <descendantOf urnRef="urn:vpro:media:group:70884914" midRef="VPWON_1250305" type="SERIES"/>
+  <descendantOf urnRef="urn:vpro:media:group:92059473" midRef="POMS_S_NPO_8166639" type="COLLECTION"/>
+  <descendantOf urnRef="urn:vpro:media:group:92059487" midRef="POMS_S_NPO_8166640" type="PLAYLIST"/>
+  <descendantOf urnRef="urn:vpro:media:group:99832092" midRef="POMS_S_NPO_11648366" type="PLAYLIST"/>
+  <memberOf added="2021-06-30T12:49:36.158+02:00" highlighted="false" midRef="POMS_S_VPRO_16181938" index="34"
+            type="PLAYLIST" urnRef="urn:vpro:media:group:115202330"/>
+  <memberOf added="2021-03-08T12:00:43.753+01:00" highlighted="false" midRef="POMS_S_NPO_16416209" index="34"
+            type="PLAYLIST" urnRef="urn:vpro:media:group:119567115"/>
+  <memberOf added="2021-08-18T13:31:49.431+02:00" highlighted="false" midRef="POMS_S_NPO_11648366" index="2332"
+            type="PLAYLIST" urnRef="urn:vpro:media:group:99832092">
+    <memberOf midRef="POMS_S_NPO_8166639" type="COLLECTION" index="17"/>
+  </memberOf>
+  <ageRating>6</ageRating>
+  <contentRating>ANGST</contentRating>
+  <website>vpro.nl/tegenlicht</website>
+  <twitter type="HASHTAG">#tegenlicht</twitter>
+  <prediction state="REALIZED" publishStart="2021-03-13T01:00:00+01:00" publishStop="2037-12-31T23:59:00+01:00">
+    INTERNETVOD
+  </prediction>
+  <prediction state="REALIZED" publishStart="2021-08-20T10:12:49+02:00" publishStop="2021-08-30T10:12:49+02:00">TVVOD
+  </prediction>
+  <prediction state="REALIZED" publishStart="2021-03-13T01:00:00+01:00" publishStop="2022-03-14T23:59:00+01:00">
+    PLUSVOD
+  </prediction>
+  <locations>
+    <location owner="AUTHORITY" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2021-03-13T01:07:06.261+01:00"
+              lastModified="2021-08-20T10:18:52.736+02:00" publishStart="2021-03-13T01:00:00+01:00"
+              publishStop="2037-12-31T23:59:00+01:00" urn="urn:vpro:media:location:120043893">
+      <programUrl>npo+drm://internetvod.omroep.nl/VPWON_1322208</programUrl>
+      <avAttributes>
+        <bitrate>3500000</bitrate>
+        <avFileFormat>HASP</avFileFormat>
+      </avAttributes>
+    </location>
+    <location owner="AUTHORITY" platform="PLUSVOD" workflow="PUBLISHED" creationDate="2021-03-13T01:14:35.237+01:00"
+              lastModified="2021-08-20T10:29:58.484+02:00" publishStart="2021-03-13T01:00:00+01:00"
+              publishStop="2022-03-14T23:59:00+01:00" urn="urn:vpro:media:location:120043912">
+      <programUrl>npo+drm://plusvod.omroep.nl/VPWON_1322208</programUrl>
+      <avAttributes>
+        <bitrate>3500000</bitrate>
+        <avFileFormat>HASP</avFileFormat>
+      </avAttributes>
+    </location>
+    <location owner="PROJECTM" platform="PLUSVOD" workflow="PUBLISHED" creationDate="2021-03-13T01:14:35.236+01:00"
+              lastModified="2021-08-20T10:28:01.519+02:00" publishStart="2021-03-13T01:00:00+01:00"
+              publishStop="2022-03-14T23:59:00+01:00" urn="urn:vpro:media:location:120043914">
+      <programUrl>sub+http://npo.npoplus.nl/video/MXF/VPWON_1322208</programUrl>
+      <avAttributes>
+        <bitrate>3500000</bitrate>
+        <avFileFormat>MPEG2</avFileFormat>
+      </avAttributes>
+    </location>
+  </locations>
+  <images>
+    <shared:image owner="BROADCASTER" type="STILL" highlighted="false" workflow="PUBLISHED"
+                  creationDate="2021-03-10T09:58:20.649+01:00" lastModified="2021-03-10T09:58:21.241+01:00"
+                  urn="urn:vpro:media:image:119993918">
+      <shared:title>Caleb</shared:title>
+      <shared:description>Caleb</shared:description>
+      <shared:imageUri>urn:vpro:image:1550703</shared:imageUri>
+      <shared:height>1080</shared:height>
+      <shared:width>1920</shared:width>
+      <shared:sourceName>Remco Bikkers</shared:sourceName>
+    </shared:image>
+    <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="PUBLISHED"
+                  creationDate="2021-03-10T11:14:05.899+01:00" lastModified="2021-03-10T11:14:05.952+01:00"
+                  urn="urn:vpro:media:image:119995014">
+      <shared:title>de weerbare democratie</shared:title>
+      <shared:description>de weerbare democratie</shared:description>
+      <shared:imageUri>urn:vpro:image:1550724</shared:imageUri>
+      <shared:height>1770</shared:height>
+      <shared:width>2732</shared:width>
+    </shared:image>
+    <shared:image owner="AUTHORITY" type="STILL" highlighted="false" workflow="PUBLISHED"
+                  creationDate="2021-03-13T01:07:15.883+01:00" lastModified="2021-03-13T01:07:15.883+01:00"
+                  urn="urn:vpro:media:image:120043894">
+      <shared:title>VPRO Tegenlicht</shared:title>
+      <shared:description>De polarisatie in Europa groeit, de electorale steun voor populisten is erg groot. Een
+        onderzoek naar de beste ideeën om onze democratie weerbaarder te maken tegen de autoritaire verleiding.
+      </shared:description>
+      <shared:imageUri>urn:vpro:image:1551885</shared:imageUri>
+      <shared:offset>P0DT0H1M0.000S</shared:offset>
+      <shared:height>1080</shared:height>
+      <shared:width>1920</shared:width>
+      <shared:credits>Still VPRO Tegenlicht / De weerbare democratie</shared:credits>
+      <shared:sourceName>VPRO</shared:sourceName>
+      <shared:license>COPYRIGHTED</shared:license>
+      <shared:date>2021</shared:date>
+    </shared:image>
+    <shared:image owner="AUTHORITY" type="STILL" highlighted="false" workflow="PUBLISHED"
+                  creationDate="2021-03-13T01:07:17.157+01:00" lastModified="2021-03-13T01:07:17.157+01:00"
+                  urn="urn:vpro:media:image:120043895">
+      <shared:title>VPRO Tegenlicht</shared:title>
+      <shared:description>De polarisatie in Europa groeit, de electorale steun voor populisten is erg groot. Een
+        onderzoek naar de beste ideeën om onze democratie weerbaarder te maken tegen de autoritaire verleiding.
+      </shared:description>
+      <shared:imageUri>urn:vpro:image:1551886</shared:imageUri>
+      <shared:offset>P0DT0H3M0.000S</shared:offset>
+      <shared:height>1080</shared:height>
+      <shared:width>1920</shared:width>
+      <shared:credits>Still VPRO Tegenlicht / De weerbare democratie</shared:credits>
+      <shared:sourceName>VPRO</shared:sourceName>
+      <shared:license>COPYRIGHTED</shared:license>
+      <shared:date>2021</shared:date>
+    </shared:image>
+    <shared:image owner="AUTHORITY" type="STILL" highlighted="false" workflow="PUBLISHED"
+                  creationDate="2021-03-13T01:07:19.462+01:00" lastModified="2021-03-13T01:07:19.462+01:00"
+                  urn="urn:vpro:media:image:120043896">
+      <shared:title>VPRO Tegenlicht</shared:title>
+      <shared:description>De polarisatie in Europa groeit, de electorale steun voor populisten is erg groot. Een
+        onderzoek naar de beste ideeën om onze democratie weerbaarder te maken tegen de autoritaire verleiding.
+      </shared:description>
+      <shared:imageUri>urn:vpro:image:1551887</shared:imageUri>
+      <shared:offset>P0DT0H2M0.000S</shared:offset>
+      <shared:height>1080</shared:height>
+      <shared:width>1920</shared:width>
+      <shared:credits>Still VPRO Tegenlicht / De weerbare democratie</shared:credits>
+      <shared:sourceName>VPRO</shared:sourceName>
+      <shared:license>COPYRIGHTED</shared:license>
+      <shared:date>2021</shared:date>
+    </shared:image>
+  </images>
+  <scheduleEvents>
+    <scheduleEvent channel="NED2" midRef="VPWON_1322208" urnRef="urn:vpro:media:program:119814811">
+      <textSubtitles>Teletekst ondertitels</textSubtitles>
+      <guideDay>2021-03-14+01:00</guideDay>
+      <start>2021-03-14T22:10:00+01:00</start>
+      <duration>P0DT0H46M21.000S</duration>
+      <poProgID>VPWON_1322208</poProgID>
+    </scheduleEvent>
+    <scheduleEvent channel="NED2" midRef="VPWON_1322208" urnRef="urn:vpro:media:program:119814811">
+      <repeat isRerun="true"/>
+      <textSubtitles>Teletekst ondertitels</textSubtitles>
+      <guideDay>2021-03-19+01:00</guideDay>
+      <start>2021-03-19T09:25:00+01:00</start>
+      <duration>P0DT0H45M49.000S</duration>
+      <poProgID>VPWON_1322208</poProgID>
+    </scheduleEvent>
+    <scheduleEvent channel="NED2" midRef="VPWON_1322208" urnRef="urn:vpro:media:program:119814811">
+      <repeat isRerun="true">14-03-2021</repeat>
+      <textSubtitles>Teletekst ondertitels</textSubtitles>
+      <guideDay>2021-08-20+02:00</guideDay>
+      <start>2021-08-20T09:25:00+02:00</start>
+      <duration>P0DT0H46M58.000S</duration>
+      <poProgID>VPWON_1322208</poProgID>
+    </scheduleEvent>
+  </scheduleEvents>
+  <episodeOf added="2021-02-19T10:37:16.388+01:00" highlighted="false" midRef="VPWON_1322200" index="9" type="SEASON"
+             urnRef="urn:vpro:media:group:119040799">
+    <memberOf midRef="VPWON_1250305" type="SERIES" index="20">
+      <memberOf midRef="POMS_S_NPO_8166640" type="PLAYLIST" index="14">
+        <memberOf midRef="POMS_S_NPO_8166639" type="COLLECTION" index="12"/>
+      </memberOf>
+      <memberOf midRef="POMS_S_VPRO_550023" type="PLAYLIST">
+        <memberOf midRef="POMS_S_VPRO_652517" type="COLLECTION">
+          <memberOf midRef="POMS_S_VPRO_652484" type="COLLECTION"/>
+        </memberOf>
+      </memberOf>
+    </memberOf>
+  </episodeOf>
+  <segments/>
+</program>

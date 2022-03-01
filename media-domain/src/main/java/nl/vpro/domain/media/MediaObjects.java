@@ -412,12 +412,16 @@ public class MediaObjects {
                 }
             }
             for (MemberRef memberRef : mediaObject.getMemberOf()) {
-                matchBroadcasters(broadcasterService, memberRef.getGroup(), handled);
+                if (memberRef.getGroup() != null) {
+                    matchBroadcasters(broadcasterService, memberRef.getGroup(), handled);
+                }
             }
             if (mediaObject instanceof Program) {
                 Program p = (Program) mediaObject;
                 for (MemberRef memberRef : p.getEpisodeOf()) {
-                    matchBroadcasters(broadcasterService, memberRef.getGroup(), handled);
+                    if (memberRef.getGroup() != null) {
+                        matchBroadcasters(broadcasterService, memberRef.getGroup(), handled);
+                    }
                 }
             }
         }
@@ -685,7 +689,7 @@ public class MediaObjects {
     public static <T extends PublishableObject<?>> T filterPublishable(T object, Instant now) {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
-                return ((PublishableObject) o).isPublishable(now);
+                return ((PublishableObject<?>) o).isPublishable(now);
             } else {
                 return true;
             }
@@ -694,10 +698,11 @@ public class MediaObjects {
         log.debug("Filtered {} from {}", result.filterCount(), result.get());
         return result.get();
     }
+
     public static <T extends PublishableObject<?>> T filterOnWorkflow(T object, Predicate<Workflow> predicate) {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
-                return predicate.test(((PublishableObject) o).getWorkflow());
+                return predicate.test(((PublishableObject<?>) o).getWorkflow());
             } else {
                 return true;
             }
@@ -982,6 +987,7 @@ public class MediaObjects {
     }
 
     /**
+     * Returns whether the mediaobject for given platform is now not playable, but will be.
      * @since 5.31
      */
     public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
@@ -1047,7 +1053,7 @@ public class MediaObjects {
      * @since 5.31
      */
     public static Map<Platform, Range<Instant>> playableRanges(@NonNull MediaObject mediaObject) {
-        final Map<Platform, Range<Instant>> result = new HashMap<>();
+        final Map<Platform, Range<Instant>> result = new TreeMap<>();
         Arrays.stream(Platform.values()).forEach(p ->
             playableRange(p, mediaObject).ifPresent(r ->
                 result.put(p, r)
@@ -1060,8 +1066,15 @@ public class MediaObjects {
         AVFileFormat.MP3,
         AVFileFormat.MP4,
         AVFileFormat.M4V,
-        AVFileFormat.H264
+        AVFileFormat.H264,
+        AVFileFormat.HASP
     )));
+
+    static final Set<String> ACCEPTABLE_SCHEMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+        "npo+drm",
+        "npo"
+    )));
+
 
     /**
      * Return {@code false} if the given location is not actually playable.
@@ -1074,6 +1087,12 @@ public class MediaObjects {
         if (l.isDeleted()) {
             return false;
         }
+        String scheme = l.getScheme();
+        if (ACCEPTABLE_SCHEMES.contains(scheme)) {
+            log.debug("Matched {} on scheme {}", l, scheme);
+            return true;
+        }
+
         // legacy filter on av type
         AVFileFormat format = l.getAvFileFormat();
         if (format == null || format == AVFileFormat.UNKNOWN) {

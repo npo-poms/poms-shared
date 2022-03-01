@@ -14,6 +14,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.xml.bind.JAXB;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -457,14 +459,16 @@ public class MediaObjectsTest {
                 try {
                     return ranges.entrySet().stream()
                         .collect(Collectors.toMap(
-                                Map.Entry::getKey,
-                                entry -> {
-                                    Range<Instant> value = entry.getValue();
-                                    return new Long[]{
-                                        value.hasLowerBound() ? value.lowerEndpoint().toEpochMilli() : null,
-                                        value.hasUpperBound() ? value.upperEndpoint().toEpochMilli() : null
-                                    };
-                                }
+                            Map.Entry::getKey,
+                            entry -> {
+                                Range<Instant> value = entry.getValue();
+                                return new Long[]{
+                                    value.hasLowerBound() ? value.lowerEndpoint().toEpochMilli() : null,
+                                    value.hasUpperBound() ? value.upperEndpoint().toEpochMilli() : null
+                                };
+                            },
+                            (longs, longs2) -> longs2,
+                            TreeMap::new
                             )
                         );
                 } catch (Exception e) {
@@ -638,6 +642,22 @@ public class MediaObjectsTest {
                         )
                         .build(),
                     expected(A_PLUSVOD, A_INTERNETVOD, A_NONE, map(PLUSVOD, null, null))
+                ),
+                Arguments.of(
+                    "npo source",
+                    fixed()
+                        .predictions(
+                            Prediction.realized().platform(INTERNETVOD).build()
+                        )
+                        .locations(
+                            Location.builder()
+                                .programUrl("npo+drm://internetvod.omroep.nl/VPWON_1322208")
+                                .avFileFormat(AVFileFormat.HASP)
+                                .owner(OwnerType.AUTHORITY)
+                                .build()
+                        )
+                        .build(),
+                    expected(A_INTERNETVOD, A_NONE, A_NONE, map(INTERNETVOD, null, null))
                 )
             );
         }
@@ -714,6 +734,16 @@ public class MediaObjectsTest {
             assertThat(MediaObjects.playableRanges(object)).isEqualTo(ranges);
         }
 
+
+        @Test
+        public void withHasp() {
+            Program program = JAXB.unmarshal(MediaObjects.class.getResourceAsStream("/VPWON_1322208.xml"), Program.class);
+
+            Map<Platform, Range<Instant>> platformRangeMap = MediaObjects.playableRanges(program);
+            log.info("{}", platformRangeMap);
+
+        }
+
         @Test
         public void createJsonForJavascriptTests() {
             DEFAULT_CONSIDER_JSON_INCLUDE.set(true);
@@ -749,7 +779,7 @@ public class MediaObjectsTest {
                         log.error(e.getMessage(), e);
                     }
                 });
-                assertThat(count.get()).isEqualTo(15);
+                assertThat(count.get()).isEqualTo(16);
             } finally {
                 DEFAULT_CONSIDER_JSON_INCLUDE.remove();
                 PublicationFilter.ENABLED.remove();
