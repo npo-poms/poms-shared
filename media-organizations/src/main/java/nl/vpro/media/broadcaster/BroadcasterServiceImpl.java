@@ -85,7 +85,6 @@ public class BroadcasterServiceImpl implements BroadcasterService {
     @Override
     public Broadcaster update(Broadcaster organization) {
         throw new UnsupportedOperationException();
-
     }
 
     @Override
