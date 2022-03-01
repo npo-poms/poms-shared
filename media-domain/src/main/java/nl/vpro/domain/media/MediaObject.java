@@ -625,6 +625,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Setter(AccessLevel.PACKAGE)
     private StreamingStatusImpl streamingPlatformStatus = StreamingStatus.unset();
 
+
+
     public MediaObject() {
     }
 
