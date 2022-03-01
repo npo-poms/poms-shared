@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -123,7 +124,10 @@ public class Program extends MediaObject {
 
     private Set<Segment> segments;
 
-
+    @XmlTransient
+    @Getter(AccessLevel.PACKAGE)
+    @Setter(AccessLevel.PACKAGE)
+    private Boolean pdAuthorityImported;
 
     public Program() {
         this(null, null);
