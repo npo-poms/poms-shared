@@ -71,12 +71,23 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         return "UNKNOWN";
 
     }
-    const ACCEPTABLE_FORMATS = ["MP3", "MP4", "M4V", "H264"];
+    const ACCEPTABLE_FORMATS = ["MP3", "MP4", "M4V", "H264", "HASP"];
+
+    const ACCEPTABLE_SCHEMES = ["npo+drm", "npo"];
+
 
     function locationFilter(l) {
         if (l.workflow === 'DELETED') {
             return false;
         }
+        let scheme = new URL(l.programUrl).protocol.slice(0, -1);
+
+        if (ACCEPTABLE_SCHEMES.includes(scheme)) {
+            debug(l, scheme, "is acceptable");
+            return true;
+        }
+
+
         // legacy filter on av type
         let format = l.avAttributes ? l.avAttributes.avFileFormat : null
         if (format == null || format === "UNKNOWN") {

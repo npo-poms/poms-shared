@@ -246,7 +246,7 @@ public class TextualObjects {
 
 
     @SuppressWarnings("unchecked")
-    public static <S extends Comparable<?>> SortedSet<S> sorted(Set<S> set) {
+    public static <S extends Comparable<?>> SortedSet<@NonNull S> sorted(Set<@NonNull S> set) {
         if (set == null) {
             return null;
         }
