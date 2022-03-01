@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 public class NotFoundException extends Exception {
 
+    private static final long serialVersionUID = 1756255370140166823L;
     private final Serializable identifier;
 
     public NotFoundException(String identifier, String message) {
