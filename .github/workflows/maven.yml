@@ -39,7 +39,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Build and deploy with Maven (Linux)
-        run:  mvn -B -P"deploy,ossrh" -U -fae deploy
+        run:  mvn -B -P"deploy,ossrh,npm" -U -fae deploy
         if: runner.os == 'Linux'
       - name: Build with Maven (Other os)
         run: mvn -B  -U -fae package
