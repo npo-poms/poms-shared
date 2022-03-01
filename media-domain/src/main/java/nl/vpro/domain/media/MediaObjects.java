@@ -1066,8 +1066,7 @@ public class MediaObjects {
         AVFileFormat.MP3,
         AVFileFormat.MP4,
         AVFileFormat.M4V,
-        AVFileFormat.H264,
-        AVFileFormat.HASP
+        AVFileFormat.H264
     )));
 
     static final Set<String> ACCEPTABLE_SCHEMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(

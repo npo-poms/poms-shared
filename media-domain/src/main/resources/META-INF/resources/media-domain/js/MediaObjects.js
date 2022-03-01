@@ -71,7 +71,7 @@ const  nl_vpro_domain_media_MediaObjects = (function() {
         return "UNKNOWN";
 
     }
-    const ACCEPTABLE_FORMATS = ["MP3", "MP4", "M4V", "H264", "HASP"];
+    const ACCEPTABLE_FORMATS = ["MP3", "MP4", "M4V", "H264"];
 
     const ACCEPTABLE_SCHEMES = ["npo+drm", "npo"];
 
