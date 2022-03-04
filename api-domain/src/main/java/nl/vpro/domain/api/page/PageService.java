@@ -15,7 +15,7 @@ import nl.vpro.util.FilteringIterator;
  */
 public interface PageService {
 
-    SuggestResult suggest(String input, String profile, Integer max);
+    SuggestResult suggest(String input, String profile, Integer max) throws ProfileNotFoundException;
 
     PageSearchResult find(PageForm form, String profile, Long offset, Integer max)  throws ProfileNotFoundException;
 

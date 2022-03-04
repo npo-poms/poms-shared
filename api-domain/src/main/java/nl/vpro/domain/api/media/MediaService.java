@@ -20,7 +20,7 @@ import nl.vpro.util.FilteringIterator;
  */
 public interface MediaService extends MediaProvider {
 
-    SuggestResult suggest(String input, String profile, Integer max);
+    SuggestResult suggest(String input, String profile, Integer max) throws ProfileNotFoundException;
 
     CloseableIterator<MediaChange> changes(
         String profile,
@@ -47,15 +47,15 @@ public interface MediaService extends MediaProvider {
 
     MediaSearchResult find(String profile, MediaForm form, Long offset, Integer max) throws ProfileNotFoundException;
 
-    MediaResult listMembers(MediaObject media, String profile, Order order, Long offset, Integer max);
+    MediaResult listMembers(MediaObject media, String profile, Order order, Long offset, Integer max) throws ProfileNotFoundException;
 
     MediaSearchResult findMembers(MediaObject media, String profile, MediaForm form, Long offset, Integer max) throws ProfileNotFoundException;
 
-    ProgramResult listEpisodes(MediaObject media, String profile, Order order, Long offset, Integer max);
+    ProgramResult listEpisodes(MediaObject media, String profile, Order order, Long offset, Integer max) throws ProfileNotFoundException;
 
     ProgramSearchResult findEpisodes(MediaObject media, String profile, MediaForm form, Long offset, Integer max) throws ProfileNotFoundException;
 
-    MediaResult listDescendants(MediaObject media, String profile, Order order, Long offset, Integer max);
+    MediaResult listDescendants(MediaObject media, String profile, Order order, Long offset, Integer max) throws ProfileNotFoundException;
 
     MediaSearchResult findDescendants(MediaObject media, String profile, MediaForm form, Long offset, Integer max) throws ProfileNotFoundException;
 
