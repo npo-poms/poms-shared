@@ -36,7 +36,7 @@ public class ErrorTest {
         assertThatJson(error).isSimilarTo("{\n" +
             "  \"status\" : 404,\n" +
             "  \"message\" : \"bla\",\n" +
-            "  \"classes\" : [ \"java.lang.RuntimeException\", \"java.lang.Exception\", \"java.lang.Throwable\", \"java.io.Serializable\" ],\n" +
+            "  \"classes\" : [ \"java.lang.RuntimeException\", \"java.lang.Exception\", \"java.lang.Throwable\"],\n" +
             "  \"cause\" : \"cause\",\n" +
             "  \"testResult\" : {\n" +
             "    \"objectType\" : \"and\",\n" +
