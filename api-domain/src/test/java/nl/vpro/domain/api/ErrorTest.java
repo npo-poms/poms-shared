@@ -3,6 +3,8 @@ package nl.vpro.domain.api;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.ws.rs.core.Response;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,14 +32,12 @@ public class ErrorTest {
 
     @Test
     public void jsonWithPredicate() {
-        Error error = new Error(404, new RuntimeException("bla"));
+        Error error = new Error(Response.Status.NOT_FOUND, new RuntimeException("bla"), false, true);
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
-        error.causeString("cause");
         assertThatJson(error).isSimilarTo("{\n" +
             "  \"status\" : 404,\n" +
             "  \"message\" : \"bla\",\n" +
-            "  \"classes\" : [ \"java.lang.RuntimeException\", \"java.lang.Exception\", \"java.lang.Throwable\"],\n" +
-            "  \"cause\" : \"cause\",\n" +
+            "  \"classes\" : [ \"RuntimeException\" ],\n" +
             "  \"testResult\" : {\n" +
             "    \"objectType\" : \"and\",\n" +
             "    \"reason\" : \"And\",\n" +

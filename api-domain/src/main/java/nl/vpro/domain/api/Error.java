@@ -83,14 +83,14 @@ public class Error {
     }
 
     public Error(Response.Status status, Throwable t) {
-        this(status, t, true);
+        this(status, t, true, false);
     }
 
-    public Error(Response.Status status, Throwable t, boolean withCause) {
+    public Error(Response.Status status, Throwable t, boolean withCause, boolean concise) {
         this.status = status.getStatusCode();
         this.message = t.getMessage();
         this.cause = withCause ? ExceptionUtils.getStackTrace(t) : null;
-        this.classes = listOfClasses(t, !withCause);
+        this.classes = listOfClasses(t, concise);
     }
 
     public Error(Integer status, String message, Throwable t) {
