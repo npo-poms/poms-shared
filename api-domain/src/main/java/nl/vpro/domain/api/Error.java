@@ -7,6 +7,7 @@ package nl.vpro.domain.api;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +16,11 @@ import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.constraint.*;
+import nl.vpro.domain.constraint.PredicateTestResult;
 
 /**
  *
@@ -77,29 +79,31 @@ public class Error {
         this.status = status;
         this.message = t.getMessage();
         this.cause = ExceptionUtils.getStackTrace(t);
-        this.classes = listOfClasses(t);
+        this.classes = listOfClasses(t, false);
     }
 
     public Error(Response.Status status, Throwable t) {
+        this(status, t, true);
+    }
+
+    public Error(Response.Status status, Throwable t, boolean withCause) {
         this.status = status.getStatusCode();
         this.message = t.getMessage();
-        this.cause = ExceptionUtils.getStackTrace(t);
-        this.classes = listOfClasses(t);
+        this.cause = withCause ? ExceptionUtils.getStackTrace(t) : null;
+        this.classes = listOfClasses(t, !withCause);
     }
 
     public Error(Integer status, String message, Throwable t) {
         this.status = status;
         this.message = message + " " + t.getMessage();
         this.cause = ExceptionUtils.getStackTrace(t);
-        this.classes = listOfClasses(t);
+        this.classes = listOfClasses(t, false);
     }
 
     public Error(Response.Status status, String message) {
         this.status = status.getStatusCode();
         this.message = message;
     }
-
-
 
     void causeString(String string) {
         this.cause = string;
@@ -111,28 +115,40 @@ public class Error {
         return status + ":" + message;
     }
 
-    private static List<String> listOfClasses(Throwable t) {
+    private static List<String> listOfClasses(Throwable t, boolean concise) {
         List<String> result = new ArrayList<>();
-        listOfClasses(t.getClass(), result);
+        listOfClasses(t.getClass(), result, concise);
         for (Class<?> c : ClassUtils.getAllInterfaces(t.getClass())) {
-            result.add(c.getCanonicalName());
+            if (c.equals(Serializable.class)) {
+                continue;
+            }
+            result.add(className(c, concise));
         }
         return result;
 
     }
-    private static <T extends Throwable> void listOfClasses(Class<T> t, List<String> result) {
+    private static <T extends Throwable> void listOfClasses(Class<T> t, List<String> result, boolean concise) {
         if (t != null) {
-            String cannonicalName = t.getCanonicalName();
-            if (! result.contains(cannonicalName)) {
-                result.add(cannonicalName);
+            String name = className(t, concise);
+            if (! result.contains(name)) {
+                result.add(name);
                 Class<?> superclass = t.getSuperclass();
+                if ((superclass.equals(Exception.class) || superclass.equals(RuntimeException.class)) && concise) {
+                    return;
+                }
                 if (Throwable.class.isAssignableFrom(superclass)) {
-                    listOfClasses((Class<T>) superclass, result);
+                    listOfClasses((Class<T>) superclass, result, concise);
                 }
 
             }
-
         }
+    }
 
+    private static String className(Class<?> c, boolean concise) {
+        if (concise) {
+            return c.getSimpleName();
+        } else {
+            return c.getCanonicalName();
+        }
     }
 }
