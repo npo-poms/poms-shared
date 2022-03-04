@@ -13,6 +13,6 @@ import nl.vpro.domain.NotFoundException;
  */
 public class ProfileNotFoundException extends NotFoundException {
     public ProfileNotFoundException(String name) {
-        super(name, "No profile for " + name);
+        super(name, "Unknown profile \"" + name + "\"");
     }
 }

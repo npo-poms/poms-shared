@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import nl.vpro.domain.api.*;
@@ -37,14 +38,14 @@ public interface PageRestService {
         @QueryParam("input") @Size(min = 1) String input,
         @QueryParam(PROFILE) String profile,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     @GET
     PageResult list(
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     @POST
     PageSearchResult find(
@@ -52,7 +53,7 @@ public interface PageRestService {
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
+        @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max) throws ProfileNotFoundException;
 
     @GET
     @Path("/multiple")
@@ -77,7 +78,7 @@ public interface PageRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     @POST
     @Path("/related")
@@ -87,7 +88,7 @@ public interface PageRestService {
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
 
     @POST

@@ -96,7 +96,7 @@ public interface MediaRestService {
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(PROFILE) String profileName
-    );
+    ) throws ProfileNotFoundException;
 
 
     @GET

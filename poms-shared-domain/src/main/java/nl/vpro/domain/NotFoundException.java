@@ -5,6 +5,8 @@ import lombok.Getter;
 import java.io.Serializable;
 
 /**
+ * A checked not found exception.
+ *
  * @author Michiel Meeuwissen
  * @since 4.4
  */
