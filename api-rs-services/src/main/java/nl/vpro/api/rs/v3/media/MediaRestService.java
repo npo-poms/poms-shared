@@ -13,6 +13,7 @@ import org.jboss.resteasy.annotations.cache.NoCache;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.media.*;
+import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.jmx.Description;
 
@@ -55,7 +56,7 @@ public interface MediaRestService {
         @QueryParam("input") @Size(min = 1) String input,
         @QueryParam(PROFILE) String profile,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
 
     /**
@@ -86,7 +87,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     @GET
     //@Path("/{mid : (?:(changes|multiple|redirects|iterate).+|(?!(changes|multiple|redirects|iterate)).*)}")
@@ -108,7 +109,7 @@ public interface MediaRestService {
         @QueryParam("ids") String mids,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(PROFILE) String profileName
-    );
+    ) throws ProfileNotFoundException;
 
     @POST
     @Path("/multiple/")
@@ -116,7 +117,7 @@ public interface MediaRestService {
         IdList ids,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(PROFILE) String profileName
-    );
+    ) throws ProfileNotFoundException;
 
     @GET
     @Path("/{mid:.*}/members")
@@ -127,7 +128,7 @@ public interface MediaRestService {
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     @POST
     @Path("/{mid:.*}/members")
@@ -138,7 +139,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     /**
      * @param mid existing urn or mid
@@ -152,7 +153,7 @@ public interface MediaRestService {
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     /**
      * @param mid existing urn or mid
@@ -166,7 +167,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     @GET
     @Path("/{mid:.*}/descendants")
@@ -177,7 +178,7 @@ public interface MediaRestService {
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     @POST
     @Path("/{mid:.*}/descendants")
@@ -188,7 +189,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
     @GET
     @Path("/{mid:.*}/related")
@@ -198,7 +199,7 @@ public interface MediaRestService {
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max,
         @QueryParam("partyId") String partyId
 
-    );
+    ) throws ProfileNotFoundException;
 
     @POST
     @Path("/{mid:.*}/related")
@@ -209,7 +210,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max,
         @QueryParam("partyId") String partyId
-    );
+    ) throws ProfileNotFoundException;
 
     @GET
     @Path("/changes/")
@@ -225,7 +226,7 @@ public interface MediaRestService {
         @QueryParam(CHECK_PROFILE) Boolean profileCheck,
         @QueryParam(DELETES) Deletes deletes,
         @QueryParam(TAIL) Tail tail
-        );
+    ) throws ProfileNotFoundException;
 
 
     /**
@@ -243,7 +244,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
-    );
+    ) throws ProfileNotFoundException;
 
 
 
