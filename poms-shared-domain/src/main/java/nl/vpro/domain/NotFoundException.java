@@ -1,5 +1,7 @@
 package nl.vpro.domain;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  */
 public class NotFoundException extends Exception {
 
+    @Getter
     private final Serializable identifier;
 
     public NotFoundException(String identifier, String message) {
@@ -15,7 +18,4 @@ public class NotFoundException extends Exception {
         this.identifier = identifier;
     }
 
-    public Serializable getIdentifier() {
-        return identifier;
-    }
 }
