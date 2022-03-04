@@ -1097,8 +1097,13 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withPredictions() {
-            Prediction internetVOD = new Prediction(Platform.INTERNETVOD, Prediction.State.REVOKED);
-            return predictions(internetVOD, new Prediction(Platform.TVVOD));
+            Prediction internetVOD = new Prediction(
+                Platform.INTERNETVOD, Prediction.State.REVOKED
+            );
+            return predictions(
+                internetVOD,
+                new Prediction(Platform.TVVOD)
+            );
         }
 
         public ProgramTestDataBuilder predictions(Platform... platforms) {
