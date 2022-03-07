@@ -1,4 +1,9 @@
-const  nl_vpro_domain_media_MediaObjects = (function() {
+/**
+ * Utilities related to 'mediaobjects' from POMS/NPO media api.
+ *
+ * Available as https://rs[-test|-acc|].poms.omroep.nl/v1/media-domain/js/MediaObjects.js
+ */
+const nl_vpro_domain_media_MediaObjects = (function() {
 
     let clock = function() {
         return Date.now();
