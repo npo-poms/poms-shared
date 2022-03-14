@@ -42,7 +42,7 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
 
 
     static {
-        Set<String> acknowledged = new HashSet<>();
+        final Set<String> acknowledged = new HashSet<>();
 
         // we don't consider these nets, but channels.
         acknowledged.add("NEDERLAND 1");
@@ -75,7 +75,7 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
         return new ExtensionFunctionCall() {
             @Override
             public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
-                String value = arguments[0].iterate().next().getStringValueCS().toString().trim().toUpperCase();
+                final String value = arguments[0].iterate().next().getStringValue().trim().toUpperCase();
                 for (Net net : netsSupplier.get()) {
                     if (net.getDisplayName().toUpperCase().equals(value) || net.getId().toUpperCase().equals(value)) {
                         return new StringValue(net.getId());

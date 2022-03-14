@@ -75,10 +75,10 @@ public abstract class AbstractValidValueFunction extends ExtensionFunctionDefini
             @Override
             public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
                 try {
-                    String clazzName = arguments[0].iterate().next().getStringValueCS().toString().trim();
-                    String propertyName = arguments[1].iterate().next().getStringValueCS().toString().trim();
+                    String clazzName = arguments[0].iterate().next().getStringValue().trim();
+                    String propertyName = arguments[1].iterate().next().getStringValue().trim();
                     Item valueItem = arguments[2].iterate().next();
-                    Object value = getValue(valueItem.getStringValueCS().toString().trim());
+                    Object value = getValue(valueItem.getStringValue().trim());
                     Class<?> clazz = Class.forName(clazzName);
                     Set<? extends ConstraintViolation<?>> constraintViolations =
                         validator.validateValue(

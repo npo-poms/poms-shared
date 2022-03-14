@@ -42,11 +42,11 @@ public class FindBroadcasterFunctionTest {
 
 
 
-        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("KRO-NCRV")})).getPrimitiveStringValue()).isEqualTo("KRO-NCRV");
-        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("WO")})).getPrimitiveStringValue()).isEqualTo("WOOK");
-        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("MIS")})).getPrimitiveStringValue()).isEqualTo("MISOK");
-        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("NEBO")})).getPrimitiveStringValue()).isEqualTo("NEBOOK");
-        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("BLA")})).getPrimitiveStringValue()).isEqualTo("BLA");
+        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("KRO-NCRV")})).getStringValue()).isEqualTo("KRO-NCRV");
+        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("WO")})).getStringValue()).isEqualTo("WOOK");
+        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("MIS")})).getStringValue()).isEqualTo("MISOK");
+        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("NEBO")})).getStringValue()).isEqualTo("NEBOOK");
+        assertThat(((StringValue) function.makeCallExpression().call(null, new Sequence[]{new StringValue("BLA")})).getStringValue()).isEqualTo("BLA");
 
     }
 

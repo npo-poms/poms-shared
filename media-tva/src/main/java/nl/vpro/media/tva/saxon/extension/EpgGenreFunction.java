@@ -72,21 +72,21 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
         return new ExtensionFunctionCall() {
             @Override
             public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
-                CharSequence epgValue;
+                String epgValue;
                 if (StringUtils.isNotEmpty(matchOnValuePrefix)) {
                     TinyElementImpl next = (TinyElementImpl) arguments[1].iterate().next();
-                    epgValue = (matchOnValuePrefix  + next.getStringValueCS());
+                    epgValue = (matchOnValuePrefix  + next.getStringValue());
                 } else {
-                    epgValue = arguments[0].iterate().next().getStringValueCS();
+                    epgValue = arguments[0].iterate().next().getStringValue();
                 }
                 try {
-                    Term term = MediaClassificationService.getInstance().getTermByReference(epgValue.toString(), (s) -> true);
+                    Term term = MediaClassificationService.getInstance().getTermByReference(epgValue, (s) -> true);
                     return new StringValue(term.getTermId());
                 } catch (IllegalArgumentException iea){
-                    if (ignore != null && ignore.contains(epgValue.toString())) {
+                    if (ignore != null && ignore.contains(epgValue)) {
                         return new StringValue("");
                     }
-                    if (warned == null || warned.add(epgValue.toString())) {
+                    if (warned == null || warned.add(epgValue)) {
                         log.warn(iea.getMessage());
                     } else {
                         log.debug(iea.getMessage());

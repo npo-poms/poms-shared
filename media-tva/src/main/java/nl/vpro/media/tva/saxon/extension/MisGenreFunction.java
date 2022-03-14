@@ -9,6 +9,7 @@ import net.sf.saxon.lib.ExtensionFunctionCall;
 import net.sf.saxon.lib.ExtensionFunctionDefinition;
 import net.sf.saxon.om.*;
 import net.sf.saxon.trans.XPathException;
+import net.sf.saxon.tree.iter.ListIterator;
 import net.sf.saxon.value.*;
 
 import java.util.ArrayList;
@@ -46,13 +47,13 @@ public class MisGenreFunction extends ExtensionFunctionDefinition {
         return new ExtensionFunctionCall() {
             @Override
             public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
-                List<StringValue> result = new ArrayList<>();
+                List<AtomicValue> result = new ArrayList<>();
                 List<MisGenreType> misTypes = new ArrayList<>();
 
                 SequenceIterator iterate = arguments[0].iterate();
                 Item item = iterate.next();
                 while(item != null) {
-                    CharSequence misInput = item.getStringValueCS();
+                    CharSequence misInput = item.getStringValue();
                     item = iterate.next();
 
                     if(StringUtils.isBlank(misInput)) {
@@ -70,7 +71,7 @@ public class MisGenreFunction extends ExtensionFunctionDefinition {
                 for(Term term : terms) {
                     result.add(new StringValue(term.getTermId()));
                 }
-                return new SequenceExtent(result);
+                return SequenceExtent.from(new ListIterator.OfAtomic<>(result));
             }
         };
     }

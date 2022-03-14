@@ -591,7 +591,7 @@ public class TVATransformerTest {
                     return new ExtensionFunctionCall() {
                         @Override
                         public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
-                            String value = arguments[0].iterate().next().getStringValueCS().toString().trim().toUpperCase().replaceAll("\\s+", "_");
+                            String value = arguments[0].iterate().next().getStringValue().trim().toUpperCase().replaceAll("\\s+", "_");
                             switch(value) {
                                 case "AVROTROS": value = "AVTR"; break;
                                 case "KRO-NCRV": value = "KRNC"; break;
