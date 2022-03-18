@@ -1178,7 +1178,8 @@
       <xs:enumeration value="NOT_YET_RATED">
         <xs:annotation>
           <xs:documentation>
-            Not yet rated
+            Not yet rated.
+            Experimental. Not currently accepted.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>

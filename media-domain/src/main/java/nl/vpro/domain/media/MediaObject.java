@@ -49,6 +49,7 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.*;
 import nl.vpro.domain.validation.NoDuplicateOwner;
 import nl.vpro.i18n.Locales;
+import nl.vpro.i18n.validation.Display;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.util.*;
@@ -455,6 +456,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     @Enumerated(EnumType.STRING)
     @NotNull(groups = {WarningValidatorGroup.class })
+    @Display
     @Nullable
     protected AgeRating ageRating;
 
