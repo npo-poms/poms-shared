@@ -456,7 +456,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     @Enumerated(EnumType.STRING)
     @NotNull(groups = {WarningValidatorGroup.class })
-    @Display
+    @Display(groups = {PomsValidatorGroup.class})
     @Nullable
     protected AgeRating ageRating;
 
