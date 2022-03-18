@@ -94,10 +94,14 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         }
         this.principalId = principalId == null  ? null/*in some test cases*/ : principalId.toLowerCase();
 
+
         if (displayName == null) {
             displayName = this.principalId;
         }
         this.displayName = displayName;
+        if (this.principalId == null) {
+            log.warn("Create used without principal id: {}", this);
+        }
 
     }
 
