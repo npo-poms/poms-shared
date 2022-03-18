@@ -92,10 +92,7 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         if (principalId == null) {
             principalId = email;
         }
-        if (principalId == null) {
-            throw new IllegalArgumentException();
-        }
-        this.principalId = principalId.toLowerCase();
+        this.principalId = principalId == null  ? null/*in some test cases*/ : principalId.toLowerCase();
 
         if (displayName == null) {
             displayName = this.principalId;
