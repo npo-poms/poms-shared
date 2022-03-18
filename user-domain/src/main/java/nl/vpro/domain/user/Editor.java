@@ -42,6 +42,8 @@ import nl.vpro.domain.Accountable;
 @Slf4j
 public class Editor extends AbstractUser {
 
+    private static final long serialVersionUID = -4381169912123229285L;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient

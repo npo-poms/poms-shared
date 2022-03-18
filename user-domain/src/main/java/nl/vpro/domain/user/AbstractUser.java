@@ -17,6 +17,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import nl.vpro.domain.Identifiable;
 
 @MappedSuperclass
@@ -29,6 +31,7 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
     @Id
     @Column(name = "principalid")
     @Getter
+    @NonNull
     protected String principalId;
 
     @Getter
@@ -44,7 +47,7 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
     @Setter
     protected String displayName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)])",
         flags = {Pattern.Flag.CASE_INSENSITIVE}
     )
@@ -84,16 +87,21 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         this.creationInstant = user.creationInstant;
     }
 
-    public AbstractUser(String principalId, String displayName, String email) {
+    public AbstractUser(String principalId, String displayName, final String email) {
+        this.email = email;
         if (principalId == null) {
             principalId = email;
         }
-        this.principalId = principalId == null  ? null : principalId.toLowerCase();
+        if (principalId == null) {
+            throw new IllegalArgumentException();
+        }
+        this.principalId = principalId.toLowerCase();
+
         if (displayName == null) {
             displayName = this.principalId;
         }
         this.displayName = displayName;
-        this.email = email;
+
     }
 
 
