@@ -1,16 +1,14 @@
 package nl.vpro.media.broadcaster;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.lanwen.wiremock.ext.WiremockResolver;
-import ru.lanwen.wiremock.ext.WiremockUriResolver;
 
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
@@ -21,10 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 @Slf4j
-@ExtendWith({
-    WiremockResolver.class,
-    WiremockUriResolver.class
-})
+@WireMockTest
 public class BroadcasterServiceImplTest {
 
 
@@ -41,8 +36,9 @@ public class BroadcasterServiceImplTest {
     }
 
     @Test
-    public void testMisId(@WiremockResolver.Wiremock WireMockServer server, @WiremockUriResolver.WiremockUri String uri) throws IOException {
-          server.stubFor(get(urlEqualTo("/broadcasters/"))
+    public void testMisId(
+        WireMockRuntimeInfo wireMockRuntimeInfo) throws IOException {
+          stubFor(get(urlEqualTo("/broadcasters/"))
               .willReturn(
                 aResponse()
                     .withBody(IOUtils.resourceToByteArray("/broadcasters.properties"))
@@ -50,14 +46,14 @@ public class BroadcasterServiceImplTest {
                     .withHeader("Last-Modified", "Wed, 24 Apr 2019 05:55:21 GMT")
             ));
 
-        server.stubFor(get(urlEqualTo("/broadcasters/mis"))
+        stubFor(get(urlEqualTo("/broadcasters/mis"))
               .willReturn(
                 aResponse()
                     .withBody(IOUtils.resourceToByteArray("/broadcasters.MIS.properties"))
                     .withHeader("Cache-Control", "public, max-age: 3600")
                     .withHeader("Last-Modified", "Wed, 24 Apr 2019 05:55:21 GMT")
             ));
-        BroadcasterService broadcasterService = new BroadcasterServiceImpl(uri + "/broadcasters/", false, true);
+        BroadcasterService broadcasterService = new BroadcasterServiceImpl(wireMockRuntimeInfo.getHttpBaseUrl() + "/broadcasters/", false, true);
         assertThat(broadcasterService.find("RTUT")).isNotNull();
         assertThat(broadcasterService.find("RTUT").getMisId()).isEqualTo("RTV Utrecht");
     }
