@@ -89,8 +89,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         fillFromFor(mediaObject.getParent() == null ? null : new ProgramUpdate(version, mediaObject.getParent(), ownerType), mediaObject);
     }
 
-    //**
-    protected void fillFromFor(
+    private void fillFromFor(
         ProgramUpdate parent,
         Segment mediaObject) {
         this.parent = parent;
@@ -175,7 +174,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
 
     @XmlAttribute(name = "type")
-    protected SegmentType getTypeAttribute() {
+    private SegmentType getTypeAttribute() {
         SegmentType type = getType();
         if (type == SegmentType.SEGMENT) {
             return null;
@@ -185,7 +184,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     }
 
 
-    protected void setTypeAttribute(SegmentType type) {
+    private void setTypeAttribute(SegmentType type) {
         this.setType(type);
     }
 
@@ -314,8 +313,8 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         Class<?>[] groups() default {};
 
         Class<? extends Payload>[] payload() default {};
-
     }
+
     public static class Validator implements ConstraintValidator<Valid, SegmentUpdate> {
 
         @Override

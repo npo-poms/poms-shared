@@ -13,7 +13,8 @@ import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.validation.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import javax.validation.groups.Default;
 import javax.xml.bind.Marshaller;
@@ -38,6 +39,7 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.validation.ValidEmbargo;
+import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
@@ -124,7 +126,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @Pattern(regexp = "^urn:vpro:media:(?:group|program|segment):[0-9]+$")
     protected String urn;
 
-    private List<@CRID String> crids;
+    private List<@NotNull @CRID String> crids;
 
     protected AVType avType;
 
@@ -132,9 +134,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     Boolean isDeleted;
 
-    List<org.meeuw.i18n.regions.Region> countries;
+    List<org.meeuw.i18n.regions.@NotNull @PomsValidCountry Region> countries;
 
-    List<Locale> languages;
+    List<@NotNull Locale> languages;
 
     AVAttributesUpdate avAttributes;
 
@@ -147,24 +149,25 @@ public abstract class  MediaUpdate<M extends MediaObject>
     Short releaseYear;
 
     @NotNull(groups = {WarningValidatorGroup.class })
+    @MustDisplay(groups = {PomsValidatorGroup.class})
     AgeRating ageRating;
 
-    List<ContentRating> contentRatings;
+    List<@NotNull ContentRating> contentRatings;
 
-    List<@Email(message = "{nl.vpro.constraints.Email.message}") String> email;
+    List<@NotNull @Email(message = "{nl.vpro.constraints.Email.message}") String> email;
 
-    protected List<@Valid ImageUpdate> images;
+    protected List<@NotNull @Valid ImageUpdate> images;
 
     /**
      * This represent the editable intentions
      * Only display the intentions for the given owner
      * (more intentions might be present in the metadata).
      */
-    protected List<IntentionType> intentions;
+    protected List<@NotNull IntentionType> intentions;
 
-    protected List<TargetGroupType> targetGroups;
+    protected List<@NotNull TargetGroupType> targetGroups;
 
-    protected List<@Valid GeoLocationUpdate> geoLocations;
+    protected List<@NotNull @Valid GeoLocationUpdate> geoLocations;
 
     private List<@Valid TopicUpdate> topics;
 
@@ -199,7 +202,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         @Pattern(regexp = "3\\.([0-9]+\\.)*[0-9]+")
         String> genres;
 
-    private SortedSet<MemberRefUpdate> memberOf;
+    private SortedSet<@NotNull MemberRefUpdate> memberOf;
 
     private List<
         @NotNull
@@ -214,7 +217,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         String> websites;
 
 
-    private List<@Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,139}$")
+    private List<@NotNull @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,139}$")
         String> twitterrefs;
 
     private SortedSet<@NotNull @Valid LocationUpdate> locations;
