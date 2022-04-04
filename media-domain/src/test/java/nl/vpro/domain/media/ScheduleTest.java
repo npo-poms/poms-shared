@@ -8,6 +8,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.time.Duration;
 import java.time.Instant;
+
 import java.util.Arrays;
 
 import javax.xml.bind.JAXB;
@@ -15,12 +16,69 @@ import javax.xml.bind.JAXB;
 import org.junit.jupiter.api.Test;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
+import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ScheduleTest {
 
     @Test
     public void testUnmarshalForMISDuplicatesOnClearScheduleEvents() {
+
+        MediaTable schedule = exampleTable();
+        final StringWriter writer = new StringWriter();
+        JAXB.marshal(schedule, writer);
+        final MediaTable result = JAXB.unmarshal(new StringReader(writer.toString()), MediaTable.class);
+
+        assertThat(result.getProgramTable()).hasSize(2);
+        assertThat(result.getProgramTable().get(0).getMid()).isEqualTo("id1");
+        assertThat(result.getProgramTable().get(0).getScheduleEvents()).hasSize(1);
+        assertThat(result.getProgramTable().get(0).getCrids()).hasSize(1);
+        assertThat(result.getProgramTable().get(1).getMid()).isEqualTo("id2");
+        assertThat(result.getProgramTable().get(1).getScheduleEvents()).hasSize(1);
+        assertThat(result.getProgramTable().get(1).getCrids()).isEmpty();
+    }
+
+    @Test
+     public void json() {
+        Schedule schedule = example();
+
+        assertThatJson(schedule).isSimilarTo(
+            "{\n" +
+                "  \"scheduleEvent\" : [ {\n" +
+                "    \"channel\" : \"CONS\",\n" +
+                "    \"start\" : 0,\n" +
+                "    \"guideDay\" : -90000000,\n" +
+                "    \"duration\" : 10000,\n" +
+                "    \"midRef\" : \"id1\",\n" +
+                "    \"poProgID\" : \"id1\",\n" +
+                "    \"urnRef\" : \"crid://domain.com/12345\"\n" +
+                "  }, {\n" +
+                "    \"channel\" : \"CONS\",\n" +
+                "    \"start\" : 10000,\n" +
+                "    \"guideDay\" : -90000000,\n" +
+                "    \"duration\" : 10000,\n" +
+                "    \"midRef\" : \"id2\",\n" +
+                "    \"poProgID\" : \"id2\",\n" +
+                "    \"urnRef\" : \"crid://domain.com/12345\"\n" +
+                "  }, {\n" +
+                "    \"channel\" : \"CONS\",\n" +
+                "    \"start\" : 20000,\n" +
+                "    \"guideDay\" : -90000000,\n" +
+                "    \"duration\" : 10000\n" +
+                "  } ],\n" +
+                "  \"channel\" : \"CONS\",\n" +
+                "  \"start\" : 1649086200000,\n" +
+                "  \"stop\" : 1649086200000\n" +
+                "}").andRounded().isEqualTo(schedule);
+
+    }
+
+    protected Schedule example() {
+        MediaTable table = exampleTable();
+        return table.getSchedule();
+    }
+
+    protected MediaTable exampleTable() {
         MediaTable table = new MediaTable();
 
         Program program = MediaBuilder.program().crids("crid://domain.com/12345").build();
@@ -37,19 +95,12 @@ public class ScheduleTest {
         event2.setUrnRef(program.getCrids().get(0));
         event2.setPoProgID("id2");
 
-        Schedule schedule = new Schedule(Channel.CONS, Instant.now(), Arrays.asList(event1, event2, event3));
+        Schedule schedule = new Schedule(Channel.CONS,
+            Instant.parse("2022-04-04T15:30:00Z"),
+            Arrays.asList(event1, event2, event3)
+        );
         table.setSchedule(schedule);
 
-        final StringWriter writer = new StringWriter();
-        JAXB.marshal(table, writer);
-        final MediaTable result = JAXB.unmarshal(new StringReader(writer.toString()), MediaTable.class);
-
-        assertThat(result.getProgramTable()).hasSize(2);
-        assertThat(result.getProgramTable().get(0).getMid()).isEqualTo("id1");
-        assertThat(result.getProgramTable().get(0).getScheduleEvents()).hasSize(1);
-        assertThat(result.getProgramTable().get(0).getCrids()).hasSize(1);
-        assertThat(result.getProgramTable().get(1).getMid()).isEqualTo("id2");
-        assertThat(result.getProgramTable().get(1).getScheduleEvents()).hasSize(1);
-        assertThat(result.getProgramTable().get(1).getCrids()).isEmpty();
+        return table;
     }
 }

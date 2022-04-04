@@ -413,6 +413,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this.stop = stop;
     }
 
+    @XmlTransient
     public void setStop(LocalDateTime stop) {
         this.stop = stop == null ? null : stop.atZone(ZONE_ID).toInstant();
     }
@@ -497,7 +498,36 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         return Ranges.closedOpen(getStart(), getStop());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Schedule schedule = (Schedule) o;
+
+        if (filtered != schedule.filtered) return false;
+        if (!scheduleEvents.equals(schedule.scheduleEvents)) return false;
+        if (channel != schedule.channel) return false;
+        if (net != null ? !net.equals(schedule.net) : schedule.net != null) return false;
+        if (!start.equals(schedule.start)) return false;
+        if (!stop.equals(schedule.stop)) return false;
+        if (releaseVersion != null ? !releaseVersion.equals(schedule.releaseVersion) : schedule.releaseVersion != null)
+            return false;
+        return reruns != null ? reruns.equals(schedule.reruns) : schedule.reruns == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = scheduleEvents.hashCode();
+        result = 31 * result + (channel != null ? channel.hashCode() : 0);
+        result = 31 * result + (net != null ? net.hashCode() : 0);
+        result = 31 * result + start.hashCode();
+        result = 31 * result + stop.hashCode();
+        result = 31 * result + (releaseVersion != null ? releaseVersion.hashCode() : 0);
+        result = 31 * result + (filtered ? 1 : 0);
+        result = 31 * result + (reruns != null ? reruns.hashCode() : 0);
+        return result;
+    }
 
     private class ScheduleEventSet extends AbstractSet<ScheduleEvent> implements SortedSet<ScheduleEvent> {
         SortedSet<ScheduleEvent> events;
