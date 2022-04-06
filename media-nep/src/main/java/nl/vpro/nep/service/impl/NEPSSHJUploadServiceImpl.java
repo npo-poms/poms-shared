@@ -1,6 +1,7 @@
 package nl.vpro.nep.service.impl;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.*;
@@ -16,6 +17,7 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
@@ -54,6 +56,11 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
      */
     private Duration sftpTimeout = Duration.ofSeconds(5);
 
+    @Getter
+    @Setter
+    private int  batchSize = 1024 * 1024 * 5;
+
+
     Set<SSHClientFactory.ClientHolder> created = new HashSet<>();
 
     @Inject
@@ -61,12 +68,15 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         @Value("${nep.gatekeeper-upload.host}") String sftpHost,
         @Value("${nep.gatekeeper-upload.username}") String username,
         @Value("${nep.gatekeeper-upload.password}") String password,
-        @Value("${nep.gatekeeper-upload.hostkey}") String hostKey
+        @Value("${nep.gatekeeper-upload.hostkey}") String hostKey,
+        @Value("${nep.gatekeeper-upload.batchSize:5242880}") int batchSize
+
     ) {
         this.sftpHost = sftpHost;
         this.username = username;
         this.password = password;
         this.hostKey = hostKey;
+        this.batchSize = batchSize;
     }
 
     protected NEPSSHJUploadServiceImpl(Properties properties) {
@@ -74,7 +84,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             properties.getProperty("nep.gatekeeper-upload.host"),
             properties.getProperty("nep.gatekeeper-upload.username"),
             properties.getProperty("nep.gatekeeper-upload.password"),
-            properties.getProperty("nep.gatekeeper-upload.hostkey")
+            properties.getProperty("nep.gatekeeper-upload.hostkey"),
+            NumberUtils.toInt(properties.getProperty("nep.gatekeeper-upload.batchSize"), 5242880)
         );
     }
 
@@ -137,7 +148,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 OutputStream out = handle.new RemoteFileOutputStream()
             ) {
 
-                byte[] buffer = new byte[1014 * 1024];
+                byte[] buffer = new byte[batchSize];
                 long infoBatch = 10;
                 long batchCount = 0;
                 long numberOfBytes = 0;
@@ -151,11 +162,13 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                     numberOfBytes += n;
 
                     if (++batchCount % infoBatch == 0) {
+                        Duration duration = Duration.between(start, Instant.now());
+
                         // updating spans in ngToast doesn't work...
                         logger.info(
-                            en("Uploaded {}/{} to {}:{}")
-                                .nl("Geüpload {}/{} naar {}:{}")
-                                .slf4jArgs(FORMATTER.format(numberOfBytes), FORMATTER.format(size), sftpHost, nepFile)
+                            en("Uploaded {}/{} to {}:{} ({})")
+                                .nl("Geüpload {}/{} naar {}:{} ({})")
+                                .slf4jArgs(FORMATTER.format(numberOfBytes), FORMATTER.format(size), sftpHost, nepFile, FORMATTER.formatSpeed(numberOfBytes, duration))
                                 .build());
                     } else {
                         log.debug("Uploaded {}/{} bytes to NEP", FORMATTER.format(numberOfBytes), FORMATTER.format(size));
