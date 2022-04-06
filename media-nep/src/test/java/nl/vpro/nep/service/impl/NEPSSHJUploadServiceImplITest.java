@@ -39,7 +39,7 @@ public class NEPSSHJUploadServiceImplITest {
     Instant start = Instant.now();
 
 
-    private String[] files = new String[] {"/Users/mihxil/WO_NTR_16270855_2020-08-25T172847803_dolleminas01.mp4"};
+    private String[] files = new String[] {"/Users/michiel/samples/huge.mxf"};
     //, "/Users/michiel/npo/media/huge2.mp4"};
 
 
@@ -92,6 +92,7 @@ public class NEPSSHJUploadServiceImplITest {
         try (FileCachingInputStream in = FileCachingInputStream.builder()
             .input(fileInputStream)
             .downloadFirst(false)
+            .batchSize(impl.getBatchSize())
             .progressLoggingBatch(50)
             .logger(log)
             //.batchSize(5000)
