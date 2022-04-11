@@ -10,9 +10,7 @@ import java.time.Instant;
  * @since 5.11
  */
 public interface Trackable {
-    default boolean hasChanges() {
-        return true;
-    }
+
     Instant getLastModifiedInstant();
     Instant getCreationInstant();
 
