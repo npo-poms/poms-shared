@@ -216,6 +216,7 @@ public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicIma
         return getLastModified();
     }
 
+    @Override
     public void setLastModifiedInstant(Instant lastModified) {
         this.lastModified = lastModified;
     }
