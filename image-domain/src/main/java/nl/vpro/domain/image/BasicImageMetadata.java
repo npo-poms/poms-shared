@@ -26,6 +26,10 @@ import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
+ * The implementation of {@link ImageMetadata}
+ *
+ * This is used to (temporary) represent an image on the image backend server for use in poms gui.
+ *
  * @author rico
  */
 @XmlRootElement(name = "metadata")

@@ -8,6 +8,9 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+/**
+ * Recognized image formats.
+ */
 @Slf4j
 public enum ImageFormat {
 

@@ -12,6 +12,8 @@ import nl.vpro.domain.support.License;
 import nl.vpro.util.TimeUtils;
 
 /**
+ * Mutable version of {@link BasicMetaData}.
+ *
  * @author Michiel Meeuwissen
  * @since 5.5
  */

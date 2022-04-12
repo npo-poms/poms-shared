@@ -10,9 +10,12 @@ import nl.vpro.domain.ChangeReport;
 
 /**
  * Extends {@link Metadata} to include more information about the image, and its original source.
+ *
+ * This targets mostly at field to _serve_ the image.
  * @author Michiel Meeuwissen
  * @since 5.5
  */
+@SuppressWarnings("UnusedReturnValue")
 public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> {
 
     Float getHeightInMm();
