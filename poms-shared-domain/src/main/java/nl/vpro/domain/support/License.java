@@ -127,7 +127,7 @@ public class License implements Displayable, Serializable { // Not an enum, beca
 
 
     @JsonCreator
-    public License(String id) {
+    public License(@LicenseId String id) {
         this.id = id;
     }
 

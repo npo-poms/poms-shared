@@ -1,8 +1,6 @@
 package nl.vpro.validation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -15,7 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @since 5.5
  */
 
-@Target({FIELD})
+@Target({ElementType.PARAMETER, FIELD})
 @Retention(RUNTIME)
 @Constraint(validatedBy = LicenseValidator.class)
 @Documented
