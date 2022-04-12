@@ -13,7 +13,7 @@ import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.*;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -124,6 +124,14 @@ public class License implements Displayable, Serializable { // Not an enum, beca
     private boolean display = true;
 
     public License (){}
+
+
+    /**
+     * Poly null constructor.
+     */
+    public static @PolyNull License of(@PolyNull @LicenseId String id) {
+        return id == null ? null : new License(id);
+    }
 
 
     @JsonCreator
