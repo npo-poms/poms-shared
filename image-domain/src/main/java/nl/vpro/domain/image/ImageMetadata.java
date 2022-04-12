@@ -11,7 +11,8 @@ import nl.vpro.domain.ChangeReport;
 /**
  * Extends {@link Metadata} to include more information about the image, and its original source.
  *
- * This targets mostly at field to _serve_ the image.
+ * This targets mostly at fields that are  need to <em>serve</em> the image.
+ *
  * @author Michiel Meeuwissen
  * @since 5.5
  */
