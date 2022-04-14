@@ -10,7 +10,7 @@ import lombok.ToString;
 
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.image.BasicImageMetadata;
+import nl.vpro.domain.image.backend.BasicImageMetadata;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 

@@ -16,7 +16,7 @@ import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.Response;
 import javax.xml.ws.ResponseWrapper;
 
-import nl.vpro.domain.image.BasicImageMetadata;
+import nl.vpro.domain.image.backend.BasicImageMetadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.support.OwnerType;
 
