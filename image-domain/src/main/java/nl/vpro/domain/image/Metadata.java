@@ -15,6 +15,7 @@ import nl.vpro.validation.URI;
  *
  * @author Michiel Meeuwissen
  * @since 5.13
+ * @param <T> self reference
  */
 public interface Metadata<T extends Metadata<T>> extends Trackable {
 
