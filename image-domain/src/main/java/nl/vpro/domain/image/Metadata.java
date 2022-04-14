@@ -45,8 +45,10 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
 
 
     /**
-     * When making an implementation of {@link Metadata}, you may defined a linke {@link lombok.Builder} which may
+     * When making an implementation of {@link Metadata}, you can define a {@link lombok.Builder} which may
      * implement this interface.
+     *
+     * This provides then {@link #from(Metadata)} which is usefull to quickly filling it, using different implementations
      *
      * @since 5.32
      */
