@@ -55,8 +55,8 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
     @Beta
     interface LombokBuilder<SELF extends LombokBuilder<SELF>> {
 
-        SELF lastModifiedInstant(Instant lastModifiedInstant);
-        SELF creationInstant(Instant createInstant);
+        SELF lastModified(Instant lastModifiedInstant);
+        SELF creationDate(Instant createInstant);
         SELF type(ImageType type);
         SELF title(String title);
         SELF description(String description);
@@ -66,8 +66,8 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
         SELF credits(String credits);
 
         default SELF from(Metadata<?> from) {
-            return lastModifiedInstant(from.getLastModifiedInstant())
-                .creationInstant(from.getCreationInstant())
+            return lastModified(from.getLastModifiedInstant())
+                .creationDate(from.getCreationInstant())
                 .type(from.getType())
                 .title(from.getTitle())
                 .description(from.getDescription())
