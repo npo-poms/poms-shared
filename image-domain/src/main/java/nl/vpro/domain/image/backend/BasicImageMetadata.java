@@ -2,9 +2,10 @@
  * Copyright (C) 2016 All rights reserved
  * VPRO The Netherlands
  */
-package nl.vpro.domain.image;
+package nl.vpro.domain.image.backend;
 
-import lombok.*;
+import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.MutableEmbargo;
+import nl.vpro.domain.image.*;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;

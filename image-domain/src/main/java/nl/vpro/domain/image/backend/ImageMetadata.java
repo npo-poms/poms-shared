@@ -1,4 +1,4 @@
-package nl.vpro.domain.image;
+package nl.vpro.domain.image.backend;
 
 import java.net.URI;
 import java.time.Instant;
@@ -7,9 +7,10 @@ import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.ChangeReport;
+import nl.vpro.domain.image.*;
 
 /**
- * Extends {@link Metadata} to include more information about the image, and its original source.
+ * Extends {@link MutableMetadata} to include more information about the image, and its original source.
  *
  * This targets mostly at fields that are  need to <em>serve</em> the image.
  *
@@ -17,7 +18,7 @@ import nl.vpro.domain.ChangeReport;
  * @since 5.5
  */
 @SuppressWarnings("UnusedReturnValue")
-public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> {
+public interface ImageMetadata<T extends ImageMetadata<T>>  extends MutableMetadata<T> {
 
     Float getHeightInMm();
 
@@ -59,8 +60,8 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
     }
 
     @Override
-    default ChangeReport copyFrom(Metadata<?> metadata) {
-        ChangeReport change = Metadata.super.copyFrom(metadata);
+    default ChangeReport copyFrom(MutableMetadata<?> metadata) {
+        ChangeReport change = MutableMetadata.super.copyFrom(metadata);
 
         if (metadata instanceof ImageMetadata) {
             ImageMetadata<?> imageMetadata = (ImageMetadata<?>) metadata;
@@ -97,8 +98,8 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
     }
 
     @Override
-    default ChangeReport copyFromIfTargetUnset(Metadata<?> source) {
-         ChangeReport change = Metadata.super.copyFromIfTargetUnset(source);
+    default ChangeReport copyFromIfTargetUnset(MutableMetadata<?> source) {
+         ChangeReport change = MutableMetadata.super.copyFromIfTargetUnset(source);
 
         if (source instanceof ImageMetadata) {
             ImageMetadata<?> image = (ImageMetadata<?>) source;
@@ -136,8 +137,8 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
 
 
     @Override
-    default  ChangeReport  copyFromIfSourceSet(Metadata<?> metadata) {
-        ChangeReport change = Metadata.super.copyFromIfSourceSet(metadata);
+    default  ChangeReport  copyFromIfSourceSet(MutableMetadata<?> metadata) {
+        ChangeReport change = MutableMetadata.super.copyFromIfSourceSet(metadata);
 
         if (metadata instanceof ImageMetadata) {
             ImageMetadata<?> source = (ImageMetadata<?>) metadata;

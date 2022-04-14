@@ -1,5 +1,6 @@
 package nl.vpro.domain.image;
 
+import nl.vpro.domain.image.backend.Image;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

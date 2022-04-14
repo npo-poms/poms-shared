@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.image.backend.ImageMetadata;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -96,7 +97,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 })
 @Slf4j
 public class Image extends PublishableObject<Image>
-    implements Metadata<Image>, MutableOwnable, Child<MediaObject> {
+    implements MutableMetadata<Image>, MutableOwnable, Child<MediaObject> {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
     public static final String BASE_URN = "urn:vpro:media:image:";
@@ -472,8 +473,8 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public ChangeReport copyFrom(@NonNull Metadata<?> metadata) {
-        ChangeReport change = Metadata.super.copyFrom(metadata);
+    public ChangeReport copyFrom(@NonNull MutableMetadata<?> metadata) {
+        ChangeReport change = MutableMetadata.super.copyFrom(metadata);
         if (metadata.getImageUri() != null) {
             if (imageUri == null) {
                 setImageUri(metadata.getImageUri());

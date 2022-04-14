@@ -20,6 +20,8 @@ import javax.validation.constraints.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.image.backend.ImageMetadata;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -60,7 +62,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @Slf4j
 @Data
-public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageUpdate> {
+public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata<ImageUpdate> {
 
     @XmlAttribute(required = true)
     @NotNull
@@ -272,7 +274,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
         if (uri != null) {
             if (uri
                 .replace('.', ':') // See MSE-865
-                .startsWith(nl.vpro.domain.image.Image.BASE_URN)) {
+                .startsWith(nl.vpro.domain.image.backend.Image.BASE_URN)) {
                 this.image = uri;
             } else if (uri.startsWith("urn:")) {
                 log.warn("Uri starts with a non image urn: {}. Not taking it as an url, because that won't work either", uri);

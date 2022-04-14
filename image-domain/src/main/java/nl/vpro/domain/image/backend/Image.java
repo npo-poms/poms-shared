@@ -3,7 +3,7 @@
  * VPRO The Netherlands
  */
 
-package nl.vpro.domain.image;
+package nl.vpro.domain.image.backend;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.AbstractPublishableObject;
+import nl.vpro.domain.image.*;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.support.License;
@@ -40,7 +41,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 /**
  * This is the image object as used by <a href="https://images.poms.omroep.nl"> poms image server</a>
  *
- * It is the database entity, and also has a XML/Json representation.
+ * It is the database entity, and also has an XML/Json representation, but this is currently not exposed in public API's.
  *
  */
 @SuppressWarnings("WSReferenceInspection")

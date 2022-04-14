@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.domain.image.BasicMetaData;
+import nl.vpro.domain.image.Metadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.support.License;
 import nl.vpro.validation.*;
@@ -27,7 +27,7 @@ import nl.vpro.validation.*;
 @Setter
 @lombok.AllArgsConstructor(access = AccessLevel.PRIVATE)
 @lombok.Builder
-public class Image implements BasicMetaData<Image> {
+public class Image implements Metadata<Image> {
 
     @XmlAttribute
     private ImageType type;
