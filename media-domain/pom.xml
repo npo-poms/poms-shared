@@ -195,12 +195,7 @@
       <artifactId>xmlunit-matchers</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>net.sf.json-lib</groupId>
-      <artifactId>json-lib</artifactId>
-      <classifier>jdk15</classifier>
-      <scope>test</scope>
-    </dependency>
+
     <!-- This is needed to let hibernate validation work, it somewhy needs an el-implementation -->
     <dependency>
       <groupId>org.glassfish.web</groupId>
