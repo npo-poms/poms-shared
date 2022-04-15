@@ -2,6 +2,7 @@ package nl.vpro.domain.image;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.annotations.Beta;
 
 import nl.vpro.domain.Trackable;
@@ -64,7 +65,9 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
     @Beta
     interface LombokBuilder<SELF extends LombokBuilder<SELF>> {
 
+        @JsonProperty("lastModified")
         SELF lastModifiedInstant(Instant lastModifiedInstant);
+        @JsonProperty("creationDate")
         SELF creationInstant(Instant creationInstant);
         SELF type(ImageType type);
         SELF title(String title);
