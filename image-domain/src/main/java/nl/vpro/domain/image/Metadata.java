@@ -25,6 +25,15 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
 
     String getDescription();
 
+
+    /**
+     * @since 5.32
+     */
+    @Beta
+    default String getAlternative() {
+        return null;
+    }
+
     License getLicense();
 
     /**
@@ -60,6 +69,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
         SELF type(ImageType type);
         SELF title(String title);
         SELF description(String description);
+        SELF alternative(String alternative);
         SELF license(License license);
         SELF source(String source);
         SELF sourceName(String sourceName);
@@ -71,6 +81,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
                 .type(from.getType())
                 .title(from.getTitle())
                 .description(from.getDescription())
+                .alternative(from.getAlternative())
                 .license(from.getLicense())
                 .source(from.getSource())
                 .sourceName(from.getSourceName())
