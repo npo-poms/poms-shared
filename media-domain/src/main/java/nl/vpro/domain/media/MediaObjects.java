@@ -637,7 +637,7 @@ public class MediaObjects {
      *
      * @since 5.32
      */
-    public static Optional<Location> isLocationAvailable(Platform platform, MediaObject m, Instant now) {
+    public static Optional<Location> getAvailableLocation(Platform platform, MediaObject m, Instant now) {
         for (Location l : m.getLocations()) {
             if (l.isPublishable(now)) {
                 if (platform.matches(l.getPlatform())) {
