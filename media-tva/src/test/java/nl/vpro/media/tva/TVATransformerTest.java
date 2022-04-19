@@ -52,14 +52,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 @Slf4j
 public class TVATransformerTest {
-
-
     final EpgGenreFunction genreFunction = new EpgGenreFunction();
 
-
-
     @BeforeEach
-    public void init() throws ParserConfigurationException, SAXException, IOException {
+    public void init() throws SAXException, IOException {
         genreFunction.setNotFound(NotFound.FATAL);
     }
 
