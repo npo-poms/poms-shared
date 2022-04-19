@@ -629,6 +629,25 @@ public class MediaObjects {
         return null;
     }
 
+    /**
+     * Determines if for a given platform, the media object has a location, and returns (one) if there is.
+     * If there is no location for a certain platform the {@link Prediction#getState()} should be {@link Prediction.State#REVOKED}, {@link Prediction.State#ANNOUNCED} or {@link Prediction.State#NOT_ANNOUNCED}.
+     *
+     * Otherwise, it must be {@link Prediction.State#REALIZED};
+     *
+     * @since 5.32
+     */
+    public static Optional<Location> isLocationAvailable(Platform platform, MediaObject m, Instant now) {
+        for (Location l : m.getLocations()) {
+            if (l.isPublishable(now)) {
+                if (platform.matches(l.getPlatform())) {
+                    return Optional.of(l);
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
     static List<String> getPlannedPlatformNamesInLowerCase(Collection<Prediction> preds) {
         if (preds != null) {
             return preds.stream()

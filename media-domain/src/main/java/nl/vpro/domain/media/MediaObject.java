@@ -2063,6 +2063,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     protected StreamingStatusImpl getModifiableStreamingPlatformStatus() {
         return streamingPlatformStatus;
     }
+
     @XmlTransient
     @NonNull
     public SortedSet<Prediction> getPredictions() {
@@ -2080,7 +2081,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                         if (location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
                                 && prediction.inPublicationWindow(instant())) {
-                            log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction,
+                            log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction,
                                     location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
                             MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
