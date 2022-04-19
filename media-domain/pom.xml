@@ -122,8 +122,8 @@
       <artifactId>i18n-regions-subdivisions</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -181,11 +181,6 @@
       <artifactId>slf4j-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.xmlunit</groupId>
       <artifactId>xmlunit-core</artifactId>
       <scope>test</scope>
@@ -198,9 +193,8 @@
 
     <!-- This is needed to let hibernate validation work, it somewhy needs an el-implementation -->
     <dependency>
-      <groupId>org.glassfish.web</groupId>
-      <artifactId>javax.el</artifactId>
-      <scope>runtime</scope>
+      <groupId>org.glassfish</groupId>
+      <artifactId>jakarta.el</artifactId>
     </dependency>
 
     <dependency>
