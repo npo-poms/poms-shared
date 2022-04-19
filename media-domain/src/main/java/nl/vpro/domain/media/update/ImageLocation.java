@@ -22,6 +22,7 @@ import nl.vpro.validation.URI;
 })
 public class ImageLocation {
 
+
     @XmlElement
     @Getter
     @Setter
@@ -36,7 +37,7 @@ public class ImageLocation {
     private String url;
 
 
-    private ImageLocation() {
+    public ImageLocation() {
 
     }
 
