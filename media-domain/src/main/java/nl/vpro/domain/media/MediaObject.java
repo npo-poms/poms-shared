@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -370,6 +371,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Schema(implementation = String.class, type = "string")
     protected List<
         // valid are countries (further validated by @ValidCountry), and a list of codes.
         org.meeuw.i18n.regions.
@@ -1258,6 +1260,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @JsonSerialize(using = CountryCodeList.Serializer.class)
     @JsonDeserialize(using = CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
+    @XmlSchemaType(name = "string")
     public List<org.meeuw.i18n.regions.Region> getCountries() {
         if (countries == null) {
             countries = new ArrayList<>();

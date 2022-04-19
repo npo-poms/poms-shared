@@ -215,6 +215,11 @@
       <artifactId>jaxb-documentation</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
   <profiles>
     <profile>
