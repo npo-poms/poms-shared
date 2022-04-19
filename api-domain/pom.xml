@@ -76,6 +76,10 @@
       <artifactId>jakarta.el</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>jakarta.el</groupId>
+      <artifactId>jakarta.el-api</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
