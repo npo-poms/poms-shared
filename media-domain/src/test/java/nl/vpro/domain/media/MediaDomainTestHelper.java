@@ -10,22 +10,16 @@ import java.time.Instant;
 import java.util.*;
 
 import javax.validation.ConstraintViolation;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
+import javax.xml.validation.*;
 
 import org.xml.sax.SAXException;
 
 import nl.vpro.domain.ValidationTestHelper;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 
 @Slf4j
