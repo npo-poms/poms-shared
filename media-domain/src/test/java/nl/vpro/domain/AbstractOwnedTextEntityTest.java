@@ -3,6 +3,10 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
+import javax.validation.constraints.NotNull;
+
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
@@ -17,10 +21,15 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AbstractOwnedTextEntityTest {
 
-    static class OwnedTextEntity extends AbstractOwnedTextEntity<OwnedTextEntity, Object> {
+    static class OwnedTextEntity extends AbstractOwnedTextEntity<OwnedTextEntity, Serializable> {
+
+        private static final long serialVersionUID = -4862022349042021564L;
+
         @Getter
         @Setter
-        Object parent;
+        @NotNull
+        Serializable parent;
+
         public OwnedTextEntity(String value, OwnerType owner, TextualType type) {
             super(value, owner, type);
         }

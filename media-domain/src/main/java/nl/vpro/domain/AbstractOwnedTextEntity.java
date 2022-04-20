@@ -23,6 +23,8 @@ import nl.vpro.validation.NoHtml;
 @XmlTransient
 public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity<T, P>, P> extends AbstractOwnedText<T> {
 
+    private static final long serialVersionUID = -4621135759610402997L;
+
     @Column(nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
     @Size.List({
@@ -68,7 +70,7 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity<
 
     public abstract P getParent();
 
-    public abstract  void setParent(P  parent);
+    public abstract  void setParent(@NotNull P  parent);
 
 
     @SuppressWarnings({"unchecked"})

@@ -19,6 +19,8 @@ import nl.vpro.domain.media.support.TextualType;
 @SuppressWarnings("JpaMissingIdInspection") // it's in super
 public class TitleTranslation extends AbstractOwnedTextEntity<TitleTranslation, MediaObjectTranslation> {
 
+    private static final long serialVersionUID = -4636628305739242913L;
+
     @Getter
     @Setter
     @ManyToOne

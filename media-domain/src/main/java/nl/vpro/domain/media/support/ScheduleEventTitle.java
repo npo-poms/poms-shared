@@ -27,6 +27,8 @@ import nl.vpro.domain.media.ScheduleEvent;
 @JsonPropertyOrder({"value", "owner", "type"})
 public class ScheduleEventTitle extends AbstractOwnedTextEntity<ScheduleEventTitle, ScheduleEvent> {
 
+    private static final long serialVersionUID = -445917594010977511L;
+
     @Getter
     @Setter
     @ManyToOne

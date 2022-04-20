@@ -19,6 +19,7 @@ import nl.vpro.domain.media.support.TextualType;
 @Entity
 public class DescriptionTranslation extends AbstractOwnedTextEntity<DescriptionTranslation, MediaObjectTranslation> {
 
+    private static final long serialVersionUID = 8768731191821945231L;
     @Getter
     @Setter
     @ManyToOne
