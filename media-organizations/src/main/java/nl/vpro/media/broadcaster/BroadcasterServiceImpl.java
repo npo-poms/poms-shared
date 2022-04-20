@@ -67,6 +67,7 @@ public class BroadcasterServiceImpl implements BroadcasterService {
         URLResource<Map<String, String>> result = URLResource.map(URI.create(configFile), this::fillMap)
             .setMinAge(Duration.of(1, ChronoUnit.HOURS))
             .setAsync(async);
+        result.setAccept("text/plain");
         result.setConnectTimeout(Duration.ofSeconds(5));
         result.setReadTimeout(Duration.ofSeconds(10));
         return result;
