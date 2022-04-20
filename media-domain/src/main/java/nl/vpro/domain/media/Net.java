@@ -12,8 +12,9 @@ import nl.vpro.i18n.Displayable;
 
 
 @Entity
-@SuppressWarnings("serial")
 public class Net implements Displayable, Serializable, Comparable<Net> {
+
+    private static final long serialVersionUID = -5278065987837127858L;
 
     @Id
     @NotNull(message = "type is required")

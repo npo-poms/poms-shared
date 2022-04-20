@@ -27,6 +27,7 @@ import nl.vpro.domain.media.support.OwnerType;
 @Setter
 public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, TargetGroup> {
 
+    private static final long serialVersionUID = -4237232154628528835L;
 
     public TargetGroups() {}
 

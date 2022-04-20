@@ -6,6 +6,7 @@ package nl.vpro.parkpost;
 
 import lombok.Getter;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
@@ -30,7 +31,9 @@ import nl.vpro.domain.media.Schedule;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
-public class ProductCode {
+public class ProductCode  implements Serializable {
+
+    private static final long serialVersionUID = 2625635499389550495L;
 
     public enum Type {
         P("PROMO"),
@@ -47,6 +50,8 @@ public class ProductCode {
     }
 
     public static class ParseException extends RuntimeException {
+        private static final long serialVersionUID = -5852212513798937395L;
+
         public ParseException(String s) {
             super(s);
         }

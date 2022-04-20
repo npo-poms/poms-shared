@@ -45,6 +45,8 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     extends AbstractPublishableObject<T>
     implements MutableEmbargoDeprecated<T>, TrackableObject {
 
+    private static final long serialVersionUID = 7010308562857745023L;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     protected Workflow workflow = Workflow.FOR_PUBLICATION;

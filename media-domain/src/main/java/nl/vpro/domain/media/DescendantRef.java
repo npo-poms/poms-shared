@@ -1,13 +1,12 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.io.Serializable;
+
+import javax.xml.bind.annotation.*;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * @author roekoe
@@ -20,6 +19,8 @@ import java.io.Serializable;
     "type"
 })
 public class DescendantRef implements Comparable<DescendantRef>, Serializable {
+
+    private static final long serialVersionUID = 2305207507673462765L;
 
     @XmlAttribute
     protected String urnRef;

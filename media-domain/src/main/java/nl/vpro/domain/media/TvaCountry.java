@@ -12,7 +12,7 @@ import com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.media.bind.TvaCountryAdapter;
 
 /**
- * See https://jira.vpro.nl/browse/MSE-2367, Appendix%203%20Country%20Codes%20v2.0.pdf
+ * See <a href="https://jira.vpro.nl/browse/MSE-2367">jira</a>, Appendix%203%20Country%20Codes%20v2.0.pdf
  *
  * For now not used, we simply use the more complete {@link CountryCode}
  *

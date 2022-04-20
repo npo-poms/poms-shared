@@ -20,6 +20,8 @@ import nl.vpro.domain.media.support.OwnerType;
 @XmlType(name = "topicsType")
 public class Topics extends AbstractMediaObjectOwnableList<Topics, Topic> {
 
+    private static final long serialVersionUID = -1309416187665166955L;
+
     public static Topics empty(@NonNull OwnerType owner) {
         return Topics.builder().owner(owner).build();
     }

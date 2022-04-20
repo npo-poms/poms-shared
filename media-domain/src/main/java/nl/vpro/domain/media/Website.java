@@ -24,6 +24,8 @@ import nl.vpro.validation.*;
 @XmlType(name = "websiteType")
 public class Website implements UpdatableIdentifiable<Long, Website>, Serializable, Supplier<String>, MutableOwnable {
 
+    private static final long serialVersionUID = 6568968749798696389L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlTransient

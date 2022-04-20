@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.*;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -26,11 +27,12 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @Getter
 @Setter
 @ToString(of = { "gtaaRecord", "role" })
-@EqualsAndHashCode(of = { "gtaaRecord" }, callSuper = false)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "geoLocationType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus", "role"})
 public class GeoLocation extends DomainObject implements MediaObjectOwnableListItem<GeoLocation, GeoLocations>, Region, GTAARecordManaged {
+
+    private static final long serialVersionUID = -1000438762907228547L;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @XmlTransient
@@ -134,6 +136,24 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @Override
     public void setGtaaUri(String uri) {
         GTAARecordManaged.super.setGtaaUri(uri);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        GeoLocation that = (GeoLocation) o;
+
+        return Objects.equals(gtaaRecord, that.gtaaRecord);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (gtaaRecord != null ? gtaaRecord.hashCode() : 0);
+        return result;
     }
 
     @Override

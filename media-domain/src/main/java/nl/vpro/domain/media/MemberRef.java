@@ -91,6 +91,8 @@ import static nl.vpro.domain.Changeables.instant;
 })
 public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable, RecursiveParentChildRelation {
 
+    private static final long serialVersionUID = -2247469313512827819L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

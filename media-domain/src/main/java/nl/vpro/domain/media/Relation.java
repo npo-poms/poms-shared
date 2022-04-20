@@ -45,6 +45,8 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
 
     private static final Pattern URN_PATTERN = Pattern.compile("(" + BASE_URN + ")(\\d+)");
 
+    private static final long serialVersionUID = -2940513328653799208L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlTransient

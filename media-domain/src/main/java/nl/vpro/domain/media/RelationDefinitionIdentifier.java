@@ -9,6 +9,8 @@ import javax.validation.constraints.Pattern;
 @Embeddable
 public class RelationDefinitionIdentifier implements Serializable {
 
+    private static final long serialVersionUID = -2249857834449241817L;
+
     @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
     @Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
     private String type;

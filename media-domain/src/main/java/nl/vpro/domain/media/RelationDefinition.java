@@ -5,15 +5,12 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.*;
 
 import nl.vpro.domain.Identifiable;
@@ -30,6 +27,8 @@ import nl.vpro.domain.user.Broadcaster;
         condition = "broadcaster in (:broadcasters)")
 })
 public class RelationDefinition implements Serializable, Identifiable<RelationDefinitionIdentifier> {
+
+    private static final long serialVersionUID = -1658542635995973742L;
 
     public static RelationDefinition of(String type, Broadcaster broadcaster) {
         return new RelationDefinition(type, broadcaster.getId());

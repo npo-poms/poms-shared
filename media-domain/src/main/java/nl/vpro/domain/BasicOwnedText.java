@@ -13,6 +13,8 @@ import nl.vpro.domain.media.support.TextualType;
  */
 public class BasicOwnedText extends BasicTypedText implements OwnedText {
 
+    private static final long serialVersionUID = -6428591725078554520L;
+
     @Getter
     @Setter
     private OwnerType owner;

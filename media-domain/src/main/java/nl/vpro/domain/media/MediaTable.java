@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
 
@@ -34,7 +35,9 @@ import static nl.vpro.domain.media.MediaObjects.deepCopy;
 @lombok.Builder
 @AllArgsConstructor
 @Slf4j
-public class MediaTable implements Iterable<MediaObject> {
+public class MediaTable implements Iterable<MediaObject>, Serializable {
+
+    private static final long serialVersionUID = 4054512453318247403L;
 
     public MediaTable() {
 

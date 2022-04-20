@@ -11,11 +11,7 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -35,6 +31,7 @@ import nl.vpro.domain.media.support.SimpleValueMediaObjectOwnableListItem;
 @JsonDeserialize(using = Intention.Deserializer.class)
 public class Intention extends DomainObject implements SimpleValueMediaObjectOwnableListItem<Intention, Intentions, IntentionType> {
 
+    private static final long serialVersionUID = -604375721442281619L;
 
     @ManyToOne(targetEntity = Intentions.class, fetch = FetchType.LAZY)
     @XmlTransient
@@ -95,7 +92,7 @@ public class Intention extends DomainObject implements SimpleValueMediaObjectOwn
 
     public static class Deserializer extends JsonDeserializer<Intention> {
         @Override
-        public Intention deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+        public Intention deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
             return new Intention(IntentionType.valueOf(p.getValueAsString()));
         }
     }

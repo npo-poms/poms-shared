@@ -27,8 +27,9 @@ import nl.vpro.domain.user.Portal;
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "portalRestrictionType")
-@SuppressWarnings("serial")
 public class PortalRestriction extends Restriction<PortalRestriction> {
+
+    private static final long serialVersionUID = -4235262587015174878L;
 
     public static class Builder extends RestrictionBuilder<Builder> {
 

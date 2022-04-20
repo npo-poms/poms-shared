@@ -8,6 +8,7 @@
 
 package nl.vpro.domain.media;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "locationTableType",
          propOrder = {"locations",
                       "scheduleEvents" })
-public class LocationTable {
+public class LocationTable implements Serializable {
+
+    private static final long serialVersionUID = 7215068410057727467L;
 
     @XmlElement(name = "location")
     protected List<Location> locations;

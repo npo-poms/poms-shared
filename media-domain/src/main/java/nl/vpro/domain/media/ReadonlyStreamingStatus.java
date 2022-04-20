@@ -11,6 +11,7 @@ import java.time.Instant;
 @Getter
 public class ReadonlyStreamingStatus implements StreamingStatus {
 
+    private static final long serialVersionUID = 3307679919618834468L;
 
     private final Value withDrm;
 

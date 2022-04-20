@@ -31,6 +31,8 @@ import nl.vpro.domain.media.support.OwnerType;
 })
 public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Intention> {
 
+    private static final long serialVersionUID = -1077914108074955136L;
+
     public Intentions() {}
 
     public static Intentions empty(@NonNull OwnerType owner) {

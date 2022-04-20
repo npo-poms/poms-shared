@@ -37,6 +37,8 @@ import nl.vpro.domain.media.gtaa.*;
 })
 public class Name extends Credits implements GTAARecordManaged {
 
+    private static final long serialVersionUID = -263374091559949040L;
+
     @XmlTransient
     @ManyToOne(optional = false)
     @JoinColumn(name = "gtaa_uri", nullable = false)

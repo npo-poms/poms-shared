@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.NONE)
 public class StreamingStatusImpl implements StreamingStatus {
 
+    private static final long serialVersionUID = -6853692159691281271L;
+
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)

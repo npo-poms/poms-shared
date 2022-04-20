@@ -26,6 +26,7 @@ import nl.vpro.domain.media.support.SimpleValueMediaObjectOwnableListItem;
 @JsonDeserialize(using = TargetGroup.Deserializer.class)
 public class TargetGroup extends DomainObject implements SimpleValueMediaObjectOwnableListItem<TargetGroup, TargetGroups, TargetGroupType> {
 
+    private static final long serialVersionUID = 6530310295897331244L;
 
     @ManyToOne(targetEntity = TargetGroups.class, fetch = FetchType.LAZY)
     @XmlTransient

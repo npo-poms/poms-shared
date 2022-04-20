@@ -22,6 +22,8 @@ import nl.vpro.util.TimeUtils;
 @Embeddable
 public class ScheduleEventIdentifier implements Serializable {
 
+    private static final long serialVersionUID = -8254248336625205070L;
+
     @Column
     @Enumerated(EnumType.STRING)
     @Getter

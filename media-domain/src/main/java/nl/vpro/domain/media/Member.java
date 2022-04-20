@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.*;
 
 /**
@@ -11,7 +13,9 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberType",
     propOrder = {})
-public class Member {
+public class Member implements Serializable {
+
+    private static final long serialVersionUID = 8447129713109420423L;
 
     @XmlElement(required = true)
     private MediaObject member;

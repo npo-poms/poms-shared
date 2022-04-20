@@ -29,6 +29,8 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @XmlType(name = "topicType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus"})
 public class Topic extends DomainObject implements MediaObjectOwnableListItem<Topic, Topics>, GTAARecordManaged {
 
+    private static final long serialVersionUID = -3211405159144788072L;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @XmlTransient
     private Topics parent;

@@ -31,6 +31,8 @@ import nl.vpro.validation.PomsValidatorGroup;
 @XmlType(name = "twitterRefType")
 public class TwitterRef implements Serializable, Supplier<String>, MutableOwnable {
 
+    private static final long serialVersionUID = -9215030144570677716L;
+
     public enum Type {
         ACCOUNT,
         HASHTAG

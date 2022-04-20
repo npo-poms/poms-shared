@@ -21,6 +21,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Repeat implements Serializable {
 
+    private static final long serialVersionUID = -5535721887986056773L;
+
     @Column(name = "reruntext")
     @XmlValue
     protected String value;
