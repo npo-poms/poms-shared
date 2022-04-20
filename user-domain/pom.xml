@@ -75,16 +75,14 @@
       <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
-      <!-- contains javax.persistence -->
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
       <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>com.sun.mail</groupId>
-          <artifactId>javax.mail</artifactId>
-        </exclusion>
-      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -98,6 +96,11 @@
     <dependency>
       <groupId>org.glassfish</groupId>
       <artifactId>jakarta.el</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.security.enterprise</groupId>
+      <artifactId>jakarta.security.enterprise-api</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

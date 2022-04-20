@@ -30,6 +30,8 @@ import nl.vpro.domain.media.support.OwnerType;
 @Setter
 public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, GeoLocation> {
 
+    private static final long serialVersionUID = 4815604300070005169L;
+
     public static GeoLocations empty(@NonNull  OwnerType owner){
         return GeoLocations.builder().owner(owner).build();
     }

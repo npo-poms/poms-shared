@@ -24,6 +24,9 @@ public class MediaObjectOwnableLists {
     private MediaObjectOwnableLists() {
     }
 
+    /**
+     * @return {@code true} as {@link Collection#add(Object)}, if the given set changed.
+     */
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
     boolean addValue(@NonNull Set<P> set,
                      @NonNull Supplier<P> creator,

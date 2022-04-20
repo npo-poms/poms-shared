@@ -142,8 +142,6 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
         GeoLocation that = (GeoLocation) o;
 
         return Objects.equals(gtaaRecord, that.gtaaRecord);
@@ -151,9 +149,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (gtaaRecord != null ? gtaaRecord.hashCode() : 0);
-        return result;
+        return (gtaaRecord != null ? gtaaRecord.hashCode() : 0);
     }
 
     @Override

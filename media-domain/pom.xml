@@ -158,18 +158,10 @@
       <artifactId>hibernate-core</artifactId>
       <optional>true</optional>
     </dependency>
-
     <dependency>
-      <!-- contains javax.persistence -->
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
       <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>com.sun.mail</groupId>
-          <artifactId>javax.mail</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>

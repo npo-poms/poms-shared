@@ -32,6 +32,8 @@ public abstract class AbstractMediaObjectOwnableList<
     extends DomainObject
     implements MediaObjectOwnableList<THIS, I>  {
 
+    private static final long serialVersionUID = 4657694328901583730L;
+
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
     @Getter
