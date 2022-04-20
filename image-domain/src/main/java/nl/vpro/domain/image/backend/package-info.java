@@ -1,7 +1,5 @@
 /**
- * More or less generic image domain objects.
- *
- * Some are more less poms specific, other could be applied more genericly.
+ * Image domain that are used by the image server itself.
  */
 @javax.xml.bind.annotation.XmlSchema(namespace = Xmlns.IMAGE_NAMESPACE,
     xmlns=

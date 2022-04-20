@@ -3,13 +3,14 @@ package nl.vpro.domain.image;
 import java.time.Instant;
 import java.util.Objects;
 
+import javax.validation.constraints.*;
+
 import org.apache.commons.lang3.StringUtils;
 
-import nl.vpro.domain.MutableEmbargo;
-import nl.vpro.domain.Embargos;
-import nl.vpro.domain.ChangeReport;
+import nl.vpro.domain.*;
 import nl.vpro.domain.support.License;
 import nl.vpro.util.TimeUtils;
+import nl.vpro.validation.NoHtml;
 
 /**
  * Mutable version of {@link Metadata}.
@@ -27,18 +28,17 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
 
     Integer getWidth();
 
-
-    void setType(ImageType type);
-    void setTitle(String title);
+    void setType(@NotNull ImageType type);
+    void setTitle(@NotNull @Size(max = 255, min = 1) String title);
     void setDescription(String description);
-    void setSource(String source);
-    void setSourceName(String sourceName);
+    void setSource(@NotNull String source);
+    void setSourceName(@NotNull String sourceName);
 
-    void setLicense(License license);
+    void setLicense(@NotNull License license);
 
-    void setCredits(String credits);
-    void setHeight(Integer height);
-    void setWidth(Integer width);
+    void setCredits(@NoHtml @NotNull String credits);
+    void setHeight(@Positive Integer height);
+    void setWidth(@Positive Integer width);
     void setDate(String date);
 
     default void setDate(Instant instant) {

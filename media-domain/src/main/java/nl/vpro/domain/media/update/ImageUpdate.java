@@ -20,8 +20,6 @@ import javax.validation.constraints.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.image.backend.ImageMetadata;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -30,7 +28,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.*;
-import nl.vpro.domain.image.*;
+import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.image.MutableMetadata;
+import nl.vpro.domain.image.backend.ImageMetadata;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.support.License;
@@ -61,11 +61,12 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 })
 
 @Slf4j
-@Data
+@Getter
 public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata<ImageUpdate> {
 
     @XmlAttribute(required = true)
     @NotNull
+    @Setter
     private ImageType type;
 
     /**
@@ -91,7 +92,8 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     private Instant publishStopInstant;
 
     @XmlAttribute(required = true)
-    @Getter @Setter
+    @Getter
+    @Setter
     Boolean highlighted = false;
 
     @XmlElement(required = true)
@@ -103,11 +105,13 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     private String description;
 
     @XmlElement
-    @Min(1)
+    @Positive
+    @Setter
     private Integer height;
 
     @XmlElement
-    @Min(1)
+    @Positive
+    @Setter
     private Integer width;
 
 
@@ -201,8 +205,43 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     }
 
     @Override
-    public void setLastModifiedInstant(Instant lastModified) {
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    @Override
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
+
+    @Override
+    public void setLicense(License license) {
+        this.license = license;
+    }
+
+    @Override
+    public void setCredits(@NoHtml String credits) {
+        this.credits = credits;
+    }
+
+    @Override
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @Override
+    public void setLastModifiedInstant(Instant lastModified) {
+        this.lastModified = lastModified;
     }
 
     @Override
