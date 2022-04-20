@@ -7,7 +7,6 @@ package nl.vpro.domain.user;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -31,7 +30,6 @@ public class ThirdPartyEditor implements OrganizationEditor<ThirdParty> {
     private ThirdParty organization;
 
     @Column(nullable = false)
-    @NotNull
     @Getter
     @Setter
     private boolean active = false;

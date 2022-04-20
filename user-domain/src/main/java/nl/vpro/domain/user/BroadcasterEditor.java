@@ -7,7 +7,6 @@ package nl.vpro.domain.user;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @ToString
@@ -30,14 +29,12 @@ public class BroadcasterEditor implements OrganizationEditor<Broadcaster> {
     protected Broadcaster organization;
 
     @Column(nullable = false)
-    @NotNull
     @Setter
     @Getter
     protected boolean active = false;
 
 
     @Column(nullable = false)
-    @NotNull
     @Setter
     @Getter
     private boolean employee = false;

@@ -7,7 +7,6 @@ package nl.vpro.domain.user;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @ToString
@@ -31,7 +30,6 @@ public class PortalEditor  implements OrganizationEditor<Portal> {
     private Portal organization;
 
     @Column(nullable = false)
-    @NotNull
     @Setter
     @Getter
     private boolean active = false;
