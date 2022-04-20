@@ -6,8 +6,7 @@
 
 package nl.vpro.domain.media.support;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -142,7 +141,6 @@ public class Image extends PublishableObject<Image>
     @NoHtml
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @Getter
-    @Setter
     private String description;
 
     @Column(name = "`offset`")
@@ -174,7 +172,6 @@ public class Image extends PublishableObject<Image>
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
     @Getter
-    @Setter
     private String source;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
@@ -183,7 +180,6 @@ public class Image extends PublishableObject<Image>
     })
     @NotNull(groups = {WarningValidatorGroup.class})
     @Getter
-    @Setter
     private String sourceName;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
@@ -346,18 +342,14 @@ public class Image extends PublishableObject<Image>
     public void setLicense(@NotNull License license) {
         this.license = license;
     }
-
-
     @Override
     public void setDescription(String description) {
         this.description = description;
     }
-
     @Override
     public void setSource(String source) {
         this.source = source;
     }
-
     @Override
     public void setSourceName(String sourceName) {
         this.sourceName = sourceName;
