@@ -67,8 +67,8 @@
       <artifactId>user-domain</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.activation</groupId>
-      <artifactId>javax.activation-api</artifactId>
+      <groupId>jakarta.activation</groupId>
+      <artifactId>jakarta.activation-api</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
