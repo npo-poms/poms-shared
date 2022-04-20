@@ -3,14 +3,12 @@ package nl.vpro.domain.media.support;
 import java.time.LocalDate;
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
+import javax.validation.*;
 
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.domain.support.License;
 import nl.vpro.domain.media.Schedule;
+import nl.vpro.domain.support.License;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -30,10 +28,11 @@ public class ImageTest {
         image.setImageUri("urn:vpro:image:123");
         image.setLicense(License.CC_BY);
 
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-
-        Set<ConstraintViolation<Image>> validate = validator.validate(image);
-        assertThat(validate).isEmpty();
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            Validator validator = factory.getValidator();
+            Set<ConstraintViolation<Image>> validate = validator.validate(image);
+            assertThat(validate).isEmpty();
+        }
     }
 
     @Test

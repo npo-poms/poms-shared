@@ -4,8 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
+import javax.validation.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -21,8 +20,8 @@ public class Editors {
 
     static {
         Validator validator;
-        try {
-             validator = Validation.buildDefaultValidatorFactory().getValidator();
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
         } catch (Exception e) {
             log.warn(e.getMessage());
             validator  = null;

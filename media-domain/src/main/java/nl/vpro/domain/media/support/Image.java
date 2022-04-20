@@ -21,7 +21,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.image.backend.ImageMetadata;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -32,7 +31,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.*;
-import nl.vpro.domain.image.*;
+import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.image.MutableMetadata;
+import nl.vpro.domain.image.backend.ImageMetadata;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
@@ -189,7 +190,6 @@ public class Image extends PublishableObject<Image>
     @NotNull(groups = {WarningValidatorGroup.class})
     @Embedded
     @Getter
-    @Setter
     private License license;
 
     @ReleaseDate()
@@ -341,6 +341,29 @@ public class Image extends PublishableObject<Image>
 
         this.title = title;
     }
+
+    @Override
+    public void setLicense(@NotNull License license) {
+        this.license = license;
+    }
+
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    @Override
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
+
+
 
 
     /**

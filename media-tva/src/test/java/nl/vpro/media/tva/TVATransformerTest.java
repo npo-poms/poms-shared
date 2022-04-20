@@ -653,24 +653,25 @@ public class TVATransformerTest {
     }
 
     private void validate(MediaTable o) {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        JAXB.marshal(o, NULL_OUTPUT_STREAM); // just marshall it once to ensure getTitles is called....
-       //JAXB.marshal(o, System.out);
-        Set<ConstraintViolation<MediaTable>> validate = validator.validate(o);
-        for (ConstraintViolation<MediaTable> cv : validate) {
-            log.warn(cv.getMessage());
-        }
-        assertThat(validator.validate(o)).isEmpty();
-
-        for (Program program : o.getProgramTable()) {
-            //program.getTitles();
-            //System.out.println("" + program.getBroadcasters());
-            Set<ConstraintViolation<Program>> constraintViolations = validator.validate(program);
-            for (ConstraintViolation<Program> cv : constraintViolations) {
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            Validator validator = factory.getValidator();
+            JAXB.marshal(o, NULL_OUTPUT_STREAM); // just marshall it once to ensure getTitles is called....
+            //JAXB.marshal(o, System.out);
+            Set<ConstraintViolation<MediaTable>> validate = validator.validate(o);
+            for (ConstraintViolation<MediaTable> cv : validate) {
                 log.warn(cv.getMessage());
             }
-            assertThat(constraintViolations).isEmpty();
+            assertThat(validator.validate(o)).isEmpty();
+
+            for (Program program : o.getProgramTable()) {
+                //program.getTitles();
+                //System.out.println("" + program.getBroadcasters());
+                Set<ConstraintViolation<Program>> constraintViolations = validator.validate(program);
+                for (ConstraintViolation<Program> cv : constraintViolations) {
+                    log.warn(cv.getMessage());
+                }
+                assertThat(constraintViolations).isEmpty();
+            }
         }
     }
 }

@@ -18,10 +18,10 @@ public class Validation {
     static {
         Validator validator;
         Locale defaultLocale = Locale.getDefault();
-        try {
-            Locale.setDefault(Locale.US);
+        Locale.setDefault(Locale.US);
+        try (
             ValidatorFactory factory = javax.validation.Validation
-                .buildDefaultValidatorFactory();
+                .buildDefaultValidatorFactory()) {
             validator = factory.getValidator();
         } catch (ValidationException ve) {
             log.info(ve.getClass().getName() + " " + ve.getMessage());

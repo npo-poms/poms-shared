@@ -22,6 +22,8 @@ import nl.vpro.domain.media.support.TextualType;
 public abstract class AbstractOwnedText<T extends AbstractOwnedText<T>> implements OwnedText, Serializable {
 
 
+    private static final long serialVersionUID = 8742323961769012971L;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute(required = true)

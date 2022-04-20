@@ -51,8 +51,12 @@ public abstract class AbstractValidValueFunction extends ExtensionFunctionDefini
         return true;
     };
 
-    static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    static Validator validator = factory.getValidator();
+    static final Validator validator;
+    static {
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
+    }
 
     @Override
     public StructuredQName getFunctionQName() {
