@@ -45,14 +45,11 @@ jobs:
         run: mvn -B  -U -fae package
         if: runner.os != 'Linux'
         continue-on-error: true
-      - name: Test Report
-        uses: dorny/test-reporter@v1
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.31
         if: (success() || failure()) && runner.os == 'Linux'    # run this step even if previous step failed
         with:
-          name: Junit Tests            # Name of the check run which will be created
-          path: '**/target/surefire-reports/TEST-*.xml'    # Path to test results
-          reporter: java-junit       # Format of test results
-          only-summary: 'true'
+          files: "**/target/surefire-reports/*.xml"
       - name: Publish to codecov
         uses: codecov/codecov-action@v2
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'

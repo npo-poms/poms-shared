@@ -41,12 +41,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Slf4j
 @Isolated
 public class MediaObjectTest {
-
     @BeforeAll
     public static void init() {
 
     }
-
     @Test
     public void testIdFromUrn() {
         assertThat(MediaObjects.idFromUrn("urn:vpro:media:program:12463402")).isEqualTo(12463402L);
