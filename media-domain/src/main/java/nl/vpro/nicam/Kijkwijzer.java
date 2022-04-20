@@ -14,7 +14,7 @@ import nl.vpro.domain.media.ContentRating;
 
 /**
  * <p>
- * http://www.kijkwijzer.nl/about-kijkwijzer
+ * See <a href="http://www.kijkwijzer.nl/about-kijkwijzer"> about kijkwijzer</a>
  *</p><p>
  * Combines an {@link AgeRating} with {@link ContentRating}s (which can be seen as the 'reason' for the rating).
  *</p>

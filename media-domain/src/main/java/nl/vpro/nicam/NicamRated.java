@@ -6,7 +6,7 @@ import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.ContentRating;
 
 /**
- * https://nicam.nl/
+ * See <a href "https://nicam.nl/">NICAM</a>
  * @author Michiel Meeuwissen
  * @since 4.3
  */
