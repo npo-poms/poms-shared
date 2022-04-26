@@ -58,6 +58,6 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText<T>> implemen
     @Override
     @NonNull
     public final String toString() {
-        return type + ":" + get();
+        return type + ":" + (owner != null ? (owner + ":") : "") + get();
     }
 }
