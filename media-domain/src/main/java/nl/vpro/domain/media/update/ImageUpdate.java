@@ -225,7 +225,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     }
 
     @Override
-    public void setLicense(License license) {
+    public void setLicense(@NotNull(groups = {WarningValidatorGroup.class}) License license) {
         this.license = license;
     }
 
