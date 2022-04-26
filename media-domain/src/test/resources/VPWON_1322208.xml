@@ -61,14 +61,9 @@
   <contentRating>ANGST</contentRating>
   <website>vpro.nl/tegenlicht</website>
   <twitter type="HASHTAG">#tegenlicht</twitter>
-  <prediction state="REALIZED" publishStart="2021-03-13T01:00:00+01:00" publishStop="2037-12-31T23:59:00+01:00">
-    INTERNETVOD
-  </prediction>
-  <prediction state="REALIZED" publishStart="2021-08-20T10:12:49+02:00" publishStop="2021-08-30T10:12:49+02:00">TVVOD
-  </prediction>
-  <prediction state="REALIZED" publishStart="2021-03-13T01:00:00+01:00" publishStop="2022-03-14T23:59:00+01:00">
-    PLUSVOD
-  </prediction>
+  <prediction state="REALIZED" publishStart="2021-03-13T01:00:00+01:00" publishStop="2037-12-31T23:59:00+01:00">INTERNETVOD</prediction>
+  <prediction state="REALIZED" publishStart="2021-08-20T10:12:49+02:00" publishStop="2021-08-30T10:12:49+02:00">TVVOD</prediction>
+  <prediction state="REALIZED" publishStart="2021-03-13T01:00:00+01:00" publishStop="2022-03-14T23:59:00+01:00">PLUSVOD</prediction>
   <locations>
     <location owner="AUTHORITY" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2021-03-13T01:07:06.261+01:00"
               lastModified="2021-08-20T10:18:52.736+02:00" publishStart="2021-03-13T01:00:00+01:00"
