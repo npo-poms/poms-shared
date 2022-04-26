@@ -2080,12 +2080,21 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                         if (location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
                                 && prediction.inPublicationWindow(instant())) {
-                            log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction,
-                                    location.getProgramUrl(), MediaObject.this.mid);
+                            log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
                             MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
                             break;
                         }
+                    }
+                } else if (prediction.getState() == Prediction.State.REALIZED) {
+                    Optional<Location> matchingLocation = MediaObject.this.getLocations().stream()
+                        .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
+                        .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                        .findFirst();
+                    if (!matchingLocation.isPresent()) {
+                        log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, MediaObject.this.mid);
+                        prediction.setState(Prediction.State.REVOKED);
+                        MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
                     }
                 }
                 return prediction;
