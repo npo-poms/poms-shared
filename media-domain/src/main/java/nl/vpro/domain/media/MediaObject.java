@@ -2074,39 +2074,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return new SortedSetSameElementWrapper<Prediction>(sorted(predictions)) {
             @Override
             protected Prediction adapt(Prediction prediction) {
-                // TODO: I think is is a bit odd that this kind of logic happens here.
-                //  It ensures consistency, that's the good thing, but it seems a patch any way!
                 prediction.setParent(MediaObject.this);
-                switch(prediction.getState()) {
-                    case ANNOUNCED:
-                    case REVOKED:
-                        for (Location location : MediaObject.this.getLocations()) {
-                            if (
-                                //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
-                                location.getPlatform() == prediction.getPlatform()
-                                && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                                && prediction.inPublicationWindow(instant())) {
-                                log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
-                                prediction.setState(Prediction.State.REALIZED);
-                                MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
-                                break;
-                            }
-                        }
-                        break;
-                    case REALIZED:
-                        Optional<Location> matchingLocation = MediaObject.this.getLocations().stream()
-                            .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
-                            .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
-                            .findFirst();
-                        if (!matchingLocation.isPresent()) {
-                            log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, MediaObject.this.mid);
-                            prediction.setState(Prediction.State.REVOKED);
-                            MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
-                        }
-                        break;
-                    default:
-                        log.debug("Ignoring prediction {}", prediction);
-                }
+                MediaObjects.correctPrediction(prediction, MediaObject.this);
                 return prediction;
             }
         };
