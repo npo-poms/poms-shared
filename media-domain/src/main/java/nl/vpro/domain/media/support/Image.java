@@ -339,8 +339,7 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public void setLicense(
-        @NotNull(groups = {WarningValidatorGroup.class}) License license) {
+    public void setLicense(@NotNull License license) {
         this.license = license;
     }
     @Override
