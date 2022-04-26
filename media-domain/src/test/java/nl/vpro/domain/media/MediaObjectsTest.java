@@ -406,10 +406,13 @@ public class MediaObjectsTest {
         @BeforeAll
         static void init (){
            MediaObjectsTest.init();
+           MediaObjects.autoCorrectPredictions = false;
+
         }
         @AfterAll
         static void setClock() {
             CLOCK.remove();
+            MediaObjects.autoCorrectPredictions = true;
         }
 
         private static MediaBuilder.ProgramBuilder fixed(String mid) {

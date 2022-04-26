@@ -1158,40 +1158,44 @@ public class MediaObjects {
     }
 
 
+    public static boolean autoCorrectPredictions = true;
+
     /**
      *  // TODO: I think is is a bit odd that this kind of logic happens here.
      *  It ensures consistency, that's the good thing, but it seems a patch any way!
      */
     protected static void correctPrediction(Prediction prediction, MediaObject mediaObject) {
-        switch(prediction.getState()) {
-            case ANNOUNCED:
-            case REVOKED:
-                for (Location location : mediaObject.getLocations()) {
-                    if (
-                        //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
-                        location.getPlatform() == prediction.getPlatform()
-                            && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                            && prediction.inPublicationWindow(instant())) {
-                        log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), mediaObject.mid);
-                        prediction.setState(Prediction.State.REALIZED);
-                        markForRepublication(mediaObject, "realized prediction");
-                        break;
+        if (autoCorrectPredictions) {
+            switch (prediction.getState()) {
+                case ANNOUNCED:
+                case REVOKED:
+                    for (Location location : mediaObject.getLocations()) {
+                        if (
+                            //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
+                            location.getPlatform() == prediction.getPlatform()
+                                && Workflow.PUBLICATIONS.contains(location.getWorkflow())
+                                && prediction.inPublicationWindow(instant())) {
+                            log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), mediaObject.mid);
+                            prediction.setState(Prediction.State.REALIZED);
+                            markForRepublication(mediaObject, "realized prediction");
+                            break;
+                        }
                     }
-                }
-                break;
-            case REALIZED:
-                Optional<Location> matchingLocation = mediaObject.getLocations().stream()
-                    .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
-                            .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
-                    .findFirst();
-                if (!matchingLocation.isPresent()) {
-                    log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, mediaObject.mid);
-                    prediction.setState(Prediction.State.REVOKED);
-                    markForRepublication(mediaObject, "realized prediction");
-                }
-                break;
-            default:
-                log.debug("Ignoring prediction {}", prediction);
+                    break;
+                case REALIZED:
+                    Optional<Location> matchingLocation = mediaObject.getLocations().stream()
+                        .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
+                        .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                        .findFirst();
+                    if (!matchingLocation.isPresent()) {
+                        log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, mediaObject.mid);
+                        prediction.setState(Prediction.State.REVOKED);
+                        markForRepublication(mediaObject, "realized prediction");
+                    }
+                    break;
+                default:
+                    log.debug("Ignoring prediction {}", prediction);
+            }
         }
     }
 
