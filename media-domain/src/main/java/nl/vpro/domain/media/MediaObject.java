@@ -2075,30 +2075,35 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             @Override
             protected Prediction adapt(Prediction prediction) {
                 prediction.setParent(MediaObject.this);
-                if (prediction.getState() == Prediction.State.ANNOUNCED) {
-                    for (Location location : MediaObject.this.getLocations()) {
-                        if (location.getPlatform() == prediction.getPlatform()
+                switch(prediction.getState()) {
+                    case ANNOUNCED:
+                    case REVOKED:
+                        for (Location location : MediaObject.this.getLocations()) {
+                            if (location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
                                 && prediction.inPublicationWindow(instant())) {
-                            log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
-                            prediction.setState(Prediction.State.REALIZED);
-                            MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
-                            break;
+                                log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
+                                prediction.setState(Prediction.State.REALIZED);
+                                MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
+                                break;
+                            }
                         }
-                    }
-                } else if (prediction.getState() == Prediction.State.REALIZED) {
-                    Optional<Location> matchingLocation = MediaObject.this.getLocations().stream()
-                        .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
-                        .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
-                        .findFirst();
-                    if (!matchingLocation.isPresent()) {
-                        log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, MediaObject.this.mid);
-                        prediction.setState(Prediction.State.REVOKED);
-                        MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
-                    }
+                        break;
+                    case REALIZED:
+                        Optional<Location> matchingLocation = MediaObject.this.getLocations().stream()
+                            .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
+                            .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                            .findFirst();
+                        if (!matchingLocation.isPresent()) {
+                            log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, MediaObject.this.mid);
+                            prediction.setState(Prediction.State.REVOKED);
+                            MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
+                        }
+                        break;
+                    default:
+                        log.debug("Ignoring prediction {}", prediction);
                 }
                 return prediction;
-
             }
         };
     }
