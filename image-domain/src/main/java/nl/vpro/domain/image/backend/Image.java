@@ -175,7 +175,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     @XmlElement
     @Embedded
     @Getter
-    @Setter
     private License license;
 
     @Getter
@@ -250,6 +249,11 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         } else {
             this.description = description.substring(0, 255);
         }
+    }
+
+    @Override
+    public void setLicense(License license) {
+        this.license = license;
     }
 
     @Override
