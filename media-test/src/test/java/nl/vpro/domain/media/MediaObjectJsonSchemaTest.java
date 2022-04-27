@@ -57,6 +57,7 @@ public class MediaObjectJsonSchemaTest {
         CLOCK.set(Clock.fixed(Instant.ofEpochMilli(10), Schedule.ZONE_ID));
         Locale.setDefault(Locales.DUTCH);
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
+        MediaObjects.autoCorrectPredictions = false;
     }
 
 
