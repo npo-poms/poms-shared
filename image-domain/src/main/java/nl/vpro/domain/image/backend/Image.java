@@ -17,8 +17,7 @@ import java.time.Instant;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -28,7 +27,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.AbstractPublishableObject;
-import nl.vpro.domain.image.*;
+import nl.vpro.domain.image.ImageFormat;
+import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.support.License;
@@ -141,10 +141,12 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     @XmlElement(name = "heightMm")
     @Getter
+    @Positive
     private Float heightInMm;
 
     @XmlElement(name = "widthMm")
     @Getter
+    @Positive
     private Float widthInMm;
 
     @Getter
