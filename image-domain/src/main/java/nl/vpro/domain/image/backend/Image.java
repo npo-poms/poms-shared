@@ -133,10 +133,12 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     @Getter
     @Setter
+    @Positive
     private Integer height;
 
     @Getter
     @Setter
+    @Positive
     private Integer width;
 
     @XmlElement(name = "heightMm")
