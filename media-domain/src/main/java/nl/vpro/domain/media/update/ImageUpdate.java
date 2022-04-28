@@ -120,7 +120,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @NotNull(groups = {WarningValidatorGroup.class})
     private String credits;
 
-    @URI(mustHaveScheme = true, minHostParts = 2)
+    @URI(mustHaveScheme = true, minHostParts = 2, groups = {WarningValidatorGroup.class})
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
     private String source;
