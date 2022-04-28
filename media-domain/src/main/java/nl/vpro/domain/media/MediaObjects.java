@@ -1183,6 +1183,7 @@ public class MediaObjects {
                     }
                     break;
                 case REALIZED:
+                    // Are there any 'REALIZED' prediction without locations that can be played anyways?
                     Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
