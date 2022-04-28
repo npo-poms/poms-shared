@@ -2,6 +2,7 @@ package nl.vpro.domain.media.update;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.*;
@@ -151,6 +152,10 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     BiPredicate<MediaObject, PublishableObject<?>> markForDeleteOnly = (m, mu) -> false;
 
+    @lombok.Builder.Default
+    Predicate<MediaObject> deleteBroadcasters = alwaysFalse();
+
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     transient SimpleLogger logger;
@@ -203,6 +208,7 @@ public class AssemblageConfig {
             followMerges,
             requireIncomingMid,
             markForDeleteOnly,
+            deleteBroadcasters,
             logger);
     }
 
@@ -255,6 +261,7 @@ public class AssemblageConfig {
             .updateType(Steal.YES)
             .followMerges(true)
             .requireIncomingMid(MidRequire.YES)
+            .deleteBroadcasters(alwaysTrue())
             ;
     }
 
@@ -472,9 +479,12 @@ public class AssemblageConfig {
      * @since 5.13
      */
     public static abstract class  RequiredFieldException extends IllegalArgumentException {
+
+        private static final long serialVersionUID = -7054047338107481793L;
+
         @Getter
-        Object[] arguments;
-        RequiredFieldException(String format, Object... arguments) {
+        Serializable[] arguments;
+        RequiredFieldException(String format, Serializable... arguments) {
             super(format);
             this.arguments = arguments;
         }
@@ -495,6 +505,8 @@ public class AssemblageConfig {
 
     public static class FatalRequiredFieldException extends RequiredFieldException {
 
+        private static final long serialVersionUID = -1815466568814368401L;
+
         FatalRequiredFieldException(String format, Object... arguments) {
             super(format, arguments);
         }
@@ -506,6 +518,8 @@ public class AssemblageConfig {
     }
 
     public static class SkippingRequiredFieldException extends RequiredFieldException {
+
+        private static final long serialVersionUID = -6503681639731951808L;
 
         SkippingRequiredFieldException(String format, Object... arguments) {
             super(format, arguments);

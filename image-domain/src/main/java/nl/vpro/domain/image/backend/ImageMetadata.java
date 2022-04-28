@@ -4,6 +4,8 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.Objects;
 
+import javax.validation.constraints.Positive;
+
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.ChangeReport;
@@ -47,9 +49,9 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends MutableMetad
     }
 
 
-    T setHeightInMm(Float heightInMm);
-    T setWidthInMm(Float widthInMm);
-    T setSize(Long size);
+    T setHeightInMm(@Positive Float heightInMm);
+    T setWidthInMm(@Positive Float widthInMm);
+    T setSize(@Positive Long size);
     T setDownloadUrl(URI downloadUrl);
     T setEtag(String etag);
     T setUrlLastModified(Instant lastModified);
