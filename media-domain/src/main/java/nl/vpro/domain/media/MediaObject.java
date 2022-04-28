@@ -2076,21 +2076,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             @Override
             protected Prediction adapt(Prediction prediction) {
                 prediction.setParent(MediaObject.this);
-                if (prediction.getState() == Prediction.State.ANNOUNCED) {
-                    for (Location location : MediaObject.this.getLocations()) {
-                        if (location.getPlatform() == prediction.getPlatform()
-                                && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                                && prediction.inPublicationWindow(Instant.now())) {
-                            log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction,
-                                    location.getProgramUrl(), MediaObject.this.mid);
-                            prediction.setState(Prediction.State.REALIZED);
-                            MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
-                            break;
-                        }
-                    }
-                }
+                MediaObjects.correctPrediction(prediction, MediaObject.this);
                 return prediction;
-
             }
         };
     }

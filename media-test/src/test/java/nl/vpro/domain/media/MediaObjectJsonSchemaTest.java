@@ -54,6 +54,7 @@ public class MediaObjectJsonSchemaTest {
     public static void before() {
         Locale.setDefault(Locales.DUTCH);
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
+        MediaObjects.autoCorrectPredictions = false;
     }
 
 
