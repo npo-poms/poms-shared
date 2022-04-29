@@ -1059,7 +1059,7 @@ public class MediaObjects {
                             //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
                             location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                                && prediction.inPublicationWindow(instant())) {
+                                && prediction.inPublicationWindow(Instant.now())) {
                             log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), mediaObject.mid);
                             prediction.setState(Prediction.State.REALIZED);
                             markForRepublication(mediaObject, "realized prediction");
