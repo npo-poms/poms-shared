@@ -1086,6 +1086,3 @@ public class MediaObjects {
     }
 
 }
-
-
-}
