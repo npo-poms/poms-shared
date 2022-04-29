@@ -84,7 +84,7 @@ public class Constants {
     public static Document createChannelMapping(ChannelIdType type) throws IOException, ParserConfigurationException, SAXException {
         Properties channelMapping = new Properties();
         if (type == ChannelIdType.BINDINC) {
-            Map<Channel, String> targetted = new HashMap<>();
+            final Map<Channel, String> targetted = new HashMap<>();
             getBindincChannelMappings().forEach((k, v) -> {
                 Channel c = Channel.valueOf(v);
                 String prevKey = targetted.put(c, k);
