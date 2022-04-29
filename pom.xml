@@ -152,6 +152,10 @@
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
-    </repository>
+     </repository>
+     <repository>
+       <id>sonatype</id>
+       <url>https://oss.sonatype.org/service/local/repositories/releases/content</url>
+     </repository>
   </repositories>
 </project>
