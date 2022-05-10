@@ -52,6 +52,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @Value("${nep.itemizer-download.scp.useFileCache}") boolean useFileCache,
         @Value("${executables.scp}") List<String> scpExecutables,
         @Value("${executables.sshpass}") List<String> sshpassExecutables,
+        @Value("${executables.scp.version:8}") int scpVersion,
         @Value("${nep.itemizer-download.maxDownloadRetries}") int maxDownloadRetries,
         @Value("${nep.itemizer-download.debugSsh}") boolean debugSsh
     ) {
@@ -65,7 +66,6 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         CommandExecutor scptry = null;
         try {
 
-
             final CommandExecutorImpl.Builder builder = CommandExecutorImpl.builder()
                 .executablesPaths(sshpassExecutables)
                 .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
@@ -75,9 +75,12 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                     "-p", password,
                     scpcommand.getAbsolutePath(),
                     "-o", "StrictHostKeyChecking=yes",
-                    "-o", userKnownHostsFile(hostkey, ftpHost),
-                    "-O" // MSE-5261, 'In case of incompatibility, the scp(1) client may be instructed to use the legacy scp/rcp using the -O flag.', otherwise we can't scp to /dev/stdout
+                    "-o", userKnownHostsFile(hostkey, ftpHost)
                 );
+
+            if (scpVersion > 8) {
+                builder.commonArg("-O"); // MSE-5261, 'In case of incompatibility, the scp(1) client may be instructed to use the legacy scp/rcp using the -O flag.', otherwise we can't scp to /dev/stdout
+            }
             if (debugSsh) {
                 builder.commonArg("-v");
             }
@@ -113,6 +116,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             true,
             Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
             Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass", "/usr/local/bin/sshpass"/*brew*/),
+            8,
             3,
             false
         );
