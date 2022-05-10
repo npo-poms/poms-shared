@@ -75,8 +75,8 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                     "-p", password,
                     scpcommand.getAbsolutePath(),
                     "-o", "StrictHostKeyChecking=yes",
-                    "-o",
-                    userKnownHostsFile(hostkey, ftpHost)
+                    "-o", userKnownHostsFile(hostkey, ftpHost),
+                    "-O" // MSE-5261, 'In case of incompatibility, the scp(1) client may be instructed to use the legacy scp/rcp using the -O flag.', otherwise we can't scp to /dev/stdout
                 );
             if (debugSsh) {
                 builder.commonArg("-v");
