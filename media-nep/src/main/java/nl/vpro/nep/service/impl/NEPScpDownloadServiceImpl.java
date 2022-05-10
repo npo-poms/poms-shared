@@ -80,7 +80,10 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 .commonArg(
                     "-p", password,
                     scpcommand.getAbsolutePath(),
-                    "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile);
+                    "-o", "StrictHostKeyChecking=yes",
+                    "-o", userKnownHostsFile(hostkey, ftpHost).get(),
+                    "-O" // MSE-5261, 'In case of incompatibility, the scp(1) client may be instructed to use the legacy scp/rcp using the -O flag.', otherwise we can't scp to /dev/stdout
+                );
             if (debugSsh) {
                 builder.commonArg("-v");
             }
@@ -106,6 +109,20 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             false
         );
     }
+
+
+    Supplier<String> userKnownHostsFile(String hostkey, String ftpHost) {
+        return () -> {
+            File tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
+            if (!tempFile.exists()) {
+                log.warn("{} Not existing (any more?). Creating again.", tempFile);
+                knownHosts.remove(hostkey);
+                tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
+            }
+            return "UserKnownHostsFile=" + tempFile;
+        };
+    }
+
 
     protected File knowHosts(String ftpHost, String hostkey) {
         try {
