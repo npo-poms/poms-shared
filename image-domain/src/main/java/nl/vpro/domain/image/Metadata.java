@@ -26,7 +26,6 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
 
     String getDescription();
 
-
     /**
      * @since 5.32
      */
@@ -38,7 +37,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
     License getLicense();
 
     /**
-     * Some URI describing where this image was original coming from
+     * Some URI describing where this image was original coming from.
      */
     @URI
     String getSource();
@@ -49,6 +48,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
     String getSourceName();
 
     /**
+     * Who or what has credits.
      *
      */
     String getCredits();

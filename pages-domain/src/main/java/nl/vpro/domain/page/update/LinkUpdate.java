@@ -8,13 +8,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import nl.vpro.domain.page.*;
+import nl.vpro.domain.page.Link;
+import nl.vpro.domain.page.LinkType;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.URI;
 
@@ -23,7 +25,7 @@ import nl.vpro.validation.URI;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "linkUpdateType")
-public class LinkUpdate implements Serializable{
+public class LinkUpdate implements Serializable {
 
     @NotNull
     @URI(
@@ -48,15 +50,15 @@ public class LinkUpdate implements Serializable{
     @Setter
     private LinkType type;
 
-    public static LinkUpdate of(String pageRef, String text) {
+    public static LinkUpdate of(@NonNull String pageRef, String text) {
         return new LinkUpdate(pageRef, text);
     }
 
-    public static LinkUpdate of(String pageRef) {
+    public static LinkUpdate of(@NonNull String pageRef) {
         return new LinkUpdate(pageRef, null);
     }
 
-    public static LinkUpdate topStory(String pageRef, String text) {
+    public static LinkUpdate topStory(@NonNull String pageRef, String text) {
         LinkUpdate update = new LinkUpdate(pageRef, text);
         update.setType(LinkType.TOP_STORY);
         return update;
@@ -83,7 +85,7 @@ public class LinkUpdate implements Serializable{
     }
 
 
-    public LinkUpdate(String pageRef, String text) {
+    public LinkUpdate(@NonNull String pageRef, String text) {
         this.pageRef = pageRef;
         this.text = text;
     }
@@ -99,12 +101,13 @@ public class LinkUpdate implements Serializable{
 
         LinkUpdate that = (LinkUpdate)o;
 
-        if(pageRef != null ? !pageRef.equals(that.pageRef) : that.pageRef != null ) {
+        if(!Objects.equals(pageRef, that.pageRef)) {
             return false;
         }
         return type != null ? type.equals(that.type) : that.type == null;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public int hashCode() {
         return pageRef != null ? pageRef.hashCode() : 0;
