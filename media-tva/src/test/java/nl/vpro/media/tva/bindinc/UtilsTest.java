@@ -32,7 +32,7 @@ class UtilsTest {
 
         bindincFile = Utils.parseFileName("20210102050510000dayARTT20210113.xml");
 
-        assertThat(bindincFile.get().getChannel()).isEqualTo(Channel.ARTE);
+        assertThat(bindincFile.get().getChannel()).isEqualTo(Channel.ART_);
         assertThat(bindincFile.get().getDay()).isEqualTo("2021-01-13");
         assertThat(bindincFile.get().getTimestamp()).isEqualTo("2021-01-02T05:05:10");
 
