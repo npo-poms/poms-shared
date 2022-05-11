@@ -68,7 +68,10 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
             final CommandExecutorImpl.Builder builder = CommandExecutorImpl.builder()
                 .executablesPaths(sshpassExecutables)
-                .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
+                .wrapLogInfo(
+                    (message) ->
+                        message.toString().replaceAll(password, "??????")
+                )
                 .useFileCache(useFileCache)
                 .logger(log)
                 .commonArg(

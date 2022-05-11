@@ -31,6 +31,8 @@ class UtilsTest {
         assertThat(bindincFile).isEmpty();
 
         bindincFile = Utils.parseFileName("20210102050510000dayARTT20210113.xml");
+        assertThat(bindincFile).isNotEmpty();
+
 
         assertThat(bindincFile.get().getChannel()).isEqualTo(Channel.ART_);
         assertThat(bindincFile.get().getDay()).isEqualTo("2021-01-13");
@@ -55,9 +57,10 @@ class UtilsTest {
         assertThat(temp).isNotNull();
         assertThat(temp.file).exists();
         assertThat(converters.TEMPS).containsKey("NED1/2020-12-09");
-        converters.convertToInputStream(temp, ex);
-        assertThat(converters.TEMPS).isEmpty();
-        Utils.ready(ex);
+        try (InputStream is = converters.convertToInputStream(temp, ex)) {
+            assertThat(converters.TEMPS).isEmpty();
+            Utils.ready(ex);
+        }
         assertThat(temp.file).doesNotExist();
     }
 
