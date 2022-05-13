@@ -6,20 +6,15 @@ import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.*;
 import net.schmizz.sshj.xfer.FileSystemFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 
 import org.apache.commons.io.IOUtils;
-
 import org.junit.jupiter.api.*;
 
 import nl.vpro.nep.service.NEPDownloadService;
@@ -70,12 +65,12 @@ public class NEPSSHJDownloadServiceImplTest {
         Instant start = Instant.now();
 
         File dest = new File(testDest);
-        impl.download("", fileName, wrapException(() -> new FileOutputStream(dest)), (fc) -> NEPDownloadService.Proceed.TRUE);
+        impl.download("", fileName, wrapException(() -> Files.newOutputStream(dest.toPath())), (fc) -> NEPDownloadService.Proceed.TRUE);
 
         Duration duration = Duration.between(start, Instant.now());
         assertThat(dest.length()).isEqualTo(221400200L);
     }
-/*
+ /*
     @Test
     public void testJsch() throws IOException, JSchException, SftpException {
         JSch sshClient = new JSch();
@@ -96,7 +91,6 @@ public class NEPSSHJDownloadServiceImplTest {
 
 
     }*/
-    @SuppressWarnings("ConstantConditions")
     @Test
     public void testSshj() throws IOException {
 
@@ -107,14 +101,12 @@ public class NEPSSHJDownloadServiceImplTest {
 
         if (! simple) {
 
-            final RemoteFile handle = sftp.open(fileName, EnumSet.of(OpenMode.READ));
-            InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
-            FileOutputStream outputStream = new FileOutputStream(testDest);
-            long size = IOUtils.copy(in, outputStream, 1024 * 10);
-            log.info("Ready with {} bytes ({})", size,FileSizeFormatter.DEFAULT.formatSpeed(size, start));
-            in.close();
-            outputStream.close();
-            handle.close();
+            try (final RemoteFile handle = sftp.open(fileName, EnumSet.of(OpenMode.READ));
+                 final InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
+                 final FileOutputStream outputStream = new FileOutputStream(testDest)) {
+                long size = IOUtils.copy(in, outputStream, 1024 * 10);
+                log.info("Ready with {} bytes ({})", size, FileSizeFormatter.DEFAULT.formatSpeed(size, start));
+            }
         } else {
             sftp.get(fileName, new FileSystemFile(new File(testDest )));
         }
