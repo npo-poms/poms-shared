@@ -95,9 +95,8 @@ final class SSHClientFactory {
         }
 
         @Override
-        public void close() throws Exception {
+        public void close() throws IOException {
             client.close();
-
         }
     }
 }

@@ -3,13 +3,13 @@ package nl.vpro.nep.service.impl;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.*;
 
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.*;
+import java.util.EnumSet;
+import java.util.Properties;
 import java.util.function.Supplier;
 
 import javax.annotation.PostConstruct;
@@ -25,8 +25,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPUploadService;
-import nl.vpro.util.FileSizeFormatter;
-import nl.vpro.util.TimeUtils;
+import nl.vpro.util.*;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
 
@@ -61,8 +60,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     private int  batchSize = 1024 * 1024 * 5;
 
 
-    Set<SSHClientFactory.ClientHolder> created = new HashSet<>();
-
     @Inject
     public NEPSSHJUploadServiceImpl(
         @Value("${nep.gatekeeper-upload.host}") String sftpHost,
@@ -96,11 +93,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     }
 
     @PreDestroy
-    public void destroy() throws IOException {
-        for (SSHClientFactory.ClientHolder client : created) {
-            log.info("Closing {}", client);
-            client.get().disconnect();
-        }
+    public void destroy() throws Exception {
+
     }
 
     private static final FileSizeFormatter FORMATTER = FileSizeFormatter.DEFAULT;
@@ -110,8 +104,10 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         @NonNull SimpleLogger logger,
         @NonNull String nepFile,
         @NonNull Long size,
-        @NonNull InputStream stream,
+        @NonNull InputStream incomingStream,
         boolean replaces) throws IOException {
+
+
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
         logger.info(
@@ -120,8 +116,14 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             .slf4jArgs(sftpHost, nepFile)
             .build());
         try(
-            final SSHClient client = createClient().get();
-            final SFTPClient sftp = client.newSFTPClient()
+            //MSE-5250 If we don't use this file cache, the incoming CoyoteStream is consumed somewhy in batched of 8172 bytes only, and it becames a lot slower
+            FileCachingInputStream stream = FileCachingInputStream
+                .builder()
+                .input(incomingStream)
+                .batchSize(batchSize)
+                .build();
+            final SSHClientFactory.ClientHolder client = createClient();
+            final SFTPClient sftp = client.get().newSFTPClient()
         ) {
             sftp.getSFTPEngine().setTimeoutMs((int) sftpTimeout.toMillis());
             int split  = nepFile.lastIndexOf('/');
@@ -253,7 +255,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         client.get().setConnectTimeout((int) connectTimeout.toMillis());
 
         log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport());
-
         return client;
 
     }

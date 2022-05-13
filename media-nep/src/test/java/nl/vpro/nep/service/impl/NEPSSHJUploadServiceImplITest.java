@@ -7,6 +7,7 @@ import net.schmizz.sshj.sftp.RemoteResourceInfo;
 import net.schmizz.sshj.sftp.SFTPClient;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class NEPSSHJUploadServiceImplITest {
     public void uploadHuge() throws Exception {
         File file = new File(files[0]);
         String filename = "test.1235";
-        InputStream fileInputStream = new FileInputStream(file);
+        InputStream fileInputStream = Files.newInputStream(file.toPath());
         impl.upload(simpleLogger, filename, file.length(), fileInputStream, true);
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
@@ -88,7 +89,7 @@ public class NEPSSHJUploadServiceImplITest {
         Locales.setDefault(Locales.DUTCH);
         File file = new File(files[0]);
         String filename = "test.1235";
-        InputStream fileInputStream = new FileInputStream(file);
+        InputStream fileInputStream = Files.newInputStream(file.toPath());
         try (FileCachingInputStream in = FileCachingInputStream.builder()
             .input(fileInputStream)
             .downloadFirst(false)
