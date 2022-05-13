@@ -116,12 +116,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             .slf4jArgs(sftpHost, nepFile)
             .build());
         try(
-            //MSE-5250 If we don't use this file cache, the incoming CoyoteStream is consumed somewhy in batched of 8172 bytes only, and it becames a lot slower
-            FileCachingInputStream stream = FileCachingInputStream
-                .builder()
-                .input(incomingStream)
-                .batchSize(batchSize)
-                .build();
             final SSHClientFactory.ClientHolder client = createClient();
             final SFTPClient sftp = client.get().newSFTPClient()
         ) {
@@ -155,7 +149,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 long batchCount = 0;
                 long numberOfBytes = 0;
                 int n;
-                while (IOUtils.EOF != (n = stream.read(buffer))) {
+                while (IOUtils.EOF != (n = incomingStream.read(buffer))) {
                     if (n == 0) {
                         throw new IllegalStateException("InputStream#read(buffer) should not give zero bytes.");
                     }
