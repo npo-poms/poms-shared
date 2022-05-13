@@ -42,9 +42,10 @@ public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
     public void testXmlDuration() {
 
         ScheduleEvent e = new ScheduleEvent();
+        e.setChannel(Channel._10TB);
         e.setDuration(Duration.ofMinutes(10));
 
-        JAXBTestUtil.roundTripAndSimilar(e, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><local:scheduleEvent xmlns:local=\"uri:local\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+        JAXBTestUtil.roundTripAndSimilar(e, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><local:scheduleEvent xmlns:local=\"uri:local\" channel=\"10TB\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "  <duration>P0DT0H10M0.000S</duration>\n" +
             "</local:scheduleEvent>");
     }
@@ -70,6 +71,28 @@ public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
 
         Jackson2TestUtil.roundTripAndSimilar(e, "{\n" +
             "  \"channel\" : \"NED1\",\n" +
+            "  \"start\" : 1503928260000,\n" +
+            "  \"guideDay\" : 1503871200000\n," +
+            "  \"duration\" : 600000\n" +
+            "}");
+    }
+
+
+    /**
+     * We explicitly annotated {@link Channel} with {@link nl.vpro.jackson2.BackwardsCompatibleJsonEnum}, causing that the XmlEnumValue is not used.
+     *
+     * We could consider changing this, bug for now it is like this.
+     */
+    @Test
+    public void testJsonChannelXmlValue() {
+        ScheduleEvent e = ScheduleEvent.builder()
+            .localStart(of(2017, 8, 28, 15, 51))
+            .channel(Channel._10TB)
+            .duration(Duration.ofMinutes(10))
+            .build();
+
+        Jackson2TestUtil.roundTripAndSimilar(e, "{\n" +
+            "  \"channel\" : \"_10TB\",\n" +
             "  \"start\" : 1503928260000,\n" +
             "  \"guideDay\" : 1503871200000\n," +
             "  \"duration\" : 600000\n" +
