@@ -284,7 +284,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         nullable = false)
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @PositiveOrZero(message = "{nl.vpro.constraints.Size.min}") // komt soms voor  bij imports.
+    @Size(min = 0, message = "{nl.vpro.constraints.Size.min}") // komt soms voor  bij imports.
     protected List<@NotNull Broadcaster> broadcasters;
 
     @ManyToMany
