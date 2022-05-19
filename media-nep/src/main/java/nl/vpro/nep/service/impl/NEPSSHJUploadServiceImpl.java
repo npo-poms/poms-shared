@@ -1,14 +1,15 @@
 package nl.vpro.nep.service.impl;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.*;
 
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.*;
+import java.util.EnumSet;
+import java.util.Properties;
 import java.util.function.Supplier;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
@@ -23,8 +25,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPUploadService;
-import nl.vpro.util.FileSizeFormatter;
-import nl.vpro.util.TimeUtils;
+import nl.vpro.util.*;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
 
@@ -54,19 +55,25 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
      */
     private Duration sftpTimeout = Duration.ofSeconds(5);
 
-    Set<SSHClientFactory.ClientHolder> created = new HashSet<>();
+    @Getter
+    @Setter
+    private int  batchSize = 1024 * 1024 * 5;
+
 
     @Inject
     public NEPSSHJUploadServiceImpl(
         @Value("${nep.gatekeeper-upload.host}") String sftpHost,
         @Value("${nep.gatekeeper-upload.username}") String username,
         @Value("${nep.gatekeeper-upload.password}") String password,
-        @Value("${nep.gatekeeper-upload.hostkey}") String hostKey
+        @Value("${nep.gatekeeper-upload.hostkey}") String hostKey,
+        @Value("${nep.gatekeeper-upload.batchSize:5242880}") int batchSize
+
     ) {
         this.sftpHost = sftpHost;
         this.username = username;
         this.password = password;
         this.hostKey = hostKey;
+        this.batchSize = batchSize;
     }
 
     protected NEPSSHJUploadServiceImpl(Properties properties) {
@@ -74,7 +81,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             properties.getProperty("nep.gatekeeper-upload.host"),
             properties.getProperty("nep.gatekeeper-upload.username"),
             properties.getProperty("nep.gatekeeper-upload.password"),
-            properties.getProperty("nep.gatekeeper-upload.hostkey")
+            properties.getProperty("nep.gatekeeper-upload.hostkey"),
+            NumberUtils.toInt(properties.getProperty("nep.gatekeeper-upload.batchSize"), 5242880)
         );
     }
 
@@ -85,11 +93,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     }
 
     @PreDestroy
-    public void destroy() throws IOException {
-        for (SSHClientFactory.ClientHolder client : created) {
-            log.info("Closing {}", client);
-            client.get().disconnect();
-        }
+    public void destroy() throws Exception {
+
     }
 
     private static final FileSizeFormatter FORMATTER = FileSizeFormatter.DEFAULT;
@@ -99,8 +104,10 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         @NonNull SimpleLogger logger,
         @NonNull String nepFile,
         @NonNull Long size,
-        @NonNull InputStream stream,
+        @NonNull InputStream incomingStream,
         boolean replaces) throws IOException {
+
+
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
         logger.info(
@@ -109,8 +116,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             .slf4jArgs(sftpHost, nepFile)
             .build());
         try(
-            final SSHClient client = createClient().get();
-            final SFTPClient sftp = client.newSFTPClient()
+            final SSHClientFactory.ClientHolder client = createClient();
+            final SFTPClient sftp = client.get().newSFTPClient()
         ) {
             sftp.getSFTPEngine().setTimeoutMs((int) sftpTimeout.toMillis());
             int split  = nepFile.lastIndexOf('/');
@@ -137,12 +144,12 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 OutputStream out = handle.new RemoteFileOutputStream()
             ) {
 
-                byte[] buffer = new byte[1014 * 1024];
+                byte[] buffer = new byte[batchSize];
                 long infoBatch = 10;
                 long batchCount = 0;
                 long numberOfBytes = 0;
                 int n;
-                while (IOUtils.EOF != (n = stream.read(buffer))) {
+                while (IOUtils.EOF != (n = incomingStream.read(buffer))) {
                     if (n == 0) {
                         throw new IllegalStateException("InputStream#read(buffer) should not give zero bytes.");
                     }
@@ -151,11 +158,13 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                     numberOfBytes += n;
 
                     if (++batchCount % infoBatch == 0) {
+                        Duration duration = Duration.between(start, Instant.now());
+
                         // updating spans in ngToast doesn't work...
                         logger.info(
-                            en("Uploaded {}/{} to {}:{}")
-                                .nl("Geüpload {}/{} naar {}:{}")
-                                .slf4jArgs(FORMATTER.format(numberOfBytes), FORMATTER.format(size), sftpHost, nepFile)
+                            en("Uploaded {}/{} to {}:{} ({})")
+                                .nl("Geüpload {}/{} naar {}:{} ({})")
+                                .slf4jArgs(FORMATTER.format(numberOfBytes), FORMATTER.format(size), sftpHost, nepFile, FORMATTER.formatSpeed(numberOfBytes, duration))
                                 .build());
                     } else {
                         log.debug("Uploaded {}/{} bytes to NEP", FORMATTER.format(numberOfBytes), FORMATTER.format(size));
@@ -240,7 +249,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         client.get().setConnectTimeout((int) connectTimeout.toMillis());
 
         log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport());
-
         return client;
 
     }
