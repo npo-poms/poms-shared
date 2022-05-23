@@ -488,6 +488,7 @@ public interface MediaBackendRestService {
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
         @QueryParam("replace") @DefaultValue("false") Boolean replace,
+        @QueryParam("uploadFirst") @DefaultValue("false") Boolean uploadFirst,
         @Context HttpServletResponse response) throws IOException;
 
     @POST
@@ -503,6 +504,7 @@ public interface MediaBackendRestService {
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
         @QueryParam("replace") @DefaultValue("false") Boolean replace,
+        @QueryParam("uploadFirst") @DefaultValue("false") Boolean uploadFirst,
         @QueryParam(ERRORS) String errors,
         @Context HttpServletResponse response) throws IOException;
 
