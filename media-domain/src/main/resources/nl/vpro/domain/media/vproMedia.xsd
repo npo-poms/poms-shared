@@ -781,12 +781,24 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="NOT_ANNOUNCED">
         <xs:annotation>
-          <xs:documentation>This value is not exposed, it can be present in the database though.</xs:documentation>
+          <xs:documentation>This value is not exposed, it can be present in the database though. It means that for given platform no playability is or was present or predicted.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="ANNOUNCED"/>
-      <xs:enumeration value="REALIZED"/>
-      <xs:enumeration value="REVOKED"/>
+      <xs:enumeration value="ANNOUNCED">
+        <xs:annotation>
+          <xs:documentation>For given platform no playability is present, but it predicted though, because it was announced.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="REALIZED">
+        <xs:annotation>
+          <xs:documentation>For given platform playability currently is present.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="REVOKED">
+        <xs:annotation>
+          <xs:documentation>For given platform playability currently is revoked. It used to be present though.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
 
