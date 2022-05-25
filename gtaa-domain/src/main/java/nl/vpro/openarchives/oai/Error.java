@@ -18,6 +18,9 @@ import javax.xml.bind.annotation.XmlValue;
 @AllArgsConstructor
 @Builder
 public class Error {
+    /**
+     * Code associated with this error
+     */
     @XmlAttribute(namespace = "")
     private String code;
 
