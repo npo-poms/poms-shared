@@ -28,6 +28,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @ToString
 public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
+    private static final long serialVersionUID = -3175261586025479797L;
 
     @Getter
     @Setter
