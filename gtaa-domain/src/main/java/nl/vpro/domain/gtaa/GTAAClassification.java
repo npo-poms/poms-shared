@@ -24,6 +24,8 @@ import nl.vpro.w3.rdf.Description;
 @XmlRootElement(name = "classification")
 public class GTAAClassification extends AbstractSimpleValueGTAAConcept {
 
+    private static final long serialVersionUID = -7045377163010493587L;
+
     @lombok.Builder(builderClassName = "Builder")
     public GTAAClassification(URI id, List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         super(id, scopeNotes, value, redirectedFrom, status, lastModified);
