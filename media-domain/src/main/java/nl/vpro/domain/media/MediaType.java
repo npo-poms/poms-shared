@@ -674,6 +674,7 @@ public enum MediaType implements Displayable {
     /**
      * @deprecated
      */
+    @Deprecated
     public MediaObject createInstance() {
         return getMediaInstance();
     }
