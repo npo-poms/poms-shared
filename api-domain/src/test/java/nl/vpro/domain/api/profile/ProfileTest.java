@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.api.profile;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.io.StringReader;
 import java.time.Instant;
 import java.util.Arrays;
@@ -33,6 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
+@Log4j2
 public class ProfileTest {
 
     @Test
@@ -151,7 +154,7 @@ public class ProfileTest {
         Program program = MediaTestDataBuilder.program().build();
         ProfileDefinition<MediaObject> predicate = getHumanProfile().getMediaProfile();
         PredicateTestResult predicateTestResult = predicate.testWithReason(program);
-        System.out.println(Arrays.asList(predicateTestResult.getDescription()));
+        log.info(Arrays.asList(predicateTestResult.getDescription()));
     }
 
 
@@ -162,10 +165,17 @@ public class ProfileTest {
         ProfileDefinition<MediaObject> predicate = getZappProfile().getMediaProfile();
         PredicateTestResult predicateTestResult1 = predicate.testWithReason(program1);
         assertThat(predicate.test(program1)).isTrue();
-        System.out.println(Arrays.asList(predicateTestResult1.getDescription()));
+        log.info(Arrays.asList(predicateTestResult1.getDescription()));
         PredicateTestResult predicateTestResult2 = predicate.testWithReason(program2);
         assertThat(predicate.test(program2)).isFalse();
-        System.out.println(Arrays.asList(predicateTestResult2.getDescription()));
+        log.info(Arrays.asList(predicateTestResult2.getDescription()));
+    }
+
+    @Test
+    public void npostart() {
+        ProfileDefinition<MediaObject> mediaProfile = getNpoStartProfile().getMediaProfile();
+        log.info("{}", mediaProfile);
+        assertThat(mediaProfile.getFilter()).isNotNull();
     }
 
     Profile getHumanProfile() {
@@ -224,7 +234,26 @@ public class ProfileTest {
             "    </media:filter>\n" +
             "  </profile:mediaProfile>\n" +
             "</profile:profile>\n";
-        System.out.println(in);
+        log.info(in);
         return JAXB.unmarshal(new StringReader(in), Profile.class);
+    }
+
+    public Profile getNpoStartProfile() {
+        String in = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<profile xmlns:constraint=\"urn:vpro:api:constraint:2014\"\n" +
+            "         xmlns=\"urn:vpro:api:profile:2013\"\n" +
+            "         xmlns:media=\"urn:vpro:api:constraint:media:2013\"\n" +
+            "         xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:api:constraint:page:2013\"\n" +
+            "         name=\"npostart\">\n" +
+            "  <mediaProfile>\n" +
+            "    <media:filter>\n" +
+            "      <media:not>\n" +
+            "        <media:isExclusive/>\n" +
+            "      </media:not>\n" +
+            "    </media:filter>\n" +
+            "  </mediaProfile>\n" +
+            "</profile>";
+        return JAXB.unmarshal(new StringReader(in), Profile.class);
+
     }
 }

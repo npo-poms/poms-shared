@@ -32,14 +32,14 @@ public class ProfileDefinitionTest {
 
     @Test
     public void testGetNullValues() {
-        ProfileDefinition in = new ProfileDefinition();
+        ProfileDefinition<?> in = new ProfileDefinition<MediaObject>();
         assertThat(in.getFilter()).isNull();
     }
 
     @Test
     public void testGetFilter() {
         ProfileDefinition<MediaObject> in = new ProfileDefinition<>(new Filter(), null);
-        ProfileDefinition out = JAXBTestUtil.roundTrip(in,
+        ProfileDefinition<MediaObject> out = JAXBTestUtil.roundTripAndSimilar(in,
             "<media:filter/>");
         assertThat(out.getFilter()).isNotNull();
         assertThat(out.getFilter()).isInstanceOf(AbstractFilter.class);
