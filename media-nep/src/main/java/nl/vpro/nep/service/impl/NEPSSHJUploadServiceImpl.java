@@ -151,14 +151,15 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 int n;
                 while (IOUtils.EOF != (n = incomingStream.read(buffer))) {
                     if (n == 0) {
-                        throw new IllegalStateException("InputStream#read(buffer) should not give zero bytes.");
+                        log.warn("InputStream#read(buffer) should not give zero bytes.");
+                        continue;
                     }
 
                     out.write(buffer, 0, n);
                     numberOfBytes += n;
 
                     if (++batchCount % infoBatch == 0) {
-                        Duration duration = Duration.between(start, Instant.now());
+                        final Duration duration = Duration.between(start, Instant.now());
 
                         // updating spans in ngToast doesn't work...
                         logger.info(
