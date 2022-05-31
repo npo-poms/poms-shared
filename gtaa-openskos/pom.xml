@@ -40,8 +40,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>javax.annotation</groupId>
-      <artifactId>jsr250-api</artifactId>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jaxb</groupId>
