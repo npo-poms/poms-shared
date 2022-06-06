@@ -93,7 +93,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     }
 
     @PreDestroy
-    public void destroy() throws Exception {
+    public void destroy() {
 
     }
 
@@ -101,76 +101,71 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     @Override
     public long upload(
-        @NonNull SimpleLogger logger,
-        @NonNull String nepFile,
-        @NonNull Long size,
-        @NonNull InputStream incomingStream,
-        boolean replaces) throws IOException {
+        final @NonNull SimpleLogger logger,
+        final @NonNull String nepFile,
+        final @NonNull Long size,
+        final @NonNull InputStream incomingStream,
+        final boolean replaces) throws IOException {
 
+        final Instant start = Instant.now();
+        final long infoBatch = 10;
 
-        Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
         logger.info(
             en("Uploading to {}:{}")
                 .nl("Uploaden naar {}:{}")
-            .slf4jArgs(sftpHost, nepFile)
+                .slf4jArgs(sftpHost, nepFile)
             .build());
         try(
             final SSHClientFactory.ClientHolder client = createClient();
             final SFTPClient sftp = client.get().newSFTPClient()
         ) {
             sftp.getSFTPEngine().setTimeoutMs((int) sftpTimeout.toMillis());
-            int split  = nepFile.lastIndexOf('/');
+            final int split  = nepFile.lastIndexOf('/');
             if (split > 0) {
                 sftp.mkdirs(nepFile.substring(0, split));
             }
             if (! replaces) {
-                try (
-                    final RemoteFile handleToCheck = sftp.open(nepFile, EnumSet.of(OpenMode.READ))
-                ) {
-                    FileAttributes attributes = handleToCheck.fetchAttributes();
-                    if (attributes.getSize() != size) {
-                        logger.warn("Found existing, but size is not equal {} {} != {}", nepFile, attributes.getSize(), size);
-                    } else {
-                        logger.info("Found existing {}", attributes);
-                    }
-                    return -1L;
-                } catch (SFTPException sftpException) {
-                    log.warn("For {}: {}", nepFile, sftpException.getMessage());
+                if (!checkExistence(logger, sftp, nepFile, size)) {
+                    return -1;
                 }
             }
             try (
                 final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
-                OutputStream out = handle.new RemoteFileOutputStream()
+                final OutputStream out = handle.new RemoteFileOutputStream()
             ) {
+                final byte[] buffer = new byte[batchSize];
 
-                byte[] buffer = new byte[batchSize];
-                long infoBatch = 10;
                 long batchCount = 0;
                 long numberOfBytes = 0;
                 int n;
                 while (IOUtils.EOF != (n = incomingStream.read(buffer))) {
                     if (n == 0) {
-                        throw new IllegalStateException("InputStream#read(buffer) should not give zero bytes.");
+                        log.debug("InputStream#read(buffer) gave zero bytes.");
+                        continue;
                     }
-
                     out.write(buffer, 0, n);
                     numberOfBytes += n;
 
                     if (++batchCount % infoBatch == 0) {
-                        Duration duration = Duration.between(start, Instant.now());
+                        final Duration duration = Duration.between(start, Instant.now());
 
                         // updating spans in ngToast doesn't work...
                         logger.info(
                             en("Uploaded {}/{} to {}:{} ({})")
                                 .nl("Geüpload {}/{} naar {}:{} ({})")
-                                .slf4jArgs(FORMATTER.format(numberOfBytes), FORMATTER.format(size), sftpHost, nepFile, FORMATTER.formatSpeed(numberOfBytes, duration))
+                                .slf4jArgs(
+                                    FORMATTER.format(numberOfBytes),
+                                    FORMATTER.format(size),
+                                    sftpHost, nepFile,
+                                    FORMATTER.formatSpeed(numberOfBytes, duration)
+                                )
                                 .build());
                     } else {
                         log.debug("Uploaded {}/{} bytes to NEP", FORMATTER.format(numberOfBytes), FORMATTER.format(size));
                     }
                 }
-                Duration duration = Duration.between(start, Instant.now());
+                final Duration duration = Duration.between(start, Instant.now());
                 logger.info(
                     en("Ready uploading {}/{} (took {}, {})")
                         .nl("Klaar met uploaden van {}/{} (kostte: {}, {})")
@@ -190,6 +185,31 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 throw sftpException;
             }
         }
+    }
+
+    private boolean checkExistence(
+        SimpleLogger logger,
+        SFTPClient sftp,
+        String nepFile,
+        long size
+    ) {
+        try (
+            final RemoteFile handleToCheck = sftp.open(nepFile, EnumSet.of(OpenMode.READ))
+        ) {
+            FileAttributes attributes = handleToCheck.fetchAttributes();
+            if (attributes.getSize() != size) {
+                logger.warn("Found existing, but size is not equal {} {} != {}",
+                    nepFile, attributes.getSize(), size);
+            } else {
+                logger.info("Found existing {}", attributes);
+            }
+            return false;
+        } catch (SFTPException sftpException) {
+            log.warn("For {}: {}", nepFile, sftpException.getMessage());
+        } catch (IOException e) {
+            log.warn(e.getMessage(), e);
+        }
+        return true;
     }
 
     @Override
