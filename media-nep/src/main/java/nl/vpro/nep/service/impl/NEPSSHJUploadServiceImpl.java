@@ -110,6 +110,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         final Instant start = Instant.now();
         final long infoBatch = 10;
 
+
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
         logger.info(
             en("Uploading to {}:{}")
@@ -135,7 +136,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 final OutputStream out = handle.new RemoteFileOutputStream()
             ) {
                 final byte[] buffer = new byte[batchSize];
-
+                long prevBatchCount = -1;
                 long batchCount = 0;
                 long numberOfBytes = 0;
                 int n;
@@ -147,7 +148,9 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                     out.write(buffer, 0, n);
                     numberOfBytes += n;
 
-                    if (++batchCount % infoBatch == 0) {
+                    batchCount = numberOfBytes / (batchSize * infoBatch);
+                    if (prevBatchCount != batchCount) {
+                        prevBatchCount = batchCount;
                         final Duration duration = Duration.between(start, Instant.now());
 
                         // updating spans in ngToast doesn't work...
