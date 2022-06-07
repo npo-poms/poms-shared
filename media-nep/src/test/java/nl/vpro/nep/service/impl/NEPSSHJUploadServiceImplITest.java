@@ -40,7 +40,7 @@ public class NEPSSHJUploadServiceImplITest {
     Instant start = Instant.now();
 
 
-    private String[] files = new String[] {"/Users/michiel/samples/huge.mxf"};
+    private final String[] files = new String[] {"/Users/michiel/samples/huge.mxf"};
     //, "/Users/michiel/npo/media/huge2.mp4"};
 
 
