@@ -3,8 +3,8 @@
         xmlns = {
             @XmlNs(prefix = "",        namespaceURI = Xmlns.PROFILE_NAMESPACE),
             @XmlNs(prefix = "media",   namespaceURI = Xmlns.MEDIA_CONSTRAINT_NAMESPACE),
-            @XmlNs(prefix = "page", namespaceURI = Xmlns.PAGE_CONSTRAINT_NAMESPACE),
-            @XmlNs(prefix = "shared", namespaceURI = Xmlns.SHARED_NAMESPACE),
+            @XmlNs(prefix = "page",    namespaceURI = Xmlns.PAGE_CONSTRAINT_NAMESPACE),
+            @XmlNs(prefix = "shared",  namespaceURI = Xmlns.SHARED_NAMESPACE),
         },
         elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
         attributeFormDefault = javax.xml.bind.annotation.XmlNsForm.UNQUALIFIED

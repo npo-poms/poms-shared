@@ -40,7 +40,9 @@ public class ProfileDefinitionTest {
     public void testGetFilter() {
         ProfileDefinition<MediaObject> in = new ProfileDefinition<>(new Filter(), null);
         ProfileDefinition<MediaObject> out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<media:filter/>");
+                "<local:profileDefinition xmlns=\"urn:vpro:api:profile:2013\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:m=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <media:filter/>\n" +
+                "</local:profileDefinition>");
         assertThat(out.getFilter()).isNotNull();
         assertThat(out.getFilter()).isInstanceOf(AbstractFilter.class);
     }
