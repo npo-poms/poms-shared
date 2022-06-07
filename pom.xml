@@ -16,6 +16,7 @@
 
   <properties>
     <poms.shared.version>${project.version}</poms.shared.version>
+    <vpro.shared.version>2.32-SNAPSHOT</vpro.shared.version>
   </properties>
 
 

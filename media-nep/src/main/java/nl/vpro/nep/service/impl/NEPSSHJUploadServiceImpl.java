@@ -116,7 +116,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             en("Uploading to {}:{}")
                 .nl("Uploaden naar {}:{}")
                 .slf4jArgs(sftpHost, nepFile)
-            .build());
+        );
         try(
             final SSHClientFactory.ClientHolder client = createClient();
             final SFTPClient sftp = client.get().newSFTPClient()
@@ -163,7 +163,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                                     sftpHost, nepFile,
                                     FORMATTER.formatSpeed(numberOfBytes, duration)
                                 )
-                                .build());
+                        );
                     } else {
                         log.debug("Uploaded {}/{} bytes to NEP", FORMATTER.format(numberOfBytes), FORMATTER.format(size));
                     }
@@ -177,7 +177,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                             FORMATTER.format(size),
                             duration,
                             FORMATTER.formatSpeed(numberOfBytes, duration))
-                        .build());
+                );
                 return numberOfBytes;
             } catch (SFTPException sftpException) {
                 Throwable e = sftpException;
