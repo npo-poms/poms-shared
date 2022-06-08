@@ -258,7 +258,7 @@ public class Genre implements Displayable, Comparable<Genre>, Serializable {
     }
 
     private static ArrayList<TermWrapper> getTerms(String termId) {
-        ArrayList<TermWrapper> result = new ArrayList<>();
+        final ArrayList<TermWrapper> result = new ArrayList<>();
         if(termId != null) {
             Term term;
             try {
