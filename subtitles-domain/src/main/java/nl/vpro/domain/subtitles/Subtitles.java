@@ -10,12 +10,12 @@ import java.time.Instant;
 import java.util.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.io.IOUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -30,9 +30,7 @@ import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.persistence.InstantToTimestampConverter;
-import nl.vpro.xml.bind.DurationXmlAdapter;
-import nl.vpro.xml.bind.InstantXmlAdapter;
-import nl.vpro.xml.bind.LocaleAdapter;
+import nl.vpro.xml.bind.*;
 
 import static nl.vpro.i18n.Locales.DUTCH;
 
@@ -116,7 +114,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute
-    @NotNull
+    @NonNull
     @Getter
     @Setter
     private OwnerType owner = OwnerType.BROADCASTER;
@@ -124,7 +122,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute
-    @NotNull
+    @NonNull
     @Getter
     @Setter
     private SubtitlesWorkflow  workflow = SubtitlesWorkflow.FOR_PUBLICATION;
