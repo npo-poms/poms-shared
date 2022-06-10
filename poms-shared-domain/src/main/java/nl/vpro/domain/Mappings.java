@@ -6,18 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.net.URI;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.SchemaOutputResolver;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
 import javax.xml.transform.Result;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMResult;
@@ -34,6 +29,8 @@ import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.SAXException;
 
+import nl.vpro.util.SchemaType;
+
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
@@ -45,7 +42,8 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  * @since 5.4
  */
 @Slf4j
-public abstract class Mappings implements Function<String, File>, LSResourceResolver {
+public abstract class Mappings implements BiFunction<String, SchemaType, File>, LSResourceResolver {
+
 
     protected final static Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
 
@@ -98,7 +96,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
                 }
                 Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
                 if (validate) {
-                    File xsd = getFile(namespace);
+                    File xsd = getXsdFile(namespace);
                     if (xsd.exists()) {
                         Schema schema = SCHEMA_FACTORY.newSchema(xsd);
                         result.setSchema(schema);
@@ -115,11 +113,15 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
 
     @SneakyThrows
     @Override
-    public File apply(String namespace) {
-        if (generateDocumentation) {
-            return getFileWithDocumentation(namespace);
+    public File apply(String namespace, SchemaType type) {
+        if (type == SchemaType.XSD) {
+            if (generateDocumentation) {
+                return getXsdFileWithDocumentation(namespace);
+            } else {
+                return getXsdFile(namespace);
+            }
         } else {
-            return getFile(namespace);
+            throw new UnsupportedOperationException("TODO");
         }
     }
 
@@ -129,7 +131,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         if (url != null) {
             return ResourceResolver.resolveNamespaceToLS(namespaceURI);
         }
-        try (InputStream resource = new FileInputStream(apply(namespaceURI))) {
+        try (InputStream resource = Files.newInputStream(apply(namespaceURI, SchemaType.XSD).toPath())) {
             LSInput lsinput = ResourceResolver.DOM.createLSInput();
             lsinput.setCharacterStream(new InputStreamReader(resource));
             return lsinput;
@@ -138,14 +140,14 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         }
     }
 
-    public File getFile(String namespace) {
+    public File getXsdFile(String namespace) {
         init();
         String fileName = namespace.substring("urn:vpro:".length()).replace(':', '_') + ".xsd";
         return new File(getTempDir(), fileName);
     }
 
-    public File getFileWithDocumentation(@NonNull String namespace) throws NotFoundException {
-        final File file = getFile(namespace);
+    public File getXsdFileWithDocumentation(@NonNull String namespace) throws NotFoundException {
+        final File file = getXsdFile(namespace);
         File fileWithDocumentation = new File(file.getParentFile(), "documented." + file.getName());
         if (fileWithDocumentation.exists() && fileWithDocumentation.lastModified() < file.lastModified()) {
             if (! fileWithDocumentation.delete()) {
@@ -220,7 +222,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
                 if (StringUtils.isEmpty(namespaceUri)) {
                     f = new File(getTempDir(), suggestedFileName);
                 } else {
-                    f = getFile(namespaceUri);
+                    f = getXsdFile(namespaceUri);
                 }
                 deleteIfOld(f);
                 if (!f.exists()) {
