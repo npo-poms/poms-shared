@@ -125,6 +125,11 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
         }
     }
 
+    public File apply(String namespace) {
+        return apply(namespace, SchemaType.XSD);
+    }
+
+
     @Override
     public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
         URL url = ResourceResolver.resolveToURL(namespaceURI);
