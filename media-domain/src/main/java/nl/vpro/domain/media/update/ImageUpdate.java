@@ -70,7 +70,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     private ImageType type;
 
     /**
-     * The URN of the image object in the media object. This is basicly the id prefixed with {@link Image#getUrnPrefix()}
+     * The URN of the image object in the media object. This is basically the id prefixed with {@link Image#getUrnPrefix()}
      */
     @XmlAttribute(name = "urn")
     @Pattern(regexp = "^urn:vpro:media:image:[0-9]+$")
@@ -120,7 +120,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @NotNull(groups = {WarningValidatorGroup.class})
     private String credits;
 
-    @URI(mustHaveScheme = true, minHostParts = 2, groups = {WarningValidatorGroup.class})
+    @URI(mustHaveScheme = true, minHostParts = 2, groups = {PomsValidatorGroup.class})
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
     private String source;
