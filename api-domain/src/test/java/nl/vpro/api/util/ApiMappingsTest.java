@@ -116,7 +116,7 @@ public class ApiMappingsTest {
 
         mappings.getUnmarshaller(true, xmlns).get();
 
-        File file = mappings.getFile(xmlns);
+        File file = mappings.getXsdFile(xmlns);
         InputStream control = getClass().getResourceAsStream("/xsds/" + file.getName());
         if (control == null) {
             log.info(file.getName());
@@ -124,7 +124,7 @@ public class ApiMappingsTest {
             throw new RuntimeException("No file " + file.getName());
         }
         //File xsdFile = mappings.getFileWithDocumentation(xmlns);
-        File xsdFile = mappings.getFile(xmlns);
+        File xsdFile = mappings.getXsdFile(xmlns);
         Diff diff = DiffBuilder.compare(control).withTest(
             new FileInputStream(xsdFile))
             .ignoreWhitespace()
