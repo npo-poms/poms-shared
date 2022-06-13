@@ -7,6 +7,8 @@ Trying this out 'vrije ruimte' of 2022-06-13. Relates to http://json-schema.org/
 
 https://json-schema.org/implementations.html
 
+Goal is to add links to json schema's in https://rs.poms.omroep.nl/v1/schema/
+
 == Schema generation
 
 Our domain objects are entirely specified in java. So you would like to _generate_ the schema from those.
@@ -63,7 +65,7 @@ May be interesting for V3 validation?
 
 I didn't have much time today. But provisionally I'd say:
 
-- Generating V3 schema can be easily added.
+- Generating V3 schema can be easily added. (though I don't see how to group those per namespace, probably easiest to just add a link per relevant root element)
 - But I don't know yet how to also add _validation_ which would make it more useful, we could offer server side validation of json, which would help developers trying to intergrate with our API's.
 
 === TODO
