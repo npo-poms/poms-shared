@@ -71,5 +71,6 @@ I didn't have much time today. But provisionally I'd say:
 === TODO
 
 - At least not in java, may be try it out in python or javascript or so.
+- Generate links anyway. Some work is done already in this branch.
 
 
