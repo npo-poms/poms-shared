@@ -29,8 +29,9 @@ This can be done using https://github.com/FasterXML/jackson-module-jsonSchema
 ----
 
 - It seems to generate quite old fashioned version 3 of json-schema
-- There is also a probject for V4: https://github.com/mbknor/mbknor-jackson-jsonSchema
+- There is also a project for V4: https://github.com/mbknor/mbknor-jackson-jsonSchema
 - Both don't seem to be maintained actively
+- Even V4 is a bit disappointing, as the latest version is V7, or Draft 2020-12 ?
 
 == Schema validation.
 
