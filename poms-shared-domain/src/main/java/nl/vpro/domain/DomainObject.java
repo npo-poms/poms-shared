@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import nl.vpro.domain.bind.PublicationFilter;
-import nl.vpro.jackson2.Jackson2Mapper;
 
 
 /**
@@ -31,7 +30,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
     static {
-        Jackson2Mapper.addFilter("publicationFilter", new PublicationFilter());
+        PublicationFilter.install();
     }
 
     @Id

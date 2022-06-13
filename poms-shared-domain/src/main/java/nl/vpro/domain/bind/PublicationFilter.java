@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ser.PropertyWriter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 
 import nl.vpro.domain.Embargo;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.jackson2.Views;
 
 /**
@@ -24,6 +25,15 @@ import nl.vpro.jackson2.Views;
  */
 @Slf4j
 public class PublicationFilter extends SimpleBeanPropertyFilter {
+
+    public static final String NAME = "publicationFilter";
+
+    /**
+     * Installs this filter in the predefined {@link com.fasterxml.jackson.databind.ObjectMapper}'s in {@link Jackson2Mapper}.
+     */
+    public static void install() {
+        Jackson2Mapper.addFilter(PublicationFilter.NAME, new PublicationFilter());
+    }
 
     /**
      * For now on default this filter does nothing.

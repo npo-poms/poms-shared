@@ -1,0 +1,72 @@
+= Json Schema and Validation
+:toc:
+
+== Intro
+
+Trying this out 'vrije ruimte' of 2022-06-13. Relates to http://json-schema.org/
+
+https://json-schema.org/implementations.html
+
+== Schema generation
+
+Our domain objects are entirely specified in java. So you would like to _generate_ the schema from those.
+
+This can be done using https://github.com/FasterXML/jackson-module-jsonSchema
+
+[source, xml]
+----
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-jsonSchema</artifactId>
+      <exclusions>
+        <exclusion>
+          <!-- we use jakarta.validation -->
+          <groupId>javax.validation</groupId>
+          <artifactId>validation-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+----
+
+- It seems to generate quite old fashioned version 3 of json-schema
+- There is also a probject for V4: https://github.com/mbknor/mbknor-jackson-jsonSchema
+- Both don't seem to be maintained actively
+
+== Schema validation.
+
+I first considered
+
+[source, xml]
+----
+    <dependency>
+      <groupId>com.networknt</groupId>
+      <artifactId>json-schema-validator</artifactId>
+      <version>1.0.70</version>
+    </dependency>
+
+----
+Sadly, only >= v4?
+
+[source, xml]
+----
+  <dependency>
+      <groupId>com.github.java-json-tools</groupId>
+      <artifactId>json-schema-validator</artifactId>
+      <version>2.2.14</version>
+    </dependency>
+----
+May be interesting for V3 validation?
+
+
+== Provisional conclusion.
+
+I didn't have much time today. But provisionally I'd say:
+
+- Generating V3 schema can be easily added.
+- But I don't know yet how to also add _validation_ which would make it more useful, we could offer server side validation of json, which would help developers trying to intergrate with our API's.
+
+=== TODO
+
+- At least not in java, may be try it out in python or javascript or so.
+
+

@@ -29,6 +29,10 @@ import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.SAXException;
 
+import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
+import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
+
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.util.SchemaType;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -44,7 +48,6 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 @Slf4j
 public abstract class Mappings implements BiFunction<String, SchemaType, File>, LSResourceResolver {
 
-
     protected final static Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
 
     protected static final long startTime = System.currentTimeMillis();
@@ -56,6 +59,12 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
     private final SchemaFactory SCHEMA_FACTORY = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+    private final JsonSchemaGenerator SCHEMA_GENERATOR = new JsonSchemaGenerator(Jackson2Mapper.getInstance());
+    {
+
+    }
+
 
     @Getter
     @Setter
@@ -121,7 +130,8 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
                 return getXsdFile(namespace);
             }
         } else {
-            throw new UnsupportedOperationException("TODO");
+            throw new UnsupportedOperationException();
+            //return getJsonSchemaFile(namespace);
         }
     }
 
@@ -143,6 +153,25 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
     public File getXsdFile(String namespace) {
         init();
         String fileName = namespace.substring("urn:vpro:".length()).replace(':', '_') + ".xsd";
+        return new File(getTempDir(), fileName);
+    }
+
+
+    public File getJsonSchemaFile(Class<?> clazz) {
+        init();
+        File file =  getJsonSchemaFileWithoutCheck(clazz);
+        if (! file.exists()) {
+            try {
+                generateJsonSchema(file, clazz);
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        return file;
+    }
+
+    private File getJsonSchemaFileWithoutCheck(Class<?> clazz) {
+        String fileName = clazz.getName() + ".json";
         return new File(getTempDir(), fileName);
     }
 
@@ -186,6 +215,7 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
 
             try {
                 generateXSDs();
+                generateJsonSchemas();
             } catch (JAXBException | IOException e) {
                 log.error(e.getMessage(), e);
             }
@@ -245,6 +275,29 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
 
 
     }
+
+    protected void generateJsonSchemas() throws IOException, JAXBException {
+        Class<?>[] classes = getClasses();
+        log.info("Generating json schema's {} in {}", Arrays.asList(classes), getTempDir());
+
+        for (Class<?> c : classes) {
+            generateJsonSchema(getJsonSchemaFileWithoutCheck(c), c);
+        }
+        log.info("Ready generating json schema's");
+    }
+
+    protected void generateJsonSchema(File file, Class<?> c) throws IOException {
+        JsonSchema schema = SCHEMA_GENERATOR.generateSchema(c);
+        if (file.exists()) {
+            log.info("{} exists already" ,file);
+        } else {
+            try (OutputStream out = Files.newOutputStream(file.toPath())) {
+                Jackson2Mapper.getPrettyInstance().writeValue(out, schema);
+            }
+            log.info("Wrote {}", file);
+        }
+    }
+
 
     private ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, Class<?>... classes) {
         return ThreadLocal.withInitial(() -> {

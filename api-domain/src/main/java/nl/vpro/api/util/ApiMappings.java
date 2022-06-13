@@ -13,14 +13,13 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.SuggestResult;
 import nl.vpro.domain.api.media.*;
-import nl.vpro.domain.api.page.PageForm;
-import nl.vpro.domain.api.page.PageSearchResult;
-import nl.vpro.domain.api.page.PageSearchResults;
+import nl.vpro.domain.api.page.*;
 import nl.vpro.domain.api.profile.Profile;
 import nl.vpro.domain.api.subtitles.SubtitlesForm;
 import nl.vpro.domain.constraint.LocalizedString;
 import nl.vpro.domain.gtaa.Scheme;
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.update.PageUpdate;
 import nl.vpro.domain.subtitles.Subtitles;
@@ -64,12 +63,13 @@ public class ApiMappings extends Mappings {
             MediaResult.class
         });
         MAPPING.put(PAGE_NAMESPACE, new Class[]{Page.class});
+        MAPPING.put(MEDIA_NAMESPACE, new Class[]{Program.class, Segment.class, Group.class});
         MAPPING.put(PAGEUPDATE_NAMESPACE, new Class[]{PageUpdate.class, ImageType.class});
-        MAPPING.put(Xmlns.MEDIA_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.media.Filter.class});
-        MAPPING.put(Xmlns.PAGE_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.page.Filter.class});
-        MAPPING.put(Xmlns.CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class,  LocalizedString.class,
+        MAPPING.put(MEDIA_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.media.Filter.class});
+        MAPPING.put(PAGE_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.page.Filter.class});
+        MAPPING.put(CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class,  LocalizedString.class,
 });
-        MAPPING.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, new Class[]{Subtitles.class, SubtitlesType.class});
+        MAPPING.put(MEDIA_SUBTITLES_NAMESPACE, new Class[]{Subtitles.class, SubtitlesType.class});
         MAPPING.put(GTAA_NAMESPACE, Scheme.classes());
 
         Xmlns.fillLocationsAtPoms(KNOWN_LOCATIONS, pomsLocation.toString());

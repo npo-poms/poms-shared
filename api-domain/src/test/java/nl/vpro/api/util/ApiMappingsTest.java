@@ -4,7 +4,11 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import javax.xml.bind.Unmarshaller;
 
@@ -13,8 +17,14 @@ import org.junit.jupiter.api.*;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
+import com.networknt.schema.*;
+
 import nl.vpro.domain.Mappings;
 import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.bind.PublicationFilter;
+import nl.vpro.domain.media.MediaTestDataBuilder;
+import nl.vpro.domain.media.Program;
+import nl.vpro.jackson2.Jackson2Mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,6 +34,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Slf4j
 public class ApiMappingsTest {
+
+    static {
+        PublicationFilter.install();
+    }
 
 
     @BeforeEach
@@ -111,6 +125,26 @@ public class ApiMappingsTest {
     }
 
 
+    @Test
+    public void jsonSchema() throws IOException {
+        ApiMappings mappings = createMappings();
+
+        File jsonSchemaFile = mappings.getJsonSchemaFile(Program.class);
+
+        log.info(IOUtils.toString(Files.newInputStream(jsonSchemaFile.toPath()), StandardCharsets.UTF_8));
+
+        JsonSchemaFactory schemaFactory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V4);
+        Program program = MediaTestDataBuilder.program().withEverything().build();
+
+        Path path = jsonSchemaFile.toPath();
+        SchemaValidatorsConfig config = new SchemaValidatorsConfig();
+        config.setTypeLoose(false);
+        JsonSchema schema = schemaFactory.getSchema(URI.create("urn:jsonschema:nl:vpro:domain:media:Program"), Jackson2Mapper.getLenientInstance().readTree(jsonSchemaFile), config);
+        schema.validate(Jackson2Mapper.getInstance().valueToTree(program));
+
+    }
+
+
     @SneakyThrows
     protected void testNamespace(ApiMappings mappings, String xmlns)  {
 
@@ -120,13 +154,13 @@ public class ApiMappingsTest {
         InputStream control = getClass().getResourceAsStream("/xsds/" + file.getName());
         if (control == null) {
             log.info(file.getName());
-            IOUtils.copy(new FileInputStream(file), System.out);
+            IOUtils.copy(Files.newInputStream(file.toPath()), System.out);
             throw new RuntimeException("No file " + file.getName());
         }
         //File xsdFile = mappings.getFileWithDocumentation(xmlns);
         File xsdFile = mappings.getXsdFile(xmlns);
         Diff diff = DiffBuilder.compare(control).withTest(
-            new FileInputStream(xsdFile))
+                Files.newInputStream(xsdFile.toPath()))
             .ignoreWhitespace()
             .ignoreComments()
             .checkForIdentical()
@@ -138,8 +172,6 @@ public class ApiMappingsTest {
         log.info("And classpath file " + file);
         assertThat(diff.hasDifferences()).withFailMessage("Not identical " + file + " " + resource + " " + diff.toString()).isFalse();
         log.info("Identical {} {}", file, getClass().getResource("/xsds/" + file.getName()));
-
-
     }
 
 }
