@@ -3,7 +3,7 @@
 
 == Intro
 
-Trying this out 'vrije ruimte' of 2022-06-13. Relates to http://json-schema.org/
+Trying this out in 'vrije ruimte' of 2022-06-13. Relates to http://json-schema.org/
 
 https://json-schema.org/implementations.html
 
