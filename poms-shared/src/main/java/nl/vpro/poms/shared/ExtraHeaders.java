@@ -3,6 +3,7 @@ package nl.vpro.poms.shared;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
@@ -51,6 +52,14 @@ public class ExtraHeaders {
         String m = ft.getMessage();
         EXTRA_HEADERS.get().add(Pair.of(header, m));
         return m;
+    }
+
+    public static void consume(BiConsumer<String, String> builder) {
+        ExtraHeaders.get().forEach((p) ->
+            builder.accept(p.getKey(), p.getValue())
+        );
+        ExtraHeaders.markUsed();
+        ExtraHeaders.remove();
     }
 
 }
