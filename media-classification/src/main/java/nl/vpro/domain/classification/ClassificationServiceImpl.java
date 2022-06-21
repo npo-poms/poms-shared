@@ -154,7 +154,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                     }
                 }
                 if (startWatchers) {
-                    watch(resourceFile);
+                    watch(resourceFile, false);
                     // show that we're watching...
                     File tempFile = new File(resourceFile, AbstractClassificationServiceImpl.class.getSimpleName() + ".watched");
                     if (tempFile.canWrite()) {
@@ -185,10 +185,18 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
     }
 
 
-    private void watch(final File directory) {
+    private void watch(final File directory, boolean usePolling) {
         synchronized (AbstractClassificationServiceImpl.class) {
-            //watchOnADecentFileSystem(directory);
-            pollingWatchDirectory(directory);
+            if (usePolling) {
+                pollingWatchDirectory(directory);
+            } else {
+                try {
+                    watchOnADecentFileSystem(directory);
+                } catch (IOException e) {
+                    log.warn(e.getMessage());
+                    pollingWatchDirectory(directory);
+                }
+            }
         }
         log.debug("Watching " + directory);
     }
