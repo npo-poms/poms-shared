@@ -447,13 +447,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     // Before hibernate 5.2 we used Filter rather then FilterJoinTable.
     // It doesn't really make much sense.
     @FilterJoinTables({
-            @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec2_.mergedTo_id is null) and " + // MSE-3526                 // ?
-                    "(mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now()) and "
-                    + "(mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now())" + ")"),
-            @FilterJoinTable(name = EMBARGO_FILTER, condition = "(mediaobjec2_2_.type != 'CLIP' "
-                    + "or mediaobjec2_.publishstart is null " + "or mediaobjec2_.publishstart < now() "
-                    + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec2_.id and o.broadcasters_id in (:broadcasters)))"),
-            @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
+        @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec2_.mergedTo_id is null) and " + // MSE-3526                 // ?
+            "(mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now()) and "
+            + "(mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now())" + ")"),
+        @FilterJoinTable(name = EMBARGO_FILTER, condition = "(mediaobjec2_2_.type != 'CLIP' "
+            + "or mediaobjec2_.publishstart is null " + "or mediaobjec2_.publishstart < now() "
+            + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec2_.id and o.broadcasters_id in (:broadcasters)))"),
+        @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
     protected Set<@NotNull @Valid MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
