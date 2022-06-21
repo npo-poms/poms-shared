@@ -27,6 +27,9 @@ public class DeleteResult {
     @XmlAttribute
     private Integer notallowedCount;
     @XmlAttribute
+    private Integer alreadyDeletedCount;
+
+    @XmlAttribute
     private boolean success = true;
     @XmlValue
     private String message;
@@ -37,10 +40,11 @@ public class DeleteResult {
     }
 
     @lombok.Builder
-    private DeleteResult( CompletableFuture<?> future, int count, int notallowedCount, Boolean success, String message) {
+    private DeleteResult( CompletableFuture<?> future, int count, int notallowedCount, int alreadyDeletedCount,  Boolean success, String message) {
         this.future = future == null ? CompletableFuture.completedFuture(null) : future;
         this.count = count;
         this.notallowedCount = notallowedCount;
+        this.alreadyDeletedCount = alreadyDeletedCount;
         this.success = success == null || success;
         this.message = message;
     }
