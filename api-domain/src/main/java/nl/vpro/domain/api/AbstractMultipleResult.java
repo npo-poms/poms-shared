@@ -47,7 +47,7 @@ public abstract class AbstractMultipleResult<M> extends Result<MultipleEntry<M>>
                     if (m != null) {
                         PredicateTestResult result = predicate.testWithReason(m);
                         if (!result.applies()) {
-                            entry.setError("Does not match profile " + predicate.toString() + ": " + ids.get(index));
+                            entry.setError("Does not match profile " + predicate + ": " + ids.get(index));
                             entry.setReason(result);
                             entry.setResult(null); // ?
                         }
