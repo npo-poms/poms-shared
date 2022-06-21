@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import nl.vpro.domain.page.PageIdMatch;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
@@ -40,6 +41,9 @@ public class DeleteResult {
     @XmlJavaTypeAdapter(value = DurationXmlAdapter.class)
     private Duration duration;
 
+    @XmlAttribute
+    private PageIdMatch match;
+
     @XmlValue
     private String message;
 
@@ -49,13 +53,15 @@ public class DeleteResult {
     }
 
     @lombok.Builder
-    private DeleteResult(CompletableFuture<?> future, int count, int notallowedCount, int alreadyDeletedCount,  Boolean success, Duration duration, String message) {
+    private DeleteResult(CompletableFuture<?> future, int count, int notallowedCount, Integer alreadyDeletedCount, PageIdMatch match, Boolean success, Duration duration, String message) {
         this.future = future == null ? CompletableFuture.completedFuture(null) : future;
         this.count = count;
         this.notallowedCount = notallowedCount;
         this.alreadyDeletedCount = alreadyDeletedCount;
         this.duration = duration;
+        this.match = match;
         this.success = success == null || success;
+
         this.message = message;
     }
 
