@@ -43,9 +43,8 @@ public abstract class AbstractMultipleResult<M> extends Result<MultipleEntry<M>>
             public MultipleEntry<M> get(int index) {
                 MultipleEntry<M> entry = producer.apply(ids.get(index), list.get(index));
                 if (predicate != null) {
-                    M m = entry.getResult();
-                    if (m != null) {
-                        PredicateTestResult result = predicate.testWithReason(m);
+                    if (entry.isFound()) {
+                        PredicateTestResult result = predicate.testWithReason(entry.getResult());
                         if (!result.applies()) {
                             entry.setError("Does not match profile " + predicate + ": " + ids.get(index));
                             entry.setReason(result);
@@ -53,7 +52,6 @@ public abstract class AbstractMultipleResult<M> extends Result<MultipleEntry<M>>
                         }
                     }
                 }
-
                 return entry;
             }
 
