@@ -3,13 +3,17 @@ package nl.vpro.domain.page.update;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
  * @author Michiel Meeuwissen
@@ -31,6 +35,11 @@ public class DeleteResult {
 
     @XmlAttribute
     private boolean success = true;
+
+    @XmlAttribute
+    @XmlJavaTypeAdapter(value = DurationXmlAdapter.class)
+    private Duration duration;
+
     @XmlValue
     private String message;
 
@@ -40,11 +49,12 @@ public class DeleteResult {
     }
 
     @lombok.Builder
-    private DeleteResult( CompletableFuture<?> future, int count, int notallowedCount, int alreadyDeletedCount,  Boolean success, String message) {
+    private DeleteResult(CompletableFuture<?> future, int count, int notallowedCount, int alreadyDeletedCount,  Boolean success, Duration duration, String message) {
         this.future = future == null ? CompletableFuture.completedFuture(null) : future;
         this.count = count;
         this.notallowedCount = notallowedCount;
         this.alreadyDeletedCount = alreadyDeletedCount;
+        this.duration = duration;
         this.success = success == null || success;
         this.message = message;
     }
