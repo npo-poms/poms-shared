@@ -2,6 +2,7 @@ package nl.vpro.domain.page.update;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -26,13 +27,15 @@ public class DeleteResultTest {
         DeleteResult result = DeleteResult.builder()
             .future(CompletableFuture.completedFuture("bla"))
             .count(100)
+            .duration(Duration.ofMillis(123))
             .build();
 
         Jackson2TestUtil.roundTripAndSimilar(result, "{\n" +
-            "  \"count\" : 100,\n" +
-            "  \"notallowedCount\" : 0,\n" +
-            "  \"success\" : true\n" +
-            "}");
+            "    \"count\" : 100,\n" +
+            "    \"notallowedCount\" : 0,\n" +
+            "    \"success\" : true,\n" +
+            "    \"duration\" : \"P0DT0H0M0.123S\"\n" +
+            "  }");
     }
 
 
@@ -41,9 +44,10 @@ public class DeleteResultTest {
         DeleteResult result = DeleteResult.builder()
             .future(CompletableFuture.completedFuture("bla"))
             .count(100)
+            .duration(Duration.ofMillis(123))
             .build();
 
-        JAXBTestUtil.roundTripAndSimilar(result, "<pageUpdate:deleteresult count=\"100\" notallowedCount=\"0\" success=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:pages:2013\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\"/>");
+        JAXBTestUtil.roundTripAndSimilar(result, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pageUpdate:deleteresult xmlns:pageUpdate=\"urn:vpro:pages:update:2013\" count=\"100\" notallowedCount=\"0\"  success=\"true\" duration=\"P0DT0H0M0.123S\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:pages:2013\"/>");
     }
 
     @Test
