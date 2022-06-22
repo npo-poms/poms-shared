@@ -73,7 +73,10 @@ public abstract class AbstractOr<T> implements Constraint<T> {
         OrPredicateTestResult orResult = (OrPredicateTestResult) result;
         ResourceBundle bundle = DisplayablePredicates.getBundleForFalse(this, locale);
         List<String> clauses = orResult.getClauses()
-            .stream().map(p -> p.getDescription(locale))
+            .stream()
+            .map(
+                p -> Optional.ofNullable(p.getDescription(locale)).orElse("No description found for " + p))
+
             .collect(Collectors.toList());
         String joinedClauses = clauses.stream()
             .collect(Collectors.joining(" " + bundle.getString("OR") + " "));

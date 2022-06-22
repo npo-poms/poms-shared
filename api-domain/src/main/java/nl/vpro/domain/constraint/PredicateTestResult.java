@@ -38,10 +38,8 @@ public abstract class PredicateTestResult implements BooleanSupplier {
 
     public static final ExpressionFactory FACTORY = ExpressionFactory.newInstance();
 
-
     private DisplayablePredicate<?> predicate;
     private List<String> bundleKey;
-
 
     @XmlAttribute
     private boolean applies;
