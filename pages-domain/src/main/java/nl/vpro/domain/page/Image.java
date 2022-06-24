@@ -115,4 +115,14 @@ public class Image implements Metadata<Image> {
     public Instant getCreationInstant() {
         return null;
     }
+
+    @Override
+    public Integer getHeight() {
+        return null;
+    }
+
+    @Override
+    public Integer getWidth() {
+        return null;
+    }
 }
