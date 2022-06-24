@@ -24,10 +24,6 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
 
     String getDate();
 
-    Integer getHeight();
-
-    Integer getWidth();
-
     void setType(@NotNull ImageType type);
     void setTitle(@NotNull @Size(max = 255, min = 1) String title);
     void setDescription(String description);

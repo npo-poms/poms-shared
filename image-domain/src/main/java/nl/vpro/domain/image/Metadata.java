@@ -54,6 +54,11 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
     String getCredits();
 
 
+    Integer getHeight();
+
+    Integer getWidth();
+
+
     /**
      * When making an implementation of {@link Metadata}, you can define a {@link lombok.Builder} which may
      * implement this interface.
@@ -77,6 +82,8 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
         SELF source(String source);
         SELF sourceName(String sourceName);
         SELF credits(String credits);
+        SELF height(Integer height);
+        SELF width(Integer width);
 
         default SELF from(Metadata<?> from) {
             return lastModifiedInstant(from.getLastModifiedInstant())
