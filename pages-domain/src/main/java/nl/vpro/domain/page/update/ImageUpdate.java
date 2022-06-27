@@ -37,7 +37,9 @@ import nl.vpro.validation.WarningValidatorGroup;
 @lombok.Builder(builderClassName = "Builder")
 @AllArgsConstructor
 @Data
-public class ImageUpdate implements Serializable{
+public class ImageUpdate implements Serializable {
+
+    private static final long serialVersionUID = -8902321923389277697L;
 
     public static ImageUpdate of(Image image) {
         if (image == null) {
