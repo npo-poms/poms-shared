@@ -37,7 +37,7 @@ public class ImageUrlServiceHolder {
         if (ImageUrlServiceHolder.instance != null && ImageUrlServiceHolder.instance != instance) {
             log.info("Replacing image backend service with {}", instance);
         }  else {
-            log.info("Setting image backend service with {}", instance);
+            log.info("Setting image backend service to {}", instance);
         }
         ImageUrlServiceHolder.instance = instance;
     }
