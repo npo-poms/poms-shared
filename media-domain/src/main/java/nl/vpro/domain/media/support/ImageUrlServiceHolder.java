@@ -3,16 +3,25 @@ package nl.vpro.domain.media.support;
 import lombok.extern.slf4j.Slf4j;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.slf4j.Logger;
 
 /**
+ * A container to statically  contain one {@link ImageUrlService}.
+ *
+ * See {@link #getInstance()}
+ *
  * @author Michiel Meeuwissen
  * @since 5.11
  */
 @Slf4j
 public class ImageUrlServiceHolder {
 
-    public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image_frontend.baseUrl";
 
+    public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
+
+    public static Logger getLog() {
+        return log;
+    }
 
     private static ImageUrlService instance;
 
@@ -28,7 +37,8 @@ public class ImageUrlServiceHolder {
     }
 
     public static void setInstance() {
-        String systemProperty = System.getProperty(IMAGE_SERVER_BASE_URL_PROPERTY, "https://images.poms.omroep.nl/image/");
+        String systemProperty = System.getProperty(IMAGE_SERVER_BASE_URL_PROPERTY);
+
         assert systemProperty != null;
         setInstance(() -> systemProperty);
     }

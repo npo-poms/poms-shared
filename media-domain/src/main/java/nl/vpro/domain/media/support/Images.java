@@ -38,7 +38,5 @@ public class Images {
             return null;
         }
         return instance.getImageLocation(id, fileExtension, conversions);
-
-
     }
 }
