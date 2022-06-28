@@ -1021,7 +1021,7 @@ public class MediaObjects {
      * @since 5.31
      */
     public static Optional<LocalDateTime> willBePlayableAt(Platform platform, MediaObject mediaObject) {
-        return Optional.ofNullable(mediaObject.getPrediction(platform))
+        return Optional.ofNullable(mediaObject).map(m -> m.getPrediction(platform))
             .filter(Prediction::isPlannedAvailability)
             .map(p -> p.getPublishStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime())
             ;
