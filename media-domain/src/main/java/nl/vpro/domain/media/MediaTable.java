@@ -58,7 +58,6 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
     protected LocationTable locationTable;
 
     @XmlElement
-    @Getter
     @Setter
     protected Schedule schedule;
 
@@ -156,6 +155,10 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
         return getProgramTable().stream().filter((p) -> mid.equals(p.getMid())).findFirst();
     }
 
+
+    /**
+     * Returns the schedule associated with this table. If there is none, then it will be a schedule based on all {@link ScheduleEvent}s of all {@link #getProgramTable()}.
+     */
 
     public Schedule getSchedule() {
         if (schedule == null) {
