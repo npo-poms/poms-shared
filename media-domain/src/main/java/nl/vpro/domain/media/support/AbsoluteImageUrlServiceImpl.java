@@ -2,6 +2,7 @@ package nl.vpro.domain.media.support;
 
 
 import javax.annotation.PostConstruct;
+import javax.inject.Named;
 
 /**
  * Implementation of {@link ImageUrlService} that can only be configured with an absolute base url.
@@ -12,7 +13,8 @@ public class AbsoluteImageUrlServiceImpl implements ImageUrlService {
 
     protected final String imageServerBaseUrl;
 
-    public AbsoluteImageUrlServiceImpl(String imageServerBaseUrl) {
+    public AbsoluteImageUrlServiceImpl(
+        @Named("image_frontend.baseUrl") String imageServerBaseUrl) {
         this.imageServerBaseUrl = imageServerBaseUrl;
     }
 
