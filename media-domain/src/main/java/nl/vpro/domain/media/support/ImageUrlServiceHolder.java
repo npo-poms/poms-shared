@@ -37,7 +37,7 @@ public class ImageUrlServiceHolder {
     }
 
     public static void setInstance() {
-        String systemProperty = System.getProperty(IMAGE_SERVER_BASE_URL_PROPERTY);
+        String systemProperty = System.getProperty(IMAGE_SERVER_BASE_URL_PROPERTY,  "https://images.poms.omroep.nl/image/");
 
         assert systemProperty != null;
         setInstance(() -> systemProperty);
