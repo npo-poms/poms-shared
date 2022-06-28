@@ -11,6 +11,9 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.media.update.GroupUpdate;
+import nl.vpro.domain.media.update.ProgramUpdate;
+
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -28,10 +31,12 @@ import static nl.vpro.domain.media.MediaObjects.deepCopy;
 @XmlRootElement(name = "mediaInformation")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaTableType",
-         propOrder = {"programTable",
-                      "groupTable",
-                      "locationTable",
-                      "schedule"})
+         propOrder = {
+             "programTable",
+             "groupTable",
+             "locationTable",
+             "schedule"}
+)
 @lombok.Builder
 @AllArgsConstructor
 @Slf4j
@@ -109,6 +114,16 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
         return this;
     }
 
+    public MediaTable add(MediaTable mo) {
+        for (Program p : mo.getProgramTable()) {
+            addProgram(p);
+        }
+        for (Group g : mo.getGroupTable()) {
+            addGroup(g);
+        }
+        return this;
+    }
+
     public <T extends MediaObject> Optional<T> find(String mid) {
         for (MediaObject p : Iterables.concat(getProgramTable(), getGroupTable())) {
             if (Objects.equals(p.getMid(), mid)) {
@@ -129,6 +144,23 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
         }
         return Optional.empty();
     }
+
+
+    /**
+     * @since 5.34
+     */
+    public Optional<Group> getGroup(String mid) {
+        return getGroupTable().stream().filter((g) -> mid.equals(g.getMid())).findFirst();
+    }
+
+
+    /**
+     * @since 5.34
+     */
+    public Optional<Program> getProgram(String mid) {
+        return getProgramTable().stream().filter((p) -> mid.equals(p.getMid())).findFirst();
+    }
+
 
     /**
      * @since 5.9
