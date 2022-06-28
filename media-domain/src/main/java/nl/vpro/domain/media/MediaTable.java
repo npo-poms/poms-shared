@@ -11,9 +11,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.media.update.GroupUpdate;
-import nl.vpro.domain.media.update.ProgramUpdate;
-
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -45,7 +42,6 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
     private static final long serialVersionUID = 4054512453318247403L;
 
     public MediaTable() {
-
     }
 
     @XmlElementWrapper(name = "programTable")
@@ -89,7 +85,6 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
     @Getter
     @Setter
     protected String source;
-
 
     /**
      * @since 5.9
@@ -162,6 +157,19 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
     }
 
 
+    public Schedule getSchedule() {
+        if (schedule == null) {
+            Schedule s = new Schedule();
+            for (Program program : getProgramTable()) {
+                for (ScheduleEvent event : program.getScheduleEvents()) {
+                    s.addScheduleEvent(event);
+                }
+            }
+            return s;
+
+        }
+        return schedule;
+    }
     /**
      * @since 5.9
      */
