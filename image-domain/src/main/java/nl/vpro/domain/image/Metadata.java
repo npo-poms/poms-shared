@@ -2,6 +2,8 @@ package nl.vpro.domain.image;
 
 import java.time.Instant;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.annotations.Beta;
 
@@ -85,17 +87,21 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
         SELF height(Integer height);
         SELF width(Integer width);
 
-        default SELF from(Metadata<?> from) {
-            return lastModifiedInstant(from.getLastModifiedInstant())
-                .creationInstant(from.getCreationInstant())
-                .type(from.getType())
-                .title(from.getTitle())
-                .description(from.getDescription())
-                .alternative(from.getAlternative())
-                .license(from.getLicense())
-                .source(from.getSource())
-                .sourceName(from.getSourceName())
-                .credits(from.getCredits());
+        default SELF from(@Nullable Metadata<?> from) {
+            if (from != null) {
+                return lastModifiedInstant(from.getLastModifiedInstant())
+                    .creationInstant(from.getCreationInstant())
+                    .type(from.getType())
+                    .title(from.getTitle())
+                    .description(from.getDescription())
+                    .alternative(from.getAlternative())
+                    .license(from.getLicense())
+                    .source(from.getSource())
+                    .sourceName(from.getSourceName())
+                    .credits(from.getCredits());
+            } else {
+                return (SELF) this;
+            }
         }
 
     }
