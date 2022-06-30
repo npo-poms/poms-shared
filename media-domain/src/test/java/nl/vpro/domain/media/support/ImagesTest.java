@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.support;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Isolated;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,11 +15,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * @since 1.6
  */
 @Deprecated
+@Isolated
 public class ImagesTest {
     @BeforeEach
     public void init() {
         System.clearProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY);
         ImageUrlServiceHolder.setInstance(() -> System.getProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY));
+    }
+
+    @AfterAll
+    public static void shutdown() {
+        System.clearProperty("image.server.baseUrl");
+
     }
 
     @Test

@@ -14,6 +14,7 @@ class PomsImagesTest {
 
     @BeforeAll
     public static void beforeAll() {
+        System.clearProperty("image.server.baseUrl");
         ImageUrlServiceHolder.setInstance();
     }
 
