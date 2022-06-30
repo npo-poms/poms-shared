@@ -87,108 +87,108 @@ class ImageMetadataTest {
         Jackson2TestUtil.assertThatJson(schema).isSimilarTo(
             // text blocks only in java 15....
             "{\n" +
-                "    \"type\" : \"object\",\n" +
-                "    \"id\" : \"urn:jsonschema:nl:vpro:domain:images:ImageMetadataImpl\",\n" +
-                "    \"properties\" : {\n" +
-                "      \"type\" : {\n" +
-                "        \"type\" : \"string\",\n" +
-                "        \"enum\" : [ \"PICTURE\", \"PORTRAIT\", \"STILL\", \"LOGO\", \"ICON\", \"PROMO_LANDSCAPE\", \"PROMO_PORTRAIT\", \"BACKGROUND\" ]\n" +
-                "      },\n" +
-                "      \"title\" : {\n" +
-                "        \"type\" : \"string\"\n" +
-                "      },\n" +
-                "      \"description\" : {\n" +
-                "        \"type\" : \"string\"\n" +
-                "      },\n" +
-                "      \"alternative\" : {\n" +
-                "        \"type\" : \"string\"\n" +
-                "      },\n" +
-                "      \"license\" : {\n" +
-                "        \"type\" : \"any\"\n" +
-                "      },\n" +
-                "      \"source\" : {\n" +
-                "        \"type\" : \"string\"\n" +
-                "      },\n" +
-                "      \"sourceName\" : {\n" +
-                "        \"type\" : \"string\"\n" +
-                "      },\n" +
-                "      \"credits\" : {\n" +
-                "        \"type\" : \"string\"\n" +
-                "      },\n" +
-                "      \"height\" : {\n" +
-                "        \"type\" : \"integer\"\n" +
-                "      },\n" +
-                "      \"width\" : {\n" +
-                "        \"type\" : \"integer\"\n" +
-                "      },\n" +
-                "      \"sourceSet\" : {\n" +
+                "  \"type\" : \"object\",\n" +
+                "  \"id\" : \"urn:jsonschema:nl:vpro:domain:image:ImageMetadataImpl\",\n" +
+                "  \"properties\" : {\n" +
+                "    \"type\" : {\n" +
+                "      \"type\" : \"string\",\n" +
+                "      \"enum\" : [ \"PICTURE\", \"PORTRAIT\", \"STILL\", \"LOGO\", \"ICON\", \"PROMO_LANDSCAPE\", \"PROMO_PORTRAIT\", \"BACKGROUND\" ]\n" +
+                "    },\n" +
+                "    \"title\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"description\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"alternative\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"license\" : {\n" +
+                "      \"type\" : \"any\"\n" +
+                "    },\n" +
+                "    \"source\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"sourceName\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"credits\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"height\" : {\n" +
+                "      \"type\" : \"integer\"\n" +
+                "    },\n" +
+                "    \"width\" : {\n" +
+                "      \"type\" : \"integer\"\n" +
+                "    },\n" +
+                "    \"sourceSet\" : {\n" +
+                "      \"type\" : \"object\",\n" +
+                "      \"additionalProperties\" : {\n" +
                 "        \"type\" : \"object\",\n" +
-                "        \"additionalProperties\" : {\n" +
-                "          \"type\" : \"object\",\n" +
-                "          \"id\" : \"urn:jsonschema:nl:vpro:domain:images:ImageSource\",\n" +
-                "          \"properties\" : {\n" +
-                "            \"url\" : {\n" +
-                "              \"type\" : \"string\"\n" +
-                "            },\n" +
-                "            \"type\" : {\n" +
-                "              \"type\" : \"string\",\n" +
-                "              \"enum\" : [ \"THUMBNAIL\", \"MOBILE\", \"TABLET\", \"LARGE\" ]\n" +
-                "            },\n" +
-                "            \"dimension\" : {\n" +
-                "              \"type\" : \"object\",\n" +
-                "              \"id\" : \"urn:jsonschema:nl:vpro:domain:images:Dimension\",\n" +
-                "              \"properties\" : {\n" +
-                "                \"width\" : {\n" +
-                "                  \"type\" : \"integer\"\n" +
-                "                },\n" +
-                "                \"height\" : {\n" +
-                "                  \"type\" : \"integer\"\n" +
-                "                }\n" +
+                "        \"id\" : \"urn:jsonschema:nl:vpro:domain:image:ImageSource\",\n" +
+                "        \"properties\" : {\n" +
+                "          \"url\" : {\n" +
+                "            \"type\" : \"string\"\n" +
+                "          },\n" +
+                "          \"type\" : {\n" +
+                "            \"type\" : \"string\",\n" +
+                "            \"enum\" : [ \"THUMBNAIL\", \"MOBILE\", \"TABLET\", \"LARGE\" ]\n" +
+                "          },\n" +
+                "          \"dimension\" : {\n" +
+                "            \"type\" : \"object\",\n" +
+                "            \"id\" : \"urn:jsonschema:nl:vpro:domain:image:Dimension\",\n" +
+                "            \"properties\" : {\n" +
+                "              \"width\" : {\n" +
+                "                \"type\" : \"integer\"\n" +
+                "              },\n" +
+                "              \"height\" : {\n" +
+                "                \"type\" : \"integer\"\n" +
                 "              }\n" +
-                "            },\n" +
-                "            \"areaOfInterest\" : {\n" +
-                "              \"type\" : \"object\",\n" +
-                "              \"id\" : \"urn:jsonschema:nl:vpro:domain:images:Area\",\n" +
-                "              \"properties\" : {\n" +
-                "                \"lowerLeft\" : {\n" +
-                "                  \"type\" : \"object\",\n" +
-                "                  \"id\" : \"urn:jsonschema:nl:vpro:domain:images:Point\",\n" +
-                "                  \"properties\" : {\n" +
-                "                    \"x\" : {\n" +
-                "                      \"type\" : \"integer\"\n" +
-                "                    },\n" +
-                "                    \"y\" : {\n" +
-                "                      \"type\" : \"integer\"\n" +
-                "                    }\n" +
+                "            }\n" +
+                "          },\n" +
+                "          \"areaOfInterest\" : {\n" +
+                "            \"type\" : \"object\",\n" +
+                "            \"id\" : \"urn:jsonschema:nl:vpro:domain:image:Area\",\n" +
+                "            \"properties\" : {\n" +
+                "              \"lowerLeft\" : {\n" +
+                "                \"type\" : \"object\",\n" +
+                "                \"id\" : \"urn:jsonschema:nl:vpro:domain:image:Point\",\n" +
+                "                \"properties\" : {\n" +
+                "                  \"x\" : {\n" +
+                "                    \"type\" : \"integer\"\n" +
+                "                  },\n" +
+                "                  \"y\" : {\n" +
+                "                    \"type\" : \"integer\"\n" +
                 "                  }\n" +
-                "                },\n" +
-                "                \"upperRight\" : {\n" +
-                "                  \"type\" : \"object\",\n" +
-                "                  \"$ref\" : \"urn:jsonschema:nl:vpro:domain:images:Point\"\n" +
                 "                }\n" +
+                "              },\n" +
+                "              \"upperRight\" : {\n" +
+                "                \"type\" : \"object\",\n" +
+                "                \"$ref\" : \"urn:jsonschema:nl:vpro:domain:image:Point\"\n" +
                 "              }\n" +
                 "            }\n" +
                 "          }\n" +
                 "        }\n" +
-                "      },\n" +
-                "      \"crids\" : {\n" +
-                "        \"type\" : \"array\",\n" +
-                "        \"items\" : {\n" +
-                "          \"type\" : \"string\"\n" +
-                "        }\n" +
-                "      },\n" +
-                "      \"areaOfInterest\" : {\n" +
-                "        \"type\" : \"object\",\n" +
-                "        \"$ref\" : \"urn:jsonschema:nl:vpro:domain:images:Area\"\n" +
-                "      },\n" +
-                "      \"lastModified\" : {\n" +
-                "        \"type\" : \"any\"\n" +
-                "      },\n" +
-                "      \"creationDate\" : {\n" +
-                "        \"type\" : \"any\"\n" +
                 "      }\n" +
+                "    },\n" +
+                "    \"crids\" : {\n" +
+                "      \"type\" : \"array\",\n" +
+                "      \"items\" : {\n" +
+                "        \"type\" : \"string\"\n" +
+                "      }\n" +
+                "    },\n" +
+                "    \"areaOfInterest\" : {\n" +
+                "      \"type\" : \"object\",\n" +
+                "      \"$ref\" : \"urn:jsonschema:nl:vpro:domain:image:Area\"\n" +
+                "    },\n" +
+                "    \"lastModified\" : {\n" +
+                "      \"type\" : \"any\"\n" +
+                "    },\n" +
+                "    \"creationDate\" : {\n" +
+                "      \"type\" : \"any\"\n" +
                 "    }\n" +
-                "  }");
+                "  }\n" +
+                "}");
 
     }
 
