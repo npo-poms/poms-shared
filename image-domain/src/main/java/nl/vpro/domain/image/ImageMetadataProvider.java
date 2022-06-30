@@ -1,0 +1,71 @@
+package nl.vpro.domain.image;
+
+import lombok.Getter;
+
+import java.util.Map;
+import java.util.Optional;
+
+/**
+ * The basic interface for images is {@link nl.vpro.domain.image.Metadata} (POMS) and its extension {@link ImageMetadata}
+ *
+ * There are a lot of image objects lying around which cannot directly implements one of these, because of conflicting methods.
+ *
+ * So, at least they can implement this, and have {@link #toImageMetadata()}.
+ *
+ */
+public interface ImageMetadataProvider {
+
+
+    default ImageMetadata toImageMetadataWithSourceSet() {
+        ImageMetadata imageMetadata = toImageMetadata();
+        if (imageMetadata == null) {
+            return null;
+        }
+        final Map<ImageSource.Type, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(this);
+        ImageMetadataImpl.Builder builder =  ImageMetadataImpl.builder()
+            .from(toImageMetadata())
+            .addSourceSet(sourceSet);
+        return builder.build();
+    }
+
+    /**
+     * This has to be implemented,
+     *
+     * Normally when using you should call {@link #toImageMetadataWithSourceSet() , which will also add  (extra)  {@link ImageMetadata#getSourceSet()} via {@link ImageSourceService}.
+     */
+    ImageMetadata toImageMetadata();
+
+
+    /**
+     * If an image object already implements {@link Metadata}, then an interface can
+     * be created using this wrapper.
+     *
+     * This e.g. is useful for poms images {@link nl.vpro.domain.media.support.Image} and {@link nl.vpro.domain.page.Image}, which are presently not yet implementing {@link ImageMetadata}
+     * Imp
+     */
+    class Wrapper<W extends Metadata<W>> implements ImageMetadataProvider {
+
+        @Getter
+        final W wrapped;
+
+        public Wrapper(W wrapped) {
+            this.wrapped = wrapped;
+        }
+
+        @Override
+        public ImageMetadata toImageMetadata() {
+            return ImageMetadataImpl.builder()
+                .from(this.wrapped)
+                .build();
+        }
+
+        public <C extends Metadata<C>> Optional<C> unwrap(Class<C> clazz) {
+            if (clazz.isInstance(wrapped)) {
+                return Optional.of((C) wrapped);
+            } else {
+                return Optional.empty();
+            }
+        }
+    }
+
+}
