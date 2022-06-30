@@ -136,7 +136,7 @@ public class ImageMetadataImpl implements ImageMetadata {
         }
 
         public Builder crid(String crid){
-            crid.add(crid);
+            this.crid.add(crid);
             return this;
         }
 
