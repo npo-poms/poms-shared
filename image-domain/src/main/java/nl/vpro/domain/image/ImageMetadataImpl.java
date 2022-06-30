@@ -126,7 +126,7 @@ public class ImageMetadataImpl implements ImageMetadata {
 
         private final Map<Type, ImageSource> _sourceSet = new TreeMap<>();
 
-        private List<String> crid = new ArrayList();
+        private final List<String> crid = new ArrayList<>();
 
         public Builder addSourceSet(Map<Type, ImageSource> sourceSet){
             if (sourceSet != null) {
