@@ -10,11 +10,13 @@ import nl.vpro.domain.image.ImageMetadataProvider;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
+import static nl.vpro.domain.media.support.ImageUrlServiceHolder.IMAGE_SERVER_BASE_URL_PROPERTY;
+
 class PomsImagesTest {
 
     @BeforeAll
     public static void beforeAll() {
-        System.clearProperty("image.server.baseUrl");
+        System.clearProperty(IMAGE_SERVER_BASE_URL_PROPERTY);
         ImageUrlServiceHolder.setInstance();
     }
 
