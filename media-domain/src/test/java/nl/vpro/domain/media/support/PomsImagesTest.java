@@ -1,15 +1,12 @@
-package nl.vpro.domain.image;
-
-import nl.vpro.domain.image.ImageMetadata;
-import nl.vpro.domain.image.ImageMetadataProvider;
+package nl.vpro.domain.media.support;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.media.support.ImageUrlServiceHolder;
+import nl.vpro.domain.image.ImageMetadata;
+import nl.vpro.domain.image.ImageMetadataProvider;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
