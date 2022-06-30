@@ -3,9 +3,7 @@ package nl.vpro.domain.image;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
-
-import nl.vpro.domain.image.*;
-import nl.vpro.domain.image.ImageType;
+import java.time.ZoneId;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -14,7 +12,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 
-import nl.vpro.domain.media.Schedule;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -24,11 +21,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 class ImageMetadataTest {
+    public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
+
+
 
     final ImageMetadata image = ImageMetadata.builder()
         .title("foobar")
-        .creationInstant(LocalDateTime.of(2022, 4, 15, 10, 10, 0).atZone(Schedule.ZONE_ID).toInstant())
-        .lastModifiedInstant(LocalDateTime.of(2022, 4, 15, 10, 20, 0).atZone(Schedule.ZONE_ID).toInstant())
+        .creationInstant(LocalDateTime.of(2022, 4, 15, 10, 10, 0).atZone(ZONE_ID).toInstant())
+        .lastModifiedInstant(LocalDateTime.of(2022, 4, 15, 10, 20, 0).atZone(ZONE_ID).toInstant())
         .type(ImageType.LOGO)
         .imageSource(thumbNail("https://www.vpro.nl/plaatje.jpeg").dimension(Dimension.of(640, 320)).build())
         .areaOfInterest(new Area(10, 20, 100, 120))
