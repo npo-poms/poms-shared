@@ -90,5 +90,14 @@
       <artifactId>hibernate-validator</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-jsonSchema</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>

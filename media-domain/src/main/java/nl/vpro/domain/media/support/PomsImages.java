@@ -13,7 +13,7 @@ import nl.vpro.domain.image.*;
 public class PomsImages {
 
 
-    static Map<ImageSource.Type, String> MAPPING = new HashMap<>();
+    private static final Map<ImageSource.Type, String> MAPPING = new HashMap<>();
     static {
         MAPPING.put(ImageSource.Type.THUMBNAIL, "s100");
         MAPPING.put(ImageSource.Type.MOBILE, "s200");

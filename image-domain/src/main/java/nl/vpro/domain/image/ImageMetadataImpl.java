@@ -126,10 +126,17 @@ public class ImageMetadataImpl implements ImageMetadata {
 
         private final Map<Type, ImageSource> _sourceSet = new TreeMap<>();
 
+        private final List<String> crid = new ArrayList<>();
+
         public Builder addSourceSet(Map<Type, ImageSource> sourceSet){
             if (sourceSet != null) {
                 _sourceSet.putAll(sourceSet);
             }
+            return this;
+        }
+
+        public Builder crid(String crid){
+            this.crid.add(crid);
             return this;
         }
 
@@ -164,6 +171,11 @@ public class ImageMetadataImpl implements ImageMetadata {
         public ImageMetadataImpl build() {
             if (sourceSet != null) {
                 _sourceSet.putAll(sourceSet);
+            }
+            if (crids != null) {
+                crids.addAll(crid);
+            } else {
+                crids(crid);
             }
             return sourceSet(_sourceSet)._build();
         }
