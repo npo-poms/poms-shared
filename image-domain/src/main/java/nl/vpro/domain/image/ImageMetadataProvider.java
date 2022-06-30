@@ -5,6 +5,8 @@ import lombok.Getter;
 import java.util.Map;
 import java.util.Optional;
 
+import org.checkerframework.checker.nullness.qual.PolyNull;
+
 /**
  * The basic interface for images is {@link nl.vpro.domain.image.Metadata} (POMS) and its extension {@link ImageMetadata}
  *
@@ -35,6 +37,15 @@ public interface ImageMetadataProvider {
      */
     ImageMetadata toImageMetadata();
 
+
+    @PolyNull
+    static <W extends Metadata<W>> Wrapper<W> of(@PolyNull W wrapped) {
+        if (wrapped == null) {
+            return null;
+        } else {
+            return new Wrapper<>(wrapped);
+        }
+    }
 
     /**
      * If an image object already implements {@link Metadata}, then an interface can
