@@ -1,6 +1,8 @@
 package nl.vpro.domain.image;
 
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -9,6 +11,7 @@ import com.google.common.annotations.Beta;
 
 import nl.vpro.domain.Trackable;
 import nl.vpro.domain.support.License;
+import nl.vpro.validation.CRID;
 import nl.vpro.validation.URI;
 
 /**
@@ -60,12 +63,18 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
 
     Integer getWidth();
 
+    /**
+     * @since 5.34
+     */
+    default List<@CRID String> getCrids() {
+        return Arrays.asList();
+    }
 
     /**
      * When making an implementation of {@link Metadata}, you can define a {@link lombok.Builder} which may
      * implement this interface.
      *
-     * This provides then {@link #from(Metadata)} which is usefull to quickly filling it, using different implementations
+     * This provides then {@link #from(Metadata)} which is useful to quickly filling it, using different implementations
      *
      * @since 5.32
      */
@@ -86,6 +95,8 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
         SELF credits(String credits);
         SELF height(Integer height);
         SELF width(Integer width);
+        SELF crids(List<@CRID String> crids);
+
 
         default SELF from(@Nullable Metadata<?> from) {
             if (from != null) {
@@ -98,7 +109,8 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
                     .license(from.getLicense())
                     .source(from.getSource())
                     .sourceName(from.getSourceName())
-                    .credits(from.getCredits());
+                    .credits(from.getCredits())
+                    .crids(from.getCrids());
             } else {
                 return (SELF) this;
             }
