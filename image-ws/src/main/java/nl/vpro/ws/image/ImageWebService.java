@@ -16,7 +16,7 @@ import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.Response;
 import javax.xml.ws.ResponseWrapper;
 
-import nl.vpro.domain.image.backend.BasicImageMetadata;
+import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.support.OwnerType;
 
@@ -38,7 +38,7 @@ public interface ImageWebService {
     @ResponseWrapper(
         localName = "uploadResponse",
         className = "nl.vpro.ws.image.UploadResponse")
-    BasicImageMetadata upload(
+    BasicBackendImageMetadata upload(
         @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
@@ -88,7 +88,7 @@ public interface ImageWebService {
     @ResponseWrapper(
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
-    BasicImageMetadata download(
+    BasicBackendImageMetadata download(
         @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,

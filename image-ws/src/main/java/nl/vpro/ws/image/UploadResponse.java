@@ -10,7 +10,7 @@ import lombok.ToString;
 
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.image.backend.BasicImageMetadata;
+import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
@@ -29,7 +29,7 @@ public class UploadResponse {
     private String urn;
 
     @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
-    private BasicImageMetadata imageMetadata;
+    private BasicBackendImageMetadata imageMetadata;
 
     public UploadResponse() {
     }
@@ -38,7 +38,7 @@ public class UploadResponse {
         this.urn = urn;
     }
 
-    public UploadResponse(String urn, BasicImageMetadata imageMetadata) {
+    public UploadResponse(String urn, BasicBackendImageMetadata imageMetadata) {
         this.urn = urn;
         this.imageMetadata = imageMetadata;
     }
