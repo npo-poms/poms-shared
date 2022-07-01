@@ -7,7 +7,9 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.File;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.time.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -594,7 +596,7 @@ public class MediaObjectsTest {
                 Arguments.of(
                     "realized prediction",
                     fixed()
-                        .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build())
+                        .locations(Location.builder().platform(null).programUrl("https://download.omroep.nl/vpro/algemeen/yous_yay_newemotions/yous_yay_johan fretz.mp3").build())
                         .predictions(Prediction.realized().platform(INTERNETVOD).build())
                         .build(),
                     expected(A_INTERNETVOD, A_NONE, A_NONE, map(INTERNETVOD, null, null))
@@ -622,7 +624,11 @@ public class MediaObjectsTest {
                     "revoked prediction and expired location",
                     fixed()
                         .locations(
-                            Location.builder().platform(null).publishStop(expired).programUrl("https://bla.com/foobar.mp4").build()
+                            Location.builder()
+                                .platform(null)
+                                .publishStop(expired)
+                                .programUrl("https://download.omroep.nl/vpro/algemeen/yous_yay_newemotions/yous_yay_johan fretz.mp3")
+                                .build()
                         )
                         .predictions(Prediction.revoked().platform(PLUSVOD).build())
                         .build(),
@@ -775,7 +781,7 @@ public class MediaObjectsTest {
                         result.put("publishedMediaObject", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(a.get()[1]));
                         result.put("mediaObject", Jackson2Mapper.getPrettyInstance().valueToTree(a.get()[1]));
 
-                        try (OutputStream outputStream = new FileOutputStream(file)) {
+                        try (OutputStream outputStream = Files.newOutputStream(file.toPath())) {
                             Jackson2Mapper.getPrettyPublisherInstance().writer().writeValue(outputStream, result);
                         }
                     } catch (Exception e) {

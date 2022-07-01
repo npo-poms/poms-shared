@@ -1,11 +1,10 @@
 package nl.vpro.domain.media;
 
-import java.net.URI;
-
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.time.Duration;
 import java.time.Instant;
@@ -337,7 +336,7 @@ public class Location extends PublishableObject<Location>
 
     public String getScheme() {
         if (programUrl != null) {
-            URI asUri = URI.create(programUrl);
+            URI asUri = URI.create(sanitizedProgramUrl(programUrl));
             return asUri.getScheme();
         }
         return null;
