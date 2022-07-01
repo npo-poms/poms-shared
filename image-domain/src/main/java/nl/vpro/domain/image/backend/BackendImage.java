@@ -45,8 +45,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  *
  */
 @SuppressWarnings("WSReferenceInspection")
-@Entity(
-)
+@Entity(name = "Image")
 @XmlRootElement(name = "image")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
