@@ -20,7 +20,7 @@ import nl.vpro.domain.image.*;
  * @since 5.5
  */
 @SuppressWarnings("UnusedReturnValue")
-public interface ImageMetadata<T extends ImageMetadata<T>>  extends MutableMetadata<T> {
+public interface BackendImageMetadata<T extends BackendImageMetadata<T>>  extends MutableMetadata<T> {
 
     Float getHeightInMm();
 
@@ -65,8 +65,8 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends MutableMetad
     default ChangeReport copyFrom(MutableMetadata<?> metadata) {
         ChangeReport change = MutableMetadata.super.copyFrom(metadata);
 
-        if (metadata instanceof ImageMetadata) {
-            ImageMetadata<?> imageMetadata = (ImageMetadata<?>) metadata;
+        if (metadata instanceof BackendImageMetadata) {
+            BackendImageMetadata<?> imageMetadata = (BackendImageMetadata<?>) metadata;
             if (!Objects.equals(getHeightInMm(), imageMetadata.getHeightInMm())) {
                 setHeightInMm(imageMetadata.getHeightInMm());
                 change.change();
@@ -103,8 +103,8 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends MutableMetad
     default ChangeReport copyFromIfTargetUnset(MutableMetadata<?> source) {
          ChangeReport change = MutableMetadata.super.copyFromIfTargetUnset(source);
 
-        if (source instanceof ImageMetadata) {
-            ImageMetadata<?> image = (ImageMetadata<?>) source;
+        if (source instanceof BackendImageMetadata) {
+            BackendImageMetadata<?> image = (BackendImageMetadata<?>) source;
             if ((getHeightInMm() == null || getHeightInMm() < 0f) && !Objects.equals(getHeightInMm(), image.getHeightInMm())) {
                 setHeightInMm(image.getHeightInMm());
                 change.change();
@@ -142,8 +142,8 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends MutableMetad
     default  ChangeReport  copyFromIfSourceSet(MutableMetadata<?> metadata) {
         ChangeReport change = MutableMetadata.super.copyFromIfSourceSet(metadata);
 
-        if (metadata instanceof ImageMetadata) {
-            ImageMetadata<?> source = (ImageMetadata<?>) metadata;
+        if (metadata instanceof BackendImageMetadata) {
+            BackendImageMetadata<?> source = (BackendImageMetadata<?>) metadata;
             if (source.getHeightInMm() != null && source.getHeightInMm() >= 0f && !Objects.equals(getHeightInMm(), source.getHeightInMm())) {
                 setHeightInMm(source.getHeightInMm());
                 change.change();

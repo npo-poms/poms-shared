@@ -6,12 +6,13 @@ import java.net.URI;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
 
 
 /**
  * Representation of one image URL
  *
- * @see nl.vpro.domain.image.backend.BasicImageMetadata
+ * @see BasicBackendImageMetadata
  */
 @With
 @Getter

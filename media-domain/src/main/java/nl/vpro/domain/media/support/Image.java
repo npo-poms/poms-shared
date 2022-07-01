@@ -32,7 +32,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.image.MutableMetadata;
-import nl.vpro.domain.image.backend.ImageMetadata;
+import nl.vpro.domain.image.backend.BackendImageMetadata;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
@@ -481,7 +481,7 @@ public class Image extends PublishableObject<Image>
         ;
     }
 
-    public static Image of(@NonNull ImageMetadata<?> metaData) {
+    public static Image of(@NonNull BackendImageMetadata<?> metaData) {
         Image image = new Image();
         image.copyFrom(metaData);
         return image;

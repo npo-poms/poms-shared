@@ -20,6 +20,8 @@ import javax.validation.constraints.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.image.backend.BackendImage;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -30,7 +32,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.image.MutableMetadata;
-import nl.vpro.domain.image.backend.ImageMetadata;
+import nl.vpro.domain.image.backend.BackendImageMetadata;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.support.License;
@@ -313,7 +315,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         if (uri != null) {
             if (uri
                 .replace('.', ':') // See MSE-865
-                .startsWith(nl.vpro.domain.image.backend.Image.BASE_URN)) {
+                .startsWith(BackendImage.BASE_URN)) {
                 this.image = uri;
             } else if (uri.startsWith("urn:")) {
                 log.warn("Uri starts with a non image urn: {}. Not taking it as an url, because that won't work either", uri);
@@ -358,7 +360,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
      *
      * @param metadata Incoming metadata from the image server
      */
-    public Image toImage(ImageMetadata<?> metadata) {
+    public Image toImage(BackendImageMetadata<?> metadata) {
         Image result = toImage();
         result.setImageUri(metadata.getImageUri());
         result.copyFromIfSourceSet(metadata);

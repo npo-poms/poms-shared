@@ -76,7 +76,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder", buildMethodName= "_build")
 @Slf4j
-public class Image extends AbstractPublishableObject<Image> implements ImageMetadata<Image>, Serializable, MutableOwnable {
+public class BackendImage extends AbstractPublishableObject<BackendImage> implements BackendImageMetadata<BackendImage>, Serializable, MutableOwnable {
     private static final long serialVersionUID = -140942203904508506L;
 
     public static final String BASE_URN = "urn:vpro:image:";
@@ -98,8 +98,8 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         public Builder downloadUri(URI downloadUri) {
             return downloadUrl(downloadUri.toString());
         }
-        public Image build()  {
-            Image image =_build();
+        public BackendImage build()  {
+            BackendImage image =_build();
             image.setCreatedBy(createdBy);
             image.setLastModifiedBy(lastModifiedBy);
             return image;
@@ -223,16 +223,16 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     @Enumerated(EnumType.STRING)
     private OwnerType owner;
 
-    public Image() {
+    public BackendImage() {
     }
 
-    public Image(String title) {
+    public BackendImage(String title) {
         setTitle(title);
     }
 
 
     @Override
-    public Image setImageFormat(ImageFormat imageFormat) {
+    public BackendImage setImageFormat(ImageFormat imageFormat) {
         this.imageFormat = imageFormat;
         return this;
     }
@@ -270,19 +270,19 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     }
 
     @Override
-    public Image setHeightInMm(Float heightInMm) {
+    public BackendImage setHeightInMm(Float heightInMm) {
         this.heightInMm = heightInMm;
         return this;
     }
 
     @Override
-    public Image setWidthInMm(Float widthInMm) {
+    public BackendImage setWidthInMm(Float widthInMm) {
         this.widthInMm = widthInMm;
         return this;
     }
 
     @Override
-    public Image setSize(Long size) {
+    public BackendImage setSize(Long size) {
         this.size = size;
         return this;
     }
@@ -292,7 +292,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         return data;
     }
 
-    public Image setBlob(Blob data) {
+    public BackendImage setBlob(Blob data) {
         this.data = data;
         return this;
     }
@@ -356,7 +356,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     }
 
     @Override
-    public Image setDownloadUrl(URI downloadUrl) {
+    public BackendImage setDownloadUrl(URI downloadUrl) {
         this.downloadUrl = downloadUrl == null ? null : downloadUrl.toString();
         return this;
     }
@@ -367,13 +367,13 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     }
 
     @Override
-    public Image setEtag(String etag) {
+    public BackendImage setEtag(String etag) {
         this.etag = etag;
         return this;
     }
 
     @Override
-    public Image setUrlLastModified(Instant lastModified) {
+    public BackendImage setUrlLastModified(Instant lastModified) {
         this.urlLastModified = lastModified;
         return this;
     }

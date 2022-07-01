@@ -28,7 +28,7 @@ class ImageTest {
 
     @Test
     public void validation() {
-        Image image = Image.builder()
+        BackendImage image = BackendImage.builder()
             .license(License.COPYRIGHTED)
             .title("bla")
             .heightInMm(1f)
@@ -38,7 +38,7 @@ class ImageTest {
     }
     @Test
     public void invalidation() {
-        Image image = Image.builder()
+        BackendImage image = BackendImage.builder()
             .license(null)
             .title("bla")
             .heightInMm(-1f)

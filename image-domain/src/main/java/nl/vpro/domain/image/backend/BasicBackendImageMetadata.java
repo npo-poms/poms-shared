@@ -28,7 +28,7 @@ import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
- * The implementation of {@link ImageMetadata}
+ * The implementation of {@link BackendImageMetadata}
  *
  * This is used to (temporary) represent an image on the image backend server for use in poms gui.
  *
@@ -61,7 +61,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 )
 @Data
 @ToString
-public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicImageMetadata>, ImageMetadata<BasicImageMetadata> {
+public class BasicBackendImageMetadata implements Serializable, MutableEmbargo<BasicBackendImageMetadata>, BackendImageMetadata<BasicBackendImageMetadata> {
 
     private static final long serialVersionUID = 0L;
 
@@ -139,18 +139,18 @@ public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicIma
     private Instant lastModified;
 
 
-    public BasicImageMetadata() {
+    public BasicBackendImageMetadata() {
         this.uploadId = null;
     }
 
 
-    public BasicImageMetadata(UUID uploadId) {
+    public BasicBackendImageMetadata(UUID uploadId) {
         this.uploadId = uploadId;
     }
 
 
-    public static BasicImageMetadata of(ImageMetadata<?> image) {
-        BasicImageMetadata metaData = new BasicImageMetadata();
+    public static BasicBackendImageMetadata of(BackendImageMetadata<?> image) {
+        BasicBackendImageMetadata metaData = new BasicBackendImageMetadata();
         metaData.copyFrom(image);
         metaData.imageUri= image.getImageUri();
         Embargos.copy(image, metaData);
@@ -160,7 +160,7 @@ public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicIma
 
     @NonNull
     @Override
-    public BasicImageMetadata setPublishStartInstant(Instant publishStart) {
+    public BasicBackendImageMetadata setPublishStartInstant(Instant publishStart) {
         this.publishStartInstant = publishStart;
         return this;
 
@@ -168,50 +168,50 @@ public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicIma
 
     @NonNull
     @Override
-    public BasicImageMetadata setPublishStopInstant(Instant publishStop) {
+    public BasicBackendImageMetadata setPublishStopInstant(Instant publishStop) {
         this.publishStopInstant = publishStop;
         return this;
     }
 
 
     @Override
-    public BasicImageMetadata setHeightInMm(Float heightInMm) {
+    public BasicBackendImageMetadata setHeightInMm(Float heightInMm) {
         this.heightInMm = heightInMm;
         return this;
     }
 
     @Override
-    public BasicImageMetadata setWidthInMm(Float widthInMm) {
+    public BasicBackendImageMetadata setWidthInMm(Float widthInMm) {
         this.widthInMm = widthInMm;
         return this;
     }
 
     @Override
-    public BasicImageMetadata setSize(Long size) {
+    public BasicBackendImageMetadata setSize(Long size) {
         this.size = size;
         return this;
     }
 
     @Override
-    public BasicImageMetadata setDownloadUrl(URI downloadUrl) {
+    public BasicBackendImageMetadata setDownloadUrl(URI downloadUrl) {
         this.downloadUrl = downloadUrl;
         return this;
     }
 
     @Override
-    public BasicImageMetadata setEtag(String etag) {
+    public BasicBackendImageMetadata setEtag(String etag) {
         this.etag = etag;
         return this;
     }
 
     @Override
-    public BasicImageMetadata setUrlLastModified(Instant urlLastModified) {
+    public BasicBackendImageMetadata setUrlLastModified(Instant urlLastModified) {
         this.urlLastModified = urlLastModified;
         return this;
     }
 
     @Override
-    public BasicImageMetadata setImageFormat(ImageFormat imageFormat) {
+    public BasicBackendImageMetadata setImageFormat(ImageFormat imageFormat) {
         this.imageFormat = imageFormat;
         return this;
     }
