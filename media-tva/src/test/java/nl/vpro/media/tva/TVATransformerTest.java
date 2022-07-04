@@ -558,6 +558,19 @@ public class TVATransformerTest {
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
 
+        Program program = (Program) table.findByCrid("crid://npo/programmagegevens/2028047243668").get();
+        log.info("{}", program);
+        assertThat(program.getDescendantOf()).hasSize(2);
+        String seasonMid = program.getEpisodeOf().first().getParentMid();
+        Group season = table.getGroup(seasonMid).orElse(null);
+        assertThat(season.getGenres()).hasSize(1);
+        assertThat(season.getGenres().first().getTermId()).isEqualTo("3.0.1.8");
+
+        String seriesMid = season.getMemberOf().first().getMidRef();
+        Group series = table.getGroup(seriesMid).orElse(null);
+
+        assertThat(series.getGenres()).hasSize(1);
+        assertThat(series.getGenres().first().getTermId()).isEqualTo("3.0.1.8");
 
 
     }
