@@ -552,6 +552,16 @@ public class TVATransformerTest {
 
     }
 
+    @Test
+    public void MSE_5290_series_genres() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        String xml = transform("pd/pd/NED220211017P.xml");
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+
+
+
+
+    }
+
 
     private String bindinc(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE);// TODO API-460
