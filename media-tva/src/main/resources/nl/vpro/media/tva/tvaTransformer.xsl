@@ -232,7 +232,7 @@
               <xsl:for-each select="parent::tva:ProgramInformation">
                 <xsl:call-template name="genres">
                   <xsl:with-param name="tag">GenreSeries</xsl:with-param>
-                </xsl:call-template>.
+                </xsl:call-template>
               </xsl:for-each>
               <xsl:if test="$seriesMid != ''">
                 <memberOf midRef="{$seriesMid}">
@@ -820,7 +820,7 @@
 
   <xsl:template name="genres">
     <xsl:param name="tag">Genre</xsl:param>
-     <xsl:choose>
+    <xsl:choose>
       <xsl:when test="$newGenres = 'true'">
         <xsl:for-each
             select="tva:BasicDescription/*[name() = $tag][starts-with(@href, 'urn:tva:metadata:cs:2004:')][last()]">
