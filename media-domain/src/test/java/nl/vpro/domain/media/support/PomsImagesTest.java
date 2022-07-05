@@ -41,7 +41,7 @@ class PomsImagesTest {
             "      \"lastModified\": 1639275163526,\n" +
             "      \"urn\": \"urn:vpro:media:image:122414908\"\n" +
             "    }", Image.class);
-        ImageMetadata imageMetadata = new ImageMetadataProvider.Wrapper<>(support).toImageMetadataWithSourceSet();
+        ImageMetadata imageMetadata = ImageMetadataProvider.of(support).toImageMetadataWithSourceSet();
         Jackson2TestUtil.roundTripAndSimilarAndEquals(imageMetadata, "{\n" +
             "  \"type\" : \"STILL\",\n" +
             "  \"title\" : \"2Doc:\",\n" +
