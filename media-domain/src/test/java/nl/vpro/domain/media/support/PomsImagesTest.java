@@ -49,6 +49,8 @@ class PomsImagesTest {
             "  \"license\" : \"COPYRIGHTED\",\n" +
             "  \"sourceName\" : \"VPRO\",\n" +
             "  \"credits\" : \"Still 2Doc: / Blue Box\",\n" +
+            "  \"height\" : 1080,\n" +
+            "  \"width\" : 1920, \n" +
             "  \"sourceSet\" : {\n" +
             "    \"THUMBNAIL\" : {\n" +
             "      \"url\" : \"https://images.poms.omroep.nl/image/s100/122414908\",\n" +

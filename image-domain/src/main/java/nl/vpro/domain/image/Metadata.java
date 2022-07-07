@@ -100,6 +100,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
 
         default SELF from(@Nullable Metadata<?> from) {
             if (from != null) {
+
                 return lastModifiedInstant(from.getLastModifiedInstant())
                     .creationInstant(from.getCreationInstant())
                     .type(from.getType())
@@ -111,7 +112,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
                     .sourceName(from.getSourceName())
                     .credits(from.getCredits())
                     .height(from.getHeight())
-                    .width(from.getHeight())
+                    .width(from.getWidth())
                     .crids(from.getCrids())
                     ;
             } else {
