@@ -27,7 +27,7 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Type, ImageSource> {
                 if (builder.length() > 0) {
                     builder.append(", ");
                 }
-                builder.append(imageSource.getUrl()).append(" w").append(imageSource.getDimension().getWidth());
+                builder.append(imageSource.getUrl()).append(' ').append(imageSource.getDimension().getWidth()).append("w");
             }
         }
         return builder.toString();
