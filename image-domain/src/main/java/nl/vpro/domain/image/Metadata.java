@@ -110,7 +110,10 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
                     .source(from.getSource())
                     .sourceName(from.getSourceName())
                     .credits(from.getCredits())
-                    .crids(from.getCrids());
+                    .height(from.getHeight())
+                    .width(from.getHeight())
+                    .crids(from.getCrids())
+                    ;
             } else {
                 return (SELF) this;
             }
