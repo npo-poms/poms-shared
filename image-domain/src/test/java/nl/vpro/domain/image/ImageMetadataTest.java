@@ -76,7 +76,7 @@ class ImageMetadataTest {
             "    \"creationDate\" : 1650010200000\n" +
             "  }");
 
-        assertThat(image.getSourceSet().toString()).isEqualTo("https://www.vpro.nl/plaatje.jpeg w640");
+        assertThat(image.getSourceSet().toString()).isEqualTo("https://www.vpro.nl/plaatje.jpeg 640w");
     }
 
     @Test
