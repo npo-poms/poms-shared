@@ -114,6 +114,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
                     .height(from.getHeight())
                     .width(from.getWidth())
                     .crids(from.getCrids())
+
                     ;
             } else {
                 return (SELF) this;
