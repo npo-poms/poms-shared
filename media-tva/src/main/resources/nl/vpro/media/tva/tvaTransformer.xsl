@@ -229,6 +229,11 @@
                   <xsl:value-of select="vpro:stripHtml(normalize-space(tva:Synopsis[@length = 'long' and not(@type)]))"/>
                 </description>
               </xsl:if>
+              <xsl:for-each select="parent::tva:ProgramInformation">
+                <xsl:call-template name="genres">
+                  <xsl:with-param name="tag">GenreSeries</xsl:with-param>
+                </xsl:call-template>
+              </xsl:for-each>
               <xsl:if test="$seriesMid != ''">
                 <memberOf midRef="{$seriesMid}">
                   <xsl:choose>
@@ -294,6 +299,11 @@
                   <xsl:value-of select="vpro:stripHtml(normalize-space(tva:Synopsis[@length = 'long' and @type='parentSeriesSynopsis']))"/>
                 </description>
               </xsl:if>
+              <xsl:for-each select="parent::tva:ProgramInformation">
+                <xsl:call-template name="genres">
+                  <xsl:with-param name="tag">GenreParentSeries</xsl:with-param>
+                </xsl:call-template>
+              </xsl:for-each>
             </xsl:for-each>
           </group>
         </xsl:for-each>
@@ -809,18 +819,24 @@
   </xsl:template>
 
   <xsl:template name="genres">
-     <xsl:choose>
+    <xsl:param name="tag">Genre</xsl:param>
+    <xsl:choose>
       <xsl:when test="$newGenres = 'true'">
         <xsl:for-each
-            select="tva:BasicDescription/tva:Genre[starts-with(@href, 'urn:tva:metadata:cs:2004:')][last()]">
+            select="tva:BasicDescription/*[name() = $tag][starts-with(@href, 'urn:tva:metadata:cs:2004:')][last()]">
           <xsl:variable name="genreid"><xsl:value-of select="vpro:transformEpgGenre(@href, ./tva:Name)"/></xsl:variable>
-          <xsl:if test="$genreid != ''">
-            <xsl:element name="genre">
-              <xsl:attribute name="id">
-                <xsl:value-of select="$genreid" />
+          <xsl:choose>
+            <xsl:when test="$genreid != ''">
+              <xsl:element name="genre">
+                <xsl:attribute name="id">
+                  <xsl:value-of select="$genreid" />
               </xsl:attribute>
-            </xsl:element>
-          </xsl:if>
+              </xsl:element>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:comment>Unrecognized genre <xsl:value-of select="$genreid" /></xsl:comment>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:for-each>
       </xsl:when>
       <xsl:otherwise>
