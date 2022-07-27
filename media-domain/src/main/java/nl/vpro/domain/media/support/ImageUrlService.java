@@ -63,6 +63,18 @@ public interface ImageUrlService {
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri
      */
+    default String getImageLocation(@NonNull String uri , @Nullable String fileExtension, String... conversions) {
+        return getImageLocation(getIdFromImageUri(uri), fileExtension, conversions);
+    }
+
+
+    /**
+     * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
+     * obtain a base url for an image host.
+     *
+     * @return valid url string or null if it can't resolve a location
+     * @throws NullPointerException on null arguments or null imageUri id.
+     */
     default String getImageLocation(@NonNull Long  id , @Nullable String fileExtension, String... conversions) {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder builder = new StringBuilder(imageServerBaseUrl);
