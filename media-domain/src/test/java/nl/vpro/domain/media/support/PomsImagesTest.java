@@ -53,28 +53,28 @@ class PomsImagesTest {
             "  \"width\" : 1920, \n" +
             "  \"sourceSet\" : {\n" +
             "    \"THUMBNAIL\" : {\n" +
-            "      \"url\" : \"https://images.poms.omroep.nl/image/s100/122414908\",\n" +
+            "      \"url\" : \"https://images.poms.omroep.nl/image/s100/1646895\",\n" +
             "      \"type\" : \"THUMBNAIL\",\n" +
             "      \"dimension\" : {\n" +
             "        \"width\" : 100\n" +
             "      }\n" +
             "    },\n" +
             "    \"MOBILE\" : {\n" +
-            "      \"url\" : \"https://images.poms.omroep.nl/image/s200/122414908\",\n" +
+            "      \"url\" : \"https://images.poms.omroep.nl/image/s200/1646895\",\n" +
             "      \"type\" : \"MOBILE\",\n" +
             "      \"dimension\" : {\n" +
             "        \"width\" : 200\n" +
             "      }\n" +
             "    },\n" +
             "    \"TABLET\" : {\n" +
-            "      \"url\" : \"https://images.poms.omroep.nl/image/s300/122414908\",\n" +
+            "      \"url\" : \"https://images.poms.omroep.nl/image/s300/1646895\",\n" +
             "      \"type\" : \"TABLET\",\n" +
             "      \"dimension\" : {\n" +
             "        \"width\" : 300\n" +
             "      }\n" +
             "    },\n" +
             "    \"LARGE\" : {\n" +
-            "      \"url\" : \"https://images.poms.omroep.nl/image/s400/122414908\",\n" +
+            "      \"url\" : \"https://images.poms.omroep.nl/image/s400/1646895\",\n" +
             "      \"type\" : \"LARGE\",\n" +
             "      \"dimension\" : {\n" +
             "        \"width\" : 400\n" +

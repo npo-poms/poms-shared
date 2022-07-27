@@ -40,8 +40,7 @@ public class PomsImages {
                 return pomsImageMetadata.unwrap(Image.class)
                     .map(i -> ImageSource.builder()
                         .type(type)
-                        .url(
-                            ImageUrlServiceHolder.getInstance().getImageLocation(i.getId(), null, transformation))
+                        .url(ImageUrlServiceHolder.getInstance().getImageLocation(i.getImageUri(), null, transformation))
                         .dimension(finalDim)
                         .build()
                     );
