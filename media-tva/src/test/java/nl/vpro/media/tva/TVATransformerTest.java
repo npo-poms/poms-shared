@@ -575,7 +575,7 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void translatedTitle() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+    public void MSE_5303_translatedTitle() throws IOException, ParserConfigurationException, SAXException, TransformerException {
         String xml = transform("pd/pd/NED320220729P.xml");
         log.info("{}", xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
