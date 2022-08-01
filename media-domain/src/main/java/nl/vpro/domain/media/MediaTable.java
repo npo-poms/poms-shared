@@ -118,6 +118,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
         return this;
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends MediaObject> Optional<T> find(String mid) {
         for (MediaObject p : Iterables.concat(getProgramTable(), getGroupTable())) {
             if (Objects.equals(p.getMid(), mid)) {
@@ -130,6 +131,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
     /**
      * @since 5.11
      */
+    @SuppressWarnings("unchecked")
     public <T extends MediaObject> Optional<T> findByCrid(String crid) {
         for (MediaObject p : Iterables.concat(getProgramTable(), getGroupTable())) {
             if (p.getCrids().contains(crid)) {
@@ -144,7 +146,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
      */
     public Optional<Group> getGroup(String mid) {
         return getGroupTable().stream()
-            .filter((g) -> mid.equals(g.getMid()))
+            .filter(g -> mid.equals(g.getMid()))
             .findFirst();
     }
 
@@ -152,7 +154,9 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
      * @since 5.34
      */
     public Optional<Program> getProgram(String mid) {
-        return getProgramTable().stream().filter((p) -> mid.equals(p.getMid())).findFirst();
+        return getProgramTable().stream()
+            .filter(p -> mid.equals(p.getMid()))
+            .findFirst();
     }
 
     /**
@@ -236,7 +240,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
         Map<String, List<Program>> map = new HashMap<>();
         for (Program program : programTable) {
             if (program.getMid() != null) {
-                List<Program> programs = map.computeIfAbsent(program.getMid(), (k) -> new ArrayList<>());
+                List<Program> programs = map.computeIfAbsent(program.getMid(), k -> new ArrayList<>());
                 programs.add(program);
             }
         }
