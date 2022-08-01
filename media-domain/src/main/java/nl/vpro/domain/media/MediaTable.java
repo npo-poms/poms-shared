@@ -139,14 +139,14 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
         return Optional.empty();
     }
 
-
     /**
      * @since 5.34
      */
     public Optional<Group> getGroup(String mid) {
-        return getGroupTable().stream().filter((g) -> mid.equals(g.getMid())).findFirst();
+        return getGroupTable().stream()
+            .filter((g) -> mid.equals(g.getMid()))
+            .findFirst();
     }
-
 
     /**
      * @since 5.34
@@ -154,7 +154,6 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
     public Optional<Program> getProgram(String mid) {
         return getProgramTable().stream().filter((p) -> mid.equals(p.getMid())).findFirst();
     }
-
 
     /**
      * Returns the schedule associated with this table. If there is none, then it will be a schedule based on all {@link ScheduleEvent}s of all {@link #getProgramTable()}.
@@ -173,6 +172,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
         }
         return schedule;
     }
+
     /**
      * @since 5.9
      */
