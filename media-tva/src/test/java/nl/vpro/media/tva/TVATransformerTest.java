@@ -572,7 +572,22 @@ public class TVATransformerTest {
 
         assertThat(series.getGenres()).hasSize(1);
         assertThat(series.getGenres().first().getTermId()).isEqualTo("3.0.1.8");
+    }
 
+    @Test
+    public void MSE_5303_translatedTitle() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        String xml = transform("pd/pd/NED320220729P.xml");
+        log.info("{}", xml);
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+
+        validate(table);
+
+        Group withWhiteSpaceOriginalTitle = table.getGroup("BV_101408213").orElseThrow(AssertionError::new);
+        assertThat(withWhiteSpaceOriginalTitle.getOriginalTitle()).isNull();
+
+        Group jeugdJournaal = table.getGroup("22Jeugd1900geb").orElseThrow(AssertionError::new);
+
+        assertThat(jeugdJournaal.getOriginalTitle()).isEqualTo("NOS Jeugdjournaal met gebarentaal");
 
     }
 
@@ -668,7 +683,7 @@ public class TVATransformerTest {
         return transformer;
     }
 
-     private Transformer getTransformer(String resource) throws TransformerConfigurationException, ParserConfigurationException, SAXException, IOException {
+     private Transformer getTransformer(String resource) throws TransformerConfigurationException {
         StreamSource stylesource = new StreamSource(getClass().getResourceAsStream(resource));
         Transformer transformer = FACTORY.newTransformer(stylesource);
 
@@ -687,11 +702,11 @@ public class TVATransformerTest {
             }
             assertThat(validator.validate(o)).isEmpty();
 
-            for (Program program : o.getProgramTable()) {
+            for (MediaObject program : o) {
                 //program.getTitles();
                 //System.out.println("" + program.getBroadcasters());
-                Set<ConstraintViolation<Program>> constraintViolations = validator.validate(program);
-                for (ConstraintViolation<Program> cv : constraintViolations) {
+                Set<ConstraintViolation<MediaObject>> constraintViolations = validator.validate(program);
+                for (ConstraintViolation<MediaObject> cv : constraintViolations) {
                     log.warn(cv.getMessage());
                 }
                 assertThat(constraintViolations).isEmpty();
