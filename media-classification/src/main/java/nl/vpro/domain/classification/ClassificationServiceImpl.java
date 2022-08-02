@@ -171,7 +171,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                         }
                     }
                 } else {
-                    log.info("Not watching {}", resourceFile);
+                    log.debug("Not watching {}", resourceFile);
                 }
 
                 final List<File> result = new ArrayList<>();
