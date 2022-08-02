@@ -220,9 +220,11 @@
                 </title>
               </xsl:if>
               <xsl:for-each select="tva:Title[lower-case(@type)='translatedtitle']">
-                <title type="ORIGINAL" owner="{$owner}">
-                  <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
-                </title>
+                <xsl:if test="vpro:stripHtml(normalize-space(text())) != ''">
+                  <title type="ORIGINAL" owner="{$owner}">
+                    <xsl:value-of select="vpro:stripHtml(normalize-space(text()))"/>
+                  </title>
+                </xsl:if>
               </xsl:for-each>
               <xsl:if test="string-length(vpro:stripHtml(normalize-space(tva:Synopsis[@length = 'long' and not(@type)]))) > 0">
                 <description type="MAIN" owner="{$owner}">
