@@ -148,7 +148,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
             if (resourceFile.isDirectory() || !resourceFile.exists()) {
                 if (! resourceFile.exists()) {
                     if (!resourceFile.mkdirs()) {
-                        log.warn("Could't make {}", resourceFile);
+                        log.warn("Couldn't make {}", resourceFile);
                     } else {
                         log.info("Created {}", resourceFile);
                     }
@@ -171,7 +171,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                         }
                     }
                 } else {
-                    log.info("Not watching {}", resourceFile);
+                    log.debug("Not watching {}", resourceFile);
                 }
 
                 final List<File> result = new ArrayList<>();
