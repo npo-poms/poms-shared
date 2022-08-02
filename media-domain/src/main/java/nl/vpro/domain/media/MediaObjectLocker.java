@@ -20,6 +20,8 @@ import nl.vpro.services.TransactionService;
 import nl.vpro.util.locker.ObjectLocker;
 import nl.vpro.util.locker.ObjectLocker.LockHolder;
 
+import static nl.vpro.util.locker.ObjectLocker.withObjectLock;
+
 /**
  * Tool to make sure that the 'authority' related dropboxes and other services don't run at the same time for the same mid.
  *
@@ -140,7 +142,7 @@ public class MediaObjectLocker {
         MediaIdentifiable.Correlation lock,
         @NonNull String reason,
         @NonNull Callable<T> callable) {
-        return ObjectLocker.withObjectLock(lock, reason, callable, LOCKED_MEDIA,
+        return withObjectLock(lock, reason, callable, LOCKED_MEDIA,
             (o1, o2) ->
                 o1 instanceof MediaIdentifiable.Correlation && Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType())
         );
