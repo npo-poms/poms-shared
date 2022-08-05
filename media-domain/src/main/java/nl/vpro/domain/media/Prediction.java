@@ -316,13 +316,13 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
             if (this.state == State.NOT_ANNOUNCED) {
                 this.state = State.ANNOUNCED;
             } else if (this.state != State.ANNOUNCED) {
-                log.warn("State of prediction {} is {}. Not setting to ANNOUNCED", this, state);
+                log.info("State of prediction already {} is {}. Not setting to ANNOUNCED", this, state);
             }
         } else {
             if (this.state == State.ANNOUNCED) {
                 this.state = State.NOT_ANNOUNCED;
             } else if (this.state != State.NOT_ANNOUNCED) {
-                log.warn("State of prediction {} is {}. Not setting to NOT_ANNOUNCED", this, state);
+                log.info("State of prediction already {} is {}. Not setting to NOT_ANNOUNCED", this, state);
             }
         }
         invalidateXml();
