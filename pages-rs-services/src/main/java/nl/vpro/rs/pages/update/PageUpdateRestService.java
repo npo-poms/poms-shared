@@ -4,14 +4,14 @@
  */
 package nl.vpro.rs.pages.update;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
 import nl.vpro.domain.page.PageIdMatch;
-import nl.vpro.domain.page.update.PageUpdate;
+import nl.vpro.domain.page.update.*;
 import nl.vpro.jmx.Description;
 
 /**
@@ -49,8 +49,8 @@ public interface PageUpdateRestService {
         @QueryParam("batch")  Boolean batch,
         @QueryParam("max") Integer max,
         @QueryParam(WAIT) Boolean wait,
-        @QueryParam(MATCH) @DefaultValue("BOTH") PageIdMatch match
-
+        @QueryParam(MATCH) @DefaultValue("BOTH") PageIdMatch match,
+        @Context HttpServletResponse response
     );
 
     @GET
