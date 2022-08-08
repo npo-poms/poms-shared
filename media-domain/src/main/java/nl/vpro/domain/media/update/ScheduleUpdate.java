@@ -31,7 +31,6 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
 
 
     @XmlTransient // See property
-    @Getter
     protected SortedSet<ScheduleEventUpdate> scheduleEvents;
 
     @XmlAttribute
@@ -85,7 +84,15 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
         if (scheduleEvents != null) {
             this.scheduleEvents.addAll(scheduleEvents);
         }
+    }
 
+
+    @NonNull
+    public SortedSet<ScheduleEventUpdate> getScheduleEvents() {
+        if (scheduleEvents == null) {
+            scheduleEvents = new TreeSet<>();
+        }
+        return scheduleEvents;
     }
 
 
