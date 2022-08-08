@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import java.util.function.UnaryOperator;
+
 import lombok.ToString;
 
 import java.net.URI;
@@ -98,9 +100,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     M build();
 
     /**
-     * Accesss to the underlying media object. Though this is public, this should normally not be used by user code.
+     * Access to the underlying media object. Though this is public, this should normally not be used by user code.
      * Use {@link #build()} in stead.
-     * @return
+     * @return The mediaobject that is currently built.
      */
     M mediaObject();
 
@@ -341,6 +343,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
+    /**
+     * @since 5.32
+     */
+    default B mainTitle(@NonNull UnaryOperator<String> title) {
+        return mainTitle(title.apply(mediaObject().getMainTitle()));
+    }
+
     default B subTitle(String title, @NonNull OwnerType owner) {
         if (StringUtils.isNotEmpty(title)) {
             return titles(new Title(title, owner, TextualType.SUB));
@@ -364,7 +373,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     default B lexicoTitle(String title) {
         if (StringUtils.isNotEmpty(title)) {
-
             return lexicoTitle(title, OwnerType.BROADCASTER);
         } else {
             return (B) this;
