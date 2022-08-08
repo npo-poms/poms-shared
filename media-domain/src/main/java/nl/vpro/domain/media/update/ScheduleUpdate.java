@@ -18,6 +18,8 @@ import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.util.DateUtils;
+import nl.vpro.util.Ranges;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
@@ -61,6 +63,9 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
     protected Instant stop;
 
 
+    public ScheduleUpdate() {
+        // constructor required by jaxb.
+    }
 
     @lombok.Builder
     private ScheduleUpdate(
@@ -85,14 +90,14 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
 
 
     public Range<LocalDateTime> asLocalRange() {
-        return Range.closedOpen(
-            getStart().atZone(Schedule.ZONE_ID).toLocalDateTime(),
-            getStop().atZone(Schedule.ZONE_ID).toLocalDateTime()
+        return Ranges.closedOpen(
+            DateUtils.toLocalDateTime(getStart(), Schedule.ZONE_ID),
+            DateUtils.toLocalDateTime(getStop(), Schedule.ZONE_ID)
         );
     }
 
     public Range<Instant> asRange() {
-        return Range.closedOpen(
+        return Ranges.closedOpen(
             getStart(),
             getStop()
         );
