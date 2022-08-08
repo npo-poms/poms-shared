@@ -4,14 +4,13 @@
  */
 package nl.vpro.domain.media;
 
-import java.util.function.UnaryOperator;
-
 import lombok.ToString;
 
 import java.net.URI;
 import java.time.*;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -882,7 +881,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
 
         @Valid
-        transient M mediaObject;
+        M mediaObject;
 
         @Override
         public M build() {
