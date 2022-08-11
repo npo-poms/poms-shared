@@ -54,10 +54,7 @@ public class MediaChange extends Change<MediaObject> {
     private String mergedTo;
 
 
-    /**
-     * Sometimes the last returned change in a feed has a artificially increased publish date (only when using max).
-     * @since 5.28
-     */
+
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -246,6 +243,11 @@ public class MediaChange extends Change<MediaObject> {
 
     }
 
+    /**
+     * Sometimes the last returned change in a feed has an artificially increased publish date (only when using max).
+     * This returns the 'real' publish date
+     * @since 5.28
+     */
     public Instant getRealPublishDate() {
         return realPublishDate == null ? getPublishDate() : realPublishDate;
     }
