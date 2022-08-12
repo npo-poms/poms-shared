@@ -39,9 +39,9 @@ import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
- * This is the image object as used by <a href="https://images.poms.omroep.nl"> poms image server</a>
- *
- * It is the database entity, and also has an XML/Json representation, but this is currently not exposed in public API's.
+ * <p>This is the image object as used by <a href="https://images.poms.omroep.nl"> poms image server</a></p>
+ * <p>
+ * It is the database entity, and also has an XML/Json representation, but this is currently not exposed in public API's.</p>
  *
  */
 @SuppressWarnings("WSReferenceInspection")
