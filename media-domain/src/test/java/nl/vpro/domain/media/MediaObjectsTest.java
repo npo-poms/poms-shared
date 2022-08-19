@@ -818,13 +818,33 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void integrate() {
+    public void integrateShrink() {
         List<Impl> existing = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "b"), new Impl(2, "c")));
 
         List<Impl> incoming = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "x")));
 
         MediaObjects.integrate(existing, incoming);
         assertThat(existing.stream().map(i -> i.value)).containsExactly("a", "x");
+    }
+
+    @Test
+    public void integrateShrinkAndGrow() {
+        List<Impl> existing = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "b"), new Impl(2, "c"), new Impl(4, "z")));
+
+        List<Impl> incoming = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "x"), new Impl(3, "y")));
+
+        MediaObjects.integrate(existing, incoming);
+        assertThat(existing.stream().map(i -> i.value)).containsExactly("a", "x", "y");
+    }
+
+    @Test
+    public void integrateGrow() {
+        List<Impl> existing = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "b")));
+
+        List<Impl> incoming = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "x"), new Impl(3, "y")));
+
+        MediaObjects.integrate(existing, incoming);
+        assertThat(existing.stream().map(i -> i.value)).containsExactly("a", "x", "y");
 
     }
 }
