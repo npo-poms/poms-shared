@@ -796,6 +796,37 @@ public class MediaObjectsTest {
             }
         }
     }
+
+    public static class Impl implements UpdatableIdentifiable<Integer, Impl> {
+        final int  id;
+        String value;
+
+        public Impl(int id, String value) {
+            this.id = id;
+            this.value = value;
+        }
+
+        @Override
+        public Integer getId() {
+            return id;
+        }
+
+        @Override
+        public void update(Impl from) {
+            this.value = from.value;
+        }
+    }
+
+    @Test
+    public void integrate() {
+        List<Impl> existing = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "b"), new Impl(2, "c")));
+
+        List<Impl> incoming = new ArrayList<>(Arrays.asList(new Impl(0,  "a"), new Impl(1, "x")));
+
+        MediaObjects.integrate(existing, incoming);
+        assertThat(existing.stream().map(i -> i.value)).containsExactly("a", "x");
+
+    }
 }
 
 
