@@ -20,21 +20,21 @@ import nl.vpro.validation.NoHtml;
 /**
  * A {@link MediaObject} can have more than one title which should differ in type and
  * owner.
- * <p/>
- * To some extend a titles type describes a usage scenario. In most cases the main title
+ * <p>
+ * To some extent a titles type describes a usage scenario. In most cases the main title
  * will be used.
- * <p/>
+ * <p>
  * The title owner describes the origin of the title. Several media suppliers provide
- * there own titles. To prevent conflicts while updating incoming data, all titles are
+ * their own titles. To prevent conflicts while updating incoming data, all titles are
  * stored for later usage. With the restriction that there are no titles t1 and t2 such
  * that t1.equals(t2).
- * <p/>
+ * <p>
  * This class confirms to a natural ordering consistent with equals based on its type
  * and owner. Beware of the fact that the title value itself has no part in the ordering
- * algorithm. Two titles are equal if there owner and type are equal. When adding a title
+ * algorithm. Two titles are equal if their owner and type are equal. When adding a title
  * to a SortedSet which already contains an equal title, the added title automatically
  * replaces the existing title.
- * <p/>
+ * <p>
  * The ordering of titles is dictated by the order (ordinal numbers) of the enum values
  * for a titles type and ownertype.
  *
