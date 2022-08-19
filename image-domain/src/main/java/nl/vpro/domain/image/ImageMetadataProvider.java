@@ -10,7 +10,7 @@ import org.checkerframework.checker.nullness.qual.PolyNull;
 
 /**
  * The basic interface for images is {@link nl.vpro.domain.image.Metadata} (POMS) and its extension {@link ImageMetadata}
- *
+ * <p>
  * There are a lot of image objects lying around which cannot directly implements one of these, because of conflicting methods.
  * <p>
  * So, at least they can implement this, and have {@link #toImageMetadata()}.
@@ -50,7 +50,7 @@ public interface ImageMetadataProvider {
     /**
      * If an image object already implements {@link Metadata}, then an interface can
      * be created using this wrapper.
-     *
+     * <p>
      * This e.g. is useful for poms images {@link nl.vpro.domain.media.support.Image} and {@link nl.vpro.domain.page.Image}, which are presently not yet implementing {@link ImageMetadata}
      * Imp
      */
