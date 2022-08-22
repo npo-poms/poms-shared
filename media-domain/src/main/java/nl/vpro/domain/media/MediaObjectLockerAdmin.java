@@ -22,7 +22,6 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
 
     private final ObjectLockerAdmin objectLockerAdmin = ObjectLockerAdmin.JMX_INSTANCE;
 
-
     @Override
     public Set<String> getLocks() {
         return MediaObjectLocker.LOCKED_MEDIA.values().stream().map(ObjectLocker.LockHolder::summarize).collect(Collectors.toSet());
@@ -31,7 +30,6 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
     @Override
     public int getLockCount() {
         return objectLockerAdmin.getLockCount();
-
     }
 
     @Override
@@ -80,14 +78,12 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
         });
     }
 
-
     @Override
     public String clearMidLocks() {
-        int size = MediaObjectLocker.LOCKED_MEDIA.size();
+        final int size = MediaObjectLocker.LOCKED_MEDIA.size();
         MediaObjectLocker.LOCKED_MEDIA.clear();
         return "Removed all mid locks (approx. " + size + ")";
     }
-
 
     @Override
     public String getMaxLockAcquireTime() {
