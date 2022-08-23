@@ -70,7 +70,7 @@ public class Changeables {
 
 
     /**
-     * Used by implementations of {@link org.hibernate.Interceptor}
+     * Used by implementations of {@code org.hibernate.Interceptor}
      * @since 5.11
      */
     public static boolean updateEntity(
