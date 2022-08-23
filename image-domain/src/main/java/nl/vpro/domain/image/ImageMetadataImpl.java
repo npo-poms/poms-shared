@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.*;
 import com.google.common.annotations.Beta;
@@ -114,6 +115,7 @@ public class ImageMetadataImpl implements ImageMetadata {
 
     //@JsonView(Views.Javascript.class)
     @Beta
+    @JsonIgnore
     public String getSourceSetString() {
         return Objects.toString(getSourceSet());
     }
