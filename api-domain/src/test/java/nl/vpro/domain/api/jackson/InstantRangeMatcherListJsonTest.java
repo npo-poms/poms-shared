@@ -28,18 +28,18 @@ public class InstantRangeMatcherListJsonTest {
         DateRangeMatcherList list = new DateRangeMatcherList(in);
 
         StringWriter writer = new StringWriter();
-        Jackson2Mapper.INSTANCE.writeValue(writer, list);
+        Jackson2Mapper.getInstance().writeValue(writer, list);
 
         assertThat(writer.toString()).isEqualTo("[{\"begin\":0,\"end\":3600000,\"inclusiveEnd\":false,\"match\":\"NOT\"}]");
 
-        DateRangeMatcherList out = Jackson2Mapper.INSTANCE.readValue(new StringReader(writer.toString()), DateRangeMatcherList.class);
+        DateRangeMatcherList out = Jackson2Mapper.getInstance().readValue(new StringReader(writer.toString()), DateRangeMatcherList.class);
         assertThat(out.asList()).containsExactly(new DateRangeMatcher(Instant.EPOCH, Instant.ofEpochMilli(3600000), false, Match.NOT));
         assertThat(out.getMatch()).isEqualTo(Match.MUST);
     }
 
     @Test
     public void testGetValueFromJson() throws Exception {
-        DateRangeMatcherList matcher = Jackson2Mapper.INSTANCE.readValue("[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}]", DateRangeMatcherList.class);
+        DateRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}]", DateRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
         assertThat(matcher.iterator().next()).isEqualTo(new DateRangeMatcher(
@@ -49,7 +49,7 @@ public class InstantRangeMatcherListJsonTest {
 
     @Test
     public void testGetValueFromJsonNatty() throws Exception {
-        DateRangeMatcherList matcher = Jackson2Mapper.INSTANCE.readValue("[{\"begin\":0,\"end\":\"now\",\"match\":\"NOT\",\"inclusiveEnd\":false}]", DateRangeMatcherList.class);
+        DateRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("[{\"begin\":0,\"end\":\"now\",\"match\":\"NOT\",\"inclusiveEnd\":false}]", DateRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
 
@@ -59,7 +59,7 @@ public class InstantRangeMatcherListJsonTest {
 
     @Test
     public void testGetValueFromJsonSingular() throws Exception {
-        DateRangeMatcherList matcher = Jackson2Mapper.INSTANCE.readValue("{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}", DateRangeMatcherList.class);
+        DateRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}", DateRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
         assertThat(matcher.iterator().next()).isEqualTo(new DateRangeMatcher(
@@ -72,18 +72,18 @@ public class InstantRangeMatcherListJsonTest {
         DateRangeMatcherList list = new DateRangeMatcherList(Collections.singletonList(in), Match.NOT);
 
         StringWriter writer = new StringWriter();
-        Jackson2Mapper.INSTANCE.writeValue(writer, list);
+        Jackson2Mapper.getInstance().writeValue(writer, list);
 
         assertThat(writer.toString()).isEqualTo("{\"value\":[{\"begin\":0,\"end\":3600000,\"inclusiveEnd\":false,\"match\":\"NOT\"}],\"match\":\"NOT\"}");
 
-        DateRangeMatcherList out = Jackson2Mapper.INSTANCE.readValue(new StringReader(writer.toString()), DateRangeMatcherList.class);
+        DateRangeMatcherList out = Jackson2Mapper.getInstance().readValue(new StringReader(writer.toString()), DateRangeMatcherList.class);
         assertThat(out.asList()).containsExactly(new DateRangeMatcher(Instant.EPOCH, Instant.ofEpochMilli(3600000), false, Match.NOT));
         assertThat(out.getMatch()).isEqualTo(Match.NOT);
     }
 
     @Test
     public void testGetValueFromJsonInverse() throws Exception {
-        DateRangeMatcherList matcher = Jackson2Mapper.INSTANCE.readValue("{\"value\":[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}],\"match\":\"not\"}", DateRangeMatcherList.class);
+        DateRangeMatcherList matcher = Jackson2Mapper.getInstance().readValue("{\"value\":[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}],\"match\":\"not\"}", DateRangeMatcherList.class);
 
         assertThat(matcher.size()).isEqualTo(1);
         assertThat(matcher.iterator().next()).isEqualTo(new DateRangeMatcher(Instant.EPOCH, Instant.ofEpochMilli(3600000), false, Match.NOT));

@@ -21,7 +21,7 @@ public class MediaChangeTest {
         MediaChange tail = MediaChange.tail(100);
         assertThat(Jackson2Mapper.getInstance().writeValueAsString(tail)).isEqualTo("{\"revision\":100,\"tail\":true}");
 
-        JsonGenerator jg = Jackson2Mapper.INSTANCE.getFactory().createGenerator(System.out);
+        JsonGenerator jg = Jackson2Mapper.getInstance().getFactory().createGenerator(System.out);
         jg.writeObject(tail);
     }
 

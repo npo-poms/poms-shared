@@ -127,7 +127,7 @@ public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
             .secondaryLifestyle(new SecondaryLifestyle("secondary lifestyle"))
             .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.PRETTY_PUBLISHER, e, "{\n" +
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPrettyPublisherInstance(), e, "{\n" +
             "  \"titles\" : [ {\n" +
             "    \"value\" : \"scheduleEventTitle\",\n" +
             "    \"owner\" : \"BROADCASTER\",\n" +

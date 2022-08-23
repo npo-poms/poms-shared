@@ -429,7 +429,7 @@ public class MediaFormTest implements BasicObjectTest<MediaForm> {
             "    }\n" +
             "}\n";
 
-        MediaForm fromJson = Jackson2Mapper.STRICT.readerFor(MediaForm.class).readValue(new StringReader(json));
+        MediaForm fromJson = Jackson2Mapper.getStrictInstance().readerFor(MediaForm.class).readValue(new StringReader(json));
         roundTripAndSimilar(fromJson, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
             "        <api:durations match=\"MUST\">\n" +

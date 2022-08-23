@@ -45,7 +45,7 @@ public class GenreSortedSet {
             if (jp.getCodec() == null) {
                 // In org/ektorp/impl/QueryResultParser.java#parseRows(JsonParser jp) it does row.doc.traverse()
                 // traverse() gives a new JsonParser, but without the original Codec. Seems a bug. But this work around it.
-                jp.setCodec(Jackson2Mapper.INSTANCE);
+                jp.setCodec(Jackson2Mapper.getInstance());
             }
 
             final SortedSet<Genre> types = new TreeSet<>();

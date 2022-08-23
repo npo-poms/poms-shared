@@ -148,7 +148,7 @@ public class SearchResultsTest {
 
     @Test
     public void unmarshalJson() throws IOException {
-        MediaSearchResult result = Jackson2Mapper.INSTANCE.readValue(getClass().getResource("/related.json"), MediaSearchResult.class);
+        MediaSearchResult result = Jackson2Mapper.getInstance().readValue(getClass().getResource("/related.json"), MediaSearchResult.class);
         MediaObject o = result.asList().get(0);
         assertThat(o.getDescendantOf().iterator().next().getMidRef()).isEqualTo("VPRO_1154287");
     }

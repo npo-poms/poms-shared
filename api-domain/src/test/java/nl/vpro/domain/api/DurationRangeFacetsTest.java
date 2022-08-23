@@ -23,7 +23,7 @@ public class DurationRangeFacetsTest {
     @Test
     public void testJsonArray() throws Exception {
         Reader reader = new StringReader("[{\"name\":\"My range\",\"begin\":100,\"end\":200}]");
-        DurationRangeFacets<AbstractSearch> facet = (DurationRangeFacets<AbstractSearch>) Jackson2Mapper.INSTANCE.readValue(reader, DurationRangeFacets.class);
+        DurationRangeFacets<AbstractSearch> facet = (DurationRangeFacets<AbstractSearch>) Jackson2Mapper.getInstance().readValue(reader, DurationRangeFacets.class);
         assertThat(facet.getRanges()).containsOnly(new DurationRangeFacetItem("My range", Duration.ofMillis(100), Duration.ofMillis(200)));
     }
 
