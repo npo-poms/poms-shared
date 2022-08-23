@@ -17,10 +17,10 @@ import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Schedule;
 
 /**
- * See https://jira.vpro.nl/browse/MSE-1324
- *
+ * See <a href="https://jira.vpro.nl/browse/MSE-1324">JIRA</a>
+ * <p>
  * De productcode van de promo is als volgt opgebouwd: [Z][Y][ddmm][CD][TITEL]
- *
+ * <p>
  * Waarbij:
  * [Z]=Zender waar het programma wordt uitgezonden (1,2,3 of Z]
  * [Y]=Type (P,T, etc.) waarbij alleen de P relevant is voor POMS, want dat zijn de promo's

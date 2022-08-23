@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
  * @since 3.3
  */
 public class ReleaseDateValidator implements ConstraintValidator<ReleaseDate, String>  {
-    static final Pattern YEAR_ONLY = Pattern.compile("[1-9][\\d]{3}");
+    static final Pattern YEAR_ONLY = Pattern.compile("[1-9]\\d{3}");
 
     @Override
     public boolean isValid(String date, ConstraintValidatorContext constraintValidatorContext){

@@ -245,7 +245,7 @@ public class TextualObjects {
     }
 
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public static <S extends Comparable<?>> SortedSet<@NonNull S> sorted(Set<@NonNull S> set) {
         if (set == null) {
             return null;
@@ -266,7 +266,7 @@ public class TextualObjects {
     /**
      * Returns the value for a certain {@link TextualType} and {@link OwnerType}. This implements a fall back mechanism.
      * It takes the first value with matching owner and type. If none found, it will fall back to the highest OwnerType ({@link OwnerType#BROADCASTER} and degrades until one is found.
-     *
+     * <p>
      * Furthermore if no 'LEXICO' typed values if found, the value for 'MAIN' will be used.
      */
     public static <OT extends OwnedText> Optional<OT> expand(
@@ -301,7 +301,7 @@ public class TextualObjects {
      * Give a collection, find the first object which equals the object we want to be in it.
      * If one found, the 'value' is copied to it.
      * If not, then the object is added to the collection.
-     *
+     * <p>
      * TypedText's are commonly stored in SortedSet's, where equals matches only owner and type, not the value itself.
      *
      * @param titles Collection
@@ -343,7 +343,7 @@ public class TextualObjects {
 
     /**
      * Copies all titles from one object to another.
-     *
+     * <p>
      * Moved from ImportUtil, SecureUpdateImpl, MediaUpdaterImpl
      *
      * @param owner The owner type of the titles to consider
@@ -391,7 +391,7 @@ public class TextualObjects {
 
     /**
      * Copies all descriptions from one object to another.
-     *
+     * <p>
      * Moved from ImportUtil, SecureUpdateImpl, MediaUpdaterImpl
      *
      * @since 5.6
@@ -560,7 +560,7 @@ public class TextualObjects {
     /**
      * Copy all texts from  a  {@link TextualObject} to a  {@link TextualObjectUpdate}.
      * You can to specify an owner. Preferred are then values with owners equals or lower then this given owner, or if there are none, it will fall back from the top again.
-     *
+     * <p>
      * In principal if the owner is {@link OwnerType#BROADCASTER} youu could also use {@link #copyToUpdate(TextualObjectUpdate, TextualObjectUpdate)}
      *
      * @since 5.9
