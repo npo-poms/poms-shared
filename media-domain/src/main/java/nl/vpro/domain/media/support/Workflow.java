@@ -153,18 +153,20 @@ public enum Workflow implements Displayable, XmlValued {
     private final String description;
 
     /**
-     * Wether this workflow can appear in the frontend api.
+     * Whether this workflow can appear in the frontend api.
+     *
+     * @see #getPublishedAs()
      */
     @Getter
     private final boolean publishable;
 
     private final String stringAs;
-    private Workflow as;
+    private Workflow publishedAs;
 
-    Workflow(String description, String as) {
+    Workflow(String description, String publishedAs) {
         this.description = description;
         this.publishable = false;
-        this.stringAs =  as;
+        this.stringAs = publishedAs;
     }
 
     Workflow(String description) {
@@ -173,11 +175,19 @@ public enum Workflow implements Displayable, XmlValued {
         this.stringAs = null;
     }
 
-    public Workflow getAs() {
-        if (as == null && stringAs != null) {
-            as = valueOf(stringAs);
+    /**
+     * Some workflows are 'temporary' (see {@link #isPublishable()}  and only used for administration purposes. This returns the
+     * workflow as it would appear when all administrative work is done.
+     */
+    public Workflow getPublishedAs() {
+        if (publishedAs == null) {
+            if (stringAs != null) {
+                publishedAs = valueOf(stringAs);
+            } else {
+                publishedAs = this;
+            }
         }
-        return as;
+        return publishedAs;
     }
 
     public String getDescription() {
