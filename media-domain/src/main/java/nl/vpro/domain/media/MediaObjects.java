@@ -18,6 +18,7 @@ import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.helpers.MessageFormatter;
 
 import com.google.common.collect.*;
@@ -36,7 +37,7 @@ import static nl.vpro.domain.media.support.Workflow.*;
 
 /**
  * Various methods related to dealing with {@link MediaObject}s, like copying and filling.
- *
+ * <p>
  * See {@link TextualObjects}, and {@link Embargos} for methods like this (because media objects are {@link TextualObject} and {@link MutableEmbargo}
  * @since 1.5
  */
@@ -127,14 +128,14 @@ public class MediaObjects {
 
     /**
      * Copies most field values from one media object to another.
-     *
+     * <p>
      * In principal this should be all fields of which the value logically can exist on more than one mediaobject the same time,
      * so not unique fields like id and mid.
-     *
+     * <p>
      * Also membership of groups will not be automatically filled. This would need write access on those objects.
-     *
+     * <p>
      * Scheduleevents, predictions, workflow, subtitles status are not copied too, since this this would not make sense.
-     *
+     * <p>
      *
      *
      */
@@ -196,7 +197,7 @@ public class MediaObjects {
 
     /**
      * A more full copy, also copying field that you could normally not copy, like MID.
-     *
+     * <p>
      * The assumption is that both objects are not yet persistent
      * @since 5.11
      */
@@ -217,7 +218,7 @@ public class MediaObjects {
 
      /**
      * A more full copy, also copying field that you could normally not copy, like MID.
-     *
+     * <p>
      * The assumption is that both objects are not yet persistent
      * @since 5.11
      */
@@ -301,7 +302,7 @@ public class MediaObjects {
 
     /**
      * Returns the {@link ScheduleEvent}s associated with the media object.
-     *
+     * <p>
      * An empty collection for all non programs.
      *
      * @since 5.11
@@ -389,7 +390,7 @@ public class MediaObjects {
     private static void matchBroadcasters(
         @NonNull BroadcasterService broadcasterService,
         @NonNull MediaObject mediaObject,
-        @NonNull Set<MediaObject> handled) throws NotFoundException {
+        @Nullable Set<MediaObject> handled) throws NotFoundException {
         if (handled == null) {
             handled = new HashSet<>(); // to avoid accidental stack overflows
         }
@@ -497,7 +498,10 @@ public class MediaObjects {
         return trimmed;
     }
 
-    public static <T extends UpdatableIdentifiable<?, T>> void integrate(@NonNull List<T> existing, @NonNull List<T> updates) {
+    @SuppressWarnings("SuspiciousListRemoveInLoop")
+    public static <T extends UpdatableIdentifiable<?, T>> void integrate(
+        @NonNull List<T> existing,
+        @NonNull List<T> updates) {
         T move = null;
         for (int i = 0; i < updates.size(); i++) {
             T incoming = updates.get(i);
@@ -582,9 +586,9 @@ public class MediaObjects {
 
     /**
      * Marks the fields of the mediaobject related to publishing as published.
-     *
+     * <p>
      * the last publish instant will be set, and the reason and destinations will be cleared.
-     *
+     * <p>
      * The workflow itself will remain untouched, and would be set to {@link Workflow#PUBLISHED}, {@link Workflow#REVOKED} or {@link Workflow#MERGED}
      */
     public static void markPublished(@NonNull MediaObject media, @NonNull Instant now) {
@@ -597,7 +601,7 @@ public class MediaObjects {
 
     /**
      * Sets the workflow of the media object to the 'published' state version of the workflow ({@link Workflow#isPublishable()} ()}
-     *
+     * <p>
      * And calls {@link #markPublished(MediaObject, Instant)}
      * @since 5.20.2
      */
@@ -632,7 +636,7 @@ public class MediaObjects {
     /**
      * Determines if for a given platform, the media object has a location, and returns (one) if there is.
      * If there is no location for a certain platform the {@link Prediction#getState()} should be {@link Prediction.State#REVOKED}, {@link Prediction.State#ANNOUNCED} or {@link Prediction.State#NOT_ANNOUNCED}.
-     *
+     * <p>
      * Otherwise, it must be {@link Prediction.State#REALIZED};
      *
      * @since 5.32
@@ -702,7 +706,7 @@ public class MediaObjects {
 
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
-     *
+     * <p>
      * TODO work in progress. This may replace the hibernate filter solution now in place.
      */
     public static <T extends PublishableObject<?>> T filterPublishable(T object, Instant now) {
@@ -1096,7 +1100,7 @@ public class MediaObjects {
 
     /**
      * Return {@code false} if the given location is not actually playable.
-     *
+     * <p>
      * Either it is {@link Location#isDeleted()}, which may occur if dealing with unpublished data, or we're dealing
      * with some legacy and the location has a format which is known not to be playable any more (like WMV)
      * @since 5.31

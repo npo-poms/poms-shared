@@ -14,7 +14,7 @@ public class PortalRestrictionTest {
     @Test
     public void testTypeJsonRoundTrip() throws Exception {
         PortalRestriction input = new PortalRestriction(new Portal("PORTAL_ID", "DISPLAY_NAME"));
-        Jackson2Mapper mapper = Jackson2Mapper.INSTANCE;
+        Jackson2Mapper mapper = Jackson2Mapper.getInstance();
         String jsonString = mapper.writeValueAsString(input);
         PortalRestriction output = mapper.readerFor(PortalRestriction.class).readValue(jsonString);
         assertThat(output.getPortal().getId()).isEqualTo("PORTAL_ID");

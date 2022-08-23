@@ -209,7 +209,7 @@ public class MediaObjectJsonSchemaTest {
     @Test
     public void testBackwardsCompatibleUnmarshalPredictions() throws IOException {
         String backwards = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"predictions\":[\"INTERNETVOD\"]}";
-        Program program = Jackson2Mapper.INSTANCE.readValue(new StringReader(backwards), Program.class);
+        Program program = Jackson2Mapper.getInstance().readValue(new StringReader(backwards), Program.class);
         assertThat(program.getPredictions()
             .iterator()
             .next()
@@ -822,7 +822,7 @@ public class MediaObjectJsonSchemaTest {
             "}";
 
 
-        Program program = Jackson2Mapper.LENIENT.readerFor(Program.class).readValue(example);
+        Program program = Jackson2Mapper.getLenientInstance().readerFor(Program.class).readValue(example);
 
         assertThat(program.getLocations().first().getOwner()).isNull();
 
@@ -840,7 +840,7 @@ public class MediaObjectJsonSchemaTest {
 
         Jackson2TestUtil.roundTripAndSimilar(program, expected);
 
-        Program marshalled = Jackson2Mapper.INSTANCE.readValue(toPublisherJson(program), Program.class);
+        Program marshalled = Jackson2Mapper.getInstance().readValue(toPublisherJson(program), Program.class);
         assertEquals(marshalled.intentions, program.intentions);
     }
 
@@ -883,7 +883,7 @@ public class MediaObjectJsonSchemaTest {
                 "        }]\n" +
                 "      }";
 
-        GeoLocations actualGeoLocations = Jackson2Mapper.STRICT.readerFor(GeoLocations.class).readValue(new StringReader(geoLocationsJson));
+        GeoLocations actualGeoLocations = Jackson2Mapper.getStrictInstance().readerFor(GeoLocations.class).readValue(new StringReader(geoLocationsJson));
         GeoLocation value = GeoLocation.builder()
                 .role(GeoRoleType.RECORDED_IN)
                 .name("myName").scopeNote("myDescription").uri("myuri").gtaaStatus(GTAAStatus.approved)

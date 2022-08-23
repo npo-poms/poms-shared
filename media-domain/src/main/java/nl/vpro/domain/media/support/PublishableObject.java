@@ -45,6 +45,8 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     extends AbstractPublishableObject<T>
     implements MutableEmbargoDeprecated<T>, TrackableObject {
 
+    public static ThreadLocal<Boolean> PUBLISH_WORKFLOW = ThreadLocal.withInitial(() -> false);
+
     private static final long serialVersionUID = 7010308562857745023L;
 
     @Column(nullable = false)
@@ -187,6 +189,13 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     @XmlAttribute
     @Override
     public Workflow getWorkflow() {
+        if (PUBLISH_WORKFLOW.get() && workflow != null) {
+            Workflow as = workflow.getPublishedAs();
+            if (as != null) {
+                log.warn("Returning workflow {} as {}", workflow, as);
+            }
+            return as;
+        }
         return workflow;
     }
 

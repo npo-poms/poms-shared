@@ -15,7 +15,9 @@ import javax.management.ObjectName;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import nl.vpro.domain.user.Trusted;
 import nl.vpro.jmx.MBeans;
+import nl.vpro.services.DoAsTransactionService;
 import nl.vpro.services.TransactionService;
 import nl.vpro.util.locker.ObjectLocker;
 import nl.vpro.util.locker.ObjectLocker.LockHolder;
@@ -24,11 +26,11 @@ import static nl.vpro.util.locker.ObjectLocker.withObjectLock;
 
 /**
  * Tool to make sure that the 'authority' related dropboxes and other services don't run at the same time for the same mid.
- *
+ * <p>
  * It may be better to (also) introduce more decent hibernate locking (MSE-3751)
- *
+ * <p>
  * This basicly wraps {@link ObjectLocker}, but keeps a separate map of locked objects, dedicated to media identifiables
- *
+ * <p>
  * Also, it defines some annotations (for use with {@link MediaObjectLockerAspect} (to facilitate locking via annotation), and some utility methods.
  *
  * @author Michiel Meeuwissen
@@ -58,11 +60,11 @@ public class MediaObjectLocker {
     /**
      * Adding this annotation of a method with a {@link String} or {@link MediaIdentifiable} argument will 'lock' the identifier, and will make sure
      * that no other code doing the same will run simultaneously.
-     *
+     * <p>
      * Much code like this will be get a mediaobject using this mid, change it and then commit the mediaobject.
-     *
+     * <p>
      * If another thread is changing the mediaobject in between those events, those changes will be lost.
-     *
+     * <p>
      * This can therefore be avoided using this annotations (or equivalently by using {@link #withMidLock(String, String, Callable)}
 
      */
@@ -95,7 +97,7 @@ public class MediaObjectLocker {
 
     /**
      * Run in a new transaction, but before that lock the mid.
-     *
+     * <p>
      * Make sure not to be in a transaction already.
      */
     public static <T> T executeInNewTransactionWithMidLock(
@@ -107,6 +109,23 @@ public class MediaObjectLocker {
             mid,
             reason,
             () -> transactionService.executeInNewTransaction(callable));
+    }
+
+     /**
+     * Run in a new transaction, but before that lock the mid.
+     * <p>
+     * Make sure not to be in a transaction already.
+     */
+    public static <T> T executeInNewTransactionWithMidLock(
+        @NonNull DoAsTransactionService transactionService,
+        @NonNull Trusted user,
+        String mid,
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
+        return withMidLock(
+            mid,
+            reason,
+            () -> transactionService.executeInNewTransaction(user, callable));
     }
 
 

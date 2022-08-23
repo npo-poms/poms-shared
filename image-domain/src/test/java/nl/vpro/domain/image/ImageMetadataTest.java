@@ -9,10 +9,12 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializationConfig;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.jackson2.Views;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -46,7 +48,11 @@ class ImageMetadataTest {
 
     @Test
     public void json() {
-        Jackson2TestUtil.roundTripAndSimilar(image, "{\n" +
+        Jackson2Mapper mapper = Jackson2Mapper.getLenientInstance();
+        SerializationConfig serializationConfig = mapper.getSerializationConfig().withView(Views.Javascript.class);
+        mapper.setConfig(serializationConfig);
+
+        Jackson2TestUtil.roundTripAndSimilar(mapper, image, "{\n" +
             "    \"type\" : \"LOGO\",\n" +
             "    \"title\" : \"foobar\",\n" +
             "    \"height\" : 200,\n" +

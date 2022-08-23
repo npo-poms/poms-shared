@@ -2767,6 +2767,8 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     /**
+     * This is not a real channel. It can be used for testing or mocking purposes.
+     *
      * @since 5.15
      */
     @XmlEnumValue("XXXX")

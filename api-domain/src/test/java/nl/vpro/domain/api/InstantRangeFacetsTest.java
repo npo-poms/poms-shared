@@ -42,7 +42,7 @@ public class InstantRangeFacetsTest {
     @Test
     public void testMixedJsonArrayPreset() throws Exception {
         Reader reader = new StringReader("[\"LAST_YEAR\",\"LAST_WEEK\",{\"name\":\"My range\",\"begin\":100,\"end\":200}]");
-        DateRangeFacets<AbstractSearch> facet = (DateRangeFacets<AbstractSearch>) Jackson2Mapper.INSTANCE.readValue(reader, DateRangeFacets.class);
+        DateRangeFacets<AbstractSearch> facet = (DateRangeFacets<AbstractSearch>) Jackson2Mapper.getInstance().readValue(reader, DateRangeFacets.class);
         assertThat(facet.getRanges()).containsOnly(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK, new DateRangeFacetItem("My range", Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)));
     }
 
@@ -51,7 +51,7 @@ public class InstantRangeFacetsTest {
         DateRangeFacets<AbstractSearch> in = new DateRangeFacets<>();
         in.setRanges(Arrays.asList(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK, new DateRangeFacetItem("My range", Instant.ofEpochMilli(100), Instant.ofEpochMilli(200))));
         Writer writer = new StringWriter();
-        Jackson2Mapper.INSTANCE.writeValue(writer, in);
+        Jackson2Mapper.getInstance().writeValue(writer, in);
         assertThat(writer.toString()).isEqualTo("[\"LAST_YEAR\",\"LAST_WEEK\",{\"name\":\"My range\",\"begin\":100,\"end\":200}]");
     }
 }
