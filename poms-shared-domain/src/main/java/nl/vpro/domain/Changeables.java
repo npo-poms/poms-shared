@@ -98,7 +98,7 @@ public class Changeables {
     }
 
     /**
-     * Used by implementations of {@link org.hibernate.Interceptor}
+     * Used by implementations of {@code org.hibernate.Interceptor}
      */
     public static void setProperty(
         @NonNull String propertyName,
