@@ -11,13 +11,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.*;
 import com.google.common.annotations.Beta;
 
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
 import nl.vpro.validation.CRID;
 import nl.vpro.validation.URI;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -33,6 +33,11 @@ import static nl.vpro.domain.image.ImageSource.Type;
 @EqualsAndHashCode
 @ToString
 @JsonDeserialize(builder = ImageMetadataImpl.Builder.class)
+@JsonPropertyOrder(
+    {
+        "type","title", "height", "width", "sourceSet", "sourceSetString", "crids", "areaOfInterest", "lastModified", "creationDater"
+    }
+)
 public class ImageMetadataImpl implements ImageMetadata {
 
     private final ImageType type;
@@ -66,6 +71,7 @@ public class ImageMetadataImpl implements ImageMetadata {
     private final Instant creationInstant;
 
 
+    @JsonView(Views.Normal.class)
     private final ImageSourceSet sourceSet;
 
     private final List<@CRID String> crids;
@@ -113,9 +119,8 @@ public class ImageMetadataImpl implements ImageMetadata {
         this.areaOfInterest = areaOfInterest;
     }
 
-    //@JsonView(Views.Javascript.class)
+    @JsonView(Views.Model.class)
     @Beta
-    @JsonIgnore
     public String getSourceSetString() {
         return Objects.toString(getSourceSet());
     }
