@@ -83,7 +83,7 @@ class ImageMetadataTest {
     @Test
     @Beta
     public void modelJson() {
-        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getModelInstance(), image, "{\n" +
+        Jackson2TestUtil.assertThatJson(Jackson2Mapper.getModelInstance(), image).withoutRemarshalling().isSimilarTo("{\n" +
             "    \"type\" : \"LOGO\",\n" +
             "    \"title\" : \"foobar\",\n" +
             "    \"height\" : 200,\n" +
