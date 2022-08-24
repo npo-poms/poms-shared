@@ -25,6 +25,8 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableSet;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 /**
  * <p>The workflow status for publishable items.</p>
  * @author arne
@@ -179,6 +181,7 @@ public enum Workflow implements Displayable, XmlValued {
      * Some workflows are 'temporary' (see {@link #isPublishable()}  and only used for administration purposes. This returns the
      * workflow as it would appear when all administrative work is done.
      */
+    @NonNull
     public Workflow getPublishedAs() {
         if (publishedAs == null) {
             if (stringAs != null) {

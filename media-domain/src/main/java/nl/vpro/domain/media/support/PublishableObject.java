@@ -191,7 +191,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     public Workflow getWorkflow() {
         if (PUBLISH_WORKFLOW.get() && workflow != null) {
             Workflow as = workflow.getPublishedAs();
-            if (as != null) {
+            if (as != workflow) {
                 log.warn("Returning workflow {} as {}", workflow, as);
             }
             return as;
