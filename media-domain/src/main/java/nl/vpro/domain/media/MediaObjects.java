@@ -585,7 +585,7 @@ public class MediaObjects {
     }
 
     /**
-     * Marks the fields of the mediaobject related to publishing as published.
+     * Marks the fields of the media object related to publishing as published.
      * <p>
      * the last publish instant will be set, and the reason and destinations will be cleared.
      * <p>

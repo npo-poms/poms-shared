@@ -12,4 +12,14 @@ public class PublishableObjectAccess {
     public static void setWorkflow(PublishableObject<?> object, Workflow workflow) {
         object.setWorkflow(workflow);
     }
+
+    /**
+     * Sets the workflow as it should be when published. e.g. a workflow like {@link Workflow#FOR_DELETION} becomes {@link Workflow#DELETED}. I.e. it sets the workflow to {@link Workflow#getPublishedAs()}
+     * @since 5.35
+     */
+    public static void markPublished(PublishableObject<?> object) {
+        if (object.getWorkflow() != null) {
+            setWorkflow(object, object.getWorkflow().getPublishedAs());
+        }
+    }
 }
