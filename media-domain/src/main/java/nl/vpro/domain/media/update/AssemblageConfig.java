@@ -267,14 +267,14 @@ public class AssemblageConfig {
     }
 
     public void backwardsCompatible(IntegerVersion version) {
-        if (copyLanguageAndCountry == null) {
-            setCopyLanguageAndCountry(version == null || version.isNotBefore(5, 0));
+        if (copyLanguageAndCountry == null && version != null && version.isNotBefore(5, 0)) {
+            setCopyLanguageAndCountry(true);
         }
-        if (copyPredictions == null) {
-            setCopyPredictions(version == null || version.isNotBefore(5, 6));
+        if (copyPredictions == null && version != null && version.isNotBefore(5, 6)) {
+            setCopyPredictions(true);
         }
-        if (copyTwitterRefs == null) {
-            setCopyTwitterRefs(version == null || version.isNotBefore(5, 10));
+        if (copyTwitterRefs == null && version != null && version.isNotBefore(5, 10)) {
+            setCopyTwitterRefs(true);
         }
     }
 
@@ -297,7 +297,7 @@ public class AssemblageConfig {
     public static class Builder {
         /**
          * Since POMS 5.9 a segment can have an owner.
-         * This sais that segments that have the configured owner, but are not present in the incoming program are to be deleted from the program to update.
+         * This says that segments that have the configured owner, but are not present in the incoming program are to be deleted from the program to update.
          */
         public Builder deleteSegmentsForOwner() {
             return segmentsForDeletion((s, a) -> s.getOwner() != null && a.getOwnerAndSimilar().contains(s.getOwner()));
