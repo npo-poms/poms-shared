@@ -266,6 +266,9 @@ public class AssemblageConfig {
         return segmentsForDeletion.test(segment, this);
     }
 
+    /**
+     * Makes the default assemblage backwards compatible.
+     */
     public void backwardsCompatible(IntegerVersion version) {
         if (copyLanguageAndCountry == null && version != null && version.isNotBefore(5, 0)) {
             setCopyLanguageAndCountry(true);

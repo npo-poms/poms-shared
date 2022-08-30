@@ -2,6 +2,8 @@ package nl.vpro.domain.media.update;
 
 import org.junit.jupiter.api.Test;
 
+import nl.vpro.util.Version;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -22,9 +24,10 @@ class AssemblageConfigTest {
     public void backwards() {
         AssemblageConfig build = AssemblageConfig.builder()
             .build();
+
         assertThat(build.isCopyPredictions()).isFalse();
 
-        build.backwardsCompatible(null);
+        build.backwardsCompatible(Version.of(6, 0));
         assertThat(build.isCopyPredictions()).isTrue();
 
     }
@@ -35,7 +38,7 @@ class AssemblageConfigTest {
             .build();
         assertThat(build.isCopyPredictions()).isFalse();
 
-        build.backwardsCompatible(null);
+        build.backwardsCompatible(Version.of(4, 0));
         assertThat(build.isCopyPredictions()).isFalse();
     }
 
