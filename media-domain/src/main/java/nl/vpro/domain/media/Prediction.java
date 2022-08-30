@@ -33,9 +33,9 @@ import static nl.vpro.domain.Changeables.instant;
 
 /**
  * A prediction is related to a program and indicates that locations (for a certain platform) <em>will be</em> available.
- *
- * Also it contains information about the embargo restrictions for that platform.
- *
+ * <p>
+ * Also, it contains information about the embargo restrictions for that platform.
+ * <p>
  *
  * @author Michiel Meeuwissen
  * @since 1.6
@@ -131,10 +131,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     private Authority authority = Authority.USER;
 
 
-
     /**
      * TODO The state is 'ANNOUNCED', so shouldn't we name this field 'announcedAvailability'?
-     *
      *
      * @since 5.6
      */
