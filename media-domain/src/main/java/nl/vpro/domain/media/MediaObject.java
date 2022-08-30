@@ -2086,6 +2086,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         this.predictionsForXml = null;
     }
 
+    /**
+     * We don't return 'non announced' predictions in the xml.
+     */
     @XmlElement(name = "prediction")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("predictions")
