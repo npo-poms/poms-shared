@@ -44,14 +44,12 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean copyWorkflow = false;
 
-    @lombok.Builder.Default
-    boolean copyLanguageAndCountry = false;
+    Boolean copyLanguageAndCountry;
 
     @lombok.Builder.Default
     boolean imageMetaData = false;
 
-    @lombok.Builder.Default
-    boolean copyPredictions = false;
+    Boolean copyPredictions = null;
 
     @lombok.Builder.Default
     boolean episodeOfUpdate = true;
@@ -65,8 +63,7 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean ratingsUpdate = true;
 
-    @lombok.Builder.Default
-    boolean copyTwitterrefs = false;
+    Boolean copyTwitterRefs = null;
 
     @lombok.Builder.Default
     boolean copyIntentions = true;
@@ -122,7 +119,7 @@ public class AssemblageConfig {
     Steal stealSegments = Steal.NO;
 
     /**
-     * On default it you merge a program, exsisting segments will not be removed
+     * On default, if you merge a program, existing segments will not be removed
      * This can be configured using this.
      * See als {@link Builder#deleteSegmentsForOwner()}
      */
@@ -188,7 +185,7 @@ public class AssemblageConfig {
             guessEpisodePosition,
             memberOfUpdate,
             ratingsUpdate,
-            copyTwitterrefs,
+            copyTwitterRefs,
             copyIntentions,
             copyTargetGroups,
             copyGeoLocations,
@@ -246,7 +243,7 @@ public class AssemblageConfig {
             .guessEpisodePosition(true)
             .memberRefMatchOwner()
             .ratingsUpdate(true)
-            .copyTwitterrefs(true)
+            .copyTwitterRefs(true)
             .copyIntentions(true)
             .copyTargetGroups(true)
             .copyGeoLocations(true)
@@ -271,12 +268,28 @@ public class AssemblageConfig {
 
     public void backwardsCompatible(IntegerVersion version) {
         setCopyLanguageAndCountry(version == null || version.isNotBefore(5, 0));
-        setCopyPredictions(version == null || version.isNotBefore(5, 6));
-        setCopyTwitterrefs(version == null || version.isNotBefore(5, 10));
+        if (copyPredictions == null) {
+            setCopyPredictions(version == null || version.isNotBefore(5, 6));
+        }
+        if (copyTwitterRefs == null) {
+            setCopyTwitterRefs(version == null || version.isNotBefore(5, 10));
+        }
     }
 
     public void setMemberOfUpdateBoolean(boolean bool) {
         setMemberOfUpdate(Predicates.biAlways(bool, "always " + bool));
+    }
+
+    public boolean isCopyPredictions() {
+        return copyPredictions != null && copyPredictions;
+    }
+
+    public boolean isCopyTwitterRefs() {
+        return copyTwitterRefs != null && copyTwitterRefs;
+    }
+
+    public boolean isCopyLanguageAndCountry() {
+        return copyLanguageAndCountry != null && copyLanguageAndCountry;
     }
 
     public static class Builder {
