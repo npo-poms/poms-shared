@@ -267,7 +267,9 @@ public class AssemblageConfig {
     }
 
     public void backwardsCompatible(IntegerVersion version) {
-        setCopyLanguageAndCountry(version == null || version.isNotBefore(5, 0));
+        if (copyLanguageAndCountry == null) {
+            setCopyLanguageAndCountry(version == null || version.isNotBefore(5, 0));
+        }
         if (copyPredictions == null) {
             setCopyPredictions(version == null || version.isNotBefore(5, 6));
         }

@@ -19,11 +19,24 @@ class AssemblageConfigTest {
 
 
     @Test
-    public void fallback() {
-        AssemblageConfig build = AssemblageConfig.builder().build();
+    public void backwards() {
+        AssemblageConfig build = AssemblageConfig.builder()
+            .build();
         assertThat(build.isCopyPredictions()).isFalse();
 
+        build.backwardsCompatible(null);
+        assertThat(build.isCopyPredictions()).isTrue();
 
+    }
+    @Test
+    public void backwards2() {
+        AssemblageConfig build = AssemblageConfig.builder()
+            .copyPredictions(false)
+            .build();
+        assertThat(build.isCopyPredictions()).isFalse();
+
+        build.backwardsCompatible(null);
+        assertThat(build.isCopyPredictions()).isFalse();
     }
 
 }
