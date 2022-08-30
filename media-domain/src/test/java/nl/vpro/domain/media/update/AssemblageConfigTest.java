@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 class AssemblageConfigTest {
 
@@ -16,7 +15,13 @@ class AssemblageConfigTest {
         AssemblageConfig a = builder.build();
         AssemblageConfig b = a.copy();
         assertThat(a).isEqualTo(b);
+    }
 
+
+    @Test
+    public void fallback() {
+        AssemblageConfig build = AssemblageConfig.builder().build();
+        assertThat(build.isCopyPredictions()).isFalse();
 
 
     }
