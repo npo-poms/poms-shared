@@ -262,7 +262,11 @@
     <xs:attribute name="version" type="versionType">
       <xs:annotation>
         <xs:documentation>
-          The POMS version this XML applies too. This is optional, though some feature will only be supported if you explicitely specify a version which is big enough (To ensure backward compatiblity).
+          <xs:paragraphs>
+            The POMS version this XML applies too. This is optional, though some features will only be supported if you explicitly specify a version which is big enough (To ensure backward compatibility). If you don't specify it,  there will be no backwards compatibility.
+
+          </xs:paragraphs>
+
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>

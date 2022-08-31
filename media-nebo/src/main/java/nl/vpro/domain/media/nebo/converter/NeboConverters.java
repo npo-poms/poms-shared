@@ -8,6 +8,7 @@ import nl.vpro.domain.media.nebo.enrichment.v2_4.NeboXmlImport;
 import nl.vpro.domain.media.nebo.webonly.v1_4.NeboXmlWebOnly;
 import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.ProgramUpdate;
+import nl.vpro.util.Version;
 
 
 /**
@@ -21,7 +22,7 @@ public class NeboConverters {
     @Converter
     public MediaUpdate<?> convert(NeboXmlImport enrichment) {
         Program program = enrichment.getAflevering().getProgram();
-        ProgramUpdate update = ProgramUpdate.create(program);
+        ProgramUpdate update = ProgramUpdate.create(Version.of(4, 0), program);
         // This legacy Nebo format has no series support
 
         return update;
@@ -30,6 +31,6 @@ public class NeboConverters {
     @Converter
     public MediaUpdate<?> convert(NeboXmlWebOnly webonly, Exchange exchange) {
         exchange.getIn().setHeader(SRID_HEADER, webonly.getWebonly().getSrid());
-        return ProgramUpdate.create(webonly.getProgram());
+        return ProgramUpdate.create(Version.of(4, 0), webonly.getProgram());
     }
 }
