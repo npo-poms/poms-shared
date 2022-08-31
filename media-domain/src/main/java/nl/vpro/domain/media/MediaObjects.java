@@ -178,7 +178,9 @@ public class MediaObjects {
         to.setCredits(from.getCredits());
         to.setPortalRestrictions(from.getPortalRestrictions());
         to.setPortals(from.getPortals());
-        //to.setPredictions();
+
+        to.setPredictions(from.getPredictions());
+
         to.setRelations(from.getRelations());
         to.setReleaseYear(from.getReleaseYear());
 

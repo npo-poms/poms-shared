@@ -357,6 +357,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     }
 
 
+
     /**
      * The correlation id of a segment currently is the correlation id of its _parent_.
      * <p>
