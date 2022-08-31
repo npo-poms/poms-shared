@@ -544,6 +544,13 @@ public interface MediaBackendRestService {
         @Encoded @PathParam("id") final String id,
         @Context HttpServletResponse response
     );
+
+    @GET
+    @Path("mid/{type:.*}")
+    @Produces(MediaType.TEXT_PLAIN)
+    String createMid(
+        @PathParam("type") nl.vpro.domain.media.MediaType mediaType);
+
 }
 
 
