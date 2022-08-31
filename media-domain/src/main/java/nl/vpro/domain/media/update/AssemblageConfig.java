@@ -27,7 +27,7 @@ import static org.meeuw.functional.Predicates.*;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@lombok.Builder(builderClassName = "Builder")
+@lombok.Builder(builderClassName = "Builder", buildMethodName = "_build", toBuilder = true)
 @Data
 @EqualsAndHashCode
 @ToString
@@ -267,17 +267,17 @@ public class AssemblageConfig {
     }
 
     /**
-     * Makes the default assemblage backwards compatible.
+     * Makes the default assemblage backwards compatible for certain properties (unless they were explicitly stated).
      */
     public void backwardsCompatible(IntegerVersion version) {
-        if (copyLanguageAndCountry == null && version != null && version.isNotBefore(5, 0)) {
-            setCopyLanguageAndCountry(true);
+        if (copyLanguageAndCountry == null) {
+            setCopyLanguageAndCountry(version == null || version.isNotBefore(5, 0));
         }
-        if (copyPredictions == null && version != null && version.isNotBefore(5, 6)) {
-            setCopyPredictions(true);
+        if (copyPredictions == null) {
+            setCopyPredictions(version == null || version.isNotBefore(5, 6));
         }
-        if (copyTwitterRefs == null && version != null && version.isNotBefore(5, 10)) {
-            setCopyTwitterRefs(true);
+        if (copyTwitterRefs == null) {
+            setCopyTwitterRefs(version == null || version.isNotBefore(5, 10));
         }
     }
 
@@ -298,6 +298,9 @@ public class AssemblageConfig {
     }
 
     public static class Builder {
+
+        private IntegerVersion backwardsCompatibleWith;
+        private boolean explicitVersion = false;
         /**
          * Since POMS 5.9 a segment can have an owner.
          * This says that segments that have the configured owner, but are not present in the incoming program are to be deleted from the program to update.
@@ -321,6 +324,22 @@ public class AssemblageConfig {
 
         public Builder deleteBroadcastIfNoScheduleEventsLeft() {
             return deleteIfNoScheduleEventsLeft(p -> p.getType() == ProgramType.BROADCAST || p.getType() == ProgramType.STRAND);
+        }
+        /**
+         * Makes the default assemblage backwards compatible.
+         */
+        public Builder backwardsCompatible(IntegerVersion version) {
+            backwardsCompatibleWith = version;
+            explicitVersion = true;
+            return this;
+        }
+
+        public AssemblageConfig build() {
+            AssemblageConfig config = _build();
+            if (explicitVersion) {
+                config.backwardsCompatible(backwardsCompatibleWith);
+            }
+            return config;
         }
     }
 
