@@ -66,17 +66,17 @@ import static nl.vpro.domain.media.MediaObject.*;
 
 /**
  * Base objects for programs, groups and segments.
- *
+ * <p>
  * Media objects are the most central objects of POMS. A media object  represents one document of meta-information, with all titles, descriptions, tags and
  * all other fields that are associated with 'media' in general.
- *
+ * <p>
  * Also {@link Group}s are an extension, which implies e.g. that things like a {@link GroupType#PLAYLIST} may themselves have similar meta data, though they
  * basicly represent groups of other {@link MediaObject}s, and are not themselves associated with actual audio or video.
- *
+ * <p>
  * But also {@link Program}s themselves can function as a group and therefor have 'members' (e.g. such a member may be a {@link ProgramType#PROMO}).
- *
+ * <p>
  * {@link Segment}s are a special kind of members of only {@link Program}s, and represent a 'segment' from a larger 'program' only.
- *
+ * <p>
  * The purpose of a mediaobject is
  * <ol>
  *     <li>Be a full representation of meta data related to one entity</li>
@@ -698,7 +698,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * Return the available subtitles. These subtitles may not be published.
-     *
+     * <p>
      * In the publisher this list is explicitely cleared before publishing to the API if there are no published locations
      * This is kind of a hack.  May be it is better to have the workflow in AvailableSubtitles also.
      */
@@ -983,9 +983,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * For NPA-403, to provide to ES the needed mapping.
-     *
+     * <p>
      * The result can be calculated from other fields, so this is not available in XML, nor in the default json view.
-     *
+     * <p>
      * Only in the {@link Views.Publisher} version of the json.
      */
     @JsonView({Views.ForwardPublisher.class})
@@ -2813,13 +2813,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Override
     protected abstract String getUrnPrefix();
 
-    // Following are overriden to help FTL and hibernate
+    // Following are overridden to help FTL and hibernate
     // See https://issues.apache.org/jira/browse/FREEMARKER-24
 
     /**
      * <p>
-     * Overriden to help hibernate search (see MediaSearchMappingFactory)
-     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     * Overridden to help hibernate search (see MediaSearchMappingFactory)
+     * Probably has to to with <a href="https://bugs.openjdk.java.net/browse/JDK-8071693">JDK-8071693</a>
      * </p>
      * {@inheritDoc}
      */

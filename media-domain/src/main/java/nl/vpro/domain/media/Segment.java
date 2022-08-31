@@ -172,7 +172,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     /**
      * Returns the parent {@link Program} of this segment. Not that this does not work directly after a simple unmarshall of
      * an individual segment because the full program object simply is not available then.
-     *
+     * <p>
      * Use {@link #getMidRef()} for the mid, and obtain it seperately.
      */
     @Override
@@ -348,6 +348,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
 
     @Override
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+        super.afterUnmarshal(unmarshaller, parent);
         if(parent instanceof Program) {
             this.parent = (Program)parent;
             this.urnRef = null;
@@ -358,7 +359,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
 
     /**
      * The correlation id of a segment currently is the correlation id of its _parent_.
-     *
+     * <p>
      * I forgot why this is important, but I think it may give problems when a segment is converted to a clip and/or vice versa.
      *
      */
