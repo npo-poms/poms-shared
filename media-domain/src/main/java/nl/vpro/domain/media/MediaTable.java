@@ -118,11 +118,21 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
         return this;
     }
 
+    /**
+     * Searches the mediaobject with given mid in the table. This may return a {@link Program}, {@link Group}, or {@link Segment}
+     */
     @SuppressWarnings("unchecked")
     public <T extends MediaObject> Optional<T> find(String mid) {
         for (MediaObject p : Iterables.concat(getProgramTable(), getGroupTable())) {
             if (Objects.equals(p.getMid(), mid)) {
                 return Optional.of((T) p);
+            }
+            if (p instanceof Program) {
+                for (Segment s : ((Program) p).getSegments()) {
+                    if (Objects.equals(s.getMid(), mid)) {
+                        return Optional.of((T) s);
+                    }
+                }
             }
         }
         return Optional.empty();
