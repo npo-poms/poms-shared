@@ -217,8 +217,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         String> websites;
 
 
-    private List<@NotNull @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,139}$")
-        String> twitterrefs;
+    private List<@NotNull @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,139}$") String> twitterrefs;
 
     private SortedSet<@NotNull @Valid LocationUpdate> locations;
 
@@ -243,7 +242,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     //Part of the process of creating a MediaUpdate from a MediaObject
-    protected final void fillFromMedia(M mediaobject, OwnerType owner) {
+    protected final void fillFromMedia(final M mediaobject, final  OwnerType owner) {
         this.mid = mediaobject.getMid();
         this.urn = mediaobject.getUrn();
         this.crids = mediaobject.getCrids();
@@ -315,6 +314,14 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected abstract void fillFrom(M mediaObject, OwnerType ownerType);
 
+
+    /**
+     * <p>The POMS version this XML applies too. This is optional, though some features will only be supported if you explicitly specify a version which is big enough (To ensure backward compatibility). If you don't specify it,  there will be no backwards compatibility.
+     * </p>
+     * <p>
+     *    The main point is that the XML may contain elements which' absent means something. E.g. having no {@code <country} would mean that there should be <em>no</em> country associated with the object.  This was introduced in poms 5.0. If you specify a version before 5.0, all country information will be ignored, and left was it was.
+     * </p>
+     */
     @Override
     @XmlTransient
     public IntegerVersion getVersion() {
