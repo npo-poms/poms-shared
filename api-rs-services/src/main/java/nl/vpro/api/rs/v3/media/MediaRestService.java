@@ -61,9 +61,9 @@ public interface MediaRestService {
 
     /**
      * Lists a number of object directly from the API.
-     *
+     * <p>
      * This only gives examples. It doesn't allow for any filtering, and is not fit for much data. See e.g. {@link #find(MediaForm, String, String, Long, Integer)} for a better use case.
-     *
+     * <p>
      * If you need huge amount of data use {@link #iterate(MediaForm, String, String, Long, Integer)} or {@link #changes(String, String, Long, String, String, Integer, Boolean, Deletes, Tail)}.
      *
      * @param offset the first result. Note that this cannot be too big!
@@ -231,7 +231,7 @@ public interface MediaRestService {
 
     /**
      * Returns all data of a certain profile
-     *
+     * <p>
      *  This can be used to make sitemaps, we might  make a sitemap feature on the page rest service too.
      */
     @POST
