@@ -222,7 +222,6 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
                         } else {
                             log.error("While getting transcode statuses for {} (from {}): {}", mid, next, execute.getStatusLine().toString());
                             execute.getEntity().writeTo(LoggerOutputStream.warn(log));
-
                         }
 
                     }
