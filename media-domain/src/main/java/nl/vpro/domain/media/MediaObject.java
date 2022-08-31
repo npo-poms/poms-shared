@@ -3016,11 +3016,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         if (this.isPersisted()) {
             id = ", id=" + this.getId();
         } else {
-            if (Workflow.API.contains(workflow)) {
-                // probably testing ES or so.
-                id = "";
+            Long thisId = this.getId();
+            if (thisId != null) {
+                id = ", id=[" + this.getId() + "]"; // bracket then signal that not yet persistent
             } else {
-                id = " (not persistent)";
+                if (Workflow.API.contains(workflow)) {
+                    // probably testing ES or so.
+                    id = "";
+                } else {
+                    id = " (not persistent)";
+                }
             }
         }
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
