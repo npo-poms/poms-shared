@@ -104,7 +104,7 @@ public enum OwnerType implements Displayable {
 
 
     /**
-     * Represents ownable data from a otherwise unspecified authorative backend system. E.g. Prepr, NEP.
+     * Represents ownable data from an otherwise unspecified authorative backend system. E.g. Prepr, NEP.
      * @since 5.2
      */
     AUTHORITY("Autoratieve bron"),

@@ -144,7 +144,7 @@ public class MediaObjects {
         TextualObjects.copy(from, to);
 
         to.setAgeRating(from.getAgeRating());
-        to.setAvAttributes(from.getAvAttributes());
+        to.setAvAttributes(AVAttributes.copy(from.getAvAttributes()));
         to.setAVType(from.getAVType());
         to.setAwards(from.getAwards());
 
@@ -210,10 +210,10 @@ public class MediaObjects {
      * @see #copy(MediaObject, MediaObject)
      */
     public static void copyFull(@NonNull MediaObject from, @NonNull MediaObject to) {
-        copy(from, to);
         to.setMid(from.getMid());
         to.setStreamingPlatformStatus(from.getModifiableStreamingPlatformStatus());
 
+        copy(from, to);
         if (to.getClass().isAssignableFrom(from.getClass())) {
             to.setMediaType(from.getMediaType());
             if (to instanceof Program) {
@@ -1197,7 +1197,7 @@ public class MediaObjects {
                     }
                     break;
                 case REALIZED:
-                    // Are there any 'REALIZED' prediction without locations that can be played anyways?
+                    // Are there any 'REALIZED' prediction without locations that can be played anyway?
                     Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))

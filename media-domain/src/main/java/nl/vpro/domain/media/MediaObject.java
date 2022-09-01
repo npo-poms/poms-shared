@@ -2574,7 +2574,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     /**
-     * When true Ceres/Pluto.. needs a restriction update. The underlying field
+     * When true Ceres/Pluto needs a restriction update. The underlying field
      * is managed by Hibernate, and not accessible.
      */
     public boolean isLocationAuthorityUpdate() {
