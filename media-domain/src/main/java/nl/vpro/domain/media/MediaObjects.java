@@ -129,12 +129,12 @@ public class MediaObjects {
     /**
      * Copies most field values from one media object to another.
      * <p>
-     * In principal this should be all fields of which the value logically can exist on more than one mediaobject the same time,
+     * Principally, this should be all fields of which the value logically can exist on more than one mediaobject the same time,
      * so not unique fields like id and mid.
      * <p>
-     * Also membership of groups will not be automatically filled. This would need write access on those objects.
+     * Also, membership of groups will not be automatically filled. This would need write access on those objects.
      * <p>
-     * Scheduleevents, predictions, workflow, subtitles status are not copied too, since this this would not make sense.
+     * ScheduleEvents, workflow, subtitles status are not copied too, since this would not make sense.
      * <p>
      *
      *
@@ -170,6 +170,13 @@ public class MediaObjects {
         to.setIsDubbed(from.isDubbed());
 
         to.setLanguages(from.getLanguages());
+
+        for (Prediction p : from.getPredictions()) {
+            Prediction newPrediction = Prediction.copy(p, to);
+            to.getPredictions().add(newPrediction);
+        }
+        to.setStreamingPlatformStatus(from.getModifiableStreamingPlatformStatus());
+
         to.setLocations(from.getLocations());
 
         //to.setMediaType(from.getMediaType());
@@ -179,7 +186,6 @@ public class MediaObjects {
         to.setPortalRestrictions(from.getPortalRestrictions());
         to.setPortals(from.getPortals());
 
-        to.setPredictions(from.getPredictions());
 
         to.setRelations(from.getRelations());
         to.setReleaseYear(from.getReleaseYear());
