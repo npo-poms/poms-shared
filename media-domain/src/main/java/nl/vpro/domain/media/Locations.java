@@ -38,8 +38,8 @@ public class Locations {
         @NonNull String pubOptie,
         @NonNull OwnerType owner,
         @NonNull Set<OwnerType> replaces) {
-        Prediction prediction = program.getPrediction(platform);
-        StreamingStatus streamingStatus = program.getStreamingPlatformStatus();
+        final Prediction prediction = program.getPrediction(platform);
+        final StreamingStatus streamingStatus = program.getStreamingPlatformStatus();
 
         Encryption encryption;
         if (prediction != null) {
@@ -56,7 +56,7 @@ public class Locations {
         @NonNull Platform platform,
         @NonNull Predicate<Location> locationPredicate,
         @NonNull Instant now) {
-        StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
+        final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
 
         if (platform == Platform.INTERNETVOD) {
             Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
@@ -220,7 +220,7 @@ public class Locations {
         Encryption encryption,
         @NonNull String pubOptie, OwnerType owner,
         @NonNull Set<OwnerType> replaces) {
-        String locationUrl = createLocationUrl(program, platform, encryption, pubOptie);
+        final String locationUrl = createLocationUrl(program, platform, encryption, pubOptie);
         if (locationUrl == null) {
             return program;
         }

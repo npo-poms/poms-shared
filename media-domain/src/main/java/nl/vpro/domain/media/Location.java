@@ -487,9 +487,9 @@ public class Location extends PublishableObject<Location>
             if (mediaObject == null) {
                 throw new IllegalStateException("Location does not have a parent mediaobject");
             }
-            Prediction existing = mediaObject.getPrediction(platform);
+            final Prediction existing = mediaObject.getPrediction(platform);
             if (create) {
-                Prediction rec = mediaObject.findOrCreatePrediction(platform);
+                final Prediction rec = mediaObject.findOrCreatePrediction(platform);
                 if (existing == null) {
                     log.info("Implicitly created prediction record for {}", platform);
                     Embargos.copy(Embargos.of(publishStart, publishStop), rec);

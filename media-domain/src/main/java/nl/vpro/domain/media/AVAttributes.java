@@ -83,6 +83,7 @@ public class AVAttributes implements Serializable {
     /**
      * Copy constructor
      */
+    @SuppressWarnings("CopyConstructorMissesField")
     public AVAttributes(AVAttributes source) {
         this(
             source.bitrate,
