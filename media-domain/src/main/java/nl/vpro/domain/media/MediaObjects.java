@@ -137,7 +137,7 @@ public class MediaObjects {
      * ScheduleEvents, workflow, subtitles status are not copied too, since this would not make sense.
      * <p>
      *
-     *
+     * @see #copyFull(MediaObject, MediaObject)
      */
     public static void copy(@NonNull MediaObject from, @NonNull MediaObject to) {
         Embargos.copy(from, to);
@@ -175,7 +175,6 @@ public class MediaObjects {
             Prediction newPrediction = Prediction.copy(p, to);
             to.getPredictions().add(newPrediction);
         }
-        to.setStreamingPlatformStatus(from.getModifiableStreamingPlatformStatus());
 
         to.setLocations(from.getLocations());
 
@@ -204,14 +203,17 @@ public class MediaObjects {
 
 
     /**
-     * A more full copy, also copying field that you could normally not copy, like MID.
+     * A more full copy, also copying field that you could normally would not copy, like MID.
      * <p>
-     * The assumption is that both objects are not yet persistent
+     * The assumption is that both objects are not yet persistent, or e.g. a type conversion is happening
      * @since 5.11
+     * @see #copy(MediaObject, MediaObject)
      */
     public static void copyFull(@NonNull MediaObject from, @NonNull MediaObject to) {
         copy(from, to);
         to.setMid(from.getMid());
+        to.setStreamingPlatformStatus(from.getModifiableStreamingPlatformStatus());
+
         if (to.getClass().isAssignableFrom(from.getClass())) {
             to.setMediaType(from.getMediaType());
             if (to instanceof Program) {
