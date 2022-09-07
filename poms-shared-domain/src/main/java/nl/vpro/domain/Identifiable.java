@@ -6,7 +6,7 @@ package nl.vpro.domain;
 
 import java.io.Serializable;
 
-public interface Identifiable<I extends Serializable> {
+public interface Identifiable<I extends Serializable & Comparable<I>> {
 
     I getId();
 

@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.support;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.Objects;
@@ -16,6 +18,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.i18n.Locales;
 import nl.vpro.validation.NoHtml;
@@ -24,11 +27,12 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @Entity
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "tagType", namespace = Xmlns.MEDIA_NAMESPACE)
-public class Tag implements Serializable, Comparable<Tag> {
+public class Tag implements Serializable, Comparable<Tag>, Identifiable<Long> {
     private static final long serialVersionUID = 0L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     private Long id;
 
     @Column(nullable = false, unique = true)
