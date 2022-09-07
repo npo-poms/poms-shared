@@ -671,21 +671,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (o == this) {
             return 0;
         }
-        Instant otherStart = o.start;
-        if (start != null
-            && otherStart != null
-            && (!start.equals(otherStart))) {
-
-            return start.compareTo(o.start);
-        }
-
-        Channel otherChannel = o.getChannel();
-        if (getChannel() != null && otherChannel != null) {
-            return getChannel().ordinal() - otherChannel.ordinal();
-        } else {
-            return comparing(ScheduleEvent::getStartInstant, Comparator.nullsLast(Comparator.naturalOrder()))
-                .thenComparing(ScheduleEvent::getChannel, Comparator.nullsLast(Comparator.naturalOrder())).compare(this, o);
-        }
+        return getId().compareTo(o.getId());
     }
 
     @Override

@@ -4,13 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Locale;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.xml.bind.LocaleAdapter;
@@ -23,7 +21,9 @@ import static nl.vpro.i18n.Locales.DUTCH;
  */
 @XmlRootElement(name = "id")
 @XmlAccessorType(XmlAccessType.NONE)
-public class SubtitlesId implements Serializable {
+public class SubtitlesId implements Serializable, Comparable<SubtitlesId> {
+
+    private static final long serialVersionUID = -965983441644838265L;
 
     @XmlAttribute
     @Getter
@@ -84,9 +84,13 @@ public class SubtitlesId implements Serializable {
         return mid + "\t" + type + "\t" + language;
     }
 
-
-    // helps https://github.com/mplushnikov/lombok-intellij-plugin/issues/1018
-    public static class Builder {
+    @Override
+    public int compareTo(SubtitlesId o) {
+        return Comparator.comparing(SubtitlesId::getMid)
+            .thenComparing(SubtitlesId::getType)
+            .thenComparing(p->p.getLanguage().toString())
+            .compare(this, o);
 
     }
+
 }
