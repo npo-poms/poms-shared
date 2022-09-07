@@ -5,22 +5,20 @@ import lombok.NonNull;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.TimeUtils;
+
+import static java.util.Comparator.comparing;
 
 /**
  * @author Michiel Meeuwissen
  */
 @Embeddable
-public class ScheduleEventIdentifier implements Serializable {
+public class ScheduleEventIdentifier implements Serializable, Comparable<ScheduleEventIdentifier> {
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -95,4 +93,22 @@ public class ScheduleEventIdentifier implements Serializable {
 
     }
 
+    @Override
+    public int compareTo(ScheduleEventIdentifier o) {
+        Instant otherStart = o.start;
+        if (start != null
+            && otherStart != null
+            && (!start.equals(otherStart))) {
+
+            return start.compareTo(o.start);
+        }
+
+        Channel otherChannel = o.getChannel();
+        if (getChannel() != null && otherChannel != null) {
+            return getChannel().ordinal() - otherChannel.ordinal();
+        } else {
+            return comparing(ScheduleEventIdentifier::getStartInstant, Comparator.nullsLast(Comparator.naturalOrder()))
+                .thenComparing(ScheduleEventIdentifier::getChannel, Comparator.nullsLast(Comparator.naturalOrder())).compare(this, o);
+        }
+    }
 }
