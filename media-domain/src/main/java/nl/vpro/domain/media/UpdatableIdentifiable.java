@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 import nl.vpro.domain.Identifiable;
 
-public interface UpdatableIdentifiable<I extends Serializable, T> extends Identifiable<I> , Updatable<T> {
+public interface UpdatableIdentifiable<I extends Serializable & Comparable<I>, T> extends Identifiable<I> , Updatable<T> {
 
 
 }
