@@ -699,7 +699,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     /**
      * Return the available subtitles. These subtitles may not be published.
      * <p>
-     * In the publisher this list is explicitely cleared before publishing to the API if there are no published locations
+     * In the publisher this list is explicitly cleared before publishing to the API if there are no published locations
      * This is kind of a hack.  May be it is better to have the workflow in AvailableSubtitles also.
      */
     @XmlElement(name = "availableSubtitles")

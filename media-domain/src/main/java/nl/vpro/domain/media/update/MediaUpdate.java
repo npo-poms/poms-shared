@@ -159,7 +159,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     protected List<@NotNull @Valid ImageUpdate> images;
 
     /**
-     * This represent the editable intentions
+     * This represents the editable intentions
      * Only display the intentions for the given owner
      * (more intentions might be present in the metadata).
      */
