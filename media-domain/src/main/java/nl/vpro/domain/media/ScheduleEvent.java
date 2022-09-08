@@ -34,7 +34,6 @@ import nl.vpro.persistence.LocalDateToDateConverter;
 import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.*;
 
-import static java.util.Comparator.comparing;
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 
@@ -90,6 +89,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     TextualObject<ScheduleEventTitle, ScheduleEventDescription, ScheduleEvent>,
     Child<Program> {
 
+    private static final long serialVersionUID = 2107980433596776633L;
     @Id
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -579,11 +579,18 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Override
     public ScheduleEventIdentifier getId() {
         if (channel != null && start != null) {
-            return new ScheduleEventIdentifier(channel, start);
+            return createId();
         } else {
             // schedule event has no proper id (yet?)
             return  null;
         }
+    }
+
+    protected ScheduleEventIdentifier createId() {
+        ScheduleEventIdentifier id = new ScheduleEventIdentifier(); // avoid @NonNull validation
+        id.start = start;
+        id.channel = channel;
+        return id;
     }
 
     @XmlAttribute
@@ -671,7 +678,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if (o == this) {
             return 0;
         }
-        return getId().compareTo(o.getId());
+        return createId().compareTo(o.createId());
     }
 
     @Override
