@@ -2,12 +2,14 @@ package nl.vpro.domain.media;
 
 import java.io.Serializable;
 
+import java.util.Comparator;
+
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Embeddable
-public class RelationDefinitionIdentifier implements Serializable {
+public class RelationDefinitionIdentifier implements Serializable, Comparable<RelationDefinitionIdentifier> {
 
     private static final long serialVersionUID = -2249857834449241817L;
 
@@ -71,5 +73,12 @@ public class RelationDefinitionIdentifier implements Serializable {
     @Override
     public String toString() {
         return "RelationDefinitionType " + broadcaster + "/" + type;
+    }
+
+    @Override
+    public int compareTo(RelationDefinitionIdentifier o) {
+        return Comparator.comparing(RelationDefinitionIdentifier::getBroadcaster, Comparator.nullsLast(Comparator.naturalOrder()))
+            .thenComparing(RelationDefinitionIdentifier::getType, Comparator.nullsLast(Comparator.naturalOrder()))
+            .compare(this, o);
     }
 }
