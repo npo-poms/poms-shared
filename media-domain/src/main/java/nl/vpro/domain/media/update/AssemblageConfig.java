@@ -49,6 +49,7 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean imageMetaData = false;
 
+    @lombok.Builder.Default
     Boolean copyPredictions = null;
 
     @lombok.Builder.Default
@@ -63,6 +64,7 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean ratingsUpdate = true;
 
+    @lombok.Builder.Default
     Boolean copyTwitterRefs = null;
 
     @lombok.Builder.Default
