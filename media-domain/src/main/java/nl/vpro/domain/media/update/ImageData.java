@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.activation.DataHandler;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
@@ -18,6 +21,8 @@ public class ImageData {
     @XmlElement
     @XmlMimeType("application/octet-stream")
     @NotNull(message = "provide image data")
+    @Getter
+    @Setter
     private DataHandler data;
 
     public ImageData() {
@@ -28,13 +33,7 @@ public class ImageData {
         this.data = data;
     }
 
-    public DataHandler getData() {
-        return data;
-    }
 
-    public void setData(DataHandler data) {
-        this.data = data;
-    }
 
     @Override
     public String toString() {
