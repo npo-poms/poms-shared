@@ -4,7 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -20,8 +21,6 @@ import javax.validation.constraints.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.image.backend.BackendImage;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -32,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.image.MutableMetadata;
+import nl.vpro.domain.image.backend.BackendImage;
 import nl.vpro.domain.image.backend.BackendImageMetadata;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
@@ -101,9 +101,11 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @XmlElement(required = true)
     @NotNull(message = "provide title for imageUpdate")
     @Size.List({@Size(max = 255), @Size(min = 1)})
+    @Setter
     private String title;
 
     @XmlElement(required = false)
+    @Setter
     private String description;
 
     @XmlElement
@@ -120,11 +122,13 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @NoHtml
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Setter
     private String credits;
 
     @URI(mustHaveScheme = true, minHostParts = 2, groups = {PomsValidatorGroup.class})
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Setter
     private String source;
 
     @XmlElement
@@ -132,15 +136,18 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Setter
     private String sourceName;
 
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
     @Valid
+    @Setter
     private License license;
 
     @ReleaseDate()
     @XmlElement
+    @Setter
     private String date;
 
     @Temporal(TemporalType.TIME)
@@ -149,6 +156,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Setter
     protected java.time.Duration offset;
 
     /**
@@ -206,40 +214,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
 
     }
 
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    @Override
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
-
-    @Override
-    public void setLicense(License license) {
-        this.license = license;
-    }
-
-    @Override
-    public void setCredits(@NoHtml String credits) {
-        this.credits = credits;
-    }
-
-    @Override
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     @Override
     public void setLastModifiedInstant(Instant lastModified) {
