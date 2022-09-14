@@ -24,6 +24,7 @@ public class Not extends AbstractNot<Page> {
     @XmlElements({
             @XmlElement(name = "and", type = And.class),
             @XmlElement(name = "or", type = Or.class),
+            @XmlElement(name = "not", type = Not.class),
             @XmlElement(name = "broadcaster", type = BroadcasterConstraint.class),
             @XmlElement(name = "type", type = PageTypeConstraint.class),
             @XmlElement(name = "portal", type = PortalConstraint.class),

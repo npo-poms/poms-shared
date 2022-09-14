@@ -6,6 +6,9 @@ package nl.vpro.domain.api.profile;
 
 import java.util.Locale;
 
+import nl.vpro.domain.constraint.page.*;
+import nl.vpro.domain.page.Page;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -61,5 +64,29 @@ public class ProfileDefinitionTest {
         assertThat(r.applies()).isFalse();
         assertThat(r.getDescription().getValue()).isEqualTo("Never matches");
         assertThat(r.getReason()).isEqualTo("AlwaysFalse");
+    }
+
+    @Test
+    void testPageProfileWithNot() {
+        nl.vpro.domain.constraint.page.Filter pageFilter = new nl.vpro.domain.constraint.page.Filter();
+        pageFilter.setConstraint(PageConstraints.and(
+            new PortalConstraint("VPRONL"),
+            new Not(new SectionConstraint("/vpronl/pers"))
+        ));
+        ProfileDefinition<Page> in = new ProfileDefinition<>(pageFilter, null);
+        ProfileDefinition<Page> out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><local:profileDefinition xmlns:local=\"uri:local\" xmlns=\"urn:vpro:api:profile:2013\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:m=\"urn:vpro:media:2009\">\n" +
+                "    <page:filter>\n" +
+                "      <page:and>\n" +
+                "        <page:portal>VPRONL</page:portal>\n" +
+                "        <page:not>\n" +
+                "          <page:section>/vpronl/pers</page:section>\n" +
+                "        </page:not>\n" +
+                "      </page:and>\n" +
+                "    </page:filter>\n" +
+                "  </local:profileDefinition>\n" +
+                "  ");
+        assertThat(out.getFilter()).isNotNull();
+        assertThat(out.getFilter()).isInstanceOf(AbstractFilter.class);
     }
 }
