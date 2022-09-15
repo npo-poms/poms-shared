@@ -14,10 +14,8 @@ class DomainObjectsTest {
     public void appendCanonicalFilePathToBuilder() {
         StringBuilder builder = new StringBuilder();
         DomainObjects.appendCanonicalFilePath(1234, builder);
-        assertThat(builder.toString().replace(File.separatorChar, '/')).isEqualTo("/12/34");
+        assertThat(builder.toString().replace(File.separatorChar, '/')).isEqualTo("12/34/");
     }
-
-
 
     @Test
     public void appendCanonicalFilePathToPath() {

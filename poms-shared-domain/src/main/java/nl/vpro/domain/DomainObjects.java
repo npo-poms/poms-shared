@@ -34,7 +34,7 @@ public class DomainObjects {
     }
 
     public static void appendCanonicalFilePath(@NonNull final String id, @NonNull StringBuilder builder) {
-        appendCanonicalFilePath(id, (p) -> builder.append(File.separator).append(p));
+        appendCanonicalFilePath(id, (p) -> builder.append(p).append(File.separator));
     }
 
     public static Path appendCanonicalFilePath(long id, @NonNull Path path) {
