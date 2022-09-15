@@ -33,7 +33,7 @@ public class ReusableImageStream extends ImageStream {
     private File file = null;
 
     public ReusableImageStream(InputStream stream) {
-        super(stream);
+        this(stream, null);
     }
 
     public ReusableImageStream(InputStream stream, Instant lastModified) {

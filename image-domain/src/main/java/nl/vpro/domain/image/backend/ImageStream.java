@@ -12,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
 
+import javax.validation.constraints.Min;
+
 /**
  * An image stream represents the actual blob data for an image.
  * <p>
@@ -40,24 +42,35 @@ public class ImageStream implements AutoCloseable {
 
     protected Runnable onClose;
 
+    protected ImageStream(InputStream stream, Instant lastModified) {
+        this.stream = stream;
+        this.lastModified = lastModified;
+        this.length = -1;
+    }
+
     public ImageStream(InputStream stream, long length, Instant lastModified) {
         this(stream, length, lastModified, null,  null, null, null);
     }
 
-    public ImageStream(InputStream stream, Instant lastModified) {
-        this(stream, -1, lastModified);
+    @SneakyThrows
+    public static ImageStream of(InputStream stream, Instant lastModified) {
+        return new ReusableImageStream(stream, lastModified);
     }
 
-    public ImageStream(InputStream stream) {
-        this(stream, null);
+    public static ImageStream of(InputStream stream) {
+        return of(stream, null);
     }
 
-    public ImageStream(File file) throws IOException {
-        this(file.toPath());
+    public static ImageStream of(File file) throws IOException {
+        return of(file.toPath());
     }
 
-    public ImageStream(Path file) throws IOException {
-        this(Files.newInputStream(file), Files.size(file), Files.getLastModifiedTime(file).toInstant());
+    public static ImageStream of(Path file) throws IOException {
+        if (Files.exists(file)) {
+            return new ImageStream(Files.newInputStream(file), Files.size(file), Files.getLastModifiedTime(file).toInstant());
+        } else {
+            return of(new byte[0]);
+        }
     }
 
     public static ImageStream of(URL url) throws IOException {
@@ -71,7 +84,7 @@ public class ImageStream implements AutoCloseable {
 
 
     @lombok.Builder(builderMethodName = "imageStreamBuilder")
-    private ImageStream(InputStream stream, long length, Instant lastModified, String contentType, String etag, URI url, Runnable onClose) {
+    private ImageStream(InputStream stream, @Min(0) long length, Instant lastModified, String contentType, String etag, URI url, Runnable onClose) {
         this.stream = stream;
         this.length = length;
         this.lastModified = lastModified;
