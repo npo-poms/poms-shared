@@ -1,8 +1,7 @@
 package nl.vpro.domain.image;
 
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -16,7 +15,7 @@ import nl.vpro.validation.URI;
 
 /**
  * All our known image types implement at least this. An immutable representation of its metadata.
- *
+ * <p>
  * It does not contain any information about how to display it.
  *
  * @author Michiel Meeuwissen
@@ -67,13 +66,13 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
      * @since 5.34
      */
     default List<@CRID String> getCrids() {
-        return Arrays.asList();
+        return Collections.emptyList();
     }
 
     /**
      * When making an implementation of {@link Metadata}, you can define a {@link lombok.Builder} which may
      * implement this interface.
-     *
+     * <p>
      * This provides then {@link #from(Metadata)} which is useful to quickly filling it, using different implementations
      *
      * @since 5.32
