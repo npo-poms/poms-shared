@@ -34,6 +34,8 @@ public enum ImageFormat {
     WEBP("image/webp", "webp");
 
 
+    public static final ImageFormat AS_IS = null;
+
     static final Map<String, String> MAPPING = new HashMap<>();
     static {
         MAPPING.put("image/pjpeg", "image/jpeg");
