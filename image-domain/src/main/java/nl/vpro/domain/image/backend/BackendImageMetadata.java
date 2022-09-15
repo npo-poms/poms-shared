@@ -11,9 +11,11 @@ import org.apache.commons.lang3.StringUtils;
 import nl.vpro.domain.ChangeReport;
 import nl.vpro.domain.image.*;
 
+import static nl.vpro.domain.image.backend.BackendImage.BASE_URN;
+
 /**
  * Extends {@link MutableMetadata} to include more information about the image, and its original source.
- *
+ * <p>
  * This targets mostly at fields that are  need to <em>serve</em> the image.
  *
  * @author Michiel Meeuwissen
@@ -36,7 +38,6 @@ public interface BackendImageMetadata<T extends BackendImageMetadata<T>>  extend
 
     ImageFormat getImageFormat();
 
-
     default String getMimeType() {
         ImageFormat format = getImageFormat();
         return format == null ? null : format.getMimeType();
@@ -46,6 +47,11 @@ public interface BackendImageMetadata<T extends BackendImageMetadata<T>>  extend
         if (StringUtils.isBlank(getDescription())) {
             setDescription(getTitle());
         }
+    }
+
+    default Long getId() {
+        String uri = getImageUri();
+        return uri == null ? null : Long.parseLong(uri.substring(BASE_URN.length()));
     }
 
 
