@@ -18,8 +18,8 @@ jobs:
           java-version: 8
       - name: Build with Maven
         run: |
-          echo "ref: ${GITHUB_REF}"
-          mvn -B -Dchangelist=-${GITHUB_REF##*/} clean test
+          echo "ref: ${GITHUB_REF} head ref: ${GITHUB_HEAD_REF}"
+          mvn -B -Dchangelist=-${GITHUB_HEAD_REF##*/} clean test
       - name: Publish Test Report
         uses: scacap/action-surefire-report@v1
         if: ${{ success() || failure()}}
