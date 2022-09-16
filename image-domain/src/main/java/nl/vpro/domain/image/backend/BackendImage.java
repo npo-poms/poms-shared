@@ -10,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.URI;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.time.Instant;
 
 import javax.activation.DataHandler;
@@ -41,7 +39,10 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 /**
  * <p>This is the image object as used by <a href="https://images.poms.omroep.nl"> poms image server</a></p>
  * <p>
- * It is the database entity, and also has an XML/Json representation, but this is currently not exposed in public API's.</p>
+ * It is the database entity, and also has an XML/Json representation, but this is currently not exposed in public API's.
+ * <p>
+ * It can also be used to represent cached converts
+ * </p>
  *
  */
 @SuppressWarnings("WSReferenceInspection")
@@ -196,16 +197,9 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
     @Setter
     private String credits;
 
-    @Lob
-    @XmlTransient
-    private Blob data;
-
     @Transient
     @XmlTransient
-    @Setter
-    private InputStream cachedInputStream;
-
-
+    private ReusableImageStream imageStream;
     /**
      * @since 5.10
      */
@@ -287,12 +281,12 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
     }
 
     @XmlTransient
-    public Blob getBlob() {
-        return data;
+    public ImageStream getImageStream() {
+        return imageStream;
     }
 
-    public BackendImage setBlob(Blob data) {
-        this.data = data;
+    public BackendImage setImageStream(ImageStream data) {
+        this.imageStream = ReusableImageStream.of(data);
         return this;
     }
 
@@ -301,25 +295,13 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
     public DataHandler getData() {
         return new DataHandler(new DataSource() {
             @Override
-            public InputStream getInputStream() throws IOException {
-                if(cachedInputStream == null) {
-                    try {
-                        return data.getBinaryStream();
-                    } catch(SQLException e) {
-                        throw new IOException(e);
-                    }
-                }
-
-                return cachedInputStream;
+            public InputStream getInputStream() {
+                return BackendImage.this.getImageStream().getStream();
             }
 
             @Override
             public OutputStream getOutputStream() throws IOException {
-                try {
-                    return data.setBinaryStream(1);
-                } catch(SQLException e) {
-                    throw new IOException(e);
-                }
+                throw new UnsupportedOperationException("Immutable blob input");
             }
 
             @Override
