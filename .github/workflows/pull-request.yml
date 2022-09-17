@@ -1,6 +1,11 @@
 ---
 name: build pull request
 
+# Builds a pull request, basing the artifact name on the branch name on which it is based, so it can be published
+# without breaking things, and enabled to build other pull requests depending on the current one.
+
+# For e.g. if you make a pull request based on a branch feature/foobar on the main branch which is 6.1-SNAPSHOT,
+# then it will be built and published as 6.1.foobar-SNAPSHOT
 on:
   pull_request:
     branches: [main]
