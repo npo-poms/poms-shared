@@ -7,8 +7,6 @@ on:
 
 jobs:
   build:
-    # would be a build by feature.yaml already
-    if: ${{ !startsWith(github.ref, 'refs/heads/feature/')}}
     runs-on: ubuntu-latest
     env:
       MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
@@ -21,9 +19,16 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 8
+          cache: 'maven'
+          server-id: vpro-ossrh
+          server-username: SONATYPE_USERNAME
+          server-password: SONATYPE_PASSWORD
       - name: Build with Maven
         run: |
-          mvn -B -P"npm" -U -fae test package
+          mvn -B -Dchangelist=.${GITHUB_HEAD_REF##*/}-SNAPSHOT -P"npm" -U -fae deploy
+        env:
+          SONATYPE_USERNAME: vpro
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2.0.0
         if: (success() || failure())
