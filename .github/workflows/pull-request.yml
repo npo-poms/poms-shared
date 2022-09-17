@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    if: ${{ !startsWith(GITHUB_HEAD_REF, 'feature/')}}
+    if: ${{ !startsWith(env.GITHUB_HEAD_REF, 'feature/')}}
     runs-on: ubuntu-latest
     env:
       MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
