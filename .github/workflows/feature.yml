@@ -26,6 +26,7 @@ jobs:
           java-version: 8
       - name: Build with Maven
         run: |
+          cat /home/runner/.m2/settings.xml
           mvn -B -Dchangelist=.${GITHUB_REF##*/}-SNAPSHOT -P"npm" -U -fae deploy
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2.0.0
