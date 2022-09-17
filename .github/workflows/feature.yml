@@ -1,5 +1,5 @@
 ---
-name: build pull request
+name: build feature branch
 
 on:
   push:
