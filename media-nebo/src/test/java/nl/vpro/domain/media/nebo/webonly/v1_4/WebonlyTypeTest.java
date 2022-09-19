@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.nebo.webonly.v1_4;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.io.*;
 import java.time.Duration;
 import java.util.Arrays;
@@ -25,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * @author Michiel Meeuwissen
  */
+@Log4j2
 public class WebonlyTypeTest {
 
     public static final Validator schemaValidator;
@@ -33,9 +36,9 @@ public class WebonlyTypeTest {
         SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
         Schema schema = null;
         try {
-            schema = factory.newSchema(new Source[]{new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/nebo/webonly_import_1.2.xsd"))});
+            schema = factory.newSchema(new Source[]{new StreamSource(WebonlyTypeTest.class.getResourceAsStream("/nl/vpro/domain/media/nebo/webonly_import_1.2.xsd"))});
         } catch(SAXException e) {
-            e.printStackTrace(System.err);
+            log.info(e.getMessage(), e);
         }
         schemaValidator = schema.newValidator();
 
