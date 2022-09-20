@@ -9,6 +9,10 @@ public class ChangeReport {
     boolean hasChanges = false;
 
 
+    public void reset() {
+        hasChanges = false;
+    }
+
     public boolean hasChanges() {
         return hasChanges;
     }
