@@ -68,9 +68,10 @@ public class ImageStream implements AutoCloseable {
         return of(file.toPath());
     }
 
-    public static ImageStream of(Path file) throws IOException {
+    public static ImageStream of(final Path file) throws IOException {
         if (Files.exists(file)) {
-            return new ImageStream(Files.newInputStream(file), Files.size(file), Files.getLastModifiedTime(file).toInstant());
+            return new ImageStream(
+                Files.newInputStream(file), Files.size(file), Files.getLastModifiedTime(file).toInstant());
         } else {
             return of(new byte[0]);
         }
@@ -87,7 +88,7 @@ public class ImageStream implements AutoCloseable {
 
 
     @lombok.Builder(builderMethodName = "imageStreamBuilder")
-    private ImageStream(
+    protected ImageStream(
         @NonNull InputStream stream,
         @Min(0) long length,
         @Nullable Instant lastModified,

@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -15,9 +16,10 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 
 import javax.imageio.ImageIO;
+import javax.validation.constraints.Min;
 
 import org.apache.commons.io.IOUtils;
-import org.checkerframework.checker.nullness.qual.PolyNull;
+import org.checkerframework.checker.nullness.qual.*;
 
 import nl.vpro.domain.image.UnsupportedImageFormatException;
 
@@ -42,9 +44,21 @@ public class ReusableImageStream extends ImageStream {
         super(stream, lastModified);
     }
 
-    @lombok.Builder
+
     public ReusableImageStream(InputStream stream, long length, Instant lastModified) {
         super(stream, length, lastModified);
+    }
+
+    @lombok.Builder
+    private ReusableImageStream(
+        @NonNull InputStream stream,
+        @Min(0) long length,
+        @Nullable Instant lastModified,
+        @Nullable String contentType,
+        @Nullable String etag,
+        @Nullable URI url,
+        @Nullable Runnable onClose) {
+        super(stream, length, lastModified, contentType, etag, url, onClose);
     }
 
     public ReusableImageStream(ImageStream stream) {
@@ -92,8 +106,23 @@ public class ReusableImageStream extends ImageStream {
             Files.deleteIfExists(file);
         }
     }
+     @Override
+     public ReusableImageStream withMetaData(BackendImageMetadata<?> metaData) {
+         ReusableImageStream reusableImageStream = ReusableImageStream.builder()
+             .stream(stream)
+             .url(url)
+             .onClose(onClose)
+             .length(length)
+             .etag(etag == null ? metaData.getEtag() : etag)
+             .contentType(metaData.getMimeType())
+             .lastModified(lastModified == null ? metaData.getLastModifiedInstant() : lastModified)
+             .build();
+         reusableImageStream.file = file;
+         return reusableImageStream;
+     }
+
     public void copyImageInfoTo(BackendImageMetadata<?> image) {
-         final ImageInfo imageInfo = new ImageInfo();
+        final ImageInfo imageInfo = new ImageInfo();
         image.setSize(getLength());
         imageInfo.setInput(getStream());
         if (imageInfo.check()) {
