@@ -71,7 +71,10 @@ public class ImageStream implements AutoCloseable {
     public static ImageStream of(final Path file) throws IOException {
         if (Files.exists(file)) {
             return new ImageStream(
-                Files.newInputStream(file), Files.size(file), Files.getLastModifiedTime(file).toInstant());
+                Files.newInputStream(file),
+                Files.size(file),
+                Files.getLastModifiedTime(file).toInstant()
+            );
         } else {
             return of(new byte[0]);
         }
@@ -79,7 +82,11 @@ public class ImageStream implements AutoCloseable {
 
     public static ImageStream of(URL url) throws IOException {
         URLConnection connection = url.openConnection();
-        return new ImageStream(connection.getInputStream(), connection.getContentLength(), Instant.ofEpochMilli(connection.getLastModified()));
+        return new ImageStream(
+            connection.getInputStream(),
+            connection.getContentLength(),
+            Instant.ofEpochMilli(connection.getLastModified())
+        );
     }
 
     public static ReusableImageStream of(byte[] bytes) throws IOException {

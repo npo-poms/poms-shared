@@ -44,7 +44,6 @@ public class ReusableImageStream extends ImageStream {
         super(stream, lastModified);
     }
 
-
     public ReusableImageStream(InputStream stream, long length, Instant lastModified) {
         super(stream, length, lastModified);
     }
