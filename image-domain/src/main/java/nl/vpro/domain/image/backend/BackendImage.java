@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.AbstractPublishableObject;
+import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.image.ImageFormat;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.support.MutableOwnable;
@@ -76,7 +77,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder", buildMethodName= "_build")
 @Slf4j
-public class BackendImage extends AbstractPublishableObject<BackendImage> implements BackendImageMetadata<BackendImage>, Serializable, MutableOwnable {
+public class BackendImage extends AbstractPublishableObject<BackendImage> implements BackendImageMetadata<BackendImage>, Identifiable<Long>, Serializable,MutableOwnable {
     private static final long serialVersionUID = -140942203904508506L;
 
     public static final String BASE_URN = "urn:vpro:image:";
