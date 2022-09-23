@@ -34,7 +34,7 @@ public class NEPGatekeeperServiceImplITest {
 
     @Test
     public void test() throws NEPException {
-        @NonNull Iterator<WorkflowExecution> i = gatekeeperService.getTranscodeStatuses(null, null, Instant.now().minus(Duration.ofHours(2)), 200L);
+        @NonNull Iterator<WorkflowExecution> i = gatekeeperService.getTranscodeStatuses(null, null, Instant.now().minus(Duration.ofHours(20)), 200L);
         while (i.hasNext()) {
             log.info("{}", i.next());
         }
