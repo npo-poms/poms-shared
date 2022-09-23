@@ -14,6 +14,9 @@ import java.time.Instant;
 
 import javax.validation.constraints.Min;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 /**
  * An image stream represents the actual blob data for an image.
  * <p>
@@ -65,9 +68,13 @@ public class ImageStream implements AutoCloseable {
         return of(file.toPath());
     }
 
-    public static ImageStream of(Path file) throws IOException {
+    public static ImageStream of(final Path file) throws IOException {
         if (Files.exists(file)) {
-            return new ImageStream(Files.newInputStream(file), Files.size(file), Files.getLastModifiedTime(file).toInstant());
+            return new ImageStream(
+                Files.newInputStream(file),
+                Files.size(file),
+                Files.getLastModifiedTime(file).toInstant()
+            );
         } else {
             return of(new byte[0]);
         }
@@ -75,7 +82,11 @@ public class ImageStream implements AutoCloseable {
 
     public static ImageStream of(URL url) throws IOException {
         URLConnection connection = url.openConnection();
-        return new ImageStream(connection.getInputStream(), connection.getContentLength(), Instant.ofEpochMilli(connection.getLastModified()));
+        return new ImageStream(
+            connection.getInputStream(),
+            connection.getContentLength(),
+            Instant.ofEpochMilli(connection.getLastModified())
+        );
     }
 
     public static ReusableImageStream of(byte[] bytes) throws IOException {
@@ -84,7 +95,14 @@ public class ImageStream implements AutoCloseable {
 
 
     @lombok.Builder(builderMethodName = "imageStreamBuilder")
-    private ImageStream(InputStream stream, @Min(0) long length, Instant lastModified, String contentType, String etag, URI url, Runnable onClose) {
+    protected ImageStream(
+        @NonNull InputStream stream,
+        @Min(0) long length,
+        @Nullable Instant lastModified,
+        @Nullable String contentType,
+        @Nullable String etag,
+        @Nullable URI url,
+        @Nullable Runnable onClose) {
         this.stream = stream;
         this.length = length;
         this.lastModified = lastModified;

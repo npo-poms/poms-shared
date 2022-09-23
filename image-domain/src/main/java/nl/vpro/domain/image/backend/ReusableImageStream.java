@@ -8,14 +8,18 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 
 import javax.imageio.ImageIO;
+import javax.validation.constraints.Min;
 
 import org.apache.commons.io.IOUtils;
-import org.checkerframework.checker.nullness.qual.PolyNull;
+import org.checkerframework.checker.nullness.qual.*;
 
 import nl.vpro.domain.image.UnsupportedImageFormatException;
 
@@ -30,7 +34,7 @@ public class ReusableImageStream extends ImageStream {
 
     private static final String HASH_ALGORITHM = "SHA1";
 
-    private File file = null;
+    private Path file = null;
 
     public ReusableImageStream(InputStream stream) {
         this(stream, null);
@@ -40,9 +44,20 @@ public class ReusableImageStream extends ImageStream {
         super(stream, lastModified);
     }
 
-    @lombok.Builder
     public ReusableImageStream(InputStream stream, long length, Instant lastModified) {
         super(stream, length, lastModified);
+    }
+
+    @lombok.Builder
+    private ReusableImageStream(
+        @NonNull InputStream stream,
+        @Min(0) long length,
+        @Nullable Instant lastModified,
+        @Nullable String contentType,
+        @Nullable String etag,
+        @Nullable URI url,
+        @Nullable Runnable onClose) {
+        super(stream, length, lastModified, contentType, etag, url, onClose);
     }
 
     public ReusableImageStream(ImageStream stream) {
@@ -63,8 +78,8 @@ public class ReusableImageStream extends ImageStream {
     @Override
     public InputStream getStream() {
         try {
-            return new FileInputStream(getFile());
-        } catch(FileNotFoundException e) {
+            return Files.newInputStream(getFile());
+        } catch(IOException e) {
             throw new IllegalStateException(e.getMessage());
         }
     }
@@ -75,7 +90,11 @@ public class ReusableImageStream extends ImageStream {
         if(length > -1) {
             return length;
         } else {
-            return getFile().length();
+            try {
+                return Files.size(getFile());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -83,12 +102,26 @@ public class ReusableImageStream extends ImageStream {
     protected void finalize() throws Throwable {
         super.finalize();
         if(file != null) {
-            //noinspection ResultOfMethodCallIgnored
-            file.delete();
+            Files.deleteIfExists(file);
         }
     }
+     @Override
+     public ReusableImageStream withMetaData(BackendImageMetadata<?> metaData) {
+         ReusableImageStream reusableImageStream = ReusableImageStream.builder()
+             .stream(stream)
+             .url(url)
+             .onClose(onClose)
+             .length(length)
+             .etag(etag == null ? metaData.getEtag() : etag)
+             .contentType(metaData.getMimeType())
+             .lastModified(lastModified == null ? metaData.getLastModifiedInstant() : lastModified)
+             .build();
+         reusableImageStream.file = file;
+         return reusableImageStream;
+     }
+
     public void copyImageInfoTo(BackendImageMetadata<?> image) {
-         final ImageInfo imageInfo = new ImageInfo();
+        final ImageInfo imageInfo = new ImageInfo();
         image.setSize(getLength());
         imageInfo.setInput(getStream());
         if (imageInfo.check()) {
@@ -114,13 +147,17 @@ public class ReusableImageStream extends ImageStream {
             }
         } else {
             try {
+                InputStream stream1 = getStream();
                 BufferedImage read = ImageIO.read(getStream());
-                image.setWidth(read.getWidth());
-                image.setHeight(read.getHeight());
+                if (read != null) {
+                    image.setWidth(read.getWidth());
+                    image.setHeight(read.getHeight());
+                    return;
+                }
             } catch (IOException e) {
-                log.warn("Can not read meta-data from image binary, since imageInfo didn't check");
                 log.warn(e.getMessage(), e);
             }
+            log.warn("Can not read meta-data from image binary, since imageInfo didn't check");
         }
     }
 
@@ -150,9 +187,15 @@ public class ReusableImageStream extends ImageStream {
     public synchronized void copy()  {
         if(file == null) {
             try {
-                file = File.createTempFile(ImageStream.class.getName(), "tempImage");
-                file.deleteOnExit();
-                try (FileOutputStream out = new FileOutputStream(file);
+                file = Files.createTempFile(ImageStream.class.getName(), "tempImage");
+                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                    try {
+                        Files.deleteIfExists(file);
+                    } catch (IOException e) {
+                        log.warn(e.getMessage(), e);
+                    }
+                }));
+                try (OutputStream out = Files.newOutputStream(file);
                      InputStream s = stream){
                     IOUtils.copy(s, out);
                 } finally {
@@ -164,7 +207,7 @@ public class ReusableImageStream extends ImageStream {
         }
     }
 
-    public File getFile()  {
+    public Path getFile()  {
         copy();
         return file;
     }
