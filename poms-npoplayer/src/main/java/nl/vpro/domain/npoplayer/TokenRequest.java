@@ -26,5 +26,5 @@ import javax.xml.bind.annotation.XmlType;
 @JsonTypeName("tokenRequest")
 public class TokenRequest {
     String mid;
-    String age;
+    Integer age;
 }
