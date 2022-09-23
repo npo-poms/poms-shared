@@ -9,7 +9,7 @@ import java.util.List;
 public interface OrganizationService<T extends Organization> {
 
     /**
-     * Finds the organization by it's main id
+     * Finds the organization by its main id
      *
      * @return <code>null</code> if not found
      */
