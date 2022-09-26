@@ -140,7 +140,7 @@ public class DateRangeInterval implements RangeFacet<Instant> {
 
         }
 
-        private static final WeekFields WEEK_FIELDS = WeekFields.of(Locales.DUTCH);
+        private static final WeekFields WEEK_FIELDS = WeekFields.of(Locales.NETHERLANDISH);
 
         @Override
         public String print(Instant dateTime) {
