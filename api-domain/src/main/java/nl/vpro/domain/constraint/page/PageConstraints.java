@@ -33,7 +33,6 @@ public class PageConstraints {
         return Constraints.alwaysTrue();
     }
 
-    @SuppressWarnings("unchecked")
     public static Constraint<Page> alwaysFalse() {
         return Constraints.alwaysFalse();
     }

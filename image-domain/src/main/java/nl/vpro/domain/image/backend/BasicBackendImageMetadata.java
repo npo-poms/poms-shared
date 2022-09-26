@@ -68,7 +68,7 @@ public class BasicBackendImageMetadata implements Serializable, MutableEmbargo<B
     /**
      * The public 'urn' of the image, which can be used to construct URLs. This is actually the urn of the image on the image-server.
      * The media server wraps it with its own image object with its own urn, and stores the reference to the image-server in 'imageUri'.
-     *
+     * <p>
      * So imageUri is an identifier for the actual image itself, the rest is metadata which may vary between different object which
      * still have the same imageUri.
      */

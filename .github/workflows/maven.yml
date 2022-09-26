@@ -46,10 +46,10 @@ jobs:
         if: runner.os != 'Linux'
         continue-on-error: true
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1.39
+        uses: EnricoMi/publish-unit-test-result-action@v2.0.0
         if: (success() || failure()) && runner.os == 'Linux'    # run this step even if previous step failed
         with:
-          files: "**/target/surefire-reports/*.xml"
+          junit_files: "**/target/surefire-reports/*.xml"
       - name: Publish to codecov
         uses: codecov/codecov-action@v2
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'

@@ -8,6 +8,7 @@
       <xs:choice minOccurs="0">
         <xs:element name="and" type="tns:and"/>
         <xs:element name="or" type="tns:or"/>
+        <xs:element name="not" type="tns:not"/>
         <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
         <xs:element name="type" type="tns:pageTypeConstraintType"/>
         <xs:element name="portal" type="tns:pagePortalConstraintType"/>
@@ -22,6 +23,7 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="and" type="tns:and"/>
         <xs:element name="or" type="tns:or"/>
+        <xs:element name="not" type="tns:not"/>
         <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
         <xs:element name="type" type="tns:pageTypeConstraintType"/>
         <xs:element name="portal" type="tns:pagePortalConstraintType"/>
@@ -36,6 +38,22 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="and" type="tns:and"/>
         <xs:element name="or" type="tns:or"/>
+        <xs:element name="not" type="tns:not"/>
+        <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
+        <xs:element name="type" type="tns:pageTypeConstraintType"/>
+        <xs:element name="portal" type="tns:pagePortalConstraintType"/>
+        <xs:element name="section" type="tns:pageSectionConstraintType"/>
+        <xs:element name="genre" type="tns:pageGenreConstraintType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="not">
+    <xs:sequence>
+      <xs:choice minOccurs="0">
+        <xs:element name="and" type="tns:and"/>
+        <xs:element name="or" type="tns:or"/>
+        <xs:element name="not" type="tns:not"/>
         <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
         <xs:element name="type" type="tns:pageTypeConstraintType"/>
         <xs:element name="portal" type="tns:pagePortalConstraintType"/>
@@ -60,7 +78,7 @@
   <xs:simpleType name="pageSectionConstraintType">
     <xs:restriction base="xs:string"/>
   </xs:simpleType>
-  
+
   <xs:simpleType name="pageGenreConstraintType">
     <xs:restriction base="xs:string"/>
   </xs:simpleType>

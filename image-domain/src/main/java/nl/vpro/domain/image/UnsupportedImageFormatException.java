@@ -11,6 +11,8 @@ package nl.vpro.domain.image;
  */
 public class UnsupportedImageFormatException extends RuntimeException {
 
+    private static final long serialVersionUID = 7697045387370472521L;
+
     public UnsupportedImageFormatException() {
     }
 
