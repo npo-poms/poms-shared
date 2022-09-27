@@ -11,6 +11,10 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest]
+        java: [8]
+        include:
+        - os: ubuntu-latest
+          java: 17
     runs-on: ${{ matrix.os }}
     env:
       MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
@@ -22,7 +26,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: 8
+          java-version: ${{ matrix.java }}
       - uses: s4u/maven-settings-action@v2
         with:
           servers: '[{"id": "vpro-ossrh", "username": "vpro", "password": "${{secrets.SONATYPE_PASSWORD}}"}]'
