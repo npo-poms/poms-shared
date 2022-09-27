@@ -18,6 +18,7 @@ jobs:
           email: 'digitaal-techniek@vpro.nl'
           token: '${{ secrets.GITHUB_TOKEN  }}'
       - name: Release branch with Maven
+        # TODO, at least in main branch, the parent poms versions must remain  ${revision}${changelist}
         run: |
           VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
           RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
