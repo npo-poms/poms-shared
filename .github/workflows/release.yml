@@ -15,14 +15,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 8
-      - name: Create settings.xml
-        uses: s4u/maven-settings-action@v2
-        with:
-          servers: '[{"id": "vpro-ossrh", "username": "vpro", "password": "${{secrets.SONATYPE_PASSWORD}}"}]'
-      - uses: crazy-max/ghaction-import-gpg@v5
-        with:
-          gpg_private_key: ${{ secrets.GPG_SECRET_KEY }}
-          passphrase: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+          cache: maven
+          server-id: vpro-ossrh
+          server-username: SONATYPE_USERNAME
+          server-password: SONATYPE_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
+          gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
       - uses: oleksiyrudenko/gha-git-credentials@v2.1
         with:
           global: true
@@ -34,3 +32,7 @@ jobs:
           mvn --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare
           git push --atomic -v --follow-tags
           mvn -Pdeploy,ossrh --batch-mode -Darguments=-DskipTests release:perform
+        env:
+          SONATYPE_USERNAME: vpro
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
