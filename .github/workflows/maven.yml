@@ -49,6 +49,7 @@ jobs:
         if: (success() || failure()) && runner.os == 'Linux'    # run this step even if previous step failed
         with:
           junit_files: "**/target/surefire-reports/*.xml"
+          check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish to codecov
         uses: codecov/codecov-action@v2
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
