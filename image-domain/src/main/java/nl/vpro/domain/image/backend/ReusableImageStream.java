@@ -101,10 +101,17 @@ public class ReusableImageStream extends ImageStream {
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
-        if(file != null) {
+        close();
+    }
+
+    @Override
+    public void close() throws IOException {
+        super.close();
+        if (file != null) {
             Files.deleteIfExists(file);
         }
     }
+
      @Override
      public ReusableImageStream withMetaData(BackendImageMetadata<?> metaData) {
          ReusableImageStream reusableImageStream = ReusableImageStream.builder()
