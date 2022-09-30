@@ -77,8 +77,8 @@ public class ReusableImageStream extends ImageStream {
 
     @Override
     public synchronized InputStream getStream() throws IOException {
-        if (closed != null) {
-            throw new IOException("Stream closed", closed);
+        if (closed) {
+            throw new IOException("Stream closed");
         }
         try {
             Path file = getFile();
@@ -216,7 +216,6 @@ public class ReusableImageStream extends ImageStream {
                     int copy = IOUtils.copy(s, out);
                     log.info("Wrote {} bytes to {}", copy, file);
                 } finally {
-
                     stream = null;
                 }
             } catch (IOException ioe) {
