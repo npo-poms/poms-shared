@@ -49,7 +49,7 @@ public class ImageStream implements AutoCloseable {
 
     protected Runnable onClose;
 
-    protected Exception closed = null;
+    protected boolean closed;
 
     protected ImageStream(InputStream stream, Instant lastModified) {
         this.stream = stream;
@@ -120,7 +120,7 @@ public class ImageStream implements AutoCloseable {
 
     @Override
     public void close() throws IOException {
-        closed = new Exception();
+        closed = true;
         log.info("Closing {} ", this);
         if (stream != null) {
             stream.close();
@@ -130,7 +130,13 @@ public class ImageStream implements AutoCloseable {
         }
     }
 
+    /**
+     * @throws IOException if the stream could not be produces because closed.
+     */
     public InputStream getStream() throws IOException {
+        if (closed) {
+            throw new IOException("Stream closed");
+        }
         return stream;
     }
 
