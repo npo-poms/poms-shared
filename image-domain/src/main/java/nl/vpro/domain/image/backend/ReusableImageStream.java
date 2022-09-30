@@ -60,12 +60,12 @@ public class ReusableImageStream extends ImageStream {
         super(stream, length, lastModified, contentType, etag, url, onClose);
     }
 
-    public ReusableImageStream(ImageStream stream) {
+    public ReusableImageStream(ImageStream stream) throws IOException {
         super(stream.getStream(), stream.getLength(), stream.getLastModified());
     }
 
     @PolyNull
-    public static ReusableImageStream of(@PolyNull ImageStream imageStream) {
+    public static ReusableImageStream of(@PolyNull ImageStream imageStream) throws IOException {
         if (imageStream == null) {
             return null;
         } else if (imageStream instanceof  ReusableImageStream) {
@@ -76,11 +76,17 @@ public class ReusableImageStream extends ImageStream {
     }
 
     @Override
-    public InputStream getStream() {
+    public synchronized InputStream getStream() throws IOException {
+        if (closed != null) {
+            throw new IOException("Stream closed", closed);
+        }
         try {
-            return Files.newInputStream(getFile());
-        } catch(IOException e) {
-            throw new IllegalStateException(e.getMessage());
+            Path file = getFile();
+            log.info("Streaming {}", file, new Exception());
+            assert Files.exists(file) : "File " + file + " didn't get created";
+            return Files.newInputStream(file);
+        } catch (IOException e) {
+            throw new IllegalStateException(e.getClass().getName() + ":" + e.getMessage(), e);
         }
     }
 
@@ -127,7 +133,7 @@ public class ReusableImageStream extends ImageStream {
          return reusableImageStream;
      }
 
-    public void copyImageInfoTo(BackendImageMetadata<?> image) {
+    public void copyImageInfoTo(BackendImageMetadata<?> image) throws IOException {
         final ImageInfo imageInfo = new ImageInfo();
         image.setSize(getLength());
         imageInfo.setInput(getStream());
@@ -194,18 +200,23 @@ public class ReusableImageStream extends ImageStream {
     public synchronized void copy()  {
         if(file == null) {
             try {
-                file = Files.createTempFile(ImageStream.class.getName(), "tempImage");
+                file = Files.createTempFile(ImageStream.class.getName(), "." + hashCode() + ".tempImage");
+                log.info("Set file to {}", file);
                 Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                     try {
-                        Files.deleteIfExists(file);
+                        if (Files.deleteIfExists(file)) {
+                            log.info("Deleted {}", file);
+                        }
                     } catch (IOException e) {
                         log.warn(e.getMessage(), e);
                     }
                 }));
                 try (OutputStream out = Files.newOutputStream(file);
-                     InputStream s = stream){
-                    IOUtils.copy(s, out);
+                     InputStream s = stream) {
+                    int copy = IOUtils.copy(s, out);
+                    log.info("Wrote {} bytes to {}", copy, file);
                 } finally {
+
                     stream = null;
                 }
             } catch (IOException ioe) {
@@ -214,7 +225,7 @@ public class ReusableImageStream extends ImageStream {
         }
     }
 
-    public Path getFile()  {
+    public synchronized Path getFile()  {
         copy();
         return file;
     }
