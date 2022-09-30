@@ -196,34 +196,31 @@ public class ReusableImageStream extends ImageStream {
         return result;
     }
 
-    public synchronized void copy()  {
+    public synchronized void copy() throws IOException {
         if(file == null) {
-            try {
-                file = Files.createTempFile(ImageStream.class.getName(),  ".tempImage");
-                log.debug("Set file to {}", file);
-                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                    try {
-                        if (Files.deleteIfExists(file)) {
-                            log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
-                        }
-                    } catch (IOException e) {
-                        log.warn(e.getMessage(), e);
+            file = Files.createTempFile(ImageStream.class.getName(),  ".tempImage");
+            log.debug("Set file to {}", file);
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    if (Files.deleteIfExists(file)) {
+                        log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
                     }
-                }));
-                try (OutputStream out = Files.newOutputStream(file);
-                     InputStream s = stream) {
-                    int copy = IOUtils.copy(s, out);
-                    log.debug("Wrote {} bytes to {}", copy, file);
-                } finally {
-                    stream = null;
+                } catch (IOException e) {
+                    log.warn(e.getMessage(), e);
                 }
-            } catch (IOException ioe) {
-                throw new RuntimeException(ioe);
+            }));
+            try (OutputStream out = Files.newOutputStream(file);
+                 InputStream s = stream) {
+                int copy = IOUtils.copy(s, out);
+                log.debug("Wrote {} bytes to {}", copy, file);
+            } finally {
+                stream = null;
             }
         }
     }
 
-    public synchronized Path getFile()  {
+    @NonNull
+    public synchronized Path getFile() throws IOException {
         copy();
         return file;
     }
