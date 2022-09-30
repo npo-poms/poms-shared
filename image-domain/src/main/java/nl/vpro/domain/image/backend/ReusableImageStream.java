@@ -203,7 +203,7 @@ public class ReusableImageStream extends ImageStream {
     public synchronized void copy()  {
         if(file == null) {
             try {
-                file = Files.createTempFile(ImageStream.class.getName(), "." + hashCode() + ".tempImage");
+                file = Files.createTempFile(ImageStream.class.getName(),  ".tempImage");
                 log.info("Set file to {}", file);
                 Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                     try {
