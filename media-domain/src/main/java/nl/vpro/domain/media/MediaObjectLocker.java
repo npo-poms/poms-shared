@@ -61,11 +61,11 @@ public class MediaObjectLocker {
      * Adding this annotation of a method with a {@link String} or {@link MediaIdentifiable} argument will 'lock' the identifier, and will make sure
      * that no other code doing the same will run simultaneously.
      * <p>
-     * Much code like this will be get a mediaobject using this mid, change it and then commit the mediaobject.
+     * Much code like this will be getting a mediaobject using this mid, change it and then commit the mediaobject.
      * <p>
      * If another thread is changing the mediaobject in between those events, those changes will be lost.
      * <p>
-     * This can therefore be avoided using this annotations (or equivalently by using {@link #withMidLock(String, String, Callable)}
+     * This can therefore be avoided using these annotations (or equivalently by using {@link #withMidLock(String, String, Callable)}
 
      */
     @Retention(RetentionPolicy.RUNTIME)
