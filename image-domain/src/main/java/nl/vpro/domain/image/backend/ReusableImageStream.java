@@ -82,7 +82,6 @@ public class ReusableImageStream extends ImageStream {
         }
         try {
             Path file = getFile();
-            log.info("Streaming {}", file, new Exception());
             assert Files.exists(file) : "File " + file + " didn't get created";
             return Files.newInputStream(file);
         } catch (IOException e) {
@@ -201,11 +200,11 @@ public class ReusableImageStream extends ImageStream {
         if(file == null) {
             try {
                 file = Files.createTempFile(ImageStream.class.getName(),  ".tempImage");
-                log.info("Set file to {}", file);
+                log.debug("Set file to {}", file);
                 Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                     try {
                         if (Files.deleteIfExists(file)) {
-                            log.info("Deleted {}", file);
+                            log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
                         }
                     } catch (IOException e) {
                         log.warn(e.getMessage(), e);
@@ -214,7 +213,7 @@ public class ReusableImageStream extends ImageStream {
                 try (OutputStream out = Files.newOutputStream(file);
                      InputStream s = stream) {
                     int copy = IOUtils.copy(s, out);
-                    log.info("Wrote {} bytes to {}", copy, file);
+                    log.debug("Wrote {} bytes to {}", copy, file);
                 } finally {
                     stream = null;
                 }
