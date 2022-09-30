@@ -297,8 +297,8 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
     public DataHandler getData() {
         return new DataHandler(new DataSource() {
             @Override
-            public InputStream getInputStream() {
-                return BackendImage.this.imageStream.get().getStream();
+            public InputStream getInputStream() throws IOException {
+                return BackendImage.this.getImageStream().getStream();
             }
 
             @Override

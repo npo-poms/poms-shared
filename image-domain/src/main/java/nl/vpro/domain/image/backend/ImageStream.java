@@ -5,6 +5,7 @@
 package nl.vpro.domain.image.backend;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.*;
@@ -27,10 +28,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * </p>
  *
  */
+@Slf4j
 @Data
 public class ImageStream implements AutoCloseable {
 
     @Setter(AccessLevel.NONE)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     protected InputStream stream;
 
     final protected long length;
@@ -44,6 +48,8 @@ public class ImageStream implements AutoCloseable {
     protected URI url;
 
     protected Runnable onClose;
+
+    protected Exception closed = null;
 
     protected ImageStream(InputStream stream, Instant lastModified) {
         this.stream = stream;
@@ -114,12 +120,18 @@ public class ImageStream implements AutoCloseable {
 
     @Override
     public void close() throws IOException {
+        closed = new Exception();
+        log.info("Closing {} ", this);
         if (stream != null) {
             stream.close();
         }
         if (onClose != null) {
             onClose.run();
         }
+    }
+
+    public InputStream getStream() throws IOException {
+        return stream;
     }
 
     public ImageStream withMetaData(BackendImageMetadata<?> metaData) {
