@@ -139,6 +139,15 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.meeuw.util</groupId>
+        <artifactId>mihxil-functional</artifactId>
+        <version>1.5</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <profiles>
     <profile>
