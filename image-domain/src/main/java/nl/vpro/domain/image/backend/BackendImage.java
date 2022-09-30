@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.functional.ThrowingSupplier;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -200,7 +201,7 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
 
     @Transient
     @XmlTransient
-    private ReusableImageStream imageStream;
+    private ThrowingSupplier<ImageStream, IOException> imageStream;
     /**
      * @since 5.10
      */
@@ -282,12 +283,12 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
     }
 
     @XmlTransient
-    public ImageStream getImageStream() {
-        return imageStream;
+    public ImageStream getImageStream() throws IOException {
+        return imageStream.getThrows();
     }
 
-    public BackendImage setImageStream(ImageStream data) {
-        this.imageStream = ReusableImageStream.of(data);
+   public BackendImage supplyImageStream(ThrowingSupplier<ImageStream, IOException> data) {
+        this.imageStream = data;
         return this;
     }
 
@@ -297,7 +298,7 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
         return new DataHandler(new DataSource() {
             @Override
             public InputStream getInputStream() {
-                return BackendImage.this.getImageStream().getStream();
+                return BackendImage.this.imageStream.get().getStream();
             }
 
             @Override
