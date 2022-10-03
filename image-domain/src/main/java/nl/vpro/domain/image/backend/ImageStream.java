@@ -102,8 +102,8 @@ public class ImageStream implements AutoCloseable {
 
     @lombok.Builder(builderMethodName = "imageStreamBuilder")
     protected ImageStream(
-        @NonNull InputStream stream,
-        @Min(0) long length,
+        @NonNull  InputStream stream,
+        @Min(0)   long length,
         @Nullable Instant lastModified,
         @Nullable String contentType,
         @Nullable String etag,
@@ -141,7 +141,6 @@ public class ImageStream implements AutoCloseable {
     }
 
     public ImageStream withMetaData(BackendImageMetadata<?> metaData) {
-
         return ImageStream.imageStreamBuilder()
             .stream(stream)
             .url(url)
