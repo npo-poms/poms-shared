@@ -207,8 +207,13 @@ public class ReusableImageStream extends ImageStream {
             log.debug("Set file to {}", file);
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
-                    if (Files.deleteIfExists(file)) {
-                        log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
+                    if (file != null) {
+                        if (Files.deleteIfExists(file)) {
+                            log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
+                        }
+                        file = null;
+                    } else {
+                        log.debug("File already null");
                     }
                 } catch (IOException e) {
                     log.warn(e.getMessage(), e);
