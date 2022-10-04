@@ -20,6 +20,7 @@ import javax.validation.constraints.Min;
 
 import org.apache.commons.io.IOUtils;
 import org.checkerframework.checker.nullness.qual.*;
+import org.meeuw.functional.ThrowingRunnable;
 
 import nl.vpro.domain.image.UnsupportedImageFormatException;
 
@@ -59,7 +60,7 @@ public class ReusableImageStream extends ImageStream {
         @Nullable String contentType,
         @Nullable String etag,
         @Nullable URI url,
-        @Nullable Runnable onClose) {
+        @Nullable ThrowingRunnable<IOException> onClose) {
         super(stream, length, lastModified, contentType, etag, url, onClose);
     }
 
@@ -117,6 +118,7 @@ public class ReusableImageStream extends ImageStream {
         super.close();
         if (file != null) {
             Files.deleteIfExists(file);
+            file = null;
         }
     }
 

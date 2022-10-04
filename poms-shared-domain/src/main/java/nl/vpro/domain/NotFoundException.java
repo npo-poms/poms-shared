@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * An exception that can be thrown if something is not find. E.g. a profile or a mediaobject
- *
+ * <p>
  *
  * This is a runtime exception. Since it is thrown by rest service interfaces
  *
@@ -15,6 +15,7 @@ import java.io.Serializable;
  */
 public class NotFoundException extends IllegalArgumentException {
 
+    private static final long serialVersionUID = 1756255370140166823L;
     @Getter
     private final Serializable identifier;
 
@@ -23,4 +24,8 @@ public class NotFoundException extends IllegalArgumentException {
         this.identifier = identifier;
     }
 
+    public NotFoundException(String s, String message, Exception cause) {
+        super(message, cause);
+        this.identifier = s;
+    }
 }

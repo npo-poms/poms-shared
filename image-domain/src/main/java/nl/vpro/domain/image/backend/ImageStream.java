@@ -17,6 +17,7 @@ import javax.validation.constraints.Min;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.functional.ThrowingRunnable;
 
 /**
  * An image stream represents the actual blob data for an image.
@@ -47,7 +48,7 @@ public class ImageStream implements AutoCloseable {
 
     protected URI url;
 
-    protected Runnable onClose;
+    protected ThrowingRunnable<IOException> onClose;
 
     protected boolean closed;
 
@@ -108,7 +109,7 @@ public class ImageStream implements AutoCloseable {
         @Nullable String contentType,
         @Nullable String etag,
         @Nullable URI url,
-        @Nullable Runnable onClose) {
+        @Nullable ThrowingRunnable onClose) {
         this.stream = stream;
         this.length = length;
         this.lastModified = lastModified;
@@ -118,6 +119,7 @@ public class ImageStream implements AutoCloseable {
         this.onClose = onClose;
     }
 
+    @SneakyThrows
     @Override
     public void close() throws IOException {
         closed = true;
@@ -126,7 +128,7 @@ public class ImageStream implements AutoCloseable {
             stream.close();
         }
         if (onClose != null) {
-            onClose.run();
+            onClose.runThrows();
         }
     }
 
