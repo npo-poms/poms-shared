@@ -10,7 +10,7 @@ public class ImageNotFoundException extends NotFoundException {
     private static final long serialVersionUID = 1607385729781522225L;
 
     public ImageNotFoundException(long s, String message) {
-        this(s == -1 ? null : String.valueOf(s), message);
+        this(s, message, null);
     }
 
     public ImageNotFoundException(String s, String message) {
@@ -19,6 +19,10 @@ public class ImageNotFoundException extends NotFoundException {
 
     public ImageNotFoundException(String s, String message, Exception cause) {
         super(s, message, cause);
+    }
+
+    public ImageNotFoundException(long s, String message, Exception cause) {
+        super(s == -1 ? null : String.valueOf(s), message, cause);
     }
 
 }
