@@ -123,7 +123,7 @@ public class ImageStream implements AutoCloseable {
     @Override
     public void close() throws IOException {
         closed = true;
-        log.info("Closing {} ", this);
+        log.debug("Closing {} ", this);
         if (stream != null) {
             stream.close();
         }
