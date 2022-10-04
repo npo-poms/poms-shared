@@ -6,6 +6,9 @@ package nl.vpro.domain.image.backend;
 
 import nl.vpro.domain.NotFoundException;
 
+/**
+ *
+ */
 public class ImageNotFoundException extends NotFoundException {
     private static final long serialVersionUID = 1607385729781522225L;
 
