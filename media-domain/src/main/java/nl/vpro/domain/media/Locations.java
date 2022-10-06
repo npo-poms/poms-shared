@@ -122,7 +122,7 @@ public class Locations {
             return Locations.RealizeResult.builder()
                 .needed(false)
                 .program(mediaObject)
-                .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform + "  in " + mediaObject)
+                .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform)
                 .build();
         }
 
@@ -146,7 +146,7 @@ public class Locations {
                 .build();
         }
 
-        return Locations.RealizeResult.builder()
+        return RealizeResult.builder()
             .needed(true)
             .locations(authorityLocations)
             .program(mediaObject)
