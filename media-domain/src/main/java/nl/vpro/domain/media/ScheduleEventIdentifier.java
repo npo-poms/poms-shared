@@ -86,7 +86,7 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
     }
 
     public String asString() {
-        return channel.name() + ":" + start;
+        return channel.getXmlValue() + ":" + start;
     }
 
     public static ScheduleEventIdentifier parse(String id) {
