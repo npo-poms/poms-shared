@@ -8,8 +8,7 @@ import java.lang.reflect.Method;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.event.Level;
 
 import nl.vpro.logging.Slf4jHelper;
@@ -17,16 +16,17 @@ import nl.vpro.util.locker.ObjectLocker;
 
 
 /**
- * This is an idea to make locking on mid easier.
+ * This makes locking on mid easier.
+ * <p>
+ * Just annotate your method with {@link MediaObjectLocker.Mid} and it should automatically lock the mid if it isn't yet.
  *
- * Just annotate your method with {@link MediaObjectLocker.Mid} and it should automaticly lock the mid if it isn't yet.
- *
- *
- ** @author Michiel Meeuwissen
+ * @author Michiel Meeuwissen
  * @since 5.8
  */
 @Aspect
 @Slf4j
+
+// DeclarePrecendence not supported by spring AOP, this is just extended in media with a spring @Order annotation in stead.
 //@DeclarePrecedence("nl.vpro.domain.media.MediaObjectLockerAspect, org.springframework.transaction.aspectj.AnnotationTransactionAspect, *")
 public abstract class MediaObjectLockerAspect  {
 
