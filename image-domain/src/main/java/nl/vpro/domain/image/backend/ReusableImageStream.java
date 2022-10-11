@@ -28,7 +28,6 @@ import nl.vpro.domain.image.UnsupportedImageFormatException;
  * A version of {@link ImageStream} that on first use of {@link #getStream()} will copy the stream to a file, so you
  * call it multiple times.
  *
- *
  * @author Roelof Jan Koekoek
  * @since 1.11
  */

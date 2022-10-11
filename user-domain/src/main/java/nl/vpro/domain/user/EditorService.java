@@ -11,7 +11,7 @@ import nl.vpro.domain.Roles;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
- * Like {@link UserService} but providing some  some more security related information
+ * Like {@link UserService} but providing some more security related information
  */
 public interface EditorService extends UserService<Editor> {
 
