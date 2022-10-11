@@ -26,7 +26,7 @@ import nl.vpro.util.locker.ObjectLocker;
 @Aspect
 @Slf4j
 
-// DeclarePrecendence not supported by spring AOP, this is just extended in media with a spring @Order annotation in stead.
+// DeclarePrecedence not supported by spring AOP, this is just extended in media project with a spring @Order annotation in stead.
 //@DeclarePrecedence("nl.vpro.domain.media.MediaObjectLockerAspect, org.springframework.transaction.aspectj.AnnotationTransactionAspect, *")
 public abstract class MediaObjectLockerAspect  {
 
