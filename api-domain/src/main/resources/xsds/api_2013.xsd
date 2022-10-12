@@ -857,6 +857,13 @@
 
   <xs:complexType name="changeType">
     <xs:sequence>
+      <xs:element name="reasons" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="reason" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="media" type="media:baseMediaType" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="publishDate" type="xs:dateTime"/>

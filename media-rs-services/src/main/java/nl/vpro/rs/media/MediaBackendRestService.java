@@ -160,7 +160,8 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
-        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput,
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     );
 
     @DELETE
@@ -171,8 +172,8 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @PathParam("locationId") final String locationId,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
-        @QueryParam(ERRORS) String errors
-
+        @QueryParam(ERRORS) String errors,
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     );
 
     @GET

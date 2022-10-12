@@ -4,13 +4,19 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
+import java.util.List;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -37,6 +43,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "mid",
     "deleted",
     "mergedTo",
+    "reasons",
     "media",
 })
 @XmlAccessorType(XmlAccessType.NONE)
@@ -45,15 +52,21 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class MediaChange extends Change<MediaObject> {
 
     @XmlAttribute
+    @Getter
+    @Setter
+    @Deprecated
     private Long sequence;
 
     @XmlAttribute
+    @Getter
+    @Setter
+    @Deprecated
     private Long revision;
 
     @XmlAttribute
+    @Getter
+    @Setter
     private String mergedTo;
-
-
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -62,14 +75,29 @@ public class MediaChange extends Change<MediaObject> {
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     private Instant realPublishDate;
 
+    @Getter
+    @XmlElementWrapper
+    @XmlElement(name = "reason")
+    @JsonProperty("reasons")
+    private List<String> reasons;
+
     public MediaChange() {
     }
 
     @lombok.Builder
-    private MediaChange(Instant publishDate, Long revision, String mid, MediaObject media, Boolean deleted, MediaSince since, Boolean tail) {
+    private MediaChange(
+        Instant publishDate,
+        Long revision,
+        String mid,
+        MediaObject media,
+        Boolean deleted,
+        MediaSince since,
+        Boolean tail,
+        @Singular @Nullable List<@NonNull String>  reasons) {
         this(DateUtils.toLong(MediaSince.instant(publishDate, since)), revision, MediaSince.mid(mid, since), media, deleted);
         setPublishDate(MediaSince.instant(publishDate, since));
         setTail(tail);
+        this.reasons = reasons;
     }
 
     private MediaChange(Long sequence, Long revision, String mid, MediaObject media, Boolean deleted) {
@@ -121,7 +149,7 @@ public class MediaChange extends Change<MediaObject> {
     }
 
     public static MediaChange tail(Instant publishDate, Long sequence) {
-        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null, null, true);
+        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null, null, true, null);
         return tail;
     }
 
@@ -156,11 +184,11 @@ public class MediaChange extends Change<MediaObject> {
                 break;
 
             case PUBLISHED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, false, null, null);
+                change = new MediaChange(lastPublished, revision, media.getMid(), media, false, null, null, null);
                 break;
 
             case MERGED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null, null);
+                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null, null, null);
                 change.setMergedTo(media.getMergedToRef());
                 break;
 
@@ -187,25 +215,6 @@ public class MediaChange extends Change<MediaObject> {
         setObject(media);
     }
 
-    @Deprecated
-    public Long getSequence() {
-        return sequence;
-    }
-
-    public void setSequence(Long sequence) {
-        this.sequence = sequence;
-    }
-
-    @Deprecated
-    public Long getRevision() {
-        return revision;
-    }
-
-    public void setRevision(Long revision) {
-        this.revision = revision;
-    }
-
-
     @XmlAttribute
     public String getMid() {
         return getId();
@@ -216,14 +225,6 @@ public class MediaChange extends Change<MediaObject> {
             setId(mid);
         }
     }
-    public String getMergedTo() {
-        return mergedTo;
-    }
-
-    public void setMergedTo(String mergedTo) {
-        this.mergedTo = mergedTo;
-    }
-
 
     public MediaSince asSince() {
         return MediaSince.builder().instant(getPublishDate()).mid(getMid()).build();
@@ -251,7 +252,5 @@ public class MediaChange extends Change<MediaObject> {
     public Instant getRealPublishDate() {
         return realPublishDate == null ? getPublishDate() : realPublishDate;
     }
-
-
 
 }
