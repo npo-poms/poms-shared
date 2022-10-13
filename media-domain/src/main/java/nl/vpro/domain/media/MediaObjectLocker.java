@@ -182,4 +182,15 @@ public class MediaObjectLocker {
         );
     }
 
+    /**
+     * Locks the given {@link MediaIdentifiable} on its {@link MediaIdentifiable#getCorrelation()}
+     *
+     */
+    public static <T> T withCorrelationLock(
+        @NonNull MediaIdentifiable lockHolder,
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
+        return withCorrelationLock(lockHolder.getCorrelation(), reason, callable);
+    }
+
 }

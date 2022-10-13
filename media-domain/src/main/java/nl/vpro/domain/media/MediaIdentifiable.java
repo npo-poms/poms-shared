@@ -38,6 +38,11 @@ public interface MediaIdentifiable extends MidIdentifiable {
         return getCorrelation().id;
     }
 
+    /**
+     * The correlation of this {@code MediaIdentifiable} is the best id currently available.
+     * Oftentimes that will be the {@link #getMid()}, but in certain situation that is not (yet) available, and it may fall back
+     * to (the first) {@link #getCrids()}.
+     */
     default Correlation getCorrelation () {
         String mid = getMid();
         if (mid != null) {
@@ -51,7 +56,9 @@ public interface MediaIdentifiable extends MidIdentifiable {
     }
 
 
-
+    /**
+     * A 'correlation' for a {@code MediaIdentifiable} is a {@code mid}, or a {@code crid}
+     */
     @Getter
     class Correlation implements Serializable, ObjectLocker.DefinesType {
         private static final long serialVersionUID = -8973548054279104343L;
