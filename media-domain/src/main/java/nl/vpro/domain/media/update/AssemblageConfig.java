@@ -7,14 +7,13 @@ import java.time.Duration;
 import java.util.*;
 import java.util.function.*;
 
+import org.apache.logging.log4j.Logger;
 import org.meeuw.functional.*;
-import org.slf4j.Logger;
 import org.slf4j.helpers.MessageFormatter;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.logging.simple.Slf4jSimpleLogger;
+import nl.vpro.logging.simple.*;
 import nl.vpro.util.IntegerVersion;
 
 import static org.meeuw.functional.Predicates.*;
@@ -169,6 +168,14 @@ public class AssemblageConfig {
 
     public SimpleLogger loggerFor(Logger log) {
         if (logger == null) {
+            return Log4j2SimpleLogger.of(log);
+        } else {
+            return logger.chain(Log4j2SimpleLogger.of(log));
+        }
+    }
+
+    public SimpleLogger loggerFor(org.slf4j.Logger log) {
+         if (logger == null) {
             return Slf4jSimpleLogger.of(log);
         } else {
             return logger.chain(Slf4jSimpleLogger.of(log));
