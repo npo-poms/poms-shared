@@ -8,7 +8,8 @@ import java.lang.reflect.Method;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.event.Level;
 
 import nl.vpro.logging.Slf4jHelper;
@@ -55,8 +56,8 @@ public abstract class MediaObjectLockerAspect  {
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockSid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Sid annotation) {
-        Object scheduleEvent = joinPoint.getArgs()[annotation.argNumber()];
-        ScheduleEventIdentifier sid = getSid(scheduleEvent);
+        final Object scheduleEvent = joinPoint.getArgs()[annotation.argNumber()];
+        final ScheduleEventIdentifier sid = getSid(scheduleEvent);
         String reason = annotation.reason();
         if (StringUtils.isEmpty(reason)) {
             reason = joinPoint.getSignature().getDeclaringType().getSimpleName() + "#" + joinPoint.getSignature().getName();
@@ -70,8 +71,19 @@ public abstract class MediaObjectLockerAspect  {
             }
 
         });
-
     }
+
+    @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
+    public Object assertNoMidLock(ProceedingJoinPoint joinPoint, MediaObjectLocker.AssertNoMidLock annotation) {
+        MediaObjectLocker.assertNoMidLock();
+        try {
+            return joinPoint.proceed(joinPoint.getArgs());
+        } catch(Throwable t) {
+            throw Lombok.sneakyThrow(t);
+        }
+    }
+
+
 
 
     protected static MediaIdentifiable.Correlation getCorrelation(String method, Object object) {

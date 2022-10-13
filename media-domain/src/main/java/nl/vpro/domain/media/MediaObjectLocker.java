@@ -2,13 +2,14 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
@@ -29,7 +30,7 @@ import static nl.vpro.util.locker.ObjectLocker.withObjectLock;
  * <p>
  * It may be better to (also) introduce more decent hibernate locking (MSE-3751)
  * <p>
- * This basicly wraps {@link ObjectLocker}, but keeps a separate map of locked objects, dedicated to media identifiables
+ * This basically wraps {@link ObjectLocker}, but keeps a separate map of locked objects, dedicated to media identifiables
  * <p>
  * Also, it defines some annotations (for use with {@link MediaObjectLockerAspect} (to facilitate locking via annotation), and some utility methods.
  *
@@ -85,6 +86,8 @@ public class MediaObjectLocker {
         String method() default "";
     }
 
+
+
     /**
      * Like {@link Mid}, but now for {@code nl.vpro.domain.subtitles.SubtitlesId}
      */
@@ -94,6 +97,18 @@ public class MediaObjectLocker {
         String reason() default "";
     }
 
+
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface AssertNoMidLock {
+        String reason() default "";
+    }
+
+     public static void assertNoMidLock() {
+        List<LockHolder<? extends Serializable>> collect = ObjectLocker.currentLocks().stream().filter(f -> f.key instanceof MediaIdentifiable.Correlation).collect(Collectors.toList());
+        if (!collect.isEmpty()) {
+            throw new IllegalStateException("There is a lock " + collect);
+        }
+    }
 
     /**
      * Run in a new transaction, but before that lock the mid.
