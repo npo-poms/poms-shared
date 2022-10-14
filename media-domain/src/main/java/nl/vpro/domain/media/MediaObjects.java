@@ -573,10 +573,10 @@ public class MediaObjects {
             if (StringUtils.isBlank(existingReason)) {
                 media.setRepubReason(formattedReason);
             } else {
-                TreeSet<String> set = Arrays.stream(existingReason.split(","))
+                TreeSet<String> set = Arrays.stream(existingReason.split("\t"))
                     .collect(Collectors.toCollection(TreeSet::new));
                 set.add(formattedReason);
-                media.setRepubReason(String.join(",", set));
+                media.setRepubReason(String.join("\t", set));
             }
         }
     }
