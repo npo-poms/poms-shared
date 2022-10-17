@@ -4,11 +4,13 @@
  */
 package nl.vpro.domain.api;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -23,6 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Change;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -90,13 +93,18 @@ public class MediaChange extends Change<MediaObject> {
         Long revision,
         String mid,
         MediaObject media,
-        Boolean deleted,
         MediaSince since,
         Boolean tail,
+        Boolean deleted,
         @Nullable List<@NonNull String> reasons) {
-        this(DateUtils.toLong(MediaSince.instant(publishDate, since)), revision, MediaSince.mid(mid, since), media, deleted);
+        this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
+            deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted);
         setPublishDate(MediaSince.instant(publishDate, since));
         setTail(tail);
+        if (media.getWorkflow() == Workflow.MERGED) {
+            setMergedTo(media.getMergedToRef());
+        }
+
         this.reasons = reasons;
     }
 
@@ -149,60 +157,10 @@ public class MediaChange extends Change<MediaObject> {
     }
 
     public static MediaChange tail(Instant publishDate, Long sequence) {
-        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null, null, true, null);
-        return tail;
-    }
-
-    public static MediaChange of(Instant publishDate, MediaObject media) {
-        return of(publishDate, media, null);
-    }
-
-    public static MediaChange of(Instant publishDate, MediaObject media, Long revision) {
-
-        MediaChange change;
-        final Instant lastPublished;
-        if (publishDate == null) {
-            lastPublished = media.getLastPublishedInstant();
-        }  else {
-            lastPublished = publishDate;
-        }
-        if (media.getWorkflow() == null) {
-            log.warn("Workflow is null for {}", media.getMid());
-            return null;
-        }
-        switch (media.getWorkflow()) {
-            case DELETED:
-            case REVOKED:
-            case PARENT_REVOKED:
-                change = MediaChange.builder()
-                    .publishDate(lastPublished)
-                    .revision(revision)
-                    .mid(media.getMid())
-                    .media(media)
-                    .deleted(true)
-                    .build();
-                break;
-
-            case PUBLISHED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, false, null, null, null);
-                break;
-
-            case MERGED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null, null, null);
-                change.setMergedTo(media.getMergedToRef());
-                break;
-
-            default:
-                if (media.getWorkflow().isPublishable()) {
-                    log.error("Unanticipated workflow for {} : {}. This is a bug.", media.getMid(), media.getWorkflow());
-                } else {
-                    log.warn("Invalid workflow for {} : {}", media.getMid(), media.getWorkflow());
-                }
-                change = null;
-                break;
-
-        }
-        return change;
+        return  MediaChange.builder()
+            .publishDate(publishDate)
+            .revision(sequence)
+            .build();
 
     }
 
