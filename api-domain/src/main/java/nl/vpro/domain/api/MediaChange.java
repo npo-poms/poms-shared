@@ -97,11 +97,11 @@ public class MediaChange extends Change<MediaObject> {
         Boolean tail,
         Boolean deleted,
         @Nullable List<@NonNull String> reasons) {
-        this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
+        this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
             deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted);
         setPublishDate(MediaSince.instant(publishDate, since));
         setTail(tail);
-        if (media.getWorkflow() == Workflow.MERGED) {
+        if (media != null && media.getWorkflow() == Workflow.MERGED) {
             setMergedTo(media.getMergedToRef());
         }
 
@@ -160,6 +160,7 @@ public class MediaChange extends Change<MediaObject> {
         return  MediaChange.builder()
             .publishDate(publishDate)
             .revision(sequence)
+            .tail(true)
             .build();
 
     }

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -87,7 +86,8 @@ public class MediaChangeTest {
         MediaChange change = MediaChange.builder()
             .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
             .mid("MID_123")
-            .media(MediaTestDataBuilder.program().lean().workflow(Workflow.DELETED).build())
+            .media(MediaTestDataBuilder.program().lean().build())
+            .deleted(true)
             .build();
 
         Jackson2TestUtil.assertThatJson(change).isSimilarTo("{\n" +
