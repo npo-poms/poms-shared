@@ -37,6 +37,7 @@ public abstract class MediaObjectLockerAspect  {
         Object media = joinPoint.getArgs()[annotation.argNumber()];
         String method = annotation.method();
         MediaIdentifiable.Correlation correlation = getCorrelation(method, media);
+
         String reason = annotation.reason();
 
         if (StringUtils.isEmpty(reason)) {
@@ -75,14 +76,13 @@ public abstract class MediaObjectLockerAspect  {
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object assertNoMidLock(ProceedingJoinPoint joinPoint, MediaObjectLocker.AssertNoMidLock annotation) {
-        MediaObjectLocker.assertNoMidLock();
+        MediaObjectLocker.assertNoMidLock(joinPoint.toLongString());
         try {
             return joinPoint.proceed(joinPoint.getArgs());
         } catch(Throwable t) {
             throw Lombok.sneakyThrow(t);
         }
     }
-
 
 
 

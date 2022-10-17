@@ -70,7 +70,7 @@ public class MediaObjectLocker {
 
      */
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface Mid {
+    public @interface Mid  {
         /**
          * The argument on which to lock. First one is 0.
          */
@@ -81,7 +81,7 @@ public class MediaObjectLocker {
         String reason() default "";
 
         /**
-         * A method on the argument to call to get the MID. Default we suppose the argument to _be_ the MID.e
+         * A method on the argument to call to get the MID. Default we suppose the argument to _be_ the MID.
          */
         String method() default "";
     }
@@ -103,10 +103,10 @@ public class MediaObjectLocker {
         String reason() default "";
     }
 
-     public static void assertNoMidLock() {
+    public static void assertNoMidLock(String description) {
         List<LockHolder<? extends Serializable>> collect = ObjectLocker.currentLocks().stream().filter(f -> f.key instanceof MediaIdentifiable.Correlation).collect(Collectors.toList());
         if (!collect.isEmpty()) {
-            throw new IllegalStateException("There is a lock " + collect);
+            throw new IllegalStateException("There is a lock " + collect + ": " + description);
         }
     }
 
