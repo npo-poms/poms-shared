@@ -16,13 +16,13 @@ import nl.vpro.i18n.Displayable;
  */
 public interface MediaPublisherHeaders {
 
-    String PUBLISH_TO_HEADER = "publishTo";
-    String QUEUETIME_HEADER = "queueTime";
-    String TRANSACTION_UUID_HEADER = "transactionUUID";
-    String REASON_HEADER = "reason";
-    String TRIGGERED_BY_HEADER = "triggeredBy";
+    String PUBLISH_TO_HEADER        = "publishTo";
+    String QUEUETIME_HEADER         = "queueTime";
+    String TRANSACTION_UUID_HEADER  = "transactionUUID";
+    String REASON_HEADER            = "reason";
+    String TRIGGERED_BY_HEADER         = "triggeredBy";
     String RECENTLY_MODIFIED_BY_HEADER = "recentlyModifiedBy";
-    String LAST_MODIFIED_BY_HEADER = "lastModifiedBy";
+    String LAST_MODIFIED_BY_HEADER     = "lastModifiedBy";
     String MID = "mid";
     String PREVIOUS_PUBLISHDATE_HEADER = "previousPublishDate";
 
