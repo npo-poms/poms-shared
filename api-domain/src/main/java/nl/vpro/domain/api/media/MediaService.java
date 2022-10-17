@@ -7,6 +7,7 @@ package nl.vpro.domain.api.media;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
@@ -32,7 +33,8 @@ public interface MediaService extends MediaProvider {
         Long keepAlive,
         boolean withSequences,
         Deletes deletes,
-        Tail tails) throws ProfileNotFoundException;
+        Tail tails,
+        Predicate<MediaChange> reasonFilter) throws ProfileNotFoundException;
 
     @Override
     <T extends MediaObject> T findByMid(boolean loadDeleted, String mid);

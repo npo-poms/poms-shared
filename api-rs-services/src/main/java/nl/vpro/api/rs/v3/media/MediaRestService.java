@@ -49,6 +49,7 @@ public interface MediaRestService {
     String CHECK_PROFILE = "checkProfile";
     String DELETES = "deletes";
     String TAIL = "tail";
+    String REASON_FILTER = "reasonFilter";
 
     @GET
     @Path("/suggest")
@@ -225,7 +226,8 @@ public interface MediaRestService {
         @QueryParam(MAX) Integer max,
         @QueryParam(CHECK_PROFILE) Boolean profileCheck,
         @QueryParam(DELETES) Deletes deletes,
-        @QueryParam(TAIL) Tail tail
+        @QueryParam(TAIL) Tail tail,
+        @QueryParam(REASON_FILTER) String reasonFilter
     ) throws ProfileNotFoundException;
 
 
