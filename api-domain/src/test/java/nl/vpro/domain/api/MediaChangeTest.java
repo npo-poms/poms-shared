@@ -3,6 +3,8 @@ package nl.vpro.domain.api;
 import java.io.IOException;
 import java.time.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonGenerator;
 
@@ -32,7 +34,7 @@ public class MediaChangeTest {
             .mid("MID_123")
             .deleted(false)
             .media(MediaTestDataBuilder.program().lean().build())
-            .reason("foo bar")
+            .reasons(Arrays.asList("foo bar"))
             .build();
 
         Jackson2TestUtil.assertThatJson(change).isSimilarTo("{\n" +
@@ -59,8 +61,7 @@ public class MediaChangeTest {
             .mid("MID_123")
             .deleted(false)
             .media(MediaTestDataBuilder.program().lean().build())
-            .reason("foo")
-            .reason("bar")
+            .reasons(Arrays.asList("foo", "bar"))
             .build()
         ;
 

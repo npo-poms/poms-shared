@@ -93,7 +93,7 @@ public class MediaChange extends Change<MediaObject> {
         Boolean deleted,
         MediaSince since,
         Boolean tail,
-        @Singular @Nullable List<@NonNull String>  reasons) {
+        @Nullable List<@NonNull String> reasons) {
         this(DateUtils.toLong(MediaSince.instant(publishDate, since)), revision, MediaSince.mid(mid, since), media, deleted);
         setPublishDate(MediaSince.instant(publishDate, since));
         setTail(tail);
