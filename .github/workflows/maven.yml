@@ -45,7 +45,7 @@ jobs:
         if: runner.os != 'Linux' || matrix.java != 8
         continue-on-error: true
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.0.0
+        uses: EnricoMi/publish-unit-test-result-action@v2.1.0
         if: (success() || failure()) && runner.os == 'Linux'    # run this step even if previous step failed
         with:
           junit_files: "**/target/surefire-reports/*.xml"
