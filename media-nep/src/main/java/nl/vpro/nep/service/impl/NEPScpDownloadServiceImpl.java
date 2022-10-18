@@ -18,6 +18,7 @@ import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.LoggerOutputStream;
+import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.nep.service.exception.NEPException;
 import nl.vpro.util.*;
@@ -73,7 +74,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                         message.toString().replaceAll(password, "??????")
                 )
                 .useFileCache(useFileCache)
-                .logger(log)
+                .simpleLogger(Slf4jSimpleLogger.slf4j(log))
                 .commonArg(
                     "-p", password,
                     scpcommand.getAbsolutePath(),
