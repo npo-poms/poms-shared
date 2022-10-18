@@ -24,9 +24,9 @@ import nl.vpro.util.*;
 
 /**
  * See MSE-4032. It's kind of a disgrace that we have to fall back to external commands...
- *
+ * <p>
  * I first tried curl, to no avail either.
- *
+ * <p>
  * Older scp clients would give troubles too. In the end Dick realized that, and pointed to a more up to date client on the poms server.
  *
  * @author Michiel Meeuwissen
