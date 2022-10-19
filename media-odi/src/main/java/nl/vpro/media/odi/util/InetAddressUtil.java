@@ -4,13 +4,13 @@
  */
 package nl.vpro.media.odi.util;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
+import java.net.*;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.net.InetAddresses;
 
 /**
@@ -42,15 +42,8 @@ public class InetAddressUtil {
 
     public static boolean isPrivate(String addr) {
         InetAddress inetAddress = getAddress(addr);
-        if (inetAddress != null) {
-            if (inetAddress.isAnyLocalAddress() || inetAddress.isLinkLocalAddress() || inetAddress.isLoopbackAddress()) {
-                return true;
-            }
-            if (inetAddress instanceof Inet4Address) {
-                if (PRIVATE_IP_PATTERN.matcher(inetAddress.getHostAddress()).find()) {
-                    return true;
-                }
-            }
+        if (inetAddress.isSiteLocalAddress() || inetAddress.isAnyLocalAddress() || inetAddress.isLinkLocalAddress() || inetAddress.isLoopbackAddress()) {
+            return true;
         }
         return false;
     }
