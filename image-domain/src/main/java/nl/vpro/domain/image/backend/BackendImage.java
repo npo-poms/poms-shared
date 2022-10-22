@@ -283,7 +283,7 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
 
     @SneakyThrows
     @XmlTransient
-    public ImageStream getImageStream() throws IOException, NotFoundException {
+    public ImageStream getImageStream() throws NotFoundException {
         return imageStream.getThrows();
     }
 

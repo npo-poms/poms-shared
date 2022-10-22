@@ -9,16 +9,23 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Change;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -91,18 +98,8 @@ public class MediaChange extends Change<MediaObject> {
         Boolean deleted,
         MediaSince since,
         Boolean tail,
-        boolean skipped) {
-        this(DateUtils.toLong(MediaSince.instant(publishDate, since)), revision, MediaSince.mid(mid, since), media, deleted);
-    private MediaChange(
-        Instant publishDate,
-        Long revision,
-        String mid,
-        MediaObject media,
-        MediaSince since,
-        Boolean tail,
-        Boolean deleted,
         @Nullable List<@NonNull String> reasons,
-             boolean skipped) {
+        boolean skipped) {
         this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
             deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted);
         setPublishDate(MediaSince.instant(publishDate, since));
@@ -110,10 +107,8 @@ public class MediaChange extends Change<MediaObject> {
         if (media != null && media.getWorkflow() == Workflow.MERGED) {
             setMergedTo(media.getMergedToRef());
         }
-
         this.reasons = reasons;
-                setSkipped(skipped);
-
+        setSkipped(skipped);
     }
 
     private MediaChange(Long sequence, Long revision, String mid, MediaObject media, Boolean deleted) {
@@ -169,30 +164,15 @@ public class MediaChange extends Change<MediaObject> {
             .publishDate(publishDate)
             .revision(sequence)
             .tail(true)
-                    .build();
-                break;
+            .build();
+    }
 
-            case PUBLISHED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, false, null, null);
-                break;
-
-            case MERGED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null, null);
-                change.setMergedTo(media.getMergedToRef());
-                break;
-
-            default:
-                if (media.getWorkflow().isPublishable()) {
-                    log.error("Unanticipated workflow for {} : {}. This is a bug.", media.getMid(), media.getWorkflow());
-                } else {
-                    log.warn("Invalid workflow for {} : {}", media.getMid(), media.getWorkflow());
-                }
-                change = null;
-                break;
-
-        }
-        return change;
-
+    public static MediaChange skipped(MediaSince since) {
+        return MediaChange.builder()
+            .since(since)
+            .tail(false)
+            .skipped(true)
+            .build();
     }
 
 
@@ -209,7 +189,7 @@ public class MediaChange extends Change<MediaObject> {
         return getId();
     }
 
-    public void setMid(String mid) {
+    void setMid(String mid) {
         if (getId() == null) {
             setId(mid);
         }
@@ -225,7 +205,7 @@ public class MediaChange extends Change<MediaObject> {
     }
 
     @Override
-    public void setPublishDate(Instant instant) {
+    protected void setPublishDate(Instant instant) {
         if (this.realPublishDate == null) {
             this.realPublishDate = getPublishDate();
         }

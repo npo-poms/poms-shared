@@ -17,14 +17,18 @@ import nl.vpro.domain.VersionedChange;
 @XmlSeeAlso(PageUpdate.class)
 public class PageUpdateChange extends VersionedChange<PageUpdate> implements Serializable {
 
-
-
     public PageUpdateChange() {
         super();
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public PageUpdateChange(Instant publishDate, String id, Boolean deleted, Boolean tail,  Integer version, PageUpdate object) {
+    public PageUpdateChange(
+        Instant publishDate,
+        String id,
+        Boolean deleted,
+        Boolean tail,
+        Integer version,
+        PageUpdate object) {
         super(publishDate, id, deleted, tail, version, object);
     }
 
@@ -42,7 +46,7 @@ public class PageUpdateChange extends VersionedChange<PageUpdate> implements Ser
         return super.getObject();
     }
     @Override
-    public void setObject(PageUpdate p) {
+    protected void setObject(PageUpdate p) {
         super.setObject(p);
     }
 }

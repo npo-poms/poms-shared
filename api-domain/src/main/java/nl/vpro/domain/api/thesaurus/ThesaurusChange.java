@@ -43,7 +43,7 @@ public class ThesaurusChange extends Change<GTAAConcept> {
 
     @lombok.Builder
     public ThesaurusChange(Instant publishDate, String id, Boolean deleted, Boolean tail, GTAAConcept object) {
-        super(publishDate, id, deleted, tail, object);
+        super(publishDate, id, deleted, tail, false, object);
 
         // TODO
     }
