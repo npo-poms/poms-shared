@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -37,6 +39,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "mid",
     "deleted",
     "mergedTo",
+    "reasons",
     "media",
 })
 @XmlAccessorType(XmlAccessType.NONE)
@@ -45,12 +48,20 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class MediaChange extends Change<MediaObject> {
 
     @XmlAttribute
+    @Getter
+    @Setter
+    @Deprecated
     private Long sequence;
 
     @XmlAttribute
+    @Getter
+    @Setter
+    @Deprecated
     private Long revision;
 
     @XmlAttribute
+    @Getter
+    @Setter
     private String mergedTo;
 
 
@@ -61,6 +72,12 @@ public class MediaChange extends Change<MediaObject> {
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     private Instant realPublishDate;
+
+    @Getter
+    @XmlElementWrapper
+    @XmlElement(name = "reason")
+    @JsonProperty("reasons")
+    private List<String> reasons;
 
     public MediaChange() {
     }
@@ -76,9 +93,27 @@ public class MediaChange extends Change<MediaObject> {
         Boolean tail,
         boolean skipped) {
         this(DateUtils.toLong(MediaSince.instant(publishDate, since)), revision, MediaSince.mid(mid, since), media, deleted);
+    private MediaChange(
+        Instant publishDate,
+        Long revision,
+        String mid,
+        MediaObject media,
+        MediaSince since,
+        Boolean tail,
+        Boolean deleted,
+        @Nullable List<@NonNull String> reasons,
+             boolean skipped) {
+        this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
+            deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted);
         setPublishDate(MediaSince.instant(publishDate, since));
         setTail(tail);
-        setSkipped(skipped);
+        if (media != null && media.getWorkflow() == Workflow.MERGED) {
+            setMergedTo(media.getMergedToRef());
+        }
+
+        this.reasons = reasons;
+                setSkipped(skipped);
+
     }
 
     private MediaChange(Long sequence, Long revision, String mid, MediaObject media, Boolean deleted) {
@@ -122,14 +157,6 @@ public class MediaChange extends Change<MediaObject> {
     }
 
 
-    public static MediaChange skipped(MediaSince since) {
-        return MediaChange.builder()
-            .since(since)
-            .tail(false)
-            .skipped(true)
-            .build();
-    }
-
     public static MediaChange tail(MediaSince since) {
         return MediaChange.builder()
             .since(since)
@@ -138,46 +165,19 @@ public class MediaChange extends Change<MediaObject> {
     }
 
     public static MediaChange tail(Instant publishDate, Long sequence) {
-        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null, null, true, false);
-        return tail;
-    }
-
-    public static MediaChange of(Instant publishDate, MediaObject media) {
-        return of(publishDate, media, null);
-    }
-
-    public static MediaChange of(Instant publishDate, MediaObject media, Long revision) {
-
-        MediaChange change;
-        final Instant lastPublished;
-        if (publishDate == null) {
-            lastPublished = media.getLastPublishedInstant();
-        }  else {
-            lastPublished = publishDate;
-        }
-        if (media.getWorkflow() == null) {
-            log.warn("Workflow is null for {}", media.getMid());
-            return null;
-        }
-        switch (media.getWorkflow()) {
-            case DELETED:
-            case REVOKED:
-            case PARENT_REVOKED:
-                change = MediaChange.builder()
-                    .publishDate(lastPublished)
-                    .revision(revision)
-                    .mid(media.getMid())
-                    .media(media)
-                    .deleted(true)
+        return  MediaChange.builder()
+            .publishDate(publishDate)
+            .revision(sequence)
+            .tail(true)
                     .build();
                 break;
 
             case PUBLISHED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, false, null, null, false);
+                change = new MediaChange(lastPublished, revision, media.getMid(), media, false, null, null);
                 break;
 
             case MERGED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null, null, false);
+                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null, null);
                 change.setMergedTo(media.getMergedToRef());
                 break;
 
@@ -204,25 +204,6 @@ public class MediaChange extends Change<MediaObject> {
         setObject(media);
     }
 
-    @Deprecated
-    public Long getSequence() {
-        return sequence;
-    }
-
-    public void setSequence(Long sequence) {
-        this.sequence = sequence;
-    }
-
-    @Deprecated
-    public Long getRevision() {
-        return revision;
-    }
-
-    public void setRevision(Long revision) {
-        this.revision = revision;
-    }
-
-
     @XmlAttribute
     public String getMid() {
         return getId();
@@ -233,14 +214,6 @@ public class MediaChange extends Change<MediaObject> {
             setId(mid);
         }
     }
-    public String getMergedTo() {
-        return mergedTo;
-    }
-
-    public void setMergedTo(String mergedTo) {
-        this.mergedTo = mergedTo;
-    }
-
 
     public MediaSince asSince() {
         return MediaSince.builder().instant(getPublishDate()).mid(getMid()).build();

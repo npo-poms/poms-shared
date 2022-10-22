@@ -56,6 +56,13 @@ public class Locations {
         @NonNull Platform platform,
         @NonNull Predicate<Location> locationPredicate,
         @NonNull Instant now) {
+        if (mediaObject.getAVType() != AVType.VIDEO) {
+            return Locations.RealizeResult.builder()
+                .needed(false)
+                .program(mediaObject)
+                .reason("Only video media objects currently can be realized. This one is " + mediaObject.getAVType())
+                .build();
+        }
         final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
 
         if (platform == Platform.INTERNETVOD) {
@@ -115,7 +122,7 @@ public class Locations {
             return Locations.RealizeResult.builder()
                 .needed(false)
                 .program(mediaObject)
-                .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform + "  in " + mediaObject)
+                .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform)
                 .build();
         }
 
@@ -139,7 +146,7 @@ public class Locations {
                 .build();
         }
 
-        return Locations.RealizeResult.builder()
+        return RealizeResult.builder()
             .needed(true)
             .locations(authorityLocations)
             .program(mediaObject)
@@ -338,14 +345,15 @@ public class Locations {
 
     /**
      * Creates a prediction because of a NEP notification.
-     *
+     * <p>
      * If a mediaobject has INTERNETVOD locations (which are not deleted) (which were not created because of NEP)
-     *
+     * <p>
      * then we need to have INTERNETVOD prediction which can be set to 'REALIZED'.
-     *
+     * <p>
      * This is not always the case, this method can correct that.
      */
     public static Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
+
         Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream()
             .filter(l -> Platform.INTERNETVOD.matches(l.getPlatform())) // l == null || l == internetvod
             .filter(l -> ! l.getProgramUrl().startsWith("npo:")) // not created because of NEP itself.

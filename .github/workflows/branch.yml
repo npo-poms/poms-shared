@@ -10,7 +10,7 @@ jobs:
     env:
       MAVEN_OPTS: '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: oleksiyrudenko/gha-git-credentials@v2.1
         with:
           global: true
@@ -18,6 +18,7 @@ jobs:
           email: 'digitaal-techniek@vpro.nl'
           token: '${{ secrets.GITHUB_TOKEN  }}'
       - name: Release branch with Maven
+        # TODO, at least in main branch, the parent poms versions must remain  ${revision}${changelist}
         run: |
           VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
           RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`

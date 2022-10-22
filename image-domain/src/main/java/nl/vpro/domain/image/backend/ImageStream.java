@@ -5,6 +5,7 @@
 package nl.vpro.domain.image.backend;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.*;
@@ -13,6 +14,10 @@ import java.nio.file.Path;
 import java.time.Instant;
 
 import javax.validation.constraints.Min;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.functional.ThrowingRunnable;
 
 /**
  * An image stream represents the actual blob data for an image.
@@ -24,10 +29,13 @@ import javax.validation.constraints.Min;
  * </p>
  *
  */
+@Slf4j
 @Data
 public class ImageStream implements AutoCloseable {
 
     @Setter(AccessLevel.NONE)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     protected InputStream stream;
 
     final protected long length;
@@ -40,7 +48,9 @@ public class ImageStream implements AutoCloseable {
 
     protected URI url;
 
-    protected Runnable onClose;
+    protected ThrowingRunnable<IOException> onClose;
+
+    protected boolean closed;
 
     protected ImageStream(InputStream stream, Instant lastModified) {
         this.stream = stream;
@@ -65,9 +75,13 @@ public class ImageStream implements AutoCloseable {
         return of(file.toPath());
     }
 
-    public static ImageStream of(Path file) throws IOException {
+    public static ImageStream of(final Path file) throws IOException {
         if (Files.exists(file)) {
-            return new ImageStream(Files.newInputStream(file), Files.size(file), Files.getLastModifiedTime(file).toInstant());
+            return new ImageStream(
+                Files.newInputStream(file),
+                Files.size(file),
+                Files.getLastModifiedTime(file).toInstant()
+            );
         } else {
             return of(new byte[0]);
         }
@@ -75,7 +89,11 @@ public class ImageStream implements AutoCloseable {
 
     public static ImageStream of(URL url) throws IOException {
         URLConnection connection = url.openConnection();
-        return new ImageStream(connection.getInputStream(), connection.getContentLength(), Instant.ofEpochMilli(connection.getLastModified()));
+        return new ImageStream(
+            connection.getInputStream(),
+            connection.getContentLength(),
+            Instant.ofEpochMilli(connection.getLastModified())
+        );
     }
 
     public static ReusableImageStream of(byte[] bytes) throws IOException {
@@ -84,7 +102,14 @@ public class ImageStream implements AutoCloseable {
 
 
     @lombok.Builder(builderMethodName = "imageStreamBuilder")
-    private ImageStream(InputStream stream, @Min(0) long length, Instant lastModified, String contentType, String etag, URI url, Runnable onClose) {
+    protected ImageStream(
+        @NonNull InputStream stream,
+        @Min(0) long length,
+        @Nullable Instant lastModified,
+        @Nullable String contentType,
+        @Nullable String etag,
+        @Nullable URI url,
+        @Nullable ThrowingRunnable onClose) {
         this.stream = stream;
         this.length = length;
         this.lastModified = lastModified;
@@ -94,14 +119,27 @@ public class ImageStream implements AutoCloseable {
         this.onClose = onClose;
     }
 
+    @SneakyThrows
     @Override
     public void close() throws IOException {
+        closed = true;
+        log.debug("Closing {} ", this);
         if (stream != null) {
             stream.close();
         }
         if (onClose != null) {
-            onClose.run();
+            onClose.runThrows();
         }
+    }
+
+    /**
+     * @throws IOException if the stream could not be produces because closed.
+     */
+    public InputStream getStream() throws IOException {
+        if (closed) {
+            throw new IOException("Stream closed");
+        }
+        return stream;
     }
 
     public ImageStream withMetaData(BackendImageMetadata<?> metaData) {

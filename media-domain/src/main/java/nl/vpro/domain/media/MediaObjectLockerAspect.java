@@ -17,16 +17,17 @@ import nl.vpro.util.locker.ObjectLocker;
 
 
 /**
- * This is an idea to make locking on mid easier.
+ * This makes locking on mid easier.
+ * <p>
+ * Just annotate your method with {@link MediaObjectLocker.Mid} and it should automatically lock the mid if it isn't yet.
  *
- * Just annotate your method with {@link MediaObjectLocker.Mid} and it should automaticly lock the mid if it isn't yet.
- *
- *
- ** @author Michiel Meeuwissen
+ * @author Michiel Meeuwissen
  * @since 5.8
  */
 @Aspect
 @Slf4j
+
+// DeclarePrecedence not supported by spring AOP, this is just extended in media project with a spring @Order annotation in stead.
 //@DeclarePrecedence("nl.vpro.domain.media.MediaObjectLockerAspect, org.springframework.transaction.aspectj.AnnotationTransactionAspect, *")
 public abstract class MediaObjectLockerAspect  {
 
@@ -36,6 +37,7 @@ public abstract class MediaObjectLockerAspect  {
         Object media = joinPoint.getArgs()[annotation.argNumber()];
         String method = annotation.method();
         MediaIdentifiable.Correlation correlation = getCorrelation(method, media);
+
         String reason = annotation.reason();
 
         if (StringUtils.isEmpty(reason)) {
@@ -55,8 +57,8 @@ public abstract class MediaObjectLockerAspect  {
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockSid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Sid annotation) {
-        Object scheduleEvent = joinPoint.getArgs()[annotation.argNumber()];
-        ScheduleEventIdentifier sid = getSid(scheduleEvent);
+        final Object scheduleEvent = joinPoint.getArgs()[annotation.argNumber()];
+        final ScheduleEventIdentifier sid = getSid(scheduleEvent);
         String reason = annotation.reason();
         if (StringUtils.isEmpty(reason)) {
             reason = joinPoint.getSignature().getDeclaringType().getSimpleName() + "#" + joinPoint.getSignature().getName();
@@ -70,8 +72,18 @@ public abstract class MediaObjectLockerAspect  {
             }
 
         });
-
     }
+
+    @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
+    public Object assertNoMidLock(ProceedingJoinPoint joinPoint, MediaObjectLocker.AssertNoMidLock annotation) {
+        MediaObjectLocker.assertNoMidLock(joinPoint.toLongString());
+        try {
+            return joinPoint.proceed(joinPoint.getArgs());
+        } catch(Throwable t) {
+            throw Lombok.sneakyThrow(t);
+        }
+    }
+
 
 
     protected static MediaIdentifiable.Correlation getCorrelation(String method, Object object) {

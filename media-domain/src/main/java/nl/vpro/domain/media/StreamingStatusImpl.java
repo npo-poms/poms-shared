@@ -13,6 +13,8 @@ import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.*;
 
 /**
+ * The streaming stati are currently stored as fields of the {@link MediaObject}.
+ *
  * @author Michiel Meeuwissen
  * @since 5.11
  */

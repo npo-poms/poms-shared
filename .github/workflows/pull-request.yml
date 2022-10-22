@@ -1,23 +1,41 @@
 ---
 name: build pull request
 
+# Builds a pull request, basing the artifact name on the branch name on which it is based, so it can be published
+# without breaking things, and enabled to build other pull requests depending on the current one.
+
+# For e.g. if you make a pull request based on a branch feature/foobar on the main branch which is 6.1-SNAPSHOT,
+# then it will be built and published as 6.1.foobar-SNAPSHOT
 on:
   pull_request:
     branches: [main]
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
     env:
       MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
     steps:
+      - name: Cancel previous Action
+        uses: styfle/cancel-workflow-action@0.11.0
+        continue-on-error: true # for act
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
+          distribution: 'temurin'
           java-version: 8
+          cache: 'maven'
+          server-id: vpro-ossrh
+          server-username: SONATYPE_USERNAME
+          server-password: SONATYPE_PASSWORD
       - name: Build with Maven
-        run: mvn -B clean test
-      - name: Publish Test Report
-        uses: scacap/action-surefire-report@v1
-        if: ${{ success() || failure()}}
+        run: |
+          mvn -B -Dchangelist=.${GITHUB_HEAD_REF##*/}-SNAPSHOT -P"npm" -U -fae deploy
+        env:
+          SONATYPE_USERNAME: vpro
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.1.0
+        if: (success() || failure())
+        with:
+          junit_files: "**/target/surefire-reports/*.xml"

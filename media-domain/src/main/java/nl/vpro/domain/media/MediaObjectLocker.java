@@ -2,13 +2,14 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
@@ -29,7 +30,7 @@ import static nl.vpro.util.locker.ObjectLocker.withObjectLock;
  * <p>
  * It may be better to (also) introduce more decent hibernate locking (MSE-3751)
  * <p>
- * This basicly wraps {@link ObjectLocker}, but keeps a separate map of locked objects, dedicated to media identifiables
+ * This basically wraps {@link ObjectLocker}, but keeps a separate map of locked objects, dedicated to media identifiables
  * <p>
  * Also, it defines some annotations (for use with {@link MediaObjectLockerAspect} (to facilitate locking via annotation), and some utility methods.
  *
@@ -61,15 +62,15 @@ public class MediaObjectLocker {
      * Adding this annotation of a method with a {@link String} or {@link MediaIdentifiable} argument will 'lock' the identifier, and will make sure
      * that no other code doing the same will run simultaneously.
      * <p>
-     * Much code like this will be get a mediaobject using this mid, change it and then commit the mediaobject.
+     * Much code like this will be getting a mediaobject using this mid, change it and then commit the mediaobject.
      * <p>
      * If another thread is changing the mediaobject in between those events, those changes will be lost.
      * <p>
-     * This can therefore be avoided using this annotations (or equivalently by using {@link #withMidLock(String, String, Callable)}
+     * This can therefore be avoided using these annotations (or equivalently by using {@link #withMidLock(String, String, Callable)}
 
      */
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface Mid {
+    public @interface Mid  {
         /**
          * The argument on which to lock. First one is 0.
          */
@@ -80,10 +81,12 @@ public class MediaObjectLocker {
         String reason() default "";
 
         /**
-         * A method on the argument to call to get the MID. Default we suppose the argument to _be_ the MID.e
+         * A method on the argument to call to get the MID. Default we suppose the argument to _be_ the MID.
          */
         String method() default "";
     }
+
+
 
     /**
      * Like {@link Mid}, but now for {@code nl.vpro.domain.subtitles.SubtitlesId}
@@ -94,6 +97,18 @@ public class MediaObjectLocker {
         String reason() default "";
     }
 
+
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface AssertNoMidLock {
+        String reason() default "";
+    }
+
+    public static void assertNoMidLock(String description) {
+        List<LockHolder<? extends Serializable>> collect = ObjectLocker.currentLocks().stream().filter(f -> f.key instanceof MediaIdentifiable.Correlation).collect(Collectors.toList());
+        if (!collect.isEmpty()) {
+            throw new IllegalStateException("There is a lock " + collect + ": " + description);
+        }
+    }
 
     /**
      * Run in a new transaction, but before that lock the mid.
@@ -165,6 +180,17 @@ public class MediaObjectLocker {
             (o1, o2) ->
                 o1 instanceof MediaIdentifiable.Correlation && Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType())
         );
+    }
+
+    /**
+     * Locks the given {@link MediaIdentifiable} on its {@link MediaIdentifiable#getCorrelation()}
+     *
+     */
+    public static <T> T withCorrelationLock(
+        @NonNull MediaIdentifiable lockHolder,
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
+        return withCorrelationLock(lockHolder.getCorrelation(), reason, callable);
     }
 
 }

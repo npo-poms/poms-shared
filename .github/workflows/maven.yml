@@ -11,45 +11,45 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest]
+        java: [11]
+        include:
+        - os: ubuntu-latest
+          java: 17
     runs-on: ${{ matrix.os }}
     env:
       MAVEN_OPTS: -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
     steps:
       - name: Cancel previous Action
-        uses: styfle/cancel-workflow-action@0.10.0
+        uses: styfle/cancel-workflow-action@0.11.0
         continue-on-error: true # for act
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v3.5.1
         with:
           distribution: 'temurin'
-          java-version: 8
-      - uses: s4u/maven-settings-action@v2
-        with:
-          servers: '[{"id": "vpro-ossrh", "username": "vpro", "password": "${{secrets.SONATYPE_PASSWORD}}"}]'
-        if: runner.os == 'Linux'
-      - uses: crazy-max/ghaction-import-gpg@v5
-        with:
-          gpg_private_key: ${{ secrets.GPG_SECRET_KEY }}
-          passphrase: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
-        if: runner.os == 'Linux'
-      - uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      - name: Build and deploy with Maven (Linux)
+          java-version: ${{ matrix.java }}
+          cache: maven
+          server-id: vpro-ossrh
+          server-username: SONATYPE_USERNAME
+          server-password: SONATYPE_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
+          gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
+      - name: Build and deploy with Maven (Linux, java 11)
         run:  mvn -B -P"deploy,ossrh,npm" -U -fae deploy
-        if: runner.os == 'Linux'
-      - name: Build with Maven (Other os)
+        if: runner.os == 'Linux' && matrix.java == 11
+        env:
+          SONATYPE_USERNAME: vpro
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
+      - name: Build with Maven (Other os and java != 11)
         run: mvn -B  -U -fae package
-        if: runner.os != 'Linux'
+        if: runner.os != 'Linux' || matrix.java != 11
         continue-on-error: true
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1.39
+        uses: EnricoMi/publish-unit-test-result-action@v2.1.0
         if: (success() || failure()) && runner.os == 'Linux'    # run this step even if previous step failed
         with:
-          files: "**/target/surefire-reports/*.xml"
+          junit_files: "**/target/surefire-reports/*.xml"
+          check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish to codecov
         uses: codecov/codecov-action@v2
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'

@@ -2,10 +2,9 @@ package nl.vpro.domain.media.support;
 
 import java.util.regex.Matcher;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * This services knows how to create urls from image ids.
@@ -19,7 +18,8 @@ public interface ImageUrlService {
         return getIdFromImageUri(image.getImageUri());
     }
 
-    default Long getIdFromImageUri(@NonNull String imageUri) {
+    @Nullable
+    default Long getIdFromImageUri(@Nullable String imageUri) {
 
         if (imageUri == null) {
             return null;
@@ -39,12 +39,16 @@ public interface ImageUrlService {
 
     /**
      * Returns the base url for image 'api' calls.
-     * For the backend server this is e.g. https://poms-dev.omroep.nl/images/api/
-     * for a frontend server this is e.g. https://images-dev.poms.omroep.nl/
+     * For the backend server this is e.g. {@code https://poms-test.omroep.nl/images/api}
+     * for a frontend server this is e.g. {@code https://images-test.poms.omroep.nl/}
      */
     String getImageBaseUrl();
 
-    default String getOriginalUrl(@NonNull Long id) {
+    @PolyNull
+    default String getOriginalUrl(@PolyNull Long id) {
+        if (id == null) {
+            return null;
+        }
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder result = new StringBuilder();
         result.append(imageServerBaseUrl).append(id);
@@ -52,19 +56,24 @@ public interface ImageUrlService {
         return result.toString();
     }
 
-    default String getOriginalUrlFromImageUri(@NonNull  String imageUri) {
+    @Nullable
+    default String getOriginalUrlFromImageUri(@Nullable String imageUri) {
         return getOriginalUrl(getIdFromImageUri(imageUri));
     }
 
     /**
-     * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
+     * Resolves a web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
      * obtain a base url for an image host.
      *
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri
      */
     default String getImageLocation(@NonNull String uri , @Nullable String fileExtension, String... conversions) {
-        return getImageLocation(getIdFromImageUri(uri), fileExtension, conversions);
+        Long id = getIdFromImageUri(uri);
+        if (id == null) {
+            return null;
+        }
+        return getImageLocation(id, fileExtension, conversions);
     }
 
 

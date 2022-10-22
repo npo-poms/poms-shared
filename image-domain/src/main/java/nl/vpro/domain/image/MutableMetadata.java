@@ -48,7 +48,7 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
 
     void setLastModifiedInstant(Instant lastModified);
 
-    default ChangeReport copyFrom(MutableMetadata<?> image){
+    default ChangeReport copyFrom(Metadata<?> image) {
         ChangeReport change = new ChangeReport();
         if (!Objects.equals(getType(), image.getType())) {
             setType(image.getType());
@@ -86,14 +86,22 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
             setCredits(image.getCredits());
             change.change();
         }
-        if (!Objects.equals(getDate(), image.getDate())) {
-            setDate(image.getDate());
-            change.change();
-        }
+
         if (!Objects.equals(getLastModifiedInstant(), image.getLastModifiedInstant())) {
             setLastModifiedInstant(image.getLastModifiedInstant());
             change.change();
         }
+        return change;
+
+    }
+    default ChangeReport copyFrom(MutableMetadata<?> image){
+        ChangeReport change = copyFrom((Metadata<?>) image);
+
+        if (!Objects.equals(getDate(), image.getDate())) {
+            setDate(image.getDate());
+            change.change();
+        }
+
 
         return change.or(Embargos.copy(image, this));
     }

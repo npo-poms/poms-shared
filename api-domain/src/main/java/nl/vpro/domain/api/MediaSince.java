@@ -7,6 +7,7 @@ import lombok.Data;
 import java.time.Instant;
 
 /**
+ * Combines an {@link Instant} with a {@code mid}, together the defined the unique order the changes feed.
  * @author Michiel Meeuwissen
  * @since 5.5
  */

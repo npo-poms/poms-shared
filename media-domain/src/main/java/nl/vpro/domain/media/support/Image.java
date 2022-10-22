@@ -6,7 +6,8 @@
 
 package nl.vpro.domain.media.support;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;

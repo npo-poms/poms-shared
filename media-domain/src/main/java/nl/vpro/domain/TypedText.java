@@ -24,6 +24,7 @@ public interface TypedText extends Typable<TextualType>, Supplier<String>, Compa
         return true;
     }
 
+
     @Override
     default int compareTo(@NonNull TypedText title) {
         if (title == null) {

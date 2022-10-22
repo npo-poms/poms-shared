@@ -4,14 +4,15 @@
  */
 package nl.vpro.rs.npoplayer;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import nl.vpro.domain.npoplayer.PlayerRequest;
-import nl.vpro.domain.npoplayer.PlayerResponse;
+import nl.vpro.domain.npoplayer.*;
 
 /**
  * @author r.jansen
@@ -25,4 +26,8 @@ public interface NPOPlayerRestService {
     @POST
     @Path("/request")
     PlayerResponse forMid(PlayerRequest request);
+
+    @POST
+    @Path("/token")
+    public PlayerResponse token(@Context HttpServletRequest request, TokenRequest tokenRequest);
 }

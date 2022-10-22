@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * This class verifies JAXB XML output format and wether this format complies to the vproMedia.xsd schema definitions.
- * It's located here so it can use the test data builder for more concise code.
+ * It's located here because then it can use the test data builder for more concise code.
  */
 @SuppressWarnings({"UnnecessaryLocalVariable", "ConstantConditions"})
 @Slf4j
@@ -75,9 +75,9 @@ public class MediaObjectXmlSchemaTest {
         Schema schema;
         try {
             schema = factory.newSchema(new Source[]{
-                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/w3/xml.xsd")),
-                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproShared.xsd")),
-                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"))}
+                new StreamSource(MediaObjectXmlSchemaTest.class.getResourceAsStream("/nl/vpro/domain/media/w3/xml.xsd")),
+                new StreamSource(MediaObjectXmlSchemaTest.class.getResourceAsStream("/nl/vpro/domain/media/vproShared.xsd")),
+                new StreamSource(MediaObjectXmlSchemaTest.class.getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"))}
             );
             schemaValidator = schema.newValidator();
         } catch(SAXException e) {

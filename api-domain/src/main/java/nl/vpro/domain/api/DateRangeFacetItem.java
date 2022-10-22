@@ -6,6 +6,8 @@ package nl.vpro.domain.api;
 
 import java.time.Instant;
 
+import java.time.temporal.ChronoUnit;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
@@ -49,8 +51,9 @@ public class DateRangeFacetItem implements RangeFacetItem<Instant> {
     @lombok.Builder
     public DateRangeFacetItem(String name, Instant begin, Instant end) {
         this.name = name;
-        this.begin = begin;
-        this.end = end;
+        // truncate, because should not be more precise than ES can do. Instant.now got more precise since java 9 (?).
+        this.begin = begin == null ? null : begin.truncatedTo(ChronoUnit.MILLIS);
+        this.end = end == null ? null : end.truncatedTo(ChronoUnit.MILLIS);
     }
 
     @Override

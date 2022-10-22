@@ -18,15 +18,16 @@ import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.LoggerOutputStream;
+import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.nep.service.exception.NEPException;
 import nl.vpro.util.*;
 
 /**
  * See MSE-4032. It's kind of a disgrace that we have to fall back to external commands...
- *
+ * <p>
  * I first tried curl, to no avail either.
- *
+ * <p>
  * Older scp clients would give troubles too. In the end Dick realized that, and pointed to a more up to date client on the poms server.
  *
  * @author Michiel Meeuwissen
@@ -73,7 +74,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                         message.toString().replaceAll(password, "??????")
                 )
                 .useFileCache(useFileCache)
-                .logger(log)
+                .simpleLogger(Slf4jSimpleLogger.slf4j(log))
                 .commonArg(
                     "-p", password,
                     scpcommand.getAbsolutePath(),

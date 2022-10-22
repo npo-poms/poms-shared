@@ -79,6 +79,7 @@ public class ImageMetadataImpl implements ImageMetadata {
     private final Area areaOfInterest;
 
 
+
     @lombok.Builder(
         builderClassName = "Builder", buildMethodName = "_build", toBuilder = true)
     private ImageMetadataImpl(
