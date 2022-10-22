@@ -19,7 +19,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  */
 @XmlTransient
 @Getter
-@Setter
+@Setter(AccessLevel.PROTECTED)
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class Change<T>  {
@@ -38,8 +38,16 @@ public abstract class Change<T>  {
     @XmlAttribute
     private Boolean deleted;
 
+
     @XmlAttribute
     private Boolean tail = null;
+
+    /**
+     * A 'skipped' change object is for some reason not relevant, and will not be marshalled in
+     * result streams.
+     */
+    @XmlTransient
+    private boolean skipped;
 
     //@XmlElement(name = "object")
     private T object;

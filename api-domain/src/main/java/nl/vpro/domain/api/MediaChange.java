@@ -66,10 +66,19 @@ public class MediaChange extends Change<MediaObject> {
     }
 
     @lombok.Builder
-    private MediaChange(Instant publishDate, Long revision, String mid, MediaObject media, Boolean deleted, MediaSince since, Boolean tail) {
+    private MediaChange(
+        Instant publishDate,
+        Long revision,
+        String mid,
+        MediaObject media,
+        Boolean deleted,
+        MediaSince since,
+        Boolean tail,
+        boolean skipped) {
         this(DateUtils.toLong(MediaSince.instant(publishDate, since)), revision, MediaSince.mid(mid, since), media, deleted);
         setPublishDate(MediaSince.instant(publishDate, since));
         setTail(tail);
+        setSkipped(skipped);
     }
 
     private MediaChange(Long sequence, Long revision, String mid, MediaObject media, Boolean deleted) {
@@ -113,6 +122,14 @@ public class MediaChange extends Change<MediaObject> {
     }
 
 
+    public static MediaChange skipped(MediaSince since) {
+        return MediaChange.builder()
+            .since(since)
+            .tail(false)
+            .skipped(true)
+            .build();
+    }
+
     public static MediaChange tail(MediaSince since) {
         return MediaChange.builder()
             .since(since)
@@ -121,7 +138,7 @@ public class MediaChange extends Change<MediaObject> {
     }
 
     public static MediaChange tail(Instant publishDate, Long sequence) {
-        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null, null, true);
+        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null, null, true, false);
         return tail;
     }
 
@@ -156,11 +173,11 @@ public class MediaChange extends Change<MediaObject> {
                 break;
 
             case PUBLISHED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, false, null, null);
+                change = new MediaChange(lastPublished, revision, media.getMid(), media, false, null, null, false);
                 break;
 
             case MERGED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null, null);
+                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null, null, false);
                 change.setMergedTo(media.getMergedToRef());
                 break;
 
