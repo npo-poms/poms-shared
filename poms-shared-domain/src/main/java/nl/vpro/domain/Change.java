@@ -41,6 +41,9 @@ public abstract class Change<T>  {
     @XmlAttribute
     private Boolean tail = null;
 
+    @XmlTransient
+    private boolean skipped;
+
     //@XmlElement(name = "object")
     private T object;
 

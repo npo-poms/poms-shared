@@ -96,6 +96,7 @@ public class MediaChange extends Change<MediaObject> {
         MediaSince since,
         Boolean tail,
         Boolean deleted,
+        boolean skipped,
         @Nullable List<@NonNull String> reasons) {
         this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
             deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted);
@@ -106,6 +107,7 @@ public class MediaChange extends Change<MediaObject> {
         }
 
         this.reasons = reasons;
+        setSkipped(skipped);
     }
 
     private MediaChange(Long sequence, Long revision, String mid, MediaObject media, Boolean deleted) {
@@ -156,13 +158,20 @@ public class MediaChange extends Change<MediaObject> {
             .build();
     }
 
+    public static MediaChange skipped(MediaSince since) {
+        return MediaChange.builder()
+            .since(since)
+            .tail(false)
+            .skipped(true)
+            .build();
+    }
+
     public static MediaChange tail(Instant publishDate, Long sequence) {
         return  MediaChange.builder()
             .publishDate(publishDate)
             .revision(sequence)
             .tail(true)
             .build();
-
     }
 
 
