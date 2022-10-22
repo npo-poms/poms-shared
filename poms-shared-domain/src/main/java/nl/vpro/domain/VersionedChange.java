@@ -17,7 +17,7 @@ public class VersionedChange<T> extends Change<T> {
 
     }
     protected VersionedChange(Instant publishDate, String id, Boolean deleted, Boolean tail, Integer version, T object) {
-        super(publishDate, id, deleted, tail, object);
+        super(publishDate, id, deleted, tail, false, object);
         this.version = version;
     }
 }
