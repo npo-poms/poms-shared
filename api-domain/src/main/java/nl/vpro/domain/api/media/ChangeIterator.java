@@ -18,8 +18,10 @@ import nl.vpro.util.FilteringIterator;
  *
  * @author Roelof Jan Koekoek
  * @since 3.0
+ * @deprecated Using {@code null} to mark bunches of skips is tricky. Use {@link MarkSkippedChangeIterator} now.
  */
 @Slf4j
+@Deprecated
 public class ChangeIterator implements CloseablePeekingIterator<MediaChange> {
 
     private static final int LOG_BATCH_DEFAULT = 50000;

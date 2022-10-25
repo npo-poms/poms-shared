@@ -71,6 +71,10 @@ public abstract class Change<T>  {
         return tail != null ? tail : false;
     }
 
+    public boolean isNotSkipped() {
+        return ! isSkipped();
+    }
+
     @Override
     public String toString() {
         return (isTail() ? "TAIL:" : "" ) + publishDate + ":" + id +

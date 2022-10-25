@@ -71,8 +71,6 @@ public class MediaChange extends Change<MediaObject> {
     @Setter
     private String mergedTo;
 
-
-
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -107,6 +105,7 @@ public class MediaChange extends Change<MediaObject> {
         if (media != null && media.getWorkflow() == Workflow.MERGED) {
             setMergedTo(media.getMergedToRef());
         }
+
         this.reasons = reasons;
         setSkipped(skipped);
     }
@@ -159,19 +158,19 @@ public class MediaChange extends Change<MediaObject> {
             .build();
     }
 
-    public static MediaChange tail(Instant publishDate, Long sequence) {
-        return  MediaChange.builder()
-            .publishDate(publishDate)
-            .revision(sequence)
-            .tail(true)
-            .build();
-    }
-
     public static MediaChange skipped(MediaSince since) {
         return MediaChange.builder()
             .since(since)
             .tail(false)
             .skipped(true)
+            .build();
+    }
+
+    public static MediaChange tail(Instant publishDate, Long sequence) {
+        return  MediaChange.builder()
+            .publishDate(publishDate)
+            .revision(sequence)
+            .tail(true)
             .build();
     }
 
@@ -189,7 +188,7 @@ public class MediaChange extends Change<MediaObject> {
         return getId();
     }
 
-    void setMid(String mid) {
+    protected void setMid(String mid) {
         if (getId() == null) {
             setId(mid);
         }
@@ -221,7 +220,5 @@ public class MediaChange extends Change<MediaObject> {
     public Instant getRealPublishDate() {
         return realPublishDate == null ? getPublishDate() : realPublishDate;
     }
-
-
 
 }

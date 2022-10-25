@@ -1,18 +1,21 @@
 package nl.vpro.domain.api.media;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.time.*;
+import java.util.List;
+import java.util.NoSuchElementException;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.junit.jupiter.api.Test;
 import org.mockito.stubbing.Answer;
 
 import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.profile.ProfileDefinition;
-import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.support.Workflow;
 
 import static java.util.Arrays.asList;
+import static nl.vpro.domain.media.MediaBuilder.clip;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
@@ -22,14 +25,17 @@ import static org.mockito.Mockito.when;
 /**
  * @author Michiel Meeuwissen
  */
+@Deprecated
 public class ChangeIteratorTest {
 
+    static Instant INSTANT = of(2021, 3, 1, 12, 0);
+    @SuppressWarnings("unchecked")
+    private final ProfileDefinition<MediaObject> even =
+        mock(ProfileDefinition.class);
 
     @SuppressWarnings("unchecked")
-    private final ProfileDefinition<MediaObject> even = mock(ProfileDefinition.class);
-
-    @SuppressWarnings("unchecked")
-    private final ProfileDefinition<MediaObject> odd = mock(ProfileDefinition.class);
+    private final ProfileDefinition<MediaObject> odd =
+        mock(ProfileDefinition.class);
 
     {
         Answer<Boolean> idIsEven = invocationOnMock -> {
@@ -41,10 +47,10 @@ public class ChangeIteratorTest {
             return mo.getId() % 2 == 1;
         };
         when(even.test(any(MediaObject.class))).thenAnswer(idIsEven);
-        when(odd.test(any(MediaObject.class))).thenAnswer(idIsEven);
+        when(odd.test(any(MediaObject.class))).thenAnswer(idIsOdd);
     }
 
-    private final List<MediaChange> fourChanges = asList(
+    private final List<@NonNull MediaChange> fourChanges = asList(
         change(1, 1)
             .deleted(true)
             .build(),
@@ -114,7 +120,7 @@ public class ChangeIteratorTest {
     public void sinceTooLate() throws Exception {
         try(ChangeIterator test = ChangeIterator.builder()
             .iterator(fourChanges.iterator())
-            .since(of(2021, 3, 1, 13, 0))
+            .since(INSTANT.plus(Duration.ofHours(1)))
             .current(even)
             .previous(null)
             //.keepAliveNull(3L)
@@ -133,7 +139,7 @@ public class ChangeIteratorTest {
 
         try(ChangeIterator test = ChangeIterator.builder()
             .iterator(fourChanges.iterator())
-            .since(of(2021, 3, 1, 12, 0))
+            .since(INSTANT)
             .current(even)
             .previous(even)
             .build()) {
@@ -148,19 +154,21 @@ public class ChangeIteratorTest {
     @Test
     public void keepAlive() throws Exception {
         try(ChangeIterator test = ChangeIterator.builder()
-            .iterator(asList(change(1, 1)
+            .iterator(asList(
+                change(1, 1) // not in profile
                     .deleted(true)
                     .build(),
-                change(3, 1)
+                change(3, 1) // not in profile
                     .deleted(true)
                     .build(),
-                change(5, 2)
+                change(5, 2) // not in profile
                     .deleted(true)
                     .build(),
-                change(7, 2)
+                change(7, 2) // not in profile, but also not deleted, so
                     .deleted(false)
-                    .build()).iterator())
-            .since(of(2021, 3, 1, 12, 0))
+                    .build()
+            ).iterator())
+            .since(INSTANT)
             .current(even)
             .previous(even)
             .keepAliveNull(2L)
@@ -180,15 +188,24 @@ public class ChangeIteratorTest {
     }
 
     @SuppressWarnings("SameParameterValue")
-    Instant of(int year, int month, int day, int hour, int minute) {
+    static Instant of(int year, int month, int day, int hour, int minute) {
         return LocalDateTime.of(year, month, day, hour, minute).atZone(Schedule.ZONE_ID).toInstant();
     }
 
+    /**
+     * Returns a change with mid {@code mid_<number>}}, and publish date {@code minute}s after 2021-03-01T12:00.
+     */
     MediaChange.Builder change(int number, int minute) {
-        return  MediaChange.builder()
-                    .publishDate(of(2021, 3, 1, 12, minute))
+        return MediaChange.builder()
+            .publishDate(INSTANT.plus(Duration.ofMinutes(minute)))
+            .mid("mid_" + number)
+            .media(
+                clip()
+                    .id((long)number)
+                    .workflow(Workflow.PUBLISHED)
                     .mid("mid_" + number)
-                    .media(MediaBuilder.clip().id((long)number).workflow(Workflow.PUBLISHED).mid("mid_" + number).build());
+                    .build()
+            );
     }
 
 }
