@@ -30,7 +30,6 @@ public interface MediaService extends MediaProvider {
         String mid,
         Order order,
         Integer max,
-        Long keepAlive,
         boolean withSequences,
         Deletes deletes,
         Tail tails,
