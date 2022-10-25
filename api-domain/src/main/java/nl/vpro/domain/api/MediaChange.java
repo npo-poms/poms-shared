@@ -188,7 +188,7 @@ public class MediaChange extends Change<MediaObject> {
         return getId();
     }
 
-    public void setMid(String mid) {
+    protected void setMid(String mid) {
         if (getId() == null) {
             setId(mid);
         }
@@ -197,6 +197,7 @@ public class MediaChange extends Change<MediaObject> {
     public MediaSince asSince() {
         return MediaSince.builder().instant(getPublishDate()).mid(getMid()).build();
     }
+
 
     @Override
     public String toString() {

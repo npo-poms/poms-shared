@@ -67,6 +67,10 @@ public abstract class Change<T>  {
         return tail != null ? tail : false;
     }
 
+    public boolean isNotSkipped() {
+        return ! isSkipped();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
