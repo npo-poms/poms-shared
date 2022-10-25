@@ -21,6 +21,8 @@ public interface MediaPublisherHeaders {
     String TRANSACTION_UUID_HEADER  = "transactionUUID";
     String REASON_HEADER            = "reason";
     String COLLECTED_REASONS_HEADER = "collectedReasons";
+    String REASONS_SPLITTER         = "\t";
+    String REASON_SPLITTER          = "|";
     String TRIGGERED_BY_HEADER         = "triggeredBy";
     String RECENTLY_MODIFIED_BY_HEADER = "recentlyModifiedBy";
     String LAST_MODIFIED_BY_HEADER     = "lastModifiedBy";
