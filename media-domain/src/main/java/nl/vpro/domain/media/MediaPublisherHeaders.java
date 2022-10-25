@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,6 +24,7 @@ public interface MediaPublisherHeaders {
     String COLLECTED_REASONS_HEADER = "collectedReasons";
     String REASONS_SPLITTER         = "\t";
     String REASON_SPLITTER          = "|";
+    String REASON_SPLITTER_QUOTED   = Pattern.quote(REASON_SPLITTER);
     String TRIGGERED_BY_HEADER         = "triggeredBy";
     String RECENTLY_MODIFIED_BY_HEADER = "recentlyModifiedBy";
     String LAST_MODIFIED_BY_HEADER     = "lastModifiedBy";
