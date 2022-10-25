@@ -32,7 +32,7 @@ public interface MediaRepository extends MediaLoader, Redirector {
     @Deprecated
     CloseableIterator<MediaChange> changes(Long since, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive);
 
-    CloseableIterator<MediaChange> changes(Instant since, String mid, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive, Deletes deletes, Tail tail, Predicate<MediaChange> reasonFilter);
+    CloseableIterator<MediaChange> changes(Instant since, String mid, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Deletes deletes, Tail tail, Predicate<MediaChange> reasonFilter);
 
     CloseableIterator<MediaObject> iterate(ProfileDefinition<MediaObject> profile, MediaForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
 
