@@ -48,6 +48,7 @@ public abstract class Change<T>  {
      * result streams.
      */
     @XmlTransient
+    @Setter(AccessLevel.PUBLIC)
     private boolean skipped;
 
     //@XmlElement(name = "object")
