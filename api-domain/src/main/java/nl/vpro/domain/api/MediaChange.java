@@ -71,6 +71,8 @@ public class MediaChange extends Change<MediaObject> {
     @Setter
     private String mergedTo;
 
+
+
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -93,11 +95,11 @@ public class MediaChange extends Change<MediaObject> {
         Long revision,
         String mid,
         MediaObject media,
+        Boolean deleted,
         MediaSince since,
         Boolean tail,
-        Boolean deleted,
-        boolean skipped,
-        @Nullable List<@NonNull String> reasons) {
+        @Nullable List<@NonNull String> reasons,
+        boolean skipped) {
         this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
             deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted);
         setPublishDate(MediaSince.instant(publishDate, since));
@@ -105,7 +107,6 @@ public class MediaChange extends Change<MediaObject> {
         if (media != null && media.getWorkflow() == Workflow.MERGED) {
             setMergedTo(media.getMergedToRef());
         }
-
         this.reasons = reasons;
         setSkipped(skipped);
     }
@@ -158,19 +159,19 @@ public class MediaChange extends Change<MediaObject> {
             .build();
     }
 
-    public static MediaChange skipped(MediaSince since) {
-        return MediaChange.builder()
-            .since(since)
-            .tail(false)
-            .skipped(true)
-            .build();
-    }
-
     public static MediaChange tail(Instant publishDate, Long sequence) {
         return  MediaChange.builder()
             .publishDate(publishDate)
             .revision(sequence)
             .tail(true)
+            .build();
+    }
+
+    public static MediaChange skipped(MediaSince since) {
+        return MediaChange.builder()
+            .since(since)
+            .tail(false)
+            .skipped(true)
             .build();
     }
 
@@ -188,7 +189,7 @@ public class MediaChange extends Change<MediaObject> {
         return getId();
     }
 
-    public void setMid(String mid) {
+    void setMid(String mid) {
         if (getId() == null) {
             setId(mid);
         }
@@ -204,7 +205,7 @@ public class MediaChange extends Change<MediaObject> {
     }
 
     @Override
-    public void setPublishDate(Instant instant) {
+    protected void setPublishDate(Instant instant) {
         if (this.realPublishDate == null) {
             this.realPublishDate = getPublishDate();
         }
@@ -220,5 +221,7 @@ public class MediaChange extends Change<MediaObject> {
     public Instant getRealPublishDate() {
         return realPublishDate == null ? getPublishDate() : realPublishDate;
     }
+
+
 
 }
