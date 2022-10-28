@@ -7,6 +7,9 @@ package nl.vpro.domain.api.media;
 import java.time.Instant;
 import java.util.function.Predicate;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
@@ -32,7 +35,17 @@ public interface MediaRepository extends MediaLoader, Redirector {
     @Deprecated
     CloseableIterator<MediaChange> changes(Long since, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive);
 
-    CloseableIterator<MediaChange> changes(Instant since, String mid, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive, Deletes deletes, Tail tail, Predicate<MediaChange> reasonFilter);
+    CloseableIterator<MediaChange> changes(
+        @Nullable final Instant since,
+        @Nullable final String mid,
+        @Nullable final ProfileDefinition<MediaObject> currentProfile,
+        @Nullable final ProfileDefinition<MediaObject> previousProfile,
+        @NonNull final Order order,
+        @Nullable final Integer max,
+        @Nullable Deletes deletes,
+        @Nullable final Tail tail,
+        @Nullable final Predicate<MediaChange> filter
+    );
 
     CloseableIterator<MediaObject> iterate(ProfileDefinition<MediaObject> profile, MediaForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
 
