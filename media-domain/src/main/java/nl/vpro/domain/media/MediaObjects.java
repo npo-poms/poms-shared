@@ -568,8 +568,8 @@ public class MediaObjects {
     }
     protected static void appendReason(MediaObject media, String reason, Object... args) {
         if (StringUtils.isNotBlank(reason)) {
-            String formattedReason =  MessageFormatter.arrayFormat(reason, args).getMessage();
-            String existingReason = media.getRepubReason();
+            final String formattedReason =  MessageFormatter.arrayFormat(reason, args).getMessage();
+            final String existingReason = media.getRepubReason();
             if (StringUtils.isBlank(existingReason)) {
                 media.setRepubReason(formattedReason);
             } else {

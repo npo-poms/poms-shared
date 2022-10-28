@@ -32,7 +32,7 @@ public interface MediaPublisherHeaders {
     /**
      * A reason can be joined with its publication time.
      */
-    String REASON_SPLITTER          = "|";
+    String REASON_SPLITTER          = "#";
     String REASON_SPLITTER_QUOTED   = Pattern.quote(REASON_SPLITTER);
     String TRIGGERED_BY_HEADER         = "triggeredBy";
     String RECENTLY_MODIFIED_BY_HEADER = "recentlyModifiedBy";
