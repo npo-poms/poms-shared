@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -84,7 +85,7 @@ public class MediaChange extends Change<MediaObject> {
     @XmlElementWrapper
     @XmlElement(name = "reason")
     @JsonProperty("reasons")
-    private List<String> reasons;
+    private List<Reason> reasons;
 
     public MediaChange() {
     }
@@ -98,7 +99,8 @@ public class MediaChange extends Change<MediaObject> {
         Boolean deleted,
         MediaSince since,
         Boolean tail,
-        @Nullable List<@NonNull String> reasons,
+        @Nullable List<@NonNull Reason> reasons,
+        @Nullable List<@NonNull String> reasonsStrings,
         boolean skipped) {
         this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
             deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted);
@@ -108,6 +110,14 @@ public class MediaChange extends Change<MediaObject> {
             setMergedTo(media.getMergedToRef());
         }
         this.reasons = reasons;
+        if (reasonsStrings != null) {
+            List<Reason> collect = reasonsStrings.stream().map(s -> new Reason(s, publishDate)).collect(Collectors.toList());
+            if (this.reasons == null) {
+                this.reasons = collect;
+            } else {
+                this.reasons.addAll(0, collect);
+            }
+        }
         setSkipped(skipped);
     }
 
@@ -220,6 +230,28 @@ public class MediaChange extends Change<MediaObject> {
      */
     public Instant getRealPublishDate() {
         return realPublishDate == null ? getPublishDate() : realPublishDate;
+    }
+
+    @Getter
+    @XmlAccessorType(XmlAccessType.NONE)
+    public static class Reason {
+        @XmlValue
+        String reason;
+
+        @XmlAttribute
+        @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+        @XmlSchemaType(name = "dateTime")
+        @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+        @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+        private Instant publishDate;
+
+        protected Reason() {
+
+        }
+        public Reason(String reason, Instant publicationDate) {
+            this.reason = reason;
+            this.publishDate = publicationDate;
+        }
     }
 
 
