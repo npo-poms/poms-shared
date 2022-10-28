@@ -11,7 +11,7 @@ public class Headers {
     }
 
     /**
-     * A request header signifying the preferred {@link OwnerType}
+     * A request header signifying the preferred {@code OwnerType}
      */
     public static final String OWNER_TYPE_HEADER = "X-Poms-CurrentOwner";
 
