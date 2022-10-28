@@ -234,6 +234,7 @@ public class MediaChange extends Change<MediaObject> {
 
     @Getter
     @XmlAccessorType(XmlAccessType.NONE)
+    @XmlType(name = "mediaChangeReason")
     public static class Reason {
         @XmlValue
         String reason;

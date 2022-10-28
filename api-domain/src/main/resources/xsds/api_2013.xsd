@@ -860,7 +860,7 @@
       <xs:element name="reasons" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="reason" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="reason" type="mediaChangeReason" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -875,6 +875,14 @@
     <xs:attribute name="mergedTo" type="xs:string"/>
     <xs:attribute name="realPublishDate" type="xs:dateTime"/>
     <xs:attribute name="mid" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="mediaChangeReason">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="publishDate" type="xs:dateTime"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
   <xs:complexType name="suggestResultType">
