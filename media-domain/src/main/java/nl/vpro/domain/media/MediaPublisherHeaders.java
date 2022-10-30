@@ -26,13 +26,17 @@ public interface MediaPublisherHeaders {
 
     /**
      * Multiple reasons can be joined with this, to encode the in one String.
+     * <p>
+     * Uses now ASCII Record seperator RS
      */
-    String REASONS_SPLITTER         = "\t";
+    String REASONS_SPLITTER         = "\u0030";
 
     /**
      * A reason can be joined with its publication time.
+     * <p>
+     *  Uses now ASCII Unit seperator US
      */
-    String REASON_SPLITTER          = "#";
+    String REASON_SPLITTER          = "\u0031";
     String REASON_SPLITTER_QUOTED   = Pattern.quote(REASON_SPLITTER);
     String TRIGGERED_BY_HEADER         = "triggeredBy";
     String RECENTLY_MODIFIED_BY_HEADER = "recentlyModifiedBy";
