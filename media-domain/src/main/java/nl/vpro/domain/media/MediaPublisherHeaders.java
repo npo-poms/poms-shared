@@ -29,14 +29,14 @@ public interface MediaPublisherHeaders {
      * <p>
      * Uses now ASCII Record seperator RS
      */
-    String REASONS_SPLITTER         = "\u0030";
+    String REASONS_SPLITTER         = "\u241E";
 
     /**
      * A reason can be joined with its publication time.
      * <p>
      *  Uses now ASCII Unit seperator US
      */
-    String REASON_SPLITTER          = "\u0031";
+    String REASON_SPLITTER          = "\u241F";
     String REASON_SPLITTER_QUOTED   = Pattern.quote(REASON_SPLITTER);
     String TRIGGERED_BY_HEADER         = "triggeredBy";
     String RECENTLY_MODIFIED_BY_HEADER = "recentlyModifiedBy";
