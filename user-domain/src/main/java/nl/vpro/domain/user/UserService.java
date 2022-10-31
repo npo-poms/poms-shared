@@ -293,6 +293,15 @@ public interface UserService<T extends User> {
 
     @Getter
     abstract class  Logout<S extends User> implements AutoCloseable {
+
+        public static <T extends User> Logout<T> nop() {
+            return new Logout<T>() {
+                @Override
+                public void close() {
+
+                }
+            };
+        }
         /**
          * The user currently logged in and that will be logout by this.
          */
@@ -313,5 +322,7 @@ public interface UserService<T extends User> {
             this.user = user;
         }
     }
+
+
 
 }
