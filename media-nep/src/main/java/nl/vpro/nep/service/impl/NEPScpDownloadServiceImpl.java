@@ -28,7 +28,7 @@ import nl.vpro.util.*;
  * <p>
  * I first tried curl, to no avail either.
  * <p>
- * Older scp clients would give troubles too. In the end Dick realized that, and pointed to a more up to date client on the poms server.
+ * Older scp clients would give troubles too. In the end Dick realized that, and pointed to a more up-to-date client on the poms-server.
  *
  * @author Michiel Meeuwissen
  * @since 5.8
@@ -51,6 +51,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @Value("${nep.itemizer-download.password}") String password,
         @Value("${nep.itemizer-download.hostkey}") String hostkey,
         @Value("${nep.itemizer-download.scp.useFileCache}") boolean useFileCache,
+        @Value("${nep.itemizer-download.hostKeyAlgorithms:+ssh-rsa,ssh-dss}") String hostkeyAlgorithms,
         @Value("${executables.scp}") List<String> scpExecutables,
         @Value("${executables.sshpass}") List<String> sshpassExecutables,
         @Value("${executables.scp.version:8}") int scpVersion,
@@ -79,6 +80,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                     "-p", password,
                     scpcommand.getAbsolutePath(),
                     "-o", "StrictHostKeyChecking=yes",
+                    "-o", "HostKeyAlgorithms=" + hostkeyAlgorithms,
                     "-o", userKnownHostsFile(hostkey, ftpHost)
                 );
 
@@ -117,6 +119,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             properties.getProperty("nep.itemizer-download.username"),
             properties.getProperty("nep.itemizer-download.password"),
             properties.getProperty("nep.itemizer-download.hostkey"),
+            "+ssh-rsa,ssh-dss",
             true,
             Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
             Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass", "/usr/local/bin/sshpass"/*brew*/),
