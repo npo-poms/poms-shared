@@ -51,6 +51,6 @@ jobs:
           junit_files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish to codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
 
