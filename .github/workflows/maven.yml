@@ -52,5 +52,6 @@ jobs:
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish to codecov
         uses: codecov/codecov-action@v3
+        verbose: true
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
 
