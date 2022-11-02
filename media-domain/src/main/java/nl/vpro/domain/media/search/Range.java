@@ -1,15 +1,11 @@
 package nl.vpro.domain.media.search;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -65,19 +61,29 @@ public interface Range<T extends Comparable<T>, S extends Range.RangeValue<T>> e
     }
 
     @Data
-    @AllArgsConstructor
     @XmlAccessorType(XmlAccessType.NONE)
     @XmlTransient
     abstract class RangeValue<T extends Comparable<T>> implements Supplier<T> {
+
+        // a boxed version for xml binding. So inclusive=true default it not specified.
         @XmlAttribute
         Boolean inclusive = null;
 
         RangeValue() {
 
         }
+
+        public RangeValue(Boolean inclusive) {
+            setInclusive(inclusive);
+        }
+
         public boolean isInclusive() {
             return inclusive == null || inclusive;
         }
+        public void setInclusive(Boolean inclusive) {
+            this.inclusive = inclusive == null || inclusive ? null : inclusive;
+        }
+
         @Override
         public T get() {
             return getValue();

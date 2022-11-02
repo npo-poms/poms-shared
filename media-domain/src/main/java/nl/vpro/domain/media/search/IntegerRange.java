@@ -48,7 +48,9 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
         }
 
         public Builder start(Long start, boolean inclusive) {
-            this.start = Value.builder().value(start).inclusive(inclusive).build();
+            this.start = Value.builder().value(start)
+                .inclusive(inclusive)
+                .build();
             return this;
         }
 
@@ -97,7 +99,10 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
         }
 
         public static Value exclusive(Long instant) {
-             return builder().value(instant).inclusive(false).build();
+             return builder()
+                 .value(instant)
+                 .inclusive(false)
+                 .build();
         }
     }
 
