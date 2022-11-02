@@ -55,5 +55,5 @@ jobs:
         with:
           verbose: true
           files:  "**/target/surefire-reports/*.xml"
-        if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
+        if: github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == 11
 
