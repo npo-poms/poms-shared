@@ -42,7 +42,7 @@ jobs:
           GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Build with Maven (Other os and java != 11)
         run: mvn -B  -U -fae package
-        if: runner.os != 'Linux' || matrix.java != 11
+        if: ! (runner.os == 'Linux' && matrix.java == 11)
         continue-on-error: true
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2.2.0
@@ -52,6 +52,8 @@ jobs:
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish to codecov
         uses: codecov/codecov-action@v3
-        verbose: true
+        with:
+          verbose: true
+          files:  "**/target/surefire-reports/*.xml"
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
 
