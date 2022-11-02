@@ -33,7 +33,12 @@ public class LocalDateRange implements Range<ChronoLocalDate, LocalDateRange.Val
 
     public LocalDateRange(LocalDate start, LocalDate stop) {
         this.start = Value.of(start);
-        this.stop = Value.of(stop);
+        this.stop = Value.exclusive(stop);
+    }
+
+    public LocalDateRange(LocalDate start) {
+        this.start = Value.of(start);
+        this.stop = Value.of(start);
     }
 
 
@@ -64,6 +69,13 @@ public class LocalDateRange implements Range<ChronoLocalDate, LocalDateRange.Val
                 return null;
             }
             return builder().value(instant).build();
+        }
+
+        public static Value exclusive(LocalDate instant) {
+            if (instant == null) {
+                return null;
+            }
+            return builder().value(instant).inclusive(false).build();
         }
     }
 

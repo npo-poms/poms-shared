@@ -28,6 +28,10 @@ public interface ScheduleService {
         }
     }
 
+    /**
+     * @param start Inclusive start instant
+     * @param stop Exclusive stop  instant
+     */
     ScheduleResult list(
         Instant start,
         Instant stop,
@@ -35,6 +39,10 @@ public interface ScheduleService {
         long offset,
         Integer max);
 
+    /**
+     * @param start Inclusive start instant
+     * @param stop Exclusive stop  instant
+     */
     ScheduleResult list(
         Channel channel,
         Instant start,

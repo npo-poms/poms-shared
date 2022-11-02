@@ -44,7 +44,7 @@ class ExtendedScheduleForm extends ScheduleForm {
     }
 
     public ExtendedScheduleForm(SchedulePager pager, LocalDate guideDay) {
-        super(pager, null, new LocalDateRange(guideDay, guideDay), null);
+        super(pager, null, new LocalDateRange(guideDay), null);
     }
 
     @Override

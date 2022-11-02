@@ -36,7 +36,9 @@ public class MediaFormTest {
     public void builder() {
         MediaForm form = MediaForm.builder()
             .broadcasters(null)
-            .locationsCount(IntegerRange.builder().start(0L).stop(0L, true).build())
+            .locationsCount(IntegerRange.builder()
+                .start(0L)
+                .stop(0L, false).build())
             .lastPublishedRange(InstantRange.builder().start(InstantRange.Value.of(LocalDateTime.of(2017, 9, 29, 16, 35).atZone(Schedule.ZONE_ID).toInstant())).build())
             .build();
         JAXBTestUtil.roundTripAndSimilar(form, "<s:mediaForm xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:s=\"urn:vpro:media:search:2012\" xmlns:update=\"urn:vpro:media:update:2009\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
@@ -46,7 +48,7 @@ public class MediaFormTest {
             "    </s:pager>\n" +
             "    <s:locationsCount>\n" +
             "        <s:start>0</s:start>\n" +
-            "        <s:stop inclusive=\"true\">0</s:stop>\n" +
+            "        <s:stop inclusive=\"false\">0</s:stop>\n" +
             "    </s:locationsCount>\n" +
             "    <s:lastPublishedRange>\n" +
             "        <s:start>2017-09-29T16:35:00+02:00</s:start>\n" +
