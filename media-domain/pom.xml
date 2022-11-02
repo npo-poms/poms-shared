@@ -10,7 +10,7 @@
   <artifactId>media-domain</artifactId>
   <name>media-domain</name>
   <description>
-    The basic domain classes for 'media', the core of POMS. Also the 'update' XML bindings for it.
+    The basic domain classes for 'media', the core of POMS. Also, the 'update' XML bindings for it.
     It also contains some closely related domain classes like the enum to contain NICAM kijkwijzer settings.
   </description>
 

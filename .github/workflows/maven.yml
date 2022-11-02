@@ -47,8 +47,8 @@ jobs:
       - name: Publish to codecov
         uses: codecov/codecov-action@v3
         with:
-          verbose: true
-          files: "**/target/surefire-reports/*.xml"
+          verbose: false
+          #files: "**/target/surefire-reports/*.xml"
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == 11
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2.2.0
