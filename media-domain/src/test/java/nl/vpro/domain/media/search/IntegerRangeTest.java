@@ -11,12 +11,11 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class IntegerRangeTest {
 
     @Test
-
     public void xml() {
         IntegerRange range = IntegerRange
             .builder()
             .start(IntegerRange.Value.of(1L))
-            .stop(IntegerRange.Value.builder().value(2L).inclusive(false).build())
+            .stop(2L)
             .build();
         JAXBTestUtil.roundTripAndSimilarAndEquals(range,
                 "<local:integerRange xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:s=\"urn:vpro:media:search:2012\" xmlns:update=\"urn:vpro:media:update:2009\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:local=\"uri:local\">\n" +

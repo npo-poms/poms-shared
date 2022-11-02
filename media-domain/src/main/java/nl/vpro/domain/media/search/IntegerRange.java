@@ -32,14 +32,19 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
     }
 
     public static class Builder {
+
+        /**
+         * Adds (inclusive) start value.
+         */
         public Builder start(Long start) {
-            this.start = Value.builder().value(start).build();
-            return this;
+            return start(start, true);
         }
 
+        /**
+         * Adds (exclusive) stop value.
+         */
         public Builder stop(Long stop) {
-            this.stop = Value.builder().value(stop).build();
-            return this;
+            return stop(stop, false);
         }
 
         public Builder start(Long start, boolean inclusive) {
@@ -56,6 +61,7 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
         public Builder equals(Long stopandstart) {
             return stop(stopandstart, true).start(stopandstart, true);
         }
+
         public Builder start(Value start) {
             this.start = start;
             return this;
@@ -88,6 +94,10 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
 
         public static Value of(Long instant) {
             return builder().value(instant).build();
+        }
+
+        public static Value exclusive(Long instant) {
+             return builder().value(instant).inclusive(false).build();
         }
     }
 

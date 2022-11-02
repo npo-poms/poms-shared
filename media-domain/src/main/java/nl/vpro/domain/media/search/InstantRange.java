@@ -40,11 +40,21 @@ public class InstantRange implements Range<Instant, InstantRange.Value> {
     public InstantRange() {
     }
 
+    /**
+     * Creates a new range. Using {@link Schedule#ZONE_ID}.
+     * @param start Inclusive start of the new range
+     * @param stop  Exclusive stop of the new range
+     */
     public InstantRange(LocalDateTime start, LocalDateTime stop) {
-        this.start = start == null ? null : Value.of(start.atZone(Schedule.ZONE_ID).toInstant());
-        this.stop = stop == null ? null : Value.exclusive(stop.atZone(Schedule.ZONE_ID).toInstant());
+        this(start == null ? null : start.atZone(Schedule.ZONE_ID).toInstant(),
+            stop == null ? null : stop.atZone(Schedule.ZONE_ID).toInstant());
     }
 
+    /**
+     * Creates a new range.
+     * @param start Inclusive start of the new range
+     * @param stop  Exclusive stop of the new range
+     */
     public InstantRange(Instant start, Instant stop) {
         this.start = Value.of(start);
         this.stop = Value.exclusive(stop);
@@ -60,6 +70,9 @@ public class InstantRange implements Range<Instant, InstantRange.Value> {
         }
     }
 
+    /**
+     * Represents one of the endpoints of an {@link InstantRange}.
+     */
     @Data
     @EqualsAndHashCode(callSuper = true)
     @XmlType(name = "dateRangeValueType")
