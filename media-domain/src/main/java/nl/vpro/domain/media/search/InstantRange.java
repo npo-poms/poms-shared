@@ -42,12 +42,12 @@ public class InstantRange implements Range<Instant, InstantRange.Value> {
 
     public InstantRange(LocalDateTime start, LocalDateTime stop) {
         this.start = start == null ? null : Value.of(start.atZone(Schedule.ZONE_ID).toInstant());
-        this.stop = stop == null ? null : Value.of(stop.atZone(Schedule.ZONE_ID).toInstant());
+        this.stop = stop == null ? null : Value.exclusive(stop.atZone(Schedule.ZONE_ID).toInstant());
     }
 
     public InstantRange(Instant start, Instant stop) {
         this.start = Value.of(start);
-        this.stop = Value.of(stop);
+        this.stop = Value.exclusive(stop);
     }
 
     public static class Builder {
@@ -88,6 +88,12 @@ public class InstantRange implements Range<Instant, InstantRange.Value> {
         public Value(Boolean inclusive, Instant value) {
             super(inclusive);
             this.value = value;
+        }
+        public static Value exclusive(Instant instant){
+            if (instant == null) {
+                return null;
+            }
+            return builder().value(instant).inclusive(false).build();
         }
         public static Value of(Instant instant) {
             if (instant == null) {
