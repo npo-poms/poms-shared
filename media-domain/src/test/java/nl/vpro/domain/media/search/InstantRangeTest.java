@@ -23,7 +23,8 @@ public class InstantRangeTest {
         assertThat(range.test(Instant.ofEpochMilli(99))).isFalse();
         assertThat(range.test(Instant.ofEpochMilli(100))).isTrue();
         assertThat(range.test(Instant.ofEpochMilli(150))).isTrue();
-        assertThat(range.test(Instant.ofEpochMilli(200))).isTrue();
+        assertThat(range.test(Instant.ofEpochMilli(199))).isTrue();
+        assertThat(range.test(Instant.ofEpochMilli(200))).isFalse();
         assertThat(range.test(Instant.ofEpochMilli(201))).isFalse();
 
     }
@@ -45,7 +46,8 @@ public class InstantRangeTest {
         assertThat(range.test(Instant.ofEpochMilli(99))).isTrue();
         assertThat(range.test(Instant.ofEpochMilli(100))).isTrue();
         assertThat(range.test(Instant.ofEpochMilli(150))).isTrue();
-        assertThat(range.test(Instant.ofEpochMilli(200))).isTrue();
+        assertThat(range.test(Instant.ofEpochMilli(199))).isTrue();
+        assertThat(range.test(Instant.ofEpochMilli(200))).isFalse();
         assertThat(range.test(Instant.ofEpochMilli(201))).isFalse();
 
     }
@@ -122,7 +124,7 @@ public class InstantRangeTest {
     public void xml() {
         JAXBTestUtil.roundTripAndSimilar(new InstantRange(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)), "<local:instantRange xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:s=\"urn:vpro:media:search:2012\" xmlns:update=\"urn:vpro:media:update:2009\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:local=\"uri:local\">\n" +
             "    <s:start>1970-01-01T01:00:00.100+01:00</s:start>\n" +
-            "    <s:stop>1970-01-01T01:00:00.200+01:00</s:stop>\n" +
+            "    <s:stop inclusive=\"false\">1970-01-01T01:00:00.200+01:00</s:stop>\n" +
             "</local:instantRange>");
 
     }
