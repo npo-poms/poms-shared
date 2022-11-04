@@ -35,12 +35,12 @@ public interface MediaObjectLockerAdminMXBean   {
     int getMaxDepth();
 
     @Description("Explicitly clear a lock on some mid")
-    String clearMidLock(@Name("mid") String mid);
+    String clearMidLock(@Name("mid") String mid, boolean interrupt);
 
     @Description("Explicitly lock a mid for a certain period. This simulates long processes, and can be used to assess such a situation")
     String lockMid(@Description("The mid to lock") @Name("mid") String mid, @Description("How long") @Name("duration") String duration);
 
-    String clearMidLocks();
+    String clearMidLocks(boolean interrupt);
 
     @Description("If locks are monitoring, this the time a process needs to wait for a lock at most")
     String getMaxLockAcquireTime();

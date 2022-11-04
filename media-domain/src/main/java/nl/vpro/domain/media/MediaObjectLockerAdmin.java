@@ -58,14 +58,20 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
     }
 
     @Override
-    public String clearMidLock(String mid) {
-        return "removed " + MediaObjectLocker.LOCKED_MEDIA.remove(MediaIdentifiable.Correlation.mid(mid));
+    public String clearMidLock(String mid, boolean interrupt) {
+        ObjectLocker.LockHolder<MediaIdentifiable.Correlation> removed = MediaObjectLocker.LOCKED_MEDIA.remove(MediaIdentifiable.Correlation.mid(mid));
+        if (removed != null) {
+            removed.disable(interrupt);
+            return "Removed " + MediaObjectLocker.LOCKED_MEDIA.remove(MediaIdentifiable.Correlation.mid(mid));
+        } else {
+            return "No such lock " + mid;
+        }
     }
 
     @Override
     public String lockMid(String mid, String duration) {
         final Duration dur = TimeUtils.parseDuration(duration).orElseThrow(() -> new IllegalArgumentException("Cannot parse " + duration));
-        return MBeans.returnString("locking mid " + mid, MBeans.multiLine(log, "locking"), Duration.ofSeconds(5), (logger) -> {
+        return MBeans.returnString("locking mid " + mid, MBeans.multiLine(log, "locking"), dur.compareTo(Duration.ofSeconds(5)) < 0 ? dur : Duration.ZERO, (logger) -> {
             MediaObjectLocker.withMidLock(mid, "explicit lock for " + duration, new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
@@ -79,9 +85,11 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
     }
 
     @Override
-    public String clearMidLocks() {
+    public String clearMidLocks(boolean interrupt) {
         final int size = MediaObjectLocker.LOCKED_MEDIA.size();
-        MediaObjectLocker.LOCKED_MEDIA.clear();
+        for (ObjectLocker.LockHolder<MediaIdentifiable.Correlation> value : MediaObjectLocker.LOCKED_MEDIA.values()) {
+             value.disable(interrupt);
+        }
         return "Removed all mid locks (approx. " + size + ")";
     }
 
