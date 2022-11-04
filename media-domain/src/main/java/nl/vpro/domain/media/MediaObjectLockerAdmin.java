@@ -74,9 +74,13 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
         return MBeans.returnString("locking mid " + mid, MBeans.multiLine(log, "locking"), dur.compareTo(Duration.ofSeconds(5)) < 0 ? dur : Duration.ZERO, (logger) -> {
             MediaObjectLocker.withMidLock(mid, "explicit lock for " + duration, new Callable<Void>() {
                 @Override
-                public Void call() throws Exception {
-                    logger.info("Locked " + mid + " for " + dur);
-                    Thread.sleep(dur.toMillis());
+                public Void call() {
+                    try {
+                        logger.info("Locked " + mid + " for " + dur);
+                        Thread.sleep(dur.toMillis());
+                    } catch (InterruptedException ie) {
+                        logger.info("Interrupted locking of " + mid);
+                    }
                     logger.info("Releasing lock for  " + mid + " now");
                     return null;
                 }
