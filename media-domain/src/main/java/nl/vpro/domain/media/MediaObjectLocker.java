@@ -32,7 +32,7 @@ import static nl.vpro.util.locker.ObjectLocker.withObjectLock;
  * <p>
  * This basically wraps {@link ObjectLocker}, but keeps a separate map of locked objects, dedicated to media identifiables
  * <p>
- * Also, it defines some annotations (for use with {@link MediaObjectLockerAspect} (to facilitate locking via annotation), and some utility methods.
+ * Also, it defines some annotations (for use with {@link MediaObjectLockerAspect}, to facilitate locking via annotation), and some utility methods.
  *
  * @author Michiel Meeuwissen
  * @since 5.5
@@ -104,7 +104,10 @@ public class MediaObjectLocker {
     }
 
     public static void assertNoMidLock(String description) {
-        List<LockHolder<? extends Serializable>> collect = ObjectLocker.currentLocks().stream().filter(f -> f.key instanceof MediaIdentifiable.Correlation).collect(Collectors.toList());
+        List<LockHolder<? extends Serializable>> collect = ObjectLocker.currentLocks()
+            .stream()
+            .filter(f -> f.key instanceof MediaIdentifiable.Correlation)
+            .collect(Collectors.toList());
         if (!collect.isEmpty()) {
             throw new IllegalStateException("There is a lock " + collect + ": " + description);
         }
