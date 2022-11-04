@@ -61,8 +61,6 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     @NotNull(message = "start property is required")
     protected java.time.Duration start;
 
-    // Some thing like this will be needed for prepr import
-    //protected List<Composite>
 
     @Transient
     protected String urnRef;
