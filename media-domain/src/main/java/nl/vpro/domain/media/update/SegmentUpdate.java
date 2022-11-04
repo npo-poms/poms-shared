@@ -300,8 +300,8 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     }
 
     @Override
-    public String getCorrelationId() {
-        return getMidRefAttribute();
+    public Correlation getCorrelation() {
+        return Correlation.mid(getMidRefAttribute());
     }
     @Target({TYPE_USE})
     @Retention(RUNTIME)

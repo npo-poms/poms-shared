@@ -34,6 +34,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
         return Optional.empty();
     }
 
+    @Override
     default String getCorrelationId() {
         return getCorrelation().id;
     }
@@ -43,6 +44,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
      * Oftentimes that will be the {@link #getMid()}, but in certain situation that is not (yet) available, and it may fall back
      * to (the first) {@link #getCrids()}.
      */
+    @Override
     default Correlation getCorrelation () {
         String mid = getMid();
         if (mid != null) {
@@ -70,7 +72,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
             this.type = type;
         }
 
-        static Correlation mid(String mid) {
+        public static Correlation mid(String mid) {
             if (mid == null) {
                 return null;
             } else {
@@ -78,7 +80,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
             }
         }
 
-        static Correlation crid(String crid) {
+        public static Correlation crid(String crid) {
             if (crid == null) {
                 return null;
             } else {
