@@ -630,6 +630,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Setter(AccessLevel.PACKAGE)
     private StreamingStatusImpl streamingPlatformStatus = StreamingStatus.unset();
 
+    @Column(insertable = false, updatable = false)
+    private String correlationId;
+
 
 
     public MediaObject() {
@@ -3003,6 +3006,25 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         }
         return result;
     }
+
+
+    @Override
+    public final Correlation getCorrelation() {
+        if (correlationId == null) {
+            Correlation cor = calcCorrelation();
+            if (cor.type == Correlation.Type.MID) {
+                correlationId = calcCorrelation().id;
+            } else {
+                return cor;
+            }
+        }
+        return Correlation.mid(correlationId);
+    }
+
+    protected  Correlation calcCorrelation() {
+        return Media.super.getCorrelation();
+    }
+
 
     @Override
     public final String toString() {

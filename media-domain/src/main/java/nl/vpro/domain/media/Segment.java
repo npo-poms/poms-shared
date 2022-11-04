@@ -363,7 +363,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
      *
      */
     @Override
-    public Correlation getCorrelation() {
+    public Correlation calcCorrelation() {
         if (parent != null) {
             return parent.getCorrelation();
         }
@@ -371,7 +371,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         if (midRef != null) {
             return Correlation.mid(midRef);
         } else {
-            return super.getCorrelation();
+            return super.calcCorrelation();
         }
     }
 
