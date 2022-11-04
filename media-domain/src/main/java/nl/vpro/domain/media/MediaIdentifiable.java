@@ -36,7 +36,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
 
     @Override
     default String getCorrelationId() {
-        return getCorrelation().id;
+        return Optional.ofNullable(getCorrelation()).map(c -> c.id).orElse(null);
     }
 
     /**
