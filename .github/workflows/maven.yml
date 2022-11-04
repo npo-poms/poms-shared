@@ -43,7 +43,8 @@ jobs:
       - name: Build with Maven (Other os and java != 11)
         run: mvn -B  -U -fae package
         if: runner.os != 'Linux' || matrix.java != 11
-        continue-on-error: true
+        continue-on-error: false
+
       - name: Publish to codecov
         uses: codecov/codecov-action@v3
         with:
