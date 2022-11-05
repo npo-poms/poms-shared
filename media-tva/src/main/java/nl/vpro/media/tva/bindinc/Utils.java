@@ -225,9 +225,10 @@ public final class Utils {
             return temp;
         }
         @Converter
-        public InputStream convertToInputStream(Temp temp, Exchange exchange) throws FileNotFoundException {
+        public InputStream convertToInputStream(
+            Temp temp, Exchange exchange) throws FileNotFoundException {
             if (temp.file.exists()) {
-                FileInputStream fileInputStream = new FileInputStream(temp.file);
+                final FileInputStream fileInputStream = new FileInputStream(temp.file);
                 List<Temp> temps = TEMPS.remove(exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class));
                 if (temps != null) {
                     temps.forEach(t -> {
@@ -269,7 +270,7 @@ public final class Utils {
                 if (file.delete()) {
                     log.debug("Deleted {}", file);
                 } else {
-                    log.warn("File {} could not be deleted", file);
+                    log.warn("File {} could not be deleted", file, new Exception());
                 }
             } else {
                 log.info("File {} does not exist", file);
