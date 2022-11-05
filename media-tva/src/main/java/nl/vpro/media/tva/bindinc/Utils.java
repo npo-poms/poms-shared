@@ -235,6 +235,8 @@ public final class Utils {
                             t.deleteFile();
                         }
                     });
+                } else {
+                    log.info("No {} found on exchange", Exchange.CORRELATION_ID);
                 }
                 return fileInputStream;
             } else {
