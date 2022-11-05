@@ -59,7 +59,7 @@ jobs:
           junit_files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish Unit Test Results (Windows)
-        uses: EnricoMi/publish-unit-test-result-action@compositev2.2.0
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2.2.0
         if: always()  && runner.os == 'Windows'
         with:
           junit_files: "**/target/surefire-reports/*.xml"

@@ -195,8 +195,8 @@ public final class Utils {
 
         /**
          * Converts input stream to a {@link Temp} object. Stores the inputstream as a temporary file.
-         *
-         * All these objects will be administrated on correlation id. If one of them is used, (because is is converted to an inputstream {@link #convertToInputStream(Temp, Exchange)},
+         * <p>
+         * All these objects will be administrated on correlation id. If one of them is used, (because it is converted to an inputstream {@link #convertToInputStream(Temp, Exchange)},
          * then all temp files for some correlation id will be deleted.
          */
         @Converter
@@ -263,8 +263,14 @@ public final class Utils {
         }
 
         void deleteFile() {
-            if (file.delete()) {
-                log.debug("Deleted {}", file);
+            if (file.exists()) {
+                if (file.delete()) {
+                    log.debug("Deleted {}", file);
+                } else {
+                    log.warn("File {} could not be deleted", file);
+                }
+            } else {
+                log.info("File {} does not exist", file);
             }
         }
 
