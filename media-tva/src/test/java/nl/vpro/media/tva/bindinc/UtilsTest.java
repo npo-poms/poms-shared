@@ -59,8 +59,8 @@ class UtilsTest {
         assertThat(converters.TEMPS).containsKey("NED1/2020-12-09");
         try (InputStream is = converters.convertToInputStream(temp, ex)) {
             assertThat(converters.TEMPS).isEmpty();
-            Utils.ready(ex);
         }
+        Utils.ready(ex);
         assertThat(temp.file).doesNotExist();
     }
 

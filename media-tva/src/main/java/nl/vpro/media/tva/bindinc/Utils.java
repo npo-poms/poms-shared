@@ -155,7 +155,6 @@ public final class Utils {
         if (body instanceof Temp) {
             ((Temp) body).deleteFile();
         }
-
     }
 
 
@@ -232,7 +231,8 @@ public final class Utils {
                 List<Temp> temps = TEMPS.remove(exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class));
                 if (temps != null) {
                     temps.forEach(t -> {
-                        if (t.file != temp.file) {
+                        if (!Objects.equals(t.file, temp.file)) {
+                            log.info("Deleting aggregated file {} ({} will be used)", t.file, temp.file);
                             t.deleteFile();
                         }
                     });
@@ -250,7 +250,6 @@ public final class Utils {
     /**
      * Used for aggregation of GenericFiles. See {@link Converters#convertToTemp(InputStream, Exchange)}
      */
-
     public static class Temp  {
         final File file;
         private  Temp(@NonNull File source, @NonNull String filename) throws IOException {
@@ -270,10 +269,10 @@ public final class Utils {
                 if (file.delete()) {
                     log.debug("Deleted {}", file);
                 } else {
-                    log.warn("File {} could not be deleted", file, new Exception());
+                    log.warn("File {} could not be deleted", file);
                 }
             } else {
-                log.info("File {} does not exist", file);
+                log.debug("File {} does not exist", file);
             }
         }
 
