@@ -43,7 +43,7 @@ public class MediaObjectLocker {
     /**
      * Map correlation -> ReentrantLock
      */
-    static final Map<MediaIdentifiable.Correlation, LockHolder<MediaIdentifiable.Correlation>>       LOCKED_MEDIA              = new ConcurrentHashMap<>();
+    static final Map<MediaIdentifiable.Correlation, LockHolder<MediaIdentifiable.Correlation>>   LOCKED_MEDIA              = new ConcurrentHashMap<>();
 
 
     private static final MediaObjectLockerAdmin JMX_INSTANCE    = new MediaObjectLockerAdmin();
