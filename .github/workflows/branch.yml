@@ -18,9 +18,18 @@ jobs:
           email: 'digitaal-techniek@vpro.nl'
           token: '${{ secrets.GITHUB_TOKEN  }}'
       - name: Release branch with Maven
-        # TODO, at least in main branch, the parent poms versions must remain  ${revision}${changelist}
+        # We are in a kind of hybrid situation
+        # For the trunk we use 'CI friendly' versioning (using 'revision' and 'changelist' properties).
+        # For release branches this is overridden by the release:branch plugin
         run: |
           VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
           RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
-          DEVELOPMENT_VERSION=`echo $VERSION | gawk 'match($1, /([0-9]+)\.([0-9]+)([\.-])(.*)/, a) {print a[1]"."(a[2]+1)a[3]a[4]}'`
-          mvn  -DupdateBranchVersions=true -DreleaseVersion=${RELEASE_VERSION} -DdevelopmentVersion=${DEVELOPMENT_VERSION} release:branch
+          REVISION=`mvn help:evaluate -Dexpression=revision -q -DforceStdout`
+          DEVELOPMENT_REVISION=`echo $REVISION | gawk 'match($1, /([0-9]+)\.([0-9]+)/, a) {print a[1]"."(a[2]+1)}'`
+          mvn  -DupdateBranchVersions=true -DupdateWorkingCopyVersions=false -DreleaseVersion=${RELEASE_VERSION} -DpushChanges=false release:branch
+          mvn versions:set-property -Dproperty=your.property -DnewVersion=arbitrary_value
+          git commit -ma 'Updated revision for next development iteration' pom.xml
+          git push
+
+
+
