@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Change;
+import nl.vpro.domain.PublicationReason;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -85,7 +86,7 @@ public class MediaChange extends Change<MediaObject> {
     @XmlElementWrapper
     @XmlElement(name = "reason")
     @JsonProperty("reasons")
-    private List<Reason> reasons;
+    private List<PublicationReason> reasons;
 
     public MediaChange() {
     }
@@ -99,7 +100,7 @@ public class MediaChange extends Change<MediaObject> {
         Boolean deleted,
         MediaSince since,
         Boolean tail,
-        @Nullable List<@NonNull Reason> reasons,
+        @Nullable List<@NonNull PublicationReason> reasons,
         @Nullable List<@NonNull String> reasonsStrings,
         boolean skipped) {
         this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
@@ -111,7 +112,7 @@ public class MediaChange extends Change<MediaObject> {
         }
         this.reasons = reasons;
         if (reasonsStrings != null) {
-            List<Reason> collect = reasonsStrings.stream().map(s -> new Reason(s, publishDate)).collect(Collectors.toList());
+            List<PublicationReason> collect = reasonsStrings.stream().map(s -> new PublicationReason(s, publishDate)).collect(Collectors.toList());
             if (this.reasons == null) {
                 this.reasons = collect;
             } else {

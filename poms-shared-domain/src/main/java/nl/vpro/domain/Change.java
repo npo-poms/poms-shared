@@ -3,14 +3,9 @@ package nl.vpro.domain;
 import lombok.*;
 
 import java.time.Instant;
-import java.util.*;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -88,75 +83,4 @@ public abstract class Change<T>  {
 
     }
 
-    @Getter
-    @XmlAccessorType(XmlAccessType.NONE)
-    @XmlType(name = "changeReason")
-    public static class Reason {
-
-        /**
-         * Multiple reasons can be joined with this, to encode the in one String.
-         * <p>
-         * Uses now ASCII Record seperator RS
-         */
-        public static final String RECORD_SPLITTER         = "\u241E";
-
-        /**
-         * A reason can be joined with its publication time.
-         * <p>
-         *  Uses now ASCII Unit seperator US
-         */
-        public static final String FIELD_SPLITTER          = "\u241F";
-
-
-
-        @XmlValue
-        String reason;
-
-        @XmlAttribute
-        @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-        @XmlSchemaType(name = "dateTime")
-        @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-        @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-        private Instant publishDate;
-
-        protected Reason() {
-
-        }
-        public Reason(@NonNull String reason, @Nullable Instant publicationDate) {
-            this.reason = reason;
-            this.publishDate = publicationDate;
-        }
-
-        public Reason parent() {
-            return new Change.Reason("parent: " + getReason(), getPublishDate());
-        }
-
-        public String toRecord() {
-            return reason + FIELD_SPLITTER + (publishDate == null ? "" : publishDate.toEpochMilli());
-        }
-
-        public static String toRecords(Collection<Reason> reasons) {
-            return reasons.stream().map(Reason::toRecord).collect(Collectors.joining(RECORD_SPLITTER));
-        }
-
-        public static Reason parseOne(String string) {
-            final String[] reasonAndDate = string.split(FIELD_SPLITTER, 2);
-            final Instant instant;
-            if (reasonAndDate.length >  1 && reasonAndDate[1].length() > 0) {
-                instant = Instant.ofEpochMilli(Long.parseLong(reasonAndDate[1]));
-            } else {
-                instant = null;
-            }
-            return new Reason(reasonAndDate[0], instant);
-        }
-        public static Reason[] parseList(String string) {
-            List<Reason> result = new ArrayList<>();
-            if (string != null && !string.isEmpty()) {
-                for (var s : string.split(RECORD_SPLITTER)) {
-                    result.add(parseOne(s));
-                }
-            }
-            return result.toArray(Reason[]::new);
-        }
-    }
 }
