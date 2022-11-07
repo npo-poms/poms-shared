@@ -3,11 +3,14 @@ package nl.vpro.domain;
 import lombok.*;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -119,15 +122,27 @@ public abstract class Change<T>  {
         protected Reason() {
 
         }
-        public Reason(String reason, Instant publicationDate) {
+        public Reason(@NonNull String reason, @Nullable Instant publicationDate) {
             this.reason = reason;
             this.publishDate = publicationDate;
+        }
+
+        public Reason parent() {
+            return new Change.Reason("parent: " + getReason(), getPublishDate());
+        }
+
+        public String toRecord() {
+            return reason + FIELD_SPLITTER + (publishDate == null ? "" : publishDate.toEpochMilli());
+        }
+
+        public static String toRecords(Collection<Reason> reasons) {
+            return reasons.stream().map(Reason::toRecord).collect(Collectors.joining(RECORD_SPLITTER));
         }
 
         public static Reason parseOne(String string) {
             final String[] reasonAndDate = string.split(FIELD_SPLITTER, 2);
             final Instant instant;
-            if (reasonAndDate.length >  1) {
+            if (reasonAndDate.length >  1 && reasonAndDate[1].length() > 0) {
                 instant = Instant.ofEpochMilli(Long.parseLong(reasonAndDate[1]));
             } else {
                 instant = null;
