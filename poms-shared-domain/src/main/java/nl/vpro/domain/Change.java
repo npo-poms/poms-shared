@@ -83,4 +83,26 @@ public abstract class Change<T>  {
 
     }
 
+    @Getter
+    @XmlAccessorType(XmlAccessType.NONE)
+    @XmlType(name = "changeReason")
+    public static class Reason {
+        @XmlValue
+        String reason;
+
+        @XmlAttribute
+        @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+        @XmlSchemaType(name = "dateTime")
+        @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+        @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+        private Instant publishDate;
+
+        protected Reason() {
+
+        }
+        public Reason(String reason, Instant publicationDate) {
+            this.reason = reason;
+            this.publishDate = publicationDate;
+        }
+    }
 }

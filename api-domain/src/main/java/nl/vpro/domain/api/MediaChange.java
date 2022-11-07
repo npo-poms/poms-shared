@@ -232,29 +232,5 @@ public class MediaChange extends Change<MediaObject> {
         return realPublishDate == null ? getPublishDate() : realPublishDate;
     }
 
-    @Getter
-    @XmlAccessorType(XmlAccessType.NONE)
-    @XmlType(name = "mediaChangeReason")
-    public static class Reason {
-        @XmlValue
-        String reason;
-
-        @XmlAttribute
-        @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-        @XmlSchemaType(name = "dateTime")
-        @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-        @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-        private Instant publishDate;
-
-        protected Reason() {
-
-        }
-        public Reason(String reason, Instant publicationDate) {
-            this.reason = reason;
-            this.publishDate = publicationDate;
-        }
-    }
-
-
 
 }
