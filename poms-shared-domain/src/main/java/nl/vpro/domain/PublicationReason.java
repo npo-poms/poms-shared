@@ -2,7 +2,6 @@ package nl.vpro.domain;
 
 import lombok.Getter;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
@@ -25,7 +24,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "publicationReason", namespace = Xmlns.API_NAMESPACE)
 public class PublicationReason implements Serializable {
 
-    @Serial
+    //@Serial
     private static final long serialVersionUID = -5898117026516765909L;
 
     /**

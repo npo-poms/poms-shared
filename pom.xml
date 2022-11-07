@@ -18,6 +18,7 @@
     <revision>7.1</revision>
     <changelist>-SNAPSHOT</changelist>
     <poms.shared.version>${project.version}</poms.shared.version>
+    <java.version>11</java.version>
   </properties>
 
 
