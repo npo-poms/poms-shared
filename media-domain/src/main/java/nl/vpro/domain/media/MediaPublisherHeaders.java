@@ -23,20 +23,6 @@ public interface MediaPublisherHeaders {
     String COLLECTED_REASONS_HEADER = "collectedReasons";
 
 
-    /**
-     * Multiple reasons can be joined with this, to encode the in one String.
-     * <p>
-     * Uses now ASCII Record seperator RS
-     */
-    String REASONS_SPLITTER         = "\u241E";
-
-    /**
-     * A reason can be joined with its publication time.
-     * <p>
-     *  Uses now ASCII Unit seperator US
-     */
-    String REASON_SPLITTER          = "\u241F";
-
     String TRIGGERED_BY_HEADER         = "triggeredBy";
     String RECENTLY_MODIFIED_BY_HEADER = "recentlyModifiedBy";
     String LAST_MODIFIED_BY_HEADER     = "lastModifiedBy";
@@ -103,4 +89,5 @@ public interface MediaPublisherHeaders {
         }
 
     }
+
 }
