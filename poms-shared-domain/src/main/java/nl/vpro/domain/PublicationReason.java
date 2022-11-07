@@ -2,6 +2,7 @@ package nl.vpro.domain;
 
 import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
@@ -21,8 +22,11 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @Getter
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "publicationReason")
+@XmlType(name = "publicationReason", namespace = Xmlns.API_NAMESPACE)
 public class PublicationReason implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -5898117026516765909L;
 
     /**
      * Multiple reasons can be joined with this, to encode the in one String.
@@ -37,6 +41,7 @@ public class PublicationReason implements Serializable {
      * Uses now ASCII Unit seperator US
      */
     public static final String FIELD_SPLITTER = "\u241F";
+
 
 
     @XmlValue
