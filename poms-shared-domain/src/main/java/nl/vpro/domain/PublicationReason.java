@@ -1,6 +1,7 @@
 package nl.vpro.domain;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -29,6 +30,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Getter
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publicationReason", namespace = Xmlns.API_NAMESPACE)
+@Slf4j
 public class PublicationReason implements Serializable {
 
     //@Serial
@@ -77,6 +79,11 @@ public class PublicationReason implements Serializable {
         return value + FIELD_SPLITTER + (publishDate == null ? "" : publishDate.toEpochMilli());
     }
 
+    @Override
+    public String toString() {
+        return value + ":" + publishDate;
+    }
+
 
     public static String parentReason(String reason) {
         return "parent: " + reason;
@@ -101,8 +108,14 @@ public class PublicationReason implements Serializable {
         List<PublicationReason> result = new ArrayList<>();
         if (string != null && !string.isEmpty()) {
             for (var s : string.split(RECORD_SPLITTER)) {
-                result.add(parseOne(s));
+                try {
+                    result.add(parseOne(s));
+                } catch(Exception e) {
+                    log.warn("Couldn't parse {}: {} {}", s, e.getClass().getName(), e.getMessage());
+                }
             }
+        } else {
+            log.warn("No reasons found in {}", string);
         }
         return result.toArray(PublicationReason[]::new);
     }
