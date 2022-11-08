@@ -19,6 +19,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
+/**
+ * Indicates a reason for publication. This part of the a {@code MediaChange} object.
+ * In ElasticSearch is it written directly into the {@code _doc} representing the {@MediaObject} itself though.
+ *
+ * @author Michiel Meeuwissen
+ * @since 7.1
+ */
 @Getter
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publicationReason", namespace = Xmlns.API_NAMESPACE)
