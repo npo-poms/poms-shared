@@ -8,7 +8,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * An 'ownable list' is an iterable of {@link OwnableListItem}, combined with an 'owner' value.
- *
+ * <p>
  * It does not actually completely implement {@link List}. {@link #getValues()} does.
  *
  * @author Michiel Meeuwissen

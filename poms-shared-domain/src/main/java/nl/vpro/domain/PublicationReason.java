@@ -70,11 +70,16 @@ public class PublicationReason implements Serializable {
     }
 
     public PublicationReason parent() {
-        return new PublicationReason("parent: " + getValue(), getPublishDate());
+        return new PublicationReason(parentReason(value), getPublishDate());
     }
 
     public String toRecord() {
         return value + FIELD_SPLITTER + (publishDate == null ? "" : publishDate.toEpochMilli());
+    }
+
+
+    public static String parentReason(String reason) {
+        return "parent: " + reason;
     }
 
     public static String toRecords(Collection<PublicationReason> reasons) {
