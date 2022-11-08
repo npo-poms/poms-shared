@@ -79,6 +79,11 @@ public class PublicationReason implements Serializable {
         return value + FIELD_SPLITTER + (publishDate == null ? "" : publishDate.toEpochMilli());
     }
 
+    @Override
+    public String toString() {
+        return value + ":" + publishDate;
+    }
+
 
     public static String parentReason(String reason) {
         return "parent: " + reason;
