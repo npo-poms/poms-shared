@@ -860,7 +860,7 @@
       <xs:element name="reasons" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="reason" type="mediaChangeReason" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="reason" type="publicationReason" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -877,7 +877,7 @@
     <xs:attribute name="mid" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="mediaChangeReason">
+  <xs:complexType name="publicationReason">
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="publishDate" type="xs:dateTime"/>
