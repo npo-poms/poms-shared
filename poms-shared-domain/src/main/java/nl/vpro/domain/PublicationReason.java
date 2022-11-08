@@ -40,7 +40,7 @@ public class PublicationReason implements Serializable {
 
 
     @XmlValue
-    String reason;
+    String value;
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -53,17 +53,17 @@ public class PublicationReason implements Serializable {
 
     }
 
-    public PublicationReason(@NonNull String reason, @Nullable Instant publicationDate) {
-        this.reason = reason;
+    public PublicationReason(@NonNull String value, @Nullable Instant publicationDate) {
+        this.value = value;
         this.publishDate = publicationDate;
     }
 
     public PublicationReason parent() {
-        return new PublicationReason("parent: " + getReason(), getPublishDate());
+        return new PublicationReason("parent: " + getValue(), getPublishDate());
     }
 
     public String toRecord() {
-        return reason + FIELD_SPLITTER + (publishDate == null ? "" : publishDate.toEpochMilli());
+        return value + FIELD_SPLITTER + (publishDate == null ? "" : publishDate.toEpochMilli());
     }
 
     public static String toRecords(Collection<PublicationReason> reasons) {
