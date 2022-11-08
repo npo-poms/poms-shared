@@ -1,18 +1,17 @@
 package nl.vpro.beeldengeluid.gtaa;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.lanwen.wiremock.ext.WiremockResolver;
-import ru.lanwen.wiremock.ext.WiremockUriResolver;
 
 import java.io.IOException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 
 import nl.vpro.domain.gtaa.GTAAGeographicName;
 
@@ -21,18 +20,17 @@ import static nl.vpro.beeldengeluid.gtaa.OpenskosRepositoryTest.f;
 import static nl.vpro.beeldengeluid.gtaa.OpenskosTests.create;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith({
-    WiremockResolver.class,
-    WiremockUriResolver.class
-})
+
+@WireMockTest
+
 @Slf4j
 class GTAAGeographicNameProviderTest {
 
     @Test
-    public void stream(@WiremockResolver.Wiremock WireMockServer server, @WiremockUriResolver.WiremockUri String uri) throws IOException {
-        create(uri);
+    public void stream(WireMockRuntimeInfo runtimeInfo) throws IOException {
+        create(runtimeInfo.getHttpBaseUrl());
 
-        server.stubFor(
+        WireMock.stubFor(
             get(urlPathEqualTo("/oai-pmh"))
                 .willReturn(okXml(f("all-geo-updates.xml"))));
 
@@ -43,10 +41,10 @@ class GTAAGeographicNameProviderTest {
     }
 
     @Test
-    public void getByCode(@WiremockResolver.Wiremock WireMockServer server, @WiremockUriResolver.WiremockUri String uri) throws IOException {
-        create(uri);
+    public void getByCode(WireMockRuntimeInfo runtimeInfo) throws IOException {
+        create(runtimeInfo.getHttpBaseUrl());
 
-        server.stubFor(
+        WireMock.stubFor(
             get(urlPathEqualTo("/api/find-concepts"))
                 .willReturn(okXml(f("tongeren.xml"))));
 

@@ -3,8 +3,6 @@ package nl.vpro.nep.service.impl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
-import ru.lanwen.wiremock.ext.WiremockResolver;
-import ru.lanwen.wiremock.ext.WiremockUriResolver;
 
 import java.security.Key;
 import java.time.Duration;
@@ -14,9 +12,10 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 
 import nl.vpro.util.DateUtils;
 
@@ -29,17 +28,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.11
  */
 @Slf4j
-@ExtendWith({
-    WiremockResolver.class,
-    WiremockUriResolver.class
-})
+@WireMockTest
 public class NEPSAMAuthenticatorTest {
 
 
     @Test
     public void authenticate(
-        @WiremockResolver.Wiremock WireMockServer server,
-        @WiremockUriResolver.WiremockUri String uri) {
+        WireMockRuntimeInfo wireMockRuntimeInfo) {
 
         //The JWT signature algorithm we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -51,14 +46,14 @@ public class NEPSAMAuthenticatorTest {
             .setExpiration(DateUtils.toDate(Instant.now().plus(Duration.ofDays(14))))
             .compact();
 
-        server.stubFor(post(urlEqualTo("/v2/token"))
+        WireMock.stubFor(post(urlEqualTo("/v2/token"))
             .willReturn(
                 aResponse()
                     .withBody("{'token': '" + token + "'}")
             ));
 
 
-        NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator("username", "password", uri);
+        NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator("username", "password", wireMockRuntimeInfo.getHttpBaseUrl());
 
         authenticator.get();
         log.info("{}", authenticator.getExpiration());
