@@ -631,7 +631,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     private StreamingStatusImpl streamingPlatformStatus = StreamingStatus.unset();
 
     @Column
-    private String correlationId;
+    @XmlTransient
+    String correlationId;
 
 
     public MediaObject() {
