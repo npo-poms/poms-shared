@@ -630,9 +630,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Setter(AccessLevel.PACKAGE)
     private StreamingStatusImpl streamingPlatformStatus = StreamingStatus.unset();
 
-    @Column(insertable = false, updatable = false)
+    @Column
     private String correlationId;
-
 
 
     public MediaObject() {
