@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.functional.TriFunction;
@@ -262,7 +262,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         flags = {
             Pattern.Flag.CASE_INSENSITIVE }, message = "{nl.vpro.constraints.mid}")
     @NotNull(groups = PrePersistValidatorGroup.class)
-    @Nullable
+    @MonotonicNonNull
     protected String mid;
 
     //@Version
