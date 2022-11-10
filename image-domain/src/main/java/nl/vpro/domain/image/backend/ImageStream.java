@@ -109,7 +109,7 @@ public class ImageStream implements AutoCloseable {
         @Nullable String contentType,
         @Nullable String etag,
         @Nullable URI url,
-        @Nullable ThrowingRunnable onClose) {
+        @Nullable ThrowingRunnable<IOException> onClose) {
         this.stream = stream;
         this.length = length;
         this.lastModified = lastModified;
