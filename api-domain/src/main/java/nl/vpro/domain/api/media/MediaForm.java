@@ -11,6 +11,8 @@ import java.util.function.Predicate;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
@@ -99,5 +101,13 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
             .add("search", getSearches())
             .omitNullValues()
             .toString();
+    }
+
+    /**
+     * {@code null}-safe version of {@link #isFaceted()}
+     * @since 7.1
+     */
+    public static boolean isFaceted(@Nullable MediaForm mediaForm){
+        return mediaForm != null && mediaForm.isFaceted();
     }
 }
