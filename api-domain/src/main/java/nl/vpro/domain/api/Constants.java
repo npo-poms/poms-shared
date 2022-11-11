@@ -5,7 +5,6 @@
 package nl.vpro.domain.api;
 
 /**
- * See https://jira.vpro.nl/browse/API-
  *
  * @author Roelof Jan Koekoek
  * @since 2.0
