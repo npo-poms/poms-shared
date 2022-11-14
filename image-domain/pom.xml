@@ -11,7 +11,7 @@
   <groupId>nl.vpro.image</groupId>
   <artifactId>image-domain</artifactId>
   <name>image-domain</name>
-  <description>Domain classes and generic related utitlies used by the image frontend and backend services</description>
+  <description>Domain classes and generic related utilities used by the image frontend and backend services</description>
   <build>
     <plugins>
       <plugin>
