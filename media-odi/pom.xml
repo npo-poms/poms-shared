@@ -13,7 +13,7 @@
   <name>media-odi</name>
   <description>
     Support for ODI authentication as required by NPO player.
-    Not sure this is still needed or used.
+    Not sure whether this is still needed or used.
 
     It also supports other 'location handlers'. I think this module is actually misnamed.
   </description>
@@ -80,7 +80,7 @@
     </dependency>
     <dependency>
       <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock-jre8</artifactId>
+      <artifactId>wiremock-jre8-standalone</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
