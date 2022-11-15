@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.functional.TriFunction;
@@ -37,6 +37,7 @@ import org.meeuw.i18n.regions.validation.Language;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.annotations.Beta;
 import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
@@ -630,8 +631,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Setter(AccessLevel.PACKAGE)
     private StreamingStatusImpl streamingPlatformStatus = StreamingStatus.unset();
 
+
+    /**
+     * Beta, may be dropped again later.
+     * @since 7.1
+     */
     @Column
     @XmlTransient
+    @Beta()
     String correlationId;
 
 
@@ -3021,7 +3028,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return Correlation.mid(correlationId);
     }
 
-    protected  Correlation calcCorrelation() {
+
+    protected Correlation calcCorrelation() {
         return Media.super.getCorrelation();
     }
 

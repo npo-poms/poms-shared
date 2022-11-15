@@ -360,7 +360,8 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
      * The correlation id of a segment currently is the correlation id of its _parent_.
      * <p>
      * I forgot why this is important, but I think it may give problems when a segment is converted to a clip and/or vice versa.
-     *
+     * <p>
+     * For 7.1 release we'll leave it
      */
     @Override
     public Correlation calcCorrelation() {
