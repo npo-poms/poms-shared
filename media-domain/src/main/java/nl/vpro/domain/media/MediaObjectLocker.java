@@ -129,6 +129,23 @@ public class MediaObjectLocker {
             () -> transactionService.executeInNewTransaction(callable));
     }
 
+    /**
+     * Run in a new transaction, but before that lock the mid.
+     * <p>
+     * Make sure not to be in a transaction already.
+     * @since 7.1
+     */
+    public static <T> T executeInNewTransactionWithCorrelationLock(
+        @NonNull TransactionService transactionService,
+        MediaIdentifiable.Correlation correlation,
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
+        return withCorrelationLock(
+            correlation,
+            reason,
+            () -> transactionService.executeInNewTransaction(callable));
+    }
+
      /**
      * Run in a new transaction, but before that lock the mid.
      * <p>
@@ -142,6 +159,24 @@ public class MediaObjectLocker {
         @NonNull Callable<T> callable) {
         return withMidLock(
             mid,
+            reason,
+            () -> transactionService.executeInNewTransaction(user, callable));
+    }
+
+    /**
+     * Run in a new transaction, but before that lock the mid.
+     * <p>
+     * Make sure not to be in a transaction already.
+     * @since 7.1
+     */
+    public static <T> T executeInNewTransactionWithCorrelationLock(
+        @NonNull DoAsTransactionService transactionService,
+        @NonNull Trusted user,
+        MediaIdentifiable.Correlation correlation,
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
+        return withCorrelationLock(
+            correlation,
             reason,
             () -> transactionService.executeInNewTransaction(user, callable));
     }
