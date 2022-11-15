@@ -22,13 +22,13 @@ jobs:
         # For the trunk we use 'CI friendly' versioning (using 'revision' and 'changelist' properties).
         # For release branches this is overridden by the release:branch plugin
         run: |
-          VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`
+          VERSION=`mvn -B help:evaluate -Dexpression=project.version -q -DforceStdout`
           RELEASE_VERSION=`echo $VERSION | sed -r 's/-SNAPSHOT/.0-SNAPSHOT/'`
-          REVISION=`mvn help:evaluate -Dexpression=revision -q -DforceStdout`
+          REVISION=`mvn -B help:evaluate -Dexpression=revision -q -DforceStdout`
           DEVELOPMENT_REVISION=`echo $REVISION | gawk 'match($1, /([0-9]+)\.([0-9]+)/, a) {print a[1]"."(a[2]+1)}'`
-          mvn  -DupdateBranchVersions=true -DupdateWorkingCopyVersions=false -DreleaseVersion=${RELEASE_VERSION} -DpushChanges=false release:branch
-          mvn versions:set-property -Dproperty=revision -DnewVersion=$DEVELOPMENT_REVISION
-          git commit -ma "Updated revision to $DEVELOPMENT_VERSION for next development iteration" pom.xml
+          mvn -B -DupdateBranchVersions=true -DupdateWorkingCopyVersions=false -DreleaseVersion=${RELEASE_VERSION} -DpushChanges=false release:branch
+          mvn -B versions:set-property -Dproperty=revision -DnewVersion=$DEVELOPMENT_REVISION
+          git commit -am "Updated revision to ${DEVELOPMENT_REVISION} for next development iteration" pom.xml
           git push --all origin
 
 
