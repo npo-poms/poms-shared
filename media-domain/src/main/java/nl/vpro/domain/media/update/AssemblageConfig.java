@@ -522,6 +522,7 @@ public class AssemblageConfig {
     }
 
     /**
+     * Exception that can be thrown during assemblage if some required field is not filled.
      * @since 5.13
      */
     public static abstract class  RequiredFieldException extends IllegalArgumentException {
@@ -536,7 +537,7 @@ public class AssemblageConfig {
         }
 
         /**
-         * Returns the formatted message. If you want to supply it do logging directly you could user {@link #getFormat()} and {@link #getArguments()}
+         * Returns the formatted message. If you want to supply it do logging directly you could use {@link #getFormat()} and {@link #getArguments()}
          */
         @Override
         public String getMessage() {
@@ -563,6 +564,11 @@ public class AssemblageConfig {
         }
     }
 
+    /**
+     * If a required field is not filled, then this exception can be thrown to indicate that the related object can just
+     * be ignored then. So {@link #isFatal()} returns false.
+     *
+     */
     public static class SkippingRequiredFieldException extends RequiredFieldException {
 
         private static final long serialVersionUID = -6503681639731951808L;
