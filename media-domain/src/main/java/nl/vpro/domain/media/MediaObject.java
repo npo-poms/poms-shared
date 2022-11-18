@@ -568,7 +568,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @XmlTransient
     @Getter(AccessLevel.PROTECTED)
     @Setter(AccessLevel.PROTECTED)
-    @Pattern(regexp = "[^\\t#]+") // \t and # are used to encode multiple reasons (with a date) in headers.
+    @Pattern(regexp = PublicationReason.REASON_PATTERN) // \t and # are used to encode multiple reasons (with a date) in headers.
     protected String repubReason;
 
     @Column
