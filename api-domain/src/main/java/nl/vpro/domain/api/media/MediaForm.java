@@ -110,4 +110,12 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
     public static boolean isFaceted(@Nullable MediaForm mediaForm){
         return mediaForm != null && mediaForm.isFaceted();
     }
+
+    /**
+     * {@code null}-safe version of {@link #isSorted()} ()}
+     * @since 7.1
+     */
+    public static boolean isSorted(@Nullable MediaForm mediaForm){
+        return mediaForm != null && mediaForm.isSorted();
+    }
 }
