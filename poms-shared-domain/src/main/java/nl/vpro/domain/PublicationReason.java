@@ -51,6 +51,9 @@ public class PublicationReason implements Serializable {
     public static final String FIELD_SPLITTER = "\u241F";
 
 
+    public static final String REASON_PATTERN = "[^" + RECORD_SPLITTER + FIELD_SPLITTER  + "]*";
+
+
 
     @XmlValue
     String value;
