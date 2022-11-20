@@ -710,7 +710,9 @@ public class MediaObjects {
 
 
     public static boolean subtitlesMayBePublished(MediaObject media) {
-        return media != null && PUBLICATIONS.contains(media.getWorkflow()) && media.getLocations().stream().anyMatch(l -> l.getWorkflow() == PUBLISHED);
+        return media != null
+            && PUBLICATIONS.contains(media.getWorkflow())
+            && media.getLocations().stream().anyMatch(l -> l.getWorkflow() == PUBLISHED);
     }
 
 
