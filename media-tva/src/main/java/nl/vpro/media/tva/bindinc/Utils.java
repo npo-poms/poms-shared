@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -189,7 +191,7 @@ public final class Utils {
 
 
     public static class Converters implements TypeConverters {
-        final Map<String, List<Temp>> TEMPS = new HashMap<>();
+        final ConcurrentMap<String, List<Temp>> TEMPS = new ConcurrentHashMap<>();
 
 
         /**

@@ -9,8 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
 import java.util.function.Function;
 
 import nl.vpro.domain.api.*;
@@ -42,7 +41,7 @@ public class SearchResults {
         };
     }
 
-    private static final Map<String, Map<String, Optional<String>>> VALUE_CACHES = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, Map<String, Optional<String>>> VALUE_CACHES = new ConcurrentHashMap<>();
 
 
     public static <T extends TermFacetResultItem, S extends MatchType> void setSelected(

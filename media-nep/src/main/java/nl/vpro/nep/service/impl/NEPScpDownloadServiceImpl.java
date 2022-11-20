@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -39,7 +41,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     private final String url;
     private final CommandExecutor scp;
     private final NEPSSHJDownloadServiceImpl sshj;
-    private final static Map<String, File> knownHosts = new HashMap<>();
+    private final static ConcurrentMap<String, File> knownHosts = new ConcurrentHashMap<>();
     private final Duration waitBetweenRetries = Duration.ofSeconds(10);
     private final int maxDownloadRetries;
 
