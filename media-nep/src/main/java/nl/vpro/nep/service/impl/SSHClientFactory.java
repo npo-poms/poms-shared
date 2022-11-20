@@ -6,16 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import net.schmizz.keepalive.KeepAliveProvider;
 import net.schmizz.sshj.DefaultConfig;
 import net.schmizz.sshj.SSHClient;
-import net.schmizz.sshj.common.Base64;
-import net.schmizz.sshj.common.Buffer;
-import net.schmizz.sshj.common.SecurityUtils;
+import net.schmizz.sshj.common.*;
 
 import java.io.IOException;
 import java.security.PublicKey;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -29,7 +27,7 @@ final class SSHClientFactory {
     private static final Duration sshTimeout  = Duration.ofSeconds(300);
     private static final Duration sshConnectionTimeout  = Duration.ofSeconds(5);
 
-    private static final Map<String, String> FINGERPRINTS = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, String> FINGERPRINTS = new ConcurrentHashMap<>();
 
     /**
      * @param hostKeys the RSA host key or if containing a semicolon one of the fingerprints supported by sshj.

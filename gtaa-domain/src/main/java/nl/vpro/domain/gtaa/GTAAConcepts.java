@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
@@ -19,7 +19,7 @@ import nl.vpro.w3.rdf.Description;
 public class GTAAConcepts {
     private static final String SCHEME_URI = "http://data.beeldengeluid.nl/gtaa/";
 
-    private static final Map<Scheme, Method> CREATE_METHODS = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<Scheme, Method> CREATE_METHODS = new ConcurrentHashMap<>();
 
     private GTAAConcepts() {
     }

@@ -16,6 +16,7 @@ import net.sf.saxon.value.StringValue;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
@@ -34,7 +35,7 @@ import nl.vpro.logging.Slf4jHelper;
 @Slf4j
 public class FindNetFunction extends ExtensionFunctionDefinition {
 
-    private final static Map<String, AtomicInteger> WARNS = new ConcurrentHashMap<>();
+    private final static ConcurrentMap<String, AtomicInteger> WARNS = new ConcurrentHashMap<>();
 
     private final static Set<String> ACKNOWLEDGED;
 
