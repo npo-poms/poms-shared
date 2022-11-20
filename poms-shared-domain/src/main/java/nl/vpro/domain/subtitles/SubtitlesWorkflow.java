@@ -39,6 +39,7 @@ public enum SubtitlesWorkflow {
      */
     DELETED,
 
+
     /**
      * New subtitles, not yet processed for publication.
      */
@@ -50,7 +51,7 @@ public enum SubtitlesWorkflow {
     FOR_REPUBLICATION,
 
     /**
-     * These subtitles are published to the API
+     * The subtitles are published to the API
      */
     PUBLISHED,
 
@@ -61,7 +62,14 @@ public enum SubtitlesWorkflow {
     ;
 
 
-    public static final  Set<SubtitlesWorkflow> NEEDS_WORK = unmodifiableSet(new HashSet<>(Arrays.asList(FOR_DELETION, FOR_PUBLICATION, FOR_REPUBLICATION)));
+    public static final  Set<SubtitlesWorkflow> NEEDS_WORK =
+        unmodifiableSet(new HashSet<>(
+            Arrays.asList(
+                FOR_DELETION,
+                FOR_PUBLICATION,
+                FOR_REPUBLICATION
+            ))
+        );
 
     public static final  Set<SubtitlesWorkflow> NOT_PUBLISHED = unmodifiableSet(new HashSet<>(Arrays.asList(FOR_DELETION, DELETED, REVOKED, FOR_PUBLICATION)));
 
