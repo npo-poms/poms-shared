@@ -616,7 +616,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Enumerated(EnumType.STRING)
     @Getter(AccessLevel.PACKAGE)
     @Setter(AccessLevel.PACKAGE)
-    private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.FOR_PUBLICATION;
+    private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.NONE;
 
     @ElementCollection(fetch = FetchType.EAGER)
     // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
