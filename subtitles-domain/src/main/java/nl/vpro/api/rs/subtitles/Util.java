@@ -26,7 +26,7 @@ public class Util {
     public static Map<String, String> headers(SubtitlesId id, String extension) {
         Map<String, String> result = new HashMap<>();
         result.put("Content-Disposition", getContentDisposition(id, extension));
-        result.put("X-subtitlesId", id.toString());
+        result.put("X-subtitlesId", id.toString().replaceAll("\\s+", " "));
         return result;
 
     }
@@ -39,7 +39,6 @@ public class Util {
         for(Map.Entry<String, String> e : headers(id, extension).entrySet()) {
             httpHeaders.putSingle(e.getKey(), e.getValue());
         }
-
     }
 
     static String getContentDisposition(SubtitlesId id, String extension) {
