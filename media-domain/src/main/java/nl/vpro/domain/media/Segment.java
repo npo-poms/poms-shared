@@ -42,6 +42,8 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
 
     private static final long serialVersionUID = -868293795041160925L;
 
+    static boolean defaultCorrelation = false;
+
     public static MediaBuilder.SegmentBuilder builder() {
         return MediaBuilder.segment();
     }
@@ -354,8 +356,6 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         }
     }
 
-
-
     /**
      * The correlation id of a segment currently is the correlation id of its _parent_.
      * <p>
@@ -365,14 +365,18 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
      */
     @Override
     public Correlation calcCorrelation() {
-        if (parent != null) {
-            return parent.getCorrelation();
-        }
-        String midRef = getMidRef();
-        if (midRef != null) {
-            return Correlation.mid(midRef);
-        } else {
+        if (defaultCorrelation) {
             return super.calcCorrelation();
+        } else {
+            if (parent != null) {
+                return parent.getCorrelation();
+            }
+            String midRef = getMidRef();
+            if (midRef != null) {
+                return Correlation.mid(midRef);
+            } else {
+                return super.calcCorrelation();
+            }
         }
     }
 
