@@ -1,9 +1,11 @@
 package nl.vpro.domain.media.search;
 
 import java.util.*;
+import java.util.stream.Stream;
+
+import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.Member;
 
@@ -119,5 +121,12 @@ public class MediaList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return list == null ? Collections.<T>emptyList().iterator() : list.iterator();
+    }
+
+    /**
+     * @since 7.2
+     */
+    public Stream<T> stream() {
+        return list == null ? Stream.empty() : list.stream();
     }
 }
