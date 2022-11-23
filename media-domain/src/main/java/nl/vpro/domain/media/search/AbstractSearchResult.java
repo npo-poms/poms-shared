@@ -9,10 +9,9 @@ import lombok.Setter;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 @XmlType(
     name ="searchResult",
@@ -58,4 +57,7 @@ public abstract class AbstractSearchResult<T> implements SearchResult<T> {
         return "" + result;
     }
 
+    public Stream<T> stream() {
+        return getResult().stream();
+    }
 }
