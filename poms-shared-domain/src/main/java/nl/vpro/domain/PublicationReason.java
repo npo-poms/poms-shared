@@ -20,6 +20,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
+import static java.util.Comparator.*;
+
 /**
  * Indicates a reason for publication. This part of the a {@code MediaChange} object.
  * In ElasticSearch is it written directly into the {@code _doc} representing the {@MediaObject} itself though.
@@ -31,7 +33,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publicationReason", namespace = Xmlns.API_NAMESPACE)
 @Slf4j
-public class PublicationReason implements Serializable {
+public class PublicationReason implements Serializable,Comparable<PublicationReason> {
 
     //@Serial
     private static final long serialVersionUID = -5898117026516765909L;
@@ -121,5 +123,12 @@ public class PublicationReason implements Serializable {
             log.warn("No reasons found in {}", string);
         }
         return result.toArray(PublicationReason[]::new);
+    }
+
+    @Override
+    public int compareTo(PublicationReason o) {
+        return comparing(PublicationReason::getPublishDate, nullsLast(naturalOrder())
+        ).thenComparing(PublicationReason::getValue, nullsLast(naturalOrder()))
+            .compare(this, o);
     }
 }
