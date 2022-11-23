@@ -9,8 +9,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
@@ -86,7 +85,7 @@ public class MediaChange extends Change<MediaObject> {
     @XmlElementWrapper
     @XmlElement(name = "reason")
     @JsonProperty("reasons")
-    private List<PublicationReason> reasons;
+    private SortedSet<PublicationReason> reasons;
 
     public MediaChange() {
     }
@@ -100,7 +99,7 @@ public class MediaChange extends Change<MediaObject> {
         Boolean deleted,
         MediaSince since,
         Boolean tail,
-        @Nullable List<@NonNull PublicationReason> reasons,
+        @Nullable SortedSet<@NonNull PublicationReason> reasons,
         @Nullable List<@NonNull String> reasonsStrings,
         boolean skipped) {
         this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
@@ -112,11 +111,11 @@ public class MediaChange extends Change<MediaObject> {
         }
         this.reasons = reasons;
         if (reasonsStrings != null) {
-            List<PublicationReason> collect = reasonsStrings.stream().map(s -> new PublicationReason(s, publishDate)).collect(Collectors.toList());
+            SortedSet<PublicationReason> collect = reasonsStrings.stream().map(s -> new PublicationReason(s, publishDate)).collect(Collectors.toCollection(TreeSet::new));
             if (this.reasons == null) {
                 this.reasons = collect;
             } else {
-                this.reasons.addAll(0, collect);
+                this.reasons.addAll(collect);
             }
         }
         setSkipped(skipped);
@@ -212,7 +211,7 @@ public class MediaChange extends Change<MediaObject> {
 
     @Override
     public String toString() {
-        return super.toString() + (revision != null ? (":" + revision) : "") + (mergedTo != null  ? (":merged to " + mergedTo) : "") + (realPublishDate == null ? "" : (" (" + realPublishDate + ")"));
+        return super.toString() + (revision != null ? (":" + revision) : "") + (mergedTo != null  ? (":merged to " + mergedTo) : "") + (realPublishDate == null ? "" : (" (" + realPublishDate + ")")) + getReasons();
     }
 
     @Override
