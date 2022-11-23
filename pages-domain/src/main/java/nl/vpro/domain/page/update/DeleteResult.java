@@ -53,7 +53,15 @@ public class DeleteResult {
     }
 
     @lombok.Builder
-    private DeleteResult(CompletableFuture<?> future, int count, int notallowedCount, Integer alreadyDeletedCount, PageIdMatch match, Boolean success, Duration duration, String message) {
+    private DeleteResult(
+        CompletableFuture<?> future,
+        int count,
+        int notallowedCount,
+        Integer alreadyDeletedCount,
+        PageIdMatch match,
+        Boolean success,
+        Duration duration,
+        String message) {
         this.future = future == null ? CompletableFuture.completedFuture(null) : future;
         this.count = count;
         this.notallowedCount = notallowedCount;

@@ -47,7 +47,19 @@ public class DeleteResultTest {
             .duration(Duration.ofMillis(123))
             .build();
 
-        JAXBTestUtil.roundTripAndSimilar(result, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pageUpdate:deleteresult xmlns:pageUpdate=\"urn:vpro:pages:update:2013\" count=\"100\" notallowedCount=\"0\"  success=\"true\" duration=\"P0DT0H0M0.123S\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:pages:2013\"/>");
+        JAXBTestUtil.roundTripAndSimilar(result, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<pageUpdate:deleteresult xmlns:pageUpdate=\"urn:vpro:pages:update:2013\" count=\"100\" notallowedCount=\"0\"  success=\"true\" duration=\"P0DT0H0M0.123S\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:pages:2013\"/>");
+    }
+
+    @Test
+    public void xmlWithUnCpompleteFeuture() {
+        DeleteResult result = DeleteResult.builder()
+            .count(100)
+            .duration(Duration.ofMillis(123))
+            .build();
+
+        JAXBTestUtil.roundTripAndSimilar(result, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<pageUpdate:deleteresult xmlns:pageUpdate=\"urn:vpro:pages:update:2013\" count=\"100\" notallowedCount=\"0\"  success=\"true\" duration=\"P0DT0H0M0.123S\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:pages:2013\"/>");
     }
 
     @Test
