@@ -57,7 +57,10 @@ public abstract class AbstractSearchResult<T> implements SearchResult<T> {
         return "" + result;
     }
 
+    /**
+     * @since 7.2
+     */
     public Stream<T> stream() {
-        return getResult().stream();
+        return result == null ? Stream.empty() :  result.stream();
     }
 }
