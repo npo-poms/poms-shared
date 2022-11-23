@@ -4,11 +4,10 @@
  */
 package nl.vpro.rs.pages.update;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.core.*;
 
 import nl.vpro.domain.page.PageIdMatch;
@@ -51,8 +50,8 @@ public interface PageUpdateRestService {
         @QueryParam("max") Integer max,
         @QueryParam(WAIT) Boolean wait,
         @QueryParam(MATCH) @DefaultValue("BOTH") PageIdMatch match,
-        @Context ContainerRequestContext request,
-        @Context ContainerResponseContext response
+        @Context HttpHeaders httpHeaders,
+        @Context HttpServletResponse response
     );
 
     @GET
