@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.domain.user.Trusted;
 import nl.vpro.jmx.MBeans;
@@ -137,9 +139,10 @@ public class MediaObjectLocker {
      */
     public static <T> T executeInNewTransactionWithCorrelationLock(
         @NonNull TransactionService transactionService,
-        MediaIdentifiable.Correlation correlation,
+        MediaIdentifiable.@Nullable Correlation correlation,
         @NonNull String reason,
         @NonNull Callable<T> callable) {
+
         return withCorrelationLock(
             correlation,
             reason,
@@ -210,14 +213,19 @@ public class MediaObjectLocker {
             callable);
     }
 
+    @SneakyThrows
     public static <T> T withCorrelationLock(
-        MediaIdentifiable.Correlation lock,
+        MediaIdentifiable.@Nullable Correlation lock,
         @NonNull String reason,
         @NonNull Callable<T> callable) {
-        return withObjectLock(lock, reason, callable, LOCKED_MEDIA,
-            (o1, o2) ->
-                o1 instanceof MediaIdentifiable.Correlation && Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType())
-        );
+        if (lock == null) {
+
+            return callable.call();
+        } else {
+            return withObjectLock(lock, reason, callable, LOCKED_MEDIA,
+                (o1, o2) ->
+                    o1 instanceof MediaIdentifiable.Correlation && Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType()));
+        }
     }
 
     /**
