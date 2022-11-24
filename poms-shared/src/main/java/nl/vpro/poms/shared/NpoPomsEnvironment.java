@@ -32,9 +32,7 @@ public class NpoPomsEnvironment {
     @PostConstruct
     public void initialize() {
         if (env == null) {
-            if (apiBase.contains("-dev.")) {
-                env = Env.DEV;
-            } else if (apiBase.contains("-test.")) {
+            if (apiBase.contains("-test.")) {
                 env = Env.TEST;
             } else if (apiBase.contains("-acc.")) {
                 env = Env.ACC;
@@ -83,7 +81,6 @@ public class NpoPomsEnvironment {
 
     public enum Env {
         LOCALHOST("http://localhost:8071/", "http://localhost:8071/images/", "http://localhost:8071/rs/"),
-        DEV("https://poms-dev.omroep.nl/", "https://images-dev.poms.omroep.nl/", "https://api-dev.poms.omroep.nl/"),
         TEST("https://poms-test.omroep.nl/", "https://images-test.poms.omroep.nl/", "https://api-test.poms.omroep.nl/"),
         ACC("https://poms-acc.omroep.nl/", "https://images-acc.poms.omroep.nl/", "https://api-acc.poms.omroep.nl/"),
         PROD("https://poms.omroep.nl/", "https://images.poms.omroep.nl/", "https://api.poms.omroep.nl/");
