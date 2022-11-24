@@ -211,7 +211,7 @@ public class MediaChange extends Change<MediaObject> {
 
     @Override
     public String toString() {
-        return super.toString() + (revision != null ? (":" + revision) : "") + (mergedTo != null  ? (":merged to " + mergedTo) : "") + (realPublishDate == null ? "" : (" (" + realPublishDate + ")")) + getReasons();
+        return super.toString() + (revision != null ? (":" + revision) : "") + (mergedTo != null  ? (":merged to " + mergedTo) : "") + (realPublishDate == null ? "" : (" (" + realPublishDate + ")")) + (reasons == null ? "" : " " + reasons);
     }
 
     @Override
