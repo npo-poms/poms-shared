@@ -169,7 +169,7 @@ public class OpenskosTests {
     }
 
     OpenskosRepository getRealInstance() {
-        return getRealInstance(Env.DEV);
+        return getRealInstance(Env.TEST);
     }
 
     static OpenskosRepository getRealInstance(final Env env) {
