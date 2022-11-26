@@ -56,7 +56,7 @@ public class MediaSince implements Comparable<MediaSince> {
      * @since 7.2
      */
     public String asQueryParam() {
-        String sinceString = instant.toString();
+        String sinceString = instant == null ? null : instant.toString();
         if (mid != null && sinceString != null) {
             sinceString += "," + mid;
         }
