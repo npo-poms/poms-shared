@@ -77,7 +77,7 @@ public class Headers {
 
     public static final String NPO_DATE                    = X_NPO + "-Date";
 
-    public static final String NPO_SUBTITLES_id            = "X-subtitlesId";
+    public static final String NPO_SUBTITLES_ID            = "X-subtitlesId";
 }
 
 
