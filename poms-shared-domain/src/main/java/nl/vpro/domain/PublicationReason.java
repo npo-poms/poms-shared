@@ -71,7 +71,9 @@ public class PublicationReason implements Serializable,Comparable<PublicationRea
 
     }
 
-    public PublicationReason(@NonNull String value, @Nullable Instant publicationDate) {
+    public PublicationReason(
+        @NonNull String value,
+        @Nullable Instant publicationDate) {
         this.value = value;
         this.publishDate = publicationDate;
     }
@@ -125,10 +127,15 @@ public class PublicationReason implements Serializable,Comparable<PublicationRea
         return result.toArray(PublicationReason[]::new);
     }
 
+    private static final Comparator<PublicationReason> COMPARATOR =
+        comparing(
+            PublicationReason::getPublishDate, nullsLast(naturalOrder()))
+            .thenComparing(
+                PublicationReason::getValue, nullsLast(naturalOrder())
+            );
+
     @Override
-    public int compareTo(PublicationReason o) {
-        return comparing(PublicationReason::getPublishDate, nullsLast(naturalOrder())
-        ).thenComparing(PublicationReason::getValue, nullsLast(naturalOrder()))
-            .compare(this, o);
+    public int compareTo(@NonNull PublicationReason o) {
+        return COMPARATOR.compare(this, o);
     }
 }
