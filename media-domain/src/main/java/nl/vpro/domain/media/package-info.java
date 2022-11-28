@@ -1,8 +1,5 @@
 /**
- * This package basicly contains the full media domain objects. The most central class here is {@link nl.vpro.domain.media.MediaObject}
- *
- *
- *
+ * This package basically contains the full media domain objects. The most central class here is {@link nl.vpro.domain.media.MediaObject}
  */
 @javax.xml.bind.annotation.XmlSchema(namespace = Xmlns.MEDIA_NAMESPACE,
     xmlns=

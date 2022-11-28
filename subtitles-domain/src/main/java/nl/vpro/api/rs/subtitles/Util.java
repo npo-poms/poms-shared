@@ -1,8 +1,6 @@
 package nl.vpro.api.rs.subtitles;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MultivaluedMap;
@@ -10,9 +8,8 @@ import javax.ws.rs.core.MultivaluedMap;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.PeekingIterator;
 
-import nl.vpro.domain.subtitles.Cue;
-import nl.vpro.domain.subtitles.StandaloneCue;
-import nl.vpro.domain.subtitles.SubtitlesId;
+import nl.vpro.domain.subtitles.*;
+import nl.vpro.poms.shared.Headers;
 
 /**
  * @author Michiel Meeuwissen
@@ -26,7 +23,7 @@ public class Util {
     public static Map<String, String> headers(SubtitlesId id, String extension) {
         Map<String, String> result = new HashMap<>();
         result.put("Content-Disposition", getContentDisposition(id, extension));
-        result.put("X-subtitlesId", id.toString().replaceAll("\\s+", " "));
+        result.put(Headers.NPO_SUBTITLES_ID, id.toString().replaceAll("\\s+", " "));
         return result;
 
     }
