@@ -219,26 +219,36 @@ public class ReusableImageStream extends ImageStream {
     }
 
     protected void createShutDownHook() {
-        shutdownHook = new Thread(() -> {
-            try {
-                if (file != null) {
-                    if (Files.deleteIfExists(file)) {
-                        log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
-                    }
-                    file = null;
-                } else {
-                    log.debug("File already null");
-                }
-            } catch (IOException e) {
-                log.warn(e.getMessage(), e);
-            }
-        });
+        shutdownHook = new Thread(new FileDeleter(file));
         Runtime.getRuntime().addShutdownHook(shutdownHook);
     }
 
     protected void removeShutDownHook() {
         if (shutdownHook != null) {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
+        }
+    }
+
+    public static class FileDeleter implements  Runnable {
+        private final Path  file;
+
+        public FileDeleter(Path file) {
+            this.file = file;
+        }
+
+        @Override
+        public void run() {
+            try {
+                if (file != null) {
+                    if (Files.deleteIfExists(file)) {
+                        log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
+                    }
+                } else {
+                    log.debug("File already null");
+                }
+            } catch (IOException e) {
+                log.warn(e.getMessage(), e);
+            }
         }
     }
 
