@@ -76,6 +76,8 @@ public class Headers {
     public static final String NPO_DISPATCHED_TO           = X_NPO + "-dispatched-to";
 
     public static final String NPO_DATE                    = X_NPO + "-Date";
+
+    public static final String NPO_SUBTITLES_id            = "X-subtitlesId";
 }
 
 
