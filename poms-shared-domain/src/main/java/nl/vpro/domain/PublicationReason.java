@@ -104,6 +104,7 @@ public class PublicationReason implements Serializable,Comparable<PublicationRea
         if (reasonAndDate.length > 1 && reasonAndDate[1].length() > 0) {
             instant = Instant.ofEpochMilli(Long.parseLong(reasonAndDate[1]));
         } else {
+            log.warn("No time found in {}. Creating a publication reason without publiss date", string);
             instant = null;
         }
         return new PublicationReason(reasonAndDate[0], instant);
