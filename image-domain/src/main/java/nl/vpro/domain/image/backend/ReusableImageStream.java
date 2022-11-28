@@ -39,6 +39,8 @@ public class ReusableImageStream extends ImageStream {
 
     private Path file = null;
 
+    private Thread shutdownHook;
+
     public ReusableImageStream(InputStream stream) {
         this(stream, null);
     }
@@ -119,6 +121,7 @@ public class ReusableImageStream extends ImageStream {
             Files.deleteIfExists(file);
             file = null;
         }
+        removeShutDownHook();
     }
 
      @Override
@@ -204,20 +207,7 @@ public class ReusableImageStream extends ImageStream {
         if(file == null) {
             file = Files.createTempFile(ImageStream.class.getName(),  ".tempImage");
             log.debug("Set file to {}", file);
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                try {
-                    if (file != null) {
-                        if (Files.deleteIfExists(file)) {
-                            log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
-                        }
-                        file = null;
-                    } else {
-                        log.debug("File already null");
-                    }
-                } catch (IOException e) {
-                    log.warn(e.getMessage(), e);
-                }
-            }));
+            createShutDownHook();
             try (OutputStream out = Files.newOutputStream(file);
                  InputStream s = stream) {
                 int copy = IOUtils.copy(s, out);
@@ -225,6 +215,30 @@ public class ReusableImageStream extends ImageStream {
             } finally {
                 stream = null;
             }
+        }
+    }
+
+    protected void createShutDownHook() {
+        shutdownHook = new Thread(() -> {
+            try {
+                if (file != null) {
+                    if (Files.deleteIfExists(file)) {
+                        log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
+                    }
+                    file = null;
+                } else {
+                    log.debug("File already null");
+                }
+            } catch (IOException e) {
+                log.warn(e.getMessage(), e);
+            }
+        });
+        Runtime.getRuntime().addShutdownHook(shutdownHook);
+    }
+
+    protected void removeShutDownHook() {
+        if (shutdownHook != null) {
+            Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
     }
 
