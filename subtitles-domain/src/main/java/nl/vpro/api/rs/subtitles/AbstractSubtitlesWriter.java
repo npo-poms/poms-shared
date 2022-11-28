@@ -16,6 +16,7 @@ import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesFormat;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
+import nl.vpro.poms.shared.Headers;
 
 /**
  * @author Michiel Meeuwissen
@@ -23,7 +24,7 @@ import nl.vpro.domain.subtitles.SubtitlesUtil;
  */
 abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
 
-    public static final String OFFSET_HEADER = "X-subtitles-offset";
+    public static final String OFFSET_HEADER = Headers.NPO_SUBTITLES_OFFSET_HEADER;
 
     private final MediaType mediaType;
     private final String extension;
