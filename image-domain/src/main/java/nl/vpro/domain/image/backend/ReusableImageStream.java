@@ -23,6 +23,9 @@ import org.checkerframework.checker.nullness.qual.*;
 import org.meeuw.functional.ThrowingRunnable;
 
 import nl.vpro.domain.image.UnsupportedImageFormatException;
+import nl.vpro.util.PathUtils;
+
+import static nl.vpro.util.PathUtils.deleteOnExit;
 
 /**
  * A version of {@link ImageStream} that on first use of {@link #getStream()} will copy the stream to a file, so you
@@ -30,6 +33,7 @@ import nl.vpro.domain.image.UnsupportedImageFormatException;
  *
  * @author Roelof Jan Koekoek
  * @since 1.11
+ * @see nl.vpro.util.FileCachingInputStream
  */
 @Slf4j
 public class ReusableImageStream extends ImageStream {
@@ -38,8 +42,6 @@ public class ReusableImageStream extends ImageStream {
     private static final String HASH_ALGORITHM = "SHA1";
 
     private Path file = null;
-
-    private Thread shutdownHook;
 
     public ReusableImageStream(InputStream stream) {
         this(stream, null);
@@ -119,9 +121,10 @@ public class ReusableImageStream extends ImageStream {
         super.close();
         if (file != null) {
             Files.deleteIfExists(file);
+            PathUtils.cancelDeleteOnExit(file);
             file = null;
         }
-        removeShutDownHook();
+
     }
 
      @Override
@@ -207,7 +210,7 @@ public class ReusableImageStream extends ImageStream {
         if(file == null) {
             file = Files.createTempFile(ImageStream.class.getName(),  ".tempImage");
             log.debug("Set file to {}", file);
-            createShutDownHook();
+            deleteOnExit(file);
             try (OutputStream out = Files.newOutputStream(file);
                  InputStream s = stream) {
                 int copy = IOUtils.copy(s, out);
@@ -218,39 +221,6 @@ public class ReusableImageStream extends ImageStream {
         }
     }
 
-    protected void createShutDownHook() {
-        shutdownHook = new Thread(new FileDeleter(file));
-        Runtime.getRuntime().addShutdownHook(shutdownHook);
-    }
-
-    protected void removeShutDownHook() {
-        if (shutdownHook != null) {
-            Runtime.getRuntime().removeShutdownHook(shutdownHook);
-        }
-    }
-
-    public static class FileDeleter implements  Runnable {
-        private final Path  file;
-
-        public FileDeleter(Path file) {
-            this.file = file;
-        }
-
-        @Override
-        public void run() {
-            try {
-                if (file != null) {
-                    if (Files.deleteIfExists(file)) {
-                        log.warn("Deleted {} (Should have been deleted earlier!, forgot to close image streams?)", file);
-                    }
-                } else {
-                    log.debug("File already null");
-                }
-            } catch (IOException e) {
-                log.warn(e.getMessage(), e);
-            }
-        }
-    }
 
     @NonNull
     public synchronized Path getFile() throws IOException {
