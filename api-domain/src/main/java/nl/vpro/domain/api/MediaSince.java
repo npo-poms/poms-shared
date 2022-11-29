@@ -78,4 +78,9 @@ public class MediaSince implements Comparable<MediaSince> {
         return Comparator.comparing(MediaSince::getInstant, Comparator.nullsFirst(naturalOrder()))
             .thenComparing(MediaSince::getMid, Comparator.nullsFirst(naturalOrder())).compare(this, o);
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " " + asQueryParam();
+    }
 }
