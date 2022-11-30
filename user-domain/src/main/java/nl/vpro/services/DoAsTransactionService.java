@@ -22,9 +22,6 @@ public interface DoAsTransactionService extends TransactionService {
 
     void executeInNewTransaction(@NonNull Trusted user, @NonNull  Runnable runnable);
 
-    @Deprecated
-    void executeInNewTransaction(@NonNull String user, @NonNull Runnable runnable);
-
 
     <T> T executeInReadonlyTransaction(@NonNull Trusted user, @NonNull  Callable<T> callable);
 

@@ -2,7 +2,6 @@ package nl.vpro.domain.media.support;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,19 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AuthorizedDurationTest {
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testGetDurationDeprecated() {
-        AuthorizedDuration duration = new AuthorizedDuration(new Date(100 * 1000));
-        assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(100);
-
-    }
-
     @Test
     public void testGetDuration() {
         AuthorizedDuration duration = new AuthorizedDuration(Duration.ofMillis(100 * 1000));
         assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(100);
-
     }
 
     @Test

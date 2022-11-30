@@ -81,11 +81,6 @@ public class AudioAttributes implements Serializable {
         this.language = language;
     }
 
-    @Deprecated
-    public AudioAttributes(String audioCoding, Integer numberOfChannels, String language) {
-        this(audioCoding, numberOfChannels, new Locale(language));
-    }
-
     public static AudioAttributes update(AudioAttributes from, AudioAttributes to) {
         if(from != null) {
             if(to == null) {

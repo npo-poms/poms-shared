@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Embargos;
-import nl.vpro.domain.MutableEmbargoDeprecated;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -32,7 +32,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "offset",
         "duration"
         })
-public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbargoDeprecated {
+public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbargo<LocationUpdate> {
 
 
     public static LocationUpdate copy(LocationUpdate copy) {

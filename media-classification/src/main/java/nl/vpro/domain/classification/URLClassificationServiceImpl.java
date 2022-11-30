@@ -6,12 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.time.Instant;
-import java.util.Collections;
-import java.util.List;
-import java.util.SortedMap;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -35,16 +31,6 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
 
     public URLClassificationServiceImpl(URI url) {
         this.resource = create(url);
-    }
-
-
-    @Deprecated
-    public URLClassificationServiceImpl(URL url) {
-        try {
-            this.resource = create(url.toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     URLResource<SortedMap<TermId, Term>> create(final URI url) {

@@ -48,7 +48,7 @@ import nl.vpro.xml.bind.*;
 
 /**
  * A MediaUpdate is meant for communicating updates. It is not meant as a complete representation of the object.
- *
+ * <p>
  * A MediaUpdate is like a {@link MediaObject} but
  * <ul>
  *  <li>It does not have {@link MutableOwnable} objects. When converting between a MediaUpdate and a MediaObject one need to indicate for which owner type this must happen.
@@ -79,7 +79,7 @@ import nl.vpro.xml.bind.*;
 @ValidEmbargo(groups = WarningValidatorGroup.class)
 public abstract class  MediaUpdate<M extends MediaObject>
     implements
-    MutableEmbargoDeprecated<MediaUpdate<M>>,
+    MutableEmbargo<MediaUpdate<M>>,
     TextualObjectUpdate<TitleUpdate, DescriptionUpdate,  MediaUpdate<M>>,
     IntegerVersionSpecific,
     MediaIdentifiable {
@@ -504,7 +504,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * Returning only the values for the given owner.
      * We decided to return an empty list if owner differ rather than raise an
      * exception (this code will usually be executed behind a queue)
-     *
+     * <p>
      * Given a null it will return null to keep the distinction between systems
      * that are aware of this field (we use empty list to delete)
      */
@@ -533,7 +533,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * Returning only the values for the given owner.
      * We decided to return an empty list if owner differ rather than raise an
      * exception (this code will usually be executed behind a queue)
-     *
+     * <p>
      * Given a null it will return null to keep the distinction between systems
      * that are aware of this field (we use empty list to delete)
      */
