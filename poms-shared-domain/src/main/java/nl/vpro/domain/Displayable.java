@@ -5,7 +5,7 @@
 package nl.vpro.domain;
 
 /**
- * A displayable has a {@link #getDisplayName()} method, to display the object as a single string (in dutch) to the user.
+ * A displayable has a {@link #getDisplayName()} method, to display the object as a single string (in Dutch) to the user.
  * @author Roelof Jan Koekoek
  * @since 1.4
  * @deprecated Use nl.vpro.i18n.Displayable
