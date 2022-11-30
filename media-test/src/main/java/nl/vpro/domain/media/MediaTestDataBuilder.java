@@ -127,13 +127,6 @@ public interface MediaTestDataBuilder<
 
 
     /**
-     * @deprecated This is itself a mediabuilder nowadays.
-     */
-    @Deprecated
-    <TT extends MediaBuilder<TT, M>> MediaBuilder<TT, M> getMediaBuilder();
-
-
-    /**
      * Made object smaller and more predictable
      * (especially the creationDate we rather want a null)
      */
@@ -151,7 +144,7 @@ public interface MediaTestDataBuilder<
 
     /**
      * Created an object with all required fields filled. This is used in tests which want a complete and valid object, but don't have an actual persistence layer.
-     *
+     * <p>
      * Note that this also includes the {@link PublishableObject#getId()}, which normally is filled by a sequence on the database so you should persist objects like this. Use {@link #dbConstrained()} then.
      */
     default T constrained() {
@@ -162,7 +155,7 @@ public interface MediaTestDataBuilder<
 
     /**
      * Fills all required fields besides 'id' (which is filled by persistence layer).
-     *
+     * <p>
      * This should be used in tests which tests the persistence layer itself.
      *
      */
@@ -893,7 +886,7 @@ public interface MediaTestDataBuilder<
         @Override
         public ProgramTestDataBuilder withEverything() {
             AtomicLong mids = new AtomicLong(30000L);
-            ProgramTestDataBuilder result = MediaTestDataBuilder.super
+            return MediaTestDataBuilder.super
                 .withEverything()
                 .withScheduleEvents()
                 .withType()
@@ -901,17 +894,7 @@ public interface MediaTestDataBuilder<
                 .withPoProgType()
                 .withPredictions()
                 .withSegmentsWithEveryting()
-                .withFixedSegmentMids(mids)
-                ;
-
-            return result;
-        }
-
-        @Override
-        public MediaBuilder<MediaBuilder.ProgramBuilder, Program> getMediaBuilder() {
-            ProgramBuilder builder = MediaBuilder.program(mediaObject());
-            builder.mid(mid);
-            return builder;
+                .withFixedSegmentMids(mids);
         }
 
         @Override
@@ -1127,12 +1110,6 @@ public interface MediaTestDataBuilder<
         GroupTestDataBuilder(Group group) {
             super(group);
         }
-        @Override
-        public MediaBuilder<MediaBuilder.GroupBuilder, Group> getMediaBuilder() {
-            GroupBuilder builder = MediaBuilder.group(mediaObject());
-            builder.mid(mid);
-            return builder;
-        }
 
         @Override
         public GroupTestDataBuilder constrainedNew() {
@@ -1179,13 +1156,6 @@ public interface MediaTestDataBuilder<
             super(segment);
         }
 
-
-        @Override
-        public MediaBuilder<MediaBuilder.SegmentBuilder, Segment> getMediaBuilder() {
-            SegmentBuilder builder = MediaBuilder.segment(mediaObject());
-            builder.mid(mid);
-            return builder;
-        }
 
         public SegmentTestDataBuilder withStart() {
             return start(Duration.ofMinutes(2));

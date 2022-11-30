@@ -36,12 +36,4 @@ public class LocalizedString extends nl.vpro.i18n.LocalizedString {
     }
 
 
-    /**
-     * Deprecated. Just use {@link nl.vpro.i18n.LocalizedString#get(Locale, Iterable)}
-     */
-    @Deprecated
-    static String get_(Locale locale, Iterable<? extends nl.vpro.i18n.LocalizedString> strings) {
-        return get(locale, strings);
-    }
-
 }
