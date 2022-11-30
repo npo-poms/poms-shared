@@ -5,11 +5,11 @@ import lombok.NonNull;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Objects;
 
 import javax.persistence.*;
 
-import nl.vpro.util.DateUtils;
 import nl.vpro.util.TimeUtils;
 
 import static java.util.Comparator.comparing;
@@ -39,19 +39,8 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
         this.channel = channel;
     }
 
-
-    @Deprecated
-    public ScheduleEventIdentifier(Channel channel, Date start) {
-        this(channel, DateUtils.toInstant(start));
-    }
-
     public Instant getStartInstant() {
         return start;
-    }
-
-    @Deprecated
-    public Date getStart() {
-        return DateUtils.toDate(start);
     }
 
     @Override

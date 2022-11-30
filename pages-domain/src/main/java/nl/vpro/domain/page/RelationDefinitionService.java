@@ -8,14 +8,6 @@ import nl.vpro.domain.user.Broadcaster;
  */
 public interface RelationDefinitionService {
 
-
-
-
-    @Deprecated
-    static RelationDefinitionService getInstance() {
-        return RelationDefinitionServiceProvider.getInstance();
-    }
-
     RelationDefinition get(String type, Broadcaster broadcaster);
 
 

@@ -84,16 +84,6 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         return new Description(main, type, TextualType.MAIN);
     }
 
-    @Deprecated
-    public String getDescription() {
-        return value;
-    }
-
-    @Deprecated
-    public void setDescription(String description) {
-        this.value = strip(description);
-    }
-
     @Override
     public String get() {
         return value;

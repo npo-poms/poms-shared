@@ -6,21 +6,19 @@ package nl.vpro.domain.media.update;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Date;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.MutableEmbargoDeprecated;
 import nl.vpro.domain.Embargos;
-import nl.vpro.domain.media.AVAttributes;
-import nl.vpro.domain.media.AVFileFormat;
-import nl.vpro.domain.media.Location;
+import nl.vpro.domain.MutableEmbargoDeprecated;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -103,17 +101,6 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     }
 
 
-    @Deprecated
-    public LocationUpdate(String programUrl, Date duration, Integer bitrate, AVFileFormat format) {
-        this.duration = duration == null ? null : Duration.ofMillis(duration.getTime());
-        this.programUrl = programUrl;
-        this.avAttributes = new AVAttributesUpdate(format, bitrate);
-    }
-    @Deprecated
-    public LocationUpdate(String programUrl, Date duration, Integer width, Integer height, Integer bitrate, AVFileFormat format) {
-        this(programUrl, duration, bitrate, format);
-        this.avAttributes.setVideoAttributes(new VideoAttributesUpdate(width, height));
-    }
     public LocationUpdate(Location location) {
         programUrl = location.getProgramUrl();
         AVAttributes ats = location.getAvAttributes();
@@ -152,18 +139,8 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         this.duration = duration;
     }
 
-    @Deprecated
-    public void setDuration(Date duration) {
-        this.duration = duration == null ? null : Duration.ofMillis(duration.getTime());
-    }
-
     public Duration getOffset() {
         return offset;
-    }
-
-    @Deprecated
-    public void setOffset(Date offset) {
-        this.offset = offset == null ? null : Duration.ofMillis(offset.getTime());
     }
 
     public void setOffset(Duration offset) {

@@ -14,19 +14,4 @@ import nl.vpro.domain.media.MediaObject;
 public interface MediaObjectChild extends Child<MediaObject> {
 
 
-    /**
-     * @deprecated use {@link #getParent()}
-     */
-    @Deprecated
-    default MediaObject getMediaObject() {
-        return getParent();
-    }
-
-    /**
-     * @deprecated use {@link #setParent(Object)}
-     */
-    @Deprecated
-    default void setMediaObject(MediaObject parent) {
-        setParent(parent);
-    }
 }

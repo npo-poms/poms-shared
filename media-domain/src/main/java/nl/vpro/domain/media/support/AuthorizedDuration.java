@@ -7,7 +7,6 @@ package nl.vpro.domain.media.support;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.temporal.*;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -101,21 +100,9 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
     public AuthorizedDuration() {
     }
 
-    @Deprecated
-    @Nullable
-    public AuthorizedDuration(@Nullable Date value) {
-        this.duration = value == null ? null : java.time.Duration.of(value.toInstant().toEpochMilli(), ChronoUnit.MILLIS);
-    }
 
     public AuthorizedDuration(java.time.Duration value) {
         this.duration = value;
-    }
-
-
-    @Deprecated
-    public AuthorizedDuration(Date value, boolean authorized) {
-        this(value);
-        this.authorized = authorized;
     }
 
     public AuthorizedDuration(java.time.Duration value, boolean authorized) {
@@ -143,16 +130,6 @@ AuthorizedDuration source) {
 
     public void setAuthorized(boolean authorized) {
         this.authorized = authorized;
-    }
-
-    @Deprecated
-    public Date getValue() {
-        return asDate(this);
-    }
-
-    @Deprecated
-    public void setValue(Date value) {
-        this.duration = value == null ? null : java.time.Duration.of(value.getTime(), ChronoUnit.MILLIS);
     }
 
     /**
@@ -202,15 +179,6 @@ AuthorizedDuration source) {
 
     public static java.time.@Nullable Duration get(@Nullable AuthorizedDuration dur) {
         return dur == null ? null : dur.get();
-    }
-
-
-    @Deprecated
-    public static java.util.@Nullable Date asDate(@Nullable AuthorizedDuration dur) {
-        if (dur == null) {
-            return null;
-        }
-        return dur.duration == null ? null : new Date(dur.duration.toMillis());
     }
 
     @Override

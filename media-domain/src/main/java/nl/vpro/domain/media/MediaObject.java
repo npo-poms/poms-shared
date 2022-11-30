@@ -1390,28 +1390,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         }
     }
 
-    @Deprecated
-    public void setDurationWithDate(Date duration) throws ModificationException {
-        Date oldDuration = AuthorizedDuration.asDate(this.duration);
-        if (ObjectUtils.notEqual(oldDuration, duration) && hasAuthorizedDuration()) {
-            throw new ModificationException("Updating an existing and authorized duration is not allowed");
-        }
 
-        if (duration == null) {
-            this.duration = null;
-        } else if (this.duration == null) {
-            this.duration = new AuthorizedDuration(duration);
-        } else {
-            this.duration.setValue(duration);
-        }
-
-    }
-
-    @Deprecated
-    @Nullable
-    public Date getDurationAsDate() {
-        return AuthorizedDuration.asDate(duration);
-    }
 
     public boolean hasAuthorizedDuration() {
         return duration != null && duration.isAuthorized();
@@ -2659,12 +2638,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
      *
      * @since 1.5
      */
-
-    @Deprecated
-    final public Date getSortDate() {
-        return DateUtils.toDate(getSortInstant());
-    }
-
     @XmlAttribute(name = "sortDate", required = true)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("sortDate")
