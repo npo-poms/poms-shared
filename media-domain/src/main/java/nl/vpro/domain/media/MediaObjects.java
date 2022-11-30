@@ -46,6 +46,7 @@ public class MediaObjects {
 
     private MediaObjects() {
         // No instances, static utility functions only
+
     }
 
     public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
@@ -787,9 +788,15 @@ public class MediaObjects {
                         locationToUpdate.setSubtitles(incomingLocation.getSubtitles());
                         Embargos.copy(incomingLocation, locationToUpdate);
                         mergeAvAttributes(incomingLocation, locationToUpdate);
+                        if (DELETES.contains(incomingLocation.getWorkflow())) {
+                            locationToUpdate.setWorkflow(FOR_DELETION);
+                        } else {
+                            locationToUpdate.setWorkflow(FOR_PUBLICATION);
+                        }
                     }
                 }
             }
+
         }
     }
 
