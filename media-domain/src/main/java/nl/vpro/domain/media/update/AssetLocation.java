@@ -68,7 +68,7 @@ public class AssetLocation implements AssetSource {
     @Override
     public InputStream getInputStream() {
         try {
-            java.net.URL url = new java.net.URL(this.url);
+            URL url = URI.create(this.url).toURL();
             URLConnection urlConnection = url.openConnection();
 
             if(urlConnection instanceof HttpURLConnection) {
