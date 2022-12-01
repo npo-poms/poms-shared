@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.time.Instant;
 import java.util.*;
@@ -446,7 +447,7 @@ public class Locations {
                 if (overrideFile.startsWith("classpath:")) {
                     inputStream = Locations.class.getResourceAsStream(overrideFile.substring("classpath:".length()));
                 } else {
-                    URL url = new URL(overrideFile);
+                    URL url = URI.create(overrideFile).toURL();
                     inputStream = url.openStream();
                 }
                 if (inputStream != null) {
