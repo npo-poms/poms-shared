@@ -115,7 +115,7 @@ public abstract class MediaObjectLockerAspect  {
 
                 return correlation;
             }
-            throw new IllegalStateException("Object is of unrecognized type " + object);
+            throw new IllegalStateException("Object " + object + " is of unrecognized type " + (object == null ? "NULL" : object.getClass().getName() ));
         }
     }
 
