@@ -47,7 +47,7 @@ jobs:
         continue-on-error: true
 
       - name: Publish to codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v2
         with:
           verbose: true
           files: "**/target/surefire-reports/*.xml"
