@@ -14,8 +14,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
 
-import nl.vpro.nep.service.exception.NEPException;
-
 import org.apache.http.HttpHeaders;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -25,9 +23,10 @@ import org.springframework.beans.factory.annotation.Value;
 import nl.vpro.nep.sam.api.AccessApi;
 import nl.vpro.nep.sam.model.*;
 import nl.vpro.nep.service.NEPSAMService;
+import nl.vpro.nep.service.exception.NEPException;
 
 /**
- * https://jira.vpro.nl/browse/MSE-3754
+ * <a href="https://jira.vpro.nl/browse/MSE-3754">JIRA</a>
  * @author Michiel Meeuwissen
  * @since 5.11
  */
@@ -97,6 +96,7 @@ public class NEPSAMServiceImpl implements NEPSAMService{
         log.info("Connecting with {}/{}", this.baseUrlMid, this.baseUrlLive);
     }
 
+    @Override
     @PreDestroy
     public void close() {
         if (httpClient != null) {

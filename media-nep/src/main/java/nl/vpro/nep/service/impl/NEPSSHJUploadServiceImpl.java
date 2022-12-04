@@ -12,7 +12,6 @@ import java.util.EnumSet;
 import java.util.Properties;
 import java.util.function.Supplier;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
@@ -25,7 +24,8 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPUploadService;
-import nl.vpro.util.*;
+import nl.vpro.util.FileSizeFormatter;
+import nl.vpro.util.TimeUtils;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
 
@@ -74,6 +74,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         this.password = password;
         this.hostKey = hostKey;
         this.batchSize = batchSize;
+        init();
     }
 
     protected NEPSSHJUploadServiceImpl(Properties properties) {
@@ -87,8 +88,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     }
 
 
-    @PostConstruct
-    public void init() {
+    //@PostConstruct
+    protected void init() {
         log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, sftpHost, hostKey);
     }
 
