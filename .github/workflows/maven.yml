@@ -50,6 +50,7 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           verbose: true
+          gcov_ignore: 'media-domain/src/main/resources'
           files: "**/target/surefire-reports/*.xml"
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == 11
       - name: Publish Unit Test Results
