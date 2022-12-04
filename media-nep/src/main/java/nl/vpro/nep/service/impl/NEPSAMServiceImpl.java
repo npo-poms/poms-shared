@@ -98,10 +98,11 @@ public class NEPSAMServiceImpl implements NEPSAMService{
 
     @Override
     @PreDestroy
-    public void close() {
+    public synchronized void close() {
         if (httpClient != null) {
             log.info("Closing {}", httpClient);
             httpClient.close();
+            httpClient = null;
         }
     }
 
@@ -167,7 +168,8 @@ public class NEPSAMServiceImpl implements NEPSAMService{
         streamApi.getApiClient().setHttpClient(getHttpClient());
         return streamApi;
     }
-    private Client getHttpClient() {
+
+    private synchronized Client getHttpClient() {
         if (httpClient == null) {
             ResteasyClientBuilder builder = new ResteasyClientBuilderImpl();
             builder.connectTimeout(connectTimeout.toMillis(), TimeUnit.MILLISECONDS);

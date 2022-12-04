@@ -68,9 +68,10 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
 
     @Override
     @PreDestroy
-    public void close() throws IOException {
+    public synchronized void close() throws IOException {
         if (httpClient != null) {
             httpClient.close();
+            httpClient = null;
         }
     }
 
@@ -169,7 +170,7 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService  {
         return getClass().getSimpleName() + ":" +  baseUrl;
     }
 
-    private CloseableHttpClient getHttpClient() {
+    private synchronized CloseableHttpClient getHttpClient() {
         if (httpClient == null) {
             RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout((int) connectTimeout.toMillis())

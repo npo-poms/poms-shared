@@ -143,9 +143,10 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     @Override
     @PreDestroy
-    public void close() throws IOException {
+    public synchronized void close() throws IOException {
         if (httpClient != null) {
             httpClient.close();
+            httpClient = null;
         }
     }
 
@@ -282,7 +283,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         return getHttpClient().execute(new HttpGet(u), clientContext);
     }
 
-    private CloseableHttpClient getHttpClient() {
+    private synchronized CloseableHttpClient getHttpClient() {
         if (httpClient == null) {
             RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout((int) connectTimeout.toMillis())
