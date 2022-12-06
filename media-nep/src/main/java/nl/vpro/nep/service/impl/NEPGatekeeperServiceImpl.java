@@ -17,6 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.commons.io.IOUtils;
@@ -126,7 +127,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         init();
     }
 
-    //@PostConstruct
+    @PostConstruct
     protected void init() {
         BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(userName, password));
