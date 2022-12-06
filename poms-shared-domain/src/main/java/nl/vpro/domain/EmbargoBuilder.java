@@ -19,6 +19,7 @@ public interface EmbargoBuilder<B extends EmbargoBuilder<B>> {
     ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
 
+    @Deprecated
     default B publishStart(Date date) {
         return publishStart(DateUtils.toInstant(date));
     }
@@ -33,6 +34,7 @@ public interface EmbargoBuilder<B extends EmbargoBuilder<B>> {
         return publishStart(fromLocalDate(date));
     }
 
+    @Deprecated
     default B publishStop(Date date) {
         return publishStop(DateUtils.toInstant(date));
     }
