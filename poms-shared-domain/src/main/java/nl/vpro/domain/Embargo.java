@@ -10,7 +10,7 @@ import static nl.vpro.domain.Changeables.instant;
 
 /**
  * An object having or defining a publication embargo, meaning that it has publish start and stop instants.
- *
+ * <p>
  * Utilities are provided in {@link Embargos}.
  *
  * @author Michiel Meeuwissen
