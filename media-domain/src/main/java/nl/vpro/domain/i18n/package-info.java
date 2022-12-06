@@ -1,7 +1,7 @@
 /**
  * Contains the translation objects for {@link nl.vpro.domain.media.MediaObject}
  * <p>
- * {@code MediaObject}s are (partially) internationizable. Fields like titles and descriptions are basically in dutch, but translations can be provided for other languages.
+ * {@code MediaObject}s are (partially) internationizable. Fields like titles and descriptions are basically in Dutch, but translations can be provided for other languages.
  */
 @javax.xml.bind.annotation.XmlSchema(namespace = Xmlns.MEDIA_I18N_NAMESPACE,
     xmlns=

@@ -102,8 +102,13 @@ public class MediaChange extends Change<MediaObject> {
         @Nullable SortedSet<@NonNull PublicationReason> reasons,
         @Nullable List<@NonNull String> reasonsStrings,
         boolean skipped) {
-        this(DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)), revision, MediaSince.mid(mid, since), media,
-            deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted);
+        this(
+            DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)),
+            revision,
+            MediaSince.mid(mid, since),
+            media,
+            deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted
+        );
         setPublishDate(MediaSince.instant(publishDate, since));
         setTail(tail);
         if (media != null && media.getWorkflow() == Workflow.MERGED) {
@@ -111,7 +116,10 @@ public class MediaChange extends Change<MediaObject> {
         }
         this.reasons = reasons;
         if (reasonsStrings != null) {
-            SortedSet<PublicationReason> collect = reasonsStrings.stream().map(s -> new PublicationReason(s, publishDate)).collect(Collectors.toCollection(TreeSet::new));
+            SortedSet<PublicationReason> collect = reasonsStrings
+                .stream()
+                .map(s -> new PublicationReason(s, publishDate))
+                .collect(Collectors.toCollection(TreeSet::new));
             if (this.reasons == null) {
                 this.reasons = collect;
             } else {

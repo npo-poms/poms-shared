@@ -157,18 +157,9 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
         value = value.substring(start, stop);
     }
 
+    @Override
     public Long getId() {
         return id;
-    }
-
-    @Deprecated
-    public String getTitle() {
-        return value;
-    }
-
-    @Deprecated
-    public void setTitle(String title) {
-        set(title);
     }
 
     @Override

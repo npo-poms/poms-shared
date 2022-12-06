@@ -260,19 +260,6 @@ public abstract class AbstractScheduleEvent implements Child<MediaObject> {
     }
 
     @XmlTransient
-    @Deprecated
-    public MediaObject getMediaObject() {
-        return mediaObject;
-    }
-
-    @Deprecated
-    public void setMediaObject(MediaObject mediaObject) {
-        this.mediaObject = mediaObject;
-    }
-
-
-    @XmlTransient
-    @Deprecated
     @Override
     public MediaObject getParent() {
         return mediaObject;

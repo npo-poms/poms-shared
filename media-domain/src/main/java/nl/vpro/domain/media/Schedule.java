@@ -25,7 +25,6 @@ import nl.vpro.util.Ranges;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.Changeables.instant;
-import static nl.vpro.util.DateUtils.toDate;
 
 
 /**
@@ -129,71 +128,28 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     public Schedule() {
     }
 
-    @Deprecated
-    public Schedule(Date start, Date stop) {
-        this((Channel)null, start, stop, null);
-    }
-
     public Schedule(Instant  start, Instant stop) {
         this((Channel) null, start, stop, null);
     }
 
-    @Deprecated
-    public Schedule(Channel channel, Date start) {
-        this(channel, start, start);
-    }
-
     public Schedule(Channel channel, Instant start) {
-        this(channel, toDate(start), toDate(start));
+        this(channel, start,start);
     }
-
 
     public Schedule(Channel channel, LocalDate date) {
         this(channel, date, Collections.emptyList());
     }
 
 
-    @Deprecated
-    public Schedule(Net net, Date start) {
-        this(net, start, start);
-    }
-
     public Schedule(Channel channel, LocalDate start, Collection<ScheduleEvent> scheduleEvents) {
         this(channel,
-            Date.from(start.atStartOfDay(Schedule.ZONE_ID).toInstant()),
-            Date.from(start.plusDays(1).atStartOfDay(Schedule.ZONE_ID).toInstant()),
+            start.atStartOfDay(Schedule.ZONE_ID).toInstant(),
+            start.plusDays(1).atStartOfDay(Schedule.ZONE_ID).toInstant(),
             scheduleEvents);
     }
 
-    @Deprecated
-    public Schedule(Channel channel, Date start, Collection<ScheduleEvent> scheduleEvents) {
-        this(channel, start, start, scheduleEvents);
-    }
-
-
     public Schedule(Channel channel, Instant start, Collection<ScheduleEvent> scheduleEvents) {
         this(channel, start, start, scheduleEvents);
-    }
-
-    @Deprecated
-    public Schedule(Net net, Date start, Collection<ScheduleEvent> scheduleEvents) {
-        this(net, start, start, scheduleEvents);
-    }
-
-    @Deprecated
-    public Schedule(Channel channel, Date start, Date stop) {
-        this(channel, start, stop, null);
-    }
-
-
-    @Deprecated
-    public Schedule(Net net, Date start, Date stop) {
-        this(net, start, stop, null);
-    }
-
-    @Deprecated
-    public Schedule(Channel channel, Date start, Date stop, Collection<ScheduleEvent> scheduleEvents) {
-        this(channel, DateUtils.toInstant(start), DateUtils.toInstant(stop), scheduleEvents);
     }
 
     public Schedule(Channel channel, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
@@ -209,10 +165,6 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this(channel, start, stop, null);
     }
 
-    @Deprecated
-    public Schedule(Net net, Date start, Date stop, Collection<ScheduleEvent> scheduleEvents) {
-        this(net, DateUtils.toInstant(start), DateUtils.toInstant(stop), scheduleEvents);
-    }
 
     public Schedule(Net net, Instant start, Instant stop) {
         this(net, start, stop, null);

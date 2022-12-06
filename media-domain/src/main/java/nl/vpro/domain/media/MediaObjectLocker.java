@@ -108,9 +108,8 @@ public class MediaObjectLocker {
             .stream()
             .filter(f -> f.key instanceof MediaIdentifiable.Correlation)
             .collect(Collectors.toList());
-        if (!collect.isEmpty()) {
-            throw new IllegalStateException("There is a lock " + collect + ": " + description);
-        }
+
+        assert collect.isEmpty() : "There is a lock " + collect + ": " + description;
     }
 
     /**

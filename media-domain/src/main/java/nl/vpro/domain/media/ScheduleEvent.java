@@ -31,7 +31,6 @@ import nl.vpro.domain.media.bind.NetToString;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.*;
 import nl.vpro.persistence.LocalDateToDateConverter;
-import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.*;
 
 import static javax.persistence.CascadeType.ALL;
@@ -394,26 +393,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.textPage = textPage;
     }
 
-    /**
-     * @deprecated use {@link #getGuideDate}
-     */
-    @Deprecated
-    @XmlTransient
-    public Date getGuideDay() {
-        LocalDate dateToUse = guideDay == null ? guideLocalDate(start) : guideDay;
-        return dateToUse == null ? null : Date.from(dateToUse.atStartOfDay(Schedule.ZONE_ID).toInstant());
-    }
-
-
-    /**
-     * @deprecated A full date object is not stored in the database nor in xml. Use {@link #setGuideDate}
-     */
-    @Deprecated
-    public void setGuideDay(Date guideDay) {
-        this.guideDay = guideDay == null ? null : guideDay.toInstant().atZone(Schedule.ZONE_ID).toLocalDate();
-    }
-
-
 
     @XmlElement(name = "guideDay")
     @XmlJavaTypeAdapter(ZonedLocalDateXmlAdapter.class)
@@ -426,12 +405,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     public void setGuideDate(LocalDate guideDate) {
         this.guideDay = guideDate;
-    }
-
-    @XmlTransient
-    @Deprecated
-    public Date getStart() {
-        return DateUtils.toDate(start);
     }
 
     @XmlElement(name = "start")

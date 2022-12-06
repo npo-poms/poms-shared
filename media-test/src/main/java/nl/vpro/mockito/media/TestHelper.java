@@ -9,30 +9,12 @@ import org.mockito.stubbing.Answer;
 
 import nl.vpro.domain.media.*;
 
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.AdditionalMatchers.or;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.ArgumentMatchers.*;
 
 public class TestHelper {
 
     private TestHelper() {
-    }
-
-    @Deprecated
-    public static <T> Answer<T> firstArgument(Class<T> clazz) {
-        return returnsFirstArg();
-    }
-
-    @Deprecated
-    public static Answer<MediaObject> withSameMediaObject() {
-        return returnsFirstArg();
-    }
-
-    @Deprecated
-    public static Answer<Schedule> withSameSchedule() {
-        return returnsFirstArg();
     }
 
     public static <T> Answer<T> argument(final int pos, Class<T> clazz) {

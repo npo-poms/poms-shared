@@ -4,9 +4,9 @@
  */
 package nl.vpro.domain.media;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +37,6 @@ public class MediaBuilderTest {
     }
 
 
-    @SuppressWarnings("deprecation")
     @Test
     public void testScheduleEvent() {
         Program program = MediaBuilder.program().scheduleEvents(
@@ -51,32 +50,31 @@ public class MediaBuilderTest {
             .build();
 
         assertThat(new ArrayList<>(program.getScheduleEvents()).get(0).getChannel()).isEqualTo(Channel.NED3);
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(0).getGuideDay()).isEqualTo(new Date(-25 * 60 * 60 * 1000));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(0).getGuideDate()).isEqualTo(LocalDate.of(1969, 12, 31));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(0).getStart())
-            .isEqualTo(Date.from(LocalDateTime.parse("1970-01-01T01:00:00.100").atZone(Schedule.ZONE_ID).toInstant()));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(1).getChannel()).isEqualTo(Channel.NED3);
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(1).getGuideDay()).isEqualTo(new Date(169200000));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(1).getGuideDate()).isEqualTo(LocalDate.of(1970, 1, 3));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(1).getStart())
-            .isEqualTo(Date.from(LocalDateTime.parse("1970-01-04T01:00:00.300").atZone(Schedule.ZONE_ID).toInstant()));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(2).getChannel()).isEqualTo(Channel.HOLL);
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(2).getGuideDay()).isEqualTo(new Date(601200000));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(2).getGuideDate()).isEqualTo(LocalDate.of(1970, 1, 8));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(2).getStart())
-            .isEqualTo(Date.from(LocalDateTime.parse("1970-01-09T01:00:00.350").atZone(Schedule.ZONE_ID).toInstant()));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(3).getChannel()).isEqualTo(Channel.CONS);
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(3).getGuideDay()).isEqualTo(new Date(774000000));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(3).getGuideDate()).isEqualTo(LocalDate.of(1970, 1, 10));
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(3).getStart())
-            .isEqualTo(Date.from(LocalDateTime.parse("1970-01-11T01:00:00.600").atZone(Schedule.ZONE_ID).toInstant()));
 
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(4).getGuideDay())
-            .isEqualTo(Date.from(LocalDateTime.parse("1973-03-04T00:00:00").atZone(Schedule.ZONE_ID).toInstant()));
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(0).getGuideDate()).isEqualTo(LocalDate.of(1969, 12, 31));
+
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(0).getStartInstant())
+            .isEqualTo(LocalDateTime.parse("1970-01-01T01:00:00.100").atZone(Schedule.ZONE_ID).toInstant());
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(1).getChannel()).isEqualTo(Channel.NED3);
+
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(1).getGuideDate()).isEqualTo(LocalDate.of(1970, 1, 3));
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(1).getStartInstant())
+            .isEqualTo(LocalDateTime.parse("1970-01-04T01:00:00.300").atZone(Schedule.ZONE_ID).toInstant());
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(2).getChannel()).isEqualTo(Channel.HOLL);
+
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(2).getGuideDate()).isEqualTo(LocalDate.of(1970, 1, 8));
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(2).getStartInstant())
+            .isEqualTo(LocalDateTime.parse("1970-01-09T01:00:00.350").atZone(Schedule.ZONE_ID).toInstant());
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(3).getChannel()).isEqualTo(Channel.CONS);
+
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(3).getGuideDate()).isEqualTo(LocalDate.of(1970, 1, 10));
+        assertThat(new ArrayList<>(program.getScheduleEvents()).get(3).getStartInstant())
+            .isEqualTo(LocalDateTime.parse("1970-01-11T01:00:00.600").atZone(Schedule.ZONE_ID).toInstant());
+
+
         assertThat(new ArrayList<>(program.getScheduleEvents()).get(4).getGuideDate()).isEqualTo(LocalDate.of(1973, 3, 4));
 
-        assertThat(new ArrayList<>(program.getScheduleEvents()).get(5).getGuideDay())
-            .isEqualTo(Date.from(LocalDateTime.parse("1973-03-05T00:00:00").atZone(Schedule.ZONE_ID).toInstant()));
+
         assertThat(new ArrayList<>(program.getScheduleEvents()).get(5).getGuideDate()).isEqualTo(LocalDate.of(1973, 3, 5));
 
 

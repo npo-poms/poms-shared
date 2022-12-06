@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.time.Instant;
-import java.util.Date;
 import java.util.zip.CRC32;
 
 import javax.persistence.*;
@@ -22,12 +21,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.TrackableObject;
-import nl.vpro.util.DateUtils;
 import nl.vpro.validation.EmbargoValidation;
 import nl.vpro.validation.PomsValidatorGroup;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static nl.vpro.domain.Changeables.instant;
 
 /**
  * A publishable object implements {@link Accountable} and {@link MutableEmbargo}, but furthermore also has {@link #workflow}.
@@ -155,37 +152,6 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         return Workflow.PUBLISHED == workflow && isRevocable(now);
     }
 
-
-    @Deprecated
-    public Date getLastModified() {
-        return DateUtils.toDate(lastModified);
-    }
-
-    @Deprecated
-    public void setLastModified(Date lastModified) {
-        this.lastModified = DateUtils.toInstant(lastModified);
-    }
-
-    @Deprecated
-    public final Date getCreationDate() {
-        return DateUtils.toDate(getCreationInstant());
-    }
-
-    @Deprecated
-    public final void setCreationDate(Date creationDate) {
-        setCreationInstant(DateUtils.toInstant(creationDate));
-    }
-
-    @Deprecated
-    public Date getLastPublished() {
-        return DateUtils.toDate(lastPublished);
-    }
-
-    @Deprecated
-    public void setLastPublished(Date lastPublished) {
-        this.lastPublished = DateUtils.toInstant(lastPublished);
-    }
-
     @XmlAttribute
     @Override
     public Workflow getWorkflow() {
@@ -213,11 +179,6 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
             .appendSuper(super.toString())
             .append("workflow", workflow)
             .toString();
-    }
-
-    @Deprecated
-    public boolean isInAllowedPublicationWindow(long millisFromNow) {
-        return inPublicationWindow(instant().plusMillis(millisFromNow));
     }
 
     @Override

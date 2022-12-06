@@ -9,7 +9,6 @@ import lombok.Setter;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -23,7 +22,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
@@ -69,17 +67,6 @@ public class DateRangeMatcher extends SimpleRangeMatcher<Instant> {
     public DateRangeMatcher(Instant begin, Instant end, Boolean inclusiveEnd) {
         super(begin, end, inclusiveEnd);
     }
-
-    @Deprecated
-    public DateRangeMatcher(Date begin, Date end, Boolean inclusiveEnd) {
-        super(DateUtils.toInstant(begin), DateUtils.toInstant(end), inclusiveEnd);
-    }
-
-    @Deprecated
-    public DateRangeMatcher(Date begin, Date end) {
-        super(DateUtils.toInstant(begin), DateUtils.toInstant(end));
-    }
-
 
     public DateRangeMatcher(Instant begin, Instant end, Boolean inclusiveEnd, Match match) {
         super(begin, end, inclusiveEnd, match);

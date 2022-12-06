@@ -17,11 +17,11 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.*;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
@@ -126,8 +126,8 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         init();
     }
 
-    @PostConstruct
-    public void init() {
+    //@PostConstruct
+    protected void init() {
         BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(userName, password));
 
@@ -141,10 +141,12 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         log.info("Created {}", this);
     }
 
+    @Override
     @PreDestroy
-    public void close() throws IOException {
+    public synchronized void close() throws IOException {
         if (httpClient != null) {
             httpClient.close();
+            httpClient = null;
         }
     }
 
@@ -281,7 +283,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         return getHttpClient().execute(new HttpGet(u), clientContext);
     }
 
-    private CloseableHttpClient getHttpClient() {
+    private synchronized CloseableHttpClient getHttpClient() {
         if (httpClient == null) {
             RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout((int) connectTimeout.toMillis())

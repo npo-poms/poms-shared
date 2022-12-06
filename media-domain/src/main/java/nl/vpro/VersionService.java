@@ -22,8 +22,6 @@ public class VersionService {
 
     private static String version;
 
-    private static Float floatVersion;
-
     private static IntegerVersion integerVersion;
 
     private VersionService() {
@@ -49,19 +47,6 @@ public class VersionService {
         }
         return version;
     }
-
-    @Deprecated
-    public static Float floatVersion() {
-        if (floatVersion == null) {
-            String version = version();
-            Matcher matcher = Pattern.compile("(\\d+\\.?\\d*).*").matcher(version);
-            if (matcher.matches()) {
-                floatVersion = Float.parseFloat(matcher.group(1));
-            }
-        }
-        return floatVersion;
-    }
-
 
     public static IntegerVersion integerVersion() {
         if (integerVersion == null) {

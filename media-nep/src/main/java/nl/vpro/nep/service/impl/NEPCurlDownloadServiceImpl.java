@@ -26,9 +26,9 @@ import nl.vpro.util.FileMetadata;
 
 /**
  * See MSE-4032. It's kind of a disgrace that we have to fall back to external commands...
- *
+ * <p>
  * osx: sudo port install curl +sftp_scp (or use brew)
- *
+ * <p>
  * Doesn't work either because of 'rekeying'? See {@link NEPSSHJUploadServiceImpl}.
  *
  * @author Michiel Meeuwissen

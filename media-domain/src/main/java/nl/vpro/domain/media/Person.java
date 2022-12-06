@@ -160,16 +160,6 @@ public class Person extends Credits implements PersonInterface {
         }
     }
 
-    @Deprecated
-    public MediaObject getMediaObject() {
-        return mediaObject;
-    }
-
-    @Deprecated
-    public void setMediaObject(MediaObject mediaObject) {
-        this.mediaObject = mediaObject;
-    }
-
 
     @Override
     public List<String> getScopeNotes() {

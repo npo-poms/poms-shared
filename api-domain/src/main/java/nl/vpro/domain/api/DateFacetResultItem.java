@@ -35,11 +35,6 @@ public class DateFacetResultItem extends RangeFacetResultItem<Instant> {
     }
 
 
-    @Deprecated
-    public DateFacetResultItem(String value, Instant begin, Instant end, long count) {
-        super(value, begin, end, count);
-    }
-
     @lombok.Builder
     private DateFacetResultItem(String value, String name, Instant begin, Instant end, long count) {
         super(value, begin, end, count);

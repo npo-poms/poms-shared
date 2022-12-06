@@ -47,16 +47,6 @@ public class TitleUpdate implements TypedText {
         return new TitleUpdate(to.get(), to.getType());
     }
 
-    @Deprecated
-    @XmlTransient
-    public String getTitle() {
-        return get();
-    }
-
-    @Deprecated
-    public void setTitle(String title) {
-        set(title);
-    }
 
     @Override
     @XmlAttribute(required = true)

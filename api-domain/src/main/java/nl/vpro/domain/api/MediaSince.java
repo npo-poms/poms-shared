@@ -56,7 +56,7 @@ public class MediaSince implements Comparable<MediaSince> {
      * @since 7.2
      */
     public String asQueryParam() {
-        String sinceString = instant.toString();
+        String sinceString = instant == null ? null : instant.toString();
         if (mid != null && sinceString != null) {
             sinceString += "," + mid;
         }
@@ -77,5 +77,10 @@ public class MediaSince implements Comparable<MediaSince> {
     public int compareTo(MediaSince o) {
         return Comparator.comparing(MediaSince::getInstant, Comparator.nullsFirst(naturalOrder()))
             .thenComparing(MediaSince::getMid, Comparator.nullsFirst(naturalOrder())).compare(this, o);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " " + asQueryParam();
     }
 }

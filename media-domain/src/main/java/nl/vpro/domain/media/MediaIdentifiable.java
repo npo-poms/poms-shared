@@ -88,7 +88,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
             }
         }
 
-        enum Type {
+        public enum Type {
             MID,
             CRID,
             HASH

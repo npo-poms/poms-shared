@@ -4,18 +4,13 @@
  */
 package nl.vpro.domain.api.media;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.*;
 import java.util.regex.Pattern;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Tag;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.util.DateUtils;
+import nl.vpro.domain.media.support.*;
 
 /**
  * @author Roelof Jan Koekoek
@@ -76,21 +71,9 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-    @Deprecated
-    public MediaFormBuilder sortDate(Date begin, Date end) {
-        return sortDate(begin, end, false);
-    }
-
     public MediaFormBuilder sortDate(Instant begin, Instant end) {
         return sortDate(begin, end, false);
     }
-
-
-    @Deprecated
-    public MediaFormBuilder sortDate(Date begin, Date end, boolean inclusiveEnd) {
-        return sortDate(DateUtils.toInstant(begin), DateUtils.toInstant(end), inclusiveEnd);
-    }
-
 
     public MediaFormBuilder sortDate(Instant begin, Instant end, boolean inclusiveEnd) {
         DateRangeMatcherList list = search().getSortDates();

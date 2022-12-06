@@ -35,8 +35,8 @@ import nl.vpro.util.TimeUtils;
 import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
 
 /**
- * See also https://jira.vpro.nl/browse/MSE-4435
- *
+ * See also <a href="https://jira.vpro.nl/browse/MSE-4435">JIRA</a>
+ * <p>
  * TODO We have generated API for this too.
  *
  * @author Michiel Meeuwissen

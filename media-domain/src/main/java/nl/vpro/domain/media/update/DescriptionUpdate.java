@@ -46,17 +46,6 @@ public class DescriptionUpdate implements TypedText {
         return new DescriptionUpdate(to.get(), to.getType());
     }
 
-    @Deprecated
-    @XmlTransient
-    public String getDescription() {
-        return get();
-    }
-
-    @Deprecated
-    public void setDescription(String description) {
-        set(description);
-    }
-
     @Override
     @XmlAttribute(required = true)
     public TextualType getType() {
