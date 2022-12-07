@@ -214,16 +214,17 @@ public class MediaObjectLocker {
 
     @SneakyThrows
     public static <T> T withCorrelationLock(
-        MediaIdentifiable.@Nullable Correlation lock,
+        MediaIdentifiable.@NonNull Correlation lock,
         @NonNull String reason,
         @NonNull Callable<T> callable) {
-        if (lock == null) {
-
+        if (lock != null && lock.getType() == MediaIdentifiable.Correlation.Type.NO_LOCK) {
             return callable.call();
         } else {
             return withObjectLock(lock, reason, callable, LOCKED_MEDIA,
                 (o1, o2) ->
-                    o1 instanceof MediaIdentifiable.Correlation && Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType()));
+                    o1 instanceof MediaIdentifiable.Correlation &&
+                        Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType())
+            );
         }
     }
 

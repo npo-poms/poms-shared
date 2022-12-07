@@ -22,7 +22,7 @@ public interface TrackableObject extends Trackable, Embargo {
 
     /**
      * Whether this object could be  publicly visible in the API.
-     *
+     * <p>
      * This returns <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
      * and otherwise it depends on {@link #inPublicationWindow(Instant)}
      */

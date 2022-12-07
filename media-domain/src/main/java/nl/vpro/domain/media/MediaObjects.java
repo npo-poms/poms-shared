@@ -589,7 +589,6 @@ public class MediaObjects {
             media.setRepubDestinations(null);
             return true;
         } else {
-            appendReason(media, reason);
             return false;
         }
     }
