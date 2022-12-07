@@ -20,11 +20,11 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 
 
 /**
- * Tests whether the POMS schema's are changed. If tests-cases fail here, fix them, but <em>also don't forget to make the changes to the XSD's also to the manually maintained ones</em>.
+ * Tests whether the POMS schemas are changed. If tests-cases fail here, fix them, but <em>also don't forget to make the changes to the XSD's also to the manually maintained ones</em>.
  * in nl/vpro/domain/media
- *
+ * <p>
  * E.g. in nl/vpro/domain/media/vproMedia.xsd
- *
+ * <p>
  * So normally you'd have to change <em>two</em> XSD's.
  *
  * @author Michiel Meeuwissen
