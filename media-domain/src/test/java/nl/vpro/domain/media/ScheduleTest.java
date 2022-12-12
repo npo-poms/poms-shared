@@ -6,14 +6,14 @@ package nl.vpro.domain.media;
 
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.time.Duration;
-import java.time.Instant;
-
+import java.time.*;
 import java.util.Arrays;
 
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
+
+import nl.vpro.domain.Changeables;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
@@ -102,5 +102,24 @@ public class ScheduleTest {
         table.setSchedule(schedule);
 
         return table;
+    }
+
+
+    @Test
+    public void testGuideDay() {
+
+        fixedClock(LocalDateTime.of(2022, 12, 12, 5, 58));
+        assertThat(Schedule.guideDay()).isEqualTo("2022-12-12");
+
+        fixedClock(LocalDateTime.of(2022, 12, 12, 5, 57));
+        assertThat(Schedule.guideDay()).isEqualTo("2022-12-11");
+
+        fixedClock(LocalDateTime.of(2022, 12, 13, 4, 57));
+        assertThat(Schedule.guideDay()).isEqualTo("2022-12-12");
+    }
+
+    void fixedClock(LocalDateTime localDateTime) {
+        Changeables.CLOCK.set(Clock.fixed(localDateTime
+            .atZone(Schedule.ZONE_ID).toInstant(), Schedule.ZONE_ID));
     }
 }
