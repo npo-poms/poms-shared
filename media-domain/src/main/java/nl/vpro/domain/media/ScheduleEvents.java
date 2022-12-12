@@ -9,6 +9,8 @@ import java.util.*;
 import java.util.function.BiFunction;
 
 /**
+ * Utilities related to {@link ScheduleEvent}
+ *
  * @author Roelof Jan Koekoek
  * @since 1.7
  */
