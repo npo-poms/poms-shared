@@ -91,12 +91,16 @@ public interface ScheduleService {
         Integer max);
 
 
-
+    /**
+     * This is used when querying for a day on start field.
+     */
     static ZonedDateTime guideDayStart(LocalDate guideDay) {
         return guideDay.atStartOfDay(ZONE_ID).with(START_OF_SCHEDULE.plus(START_OF_SCHEDULE_SLACK));
     }
 
-    @Deprecated
+    /**
+     * This is used when querying for a day on start field.
+     */
     static ZonedDateTime guideDayStop(LocalDate guideDay) {
         return guideDayStart(guideDay.plusDays(1));
     }
