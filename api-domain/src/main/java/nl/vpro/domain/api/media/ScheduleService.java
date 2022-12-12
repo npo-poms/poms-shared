@@ -9,6 +9,8 @@ import java.time.*;
 import nl.vpro.domain.api.Order;
 import nl.vpro.domain.media.*;
 
+import static nl.vpro.domain.media.Schedule.START_OF_SCHEDULE_SLACK;
+
 /**
  * @author rico
  */
@@ -89,9 +91,9 @@ public interface ScheduleService {
         Integer max);
 
 
-    @Deprecated
+
     static ZonedDateTime guideDayStart(LocalDate guideDay) {
-        return guideDay.atStartOfDay(ZONE_ID).with(START_OF_SCHEDULE);
+        return guideDay.atStartOfDay(ZONE_ID).with(START_OF_SCHEDULE.plus(START_OF_SCHEDULE_SLACK));
     }
 
     @Deprecated
