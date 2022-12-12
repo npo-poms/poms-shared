@@ -5,27 +5,33 @@
 package nl.vpro.domain.api.media;
 
 import java.time.*;
-import java.time.temporal.ChronoUnit;
 
 import nl.vpro.domain.api.Order;
-import nl.vpro.domain.media.Channel;
-import nl.vpro.domain.media.Net;
+import nl.vpro.domain.media.*;
 
 /**
  * @author rico
  */
 public interface ScheduleService {
 
-    ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
-    LocalTime START_OF_SCHEDULE = LocalTime.of(6, 0);
+    /**
+     * @deprecated Use {@link Schedule#ZONE_ID}
+     */
+    @Deprecated
+    ZoneId ZONE_ID = Schedule.ZONE_ID;
 
+    /**
+     * @deprecated Use {@link Schedule#START_OF_SCHEDULE}
+     */
+    @Deprecated
+    LocalTime START_OF_SCHEDULE = Schedule.START_OF_SCHEDULE;
+
+    /**
+     * @deprecated Moved to {@link Schedule#guideDay()} ()}
+     */
+    @Deprecated
     static LocalDate today() {
-        ZonedDateTime now = ZonedDateTime.now(ZONE_ID);
-        if (now.toLocalTime().isBefore(START_OF_SCHEDULE)) {
-            return LocalDate.now(ZONE_ID).minus(1, ChronoUnit.DAYS);
-        } else {
-            return LocalDate.now(ZONE_ID);
-        }
+        return Schedule.guideDay();
     }
 
     /**
@@ -83,10 +89,12 @@ public interface ScheduleService {
         Integer max);
 
 
+    @Deprecated
     static ZonedDateTime guideDayStart(LocalDate guideDay) {
         return guideDay.atStartOfDay(ZONE_ID).with(START_OF_SCHEDULE);
     }
 
+    @Deprecated
     static ZonedDateTime guideDayStop(LocalDate guideDay) {
         return guideDayStart(guideDay.plusDays(1));
     }
