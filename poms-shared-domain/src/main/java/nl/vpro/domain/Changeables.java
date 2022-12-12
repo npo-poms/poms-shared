@@ -13,14 +13,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Michiel Meeuwissen
  * @since 5.10
  */
-@SuppressWarnings("JavadocReference")
 public class Changeables {
 
     public static final ThreadLocal<Clock> CLOCK = ThreadLocal.withInitial(Clock::systemUTC);
 
     /**
-     * Returns the clock that is for determining default creation dates and such things. Also it used by {@link Embargo}.
-     *
+     * Returns the clock that is for determining default creation dates and such things. Also, it used by {@link Embargo}.
+     * <p>
      * The clock is a Thread local, and normally is just {@link Clock#systemUTC()}, but e.g. during testing it may be some
      * other clock implementation (like {@link Clock#fixed(Instant, ZoneId)}.
      * @since 5.31
