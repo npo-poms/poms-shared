@@ -25,7 +25,7 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
  * <p>
  * E.g. in nl/vpro/domain/media/vproMedia.xsd
  * <p>
- * So normally you'd have to change <em>two</em> XSD's.
+ * So normally you'd have to change <em>two</em> XSDs.
  *
  * @author Michiel Meeuwissen
  * @since 3.4
