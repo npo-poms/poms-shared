@@ -30,7 +30,7 @@ public class ChannelTest {
     }
 
     @Test
-    @Disabled("sadly fails, but we can't really fix it withough huge republications.")
+    @Disabled("sadly fails, but we can't really fix it without huge republications.")
     public void testJson() throws JsonProcessingException {
         assertThat(Jackson2Mapper.getInstance().writeValueAsString(Channel._101_)).isEqualTo("\"101_\"");
     }
@@ -46,14 +46,22 @@ public class ChannelTest {
         for (Channel c : Channel.values()) {
             assertThat(Channel.valuesOf(Collections.singletonList(c.name())).get(0)).isEqualTo(c);
         }
-        Channel.valuesOf(Collections.singleton("13ST")).containsAll(Collections.singletonList(Channel._13ST));
-        Channel.valuesOf(Collections.singleton("ARD")).containsAll(Collections.singletonList(Channel.ARD_));
+        assertThat(Channel.valuesOf(Collections.singleton("13ST"))).containsExactly(Channel._13ST);
+        assertThat(Channel.valuesOf(Collections.singleton("ARD"))).containsExactly(Channel.ARD_);
     }
 
     @Test
     public void testByXmlValue() {
         assertThat(Channel.valueOfXml("101_")).isEqualTo(Channel._101_);
         assertThat(Channel.valueOfXml("10TB")).isEqualTo(Channel._10TB);
+    }
+
+    @Test
+    public void headRequests() {
+        for(Channel c : Channel.values()) {
+            String website = c.getWebsite();
+
+        }
     }
 
 
