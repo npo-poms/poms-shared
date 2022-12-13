@@ -1206,10 +1206,11 @@ public interface MediaTestDataBuilder<
         }
     }
 
+    String TEST_PRINCIPAL =  "editor@vpro.nl";
 
     static Editor vproEditor() {
         return Editor.builder()
-            .principalId("editor@vpro.nl")
+            .principalId(TEST_PRINCIPAL)
             .displayName("Editor")
             .email("editor@vpro.nl")
             .broadcaster(new Broadcaster("VPRO", "VPRO"))
