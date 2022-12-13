@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.time.*;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -13,6 +12,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.PolyNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -44,23 +44,34 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     /**
      * The time zone most relevant for NPO, i.e. the timezone in the Netherlands.
      */
-    public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
+    public static final ZoneId    ZONE_ID = ZoneId.of("Europe/Amsterdam");
+
+    /**
+     * A {@link ScheduleEvent} can basically be associated with a {@link LocalDate}. If there is no
+     * explicit value, then it can be based on {@link ScheduleEvent#getStartInstant()} and ({@link #ZONE_ID}.
+     * <p>
+     * If the time of the day is before this, then it would be considered part of the <em>previous</em> day.
+     */
     public static final LocalTime START_OF_SCHEDULE = LocalTime.of(6, 0);
 
-    public static LocalDate guideDay(Instant instant) {
+    /**
+     * Edge cases like 5:59 are logically considered part of the previous day, but the bulk of the schedule event will be in the current day, so we allow for a few minutes slack.
+     */
+    public static final Duration  START_OF_SCHEDULE_SLACK = Duration.ofMinutes(-2);
+
+
+    /**
+     * Returns the current value of 'today' as a {@link LocalDate}, but considers
+     * {@link #START_OF_SCHEDULE} and {@link #START_OF_SCHEDULE_SLACK}
+     */
+    public static @PolyNull LocalDate guideDay(@PolyNull Instant instant) {
         if (instant == null) {
             return null;
         }
-        ZonedDateTime dateTime = instant.atZone(Schedule.ZONE_ID);
-
-        if (localTimeBelongsToPreviousDay(dateTime.toLocalTime())) {
-            dateTime = dateTime.minusDays(1);
-        }
-
-        return dateTime.toLocalDate();
+        return guideDay(instant.atZone(Schedule.ZONE_ID).toLocalDateTime());
     }
 
-    /**
+      /**
      * @since 5.11
      */
     public static LocalDate guideDay(LocalDateTime datetime) {
@@ -73,26 +84,36 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         }
         return localDate;
     }
-     /**
+
+    /**
+     * Returns the current value of 'today' as a {@link LocalDate}, but considers
+     * {@link #START_OF_SCHEDULE} and {@link #START_OF_SCHEDULE_SLACK}
+     * @since 7.2
+     */
+    public static LocalDate guideDay() {
+        return guideDay(instant());
+    }
+
+    /**
+     * Whether a certain {@link ScheduleEvent}, would be considered part of the previous day.
+     * This is a utility function used in several other utilities
      * @since 5.11
      */
     public static boolean localTimeBelongsToPreviousDay(@NonNull LocalTime localTime) {
-        return localTime.isBefore(Schedule.START_OF_SCHEDULE.minus(2, ChronoUnit.MINUTES));
-    }
-
-    public static LocalDate guideDay() {
-        return guideDay(instant());
+        return localTime.isBefore(Schedule.START_OF_SCHEDULE.plus(START_OF_SCHEDULE_SLACK));
     }
 
     public static Instant toInstant(LocalDateTime time) {
         return time.atZone(ZONE_ID).toInstant();
     }
 
-
+    /**
+     * @deprecated Dont use {@link Date}
+     */
+    @Deprecated
     protected static Instant toInstant(Date time) {
         return DateUtils.toInstant(time);
     }
-
 
     @XmlTransient // See property
     protected SortedSet<ScheduleEvent> scheduleEvents;
