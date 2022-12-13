@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlEnumValue;
@@ -126,5 +127,15 @@ public enum AgeRating implements Displayable, XmlValued {
         return Optional.of("kijkwijzer-icon kijkwijzer-icon-agerating-" + getXmlValue().toLowerCase());
     }
 
+    private static final AgeRating[] ACCEPTED = Arrays.stream(AgeRating.values())
+        .filter(Displayable::display).toArray(AgeRating[]::new);
+
+    /**
+     * Returns all valid AgeRatings that are actually currently accepted.
+     * @since 7.2
+     */
+    public static AgeRating[] acceptedValues() {
+        return ACCEPTED;
+    }
 
 }
