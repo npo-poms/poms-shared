@@ -42,19 +42,20 @@ public enum Workflow implements Displayable, XmlValued {
      */
     IGNORE("Genegeerd", null),
 
+    PUBLISHED("Gepubliceerd"),
     /**
      * The object is not yet published, but should be considered for publication. This probably is a new object.
      */
     @XmlEnumValue("FOR PUBLICATION")
-    FOR_PUBLICATION("Voor publicatie", "PUBLISHED"),
+    FOR_PUBLICATION("Voor publicatie", PUBLISHED),
 
     /**
      * The object is already published, but something has been changed, and it needs to be published again.
      */
     @XmlEnumValue("FOR REPUBLICATION")
-    FOR_REPUBLICATION("Wordt gepubliceerd", "PUBLISHED"),
+    FOR_REPUBLICATION("Wordt gepubliceerd", PUBLISHED),
 
-    PUBLISHED("Gepubliceerd"),
+
 
     /**
      * The object is merged with another object. An object will get this status when it is published for the last time.
@@ -78,16 +79,19 @@ public enum Workflow implements Displayable, XmlValued {
     REVOKED("Ingetrokken"),
 
     /**
-     * The entity is scheduled for deletion.
-     */
-    @XmlEnumValue("FOR DELETION")
-    FOR_DELETION("Wordt verwijderd", "DELETED"),
-
-    /**
      * If someone explicitly deleted an entity then it becomes 'deleted'. This implies revocation from publication.
      * Normal users should not see these entities.
      */
-    DELETED("Verwijderd");
+    DELETED("Verwijderd"),
+    /**
+     * The entity is scheduled for deletion.
+     */
+    @XmlEnumValue("FOR DELETION")
+    FOR_DELETION("Wordt verwijderd", DELETED)
+
+    ;
+
+
 
     public static final List<Workflow> WITH_MEDIA_ACTIVATION = List.of(
         FOR_PUBLICATION,
@@ -161,19 +165,18 @@ public enum Workflow implements Displayable, XmlValued {
     @Getter
     private final boolean publishable;
 
-    private final String stringAs;
-    private Workflow publishedAs;
+    private final Workflow publishedAs;
 
-    Workflow(String description, String publishedAs) {
+    Workflow(String description, Workflow publishedAs) {
         this.description = description;
         this.publishable = false;
-        this.stringAs = publishedAs;
+        this.publishedAs = publishedAs;
     }
 
     Workflow(String description) {
         this.description = description;
         this.publishable = true;
-        this.stringAs = null;
+        this.publishedAs = this;
     }
 
     /**
@@ -182,13 +185,6 @@ public enum Workflow implements Displayable, XmlValued {
      */
     @NonNull
     public Workflow getPublishedAs() {
-        if (publishedAs == null) {
-            if (stringAs != null) {
-                publishedAs = valueOf(stringAs);
-            } else {
-                publishedAs = this;
-            }
-        }
         return publishedAs;
     }
 
