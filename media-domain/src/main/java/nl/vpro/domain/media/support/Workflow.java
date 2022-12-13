@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -21,11 +23,7 @@ import nl.vpro.domain.media.MediaObject;
 import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
-import static java.util.Collections.unmodifiableSet;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * <p>The workflow status for publishable items.</p>
@@ -91,41 +89,41 @@ public enum Workflow implements Displayable, XmlValued {
      */
     DELETED("Verwijderd");
 
-    public static final List<Workflow> WITH_MEDIA_ACTIVATION = unmodifiableList(asList(
+    public static final List<Workflow> WITH_MEDIA_ACTIVATION = List.of(
         FOR_PUBLICATION,
         PARENT_REVOKED,
         REVOKED
-    ));
+    );
 
 
 
-    public static final List<Workflow> PUBLICATIONS = unmodifiableList(asList(
+    public static final List<Workflow> PUBLICATIONS = List.of(
         PUBLISHED,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    ));
+    );
 
-    public static final List<Workflow> DELETES = unmodifiableList(asList(
+    public static final List<Workflow> DELETES = List.of(
         FOR_DELETION,
         DELETED
-    ));
+    );
 
 
-    public static final List<Workflow> PUBLISHED_AS_DELETED = unmodifiableList(asList(
+    public static final List<Workflow> PUBLISHED_AS_DELETED = List.of(
         FOR_DELETION,
         DELETED,
         MERGED,
         PARENT_REVOKED,
         REVOKED
-    ));
+    );
 
-    public static final Set<Workflow> API = unmodifiableSet(new HashSet<>(asList(
+    public static final Set<Workflow> API = Set.of(
         DELETED,
         MERGED,
         PARENT_REVOKED,
         REVOKED,
         PUBLISHED
-    )));
+    );
 
     public static final List<Workflow> AS_DELETED_IN_API = unmodifiableList(
         PUBLISHED_AS_DELETED.stream()
@@ -133,12 +131,13 @@ public enum Workflow implements Displayable, XmlValued {
             .collect(Collectors.toList())
     );
 
-    public static final List<Workflow> REVOKES = unmodifiableList(asList(
+    public static final List<Workflow> REVOKES = List.of(
         FOR_DELETION,
         DELETED,
         REVOKED,
         MERGED
-    ));
+    );
+
     public static final List<Workflow> REVOKES_OR_IGNORE;
     static {
         List<Workflow> list = new ArrayList<>(REVOKES);
@@ -146,11 +145,11 @@ public enum Workflow implements Displayable, XmlValued {
         REVOKES_OR_IGNORE = unmodifiableList(list);
     }
 
-    public static final List<Workflow> NEEDWORK = unmodifiableList(asList(
+    public static final List<Workflow> NEEDWORK = List.of(
         FOR_DELETION,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    ));
+    );
 
     private final String description;
 
