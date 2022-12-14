@@ -2694,10 +2694,18 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return mergedTo;
     }
 
+    /**
+     * Mark this object as being merged to another mediaobject. This will only set the {@code mergedTo} field.
+     * The workflow status will be unaffected. The publisher will pick up that the workflow is not {@link Workflow#MERGED} while
+     * there the {@code mergedTo} field is set, and then correct that and republish accordingly.
+     *
+     * @param mergedTo The destination of the merge.
+     * @throws IllegalArgumentException If this mediaobject was already merged to some other object
+     */
     public void setMergedTo(@Nullable MediaObject mergedTo) {
         if (this.mergedTo != null && mergedTo != null && !this.mergedTo.equals(mergedTo)) {
             throw new IllegalArgumentException(
-                    "Can not merge " + this + " to " + mergedTo + " since it is already merged to " + this.mergedTo);
+                "Can not merge " + this + " to " + mergedTo + " since it is already merged to " + this.mergedTo);
         }
 
         int depth = 10;

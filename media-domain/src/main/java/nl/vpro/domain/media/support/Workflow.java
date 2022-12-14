@@ -63,6 +63,7 @@ public enum Workflow implements Displayable, XmlValued {
      * Used only on {@link MediaObject}s.
      * <p>
      * Normal users should not see these objects, but should be directed to the object {@link MediaObject#getMergedTo()}
+     * Objects are published though to ES, so the redirect list can be dynamically built.
      */
     MERGED("Samengevoegd"),
 
