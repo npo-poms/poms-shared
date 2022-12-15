@@ -7,8 +7,7 @@ package nl.vpro.domain.subtitles;
 import java.io.StringReader;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Base64;
+import java.util.*;
 
 import javax.xml.bind.JAXB;
 
@@ -23,8 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SubtitlesTest {
 
-
-
     @Test
     public void testMarshalToXml()  {
         Subtitles subtitles = Subtitles.webvtt("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), NETHERLANDISH,  "WEBVTT\n\n1\n00:00:00.000 --> 00:01:04.000\nbla\n\n");
@@ -33,10 +30,10 @@ public class SubtitlesTest {
 
 
         JAXBTestUtil.roundTripAndSimilar(subtitles,
-                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                    "<subtitles:subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\" creationDate=\"1970-01-01T01:00:00+01:00\" lastModified=\"1970-01-01T01:00:00+01:00\" type=\"CAPTION\" xml:lang=\"nl-NL\" owner=\"BROADCASTER\" workflow=\"FOR_PUBLICATION\" cueCount=\"1\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-                    "    <subtitles:content format=\"WEBVTT\" charset=\"UTF-8\">V0VCVlRUCgoxCjAwOjAwOjAwLjAwMCAtLT4gMDA6MDE6MDQuMDAwCmJsYQoK</subtitles:content>\n" +
-                    "</subtitles:subtitles>");
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<subtitles:subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\" creationDate=\"1970-01-01T01:00:00+01:00\" lastModified=\"1970-01-01T01:00:00+01:00\" type=\"CAPTION\" xml:lang=\"nl-NL\" owner=\"BROADCASTER\" workflow=\"FOR_PUBLICATION\" cueCount=\"1\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+                "    <subtitles:content format=\"WEBVTT\" charset=\"UTF-8\">V0VCVlRUCgoxCjAwOjAwOjAwLjAwMCAtLT4gMDA6MDE6MDQuMDAwCmJsYQoK</subtitles:content>\n" +
+                "</subtitles:subtitles>");
     }
 
     @Test
@@ -89,9 +86,17 @@ public class SubtitlesTest {
 
     @Test
     public void from() {
-        Subtitles subtitles = Subtitles.from(Arrays.asList(
-                StandaloneCue.tt888(Cue.forMid(
-                "mid").sequence(1).start(Duration.ZERO).end(Duration.ofSeconds(64)).content("bla").build())).iterator());
+        Subtitles subtitles = Subtitles.from(List.of(
+                StandaloneCue.tt888(
+                    Cue.forMid("mid")
+                        .sequence(1)
+                        .start(Duration.ZERO)
+                        .end(Duration.ofSeconds(64))
+                        .content("bla")
+                        .build())
+                )
+            .iterator()
+        );
         Jackson2TestUtil.roundTripAndSimilar(subtitles, "{" +
             "  \"mid\" : \"mid\",\n" +
             "  \"content\" : {\n" +

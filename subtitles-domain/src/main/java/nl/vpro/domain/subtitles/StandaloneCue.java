@@ -38,7 +38,6 @@ public class StandaloneCue extends Cue {
     @XmlAttribute
     private SubtitlesType type = SubtitlesType.CAPTION;
 
-
     public static StandaloneCue translation(Cue cue, Locale locale) {
         return new StandaloneCue(cue, locale, SubtitlesType.TRANSLATION);
     }
@@ -59,7 +58,6 @@ public class StandaloneCue extends Cue {
     }
 
     protected StandaloneCue() {
-
     }
 
     public StandaloneCue(@NonNull Cue cue, Locale language, SubtitlesType type) {
@@ -69,17 +67,17 @@ public class StandaloneCue extends Cue {
     }
 
     @lombok.Builder(builderClassName = "Builder", builderMethodName = "standaloneBuilder")
-    StandaloneCue(String parent,
-                  int sequence,
-                  Duration start,
-                  Duration end,
-                  String content,
-                  Locale language,
-                  SubtitlesType type) {
+    StandaloneCue(
+        String parent,
+        int sequence,
+        Duration start,
+        Duration end,
+        String content,
+        Locale language,
+        SubtitlesType type) {
         super(Cue.builder().parent(parent).sequence(sequence).start(start).end(end).content(content).build());
         this.language = language;
         this.type = type;
-
     }
 
 
@@ -97,8 +95,8 @@ public class StandaloneCue extends Cue {
             .language(Locale.forLanguageTag(split[2]))
             .build(),
             Integer.parseInt(split[3]));
-
     }
+
     @XmlTransient
     public SubtitlesId getSubtitlesId() {
         return SubtitlesId.builder().mid(parent).language(language).type(type).build();
