@@ -6,15 +6,13 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.time.Duration;
-import java.util.Iterator;
-import java.util.Locale;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import org.apache.commons.io.IOUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.util.BasicWrappedIterator;
 import nl.vpro.util.CountedIterator;
@@ -108,10 +106,9 @@ public class SubtitlesUtil {
             return defaultValue;
 
         }
-
     }
 
-    public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles, boolean guessOffset, boolean fillCueNumbers) {
+    public static Stream<@NonNull StandaloneCue> standaloneStream(Subtitles subtitles, boolean guessOffset, boolean fillCueNumbers) {
         if (subtitles == null) {
             return Stream.empty();
         }
@@ -119,7 +116,8 @@ public class SubtitlesUtil {
         if (fillCueNumbers) {
             stream = fillCueNumber(stream);
         }
-        return stream.map(c -> StandaloneCue.of(c, subtitles.getLanguage(), subtitles.getType()));
+        return stream.map(c -> StandaloneCue.of(c, subtitles.getLanguage(), subtitles.getType()))
+            .filter(Objects::nonNull);
     }
 
 

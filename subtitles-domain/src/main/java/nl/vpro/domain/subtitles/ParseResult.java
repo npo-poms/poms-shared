@@ -9,6 +9,7 @@ import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * @author Michiel Meeuwissen
@@ -20,21 +21,21 @@ public class ParseResult implements Iterable<Cue> {
     private final List<Meta> headers;
 
     @NonNull
-    private final Stream<Cue> cues;
+    private final Stream<@Nullable Cue> cues;
 
-    private ParseResult(Stream<Cue> cues, List<Meta> headers) {
+    private ParseResult(@NonNull Stream<@NonNull Cue> cues, List<Meta> headers) {
         this.cues = cues;
         this.headers = headers;
     }
-    private ParseResult(Stream<Cue> cues) {
+    private ParseResult(@NonNull Stream<@NonNull Cue> cues) {
         this(cues, new ArrayList<>());
     }
 
-    public static ParseResult of(Stream<Cue> cues) {
+    public static ParseResult of(Stream<@NonNull Cue> cues) {
         return new ParseResult(cues);
     }
 
-    public static ParseResult of(Stream<Cue> cues, List<Meta> headers) {
+    public static ParseResult of(Stream<@NonNull Cue> cues, List<Meta> headers) {
         return new ParseResult(cues, headers);
     }
 

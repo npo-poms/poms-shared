@@ -59,7 +59,7 @@ public class WEBVTTandSRT {
 
     /**
      * A WebVTT timestamp consists of the following components, in the given order:
-     *
+     * <p>
      * Optionally (required if hours is non-zero):
      * Two or more ASCII digits, representing the hours as a base ten integer.
      * // REMARK: We accept 1 too.
@@ -115,7 +115,7 @@ public class WEBVTTandSRT {
 
             }
 
-            protected void findNext() {
+            private void findNext() {
                 if (needsFindNext) {
                     cueIdentifier= null;
                     timeLine = null;
