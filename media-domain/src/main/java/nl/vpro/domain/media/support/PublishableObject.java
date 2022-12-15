@@ -20,11 +20,13 @@ import javax.xml.bind.annotation.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import nl.vpro.domain.*;
+import nl.vpro.domain.media.CollectionUtils;
 import nl.vpro.domain.media.TrackableObject;
 import nl.vpro.validation.EmbargoValidation;
 import nl.vpro.validation.PomsValidatorGroup;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static nl.vpro.domain.media.support.Workflow.WITH_MEDIA_ACTIVATION;
 
 /**
  * A publishable object implements {@link Accountable} and {@link MutableEmbargo}, but furthermore also has {@link #workflow}.
@@ -140,7 +142,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
     public boolean isActivation(Instant now) {
-        return isPublishable(now) && Workflow.WITH_MEDIA_ACTIVATION.contains(workflow);
+        return isPublishable(now) && CollectionUtils.inCollection(WITH_MEDIA_ACTIVATION, workflow);
     }
 
     public boolean isDeactivation(Instant now) {

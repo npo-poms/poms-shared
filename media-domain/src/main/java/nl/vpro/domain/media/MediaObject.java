@@ -3034,7 +3034,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             if (thisId != null) {
                 id = ", id=[" + this.getId() + "]"; // bracket then signal that not yet persistent
             } else {
-                if (Workflow.API.contains(workflow)) {
+                if (inCollection(Workflow.API, workflow)) {
                     // probably testing ES or so.
                     id = "";
                 } else {
@@ -3043,7 +3043,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             }
         }
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
-            (! Workflow.PUBLICATIONS.contains(workflow) ? workflow + ":" : "" ),
+            (! inCollection(Workflow.PUBLICATIONS, workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
             this.getMid() == null ? "<no mid>" : "\"" + this.getMid() + "\"",
             mainTitle,
