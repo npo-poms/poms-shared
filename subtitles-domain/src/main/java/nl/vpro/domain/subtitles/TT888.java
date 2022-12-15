@@ -8,6 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -156,13 +158,17 @@ public class TT888 {
             .end(timeLine.end.minus(offset))
             .content(content)
             .build();
-        }
+    }
 
+
+    private static final Pattern SEQ = Pattern.compile("([-+]?\\d+):?");
     public static TimeLine parseTimeline(String timeLine) {
         String[] split = timeLine.split("\\s+");
         try {
+            Matcher matcher = SEQ.matcher(split[0]);
+            Integer integer = matcher.matches() ? Integer.parseInt(matcher.group(1)) : null;
             return new TimeLine(
-                Integer.parseInt(split[0]),
+                integer,
                 parseTime(split[1]),
                 parseTime(split[2])
             );
