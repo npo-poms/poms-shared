@@ -53,4 +53,13 @@ public class TT888Test {
         cues.forEach(cueList::add);
         assertThat(cueList.get(160).getContent()).startsWith("Geachte heer Dürüst, bij deze delen");
     }
+
+    @Test
+    public void readKN_1729896() {
+        Stream<Cue> cues = TT888.parseUTF8("KN_1729896", Duration.ZERO, (tl) -> Duration.ZERO, getClass().getResourceAsStream("/KN_1729896.txt"));
+        List<Cue> cueList = new ArrayList<>();
+        cues.forEach(cueList::add);
+        log.info("{}", cueList);
+        assertThat(cueList.get(126).getContent()).startsWith("You can find ING's response on pointer.nl.");
+    }
 }
