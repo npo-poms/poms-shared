@@ -130,7 +130,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         );
     }
 
-    protected File knowHosts(String ftpHost, String hostkey) {
+    protected synchronized File knowHosts(String ftpHost, String hostkey) {
         try {
             final File f = File.createTempFile("known_hosts", ".tmp");
             try (PrintWriter writer = new PrintWriter(f)) {
@@ -236,7 +236,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public String toString () {
-        return getClass().getSimpleName() + ":" + scp + " " + getDownloadString();
+        return getClass().getSimpleName() + ":" + scp.getBinary().get() + " " + getDownloadString();
     }
 
 }

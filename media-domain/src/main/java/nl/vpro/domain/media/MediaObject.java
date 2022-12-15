@@ -287,7 +287,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         nullable = false)
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Size(min = 0, message = "{nl.vpro.constraints.Size.min}") // komt soms voor  bij imports.
+    @Size(min = 0, message = "{nl.vpro.constraints.Size.min}") // komt soms voor bij imports.
     protected List<@NotNull Broadcaster> broadcasters;
 
     @ManyToMany
@@ -2694,10 +2694,18 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return mergedTo;
     }
 
+    /**
+     * Mark this object as being merged to another mediaobject. This will only set the {@code mergedTo} field.
+     * The workflow status will be unaffected. The publisher will pick up that the workflow is not {@link Workflow#MERGED} while
+     * there the {@code mergedTo} field is set, and then correct that and republish accordingly.
+     *
+     * @param mergedTo The destination of the merge.
+     * @throws IllegalArgumentException If this mediaobject was already merged to some other object
+     */
     public void setMergedTo(@Nullable MediaObject mergedTo) {
         if (this.mergedTo != null && mergedTo != null && !this.mergedTo.equals(mergedTo)) {
             throw new IllegalArgumentException(
-                    "Can not merge " + this + " to " + mergedTo + " since it is already merged to " + this.mergedTo);
+                "Can not merge " + this + " to " + mergedTo + " since it is already merged to " + this.mergedTo);
         }
 
         int depth = 10;
@@ -3026,7 +3034,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             if (thisId != null) {
                 id = ", id=[" + this.getId() + "]"; // bracket then signal that not yet persistent
             } else {
-                if (Workflow.API.contains(workflow)) {
+                if (inCollection(Workflow.API, workflow)) {
                     // probably testing ES or so.
                     id = "";
                 } else {
@@ -3035,7 +3043,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             }
         }
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
-            (! Workflow.PUBLICATIONS.contains(workflow) ? workflow + ":" : "" ),
+            (! inCollection(Workflow.PUBLICATIONS, workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
             this.getMid() == null ? "<no mid>" : "\"" + this.getMid() + "\"",
             mainTitle,

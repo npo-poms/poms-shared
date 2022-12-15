@@ -18,9 +18,9 @@ import org.hibernate.annotations.*;
 
 import com.fasterxml.jackson.annotation.*;
 
-import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.*;
 
 import static javax.persistence.CascadeType.MERGE;
@@ -143,6 +143,7 @@ public class Program extends MediaObject {
         this.type = type;
     }
 
+    @SuppressWarnings("CopyConstructorMissesField")
     public Program(Program source) {
         super(source);
         source.getEpisodeOf().forEach(ref -> this.createEpisodeOf((Group)ref.getGroup(), ref.getNumber(), ref.getOwner()));
@@ -229,7 +230,7 @@ public class Program extends MediaObject {
             for (MemberRef memberRef : episodeOf) {
                 if (! memberRef.isVirtual()) {
                     final MediaObject reference = memberRef.getGroup();
-                    if (!set.contains(reference)) {
+                    if (reference != null && !set.contains(reference)) {
                         set.add(reference);
                         reference.addAncestors(set);
 
@@ -315,8 +316,10 @@ public class Program extends MediaObject {
         }
 
         for(MemberRef memberRef : episodeOf) {
-            if(memberRef.getGroup().equals(ancestor) || memberRef.getGroup().hasAncestor(ancestor)) {
-                return true;
+            if (memberRef.getGroup() != null) {
+                if (Objects.equals(memberRef.getGroup(), ancestor) || memberRef.getGroup().hasAncestor(ancestor)) {
+                    return true;
+                }
             }
         }
 
@@ -329,15 +332,16 @@ public class Program extends MediaObject {
 
         if(ancestors.isEmpty() && isEpisode()) {
             for(MemberRef memberRef : episodeOf) {
-                if(memberRef.getGroup().equals(ancestor)) {
+                if(Objects.equals(memberRef.getGroup(), ancestor)) {
                     ancestors.add(ancestor);
                     return;
                 }
-
-                memberRef.getGroup().findAncestry(ancestor, ancestors);
-                if(!ancestors.isEmpty()) {
-                    ancestors.add(memberRef.getGroup());
-                    return;
+                if (memberRef.getGroup() != null) {
+                    memberRef.getGroup().findAncestry(ancestor, ancestors);
+                    if (!ancestors.isEmpty()) {
+                        ancestors.add(memberRef.getGroup());
+                        return;
+                    }
                 }
             }
         }
@@ -351,7 +355,8 @@ public class Program extends MediaObject {
         }
 
         if(! ProgramType.EPISODES.contains(this.getType())) {
-            throw new IllegalArgumentException(String.format("%1$s of type %2$s can not become an episode of %3$s with type %4$s (should be one of %s)", this, this.getType(), group, group.getType(), ProgramType.EPISODES));
+            throw new IllegalArgumentException(
+                String.format("%1$s of type %2$s can not become an episode of %3$s with type %4$s (should be one of %5$s)", this, this.getType(), group, group.getType(), ProgramType.EPISODES));
         }
 
         if(! group.getType().canContainEpisodes()) {
@@ -381,7 +386,7 @@ public class Program extends MediaObject {
             while(it.hasNext()) {
                 MemberRef memberRef = it.next();
 
-                if(memberRef.getGroup().equals(owner)) {
+                if(Objects.equals(memberRef.getGroup(), owner)) {
                     it.remove();
                     success = true;
                 }
@@ -405,16 +410,6 @@ public class Program extends MediaObject {
             }
         }
         return false;
-    }
-
-    @Deprecated
-    public String getEpisodeTitle() {
-        return TextualObjects.get(titles, (String)null, TextualType.EPISODE);
-    }
-
-    @Deprecated
-    public String getEpisodeDescription() {
-        return TextualObjects.get(descriptions, (String)null, TextualType.EPISODE);
     }
 
     public String getPoProgType() {

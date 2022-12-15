@@ -1,5 +1,7 @@
 package nl.vpro.nep.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
@@ -25,6 +27,7 @@ import nl.vpro.util.FileMetadata;
  * @since 5.6
  */
 @Named("NEPService")
+@Slf4j
 public class NEPServiceImpl implements NEPService {
 
     private final Provider<NEPGatekeeperService> gatekeeperService;
@@ -226,9 +229,23 @@ public class NEPServiceImpl implements NEPService {
     @Override
     @PreDestroy
     public void close() throws Exception {
-        this.gatekeeperService.get().close();
-        this.itemizeService.get().close();
-        this.samService.get().close();
-        this.tokenService.get().close();
+        closeQuietly(
+            gatekeeperService,
+            itemizeService,
+            samService,
+            tokenService
+        );
+    }
+
+    @SafeVarargs
+    private static void closeQuietly(Provider<? extends AutoCloseable>... closeables) {
+        for (Provider<? extends AutoCloseable> closeable : closeables) {
+            try {
+                closeable.get().close();
+            } catch (Exception e) {
+                log.debug(e.getMessage());
+            }
+
+        }
     }
 }

@@ -10,7 +10,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Michiel Meeuwissen
  * @since 5.12
  */
-class CollectionUtils {
+public class CollectionUtils {
 
     private CollectionUtils() {
     }
@@ -92,5 +92,18 @@ class CollectionUtils {
             return set;
         }
     }
+
+    /**
+     * {@code null}-safe {@link Collection#contains(Object)}. {@code null} is never in the list.
+     * <p>
+     * Mainly because link java 9's Immutable lists resulting from things as {@link List#of()} throw exception if called with {@code null}
+     * (Things like {@link Collections#unmodifiableList(List)} didn't behave like that).
+     *
+     * @since 7.2
+     */
+    public static <P> boolean inCollection(Collection<P> col, P element) {
+        return element != null && col.contains(element);
+    }
+
 
 }

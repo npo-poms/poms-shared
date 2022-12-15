@@ -164,6 +164,11 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         return getParent().isRevocable(now);
     }
 
+    /**
+     * A segment is considered merged if its parent is.
+     * <p >
+     * Note that generally it won't have  {@link MediaObject#getMergedTo()}
+     */
     @Override
     public boolean isMerged() {
         return (parent != null && parent.isMerged()) || super.isMerged();

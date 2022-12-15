@@ -99,14 +99,14 @@
   <xs:simpleType name="workflowEnumType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="IGNORE"/>
+      <xs:enumeration value="PUBLISHED"/>
       <xs:enumeration value="FOR PUBLICATION"/>
       <xs:enumeration value="FOR REPUBLICATION"/>
-      <xs:enumeration value="PUBLISHED"/>
       <xs:enumeration value="MERGED"/>
       <xs:enumeration value="PARENT REVOKED"/>
       <xs:enumeration value="REVOKED"/>
-      <xs:enumeration value="FOR DELETION"/>
       <xs:enumeration value="DELETED"/>
+      <xs:enumeration value="FOR DELETION"/>
     </xs:restriction>
   </xs:simpleType>
 

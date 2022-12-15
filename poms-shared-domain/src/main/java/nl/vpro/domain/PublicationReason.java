@@ -24,7 +24,7 @@ import static java.util.Comparator.*;
 
 /**
  * Indicates a reason for publication. This part of the a {@code MediaChange} object.
- * In ElasticSearch is it written directly into the {@code _doc} representing the {@MediaObject} itself though.
+ * In ElasticSearch is it written directly into the {@code _doc} representing the {@code MediaObject} itself though.
  *
  * @author Michiel Meeuwissen
  * @since 7.1
@@ -33,7 +33,7 @@ import static java.util.Comparator.*;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publicationReason", namespace = Xmlns.API_NAMESPACE)
 @Slf4j
-public class PublicationReason implements Serializable,Comparable<PublicationReason> {
+public class PublicationReason implements Serializable, Comparable<PublicationReason> {
 
     //@Serial
     private static final long serialVersionUID = -5898117026516765909L;

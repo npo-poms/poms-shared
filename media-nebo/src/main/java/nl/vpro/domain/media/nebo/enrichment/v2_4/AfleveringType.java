@@ -14,11 +14,10 @@ import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
 
+import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.nebo.base.AfbeeldingenType;
-import nl.vpro.domain.media.nebo.base.FragmentenType;
-import nl.vpro.domain.media.nebo.base.TabsType;
+import nl.vpro.domain.media.nebo.base.*;
 import nl.vpro.domain.media.nebo.shared.StreamsType;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.util.TextUtil;
@@ -156,7 +155,7 @@ public class AfleveringType {
 
 
     public String getInh2() {
-        return program.getEpisodeDescription();
+        return  TextualObjects.get(program.getDescriptions(), (String)null, TextualType.EPISODE);
     }
 
 
@@ -240,7 +239,7 @@ public class AfleveringType {
     }
 
     public String getGids_tekst() {
-        return program.getEpisodeDescription();
+        return TextualObjects.get(program.getDescriptions(), (String)null, TextualType.EPISODE);
     }
 
 

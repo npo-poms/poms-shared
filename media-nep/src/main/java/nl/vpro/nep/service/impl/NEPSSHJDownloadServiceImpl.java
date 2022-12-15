@@ -28,9 +28,9 @@ import nl.vpro.util.FileMetadata;
 
 
 /**
- * This is a wrapper for sftp-itemizer.nepworldwide.nl This is were itemize results are placed by NEP
- *
- * Not used, because of https://github.com/hierynomus/sshj/issues/432
+ * This is a wrapper for sftp-itemizer.nepworldwide.nl This is where itemize results are placed by NEP
+ * <p>
+ * Not used, because of <a href="https://github.com/hierynomus/sshj/issues/432">this issue</a>
  */
 //@Named("NEPDownloadService") // It doesn't *** work
 @Slf4j

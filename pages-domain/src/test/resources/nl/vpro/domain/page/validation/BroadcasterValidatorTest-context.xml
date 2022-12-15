@@ -8,10 +8,10 @@
   <bean class="nl.vpro.domain.user.ServiceLocator"/>
 
   <bean class="org.mockito.Mockito" factory-method="mock">
-    <constructor-arg value="nl.vpro.domain.user.BroadcasterService"/>
+    <constructor-arg type="java.lang.Class" value="nl.vpro.domain.user.BroadcasterService"/>
   </bean>
 
   <bean class="org.mockito.Mockito" factory-method="mock">
-    <constructor-arg value="nl.vpro.domain.user.PortalService"/>
+    <constructor-arg type="java.lang.Class" value="nl.vpro.domain.user.PortalService"/>
   </bean>
 </beans>

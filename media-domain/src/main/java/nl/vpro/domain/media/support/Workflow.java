@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -21,11 +23,7 @@ import nl.vpro.domain.media.MediaObject;
 import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
-import static java.util.Collections.unmodifiableSet;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * <p>The workflow status for publishable items.</p>
@@ -44,19 +42,20 @@ public enum Workflow implements Displayable, XmlValued {
      */
     IGNORE("Genegeerd", null),
 
+    PUBLISHED("Gepubliceerd"),
     /**
      * The object is not yet published, but should be considered for publication. This probably is a new object.
      */
     @XmlEnumValue("FOR PUBLICATION")
-    FOR_PUBLICATION("Voor publicatie", "PUBLISHED"),
+    FOR_PUBLICATION("Voor publicatie", PUBLISHED),
 
     /**
      * The object is already published, but something has been changed, and it needs to be published again.
      */
     @XmlEnumValue("FOR REPUBLICATION")
-    FOR_REPUBLICATION("Wordt gepubliceerd", "PUBLISHED"),
+    FOR_REPUBLICATION("Wordt gepubliceerd", PUBLISHED),
 
-    PUBLISHED("Gepubliceerd"),
+
 
     /**
      * The object is merged with another object. An object will get this status when it is published for the last time.
@@ -64,6 +63,7 @@ public enum Workflow implements Displayable, XmlValued {
      * Used only on {@link MediaObject}s.
      * <p>
      * Normal users should not see these objects, but should be directed to the object {@link MediaObject#getMergedTo()}
+     * Objects are published though to ES, so the redirect list can be dynamically built.
      */
     MERGED("Samengevoegd"),
 
@@ -80,52 +80,55 @@ public enum Workflow implements Displayable, XmlValued {
     REVOKED("Ingetrokken"),
 
     /**
-     * The entity is scheduled for deletion.
-     */
-    @XmlEnumValue("FOR DELETION")
-    FOR_DELETION("Wordt verwijderd", "DELETED"),
-
-    /**
      * If someone explicitly deleted an entity then it becomes 'deleted'. This implies revocation from publication.
      * Normal users should not see these entities.
      */
-    DELETED("Verwijderd");
+    DELETED("Verwijderd"),
+    /**
+     * The entity is scheduled for deletion.
+     */
+    @XmlEnumValue("FOR DELETION")
+    FOR_DELETION("Wordt verwijderd", DELETED)
 
-    public static final List<Workflow> WITH_MEDIA_ACTIVATION = unmodifiableList(asList(
+    ;
+
+
+
+    public static final List<Workflow> WITH_MEDIA_ACTIVATION = List.of(
         FOR_PUBLICATION,
         PARENT_REVOKED,
         REVOKED
-    ));
+    );
 
 
 
-    public static final List<Workflow> PUBLICATIONS = unmodifiableList(asList(
+    public static final List<Workflow> PUBLICATIONS = List.of(
         PUBLISHED,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    ));
+    );
 
-    public static final List<Workflow> DELETES = unmodifiableList(asList(
+    public static final List<Workflow> DELETES = List.of(
         FOR_DELETION,
         DELETED
-    ));
+    );
 
 
-    public static final List<Workflow> PUBLISHED_AS_DELETED = unmodifiableList(asList(
+    public static final List<Workflow> PUBLISHED_AS_DELETED = List.of(
         FOR_DELETION,
         DELETED,
         MERGED,
         PARENT_REVOKED,
         REVOKED
-    ));
+    );
 
-    public static final Set<Workflow> API = unmodifiableSet(new HashSet<>(asList(
+    public static final Set<Workflow> API = Set.of(
         DELETED,
         MERGED,
         PARENT_REVOKED,
         REVOKED,
         PUBLISHED
-    )));
+    );
 
     public static final List<Workflow> AS_DELETED_IN_API = unmodifiableList(
         PUBLISHED_AS_DELETED.stream()
@@ -133,12 +136,13 @@ public enum Workflow implements Displayable, XmlValued {
             .collect(Collectors.toList())
     );
 
-    public static final List<Workflow> REVOKES = unmodifiableList(asList(
+    public static final List<Workflow> REVOKES = List.of(
         FOR_DELETION,
         DELETED,
         REVOKED,
         MERGED
-    ));
+    );
+
     public static final List<Workflow> REVOKES_OR_IGNORE;
     static {
         List<Workflow> list = new ArrayList<>(REVOKES);
@@ -146,11 +150,11 @@ public enum Workflow implements Displayable, XmlValued {
         REVOKES_OR_IGNORE = unmodifiableList(list);
     }
 
-    public static final List<Workflow> NEEDWORK = unmodifiableList(asList(
+    public static final List<Workflow> NEEDWORK = List.of(
         FOR_DELETION,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    ));
+    );
 
     private final String description;
 
@@ -162,19 +166,18 @@ public enum Workflow implements Displayable, XmlValued {
     @Getter
     private final boolean publishable;
 
-    private final String stringAs;
-    private Workflow publishedAs;
+    private final Workflow publishedAs;
 
-    Workflow(String description, String publishedAs) {
+    Workflow(String description, Workflow publishedAs) {
         this.description = description;
         this.publishable = false;
-        this.stringAs = publishedAs;
+        this.publishedAs = publishedAs;
     }
 
     Workflow(String description) {
         this.description = description;
         this.publishable = true;
-        this.stringAs = null;
+        this.publishedAs = this;
     }
 
     /**
@@ -183,13 +186,6 @@ public enum Workflow implements Displayable, XmlValued {
      */
     @NonNull
     public Workflow getPublishedAs() {
-        if (publishedAs == null) {
-            if (stringAs != null) {
-                publishedAs = valueOf(stringAs);
-            } else {
-                publishedAs = this;
-            }
-        }
         return publishedAs;
     }
 

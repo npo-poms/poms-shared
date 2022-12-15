@@ -91,12 +91,15 @@ public interface MediaIdentifiable extends MidIdentifiable {
         public enum Type {
             MID,
             CRID,
-            HASH
+            HASH,
+            NO_LOCK
         }
         @Override
         public String toString() {
             return type + ":" + id;
         }
+
+        public static final Correlation NO_LOCK = new Correlation(null, Type.NO_LOCK);
 
         @Override
         public boolean equals(Object o) {

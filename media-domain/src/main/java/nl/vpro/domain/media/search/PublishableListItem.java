@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.*;
+import nl.vpro.domain.media.CollectionUtils;
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Editor;
@@ -77,7 +78,7 @@ public abstract class PublishableListItem<S extends PublishableListItem<S>> impl
 
     @XmlAttribute(name = "deleted")
     public Boolean getDeletedAttributeValue() {
-        return Workflow.DELETES.contains(workflow) ? Boolean.TRUE : null;
+        return CollectionUtils.inCollection(Workflow.DELETES, workflow) ? Boolean.TRUE : null;
     }
 
     public void setDeletedAttributeValue(Boolean deleted) {

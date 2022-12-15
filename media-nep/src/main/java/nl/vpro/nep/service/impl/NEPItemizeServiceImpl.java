@@ -270,9 +270,10 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Override
     @PreDestroy
-    public void close() throws Exception {
+    public synchronized void close() throws Exception {
         if (httpClient != null) {
             httpClient.close();
+            httpClient = null;
         }
     }
 
