@@ -39,9 +39,9 @@ public class EBU {
         }
         return new Iterator<Cue>() {
 
-            protected Cue next;
+            private Cue next;
 
-            protected Boolean hasNext = null;
+            private Boolean hasNext = null;
             private int i = 0;
             final byte[] ttiBlock = new byte[128];
             final int numberOfTTIBlocks;
@@ -145,7 +145,7 @@ public class EBU {
             }
 
 
-            protected void findNext() {
+            private void findNext() {
 
                 if (hasNext == null) {
                     next = null;

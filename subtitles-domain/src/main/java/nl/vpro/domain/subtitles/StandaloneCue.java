@@ -5,20 +5,17 @@ package nl.vpro.domain.subtitles;
  * @since 4.8
  */
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.Duration;
 import java.util.Locale;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.PolyNull;
 
 import nl.vpro.xml.bind.LocaleAdapter;
 
@@ -46,16 +43,15 @@ public class StandaloneCue extends Cue {
         return new StandaloneCue(cue, locale, SubtitlesType.TRANSLATION);
     }
 
-
     public static StandaloneCue tt888(Cue cue) {
         return new StandaloneCue(cue, DUTCH, SubtitlesType.CAPTION);
     }
 
-    public static StandaloneCue of(Cue cue, SubtitlesId subtitles) {
+    public static @PolyNull StandaloneCue of(@PolyNull Cue cue, SubtitlesId subtitles) {
         return of(cue, subtitles.getLanguage(), subtitles.getType());
     }
 
-    public static StandaloneCue of(Cue cue, Locale language, SubtitlesType type) {
+    public static @PolyNull StandaloneCue of(@PolyNull Cue cue, Locale language, SubtitlesType type) {
         if (cue == null) {
             return null;
         }
