@@ -4,10 +4,13 @@
  */
 package nl.vpro.domain.subtitles;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.io.StringReader;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.*;
+import java.util.Base64;
+import java.util.List;
 
 import javax.xml.bind.JAXB;
 
@@ -20,6 +23,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static nl.vpro.i18n.Locales.NETHERLANDISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Log4j2
 public class SubtitlesTest {
 
     @Test
@@ -114,12 +118,25 @@ public class SubtitlesTest {
     }
 
     @Test
-
     public void guessFormat() {
         Subtitles subtitles = Subtitles.builder()
             .value(getClass().getResourceAsStream("/WO_NPO_14933889.vtt"))
             .build();
 
         assertThat(subtitles.getContent().getFormat()).isEqualTo(SubtitlesFormat.WEBVTT);
+    }
+
+    @Test
+    public void guessFormat2() {
+        Subtitles subtitles = Subtitles.builder()
+            .value(getClass().getResourceAsStream("/KN_1729896.txt"))
+            .build();
+
+        for (Cue cue : SubtitlesUtil.parse(subtitles, false)) {
+            log.info("{}", cue);
+        }
+
+        assertThat(subtitles.getContent().getFormat()).isEqualTo(SubtitlesFormat.TT888);
+
     }
 }

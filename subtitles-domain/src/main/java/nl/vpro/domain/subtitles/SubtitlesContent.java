@@ -3,16 +3,11 @@ package nl.vpro.domain.subtitles;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -25,6 +20,8 @@ import javax.xml.bind.annotation.*;
 @Slf4j
 @Data
 public class SubtitlesContent implements Serializable {
+
+    private static final long serialVersionUID = 4374514441026800570L;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

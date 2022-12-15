@@ -85,7 +85,7 @@ public class WEBVTTandSRT {
             .lines()
             .iterator();
 
-        Iterator<Cue> cues = new Iterator<Cue>() {
+        Iterator<Cue> cues = new Iterator<>() {
 
             boolean needsFindNext = true;
             String cueIdentifier;
@@ -117,7 +117,7 @@ public class WEBVTTandSRT {
 
             private void findNext() {
                 if (needsFindNext) {
-                    cueIdentifier= null;
+                    cueIdentifier = null;
                     timeLine = null;
                     content.setLength(0);
 
@@ -125,7 +125,7 @@ public class WEBVTTandSRT {
                     while (stream.hasNext()) {
                         String l = stream.next();
                         if (StringUtils.isNotBlank(l)) {
-                            if (! readIntro) {
+                            if (!readIntro) {
                                 if (WEBVTT_INTRO.equals(l.trim())) {
                                     StringBuilder content = new StringBuilder();
                                     while (stream.hasNext()) {
@@ -170,7 +170,7 @@ public class WEBVTTandSRT {
                         }
                     }
                     if (headLine != null) {
-                        if (! CUETIMING.matcher(headLine).matches()) {
+                        if (!CUETIMING.matcher(headLine).matches()) {
                             cueIdentifier = headLine;
                             if (stream.hasNext()) {
                                 timeLine = stream.next();
@@ -199,10 +199,7 @@ public class WEBVTTandSRT {
         return ParseResult.of(
             StreamSupport.stream(Spliterators.spliteratorUnknownSize(cues, Spliterator.ORDERED), false),
             headers);
-
-
     }
-
 
 
     static Cue parseCue(String parent, String cueNumber, Duration offset, String timeLine, String content, String decimalSeparator) {

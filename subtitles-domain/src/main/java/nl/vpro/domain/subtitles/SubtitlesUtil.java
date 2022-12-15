@@ -73,7 +73,6 @@ public class SubtitlesUtil {
         String mid = subtitles.getMid();
         Duration offset = subtitles.getOffset();
 
-
         Function<TimeLine, Duration> offsetGuesser = guessOffset ? new DefaultOffsetGuesser(subtitles.getCreationInstant()) : timeLine -> Duration.ZERO;
         switch (content.getFormat()) {
             case TT888:
@@ -87,8 +86,8 @@ public class SubtitlesUtil {
             default:
                 throw new IllegalArgumentException("Not supported format " + content.getFormat());
         }
-
     }
+
 
 
 
