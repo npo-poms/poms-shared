@@ -582,7 +582,7 @@ public class MediaObjects {
     }
 
     public static boolean markForUnDeletionIfNeeded(@NonNull MediaObject media, String reason) {
-        if (Workflow.DELETES.contains(media.getWorkflow())) {
+        if (CollectionUtils.inCollection(Workflow.DELETES, media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             log.info("Marked {} for undeletion", media);
             appendReason(media, reason);
