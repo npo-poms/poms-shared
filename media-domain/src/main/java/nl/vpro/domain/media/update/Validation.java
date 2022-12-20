@@ -30,10 +30,12 @@ public class Validation {
         } catch(Throwable e) {
             // like java.lang.NoSuchMethodError: javax.el.ELUtil.getExpressionFactory()Ljavax/el/ExpressionFactory;
             log.warn(e.getClass().getName() + " " + e.getMessage());
-            log.info("javax.validation will be disabled");
             validator = null;
         } finally {
             Locale.setDefault(defaultLocale);
+        }
+        if (validator == null) {
+            log.info("No validator could be constructed. javax.validation will be disabled");
         }
         VALIDATOR = validator;
     }
