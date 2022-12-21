@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.time.Instant;
 import java.util.*;
@@ -140,7 +141,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         try {
             String protocol = resource.toURL().getProtocol().toLowerCase();
             String path = "file".equals(protocol) ? resource.getPath() : null;
-            resourceFile = path == null ? null : new File(URLDecoder.decode(path, "UTF-8")); // e.g. on Jenkins.
+            resourceFile = path == null ? null : new File(URLDecoder.decode(path, StandardCharsets.UTF_8)); // e.g. on Jenkins.
         } catch (IOException ignored) {
             resourceFile = null;
         }
