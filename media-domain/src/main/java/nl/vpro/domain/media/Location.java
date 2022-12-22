@@ -661,7 +661,7 @@ public class Location extends PublishableObject<Location>
     @Override
     public void setWorkflow(Workflow workflow) {
         super.setWorkflow(workflow);
-        if (Workflow.REVOKES.contains(workflow) && platform != null && this.mediaObject != null) {
+        if (CollectionUtils.inCollection(Workflow.REVOKES, workflow) && platform != null && this.mediaObject != null) {
             Locations.updatePredictionStates(this.mediaObject, platform, instant());
         }
     }
