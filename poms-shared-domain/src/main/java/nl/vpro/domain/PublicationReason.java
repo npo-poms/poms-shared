@@ -41,15 +41,17 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
     /**
      * Multiple reasons can be joined with this, to encode the in one String.
      * <p>
-     * Uses now ASCII Record seperator RS
+     * Uses  ASCII Record separator RS
      */
+    @SuppressWarnings("UnnecessaryUnicodeEscape")
     public static final String RECORD_SPLITTER = "\u241E";
 
     /**
      * A reason can be joined with its publication time.
      * <p>
-     * Uses now ASCII Unit seperator US
+     * Uses  ASCII Unit separator US
      */
+    @SuppressWarnings("UnnecessaryUnicodeEscape")
     public static final String FIELD_SPLITTER = "\u241F";
 
 
