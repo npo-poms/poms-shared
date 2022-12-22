@@ -13,7 +13,10 @@ import nl.vpro.domain.NotFoundException;
 public interface BroadcasterService extends OrganizationService<Broadcaster> {
 
     default Instant getLastModification() {
-        return findAll().stream().map(Broadcaster::getLastModified).max(Comparator.naturalOrder()).orElse(Instant.now());
+        return findAll().stream()
+            .map(Broadcaster::getLastModified)
+            .max(Comparator.naturalOrder())
+            .orElse(Instant.now());
     }
 
     default Broadcaster findForMisId(String id) throws NotFoundException {
