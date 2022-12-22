@@ -136,10 +136,12 @@ public enum Workflow implements Displayable, XmlValued {
             .collect(Collectors.toList())
     );
 
+
     public static final List<Workflow> REVOKES = List.of(
         FOR_DELETION,
         DELETED,
         REVOKED,
+        PARENT_REVOKED,
         MERGED
     );
 

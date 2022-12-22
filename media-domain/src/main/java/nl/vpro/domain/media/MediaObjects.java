@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import lombok.extern.slf4j.Slf4j;
-
+import com.google.common.collect.*;
 import java.io.*;
 import java.time.*;
 import java.util.*;
@@ -13,26 +12,22 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import javax.validation.constraints.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.slf4j.helpers.MessageFormatter;
-
-import com.google.common.collect.*;
-
+import lombok.extern.slf4j.Slf4j;
+import static nl.vpro.domain.Changeables.instant;
 import nl.vpro.domain.*;
+import static nl.vpro.domain.PublicationReason.FIELD_SPLITTER;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
+import static nl.vpro.domain.media.support.Workflow.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
-
-import static nl.vpro.domain.Changeables.instant;
-import static nl.vpro.domain.media.support.Workflow.*;
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.helpers.MessageFormatter;
 
 
 /**
@@ -548,7 +543,6 @@ public class MediaObjects {
             media.setRepubDestinations(null);
             return true;
         } else {
-            appendReason(media, reason);
             return false;
         }
     }
@@ -562,7 +556,6 @@ public class MediaObjects {
             media.setRepubDestinations(null);
             return true;
         } else {
-            appendReason(media, reason);
             return false;
         }
     }
@@ -573,10 +566,11 @@ public class MediaObjects {
             if (StringUtils.isBlank(existingReason)) {
                 media.setRepubReason(formattedReason);
             } else {
-                TreeSet<String> set = Arrays.stream(existingReason.split("\t"))
+                // add via a set, to avoid appending a reason that is there already
+                TreeSet<String> set = Arrays.stream(existingReason.split(FIELD_SPLITTER))
                     .collect(Collectors.toCollection(TreeSet::new));
                 set.add(formattedReason);
-                media.setRepubReason(String.join("\t", set));
+                media.setRepubReason(String.join(FIELD_SPLITTER, set));
             }
         }
     }
@@ -605,7 +599,6 @@ public class MediaObjects {
         media.setRepubReason(null);
         media.setRepubDestinations(null);
     }
-
 
 
     /**
@@ -661,9 +654,9 @@ public class MediaObjects {
         return Optional.empty();
     }
 
-    static List<String> getPlannedPlatformNamesInLowerCase(Collection<Prediction> preds) {
-        if (preds != null) {
-            return preds.stream()
+    static List<String> getPlannedPlatformNamesInLowerCase(Collection<Prediction> predictions) {
+        if (predictions != null) {
+            return predictions.stream()
                 .filter(Prediction::isPlannedAvailability)
                 .map(Prediction::getPlatform)
                 .map(Platform::name)
@@ -710,7 +703,7 @@ public class MediaObjects {
 
     public static boolean subtitlesMayBePublished(MediaObject media) {
         return media != null
-            && PUBLICATIONS.contains(media.getWorkflow())
+            && CollectionUtils.inCollection(PUBLICATIONS, media.getWorkflow())
             && media.getLocations().stream().anyMatch(l -> l.getWorkflow() == PUBLISHED);
     }
 
@@ -928,7 +921,7 @@ public class MediaObjects {
     public static <T extends PublishableObject<?>> boolean revokeRelatedPublishables(MediaObject media, Collection<T> publishables, Instant now, Runnable callbackOnChange) {
         boolean foundRevokedPublishable = false;
         for(T publishable : publishables) {
-            if(Workflow.REVOKES.contains(publishable.getWorkflow())) {
+            if(CollectionUtils.inCollection(Workflow.REVOKES, publishable.getWorkflow())) {
                 continue;
             }
             if(!publishable.inPublicationWindow(now)) {
@@ -1101,17 +1094,14 @@ public class MediaObjects {
         return Collections.unmodifiableMap(result);
     }
 
-    static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+    static final Set<AVFileFormat> ACCEPTABLE_FORMATS = Set.of(
         AVFileFormat.MP3,
         AVFileFormat.MP4,
         AVFileFormat.M4V,
         AVFileFormat.H264
-    )));
+    );
 
-    static final Set<String> ACCEPTABLE_SCHEMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-        "npo+drm",
-        "npo"
-    )));
+    static final Set<String> ACCEPTABLE_SCHEMES = Set.of("npo+drm", "npo");
 
 
     /**
