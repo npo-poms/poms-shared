@@ -1,12 +1,12 @@
 package nl.vpro.domain.media;
 
-import javax.xml.bind.annotation.XmlEnumValue;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
+import javax.xml.bind.annotation.XmlEnumValue;
 import nl.vpro.domain.XmlValued;
 import nl.vpro.domain.media.bind.AspectRatioToString;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import static org.meeuw.math.IntegerUtils.gcd;
 
 @JsonSerialize(using = AspectRatioToString.Serializer.class)
 @JsonDeserialize(using = AspectRatioToString.Deserializer.class)
@@ -30,17 +30,17 @@ public enum AspectRatio implements XmlValued {
     private final int h;
 
     AspectRatio(int w, int h) {
-        int gcd = gcd(w, h);
+        int gcd = (int) gcd(w, h);
         this.w = w / gcd;
         this.h = h / gcd;
     }
 
 
-    public static AspectRatio fromDimension(Integer w, Integer h) {
+    public static @Nullable AspectRatio fromDimension(@Nullable Integer w, @Nullable Integer h) {
         if (w == null || h == null) {
             return null;
         }
-        int gcd = gcd(w, h);
+        int gcd = (int) gcd(w, h);
         if (gcd == 0) return null;
         int aw = w / gcd;
         int ah = h / gcd;
@@ -49,7 +49,6 @@ public enum AspectRatio implements XmlValued {
                 return a;
             }
         }
-
         return null;
     }
 
@@ -67,14 +66,6 @@ public enum AspectRatio implements XmlValued {
     @Override
     public String toString() {
         return w + ":" + h;
-    }
-
-    /**
-     * @return the greatest common divisor of a and b.
-     */
-    private static int gcd(int a, int b) {
-        // Euclid's algorithm
-        return b == 0 ? (a == 0 ? 1 : a) : gcd(b, a % b);
     }
 
 }

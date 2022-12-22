@@ -7,6 +7,7 @@ package nl.vpro.domain.media.update;
 import java.time.Duration;
 import java.time.Instant;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -49,6 +50,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
 
     @XmlElement(required = true)
     @NotNull
+    @Valid
     private AVAttributesUpdate avAttributes;
 
     @XmlElement

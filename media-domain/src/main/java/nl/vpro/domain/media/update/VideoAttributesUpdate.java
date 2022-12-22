@@ -4,8 +4,11 @@
  */
 package nl.vpro.domain.media.update;
 
+import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.*;
 
+import lombok.Getter;
+import lombok.Setter;
 import nl.vpro.domain.media.AspectRatio;
 import nl.vpro.domain.media.ColorType;
 import nl.vpro.domain.media.VideoAttributes;
@@ -16,12 +19,16 @@ import nl.vpro.domain.media.VideoAttributes;
         "color",
         "coding"
         })
+@Getter
+@Setter
 public class VideoAttributesUpdate {
 
     @XmlAttribute(name = "width")
+    @Min(0)
     private Integer width;
 
     @XmlAttribute(name = "height")
+    @Min(0)
     private Integer height;
 
     @XmlElement
@@ -77,37 +84,5 @@ public class VideoAttributesUpdate {
         attributes.setColor(color);
         attributes.setVideoCoding(coding);
         return attributes;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public String getCoding() {
-        return coding;
-    }
-
-    public void setCoding(String coding) {
-        this.coding = coding;
-    }
-
-    public ColorType getColor() {
-        return color;
-    }
-
-    public void setColor(ColorType color) {
-        this.color = color;
     }
 }

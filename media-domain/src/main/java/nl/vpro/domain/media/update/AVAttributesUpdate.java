@@ -7,11 +7,9 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.AVAttributes;
 import nl.vpro.domain.media.AVFileFormat;
@@ -46,11 +44,13 @@ public class AVAttributesUpdate {
     @XmlElement
     @Getter
     @Setter
+    @Valid
     private AudioAttributesUpdate audioAttributes;
 
     @XmlElement
     @Getter
     @Setter
+    @Valid
     private VideoAttributesUpdate videoAttributes;
 
     public static AVAttributesUpdate copy(AVAttributesUpdate from) {

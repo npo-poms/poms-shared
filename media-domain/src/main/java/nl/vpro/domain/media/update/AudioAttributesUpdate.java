@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import lombok.Getter;
+import lombok.Setter;
 import nl.vpro.domain.media.AudioAttributes;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -16,6 +18,8 @@ import nl.vpro.domain.media.AudioAttributes;
         "channels",
         "coding"
         })
+@Getter
+@Setter
 public class AudioAttributesUpdate {
 
     @XmlElement
@@ -51,19 +55,6 @@ public class AudioAttributesUpdate {
         return new AudioAttributes(coding, channels);
     }
 
-    public Integer getChannels() {
-        return channels;
-    }
 
-    public void setChannels(Integer channels) {
-        this.channels = channels;
-    }
 
-    public String getCoding() {
-        return coding;
-    }
-
-    public void setCoding(String coding) {
-        this.coding = coding;
-    }
 }
