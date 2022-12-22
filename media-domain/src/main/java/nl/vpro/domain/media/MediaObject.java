@@ -2684,6 +2684,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         }
     }
 
+    /**
+     * MediaObjects can be merged. This means that {@link #getMergedTo()} (or {@link #getMergedToRef()}) is non {@code null}
+     */
     @Override
     public boolean isMerged() {
         return mergedTo != null || mergedToRef != null;
