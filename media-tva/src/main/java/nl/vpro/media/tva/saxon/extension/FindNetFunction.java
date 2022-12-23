@@ -48,6 +48,7 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
         // we don't consider these nets, but channels.
         acknowledged.add("NEDERLAND 1");
         acknowledged.add("NEDERLAND 2");
+        acknowledged.add("NEDERLAND 3");
         ACKNOWLEDGED = Collections.unmodifiableSet(acknowledged);
 
     }
