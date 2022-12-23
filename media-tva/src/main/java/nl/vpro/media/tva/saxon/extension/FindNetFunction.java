@@ -8,13 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.lib.ExtensionFunctionCall;
 import net.sf.saxon.lib.ExtensionFunctionDefinition;
-import net.sf.saxon.om.Sequence;
-import net.sf.saxon.om.StructuredQName;
-import net.sf.saxon.trans.XPathException;
+import net.sf.saxon.om.*;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -69,19 +68,21 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
     public ExtensionFunctionCall makeCallExpression() {
         return new ExtensionFunctionCall() {
             @Override
-            public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
-                final String value = arguments[0].iterate().next().getStringValue().trim().toUpperCase();
-                for (Net net : netsSupplier.get()) {
-                    if (net.getDisplayName().toUpperCase().equals(value) || net.getId().toUpperCase().equals(value)) {
-                        return new StringValue(net.getId());
+            public Sequence call(XPathContext context, Sequence[] arguments) {
+                try (SequenceIterator si = arguments[0].iterate()) {
+                    final String value = si.next().getStringValue().trim().toUpperCase();
+                    for (Net net : netsSupplier.get()) {
+                        if (net.getDisplayName().toUpperCase().equals(value) || net.getId().toUpperCase().equals(value)) {
+                            return new StringValue(net.getId());
+                        }
                     }
+                    AtomicInteger occurence = WARNS.computeIfAbsent(value, (v) -> new AtomicInteger(0));
+                    boolean acknowledge = ACKNOWLEDGED.contains(value);
+                    Level level = occurence.incrementAndGet() % 100 == 1 ?
+                        acknowledge ? Level.INFO : Level.WARN : Level.DEBUG;
+                    Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored){}", value, occurence.get(), acknowledge ? " (acknowledge)" : "");
+                    return new StringValue("");
                 }
-                AtomicInteger occurence = WARNS.computeIfAbsent(value, (v) -> new AtomicInteger(0));
-                boolean acknowledge =  ACKNOWLEDGED.contains(value);
-                Level level = occurence.incrementAndGet() % 100 == 1 ?
-                   acknowledge ? Level.INFO : Level.WARN : Level.DEBUG;
-                Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored){}",  value, occurence.get(), acknowledge ? " (acknowledge)" : "");
-                return new StringValue("");
             }
         };
     }
