@@ -10,8 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.lib.ExtensionFunctionCall;
 import net.sf.saxon.lib.ExtensionFunctionDefinition;
-import net.sf.saxon.om.Sequence;
-import net.sf.saxon.om.StructuredQName;
+import net.sf.saxon.om.*;
 import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.tree.tiny.TinyElementImpl;
 import net.sf.saxon.value.SequenceType;
@@ -74,10 +73,15 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
             public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
                 String epgValue;
                 if (StringUtils.isNotEmpty(matchOnValuePrefix)) {
-                    TinyElementImpl next = (TinyElementImpl) arguments[1].iterate().next();
-                    epgValue = (matchOnValuePrefix  + next.getStringValue());
+                    try (SequenceIterator si = arguments[1].iterate()) {
+
+                        TinyElementImpl next = (TinyElementImpl) si.next();
+                        epgValue = (matchOnValuePrefix + next.getStringValue());
+                    }
                 } else {
-                    epgValue = arguments[0].iterate().next().getStringValue();
+                    try (SequenceIterator si = arguments[0].iterate()) {
+                        epgValue = si.next().getStringValue();
+                    }
                 }
                 try {
                     Term term = MediaClassificationService.getInstance().getTermByReference(epgValue, (s) -> true);

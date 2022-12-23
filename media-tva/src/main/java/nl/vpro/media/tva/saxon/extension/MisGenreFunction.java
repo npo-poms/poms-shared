@@ -8,7 +8,6 @@ import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.lib.ExtensionFunctionCall;
 import net.sf.saxon.lib.ExtensionFunctionDefinition;
 import net.sf.saxon.om.*;
-import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.tree.iter.ListIterator;
 import net.sf.saxon.value.*;
 
@@ -46,25 +45,25 @@ public class MisGenreFunction extends ExtensionFunctionDefinition {
     public ExtensionFunctionCall makeCallExpression() {
         return new ExtensionFunctionCall() {
             @Override
-            public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
+            public Sequence call(XPathContext context, Sequence[] arguments) {
                 List<AtomicValue> result = new ArrayList<>();
                 List<MisGenreType> misTypes = new ArrayList<>();
 
-                SequenceIterator iterate = arguments[0].iterate();
-                Item item = iterate.next();
-                while(item != null) {
-                    CharSequence misInput = item.getStringValue();
-                    item = iterate.next();
+                try (SequenceIterator iterate = arguments[0].iterate()) {
+                    Item item = iterate.next();
+                    while(item != null) {
+                        CharSequence misInput = item.getStringValue();
+                        item = iterate.next();
 
-                    if(StringUtils.isBlank(misInput)) {
-                        continue;
+                        if (StringUtils.isBlank(misInput)) {
+                            continue;
+                        }
+
+                        MisGenreType misGenreType = toMisGenreType(misInput.toString());
+                        if (misGenreType != null) {
+                            misTypes.add(misGenreType);
+                        }
                     }
-
-                    MisGenreType misGenreType = toMisGenreType(misInput.toString());
-                    if(misGenreType != null) {
-                        misTypes.add(misGenreType);
-                    }
-
                 }
 
                 List<Term> terms = MediaClassificationService.getTermsByMisGenreType(misTypes);

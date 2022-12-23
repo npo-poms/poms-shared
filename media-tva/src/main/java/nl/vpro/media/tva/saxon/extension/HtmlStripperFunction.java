@@ -7,8 +7,7 @@ package nl.vpro.media.tva.saxon.extension;
 import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.lib.ExtensionFunctionCall;
 import net.sf.saxon.lib.ExtensionFunctionDefinition;
-import net.sf.saxon.om.Sequence;
-import net.sf.saxon.om.StructuredQName;
+import net.sf.saxon.om.*;
 import net.sf.saxon.trans.XPathException;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
@@ -40,8 +39,10 @@ public class HtmlStripperFunction extends ExtensionFunctionDefinition {
         return new ExtensionFunctionCall() {
             @Override
             public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
-                String value = arguments[0].iterate().next().getStringValue();
-                return new StringValue(TextUtil.sanitize(value));
+                try (SequenceIterator iterate = arguments[0].iterate()) {
+                    String value = iterate.next().getStringValue();
+                    return new StringValue(TextUtil.sanitize(value));
+                }
             }
         };
     }

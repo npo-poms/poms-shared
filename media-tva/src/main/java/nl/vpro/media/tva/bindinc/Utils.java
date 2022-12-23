@@ -111,10 +111,10 @@ public final class Utils {
 
 
     /**
-     * For the items which dont have a proper mid (bindinc uses tva:BasicDescription/tva:OtherIdentifier/tva:OtherIdentifier[@type='broadcaster:npo:productid'] to store,
+     * For the items which don't have a proper mid (bindinc uses tva:BasicDescription/tva:OtherIdentifier/tva:OtherIdentifier[@type='broadcaster:npo:productid'] to store,
      * we just generate one based on the bindinc id.
      *
-     * Note that this id seems to correspond to _schedule events_ rather then actual programs.  In practice this probably means
+     * Note that this id seems to correspond to _schedule events_ rather than actual programs.  In practice this probably means
      * that only on PO-channels we'll have programs with multiple schedule events.
      */
     public static void assignBindincMidIfNecessary(Program p) {

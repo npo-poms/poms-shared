@@ -10,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.lib.ExtensionFunctionCall;
 import net.sf.saxon.lib.ExtensionFunctionDefinition;
-import net.sf.saxon.om.Sequence;
-import net.sf.saxon.om.StructuredQName;
-import net.sf.saxon.trans.XPathException;
+import net.sf.saxon.om.*;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
 
@@ -59,26 +57,29 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
     public ExtensionFunctionCall makeCallExpression() {
         return new ExtensionFunctionCall() {
             @Override
-            public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
-                String value = arguments[0].iterate().next().getStringValue().trim().toUpperCase();
-                Broadcaster broadcaster = broadcasterService.findForIds(value).orElse(null);
-                if (broadcaster != null) {
-                    return new  StringValue(broadcaster.getId());
+            public Sequence call(XPathContext context, Sequence[] arguments) {
+                try (SequenceIterator si = arguments[0].iterate()) {
+
+                    String value = si.next().getStringValue().trim().toUpperCase();
+                    Broadcaster broadcaster = broadcasterService.findForIds(value).orElse(null);
+                    if (broadcaster != null) {
+                        return new StringValue(broadcaster.getId());
+                    }
+
+                    log.warn("No (WON/PD/NEBO) broadcaster for value '{}'", value);
+
+                    switch (notFound) {
+                        case ASIS:
+                            /* will go wrong in hibernate then, but with catchable error */
+                            return new StringValue(value);
+                        case IGNORE:
+                            return new StringValue("");
+                        case FATAL:
+                        default:
+                            throw new IllegalArgumentException("No such broadcaster " + value);
+                    }
+
                 }
-
-                log.warn("No (WON/PD/NEBO) broadcaster for value '{}'", value);
-
-                switch(notFound) {
-                    case ASIS:
-                        /* will go wrong in hibernate then, but with catchable error */
-                        return new StringValue(value);
-                    case IGNORE:
-                        return new StringValue("");
-                    case FATAL:
-                    default:
-                        throw new IllegalArgumentException("No such broadcaster " + value);
-                }
-
             }
         };
     }
