@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -98,8 +97,20 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         return "parent: " + reason;
     }
 
-    public static String toRecords(Collection<PublicationReason> reasons) {
-        return reasons.stream().map(PublicationReason::toRecord).collect(Collectors.joining(RECORD_SPLITTER));
+    public static String toRecords(Collection<PublicationReason> reasons, long maxLength, String mid) {
+        StringBuilder builder = new StringBuilder();
+        for (PublicationReason reason : reasons) {
+            String s = reason.toRecord();
+            if (builder.length() > 0){
+                builder.append(RECORD_SPLITTER);
+            }
+            builder.append(s);
+            if (builder.length() > maxLength) {
+                log.error("Reason header for {} is ridiculously long ({} reasons). Will be truncated", mid, reasons.size());
+                break;
+            }
+        }
+        return builder.toString();
     }
 
     public static PublicationReason parseOne(final String string) {
