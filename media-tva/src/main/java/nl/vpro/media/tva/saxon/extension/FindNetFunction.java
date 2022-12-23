@@ -37,21 +37,14 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
 
     private final static ConcurrentMap<String, AtomicInteger> WARNS = new ConcurrentHashMap<>();
 
-    private final static Set<String> ACKNOWLEDGED;
+    private final static Set<String>  ACKNOWLEDGED = Set.of(
+        "NEDERLAND 1",
+        "NEDERLAND 2",
+        "NEDERLAND 3"
+    );
 
     private final Supplier<Collection<Net>> netsSupplier;
 
-
-    static {
-        final Set<String> acknowledged = new HashSet<>();
-
-        // we don't consider these nets, but channels.
-        acknowledged.add("NEDERLAND 1");
-        acknowledged.add("NEDERLAND 2");
-        acknowledged.add("NEDERLAND 3");
-        ACKNOWLEDGED = Collections.unmodifiableSet(acknowledged);
-
-    }
     @Inject
     public FindNetFunction(@Named("netsSupplier") Supplier<Collection<Net>> netsSupplier) {
         this.netsSupplier = netsSupplier;
