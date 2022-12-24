@@ -28,11 +28,10 @@ import nl.vpro.domain.media.MediaObject;
 @Slf4j
 public abstract class AbstractValidValueFunction extends ExtensionFunctionDefinition {
 
-    static final Set<String> IGNORE_EMAILS;
-    static {
-        Set<String> emails = new HashSet<>(Arrays.asList("nvt")); //   Encountered violation error in null: nvt is geen goed email-adres [Camel (mediaRoutes) thread #2 - file:///share/pg/poms] is polluting the logs.
-        IGNORE_EMAILS = Collections.unmodifiableSet(emails);
-    }
+    static final Set<String> IGNORE_EMAILS = Set.of(
+        "nvt"//   Encountered violation error in null: nvt is geen goed email-adres [Camel (mediaRoutes) thread #2 - file:///share/pg/poms] is
+
+    );
 
     static final TriPredicate<Class<?>, String, Object> warn = (clazz, propertyName, value) -> {
         if (MediaObject.class.equals(clazz)) {
@@ -78,10 +77,12 @@ public abstract class AbstractValidValueFunction extends ExtensionFunctionDefini
         return new ExtensionFunctionCall() {
             @Override
             public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
-                try {
-                    String clazzName = arguments[0].iterate().next().getStringValue().trim();
-                    String propertyName = arguments[1].iterate().next().getStringValue().trim();
-                    Item valueItem = arguments[2].iterate().next();
+                try ( SequenceIterator iterate0 = arguments[0].iterate();
+                      SequenceIterator iterate1 = arguments[1].iterate();
+                      SequenceIterator iterate2 = arguments[2].iterate();) {
+                    String clazzName = iterate0.next().getStringValue().trim();
+                    String propertyName = iterate1.next().getStringValue().trim();
+                    Item valueItem = iterate2.next();
                     Object value = getValue(valueItem.getStringValue().trim());
                     Class<?> clazz = Class.forName(clazzName);
                     Set<? extends ConstraintViolation<?>> constraintViolations =
