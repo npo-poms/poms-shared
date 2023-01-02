@@ -31,7 +31,7 @@ public class Roles {
     public static final String USER_ROLE = ROLE + USER;
 
     /**
-     * A super user has user access to nodes of every broadcaster.
+     * A super-user has user access to nodes of every broadcaster.
      */
     public static final String SUPERUSER = MEDIA + "SUPERUSER";
     public static final String SUPERUSER_ROLE = ROLE + SUPERUSER;
