@@ -2463,7 +2463,7 @@ public enum Channel implements Displayable, XmlValued {
     BRNL(VIDEO, "https://classica.stingray.com", 1995) {
         @Override
         public String toString() {
-            return "Stringray brava";
+            return "Stringray Classica";
         }
     },
     @XmlEnumValue("BRHD")
