@@ -20,13 +20,13 @@ import org.slf4j.*;
 
 import nl.vpro.domain.Roles;
 import nl.vpro.i18n.Locales;
-import nl.vpro.mdc.MDCConstants;
+import nl.vpro.logging.mdc.MDCConstants;
 
-import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
+import static nl.vpro.logging.mdc.MDCConstants.ONBEHALFOF;
 
 
 /**
- * The user services provides service related to users. This integrates with spring security, and e.g. with keycloak. It may also support saving the users to a local database. If this in unneeded,, because the current system does not have a database backing these methods may be left unimplemented
+ * The user services provides service related to users. This integrates with spring security, and e.g. with keycloak. It may also support saving the users to a local database. If this in unneeded, because the current system does not have a database backing these methods may be left unimplemented
  */
 public interface UserService<T extends User> {
 
@@ -169,9 +169,9 @@ public interface UserService<T extends User> {
 
     /**
      * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean, boolean)} )}) in CompletableFuture#supplyAsync.
-     *
+     * <p>
      * This makes sure that the job is running as the current user, and for example also that the current MDC is copied to the other thread.
-     *
+     * <p>
      * Note that if you use {@link CompletableFuture#thenAccept(Consumer)} or something similar that these will not be run in the same context. You can wrapp those with {@link #wrap(Callable, Logger, Boolean, boolean)} yourself.
      *
      * @param callable The job to run asynchronously
