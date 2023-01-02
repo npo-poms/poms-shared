@@ -14,7 +14,7 @@ import org.slf4j.MDC;
 
 import nl.vpro.i18n.Locales;
 
-import static nl.vpro.mdc.MDCConstants.USER_NAME;
+import static nl.vpro.logging.mdc.MDCConstants.USER_NAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
