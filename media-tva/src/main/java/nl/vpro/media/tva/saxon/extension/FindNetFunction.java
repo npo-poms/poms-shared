@@ -76,11 +76,11 @@ public class FindNetFunction extends ExtensionFunctionDefinition {
                             return new StringValue(net.getId());
                         }
                     }
-                    AtomicInteger occurence = WARNS.computeIfAbsent(value, (v) -> new AtomicInteger(0));
+                    AtomicInteger occurrence = WARNS.computeIfAbsent(value, (v) -> new AtomicInteger(0));
                     boolean acknowledge = ACKNOWLEDGED.contains(value);
-                    Level level = occurence.incrementAndGet() % 100 == 1 ?
+                    Level level = occurrence.incrementAndGet() % 100 == 1 ?
                         acknowledge ? Level.INFO : Level.WARN : Level.DEBUG;
-                    Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored){}", value, occurence.get(), acknowledge ? " (acknowledge)" : "");
+                    Slf4jHelper.log(log, level, "No such net {} (#{}, now returning empty string, which indicates that it can be ignored){}", value, occurrence.get(), acknowledge ? " (acknowledge)" : "");
                     return new StringValue("");
                 }
             }
