@@ -1,13 +1,14 @@
 package nl.vpro.domain.media;
 
+import java.util.Collection;
+
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collection;
+import nl.vpro.i18n.Displayable;
 
 import org.apache.commons.lang3.StringUtils;
-
-import nl.vpro.i18n.Displayable;
+import org.checkerframework.checker.nullness.qual.PolyNull;
 
 
 /**
@@ -33,7 +34,6 @@ public interface MediaPublisherHeaders {
     @Slf4j
     enum Destination implements Displayable {
         ElasticSearch("NPO Frontend API"),
-        ElasticSearch_previous("NPO Frontend API (a previous ES-deployment)"),
         PROJECTM("Project M")
         ;
 
@@ -64,7 +64,11 @@ public interface MediaPublisherHeaders {
             return toStringArray(destinations.toArray(new Destination[0]));
         }
 
-        public static Destination[] arrayOf(String destination) {
+        @PolyNull
+        public static Destination[] arrayOf(@PolyNull String destination) {
+            if (destination == null) {
+                return null;
+            }
             String[] values =
                 StringUtils.isEmpty(destination) ?
                     new String[0] :
