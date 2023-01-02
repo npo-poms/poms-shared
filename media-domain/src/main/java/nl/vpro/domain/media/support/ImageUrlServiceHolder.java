@@ -45,7 +45,7 @@ public class ImageUrlServiceHolder {
 
     public static void setInstance(@NonNull ImageUrlService instance) {
         if (ImageUrlServiceHolder.instance != null && ImageUrlServiceHolder.instance != instance) {
-            log.info("Replacing image url service with {}", instance);
+            log.info("Replacing image url service {} with {}", ImageUrlServiceHolder.instance, instance);
         }  else {
             log.info("Setting image url service to {}", instance);
         }
