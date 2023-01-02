@@ -127,7 +127,7 @@ public class Roles {
 
 
     /**
-     * The system role is only assigned via {@link nl.vpro.domain.user.UserService#systemAuthenticate)}
+     * The system role is only assigned via {@code nl.vpro.domain.user.UserService#systemAuthenticate)}
      */
     public static final String SYSTEM = "SYSTEM";
     public static final String SYSTEM_ROLE = ROLE + SYSTEM;
