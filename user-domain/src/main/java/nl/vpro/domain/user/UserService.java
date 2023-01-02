@@ -20,9 +20,9 @@ import org.slf4j.*;
 
 import nl.vpro.domain.Roles;
 import nl.vpro.i18n.Locales;
-import nl.vpro.mdc.MDCConstants;
+import nl.vpro.logging.mdc.MDCConstants;
 
-import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
+import static nl.vpro.logging.mdc.MDCConstants.ONBEHALFOF;
 
 
 /**
