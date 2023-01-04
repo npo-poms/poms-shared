@@ -3,9 +3,9 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Comparator;
@@ -78,11 +78,7 @@ public class Location extends PublishableObject<Location>
         }
         String[] parts = value.trim().split("/", 4);
         if (parts.length == 4) {
-            try {
-                parts[3] = URLEncoder.encode(parts[3], "UTF-8");
-            } catch (UnsupportedEncodingException ignored) {
-
-            }
+            parts[3] = URLEncoder.encode(parts[3], StandardCharsets.UTF_8);
         }
         return StringUtils.join(parts, "/");
     }
@@ -142,35 +138,32 @@ public class Location extends PublishableObject<Location>
     public Location() {
     }
 
-    public Location(OwnerType owner) {
-        this.owner = owner;
+    public Location(@NonNull OwnerType owner) {
+        this(null, owner);
     }
 
     public Location(String programUrl, OwnerType owner) {
-        this.programUrl = programUrl == null ? null : programUrl.trim();
-        this.owner = owner;
-        setDefaultAVAttributes();
+        this(programUrl, owner, (Platform) null);
     }
 
     public Location(String programUrl, OwnerType owner, Platform platform) {
-        this(programUrl, owner);
-        this.platform = platform;
+        this(programUrl, owner, null, null, platform);
     }
 
     public Location(String programUrl, AVAttributes avAttributes) {
-        this.programUrl = programUrl;
-        this.avAttributes = avAttributes;
+        this(programUrl, null, avAttributes);
     }
 
     public Location(String programUrl, OwnerType owner, AVAttributes avAttributes) {
-        this.programUrl = programUrl;
-        this.owner = owner;
-        this.avAttributes = avAttributes;
+        this(programUrl, owner, avAttributes, null, null);
     }
 
 
-    public Location(String programUrl, OwnerType owner, AVAttributes avAttributes, Duration duration) {
-        this(programUrl, owner, avAttributes);
+    private Location(String programUrl, OwnerType owner, AVAttributes avAttributes, Duration duration, Platform platform) {
+        this.programUrl = programUrl == null ? null : programUrl.trim();
+        this.owner = owner;
+        this.avAttributes = getDefaultAVAttributes(avAttributes, this.programUrl);
+        this.workflow = Workflow.PUBLISHED;
         this.duration = duration;
     }
 
@@ -178,12 +171,14 @@ public class Location extends PublishableObject<Location>
 
     }
     /**
-     * Unset some default values, to ensure that roundtripping will result same object
+     * Unset some default values, to ensure that round tripping will result same object
      * @since 5.11
      */
     @JsonCreator
     static Location jsonCreator() {
-        return builder().workflow(null).build();
+        return builder()
+            .workflow(null)
+            .build();
     }
 
 
@@ -203,12 +198,7 @@ public class Location extends PublishableObject<Location>
         Workflow workflow,
         Instant creationDate
     ) {
-        this.programUrl = programUrl;
-        this.owner = owner == null ? OwnerType.BROADCASTER : owner;
-        if (avAttributes == null) {
-            avAttributes = new AVAttributes();
-        }
-        this.duration = duration;
+        this(programUrl, owner == null ? OwnerType.BROADCASTER : owner, null, duration, platform);
         this.avAttributes = AVAttributes
             .builder()
             .bitrate(bitrate == null ? avAttributes.getBitrate() : bitrate)
@@ -216,11 +206,12 @@ public class Location extends PublishableObject<Location>
             .audioAttributes(audioAttributes == null ? avAttributes.getAudioAttributes() : audioAttributes)
             .videoAttributes(videoAttributes == null ? avAttributes.getVideoAttributes() : videoAttributes)
             .build();
-        this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
         if (workflow != null) {
             this.workflow = workflow;
+        } else {
+            this.workflow = Workflow.PUBLISHED; // doesn't need its own
         }
         this.creationInstant = creationDate == null ? Changeables.instant() : creationDate;
     }
@@ -652,9 +643,11 @@ public class Location extends PublishableObject<Location>
         }
     }
 
-    private void setDefaultAVAttributes() {
+    private static AVAttributes getDefaultAVAttributes(AVAttributes avAttributes, String programUrl) {
         if(avAttributes == null) {
-            avAttributes = new AVAttributes(AVFileFormat.forProgramUrl(programUrl));
+            return new AVAttributes(AVFileFormat.forProgramUrl(programUrl));
+        } else {
+            return avAttributes;
         }
     }
 
