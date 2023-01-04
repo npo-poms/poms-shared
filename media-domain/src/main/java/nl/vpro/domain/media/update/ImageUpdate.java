@@ -169,7 +169,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     private Object image;
 
     @XmlElement(name = "crid")
-    private List<@CRID String> crids;
+    private List<@NotNull @CRID String> crids;
 
     @XmlTransient
     private Instant lastModified;

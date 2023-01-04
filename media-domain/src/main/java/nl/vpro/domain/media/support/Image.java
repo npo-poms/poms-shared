@@ -204,7 +204,7 @@ public class Image extends PublishableObject<Image>
     @Setter
     @XmlElement(name = "crid", namespace = Xmlns.SHARED_NAMESPACE)
     @JsonProperty("crids")
-    protected List<String> crids;
+    protected List<@NotNull @CRID String> crids;
 
 
     @ManyToOne
