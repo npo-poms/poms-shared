@@ -235,7 +235,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-        if (parent instanceof Program) {
+        if (parent instanceof ProgramUpdate) {
             this.parent = (ProgramUpdate) parent;
         }
     }
