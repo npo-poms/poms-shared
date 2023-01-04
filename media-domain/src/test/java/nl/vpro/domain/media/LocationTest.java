@@ -50,8 +50,9 @@ public class LocationTest implements BasicObjectTest<Location> {
 
     @BeforeAll
     public static void setUp() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
     }
 
     @Test
@@ -213,10 +214,11 @@ public class LocationTest implements BasicObjectTest<Location> {
         Location withOwner = new Location(OwnerType.BROADCASTER);
         Location withUrlAndOwner = new Location("1", OwnerType.BROADCASTER);
         Location withOtherUrlAndOwner = new Location("2", OwnerType.BROADCASTER);
-        return Arbitraries.of(null,
+        return Arbitraries.of(
             emptyFields,
             withOwner,
             withUrlAndOwner,
-            withOtherUrlAndOwner);
+            withOtherUrlAndOwner)
+            .injectNull(0.1);
     }
 }
