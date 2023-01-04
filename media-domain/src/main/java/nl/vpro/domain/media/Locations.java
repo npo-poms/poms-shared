@@ -214,7 +214,6 @@ public class Locations {
     @NonNull
     private static Location createLocation(final MediaObject mediaObject, final Prediction prediction, final String locationUrl){
         Location platformAuthorityLocation = new Location(locationUrl, OwnerType.AUTHORITY, prediction.getPlatform());
-        platformAuthorityLocation.setPlatform(prediction.getPlatform());
         platformAuthorityLocation.setPublishStartInstant(prediction.getPublishStartInstant());
         platformAuthorityLocation.setPublishStopInstant(prediction.getPublishStopInstant());
         mediaObject.addLocation(platformAuthorityLocation);
@@ -298,7 +297,6 @@ public class Locations {
         if (location == null) {
             log.info("Creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());
             location = new Location(locationUrl, owner, platform);
-            location.setPlatform(platform);
             program.addLocation(location);
             Prediction prediction = program.getPrediction(platform);
             if (prediction.isNew()) {

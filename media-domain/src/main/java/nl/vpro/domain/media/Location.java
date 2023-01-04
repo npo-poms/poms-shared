@@ -150,6 +150,7 @@ public class Location extends PublishableObject<Location>
         this(programUrl, owner, null, null, platform);
     }
 
+    @Deprecated
     public Location(String programUrl, AVAttributes avAttributes) {
         this(programUrl, null, avAttributes);
     }
@@ -165,6 +166,7 @@ public class Location extends PublishableObject<Location>
         this.avAttributes = getDefaultAVAttributes(avAttributes, this.programUrl);
         this.workflow = Workflow.PUBLISHED;
         this.duration = duration;
+        this.platform = platform;
     }
 
     public static class Builder implements EmbargoBuilder<Builder> {
@@ -198,14 +200,17 @@ public class Location extends PublishableObject<Location>
         Workflow workflow,
         Instant creationDate
     ) {
-        this(programUrl, owner == null ? OwnerType.BROADCASTER : owner, null, duration, platform);
-        this.avAttributes = AVAttributes
-            .builder()
-            .bitrate(bitrate == null ? avAttributes.getBitrate() : bitrate)
-            .avFileFormat(avFileFormat == null ? avAttributes.getAvFileFormat() : avFileFormat)
-            .audioAttributes(audioAttributes == null ? avAttributes.getAudioAttributes() : audioAttributes)
-            .videoAttributes(videoAttributes == null ? avAttributes.getVideoAttributes() : videoAttributes)
-            .build();
+        this(programUrl, owner == null ? OwnerType.BROADCASTER : owner, avAttributes, duration, platform);
+
+        if (bitrate != null || avFileFormat != null || audioAttributes != null || videoAttributes != null) {
+            this.avAttributes = AVAttributes
+                .builder()
+                .bitrate(bitrate == null ? this.avAttributes.getBitrate() : bitrate)
+                .avFileFormat(avFileFormat == null ? this.avAttributes.getAvFileFormat() : avFileFormat)
+                .audioAttributes(audioAttributes == null ? this.avAttributes.getAudioAttributes() : audioAttributes)
+                .videoAttributes(videoAttributes == null ? this.avAttributes.getVideoAttributes() : videoAttributes)
+                .build();
+        }
         this.publishStart = publishStart;
         this.publishStop = publishStop;
         if (workflow != null) {
