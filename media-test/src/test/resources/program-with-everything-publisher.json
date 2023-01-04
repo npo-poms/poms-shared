@@ -376,7 +376,7 @@
     },
     "owner" : "BROADCASTER",
     "creationDate" : 1457102700000,
-    "workflow" : "FOR_PUBLICATION",
+    "workflow" : "PUBLISHED",
     "offset" : 780000,
     "duration" : 600000,
     "urn" : "urn:vpro:media:location:6"
@@ -388,7 +388,7 @@
     },
     "owner" : "BROADCASTER",
     "creationDate" : 1457099100000,
-    "workflow" : "FOR_PUBLICATION",
+    "workflow" : "PUBLISHED",
     "urn" : "urn:vpro:media:location:7"
   }, {
     "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
@@ -398,7 +398,7 @@
     },
     "owner" : "BROADCASTER",
     "creationDate" : 1457095500000,
-    "workflow" : "FOR_PUBLICATION",
+    "workflow" : "PUBLISHED",
     "duration" : 1833000,
     "urn" : "urn:vpro:media:location:8"
   }, {
@@ -409,10 +409,10 @@
     },
     "owner" : "NEBO",
     "creationDate" : 1457091900000,
-    "workflow" : "FOR_PUBLICATION",
+    "workflow" : "PUBLISHED",
     "urn" : "urn:vpro:media:location:9"
   }, {
-    "programUrl" : "http://www.npo.nl/location/1",
+    "programUrl" : "http://www.npo.nl/location/2",
     "avAttributes" : {
       "avFileFormat" : "UNKNOWN"
     },
@@ -464,7 +464,7 @@
     "type" : "PICTURE",
     "highlighted" : false,
     "creationDate" : 1494489600000,
-    "workflow" : "FOR_PUBLICATION",
+    "workflow" : "PUBLISHED",
     "urn" : "urn:vpro:media:image:2"
   }, {
     "title" : "Tweede plaatje met credits",
@@ -476,7 +476,7 @@
     "type" : "PICTURE",
     "highlighted" : false,
     "creationDate" : 1494489600000,
-    "workflow" : "FOR_PUBLICATION",
+    "workflow" : "PUBLISHED",
     "urn" : "urn:vpro:media:image:3"
   }, {
     "title" : "Een plaatje met andere owner",
@@ -485,7 +485,7 @@
     "type" : "PICTURE",
     "highlighted" : false,
     "creationDate" : 1494489600000,
-    "workflow" : "FOR_PUBLICATION",
+    "workflow" : "PUBLISHED",
     "urn" : "urn:vpro:media:image:4"
   }, {
     "title" : "Nog een plaatje met andere owner",
@@ -494,47 +494,8 @@
     "type" : "PICTURE",
     "highlighted" : false,
     "creationDate" : 1494489600000,
-    "workflow" : "FOR_PUBLICATION",
+    "workflow" : "PUBLISHED",
     "urn" : "urn:vpro:media:image:5"
-  } ],
-  "credits" : [ {
-    "objectType" : "person",
-    "givenName" : "Bregtje",
-    "familyName" : "van der Haak",
-    "role" : "DIRECTOR",
-    "gtaaUri" : "http://gtaa/1234",
-    "name" : "van der Haak, Bregtje"
-  }, {
-    "objectType" : "person",
-    "givenName" : "Hans",
-    "familyName" : "Goedkoop",
-    "role" : "PRESENTER",
-    "name" : "Goedkoop, Hans"
-  }, {
-    "objectType" : "person",
-    "givenName" : "Meta",
-    "familyName" : "de Vries",
-    "role" : "PRESENTER",
-    "name" : "de Vries, Meta"
-  }, {
-    "objectType" : "person",
-    "givenName" : "Claire",
-    "familyName" : "Holt",
-    "role" : "ACTOR",
-    "name" : "Holt, Claire"
-  }, {
-    "objectType" : "name",
-    "role" : "COMPOSER",
-    "name" : "Doe Maar",
-    "scopeNotes" : [ "popgroep Nederland" ],
-    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
-  }, {
-    "objectType" : "person",
-    "givenName" : "Mark",
-    "familyName" : "Rutte",
-    "role" : "SUBJECT",
-    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017",
-    "name" : "Rutte, Mark"
   } ],
   "scheduleEvents" : [ {
     "titles" : [ {
@@ -959,7 +920,7 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1457102700000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "offset" : 780000,
       "duration" : 600000,
       "urn" : "urn:vpro:media:location:6"
@@ -971,7 +932,7 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1457099100000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "urn" : "urn:vpro:media:location:7"
     }, {
       "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
@@ -981,7 +942,7 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1457095500000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "duration" : 1833000,
       "urn" : "urn:vpro:media:location:8"
     }, {
@@ -992,10 +953,10 @@
       },
       "owner" : "NEBO",
       "creationDate" : 1457091900000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "urn" : "urn:vpro:media:location:9"
     }, {
-      "programUrl" : "http://www.npo.nl/location/1",
+      "programUrl" : "http://www.npo.nl/location/2",
       "avAttributes" : {
         "avFileFormat" : "UNKNOWN"
       },
@@ -1047,7 +1008,7 @@
       "type" : "PICTURE",
       "highlighted" : false,
       "creationDate" : 1494489600000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "urn" : "urn:vpro:media:image:2"
     }, {
       "title" : "Tweede plaatje met credits",
@@ -1059,7 +1020,7 @@
       "type" : "PICTURE",
       "highlighted" : false,
       "creationDate" : 1494489600000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "urn" : "urn:vpro:media:image:3"
     }, {
       "title" : "Een plaatje met andere owner",
@@ -1068,7 +1029,7 @@
       "type" : "PICTURE",
       "highlighted" : false,
       "creationDate" : 1494489600000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "urn" : "urn:vpro:media:image:4"
     }, {
       "title" : "Nog een plaatje met andere owner",
@@ -1077,47 +1038,8 @@
       "type" : "PICTURE",
       "highlighted" : false,
       "creationDate" : 1494489600000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "urn" : "urn:vpro:media:image:5"
-    } ],
-    "credits" : [ {
-      "objectType" : "person",
-      "givenName" : "Bregtje",
-      "familyName" : "van der Haak",
-      "role" : "DIRECTOR",
-      "gtaaUri" : "http://gtaa/1234",
-      "name" : "van der Haak, Bregtje"
-    }, {
-      "objectType" : "person",
-      "givenName" : "Hans",
-      "familyName" : "Goedkoop",
-      "role" : "PRESENTER",
-      "name" : "Goedkoop, Hans"
-    }, {
-      "objectType" : "person",
-      "givenName" : "Meta",
-      "familyName" : "de Vries",
-      "role" : "PRESENTER",
-      "name" : "de Vries, Meta"
-    }, {
-      "objectType" : "person",
-      "givenName" : "Claire",
-      "familyName" : "Holt",
-      "role" : "ACTOR",
-      "name" : "Holt, Claire"
-    }, {
-      "objectType" : "name",
-      "role" : "COMPOSER",
-      "name" : "Doe Maar",
-      "scopeNotes" : [ "popgroep Nederland" ],
-      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
-    }, {
-      "objectType" : "person",
-      "givenName" : "Mark",
-      "familyName" : "Rutte",
-      "role" : "SUBJECT",
-      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017",
-      "name" : "Rutte, Mark"
     } ],
     "start" : 0,
     "urnRef" : "urn:vpro:media:program:12",
@@ -1185,7 +1107,85 @@
         "index" : 1
       } ]
     },
+    "credits" : [ {
+      "objectType" : "person",
+      "givenName" : "Bregtje",
+      "familyName" : "van der Haak",
+      "role" : "DIRECTOR",
+      "gtaaUri" : "http://gtaa/1234",
+      "name" : "van der Haak, Bregtje"
+    }, {
+      "objectType" : "person",
+      "givenName" : "Hans",
+      "familyName" : "Goedkoop",
+      "role" : "PRESENTER",
+      "name" : "Goedkoop, Hans"
+    }, {
+      "objectType" : "person",
+      "givenName" : "Meta",
+      "familyName" : "de Vries",
+      "role" : "PRESENTER",
+      "name" : "de Vries, Meta"
+    }, {
+      "objectType" : "person",
+      "givenName" : "Claire",
+      "familyName" : "Holt",
+      "role" : "ACTOR",
+      "name" : "Holt, Claire"
+    }, {
+      "objectType" : "name",
+      "role" : "COMPOSER",
+      "name" : "Doe Maar",
+      "scopeNotes" : [ "popgroep Nederland" ],
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
+    }, {
+      "objectType" : "person",
+      "givenName" : "Mark",
+      "familyName" : "Rutte",
+      "role" : "SUBJECT",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017",
+      "name" : "Rutte, Mark"
+    } ],
     "publishDate" : 1425603600000
+  } ],
+  "credits" : [ {
+    "objectType" : "person",
+    "givenName" : "Bregtje",
+    "familyName" : "van der Haak",
+    "role" : "DIRECTOR",
+    "gtaaUri" : "http://gtaa/1234",
+    "name" : "van der Haak, Bregtje"
+  }, {
+    "objectType" : "person",
+    "givenName" : "Hans",
+    "familyName" : "Goedkoop",
+    "role" : "PRESENTER",
+    "name" : "Goedkoop, Hans"
+  }, {
+    "objectType" : "person",
+    "givenName" : "Meta",
+    "familyName" : "de Vries",
+    "role" : "PRESENTER",
+    "name" : "de Vries, Meta"
+  }, {
+    "objectType" : "person",
+    "givenName" : "Claire",
+    "familyName" : "Holt",
+    "role" : "ACTOR",
+    "name" : "Holt, Claire"
+  }, {
+    "objectType" : "name",
+    "role" : "COMPOSER",
+    "name" : "Doe Maar",
+    "scopeNotes" : [ "popgroep Nederland" ],
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
+  }, {
+    "objectType" : "person",
+    "givenName" : "Mark",
+    "familyName" : "Rutte",
+    "role" : "SUBJECT",
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017",
+    "name" : "Rutte, Mark"
   } ],
   "publishDate" : 1425603600000
 }
