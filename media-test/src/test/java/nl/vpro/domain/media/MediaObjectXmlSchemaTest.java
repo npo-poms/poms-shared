@@ -40,7 +40,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
- * This class verifies JAXB XML output format and wether this format complies to the vproMedia.xsd schema definitions.
+ * This class verifies JAXB XML output format and whether this format complies to the vproMedia.xsd schema definitions.
  * It's located here because then it can use the test data builder for more concise code.
  */
 @SuppressWarnings({"UnnecessaryLocalVariable", "ConstantConditions"})
@@ -866,45 +866,82 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testWithLocations() {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <credits/>\n" +
-            "    <locations>\n" +
-            "        <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" creationDate=\"2016-03-04T15:45:00+01:00\">\n" +
-            "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
-            "            <avAttributes>\n" +
-            "                <bitrate>1500</bitrate>\n" +
-            "                <avFileFormat>MP4</avFileFormat>\n" +
-            "            </avAttributes>\n" +
-            "            <offset>P0DT0H13M0.000S</offset>\n" +
-            "            <duration>P0DT0H10M0.000S</duration>\n" +
-            "        </location>\n" +
-            "        <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" creationDate=\"2016-03-04T14:45:00+01:00\">\n" +
-            "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>\n" +
-            "            <avAttributes>\n" +
-            "                <bitrate>3000</bitrate>\n" +
-            "                <avFileFormat>WM</avFileFormat>\n" +
-            "            </avAttributes>\n" +
-            "        </location>\n" +
-            "        <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" creationDate=\"2016-03-04T13:45:00+01:00\">\n" +
-            "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>\n" +
-            "            <avAttributes>\n" +
-            "                <bitrate>2000</bitrate>\n" +
-            "                <avFileFormat>WM</avFileFormat>\n" +
-            "            </avAttributes>\n" +
-            "            <duration>P0DT0H30M33.000S</duration>\n" +
-            "        </location>\n" +
-            "        <location owner=\"NEBO\" workflow=\"FOR PUBLICATION\" creationDate=\"2016-03-04T12:45:00+01:00\">\n" +
-            "            <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>\n" +
-            "            <avAttributes>\n" +
-            "                <bitrate>1000</bitrate>\n" +
-            "                <avFileFormat>HTML</avFileFormat>\n" +
-            "            </avAttributes>\n" +
-            "        </location>\n" +
-            "    </locations>\n" +
-            "    <images/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <segments/>\n" +
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><program xmlns=\"urn:vpro:media:2009\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "      \n" +
+            "  <credits/>\n" +
+            "      \n" +
+            "  <locations>\n" +
+            "            \n" +
+            "    <location owner=\"BROADCASTER\" workflow=\"PUBLISHED\" creationDate=\"2016-03-04T15:45:00+01:00\">\n" +
+            "                  \n" +
+            "      <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
+            "                  \n" +
+            "      <avAttributes>\n" +
+            "                        \n" +
+            "        <bitrate>1500</bitrate>\n" +
+            "                        \n" +
+            "        <avFileFormat>MP4</avFileFormat>\n" +
+            "                    \n" +
+            "      </avAttributes>\n" +
+            "                  \n" +
+            "      <offset>P0DT0H13M0.000S</offset>\n" +
+            "                  \n" +
+            "      <duration>P0DT0H10M0.000S</duration>\n" +
+            "              \n" +
+            "    </location>\n" +
+            "            \n" +
+            "    <location owner=\"BROADCASTER\" workflow=\"PUBLISHED\" creationDate=\"2016-03-04T14:45:00+01:00\">\n" +
+            "                  \n" +
+            "      <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>\n" +
+            "                  \n" +
+            "      <avAttributes>\n" +
+            "                        \n" +
+            "        <bitrate>3000</bitrate>\n" +
+            "                        \n" +
+            "        <avFileFormat>WM</avFileFormat>\n" +
+            "                    \n" +
+            "      </avAttributes>\n" +
+            "              \n" +
+            "    </location>\n" +
+            "            \n" +
+            "    <location owner=\"BROADCASTER\" workflow=\"PUBLISHED\" creationDate=\"2016-03-04T13:45:00+01:00\">\n" +
+            "                  \n" +
+            "      <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>\n" +
+            "                  \n" +
+            "      <avAttributes>\n" +
+            "                        \n" +
+            "        <bitrate>2000</bitrate>\n" +
+            "                        \n" +
+            "        <avFileFormat>WM</avFileFormat>\n" +
+            "                    \n" +
+            "      </avAttributes>\n" +
+            "                  \n" +
+            "      <duration>P0DT0H30M33.000S</duration>\n" +
+            "              \n" +
+            "    </location>\n" +
+            "            \n" +
+            "    <location owner=\"NEBO\" workflow=\"PUBLISHED\" creationDate=\"2016-03-04T12:45:00+01:00\">\n" +
+            "                  \n" +
+            "      <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>\n" +
+            "                  \n" +
+            "      <avAttributes>\n" +
+            "                        \n" +
+            "        <bitrate>1000</bitrate>\n" +
+            "                        \n" +
+            "        <avFileFormat>HTML</avFileFormat>\n" +
+            "                    \n" +
+            "      </avAttributes>\n" +
+            "              \n" +
+            "    </location>\n" +
+            "        \n" +
+            "  </locations>\n" +
+            "      \n" +
+            "  <images/>\n" +
+            "      \n" +
+            "  <scheduleEvents/>\n" +
+            "      \n" +
+            "  <segments/>\n" +
+            "  \n" +
             "</program>\n";
 
         Program program = program().id(100L).lean().withLocations().build();
@@ -916,7 +953,7 @@ public class MediaObjectXmlSchemaTest {
     public void testWithLocationWithUnknownOwner() {
         String example = "<program embeddable=\"true\" hasSubtitles=\"false\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <locations>\n" +
-            "        <location owner=\"UNKNOWN\" creationDate=\"2016-03-04T15:45:00+01:00\" workflow=\"FOR PUBLICATION\">\n" +
+            "        <location owner=\"UNKNOWN\" creationDate=\"2016-03-04T15:45:00+01:00\" workflow=\"PUBLISHED\">\n" +
             "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
             "            <avAttributes>\n" +
             "                <avFileFormat>MP4</avFileFormat>\n" +

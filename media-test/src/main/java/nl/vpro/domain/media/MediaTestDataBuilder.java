@@ -643,7 +643,7 @@ public interface MediaTestDataBuilder<
         Location l1 = new Location("http://www.vpro.nl/location/1", OwnerType.BROADCASTER);
         l1.setCreationInstant(LocalDateTime.of(2017, 2, 5, 11, 42).atZone(Schedule.ZONE_ID).toInstant());
         l1.setWorkflow(Workflow.PUBLISHED);
-        Location l2 = new Location("http://www.npo.nl/location/1", OwnerType.NPO);
+        Location l2 = new Location("http://www.npo.nl/location/2", OwnerType.NPO);
         l2.setDuration(Duration.of(10L, ChronoUnit.MINUTES));
         l2.setOffset(Duration.of(13L, ChronoUnit.MINUTES));
         l2.setCreationInstant(LocalDateTime.of(2017, 3, 4, 15, 45).atZone(Schedule.ZONE_ID).toInstant());

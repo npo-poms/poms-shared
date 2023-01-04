@@ -217,6 +217,7 @@ public class Image extends PublishableObject<Image>
 
     public Image(OwnerType owner) {
         this.owner = owner;
+        this.workflow = Workflow.PUBLISHED;
     }
 
     public Image(OwnerType owner, String imageUri) {
