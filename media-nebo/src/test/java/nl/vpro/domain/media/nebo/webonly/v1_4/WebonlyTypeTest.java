@@ -61,7 +61,11 @@ public class WebonlyTypeTest {
             //.poSeriesID("WO_S_mijnposeriesid")
             .withBroadcasters()
             .genres(Genre.valueOfMis(MisGenreType.ENTERTAINMENT, MisGenreType.YOUTH))
-            .locations(new Location("http://location.nl/abcde1234.mp4", OwnerType.BROADCASTER, new AVAttributes(1000000, AVFileFormat.MP4), Duration.ofMillis(36000L)))
+            .locations(Location.builder()
+                .programUrl("http://location.nl/abcde1234.mp4")
+                .owner(OwnerType.BROADCASTER)
+                .avAttributes(new AVAttributes(1000000, AVFileFormat.MP4))
+                .duration(Duration.ofMillis(36000L)).build())
             .segments(
                 MediaTestDataBuilder
                     .segment()
