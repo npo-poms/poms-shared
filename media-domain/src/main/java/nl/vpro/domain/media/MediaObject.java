@@ -2534,6 +2534,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     public boolean removeImage(Image image) {
         if (images != null) {
             image.setParent(null);
+            image.getCrids().clear();
             return images.remove(image);
         }
         return false;
@@ -2966,7 +2967,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     public void removeImages() {
-        getImages().forEach(img -> img.setParent(null));
+        getImages().forEach(img -> {
+            img.setParent(null);
+        });
         images.clear();
     }
 
