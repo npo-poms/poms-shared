@@ -59,7 +59,7 @@ public class PageSearchResultTest {
             "            },\n" +
             "            \"owner\" : \"BROADCASTER\",\n" +
             "            \"creationDate\" : 1457102700000,\n" +
-            "            \"workflow\" : \"FOR_PUBLICATION\",\n" +
+            "            \"workflow\" : \"PUBLISHED\",\n" +
             "            \"offset\" : 780000,\n" +
             "            \"duration\" : 600000\n" +
             "          }, {\n" +
@@ -70,7 +70,7 @@ public class PageSearchResultTest {
             "            },\n" +
             "            \"owner\" : \"BROADCASTER\",\n" +
             "            \"creationDate\" : 1457099100000,\n" +
-            "            \"workflow\" : \"FOR_PUBLICATION\"\n" +
+            "            \"workflow\" : \"PUBLISHED\"\n" +
             "          }, {\n" +
             "            \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf\",\n" +
             "            \"avAttributes\" : {\n" +
@@ -79,7 +79,7 @@ public class PageSearchResultTest {
             "            },\n" +
             "            \"owner\" : \"BROADCASTER\",\n" +
             "            \"creationDate\" : 1457095500000,\n" +
-            "            \"workflow\" : \"FOR_PUBLICATION\",\n" +
+            "            \"workflow\" : \"PUBLISHED\",\n" +
             "            \"duration\" : 1833000\n" +
             "          }, {\n" +
             "            \"programUrl\" : \"http://player.omroep.nl/?aflID=4393288\",\n" +
@@ -89,7 +89,7 @@ public class PageSearchResultTest {
             "            },\n" +
             "            \"owner\" : \"NEBO\",\n" +
             "            \"creationDate\" : 1457091900000,\n" +
-            "            \"workflow\" : \"FOR_PUBLICATION\"\n" +
+            "            \"workflow\" : \"PUBLISHED\"\n" +
             "          } ]\n" +
             "        }\n" +
             "      } ]\n" +
