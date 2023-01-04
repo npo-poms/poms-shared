@@ -25,9 +25,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  *
  * Created a program 'with everything' then makes an 'update' object of it. Checks the XML, and marshall it back to an update object.
- *
- * Then take that, make a simple mediaobject of it and check _its_ XML.
- *
+ * <p>
+ * Then take that, make a simple {@link MediaObject} of it and check _its_ XML.
  *
  * @author Michiel Meeuwissen
  * @since 5.8

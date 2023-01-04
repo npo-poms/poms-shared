@@ -9,7 +9,6 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 public class MediaListItemTest {
 
