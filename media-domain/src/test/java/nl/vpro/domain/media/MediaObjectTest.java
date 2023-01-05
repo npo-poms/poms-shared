@@ -966,7 +966,7 @@ public class MediaObjectTest {
         assertEquals("urn:image:1", existing.getImages().get(1).getImageUri());
         assertEquals("urn:image:2", existing.getImages().get(2).getImageUri());
 
-        // other images remain untouched and in same  same order
+        // other images remain untouched and in same  order
         assertEquals("urn:image:ceres1", existing.getImages().get(3).getImageUri());
         assertEquals("urn:image:ceres2", existing.getImages().get(4).getImageUri());
         assertEquals("urn:image:ceres3", existing.getImages().get(5).getImageUri());
@@ -975,7 +975,7 @@ public class MediaObjectTest {
 
     @Test
     public void testMergeImagesChange() {
-        Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).build();
+        Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).title("Before title").build();
         Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).build();
         Image existingImage3= Image.builder().imageUri("urn:image:ceres1").owner(CERES).build();
 
