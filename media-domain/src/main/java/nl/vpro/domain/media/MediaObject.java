@@ -2962,13 +2962,15 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                 log.debug("Oddly, incoming image {} with different owner, will be ignored", i);
             }
         }
-        List<Image> toRemove = images
-            .stream()
-            .filter(i -> Objects.equals(i.getOwner(), owner))
-            .filter(i -> ! incoming.getImages().contains(i))
-            .collect(Collectors.toList());
+        if (images != null) {
+            List<Image> toRemove = images
+                .stream()
+                .filter(i -> Objects.equals(i.getOwner(), owner))
+                .filter(i -> !incoming.getImages().contains(i))
+                .collect(Collectors.toList());
 
-        toRemove.forEach(this::removeImage);
+            toRemove.forEach(this::removeImage);
+        }
 
 
     }
