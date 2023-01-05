@@ -2531,10 +2531,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return null;
     }
 
-    public boolean removeImage(Image image) {
+    public boolean removeImage(@NonNull Image image) {
+        image.setParent(null);
+        image.getCrids().clear();
         if (images != null) {
-            image.setParent(null);
-            image.getCrids().clear();
             return images.remove(image);
         }
         return false;
@@ -2828,7 +2828,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * <p>
-     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     * Overridden to help hibernate search (see MediaSearchMappingFactory)
      * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
      * </p>
      * {@inheritDoc}
@@ -2840,7 +2840,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * <p>
-     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     * Overridden to help hibernate search (see MediaSearchMappingFactory)
      * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
      * </p>
      * {@inheritDoc}
@@ -2852,7 +2852,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * <p>
-     * Overriden to help FTL. See
+     * Overridden to help FTL. See
      * https://issues.apache.org/jira/browse/FREEMARKER-24
      * </p>
      * {@inheritDoc}
@@ -2864,7 +2864,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * <p>
-     * Overriden to help FTL. See
+     * Overridden to help FTL. See
      * https://issues.apache.org/jira/browse/FREEMARKER-24
      * </p>
      * {@inheritDoc}
@@ -2876,7 +2876,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * <p>
-     * Overriden to help FTL. See
+     * Overridden to help FTL. See
      * https://issues.apache.org/jira/browse/FREEMARKER-24
      * </p>
      * {@inheritDoc}
@@ -2888,7 +2888,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * <p>
-     * Overriden to help FTL. See
+     * Overridden to help FTL. See
      * https://issues.apache.org/jira/browse/FREEMARKER-24
      * </p>
      * {@inheritDoc}
@@ -2900,7 +2900,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * <p>
-     * Overriden to help FTL. See
+     * Overridden to help FTL. See
      * https://issues.apache.org/jira/browse/FREEMARKER-24
      * </p>
      * {@inheritDoc}
@@ -2912,7 +2912,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * <p>
-     * Overriden to help FTL. See
+     * Overridden to help FTL. See
      * https://issues.apache.org/jira/browse/FREEMARKER-24
      * </p>
      * {@inheritDoc}
@@ -2924,7 +2924,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     /**
      * <p>
-     * Overriden to help FTL. See
+     * Overridden to help FTL. See
      * https://issues.apache.org/jira/browse/FREEMARKER-24
      * </p>
      * {@inheritDoc}
@@ -2936,39 +2936,52 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     public void mergeImages(MediaObject incoming, OwnerType owner) {
         List<Image> firstImages = new ArrayList<>();
-        incoming.getImages().forEach(i -> {
+        int index = 0;
+        for (Image i: incoming.getImages()) {
             if (Objects.equals(i.getOwner(), owner)) {
-                firstImages.add(addOrUpdate(i));
+                int currentIndex = images.indexOf(i);
+                if (currentIndex == -1) {
+                    i.setParent(this);
+                    images.add(index, i);
+                } else {
+                    Collections.swap(images, index, currentIndex);
+                    Image existing = images.get(index);
+                    existing.copyFrom(i);
+                    if (existing.getCrids() == null || i.getCrids() == null) {
+                        existing.setCrids(i.getCrids());
+                    } else {
+                        existing.getCrids().removeIf(c -> i.getCrids().contains(c));
+                        List<String> copy = new ArrayList<>(i.getCrids());
+                        copy.removeIf(c -> existing.getCrids().contains(c));
+                        existing.getCrids().addAll(copy);
+                    }
+                }
+                index++;
             } else {
-                log.debug("A bit odd, incoming with different owner");
+                log.debug("Oddly, incoming image {} with different owner, will be ignored", i);
             }
-        });
-        List<Image> toRemove = getImages()
+        }
+        List<Image> toRemove = images
             .stream()
             .filter(i -> Objects.equals(i.getOwner(), owner))
             .filter(i -> ! incoming.getImages().contains(i))
             .collect(Collectors.toList());
 
         toRemove.forEach(this::removeImage);
-        List<Image> rest =
-            getImages().stream()
-                .filter(i -> !owner.equals(i.getOwner()))
-                .collect(Collectors.toList());
 
-        getImages().clear();
-        addAllImages(firstImages);
-        addAllImages(rest);
 
     }
 
     public void addAllImages(List<Image> imgs) {
+        imgs.removeIf(Objects::isNull);
         imgs.forEach(img -> img.setParent(this));
-        getImages().addAll(imgs);
+        images.addAll(imgs);
     }
 
     public void removeImages() {
         getImages().forEach(img -> {
             img.setParent(null);
+            img.getCrids().clear();
         });
         images.clear();
     }
@@ -2980,6 +2993,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                 log.info("Copying from different owner {} <- {}", existing, img);
             }
             existing.copyFrom(img);
+            existing.setCrids(img.getCrids());
             return existing;
         } else {
             addImage(img);
@@ -2988,7 +3002,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     @Override
-    // overriden to give access to test
+    // Overridden to give access to test
     protected byte[] serializeForCalcCRC32() {
         return super.serializeForCalcCRC32();
     }
