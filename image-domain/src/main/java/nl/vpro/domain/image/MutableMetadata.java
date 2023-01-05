@@ -94,6 +94,13 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
         return change;
 
     }
+
+    /**
+     * Copied all metadata from the given object to this.
+     *
+     * @param image the source of the metadata.
+     * @return A {@link ChangeReport}.
+     */
     default ChangeReport copyFrom(MutableMetadata<?> image){
         ChangeReport change = copyFrom((Metadata<?>) image);
 
@@ -101,8 +108,6 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
             setDate(image.getDate());
             change.change();
         }
-
-
         return change.or(Embargos.copy(image, this));
     }
 
