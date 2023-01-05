@@ -2533,7 +2533,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
 
     public boolean removeImage(@NonNull Image image) {
         image.setParent(null);
-        image.getCrids().clear();
+        if (image.getCrids() != null) {
+            image.getCrids().clear();
+        }
         if (images != null) {
             return images.remove(image);
         }
