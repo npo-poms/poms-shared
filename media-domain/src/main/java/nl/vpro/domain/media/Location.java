@@ -39,7 +39,7 @@ import static nl.vpro.domain.Changeables.instant;
  * owner.
  * <p/>
  * The location owner describes an origin of the location. Several media suppliers provide
- * there own locations. To prevent conflicts while updating for incoming data, locations
+ * their own locations. To prevent conflicts while updating for incoming data, locations
  * for those suppliers are kept in parallel.
  * <p/>
  * Note that this class confirms to a natural ordering not consistent with equals.
