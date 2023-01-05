@@ -282,7 +282,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @StringList(maxLength = 255)
     protected List<@NotNull @CRID  String> crids;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER) // broadcasters are important for security
     @OrderColumn(name = "list_index",
         nullable = false)
     @Valid
@@ -290,14 +290,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Size(min = 0, message = "{nl.vpro.constraints.Size.min}") // komt soms voor bij imports.
     protected List<@NotNull Broadcaster> broadcasters;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER) // portals are important for security
     @OrderColumn(name = "list_index", nullable = false)
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Nullable
     protected List<@NotNull Portal> portals;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER) // thirdParties are important for security
     @OrderColumn(name = "list_index", nullable = false)
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
