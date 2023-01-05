@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -213,13 +212,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @lombok.Builder(builderClassName = "Builder")
     private ScheduleEvent(
         @NonNull Channel channel,
-        @Null  Net net,
+        @Nullable  Net net,
         @Nullable  LocalDate guideDay,
         @NonNull  Instant start,
         @NonNull  Duration duration,
         String midRef,
         @Nullable Program media,
-        @Nullable  Repeat repeat,
+        @Nullable Repeat repeat,
         @Nullable Lifestyle primaryLifestyle,
         @Nullable SecondaryLifestyle secondaryLifestyle,
         @Singular Set<ScheduleEventTitle> titles,
