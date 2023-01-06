@@ -2967,6 +2967,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         int index = 0;
 
         for (Image i: incoming.getImages()) {
+            getImages();
             if (Objects.equals(i.getOwner(), owner)) {
                 int currentIndex = images.indexOf(i);
                 if (currentIndex == -1) {
@@ -2985,10 +2986,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                         existing.getCrids().addAll(copy);
                     }
                 }
-                index++;
             } else {
                 log.debug("Oddly, incoming image {} with different owner, will be ignored", i);
             }
+            index++;
         }
         if (images != null) {
             List<Image> toRemove = images
