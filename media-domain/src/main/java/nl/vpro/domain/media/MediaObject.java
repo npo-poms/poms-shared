@@ -2977,8 +2977,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                     // it will grow one now,
                 } else {
                     // found so it exists at currentIndex
-                    assert index < images.size();
-                    assert currentIndex < images.size();
+                    assert index < images.size() : index + ":" + images + " " + incoming.getImages();
+                    assert currentIndex < images.size() : currentIndex  + ":" + images + " " + incoming.getImages();
 
                     Collections.swap(images, index, currentIndex);
                     Image existing = images.get(index);
