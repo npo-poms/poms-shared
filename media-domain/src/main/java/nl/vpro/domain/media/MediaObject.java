@@ -2969,15 +2969,21 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         for (Image i: incoming.getImages()) {
             getImages();
             if (Objects.equals(i.getOwner(), owner)) {
-                int currentIndex = images.indexOf(i);
+                int currentIndex = CollectionUtils.indexOf(images, i, index);
                 if (currentIndex == -1) {
+                    // not found, add it
                     i.setParent(this);
                     images.add(index, i);
+                    // it will grow one now,
                 } else {
+                    // found so it exists at currentIndex
+                    assert index < images.size();
+                    assert currentIndex < images.size();
+
                     Collections.swap(images, index, currentIndex);
                     Image existing = images.get(index);
                     if (existing == null) {
-                        log.warn("Found null in {}", images);
+                        log.warn("Found bu now is null in {}", images);
                         images.set(index, i);
                     } else {
                         existing.copyFrom(i);

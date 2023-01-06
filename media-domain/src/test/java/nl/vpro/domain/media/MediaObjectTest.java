@@ -974,6 +974,37 @@ public class MediaObjectTest {
 
 
     @Test
+    public void mergeImagesAnother() {
+        Image old1 = Image.builder().imageUri("urn:image:1").owner(AUTHORITY).build();
+        Image old2 = Image.builder().imageUri("urn:image:2").owner(AUTHORITY).build();
+        Image old3 = Image.builder().imageUri("urn:image:3").owner(AUTHORITY).build();
+
+        Image new1 = Image.builder().imageUri("urn:image:1").owner(AUTHORITY).build();
+        Image new2 = Image.builder().imageUri("urn:image:2").owner(AUTHORITY).build();
+        Image new3 = Image.builder().imageUri("urn:image:3").owner(AUTHORITY).build();
+
+        Program existing = MediaBuilder.program().build();
+
+        Program incoming = MediaBuilder.program().images(
+            new1,
+            old1,
+            new2,
+            new3
+        ).build();
+
+        existing.mergeImages(incoming, AUTHORITY);
+
+        // arrived and in correct order
+        assertThat(existing.getImages()).hasSize(4);
+        assertThat(existing.getImages().get(0).getImageUri()).isEqualTo("urn:image:1");
+        assertThat(existing.getImages().get(1).getImageUri()).isEqualTo("urn:image:1");
+        assertThat(existing.getImages().get(2).getImageUri()).isEqualTo("urn:image:2");
+        assertThat(existing.getImages().get(3).getImageUri()).isEqualTo("urn:image:3");
+
+    }
+
+
+    @Test
     public void testMergeImagesChange() {
         Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).build();
         Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).crid("crid://existing/2").build();
@@ -1011,7 +1042,7 @@ public class MediaObjectTest {
 
 
     @Test
-    @Disabled("Fails, but I think it may have to be fixed?")
+    @Disabled
     public void testMergeImagesExistingForDifferentOwner() {
         Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).title("broadcaster owner").build();
         Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(RADIOBOX).title("radiobox owner").build();
@@ -1020,18 +1051,21 @@ public class MediaObjectTest {
         Image incomingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).title("radiobox owner updated by broadcaster").build();
 
         Program existing = MediaBuilder.program().images(
-            existingImage1, existingImage2
+            existingImage1,
+            existingImage2
         ).build();
 
         Program incoming = MediaBuilder.program().images(
-            incomingImage2, incomingImage1
+            incomingImage2, // ignored, since of wrong owner
+            incomingImage1
         ).build();
 
         existing.mergeImages(incoming, BROADCASTER);
 
         // arrived and in correct order
-        assertEquals("urn:image:1", existing.getImages().get(0).getImageUri()); // FAILS, but I think it may be
-        assertEquals("urn:image:2", existing.getImages().get(1).getImageUri());
+        assertThat(existing.getImages().get(0).getImageUri()).isEqualTo("urn:image:2");
+        assertThat(existing.getImages().get(1).getImageUri()).isEqualTo("urn:image:1");
+        assertThat(existing.getImages().get(1).getOwner()).isEqualTo(RADIOBOX);
 
         // fields are updated too
         assertThat(existing.getImages().get(1).getTitle()).isEqualTo("Updated title");
