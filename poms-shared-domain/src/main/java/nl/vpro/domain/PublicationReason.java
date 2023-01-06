@@ -168,4 +168,22 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
     public int compareTo(@NonNull PublicationReason o) {
         return COMPARATOR.compare(this, o);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PublicationReason that = (PublicationReason) o;
+
+        if (!Objects.equals(value, that.value)) return false;
+        return Objects.equals(publishDate, that.publishDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = value != null ? value.hashCode() : 0;
+        result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
+        return result;
+    }
 }

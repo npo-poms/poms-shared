@@ -66,6 +66,9 @@ class PublicationReasonTest {
             false
         );
         assertThat(records).isEqualTo("a␟1␞a␟2␞b␟3␞b␟4␞a␟5␞c␟6");
+
+        List<PublicationReason> roundTrip = List.of(PublicationReason.parseList(records));
+        assertThat(roundTrip).containsExactlyElementsOf(reasons);
     }
 
 
