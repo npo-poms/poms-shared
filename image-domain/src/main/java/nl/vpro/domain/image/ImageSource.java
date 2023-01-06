@@ -2,10 +2,12 @@ package nl.vpro.domain.image;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.net.URI;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
 
 
@@ -18,7 +20,9 @@ import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
 @Getter
 @EqualsAndHashCode
 @JsonDeserialize(builder = ImageSource.Builder.class)
-public class ImageSource {
+public class ImageSource implements Serializable {
+
+    private static final long serialVersionUID = -7707025279370332657L;
 
     @ImageURL
     private final java.net.URI url;
