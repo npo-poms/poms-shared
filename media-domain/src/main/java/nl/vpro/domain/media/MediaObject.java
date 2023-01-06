@@ -2939,6 +2939,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     public void mergeImages(MediaObject incoming, OwnerType owner) {
         int index = 0;
         for (Image i: incoming.getImages()) {
+            if (images == null) {
+                images = new ArrayList<>();
+            }
             if (Objects.equals(i.getOwner(), owner)) {
                 int currentIndex = images.indexOf(i);
                 if (currentIndex == -1) {
