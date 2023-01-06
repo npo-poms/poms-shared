@@ -943,7 +943,7 @@ public class MediaObjectTest {
         Image imgn2 = Image.builder().imageUri("urn:image:2").owner(NEBO).build();
         Image imgn3 = Image.builder().imageUri("urn:image:3").owner(NEBO).build();
 
-        Image imgc1 = Image.builder().imageUri("urn:image:ceres1").owner(CERES).build();
+        Image imgc1 = Image.builder().imageUri("urn:image:ceres1").owner(CERES).crid("crid://ceres/1").build();
         Image imgc2 = Image.builder().imageUri("urn:image:ceres2").owner(CERES).build();
         Image imgc3 = Image.builder().imageUri("urn:image:ceres3").owner(CERES).build();
 
@@ -966,6 +966,7 @@ public class MediaObjectTest {
         assertEquals("urn:image:1", existing.getImages().get(1).getImageUri());
         assertEquals("urn:image:2", existing.getImages().get(2).getImageUri());
 
+        // other images remain untouched and in the same order
         // other images remain untouched and in same  order
         assertEquals("urn:image:ceres1", existing.getImages().get(3).getImageUri());
         assertEquals("urn:image:ceres2", existing.getImages().get(4).getImageUri());
@@ -976,20 +977,24 @@ public class MediaObjectTest {
     @Test
     public void testMergeImagesChange() {
         Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).title("Before title").build();
-        Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).build();
+        Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).crid("crid://existing/2").build();
         Image existingImage3= Image.builder().imageUri("urn:image:ceres1").owner(CERES).build();
 
 
         Image incomingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).title("Updated title").build();
-        Image incomingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).build();
+        Image incomingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).crid("crid://incoming/1").build();
 
         Program existing = MediaBuilder.program().images(
-            existingImage1, existingImage2, existingImage3
+            existingImage1, existingImage2,
+            null, // Null in existing?
+            existingImage3
         ).build();
 
-        // incoming has ceres images too, this is odd, but they will be ignored
+        // incoming has ceres images too, and even a null,  this is odd, but they will be ignored
         Program incoming = MediaBuilder.program().images(
-            incomingImage2, incomingImage1
+            incomingImage2,
+            null,
+            incomingImage1
         ).build();
 
         existing.mergeImages(incoming, BROADCASTER);
@@ -1000,7 +1005,9 @@ public class MediaObjectTest {
         assertEquals("urn:image:ceres1", existing.getImages().get(2).getImageUri());
 
         // fields are updated too
+        assertThat(existing.getImages().get(0).getCrids()).containsExactly("crid://incoming/1");
         assertThat(existing.getImages().get(1).getTitle()).isEqualTo("Updated title");
+
     }
 
 

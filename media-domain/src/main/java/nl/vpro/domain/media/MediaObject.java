@@ -2950,14 +2950,19 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                 } else {
                     Collections.swap(images, index, currentIndex);
                     Image existing = images.get(index);
-                    existing.copyFrom(i);
-                    if (existing.getCrids() == null || i.getCrids() == null) {
-                        existing.setCrids(i.getCrids());
+                    if (existing == null) {
+                        log.warn("Found null in {}", images);
+                        images.set(index, i);
                     } else {
-                        existing.getCrids().removeIf(c -> i.getCrids().contains(c));
-                        List<String> copy = new ArrayList<>(i.getCrids());
-                        copy.removeIf(c -> existing.getCrids().contains(c));
-                        existing.getCrids().addAll(copy);
+                        existing.copyFrom(i);
+                        if (existing.getCrids() == null || i.getCrids() == null) {
+                            existing.setCrids(i.getCrids());
+                        } else {
+                            existing.getCrids().removeIf(c -> ! i.getCrids().contains(c));
+                            List<String> copy = new ArrayList<>(i.getCrids());
+                            copy.removeIf(c -> existing.getCrids().contains(c));
+                            existing.getCrids().addAll(copy);
+                        }
                     }
                 }
                 index++;

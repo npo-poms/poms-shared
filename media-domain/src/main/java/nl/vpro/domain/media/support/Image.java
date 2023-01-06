@@ -6,13 +6,11 @@
 
 package nl.vpro.domain.media.support;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import javax.persistence.*;
@@ -258,7 +256,8 @@ public class Image extends PublishableObject<Image>
         Instant publishStart,
         Instant publishStop,
         Instant creationInstant,
-        Instant lastModified
+        Instant lastModified,
+        @Singular List<String> crids
         ) {
         this(owner, type, imageUri);
         this.title = title;
@@ -275,7 +274,7 @@ public class Image extends PublishableObject<Image>
         this.publishStop = publishStop;
         this.creationInstant = creationInstant;
         this.lastModified = lastModified;
-
+        this.crids = crids == null ? null : new ArrayList<>(crids);
     }
 
 
@@ -294,6 +293,7 @@ public class Image extends PublishableObject<Image>
         this.credits = source.credits;
         this.source = source.source;
         this.date = source.date;
+        // crids?
     }
 
     public static Image copy(Image source) {
