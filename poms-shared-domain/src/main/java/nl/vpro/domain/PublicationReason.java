@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static java.util.Comparator.*;
@@ -97,16 +98,31 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         return "parent: " + reason;
     }
 
-    public static String toRecords(Collection<PublicationReason> reasons, long maxLength, String mid) {
+    public static String toRecords(List<PublicationReason> reasons, long maxLength, String mid, boolean mergeDuplicates) {
         StringBuilder builder = new StringBuilder();
+        PublicationReason prevReason = null;
         for (PublicationReason reason : reasons) {
-            String s = reason.toRecord();
-            if (builder.length() > 0){
+
+
+            boolean needsSplitter = builder.length() > 0;
+            if (prevReason != null) {
+                if (DateUtils.isAfter(prevReason.publishDate, reason.publishDate)) {
+                    log.warn("The list seems to be ordered wrong");
+                }
+                if (mergeDuplicates && Objects.equals(prevReason.getValue(), reason.getValue())) {
+                    builder.delete(builder.length() - prevReason.toRecord().length(), builder.length());
+                    needsSplitter = false;
+
+                }
+            }
+            if (needsSplitter){
                 builder.append(RECORD_SPLITTER);
             }
+            String s = reason.toRecord();
             builder.append(s);
-            if (builder.length() > maxLength) {
-                log.error("Reason header for {} is ridiculously long ({} reasons). Will be truncated", mid, reasons.size());
+            prevReason = reason;
+            if (builder.length() >= maxLength) {
+                log.error("Reason header for {} is ridiculously long ({} reasons, {} chars). Will be truncated", mid, reasons.size(), builder.length());
                 break;
             }
         }
