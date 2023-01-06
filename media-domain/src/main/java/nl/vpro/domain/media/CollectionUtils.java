@@ -74,6 +74,23 @@ public class CollectionUtils {
         }
     }
 
+    public static <E> int indexOf(List<E> list, E o, int offset) {
+        ListIterator<E> it = list.listIterator();
+        while(offset-- > 0) {
+            it.next();
+        }
+        if (o == null) {
+            while (it.hasNext())
+                if (it.next()==null)
+                    return it.previousIndex();
+        } else {
+            while (it.hasNext())
+                if (o.equals(it.next()))
+                    return it.previousIndex();
+        }
+        return -1;
+    }
+
     public static <P extends Comparable<P>> SortedSet<P> createIfNull(SortedSet<P> set) {
         if(set == null) {
             set = new TreeSet<>();
