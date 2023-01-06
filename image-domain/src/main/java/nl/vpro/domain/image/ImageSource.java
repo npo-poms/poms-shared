@@ -16,7 +16,6 @@ import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
  */
 @With
 @Getter
-@ToString
 @EqualsAndHashCode
 @JsonDeserialize(builder = ImageSource.Builder.class)
 public class ImageSource {
