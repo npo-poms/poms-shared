@@ -124,11 +124,23 @@ public class ImageStream implements AutoCloseable {
     public void close() throws IOException {
         closed = true;
         log.debug("Closing {} ", this);
+        IOException ioException = null;
         if (onClose != null) {
-            onClose.runThrows();
+            try {
+                onClose.runThrows();
+            } catch (IOException ioe) {
+                ioException = ioe;
+            }
         }
         if (stream != null) {
-            stream.close();
+            try {
+                stream.close();
+            } catch (IOException ioe) {
+                ioException = ioe;
+            }
+        }
+        if (ioException != null) {
+            throw ioException;
         }
 
     }
