@@ -57,8 +57,6 @@ jobs:
         with:
           verbose: true
           files: "**/target/surefire-reports/*.xml"
-          ignore:
-              - "media-domain/src/main/resources"
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == 11
       - name: Coveralls
         uses: coverallsapp/github-action@master
