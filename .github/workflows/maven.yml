@@ -57,6 +57,8 @@ jobs:
         with:
           verbose: true
           files: "**/target/surefire-reports/*.xml"
+          ignore:
+              - "media-domain/src/main/resources"
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux' && matrix.java == 11
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2.2.0
