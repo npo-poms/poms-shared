@@ -1364,11 +1364,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     @XmlElement()
+    @Nullable
     public AuthorizedDuration getDuration() {
         return duration;
     }
 
-    void setDuration(AuthorizedDuration duration) {
+    void setDuration(@Nullable AuthorizedDuration duration) {
         this.duration = duration;
     }
 
@@ -1731,7 +1732,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             while (it.hasNext()) {
                 MemberRef memberRef = it.next();
 
-                if (memberRef.getGroup().equals(reference)) {
+                if (Objects.equals(memberRef.getGroup(), reference)) {
                     it.remove();
                     success = true;
                     descendantOf = null;
@@ -1952,7 +1953,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
             return false;
         }
         for (MemberRef memberRef : memberOf) {
-            if (memberRef.getGroup().equals(ancestor) || (memberRef.getMidRef() != null && memberRef.getMidRef().equals(ancestor.getMid())) || memberRef.getGroup().hasAncestor(ancestor)) {
+            if (Objects.equals(memberRef.getGroup(), ancestor) || (memberRef.getMidRef() != null && memberRef.getMidRef().equals(ancestor.getMid())) || memberRef.getGroup().hasAncestor(ancestor)) {
                 return true;
             }
         }
@@ -1974,7 +1975,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     protected void findAncestry(MediaObject ancestor, List<MediaObject> ancestors) {
         if (isMember()) {
             for (MemberRef memberRef : memberOf) {
-                if (memberRef.getGroup().equals(ancestor)) {
+                if (Objects.equals(memberRef.getGroup(), ancestor)) {
                     ancestors.add(ancestor);
                     return;
                 }
@@ -1998,8 +1999,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                 if (! memberRef.isVirtual()) {
                     final MediaObject reference = memberRef.getGroup();
                     if (set.add(reference)) { // avoid stack overflow if object
-                        // happens to be descendant of
-                        // it self
+                        // happens to be descendant of itself
                         reference.addAncestors(set);
                     }
                 }
