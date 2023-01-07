@@ -43,6 +43,7 @@ public class ReusableImageStream extends ImageStream {
 
     private Path file = null;
 
+
     public ReusableImageStream(InputStream stream) {
         this(stream, null);
     }
@@ -68,7 +69,15 @@ public class ReusableImageStream extends ImageStream {
     }
 
     public ReusableImageStream(ImageStream stream) throws IOException {
-        super(stream.getStream(), stream.getLength(), stream.getLastModified());
+        super(
+            stream.getStream(),
+            stream.getLength(),
+            stream.getLastModified(),
+            stream.getContentType(),
+            stream.getEtag(),
+            stream.getUrl(),
+            stream::close);
+
     }
 
     @PolyNull
