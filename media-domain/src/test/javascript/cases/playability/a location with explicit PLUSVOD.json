@@ -26,20 +26,20 @@
     "locations" : [ {
       "programUrl" : "https://bla.com/expired.mp4",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "MP4"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "platform" : "PLUSVOD"
     }, {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "MP4"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "platform" : "PLUSVOD"
     } ]
   },
@@ -60,7 +60,7 @@
     "locations" : [ {
       "programUrl" : "https://bla.com/deleted.mp4",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "MP4"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
@@ -69,20 +69,20 @@
     }, {
       "programUrl" : "https://bla.com/expired.mp4",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "MP4"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "platform" : "PLUSVOD"
     }, {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "MP4"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "platform" : "PLUSVOD"
     } ]
   }

@@ -30,7 +30,7 @@
       },
       "owner" : "AUTHORITY",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION"
+      "workflow" : "PUBLISHED"
     } ]
   },
   "mediaObject" : {
@@ -54,7 +54,7 @@
       },
       "owner" : "AUTHORITY",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION"
+      "workflow" : "PUBLISHED"
     } ]
   }
 }

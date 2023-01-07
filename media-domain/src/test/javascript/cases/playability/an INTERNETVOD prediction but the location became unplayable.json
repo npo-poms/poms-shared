@@ -24,11 +24,11 @@
     "locations" : [ {
       "programUrl" : "http://cgi.omroep.nl/cgi-bin/streams?/nps/cultura/CU_VrijdagvanVredenburg_181209b.wmv",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "WM"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "platform" : "INTERNETVOD"
     } ]
   },
@@ -49,11 +49,11 @@
     "locations" : [ {
       "programUrl" : "http://cgi.omroep.nl/cgi-bin/streams?/nps/cultura/CU_VrijdagvanVredenburg_181209b.wmv",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "WM"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "platform" : "INTERNETVOD"
     } ]
   }

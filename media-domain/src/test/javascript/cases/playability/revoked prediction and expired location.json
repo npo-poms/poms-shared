@@ -43,11 +43,11 @@
     "locations" : [ {
       "programUrl" : "https://download.omroep.nl/vpro/algemeen/yous_yay_newemotions/yous_yay_johan fretz.mp3",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "MP3"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION",
+      "workflow" : "PUBLISHED",
       "publishStop" : 1635253190000
     } ]
   }

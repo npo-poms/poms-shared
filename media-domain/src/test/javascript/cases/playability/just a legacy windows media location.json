@@ -20,11 +20,11 @@
     "locations" : [ {
       "programUrl" : "https://bla.com/foobar.wmv",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "WM"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION"
+      "workflow" : "PUBLISHED"
     } ]
   },
   "mediaObject" : {
@@ -40,11 +40,11 @@
     "locations" : [ {
       "programUrl" : "https://bla.com/foobar.wmv",
       "avAttributes" : {
-        "avFileFormat" : "UNKNOWN"
+        "avFileFormat" : "WM"
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "FOR_PUBLICATION"
+      "workflow" : "PUBLISHED"
     } ]
   }
 }
