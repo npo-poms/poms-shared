@@ -2957,7 +2957,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                     Collections.swap(images, index, currentIndex);
                     Image existing = images.get(index);
                     if (existing == null) {
-                        log.warn("Found bu now is null in {}", images);
+                        log.warn("Found  null in {}", images);
                         images.set(index, i);
                     } else {
                         existing.copyFrom(i);
