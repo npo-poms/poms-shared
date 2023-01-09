@@ -13,6 +13,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import nl.vpro.domain.bind.PublicationFilter;
@@ -39,6 +41,7 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
     @XmlTransient // Don't remove!
     @Getter
+    @MonotonicNonNull
     protected Long id;
 
     @Transient
