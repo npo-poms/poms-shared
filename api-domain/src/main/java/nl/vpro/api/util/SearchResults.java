@@ -332,7 +332,7 @@ public class SearchResults {
         return false;
     }
 
-    public static void sort(TextFacet<?>  facet, List<? extends TermFacetResultItem> results, List<? extends TermFacetResultItem> selected) {
+    public static void sort(TextFacet<?, ?>  facet, List<? extends TermFacetResultItem> results, List<? extends TermFacetResultItem> selected) {
         if (facet == null) return;
         FacetOrder sort = facet.getSort();
         if (sort == null) return;
@@ -344,7 +344,7 @@ public class SearchResults {
         }
     }
 
-    public static void sortWithCustomComparator(TextFacet<?> facet, List<? extends TermFacetResultItem> results, List<? extends TermFacetResultItem> selected, Comparator<TermFacetResultItem> comparator) {
+    public static void sortWithCustomComparator(TextFacet<?, ?> facet, List<? extends TermFacetResultItem> results, List<? extends TermFacetResultItem> selected, Comparator<TermFacetResultItem> comparator) {
         if (facet != null) {
             if (results != null) {
                 results.sort(comparator);

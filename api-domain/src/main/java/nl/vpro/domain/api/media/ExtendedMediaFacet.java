@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.ExtendedTextFacet;
 import nl.vpro.domain.api.FacetOrder;
+import nl.vpro.domain.media.MediaObject;
 
 /**
  * @author Michiel Meeuwissen
@@ -18,7 +19,7 @@ import nl.vpro.domain.api.FacetOrder;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "extendedMediaFacetType")
-public class ExtendedMediaFacet extends ExtendedTextFacet<MediaSearch> {
+public class ExtendedMediaFacet extends ExtendedTextFacet<MediaSearch, MediaObject> {
     public ExtendedMediaFacet() {
     }
 

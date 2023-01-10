@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlTransient
-public abstract class ExtendedTextFacet<T extends AbstractSearch> extends TextFacet<T> implements Facet<T> {
+public abstract class ExtendedTextFacet<T extends AbstractSearch<V>, V> extends TextFacet<T, V> implements Facet<T> {
 
     @XmlAttribute
     private Boolean caseSensitive;

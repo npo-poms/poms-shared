@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "textFacetType")
 @Setter
 @Getter
-public class TextFacet<T extends AbstractSearch> extends AbstractFacet<T> implements LimitableFacet<T> {
+public class TextFacet<T extends AbstractSearch<V>, V> extends AbstractFacet<T> implements LimitableFacet<T> {
 
     @XmlElement
     private Integer threshold = null;

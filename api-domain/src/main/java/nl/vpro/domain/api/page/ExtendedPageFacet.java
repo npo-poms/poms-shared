@@ -4,13 +4,11 @@
  */
 package nl.vpro.domain.api.page;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.api.ExtendedTextFacet;
 import nl.vpro.domain.api.FacetOrder;
+import nl.vpro.domain.page.Page;
 
 /**
  * @author Michiel Meeuwissen
@@ -18,7 +16,7 @@ import nl.vpro.domain.api.FacetOrder;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "extendedPageFacetType")
-public class ExtendedPageFacet extends ExtendedTextFacet<PageSearch> {
+public class ExtendedPageFacet extends ExtendedTextFacet<PageSearch, Page> {
     public ExtendedPageFacet() {
     }
 

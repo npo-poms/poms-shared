@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.FacetOrder;
 import nl.vpro.domain.api.TextFacet;
+import nl.vpro.domain.page.Page;
 
 /**
  * @author Roelof Jan Koekoek
@@ -18,7 +19,7 @@ import nl.vpro.domain.api.TextFacet;
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "pageFacetType")
-public class PageFacet extends TextFacet<PageSearch> {
+public class PageFacet extends TextFacet<PageSearch, Page> {
     public PageFacet() {
     }
 
