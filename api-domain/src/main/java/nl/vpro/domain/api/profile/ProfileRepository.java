@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.Map;
 import java.util.SortedSet;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.page.Page;
 
@@ -13,15 +15,35 @@ import nl.vpro.domain.page.Page;
  */
 public interface ProfileRepository {
 
-    SortedSet<Profile> getProfiles(String name);
+    @Nullable
+    default SortedSet<Profile> getProfiles(String name) {
+        if (name == null) {
+            return null;
+        }
+        return getProfiles().get(name);
+    }
 
     Map<String, SortedSet<Profile>> getProfiles();
 
-    ProfileDefinition<Page> getPageProfileDefinition(String name);
 
-    ProfileDefinition<MediaObject> getMediaProfileDefinition(String name);
+    default  ProfileDefinition<Page> getPageProfileDefinition(String name) {
+        if (name == null) {
+            return null;
+        }
+        SortedSet<Profile> definitions = getProfiles(name);
+        Profile profile = definitions == null || definitions.isEmpty() ? null : definitions.first();
+        return profile != null ? profile.getPageProfile() : null;
+    }
 
-    ProfileDefinition<MediaObject> getMediaProfileDefinition(String name, Instant since);
+    default  ProfileDefinition<MediaObject> getMediaProfileDefinition(String name) {
+        SortedSet<Profile> definitions = getProfiles(name);
+        Profile profile = definitions == null || definitions.isEmpty() ? null : definitions.first();
+        return profile != null ? profile.getMediaProfile() : null;
+    }
+
+    default ProfileDefinition<MediaObject> getMediaProfileDefinition(String name, Instant since) {
+        throw new UnsupportedOperationException();
+    }
 
 
 }
