@@ -477,7 +477,7 @@ public class MediaForm {
     /**
      * @deprecated  {@link #setLocationsCount(IntegerRange)}
      */
-    
+
     @Deprecated
     public boolean hasLocations() {
         return hasLocations == null ? false : hasLocations;
@@ -492,7 +492,7 @@ public class MediaForm {
     }
 
     /**
-     * @deprecated  {@link #setMemberOfCount(IntegerRange)}  
+     * @deprecated  {@link #setMemberOfCount(IntegerRange)}
      */
     @Deprecated
     public boolean hasNoPlaylist() {
@@ -500,14 +500,14 @@ public class MediaForm {
     }
 
     /**
-     * @deprecated  {@link #setMemberOfCount(IntegerRange)}  
+     * @deprecated  {@link #setMemberOfCount(IntegerRange)}
      */
     @Deprecated
     public void setNoPlaylist(boolean noPlaylist) {
         this.noPlaylist = noPlaylist;
     }
 
- 
+
     public Boolean hasNoMembers() {
         return noMembers == null ? false : noMembers;
     }
@@ -516,6 +516,9 @@ public class MediaForm {
         this.noMembers = noMembers;
     }
 
+    /**
+     * @deprecated  ?
+     */
     @Deprecated
     public boolean hasNoCredits() {
         return noCredits == null ? false : noCredits;

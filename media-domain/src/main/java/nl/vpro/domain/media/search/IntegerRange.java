@@ -4,10 +4,9 @@
  */
 package nl.vpro.domain.media.search;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
+
+import java.util.Objects;
 
 import javax.xml.bind.annotation.*;
 
@@ -20,6 +19,7 @@ import javax.xml.bind.annotation.*;
 @Data
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder")
+
 public class IntegerRange implements Range<Long, IntegerRange.Value> {
 
     @XmlElement
@@ -29,6 +29,24 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
     private Value stop;
 
     public IntegerRange() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        IntegerRange that = (IntegerRange) o;
+
+        if (!Objects.equals(start, that.start)) return false;
+        return Objects.equals(stop, that.stop);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = start != null ? start.hashCode() : 0;
+        result = 31 * result + (stop != null ? stop.hashCode() : 0);
+        return result;
     }
 
     public static IntegerRange equals(long value) {
