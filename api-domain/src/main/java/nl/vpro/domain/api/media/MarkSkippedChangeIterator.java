@@ -32,7 +32,6 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
 
     private final ProfileDefinition<MediaObject> current;
 
-    private final ProfileDefinition<MediaObject> previous;
 
     private final Instant sinceDate;
     private final Long since;
@@ -59,10 +58,9 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
      * @param since         The original since argument, which is sometimes needed during filtering
      *                      Sometimes the stream may contain objects sent before this.
      * @param current       The current profile as used by filtering
-     * @param previous      The profile at the moment 'since'.
      */
-    public MarkSkippedChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous) {
-        this(iterator, since, current, previous, null);
+    public MarkSkippedChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> current) {
+        this(iterator, since, current, null);
     }
 
 
@@ -71,9 +69,8 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
         Iterator<@NonNull MediaChange> iterator,
         Instant since,
         final ProfileDefinition<MediaObject> current,
-        final ProfileDefinition<MediaObject> previous,
         Integer logBatch) {
-        this(iterator, since, null, current, previous, logBatch);
+        this(iterator, since, null, current, logBatch);
     }
 
     private MarkSkippedChangeIterator(
@@ -81,12 +78,11 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
         Instant sinceDate,
         Long since,
         final ProfileDefinition<MediaObject> current,
-        final ProfileDefinition<MediaObject> previous, Integer logBatch) {
+        Integer logBatch) {
         this.wrapped = new FilteringIterator<>(iterator, Objects::nonNull); // if incoming contains null already, ignore those
         this.sinceDate = sinceDate;
         this.since = since;
         this.current = nullIsMatchAlways(current);
-        this.previous = nullIsMatchAlways(previous);
         this.logBatch = logBatch == null ? LOG_BATCH_DEFAULT : logBatch;
     }
 
@@ -212,21 +208,7 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
      */
 
     protected boolean deleteNeedsOutput(MediaChange input) {
-        if (input.getMedia() == null ) {
-            // No media, so we can't determine if it was in the previous profile
-            // if it wasn't then no output needed
-            // otherwise see below.
-            return appliesToSince(input);
-        }
-        if (previous.test(input.getMedia())) {
-            // we know it was in the previous profile
-            // so we just need to issue a delete if this indeed was deleted since then
-            return appliesToSince(input);
-        } else {
-            // input was  not even in the previous profile, so it wasn't published.
-            // no need to output a delete
-            return false;
-        }
+        return appliesToSince(input);
     }
 
     /**
@@ -237,18 +219,13 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
     protected boolean updateNeedsOutput(MediaChange input) {
         final MediaObject media = input.getMedia();
         final boolean inCurrent  = current.test(media);
-        final boolean inPrevious = previous.test(media);
+
 
         if (inCurrent) {
             // Is newer than since or did not apply under previous profile
-            return appliesToSince(input) || !inPrevious;
+            return appliesToSince(input);
         } else {
             // Let's see if it might be needed to issue a _delete_ in stead.
-
-            if (publishedBeforeSince(input) && !inPrevious) {
-                // Not previous too, so it wasn't published then, so we don't need an explicit delete
-                return false;
-            }
             // Return a delete since we can't determine whether the previous revision applied to the current
             // profile without extra document retrievals (NPA-134)
             input.setDeleted(true);

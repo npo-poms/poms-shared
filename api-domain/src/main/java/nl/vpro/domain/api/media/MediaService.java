@@ -25,7 +25,7 @@ public interface MediaService extends MediaProvider {
 
     CloseableIterator<MediaChange> changes(
         String profile,
-        boolean profileCheck,
+        Boolean profileCheck,
         Instant since,
         String mid,
         Order order,
