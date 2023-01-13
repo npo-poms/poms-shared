@@ -31,6 +31,18 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
     public IntegerRange() {
     }
 
+    public static IntegerRange equals(long value) {
+        return builder().equals(value).build();
+    }
+
+    public static IntegerRange zero() {
+        return builder().equals(0L).build();
+    }
+    public static IntegerRange gte(long start) {
+        return builder().start(start).build();
+    }
+
+
     public static class Builder {
 
         /**
