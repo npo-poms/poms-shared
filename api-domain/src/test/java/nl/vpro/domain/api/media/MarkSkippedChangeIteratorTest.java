@@ -70,7 +70,7 @@ public class MarkSkippedChangeIteratorTest {
         try(MarkSkippedChangeIterator test = MarkSkippedChangeIterator.builder()
             .iterator(fourChanges.iterator())
             .since(INSTANT)
-            .current(null)
+            .profile(null)
             .logBatch(2)
             .build()) {
             assertThat(test.getPublishDate()).isNull();
@@ -100,7 +100,7 @@ public class MarkSkippedChangeIteratorTest {
         try(MarkSkippedChangeIterator test = MarkSkippedChangeIterator.builder()
             .iterator(fourChanges.iterator())
             .since(INSTANT)
-            .current(even)
+            .profile(even)
             .logBatch(2)
             .build()) {
             test(test.next(), "2021-03-01T11:01:00Z", "mid_1", true);
@@ -117,7 +117,7 @@ public class MarkSkippedChangeIteratorTest {
         try(MarkSkippedChangeIterator test = MarkSkippedChangeIterator.builder()
             .iterator(fourChanges.iterator())
             .since(INSTANT.plus(Duration.ofHours(1)))
-            .current(even)
+            .profile(even)
             //.keepAliveNull(3L)
             .logBatch(2)
             .build()) {
@@ -137,7 +137,7 @@ public class MarkSkippedChangeIteratorTest {
         try(MarkSkippedChangeIterator test = MarkSkippedChangeIterator.builder()
             .iterator(fourChanges.iterator())
             .since(INSTANT)
-            .current(even)
+            .profile(even)
             .build()) {
             assertThat(test.next().isSkipped()).isTrue();
             test(test.next(), "2021-03-01T11:01:00Z", "mid_2", true);
@@ -166,7 +166,7 @@ public class MarkSkippedChangeIteratorTest {
                     .build()
             ).iterator())
             .since(INSTANT)
-            .current(even)
+            .profile(even)
             .build()) {
             assertThat(test.next().isSkipped()).isTrue();
             assertThat(test.next().isSkipped()).isTrue();

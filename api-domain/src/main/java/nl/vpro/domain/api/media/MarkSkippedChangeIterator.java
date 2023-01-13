@@ -30,7 +30,7 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
     private final int logBatch;
     private final Iterator<MediaChange> wrapped;
 
-    private final ProfileDefinition<MediaObject> current;
+    private final ProfileDefinition<MediaObject> profile;
 
 
     private final Instant sinceDate;
@@ -57,10 +57,10 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
      * @param iterator      The original change feed (from ES)
      * @param since         The original since argument, which is sometimes needed during filtering
      *                      Sometimes the stream may contain objects sent before this.
-     * @param current       The current profile as used by filtering
+     * @param profile       The current profile as used by filtering
      */
-    public MarkSkippedChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> current) {
-        this(iterator, since, current, null);
+    public MarkSkippedChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> profile) {
+        this(iterator, since, profile, null);
     }
 
 
@@ -68,21 +68,21 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
     private MarkSkippedChangeIterator(
         Iterator<@NonNull MediaChange> iterator,
         Instant since,
-        final ProfileDefinition<MediaObject> current,
+        final ProfileDefinition<MediaObject> profile,
         Integer logBatch) {
-        this(iterator, since, null, current, logBatch);
+        this(iterator, since, null, profile, logBatch);
     }
 
     private MarkSkippedChangeIterator(
         Iterator<@NonNull MediaChange> iterator,
         Instant sinceDate,
         Long since,
-        final ProfileDefinition<MediaObject> current,
+        final ProfileDefinition<MediaObject> profile,
         Integer logBatch) {
         this.wrapped = new FilteringIterator<>(iterator, Objects::nonNull); // if incoming contains null already, ignore those
         this.sinceDate = sinceDate;
         this.since = since;
-        this.current = nullIsMatchAlways(current);
+        this.profile = nullIsMatchAlways(profile);
         this.logBatch = logBatch == null ? LOG_BATCH_DEFAULT : logBatch;
     }
 
@@ -153,19 +153,20 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
                 count++;
                 sequence = next.getSequence();
                 publishDate = next.getPublishDate();
-                if (!needsOutputAndAdapt(next)) {
-                    // no
-                    if (next.isDeleted()) {
-                        deletesSkipped++;
-                    } else {
-                        updatesSkipped++;
-                    }
+                markDeletedIfNotInProfile(next);
+                // no
+                if (next.isDeleted()) {
+                    deletesSkipped++;
+                } else {
+                    updatesSkipped++;
+                }
+                if (! appliesToSince(next)) {
                     next.setSkipped(true);
                     currentSkipCount++;
                 }
                 if (count % logBatch == 0) {
                     log.info("{}: sequence: {} count: {}  skipped updates: {}, skipped deletes: {}",
-                        current.getName(),
+                        profile.getName(),
                         sequence, count, updatesSkipped, deletesSkipped);
                 }
                 // handle last one
@@ -173,7 +174,7 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
 
                 if (nextnext == null) {
                     if (count > logBatch) {
-                        log.info("{}: sequence: {} count: {}  skipped updates: {}, skipped deletes: {}. Ready.", current.getName(), sequence, count, updatesSkipped, deletesSkipped);
+                        log.info("{}: sequence: {} count: {}  skipped updates: {}, skipped deletes: {}. Ready.", profile.getName(), sequence, count, updatesSkipped, deletesSkipped);
                     }
                 }
             }
@@ -190,46 +191,26 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
         }
     }
 
-    /**
-     *
-     */
-    protected boolean needsOutputAndAdapt(@NonNull MediaChange input) {
-        if (input.isDeleted()) {
-            return deleteNeedsOutput(input);
-        } else {
-            return updateNeedsOutput(input);
-        }
-    }
-
-    /**
-     * A delete needs output (always, of course _as_ a delete) if:
-     *   - The associated 'since' timestamp is indeed after the configured one
-     *   -
-     */
-
-    protected boolean deleteNeedsOutput(MediaChange input) {
-        return appliesToSince(input);
-    }
 
     /**
      * Whether an update needs to be outputted.
      * As a side effect the update may be converted to a <em>delete</em>
      */
 
-    protected boolean updateNeedsOutput(MediaChange input) {
+    protected void markDeletedIfNotInProfile(MediaChange input) {
         final MediaObject media = input.getMedia();
-        final boolean inCurrent  = current.test(media);
+        final boolean inProfile  = profile.test(media);
 
 
-        if (inCurrent) {
-            // Is newer than since or did not apply under previous profile
-            return appliesToSince(input);
-        } else {
+        if (! inProfile) {
+            if (input.isDeleted()) {
+                input.setSkipped(true);
+            }
             // Let's see if it might be needed to issue a _delete_ in stead.
             // Return a delete since we can't determine whether the previous revision applied to the current
             // profile without extra document retrievals (NPA-134)
             input.setDeleted(true);
-            return true;
+
         }
     }
 
@@ -274,9 +255,21 @@ public class MarkSkippedChangeIterator implements CloseablePeekingIterator<@NonN
         if (def != null) {
             return def;
         }
-        return new ProfileDefinition<>(new AbstractFilter<MediaObject>(null) {
+        return new ProfileDefinition<>(new AbstractFilter<>(null) {
         }); // matches everything
     }
 
+
+    public static class Builder {
+
+        /**
+         * @deprecated Used {@link #profile(ProfileDefinition)}.
+         */
+        @Deprecated
+        public Builder current(ProfileDefinition<MediaObject> profile) {
+            return profile(profile);
+        }
+
+    }
 
 }
