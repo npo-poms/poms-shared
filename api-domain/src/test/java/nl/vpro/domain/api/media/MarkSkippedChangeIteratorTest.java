@@ -1,23 +1,26 @@
 package nl.vpro.domain.api.media;
 
 import java.time.*;
-import static java.util.Arrays.asList;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.junit.jupiter.api.Test;
+import org.mockito.stubbing.Answer;
+
 import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.profile.ProfileDefinition;
-import static nl.vpro.domain.media.MediaBuilder.clip;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.support.Workflow;
+
+import static java.util.Arrays.asList;
+import static nl.vpro.domain.media.MediaBuilder.clip;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import org.mockito.stubbing.Answer;
 
 /**
  * @author Michiel Meeuwissen
@@ -68,7 +71,6 @@ public class MarkSkippedChangeIteratorTest {
             .iterator(fourChanges.iterator())
             .since(INSTANT)
             .current(null)
-            .previous(null)
             .logBatch(2)
             .build()) {
             assertThat(test.getPublishDate()).isNull();
@@ -99,7 +101,6 @@ public class MarkSkippedChangeIteratorTest {
             .iterator(fourChanges.iterator())
             .since(INSTANT)
             .current(even)
-            .previous(null)
             .logBatch(2)
             .build()) {
             test(test.next(), "2021-03-01T11:01:00Z", "mid_1", true);
@@ -117,7 +118,6 @@ public class MarkSkippedChangeIteratorTest {
             .iterator(fourChanges.iterator())
             .since(INSTANT.plus(Duration.ofHours(1)))
             .current(even)
-            .previous(null)
             //.keepAliveNull(3L)
             .logBatch(2)
             .build()) {
@@ -138,7 +138,6 @@ public class MarkSkippedChangeIteratorTest {
             .iterator(fourChanges.iterator())
             .since(INSTANT)
             .current(even)
-            .previous(even)
             .build()) {
             assertThat(test.next().isSkipped()).isTrue();
             test(test.next(), "2021-03-01T11:01:00Z", "mid_2", true);
@@ -168,7 +167,6 @@ public class MarkSkippedChangeIteratorTest {
             ).iterator())
             .since(INSTANT)
             .current(even)
-            .previous(even)
             .build()) {
             assertThat(test.next().isSkipped()).isTrue();
             assertThat(test.next().isSkipped()).isTrue();

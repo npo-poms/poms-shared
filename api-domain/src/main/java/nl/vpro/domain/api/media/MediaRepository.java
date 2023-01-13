@@ -39,7 +39,6 @@ public interface MediaRepository extends MediaLoader, Redirector {
         @Nullable final Instant since,
         @Nullable final String mid,
         @Nullable final ProfileDefinition<MediaObject> currentProfile,
-        @Nullable final ProfileDefinition<MediaObject> previousProfile,
         @NonNull final Order order,
         @Nullable final Integer max,
         @Nullable Deletes deletes,
