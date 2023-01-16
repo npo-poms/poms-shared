@@ -46,6 +46,10 @@ public interface MediaRestService {
     String SORT = "sort";
     String SINCE = "since";
     String PUBLISHEDSINCE = "publishedSince";
+    /**
+     * @deprecated
+     */
+    @Deprecated
     String CHECK_PROFILE = "checkProfile";
     String DELETES = "deletes";
     String TAIL = "tail";
@@ -224,7 +228,7 @@ public interface MediaRestService {
         @QueryParam(PUBLISHEDSINCE) String publishedSince,
         @QueryParam(ORDER) @DefaultValue(ASC) String order,
         @QueryParam(MAX) Integer max,
-        @QueryParam(CHECK_PROFILE) Boolean profileCheck,
+        @Deprecated @QueryParam(CHECK_PROFILE) Boolean profileCheck,
         @QueryParam(DELETES) Deletes deletes,
         @QueryParam(TAIL) Tail tail,
         @QueryParam(REASON_FILTER) String reasonFilter
