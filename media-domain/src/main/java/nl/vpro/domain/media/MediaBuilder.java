@@ -214,6 +214,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return mediaObject().getWorkflow();
     }
 
+    default B republicationReason(String reason) {
+        mediaObject().setRepubReason(reason);
+        return (B) this;
+    }
+
     @SuppressWarnings("unchecked")
     default B crids(Collection<String> crids) {
         for(String crid : crids) {
