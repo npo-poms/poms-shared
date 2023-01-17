@@ -359,8 +359,15 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         if (platform == null || other.platform == null) {
             return other == this;
         }
-        return Objects.equals(platform, other.platform);
+        return Objects.equals(platform, other.platform) &&
+            Objects.equals(getParent(), other.getParent());
+    }
 
+    public boolean fieldEquals(Prediction prediction) {
+        return equals(prediction) &&
+            asRange().equals(prediction.asRange()) &&
+            getEncryption() == prediction.getEncryption() &&
+            plannedAvailability == prediction.plannedAvailability;
     }
 
     @Override
