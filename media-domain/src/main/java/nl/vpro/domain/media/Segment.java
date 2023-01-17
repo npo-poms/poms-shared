@@ -176,6 +176,15 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     }
 
     /**
+     * If a segment is member of a merged {@link Program} then its workflow will become {@link Workflow#MERGED}, to indicate that. But this will in all cases be considered a delete.
+     * <p>
+     * E.g. if such on object is requested from the API it should result 404.
+     */
+    public boolean isDeleted() {
+        return super.isDeleted() || isMerged();
+    }
+
+    /**
      * Returns the parent {@link Program} of this segment. Not that this does not work directly after a simple unmarshall of
      * an individual segment because the full program object simply is not available then.
      * <p>
