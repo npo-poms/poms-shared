@@ -1,20 +1,16 @@
 package nl.vpro.domain.media;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -25,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "geoRestrictionType")
 @SuppressWarnings("serial")
-@EqualsAndHashCode(callSuper = true)
 @ToString
 public class GeoRestriction extends Restriction<GeoRestriction> implements Comparable<GeoRestriction> {
 
@@ -81,7 +76,12 @@ public class GeoRestriction extends Restriction<GeoRestriction> implements Compa
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private GeoRestriction(Long id, Region region, Instant start, Instant stop, Platform platform, boolean authoritative) {
+    private GeoRestriction(
+        @Nullable Long id,
+        @NonNull @lombok.NonNull Region region,
+        @Nullable Instant start,
+        @Nullable Instant stop,
+        @Nullable Platform platform, boolean authoritative) {
         super(id, start, stop);
         this.region = region;
         this.authoritative = authoritative;
@@ -114,7 +114,27 @@ public class GeoRestriction extends Restriction<GeoRestriction> implements Compa
         return (platform == null || platform == Platform.INTERNETVOD ? "" : (platform.name() + ":")) + region.name();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
+        GeoRestriction that = (GeoRestriction) o;
+
+        if (authoritative != that.authoritative) return false;
+        if (region != that.region) return false;
+        return platform == that.platform;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + region.hashCode();
+        result = 31 * result + platform.hashCode();
+        result = 31 * result + (authoritative ? 1 : 0);
+        return result;
+    }
 
     @Override
     public int compareTo(GeoRestriction o) {

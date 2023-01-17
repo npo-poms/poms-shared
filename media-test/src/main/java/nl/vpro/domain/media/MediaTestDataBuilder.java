@@ -30,6 +30,8 @@ import nl.vpro.i18n.Locales;
 
 import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.NPO;
+import static nl.vpro.domain.media.support.Workflow.MERGED;
+import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
 
 @SuppressWarnings({"unchecked", "deprecation", "UnusedReturnValue"})
 @CanIgnoreReturnValue
@@ -232,11 +234,14 @@ public interface MediaTestDataBuilder<
         return published();
     }
 
+    /**
+     * Marks the object as {@link Workflow#PUBLISHED} (or {@link Workflow#MERGED} if {@code mediaObject().isMerged()})
+     */
     default T published() {
         if (mediaObject().isMerged()) {
-            return workflow(Workflow.MERGED);
+            return workflow(MERGED);
         } else {
-            return workflow(Workflow.PUBLISHED);
+            return workflow(PUBLISHED);
         }
     }
     default T deleted() {
@@ -642,7 +647,7 @@ public interface MediaTestDataBuilder<
     default T withPublishedLocations() {
         Location l1 = new Location("http://www.vpro.nl/location/1", OwnerType.BROADCASTER);
         l1.setCreationInstant(LocalDateTime.of(2017, 2, 5, 11, 42).atZone(Schedule.ZONE_ID).toInstant());
-        l1.setWorkflow(Workflow.PUBLISHED);
+        l1.setWorkflow(PUBLISHED);
         Location l2 = new Location("http://www.npo.nl/location/2", OwnerType.NPO);
         l2.setDuration(Duration.of(10L, ChronoUnit.MINUTES));
         l2.setOffset(Duration.of(13L, ChronoUnit.MINUTES));
@@ -712,8 +717,8 @@ public interface MediaTestDataBuilder<
 
     default T withPublishedImages() {
         return images(
-            image(OwnerType.BROADCASTER, "urn:vpro:image:1234", Workflow.PUBLISHED),
-            image(OwnerType.BROADCASTER, "urn:vpro:image:5678", Workflow.PUBLISHED)
+            image(OwnerType.BROADCASTER, "urn:vpro:image:1234", PUBLISHED),
+            image(OwnerType.BROADCASTER, "urn:vpro:image:5678", PUBLISHED)
         );
     }
 
