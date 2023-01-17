@@ -444,6 +444,7 @@ public class Program extends MediaObject {
     @XmlElement(name = "segment")
     @JsonProperty("segments")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @NonNull
     public SortedSet<Segment> getSegments() {
         if(segments == null) {
             segments = new TreeSet<>();
