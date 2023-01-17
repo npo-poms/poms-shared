@@ -169,6 +169,12 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         return (parent != null && parent.isMerged()) || super.isMerged();
     }
 
+    @Override
+    public boolean isDeleted() {
+        return super.isDeleted() || isMerged();
+    }
+
+
     /**
      * Returns the parent {@link Program} of this segment. Not that this does not work directly after a simple unmarshall of
      * an individual segment because the full program object simply is not available then.
