@@ -75,8 +75,8 @@ public interface TrackableObject extends Trackable, Embargo {
     }
 
     /**
-     * Implementations can optionally become child of a trackable parent where the parents trackability decides on
-     * this child's trackability.
+     * Implementations can optionally become child of a trackable parent where the parents track-ability decides on
+     * this child's track-ability.
      *
      * @return a trackable parent, null when a parent is not set or no parent-child relation exists
      * @see Image#getParent()
