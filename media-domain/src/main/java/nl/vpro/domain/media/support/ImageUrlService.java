@@ -2,9 +2,10 @@ package nl.vpro.domain.media.support;
 
 import java.util.regex.Matcher;
 
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.*;
 
-import org.apache.commons.lang3.StringUtils;
+import nl.vpro.util.URLPathEncode;
 
 /**
  * This services knows how to create urls from image ids.
@@ -84,11 +85,11 @@ public interface ImageUrlService {
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri id.
      */
-    default String getImageLocation(@NonNull Long  id , @Nullable String fileExtension, String... conversions) {
+    default String getImageLocation(@NonNull Long  id , @Nullable String fileExtension, boolean encode, String... conversions) {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder builder = new StringBuilder(imageServerBaseUrl);
         for (String conversion : conversions) {
-            builder.append(conversion);
+            builder.append(URLPathEncode.encode(conversion));
             builder.append('/');
         }
         builder.append(id);
@@ -97,6 +98,10 @@ public interface ImageUrlService {
         }
         appendSecurityTokens(builder);
         return builder.toString();
+    }
+
+    default String getImageLocation(@NonNull Long  id , @Nullable String fileExtension, String... conversions) {
+        return getImageLocation(id, fileExtension, true, conversions);
     }
 
     default void appendSecurityTokens(StringBuilder builder) {
