@@ -32,6 +32,9 @@ import nl.vpro.jackson2.Jackson2Mapper;
 @JsonFilter("publicationFilter")
 public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
+    //@Serial
+    private static final long serialVersionUID = 6335921198095424865L;
+
     static {
         Jackson2Mapper.addFilter("publicationFilter", new PublicationFilter());
     }
