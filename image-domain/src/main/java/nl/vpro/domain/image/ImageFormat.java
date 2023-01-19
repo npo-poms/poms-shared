@@ -7,6 +7,7 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.PolyNull;
 
 /**
  * Recognized image formats.
@@ -94,6 +95,11 @@ public enum ImageFormat {
 
     public String getFileExtension() {
         return name().toLowerCase();
+    }
+
+    @PolyNull
+    public static String getFileExtension(@PolyNull ImageFormat imageFormat) {
+        return imageFormat == null ? null : imageFormat.getFileExtension();
     }
 
     public boolean supportsAnimation() {

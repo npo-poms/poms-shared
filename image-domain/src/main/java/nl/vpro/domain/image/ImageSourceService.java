@@ -11,7 +11,7 @@ public class ImageSourceService {
     public <C extends ImageMetadataProvider> Map<ImageSource.Key, ImageSource> getSourceSet(C metadataProvider) {
         final SortedMap<ImageSource.Key, ImageSource> map = new TreeMap<>();
         services.forEach(creator -> {
-            for (ImageSource.Type type : ImageSource.Type.values()) {
+            for (ImageSource.Key type : ImageSource.Key.values()) {
                 creator.createFor(metadataProvider, type).ifPresent(imageSource -> {
                     map.put(imageSource.getKey(), imageSource);
                 });

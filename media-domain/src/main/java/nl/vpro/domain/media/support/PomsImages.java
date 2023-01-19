@@ -24,10 +24,10 @@ public class PomsImages {
     public static class Creator implements ImageSourceCreator {
 
         @Override
-        public Optional<ImageSource> createFor(ImageMetadataProvider provider, ImageSource.Type type) {
+        public Optional<ImageSource> createFor(ImageMetadataProvider provider, ImageSource.Key key) {
             if (provider instanceof ImageMetadataProvider.Wrapper) {
                 ImageMetadataProvider.Wrapper<?> pomsImageMetadata = (ImageMetadataProvider.Wrapper) provider;
-                final String transformation  = MAPPING.get(type);
+                final String transformation  = MAPPING.get(key.getType());
                 Dimension dimension;
                 try {
 
@@ -39,8 +39,13 @@ public class PomsImages {
                 final Dimension finalDim = dimension;
                 return pomsImageMetadata.unwrap(Image.class)
                     .map(i -> ImageSource.builder()
-                        .type(type)
-                        .url(ImageUrlServiceHolder.getInstance().getImageLocation(i.getImageUri(), null, transformation))
+                        .type(key.getType())
+                        .format(key.getFormat())
+                        .url(
+                            ImageUrlServiceHolder.getInstance().getImageLocation(
+                                i.getImageUri(),
+                                ImageFormat.getFileExtension(key.getFormat()), transformation)
+                        )
                         .dimension(finalDim)
                         .build()
                     );
