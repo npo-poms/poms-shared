@@ -4,6 +4,8 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.Comparator;
+import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -32,7 +34,7 @@ public class ImageSource implements Serializable {
 
     private final Type type;
 
-    private final ImageFormat imageFormat;
+    private final ImageFormat format;
 
     private final Dimension dimension;
 
@@ -53,7 +55,7 @@ public class ImageSource implements Serializable {
         Area areaOfInterest) {
         this.url = uri;
         this.type = type;
-        this.imageFormat = format;
+        this.format = format;
         this.dimension = dimension;
         this.areaOfInterest = areaOfInterest;
     }
@@ -73,7 +75,7 @@ public class ImageSource implements Serializable {
 
     @JsonIgnore
     public Key getKey() {
-        return new Key(type, imageFormat);
+        return new Key(type, format);
     }
 
     public enum Type {
@@ -84,6 +86,7 @@ public class ImageSource implements Serializable {
     }
 
     @EqualsAndHashCode
+    @Getter
     public static class Key implements Comparable<Key>, Serializable {
         private static final long serialVersionUID = 847885430222383460L;
 
@@ -110,7 +113,12 @@ public class ImageSource implements Serializable {
 
         @Override
         public int compareTo(Key o) {
-            return type.compareTo(o.type);
+            int compare = type.compareTo(o.type);
+            if (compare != 0) {
+                return compare;
+            }
+            return Objects.compare(format, o.format, Comparator.nullsFirst(Comparator.naturalOrder()));
         }
+
     }
 }

@@ -58,36 +58,45 @@ class ImageMetadataTest {
     @Test
     public void json() {
         Jackson2TestUtil.roundTripAndSimilar(image, "{\n" +
-            "    \"type\" : \"LOGO\",\n" +
-            "    \"title\" : \"foobar\",\n" +
-            "    \"height\" : 200,\n" +
-            "    \"width\" : 200,\n" +
-            "    \"sourceSet\" : {\n" +
-            "      \"THUMBNAIL\" : {\n" +
-            "        \"url\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
-            "        \"type\" : \"THUMBNAIL\",\n" +
-            "        \"dimension\" : {\n" +
-            "          \"width\" : 640,\n" +
-            "          \"height\" : 320\n" +
-            "        }\n" +
+            "  \"type\" : \"LOGO\",\n" +
+            "  \"title\" : \"foobar\",\n" +
+            "  \"height\" : 200,\n" +
+            "  \"width\" : 200,\n" +
+            "  \"sourceSet\" : {\n" +
+            "    \"THUMBNAIL\" : {\n" +
+            "      \"url\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
+            "      \"type\" : \"THUMBNAIL\",\n" +
+            "      \"dimension\" : {\n" +
+            "        \"width\" : 640,\n" +
+            "        \"height\" : 320\n" +
             "      }\n" +
             "    },\n" +
-            "    \"crids\" : [ \"urn:cinema:1234\" ],\n" +
-            "    \"areaOfInterest\" : {\n" +
-            "      \"lowerLeft\" : {\n" +
-            "        \"x\" : 10,\n" +
-            "        \"y\" : 20\n" +
-            "      },\n" +
-            "      \"upperRight\" : {\n" +
-            "        \"x\" : 100,\n" +
-            "        \"y\" : 120\n" +
+            "    \"THUMBNAIL_WEBP\" : {\n" +
+            "      \"url\" : \"https://www.vpro.nl/plaatje.webp\",\n" +
+            "      \"type\" : \"THUMBNAIL\",\n" +
+            "      \"format\" : \"WEBP\",\n" +
+            "      \"dimension\" : {\n" +
+            "        \"width\" : 640,\n" +
+            "        \"height\" : 320\n" +
             "      }\n" +
+            "    }\n" +
+            "  },\n" +
+            "  \"crids\" : [ \"urn:cinema:1234\" ],\n" +
+            "  \"areaOfInterest\" : {\n" +
+            "    \"lowerLeft\" : {\n" +
+            "      \"x\" : 10,\n" +
+            "      \"y\" : 20\n" +
             "    },\n" +
-            "    \"lastModified\" : 1650010800000,\n" +
-            "    \"creationDate\" : 1650010200000\n" +
-            "  }");
+            "    \"upperRight\" : {\n" +
+            "      \"x\" : 100,\n" +
+            "      \"y\" : 120\n" +
+            "    }\n" +
+            "  },\n" +
+            "  \"lastModified\" : 1650010800000,\n" +
+            "  \"creationDate\" : 1650010200000\n" +
+            "}");
 
-        assertThat(image.getSourceSet().toString()).isEqualTo("https://www.vpro.nl/plaatje.jpeg 640w");
+        assertThat(image.getSourceSet().toString()).isEqualTo("https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w");
     }
 
     @Test
@@ -98,7 +107,7 @@ class ImageMetadataTest {
             "    \"title\" : \"foobar\",\n" +
             "    \"height\" : 200,\n" +
             "    \"width\" : 200,\n" +
-            "    \"sourceSetString\" : \"https://www.vpro.nl/plaatje.jpeg 640w\",\n" +
+            "    \"sourceSetString\" : \"https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w\",\n" +
             "    \"crids\" : [ \"urn:cinema:1234\" ],\n" +
             "    \"areaOfInterest\" : {\n" +
             "      \"lowerLeft\" : {\n" +
@@ -132,9 +141,18 @@ class ImageMetadataTest {
             "        \"width\" : 640,\n" +
             "        \"height\" : 320\n" +
             "      }\n" +
+            "    },\n" +
+            "    \"THUMBNAIL_WEBP\" : {\n" +
+            "      \"url\" : \"https://www.vpro.nl/plaatje.webp\",\n" +
+            "      \"type\" : \"THUMBNAIL\",\n" +
+            "      \"format\" : \"WEBP\",\n" +
+            "      \"dimension\" : {\n" +
+            "        \"width\" : 640,\n" +
+            "        \"height\" : 320\n" +
+            "      }\n" +
             "    }\n" +
             "  },\n" +
-            "  \"sourceSetString\" : \"https://www.vpro.nl/plaatje.jpeg 640w\",\n" +
+            "  \"sourceSetString\" : \"https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w\",\n" +
             "  \"crids\" : [ \"urn:cinema:1234\" ],\n" +
             "  \"areaOfInterest\" : {\n" +
             "    \"lowerLeft\" : {\n" +
@@ -191,7 +209,7 @@ class ImageMetadataTest {
                 "            \"type\" : \"string\",\n" +
                 "            \"enum\" : [ \"THUMBNAIL\", \"MOBILE\", \"TABLET\", \"LARGE\" ]\n" +
                 "          },\n" +
-                "          \"imageFormat\" : {\n" +
+                "          \"format\" : {\n" +
                 "            \"type\" : \"string\",\n" +
                 "            \"enum\" : [ \"BMP\", \"GIF\", \"IEF\", \"IFF\", \"JPG\", \"JFIF\", \"PNG\", \"PBM\", \"PGM\", \"PNM\", \"PPM\", \"SVG\", \"RAS\", \"RGB\", \"TIF\", \"XBM\", \"XPM\", \"WEBP\" ]\n" +
                 "          },\n" +

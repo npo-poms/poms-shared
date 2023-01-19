@@ -167,7 +167,7 @@ public class ImageMetadataImpl implements ImageMetadata {
 
         public Builder imageSource(ImageSource... source) {
             for (ImageSource s : source) {
-                _sourceSet.put(new ImageSource.Key(s.getType(), s.getImageFormat()), s);
+                _sourceSet.put(new ImageSource.Key(s.getType(), s.getFormat()), s);
             }
             return this;
         }
