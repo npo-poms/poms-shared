@@ -22,8 +22,6 @@ import nl.vpro.validation.CRID;
 import nl.vpro.validation.URI;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
-import static nl.vpro.domain.image.ImageSource.Type;
-
 
 /**
  * This is the basic image presentation at VPRO. It implements {@link ImageMetadata}
@@ -95,7 +93,7 @@ public class ImageMetadataImpl implements ImageMetadata {
         Integer width,
         Instant lastModifiedInstant,
         Instant creationInstant,
-        Map<Type, ImageSource> sourceSet,
+        Map<ImageSource.Key, ImageSource> sourceSet,
         List<@CRID String> crids,
         @Nullable Area areaOfInterest) {
 
@@ -140,11 +138,11 @@ public class ImageMetadataImpl implements ImageMetadata {
     @JsonPOJOBuilder(withPrefix = "")
     public static class Builder implements LombokBuilder<Builder> {
 
-        private final Map<Type, ImageSource> _sourceSet = new TreeMap<>();
+        private final Map<ImageSource.Key, ImageSource> _sourceSet = new TreeMap<>();
 
         private final List<String> crid = new ArrayList<>();
 
-        public Builder addSourceSet(Map<Type, ImageSource> sourceSet){
+        public Builder addSourceSet(Map<ImageSource.Key, ImageSource> sourceSet){
             if (sourceSet != null) {
                 _sourceSet.putAll(sourceSet);
             }
@@ -169,7 +167,7 @@ public class ImageMetadataImpl implements ImageMetadata {
 
         public Builder imageSource(ImageSource... source) {
             for (ImageSource s : source) {
-                _sourceSet.put(s.getType(), s);
+                _sourceSet.put(new ImageSource.Key(s.getType(), s.getImageFormat()), s);
             }
             return this;
         }

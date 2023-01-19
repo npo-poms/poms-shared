@@ -5,6 +5,9 @@ import lombok.*;
 import java.io.Serializable;
 import java.net.URI;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
@@ -29,6 +32,8 @@ public class ImageSource implements Serializable {
 
     private final Type type;
 
+    private final ImageFormat imageFormat;
+
     private final Dimension dimension;
 
     private final Area areaOfInterest;
@@ -43,10 +48,12 @@ public class ImageSource implements Serializable {
     private  ImageSource(
         java.net.URI uri,
         Type type,
+        ImageFormat format,
         Dimension dimension,
         Area areaOfInterest) {
         this.url = uri;
         this.type = type;
+        this.imageFormat = format;
         this.dimension = dimension;
         this.areaOfInterest = areaOfInterest;
     }
@@ -64,10 +71,46 @@ public class ImageSource implements Serializable {
 
     }
 
+    @JsonIgnore
+    public Key getKey() {
+        return new Key(type, imageFormat);
+    }
+
     public enum Type {
         THUMBNAIL,
         MOBILE,
         TABLET,
         LARGE
+    }
+
+    @EqualsAndHashCode
+    public static class Key implements Comparable<Key>, Serializable {
+        private static final long serialVersionUID = 847885430222383460L;
+
+        final Type type;
+        final ImageFormat format;
+
+        public Key(Type type, @Nullable ImageFormat format) {
+            this.type = type;
+            this.format = format;
+        }
+        @JsonCreator
+        public Key(String key) {
+            String[] split = key.split("_", 2);
+            type = Type.valueOf(split[0]);
+            format = split.length > 1 ? ImageFormat.valueOf(split[1]) : null;
+        }
+
+
+        @JsonValue
+        @Override
+        public String toString() {
+            return (type.name() + (format == null ? "" : ("_" + format.name())));
+        }
+
+        @Override
+        public int compareTo(Key o) {
+            return type.compareTo(o.type);
+        }
     }
 }

@@ -22,7 +22,7 @@ public interface ImageMetadataProvider {
     @NonNull
     default ImageMetadata toImageMetadataWithSourceSet() {
         final ImageMetadata imageMetadata = toImageMetadata();
-        final Map<ImageSource.Type, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(this);
+        final Map<ImageSource.Key, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(this);
         ImageMetadataImpl.Builder builder =  ImageMetadataImpl.builder()
             .from(toImageMetadata())
             .addSourceSet(sourceSet);

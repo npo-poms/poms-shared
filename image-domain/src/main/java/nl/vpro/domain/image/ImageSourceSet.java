@@ -5,18 +5,22 @@ import java.util.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize
-public class ImageSourceSet extends AbstractMap<ImageSource.Type, ImageSource> {
+public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
 
-    final Map<ImageSource.Type, ImageSource> imageSources = new TreeMap<>();
+    final Map<ImageSource.Key, ImageSource> imageSources = new TreeMap<>();
 
     @Override
-    public Set<Entry<ImageSource.Type, ImageSource>> entrySet() {
+    public Set<Entry<ImageSource.Key, ImageSource>> entrySet() {
         return imageSources.entrySet();
     }
 
     @Override
-    public ImageSource put(ImageSource.Type type, ImageSource source) {
+    public ImageSource put(ImageSource.Key type, ImageSource source) {
         return imageSources.put(type, source);
+    }
+
+    public ImageSource put(ImageSource.Type type, ImageSource source) {
+        return put(new ImageSource.Key(type,null), source);
     }
 
     @Override

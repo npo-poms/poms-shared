@@ -31,7 +31,17 @@ class ImageMetadataTest {
         .creationInstant(LocalDateTime.of(2022, 4, 15, 10, 10, 0).atZone(ZONE_ID).toInstant())
         .lastModifiedInstant(LocalDateTime.of(2022, 4, 15, 10, 20, 0).atZone(ZONE_ID).toInstant())
         .type(ImageType.LOGO)
-        .imageSource(thumbNail("https://www.vpro.nl/plaatje.jpeg").dimension(Dimension.of(640, 320)).build())
+        .imageSource(
+            thumbNail("https://www.vpro.nl/plaatje.jpeg")
+                .dimension(Dimension.of(640, 320))
+                .build()
+        )
+        .imageSource(
+            thumbNail("https://www.vpro.nl/plaatje.webp")
+                .dimension(Dimension.of(640, 320))
+                .format(ImageFormat.WEBP)
+                .build()
+        )
         .areaOfInterest(new Area(10, 20, 100, 120))
         .dimensions(200, 200)
         .crid("urn:cinema:1234")
@@ -162,24 +172,6 @@ class ImageMetadataTest {
                 "    \"title\" : {\n" +
                 "      \"type\" : \"string\"\n" +
                 "    },\n" +
-                "    \"description\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"alternative\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"license\" : {\n" +
-                "      \"type\" : \"any\"\n" +
-                "    },\n" +
-                "    \"source\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"sourceName\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"credits\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
                 "    \"height\" : {\n" +
                 "      \"type\" : \"integer\"\n" +
                 "    },\n" +
@@ -198,6 +190,10 @@ class ImageMetadataTest {
                 "          \"type\" : {\n" +
                 "            \"type\" : \"string\",\n" +
                 "            \"enum\" : [ \"THUMBNAIL\", \"MOBILE\", \"TABLET\", \"LARGE\" ]\n" +
+                "          },\n" +
+                "          \"imageFormat\" : {\n" +
+                "            \"type\" : \"string\",\n" +
+                "            \"enum\" : [ \"BMP\", \"GIF\", \"IEF\", \"IFF\", \"JPG\", \"JFIF\", \"PNG\", \"PBM\", \"PGM\", \"PNM\", \"PPM\", \"SVG\", \"RAS\", \"RGB\", \"TIF\", \"XBM\", \"XPM\", \"WEBP\" ]\n" +
                 "          },\n" +
                 "          \"dimension\" : {\n" +
                 "            \"type\" : \"object\",\n" +
@@ -248,6 +244,24 @@ class ImageMetadataTest {
                 "    },\n" +
                 "    \"lastModified\" : {\n" +
                 "      \"type\" : \"any\"\n" +
+                "    },\n" +
+                "    \"description\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"alternative\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"license\" : {\n" +
+                "      \"type\" : \"any\"\n" +
+                "    },\n" +
+                "    \"source\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"sourceName\" : {\n" +
+                "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"credits\" : {\n" +
+                "      \"type\" : \"string\"\n" +
                 "    },\n" +
                 "    \"creationDate\" : {\n" +
                 "      \"type\" : \"any\"\n" +
