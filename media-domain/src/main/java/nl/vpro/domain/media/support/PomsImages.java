@@ -22,6 +22,7 @@ public class PomsImages {
         mapping.put(ImageSource.Type.MOBILE, "s414");
         mapping.put(ImageSource.Type.TABLET, "s1024>");
         mapping.put(ImageSource.Type.LARGE, "s2048>");
+        // TODO: FixedSizeMap 0.10 (not yet released) has nicer constructors.
         MAPPING = new FixedSizeMap<>(mapping);
     }
 
