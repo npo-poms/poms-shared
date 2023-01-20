@@ -115,9 +115,13 @@ public class ImageSource implements Serializable {
 
 
         @JsonValue
+        public String name() {
+            return (type.name() + (format == null ? "" : ("_" + format.name())));
+        }
+
         @Override
         public String toString() {
-            return (type.name() + (format == null ? "" : ("_" + format.name())));
+            return name();
         }
 
         @Override
