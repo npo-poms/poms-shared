@@ -71,6 +71,10 @@ public class ImageSource implements Serializable {
         public Builder url(@ImageURL String uri) {
             return uri(URI.create(uri));
         }
+        public Builder key(Key key) {
+            return type(key.getType())
+                .format(key.getFormat());
+        }
 
     }
 
