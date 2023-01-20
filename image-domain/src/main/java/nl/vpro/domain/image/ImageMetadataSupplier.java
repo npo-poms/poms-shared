@@ -20,7 +20,7 @@ public interface ImageMetadataSupplier {
 
 
     @NonNull
-    default ImageMetadata toImageMetadataWithSourceSet() {
+    default ImageMetadata getImageMetadataWithSourceSet() {
         final ImageMetadata imageMetadata = getImageMetadata();
         final Map<ImageSource.Key, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(this);
         ImageMetadataImpl.Builder builder =  ImageMetadataImpl.builder()
@@ -32,7 +32,7 @@ public interface ImageMetadataSupplier {
     /**
      * This has to be implemented,
      * <p>
-     * Normally when using you should call {@link #toImageMetadataWithSourceSet() , which will also add  (extra)  {@link ImageMetadata#getSourceSet()} via {@link ImageSourceService}.
+     * Normally when using you should call {@link #getImageMetadataWithSourceSet() , which will also add  (extra)  {@link ImageMetadata#getSourceSet()} via {@link ImageSourceService}.
      */
     @NonNull
     ImageMetadata getImageMetadata();
