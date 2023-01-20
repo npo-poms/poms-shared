@@ -7,7 +7,9 @@ public interface ImageMetadataProvider extends ImageMetadataSupplier {
 
     @NonNull
     @Deprecated
-    ImageMetadata toImageMetadataWithSourceSet();
+    default ImageMetadata toImageMetadataWithSourceSet() {
+        return ImageMetadataSupplier.super.getImageMetadataWithSourceSet();
+    }
 
     @Override
     @NonNull
