@@ -34,9 +34,9 @@ public class PomsImages {
             if (provider instanceof ImageMetadataProvider.Wrapper) {
                 ImageMetadataProvider.Wrapper<?> pomsImageMetadata = (ImageMetadataProvider.Wrapper<?>) provider;
                 final String transformation  = MAPPING.get(key.getType());
+                Dimension existingDimension = pomsImageMetadata.getWrapped().getDimension();
                 Dimension dimension;
                 try {
-
                     dimension = Dimension.of(Integer.parseInt(transformation.substring(1)), null);
                 } catch (Exception e) {
                     log.warn("Couldn't parse dimension from {}", transformation);
