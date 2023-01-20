@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.domain.image.ImageMetadata;
-import nl.vpro.domain.image.ImageMetadataProvider;
+import nl.vpro.domain.image.ImageMetadataSupplier;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
@@ -41,7 +41,7 @@ class PomsImagesTest {
             "      \"lastModified\": 1639275163526,\n" +
             "      \"urn\": \"urn:vpro:media:image:122414908\"\n" +
             "    }", Image.class);
-        ImageMetadata imageMetadata = ImageMetadataProvider.of(support).toImageMetadataWithSourceSet();
+        ImageMetadata imageMetadata = ImageMetadataSupplier.of(support).toImageMetadataWithSourceSet();
         Jackson2TestUtil.roundTripAndSimilarAndEquals(imageMetadata, "{\n" +
             "  \"type\" : \"STILL\",\n" +
             "  \"title\" : \"2Doc:\",\n" +

@@ -13,18 +13,18 @@ import org.checkerframework.checker.nullness.qual.PolyNull;
  * <p>
  * There are a lot of image objects lying around which cannot directly implements one of these, because of conflicting methods.
  * <p>
- * So, at least they can implement this, and have {@link #toImageMetadata()}.
+ * So, at least they can implement this, and have {@link #getImageMetadata()}.
  *
  */
-public interface ImageMetadataProvider {
+public interface ImageMetadataSupplier {
 
 
     @NonNull
     default ImageMetadata toImageMetadataWithSourceSet() {
-        final ImageMetadata imageMetadata = toImageMetadata();
+        final ImageMetadata imageMetadata = getImageMetadata();
         final Map<ImageSource.Key, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(this);
         ImageMetadataImpl.Builder builder =  ImageMetadataImpl.builder()
-            .from(toImageMetadata())
+            .from(getImageMetadata())
             .addSourceSet(sourceSet);
         return builder.build();
     }
@@ -35,7 +35,7 @@ public interface ImageMetadataProvider {
      * Normally when using you should call {@link #toImageMetadataWithSourceSet() , which will also add  (extra)  {@link ImageMetadata#getSourceSet()} via {@link ImageSourceService}.
      */
     @NonNull
-    ImageMetadata toImageMetadata();
+    ImageMetadata getImageMetadata();
 
 
     @PolyNull
@@ -54,7 +54,7 @@ public interface ImageMetadataProvider {
      * This e.g. is useful for poms images {@link nl.vpro.domain.media.support.Image} and {@link nl.vpro.domain.page.Image}, which are presently not yet implementing {@link ImageMetadata}
      * Imp
      */
-    class Wrapper<W extends Metadata<W>> implements ImageMetadataProvider {
+    class Wrapper<W extends Metadata<W>> implements ImageMetadataSupplier {
 
         @Getter
         final W wrapped;
@@ -65,7 +65,7 @@ public interface ImageMetadataProvider {
 
         @Override
         @NonNull
-        public ImageMetadata toImageMetadata() {
+        public ImageMetadata getImageMetadata() {
             return ImageMetadataImpl.builder()
                 .from(this.wrapped)
                 .build();

@@ -29,8 +29,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.*;
-import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.image.MutableMetadata;
+import nl.vpro.domain.image.*;
 import nl.vpro.domain.image.backend.BackendImageMetadata;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.support.License;

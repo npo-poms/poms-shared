@@ -2,13 +2,20 @@ package nl.vpro.domain.image;
 
 import java.util.*;
 
+/**
+ * Wrapper for the {@link ImageSourceCreator} {@link ServiceLoader}.
+ *
+ */
 public class ImageSourceService {
 
     public static final ImageSourceService INSTANCE = new ImageSourceService();
 
     private final ServiceLoader<ImageSourceCreator> services = ServiceLoader.load(ImageSourceCreator.class);
 
-    public <C extends ImageMetadataProvider> Map<ImageSource.Key, ImageSource> getSourceSet(C metadataProvider) {
+    /**
+     *
+     */
+    public Map<ImageSource.Key, ImageSource> getSourceSet(ImageMetadataSupplier metadataProvider) {
         final SortedMap<ImageSource.Key, ImageSource> map = new TreeMap<>();
         services.forEach(creator -> {
             for (ImageSource.Key key : ImageSource.Key.values()) {

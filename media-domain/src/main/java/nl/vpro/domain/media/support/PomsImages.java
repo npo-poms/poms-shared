@@ -30,9 +30,9 @@ public class PomsImages {
 
 
         @Override
-        public Optional<ImageSource> createFor(ImageMetadataProvider provider, ImageSource.Key key) {
-            if (provider instanceof ImageMetadataProvider.Wrapper) {
-                ImageMetadataProvider.Wrapper<?> pomsImageMetadata = (ImageMetadataProvider.Wrapper<?>) provider;
+        public Optional<ImageSource> createFor(ImageMetadataSupplier provider, ImageSource.Key key) {
+            if (provider instanceof ImageMetadataSupplier.Wrapper) {
+                ImageMetadataSupplier.Wrapper<?> pomsImageMetadata = (ImageMetadataSupplier.Wrapper<?>) provider;
                 final String transformation  = MAPPING.get(key.getType());
                 Dimension existingDimension = pomsImageMetadata.getWrapped().getDimension();
                 Dimension dimension;
