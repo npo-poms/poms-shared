@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
+import org.meeuw.configuration.FixedSizeMap;
+
 import nl.vpro.domain.image.*;
 
 /**
@@ -13,20 +15,23 @@ import nl.vpro.domain.image.*;
 public class PomsImages {
 
 
-    private static final Map<ImageSource.Type, String> MAPPING = new HashMap<>();
+    private static final Map<ImageSource.Type, String> MAPPING;
     static {
-        MAPPING.put(ImageSource.Type.THUMBNAIL, "s100");
-        MAPPING.put(ImageSource.Type.MOBILE, "s200");
-        MAPPING.put(ImageSource.Type.TABLET, "s300");
-        MAPPING.put(ImageSource.Type.LARGE, "s400");
+        Map<ImageSource.Type, String> mapping = new HashMap<>();
+        mapping.put(ImageSource.Type.THUMBNAIL, "s100");
+        mapping.put(ImageSource.Type.MOBILE, "s414");
+        mapping.put(ImageSource.Type.TABLET, "s1024>");
+        mapping.put(ImageSource.Type.LARGE, "s2048>");
+        MAPPING = new FixedSizeMap<>(mapping);
     }
 
     public static class Creator implements ImageSourceCreator {
 
+
         @Override
         public Optional<ImageSource> createFor(ImageMetadataProvider provider, ImageSource.Key key) {
             if (provider instanceof ImageMetadataProvider.Wrapper) {
-                ImageMetadataProvider.Wrapper<?> pomsImageMetadata = (ImageMetadataProvider.Wrapper) provider;
+                ImageMetadataProvider.Wrapper<?> pomsImageMetadata = (ImageMetadataProvider.Wrapper<?>) provider;
                 final String transformation  = MAPPING.get(key.getType());
                 Dimension dimension;
                 try {
