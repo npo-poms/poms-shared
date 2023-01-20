@@ -7,8 +7,17 @@ import java.util.Optional;
  */
 public interface ImageSourceCreator {
 
+
+
+    @Deprecated
+    default Optional<ImageSource> createFor(ImageMetadataProvider provider, ImageSource.Type type) {
+        return createFor(provider, new ImageSource.Key(type, null));
+    }
+
     /**
      * Given a source for image meta and a desired 'type' try to create {@link ImageSource} (basically a URL) for it.
      */
-    Optional<ImageSource> createFor(ImageMetadataProvider provider, ImageSource.Key type);
+    default Optional<ImageSource> createFor(ImageMetadataProvider provider, ImageSource.Key type) {
+        return createFor(provider, type.getType());
+    }
 }
