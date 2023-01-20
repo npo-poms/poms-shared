@@ -7,8 +7,12 @@ public interface ImageMetadataProvider extends ImageMetadataSupplier {
 
     @NonNull
     @Deprecated
-    default ImageMetadata toImageMetadataWithSourceSet() {
-        return getImageMetadataWithSourceSet();
+    ImageMetadata toImageMetadataWithSourceSet();
+
+    @Override
+    @NonNull
+    default ImageMetadata getImageMetadataWithSourceSet() {
+        return toImageMetadataWithSourceSet();
     }
 
     /**
@@ -18,8 +22,12 @@ public interface ImageMetadataProvider extends ImageMetadataSupplier {
      */
     @NonNull
     @Deprecated
-    default ImageMetadata toImageMetadata() {
-        return getImageMetadata();
+    ImageMetadata toImageMetadata();
+
+    @Override
+    @NonNull
+    default ImageMetadata getImageMetadata() {
+        return toImageMetadata();
     }
 
 }
