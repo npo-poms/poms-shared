@@ -62,6 +62,10 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
 
     Integer getWidth();
 
+    default Dimension getDimension(){
+        return Dimension.of(getWidth(), getHeight());
+    }
+
     /**
      * @since 5.34
      */
