@@ -5,6 +5,7 @@ import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.annotations.Beta;
 
@@ -62,6 +63,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
 
     Integer getWidth();
 
+    @JsonIgnore
     default Dimension getDimension(){
         return Dimension.of(getWidth(), getHeight());
     }
