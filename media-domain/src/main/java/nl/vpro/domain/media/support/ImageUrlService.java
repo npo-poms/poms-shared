@@ -96,6 +96,8 @@ public interface ImageUrlService {
      * Resolves a web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
      * obtain a base url for an image host.
      *
+     * @param id The id of the image (on the image server). Note that is <em>not</em> {@link Image#getId()}. See {@link #getImageLocation(String, String, boolean, String...)}, which accepts {@link Image#getImageUri()}
+     *
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri id.
      */
@@ -118,6 +120,9 @@ public interface ImageUrlService {
         return builder.toString();
     }
 
+    /**
+     * Defaulting version of {@link #getImageLocation(Long, String, boolean, String...)} (with {@code true})
+     */
     default String getImageLocation(@NonNull Long  id , @Nullable String fileExtension, String... conversions) {
         return getImageLocation(id, fileExtension, true, conversions);
     }
