@@ -89,7 +89,11 @@ public interface ImageUrlService {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder builder = new StringBuilder(imageServerBaseUrl);
         for (String conversion : conversions) {
-            builder.append(URLPathEncode.encode(conversion));
+            if (encode) {
+                builder.append(URLPathEncode.encode(conversion));
+            } else {
+                builder.append(conversion);
+            }
             builder.append('/');
         }
         builder.append(id);
