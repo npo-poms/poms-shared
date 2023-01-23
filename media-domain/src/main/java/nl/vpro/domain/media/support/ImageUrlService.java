@@ -69,18 +69,34 @@ public interface ImageUrlService {
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri
      */
-    default String getImageLocation(@NonNull String uri , @Nullable String fileExtension, String... conversions) {
-        Long id = getIdFromImageUri(uri);
-        if (id == null) {
-            return null;
-        }
-        return getImageLocation(id, fileExtension, conversions);
+    @PolyNull
+    default String getImageLocation(@PolyNull String uri , @Nullable String fileExtension, String... conversions) {
+        return getImageLocation(uri, fileExtension, true, conversions);
     }
 
 
     /**
-     * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
+     * Resolves a web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
      * obtain a base url for an image host.
+     *
+     * @return valid url string or null if it can't resolve a location
+     * @since 7.2
+     */
+    @PolyNull
+    default String getImageLocation(@PolyNull String uri ,  @Nullable String fileExtension, boolean encode, String... conversions) {
+        Long id = getIdFromImageUri(uri);
+        if (id == null) {
+            return null;
+        }
+        return getImageLocation(id,  fileExtension, encode,  conversions);
+    }
+
+
+    /**
+     * Resolves a web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
+     * obtain a base url for an image host.
+     *
+     * @param id The id of the image (on the image server). Note that is <em>not</em> {@link Image#getId()}. See {@link #getImageLocation(String, String, boolean, String...)}, which accepts {@link Image#getImageUri()}
      *
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri id.
@@ -89,7 +105,11 @@ public interface ImageUrlService {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder builder = new StringBuilder(imageServerBaseUrl);
         for (String conversion : conversions) {
-            builder.append(URLPathEncode.encode(conversion));
+            if (encode) {
+                builder.append(URLPathEncode.encode(conversion));
+            } else {
+                builder.append(conversion);
+            }
             builder.append('/');
         }
         builder.append(id);
@@ -100,6 +120,9 @@ public interface ImageUrlService {
         return builder.toString();
     }
 
+    /**
+     * Defaulting version of {@link #getImageLocation(Long, String, boolean, String...)} (with {@code true})
+     */
     default String getImageLocation(@NonNull Long  id , @Nullable String fileExtension, String... conversions) {
         return getImageLocation(id, fileExtension, true, conversions);
     }
