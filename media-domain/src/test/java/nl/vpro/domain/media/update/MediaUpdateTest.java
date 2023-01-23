@@ -18,9 +18,4 @@ public abstract class MediaUpdateTest {
             new VideoAttributesUpdate(320, 180));
     }
 
-
-
-
-
-
 }

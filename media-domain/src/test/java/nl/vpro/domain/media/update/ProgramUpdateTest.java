@@ -41,8 +41,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             MediaBuilder.program(ProgramType.CLIP)
                 .mainTitle("foobar")
                 .id(123L)
+                .locations("https://vpro.nl/bla1.mp4")
                 .build()
-            , OwnerType.AUTHORITY, IntegerVersion.of(5, 31, 0));
+            , OwnerType.BROADCASTER, IntegerVersion.of(5, 31, 0));
         assertThat(pu.warningViolations().toString()).contains("ageRating");
         assertThat(pu.getVersionAttribute()).isEqualTo("5.31.0");
         assertThat(pu.isBefore(5, 30)).isFalse();
@@ -74,7 +75,11 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(pu.fetch().getWebsites()).containsExactly(new Website("https://meeuw.org", OwnerType.BROADCASTER));
 
 
+        Program fetch = pu.fetch(OwnerType.AUTHORITY);
 
+        assertThat(fetch.getLocations().stream().map(Location::getProgramUrl))  .containsExactly("https://vpro.nl/bla1.mp4");
+
+        assertThat(fetch.getLocations().first().getOwner()).isEqualTo(OwnerType.AUTHORITY);
     }
 
     @Test
@@ -1157,8 +1162,6 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "</program>");
 
     }
-
-    @Test
 
 
     protected ProgramUpdate programUpdate() {
