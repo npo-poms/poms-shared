@@ -78,6 +78,11 @@ public interface ImageMetadataSupplier {
                 return Optional.empty();
             }
         }
+
+        @Override
+        public String toString() {
+            return "supplier[" + wrapped + "]";
+        }
     }
 
 }

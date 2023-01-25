@@ -1,7 +1,6 @@
 package nl.vpro.domain.media.support;
 
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -10,28 +9,12 @@ import javax.inject.Named;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public class AbsoluteImageUrlServiceImpl implements ImageUrlService {
-
-    protected final String imageServerBaseUrl;
+public class AbsoluteImageUrlServiceImpl extends nl.vpro.domain.image.AbsoluteImageUrlServiceImpl implements ImageUrlService {
 
     @Inject
     public AbsoluteImageUrlServiceImpl(
         @Named("image_frontend.baseUrl") String imageServerBaseUrl) {
-        this.imageServerBaseUrl = imageServerBaseUrl;
+        super(imageServerBaseUrl);
     }
 
-    @PostConstruct
-    public void init() {
-        ImageUrlServiceHolder.setInstance(this);
-    }
-
-    @Override
-    public String getImageBaseUrl() {
-        return imageServerBaseUrl;
-    }
-
-    @Override
-    public String toString() {
-        return imageServerBaseUrl + "<image>";
-    }
 }

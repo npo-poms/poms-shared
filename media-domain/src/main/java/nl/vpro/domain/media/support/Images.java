@@ -25,7 +25,7 @@ public class Images {
     }
 
     /**
-     * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
+     * Resolves a web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
      * obtain a base url for an image host.
      *
      * @return valid url string or null if it can't resolve a location

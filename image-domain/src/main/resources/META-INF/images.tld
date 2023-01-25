@@ -1,0 +1,13 @@
+<taglib
+  version="2.0" xmlns="http://java.sun.com/xml/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.2</jsp-version>
+    <short-name>image tags</short-name>
+
+    <uri>https://github.com/npo-poms/poms-shared/tags/images</uri>
+    <tag-file>
+        <name>picture</name>
+        <path>/META-INF/tags/images/picture.tagx</path>
+    </tag-file>
+</taglib>

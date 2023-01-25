@@ -18,7 +18,7 @@ public class ImageSourceService {
     /**
      *
      */
-    public Map<ImageSource.Key, ImageSource> getSourceSet(ImageMetadataSupplier metadataProvider) {
+    public ImageSourceSet getSourceSet(ImageMetadataSupplier metadataProvider) {
         final SortedMap<ImageSource.Key, ImageSource> map = new TreeMap<>();
         services.forEach(creator -> {
             for (ImageSource.Key key : ImageSource.Key.values()) {
@@ -30,6 +30,6 @@ public class ImageSourceService {
                 };
             }
         });
-        return Collections.unmodifiableMap(map);
+        return new ImageSourceSet(map);
     }
 }

@@ -1,0 +1,37 @@
+<jsp:root
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	version="2.0"
+>
+	<jsp:directive.tag import="nl.vpro.domain.image.ImageFormat"/>
+	<jsp:directive.tag import="java.util.Map"/>
+	<jsp:directive.tag
+		display-name="picture"
+		description="HTML 5 picture tag"
+	/>
+	<jsp:directive.attribute
+		name="image"
+		rtexprvalue="true"
+		type="nl.vpro.domain.image.ImageMetadataSupplier"
+		description="imagemeta" required="true" />
+
+	<jsp:directive.attribute
+		name="style"
+		rtexprvalue="true"
+		type="java.lang.String"
+		required="false" />
+
+	<picture>
+		<!-- scriptlet to void needing jstl -->
+		  <jsp:scriptlet><![CDATA[
+				for (Map.Entry<ImageFormat, String> e : image.getImageMetadataWithSourceSet().getSourceSet().getSourceSrcs().entrySet()) {
+				request.setAttribute("e", e);
+				]]>
+			</jsp:scriptlet>
+		<source type="${e.key.mimeType"
+						srcset="${e.value}" />
+		<jsp:scriptlet>}</jsp:scriptlet>
+		<img style="${style}" src="${image.imageMetadataWithSourceSet.sourceSet.defaultImageSource}" />
+
+
+	</picture>
+</jsp:root>

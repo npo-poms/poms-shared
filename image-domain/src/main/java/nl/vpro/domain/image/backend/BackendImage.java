@@ -77,10 +77,11 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder", buildMethodName= "_build")
 @Slf4j
-public class BackendImage extends AbstractPublishableObject<BackendImage> implements BackendImageMetadata<BackendImage>, Identifiable<Long>, Serializable,MutableOwnable {
+public class BackendImage extends AbstractPublishableObject<BackendImage> implements BackendImageMetadata<BackendImage>, Identifiable<Long>, Serializable, MutableOwnable {
     private static final long serialVersionUID = -140942203904508506L;
 
     public static final String BASE_URN = "urn:vpro:image:";
+
 
     public static class Builder {
         private Editor createdBy;

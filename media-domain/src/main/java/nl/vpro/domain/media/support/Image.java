@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.*;
@@ -357,13 +359,11 @@ public class Image extends PublishableObject<Image>
     }
 
 
-
-
     /**
      * The 'uri' of the image on the image server
      * This means a string of the form urn:vpro:image:&lt;id&gt;
      * where id is the database id of the image in the image database.
-     *
+     * <p>
      * Several image may share this image uri, if they represent the exact same image
      * (but may vary in meta data)
      *
@@ -376,6 +376,29 @@ public class Image extends PublishableObject<Image>
     public Image setImageUri(String uri) {
         this.imageUri = uri == null ? null : uri.trim();
         return this;
+    }
+
+    public Long getImageId() {
+        return getIdFromImageUri(imageUri);
+    }
+
+    @Nullable
+    public static Long getIdFromImageUri(@Nullable String imageUri) {
+
+        if (imageUri == null) {
+            return null;
+        }
+        Matcher matcher = Image.SERVER_URI_PATTERN.matcher(imageUri);
+        if(!matcher.find()) {
+            return null;
+        }
+
+        String id = matcher.group(1);
+
+        if(StringUtils.isEmpty(id)) {
+            return null;
+        }
+        return Long.parseLong(id);
     }
 
 
