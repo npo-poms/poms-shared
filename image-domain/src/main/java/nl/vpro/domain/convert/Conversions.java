@@ -27,11 +27,16 @@ public class Conversions {
     static {
         Map<ImageSource.Key, String[]> mapping = new HashMap<>();
         mapping.put(webp(THUMBNAIL), new String[] {"s100"});
-        mapping.put(webp(MOBILE), new String[] {"s414"});
-        mapping.put(webp(TABLET), new String[] {"s1024>"});
-        mapping.put(webp(LARGE),  new String[] {"s2048>"});
+        mapping.put(webp(MOBILE_HALF), new String[] {"s160"});
+        mapping.put(webp(MOBILE), new String[] {"s320"});
+        mapping.put(webp(MOBILE_2), new String[] {"s640"});
+        mapping.put(webp(MOBILE_3), new String[] {"s960"});
+        mapping.put(webp(TABLET), new String[] {"s1280>"});
+        mapping.put(webp(TABLET_2), new String[] {"s1440>"});
+        mapping.put(webp(TABLET_3), new String[] {"s1920>"});
+        mapping.put(webp(LARGE),  new String[] {"s2540>"});
 
-        mapping.put(jpeg(LARGE),  new String[] {"s414"});
+        mapping.put(jpeg(MOBILE),  new String[] {"s640"});
 
         MAPPING = new FixedSizeMap<>(mapping);
     }
