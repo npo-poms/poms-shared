@@ -1,0 +1,11 @@
+/*
+ * Copyright (C) 2023 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.convert;
+
+public interface DynamicProfile<O> extends Profile<O> {
+
+
+
+}

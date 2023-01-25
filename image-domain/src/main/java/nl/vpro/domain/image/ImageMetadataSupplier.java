@@ -14,6 +14,9 @@ import org.checkerframework.checker.nullness.qual.PolyNull;
  * There are a lot of image objects lying around which cannot directly implements one of these, because of conflicting methods.
  * <p>
  * So, at least they can implement this, and have {@link #getImageMetadata()}.
+ * <p>
+ *
+ *
  *
  */
 public interface ImageMetadataSupplier {

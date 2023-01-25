@@ -21,7 +21,7 @@
 		required="false" />
 
 	<picture>
-		<!-- scriptlet to void needing jstl -->
+		<!-- scriptlet to avoid needing jstl -->
 		  <jsp:scriptlet><![CDATA[
 				for (Map.Entry<ImageFormat, String> e : image.getImageMetadataWithSourceSet().getSourceSet().getSourceSrcs().entrySet()) {
 				request.setAttribute("e", e);
