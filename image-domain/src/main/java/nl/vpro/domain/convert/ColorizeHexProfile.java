@@ -12,7 +12,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 /**
  *
  */
-public interface ColorizeHexProfile extends DynamicProfile<Matcher> {
+public interface ColorizeHexProfile extends ParameterizedProfile<Matcher> {
 
     Pattern COLORIZE_HEX = Pattern.compile("^ch([\\dA-F]{2})([\\dA-F]{2})([\\dA-F]{2})$");
 

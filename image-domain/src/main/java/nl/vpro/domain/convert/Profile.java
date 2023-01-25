@@ -33,7 +33,7 @@ public interface Profile<O> extends Predicate<String> {
      * Some conversions may change the dimensions of an image
      *
      */
-    default Dimension convertedDimension(O s, Dimension in) {
+    default Dimension convertedDimension(Object s, Dimension in) {
         return in;
     }
 

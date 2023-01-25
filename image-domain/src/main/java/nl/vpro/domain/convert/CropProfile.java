@@ -6,7 +6,7 @@ package nl.vpro.domain.convert;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public interface CropProfile extends DynamicProfile<Geometry> {
+public interface CropProfile extends ParameterizedProfile<Geometry> {
 
 
     int getMaxSize();
@@ -21,9 +21,6 @@ public interface CropProfile extends DynamicProfile<Geometry> {
         String arg = request.substring(1);
         Geometry geometry = Geometry.compile(arg, getMaxSize());
 
-        if(!geometry.matches()) {
-            return new TestResult<>(false, geometry);
-        }
-        return new TestResult<>(true, geometry);
+        return new TestResult<>(geometry.matches(), geometry);
     }
 }

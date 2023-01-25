@@ -8,7 +8,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.image.Dimension;
 
-public interface ResizeProfile extends DynamicProfile<Geometry> {
+public interface ResizeProfile extends ParameterizedProfile<Geometry> {
 
     int getMaxSize();
 
@@ -21,15 +21,18 @@ public interface ResizeProfile extends DynamicProfile<Geometry> {
         final String arg = request.substring(1);
         Geometry geometry = Geometry.compile(arg, getMaxSize());
 
-        if(!geometry.matches()) {
-            return new TestResult<>(false, geometry);
-        }
-        return new TestResult<>(true, geometry);
+        return new TestResult<>(geometry.matches(), geometry);
     }
 
     @Override
-    default Dimension convertedDimension(Geometry s, Dimension dimension) {
-        // TODO
-        return null;//dimension;
+    default Dimension convertedDimension(Object s, Dimension dimension) {
+        Geometry geometry = (Geometry) s;
+        if (geometry.getModifier().contains(Geometry.Modifier.ONLY_WHEN_BIGGER)) {
+            if (geometry.width() > dimension.getWidth()) {
+                return dimension;
+            }
+        }
+        float scale = (float) geometry.width() / dimension.getWidth();
+        return Dimension.of(geometry.width(), Math.round(dimension.getHeight() * scale));
     }
 }
