@@ -4,9 +4,8 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Stream;
+import java.util.Comparator;
+import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -98,12 +97,16 @@ public class ImageSource implements Serializable {
         final Type type;
         final ImageFormat format;
 
-        static final Key[] VALUES;
-        static {
-            VALUES = Arrays.stream(Type.values())
-                .map(t -> Stream.of(new Key(t, null), new Key(t, ImageFormat.WEBP)))
-                .flatMap(Function.identity())
-                .toArray(Key[]::new);
+        public static Key webp(Type type) {
+            return new Key(type, ImageFormat.WEBP);
+        }
+
+        public static Key asis(Type type) {
+            return new Key(type, ImageFormat.AS_IS);
+        }
+
+        public static Key jpeg(Type type) {
+            return new Key(type, ImageFormat.JPG);
         }
 
         public Key(Type type, @Nullable ImageFormat format) {
@@ -135,10 +138,6 @@ public class ImageSource implements Serializable {
                 return compare;
             }
             return Objects.compare(format, o.format, Comparator.nullsFirst(Comparator.naturalOrder()));
-        }
-
-        public static Key[] values() {
-            return VALUES;
         }
 
     }

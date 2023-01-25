@@ -15,5 +15,7 @@ public interface PromoPortraitProfile extends Profile<Geometry> {
         return new TestResult<>(request.equals("promo-portrait"), getGeometry());
     }
 
-    Geometry getGeometry();
+    default Geometry getGeometry() {
+        return DEFAULT_GEOMETRY;
+    }
 }

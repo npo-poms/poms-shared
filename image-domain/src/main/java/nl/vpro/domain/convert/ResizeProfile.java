@@ -10,7 +10,9 @@ import nl.vpro.domain.image.Dimension;
 
 public interface ResizeProfile extends ParameterizedProfile<Geometry> {
 
-    int getMaxSize();
+    default int getMaxSize() {
+        return Integer.MAX_VALUE;
+    }
 
     @Override
     default TestResult<Geometry> dynamicTest(@NonNull String request) {

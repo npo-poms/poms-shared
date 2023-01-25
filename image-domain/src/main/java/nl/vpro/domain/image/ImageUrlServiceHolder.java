@@ -2,11 +2,7 @@ package nl.vpro.domain.image;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.configuration.FixedSizeMap;
 import org.slf4j.Logger;
 
 /**
@@ -19,17 +15,6 @@ import org.slf4j.Logger;
  */
 @Slf4j
 public class ImageUrlServiceHolder {
-
-    public static final Map<ImageSource.Type, String> MAPPING;
-    static {
-        Map<ImageSource.Type, String> mapping = new HashMap<>();
-        mapping.put(ImageSource.Type.THUMBNAIL, "s100");
-        mapping.put(ImageSource.Type.MOBILE, "s414");
-        mapping.put(ImageSource.Type.TABLET, "s1024>");
-        mapping.put(ImageSource.Type.LARGE, "s2048>");
-        // TODO: FixedSizeMap 0.10 (not yet released) has nicer constructors.
-        MAPPING = new FixedSizeMap<>(mapping);
-    }
 
 
     public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";

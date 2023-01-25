@@ -16,5 +16,7 @@ public interface PromoLandscapeProfile extends Profile<Geometry> {
         return new TestResult<>(request.equals("promo-landscape"), getGeometry());
     }
 
-    Geometry getGeometry();
+    default Geometry getGeometry() {
+        return DEFAULT_GEOMETRY;
+    }
 }

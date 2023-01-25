@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Optional;
 
 import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.convert.Conversions;
 import nl.vpro.domain.image.*;
 
 
@@ -15,8 +16,6 @@ import nl.vpro.domain.image.*;
  */
 @Slf4j
 public class BackendImageSourceCreator implements ImageSourceCreator {
-
-
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     protected Optional<Long> getId(ImageMetadataSupplier supplier) {
@@ -40,16 +39,9 @@ public class BackendImageSourceCreator implements ImageSourceCreator {
 
     @Override
     public Optional<ImageSource> createFor(ImageMetadataSupplier supplier, ImageSource.Key key) {
-        final String transformation  = ImageUrlServiceHolder.MAPPING.get(key.getType());
+        final String[] transformation  = Conversions.MAPPING.get(key);
         Dimension existingDimension = supplier.getImageMetadata().getDimension();
-        Dimension dimension;
-        try {
-            dimension = Dimension.of(Integer.parseInt(transformation.substring(1)), null);
-        } catch (Exception e) {
-            log.warn("Couldn't parse dimension from {}", transformation);
-            dimension = null;
-        }
-        final Dimension finalDim = dimension;
+        final Dimension finalDim = Conversions.predictDimensions(existingDimension, transformation);
         ImageFormat finalFormat = key.getFormat() == null ? getOriginalFormat(supplier) : key.getFormat();
         return getId(supplier)
             .map(id ->

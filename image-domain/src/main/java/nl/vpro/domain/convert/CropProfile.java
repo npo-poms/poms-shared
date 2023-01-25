@@ -9,7 +9,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 public interface CropProfile extends ParameterizedProfile<Geometry> {
 
 
-    int getMaxSize();
+    default int getMaxSize() {
+        return Integer.MAX_VALUE;
+    }
 
     @Override
     default TestResult<Geometry> dynamicTest(@NonNull String request) {
