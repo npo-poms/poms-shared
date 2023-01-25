@@ -2661,15 +2661,17 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return sortInstant;
     }
 
-    /**
-     * Method is needed for unmarshalling. It does nothing. It may do something
-     * in overrides (as in {@link Group})
-     */
-    @JsonIgnore
-    final void setSortDate(@Nullable Date date) {
-        this.setSortInstant(DateUtils.toInstant(date));
-    }
 
+    /**
+     *
+     * @since 1.5
+     * @deprecated Still used in FTL which doesn't support instance well?
+     */
+
+    @Deprecated
+    final public Date getSortDate() {
+        return DateUtils.toDate(getSortInstant());
+    }
     /**
      * Method is needed for unmarshalling. It does nothing. It may do something
      * in overrides (as in {@link Group})
