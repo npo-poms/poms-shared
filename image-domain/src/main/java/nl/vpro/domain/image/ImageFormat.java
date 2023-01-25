@@ -32,7 +32,8 @@ public enum ImageFormat {
     TIF("image/tiff", "tif", "tiff"),
     XBM("image/x-xbitmap", "xbm"),
     XPM("image/x-xpixmap", "xpm"),
-    WEBP("image/webp", "webp");
+    WEBP("image/webp", "webp")
+    ;
 
 
     public static final ImageFormat AS_IS = null;

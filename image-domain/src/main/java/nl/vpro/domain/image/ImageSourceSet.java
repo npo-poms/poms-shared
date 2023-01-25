@@ -15,11 +15,15 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
     }
 
     public ImageSourceSet() {
-        this(new TreeMap<>());
+        this(new LinkedHashMap<>());
     }
 
     public ImageSource getDefaultImageSource() {
-        return imageSources.entrySet().stream().findFirst().map(Entry::getValue).orElse(null);
+        return imageSources
+            .entrySet()
+            .stream()
+            .findFirst()
+            .map(Entry::getValue).orElse(null);
 
     }
     @Override
@@ -65,7 +69,7 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
     }
 
     public ImageSourceSet forFormat(ImageFormat format) {
-        final Map<ImageSource.Key, ImageSource> imageSources = new TreeMap<>();
+        final Map<ImageSource.Key, ImageSource> imageSources = new LinkedHashMap<>();
         final int[] skipped = {0};
         this.imageSources.forEach((key, value) -> {
             if (value.getFormat() == format) {
@@ -81,13 +85,13 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
         }
     }
 
-    public EnumMap<ImageFormat, String> getSourceSrcs() {
-        EnumMap<ImageFormat, StringBuilder> enumMap = new EnumMap<ImageFormat, StringBuilder>(ImageFormat.class);
+    public Map<ImageFormat, String> getSourceSrcs() {
+        Map<ImageFormat, StringBuilder> enumMap = new LinkedHashMap<>();
         for (ImageSource imageSource : imageSources.values()) {
             StringBuilder builder = enumMap.computeIfAbsent(imageSource.getFormat(), (f) -> new StringBuilder());
             appendSrc(builder, imageSource);
         }
-        EnumMap<ImageFormat, String> result = new EnumMap<ImageFormat, String>(ImageFormat.class);
+        Map<ImageFormat, String> result = new LinkedHashMap<>();
         enumMap.forEach((key, value) -> result.put(key, value.toString()));
         return result;
     }

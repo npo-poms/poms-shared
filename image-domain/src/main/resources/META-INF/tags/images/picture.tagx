@@ -11,7 +11,7 @@
 	<jsp:directive.attribute
 		name="image"
 		rtexprvalue="true"
-		type="nl.vpro.domain.image.ImageMetadataSupplier"
+		type="nl.vpro.domain.image.ImageMetadata"
 		description="imagemeta" required="true" />
 
 	<jsp:directive.attribute
@@ -23,14 +23,14 @@
 	<picture>
 		<!-- scriptlet to avoid needing jstl -->
 		  <jsp:scriptlet><![CDATA[
-				for (Map.Entry<ImageFormat, String> e : image.getImageMetadataWithSourceSet().getSourceSet().getSourceSrcs().entrySet()) {
+				for (Map.Entry<ImageFormat, String> e : image.getSourceSet().getSourceSrcs().entrySet()) {
 				request.setAttribute("e", e);
 				]]>
 			</jsp:scriptlet>
 		<source type="${e.key.mimeType"
 						srcset="${e.value}" />
 		<jsp:scriptlet>}</jsp:scriptlet>
-		<img style="${style}" src="${image.imageMetadataWithSourceSet.sourceSet.defaultImageSource}" />
+		<img style="${style}" src="${image.sourceSet.defaultImageSource}" alt="${empty image.alternative ? image.title : image.alternative}"/>
 
 
 	</picture>

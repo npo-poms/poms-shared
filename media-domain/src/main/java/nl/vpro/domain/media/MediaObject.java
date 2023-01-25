@@ -2665,9 +2665,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     /**
      *
      * @since 1.5
-     * @deprecated Still used in FTL which doesn't support instance well?
+     * @deprecated Buts still used in FTL which doesn't support {@link Instant} well?
      */
-
     @Deprecated
     final public Date getSortDate() {
         return DateUtils.toDate(getSortInstant());

@@ -25,7 +25,7 @@ public class Conversions {
 
     public static final Map<ImageSource.Key, String[]> MAPPING;
     static {
-        Map<ImageSource.Key, String[]> mapping = new HashMap<>();
+        Map<ImageSource.Key, String[]> mapping = new LinkedHashMap<>();
         mapping.put(webp(THUMBNAIL), new String[] {"s100"});
         mapping.put(webp(MOBILE_HALF), new String[] {"s160"});
         mapping.put(webp(MOBILE), new String[] {"s320"});
