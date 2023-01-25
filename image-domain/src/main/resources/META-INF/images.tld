@@ -1,7 +1,10 @@
 <taglib
-  version="2.0" xmlns="http://java.sun.com/xml/j2ee">
-  <tlib-version>1.0</tlib-version>
-  <jsp-version>2.2</jsp-version>
+    xmlns="http://java.sun.com/xml/ns/j2ee"
+    version="2.0"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+    xsd:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    >
+  <tlib-version>2.0</tlib-version>
   <short-name>images</short-name>
   <uri>https://github.com/npo-poms/poms-shared/tags/images</uri>
   <tag-file>
