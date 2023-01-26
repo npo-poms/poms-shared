@@ -26,7 +26,7 @@ import static nl.vpro.domain.image.ImageFormat.*;
 @Getter
 @EqualsAndHashCode
 @JsonDeserialize(builder = ImageSource.Builder.class)
-public class ImageSource implements Serializable {
+public class ImageSource implements Serializable, Comparable<ImageSource> {
 
     private static final long serialVersionUID = -7707025279370332657L;
 
@@ -65,6 +65,19 @@ public class ImageSource implements Serializable {
     public String toString() {
         return url + (dimension == null || dimension.getWidth() == null ? "" : " " + dimension.getWidth() +  "px");
     }
+
+    public int equivalent(ImageSource imageSource) {
+        return Comparator.comparing(ImageSource::getType)
+            .thenComparing(ImageSource::getDimension, Comparator.nullsLast(Comparator.naturalOrder()))
+            .thenComparing(ImageSource::getFormat, Comparator.nullsFirst(Comparator.naturalOrder()))
+            .compare(this, imageSource);
+    }
+
+    @Override
+    public int compareTo(ImageSource imageSource) {
+        return equivalent(imageSource);
+    }
+
 
     @JsonPOJOBuilder(withPrefix = "")
     public static class Builder {

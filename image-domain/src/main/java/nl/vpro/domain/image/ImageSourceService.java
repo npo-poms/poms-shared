@@ -22,13 +22,14 @@ public class ImageSourceService {
      */
     public ImageSourceSet getSourceSet(ImageMetadataSupplier metadataProvider) {
         final Map<ImageSource.Key, ImageSource> map = new LinkedHashMap<>();
-        final Set<ImageSource> set = new HashSet<>();
+        final Set<String> set = new TreeSet<>();
+
         services.forEach(creator -> {
             for (ImageSource.Key key : Conversions.MAPPING.keySet()) {
                 Optional<ImageSource> image = creator.createFor(metadataProvider, key);
                 if (image.isPresent()) {
                     ImageSource source = image.get();
-                    if(set.add(source)) {
+                    if(set.add(source.getDimension() + "\t" + source.getFormat())) {
                         map.put(image.get().getKey(), source);
                     }
                 } else {

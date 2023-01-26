@@ -7,12 +7,14 @@ import javax.validation.constraints.Positive;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static java.util.Comparator.*;
+
 /**
  * @author Michiel Meeuwissen
  * @since 3.64
  */
 @Data
-public class Dimension implements java.io.Serializable {
+public class Dimension implements java.io.Serializable, Comparable<Dimension> {
 
     private static final long serialVersionUID = 0L;
 
@@ -49,7 +51,13 @@ public class Dimension implements java.io.Serializable {
             gcd = gcd(w, h);
         }
         return new Dimension(w,h);
+    }
 
+    @Override
+    public int compareTo(Dimension o) {
+        return comparing(Dimension::getWidth, nullsLast(naturalOrder()))
+            .thenComparing(Dimension::getHeight, nullsLast(naturalOrder()))
+            .compare(this, o);
     }
 
     protected long gcd(long a, long b) {

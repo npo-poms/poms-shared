@@ -138,7 +138,7 @@ public class ImageMetadataImpl implements ImageMetadata {
     @JsonPOJOBuilder(withPrefix = "")
     public static class Builder implements LombokBuilder<Builder> {
 
-        private final Map<ImageSource.Key, ImageSource> _sourceSet = new TreeMap<>();
+        private final Map<ImageSource.Key, ImageSource> _sourceSet = new LinkedHashMap<>();
 
         private final List<String> crid = new ArrayList<>();
 
