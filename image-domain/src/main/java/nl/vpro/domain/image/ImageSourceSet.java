@@ -2,6 +2,7 @@ package nl.vpro.domain.image;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -19,12 +20,16 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
     }
 
     public ImageSource getDefaultImageSource() {
-        return imageSources
-            .entrySet()
+        List<ImageSource> nonwebp = imageSources
+            .values()
             .stream()
-            .findFirst()
-            .map(Entry::getValue).orElse(null);
-
+            .filter(e -> e.getFormat() != ImageFormat.WEBP)
+            .collect(Collectors.toList());
+        if (nonwebp.size() > 0) {
+            return nonwebp.get(nonwebp.size() - 1);
+        } else {
+            return null;
+        }
     }
     @Override
     public Set<Entry<ImageSource.Key, ImageSource>> entrySet() {

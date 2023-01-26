@@ -62,6 +62,7 @@ public interface ImageMetadataSupplier {
         @Getter
         final W wrapped;
 
+
         public Wrapper(W wrapped) {
             this.wrapped = wrapped;
         }
