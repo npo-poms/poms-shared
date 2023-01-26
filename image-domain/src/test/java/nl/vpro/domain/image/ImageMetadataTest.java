@@ -207,7 +207,7 @@ class ImageMetadataTest {
                 "          },\n" +
                 "          \"type\" : {\n" +
                 "            \"type\" : \"string\",\n" +
-                "            \"enum\" : [ \"THUMBNAIL\", \"MOBILE\", \"TABLET\", \"LARGE\" ]\n" +
+                "            \"enum\" : [ \"THUMBNAIL\", \"MOBILE_HALF\", \"MOBILE\", \"MOBILE_2\", \"MOBILE_3\", \"TABLET\", \"TABLET_2\", \"TABLET_3\", \"LARGE\" ]\n" +
                 "          },\n" +
                 "          \"format\" : {\n" +
                 "            \"type\" : \"string\",\n" +

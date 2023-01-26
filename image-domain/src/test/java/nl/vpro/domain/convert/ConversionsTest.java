@@ -20,7 +20,6 @@ class ConversionsTest {
             Arguments.of(of(2048, 1360),of(150, 100), "s150" ),
             Arguments.of(of(2048, 1360),of(2048, 1360), "s3000>" )
         );
-
     }
 
     @ParameterizedTest

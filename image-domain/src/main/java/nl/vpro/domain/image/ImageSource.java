@@ -84,10 +84,12 @@ public class ImageSource implements Serializable {
 
     public enum Type {
         THUMBNAIL,
+
         MOBILE_HALF,
         MOBILE,
         MOBILE_2,
         MOBILE_3,
+
         TABLET,
         TABLET_2,
         TABLET_3,

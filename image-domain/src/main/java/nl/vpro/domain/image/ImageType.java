@@ -15,7 +15,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.i18n.Displayable;
 
 /**
- * The POMS supported image types, as can be selected in the GUI, and are available as meta data for all images.
+ * The POMS supported image types, as can be selected in the GUI, and are available as metadata for all images.
  * @author rico
  */
 @XmlEnum
