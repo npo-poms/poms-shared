@@ -122,9 +122,14 @@ public class ImageSource implements Serializable {
         }
         @JsonCreator
         public Key(String key) {
-            String[] split = key.split("_", 2);
-            type = Type.valueOf(split[0]);
-            format = split.length > 1 ? ImageFormat.valueOf(split[1]) : null;
+            int lastU = key.lastIndexOf('_');
+            if (lastU > 0) {
+                type = Type.valueOf(key.substring(0, lastU));
+                format = ImageFormat.valueOf(key.substring(lastU + 1));
+            } else {
+                type = Type.valueOf(key);
+                format = null;
+            }
         }
 
 
