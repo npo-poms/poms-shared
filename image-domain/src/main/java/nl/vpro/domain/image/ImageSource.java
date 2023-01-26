@@ -42,7 +42,7 @@ public class ImageSource implements Serializable {
     private final Area areaOfInterest;
 
     public static  ImageSource.Builder thumbNail(@ImageURL String url) {
-        return  ImageSource.builder()
+        return ImageSource.builder()
             .type(Type.THUMBNAIL)
             .url(url);
     }
