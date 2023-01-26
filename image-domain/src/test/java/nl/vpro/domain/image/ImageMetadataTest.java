@@ -71,7 +71,7 @@ class ImageMetadataTest {
             "        \"height\" : 320\n" +
             "      }\n" +
             "    },\n" +
-            "    \"THUMBNAIL_WEBP\" : {\n" +
+            "    \"THUMBNAIL.WEBP\" : {\n" +
             "      \"url\" : \"https://www.vpro.nl/plaatje.webp\",\n" +
             "      \"type\" : \"THUMBNAIL\",\n" +
             "      \"format\" : \"WEBP\",\n" +
@@ -142,7 +142,7 @@ class ImageMetadataTest {
             "        \"height\" : 320\n" +
             "      }\n" +
             "    },\n" +
-            "    \"THUMBNAIL_WEBP\" : {\n" +
+            "    \"THUMBNAIL.WEBP\" : {\n" +
             "      \"url\" : \"https://www.vpro.nl/plaatje.webp\",\n" +
             "      \"type\" : \"THUMBNAIL\",\n" +
             "      \"format\" : \"WEBP\",\n" +

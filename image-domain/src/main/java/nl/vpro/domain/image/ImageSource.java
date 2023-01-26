@@ -4,8 +4,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -14,6 +13,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
+
+import static nl.vpro.domain.image.ImageFormat.*;
 
 
 /**
@@ -82,18 +83,40 @@ public class ImageSource implements Serializable {
         return new Key(type, format);
     }
 
+    private static final Map<String, Type> lookup = new HashMap<>();
     public enum Type {
-        THUMBNAIL,
 
-        MOBILE_HALF,
-        MOBILE,
-        MOBILE_2,
-        MOBILE_3,
+        THUMBNAIL("TN"),
 
-        TABLET,
-        TABLET_2,
-        TABLET_3,
-        LARGE
+        MOBILE_HALF("M0"),
+        MOBILE("M1"),
+        MOBILE_2("M2"),
+        MOBILE_3("M3"),
+
+        TABLET("T1"),
+        TABLET_2("T2"),
+        TABLET_3("T3"),
+
+        LARGE("L1");
+
+
+        @Getter
+        private final String shortName;
+
+        Type(String shortName) {
+            this.shortName = shortName;
+            if (lookup.put(shortName.toUpperCase(), this) != null) {
+                throw new IllegalStateException();
+            }
+        }
+
+        public static Type forShortName(String s) {
+            Type t = lookup.get(s.toUpperCase());
+            if (t == null) {
+                throw new IllegalArgumentException();
+            }
+            return t;
+        }
     }
 
     @EqualsAndHashCode
@@ -105,15 +128,15 @@ public class ImageSource implements Serializable {
         final ImageFormat format;
 
         public static Key webp(Type type) {
-            return new Key(type, ImageFormat.WEBP);
+            return new Key(type, WEBP);
         }
 
         public static Key asis(Type type) {
-            return new Key(type, ImageFormat.AS_IS);
+            return new Key(type, AS_IS);
         }
 
         public static Key jpeg(Type type) {
-            return new Key(type, ImageFormat.JPG);
+            return new Key(type, JPG);
         }
 
         public Key(Type type, @Nullable ImageFormat format) {
@@ -122,7 +145,7 @@ public class ImageSource implements Serializable {
         }
         @JsonCreator
         public Key(String key) {
-            int lastU = key.lastIndexOf('_');
+            int lastU = key.lastIndexOf('.');
             if (lastU > 0) {
                 type = Type.valueOf(key.substring(0, lastU));
                 format = ImageFormat.valueOf(key.substring(lastU + 1));
@@ -135,7 +158,11 @@ public class ImageSource implements Serializable {
 
         @JsonValue
         public String name() {
-            return (type.name() + (format == null ? "" : ("_" + format.name())));
+            return (type.name() + (format == null ? "" : ("." + format.name())));
+        }
+
+        public String getShortName() {
+            return type.getShortName() + (format == null ? "" : ("." + format.getShortName()));
         }
 
         @Override

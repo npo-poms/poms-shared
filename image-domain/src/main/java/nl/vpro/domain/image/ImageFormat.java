@@ -19,7 +19,7 @@ public enum ImageFormat {
     GIF("image/gif", true, "gif"),
     IEF("image/ief", "ief"),
     IFF("image/iff", "iff"),
-    JPG("image/jpeg", "jpe", "jpeg", "jpg"),
+    JPG("image/jpeg", "J", false, "jpe", "jpeg", "jpg"),
     JFIF("image/pipeg", "jfif"),
     PNG("image/png", "png"),
     PBM("image/x-portable-bitmap", "pbm"),
@@ -32,7 +32,7 @@ public enum ImageFormat {
     TIF("image/tiff", "tif", "tiff"),
     XBM("image/x-xbitmap", "xbm"),
     XPM("image/x-xpixmap", "xpm"),
-    WEBP("image/webp", "webp")
+    WEBP("image/webp",  "W", false, "webp")
     ;
 
 
@@ -41,7 +41,7 @@ public enum ImageFormat {
     static final Map<String, String> MAPPING = new HashMap<>();
     static {
         MAPPING.put("image/pjpeg", "image/jpeg");
-        MAPPING.put("image/jpg", "image/jpeg"); // found in in the logs: May  5 22:29:22 judy07 1 2021-05-05T22:29:22+02:00 bogo03 /e/as/poms7a - - - [prod] - imagebackend - WARN  -  - For https://radio-images.npo.nl/%7Bformat%7D/c558d163-3329-4fc4-91e4-83b1a9e2bf1d/7aed65cc-d12d-4a89-91b7-8f701a534d0c.jpg image/jpg: No matching type for mime-type: image/jpg  [ nl.vpro.domain.image.ImageDownloaders - pool-4-thread-1 ]
+        MAPPING.put("image/jpg", "image/jpeg"); // found in the logs: May  5 22:29:22 judy07 1 2021-05-05T22:29:22+02:00 bogo03 /e/as/poms7a - - - [prod] - imagebackend - WARN  -  - For https://radio-images.npo.nl/%7Bformat%7D/c558d163-3329-4fc4-91e4-83b1a9e2bf1d/7aed65cc-d12d-4a89-91b7-8f701a534d0c.jpg image/jpg: No matching type for mime-type: image/jpg  [ nl.vpro.domain.image.ImageDownloaders - pool-4-thread-1 ]
         // it's actually wrong, but never mind
 
     }
@@ -53,14 +53,25 @@ public enum ImageFormat {
 
     private final boolean supportsAnimation;
 
+    private final String shortName;
+
     ImageFormat(String mimeType, String... extensions) {
-        this(mimeType, false, extensions);
+        this(mimeType, null, false, extensions);
+    }
+    ImageFormat(String mimeType, boolean supportsAnimation, String... extensions) {
+        this(mimeType, null, supportsAnimation, extensions);
     }
 
-    ImageFormat(String mimeType, boolean supportsAnimation, String... extensions) {
+    ImageFormat(String mimeType, String shortName, boolean supportsAnimation, String... extensions) {
         this.mimeType = mimeType;
         this.extensions = extensions;
+        this.shortName = shortName;
         this.supportsAnimation = supportsAnimation;
+    }
+
+    @NonNull
+    public String getShortName() {
+        return shortName == null ? name() : shortName;
     }
 
     @NonNull
