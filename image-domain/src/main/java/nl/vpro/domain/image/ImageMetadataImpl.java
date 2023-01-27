@@ -33,7 +33,16 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @JsonDeserialize(builder = ImageMetadataImpl.Builder.class)
 @JsonPropertyOrder(
     {
-        "type","title", "height", "width", "sourceSet", "sourceSetString", "crids", "areaOfInterest", "lastModified", "creationDater"
+        "type",
+        "title",
+        "height",
+        "width",
+        "sourceSet",
+        "sourceSetString",
+        "crids",
+        "areaOfInterest",
+        "lastModified",
+        "creationDater"
     }
 )
 public class ImageMetadataImpl implements ImageMetadata {

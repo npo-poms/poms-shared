@@ -36,7 +36,5 @@
 		<img style="${style}"
 				 src="${defaultSource.url}"
 				 alt="${empty image.alternative ? image.title : image.alternative}"/>
-
-
 	</picture>
 </jsp:root>
