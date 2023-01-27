@@ -29,8 +29,8 @@ public class Conversions {
         mapping.put(webp(THUMBNAIL), new String[] {"s100"});
         mapping.put(webp(MOBILE_HALF), new String[] {"s160"});
         mapping.put(webp(MOBILE), new String[] {"s320"});
-        mapping.put(webp(MOBILE_2), new String[] {"s640"});
-        mapping.put(webp(MOBILE_3), new String[] {"s960"});
+        mapping.put(webp(MOBILE_2), new String[] {"s640>"});
+        mapping.put(webp(MOBILE_3), new String[] {"s960>"});
         mapping.put(webp(TABLET), new String[] {"s1280>"});
         mapping.put(webp(TABLET_2), new String[] {"s1440>"});
         mapping.put(webp(TABLET_3), new String[] {"s1920>"});
