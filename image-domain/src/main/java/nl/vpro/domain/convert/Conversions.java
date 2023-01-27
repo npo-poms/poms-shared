@@ -36,7 +36,7 @@ public class Conversions {
         mapping.put(webp(TABLET_3), new String[] {"s1920>"});
         mapping.put(webp(LARGE),  new String[] {"s2540>"});
 
-        mapping.put(jpeg(MOBILE),  new String[] {"s640"});
+        mapping.put(jpeg(MOBILE),  new String[] {"s640>"});
 
         MAPPING = new FixedSizeMap<>(mapping);
     }
