@@ -23,7 +23,9 @@ class ConversionsTest {
     public static Stream<Arguments> tests() {
         return Stream.of(
             Arguments.of(of(2048, 1360),of(150, 100), "s150" ),
-            Arguments.of(of(2048, 1360),of(2048, 1360), "s3000>" )
+            Arguments.of(of(2048, 1360),of(2048, 1360), "s3000>" ),
+            Arguments.of(of(2048, 1360), of(150, 100), "mc/s150" ),
+            Arguments.of(of(2048, 1360), of(150, 100), "mc/s150/negate" )
         );
     }
 
