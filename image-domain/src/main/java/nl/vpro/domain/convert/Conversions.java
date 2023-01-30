@@ -78,10 +78,10 @@ public class Conversions {
                     case NO_MATCH:
                         continue;
                     case MATCH:
-                        out = profile.convertedDimension(result.object(), in);
+                        out = profile.convertedDimension(result.object(), out);
                         continue CONVERSION;
                     case MATCH_AND_STOP:
-                        out = profile.convertedDimension(result.object(), in);
+                        out = profile.convertedDimension(result.object(), out);
                         break CONVERSION;
                 }
             }

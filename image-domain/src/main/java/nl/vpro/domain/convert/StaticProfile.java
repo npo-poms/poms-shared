@@ -22,7 +22,7 @@ public interface StaticProfile extends ParameterizedProfile<StaticProfile.Static
         if (staticConversion == null){
             return new TestResult<>(false, null);
         }
-        return new TestResult<>(TestResult.MatchResult.MATCH_AND_STOP, staticConversion);
+        return new TestResult<>(TestResult.MatchResult.MATCH, staticConversion);
     }
 
     @Override
