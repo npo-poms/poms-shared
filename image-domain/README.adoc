@@ -1,0 +1,28 @@
+= poms image-domain classes
+
+image:http://www.javadoc.io/badge/nl.vpro.image/image-domain.svg?color=blue[javadoc,link=http://www.javadoc.io/doc/nl.vpro.image/image-domain]
+image:https://img.shields.io/maven-central/v/nl.vpro.image/image-domain.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:%22nl.vpro.image%22]
+
+The image domain classes used by NPO Frontend API, POMS Backend and other POMS projects.
+
+
+
+== taglib
+
+This jar also provided a tag-library. Currently, with just one tag.
+
+
+This example is JSPX. Tag-libraries are useable in normal JSP or e.g. FreeMarker too. Change syntax accordingly then.
+
+[source, html]
+----
+<jsp:root
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:image="https://github.com/npo-poms/poms-shared/tags/images"
+	version="2.0"
+>
+...
+  <image:picture image="${metadata}" style="width: 80%; margin-left: 10%" />
+</jsp:root>
+----
+

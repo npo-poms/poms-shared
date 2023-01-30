@@ -16,10 +16,10 @@ See also https://github.com/npo-poms/poms-parent[poms parent]
 
 == build
 
-This is automaticly build on github.
+This is automatically build on github.
 
 
-Basicly it's just
+Basically it's just
 [source, bash]
 ====
  michiel@mitulo:~/github/npo-poms/poms-shared$ mvn
