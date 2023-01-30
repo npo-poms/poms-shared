@@ -1,15 +1,35 @@
 package nl.vpro.domain.convert;
 
-public class TestResult<O> {
-    final boolean test;
+import java.util.function.BooleanSupplier;
+
+public class TestResult<O> implements BooleanSupplier {
+
+    @Override
+    public boolean getAsBoolean() {
+        return test == MatchResult.MATCH || test == MatchResult.MATCH_AND_STOP;
+    }
+
+    public enum MatchResult {
+        MATCH,
+        NO_MATCH,
+        MATCH_AND_STOP;
+    }
+
+
+    final MatchResult test;
     final O object;
 
-    public TestResult(boolean test, O object) {
+    public TestResult(MatchResult test, O object) {
         this.test = test;
         this.object = object;
     }
 
-    public boolean test() {
+    public TestResult(boolean test, O object) {
+        this.test = test ? MatchResult.MATCH : MatchResult.NO_MATCH;
+        this.object = object;
+    }
+
+    public MatchResult test() {
         return test;
     }
 

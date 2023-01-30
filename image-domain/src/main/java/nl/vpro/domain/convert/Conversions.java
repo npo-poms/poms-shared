@@ -1,5 +1,9 @@
 package nl.vpro.domain.convert;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -10,33 +14,35 @@ import com.google.common.annotations.Beta;
 import nl.vpro.domain.image.Dimension;
 import nl.vpro.domain.image.ImageSource;
 
-import static nl.vpro.domain.image.ImageSource.Key.jpeg;
-import static nl.vpro.domain.image.ImageSource.Key.webp;
-import static nl.vpro.domain.image.ImageSource.Type.*;
-import static nl.vpro.domain.image.ImageSource.Type.LARGE;
-
 /**
  * Utilities related to image conversion.
  * @since 7.2
  */
 @Beta
+@Slf4j
 public class Conversions {
 
 
     public static final Map<ImageSource.Key, String[]> MAPPING;
     static {
         Map<ImageSource.Key, String[]> mapping = new LinkedHashMap<>();
-        mapping.put(webp(THUMBNAIL), new String[] {"s100"});
-        mapping.put(webp(MOBILE_HALF), new String[] {"s160"});
-        mapping.put(webp(MOBILE), new String[] {"s320"});
-        mapping.put(webp(MOBILE_2), new String[] {"s640"});
-        mapping.put(webp(MOBILE_3), new String[] {"s960"});
-        mapping.put(webp(TABLET), new String[] {"s1280>"});
-        mapping.put(webp(TABLET_2), new String[] {"s1440>"});
-        mapping.put(webp(TABLET_3), new String[] {"s1920>"});
-        mapping.put(webp(LARGE),  new String[] {"s2540>"});
+        try (InputStream resourceAsStream = Conversions.class.getResourceAsStream("/image-conversions.properties")) {
+            Properties properties = new Properties();
+            properties.load(resourceAsStream);
+            properties.forEach((k, v) -> {
+                try {
+                    mapping.put(
+                        new ImageSource.Key(k.toString()),
+                        v.toString().split("/")
+                    );
+                } catch (Exception e) {
+                    log.debug("Ignored {}={}", k, v);
+                }
+            });
 
-        mapping.put(jpeg(MOBILE),  new String[] {"s640"});
+        } catch (IOException e) {
+            log.warn(e.getMessage(), e);
+        }
 
         MAPPING = new FixedSizeMap<>(mapping);
     }
@@ -63,9 +69,15 @@ public class Conversions {
         for (String con : conversions) {
             for (Profile<?> profile : conversionProfiles) {
                 TestResult<?> result = profile.dynamicTest(con);
-                if (result.test()) {
-                    out = profile.convertedDimension(result.object(), in);
-                    continue CONVERSION;
+                switch(result.test()) {
+                    case NO_MATCH:
+                        continue;
+                    case MATCH:
+                        out = profile.convertedDimension(result.object(), in);
+                        continue CONVERSION;
+                    case MATCH_AND_STOP:
+                        out = profile.convertedDimension(result.object(), in);
+                        break CONVERSION;
                 }
             }
             // just skip, suppose this is an unrecognized conversion, that just
