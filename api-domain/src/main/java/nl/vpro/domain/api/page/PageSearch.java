@@ -112,6 +112,7 @@ public class PageSearch extends AbstractTextSearch<Page> {
      * @deprecated For json backwards compatibility
      */
     @JsonSetter
+    @Deprecated
     public void setSortDate(DateRangeMatcherList sortDate) {
         this.sortDates = sortDate;
     }
