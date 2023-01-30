@@ -26,3 +26,12 @@ This example is JSPX. Tag-libraries are useable in normal JSP or e.g. FreeMarker
 </jsp:root>
 ----
 
+== Conversions
+
+We provide (since 7.2) also some functionality to _predict_ sizes before actual conversions.
+
+It is implemented, in java,  in link:./src/main/java/nl/vpro/domain/convert/Conversions.java[this class]
+
+It used link:src/main/resources/image-conversions.properties[this resource] (which is also served via https://images.poms.omroep.nl/properties)
+
+I would of course be feasible to make this available in different languages.
