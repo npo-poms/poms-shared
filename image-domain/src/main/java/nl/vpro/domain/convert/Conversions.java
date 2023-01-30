@@ -26,6 +26,9 @@ public class Conversions {
 
     public static final Map<ImageSource.Key, String[]> MAPPING;
     static {
+        // The properties used for conversion are statically used from the image-domain jar.
+        // If necessary we may make it configurable, in which cases this class should be changed to download the properties
+        // from the public url
         Map<ImageSource.Key, String[]> mapping = new LinkedHashMap<>();
         try (InputStream resourceAsStream = Conversions.class.getResourceAsStream("/image-conversions.properties")) {
             Properties properties = new OrderedProperties();
