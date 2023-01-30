@@ -13,6 +13,7 @@ import com.google.common.annotations.Beta;
 
 import nl.vpro.domain.image.Dimension;
 import nl.vpro.domain.image.ImageSource;
+import nl.vpro.util.OrderedProperties;
 
 /**
  * Utilities related to image conversion.
@@ -27,15 +28,17 @@ public class Conversions {
     static {
         Map<ImageSource.Key, String[]> mapping = new LinkedHashMap<>();
         try (InputStream resourceAsStream = Conversions.class.getResourceAsStream("/image-conversions.properties")) {
-            Properties properties = new Properties();
+            Properties properties = new OrderedProperties();
             properties.load(resourceAsStream);
-            properties.forEach((k, v) -> {
+            properties.entrySet().forEach((e) -> {
+                String k = e.getKey().toString();
+                String v = e.getValue().toString();
                 try {
                     mapping.put(
-                        new ImageSource.Key(k.toString()),
-                        v.toString().split("/")
+                        new ImageSource.Key(k),
+                        v.split("/")
                     );
-                } catch (Exception e) {
+                } catch (Exception ex) {
                     log.debug("Ignored {}={}", k, v);
                 }
             });
@@ -50,7 +53,9 @@ public class Conversions {
 
     private final static List<Profile<?>> conversionProfiles;
     static {
+        // todo, this must be in sync with setup in image server itself
         conversionProfiles = Arrays.asList(
+            new StaticProfile() {},
             new ResizeProfile() {},
             new CropProfile() {},
             new PromoLandscapeProfile() {},

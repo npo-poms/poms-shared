@@ -16,7 +16,6 @@ import nl.vpro.domain.image.Dimension;
 public interface StaticProfile extends ParameterizedProfile<StaticProfile.StaticConversion> {
 
 
-
     @Override
     default TestResult<StaticConversion> dynamicTest(@NonNull String request) {
         StaticConversion staticConversion = Service.INSTANCE.getMap().get(request);
