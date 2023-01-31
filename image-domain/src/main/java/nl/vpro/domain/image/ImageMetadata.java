@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  *  An extended version of {@link nl.vpro.domain.image.Metadata}. Most noticeably, it adds {@link #getSourceSet()}, and also {@link #getAreaOfInterest()}
  */
-public interface ImageMetadata extends Metadata<ImageMetadata> {
+public interface ImageMetadata extends Metadata {
 
     /**
      * As a map, for easier reference, but the causes a bit of pleonasm in  key and value, we could also just do a set?

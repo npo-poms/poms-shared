@@ -5,12 +5,12 @@ import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.google.common.annotations.Beta;
 
 import nl.vpro.domain.Trackable;
 import nl.vpro.domain.support.License;
+import nl.vpro.jackson2.Views;
 import nl.vpro.validation.CRID;
 import nl.vpro.validation.URI;
 
@@ -21,10 +21,12 @@ import nl.vpro.validation.URI;
  *
  * @author Michiel Meeuwissen
  * @since 5.13
- * @param <T> self reference
  */
-public interface Metadata<T extends Metadata<T>> extends Trackable {
+public interface Metadata extends Trackable {
 
+    /**
+     * Specifies what type this image represents, e.g. a {@link ImageType#LOGO} or a {@link ImageType#STILL}
+     */
     ImageType getType();
 
     String getTitle();
@@ -32,6 +34,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
     String getDescription();
 
     /**
+     * An alternative representation of the image. If the image is not viewable. Like the html alt-attribute.
      * @since 5.32
      */
     @Beta
@@ -39,6 +42,15 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
         return null;
     }
 
+    @JsonView(Views.Model.class)
+    default String getAlternativeOrTitle() {
+        return Optional.ofNullable(getAlternative()).orElse(getTitle());
+    }
+
+
+    /**
+     * The license for the image.
+     */
     License getLicense();
 
     /**
@@ -53,22 +65,31 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
     String getSourceName();
 
     /**
-     * Who or what has credits.
-     *
+     * Who or what has credits for this image.
      */
     String getCredits();
 
 
+    /**
+     * Height in pixels
+     */
     Integer getHeight();
 
+    /**
+     * Width in pixels
+     */
     Integer getWidth();
 
+    /**
+     * Height and width wrapped in a {@link Dimension}
+     */
     @JsonIgnore
     default Dimension getDimension(){
         return Dimension.of(getWidth(), getHeight());
     }
 
     /**
+     * (Alternative) identifiers for the image.
      * @since 5.34
      */
     default List<@CRID String> getCrids() {
@@ -103,7 +124,7 @@ public interface Metadata<T extends Metadata<T>> extends Trackable {
         SELF crids(List<@CRID String> crids);
 
 
-        default SELF from(@Nullable Metadata<?> from) {
+        default SELF from(@Nullable Metadata from) {
             if (from != null) {
 
                 return lastModifiedInstant(from.getLastModifiedInstant())

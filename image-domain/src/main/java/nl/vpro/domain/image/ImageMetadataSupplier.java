@@ -42,7 +42,7 @@ public interface ImageMetadataSupplier {
 
 
     @PolyNull
-    static <W extends Metadata<W>> Wrapper<W> of(@PolyNull W wrapped) {
+    static <W extends Metadata> Wrapper<W> of(@PolyNull W wrapped) {
         if (wrapped == null) {
             return null;
         } else {
@@ -57,7 +57,7 @@ public interface ImageMetadataSupplier {
      * This e.g. is useful for poms images {@link nl.vpro.domain.media.support.Image} and {@link nl.vpro.domain.page.Image}, which are presently not yet implementing {@link ImageMetadata}
      * Imp
      */
-    class Wrapper<W extends Metadata<W>> implements ImageMetadataSupplier {
+    class Wrapper<W extends Metadata> implements ImageMetadataSupplier {
 
         @Getter
         final W wrapped;
@@ -75,7 +75,7 @@ public interface ImageMetadataSupplier {
                 .build();
         }
 
-        public <C extends Metadata<C>> Optional<C> unwrap(Class<C> clazz) {
+        public <C extends Metadata> Optional<C> unwrap(Class<C> clazz) {
             if (clazz.isInstance(wrapped)) {
                 return Optional.of((C) wrapped);
             } else {

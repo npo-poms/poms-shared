@@ -132,6 +132,10 @@ public class ImageSource implements Serializable, Comparable<ImageSource> {
         }
     }
 
+    /**
+     * Insided a {@link ImageSourceSet} every {@link ImageSource} has a unique key, which is a
+     * combination of its {@link Type} and {@link ImageFormat}.
+     */
     @EqualsAndHashCode
     @Getter
     public static class Key implements Comparable<Key>, Serializable {
