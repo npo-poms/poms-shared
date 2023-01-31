@@ -42,7 +42,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "crids",
         "areaOfInterest",
         "lastModified",
-        "creationDater"
+        "creationDate"
     }
 )
 public class ImageMetadataImpl implements ImageMetadata {
@@ -119,7 +119,7 @@ public class ImageMetadataImpl implements ImageMetadata {
         this.lastModifiedInstant = lastModifiedInstant;
 
         this.creationInstant = creationInstant;
-        this.sourceSet = new ImageSourceSet();
+        this.sourceSet = new ImageSourceSet(this);
         if (sourceSet != null) {
             this.sourceSet.putAll(sourceSet);
         }
@@ -129,8 +129,15 @@ public class ImageMetadataImpl implements ImageMetadata {
 
     @JsonView(Views.Model.class)
     @Beta
+    @Deprecated
     public String getSourceSetString() {
         return Objects.toString(getSourceSet());
+    }
+
+    @JsonView(Views.Model.class)
+    @Beta
+    public Picture getPicture() {
+        return getSourceSet().getPicture();
     }
 
     /**
@@ -183,7 +190,7 @@ public class ImageMetadataImpl implements ImageMetadata {
 
         public Builder from(ImageMetadata imageMetadata) {
             return
-                from((Metadata<?>) imageMetadata)
+                from((Metadata) imageMetadata)
                     .crids(imageMetadata.getCrids())
                     .areaOfInterest(imageMetadata.getAreaOfInterest())
                     .addSourceSet(imageMetadata.getSourceSet())

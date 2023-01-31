@@ -27,7 +27,7 @@ import nl.vpro.validation.*;
 @Setter
 @lombok.AllArgsConstructor(access = AccessLevel.PRIVATE)
 @lombok.Builder
-public class Image implements Metadata<Image> {
+public class Image implements Metadata {
 
     @XmlAttribute
     private ImageType type;
