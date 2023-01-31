@@ -23,7 +23,6 @@ public interface Picture {
 
     Integer getHeight();
 
-
     @JsonIgnore
     default JsonNode getJson() {
         return Jackson2Mapper.getModelInstance().valueToTree(this);

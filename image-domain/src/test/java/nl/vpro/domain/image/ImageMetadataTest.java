@@ -114,39 +114,41 @@ class ImageMetadataTest {
     @Beta
     public void modelJson() {
         Jackson2TestUtil.assertThatJson(Jackson2Mapper.getModelInstance(), image).withoutRemarshalling().isSimilarTo("{\n" +
-            "  \"type\" : \"LOGO\",\n" +
-            "  \"title\" : \"foobar\",\n" +
-            "  \"height\" : 150,\n" +
-            "  \"width\" : 200,\n" +
-            "  \"sourceSetString\" : \"https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w\",\n" +
-            "  \"crids\" : [ \"urn:cinema:1234\" ],\n" +
-            "  \"areaOfInterest\" : {\n" +
-            "    \"lowerLeft\" : {\n" +
-            "      \"x\" : 10,\n" +
-            "      \"y\" : 20\n" +
+            "    \"type\" : \"LOGO\",\n" +
+            "    \"title\" : \"foobar\",\n" +
+            "    \"height\" : 150,\n" +
+            "    \"width\" : 200,\n" +
+            "    \"sourceSetString\" : \"https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w\",\n" +
+            "    \"crids\" : [ \"urn:cinema:1234\" ],\n" +
+            "    \"areaOfInterest\" : {\n" +
+            "      \"lowerLeft\" : {\n" +
+            "        \"x\" : 10,\n" +
+            "        \"y\" : 20\n" +
+            "      },\n" +
+            "      \"upperRight\" : {\n" +
+            "        \"x\" : 100,\n" +
+            "        \"y\" : 120\n" +
+            "      }\n" +
             "    },\n" +
-            "    \"upperRight\" : {\n" +
-            "      \"x\" : 100,\n" +
-            "      \"y\" : 120\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"lastModified\" : 1650010800000,\n" +
-            "  \"creationDate\" : 1650010200000,\n" +
-            "  \"license\" : \"CC_BY\",\n" +
-            "  \"source\" : \"https://www.vpro.nl\",\n" +
-            "  \"sourceName\" : \"VPRO\",\n" +
-            "  \"credits\" : \"Pietje Puk\",\n" +
-            "  \"picture\" : {\n" +
-            "    \"sources\" : {\n" +
-            "      \"image/jpeg\" : \"https://www.vpro.nl/plaatje.jpeg 640w\",\n" +
-            "      \"image/webp\" : \"https://www.vpro.nl/plaatje.webp 640w\"\n" +
+            "    \"lastModified\" : 1650010800000,\n" +
+            "    \"creationDate\" : 1650010200000,\n" +
+            "    \"license\" : \"CC_BY\",\n" +
+            "    \"source\" : \"https://www.vpro.nl\",\n" +
+            "    \"sourceName\" : \"VPRO\",\n" +
+            "    \"credits\" : \"Pietje Puk\",\n" +
+            "    \"picture\" : {\n" +
+            "      \"sources\" : {\n" +
+            "        \"image/jpeg\" : \"https://www.vpro.nl/plaatje.jpeg 640w\",\n" +
+            "        \"image/webp\" : \"https://www.vpro.nl/plaatje.webp 640w\"\n" +
+            "      },\n" +
+            "      \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
+            "      \"alternative\" : \"foobar\",\n" +
+            "      \"width\" : 200,\n" +
+            "      \"height\" : 150,\n" +
+            "      \"pointOfInterest\" : \"28% 47%\"\n" +
             "    },\n" +
-            "    \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
-            "    \"alternative\" : \"foobar\",\n" +
-            "    \"pointOfInterest\" : \"28% 47%\"\n" +
-            "  },\n" +
-            "  \"alternativeOrTitle\" : \"foobar\"\n" +
-            "}");
+            "    \"alternativeOrTitle\" : \"foobar\"\n" +
+            "  }");
 
     }
 
@@ -203,6 +205,8 @@ class ImageMetadataTest {
             "    },\n" +
             "    \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
             "    \"alternative\" : \"foobar\",\n" +
+            "    \"width\" : 200,\n" +
+            "    \"height\" : 150,\n" +
             "    \"pointOfInterest\" : \"28% 47%\"\n" +
             "  },\n" +
             "  \"alternativeOrTitle\" : \"foobar\"\n" +
