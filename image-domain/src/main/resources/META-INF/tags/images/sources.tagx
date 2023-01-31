@@ -18,15 +18,11 @@
 		rtexprvalue="true"
 		type="java.lang.String"
 		required="false" />
-
-	<picture>
-
-	</picture>
-		<c:forEach var="entry" items="${image.picture.sources}">
+	<c:forEach var="entry" items="${image.picture.sources}">
 			<source type="${entry.key}"
 							srcset="${entry.value}" />
-		</c:forEach>
-		<img style="${style}"
-				 src="${image.picture.imageSrc}"
-				 alt="${image.picture.alternative}"/>
+	</c:forEach>
+	<img style="${style}"
+			 src="${image.picture.imageSrc}"
+			 alt="${image.picture.alternative}"/>
 </jsp:root>
