@@ -19,6 +19,11 @@ public interface Picture {
 
     String getStyle();
 
+    Integer getWidth();
+
+    Integer getHeight();
+
+
     @JsonIgnore
     default JsonNode getJson() {
         return Jackson2Mapper.getModelInstance().valueToTree(this);

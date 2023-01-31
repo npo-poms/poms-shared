@@ -19,7 +19,7 @@ import nl.vpro.domain.image.Picture;
 @Setter
 public class SourcesTag extends SimpleTagSupport  {
     ImageMetadata image;
-    CharSequence style;
+    CharSequence imgStyle;
     CharSequence alt;
     @Override
     public void doTag() throws IOException {
@@ -33,14 +33,22 @@ public class SourcesTag extends SimpleTagSupport  {
             writer.append(String.format("<source srcset='%s' type='%s' />", e.getValue(), e.getKey()));
         }
         writer.append("<img");
-        if (StringUtils.isNotBlank(style)) {
-            writer.append(String.format(" style='%s'", StringEscapeUtils.escapeXml10(style.toString())));
+        if (StringUtils.isNotBlank(imgStyle)) {
+            writer.append(String.format(" style='%s'", StringEscapeUtils.escapeXml10(imgStyle.toString())));
         }
         CharSequence effectiveAlt = Optional.ofNullable(alt).orElse(picture.getAlternative());
         if (StringUtils.isNotBlank(effectiveAlt)) {
             writer.append(String.format(" alt='%s'", StringEscapeUtils.escapeXml10(effectiveAlt.toString())));
         }
-        writer.append(String.format(" src=%s", picture.getImageSrc()));
+        if (picture.getHeight() != null) {
+            writer.append(String.format(" width='%d'", picture.getWidth()));
+        }
+        if (picture.getHeight() != null) {
+            writer.append(String.format(" height='%d'", picture.getHeight()));
+        }
+        writer.append(String.format(" src='%s'", StringEscapeUtils.escapeXml10(picture.getImageSrc())));
+        writer.append(" />");
+
     }
 
 

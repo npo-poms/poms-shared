@@ -21,6 +21,15 @@ public class Dimension implements java.io.Serializable, Comparable<Dimension> {
     private final Long width;
     private final Long height;
 
+    public static Integer asInteger(Long in) {
+        return in == null ? null : Math.toIntExact(in);
+    }
+    public static Integer getIntegerWidth(Dimension in) {
+        return in == null ? null : asInteger(in.getWidth());
+    }
+    public static Integer getIntegerHeight(Dimension in) {
+        return in == null ? null : asInteger(in.getHeight());
+    }
 
     public static Dimension of(@Positive  Integer width, @Positive Integer height) {
         return new Dimension(width == null ? null : width.longValue(), height == null ? null : height.longValue());

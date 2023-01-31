@@ -26,11 +26,17 @@ public class PictureImpl implements Picture {
 
     String alternative;
 
+    Integer width;
+
+    Integer height;
+
     public PictureImpl(Map<String, String> sources, ImageSource image, @NonNull ImageMetadata wrapped) {
         this.wrapped = wrapped;
         this.sources = Collections.unmodifiableMap(sources);
         this.imageSrc = image.getUrl().toString();
         this.alternative = wrapped.getAlternativeOrTitle();
+        this.width = Dimension.getIntegerWidth(wrapped.getDimension());
+        this.height = Dimension.getIntegerWidth(wrapped.getDimension());
     }
 
     @JsonProperty("pointOfInterest")
@@ -41,4 +47,5 @@ public class PictureImpl implements Picture {
             return wrapped.getPointOfInterest().toString();
         }
     }
+
 }

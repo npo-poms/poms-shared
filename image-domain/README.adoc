@@ -24,7 +24,7 @@ This example is JSPX. Tag-libraries are useable in normal JSP or e.g. FreeMarker
   <image:picture image="${metadata}"
                  data-1="foobar"
                  ng-click="alert('hello world');"
-                 style="width: 80%; margin-left: 10%" />
+                 imgStyle="width: 80%; margin-left: 10%" />
 </jsp:root>
 ----
 
