@@ -145,6 +145,7 @@ public class ImageMetadataImpl implements ImageMetadata {
      * See <a href="https://bugs.openjdk.org/browse/JDK-8071693">JDK bug</a>
      */
     @Override
+    @NonNull
     public RelativePoint getPointOfInterest() {
         return ImageMetadata.super.getPointOfInterest();
     }
