@@ -7,12 +7,57 @@
   <tlib-version>2.0</tlib-version>
   <short-name>images</short-name>
   <uri>https://github.com/npo-poms/poms-shared/tags/images</uri>
-  <tag-file>
+  <tag>
     <name>picture</name>
-    <path>/META-INF/tags/images/picture.tagx</path>
-  </tag-file>
-  <tag-file>
+    <tag-class>nl.vpro.images.tags.PictureTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <description>image metadata object</description>
+      <name>image</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>nl.vpro.domain.image.ImageMetadata</type>
+    </attribute>
+    <attribute>
+      <description>image metadata object</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.CharSequence</type>
+    </attribute>
+    <attribute>
+      <description>alt</description>
+      <name>alt</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.CharSequence</type>
+    </attribute>
+    <dynamic-attributes>true</dynamic-attributes>
+  </tag>
+    <tag>
     <name>sources</name>
-    <path>/META-INF/tags/images/sources.tagx</path>
-  </tag-file>
+    <tag-class>nl.vpro.images.tags.SourcesTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <description>image metadata object</description>
+      <name>image</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>nl.vpro.domain.image.ImageMetadata</type>
+    </attribute>
+    <attribute>
+      <description>image metadata object</description>
+      <name>style</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.CharSequence</type>
+    </attribute>
+      <attribute>
+      <description>alt</description>
+      <name>alt</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.CharSequence</type>
+    </attribute>
+  </tag>
 </taglib>
