@@ -1,11 +1,14 @@
 <jsp:root
 	xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:images="https://github.com/npo-poms/poms-shared/tags/images"
+	xmlns:images="urn:jsptagdir:/WEB-INF/tags/images"
 	version="2.0"
 >
+	<jsp:directive.tag import="java.util.Map"/>
+	<jsp:directive.tag import="java.io.IOException"/>
 	<jsp:directive.tag
 		display-name="picture"
 		description="HTML 5 picture tag"
+		dynamic-attributes="dynamic"
 	/>
 	<jsp:directive.attribute
 		name="image"
@@ -19,7 +22,17 @@
 		type="java.lang.String"
 		required="false" />
 
-	<picture>
-		<images:sources image="${image}" style="${style}" />
-	</picture>
+	<jsp:scriptlet><![CDATA[
+		Map dynamics = (Map) jspContext.getAttribute("dynamic");
+		out.print("<picture ");
+		dynamics.forEach((k, v) -> {
+			try {
+				out.print(k + "='" + v + "'");
+			}catch (IOException ioe) {
+
+			}});
+		  out.print(">");
+		]]></jsp:scriptlet>
+	<images:sources image="${image}" style="${style}" />
+	<jsp:scriptlet><![CDATA[out.print("</picture>");]]></jsp:scriptlet>
 </jsp:root>
