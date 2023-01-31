@@ -10,10 +10,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.annotations.Beta;
 
 /**
  * @since 7.2.3
  */
+@Beta
 @Getter
 public class PictureMetadata extends MetadataWrapper implements Picture, ImageMetadata {
 
