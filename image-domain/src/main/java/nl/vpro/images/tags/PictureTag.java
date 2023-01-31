@@ -17,6 +17,7 @@ import nl.vpro.domain.image.Picture;
 @Setter
 public class PictureTag extends SourcesTag implements DynamicAttributes {
     private final Map<String, Object> dynamicAttributes = new HashMap<>();
+
     @Override
     public void doTag() throws IOException {
         Picture picture = image.getSourceSet().getPicture();

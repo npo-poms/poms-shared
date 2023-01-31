@@ -20,7 +20,7 @@
     </attribute>
     <attribute>
       <description>image metadata object</description>
-      <name>style</name>
+      <name>imgStyle</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.CharSequence</type>
@@ -47,7 +47,7 @@
     </attribute>
     <attribute>
       <description>image metadata object</description>
-      <name>style</name>
+      <name>imgStyle</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.CharSequence</type>
