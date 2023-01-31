@@ -6,6 +6,8 @@ import lombok.NonNull;
 import java.util.Collections;
 import java.util.Map;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @since 7.2.3
  */
 @Getter
-public class PictureMetadata extends MetadataWrapper implements Picture {
+public class PictureMetadata extends MetadataWrapper implements Picture, ImageMetadata {
 
     private final Map<String, String> sources;
     final String imageSrc;
@@ -39,5 +41,17 @@ public class PictureMetadata extends MetadataWrapper implements Picture {
         } else {
             return wrapped.getPointOfInterest().toString();
         }
+    }
+
+    @Override
+    @JsonIgnore
+    public ImageSourceSet getSourceSet() {
+        return wrapped.getSourceSet();
+    }
+
+    @Override
+    @JsonIgnore
+    public @Nullable Area getAreaOfInterest() {
+        return wrapped.getAreaOfInterest();
     }
 }
