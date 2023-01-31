@@ -1,11 +1,11 @@
 <jsp:root
 	xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:images="https://github.com/npo-poms/poms-shared/tags/images"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	version="2.0"
 >
 	<jsp:directive.tag
-		display-name="picture"
-		description="HTML 5 picture tag"
+		display-name="sources"
+		description="HTML 5 picture sources tag"
 	/>
 	<jsp:directive.attribute
 		name="image"
@@ -20,6 +20,13 @@
 		required="false" />
 
 	<picture>
-		<images:sources image="${image}" style="${style}" />
+
 	</picture>
+		<c:forEach var="entry" items="${image.picture.sources}">
+			<source type="${entry.key}"
+							srcset="${entry.value}" />
+		</c:forEach>
+		<img style="${style}"
+				 src="${image.picture.imageSrc}"
+				 alt="${image.picture.alternative}"/>
 </jsp:root>

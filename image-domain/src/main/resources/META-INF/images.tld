@@ -11,4 +11,8 @@
     <name>picture</name>
     <path>/META-INF/tags/images/picture.tagx</path>
   </tag-file>
+  <tag-file>
+    <name>sources</name>
+    <path>/META-INF/tags/images/sources.tagx</path>
+  </tag-file>
 </taglib>
