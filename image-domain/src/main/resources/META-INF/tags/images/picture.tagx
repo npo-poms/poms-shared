@@ -1,10 +1,12 @@
 <jsp:root
 	xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:images="urn:jsptagdir:/WEB-INF/tags/images"
+	xmlns:images="https://github.com/npo-poms/poms-shared/tags/images"
 	version="2.0"
 >
 	<jsp:directive.tag import="java.util.Map"/>
 	<jsp:directive.tag import="java.io.IOException"/>
+	<jsp:directive.tag import="org.apache.commons.text.StringEscapeUtils"/>
+	<jsp:directive.tag import="java.util.Collection"/>
 	<jsp:directive.tag
 		display-name="picture"
 		description="HTML 5 picture tag"
@@ -23,15 +25,12 @@
 		required="false" />
 
 	<jsp:scriptlet><![CDATA[
-		Map dynamics = (Map) jspContext.getAttribute("dynamic");
+		Collection<Map.Entry<String, String>> dynamics = ((Map) jspContext.getAttribute("dynamic")).entrySet();
 		out.print("<picture ");
-		dynamics.forEach((k, v) -> {
-			try {
-				out.print(k + "='" + v + "'");
-			}catch (IOException ioe) {
-
-			}});
-		  out.print(">");
+		for (Map.Entry<String, String> e : dynamics) {
+			out.print(e.getKey() + "='" + StringEscapeUtils.escapeXml10(e.getValue()) + "'");
+		}
+		out.print(">");
 		]]></jsp:scriptlet>
 	<images:sources image="${image}" style="${style}" />
 	<jsp:scriptlet><![CDATA[out.print("</picture>");]]></jsp:scriptlet>
