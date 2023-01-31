@@ -1,5 +1,6 @@
 package nl.vpro.domain.image;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,6 +23,7 @@ public interface ImageMetadata extends Metadata {
      * a thing is defined, then {@link RelativePoint#MIDDLE}
      */
     @JsonIgnore
+    @NonNull
     default RelativePoint getPointOfInterest() {
         Area areaOfInterest = getAreaOfInterest();
         if (areaOfInterest != null && getWidth() != null && getHeight() != null) {

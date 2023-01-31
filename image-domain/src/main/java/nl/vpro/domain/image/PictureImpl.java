@@ -41,11 +41,7 @@ public class PictureImpl implements Picture {
 
     @JsonProperty("pointOfInterest")
     public String getPointOfInterestAsString() {
-        if (wrapped.getPointOfInterest() == null){
-            return "50% 50%";
-        } else {
-            return wrapped.getPointOfInterest().toString();
-        }
+        return wrapped.getPointOfInterest().toString();
     }
 
 }
