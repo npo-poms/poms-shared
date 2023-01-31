@@ -156,7 +156,7 @@ public class NEPSAMServiceImpl implements NEPSAMService{
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("viewer", "pomsgui");
         attributes.put("ip", ip);
-        attributes.put("duration", duration);
+        attributes.put("duration", duration == null ? null : duration.toString());
         item.getData().setAttributes(attributes);
         return item;
     }
