@@ -36,7 +36,7 @@ public class PictureImpl implements Picture {
         this.imageSrc = image.getUrl().toString();
         this.alternative = wrapped.getAlternativeOrTitle();
         this.width = Dimension.getIntegerWidth(wrapped.getDimension());
-        this.height = Dimension.getIntegerWidth(wrapped.getDimension());
+        this.height = Dimension.getIntegerHeight(wrapped.getDimension());
     }
 
     @JsonProperty("pointOfInterest")
