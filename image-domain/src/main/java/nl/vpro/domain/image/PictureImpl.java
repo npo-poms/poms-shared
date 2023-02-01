@@ -22,19 +22,23 @@ public class PictureImpl implements Picture {
     @JsonIgnore
     protected ImageMetadata wrapped;
 
-    String style;
+    String imageStyle;
 
     String alternative;
+
+    String imageTitle;
 
     Integer width;
 
     Integer height;
+
 
     public PictureImpl(Map<String, String> sources, ImageSource image, @NonNull ImageMetadata wrapped) {
         this.wrapped = wrapped;
         this.sources = Collections.unmodifiableMap(sources);
         this.imageSrc = image.getUrl().toString();
         this.alternative = wrapped.getAlternativeOrTitle();
+        this.imageTitle = wrapped.getTitle();
         this.width = Dimension.getIntegerWidth(wrapped.getDimension());
         this.height = Dimension.getIntegerHeight(wrapped.getDimension());
     }

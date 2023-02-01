@@ -26,15 +26,22 @@
       <type>java.lang.CharSequence</type>
     </attribute>
     <attribute>
-      <description>alt</description>
+      <description>The alt attribute for the img element</description>
       <name>alt</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.CharSequence</type>
+    </attribute>
+    <attribute>
+      <description>The title attribute for the img element</description>
+      <name>imageTitle</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.CharSequence</type>
     </attribute>
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
-    <tag>
+  <tag>
     <name>sources</name>
     <tag-class>nl.vpro.images.tags.SourcesTag</tag-class>
     <body-content>empty</body-content>
@@ -52,9 +59,16 @@
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.CharSequence</type>
     </attribute>
-      <attribute>
+    <attribute>
       <description>alt</description>
       <name>alt</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.CharSequence</type>
+    </attribute>
+    <attribute>
+      <description>The title attribute for the img element</description>
+      <name>imageTitle</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.CharSequence</type>
