@@ -34,7 +34,14 @@
     </attribute>
     <attribute>
       <description>The title attribute for the img element</description>
-      <name>imageTitle</name>
+      <name>imgTitle</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.CharSequence</type>
+    </attribute>
+    <attribute>
+      <description>The class attribute for the img element</description>
+      <name>imgClass</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.CharSequence</type>
@@ -68,7 +75,14 @@
     </attribute>
     <attribute>
       <description>The title attribute for the img element</description>
-      <name>imageTitle</name>
+      <name>imgTitle</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.CharSequence</type>
+    </attribute>
+    <attribute>
+      <description>The class attribute for the img element</description>
+      <name>imgClass</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
       <type>java.lang.CharSequence</type>
