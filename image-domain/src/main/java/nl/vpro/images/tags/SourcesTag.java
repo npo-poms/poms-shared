@@ -20,8 +20,10 @@ import nl.vpro.domain.image.Picture;
 public class SourcesTag extends SimpleTagSupport  {
     ImageMetadata image;
     CharSequence imgStyle;
+    CharSequence imgTitle;
+    CharSequence imgClass;
     CharSequence alt;
-    CharSequence imageTitle;
+
 
     @Override
     public void doTag() throws IOException {
@@ -38,14 +40,18 @@ public class SourcesTag extends SimpleTagSupport  {
         if (StringUtils.isNotBlank(imgStyle)) {
             writer.append(String.format(" style='%s'", StringEscapeUtils.escapeXml10(imgStyle.toString())));
         }
+        if (StringUtils.isNotBlank(imgClass)) {
+            writer.append(String.format(" class='%s'", StringEscapeUtils.escapeXml10(imgClass.toString())));
+        }
+        CharSequence effectiveTitle = Optional.ofNullable(imgTitle).orElse(picture.getImageTitle());
+        if (StringUtils.isNotBlank(effectiveTitle)) {
+            writer.append(String.format(" title='%s'", StringEscapeUtils.escapeXml10(effectiveTitle.toString())));
+        }
         CharSequence effectiveAlt = Optional.ofNullable(alt).orElse(picture.getAlternative());
         if (StringUtils.isNotBlank(effectiveAlt)) {
             writer.append(String.format(" alt='%s'", StringEscapeUtils.escapeXml10(effectiveAlt.toString())));
         }
-        CharSequence effectiveTitle = Optional.ofNullable(imageTitle).orElse(picture.getImageTitle());
-        if (StringUtils.isNotBlank(effectiveTitle)) {
-            writer.append(String.format(" title='%s'", StringEscapeUtils.escapeXml10(effectiveTitle.toString())));
-        }
+
         if (picture.getHeight() != null) {
             writer.append(String.format(" width='%d'", picture.getWidth()));
         }

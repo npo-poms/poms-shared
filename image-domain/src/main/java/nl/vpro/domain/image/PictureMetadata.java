@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.annotations.Beta;
 
 /**
+ * A {@link Picture} that also is {@link ImageMetadata}, so represents all available metadata for the image, and also
+ * some (probably derivative) information for being a {@link Picture}
  * @since 7.2.3
  */
 @Beta
@@ -24,8 +26,6 @@ public class PictureMetadata extends MetadataWrapper implements Picture, ImageMe
     @JsonIgnore
     protected ImageMetadata wrapped;
 
-    String imageStyle;
-
     String imageTitle;
 
     String alternative;
@@ -35,12 +35,12 @@ public class PictureMetadata extends MetadataWrapper implements Picture, ImageMe
         this.wrapped = wrapped;
         this.sources = Collections.unmodifiableMap(sources);
         this.imageSrc = image.getUrl().toString();
+        this.imageTitle = wrapped.getTitle();
         this.alternative = wrapped.getAlternativeOrTitle();
     }
 
     @JsonProperty("pointOfInterest")
     public String getPointOfInterestAsString() {
-
         return wrapped.getPointOfInterest().toString();
     }
 

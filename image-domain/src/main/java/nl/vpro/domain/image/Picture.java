@@ -10,6 +10,9 @@ import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * A 'picture' view on {@link ImageMetadata}. Mainly target at filling HTML picture elements.
+ * <p>
+ * It contains metadata relevant to the image itself, which could depend on what image actually is presented.
+
  */
 @Beta
 public interface Picture {
@@ -19,7 +22,6 @@ public interface Picture {
      */
 
     Map<String, String> getSources();
-
 
     /**
      * The default image URL to use. The src attribute value of the child 'img' tag element.
@@ -32,14 +34,9 @@ public interface Picture {
     String getAlternative();
 
     /**
-     * The title of the image, as it should apper on the img child element.
+     * The title of the image, as it should appear on the img child element.
      */
     String getImageTitle();
-
-    /**
-     * Style attribute to apply on the img tag child element.
-     */
-    String getImageStyle();
 
     /**
      * Width of the original, unscaled, image, to be used a 'with' attribute of the img element.
