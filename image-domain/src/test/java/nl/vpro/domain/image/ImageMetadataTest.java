@@ -349,6 +349,7 @@ class ImageMetadataTest {
             "    \"image/webp\" : \"https://www.vpro.nl/plaatje.webp 640w\"\n" +
             "  },\n" +
             "  \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
+            "  \"imageTitle\" : \"foobar\",\n" +
             "  \"alternative\" : \"foobar\",\n" +
             "  \"source\" : \"https://www.vpro.nl\",\n" +
             "  \"license\" : \"CC_BY\",\n" +
