@@ -21,6 +21,8 @@ public class SourcesTag extends SimpleTagSupport  {
     ImageMetadata image;
     CharSequence imgStyle;
     CharSequence alt;
+    CharSequence imageTitle;
+
     @Override
     public void doTag() throws IOException {
          Picture picture = image.getSourceSet().getPicture();
@@ -39,6 +41,10 @@ public class SourcesTag extends SimpleTagSupport  {
         CharSequence effectiveAlt = Optional.ofNullable(alt).orElse(picture.getAlternative());
         if (StringUtils.isNotBlank(effectiveAlt)) {
             writer.append(String.format(" alt='%s'", StringEscapeUtils.escapeXml10(effectiveAlt.toString())));
+        }
+        CharSequence effectiveTitle = Optional.ofNullable(imageTitle).orElse(picture.getImageTitle());
+        if (StringUtils.isNotBlank(effectiveTitle)) {
+            writer.append(String.format(" title='%s'", StringEscapeUtils.escapeXml10(effectiveTitle.toString())));
         }
         if (picture.getHeight() != null) {
             writer.append(String.format(" width='%d'", picture.getWidth()));
