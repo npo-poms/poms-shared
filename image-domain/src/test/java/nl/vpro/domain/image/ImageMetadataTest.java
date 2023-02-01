@@ -143,6 +143,7 @@ class ImageMetadataTest {
             "      },\n" +
             "      \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
             "      \"alternative\" : \"foobar\",\n" +
+            "      \"imageTitle\" : \"foobar\",\n" +
             "      \"width\" : 200,\n" +
             "      \"height\" : 150,\n" +
             "      \"pointOfInterest\" : \"28% 47%\"\n" +
@@ -205,6 +206,7 @@ class ImageMetadataTest {
             "    },\n" +
             "    \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
             "    \"alternative\" : \"foobar\",\n" +
+            "    \"imageTitle\" : \"foobar\",\n" +
             "    \"width\" : 200,\n" +
             "    \"height\" : 150,\n" +
             "    \"pointOfInterest\" : \"28% 47%\"\n" +
