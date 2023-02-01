@@ -3,7 +3,7 @@
     version="2.0"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
     xsd:schemaLocation="http://java.sun.com/xml/ns/j2ee https://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
-    >
+>
   <tlib-version>2.0</tlib-version>
   <short-name>images</short-name>
   <uri>https://github.com/npo-poms/poms-shared/tags/images</uri>
@@ -19,32 +19,11 @@
       <type>nl.vpro.domain.image.ImageMetadata</type>
     </attribute>
     <attribute>
-      <description>image metadata object</description>
-      <name>imgStyle</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.CharSequence</type>
-    </attribute>
-    <attribute>
       <description>The alt attribute for the img element</description>
       <name>alt</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.CharSequence</type>
-    </attribute>
-    <attribute>
-      <description>The title attribute for the img element</description>
-      <name>imgTitle</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.CharSequence</type>
-    </attribute>
-    <attribute>
-      <description>The class attribute for the img element</description>
-      <name>imgClass</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.CharSequence</type>
+      <type>java.lang.String</type>
     </attribute>
     <dynamic-attributes>true</dynamic-attributes>
   </tag>
@@ -60,32 +39,12 @@
       <type>nl.vpro.domain.image.ImageMetadata</type>
     </attribute>
     <attribute>
-      <description>image metadata object</description>
-      <name>imgStyle</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.CharSequence</type>
-    </attribute>
-    <attribute>
       <description>alt</description>
       <name>alt</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.CharSequence</type>
+      <type>java.lang.String</type>
     </attribute>
-    <attribute>
-      <description>The title attribute for the img element</description>
-      <name>imgTitle</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.CharSequence</type>
-    </attribute>
-    <attribute>
-      <description>The class attribute for the img element</description>
-      <name>imgClass</name>
-      <required>false</required>
-      <rtexprvalue>true</rtexprvalue>
-      <type>java.lang.CharSequence</type>
-    </attribute>
+    <dynamic-attributes>true</dynamic-attributes>
   </tag>
 </taglib>
