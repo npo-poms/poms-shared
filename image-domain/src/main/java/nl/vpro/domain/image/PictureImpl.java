@@ -8,7 +8,10 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.Beta;
+
+import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * @since 7.2.3
@@ -22,19 +25,22 @@ public class PictureImpl implements Picture {
     @JsonIgnore
     protected ImageMetadata wrapped;
 
-    String style;
 
     String alternative;
+
+    String imageTitle;
 
     Integer width;
 
     Integer height;
+
 
     public PictureImpl(Map<String, String> sources, ImageSource image, @NonNull ImageMetadata wrapped) {
         this.wrapped = wrapped;
         this.sources = Collections.unmodifiableMap(sources);
         this.imageSrc = image.getUrl().toString();
         this.alternative = wrapped.getAlternativeOrTitle();
+        this.imageTitle = wrapped.getTitle();
         this.width = Dimension.getIntegerWidth(wrapped.getDimension());
         this.height = Dimension.getIntegerHeight(wrapped.getDimension());
     }
@@ -42,6 +48,15 @@ public class PictureImpl implements Picture {
     @JsonProperty("pointOfInterest")
     public String getPointOfInterestAsString() {
         return wrapped.getPointOfInterest().toString();
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return Jackson2Mapper.getInstance().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return super.toString();
+        }
     }
 
 }

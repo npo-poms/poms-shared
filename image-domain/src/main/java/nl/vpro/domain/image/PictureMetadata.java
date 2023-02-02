@@ -10,9 +10,14 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.Beta;
 
+import nl.vpro.jackson2.Jackson2Mapper;
+
 /**
+ * A {@link Picture} that also is {@link ImageMetadata}, so represents all available metadata for the image, and also
+ * some (probably derivative) information for being a {@link Picture}
  * @since 7.2.3
  */
 @Beta
@@ -24,7 +29,7 @@ public class PictureMetadata extends MetadataWrapper implements Picture, ImageMe
     @JsonIgnore
     protected ImageMetadata wrapped;
 
-    String style;
+    String imageTitle;
 
     String alternative;
 
@@ -33,16 +38,13 @@ public class PictureMetadata extends MetadataWrapper implements Picture, ImageMe
         this.wrapped = wrapped;
         this.sources = Collections.unmodifiableMap(sources);
         this.imageSrc = image.getUrl().toString();
+        this.imageTitle = wrapped.getTitle();
         this.alternative = wrapped.getAlternativeOrTitle();
     }
 
     @JsonProperty("pointOfInterest")
     public String getPointOfInterestAsString() {
-        if (wrapped.getPointOfInterest() == null){
-            return "50% 50%";
-        } else {
-            return wrapped.getPointOfInterest().toString();
-        }
+        return wrapped.getPointOfInterest().toString();
     }
 
     @Override
@@ -55,5 +57,14 @@ public class PictureMetadata extends MetadataWrapper implements Picture, ImageMe
     @JsonIgnore
     public @Nullable Area getAreaOfInterest() {
         return wrapped.getAreaOfInterest();
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return Jackson2Mapper.getInstance().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return super.toString();
+        }
     }
 }
