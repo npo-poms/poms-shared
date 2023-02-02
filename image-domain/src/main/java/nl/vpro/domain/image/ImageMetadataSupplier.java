@@ -24,7 +24,6 @@ public interface ImageMetadataSupplier {
 
     @NonNull
     default ImageMetadata getImageMetadataWithSourceSet() {
-        final ImageMetadata imageMetadata = getImageMetadata();
         final Map<ImageSource.Key, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(this);
         ImageMetadataImpl.Builder builder =  ImageMetadataImpl.builder()
             .from(getImageMetadata())
