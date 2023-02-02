@@ -357,5 +357,7 @@ class ImageMetadataTest {
             "  \"sourceName\" : \"VPRO\",\n" +
             "  \"pointOfInterest\" : \"28% 47%\"\n" +
             "}", Jackson2Mapper.getInstance().writeValueAsString(picture));
+
+        log.info("{}", picture.toString());
     }
 }

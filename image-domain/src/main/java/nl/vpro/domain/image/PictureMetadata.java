@@ -10,7 +10,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.annotations.Beta;
+
+import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * A {@link Picture} that also is {@link ImageMetadata}, so represents all available metadata for the image, and also
@@ -54,5 +57,14 @@ public class PictureMetadata extends MetadataWrapper implements Picture, ImageMe
     @JsonIgnore
     public @Nullable Area getAreaOfInterest() {
         return wrapped.getAreaOfInterest();
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return Jackson2Mapper.getInstance().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return super.toString();
+        }
     }
 }
