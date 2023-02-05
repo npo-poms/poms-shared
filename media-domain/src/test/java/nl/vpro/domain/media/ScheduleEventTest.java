@@ -7,10 +7,10 @@ import java.time.Duration;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.util.test.ComparableTheory;
 
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
+public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
     @Test
     public void testTitles() {

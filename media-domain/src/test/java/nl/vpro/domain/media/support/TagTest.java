@@ -8,12 +8,11 @@ import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
 import org.junit.jupiter.api.Test;
-
-import nl.vpro.test.jqwik.ComparableTest;
+import org.meeuw.util.test.ComparableTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TagTest implements ComparableTest<Tag> {
+public class TagTest implements ComparableTheory<Tag> {
 
     @Test
     public void testCaseSensitivity() {

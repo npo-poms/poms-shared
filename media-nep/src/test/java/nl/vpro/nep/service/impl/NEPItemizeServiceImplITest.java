@@ -2,7 +2,8 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.time.Duration;
 import java.time.Instant;
@@ -11,6 +12,8 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import nl.vpro.nep.domain.ItemizerStatusResponse;
 import nl.vpro.nep.domain.NEPItemizeResponse;
@@ -31,7 +34,7 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 @Timeout(value = 10, unit = TimeUnit.MINUTES)
 public class NEPItemizeServiceImplITest {
 
-    final static String MID = "POW_04505213";
+    final static String MID = "TELEA_1044063";
     //String MID = "AT_2073522";
     @Test
     @Order(1)
@@ -122,13 +125,14 @@ public class NEPItemizeServiceImplITest {
     }
 
 
-    @Test
+    @ParameterizedTest
     @Order(30)
-    public void grabScreenMid() throws Exception {
+    @ValueSource( strings= {"VPWON_1344256", MID, "TELEA_1044063"})
+    public void grabScreenMid(String mid) throws Exception {
         try (NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES)) {
             File out = File.createTempFile("test", ".jpg");
             Map<String, String> headers = new HashMap<>();
-            itemizer.grabScreenMid(MID, Duration.ZERO, headers::put, Files.newOutputStream(out.toPath()));
+            itemizer.grabScreenMid(mid, Duration.ofSeconds(10), headers::put, Files.newOutputStream(out.toPath()));
             log.info("Created {} bytes {} (headers: {})", out.length(), out, headers);
         }
     }

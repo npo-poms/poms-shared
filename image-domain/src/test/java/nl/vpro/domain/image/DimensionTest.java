@@ -5,8 +5,7 @@ import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
 import org.junit.jupiter.api.Test;
-
-import nl.vpro.test.jqwik.ComparableTest;
+import org.meeuw.util.test.ComparableTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.34
  */
 @Slf4j
-public class DimensionTest implements ComparableTest<Dimension> {
+public class DimensionTest implements ComparableTheory<Dimension> {
 
     @Test
     public void reduce() {

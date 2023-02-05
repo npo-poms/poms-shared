@@ -13,15 +13,15 @@ import javax.validation.ConstraintViolation;
 import javax.xml.bind.util.JAXBSource;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.util.test.ComparableTheory;
 
-import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class RelationTest implements ComparableTest<Relation> {
+public class RelationTest implements ComparableTheory<Relation> {
 
     @Test
     public void testGetUrnOnNull() {
