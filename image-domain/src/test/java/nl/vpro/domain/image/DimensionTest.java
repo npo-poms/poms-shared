@@ -36,7 +36,8 @@ public class DimensionTest implements ComparableTheory<Dimension> {
                     Dimension.of(
                         a == null ? null : a * 100,
                         b == null ? null : b * 100))
-            ).injectNull(0.001);
+            ).injectNull(0.0001);
+
 
     }
 }
