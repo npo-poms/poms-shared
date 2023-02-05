@@ -1,8 +1,8 @@
 package nl.vpro.domain.image;
 
 import lombok.extern.slf4j.Slf4j;
-import net.jqwik.api.Arbitraries;
-import net.jqwik.api.Arbitrary;
+import net.jqwik.api.*;
+import net.jqwik.api.arbitraries.IntegerArbitrary;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.util.test.ComparableTheory;
@@ -25,11 +25,18 @@ public class DimensionTest implements ComparableTheory<Dimension> {
 
     @Override
     public Arbitrary<? extends Dimension> datapoints() {
-        return Arbitraries.of(
-            Dimension.of(640, 320),
-            Dimension.of(640, null),
-            Dimension.of((Long) null, null),
-            Dimension.of(1, 2)
-            ).injectNull(0.2);
+        IntegerArbitrary x = Arbitraries.integers().between(1, 4);
+        IntegerArbitrary y = Arbitraries.integers().between(1, 4);
+
+        return Combinators.combine(
+            x.injectNull(0.01),
+            y.injectNull(0.01))
+            .flatAs(
+                (a, b) -> Arbitraries.of(
+                    Dimension.of(
+                        a == null ? null : a * 100,
+                        b == null ? null : b * 100))
+            ).injectNull(0.001);
+
     }
 }
