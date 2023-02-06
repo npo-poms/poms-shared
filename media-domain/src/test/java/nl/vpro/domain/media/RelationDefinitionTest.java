@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import net.jqwik.api.Arbitraries;
-import net.jqwik.api.Arbitrary;
+import net.jqwik.api.*;
 
 import java.util.Set;
 
@@ -13,12 +12,11 @@ import javax.validation.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import nl.vpro.test.jqwik.BasicObjectTest;
+import org.meeuw.util.test.BasicObjectTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RelationDefinitionTest implements BasicObjectTest<RelationDefinition> {
+public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinition> {
 
     private static Validator validator;
 
@@ -74,5 +72,17 @@ public class RelationDefinitionTest implements BasicObjectTest<RelationDefinitio
             new RelationDefinition(), // with empty fields
             new RelationDefinition("LABEL", "VPRO"), // ide only
             new RelationDefinition("LABEL", "VPRO", "Added text"));
+    }
+
+   @Override
+   public Arbitrary<? extends Tuple.Tuple2<? extends RelationDefinition, ? extends RelationDefinition>> equalDatapoints() {
+
+
+        return Arbitraries.of(
+            Tuple.of(new RelationDefinition(), new RelationDefinition()),
+            Tuple.of(
+                new RelationDefinition("LABEL", "VPRO"),
+                new RelationDefinition("LABEL", "VPRO", "Added text"))
+        );
     }
 }

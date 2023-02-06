@@ -51,7 +51,6 @@ public class DimensionTest implements ComparableTheory<Dimension> {
                 Dimension.of(null, 320)
             )
         );
-
     }
 
 }

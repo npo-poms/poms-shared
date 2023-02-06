@@ -1,16 +1,17 @@
 package nl.vpro.domain.media;
 
-import net.jqwik.api.Arbitraries;
-import net.jqwik.api.Arbitrary;
+import net.jqwik.api.*;
+
+import java.net.URI;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.util.test.BasicObjectTheory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.jqwik.BasicObjectTest;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
@@ -20,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.8
  */
-public class PersonTest implements BasicObjectTest<Person> {
+public class PersonTest implements BasicObjectTheory<Person> {
 
 
     @Test
@@ -79,8 +80,25 @@ public class PersonTest implements BasicObjectTest<Person> {
                 pietjePuk,
                 pietjePuk2,
                 pietjePuk3
-            ).injectNull(0.1)
-            .injectDuplicates(0.1);
+            ).injectNull(0.1);
+    }
 
+    @Override
+    public Arbitrary<? extends Tuple.Tuple2<? extends Person, ? extends Person>> equalDatapoints() {
+        Person pietje = Person.builder()
+            .givenName("Pietje")
+            .familyName("Puk")
+            .role(RoleType.PRESENTER)
+            .uri(URI.create("https://gtaa.nl/1234"))
+            .build();
+
+        return Arbitraries.of(
+            Tuple.of(pietje, pietje),
+            Tuple.of(pietje, Person
+                    .builder()
+                    .gtaaUri(pietje.getGtaaUri())
+                    .build()
+            )
+        );
     }
 }
