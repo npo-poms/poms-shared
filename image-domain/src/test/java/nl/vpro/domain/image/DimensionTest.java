@@ -25,19 +25,33 @@ public class DimensionTest implements ComparableTheory<Dimension> {
 
     @Override
     public Arbitrary<? extends Dimension> datapoints() {
-        IntegerArbitrary x = Arbitraries.integers().between(1, 4);
-        IntegerArbitrary y = Arbitraries.integers().between(1, 4);
+        IntegerArbitrary x = Arbitraries.integers().between(1, 1000);
+        IntegerArbitrary y = Arbitraries.integers().between(1, 1000);
 
         return Combinators.combine(
             x.injectNull(0.01),
             y.injectNull(0.01))
             .flatAs(
                 (a, b) -> Arbitraries.of(
-                    Dimension.of(
-                        a == null ? null : a * 100,
-                        b == null ? null : b * 100))
-            ).injectNull(0.0001);
+                    Dimension.of(a, b)
+                )
+            ).injectNull(0.1);
+    }
 
+    @Override
+    public Arbitrary<? extends Tuple.Tuple2<? extends Dimension, ? extends Dimension>> equalDatapoints() {
+
+        return Arbitraries.of(
+            Tuple.of(
+                Dimension.of(640, 320),
+                Dimension.of(640, 320)
+            ),
+            Tuple.of(
+                Dimension.of(null, 320),
+                Dimension.of(null, 320)
+            )
+        );
 
     }
+
 }
