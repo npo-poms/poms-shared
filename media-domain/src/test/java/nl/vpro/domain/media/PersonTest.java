@@ -1,17 +1,16 @@
 package nl.vpro.domain.media;
 
-import net.jqwik.api.*;
-
-import java.net.URI;
+import net.jqwik.api.Arbitraries;
+import net.jqwik.api.Arbitrary;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.BasicObjectTheory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.jqwik.BasicObjectTest;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
@@ -21,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.8
  */
-public class PersonTest implements BasicObjectTheory<Person> {
+public class PersonTest implements BasicObjectTest<Person> {
 
 
     @Test
@@ -83,7 +82,7 @@ public class PersonTest implements BasicObjectTheory<Person> {
             ).injectNull(0.1);
     }
 
-    @Override
+  /*  @Override
     public Arbitrary<? extends Tuple.Tuple2<? extends Person, ? extends Person>> equalDatapoints() {
         Person pietje = Person.builder()
             .givenName("Pietje")
@@ -100,5 +99,5 @@ public class PersonTest implements BasicObjectTheory<Person> {
                     .build()
             )
         );
-    }
+    }*/
 }

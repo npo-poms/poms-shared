@@ -13,15 +13,15 @@ import javax.validation.ConstraintViolation;
 import javax.xml.bind.util.JAXBSource;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.ComparableTheory;
 
+import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class RelationTest implements ComparableTheory<Relation> {
+public class RelationTest implements ComparableTest<Relation> {
 
     @Test
     public void testGetUrnOnNull() {
@@ -167,6 +167,14 @@ public class RelationTest implements ComparableTheory<Relation> {
         );
     }
 
+    //@Override
+   /* public Arbitrary<? extends Tuple.Tuple2<? extends Relation, ? extends Relation>> equalDatapoints() {
+        return Arbitraries.of(
+            Tuple.of(relation(null, "TYPE", "VPRO"), relation(null, "TYPE", "VPRO")),
+            Tuple.of(relation(2L, "TYPEA", "VPRO"), relation(2L, "TYPE", "VPRO"))
+        );
+     }
+*/
 
     private static Relation relation(Long id, String type, String broadcaster) {
         Relation relation = new Relation(new RelationDefinition(type, broadcaster));
