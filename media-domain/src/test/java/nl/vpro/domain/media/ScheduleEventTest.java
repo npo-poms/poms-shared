@@ -185,11 +185,10 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
             null
 
         );
-  }
-     @Override
-   public Arbitrary<? extends Tuple.Tuple2<? extends ScheduleEvent, ? extends ScheduleEvent>> equalDatapoints() {
+    }
 
-
+    @Override
+    public Arbitrary<? extends Tuple.Tuple2<? extends ScheduleEvent, ? extends ScheduleEvent>> equalDatapoints() {
         return Arbitraries.of(
             Tuple.of(ScheduleEvent.builder().build(), ScheduleEvent.builder().build()),
             Tuple.of(

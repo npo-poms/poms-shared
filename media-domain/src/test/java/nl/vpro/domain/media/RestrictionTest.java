@@ -41,6 +41,9 @@ public class RestrictionTest implements BasicObjectTheory<RestrictionTest.TestRe
     }
 
     public static class TestRestriction extends Restriction<TestRestriction> {
+
+        private static final long serialVersionUID = -884609334628436209L;
+
         private TestRestriction(Long id, Instant start, Instant stop) {
             super(id, start, stop);
         }
