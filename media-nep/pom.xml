@@ -184,18 +184,19 @@
             <configuration>
               <inputSpec>${project.basedir}/src/main/resources/sourcing-service/openapi.yaml</inputSpec>
               <generatorName>java</generatorName>
-              <apiPackage>nl.vpro.nep.sourcingservice</apiPackage>
-              <modelPackage>nl.vpro.nep.sourcingservice</modelPackage>
+              <apiPackage>nl.vpro.nep.sourcingservice.api</apiPackage>
+              <modelPackage>nl.vpro.nep.sourcingservice.model</modelPackage>
               <invokerPackage>nl.vpro.nep.sourcingservice.invoker</invokerPackage>
               <configHelp>false</configHelp>
-              <generateApiTests>true</generateApiTests>
-              <generateModelTests>true</generateModelTests>
+              <generateApiTests>false</generateApiTests>
+              <generateModelTests>false</generateModelTests>
               <configOptions>
                 <strictSpec>true</strictSpec>
                 <dateLibrary>java8</dateLibrary>
                 <java8>true</java8>
                 <library>resteasy</library>
                 <withXml>false</withXml>
+
               </configOptions>
             </configuration>
           </execution>
