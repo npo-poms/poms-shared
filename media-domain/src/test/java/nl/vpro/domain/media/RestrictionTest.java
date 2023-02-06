@@ -10,7 +10,8 @@ import net.jqwik.api.Arbitrary;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.BasicObjectTheory;
+
+import nl.vpro.test.jqwik.BasicObjectTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
-public class RestrictionTest implements BasicObjectTheory<RestrictionTest.TestRestriction> {
+public class RestrictionTest implements BasicObjectTest<RestrictionTest.TestRestriction> {
 
     public static TestRestriction nullArgument = null;
     public static TestRestriction withStartAndStop = new TestRestriction(null, Instant.EPOCH, Instant.ofEpochMilli(2));

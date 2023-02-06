@@ -4,14 +4,14 @@ import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.ComparableTheory;
 
+import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaType.CLIP;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemberRefTheoryTest implements ComparableTheory<MemberRef> {
+public class MemberRefTheoryTest implements ComparableTest<MemberRef> {
 
     private static final  Program member = new Program(1L);
 
