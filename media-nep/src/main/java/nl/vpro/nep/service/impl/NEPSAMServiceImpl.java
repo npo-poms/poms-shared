@@ -3,7 +3,6 @@ package nl.vpro.nep.service.impl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -152,12 +151,14 @@ public class NEPSAMServiceImpl implements NEPSAMService{
     }
 
     static StreamAccessItem createStreamAccessItem(String ip, Duration duration) {
-        StreamAccessItem item = new StreamAccessItem().data(new ApiObject().type("access"));
-        Map<String, Object> attributes = new HashMap<>();
-        attributes.put("viewer", "pomsgui");
-        attributes.put("ip", ip);
-        attributes.put("duration", duration == null ? null : duration.toString());
-        item.getData().setAttributes(attributes);
+        StreamAccessItem item = new StreamAccessItem().data(
+            new StreamAccessItemData().type("access")
+        );
+        StreamAccessAttributes accessAttributes = new StreamAccessAttributes();
+        accessAttributes.setViewer("pomsgui");
+        accessAttributes.setIp(ip);
+        accessAttributes.setDuration((int) (duration.toMillis() / 1000));
+        item.getData().setAttributes(accessAttributes);
         return item;
     }
 

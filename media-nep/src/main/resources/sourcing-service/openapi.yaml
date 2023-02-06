@@ -1,0 +1,625 @@
+openapi: 3.0.0
+
+info:
+  title: NEP Sourcing service
+  description: Sourcing service of AV media files for automated processing
+  version: 1.2.0
+
+servers:
+  - url: https://sourcingservice-acc.cdn1.usvc.nepworldwide.nl
+  - url: http://localhost:8000
+
+security:
+  - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key
+  schemas:
+    # Base IngestRequest, to be used as an example for POST to /v1/ingest/request
+    # There is a limited set of properties
+    IngestRequest:
+      properties:
+        fileName:
+          type: string
+          format: filename
+          example: "video_file.mxf"
+        origin:
+          type: string
+          example: "nep_upload@ftp1.cdn1.usvc.nepworldwide.nl"
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/IngestRequestProfiles'
+        ancillaryFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/IngestRequestAncillaryFile'
+      required:
+        - fileName
+        - origin
+        - profiles
+
+    # An IngestRequest with a uuid property, to be used as response examples
+    IngestRequestResponse:
+      allOf:
+        - type: object
+          properties:
+            uuid:
+              type: string
+              format: uuid
+              example: "20b9fa58-c32b-44fe-994b-ad4f9f4bd791"
+            fileName:
+              type: string
+              format: filename
+              example: "video_file.mxf"
+            origin:
+              type: string
+              example: "nep_upload@ftp1.cdn1.usvc.nepworldwide.nl"
+            requestedAt:
+              type: string
+              format: date-time
+            expiresAt:
+              type: string
+              format: date-time
+            isUploaded:
+              type: boolean
+            uploadedAt:
+              type: string
+              format: date-time
+            fileUuid:
+              type: string
+              format: uuid
+              example: "5afb1d50-1713-11e8-80e5-fd2adac54d33"
+            tasks:
+              type: array
+              items:
+                $ref: '#/components/schemas/IngestRequestTaskResponse'
+            status:
+              type: string
+              example: 'processing'
+            progress:
+              type: integer
+              example: 84
+            completedAt:
+              type: string
+              format: date-time
+              nullable: true
+            ancillaryFiles:
+              type: array
+              items:
+                $ref: '#/components/schemas/AncillaryFile'
+    IngestRequestProfiles:
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parameter'
+
+    AncillaryFile:
+      properties:
+        fileName:
+          type: string
+          format: filename
+          example: "video_file.mxf"
+        isUploaded:
+          type: boolean
+        fileUuid:
+          type: string
+          format: uuid
+          example: "5afb1d50-1713-11e8-80e5-fd2adac54d33"
+        uploadedAt:
+          type: string
+          format: date-time
+
+    IngestRequestAncillaryFile:
+      properties:
+        fileName:
+          type: string
+
+    IngestRequestTask:
+      properties:
+        profile:
+          type: string
+          example: "dcea58a4-16ea-11e8-80e5-fd2adac54d33"
+        inputParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parameter'
+        outputParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parameter'
+
+    IngestRequestTaskResponse:
+      allOf:
+        - $ref: '#/components/schemas/IngestRequestTask'
+        - type: object
+          properties:
+            name:
+              type: string
+              example: "hd-encoding-profile"
+            status:
+              type: string
+              example: "pending"
+            progress:
+              type: integer
+              example: 42
+
+    Parameter:
+      properties:
+        key:
+          type: string
+          example: "drm"
+        value:
+          type: string
+          example: "true"
+
+    File:
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          example: "5afb1d50-1713-11e8-80e5-fd2adac54d33"
+        fileName:
+          type: string
+          example: "video_file.mxf"
+        byteSize:
+          type: integer
+          example: 484613570
+        createdAt:
+          type: string
+          format: date-time
+        origin:
+            type: string
+            example: "user@ftp1.cdn.nepworldwide.nl"
+        isRequested:
+          type: boolean
+        requestedAt:
+          type: string
+          format: date-time
+        ingestRequestUuid:
+          type: string
+          format: uuid
+          example: "20b9fa58-c32b-44fe-994b-ad4f9f4bd791"
+
+    ProfileMapping:
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          example: "5afb1d50-1713-11e8-80e5-fd2adac54d33"
+        description:
+          type: string
+          example: "profile description"
+
+    TransferRequestCallback:
+      type: object
+      properties:
+        origin:
+          description: Origin of the file
+          type: string
+          example: your_user@ftp1.cdn.nepworldwide.nl
+        sourcePath:
+          description: Directory of the originally uploaded file
+          type: string
+          example: 'nep\\'
+        storedFilePath:
+          description: Filename as it is on storage
+          type: string
+          example: 'catch-all\\'
+        fileName:
+          description: Filename as it was uploaded
+          type: string
+          example: NEP_VIDEO.mxf
+        storedFileName:
+          description: Filename on storage
+          type: string
+          example: NEP_VIDEO.mxf
+        destinationPath:
+          description: Directory relative to the transfer destination
+          type: string
+          example: 'nep\\'
+    IngestRequestTaskCallback:
+      type: object
+      required: [workOrder, profile, inputParameters, outputParameters, file]
+      properties:
+        workOrder:
+          description: Unique identifier of the work order
+          type: string
+          format: uuid
+        profile:
+          description: Unique identifier of the profile for this job
+          type: string
+          format: uuid
+        inputParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parameter'
+        outputParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parameter'
+        file:
+          type: object
+          properties:
+            uuid:
+              description: Unique identifier of the file that was used for this job
+              type: string
+              format: uuid
+            originalFileName:
+              description: Filename as it was originally uploaded
+              type: string
+              example: NEP_VIDEO.mxf
+            storedFileName:
+              description: Filename as it is on storage
+              type: string
+              example: NEP_VIDEO.mxf
+        completedAt:
+          type: string
+          format: date-time
+    IngestRequestCallback:
+      type: object
+      required: [workOrder, file]
+      properties:
+        workOrder:
+          description: Unique identifier of the work order
+          type: string
+          format: uuid
+        file:
+          type: object
+          properties:
+            uuid:
+              description: Unique identifier of the file that was used for this job
+              type: string
+              format: uuid
+            originalFileName:
+              description: Filename as it was originally uploaded
+              type: string
+              example: NEP_VIDEO.mxf
+            storedFileName:
+              description: Filename as it is on storage
+              type: string
+              example: NEP_VIDEO.mxf
+        completedAt:
+          type: string
+          format: date-time
+paths:
+  /v1/ingest/files:
+    get:
+      tags:
+        - ingest
+      parameters:
+        - name: minutes
+          in: query
+          description: Limit to last n minutes
+          schema:
+            type: string
+            default: '30'
+        - name: dateFrom
+          in: query
+          description: Received after (DATE_ISO8601, requires dateTo to be set)
+          schema:
+            type: string
+            default: '2018-01-01T0:00:00Z'
+        - name: dateTo
+          in: query
+          description: Received before (DATE_ISO8601, requires dateFrom to be set)
+          schema:
+            type: string
+            default: '2022-01-01T0:00:00Z'
+        - name: tenant
+          in: query
+          description: Tenant filter
+          schema:
+            type: string
+            default: DELT
+      responses:
+        '200':
+          description: List of contributed files
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/File'
+
+  /v1/ingest/files/{file}:
+    get:
+      tags:
+        - ingest
+      parameters:
+        - name: file
+          in: path
+          required: true
+          schema:
+            type: string
+          description: uuid of file
+      responses:
+        '200':
+          description: File object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+
+  /v1/ingest/request:
+    get:
+      tags:
+        - ingest
+      parameters:
+        - name: order
+          in: query
+          description: order by
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List with ingest requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestRequestResponse'
+    post:
+      callbacks:
+        ALL_JOBS_COMPLETED:
+          'https://configured-callback-url':
+            post:
+              description: 'Dispatched after all jobs for a single work order have been completed'
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      allOf:
+                        - type: object
+                          properties:
+                            event:
+                              type: string
+                              enum:
+                                - ALL_JOBS_COMPLETED
+                        - $ref: '#/components/schemas/IngestRequestCallback'
+              responses:
+                '200':
+                  description: 'Callback has been accepted'
+        REGISTERED:
+          'https://configured-callback-url':
+            post:
+              description: 'Dispatched whenever a new file has been registered in the sourcing service'
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      allOf:
+                        - type: object
+                          properties:
+                            event:
+                              type: string
+                              enum:
+                                - REGISTERED
+                        - $ref: '#/components/schemas/TransferRequestCallback'
+              responses:
+                '200':
+                  description: 'Callback has been accepted'
+        TRANSFERRED:
+          'https://configured-callback-url':
+            post:
+              description: 'Dispatched after a file has been transferred to storage'
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      allOf:
+                        - type: object
+                          properties:
+                            event:
+                              type: string
+                              enum:
+                                - TRANSFERRED
+                        - $ref: '#/components/schemas/TransferRequestCallback'
+              responses:
+                '200':
+                  description: 'Callback has been accepted'
+        JOB_STARTED:
+          'https://configured-callback-url':
+            post:
+              description: 'Dispatched after one of a work orders jobs has started'
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      allOf:
+                        - type: object
+                          properties:
+                            event:
+                              type: string
+                              enum:
+                                - JOB_STARTED
+                        - $ref: '#/components/schemas/IngestRequestTaskCallback'
+              responses:
+                '200':
+                  description: 'Callback has been accepted'
+        JOB_COMPLETED:
+          'https://configured-callback-url':
+            post:
+              description: 'Dispatched after one of a work order jobs has successfully completed'
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      allOf:
+                        - type: object
+                          properties:
+                            event:
+                              type: string
+                              enum:
+                                - JOB_COMPLETED
+                        - $ref: '#/components/schemas/IngestRequestTaskCallback'
+              responses:
+                '200':
+                  description: 'Callback has been accepted'
+        JOB_FAILED:
+          'https://configured-callback-url':
+            post:
+              description: 'Dispatched after one of a work order jobs has failed'
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      allOf:
+                        - type: object
+                          properties:
+                            event:
+                              type: string
+                              enum:
+                                - JOB_FAILED
+                        - $ref: '#/components/schemas/IngestRequestTaskCallback'
+              responses:
+                '200':
+                  description: 'Callback has been accepted'
+        FILE_CONTENT_RECEIVED:
+          'https://configured-callback-url':
+            post:
+              description: 'Dispatched after a inbound file callback has been received, with the file content included'
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      required: ['event', 'origin', 'path', 'originalFileName', 'storedFileName']
+                      properties:
+                        event:
+                          type: string
+                          enum:
+                            - FILE_CONTENT_RECEIVED
+                        file:
+                          type: object
+                          properties:
+                            origin:
+                              type: string
+                              example: 'nep_upload@ftp1.cdn.nepworldwide.nl'
+                            path:
+                              type: string
+                              example: /
+                            originalFileName:
+                              type: string
+                              example: metadata.xml
+                            storedFileName:
+                              type: string
+                              example: metadata.xml
+                            content:
+                              type: string
+                              description: Content of the uploaded file
+                              example: '<xml></xml>'
+                            contributor:
+                              type: string
+                              description: UUID of the contributor of this file
+                              format: uuid
+                            client:
+                              type: string
+                              description: UUID of the client that this file was uploaded for
+                              format: uuid
+
+              responses:
+                '200':
+                  description: 'Callback has been accepted'
+      tags:
+        - ingest
+      requestBody:
+        description: Ingest request object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestRequest'
+      responses:
+        '201':
+          description: Created Ingest Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestRequestResponse'
+        '401':
+          description: No access
+        '409':
+          description: An ingest request for this file is already being processed
+
+  /v1/ingest/request/{ingestRequest}:
+    get:
+      tags:
+        - ingest
+      parameters:
+        - name: order
+          in: query
+          description: order by
+          schema:
+            type: string
+        - name: ingestRequest
+          in: path
+          required: true
+          description: uuid of ingestRequest
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Ingest Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestRequestResponse'
+    patch:
+      tags:
+        - ingest
+      requestBody:
+        description: Ingest request object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestRequest'
+      parameters:
+        - name: ingestRequest
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Patched Ingest Request
+        '409':
+          description: 'Not allowed to change the data, record is locked'
+    delete:
+      tags:
+        - ingest
+      parameters:
+        - name: ingestRequest
+          in: path
+          required: true
+          schema:
+            type: string
+          description: uuid of ingestRequest
+      responses:
+        '204':
+          description: No content
+        '209':
+          description: Unable to delete ingest request
+
+  /v1/ingest/profiles:
+    get:
+      tags:
+        - ingest
+      responses:
+        '200':
+          description: Profile Mappings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileMapping'

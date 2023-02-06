@@ -132,6 +132,16 @@
       <groupId>nl.vpro.poms</groupId>
       <artifactId>poms-shared-domain</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>0.2.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 
 
@@ -141,9 +151,10 @@
       <plugin>
         <groupId>org.openapitools</groupId>
         <artifactId>openapi-generator-maven-plugin</artifactId>
-        <version>3.3.4</version> <!-- newer versions create NPE during generation -->
+        <version>6.3.0</version>
         <executions>
           <execution>
+            <id>samapi</id>
             <goals>
               <goal>generate</goal>
             </goals>
@@ -156,6 +167,29 @@
               <configHelp>false</configHelp>
               <generateApiTests>false</generateApiTests>
               <generateModelTests>false</generateModelTests>
+              <configOptions>
+                <strictSpec>true</strictSpec>
+                <dateLibrary>java8</dateLibrary>
+                <java8>true</java8>
+                <library>resteasy</library>
+                <withXml>false</withXml>
+              </configOptions>
+            </configuration>
+          </execution>
+          <execution>
+            <id>sourcingservice</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/src/main/resources/sourcing-service/openapi.yaml</inputSpec>
+              <generatorName>java</generatorName>
+              <apiPackage>nl.vpro.nep.sourcingservice</apiPackage>
+              <modelPackage>nl.vpro.nep.sourcingservice</modelPackage>
+              <invokerPackage>nl.vpro.nep.sourcingservice.invoker</invokerPackage>
+              <configHelp>false</configHelp>
+              <generateApiTests>true</generateApiTests>
+              <generateModelTests>true</generateModelTests>
               <configOptions>
                 <strictSpec>true</strictSpec>
                 <dateLibrary>java8</dateLibrary>
