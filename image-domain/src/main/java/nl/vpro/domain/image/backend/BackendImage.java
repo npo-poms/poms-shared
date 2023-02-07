@@ -282,6 +282,12 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
         return this;
     }
 
+    @Override
+    public BackendImage setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     @SneakyThrows
     @XmlTransient
     public ImageStream getImageStream() throws NotFoundException {

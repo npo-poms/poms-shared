@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.image.backend;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -72,6 +71,7 @@ public class BasicBackendImageMetadata implements Serializable, MutableEmbargo<B
      * So imageUri is an identifier for the actual image itself, the rest is metadata which may vary between different object which
      * still have the same imageUri.
      */
+    @Setter(AccessLevel.NONE)
     private String imageUri;
 
     private ImageType type;
