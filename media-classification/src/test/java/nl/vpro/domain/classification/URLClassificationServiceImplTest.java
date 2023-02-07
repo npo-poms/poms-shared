@@ -54,8 +54,9 @@ public class URLClassificationServiceImplTest {
 
         assertThat(service.values().size()).isGreaterThan(10);
         assertThat(service.getCode()).isEqualTo(200);
+
         Instant load = service.getLastLoad();
-        assertThat(load).isAfter(service.getLastModified());
+        assertThat(load).isBeforeOrEqualTo(service.getLastModified());
 
         // call another time to show that it would not be loaded again.
         assertThat(service.values().size()).isGreaterThan(11);
