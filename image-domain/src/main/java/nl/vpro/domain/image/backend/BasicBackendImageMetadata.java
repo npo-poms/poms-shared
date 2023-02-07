@@ -4,7 +4,8 @@
  */
 package nl.vpro.domain.image.backend;
 
-import lombok.*;
+import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -21,7 +22,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.MutableEmbargo;
-import nl.vpro.domain.image.*;
+import nl.vpro.domain.image.ImageFormat;
+import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -71,7 +73,6 @@ public class BasicBackendImageMetadata implements Serializable, MutableEmbargo<B
      * So imageUri is an identifier for the actual image itself, the rest is metadata which may vary between different object which
      * still have the same imageUri.
      */
-    @Setter(AccessLevel.NONE)
     private String imageUri;
 
     private ImageType type;
@@ -231,4 +232,11 @@ public class BasicBackendImageMetadata implements Serializable, MutableEmbargo<B
     public Instant getCreationInstant() {
         return getLastModifiedInstant();
     }
+
+    @Override
+    public BasicBackendImageMetadata setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+        return this;
+    }
+
 }
