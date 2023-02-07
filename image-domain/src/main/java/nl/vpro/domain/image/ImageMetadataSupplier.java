@@ -70,9 +70,15 @@ public interface ImageMetadataSupplier {
         @Override
         @NonNull
         public ImageMetadata getImageMetadata() {
-            return ImageMetadataImpl.builder()
-                .from(this.wrapped)
-                .build();
+            ImageMetadataImpl.Builder builder = ImageMetadataImpl.builder();
+
+            // todo
+            if (this.wrapped instanceof ImageMetadata) {
+                builder.from((ImageMetadata) this.wrapped);
+            } else {
+                builder.from(this.wrapped);
+            }
+            return builder.build();
         }
 
         public <C extends Metadata> Optional<C> unwrap(Class<C> clazz) {
