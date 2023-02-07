@@ -1,12 +1,8 @@
 package nl.vpro.domain.image;
 
-import lombok.Getter;
-
 import java.util.Map;
-import java.util.Optional;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.PolyNull;
+import org.checkerframework.checker.nullness.qual.*;
 
 /**
  * The basic interface for images is {@link nl.vpro.domain.image.Metadata} (POMS) and its extension {@link ImageMetadata}
@@ -25,7 +21,7 @@ public interface ImageMetadataSupplier {
     @NonNull
     default ImageMetadata getImageMetadataWithSourceSet() {
         final ImageMetadata imageMetadata = getImageMetadata();
-        final Map<ImageSource.Key, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(this);
+        final Map<ImageSource.Key, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(imageMetadata);
         ImageMetadataImpl.Builder builder =  ImageMetadataImpl.builder()
             .from(getImageMetadata())
             .addSourceSet(sourceSet);
@@ -40,53 +36,5 @@ public interface ImageMetadataSupplier {
     @NonNull
     ImageMetadata getImageMetadata();
 
-
-    @PolyNull
-    static <W extends Metadata<W>> Wrapper<W> of(@PolyNull W wrapped) {
-        if (wrapped == null) {
-            return null;
-        } else {
-            return new Wrapper<>(wrapped);
-        }
-    }
-
-    /**
-     * If an image object already implements {@link Metadata}, then an interface can
-     * be created using this wrapper.
-     * <p>
-     * This e.g. is useful for poms images {@link nl.vpro.domain.media.support.Image} and {@link nl.vpro.domain.page.Image}, which are presently not yet implementing {@link ImageMetadata}
-     * Imp
-     */
-    class Wrapper<W extends Metadata<W>> implements ImageMetadataSupplier {
-
-        @Getter
-        final W wrapped;
-
-
-        public Wrapper(W wrapped) {
-            this.wrapped = wrapped;
-        }
-
-        @Override
-        @NonNull
-        public ImageMetadata getImageMetadata() {
-            return ImageMetadataImpl.builder()
-                .from(this.wrapped)
-                .build();
-        }
-
-        public <C extends Metadata<C>> Optional<C> unwrap(Class<C> clazz) {
-            if (clazz.isInstance(wrapped)) {
-                return Optional.of((C) wrapped);
-            } else {
-                return Optional.empty();
-            }
-        }
-
-        @Override
-        public String toString() {
-            return "supplier[" + wrapped + "]";
-        }
-    }
 
 }

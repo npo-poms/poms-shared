@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.domain.image.ImageMetadata;
-import nl.vpro.domain.image.ImageMetadataSupplier;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
@@ -41,8 +40,10 @@ class PomsImagesTest {
             "      \"lastModified\": 1639275163526,\n" +
             "      \"urn\": \"urn:vpro:media:image:122414908\"\n" +
             "    }", Image.class);
-        ImageMetadata imageMetadata = ImageMetadataSupplier.of(support).getImageMetadataWithSourceSet();
-        Jackson2TestUtil.roundTripAndSimilarAndEquals(imageMetadata, "{\n" +
+        ImageMetadata imageMetadata = ImageMetadata.of(support);
+        Jackson2TestUtil.assertThatJson(Jackson2Mapper.getModelInstance(), imageMetadata)
+            .withoutUnmarshalling()
+            .isSimilarTo("{\n" +
             "  \"type\" : \"STILL\",\n" +
             "  \"title\" : \"2Doc:\",\n" +
             "  \"height\" : 1080,\n" +
@@ -131,11 +132,15 @@ class PomsImagesTest {
             "    }\n" +
             "  },\n" +
             "  \"lastModified\" : 1639275163526,\n" +
+            "  \"creationDate\" : 1639275163526,\n" +
             "  \"description\" : \"Filmmaakster Michal Weits duikt in het verleden van haar overgrootvader Joseph Weitz die, met geld van de Blue Box-campagne van het Joods Nationaal Fonds, Palestijns land aankocht en onteigende.\",\n" +
-            "  \"license\" : \"COPYRIGHTED\",\n" +
             "  \"sourceName\" : \"VPRO\",\n" +
+            "  \"license\" : \"COPYRIGHTED\",\n" +
             "  \"credits\" : \"Still 2Doc: / Blue Box\",\n" +
-            "  \"creationDate\" : 1639275163526\n" +
+            "  \"pointOfInterest\" : {\n" +
+            "    \"x\" : 50.0,\n" +
+            "    \"y\" : 50.0\n" +
+            "  }\n" +
             "}");
     }
 

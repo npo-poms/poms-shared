@@ -5,19 +5,15 @@ import java.util.Optional;
 /**
  * A SPI to provide {@link ImageSource}s for a given {@link ImageMetadataSupplier}.
  */
+@FunctionalInterface
 public interface ImageSourceCreator {
-
-
-
-    @Deprecated
-    default Optional<ImageSource> createFor(ImageMetadataSupplier provider, ImageSource.Type type) {
-        return createFor(provider, new ImageSource.Key(type, null));
-    }
 
     /**
      * Given a source for image meta and a desired 'type' try to create {@link ImageSource} (basically a URL) for it.
      */
-    default Optional<ImageSource> createFor(ImageMetadataSupplier provider, ImageSource.Key type) {
-        return createFor(provider, type.getType());
-    }
+    Optional<ImageSource> createFor(
+        Metadata<?> imageMetadata,
+        ImageSource.Key type
+    );
+
 }

@@ -17,16 +17,18 @@ public class ImageSourceService {
 
     private final ServiceLoader<ImageSourceCreator> services = ServiceLoader.load(ImageSourceCreator.class);
 
+
+
     /**
      *
      */
-    public ImageSourceSet getSourceSet(ImageMetadataSupplier metadataProvider) {
+    public ImageSourceSet getSourceSet(Metadata<?> metadata) {
         final Map<ImageSource.Key, ImageSource> map = new LinkedHashMap<>();
         final Set<String> set = new TreeSet<>();
 
         services.forEach(creator -> {
             for (ImageSource.Key key : Conversions.MAPPING.keySet()) {
-                Optional<ImageSource> image = creator.createFor(metadataProvider, key);
+                Optional<ImageSource> image = creator.createFor(metadata, key);
                 if (image.isPresent()) {
                     ImageSource source = image.get();
                     if(set.add(source.getDimension() + "\t" + source.getFormat())) {

@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 
-import nl.vpro.domain.image.ImageMetadataSupplier;
+import nl.vpro.domain.image.*;
 import nl.vpro.domain.image.backend.BackendImageSourceCreator;
 
 /**
@@ -16,12 +16,10 @@ public class PomsImages {
 
     public static class Creator extends BackendImageSourceCreator {
 
-        @SuppressWarnings("unchecked")
         @Override
-        protected Optional<Long> getId(ImageMetadataSupplier supplier) {
-            if (supplier instanceof ImageMetadataSupplier.Wrapper) {
-                Optional<Image> result = ((ImageMetadataSupplier.Wrapper) supplier).unwrap(Image.class);
-                return result.map(Image::getImageId);
+        protected Optional<Long> getId(Metadata<?> metadata) {
+            if (metadata instanceof Image) {
+                return Optional.of(((Image) metadata).getImageId());
             } else {
                 return Optional.empty();
             }

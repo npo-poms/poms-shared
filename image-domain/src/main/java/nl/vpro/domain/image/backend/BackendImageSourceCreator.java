@@ -18,9 +18,9 @@ import nl.vpro.domain.image.*;
 public class BackendImageSourceCreator implements ImageSourceCreator {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    protected Optional<Long> getId(ImageMetadataSupplier supplier) {
-        if (supplier instanceof ImageMetadataSupplier.Wrapper) {
-            Optional<BackendImage> result = ((ImageMetadataSupplier.Wrapper) supplier).unwrap(BackendImage.class);
+    protected Optional<Long> getId(Metadata<?> supplier) {
+        if (supplier instanceof ImageMetadata.Wrapper) {
+            Optional<BackendImage> result = ((ImageMetadata.Wrapper) supplier).unwrap(BackendImage.class);
             return result.map(DomainObject::getId);
         } else {
             return Optional.empty();
@@ -28,9 +28,9 @@ public class BackendImageSourceCreator implements ImageSourceCreator {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    protected ImageFormat getOriginalFormat(ImageMetadataSupplier supplier) {
-        if (supplier instanceof ImageMetadataSupplier.Wrapper) {
-            Optional<BackendImage> result = ((ImageMetadataSupplier.Wrapper) supplier).unwrap(BackendImage.class);
+    protected ImageFormat getOriginalFormat(Metadata<?> supplier) {
+        if (supplier instanceof ImageMetadata.Wrapper) {
+            Optional<BackendImage> result = ((ImageMetadata.Wrapper) supplier).unwrap(BackendImage.class);
             return result.map(BackendImage::getImageFormat).orElse(null);
         } else {
             return null;
@@ -38,14 +38,14 @@ public class BackendImageSourceCreator implements ImageSourceCreator {
     }
 
     @Override
-    public Optional<ImageSource> createFor(ImageMetadataSupplier supplier, ImageSource.Key key) {
-        final String[] transformation  = Conversions.MAPPING.get(key);
-        Dimension existingDimension = supplier.getImageMetadata().getDimension();
-        final Dimension finalDim = Conversions.predictDimensions(existingDimension, transformation);
-        ImageFormat finalFormat = key.getFormat() == null ? getOriginalFormat(supplier) : key.getFormat();
+    public Optional<ImageSource> createFor(Metadata<?> supplier, ImageSource.Key key) {
         return getId(supplier)
-            .map(id ->
-                ImageSource.builder()
+            .map(id -> {
+                final String[] transformation = Conversions.MAPPING.get(key);
+                Dimension existingDimension = supplier.getDimension();
+                final Dimension finalDim = Conversions.predictDimensions(existingDimension, transformation);
+                ImageFormat finalFormat = key.getFormat() == null ? getOriginalFormat(supplier) : key.getFormat();
+                return ImageSource.builder()
                     .type(key.getType())
                     .format(finalFormat)
                     .url(
@@ -57,7 +57,8 @@ public class BackendImageSourceCreator implements ImageSourceCreator {
                         )
                     )
                     .dimension(finalDim)
-                    .build()
+                    .build();
+                }
             );
     }
 

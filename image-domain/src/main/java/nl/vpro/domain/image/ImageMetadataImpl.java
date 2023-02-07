@@ -13,7 +13,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.*;
-import com.google.common.annotations.Beta;
 
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -125,12 +124,6 @@ public class ImageMetadataImpl implements ImageMetadata {
         }
         this.crids = crids == null ? new ArrayList<>() : crids;
         this.areaOfInterest = areaOfInterest;
-    }
-
-    @JsonView(Views.Model.class)
-    @Beta
-    public String getSourceSetString() {
-        return Objects.toString(getSourceSet());
     }
 
     /**

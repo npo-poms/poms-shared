@@ -14,17 +14,17 @@ import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 import com.google.common.annotations.Beta;
 
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.image.ImageSource.thumbNail;
+import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
+import static nl.vpro.test.util.jackson2.Jackson2TestUtil.roundTripAndSimilar;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 class ImageMetadataTest {
+
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
-
-
 
     final ImageMetadata image = ImageMetadata.builder()
         .title("foobar")
@@ -57,30 +57,11 @@ class ImageMetadataTest {
 
     @Test
     public void json() {
-        Jackson2TestUtil.roundTripAndSimilar(image, "{\n" +
+        roundTripAndSimilar(image, "{\n" +
             "  \"type\" : \"LOGO\",\n" +
             "  \"title\" : \"foobar\",\n" +
             "  \"height\" : 200,\n" +
             "  \"width\" : 200,\n" +
-            "  \"sourceSet\" : {\n" +
-            "    \"THUMBNAIL\" : {\n" +
-            "      \"url\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
-            "      \"type\" : \"THUMBNAIL\",\n" +
-            "      \"dimension\" : {\n" +
-            "        \"width\" : 640,\n" +
-            "        \"height\" : 320\n" +
-            "      }\n" +
-            "    },\n" +
-            "    \"THUMBNAIL.WEBP\" : {\n" +
-            "      \"url\" : \"https://www.vpro.nl/plaatje.webp\",\n" +
-            "      \"type\" : \"THUMBNAIL\",\n" +
-            "      \"format\" : \"WEBP\",\n" +
-            "      \"dimension\" : {\n" +
-            "        \"width\" : 640,\n" +
-            "        \"height\" : 320\n" +
-            "      }\n" +
-            "    }\n" +
-            "  },\n" +
             "  \"crids\" : [ \"urn:cinema:1234\" ],\n" +
             "  \"areaOfInterest\" : {\n" +
             "    \"lowerLeft\" : {\n" +
@@ -96,39 +77,65 @@ class ImageMetadataTest {
             "  \"creationDate\" : 1650010200000\n" +
             "}");
 
-        assertThat(image.getSourceSet().toString()).isEqualTo("https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w");
+        assertThat(image.getSourceSet().toString())
+            .isEqualTo("https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w");
     }
 
     @Test
     @Beta
     public void modelJson() {
-        Jackson2TestUtil.assertThatJson(Jackson2Mapper.getModelInstance(), image).withoutRemarshalling().isSimilarTo("{\n" +
-            "    \"type\" : \"LOGO\",\n" +
-            "    \"title\" : \"foobar\",\n" +
-            "    \"height\" : 200,\n" +
-            "    \"width\" : 200,\n" +
-            "    \"sourceSetString\" : \"https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w\",\n" +
-            "    \"crids\" : [ \"urn:cinema:1234\" ],\n" +
-            "    \"areaOfInterest\" : {\n" +
-            "      \"lowerLeft\" : {\n" +
-            "        \"x\" : 10,\n" +
-            "        \"y\" : 20\n" +
-            "      },\n" +
-            "      \"upperRight\" : {\n" +
-            "        \"x\" : 100,\n" +
-            "        \"y\" : 120\n" +
-            "      }\n" +
-            "    },\n" +
-            "    \"lastModified\" : 1650010800000,\n" +
-            "    \"creationDate\" : 1650010200000\n" +
-            "  }");
+        assertThatJson(Jackson2Mapper
+            .getModelInstance(), image)
+            .withoutRemarshalling()
+            .isSimilarTo("{\n" +
+                "  \"type\" : \"LOGO\",\n" +
+                "  \"title\" : \"foobar\",\n" +
+                "  \"height\" : 200,\n" +
+                "  \"width\" : 200,\n" +
+                "  \"sourceSet\" : {\n" +
+                "    \"THUMBNAIL\" : {\n" +
+                "      \"url\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
+                "      \"type\" : \"THUMBNAIL\",\n" +
+                "      \"dimension\" : {\n" +
+                "        \"width\" : 640,\n" +
+                "        \"height\" : 320\n" +
+                "      }\n" +
+                "    },\n" +
+                "    \"THUMBNAIL.WEBP\" : {\n" +
+                "      \"url\" : \"https://www.vpro.nl/plaatje.webp\",\n" +
+                "      \"type\" : \"THUMBNAIL\",\n" +
+                "      \"format\" : \"WEBP\",\n" +
+                "      \"dimension\" : {\n" +
+                "        \"width\" : 640,\n" +
+                "        \"height\" : 320\n" +
+                "      }\n" +
+                "    }\n" +
+                "  },\n" +
+                "  \"crids\" : [ \"urn:cinema:1234\" ],\n" +
+                "  \"areaOfInterest\" : {\n" +
+                "    \"lowerLeft\" : {\n" +
+                "      \"x\" : 10,\n" +
+                "      \"y\" : 20\n" +
+                "    },\n" +
+                "    \"upperRight\" : {\n" +
+                "      \"x\" : 100,\n" +
+                "      \"y\" : 120\n" +
+                "    }\n" +
+                "  },\n" +
+                "  \"lastModified\" : 1650010800000,\n" +
+                "  \"pointOfInterest\" : {\n" +
+                "    \"x\" : 27.5,\n" +
+                "    \"y\" : 35.0\n" +
+                "  },\n" +
+                "  \"creationDate\" : 1650010200000\n" +
+                "}");
 
     }
 
     @Test
     @Beta
     public void modelAndNormalJson() {
-        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getModelAndNormalInstance(), image, "{\n" +
+        roundTripAndSimilar(Jackson2Mapper.getModelAndNormalInstance(), image, "{\n" +
             "  \"type\" : \"LOGO\",\n" +
             "  \"title\" : \"foobar\",\n" +
             "  \"height\" : 200,\n" +
@@ -152,7 +159,6 @@ class ImageMetadataTest {
             "      }\n" +
             "    }\n" +
             "  },\n" +
-            "  \"sourceSetString\" : \"https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w\",\n" +
             "  \"crids\" : [ \"urn:cinema:1234\" ],\n" +
             "  \"areaOfInterest\" : {\n" +
             "    \"lowerLeft\" : {\n" +
@@ -165,6 +171,10 @@ class ImageMetadataTest {
             "    }\n" +
             "  },\n" +
             "  \"lastModified\" : 1650010800000,\n" +
+            "  \"pointOfInterest\" : {\n" +
+            "    \"x\" : 27.5,\n" +
+            "    \"y\" : 35.0\n" +
+            "  },\n" +
             "  \"creationDate\" : 1650010200000\n" +
             "}");
 
@@ -174,10 +184,10 @@ class ImageMetadataTest {
 
     @Test
     public void schema() throws JsonProcessingException {
-        JsonSchemaGenerator schemaGen = new JsonSchemaGenerator(Jackson2Mapper.getInstance());
+        JsonSchemaGenerator schemaGen = new JsonSchemaGenerator(Jackson2Mapper.getModelAndNormalInstance());
         JsonSchema schema = schemaGen.generateSchema(ImageMetadataImpl.class);
 
-        Jackson2TestUtil.assertThatJson(schema).isSimilarTo(
+        assertThatJson(schema).isSimilarTo(
             // text blocks only in java 15....
             "{\n" +
                 "  \"type\" : \"object\",\n" +
@@ -280,6 +290,18 @@ class ImageMetadataTest {
                 "    },\n" +
                 "    \"credits\" : {\n" +
                 "      \"type\" : \"string\"\n" +
+                "    },\n" +
+                "    \"pointOfInterest\" : {\n" +
+                "      \"type\" : \"object\",\n" +
+                "      \"id\" : \"urn:jsonschema:nl:vpro:domain:image:RelativePoint\",\n" +
+                "      \"properties\" : {\n" +
+                "        \"x\" : {\n" +
+                "          \"type\" : \"number\"\n" +
+                "        },\n" +
+                "        \"y\" : {\n" +
+                "          \"type\" : \"number\"\n" +
+                "        }\n" +
+                "      }\n" +
                 "    },\n" +
                 "    \"creationDate\" : {\n" +
                 "      \"type\" : \"any\"\n" +
