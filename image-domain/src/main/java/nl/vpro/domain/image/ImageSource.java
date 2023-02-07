@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import nl.vpro.domain.image.backend.BasicBackendImageMetadata;
+import nl.vpro.jackson2.Views;
 
 import static nl.vpro.domain.image.ImageFormat.*;
 
@@ -39,6 +40,7 @@ public class ImageSource implements Serializable, Comparable<ImageSource> {
 
     private final Dimension dimension;
 
+    @JsonView(Views.Normal.class)
     private final Area areaOfInterest;
 
     public static  ImageSource.Builder thumbNail(@ImageURL String url) {
@@ -59,6 +61,15 @@ public class ImageSource implements Serializable, Comparable<ImageSource> {
         this.format = format;
         this.dimension = dimension;
         this.areaOfInterest = areaOfInterest;
+    }
+
+    /**
+     * The point of interest is just the exact middle point of {@link #getAreaOfInterest()},
+     * or if there is no such a thing is defined, then {@link RelativePoint#MIDDLE}
+     */
+    @JsonIgnore
+    public RelativePoint getPointOfInterest() {
+        return Area.relativeCenter(getAreaOfInterest(), getDimension());
     }
 
     @Override

@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @ToString
 public class Area implements Serializable {
 
+    private static final long serialVersionUID = 936296968752859966L;
+
     final Point lowerLeft;
     final Point upperRight;
 
@@ -34,5 +36,16 @@ public class Area implements Serializable {
 
     public Area times(float multiplier) {
         return new Area(lowerLeft.times(multiplier), upperRight.times(multiplier));
+    }
+
+    public static RelativePoint relativeCenter(Area area, Dimension dimension) {
+        if (area != null && dimension != null && dimension.getWidth() != null && dimension.getHeight() != null) {
+            return new RelativePoint(
+                50f * (area.getLowerLeft().getX() + area.getUpperRight().getX()) / dimension.getWidth(),
+                50f * (area.getLowerLeft().getY() + area.getUpperRight().getY()) / dimension.getHeight()
+            );
+        } else {
+            return RelativePoint.MIDDLE;
+        }
     }
 }

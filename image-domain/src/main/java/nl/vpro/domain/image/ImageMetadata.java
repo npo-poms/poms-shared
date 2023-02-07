@@ -33,15 +33,7 @@ public interface ImageMetadata extends Metadata {
      */
     @JsonView(Views.Model.class)
     default RelativePoint getPointOfInterest() {
-        Area areaOfInterest = getAreaOfInterest();
-        if (areaOfInterest != null && getWidth() != null && getHeight() != null) {
-            return new RelativePoint(
-                50f * (areaOfInterest.getLowerLeft().getX() + areaOfInterest.getUpperRight().getX()) / getWidth(),
-                50f * (areaOfInterest.getLowerLeft().getY() + areaOfInterest.getUpperRight().getY()) / getHeight()
-            );
-        } else {
-            return RelativePoint.MIDDLE;
-        }
+        return Area.relativeCenter(getAreaOfInterest(), getDimension());
     }
 
     static ImageMetadataImpl.Builder builder() {
