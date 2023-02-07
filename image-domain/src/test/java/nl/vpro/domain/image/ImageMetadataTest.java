@@ -127,6 +127,7 @@ class ImageMetadataTest {
                 "    \"x\" : 27.5,\n" +
                 "    \"y\" : 35.0\n" +
                 "  },\n" +
+                "  \"alternativeOrTitle\" : \"foobar\",\n" +
                 "  \"creationDate\" : 1650010200000\n" +
                 "}");
 
@@ -175,6 +176,7 @@ class ImageMetadataTest {
             "    \"x\" : 27.5,\n" +
             "    \"y\" : 35.0\n" +
             "  },\n" +
+            " \"alternativeOrTitle\" : \"foobar\",\n" +
             "  \"creationDate\" : 1650010200000\n" +
             "}");
 
@@ -302,6 +304,9 @@ class ImageMetadataTest {
                 "          \"type\" : \"number\"\n" +
                 "        }\n" +
                 "      }\n" +
+                "    },\n" +
+                "    \"alternativeOrTitle\" : {\n" +
+                "      \"type\" : \"string\"\n" +
                 "    },\n" +
                 "    \"creationDate\" : {\n" +
                 "      \"type\" : \"any\"\n" +

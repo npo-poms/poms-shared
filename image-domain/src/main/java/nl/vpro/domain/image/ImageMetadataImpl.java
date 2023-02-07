@@ -118,7 +118,7 @@ public class ImageMetadataImpl implements ImageMetadata {
         this.lastModifiedInstant = lastModifiedInstant;
 
         this.creationInstant = creationInstant;
-        this.sourceSet = new ImageSourceSet();
+        this.sourceSet = new ImageSourceSet(this);
         if (sourceSet != null) {
             this.sourceSet.putAll(sourceSet);
         }
@@ -176,7 +176,7 @@ public class ImageMetadataImpl implements ImageMetadata {
 
         public Builder from(ImageMetadata imageMetadata) {
             return
-                from((Metadata<?>) imageMetadata)
+                from((Metadata) imageMetadata)
                     .crids(imageMetadata.getCrids())
                     .areaOfInterest(imageMetadata.getAreaOfInterest())
                     .addSourceSet(imageMetadata.getSourceSet())

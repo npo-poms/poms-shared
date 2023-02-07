@@ -12,7 +12,7 @@ public interface ImageSourceCreator {
      * Given a source for image meta and a desired 'type' try to create {@link ImageSource} (basically a URL) for it.
      */
     Optional<ImageSource> createFor(
-        Metadata<?> imageMetadata,
+        Metadata imageMetadata,
         ImageSource.Key type
     );
 

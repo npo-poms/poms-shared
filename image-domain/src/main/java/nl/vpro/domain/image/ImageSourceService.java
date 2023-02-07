@@ -22,7 +22,7 @@ public class ImageSourceService {
     /**
      *
      */
-    public ImageSourceSet getSourceSet(Metadata<?> metadata) {
+    public ImageSourceSet getSourceSet(Metadata metadata) {
         final Map<ImageSource.Key, ImageSource> map = new LinkedHashMap<>();
         final Set<String> set = new TreeSet<>();
 
@@ -39,6 +39,6 @@ public class ImageSourceService {
                 };
             }
         });
-        return new ImageSourceSet(map, metadataProvider.getImageMetadata());
+        return new ImageSourceSet(map, ImageMetadata.of(metadata));
     }
 }

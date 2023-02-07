@@ -16,7 +16,7 @@ import nl.vpro.jackson2.Views;
 /**
  *  An extended version of {@link nl.vpro.domain.image.Metadata}. Most noticeably, it adds {@link #getSourceSet()}, and also {@link #getAreaOfInterest()}
  */
-public interface ImageMetadata extends Metadata<ImageMetadata> {
+public interface ImageMetadata extends Metadata {
 
     /**
      * The associated {@link ImageSourceSet}. This will normally be calculable from other fields.
@@ -50,11 +50,15 @@ public interface ImageMetadata extends Metadata<ImageMetadata> {
 
 
     @PolyNull
-    static <W extends Metadata<W>> Wrapper<W> of(@PolyNull W wrapped) {
+    static <W extends Metadata> ImageMetadata of(@PolyNull W wrapped) {
         if (wrapped == null) {
             return null;
         } else {
-            return new Wrapper<>(wrapped);
+            if (wrapped instanceof  ImageMetadata) {
+                return (ImageMetadata) wrapped;
+            } else {
+                return new Wrapper<>(wrapped);
+            }
         }
     }
 
@@ -78,7 +82,7 @@ public interface ImageMetadata extends Metadata<ImageMetadata> {
         "creationDate"
     }
     )
-    class Wrapper<W extends Metadata<W>> implements ImageMetadata {
+    class Wrapper<W extends Metadata> implements ImageMetadata {
 
         @JsonIgnore
         @Getter
@@ -90,7 +94,7 @@ public interface ImageMetadata extends Metadata<ImageMetadata> {
         }
 
 
-        public <C extends Metadata<C>> Optional<C> unwrap(Class<C> clazz) {
+        public <C extends Metadata> Optional<C> unwrap(Class<C> clazz) {
             if (clazz.isInstance(wrapped)) {
                 return Optional.of((C) wrapped);
             } else {

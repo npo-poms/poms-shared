@@ -18,7 +18,7 @@ import nl.vpro.domain.image.*;
 public class BackendImageSourceCreator implements ImageSourceCreator {
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    protected Optional<Long> getId(Metadata<?> supplier) {
+    protected Optional<Long> getId(Metadata supplier) {
         if (supplier instanceof ImageMetadata.Wrapper) {
             Optional<BackendImage> result = ((ImageMetadata.Wrapper) supplier).unwrap(BackendImage.class);
             return result.map(DomainObject::getId);
@@ -28,7 +28,7 @@ public class BackendImageSourceCreator implements ImageSourceCreator {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    protected ImageFormat getOriginalFormat(Metadata<?> supplier) {
+    protected ImageFormat getOriginalFormat(Metadata supplier) {
         if (supplier instanceof ImageMetadata.Wrapper) {
             Optional<BackendImage> result = ((ImageMetadata.Wrapper) supplier).unwrap(BackendImage.class);
             return result.map(BackendImage::getImageFormat).orElse(null);
@@ -38,7 +38,7 @@ public class BackendImageSourceCreator implements ImageSourceCreator {
     }
 
     @Override
-    public Optional<ImageSource> createFor(Metadata<?> supplier, ImageSource.Key key) {
+    public Optional<ImageSource> createFor(Metadata supplier, ImageSource.Key key) {
         return getId(supplier)
             .map(id -> {
                 final String[] transformation = Conversions.MAPPING.get(key);
