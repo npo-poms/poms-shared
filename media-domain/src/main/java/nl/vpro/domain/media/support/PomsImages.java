@@ -13,11 +13,10 @@ import nl.vpro.domain.image.backend.BackendImageSourceCreator;
 @Slf4j
 public class PomsImages {
 
-
     public static class Creator extends BackendImageSourceCreator {
 
         @Override
-        protected Optional<Long> getId(Metadata<?> metadata) {
+        protected Optional<Long> getId(Metadata metadata) {
             if (metadata instanceof Image) {
                 return Optional.of(((Image) metadata).getImageId());
             } else {
