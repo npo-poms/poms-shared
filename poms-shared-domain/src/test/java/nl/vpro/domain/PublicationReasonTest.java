@@ -7,17 +7,17 @@ import java.time.Instant;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.util.test.ComparableTheory;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static java.time.Instant.ofEpochMilli;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PublicationReasonTest implements ComparableTest<PublicationReason> {
+class PublicationReasonTest implements ComparableTheory<PublicationReason> {
 
 
     @Test

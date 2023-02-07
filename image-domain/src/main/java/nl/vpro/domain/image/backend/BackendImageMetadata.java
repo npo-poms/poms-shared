@@ -54,6 +54,11 @@ public interface BackendImageMetadata<T extends BackendImageMetadata<T>>  extend
         return uri == null ? null : Long.parseLong(uri.substring(BASE_URN.length()));
     }
 
+    default T setId(Long id) {
+        return setImageUri(id == null ? null : BASE_URN + id);
+    }
+
+
 
     T setHeightInMm(@Positive Float heightInMm);
     T setWidthInMm(@Positive Float widthInMm);
@@ -62,6 +67,12 @@ public interface BackendImageMetadata<T extends BackendImageMetadata<T>>  extend
     T setEtag(String etag);
     T setUrlLastModified(Instant lastModified);
     T setImageFormat(ImageFormat imageFormat);
+    default T setImageUri(String imageUri) {
+        if  (! Objects.equals(imageUri, getImageUri())) {
+            throw new UnsupportedOperationException();
+        }
+        return (T) this;
+    }
 
     default T setMimeType(String mimeType) throws UnsupportedImageFormatException {
         return setImageFormat(ImageFormat.forMimeType(mimeType));

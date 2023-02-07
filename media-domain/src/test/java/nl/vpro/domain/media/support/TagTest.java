@@ -4,16 +4,14 @@
  */
 package nl.vpro.domain.media.support;
 
-import net.jqwik.api.Arbitraries;
-import net.jqwik.api.Arbitrary;
+import net.jqwik.api.*;
 
 import org.junit.jupiter.api.Test;
-
-import nl.vpro.test.jqwik.ComparableTest;
+import org.meeuw.util.test.ComparableTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TagTest implements ComparableTest<Tag> {
+public class TagTest implements ComparableTheory<Tag> {
 
     @Test
     public void testCaseSensitivity() {
@@ -35,4 +33,15 @@ public class TagTest implements ComparableTest<Tag> {
             new Tag("tag2")
         );
     }
+
+    @Override
+    public Arbitrary<? extends Tuple.Tuple2<? extends Tag, ? extends Tag>> equalDatapoints() {
+        Tag tagNull = new Tag(null);
+        Tag tag1 = new Tag("tag1");
+        return Arbitraries.of(
+            Tuple.of(new Tag("tag"), new Tag("tag")),
+             Tuple.of(tagNull, new Tag(null)),
+             Tuple.of(tag1, tag1)
+        );
+     }
 }

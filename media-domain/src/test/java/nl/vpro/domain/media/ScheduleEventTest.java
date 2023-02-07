@@ -1,16 +1,15 @@
 package nl.vpro.domain.media;
 
-import net.jqwik.api.Arbitraries;
-import net.jqwik.api.Arbitrary;
+import net.jqwik.api.*;
 
 import java.time.Duration;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.util.test.ComparableTheory;
 
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -21,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
+public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
     @Test
     public void testTitles() {
@@ -157,20 +156,7 @@ public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
 
     static final Instant now = Instant.now();
 
-    @Override
-    public Arbitrary<? extends ScheduleEvent> datapoints() {
-        return Arbitraries.of(
-            ScheduleEvent.builder().build(),
-            ScheduleEvent.builder().start(now).build(),
-            ScheduleEvent.builder().channel(Channel.ARTE).start(now).build(),
-            ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
-            ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
-            ScheduleEvent.builder().channel(Channel.NED1).start(now.plus(Duration.ofMinutes(10))).build(),
-            null,
-            null
 
-        );
-    }
 
     @Test
     public void testGuideDayBeforeCutOff() {
@@ -186,4 +172,35 @@ public class ScheduleEventTest implements ComparableTest<ScheduleEvent> {
 
         assertThat(target.getGuideDate().toString()).isEqualTo("1970-01-01");
     }
+    @Override
+    public Arbitrary<? extends ScheduleEvent> datapoints() {
+        return Arbitraries.of(
+            ScheduleEvent.builder().build(),
+            ScheduleEvent.builder().start(now).build(),
+            ScheduleEvent.builder().channel(Channel.ARTE).start(now).build(),
+            ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
+            ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
+            ScheduleEvent.builder().channel(Channel.NED1).start(now.plus(Duration.ofMinutes(10))).build(),
+            null,
+            null
+
+        );
+    }
+
+    @Override
+    public Arbitrary<? extends Tuple.Tuple2<? extends ScheduleEvent, ? extends ScheduleEvent>> equalDatapoints() {
+        return Arbitraries.of(
+            Tuple.of(ScheduleEvent.builder().build(), ScheduleEvent.builder().build()),
+            Tuple.of(
+                ScheduleEvent.builder().channel(Channel.ARTE).start(now).build(),
+                ScheduleEvent.builder().channel(Channel.ARTE).start(now).build()),
+             Tuple.of(
+                ScheduleEvent.builder().channel(Channel.ARTE).start(now).build(),
+                ScheduleEvent.builder().channel(Channel.ARTE).start(now).duration(Duration.ofMinutes(1)).build()),
+            Tuple.of(
+                ScheduleEvent.builder().channel(Channel.ARTE).start(now).duration(Duration.ofMinutes(10)).build(),
+                ScheduleEvent.builder().channel(Channel.ARTE).start(now).duration(Duration.ofMinutes(1)).build())
+
+        );
+     }
 }

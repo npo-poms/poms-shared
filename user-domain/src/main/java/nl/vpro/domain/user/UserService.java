@@ -13,8 +13,6 @@ import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import javax.transaction.Transactional;
-
 import org.checkerframework.checker.nullness.qual.*;
 import org.slf4j.*;
 
@@ -82,7 +80,7 @@ public interface UserService<T extends User> {
     /**
      * Logins in the given principal
      */
-    @Transactional(Transactional.TxType.NEVER)
+    //@Transactional(Transactional.TxType.NEVER) // This make (in mockito 5) this stuff kind of unmockable.
     default T login(java.security.Principal authentication, Instant timestamp) {
         T editor = get(authentication);
         if (timestamp != null) {
@@ -112,6 +110,9 @@ public interface UserService<T extends User> {
 
     Optional<T> authenticate(String principalId);
 
+    /**
+     * Checks whether current user has at least one of the given roles
+     */
     default boolean currentUserHasRole(String... roles) {
         return currentUserHasRole(Arrays.asList(roles));
     }

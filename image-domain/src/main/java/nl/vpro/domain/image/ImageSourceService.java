@@ -39,6 +39,6 @@ public class ImageSourceService {
                 };
             }
         });
-        return new ImageSourceSet(map);
+        return new ImageSourceSet(map, metadataProvider.getImageMetadata());
     }
 }

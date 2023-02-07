@@ -33,10 +33,18 @@ public class RestrictionTest implements BasicObjectTest<RestrictionTest.TestRest
 
     @Override
     public Arbitrary<TestRestriction> datapoints() {
-        return Arbitraries.of(nullArgument, withStartAndStop, persistedWithStartAndStop, persistedWithStartUpdate);
+        return Arbitraries.of(
+            nullArgument,
+            withStartAndStop,
+            persistedWithStartAndStop,
+            persistedWithStartUpdate
+        );
     }
 
     public static class TestRestriction extends Restriction<TestRestriction> {
+
+        private static final long serialVersionUID = -884609334628436209L;
+
         private TestRestriction(Long id, Instant start, Instant stop) {
             super(id, start, stop);
         }

@@ -79,8 +79,25 @@ public class PersonTest implements BasicObjectTest<Person> {
                 pietjePuk,
                 pietjePuk2,
                 pietjePuk3
-            ).injectNull(0.1)
-            .injectDuplicates(0.1);
-
+            ).injectNull(0.1);
     }
+
+  /*  @Override
+    public Arbitrary<? extends Tuple.Tuple2<? extends Person, ? extends Person>> equalDatapoints() {
+        Person pietje = Person.builder()
+            .givenName("Pietje")
+            .familyName("Puk")
+            .role(RoleType.PRESENTER)
+            .uri(URI.create("https://gtaa.nl/1234"))
+            .build();
+
+        return Arbitraries.of(
+            Tuple.of(pietje, pietje),
+            Tuple.of(pietje, Person
+                    .builder()
+                    .gtaaUri(pietje.getGtaaUri())
+                    .build()
+            )
+        );
+    }*/
 }

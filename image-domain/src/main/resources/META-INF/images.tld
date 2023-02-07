@@ -2,13 +2,49 @@
     xmlns="http://java.sun.com/xml/ns/j2ee"
     version="2.0"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
-    xsd:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
-    >
+    xsd:schemaLocation="http://java.sun.com/xml/ns/j2ee https://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+>
   <tlib-version>2.0</tlib-version>
   <short-name>images</short-name>
   <uri>https://github.com/npo-poms/poms-shared/tags/images</uri>
-  <tag-file>
+  <tag>
     <name>picture</name>
-    <path>/META-INF/tags/images/picture.tagx</path>
-  </tag-file>
+    <tag-class>nl.vpro.images.tags.PictureTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <description>image metadata object</description>
+      <name>image</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>nl.vpro.domain.image.ImageMetadata</type>
+    </attribute>
+    <attribute>
+      <description>The alt attribute for the img element</description>
+      <name>alt</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <dynamic-attributes>true</dynamic-attributes>
+  </tag>
+  <tag>
+    <name>sources</name>
+    <tag-class>nl.vpro.images.tags.SourcesTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <description>image metadata object</description>
+      <name>image</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>nl.vpro.domain.image.ImageMetadata</type>
+    </attribute>
+    <attribute>
+      <description>alt</description>
+      <name>alt</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <dynamic-attributes>true</dynamic-attributes>
+  </tag>
 </taglib>

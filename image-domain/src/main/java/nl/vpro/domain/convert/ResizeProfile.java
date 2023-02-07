@@ -5,6 +5,7 @@
 package nl.vpro.domain.convert;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.PolyNull;
 
 import nl.vpro.domain.image.Dimension;
 
@@ -27,7 +28,10 @@ public interface ResizeProfile extends ParameterizedProfile<Geometry> {
     }
 
     @Override
-    default Dimension convertedDimension(Object s, Dimension dimension) {
+    default @PolyNull Dimension convertedDimension(Object s, @PolyNull Dimension dimension) {
+        if (dimension.getWidth() == null) {
+            return null;
+        }
         Geometry geometry = (Geometry) s;
         if (geometry.getModifier().contains(Geometry.Modifier.ONLY_WHEN_BIGGER)) {
             if (geometry.width() > dimension.getWidth()) {

@@ -7,7 +7,7 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 
 /**
- * See http://wiki.publiekeomroep.nl/display/poms/Gebruikersbeheer#Gebruikersbeheer-Rollen
+ * See <a href="https://wiki.vpro.nl/display/poms/Gebruikersbeheer#Gebruikersbeheer-Rollen">Gebruikersbeheer</a>
  *
  * @author Michiel Meeuwissen
  * @since 5.4
@@ -37,7 +37,7 @@ public class Roles {
     public static final String SUPERUSER_ROLE = ROLE + SUPERUSER;
 
     /**
-     * A super process is like a super user
+     * A super-process is like a super-user
      */
     public static final String SUPERPROCESS =  MEDIA + "SUPERPROCESS";
     public static final String SUPERPROCESS_ROLE = ROLE + SUPERPROCESS;
@@ -58,7 +58,7 @@ public class Roles {
 
     /**
      * The publisher role is kind of special. It can only see things that are allowed to be published.
-     *
+     * <p>
      * This is a system role as nobody or nothing else would normally need to have this role.
      */
     public static final String PUBLISHER  = MEDIA + "PUBLISHER";
@@ -66,8 +66,8 @@ public class Roles {
 
     /**
      * Support are people at NPO-helpdesk who can see everything, including deleted record, but edit nothing. (MSE-2015)
-     *
-     * They may also not limited in publishing bulk.
+     * <p>
+     * They may also not be limited in publishing bulk.
      */
     public static final String SUPPORT     = MEDIA + "SUPPORT";
     public static final String SUPPORT_ROLE = ROLE + SUPPORT;
@@ -92,8 +92,8 @@ public class Roles {
 
     /**
      * Certain users in POMS backend are allowed to change/add schedule related fields.
-     *
-     * https://jira.vpro.nl/browse/MSE-3999
+     * <p>
+     * <a href="https://jira.vpro.nl/browse/MSE-3999">MSE-3999</a>
      */
     public static final String SCHEDULE = MEDIA + "SCHEDULE";
     public static final String SCHEDULE_ROLE = ROLE + SCHEDULE;
@@ -105,23 +105,40 @@ public class Roles {
     public static final String UPLOAD_ROLE = ROLE + UPLOAD;
 
 
+    /**
+     * Have the right merge series
+     */
     public static final String MERGE_SERIES = MEDIA + "MERGESERIES";
     public static final String MERGE_SERIES_ROLE = ROLE + MERGE_SERIES;
+
+    /**
+     * Have the right merge episodes
+     */
     public static final String MERGE_EPISODE = MEDIA + "MERGEEPISODE";
     public static final String MERGE_EPISODE_ROLE = ROLE + MERGE_EPISODE;
+
+    /**
+     * Have the right merge anything
+     */
     public static final String MERGE_ALL  = MEDIA + "MERGEALL";
     public static final String MERGE_ALL_ROLE = ROLE + MERGE_ALL;
 
+    /**
+     * Allowed to add translations
+     */
     public static final String TRANSLATOR  = MEDIA + "TRANSLATOR";
     public static final String TRANSLATOR_ROLE = ROLE + TRANSLATOR;
 
     /**
-     * Role for users that are allowed to edit MIS owned fields, do note that they still need the regular permssions to actually do so.
+     * Role for users that are allowed to edit MIS owned fields, do note that they still need the regular permissions to actually do so.
      */
     public static final String MIS  = MEDIA + "MIS";
     public static final String MIS_ROLE = ROLE + MIS;
 
 
+    /**
+     * Allowed to create promos {@link ProgramType#PROMO}
+     */
     public static final String PROMO = MEDIA + "PROMO";
     public static final String PROMO_ROLE = ROLE + PROMO;
 
@@ -132,6 +149,10 @@ public class Roles {
     public static final String SYSTEM = "SYSTEM";
     public static final String SYSTEM_ROLE = ROLE + SYSTEM;
 
+
+    /**
+     * Unused, I think
+     */
     public static final String TVVOD = API + "TVVOD";
     public static final String TVVOD_ROLE = ROLE + TVVOD;
 
@@ -145,13 +166,14 @@ public class Roles {
     public static final String HAS_API_ROLE = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CLIENT')";
     public static final String HAS_API_CHANGES_ROLE = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CHANGES_CLIENT')";
 
-    public static final String PAGES_USER = "ROLE_PAGES_USER";
 
-    public static final String PAGES_SUPERUSER= "ROLE_PAGES_SUPERUSER";
+    public static final String PAGES_USER = ROLE + "_PAGES_USER";
 
-    public static final String PAGES_PROCESS = "ROLE_PAGES_PROCESS";
+    public static final String PAGES_SUPERUSER= ROLE + "_PAGES_SUPERUSER";
 
-    public static final String PAGES_SUPERPROCESS = "ROLE_PAGES_SUPERPROCESS";
+    public static final String PAGES_PROCESS = ROLE + "_PAGES_PROCESS";
+
+    public static final String PAGES_SUPERPROCESS = ROLE + "_PAGES_SUPERPROCESS";
 
 
     public static final Set<String> RECOGNIZED;
@@ -188,5 +210,27 @@ public class Roles {
         MIS_ROLE,
         SUPERADMIN_ROLE
     )));
+
+    public static Set<String> allRoles() {
+        Set<String> set = new LinkedHashSet<>();
+        for (Field f : Roles.class.getDeclaredFields()) {
+            if (Modifier.isPublic(f.getModifiers()) && Modifier.isStatic(f.getModifiers()) && f.getType().equals(String.class)) {
+                try {
+                    String value = (String) f.get(null);
+                    if (value.startsWith(ROLE)) {
+                        String role = value.substring(ROLE.length()).toLowerCase();
+                        if (! role.isEmpty()) {
+                            set.add(role);
+                        }
+                    }
+                } catch (Exception e) {
+                    log.warn(e.getMessage(), e);
+                }
+            }
+        }
+        return set;
+    }
+
+
 }
 

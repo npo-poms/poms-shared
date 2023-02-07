@@ -6,17 +6,24 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+/**
+ * Represents a set of {@link ImageSource}s
+ */
 @JsonSerialize
 public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
 
     final Map<ImageSource.Key, ImageSource> imageSources;
 
-    ImageSourceSet(Map<ImageSource.Key, ImageSource> imageSources) {
+    private final ImageMetadata wrapped;
+
+    ImageSourceSet(Map<ImageSource.Key, ImageSource> imageSources, ImageMetadata wrapped) {
         this.imageSources = imageSources;
+        this.wrapped = wrapped;
+
     }
 
-    public ImageSourceSet() {
-        this(new LinkedHashMap<>());
+    public ImageSourceSet(ImageMetadata wrapped) {
+        this(new LinkedHashMap<>(), wrapped);
     }
 
     public ImageSource getDefaultImageSource() {
@@ -86,19 +93,34 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
         if (skipped[0] == 0) {
             return this;
         } else {
-            return new ImageSourceSet(imageSources);
+            return new ImageSourceSet(imageSources, wrapped);
         }
     }
 
-    public Map<ImageFormat, String> getSourceSrcs() {
+    /**
+     * Represents the metadata to build an HTML picture tag.
+     */
+    public Picture getPicture() {
+        return new PictureImpl(getSources(), getDefaultImageSource(), wrapped);
+    }
+
+    /**
+     * Represents the metadata to build an HTML picture tag.
+     */
+    public PictureMetadata getPictureMetadata() {
+        return new PictureMetadata(getSources(), getDefaultImageSource(), wrapped);
+    }
+
+    private Map<String, String> getSources() {
         Map<ImageFormat, StringBuilder> enumMap = new LinkedHashMap<>();
         for (ImageSource imageSource : imageSources.values()) {
             StringBuilder builder = enumMap.computeIfAbsent(imageSource.getFormat(), (f) -> new StringBuilder());
             appendSrc(builder, imageSource);
         }
-        Map<ImageFormat, String> result = new LinkedHashMap<>();
-        enumMap.forEach((key, value) -> result.put(key, value.toString()));
+        Map<String, String> result = new LinkedHashMap<>();
+        enumMap.forEach((key, value) -> result.put(key == null ? "" : key.getMimeType(), value.toString()));
         return result;
     }
+
 
 }

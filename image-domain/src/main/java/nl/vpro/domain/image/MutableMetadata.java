@@ -18,7 +18,7 @@ import nl.vpro.validation.NoHtml;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableEmbargo<T>, Metadata<T> {
+public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableEmbargo<T>, Metadata {
 
     String getImageUri();
 
@@ -48,7 +48,7 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
 
     void setLastModifiedInstant(Instant lastModified);
 
-    default ChangeReport copyFrom(Metadata<?> image) {
+    default ChangeReport copyFrom(Metadata image) {
         ChangeReport change = new ChangeReport();
         if (!Objects.equals(getType(), image.getType())) {
             setType(image.getType());
@@ -102,7 +102,7 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
      * @return A {@link ChangeReport}.
      */
     default ChangeReport copyFrom(MutableMetadata<?> image){
-        ChangeReport change = copyFrom((Metadata<?>) image);
+        ChangeReport change = copyFrom((Metadata) image);
 
         if (!Objects.equals(getDate(), image.getDate())) {
             setDate(image.getDate());

@@ -1,12 +1,11 @@
 package nl.vpro.domain.image;
 
 import lombok.extern.slf4j.Slf4j;
-import net.jqwik.api.Arbitraries;
-import net.jqwik.api.Arbitrary;
+import net.jqwik.api.*;
+import net.jqwik.api.arbitraries.IntegerArbitrary;
 
 import org.junit.jupiter.api.Test;
-
-import nl.vpro.test.jqwik.ComparableTest;
+import org.meeuw.util.test.ComparableTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.34
  */
 @Slf4j
-public class DimensionTest implements ComparableTest<Dimension> {
+public class DimensionTest implements ComparableTheory<Dimension> {
 
     @Test
     public void reduce() {
@@ -26,11 +25,32 @@ public class DimensionTest implements ComparableTest<Dimension> {
 
     @Override
     public Arbitrary<? extends Dimension> datapoints() {
-        return Arbitraries.of(
-            Dimension.of(640, 320),
-            Dimension.of(640, null),
-            Dimension.of((Long) null, null),
-            Dimension.of(1, 2)
-            ).injectNull(0.2);
+        IntegerArbitrary x = Arbitraries.integers().between(1, 1000);
+        IntegerArbitrary y = Arbitraries.integers().between(1, 1000);
+
+        return Combinators.combine(
+            x.injectNull(0.01),
+            y.injectNull(0.01))
+            .flatAs(
+                (a, b) -> Arbitraries.of(
+                    Dimension.of(a, b)
+                )
+            ).injectNull(0.1);
     }
+
+    @Override
+    public Arbitrary<? extends Tuple.Tuple2<? extends Dimension, ? extends Dimension>> equalDatapoints() {
+
+        return Arbitraries.of(
+            Tuple.of(
+                Dimension.of(640, 320),
+                Dimension.of(640, 320)
+            ),
+            Tuple.of(
+                Dimension.of(null, 320),
+                Dimension.of(null, 320)
+            )
+        );
+    }
+
 }

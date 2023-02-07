@@ -167,6 +167,14 @@ public class RelationTest implements ComparableTest<Relation> {
         );
     }
 
+    //@Override
+   /* public Arbitrary<? extends Tuple.Tuple2<? extends Relation, ? extends Relation>> equalDatapoints() {
+        return Arbitraries.of(
+            Tuple.of(relation(null, "TYPE", "VPRO"), relation(null, "TYPE", "VPRO")),
+            Tuple.of(relation(2L, "TYPEA", "VPRO"), relation(2L, "TYPE", "VPRO"))
+        );
+     }
+*/
 
     private static Relation relation(Long id, String type, String broadcaster) {
         Relation relation = new Relation(new RelationDefinition(type, broadcaster));
