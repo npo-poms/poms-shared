@@ -15,10 +15,10 @@ import nl.vpro.domain.image.*;
 @Slf4j
 public abstract class PomsImageSourceCreator<M extends Metadata> implements ImageSourceCreator<M> {
 
-    protected abstract Optional<Long> getId(M supplier);
+    protected abstract Optional<Long> getId(M metadata);
 
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({"rawtypes"})
     protected ImageFormat getOriginalFormat(Metadata supplier) {
         if (supplier instanceof ImageMetadata.Wrapper) {
             Optional<BackendImage> result = ((ImageMetadata.Wrapper) supplier).unwrap(BackendImage.class);

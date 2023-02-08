@@ -36,7 +36,9 @@ public interface ImageMetadata extends Metadata {
      */
     @JsonView(Views.Model.class)
     default RelativePoint getPointOfInterest() {
-        return Area.relativeCenter(getAreaOfInterest(), getDimension());
+        return Area.relativeCenter(
+            getAreaOfInterest(), getDimension()
+        );
     }
 
 
