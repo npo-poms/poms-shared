@@ -40,6 +40,7 @@ class PomsImagesTest {
             "      \"lastModified\": 1639275163526,\n" +
             "      \"urn\": \"urn:vpro:media:image:122414908\"\n" +
             "    }", Image.class);
+
         ImageMetadata imageMetadata = ImageMetadata.of(support);
         Jackson2TestUtil.assertThatJson(Jackson2Mapper.getModelInstance(), imageMetadata)
             .withoutUnmarshalling()

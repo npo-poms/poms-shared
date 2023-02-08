@@ -15,6 +15,7 @@ import org.checkerframework.checker.nullness.qual.*;
  *
  *
  */
+@Deprecated
 public interface ImageMetadataSupplier {
 
 

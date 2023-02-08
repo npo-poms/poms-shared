@@ -1,32 +1,35 @@
 package nl.vpro.domain.image;
 
-import lombok.Getter;
-
-import java.time.Instant;
 import java.util.Optional;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.checker.nullness.qual.PolyNull;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonView;
 
-import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.Views;
 
 /**
- *  An extended version of {@link nl.vpro.domain.image.Metadata}. Most noticeably, it adds {@link #getSourceSet()}, and also {@link #getAreaOfInterest()}
+ *  An extended version of {@link nl.vpro.domain.image.Metadata}. Most noticeably, it adds {@link #getSourceSet()} which may be calculated from other properties.
  */
 public interface ImageMetadata extends Metadata {
 
     /**
      * The associated {@link ImageSourceSet}. This will normally be calculable from other fields.
+     * A {@link Picture} can be obtained via {@link ImageSourceSet#getPicture()}
      */
     @JsonView(Views.Model.class)
     ImageSourceSet getSourceSet();
 
+    /**
+     * Null safe shortcut to {@link #getSourceSet()}.{@link ImageSourceSet#getPicture() getPicture()}
+     */
     @Nullable
-    Area getAreaOfInterest();
-
+    default Picture getPicture() {
+        ImageSourceSet set = getSourceSet();
+        return set == null ? null : set.getPicture();
+    }
     /**
      * The point of interest is just the exact middle point of {@link #getAreaOfInterest()},
      * or if there is no such a thing is defined, then {@link RelativePoint#MIDDLE}
@@ -35,6 +38,7 @@ public interface ImageMetadata extends Metadata {
     default RelativePoint getPointOfInterest() {
         return Area.relativeCenter(getAreaOfInterest(), getDimension());
     }
+
 
     static ImageMetadataImpl.Builder builder() {
         return ImageMetadataImpl.builder();
@@ -74,15 +78,10 @@ public interface ImageMetadata extends Metadata {
         "creationDate"
     }
     )
-    class Wrapper<W extends Metadata> implements ImageMetadata {
-
-        @JsonIgnore
-        @Getter
-        final W wrapped;
-
+    class Wrapper<W extends Metadata> extends MetadataWrapper implements ImageMetadata {
 
         public Wrapper(W wrapped) {
-            this.wrapped = wrapped;
+            super(wrapped);
         }
 
 
@@ -114,63 +113,6 @@ public interface ImageMetadata extends Metadata {
             } else {
                 return null;
             }
-        }
-
-        @Override
-        public ImageType getType() {
-            return wrapped.getType();
-        }
-
-        @Override
-        public String getTitle() {
-            return wrapped.getTitle();
-        }
-
-        @Override
-        public String getDescription() {
-            return wrapped.getDescription();
-        }
-
-        @Override
-        public License getLicense() {
-            return wrapped.getLicense();
-        }
-
-        @Override
-        public String getSource() {
-            return wrapped.getSource();
-        }
-
-        @Override
-        public String getSourceName() {
-            return wrapped.getSourceName();
-        }
-
-        @Override
-        public String getCredits() {
-            return wrapped.getCredits();
-        }
-
-        @Override
-        public Integer getHeight() {
-            return wrapped.getHeight();
-        }
-
-        @Override
-        public Integer getWidth() {
-            return wrapped.getWidth();
-        }
-
-        @Override
-        @JsonProperty("lastModified")
-        public Instant getLastModifiedInstant() {
-            return wrapped.getLastModifiedInstant();
-        }
-
-        @Override
-        @JsonProperty("creationDate")
-        public Instant getCreationInstant() {
-            return wrapped.getCreationInstant();
         }
     }
 }

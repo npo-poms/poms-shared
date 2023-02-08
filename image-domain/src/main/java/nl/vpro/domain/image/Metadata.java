@@ -96,6 +96,11 @@ public interface Metadata extends Trackable {
         return Collections.emptyList();
     }
 
+    @Nullable
+    default Area getAreaOfInterest() {
+        return null;
+    }
+
     /**
      * When making an implementation of {@link Metadata}, you can define a {@link lombok.Builder} which may
      * implement this interface.
