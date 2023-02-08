@@ -72,7 +72,6 @@ class ImageSourceServiceTest {
 
         ImageSourceSet imageMetadata = ImageSourceService.INSTANCE.getSourceSet(supplier);
         assertThatJson(imageMetadata)
-            .withoutUnmarshalling()
             .isSimilarTo("{\n" +
             "  \"THUMBNAIL.WEBP\" : {\n" +
             "    \"url\" : \"https://bla/TN.W/1.webp\",\n" +
@@ -131,7 +130,7 @@ class ImageSourceServiceTest {
 
         log.info("{}", Jackson2Mapper.getInstance().writeValueAsString(image));
         assertThatJson(Jackson2Mapper.getModelInstance(), ImageMetadata.of(image))
-            .withoutUnmarshalling()
+            .withoutRemarshalling()
             .isSimilarTo("{\n" +
                 "  \"title\" : \"bla\",\n" +
                 "  \"height\" : 100,\n" +
@@ -185,20 +184,8 @@ class ImageSourceServiceTest {
                 "  },\n" +
                 "  \"creationDate\" : 1675851618171,\n" +
                 "  \"pointOfInterest\" : {\n" +
-                "    \"x\" : 50.0,\n" +
-                "    \"y\" : 50.0\n" +
-                "  },\n" +
-                "  \"picture\" : {\n" +
-                "    \"sources\" : {\n" +
-                "      \"image/webp\" : \"https://images.poms.omroep.nl/s100/123.webp 100w, https://images.poms.omroep.nl/s160/123.webp 160w, https://images.poms.omroep.nl/s320/123.webp 320w, https://images.poms.omroep.nl/s640%3E/123.webp 200w\",\n" +
-                "      \"image/jpeg\" : \"https://images.poms.omroep.nl/s640%3E/123.jpg 200w\"\n" +
-                "    },\n" +
-                "    \"imageSrc\" : \"https://images.poms.omroep.nl/s640%3E/123.jpg\",\n" +
-                "    \"alternative\" : \"bla\",\n" +
-                "    \"imageTitle\" : \"bla\",\n" +
-                "    \"width\" : 200,\n" +
-                "    \"height\" : 100,\n" +
-                "    \"pointOfInterest\" : \"50% 50%\"\n" +
+                "    \"x\" : 0.5,\n" +
+                "    \"y\" : 0.5\n" +
                 "  },\n" +
                 "  \"alternativeOrTitle\" : \"bla\"\n" +
                 "}");

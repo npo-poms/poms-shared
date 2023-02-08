@@ -82,6 +82,10 @@ public interface ImageMetadata extends Metadata {
     )
     class Wrapper<W extends Metadata> extends MetadataWrapper implements ImageMetadata {
 
+        protected Wrapper() {
+            super(MetadataImpl.builder().build());
+        }
+
         public Wrapper(W wrapped) {
             super(wrapped);
         }
