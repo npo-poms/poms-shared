@@ -26,6 +26,7 @@ public interface ImageMetadata extends Metadata {
      * Null safe shortcut to {@link #getSourceSet()}.{@link ImageSourceSet#getPicture() getPicture()}
      */
     @Nullable
+    @JsonView(Views.Model.class)
     default Picture getPicture() {
         ImageSourceSet set = getSourceSet();
         return set == null ? null : set.getPicture();

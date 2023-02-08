@@ -1,32 +1,34 @@
 package nl.vpro.domain.image;
 
-import lombok.extern.slf4j.Slf4j;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 import com.google.common.annotations.Beta;
 
-import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+import lombok.extern.slf4j.Slf4j;
 
 import static nl.vpro.domain.image.ImageSource.thumbNail;
+
+import nl.vpro.jackson2.Jackson2Mapper;
+
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
-import static nl.vpro.test.util.jackson2.Jackson2TestUtil.roundTripAndSimilar;
+
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 @Slf4j
 class ImageMetadataTest {
 
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
-    final ImageMetadata image = ImageMetadata.builder()
+    final ImageMetadataImpl image = ImageMetadata.builder()
         .title("foobar")
         .creationInstant(LocalDateTime.of(2022, 4, 15, 10, 10, 0).atZone(ZONE_ID).toInstant())
         .lastModifiedInstant(LocalDateTime.of(2022, 4, 15, 10, 20, 0).atZone(ZONE_ID).toInstant())
@@ -45,7 +47,7 @@ class ImageMetadataTest {
         .areaOfInterest(new Area(10, 20, 100, 120))
         .dimensions(200, 200)
         .crid("urn:cinema:1234")
-        ._build();
+        .build();
 
 
 
@@ -57,7 +59,9 @@ class ImageMetadataTest {
 
     @Test
     public void json() {
-        roundTripAndSimilar(image, "{\n" +
+        assertThatJson(image)
+            .withoutRemarshalling()
+            .isSimilarTo("{\n" +
             "  \"type\" : \"LOGO\",\n" +
             "  \"title\" : \"foobar\",\n" +
             "  \"height\" : 200,\n" +
@@ -123,12 +127,24 @@ class ImageMetadataTest {
                 "    }\n" +
                 "  },\n" +
                 "  \"lastModified\" : 1650010800000,\n" +
+                "  \"creationDate\" : 1650010200000,\n" +
                 "  \"pointOfInterest\" : {\n" +
                 "    \"x\" : 27.5,\n" +
                 "    \"y\" : 35.0\n" +
                 "  },\n" +
-                "  \"alternativeOrTitle\" : \"foobar\",\n" +
-                "  \"creationDate\" : 1650010200000\n" +
+                "  \"picture\" : {\n" +
+                "    \"sources\" : {\n" +
+                "      \"\" : \"https://www.vpro.nl/plaatje.jpeg 640w\",\n" +
+                "      \"image/webp\" : \"https://www.vpro.nl/plaatje.webp 640w\"\n" +
+                "    },\n" +
+                "    \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
+                "    \"alternative\" : \"foobar\",\n" +
+                "    \"imageTitle\" : \"foobar\",\n" +
+                "    \"width\" : 200,\n" +
+                "    \"height\" : 200,\n" +
+                "    \"pointOfInterest\" : \"28% 35%\"\n" +
+                "  },\n" +
+                "  \"alternativeOrTitle\" : \"foobar\"\n" +
                 "}");
 
     }
@@ -136,7 +152,9 @@ class ImageMetadataTest {
     @Test
     @Beta
     public void modelAndNormalJson() {
-        roundTripAndSimilar(Jackson2Mapper.getModelAndNormalInstance(), image, "{\n" +
+        assertThatJson(Jackson2Mapper.getModelAndNormalInstance(), image)
+            .withoutRemarshalling()
+            .isSimilarTo("{\n" +
             "  \"type\" : \"LOGO\",\n" +
             "  \"title\" : \"foobar\",\n" +
             "  \"height\" : 200,\n" +
@@ -172,12 +190,24 @@ class ImageMetadataTest {
             "    }\n" +
             "  },\n" +
             "  \"lastModified\" : 1650010800000,\n" +
+            "  \"creationDate\" : 1650010200000,\n" +
             "  \"pointOfInterest\" : {\n" +
             "    \"x\" : 27.5,\n" +
             "    \"y\" : 35.0\n" +
             "  },\n" +
-            " \"alternativeOrTitle\" : \"foobar\",\n" +
-            "  \"creationDate\" : 1650010200000\n" +
+            "  \"picture\" : {\n" +
+            "    \"sources\" : {\n" +
+            "      \"\" : \"https://www.vpro.nl/plaatje.jpeg 640w\",\n" +
+            "      \"image/webp\" : \"https://www.vpro.nl/plaatje.webp 640w\"\n" +
+            "    },\n" +
+            "    \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
+            "    \"alternative\" : \"foobar\",\n" +
+            "    \"imageTitle\" : \"foobar\",\n" +
+            "    \"width\" : 200,\n" +
+            "    \"height\" : 200,\n" +
+            "    \"pointOfInterest\" : \"28% 35%\"\n" +
+            "  },\n" +
+            "  \"alternativeOrTitle\" : \"foobar\"\n" +
             "}");
 
     }
@@ -275,6 +305,9 @@ class ImageMetadataTest {
                 "    \"lastModified\" : {\n" +
                 "      \"type\" : \"any\"\n" +
                 "    },\n" +
+                "    \"creationDate\" : {\n" +
+                "      \"type\" : \"any\"\n" +
+                "    },\n" +
                 "    \"description\" : {\n" +
                 "      \"type\" : \"string\"\n" +
                 "    },\n" +
@@ -305,11 +338,35 @@ class ImageMetadataTest {
                 "        }\n" +
                 "      }\n" +
                 "    },\n" +
+                "    \"picture\" : {\n" +
+                "      \"type\" : \"object\",\n" +
+                "      \"id\" : \"urn:jsonschema:nl:vpro:domain:image:Picture\",\n" +
+                "      \"properties\" : {\n" +
+                "        \"width\" : {\n" +
+                "          \"type\" : \"integer\"\n" +
+                "        },\n" +
+                "        \"height\" : {\n" +
+                "          \"type\" : \"integer\"\n" +
+                "        },\n" +
+                "        \"sources\" : {\n" +
+                "          \"type\" : \"object\",\n" +
+                "          \"additionalProperties\" : {\n" +
+                "            \"type\" : \"string\"\n" +
+                "          }\n" +
+                "        },\n" +
+                "        \"alternative\" : {\n" +
+                "          \"type\" : \"string\"\n" +
+                "        },\n" +
+                "        \"imageSrc\" : {\n" +
+                "          \"type\" : \"string\"\n" +
+                "        },\n" +
+                "        \"imageTitle\" : {\n" +
+                "          \"type\" : \"string\"\n" +
+                "        }\n" +
+                "      }\n" +
+                "    },\n" +
                 "    \"alternativeOrTitle\" : {\n" +
                 "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"creationDate\" : {\n" +
-                "      \"type\" : \"any\"\n" +
                 "    }\n" +
                 "  }\n" +
                 "}");

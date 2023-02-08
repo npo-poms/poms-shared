@@ -1,14 +1,14 @@
 package nl.vpro.domain.image;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.time.Instant;
 import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
@@ -39,7 +39,7 @@ import nl.vpro.validation.CRID;
 )
 public class ImageMetadataImpl extends MetadataImpl implements ImageMetadata {
 
-    @JsonView(Views.Normal.class)
+    @JsonView(Views.Model.class)
     private final ImageSourceSet sourceSet;
 
 
@@ -83,6 +83,7 @@ public class ImageMetadataImpl extends MetadataImpl implements ImageMetadata {
 
     @SuppressWarnings("UnusedReturnValue")
     @JsonPOJOBuilder(withPrefix = "")
+    @JsonIgnoreProperties("picture")
     public static class Builder extends MetadataImpl.MetaBuilder<Builder> {
 
         private final Map<ImageSource.Key, ImageSource> _sourceSet = new LinkedHashMap<>();
@@ -112,13 +113,14 @@ public class ImageMetadataImpl extends MetadataImpl implements ImageMetadata {
 
         @Override
         public void  prebuild() {
+            super.prebuild();
             if (sourceSet != null) {
                 _sourceSet.putAll(sourceSet);
             }
             sourceSet(_sourceSet);
         }
 
-        public MetadataImpl build() {
+        public ImageMetadataImpl build() {
             prebuild();
             return _build();
         }

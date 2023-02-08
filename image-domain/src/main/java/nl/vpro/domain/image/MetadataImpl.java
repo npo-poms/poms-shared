@@ -132,10 +132,10 @@ public class MetadataImpl implements Metadata {
         }
 
         protected void prebuild() {
-            if (crids != null) {
-                crids.addAll(crid);
-            } else {
+            if (crids == null) {
                 crids(crid);
+            } else {
+                crids.addAll(crid);
             }
         }
 
