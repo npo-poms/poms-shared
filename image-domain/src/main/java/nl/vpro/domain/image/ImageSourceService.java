@@ -54,27 +54,30 @@ public class ImageSourceService {
         final Set<String> set = new TreeSet<>();
 
         services.forEach(creator -> {
-
-            for (ImageSource.Key key : Conversions.MAPPING.keySet()) {
-                if (getTypeOf(creator).isAssignableFrom(sourceObject.getClass())) {
-                    Optional<ImageSource> image = creator.createFor(sourceObject, metadata, key);
-                    if (image.isPresent()) {
-                        ImageSource source = image.get();
-                        if (source.getDimension() == null) {
-                            log.warn("Cannot add source without dimension {}", source);
-                        } else {
-                            if (set.add(source.getDimension() + "\t" + source.getFormat())) {
-                                map.put(image.get().getKey(), source);
+            try {
+                for (ImageSource.Key key : Conversions.MAPPING.keySet()) {
+                    if (getTypeOf(creator).isAssignableFrom(sourceObject.getClass())) {
+                        Optional<ImageSource> image = creator.createFor(sourceObject, metadata, key);
+                        if (image.isPresent()) {
+                            ImageSource source = image.get();
+                            if (source.getDimension() == null) {
+                                log.warn("Cannot add source without dimension {}", source);
                             } else {
-                                log.debug("Cannot add source {}, it has same existing dimension/format {}/{}", source, source.getDimension(), source.getFormat());
+                                if (set.add(source.getDimension() + "\t" + source.getFormat())) {
+                                    map.put(image.get().getKey(), source);
+                                } else {
+                                    log.debug("Cannot add source {}, it has same existing dimension/format {}/{}", source, source.getDimension(), source.getFormat());
+                                }
                             }
+                        } else {
+                            log.debug("No image could be created for {} by {}", key, creator);
                         }
                     } else {
-                        log.debug("No image could be created for {} by {}", key, creator);
+                        log.debug("Creator {} doesn't support {}", creator, sourceObject.getClass());
                     }
-                } else {
-                    log.debug("Creator {} doesn't support {}", creator, sourceObject.getClass());
                 }
+            } catch (Throwable e) {
+                log.warn(e.getMessage());
             }
         });
         return new ImageSourceSet(map, ImageMetadata.of(metadata));
@@ -82,11 +85,16 @@ public class ImageSourceService {
 
     @SneakyThrows
     static Class<?> getTypeOf(ImageSourceCreator<?> creator)  {
-        Type[] genericInterfaces = creator.getClass().getGenericInterfaces();
-        if (genericInterfaces.length > 0) {
-            return (Class<?>) ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments()[0];
-        } else {
-            return (Class<?>) ((ParameterizedType) creator.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        try {
+            Type[] genericInterfaces = creator.getClass().getGenericInterfaces();
+            if (genericInterfaces.length > 0) {
+                return (Class<?>) ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments()[0];
+            } else {
+                return (Class<?>) ((ParameterizedType) creator.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            }
+        } catch (ClassCastException cce) {
+            log.warn(cce.getMessage());
+            return Object.class;
         }
 
     }
