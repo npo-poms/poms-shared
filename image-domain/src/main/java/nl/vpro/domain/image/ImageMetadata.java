@@ -123,7 +123,7 @@ public interface ImageMetadata extends Metadata {
             if (supplier == null) {
                 return ImageSourceService.INSTANCE.getSourceSet(wrapped);
             } else {
-                return ImageSourceService.INSTANCE.getSourceSet(supplier);
+                return ImageSourceService.INSTANCE.getSourceSet(supplier, wrapped);
             }
         }
         protected void setSourceSet(ImageSourceSet ignored) {
