@@ -12,11 +12,11 @@ import nl.vpro.jackson2.Views;
 
 /**
  * This jackson filter is enabled when using poms domain classes.
- *
+ * <p>
  * The idea is that it makes it possible ot marshall objects that are under embargo, when using the {@link Views.Publisher} view.
- *
+ * <p>
  * In poms this is arranged via hibernate filters, but this could be an alternative, since we publish JSON basically.
- *
+ * <p>
  * This is now used to generate 'published' json for tests cases.
  *
  * @see CollectionOfPublishable
@@ -27,7 +27,7 @@ public class PublicationFilter extends SimpleBeanPropertyFilter {
 
     /**
      * For now on default this filter does nothing.
-     *
+     * <p>
      * You may override that by setting in this thread local to true
      *
      */

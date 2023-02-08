@@ -99,7 +99,10 @@ public class ImageSource implements Serializable, Comparable<ImageSource> {
             return type(key.getType())
                 .format(key.getFormat());
         }
+    }
 
+    public static Builder of(Key key) {
+        return builder().key(key);
     }
 
     @JsonIgnore

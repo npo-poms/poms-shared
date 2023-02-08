@@ -41,7 +41,7 @@ public interface ImageMetadata extends Metadata {
 
 
     static ImageMetadataImpl.Builder builder() {
-        return ImageMetadataImpl.builder();
+        return ImageMetadataImpl.ibuilder();
     }
 
 
@@ -106,13 +106,5 @@ public interface ImageMetadata extends Metadata {
 
         }
 
-        @Override
-        public @Nullable Area getAreaOfInterest() {
-            if (wrapped instanceof ImageMetadata) {
-                return ((ImageMetadata)wrapped).getAreaOfInterest();
-            } else {
-                return null;
-            }
-        }
     }
 }

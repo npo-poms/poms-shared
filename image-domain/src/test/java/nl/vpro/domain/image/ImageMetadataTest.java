@@ -45,7 +45,7 @@ class ImageMetadataTest {
         .areaOfInterest(new Area(10, 20, 100, 120))
         .dimensions(200, 200)
         .crid("urn:cinema:1234")
-        .build();
+        ._build();
 
 
 

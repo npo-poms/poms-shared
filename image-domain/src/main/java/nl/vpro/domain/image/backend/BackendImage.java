@@ -291,7 +291,7 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
     @SneakyThrows
     @XmlTransient
     public ImageStream getImageStream() throws NotFoundException {
-        return imageStream.getThrows();
+        return imageStream == null ? null : imageStream.getThrows();
     }
 
    public BackendImage supplyImageStream(ThrowAnySupplier<ImageStream> data) {
@@ -302,27 +302,32 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
     @XmlElement(name = "data")
     @XmlMimeType("application/octet-stream")
     public DataHandler getData() {
-        return new DataHandler(new DataSource() {
-            @Override
-            public InputStream getInputStream() throws IOException {
-                return BackendImage.this.getImageStream().getStream();
-            }
+        if (imageStream == null) {
+            return null;
+        } else {
+            return new DataHandler(new DataSource() {
+                @Override
+                public InputStream getInputStream() throws IOException {
+                    ImageStream is = BackendImage.this.getImageStream();
+                    return is == null ? null : is.getStream();
+                }
 
-            @Override
-            public OutputStream getOutputStream() throws IOException {
-                throw new UnsupportedOperationException("Immutable blob input");
-            }
+                @Override
+                public OutputStream getOutputStream() throws IOException {
+                    throw new UnsupportedOperationException("Immutable blob input");
+                }
 
-            @Override
-            public String getContentType() {
-                return getMimeType();
-            }
+                @Override
+                public String getContentType() {
+                    return getMimeType();
+                }
 
-            @Override
-            public String getName() {
-                return title;
-            }
-        });
+                @Override
+                public String getName() {
+                    return title;
+                }
+            });
+        }
     }
 
     /**

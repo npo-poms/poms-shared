@@ -4,8 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 
-import nl.vpro.domain.image.*;
-import nl.vpro.domain.image.backend.BackendImageSourceCreator;
+import nl.vpro.domain.image.backend.PomsImageSourceCreator;
 
 /**
  * Wrapped for poms images.
@@ -13,15 +12,11 @@ import nl.vpro.domain.image.backend.BackendImageSourceCreator;
 @Slf4j
 public class PomsImages {
 
-    public static class Creator extends BackendImageSourceCreator {
+    public static class Creator extends PomsImageSourceCreator<Image> {
 
         @Override
-        protected Optional<Long> getId(Metadata metadata) {
-            if (metadata instanceof Image) {
-                return Optional.of(((Image) metadata).getImageId());
-            } else {
-                return Optional.empty();
-            }
+        protected Optional<Long> getId(Image metadata) {
+            return Optional.of(metadata.getImageId());
         }
     }
 }
