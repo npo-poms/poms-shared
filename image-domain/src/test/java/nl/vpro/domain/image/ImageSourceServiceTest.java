@@ -70,8 +70,8 @@ class ImageSourceServiceTest {
     void forSomeSupplier() {
         MetadataSupplier supplier = new SomeImageThatCantImplementMetadata();
 
-        ImageSourceSet imageMetadata = ImageSourceService.INSTANCE.getSourceSet(supplier);
-        assertThatJson(imageMetadata)
+        ImageSourceSet sourceSet = ImageSourceService.INSTANCE.getSourceSet(supplier);
+        assertThatJson(sourceSet)
             .isSimilarTo("{\n" +
             "  \"THUMBNAIL.WEBP\" : {\n" +
             "    \"url\" : \"https://bla/TN.W/1.webp\",\n" +
@@ -110,6 +110,68 @@ class ImageSourceServiceTest {
             "    }\n" +
             "  }\n" +
             "}");
+
+        ImageMetadata metadata = ImageMetadata.of(supplier);
+        assertThatJson(Jackson2Mapper.getModelInstance(), metadata)
+            .withoutRemarshalling()
+            .isSimilarTo("{\n" +
+                "  \"title\" : \"Test\",\n" +
+                "  \"height\" : 200,\n" +
+                "  \"width\" : 100,\n" +
+                "  \"sourceSet\" : {\n" +
+                "    \"THUMBNAIL.WEBP\" : {\n" +
+                "      \"url\" : \"https://bla/TN.W/1.webp\",\n" +
+                "      \"type\" : \"THUMBNAIL\",\n" +
+                "      \"format\" : \"WEBP\",\n" +
+                "      \"dimension\" : {\n" +
+                "        \"width\" : 100,\n" +
+                "        \"height\" : 100\n" +
+                "      }\n" +
+                "    },\n" +
+                "    \"MOBILE.WEBP\" : {\n" +
+                "      \"url\" : \"https://bla/M1.W/1.webp\",\n" +
+                "      \"type\" : \"MOBILE\",\n" +
+                "      \"format\" : \"WEBP\",\n" +
+                "      \"dimension\" : {\n" +
+                "        \"width\" : 200,\n" +
+                "        \"height\" : 200\n" +
+                "      }\n" +
+                "    },\n" +
+                "    \"LARGE.WEBP\" : {\n" +
+                "      \"url\" : \"https://bla/L1.W/1.webp\",\n" +
+                "      \"type\" : \"LARGE\",\n" +
+                "      \"format\" : \"WEBP\",\n" +
+                "      \"dimension\" : {\n" +
+                "        \"width\" : 300,\n" +
+                "        \"height\" : 300\n" +
+                "      }\n" +
+                "    },\n" +
+                "    \"MOBILE.JPG\" : {\n" +
+                "      \"url\" : \"https://bla/M1.J/1.jpg\",\n" +
+                "      \"type\" : \"MOBILE\",\n" +
+                "      \"format\" : \"JPG\",\n" +
+                "      \"dimension\" : {\n" +
+                "        \"width\" : 200,\n" +
+                "        \"height\" : 200\n" +
+                "      }\n" +
+                "    }\n" +
+                "  },\n" +
+                "  \"areaOfInterest\" : {\n" +
+                "    \"lowerLeft\" : {\n" +
+                "      \"x\" : 0,\n" +
+                "      \"y\" : 0\n" +
+                "    },\n" +
+                "    \"upperRight\" : {\n" +
+                "      \"x\" : 10,\n" +
+                "      \"y\" : 10\n" +
+                "    }\n" +
+                "  },\n" +
+                "  \"pointOfInterest\" : {\n" +
+                "    \"x\" : 0.05,\n" +
+                "    \"y\" : 0.025\n" +
+                "  },\n" +
+                "  \"alternativeOrTitle\" : \"Test\"\n" +
+                "}");
     }
 
 
