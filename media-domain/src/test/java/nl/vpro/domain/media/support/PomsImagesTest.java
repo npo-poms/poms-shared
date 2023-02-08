@@ -134,15 +134,27 @@ class PomsImagesTest {
                 "  },\n" +
                 "  \"lastModified\" : 1639275163526,\n" +
                 "  \"creationDate\" : 1639275163526,\n" +
-                "  \"description\" : \"Filmmaakster Michal Weits duikt in het verleden van haar overgrootvader Joseph Weitz die, met geld van de Blue Box-campagne van het Joods Nationaal Fonds, Palestijns land aankocht en onteigende.\",\n" +
-                "  \"sourceName\" : \"VPRO\",\n" +
-                "  \"license\" : \"COPYRIGHTED\",\n" +
-                "  \"credits\" : \"Still 2Doc: / Blue Box\",\n" +
+                "  \"picture\" : {\n" +
+                "    \"sources\" : {\n" +
+                "      \"image/webp\" : \"https://images.poms.omroep.nl/image/s100/1646895.webp 100w, https://images.poms.omroep.nl/image/s160/1646895.webp 160w, https://images.poms.omroep.nl/image/s320/1646895.webp 320w, https://images.poms.omroep.nl/image/s640%3E/1646895.webp 640w, https://images.poms.omroep.nl/image/s960%3E/1646895.webp 960w, https://images.poms.omroep.nl/image/s1280%3E/1646895.webp 1280w, https://images.poms.omroep.nl/image/s1440%3E/1646895.webp 1440w, https://images.poms.omroep.nl/image/s1920%3E/1646895.webp 1920w\",\n" +
+                "      \"image/jpeg\" : \"https://images.poms.omroep.nl/image/s640%3E/1646895.jpg 640w\"\n" +
+                "    },\n" +
+                "    \"imageSrc\" : \"https://images.poms.omroep.nl/image/s640%3E/1646895.jpg\",\n" +
+                "    \"alternative\" : \"2Doc:\",\n" +
+                "    \"imageTitle\" : \"2Doc:\",\n" +
+                "    \"width\" : 1920,\n" +
+                "    \"height\" : 1080,\n" +
+                "    \"pointOfInterest\" : \"50% 50%\"\n" +
+                "  },\n" +
                 "  \"pointOfInterest\" : {\n" +
                 "    \"x\" : 50.0,\n" +
                 "    \"y\" : 50.0\n" +
                 "  },\n" +
-                "  \"alternativeOrTitle\" : \"2Doc:\"\n" +
+                "  \"license\" : \"COPYRIGHTED\",\n" +
+                "  \"credits\" : \"Still 2Doc: / Blue Box\",\n" +
+                "  \"description\" : \"Filmmaakster Michal Weits duikt in het verleden van haar overgrootvader Joseph Weitz die, met geld van de Blue Box-campagne van het Joods Nationaal Fonds, Palestijns land aankocht en onteigende.\",\n" +
+                "  \"alternativeOrTitle\" : \"2Doc:\",\n" +
+                "  \"sourceName\" : \"VPRO\"\n" +
                 "}");
     }
 
