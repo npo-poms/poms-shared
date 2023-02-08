@@ -44,7 +44,6 @@ public class ImageSourceService {
         return getSourceSet(metadata, metadata.getMetadata());
     }
 
-
     /**
      * Finally, it is possible to just pass both.
      */

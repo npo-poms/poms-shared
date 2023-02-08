@@ -18,7 +18,7 @@ public abstract class PomsImageSourceCreator<M extends Metadata> implements Imag
     protected abstract Optional<Long> getId(M supplier);
 
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({"rawtypes"})
     protected ImageFormat getOriginalFormat(Metadata supplier) {
         if (supplier instanceof ImageMetadata.Wrapper) {
             Optional<BackendImage> result = ((ImageMetadata.Wrapper) supplier).unwrap(BackendImage.class);

@@ -60,6 +60,19 @@ public interface ImageMetadata extends Metadata {
         }
     }
 
+    @PolyNull
+    static <W extends MetadataSupplier> ImageMetadata of(@PolyNull W wrapped) {
+        if (wrapped == null) {
+            return null;
+        } else {
+            if (wrapped instanceof  ImageMetadata) {
+                return (ImageMetadata) wrapped;
+            } else {
+                return new Wrapper<>(wrapped);
+            }
+        }
+    }
+
     /**
      * If an image object already implements {@link Metadata}, then an interface can
      * be created using this wrapper.
@@ -82,12 +95,21 @@ public interface ImageMetadata extends Metadata {
     )
     class Wrapper<W extends Metadata> extends MetadataWrapper implements ImageMetadata {
 
+        protected final MetadataSupplier supplier;
+
         protected Wrapper() {
             super(MetadataImpl.builder().build());
+            this.supplier = null;
         }
 
         public Wrapper(W wrapped) {
             super(wrapped);
+            this.supplier = null;
+        }
+
+        public Wrapper(MetadataSupplier wrapped) {
+            super(wrapped.getMetadata());
+            this.supplier = wrapped;
         }
 
         @Override
@@ -98,7 +120,11 @@ public interface ImageMetadata extends Metadata {
         @Override
         @JsonView(Views.Model.class)
         public ImageSourceSet getSourceSet() {
-            return ImageSourceService.INSTANCE.getSourceSet(wrapped);
+            if (supplier == null) {
+                return ImageSourceService.INSTANCE.getSourceSet(wrapped);
+            } else {
+                return ImageSourceService.INSTANCE.getSourceSet(supplier);
+            }
         }
         protected void setSourceSet(ImageSourceSet ignored) {
 
