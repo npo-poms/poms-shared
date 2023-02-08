@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
@@ -19,11 +20,16 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
     ImageSourceSet(Map<ImageSource.Key, ImageSource> imageSources, ImageMetadata parent) {
         this.imageSources = imageSources;
         this.parent = parent;
-
     }
 
     public ImageSourceSet(ImageMetadata wrapped) {
         this(new LinkedHashMap<>(), wrapped);
+    }
+
+    @JsonCreator
+    ImageSourceSet(Map<ImageSource.Key, ImageSource> imageSources) {
+        this.imageSources = imageSources;
+        parent = null;
     }
 
     public ImageSource getDefaultImageSource() {

@@ -55,7 +55,7 @@ public interface BackendImageMetadata<T extends BackendImageMetadata<T>>  extend
     }
 
     default T setId(Long id) {
-          return setImageUri(id == null ? null : BASE_URN + id);
+        return setImageUri(id == null ? null : BASE_URN + id);
     }
 
 

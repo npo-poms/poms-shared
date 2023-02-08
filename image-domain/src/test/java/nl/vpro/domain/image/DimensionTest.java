@@ -27,10 +27,11 @@ public class DimensionTest implements ComparableTest<Dimension> {
     @Override
     public Arbitrary<? extends Dimension> datapoints() {
         return Arbitraries.of(
-            Dimension.of(640, 320),
+                Dimension.of(640, 320),
             Dimension.of(640, null),
             Dimension.of((Long) null, null),
             Dimension.of(1, 2)
             ).injectNull(0.2);
     }
+
 }

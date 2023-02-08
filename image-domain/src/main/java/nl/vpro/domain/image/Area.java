@@ -44,8 +44,8 @@ public class Area implements Serializable {
     public static RelativePoint relativeCenter(Area area, Dimension dimension) {
         if (area != null && dimension != null && dimension.getWidth() != null && dimension.getHeight() != null) {
             return new RelativePoint(
-                50f * (area.getLowerLeft().getX() + area.getUpperRight().getX()) / dimension.getWidth(),
-                50f * (area.getLowerLeft().getY() + area.getUpperRight().getY()) / dimension.getHeight()
+                0.5f * (area.getLowerLeft().getX() + area.getUpperRight().getX()) / dimension.getWidth(),
+                0.5f * (area.getLowerLeft().getY() + area.getUpperRight().getY()) / dimension.getHeight()
             );
         } else {
             return RelativePoint.MIDDLE;

@@ -36,7 +36,9 @@ public interface ImageMetadata extends Metadata {
      */
     @JsonView(Views.Model.class)
     default RelativePoint getPointOfInterest() {
-        return Area.relativeCenter(getAreaOfInterest(), getDimension());
+        return Area.relativeCenter(
+            getAreaOfInterest(), getDimension()
+        );
     }
 
 
@@ -79,6 +81,10 @@ public interface ImageMetadata extends Metadata {
     }
     )
     class Wrapper<W extends Metadata> extends MetadataWrapper implements ImageMetadata {
+
+        protected Wrapper() {
+            super(MetadataImpl.builder().build());
+        }
 
         public Wrapper(W wrapped) {
             super(wrapped);
