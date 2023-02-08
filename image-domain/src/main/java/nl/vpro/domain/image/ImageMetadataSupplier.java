@@ -19,6 +19,7 @@ import org.checkerframework.checker.nullness.qual.PolyNull;
  *
  *
  */
+@Deprecated
 public interface ImageMetadataSupplier {
 
 
