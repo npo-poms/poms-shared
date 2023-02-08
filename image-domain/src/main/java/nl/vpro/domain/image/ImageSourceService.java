@@ -10,8 +10,12 @@ import java.util.*;
 import nl.vpro.domain.convert.Conversions;
 
 /**
- * Wrapper for the {@link ImageSourceCreator} {@link ServiceLoader}.
+ * Wrapper for the {@link ImageSourceCreator} {@link ServiceLoader}. This provides a service oriented way to create {@link ImageSourceSet}s from image metadata. Such a sourceset is not intrinsic to the image,
+ * it may depend on the environment, and configuration how exactly it must be calculated.
+ * <p>
+ * This service provides the flexibility to do that.
  *
+ * @since 7.2
  */
 @Slf4j
 public class ImageSourceService {
@@ -21,20 +25,31 @@ public class ImageSourceService {
     @SuppressWarnings("rawtypes")
     private final ServiceLoader<ImageSourceCreator> services = ServiceLoader.load(ImageSourceCreator.class);
 
+    /**
+     * This is the simplest way use this service. Provide it with an instance of some class implementation {@link Metadata}.
+     * <p>
+     * The service loader needs to be aware of some {@link ImageSourceCreator} that supports this class.
+     *
+     */
+    public ImageSourceSet getSourceSet(Metadata metadata) {
+        return getSourceSet(metadata, metadata);
+    }
 
+
+    /**
+     * Sometimes, for example for legacy reason, the image object itself cannot implement {@link Metadata}. It could then implement just {@link MetadataSupplier}. The associated {@link ImageSourceCreator}s can still receive the original image object.
+     *
+     */
     public ImageSourceSet getSourceSet(MetadataSupplier metadata) {
         return getSourceSet(metadata, metadata.getMetadata());
     }
 
 
-    public ImageSourceSet getSourceSet(Metadata metadata) {
-        return getSourceSet(metadata, metadata);
-    }
-
     /**
+     * Finally, it is possible to just pass both.
      */
     @SuppressWarnings("unchecked")
-    protected ImageSourceSet getSourceSet(Object sourceObject, Metadata metadata) {
+    public ImageSourceSet getSourceSet(Object sourceObject, Metadata metadata) {
         final Map<ImageSource.Key, ImageSource> map = new LinkedHashMap<>();
         final Set<String> set = new TreeSet<>();
 
@@ -57,7 +72,8 @@ public class ImageSourceService {
                     } else {
                         log.debug("No image could be created for {} by {}", key, creator);
                     }
-                    ;
+                } else {
+                    log.debug("Creator {} doesn't support {}", creator, sourceObject.getClass());
                 }
             }
         });
@@ -65,7 +81,7 @@ public class ImageSourceService {
     }
 
     @SneakyThrows
-    public static Class<?> getTypeOf(ImageSourceCreator<?> creator)  {
+    static Class<?> getTypeOf(ImageSourceCreator<?> creator)  {
         Type[] genericInterfaces = creator.getClass().getGenericInterfaces();
         if (genericInterfaces.length > 0) {
             return (Class<?>) ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments()[0];

@@ -1,6 +1,7 @@
 package nl.vpro.domain.image;
 
 import java.time.Instant;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.*;
 
@@ -90,5 +91,14 @@ public  class MetadataWrapper implements Metadata {
     @Override
     public Area getAreaOfInterest() {
         return wrapped.getAreaOfInterest();
+    }
+
+    @SuppressWarnings("unchecked")
+    public <C extends Metadata> Optional<C> unwrap(Class<C> clazz) {
+        if (clazz.isInstance(wrapped)) {
+            return Optional.of((C) wrapped);
+        } else {
+            return Optional.empty();
+        }
     }
 }

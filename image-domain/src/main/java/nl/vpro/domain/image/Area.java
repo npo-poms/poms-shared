@@ -38,6 +38,9 @@ public class Area implements Serializable {
         return new Area(lowerLeft.times(multiplier), upperRight.times(multiplier));
     }
 
+    /**
+     *
+     */
     public static RelativePoint relativeCenter(Area area, Dimension dimension) {
         if (area != null && dimension != null && dimension.getWidth() != null && dimension.getHeight() != null) {
             return new RelativePoint(

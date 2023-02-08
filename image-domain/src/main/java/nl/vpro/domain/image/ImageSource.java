@@ -19,7 +19,7 @@ import static nl.vpro.domain.image.ImageFormat.*;
 
 
 /**
- * Representation of one image URL
+ * Representation of one image URL, especially in a {@link ImageSourceSet}.
  *
  * @see BasicBackendImageMetadata
  */
