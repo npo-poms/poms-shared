@@ -96,6 +96,11 @@ public interface Metadata extends Trackable {
         return Collections.emptyList();
     }
 
+    @Nullable
+    default Area getAreaOfInterest() {
+        return null;
+    }
+
     /**
      * When making an implementation of {@link Metadata}, you can define a {@link lombok.Builder} which may
      * implement this interface.
@@ -123,6 +128,21 @@ public interface Metadata extends Trackable {
         SELF width(Integer width);
         SELF crids(List<@CRID String> crids);
 
+         default SELF longHeight(Long height) {
+            return height(height == null ? null : height.intValue());
+        }
+        default  SELF longWidth(Long width){
+            return width(width == null ? null : width.intValue());
+        }
+
+        default SELF dimensions(int width, int height) {
+            return width(width)
+                .height(height);
+        }
+        default SELF dimension(Dimension dimension) {
+            return longWidth(dimension.getWidth())
+                .longHeight(dimension.getHeight());
+        }
 
         default SELF from(@Nullable Metadata from) {
             if (from != null) {
@@ -148,5 +168,7 @@ public interface Metadata extends Trackable {
         }
 
     }
+
+
 
 }

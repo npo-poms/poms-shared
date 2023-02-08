@@ -24,10 +24,10 @@ public interface ImageMetadataSupplier {
 
     @NonNull
     default ImageMetadata getImageMetadataWithSourceSet() {
-        final Map<ImageSource.Key, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(this);
-        ImageMetadataImpl.Builder builder =  ImageMetadataImpl.builder()
+        final Map<ImageSource.Key, ImageSource> sourceSet = ImageSourceService.INSTANCE.getSourceSet(getImageMetadata());
+        ImageMetadataImpl.Builder builder =  ImageMetadataImpl.ibuilder()
             .from(getImageMetadata())
-            .addSourceSet(sourceSet);
+            .sourceSet(sourceSet);
         return builder.build();
     }
 
@@ -69,7 +69,7 @@ public interface ImageMetadataSupplier {
         @Override
         @NonNull
         public ImageMetadata getImageMetadata() {
-            ImageMetadataImpl.Builder builder = ImageMetadataImpl.builder();
+            ImageMetadataImpl.Builder builder = ImageMetadataImpl.ibuilder();
 
             // todo
             if (this.wrapped instanceof ImageMetadata) {

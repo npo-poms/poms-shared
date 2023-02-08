@@ -37,7 +37,7 @@ public class PictureMetadata extends MetadataWrapper implements Picture, ImageMe
         super(wrapped);
         this.wrapped = wrapped;
         this.sources = Collections.unmodifiableMap(sources);
-        this.imageSrc = image.getUrl().toString();
+        this.imageSrc = image == null || image.getUrl() == null ? null : image.getUrl().toString();
         this.imageTitle = wrapped.getTitle();
         this.alternative = wrapped.getAlternativeOrTitle();
     }

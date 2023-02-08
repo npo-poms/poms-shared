@@ -35,10 +35,12 @@ public class PictureImpl implements Picture {
     Integer height;
 
 
-    public PictureImpl(Map<String, String> sources, ImageSource image, @NonNull ImageMetadata wrapped) {
+    public PictureImpl(
+        Map<String, String> sources,
+        ImageSource image, @NonNull ImageMetadata wrapped) {
         this.wrapped = wrapped;
         this.sources = Collections.unmodifiableMap(sources);
-        this.imageSrc = image == null ? null : String.valueOf(image.getUrl());
+        this.imageSrc = image == null || image.getUrl() == null ? null : image.getUrl().toString();
         this.alternative = wrapped.getAlternativeOrTitle();
         this.imageTitle = wrapped.getTitle();
         this.width = Dimension.getIntegerWidth(wrapped.getDimension());

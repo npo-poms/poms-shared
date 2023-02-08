@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents a relative position in an image. Basically two floats ranging from {@code 0} to {@code 100}.
+ * Represents a relative position in an image. Basically two floats ranging from {@code 0} to {@code 1}.
  *
  * @author Michiel Meeuwissen
  * @since 5.34
@@ -16,7 +16,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Data
 public class RelativePoint implements java.io.Serializable {
 
-    public static final RelativePoint MIDDLE = RelativePoint.of(50, 50);
+    public static final RelativePoint MIDDLE = RelativePoint.of(
+        0.5f, 0.5f);
 
     private static final long serialVersionUID = 0L;
 
@@ -24,18 +25,23 @@ public class RelativePoint implements java.io.Serializable {
     private final float y;
 
 
-    public static RelativePoint of(@Min(0) @Max(100) float x, @Min(0) @Max(100)  int y) {
+    public static RelativePoint of(
+        @Min(0) @Max(1) float x,
+        @Min(0) @Max(1)  float y
+    ) {
         return new RelativePoint(x, y);
     }
 
     @JsonCreator
-    public RelativePoint(@JsonProperty("x") float x, @JsonProperty("y") float y) {
+    public RelativePoint(
+         @Min(0) @Max(1) @JsonProperty("x") float x,
+         @Min(0) @Max(1) @JsonProperty("y") float y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
     public String toString() {
-        return "" + Math.round(x) + "% " + Math.round(y) + "%";
+        return "" + Math.round(100 * x) + "% " + Math.round(100 * y) + "%";
     }
 }

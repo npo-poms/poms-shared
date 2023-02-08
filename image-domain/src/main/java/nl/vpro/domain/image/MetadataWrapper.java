@@ -1,9 +1,9 @@
 package nl.vpro.domain.image;
 
 import java.time.Instant;
+import java.util.Optional;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.support.License;
 
@@ -77,12 +77,28 @@ public  class MetadataWrapper implements Metadata {
     }
 
     @Override
+    @JsonProperty("lastModified")
     public Instant getLastModifiedInstant() {
         return wrapped.getLastModifiedInstant();
     }
 
     @Override
+    @JsonProperty("creationDate")
     public Instant getCreationInstant() {
         return wrapped.getCreationInstant();
+    }
+
+    @Override
+    public Area getAreaOfInterest() {
+        return wrapped.getAreaOfInterest();
+    }
+
+    @SuppressWarnings("unchecked")
+    public <C extends Metadata> Optional<C> unwrap(Class<C> clazz) {
+        if (clazz.isInstance(wrapped)) {
+            return Optional.of((C) wrapped);
+        } else {
+            return Optional.empty();
+        }
     }
 }

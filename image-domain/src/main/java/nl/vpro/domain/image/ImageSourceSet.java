@@ -14,11 +14,11 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
 
     final Map<ImageSource.Key, ImageSource> imageSources;
 
-    private final ImageMetadata wrapped;
+    private final ImageMetadata parent;
 
-    ImageSourceSet(Map<ImageSource.Key, ImageSource> imageSources, ImageMetadata wrapped) {
+    ImageSourceSet(Map<ImageSource.Key, ImageSource> imageSources, ImageMetadata parent) {
         this.imageSources = imageSources;
-        this.wrapped = wrapped;
+        this.parent = parent;
 
     }
 
@@ -93,7 +93,7 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
         if (skipped[0] == 0) {
             return this;
         } else {
-            return new ImageSourceSet(imageSources, wrapped);
+            return new ImageSourceSet(imageSources, parent);
         }
     }
 
@@ -101,14 +101,14 @@ public class ImageSourceSet extends AbstractMap<ImageSource.Key, ImageSource> {
      * Represents the metadata to build an HTML picture tag.
      */
     public Picture getPicture() {
-        return new PictureImpl(getSources(), getDefaultImageSource(), wrapped);
+        return new PictureImpl(getSources(), getDefaultImageSource(), parent);
     }
 
     /**
      * Represents the metadata to build an HTML picture tag.
      */
     public PictureMetadata getPictureMetadata() {
-        return new PictureMetadata(getSources(), getDefaultImageSource(), wrapped);
+        return new PictureMetadata(getSources(), getDefaultImageSource(), parent);
     }
 
     private Map<String, String> getSources() {
