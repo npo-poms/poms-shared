@@ -3260,6 +3260,14 @@
         </xs:annotation>
       </xs:enumeration>
 
+      <xs:enumeration value="PRMT">
+        <xs:annotation>
+          <xs:documentation>
+            Paramount Nederland
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
        <xs:enumeration value="XXXX">
         <xs:annotation>
           <xs:documentation>

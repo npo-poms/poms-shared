@@ -1,11 +1,12 @@
 package nl.vpro.domain.gtaa;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.w3.rdf.Description;
 
@@ -22,6 +23,7 @@ import nl.vpro.w3.rdf.Description;
     }
 )
 @XmlRootElement(name = "classification")
+@Schema(name = "GTAAClassification")
 public class GTAAClassification extends AbstractSimpleValueGTAAConcept {
 
     private static final long serialVersionUID = -7045377163010493587L;

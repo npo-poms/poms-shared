@@ -1,5 +1,6 @@
 package nl.vpro.domain.media.support;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -63,6 +64,7 @@ public class Tag implements Serializable, Comparable<Tag>, Identifiable<Long> {
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
+    @Schema(implementation = String.class, type = "string")
     public Locale getLanguage() {
         return language == null || language.equals(Locales.DUTCH) ? null : language;
     }

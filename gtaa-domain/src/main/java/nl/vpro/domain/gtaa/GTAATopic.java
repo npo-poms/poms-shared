@@ -1,5 +1,7 @@
 package nl.vpro.domain.gtaa;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
@@ -22,6 +24,7 @@ import nl.vpro.w3.rdf.Description;
     }
 )
 @XmlRootElement(name = "topic")
+@Schema(name = "GTAATopic")
 public class GTAATopic extends AbstractSimpleValueGTAAConcept {
 
     private static final long serialVersionUID = -6679803582581099101L;

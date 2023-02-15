@@ -1,5 +1,7 @@
 package nl.vpro.api.rs.v3.subtitles;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.Locale;
 
 import javax.validation.Valid;
@@ -46,7 +48,7 @@ public interface SubtitlesRestService {
     @Path("/{mid}/{language}")
     Subtitles get(
         @Encoded @PathParam(MID) String mid,
-        @PathParam(LANGUAGE) Locale locale);
+        @Schema(implementation = String.class, type = "string") @PathParam(LANGUAGE) Locale locale);
 
 
     @GET

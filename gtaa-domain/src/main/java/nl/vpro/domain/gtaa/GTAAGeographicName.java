@@ -1,11 +1,12 @@
 package nl.vpro.domain.gtaa;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import org.meeuw.i18n.regions.Region;
 
@@ -15,11 +16,14 @@ import nl.vpro.w3.rdf.Description;
 @XmlType(
     name = "geographicNameType",
     propOrder = {
-    "name",
-    "scopeNotes",
-    "redirectedFrom"
-})
+        "name",
+        "scopeNotes",
+        "redirectedFrom"
+    }
+)
 @XmlRootElement(name = "geographicName")
+@XmlAccessorType(XmlAccessType.NONE)
+@Schema(name = "GTAAGeographicName")
 public class GTAAGeographicName extends AbstractSimpleValueGTAAConcept implements Region {
 
     private static final long serialVersionUID = 2600104116644142067L;
@@ -39,16 +43,13 @@ public class GTAAGeographicName extends AbstractSimpleValueGTAAConcept implement
         return answer;
     }
 
-
     @Override
     public String getCode() {
         return getId().toString();
-
     }
 
     @Override
     public Type getType() {
         return Type.UNDEFINED;
-
     }
 }

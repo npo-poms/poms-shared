@@ -1,5 +1,6 @@
 package nl.vpro.domain.subtitles;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -95,6 +96,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @Id
+    @Schema(implementation = String.class, type = "string")
     private Locale language;
 
     @Column(name = "`offset`")
