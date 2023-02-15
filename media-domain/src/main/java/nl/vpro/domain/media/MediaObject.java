@@ -241,8 +241,8 @@ import static nl.vpro.domain.media.MediaObject.*;
 @Filter(name = "modifiedRange", condition = ":modifiedStart <= lastModified and :modifiedStop >= lastModified")
 @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
     + "and (publishStop is null or publishStop > now())")
-@Filter(name = EMBARGO_FILTER, condition = "(publishstart is null "
-    + "or publishstart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
+@Filter(name = EMBARGO_FILTER, condition = "(publishStart is null "
+    + "or publishStart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
     + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))")
 @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
 

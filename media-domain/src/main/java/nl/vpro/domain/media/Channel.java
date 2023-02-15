@@ -2759,10 +2759,21 @@ public enum Channel implements Displayable, XmlValued {
      * @since 5.30
      */
     @XmlEnumValue("SPID")
-    SPID(VIDEO, "https://www.spiketv.nl/", 2015) {
+    SPID(VIDEO, Range.closed(Year.of(2014), Year.of(2022)), "https://www.spiketv.nl/", null) {
         @Override
         public String toString() {
             return "Spike Nederland";
+        }
+    },
+
+    /**
+     * @since 7.3
+     */
+    @XmlEnumValue("PRMT")
+    PRMT(VIDEO, "https://www.paramountnetwork.nl/", 2022) {
+        @Override
+        public String toString() {
+            return "Paramount Network Nederland";
         }
     },
 
