@@ -27,7 +27,6 @@ import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
         @JsonSubTypes.Type(value = GTAAPerson.class),
         @JsonSubTypes.Type(value = GTAATopic.class),
         @JsonSubTypes.Type(value = GTAATopicBandG.class),
-
         @JsonSubTypes.Type(value = GTAAGenre.class),
         @JsonSubTypes.Type(value = GTAAGeographicName.class),
         @JsonSubTypes.Type(value = GTAAMaker.class),

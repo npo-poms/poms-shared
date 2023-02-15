@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.gtaa;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +25,7 @@ import nl.vpro.w3.rdf.Description;
 
 /**
  * A representation of the gtaa concept {@link Scheme#person}.
- *
+ * <p>
  * We have the small distinction what we try to make sense of {@link #givenName} and {@link #familyName}. It's doubtful that this is culturally neutral, but for the use cases at hand it's probably sensible.
  *
  * @author Roelof Jan Koekoek
@@ -35,11 +36,11 @@ import nl.vpro.w3.rdf.Description;
     name = "personType",
     propOrder = {
         "name",
-    "givenName",
-    "familyName",
-    "scopeNotes",
-    "knownAs",
-    "redirectedFrom"
+        "givenName",
+        "familyName",
+        "scopeNotes",
+        "knownAs",
+        "redirectedFrom"
 
 })
 @JsonPropertyOrder({
@@ -52,13 +53,13 @@ import nl.vpro.w3.rdf.Description;
     "knownAs",
     "redirectedFrom"
 }
-
 )
 @XmlAccessorType(XmlAccessType.NONE)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = "person")
 @GTAAScheme(Scheme.person)
+@Schema(name = "GTAAPerson")
 public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;

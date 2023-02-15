@@ -1,5 +1,7 @@
 package nl.vpro.domain.gtaa;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
@@ -18,6 +20,7 @@ import nl.vpro.w3.rdf.Description;
     }
 )
 @XmlRootElement(name = "maker")
+@Schema(name = "GTAAMaker")
 public class GTAAMaker extends AbstractSimpleValueGTAAConcept {
 
 

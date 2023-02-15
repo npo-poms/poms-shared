@@ -34,6 +34,7 @@
     <dependency>
       <groupId>io.swagger.core.v3</groupId>
       <artifactId>swagger-annotations</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 </project>
