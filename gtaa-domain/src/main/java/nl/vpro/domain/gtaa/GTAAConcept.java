@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 
 /**
  * These are the data transfer objects that we use for thesaurus objects
- *
+ * <p>
  * They are
  * <ul>
  *  <li>The 'POMS' representation of objects in the thesaurus, the frontend API directly maps the second to the first </li>

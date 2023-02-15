@@ -199,7 +199,6 @@ import static nl.vpro.domain.media.MediaObject.*;
     @JsonSubTypes.Type(value = Group.class, name = "group"),
     @JsonSubTypes.Type(value = Segment.class, name = "segment") }
 )
-
 // Improvement: Filters can be defined in hibernate-mapping in the hibernate-config.xml
 // See https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch19.html
 @FilterDef(name = "titleFilter", parameters = { @ParamDef(name = "title", type = "string") })
