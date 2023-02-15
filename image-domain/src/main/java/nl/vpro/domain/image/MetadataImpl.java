@@ -71,6 +71,7 @@ public class MetadataImpl implements Metadata {
     private final Instant lastModifiedInstant;
 
     @XmlAttribute(name = "creationDate")
+    @JsonProperty("creationDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
