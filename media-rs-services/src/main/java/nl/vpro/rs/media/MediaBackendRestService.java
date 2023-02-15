@@ -1,5 +1,7 @@
 package nl.vpro.rs.media;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -359,7 +361,7 @@ public interface MediaBackendRestService {
     @Produces({VTT, TT888, SRT, APPLICATION_XML})
     Subtitles getSubtitles(
         @Encoded @PathParam(MID) String mid,
-        @PathParam(LANGUAGE) Locale language,
+        @Schema(implementation = String.class, type = "string") @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam("avoidParsing") @DefaultValue("false") Boolean avoidParsing

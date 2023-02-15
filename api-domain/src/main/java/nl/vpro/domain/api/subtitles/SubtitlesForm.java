@@ -32,7 +32,6 @@ public class SubtitlesForm implements Form, Predicate<StandaloneCue> {
     private SubtitlesSearch searches;
 
 
-
     public SubtitlesForm() {
 
     }

@@ -1,5 +1,6 @@
 package nl.vpro.domain.subtitles;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,6 +40,7 @@ public class SubtitlesId implements Serializable, Comparable<SubtitlesId> {
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @Getter
     @Setter
+    @Schema(implementation = String.class, type = "string")
     private Locale language;
 
     public static SubtitlesId tt888Caption(String mid) {

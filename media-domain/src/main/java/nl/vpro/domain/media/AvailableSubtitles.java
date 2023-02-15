@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.io.Serializable;
@@ -40,6 +41,7 @@ public class AvailableSubtitles implements Serializable, Comparable<AvailableSub
     @Getter
     @Setter(AccessLevel.PRIVATE)
     @EqualsAndHashCode.Include
+    @Schema(implementation = String.class, type="string")
     private Locale language;
 
     @Enumerated(EnumType.STRING)

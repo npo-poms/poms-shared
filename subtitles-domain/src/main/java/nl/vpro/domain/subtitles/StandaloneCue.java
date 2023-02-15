@@ -5,6 +5,7 @@ package nl.vpro.domain.subtitles;
  * @since 4.8
  */
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.time.Duration;
@@ -33,6 +34,7 @@ public class StandaloneCue extends Cue {
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
+    @Schema(implementation = String.class, type = "string")
     private Locale language;
 
     @XmlAttribute
