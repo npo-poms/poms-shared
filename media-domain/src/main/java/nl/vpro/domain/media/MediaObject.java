@@ -1311,6 +1311,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @JsonSerialize(using = LanguageList.Serializer.class)
     @JsonDeserialize(using = LanguageList.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @Schema(implementation = String.class, type = "string")
     public List<Locale> getLanguages() {
         if (languages == null) {
             languages = new ArrayList<>();

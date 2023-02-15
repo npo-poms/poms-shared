@@ -103,5 +103,10 @@
       <groupId>nl.vpro.poms</groupId>
       <artifactId>poms-shared</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 </project>

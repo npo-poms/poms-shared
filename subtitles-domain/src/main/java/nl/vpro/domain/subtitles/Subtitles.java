@@ -1,38 +1,33 @@
 package nl.vpro.domain.subtitles;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
-import java.io.*;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.*;
-
-import javax.persistence.*;
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.apache.commons.io.IOUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.PeekingIterator;
-
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.*;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.*;
+import javax.persistence.*;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.domain.Changeable;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
+import static nl.vpro.i18n.Locales.DUTCH;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.persistence.InstantToTimestampConverter;
 import nl.vpro.xml.bind.*;
-
-import static nl.vpro.i18n.Locales.DUTCH;
+import org.apache.commons.io.IOUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Closed captions (subtitles for hearing impaired). We could also store translation subtitles in this.
@@ -95,6 +90,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @Id
+    @Schema(implementation = String.class, name = "string")
     private Locale language;
 
     @Column(name = "`offset`")
