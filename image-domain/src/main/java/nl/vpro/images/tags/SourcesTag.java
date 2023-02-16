@@ -31,9 +31,9 @@ public class SourcesTag extends SimpleTagSupport implements DynamicAttributes {
      }
 
     void append(Picture picture, Map<String, Object> dynAttributes) throws IOException {
-         Writer writer = getJspContext().getOut();
-        for (Map.Entry<String, String> e : picture.getSources().entrySet()) {
-            writer.append(String.format("<source srcset='%s' type='%s' />", e.getValue(), e.getKey()));
+        Writer writer = getJspContext().getOut();
+        for (Picture.Source source : picture.getSourcesList()) {
+            writer.append(String.format("<source srcset='%s' type='%s' />", source.getUrls(), source.getType()));
         }
         writer.append("<img");
         CharSequence imgTitle = (CharSequence) dynAttributes.remove("title");
