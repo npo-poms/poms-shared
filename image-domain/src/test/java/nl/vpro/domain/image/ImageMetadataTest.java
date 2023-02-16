@@ -185,6 +185,29 @@ class ImageMetadataTest {
 
     }
 
+    @Test
+    @Beta
+    public void modelAndNormalJsonPicture() {
+        assertThatJson(Jackson2Mapper.getModelAndNormalInstance(), image.getPicture())
+            .withoutRemarshalling()
+            .withoutUnmarshalling()
+            .isSimilarTo("{\n" +
+                "  \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
+                "  \"alternative\" : \"foobar\",\n" +
+                "  \"imageTitle\" : \"foobar\",\n" +
+                "  \"width\" : 200,\n" +
+                "  \"height\" : 200,\n" +
+                "  \"sources\" : [ {\n" +
+                "    \"srcSet\" : \"https://www.vpro.nl/plaatje.jpeg 640w\"\n" +
+                "  }, {\n" +
+                "    \"type\" : \"image/webp\",\n" +
+                "    \"srcSet\" : \"https://www.vpro.nl/plaatje.webp 640w\"\n" +
+                "  } ],\n" +
+                "  \"pointOfInterest\" : \"28% 35%\"\n" +
+                "}");
+
+    }
+
 
 
     @Test
