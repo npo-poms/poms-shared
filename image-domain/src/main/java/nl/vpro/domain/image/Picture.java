@@ -1,8 +1,12 @@
 package nl.vpro.domain.image;
 
-import java.util.Map;
+import lombok.Data;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.annotations.Beta;
 
@@ -17,11 +21,27 @@ import nl.vpro.jackson2.Jackson2Mapper;
 @Beta
 public interface Picture {
 
+    @Data
+    class Source {
+        final String type;
+        final String srcSet;
+
+        public Source(String type, String srcSet) {
+            this.type = type;
+            this.srcSet = srcSet;
+        }
+    }
+
     /**
      * The sources of this picture. Keys are the type, values are srcset values. A list of urls with indicators when to use.
      */
-
+    @JsonIgnore
     Map<String, String> getSources();
+
+    @JsonProperty("sources")
+    default List<Source> getSourcesList() {
+        return getSources().entrySet().stream().map(e -> new Source(e.getKey(), e.getValue())).collect(Collectors.toList());
+    }
 
     /**
      * The default image URL to use. The src attribute value of the child 'img' tag element.
