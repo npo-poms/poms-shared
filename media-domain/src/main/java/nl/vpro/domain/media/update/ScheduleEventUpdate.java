@@ -158,8 +158,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         this.titles = titles;
     }
 
-
-
+    @XmlTransient
     public void setTitles(TitleUpdate... titles) {
         this.titles = new TreeSet<>(Arrays.asList(titles));
     }
@@ -192,6 +191,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         this.descriptions = descriptions;
     }
 
+    @XmlTransient
     public void setDescriptions(DescriptionUpdate... descriptions) {
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }

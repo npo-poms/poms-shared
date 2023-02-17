@@ -839,6 +839,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.broadcasters = broadcasters;
     }
 
+    @XmlTransient
     public void setBroadcasters(String... broadcasters) {
         this.broadcasters = Arrays.asList(broadcasters);
     }
@@ -855,6 +856,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setPortals(List<String> portals) {
         this.portals = portals;
     }
+
+    @XmlTransient
     public void setPortals(String... portals) {
         this.portals = Arrays.asList(portals);
     }
@@ -872,6 +875,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.portalRestrictions = restrictions;
     }
 
+    @XmlTransient
     public void setPortalRestrictions(String... restrictions) {
         List<PortalRestrictionUpdate> updates = getPortalRestrictions();
         Stream.of(restrictions).forEach(r -> updates.add(PortalRestrictionUpdate.of(r)));
@@ -907,6 +911,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setTitles(SortedSet<TitleUpdate> titles) {
         this.titles = titles;
     }
+    @XmlTransient
     public void setTitles(TitleUpdate... titles) {
         setTitles(new TreeSet<>(Arrays.asList(titles)));
     }
@@ -926,6 +931,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setDescriptions(SortedSet<DescriptionUpdate> descriptions) {
         this.descriptions = descriptions;
     }
+    @XmlTransient
     public void setDescriptions(DescriptionUpdate... descriptions) {
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }
@@ -952,6 +958,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.tags = tags;
     }
 
+    @XmlTransient
     public void setTags(String... tags) {
         setTags(new TreeSet<>(Arrays.asList(tags)));
     }
@@ -995,6 +1002,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.genres = genres;
     }
 
+    @XmlTransient
     public void setGenres(String... genres) {
         setGenres(new TreeSet<>(Arrays.asList(genres)));
     }
@@ -1029,7 +1037,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setAvAttributes(AVAttributesUpdate avAttributes) {
         this.avAttributes = avAttributes;
     }
-
 
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
@@ -1068,6 +1075,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.credits = credits;
     }
 
+    @XmlTransient
     public void setCredits(CreditsUpdate... credits){
         setCredits(new ArrayList<>(Arrays.asList(credits)));
     }
@@ -1105,7 +1113,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.ageRating = ageRating;
     }
 
-
     @XmlElement(name = "contentRating")
     @NonNull
     public List<ContentRating> getContentRatings() {
@@ -1118,7 +1125,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setContentRatings(List<ContentRating> contentRatings) {
         this.contentRatings = contentRatings;
     }
-
 
     @XmlElement
     @NonNull
@@ -1133,6 +1139,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.email = emails;
     }
 
+    @XmlTransient
     public void setEmail(String... emails) {
         setEmail(new ArrayList<>(Arrays.asList(emails)));
     }
@@ -1150,6 +1157,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.websites = websites;
     }
 
+    @XmlTransient
     public void setWebsites(String... websites) {
         setWebsites(new ArrayList<>(Arrays.asList(websites)));
     }
@@ -1170,6 +1178,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return twitterrefs;
     }
 
+    @XmlTransient
     public void setTwitterRefs(List<String> twitterRefs) {
         this.twitterrefs = twitterRefs;
     }
@@ -1208,6 +1217,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setLocations(SortedSet<LocationUpdate> locations) {
         this.locations = locations;
     }
+
+    @XmlTransient
     public void setLocations(LocationUpdate... locations) {
         setLocations(new TreeSet<>(Arrays.asList(locations)));
     }
@@ -1241,6 +1252,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.images = images;
     }
 
+    @XmlTransient
     public void setImages(ImageUpdate... images) {
         setImages(new ArrayList<>());
         this.images.addAll(Arrays.asList(images));
@@ -1274,6 +1286,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.geoLocations = geoLocationUpdates;
     }
 
+    @XmlTransient
     public void setGeoLocations(GeoLocationUpdate... geoLocationUpdates) {
         setGeoLocations(Arrays.asList(geoLocationUpdates));
     }
@@ -1290,6 +1303,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.topics = topicUpdates;
     }
 
+    @XmlTransient
     public void setTopics(TopicUpdate... topicUpdates) {
         setTopics(Arrays.asList(topicUpdates));
     }
