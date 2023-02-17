@@ -23,12 +23,11 @@ public class SourcesTag extends SimpleTagSupport implements DynamicAttributes {
 
     String alt;
 
-
     @Override
     public void doTag() throws IOException {
          Picture picture = image.getSourceSet().getPicture();
          append(picture, dynamicAttributes);
-     }
+    }
 
     void append(Picture picture, Map<String, Object> dynAttributes) throws IOException {
         Writer writer = getJspContext().getOut();
