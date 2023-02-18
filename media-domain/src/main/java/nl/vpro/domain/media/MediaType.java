@@ -128,7 +128,6 @@ public enum MediaType implements Displayable {
             return "Koepelprogramma";
         }
 
-
         @Override
         public ProgramType getSubType() {
             return ProgramType.STRAND;

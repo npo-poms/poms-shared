@@ -14,21 +14,25 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class MediaFormTest {
 
 
+
     @Test
     public void xml() {
         MediaForm form = MediaForm.builder()
             .asc(MediaSortField.lastModified)
+            .broadcaster("VPRO")
+            .quotedText("foobar")
             .max(1000)
             .build();
-        JAXBTestUtil.roundTripAndSimilar(form, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<s:mediaForm xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:s=\"urn:vpro:media:search:2012\" xmlns:update=\"urn:vpro:media:update:2009\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
-                "    <s:pager>\n" +
-                "        <s:offset>0</s:offset>\n" +
-                "        <s:max>1000</s:max>\n" +
-                "        <s:sort>lastModified</s:sort>\n" +
-                "        <s:order>ASC</s:order>\n" +
-                "    </s:pager>\n" +
-                "</s:mediaForm>\n"
+        JAXBTestUtil.roundTripAndSimilar(form, "<s:mediaForm xmlns:s=\"urn:vpro:media:search:2012\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:update=\"urn:vpro:media:update:2009\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">\n" +
+                "  <s:pager>\n" +
+                "    <s:offset>0</s:offset>\n" +
+                "    <s:max>1000</s:max>\n" +
+                "    <s:sort>lastModified</s:sort>\n" +
+                "    <s:order>ASC</s:order>\n" +
+                "  </s:pager>\n" +
+                "  <s:broadcaster>VPRO</s:broadcaster>\n" +
+                "  <s:text>\"foobar\"</s:text>\n" +
+                "</s:mediaForm>"
             );
     }
 
