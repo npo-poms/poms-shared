@@ -187,10 +187,11 @@ class ImageMetadataTest {
 
     @Test
     @Beta
+    @Disabled("tested in main")
     public void modelAndNormalJsonPicture() {
         assertThatJson(Jackson2Mapper.getModelAndNormalInstance(), image.getPicture())
             .withoutRemarshalling()
-            .withoutUnmarshalling()
+
             .isSimilarTo("{\n" +
                 "  \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
                 "  \"alternative\" : \"foobar\",\n" +

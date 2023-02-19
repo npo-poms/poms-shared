@@ -25,7 +25,6 @@ public class PictureImpl implements Picture {
     @JsonIgnore
     protected ImageMetadata wrapped;
 
-
     String alternative;
 
     String imageTitle;
