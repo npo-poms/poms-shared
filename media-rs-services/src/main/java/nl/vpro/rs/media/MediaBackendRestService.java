@@ -1,7 +1,5 @@
 package nl.vpro.rs.media;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -12,6 +10,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.*;
@@ -19,6 +18,7 @@ import javax.ws.rs.core.*;
 import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
+import org.meeuw.i18n.regions.validation.Language;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
@@ -191,7 +191,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|group|segment)}/{id:.*}/image")
     @Produces(MediaType.WILDCARD)
     Response addImage(
-        ImageUpdate imageUpdate,
+        @Valid ImageUpdate imageUpdate,
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
@@ -361,7 +361,7 @@ public interface MediaBackendRestService {
     @Produces({VTT, TT888, SRT, APPLICATION_XML})
     Subtitles getSubtitles(
         @Encoded @PathParam(MID) String mid,
-        @Schema(implementation = String.class, type = "string") @PathParam(LANGUAGE) Locale language,
+        @Language @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam("avoidParsing") @DefaultValue("false") Boolean avoidParsing
@@ -372,7 +372,7 @@ public interface MediaBackendRestService {
     @Path("subtitles/{mid:.*}/{language}/{type}/{seq}")
     StandaloneCue getCue(
         @Encoded @PathParam(MID) String mid,
-        @PathParam(LANGUAGE) Locale language,
+        @Language @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @PathParam("seq") Integer seq,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
@@ -392,7 +392,7 @@ public interface MediaBackendRestService {
     @Consumes({VTT, EBU, TT888, SRT})
     Response setSubtitles(
         @Encoded @PathParam(MID) String mid,
-        @PathParam(LANGUAGE) Locale language,
+        @Language @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @QueryParam(OFFSET) @DefaultValue("0") Duration offset,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
@@ -403,7 +403,7 @@ public interface MediaBackendRestService {
     @Path("subtitles/{mid:.*}/{language}/{type}/{offset}")
     Response setSubtitlesOffset(
         @Encoded @PathParam(MID) String mid,
-        @PathParam(LANGUAGE) Locale language,
+        @Language @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @PathParam("offset") @DefaultValue("0") Duration offset,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
@@ -413,7 +413,7 @@ public interface MediaBackendRestService {
     @Path("subtitles/{mid:.*}/{language}/{type}")
     Response deleteSubtitles(
         @Encoded @PathParam(MID) String mid,
-        @PathParam(LANGUAGE) Locale language,
+        @Language @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors);
