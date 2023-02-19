@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import nl.vpro.domain.Changeables;
 
@@ -121,5 +121,10 @@ public class ScheduleTest {
     void fixedClock(LocalDateTime localDateTime) {
         Changeables.CLOCK.set(Clock.fixed(localDateTime
             .atZone(Schedule.ZONE_ID).toInstant(), Schedule.ZONE_ID));
+    }
+
+    @AfterEach
+    public  void clearUp() {
+        Changeables.CLOCK.remove();
     }
 }
