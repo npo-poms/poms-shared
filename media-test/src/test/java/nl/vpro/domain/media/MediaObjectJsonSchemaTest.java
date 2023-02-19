@@ -16,8 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,6 +58,12 @@ public class MediaObjectJsonSchemaTest {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
         MediaObjects.autoCorrectPredictions = false;
     }
+
+    @AfterAll
+    public static void cleanUp() {
+        CLOCK.remove();
+    }
+
 
 
     @Test
