@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.StringReader;
 import java.net.URI;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,6 +35,7 @@ import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static nl.vpro.domain.media.support.OwnerType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.BDDAssertions.within;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -628,7 +630,9 @@ public class MediaObjectTest {
     @Test
     public void sortDate() {
         Program program = new Program();
-        assertThat(Math.abs(program.getSortInstant().toEpochMilli() - System.currentTimeMillis())).isLessThan(10000);
+        assertThat(program.getSortInstant()).isCloseTo(
+            Instant.now(), within(10, ChronoUnit.SECONDS));
+
         Instant publishDate = Instant.ofEpochMilli(1344043500362L);
         program.setPublishStartInstant(publishDate);
         assertThat(program.getSortInstant()).isEqualTo(publishDate);
