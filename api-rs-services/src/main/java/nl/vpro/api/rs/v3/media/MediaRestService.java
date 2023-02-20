@@ -228,7 +228,6 @@ public interface MediaRestService {
         @QueryParam(PUBLISHEDSINCE) String publishedSince,
         @QueryParam(ORDER) @DefaultValue(ASC) String order,
         @QueryParam(MAX) Integer max,
-        @Deprecated @QueryParam(CHECK_PROFILE) Boolean profileCheck,
         @QueryParam(DELETES) Deletes deletes,
         @QueryParam(TAIL) Tail tail,
         @QueryParam(REASON_FILTER) String reasonFilter
