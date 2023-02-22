@@ -3,7 +3,7 @@
     version="2.0"
     >
 	<jsp:directive.attribute
-			name="class"
+			name="cssClass"
 			rtexprvalue="true"
 			type="java.lang.String" description="html class" required="false" />
 
@@ -23,7 +23,7 @@
 			rtexprvalue="true"
 			type="java.lang.Integer"  required="false" />
 
-	<img class="${empty class ? 'logo__img': class}"
+	<img class="${empty cssClass ? 'logo__img': cssClass}"
 			 src="${pageContext.request.contextPath}/images/npo/logo.svg"
 			 height="${empty height ? 30 : height}" width="${empty width ? 30 : width}"
 			 alt="${empty alt ? 'NPO' : alt}"

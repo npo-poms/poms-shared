@@ -7,7 +7,13 @@
   <short-name>npo</short-name>
   <uri>https://www.vpro.nl/shared/tags/npo</uri>
   <tag-file>
+    <description>Generates a bunch of html head links to create NPO favicon</description>
     <name>favicon</name>
     <path>/META-INF/tags/npo/favicon.tagx</path>
+  </tag-file>
+  <tag-file>
+    <description>Generates an img tag with an (SVG) NPO logo</description>
+    <name>logo</name>
+    <path>/META-INF/tags/npo/logo.tagx</path>
   </tag-file>
 </taglib>
