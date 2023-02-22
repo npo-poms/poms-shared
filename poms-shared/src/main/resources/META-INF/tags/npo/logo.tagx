@@ -1,0 +1,32 @@
+<jsp:root
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    version="2.0"
+    >
+	<jsp:directive.attribute
+			name="class"
+			rtexprvalue="true"
+			type="java.lang.String" description="html class" required="false" />
+
+
+	<jsp:directive.attribute
+			name="alt"
+			rtexprvalue="true"
+			type="java.lang.String" description="html alt" required="false" />
+
+	<jsp:directive.attribute
+			name="height"
+			rtexprvalue="true"
+			type="java.lang.Integer"  required="false" />
+
+	<jsp:directive.attribute
+			name="width"
+			rtexprvalue="true"
+			type="java.lang.Integer"  required="false" />
+
+	<img class="${empty class ? 'logo__img': class}"
+			 src="${pageContext.request.contextPath}/images/npo/logo.svg"
+			 height="${empty height ? 30 : height}" width="${empty width ? 30 : width}"
+			 alt="${empty alt ? 'NPO' : alt}"
+	/>
+
+</jsp:root>
