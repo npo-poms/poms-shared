@@ -12,7 +12,7 @@ The jar artifact of this module contains the NPO logo. As an SVG and as favicon.
 
 [source, html]
 ----
-Jjsp:root
+<jsp:root
         xmlns:jsp="http://java.sun.com/JSP/Page"
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:npo="https://www.vpro.nl/shared/tags/npo"
@@ -22,11 +22,10 @@ Jjsp:root
   <jsp:output doctype-root-element="HTML"
               doctype-system="about:legacy-compat" />
 <html>
-	<head>
-		<title>NPO utility page</title>
+  <head>
+    <title>NPO utility page</title>
     <npo:favicon />
   </head>
-
 ...
 <npo:logo />
 </html>
