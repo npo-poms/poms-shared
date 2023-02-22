@@ -28,7 +28,6 @@ public class NpoPomsEnvironment {
     private Env env = Env.PROD;
 
 
-
     @PostConstruct
     public void initialize() {
         if (env == null) {
