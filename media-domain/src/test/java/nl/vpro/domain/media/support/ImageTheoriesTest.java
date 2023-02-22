@@ -13,14 +13,13 @@ import java.io.Writer;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.util.test.BasicObjectTheory;
 
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.test.jqwik.BasicObjectTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ImageTheoriesTest implements BasicObjectTest<Image> {
-
+public class ImageTheoriesTest implements BasicObjectTheory<Image> {
 
 
     @Test
@@ -79,14 +78,12 @@ public class ImageTheoriesTest implements BasicObjectTest<Image> {
 
     @Override
     public Arbitrary<? extends Image> datapoints() {
-        Image nullArgument = null;
-        Image emptyFields = new Image();
+                Image emptyFields = new Image();
         Image withOwner = new Image(OwnerType.BROADCASTER);
         Image withOwnerAndUri = new Image(OwnerType.BROADCASTER, "urn:vpro:image:1234");
 
         Image withOwnerTypeAndUri = new Image(OwnerType.BROADCASTER, ImageType.ICON, "urn:vpro:image:3456");
         return Arbitraries.of(
-            nullArgument,
             emptyFields,
             withOwner,
             withOwnerAndUri,

@@ -7,7 +7,7 @@ package nl.vpro.domain.media;
 import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
-import nl.vpro.test.jqwik.BasicObjectTest;
+import org.meeuw.util.test.BasicObjectTheory;
 
 /**
  * @author Roelof Jan Koekoek
@@ -15,9 +15,8 @@ import nl.vpro.test.jqwik.BasicObjectTest;
  */
 public class DescendantRefTest
     // extends ComparableTest<DescendantRef> // TODO DescendantRef doesn't properly implement Comparable
-    implements BasicObjectTest<DescendantRef> {
+    implements BasicObjectTheory<DescendantRef> {
 
-    public static DescendantRef nullArgument = null;
 
     public static DescendantRef withEmptyFields = new DescendantRef();
 
@@ -30,7 +29,6 @@ public class DescendantRefTest
     @Override
     public Arbitrary<? extends DescendantRef> datapoints() {
         return Arbitraries.of(
-            nullArgument,
             withEmptyFields,
             midOnly,
             urnOnly,

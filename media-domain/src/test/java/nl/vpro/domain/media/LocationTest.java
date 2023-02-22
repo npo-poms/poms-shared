@@ -18,12 +18,12 @@ import javax.validation.groups.Default;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.*;
+import org.meeuw.util.test.BasicObjectTheory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.jqwik.BasicObjectTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.validation.PomsValidatorGroup;
 
@@ -31,7 +31,7 @@ import static nl.vpro.domain.Changeables.CLOCK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-public class LocationTest implements BasicObjectTest<Location> {
+public class LocationTest implements BasicObjectTheory<Location> {
 
     static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
 
@@ -218,7 +218,6 @@ public class LocationTest implements BasicObjectTest<Location> {
             emptyFields,
             withOwner,
             withUrlAndOwner,
-            withOtherUrlAndOwner)
-            .injectNull(0.1);
+            withOtherUrlAndOwner);
     }
 }
