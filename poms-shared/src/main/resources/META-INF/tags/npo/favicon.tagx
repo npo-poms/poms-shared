@@ -1,0 +1,12 @@
+<jsp:root
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    version="2.0"
+    >
+  <link rel="apple-touch-icon" sizes="180x180" href="${pageContext.request.contextPath}/favicons/npo/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/favicons/npo/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/favicons/npo/favicon-16x16.png" sizes="16x16" />
+  <link rel="manifest" href="${pageContext.request.contextPath}/favicons/npo/manifest.json" />
+  <link rel="mask-icon" href="${pageContext.request.contextPath}/favicons/npo/safari-pinned-tab.svg" color="#5bbad5" />
+  <meta name="msapplication-config" content="${pageContext.request.contextPath}/favicons/npobrowserconfig.xml" />
+
+</jsp:root>
