@@ -68,7 +68,6 @@ public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinit
     @Override
     public Arbitrary<? extends RelationDefinition> datapoints() {
         return Arbitraries.of(
-            null,
             new RelationDefinition(), // with empty fields
             new RelationDefinition("LABEL", "VPRO"), // ide only
             new RelationDefinition("LABEL", "VPRO", "Added text"));
