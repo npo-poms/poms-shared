@@ -35,7 +35,7 @@ public class DimensionTest implements ComparableTheory<Dimension> {
                 (a, b) -> Arbitraries.of(
                     Dimension.of(a, b)
                 )
-            ).injectNull(0.1);
+            );
     }
 
     @Override
