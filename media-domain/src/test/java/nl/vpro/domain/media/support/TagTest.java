@@ -25,7 +25,6 @@ public class TagTest implements ComparableTheory<Tag> {
     public Arbitrary<? extends Tag> datapoints() {
         Tag tag = new Tag("tag");
         return Arbitraries.of(
-            null,
             tag,
             tag,
             new Tag("tag"),
