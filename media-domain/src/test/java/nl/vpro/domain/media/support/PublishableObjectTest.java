@@ -9,8 +9,7 @@ import net.jqwik.api.*;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Assumptions;
-
-import nl.vpro.test.jqwik.BasicObjectTest;
+import org.meeuw.util.test.BasicObjectTheory;
 
 import static nl.vpro.domain.media.support.Workflow.*;
 import static nl.vpro.test.jqwik.HamcrestAssumptions.*;
@@ -23,11 +22,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Roelof Jan Koekoek
  * @since 1.5
  */
-public class PublishableObjectTest implements BasicObjectTest<PublishableObject<?>> {
+public class PublishableObjectTest implements BasicObjectTheory<PublishableObject<?>> {
 
     private static final Instant NOW = Instant.now();
 
-    public static PublishableObject<?> nullArgument = null;
 
     public static PublishableObject<?> withId1 = data(1L, null, null, null);
 
@@ -217,7 +215,6 @@ public class PublishableObjectTest implements BasicObjectTest<PublishableObject<
     @Override
     public Arbitrary<? extends PublishableObject<?>> datapoints() {
         return Arbitraries.of(
-            nullArgument,
             withId1,
             withId2,
             forPublication,

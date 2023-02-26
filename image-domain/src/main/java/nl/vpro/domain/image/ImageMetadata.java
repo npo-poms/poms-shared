@@ -114,7 +114,7 @@ public interface ImageMetadata extends Metadata {
 
         @Override
         public String toString() {
-            return "supplier[" + wrapped + "]";
+            return "wrapper[" + wrapped + "]";
         }
 
         @Override

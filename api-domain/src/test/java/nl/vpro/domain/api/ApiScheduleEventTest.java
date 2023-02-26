@@ -13,19 +13,19 @@ import java.util.List;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.util.test.ComparableTheory;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.api.media.ScheduleResult;
 import nl.vpro.domain.media.*;
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ApiScheduleEventTest implements ComparableTest<ScheduleEvent> {
+public class ApiScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
     @Test
     public void json() throws IOException {
@@ -268,9 +268,7 @@ public class ApiScheduleEventTest implements ComparableTest<ScheduleEvent> {
             ScheduleEvent.builder().channel(Channel.ARTE).start(now).build(),
             ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
             ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
-            ScheduleEvent.builder().channel(Channel.NED1).start(now.plus(Duration.ofMinutes(10))).build(),
-            null,
-            null
+            ScheduleEvent.builder().channel(Channel.NED1).start(now.plus(Duration.ofMinutes(10))).build()
         ).map(s -> s == null ? null : new ApiScheduleEvent(s, program));
     }
 }

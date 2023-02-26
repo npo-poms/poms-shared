@@ -4,19 +4,18 @@ import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.util.test.ComparableTheory;
 
-import nl.vpro.test.jqwik.ComparableTest;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaType.CLIP;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemberRefTheoryTest implements ComparableTest<MemberRef> {
+public class MemberRefTheoryTest implements ComparableTheory<MemberRef> {
 
     private static final  Program member = new Program(1L);
 
     private static final Group owner = new Group(2L);
-    MemberRef nullArgument = null;
     MemberRef nullFields = new MemberRef();
     MemberRef midReference = memberRefWithMid();
     MemberRef urnReference = memberRefWithUrn();
@@ -91,7 +90,6 @@ public class MemberRefTheoryTest implements ComparableTest<MemberRef> {
     public Arbitrary<? extends MemberRef> datapoints() {
 
         return Arbitraries.of(
-            nullArgument,
             nullFields,
             midReference,
             urnReference,

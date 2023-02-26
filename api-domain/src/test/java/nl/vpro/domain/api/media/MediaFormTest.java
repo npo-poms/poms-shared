@@ -15,6 +15,7 @@ import java.time.*;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
+import org.meeuw.util.test.BasicObjectTheory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -25,7 +26,6 @@ import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.logging.LoggerOutputStream;
-import nl.vpro.test.jqwik.BasicObjectTest;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.util.Version;
 
@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @since 2.0
  */
 @Slf4j
-public class MediaFormTest implements BasicObjectTest<MediaForm> {
+public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
     @Test
     public void testGetSort() {
@@ -603,7 +603,6 @@ public class MediaFormTest implements BasicObjectTest<MediaForm> {
     @Override
     public Arbitrary<? extends MediaForm> datapoints() {
         return Arbitraries.of(
-            null,
             MediaFormBuilder.emptyForm(),
             rad1,
             rad1_2,
