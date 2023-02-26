@@ -15,7 +15,7 @@
   <description>Domain classes and utilities for NPO POMS projects.</description>
 
   <properties>
-    <revision>7.3</revision>
+    <revision>7.4</revision>
     <changelist>-SNAPSHOT</changelist>
     <poms.shared.version>${project.version}</poms.shared.version>
     <java.version>11</java.version>
