@@ -22,8 +22,9 @@ public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinit
 
     @BeforeAll
     public static void setUp() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            validator = factory.getValidator();
+        }
     }
 
     @Test
@@ -75,8 +76,6 @@ public class RelationDefinitionTest implements BasicObjectTheory<RelationDefinit
 
    @Override
    public Arbitrary<? extends Tuple.Tuple2<? extends RelationDefinition, ? extends RelationDefinition>> equalDatapoints() {
-
-
         return Arbitraries.of(
             Tuple.of(new RelationDefinition(), new RelationDefinition()),
             Tuple.of(
