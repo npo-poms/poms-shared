@@ -167,13 +167,13 @@ public class Roles {
     public static final String HAS_API_CHANGES_ROLE = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CHANGES_CLIENT')";
 
 
-    public static final String PAGES_USER = ROLE + "_PAGES_USER";
+    public static final String PAGES_USER = ROLE + "PAGES_USER";
 
-    public static final String PAGES_SUPERUSER= ROLE + "_PAGES_SUPERUSER";
+    public static final String PAGES_SUPERUSER= ROLE + "PAGES_SUPERUSER";
 
-    public static final String PAGES_PROCESS = ROLE + "_PAGES_PROCESS";
+    public static final String PAGES_PROCESS = ROLE + "PAGES_PROCESS";
 
-    public static final String PAGES_SUPERPROCESS = ROLE + "_PAGES_SUPERPROCESS";
+    public static final String PAGES_SUPERPROCESS = ROLE + "PAGES_SUPERPROCESS";
 
 
     public static final Set<String> RECOGNIZED;
