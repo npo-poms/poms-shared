@@ -26,7 +26,12 @@ public class Headers {
        * A request header signifying the preferred date format in json
      * TODO: NPA-539
      */
-    public static final String JSON_TIMESTAMPS = X_NPO + "-TIMESTAMPS";
+    public static final String NPO_JSON_TIMESTAMPS = X_NPO + "-TIMESTAMPS";
+
+    /**
+     * A request header signifying
+     */
+    public static final String NPO_VALIDATION = X_NPO + "-VALIDATION";
 
     /**
      * The request was authenticated, the response acknowledges that via this header
