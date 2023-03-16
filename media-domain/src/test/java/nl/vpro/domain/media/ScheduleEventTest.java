@@ -180,10 +180,7 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
             ScheduleEvent.builder().channel(Channel.ARTE).start(now).build(),
             ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
             ScheduleEvent.builder().channel(Channel.ARTE).start(now.plus(Duration.ofMinutes(10))).build(),
-            ScheduleEvent.builder().channel(Channel.NED1).start(now.plus(Duration.ofMinutes(10))).build(),
-            null,
-            null
-
+            ScheduleEvent.builder().channel(Channel.NED1).start(now.plus(Duration.ofMinutes(10))).build()
         );
     }
 

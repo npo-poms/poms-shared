@@ -10,15 +10,15 @@ import lombok.Getter;
 @Getter
 public enum PageIdMatch {
 
-     URL(true, false),
-     CRID(false, true),
-     BOTH(true, true);
-     private final boolean matchUrl;
-     private final boolean matchCrid;
+    URL(true, false),
+    CRID(false, true),
+    BOTH(true, true);
+    private final boolean matchUrl;
+    private final boolean matchCrid;
 
-     PageIdMatch(boolean matchUrl, boolean matchCrid) {
-         this.matchUrl = matchUrl;
-         this.matchCrid = matchCrid;
-     }
+    PageIdMatch(boolean matchUrl, boolean matchCrid) {
+        this.matchUrl = matchUrl;
+        this.matchCrid = matchCrid;
+    }
 
 }

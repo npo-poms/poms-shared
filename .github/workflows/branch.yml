@@ -28,6 +28,7 @@ jobs:
           DEVELOPMENT_REVISION=`echo $REVISION | gawk 'match($1, /([0-9]+)\.([0-9]+)/, a) {print a[1]"."(a[2]+1)}'`
           # TODO: updateWorkingCopyVersions doesn't seem to do what I thought it would
           mvn -B -DupdateBranchVersions=true -DupdateWorkingCopyVersions=false -DreleaseVersion=${RELEASE_VERSION} -DpushChanges=false release:branch
+          mvn -B versions:set -DnewVersion='${revision}${changelist}'
           mvn -B versions:set-property -Dproperty=revision -DnewVersion=$DEVELOPMENT_REVISION
           git commit -am "Updated revision to ${DEVELOPMENT_REVISION} for next development iteration"
           git push --all origin
