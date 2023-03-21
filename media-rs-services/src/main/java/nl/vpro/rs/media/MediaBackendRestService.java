@@ -71,11 +71,11 @@ public interface MediaBackendRestService {
 
     // some descriptions for common query and path parameters
     String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitly followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
-    String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated duration parsing, against the XSD. If this is false, your input will still be validated, but using so called java bean validation only. This will give no line and column number information, but is otherwise be more complete.";
+    String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated duration parsing, against the XSD. If this is false, your input will still be validated, but using so-called java bean validation only. This will give no line and column number information, but is otherwise more complete.";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously. These errors may relate to authorization, or to database related problems.";
-    String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRID's in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed.";
-    String STEAL_CRIDS_DESCRIPTION = "When set to true, and you submit an object with both crid and mid (or you used lookupcrid=false, and generate a mid), and the crid existed already for a different mid, then this crid will be (if allowed) removed from the old object.";
-    String IMAGE_METADATA_DESCRIPTION = "When set to true, the image backend server will try to fill in missing image metadata automatically, using several external API's.";
+    String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRIDs in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed.";
+    String STEAL_CRIDS_DESCRIPTION = "When set to true, and you submit an object with both CRID and mid (or you used lookupcrid=false, and generate a mid), and the CRID existed already for a different mid, then this CRID will be (if allowed) removed from the old object.";
+    String IMAGE_METADATA_DESCRIPTION = "When set to true, the image backend server will try to fill in missing image metadata automatically, using several external APIs.";
     String OWNER_DESCRIPTION = "if your account has sufficient rights, you may get and post with a different owner type than BROADCASTER";
 
     String DELETES_DESCRIPTION = "also include members/episodes that are deleted (if possible, you may lack rights)";
