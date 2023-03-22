@@ -29,7 +29,7 @@ jobs:
           BRANCH=REL-$VERSION
           git checkout -b  $BRANCH
           mvn -DnewVersion=$RELEASE_VERSION versions:set
-          git commit -am 'Updated version to ${RELEASE_VERSION} for release branch'
+          git commit -am "Updated version to ${RELEASE_VERSION} for release branch"
           git push origin $BRANCH
           git checkout main
           mvn -B versions:set-property -Dproperty=revision -DnewVersion=$DEVELOPMENT_REVISION
