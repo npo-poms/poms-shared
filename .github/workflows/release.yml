@@ -1,5 +1,6 @@
 ---
 name: release
+run-name: Creating release by ${{ github.actor }} on ${{ github.ref_name }}
 on:
   workflow_dispatch:
 
