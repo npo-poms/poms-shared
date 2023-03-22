@@ -1,5 +1,6 @@
 ---
 name: build pull request
+run-name: build pull request ${{  github.ref_name }}
 
 # Builds a pull request, basing the artifact name on the branch name on which it is based, so it can be published
 # without breaking things, and enabled to build other pull requests depending on the current one.
