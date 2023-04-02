@@ -32,6 +32,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static java.util.Comparator.*;
 
 /**
+ * Utilities related to syncing TVA files from Bindinc.
  * @author Michiel Meeuwissen
  */
 @Slf4j
@@ -113,7 +114,7 @@ public final class Utils {
     /**
      * For the items which don't have a proper mid (bindinc uses tva:BasicDescription/tva:OtherIdentifier/tva:OtherIdentifier[@type='broadcaster:npo:productid'] to store,
      * we just generate one based on the bindinc id.
-     *
+     * <p>
      * Note that this id seems to correspond to _schedule events_ rather than actual programs.  In practice this probably means
      * that only on PO-channels we'll have programs with multiple schedule events.
      */
@@ -206,6 +207,14 @@ public final class Utils {
                 new Temp(inputStream, exchange.getIn().getHeader(Exchange.FILE_NAME, String.class)),
                 exchange
             );
+        }
+
+        /**
+         *
+         */
+        @Converter
+        public Temp convertToTemp(byte[] bytes, Exchange exchange) throws IOException {
+            return convertToTemp(new ByteArrayInputStream(bytes), exchange);
         }
 
         @Converter
