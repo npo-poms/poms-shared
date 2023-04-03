@@ -1,0 +1,959 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "NPO Sourcing Service Audio",
+        "version": "1.4.0"
+    },
+    "paths": {
+        "/api/ingest": {
+            "post": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Create an Ingest",
+                "operationId": "d1924cfbcf4884b6af516f40e6c3fe69",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "broadcaster": {
+                                        "type": "string",
+                                        "default": "NPO"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "series_title": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "filename": {
+                                        "type": "string"
+                                    },
+                                    "website": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_location": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_name": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_license": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_sourcename": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_source": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_credits": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "genre": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "member_of": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "callback_url": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "duration": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "publish_start": {
+                                        "type": "string",
+                                        "default": "2023-12-22T17:47:09+01:00"
+                                    },
+                                    "publish_stop": {
+                                        "type": "string",
+                                        "default": "2024-12-22T17:47:09+01:00"
+                                    },
+                                    "geo_restriction": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "age_rating": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "delete_at": {
+                                        "type": "string",
+                                        "default": "2024-12-25T17:47:09+01:00"
+                                    },
+                                    "mid": {
+                                        "type": "string",
+                                        "default": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": {
+                                            "media_id": "POMS_NPO_1234567",
+                                            "original_filename": "c4c9c352-3921-4b13-8852-7d00831f71c4.mp3",
+                                            "filename": "POMS_NPO_1234567.mp3"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ingest/{mid}/multipart": {
+            "post": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Add an asset to an Ingest.<br/><br />&nbsp;&nbsp;&nbsp;&nbsp;- step 1: upload_phase: start, file_size: <size_in_bytes><br />&nbsp;&nbsp;&nbsp;&nbsp;- step 2: upload_phase: transfer, file_chunk: <chunk_10_MB> (repeat for all chunks)<br />&nbsp;&nbsp;&nbsp;&nbsp;- step 3: upload_phase: finish",
+                "operationId": "fe2878922c15ec40d930bec65724f0c7",
+                "parameters": [
+                    {
+                        "parameter": "mid",
+                        "name": "mid",
+                        "in": "path",
+                        "description": "MID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "upload_phase": {
+                                        "description": "name",
+                                        "type": "string"
+                                    },
+                                    "file_size": {
+                                        "description": "description",
+                                        "type": "string"
+                                    },
+                                    "file_chunk": {
+                                        "description": "description",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": "OK"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ingest/{mid}/force-online": {
+            "post": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Force online an Ingest",
+                "operationId": "2af47cf5eac32b2eaf6d112a61ef02ca",
+                "parameters": [
+                    {
+                        "parameter": "mid",
+                        "name": "mid",
+                        "in": "path",
+                        "description": "MID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": "sent to queue"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ingest/{mid}/memberof": {
+            "post": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Link an Ingest to a POMS-entity",
+                "operationId": "09d63dbb9b8408653d03a47528530d61",
+                "parameters": [
+                    {
+                        "parameter": "mid",
+                        "name": "mid",
+                        "in": "path",
+                        "description": "MID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "memberof": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": "sent to queue"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ingest/{mid}/delete": {
+            "post": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Delete an Ingest.<br/><br />",
+                "operationId": "0b76a0a427cdf42f06ddbfc77556e20a",
+                "parameters": [
+                    {
+                        "parameter": "mid",
+                        "name": "mid",
+                        "in": "path",
+                        "description": "MID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "'days_before_hard_delete': specify days till hard delete. Value '<b>0</b>' is hard delete.<br /><br />",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "days_before_hard_delete": {
+                                        "type": "integer",
+                                        "default": "30"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": "set to be deleted after 30 days"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ingest/{mid}/delete-restore": {
+            "post": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Restore an Ingest for deletion that is planned to be hard-deleted",
+                "operationId": "8c8d8308776df1915e45698332fd6a1e",
+                "parameters": [
+                    {
+                        "parameter": "mid",
+                        "name": "mid",
+                        "in": "path",
+                        "description": "MID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": "restored from deletion"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ingest/{mid}/status": {
+            "get": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Check status of an Ingest",
+                "operationId": "f227d98ae90904810ef8784ccb2725d4",
+                "parameters": [
+                    {
+                        "parameter": "mid",
+                        "name": "mid",
+                        "in": "path",
+                        "description": "MID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": {
+                                            "id": "POMS_NPO_1234567",
+                                            "current_status": "In Progress",
+                                            "original_filename": "c4c9c352-3921-4b13-8852-7d00831f71c4.mp3",
+                                            "filename": "POMS_NPO_1234567.mp3",
+                                            "stored_filename": "",
+                                            "streamstatus_updated": null,
+                                            "created_at": "2022-08-22 13:14:24"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ingest/program": {
+            "post": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Create a Serie for an Ingest",
+                "operationId": "33e7df52ac636a845cb51fc556f5ad99",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "broadcaster": {
+                                        "type": "string",
+                                        "default": "NPO"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "publish_start": {
+                                        "type": "string",
+                                        "default": "2022-12-22T17:47:09+01:00"
+                                    },
+                                    "publish_stop": {
+                                        "type": "string",
+                                        "default": "2023-12-22T17:47:09+01:00"
+                                    },
+                                    "callback_url": {
+                                        "type": "string"
+                                    },
+                                    "genre": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "file_location": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "website": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_location": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_name": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_license": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_sourcename": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_source": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "image_credits": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "member_of": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "poms_classifications": {
+                                        "type": "string",
+                                        "default": "3.0.1.1,3.0.1.1.2"
+                                    },
+                                    "geo_restriction": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "concent_rating": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "mid": {
+                                        "type": "string",
+                                        "default": ""
+                                    },
+                                    "crid": {
+                                        "type": "string",
+                                        "default": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": {
+                                            "media_id": "POMS_S_NPO_1234567",
+                                            "title": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ingest/{type}/{mid}/exists": {
+            "get": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Check of MID exists in POMS",
+                "operationId": "be80aa0a65d7bf222cded19f3f7868f0",
+                "parameters": [
+                    {
+                        "parameter": "mid",
+                        "name": "mid",
+                        "in": "path",
+                        "description": "MID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/ingest/{mid}/repair": {
+            "post": {
+                "tags": [
+                    "Ingest"
+                ],
+                "description": "Repair a MID (an attempt..)",
+                "operationId": "41c77b0b3f6a8fc0d2e7f4da44a451f5",
+                "parameters": [
+                    {
+                        "parameter": "mid",
+                        "name": "mid",
+                        "in": "path",
+                        "description": "MID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "result(s)": "Do actions taken"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/health-check/{specificCheck}": {
+            "get": {
+                "tags": [
+                    "Monitoring"
+                ],
+                "description": "Check for health condition server, database, POMS and NEP (or a specific check)",
+                "operationId": "be94d7d9277546d96776bbed99102526",
+                "parameters": [
+                    {
+                        "parameter": "specificCheck",
+                        "name": "specificCheck",
+                        "in": "path",
+                        "description": "Specific Check (leave empty for all checks)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/api/streamstatus-responsetime": {
+            "get": {
+                "tags": [
+                    "Monitoring"
+                ],
+                "description": "Check for response time of the streamstatus received<br />&nbsp;&nbsp;&nbsp;&nbsp;status -1 = fail, status 0 = slow, status 1 = OK",
+                "operationId": "0f5e9d9c278a5f06167e99d523a929fe",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/api/average-streamstatus-responsetime": {
+            "get": {
+                "tags": [
+                    "Monitoring"
+                ],
+                "description": "Get average streamstatus response time (in minutes)",
+                "operationId": "e0b92c5e3214a40e85f77c9f9de3cc37",
+                "parameters": [
+                    {
+                        "parameter": "before",
+                        "name": "before",
+                        "in": "query",
+                        "description": "Date(-time) before (yyyy-mm-dd)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "after",
+                        "name": "after",
+                        "in": "query",
+                        "description": "Date(-time) after (yyyy-mm-dd)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": "30"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/mediaids-with-streamstatus-response-time": {
+            "get": {
+                "tags": [
+                    "Monitoring"
+                ],
+                "description": "Get media-ids with specified streamstatus response time",
+                "operationId": "50a59ed58902c3c8343e3913e5d1229b",
+                "parameters": [
+                    {
+                        "parameter": "minutes-min",
+                        "name": "minutes-min",
+                        "in": "query",
+                        "description": "Min response time in minutes",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "minutes-max",
+                        "name": "minutes-max",
+                        "in": "query",
+                        "description": "Max response time in minutes",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "before",
+                        "name": "before",
+                        "in": "query",
+                        "description": "Date(-time) before (yyyy-mm-dd)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "after",
+                        "name": "after",
+                        "in": "query",
+                        "description": "Date(-time) after (yyyy-mm-dd)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": "[ POMS_NPO_21345, POMS_NPO_43544 ]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/mediaids-with-status/{currentStatus}": {
+            "get": {
+                "tags": [
+                    "Monitoring"
+                ],
+                "description": "Get media-ids with specified current status. ",
+                "operationId": "e13bacedb908e9cb187221c14c7de3b1",
+                "parameters": [
+                    {
+                        "parameter": "currentStatus",
+                        "name": "currentStatus",
+                        "in": "path",
+                        "description": "Current Status (in integer: -1 = offline, 0 = In Progress, 1 = online)",
+                        "required": true,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "parameter": "before",
+                        "name": "before",
+                        "in": "query",
+                        "description": "Date(-time) before (yyyy-mm-dd)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "after",
+                        "name": "after",
+                        "in": "query",
+                        "description": "Date(-time) after (yyyy-mm-dd)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": "[ POMS_NPO_21345, POMS_NPO_43544 ]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/to-be-deleted-mediaids": {
+            "get": {
+                "tags": [
+                    "Monitoring"
+                ],
+                "description": "Get to be deleted media ids (with also deleted media ids) ",
+                "operationId": "15f433afdad2a1796d95170c305973ff",
+                "parameters": [
+                    {
+                        "parameter": "deleted",
+                        "name": "deleted",
+                        "in": "query",
+                        "description": "deleted (1 = only deleted items, 0 = also deleted items)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "parameter": "before",
+                        "name": "before",
+                        "in": "query",
+                        "description": "Date(-time) before (yyyy-mm-dd)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "parameter": "after",
+                        "name": "after",
+                        "in": "query",
+                        "description": "Date(-time) after (yyyy-mm-dd)",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "success",
+                                        "response": "[ POMS_NPO_21345, POMS_NPO_43544 ]"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
