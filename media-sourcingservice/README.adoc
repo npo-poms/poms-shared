@@ -40,8 +40,13 @@ This does it. Client generation is not useable for this api
 There are only 2 calls of importance for now
 
 /ingest
-  - talks to our backend api (it shouldn't)
-  - it registers a 'callback_url'  (I don't see the point)
+
+* talks to our backend api (it shouldn't)
+* it registers a 'callback_url'  (I don't see the point)
+
+/ingest/<mid>/multipart
+
+-  uploads the actual file, via 3 or more http multipart posts.
 
 We now are implementing it just with an `java.net.http.HttpClient`. See `nl.vpro.sourcingservice.SourcingServiceImpl`
 
