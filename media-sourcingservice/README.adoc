@@ -1,7 +1,7 @@
 
 = NPO Audio Sourcing Service integegration
 
-== Issues
+== Issues when using openapi generator
 
 
 - operationId are ids  UUID
@@ -27,6 +27,16 @@ Code has no form of validation. If I send an empty ingest request, I'll simply c
 "description": "description",
 "type": "string"
 ```
+
+- or missing altogether in openapi spec: ('email')
+
+- at last: https://github.com/OpenAPITools/openapi-generator/issues/2054
+
+This does it. Client generation is not useable for this api
+
+
+== Direct implementation
+
 
 
 
