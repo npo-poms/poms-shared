@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>nl.vpro.poms</groupId>
+    <artifactId>poms-shared-parent</artifactId>
+    <version>${revision}${changelist}</version>
+  </parent>
+  <groupId>nl.vpro.media</groupId>
+  <artifactId>media-sourcingservice</artifactId>
+  <name>media-nep</name>
+  <description>Support for the several API </description>
+  <dependencies>
+
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-multipart-provider</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.resteasy</groupId>
+      <artifactId>resteasy-jackson2-provider</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>0.2.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+    </dependency>
+  </dependencies>
+
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>6.3.0</version> <!-- newer versions create NPE during generation -->
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/src/main/resources/sourceing-audio.json</inputSpec>
+              <generatorName>java</generatorName>
+              <apiPackage>nl.vpro.sourcingservice.api</apiPackage>
+              <modelPackage>nl.vpro.sourcingservice.model</modelPackage>
+              <invokerPackage>nl.vpro.sourcingservice.invoker</invokerPackage>
+              <configHelp>false</configHelp>
+              <generateApiTests>false</generateApiTests>
+              <generateModelTests>false</generateModelTests>
+              <skipValidateSpec>true</skipValidateSpec>
+              <removeOperationIdPrefix>true</removeOperationIdPrefix>
+              <configOptions>
+                <strictSpec>true</strictSpec>
+                <dateLibrary>java8</dateLibrary>
+                <java8>true</java8>
+                <library>resteasy</library>
+                <withXml>false</withXml>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
