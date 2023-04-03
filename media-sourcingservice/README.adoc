@@ -1,0 +1,37 @@
+
+= NPO Audio Sourcing Service integegration
+
+== Issues
+
+
+- operationId are ids  UUID
+
+NOTE: https://swagger.io/docs/specification/paths-and-operations/
+Some common use cases for operationId are:``
+Some code generators use this value to name the corresponding methods in code.
+Links can refer to the linked operations by operationId.``
+
+Generated code is therefore pretty much horrible.
+
+
+Code has no form of validation. If I send an empty ingest request, I'll simply cause errors in de poms log.
+
+- 'multipart' api seems rather particular
+
+  public Object fe2878922c15ec40d930bec65724f0c7(String mid, String uploadPhase, String fileSize, File fileChunk) throws ApiException {
+
+- type of parameters seems sometimes a bit off:
+
+```
+"file_size": {
+"description": "description",
+"type": "string"
+```
+
+
+
+
+
+
+
+
