@@ -37,6 +37,16 @@ This does it. Client generation is not useable for this api
 
 == Direct implementation
 
+There are only 2 calls of importance for now
+
+/ingest
+  - talks to our backend api (it shouldn't)
+  - it registers a 'callback_url'  (I don't see the point)
+
+We now are implementing it just with an `java.net.http.HttpClient`. See `nl.vpro.sourcingservice.SourcingServiceImpl`
+
+
+
 
 
 
