@@ -95,7 +95,7 @@ public class Locations {
                         .build();
                 } else {
                     if (existingPredictionForPlatform.getEncryption() != Encryption.DRM) {
-                        createDrmImplicitely(mediaObject, platform, authorityLocations, locationPredicate, now);
+                        createDrmImplicitly(mediaObject, platform, authorityLocations, locationPredicate, now);
                         if (authorityLocations.isEmpty()) {
                             return Locations.RealizeResult.builder()
                                 .needed(false)
@@ -136,7 +136,7 @@ public class Locations {
 
         //MSE-3992
         if (encryption != Encryption.DRM) {
-            createDrmImplicitely(mediaObject, platform, authorityLocations, locationPredicate, now);
+            createDrmImplicitly(mediaObject, platform, authorityLocations, locationPredicate, now);
         }
 
         if (authorityLocations.isEmpty()) {
@@ -154,7 +154,7 @@ public class Locations {
             .build();
     }
 
-    private static void createDrmImplicitely(MediaObject mediaObject, Platform platform, List<Location> authorityLocations, Predicate<Location> locationPredicate, Instant now) {
+    private static void createDrmImplicitly(MediaObject mediaObject, Platform platform, List<Location> authorityLocations, Predicate<Location> locationPredicate, Instant now) {
             Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
             if (authorityLocation2 != null) {
                 authorityLocations.add(authorityLocation2);
