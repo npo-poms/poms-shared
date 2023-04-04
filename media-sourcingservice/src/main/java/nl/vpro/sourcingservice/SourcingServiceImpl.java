@@ -5,13 +5,10 @@ import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URI;
 import java.net.http.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
-import org.apache.commons.io.IOUtils;
+import com.google.common.io.ByteStreams;
 
 
 @Log4j2
@@ -46,18 +43,16 @@ public class SourcingServiceImpl implements SourcingService {
         }
         long uploaded = 0;
         while(uploaded < fileSize) {
-            final Path tempFile = Files.createTempFile(mid, ".transfer");
-            try (OutputStream outputStream = Files.newOutputStream(tempFile)) {
-                long test = IOUtils.copyLarge(inputStream, outputStream, 0, CHUNK_SIZE);
-                MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-                    .add("upload_phase", "transfer")
-                    .addFile("file_chunk", tempFile)
-                    .add("file_size", String.valueOf(fileSize));
-                HttpRequest transferRequest = multipart(mid, body);
-                HttpResponse<String> transfer = client.send(transferRequest, HttpResponse.BodyHandlers.ofString());
-                log.info("transfer: {} {}", transfer.statusCode(), transfer.body());
-                uploaded += test;
-            }
+            MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
+                .add("upload_phase", "transfer")
+                .addStream("file_chunk", "part" , () -> {
+                    return ByteStreams.limit(inputStream, CHUNK_SIZE);
+                })
+                .add("file_size", String.valueOf(fileSize));
+            HttpRequest transferRequest = multipart(mid, body);
+            HttpResponse<String> transfer = client.send(transferRequest, HttpResponse.BodyHandlers.ofString());
+            log.info("transfer: {} {}", transfer.statusCode(), transfer.body());
+            uploaded += CHUNK_SIZE;
         }
         MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "finish");
