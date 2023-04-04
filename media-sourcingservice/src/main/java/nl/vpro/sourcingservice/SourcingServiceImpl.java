@@ -19,10 +19,9 @@ public class SourcingServiceImpl implements SourcingService {
 
     private final static long CHUNK_SIZE = 10_000_000L;
 
-
     private final String baseUrl;
     private final String token;
-    HttpClient client = HttpClient.newHttpClient();
+    private final HttpClient client = HttpClient.newHttpClient();
 
 
     public SourcingServiceImpl(String baseUrl, String token) {
@@ -33,44 +32,39 @@ public class SourcingServiceImpl implements SourcingService {
 
     @Override
     @SneakyThrows
-    public void upload(String mid, Long fileSize, InputStream inputStream)  {
+    public void upload(String mid, final long fileSize, InputStream inputStream)  {
         {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "start")
                 .add("email", "michiel.meeuwissen@gmail.com")
-                .add("file_size", "" + fileSize);
+                .add("file_size", String.valueOf(fileSize));
             HttpResponse<String> start = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
             if (start.statusCode() > 299) {
                 throw new IllegalArgumentException(start.body());
             }
             log.info("start: {} {}", start.statusCode(), start.body());
         }
-
-        while(true) {
-                Path tempFile = Files.createTempFile(mid, ".transfer");
-                try (OutputStream outputStream = Files.newOutputStream(tempFile)) {
-                    long test = IOUtils.copyLarge(inputStream, outputStream, 0, CHUNK_SIZE);
-                    MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-                            .add("upload_phase", "transfer")
-                            .addFile("file_chunk", tempFile)
-                            .add("file_size", "" + fileSize);
-                    HttpRequest transferRequest = multipart(mid, body);
-                    HttpResponse<String> transfer = client.send(transferRequest, HttpResponse.BodyHandlers.ofString());
-                    log.info("transfer: {} {}", transfer.statusCode(), transfer.body());
-                    if (test < CHUNK_SIZE) {
-                        break;
-                    }
-                }
-
+        long uploaded = 0;
+        while(uploaded < fileSize) {
+            final Path tempFile = Files.createTempFile(mid, ".transfer");
+            try (OutputStream outputStream = Files.newOutputStream(tempFile)) {
+                long test = IOUtils.copyLarge(inputStream, outputStream, 0, CHUNK_SIZE);
+                MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
+                    .add("upload_phase", "transfer")
+                    .addFile("file_chunk", tempFile)
+                    .add("file_size", String.valueOf(fileSize));
+                HttpRequest transferRequest = multipart(mid, body);
+                HttpResponse<String> transfer = client.send(transferRequest, HttpResponse.BodyHandlers.ofString());
+                log.info("transfer: {} {}", transfer.statusCode(), transfer.body());
+                uploaded += test;
             }
+        }
         MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-                            .add("upload_phase", "finish");
+            .add("upload_phase", "finish");
 
         HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
 
         log.info("finish: {} {}", finish.statusCode(), finish.body());
-
-
     }
 
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
