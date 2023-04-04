@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.Properties;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class SourcingServiceImplTest {
@@ -31,6 +32,7 @@ class SourcingServiceImplTest {
     }
 
     @Test
+    @Disabled
     public void upload() throws IOException {
         Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
 
