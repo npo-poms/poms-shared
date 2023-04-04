@@ -1,8 +1,7 @@
 
-= NPO Audio Sourcing Service integegration
+= NPO Audio Sourcing Service integration
 
 == Issues when using openapi generator
-
 
 - operationId are ids  UUID
 
@@ -17,16 +16,20 @@ Generated code is therefore pretty much horrible.
 Code has no form of validation. If I send an empty ingest request, I'll simply cause errors in de poms log.
 
 - 'multipart' api seems rather particular
-
-  public Object fe2878922c15ec40d930bec65724f0c7(String mid, String uploadPhase, String fileSize, File fileChunk) throws ApiException {
+[source, java]
+----
+  public Object fe2878922c15ec40d930bec65724f0c7(String mid, String uploadPhase, String fileSize, File fileChunk) throws ApiException{
+----
 
 - type of parameters seems sometimes a bit off:
 
-```
+[source, json]
+----
 "file_size": {
 "description": "description",
 "type": "string"
-```
+----
+
 
 - or missing altogether in openapi spec: ('email')
 
@@ -37,6 +40,8 @@ This does it. Client generation is not useable for this api
 
 == Direct implementation
 
+So, we'll keep it simple, and this will be our approach
+
 There are only 2 calls of importance for now
 
 /ingest
@@ -46,9 +51,11 @@ There are only 2 calls of importance for now
 
 /ingest/<mid>/multipart
 
--  uploads the actual file, via 3 or more http multipart posts.
+-  uploads the actual file, via 3 or more https multipart posts.
 
 We now are implementing it just with an `java.net.http.HttpClient`. See `nl.vpro.sourcingservice.SourcingServiceImpl`
+
+If you try this, the last call will fail notifying us that no callback_url was available.
 
 
 
