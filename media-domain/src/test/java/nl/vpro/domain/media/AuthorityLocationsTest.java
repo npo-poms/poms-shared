@@ -126,7 +126,10 @@ public class AuthorityLocationsTest {
             Instant.now()
         ));
         log.info("{}", program);
-        assertThat(program.getLocations()).isEmpty(); //MSE-5172
+        assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("https://entry.cdn.npoaudio.nl/handle/MID-123.mp3");
+        assertThat(program.getLocations().first().getOwner()).isEqualTo(OwnerType.AUTHORITY);
+        assertThat(program.getLocations().first().getAvFileFormat()).isEqualTo(AVFileFormat.MP3);
+
     }
 
 }
