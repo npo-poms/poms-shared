@@ -2044,7 +2044,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     /**
-     * Returns (a copy of, since you have no bussines setting it) the {@link StreamingStatus}.
+     * Returns (a copy of, since you have no business setting it) the {@link StreamingStatus}.
      * @since 5.11
      */
     public StreamingStatus getStreamingPlatformStatus() {
@@ -2055,6 +2055,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
         return streamingPlatformStatus;
     }
 
+    /**
+     * Every {@code MediaObject} can be assigned several {@link Prediction prediction records} (one per {@link Platform}). Originally these contained information about 'predicted playability' only. They can be used more generally, and also indicate whether for a certain platform the object <em>is</em> or <em>was</em> playable.
+     *
+     * @see MediaObjects#isPlayable(MediaObject)
+     */
     @XmlTransient
     @NonNull
     public SortedSet<Prediction> getPredictions() {

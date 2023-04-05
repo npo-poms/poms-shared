@@ -23,17 +23,26 @@ import nl.vpro.domain.media.support.OwnerType;
 import static nl.vpro.domain.Changeables.instant;
 
 /**
+ * Utilities related to poms 'authorative locations'. I.e. {@link MediaObject#getLocations() locations} that are implicitly added (because of some notification from an external system, currently NEP), with {@link OwnerType owner} {@link OwnerType#AUTHORITY}
+ *
  * @author Michiel Meeuwissen
  * @since 5.7
  */
 @Slf4j
-public class Locations {
+public class AuthorityLocations {
 
-    private Locations() {
+
+
+    public AuthorityLocations() {
     }
 
 
-    public static Program realize(
+    /**
+     * This will be called if for a certain platform and 'puboptie' a 'notify' is received. E.g. a 'projecm' notify message would trigger this.
+     * TODO I think this is not used any more, we receive notification from NEP (which we assign 'pubOptie=nep')
+     *
+     */
+    public Program realize(
         @NonNull Program program,
         @NonNull Platform platform,
         @NonNull String pubOptie,
@@ -52,19 +61,45 @@ public class Locations {
         return addLocation(program, platform, encryption, pubOptie, owner, replaces);
     }
 
-    public static Locations.RealizeResult realizeStreamingPlatformIfNeeded(
+    /**
+     * This will be called per platform if an NEP notify is received.
+     */
+    public AuthorityLocations.RealizeResult realizeStreamingPlatformIfNeeded(
         @NonNull MediaObject mediaObject,
         @NonNull Platform platform,
         @NonNull Predicate<Location> locationPredicate,
         @NonNull Instant now) {
-        if (mediaObject.getAVType() != AVType.VIDEO) {
-            return Locations.RealizeResult.builder()
-                .needed(false)
-                .program(mediaObject)
-                .reason("Only video media objects currently can be realized. This one is " + mediaObject.getAVType())
-                .build();
+        if (mediaObject.getAVType() == null) {
+            return cannotRealize(mediaObject, now);
         }
-        final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
+        switch (mediaObject.getAVType()) {
+            case VIDEO:
+                return realizeStreamingPlatformIfNeededVideo(mediaObject, platform, locationPredicate, now);
+            case AUDIO:
+                //return realizeStreamingPlatformIfNeededAudio(mediaObject, platform, locationPredicate, now);
+            default:
+                return cannotRealize(mediaObject, now);
+        }
+     }
+
+    AuthorityLocations.RealizeResult cannotRealize(
+        @NonNull MediaObject mediaObject,
+        @NonNull Instant now) {
+        return AuthorityLocations.RealizeResult.builder()
+            .needed(false)
+            .program(mediaObject)
+            .reason("Only audio and video media objects currently can be realized. This one is " + mediaObject.getAVType())
+            .build();
+    }
+
+
+    private AuthorityLocations.RealizeResult realizeStreamingPlatformIfNeededVideo(
+        @NonNull MediaObject mediaObject,
+        @NonNull Platform platform,
+        @NonNull Predicate<Location> locationPredicate,
+        @NonNull Instant now) {
+        assert mediaObject.getAVType() == AVType.VIDEO;
+
 
         if (platform == Platform.INTERNETVOD) {
             Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
@@ -73,13 +108,14 @@ public class Locations {
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         Encryption encryption;
 
+        final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
 
         final List<Location> authorityLocations = new ArrayList<>();
         if (existingPredictionForPlatform != null) {
             if (!existingPredictionForPlatform.isPlannedAvailability()) {
                 log.debug("Can't realize {} for {} because no availability planned", mediaObject, platform);
                 existingPredictionForPlatform.setState(Prediction.State.NOT_ANNOUNCED);
-                return Locations.RealizeResult.builder()
+                return AuthorityLocations.RealizeResult.builder()
                     .needed(false)
                     .program(mediaObject)
                     .reason("NEP status is " + streamingPlatformStatus + " but no availability planned ")
@@ -88,7 +124,7 @@ public class Locations {
             if (!streamingPlatformStatus.matches(existingPredictionForPlatform.getEncryption())) {
                 log.debug("Can't realize {} for {} because incorrect encryption", mediaObject, platform);
                 if (existingPredictionForPlatform.getEncryption() != Encryption.NONE) {
-                    return Locations.RealizeResult.builder()
+                    return AuthorityLocations.RealizeResult.builder()
                         .needed(false)
                         .program(mediaObject)
                         .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
@@ -97,13 +133,13 @@ public class Locations {
                     if (existingPredictionForPlatform.getEncryption() != Encryption.DRM) {
                         createDrmImplicitly(mediaObject, platform, authorityLocations, locationPredicate, now);
                         if (authorityLocations.isEmpty()) {
-                            return Locations.RealizeResult.builder()
+                            return AuthorityLocations.RealizeResult.builder()
                                 .needed(false)
                                 .program(mediaObject)
                                 .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
                                 .build();
                         } else {
-                             return Locations.RealizeResult.builder()
+                             return AuthorityLocations.RealizeResult.builder()
                                 .needed(true)
                                 .program(mediaObject)
                                 .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
@@ -120,7 +156,7 @@ public class Locations {
             }
         } else {
             log.debug("No prediction found for platform {} in {} ", platform, mediaObject);
-            return Locations.RealizeResult.builder()
+            return AuthorityLocations.RealizeResult.builder()
                 .needed(false)
                 .program(mediaObject)
                 .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform)
@@ -128,7 +164,7 @@ public class Locations {
         }
 
 
-        Location authorityLocation = getAuthorityLocation(mediaObject, platform, encryption, "For " + encryption, locationPredicate);
+        Location authorityLocation = getOrCreateAuthorityVideoLocation(mediaObject, platform, encryption, "For " + encryption, locationPredicate);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
             updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
@@ -140,7 +176,7 @@ public class Locations {
         }
 
         if (authorityLocations.isEmpty()) {
-            return Locations.RealizeResult.builder()
+            return AuthorityLocations.RealizeResult.builder()
                 .needed(false)
                 .program(mediaObject)
                 .reason("NEP status is " + streamingPlatformStatus + " but no existing locations or predictions matched")
@@ -154,22 +190,22 @@ public class Locations {
             .build();
     }
 
-    private static void createDrmImplicitly(MediaObject mediaObject, Platform platform, List<Location> authorityLocations, Predicate<Location> locationPredicate, Instant now) {
-            Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
+    private void createDrmImplicitly(MediaObject mediaObject, Platform platform, List<Location> authorityLocations, Predicate<Location> locationPredicate, Instant now) {
+            Location authorityLocation2 = getOrCreateAuthorityVideoLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
             if (authorityLocation2 != null) {
                 authorityLocations.add(authorityLocation2);
                 updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("Not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
             }
     }
 
-    private static Location getAuthorityLocation(MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate) {
-        String locationUrl = createLocationUrl(mediaObject, platform, encryption, "nep");
+    private Location getOrCreateAuthorityVideoLocation(MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate) {
+        String locationUrl = createLocationVideoUrl(mediaObject, platform, encryption, "nep");
         if (locationUrl == null) {
             return null;
             // I think this cannot happen
         }
 
-        // Checks if this exaction url is available already with correct owner?
+        // Checks if this exact url is available already with correct owner?
         Location authorityLocation = mediaObject.findLocation(locationUrl, OwnerType.AUTHORITY);
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
 
@@ -212,7 +248,7 @@ public class Locations {
 
 
     @NonNull
-    private static Location createLocation(final MediaObject mediaObject, final Prediction prediction, final String locationUrl){
+    private Location createLocation(final MediaObject mediaObject, final Prediction prediction, final String locationUrl){
         Location platformAuthorityLocation = new Location(locationUrl, OwnerType.AUTHORITY, prediction.getPlatform());
         platformAuthorityLocation.setPublishStartInstant(prediction.getPublishStartInstant());
         platformAuthorityLocation.setPublishStopInstant(prediction.getPublishStopInstant());
@@ -221,13 +257,13 @@ public class Locations {
     }
 
 
-    private static Program addLocation(
+    private Program addLocation(
         @NonNull Program program,
         @NonNull Platform platform,
         Encryption encryption,
         @NonNull String pubOptie, OwnerType owner,
         @NonNull Set<OwnerType> replaces) {
-        final String locationUrl = createLocationUrl(program, platform, encryption, pubOptie);
+        final String locationUrl = createLocationVideoUrl(program, platform, encryption, pubOptie);
         if (locationUrl == null) {
             return program;
         }
@@ -242,7 +278,7 @@ public class Locations {
     }
 
 
-    private static void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Set<OwnerType> replaces, Instant now) {
+    private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Set<OwnerType> replaces, Instant now) {
         location.setAvAttributes(avAttributes);
         if (replaces != null) {
             if (replaces.contains(location.getOwner())) {
@@ -254,8 +290,10 @@ public class Locations {
 
     /**
      * Create a new location url. Doesn't change the mediaobject.
+     *
+     * @param pubOptie Originally we got notifies with different puboptions. Now we get from NEP, and pubotion then is 'nep'.
      */
-    private static String createLocationUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
+    private  String createLocationVideoUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
         String baseUrl = getBaseUrl(platform, encryption, pubOptie, program.getStreamingPlatformStatus());
         if (baseUrl == null) {
             return null;
@@ -264,7 +302,7 @@ public class Locations {
     }
 
 
-    private static String getBaseUrl(Platform platform, Encryption encryption, String publicationOption, StreamingStatus status) {
+    private String getBaseUrl(Platform platform, Encryption encryption, String publicationOption, StreamingStatus status) {
         if ("nep".equals(publicationOption)) {
             if (! status.matches(encryption)) {
                 log.debug("{} does not match {}", status, encryption);
@@ -288,7 +326,7 @@ public class Locations {
     }
 
 
-    private static Location createOrFindLocation(
+    private Location createOrFindLocation(
         @NonNull Program program,
         @NonNull String locationUrl,
         @NonNull OwnerType owner,
@@ -312,11 +350,11 @@ public class Locations {
 
 
 
-    public static void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate, Instant now){
-        List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
-        Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
-        StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
-        List<Encryption> encryptions = streamingPlatformStatus.getEncryptionsForPrediction(existingPredictionForPlatform);
+    public void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate, Instant now){
+        final List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
+        final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
+        final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
+        final List<Encryption> encryptions = streamingPlatformStatus.getEncryptionsForPrediction(existingPredictionForPlatform);
         for (Location existingPlatformLocation : existingPlatformLocations) {
             if (! locationPredicate.test(existingPlatformLocation)) {
                 log.info("Skipped for consideration {}", existingPlatformLocation);
@@ -351,7 +389,7 @@ public class Locations {
      * <p>
      * This is not always the case, this method can correct that.
      */
-    public static Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
+    public  Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
 
         Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream()
             .filter(l -> Platform.INTERNETVOD.matches(l.getPlatform())) // l == null || l == internetvod
@@ -376,15 +414,16 @@ public class Locations {
         }
     }
 
-    private static List<Location> getAuthorityLocationsForPlatform(MediaObject mediaObject, Platform platform){
+    private  List<Location> getAuthorityLocationsForPlatform(MediaObject mediaObject, Platform platform){
         return mediaObject.getLocations().stream()
             .filter(l -> l.getOwner() == OwnerType.AUTHORITY && l.getPlatform() == platform)
             .collect(Collectors.toList());
     }
 
 
-
-
+    /**
+     * After locations are added or removed, this may have effect on the state of the {@link MediaObject#getPredictions() prediction records}
+     */
     public static boolean updatePredictionStates(MediaObject object, Instant now) {
         boolean change = false;
         for (Prediction prediction : object.getPredictions()) {
@@ -408,7 +447,7 @@ public class Locations {
                 if (locationPlatform == null) {
                     log.debug("Location has no explicit platform");
                     // this might be a good idea?
-                    //log.debug("Location has no explicit platform. Taking it {} implicitely", Platform.INTERNETVOD);
+                    //log.debug("Location has no explicit platform. Taking it {} implicitly", Platform.INTERNETVOD);
                     //locationPlatform = Platform.INTERNETVOD;
                 }
                 if (locationPlatform == platform) {
@@ -439,11 +478,11 @@ public class Locations {
 
         Properties properties = new Properties();
         try {
-            properties.load(Locations.class.getResourceAsStream("/authority.puboptions.properties"));
+            properties.load(AuthorityLocations.class.getResourceAsStream("/authority.puboptions.properties"));
             if (StringUtils.isNotBlank(overrideFile)) {
                 final InputStream inputStream;
                 if (overrideFile.startsWith("classpath:")) {
-                    inputStream = Locations.class.getResourceAsStream(overrideFile.substring("classpath:".length()));
+                    inputStream = AuthorityLocations.class.getResourceAsStream(overrideFile.substring("classpath:".length()));
                 } else {
                     URL url = URI.create(overrideFile).toURL();
                     inputStream = url.openStream();
