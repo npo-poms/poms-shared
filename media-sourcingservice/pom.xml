@@ -16,7 +16,8 @@
   </properties>
   <dependencies>
 
-  <!--  <dependency>
+  <!-- these would be needed for generated client. See comments below
+    <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
     </dependency>
@@ -41,6 +42,7 @@
       <artifactId>jackson-databind-nullable</artifactId>
       <version>0.2.6</version>
     </dependency>-->
+
     <dependency>
       <groupId>io.github.yskszk63</groupId>
       <artifactId>jnhttp-multipartformdata-bodypublisher</artifactId>
@@ -50,28 +52,25 @@
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
     </dependency>
+
+
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
     </dependency>
-
-    <dependency>
-      <groupId>nl.vpro.shared</groupId>
-      <artifactId>vpro-shared-log4j2</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>14.0.1</version>
     </dependency>
   </dependencies>
-
-
 
   <build>
     <plugins>
       <!--
+      - The openapi json provided has a few issues not making this feasible
+      - also the generator seems not to create a client properly doing multipart
+      Resigning this for now
+
       <plugin>
         <groupId>org.openapitools</groupId>
         <artifactId>openapi-generator-maven-plugin</artifactId>
