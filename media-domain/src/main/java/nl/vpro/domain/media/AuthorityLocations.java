@@ -34,7 +34,7 @@ import static nl.vpro.domain.Changeables.instant;
 public class AuthorityLocations {
 
 
-    @Value("${authority.locations.audioTemplate:https://entry.cdn.npoaudio.nl/handle/%s.mp3")
+    @Value("${authority.locations.audioTemplate:https://entry.cdn.npoaudio.nl/handle/%s.mp3}")
     private String audioTemplate = "https://entry.cdn.npoaudio.nl/handle/%s.mp3";
 
     public AuthorityLocations() {
