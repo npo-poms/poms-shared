@@ -9,6 +9,10 @@ import java.util.Properties;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import nl.vpro.domain.user.UserService;
+
+import static org.mockito.Mockito.mock;
+
 @Log4j2
 class SourcingServiceImplTest {
 
@@ -31,7 +35,12 @@ class SourcingServiceImplTest {
         apiClient.setBasePath("https://test.sourcing-audio.cdn.npoaudio.nl/");
         ((HttpBearerAuth) apiClient.getAuthentication("bearerAuth")).setBearerToken(PROPERTIES.getProperty("token"));
 */
-        impl = new SourcingServiceImpl("https://test.sourcing-audio.cdn.npoaudio.nl/", PROPERTIES.getProperty("token"));
+        impl = new SourcingServiceImpl(
+            "https://test.sourcing-audio.cdn.npoaudio.nl/",
+            PROPERTIES.getProperty("token"),
+            "https://proxy.meeuw.org/sourcingservice/%s",
+            mock(UserService.class)
+        );
     }
 
     @Test
