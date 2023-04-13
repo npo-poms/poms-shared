@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.user.UserService;
+import nl.vpro.logging.simple.Log4j2SimpleLogger;
 
 import static org.mockito.Mockito.mock;
 
@@ -48,7 +49,7 @@ class SourcingServiceImplTest {
     public void upload() throws IOException {
         Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
 
-        impl.upload("WO_KN_20053440", Files.size(file), Files.newInputStream(file));
+        impl.upload(Log4j2SimpleLogger.simple(log), "WO_KN_20053440", Files.size(file), Files.newInputStream(file));
     }
 
 

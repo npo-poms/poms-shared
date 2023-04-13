@@ -2,8 +2,10 @@ package nl.vpro.sourcingservice;
 
 import java.io.InputStream;
 
+import nl.vpro.logging.simple.SimpleLogger;
+
 public interface SourcingService {
 
-    void upload(String mid, long fileSize, InputStream inputStream);
+    void upload(SimpleLogger logger, String mid, long fileSize, InputStream inputStream);
 
 }
