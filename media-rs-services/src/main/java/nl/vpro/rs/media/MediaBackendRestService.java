@@ -508,7 +508,7 @@ public interface MediaBackendRestService {
         @Context HttpServletResponse response) throws IOException;
 
     @POST
-    @Path("uploadaudio/{mid}")
+    @Path("upload/{mid}")
     @Consumes({"audio/*"})
     TranscodeRequest uploadAudio(
         @Encoded @PathParam(MID) final String mid,
