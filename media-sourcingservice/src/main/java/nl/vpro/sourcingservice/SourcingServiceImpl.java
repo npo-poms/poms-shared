@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.http.*;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.google.common.io.ByteStreams;
 
 import nl.vpro.domain.user.User;
@@ -28,9 +30,9 @@ public class SourcingServiceImpl implements SourcingService {
 
 
     public SourcingServiceImpl(
-        String baseUrl,
-        String token,
-        String callbackBaseUrl,
+        @Value("${sourcingservice.baseUrl}") String baseUrl,
+        @Value("${sourcingservice.token}")String token,
+        @Value("${sourcingservice.callbackBaseUrl}")String callbackBaseUrl,
         UserService<?> userService) {
         this.baseUrl = baseUrl;
         this.token = token;

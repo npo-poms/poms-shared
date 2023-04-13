@@ -37,14 +37,14 @@ class SourcingServiceImplTest {
 */
         impl = new SourcingServiceImpl(
             "https://test.sourcing-audio.cdn.npoaudio.nl/",
-            PROPERTIES.getProperty("token"),
-            "https://proxy.meeuw.org/sourcingservice/%s",
+            PROPERTIES.getProperty("sourcingservice.token"),
+            PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             mock(UserService.class)
         );
     }
 
     @Test
-    @Disabled("This does actual stuff, need actual token. Ad wiremock version to test our part isolated.")
+    @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void upload() throws IOException {
         Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
 
