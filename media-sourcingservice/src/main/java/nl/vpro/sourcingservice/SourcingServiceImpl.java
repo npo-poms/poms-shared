@@ -14,6 +14,7 @@ import com.google.common.io.ByteStreams;
 
 import nl.vpro.domain.user.User;
 import nl.vpro.domain.user.UserService;
+import nl.vpro.logging.simple.SimpleLogger;
 
 
 @Log4j2
@@ -43,7 +44,7 @@ public class SourcingServiceImpl implements SourcingService {
 
     @Override
     @SneakyThrows
-    public void upload(String mid, final long fileSize, InputStream inputStream)  {
+    public void upload(SimpleLogger logger, String mid, final long fileSize, InputStream inputStream)  {
         {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "start")
@@ -54,7 +55,7 @@ public class SourcingServiceImpl implements SourcingService {
             if (start.statusCode() > 299) {
                 throw new IllegalArgumentException(start.body());
             }
-            log.info("start: {} {}", start.statusCode(), start.body());
+            logger.info("start: {} {}", start.statusCode(), start.body());
         }
         long uploaded = 0;
         while(uploaded < fileSize) {
@@ -66,7 +67,7 @@ public class SourcingServiceImpl implements SourcingService {
                 .add("file_size", String.valueOf(fileSize));
             HttpRequest transferRequest = multipart(mid, body);
             HttpResponse<String> transfer = client.send(transferRequest, HttpResponse.BodyHandlers.ofString());
-            log.info("transfer: {} {}", transfer.statusCode(), transfer.body());
+            logger.info("transfer: {} {}", transfer.statusCode(), transfer.body());
             uploaded += CHUNK_SIZE;
         }
         MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
@@ -74,7 +75,7 @@ public class SourcingServiceImpl implements SourcingService {
 
         HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
 
-        log.info("finish: {} {}", finish.statusCode(), finish.body());
+        logger.info("finish: {} {}", finish.statusCode(), finish.body());
     }
 
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
