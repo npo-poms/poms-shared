@@ -32,10 +32,11 @@ import static javax.persistence.EnumType.STRING;
 import static nl.vpro.domain.Changeables.instant;
 
 /**
- * A prediction is related to a program and indicates that locations (for a certain platform) <em>will be</em> available.
+ * A prediction is related to a program and indicates that locations (for a certain platform) <em>will be</em> available, and nowadays also whether it <em>is</em> or <em>was</em> available.
  * <p>
  * Also, it contains information about the embargo restrictions for that platform.
  * <p>
+ *
  *
  * @author Michiel Meeuwissen
  * @since 1.6

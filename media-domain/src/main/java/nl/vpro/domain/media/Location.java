@@ -660,7 +660,7 @@ public class Location extends PublishableObject<Location>
     public void setWorkflow(Workflow workflow) {
         super.setWorkflow(workflow);
         if (CollectionUtils.inCollection(Workflow.REVOKES, workflow) && platform != null && this.mediaObject != null) {
-            Locations.updatePredictionStates(this.mediaObject, platform, instant());
+            AuthorityLocations.updatePredictionStates(this.mediaObject, platform, instant());
         }
     }
 
