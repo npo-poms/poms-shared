@@ -495,6 +495,31 @@ public interface MediaBackendRestService {
         @Context HttpServletResponse response) throws IOException;
 
     @POST
+    @Path("upload/{mid}")
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
+    TranscodeRequest upload(
+        @Encoded @PathParam(MID) final String mid,
+        InputStream inputStream,
+        @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
+        @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam("replace") @DefaultValue("false") Boolean replace,
+        @QueryParam("uploadFirst") @DefaultValue("false") Boolean uploadFirst,
+        @Context HttpServletResponse response) throws IOException;
+
+    @POST
+    @Path("uploadaudio/{mid}")
+    @Consumes({"audio/*"})
+    TranscodeRequest uploadAudio(
+        @Encoded @PathParam(MID) final String mid,
+        InputStream inputStream,
+        @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
+        @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam("uploadFirst") @DefaultValue("false") Boolean uploadFirst,
+        @Context HttpServletResponse response) throws IOException;
+
+    @POST
     @Path("upload/{mid}/{encryption}/{priority}/{fileName}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
     Response uploadAndTranscode(
@@ -502,6 +527,22 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
         @Encoded @PathParam(PRIORITY) final TranscodeRequest.Priority priority,
         @Encoded @PathParam(FILE_NAME) final String fileName,
+        InputStream inputStream,
+        @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
+        @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam("replace") @DefaultValue("false") Boolean replace,
+        @QueryParam("uploadFirst") @DefaultValue("false") Boolean uploadFirst,
+        @QueryParam(ERRORS) String errors,
+        @Context HttpServletResponse response) throws IOException;
+
+    @POST
+    @Path("upload/{mid}/{encryption}/{priority}")
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
+    Response uploadAndTranscode(
+        @Encoded @PathParam(MID) final String mid,
+        @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
+        @Encoded @PathParam(PRIORITY) final TranscodeRequest.Priority priority,
         InputStream inputStream,
         @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
