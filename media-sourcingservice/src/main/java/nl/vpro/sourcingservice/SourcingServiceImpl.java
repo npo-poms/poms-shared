@@ -10,20 +10,32 @@ import java.net.http.*;
 
 import com.google.common.io.ByteStreams;
 
+import nl.vpro.domain.user.User;
+import nl.vpro.domain.user.UserService;
+
 
 @Log4j2
 public class SourcingServiceImpl implements SourcingService {
 
     private final static long CHUNK_SIZE = 10_000_000L;
 
+
     private final String baseUrl;
+    private final String callbackBaseUrl;
     private final String token;
-    private final HttpClient client = HttpClient.newHttpClient();
+    private final UserService<?> userService;
+    HttpClient client = HttpClient.newHttpClient();
 
 
-    public SourcingServiceImpl(String baseUrl, String token) {
+    public SourcingServiceImpl(
+        String baseUrl,
+        String token,
+        String callbackBaseUrl,
+        UserService<?> userService) {
         this.baseUrl = baseUrl;
         this.token = token;
+        this.callbackBaseUrl = callbackBaseUrl;
+        this.userService = userService;
     }
 
 
@@ -33,7 +45,8 @@ public class SourcingServiceImpl implements SourcingService {
         {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "start")
-                .add("email", "michiel.meeuwissen@gmail.com")
+                .add("email", userService.currentUser().map(User::getEmail).orElse("m.meeuwissen.vpro@gmail.com"))
+                .add("callback_url", callbackBaseUrl.formatted(mid))
                 .add("file_size", String.valueOf(fileSize));
             HttpResponse<String> start = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
             if (start.statusCode() > 299) {
