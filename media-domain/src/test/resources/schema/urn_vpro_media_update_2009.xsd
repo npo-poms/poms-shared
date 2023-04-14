@@ -44,6 +44,8 @@
 
   <xs:element name="transcodeStatus" type="transcodeStatusType"/>
 
+  <xs:element name="uploadResponse" type="uploadResponse"/>
+
   <xs:complexType name="midAndTypeType">
     <xs:sequence>
       <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -579,6 +581,14 @@
       <xs:element name="descriptions" type="descriptionUpdateType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tags" type="media:tagType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="uploadResponse">
+    <xs:sequence>
+      <xs:element name="status" type="xs:string" minOccurs="0"/>
+      <xs:element name="response" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="statusCode" type="xs:int" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="transcodeType">
