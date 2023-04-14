@@ -43,6 +43,10 @@
       <version>0.2.6</version>
     </dependency>-->
     <dependency>
+      <groupId>nl.vpro.media</groupId>
+      <artifactId>media-domain</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.github.yskszk63</groupId>
       <artifactId>jnhttp-multipartformdata-bodypublisher</artifactId>
       <version>0.0.1</version>

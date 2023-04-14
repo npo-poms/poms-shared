@@ -4,6 +4,8 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
 import java.nio.file.*;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Properties;
 
 import org.junit.jupiter.api.Disabled;
@@ -46,10 +48,13 @@ class SourcingServiceImplTest {
 
     @Test
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
+
     public void upload() throws IOException {
+        Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
 
         impl.upload(Log4j2SimpleLogger.simple(log), "WO_KN_20053440", Files.size(file), Files.newInputStream(file));
+        log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
 
