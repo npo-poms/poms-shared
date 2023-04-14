@@ -154,6 +154,8 @@
 
   <descendantOf midRef="VPROWON_20005"/>
 
+  <descendantOf midRef="VPROWON_30004"/>
+
   <memberOf highlighted="false" midRef="VPROWON_20003" index="1"/>
 
   <memberOf highlighted="false" midRef="VPROWON_20005" index="2"/>
@@ -341,6 +343,8 @@
     </scheduleEvent>
 
   </scheduleEvents>
+
+  <episodeOf highlighted="false" midRef="VPROWON_30004" index="1"/>
 
   <segments>
 
@@ -640,6 +644,8 @@
 
         <memberOf midRef="VPROWON_20005" index="3"/>
 
+        <episodeOf midRef="VPROWON_30004" index="1"/>
+
       </segmentOf>
 
       <start>P0DT0H0M0.000S</start>
@@ -649,4 +655,3 @@
   </segments>
 
 </program>
-
