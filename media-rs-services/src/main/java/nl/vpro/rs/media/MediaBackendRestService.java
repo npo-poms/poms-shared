@@ -510,7 +510,8 @@ public interface MediaBackendRestService {
     @POST
     @Path("upload/{mid}")
     @Consumes({"audio/*"})
-    void uploadAudio(
+    @Produces(APPLICATION_XML)
+    UploadResponse uploadAudio(
         @Encoded @PathParam(MID) final String mid,
         InputStream inputStream,
         @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,

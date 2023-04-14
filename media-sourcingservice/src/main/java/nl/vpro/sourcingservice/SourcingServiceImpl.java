@@ -10,10 +10,13 @@ import java.net.http.*;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.io.ByteStreams;
 
+import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.domain.user.User;
 import nl.vpro.domain.user.UserService;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.logging.simple.SimpleLogger;
 
 
@@ -32,8 +35,8 @@ public class SourcingServiceImpl implements SourcingService {
 
     public SourcingServiceImpl(
         @Value("${sourcingservice.baseUrl}") String baseUrl,
-        @Value("${sourcingservice.token}")String token,
-        @Value("${sourcingservice.callbackBaseUrl}")String callbackBaseUrl,
+        @Value("${sourcingservice.token}") String token,
+        @Value("${sourcingservice.callbackBaseUrl}") String callbackBaseUrl,
         UserService<?> userService) {
         this.baseUrl = baseUrl;
         this.token = token;
@@ -44,7 +47,7 @@ public class SourcingServiceImpl implements SourcingService {
 
     @Override
     @SneakyThrows
-    public void upload(SimpleLogger logger, String mid, final long fileSize, InputStream inputStream)  {
+    public UploadResponse upload(SimpleLogger logger, String mid, final long fileSize, InputStream inputStream)  {
         {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "start")
@@ -62,11 +65,13 @@ public class SourcingServiceImpl implements SourcingService {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "transfer")
                 .addStream("file_chunk", "part" , () -> {
-                    return ByteStreams.limit(inputStream, CHUNK_SIZE);
+                    InputStream limit = ByteStreams.limit(inputStream, CHUNK_SIZE);
+                    return limit;
                 })
                 .add("file_size", String.valueOf(fileSize));
             HttpRequest transferRequest = multipart(mid, body);
-            HttpResponse<String> transfer = client.send(transferRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> transfer = client.send(
+                transferRequest, HttpResponse.BodyHandlers.ofString());
             logger.info("transfer: {} {}", transfer.statusCode(), transfer.body());
             uploaded += CHUNK_SIZE;
         }
@@ -75,11 +80,14 @@ public class SourcingServiceImpl implements SourcingService {
 
         HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
 
+
         logger.info("finish: {} {}", finish.statusCode(), finish.body());
+        JsonNode bodyNode = Jackson2Mapper.getLenientInstance().readTree(finish.body());
+        return new UploadResponse(finish.statusCode(), bodyNode.get("status").textValue(), bodyNode.get("response").textValue());
     }
 
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
-        return request("ingest/" + mid + "/multipart")
+        return request(pathForIngest(mid))
             .header("Content-Type", body.contentType())
             .POST(body).build();
     }
@@ -87,7 +95,21 @@ public class SourcingServiceImpl implements SourcingService {
     protected HttpRequest.Builder request(String path) {
         return HttpRequest.newBuilder()
             .header("Authorization", "Bearer " + token)
-            .uri(URI.create(baseUrl + "api/" + path));
-
+            .uri(URI.create(forPath(path)));
     }
+
+    String pathForIngest(String mid) {
+        return "ingest/" + mid + "/multipart";
+    }
+
+    String forPath(String path) {
+        return baseUrl + "api/" + path;
+    }
+
+    @Override
+    public String getUploadString() {
+        return forPath(pathForIngest("%s"));
+    }
+
+
 }
