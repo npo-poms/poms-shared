@@ -57,6 +57,7 @@ public class SchemaTest extends AbstractSchemaTest {
             ImageUpdate.class,
             LocationUpdate.class,
             StreamingStatusImpl.class,
+            UploadResponse.class,
             //
             TranscodeRequest.class,
             TranscodeStatus.class,
