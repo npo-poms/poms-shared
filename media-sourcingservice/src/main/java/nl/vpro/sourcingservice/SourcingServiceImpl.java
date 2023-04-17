@@ -27,9 +27,6 @@ import nl.vpro.util.InputStreamChunk;
 @Log4j2
 public class SourcingServiceImpl implements SourcingService {
 
-
-
-
     private final String baseUrl;
     private final String callbackBaseUrl;
     private final String token;
@@ -37,7 +34,7 @@ public class SourcingServiceImpl implements SourcingService {
     private final int chunkSize;
     private final String defaultEmail;
 
-    HttpClient client = HttpClient.newHttpClient();
+    private final HttpClient client = HttpClient.newHttpClient();
 
 
     public SourcingServiceImpl(
