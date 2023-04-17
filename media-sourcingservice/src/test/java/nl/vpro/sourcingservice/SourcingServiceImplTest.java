@@ -42,6 +42,7 @@ class SourcingServiceImplTest {
             "https://test.sourcing-audio.cdn.npoaudio.nl/",
             PROPERTIES.getProperty("sourcingservice.token"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
+            1_000_000,
             mock(UserService.class)
         );
     }
@@ -51,9 +52,9 @@ class SourcingServiceImplTest {
 
     public void upload() throws IOException {
         Instant start = Instant.now();
-        Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
+        Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.wav");
 
-        impl.upload(Log4j2SimpleLogger.simple(log), "WO_KN_20053440", Files.size(file), Files.newInputStream(file));
+        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_T20014434", Files.size(file), Files.newInputStream(file));
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
