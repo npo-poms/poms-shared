@@ -40,7 +40,7 @@ public class SourcingServiceImpl implements SourcingService {
         @Value("${sourcingservice.baseUrl}") String baseUrl,
         @Value("${sourcingservice.token}") String token,
         @Value("${sourcingservice.callbackBaseUrl}") String callbackBaseUrl,
-        @Value("${sourcingservice.chunkSize:10_000_000}") int chunkSize,
+        @Value("${sourcingservice.chunkSize:10000000}") int chunkSize,
         UserService<?> userService) {
         this.baseUrl = baseUrl;
         this.token = token;
@@ -54,6 +54,7 @@ public class SourcingServiceImpl implements SourcingService {
     @SneakyThrows
     public UploadResponse upload(SimpleLogger logger, String mid, final long fileSize, InputStream inputStream)  {
         {
+
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "start")
                 .add("email", userService.currentUser().map(User::getEmail).orElse("m.meeuwissen.vpro@gmail.com"))
