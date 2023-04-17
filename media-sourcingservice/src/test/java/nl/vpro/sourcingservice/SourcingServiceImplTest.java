@@ -43,6 +43,7 @@ class SourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.token"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             1_000_000,
+            "m.meeuwissen.vpro@gmail.com",
             mock(UserService.class)
         );
     }
@@ -54,7 +55,7 @@ class SourcingServiceImplTest {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.wav");
 
-        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_T20014434", Files.size(file), Files.newInputStream(file));
+        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_20057519", Files.size(file), Files.newInputStream(file));
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 

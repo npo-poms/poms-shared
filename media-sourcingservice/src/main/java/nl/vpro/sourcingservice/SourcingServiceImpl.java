@@ -32,6 +32,7 @@ public class SourcingServiceImpl implements SourcingService {
     private final String token;
     private final UserService<?> userService;
     private final int chunkSize;
+    private final String defaultEmail;
 
     HttpClient client = HttpClient.newHttpClient();
 
@@ -41,12 +42,14 @@ public class SourcingServiceImpl implements SourcingService {
         @Value("${sourcingservice.token}") String token,
         @Value("${sourcingservice.callbackBaseUrl}") String callbackBaseUrl,
         @Value("${sourcingservice.chunkSize:10000000}") int chunkSize,
+        @Value("${sourcingservice.defaultEmail:#{null}}") String defaultEmail,
         UserService<?> userService) {
         this.baseUrl = baseUrl;
         this.token = token;
         this.callbackBaseUrl = callbackBaseUrl;
         this.userService = userService;
         this.chunkSize = chunkSize;
+        this.defaultEmail = defaultEmail;
     }
 
 
@@ -54,17 +57,21 @@ public class SourcingServiceImpl implements SourcingService {
     @SneakyThrows
     public UploadResponse upload(SimpleLogger logger, String mid, final long fileSize, InputStream inputStream)  {
         {
-
+            final String callbackUrl = callbackBaseUrl.formatted(mid);
+            final String email =  userService.currentUser().map(User::getEmail).orElse(defaultEmail);
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-                .add("upload_phase", "start")
-                .add("email", userService.currentUser().map(User::getEmail).orElse("m.meeuwissen.vpro@gmail.com"))
-                .add("callback_url", callbackBaseUrl.formatted(mid))
+                .add("upload_phase", "start");
+            if (email != null) {
+                body.add("email", email);
+            }
+            body.add("callback_url", callbackUrl)
                 .add("file_size", String.valueOf(fileSize));
             HttpResponse<String> start = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
             if (start.statusCode() > 299) {
                 throw new IllegalArgumentException(start.body());
             }
-            logger.info("start: {} {} {}", FileSizeFormatter.DEFAULT.format(fileSize), start.statusCode(), start.body());
+            JsonNode node = Jackson2Mapper.LENIENT.readTree(start.body());
+            logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, callbackUrl.replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));
         }
         long uploaded = 0;
         while(uploaded < fileSize) {
@@ -80,10 +87,11 @@ public class SourcingServiceImpl implements SourcingService {
             HttpResponse<String> transfer = client.send(
                 transferRequest, HttpResponse.BodyHandlers.ofString());
             uploaded += chunkStream.getCount();
-            logger.info("transfer: {},  {} {}", FileSizeFormatter.DEFAULT.format(chunkStream.getCount()), transfer.statusCode(), transfer.body());
-            uploaded += chunkStream.getCount();
+            JsonNode node = Jackson2Mapper.LENIENT.readTree(transfer.body());
+            logger.info("transfer: {} ({}) {}", node.get("status").textValue(), transfer.statusCode(),  FileSizeFormatter.DEFAULT.format(uploaded));
         }
         inputStream.close();
+        assert uploaded == fileSize;
         MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "finish");
 
