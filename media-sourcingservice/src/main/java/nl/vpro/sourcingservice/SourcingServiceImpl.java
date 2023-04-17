@@ -11,6 +11,7 @@ import java.net.http.*;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.domain.user.User;
@@ -55,23 +56,36 @@ public class SourcingServiceImpl implements SourcingService {
 
     @Override
     @SneakyThrows
-    public UploadResponse upload(SimpleLogger logger, String mid, final long fileSize, InputStream inputStream)  {
+    public UploadResponse upload(SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream)  {
+        final String callbackUrl = callbackBaseUrl.formatted(mid);
+        ObjectNode metaData = Jackson2Mapper.INSTANCE.createObjectNode();
+        metaData.put("mid", mid);
+        metaData.put("callback_url", callbackUrl);
+
+        HttpRequest ingestRequest = ingest(HttpRequest.BodyPublishers.ofByteArray(Jackson2Mapper.INSTANCE.writeValueAsBytes(metaData)));
+        HttpResponse<byte[]> ingest = client.send(ingestRequest,
+            HttpResponse.BodyHandlers.ofByteArray());
+        if (ingest.statusCode() > 299) {
+            throw new IllegalArgumentException(new String(ingest.body()));
+        }
+        IngestResponse response = Jackson2Mapper.LENIENT.readValue(ingest.body(), IngestResponse.class);
+        logger.info("ingest {}", response);
+
         {
-            final String callbackUrl = callbackBaseUrl.formatted(mid);
+
             final String email =  userService.currentUser().map(User::getEmail).orElse(defaultEmail);
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "start");
             if (email != null) {
                 body.add("email", email);
             }
-            body.add("callback_url", callbackUrl)
-                .add("file_size", String.valueOf(fileSize));
+            body.add("file_size", String.valueOf(fileSize));
             HttpResponse<String> start = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
             if (start.statusCode() > 299) {
                 throw new IllegalArgumentException(start.body());
             }
             JsonNode node = Jackson2Mapper.LENIENT.readTree(start.body());
-            logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, callbackUrl.replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));
+            logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback_url={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, callbackUrl.replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));
         }
         long uploaded = 0;
         while(uploaded < fileSize) {
@@ -104,8 +118,15 @@ public class SourcingServiceImpl implements SourcingService {
     }
 
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
-        return request(pathForIngest(mid))
+        return request(pathForIngestMultipart(mid))
             .header("Content-Type", body.contentType())
+            .POST(body).build();
+    }
+
+
+    protected HttpRequest ingest(HttpRequest.BodyPublisher body) {
+        return request("ingest")
+            .header("Content-Type", "application/json")
             .POST(body).build();
     }
 
@@ -115,7 +136,7 @@ public class SourcingServiceImpl implements SourcingService {
             .uri(URI.create(forPath(path)));
     }
 
-    String pathForIngest(String mid) {
+    String pathForIngestMultipart(String mid) {
         return "ingest/" + mid + "/multipart";
     }
 
@@ -125,7 +146,7 @@ public class SourcingServiceImpl implements SourcingService {
 
     @Override
     public String getUploadString() {
-        return forPath(pathForIngest("%s"));
+        return forPath(pathForIngestMultipart("%s"));
     }
 
 
