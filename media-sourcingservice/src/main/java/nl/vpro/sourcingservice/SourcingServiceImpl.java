@@ -4,9 +4,11 @@ import io.github.yskszk63.jnhttpmultipartformdatabodypublisher.MultipartFormData
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -57,10 +59,25 @@ public class SourcingServiceImpl implements SourcingService {
     @Override
     @SneakyThrows
     public UploadResponse upload(SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream)  {
-        final String callbackUrl = callbackBaseUrl.formatted(mid);
+
+        ingest(logger, mid);
+
+        uploadStart(logger, mid, fileSize);
+
+        AtomicLong uploaded = new AtomicLong(0);
+        while(uploaded.get() < fileSize) {
+            uploadChunk(logger, mid, inputStream, uploaded);
+        }
+        inputStream.close();
+        assert uploaded.get() == fileSize;
+
+        return uploadFinish(logger, mid, uploaded);
+    }
+
+    private void ingest(SimpleLogger logger, String mid) throws IOException, InterruptedException {
         ObjectNode metaData = Jackson2Mapper.INSTANCE.createObjectNode();
         metaData.put("mid", mid);
-        metaData.put("callback_url", callbackUrl);
+        metaData.put("callback_url", getCallbackUrl(mid));
 
         HttpRequest ingestRequest = ingest(HttpRequest.BodyPublishers.ofByteArray(Jackson2Mapper.INSTANCE.writeValueAsBytes(metaData)));
         HttpResponse<byte[]> ingest = client.send(ingestRequest,
@@ -70,42 +87,42 @@ public class SourcingServiceImpl implements SourcingService {
         }
         IngestResponse response = Jackson2Mapper.LENIENT.readValue(ingest.body(), IngestResponse.class);
         logger.info("ingest {}", response);
+    }
 
-        {
+    private void uploadStart(SimpleLogger logger, String mid, long fileSize) throws IOException, InterruptedException {
 
-            final String email =  userService.currentUser().map(User::getEmail).orElse(defaultEmail);
-            MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-                .add("upload_phase", "start");
-            if (email != null) {
-                body.add("email", email);
-            }
-            body.add("file_size", String.valueOf(fileSize));
-            HttpResponse<String> start = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
-            if (start.statusCode() > 299) {
-                throw new IllegalArgumentException(start.body());
-            }
-            JsonNode node = Jackson2Mapper.LENIENT.readTree(start.body());
-            logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback_url={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, callbackUrl.replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));
+        final String email =  userService.currentUser().map(User::getEmail).orElse(defaultEmail);
+        MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
+            .add("upload_phase", "start");
+        if (email != null) {
+            body.add("email", email);
         }
-        long uploaded = 0;
-        while(uploaded < fileSize) {
-            InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream);
-            MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-                .add("upload_phase", "transfer")
-                .addStream("file_chunk", "part" , () -> {
-                    return chunkStream;
-
-                })
-                .add("file_size", String.valueOf(fileSize));
-            HttpRequest transferRequest = multipart(mid, body);
-            HttpResponse<String> transfer = client.send(
-                transferRequest, HttpResponse.BodyHandlers.ofString());
-            uploaded += chunkStream.getCount();
-            JsonNode node = Jackson2Mapper.LENIENT.readTree(transfer.body());
-            logger.info("transfer: {} ({}) {}", node.get("status").textValue(), transfer.statusCode(),  FileSizeFormatter.DEFAULT.format(uploaded));
+        body.add("file_size", String.valueOf(fileSize));
+        HttpResponse<String> start = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
+        if (start.statusCode() > 299) {
+            throw new IllegalArgumentException(start.body());
         }
-        inputStream.close();
-        assert uploaded == fileSize;
+        JsonNode node = Jackson2Mapper.LENIENT.readTree(start.body());
+        logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback_url={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, getCallbackUrl(mid).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));
+    }
+
+    private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded) throws IOException, InterruptedException {
+        InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream);
+        MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
+            .add("upload_phase", "transfer")
+            .addStream("file_chunk", "part" , () -> {
+                return chunkStream;
+
+            });
+        HttpRequest transferRequest = multipart(mid, body);
+        HttpResponse<String> transfer = client.send(
+            transferRequest, HttpResponse.BodyHandlers.ofString());
+        long l = uploaded.addAndGet(chunkStream.getCount());
+        JsonNode node = Jackson2Mapper.LENIENT.readTree(transfer.body());
+        logger.info("transfer: {} ({}) {}", node.get("status").textValue(), transfer.statusCode(),  FileSizeFormatter.DEFAULT.format(l));
+    }
+
+    private UploadResponse uploadFinish(SimpleLogger logger, String mid, AtomicLong uploaded) throws IOException, InterruptedException {
         MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "finish");
 
@@ -116,6 +133,11 @@ public class SourcingServiceImpl implements SourcingService {
         logger.info("finish: {} ({}) {}",  node.get("status").textValue(), finish.statusCode(),  FileSizeFormatter.DEFAULT.format(uploaded));
         JsonNode bodyNode = Jackson2Mapper.getLenientInstance().readTree(finish.body());
         return new UploadResponse(finish.statusCode(), bodyNode.get("status").textValue(), bodyNode.get("response").textValue());
+    }
+
+    protected String getCallbackUrl(String mid) {
+        return callbackBaseUrl.formatted(mid);
+
     }
 
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
