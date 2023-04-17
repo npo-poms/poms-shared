@@ -10,6 +10,8 @@ run-name: build pull request ${{  github.ref_name }}
 on:
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
 
 jobs:
   build:
