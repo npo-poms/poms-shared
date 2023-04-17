@@ -110,10 +110,7 @@ public class SourcingServiceImpl implements SourcingService {
         InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream);
         MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "transfer")
-            .addStream("file_chunk", "part" , () -> {
-                return chunkStream;
-
-            });
+            .addStream("file_chunk", "part" , () -> chunkStream);
         HttpRequest transferRequest = multipart(mid, body);
         HttpResponse<String> transfer = client.send(
             transferRequest, HttpResponse.BodyHandlers.ofString());
