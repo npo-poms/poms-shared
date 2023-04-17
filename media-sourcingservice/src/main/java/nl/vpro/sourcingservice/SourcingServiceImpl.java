@@ -111,8 +111,9 @@ public class SourcingServiceImpl implements SourcingService {
 
         HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
 
+        JsonNode node = Jackson2Mapper.LENIENT.readTree(finish.body());
 
-        logger.info("finish: {} {}", finish.statusCode(), finish.body());
+        logger.info("finish: {} ({}) {}",  node.get("status").textValue(), finish.statusCode(),  FileSizeFormatter.DEFAULT.format(uploaded));
         JsonNode bodyNode = Jackson2Mapper.getLenientInstance().readTree(finish.body());
         return new UploadResponse(finish.statusCode(), bodyNode.get("status").textValue(), bodyNode.get("response").textValue());
     }
