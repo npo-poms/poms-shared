@@ -556,7 +556,7 @@ public interface MediaBackendRestService {
         summary = "Upload a video",
         description = " "
     )
-    @Path("upload/{mid:[^/]+?}/PASSTHROUGH")
+    @Path("upload/{mid:[^/]+?}/passthrough")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
     UploadResponse uploadVideo(
         @PathParam(MID) final String mid,
