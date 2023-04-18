@@ -506,6 +506,9 @@ public interface MediaBackendRestService {
         @QueryParam("uploadFirst") @DefaultValue("false") Boolean uploadFirst,
         @Context HttpServletResponse response) throws IOException;
 
+    /**
+     * @since 7.5
+     */
     @POST
     @Path("upload/{mid}")
     @Consumes({"audio/*"})
@@ -516,7 +519,9 @@ public interface MediaBackendRestService {
         @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam(ERRORS) String errors,
         @Context HttpServletResponse response) throws IOException, InterruptedException;
+
 
     @POST
     @Path("upload/{mid}/{encryption}/{priority}/{fileName}")
@@ -551,6 +556,10 @@ public interface MediaBackendRestService {
         @QueryParam(ERRORS) String errors,
         @Context HttpServletResponse response) throws IOException;
 
+
+    /**
+     * @since 7.5
+     */
     @POST
     @Operation(tags = {"media",   "streams"},
         summary = "Upload a video",
