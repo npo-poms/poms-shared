@@ -40,11 +40,12 @@ class SourcingServiceImplTest {
 */
         impl = new SourcingServiceImpl(
             "https://test.sourcing-audio.cdn.npoaudio.nl/",
-            PROPERTIES.getProperty("sourcingservice.token"),
+            "https://test.sourcing-video.cdn.npoaudio.nl/",
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
+            PROPERTIES.getProperty("sourcingservice.token"),
+            mock(UserService.class),
             100_000_000,
-            "m.meeuwissen.vpro@gmail.com",
-            mock(UserService.class)
+            "m.meeuwissen.vpro@gmail.com"
         );
     }
 
@@ -53,6 +54,16 @@ class SourcingServiceImplTest {
     public void uploadAudio() throws IOException, InterruptedException {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
+
+        impl.uploadAudio(Log4j2SimpleLogger.simple(log), "WO_VPRO_A20017042", Files.size(file), Files.newInputStream(file));
+        log.info("Took {}", Duration.between(start, Instant.now()));
+    }
+
+     @Test
+    @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
+    public void uploadVideo() throws IOException, InterruptedException {
+        Instant start = Instant.now();
+        Path file = Paths.get(System.getProperty("user.home") , "samples", "test.mp4");
 
         impl.uploadAudio(Log4j2SimpleLogger.simple(log), "WO_VPRO_A20017042", Files.size(file), Files.newInputStream(file));
         log.info("Took {}", Duration.between(start, Instant.now()));

@@ -16,6 +16,9 @@ public interface SourcingService {
     /**
      * A string which can be used to show where this implementation will upload to.
      */
-    String getUploadString();
+    String getAudioUploadString();
+
+    String getVideoUploadString();
+
 
 }
