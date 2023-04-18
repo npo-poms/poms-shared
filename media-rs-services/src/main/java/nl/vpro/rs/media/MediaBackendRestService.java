@@ -514,7 +514,7 @@ public interface MediaBackendRestService {
         @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
-        @Context HttpServletResponse response) throws IOException;
+        @Context HttpServletResponse response) throws IOException, InterruptedException;
 
     @POST
     @Path("upload/{mid}/{encryption}/{priority}/{fileName}")
