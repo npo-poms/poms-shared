@@ -1,5 +1,7 @@
 package nl.vpro.rs.media;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -509,7 +511,7 @@ public interface MediaBackendRestService {
     @Consumes({"audio/*"})
     @Produces(APPLICATION_XML)
     UploadResponse uploadAudio(
-        @Encoded @PathParam(MID) final String mid,
+        @Encoded @PathParam("audioMid") final String mid,
         InputStream inputStream,
         @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
@@ -548,6 +550,22 @@ public interface MediaBackendRestService {
         @QueryParam("uploadFirst") @DefaultValue("false") Boolean uploadFirst,
         @QueryParam(ERRORS) String errors,
         @Context HttpServletResponse response) throws IOException;
+
+    @POST
+    @Operation(tags = {"media",   "streams"},
+        summary = "Upload a video",
+        description = " "
+    )
+    @Path("upload/{mid:[^/]+?}/PASSTHROUGH")
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
+    UploadResponse uploadVideo(
+        @PathParam(MID) final String mid,
+        InputStream inputStream,
+        @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
+        @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam(ERRORS) String errors,
+        @Context HttpServletResponse response) throws IOException, InterruptedException;
 
     @GET
     @Path("{entity:(media|program|segment)}/{mid:.*}/transcodingstatus")
