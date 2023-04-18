@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.*;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -46,15 +48,25 @@ public class SourcingServiceImpl implements SourcingService {
 
 
     @Override
-    public UploadResponse uploadAudio(SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream) throws IOException, InterruptedException {
+    public UploadResponse uploadAudio(
+        SimpleLogger logger,
+        final String mid,
+        final long fileSize,
+        InputStream inputStream,
+        @Nullable String errors) throws IOException, InterruptedException {
 
-        return upload(audio, logger, mid, fileSize, inputStream);
+        return upload(audio, logger, mid, fileSize, inputStream, errors);
     }
 
 
     @Override
-    public UploadResponse uploadVideo(SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream) throws IOException, InterruptedException {
-        return upload(video, logger, mid, fileSize, inputStream);
+    public UploadResponse uploadVideo(
+        SimpleLogger logger,
+        final String mid,
+        final long fileSize,
+        InputStream inputStream,
+        @Nullable String errors) throws IOException, InterruptedException {
+        return upload(video, logger, mid, fileSize, inputStream, errors);
 
     }
 
@@ -69,11 +81,11 @@ public class SourcingServiceImpl implements SourcingService {
     }
 
 
-    public UploadResponse upload(Abstract base, SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream) throws IOException, InterruptedException {
+    public UploadResponse upload(Abstract base, SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
 
         base.ingest(logger, mid);
 
-        base.uploadStart(logger, mid, fileSize);
+        base.uploadStart(logger, mid, fileSize, errors);
 
         AtomicLong uploaded = new AtomicLong(0);
         while(uploaded.get() < fileSize) {
@@ -123,9 +135,9 @@ public class SourcingServiceImpl implements SourcingService {
             logger.info("ingest {}", response);
         }
 
-        private void uploadStart(SimpleLogger logger, String mid, long fileSize) throws IOException, InterruptedException {
+        private void uploadStart(SimpleLogger logger, String mid, long fileSize, @Nullable String errors) throws IOException, InterruptedException {
 
-            final String email = userService.currentUser().map(User::getEmail).orElse(defaultEmail);
+            final String email = Optional.ofNullable(errors).orElse(userService.currentUser().map(User::getEmail).orElse(defaultEmail));
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "start");
             if (email != null) {
