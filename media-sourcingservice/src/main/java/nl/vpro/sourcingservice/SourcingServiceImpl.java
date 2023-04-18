@@ -1,7 +1,6 @@
 package nl.vpro.sourcingservice;
 
 import io.github.yskszk63.jnhttpmultipartformdatabodypublisher.MultipartFormDataBodyPublisher;
-import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
@@ -54,8 +53,7 @@ public class SourcingServiceImpl implements SourcingService {
 
 
     @Override
-    @SneakyThrows
-    public UploadResponse upload(SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream)  {
+    public UploadResponse uploadAudio(SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream) throws IOException, InterruptedException {
 
         ingest(logger, mid);
 
@@ -69,6 +67,11 @@ public class SourcingServiceImpl implements SourcingService {
         assert uploaded.get() == fileSize;
 
         return uploadFinish(logger, mid, uploaded);
+    }
+
+    @Override
+    public UploadResponse uploadVideo(SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream) throws IOException, InterruptedException {
+        throw new UnsupportedOperationException();
     }
 
     private void ingest(SimpleLogger logger, String mid) throws IOException, InterruptedException {
