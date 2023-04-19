@@ -25,6 +25,11 @@ public interface SourcingService {
         InputStream inputStream,
         @Nullable String errors) throws IOException, InterruptedException;
 
+    StatusResponse statusAudio(String mid) throws IOException, InterruptedException;
+
+    StatusResponse statusVideo(String mid) throws IOException, InterruptedException;
+
+
     /**
      * A string which can be used to show where this implementation will upload to.
      */

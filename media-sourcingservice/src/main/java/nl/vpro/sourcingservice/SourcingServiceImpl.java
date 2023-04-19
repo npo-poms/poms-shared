@@ -14,12 +14,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.domain.user.User;
 import nl.vpro.domain.user.UserService;
-import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileSizeFormatter;
 import nl.vpro.util.InputStreamChunk;
@@ -28,6 +29,11 @@ import nl.vpro.util.InputStreamChunk;
 @Log4j2
 public class SourcingServiceImpl implements SourcingService {
 
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+    static {
+        MAPPER.registerModule( new JavaTimeModule());
+
+    }
 
     final Abstract audio;
     final Abstract video;
@@ -56,7 +62,7 @@ public class SourcingServiceImpl implements SourcingService {
         InputStream inputStream,
         @Nullable String errors) throws IOException, InterruptedException {
 
-        return upload(audio, logger, mid, fileSize, inputStream, errors);
+        return upload(audio, logger, mid, mid + ".mp3", fileSize, inputStream, errors);
     }
 
 
@@ -67,8 +73,18 @@ public class SourcingServiceImpl implements SourcingService {
         final long fileSize,
         InputStream inputStream,
         @Nullable String errors) throws IOException, InterruptedException {
-        return upload(video, logger, mid, fileSize, inputStream, errors);
+        return upload(video, logger, mid,  mid + ".mp4", fileSize, inputStream, errors);
+    }
 
+
+    @Override
+    public StatusResponse statusVideo(String mid) throws IOException, InterruptedException {
+        return status(video, mid);
+    }
+
+    @Override
+    public StatusResponse statusAudio(String mid) throws IOException, InterruptedException {
+        return status(audio, mid);
     }
 
     @Override
@@ -82,9 +98,9 @@ public class SourcingServiceImpl implements SourcingService {
     }
 
 
-    public UploadResponse upload(Abstract base, SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
+    UploadResponse upload(Abstract base, SimpleLogger logger, final String mid, String filename, final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
 
-        base.ingest(logger, mid);
+        base.ingest(logger, mid, filename);
 
         base.uploadStart(logger, mid, fileSize, errors);
 
@@ -96,6 +112,10 @@ public class SourcingServiceImpl implements SourcingService {
         assert uploaded.get() == fileSize;
 
         return base.uploadFinish(logger, mid, uploaded);
+    }
+
+    StatusResponse status(Abstract base, String mid) throws IOException, InterruptedException {
+        return base.status(mid);
     }
 
     static class Abstract {
@@ -120,19 +140,34 @@ public class SourcingServiceImpl implements SourcingService {
             this.defaultEmail = defaultEmail;
         }
 
-
-        private void ingest(SimpleLogger logger, String mid) throws IOException, InterruptedException {
-            ObjectNode metaData = Jackson2Mapper.INSTANCE.createObjectNode();
+        public StatusResponse status(String mid) throws IOException, InterruptedException {
+            HttpRequest statusRequest = statusRequest(mid);
+            HttpResponse<String> ingest = client.send(statusRequest, HttpResponse.BodyHandlers.ofString());
+            if (ingest.statusCode() > 299) {
+                throw new IllegalArgumentException(statusRequest + ":" + ingest.statusCode() + ":" +  ingest.body());
+            }
+            return MAPPER.readValue(ingest.body(), StatusResponse.class);
+        }
+        private void ingest(SimpleLogger logger, String mid, String filename) throws IOException, InterruptedException {
+            ObjectNode metaData = MAPPER.createObjectNode();
             metaData.put("mid", mid);
             metaData.put("callback_url", getCallbackUrl(mid));
 
-            HttpRequest ingestRequest = ingest(HttpRequest.BodyPublishers.ofByteArray(Jackson2Mapper.INSTANCE.writeValueAsBytes(metaData)));
+            // I don't get the point of this
+            metaData.put("filename", filename);
+
+
+            // These should not be needed
+            metaData.put("broadcaster", "VPRO");
+            metaData.put("title", "should not be needed");
+
+            HttpRequest ingestRequest = ingest(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(metaData)));
             HttpResponse<byte[]> ingest = client.send(ingestRequest,
                 HttpResponse.BodyHandlers.ofByteArray());
             if (ingest.statusCode() > 299) {
                 throw new IllegalArgumentException(ingestRequest + ":" + ingest.statusCode() + ":" + new String(ingest.body()));
             }
-            IngestResponse response = Jackson2Mapper.LENIENT.readValue(ingest.body(), IngestResponse.class);
+            IngestResponse response = MAPPER.readValue(ingest.body(), IngestResponse.class);
             logger.info("ingest {}", response);
         }
 
@@ -154,7 +189,7 @@ public class SourcingServiceImpl implements SourcingService {
             if (start.statusCode() > 299) {
                 throw new IllegalArgumentException(multipart + ": " + start.statusCode() + ":" + start.body());
             }
-            JsonNode node = Jackson2Mapper.LENIENT.readTree(start.body());
+            JsonNode node = MAPPER.readTree(start.body());
             logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback_url={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, getCallbackUrl(mid).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));
         }
 
@@ -167,7 +202,7 @@ public class SourcingServiceImpl implements SourcingService {
             HttpResponse<String> transfer = client.send(
                 transferRequest, HttpResponse.BodyHandlers.ofString());
             long l = uploaded.addAndGet(chunkStream.getCount());
-            JsonNode node = Jackson2Mapper.LENIENT.readTree(transfer.body());
+            JsonNode node = MAPPER.readTree(transfer.body());
             logger.info("transfer: {} ({}) {}", node.get("status").textValue(), transfer.statusCode(), FileSizeFormatter.DEFAULT.format(l));
         }
 
@@ -177,10 +212,10 @@ public class SourcingServiceImpl implements SourcingService {
 
             HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
 
-            JsonNode node = Jackson2Mapper.LENIENT.readTree(finish.body());
+            JsonNode node = MAPPER.readTree(finish.body());
 
             logger.info("finish: {} ({}) {}", node.get("status").textValue(), finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded));
-            JsonNode bodyNode = Jackson2Mapper.getLenientInstance().readTree(finish.body());
+            JsonNode bodyNode = MAPPER.readTree(finish.body());
             return new UploadResponse(finish.statusCode(), bodyNode.get("status").textValue(), bodyNode.get("response").textValue());
         }
 
@@ -200,6 +235,12 @@ public class SourcingServiceImpl implements SourcingService {
             return request("ingest")
                 .header("Content-Type", "application/json")
                 .POST(body).build();
+        }
+
+
+        protected HttpRequest statusRequest(String mid) {
+            return request("ingest/" + mid + "/status")
+                .GET().build();
         }
 
         protected HttpRequest.Builder request(String path) {
