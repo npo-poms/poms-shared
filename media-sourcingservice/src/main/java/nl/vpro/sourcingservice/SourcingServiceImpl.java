@@ -84,7 +84,7 @@ public class SourcingServiceImpl implements SourcingService {
 
     public UploadResponse upload(Abstract base, SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
 
-        //base.ingest(logger, mid);
+        base.ingest(logger, mid);
 
         base.uploadStart(logger, mid, fileSize, errors);
 
