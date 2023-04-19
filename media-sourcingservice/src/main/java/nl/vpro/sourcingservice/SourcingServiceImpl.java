@@ -137,7 +137,11 @@ public class SourcingServiceImpl implements SourcingService {
 
         private void uploadStart(SimpleLogger logger, String mid, long fileSize, @Nullable String errors) throws IOException, InterruptedException {
 
-            final String email = Optional.ofNullable(errors).orElse(userService.currentUser().map(User::getEmail).orElse(defaultEmail));
+            final String email = Optional.ofNullable(errors)
+                .orElse(
+                    userService.currentUser().map(User::getEmail)
+                        .orElse(defaultEmail)
+                );
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "start");
             if (email != null) {
