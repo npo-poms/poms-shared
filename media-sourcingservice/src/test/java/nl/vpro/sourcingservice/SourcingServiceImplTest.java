@@ -42,7 +42,8 @@ class SourcingServiceImplTest {
             "https://test.sourcing-audio.cdn.npoaudio.nl/",
             "https://sourcing-video.cdn.npoaudio.nl/",
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
-            PROPERTIES.getProperty("sourcingservice.token"),
+            PROPERTIES.getProperty("sourcingservice.audio.token"),
+            PROPERTIES.getProperty("sourcingservice.video.token"),
             mock(UserService.class),
             100_000_000,
             "m.meeuwissen.vpro@gmail.com"
