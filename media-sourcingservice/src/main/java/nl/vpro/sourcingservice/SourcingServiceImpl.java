@@ -33,17 +33,18 @@ public class SourcingServiceImpl implements SourcingService {
     final Abstract video;
 
     public SourcingServiceImpl(
-        @Value("${sourcingservice.audioBaseUrl}") String audioBaseUrl,
-        @Value("${sourcingservice.videoBaseUrl}") String videoBaseUrl,
+        @Value("${sourcingservice.audio.baseUrl}") String audioBaseUrl,
+        @Value("${sourcingservice.video.baseUrl}") String videoBaseUrl,
         @Value("${sourcingservice.callbackBaseUrl}") String callbackBaseUrl,
-        @Value("${sourcingservice.token}") String token,
+        @Value("${sourcingservice.audio.token}") String audioToken,
+        @Value("${sourcingservice.video.token}") String videoToken,
         UserService<?> userService,
         @Value("${sourcingservice.chunkSize:10000000}") int chunkSize,
         @Value("${sourcingservice.defaultEmail:#{null}}") String defaultEmail
        ) {
-        this.audio = new Abstract(audioBaseUrl, callbackBaseUrl, token,  userService, chunkSize, defaultEmail);
+        this.audio = new Abstract(audioBaseUrl, callbackBaseUrl, audioToken,  userService, chunkSize, defaultEmail);
 
-        this.video = new Abstract(videoBaseUrl, callbackBaseUrl, token , userService, chunkSize, defaultEmail);
+        this.video = new Abstract(videoBaseUrl, callbackBaseUrl, videoToken , userService, chunkSize, defaultEmail);
     }
 
 
@@ -83,7 +84,7 @@ public class SourcingServiceImpl implements SourcingService {
 
     public UploadResponse upload(Abstract base, SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
 
-        base.ingest(logger, mid);
+        //base.ingest(logger, mid);
 
         base.uploadStart(logger, mid, fileSize, errors);
 
@@ -148,9 +149,10 @@ public class SourcingServiceImpl implements SourcingService {
                 body.add("email", email);
             }
             body.add("file_size", String.valueOf(fileSize));
-            HttpResponse<String> start = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
+            HttpRequest multipart = multipart(mid, body);
+            HttpResponse<String> start = client.send(multipart, HttpResponse.BodyHandlers.ofString());
             if (start.statusCode() > 299) {
-                throw new IllegalArgumentException(start.body());
+                throw new IllegalArgumentException(multipart + ": " + start.statusCode() + ":" + start.body());
             }
             JsonNode node = Jackson2Mapper.LENIENT.readTree(start.body());
             logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback_url={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, getCallbackUrl(mid).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));

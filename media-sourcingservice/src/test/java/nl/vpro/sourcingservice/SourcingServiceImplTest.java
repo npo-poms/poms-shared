@@ -40,7 +40,7 @@ class SourcingServiceImplTest {
 */
         impl = new SourcingServiceImpl(
             "https://test.sourcing-audio.cdn.npoaudio.nl/",
-            "https://test.sourcing-video.cdn.npoaudio.nl/",
+            "https://sourcing-video.cdn.npoaudio.nl/",
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.token"),
             mock(UserService.class),
@@ -65,7 +65,7 @@ class SourcingServiceImplTest {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "test.mp4");
 
-        impl.uploadAudio(Log4j2SimpleLogger.simple(log), "WO_VPRO_A20017042", Files.size(file), Files.newInputStream(file), null);
+        impl.uploadVideo(Log4j2SimpleLogger.simple(log), "WO_VPRO_A20017042", Files.size(file), Files.newInputStream(file), null);
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
