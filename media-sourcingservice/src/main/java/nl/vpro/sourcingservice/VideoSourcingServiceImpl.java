@@ -8,7 +8,7 @@ import nl.vpro.domain.user.UserService;
 
 
 @Log4j2
-public class VideoSourcingServiceImpl extends  AbstractSourcingServiceImpl implements AudioSourcingService {
+public class VideoSourcingServiceImpl extends  AbstractSourcingServiceImpl implements VideoSourcingService {
 
 
 
