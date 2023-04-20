@@ -52,6 +52,9 @@ public class AssemblageConfig {
     Boolean copyPredictions = null;
 
     @lombok.Builder.Default
+    Authority authority = Authority.USER;
+
+    @lombok.Builder.Default
     boolean episodeOfUpdate = true;
 
     @lombok.Builder.Default
@@ -190,6 +193,7 @@ public class AssemblageConfig {
             copyLanguageAndCountry,
             imageMetaData,
             copyPredictions,
+            authority,
             episodeOfUpdate,
             guessEpisodePosition,
             memberOfUpdate,
