@@ -226,7 +226,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SINCE) Long since,
         @QueryParam(PUBLISHEDSINCE) String publishedSince,
-        @QueryParam(ORDER) @DefaultValue(ASC) String order,
+        @QueryParam(ORDER) @DefaultValue(ASC)  Order order,
         @QueryParam(MAX) Integer max,
         @QueryParam(DELETES) Deletes deletes,
         @QueryParam(TAIL) Tail tail,
