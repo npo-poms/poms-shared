@@ -7,7 +7,6 @@ package nl.vpro.domain.api.media;
 import java.time.Instant;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.domain.api.*;
@@ -39,7 +38,7 @@ public interface MediaRepository extends MediaLoader, Redirector {
         @Nullable final Instant since,
         @Nullable final String mid,
         @Nullable final ProfileDefinition<MediaObject> currentProfile,
-        @NonNull final Order order,
+        @Nullable final Order order,
         @Nullable final Integer max,
         @Nullable Deletes deletes,
         @Nullable final Tail tail,
