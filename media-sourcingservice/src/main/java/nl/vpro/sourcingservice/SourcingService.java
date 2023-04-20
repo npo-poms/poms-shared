@@ -10,7 +10,7 @@ import nl.vpro.logging.simple.SimpleLogger;
 
 public interface SourcingService {
 
-    UploadResponse uploadAudio(
+    UploadResponse upload(
         SimpleLogger logger,
         String mid,
         long fileSize,
@@ -18,24 +18,12 @@ public interface SourcingService {
         @Nullable String errors) throws IOException, InterruptedException;
 
 
-    UploadResponse uploadVideo(
-        SimpleLogger logger,
-        String mid,
-        long fileSize,
-        InputStream inputStream,
-        @Nullable String errors) throws IOException, InterruptedException;
-
-    StatusResponse statusAudio(String mid) throws IOException, InterruptedException;
-
-    StatusResponse statusVideo(String mid) throws IOException, InterruptedException;
-
+    StatusResponse status(String mid) throws IOException, InterruptedException;
 
     /**
      * A string which can be used to show where this implementation will upload to.
      */
-    String getAudioUploadString();
-
-    String getVideoUploadString();
+    String getUploadString();
 
 
 }
