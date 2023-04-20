@@ -6,5 +6,6 @@
             http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-  <bean class="nl.vpro.sourcingservice.SourcingServiceImpl" />
+  <bean class="nl.vpro.sourcingservice.AudioSourcingServiceImpl" />
+  <bean class="nl.vpro.sourcingservice.VideoSourcingServiceImpl" />
 </beans>

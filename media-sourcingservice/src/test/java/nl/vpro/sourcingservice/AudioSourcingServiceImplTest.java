@@ -17,7 +17,7 @@ import nl.vpro.logging.simple.Log4j2SimpleLogger;
 import static org.mockito.Mockito.mock;
 
 @Log4j2
-class SourcingServiceImplTest {
+class AudioSourcingServiceImplTest {
 
     public static final Properties PROPERTIES = new Properties();
 
@@ -31,19 +31,17 @@ class SourcingServiceImplTest {
     }
 
 
-    SourcingServiceImpl impl;
+    AudioSourcingServiceImpl impl;
     {
         /*ApiClient apiClient = new ApiClient();
         impl =  new SourcingServiceImpl(apiClient);
         apiClient.setBasePath("https://test.sourcing-audio.cdn.npoaudio.nl/");
         ((HttpBearerAuth) apiClient.getAuthentication("bearerAuth")).setBearerToken(PROPERTIES.getProperty("token"));
 */
-        impl = new SourcingServiceImpl(
+        impl = new AudioSourcingServiceImpl(
             "https://test.sourcing-audio.cdn.npoaudio.nl/",
-            "https://sourcing-video.cdn.npoaudio.nl/",
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.audio.token"),
-            PROPERTIES.getProperty("sourcingservice.video.token"),
             mock(UserService.class),
             100_000_000,
             "m.meeuwissen.vpro@gmail.com"
@@ -56,26 +54,17 @@ class SourcingServiceImplTest {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
 
-        impl.uploadAudio(Log4j2SimpleLogger.simple(log), "WO_VPRO_A20017042", Files.size(file), Files.newInputStream(file), null);
+        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_A20017042", Files.size(file), Files.newInputStream(file), null);
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
-     @Test
-    @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
-    public void uploadVideo() throws IOException, InterruptedException {
-        Instant start = Instant.now();
-        Path file = Paths.get(System.getProperty("user.home") , "samples", "test.mp4");
-
-        impl.uploadVideo(Log4j2SimpleLogger.simple(log), "WO_VPRO_20057921", Files.size(file), Files.newInputStream(file), null);
-        log.info("Took {}", Duration.between(start, Instant.now()));
-    }
 
 
     @Test
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
-    public void statusVideo() throws IOException, InterruptedException {
+    public void status() throws IOException, InterruptedException {
 
-        Object status = impl.statusVideo("WO_VPRO_20057921");
+        Object status = impl.status("WO_VPRO_20057921");
         log.info("Status {}", status);
     }
 
