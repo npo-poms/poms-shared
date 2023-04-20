@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
 import nl.vpro.domain.media.*;
@@ -28,7 +30,7 @@ public interface MediaService extends MediaProvider {
         Boolean profileCheck,
         Instant since,
         String mid,
-        Order order,
+        @Nullable Order order,
         Integer max,
         boolean withSequences,
         Deletes deletes,
