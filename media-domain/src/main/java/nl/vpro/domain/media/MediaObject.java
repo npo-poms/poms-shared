@@ -2152,7 +2152,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     }
 
     protected Prediction findOrCreatePrediction(Platform platform, Embargo embargo) {
-         Prediction prediction = getPrediction(platform);
+        Prediction prediction = getPrediction(platform);
         if (prediction == null) {
             log.debug("Creating prediction object for {}: {}", platform, this);
             prediction = new Prediction(platform);
