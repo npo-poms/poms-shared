@@ -510,7 +510,7 @@ public interface MediaBackendRestService {
      * @since 7.5
      */
     @POST
-    @Path("upload/{mid}")
+    @Path("upload/{audioMid}")
     @Consumes({"audio/*"})
     @Produces(APPLICATION_XML)
     UploadResponse uploadAudio(
