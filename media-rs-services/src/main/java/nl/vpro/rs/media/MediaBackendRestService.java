@@ -115,7 +115,8 @@ public interface MediaBackendRestService {
     @Path("/exists/{mid:.*}")
     @Produces(MediaType.TEXT_PLAIN)
     boolean exists(
-        @Encoded @PathParam(MID) String mid);
+        @Encoded @PathParam(MID) String mid,
+        @Context HttpServletResponse response);
 
     @DELETE
     @Path("{entity:(media|program|group|segment)}/{id:.*}")
