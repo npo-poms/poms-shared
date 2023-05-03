@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
@@ -100,7 +99,7 @@ public interface MediaBackendRestService {
         MediaForm form,
         @QueryParam("writable") @DefaultValue("false") boolean writable,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
-    ) throws IOException;
+    );
 
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}")
@@ -109,7 +108,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
-    ) throws IOException;
+    );
 
     @GET
     @Path("/exists/{mid:.*}")
@@ -256,7 +255,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(DELETES) Boolean  deleted
-    ) throws IOException;
+    );
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id:.*}/memberOf")
@@ -423,7 +422,7 @@ public interface MediaBackendRestService {
     StreamingStatus getStreamingstatus(
         @Encoded @PathParam(MID) String mid,
         @Context HttpServletRequest request
-    ) throws IOException, URISyntaxException;
+    );
 
     @GET
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions")
@@ -431,7 +430,7 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
-    ) throws IOException;
+    );
 
     @GET
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions/{platform}")
@@ -440,7 +439,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @PathParam("platform") final Platform platform,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
-    ) throws IOException;
+    );
 
     @POST
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions")
