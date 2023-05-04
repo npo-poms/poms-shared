@@ -35,42 +35,40 @@ public class MockDoAsTransactionService extends MockTransactionService implement
     @SneakyThrows
     public <T> T executeInReadonlyTransaction(@NonNull Trusted user, @NonNull Callable<T> callable) {
         return callable.call();
-
     }
 
     @Override
     public <T, S> T executeInReadonlyTransaction(@NonNull Trusted user, S argument, @NonNull Function<S, T> function) {
         return function.apply(argument);
-
     }
 
     @Override
     public void executeInReadonlyTransaction(@NonNull Trusted user, @NonNull Runnable runnable) {
         runnable.run();
-
     }
 
     @Override
     public <T> void executeInReadonlyTransaction(@NonNull Trusted user, T argument, @NonNull Consumer<T> consumer) {
         consumer.accept(argument);
-
     }
 
     @Override
     public <T> T getInNewTransaction(@NonNull Trusted user, @NonNull Supplier<T> supplier) {
         return supplier.get();
+    }
 
+    @Override
+    public <T> T getInTransaction(@NonNull Trusted user, @NonNull Supplier<T> supplier) {
+        return supplier.get();
     }
 
     @Override
     public <T> T getInReadonlyTransaction(@NonNull Trusted user, @NonNull Supplier<T> supplier) {
         return supplier.get();
-
     }
 
     @Override
     public <T> void executeInNewTransaction(@NonNull Trusted user, T argument, @NonNull Consumer<T> consumer) {
         consumer.accept(argument);
-
     }
 }

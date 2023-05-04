@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Please note that transactions are only rolled back in case of a runtime exception
- *
+ * <p>
  * Also note that in new transactions the currently existing hibernate filters will be gone.
  *
  * @author Danny Sedney
@@ -27,6 +27,8 @@ public interface TransactionService {
     <T> T executeInNewTransaction(@NonNull Callable<T> callable) throws Exception;
 
     <T> T getInNewTransaction(@NonNull Supplier<T> supplier);
+
+    <T> T getInTransaction(@NonNull Supplier<T> supplier);
 
     void executeInNewTransaction(@NonNull Runnable runnable);
 
@@ -47,6 +49,6 @@ public interface TransactionService {
 
     @Transactional(propagation = Propagation.NEVER)
     default void ensureNoTransaction() {
-        
+
     }
 }
