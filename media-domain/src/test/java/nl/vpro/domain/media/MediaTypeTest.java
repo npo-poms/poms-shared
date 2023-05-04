@@ -83,6 +83,7 @@ public class MediaTypeTest {
         SimpleLogger slog = StringBuilderSimpleLogger.builder().level(Level.DEBUG).build().chain(new Slf4jSimpleLogger(log).withThreshold(Level.INFO));
         for (MediaType type : MediaType.values()) {
             slog.debug("\n\n" + type.name() + " " + type);
+            slog.debug("prefix {}", type.getUrnPrefix());
             slog.debug("{}", asList(type.allowedEpisodeOfTypes()));
             slog.debug("{}", asList(type.allowedEpisodeTypes()));
             slog.debug("{}", asList(type.allowedMemberOfTypes()));
@@ -118,6 +119,9 @@ public class MediaTypeTest {
             }
             if (type.getSubType() != null) {
                 assertThat(type.getSubType().getMediaType()).withFailMessage("" + type).isNotNull();
+            }
+            if (type != MEDIA) {
+                assertThat(type.getUrnPrefix()).isNotNull();
             }
         }
     }
