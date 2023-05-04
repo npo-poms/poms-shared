@@ -83,9 +83,9 @@ public interface MediaBackendRestService {
 
     String PUBLISH_DESCRIPTION = "if you set this to true, then the required change will be published immediately";
 
-
     String AVOID_PARSING_DESCRIPTION = "if you request the subtitles in the same format as they were originally supplied, they will be returned untouched as much as possible";
 
+    String LANGUAGE_DESCRIPTION = "Language code (ISO 639), possible postfix with region and variants. ";
 
     // related to transcoding
     String ENCRYPTION = "encryption";
