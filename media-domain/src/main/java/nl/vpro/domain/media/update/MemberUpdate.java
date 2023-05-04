@@ -23,7 +23,7 @@ public class MemberUpdate {
     public MemberUpdate() {
     }
 
-    public MemberUpdate(Integer position, MediaUpdate mediaUpdate) {
+    public MemberUpdate(Integer position, MediaUpdate<?> mediaUpdate) {
         this.position = position;
         this.mediaUpdate = mediaUpdate;
     }
