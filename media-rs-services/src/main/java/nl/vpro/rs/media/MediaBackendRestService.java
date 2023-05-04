@@ -70,7 +70,14 @@ public interface MediaBackendRestService {
 
     String AVOID_PARSING = "avoidParsing";
 
+
     // some descriptions for common query and path parameters
+    String MID_DESCRIPTION = "The 'mediaobject id'. For program sometimes referred to as 'prid' for series/seasons as 'srid'";
+
+
+    // some descriptions for common query and path parameters
+    String ID_DESCRIPTION = "The 'mediaobject id'. May be a MID, an database id, or a crid";
+
     String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitly followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated duration parsing, against the XSD. If this is false, your input will still be validated, but using so-called java bean validation only. This will give no line and column number information, but is otherwise more complete.";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously. These errors may relate to authorization, or to database related problems.";
