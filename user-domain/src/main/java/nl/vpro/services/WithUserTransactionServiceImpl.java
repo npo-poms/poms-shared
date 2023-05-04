@@ -34,8 +34,14 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     @Override
     public <T> T getInNewTransaction(@NonNull  Supplier<T> supplier) {
         return doAsTransactionService.getInNewTransaction(user, supplier);
-
     }
+
+
+    @Override
+    public <T> T getInTransaction(@NonNull  Supplier<T> supplier) {
+        return doAsTransactionService.getInTransaction(user, supplier);
+    }
+
 
     @Override
     public void executeInNewTransaction(@NonNull  Runnable runnable) {
