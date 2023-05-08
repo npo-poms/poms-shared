@@ -59,9 +59,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
    @Override
-   public UploadResponse upload(SimpleLogger logger, final String mid, final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
+   public UploadResponse upload(
+       SimpleLogger logger,
+       final String mid,
+       Restrictions restrictions,
+       final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
 
-        ingest(logger, mid, getFileName(mid));
+        ingest(logger, mid, getFileName(mid), restrictions);
 
         uploadStart(logger, mid, fileSize, errors);
 
@@ -85,7 +89,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
         return MAPPER.readValue(ingest.body(), StatusResponse.class);
     }
-    private void ingest(SimpleLogger logger, String mid, String filename) throws IOException, InterruptedException {
+    private void ingest(SimpleLogger logger, String mid, String filename, Restrictions restrictions) throws IOException, InterruptedException {
         ObjectNode metaData = MAPPER.createObjectNode();
         metaData.put("mid", mid);
         metaData.put("callback_url", getCallbackUrl(mid));
@@ -93,6 +97,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         // I don't get the point of this
         metaData.put("filename", filename);
 
+        if (restrictions.getGeoRestriction() != null) {
+            metaData.put("geo_restriction", restrictions.getGeoRestriction().getRegion().name());
+        }
 
         // These should not be needed
         metaData.put("broadcaster", "VPRO");
