@@ -11,6 +11,8 @@ import java.util.Properties;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import nl.vpro.domain.media.GeoRestriction;
+import nl.vpro.domain.media.Region;
 import nl.vpro.domain.user.UserService;
 import nl.vpro.logging.simple.Log4j2SimpleLogger;
 
@@ -54,7 +56,9 @@ class AudioSourcingServiceImplTest {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
 
-        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_A20017042", Files.size(file), Files.newInputStream(file), null);
+        Restrictions restrictions = new Restrictions();
+        restrictions.setGeoRestriction(GeoRestriction.builder().region(Region.NL).build());
+        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_A20017042", restrictions, Files.size(file), Files.newInputStream(file), null);
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 

@@ -48,13 +48,13 @@ class VideoSourcingServiceImplTest {
         );
     }
 
-     @Test
+    @Test
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void uploadVideo() throws IOException, InterruptedException {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "test.mp4");
 
-        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_20057921", Files.size(file), Files.newInputStream(file), null);
+        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_20057921", null, Files.size(file), Files.newInputStream(file), null);
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
