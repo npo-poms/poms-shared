@@ -1,10 +1,14 @@
 package nl.vpro.sourcingservice;
 
+import lombok.Data;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import nl.vpro.domain.media.AgeRating;
+import nl.vpro.domain.media.GeoRestriction;
 import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.SimpleLogger;
 
@@ -13,6 +17,7 @@ public interface SourcingService {
     UploadResponse upload(
         SimpleLogger logger,
         String mid,
+        Restrictions restrictions,
         long fileSize,
         InputStream inputStream,
         @Nullable String errors) throws IOException, InterruptedException;
@@ -25,5 +30,9 @@ public interface SourcingService {
      */
     String getUploadString();
 
-
+    @Data
+    class Restrictions {
+        GeoRestriction geoRestriction;
+        AgeRating ageRating;
+    }
 }
