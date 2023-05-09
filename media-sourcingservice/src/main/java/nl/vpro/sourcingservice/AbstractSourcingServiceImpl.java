@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.domain.user.User;
 import nl.vpro.domain.user.UserService;
@@ -97,8 +98,23 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         // I don't get the point of this
         metaData.put("filename", filename);
 
-        if (restrictions.getGeoRestriction() != null) {
-            metaData.put("geo_restriction", restrictions.getGeoRestriction().getRegion().name());
+        if (restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().getPlatform() == Platform.INTERNETVOD) {
+            GeoRestriction geoRestriction = restrictions.getGeoRestriction();
+            if (geoRestriction.isUnderEmbargo()) {
+                if (geoRestriction.willBePublished()) {
+                    logger.warn("Specified geo restriction {} is under embargo, but will not be. This is not yet supported", geoRestriction);
+                } else {
+                    logger.info("Specified geo restriction {} is under embargo", geoRestriction);
+                }
+            } else {
+                if (geoRestriction.willBeUnderEmbargo()) {
+                    logger.warn("Specified geo restriction {} will be under embargo. This is not yet supported", geoRestriction);
+                }
+                metaData.put("geo_restriction", restrictions.getGeoRestriction().getRegion().name());
+            }
+        }
+        if (restrictions.getAgeRating() != null && restrictions.getAgeRating() != AgeRating.ALL) {
+            logger.info("Specified age rating {} is not supported for audio, and will be ignored", restrictions.getAgeRating());
         }
 
         // These should not be needed

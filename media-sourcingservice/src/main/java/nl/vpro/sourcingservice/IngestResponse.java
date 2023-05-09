@@ -12,7 +12,9 @@ public class IngestResponse extends AbstractResponse {
     final Response response;
 
     @JsonCreator
-    public IngestResponse(@JsonProperty("status") String status, @JsonProperty("response") Response response) {
+    public IngestResponse(
+        @JsonProperty("status") String status,
+        @JsonProperty("response") Response response) {
         super(status);
         this.response = response;
     }
@@ -22,6 +24,5 @@ public class IngestResponse extends AbstractResponse {
         private String media_id;
         private String original_filename;
         private String filename;
-
     }
 }
