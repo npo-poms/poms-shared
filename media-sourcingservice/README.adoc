@@ -1,6 +1,9 @@
 
 = NPO Audio Sourcing Service integration
 
+See https://test.sourcing-audio.cdn.npoaudio.nl/api/documentation#/
+
+
 == Issues when using openapi generator
 
 - operationId are ids  UUID
