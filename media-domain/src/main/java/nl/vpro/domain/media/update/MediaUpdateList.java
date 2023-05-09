@@ -88,7 +88,6 @@ public class MediaUpdateList<T> implements Iterable<T>, IntegerVersionSpecific {
         this.list = l == null ? null : Collections.unmodifiableList(l);
     }
 
-
     //@Override
     public int size() {
         return list == null ? 0 : list.size();
@@ -105,13 +104,13 @@ public class MediaUpdateList<T> implements Iterable<T>, IntegerVersionSpecific {
 
     @Override
     public String toString() {
-        return "" + list;
+        return String.valueOf(list);
     }
 
     @NonNull
     @Override
     public Iterator<T> iterator() {
-        return list == null ? Collections.<T>emptyList().iterator() : list.iterator();
+        return list == null ? Collections.emptyIterator() : list.iterator();
     }
 
     public Stream<T> stream() {

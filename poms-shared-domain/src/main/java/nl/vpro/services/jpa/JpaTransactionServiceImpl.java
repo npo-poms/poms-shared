@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 
 import nl.vpro.services.TransactionService;
 
-import static javax.transaction.Transactional.TxType.NEVER;
-import static javax.transaction.Transactional.TxType.REQUIRES_NEW;
+import static javax.transaction.Transactional.TxType.*;
 
 @Service("jpaTransactionService")
 public class JpaTransactionServiceImpl implements TransactionService {
@@ -26,7 +25,12 @@ public class JpaTransactionServiceImpl implements TransactionService {
     @Transactional(value = REQUIRES_NEW, rollbackOn = {Exception.class})
     public <T> T getInNewTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
+    }
 
+    @Override
+    @Transactional(value = REQUIRED, rollbackOn = {Exception.class})
+    public <T> T getInTransaction(@NonNull Supplier<T> supplier) {
+        return supplier.get();
     }
 
     @Override
@@ -79,11 +83,11 @@ public class JpaTransactionServiceImpl implements TransactionService {
     public <T> void executeInReadonlyTransaction(T argument, @NonNull Consumer<T> consumer) {
         consumer.accept(argument);
     }
-    
+
     @Override
     @Transactional(NEVER)
     public void ensureNoTransaction() {
 
     }
-        
+
 }

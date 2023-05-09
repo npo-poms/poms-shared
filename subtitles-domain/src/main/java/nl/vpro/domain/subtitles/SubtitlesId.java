@@ -47,6 +47,10 @@ public class SubtitlesId implements Serializable, Comparable<SubtitlesId> {
         return new SubtitlesId(mid, DUTCH, SubtitlesType.CAPTION);
     }
 
+    public static SubtitlesId of(String mid, Locale language, SubtitlesType type) {
+        return new SubtitlesId(mid, language, type);
+    }
+
     public SubtitlesId()  {
 
     }

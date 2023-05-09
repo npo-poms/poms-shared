@@ -18,8 +18,13 @@ public class MockTransactionService implements TransactionService {
     @Override
     public <T> T getInNewTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
-
     }
+
+    @Override
+    public <T> T getInTransaction(@NonNull Supplier<T> supplier) {
+        return supplier.get();
+    }
+
 
     @Override
     public void executeInNewTransaction(@NonNull Runnable runnable) {
@@ -34,7 +39,6 @@ public class MockTransactionService implements TransactionService {
     @Override
     public <T> void executeInNewTransaction(T argument, @NonNull Consumer<T> consumer) {
         consumer.accept(argument);
-
     }
 
 
@@ -60,7 +64,6 @@ public class MockTransactionService implements TransactionService {
     public <T, S> T executeInReadonlyTransaction(S argument, @NonNull Function<S, T> function) {
         readonly();
         return function.apply(argument);
-
     }
 
     @Override
@@ -70,6 +73,5 @@ public class MockTransactionService implements TransactionService {
     }
 
     protected void readonly() {
-
     }
 }

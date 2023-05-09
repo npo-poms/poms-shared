@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
@@ -71,7 +70,14 @@ public interface MediaBackendRestService {
 
     String AVOID_PARSING = "avoidParsing";
 
+
     // some descriptions for common query and path parameters
+    String MID_DESCRIPTION = "The 'mediaobject id'. For program sometimes referred to as 'prid' for series/seasons as 'srid'";
+
+
+    // some descriptions for common query and path parameters
+    String ID_DESCRIPTION = "The 'mediaobject id'. May be a MID, an database id, or a crid";
+
     String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitly followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated duration parsing, against the XSD. If this is false, your input will still be validated, but using so-called java bean validation only. This will give no line and column number information, but is otherwise more complete.";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously. These errors may relate to authorization, or to database related problems.";
@@ -84,9 +90,9 @@ public interface MediaBackendRestService {
 
     String PUBLISH_DESCRIPTION = "if you set this to true, then the required change will be published immediately";
 
-
     String AVOID_PARSING_DESCRIPTION = "if you request the subtitles in the same format as they were originally supplied, they will be returned untouched as much as possible";
 
+    String LANGUAGE_DESCRIPTION = "Language code (ISO 639), possible postfix with region and variants. ";
 
     // related to transcoding
     String ENCRYPTION = "encryption";
@@ -100,7 +106,7 @@ public interface MediaBackendRestService {
         MediaForm form,
         @QueryParam("writable") @DefaultValue("false") boolean writable,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
-    ) throws IOException;
+    );
 
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}")
@@ -109,7 +115,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
-    ) throws IOException;
+    );
 
     @GET
     @Path("/exists/{mid:.*}")
@@ -256,7 +262,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(DELETES) Boolean  deleted
-    ) throws IOException;
+    );
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id:.*}/memberOf")
@@ -423,7 +429,7 @@ public interface MediaBackendRestService {
     StreamingStatus getStreamingstatus(
         @Encoded @PathParam(MID) String mid,
         @Context HttpServletRequest request
-    ) throws IOException, URISyntaxException;
+    );
 
     @GET
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions")
@@ -431,7 +437,7 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
-    ) throws IOException;
+    );
 
     @GET
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions/{platform}")
@@ -440,7 +446,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @PathParam("platform") final Platform platform,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
-    ) throws IOException;
+    );
 
     @POST
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions")

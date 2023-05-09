@@ -36,11 +36,14 @@ public enum MediaType implements Displayable {
             return "Alle media";
         }
 
-
         @Override
         public SubMediaType getSubType() {
             return null;
+        }
 
+        @Override
+        public String getUrnPrefix() {
+            return null;
         }
 
         @Override
@@ -59,12 +62,12 @@ public enum MediaType implements Displayable {
 
     },
 
-     /**
+    /**
      * The abstract type denoting every type of a {@link Program}
      */
     PROGRAM(Program.class) {
         @Override
-       public String getDisplayName() {
+        public String getDisplayName() {
             return "Programma";
         }
 
@@ -72,8 +75,10 @@ public enum MediaType implements Displayable {
         public ProgramType getSubType() {
             return null;
         }
-
-
+        @Override
+        public String getUrnPrefix() {
+            return ProgramType.URN_PREFIX;
+        }
         @Override
         public List<SubMediaType> getSubTypes() {
             return Arrays.asList(ProgramType.values());
@@ -179,15 +184,17 @@ public enum MediaType implements Displayable {
 
     GROUP(Group.class) {
         @Override
-       public String getDisplayName() {
+        public String getDisplayName() {
             return "Groep";
         }
-
-
 
         @Override
         public GroupType getSubType() {
             return null;
+        }
+        @Override
+        public String getUrnPrefix() {
+            return GroupType.URN_PREFIX;
         }
 
         @Override
@@ -309,7 +316,7 @@ public enum MediaType implements Displayable {
     },
     SEGMENT(Segment.class) {
         @Override
-       public String getDisplayName() {
+        public String getDisplayName() {
             return "Segment";
         }
 
@@ -317,8 +324,8 @@ public enum MediaType implements Displayable {
         @Override
         public SegmentType getSubType() {
             return SegmentType.SEGMENT;
-
         }
+
     },
 /*
     COLLECTION {
@@ -433,7 +440,11 @@ public enum MediaType implements Displayable {
         @Override
         public SegmentType getSubType() {
             return null;
+        }
 
+        @Override
+        public String getUrnPrefix() {
+            return SegmentType.URN_PREFIX;
         }
 
         @Override
@@ -670,12 +681,21 @@ public enum MediaType implements Displayable {
         return MediaType.MEDIA;
     }
 
+
+
     /**
      * @deprecated
      */
     @Deprecated
     public MediaObject createInstance() {
         return getMediaInstance();
+    }
+
+    /**
+     * @since 7.6
+     */
+    public String getUrnPrefix() {
+        return getSubType().getUrnPrefix();
     }
 
     /**

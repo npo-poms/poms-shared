@@ -26,7 +26,12 @@ public class TransactionServiceImpl implements TransactionService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {Exception.class})
     public <T> T getInNewTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
+    }
 
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public <T> T getInTransaction(@NonNull Supplier<T> supplier) {
+        return supplier.get();
     }
 
     @Override
