@@ -16,6 +16,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+
+/**
+ * Indicates for which geographical {@link Region}, something must be available. This extends from {@link Restriction},
+ * so this restriction may be under {@link nl.vpro.domain.Embargo embargo}.
+ */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)

@@ -9,12 +9,13 @@ import nl.vpro.util.Ranges;
 import static nl.vpro.domain.Changeables.instant;
 
 /**
- * An object having or defining a publication embargo, meaning that it has publish start and stop instants.
+ * An object having or defining a publication embargo, meaning that it has {@link #getPublishStartInstant()  publish} start and {@link #getPublishStopInstant() stop} {@link Instant instants}.
  * <p>
  * Utilities are provided in {@link Embargos}.
  *
  * @author Michiel Meeuwissen
  * @since 5.3
+ * @see MutableEmbargo
  */
 public interface Embargo {
 

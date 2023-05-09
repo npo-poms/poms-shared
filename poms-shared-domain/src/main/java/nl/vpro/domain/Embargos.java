@@ -9,7 +9,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import com.google.common.collect.Range;
 
 /**
- * Utilities related to {@link MutableEmbargo}
+ * Utilities related to {@link Embargo} and {@link MutableEmbargo}
  * @author Michiel Meeuwissen
  * @since 5.3
  */
@@ -83,9 +83,9 @@ public class Embargos {
 
     /**
      * Takes from both the start and stop of the two embargo's the least restrictive one and copies them to the second.
-     *
+     * <p>
      * Note that if the two embargos were not connected there will be times  (in between the two) which will be in de new embargo but, were in none.
-     *
+     * <p>
      * If they were connected, the result is the union.
      */
      public static ChangeReport copyIfLessRestricted(Embargo from, MutableEmbargo<?> to) {
@@ -109,9 +109,9 @@ public class Embargos {
 
      /**
      * Takes from both the start and stop of the two embargo's the least restrictive one and copies them to the second.
-     *
+     * <p>
      * Note that if the two embargos were not connected there will be times  (in between the two) which will be in de new embargo but, were in none.
-     *
+     * <p>
      * If they were connected, the result is the union.
      */
      public static ChangeReport copyIfLessRestrictedOrTargetUnset(Embargo from, MutableEmbargo<?> to) {

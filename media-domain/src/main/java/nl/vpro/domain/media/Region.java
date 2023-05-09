@@ -42,7 +42,7 @@ public enum Region implements Displayable {
      * @deprecated Not supported by VMV
      */
     @Deprecated
-    @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not support by the NPO player)")
+    @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not supported by the NPO player)")
     BENELUX("Benelux"),
 
     /**
@@ -78,10 +78,11 @@ public enum Region implements Displayable {
         if (StringUtils.isEmpty(v)) {
             return null;
         }
-        if (v.toUpperCase().equals("EUROPA")) {
+        if (v.equalsIgnoreCase("EUROPA")) {
             return EUROPE;
         }
         return valueOf(v);
 
      }
+
 }
