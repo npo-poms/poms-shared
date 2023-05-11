@@ -55,6 +55,8 @@ public interface MediaBackendRestService {
     String ERRORS = "errors";
     String ID     = "id";
     String MID = "mid";
+
+
     String MAX = "max";
     String OFFSET = "offset";
     String ORDER = "order";
@@ -71,7 +73,19 @@ public interface MediaBackendRestService {
 
     String AVOID_PARSING = "avoidParsing";
 
+
+
+    // related to transcoding, and uploading.
+    String ENCRYPTION = "encryption";
+    String PRIORITY   = "priority";
+    String LOG        = "log";
+    String FILE_NAME = "fileName";
+
+
     // some descriptions for common query and path parameters
+    String MID_DESCRIPTION = "The 'mediaobject id'. For program sometimes referred to as 'prid' for series/seasons as 'srid'";
+    String ID_DESCRIPTION = "The 'mediaobject id'. May be a MID, an database id, or a crid";
+
     String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitly followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated duration parsing, against the XSD. If this is false, your input will still be validated, but using so-called java bean validation only. This will give no line and column number information, but is otherwise more complete.";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously. These errors may relate to authorization, or to database related problems.";
@@ -84,15 +98,13 @@ public interface MediaBackendRestService {
 
     String PUBLISH_DESCRIPTION = "if you set this to true, then the required change will be published immediately";
 
-
     String AVOID_PARSING_DESCRIPTION = "if you request the subtitles in the same format as they were originally supplied, they will be returned untouched as much as possible";
 
+    String LANGUAGE_DESCRIPTION = "Language code (ISO 639), possible postfix with region and variants. ";
 
-    // related to transcoding
-    String ENCRYPTION = "encryption";
-    String PRIORITY   = "priority";
-    String LOG        = "log";
-    String FILE_NAME = "fileName";
+    String LOG_DESCRIPTION = "Some calls that could need some time to complete (e.g. because uploading large files) have this query parameter. If set to true, the server may stream some logging back to you during the process";
+
+
 
     @POST
     @Path("find")
