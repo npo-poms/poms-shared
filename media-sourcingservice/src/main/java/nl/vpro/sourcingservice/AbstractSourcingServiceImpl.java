@@ -32,7 +32,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     static {
         MAPPER.registerModule( new JavaTimeModule());
-
     }
 
     private final HttpClient client = HttpClient.newHttpClient();
