@@ -54,32 +54,32 @@ public class JpaTransactionServiceImpl implements TransactionService {
 
 
     @Override
-    @Transactional(REQUIRES_NEW) // READONLY?
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public <T> T executeInReadonlyTransaction(@NonNull Callable<T> callable) throws Exception {
         return callable.call();
     }
 
     @Override
-    @Transactional(REQUIRES_NEW) // READONLY
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
     }
 
     @Override
-    @Transactional(REQUIRES_NEW) // READONLY
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public void executeInReadonlyTransaction(@NonNull Runnable runnable) {
         runnable.run();
     }
 
     @Override
-    @Transactional(REQUIRES_NEW) // READONLY
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public <T, S> T executeInReadonlyTransaction(S argument, @NonNull Function<S, T> function) {
         return function.apply(argument);
 
     }
 
     @Override
-    @Transactional(REQUIRES_NEW) // READONLY
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public <T> void executeInReadonlyTransaction(T argument, @NonNull Consumer<T> consumer) {
         consumer.accept(argument);
     }
