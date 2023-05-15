@@ -64,7 +64,8 @@ public enum AgeRating implements Displayable, XmlValued {
         }
         @Override
         public boolean display() {
-            return false;
+            // Related to MSE-5459 ?
+            return "true".equals(System.getProperty("nl.vpro.domain.media.AgeRating.NOT_YET_RATED"));
         }
     };
 
