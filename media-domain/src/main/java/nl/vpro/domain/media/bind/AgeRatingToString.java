@@ -27,11 +27,10 @@ public class AgeRatingToString {
 
         @Override
         public void serialize(AgeRating value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-            String text = value.toString();
-            if (text.startsWith("_")) {
-                jgen.writeString(text.substring(1));
+            if (value == AgeRating.NOT_YET_RATED){
+                jgen.writeNull();
             } else {
-                jgen.writeString(text);
+                jgen.writeString(value.getXmlValue());
             }
         }
     }
