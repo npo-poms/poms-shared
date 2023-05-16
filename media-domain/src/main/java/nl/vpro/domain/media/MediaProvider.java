@@ -7,7 +7,7 @@ package nl.vpro.domain.media;
 public interface  MediaProvider {
 
     /**
-     *
+     * Defaulting version of {@link #findByMid(boolean, String)} with first argument {@code true}
      */
     default <T extends MediaObject> T  findByMid(String mid) {
         return findByMid(true, mid);

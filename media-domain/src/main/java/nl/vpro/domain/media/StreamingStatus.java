@@ -173,8 +173,8 @@ public interface StreamingStatus extends Serializable, Displayable {
     }
 
     /**
-     * See <a href="http://wiki.publiekeomroep.nl/display/poms/Locations+and+predictions#Locationsandpredictions-Locations,streamingplatformandpredictions">wiki</a>
-     *
+     * See <a href="https://wiki.vpro.nl/display/poms/Locations+and+predictions#Locationsandpredictions-Locations,streamingplatformandpredictions">wiki</a>
+     * <p>
      * Given a prediction shows what kind of locations must be created by the authority location service.
      *
      * @return A list of {@link Encryption}s.

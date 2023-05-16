@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 import nl.vpro.util.TimeUtils;
 
 /**
- * See http://wiki.publiekeomroep.nl/display/npoplayer/Web+player+documentatie
+ * See https://wiki.vpro.nl/display/npoplayer/Web+player+documentatie
  * @author r.jansen
  * @since 5.10
  */
