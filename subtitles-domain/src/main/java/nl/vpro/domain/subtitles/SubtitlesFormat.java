@@ -14,6 +14,7 @@ import nl.vpro.util.ISO6937CharsetProvider;
 
 
 /**
+ * The recognized (by POMS) subtitles formats.
  * @author Michiel Meeuwissen
  * @since 4.7
  */
@@ -21,6 +22,9 @@ import nl.vpro.util.ISO6937CharsetProvider;
 @XmlType(name = "subtitlesFormatEnum")
 public enum SubtitlesFormat {
 
+    /**
+     * <a href="https://www.w3.org/TR/webvtt1/">WEBVTT</a>
+     */
     WEBVTT("vtt", Constants.VTT, StandardCharsets.UTF_8),
     TT888("txt", Constants.TT888, ISO6937CharsetProvider.ISO6937),
     EBU("stl", Constants.EBU, null),
