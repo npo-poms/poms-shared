@@ -223,7 +223,7 @@ import static nl.vpro.domain.media.MediaObject.*;
 @Filter(name = "typeFilter", condition = "(0 < (select count(*) from program p where p.id = id and p.type in (:types)))"
     + " or (0 < (select count(*) from group_table g where g.id = id and g.type in (:types)))"
     + " or (:segments and 0 < (select count(*) from segment s where s.id = id))")
-@Filter(name = "organizationFilter", condition = "0 < ("
+@Filter(name = ORGANIZATION_FILTER, condition = "0 < ("
     + "(select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))"
     + " + "
     + "(select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:organizations))"
@@ -254,6 +254,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     public static final String INVERSE_PUBLICATION_FILTER = "inversePublicationFilter";
     public static final String EMBARGO_FILTER = "embargoFilter";
     public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
+    public static final String ORGANIZATION_FILTER = "organizationFilter";
 
     private static final long serialVersionUID = -9095662256792069374L;
 
