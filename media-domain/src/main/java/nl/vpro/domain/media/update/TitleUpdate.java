@@ -16,6 +16,8 @@ import nl.vpro.validation.NoHtml;
 
 /**
  * A title of a {@link MediaUpdate}. Like a non {@link MutableOwnable} {@link Title}
+ * @see nl.vpro.domain.media.update
+ * @see Title
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "titleUpdateType",

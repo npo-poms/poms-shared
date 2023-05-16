@@ -28,6 +28,10 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.xml.bind.*;
 
+/**
+ * @see nl.vpro.domain.media.update
+ * @see ScheduleEvent
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventUpdateType",
     propOrder = {

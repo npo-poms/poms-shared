@@ -12,6 +12,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import nl.vpro.domain.media.Topic;
 
+/**
+ * @see nl.vpro.domain.media.update
+ * @see Topic
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "topicUpdateType")
 @XmlRootElement(name = "topic")

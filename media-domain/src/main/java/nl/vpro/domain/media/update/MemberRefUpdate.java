@@ -15,6 +15,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import nl.vpro.domain.media.MemberRef;
 import nl.vpro.domain.media.support.OwnerType;
 
+/**
+ * @see nl.vpro.domain.media.update
+ * @see MemberRef
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberRefUpdateType")
 @XmlRootElement(name = "memberRef")

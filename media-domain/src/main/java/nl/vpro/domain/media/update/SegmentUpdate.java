@@ -29,6 +29,10 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+/**
+ * @see nl.vpro.domain.media.update
+ * @see nl.vpro.domain.media.Segment
+ */
 @XmlRootElement(name = "segment")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "segmentUpdateType", propOrder = {

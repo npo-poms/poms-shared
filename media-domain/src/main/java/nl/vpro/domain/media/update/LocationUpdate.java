@@ -25,6 +25,11 @@ import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
+
+/**
+ * @see nl.vpro.domain.media.update
+ * @see Location
+ */
 @XmlRootElement(name = "location")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "locationUpdateType", propOrder = {

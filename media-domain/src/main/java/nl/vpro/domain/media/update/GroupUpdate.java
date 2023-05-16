@@ -10,6 +10,9 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.util.IntegerVersion;
 
+/**
+ * @see Group
+ */
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "groupUpdateType",

@@ -42,8 +42,11 @@ import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
-
-
+/**
+ * An 'update' version of {@link Image}.
+ * @see nl.vpro.domain.media.update
+ * @see Image
+ */
 
 @XmlRootElement(name = "image")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -61,7 +64,6 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "image",
     "crids"
 })
-
 @Slf4j
 @Getter
 public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata<ImageUpdate> {
@@ -101,9 +103,11 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @XmlElement(required = true)
     @NotNull(message = "provide title for imageUpdate")
     @Size.List({@Size(max = 255), @Size(min = 1)})
+    @Setter
     private String title;
 
     @XmlElement(required = false)
+    @Setter
     private String description;
 
     @XmlElement
@@ -116,15 +120,17 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @Setter
     private Integer width;
 
-
     @NoHtml
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Setter
+
     private String credits;
 
     @URI(mustHaveScheme = true, minHostParts = 2, groups = {PomsValidatorGroup.class})
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Setter
     private String source;
 
     @XmlElement
@@ -132,15 +138,18 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Setter
     private String sourceName;
 
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
     @Valid
+    @Setter
     private License license;
 
     @ReleaseDate()
     @XmlElement
+    @Setter
     private String date;
 
     @Temporal(TemporalType.TIME)
@@ -177,7 +186,6 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @XmlTransient
     private Instant creationDate;
 
-
     public ImageUpdate() {
     }
 
@@ -203,42 +211,6 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
             return (String) image;
         }
         return null;
-
-    }
-
-    @Override
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    @Override
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
-
-    @Override
-    public void setLicense(License license) {
-        this.license = license;
-    }
-
-    @Override
-    public void setCredits(@NoHtml String credits) {
-        this.credits = credits;
-    }
-
-    @Override
-    public void setDate(String date) {
-        this.date = date;
     }
 
     @Override
@@ -355,7 +327,6 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         return result;
     }
 
-
     /**
      *
      * @param metadata Incoming metadata from the image server
@@ -368,12 +339,9 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         return result;
     }
 
-
-
     public Long getId() {
         return Image.idFromUrn(getUrn());
     }
-
 
     public void setId(Long id) {
         urn = id == null ? null : Image.BASE_URN + id;
@@ -397,7 +365,6 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.publishStopInstant = publishStop;
         return this;
     }
-
     /**
      * Sets the image as an {@link ImageData} object. I.e. the actual blob
      */
@@ -405,14 +372,12 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.image = image;
     }
 
-
     /**
      * Sets the image as an {@link ImageLocation} object. I.e. a reference to some remote url.
      */
     public void setImage(ImageLocation image) {
         this.image = image;
     }
-
 
     /**
      * Sets the image as an urn, i.e. a reference to the image database

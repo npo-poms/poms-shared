@@ -14,6 +14,7 @@ import nl.vpro.domain.media.RelationDefinition;
 
 
 /**
+ * @see nl.vpro.domain.media.update
  * @see Relation
  */
 @XmlAccessorType(XmlAccessType.FIELD)

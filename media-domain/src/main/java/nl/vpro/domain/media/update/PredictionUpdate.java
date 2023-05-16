@@ -21,6 +21,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 /**
  * @author Michiel Meeuwissen
  * @since 5.6
+ * @see nl.vpro.domain.media.update
+ * @see nl.vpro.domain.media.Prediction
  */
 
 @Data

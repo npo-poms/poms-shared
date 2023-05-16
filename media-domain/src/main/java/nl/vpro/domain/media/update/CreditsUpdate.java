@@ -7,9 +7,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import nl.vpro.domain.media.Credits;
-import nl.vpro.domain.media.RoleType;
+import nl.vpro.domain.media.*;
 
+/**
+ * @see nl.vpro.domain.media.update
+ * @see Credits
+ */
 @ToString(of = { "role" })
 public abstract class CreditsUpdate {
 

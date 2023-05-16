@@ -22,7 +22,10 @@ import nl.vpro.validation.WarningValidatorGroup;
 
 
 /**
- * Horrible copy/paste code from {@link Person}. Mainly to get it in a different namespace.
+ * Copy/paste code from {@link Person}. Mainly to get it in a different namespace.
+ *
+ * @see nl.vpro.domain.media.update
+ * @see nl.vpro.domain.media.Person
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "personUpdateType",

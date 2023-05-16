@@ -17,6 +17,10 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.util.IntegerVersion;
 
 
+/**
+ * @see nl.vpro.domain.media.update
+ * @see nl.vpro.domain.media.Program
+ */
 @XmlRootElement(name = "program")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "programUpdateType", propOrder = {

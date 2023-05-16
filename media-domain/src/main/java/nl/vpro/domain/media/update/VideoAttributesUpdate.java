@@ -4,15 +4,18 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.*;
 
-import lombok.Getter;
-import lombok.Setter;
-import nl.vpro.domain.media.AspectRatio;
-import nl.vpro.domain.media.ColorType;
-import nl.vpro.domain.media.VideoAttributes;
+import nl.vpro.domain.media.*;
 
+/**
+ * @see nl.vpro.domain.media.update
+ * @see VideoAttributes
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "videoAttributesUpdateType", propOrder = {
         "aspectRatio",

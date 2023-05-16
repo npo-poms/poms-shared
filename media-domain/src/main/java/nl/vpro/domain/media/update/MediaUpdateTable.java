@@ -14,11 +14,13 @@ import nl.vpro.domain.media.support.OwnerType;
 
 /**
  * This is the 'update' version of a link {@link MediaTable}.
- *
+ * <p>
  * Collects a number of {@link ProgramUpdate}s with a number of {@link GroupUpdate}s and a {@link ScheduleUpdate}.
  *
  * @author Michiel Meeuwissen
  * @since 5.8
+ * @see nl.vpro.domain.media.update
+ * @see MediaTable
  */
 @Data
 @XmlRootElement

@@ -70,6 +70,7 @@ import nl.vpro.xml.bind.*;
  * @param <M>  The {@link MediaObject} extension this is for.
  *
  * @see nl.vpro.domain.media.update
+ * @see MediaObject
  */
 
 @XmlAccessorType(XmlAccessType.PROPERTY)

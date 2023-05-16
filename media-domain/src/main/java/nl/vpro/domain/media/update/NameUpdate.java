@@ -11,10 +11,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.media.Credits;
-import nl.vpro.domain.media.Name;
-import nl.vpro.domain.media.RoleType;
+import nl.vpro.domain.media.*;
 
+/**
+ * @see nl.vpro.domain.media.update
+ * @see Name
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "nameUpdateType")
 @XmlRootElement(name = "name")
