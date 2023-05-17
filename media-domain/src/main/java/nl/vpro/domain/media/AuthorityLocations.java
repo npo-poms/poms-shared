@@ -70,6 +70,7 @@ public class AuthorityLocations {
      */
     public AuthorityLocations.RealizeResult realizeStreamingPlatformIfNeeded(
         @NonNull MediaObject mediaObject,
+        //@NonNull AVType avType,
         @NonNull Platform platform,
         @NonNull Predicate<Location> locationPredicate,
         @NonNull Instant now) {
