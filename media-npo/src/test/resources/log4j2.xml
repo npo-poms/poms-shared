@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+  <Appenders>
+    <Console name="stdout" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{ISO8601} %4.4p %C{1} %M.%L %m (%t) %n"  charset="UTF-8"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Logger name="com.joestelmach.natty" level="WARN" />
+
+    <Root level="INFO">
+      <Appender-Ref ref="stdout" />
+    </Root>
+
+
+  </Loggers>
+</Configuration>
