@@ -17,7 +17,7 @@ import nl.vpro.i18n.Displayable;
 @XmlType(name = "platformTypeEnum")
 public enum Platform implements Displayable {
     /**
-     * Visible on internet
+     * Visible on internet. May also be used for audio?
      */
     INTERNETVOD(true, "Beschikbaar op internet") {
         @Override
@@ -38,10 +38,15 @@ public enum Platform implements Displayable {
 
     /**
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
-     *  Zie https://jira.vpro.nl/browse/MSE-2742 Blijkbaar nooit gebruikt.
+     *  Zie <a href="https://jira.vpro.nl/browse/MSE-2742">MSE-2742</a> Blijkbaar nooit gebruikt.
      */
     @Deprecated
-    NPOPLUSVOD(false, "NPO Plus");
+    NPOPLUSVOD(false, "NPO Plus") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    };
 
 
     @Getter
