@@ -973,6 +973,7 @@
       <xs:enumeration value="BENELUX"/>
       <xs:enumeration value="EUROPE"/>
       <xs:enumeration value="EU"/>
+      <xs:enumeration value="UNIVERSE"/>
     </xs:restriction>
   </xs:simpleType>
 
