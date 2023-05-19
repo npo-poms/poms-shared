@@ -22,16 +22,21 @@ import nl.vpro.i18n.Displayable;
 public enum Region implements Displayable {
 
 
+    /**
+     * Netherlands
+     * /
     @XmlDocumentation("Means that this object can only be played in the Netherlands")
     NL("Nederland"),
 
-     /**
+    /**
+     * Netherlands and communities in the Caribbean
      * @since 5.6
      */
     @XmlDocumentation("Nederland plus BES gemeentes")
     NLBES("Nederland en de BES-gemeenten"),
 
-     /**
+    /**
+     * Netherlands and communities in the Caribbean and Curaçao, St. Maarten and Aruba
      * @since 5.6
      */
     @XmlDocumentation("Nederland plus BES gemeentes plus Curaçao, St. Maarten en Aruba")
@@ -39,6 +44,7 @@ public enum Region implements Displayable {
 
 
     /**
+     * Belgium, Netherlands and Luxemburg
      * @deprecated Not supported by VMV
      */
     @Deprecated
@@ -46,12 +52,14 @@ public enum Region implements Displayable {
     BENELUX("Benelux"),
 
     /**
+     * Europe
      * @since 5.6
      */
     @XmlDocumentation("Means that this object can only be played in Europe")
     EUROPE("Europa"),
 
-     /**
+    /**
+      * European Union incl. BES gemeentes, Curaçao, St. Maarten en Aruba
      * @since 5.6
      */
     @XmlDocumentation("European Union incl. BES gemeentes, Curaçao, St. Maarten en Aruba")
