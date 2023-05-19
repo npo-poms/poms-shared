@@ -5,6 +5,8 @@ import lombok.Data;
 import java.time.Instant;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -16,15 +18,30 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class StreamStatus {
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @NotNull
     Instant timestamp;
+
+    @NotNull
     String prid;
+
     String channel;
+
+    @NotNull
     Encryption encryptie;
+
+    @Valid
     Tijdsbeperking tijdsbeperking;
-    String streamtype;
-    String platform;
-    String status;
+
+    @NotNull
+    StreamType streamtype;
+
+    @NotNull
+    Platform platform;
+
+    @NotNull
+    Status status;
+
     @XmlElementWrapper(name = "profielen")
-    List<Profiel> profiel;
+    List<@Valid Profiel> profiel;
 
 }

@@ -2,6 +2,7 @@ package nl.vpro.domain.npo.streamstatus;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
@@ -9,6 +10,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @Data
 public class Profiel {
     int versie;
-    String protocol;
-    String encryptie;
+
+    @NotNull
+    Protocol protocol;
+
+    ProfielEncryption encryptie;
 }
