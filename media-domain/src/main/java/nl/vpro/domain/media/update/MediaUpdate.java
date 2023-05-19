@@ -432,7 +432,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
         media.setTags(toSet(tags, Tag::new));
         media.setCredits(toList(credits, CreditsUpdate::toCredits, true));
         media.setPortalRestrictions(toList(portalRestrictions, PortalRestrictionUpdate::toPortalRestriction));
-        media.setGeoRestrictions(toSet(geoRestrictions, GeoRestrictionUpdate::toGeoRestriction));
+        media.setGeoRestrictions(toSet(geoRestrictions,
+            g -> g.getRegion() != Region.UNIVERSE,
+            GeoRestrictionUpdate::toGeoRestriction
+        ));
 
         // titles have owner,
 
