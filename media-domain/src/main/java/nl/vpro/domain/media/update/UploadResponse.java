@@ -27,4 +27,8 @@ public class UploadResponse {
     private UploadResponse() {
 
     }
+
+    public boolean isSuccessFull() {
+        return statusCode >= 200 && statusCode < 300;
+    }
 }
