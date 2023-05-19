@@ -91,8 +91,6 @@ public class GeoRestriction extends Restriction<GeoRestriction> implements Compa
         this.region = region;
         this.authoritative = authoritative;
         this.platform = platform == null ? Platform.INTERNETVOD : platform;
-
-
     }
 
     public GeoRestriction(GeoRestriction source) {
