@@ -2,12 +2,14 @@ package nl.vpro.domain.media.update;
 
 
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.xml.bind.annotation.*;
 
 @Getter
 @XmlRootElement(name = "uploadResponse")
 @XmlAccessorType(XmlAccessType.FIELD)
+@ToString
 public class UploadResponse {
 
     @XmlAttribute
