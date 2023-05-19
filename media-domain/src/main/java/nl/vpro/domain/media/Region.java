@@ -55,7 +55,22 @@ public enum Region implements Displayable {
      * @since 5.6
      */
     @XmlDocumentation("European Union incl. BES gemeentes, Curaçao, St. Maarten en Aruba")
-    EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba");
+    EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba"),
+
+
+    /**
+     * @since 7.6
+     */
+    @XmlDocumentation("No georestriction")
+    NONE("Wereld") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    }
+
+
+    ;
 
 
 
