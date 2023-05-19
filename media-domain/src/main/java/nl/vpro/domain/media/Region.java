@@ -59,6 +59,8 @@ public enum Region implements Displayable {
 
 
     /**
+     * It can be handy to have a region value that effectively doesn't restrict anything. This way there is no need for n
+     * null checks and things like that.
      * @since 7.6
      */
     @XmlDocumentation("No georestriction")
