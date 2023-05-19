@@ -102,6 +102,7 @@ public class AuthorityLocationsTest {
 
         log.info("{}", locations.realizeStreamingPlatformIfNeeded(
             program,
+            AVType.VIDEO,
             Platform.INTERNETVOD,
             (l) -> true,
             Instant.now()
@@ -121,6 +122,7 @@ public class AuthorityLocationsTest {
 
         log.info("{}", locations.realizeStreamingPlatformIfNeeded(
             program,
+            AVType.AUDIO,
             Platform.INTERNETVOD,
             (l) -> true,
             Instant.now()
