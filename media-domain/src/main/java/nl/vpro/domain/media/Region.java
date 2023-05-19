@@ -62,7 +62,7 @@ public enum Region implements Displayable {
      * @since 7.6
      */
     @XmlDocumentation("No georestriction")
-    NONE("Wereld") {
+    UNIVERSE("Overal te zien") {
         @Override
         public boolean display() {
             return false;
