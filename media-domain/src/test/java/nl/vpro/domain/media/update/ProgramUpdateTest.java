@@ -29,7 +29,10 @@ import nl.vpro.util.Version;
 import nl.vpro.validation.ConstraintViolations;
 import nl.vpro.validation.WarningValidatorGroup;
 
+import static java.time.Instant.ofEpochMilli;
 import static nl.vpro.domain.media.MediaBuilder.program;
+import static nl.vpro.domain.media.Region.BENELUX;
+import static nl.vpro.domain.media.Region.NL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -330,7 +333,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPublishStart() {
         ProgramUpdate update = programUpdate();
-        update.setPublishStartInstant(Instant.ofEpochMilli(4444));
+        update.setPublishStartInstant(ofEpochMilli(4444));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program publishStart=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
@@ -346,7 +349,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPublishStop() {
         ProgramUpdate update = programUpdate();
-        update.setPublishStopInstant(Instant.ofEpochMilli(4444));
+        update.setPublishStopInstant(ofEpochMilli(4444));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<program publishStop=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
@@ -362,7 +365,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             program()
                 .images(
                     Image.builder()
-                        .publishStop(Instant.ofEpochMilli(5444))
+                        .publishStop(ofEpochMilli(5444))
                         .imageUri("urn:vpro:image:123")
                         .build()
                 )
@@ -442,7 +445,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testGetPortalRestrictions() {
         ProgramUpdate update = programUpdate();
         update.setPortalRestrictions(Arrays.asList(new PortalRestrictionUpdate(new PortalRestriction(new Portal("3VOOR12_GRONINGEN", "3voor12 Groningen"))),
-            new PortalRestrictionUpdate(new PortalRestriction(new Portal("STERREN24", "Sterren24"), Instant.ofEpochMilli(0), Instant.ofEpochMilli(1000000)))));
+            new PortalRestrictionUpdate(new PortalRestriction(new Portal("STERREN24", "Sterren24"), ofEpochMilli(0), ofEpochMilli(1000000)))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
@@ -466,7 +469,12 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setGeoRestrictions(
             new TreeSet<>(Arrays.asList(
-                new GeoRestrictionUpdate(new GeoRestriction(Region.BENELUX)), new GeoRestrictionUpdate(new GeoRestriction(Region.NL, Instant.ofEpochMilli(0), Instant.ofEpochMilli((1000000)))))));
+                new GeoRestrictionUpdate(
+                    new GeoRestriction(BENELUX)),
+                new GeoRestrictionUpdate(
+                    new GeoRestriction(NL, ofEpochMilli(0), ofEpochMilli((1000000)))))
+            )
+        );
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
@@ -733,7 +741,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setScheduleEvent(new ScheduleEventUpdate(
             Channel.RAD5,
-            Instant.ofEpochMilli(97779),
+            ofEpochMilli(97779),
             Duration.ofMillis(100))
         );
 
@@ -760,7 +768,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         ScheduleEventUpdate se = new ScheduleEventUpdate(
             Channel.RAD5,
-            Instant.ofEpochMilli(97779),
+            ofEpochMilli(97779),
             Duration.ofMillis(100));
         se.addTitle(TitleUpdate.main("bla"));
         se.addDescription(new DescriptionUpdate("bloe", TextualType.LEXICO));
