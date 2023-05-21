@@ -24,7 +24,7 @@ public enum Region implements Displayable {
 
     /**
      * Netherlands
-     * /
+     */
     @XmlDocumentation("Means that this object can only be played in the Netherlands")
     NL("Nederland"),
 
