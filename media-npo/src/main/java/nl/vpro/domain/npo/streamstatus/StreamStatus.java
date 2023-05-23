@@ -22,23 +22,28 @@ public class StreamStatus {
     Instant timestamp;
 
     @NotNull
+    @XmlElement(required = true)
     String prid;
 
     String channel;
 
     @NotNull
+    @XmlElement(required = true)
     Encryption encryptie;
 
     @Valid
     Tijdsbeperking tijdsbeperking;
 
     @NotNull
+    @XmlElement(required = true)
     StreamType streamtype;
 
     @NotNull
+    @XmlElement(required = true)
     Platform platform;
 
     @NotNull
+    @XmlElement(required = true)
     Status status;
 
     @XmlElementWrapper(name = "profielen")
