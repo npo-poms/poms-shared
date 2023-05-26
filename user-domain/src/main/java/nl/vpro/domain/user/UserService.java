@@ -20,7 +20,7 @@ import nl.vpro.domain.Roles;
 import nl.vpro.i18n.Locales;
 import nl.vpro.logging.mdc.MDCConstants;
 
-import static nl.vpro.logging.mdc.MDCConstants.ONBEHALFOF;
+import static nl.vpro.logging.mdc.MDCConstants.ON_BEHALF_OF;
 
 
 /**
@@ -286,7 +286,7 @@ public interface UserService<T extends User> {
                 try {
                     restoreAuthentication(onBehalfOf);
                 } finally {
-                    MDC.remove(ONBEHALFOF);
+                    MDC.remove(ON_BEHALF_OF);
                 }
             }
         };
