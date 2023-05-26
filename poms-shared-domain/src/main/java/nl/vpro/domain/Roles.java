@@ -162,10 +162,12 @@ public class Roles {
     public static final String API_CLIENT = API + "CLIENT";
     public static final String API_CHANGES_CLIENT = API + "CHANGES_CLIENT";
 
+    public static final String API_CLIENT_ROLE = ROLE + API_CLIENT;
+    public static final String API_CHANGES_CLIENT_ROLE = ROLE + API_CHANGES_CLIENT;
 
-    public static final String HAS_API_ROLE = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CLIENT')";
-    public static final String HAS_API_CHANGES_ROLE = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CHANGES_CLIENT')";
 
+    public static final String HAS_API_ROLE = "hasAnyRole('" + USER_ROLE + "','" + API_CLIENT_ROLE + "')";
+    public static final String HAS_API_CHANGES_ROLE = "hasAnyRole('" + USER_ROLE + "','" + API_CHANGES_CLIENT_ROLE + "')";
 
     public static final String PAGES_USER = ROLE + "PAGES_USER";
 
@@ -230,6 +232,7 @@ public class Roles {
         }
         return set;
     }
+
 
 
 }
