@@ -39,24 +39,30 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
     private static final long serialVersionUID = -5898117026516765909L;
 
     /**
-     * Multiple reasons can be joined with this, to encode the in one String.
+     * Multiple reasons can be joined with this, to encode them in one String.
      * <p>
      * Uses  ASCII Record separator RS
      */
-    @SuppressWarnings("UnnecessaryUnicodeEscape")
-    public static final String RECORD_SPLITTER = "\u241E";
+    public static final String RECORD_SPLITTER = "␞";
 
     /**
-     * A reason can be joined with its publication time.
+     * A reason can be joined with its publication time. Not in the database, just in the string representation of a
+     * set of reasons (as put on headers).
      * <p>
      * Uses  ASCII Unit separator US
      */
-    @SuppressWarnings("UnnecessaryUnicodeEscape")
-    public static final String FIELD_SPLITTER = "\u241F";
+    public static final String FIELD_SPLITTER = "␟";
+
+    /**
+     * Multiple reasons can be collected in the database, in that case they are joined with this.
+     */
+    public static final String REASON_SPLITTER = "\t";
 
 
+    /**
+     * The pattern for a valid reason in the database.
+     */
     public static final String REASON_PATTERN = "[^" + RECORD_SPLITTER + FIELD_SPLITTER  + "]*";
-
 
 
     @XmlValue

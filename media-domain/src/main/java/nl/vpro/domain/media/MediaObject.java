@@ -566,11 +566,15 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     @Column(name = "repubDate", unique = false)
     protected Instant repubDate;
 
+
+    /**
+     * ␟  and ␟ are used to encode multiple reasons (with a date) in headers, and therefore should not be in the database field itself. \t can be used to temporary store multiple reasons, which will all be published at the same time.
+     */
     @Column
     @XmlTransient
     @Getter(AccessLevel.PROTECTED)
     @Setter(AccessLevel.PROTECTED)
-    @Pattern(regexp = PublicationReason.REASON_PATTERN) // \t and # are used to encode multiple reasons (with a date) in headers.
+    @Pattern(regexp = PublicationReason.REASON_PATTERN)
     protected String repubReason;
 
     @Column
