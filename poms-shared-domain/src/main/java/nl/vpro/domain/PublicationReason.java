@@ -58,6 +58,10 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
      */
     public static final String REASON_SPLITTER = "\t";
 
+    /**
+     * Multiple reasons can be collected in the database, in that case they are joined with this.
+     */
+    public static final String REASON_PREFIX_SPLITTER = "|";
 
     /**
      * The pattern for a valid reason in the database.
