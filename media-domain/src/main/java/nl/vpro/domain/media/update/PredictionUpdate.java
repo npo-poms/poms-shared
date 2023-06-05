@@ -56,16 +56,18 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
     protected Encryption encryption;
 
     public PredictionUpdate() {
-
     }
 
     public static PredictionUpdate of(Prediction prediction) {
+        return PredictionUpdate.builderOf(prediction).build();
+    }
+
+    public static PredictionUpdate.Builder builderOf(Prediction prediction) {
         return PredictionUpdate.builder()
                .platform(prediction.getPlatform())
                .publishStart(prediction.getPublishStartInstant())
                .publishStop(prediction.getPublishStopInstant())
-               .encryption(prediction.getEncryption())
-               .build();
+               .encryption(prediction.getEncryption());
     }
 
     public Prediction toPrediction(Prediction prediction) {
@@ -83,6 +85,5 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
     @Override
     public int compareTo(PredictionUpdate o) {
         return platform.compareTo(o.getPlatform());
-
     }
 }
