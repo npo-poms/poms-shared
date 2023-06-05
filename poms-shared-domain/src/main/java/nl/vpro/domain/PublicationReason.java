@@ -46,21 +46,23 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
     public static final String RECORD_SPLITTER = "␞";
 
     /**
-     * A reason can be joined with its publication time.
+     * A reason can be joined with its publication time. Not in the database, just in the string representation of a
+     * set of reasons (as put on headers).
      * <p>
      * Uses  ASCII Unit separator US
      */
     public static final String FIELD_SPLITTER = "␟";
 
     /**
-     * Multiple reasons can be collected in the datqbase, in that case they are joined with this
-     *
+     * Multiple reasons can be collected in the database, in that case they are joined with this.
      */
     public static final String REASON_SPLITTER = "\t";
 
 
+    /**
+     * The pattern for a valid reason in the database.
+     */
     public static final String REASON_PATTERN = "[^" + RECORD_SPLITTER + FIELD_SPLITTER  + "]*";
-
 
 
     @XmlValue
