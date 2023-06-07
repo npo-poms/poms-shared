@@ -4,7 +4,8 @@
  */
 package nl.vpro.domain.media;
 
-import com.google.common.collect.*;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.time.*;
 import java.util.*;
@@ -12,22 +13,27 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import javax.validation.constraints.Pattern;
-import lombok.extern.slf4j.Slf4j;
-import static nl.vpro.domain.Changeables.instant;
-import nl.vpro.domain.*;
-import static nl.vpro.domain.PublicationReason.FIELD_SPLITTER;
-import nl.vpro.domain.media.gtaa.GTAARecord;
-import nl.vpro.domain.media.support.*;
-import static nl.vpro.domain.media.support.Workflow.*;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.BroadcasterService;
-import nl.vpro.util.DateUtils;
-import nl.vpro.util.ObjectFilter;
+
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.helpers.MessageFormatter;
+
+import com.google.common.collect.*;
+
+import nl.vpro.domain.*;
+import nl.vpro.domain.media.gtaa.GTAARecord;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.domain.user.BroadcasterService;
+import nl.vpro.util.DateUtils;
+import nl.vpro.util.ObjectFilter;
+
+import static nl.vpro.domain.Changeables.instant;
+import static nl.vpro.domain.PublicationReason.REASON_SPLITTER;
+import static nl.vpro.domain.media.support.Workflow.*;
 
 
 /**
@@ -567,10 +573,10 @@ public class MediaObjects {
                 media.setRepubReason(formattedReason);
             } else {
                 // add via a set, to avoid appending a reason that is there already
-                TreeSet<String> set = Arrays.stream(existingReason.split(FIELD_SPLITTER))
+                TreeSet<String> set = Arrays.stream(existingReason.split(REASON_SPLITTER))
                     .collect(Collectors.toCollection(TreeSet::new));
                 set.add(formattedReason);
-                media.setRepubReason(String.join(FIELD_SPLITTER, set));
+                media.setRepubReason(String.join(REASON_SPLITTER, set));
             }
         }
     }
