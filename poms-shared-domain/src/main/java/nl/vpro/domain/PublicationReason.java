@@ -3,6 +3,7 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
@@ -48,7 +49,7 @@ import static java.util.Comparator.*;
 @Slf4j
 public class PublicationReason implements Serializable, Comparable<PublicationReason> {
 
-    //@Serial
+    @Serial
     private static final long serialVersionUID = -5898117026516765909L;
 
     /**
