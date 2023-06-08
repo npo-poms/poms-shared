@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
  * @author Michiel Meeuwissen
  * @since 3.5
  */
+@Deprecated
 public class NpoPomsEnvironment {
-
 
     @Value("${npo-api.baseUrl:}")
     private String apiBase;
@@ -40,7 +40,6 @@ public class NpoPomsEnvironment {
             }
         }
     }
-
 
     public URL getImageUrl(String format, String id) {
         try {
