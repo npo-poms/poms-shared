@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
@@ -63,6 +64,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
      */
     @Getter
     class Correlation implements Serializable, ObjectLocker.DefinesType {
+        @Serial
         private static final long serialVersionUID = -8973548054279104343L;
         final String id;
         final Type type;

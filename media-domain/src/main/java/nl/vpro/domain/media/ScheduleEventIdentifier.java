@@ -78,8 +78,8 @@ public class ScheduleEventIdentifier implements Serializable, Comparable<Schedul
         return channel.getXmlValue() + ":" + start;
     }
 
-    public static ScheduleEventIdentifier parse(String id) {
-        String[] split = id.split(":", 2);
+    public static ScheduleEventIdentifier parse(CharSequence id) {
+        String[] split = id.toString().split(":", 2);
         return new ScheduleEventIdentifier(Channel.valueOf(split[0]), TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)));
 
     }
