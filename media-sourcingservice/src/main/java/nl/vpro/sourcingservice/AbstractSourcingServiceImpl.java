@@ -175,7 +175,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         logger.info("finish: {} ({}) {}", node.get("status").textValue(), finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded));
         JsonNode bodyNode = MAPPER.readTree(finish.body());
-        return new UploadResponse(finish.statusCode(), bodyNode.get("status").textValue(), bodyNode.get("response").textValue());
+        return new UploadResponse(
+            mid,
+            finish.statusCode(),
+            bodyNode.get("status").textValue(),
+            bodyNode.get("response").textValue(),
+            uploaded.get()
+        );
     }
 
     protected String getCallbackUrl(String mid) {
