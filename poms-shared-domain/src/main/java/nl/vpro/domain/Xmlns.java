@@ -145,12 +145,14 @@ public final class Xmlns {
         if (pomsLocation == null) {
             throw new IllegalArgumentException();
         }
+        if (! pomsLocation.endsWith("/")) {
+            pomsLocation += "/";
+        }
         //map.put(XMLConstants.XML_NS_URI, URI.create(pomsLocation + "schema/xml.xsd"));
         map.put(MEDIA_NAMESPACE, URI.create(pomsLocation + "schema/" + MEDIA_XSD_NAME));
         map.put(SHARED_NAMESPACE, URI.create(pomsLocation + "schema/" + SHARED_XSD_NAME));
         map.put(SEARCH_NAMESPACE, URI.create(pomsLocation + "schema/search/vproMediaSearch.xsd"));
         map.put(UPDATE_NAMESPACE, URI.create(pomsLocation + "schema/update/vproMediaUpdate.xsd"));
-
     }
 
 

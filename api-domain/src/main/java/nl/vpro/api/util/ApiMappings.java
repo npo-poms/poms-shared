@@ -39,8 +39,8 @@ public class ApiMappings extends Mappings {
     final URI pomsLocation;
 
     @Inject
-    public ApiMappings(@Named("${poms.location}") String pomsLocation) {
-        this.pomsLocation = pomsLocation == null ? URI.create("https://poms.omroep.nl/") : URI.create(pomsLocation);
+    public ApiMappings(@Named("${npo-media.baseUrl}") String pomsLocation) {
+        this.pomsLocation = pomsLocation == null ? URI.create("https://poms.omroep.nl") : URI.create(pomsLocation);
         generateDocumentation = true;
         log.info("Using poms location {}", this.pomsLocation);
     }
