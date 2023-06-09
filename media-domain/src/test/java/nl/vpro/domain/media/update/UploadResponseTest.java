@@ -11,12 +11,11 @@ class UploadResponseTest {
     public void xml() {
        UploadResponse response = new UploadResponse("mid_123", 200, "succes", "foobar", 1000L);
 
-        JAXBTestUtil.assertThatXml(response).noRoundTrip().isSimilarTo("""
-            <uploadResponse statusCode="200" mid="mid_123" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
-                <status>succes</status>
-                <response>foobar</response>
-                <bytes>1000</bytes>
-            </uploadResponse>""");
+        JAXBTestUtil.assertThatXml(response).noRoundTrip().isSimilarTo("<uploadResponse statusCode=\"200\" mid=\"mid_123\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                                                                       "    <status>succes</status>\n" +
+                                                                       "    <response>foobar</response>\n" +
+                                                                       "    <bytes>1000</bytes>\n" +
+                                                                       "</uploadResponse>");
 
     }
 
@@ -24,14 +23,13 @@ class UploadResponseTest {
     public void json() {
        UploadResponse response = new UploadResponse("mid_123", 200, "succes", "foobar", 1000L);
 
-        Jackson2TestUtil.assertThatJson(response).isSimilarTo("""
-            {
-              "statusCode" : 200,
-              "mid" : "mid_123",
-              "status" : "succes",
-              "response" : "foobar",
-              "bytes" : 1000
-            }""");
+        Jackson2TestUtil.assertThatJson(response).isSimilarTo("{\n" +
+                                                              "  \"statusCode\" : 200,\n" +
+                                                              "  \"mid\" : \"mid_123\",\n" +
+                                                              "  \"status\" : \"succes\",\n" +
+                                                              "  \"response\" : \"foobar\",\n" +
+                                                              "  \"bytes\" : 1000\n" +
+                                                              "}");
 
     }
 
