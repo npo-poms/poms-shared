@@ -50,8 +50,6 @@ public class ApiMappingsTest {
         return mappings;
     }
 
-
-
     @Test
     public void testProfileSchema() {
         testNamespace(createMappings(), Xmlns.PROFILE_NAMESPACE);
@@ -67,12 +65,10 @@ public class ApiMappingsTest {
         testNamespace(createMappings(), Xmlns.PAGE_CONSTRAINT_NAMESPACE);
     }
 
-
     @Test
     public void testProfileConstraint()  {
         testNamespace(createMappings(), Xmlns.CONSTRAINT_NAMESPACE);
     }
-
 
     @Test
     public void testPageSchema() {
