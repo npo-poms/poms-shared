@@ -16,6 +16,7 @@ import static org.meeuw.i18n.countries.Country.of;
  * @author Michiel Meeuwissen
  * @since 4.8
  */
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 public class CountryWrapperTest {
 
     @Test

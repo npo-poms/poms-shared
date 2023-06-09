@@ -28,27 +28,29 @@ public class PersonTest implements BasicObjectTheory<Person> {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
         person.setGtaaInfo(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         assertThatJson(person).isSimilarTo(
-            "{\n" +
-                " \"objectType\" : \"person\",\n" +
-                "  \"givenName\" : \"Pietje\",\n" +
-                "  \"familyName\" : \"Puk\",\n" +
-                "  \"role\" : \"ACTOR\",\n" +
-                "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\",\n" +
-                "  \"gtaaStatus\" : \"approved\"\n"  +
-                "}").andRounded().isEqualTo(person);
+            """
+                {
+                 "objectType" : "person",
+                  "givenName" : "Pietje",
+                  "familyName" : "Puk",
+                  "role" : "ACTOR",
+                  "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/1869521",
+                  "gtaaStatus" : "approved"
+                }""").andRounded().isEqualTo(person);
 
     }
     @Test
     public void jsonWithoutType() throws JsonProcessingException {
 
         Person person = (Person) Jackson2Mapper.getInstance().readValue(
-            "{\n" +
-                "  \"givenName\" : \"Pietje\",\n" +
-                "  \"familyName\" : \"Puk\",\n" +
-                "  \"role\" : \"ACTOR\",\n" +
-                "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\",\n" +
-                "  \"gtaaStatus\" : \"approved\"\n"  +
-                "}", Credits.class);
+            """
+                {
+                  "givenName" : "Pietje",
+                  "familyName" : "Puk",
+                  "role" : "ACTOR",
+                  "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/1869521",
+                  "gtaaStatus" : "approved"
+                }""", Credits.class);
         assertThat(person.getRole()).isEqualTo(RoleType.ACTOR);
 
 

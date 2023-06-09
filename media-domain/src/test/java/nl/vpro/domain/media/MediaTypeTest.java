@@ -118,7 +118,7 @@ public class MediaTypeTest {
                 slog.debug("Ok, not possible to instantiate {}", type);
             }
             if (type.getSubType() != null) {
-                assertThat(type.getSubType().getMediaType()).withFailMessage("" + type).isNotNull();
+                assertThat(type.getSubType().getMediaType()).withFailMessage(String.valueOf(type)).isNotNull();
             }
             if (type != MEDIA) {
                 assertThat(type.getUrnPrefix()).isNotNull();

@@ -56,23 +56,24 @@ public class MediaListTest {
             , 1000, new MediaListItem(program));
 
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<s:list totalCount=\"1000\" sort=\"creationDate\" offset=\"1\" max=\"10\" order=\"ASC\" size=\"1\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:s=\"urn:vpro:media:search:2012\" xmlns:update=\"urn:vpro:media:update:2009\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <s:item xsi:type=\"s:mediaListItem\" avType=\"VIDEO\" id=\"123\" mediaType=\"nl.vpro.domain.media.Program\" urn=\"urn:vpro:media:program:123\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-            "        <s:broadcaster>VPRO</s:broadcaster>\n" +
-            "        <s:title></s:title>\n" +
-            "        <s:subTitle></s:subTitle>\n" +
-            "        <s:creationDate>2012-08-02T17:41:25.885+02:00</s:creationDate>\n" +
-            "        <s:lastModified>2012-08-02T17:41:25.885+02:00</s:lastModified>\n" +
-            "        <s:createdBy>editor@vpro.nl</s:createdBy>\n" +
-            "        <s:sortDate>2012-08-02T17:41:25.885+02:00</s:sortDate>\n" +
-            "        <s:type>CLIP</s:type>\n" +
-            "        <s:publishStop>2012-08-02T17:41:25.885+02:00</s:publishStop>\n" +
-            "        <s:numberOfLocations>0</s:numberOfLocations>\n" +
-            "        <s:tag>bar</s:tag>\n" +
-            "        <s:tag>foo</s:tag>\n" +
-            "    </s:item>\n" +
-            "</s:list>";
+        String expected = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <s:list totalCount="1000" sort="creationDate" offset="1" max="10" order="ASC" size="1" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:s="urn:vpro:media:search:2012" xmlns:update="urn:vpro:media:update:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:media="urn:vpro:media:2009">
+                <s:item xsi:type="s:mediaListItem" avType="VIDEO" id="123" mediaType="nl.vpro.domain.media.Program" urn="urn:vpro:media:program:123" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <s:broadcaster>VPRO</s:broadcaster>
+                    <s:title></s:title>
+                    <s:subTitle></s:subTitle>
+                    <s:creationDate>2012-08-02T17:41:25.885+02:00</s:creationDate>
+                    <s:lastModified>2012-08-02T17:41:25.885+02:00</s:lastModified>
+                    <s:createdBy>editor@vpro.nl</s:createdBy>
+                    <s:sortDate>2012-08-02T17:41:25.885+02:00</s:sortDate>
+                    <s:type>CLIP</s:type>
+                    <s:publishStop>2012-08-02T17:41:25.885+02:00</s:publishStop>
+                    <s:numberOfLocations>0</s:numberOfLocations>
+                    <s:tag>bar</s:tag>
+                    <s:tag>foo</s:tag>
+                </s:item>
+            </s:list>""";
 
 
         MediaList<MediaListItem> list = assertThatXml(xmlList)

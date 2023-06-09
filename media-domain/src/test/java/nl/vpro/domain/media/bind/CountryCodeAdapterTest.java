@@ -101,21 +101,23 @@ public class CountryCodeAdapterTest {
     A empty = new A();
     @Test
     public void xml() {
-        JAXBTestUtil.roundTripAndSimilar(nl, "<local:a xmlns:local=\"uri:local\" xmlns=\"urn:vpro:media:2009\">\n" +
-                "    <country code=\"NL\">Nederland</country>\n" +
-                "</local:a>");
+        JAXBTestUtil.roundTripAndSimilar(nl, """
+            <local:a xmlns:local="uri:local" xmlns="urn:vpro:media:2009">
+                <country code="NL">Nederland</country>
+            </local:a>""");
         JAXBTestUtil.roundTripAndSimilar(empty, "<local:a xmlns:local=\"uri:local\" xmlns=\"urn:vpro:media:2009\">\n" +
                 "</local:a>");
     }
 
     @Test
     public void json() {
-        Jackson2TestUtil.roundTripAndSimilar(nl, "{\n" +
-                "  \"countries\" : [ {\n" +
-                "    \"code\" : \"NL\",\n" +
-                "    \"value\" : \"Nederland\"\n" +
-                "  } ]\n" +
-                "}");
+        Jackson2TestUtil.roundTripAndSimilar(nl, """
+            {
+              "countries" : [ {
+                "code" : "NL",
+                "value" : "Nederland"
+              } ]
+            }""");
         Jackson2TestUtil.roundTripAndSimilar(empty, "{}");
     }
 }

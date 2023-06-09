@@ -35,7 +35,7 @@ import static java.util.Comparator.*;
  *  Encoded  {@code republication|<some string>␟1686051496927}
  * and {@code republication|<some other string>␟1686051496927} (constructed with {@link #toRecord()}).
  * <p>
- *  While transfering multiple such reasons to the publishered multiple of such string representations are joined with {@link #RECORD_SPLITTER}.
+ *  While transferring multiple such reasons to the publisher multiple of such string representations are joined with {@link #RECORD_SPLITTER}.
  * </p>
  *
  *

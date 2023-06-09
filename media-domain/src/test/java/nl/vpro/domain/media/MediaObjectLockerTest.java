@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,12 +47,9 @@ class MediaObjectLockerTest {
         MediaObjectLocker.withMidLock("mid_1", "test", new Runnable() {
             @Override
             public void run() {
-                MediaObjectLocker.withCorrelationLock(MediaIdentifiable.Correlation.crid("crid_1"), "test sub", new Callable<Object>() {
-                    @Override
-                    public Object call() {
-                        result.add("bla");
-                        return null;
-                    }
+                MediaObjectLocker.withCorrelationLock(MediaIdentifiable.Correlation.crid("crid_1"), "test sub", () -> {
+                    result.add("bla");
+                    return null;
                 });
                 }
         });
