@@ -42,6 +42,8 @@
 
   <xs:element name="itemizeResponse" type="itemizeResponseType"/>
 
+  <xs:element name="uploadResponse" type="uploadResponse"/>
+
   <xs:complexType name="avAtributeUpdateType">
     <xs:sequence>
       <xs:element name="bitrate" type="xs:int" form="qualified" minOccurs="0"/>
@@ -690,5 +692,14 @@
       <xs:pattern value="[0-9]+(\.[0-9]+(\.[0-9]+)?)?" />
     </xs:restriction>
   </xs:simpleType>
+
+  <xs:complexType name="uploadResponse">
+    <xs:sequence>
+      <xs:element name="status" type="xs:string" minOccurs="0"/>
+      <xs:element name="response" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="statusCode" type="xs:int" use="required"/>
+  </xs:complexType>
+
 
 </xs:schema>
