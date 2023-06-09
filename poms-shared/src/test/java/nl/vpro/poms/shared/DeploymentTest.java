@@ -22,7 +22,7 @@ class DeploymentTest {
             log.info("{} {} {}", deployment, env, baseUrl);
             if (baseUrl != null) {
                 assertThat(baseUrl.isEmpty()).isFalse();
-                assertThat(baseUrl).endsWith("/");
+                assertThat(baseUrl).doesNotEndWith("/");
             }
         }
     }
