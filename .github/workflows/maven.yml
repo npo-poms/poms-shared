@@ -20,7 +20,7 @@ jobs:
         uses: styfle/cancel-workflow-action@0.11.0
         continue-on-error: true # for act
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3.9.0
+      - uses: actions/setup-java@v3.11.0
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
@@ -30,7 +30,7 @@ jobs:
           server-password: SONATYPE_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
           gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
-      - name: Build and deploy with Maven (Linux, java 11)
+      - name: Build and deploy with Maven (Linux, java 17)
         run:  mvn -ntp  -B -P"deploy,ossrh,npm" -U -fae deploy
         if: runner.os == 'Linux'
         env:
@@ -55,7 +55,7 @@ jobs:
           files: "**/target/surefire-reports/*.xml"
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.6.1
+        uses: EnricoMi/publish-unit-test-result-action@v2.7.0
         if: always() && runner.os == 'Linux'
         with:
           junit_files: "**/target/surefire-reports/*.xml"
