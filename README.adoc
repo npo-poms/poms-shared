@@ -45,3 +45,16 @@ The github build can be done locally with 'https://github.com/nektos/act[act]'. 
  ...
 ====
 
+== Compatibility
+
+
+|===
+|poms shared  | java
+
+|5.x | java 8
+|6.x  | java 8
+|7.x  | java 11
+|>= 7.7  | java 17
+|===
+
+
