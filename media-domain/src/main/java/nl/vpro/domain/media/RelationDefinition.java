@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ import nl.vpro.domain.user.Broadcaster;
 })
 public class RelationDefinition implements Serializable, Identifiable<RelationDefinitionIdentifier> {
 
+    @Serial
     private static final long serialVersionUID = -1658542635995973742L;
 
     public static RelationDefinition of(String type, Broadcaster broadcaster) {

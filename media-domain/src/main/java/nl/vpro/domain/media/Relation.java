@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -45,6 +46,7 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
 
     private static final Pattern URN_PATTERN = Pattern.compile("(" + BASE_URN + ")(\\d+)");
 
+    @Serial
     private static final long serialVersionUID = -2940513328653799208L;
 
     @Id

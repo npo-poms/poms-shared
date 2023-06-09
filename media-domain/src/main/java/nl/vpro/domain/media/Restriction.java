@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.time.Instant;
 
 import javax.persistence.Column;
@@ -26,6 +27,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 abstract public class Restriction<T extends Restriction<T>> extends DomainObject implements MutableEmbargo<T> {
 
+    @Serial
     private static final long serialVersionUID = 4916863601110482209L;
 
     protected static abstract class RestrictionBuilder<B extends RestrictionBuilder<B>> implements EmbargoBuilder<B> {

@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.time.Instant;
 
 import javax.persistence.Cacheable;
@@ -29,6 +30,7 @@ import nl.vpro.domain.user.Portal;
 @XmlType(name = "portalRestrictionType")
 public class PortalRestriction extends Restriction<PortalRestriction> {
 
+    @Serial
     private static final long serialVersionUID = -4235262587015174878L;
 
     public static class Builder extends RestrictionBuilder<Builder> {

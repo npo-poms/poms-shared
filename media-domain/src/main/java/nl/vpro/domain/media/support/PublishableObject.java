@@ -46,6 +46,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
     public static ThreadLocal<Boolean> PUBLISH_WORKFLOW = ThreadLocal.withInitial(() -> false);
 
+    @Serial
     private static final long serialVersionUID = 7010308562857745023L;
 
     @Column(nullable = false)

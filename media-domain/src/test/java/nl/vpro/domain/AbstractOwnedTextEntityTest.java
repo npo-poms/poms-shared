@@ -3,6 +3,7 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,7 @@ public class AbstractOwnedTextEntityTest {
 
     static class OwnedTextEntity extends AbstractOwnedTextEntity<OwnedTextEntity, Serializable> {
 
+        @Serial
         private static final long serialVersionUID = -4862022349042021564L;
 
         @Getter

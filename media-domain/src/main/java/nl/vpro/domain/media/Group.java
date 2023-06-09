@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.util.TreeSet;
 
@@ -35,6 +36,7 @@ import nl.vpro.domain.media.support.OwnerType;
 @JsonTypeName("group")
 public class Group extends MediaObject {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
 

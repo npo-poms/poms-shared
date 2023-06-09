@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Comparator;
@@ -20,6 +21,7 @@ import static java.util.Comparator.comparing;
 @Embeddable
 public class ScheduleEventIdentifier implements Serializable, Comparable<ScheduleEventIdentifier> {
 
+    @Serial
     private static final long serialVersionUID = -8254248336625205070L;
 
     @Column

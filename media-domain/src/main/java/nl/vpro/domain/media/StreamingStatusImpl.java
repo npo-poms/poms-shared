@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.util.zip.CRC32;
 
@@ -24,6 +25,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.NONE)
 public class StreamingStatusImpl implements StreamingStatus {
 
+    @Serial
     private static final long serialVersionUID = -6853692159691281271L;
 
     @Getter

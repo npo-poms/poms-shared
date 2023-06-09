@@ -147,6 +147,7 @@ public class Broadcaster extends Organization {
     }
 
 
+    @SuppressWarnings("CopyConstructorMissesField")
     public Broadcaster(Broadcaster b) {
         this(b.id, b.displayName, b.whatsOnId, b.neboId, b.misId, b.domain, b.start, b.stop, b.display);
     }
@@ -186,13 +187,12 @@ public class Broadcaster extends Organization {
 
     @Override
     public boolean equals(Object o) {
-        if(!(o instanceof Broadcaster)) {
+        if(!(o instanceof Broadcaster other)) {
             return false;
         }
         if(id != null) {
             return super.equals(o);
         }
-        Broadcaster other = (Broadcaster)o;
         if(whatsOnId != null) {
             return whatsOnId.equals(other.getWhatsOnId());
         }

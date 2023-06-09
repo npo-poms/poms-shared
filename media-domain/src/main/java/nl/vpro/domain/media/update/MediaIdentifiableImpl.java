@@ -3,6 +3,7 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +23,7 @@ import nl.vpro.validation.StringList;
 @XmlType(name = "midAndTypeType")
 public class MediaIdentifiableImpl implements Serializable, MediaIdentifiable {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     @XmlAttribute

@@ -2,6 +2,7 @@ package nl.vpro.domain;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ import nl.vpro.domain.media.support.TextualType;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractOwnedText<T extends AbstractOwnedText<T>> implements OwnedText, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 8742323961769012971L;
 
     @Column(nullable = false)

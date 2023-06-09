@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Singular;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.*;
 import java.util.*;
@@ -87,6 +88,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     TextualObject<ScheduleEventTitle, ScheduleEventDescription, ScheduleEvent>,
     Child<Program> {
 
+    @Serial
     private static final long serialVersionUID = 2107980433596776633L;
     @Id
     @Enumerated(EnumType.STRING)

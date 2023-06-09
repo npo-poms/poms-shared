@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.function.Supplier;
 
@@ -31,6 +32,7 @@ import nl.vpro.validation.PomsValidatorGroup;
 @XmlType(name = "twitterRefType")
 public class TwitterRef implements Serializable, Supplier<String>, MutableOwnable {
 
+    @Serial
     private static final long serialVersionUID = -9215030144570677716L;
 
     public enum Type {

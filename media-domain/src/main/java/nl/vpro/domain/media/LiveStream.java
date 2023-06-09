@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import nl.vpro.util.URLResource;
 @Getter
 public class LiveStream implements Displayable, Serializable {
 
+    @Serial
     private static final long serialVersionUID = -7342555628196300139L;
 
     static LiveStream[] values;

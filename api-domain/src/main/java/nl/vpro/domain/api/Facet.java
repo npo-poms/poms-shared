@@ -14,9 +14,9 @@ public interface Facet<F extends AbstractSearch> {
 
     /**
      * The filter of facet defines on which parts of the complete index the facet must be applied.
-     *
+     * <p>
      * This may be implicit ('profiles'), but it can also be done explicitely
-     *
+     * <p>
      * E.g. apply facets only on all object of type 'ALBUM'.
      * See also {@link SearchableFacet} for limiting the number of facet values you're interested in.
      */

@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.xml.bind.annotation.*;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class DescendantRef implements Comparable<DescendantRef>, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 2305207507673462765L;
 
     @XmlAttribute

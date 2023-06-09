@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -256,6 +257,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
     public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
     public static final String ORGANIZATION_FILTER = "organizationFilter";
 
+    @Serial
     private static final long serialVersionUID = -9095662256792069374L;
 
     @Column(name = "mid", nullable = false, unique = true)
@@ -1609,7 +1611,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                 descendantOf.add(DescendantRef.forOwner(media));
             }
             descendantOf.addAll(getVirtualMemberRefs().stream()
-                .map(DescendantRef::of).collect(Collectors.toList()));
+                .map(DescendantRef::of).toList());
         }
         return sorted(descendantOf);
     }
@@ -2992,7 +2994,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject> impleme
                 .stream()
                 .filter(i -> Objects.equals(i.getOwner(), owner))
                 .filter(i -> !incoming.getImages().contains(i))
-                .collect(Collectors.toList());
+                .toList();
 
             toRemove.forEach(this::removeImage);
         }

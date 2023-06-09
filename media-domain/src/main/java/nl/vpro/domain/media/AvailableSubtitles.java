@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Locale;
@@ -29,6 +30,7 @@ import static java.util.Comparator.nullsLast;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class AvailableSubtitles implements Serializable, Comparable<AvailableSubtitles> {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     private static final Comparator<AvailableSubtitles> COMPARATOR  =

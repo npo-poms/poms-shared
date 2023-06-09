@@ -45,9 +45,6 @@ public class AssetData implements AssetSource {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("AssetData");
-        sb.append("{}");
-        return sb.toString();
+        return "AssetData{}";
     }
 }

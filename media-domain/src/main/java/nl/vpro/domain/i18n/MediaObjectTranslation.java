@@ -3,6 +3,7 @@ package nl.vpro.domain.i18n;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
@@ -46,6 +47,7 @@ public class MediaObjectTranslation implements
     Identifiable<Long>,
     Accountable, Serializable {
 
+    @Serial
     private static final long serialVersionUID = -2040558972295866861L;
 
     @Id

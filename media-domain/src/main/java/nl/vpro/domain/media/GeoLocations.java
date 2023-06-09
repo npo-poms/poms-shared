@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.Singular;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,7 @@ import nl.vpro.domain.media.support.OwnerType;
 @Setter
 public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, GeoLocation> {
 
+    @Serial
     private static final long serialVersionUID = 4815604300070005169L;
 
     public static GeoLocations empty(@NonNull  OwnerType owner){

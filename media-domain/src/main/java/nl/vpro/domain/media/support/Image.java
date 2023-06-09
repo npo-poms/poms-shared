@@ -9,6 +9,7 @@ package nl.vpro.domain.media.support;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -102,6 +103,7 @@ public class Image extends PublishableObject<Image>
 
     public static final String BASE_URN = "urn:vpro:media:image:";
 
+    @Serial
     private static final long serialVersionUID = 2182582685395751329L;
 
     @Column(nullable = false)

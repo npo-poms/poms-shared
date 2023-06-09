@@ -64,36 +64,25 @@ public enum FacetOrder {
     private static final Comparator<TermFacetResultItem> COUNT_DESC_COMPARATOR = (o1, o2) -> COUNT_ASC_COMPARATOR.compare(o2, o1);
 
     public static Comparator<TermFacetResultItem> toComparator(final FacetOrder order) {
-        switch(order) {
-            case VALUE_ASC:
-                return VALUE_ASC_COMPARATOR;
-            case VALUE_DESC:
-                return VALUE_DESC_COMPARATOR;
-            case COUNT_ASC:
-                return COUNT_ASC_COMPARATOR;
-            case COUNT_DESC:
-                return COUNT_DESC_COMPARATOR;
-            default:
-                return COUNT_DESC_COMPARATOR;
-        }
+        return switch (order) {
+            case VALUE_ASC -> VALUE_ASC_COMPARATOR;
+            case VALUE_DESC -> VALUE_DESC_COMPARATOR;
+            case COUNT_ASC -> COUNT_ASC_COMPARATOR;
+            default -> COUNT_DESC_COMPARATOR;
+        };
     }
 
-    protected static FacetOrder backwardCompatibleValueOf(FacetOrderBackwards v) {
+    static FacetOrder backwardCompatibleValueOf(FacetOrderBackwards v) {
         if (v == null) {
             return null;
         }
-        switch (v) {
-            case TERM:
-                return FacetOrder.VALUE_ASC;
-            case REVERSE_TERM:
-                return FacetOrder.VALUE_DESC;
-            case COUNT:
-                return FacetOrder.COUNT_DESC;
-            case REVERSE_COUNT:
-                return FacetOrder.COUNT_ASC;
-            default:
-                return FacetOrder.valueOf(v.toString());
-        }
+        return switch (v) {
+            case TERM -> FacetOrder.VALUE_ASC;
+            case REVERSE_TERM -> FacetOrder.VALUE_DESC;
+            case COUNT -> FacetOrder.COUNT_DESC;
+            case REVERSE_COUNT -> FacetOrder.COUNT_ASC;
+            default -> FacetOrder.valueOf(v.toString());
+        };
     }
 
 

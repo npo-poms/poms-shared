@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Singular;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ import nl.vpro.domain.media.support.OwnerType;
 @XmlType(name = "topicsType")
 public class Topics extends AbstractMediaObjectOwnableList<Topics, Topic> {
 
+    @Serial
     private static final long serialVersionUID = -1309416187665166955L;
 
     public static Topics empty(@NonNull OwnerType owner) {

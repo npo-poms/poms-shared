@@ -3,6 +3,7 @@ package nl.vpro.nicam;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
@@ -41,6 +42,7 @@ import nl.vpro.domain.media.ContentRating;
 @Slf4j
 public class Kijkwijzer implements NicamRated, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 9201478832377124830L;
 
     private final AgeRating ageRating;

@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.xml.bind.annotation.*;
@@ -15,6 +16,7 @@ import javax.xml.bind.annotation.*;
     propOrder = {})
 public class Member implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 8447129713109420423L;
 
     @XmlElement(required = true)

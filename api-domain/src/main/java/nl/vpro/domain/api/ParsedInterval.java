@@ -1,7 +1,5 @@
 package nl.vpro.domain.api;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -32,7 +30,7 @@ abstract class ParsedInterval<T extends Comparable<T>> {
         }
         final int number = matcher.group(1) == null ? 1 : Integer.parseInt(matcher.group(1));
         final IntervalUnit unit = IntervalUnit.valueOf(matcher.group(2));
-        return ParseResult.builder().amount(number).unit(unit).build();
+        return new ParseResult(number, unit);
 
     }
 
@@ -42,7 +40,7 @@ abstract class ParsedInterval<T extends Comparable<T>> {
     protected final int amount;
 
     protected ParsedInterval(ParseResult pair) {
-        this(pair.getAmount(), pair.getUnit());
+        this(pair.amount(), pair.unit());
     }
 
     protected ParsedInterval(int amount, IntervalUnit unit) {
@@ -72,12 +70,7 @@ abstract class ParsedInterval<T extends Comparable<T>> {
         return getValue();
     }
 
-    @AllArgsConstructor
-    @Data
-    @lombok.Builder
-    public static class ParseResult {
-        final int amount;
-        final IntervalUnit unit;
+    public record ParseResult(int amount, IntervalUnit unit) {
     }
 
 }

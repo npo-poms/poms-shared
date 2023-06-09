@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
 
@@ -54,6 +55,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 @JsonTypeName("program")
 @Slf4j
 public class Program extends MediaObject {
+    @Serial
     private static final long serialVersionUID = 6174884273805175998L;
 
     public static MediaBuilder.ProgramBuilder builder() {

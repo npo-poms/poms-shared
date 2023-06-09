@@ -3,6 +3,7 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -14,6 +15,7 @@ import nl.vpro.domain.media.support.TextualType;
  * @since 5.3
  */
 public class BasicTypedText implements TypedText, Comparable<TypedText>, Serializable {
+    @Serial
     private static final long serialVersionUID = -244704110650600576L;
     @Getter
     @Setter

@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
@@ -14,6 +15,7 @@ import nl.vpro.i18n.Displayable;
 @Entity
 public class Net implements Displayable, Serializable, Comparable<Net> {
 
+    @Serial
     private static final long serialVersionUID = -5278065987837127858L;
 
     @Id

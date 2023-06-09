@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.util.List;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @XmlType(name = "topicType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus"})
 public class Topic extends DomainObject implements MediaObjectOwnableListItem<Topic, Topics>, GTAARecordManaged {
 
+    @Serial
     private static final long serialVersionUID = -3211405159144788072L;
 
     @ManyToOne(fetch = FetchType.LAZY)

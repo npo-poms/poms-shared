@@ -1,5 +1,6 @@
 package nl.vpro.domain.media.support;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -50,6 +51,7 @@ import nl.vpro.validation.NoHtml;
 @JsonPropertyOrder({"value", "owner", "type"})
 public class Title extends AbstractOwnedText<Title> implements  Serializable, Child<MediaObject>, Identifiable<Long> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

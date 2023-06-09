@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
+import java.io.Serial;
 import java.time.Instant;
 
 /**
@@ -11,6 +12,7 @@ import java.time.Instant;
 @Getter
 public class ReadonlyStreamingStatus implements StreamingStatus {
 
+    @Serial
     private static final long serialVersionUID = 3307679919618834468L;
 
     private final Value withDrm;

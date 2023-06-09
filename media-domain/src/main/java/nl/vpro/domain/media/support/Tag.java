@@ -3,6 +3,7 @@ package nl.vpro.domain.media.support;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Locale;
 import java.util.Objects;
@@ -29,6 +30,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "tagType", namespace = Xmlns.MEDIA_NAMESPACE)
 public class Tag implements Serializable, Comparable<Tag>, Identifiable<Long> {
+    @Serial
     private static final long serialVersionUID = 0L;
 
     @Id

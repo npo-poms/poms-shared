@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Repeat implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -5535721887986056773L;
 
     @Column(name = "reruntext")

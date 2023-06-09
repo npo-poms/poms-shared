@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.net.URI;
 import java.util.*;
 
@@ -42,6 +43,7 @@ import nl.vpro.validation.NoHtml;
 })
 public class Person extends Credits implements PersonInterface {
 
+    @Serial
     private static final long serialVersionUID = 6033483875674065456L;
 
     public static Person copy(Person source) {

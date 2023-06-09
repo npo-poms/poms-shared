@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import java.io.Serial;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.support.Image;
@@ -16,6 +18,7 @@ public interface ImageImporter {
 
     class DownloadException extends RuntimeException {
 
+        @Serial
         private static final long serialVersionUID = 960450531709055817L;
         private final boolean retryable;
 

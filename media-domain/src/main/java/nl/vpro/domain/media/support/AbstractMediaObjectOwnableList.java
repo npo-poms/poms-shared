@@ -3,6 +3,7 @@ package nl.vpro.domain.media.support;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.util.*;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public abstract class AbstractMediaObjectOwnableList<
     extends DomainObject
     implements MediaObjectOwnableList<THIS, I>  {
 
+    @Serial
     private static final long serialVersionUID = 4657694328901583730L;
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)

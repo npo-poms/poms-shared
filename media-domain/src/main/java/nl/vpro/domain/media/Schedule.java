@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.*;
 import java.util.*;
@@ -39,6 +40,7 @@ import static nl.vpro.domain.Changeables.instant;
 @Slf4j
 public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicate<ScheduleEvent> {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     /**

@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
@@ -91,6 +92,7 @@ import static nl.vpro.domain.Changeables.instant;
 })
 public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable, RecursiveParentChildRelation {
 
+    @Serial
     private static final long serialVersionUID = -2247469313512827819L;
 
     @Id

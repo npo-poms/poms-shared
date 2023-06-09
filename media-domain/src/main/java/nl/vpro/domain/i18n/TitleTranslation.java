@@ -3,6 +3,8 @@ package nl.vpro.domain.i18n;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -19,6 +21,7 @@ import nl.vpro.domain.media.support.TextualType;
 @SuppressWarnings("JpaMissingIdInspection") // it's in super
 public class TitleTranslation extends AbstractOwnedTextEntity<TitleTranslation, MediaObjectTranslation> {
 
+    @Serial
     private static final long serialVersionUID = -4636628305739242913L;
 
     @Getter

@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
     "aspectRatio"
 })
 public class VideoAttributes implements Serializable {
+    @Serial
     private static final long serialVersionUID = 5314003558805319340L;
 
     @Id

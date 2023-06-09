@@ -5,6 +5,7 @@
 package nl.vpro.domain.constraint;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.xml.bind.annotation.*;
 
@@ -46,13 +47,11 @@ public abstract class AbstractFilter<T> implements DelegatingDisplayablePredicat
         if(this == o) {
             return true;
         }
-        if(!(o instanceof AbstractFilter)) {
+        if(!(o instanceof AbstractFilter filter)) {
             return false;
         }
 
-        AbstractFilter filter = (AbstractFilter)o;
-
-        if(constraint != null ? !constraint.equals(filter.constraint) : filter.constraint != null) {
+        if(!Objects.equals(constraint, filter.constraint)) {
             return false;
         }
 

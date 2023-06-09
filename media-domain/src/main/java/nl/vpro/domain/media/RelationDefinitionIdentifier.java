@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import java.util.Comparator;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Pattern;
 @Embeddable
 public class RelationDefinitionIdentifier implements Serializable, Comparable<RelationDefinitionIdentifier> {
 
+    @Serial
     private static final long serialVersionUID = -2249857834449241817L;
 
     @NotNull(message = "{nl.vpro.constraints.NotEmpty}")

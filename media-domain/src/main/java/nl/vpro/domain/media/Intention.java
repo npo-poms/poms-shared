@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ import nl.vpro.domain.media.support.SimpleValueMediaObjectOwnableListItem;
 @JsonDeserialize(using = Intention.Deserializer.class)
 public class Intention extends DomainObject implements SimpleValueMediaObjectOwnableListItem<Intention, Intentions, IntentionType> {
 
+    @Serial
     private static final long serialVersionUID = -604375721442281619L;
 
     @ManyToOne(targetEntity = Intentions.class, fetch = FetchType.LAZY)

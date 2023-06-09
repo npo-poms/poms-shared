@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.util.List;
 
 import javax.persistence.*;
@@ -39,6 +40,7 @@ import nl.vpro.domain.media.gtaa.GTAAManaged;
 @JsonDeserialize(using = CreditsDeserializer.class)
 public abstract class Credits extends DomainObject implements Child<MediaObject>, GTAAManaged {
 
+    @Serial
     private static final long serialVersionUID = 576943675942583696L;
 
     @Column(nullable = false)

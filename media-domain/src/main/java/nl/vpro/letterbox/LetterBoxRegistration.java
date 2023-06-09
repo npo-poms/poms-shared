@@ -3,6 +3,7 @@ package nl.vpro.letterbox;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Duration;
 
@@ -23,6 +24,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 @Slf4j
 public class LetterBoxRegistration implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1280324393718594913L;
 
     private final String key;

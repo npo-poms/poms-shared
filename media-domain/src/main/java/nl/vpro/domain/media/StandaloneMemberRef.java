@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -45,6 +46,7 @@ import nl.vpro.domain.media.support.OwnerType;
     "objectType"
 })
 public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRelation {
+    @Serial
     private static final long serialVersionUID = 0L;
 
     protected Instant added;

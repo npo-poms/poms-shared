@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.function.Supplier;
 
@@ -24,6 +25,7 @@ import nl.vpro.validation.*;
 @XmlType(name = "websiteType")
 public class Website implements UpdatableIdentifiable<Long, Website>, Serializable, Supplier<String>, MutableOwnable {
 
+    @Serial
     private static final long serialVersionUID = 6568968749798696389L;
 
     @Id

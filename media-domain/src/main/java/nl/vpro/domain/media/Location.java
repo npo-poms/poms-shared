@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -68,6 +69,7 @@ import static nl.vpro.domain.Changeables.instant;
 @Slf4j
 public class Location extends PublishableObject<Location>
     implements MutableOwnable, Comparable<Location>, Child<MediaObject> {
+    @Serial
     private static final long serialVersionUID = -140942203904508506L;
 
     private static final String BASE_URN = "urn:vpro:media:location:";
@@ -739,6 +741,7 @@ public class Location extends PublishableObject<Location>
     public final static Comparator<Location> PRESENTATION_ORDER = new PresentationComparator();
 
     public static class PresentationComparator implements Comparator<Location>, Serializable {
+        @Serial
         private static final long serialVersionUID = 0L;
 
         @Override

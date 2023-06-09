@@ -1,5 +1,6 @@
 package nl.vpro.domain;
 
+import java.io.Serial;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ import nl.vpro.validation.NoHtml;
 @XmlTransient
 public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity<T, P>, P> extends AbstractOwnedText<T> {
 
+    @Serial
     private static final long serialVersionUID = -4621135759610402997L;
 
     @Column(nullable = false)

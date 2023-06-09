@@ -2,6 +2,7 @@ package nl.vpro.domain.media.update;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Duration;
 import java.util.*;
@@ -448,15 +449,15 @@ public class AssemblageConfig {
 
 
         public static <S, F> boolean defaultTest(S source, S target, RequireEnum value, Function<S, F> getter) {
-            switch(value) {
-                case ELSE_SKIP:
-                case YES: {
+            switch (value) {
+                case ELSE_SKIP, YES -> {
                     F sourceValue = getter.apply(source);
                     return sourceValue != null;
                 }
-                case NO:
+                case NO -> {
                     return true;
-                case IF_TARGET_EMPTY: {
+                }
+                case IF_TARGET_EMPTY -> {
                     F sourceValue = getter.apply(source);
                     if (sourceValue == null) {
                         F targetValue = getter.apply(target);
@@ -465,8 +466,7 @@ public class AssemblageConfig {
                         return true;
                     }
                 }
-                default:
-                    throw new IllegalStateException();
+                default -> throw new IllegalStateException();
             }
 
         }
@@ -531,6 +531,7 @@ public class AssemblageConfig {
      */
     public static abstract class  RequiredFieldException extends IllegalArgumentException {
 
+        @Serial
         private static final long serialVersionUID = -7054047338107481793L;
 
         @Getter
@@ -556,6 +557,7 @@ public class AssemblageConfig {
 
     public static class FatalRequiredFieldException extends RequiredFieldException {
 
+        @Serial
         private static final long serialVersionUID = -1815466568814368401L;
 
         FatalRequiredFieldException(String format, Object... arguments) {
@@ -575,6 +577,7 @@ public class AssemblageConfig {
      */
     public static class SkippingRequiredFieldException extends RequiredFieldException {
 
+        @Serial
         private static final long serialVersionUID = -6503681639731951808L;
 
         SkippingRequiredFieldException(String format, Object... arguments) {

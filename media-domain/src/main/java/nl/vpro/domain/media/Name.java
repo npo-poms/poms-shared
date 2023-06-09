@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.net.URI;
 import java.util.List;
 
@@ -37,6 +38,7 @@ import nl.vpro.domain.media.gtaa.*;
 })
 public class Name extends Credits implements GTAARecordManaged {
 
+    @Serial
     private static final long serialVersionUID = -263374091559949040L;
 
     @XmlTransient

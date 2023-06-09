@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
@@ -38,6 +39,7 @@ import nl.vpro.validation.GenreValidation;
 @Slf4j
 public class Genre implements Displayable, Comparable<Genre>, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 433263994376700689L;
 
     @Id

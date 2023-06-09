@@ -3,6 +3,7 @@ package nl.vpro.domain.media.gtaa;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
@@ -23,6 +24,7 @@ import nl.vpro.validation.NoHtml;
 @EqualsAndHashCode(of = { "uri" })
 public class GTAARecord implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     @Id

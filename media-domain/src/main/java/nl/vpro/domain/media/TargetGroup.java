@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ import nl.vpro.domain.media.support.SimpleValueMediaObjectOwnableListItem;
 @JsonDeserialize(using = TargetGroup.Deserializer.class)
 public class TargetGroup extends DomainObject implements SimpleValueMediaObjectOwnableListItem<TargetGroup, TargetGroups, TargetGroupType> {
 
+    @Serial
     private static final long serialVersionUID = 6530310295897331244L;
 
     @ManyToOne(targetEntity = TargetGroups.class, fetch = FetchType.LAZY)

@@ -3,6 +3,8 @@ package nl.vpro.domain.media.support;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -27,6 +29,7 @@ import nl.vpro.domain.media.ScheduleEvent;
 @JsonPropertyOrder({"value", "owner", "type"})
 public class ScheduleEventDescription extends AbstractOwnedTextEntity<ScheduleEventDescription, ScheduleEvent> {
 
+    @Serial
     private static final long serialVersionUID = -5439283140517618047L;
 
     @Getter

@@ -65,7 +65,7 @@ public abstract class AbstractTextConstraint<T> implements WildTextConstraint<T>
 
         AbstractTextConstraint<?> that = (AbstractTextConstraint<?>)o;
 
-        return value != null ? value.equals(that.value) : that.value == null;
+        return Objects.equals(value, that.value);
     }
 
     @Override
@@ -81,16 +81,12 @@ public abstract class AbstractTextConstraint<T> implements WildTextConstraint<T>
 
 
     protected boolean applyValue(String compareTo) {
-        switch (getCaseHandling()) {
-            case ASIS:
-                return Objects.equals(value, compareTo);
-            case LOWER:
-                return Objects.equals(value == null ? null : value.toLowerCase(), compareTo);
-            case UPPER:
-                return Objects.equals(value == null ? null : value.toUpperCase(), compareTo);
-            default:
-                return Objects.equals(value == null ? null : value.toUpperCase(), compareTo.toUpperCase());
-        }
+        return switch (getCaseHandling()) {
+            case ASIS -> Objects.equals(value, compareTo);
+            case LOWER -> Objects.equals(value == null ? null : value.toLowerCase(), compareTo);
+            case UPPER -> Objects.equals(value == null ? null : value.toUpperCase(), compareTo);
+            default -> Objects.equals(value == null ? null : value.toUpperCase(), compareTo.toUpperCase());
+        };
     }
 
 

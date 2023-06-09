@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
     "audioAttributes"
 })
 public class AVAttributes implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1651506882422062995L;
 
     @Id

@@ -31,7 +31,7 @@ public abstract class AbstractGenreConstraint<T> extends AbstractTextConstraint<
     }
 
     @Override
-    @Pattern(regexp = "3\\.[0-9\\.]+")
+    @Pattern(regexp = "3\\.[0-9.]+")
     public void setValue(String s) {
         super.setValue(s);
     }

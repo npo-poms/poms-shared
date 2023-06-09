@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,6 +33,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @XmlType(name = "geoLocationType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus", "role"})
 public class GeoLocation extends DomainObject implements MediaObjectOwnableListItem<GeoLocation, GeoLocations>, Region, GTAARecordManaged {
 
+    @Serial
     private static final long serialVersionUID = -1000438762907228547L;
 
     @ManyToOne(fetch = FetchType.LAZY)

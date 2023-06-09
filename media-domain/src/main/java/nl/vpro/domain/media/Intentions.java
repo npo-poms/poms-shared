@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,7 @@ import nl.vpro.domain.media.support.OwnerType;
 })
 public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Intention> {
 
+    @Serial
     private static final long serialVersionUID = -1077914108074955136L;
 
     public Intentions() {}

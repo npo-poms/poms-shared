@@ -2,6 +2,8 @@ package nl.vpro.domain.media;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Locale;
 import javax.persistence.*;
@@ -22,6 +24,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
         "language"
         })
 public class AudioAttributes implements Serializable {
+    @Serial
     private static final long serialVersionUID = -1734599033747834638L;
 
     @Id

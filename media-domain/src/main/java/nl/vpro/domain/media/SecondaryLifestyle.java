@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import nl.vpro.i18n.Displayable;
 @XmlAccessorType(XmlAccessType.NONE)
 public class SecondaryLifestyle implements Serializable, Displayable {
 
+    @Serial
     private static final long serialVersionUID = -2203208005840440189L;
 
     @XmlValue

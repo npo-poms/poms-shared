@@ -2,6 +2,7 @@ package nl.vpro.parkpost;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.time.Duration;
 import java.util.*;
 
@@ -187,6 +188,7 @@ public class PromoEventConverter {
     }
 
     public static class NoMidException extends Exception {
+        @Serial
         private static final long serialVersionUID = -7852346235133782658L;
 
         public NoMidException(PromoEvent event) {
@@ -195,6 +197,7 @@ public class PromoEventConverter {
     }
 
     public static class NoPromoException extends Exception {
+        @Serial
         private static final long serialVersionUID = -7799151404463882905L;
 
         public NoPromoException(PromoEvent event) {
@@ -203,6 +206,7 @@ public class PromoEventConverter {
     }
 
     public static class NoTitleException extends Exception {
+        @Serial
         private static final long serialVersionUID = 3545093070408436707L;
 
         public NoTitleException(PromoEvent event) {

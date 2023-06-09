@@ -3,6 +3,8 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 
@@ -13,6 +15,7 @@ import nl.vpro.domain.media.support.TextualType;
  */
 public class BasicOwnedText extends BasicTypedText implements OwnedText {
 
+    @Serial
     private static final long serialVersionUID = -6428591725078554520L;
 
     @Getter

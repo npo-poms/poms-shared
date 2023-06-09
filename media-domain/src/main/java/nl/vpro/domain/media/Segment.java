@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
 
@@ -40,6 +41,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 @SegmentValidation
 public class Segment extends MediaObject implements Comparable<Segment>, Child<Program>, MutableOwnable {
 
+    @Serial
     private static final long serialVersionUID = -868293795041160925L;
 
     static boolean defaultCorrelation = false;
