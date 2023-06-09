@@ -21,8 +21,6 @@
 
   <xs:element name="pagesForm" type="pagesFormType"/>
 
-  <xs:element name="publicationReason" type="publicationReasonType"/>
-
   <xs:element name="redirectEntry" type="redirectEntry"/>
 
   <xs:element name="redirects" type="redirectList"/>
