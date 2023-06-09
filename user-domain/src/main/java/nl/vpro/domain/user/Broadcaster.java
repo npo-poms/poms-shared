@@ -76,10 +76,10 @@ public class Broadcaster extends Organization {
     @XmlTransient
     private Instant lastModified;
 
-    @Column
+    @Column(columnDefinition = "boolean default true")
     @Getter
     @XmlTransient
-    private boolean display;
+    private boolean display = true;
 
     public Range<LocalDate> asRange() {
         return Ranges.closedClosed(start, stop);
