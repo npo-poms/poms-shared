@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Michiel Meeuwissen
  * @since 4.1
  */
-@SuppressWarnings("OptionalGetWithoutIsPresent")
+@SuppressWarnings({"OptionalGetWithoutIsPresent", "DataFlowIssue"})
 @Slf4j
 public class TVATransformerTest {
     final EpgGenreFunction genreFunction = new EpgGenreFunction();
@@ -68,108 +68,109 @@ public class TVATransformerTest {
     public void transform() throws TransformerException, ParserConfigurationException, SAXException, IOException {
         String xml = transform("pd/pd/NED320150805P.xml");
         similar(xml,
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<mediaInformation xmlns=\"urn:vpro:media:2009\"\n" +
-                "                  publicationTime=\"2015-08-03T17:40:17.040+02:00\"\n" +
-                "                  version=\"300\">\n" +
-                "   <programTable>\n" +
-                "      <program workflow=\"FOR_REPUBLICATION\"\n" +
-                "               mid=\"POW_00252645\"\n" +
-                "               type=\"BROADCAST\"\n" +
-                "               avType=\"VIDEO\"\n" +
-                "               embeddable=\"true\">\n" +
-                "         <crid>crid://npo/programmagegevens/840343221668</crid>\n" +
-                "         <broadcaster id=\"EO\">EO</broadcaster>\n" +
-                "         <title type=\"MAIN\" owner=\"MIS\">SERIE TITEL</title>\n" +
-                "         <title type=\"SUB\" owner=\"MIS\">IK BEN EEN AFLEVERING</title>\n" +
-                "         <!--tva:Title[@type='parentseriestitle'] 'IK BEN EEN MOEDERSERIE' goes to series-->\n" +
-                "         <!--tva:Title[@type='translatedtitle'] 'ICH BIN EIN SEIZON' goes to season-->\n" +
-                "         <title type=\"ORIGINAL\" owner=\"MIS\">ICH BIN EIN PROGRAM</title>\n" +
-                "         <!--tva:Synopsis[@length = 'long'] 'Dit is de seizoensbeschrijving' goes to season-->\n" +
-                "         <description type=\"SHORT\" owner=\"MIS\">IK BEN DE KORTE BESCHRIJVING</description>\n" +
-                "         <description type=\"MAIN\" owner=\"MIS\">IK BEN DE LANGE BESCHRIJVING</description>\n" +
-                "         <!--tva:Synopsis[@length = 'long' and @type = 'parentSeriesSynopsis'] 'Dit is de Seriesbeschrijving' goes to series-->\n" +
-                "         <description owner=\"MIS\" type=\"KICKER\">Dit is de kicker</description>\n" +
-                "         <genre id=\"3.0.1.1.11\"/>\n" +
-                "         <country code=\"GB\"/>\n" +
-                "         <language code=\"cs\"/>\n" +
-                "         <releaseYear>2009</releaseYear>\n" +
-                "         <duration>PT00H12M55S</duration>\n" +
-                "         <ageRating>ALL</ageRating>\n" +
-                "         <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
-                "         <contentRating>GROF_TAALGEBRUIK</contentRating>\n" +
-                "         <descendantOf type=\"SEASON\" midRef=\"POW_00252644\"/>\n" +
-                "         <descendantOf type=\"SERIES\" midRef=\"POW_00818820\"/>\n" +
-                "         <episodeOf type=\"SEASON\" midRef=\"POW_00252644\" index=\"1\"/>\n" +
-                "      </program>\n" +
-                "      <program workflow=\"FOR_REPUBLICATION\"\n" +
-                "               mid=\"POW_00252645_1\"\n" +
-                "               type=\"BROADCAST\"\n" +
-                "               avType=\"VIDEO\"\n" +
-                "               embeddable=\"true\">\n" +
-                "         <crid>crid://npo/programmagegevens/840343221669</crid>\n" +
-                "         <broadcaster id=\"EO\">EO</broadcaster>\n" +
-                "         <title type=\"MAIN\" owner=\"MIS\">SERIE TITEL</title>\n" +
-                "         <title type=\"SUB\" owner=\"MIS\">IK BEN EEN AFLEVERING</title>\n" +
-                "         <!--tva:Title[@type='parentseriestitle'] 'IK BEN EEN MOEDERSERIE' goes to series-->\n" +
-                "         <!--tva:Synopsis[@length = 'long'] 'Dit is de seizoensbeschrijving' goes to season-->\n" +
-                "         <description type=\"SHORT\" owner=\"MIS\">IK BEN DE KORTE BESCHRIJVING</description>\n" +
-                "         <description type=\"MAIN\" owner=\"MIS\">IK BEN DE LANGE BESCHRIJVING</description>\n" +
-                "         <!--tva:Synopsis[@length = 'long' and @type = 'parentSeriesSynopsis'] 'Dit is de Seriesbeschrijving' goes to series-->\n" +
-                "         <description owner=\"MIS\" type=\"KICKER\">Dit is de kicker</description>\n" +
-                "         <genre id=\"3.0.1.1.11\"/>\n" +
-                "         <country code=\"GB\"/>\n" +
-                "         <language code=\"en\"/>\n" +
-                "         <releaseYear>2009</releaseYear>\n" +
-                "         <duration>PT00H12M55S</duration>\n" +
-                "         <ageRating>9</ageRating>\n" +
-                "         <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
-                "         <contentRating>GROF_TAALGEBRUIK</contentRating>\n" +
-                "      </program>\n" +
-                "   </programTable>\n" +
-                "   <groupTable>\n" +
-                "      <group type=\"SEASON\"\n" +
-                "             avType=\"VIDEO\"\n" +
-                "             mid=\"POW_00252644\"\n" +
-                "             workflow=\"FOR_REPUBLICATION\">\n" +
-                "         <broadcaster id=\"EO\">EO</broadcaster>\n" +
-                "         <title type=\"MAIN\" owner=\"MIS\">SERIE TITEL</title>\n" +
-                "         <title type=\"ORIGINAL\" owner=\"MIS\">ICH BIN EIN SEIZON</title>\n" +
-                "         <description type=\"MAIN\" owner=\"MIS\">Dit is de seizoensbeschrijving</description>\n" +
-                "         <memberOf midRef=\"POW_00818820\" index=\"3\"/>\n" +
-                "         <poSequenceInformation>3</poSequenceInformation>\n" +
-                "      </group>\n" +
-                "      <group type=\"SERIES\"\n" +
-                "             avType=\"VIDEO\"\n" +
-                "             mid=\"POW_00818820\"\n" +
-                "             workflow=\"FOR_REPUBLICATION\">\n" +
-                "         <broadcaster id=\"EO\">EO</broadcaster>\n" +
-                "         <title type=\"MAIN\" owner=\"MIS\">IK BEN EEN MOEDERSERIE</title>\n" +
-                "         <description type=\"MAIN\" owner=\"MIS\">Dit is de Seriesbeschrijving</description>\n" +
-                "      </group>\n" +
-                "   </groupTable>\n" +
-                "   <schedule channel=\"NED3\"\n" +
-                "             start=\"2015-08-15T06:30:00+02:00\"\n" +
-                "             stop=\"2015-08-16T03:06:00+02:00\">\n" +
-                "      <scheduleEvent urnRef=\"crid://npo/programmagegevens/840343221668\"\n" +
-                "                     channel=\"NED3\"\n" +
-                "                     net=\"ZAPP\">\n" +
-                "         <repeat isRerun=\"true\">Bla bla</repeat>\n" +
-                "         <start>2015-08-15T06:30:00+02:00</start>\n" +
-                "         <duration>PT00H12M55S</duration>\n" +
-                "         <poProgID>POW_00252645</poProgID>\n" +
-                "         <poSeriesID>POW_00252644</poSeriesID>\n" +
-                "      </scheduleEvent>\n" +
-                "      <scheduleEvent urnRef=\"crid://npo/programmagegevens/840343221669\"\n" +
-                "                     channel=\"NED3\"\n" +
-                "                     net=\"ZAPP\">\n" +
-                "         <repeat isRerun=\"false\">Bloe bloe</repeat>\n" +
-                "         <start>2015-08-15T06:30:00+02:00</start>\n" +
-                "         <duration>PT00H12M55S</duration>\n" +
-                "         <poProgID>POW_00252645_1</poProgID>\n" +
-                "      </scheduleEvent>\n" +
-                "   </schedule>\n" +
-                "</mediaInformation>");
+            """
+                <?xml version="1.0" encoding="UTF-8"?>
+                <mediaInformation xmlns="urn:vpro:media:2009"
+                                  publicationTime="2015-08-03T17:40:17.040+02:00"
+                                  version="300">
+                   <programTable>
+                      <program workflow="FOR_REPUBLICATION"
+                               mid="POW_00252645"
+                               type="BROADCAST"
+                               avType="VIDEO"
+                               embeddable="true">
+                         <crid>crid://npo/programmagegevens/840343221668</crid>
+                         <broadcaster id="EO">EO</broadcaster>
+                         <title type="MAIN" owner="MIS">SERIE TITEL</title>
+                         <title type="SUB" owner="MIS">IK BEN EEN AFLEVERING</title>
+                         <!--tva:Title[@type='parentseriestitle'] 'IK BEN EEN MOEDERSERIE' goes to series-->
+                         <!--tva:Title[@type='translatedtitle'] 'ICH BIN EIN SEIZON' goes to season-->
+                         <title type="ORIGINAL" owner="MIS">ICH BIN EIN PROGRAM</title>
+                         <!--tva:Synopsis[@length = 'long'] 'Dit is de seizoensbeschrijving' goes to season-->
+                         <description type="SHORT" owner="MIS">IK BEN DE KORTE BESCHRIJVING</description>
+                         <description type="MAIN" owner="MIS">IK BEN DE LANGE BESCHRIJVING</description>
+                         <!--tva:Synopsis[@length = 'long' and @type = 'parentSeriesSynopsis'] 'Dit is de Seriesbeschrijving' goes to series-->
+                         <description owner="MIS" type="KICKER">Dit is de kicker</description>
+                         <genre id="3.0.1.1.11"/>
+                         <country code="GB"/>
+                         <language code="cs"/>
+                         <releaseYear>2009</releaseYear>
+                         <duration>PT00H12M55S</duration>
+                         <ageRating>ALL</ageRating>
+                         <contentRating>DRUGS_EN_ALCOHOL</contentRating>
+                         <contentRating>GROF_TAALGEBRUIK</contentRating>
+                         <descendantOf type="SEASON" midRef="POW_00252644"/>
+                         <descendantOf type="SERIES" midRef="POW_00818820"/>
+                         <episodeOf type="SEASON" midRef="POW_00252644" index="1"/>
+                      </program>
+                      <program workflow="FOR_REPUBLICATION"
+                               mid="POW_00252645_1"
+                               type="BROADCAST"
+                               avType="VIDEO"
+                               embeddable="true">
+                         <crid>crid://npo/programmagegevens/840343221669</crid>
+                         <broadcaster id="EO">EO</broadcaster>
+                         <title type="MAIN" owner="MIS">SERIE TITEL</title>
+                         <title type="SUB" owner="MIS">IK BEN EEN AFLEVERING</title>
+                         <!--tva:Title[@type='parentseriestitle'] 'IK BEN EEN MOEDERSERIE' goes to series-->
+                         <!--tva:Synopsis[@length = 'long'] 'Dit is de seizoensbeschrijving' goes to season-->
+                         <description type="SHORT" owner="MIS">IK BEN DE KORTE BESCHRIJVING</description>
+                         <description type="MAIN" owner="MIS">IK BEN DE LANGE BESCHRIJVING</description>
+                         <!--tva:Synopsis[@length = 'long' and @type = 'parentSeriesSynopsis'] 'Dit is de Seriesbeschrijving' goes to series-->
+                         <description owner="MIS" type="KICKER">Dit is de kicker</description>
+                         <genre id="3.0.1.1.11"/>
+                         <country code="GB"/>
+                         <language code="en"/>
+                         <releaseYear>2009</releaseYear>
+                         <duration>PT00H12M55S</duration>
+                         <ageRating>9</ageRating>
+                         <contentRating>DRUGS_EN_ALCOHOL</contentRating>
+                         <contentRating>GROF_TAALGEBRUIK</contentRating>
+                      </program>
+                   </programTable>
+                   <groupTable>
+                      <group type="SEASON"
+                             avType="VIDEO"
+                             mid="POW_00252644"
+                             workflow="FOR_REPUBLICATION">
+                         <broadcaster id="EO">EO</broadcaster>
+                         <title type="MAIN" owner="MIS">SERIE TITEL</title>
+                         <title type="ORIGINAL" owner="MIS">ICH BIN EIN SEIZON</title>
+                         <description type="MAIN" owner="MIS">Dit is de seizoensbeschrijving</description>
+                         <memberOf midRef="POW_00818820" index="3"/>
+                         <poSequenceInformation>3</poSequenceInformation>
+                      </group>
+                      <group type="SERIES"
+                             avType="VIDEO"
+                             mid="POW_00818820"
+                             workflow="FOR_REPUBLICATION">
+                         <broadcaster id="EO">EO</broadcaster>
+                         <title type="MAIN" owner="MIS">IK BEN EEN MOEDERSERIE</title>
+                         <description type="MAIN" owner="MIS">Dit is de Seriesbeschrijving</description>
+                      </group>
+                   </groupTable>
+                   <schedule channel="NED3"
+                             start="2015-08-15T06:30:00+02:00"
+                             stop="2015-08-16T03:06:00+02:00">
+                      <scheduleEvent urnRef="crid://npo/programmagegevens/840343221668"
+                                     channel="NED3"
+                                     net="ZAPP">
+                         <repeat isRerun="true">Bla bla</repeat>
+                         <start>2015-08-15T06:30:00+02:00</start>
+                         <duration>PT00H12M55S</duration>
+                         <poProgID>POW_00252645</poProgID>
+                         <poSeriesID>POW_00252644</poSeriesID>
+                      </scheduleEvent>
+                      <scheduleEvent urnRef="crid://npo/programmagegevens/840343221669"
+                                     channel="NED3"
+                                     net="ZAPP">
+                         <repeat isRerun="false">Bloe bloe</repeat>
+                         <start>2015-08-15T06:30:00+02:00</start>
+                         <duration>PT00H12M55S</duration>
+                         <poProgID>POW_00252645_1</poProgID>
+                      </scheduleEvent>
+                   </schedule>
+                </mediaInformation>""");
     }
 
     @Test
@@ -360,7 +361,7 @@ public class TVATransformerTest {
                 continue;
             }
             if (mediaObject.getBroadcasters().isEmpty()) {
-                log.info("" + mediaObject + " has no broadcasters");
+                log.info(mediaObject + " has no broadcasters");
             }
             for (Broadcaster b : mediaObject.getBroadcasters()) {
                 assertThat(b.getId()).isNotEmpty();
@@ -376,7 +377,7 @@ public class TVATransformerTest {
             if ("POW_03195338".equals(program.getMid())) {
                 List<Title> titles = new ArrayList<>(program.getTitles());
                 assertThat(titles.get(0).get()).isEqualTo("Zappbios: Tussen twee werelden");
-                assertThat(titles.get(1).get()).isEqualTo("H\u00f6rdur - zwischen den Welten");
+                assertThat(titles.get(1).get()).isEqualTo("Hördur - zwischen den Welten");
             }
             if ("POW_00163247".equals(program.getMid())) {
                 assertThat(program.getLanguages()).containsExactly(new Locale("zxx"));
@@ -624,16 +625,17 @@ public class TVATransformerTest {
                 @Override
                 public ExtensionFunctionCall makeCallExpression() {
                     return new ExtensionFunctionCall() {
+                        @SuppressWarnings("resource")
                         @Override
                         public Sequence call(XPathContext context, Sequence[] arguments) throws XPathException {
                             String value = arguments[0].iterate().next().getStringValue().trim().toUpperCase().replaceAll("\\s+", "_");
-                            switch(value) {
-                                case "AVROTROS": value = "AVTR"; break;
-                                case "KRO-NCRV": value = "KRNC"; break;
-                                case "SOCUTERA": value = "SOCU"; break;
-                                case "OMROP_FRYSLAN": value = "ROFR"; break;
-                                case "": log.warn("empty value"); break;
-                                }
+                            switch (value) {
+                                case "AVROTROS" -> value = "AVTR";
+                                case "KRO-NCRV" -> value = "KRNC";
+                                case "SOCUTERA" -> value = "SOCU";
+                                case "OMROP_FRYSLAN" -> value = "ROFR";
+                                case "" -> log.warn("empty value");
+                            }
                             return new StringValue(value.substring(0, Math.min(4, value.length())));
                         }
                     };
@@ -658,7 +660,7 @@ public class TVATransformerTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Result result = new StreamResult(out);
         getTransformer(configure).transform(new StreamSource(resource), result);
-        return out.toString(StandardCharsets.UTF_8.name());
+        return out.toString(StandardCharsets.UTF_8);
     }
 
     private String transform(String resource, Consumer<Transformer> configure) throws TransformerException, IOException, SAXException, ParserConfigurationException {
