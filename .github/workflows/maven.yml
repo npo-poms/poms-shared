@@ -1,6 +1,6 @@
 ---
 name: build
-run-name: build ${{  github.ref_name }} ('${{ github.event.head_commit.message }}' by ${{ github.actor }})
+run-name: build ${{  github.ref_name }} ('${{ github.event.head_commit.message }}')
 
 on:
   push:
