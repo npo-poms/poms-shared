@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.user;
 
+import java.io.Serial;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlType;
@@ -14,6 +16,9 @@ import nl.vpro.domain.Xmlns;
 @Cacheable(true)
 @XmlType(name = "thirdPartyType", namespace = Xmlns.MEDIA_NAMESPACE)
 public class ThirdParty extends Organization {
+
+    @Serial
+    private static final long serialVersionUID = 3250763235873656107L;
 
     protected ThirdParty() {
 

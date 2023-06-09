@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -25,6 +26,7 @@ import nl.vpro.domain.Identifiable;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Slf4j
 public abstract class AbstractUser implements Serializable, Identifiable<String>, User  {
+    @Serial
     private static final long serialVersionUID = 1L;
 
 

@@ -12,10 +12,6 @@ import nl.vpro.domain.MutableEmbargo;
 public class PublishableValidator implements ConstraintValidator<EmbargoValidation, MutableEmbargo<?>> {
 
     @Override
-    public void initialize(EmbargoValidation publishable) {
-    }
-
-    @Override
     public boolean isValid(MutableEmbargo<?> value, ConstraintValidatorContext constraintValidatorContext) {
         return value.getPublishStartInstant() == null
             || value.getPublishStopInstant() == null

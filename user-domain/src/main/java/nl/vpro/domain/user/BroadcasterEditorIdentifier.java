@@ -6,6 +6,8 @@ package nl.vpro.domain.user;
 
 import lombok.*;
 
+import java.io.Serial;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -13,6 +15,8 @@ import javax.persistence.Embeddable;
 @EqualsAndHashCode
 public class BroadcasterEditorIdentifier implements OrganizationEditorIdentifier<Broadcaster> {
 
+    @Serial
+    private static final long serialVersionUID = 1429763489903175742L;
     @Column(name = "editor_principalid")
     @Getter
     @Setter

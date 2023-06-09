@@ -7,6 +7,7 @@ package nl.vpro.domain.user;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -86,7 +87,7 @@ public abstract class Organization implements Serializable, Identifiable<String>
 
         Organization that = (Organization)o;
 
-        if(id != null ? !id.equals(that.id) : that.id != null) {
+        if(!Objects.equals(id, that.id)) {
             return false;
         }
 

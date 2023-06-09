@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.user;
 
+import java.io.Serial;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -17,6 +19,9 @@ import nl.vpro.domain.Xmlns;
 @XmlType(name = "portalType", namespace = Xmlns.MEDIA_NAMESPACE)
 @Cacheable
 public class Portal extends Organization {
+
+    @Serial
+    private static final long serialVersionUID = 2524006843893831462L;
 
     public Portal() {
     }

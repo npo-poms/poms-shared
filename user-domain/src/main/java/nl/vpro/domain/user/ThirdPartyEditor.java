@@ -6,6 +6,8 @@ package nl.vpro.domain.user;
 
 import lombok.*;
 
+import java.io.Serial;
+
 import javax.persistence.*;
 
 
@@ -13,6 +15,7 @@ import javax.persistence.*;
 @ToString
 public class ThirdPartyEditor implements OrganizationEditor<ThirdParty> {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     @EmbeddedId

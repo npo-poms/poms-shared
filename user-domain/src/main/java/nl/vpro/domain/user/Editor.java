@@ -7,6 +7,7 @@ package nl.vpro.domain.user;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
 import java.util.function.Supplier;
@@ -42,6 +43,7 @@ import nl.vpro.domain.Accountable;
 @Slf4j
 public class Editor extends AbstractUser {
 
+    @Serial
     private static final long serialVersionUID = -4381169912123229285L;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")

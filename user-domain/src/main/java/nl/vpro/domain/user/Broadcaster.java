@@ -137,17 +137,18 @@ public class Broadcaster extends Organization {
         String misId,
         String domain,
         LocalDate start,
-        LocalDate stop) {
+        LocalDate stop,
+        Boolean display) {
         this(id, displayName,whatsOnId, neboId, misId);
         this.domain = domain;
         this.start = start;
         this.stop = stop;
+        this.display = display == null || display;
     }
 
 
     public Broadcaster(Broadcaster b) {
-        this(b.id, b.displayName, b.whatsOnId, b.neboId, b.misId, b.domain, b.start, b.stop);
-
+        this(b.id, b.displayName, b.whatsOnId, b.neboId, b.misId, b.domain, b.start, b.stop, b.display);
     }
 
     @Override

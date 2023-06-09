@@ -7,6 +7,7 @@ package nl.vpro.domain;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.time.Instant;
 
 import javax.persistence.*;
@@ -41,6 +42,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public abstract class AbstractPublishableObject<T extends AbstractPublishableObject<T>>
     extends DomainObject implements Publishable<T> {
 
+    @Serial
     private static final long serialVersionUID = -8895271310506491326L;
     @Column(nullable = false, name="creationDate")
     protected Instant creationInstant = Changeables.instant();

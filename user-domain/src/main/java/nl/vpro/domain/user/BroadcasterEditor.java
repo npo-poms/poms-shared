@@ -6,12 +6,15 @@ package nl.vpro.domain.user;
 
 import lombok.*;
 
+import java.io.Serial;
+
 import javax.persistence.*;
 
 @Entity
 @ToString
 public class BroadcasterEditor implements OrganizationEditor<Broadcaster> {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
