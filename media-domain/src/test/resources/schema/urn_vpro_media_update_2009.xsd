@@ -44,7 +44,7 @@
 
   <xs:element name="transcodeStatus" type="transcodeStatusType"/>
 
-  <xs:element name="uploadResponse" type="uploadResponse"/>
+  <xs:element name="uploadResponse" type="uploadResponseType"/>
 
   <xs:complexType name="midAndTypeType">
     <xs:sequence>
@@ -583,12 +583,14 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="uploadResponse">
+  <xs:complexType name="uploadResponseType">
     <xs:sequence>
       <xs:element name="status" type="xs:string" minOccurs="0"/>
       <xs:element name="response" type="xs:string" minOccurs="0"/>
+      <xs:element name="bytes" type="xs:long" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="statusCode" type="xs:int" use="required"/>
+    <xs:attribute name="mid" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="transcodeType">

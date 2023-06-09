@@ -86,6 +86,9 @@ public abstract class MediaObjectLockerAspect  {
 
 
     protected static MediaIdentifiable.Correlation getCorrelation(String method, Object object) {
+        if (object == null) {
+            return MediaIdentifiable.Correlation.NO_LOCK;
+        }
         if (StringUtils.isNotBlank(method)) {
             try {
                 Method m = object.getClass().getMethod(method);
@@ -98,8 +101,8 @@ public abstract class MediaObjectLockerAspect  {
             if (object instanceof CharSequence) {
                 return  MediaIdentifiable.Correlation.mid(object.toString());
             }
-            if (object instanceof MediaIdentifiable) {
-                MediaIdentifiable.Correlation correlation = ((MediaIdentifiable) object).getCorrelation();
+            if (object instanceof MediaIdentifiable mediaIdentifiable) {
+                MediaIdentifiable.Correlation correlation = mediaIdentifiable.getCorrelation();
                 if (correlation == null || correlation.getType() == MediaIdentifiable.Correlation.Type.HASH) {
                     boolean warn = true;
                     if (object instanceof MediaObject) {
@@ -121,14 +124,14 @@ public abstract class MediaObjectLockerAspect  {
 
 
     public static ScheduleEventIdentifier getSid(Object object) {
-        if (object instanceof CharSequence) {
-            return ScheduleEventIdentifier.parse(object.toString());
+        if (object instanceof CharSequence charSequence) {
+            return ScheduleEventIdentifier.parse(charSequence);
         }
-        if (object instanceof ScheduleEventIdentifier) {
-            return (ScheduleEventIdentifier) object;
+        if (object instanceof ScheduleEventIdentifier scheduleEventIdentifier) {
+            return scheduleEventIdentifier;
         }
-        if (object instanceof ScheduleEvent) {
-            return ((ScheduleEvent) object).getId();
+        if (object instanceof ScheduleEvent scheduleEvent) {
+            return scheduleEvent.getId();
         }
         throw new IllegalStateException();
     }

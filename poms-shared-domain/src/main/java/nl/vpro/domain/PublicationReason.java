@@ -3,6 +3,7 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
@@ -25,6 +26,19 @@ import static java.util.Comparator.*;
 /**
  * Indicates a reason for publication. This part of the a {@code MediaChange} object.
  * In ElasticSearch is it written directly into the {@code _doc} representing the {@code MediaObject} itself though.
+ * <p>
+ * So a reason in the 'repubReason' field in the database looks like
+ * {@code <some string>[\t<some other string>][..]]}
+ * So, multiple reasons are joined with {@link #REASON_SPLITTER}
+ * <p>
+ * Resulting in two reason in the api, where the strings are joined with a string representing the mechanism and a timestamp. (The two fields in {@link PublicationReason}).
+ *  Encoded  {@code republication|<some string>␟1686051496927}
+ * and {@code republication|<some other string>␟1686051496927} (constructed with {@link #toRecord()}).
+ * <p>
+ *  While transfering multiple such reasons to the publishered multiple of such string representations are joined with {@link #RECORD_SPLITTER}.
+ * </p>
+ *
+ *
  *
  * @author Michiel Meeuwissen
  * @since 7.1
@@ -35,7 +49,7 @@ import static java.util.Comparator.*;
 @Slf4j
 public class PublicationReason implements Serializable, Comparable<PublicationReason> {
 
-    //@Serial
+    @Serial
     private static final long serialVersionUID = -5898117026516765909L;
 
     /**
@@ -46,23 +60,32 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
     public static final String RECORD_SPLITTER = "␞";
 
     /**
-     * A reason can be joined with its publication time.
+     * A reason can be joined with its publication time. Not in the database, just in the string representation of a
+     * set of reasons (as put on headers).
      * <p>
      * Uses  ASCII Unit separator US
      */
     public static final String FIELD_SPLITTER = "␟";
 
     /**
-     * Multiple reasons can be collected in the datqbase, in that case they are joined with this
-     *
+     * Multiple reasons can be collected in the database, in that case they are joined with this.
      */
     public static final String REASON_SPLITTER = "\t";
 
+    /**
+     * An explicit reason can be stored in the database, but they get prefixed by the mechanism that caused them
+     */
+    public static final String REASON_PREFIX_SPLITTER = "|";
 
+    /**
+     * The pattern for a valid reason in the database.
+     */
     public static final String REASON_PATTERN = "[^" + RECORD_SPLITTER + FIELD_SPLITTER  + "]*";
 
 
-
+    /**
+     * The string representing the reason for publication. This may just be some mechanism, like the ones found in  nl.vpro.domain.media.PublicationUpdate.Reasons}, but this may also be a prefix for some explicit reason set in the database (seperated by {@link #REASON_PREFIX_SPLITTER}).
+     */
     @XmlValue
     String value;
 
