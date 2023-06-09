@@ -45,7 +45,7 @@ import static java.util.Comparator.*;
  */
 @Getter
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "publicationReason", namespace = Xmlns.API_NAMESPACE)
+@XmlType(name = "publicationReasonType", namespace = Xmlns.API_NAMESPACE)
 @Slf4j
 public class PublicationReason implements Serializable, Comparable<PublicationReason> {
 
