@@ -6,6 +6,7 @@ package nl.vpro.domain.user;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -27,6 +28,7 @@ import nl.vpro.util.Ranges;
 @Cacheable
 public class Broadcaster extends Organization {
 
+    @Serial
     private static final long serialVersionUID = 4814193296511306394L;
 
     @Column(unique = true)
@@ -73,6 +75,11 @@ public class Broadcaster extends Organization {
     @Getter
     @XmlTransient
     private Instant lastModified;
+
+    @Column
+    @Getter
+    @XmlTransient
+    private boolean display;
 
     public Range<LocalDate> asRange() {
         return Ranges.closedClosed(start, stop);
@@ -148,6 +155,11 @@ public class Broadcaster extends Organization {
     @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
     public String getId() {
         return super.getId();
+    }
+
+    @Override
+    public boolean display() {
+        return display;
     }
 
     public String getWhatsOnId() {

@@ -5,6 +5,7 @@
 package nl.vpro.domain.user;
 
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ import nl.vpro.validation.PrePersistValidatorGroup;
 @XmlType(name = "organizationType", namespace = Xmlns.MEDIA_NAMESPACE)
 public abstract class Organization implements Serializable, Identifiable<String>, Comparable<Organization>, Displayable {
 
+    @Serial
     private static final long serialVersionUID = 80331611639307640L;
     @Id
     @XmlAttribute
