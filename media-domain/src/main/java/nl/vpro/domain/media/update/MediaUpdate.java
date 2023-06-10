@@ -78,12 +78,12 @@ import nl.vpro.xml.bind.*;
 @Slf4j
 @XmlTransient
 @ValidEmbargo(groups = WarningValidatorGroup.class)
-public abstract class  MediaUpdate<M extends MediaObject>
+public abstract sealed class  MediaUpdate<M extends MediaObject>
     implements
     MutableEmbargo<MediaUpdate<M>>,
     TextualObjectUpdate<TitleUpdate, DescriptionUpdate,  MediaUpdate<M>>,
     IntegerVersionSpecific,
-    MediaIdentifiable {
+    MediaIdentifiable permits ProgramUpdate, GroupUpdate, SegmentUpdate {
 
 
 
