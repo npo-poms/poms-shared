@@ -19,7 +19,7 @@
 
   <xs:element name="streamingStatus" type="streamingStatus"/>
 
-  <xs:complexType name="programType">
+  <xs:complexType name="programType" final="extension restriction">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
@@ -236,7 +236,7 @@
     <xs:attribute name="circular" type="xs:boolean"/>
   </xs:complexType>
 
-  <xs:complexType name="segmentType">
+  <xs:complexType name="segmentType" final="extension restriction">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
@@ -497,7 +497,7 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:complexType name="groupType">
+  <xs:complexType name="groupType" final="extension restriction">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
