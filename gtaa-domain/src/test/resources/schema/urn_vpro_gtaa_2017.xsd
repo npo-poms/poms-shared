@@ -21,7 +21,7 @@
 
   <xs:element name="topicbandg" type="tns:topicbandgType"/>
 
-  <xs:complexType name="personType">
+  <xs:complexType name="personType" final="extension restriction">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="givenName" type="xs:string" minOccurs="0"/>
@@ -42,7 +42,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="geographicNameType">
+  <xs:complexType name="geographicNameType" final="extension restriction">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -53,7 +53,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="topicType">
+  <xs:complexType name="topicType" final="extension restriction">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -64,7 +64,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="topicbandgType">
+  <xs:complexType name="topicbandgType" final="extension restriction">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -75,7 +75,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="classificationType">
+  <xs:complexType name="classificationType" final="extension restriction">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -86,7 +86,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="makerType">
+  <xs:complexType name="makerType" final="extension restriction">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -97,7 +97,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="genreType">
+  <xs:complexType name="genreType" final="extension restriction">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -108,7 +108,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="nameType">
+  <xs:complexType name="nameType" final="extension restriction">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -119,7 +119,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="newPersonType">
+  <xs:complexType name="newPersonType" final="extension restriction">
     <xs:sequence>
       <xs:element name="givenName" type="xs:string" minOccurs="0"/>
       <xs:element name="familyName" type="xs:string" minOccurs="0"/>
@@ -127,7 +127,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="newConceptType">
+  <xs:complexType name="newConceptType" final="extension restriction">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
