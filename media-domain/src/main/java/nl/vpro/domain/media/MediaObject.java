@@ -247,7 +247,8 @@ import static nl.vpro.domain.media.MediaObject.*;
 @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
 
 @Slf4j
-public abstract class MediaObject extends PublishableObject<MediaObject> implements Media<MediaObject> {
+public abstract sealed class MediaObject extends PublishableObject<MediaObject>
+    implements Media<MediaObject> permits Program, Group, Segment {
 
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";

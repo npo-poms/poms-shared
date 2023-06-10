@@ -39,7 +39,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 })
 @JsonTypeName("segment")
 @SegmentValidation
-public class Segment extends MediaObject implements Comparable<Segment>, Child<Program>, MutableOwnable {
+public final class Segment extends MediaObject implements Comparable<Segment>, Child<Program>, MutableOwnable {
 
     @Serial
     private static final long serialVersionUID = -868293795041160925L;
@@ -59,23 +59,23 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     }
 
     @ManyToOne(targetEntity = Program.class, optional = false)
-    protected Program parent;
+    Program parent;
 
     @Column(nullable = false)
     @NotNull(message = "start property is required")
-    protected java.time.Duration start;
+    private java.time.Duration start;
 
 
     @Transient
-    protected String urnRef;
+    private String urnRef;
 
     @Transient
-    protected String midRef;
+    private String midRef;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "no segment type given")
-    protected SegmentType type = SegmentType.SEGMENT;
+    private SegmentType type = SegmentType.SEGMENT;
 
     @Getter
     @Setter

@@ -36,8 +36,8 @@ import static nl.vpro.domain.TextualObjects.sorted;
  * A program can have a {@link nl.vpro.domain.media.ProgramType} when it's a movie or strand
  * program. A strand programs has the ability to become an episode of other strand programs
  * as opposed to strand groups.
- *
- * Another important distinction is that only programs may contain {@link Segment}s. Also they themselves know of their segments,
+ * <p>
+ * Another important distinction is that only programs may contain {@link Segment}s. Also, they themselves know of their segments,
  * and the XML and JSON representations on programs normally contain all their segments too.
  *
  * @author roekoe
@@ -54,7 +54,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 })
 @JsonTypeName("program")
 @Slf4j
-public class Program extends MediaObject {
+public final class Program extends MediaObject {
     @Serial
     private static final long serialVersionUID = 6174884273805175998L;
 
@@ -75,8 +75,7 @@ public class Program extends MediaObject {
     @SortNatural
     // Caching doesn't work properly because ScheduleEventRepository may touch this
     // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
-    protected Set<@NotNull ScheduleEvent> scheduleEvents;
+    @Valid Set<@NotNull ScheduleEvent> scheduleEvents;
 
 
 
@@ -101,15 +100,15 @@ public class Program extends MediaObject {
                 "and (mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now()))"),
         @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))")
     })
-    protected Set<MemberRef> episodeOf = new TreeSet<>();
+    Set<MemberRef> episodeOf = new TreeSet<>();
 
     @Size.List({@Size(max = 255), @Size(min = 1)})
-    protected String poProgType;
+    private String poProgType;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "no program type given")
-    protected ProgramType type;
+    private ProgramType type;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = false) // no implicit orphan removal, the segment my be subject to 'stealing'.
     @org.hibernate.annotations.Cascade({
@@ -471,7 +470,7 @@ public class Program extends MediaObject {
 
         return null;
     }
-    protected Optional<Segment> findSegment(Segment segment) {
+    Optional<Segment> findSegment(Segment segment) {
         return getSegments().stream().filter(existing -> existing.equals(segment)).findFirst();
     }
 

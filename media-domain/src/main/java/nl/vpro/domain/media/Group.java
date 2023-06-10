@@ -34,7 +34,7 @@ import nl.vpro.domain.media.support.OwnerType;
     "poSequenceInformation"
 })
 @JsonTypeName("group")
-public class Group extends MediaObject {
+public final class Group extends MediaObject {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -57,21 +57,20 @@ public class Group extends MediaObject {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull
-    protected GroupType type;
+    private GroupType type;
 
     @Column(nullable = false)
     @NotNull
-    protected Boolean episodesLocked = false;
+    private Boolean episodesLocked = false;
 
     @Column(nullable = false)
-    @NotNull
-    protected Boolean isOrdered = true;
+    @NotNull Boolean isOrdered = true;
 
-    protected Long defaultElement;
+    private Long defaultElement;
 
     @Column
     @XmlElement
-    protected String poSequenceInformation;
+    private String poSequenceInformation;
 
     public Group() {
     }
