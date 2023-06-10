@@ -2,6 +2,7 @@ package nl.vpro.domain.gtaa;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.net.URI;
 import java.time.Instant;
@@ -13,6 +14,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -26,8 +28,11 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode
 @ToString
-public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
+public abstract sealed class AbstractGTAAConcept implements GTAAConcept, Serializable
+    permits AbstractSimpleValueGTAAConcept, GTAAPerson {
 
+
+    @Serial
     private static final long serialVersionUID = -3175261586025479797L;
 
     @Getter

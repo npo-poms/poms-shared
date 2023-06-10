@@ -1,5 +1,6 @@
 package nl.vpro.domain.gtaa;
 
+import java.io.Serial;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
@@ -18,7 +19,10 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
-public class AbstractSimpleValueGTAAConcept extends AbstractGTAAConcept {
+public sealed class AbstractSimpleValueGTAAConcept extends AbstractGTAAConcept permits GTAAClassification, GTAAGenre, GTAAGeographicName, GTAAMaker, GTAAName, GTAATopic, GTAATopicBandG {
+
+    @Serial
+    private static final long serialVersionUID = 2951729766344371699L;
 
     public AbstractSimpleValueGTAAConcept(URI id, List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         super(id, scopeNotes, value, redirectedFrom, status, lastModified);

@@ -35,7 +35,7 @@ import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 
     })
 
-public interface GTAAConcept {
+public sealed interface GTAAConcept permits AbstractGTAAConcept {
 
 
     URI getId();

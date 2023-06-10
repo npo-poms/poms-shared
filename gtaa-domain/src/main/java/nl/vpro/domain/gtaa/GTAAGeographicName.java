@@ -2,6 +2,7 @@ package nl.vpro.domain.gtaa;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.io.Serial;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
@@ -24,8 +25,9 @@ import nl.vpro.w3.rdf.Description;
 @XmlRootElement(name = "geographicName")
 @XmlAccessorType(XmlAccessType.NONE)
 @Schema(name = "GTAAGeographicName")
-public class GTAAGeographicName extends AbstractSimpleValueGTAAConcept implements Region {
+public final class GTAAGeographicName extends AbstractSimpleValueGTAAConcept implements Region {
 
+    @Serial
     private static final long serialVersionUID = 2600104116644142067L;
 
     @lombok.Builder(builderClassName = "Builder")

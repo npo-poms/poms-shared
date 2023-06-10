@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.net.URI;
 import java.time.Instant;
@@ -60,21 +61,22 @@ import nl.vpro.w3.rdf.Description;
 @XmlRootElement(name = "person")
 @GTAAScheme(Scheme.person)
 @Schema(name = "GTAAPerson")
-public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface, Serializable {
+public final class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @NoHtml
     @Getter
     @Setter
     @XmlElement
-    protected String givenName;
+    private String givenName;
 
     @NoHtml
     @Getter
     @Setter
     @XmlElement
-    protected String familyName;
+    private String familyName;
 
 
     @Getter

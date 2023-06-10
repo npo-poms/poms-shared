@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 })
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonTypeName("concept")
-public class GTAANewGenericConcept extends AbstractGTAANewConcept  {
+public final class GTAANewGenericConcept extends AbstractGTAANewConcept  {
 
     @Getter
     @Setter

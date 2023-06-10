@@ -26,7 +26,7 @@ import nl.vpro.openarchives.oai.Label;
     GTAANewPerson.class,
     GTAANewGenericConcept.class
 })
-public interface GTAANewConcept {
+public sealed interface GTAANewConcept permits AbstractGTAANewConcept {
     String getName();
 
     List<String> getScopeNotes();

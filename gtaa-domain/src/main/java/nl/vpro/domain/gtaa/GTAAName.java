@@ -21,7 +21,7 @@ import nl.vpro.w3.rdf.Description;
 )
 @XmlRootElement(name = "name")
 @Schema(name = "GTAAName")
-public class GTAAName extends AbstractSimpleValueGTAAConcept {
+public final class GTAAName extends AbstractSimpleValueGTAAConcept {
 
 
     @lombok.Builder(builderClassName = "Builder")

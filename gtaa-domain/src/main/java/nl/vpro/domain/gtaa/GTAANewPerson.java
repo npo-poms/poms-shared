@@ -29,7 +29,7 @@ import nl.vpro.domain.PersonInterface;
 @GTAAScheme(Scheme.person)
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonTypeName("person")
-public class GTAANewPerson extends AbstractGTAANewConcept implements PersonInterface {
+public final class GTAANewPerson extends AbstractGTAANewConcept implements PersonInterface {
 
     @Getter
     @Setter

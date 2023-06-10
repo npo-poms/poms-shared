@@ -2,6 +2,7 @@ package nl.vpro.domain.gtaa;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.io.Serial;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
@@ -21,8 +22,9 @@ import nl.vpro.w3.rdf.Description;
 )
 @XmlRootElement(name = "genre")
 @Schema(name = "GTAAGenre")
-public class GTAAGenre extends AbstractSimpleValueGTAAConcept {
+public final class GTAAGenre extends AbstractSimpleValueGTAAConcept {
 
+    @Serial
     private static final long serialVersionUID = 3730679636738125602L;
 
     @lombok.Builder(builderClassName = "Builder")
