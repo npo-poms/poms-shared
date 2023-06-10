@@ -84,7 +84,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="programType">
+  <xs:complexType name="programType" final="extension restriction">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
@@ -626,7 +626,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="segmentType">
+  <xs:complexType name="segmentType" final="extension restriction">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
@@ -846,7 +846,7 @@
     <xs:attribute name="type" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="groupType">
+  <xs:complexType name="groupType" final="extension restriction">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
