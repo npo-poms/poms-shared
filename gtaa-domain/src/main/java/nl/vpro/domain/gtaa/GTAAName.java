@@ -2,6 +2,7 @@ package nl.vpro.domain.gtaa;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.io.Serial;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
@@ -23,6 +24,8 @@ import nl.vpro.w3.rdf.Description;
 @Schema(name = "GTAAName")
 public final class GTAAName extends AbstractSimpleValueGTAAConcept {
 
+    @Serial
+    private static final long serialVersionUID = -1455173916923895447L;
 
     @lombok.Builder(builderClassName = "Builder")
     public GTAAName(URI id, List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified) {

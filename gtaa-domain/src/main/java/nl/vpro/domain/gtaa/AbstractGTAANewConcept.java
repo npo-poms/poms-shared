@@ -15,7 +15,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract sealed class AbstractGTAANewConcept implements GTAANewConcept permits GTAANewGenericConcept, GTAANewPerson {
+public abstract sealed class AbstractGTAANewConcept implements GTAANewConcept
+    permits GTAANewGenericConcept, GTAANewPerson {
 
     @Getter
     @Setter

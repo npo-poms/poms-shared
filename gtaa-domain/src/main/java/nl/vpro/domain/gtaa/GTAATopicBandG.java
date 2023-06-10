@@ -26,7 +26,7 @@ import nl.vpro.w3.rdf.Description;
 )
 @XmlRootElement(name = "topicbandg")
 @Schema(name = "GTAATopicBandG")
-public non-sealed class GTAATopicBandG extends AbstractSimpleValueGTAAConcept {
+public final class GTAATopicBandG extends AbstractSimpleValueGTAAConcept {
 
     @Serial
     private static final long serialVersionUID = 8930652748727451186L;
