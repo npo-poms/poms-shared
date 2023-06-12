@@ -11,22 +11,27 @@ import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.media.update.LocationUpdate;
 
+import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class XmlCollectionTest {
 
     @Test
-    public void marshall() {
+    public void marshal() {
         XmlCollection<LocationUpdate> col = new XmlCollection<>(Arrays.asList(new LocationUpdate()));
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<collection xmlns:update=\"urn:vpro:media:update:2009\" xmlns:media=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <update:location/>\n" +
-            "</collection>";
+        String expected = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <collection xmlns:update="urn:vpro:media:update:2009" xmlns:media="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <update:location/>
+            </collection>""";
         StringWriter writer = new StringWriter();
         JAXB.marshal(col, System.out);
         JAXB.marshal(col, writer);
         Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
         assertFalse(diff.hasDifferences(), diff.toString() + " " + expected);
+        XmlCollection<LocationUpdate> rounded = assertThatXml(col).isSimilarTo(expected).get();
+        assertThat(rounded).isEqualTo(col);
 
     }
 

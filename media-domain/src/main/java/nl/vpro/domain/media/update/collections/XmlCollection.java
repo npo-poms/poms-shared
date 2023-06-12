@@ -1,7 +1,6 @@
 package nl.vpro.domain.media.update.collections;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -89,5 +88,23 @@ public class XmlCollection<T> implements Iterable<T> , IntegerVersionSpecific {
     @Override
     public String toString() {
         return "xmlcollection:" + list;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        XmlCollection<?> that = (XmlCollection<?>) o;
+
+        if (!Objects.equals(version, that.version)) return false;
+        return Objects.equals(list, that.list);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = version != null ? version.hashCode() : 0;
+        result = 31 * result + (list != null ? list.hashCode() : 0);
+        return result;
     }
 }

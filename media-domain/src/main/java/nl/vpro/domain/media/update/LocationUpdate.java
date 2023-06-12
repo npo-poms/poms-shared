@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.EqualsAndHashCode;
+
 import java.time.Duration;
 import java.time.Instant;
 
@@ -38,6 +40,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "offset",
         "duration"
         })
+@EqualsAndHashCode
 public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbargo<LocationUpdate> {
 
 
