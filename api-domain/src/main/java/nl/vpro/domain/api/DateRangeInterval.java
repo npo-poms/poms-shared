@@ -145,25 +145,19 @@ public class DateRangeInterval implements RangeFacet<Instant> {
         @Override
         public String print(Instant dateTime) {
 
-            switch(unit) {
-                case YEAR:
-                    return String.valueOf(dateTime.atZone(ZONE).getYear());
-                case MONTH:
-                    return String.format("%04d-%02d", dateTime.atZone(ZONE).getYear(), dateTime.atZone(ZONE).getMonthValue());
-                case WEEK:
-                    return String.format("%04d-W%02d",
-                        dateTime.atZone(ZONE).get(WEEK_FIELDS.weekBasedYear()),
-                        dateTime.atZone(ZONE).get(WEEK_FIELDS.weekOfWeekBasedYear())
-                    );
-                case DAY:
-                    return dateTime.atZone(ZONE).toLocalDate().toString();
-                case HOUR:
-                    return ISO_OFFSET_DATE_TIME.format(dateTime.atZone(ZONE));
-                case MINUTE:
-                    return ISO_OFFSET_DATE_TIME.format(dateTime.atZone(ZONE));
-                default:
-                    throw new IllegalArgumentException();
-            }
+            return switch (unit) {
+                case YEAR -> String.valueOf(dateTime.atZone(ZONE).getYear());
+                case MONTH ->
+                    String.format("%04d-%02d", dateTime.atZone(ZONE).getYear(), dateTime.atZone(ZONE).getMonthValue());
+                case WEEK -> String.format("%04d-W%02d",
+                    dateTime.atZone(ZONE).get(WEEK_FIELDS.weekBasedYear()),
+                    dateTime.atZone(ZONE).get(WEEK_FIELDS.weekOfWeekBasedYear())
+                );
+                case DAY -> dateTime.atZone(ZONE).toLocalDate().toString();
+                case HOUR -> ISO_OFFSET_DATE_TIME.format(dateTime.atZone(ZONE));
+                case MINUTE -> ISO_OFFSET_DATE_TIME.format(dateTime.atZone(ZONE));
+                default -> throw new IllegalArgumentException();
+            };
 
         }
 

@@ -407,10 +407,9 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
         if (episodeOf == null) {
             return TestResultIgnore.INSTANCE;
         }
-        if (!(input instanceof Program)) {
+        if (!(input instanceof Program program)) {
             return new TestResultImpl("episodeof", episodeOf.getMatch(), () -> false);
         }
-        Program program = (Program) input;
         return TestResult.ofPlural("episodeof", episodeOf, MemberRef::getMidRef,  program::getEpisodeOf);
     }
 
@@ -606,14 +605,11 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
                 value = ! value;
                 match = Match.MUST;
             }
-            switch(match) {
-                case MUST:
-                    return value ? Truthiness.TRUE : Truthiness.FALSE;
-                case SHOULD:
-                    return value ? Truthiness.TRUE : Truthiness.MAYBE_NOT;
-                default:
-                    throw new IllegalStateException();
-            }
+            return switch (match) {
+                case MUST -> value ? Truthiness.TRUE : Truthiness.FALSE;
+                case SHOULD -> value ? Truthiness.TRUE : Truthiness.MAYBE_NOT;
+                default -> throw new IllegalStateException();
+            };
 
         }
 
@@ -640,7 +636,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
     /**
      * This calls tries to perform the quite complicated task to combine 'truthiness' as elasticsearch does.
-     *
+     * <p>
      * if there are only 'must' clauses, this is quite simple.
      *
      */
@@ -712,18 +708,12 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
         public void add(TestResult... tests) {
             for (TestResult test : tests) {
-                if (test instanceof TestResultImpl) {
-                    TestResultImpl impl = (TestResultImpl) test;
+                if (test instanceof TestResultImpl impl) {
                     switch (impl.getMatch()) {
-                        case MUST:
-                            musts.add(test);
-                            break;
-                        case SHOULD:
-                            shoulds.add(test);
-                            break;
-                        case NOT:
+                        case MUST -> musts.add(test);
+                        case SHOULD -> shoulds.add(test);
+                        case NOT ->
                             musts.add(new TestResultImpl("!" + test.getDescription(), Match.MUST, () -> !test.test().getAsBoolean()));
-
                     }
                 } else if (test instanceof TestResultCombiner) {
                     musts.addAll(((TestResultCombiner) test).getMusts());

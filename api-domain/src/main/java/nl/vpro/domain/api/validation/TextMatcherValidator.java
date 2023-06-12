@@ -16,9 +16,6 @@ import nl.vpro.domain.api.MatchType;
  */
 public class TextMatcherValidator implements ConstraintValidator<ValidTextMatcher, AbstractTextMatcher> {
 
-    @Override
-    public void initialize(ValidTextMatcher constraintAnnotation) {
-    }
 
     @Override
     public boolean isValid(AbstractTextMatcher textMatcher, ConstraintValidatorContext context) {

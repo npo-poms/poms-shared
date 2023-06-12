@@ -68,7 +68,7 @@ public class MediaSortOrderListJson {
             MediaSortOrderList list = new MediaSortOrderList();
             JsonToken token = jsonParser.currentToken();
             switch (token) {
-                case START_OBJECT:
+                case START_OBJECT -> {
                     jsonParser.nextToken();
                     while (jsonParser.hasToken(JsonToken.FIELD_NAME)) {
                         String[] nextField = jsonParser.getText().split(":", 2);
@@ -83,11 +83,11 @@ public class MediaSortOrderListJson {
                         }
                         jsonParser.nextToken();
                     }
-                    break;
-                case START_ARRAY:
+                }
+                case START_ARRAY -> {
                     while (jsonParser.nextToken() != JsonToken.END_ARRAY) {
-                        switch(jsonParser.currentToken()) {
-                            case START_OBJECT:
+                        switch (jsonParser.currentToken()) {
+                            case START_OBJECT -> {
                                 ObjectNode o = jsonParser.readValueAsTree();
                                 if (o.get("field").asText().equals("title")) {
                                     list.add(jsonParser.getCodec().treeToValue(o, TitleSortOrder.class));
@@ -95,14 +95,14 @@ public class MediaSortOrderListJson {
                                     list.add(jsonParser.getCodec().treeToValue(o, MediaSortOrder.class));
 
                                 }
-                                break;
-                            case VALUE_STRING:
+                            }
+                            case VALUE_STRING -> {
                                 MediaSortField sf = MediaSortField.valueOf(jsonParser.getText());
                                 list.add(new MediaSortOrder(sf));
-                                break;
+                            }
                         }
                     }
-                    break;
+                }
             }
             return list;
         }

@@ -155,18 +155,17 @@ public class Matchers {
 
             for(AbstractTextMatcher<?> t : textMatchers) {
                 boolean match = predicater.apply(t).test(input);
-                switch(t.getMatch()) {
-                    case NOT:
-                        // fall through
-                    case MUST:
-                        if (! match) {
+                switch (t.getMatch()) {
+                    // fall through
+                    case NOT, MUST -> {
+                        if (!match) {
                             return false;
                         }
-                        break;
-                    case SHOULD:
+                    }
+                    case SHOULD -> {
                         hasShould = true;
                         shouldResult |= match;
-                        break;
+                    }
                 }
             }
             return ! hasShould || shouldResult;
@@ -193,23 +192,23 @@ public class Matchers {
             for (Matcher<V> t : matchers) {
                 boolean match;
                 switch (t.getMatch()) {
-                    case NOT:
+                    case NOT -> {
                         match = matchesAll(collection, t, valueGetter);
-                        if (! match) {
+                        if (!match) {
                             return false;
                         }
-                        break;
-                    case MUST:
+                    }
+                    case MUST -> {
                         match = matchesOne(collection, t, valueGetter);
                         if (!match) {
                             return false;
                         }
-                        break;
-                    case SHOULD:
+                    }
+                    case SHOULD -> {
                         match = matchesOne(collection, t, valueGetter);
                         hasShould = true;
                         shouldResult |= match;
-                        break;
+                    }
                 }
             }
             return ! hasShould || shouldResult;

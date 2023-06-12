@@ -71,11 +71,9 @@ public class TextFacet<T extends AbstractSearch<V>, V> extends AbstractFacet<T> 
         if(this == o) {
             return true;
         }
-        if(!(o instanceof TextFacet)) {
+        if(!(o instanceof TextFacet textFacet)) {
             return false;
         }
-
-        TextFacet textFacet = (TextFacet)o;
 
         if(max != null ? !max.equals(textFacet.max) : textFacet.max != null) {
             return false;

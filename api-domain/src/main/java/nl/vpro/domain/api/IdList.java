@@ -1,5 +1,6 @@
 package nl.vpro.domain.api;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
@@ -17,6 +18,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class IdList extends AbstractList<String> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
 

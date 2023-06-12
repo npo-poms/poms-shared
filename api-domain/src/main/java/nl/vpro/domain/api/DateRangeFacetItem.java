@@ -93,11 +93,9 @@ public class DateRangeFacetItem implements RangeFacetItem<Instant> {
         if(this == o) {
             return true;
         }
-        if(!(o instanceof DateRangeFacetItem)) {
+        if(!(o instanceof DateRangeFacetItem that)) {
             return false;
         }
-
-        DateRangeFacetItem that = (DateRangeFacetItem)o;
 
         if(begin != null ? !begin.equals(that.begin) : that.begin != null) {
             return false;

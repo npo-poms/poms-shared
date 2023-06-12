@@ -67,18 +67,16 @@ public abstract class MatcherList<V, T extends Matcher<V>> implements Iterable<T
 
         for(T t : this) {
             boolean match = t.test(s);
-            switch(t.getMatch()) {
-                case NOT:
-                    // fall through
-                case MUST:
-                    if (! match) {
+            switch (t.getMatch()) {
+                case NOT, MUST -> {
+                    if (!match) {
                         return false;
                     }
-                    break;
-                case SHOULD:
+                }
+                case SHOULD -> {
                     hasShould = true;
                     shouldResult |= match;
-                    break;
+                }
             }
         }
         return ! hasShould || shouldResult;

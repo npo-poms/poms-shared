@@ -47,8 +47,7 @@ public class DurationRangeFacetsToJson {
             DurationRangeFacets<?> result = new DurationRangeFacets<>();
 
             TreeNode treeNode = mapper.readTree(jp);
-            if(treeNode instanceof ArrayNode) {
-                ArrayNode arrayNode = (ArrayNode)treeNode;
+            if(treeNode instanceof ArrayNode arrayNode) {
                 for(JsonNode jsonNode : arrayNode) {
                     if(jsonNode.isTextual()) {
                         result.addRanges(new DurationRangeInterval(jsonNode.textValue()));

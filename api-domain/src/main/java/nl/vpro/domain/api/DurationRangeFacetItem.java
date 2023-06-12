@@ -90,11 +90,9 @@ public class DurationRangeFacetItem implements RangeFacetItem<Duration> {
         if(this == o) {
             return true;
         }
-        if(!(o instanceof DurationRangeFacetItem)) {
+        if(!(o instanceof DurationRangeFacetItem that)) {
             return false;
         }
-
-        DurationRangeFacetItem that = (DurationRangeFacetItem)o;
 
         if(begin != null ? !begin.equals(that.begin) : that.begin != null) {
             return false;

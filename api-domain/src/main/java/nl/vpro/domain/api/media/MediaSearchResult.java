@@ -15,7 +15,7 @@ import nl.vpro.domain.media.MediaObject;
 
 
 /**
- * Exists only because of https://jira.vpro.nl/browse/API-118
+ * Exists only because of <a href="https://jira.vpro.nl/browse/API-118">that generics dont' work  otherwise?</a>
  *
  * @author Michiel Meeuwissen
  * @since 2.0

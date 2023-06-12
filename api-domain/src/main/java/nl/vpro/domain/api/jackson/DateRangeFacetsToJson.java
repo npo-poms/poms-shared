@@ -48,8 +48,7 @@ public class DateRangeFacetsToJson {
             DateRangeFacets<?> result = new DateRangeFacets<>();
 
             TreeNode treeNode = jp.getCodec().readTree(jp);
-            if(treeNode instanceof ArrayNode) {
-                ArrayNode arrayNode = (ArrayNode)treeNode;
+            if(treeNode instanceof ArrayNode arrayNode) {
                 for(JsonNode jsonNode : arrayNode) {
                     if(jsonNode.isTextual()) {
                         try {

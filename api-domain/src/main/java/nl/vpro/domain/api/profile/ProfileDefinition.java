@@ -110,11 +110,9 @@ public class ProfileDefinition<T> implements DelegatingDisplayablePredicate<T>, 
         if(this == o) {
             return true;
         }
-        if(!(o instanceof ProfileDefinition)) {
+        if(!(o instanceof ProfileDefinition that)) {
             return false;
         }
-
-        ProfileDefinition that = (ProfileDefinition)o;
 
         if(getName() != null ? !getName().equals(that.getName()) : that.getName() != null) {
             return false;

@@ -62,18 +62,13 @@ public abstract class DateConstraint<T> implements FieldConstraint<T> {
 
     protected boolean applyDate(Instant date) {
         if (date == null) return false;
-        switch(operator) {
-            case LT:
-                return date.isBefore(getDateAsInstant());
-            case GT:
-                return date.isAfter(getDateAsInstant());
-            case LTE:
-                return ! date.isAfter(getDateAsInstant());
-            case GTE:
-                return ! date.isBefore(getDateAsInstant());
-
-        }
-        return false;
+        return switch (operator) {
+            case LT -> date.isBefore(getDateAsInstant());
+            case GT -> date.isAfter(getDateAsInstant());
+            case LTE -> !date.isAfter(getDateAsInstant());
+            case GTE -> !date.isBefore(getDateAsInstant());
+            default -> false;
+        };
     }
 
     @Override
