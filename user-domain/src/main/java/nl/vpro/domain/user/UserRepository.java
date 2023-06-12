@@ -13,6 +13,9 @@ public interface UserRepository<T extends User> {
 
     Long count();
 
+    /**
+     * Gets user by id (so not the email)
+     */
     Optional<T> get(String id);
 
     T save(T user);
