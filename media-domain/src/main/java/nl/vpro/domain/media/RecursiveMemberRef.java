@@ -13,6 +13,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.*;
 
@@ -84,11 +85,15 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     public RecursiveMemberRef() {
     }
 
+
+    /**
+     * @param parentType the type of the parent, if known. This is not always known, for instance when this MemberRef is fetched from an {@link nl.vpro.domain.media.update.MemberRefUpdate}.
+     */
     @lombok.Builder(builderClassName = "Builder")
     private RecursiveMemberRef(
         @NonNull String childMid,
         @NonNull String parentMid,
-        @NonNull MediaType parentType,
+        @Nullable MediaType parentType,
         Integer index,
         Boolean highlighted,
         SortedSet<RecursiveMemberRef> memberOf,
@@ -114,10 +119,14 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
         if (parent != null) {
             builder.parentMid(parent.getMid())
-                    .parentType(parent.getMediaType())
-                    .memberOf(of(parent.getMemberOf(), memberStack,  MemberRefType.memberOf))
-                    .episodeOf(parent instanceof Program ? of(((Program) parent).getEpisodeOf(), memberStack, MemberRefType.episodeOf) : null)
-                    .segmentOf(parent instanceof Segment ? ofSegment(((Segment) parent), memberStack) : null)
+                .parentType(parent.getMediaType())
+                .memberOf(of(parent.getMemberOf(), memberStack,  MemberRefType.memberOf))
+                .episodeOf(parent instanceof Program parentProgram ? of(parentProgram.getEpisodeOf(), memberStack, MemberRefType.episodeOf) : null)
+                .segmentOf(
+                    parent instanceof Segment parentSegment ?
+                        ofSegment(parentSegment, memberStack) :
+                        null
+                )
             ;
         }
         return builder;
@@ -148,10 +157,16 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         if (ref == null) {
             return null;
         }
-        TreeSet<RecursiveMemberRef> result = new TreeSet<>();
+        SortedSet<RecursiveMemberRef> result = new TreeSet<>();
         ref.forEach((r) -> {
-            LinkedHashSet<StackElement> copyOfStack = new LinkedHashSet<>(stack);
-            StackElement newStackElement = new StackElement(copyOfStack.isEmpty() ? r.getChildMid() : null, r.getMidRef(), mode, r.getNumber());
+            final Set<StackElement> copyOfStack = new LinkedHashSet<>(stack);
+            final StackElement newStackElement =
+                new StackElement(
+                    copyOfStack.isEmpty() ? r.getChildMid() : null,
+                    r.getMidRef(),
+                    mode,
+                    r.getNumber()
+                );
             if (copyOfStack.add(newStackElement)) {
                 RecursiveMemberRef rr = of(r, copyOfStack);
                 result.add(rr);
@@ -278,11 +293,9 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (! (o instanceof RecursiveMemberRef)) {
+        if (! (o instanceof RecursiveMemberRef that)) {
             return false;
         }
-
-        RecursiveMemberRef that = (RecursiveMemberRef) o;
 
         if (!midRef.equals(that.midRef)) return false;
         if (!getChildMid().equals(that.getChildMid())) return false;
@@ -305,7 +318,11 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         private final Integer number;
 
 
-        private StackElement(String child, String parent, MemberRefType type, Integer number) {
+        private StackElement(
+            @NonNull String child,
+            @NonNull String parent,
+            @NonNull MemberRefType type,
+            @Nullable Integer number) {
             this.parent = parent;
             this.child = child;
             this.type = type;

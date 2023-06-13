@@ -1044,14 +1044,12 @@ public interface MediaTestDataBuilder<
                         .duration(Duration.ofMillis(100000))
                         .build())
                 ;
-
-
         }
+
         public ProgramTestDataBuilder clearSegments() {
             mediaObject().getSegments().clear();
             return this;
         }
-
 
         @Override
         public ProgramTestDataBuilder withIds(AtomicLong id) {

@@ -226,64 +226,65 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testTitles() throws Exception {
-        String expected = "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"titles\" : [ {\n" +
-            "    \"value\" : \"Main title\",\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"type\" : \"MAIN\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Main title MIS\",\n" +
-            "    \"owner\" : \"MIS\",\n" +
-            "    \"type\" : \"MAIN\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Short title\",\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"type\" : \"SHORT\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Episode title MIS\",\n" +
-            "    \"owner\" : \"MIS\",\n" +
-            "    \"type\" : \"SUB\"\n" +
-            "  } ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"expandedTitles\" : [ {\n" +
-            "    \"value\" : \"Main title\",\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"type\" : \"MAIN\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Main title\",\n" +
-            "    \"owner\" : \"NPO\",\n" +
-            "    \"type\" : \"MAIN\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Short title\",\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"type\" : \"SHORT\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Short title\",\n" +
-            "    \"owner\" : \"NPO\",\n" +
-            "    \"type\" : \"SHORT\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Episode title MIS\",\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"type\" : \"SUB\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Episode title MIS\",\n" +
-            "    \"owner\" : \"NPO\",\n" +
-            "    \"type\" : \"SUB\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Main title\",\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"type\" : \"LEXICO\"\n" +
-            "  }, {\n" +
-            "    \"value\" : \"Main title\",\n" +
-            "    \"owner\" : \"NPO\",\n" +
-            "    \"type\" : \"LEXICO\"\n" +
-            "  } ]\n" +
-            "}";
+        String expected = """
+            {
+              "objectType" : "program",
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "titles" : [ {
+                "value" : "Main title",
+                "owner" : "BROADCASTER",
+                "type" : "MAIN"
+              }, {
+                "value" : "Main title MIS",
+                "owner" : "MIS",
+                "type" : "MAIN"
+              }, {
+                "value" : "Short title",
+                "owner" : "BROADCASTER",
+                "type" : "SHORT"
+              }, {
+                "value" : "Episode title MIS",
+                "owner" : "MIS",
+                "type" : "SUB"
+              } ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "expandedTitles" : [ {
+                "value" : "Main title",
+                "owner" : "BROADCASTER",
+                "type" : "MAIN"
+              }, {
+                "value" : "Main title",
+                "owner" : "NPO",
+                "type" : "MAIN"
+              }, {
+                "value" : "Short title",
+                "owner" : "BROADCASTER",
+                "type" : "SHORT"
+              }, {
+                "value" : "Short title",
+                "owner" : "NPO",
+                "type" : "SHORT"
+              }, {
+                "value" : "Episode title MIS",
+                "owner" : "BROADCASTER",
+                "type" : "SUB"
+              }, {
+                "value" : "Episode title MIS",
+                "owner" : "NPO",
+                "type" : "SUB"
+              }, {
+                "value" : "Main title",
+                "owner" : "BROADCASTER",
+                "type" : "LEXICO"
+              }, {
+                "value" : "Main title",
+                "owner" : "NPO",
+                "type" : "LEXICO"
+              } ]
+            }""";
 
         Program program = program().lean().withTitles().build();
         String actual = toPublisherJson(program);
@@ -357,75 +358,76 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testMemberOfAndDescendantOfGraph() throws Exception {
-        String expected = "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"descendantOf\" : [ {\n" +
-            "    \"midRef\" : \"AVRO_5555555\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:group:100\",\n" +
-            "    \"type\" : \"SERIES\"\n" +
-            "  }, {\n" +
-            "    \"midRef\" : \"AVRO_7777777\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:group:200\",\n" +
-            "    \"type\" : \"SEASON\"\n" +
-            "  }, {\n" +
-            "    \"midRef\" : \"VPROWON_110\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:segment:301\",\n" +
-            "    \"type\" : \"SEGMENT\"\n" +
-            "  } ],\n" +
-            "  \"memberOf\" : [ {\n" +
-            "    \"midRef\" : \"AVRO_7777777\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:group:200\",\n" +
-            "    \"type\" : \"SEASON\",\n" +
-            "    \"index\" : 1,\n" +
-            "    \"highlighted\" : false,\n" +
-            "    \"memberOf\" : [ {\n" +
-            "      \"midRef\" : \"AVRO_5555555\",\n" +
-            "      \"type\" : \"SERIES\",\n" +
-            "      \"index\" : 1\n" +
-            "    } ],\n" +
-            "    \"episodeOf\" : [ ],\n" +
-            "    \"added\" : 0\n" +
-            "  }, {\n" +
-            "    \"midRef\" : \"VPROWON_110\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:segment:301\",\n" +
-            "    \"type\" : \"SEGMENT\",\n" +
-            "    \"index\" : 2,\n" +
-            "    \"highlighted\" : false,\n" +
-            "    \"memberOf\" : [ ],\n" +
-            "    \"episodeOf\" : [ ],\n" +
-            "    \"segmentOf\" : {\n" +
-            "      \"midRef\" : \"VPROWON_109\",\n" +
-            "      \"type\" : \"CLIP\",\n" +
-            "      \"memberOf\" : [ {\n" +
-            "        \"midRef\" : \"AVRO_5555555\",\n" +
-            "        \"type\" : \"SERIES\",\n" +
-            "        \"index\" : 10\n" +
-            "      } ]\n" +
-            "    }\n" +
-            "  }, {\n" +
-            "    \"midRef\" : \"VPROWON_110\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:segment:301\",\n" +
-            "    \"type\" : \"SEGMENT\",\n" +
-            "    \"index\" : 3,\n" +
-            "    \"highlighted\" : false,\n" +
-            "    \"memberOf\" : [ ],\n" +
-            "    \"episodeOf\" : [ ],\n" +
-            "    \"segmentOf\" : {\n" +
-            "      \"midRef\" : \"VPROWON_109\",\n" +
-            "      \"type\" : \"CLIP\",\n" +
-            "      \"memberOf\" : [ {\n" +
-            "        \"midRef\" : \"AVRO_5555555\",\n" +
-            "        \"type\" : \"SERIES\",\n" +
-            "        \"index\" : 10\n" +
-            "      } ]\n" +
-            "    }\n" +
-            "  } ]\n" +
-            "}";
+        String expected = """
+            {
+              "objectType" : "program",
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "descendantOf" : [ {
+                "midRef" : "AVRO_5555555",
+                "urnRef" : "urn:vpro:media:group:100",
+                "type" : "SERIES"
+              }, {
+                "midRef" : "AVRO_7777777",
+                "urnRef" : "urn:vpro:media:group:200",
+                "type" : "SEASON"
+              }, {
+                "midRef" : "VPROWON_110",
+                "urnRef" : "urn:vpro:media:segment:301",
+                "type" : "SEGMENT"
+              } ],
+              "memberOf" : [ {
+                "midRef" : "AVRO_7777777",
+                "urnRef" : "urn:vpro:media:group:200",
+                "type" : "SEASON",
+                "index" : 1,
+                "highlighted" : false,
+                "memberOf" : [ {
+                  "midRef" : "AVRO_5555555",
+                  "type" : "SERIES",
+                  "index" : 1
+                } ],
+                "episodeOf" : [ ],
+                "added" : 0
+              }, {
+                "midRef" : "VPROWON_110",
+                "urnRef" : "urn:vpro:media:segment:301",
+                "type" : "SEGMENT",
+                "index" : 2,
+                "highlighted" : false,
+                "memberOf" : [ ],
+                "episodeOf" : [ ],
+                "segmentOf" : {
+                  "midRef" : "VPROWON_109",
+                  "type" : "CLIP",
+                  "memberOf" : [ {
+                    "midRef" : "AVRO_5555555",
+                    "type" : "SERIES",
+                    "index" : 10
+                  } ]
+                }
+              }, {
+                "midRef" : "VPROWON_110",
+                "urnRef" : "urn:vpro:media:segment:301",
+                "type" : "SEGMENT",
+                "index" : 3,
+                "highlighted" : false,
+                "memberOf" : [ ],
+                "episodeOf" : [ ],
+                "segmentOf" : {
+                  "midRef" : "VPROWON_109",
+                  "type" : "CLIP",
+                  "memberOf" : [ {
+                    "midRef" : "AVRO_5555555",
+                    "type" : "SERIES",
+                    "index" : 10
+                  } ]
+                }
+              } ]
+            }""";
 
         Program program = program().lean().withMemberOf(new AtomicLong(106)).build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
@@ -442,55 +444,56 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testEpisodeOfAndDescendantOfGraph() throws Exception {
-        String expected = "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"type\" : \"BROADCAST\",\n" +
-            "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"episodeOf\" : [ {\n" +
-            "    \"midRef\" : \"AVRO_7777777\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:group:102\",\n" +
-            "    \"type\" : \"SEASON\",\n" +
-            "    \"index\" : 1,\n" +
-            "    \"highlighted\" : false,\n" +
-            "    \"memberOf\" : [ {\n" +
-            "      \"midRef\" : \"AVRO_5555555\",\n" +
-            "      \"type\" : \"SERIES\",\n" +
-            "      \"index\" : 1\n" +
-            "    }, {\n" +
-            "      \"midRef\" : \"VPROWON_106\",\n" +
-            "      \"type\" : \"SEGMENT\",\n" +
-            "      \"index\" : 2,\n" +
-            "      \"segmentOf\" : {\n" +
-            "        \"midRef\" : \"VPROWON_105\",\n" +
-            "        \"type\" : \"CLIP\",\n" +
-            "        \"memberOf\" : [ {\n" +
-            "          \"midRef\" : \"AVRO_5555555\",\n" +
-            "          \"type\" : \"SERIES\",\n" +
-            "          \"index\" : 10\n" +
-            "        } ]\n" +
-            "      }\n" +
-            "    } ],\n" +
-            "    \"episodeOf\" : [ ],\n" +
-            "    \"added\" : 0\n" +
-            "  } ],\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"descendantOf\" : [ {\n" +
-            "    \"midRef\" : \"AVRO_5555555\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
-            "    \"type\" : \"SERIES\"\n" +
-            "  }, {\n" +
-            "    \"midRef\" : \"AVRO_7777777\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:group:102\",\n" +
-            "    \"type\" : \"SEASON\"\n" +
-            "  }, {\n" +
-            "    \"midRef\" : \"VPROWON_106\",\n" +
-            "    \"type\" : \"SEGMENT\"\n" +
-            "  } ]\n" +
-            "}";
+        String expected = """
+            {
+              "objectType" : "program",
+              "type" : "BROADCAST",
+              "urn" : "urn:vpro:media:program:100",
+              "embeddable" : true,
+              "episodeOf" : [ {
+                "midRef" : "AVRO_7777777",
+                "urnRef" : "urn:vpro:media:group:102",
+                "type" : "SEASON",
+                "index" : 1,
+                "highlighted" : false,
+                "memberOf" : [ {
+                  "midRef" : "AVRO_5555555",
+                  "type" : "SERIES",
+                  "index" : 1
+                }, {
+                  "midRef" : "VPROWON_106",
+                  "type" : "SEGMENT",
+                  "index" : 2,
+                  "segmentOf" : {
+                    "midRef" : "VPROWON_105",
+                    "type" : "CLIP",
+                    "memberOf" : [ {
+                      "midRef" : "AVRO_5555555",
+                      "type" : "SERIES",
+                      "index" : 10
+                    } ]
+                  }
+                } ],
+                "episodeOf" : [ ],
+                "added" : 0
+              } ],
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "descendantOf" : [ {
+                "midRef" : "AVRO_5555555",
+                "urnRef" : "urn:vpro:media:group:101",
+                "type" : "SERIES"
+              }, {
+                "midRef" : "AVRO_7777777",
+                "urnRef" : "urn:vpro:media:group:102",
+                "type" : "SEASON"
+              }, {
+                "midRef" : "VPROWON_106",
+                "type" : "SEGMENT"
+              } ]
+            }""";
 
         Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L, new AtomicLong(103)).build();
         program.getEpisodeOf().first().setAdded(Instant.EPOCH);
@@ -507,42 +510,43 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testScheduleEvent() {
-        String expected = "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"sortDate\" : 0,\n" +
-            "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"scheduleEvents\" : [ {\n" +
-            "    \"channel\" : \"NED1\",\n" +
-            "    \"start\" : 0,\n" +
-            "    \"guideDay\" : -90000000,\n" +
-            "    \"duration\" : 100000,\n" +
-            "    \"midRef\" : \"VPRO_123456\",\n" +
-            "    \"poProgID\" : \"VPRO_123456\",\n" +
-            "    \"rerun\" : false,\n" +
-            "    \"net\" : \"ZAPP\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:program:100\",\n" +
-            "    \"eventStart\" : 0\n" +
-            "  }, {\n" +
-            "    \"channel\" : \"NED2\",\n" +
-            "    \"start\" : 1,\n" +
-            "    \"guideDay\" : -90000000,\n" +
-            "    \"duration\" : 100000,\n" +
-            "    \"midRef\" : \"VPRO_123457\",\n" +
-            "    \"poProgID\" : \"VPRO_123457\",\n" +
-            "    \"repeat\" : {\n" +
-            "      \"value\" : \"herhaling\",\n" +
-            "      \"isRerun\" : true\n" +
-            "    },\n" +
-            "    \"rerun\" : true,\n" +
-            "    \"urnRef\" : \"urn:vpro:media:program:100\",\n" +
-            "    \"eventStart\" : 1\n" +
-            "  } ]\n" +
-            "}";
+        String expected = """
+            {
+              "objectType" : "program",
+              "sortDate" : 0,
+              "urn" : "urn:vpro:media:program:100",
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "scheduleEvents" : [ {
+                "channel" : "NED1",
+                "start" : 0,
+                "guideDay" : -90000000,
+                "duration" : 100000,
+                "midRef" : "VPRO_123456",
+                "poProgID" : "VPRO_123456",
+                "rerun" : false,
+                "net" : "ZAPP",
+                "urnRef" : "urn:vpro:media:program:100",
+                "eventStart" : 0
+              }, {
+                "channel" : "NED2",
+                "start" : 1,
+                "guideDay" : -90000000,
+                "duration" : 100000,
+                "midRef" : "VPRO_123457",
+                "poProgID" : "VPRO_123457",
+                "repeat" : {
+                  "value" : "herhaling",
+                  "isRerun" : true
+                },
+                "rerun" : true,
+                "urnRef" : "urn:vpro:media:program:100",
+                "eventStart" : 1
+              } ]
+            }""";
 
 
 
@@ -572,21 +576,22 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testCredits() throws Exception {
-        String expected = "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"credits\" : [ {\n" +
-            "    \"objectType\" : \"person\",\n" +
-            "    \"givenName\" : \"Pietje\",\n" +
-            "    \"familyName\" : \"Puk\",\n" +
-            "    \"role\" : \"GUEST\"\n" +
-            "  } ]\n" +
-            "}";
+        String expected = """
+            {
+              "objectType" : "program",
+              "urn" : "urn:vpro:media:program:100",
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "credits" : [ {
+                "objectType" : "person",
+                "givenName" : "Pietje",
+                "familyName" : "Puk",
+                "role" : "GUEST"
+              } ]
+            }""";
 
         Person person = new Person("Pietje", "Puk", RoleType.GUEST);
         Program program = program().id(100L).lean().persons(person).build();
@@ -730,56 +735,57 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testWithLocations() {
-        String expected = "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"locations\" : [ {\n" +
-            "    \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v\",\n" +
-            "    \"avAttributes\" : {\n" +
-            "      \"bitrate\" : 1500,\n" +
-            "      \"avFileFormat\" : \"MP4\"\n" +
-            "    },\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"creationDate\" : 1457102700000,\n" +
-            "    \"workflow\" : \"PUBLISHED\",\n" +
-            "    \"offset\" : 780000,\n" +
-            "    \"duration\" : 600000,\n" +
-            "    \"publishStart\" : 1487244180000\n" +
-            "  }, {\n" +
-            "    \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf\",\n" +
-            "    \"avAttributes\" : {\n" +
-            "      \"bitrate\" : 3000,\n" +
-            "      \"avFileFormat\" : \"WM\"\n" +
-            "    },\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"creationDate\" : 1457099100000,\n" +
-            "    \"workflow\" : \"PUBLISHED\"\n" +
-            "  }, {\n" +
-            "    \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf\",\n" +
-            "    \"avAttributes\" : {\n" +
-            "      \"bitrate\" : 2000,\n" +
-            "      \"avFileFormat\" : \"WM\"\n" +
-            "    },\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"creationDate\" : 1457095500000,\n" +
-            "    \"workflow\" : \"PUBLISHED\",\n" +
-            "    \"duration\" : 1833000\n" +
-            "  }, {\n" +
-            "    \"programUrl\" : \"http://player.omroep.nl/?aflID=4393288\",\n" +
-            "    \"avAttributes\" : {\n" +
-            "      \"bitrate\" : 1000,\n" +
-            "      \"avFileFormat\" : \"HTML\"\n" +
-            "    },\n" +
-            "    \"owner\" : \"NEBO\",\n" +
-            "    \"creationDate\" : 1457091900000,\n" +
-            "    \"workflow\" : \"PUBLISHED\"\n" +
-            "  } ]\n" +
-            "}";
+        String expected = """
+            {
+              "objectType" : "program",
+              "urn" : "urn:vpro:media:program:100",
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "locations" : [ {
+                "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
+                "avAttributes" : {
+                  "bitrate" : 1500,
+                  "avFileFormat" : "MP4"
+                },
+                "owner" : "BROADCASTER",
+                "creationDate" : 1457102700000,
+                "workflow" : "PUBLISHED",
+                "offset" : 780000,
+                "duration" : 600000,
+                "publishStart" : 1487244180000
+              }, {
+                "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
+                "avAttributes" : {
+                  "bitrate" : 3000,
+                  "avFileFormat" : "WM"
+                },
+                "owner" : "BROADCASTER",
+                "creationDate" : 1457099100000,
+                "workflow" : "PUBLISHED"
+              }, {
+                "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
+                "avAttributes" : {
+                  "bitrate" : 2000,
+                  "avFileFormat" : "WM"
+                },
+                "owner" : "BROADCASTER",
+                "creationDate" : 1457095500000,
+                "workflow" : "PUBLISHED",
+                "duration" : 1833000
+              }, {
+                "programUrl" : "http://player.omroep.nl/?aflID=4393288",
+                "avAttributes" : {
+                  "bitrate" : 1000,
+                  "avFileFormat" : "HTML"
+                },
+                "owner" : "NEBO",
+                "creationDate" : 1457091900000,
+                "workflow" : "PUBLISHED"
+              } ]
+            }""";
 
         Program program = program().id(100L)
             .lean()
@@ -795,36 +801,37 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testWithLocationsWithUnknownOwner() throws Exception {
-        String example = "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"hasSubtitles\" : false,\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"locations\" : [ {\n" +
-            "    \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v\",\n" +
-            "    \"avAttributes\" : {\n" +
-            "      \"avFileFormat\" : \"MP4\"\n" +
-            "    },\n" +
-            "    \"offset\" : 780000,\n" +
-            "    \"duration\" : 600000,\n" +
-            "    \"owner\" : \"UNKNOWN\",\n" +
-            "    \"creationDate\" : 1457102700000,\n" +
-            "    \"workflow\" : \"FOR_PUBLICATION\",\n" +
-            "     \"publishStart\" : 1487244180000\n" +
-            "  }, {\n" +
-            "    \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf\",\n" +
-            "    \"avAttributes\" : {\n" +
-            "      \"avFileFormat\" : \"WM\"\n" +
-            "    },\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"creationDate\" : 1457099100000,\n" +
-            "    \"workflow\" : \"FOR_PUBLICATION\"\n" +
-            "  } ]\n" +
-            "}";
+        String example = """
+            {
+              "objectType" : "program",
+              "urn" : "urn:vpro:media:program:100",
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "hasSubtitles" : false,
+              "countries" : [ ],
+              "languages" : [ ],
+              "locations" : [ {
+                "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
+                "avAttributes" : {
+                  "avFileFormat" : "MP4"
+                },
+                "offset" : 780000,
+                "duration" : 600000,
+                "owner" : "UNKNOWN",
+                "creationDate" : 1457102700000,
+                "workflow" : "FOR_PUBLICATION",
+                 "publishStart" : 1487244180000
+              }, {
+                "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
+                "avAttributes" : {
+                  "avFileFormat" : "WM"
+                },
+                "owner" : "BROADCASTER",
+                "creationDate" : 1457099100000,
+                "workflow" : "FOR_PUBLICATION"
+              } ]
+            }""";
 
 
         Program program = Jackson2Mapper.getLenientInstance().readerFor(Program.class).readValue(example);
@@ -877,16 +884,18 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testUnMarshalWithFullGeoLocations() throws Exception {
-        String geoLocationsJson = "      {\n" +
-                "        \"owner\":\"BROADCASTER\",\n" +
-                "        \"values\": [{\n" +
-                "          \"name\":\"myName\",\n" +
-                "          \"scopeNotes\": [\"myDescription\"],\n" +
-                "          \"gtaaUri\": \"myuri\",\n" +
-                "          \"gtaaStatus\": \"approved\",\n" +
-                "          \"role\":\"RECORDED_IN\"\n" +
-                "        }]\n" +
-                "      }";
+        String geoLocationsJson = """
+                  {
+                    "owner":"BROADCASTER",
+                    "values": [{
+                      "name":"myName",
+                      "scopeNotes": ["myDescription"],
+                      "gtaaUri": "myuri",
+                      "gtaaStatus": "approved",
+                      "role":"RECORDED_IN"
+                    }]
+                  }\
+            """;
 
         GeoLocations actualGeoLocations = Jackson2Mapper.getStrictInstance().readerFor(GeoLocations.class).readValue(new StringReader(geoLocationsJson));
         GeoLocation value = GeoLocation.builder()
@@ -945,48 +954,49 @@ public class MediaObjectJsonSchemaTest {
     public void testWithCredits() {
         Program program = program().lean().withCredits().build();
 
-        Program rounded = Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"credits\" : [ {\n" +
-            "    \"objectType\" : \"person\",\n" +
-            "    \"givenName\" : \"Bregtje\",\n" +
-            "    \"familyName\" : \"van der Haak\",\n" +
-            "    \"role\" : \"DIRECTOR\",\n" +
-            "    \"gtaaUri\" : \"http://gtaa/1234\"\n" +
-            "  }, {\n" +
-            "    \"objectType\" : \"person\",\n" +
-            "    \"givenName\" : \"Hans\",\n" +
-            "    \"familyName\" : \"Goedkoop\",\n" +
-            "    \"role\" : \"PRESENTER\"\n" +
-            "  }, {\n" +
-            "    \"objectType\" : \"person\",\n" +
-            "    \"givenName\" : \"Meta\",\n" +
-            "    \"familyName\" : \"de Vries\",\n" +
-            "    \"role\" : \"PRESENTER\"\n" +
-            "  }, {\n" +
-            "    \"objectType\" : \"person\",\n" +
-            "    \"givenName\" : \"Claire\",\n" +
-            "    \"familyName\" : \"Holt\",\n" +
-            "    \"role\" : \"ACTOR\"\n" +
-            "  }, {\n" +
-            "    \"objectType\" : \"name\",\n" +
-            "    \"role\" : \"COMPOSER\",\n" +
-            "    \"name\" : \"Doe Maar\",\n" +
-            "    \"scopeNotes\" : [ \"popgroep Nederland\" ],\n" +
-            "    \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/51771\"\n" +
-            "  }, {\n" +
-            "    \"objectType\" : \"person\",\n" +
-            "    \"givenName\" : \"Mark\",\n" +
-            "    \"familyName\" : \"Rutte\",\n" +
-            "    \"role\" : \"SUBJECT\",\n" +
-            "    \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/149017\"\n" +
-            "  } ]\n" +
-            "}");
+        Program rounded = Jackson2TestUtil.roundTripAndSimilar(program, """
+            {
+              "objectType" : "program",
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "credits" : [ {
+                "objectType" : "person",
+                "givenName" : "Bregtje",
+                "familyName" : "van der Haak",
+                "role" : "DIRECTOR",
+                "gtaaUri" : "http://gtaa/1234"
+              }, {
+                "objectType" : "person",
+                "givenName" : "Hans",
+                "familyName" : "Goedkoop",
+                "role" : "PRESENTER"
+              }, {
+                "objectType" : "person",
+                "givenName" : "Meta",
+                "familyName" : "de Vries",
+                "role" : "PRESENTER"
+              }, {
+                "objectType" : "person",
+                "givenName" : "Claire",
+                "familyName" : "Holt",
+                "role" : "ACTOR"
+              }, {
+                "objectType" : "name",
+                "role" : "COMPOSER",
+                "name" : "Doe Maar",
+                "scopeNotes" : [ "popgroep Nederland" ],
+                "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
+              }, {
+                "objectType" : "person",
+                "givenName" : "Mark",
+                "familyName" : "Rutte",
+                "role" : "SUBJECT",
+                "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
+              } ]
+            }""");
 
         log.info("{}", rounded.getCredits());
 
@@ -1048,18 +1058,19 @@ public class MediaObjectJsonSchemaTest {
             ;
         Jackson2TestUtil.assertThatJson(Jackson2Mapper.getPrettyPublisherInstance(), p)
             .withoutRemarshalling()
-            .isSimilarTo("{\n" +
-                "  \"objectType\" : \"program\",\n" +
-                "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
-                "  \"sortDate\" : 10,\n" +
-                "  \"creationDate\" : 10,\n" +
-                "  \"embeddable\" : true,\n" +
-                "  \"broadcasters\" : [ ],\n" +
-                "  \"genres\" : [ ],\n" +
-                "  \"countries\" : [ ],\n" +
-                "  \"languages\" : [ ],\n" +
-                "  \"locations\" : [ ]\n" +
-                "}");
+            .isSimilarTo("""
+                {
+                  "objectType" : "program",
+                  "workflow" : "FOR_PUBLICATION",
+                  "sortDate" : 10,
+                  "creationDate" : 10,
+                  "embeddable" : true,
+                  "broadcasters" : [ ],
+                  "genres" : [ ],
+                  "countries" : [ ],
+                  "languages" : [ ],
+                  "locations" : [ ]
+                }""");
         PublicationFilter.ENABLED.remove();
 
     }
@@ -1072,26 +1083,27 @@ public class MediaObjectJsonSchemaTest {
 
             .memberOf(MemberRef.builder().type(MediaType.SEASON).build()).build();
 
-        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
-            "  \"sortDate\" : 1566327600000,\n" +
-            "  \"creationDate\" : 1566327600000,\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"descendantOf\" : [ {\n" +
-            "    \"type\" : \"SEASON\"\n" +
-            "  } ],\n" +
-            "  \"memberOf\" : [ {\n" +
-            "    \"type\" : \"SEASON\",\n" +
-            "    \"highlighted\" : false,\n" +
-            "    \"memberOf\" : [ ],\n" +
-            "    \"episodeOf\" : [ ]\n" +
-            "  } ]\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(program, """
+            {
+              "objectType" : "program",
+              "workflow" : "FOR_PUBLICATION",
+              "sortDate" : 1566327600000,
+              "creationDate" : 1566327600000,
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "descendantOf" : [ {
+                "type" : "SEASON"
+              } ],
+              "memberOf" : [ {
+                "type" : "SEASON",
+                "highlighted" : false,
+                "memberOf" : [ ],
+                "episodeOf" : [ ]
+              } ]
+            }""");
 
     }
 
@@ -1100,36 +1112,37 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().lean().withRelations().build();
 
-        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
-                "  \"objectType\" : \"program\",\n" +
-                "  \"embeddable\" : true,\n" +
-                "  \"broadcasters\" : [ ],\n" +
-                "  \"genres\" : [ ],\n" +
-                "  \"countries\" : [ ],\n" +
-                "  \"languages\" : [ ],\n" +
-                "  \"relations\" : [ {\n" +
-                "    \"value\" : \"synoniem\",\n" +
-                "    \"type\" : \"THESAURUS\",\n" +
-                "    \"broadcaster\" : \"AVRO\",\n" +
-                "    \"urn\" : \"urn:vpro:media:relation:2\"\n" +
-                "  }, {\n" +
-                "    \"value\" : \"Ulfts Mannenkoor\",\n" +
-                "    \"type\" : \"KOOR\",\n" +
-                "    \"broadcaster\" : \"EO\",\n" +
-                "    \"urn\" : \"urn:vpro:media:relation:4\"\n" +
-                "  }, {\n" +
-                "    \"value\" : \"Marco Borsato\",\n" +
-                "    \"type\" : \"ARTIST\",\n" +
-                "    \"broadcaster\" : \"VPRO\",\n" +
-                "    \"urn\" : \"urn:vpro:media:relation:3\"\n" +
-                "  }, {\n" +
-                "    \"uriRef\" : \"http://www.bluenote.com/\",\n" +
-                "    \"value\" : \"Blue Note\",\n" +
-                "    \"type\" : \"LABEL\",\n" +
-                "    \"broadcaster\" : \"VPRO\",\n" +
-                "    \"urn\" : \"urn:vpro:media:relation:1\"\n" +
-                "  } ]\n" +
-                "}");
+        Jackson2TestUtil.roundTripAndSimilar(program, """
+            {
+              "objectType" : "program",
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "relations" : [ {
+                "value" : "synoniem",
+                "type" : "THESAURUS",
+                "broadcaster" : "AVRO",
+                "urn" : "urn:vpro:media:relation:2"
+              }, {
+                "value" : "Ulfts Mannenkoor",
+                "type" : "KOOR",
+                "broadcaster" : "EO",
+                "urn" : "urn:vpro:media:relation:4"
+              }, {
+                "value" : "Marco Borsato",
+                "type" : "ARTIST",
+                "broadcaster" : "VPRO",
+                "urn" : "urn:vpro:media:relation:3"
+              }, {
+                "uriRef" : "http://www.bluenote.com/",
+                "value" : "Blue Note",
+                "type" : "LABEL",
+                "broadcaster" : "VPRO",
+                "urn" : "urn:vpro:media:relation:1"
+              } ]
+            }""");
 
     }
 

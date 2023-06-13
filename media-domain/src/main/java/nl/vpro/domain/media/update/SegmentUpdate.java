@@ -160,7 +160,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     @Override
     @XmlTransient
     public SegmentType getType() {
-        return segmentType;
+        return segmentType == null ? SegmentType.SEGMENT : segmentType;
     }
 
     @Override

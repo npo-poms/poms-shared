@@ -270,6 +270,9 @@ public final class Program extends MediaObject {
 
     public void setEpisodeOf(SortedSet<MemberRef> episodeOf) {
         this.episodeOf = episodeOf;
+        for (MemberRef r : episodeOf) {
+            r.setMember(this);
+        }
     }
 
     public MemberRef findEpisodeOfRef(long refId) {

@@ -31,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
+@SuppressWarnings("DataFlowIssue")
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @Slf4j
 public class MediaUpdateTest {
@@ -79,17 +80,18 @@ public class MediaUpdateTest {
         Program deleted = MediaTestDataBuilder.program().workflow(Workflow.DELETED).build();
         ProgramUpdate update = ProgramUpdate.create(deleted, OwnerType.BROADCASTER);
 
-        ProgramUpdate programUpdate = JAXBTestUtil.roundTripAndSimilar(update, "<program xmlns=\"urn:vpro:media:update:2009\" deleted=\"true\" embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "  <intentions/>\n" +
-            "  <targetGroups/>\n" +
-            "  <geoLocations/>\n" +
-            "  <topics/>\n" +
-            "  <credits/>\n" +
-            "  <locations/>\n" +
-            "  <scheduleEvents/>\n" +
-            "  <images/>\n" +
-            "  <segments/>\n" +
-            "</program>");
+        ProgramUpdate programUpdate = JAXBTestUtil.roundTripAndSimilar(update, """
+            <program xmlns="urn:vpro:media:update:2009" deleted="true" embeddable="true" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+              <intentions/>
+              <targetGroups/>
+              <geoLocations/>
+              <topics/>
+              <credits/>
+              <locations/>
+              <scheduleEvents/>
+              <images/>
+              <segments/>
+            </program>""");
         assertThat(programUpdate.isDeleted()).isTrue();
 
     }
@@ -120,12 +122,13 @@ public class MediaUpdateTest {
     @Test
     public void testWithoutIntentions() {
 
-        String withoutIntentions = "<program xmlns=\"urn:vpro:media:update:2009\" xmlns:media=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" embeddable=\"true\">\n" +
-            "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <images/>\n" +
-            "    <segments/>\n" +
-            "</program>";
+        String withoutIntentions = """
+            <program xmlns="urn:vpro:media:update:2009" xmlns:media="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" embeddable="true">
+                <locations/>
+                <scheduleEvents/>
+                <images/>
+                <segments/>
+            </program>""";
 
         ProgramUpdate update = JAXB.unmarshal(new StringReader(withoutIntentions), ProgramUpdate.class);
         assertThat(update.getIntentions()).isNull();
@@ -135,13 +138,14 @@ public class MediaUpdateTest {
     @Test
     public void testWithIntentions() {
 
-        String withoutIntentions = "<program xmlns=\"urn:vpro:media:update:2009\" xmlns:media=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" embeddable=\"true\">\n" +
-            "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <images/>\n" +
-            "    <segments/>\n" +
-            "    <intentions />\n" +
-            "</program>";
+        String withoutIntentions = """
+            <program xmlns="urn:vpro:media:update:2009" xmlns:media="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" embeddable="true">
+                <locations/>
+                <scheduleEvents/>
+                <images/>
+                <segments/>
+                <intentions />
+            </program>""";
 
         ProgramUpdate update = JAXB.unmarshal(new StringReader(withoutIntentions), ProgramUpdate.class);
 

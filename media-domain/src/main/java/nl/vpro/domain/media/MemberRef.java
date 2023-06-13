@@ -410,6 +410,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     @Override
     @XmlAttribute
+    @NonNull
     public MediaType getType() {
         return group != null ? MediaType.getMediaType(group) : typeOfGroup;
     }

@@ -105,15 +105,16 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testAvailableSubtitles() {
-        String expected = "<program embeddable=\"true\" hasSubtitles=\"true\" mid=\"MID_000001\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <availableSubtitles language=\"nl\" type=\"CAPTION\"/>\n" +
-            "    <availableSubtitles language=\"nl\" type=\"TRANSLATION\"/>\n" +
-            "    <credits/>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <segments/>\n" +
-            "</program>";
+        String expected = """
+            <program embeddable="true" hasSubtitles="true" mid="MID_000001" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <availableSubtitles language="nl" type="CAPTION"/>
+                <availableSubtitles language="nl" type="TRANSLATION"/>
+                <credits/>
+                <locations/>
+                <images/>
+                <scheduleEvents/>
+                <segments/>
+            </program>""";
 
         Program program = program().lean().mid("MID_000001").build();
     	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
@@ -132,14 +133,16 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testHasSubtitles() {
-        String expected = "<program embeddable=\"true\" hasSubtitles=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <availableSubtitles language=\"nl\" type=\"CAPTION\"/>\n" +
-            "    <credits/>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <segments/>\n" +
-            "</program>\n";
+        String expected = """
+            <program embeddable="true" hasSubtitles="true" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <availableSubtitles language="nl" type="CAPTION"/>
+                <credits/>
+                <locations/>
+                <images/>
+                <scheduleEvents/>
+                <segments/>
+            </program>
+            """;
 
         Program program = program().lean().withSubtitles().build();
         Program rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
@@ -240,17 +243,19 @@ public class MediaObjectXmlSchemaTest {
     public void testRegions() {
 
         JAXBTestUtil.roundTripAndSimilar(program().lean().withGeoRestrictions().build(),
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-                "    <region regionId=\"NL\" platform=\"INTERNETVOD\"/>\n" +
-                "    <region regionId=\"BENELUX\" platform=\"INTERNETVOD\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
-                "    <region regionId=\"NL\" platform=\"TVVOD\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
-                "    <credits/>\n" +
-                "    <locations/>\n" +
-                "    <images/>\n" +
-                "    <scheduleEvents/>\n" +
-                "    <segments/>\n" +
-                "</program>\n");
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <program embeddable="true" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                    <region regionId="NL" platform="INTERNETVOD"/>
+                    <region regionId="BENELUX" platform="INTERNETVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
+                    <region regionId="NL" platform="TVVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
+                    <credits/>
+                    <locations/>
+                    <images/>
+                    <scheduleEvents/>
+                    <segments/>
+                </program>
+                """);
     }
 
     @Test
@@ -334,22 +339,22 @@ public class MediaObjectXmlSchemaTest {
     public void testGenres() {
         Program program = program().withGenres().withFixedDates().build();
 
-        Program result = JAXBTestUtil.roundTripAndSimilar(program, "<program embeddable=\"true\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <genre id=\"3.0.1.7.21\">\n" +
-            "        <term>Informatief</term>\n" +
-            "        <term>Nieuws/actualiteiten</term>\n" +
-            "    </genre>\n" +
-            "    <genre id=\"3.0.1.8.25\">\n" +
-            "        <term>Documentaire</term>\n" +
-            "        <term>Natuur</term>\n" +
-            "    </genre>\n" +
-            "    <credits/>\n" +
-            "    <locations/>\n" +
-
-            "    <images/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <segments/>\n" +
-            "</program>");
+        Program result = JAXBTestUtil.roundTripAndSimilar(program, """
+            <program embeddable="true" sortDate="2015-03-06T00:00:00+01:00" workflow="FOR PUBLICATION" creationDate="2015-03-06T00:00:00+01:00" lastModified="2015-03-06T01:00:00+01:00" publishDate="2015-03-06T02:00:00+01:00" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <genre id="3.0.1.7.21">
+                    <term>Informatief</term>
+                    <term>Nieuws/actualiteiten</term>
+                </genre>
+                <genre id="3.0.1.8.25">
+                    <term>Documentaire</term>
+                    <term>Natuur</term>
+                </genre>
+                <credits/>
+                <locations/>
+                <images/>
+                <scheduleEvents/>
+                <segments/>
+            </program>""");
 
         assertThat(result.getGenres()).hasSize(2);
     }
@@ -424,29 +429,30 @@ public class MediaObjectXmlSchemaTest {
     public void testMemberOfAndDescendantOfGraph() {
         AtomicLong id = new AtomicLong(100L);
         String expected =
-            "<program xmlns=\"urn:vpro:media:2009\" embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-                "    <credits/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:segment:301\" midRef=\"VPROWON_104\" type=\"SEGMENT\"/>\n" +
-                "    <memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\">\n" +
-                "        <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"1\"/>\n" +
-                "    </memberOf>\n" +
-                "    <memberOf highlighted=\"false\" midRef=\"VPROWON_104\" index=\"2\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
-                "        <segmentOf midRef=\"VPROWON_103\" type=\"CLIP\">\n" +
-                "            <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"10\"/>\n" +
-                "        </segmentOf>\n" +
-                "    </memberOf>\n" +
-                "    <memberOf highlighted=\"false\" midRef=\"VPROWON_104\" index=\"3\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:segment:301\">\n" +
-                "        <segmentOf midRef=\"VPROWON_103\" type=\"CLIP\">\n" +
-                "            <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"10\"/>\n" +
-                "        </segmentOf>\n" +
-                "    </memberOf>\n" +
-                "    <locations/>\n" +
-                "    <images/>\n" +
-                "    <scheduleEvents/>\n" +
-                "    <segments/>\n" +
-                "</program>";
+            """
+                <program xmlns="urn:vpro:media:2009" embeddable="true" xmlns:shared="urn:vpro:shared:2009">
+                    <credits/>
+                    <descendantOf urnRef="urn:vpro:media:group:100" midRef="AVRO_5555555" type="SERIES"/>
+                    <descendantOf urnRef="urn:vpro:media:group:200" midRef="AVRO_7777777" type="SEASON"/>
+                    <descendantOf urnRef="urn:vpro:media:segment:301" midRef="VPROWON_104" type="SEGMENT"/>
+                    <memberOf added="1970-01-01T01:00:00+01:00" highlighted="false" midRef="AVRO_7777777" index="1" type="SEASON" urnRef="urn:vpro:media:group:200">
+                        <memberOf midRef="AVRO_5555555" type="SERIES" index="1"/>
+                    </memberOf>
+                    <memberOf highlighted="false" midRef="VPROWON_104" index="2" type="SEGMENT" urnRef="urn:vpro:media:segment:301">
+                        <segmentOf midRef="VPROWON_103" type="CLIP">
+                            <memberOf midRef="AVRO_5555555" type="SERIES" index="10"/>
+                        </segmentOf>
+                    </memberOf>
+                    <memberOf highlighted="false" midRef="VPROWON_104" index="3" type="SEGMENT" urnRef="urn:vpro:media:segment:301">
+                        <segmentOf midRef="VPROWON_103" type="CLIP">
+                            <memberOf midRef="AVRO_5555555" type="SERIES" index="10"/>
+                        </segmentOf>
+                    </memberOf>
+                    <locations/>
+                    <images/>
+                    <scheduleEvents/>
+                    <segments/>
+                </program>""";
 
         Program program = program().lean()
                 .withMemberOf(id)
@@ -475,24 +481,26 @@ public class MediaObjectXmlSchemaTest {
     public void testEpisodeOfAndDescendantOfGraph() {
 
         AtomicLong id = new AtomicLong(100);
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><program xmlns=\"urn:vpro:media:2009\" type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <credits/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"AVRO_5555555\" type=\"SERIES\"/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:group:102\" midRef=\"AVRO_7777777\" type=\"SEASON\"/>\n" +
-            "    <descendantOf midRef=\"VPROWON_106\" type=\"SEGMENT\"/>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <episodeOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:102\">\n" +
-            "        <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"1\"/>\n" +
-            "        <memberOf midRef=\"VPROWON_106\" type=\"SEGMENT\" index=\"2\">\n" +
-            "            <segmentOf midRef=\"VPROWON_105\" type=\"CLIP\">\n" +
-            "                <memberOf midRef=\"AVRO_5555555\" type=\"SERIES\" index=\"10\"/>\n" +
-            "            </segmentOf>\n" +
-            "        </memberOf>\n" +
-            "    </episodeOf>\n" +
-            "    <segments/>\n" +
-            "</program>\n";
+        String expected = """
+            <?xml version="1.0" encoding="UTF-8"?><program xmlns="urn:vpro:media:2009" type="BROADCAST" embeddable="true" urn="urn:vpro:media:program:100" xmlns:shared="urn:vpro:shared:2009">
+                <credits/>
+                <descendantOf urnRef="urn:vpro:media:group:101" midRef="AVRO_5555555" type="SERIES"/>
+                <descendantOf urnRef="urn:vpro:media:group:102" midRef="AVRO_7777777" type="SEASON"/>
+                <descendantOf midRef="VPROWON_106" type="SEGMENT"/>
+                <locations/>
+                <images/>
+                <scheduleEvents/>
+                <episodeOf added="1970-01-01T01:00:00+01:00" highlighted="false" midRef="AVRO_7777777" index="1" type="SEASON" urnRef="urn:vpro:media:group:102">
+                    <memberOf midRef="AVRO_5555555" type="SERIES" index="1"/>
+                    <memberOf midRef="VPROWON_106" type="SEGMENT" index="2">
+                        <segmentOf midRef="VPROWON_105" type="CLIP">
+                            <memberOf midRef="AVRO_5555555" type="SERIES" index="10"/>
+                        </segmentOf>
+                    </memberOf>
+                </episodeOf>
+                <segments/>
+            </program>
+            """;
 
         Program program = program().id(id.getAndIncrement()).lean()
                 .type(ProgramType.BROADCAST)
@@ -511,19 +519,20 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testRelations() {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00+01:00\" creationDate=\"1970-01-01T01:00:00+01:00\" urn=\"urn:vpro:media:program:100\" workflow=\"PUBLISHED\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <credits/>\n" +
-            "    <locations/>\n" +
-            "    <relation broadcaster=\"AVRO\" type=\"THESAURUS\" urn=\"urn:vpro:media:relation:2\">synoniem</relation>\n" +
-            "    <relation broadcaster=\"EO\" type=\"KOOR\" urn=\"urn:vpro:media:relation:4\">Ulfts Mannenkoor</relation>\n" +
-            "    <relation broadcaster=\"VPRO\" type=\"ARTIST\" urn=\"urn:vpro:media:relation:3\">Marco Borsato</relation>\n" +
-            "    <relation uriRef=\"http://www.bluenote.com/\" broadcaster=\"VPRO\" type=\"LABEL\" urn=\"urn:vpro:media:relation:1\">Blue Note</relation>\n" +
-            " \n" +
-            "    <images/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <segments/>\n" +
-            "</program>";
+        String expected = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <program embeddable="true" sortDate="1970-01-01T01:00:00+01:00" creationDate="1970-01-01T01:00:00+01:00" urn="urn:vpro:media:program:100" workflow="PUBLISHED" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <credits/>
+                <locations/>
+                <relation broadcaster="AVRO" type="THESAURUS" urn="urn:vpro:media:relation:2">synoniem</relation>
+                <relation broadcaster="EO" type="KOOR" urn="urn:vpro:media:relation:4">Ulfts Mannenkoor</relation>
+                <relation broadcaster="VPRO" type="ARTIST" urn="urn:vpro:media:relation:3">Marco Borsato</relation>
+                <relation uriRef="http://www.bluenote.com/" broadcaster="VPRO" type="LABEL" urn="urn:vpro:media:relation:1">Blue Note</relation>
+            \s
+                <images/>
+                <scheduleEvents/>
+                <segments/>
+            </program>""";
 
         Program program = program().id(100L).lean().creationDate(Instant.EPOCH).workflow(Workflow.PUBLISHED).withRelations().build();
 
@@ -543,80 +552,82 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().id(100L).lean().withScheduleEvents().build();
         String actual = toXml(program);
 
-        assertThatXml(actual).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00.100+01:00\"\n" +
-            "    urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <credits/>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <scheduleEvents>\n" +
-            "        <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "            <title owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Title</title>\n" +
-            "            <description owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Description</description>\n" +
-            "            <textSubtitles>Teletekst ondertitels</textSubtitles>\n" +
-            "            <textPage>888</textPage>\n" +
-            "            <guideDay>1969-12-31+01:00</guideDay>\n" +
-            "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
-            "            <duration>P0DT0H0M0.200S</duration>\n" +
-            "            <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>\n" +
-            "            <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>\n" +
-            "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "            <repeat isRerun=\"true\"/>\n" +
-            "            <guideDay>1970-01-03+01:00</guideDay>\n" +
-            "            <start>1970-01-04T01:00:00.300+01:00</start>\n" +
-            "            <duration>P0DT0H0M0.050S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "            <repeat isRerun=\"true\"/>\n" +
-            "            <guideDay>1970-01-08+01:00</guideDay>\n" +
-            "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
-            "            <duration>P0DT0H0M0.250S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "            <repeat isRerun=\"true\"/>\n" +
-            "            <guideDay>1970-01-10+01:00</guideDay>\n" +
-            "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
-            "            <duration>P0DT0H0M0.200S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "    </scheduleEvents>\n" +
-            "    <segments/>\n" +
-            "</program>\n");
+        assertThatXml(actual).isSimilarTo("""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <program embeddable="true" sortDate="1970-01-01T01:00:00.100+01:00"
+                urn="urn:vpro:media:program:100" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <credits/>
+                <locations/>
+                <images/>
+                <scheduleEvents>
+                    <scheduleEvent channel="NED3" urnRef="urn:vpro:media:program:100">
+                        <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
+                        <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
+                        <textSubtitles>Teletekst ondertitels</textSubtitles>
+                        <textPage>888</textPage>
+                        <guideDay>1969-12-31+01:00</guideDay>
+                        <start>1970-01-01T01:00:00.100+01:00</start>
+                        <duration>P0DT0H0M0.200S</duration>
+                        <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>
+                        <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>
+                    </scheduleEvent>
+                    <scheduleEvent channel="NED3" net="ZAPP" urnRef="urn:vpro:media:program:100">
+                        <repeat isRerun="true"/>
+                        <guideDay>1970-01-03+01:00</guideDay>
+                        <start>1970-01-04T01:00:00.300+01:00</start>
+                        <duration>P0DT0H0M0.050S</duration>
+                    </scheduleEvent>
+                    <scheduleEvent channel="HOLL" urnRef="urn:vpro:media:program:100">
+                        <repeat isRerun="true"/>
+                        <guideDay>1970-01-08+01:00</guideDay>
+                        <start>1970-01-09T01:00:00.350+01:00</start>
+                        <duration>P0DT0H0M0.250S</duration>
+                    </scheduleEvent>
+                    <scheduleEvent channel="CONS" urnRef="urn:vpro:media:program:100">
+                        <repeat isRerun="true"/>
+                        <guideDay>1970-01-10+01:00</guideDay>
+                        <start>1970-01-11T01:00:00.600+01:00</start>
+                        <duration>P0DT0H0M0.200S</duration>
+                    </scheduleEvent>
+                </scheduleEvents>
+                <segments/>
+            </program>
+            """);
 
-        String withScheduleEventOnOldLocation =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00.100+01:00\"\n" +
-            "    urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <credits/>\n" +
-            "    <locations/>\n" +
-
-            "    <scheduleEvents>\n" +
-            "        <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "            <guideDay>1969-12-31+01:00</guideDay>\n" +
-            "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
-            "            <duration>P0DT0H0M0.200S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "            <repeat isRerun=\"true\"/>\n" +
-            "            <guideDay>1970-01-03+01:00</guideDay>\n" +
-            "            <start>1970-01-04T01:00:00.300+01:00</start>\n" +
-            "            <duration>P0DT0H0M0.050S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "            <repeat isRerun=\"true\"/>\n" +
-            "            <guideDay>1970-01-08+01:00</guideDay>\n" +
-            "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
-            "            <duration>P0DT0H0M0.250S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "            <repeat isRerun=\"true\"/>\n" +
-            "            <guideDay>1970-01-10+01:00</guideDay>\n" +
-            "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
-            "            <duration>P0DT0H0M0.200S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "    </scheduleEvents>\n" +
-            "    <images/>\n" +
-            "    <segments/>\n" +
-            "</program>";
+        String withScheduleEventOnOldLocation = """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <program embeddable="true" sortDate="1970-01-01T01:00:00.100+01:00"
+                urn="urn:vpro:media:program:100" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <credits/>
+                <locations/>
+                <scheduleEvents>
+                    <scheduleEvent channel="NED3" urnRef="urn:vpro:media:program:100">
+                        <guideDay>1969-12-31+01:00</guideDay>
+                        <start>1970-01-01T01:00:00.100+01:00</start>
+                        <duration>P0DT0H0M0.200S</duration>
+                    </scheduleEvent>
+                    <scheduleEvent channel="NED3" net="ZAPP" urnRef="urn:vpro:media:program:100">
+                        <repeat isRerun="true"/>
+                        <guideDay>1970-01-03+01:00</guideDay>
+                        <start>1970-01-04T01:00:00.300+01:00</start>
+                        <duration>P0DT0H0M0.050S</duration>
+                    </scheduleEvent>
+                    <scheduleEvent channel="HOLL" urnRef="urn:vpro:media:program:100">
+                        <repeat isRerun="true"/>
+                        <guideDay>1970-01-08+01:00</guideDay>
+                        <start>1970-01-09T01:00:00.350+01:00</start>
+                        <duration>P0DT0H0M0.250S</duration>
+                    </scheduleEvent>
+                    <scheduleEvent channel="CONS" urnRef="urn:vpro:media:program:100">
+                        <repeat isRerun="true"/>
+                        <guideDay>1970-01-10+01:00</guideDay>
+                        <start>1970-01-11T01:00:00.600+01:00</start>
+                        <duration>P0DT0H0M0.200S</duration>
+                    </scheduleEvent>
+                </scheduleEvents>
+                <images/>
+                <segments/>
+            </program>""";
 
         Program unmarshalled = JAXB.unmarshal(new StringReader(withScheduleEventOnOldLocation), Program.class);
         assertThat(unmarshalled.getScheduleEvents()).hasSize(4);
@@ -629,23 +640,24 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testScheduleEventsWithNet() {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00+01:00\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <credits/>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <scheduleEvents>\n" +
-            "        <scheduleEvent channel=\"NED1\" midRef=\"VPRO_123456\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "            <guideDay>1970-01-01+01:00</guideDay>\n" +
-            "            <start>1970-01-01T01:00:00+01:00</start>\n" +
-            "            <duration>P0DT0H1M40.000S</duration>\n" +
-            "            <poProgID>VPRO_123456</poProgID>\n" +
-            "            <primaryLifestyle>Onbezorgde Trendbewusten</primaryLifestyle>\n" +
-            "            <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>\n" +
-            "        </scheduleEvent>\n" +
-            "    </scheduleEvents>\n" +
-            "    <segments/>\n" +
-            "</program>";
+        String expected = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <program embeddable="true" sortDate="1970-01-01T01:00:00+01:00" urn="urn:vpro:media:program:100" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <credits/>
+                <locations/>
+                <images/>
+                <scheduleEvents>
+                    <scheduleEvent channel="NED1" midRef="VPRO_123456" net="ZAPP" urnRef="urn:vpro:media:program:100">
+                        <guideDay>1970-01-01+01:00</guideDay>
+                        <start>1970-01-01T01:00:00+01:00</start>
+                        <duration>P0DT0H1M40.000S</duration>
+                        <poProgID>VPRO_123456</poProgID>
+                        <primaryLifestyle>Onbezorgde Trendbewusten</primaryLifestyle>
+                        <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>
+                    </scheduleEvent>
+                </scheduleEvents>
+                <segments/>
+            </program>""";
 
         ScheduleEvent event = new ScheduleEvent(Channel.NED1, Instant.EPOCH, java.time.Duration.ofSeconds((100)));
         event.setGuideDate(LocalDate.ofEpochDay(0));
@@ -723,39 +735,40 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(schedule);
 
-        assertThatXml(actual).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<schedule channel=\"NED1\" start=\"1970-01-01T01:00:00+01:00\"\n" +
-            "    stop=\"1970-01-11T01:00:00.800+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "        <title owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Title</title>\n" +
-            "        <description owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Description</description>\n" +
-            "        <textSubtitles>Teletekst ondertitels</textSubtitles>\n" +
-            "        <textPage>888</textPage>\n" +
-            "        <guideDay>1969-12-31+01:00</guideDay>\n" +
-            "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
-            "        <duration>P0DT0H0M0.200S</duration>\n" +
-            "        <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>\n" +
-            "        <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>\n" +
-            "    </scheduleEvent>\n" +
-            "    <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "        <repeat isRerun=\"true\"/>\n" +
-            "        <guideDay>1970-01-03+01:00</guideDay>\n" +
-            "        <start>1970-01-04T01:00:00.300+01:00</start>\n" +
-            "        <duration>P0DT0H0M0.050S</duration>\n" +
-            "    </scheduleEvent>\n" +
-            "    <scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "        <repeat isRerun=\"true\"/>\n" +
-            "        <guideDay>1970-01-08+01:00</guideDay>\n" +
-            "        <start>1970-01-09T01:00:00.350+01:00</start>\n" +
-            "        <duration>P0DT0H0M0.250S</duration>\n" +
-            "    </scheduleEvent>\n" +
-            "    <scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "        <repeat isRerun=\"true\"/>\n" +
-            "        <guideDay>1970-01-10+01:00</guideDay>\n" +
-            "        <start>1970-01-11T01:00:00.600+01:00</start>\n" +
-            "        <duration>P0DT0H0M0.200S</duration>\n" +
-            "    </scheduleEvent>\n" +
-            "</schedule>");
+        assertThatXml(actual).isSimilarTo("""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <schedule channel="NED1" start="1970-01-01T01:00:00+01:00"
+                stop="1970-01-11T01:00:00.800+01:00" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <scheduleEvent channel="NED3" urnRef="urn:vpro:media:program:100">
+                    <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
+                    <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
+                    <textSubtitles>Teletekst ondertitels</textSubtitles>
+                    <textPage>888</textPage>
+                    <guideDay>1969-12-31+01:00</guideDay>
+                    <start>1970-01-01T01:00:00.100+01:00</start>
+                    <duration>P0DT0H0M0.200S</duration>
+                    <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>
+                    <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>
+                </scheduleEvent>
+                <scheduleEvent channel="NED3" net="ZAPP" urnRef="urn:vpro:media:program:100">
+                    <repeat isRerun="true"/>
+                    <guideDay>1970-01-03+01:00</guideDay>
+                    <start>1970-01-04T01:00:00.300+01:00</start>
+                    <duration>P0DT0H0M0.050S</duration>
+                </scheduleEvent>
+                <scheduleEvent channel="HOLL" urnRef="urn:vpro:media:program:100">
+                    <repeat isRerun="true"/>
+                    <guideDay>1970-01-08+01:00</guideDay>
+                    <start>1970-01-09T01:00:00.350+01:00</start>
+                    <duration>P0DT0H0M0.250S</duration>
+                </scheduleEvent>
+                <scheduleEvent channel="CONS" urnRef="urn:vpro:media:program:100">
+                    <repeat isRerun="true"/>
+                    <guideDay>1970-01-10+01:00</guideDay>
+                    <start>1970-01-11T01:00:00.600+01:00</start>
+                    <duration>P0DT0H0M0.200S</duration>
+                </scheduleEvent>
+            </schedule>""");
 
 
         Schedule unmarshalled = JAXB.unmarshal(new StringReader(actual), Schedule.class);
@@ -773,28 +786,29 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(schedule);
 
-        assertThatXml(actual).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<schedule channel=\"NED3\" start=\"1970-01-01T01:00:00+01:00\"\n" +
-            "    stop=\"1970-01-09T01:00:00.350+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "        <title owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Title</title>\n" +
-            "        <description owner=\"BROADCASTER\" type=\"MAIN\">Main ScheduleEvent Description</description>\n" +
-            "        <textSubtitles>Teletekst ondertitels</textSubtitles>\n" +
-            "        <textPage>888</textPage>\n" +
-            "        <guideDay>1969-12-31+01:00</guideDay>\n" +
-            "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
-            "        <duration>P0DT0H0M0.200S</duration>\n" +
-            "        <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>\n" +
-            "        <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>\n" +
-            "    </scheduleEvent>\n" +
-            "    <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "        <repeat isRerun=\"true\"/>\n" +
-            "        <guideDay>1970-01-03+01:00</guideDay>\n" +
-            "        <start>1970-01-04T01:00:00.300+01:00</start>\n" +
-            "        <duration>P0DT0H0M0.050S</duration>\n" +
-            "    </scheduleEvent>\n" +
-            "</schedule>\n" +
-            "");
+        assertThatXml(actual).isSimilarTo("""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <schedule channel="NED3" start="1970-01-01T01:00:00+01:00"
+                stop="1970-01-09T01:00:00.350+01:00" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <scheduleEvent channel="NED3" urnRef="urn:vpro:media:program:100">
+                    <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
+                    <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
+                    <textSubtitles>Teletekst ondertitels</textSubtitles>
+                    <textPage>888</textPage>
+                    <guideDay>1969-12-31+01:00</guideDay>
+                    <start>1970-01-01T01:00:00.100+01:00</start>
+                    <duration>P0DT0H0M0.200S</duration>
+                    <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>
+                    <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>
+                </scheduleEvent>
+                <scheduleEvent channel="NED3" net="ZAPP" urnRef="urn:vpro:media:program:100">
+                    <repeat isRerun="true"/>
+                    <guideDay>1970-01-03+01:00</guideDay>
+                    <start>1970-01-04T01:00:00.300+01:00</start>
+                    <duration>P0DT0H0M0.050S</duration>
+                </scheduleEvent>
+            </schedule>
+            """);
     }
 
     @Test
@@ -811,16 +825,17 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().id(100L).lean().withScheduleEvents().build();
         schedule.addScheduleEventsFromMedia(program);
 
-        assertThatXml(toXml(schedule)).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<schedule net=\"ZAPP\" start=\"1970-01-01T01:00:00+01:00\"\n" +
-            "    stop=\"1970-01-09T01:00:00.350+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
-            "        <repeat isRerun=\"true\"/>\n" +
-            "        <guideDay>1970-01-03+01:00</guideDay>\n" +
-            "        <start>1970-01-04T01:00:00.300+01:00</start>\n" +
-            "        <duration>P0DT0H0M0.050S</duration>\n" +
-            "    </scheduleEvent>\n" +
-            "</schedule>");
+        assertThatXml(toXml(schedule)).isSimilarTo("""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <schedule net="ZAPP" start="1970-01-01T01:00:00+01:00"
+                stop="1970-01-09T01:00:00.350+01:00" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <scheduleEvent channel="NED3" net="ZAPP" urnRef="urn:vpro:media:program:100">
+                    <repeat isRerun="true"/>
+                    <guideDay>1970-01-03+01:00</guideDay>
+                    <start>1970-01-04T01:00:00.300+01:00</start>
+                    <duration>P0DT0H0M0.050S</duration>
+                </scheduleEvent>
+            </schedule>""");
     }
 
     @Test
@@ -866,83 +881,85 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testWithLocations() {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><program xmlns=\"urn:vpro:media:2009\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "      \n" +
-            "  <credits/>\n" +
-            "      \n" +
-            "  <locations>\n" +
-            "            \n" +
-            "    <location owner=\"BROADCASTER\" workflow=\"PUBLISHED\" creationDate=\"2016-03-04T15:45:00+01:00\">\n" +
-            "                  \n" +
-            "      <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
-            "                  \n" +
-            "      <avAttributes>\n" +
-            "                        \n" +
-            "        <bitrate>1500</bitrate>\n" +
-            "                        \n" +
-            "        <avFileFormat>MP4</avFileFormat>\n" +
-            "                    \n" +
-            "      </avAttributes>\n" +
-            "                  \n" +
-            "      <offset>P0DT0H13M0.000S</offset>\n" +
-            "                  \n" +
-            "      <duration>P0DT0H10M0.000S</duration>\n" +
-            "              \n" +
-            "    </location>\n" +
-            "            \n" +
-            "    <location owner=\"BROADCASTER\" workflow=\"PUBLISHED\" creationDate=\"2016-03-04T14:45:00+01:00\">\n" +
-            "                  \n" +
-            "      <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>\n" +
-            "                  \n" +
-            "      <avAttributes>\n" +
-            "                        \n" +
-            "        <bitrate>3000</bitrate>\n" +
-            "                        \n" +
-            "        <avFileFormat>WM</avFileFormat>\n" +
-            "                    \n" +
-            "      </avAttributes>\n" +
-            "              \n" +
-            "    </location>\n" +
-            "            \n" +
-            "    <location owner=\"BROADCASTER\" workflow=\"PUBLISHED\" creationDate=\"2016-03-04T13:45:00+01:00\">\n" +
-            "                  \n" +
-            "      <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>\n" +
-            "                  \n" +
-            "      <avAttributes>\n" +
-            "                        \n" +
-            "        <bitrate>2000</bitrate>\n" +
-            "                        \n" +
-            "        <avFileFormat>WM</avFileFormat>\n" +
-            "                    \n" +
-            "      </avAttributes>\n" +
-            "                  \n" +
-            "      <duration>P0DT0H30M33.000S</duration>\n" +
-            "              \n" +
-            "    </location>\n" +
-            "            \n" +
-            "    <location owner=\"NEBO\" workflow=\"PUBLISHED\" creationDate=\"2016-03-04T12:45:00+01:00\">\n" +
-            "                  \n" +
-            "      <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>\n" +
-            "                  \n" +
-            "      <avAttributes>\n" +
-            "                        \n" +
-            "        <bitrate>1000</bitrate>\n" +
-            "                        \n" +
-            "        <avFileFormat>HTML</avFileFormat>\n" +
-            "                    \n" +
-            "      </avAttributes>\n" +
-            "              \n" +
-            "    </location>\n" +
-            "        \n" +
-            "  </locations>\n" +
-            "      \n" +
-            "  <images/>\n" +
-            "      \n" +
-            "  <scheduleEvents/>\n" +
-            "      \n" +
-            "  <segments/>\n" +
-            "  \n" +
-            "</program>\n";
+        String expected = """
+            <?xml version="1.0" encoding="UTF-8"?><program xmlns="urn:vpro:media:2009" embeddable="true" urn="urn:vpro:media:program:100" xmlns:shared="urn:vpro:shared:2009">
+                 \s
+              <credits/>
+                 \s
+              <locations>
+                       \s
+                <location owner="BROADCASTER" workflow="PUBLISHED" creationDate="2016-03-04T15:45:00+01:00">
+                             \s
+                  <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
+                             \s
+                  <avAttributes>
+                                   \s
+                    <bitrate>1500</bitrate>
+                                   \s
+                    <avFileFormat>MP4</avFileFormat>
+                               \s
+                  </avAttributes>
+                             \s
+                  <offset>P0DT0H13M0.000S</offset>
+                             \s
+                  <duration>P0DT0H10M0.000S</duration>
+                         \s
+                </location>
+                       \s
+                <location owner="BROADCASTER" workflow="PUBLISHED" creationDate="2016-03-04T14:45:00+01:00">
+                             \s
+                  <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
+                             \s
+                  <avAttributes>
+                                   \s
+                    <bitrate>3000</bitrate>
+                                   \s
+                    <avFileFormat>WM</avFileFormat>
+                               \s
+                  </avAttributes>
+                         \s
+                </location>
+                       \s
+                <location owner="BROADCASTER" workflow="PUBLISHED" creationDate="2016-03-04T13:45:00+01:00">
+                             \s
+                  <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
+                             \s
+                  <avAttributes>
+                                   \s
+                    <bitrate>2000</bitrate>
+                                   \s
+                    <avFileFormat>WM</avFileFormat>
+                               \s
+                  </avAttributes>
+                             \s
+                  <duration>P0DT0H30M33.000S</duration>
+                         \s
+                </location>
+                       \s
+                <location owner="NEBO" workflow="PUBLISHED" creationDate="2016-03-04T12:45:00+01:00">
+                             \s
+                  <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>
+                             \s
+                  <avAttributes>
+                                   \s
+                    <bitrate>1000</bitrate>
+                                   \s
+                    <avFileFormat>HTML</avFileFormat>
+                               \s
+                  </avAttributes>
+                         \s
+                </location>
+                   \s
+              </locations>
+                 \s
+              <images/>
+                 \s
+              <scheduleEvents/>
+                 \s
+              <segments/>
+             \s
+            </program>
+            """;
 
         Program program = program().id(100L).lean().withLocations().build();
 
@@ -951,18 +968,19 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testWithLocationWithUnknownOwner() {
-        String example = "<program embeddable=\"true\" hasSubtitles=\"false\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <locations>\n" +
-            "        <location owner=\"UNKNOWN\" creationDate=\"2016-03-04T15:45:00+01:00\" workflow=\"PUBLISHED\">\n" +
-            "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
-            "            <avAttributes>\n" +
-            "                <avFileFormat>MP4</avFileFormat>\n" +
-            "            </avAttributes>\n" +
-            "            <offset>P0DT0H13M0.000S</offset>\n" +
-            "            <duration>P0DT0H10M0.000S</duration>\n" +
-            "        </location>\n" +
-            "    </locations>\n" +
-            "</program>";
+        String example = """
+            <program embeddable="true" hasSubtitles="false" urn="urn:vpro:media:program:100" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <locations>
+                    <location owner="UNKNOWN" creationDate="2016-03-04T15:45:00+01:00" workflow="PUBLISHED">
+                        <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
+                        <avAttributes>
+                            <avFileFormat>MP4</avFileFormat>
+                        </avAttributes>
+                        <offset>P0DT0H13M0.000S</offset>
+                        <duration>P0DT0H10M0.000S</duration>
+                    </location>
+                </locations>
+            </program>""";
 
         Program program = JAXBTestUtil.unmarshal(example, Program.class);
         assertThat(program.getLocations().first().getOwner()).isNull();
@@ -971,17 +989,18 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void testWithDescendantOf() {
         Program program = program().lean().withDescendantOf().build();
-        JAXBTestUtil.roundTripAndSimilar(program, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <credits/>\n" +
-            "    <descendantOf midRef=\"MID_123456\" type=\"SEASON\"/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:group:2\" type=\"SERIES\"/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:program:1\" type=\"BROADCAST\"/>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <segments/>\n" +
-            "</program>");
+        JAXBTestUtil.roundTripAndSimilar(program, """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <program embeddable="true" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <credits/>
+                <descendantOf midRef="MID_123456" type="SEASON"/>
+                <descendantOf urnRef="urn:vpro:media:group:2" type="SERIES"/>
+                <descendantOf urnRef="urn:vpro:media:program:1" type="BROADCAST"/>
+                <locations/>
+                <images/>
+                <scheduleEvents/>
+                <segments/>
+            </program>""");
     }
 
     @Test
@@ -1068,31 +1087,32 @@ public class MediaObjectXmlSchemaTest {
      */
     @Test
     public void expectSAXParseException() {
-        String example = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<segment xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" midRef=\"RBX_NTR_2647822\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:program:80684549\" avType=\"AUDIO\" embeddable=\"true\" mid=\"RBX_NTR_5074546\" sortDate=\"2016-09-10T17:30:00+02:00\" workflow=\"PUBLISHED\" creationDate=\"2016-09-10T19:09:11.870+02:00\" lastModified=\"2016-09-10T19:09:11.995+02:00\" publishDate=\"2020-07-20T12:37:55.591+02:00\" urn=\"urn:vpro:media:segment:81654017\">\n" +
-            "    <crid>crid://item.radiobox2/374086</crid>\n" +
-            "    <broadcaster id=\"NTR\">NTR</broadcaster>\n" +
-            "    <title owner=\"RADIOBOX\" type=\"MAIN\">Wat kunt u zoal verwachten?</title>\n" +
-            "    <description owner=\"RADIOBOX\" type=\"MAIN\">Podium op Zaterdag met muzieknieuws en nieuwe CD's, o.a. laatste CD van de zusjes Baiba en Lauma Skride en van Charlotte Haesen Franse chansons. \u0005Als nieuwe crossover CD The Magical Forest, met een sfeervolle mix van Noorse folk, jazz en het vocaal Trio Mediaeval . Poëzie is er van de Groningse dichter Jean-Pierre Rawie, van hem het gedicht ‘Adieu’. Als filmtip L'Avenir van Mia Hansen-Løve. En in het Open Podium het jonge Nederlandse Gióvani Kwartet, dat hier te horen is in de oude bezetting. Doe mee met het Open Podium en stuur je opname naar: openpodium@ntr.nl.</description>\n" +
-            "    <tag>podium</tag>\n" +
-            "    <duration>P0DT0H3M0.000S</duration>\n" +
-            "    <credits/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:group:13405550\" midRef=\"AUTO_PODIUM\" type=\"SERIES\"/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:program:80684549\" midRef=\"RBX_NTR_2647822\" type=\"BROADCAST\"/>\n" +
-            "    <locations/>\n" +
-            "    <images>\n" +
-            "        <shared:image owner=\"RADIOBOX\" type=\"PICTURE\" highlighted=\"false\" workflow=\"PUBLISHED\" creationDate=\"2016-09-10T19:09:11.511+02:00\" lastModified=\"2016-09-10T19:09:11.873+02:00\" urn=\"urn:vpro:media:image:81654019\">\n" +
-            "            <shared:title>magical forest cover.jpg</shared:title>\n" +
-            "            <shared:imageUri>urn:vpro:image:801058</shared:imageUri>\n" +
-            "            <shared:height>372</shared:height>\n" +
-            "            <shared:width>620</shared:width>\n" +
-            "        </shared:image>\n" +
-            "    </images>\n" +
-            "    <segmentOf midRef=\"RBX_NTR_2647822\" type=\"BROADCAST\">\n" +
-            "        <episodeOf midRef=\"AUTO_PODIUM\" type=\"SERIES\" index=\"612\"/>\n" +
-            "    </segmentOf>\n" +
-            "    <start>P0DT0H30M0.000S</start>\n" +
-            "</segment>";
+        String example = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <segment xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" midRef="RBX_NTR_2647822" type="SEGMENT" urnRef="urn:vpro:media:program:80684549" avType="AUDIO" embeddable="true" mid="RBX_NTR_5074546" sortDate="2016-09-10T17:30:00+02:00" workflow="PUBLISHED" creationDate="2016-09-10T19:09:11.870+02:00" lastModified="2016-09-10T19:09:11.995+02:00" publishDate="2020-07-20T12:37:55.591+02:00" urn="urn:vpro:media:segment:81654017">
+                <crid>crid://item.radiobox2/374086</crid>
+                <broadcaster id="NTR">NTR</broadcaster>
+                <title owner="RADIOBOX" type="MAIN">Wat kunt u zoal verwachten?</title>
+                <description owner="RADIOBOX" type="MAIN">Podium op Zaterdag met muzieknieuws en nieuwe CD's, o.a. laatste CD van de zusjes Baiba en Lauma Skride en van Charlotte Haesen Franse chansons. \u0005Als nieuwe crossover CD The Magical Forest, met een sfeervolle mix van Noorse folk, jazz en het vocaal Trio Mediaeval . Poëzie is er van de Groningse dichter Jean-Pierre Rawie, van hem het gedicht ‘Adieu’. Als filmtip L'Avenir van Mia Hansen-Løve. En in het Open Podium het jonge Nederlandse Gióvani Kwartet, dat hier te horen is in de oude bezetting. Doe mee met het Open Podium en stuur je opname naar: openpodium@ntr.nl.</description>
+                <tag>podium</tag>
+                <duration>P0DT0H3M0.000S</duration>
+                <credits/>
+                <descendantOf urnRef="urn:vpro:media:group:13405550" midRef="AUTO_PODIUM" type="SERIES"/>
+                <descendantOf urnRef="urn:vpro:media:program:80684549" midRef="RBX_NTR_2647822" type="BROADCAST"/>
+                <locations/>
+                <images>
+                    <shared:image owner="RADIOBOX" type="PICTURE" highlighted="false" workflow="PUBLISHED" creationDate="2016-09-10T19:09:11.511+02:00" lastModified="2016-09-10T19:09:11.873+02:00" urn="urn:vpro:media:image:81654019">
+                        <shared:title>magical forest cover.jpg</shared:title>
+                        <shared:imageUri>urn:vpro:image:801058</shared:imageUri>
+                        <shared:height>372</shared:height>
+                        <shared:width>620</shared:width>
+                    </shared:image>
+                </images>
+                <segmentOf midRef="RBX_NTR_2647822" type="BROADCAST">
+                    <episodeOf midRef="AUTO_PODIUM" type="SERIES" index="612"/>
+                </segmentOf>
+                <start>P0DT0H30M0.000S</start>
+            </segment>""";
         assertThatThrownBy(() -> {
             Segment unmarshal = JAXB.unmarshal(new StringReader(example), Segment.class);
         }).isInstanceOf(javax.xml.bind.DataBindingException.class).hasMessageContaining("An invalid XML character");
@@ -1102,16 +1122,18 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void roundTripWithPrediction() {
         String example =
-            "<program xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPWON_1199058\" sortDate=\"2013-04-09T15:25:00+02:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2013-03-17T06:48:59.719+01:00\" lastModified=\"2018-02-07T11:58:43.578+01:00\" publishDate=\"2015-01-08T17:42:19.202+01:00\" urn=\"urn:vpro:media:program:23197206\">\n" +
-                "  <broadcaster id=\"VPRO\">VPRO</broadcaster>\n" +
-                "  <credits/>\n" +
-                "  <prediction state=\"ANNOUNCED\" publishStop=\"2020-01-02T14:54:44+01:00\">INTERNETVOD</prediction>\n" +
-                "  <prediction state=\"ANNOUNCED\" publishStop=\"2020-01-02T14:54:44+01:00\">TVVOD</prediction>\n" +
-                "  <locations />\n" +
-                "  <images/>\n" +
-                "  <scheduleEvents/>\n" +
-                "  <segments/>\n" +
-                "</program>\n";
+            """
+                <program xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" type="BROADCAST" avType="VIDEO" embeddable="true" mid="VPWON_1199058" sortDate="2013-04-09T15:25:00+02:00" workflow="FOR PUBLICATION" creationDate="2013-03-17T06:48:59.719+01:00" lastModified="2018-02-07T11:58:43.578+01:00" publishDate="2015-01-08T17:42:19.202+01:00" urn="urn:vpro:media:program:23197206">
+                  <broadcaster id="VPRO">VPRO</broadcaster>
+                  <credits/>
+                  <prediction state="ANNOUNCED" publishStop="2020-01-02T14:54:44+01:00">INTERNETVOD</prediction>
+                  <prediction state="ANNOUNCED" publishStop="2020-01-02T14:54:44+01:00">TVVOD</prediction>
+                  <locations />
+                  <images/>
+                  <scheduleEvents/>
+                  <segments/>
+                </program>
+                """;
         JAXBTestUtil.roundTripAndSimilar(example, Program.class);
     }
 

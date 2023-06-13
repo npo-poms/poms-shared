@@ -75,81 +75,83 @@ class RecursiveMemberRefTest {
     public void marshalm3() {
 
         JAXBTestUtil.roundTripAndSimilar(m3,
-            "<program xmlns=\"urn:vpro:media:2009\" embeddable=\"true\" mid=\"m3\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" urn=\"urn:vpro:media:program:3\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-                "    <credits/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"g1\" type=\"SERIES\"/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:program:1\" midRef=\"m1\" type=\"PROGRAM\"/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:program:2\" midRef=\"m2\" type=\"BROADCAST\"/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:program:3\" midRef=\"m3\" type=\"PROGRAM\"/>\n" +
-                "    <memberOf highlighted=\"false\" midRef=\"m1\" index=\"1\" type=\"PROGRAM\" urnRef=\"urn:vpro:media:program:1\">\n" +
-                "        <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"1\">\n" +
-                "            <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\" circular=\"true\"/>\n" +
-                "            <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\">\n" +
-                "                <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\" circular=\"true\"/>\n" +
-                "                <episodeOf midRef=\"g1\" type=\"SERIES\" index=\"1\">\n" +
-                "                    <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"2\" circular=\"true\"/>\n" +
-                "                </episodeOf>\n" +
-                "            </memberOf>\n" +
-                "        </memberOf>\n" +
-                "    </memberOf>\n" +
-                "    <memberOf highlighted=\"false\" midRef=\"m2\" index=\"1\" type=\"BROADCAST\" urnRef=\"urn:vpro:media:program:2\">\n" +
-                "        <episodeOf midRef=\"g1\" type=\"SERIES\" index=\"1\">\n" +
-                "            <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"2\">\n" +
-                "                <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\">\n" +
-                "                    <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"1\" circular=\"true\"/>\n" +
-                "                </memberOf>\n" +
-                "                <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\" circular=\"true\"/>\n" +
-                "            </memberOf>\n" +
-                "        </episodeOf>\n" +
-                "        <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\">\n" +
-                "            <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"1\">\n" +
-                "                <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\" circular=\"true\"/>\n" +
-                "                <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\" circular=\"true\"/>\n" +
-                "            </memberOf>\n" +
-                "        </memberOf>\n" +
-                "    </memberOf>\n" +
-                "    <locations/>\n" +
-                "    <images/>\n" +
-                "    <scheduleEvents/>\n" +
-                "    <segments/>\n" +
-                "</program>");
+            """
+                <program xmlns="urn:vpro:media:2009" embeddable="true" mid="m3" sortDate="2015-03-06T00:00:00+01:00" workflow="FOR PUBLICATION" creationDate="2015-03-06T00:00:00+01:00" lastModified="2015-03-06T01:00:00+01:00" publishDate="2015-03-06T02:00:00+01:00" urn="urn:vpro:media:program:3" xmlns:shared="urn:vpro:shared:2009">
+                    <credits/>
+                    <descendantOf urnRef="urn:vpro:media:group:100" midRef="g1" type="SERIES"/>
+                    <descendantOf urnRef="urn:vpro:media:program:1" midRef="m1" type="PROGRAM"/>
+                    <descendantOf urnRef="urn:vpro:media:program:2" midRef="m2" type="BROADCAST"/>
+                    <descendantOf urnRef="urn:vpro:media:program:3" midRef="m3" type="PROGRAM"/>
+                    <memberOf highlighted="false" midRef="m1" index="1" type="PROGRAM" urnRef="urn:vpro:media:program:1">
+                        <memberOf midRef="m3" type="PROGRAM" index="1">
+                            <memberOf midRef="m1" type="PROGRAM" index="1" circular="true"/>
+                            <memberOf midRef="m2" type="BROADCAST" index="1">
+                                <memberOf midRef="m1" type="PROGRAM" index="1" circular="true"/>
+                                <episodeOf midRef="g1" type="SERIES" index="1">
+                                    <memberOf midRef="m3" type="PROGRAM" index="2" circular="true"/>
+                                </episodeOf>
+                            </memberOf>
+                        </memberOf>
+                    </memberOf>
+                    <memberOf highlighted="false" midRef="m2" index="1" type="BROADCAST" urnRef="urn:vpro:media:program:2">
+                        <episodeOf midRef="g1" type="SERIES" index="1">
+                            <memberOf midRef="m3" type="PROGRAM" index="2">
+                                <memberOf midRef="m1" type="PROGRAM" index="1">
+                                    <memberOf midRef="m3" type="PROGRAM" index="1" circular="true"/>
+                                </memberOf>
+                                <memberOf midRef="m2" type="BROADCAST" index="1" circular="true"/>
+                            </memberOf>
+                        </episodeOf>
+                        <memberOf midRef="m1" type="PROGRAM" index="1">
+                            <memberOf midRef="m3" type="PROGRAM" index="1">
+                                <memberOf midRef="m1" type="PROGRAM" index="1" circular="true"/>
+                                <memberOf midRef="m2" type="BROADCAST" index="1" circular="true"/>
+                            </memberOf>
+                        </memberOf>
+                    </memberOf>
+                    <locations/>
+                    <images/>
+                    <scheduleEvents/>
+                    <segments/>
+                </program>""");
     }
     @Test
     public void marshalm2() {
          JAXBTestUtil.roundTripAndSimilar(m2,
-            "<program xmlns=\"urn:vpro:media:2009\" type=\"BROADCAST\" embeddable=\"true\" mid=\"m2\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" urn=\"urn:vpro:media:program:2\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-                "    <credits/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"g1\" type=\"SERIES\"/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:program:1\" midRef=\"m1\" type=\"PROGRAM\"/>\n" +
-                "    <memberOf highlighted=\"false\" midRef=\"m1\" index=\"1\" type=\"PROGRAM\" urnRef=\"urn:vpro:media:program:1\">\n" +
-                "        <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"1\">\n" +
-                "            <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\" circular=\"true\"/>\n" +
-                "            <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\">\n" +
-                "                <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\" circular=\"true\"/>\n" +
-                "                <episodeOf midRef=\"g1\" type=\"SERIES\" index=\"1\">\n" +
-                "                    <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"2\" circular=\"true\"/>\n" +
-                "                </episodeOf>\n" +
-                "            </memberOf>\n" +
-                "        </memberOf>\n" +
-                "    </memberOf>\n" +
-                "    <locations/>\n" +
-                "    <images/>\n" +
-                "    <scheduleEvents/>\n" +
-                "    <episodeOf highlighted=\"false\" midRef=\"g1\" index=\"1\" type=\"SERIES\" urnRef=\"urn:vpro:media:group:100\">\n" +
-                "        <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"2\">\n" +
-                "            <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\">\n" +
-                "                <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"1\" circular=\"true\"/>\n" +
-                "            </memberOf>\n" +
-                "            <memberOf midRef=\"m2\" type=\"BROADCAST\" index=\"1\">\n" +
-                "                <memberOf midRef=\"m1\" type=\"PROGRAM\" index=\"1\">\n" +
-                "                    <memberOf midRef=\"m3\" type=\"PROGRAM\" index=\"1\" circular=\"true\"/>\n" +
-                "                </memberOf>\n" +
-                "                <episodeOf midRef=\"g1\" type=\"SERIES\" index=\"1\" circular=\"true\"/>\n" +
-                "            </memberOf>\n" +
-                "        </memberOf>\n" +
-                "    </episodeOf>\n" +
-                "    <segments/>\n" +
-                "</program>");
+             """
+                 <program xmlns="urn:vpro:media:2009" type="BROADCAST" embeddable="true" mid="m2" sortDate="2015-03-06T00:00:00+01:00" workflow="FOR PUBLICATION" creationDate="2015-03-06T00:00:00+01:00" lastModified="2015-03-06T01:00:00+01:00" publishDate="2015-03-06T02:00:00+01:00" urn="urn:vpro:media:program:2" xmlns:shared="urn:vpro:shared:2009">
+                     <credits/>
+                     <descendantOf urnRef="urn:vpro:media:group:100" midRef="g1" type="SERIES"/>
+                     <descendantOf urnRef="urn:vpro:media:program:1" midRef="m1" type="PROGRAM"/>
+                     <memberOf highlighted="false" midRef="m1" index="1" type="PROGRAM" urnRef="urn:vpro:media:program:1">
+                         <memberOf midRef="m3" type="PROGRAM" index="1">
+                             <memberOf midRef="m1" type="PROGRAM" index="1" circular="true"/>
+                             <memberOf midRef="m2" type="BROADCAST" index="1">
+                                 <memberOf midRef="m1" type="PROGRAM" index="1" circular="true"/>
+                                 <episodeOf midRef="g1" type="SERIES" index="1">
+                                     <memberOf midRef="m3" type="PROGRAM" index="2" circular="true"/>
+                                 </episodeOf>
+                             </memberOf>
+                         </memberOf>
+                     </memberOf>
+                     <locations/>
+                     <images/>
+                     <scheduleEvents/>
+                     <episodeOf highlighted="false" midRef="g1" index="1" type="SERIES" urnRef="urn:vpro:media:group:100">
+                         <memberOf midRef="m3" type="PROGRAM" index="2">
+                             <memberOf midRef="m1" type="PROGRAM" index="1">
+                                 <memberOf midRef="m3" type="PROGRAM" index="1" circular="true"/>
+                             </memberOf>
+                             <memberOf midRef="m2" type="BROADCAST" index="1">
+                                 <memberOf midRef="m1" type="PROGRAM" index="1">
+                                     <memberOf midRef="m3" type="PROGRAM" index="1" circular="true"/>
+                                 </memberOf>
+                                 <episodeOf midRef="g1" type="SERIES" index="1" circular="true"/>
+                             </memberOf>
+                         </memberOf>
+                     </episodeOf>
+                     <segments/>
+                 </program>""");
     }
 
 
@@ -157,22 +159,23 @@ class RecursiveMemberRefTest {
     public void marshalm4() {
 
         Program program = JAXBTestUtil.roundTripAndSimilar(m4,
-            "<program xmlns=\"urn:vpro:media:2009\" type=\"BROADCAST\" embeddable=\"true\" mid=\"m3\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" urn=\"urn:vpro:media:program:3\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-                "    <credits/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"g2\" type=\"SEASON\"/>\n" +
-                "    <descendantOf urnRef=\"urn:vpro:media:segment:4\" midRef=\"s1\" type=\"SEGMENT\"/>\n" +
-                "    <locations/>\n" +
-                "    <images/>\n" +
-                "    <scheduleEvents/>\n" +
-                "    <episodeOf highlighted=\"false\" midRef=\"g2\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:101\">\n" +
-                "        <memberOf midRef=\"s1\" type=\"SEGMENT\" index=\"1\">\n" +
-                "            <segmentOf midRef=\"m3\" type=\"BROADCAST\">\n" +
-                "                <episodeOf midRef=\"g2\" type=\"SEASON\" index=\"1\" circular=\"true\"/>\n" +
-                "            </segmentOf>\n" +
-                "        </memberOf>\n" +
-                "    </episodeOf>\n" +
-                "    <segments/>\n" +
-                "</program>");
+            """
+                <program xmlns="urn:vpro:media:2009" type="BROADCAST" embeddable="true" mid="m3" sortDate="2015-03-06T00:00:00+01:00" workflow="FOR PUBLICATION" creationDate="2015-03-06T00:00:00+01:00" lastModified="2015-03-06T01:00:00+01:00" publishDate="2015-03-06T02:00:00+01:00" urn="urn:vpro:media:program:3" xmlns:shared="urn:vpro:shared:2009">
+                    <credits/>
+                    <descendantOf urnRef="urn:vpro:media:group:101" midRef="g2" type="SEASON"/>
+                    <descendantOf urnRef="urn:vpro:media:segment:4" midRef="s1" type="SEGMENT"/>
+                    <locations/>
+                    <images/>
+                    <scheduleEvents/>
+                    <episodeOf highlighted="false" midRef="g2" index="1" type="SEASON" urnRef="urn:vpro:media:group:101">
+                        <memberOf midRef="s1" type="SEGMENT" index="1">
+                            <segmentOf midRef="m3" type="BROADCAST">
+                                <episodeOf midRef="g2" type="SEASON" index="1" circular="true"/>
+                            </segmentOf>
+                        </memberOf>
+                    </episodeOf>
+                    <segments/>
+                </program>""");
         assertThat(program.getEpisodeOf().first().getChildMid()).isEqualTo("m3");
         assertThat(program.getEpisodeOf().first().getMemberOf().first().getChildMid()).isEqualTo("g2");
 
@@ -182,54 +185,55 @@ class RecursiveMemberRefTest {
     public void marshalm4json() {
 
         Program program = Jackson2TestUtil.roundTripAndSimilar(m4,
-            "{\n" +
-                "  \"objectType\" : \"program\",\n" +
-                "  \"mid\" : \"m3\",\n" +
-                "  \"type\" : \"BROADCAST\",\n" +
-                "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
-                "  \"sortDate\" : 1425596400000,\n" +
-                "  \"creationDate\" : 1425596400000,\n" +
-                "  \"lastModified\" : 1425600000000,\n" +
-                "  \"urn\" : \"urn:vpro:media:program:3\",\n" +
-                "  \"embeddable\" : true,\n" +
-                "  \"episodeOf\" : [ {\n" +
-                "    \"midRef\" : \"g2\",\n" +
-                "    \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
-                "    \"type\" : \"SEASON\",\n" +
-                "    \"index\" : 1,\n" +
-                "    \"highlighted\" : false,\n" +
-                "    \"memberOf\" : [ {\n" +
-                "      \"midRef\" : \"s1\",\n" +
-                "      \"type\" : \"SEGMENT\",\n" +
-                "      \"segmentOf\" : {\n" +
-                "        \"midRef\" : \"m3\",\n" +
-                "        \"type\" : \"BROADCAST\",\n" +
-                "        \"episodeOf\" : [ {\n" +
-                "          \"midRef\" : \"g2\",\n" +
-                "          \"type\" : \"SEASON\",\n" +
-                "          \"index\" : 1,\n" +
-                "          \"circular\" : true\n" +
-                "        } ]\n" +
-                "      },\n" +
-                "      \"index\" : 1\n" +
-                "    } ],\n" +
-                "    \"episodeOf\" : [ ]\n" +
-                "  } ],\n" +
-                "  \"broadcasters\" : [ ],\n" +
-                "  \"genres\" : [ ],\n" +
-                "  \"countries\" : [ ],\n" +
-                "  \"languages\" : [ ],\n" +
-                "  \"descendantOf\" : [ {\n" +
-                "    \"midRef\" : \"g2\",\n" +
-                "    \"urnRef\" : \"urn:vpro:media:group:101\",\n" +
-                "    \"type\" : \"SEASON\"\n" +
-                "  }, {\n" +
-                "    \"midRef\" : \"s1\",\n" +
-                "    \"urnRef\" : \"urn:vpro:media:segment:4\",\n" +
-                "    \"type\" : \"SEGMENT\"\n" +
-                "  } ],\n" +
-                "  \"publishDate\" : 1425603600000\n" +
-                "}");
+            """
+                {
+                  "objectType" : "program",
+                  "mid" : "m3",
+                  "type" : "BROADCAST",
+                  "workflow" : "FOR_PUBLICATION",
+                  "sortDate" : 1425596400000,
+                  "creationDate" : 1425596400000,
+                  "lastModified" : 1425600000000,
+                  "urn" : "urn:vpro:media:program:3",
+                  "embeddable" : true,
+                  "episodeOf" : [ {
+                    "midRef" : "g2",
+                    "urnRef" : "urn:vpro:media:group:101",
+                    "type" : "SEASON",
+                    "index" : 1,
+                    "highlighted" : false,
+                    "memberOf" : [ {
+                      "midRef" : "s1",
+                      "type" : "SEGMENT",
+                      "segmentOf" : {
+                        "midRef" : "m3",
+                        "type" : "BROADCAST",
+                        "episodeOf" : [ {
+                          "midRef" : "g2",
+                          "type" : "SEASON",
+                          "index" : 1,
+                          "circular" : true
+                        } ]
+                      },
+                      "index" : 1
+                    } ],
+                    "episodeOf" : [ ]
+                  } ],
+                  "broadcasters" : [ ],
+                  "genres" : [ ],
+                  "countries" : [ ],
+                  "languages" : [ ],
+                  "descendantOf" : [ {
+                    "midRef" : "g2",
+                    "urnRef" : "urn:vpro:media:group:101",
+                    "type" : "SEASON"
+                  }, {
+                    "midRef" : "s1",
+                    "urnRef" : "urn:vpro:media:segment:4",
+                    "type" : "SEGMENT"
+                  } ],
+                  "publishDate" : 1425603600000
+                }""");
 
         MemberRef firstEpisodeOf = program.getEpisodeOf().first();
         assertThat(program.getMid()).isEqualTo("m3");
