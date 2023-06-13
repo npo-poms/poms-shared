@@ -2,6 +2,8 @@ package nl.vpro.domain.image;
 
 import lombok.Data;
 
+import java.io.Serial;
+
 import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -16,6 +18,7 @@ import static java.util.Comparator.*;
 @Data
 public class Dimension implements java.io.Serializable, Comparable<Dimension> {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     private final Long width;

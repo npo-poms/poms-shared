@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.*;
 @Data
 public class SubtitlesContent implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 4374514441026800570L;
 
     @Column(nullable = false)

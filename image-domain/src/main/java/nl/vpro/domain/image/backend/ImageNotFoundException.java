@@ -4,12 +4,15 @@
  */
 package nl.vpro.domain.image.backend;
 
+import java.io.Serial;
+
 import nl.vpro.domain.NotFoundException;
 
 /**
  *
  */
 public class ImageNotFoundException extends NotFoundException {
+    @Serial
     private static final long serialVersionUID = 1607385729781522225L;
 
     public ImageNotFoundException(long s, String message) {

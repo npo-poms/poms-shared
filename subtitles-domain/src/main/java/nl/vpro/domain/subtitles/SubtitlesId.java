@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Locale;
@@ -24,6 +25,7 @@ import static nl.vpro.i18n.Locales.DUTCH;
 @XmlAccessorType(XmlAccessType.NONE)
 public class SubtitlesId implements Serializable, Comparable<SubtitlesId> {
 
+    @Serial
     private static final long serialVersionUID = -965983441644838265L;
 
     @XmlAttribute

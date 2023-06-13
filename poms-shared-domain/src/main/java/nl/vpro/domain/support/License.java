@@ -3,8 +3,7 @@ package nl.vpro.domain.support;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.URI;
@@ -39,6 +38,7 @@ import nl.vpro.validation.LicenseId;
 @Embeddable
 public class License implements Displayable, Serializable { // Not an enum, because that is hard for older clients!
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     public static final License COPYRIGHTED = new License("Copyrighted", null);

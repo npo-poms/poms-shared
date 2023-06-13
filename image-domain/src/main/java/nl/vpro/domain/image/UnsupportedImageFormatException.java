@@ -6,11 +6,14 @@
 
 package nl.vpro.domain.image;
 
+import java.io.Serial;
+
 /**
  * @author arne
  */
 public class UnsupportedImageFormatException extends RuntimeException {
 
+    @Serial
     private static final long serialVersionUID = 7697045387370472521L;
 
     public UnsupportedImageFormatException() {

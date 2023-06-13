@@ -2,6 +2,8 @@ package nl.vpro.domain.image;
 
 import lombok.Data;
 
+import java.io.Serial;
+
 import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -16,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Data
 public class Point implements java.io.Serializable {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     private final int x;

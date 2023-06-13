@@ -2,6 +2,7 @@ package nl.vpro.domain.image;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.*;
@@ -29,6 +30,7 @@ import static nl.vpro.domain.image.ImageFormat.*;
 @JsonDeserialize(builder = ImageSource.Builder.class)
 public class ImageSource implements Serializable, Comparable<ImageSource> {
 
+    @Serial
     private static final long serialVersionUID = -7707025279370332657L;
 
     @ImageURL
@@ -153,6 +155,7 @@ public class ImageSource implements Serializable, Comparable<ImageSource> {
     @EqualsAndHashCode
     @Getter
     public static class Key implements Comparable<Key>, Serializable {
+        @Serial
         private static final long serialVersionUID = 847885430222383460L;
 
         final Type type;

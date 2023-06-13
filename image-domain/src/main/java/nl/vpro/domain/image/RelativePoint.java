@@ -2,6 +2,8 @@ package nl.vpro.domain.image;
 
 import lombok.Data;
 
+import java.io.Serial;
+
 import javax.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -19,6 +21,7 @@ public class RelativePoint implements java.io.Serializable {
     public static final RelativePoint MIDDLE = RelativePoint.of(
         0.5f, 0.5f);
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     private final float x;

@@ -3,6 +3,7 @@ package nl.vpro.domain.page;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.validation.constraints.Pattern;
@@ -30,6 +31,7 @@ import nl.vpro.validation.PathSegment;
 @Builder
 public class Section implements Displayable, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 669523707422621642L;
 
     @MonotonicNonNull

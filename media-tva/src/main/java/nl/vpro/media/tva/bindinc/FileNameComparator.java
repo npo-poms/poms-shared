@@ -1,5 +1,6 @@
 package nl.vpro.media.tva.bindinc;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class FileNameComparator implements Comparator<String>, Serializable {
 
     //@Serial
+    @Serial
     private static final long serialVersionUID = -3188480559809189586L;
 
     @Override

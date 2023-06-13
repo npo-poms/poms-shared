@@ -7,6 +7,7 @@ package nl.vpro.domain.page.update;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -39,6 +40,7 @@ import nl.vpro.validation.WarningValidatorGroup;
 @Data
 public class ImageUpdate implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -8902321923389277697L;
 
     public static ImageUpdate of(Image image) {

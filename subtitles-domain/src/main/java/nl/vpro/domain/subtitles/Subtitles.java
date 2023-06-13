@@ -54,6 +54,7 @@ import static nl.vpro.i18n.Locales.DUTCH;
 @IdClass(SubtitlesId.class)
 public class Subtitles implements Serializable, Identifiable<SubtitlesId>, MutableOwnable, Changeable, SubtitlesMetadata {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     @JsonCreator

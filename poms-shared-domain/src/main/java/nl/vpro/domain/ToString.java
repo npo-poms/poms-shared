@@ -1,5 +1,7 @@
 package nl.vpro.domain;
 
+import java.io.Serial;
+
 import org.apache.commons.lang3.builder.*;
 
 
@@ -15,6 +17,7 @@ public class ToString {
     public static final ToStringStyle STYLE;
     static {
         StandardToStringStyle style = new StandardToStringStyle() {
+            @Serial
             private static final long serialVersionUID = -4020286714849246315L;
 
             @Override

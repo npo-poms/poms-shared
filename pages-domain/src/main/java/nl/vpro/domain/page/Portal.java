@@ -1,6 +1,7 @@
 package nl.vpro.domain.page;
 
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ import nl.vpro.validation.URI;
 )
 public class Portal implements Displayable, Serializable {
 
+    @Serial
     private static final long serialVersionUID = 8705886819893517841L;
     @NotNull
     @URI

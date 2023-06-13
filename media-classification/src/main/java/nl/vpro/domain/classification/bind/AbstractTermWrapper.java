@@ -1,5 +1,6 @@
 package nl.vpro.domain.classification.bind;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -14,6 +15,7 @@ import nl.vpro.domain.classification.Term;
  */
 @XmlTransient
 public abstract class AbstractTermWrapper implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
 

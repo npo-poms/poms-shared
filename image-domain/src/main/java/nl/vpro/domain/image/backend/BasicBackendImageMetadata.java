@@ -7,6 +7,7 @@ package nl.vpro.domain.image.backend;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.net.URI;
 import java.time.Instant;
@@ -64,6 +65,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @ToString
 public class BasicBackendImageMetadata implements Serializable, MutableEmbargo<BasicBackendImageMetadata>, BackendImageMetadata<BasicBackendImageMetadata> {
 
+    @Serial
     private static final long serialVersionUID = 0L;
 
     /**

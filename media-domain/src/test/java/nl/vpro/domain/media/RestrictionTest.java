@@ -7,6 +7,7 @@ package nl.vpro.domain.media;
 import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
+import java.io.Serial;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,7 @@ public class RestrictionTest implements BasicObjectTheory<RestrictionTest.TestRe
 
     public static class TestRestriction extends Restriction<TestRestriction> {
 
+        @Serial
         private static final long serialVersionUID = -884609334628436209L;
 
         private TestRestriction(Long id, Instant start, Instant stop) {

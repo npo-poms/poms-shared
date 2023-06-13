@@ -1,5 +1,6 @@
 package nl.vpro.domain.classification;
 
+import java.io.Serial;
 import java.util.Locale;
 
 /**
@@ -7,6 +8,7 @@ import java.util.Locale;
  */
 
 public class LocalizedString extends nl.vpro.i18n.LocalizedString {
+    @Serial
     private static final long serialVersionUID = -6545505135867762847L;
 
     public static LocalizedString copy(nl.vpro.i18n.LocalizedString copy) {

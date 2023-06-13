@@ -8,6 +8,7 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
     //@Serial
+    @Serial
     private static final long serialVersionUID = 6335921198095424865L;
 
     static {

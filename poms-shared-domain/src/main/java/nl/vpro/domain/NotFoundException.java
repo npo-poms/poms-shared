@@ -2,6 +2,7 @@ package nl.vpro.domain;
 
 import lombok.Getter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -17,6 +18,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  */
 public class NotFoundException extends IllegalArgumentException {
 
+    @Serial
     private static final long serialVersionUID = 1756255370140166823L;
     @Getter
     private final Serializable identifier;

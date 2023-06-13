@@ -2,6 +2,7 @@ package nl.vpro.domain.image;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @ToString
 public class Area implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 936296968752859966L;
 
     final Point lowerLeft;

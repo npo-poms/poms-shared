@@ -7,6 +7,7 @@ package nl.vpro.domain.page.update;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
@@ -43,6 +44,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlRootElement(name = "page")
 public class PageUpdate implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -7641774463877245473L;
 
     public static PageUpdateBuilder builder() {
