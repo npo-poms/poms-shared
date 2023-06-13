@@ -26,14 +26,14 @@ public class AbstractJsonIterable {
     public static <T> boolean isEmpty(SerializerProvider provider, Iterable<T> value) {
         JsonInclude.Include incl = provider.getConfig().getDefaultPropertyInclusion().getValueInclusion();
         switch (incl) {
-            case NON_NULL:
-            case NON_ABSENT:
-                 if (value == null) return true;
-                break;
-            case NON_EMPTY:
-                if (value == null || ! value.iterator().hasNext()) return true;
-                break;
-            default:
+            case NON_NULL, NON_ABSENT -> {
+                if (value == null) return true;
+            }
+            case NON_EMPTY -> {
+                if (value == null || !value.iterator().hasNext()) return true;
+            }
+            default -> {
+            }
         }
         return false;
     }
@@ -54,14 +54,14 @@ public class AbstractJsonIterable {
 
     /**
      * A {@link JsonSerializer} specialization that arranges the json array for the {@link Iterable} already.
-     *
+     * <p>
      * This leaves a simpler {@link #serializeValue(Object, JsonGenerator, SerializerProvider)} abstract method for the implementer to do.
      */
     public static abstract class Serializer<T> extends JsonSerializer<Iterable<T>> {
 
         /**
          * TODO: Consider this to be default true.
-         *
+         * <p>
          * This will fail a lot of test cases that produce empty arrays. But the fields are marked 'NON_EMPTY' !
          */
         protected boolean considerJsonInclude = DEFAULT_CONSIDER_JSON_INCLUDE.get();
@@ -85,7 +85,7 @@ public class AbstractJsonIterable {
 
     /**
      * A {@link JsonDeserializer} specialization that arranges parsing of the json array for the {@link Iterable} already.
-     *
+     * <p>
      * This leaves a simpler {@link #deserializeValue(JsonNode, DeserializationContext)}  abstract method for the implementer to do.
      */
     public static abstract class Deserializer<T> extends JsonDeserializer<Iterable<T>> {

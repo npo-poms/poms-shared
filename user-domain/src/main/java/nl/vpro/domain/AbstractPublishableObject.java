@@ -215,7 +215,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
 
     /**
      * When this object was last published to the frontends
-     *
+     * <p>
      * Note that this field is named differently in XML and JSON.
      */
     @XmlAttribute(name = "publishDate")

@@ -20,9 +20,9 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * Representation of all redirects.
- *
+ * <p>
  * Serves as response for the redirects api call (jaxb and json bindings are arranged).
- *
+ * <p>
  *
  * @author Michiel Meeuwissen
  * @since 4.1
@@ -63,7 +63,7 @@ public class RedirectList implements Iterable<RedirectEntry> {
     /**
      * Redirects may point to objects which itself would be redirected.
      * The 'resolved' map is a map of the same size as {@link #getMap()}, but all values are itself resolved (in case there are a key too).
-     *
+     * <p>
      * If this somehow there is a circular structure, then the value will be <code>null</code>, causing _no_ redirects to happen.
      */
     public Map<String, String> getResolvedMap() {

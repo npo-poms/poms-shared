@@ -4,7 +4,7 @@ import nl.vpro.validation.URI;
 
 /**
  * {@link URI} validator for URI's that point to images.
- *
+ * <p>
  * A valid URI, that must have a scheme, must have a host with at least two parts.
  *
  */

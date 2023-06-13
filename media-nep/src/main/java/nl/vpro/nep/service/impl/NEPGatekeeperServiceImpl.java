@@ -49,15 +49,15 @@ import nl.vpro.util.*;
 
 /**
  * Wrapper for https://npo-webonly-gatekeeper.nepworldwide.nl
- *
+ * <p>
 
  *
  * TODO, where's the documentation of that?
- *
+ * <p>
  *  * http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/swagger-ui.html
- *
+ * <p>
  *  Swagger:   http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/swagger-ui.html
- *
+ * <p>
  *  http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/v2/api-docs
  */
 @Slf4j

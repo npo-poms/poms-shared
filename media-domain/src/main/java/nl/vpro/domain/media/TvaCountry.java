@@ -13,7 +13,7 @@ import nl.vpro.domain.media.bind.TvaCountryAdapter;
 
 /**
  * See <a href="https://jira.vpro.nl/browse/MSE-2367">jira</a>, Appendix%203%20Country%20Codes%20v2.0.pdf
- *
+ * <p>
  * For now not used, we simply use the more complete {@link CountryCode}
  *
  * @author Michiel Meeuwissen

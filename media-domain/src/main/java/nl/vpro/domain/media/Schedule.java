@@ -461,7 +461,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
 
     /**
      * Returns the with this Schedule associated {@link #getStart()} and {@link #getStop()} instances as a {@link Range} of {@link ZonedDateTime}'s.
-     *
+     * <p>
      * I.e. an interval that is closed at the start, and open at the end. For now everything is associated with the time zone {@link #ZONE_ID} (i.e. CEST), since we
      * haven't accounted an use case for something else yet, but otherwise we may imaging also the time zone to be a member of this schedule object.
      */

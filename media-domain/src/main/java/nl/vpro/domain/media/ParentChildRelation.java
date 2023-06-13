@@ -2,7 +2,7 @@ package nl.vpro.domain.media;
 
 /**
  * Represents a parent/child relation between two {@link MidIdentifiable}s. In practice between two {@link MediaObject}s.
- *
+ * <p>
  * Poms recognizes three types of such relations:
  *
  * <ol>

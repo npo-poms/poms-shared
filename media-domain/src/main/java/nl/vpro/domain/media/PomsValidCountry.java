@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * A meta annotation for country codes which are considered valid in poms.
- *
+ * <p>
  * These are all former, officially assigned and most known user assigned countries.
  * Additionally, the countries of UK are accepted (these are really subdivisions).
  *

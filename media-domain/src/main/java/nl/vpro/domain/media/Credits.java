@@ -21,7 +21,7 @@ import nl.vpro.domain.media.gtaa.GTAAManaged;
 
 /**
  * A container class for credits, linking the role to an actual entity.
- *
+ * <p>
  * For person this at the moment is an embedded entity, for other names, this should be a join with gtaa record.
  *
  * @author Michiel Meeuwissen

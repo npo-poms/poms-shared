@@ -129,7 +129,7 @@ public class Name extends Credits implements GTAARecordManaged {
 
     /**
      * Always returns false, because we arranged that all redirects are simply resolved in the database.
-     *
+     * <p>
      * (TODO: right?)
      */
     @Override
