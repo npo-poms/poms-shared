@@ -2427,7 +2427,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return false;
     }
 
-    @SuppressWarnings("ConstantConditions")
     @XmlElementWrapper(name = "images")
     @XmlElement(name = "image", namespace = Xmlns.SHARED_NAMESPACE)
     @JsonProperty("images")

@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @author Roelof Jan Koekoek
  * @since 1.4
  */
-@SuppressWarnings({"deprecation", "ConstantConditions", "OptionalGetWithoutIsPresent"})
+@SuppressWarnings({"deprecation", "OptionalGetWithoutIsPresent"})
 @Slf4j
 public class MediaObjectsTest {
     static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");

@@ -10,7 +10,6 @@ import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 public class DateFacetResultItemTest {
 
 
-    @SuppressWarnings("unchecked")
     @Test
     public void json() {
         DateFacetResultItem item = DateFacetResultItem.builder().value("test").begin(Instant.EPOCH).count(10).build();

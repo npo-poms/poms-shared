@@ -22,7 +22,6 @@ import static nl.vpro.jassert.assertions.MediaAssertions.locationAssertThat;
  * @author Roelof Jan Koekoek
  * @since 1.5
  */
-@SuppressWarnings("ResultOfMethodCallIgnored")
 public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObject> {
 
     protected MediaAssert(MediaObject actual) {

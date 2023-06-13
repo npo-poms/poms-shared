@@ -47,7 +47,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Roelof Jan Koekoek
  * @since 1.7
  */
-@SuppressWarnings("ConstantConditions")
 @Slf4j
 public class MediaObjectJsonSchemaTest {
 

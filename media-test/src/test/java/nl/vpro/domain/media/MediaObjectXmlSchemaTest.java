@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * This class verifies JAXB XML output format and whether this format complies to the vproMedia.xsd schema definitions.
  * It's located here because then it can use the test data builder for more concise code.
  */
-@SuppressWarnings({"UnnecessaryLocalVariable", "ConstantConditions"})
+@SuppressWarnings({"UnnecessaryLocalVariable"})
 @Slf4j
 public class MediaObjectXmlSchemaTest {
 

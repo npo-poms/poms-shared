@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
-@SuppressWarnings("ConstantConditions")
 public class PromoEventTest {
 
     @Test
