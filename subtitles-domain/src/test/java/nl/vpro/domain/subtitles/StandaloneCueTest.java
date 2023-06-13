@@ -20,14 +20,14 @@ public class StandaloneCueTest {
             .sequence(0).build(),
             Locale.US, SubtitlesType.TRANSLATION);
 
-        Jackson2TestUtil.roundTripAndSimilar(cue, "{\n" +
-            "  \"parent\" : \"MID_123\",\n" +
-            "  \"sequence\" : 0,\n" +
-            "   \"identifier\" : \"cue 1\"," +
-            "  \"type\" : \"TRANSLATION\",\n" +
-            "  \"content\" : \"bla bla\",\n" +
-            "  \"lang\" : \"en-US\"\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(cue, """
+            {
+              "parent" : "MID_123",
+              "sequence" : 0,
+               "identifier" : "cue 1",  "type" : "TRANSLATION",
+              "content" : "bla bla",
+              "lang" : "en-US"
+            }""");
 
 
     }

@@ -34,56 +34,59 @@ public class ErrorTest {
     public void jsonWithPredicate() {
         Error error = new Error(Response.Status.NOT_FOUND, new RuntimeException("bla"), false, true);
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
-        assertThatJson(error).isSimilarTo("{\n" +
-            "  \"status\" : 404,\n" +
-            "  \"message\" : \"bla\",\n" +
-            "  \"classes\" : [ \"RuntimeException\" ],\n" +
-            "  \"testResult\" : {\n" +
-            "    \"objectType\" : \"and\",\n" +
-            "    \"reason\" : \"And\",\n" +
-            "    \"applies\" : false,\n" +
-            "    \"description\" : {\n" +
-            "      \"value\" : \"(Never matches)\",\n" +
-            "      \"lang\" : \"en_US\"\n" +
-            "    },\n" +
-            "    \"clauses\" : [ {\n" +
-            "      \"objectType\" : \"simple\",\n" +
-            "      \"reason\" : \"AlwaysFalse\",\n" +
-            "      \"applies\" : false,\n" +
-            "      \"description\" : {\n" +
-            "        \"value\" : \"Never matches\",\n" +
-            "        \"lang\" : \"en_US\"\n" +
-            "      }\n" +
-            "    }, {\n" +
-            "      \"objectType\" : \"simple\",\n" +
-            "      \"reason\" : \"AlwaysTrue\",\n" +
-            "      \"applies\" : true,\n" +
-            "      \"description\" : {\n" +
-            "        \"value\" : \"Always matches\",\n" +
-            "        \"lang\" : \"en_US\"\n" +
-            "      }\n" +
-            "    } ]\n" +
-            "  }\n" +
-            "}").andRounded().isNotNull();
+        assertThatJson(error).isSimilarTo("""
+            {
+              "status" : 404,
+              "message" : "bla",
+              "classes" : [ "RuntimeException" ],
+              "testResult" : {
+                "objectType" : "and",
+                "reason" : "And",
+                "applies" : false,
+                "description" : {
+                  "value" : "(Never matches)",
+                  "lang" : "en_US"
+                },
+                "clauses" : [ {
+                  "objectType" : "simple",
+                  "reason" : "AlwaysFalse",
+                  "applies" : false,
+                  "description" : {
+                    "value" : "Never matches",
+                    "lang" : "en_US"
+                  }
+                }, {
+                  "objectType" : "simple",
+                  "reason" : "AlwaysTrue",
+                  "applies" : true,
+                  "description" : {
+                    "value" : "Always matches",
+                    "lang" : "en_US"
+                  }
+                } ]
+              }
+            }""").andRounded().isNotNull();
     }
 
     @Test
     public void xmlWithPredicate() {
         Error error = new Error(404, "bla");
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
-        assertThatXml(error).isSimilarTo("<api:error status=\"404\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:message>bla</api:message>\n" +
-            "    <api:testResult xsi:type=\"constraint:andPredicateTestResult\" applies=\"false\" reason=\"And\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-            "        <constraint:description xml:lang=\"en_US\">(Never matches)</constraint:description>\n" +
-            "        <constraint:clauses>\n" +
-            "            <constraint:clause xsi:type=\"constraint:simplePredicateTestResult\" applies=\"false\" reason=\"AlwaysFalse\">\n" +
-            "                <constraint:description xml:lang=\"en_US\">Never matches</constraint:description>\n" +
-            "            </constraint:clause>\n" +
-            "            <constraint:clause xsi:type=\"constraint:simplePredicateTestResult\" applies=\"true\" reason=\"AlwaysTrue\">\n" +
-            "                <constraint:description xml:lang=\"en_US\">Always matches</constraint:description>\n" +
-            "            </constraint:clause>\n" +
-            "        </constraint:clauses>\n" +
-            "    </api:testResult>\n" +
-            "</api:error>\n");
+        assertThatXml(error).isSimilarTo("""
+            <api:error status="404" xmlns:pages="urn:vpro:pages:2013" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <api:message>bla</api:message>
+                <api:testResult xsi:type="constraint:andPredicateTestResult" applies="false" reason="And" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <constraint:description xml:lang="en_US">(Never matches)</constraint:description>
+                    <constraint:clauses>
+                        <constraint:clause xsi:type="constraint:simplePredicateTestResult" applies="false" reason="AlwaysFalse">
+                            <constraint:description xml:lang="en_US">Never matches</constraint:description>
+                        </constraint:clause>
+                        <constraint:clause xsi:type="constraint:simplePredicateTestResult" applies="true" reason="AlwaysTrue">
+                            <constraint:description xml:lang="en_US">Always matches</constraint:description>
+                        </constraint:clause>
+                    </constraint:clauses>
+                </api:testResult>
+            </api:error>
+            """);
     }
 }

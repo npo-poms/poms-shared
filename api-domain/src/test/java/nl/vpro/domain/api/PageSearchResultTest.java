@@ -32,70 +32,71 @@ public class PageSearchResultTest {
         result.setFacets(new PageFacetsResult());
         result.setMediaFacets(new MediaFacetsResult());
 
-        Jackson2TestUtil.roundTripAndSimilar(result, "{\n" +
-            "  \"facets\" : { },\n" +
-            "  \"mediaFacets\" : { },\n" +
-            "  \"total\" : 1,\n" +
-            "  \"totalQualifier\" : \"EQUAL_TO\",\n" +
-            "  \"offset\" : 0,\n" +
-            "  \"max\" : 10,\n" +
-            "  \"items\" : [ {\n" +
-            "    \"result\" : {\n" +
-            "      \"objectType\" : \"page\",\n" +
-            "      \"type\" : \"ARTICLE\",\n" +
-            "      \"embeds\" : [ {\n" +
-            "        \"media\" : {\n" +
-            "          \"objectType\" : \"program\",\n" +
-            "          \"embeddable\" : true,\n" +
-            "          \"broadcasters\" : [ ],\n" +
-            "          \"genres\" : [ ],\n" +
-            "          \"countries\" : [ ],\n" +
-            "          \"languages\" : [ ],\n" +
-            "          \"locations\" : [ {\n" +
-            "            \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v\",\n" +
-            "            \"avAttributes\" : {\n" +
-            "              \"bitrate\" : 1500,\n" +
-            "              \"avFileFormat\" : \"MP4\"\n" +
-            "            },\n" +
-            "            \"owner\" : \"BROADCASTER\",\n" +
-            "            \"creationDate\" : 1457102700000,\n" +
-            "            \"workflow\" : \"PUBLISHED\",\n" +
-            "            \"offset\" : 780000,\n" +
-            "            \"duration\" : 600000\n" +
-            "          }, {\n" +
-            "            \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf\",\n" +
-            "            \"avAttributes\" : {\n" +
-            "              \"bitrate\" : 3000,\n" +
-            "              \"avFileFormat\" : \"WM\"\n" +
-            "            },\n" +
-            "            \"owner\" : \"BROADCASTER\",\n" +
-            "            \"creationDate\" : 1457099100000,\n" +
-            "            \"workflow\" : \"PUBLISHED\"\n" +
-            "          }, {\n" +
-            "            \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf\",\n" +
-            "            \"avAttributes\" : {\n" +
-            "              \"bitrate\" : 2000,\n" +
-            "              \"avFileFormat\" : \"WM\"\n" +
-            "            },\n" +
-            "            \"owner\" : \"BROADCASTER\",\n" +
-            "            \"creationDate\" : 1457095500000,\n" +
-            "            \"workflow\" : \"PUBLISHED\",\n" +
-            "            \"duration\" : 1833000\n" +
-            "          }, {\n" +
-            "            \"programUrl\" : \"http://player.omroep.nl/?aflID=4393288\",\n" +
-            "            \"avAttributes\" : {\n" +
-            "              \"bitrate\" : 1000,\n" +
-            "              \"avFileFormat\" : \"HTML\"\n" +
-            "            },\n" +
-            "            \"owner\" : \"NEBO\",\n" +
-            "            \"creationDate\" : 1457091900000,\n" +
-            "            \"workflow\" : \"PUBLISHED\"\n" +
-            "          } ]\n" +
-            "        }\n" +
-            "      } ]\n" +
-            "    }\n" +
-            "  } ]\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(result, """
+            {
+              "facets" : { },
+              "mediaFacets" : { },
+              "total" : 1,
+              "totalQualifier" : "EQUAL_TO",
+              "offset" : 0,
+              "max" : 10,
+              "items" : [ {
+                "result" : {
+                  "objectType" : "page",
+                  "type" : "ARTICLE",
+                  "embeds" : [ {
+                    "media" : {
+                      "objectType" : "program",
+                      "embeddable" : true,
+                      "broadcasters" : [ ],
+                      "genres" : [ ],
+                      "countries" : [ ],
+                      "languages" : [ ],
+                      "locations" : [ {
+                        "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
+                        "avAttributes" : {
+                          "bitrate" : 1500,
+                          "avFileFormat" : "MP4"
+                        },
+                        "owner" : "BROADCASTER",
+                        "creationDate" : 1457102700000,
+                        "workflow" : "PUBLISHED",
+                        "offset" : 780000,
+                        "duration" : 600000
+                      }, {
+                        "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
+                        "avAttributes" : {
+                          "bitrate" : 3000,
+                          "avFileFormat" : "WM"
+                        },
+                        "owner" : "BROADCASTER",
+                        "creationDate" : 1457099100000,
+                        "workflow" : "PUBLISHED"
+                      }, {
+                        "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
+                        "avAttributes" : {
+                          "bitrate" : 2000,
+                          "avFileFormat" : "WM"
+                        },
+                        "owner" : "BROADCASTER",
+                        "creationDate" : 1457095500000,
+                        "workflow" : "PUBLISHED",
+                        "duration" : 1833000
+                      }, {
+                        "programUrl" : "http://player.omroep.nl/?aflID=4393288",
+                        "avAttributes" : {
+                          "bitrate" : 1000,
+                          "avFileFormat" : "HTML"
+                        },
+                        "owner" : "NEBO",
+                        "creationDate" : 1457091900000,
+                        "workflow" : "PUBLISHED"
+                      } ]
+                    }
+                  } ]
+                }
+              } ]
+            }""");
 
     }
 

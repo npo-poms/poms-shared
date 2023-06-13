@@ -42,9 +42,10 @@ public class PortalTest {
         target.setUrl("http://tegenlicht.vpro.nl/");
         target.setDisplayName("Wetenschap24");
         target.setSection(new Section("/noorderlicht", "Noorderlicht"));
-        JAXBTestUtil.roundTripAndSimilar(target, "<local:portal url=\"http://tegenlicht.vpro.nl\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:local=\"uri:local\">\n" +
-            "    <pages:name>Wetenschap24</pages:name>\n" +
-            "    <pages:section path=\"/noorderlicht\">Noorderlicht</pages:section>\n" +
-            "</local:portal>");
+        JAXBTestUtil.roundTripAndSimilar(target, """
+            <local:portal url="http://tegenlicht.vpro.nl" xmlns:pages="urn:vpro:pages:2013" xmlns:local="uri:local">
+                <pages:name>Wetenschap24</pages:name>
+                <pages:section path="/noorderlicht">Noorderlicht</pages:section>
+            </local:portal>""");
     }
 }

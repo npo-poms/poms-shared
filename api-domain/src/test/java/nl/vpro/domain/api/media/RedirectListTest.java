@@ -33,19 +33,20 @@ public class RedirectListTest {
     @Test
     public void json() {
         RedirectList rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(instance,
-            "{\n" +
-                "  \"lastUpdate\" : \"1970-01-01T01:00:00+01:00\",\n" +
-                "  \"map\" : {\n" +
-                "    \"a\" : \"b\",\n" +
-                "    \"x\" : \"y\",\n" +
-                "    \"y\" : \"z\",\n" +
-                "    \"source1\" : \"target_but_source\",\n" +
-                "    \"z\" : \"x\",\n" +
-                "    \"source\" : \"target\",\n" +
-                "    \"anothersource\" : \"target\",\n" +
-                "    \"target_but_source\" : \"ultimate_target\"\n" +
-                "  }\n" +
-                "}");
+            """
+                {
+                  "lastUpdate" : "1970-01-01T01:00:00+01:00",
+                  "map" : {
+                    "a" : "b",
+                    "x" : "y",
+                    "y" : "z",
+                    "source1" : "target_but_source",
+                    "z" : "x",
+                    "source" : "target",
+                    "anothersource" : "target",
+                    "target_but_source" : "ultimate_target"
+                  }
+                }""");
         assertThat(rounded.getList()).hasSize(8);
         assertThat(rounded.getList().get(0).getFrom()).isEqualTo("a");
         assertThat(rounded.getList().get(0).getTo()).isEqualTo("b");
@@ -56,16 +57,17 @@ public class RedirectListTest {
     @Test
     public void jaxb() {
         RedirectList rounded = JAXBTestUtil.roundTripAndSimilarAndEquals(instance,
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><redirects xmlns=\"urn:vpro:api:2013\" lastUpdate=\"1970-01-01T01:00:00+01:00\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                "    <entry from=\"a\" to=\"b\" ultimate=\"b\"/>\n" +
-                "    <entry from=\"source\" to=\"target\" ultimate=\"target\"/>\n" +
-                "    <entry from=\"anothersource\" to=\"target\" ultimate=\"target\"/>\n" +
-                "    <entry from=\"source1\" to=\"target_but_source\" ultimate=\"ultimate_target\"/>\n" +
-                "    <entry from=\"target_but_source\" to=\"ultimate_target\" ultimate=\"ultimate_target\"/>\n" +
-                "    <entry from=\"x\" to=\"y\" circular=\"true\"/>\n" +
-                "    <entry from=\"y\" to=\"z\" circular=\"true\"/>\n" +
-                "    <entry from=\"z\" to=\"x\" circular=\"true\"/>\n" +
-                "</redirects>");
+            """
+                <?xml version="1.0" encoding="UTF-8"?><redirects xmlns="urn:vpro:api:2013" lastUpdate="1970-01-01T01:00:00+01:00" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                    <entry from="a" to="b" ultimate="b"/>
+                    <entry from="source" to="target" ultimate="target"/>
+                    <entry from="anothersource" to="target" ultimate="target"/>
+                    <entry from="source1" to="target_but_source" ultimate="ultimate_target"/>
+                    <entry from="target_but_source" to="ultimate_target" ultimate="ultimate_target"/>
+                    <entry from="x" to="y" circular="true"/>
+                    <entry from="y" to="z" circular="true"/>
+                    <entry from="z" to="x" circular="true"/>
+                </redirects>""");
         assertThat(rounded.getList()).hasSize(8);
         assertThat(rounded.getList().get(0).getFrom()).isEqualTo("a");
         assertThat(rounded.getList().get(0).getTo()).isEqualTo("b");

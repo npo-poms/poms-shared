@@ -31,9 +31,10 @@ public class MediaSearchTest {
         MediaSearch in = new MediaSearch();
         in.setText(new SimpleTextMatcher("Title"));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:mediaSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:text>Title</api:text>\n" +
-                "</local:mediaSearch>");
+            """
+                <local:mediaSearch xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:text>Title</api:text>
+                </local:mediaSearch>""");
         assertThat(must("Title")).isEqualTo(out.getText());
     }
 
@@ -42,13 +43,14 @@ public class MediaSearchTest {
         MediaSearch in = new MediaSearch();
         in.setBroadcasters(new TextMatcherList(must("VPRO"), must("TROS")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<local:mediaSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:broadcasters match=\"MUST\">\n" +
-                "        <api:matcher>VPRO</api:matcher>\n" +
-                "        <api:matcher>TROS</api:matcher>\n" +
-                "    </api:broadcasters>\n" +
-                "</local:mediaSearch>");
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <local:mediaSearch xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:broadcasters match="MUST">
+                        <api:matcher>VPRO</api:matcher>
+                        <api:matcher>TROS</api:matcher>
+                    </api:broadcasters>
+                </local:mediaSearch>""");
         assertThat(out.getBroadcasters().asList()).containsExactly(new TextMatcher("VPRO"), new TextMatcher("TROS"));
     }
 
@@ -58,12 +60,13 @@ public class MediaSearchTest {
         MediaSearch in = new MediaSearch();
         in.setLocations(new TextMatcherList(new TextMatcher("http://some.domain.com/path"), new TextMatcher(".extension")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:mediaSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:locations match=\"MUST\">\n" +
-                "        <api:matcher>http://some.domain.com/path</api:matcher>\n" +
-                "        <api:matcher>.extension</api:matcher>\n" +
-                "    </api:locations>\n" +
-                "</local:mediaSearch>");
+            """
+                <local:mediaSearch xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:locations match="MUST">
+                        <api:matcher>http://some.domain.com/path</api:matcher>
+                        <api:matcher>.extension</api:matcher>
+                    </api:locations>
+                </local:mediaSearch>""");
         assertThat(out.getLocations().asList()).containsExactly(new TextMatcher("http://some.domain.com/path"), new TextMatcher(".extension"));
     }
 
@@ -72,12 +75,13 @@ public class MediaSearchTest {
         MediaSearch in = new MediaSearch();
         in.setTags(new ExtendedTextMatcherList(new ExtendedTextMatcher("cultuur"), new ExtendedTextMatcher("kunst")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:mediaSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:tags match=\"MUST\">\n" +
-                "        <api:matcher>cultuur</api:matcher>\n" +
-                "        <api:matcher>kunst</api:matcher>\n" +
-                "    </api:tags>\n" +
-                "</local:mediaSearch>");
+            """
+                <local:mediaSearch xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:tags match="MUST">
+                        <api:matcher>cultuur</api:matcher>
+                        <api:matcher>kunst</api:matcher>
+                    </api:tags>
+                </local:mediaSearch>""");
         assertThat(out.getTags().asList()).containsExactly(new ExtendedTextMatcher("cultuur"), new ExtendedTextMatcher("kunst"));
     }
 
@@ -87,12 +91,13 @@ public class MediaSearchTest {
         MediaSearch in = new MediaSearch();
         in.setTypes(new TextMatcherList(Arrays.asList(new TextMatcher("A"), new TextMatcher("B", Match.SHOULD)), Match.SHOULD));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:mediaSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:types match=\"SHOULD\">\n" +
-                "        <api:matcher>A</api:matcher>\n" +
-                "        <api:matcher match=\"SHOULD\">B</api:matcher>\n" +
-                "    </api:types>\n" +
-                "</local:mediaSearch>");
+            """
+                <local:mediaSearch xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:types match="SHOULD">
+                        <api:matcher>A</api:matcher>
+                        <api:matcher match="SHOULD">B</api:matcher>
+                    </api:types>
+                </local:mediaSearch>""");
         assertThat(out.getTypes().asList()).containsExactly(new TextMatcher("A"), new TextMatcher("B", Match.SHOULD));
 
     }
@@ -108,13 +113,14 @@ public class MediaSearchTest {
     public void testTitleSearchJson() {
         MediaSearch in = new MediaSearch();
         in.setTitles(Arrays.asList(TESTRESULT));
-        MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
-            "  \"titles\" : [ {\n" +
-            "    \"value\" : \"A\",\n" +
-            "    \"owner\" : \"PLUTO\",\n" +
-            "    \"type\" :\"LEXICO\"\n" +
-            "  } ]\n" +
-            "}");
+        MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, """
+            {
+              "titles" : [ {
+                "value" : "A",
+                "owner" : "PLUTO",
+                "type" :"LEXICO"
+              } ]
+            }""");
         assertThat(out.getTitles()).containsExactly(TESTRESULT);
 
     }
@@ -329,16 +335,17 @@ public class MediaSearchTest {
         MediaSearch in = new MediaSearch();
         in.setScheduleEvents(Arrays.asList(AT_NED1, AT_NED2));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<local:mediaSearch xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:scheduleEvents>\n" +
-                "        <api:channel>NED1</api:channel>\n" +
-                "    </api:scheduleEvents>\n" +
-                "     <api:scheduleEvents>\n" +
-                "       <api:begin>1970-01-01T01:00:00+01:00</api:begin>\n" +
-                "       <api:channel>NED2</api:channel>\n" +
-                "   </api:scheduleEvents>\n"+
-                "</local:mediaSearch>");
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <local:mediaSearch xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:scheduleEvents>
+                        <api:channel>NED1</api:channel>
+                    </api:scheduleEvents>
+                     <api:scheduleEvents>
+                       <api:begin>1970-01-01T01:00:00+01:00</api:begin>
+                       <api:channel>NED2</api:channel>
+                   </api:scheduleEvents>
+                </local:mediaSearch>""");
         assertThat(out.getScheduleEvents()).containsExactly(AT_NED1, AT_NED2);
 
     }
@@ -346,11 +353,12 @@ public class MediaSearchTest {
     public void testScheduleEventSearchJson() {
         MediaSearch in = new MediaSearch();
         in.setScheduleEvents(Arrays.asList(AT_NED1));
-        MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
-            "  \"scheduleEvents\" : {\n" +
-            "    \"channel\" : \"NED1\"\n" +
-            "  }\n" +
-            "}");
+        MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, """
+            {
+              "scheduleEvents" : {
+                "channel" : "NED1"
+              }
+            }""");
        assertThat(out.getScheduleEvents()).containsExactly(AT_NED1);
 
     }
@@ -359,14 +367,15 @@ public class MediaSearchTest {
     public void testScheduleEventSearchJson2() {
         MediaSearch in = new MediaSearch();
         in.setScheduleEvents(Arrays.asList(AT_NED1, AT_NED2));
-        MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
-            "  \"scheduleEvents\" : [ {\n" +
-            "    \"channel\" : \"NED1\"\n" +
-            "  }, {\n" +
-            "    \"begin\" : 0,\n" +
-            "    \"channel\" : \"NED2\"\n" +
-            "  } ]\n" +
-            "}");
+        MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, """
+            {
+              "scheduleEvents" : [ {
+                "channel" : "NED1"
+              }, {
+                "begin" : 0,
+                "channel" : "NED2"
+              } ]
+            }""");
         assertThat(out.getScheduleEvents()).containsExactly(AT_NED1, AT_NED2);
 
     }
@@ -377,14 +386,15 @@ public class MediaSearchTest {
 
         ScheduleEventSearch search = Jackson2Mapper.getLenientInstance().readerFor(ScheduleEventSearch.class).readValue(new StringReader("{'begin': 0, 'channel': 'x'}"));
         assertThat(search).isEqualTo(FROM_EPOCH);
-        MediaSearch out = Jackson2Mapper.getLenientInstance().readerFor(MediaSearch.class).readValue(new StringReader("{\n" +
-            "  \"scheduleEvents\" : [ {\n" +
-            "    \"channel\" : \"NED1\"\n" +
-            "  }, {\n" +
-            "    \"begin\" : 0,\n" +
-            "    \"channel\" : \"\"\n" +
-            "  } ]\n" +
-            "}"));
+        MediaSearch out = Jackson2Mapper.getLenientInstance().readerFor(MediaSearch.class).readValue(new StringReader("""
+            {
+              "scheduleEvents" : [ {
+                "channel" : "NED1"
+              }, {
+                "begin" : 0,
+                "channel" : ""
+              } ]
+            }"""));
         assertThat(out.getScheduleEvents()).containsExactly(AT_NED1, FROM_EPOCH);
 
     }
@@ -430,16 +440,18 @@ public class MediaSearchTest {
 
     @Test
     public void withDateRangeAsString() throws JsonProcessingException {
-        String json = "{\n" +
-            "    \"sort\":{\n" +
-            "        \"sortDate\":\"DESC\"\n" +
-            "    },\n" +
-            "    \"searches\": {\n" +
-            "        \"sortDate\": {\n" +
-            "            \"end\": \"1444255200000\"\n" +
-            "        }\n" +
-            "    }\n" +
-            "}\n";
+        String json = """
+            {
+                "sort":{
+                    "sortDate":"DESC"
+                },
+                "searches": {
+                    "sortDate": {
+                        "end": "1444255200000"
+                    }
+                }
+            }
+            """;
         MediaForm form = Jackson2Mapper.getLenientInstance().readValue(json, MediaForm.class);
         assertThat(form.getSearches().getSortDates().get(0).getEnd()).isEqualTo(Instant.ofEpochMilli(1444255200000L));
     }

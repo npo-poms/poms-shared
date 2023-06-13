@@ -31,10 +31,11 @@ public class ScheduleEventSearchTest {
         Channel channel = Channel.NED3;
         ScheduleEventSearch in = new ScheduleEventSearch(channel, begin, null);
         ScheduleEventSearch out = JAXBTestUtil.roundTripAndSimilarAndEquals(in,
-            "<local:scheduleEventSearch xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:begin>1970-01-01T01:00:00+01:00</api:begin>\n" +
-                "    <api:channel>NED3</api:channel>\n" +
-                "</local:scheduleEventSearch>");
+            """
+                <local:scheduleEventSearch xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:begin>1970-01-01T01:00:00+01:00</api:begin>
+                    <api:channel>NED3</api:channel>
+                </local:scheduleEventSearch>""");
         assertThat(out.getBegin()).isEqualTo(begin);
         assertThat(out.getChannel()).isEqualTo(channel);
     }
@@ -49,11 +50,12 @@ public class ScheduleEventSearchTest {
             .inclusiveEnd(true)
             .build();
         ScheduleEventSearch out = JAXBTestUtil.roundTripAndSimilarAndEquals(in,
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<local:scheduleEventSearch inclusiveEnd=\"true\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:end>1970-01-01T01:00:00+01:00</api:end>\n" +
-                "    <api:channel>NED3</api:channel>\n" +
-                "</local:scheduleEventSearch>");
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <local:scheduleEventSearch inclusiveEnd="true" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:end>1970-01-01T01:00:00+01:00</api:end>
+                    <api:channel>NED3</api:channel>
+                </local:scheduleEventSearch>""");
         assertThat(out.getEnd()).isEqualTo(end);
         assertThat(out.getChannel()).isEqualTo(channel);
     }

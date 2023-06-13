@@ -24,12 +24,13 @@ public class SubtitlesFormTest {
                     .types(TextMatcherList.must(TextMatcher.must("CAPTION")))
                     .build()
             ).build();
-        Jackson2TestUtil.roundTripAndSimilar(form, "{\n" +
-            "  \"searches\" : {\n" +
-            "    \"text\" : \"bla\",\n" +
-            "    \"types\" : \"CAPTION\"\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(form, """
+            {
+              "searches" : {
+                "text" : "bla",
+                "types" : "CAPTION"
+              }
+            }""");
     }
 
     @Test
@@ -42,14 +43,15 @@ public class SubtitlesFormTest {
                     .types(TextMatcherList.must(TextMatcher.must("CAPTION")))
                     .build()
             ).build();
-        JAXBTestUtil.roundTripAndSimilar(form, "<api:subtitlesForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:searches>\n" +
-            "        <api:text>bla</api:text>\n" +
-            "        <api:types match=\"MUST\">\n" +
-            "            <api:matcher>CAPTION</api:matcher>\n" +
-            "        </api:types>\n" +
-            "    </api:searches>\n" +
-            "</api:subtitlesForm>");
+        JAXBTestUtil.roundTripAndSimilar(form, """
+            <api:subtitlesForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <api:searches>
+                    <api:text>bla</api:text>
+                    <api:types match="MUST">
+                        <api:matcher>CAPTION</api:matcher>
+                    </api:types>
+                </api:searches>
+            </api:subtitlesForm>""");
 
     }
 }

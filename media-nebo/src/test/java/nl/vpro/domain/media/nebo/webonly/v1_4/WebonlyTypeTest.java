@@ -136,37 +136,36 @@ public class WebonlyTypeTest {
      */
     @Test
     public void unmarshalExample1() {
-        String test = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<nebo_xml timestamp=\"2012-05-15T20:58:25\" type=\"webonly\">\n" +
-            "  <webonly id=\"14305325\">\n" +
-            "    <prid>WO_KRO_000010</prid>\n" +
-            "    <srid>boerzoektvrouw_2012_extra</srid>\n" +
-            "    <titel>Oproep Hans</titel>\n" +
-            "    <subtitel>Oproep Hans</subtitel>\n" +
-            "    <omschrijving_kort>De 40-jarige Hans is op zoek naar een enthousiaste vrouw met pit.</omschrijving_kort>\n" +
-            "    <omschrijving_lang>De 40-jarige Hans is op zoek naar een enthousiaste vrouw met pit.</omschrijving_lang>\n" +
-
-            "    <media>\n" +
-            "      <streams publicatie_startdatumtijd=\"2012-05-13T19:00:00\" aspect_ratio=\"16:9\">\n" +
-            "        <stream formaat=\"wmv\" kwaliteit=\"bb\">http://cgi.omroep.nl/cgi-bin/streams?/kro/boerzoektvrouw/bzv_20120513_oproephans_video_high.wmv</stream>\n" +
-            "        <stream formaat=\"wmv\" kwaliteit=\"sb\">http://cgi.omroep.nl/cgi-bin/streams?/kro/boerzoektvrouw/bzv_20120513_oproephans_video_low.wmv</stream>\n" +
-            "        <stream formaat=\"mov\" kwaliteit=\"bb\">http://content.omroep.nl/kro/video/boerzoektvrouw/bzv_20120513_oproephans_video_high.mp4</stream>\n" +
-            "        <stream formaat=\"mov\" kwaliteit=\"sb\">http://content.omroep.nl/kro/video/boerzoektvrouw/bzv_20120513_oproephans_video_low.mp4</stream>\n" +
-            "      </streams>\n" +
-            "      <icon>\n" +
-            "        <file>http://u.omroep.nl/n/a/2012-05/hans.jpg</file>\n" +
-            "        <titel>Hans oproep</titel>\n" +
-            "      </icon>\n" +
-            "    </media>\n" +
-
-            "    <genres>\n" +
-            "      <genre>Amusement</genre>\n" +
-            "    </genres>\n" +
-            "    <omroepen>\n" +
-            "      <omroep hoofdomroep=\"true\">KRO</omroep>\n" +
-            "    </omroepen>\n" +
-            "  </webonly>\n" +
-            "</nebo_xml>";
+        String test = """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <nebo_xml timestamp="2012-05-15T20:58:25" type="webonly">
+              <webonly id="14305325">
+                <prid>WO_KRO_000010</prid>
+                <srid>boerzoektvrouw_2012_extra</srid>
+                <titel>Oproep Hans</titel>
+                <subtitel>Oproep Hans</subtitel>
+                <omschrijving_kort>De 40-jarige Hans is op zoek naar een enthousiaste vrouw met pit.</omschrijving_kort>
+                <omschrijving_lang>De 40-jarige Hans is op zoek naar een enthousiaste vrouw met pit.</omschrijving_lang>
+                <media>
+                  <streams publicatie_startdatumtijd="2012-05-13T19:00:00" aspect_ratio="16:9">
+                    <stream formaat="wmv" kwaliteit="bb">http://cgi.omroep.nl/cgi-bin/streams?/kro/boerzoektvrouw/bzv_20120513_oproephans_video_high.wmv</stream>
+                    <stream formaat="wmv" kwaliteit="sb">http://cgi.omroep.nl/cgi-bin/streams?/kro/boerzoektvrouw/bzv_20120513_oproephans_video_low.wmv</stream>
+                    <stream formaat="mov" kwaliteit="bb">http://content.omroep.nl/kro/video/boerzoektvrouw/bzv_20120513_oproephans_video_high.mp4</stream>
+                    <stream formaat="mov" kwaliteit="sb">http://content.omroep.nl/kro/video/boerzoektvrouw/bzv_20120513_oproephans_video_low.mp4</stream>
+                  </streams>
+                  <icon>
+                    <file>http://u.omroep.nl/n/a/2012-05/hans.jpg</file>
+                    <titel>Hans oproep</titel>
+                  </icon>
+                </media>
+                <genres>
+                  <genre>Amusement</genre>
+                </genres>
+                <omroepen>
+                  <omroep hoofdomroep="true">KRO</omroep>
+                </omroepen>
+              </webonly>
+            </nebo_xml>""";
         NeboXmlWebOnly xml = JAXB.unmarshal(new StringReader(test), NeboXmlWebOnly.class);
         assertNotNull(xml.getWebonly());
         assertNotNull(xml.getWebonly().getMedia());
@@ -180,14 +179,15 @@ public class WebonlyTypeTest {
 
     @Test
     public void testUnmarshalWithIllegalGenre() {
-        String test = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<nebo_xml timestamp=\"2012-05-15T20:58:25\" type=\"webonly\">\n" +
-            "  <webonly id=\"14305325\">\n" +
-            "    <genres>\n" +
-            "      <genre>ILLEGAL</genre>\n" +
-            "    </genres>\n" +
-            "  </webonly>\n" +
-            "</nebo_xml>";
+        String test = """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <nebo_xml timestamp="2012-05-15T20:58:25" type="webonly">
+              <webonly id="14305325">
+                <genres>
+                  <genre>ILLEGAL</genre>
+                </genres>
+              </webonly>
+            </nebo_xml>""";
         NeboXmlWebOnly xml = JAXB.unmarshal(new StringReader(test), NeboXmlWebOnly.class);
         assertThat(xml.getProgram().getGenres()).isEmpty();
 
@@ -195,31 +195,33 @@ public class WebonlyTypeTest {
 
     @Test
     public void unmarshalExample2() {
-        String test = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-            "<nebo_xml timestamp=\"2012-05-15T19:58:41\" type=\"webonly\">\n" +
-            "  <webonly id=\"10602764\">\n" +
-            "    <prid>WO_NCRV_013487</prid>\n" +
-            "    <srid>WO_S_NCRV_013488</srid>\n" +
-            "    <titel>Yoga</titel>\n" +
-            "    <subtitel>Aflevering 8</subtitel>\n" +
-            "    <omschrijving_kort>Myrna van Kemenade leidt iedere ochtend op Spirit 24 een aangename yoga sessie om het lichaam en de geest in een goede balans te brengen. &#13;\n" +
-            "Naast fysieke oefeningen en meditatiemomenten krijgt u uitgebreide informatie over de herkomst en heilzaamheid van de oefeningen. Het programma is gericht op beginners n gevorderden, zodat iedereen mee kan doen.</omschrijving_kort>\n" +
-            "    <omschrijving_lang>Myrna van Kemenade leidt iedere ochtend op Spirit 24 een aangename yoga sessie om het lichaam en de geest in een goede balans te brengen. &#13;\n" +
-            "Naast fysieke oefeningen en meditatiemomenten krijgt u uitgebreide informatie over de herkomst en heilzaamheid van de oefeningen. Het programma is gericht op beginners n gevorderden, zodat iedereen mee kan doen.</omschrijving_lang>\n" +
-            "    <media>\n" +
-            "      <streams publicatie_startdatumtijd=\"2010-01-08T11:42:00\" aspect_ratio=\"16:9\">\n" +
-            "        <stream formaat=\"wmv\" kwaliteit=\"bb\">http://cgi.omroep.nl/cgi-bin/streams?/ncrv/geloven/16X9_20090924_YOGA_AFLEVERING8AHLHAN.wmv</stream>\n" +
-            "        <stream formaat=\"wmv\" kwaliteit=\"sb\">http://cgi.omroep.nl/cgi-bin/streams?/ncrv/geloven/16X9_20090924_YOGA_AFLEVERING8AGLHAN.wmv</stream>\n" +
-            "      </streams>\n" +
-            "    </media>\n" +
-            "    <genres>\n" +
-            "      <genre>Religieus</genre>\n" +
-            "    </genres>\n" +
-            "    <omroepen>\n" +
-            "      <omroep hoofdomroep=\"true\">KRO</omroep>\n" +
-            "    </omroepen>\n" +
-            "  </webonly>\n" +
-            "</nebo_xml>\n";
+        String test = """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <nebo_xml timestamp="2012-05-15T19:58:41" type="webonly">
+              <webonly id="10602764">
+                <prid>WO_NCRV_013487</prid>
+                <srid>WO_S_NCRV_013488</srid>
+                <titel>Yoga</titel>
+                <subtitel>Aflevering 8</subtitel>
+                <omschrijving_kort>Myrna van Kemenade leidt iedere ochtend op Spirit 24 een aangename yoga sessie om het lichaam en de geest in een goede balans te brengen. &#13;
+            Naast fysieke oefeningen en meditatiemomenten krijgt u uitgebreide informatie over de herkomst en heilzaamheid van de oefeningen. Het programma is gericht op beginners n gevorderden, zodat iedereen mee kan doen.</omschrijving_kort>
+                <omschrijving_lang>Myrna van Kemenade leidt iedere ochtend op Spirit 24 een aangename yoga sessie om het lichaam en de geest in een goede balans te brengen. &#13;
+            Naast fysieke oefeningen en meditatiemomenten krijgt u uitgebreide informatie over de herkomst en heilzaamheid van de oefeningen. Het programma is gericht op beginners n gevorderden, zodat iedereen mee kan doen.</omschrijving_lang>
+                <media>
+                  <streams publicatie_startdatumtijd="2010-01-08T11:42:00" aspect_ratio="16:9">
+                    <stream formaat="wmv" kwaliteit="bb">http://cgi.omroep.nl/cgi-bin/streams?/ncrv/geloven/16X9_20090924_YOGA_AFLEVERING8AHLHAN.wmv</stream>
+                    <stream formaat="wmv" kwaliteit="sb">http://cgi.omroep.nl/cgi-bin/streams?/ncrv/geloven/16X9_20090924_YOGA_AFLEVERING8AGLHAN.wmv</stream>
+                  </streams>
+                </media>
+                <genres>
+                  <genre>Religieus</genre>
+                </genres>
+                <omroepen>
+                  <omroep hoofdomroep="true">KRO</omroep>
+                </omroepen>
+              </webonly>
+            </nebo_xml>
+            """;
 
         NeboXmlWebOnly xml = JAXB.unmarshal(new StringReader(test), NeboXmlWebOnly.class);
         assertEquals(2, xml.getProgram().getLocations().size());

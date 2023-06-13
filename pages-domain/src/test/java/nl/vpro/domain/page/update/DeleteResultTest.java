@@ -30,12 +30,13 @@ public class DeleteResultTest {
             .duration(Duration.ofMillis(123))
             .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(result, "{\n" +
-            "    \"count\" : 100,\n" +
-            "    \"notallowedCount\" : 0,\n" +
-            "    \"success\" : true,\n" +
-            "    \"duration\" : \"P0DT0H0M0.123S\"\n" +
-            "  }");
+        Jackson2TestUtil.roundTripAndSimilar(result, """
+            {
+                "count" : 100,
+                "notallowedCount" : 0,
+                "success" : true,
+                "duration" : "P0DT0H0M0.123S"
+              }""");
     }
 
 
@@ -97,9 +98,10 @@ public class DeleteResultTest {
 
         r1.and(r2).getFuture().get();
         logger.info("Ready a & b");
-        assertThat(sb.toString()).isEqualTo("INFO Ready a\n" +
-            "INFO Ready b\n" +
-            "INFO Ready a & b");
+        assertThat(sb.toString()).isEqualTo("""
+            INFO Ready a
+            INFO Ready b
+            INFO Ready a & b""");
 
     }
 

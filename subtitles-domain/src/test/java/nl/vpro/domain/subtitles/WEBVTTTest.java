@@ -25,11 +25,12 @@ public class WEBVTTTest {
         assertThat(WEBVTTandSRT.formatCue(
             SubtitlesUtil.parse(getSubtitles(), false)
                 .getCues()
-                .findFirst().get(), new StringBuilder(), ".", true).toString()).isEqualTo("1\n" +
-            "00:00:02.200 --> 00:00:04.150\n" +
-            "888\n" +
-            "\n" +
-            "");
+                .findFirst().get(), new StringBuilder(), ".", true).toString()).isEqualTo("""
+            1
+            00:00:02.200 --> 00:00:04.150
+            888
+
+            """);
     }
 
     @Test
@@ -37,23 +38,24 @@ public class WEBVTTTest {
         StringWriter writer = new StringWriter();
         WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitles(), false, false).limit(3).collect(Collectors.toList()).iterator(), writer);
         assertThat(writer.toString()).isEqualTo(
-            "WEBVTT\n" +
-                "\n" +
-                "1\n" +
-                "00:00:02.200 --> 00:00:04.150\n" +
-                "888\n" +
-                "\n" +
-                "2\n" +
-                "00:00:04.200 --> 00:00:08.060\n" +
-                "*'k Heb een paar puntjes\n" +
-                "die ik met je wil bespreken\n" +
-                "\n" +
-                "3\n" +
-                "00:00:08.110 --> 00:00:11.060\n" +
-                "*Dat wil ik doen\n" +
-                "in jouw mobiele bakkerij\n" +
-                "\n" +
-                "");
+            """
+                WEBVTT
+
+                1
+                00:00:02.200 --> 00:00:04.150
+                888
+
+                2
+                00:00:04.200 --> 00:00:08.060
+                *'k Heb een paar puntjes
+                die ik met je wil bespreken
+
+                3
+                00:00:08.110 --> 00:00:11.060
+                *Dat wil ik doen
+                in jouw mobiele bakkerij
+
+                """);
     }
 
 
@@ -67,42 +69,46 @@ public class WEBVTTTest {
             .collect(Collectors.toList())
             .iterator(), writer);
         assertThat(writer.toString()).isEqualTo(
-            "WEBVTT\n" +
-                "\n" +
-                "\n" +
-                "-00:01:59.991 --> -00:01:57.770 A:left\n" +
-                "ترجمة: جانيت نمور\n" +
-                "\n" +
-                "\n" +
-                "-00:01:31.980 --> -00:01:27.980\n" +
-                "في عام 1993 هربنا من إيران، أمي وأخي وأنا\n" +
-                "\n" +
-                "\n" +
-                "-00:01:27.610 --> -00:01:25.197\n" +
-                "الآن نحن بطريقنا إلى الحي..\n" +
-                "\n");
+            """
+                WEBVTT
+
+
+                -00:01:59.991 --> -00:01:57.770 A:left
+                ترجمة: جانيت نمور
+
+
+                -00:01:31.980 --> -00:01:27.980
+                في عام 1993 هربنا من إيران، أمي وأخي وأنا
+
+
+                -00:01:27.610 --> -00:01:25.197
+                الآن نحن بطريقنا إلى الحي..
+
+                """);
     }
 
 
 
     @Test
     public void parse() {
-        String example = "WEBVTT\n" +
-            "\n" +
-            "1\n" +
-            "0:02.200 --> 2:04.150\n" +
-            "888\n" +
-            "\n" +
-            "2\n" +
-            "2:04.200 --> 2:08.060\n" +
-            "*'k Heb een paar puntjes\n" +
-            "die ik met je wil bespreken\n" +
-            "\n" +
-            "3\n" +
-            "2:08.110 --> 2:11.060\n" +
-            "*Dat wil ik doen\n" +
-            "in jouw mobiele bakkerij\n" +
-            "\n";
+        String example = """
+            WEBVTT
+
+            1
+            0:02.200 --> 2:04.150
+            888
+
+            2
+            2:04.200 --> 2:08.060
+            *'k Heb een paar puntjes
+            die ik met je wil bespreken
+
+            3
+            2:08.110 --> 2:11.060
+            *Dat wil ik doen
+            in jouw mobiele bakkerij
+
+            """;
         List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofSeconds(2), new StringReader(example), ".").getCues().collect(Collectors.toList());
         assertThat(cues).hasSize(3);
         assertThat(cues.get(0).getSequence()).isEqualTo(1);
@@ -114,22 +120,24 @@ public class WEBVTTTest {
 
     @Test
     public void parseNegative() {
-        String example = "WEBVTT\n" +
-            "\n" +
-            "1\n" +
-            "-0:02.200 --> 2:04.150\n" +
-            "888\n" +
-            "\n" +
-            "2\n" +
-            "2:04.200 --> 2:08.060\n" +
-            "*'k Heb een paar puntjes\n" +
-            "die ik met je wil bespreken\n" +
-            "\n" +
-            "3\n" +
-            "2:08.110 --> 2:11.060\n" +
-            "*Dat wil ik doen\n" +
-            "in jouw mobiele bakkerij\n" +
-            "\n";
+        String example = """
+            WEBVTT
+
+            1
+            -0:02.200 --> 2:04.150
+            888
+
+            2
+            2:04.200 --> 2:08.060
+            *'k Heb een paar puntjes
+            die ik met je wil bespreken
+
+            3
+            2:08.110 --> 2:11.060
+            *Dat wil ik doen
+            in jouw mobiele bakkerij
+
+            """;
         List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(0), new StringReader(example), ".").getCues().collect(Collectors.toList());
         assertThat(cues).hasSize(3);
         assertThat(cues.get(0).getSequence()).isEqualTo(1);

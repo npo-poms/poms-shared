@@ -178,9 +178,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
         } catch(AssertionError error) {
 
-            Fail.fail(String.format("missing title\n" +
-                "    TITLES:    %s\n" +
-                "    EXPECTED:  %s", titles, expected));
+            Fail.fail(String.format("""
+                missing title
+                    TITLES:    %s
+                    EXPECTED:  %s""", titles, expected));
         }
         return myself;
     }
@@ -198,9 +199,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             assertThat(titles).contains(expected);
 
         } catch(AssertionError error) {
-            Fail.fail(String.format("missing title\n" +
-                "    TITLES:    %s\n" +
-                "    EXPECTED:  %s", titles, expected));
+            Fail.fail(String.format("""
+                missing title
+                    TITLES:    %s
+                    EXPECTED:  %s""", titles, expected));
         }
         return myself;
     }
@@ -218,9 +220,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             assertThat(titles).contains(expected);
             return myself;
         } catch(AssertionError error) {
-            Fail.fail(String.format("missing title\n" +
-                "    TITLES:    %s\n" +
-                "    EXPECTED:  %s", titles, expected));
+            Fail.fail(String.format("""
+                missing title
+                    TITLES:    %s
+                    EXPECTED:  %s""", titles, expected));
             return myself;
         }
     }
@@ -273,9 +276,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             assertThat(Descriptions).contains(expected);
 
         } catch(AssertionError error) {
-            Fail.fail(String.format("missing description\n" +
-                "    DESCRIPTIONS:    %s\n" +
-                "    EXPECTED:  %s", Descriptions, expected));
+            Fail.fail(String.format("""
+                missing description
+                    DESCRIPTIONS:    %s
+                    EXPECTED:  %s""", Descriptions, expected));
         }
         return myself;
     }
@@ -293,9 +297,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             assertThat(Descriptions).contains(expected);
 
         } catch(AssertionError error) {
-            Fail.fail(String.format("missing description\n" +
-                "    DESCRIPTIONS:    %s\n" +
-                "    EXPECTED:  %s", Descriptions, expected));
+            Fail.fail(String.format("""
+                missing description
+                    DESCRIPTIONS:    %s
+                    EXPECTED:  %s""", Descriptions, expected));
         }
         return myself;
     }
@@ -313,9 +318,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
             assertThat(descriptions).contains(expected);
 
         } catch(AssertionError error) {
-            Fail.fail(String.format("missing description\n" +
-                "    DESCRIPTIONS: %s\n" +
-                "    EXPECTED:     %s", descriptions, expected));
+            Fail.fail(String.format("""
+                missing description
+                    DESCRIPTIONS: %s
+                    EXPECTED:     %s""", descriptions, expected));
         }
         return myself;
     }
@@ -545,9 +551,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
         } catch(AssertionError error) {
 
-            Fail.fail(String.format("missing relation\n" +
-                "    RELATIONS: %s\n" +
-                "    EXPECTED:  %s", relations, expected));
+            Fail.fail(String.format("""
+                missing relation
+                    RELATIONS: %s
+                    EXPECTED:  %s""", relations, expected));
         }
         return myself;
     }

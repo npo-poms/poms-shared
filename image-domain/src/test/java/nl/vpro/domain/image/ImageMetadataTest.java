@@ -58,25 +58,26 @@ class ImageMetadataTest {
     public void json() {
         assertThatJson(image)
             .withoutRemarshalling()
-            .isSimilarTo("{\n" +
-            "  \"type\" : \"LOGO\",\n" +
-            "  \"title\" : \"foobar\",\n" +
-            "  \"height\" : 200,\n" +
-            "  \"width\" : 200,\n" +
-            "  \"crids\" : [ \"urn:cinema:1234\" ],\n" +
-            "  \"areaOfInterest\" : {\n" +
-            "    \"lowerLeft\" : {\n" +
-            "      \"x\" : 10,\n" +
-            "      \"y\" : 20\n" +
-            "    },\n" +
-            "    \"upperRight\" : {\n" +
-            "      \"x\" : 100,\n" +
-            "      \"y\" : 120\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"lastModified\" : 1650010800000,\n" +
-            "  \"creationDate\" : 1650010200000\n" +
-            "}");
+            .isSimilarTo("""
+                {
+                  "type" : "LOGO",
+                  "title" : "foobar",
+                  "height" : 200,
+                  "width" : 200,
+                  "crids" : [ "urn:cinema:1234" ],
+                  "areaOfInterest" : {
+                    "lowerLeft" : {
+                      "x" : 10,
+                      "y" : 20
+                    },
+                    "upperRight" : {
+                      "x" : 100,
+                      "y" : 120
+                    }
+                  },
+                  "lastModified" : 1650010800000,
+                  "creationDate" : 1650010200000
+                }""");
 
         assertThat(image.getSourceSet().toString())
             .isEqualTo("https://www.vpro.nl/plaatje.jpeg 640w, https://www.vpro.nl/plaatje.webp 640w");
@@ -88,49 +89,50 @@ class ImageMetadataTest {
         assertThatJson(Jackson2Mapper
             .getModelInstance(), image)
             .withoutRemarshalling()
-            .isSimilarTo("{\n" +
-                "  \"type\" : \"LOGO\",\n" +
-                "  \"title\" : \"foobar\",\n" +
-                "  \"height\" : 200,\n" +
-                "  \"width\" : 200,\n" +
-                "  \"sourceSet\" : {\n" +
-                "    \"THUMBNAIL\" : {\n" +
-                "      \"url\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
-                "      \"type\" : \"THUMBNAIL\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 640,\n" +
-                "        \"height\" : 320\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"THUMBNAIL.WEBP\" : {\n" +
-                "      \"url\" : \"https://www.vpro.nl/plaatje.webp\",\n" +
-                "      \"type\" : \"THUMBNAIL\",\n" +
-                "      \"format\" : \"WEBP\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 640,\n" +
-                "        \"height\" : 320\n" +
-                "      }\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"crids\" : [ \"urn:cinema:1234\" ],\n" +
-                "  \"areaOfInterest\" : {\n" +
-                "    \"lowerLeft\" : {\n" +
-                "      \"x\" : 10,\n" +
-                "      \"y\" : 20\n" +
-                "    },\n" +
-                "    \"upperRight\" : {\n" +
-                "      \"x\" : 100,\n" +
-                "      \"y\" : 120\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"lastModified\" : 1650010800000,\n" +
-                "  \"creationDate\" : 1650010200000,\n" +
-                "  \"pointOfInterest\" : {\n" +
-                "    \"x\" : 0.275,\n" +
-                "    \"y\" : 0.35\n" +
-                "  },\n" +
-                "  \"alternativeOrTitle\" : \"foobar\"\n" +
-                "}");
+            .isSimilarTo("""
+                {
+                  "type" : "LOGO",
+                  "title" : "foobar",
+                  "height" : 200,
+                  "width" : 200,
+                  "sourceSet" : {
+                    "THUMBNAIL" : {
+                      "url" : "https://www.vpro.nl/plaatje.jpeg",
+                      "type" : "THUMBNAIL",
+                      "dimension" : {
+                        "width" : 640,
+                        "height" : 320
+                      }
+                    },
+                    "THUMBNAIL.WEBP" : {
+                      "url" : "https://www.vpro.nl/plaatje.webp",
+                      "type" : "THUMBNAIL",
+                      "format" : "WEBP",
+                      "dimension" : {
+                        "width" : 640,
+                        "height" : 320
+                      }
+                    }
+                  },
+                  "crids" : [ "urn:cinema:1234" ],
+                  "areaOfInterest" : {
+                    "lowerLeft" : {
+                      "x" : 10,
+                      "y" : 20
+                    },
+                    "upperRight" : {
+                      "x" : 100,
+                      "y" : 120
+                    }
+                  },
+                  "lastModified" : 1650010800000,
+                  "creationDate" : 1650010200000,
+                  "pointOfInterest" : {
+                    "x" : 0.275,
+                    "y" : 0.35
+                  },
+                  "alternativeOrTitle" : "foobar"
+                }""");
 
     }
 
@@ -139,49 +141,50 @@ class ImageMetadataTest {
     public void modelAndNormalJson() {
         assertThatJson(Jackson2Mapper.getModelAndNormalInstance(), image)
             .withoutRemarshalling()
-            .isSimilarTo("{\n" +
-                "  \"type\" : \"LOGO\",\n" +
-                "  \"title\" : \"foobar\",\n" +
-                "  \"height\" : 200,\n" +
-                "  \"width\" : 200,\n" +
-                "  \"sourceSet\" : {\n" +
-                "    \"THUMBNAIL\" : {\n" +
-                "      \"url\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
-                "      \"type\" : \"THUMBNAIL\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 640,\n" +
-                "        \"height\" : 320\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"THUMBNAIL.WEBP\" : {\n" +
-                "      \"url\" : \"https://www.vpro.nl/plaatje.webp\",\n" +
-                "      \"type\" : \"THUMBNAIL\",\n" +
-                "      \"format\" : \"WEBP\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 640,\n" +
-                "        \"height\" : 320\n" +
-                "      }\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"crids\" : [ \"urn:cinema:1234\" ],\n" +
-                "  \"areaOfInterest\" : {\n" +
-                "    \"lowerLeft\" : {\n" +
-                "      \"x\" : 10,\n" +
-                "      \"y\" : 20\n" +
-                "    },\n" +
-                "    \"upperRight\" : {\n" +
-                "      \"x\" : 100,\n" +
-                "      \"y\" : 120\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"lastModified\" : 1650010800000,\n" +
-                "  \"creationDate\" : 1650010200000,\n" +
-                "  \"pointOfInterest\" : {\n" +
-                "    \"x\" : 0.275,\n" +
-                "    \"y\" : 0.35\n" +
-                "  },\n" +
-                "  \"alternativeOrTitle\" : \"foobar\"\n" +
-                "}");
+            .isSimilarTo("""
+                {
+                  "type" : "LOGO",
+                  "title" : "foobar",
+                  "height" : 200,
+                  "width" : 200,
+                  "sourceSet" : {
+                    "THUMBNAIL" : {
+                      "url" : "https://www.vpro.nl/plaatje.jpeg",
+                      "type" : "THUMBNAIL",
+                      "dimension" : {
+                        "width" : 640,
+                        "height" : 320
+                      }
+                    },
+                    "THUMBNAIL.WEBP" : {
+                      "url" : "https://www.vpro.nl/plaatje.webp",
+                      "type" : "THUMBNAIL",
+                      "format" : "WEBP",
+                      "dimension" : {
+                        "width" : 640,
+                        "height" : 320
+                      }
+                    }
+                  },
+                  "crids" : [ "urn:cinema:1234" ],
+                  "areaOfInterest" : {
+                    "lowerLeft" : {
+                      "x" : 10,
+                      "y" : 20
+                    },
+                    "upperRight" : {
+                      "x" : 100,
+                      "y" : 120
+                    }
+                  },
+                  "lastModified" : 1650010800000,
+                  "creationDate" : 1650010200000,
+                  "pointOfInterest" : {
+                    "x" : 0.275,
+                    "y" : 0.35
+                  },
+                  "alternativeOrTitle" : "foobar"
+                }""");
 
     }
 
@@ -191,20 +194,21 @@ class ImageMetadataTest {
         assertThatJson(Jackson2Mapper.getModelAndNormalInstance(), image.getPicture())
             .withoutRemarshalling()
             .withoutUnmarshalling()
-            .isSimilarTo("{\n" +
-                "  \"imageSrc\" : \"https://www.vpro.nl/plaatje.jpeg\",\n" +
-                "  \"alternative\" : \"foobar\",\n" +
-                "  \"imageTitle\" : \"foobar\",\n" +
-                "  \"width\" : 200,\n" +
-                "  \"height\" : 200,\n" +
-                "  \"sources\" : [ {\n" +
-                "    \"srcSet\" : \"https://www.vpro.nl/plaatje.jpeg 640w\"\n" +
-                "  }, {\n" +
-                "    \"type\" : \"image/webp\",\n" +
-                "    \"srcSet\" : \"https://www.vpro.nl/plaatje.webp 640w\"\n" +
-                "  } ],\n" +
-                "  \"pointOfInterest\" : \"28% 35%\"\n" +
-                "}");
+            .isSimilarTo("""
+                {
+                  "imageSrc" : "https://www.vpro.nl/plaatje.jpeg",
+                  "alternative" : "foobar",
+                  "imageTitle" : "foobar",
+                  "width" : 200,
+                  "height" : 200,
+                  "sources" : [ {
+                    "srcSet" : "https://www.vpro.nl/plaatje.jpeg 640w"
+                  }, {
+                    "type" : "image/webp",
+                    "srcSet" : "https://www.vpro.nl/plaatje.webp 640w"
+                  } ],
+                  "pointOfInterest" : "28% 35%"
+                }""");
 
     }
 
@@ -217,128 +221,129 @@ class ImageMetadataTest {
 
         assertThatJson(schema).isSimilarTo(
             // text blocks only in java 15....
-            "{\n" +
-                "  \"type\" : \"object\",\n" +
-                "  \"id\" : \"urn:jsonschema:nl:vpro:domain:image:ImageMetadataImpl\",\n" +
-                "  \"properties\" : {\n" +
-                "    \"type\" : {\n" +
-                "      \"type\" : \"string\",\n" +
-                "      \"enum\" : [ \"PICTURE\", \"PORTRAIT\", \"STILL\", \"LOGO\", \"ICON\", \"PROMO_LANDSCAPE\", \"PROMO_PORTRAIT\", \"BACKGROUND\" ]\n" +
-                "    },\n" +
-                "    \"title\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"height\" : {\n" +
-                "      \"type\" : \"integer\"\n" +
-                "    },\n" +
-                "    \"width\" : {\n" +
-                "      \"type\" : \"integer\"\n" +
-                "    },\n" +
-                "    \"sourceSet\" : {\n" +
-                "      \"type\" : \"object\",\n" +
-                "      \"additionalProperties\" : {\n" +
-                "        \"type\" : \"object\",\n" +
-                "        \"id\" : \"urn:jsonschema:nl:vpro:domain:image:ImageSource\",\n" +
-                "        \"properties\" : {\n" +
-                "          \"url\" : {\n" +
-                "            \"type\" : \"string\"\n" +
-                "          },\n" +
-                "          \"type\" : {\n" +
-                "            \"type\" : \"string\",\n" +
-                "            \"enum\" : [ \"THUMBNAIL\", \"MOBILE_HALF\", \"MOBILE\", \"MOBILE_2\", \"MOBILE_3\", \"TABLET\", \"TABLET_2\", \"TABLET_3\", \"LARGE\" ]\n" +
-                "          },\n" +
-                "          \"format\" : {\n" +
-                "            \"type\" : \"string\",\n" +
-                "            \"enum\" : [ \"BMP\", \"GIF\", \"IEF\", \"IFF\", \"JPG\", \"JFIF\", \"PNG\", \"PBM\", \"PGM\", \"PNM\", \"PPM\", \"SVG\", \"RAS\", \"RGB\", \"TIF\", \"XBM\", \"XPM\", \"WEBP\" ]\n" +
-                "          },\n" +
-                "          \"dimension\" : {\n" +
-                "            \"type\" : \"object\",\n" +
-                "            \"id\" : \"urn:jsonschema:nl:vpro:domain:image:Dimension\",\n" +
-                "            \"properties\" : {\n" +
-                "              \"width\" : {\n" +
-                "                \"type\" : \"integer\"\n" +
-                "              },\n" +
-                "              \"height\" : {\n" +
-                "                \"type\" : \"integer\"\n" +
-                "              }\n" +
-                "            }\n" +
-                "          },\n" +
-                "          \"areaOfInterest\" : {\n" +
-                "            \"type\" : \"object\",\n" +
-                "            \"id\" : \"urn:jsonschema:nl:vpro:domain:image:Area\",\n" +
-                "            \"properties\" : {\n" +
-                "              \"lowerLeft\" : {\n" +
-                "                \"type\" : \"object\",\n" +
-                "                \"id\" : \"urn:jsonschema:nl:vpro:domain:image:Point\",\n" +
-                "                \"properties\" : {\n" +
-                "                  \"x\" : {\n" +
-                "                    \"type\" : \"integer\"\n" +
-                "                  },\n" +
-                "                  \"y\" : {\n" +
-                "                    \"type\" : \"integer\"\n" +
-                "                  }\n" +
-                "                }\n" +
-                "              },\n" +
-                "              \"upperRight\" : {\n" +
-                "                \"type\" : \"object\",\n" +
-                "                \"$ref\" : \"urn:jsonschema:nl:vpro:domain:image:Point\"\n" +
-                "              }\n" +
-                "            }\n" +
-                "          }\n" +
-                "        }\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"crids\" : {\n" +
-                "      \"type\" : \"array\",\n" +
-                "      \"items\" : {\n" +
-                "        \"type\" : \"string\"\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"areaOfInterest\" : {\n" +
-                "      \"type\" : \"object\",\n" +
-                "      \"$ref\" : \"urn:jsonschema:nl:vpro:domain:image:Area\"\n" +
-                "    },\n" +
-                "    \"lastModified\" : {\n" +
-                "      \"type\" : \"any\"\n" +
-                "    },\n" +
-                "    \"creationDate\" : {\n" +
-                "      \"type\" : \"any\"\n" +
-                "    },\n" +
-                "    \"description\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"alternative\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"license\" : {\n" +
-                "      \"type\" : \"any\"\n" +
-                "    },\n" +
-                "    \"source\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"sourceName\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"credits\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    },\n" +
-                "    \"pointOfInterest\" : {\n" +
-                "      \"type\" : \"object\",\n" +
-                "      \"id\" : \"urn:jsonschema:nl:vpro:domain:image:RelativePoint\",\n" +
-                "      \"properties\" : {\n" +
-                "        \"x\" : {\n" +
-                "          \"type\" : \"number\"\n" +
-                "        },\n" +
-                "        \"y\" : {\n" +
-                "          \"type\" : \"number\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"alternativeOrTitle\" : {\n" +
-                "      \"type\" : \"string\"\n" +
-                "    }\n" +
-                "  }\n" +
-                "}");
+            """
+                {
+                  "type" : "object",
+                  "id" : "urn:jsonschema:nl:vpro:domain:image:ImageMetadataImpl",
+                  "properties" : {
+                    "type" : {
+                      "type" : "string",
+                      "enum" : [ "PICTURE", "PORTRAIT", "STILL", "LOGO", "ICON", "PROMO_LANDSCAPE", "PROMO_PORTRAIT", "BACKGROUND" ]
+                    },
+                    "title" : {
+                      "type" : "string"
+                    },
+                    "height" : {
+                      "type" : "integer"
+                    },
+                    "width" : {
+                      "type" : "integer"
+                    },
+                    "sourceSet" : {
+                      "type" : "object",
+                      "additionalProperties" : {
+                        "type" : "object",
+                        "id" : "urn:jsonschema:nl:vpro:domain:image:ImageSource",
+                        "properties" : {
+                          "url" : {
+                            "type" : "string"
+                          },
+                          "type" : {
+                            "type" : "string",
+                            "enum" : [ "THUMBNAIL", "MOBILE_HALF", "MOBILE", "MOBILE_2", "MOBILE_3", "TABLET", "TABLET_2", "TABLET_3", "LARGE" ]
+                          },
+                          "format" : {
+                            "type" : "string",
+                            "enum" : [ "BMP", "GIF", "IEF", "IFF", "JPG", "JFIF", "PNG", "PBM", "PGM", "PNM", "PPM", "SVG", "RAS", "RGB", "TIF", "XBM", "XPM", "WEBP" ]
+                          },
+                          "dimension" : {
+                            "type" : "object",
+                            "id" : "urn:jsonschema:nl:vpro:domain:image:Dimension",
+                            "properties" : {
+                              "width" : {
+                                "type" : "integer"
+                              },
+                              "height" : {
+                                "type" : "integer"
+                              }
+                            }
+                          },
+                          "areaOfInterest" : {
+                            "type" : "object",
+                            "id" : "urn:jsonschema:nl:vpro:domain:image:Area",
+                            "properties" : {
+                              "lowerLeft" : {
+                                "type" : "object",
+                                "id" : "urn:jsonschema:nl:vpro:domain:image:Point",
+                                "properties" : {
+                                  "x" : {
+                                    "type" : "integer"
+                                  },
+                                  "y" : {
+                                    "type" : "integer"
+                                  }
+                                }
+                              },
+                              "upperRight" : {
+                                "type" : "object",
+                                "$ref" : "urn:jsonschema:nl:vpro:domain:image:Point"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "crids" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "string"
+                      }
+                    },
+                    "areaOfInterest" : {
+                      "type" : "object",
+                      "$ref" : "urn:jsonschema:nl:vpro:domain:image:Area"
+                    },
+                    "lastModified" : {
+                      "type" : "any"
+                    },
+                    "creationDate" : {
+                      "type" : "any"
+                    },
+                    "description" : {
+                      "type" : "string"
+                    },
+                    "alternative" : {
+                      "type" : "string"
+                    },
+                    "license" : {
+                      "type" : "any"
+                    },
+                    "source" : {
+                      "type" : "string"
+                    },
+                    "sourceName" : {
+                      "type" : "string"
+                    },
+                    "credits" : {
+                      "type" : "string"
+                    },
+                    "pointOfInterest" : {
+                      "type" : "object",
+                      "id" : "urn:jsonschema:nl:vpro:domain:image:RelativePoint",
+                      "properties" : {
+                        "x" : {
+                          "type" : "number"
+                        },
+                        "y" : {
+                          "type" : "number"
+                        }
+                      }
+                    },
+                    "alternativeOrTitle" : {
+                      "type" : "string"
+                    }
+                  }
+                }""");
 
     }
 

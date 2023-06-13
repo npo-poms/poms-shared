@@ -36,24 +36,25 @@ public class MediaChangeTest {
             .reasonsStrings(Arrays.asList("foo bar"))
             .build();
 
-        Jackson2TestUtil.assertThatJson(change).isSimilarTo("{\n" +
-            "  \"sequence\" : 1469014680000,\n" +
-            "  \"publishDate\" : 1469014680000,\n" +
-            "  \"id\" : \"MID_123\",\n" +
-            "  \"mid\" : \"MID_123\",\n" +
-            "  \"reasons\" : [ {\n" +
-            "    \"value\" : \"foo bar\",\n" +
-            "    \"publishDate\" : 1469014680000\n" +
-            "  } ],\n" +
-            "  \"media\" : {\n" +
-            "    \"objectType\" : \"program\",\n" +
-            "    \"embeddable\" : true,\n" +
-            "    \"broadcasters\" : [ ],\n" +
-            "    \"genres\" : [ ],\n" +
-            "    \"countries\" : [ ],\n" +
-            "    \"languages\" : [ ]\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.assertThatJson(change).isSimilarTo("""
+            {
+              "sequence" : 1469014680000,
+              "publishDate" : 1469014680000,
+              "id" : "MID_123",
+              "mid" : "MID_123",
+              "reasons" : [ {
+                "value" : "foo bar",
+                "publishDate" : 1469014680000
+              } ],
+              "media" : {
+                "objectType" : "program",
+                "embeddable" : true,
+                "broadcasters" : [ ],
+                "genres" : [ ],
+                "countries" : [ ],
+                "languages" : [ ]
+              }
+            }""");
     }
 
     @Test
@@ -66,20 +67,21 @@ public class MediaChangeTest {
             .build()
         ;
 
-        JAXBTestUtil.assertThatXml(change).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<api:change publishDate=\"2016-07-20T13:38:00+02:00\" id=\"MID_123\" sequence=\"1469014680000\" mid=\"MID_123\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:reasons>\n" +
-            "      <api:reason publishDate=\"2016-07-20T13:38:00+02:00\">bar</api:reason>\n" +
-            "      <api:reason publishDate=\"2016-07-20T13:38:00+02:00\">foo</api:reason>\n" +
-            "    </api:reasons>\n" +
-            "    <api:media xsi:type=\"media:programType\" embeddable=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-            "        <media:credits/>\n" +
-            "        <media:locations/>\n" +
-            "        <media:images/>\n" +
-            "        <media:scheduleEvents/>\n" +
-            "        <media:segments/>\n" +
-            "    </api:media>\n" +
-            "</api:change>");
+        JAXBTestUtil.assertThatXml(change).isSimilarTo("""
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <api:change publishDate="2016-07-20T13:38:00+02:00" id="MID_123" sequence="1469014680000" mid="MID_123" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <api:reasons>
+                  <api:reason publishDate="2016-07-20T13:38:00+02:00">bar</api:reason>
+                  <api:reason publishDate="2016-07-20T13:38:00+02:00">foo</api:reason>
+                </api:reasons>
+                <api:media xsi:type="media:programType" embeddable="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <media:credits/>
+                    <media:locations/>
+                    <media:images/>
+                    <media:scheduleEvents/>
+                    <media:segments/>
+                </api:media>
+            </api:change>""");
 
     }
 
@@ -93,21 +95,22 @@ public class MediaChangeTest {
             .deleted(true)
             .build();
 
-        Jackson2TestUtil.assertThatJson(change).isSimilarTo("{\n" +
-            "  \"sequence\" : 1469014680000,\n" +
-            "  \"publishDate\" : 1469014680000,\n" +
-            "  \"id\" : \"MID_123\",\n" +
-            "  \"mid\" : \"MID_123\",\n" +
-            "  \"deleted\" : true,\n" +
-            "  \"media\" : {\n" +
-            "    \"objectType\" : \"program\",\n" +
-            "    \"embeddable\" : true,\n" +
-            "    \"broadcasters\" : [ ],\n" +
-            "    \"genres\" : [ ],\n" +
-            "    \"countries\" : [ ],\n" +
-            "    \"languages\" : [ ]\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.assertThatJson(change).isSimilarTo("""
+            {
+              "sequence" : 1469014680000,
+              "publishDate" : 1469014680000,
+              "id" : "MID_123",
+              "mid" : "MID_123",
+              "deleted" : true,
+              "media" : {
+                "objectType" : "program",
+                "embeddable" : true,
+                "broadcasters" : [ ],
+                "genres" : [ ],
+                "countries" : [ ],
+                "languages" : [ ]
+              }
+            }""");
     }
 
     @Test
@@ -132,22 +135,23 @@ public class MediaChangeTest {
 
         change.setPublishDate(change.getPublishDate().plus(Duration.ofMillis(10)));
 
-        Jackson2TestUtil.assertThatJson(change).isSimilarTo("{\n" +
-            "  \"sequence\" : 1469014680000,\n" +
-            "  \"publishDate\" : 1469014680010,\n" +
-            "  \"realPublishDate\" : 1469014680000,\n" +
-            "  \"id\" : \"MID_123\",\n" +
-            "  \"mid\" : \"MID_123\",\n" +
-            "  \"deleted\" : true,\n" +
-            "  \"media\" : {\n" +
-            "    \"objectType\" : \"program\",\n" +
-            "    \"embeddable\" : true,\n" +
-            "    \"broadcasters\" : [ ],\n" +
-            "    \"genres\" : [ ],\n" +
-            "    \"countries\" : [ ],\n" +
-            "    \"languages\" : [ ]\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.assertThatJson(change).isSimilarTo("""
+            {
+              "sequence" : 1469014680000,
+              "publishDate" : 1469014680010,
+              "realPublishDate" : 1469014680000,
+              "id" : "MID_123",
+              "mid" : "MID_123",
+              "deleted" : true,
+              "media" : {
+                "objectType" : "program",
+                "embeddable" : true,
+                "broadcasters" : [ ],
+                "genres" : [ ],
+                "countries" : [ ],
+                "languages" : [ ]
+              }
+            }""");
     }
 
 }

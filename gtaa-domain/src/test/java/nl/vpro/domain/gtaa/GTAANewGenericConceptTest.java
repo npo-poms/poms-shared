@@ -31,22 +31,24 @@ public class GTAANewGenericConceptTest {
                 .build();
 
 
-        Jackson2TestUtil.roundTripAndSimilar(person, "{\n" +
-            "  \"newObjectType\" : \"concept\",\n" +
-            "  \"name\" : \"new genre\",\n" +
-            "  \"scopeNotes\" : [ \"Bla\" ],\n" +
-            "  \"objectType\" : \"genre\"\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(person, """
+            {
+              "newObjectType" : "concept",
+              "name" : "new genre",
+              "scopeNotes" : [ "Bla" ],
+              "objectType" : "genre"
+            }""");
 
     }
 
      @Test
     public void jsonWithoutType() throws IOException {
-        String json = "{\n" +
-            "  \"name\" : \"new genre\",\n" +
-            "  \"scopeNotes\" : [ \"Bla\" ],\n" +
-            "  \"objectType\" : \"genre\"\n" +
-            "}";
+        String json = """
+            {
+              "name" : "new genre",
+              "scopeNotes" : [ "Bla" ],
+              "objectType" : "genre"
+            }""";
 
         GTAANewGenericConcept gtaaNewGenericConcept =
             (GTAANewGenericConcept) reader.readFrom(Object.class,
@@ -65,10 +67,11 @@ public class GTAANewGenericConceptTest {
             .scheme(Scheme.maker)
             .name("Pietje Puk")
             .scopeNote("test").build();
-        JAXBTestUtil.roundTripAndSimilar(person, "<gtaa:newConcept gtaa:objectType=\"maker\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:gtaa=\"urn:vpro:gtaa:2017\" xmlns:openskos=\"http://openskos.org/xmlns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n" +
-            "    <gtaa:name>Pietje Puk</gtaa:name>\n" +
-            "    <gtaa:scopeNote>test</gtaa:scopeNote>\n" +
-            "</gtaa:newConcept>");
+        JAXBTestUtil.roundTripAndSimilar(person, """
+            <gtaa:newConcept gtaa:objectType="maker" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:gtaa="urn:vpro:gtaa:2017" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+                <gtaa:name>Pietje Puk</gtaa:name>
+                <gtaa:scopeNote>test</gtaa:scopeNote>
+            </gtaa:newConcept>""");
 
     }
 

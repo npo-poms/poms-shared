@@ -76,31 +76,33 @@ public class PageFormTest {
         JAXB.marshal(builder.build(), writer);
         System.out.println(writer.toString());
         assertThatXml(writer.toString())
-            .isSimilarTo("<api:pagesForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                "    <api:searches>\n" +
-                "        <api:sortDates match=\"MUST\">\n" +
-                "            <api:matcher inclusiveEnd=\"false\">\n" +
-                "                <api:end>2017-06-12T15:00:00+02:00</api:end>\n" +
-                "            </api:matcher>\n" +
-                "        </api:sortDates>\n" +
-                "    </api:searches>\n" +
-                "    <api:sortFields>\n" +
-                "        <api:sort order=\"DESC\">lastModified</api:sort>\n" +
-                "    </api:sortFields>\n" +
-                "</api:pagesForm>");
+            .isSimilarTo("""
+                <api:pagesForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                    <api:searches>
+                        <api:sortDates match="MUST">
+                            <api:matcher inclusiveEnd="false">
+                                <api:end>2017-06-12T15:00:00+02:00</api:end>
+                            </api:matcher>
+                        </api:sortDates>
+                    </api:searches>
+                    <api:sortFields>
+                        <api:sort order="DESC">lastModified</api:sort>
+                    </api:sortFields>
+                </api:pagesForm>""");
     }
     @Test
     public void unmarshal() throws IOException {
-        String string = "{\n" +
-            "    \"facets\": {\n" +
-            "        \"sections\": {\n" +
-            "            }\n" +
-            "    },\n" +
-            "    \"highlight\": true,\n" +
-            "    \"searches\": {\n" +
-            "     \"sortDates\": { \"begin\": 0}\n" +
-            "    }\n" +
-            "}";
+        String string = """
+            {
+                "facets": {
+                    "sections": {
+                        }
+                },
+                "highlight": true,
+                "searches": {
+                 "sortDates": { "begin": 0}
+                }
+            }""";
 
         PageForm form  = Jackson2Mapper.getInstance().readValue(new StringReader(string), PageForm.class);
 
@@ -110,13 +112,14 @@ public class PageFormTest {
 
     @Test
     public void unmarshalBackwards() throws IOException {
-        String string = "{\n" +
-            "    \"facets\": {\n" +
-            "        \"sections\": {\n" +
-            "            \"sort\": \"COUNT\"\n" +
-            "            }\n" +
-            "    }\n" +
-            "}";
+        String string = """
+            {
+                "facets": {
+                    "sections": {
+                        "sort": "COUNT"
+                        }
+                }
+            }""";
 
         PageForm form = Jackson2Mapper.getInstance().readValue(new StringReader(string), PageForm.class);
 
@@ -125,33 +128,36 @@ public class PageFormTest {
 
     @Test
     public void toXml() throws IOException {
-        String json = "{\n" +
-            "    \"searches\" : {\n" +
-            "\n" +
-            "    },\n" +
-            "\n" +
-            " \"sort\": {\"sortDate\": \"ASC\" },\n" +
-            "    \"facets\" : {\n" +
-            "      \"sortDates\" : [ \"YEAR\" ]\n" +
-            "    }\n" +
-            "}\n";
+        String json = """
+            {
+                "searches" : {
+
+                },
+
+             "sort": {"sortDate": "ASC" },
+                "facets" : {
+                  "sortDates" : [ "YEAR" ]
+                }
+            }
+            """;
         PageForm form = Jackson2Mapper.INSTANCE.readValue(new StringReader(json), PageForm.class);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         JAXB.marshal(form, out);
         String expected =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<api:pagesForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                "    <api:searches/>\n" +
-                "    <api:sortFields>\n" +
-                "        <api:sort order=\"ASC\">sortDate</api:sort>\n" +
-                "    </api:sortFields>\n" +
-                "    <api:facets>\n" +
-                "        <api:sortDates>\n" +
-                "            <api:interval>YEAR</api:interval>\n" +
-                "        </api:sortDates>\n" +
-                "    </api:facets>\n" +
-                "</api:pagesForm>";
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <api:pagesForm xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                    <api:searches/>
+                    <api:sortFields>
+                        <api:sort order="ASC">sortDate</api:sort>
+                    </api:sortFields>
+                    <api:facets>
+                        <api:sortDates>
+                            <api:interval>YEAR</api:interval>
+                        </api:sortDates>
+                    </api:facets>
+                </api:pagesForm>""";
 
         System.out.println(out.toString());
         Diff diff = DiffBuilder.compare(expected).withTest(out.toString()).build();
@@ -197,17 +203,18 @@ public class PageFormTest {
     @Test
     public void testReferralsXml() {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY)).build();
-        String xml = "<api:pagesForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:searches>\n" +
-            "        <api:referrals>\n" +
-            "            <api:search>\n" +
-            "                <api:types match=\"MUST\">\n" +
-            "                    <api:matcher>TOP_STORY</api:matcher>\n" +
-            "                </api:types>\n" +
-            "            </api:search>\n" +
-            "        </api:referrals>\n" +
-            "    </api:searches>\n" +
-            "</api:pagesForm>";
+        String xml = """
+            <api:pagesForm xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <api:searches>
+                    <api:referrals>
+                        <api:search>
+                            <api:types match="MUST">
+                                <api:matcher>TOP_STORY</api:matcher>
+                            </api:types>
+                        </api:search>
+                    </api:referrals>
+                </api:searches>
+            </api:pagesForm>""";
 
         PageForm rounded = JAXBTestUtil.roundTripAndSimilar(form, xml);
 

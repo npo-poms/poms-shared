@@ -17,14 +17,15 @@ public class MultiplePageEntryTest {
     public void json() {
         MultiplePageEntry entry = new MultiplePageEntry("bla", Page.builder().type(PageType.HOME).url("http://www.vpro.nl/bla").build());
 
-        Jackson2TestUtil.roundTripAndSimilar(entry, "{\n" +
-            "  \"id\" : \"bla\",\n" +
-            "  \"result\" : {\n" +
-            "    \"objectType\" : \"page\",\n" +
-            "    \"type\" : \"HOME\",\n" +
-            "    \"url\" : \"http://www.vpro.nl/bla\"\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(entry, """
+            {
+              "id" : "bla",
+              "result" : {
+                "objectType" : "page",
+                "type" : "HOME",
+                "url" : "http://www.vpro.nl/bla"
+              }
+            }""");
     }
 
 }

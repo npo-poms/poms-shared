@@ -18,10 +18,11 @@ class SimpleTextMatcherTest {
 
     @Test
     public void json() {
-        Jackson2TestUtil.roundTripAndSimilar(SimpleTextMatcher.builder().semantic(true).value("foobar").build(), "{\n" +
-            "  \"value\" : \"foobar\",\n" +
-            "  \"semantic\" : true\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(SimpleTextMatcher.builder().semantic(true).value("foobar").build(), """
+            {
+              "value" : "foobar",
+              "semantic" : true
+            }""");
     }
 
 

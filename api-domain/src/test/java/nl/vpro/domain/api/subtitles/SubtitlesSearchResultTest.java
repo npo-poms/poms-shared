@@ -23,13 +23,14 @@ public class SubtitlesSearchResultTest {
         StandaloneCue cue1 = StandaloneCue.standaloneBuilder().content("bla").type(SubtitlesType.CAPTION).start(Duration.ofSeconds(10)).build();
         SearchResultItem<StandaloneCue> item = new SearchResultItem<>(cue1);
         SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, Result.Total.equalsTo(100L));
-        JAXBTestUtil.roundTripAndSimilar(result, "<api:subtitlesSearchResult total=\"100\" totalQualifier=\"EQUAL_TO\" offset=\"0\" max=\"10\" xmlns=\"urn:vpro:media:2009\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:items>\n" +
-            "        <api:item xsi:type=\"api:searchResultItem\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-            "            <api:result xsi:type=\"subtitles:standaloneCue\" type=\"CAPTION\" sequence=\"0\" identifier=\"0\" start=\"P0DT0H0M10.000S\">bla</api:result>\n" +
-            "        </api:item>\n" +
-            "    </api:items>\n" +
-            "</api:subtitlesSearchResult>");
+        JAXBTestUtil.roundTripAndSimilar(result, """
+            <api:subtitlesSearchResult total="100" totalQualifier="EQUAL_TO" offset="0" max="10" xmlns="urn:vpro:media:2009" xmlns:subtitles="urn:vpro:media:subtitles:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <api:items>
+                    <api:item xsi:type="api:searchResultItem" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                        <api:result xsi:type="subtitles:standaloneCue" type="CAPTION" sequence="0" identifier="0" start="P0DT0H0M10.000S">bla</api:result>
+                    </api:item>
+                </api:items>
+            </api:subtitlesSearchResult>""");
     }
 
     @Test
@@ -37,22 +38,23 @@ public class SubtitlesSearchResultTest {
         StandaloneCue cue1 = StandaloneCue.standaloneBuilder().content("bla").type(SubtitlesType.CAPTION).start(Duration.ofSeconds(10)).build();
         SearchResultItem<StandaloneCue> item = new SearchResultItem<>(cue1);
         SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, Result.Total.equalsTo(100L));
-        Jackson2TestUtil.roundTripAndSimilar(result, "{\n" +
-            "  \"total\" : 100,\n" +
-            "  \"totalQualifier\" : \"EQUAL_TO\",\n" +
-            "  \"offset\" : 0,\n" +
-            "  \"max\" : 10,\n" +
-            "  \"items\" : [ {\n" +
-            "    \"result\" : {\n" +
-            "      \"objectType\" : \"StandaloneCue\",\n" +
-            "      \"sequence\" : 0,\n" +
-            "       \"identifier\" : \"0\",\n" +
-            "      \"start\" : 10000,\n" +
-            "      \"type\" : \"CAPTION\",\n" +
-            "      \"content\" : \"bla\"\n" +
-            "    }\n" +
-            "  } ]\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(result, """
+            {
+              "total" : 100,
+              "totalQualifier" : "EQUAL_TO",
+              "offset" : 0,
+              "max" : 10,
+              "items" : [ {
+                "result" : {
+                  "objectType" : "StandaloneCue",
+                  "sequence" : 0,
+                   "identifier" : "0",
+                  "start" : 10000,
+                  "type" : "CAPTION",
+                  "content" : "bla"
+                }
+              } ]
+            }""");
 
     }
 }

@@ -17,12 +17,13 @@ public class RelationSearchTest {
     public void json() {
         RelationSearch search = new RelationSearch();
         search.setBroadcasters(TextMatcherList.must(TextMatcher.not("VPRO")));
-        Jackson2TestUtil.roundTripAndSimilarAndEquals(search, "{\n" +
-            "  \"broadcasters\" : {\n" +
-            "    \"value\" : \"VPRO\",\n" +
-            "    \"match\" : \"NOT\"\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilarAndEquals(search, """
+            {
+              "broadcasters" : {
+                "value" : "VPRO",
+                "match" : "NOT"
+              }
+            }""");
     }
 
 }

@@ -32,20 +32,23 @@ public class GTAAPersonTest {
             .build();
 
         Jackson2TestUtil.roundTripAndSimilarAndEquals(person,
-            "{\"objectType\" : \"person\",\n" +
-                "  \"id\" : \"http://data.beeldengeluid.nl/gtaa/167222\",\n" +
-                "  \"name\" : \"puk, Pietje\",\n" +
-                "  \"givenName\" : \"Pietje\",\n" +
-                "  \"familyName\" : \"puk\"\n" +
-                "}");
+            """
+                {"objectType" : "person",
+                  "id" : "http://data.beeldengeluid.nl/gtaa/167222",
+                  "name" : "puk, Pietje",
+                  "givenName" : "Pietje",
+                  "familyName" : "puk"
+                }""");
 
     }
 
 
     @Test
     public void json2() throws IOException {
-        String example = "{ \"objectType\" : \"person\", \"familyName\":\"Puk\",\"givenName\":\"Pietje\",\"notes\":[null,\"vanuit POMS voor: POW_00700386\"]}\n" +
-            "Name\n";
+        String example = """
+            { "objectType" : "person", "familyName":"Puk","givenName":"Pietje","notes":[null,"vanuit POMS voor: POW_00700386"]}
+            Name
+            """;
         GTAAPerson person = Jackson2Mapper.getLenientInstance().readValue(new StringReader(example), GTAAPerson.class);
         assertThat(person.getFamilyName()).isEqualTo("Puk");
         assertThat(person.getGivenName()).isEqualTo("Pietje");
@@ -55,12 +58,13 @@ public class GTAAPersonTest {
     public void jsonAsThesaurusObjectReturnsPerson() throws Exception {
 
 
-        GTAAConcept object = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
-            "  \"objectType\" : \"person\",\n" +
-            "  \"familyName\" : \"puk\",\n" +
-            "  \"name\" : \"null puk\",\n" +
-            "  \"prefLabel\" : \"null puk\"\n" +
-            "}"), GTAAConcept.class);
+        GTAAConcept object = Jackson2Mapper.getInstance().readValue(new StringReader("""
+            {
+              "objectType" : "person",
+              "familyName" : "puk",
+              "name" : "null puk",
+              "prefLabel" : "null puk"
+            }"""), GTAAConcept.class);
 
         assertThat(object).isInstanceOf(GTAAPerson.class);
 
@@ -78,15 +82,17 @@ public class GTAAPersonTest {
             .lastModified(LocalDateTime.of(2017, 9, 20, 10, 43, 0).atZone(BindingUtils.DEFAULT_ZONE).toInstant())
             .build();
 
-        JAXBTestUtil.roundTripAndSimilarAndEquals(person, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<gtaa:person gtaa:status=\"approved\" gtaa:lastModified=\"2017-09-20T10:43:00+02:00\" gtaa:id=\"http://gtaa/1234\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:oai=\"http://www.openarchives.org/OAI/2.0/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:gtaa=\"urn:vpro:gtaa:2017\" xmlns:openskos=\"http://openskos.org/xmlns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n" +
-            "    <gtaa:name>puk</gtaa:name>\n" +
-            "    <gtaa:familyName>puk</gtaa:familyName>\n" +
-            "    <gtaa:scopeNote>bla</gtaa:scopeNote>\n" +
-            "    <gtaa:knownAs>\n" +
-            "        <gtaa:familyName>pietje</gtaa:familyName>\n" +
-            "    </gtaa:knownAs>\n" +
-            "</gtaa:person>\n");
+        JAXBTestUtil.roundTripAndSimilarAndEquals(person, """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <gtaa:person gtaa:status="approved" gtaa:lastModified="2017-09-20T10:43:00+02:00" gtaa:id="http://gtaa/1234" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" xmlns:oai="http://www.openarchives.org/OAI/2.0/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:gtaa="urn:vpro:gtaa:2017" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+                <gtaa:name>puk</gtaa:name>
+                <gtaa:familyName>puk</gtaa:familyName>
+                <gtaa:scopeNote>bla</gtaa:scopeNote>
+                <gtaa:knownAs>
+                    <gtaa:familyName>pietje</gtaa:familyName>
+                </gtaa:knownAs>
+            </gtaa:person>
+            """);
 
     }
 

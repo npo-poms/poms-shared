@@ -18,19 +18,21 @@ public class MediaSortOrderListJsonTest {
 
     @Test
     public void test() throws IOException {
-        String example = "{\n" +
-            "    \"searches\" : {\n" +
-            "        \"text\" : \"Twee vandaag\"\n" +
-            "    },\n" +
-            "    \"sort\" : {\n" +
-            "        \"title\" :{\n" +
-            "            \"order\" : \"ASC\",\n" +
-            "            \"type\" : \"LEXICO\",\n" +
-            "            \"owner\" : \"BROADCASTER\"\n" +
-            "        },\n" +
-            "        \"sortDate\" : \"DESC\"\n" +
-            "    }\n" +
-            "}\n";
+        String example = """
+            {
+                "searches" : {
+                    "text" : "Twee vandaag"
+                },
+                "sort" : {
+                    "title" :{
+                        "order" : "ASC",
+                        "type" : "LEXICO",
+                        "owner" : "BROADCASTER"
+                    },
+                    "sortDate" : "DESC"
+                }
+            }
+            """;
 
         MediaForm form = Jackson2Mapper.getLenientInstance().readValue(example, MediaForm.class);
         assertThat(form.getSortFields()).hasSize(2);
@@ -40,25 +42,27 @@ public class MediaSortOrderListJsonTest {
 
     @Test
     public void testArray() throws IOException {
-        String example = "{\n" +
-            "    \"searches\" : {\n" +
-            "        \"text\" : \"Twee vandaag\"\n" +
-            "    },\n" +
-            "    /* json doesn't actually have a order, so we should support arrays too */\n" +
-            "    \"sort\" : [\n" +
-            "        {\n" +
-            "            \"field\": \"title\",\n" +
-            "            \"order\" : \"ASC\",\n" +
-            "            \"type\" : \"LEXICO\",\n" +
-            "            \"owner\" : \"BROADCASTER\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"field\": \"sortDate\",\n" +
-            "            \"order\" : \"DESC\"\n" +
-            "        },\n" +
-            "        \"lastModified\"\n" +
-            "    ]\n" +
-            "}\n";
+        String example = """
+            {
+                "searches" : {
+                    "text" : "Twee vandaag"
+                },
+                /* json doesn't actually have a order, so we should support arrays too */
+                "sort" : [
+                    {
+                        "field": "title",
+                        "order" : "ASC",
+                        "type" : "LEXICO",
+                        "owner" : "BROADCASTER"
+                    },
+                    {
+                        "field": "sortDate",
+                        "order" : "DESC"
+                    },
+                    "lastModified"
+                ]
+            }
+            """;
 
         MediaForm form = Jackson2Mapper.getLenientInstance().readValue(example, MediaForm.class);
         assertThat(form.getSortFields()).hasSize(3);

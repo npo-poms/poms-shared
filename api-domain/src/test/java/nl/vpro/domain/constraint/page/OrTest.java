@@ -19,10 +19,11 @@ public class OrTest {
     public void testGetConstraints() {
         Or in = new Or(new BroadcasterConstraint("VPRO"), new PortalConstraint("http://www.vpro.nl"));
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:or xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">\n" +
-                "    <page:broadcaster>VPRO</page:broadcaster>\n" +
-                "    <page:portal>http://www.vpro.nl</page:portal>\n" +
-                "</local:or>");
+            """
+                <local:or xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:local="uri:local">
+                    <page:broadcaster>VPRO</page:broadcaster>
+                    <page:portal>http://www.vpro.nl</page:portal>
+                </local:or>""");
 
         assertThat(out.getConstraints()).hasSize(2);
     }

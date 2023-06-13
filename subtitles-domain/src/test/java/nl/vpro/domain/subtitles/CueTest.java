@@ -24,15 +24,16 @@ public class CueTest {
             .content("bla bla bla")
             .settings(CueSettings.webvtt("A:left"))
             .build();
-        Jackson2TestUtil.roundTripAndSimilar(cue, "{\n" +
-            "  \"parent\" : \"MID_1234\",\n" +
-            "  \"sequence\" : 10,\n" +
-            "  \"identifier\" : \"cue tien\",\n" +
-            "  \"start\" : 20000,\n" +
-            "  \"end\" : 30000,\n" +
-            "  \"settings\" : \"A:left\",\n" +
-            "  \"content\" : \"bla bla bla\"\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(cue, """
+            {
+              "parent" : "MID_1234",
+              "sequence" : 10,
+              "identifier" : "cue tien",
+              "start" : 20000,
+              "end" : 30000,
+              "settings" : "A:left",
+              "content" : "bla bla bla"
+            }""");
     }
 
 

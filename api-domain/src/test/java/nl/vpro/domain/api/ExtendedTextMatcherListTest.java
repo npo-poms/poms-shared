@@ -25,10 +25,12 @@ public class ExtendedTextMatcherListTest {
                         new ExtendedTextMatcher("b", Match.SHOULD)),
                 Match.MUST);
         ExtendedTextMatcherList result = JAXBTestUtil.roundTripAndSimilar(textMatcherList,
-                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-                        + "<local:extendedTextMatcherList match=\"MUST\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n"
-                        + "    <api:matcher caseSensitive=\"false\" match=\"SHOULD\">a</api:matcher>\n"
-                        + "    <api:matcher match=\"SHOULD\">b</api:matcher>\n" + "</local:extendedTextMatcherList>");
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <local:extendedTextMatcherList match="MUST" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:matcher caseSensitive="false" match="SHOULD">a</api:matcher>
+                    <api:matcher match="SHOULD">b</api:matcher>
+                </local:extendedTextMatcherList>""");
 
         assertThat(result.asList().get(0).getMatch()).isEqualTo(Match.SHOULD);
         assertThat(result.asList().get(0).getMatchType()).isEqualTo(StandardMatchType.TEXT);

@@ -24,10 +24,11 @@ public class IdListTest {
     }
     @Test
     public void fromXml() {
-        IdList list = JAXB.unmarshal(new StringReader("<idList xmlns=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <id>a</id>\n" +
-            "    <id>b</id>\n" +
-            "</idList>"), IdList.class);
+        IdList list = JAXB.unmarshal(new StringReader("""
+            <idList xmlns="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <id>a</id>
+                <id>b</id>
+            </idList>"""), IdList.class);
         assertThat(list).isEqualTo(Arrays.asList("a", "b"));
     }
 
@@ -41,19 +42,20 @@ public class IdListTest {
     @Test
     public void xml() {
         IdList list = new IdList("a", "b");
-        JAXBTestUtil.roundTripAndSimilar(list, "<api:idList xmlns:api=\"urn:vpro:api:2013\" >\n" +
-            "    <api:id>a</api:id>\n" +
-            "    <api:id>b</api:id>\n" +
-            "</api:idList>");
+        JAXBTestUtil.roundTripAndSimilar(list, """
+            <api:idList xmlns:api="urn:vpro:api:2013" >
+                <api:id>a</api:id>
+                <api:id>b</api:id>
+            </api:idList>""");
 
     }
 
     @Test
     public void fromJson() throws IOException {
-        IdList list = Jackson2Mapper.getInstance().readValue(new StringReader("[\"a\",\"b\"]" +
-            "    <id>a</id>\n" +
-            "    <id>b</id>\n" +
-            "</idList>"), IdList.class);
+        IdList list = Jackson2Mapper.getInstance().readValue(new StringReader("""
+            ["a","b"]    <id>a</id>
+                <id>b</id>
+            </idList>"""), IdList.class);
         assertThat(list).isEqualTo(Arrays.asList("a", "b"));
     }
 }

@@ -35,10 +35,11 @@ public class SubtitlesTest {
 
 
         JAXBTestUtil.roundTripAndSimilar(subtitles,
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<subtitles:subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\" creationDate=\"1970-01-01T01:00:00+01:00\" lastModified=\"1970-01-01T01:00:00+01:00\" type=\"CAPTION\" xml:lang=\"nl-NL\" owner=\"BROADCASTER\" workflow=\"FOR_PUBLICATION\" cueCount=\"1\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-                "    <subtitles:content format=\"WEBVTT\" charset=\"UTF-8\">V0VCVlRUCgoxCjAwOjAwOjAwLjAwMCAtLT4gMDA6MDE6MDQuMDAwCmJsYQoK</subtitles:content>\n" +
-                "</subtitles:subtitles>");
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <subtitles:subtitles mid="VPRO_1234" offset="P0DT0H2M0.000S" creationDate="1970-01-01T01:00:00+01:00" lastModified="1970-01-01T01:00:00+01:00" type="CAPTION" xml:lang="nl-NL" owner="BROADCASTER" workflow="FOR_PUBLICATION" cueCount="1" xmlns:subtitles="urn:vpro:media:subtitles:2009" xmlns:shared="urn:vpro:shared:2009">
+                    <subtitles:content format="WEBVTT" charset="UTF-8">V0VCVlRUCgoxCjAwOjAwOjAwLjAwMCAtLT4gMDA6MDE6MDQuMDAwCmJsYQoK</subtitles:content>
+                </subtitles:subtitles>""");
     }
 
     @Test
@@ -61,32 +62,35 @@ public class SubtitlesTest {
     public void json() {
         Subtitles subtitles = Subtitles.webvtt("VPRO_1234",
             Duration.ofMillis(2 * 60 * 1000), NETHERLANDISH,
-            "WEBVTT\n" +
-                "\n" +
-                "1\n" +
-                "00:00:02.200 --> 00:00:04.150\n" +
-                "888\n" +
-                "\n");
+            """
+                WEBVTT
+
+                1
+                00:00:02.200 --> 00:00:04.150
+                888
+
+                """);
         subtitles.setCreationInstant(Instant.ofEpochMilli(0));
         subtitles.setLastModifiedInstant(Instant.ofEpochMilli(0));
         assertThat(subtitles.getCueCount()).isEqualTo(1);
 
-        Jackson2TestUtil.roundTripAndSimilar(subtitles, "{\n" +
-            "  \"mid\" : \"VPRO_1234\",\n" +
-            "  \"offset\" : 120000,\n" +
-            "  \"content\" : {\n" +
-            "    \"format\" : \"WEBVTT\",\n" +
-            "    \"value\" : \"V0VCVlRUCgoxCjAwOjAwOjAyLjIwMCAtLT4gMDA6MDA6MDQuMTUwCjg4OAoK\",\n" +
-            "    \"charset\" : \"UTF-8\"\n" +
-            "  },\n" +
-            "  \"creationDate\" : \"1970-01-01T01:00:00+01:00\",\n" +
-            "  \"lastModified\" : \"1970-01-01T01:00:00+01:00\",\n" +
-            "  \"type\" : \"CAPTION\",\n" +
-            "  \"owner\" : \"BROADCASTER\",\n" +
-            "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
-            "  \"lang\" : \"nl-NL\",\n" +
-            "  \"cueCount\" : 1\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(subtitles, """
+            {
+              "mid" : "VPRO_1234",
+              "offset" : 120000,
+              "content" : {
+                "format" : "WEBVTT",
+                "value" : "V0VCVlRUCgoxCjAwOjAwOjAyLjIwMCAtLT4gMDA6MDA6MDQuMTUwCjg4OAoK",
+                "charset" : "UTF-8"
+              },
+              "creationDate" : "1970-01-01T01:00:00+01:00",
+              "lastModified" : "1970-01-01T01:00:00+01:00",
+              "type" : "CAPTION",
+              "owner" : "BROADCASTER",
+              "workflow" : "FOR_PUBLICATION",
+              "lang" : "nl-NL",
+              "cueCount" : 1
+            }""");
     }
 
     @Test
@@ -102,19 +106,19 @@ public class SubtitlesTest {
                 )
             .iterator()
         );
-        Jackson2TestUtil.roundTripAndSimilar(subtitles, "{" +
-            "  \"mid\" : \"mid\",\n" +
-            "  \"content\" : {\n" +
-            "    \"format\" : \"WEBVTT\",\n" +
-            "    \"value\" : \"V0VCVlRUCgoxCjAwOjAwOjAwLjAwMCAtLT4gMDA6MDE6MDQuMDAwCmJsYQoK\",\n" +
-            "    \"charset\" : \"UTF-8\"\n" +
-            "  },\n" +
-            "  \"type\" : \"CAPTION\",\n" +
-            "   \"owner\" : \"BROADCASTER\",\n" +
-            "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
-            "  \"lang\" : \"nl\",\n" +
-            "  \"cueCount\" : 1\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(subtitles, """
+            {  "mid" : "mid",
+              "content" : {
+                "format" : "WEBVTT",
+                "value" : "V0VCVlRUCgoxCjAwOjAwOjAwLjAwMCAtLT4gMDA6MDE6MDQuMDAwCmJsYQoK",
+                "charset" : "UTF-8"
+              },
+              "type" : "CAPTION",
+               "owner" : "BROADCASTER",
+              "workflow" : "FOR_PUBLICATION",
+              "lang" : "nl",
+              "cueCount" : 1
+            }""");
 
     }
 

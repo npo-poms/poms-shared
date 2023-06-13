@@ -26,13 +26,14 @@ public class WorkflowExecutionRequestTest {
                 .build();
 
         WorkflowExecutionRequest rounded = Jackson2TestUtil.roundTripAndSimilar(workflowExecutionRequest,
-                "{\n" +
-                        "  \"mid\" : \"AB_123132\",\n" +
-                        "  \"filename\" : \"bla.mp3\",\n" +
-                        "  \"encryption\" : \"DRM\",\n" +
-                        "  \"priority\" : \"NORMAL\",\n" +
-                        "  \"type\" : \"VIDEO\",\n" +
-                        "  \"platforms\" : [ \"internetvod\", \"tvvod\" ]\n" +
-                        "}");
+            """
+                {
+                  "mid" : "AB_123132",
+                  "filename" : "bla.mp3",
+                  "encryption" : "DRM",
+                  "priority" : "NORMAL",
+                  "type" : "VIDEO",
+                  "platforms" : [ "internetvod", "tvvod" ]
+                }""");
     }
 }

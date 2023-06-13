@@ -62,9 +62,10 @@ public class ProfileTest {
         Profile in = new Profile("media", new ProfileDefinition<>(), null);
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<profile timestamp=\"1970-01-01T01:00:00+01:00\" name=\"media\" xmlns=\"urn:vpro:api:profile:2013\" xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\">\n" +
-                "    <pageProfile/>\n" +
-                "</profile>");
+            """
+                <profile timestamp="1970-01-01T01:00:00+01:00" name="media" xmlns="urn:vpro:api:profile:2013" xmlns:constraint="urn:vpro:api:constraint" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013">
+                    <pageProfile/>
+                </profile>""");
         assertNotNull(out.getPageProfile());
         assertThat((Predicate<Page>) out.getPageProfile()).isInstanceOf(ProfileDefinition.class);
     }
@@ -74,9 +75,10 @@ public class ProfileTest {
         Profile in = new Profile("media", null, new ProfileDefinition<>());
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<profile timestamp=\"1970-01-01T01:00:00+01:00\" name=\"media\" xmlns=\"urn:vpro:api:profile:2013\" xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\">\n" +
-                "    <mediaProfile/>\n" +
-                "</profile>");
+            """
+                <profile timestamp="1970-01-01T01:00:00+01:00" name="media" xmlns="urn:vpro:api:profile:2013" xmlns:constraint="urn:vpro:api:constraint" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013">
+                    <mediaProfile/>
+                </profile>""");
         assertNotNull(out.getMediaProfile());
         assertThat((Predicate<MediaObject>) out.getMediaProfile()).isInstanceOf(ProfileDefinition.class);
     }
@@ -86,13 +88,14 @@ public class ProfileTest {
         Profile in = new Profile("agerating", null, new ProfileDefinition<>(new Filter(new AgeRatingConstraint(AgeRating._6))));
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<profile timestamp=\"1970-01-01T01:00:00+01:00\" name=\"agerating\" xmlns=\"urn:vpro:api:profile:2013\" xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\">\n" +
-            "    <mediaProfile>\n" +
-            "        <media:filter>\n" +
-            "            <media:ageRating>6</media:ageRating>\n" +
-            "        </media:filter>\n" +
-            "    </mediaProfile>\n" +
-            "</profile>");
+            """
+                <profile timestamp="1970-01-01T01:00:00+01:00" name="agerating" xmlns="urn:vpro:api:profile:2013" xmlns:constraint="urn:vpro:api:constraint" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013">
+                    <mediaProfile>
+                        <media:filter>
+                            <media:ageRating>6</media:ageRating>
+                        </media:filter>
+                    </mediaProfile>
+                </profile>""");
         assertNotNull(out.getMediaProfile());
         assertThat((Predicate<MediaObject>) out.getMediaProfile()).isInstanceOf(ProfileDefinition.class);
     }
@@ -102,13 +105,14 @@ public class ProfileTest {
         Profile in = new Profile("genre", null, new ProfileDefinition<>(new Filter(new GenreConstraint("Jeugd"))));
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
-                "<profile timestamp=\"1970-01-01T01:00:00+01:00\" name=\"genre\" xmlns=\"urn:vpro:api:profile:2013\" xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\">\n" +
-                        "    <mediaProfile>\n" +
-                        "        <media:filter>\n" +
-                        "            <media:genre>Jeugd</media:genre>\n" +
-                        "        </media:filter>\n" +
-                        "    </mediaProfile>\n" +
-                "</profile>");
+            """
+                <profile timestamp="1970-01-01T01:00:00+01:00" name="genre" xmlns="urn:vpro:api:profile:2013" xmlns:constraint="urn:vpro:api:constraint" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013">
+                    <mediaProfile>
+                        <media:filter>
+                            <media:genre>Jeugd</media:genre>
+                        </media:filter>
+                    </mediaProfile>
+                </profile>""");
         assertNotNull(out.getMediaProfile());
         assertThat((Predicate<MediaObject>) out.getMediaProfile()).isInstanceOf(ProfileDefinition.class);
     }
@@ -127,14 +131,15 @@ public class ProfileTest {
 
     @Test
     public void parseScheduleEvent() {
-        String in = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<profile:profile xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:profile=\"urn:vpro:api:profile:2013\" name=\"test-profiel\">\n" +
-            "  <profile:mediaProfile>\n" +
-            "    <media:filter>\n" +
-            "      <media:scheduleEvent operator=\"LT\" date=\"two years ago midnight\" />\n" +
-            "    </media:filter>\n" +
-            "  </profile:mediaProfile>\n" +
-            "</profile:profile>";
+        String in = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <profile:profile xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:profile="urn:vpro:api:profile:2013" name="test-profiel">
+              <profile:mediaProfile>
+                <media:filter>
+                  <media:scheduleEvent operator="LT" date="two years ago midnight" />
+                </media:filter>
+              </profile:mediaProfile>
+            </profile:profile>""";
 
         Profile profile = JAXB.unmarshal(new StringReader(in), Profile.class);
         ProfileDefinition<MediaObject> mediaProfile = profile.getMediaProfile();
@@ -179,80 +184,85 @@ public class ProfileTest {
     }
 
     Profile getHumanProfile() {
-        String in = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<profile xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns=\"urn:vpro:api:profile:2013\" timestamp=\"2015-02-06T08:30:08.486+01:00\" name=\"human\">\n" +
-            "  <pageProfile since=\"0\">\n" +
-            "    <page:filter>\n" +
-            "      <page:portal>HUMANNL</page:portal>\n" +
-            "    </page:filter>\n" +
-            "  </pageProfile>\n" +
-            "  <mediaProfile since=\"5680508\">\n" +
-            "    <media:filter>\n" +
-            "      <media:and>\n" +
-            "        <media:or>\n" +
-            "          <media:broadcaster>HUMA</media:broadcaster>\n" +
-            "          <media:broadcaster>HUMAN</media:broadcaster>\n" +
-            "        </media:or>\n" +
-            "        <media:hasImage/>\n" +
-            "        <media:or>\n" +
-            "          <media:hasLocation/>\n" +
-            "          <media:type>SEGMENT</media:type>\n" +
-            "        </media:or>\n" +
-            "      </media:and>\n" +
-            "    </media:filter>\n" +
-            "  </mediaProfile>\n" +
-            "</profile>\n";
+        String in = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <profile xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:constraint="urn:vpro:api:constraint" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns="urn:vpro:api:profile:2013" timestamp="2015-02-06T08:30:08.486+01:00" name="human">
+              <pageProfile since="0">
+                <page:filter>
+                  <page:portal>HUMANNL</page:portal>
+                </page:filter>
+              </pageProfile>
+              <mediaProfile since="5680508">
+                <media:filter>
+                  <media:and>
+                    <media:or>
+                      <media:broadcaster>HUMA</media:broadcaster>
+                      <media:broadcaster>HUMAN</media:broadcaster>
+                    </media:or>
+                    <media:hasImage/>
+                    <media:or>
+                      <media:hasLocation/>
+                      <media:type>SEGMENT</media:type>
+                    </media:or>
+                  </media:and>
+                </media:filter>
+              </mediaProfile>
+            </profile>
+            """;
         return JAXB.unmarshal(new StringReader(in), Profile.class);
     }
 
     Profile getZappProfile() {
-        String in = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<profile:profile xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:profile=\"urn:vpro:api:profile:2013\" name=\"zappnet\">\n" +
-            "  <profile:pageProfile>\n" +
-            "    <page:filter>\n" +
-            "      <page:portal>ZAPP</page:portal>\n" +
-            "    </page:filter>\n" +
-            "  </profile:pageProfile>\n" +
-            "  <profile:mediaProfile>\n" +
-            "    <media:filter>\n" +
-            "      <media:and>\n" +
-            "        <media:hasImage/>\n" +
-            "        <media:or>\n" +
-            "          <media:hasLocation/>\n" +
-            "          <media:type>SEGMENT</media:type>\n" +
-            "        </media:or>\n" +
-            "        <media:not>\n" +
-            "          <media:isExclusive />\n" +
-            "        </media:not>\n" +
-            "        <media:or>\n" +
-            "          <media:not><media:hasAgeRating /></media:not>\n" +
-            "          <media:ageRating>6</media:ageRating>\n" +
-            "          <media:ageRating>9</media:ageRating>\n" +
-            "          <media:ageRating>ALL</media:ageRating>\n" +
-            "        </media:or>\n" +
-            "      </media:and>\n" +
-            "    </media:filter>\n" +
-            "  </profile:mediaProfile>\n" +
-            "</profile:profile>\n";
+        String in = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <profile:profile xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:profile="urn:vpro:api:profile:2013" name="zappnet">
+              <profile:pageProfile>
+                <page:filter>
+                  <page:portal>ZAPP</page:portal>
+                </page:filter>
+              </profile:pageProfile>
+              <profile:mediaProfile>
+                <media:filter>
+                  <media:and>
+                    <media:hasImage/>
+                    <media:or>
+                      <media:hasLocation/>
+                      <media:type>SEGMENT</media:type>
+                    </media:or>
+                    <media:not>
+                      <media:isExclusive />
+                    </media:not>
+                    <media:or>
+                      <media:not><media:hasAgeRating /></media:not>
+                      <media:ageRating>6</media:ageRating>
+                      <media:ageRating>9</media:ageRating>
+                      <media:ageRating>ALL</media:ageRating>
+                    </media:or>
+                  </media:and>
+                </media:filter>
+              </profile:mediaProfile>
+            </profile:profile>
+            """;
         log.info(in);
         return JAXB.unmarshal(new StringReader(in), Profile.class);
     }
 
     public Profile getNpoStartProfile() {
-        String in = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<profile xmlns:constraint=\"urn:vpro:api:constraint:2014\"\n" +
-            "         xmlns=\"urn:vpro:api:profile:2013\"\n" +
-            "         xmlns:media=\"urn:vpro:api:constraint:media:2013\"\n" +
-            "         xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:api:constraint:page:2013\"\n" +
-            "         name=\"npostart\">\n" +
-            "  <mediaProfile>\n" +
-            "    <media:filter>\n" +
-            "      <media:not>\n" +
-            "        <media:isExclusive/>\n" +
-            "      </media:not>\n" +
-            "    </media:filter>\n" +
-            "  </mediaProfile>\n" +
-            "</profile>";
+        String in = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <profile xmlns:constraint="urn:vpro:api:constraint:2014"
+                     xmlns="urn:vpro:api:profile:2013"
+                     xmlns:media="urn:vpro:api:constraint:media:2013"
+                     xmlns:shared="urn:vpro:shared:2009" xmlns:page="urn:vpro:api:constraint:page:2013"
+                     name="npostart">
+              <mediaProfile>
+                <media:filter>
+                  <media:not>
+                    <media:isExclusive/>
+                  </media:not>
+                </media:filter>
+              </mediaProfile>
+            </profile>""";
         return JAXB.unmarshal(new StringReader(in), Profile.class);
 
     }

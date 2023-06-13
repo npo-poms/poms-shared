@@ -25,16 +25,17 @@ public class RelationFacetListTest {
 
         RelationFacetList list = new RelationFacetList(Collections.singletonList(facet));
 
-        list = JAXBTestUtil.roundTripAndSimilar(list, "<local:relationFacetList xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-            "    <api:facet sort=\"VALUE_ASC\">\n" +
-            "        <api:max>24</api:max>\n" +
-            "        <api:subSearch>\n" +
-            "            <api:broadcasters match=\"MUST\">\n" +
-            "                <api:matcher>VPRO</api:matcher>\n" +
-            "            </api:broadcasters>\n" +
-            "        </api:subSearch>\n" +
-            "    </api:facet>\n" +
-            "</local:relationFacetList>");
+        list = JAXBTestUtil.roundTripAndSimilar(list, """
+            <local:relationFacetList xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                <api:facet sort="VALUE_ASC">
+                    <api:max>24</api:max>
+                    <api:subSearch>
+                        <api:broadcasters match="MUST">
+                            <api:matcher>VPRO</api:matcher>
+                        </api:broadcasters>
+                    </api:subSearch>
+                </api:facet>
+            </local:relationFacetList>""");
 
         assertThat(list.facets).isNotEmpty();
         assertNotNull(list.facets.get(0).getSubSearch());
@@ -149,29 +150,30 @@ public class RelationFacetListTest {
         listSubSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO",Match.SHOULD), new TextMatcher("EO", Match.NOT)));
         list.setSubSearch(listSubSearch);
 
-        String expected = "{\n" +
-            "  \"value\" : {\n" +
-            "    \"threshold\" : 0,\n" +
-            "    \"sort\" : \"VALUE_ASC\",\n" +
-            "    \"max\" : 24,\n" +
-            "    \"name\" : \"myrelation\",\n" +
-            "    \"subSearch\" : {\n" +
-            "      \"broadcasters\" : [ \"VPRO\", {\n" +
-            "        \"value\" : \"EO\",\n" +
-            "        \"match\" : \"NOT\"\n" +
-            "      } ]\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"subSearch\" : {\n" +
-            "    \"broadcasters\" : [ {\n" +
-            "      \"value\" : \"VPRO\",\n" +
-            "      \"match\" : \"SHOULD\"\n" +
-            "    }, {\n" +
-            "      \"value\" : \"EO\",\n" +
-            "      \"match\" : \"NOT\"\n" +
-            "    } ]\n" +
-            "  }\n" +
-            "}";
+        String expected = """
+            {
+              "value" : {
+                "threshold" : 0,
+                "sort" : "VALUE_ASC",
+                "max" : 24,
+                "name" : "myrelation",
+                "subSearch" : {
+                  "broadcasters" : [ "VPRO", {
+                    "value" : "EO",
+                    "match" : "NOT"
+                  } ]
+                }
+              },
+              "subSearch" : {
+                "broadcasters" : [ {
+                  "value" : "VPRO",
+                  "match" : "SHOULD"
+                }, {
+                  "value" : "EO",
+                  "match" : "NOT"
+                } ]
+              }
+            }""";
         String actual = Jackson2Mapper.getInstance().writeValueAsString(list);
         Jackson2TestUtil.assertThatJson(actual).isSimilarTo(expected);
 

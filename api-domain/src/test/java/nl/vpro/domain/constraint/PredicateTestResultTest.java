@@ -59,9 +59,10 @@ public class PredicateTestResultTest {
     public void xml() {
         PredicateTestResult result =  Constraints.<String>alwaysFalse().testWithReason("bla");
 
-        PredicateTestResult rounded = JAXBTestUtil.roundTripAndSimilar(result, "<local:simplePredicateTestResult applies=\"false\" reason=\"AlwaysFalse\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:local=\"uri:local\">\n" +
-            "    <constraint:description xml:lang=\"en_US\">Never matches</constraint:description>\n" +
-            "</local:simplePredicateTestResult>");
+        PredicateTestResult rounded = JAXBTestUtil.roundTripAndSimilar(result, """
+            <local:simplePredicateTestResult applies="false" reason="AlwaysFalse" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:local="uri:local">
+                <constraint:description xml:lang="en_US">Never matches</constraint:description>
+            </local:simplePredicateTestResult>""");
 
         System.out.println(rounded.toString());
 
@@ -76,15 +77,16 @@ public class PredicateTestResultTest {
 
         log.info("{}", Locale.getDefault());
 
-        Jackson2TestUtil.roundTripAndSimilar(result, "{\n" +
-            "  \"objectType\" : \"simple\",\n" +
-            "  \"reason\" : \"AlwaysFalse\",\n" +
-            "  \"applies\" : false,\n" +
-            "  \"description\" : {\n" +
-            "    \"value\" : \"Never matches\",\n" +
-            "    \"lang\" : \"en_US\"\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(result, """
+            {
+              "objectType" : "simple",
+              "reason" : "AlwaysFalse",
+              "applies" : false,
+              "description" : {
+                "value" : "Never matches",
+                "lang" : "en_US"
+              }
+            }""");
 
     }
 

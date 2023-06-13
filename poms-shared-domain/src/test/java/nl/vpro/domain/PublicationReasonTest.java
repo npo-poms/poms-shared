@@ -23,10 +23,11 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
     @Test
     public void marshall() {
         PublicationReason reason = new PublicationReason("foobar", Instant.EPOCH);
-        Jackson2TestUtil.roundTripAndSimilar(reason, "{\n" +
-            "  \"value\" : \"foobar\",\n" +
-            "  \"publishDate\" : 0\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(reason, """
+            {
+              "value" : "foobar",
+              "publishDate" : 0
+            }""");
     }
 
     @Test
@@ -35,12 +36,13 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
         ObjectNode node = Jackson2Mapper.getInstance().createObjectNode();
         node.putPOJO("test", reason);
 
-        Jackson2TestUtil.roundTripAndSimilar(node, "{\n" +
-            "  \"test\" : {\n" +
-            "    \"value\" : \"foobar\",\n" +
-            "    \"publishDate\" : 0\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(node, """
+            {
+              "test" : {
+                "value" : "foobar",
+                "publishDate" : 0
+              }
+            }""");
     }
     static List<PublicationReason> reasons = List.of(
                 new PublicationReason("a", ofEpochMilli(1)),

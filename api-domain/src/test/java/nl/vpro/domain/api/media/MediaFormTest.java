@@ -52,13 +52,14 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
         in.setHighlight(true);
         in.setSortFields(list);
         MediaForm out = roundTripAndSimilar(in,
-            "<api:mediaForm highlight=\"true\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                "    <api:sortFields>\n" +
-                "        <api:sort order=\"DESC\">sortDate</api:sort>\n" +
-                "        <api:sort order=\"ASC\">title</api:sort>\n" +
-                "        <api:titleSort type=\"LEXICO\" order=\"ASC\" />\n" +
-                "    </api:sortFields>\n" +
-                "</api:mediaForm>"
+            """
+                <api:mediaForm highlight="true" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                    <api:sortFields>
+                        <api:sort order="DESC">sortDate</api:sort>
+                        <api:sort order="ASC">title</api:sort>
+                        <api:titleSort type="LEXICO" order="ASC" />
+                    </api:sortFields>
+                </api:mediaForm>"""
         );
         assertThat(out.getSortFields()).hasSize(3);
     }
@@ -72,17 +73,18 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
         list.add(TitleSortOrder.builder().textualType(TextualType.LEXICO).build());
         in.setHighlight(true);
         in.setSortFields(list);
-        MediaForm result = Jackson2TestUtil.roundTripAndSimilarAndEquals(in, "{\n" +
-            "  \"sort\" : [ {\n" +
-            "    \"order\" : \"DESC\",\n" +
-            "    \"field\" : \"sortDate\"\n" +
-            "  }, \"title\", {\n" +
-            "    \"order\" : \"ASC\",\n" +
-            "    \"type\" : \"LEXICO\",\n" +
-            "    \"field\" : \"title\"\n" +
-            "  } ],\n" +
-            "  \"highlight\" : true\n" +
-            "}");
+        MediaForm result = Jackson2TestUtil.roundTripAndSimilarAndEquals(in, """
+            {
+              "sort" : [ {
+                "order" : "DESC",
+                "field" : "sortDate"
+              }, "title", {
+                "order" : "ASC",
+                "type" : "LEXICO",
+                "field" : "title"
+              } ],
+              "highlight" : true
+            }""");
         assertThat(result.getSortFields()).hasSize(3);
         assertThat(result.getSortFields().get(0).getField()).isEqualTo(MediaSortField.sortDate);
         assertThat(result).isEqualTo(in);
@@ -99,13 +101,14 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
         list.put(MediaSortField.creationDate, Order.DESC);
         in.setHighlight(true);
         in.setSortFields(list);
-        MediaForm result = Jackson2TestUtil.roundTripAndSimilarAndEquals(in, "{\n" +
-            "  \"sort\" : {\n" +
-            "    \"sortDate\" : \"DESC\",\n" +
-            "    \"creationDate\" : \"DESC\"\n" +
-            "  },\n" +
-            "  \"highlight\" : true\n" +
-            "}");
+        MediaForm result = Jackson2TestUtil.roundTripAndSimilarAndEquals(in, """
+            {
+              "sort" : {
+                "sortDate" : "DESC",
+                "creationDate" : "DESC"
+              },
+              "highlight" : true
+            }""");
         assertThat(result.getSortFields()).hasSize(2);
         assertThat(result.getSortFields().get(0).getField()).isEqualTo(MediaSortField.sortDate);
         assertThat(result).isEqualTo(in);
@@ -116,10 +119,12 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
     @Test
     public void parseWithEmptySort() throws Exception {
-        String example = "{\n" +
-            "  \"sort\" : {\n" +
-            "  }\n" +
-            "}\n";
+        String example = """
+            {
+              "sort" : {
+              }
+            }
+            """;
         MediaForm form = Jackson2Mapper.getInstance().readValue(new StringReader(example), MediaForm.class);
         assertThat(form.getSortFields()).isEmpty();
     }
@@ -128,13 +133,14 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     public void testGetTags() {
         MediaForm in = MediaFormBuilder.form().tags(Match.SHOULD, new Tag("XML")).build();
         MediaForm out = roundTripAndSimilar(in,
-                "<api:mediaForm  xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                    "    <api:searches>\n" +
-                    "        <api:tags match=\"SHOULD\">\n" +
-                    "            <api:matcher match=\"SHOULD\">XML</api:matcher>\n" +
-                    "        </api:tags>\n" +
-                    "    </api:searches>\n" +
-                    "</api:mediaForm>"
+            """
+                <api:mediaForm  xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                    <api:searches>
+                        <api:tags match="SHOULD">
+                            <api:matcher match="SHOULD">XML</api:matcher>
+                        </api:tags>
+                    </api:searches>
+                </api:mediaForm>"""
         );
         assertThat(out.getSearches().getTags().size()).isEqualTo(1);
         assertThat(out.getSearches().getTags().get(0).getMatch()).isEqualTo(Match.SHOULD);
@@ -149,72 +155,76 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
                 LocalDate.of(2015, 1, 27).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant())
         ).build();
         MediaForm out = roundTripAndSimilar(in,
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<api:mediaForm xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                "    <api:searches>\n" +
-                "        <api:scheduleEvents>\n" +
-                "            <api:begin>2015-01-26T00:00:00+01:00</api:begin>\n" +
-                "            <api:end>2015-01-27T00:00:00+01:00</api:end>\n" +
-                "            <api:channel>NED3</api:channel>\n" +
-                "        </api:scheduleEvents>\n" +
-                "    </api:searches>\n" +
-                "    <api:facets>\n" +
-                "        <api:broadcasters sort=\"VALUE_ASC\">\n" +
-                "            <api:threshold>0</api:threshold>\n" +
-                "            <api:max>24</api:max>\n" +
-                "        </api:broadcasters>\n" +
-                "    </api:facets>\n" +
-                "</api:mediaForm>\n");
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <api:mediaForm xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                    <api:searches>
+                        <api:scheduleEvents>
+                            <api:begin>2015-01-26T00:00:00+01:00</api:begin>
+                            <api:end>2015-01-27T00:00:00+01:00</api:end>
+                            <api:channel>NED3</api:channel>
+                        </api:scheduleEvents>
+                    </api:searches>
+                    <api:facets>
+                        <api:broadcasters sort="VALUE_ASC">
+                            <api:threshold>0</api:threshold>
+                            <api:max>24</api:max>
+                        </api:broadcasters>
+                    </api:facets>
+                </api:mediaForm>
+                """);
         assertThat(out.getFacets().getBroadcasters().getSort()).isEqualTo(FacetOrder.VALUE_ASC);
     }
 
     @Test
     public void testGetFacetsBackwards() {
-        MediaForm out = JAXB.unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<mediaForm xmlns=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" highlight=\"false\">\n" +
-            "    <searches>\n" +
-            "        <scheduleEvents inclusiveEnd=\"true\">\n" +
-            "            <begin>2015-01-26T00:00:00+01:00</begin>\n" +
-            "            <end>2015-01-27T00:00:00+01:00</end>\n" +
-            "            <channel>NED3</channel>\n" +
-            "        </scheduleEvents>\n" +
-            "    </searches>\n" +
-            "    <facets>\n" +
-            "        <broadcasters sort=\"REVERSE_TERM\">\n" +
-            "            <threshold>0</threshold>\n" +
-            "            <offset>0</offset>\n" +
-            "            <max>24</max>\n" +
-            "        </broadcasters>\n" +
-            "    </facets>\n" +
-            "</mediaForm>"), MediaForm.class);
+        MediaForm out = JAXB.unmarshal(new StringReader("""
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <mediaForm xmlns="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" highlight="false">
+                <searches>
+                    <scheduleEvents inclusiveEnd="true">
+                        <begin>2015-01-26T00:00:00+01:00</begin>
+                        <end>2015-01-27T00:00:00+01:00</end>
+                        <channel>NED3</channel>
+                    </scheduleEvents>
+                </searches>
+                <facets>
+                    <broadcasters sort="REVERSE_TERM">
+                        <threshold>0</threshold>
+                        <offset>0</offset>
+                        <max>24</max>
+                    </broadcasters>
+                </facets>
+            </mediaForm>"""), MediaForm.class);
         assertThat(out.getFacets().getBroadcasters().getSort()).isEqualTo(FacetOrder.VALUE_DESC);
     }
 
 
     @Test
     public void testFilterTags() throws IOException {
-        String tagForm = "{\n" +
-            "    \"facets\": {\n" +
-            "        \"tags\": {\n" +
-            "            \"filter\": {\n" +
-            "                \"tags\":  {\n" +
-            "                    \"matchType\": \"WILDCARD\",\n" +
-            "                    \"match\": \"MUST\",\n" +
-            "                    \"value\": \"Lief*\"\n" +
-            "                }\n" +
-            "            },\n" +
-            "            \"max\": 10000\n" +
-            "        }\n" +
-            "    },\n" +
-            "    \"searches\": {\n" +
-            "        \"tags\": {\n" +
-            "            \"matchType\": \"WILDCARD\",\n" +
-            "            \"match\": \"SHOULD\",\n" +
-            "            \"value\": \"Lief*\"\n" +
-            "        }\n" +
-            "\n" +
-            "    }\n" +
-            "}";
+        String tagForm = """
+            {
+                "facets": {
+                    "tags": {
+                        "filter": {
+                            "tags":  {
+                                "matchType": "WILDCARD",
+                                "match": "MUST",
+                                "value": "Lief*"
+                            }
+                        },
+                        "max": 10000
+                    }
+                },
+                "searches": {
+                    "tags": {
+                        "matchType": "WILDCARD",
+                        "match": "SHOULD",
+                        "value": "Lief*"
+                    }
+
+                }
+            }""";
         MediaForm form = Jackson2Mapper.getInstance().readValue(tagForm, MediaForm.class);
         assertThat(form.getSearches().getTags().get(0).getValue()).isEqualTo("Lief*");
         assertThat(form.getSearches().getTags().get(0).getMatch()).isEqualTo(Match.SHOULD);
@@ -225,33 +235,35 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
     @Test
     public void testSubSearch() {
-        String example = "{\n" +
-            "    \"facets\": {\n" +
-            "        \"relations\":  {\n" +
-            "            \"subSearch\": {\n" +
-            "                \"broadcasters\": \"VPRO\"\n" +
-            "            },\n" +
-            "            \"value\": [\n" +
-            "                {\n" +
-            "                    \"name\": \"labels\",\n" +
-            "                    \"sort\": \"COUNT_DESC\",\n" +
-            "                    \"max\": 3,\n" +
-            "                    \"subSearch\": {\n" +
-            "                        \"types\": \"LABEL\"\n" +
-            "                    }\n" +
-            "                },\n" +
-            "                {\n" +
-            "                    \"name\": \"artiesten\",\n" +
-            "                    \"sort\": \"COUNT_DESC\",\n" +
-            "                    \"max\": 3,\n" +
-            "                    \"subSearch\": {\n" +
-            "                        \"types\": \"ARTIST\"\n" +
-            "                    }\n" +
-            "                }\n" +
-            "            ]\n" +
-            "        }\n" +
-            "    }\n" +
-            "}\n";
+        String example = """
+            {
+                "facets": {
+                    "relations":  {
+                        "subSearch": {
+                            "broadcasters": "VPRO"
+                        },
+                        "value": [
+                            {
+                                "name": "labels",
+                                "sort": "COUNT_DESC",
+                                "max": 3,
+                                "subSearch": {
+                                    "types": "LABEL"
+                                }
+                            },
+                            {
+                                "name": "artiesten",
+                                "sort": "COUNT_DESC",
+                                "max": 3,
+                                "subSearch": {
+                                    "types": "ARTIST"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+            """;
         MediaForm form = assertThatJson(MediaForm.class, example).isSimilarTo(example).get();
         assertThat(form.getFacets()).isNotNull();
         assertThat(form.getFacets().getRelations()).isNotNull();
@@ -269,21 +281,23 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     @Test
     public void testFuzzinessBinding() {
         MediaForm form = MediaForm.builder().fuzzyText("bla").build();
-        roundTripAndSimilar(form, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:searches>\n" +
-            "        <api:text fuzziness=\"AUTO\" match=\"SHOULD\">bla</api:text>\n" +
-            "    </api:searches>\n" +
-            "</api:mediaForm>");
+        roundTripAndSimilar(form, """
+            <api:mediaForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <api:searches>
+                    <api:text fuzziness="AUTO" match="SHOULD">bla</api:text>
+                </api:searches>
+            </api:mediaForm>""");
 
-        Jackson2TestUtil.roundTripAndSimilar(form, "{\n" +
-            "  \"searches\" : {\n" +
-            "    \"text\" : {\n" +
-            "      \"value\" : \"bla\",\n" +
-            "      \"match\" : \"SHOULD\",\n" +
-            "      \"fuzziness\" : \"AUTO\"\n" +
-            "    }\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(form, """
+            {
+              "searches" : {
+                "text" : {
+                  "value" : "bla",
+                  "match" : "SHOULD",
+                  "fuzziness" : "AUTO"
+                }
+              }
+            }""");
 
 
     }
@@ -295,21 +309,23 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
             .builder()
             .fuzzyText("bla")
             .build();
-        roundTripAndSimilar(form, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:searches>\n" +
-            "        <api:text fuzziness=\"AUTO\" match=\"SHOULD\">bla</api:text>\n" +
-            "    </api:searches>\n" +
-            "</api:mediaForm>");
+        roundTripAndSimilar(form, """
+            <api:mediaForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <api:searches>
+                    <api:text fuzziness="AUTO" match="SHOULD">bla</api:text>
+                </api:searches>
+            </api:mediaForm>""");
 
-        Jackson2TestUtil.roundTripAndSimilar(form, "{\n" +
-            "  \"searches\" : {\n" +
-            "    \"text\" : {\n" +
-            "      \"value\" : \"bla\",\n" +
-            "      \"match\" : \"SHOULD\",\n" +
-            "      \"fuzziness\" : \"AUTO\"\n" +
-            "    }\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(form, """
+            {
+              "searches" : {
+                "text" : {
+                  "value" : "bla",
+                  "match" : "SHOULD",
+                  "fuzziness" : "AUTO"
+                }
+              }
+            }""");
 
 
     }
@@ -321,21 +337,23 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
             .builder()
             .titles(TitleSearch.builder().type(TextualType.MAIN).value("Flikken").build())
             .build();
-        roundTripAndSimilar(form, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<api:mediaForm xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:searches>\n" +
-            "        <api:titles type=\"MAIN\">Flikken</api:titles>\n" +
-            "    </api:searches>\n" +
-            "</api:mediaForm>");
+        roundTripAndSimilar(form, """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <api:mediaForm xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <api:searches>
+                    <api:titles type="MAIN">Flikken</api:titles>
+                </api:searches>
+            </api:mediaForm>""");
 
-        Jackson2TestUtil.roundTripAndSimilar(form, "{\n" +
-            "  \"searches\" : {\n" +
-            "    \"titles\" : [ {\n" +
-            "      \"type\" : \"MAIN\",\n" +
-            "      \"value\" : \"Flikken\"\n" +
-            "    } ]\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(form, """
+            {
+              "searches" : {
+                "titles" : [ {
+                  "type" : "MAIN",
+                  "value" : "Flikken"
+                } ]
+              }
+            }""");
 
 
     }
@@ -350,125 +368,131 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
         Jackson2Mapper.getPrettyInstance().writeValue(LoggerOutputStream.info(log), form);
     }
 
-    private static final String LUNATIC_BACKWARD_COMPATIBLE = "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-        "    <api:searches>\n" +
-        "        <api:durations match=\"MUST\">\n" +
-        "            <api:matcher inclusiveEnd=\"false\">\n" +
-        "                <api:begin>1970-01-01T01:05:00.001+01:00</api:begin>\n" +
-        "                <api:end>1970-01-01T01:10:00+01:00</api:end>\n" +
-        "            </api:matcher>\n" +
-        "        </api:durations>\n" +
-        "    </api:searches>\n" +
-        "    <api:facets>\n" +
-        "        <api:durations>\n" +
-        "            <api:range>\n" +
-        "                <api:name>0-5m</api:name>\n" +
-        "                <api:begin>1970-01-01T01:00:00.001+01:00</api:begin>\n" +
-        "                <api:end>1970-01-01T01:05:00+01:00</api:end>\n" +
-        "            </api:range>\n" +
-        "            <api:range>\n" +
-        "                <api:name>5-10m</api:name>\n" +
-        "                <api:begin>1970-01-01T01:05:00.001+01:00</api:begin>\n" +
-        "                <api:end>1970-01-01T01:10:00+01:00</api:end>\n" +
-        "            </api:range>\n" +
-        "            <api:range>\n" +
-        "                <api:name>10m-30m</api:name>\n" +
-        "                <api:begin>1970-01-01T01:10:00.001+01:00</api:begin>\n" +
-        "                <api:end>1970-01-01T01:30:00+01:00</api:end>\n" +
-        "            </api:range>\n" +
-        "            <api:range>\n" +
-        "                <api:name>30m-60m</api:name>\n" +
-        "                <api:begin>1970-01-01T01:30:00.001+01:00</api:begin>\n" +
-        "                <api:end>1970-01-01T02:00:00+01:00</api:end>\n" +
-        "            </api:range>\n" +
-        "            <api:range>\n" +
-        "                <api:name>60m-∞</api:name>\n" +
-        "                <api:begin>1970-01-01T02:00:00.001+01:00</api:begin>\n" +
-        "                <api:end>1970-01-01T05:00:00+01:00</api:end>\n" +
-        "            </api:range>\n" +
-        "        </api:durations>\n" +
-        "    </api:facets>\n" +
-        "</api:mediaForm>\n";
+    private static final String LUNATIC_BACKWARD_COMPATIBLE = """
+        <api:mediaForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+            <api:searches>
+                <api:durations match="MUST">
+                    <api:matcher inclusiveEnd="false">
+                        <api:begin>1970-01-01T01:05:00.001+01:00</api:begin>
+                        <api:end>1970-01-01T01:10:00+01:00</api:end>
+                    </api:matcher>
+                </api:durations>
+            </api:searches>
+            <api:facets>
+                <api:durations>
+                    <api:range>
+                        <api:name>0-5m</api:name>
+                        <api:begin>1970-01-01T01:00:00.001+01:00</api:begin>
+                        <api:end>1970-01-01T01:05:00+01:00</api:end>
+                    </api:range>
+                    <api:range>
+                        <api:name>5-10m</api:name>
+                        <api:begin>1970-01-01T01:05:00.001+01:00</api:begin>
+                        <api:end>1970-01-01T01:10:00+01:00</api:end>
+                    </api:range>
+                    <api:range>
+                        <api:name>10m-30m</api:name>
+                        <api:begin>1970-01-01T01:10:00.001+01:00</api:begin>
+                        <api:end>1970-01-01T01:30:00+01:00</api:end>
+                    </api:range>
+                    <api:range>
+                        <api:name>30m-60m</api:name>
+                        <api:begin>1970-01-01T01:30:00.001+01:00</api:begin>
+                        <api:end>1970-01-01T02:00:00+01:00</api:end>
+                    </api:range>
+                    <api:range>
+                        <api:name>60m-∞</api:name>
+                        <api:begin>1970-01-01T02:00:00.001+01:00</api:begin>
+                        <api:end>1970-01-01T05:00:00+01:00</api:end>
+                    </api:range>
+                </api:durations>
+            </api:facets>
+        </api:mediaForm>
+        """;
     @Test
     public void testDurations() throws IOException {
-        String json = "{\n" +
-            "\n" +
-            "    \"searches\" : {\n" +
-            "        \"durations\" : [ {\n" +
-            "            \"begin\" : 300001,\n" +
-            "            \"end\" : 600000\n" +
-            "        } ]\n" +
-            "    },\n" +
-            "    \"facets\" : {\n" +
-            "        \"durations\" : [ {\n" +
-            "            \"name\" : \"0-5m\",\n" +
-            "            \"begin\" : 1,\n" +
-            "            \"end\" : 300000,\n" +
-            "            \"inclusiveEnd\" : true\n" +
-            "        }, {\n" +
-            "            \"name\" : \"5-10m\",\n" +
-            "            \"begin\" : 300001,\n" +
-            "            \"end\" : 600000,\n" +
-            "            \"inclusiveEnd\" : true\n" +
-            "        }, {\n" +
-            "            \"name\" : \"10m-30m\",\n" +
-            "            \"begin\" : 600001,\n" +
-            "            \"end\" : 1800000,\n" +
-            "            \"inclusiveEnd\" : true\n" +
-            "        }, {\n" +
-            "            \"name\" : \"30m-60m\",\n" +
-            "            \"begin\" : 1800001,\n" +
-            "            \"end\" : 3600000,\n" +
-            "            \"inclusiveEnd\" : true\n" +
-            "        }, {\n" +
-            "            \"name\" : \"60m-∞\",\n" +
-            "            \"begin\" : 3600001,\n" +
-            "            \"end\" : 14400000,\n" +
-            "            \"inclusiveEnd\" : true\n" +
-            "        } ]\n" +
-            "    }\n" +
-            "}\n";
+        String json = """
+            {
+
+                "searches" : {
+                    "durations" : [ {
+                        "begin" : 300001,
+                        "end" : 600000
+                    } ]
+                },
+                "facets" : {
+                    "durations" : [ {
+                        "name" : "0-5m",
+                        "begin" : 1,
+                        "end" : 300000,
+                        "inclusiveEnd" : true
+                    }, {
+                        "name" : "5-10m",
+                        "begin" : 300001,
+                        "end" : 600000,
+                        "inclusiveEnd" : true
+                    }, {
+                        "name" : "10m-30m",
+                        "begin" : 600001,
+                        "end" : 1800000,
+                        "inclusiveEnd" : true
+                    }, {
+                        "name" : "30m-60m",
+                        "begin" : 1800001,
+                        "end" : 3600000,
+                        "inclusiveEnd" : true
+                    }, {
+                        "name" : "60m-∞",
+                        "begin" : 3600001,
+                        "end" : 14400000,
+                        "inclusiveEnd" : true
+                    } ]
+                }
+            }
+            """;
 
         MediaForm fromJson = Jackson2Mapper.getStrictInstance().readerFor(MediaForm.class).readValue(new StringReader(json));
-        roundTripAndSimilar(fromJson, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:searches>\n" +
-            "        <api:durations match=\"MUST\">\n" +
-            "            <api:matcher>\n" +
-            "                <api:begin>PT5M0.001S</api:begin>\n" +
-            "                <api:end>PT10M</api:end>\n" +
-            "            </api:matcher>\n" +
-            "        </api:durations>\n" +
-            "    </api:searches>\n" +
-            "    <api:facets>\n" +
-            "        <api:durations>\n" +
-            "            <api:range>\n" +
-            "                <api:name>0-5m</api:name>\n" +
-            "                <api:begin>PT0.001S</api:begin>\n" +
-            "                <api:end>PT5M</api:end>\n" +
-            "            </api:range>\n" +
-            "            <api:range>\n" +
-            "                <api:name>5-10m</api:name>\n" +
-            "                <api:begin>PT5M0.001S</api:begin>\n" +
-            "                <api:end>PT10M</api:end>\n" +
-            "            </api:range>\n" +
-            "            <api:range>\n" +
-            "                <api:name>10m-30m</api:name>\n" +
-            "                <api:begin>PT10M0.001S</api:begin>\n" +
-            "                <api:end>PT30M</api:end>\n" +
-            "            </api:range>\n" +
-            "            <api:range>\n" +
-            "                <api:name>30m-60m</api:name>\n" +
-            "                <api:begin>PT30M0.001S</api:begin>\n" +
-            "                <api:end>PT1H</api:end>\n" +
-            "            </api:range>\n" +
-            "            <api:range>\n" +
-            "                <api:name>60m-∞</api:name>\n" +
-            "                <api:begin>PT1H0.001S</api:begin>\n" +
-            "                <api:end>PT4H</api:end>\n" +
-            "            </api:range>\n" +
-            "        </api:durations>\n" +
-            "    </api:facets>\n" +
-            "</api:mediaForm>\n");
+        roundTripAndSimilar(fromJson, """
+            <api:mediaForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <api:searches>
+                    <api:durations match="MUST">
+                        <api:matcher>
+                            <api:begin>PT5M0.001S</api:begin>
+                            <api:end>PT10M</api:end>
+                        </api:matcher>
+                    </api:durations>
+                </api:searches>
+                <api:facets>
+                    <api:durations>
+                        <api:range>
+                            <api:name>0-5m</api:name>
+                            <api:begin>PT0.001S</api:begin>
+                            <api:end>PT5M</api:end>
+                        </api:range>
+                        <api:range>
+                            <api:name>5-10m</api:name>
+                            <api:begin>PT5M0.001S</api:begin>
+                            <api:end>PT10M</api:end>
+                        </api:range>
+                        <api:range>
+                            <api:name>10m-30m</api:name>
+                            <api:begin>PT10M0.001S</api:begin>
+                            <api:end>PT30M</api:end>
+                        </api:range>
+                        <api:range>
+                            <api:name>30m-60m</api:name>
+                            <api:begin>PT30M0.001S</api:begin>
+                            <api:end>PT1H</api:end>
+                        </api:range>
+                        <api:range>
+                            <api:name>60m-∞</api:name>
+                            <api:begin>PT1H0.001S</api:begin>
+                            <api:end>PT4H</api:end>
+                        </api:range>
+                    </api:durations>
+                </api:facets>
+            </api:mediaForm>
+            """);
     }
     @Test
     public void testBackwards() {
@@ -478,42 +502,44 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
     @Test
     public void testWithTitleFacet() throws IOException {
-        MediaForm form = Jackson2Mapper.getInstance().readValue("{\n" +
-            "    \"facets\": {\n" +
-            "        \"titles\": [\n" +
-            "             {\n" +
-            "                 \"sort\" : \"COUNT_DESC\",\n" +
-            "                 \"max\" : 23\n" +
-            "             },\n" +
-            "            {\n" +
-            "                \"name\": \"a\",\n" +
-            "                \"subSearch\": {\n" +
-            "                    \"type\": \"MAIN\",\n" +
-            "                    \"value\": \"a*\",\n" +
-            "                    \"matchType\": \"WILDCARD\"\n" +
-            "                }\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"name\": \"b\",\n" +
-            "                \"subSearch\": {\n" +
-            "                    \"type\": \"MAIN\",\n" +
-            "                    \"value\": \"b*\",\n" +
-            "                    \"matchType\": \"WILDCARD\"\n" +
-            "                }\n" +
-            "            }\n" +
-            "        ]\n" +
-            "    },\n" +
-            "    \"searches\": {\n" +
-            "        \"titles\": [\n" +
-            "            {\n" +
-            "                \"match\": \"SHOULD\",\n" +
-            "                \"type\": \"MAIN\",\n" +
-            "                \"value\": \"a*\",\n" +
-            "                \"matchType\": \"WILDCARD\"\n" +
-            "            }\n" +
-            "        ]\n" +
-            "    }\n" +
-            "}\n",  MediaForm.class);
+        MediaForm form = Jackson2Mapper.getInstance().readValue("""
+            {
+                "facets": {
+                    "titles": [
+                         {
+                             "sort" : "COUNT_DESC",
+                             "max" : 23
+                         },
+                        {
+                            "name": "a",
+                            "subSearch": {
+                                "type": "MAIN",
+                                "value": "a*",
+                                "matchType": "WILDCARD"
+                            }
+                        },
+                        {
+                            "name": "b",
+                            "subSearch": {
+                                "type": "MAIN",
+                                "value": "b*",
+                                "matchType": "WILDCARD"
+                            }
+                        }
+                    ]
+                },
+                "searches": {
+                    "titles": [
+                        {
+                            "match": "SHOULD",
+                            "type": "MAIN",
+                            "value": "a*",
+                            "matchType": "WILDCARD"
+                        }
+                    ]
+                }
+            }
+            """,  MediaForm.class);
         assertThat(form.getFacets().getTitles()).isNotNull();
         assertThat(form.getFacets().getTitles().getMax()).isEqualTo(23);
         assertThat(form.getFacets().getTitles().getFacets()).hasSize(2);
@@ -523,14 +549,15 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     @Test
     public void facetBroadcasters() {
         MediaForm builder = MediaForm.builder().broadcasterFacet(new MediaFacet()).build();
-        Jackson2TestUtil.roundTripAndSimilar(builder, "{\n" +
-            "  \"facets\" : {\n" +
-            "    \"broadcasters\" : {\n" +
-            "      \"sort\" : \"VALUE_ASC\",\n" +
-            "      \"max\" : 24\n" +
-            "    }\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(builder, """
+            {
+              "facets" : {
+                "broadcasters" : {
+                  "sort" : "VALUE_ASC",
+                  "max" : 24
+                }
+              }
+            }""");
     }
 
     @Test
@@ -553,20 +580,22 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
     @Test
     public void withSort() throws Exception {
 
-        String sortBackwards = "{\n" +
-            "  \"sort\" : {\n" +
-            "    \"sortDate\" : \"DESC\"\n" +
-            "  }\n" +
-            "}";
+        String sortBackwards = """
+            {
+              "sort" : {
+                "sortDate" : "DESC"
+              }
+            }""";
 
         MediaForm form = Jackson2Mapper.getLenientInstance().readValue(sortBackwards, MediaForm.class);
         assertThat(form.getSortFields()).containsExactly(MediaSortOrder.desc(MediaSortField.sortDate));
 
-        Jackson2TestUtil.roundTripAndSimilar(MediaForm.builder().sortOrder(MediaSortOrder.desc(MediaSortField.sortDate)).build(), "{\n" +
-            "  \"sort\" : {\n" +
-            "    \"sortDate\" : \"DESC\"\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(MediaForm.builder().sortOrder(MediaSortOrder.desc(MediaSortField.sortDate)).build(), """
+            {
+              "sort" : {
+                "sortDate" : "DESC"
+              }
+            }""");
     }
 
 

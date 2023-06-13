@@ -20,12 +20,13 @@ public class PageFacetTest {
         PageFacet facet = new PageFacet();
         facet.setFilter(search);
 
-        PageFacet out = JAXBTestUtil.roundTripAndSimilar(facet, "<local:pageFacet sort=\"VALUE_ASC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-            "    <api:max>24</api:max>\n" +
-            "    <api:filter>\n" +
-            "        <api:text>find me</api:text>\n" +
-            "    </api:filter>\n" +
-            "</local:pageFacet>");
+        PageFacet out = JAXBTestUtil.roundTripAndSimilar(facet, """
+            <local:pageFacet sort="VALUE_ASC" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                <api:max>24</api:max>
+                <api:filter>
+                    <api:text>find me</api:text>
+                </api:filter>
+            </local:pageFacet>""");
 
         assertThat(out.getFilter()).isNotNull();
     }

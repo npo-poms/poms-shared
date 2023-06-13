@@ -92,11 +92,12 @@ public class PageUpdateTest {
 
     @Test
     public void unmarshal() {
-        String xml = "<page type=\"ARTICLE\" url=\"http://www.vpro.nl/article/123\"  xmlns=\"urn:vpro:pages:update:2013\">\n" +
-            "  <crid>crid://bla/123</crid>\n" +
-            "  <broadcaster>VPRO</broadcaster>\n" +
-            "  <title>Hoi2</title>\n" +
-            "</page>";
+        String xml = """
+            <page type="ARTICLE" url="http://www.vpro.nl/article/123"  xmlns="urn:vpro:pages:update:2013">
+              <crid>crid://bla/123</crid>
+              <broadcaster>VPRO</broadcaster>
+              <title>Hoi2</title>
+            </page>""";
         PageUpdate update = JAXB.unmarshal(new StringReader(xml), PageUpdate.class);
         assertThat(update.getTitle()).isEqualTo("Hoi2");
     }
@@ -137,45 +138,45 @@ public class PageUpdateTest {
             )
             .build();
         assertThat(page.getWorkflow()).isEqualTo(PageWorkflow.PUBLISHED);
-        PageUpdate rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(Jackson2Mapper.getPublisherInstance(), page, "{\n" +
-            "  \"type\" : \"ARTICLE\",\n" +
-            "  \"url\" : \"http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html\",\n" +
-            "  \"portal\" : {\n" +
-            "    \"section\" : {\n" +
-            "      \"path\" : \"/bla\",\n" +
-            "      \"value\" : \"display\"\n" +
-            "    },\n" +
-            "    \"id\" : \"3voor12\",\n" +
-            "    \"url\" : \"http://3voor12-beta-test.vpro.nl/\"\n" +
-            "  },\n" +
-            "  \"paragraphs\" : [ {\n" +
-            "    \"title\" : \"title\",\n" +
-            "    \"body\" : \"body\",\n" +
-            "    \"image\" : {\n" +
-            "      \"credits\" : \"paragraph image credits\"\n" +
-            "    }\n" +
-            "  } ],\n" +
-            "  \"images\" : [ {\n" +
-            "    \"title\" : \"title\",\n" +
-            "    \"description\" : \"description\",\n" +
-            "    \"source\" : \"source\",\n" +
-            "    \"sourceName\" : \"vpro\",\n" +
-            "    \"license\" : \"CC_BY\",\n" +
-            "    \"credits\" : \"page image credits\",\n" +
-            "    \"image\" : {\n" +
-            "      \"imageLocation\" : {\n" +
-            "        \"url\" : \"https://www.vpro.nl/plaatje\"\n" +
-            "      }\n" +
-            "    },\n" +
-            "    \"type\" : \"ICON\"\n" +
-            "  } ],\n" +
-            "  \"relations\" : [ {\n" +
-            "    \"type\" : \"FOO\",\n" +
-            "    \"broadcaster\" : \"VPRO\",\n" +
-            "    \"value\" : \"bla\"\n" +
-            "  } ]," +
-            "  \"expandedWorkflow\":\"PUBLISHED\"\n" +
-            "}");
+        PageUpdate rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(Jackson2Mapper.getPublisherInstance(), page, """
+            {
+              "type" : "ARTICLE",
+              "url" : "http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html",
+              "portal" : {
+                "section" : {
+                  "path" : "/bla",
+                  "value" : "display"
+                },
+                "id" : "3voor12",
+                "url" : "http://3voor12-beta-test.vpro.nl/"
+              },
+              "paragraphs" : [ {
+                "title" : "title",
+                "body" : "body",
+                "image" : {
+                  "credits" : "paragraph image credits"
+                }
+              } ],
+              "images" : [ {
+                "title" : "title",
+                "description" : "description",
+                "source" : "source",
+                "sourceName" : "vpro",
+                "license" : "CC_BY",
+                "credits" : "page image credits",
+                "image" : {
+                  "imageLocation" : {
+                    "url" : "https://www.vpro.nl/plaatje"
+                  }
+                },
+                "type" : "ICON"
+              } ],
+              "relations" : [ {
+                "type" : "FOO",
+                "broadcaster" : "VPRO",
+                "value" : "bla"
+              } ],  "expandedWorkflow":"PUBLISHED"
+            }""");
 
         assertThat(rounded.getPortal().getSection().getDisplayName()).isEqualTo("display");
 

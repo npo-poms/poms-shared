@@ -29,9 +29,10 @@ public class NotTest {
     public void testAndBinding() {
         Not in = new Not(new And());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
-                "    <media:and/>\n" +
-                "</local:not>");
+            """
+                <local:not xmlns:local="uri:local" xmlns:media="urn:vpro:api:constraint:media:2013">
+                    <media:and/>
+                </local:not>""");
 
         assertThat(out.getConstraint()).isInstanceOf(And.class);
     }
@@ -40,9 +41,10 @@ public class NotTest {
     public void testOrBinding() {
         Not in = new Not(new Or());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
-                "    <media:or/>\n" +
-                "</local:not>");
+            """
+                <local:not xmlns:local="uri:local" xmlns:media="urn:vpro:api:constraint:media:2013">
+                    <media:or/>
+                </local:not>""");
 
         assertThat(out.getConstraint()).isInstanceOf(Or.class);
     }
@@ -51,9 +53,10 @@ public class NotTest {
     public void testNotBinding() {
         Not in = new Not(new Not());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
-                "    <media:not/>\n" +
-                "</local:not>");
+            """
+                <local:not xmlns:local="uri:local" xmlns:media="urn:vpro:api:constraint:media:2013">
+                    <media:not/>
+                </local:not>""");
 
         assertThat(out.getConstraint()).isInstanceOf(Not.class);
     }
@@ -62,9 +65,10 @@ public class NotTest {
     public void testAvTypeBinding() {
         Not in = new Not(new AvTypeConstraint());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
-                "    <media:avType/>\n" +
-                "</local:not>");
+            """
+                <local:not xmlns:local="uri:local" xmlns:media="urn:vpro:api:constraint:media:2013">
+                    <media:avType/>
+                </local:not>""");
 
         assertThat(out.getConstraint()).isInstanceOf(AvTypeConstraint.class);
     }
@@ -73,9 +77,10 @@ public class NotTest {
     public void testAvFileFormatBinding() {
         Not in = new Not(new AvFileFormatConstraint());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
-                "    <media:avFileFormat/>\n" +
-                "</local:not>");
+            """
+                <local:not xmlns:local="uri:local" xmlns:media="urn:vpro:api:constraint:media:2013">
+                    <media:avFileFormat/>
+                </local:not>""");
 
         assertThat(out.getConstraint()).isInstanceOf(AvFileFormatConstraint.class);
     }
@@ -84,9 +89,10 @@ public class NotTest {
     public void testAvFileExtensionBinding() {
         Not in = new Not(new AVFileExtensionConstraint());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
-                "    <media:avFileExtension/>\n" +
-                "</local:not>");
+            """
+                <local:not xmlns:local="uri:local" xmlns:media="urn:vpro:api:constraint:media:2013">
+                    <media:avFileExtension/>
+                </local:not>""");
 
         assertThat(out.getConstraint()).isInstanceOf(AVFileExtensionConstraint.class);
     }

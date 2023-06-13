@@ -31,10 +31,11 @@ public class ExtendedTextMatcherListJsonTest {
     public void testGetValueJsonIgnoreCase() {
         ExtendedTextMatcherList in = new ExtendedTextMatcherList(new ExtendedTextMatcher("title", false));
 
-        ExtendedTextMatcherList out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
-            "  \"value\" : \"title\",\n" +
-            "  \"caseSensitive\" : false\n" +
-            "}");
+        ExtendedTextMatcherList out = Jackson2TestUtil.roundTripAndSimilar(in, """
+            {
+              "value" : "title",
+              "caseSensitive" : false
+            }""");
 
         assertThat(out.get(0).isCaseSensitive()).isFalse();
     }

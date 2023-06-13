@@ -31,10 +31,11 @@ public class InstantRangeFacetsTest {
         DateRangeFacets<AbstractSearch> in = new DateRangeFacets<>();
         in.setRanges(Arrays.asList(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK));
         DateRangeFacets<AbstractSearch> out = JAXBTestUtil.roundTripAndSimilar(in,
-                "<local:dateRangeFacets xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:preset>LAST_YEAR</api:preset>\n" +
-                "    <api:preset>LAST_WEEK</api:preset>\n" +
-                "</local:dateRangeFacets>");
+            """
+                <local:dateRangeFacets xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:preset>LAST_YEAR</api:preset>
+                    <api:preset>LAST_WEEK</api:preset>
+                </local:dateRangeFacets>""");
         assertThat(out.getRanges()).containsOnly(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK);
         JAXB.marshal(in, System.out);
     }

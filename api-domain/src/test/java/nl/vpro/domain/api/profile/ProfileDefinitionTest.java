@@ -43,9 +43,10 @@ public class ProfileDefinitionTest {
     public void testGetFilter() {
         ProfileDefinition<MediaObject> in = new ProfileDefinition<>(new Filter(), null);
         ProfileDefinition<MediaObject> out = JAXBTestUtil.roundTripAndSimilar(in,
-                "<local:profileDefinition xmlns=\"urn:vpro:api:profile:2013\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:m=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <media:filter/>\n" +
-                "</local:profileDefinition>");
+            """
+                <local:profileDefinition xmlns="urn:vpro:api:profile:2013" xmlns:shared="urn:vpro:shared:2009" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:m="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <media:filter/>
+                </local:profileDefinition>""");
         assertThat(out.getFilter()).isNotNull();
         assertThat(out.getFilter()).isInstanceOf(AbstractFilter.class);
     }
@@ -75,17 +76,18 @@ public class ProfileDefinitionTest {
         ));
         ProfileDefinition<Page> in = new ProfileDefinition<>(pageFilter, null);
         ProfileDefinition<Page> out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><local:profileDefinition xmlns:local=\"uri:local\" xmlns=\"urn:vpro:api:profile:2013\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:m=\"urn:vpro:media:2009\">\n" +
-                "    <page:filter>\n" +
-                "      <page:and>\n" +
-                "        <page:portal>VPRONL</page:portal>\n" +
-                "        <page:not>\n" +
-                "          <page:section>/vpronl/pers</page:section>\n" +
-                "        </page:not>\n" +
-                "      </page:and>\n" +
-                "    </page:filter>\n" +
-                "  </local:profileDefinition>\n" +
-                "  ");
+            """
+                <?xml version="1.0" encoding="UTF-8"?><local:profileDefinition xmlns:local="uri:local" xmlns="urn:vpro:api:profile:2013" xmlns:shared="urn:vpro:shared:2009" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:m="urn:vpro:media:2009">
+                    <page:filter>
+                      <page:and>
+                        <page:portal>VPRONL</page:portal>
+                        <page:not>
+                          <page:section>/vpronl/pers</page:section>
+                        </page:not>
+                      </page:and>
+                    </page:filter>
+                  </local:profileDefinition>
+                 \s""");
         assertThat(out.getFilter()).isNotNull();
         assertThat(out.getFilter()).isInstanceOf(AbstractFilter.class);
     }

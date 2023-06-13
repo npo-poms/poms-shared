@@ -72,106 +72,108 @@ class ImageSourceServiceTest {
 
         ImageSourceSet sourceSet = ImageSourceService.INSTANCE.getSourceSet(supplier);
         assertThatJson(sourceSet)
-            .isSimilarTo("{\n" +
-            "  \"THUMBNAIL.WEBP\" : {\n" +
-            "    \"url\" : \"https://bla/TN.W/1.webp\",\n" +
-            "    \"type\" : \"THUMBNAIL\",\n" +
-            "    \"format\" : \"WEBP\",\n" +
-            "    \"dimension\" : {\n" +
-            "      \"width\" : 100,\n" +
-            "      \"height\" : 100\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"MOBILE.WEBP\" : {\n" +
-            "    \"url\" : \"https://bla/M1.W/1.webp\",\n" +
-            "    \"type\" : \"MOBILE\",\n" +
-            "    \"format\" : \"WEBP\",\n" +
-            "    \"dimension\" : {\n" +
-            "      \"width\" : 200,\n" +
-            "      \"height\" : 200\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"LARGE.WEBP\" : {\n" +
-            "    \"url\" : \"https://bla/L1.W/1.webp\",\n" +
-            "    \"type\" : \"LARGE\",\n" +
-            "    \"format\" : \"WEBP\",\n" +
-            "    \"dimension\" : {\n" +
-            "      \"width\" : 300,\n" +
-            "      \"height\" : 300\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"MOBILE.JPG\" : {\n" +
-            "    \"url\" : \"https://bla/M1.J/1.jpg\",\n" +
-            "    \"type\" : \"MOBILE\",\n" +
-            "    \"format\" : \"JPG\",\n" +
-            "    \"dimension\" : {\n" +
-            "      \"width\" : 200,\n" +
-            "      \"height\" : 200\n" +
-            "    }\n" +
-            "  }\n" +
-            "}");
+            .isSimilarTo("""
+                {
+                  "THUMBNAIL.WEBP" : {
+                    "url" : "https://bla/TN.W/1.webp",
+                    "type" : "THUMBNAIL",
+                    "format" : "WEBP",
+                    "dimension" : {
+                      "width" : 100,
+                      "height" : 100
+                    }
+                  },
+                  "MOBILE.WEBP" : {
+                    "url" : "https://bla/M1.W/1.webp",
+                    "type" : "MOBILE",
+                    "format" : "WEBP",
+                    "dimension" : {
+                      "width" : 200,
+                      "height" : 200
+                    }
+                  },
+                  "LARGE.WEBP" : {
+                    "url" : "https://bla/L1.W/1.webp",
+                    "type" : "LARGE",
+                    "format" : "WEBP",
+                    "dimension" : {
+                      "width" : 300,
+                      "height" : 300
+                    }
+                  },
+                  "MOBILE.JPG" : {
+                    "url" : "https://bla/M1.J/1.jpg",
+                    "type" : "MOBILE",
+                    "format" : "JPG",
+                    "dimension" : {
+                      "width" : 200,
+                      "height" : 200
+                    }
+                  }
+                }""");
 
         ImageMetadata metadata = ImageMetadata.of(supplier);
         assertThatJson(Jackson2Mapper.getModelInstance(), metadata)
             .withoutRemarshalling()
-            .isSimilarTo("{\n" +
-                "  \"title\" : \"Test\",\n" +
-                "  \"height\" : 200,\n" +
-                "  \"width\" : 100,\n" +
-                "  \"sourceSet\" : {\n" +
-                "    \"THUMBNAIL.WEBP\" : {\n" +
-                "      \"url\" : \"https://bla/TN.W/1.webp\",\n" +
-                "      \"type\" : \"THUMBNAIL\",\n" +
-                "      \"format\" : \"WEBP\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 100,\n" +
-                "        \"height\" : 100\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"MOBILE.WEBP\" : {\n" +
-                "      \"url\" : \"https://bla/M1.W/1.webp\",\n" +
-                "      \"type\" : \"MOBILE\",\n" +
-                "      \"format\" : \"WEBP\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 200,\n" +
-                "        \"height\" : 200\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"LARGE.WEBP\" : {\n" +
-                "      \"url\" : \"https://bla/L1.W/1.webp\",\n" +
-                "      \"type\" : \"LARGE\",\n" +
-                "      \"format\" : \"WEBP\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 300,\n" +
-                "        \"height\" : 300\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"MOBILE.JPG\" : {\n" +
-                "      \"url\" : \"https://bla/M1.J/1.jpg\",\n" +
-                "      \"type\" : \"MOBILE\",\n" +
-                "      \"format\" : \"JPG\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 200,\n" +
-                "        \"height\" : 200\n" +
-                "      }\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"areaOfInterest\" : {\n" +
-                "    \"lowerLeft\" : {\n" +
-                "      \"x\" : 0,\n" +
-                "      \"y\" : 0\n" +
-                "    },\n" +
-                "    \"upperRight\" : {\n" +
-                "      \"x\" : 10,\n" +
-                "      \"y\" : 10\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"pointOfInterest\" : {\n" +
-                "    \"x\" : 0.05,\n" +
-                "    \"y\" : 0.025\n" +
-                "  },\n" +
-                "  \"alternativeOrTitle\" : \"Test\"\n" +
-                "}");
+            .isSimilarTo("""
+                {
+                  "title" : "Test",
+                  "height" : 200,
+                  "width" : 100,
+                  "sourceSet" : {
+                    "THUMBNAIL.WEBP" : {
+                      "url" : "https://bla/TN.W/1.webp",
+                      "type" : "THUMBNAIL",
+                      "format" : "WEBP",
+                      "dimension" : {
+                        "width" : 100,
+                        "height" : 100
+                      }
+                    },
+                    "MOBILE.WEBP" : {
+                      "url" : "https://bla/M1.W/1.webp",
+                      "type" : "MOBILE",
+                      "format" : "WEBP",
+                      "dimension" : {
+                        "width" : 200,
+                        "height" : 200
+                      }
+                    },
+                    "LARGE.WEBP" : {
+                      "url" : "https://bla/L1.W/1.webp",
+                      "type" : "LARGE",
+                      "format" : "WEBP",
+                      "dimension" : {
+                        "width" : 300,
+                        "height" : 300
+                      }
+                    },
+                    "MOBILE.JPG" : {
+                      "url" : "https://bla/M1.J/1.jpg",
+                      "type" : "MOBILE",
+                      "format" : "JPG",
+                      "dimension" : {
+                        "width" : 200,
+                        "height" : 200
+                      }
+                    }
+                  },
+                  "areaOfInterest" : {
+                    "lowerLeft" : {
+                      "x" : 0,
+                      "y" : 0
+                    },
+                    "upperRight" : {
+                      "x" : 10,
+                      "y" : 10
+                    }
+                  },
+                  "pointOfInterest" : {
+                    "x" : 0.05,
+                    "y" : 0.025
+                  },
+                  "alternativeOrTitle" : "Test"
+                }""");
     }
 
 
@@ -193,64 +195,65 @@ class ImageSourceServiceTest {
         log.info("{}", Jackson2Mapper.getInstance().writeValueAsString(image));
         assertThatJson(Jackson2Mapper.getModelInstance(), ImageMetadata.of(image))
             .withoutRemarshalling()
-            .isSimilarTo("{\n" +
-                "  \"title\" : \"bla\",\n" +
-                "  \"height\" : 100,\n" +
-                "  \"width\" : 200,\n" +
-                "  \"sourceSet\" : {\n" +
-                "    \"THUMBNAIL.WEBP\" : {\n" +
-                "      \"url\" : \"https://images.poms.omroep.nl/s100/123.webp\",\n" +
-                "      \"type\" : \"THUMBNAIL\",\n" +
-                "      \"format\" : \"WEBP\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 100,\n" +
-                "        \"height\" : 50\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"MOBILE_HALF.WEBP\" : {\n" +
-                "      \"url\" : \"https://images.poms.omroep.nl/s160/123.webp\",\n" +
-                "      \"type\" : \"MOBILE_HALF\",\n" +
-                "      \"format\" : \"WEBP\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 160,\n" +
-                "        \"height\" : 80\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"MOBILE.WEBP\" : {\n" +
-                "      \"url\" : \"https://images.poms.omroep.nl/s320/123.webp\",\n" +
-                "      \"type\" : \"MOBILE\",\n" +
-                "      \"format\" : \"WEBP\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 320,\n" +
-                "        \"height\" : 160\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"MOBILE_2.WEBP\" : {\n" +
-                "      \"url\" : \"https://images.poms.omroep.nl/s640%3E/123.webp\",\n" +
-                "      \"type\" : \"MOBILE_2\",\n" +
-                "      \"format\" : \"WEBP\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 200,\n" +
-                "        \"height\" : 100\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"MOBILE.JPG\" : {\n" +
-                "      \"url\" : \"https://images.poms.omroep.nl/s640%3E/123.jpg\",\n" +
-                "      \"type\" : \"MOBILE\",\n" +
-                "      \"format\" : \"JPG\",\n" +
-                "      \"dimension\" : {\n" +
-                "        \"width\" : 200,\n" +
-                "        \"height\" : 100\n" +
-                "      }\n" +
-                "    }\n" +
-                "  },\n" +
-                "  \"creationDate\" : 1675851618171,\n" +
-                "  \"pointOfInterest\" : {\n" +
-                "    \"x\" : 0.5,\n" +
-                "    \"y\" : 0.5\n" +
-                "  },\n" +
-                "  \"alternativeOrTitle\" : \"bla\"\n" +
-                "}");
+            .isSimilarTo("""
+                {
+                  "title" : "bla",
+                  "height" : 100,
+                  "width" : 200,
+                  "sourceSet" : {
+                    "THUMBNAIL.WEBP" : {
+                      "url" : "https://images.poms.omroep.nl/s100/123.webp",
+                      "type" : "THUMBNAIL",
+                      "format" : "WEBP",
+                      "dimension" : {
+                        "width" : 100,
+                        "height" : 50
+                      }
+                    },
+                    "MOBILE_HALF.WEBP" : {
+                      "url" : "https://images.poms.omroep.nl/s160/123.webp",
+                      "type" : "MOBILE_HALF",
+                      "format" : "WEBP",
+                      "dimension" : {
+                        "width" : 160,
+                        "height" : 80
+                      }
+                    },
+                    "MOBILE.WEBP" : {
+                      "url" : "https://images.poms.omroep.nl/s320/123.webp",
+                      "type" : "MOBILE",
+                      "format" : "WEBP",
+                      "dimension" : {
+                        "width" : 320,
+                        "height" : 160
+                      }
+                    },
+                    "MOBILE_2.WEBP" : {
+                      "url" : "https://images.poms.omroep.nl/s640%3E/123.webp",
+                      "type" : "MOBILE_2",
+                      "format" : "WEBP",
+                      "dimension" : {
+                        "width" : 200,
+                        "height" : 100
+                      }
+                    },
+                    "MOBILE.JPG" : {
+                      "url" : "https://images.poms.omroep.nl/s640%3E/123.jpg",
+                      "type" : "MOBILE",
+                      "format" : "JPG",
+                      "dimension" : {
+                        "width" : 200,
+                        "height" : 100
+                      }
+                    }
+                  },
+                  "creationDate" : 1675851618171,
+                  "pointOfInterest" : {
+                    "x" : 0.5,
+                    "y" : 0.5
+                  },
+                  "alternativeOrTitle" : "bla"
+                }""");
     }
 
 }

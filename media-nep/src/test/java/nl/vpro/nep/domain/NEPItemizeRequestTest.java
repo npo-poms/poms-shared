@@ -20,11 +20,12 @@ public class NEPItemizeRequestTest {
             .identifier("npo-1dvr")
             .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getLenientInstance(), request, "{\n" +
-            "  \"identifier\" : \"npo-1dvr\",\n" +
-            "  \"starttime\" : \"2018-05-09T16:03:01.121\",\n" +
-            "  \"endtime\" : \"2018-05-09T16:53:01.122\"\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getLenientInstance(), request, """
+            {
+              "identifier" : "npo-1dvr",
+              "starttime" : "2018-05-09T16:03:01.121",
+              "endtime" : "2018-05-09T16:53:01.122"
+            }""");
 
         // {"starttime":"2018-05-09T14:59:25.405","endtime":"2018-05-09T14:59:31.548","identifier":"npo-1dvr"}
     }
@@ -38,11 +39,12 @@ public class NEPItemizeRequestTest {
             .identifier("npo-1dvr")
             .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getLenientInstance(), request, "{\n" +
-            "  \"identifier\" : \"npo-1dvr\",\n" +
-            "  \"starttime\" : \"2018-05-09T16:00:00.000\",\n" +
-            "  \"endtime\" : \"2018-05-09T16:00:00.000\"\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getLenientInstance(), request, """
+            {
+              "identifier" : "npo-1dvr",
+              "starttime" : "2018-05-09T16:00:00.000",
+              "endtime" : "2018-05-09T16:00:00.000"
+            }""");
 
         // {"starttime":"2018-05-09T14:59:25.405","endtime":"2018-05-09T14:59:31.548","identifier":"npo-1dvr"}
     }

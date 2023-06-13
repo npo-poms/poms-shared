@@ -40,16 +40,19 @@ public class LicenseTest {
 
     @Test
     public void json() {
-        Jackson2TestUtil.roundTripAndSimilar(new A(License.CC_BY), "{\n" +
-            "  \"license\" : \"CC_BY\"\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(new A(License.CC_BY), """
+            {
+              "license" : "CC_BY"
+            }""");
     }
 
     @Test
     public void xml() {
-        JAXBTestUtil.roundTripAndSimilar(new A(License.CC_BY), "<a>\n" +
-            "    <license>CC_BY</license>\n" +
-            "</a>\n");
+        JAXBTestUtil.roundTripAndSimilar(new A(License.CC_BY), """
+            <a>
+                <license>CC_BY</license>
+            </a>
+            """);
     }
 
     ValidatorFactory config = Validation.buildDefaultValidatorFactory();
@@ -63,9 +66,10 @@ public class LicenseTest {
 
     @Test
     public void futureIdsCanBeUnmarshalledXml() {
-        A a = JAXB.unmarshal(new StringReader("<a>\n" +
-            "    <license>FUTURE_LICENSE</license>\n" +
-            "</a>"), A.class);
+        A a = JAXB.unmarshal(new StringReader("""
+            <a>
+                <license>FUTURE_LICENSE</license>
+            </a>"""), A.class);
         License testLicense = a.getLicense();
         assertThat(testLicense.getId()).isEqualTo("FUTURE_LICENSE");
 
@@ -76,9 +80,10 @@ public class LicenseTest {
 
     @Test
     public void futureIdsCanBeUnmarshalledJson() throws Exception {
-        A a = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
-            "  \"license\" : \"FUTURE_LICENSE\"\n" +
-            "}"), A.class);
+        A a = Jackson2Mapper.getInstance().readValue(new StringReader("""
+            {
+              "license" : "FUTURE_LICENSE"
+            }"""), A.class);
         License testLicense = a.getLicense();
         assertThat(testLicense.getId()).isEqualTo("FUTURE_LICENSE");
     }
@@ -86,9 +91,10 @@ public class LicenseTest {
 
     @Test
     public void futureIdsAreInvalidThough() throws Exception {
-        A a = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
-            "  \"license\" : \"FUTURE_LICENSE\"\n" +
-            "}"), A.class);
+        A a = Jackson2Mapper.getInstance().readValue(new StringReader("""
+            {
+              "license" : "FUTURE_LICENSE"
+            }"""), A.class);
         License testLicense = a.getLicense();
 
 

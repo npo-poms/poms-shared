@@ -33,21 +33,22 @@ public class WorkflowExecutionResponseTest {
                 .build();
 
         WorkflowExecutionResponse rounded = Jackson2TestUtil.roundTripAndSimilar(workflowExecutionResponse,
-                "{\n" +
-                    "  \"workflowExecutions\" : [ {\n" +
-                    "    \"workflowId\" : \"b337aa4e-bb95-401a-93e7-b9aea6ac327c\",\n" +
-                    "    \"status\" : \"FAILED\",\n" +
-                    "    \"statusMessage\" : \"Packaging failed\",\n" +
-                    "    \"workflowType\" : \"npo_webonly_drm\",\n" +
-                    "    \"customerMetadata\" : {\n" +
-                    "      \"mid\" : \"VPWON_1267474\",\n" +
-                    "      \"broadcaster\" : \"VPRO\"\n" +
-                    "    },\n" +
-                    "    \"startTime\" : 1518093837000,\n" +
-                    "    \"updateTime\" : 1518093927000,\n" +
-                    "    \"endTime\" : 1518093927000\n" +
-                    "  } ]\n" +
-                    "}");
+            """
+                {
+                  "workflowExecutions" : [ {
+                    "workflowId" : "b337aa4e-bb95-401a-93e7-b9aea6ac327c",
+                    "status" : "FAILED",
+                    "statusMessage" : "Packaging failed",
+                    "workflowType" : "npo_webonly_drm",
+                    "customerMetadata" : {
+                      "mid" : "VPWON_1267474",
+                      "broadcaster" : "VPRO"
+                    },
+                    "startTime" : 1518093837000,
+                    "updateTime" : 1518093927000,
+                    "endTime" : 1518093927000
+                  } ]
+                }""");
 
     }
 }

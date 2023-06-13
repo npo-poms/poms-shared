@@ -39,47 +39,48 @@ public class PageFormBuilderTest {
             .relationText(RelationDefinition.of("DIRECTOR", "VPRO"), ExtendedTextMatcher.not("Quintin Tarentino"))
             .build();
         PageForm result = Jackson2TestUtil.roundTripAndSimilar(form,
-            "{\n" +
-                "  \"searches\" : {\n" +
-                "    \"text\" : {\n" +
-                "      \"value\" : \"text\",\n" +
-                "      \"match\" : \"SHOULD\"\n" +
-                "    },\n" +
-                "    \"broadcasters\" : \"VPRO\",\n" +
-                "    \"types\" : {\n" +
-                "      \"value\" : \"ARTICLE\",\n" +
-                "      \"match\" : \"SHOULD\"\n" +
-                "    },\n" +
-                "    \"sortDates\" : [ {\n" +
-                "      \"begin\" : 0,\n" +
-                "      \"end\" : 1000,\n" +
-                "      \"inclusiveEnd\" : false\n" +
-                "    } ],\n" +
-                "    \"relations\" : [ {\n" +
-                "      \"types\" : \"DIRECTOR\",\n" +
-                "      \"broadcasters\" : \"VPRO\",\n" +
-                "      \"values\" : \"Stanley Kubrick\"\n" +
-                "    }, {\n" +
-                "      \"types\" : \"DIRECTOR\",\n" +
-                "      \"broadcasters\" : \"VPRO\",\n" +
-                "      \"values\" : {\n" +
-                "        \"value\" : \"Quintin Tarentino\",\n" +
-                "        \"match\" : \"NOT\"\n" +
-                "      }\n" +
-                "    } ]\n" +
-                "  },\n" +
-                "  \"facets\" : {\n" +
-                "    \"sortDates\" : [ { }, \"TODAY\", \"LAST_WEEK\" ],\n" +
-                "    \"broadcasters\" : {\n" +
-                "      \"sort\" : \"COUNT_DESC\",\n" +
-                "      \"max\" : 24\n" +
-                "    },\n" +
-                "    \"types\" : {\n" +
-                "      \"sort\" : \"COUNT_DESC\",\n" +
-                "      \"max\" : 24\n" +
-                "    }\n" +
-                "  }\n" +
-                "}");
+            """
+                {
+                  "searches" : {
+                    "text" : {
+                      "value" : "text",
+                      "match" : "SHOULD"
+                    },
+                    "broadcasters" : "VPRO",
+                    "types" : {
+                      "value" : "ARTICLE",
+                      "match" : "SHOULD"
+                    },
+                    "sortDates" : [ {
+                      "begin" : 0,
+                      "end" : 1000,
+                      "inclusiveEnd" : false
+                    } ],
+                    "relations" : [ {
+                      "types" : "DIRECTOR",
+                      "broadcasters" : "VPRO",
+                      "values" : "Stanley Kubrick"
+                    }, {
+                      "types" : "DIRECTOR",
+                      "broadcasters" : "VPRO",
+                      "values" : {
+                        "value" : "Quintin Tarentino",
+                        "match" : "NOT"
+                      }
+                    } ]
+                  },
+                  "facets" : {
+                    "sortDates" : [ { }, "TODAY", "LAST_WEEK" ],
+                    "broadcasters" : {
+                      "sort" : "COUNT_DESC",
+                      "max" : 24
+                    },
+                    "types" : {
+                      "sort" : "COUNT_DESC",
+                      "max" : 24
+                    }
+                  }
+                }""");
         System.out.println(result);
 
     }

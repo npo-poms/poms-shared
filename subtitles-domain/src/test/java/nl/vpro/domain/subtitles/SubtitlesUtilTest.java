@@ -47,9 +47,11 @@ public class SubtitlesUtilTest {
             .parse(getSubtitles(), true)
             .getCues()
             .findFirst()
-            .orElseThrow(NullPointerException::new), new StringBuilder()).toString()).isEqualTo("0001 00:02:20 00:04:15\n" +
-            "888\n" +
-            "\n");
+            .orElseThrow(NullPointerException::new), new StringBuilder()).toString()).isEqualTo("""
+            0001 00:02:20 00:04:15
+            888
+
+            """);
 
     }
 

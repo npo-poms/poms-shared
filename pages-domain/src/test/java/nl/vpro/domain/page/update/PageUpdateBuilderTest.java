@@ -50,9 +50,11 @@ public class PageUpdateBuilderTest {
     public void testPortal() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").portal(new PortalUpdate("VproNL", "http://www.vpro.nl")).build();
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page,
-            "<pageUpdate:page type=\"ARTICLE\" url=\"http://www.vpro.nl\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
-            "    <pageUpdate:portal id=\"VproNL\" url=\"http://www.vpro.nl\"/>\n" +
-            "</pageUpdate:page>\n");
+            """
+                <pageUpdate:page type="ARTICLE" url="http://www.vpro.nl" xmlns:pageUpdate="urn:vpro:pages:update:2013">
+                    <pageUpdate:portal id="VproNL" url="http://www.vpro.nl"/>
+                </pageUpdate:page>
+                """);
         assertThat(result.getPortal()).isEqualTo(new PortalUpdate("VproNL", "http://www.vpro.nl"));
     }
 
@@ -89,14 +91,15 @@ public class PageUpdateBuilderTest {
     @Test
     public void testParagraphs() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").paragraphs(new ParagraphUpdate(null, "body1", null), new ParagraphUpdate(null, "body2", null)).build();
-        PageUpdate result = roundTripContains(page, "<pageUpdate:paragraphs xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
-            "        <pageUpdate:paragraph>\n" +
-            "            <pageUpdate:body>body1</pageUpdate:body>\n" +
-            "        </pageUpdate:paragraph>\n" +
-            "        <pageUpdate:paragraph>\n" +
-            "            <pageUpdate:body>body2</pageUpdate:body>\n" +
-            "        </pageUpdate:paragraph>\n" +
-            "    </pageUpdate:paragraphs>");
+        PageUpdate result = roundTripContains(page, """
+            <pageUpdate:paragraphs xmlns:pageUpdate="urn:vpro:pages:update:2013">
+                    <pageUpdate:paragraph>
+                        <pageUpdate:body>body1</pageUpdate:body>
+                    </pageUpdate:paragraph>
+                    <pageUpdate:paragraph>
+                        <pageUpdate:body>body2</pageUpdate:body>
+                    </pageUpdate:paragraph>
+                </pageUpdate:paragraphs>""");
         assertThat(result.getParagraphs()).containsExactly(new ParagraphUpdate(null, "body1", null), new ParagraphUpdate(null, "body2", null));
     }
 
@@ -112,32 +115,35 @@ public class PageUpdateBuilderTest {
     @Test
     public void testLinks() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").links(new LinkUpdate("http://www.vpro.nl", "Link text")).build();
-        PageUpdate result = roundTripContains(page, "<pageUpdate:link pageRef=\"http://www.vpro.nl\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
-            "        <pageUpdate:text>Link text</pageUpdate:text>\n" +
-            "    </pageUpdate:link>");
+        PageUpdate result = roundTripContains(page, """
+            <pageUpdate:link pageRef="http://www.vpro.nl" xmlns:pageUpdate="urn:vpro:pages:update:2013">
+                    <pageUpdate:text>Link text</pageUpdate:text>
+                </pageUpdate:link>""");
         assertThat(result.getLinks()).containsExactly(new LinkUpdate("http://www.vpro.nl", "Link text"));
     }
 
     @Test
     public void testEmbeds() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").embeds(new EmbedUpdate("MID_1234", "Title", "Description")).build();
-        PageUpdate result = roundTripContains(page, "<pageUpdate:embeds xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
-            "        <pageUpdate:embed midRef=\"MID_1234\">\n" +
-            "            <pageUpdate:title>Title</pageUpdate:title>\n" +
-            "            <pageUpdate:description>Description</pageUpdate:description>\n" +
-            "        </pageUpdate:embed>\n" +
-            "    </pageUpdate:embeds>");
+        PageUpdate result = roundTripContains(page, """
+            <pageUpdate:embeds xmlns:pageUpdate="urn:vpro:pages:update:2013">
+                    <pageUpdate:embed midRef="MID_1234">
+                        <pageUpdate:title>Title</pageUpdate:title>
+                        <pageUpdate:description>Description</pageUpdate:description>
+                    </pageUpdate:embed>
+                </pageUpdate:embeds>""");
         assertThat(result.getEmbeds()).containsExactly(new EmbedUpdate("MID_1234", "Title", "Description"));
     }
 
     @Test
     public void testImages() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").images(new ImageUpdate(new Image("http://somewhere"))).build();
-        PageUpdate result = roundTripContains(page, "<pageUpdate:image xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
-            "        <pageUpdate:imageLocation>\n" +
-            "            <pageUpdate:url>http://somewhere</pageUpdate:url>\n" +
-            "        </pageUpdate:imageLocation>\n" +
-            "    </pageUpdate:image>");
+        PageUpdate result = roundTripContains(page, """
+            <pageUpdate:image xmlns:pageUpdate="urn:vpro:pages:update:2013">
+                    <pageUpdate:imageLocation>
+                        <pageUpdate:url>http://somewhere</pageUpdate:url>
+                    </pageUpdate:imageLocation>
+                </pageUpdate:image>""");
         assertThat(result.getImages()).containsExactly(new ImageUpdate(new Image("http://somewhere")));
     }
 
@@ -146,9 +152,10 @@ public class PageUpdateBuilderTest {
     public void testGenres() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").genres("3.0.1.1.11").build();
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page,
-            "<pageUpdate:page type=\"ARTICLE\" url=\"http://www.vpro.nl\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
-                "    <pageUpdate:genre>3.0.1.1.11</pageUpdate:genre>\n" +
-                "</pageUpdate:page>");
+            """
+                <pageUpdate:page type="ARTICLE" url="http://www.vpro.nl" xmlns:pages="urn:vpro:pages:2013" xmlns:pageUpdate="urn:vpro:pages:update:2013">
+                    <pageUpdate:genre>3.0.1.1.11</pageUpdate:genre>
+                </pageUpdate:page>""");
         assertThat(result.getGenres()).containsExactly("3.0.1.1.11");
     }
 
@@ -176,13 +183,14 @@ public class PageUpdateBuilderTest {
             .creationDate(TEST_INSTANT.minus(1, ChronoUnit.DAYS))
             .lastPublished(TEST_INSTANT.plus(1, ChronoUnit.DAYS))
             .build();
-        String test = "{\n" +
-            "  \"type\" : \"ARTICLE\",\n" +
-            "  \"url\" : \"http://www/vpro.nl\",\n" +
-            "  \"publishStart\" : 1460973600000,\n" +
-            "  \"lastPublished\" : 1461060000000,\n" +
-            "  \"creationDate\" : 1460887200000\n" +
-            "}";
+        String test = """
+            {
+              "type" : "ARTICLE",
+              "url" : "http://www/vpro.nl",
+              "publishStart" : 1460973600000,
+              "lastPublished" : 1461060000000,
+              "creationDate" : 1460887200000
+            }""";
         PageUpdate result = Jackson2TestUtil.roundTripAndSimilar(page, test);
         assertThat(result.getPublishStart()).isEqualTo(TEST_INSTANT);
         assertThat(result.getCreationDate()).isEqualTo(TEST_INSTANT.minus(1, ChronoUnit.DAYS));

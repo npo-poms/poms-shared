@@ -22,9 +22,10 @@ public class NotTest {
     public void testGetConstraints() {
         Not in = new Not(new PageTypeConstraint(PageType.ARTICLE));
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:not xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">\n" +
-                "    <page:type>ARTICLE</page:type>\n" +
-                "</local:not>");
+            """
+                <local:not xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:local="uri:local">
+                    <page:type>ARTICLE</page:type>
+                </local:not>""");
 
         assertThat(out.getConstraint()).isInstanceOf(PageTypeConstraint.class);
     }

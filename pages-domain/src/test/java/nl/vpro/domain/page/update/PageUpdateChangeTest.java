@@ -25,9 +25,11 @@ public class PageUpdateChangeTest {
                 .object(PageUpdateBuilder.article("http://www.vpro.nl/pagina/1").build())
                 .build();
 
-        JAXBTestUtil.assertThatXml(change).isSimilarTo("<pageUpdate:pageUpdateChange publishDate=\"2017-01-30T11:41:00+01:00\" id=\"http://www.vpro.nl/pagina/1\" deleted=\"false\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
-                "    <pageUpdate:object type=\"ARTICLE\" url=\"http://www.vpro.nl/pagina/1\"/>\n" +
-                "</pageUpdate:pageUpdateChange>\n");
+        JAXBTestUtil.assertThatXml(change).isSimilarTo("""
+            <pageUpdate:pageUpdateChange publishDate="2017-01-30T11:41:00+01:00" id="http://www.vpro.nl/pagina/1" deleted="false" xmlns:shared="urn:vpro:shared:2009" xmlns:page="urn:vpro:pages:2013" xmlns:media="urn:vpro:media:2009" xmlns:pageUpdate="urn:vpro:pages:update:2013">
+                <pageUpdate:object type="ARTICLE" url="http://www.vpro.nl/pagina/1"/>
+            </pageUpdate:pageUpdateChange>
+            """);
     }
 
 
@@ -41,15 +43,16 @@ public class PageUpdateChangeTest {
                 .object(PageUpdateBuilder.article("http://www.vpro.nl/pagina/1").build())
                 .build();
 
-        Jackson2TestUtil.assertThatJson(change).isSimilarTo("{\n" +
-            "  \"publishDate\" : 1485772860000,\n" +
-            "  \"id\" : \"http://www.vpro.nl/pagina/1\",\n" +
-            "  \"deleted\" : false,\n" +
-            "  \"object\" : {\n" +
-            "    \"type\" : \"ARTICLE\",\n" +
-            "    \"url\" : \"http://www.vpro.nl/pagina/1\"\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.assertThatJson(change).isSimilarTo("""
+            {
+              "publishDate" : 1485772860000,
+              "id" : "http://www.vpro.nl/pagina/1",
+              "deleted" : false,
+              "object" : {
+                "type" : "ARTICLE",
+                "url" : "http://www.vpro.nl/pagina/1"
+              }
+            }""");
 
     }
 

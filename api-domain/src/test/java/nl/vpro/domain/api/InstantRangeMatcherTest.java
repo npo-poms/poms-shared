@@ -76,19 +76,21 @@ public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRange
             .begin(LocalDateTime.of(2017, 6, 24, 18, 0).atZone(Schedule.ZONE_ID).toInstant())
             .end(LocalDateTime.of(2017, 7, 24, 18, 0).atZone(Schedule.ZONE_ID).toInstant())
             .build();
-        Jackson2TestUtil.roundTripAndSimilar(rangeMatcher, "{\n" +
-            "  \"begin\" : 1498320000000,\n" +
-            "  \"end\" : 1500912000000\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(rangeMatcher, """
+            {
+              "begin" : 1498320000000,
+              "end" : 1500912000000
+            }""");
 
     }
 
     @Test
     public void jsonNatty() throws Exception {
         Instant now = Instant.now();
-        DateRangeMatcher in = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
-            "  \"begin\" : \"now\"\n" +
-            "}"), DateRangeMatcher.class);
+        DateRangeMatcher in = Jackson2Mapper.getInstance().readValue(new StringReader("""
+            {
+              "begin" : "now"
+            }"""), DateRangeMatcher.class);
         assertThat(in.getBegin()).isCloseTo(now, within(10, ChronoUnit.SECONDS));
 
     }

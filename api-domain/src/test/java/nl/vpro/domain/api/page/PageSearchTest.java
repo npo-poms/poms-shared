@@ -24,10 +24,11 @@ public class PageSearchTest {
         PageSearch in = new PageSearch();
         in.setText(new SimpleTextMatcher("Title"));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<local:pageSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:text>Title</api:text>\n" +
-                "</local:pageSearch>");
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <local:pageSearch xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:text>Title</api:text>
+                </local:pageSearch>""");
         assertThat(new TextMatcher("Title")).isEqualTo(out.getText());
     }
 
@@ -47,12 +48,13 @@ public class PageSearchTest {
         PageSearch in = new PageSearch();
         in.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("TROS")));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:broadcasters match=\"MUST\">\n" +
-                "        <api:matcher>VPRO</api:matcher>\n" +
-                "        <api:matcher>TROS</api:matcher>\n" +
-                "    </api:broadcasters>\n" +
-                "</local:pageSearch>");
+            """
+                <local:pageSearch xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:broadcasters match="MUST">
+                        <api:matcher>VPRO</api:matcher>
+                        <api:matcher>TROS</api:matcher>
+                    </api:broadcasters>
+                </local:pageSearch>""");
         assertThat(out.getBroadcasters().asList()).containsExactly(new TextMatcher("VPRO"), new TextMatcher("TROS"));
     }
 
@@ -72,12 +74,14 @@ public class PageSearchTest {
         PageSearch in = new PageSearch();
         in.setTypes(new TextMatcherList(new TextMatcher("ARTICLE"), new TextMatcher("PLAYER")));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:types match=\"MUST\">\n" +
-                "        <api:matcher>ARTICLE</api:matcher>\n" +
-                "        <api:matcher>PLAYER</api:matcher>\n" +
-                "    </api:types>\n" +
-                "</local:pageSearch>\n");
+            """
+                <local:pageSearch xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:types match="MUST">
+                        <api:matcher>ARTICLE</api:matcher>
+                        <api:matcher>PLAYER</api:matcher>
+                    </api:types>
+                </local:pageSearch>
+                """);
         assertThat(out.getTypes().asList()).containsExactly(new TextMatcher(PageType.ARTICLE.name()), new TextMatcher(PageType.PLAYER.name()));
     }
 
@@ -98,11 +102,12 @@ public class PageSearchTest {
         PageSearch in = new PageSearch();
         in.setPortals(new TextMatcherList(new TextMatcher("WETENSCHAP24")));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:portals match=\"MUST\">\n" +
-                "        <api:matcher>WETENSCHAP24</api:matcher>\n" +
-                "    </api:portals>\n" +
-                "</local:pageSearch>");
+            """
+                <local:pageSearch xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:portals match="MUST">
+                        <api:matcher>WETENSCHAP24</api:matcher>
+                    </api:portals>
+                </local:pageSearch>""");
         assertThat(out.getPortals().asList()).containsExactly(new TextMatcher("WETENSCHAP24"));
     }
 
@@ -138,11 +143,12 @@ public class PageSearchTest {
         PageSearch in = new PageSearch();
         in.setGenres(new TextMatcherList(new TextMatcher("3.0.1.1")));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:genres match=\"MUST\">\n" +
-                "        <api:matcher>3.0.1.1</api:matcher>\n" +
-                "    </api:genres>\n" +
-                "</local:pageSearch>");
+            """
+                <local:pageSearch xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:genres match="MUST">
+                        <api:matcher>3.0.1.1</api:matcher>
+                    </api:genres>
+                </local:pageSearch>""");
         assertThat(out.getGenres().asList()).containsExactly(new TextMatcher("3.0.1.1"));
     }
 
@@ -164,12 +170,13 @@ public class PageSearchTest {
         in.setTags(new ExtendedTextMatcherList(new ExtendedTextMatcher("tag1")));
 
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<local:pageSearch xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                        "    <api:tags match=\"MUST\">\n" +
-                        "        <api:matcher>tag1</api:matcher>\n" +
-                        "    </api:tags>\n" +
-                        "</local:pageSearch>");
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <local:pageSearch xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:tags match="MUST">
+                        <api:matcher>tag1</api:matcher>
+                    </api:tags>
+                </local:pageSearch>""");
         assertThat(out.getTags().asList()).containsExactly(new ExtendedTextMatcher("tag1"));
     }
 
@@ -202,14 +209,15 @@ public class PageSearchTest {
         PageSearch in = new PageSearch();
         in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), true)));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:pageSearch xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:sortDates match=\"MUST\">\n" +
-                "        <api:matcher inclusiveEnd=\"true\">\n" +
-                "            <api:begin>1970-01-01T01:00:00.100+01:00</api:begin>\n" +
-                "            <api:end>1970-01-01T01:00:00.200+01:00</api:end>\n" +
-                "        </api:matcher>\n" +
-                "    </api:sortDates>\n" +
-                "</local:pageSearch>");
+            """
+                <local:pageSearch xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:sortDates match="MUST">
+                        <api:matcher inclusiveEnd="true">
+                            <api:begin>1970-01-01T01:00:00.100+01:00</api:begin>
+                            <api:end>1970-01-01T01:00:00.200+01:00</api:end>
+                        </api:matcher>
+                    </api:sortDates>
+                </local:pageSearch>""");
         assertThat(out.getSortDates().asList().get(0)).isEqualTo(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), true));
     }
 
@@ -262,20 +270,21 @@ public class PageSearchTest {
         rs2.setTypes(TextMatcherList.must(TextMatcher.must("ACTOR")));
         in.setRelations(new RelationSearchList(rs1, rs2));
         JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:pageSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:relations>\n" +
-                "        <api:relationSearch>\n" +
-                "            <api:types match=\"MUST\">\n" +
-                "                <api:matcher>DIRECTOR</api:matcher>\n" +
-                "            </api:types>\n" +
-                "        </api:relationSearch>\n" +
-                "        <api:relationSearch>\n" +
-                "            <api:types match=\"MUST\">\n" +
-                "                <api:matcher>ACTOR</api:matcher>\n" +
-                "            </api:types>\n" +
-                "        </api:relationSearch>\n" +
-                "    </api:relations>\n" +
-                "</local:pageSearch>");
+            """
+                <local:pageSearch xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:relations>
+                        <api:relationSearch>
+                            <api:types match="MUST">
+                                <api:matcher>DIRECTOR</api:matcher>
+                            </api:types>
+                        </api:relationSearch>
+                        <api:relationSearch>
+                            <api:types match="MUST">
+                                <api:matcher>ACTOR</api:matcher>
+                            </api:types>
+                        </api:relationSearch>
+                    </api:relations>
+                </local:pageSearch>""");
 
     }
 
@@ -288,20 +297,21 @@ public class PageSearchTest {
         as2.setTypes(TextMatcherList.must(TextMatcher.must("SLECHT")));
         in.setReferrals(new AssociationSearchList(as1, as2));
         JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:pageSearch xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:referrals>\n" +
-                "        <api:search>\n" +
-                "            <api:types match=\"MUST\">\n" +
-                "                <api:matcher>TOP_STORY</api:matcher>\n" +
-                "            </api:types>\n" +
-                "        </api:search>\n" +
-                "        <api:search>\n" +
-                "            <api:types match=\"MUST\">\n" +
-                "                <api:matcher>SLECHT</api:matcher>\n" +
-                "            </api:types>\n" +
-                "        </api:search>\n" +
-                "    </api:referrals>\n" +
-                "</local:pageSearch>");
+            """
+                <local:pageSearch xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:referrals>
+                        <api:search>
+                            <api:types match="MUST">
+                                <api:matcher>TOP_STORY</api:matcher>
+                            </api:types>
+                        </api:search>
+                        <api:search>
+                            <api:types match="MUST">
+                                <api:matcher>SLECHT</api:matcher>
+                            </api:types>
+                        </api:search>
+                    </api:referrals>
+                </local:pageSearch>""");
 
     }
 }

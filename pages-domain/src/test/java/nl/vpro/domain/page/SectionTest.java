@@ -57,9 +57,10 @@ public class SectionTest {
         Portal portal = new Portal();
         portal.setId("vpronl");
         portal.setSection(target);
-        Portal result = JAXBTestUtil.roundTripAndSimilar(portal, "<local:portal id=\"vpronl\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-            "    <pages:section path=\"/tegenlicht\">Tegenlicht</pages:section>\n" +
-            "</local:portal>");
+        Portal result = JAXBTestUtil.roundTripAndSimilar(portal, """
+            <local:portal id="vpronl" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                <pages:section path="/tegenlicht">Tegenlicht</pages:section>
+            </local:portal>""");
         assertThat(result.getSection()).isNotNull();
         assertThat(result.getSection().getPortal()).isSameAs(result);
         assertThat(result.getSection().getDisplayName()).isEqualTo("Tegenlicht");
@@ -73,14 +74,15 @@ public class SectionTest {
         Portal portal = new Portal();
         portal.setId("vpronl");
         portal.setSection(target);
-        Portal result = Jackson2TestUtil.roundTripAndSimilar(portal, "{\n" +
-            "  \"id\" : \"vpronl\",\n" +
-            "  \"section\" : {\n" +
-            "    \"path\" : \"/tegenlicht\",\n" +
-            "    \"id\" : \"vpronl./tegenlicht\",\n" +
-            "    \"value\" : \"Tegenlicht\"\n" +
-            "  }\n" +
-            "}");
+        Portal result = Jackson2TestUtil.roundTripAndSimilar(portal, """
+            {
+              "id" : "vpronl",
+              "section" : {
+                "path" : "/tegenlicht",
+                "id" : "vpronl./tegenlicht",
+                "value" : "Tegenlicht"
+              }
+            }""");
         assertThat(result.getSection()).isNotNull();
         assertThat(result.getSection().getPortal()).isSameAs(result);
         assertThat(result.getSection().getDisplayName()).isEqualTo("Tegenlicht");

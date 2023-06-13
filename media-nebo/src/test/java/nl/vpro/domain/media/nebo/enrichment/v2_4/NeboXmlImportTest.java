@@ -164,25 +164,27 @@ public class NeboXmlImportTest {
 
     @Test
     public void unmarshal2() {
-        String test = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<nebo_xml_import type=\"verrijking\" versie=\"2.3\">\n" +
-            "    <aflevering prid='myprid'>\n" +
-            "        <atit>Episode title MIS</atit>\n" +
-            "        <fragmenten>\n" +
-            "            <fragment>\n" +
-            "                <eindtijd>03:02:00</eindtijd>\n" +
-            "                <afbeelding>\n" +
-            "                    <pad>urn.media.image.123</pad>\n" +
-            "                </afbeelding>\n" +
-            "                <omschrijving>Beschrijving</omschrijving>\n" +
-            "                <starttijd>01:02:00</starttijd>\n" +
-            "                <titel>Main title</titel>\n" +
-            "            </fragment>\n" +
-            "        </fragmenten>\n" +
-            "        <gids_tekst>Main title</gids_tekst>\n" +
-            "        <tite>Main title</tite>\n" +
-            "    </aflevering>\n" +
-            "</nebo_xml_import>\n";
+        String test = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <nebo_xml_import type="verrijking" versie="2.3">
+                <aflevering prid='myprid'>
+                    <atit>Episode title MIS</atit>
+                    <fragmenten>
+                        <fragment>
+                            <eindtijd>03:02:00</eindtijd>
+                            <afbeelding>
+                                <pad>urn.media.image.123</pad>
+                            </afbeelding>
+                            <omschrijving>Beschrijving</omschrijving>
+                            <starttijd>01:02:00</starttijd>
+                            <titel>Main title</titel>
+                        </fragment>
+                    </fragmenten>
+                    <gids_tekst>Main title</gids_tekst>
+                    <tite>Main title</tite>
+                </aflevering>
+            </nebo_xml_import>
+            """;
 
         NeboXmlImport xml = JAXB.unmarshal(new ByteArrayInputStream(test.getBytes()), NeboXmlImport.class);
         assertEquals(1, xml.getAflevering().getFragmenten().getFragment().size());

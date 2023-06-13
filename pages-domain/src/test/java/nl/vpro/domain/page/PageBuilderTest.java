@@ -109,12 +109,13 @@ public class PageBuilderTest {
     public void testGenres() {
         Page page = PageBuilder.page(PageType.ARTICLE).url("http://www.vpro.nl").genres(classificationService.getTerm("3.0.1.1.4")).build();
         String test =
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pages:page xmlns:pages=\"urn:vpro:pages:2013\" url=\"http://www.vpro.nl\" type=\"ARTICLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <pages:genre displayName=\"Jeugd - Sport\" id=\"3.0.1.1.4\">\n" +
-            "        <pages:term>Jeugd</pages:term>\n" +
-            "        <pages:term>Sport</pages:term>\n" +
-            "    </pages:genre>\n" +
-            "</pages:page>";
+            """
+                <?xml version="1.0" encoding="UTF-8"?><pages:page xmlns:pages="urn:vpro:pages:2013" url="http://www.vpro.nl" type="ARTICLE" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                    <pages:genre displayName="Jeugd - Sport" id="3.0.1.1.4">
+                        <pages:term>Jeugd</pages:term>
+                        <pages:term>Sport</pages:term>
+                    </pages:genre>
+                </pages:page>""";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
         assertThat(result.getGenres()).hasSize(1);
         assertThat(result.getGenres().first().getTermId()).isEqualTo("3.0.1.1.4");

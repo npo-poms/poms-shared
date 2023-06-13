@@ -26,22 +26,24 @@ public class GTAANewPersonTest {
 
         GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").scopeNote("test").build();
 
-        Jackson2TestUtil.roundTripAndSimilar(person, "{\n" +
-            "  \"newObjectType\" : \"person\",\n" +
-            "  \"givenName\" : \"Pietje\",\n" +
-            "  \"familyName\" : \"Puk\",\n" +
-            "  \"scopeNotes\" : [ \"test\" ]\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(person, """
+            {
+              "newObjectType" : "person",
+              "givenName" : "Pietje",
+              "familyName" : "Puk",
+              "scopeNotes" : [ "test" ]
+            }""");
 
     }
 
     @Test
     public void jsonWithoutType() throws IOException {
-        String json = "{\n" +
-            "  \"givenName\" : \"Pietje\",\n" +
-            "  \"familyName\" : \"Puk\",\n" +
-            "  \"scopeNotes\" : [ \"test\" ]\n" +
-            "}";
+        String json = """
+            {
+              "givenName" : "Pietje",
+              "familyName" : "Puk",
+              "scopeNotes" : [ "test" ]
+            }""";
 
         GTAANewPerson gtaaNewPerson =
             (GTAANewPerson) reader.readFrom(Object.class,
@@ -55,11 +57,12 @@ public class GTAANewPersonTest {
     @Test
     public void xml() {
         GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").scopeNote("test").build();
-        JAXBTestUtil.roundTripAndSimilar(person, "<gtaa:newPerson   xmlns:gtaa=\"urn:vpro:gtaa:2017\" >\n" +
-            "    <gtaa:givenName>Pietje</gtaa:givenName>\n" +
-            "    <gtaa:familyName>Puk</gtaa:familyName>\n" +
-            "    <gtaa:scopeNote>test</gtaa:scopeNote>\n" +
-            "</gtaa:newPerson>");
+        JAXBTestUtil.roundTripAndSimilar(person, """
+            <gtaa:newPerson   xmlns:gtaa="urn:vpro:gtaa:2017" >
+                <gtaa:givenName>Pietje</gtaa:givenName>
+                <gtaa:familyName>Puk</gtaa:familyName>
+                <gtaa:scopeNote>test</gtaa:scopeNote>
+            </gtaa:newPerson>""");
 
     }
 }

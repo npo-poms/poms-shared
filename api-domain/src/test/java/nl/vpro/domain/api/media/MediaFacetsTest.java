@@ -38,17 +38,18 @@ public class MediaFacetsTest {
         assertThat(in.isFaceted()).isTrue();
 
         MediaFacets out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:mediaFacets xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:sortDates>\n" +
-                "        <api:preset>THIS_WEEK</api:preset>\n" +
-                "        <api:interval>YEAR</api:interval>\n" +
-                "        <api:range>\n" +
-                "            <api:name>MyFacet</api:name>\n" +
-                "            <api:begin>1970-01-01T01:00:00+01:00</api:begin>\n" +
-                "            <api:end>1970-01-01T01:00:01+01:00</api:end>\n" +
-                "        </api:range>\n" +
-                "    </api:sortDates>\n" +
-                "</local:mediaFacets>");
+            """
+                <local:mediaFacets xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:sortDates>
+                        <api:preset>THIS_WEEK</api:preset>
+                        <api:interval>YEAR</api:interval>
+                        <api:range>
+                            <api:name>MyFacet</api:name>
+                            <api:begin>1970-01-01T01:00:00+01:00</api:begin>
+                            <api:end>1970-01-01T01:00:01+01:00</api:end>
+                        </api:range>
+                    </api:sortDates>
+                </local:mediaFacets>""");
 
         assertThat(out.getSortDates().getRanges()).hasSize(3);
     }
@@ -125,11 +126,12 @@ public class MediaFacetsTest {
         MediaFacets in = new MediaFacets();
         in.setBroadcasters(new MediaFacet());
         MediaFacets out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:mediaFacets xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:broadcasters sort=\"VALUE_ASC\">\n" +
-                "        <api:max>24</api:max>\n" +
-                "    </api:broadcasters>\n" +
-                "</local:mediaFacets>");
+            """
+                <local:mediaFacets xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:broadcasters sort="VALUE_ASC">
+                        <api:max>24</api:max>
+                    </api:broadcasters>
+                </local:mediaFacets>""");
         assertThat(out.getBroadcasters()).isEqualTo(new MediaFacet());
     }
 
@@ -141,24 +143,26 @@ public class MediaFacetsTest {
         assertThat(in.isFaceted()).isTrue();
 
         MediaFacets out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:mediaFacets xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:genres sort=\"VALUE_ASC\">\n" +
-                "        <api:max>24</api:max>\n" +
-                "    </api:genres>\n" +
-                "</local:mediaFacets>"
+            """
+                <local:mediaFacets xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:genres sort="VALUE_ASC">
+                        <api:max>24</api:max>
+                    </api:genres>
+                </local:mediaFacets>"""
         );
         assertThat(out.getGenres()).isEqualTo(new MediaFacet());
     }
 
     @Test
     public void testGetGenreBackwards() {
-        String backwards = "<local:mediaFacets xmlns=\"urn:vpro:api:2013\" xmlns:local=\"uri:local\" >\n" +
-            "    <genres sort=\"COUNT\">\n" +
-            "        <threshold>0</threshold>\n" +
-            "        <offset>0</offset>\n" +
-            "        <max>24</max>\n" +
-            "    </genres>\n" +
-            "</local:mediaFacets>";
+        String backwards = """
+            <local:mediaFacets xmlns="urn:vpro:api:2013" xmlns:local="uri:local" >
+                <genres sort="COUNT">
+                    <threshold>0</threshold>
+                    <offset>0</offset>
+                    <max>24</max>
+                </genres>
+            </local:mediaFacets>""";
         MediaFacets out = JAXB.unmarshal(new StringReader(backwards), MediaFacets.class);
         assertThat(out.getGenres().getSort()).isEqualTo(FacetOrder.COUNT_DESC);
     }
@@ -171,11 +175,12 @@ public class MediaFacetsTest {
         assertThat(in.isFaceted()).isTrue();
 
         MediaFacets out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:mediaFacets xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:tags sort=\"VALUE_ASC\">\n" +
-                "        <api:max>24</api:max>\n" +
-                "    </api:tags>\n" +
-                "</local:mediaFacets>");
+            """
+                <local:mediaFacets xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:tags sort="VALUE_ASC">
+                        <api:max>24</api:max>
+                    </api:tags>
+                </local:mediaFacets>""");
         assertThat(out.getTags()).isEqualTo(new MediaFacet());
     }
 
@@ -189,11 +194,12 @@ public class MediaFacetsTest {
         assertThat(in.isFaceted()).isTrue();
 
         MediaFacets out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:mediaFacets xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:durations>\n" +
-                "        <api:interval>YEAR</api:interval>\n" +
-                "    </api:durations>\n" +
-                "</local:mediaFacets>");
+            """
+                <local:mediaFacets xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:durations>
+                        <api:interval>YEAR</api:interval>
+                    </api:durations>
+                </local:mediaFacets>""");
         assertThat(out.getDurations().getRanges()).hasSize(1);
     }
 
@@ -206,12 +212,13 @@ public class MediaFacetsTest {
         facet.setFilter(search);
 
         MediaFacet out = JAXBTestUtil.roundTripAndSimilar(facet,
-            "<local:mediaFacet sort=\"VALUE_ASC\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:max>24</api:max>\n" +
-                "    <api:filter>\n" +
-                "        <api:text>find me</api:text>\n" +
-                "    </api:filter>\n" +
-                "</local:mediaFacet>"
+            """
+                <local:mediaFacet sort="VALUE_ASC" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:local="uri:local">
+                    <api:max>24</api:max>
+                    <api:filter>
+                        <api:text>find me</api:text>
+                    </api:filter>
+                </local:mediaFacet>"""
         );
         assertThat(out.getFilter()).isInstanceOf(MediaSearch.class);
         assertThat(out.getFilter().getText().getValue()).isEqualTo("find me");
@@ -236,14 +243,15 @@ public class MediaFacetsTest {
     @Test
     public void testGetMediaSearchFromFacetTitlesBackwardsCompatibleJson() throws Exception {
 
-        String example = "{\n" +
-            "  \"facets\" : {\n" +
-            "    \"titles\" : {\n" +
-            "      \"sort\" : \"VALUE_ASC\",\n" +
-            "      \"max\" : 23\n" +
-            "    }\n" +
-            "  }\n" +
-            "}";
+        String example = """
+            {
+              "facets" : {
+                "titles" : {
+                  "sort" : "VALUE_ASC",
+                  "max" : 23
+                }
+              }
+            }""";
 
         MediaForm form = Jackson2Mapper.getLenientInstance().readValue(example, MediaForm.class);
 
@@ -256,13 +264,14 @@ public class MediaFacetsTest {
     @Test
     public void testGetMediaSearchFromFacetTitlesBackwardsCompatibleXml() {
 
-        String example = "<mediaForm xmlns=\"urn:vpro:api:2013\">\n" +
-            "  <facets>\n" +
-            "    <titles sort=\"COUNT_DESC\">\n" +
-            "      <max>25</max>\n" +
-            "    </titles>\n" +
-            "  </facets>\n" +
-            "</mediaForm>";
+        String example = """
+            <mediaForm xmlns="urn:vpro:api:2013">
+              <facets>
+                <titles sort="COUNT_DESC">
+                  <max>25</max>
+                </titles>
+              </facets>
+            </mediaForm>""";
 
         MediaForm form = JAXB.unmarshal(new StringReader(example), MediaForm.class);
 
