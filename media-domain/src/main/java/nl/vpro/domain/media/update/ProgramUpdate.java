@@ -128,10 +128,10 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         Program p  = super.fetch(owner);
         p.setType(programType);
         p.setSegments(toSet(segments, (s) -> {
-                Segment result = s.fetch(owner);
-                result.setMidRef(null);
-                result.setParent(p);
-                return result;
+            Segment result = s.fetch(owner);
+            result.setMidRef(null);
+            result.setParent(p);
+            return result;
             })
         );
 
@@ -142,8 +142,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         }));
         // used to be handled in  nl.vpro.domain.media.update.MediaUpdateServiceImpl.fetch
         p.setEpisodeOf(toSet(episodeOf, s -> {
-            MemberRef r = s.toMemberRef(owner);
-            return r;
+            return s.toMemberRef(owner);
         }));
         return p;
     }
@@ -204,5 +203,10 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
     public void setSegments(SortedSet<SegmentUpdate> segments) {
         this.segments = segments;
+        if (segments != null) {
+            for (SegmentUpdate segment : segments) {
+                segment.setParent(this);
+            }
+        }
     }
 }
