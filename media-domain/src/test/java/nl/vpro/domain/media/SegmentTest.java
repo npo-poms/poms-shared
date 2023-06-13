@@ -19,27 +19,28 @@ public class SegmentTest {
 
     @Test
     public void xml() {
-        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><segment xmlns=\"urn:vpro:media:2009\" midRef=\"RBX_NTR_2648108\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:program:83538010\" avType=\"AUDIO\" embeddable=\"true\" mid=\"RBX_NTR_4965178\" sortDate=\"2013-11-01T04:36:35.076+01:00\" workflow=\"PUBLISHED\" creationDate=\"2016-11-01T04:36:35.076+01:00\" lastModified=\"2016-11-01T04:36:35.105+01:00\" publishDate=\"2016-11-01T04:42:23.506+01:00\" urn=\"urn:vpro:media:segment:83538015\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <crid>crid://item.radiobox2/372578</crid>\n" +
-            "    <broadcaster id=\"NTR\">NTR</broadcaster>\n" +
-            "    <title owner=\"RADIOBOX\" type=\"MAIN\">Monteverdi - Orfeo</title>\n" +
-            "    <description owner=\"RADIOBOX\" type=\"MAIN\">Opname 12 oktober 2016, Opera LausanneJose Maria Lo Monaco &amp; Fernando Guimaraes &amp; Anais Yvoz &amp; Delphine Galou &amp; Nicolas Courjal &amp; Anicio Zorzi Giustiniani &amp; Alessandro Giangrande &amp; Mathilde Opinel</description>\n" +
-            "    <duration>P0DT0H3M0.000S</duration>\n" +
-            "    <credits/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:group:13405607\" midRef=\"AUTO_NTROPERALIVE\" type=\"SERIES\"/>\n" +
-            "    <descendantOf urnRef=\"urn:vpro:media:program:83538010\" midRef=\"RBX_NTR_2648108\" type=\"BROADCAST\"/>\n" +
-            "    <locations/>\n" +
-            "    <images>\n" +
-            "        <shared:image owner=\"RADIOBOX\" type=\"PICTURE\" highlighted=\"false\" workflow=\"PUBLISHED\" creationDate=\"2016-11-01T04:36:34.659+01:00\" lastModified=\"2016-11-01T04:36:35.079+01:00\" urn=\"urn:vpro:media:image:83538017\">\n" +
-            "            <shared:title>Orfeo ed Euridice</shared:title>\n" +
-            "            <shared:imageUri>urn:vpro:image:780595</shared:imageUri>\n" +
-            "            <shared:height>568</shared:height>\n" +
-            "            <shared:width>480</shared:width>\n" +
-            "        </shared:image>\n" +
-            "    </images>\n" +
-            "    <segmentOf midRef=\"RBX_NTR_2648108\" type=\"CLIP\"/>\n" +
-            "    <start>P0DT0H0M0.000S</start>\n" +
-            "</segment>";
+        String xml = """
+            <?xml version="1.0" encoding="UTF-8"?><segment xmlns="urn:vpro:media:2009" midRef="RBX_NTR_2648108" type="SEGMENT" urnRef="urn:vpro:media:program:83538010" avType="AUDIO" embeddable="true" mid="RBX_NTR_4965178" sortDate="2013-11-01T04:36:35.076+01:00" workflow="PUBLISHED" creationDate="2016-11-01T04:36:35.076+01:00" lastModified="2016-11-01T04:36:35.105+01:00" publishDate="2016-11-01T04:42:23.506+01:00" urn="urn:vpro:media:segment:83538015" xmlns:shared="urn:vpro:shared:2009">
+                <crid>crid://item.radiobox2/372578</crid>
+                <broadcaster id="NTR">NTR</broadcaster>
+                <title owner="RADIOBOX" type="MAIN">Monteverdi - Orfeo</title>
+                <description owner="RADIOBOX" type="MAIN">Opname 12 oktober 2016, Opera LausanneJose Maria Lo Monaco &amp; Fernando Guimaraes &amp; Anais Yvoz &amp; Delphine Galou &amp; Nicolas Courjal &amp; Anicio Zorzi Giustiniani &amp; Alessandro Giangrande &amp; Mathilde Opinel</description>
+                <duration>P0DT0H3M0.000S</duration>
+                <credits/>
+                <descendantOf urnRef="urn:vpro:media:group:13405607" midRef="AUTO_NTROPERALIVE" type="SERIES"/>
+                <descendantOf urnRef="urn:vpro:media:program:83538010" midRef="RBX_NTR_2648108" type="BROADCAST"/>
+                <locations/>
+                <images>
+                    <shared:image owner="RADIOBOX" type="PICTURE" highlighted="false" workflow="PUBLISHED" creationDate="2016-11-01T04:36:34.659+01:00" lastModified="2016-11-01T04:36:35.079+01:00" urn="urn:vpro:media:image:83538017">
+                        <shared:title>Orfeo ed Euridice</shared:title>
+                        <shared:imageUri>urn:vpro:image:780595</shared:imageUri>
+                        <shared:height>568</shared:height>
+                        <shared:width>480</shared:width>
+                    </shared:image>
+                </images>
+                <segmentOf midRef="RBX_NTR_2648108" type="CLIP"/>
+                <start>P0DT0H0M0.000S</start>
+            </segment>""";
         Segment segment = JAXBTestUtil.unmarshal(xml,  Segment.class);
         assertThat(segment.getSegmentOf().getParentMid()).isEqualTo("RBX_NTR_2648108");
         assertThat(segment.getSegmentOf().getType()).isEqualTo(MediaType.CLIP);
@@ -55,24 +56,25 @@ public class SegmentTest {
             .creationDate(LocalDateTime.of(2017, 5, 9, 14, 0))
 
             .build();
-        Jackson2TestUtil.roundTripAndSimilar(segment, "{\n" +
-            "  \"objectType\" : \"segment\",\n" +
-            "  \"type\" : \"SEGMENT\",\n" +
-            "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
-            "  \"sortDate\" : 1494331200000,\n" +
-            "  \"creationDate\" : 1494331200000,\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ],\n" +
-            "  \"start\" : 100,\n" +
-            "  \"midRef\" : \"bla\",\n" +
-            "  \"segmentOf\" : {\n" +
-            "    \"midRef\" : \"bla\",\n" +
-            "    \"type\" : \"CLIP\"\n" +
-            "  }\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(segment, """
+            {
+              "objectType" : "segment",
+              "type" : "SEGMENT",
+              "workflow" : "FOR_PUBLICATION",
+              "sortDate" : 1494331200000,
+              "creationDate" : 1494331200000,
+              "embeddable" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ],
+              "start" : 100,
+              "midRef" : "bla",
+              "segmentOf" : {
+                "midRef" : "bla",
+                "type" : "CLIP"
+              }
+            }""");
     }
 
     @Test
@@ -103,46 +105,49 @@ public class SegmentTest {
         assertThat(segment.getSortInstant()).isEqualTo(program.getCreationInstant());
 
         assertThat(
-            JAXBTestUtil.roundTripAndSimilar(segment, "<segment midRef=\"parentMid\" type=\"SEGMENT\" embeddable=\"true\" mid=\"segmentMid\" sortDate=\"2017-10-24T00:00:00+02:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2017-10-25T00:00:00+02:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-                "    <title owner=\"BROADCASTER\" type=\"MAIN\">bla</title>\n" +
-                "    <duration>P0DT0H2M3.000S</duration>\n" +
-                "    <credits/>\n" +
-                "    <descendantOf midRef=\"parentMid\" type=\"BROADCAST\"/>\n" +
-                "    <locations/>\n" +
-                "    <images/>\n" +
-                "    <segmentOf midRef=\"parentMid\" type=\"BROADCAST\"/>\n" +
-                "</segment>").getSortInstant()
+            JAXBTestUtil.roundTripAndSimilar(segment, """
+                <segment midRef="parentMid" type="SEGMENT" embeddable="true" mid="segmentMid" sortDate="2017-10-24T00:00:00+02:00" workflow="FOR PUBLICATION" creationDate="2017-10-25T00:00:00+02:00" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                    <title owner="BROADCASTER" type="MAIN">bla</title>
+                    <duration>P0DT0H2M3.000S</duration>
+                    <credits/>
+                    <descendantOf midRef="parentMid" type="BROADCAST"/>
+                    <locations/>
+                    <images/>
+                    <segmentOf midRef="parentMid" type="BROADCAST"/>
+                </segment>""").getSortInstant()
         ).isEqualTo(program.getCreationInstant());
 
         assertThat(
-            Jackson2TestUtil.roundTripAndSimilar(segment, "{\n" +
-                "  \"objectType\" : \"segment\",\n" +
-                "  \"mid\" : \"segmentMid\",\n" +
-                "  \"type\" : \"SEGMENT\",\n" +
-                "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
-                "  \"sortDate\" : 1508796000000,\n" +
-                "  \"creationDate\" : 1508882400000,\n" +
-                "  \"embeddable\" : true,\n" +
-                "  \"broadcasters\" : [ ],\n" +
-                "  \"titles\" : [ {\n" +
-                "    \"value\" : \"bla\",\n" +
-                "    \"owner\" : \"BROADCASTER\",\n" +
-                "    \"type\" : \"MAIN\"\n" +
-                "  } ],\n" +
-                "  \"genres\" : [ ],\n" +
-                "  \"countries\" : [ ],\n" +
-                "  \"languages\" : [ ],\n" +
-                "  \"duration\" : 123000,\n" +
-                "  \"descendantOf\" : [ {\n" +
-                "    \"midRef\" : \"parentMid\",\n" +
-                "    \"type\" : \"BROADCAST\"\n" +
-                "  } ],\n" +
-                "  \"midRef\" : \"parentMid\",\n" +
-                "  \"segmentOf\" : {\n" +
-                "    \"midRef\" : \"parentMid\",\n" +
-                "    \"type\" : \"BROADCAST\"\n" +
-                "    }\n" +
-                "}\n").getSortInstant()
+            Jackson2TestUtil.roundTripAndSimilar(segment, """
+                {
+                  "objectType" : "segment",
+                  "mid" : "segmentMid",
+                  "type" : "SEGMENT",
+                  "workflow" : "FOR_PUBLICATION",
+                  "sortDate" : 1508796000000,
+                  "creationDate" : 1508882400000,
+                  "embeddable" : true,
+                  "broadcasters" : [ ],
+                  "titles" : [ {
+                    "value" : "bla",
+                    "owner" : "BROADCASTER",
+                    "type" : "MAIN"
+                  } ],
+                  "genres" : [ ],
+                  "countries" : [ ],
+                  "languages" : [ ],
+                  "duration" : 123000,
+                  "descendantOf" : [ {
+                    "midRef" : "parentMid",
+                    "type" : "BROADCAST"
+                  } ],
+                  "midRef" : "parentMid",
+                  "segmentOf" : {
+                    "midRef" : "parentMid",
+                    "type" : "BROADCAST"
+                    }
+                }
+                """).getSortInstant()
         ).isEqualTo(program.getCreationInstant());
     }
 

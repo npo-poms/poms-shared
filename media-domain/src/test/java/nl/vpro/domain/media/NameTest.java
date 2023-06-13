@@ -73,12 +73,13 @@ class NameTest {
             .build();
 
         JAXBTestUtil.assertThatXml(name).isSimilarTo(
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<local:name gtaaUri=\"http://gtaa/1\" gtaaStatus=\"approved\" role=\"GUEST\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <name>Doe Maar</name>\n" +
-                "    <scopeNote>bla1</scopeNote>\n" +
-                "    <scopeNote>bla2</scopeNote>\n" +
-                "</local:name>"
+            """
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <local:name gtaaUri="http://gtaa/1" gtaaStatus="approved" role="GUEST" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:local="uri:local">
+                    <name>Doe Maar</name>
+                    <scopeNote>bla1</scopeNote>
+                    <scopeNote>bla2</scopeNote>
+                </local:name>"""
         ).andRounded().isEqualTo(name);
     }
 }

@@ -22,14 +22,15 @@ class LocationUpdateTest {
                 .duration(Duration.ofMinutes(5))
                 .programUrl("https://www.vpro.nl/test.mp4")
                 .build()
-            , "<location xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                "    <programUrl>https://www.vpro.nl/test.mp4</programUrl>\n" +
-                "    <avAttributes>\n" +
-                "        <avFileFormat>MP4</avFileFormat>\n" +
-                "        <videoAttributes width=\"640\" height=\"320\"/>\n" +
-                "    </avAttributes>\n" +
-                "    <duration>P0DT0H5M0.000S</duration>\n" +
-                "</location>"
+            , """
+                <location xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                    <programUrl>https://www.vpro.nl/test.mp4</programUrl>
+                    <avAttributes>
+                        <avFileFormat>MP4</avFileFormat>
+                        <videoAttributes width="640" height="320"/>
+                    </avAttributes>
+                    <duration>P0DT0H5M0.000S</duration>
+                </location>"""
         );
     }
 }

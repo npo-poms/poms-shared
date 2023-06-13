@@ -21,12 +21,13 @@ public class TranscodeStatusTest {
             .broadcasters(Arrays.asList("VPRO", "EO"))
             .build();
 
-        JAXBTestUtil.roundTripAndSimilar(status, "<transcodeStatus mid=\"mid_123\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <broadcasters>\n" +
-            "        <broadcaster>VPRO</broadcaster>\n" +
-            "        <broadcaster>EO</broadcaster>\n" +
-            "    </broadcasters>\n" +
-            "</transcodeStatus>");
+        JAXBTestUtil.roundTripAndSimilar(status, """
+            <transcodeStatus mid="mid_123" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                <broadcasters>
+                    <broadcaster>VPRO</broadcaster>
+                    <broadcaster>EO</broadcaster>
+                </broadcasters>
+            </transcodeStatus>""");
     }
 
 }

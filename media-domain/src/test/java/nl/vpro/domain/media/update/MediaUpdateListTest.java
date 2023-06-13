@@ -35,11 +35,11 @@ public class MediaUpdateListTest {
     @Test
     public void marshalStrings() {
         MediaUpdateList<String> xmlList = new MediaUpdateList<>("a", "b");
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<list  offset='0' size='2' totalCount='2' xmlns:media=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"  xmlns=\"urn:vpro:media:update:2009\">\n" +
-            "   <item  xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"xs:string\">a</item>\n" +
-            "   <item  xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"xs:string\">b</item>" +
-            "</list>";
+        String expected = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <list  offset='0' size='2' totalCount='2' xmlns:media="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009"  xmlns="urn:vpro:media:update:2009">
+               <item  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">a</item>
+               <item  xmlns:xs="http://www.w3.org/2001/XMLSchema"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">b</item></list>""";
 
         StringWriter writer = new StringWriter();
         JAXB.marshal(xmlList, writer);
@@ -95,34 +95,36 @@ public class MediaUpdateListTest {
         StringWriter writer = new StringWriter();
         JAXB.marshal(list, writer);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<list offset=\"0\" totalCount=\"1\" size=\"1\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <item xsi:type=\"programUpdateType\" type='CLIP' avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_1234\" urn=\"urn:vpro:media:program:123\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-            "        <broadcaster>VPRO</broadcaster>\n" +
-            "        <title type=\"MAIN\">hoi</title>\n" +
-            "        <intentions/>\n" +
-            "        <targetGroups/>\n" +
-            "        <geoLocations/>\n" +
-            "        <topics/>\n" +
-            "        <credits/>\n" +
-            "        <locations/>\n" +
-            "        <scheduleEvents/>\n" +
-            "        <images/>\n" +
-            "        <segments>\n" +
-            "            <segment avType=\"VIDEO\" embeddable=\"true\" midRef=\"POMS_1234\" type=\"VISUALRADIOSEGMENT\">\n" +
-            "                <broadcaster>VPRO</broadcaster>\n" +
-            "                <title type=\"MAIN\">segmenttitel</title>\n" +
-            "                <intentions/>\n" +
-            "                <targetGroups/>\n" +
-            "                <geoLocations/>\n" +
-            "                <topics/>\n" +
-            "                <credits/>\n" +
-            "                <locations/>\n" +
-            "                <images/>\n" +
-            "                <start>P0DT0H0M0.000S</start>\n" +
-            "            </segment>\n" +
-            "        </segments>\n" +
-            "    </item>\n" +
-            "</list>";
+        String expected = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <list offset="0" totalCount="1" size="1" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                <item xsi:type="programUpdateType" type='CLIP' avType="VIDEO" embeddable="true" mid="POMS_1234" urn="urn:vpro:media:program:123" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <broadcaster>VPRO</broadcaster>
+                    <title type="MAIN">hoi</title>
+                    <intentions/>
+                    <targetGroups/>
+                    <geoLocations/>
+                    <topics/>
+                    <credits/>
+                    <locations/>
+                    <scheduleEvents/>
+                    <images/>
+                    <segments>
+                        <segment avType="VIDEO" embeddable="true" midRef="POMS_1234" type="VISUALRADIOSEGMENT">
+                            <broadcaster>VPRO</broadcaster>
+                            <title type="MAIN">segmenttitel</title>
+                            <intentions/>
+                            <targetGroups/>
+                            <geoLocations/>
+                            <topics/>
+                            <credits/>
+                            <locations/>
+                            <images/>
+                            <start>P0DT0H0M0.000S</start>
+                        </segment>
+                    </segments>
+                </item>
+            </list>""";
         log.info(writer.toString());
         Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
         MediaUpdateList<ProgramUpdate> list2 = JAXB.unmarshal(new StringReader(writer.toString()), MediaUpdateList.class);

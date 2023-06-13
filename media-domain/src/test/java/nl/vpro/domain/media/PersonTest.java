@@ -62,10 +62,11 @@ public class PersonTest implements BasicObjectTheory<Person> {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
         person.setGtaaInfo(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         JAXBTestUtil.assertThatXml(person).isSimilarTo(
-            "<local:person role=\"ACTOR\" gtaaStatus=\"approved\" gtaaUri=\"http://data.beeldengeluid.nl/gtaa/1869521\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
-            "    <givenName>Pietje</givenName>\n" +
-            "    <familyName>Puk</familyName>\n" +
-            "</local:person>").andRounded().isEqualTo(person);
+            """
+                <local:person role="ACTOR" gtaaStatus="approved" gtaaUri="http://data.beeldengeluid.nl/gtaa/1869521" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:local="uri:local">
+                    <givenName>Pietje</givenName>
+                    <familyName>Puk</familyName>
+                </local:person>""").andRounded().isEqualTo(person);
 
     }
 

@@ -45,16 +45,17 @@ public class ImageTest {
         image.setLicense(License.CC_BY);
 
 
-        Image result = Jackson2TestUtil.roundTripAndSimilarAndEquals(image, "{\n" +
-            "  \"imageUri\" : \"urn:vpro:image:123\",\n" +
-            "  \"offset\" : 100,\n" +
-            "  \"license\" : \"CC_BY\",\n" +
-            "  \"owner\" : \"BROADCASTER\",\n" +
-            "  \"type\" : \"PICTURE\",\n" +
-            "  \"highlighted\" : false,\n" +
-            "  \"creationDate\" : 1478646000000,\n" +
-            "  \"workflow\" : \"FOR_PUBLICATION\"\n" +
-            "}");
+        Image result = Jackson2TestUtil.roundTripAndSimilarAndEquals(image, """
+            {
+              "imageUri" : "urn:vpro:image:123",
+              "offset" : 100,
+              "license" : "CC_BY",
+              "owner" : "BROADCASTER",
+              "type" : "PICTURE",
+              "highlighted" : false,
+              "creationDate" : 1478646000000,
+              "workflow" : "FOR_PUBLICATION"
+            }""");
         assertThat(result.getLicense()).isEqualTo(License.CC_BY);
     }
 
@@ -68,11 +69,12 @@ public class ImageTest {
         image.setLicense(License.CC_BY);
 
 
-        JAXBTestUtil.roundTripAndSimilar(image, "<local:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" creationDate=\"2016-11-09T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
-            "    <shared:imageUri>urn:vpro:image:123</shared:imageUri>\n" +
-            "    <shared:offset>P0DT0H0M0.100S</shared:offset>\n" +
-            "    <shared:license>CC_BY</shared:license>\n" +
-            "</local:image>");
+        JAXBTestUtil.roundTripAndSimilar(image, """
+            <local:image owner="BROADCASTER" type="PICTURE" highlighted="false" creationDate="2016-11-09T00:00:00+01:00" workflow="FOR PUBLICATION" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:local="uri:local">
+                <shared:imageUri>urn:vpro:image:123</shared:imageUri>
+                <shared:offset>P0DT0H0M0.100S</shared:offset>
+                <shared:license>CC_BY</shared:license>
+            </local:image>""");
 
     }
 

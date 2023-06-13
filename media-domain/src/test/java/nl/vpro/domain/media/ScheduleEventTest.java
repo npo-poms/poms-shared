@@ -31,10 +31,11 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
         assertThat(e.getTitles().first().get()).isEqualTo("aa");
 
-        JAXBTestUtil.roundTripAndSimilar(e, "<local:scheduleEvent xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
-            "    <title owner=\"BROADCASTER\" type=\"MAIN\">aa</title>\n" +
-            "    <title owner=\"BROADCASTER\" type=\"ABBREVIATION\">bbb</title>\n" +
-            "</local:scheduleEvent>");
+        JAXBTestUtil.roundTripAndSimilar(e, """
+            <local:scheduleEvent xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:local="uri:local">
+                <title owner="BROADCASTER" type="MAIN">aa</title>
+                <title owner="BROADCASTER" type="ABBREVIATION">bbb</title>
+            </local:scheduleEvent>""");
     }
 
     @Test
@@ -44,9 +45,10 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
         e.setChannel(Channel._10TB);
         e.setDuration(Duration.ofMinutes(10));
 
-        JAXBTestUtil.roundTripAndSimilar(e, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><local:scheduleEvent xmlns:local=\"uri:local\" channel=\"10TB\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "  <duration>P0DT0H10M0.000S</duration>\n" +
-            "</local:scheduleEvent>");
+        JAXBTestUtil.roundTripAndSimilar(e, """
+            <?xml version="1.0" encoding="UTF-8"?><local:scheduleEvent xmlns:local="uri:local" channel="10TB" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+              <duration>P0DT0H10M0.000S</duration>
+            </local:scheduleEvent>""");
     }
 
     @Test
@@ -55,9 +57,10 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
         ScheduleEvent e = new ScheduleEvent();
         e.setDuration(Duration.ofDays(800));
 
-        JAXBTestUtil.roundTripAndSimilar(e, "<?xml version=\"1.0\" encoding=\"UTF-8\"?><local:scheduleEvent xmlns:local=\"uri:local\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "  <duration>P2Y2M10DT0H0M0.000S</duration>\n" +
-            "</local:scheduleEvent>");
+        JAXBTestUtil.roundTripAndSimilar(e, """
+            <?xml version="1.0" encoding="UTF-8"?><local:scheduleEvent xmlns:local="uri:local" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+              <duration>P2Y2M10DT0H0M0.000S</duration>
+            </local:scheduleEvent>""");
     }
 
     @Test
@@ -68,12 +71,13 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
             .duration(Duration.ofMinutes(10))
             .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(e, "{\n" +
-            "  \"channel\" : \"NED1\",\n" +
-            "  \"start\" : 1503928260000,\n" +
-            "  \"guideDay\" : 1503871200000\n," +
-            "  \"duration\" : 600000\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(e, """
+            {
+              "channel" : "NED1",
+              "start" : 1503928260000,
+              "guideDay" : 1503871200000
+            ,  "duration" : 600000
+            }""");
     }
 
 
@@ -90,12 +94,13 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
             .duration(Duration.ofMinutes(10))
             .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(e, "{\n" +
-            "  \"channel\" : \"_10TB\",\n" +
-            "  \"start\" : 1503928260000,\n" +
-            "  \"guideDay\" : 1503871200000\n," +
-            "  \"duration\" : 600000\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(e, """
+            {
+              "channel" : "_10TB",
+              "start" : 1503928260000,
+              "guideDay" : 1503871200000
+            ,  "duration" : 600000
+            }""");
     }
 
     @Test
@@ -106,12 +111,13 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
             .duration(Duration.ofDays(800))
             .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(e, "{\n" +
-            "  \"channel\" : \"NED1\",\n" +
-            "  \"start\" : 1503928260000,\n" +
-            "  \"guideDay\" : 1503871200000\n," +
-            "  \"duration\" : 69120000000\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(e, """
+            {
+              "channel" : "NED1",
+              "start" : 1503928260000,
+              "guideDay" : 1503871200000
+            ,  "duration" : 69120000000
+            }""");
     }
 
     @Test
@@ -126,30 +132,31 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
             .secondaryLifestyle(new SecondaryLifestyle("secondary lifestyle"))
             .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPrettyPublisherInstance(), e, "{\n" +
-            "  \"titles\" : [ {\n" +
-            "    \"value\" : \"scheduleEventTitle\",\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"type\" : \"MAIN\"\n" +
-            "  } ],\n" +
-            "  \"descriptions\" : [ {\n" +
-            "    \"value\" : \"scheduleEventDescription\",\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"type\" : \"MAIN\"\n" +
-            "  } ],\n" +
-            "  \"channel\" : \"NED1\",\n" +
-            "  \"start\" : 1503928260000,\n" +
-            "  \"guideDay\" : 1503871200000,\n" +
-            "  \"duration\" : 600000,\n" +
-            "  \"primaryLifestyle\" : {\n" +
-            "    \"value\" : \"primary lifestyle\"\n" +
-            "  },\n" +
-            "  \"secondaryLifestyle\" : {\n" +
-            "    \"value\" : \"secondary lifestyle\"\n" +
-            "  },\n" +
-            "  \"rerun\" : false,\n" +
-            "  \"eventStart\" : 1503928260000\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPrettyPublisherInstance(), e, """
+            {
+              "titles" : [ {
+                "value" : "scheduleEventTitle",
+                "owner" : "BROADCASTER",
+                "type" : "MAIN"
+              } ],
+              "descriptions" : [ {
+                "value" : "scheduleEventDescription",
+                "owner" : "BROADCASTER",
+                "type" : "MAIN"
+              } ],
+              "channel" : "NED1",
+              "start" : 1503928260000,
+              "guideDay" : 1503871200000,
+              "duration" : 600000,
+              "primaryLifestyle" : {
+                "value" : "primary lifestyle"
+              },
+              "secondaryLifestyle" : {
+                "value" : "secondary lifestyle"
+              },
+              "rerun" : false,
+              "eventStart" : 1503928260000
+            }""");
     }
 
 

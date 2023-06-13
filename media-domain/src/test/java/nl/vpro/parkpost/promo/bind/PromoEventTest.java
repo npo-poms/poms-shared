@@ -26,26 +26,27 @@ public class PromoEventTest {
 
     @Test
     public void testBinding() {
-        String input = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-            "<NPO_gfxwrp>\n" +
-            "\t<ProductCode>KP2702MO_KOEKEI</ProductCode>\n" +
-            "\t<OrderCode>3P130227_EO___KOEK___E____</OrderCode>\n" +
-            "\t<PromotedProgramProductCode >EO_101196643</PromotedProgramProductCode >\n" +
-            "\t<Referrer>Morgen</Referrer>\n" +
-            "\t<MXF_Name>MXF51236100</MXF_Name>\n" +
-            "\t<ProgramTitle/>\n" +
-            "\t<EpisodeTitle>Koek </EpisodeTitle>\n" +
-            "\t<Net>3</Net>\n" +
-            "\t<PromoType>P</PromoType>\n" +
-            "\t<TrailerTitle/>\n" +
-            "\t<SerieTitle>Koek </SerieTitle>\n" +
-            "\t<FrameCount>0</FrameCount>\n" +
-            "\t<VideoFormat/>\n" +
-            "\t<FirstTransmissionDate>2013-02-10T20:28:45+01:00</FirstTransmissionDate>\n" +
-            "\t<PlannedTransmissionDate>0000-00-00 00:00:00</PlannedTransmissionDate>\n" +
-            "\t<PlacingWindowStart>2013-02-26T00:00:00+01:00</PlacingWindowStart>\n" +
-            "\t<PlacingWindowEnd>2013-02-26T23:59:59+01:00</PlacingWindowEnd>\n" +
-            "</NPO_gfxwrp>";
+        String input = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <NPO_gfxwrp>
+            \t<ProductCode>KP2702MO_KOEKEI</ProductCode>
+            \t<OrderCode>3P130227_EO___KOEK___E____</OrderCode>
+            \t<PromotedProgramProductCode >EO_101196643</PromotedProgramProductCode >
+            \t<Referrer>Morgen</Referrer>
+            \t<MXF_Name>MXF51236100</MXF_Name>
+            \t<ProgramTitle/>
+            \t<EpisodeTitle>Koek </EpisodeTitle>
+            \t<Net>3</Net>
+            \t<PromoType>P</PromoType>
+            \t<TrailerTitle/>
+            \t<SerieTitle>Koek </SerieTitle>
+            \t<FrameCount>0</FrameCount>
+            \t<VideoFormat/>
+            \t<FirstTransmissionDate>2013-02-10T20:28:45+01:00</FirstTransmissionDate>
+            \t<PlannedTransmissionDate>0000-00-00 00:00:00</PlannedTransmissionDate>
+            \t<PlacingWindowStart>2013-02-26T00:00:00+01:00</PlacingWindowStart>
+            \t<PlacingWindowEnd>2013-02-26T23:59:59+01:00</PlacingWindowEnd>
+            </NPO_gfxwrp>""";
 
         Reader reader = new StringReader(input);
         PromoEvent event = JAXB.unmarshal(reader, PromoEvent.class);

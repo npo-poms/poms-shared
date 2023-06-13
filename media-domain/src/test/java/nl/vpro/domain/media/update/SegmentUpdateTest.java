@@ -36,15 +36,17 @@ public class SegmentUpdateTest extends MediaUpdateTest {
         update.setAgeRating(AgeRating.ALL);
         update.setBroadcasters("VPRO");
 
-        String expected = "<segment xmlns=\"urn:vpro:media:update:2009\" avType=\"VIDEO\" embeddable=\"true\" midRef=\"MID_123\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <broadcaster>VPRO</broadcaster>\n" +
-            "    <title type=\"MAIN\">main title</title>\n" +
-            "    <credits/>\n" +
-            "    <ageRating>ALL</ageRating>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <start>P0DT0H0M0.100S</start>\n" +
-            "</segment>\n";
+        String expected = """
+            <segment xmlns="urn:vpro:media:update:2009" avType="VIDEO" embeddable="true" midRef="MID_123" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                <broadcaster>VPRO</broadcaster>
+                <title type="MAIN">main title</title>
+                <credits/>
+                <ageRating>ALL</ageRating>
+                <locations/>
+                <images/>
+                <start>P0DT0H0M0.100S</start>
+            </segment>
+            """;
 
         SegmentUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertThat(update.isStandalone()).isTrue();
@@ -78,24 +80,25 @@ public class SegmentUpdateTest extends MediaUpdateTest {
     public void ofProgram() {
 
         String expected =
-            "<program xmlns=\"urn:vpro:media:update:2009\"  type=\"CLIP\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                "    <broadcaster>MAX</broadcaster>\n" +
-                "    <geoLocations/>\n" +
-                "    <topics/>\n" +
-                "    <credits/>\n" +
-                "    <locations/>\n" +
-                "    <scheduleEvents/>\n" +
-                "    <images/>\n" +
-                "    <segments>\n" +
-                "<segment  avType=\"VIDEO\" embeddable=\"true\" midRef=\"MID_123\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <title type=\"MAIN\">main title</title>\n" +
-            "    <credits/>\n" +
-            "    <ageRating>ALL</ageRating>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <start>P0DT0H0M0.100S</start>\n" +
-            "</segment>\n" +
-           "</segments></program>";
+            """
+                <program xmlns="urn:vpro:media:update:2009"  type="CLIP" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                    <broadcaster>MAX</broadcaster>
+                    <geoLocations/>
+                    <topics/>
+                    <credits/>
+                    <locations/>
+                    <scheduleEvents/>
+                    <images/>
+                    <segments>
+                <segment  avType="VIDEO" embeddable="true" midRef="MID_123" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                    <title type="MAIN">main title</title>
+                    <credits/>
+                    <ageRating>ALL</ageRating>
+                    <locations/>
+                    <images/>
+                    <start>P0DT0H0M0.100S</start>
+                </segment>
+                </segments></program>""";
         ProgramUpdate u = JAXB.unmarshal(new StringReader(expected), ProgramUpdate.class);
         u.setMainTitle("hoi");
         u.setAVType(AVType.VIDEO);
@@ -115,13 +118,14 @@ public class SegmentUpdateTest extends MediaUpdateTest {
      */
     @Test
     public void testNamespaces() throws JAXBException, ParserConfigurationException, SAXException {
-        String example = "<?xml version=\"1.0\"?>\n" +
-            "<ns0:segment xmlns:ns0=\"urn:vpro:media:update:2009\" avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_BV_12672829\" midRef=\"BV_101386500\"   sortDate=\"3333-01-24T10:12:00+00:00\" urn=\"urn:vpro:media:segment:102562422\">\n" +
-            "  <ns0:title type=\"MAIN\">Test poms export</ns0:title>\n" +
-            "  <ns0:broadcaster>BNN</ns0:broadcaster>\n" +
-            "  <broadcaster>BNVA</broadcaster>\n" +
-            "  <broadcaster xmlns='urn:completelydifferent'>XXX</broadcaster>\n" +
-            "</ns0:segment>";
+        String example = """
+            <?xml version="1.0"?>
+            <ns0:segment xmlns:ns0="urn:vpro:media:update:2009" avType="VIDEO" embeddable="true" mid="POMS_BV_12672829" midRef="BV_101386500"   sortDate="3333-01-24T10:12:00+00:00" urn="urn:vpro:media:segment:102562422">
+              <ns0:title type="MAIN">Test poms export</ns0:title>
+              <ns0:broadcaster>BNN</ns0:broadcaster>
+              <broadcaster>BNVA</broadcaster>
+              <broadcaster xmlns='urn:completelydifferent'>XXX</broadcaster>
+            </ns0:segment>""";
         JAXBContext jaxbContext = JAXBContext.newInstance(SegmentUpdate.class);
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 

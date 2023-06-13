@@ -130,13 +130,14 @@ public class RelationTest implements ComparableTheory<Relation> {
                 new RelationDefinition("LABEL", "VPRO", "Record label"),
                 "http://sony.com",
                 "Sony"
-        ), "{\n" +
-                "  \"uriRef\" : \"http://sony.com\",\n" +
-                "  \"value\" : \"Sony\",\n" +
-                "  \"type\" : \"LABEL\",\n" +
-                "  \"urn\" : \"urn:vpro:media:relation:56\",\n" +
-                "  \"broadcaster\" : \"VPRO\"\n" +
-                "}");
+        ), """
+            {
+              "uriRef" : "http://sony.com",
+              "value" : "Sony",
+              "type" : "LABEL",
+              "urn" : "urn:vpro:media:relation:56",
+              "broadcaster" : "VPRO"
+            }""");
     }
 
     private Program validProgramWithRelation() {

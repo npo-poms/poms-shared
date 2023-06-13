@@ -889,14 +889,16 @@ public class MediaObjectTest {
             .build();
         program.acceptChanges();
         byte[] bytes = program.serializeForCalcCRC32();
-        assertThat(new String(bytes)).isEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:10+01:00\"  creationDate=\"1970-01-01T01:00:10+01:00\" urn=\"urn:vpro:media:program:1\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
-            "    <credits/>\n" +
-            "    <locations/>\n" +
-            "    <images/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <segments/>\n" +
-            "</program>\n");
+        assertThat(new String(bytes)).isEqualTo("""
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <program embeddable="true" sortDate="1970-01-01T01:00:10+01:00"  creationDate="1970-01-01T01:00:10+01:00" urn="urn:vpro:media:program:1" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+                <credits/>
+                <locations/>
+                <images/>
+                <scheduleEvents/>
+                <segments/>
+            </program>
+            """);
 
         assertThat(program.getHash()).isEqualTo(2081675751L);
     }
@@ -1093,24 +1095,25 @@ public class MediaObjectTest {
 
     @Test
     public void testMemberOf() {
-        Group group = JAXB.unmarshal(new StringReader("<group xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" isOrdered=\"true\" type=\"SEASON\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPWON_1240914\" sortDate=\"2016-09-15T09:15:00+02:00\" workflow=\"PUBLISHED\" creationDate=\"2015-02-18T06:51:59.964+01:00\" lastModified=\"2016-12-21T11:20:37.369+01:00\" publishDate=\"2016-12-21T11:23:53.445+01:00\" urn=\"urn:vpro:media:group:51613423\">\n" +
-            "<broadcaster id=\"VPRO\">VPRO</broadcaster>\n" +
-            "<title owner=\"BROADCASTER\" type=\"MAIN\">VPRO Tegenlicht 2015 (HH)</title>\n" +
-            "<title owner=\"MIS\" type=\"MAIN\">VPRO Tegenlicht</title>\n" +
-            "<title owner=\"WHATS_ON\" type=\"MAIN\">VPRO Tegenlicht</title>\n" +
-            "<title owner=\"BROADCASTER\" type=\"SUB\">Seizoen 2015 (HH)</title>\n" +
-            "<description owner=\"MIS\" type=\"MAIN\">\n" +
-            "VPRO Tegenlicht speurt in binnen- en buitenland naar ontwikkelingen in de politiek, economie, maatschappij en wetenschap die onze nabije toekomst zullen bepalen.\n" +
-            "</description>\n" +
-            "<releaseYear>2015</releaseYear>\n" +
-            "<credits/>\n" +
-            "<descendantOf urnRef=\"urn:vpro:media:group:45760423\" midRef=\"POMS_S_VPRO_652484\" type=\"COLLECTION\"/>\n" +
-            "<descendantOf urnRef=\"urn:vpro:media:group:58901677\" midRef=\"POMS_S_VPRO_1405375\" type=\"COLLECTION\"/>\n" +
-            "<memberOf added=\"2015-08-14T14:02:59.793+02:00\" highlighted=\"false\" midRef=\"POMS_S_VPRO_1405375\" index=\"5\" type=\"COLLECTION\" urnRef=\"urn:vpro:media:group:58901677\"/>\n" +
-            "<locations/>\n" +
-            "<scheduleEvents/>\n" +
-            "<images/>\n" +
-            "</group>"), Group.class);
+        Group group = JAXB.unmarshal(new StringReader("""
+            <group xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" isOrdered="true" type="SEASON" avType="VIDEO" embeddable="true" mid="VPWON_1240914" sortDate="2016-09-15T09:15:00+02:00" workflow="PUBLISHED" creationDate="2015-02-18T06:51:59.964+01:00" lastModified="2016-12-21T11:20:37.369+01:00" publishDate="2016-12-21T11:23:53.445+01:00" urn="urn:vpro:media:group:51613423">
+            <broadcaster id="VPRO">VPRO</broadcaster>
+            <title owner="BROADCASTER" type="MAIN">VPRO Tegenlicht 2015 (HH)</title>
+            <title owner="MIS" type="MAIN">VPRO Tegenlicht</title>
+            <title owner="WHATS_ON" type="MAIN">VPRO Tegenlicht</title>
+            <title owner="BROADCASTER" type="SUB">Seizoen 2015 (HH)</title>
+            <description owner="MIS" type="MAIN">
+            VPRO Tegenlicht speurt in binnen- en buitenland naar ontwikkelingen in de politiek, economie, maatschappij en wetenschap die onze nabije toekomst zullen bepalen.
+            </description>
+            <releaseYear>2015</releaseYear>
+            <credits/>
+            <descendantOf urnRef="urn:vpro:media:group:45760423" midRef="POMS_S_VPRO_652484" type="COLLECTION"/>
+            <descendantOf urnRef="urn:vpro:media:group:58901677" midRef="POMS_S_VPRO_1405375" type="COLLECTION"/>
+            <memberOf added="2015-08-14T14:02:59.793+02:00" highlighted="false" midRef="POMS_S_VPRO_1405375" index="5" type="COLLECTION" urnRef="urn:vpro:media:group:58901677"/>
+            <locations/>
+            <scheduleEvents/>
+            <images/>
+            </group>"""), Group.class);
 
         Group owner = new Group(0L);
         owner.setMid("POMS_S_VPRO_1405375");

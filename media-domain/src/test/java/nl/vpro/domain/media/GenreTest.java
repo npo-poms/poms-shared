@@ -49,11 +49,12 @@ public class GenreTest {
         Genre genre = new Genre("3.0.1.2.10");
 
         JAXB.marshal(genre, System.out);
-        JAXBTestUtil.roundTripAndSimilar(genre, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<local:genre id=\"3.0.1.2.10\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
-            "    <term>Film</term>\n" +
-            "    <term>Spanning</term>\n" +
-            "</local:genre>");
+        JAXBTestUtil.roundTripAndSimilar(genre, """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <local:genre id="3.0.1.2.10" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:local="uri:local">
+                <term>Film</term>
+                <term>Spanning</term>
+            </local:genre>""");
     }
 
 /*

@@ -27,16 +27,17 @@ public class ImageUpdateTest {
         update.setLicense(License.CC_BY);
         update.setSourceName("placeholdit");
         update.setCredits(getClass().getName());
-        JAXBTestUtil.roundTripAndSimilar(update, "\n" +
-            "<image type=\"PICTURE\" highlighted=\"false\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <title>title</title>\n" +
-            "    <sourceName>placeholdit</sourceName>\n" +
-            "    <license>CC_BY</license>\n" +
-            "    <credits>nl.vpro.domain.media.update.ImageUpdateTest</credits>\n" +
-            "    <imageLocation>\n" +
-            "        <url>http://placehold.it/150/7735a</url>\n" +
-            "    </imageLocation>\n" +
-            "</image>");
+        JAXBTestUtil.roundTripAndSimilar(update, """
+
+            <image type="PICTURE" highlighted="false" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                <title>title</title>
+                <sourceName>placeholdit</sourceName>
+                <license>CC_BY</license>
+                <credits>nl.vpro.domain.media.update.ImageUpdateTest</credits>
+                <imageLocation>
+                    <url>http://placehold.it/150/7735a</url>
+                </imageLocation>
+            </image>""");
 
     }
 
@@ -46,19 +47,20 @@ public class ImageUpdateTest {
         update.setLicense(License.CC_BY);
         update.setSourceName("placeholdit");
         update.setCredits(getClass().getName());
-        Jackson2TestUtil.roundTripAndSimilar(update, "{\n" +
-            "  \"title\" : \"title\",\n" +
-            "  \"sourceName\" : \"placeholdit\",\n" +
-            "  \"license\" : \"CC_BY\",\n" +
-            "  \"credits\" : \"nl.vpro.domain.media.update.ImageUpdateTest\",\n" +
-            "  \"image\" : {\n" +
-            "    \"imageLocation\" : {\n" +
-            "      \"url\" : \"http://placehold.it/150/7735a\"\n" +
-            "    }\n" +
-            "  },\n" +
-            "  \"type\" : \"PICTURE\",\n" +
-            "  \"highlighted\" : false\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(update, """
+            {
+              "title" : "title",
+              "sourceName" : "placeholdit",
+              "license" : "CC_BY",
+              "credits" : "nl.vpro.domain.media.update.ImageUpdateTest",
+              "image" : {
+                "imageLocation" : {
+                  "url" : "http://placehold.it/150/7735a"
+                }
+              },
+              "type" : "PICTURE",
+              "highlighted" : false
+            }""");
     }
 
 
@@ -67,15 +69,16 @@ public class ImageUpdateTest {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
         update.setLicense(License.CC_BY);
         update.setCredits(getClass().getName());
-        JAXBTestUtil.roundTripAndSimilar(update, "\n" +
-            "<image type=\"PICTURE\" highlighted=\"false\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <title>title</title>\n" +
-            "    <license>CC_BY</license>\n" +
-            "    <credits>nl.vpro.domain.media.update.ImageUpdateTest</credits>\n" +
-            "    <imageLocation>\n" +
-            "        <url>http://placehold.it/150/7735a</url>\n" +
-            "    </imageLocation>\n" +
-            "</image>");
+        JAXBTestUtil.roundTripAndSimilar(update, """
+
+            <image type="PICTURE" highlighted="false" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                <title>title</title>
+                <license>CC_BY</license>
+                <credits>nl.vpro.domain.media.update.ImageUpdateTest</credits>
+                <imageLocation>
+                    <url>http://placehold.it/150/7735a</url>
+                </imageLocation>
+            </image>""");
 
     }
 
@@ -90,16 +93,17 @@ public class ImageUpdateTest {
         update.setLicense(constructor.newInstance("blabla"));
         update.setSourceName("placeholdit");
         update.setCredits(getClass().getName());
-        JAXBTestUtil.roundTripAndSimilar(update, "\n" +
-            "<image type=\"PICTURE\" highlighted=\"false\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <title>title</title>\n" +
-            "    <sourceName>placeholdit</sourceName>\n" +
-            "   <license>blabla</license>\n" +
-            "    <credits>nl.vpro.domain.media.update.ImageUpdateTest</credits>\n" +
-            "    <imageLocation>\n" +
-            "        <url>http://placehold.it/150/7735a</url>\n" +
-            "    </imageLocation>\n" +
-            "</image>");
+        JAXBTestUtil.roundTripAndSimilar(update, """
+
+            <image type="PICTURE" highlighted="false" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+                <title>title</title>
+                <sourceName>placeholdit</sourceName>
+               <license>blabla</license>
+                <credits>nl.vpro.domain.media.update.ImageUpdateTest</credits>
+                <imageLocation>
+                    <url>http://placehold.it/150/7735a</url>
+                </imageLocation>
+            </image>""");
         assertThat(update.violations()).isNotEmpty();
         log.info("v:{}", update.violations());
     }

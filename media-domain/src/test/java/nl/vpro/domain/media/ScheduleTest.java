@@ -43,33 +43,34 @@ public class ScheduleTest {
         Schedule schedule = example();
 
         assertThatJson(schedule).isSimilarTo(
-            "{\n" +
-                "  \"scheduleEvent\" : [ {\n" +
-                "    \"channel\" : \"CONS\",\n" +
-                "    \"start\" : 0,\n" +
-                "    \"guideDay\" : -90000000,\n" +
-                "    \"duration\" : 10000,\n" +
-                "    \"midRef\" : \"id1\",\n" +
-                "    \"poProgID\" : \"id1\",\n" +
-                "    \"urnRef\" : \"crid://domain.com/12345\"\n" +
-                "  }, {\n" +
-                "    \"channel\" : \"CONS\",\n" +
-                "    \"start\" : 10000,\n" +
-                "    \"guideDay\" : -90000000,\n" +
-                "    \"duration\" : 10000,\n" +
-                "    \"midRef\" : \"id2\",\n" +
-                "    \"poProgID\" : \"id2\",\n" +
-                "    \"urnRef\" : \"crid://domain.com/12345\"\n" +
-                "  }, {\n" +
-                "    \"channel\" : \"CONS\",\n" +
-                "    \"start\" : 20000,\n" +
-                "    \"guideDay\" : -90000000,\n" +
-                "    \"duration\" : 10000\n" +
-                "  } ],\n" +
-                "  \"channel\" : \"CONS\",\n" +
-                "  \"start\" : 1649086200000,\n" +
-                "  \"stop\" : 1649086200000\n" +
-                "}").andRounded().isEqualTo(schedule);
+            """
+                {
+                  "scheduleEvent" : [ {
+                    "channel" : "CONS",
+                    "start" : 0,
+                    "guideDay" : -90000000,
+                    "duration" : 10000,
+                    "midRef" : "id1",
+                    "poProgID" : "id1",
+                    "urnRef" : "crid://domain.com/12345"
+                  }, {
+                    "channel" : "CONS",
+                    "start" : 10000,
+                    "guideDay" : -90000000,
+                    "duration" : 10000,
+                    "midRef" : "id2",
+                    "poProgID" : "id2",
+                    "urnRef" : "crid://domain.com/12345"
+                  }, {
+                    "channel" : "CONS",
+                    "start" : 20000,
+                    "guideDay" : -90000000,
+                    "duration" : 10000
+                  } ],
+                  "channel" : "CONS",
+                  "start" : 1649086200000,
+                  "stop" : 1649086200000
+                }""").andRounded().isEqualTo(schedule);
 
     }
 

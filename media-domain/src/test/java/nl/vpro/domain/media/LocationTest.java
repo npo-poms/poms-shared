@@ -166,19 +166,20 @@ public class LocationTest implements BasicObjectTheory<Location> {
 
     @Test
     public void fromJson() throws Exception {
-        String json = "[ {\n" +
-            "  \"programUrl\" : \"http://adaptive.npostreaming.nl/u/npo/promo/1P0603VD_BEDBREAK/1P0603VD_BEDBREAK.ism\",\n" +
-            "  \"avAttributes\" : {\n" +
-            "    \"avFileFormat\" : \"HASP\",\n" +
-            "    \"videoAttributes\" : { }\n" +
-            "  },\n" +
-            "  \"duration\" : 30000,\n" +
-            "  \"owner\" : \"BROADCASTER\",\n" +
-            "  \"creationDate\" : 1425497262985,\n" +
-            "  \"lastModified\" : 1425497263370,\n" +
-            "  \"workflow\" : \"PUBLISHED\",\n" +
-            "  \"urn\" : \"urn:vpro:media:location:52197707\"\n" +
-            "} ]";
+        String json = """
+            [ {
+              "programUrl" : "http://adaptive.npostreaming.nl/u/npo/promo/1P0603VD_BEDBREAK/1P0603VD_BEDBREAK.ism",
+              "avAttributes" : {
+                "avFileFormat" : "HASP",
+                "videoAttributes" : { }
+              },
+              "duration" : 30000,
+              "owner" : "BROADCASTER",
+              "creationDate" : 1425497262985,
+              "lastModified" : 1425497263370,
+              "workflow" : "PUBLISHED",
+              "urn" : "urn:vpro:media:location:52197707"
+            } ]""";
 
         Location[] locations = Jackson2Mapper.getInstance().readValue(json, Location[].class);
         Jackson2TestUtil.roundTripAndSimilar(locations, json);
@@ -189,15 +190,16 @@ public class LocationTest implements BasicObjectTheory<Location> {
 
     @Test
     public void toJson() throws JsonProcessingException {
-        Location loc = JAXB.unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<location xmlns:shared=\"urn:vpro:shared:2009\" xmlns:ns3=\"urn:vpro:media:2009\" owner=\"BROADCASTER\" creationDate=\"2015-03-06T20:22:04.051+01:00\" lastModified=\"2015-03-06T20:22:04.457+01:00\" urn=\"urn:vpro:media:location:52286162\" workflow=\"PUBLISHED\">\n" +
-            "    <ns3:programUrl>http://adaptive.npostreaming.nl/u/npo/promo/2P0803MO_PODIUMWI/2P0803MO_PODIUMWI.ism</ns3:programUrl>\n" +
-            "    <ns3:avAttributes>\n" +
-            "        <ns3:avFileFormat>HASP</ns3:avFileFormat>\n" +
-            "        <ns3:videoAttributes/>\n" +
-            "    </ns3:avAttributes>\n" +
-            "    <ns3:duration>PT30.000S</ns3:duration>\n" +
-            "</location>"), Location.class);
+        Location loc = JAXB.unmarshal(new StringReader("""
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <location xmlns:shared="urn:vpro:shared:2009" xmlns:ns3="urn:vpro:media:2009" owner="BROADCASTER" creationDate="2015-03-06T20:22:04.051+01:00" lastModified="2015-03-06T20:22:04.457+01:00" urn="urn:vpro:media:location:52286162" workflow="PUBLISHED">
+                <ns3:programUrl>http://adaptive.npostreaming.nl/u/npo/promo/2P0803MO_PODIUMWI/2P0803MO_PODIUMWI.ism</ns3:programUrl>
+                <ns3:avAttributes>
+                    <ns3:avFileFormat>HASP</ns3:avFileFormat>
+                    <ns3:videoAttributes/>
+                </ns3:avAttributes>
+                <ns3:duration>PT30.000S</ns3:duration>
+            </location>"""), Location.class);
         System.out.println(Jackson2Mapper.getInstance().writeValueAsString(new Location[] {loc}));
     }
 
