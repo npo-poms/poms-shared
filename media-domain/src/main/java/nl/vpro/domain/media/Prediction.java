@@ -202,29 +202,41 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.mediaObject = parent;
     }
 
-    public Prediction(Prediction source) {
-        this(source, source.mediaObject);
+    private Prediction(Prediction source) {
+        this(source, source.mediaObject, source.authority);
     }
 
-    public Prediction(Prediction source, MediaObject parent) {
+    /**
+     * Created a new prediction, based on the source, but with a different parent,
+     */
+    private Prediction(Prediction source, MediaObject parent, Authority authority) {
         this(source.getPlatform(), source.getPublishStartInstant(), source.getPublishStopInstant());
         this.issueDate = source.issueDate;
         this.state = source.state;
         this.mediaObject = parent;
         this.plannedAvailability = source.plannedAvailability;
         this.encryption = source.encryption;
+        this.authority = authority;
     }
 
-    public static Prediction copy(Prediction source){
-        return copy(source, source.mediaObject);
+    /**
+     *
+     */
+    public static Prediction copy(Prediction source, Authority authority) {
+        if (source == null) {
+            return null;
+        }
+        return new Prediction(source, source.mediaObject, authority);
     }
 
+    /**
+     * Copied a prediction to a new parent, with authority {@link Authority#USER}
+     */
     public static Prediction copy(Prediction source, MediaObject parent){
         if(source == null) {
             return null;
         }
-
-        return new Prediction(source, parent);
+        return new Prediction(source, parent, Authority.USER);
     }
 
     public static Prediction unavailable(MediaObject parent, Platform platform, Authority authority) {
