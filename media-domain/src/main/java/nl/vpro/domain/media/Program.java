@@ -135,9 +135,16 @@ public final class Program extends MediaObject {
         this(null, null);
     }
 
+    public Program(String mid, long id) {
+        this(id);
+        this.mid = mid;
+    }
+
+
     public Program(long id) {
         super(id);
     }
+
 
     public Program(AVType avType, ProgramType type) {
         this.avType = avType;
