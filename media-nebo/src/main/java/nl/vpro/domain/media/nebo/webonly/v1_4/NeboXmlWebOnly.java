@@ -63,7 +63,7 @@ public class NeboXmlWebOnly {
 
     public NeboXmlWebOnly(Program program, String group) throws DatatypeConfigurationException {
         type = "webonly";
-        GregorianCalendar cal = new GregorianCalendar(Locale.of("nl", "NL"));
+        GregorianCalendar cal = new GregorianCalendar(new Locale("nl", "NL"));
         cal.setGregorianChange(new Date());
         timestamp = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
         webonly = new WebonlyType(program, group);

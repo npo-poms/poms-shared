@@ -379,10 +379,10 @@ public class TVATransformerTest {
                 assertThat(titles.get(1).get()).isEqualTo("Hördur - zwischen den Welten");
             }
             if ("POW_00163247".equals(program.getMid())) {
-                assertThat(program.getLanguages()).containsExactly(Locale.of("zxx"));
+                assertThat(program.getLanguages()).containsExactly(new Locale("zxx"));
             }
             if ("POW_00995211".equals((program.getMid()))) {
-                assertThat(program.getLanguages()).containsExactly( Locale.of("und"));
+                assertThat(program.getLanguages()).containsExactly(new Locale("und"));
             }
         }
         validate(table);
