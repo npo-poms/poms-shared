@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.validation.Valid;
@@ -26,6 +27,9 @@ import nl.vpro.domain.user.ServiceLocator;
 @AllArgsConstructor
 @Builder
 public class PortalUpdate implements Serializable{
+
+    @Serial
+    private static final long serialVersionUID = 1528575304102260572L;
 
     @ValidPortal
     @NotNull

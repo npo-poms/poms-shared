@@ -2,6 +2,9 @@ package nl.vpro.nep.domain;
 
 import lombok.*;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.25
@@ -10,7 +13,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @lombok.Builder
-public class FailureResponse {
+public class FailureResponse implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -8133232400817291872L;
 
     private boolean success;
 

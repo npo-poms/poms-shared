@@ -1,5 +1,7 @@
 package nl.vpro.domain.classification.bind;
 
+import java.io.Serial;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -22,6 +24,9 @@ import nl.vpro.domain.classification.Term;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TermWrapper extends AbstractTermWrapper {
 
+
+    @Serial
+    private static final long serialVersionUID = 2711696987261976991L;
 
     public TermWrapper() {
     }

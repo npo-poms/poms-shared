@@ -4,9 +4,14 @@
  */
 package nl.vpro.domain.media.exceptions;
 
+import java.io.Serial;
+
 import nl.vpro.domain.user.Organization;
 
 public class OrganizationNotFoundException extends RuntimeException {
+
+    @Serial
+    private static final long serialVersionUID = -923897830621230741L;
 
     public OrganizationNotFoundException() {
         super("Organization not found");

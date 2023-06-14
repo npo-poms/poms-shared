@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.api;
 
+import java.io.Serial;
+
 import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,6 +27,9 @@ import nl.vpro.domain.media.*;
 })
 @XmlSeeAlso(Match.class)
 public class ApiScheduleEvent extends ScheduleEvent {
+
+    @Serial
+    private static final long serialVersionUID = 8540834440100563042L;
 
     public ApiScheduleEvent() {
     }

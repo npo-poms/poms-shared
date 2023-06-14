@@ -31,7 +31,11 @@ import static org.meeuw.functional.Predicates.*;
 @Data
 @EqualsAndHashCode
 @ToString
-public class AssemblageConfig {
+public class AssemblageConfig implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -6110624203385921307L;
+
 
     public static final BiPredicate<List<String>, Relation> DEFAULT_RELATION_MATCH = (b, r) -> b.contains(r.getBroadcaster());
 
@@ -434,7 +438,10 @@ public class AssemblageConfig {
      * @param <S> Type of incoming objects
      * @param <F> Type of field to of those object which are required (or not)
      */
-    public static abstract class Require<S, F>  implements BiPredicate<S, S> {
+    public static abstract class Require<S, F>  implements BiPredicate<S, S>, Serializable {
+        @Serial
+        private static final long serialVersionUID = 4271155751821174345L;
+
         protected final BiFunction<S, S, RequireEnum> value;
         private final Function<S, F> getter;
 
@@ -505,11 +512,14 @@ public class AssemblageConfig {
     /**
      * @since 5.13
      */
-    public static class MidRequire extends Require<MediaObject, String> {
+    public static class MidRequire extends Require<MediaObject, String> implements Serializable {
         public static final MidRequire YES = new MidRequire(RequireEnum.YES);
         public static final MidRequire NO = new MidRequire(RequireEnum.NO);
         public static final MidRequire IF_TARGET_EMPTY = new MidRequire(RequireEnum.IF_TARGET_EMPTY);
         public static final MidRequire ELSE_SKIP = new MidRequire(RequireEnum.ELSE_SKIP);
+
+        @Serial
+        private static final long serialVersionUID = -6648234818264600444L;
 
         private MidRequire(RequireEnum value) {
             this(Functions.biAlways(value));

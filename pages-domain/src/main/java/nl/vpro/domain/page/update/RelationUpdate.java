@@ -1,5 +1,6 @@
 package nl.vpro.domain.page.update;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.xml.bind.annotation.*;
@@ -17,6 +18,9 @@ import nl.vpro.domain.user.Broadcaster;
     })
 @ValidRelation
 public class RelationUpdate implements Comparable<RelationUpdate>, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 5444795749320211891L;
 
     public static RelationUpdate of(Relation relation) {
         return RelationUpdate.builder()

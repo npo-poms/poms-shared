@@ -1,15 +1,20 @@
 package nl.vpro.domain.media.bind;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.i18n.Locales;
+
+import java.io.Serial;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import nl.vpro.i18n.Locales;
 
 /**
  * @author Michiel Meeuwissen
@@ -59,6 +64,9 @@ public class CountryWrapper {
     }
 
     public static class UnknownRegion implements Region {
+        @Serial
+        private static final long serialVersionUID = -909414482181898385L;
+
         private final String code;
 
         public UnknownRegion(String code) {

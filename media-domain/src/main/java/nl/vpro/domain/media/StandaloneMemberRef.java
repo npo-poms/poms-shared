@@ -269,7 +269,10 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
     @NoArgsConstructor
     @EqualsAndHashCode
     public static class IdType implements Serializable{
-         String midRef;
+        @Serial
+        private static final long serialVersionUID = 8764152600088414011L;
+
+        String midRef;
          String index;
          String childRef;
          ObjectType objectType;

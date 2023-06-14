@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.page.update;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.validation.Valid;
@@ -22,6 +23,9 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "paragraphUpdateType", propOrder = {"title", "body", "image"})
 @XmlAccessorType(XmlAccessType.NONE)
 public class ParagraphUpdate implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 5358055471817534969L;
 
     @NoHtml
     private String title;

@@ -1,5 +1,6 @@
 package nl.vpro.domain.page;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import nl.vpro.domain.user.Broadcaster;
 
 public class RelationDefinition implements Serializable, Identifiable<RelationDefinitionIdentifier> {
 
+    @Serial
+    private static final long serialVersionUID = -4599193836441441235L;
 
     public static RelationDefinition of(String type, Broadcaster broadcaster) {
         return new RelationDefinition(type, broadcaster.getId());

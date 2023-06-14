@@ -4,7 +4,12 @@
  */
 package nl.vpro.domain.media.exceptions;
 
+import java.io.Serial;
+
 public class BroadcasterException extends RuntimeException {
+    @Serial
+    private static final long serialVersionUID = 1794747558440101218L;
+
     public BroadcasterException() {
     }
 

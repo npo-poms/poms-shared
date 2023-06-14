@@ -6,6 +6,7 @@ package nl.vpro.domain.page.update;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,9 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "embedUpdateType")
 @Builder
 public class EmbedUpdate implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 2359340553661004262L;
 
     public static EmbedUpdate of(Embed embed) {
         if (embed == null) {

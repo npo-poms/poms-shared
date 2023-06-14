@@ -6,6 +6,7 @@ package nl.vpro.domain.media.support;
 
 import net.jqwik.api.*;
 
+import java.io.Serial;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Assumptions;
@@ -238,6 +239,9 @@ public class PublishableObjectTest implements BasicObjectTheory<PublishableObjec
     }
 
     private static class MyPublishableObject extends PublishableObject<MyPublishableObject> {
+        @Serial
+        private static final long serialVersionUID = 5229283134880255886L;
+
         MyPublishableObject(Long id) {
             super(id);
         }

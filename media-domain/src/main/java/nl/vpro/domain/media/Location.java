@@ -801,6 +801,9 @@ public class Location extends PublishableObject<Location>
     }
 
     public static class IllegalAuthorityRecord extends IllegalStateException {
+        @Serial
+        private static final long serialVersionUID = -162376436758135168L;
+
         private final String id;
         public IllegalAuthorityRecord(String id, String s) {
             super(s);

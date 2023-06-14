@@ -7,6 +7,7 @@ package nl.vpro.domain.page.update;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -26,6 +27,9 @@ import nl.vpro.validation.URI;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "linkUpdateType")
 public class LinkUpdate implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -5090488540344490405L;
 
     @NotNull
     @URI(

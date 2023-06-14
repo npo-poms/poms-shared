@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 @ToString
 public class WorkflowExecutionRequest implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 8536285942881267506L;
     /**
      * the MID for which this request is a transcoding
      */

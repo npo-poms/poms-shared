@@ -7,8 +7,7 @@ package nl.vpro.beeldengeluid.gtaa;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -654,7 +653,10 @@ public class OpenskosRepository implements GTAARepository {
                 transformer.transform(source, result);
                 return new DOMSource(result.getNode());
             } catch (TransformerException e) {
-                throw new XmlMappingException(e.getMessage(), e) {};
+                throw new XmlMappingException(e.getMessage(), e) {
+                    @Serial
+                    private static final long serialVersionUID = -4299814482145831053L;
+                };
             }
 
         }

@@ -4,9 +4,14 @@
  */
 package nl.vpro.domain.media.exceptions;
 
+import java.io.Serial;
+
 import nl.vpro.domain.media.MediaObject;
 
 public class OwnerNotFoundException extends RuntimeException {
+
+    @Serial
+    private static final long serialVersionUID = -2756165284080124044L;
 
     public OwnerNotFoundException() {
         super("Owner not found");

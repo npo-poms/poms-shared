@@ -6,6 +6,7 @@ package nl.vpro.domain.media.gtaa;
 
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -20,6 +21,9 @@ import javax.persistence.Embeddable;
 @Embeddable
 @ToString(callSuper = true)
 public class EmbeddablePerson extends EmbeddableGTAARecord implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 2983827493130215257L;
 
     @Column(name = "gtaa_knownas")
     private Boolean knownAs = false;

@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.page.update;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,9 @@ import nl.vpro.validation.URI;
     "url"
 })
 public final class ImageLocation implements Serializable{
+
+    @Serial
+    private static final long serialVersionUID = 7949324241319668897L;
 
     @XmlElement
     @NotNull(message = "provide image location")

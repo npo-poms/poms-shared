@@ -3,6 +3,8 @@ package nl.vpro.nep.service.exception;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
+
 import nl.vpro.nep.domain.FailureResponse;
 
 /**
@@ -12,6 +14,9 @@ import nl.vpro.nep.domain.FailureResponse;
 @Getter
 @ToString
 public class ItemizerStatusException extends NEPException {
+
+    @Serial
+    private static final long serialVersionUID = 3080658033118493320L;
 
     private final FailureResponse response;
 

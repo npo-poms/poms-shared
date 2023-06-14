@@ -1,5 +1,6 @@
 package nl.vpro.domain.page.update;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -16,6 +17,9 @@ import nl.vpro.domain.VersionedChange;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso(PageUpdate.class)
 public class PageUpdateChange extends VersionedChange<PageUpdate> implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -3105890330183928614L;
 
     public PageUpdateChange() {
         super();
