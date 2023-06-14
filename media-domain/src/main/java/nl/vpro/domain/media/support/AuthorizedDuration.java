@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.support;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.temporal.*;
@@ -42,7 +43,8 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
 public class AuthorizedDuration implements Serializable, TemporalAmount {
 
-    private static long serialVersionUID = 0L;
+    @Serial
+    private static final long serialVersionUID = 0L;
 
     @Column(name = "duration_authorized")
     @XmlAttribute
