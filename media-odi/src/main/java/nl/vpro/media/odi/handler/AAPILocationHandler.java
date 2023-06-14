@@ -88,7 +88,7 @@ public class AAPILocationHandler implements LocationProducer {
 
         String odiUrl = null;
         try {
-            URL pomsUrl = new URL(programUrl);
+            URL pomsUrl = URI.create(programUrl).toURL();
 
             String file = FilenameUtils.getBaseName(pomsUrl.getPath());
             String stream = pomsUrl.getPath() + "/" + file + "." + pubOption;

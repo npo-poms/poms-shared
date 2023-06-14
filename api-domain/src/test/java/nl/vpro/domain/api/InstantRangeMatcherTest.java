@@ -29,9 +29,11 @@ public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRange
 
     @Test
     public void testGetInclusiveEnd() {
-        DateRangeMatcher in = new DateRangeMatcher((Instant) null, null, true);
-        DateRangeMatcher out = JAXBTestUtil.roundTrip(in,
-            "inclusiveEnd=\"true\"");
+        DateRangeMatcher in = new DateRangeMatcher(null, null, true);
+        DateRangeMatcher out = JAXBTestUtil.roundTripAndSimilar(in,
+            """
+                <local:dateRangeMatcher xmlns:local="uri:local" inclusiveEnd="true" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009"/>
+                """);
         assertThat(out.includeEnd()).isTrue();
     }
 

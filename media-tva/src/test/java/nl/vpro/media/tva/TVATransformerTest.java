@@ -41,7 +41,6 @@ import nl.vpro.media.tva.saxon.extension.*;
 
 import static nl.vpro.media.tva.Constants.*;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.similar;
-import static org.apache.commons.io.output.NullOutputStream.NULL_OUTPUT_STREAM;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -380,10 +379,10 @@ public class TVATransformerTest {
                 assertThat(titles.get(1).get()).isEqualTo("Hördur - zwischen den Welten");
             }
             if ("POW_00163247".equals(program.getMid())) {
-                assertThat(program.getLanguages()).containsExactly(new Locale("zxx"));
+                assertThat(program.getLanguages()).containsExactly(Locale.of("zxx"));
             }
             if ("POW_00995211".equals((program.getMid()))) {
-                assertThat(program.getLanguages()).containsExactly(new Locale("und"));
+                assertThat(program.getLanguages()).containsExactly( Locale.of("und"));
             }
         }
         validate(table);
@@ -696,7 +695,7 @@ public class TVATransformerTest {
     private void validate(MediaTable o) {
         try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
             Validator validator = factory.getValidator();
-            JAXB.marshal(o, NULL_OUTPUT_STREAM); // just marshall it once to ensure getTitles is called....
+            JAXB.marshal(o, OutputStream.nullOutputStream()); // just marshall it once to ensure getTitles is called....
             //JAXB.marshal(o, System.out);
             Set<ConstraintViolation<MediaTable>> validate = validator.validate(o);
             for (ConstraintViolation<MediaTable> cv : validate) {

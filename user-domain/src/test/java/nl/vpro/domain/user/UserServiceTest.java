@@ -122,7 +122,7 @@ class UserServiceTest {
         Locale def = Locales.getDefault();
 
         List<CompletableFuture<?>> futures = new ArrayList<>();
-        try (AutoCloseable autoCloseable = Locales.with(new Locale("zh"))) {
+        try (AutoCloseable autoCloseable = Locales.with(Locale.of("zh"))) {
             for (int i = 0; i < 500; i++) {
                 int fi = i;
                 futures.add(userService.async(() -> {

@@ -20,7 +20,7 @@ import nl.vpro.i18n.LocalizedString;
 public class LocaleWrapper {
 
 
-    private static final Locale NL = new Locale("nl");
+    private static final Locale NL = Locale.of("nl");
 
 
     private Locale locale;
