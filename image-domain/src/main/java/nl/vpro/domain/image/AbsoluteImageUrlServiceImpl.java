@@ -16,7 +16,7 @@ public class AbsoluteImageUrlServiceImpl implements ImageUrlService {
 
     @Inject
     public AbsoluteImageUrlServiceImpl(
-        @Named("image_frontend.baseUrl") String imageServerBaseUrl) {
+        @Named("npo-images.baseUrl") String imageServerBaseUrl) {
         this.imageServerBaseUrl = imageServerBaseUrl;
     }
 

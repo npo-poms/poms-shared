@@ -13,7 +13,7 @@ public class AbsoluteImageUrlServiceImpl extends nl.vpro.domain.image.AbsoluteIm
 
     @Inject
     public AbsoluteImageUrlServiceImpl(
-        @Named("image_frontend.baseUrl") String imageServerBaseUrl) {
+        @Named("npo-images.baseUrl") String imageServerBaseUrl) {
         super(imageServerBaseUrl);
     }
 
