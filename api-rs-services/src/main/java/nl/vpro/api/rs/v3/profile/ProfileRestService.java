@@ -4,8 +4,6 @@
  */
 package nl.vpro.api.rs.v3.profile;
 
-import java.time.Instant;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -28,7 +26,6 @@ public interface ProfileRestService {
     String PATH = "/" + TAG;
 
     String NAME = "name";
-    String TIME = "time";
 
 
     /**
@@ -40,9 +37,7 @@ public interface ProfileRestService {
     @GET
     @Path("/{name}")
     Profile load(
-        @PathParam(NAME) String name,
-        @QueryParam(TIME) Instant time
-    );
+        @PathParam(NAME) String name);
 
     @GET
     @Path("/list")
@@ -50,7 +45,6 @@ public interface ProfileRestService {
         @QueryParam("pattern") String pattern,
         @QueryParam("max") Integer max
     );
-
 
 
 }

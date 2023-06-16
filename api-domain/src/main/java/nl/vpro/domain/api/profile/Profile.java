@@ -4,15 +4,19 @@
  */
 package nl.vpro.domain.api.profile;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.IOException;
 import java.io.StringWriter;
 import java.time.Instant;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -36,13 +40,19 @@ public class Profile implements Comparable<Profile> {
     @XmlAttribute
     @XmlJavaTypeAdapter(value = InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
-    private Instant timestamp = Instant.now();
+    @Deprecated
+    @Getter
+    @Setter
+    private Instant timestamp = null;
 
     @XmlAttribute
+    @Getter
     private String name;
 
+    @Getter
     private ProfileDefinition<Page> pageProfile;
 
+    @Getter
     private ProfileDefinition<MediaObject> mediaProfile;
 
     private Profile() {
@@ -66,26 +76,6 @@ public class Profile implements Comparable<Profile> {
         }
     }
 
-    public Instant getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Instant timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ProfileDefinition<Page> getPageProfile() {
-        return pageProfile;
-    }
-
-
-    public ProfileDefinition<MediaObject> getMediaProfile() {
-        return mediaProfile;
-    }
 
     @Override
     public String toString() {
