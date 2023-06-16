@@ -62,7 +62,6 @@ public class ProfileDefinition<T> implements DelegatingDisplayablePredicate<T>, 
 
     }
 
-    @Deprecated
     public Instant getTimeStamp() {
         return profile == null ? null : profile.getTimestamp();
     }

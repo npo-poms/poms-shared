@@ -40,7 +40,6 @@ public class Profile implements Comparable<Profile> {
     @XmlAttribute
     @XmlJavaTypeAdapter(value = InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
-    @Deprecated
     @Getter
     @Setter
     private Instant timestamp = null;
