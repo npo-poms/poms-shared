@@ -16,7 +16,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.joestelmach</groupId>
+      <groupId>io.github.natty-parser</groupId>
       <artifactId>natty</artifactId>
     </dependency>
     <dependency>
