@@ -6,9 +6,6 @@ package nl.vpro.domain.api.profile;
 
 import java.util.Locale;
 
-import nl.vpro.domain.constraint.page.*;
-import nl.vpro.domain.page.Page;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +13,10 @@ import nl.vpro.domain.constraint.AbstractFilter;
 import nl.vpro.domain.constraint.PredicateTestResult;
 import nl.vpro.domain.constraint.media.Filter;
 import nl.vpro.domain.constraint.media.MediaConstraints;
+import nl.vpro.domain.constraint.page.*;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.MediaTestDataBuilder;
+import nl.vpro.domain.page.Page;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,7 +40,7 @@ public class ProfileDefinitionTest {
 
     @Test
     public void testGetFilter() {
-        ProfileDefinition<MediaObject> in = new ProfileDefinition<>(new Filter(), null);
+        ProfileDefinition<MediaObject> in = new ProfileDefinition<>(new Filter());
         ProfileDefinition<MediaObject> out = JAXBTestUtil.roundTripAndSimilar(in,
             """
                 <local:profileDefinition xmlns="urn:vpro:api:profile:2013" xmlns:shared="urn:vpro:shared:2009" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:m="urn:vpro:media:2009" xmlns:local="uri:local">
@@ -56,7 +55,7 @@ public class ProfileDefinitionTest {
     public void testApply() {
         Filter filter = new Filter();
         filter.setConstraint(MediaConstraints.alwaysFalse());
-        ProfileDefinition<MediaObject> in = new ProfileDefinition<>(filter, null);
+        ProfileDefinition<MediaObject> in = new ProfileDefinition<>(filter);
         in.setProfile(new Profile("test"));
 
 
@@ -74,7 +73,7 @@ public class ProfileDefinitionTest {
             new PortalConstraint("VPRONL"),
             new Not(new SectionConstraint("/vpronl/pers"))
         ));
-        ProfileDefinition<Page> in = new ProfileDefinition<>(pageFilter, null);
+        ProfileDefinition<Page> in = new ProfileDefinition<>(pageFilter);
         ProfileDefinition<Page> out = JAXBTestUtil.roundTripAndSimilar(in,
             """
                 <?xml version="1.0" encoding="UTF-8"?><local:profileDefinition xmlns:local="uri:local" xmlns="urn:vpro:api:profile:2013" xmlns:shared="urn:vpro:shared:2009" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:m="urn:vpro:media:2009">
