@@ -8,8 +8,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
-
-import com.joestelmach.natty.Parser;
+import org.natty.Parser;
 
 import nl.vpro.util.DateUtils;
 
