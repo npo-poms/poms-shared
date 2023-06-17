@@ -17,6 +17,8 @@ import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.ProgramUpdate;
+import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
 
@@ -59,6 +61,29 @@ public class MediaUpdateTest {
         rounded = JAXBTestUtil.roundTripAndValidateAndSimilar(update,
             getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"),
             getClass().getResourceAsStream("/programupdate-with-everything.xml")
+        );
+
+        assertThat(update.violations()).isEmpty();
+    }
+
+    @Test
+    public void withEverythingJson() throws Exception {
+
+        Program withEverything = MediaTestDataBuilder
+            .program()
+            .withEverything()
+            .withFixedDates()
+            .build();
+
+
+        ProgramUpdate update = ProgramUpdate.create(withEverything, OwnerType.BROADCASTER);
+        update.setVersion(Version.of(5, 12));
+        log.info("{}", update.getVersion());
+        rounded = Jackson2TestUtil.roundTripAndSimilar(
+            Jackson2Mapper.getInstance(),
+            update,
+            getClass().getResourceAsStream("/program-from-update-with-everything.json")
+
         );
 
         assertThat(update.violations()).isEmpty();

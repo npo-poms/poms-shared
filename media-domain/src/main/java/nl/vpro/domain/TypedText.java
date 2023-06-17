@@ -4,6 +4,8 @@ import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Typable;
 
@@ -54,6 +56,11 @@ public interface TypedText extends Typable<TextualType>, Supplier<String>, Compa
 
     default String fullString() {
         return getType() + ":" + get();
+    }
+
+    @JsonIgnore
+    default boolean isEmpty() {
+        return CharSequence.super.isEmpty();
     }
 
 }

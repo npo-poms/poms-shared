@@ -1,16 +1,14 @@
 package nl.vpro.domain;
 
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import org.apache.commons.lang3.StringUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
@@ -139,18 +137,22 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
      *
      * @return - the first subtitle
      */
+    @JsonIgnore
     default String getSubTitle() {
         return TextualObjects.get(getTitles(), TextualType.SUB);
     }
 
+    @JsonIgnore
     default String getShortTitle() {
         return TextualObjects.get(getTitles(), TextualType.SHORT);
     }
 
+    @JsonIgnore
     default String getOriginalTitle() {
         return TextualObjects.get(getTitles(), TextualType.ORIGINAL);
     }
 
+    @JsonIgnore
     default String getWorkTitle() {
         return TextualObjects.get(getTitles(), TextualType.WORK);
     }
@@ -160,6 +162,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
      * This defaults to {@link #getMainTitle()} if no explicit value was set. If an explicit value is set, it may
      * e.g. be the same as {@link #getMainTitle()} but with leading articles ommitted.
      */
+    @JsonIgnore
     default String getLexicoTitle() {
         return TextualObjects.getOptional(getTitles(), TextualType.LEXICO).orElse(getMainTitle());
     }
@@ -167,6 +170,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * @since 2.1
      */
+    @JsonIgnore
     default String getAbbreviatedTitle() {
         return TextualObjects.get(getTitles(), TextualType.ABBREVIATION);
     }
@@ -201,6 +205,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * @since 5.5
      */
+    @JsonIgnore
     BiFunction<String, TextualType, D> getDescriptionCreator();
 
     default TO addDescription(@Nullable String description, @NonNull TextualType type) {
@@ -274,6 +279,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * Returns the first available description. Probably the 'MAIN' description.
      */
+    @JsonIgnore
     default String getMainDescription() {
         if (hasDescriptions()) {
             return getDescriptions().first().get();
@@ -288,6 +294,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * Returns the description with textual type 'LONG' if there is one. Otherwise, returns {@link #getMainDescription()}
      */
+    @JsonIgnore
     default String getLongDescription() {
         if (hasDescriptions()) {
             return TextualObjects.getOptional(getDescriptions(), TextualType.LONG).orElse(getMainDescription());
@@ -300,6 +307,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         setDescription(description, TextualType.LONG);
     }
 
+    @JsonIgnore
     default String getSubDescription() {
         if (hasDescriptions()) {
             for (D description : getDescriptions()) {
@@ -311,6 +319,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return null;
     }
 
+    @JsonIgnore
     default String getShortDescription() {
         if (hasDescriptions()) {
             for (D description : getDescriptions()) {

@@ -1,0 +1,472 @@
+{
+  "broadcaster" : [ "BNN", "AVRO" ],
+  "portal" : [ "3VOOR12_GRONINGEN", "STERREN24" ],
+  "exclusive" : [ {
+    "portal" : "STERREN24"
+  }, {
+    "portal" : "3VOOR12_GRONINGEN",
+    "start" : 0,
+    "stop" : 100000
+  } ],
+  "region" : [ {
+    "value" : "NL",
+    "platform" : "INTERNETVOD"
+  }, {
+    "start" : 0,
+    "stop" : 100000,
+    "value" : "BENELUX",
+    "platform" : "INTERNETVOD"
+  }, {
+    "start" : 0,
+    "stop" : 100000,
+    "value" : "NL",
+    "platform" : "TVVOD"
+  } ],
+  "title" : [ {
+    "value" : "Main title",
+    "type" : "MAIN"
+  }, {
+    "value" : "Short title",
+    "type" : "SHORT"
+  }, {
+    "value" : "Episode title MIS",
+    "type" : "SUB"
+  } ],
+  "description" : [ {
+    "value" : "Main description",
+    "type" : "MAIN"
+  }, {
+    "value" : "Short description",
+    "type" : "SHORT"
+  }, {
+    "value" : "Episode description MIS",
+    "type" : "EPISODE"
+  } ],
+  "tag" : [ "tag1", "tag2", "tag3" ],
+  "country" : [ "GB", "US" ],
+  "genre" : [ "3.0.1.7.21", "3.0.1.8.25" ],
+  "intentions" : [ "ACTIVATING", "INFORM_INDEPTH" ],
+  "targetGroups" : [ "ADULTS" ],
+  "geoLocations" : [ {
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/31299",
+    "role" : "SUBJECT"
+  } ],
+  "topics" : [ {
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25890"
+  }, {
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/29064"
+  } ],
+  "avAttributes" : {
+    "bitrate" : 1000000,
+    "avFileFormat" : "M4V",
+    "videoAttributes" : {
+      "color" : "BLACK_AND_WHITE",
+      "coding" : "VCODEC",
+      "width" : 640,
+      "height" : 320
+    },
+    "audioAttributes" : {
+      "channels" : 2,
+      "coding" : "ACODEC"
+    }
+  },
+  "releaseYear" : 2004,
+  "duration" : "P0DT2H0M0.000S",
+  "credits" : [ {
+    "person" : {
+      "role" : "DIRECTOR",
+      "gtaaUri" : "http://gtaa/1234"
+    }
+  }, {
+    "person" : {
+      "givenName" : "Hans",
+      "familyName" : "Goedkoop",
+      "role" : "PRESENTER"
+    }
+  }, {
+    "person" : {
+      "givenName" : "Meta",
+      "familyName" : "de Vries",
+      "role" : "PRESENTER"
+    }
+  }, {
+    "person" : {
+      "givenName" : "Claire",
+      "familyName" : "Holt",
+      "role" : "ACTOR"
+    }
+  }, {
+    "name" : {
+      "role" : "COMPOSER",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
+    }
+  }, {
+    "person" : {
+      "role" : "SUBJECT",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
+    }
+  } ],
+  "memberOf" : [ {
+    "position" : 1,
+    "highlighted" : false,
+    "value" : "VPROWON_20003"
+  }, {
+    "position" : 2,
+    "highlighted" : false,
+    "value" : "VPROWON_20005"
+  }, {
+    "position" : 3,
+    "highlighted" : false,
+    "value" : "VPROWON_20005"
+  } ],
+  "ageRating" : "12",
+  "contentRating" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
+  "email" : [ "info@npo.nl", "programma@avro.nl" ],
+  "website" : [ "http://www.omroep.nl/programma/journaal", "http://tegenlicht.vpro.nl/afleveringen/222555" ],
+  "twitterref" : [ "#vpro", "@twitter" ],
+  "prediction" : [ {
+    "platform" : "INTERNETVOD"
+  }, {
+    "platform" : "TVVOD"
+  } ],
+  "locations" : [ {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
+    "avAttributes" : {
+      "bitrate" : 1500,
+      "avFileFormat" : "MP4"
+    },
+    "offset" : "P0DT0H13M0.000S",
+    "duration" : "P0DT0H10M0.000S",
+    "urn" : "urn:vpro:media:location:6"
+  }, {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
+    "avAttributes" : {
+      "bitrate" : 3000,
+      "avFileFormat" : "WM"
+    },
+    "urn" : "urn:vpro:media:location:7"
+  }, {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
+    "avAttributes" : {
+      "bitrate" : 2000,
+      "avFileFormat" : "WM"
+    },
+    "duration" : "P0DT0H30M33.000S",
+    "urn" : "urn:vpro:media:location:8"
+  }, {
+    "programUrl" : "http://www.vpro.nl/location/1",
+    "avAttributes" : {
+      "avFileFormat" : "UNKNOWN"
+    },
+    "urn" : "urn:vpro:media:location:11"
+  } ],
+  "scheduleEvents" : [ {
+    "start" : "1970-01-01T01:00:00.100+01:00",
+    "guideDay" : "1969-12-31",
+    "duration" : "P0DT0H0M0.200S",
+    "titles" : [ {
+      "value" : "Main ScheduleEvent Title",
+      "type" : "MAIN"
+    } ],
+    "descriptions" : [ {
+      "value" : "Main ScheduleEvent Description",
+      "type" : "MAIN"
+    } ],
+    "channel" : "NED3"
+  }, {
+    "start" : "1970-01-04T01:00:00.300+01:00",
+    "guideDay" : "1970-01-03",
+    "duration" : "P0DT0H0M0.050S",
+    "channel" : "NED3"
+  }, {
+    "start" : "1970-01-09T01:00:00.350+01:00",
+    "guideDay" : "1970-01-08",
+    "duration" : "P0DT0H0M0.250S",
+    "channel" : "HOLL"
+  }, {
+    "start" : "1970-01-11T01:00:00.600+01:00",
+    "guideDay" : "1970-01-10",
+    "duration" : "P0DT0H0M0.200S",
+    "channel" : "CONS"
+  } ],
+  "relation" : [ {
+    "type" : "THESAURUS",
+    "broadcaster" : "AVRO",
+    "urn" : "urn:vpro:media:relation:2",
+    "value" : "synoniem"
+  }, {
+    "type" : "KOOR",
+    "broadcaster" : "EO",
+    "urn" : "urn:vpro:media:relation:4",
+    "value" : "Ulfts Mannenkoor"
+  }, {
+    "type" : "ARTIST",
+    "broadcaster" : "VPRO",
+    "urn" : "urn:vpro:media:relation:3",
+    "value" : "Marco Borsato"
+  }, {
+    "type" : "LABEL",
+    "broadcaster" : "VPRO",
+    "uriRef" : "http://www.bluenote.com/",
+    "urn" : "urn:vpro:media:relation:1",
+    "value" : "Blue Note"
+  } ],
+  "images" : [ {
+    "title" : "Eerste plaatje met credits",
+    "source" : "https://www.vpro.nl",
+    "license" : "PUBLIC_DOMAIN",
+    "credits" : "CREDITS",
+    "image" : "urn:vpro:image:11234",
+    "type" : "PICTURE",
+    "highlighted" : false,
+    "urn" : "urn:vpro:media:image:2"
+  }, {
+    "title" : "Tweede plaatje met credits",
+    "source" : "https://www.vpro.nl",
+    "license" : "PUBLIC_DOMAIN",
+    "credits" : "CREDITS",
+    "image" : "urn:vpro:image:15678",
+    "type" : "PICTURE",
+    "highlighted" : false,
+    "urn" : "urn:vpro:media:image:3"
+  } ],
+  "episodeOf" : [ {
+    "position" : 1,
+    "highlighted" : false,
+    "value" : "VPROWON_30004"
+  } ],
+  "segments" : [ {
+    "broadcaster" : [ "BNN", "AVRO" ],
+    "portal" : [ "3VOOR12_GRONINGEN", "STERREN24" ],
+    "exclusive" : [ {
+      "portal" : "STERREN24"
+    }, {
+      "portal" : "3VOOR12_GRONINGEN",
+      "start" : 0,
+      "stop" : 100000
+    } ],
+    "region" : [ {
+      "value" : "NL",
+      "platform" : "INTERNETVOD"
+    }, {
+      "start" : 0,
+      "stop" : 100000,
+      "value" : "BENELUX",
+      "platform" : "INTERNETVOD"
+    }, {
+      "start" : 0,
+      "stop" : 100000,
+      "value" : "NL",
+      "platform" : "TVVOD"
+    } ],
+    "title" : [ {
+      "value" : "Main title",
+      "type" : "MAIN"
+    }, {
+      "value" : "Short title",
+      "type" : "SHORT"
+    }, {
+      "value" : "Episode title MIS",
+      "type" : "SUB"
+    } ],
+    "description" : [ {
+      "value" : "Main description",
+      "type" : "MAIN"
+    }, {
+      "value" : "Short description",
+      "type" : "SHORT"
+    }, {
+      "value" : "Episode description MIS",
+      "type" : "EPISODE"
+    } ],
+    "tag" : [ "tag1", "tag2", "tag3" ],
+    "country" : [ "GB", "US" ],
+    "genre" : [ "3.0.1.7.21", "3.0.1.8.25" ],
+    "intentions" : [ "ACTIVATING", "INFORM_INDEPTH" ],
+    "targetGroups" : [ "ADULTS" ],
+    "geoLocations" : [ {
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/31299",
+      "role" : "SUBJECT"
+    } ],
+    "topics" : [ {
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/25890"
+    }, {
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/29064"
+    } ],
+    "avAttributes" : {
+      "bitrate" : 1000000,
+      "avFileFormat" : "M4V",
+      "videoAttributes" : {
+        "color" : "BLACK_AND_WHITE",
+        "coding" : "VCODEC",
+        "width" : 640,
+        "height" : 320
+      },
+      "audioAttributes" : {
+        "channels" : 2,
+        "coding" : "ACODEC"
+      }
+    },
+    "releaseYear" : 2004,
+    "duration" : "P0DT0H1M40.000S",
+    "credits" : [ {
+      "person" : {
+        "role" : "DIRECTOR",
+        "gtaaUri" : "http://gtaa/1234"
+      }
+    }, {
+      "person" : {
+        "givenName" : "Hans",
+        "familyName" : "Goedkoop",
+        "role" : "PRESENTER"
+      }
+    }, {
+      "person" : {
+        "givenName" : "Meta",
+        "familyName" : "de Vries",
+        "role" : "PRESENTER"
+      }
+    }, {
+      "person" : {
+        "givenName" : "Claire",
+        "familyName" : "Holt",
+        "role" : "ACTOR"
+      }
+    }, {
+      "name" : {
+        "role" : "COMPOSER",
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
+      }
+    }, {
+      "person" : {
+        "role" : "SUBJECT",
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
+      }
+    } ],
+    "memberOf" : [ {
+      "position" : 1,
+      "highlighted" : false,
+      "value" : "VPROWON_20010"
+    }, {
+      "position" : 2,
+      "highlighted" : false,
+      "value" : "VPROWON_20012"
+    }, {
+      "position" : 3,
+      "highlighted" : false,
+      "value" : "VPROWON_20012"
+    } ],
+    "ageRating" : "12",
+    "contentRating" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
+    "email" : [ "info@npo.nl", "programma@avro.nl" ],
+    "website" : [ "http://www.omroep.nl/programma/journaal", "http://tegenlicht.vpro.nl/afleveringen/222555" ],
+    "twitterref" : [ "#vpro", "@twitter" ],
+    "prediction" : [ {
+      "platform" : "INTERNETVOD"
+    } ],
+    "locations" : [ {
+      "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
+      "avAttributes" : {
+        "bitrate" : 1500,
+        "avFileFormat" : "MP4"
+      },
+      "offset" : "P0DT0H13M0.000S",
+      "duration" : "P0DT0H10M0.000S",
+      "urn" : "urn:vpro:media:location:6"
+    }, {
+      "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
+      "avAttributes" : {
+        "bitrate" : 3000,
+        "avFileFormat" : "WM"
+      },
+      "urn" : "urn:vpro:media:location:7"
+    }, {
+      "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
+      "avAttributes" : {
+        "bitrate" : 2000,
+        "avFileFormat" : "WM"
+      },
+      "duration" : "P0DT0H30M33.000S",
+      "urn" : "urn:vpro:media:location:8"
+    }, {
+      "programUrl" : "http://www.vpro.nl/location/1",
+      "avAttributes" : {
+        "avFileFormat" : "UNKNOWN"
+      },
+      "urn" : "urn:vpro:media:location:11"
+    } ],
+    "relation" : [ {
+      "type" : "THESAURUS",
+      "broadcaster" : "AVRO",
+      "urn" : "urn:vpro:media:relation:2",
+      "value" : "synoniem"
+    }, {
+      "type" : "KOOR",
+      "broadcaster" : "EO",
+      "urn" : "urn:vpro:media:relation:4",
+      "value" : "Ulfts Mannenkoor"
+    }, {
+      "type" : "ARTIST",
+      "broadcaster" : "VPRO",
+      "urn" : "urn:vpro:media:relation:3",
+      "value" : "Marco Borsato"
+    }, {
+      "type" : "LABEL",
+      "broadcaster" : "VPRO",
+      "uriRef" : "http://www.bluenote.com/",
+      "urn" : "urn:vpro:media:relation:1",
+      "value" : "Blue Note"
+    } ],
+    "images" : [ {
+      "title" : "Eerste plaatje met credits",
+      "source" : "https://www.vpro.nl",
+      "license" : "PUBLIC_DOMAIN",
+      "credits" : "CREDITS",
+      "image" : "urn:vpro:image:11234",
+      "type" : "PICTURE",
+      "highlighted" : false,
+      "urn" : "urn:vpro:media:image:2"
+    }, {
+      "title" : "Tweede plaatje met credits",
+      "source" : "https://www.vpro.nl",
+      "license" : "PUBLIC_DOMAIN",
+      "credits" : "CREDITS",
+      "image" : "urn:vpro:image:15678",
+      "type" : "PICTURE",
+      "highlighted" : false,
+      "urn" : "urn:vpro:media:image:3"
+    } ],
+    "start" : "P0DT0H0M0.000S",
+    "imported" : false,
+    "valid" : true,
+    "mediaType" : "SEGMENT",
+    "titleCreator" : { },
+    "underEmbargo" : false,
+    "publishable" : true,
+    "language" : [ "nl", "fr" ],
+    "mainTitle" : "Main title",
+    "mid" : "VPROWON_12345_1",
+    "urn" : "urn:vpro:media:segment:12",
+    "embeddable" : true,
+    "midRef" : "VPROWON_20001",
+    "avType" : "VIDEO",
+    "publishStop" : 16725222000000,
+    "publishStart" : 0
+  } ],
+  "imported" : false,
+  "valid" : true,
+  "mediaType" : "BROADCAST",
+  "titleCreator" : { },
+  "underEmbargo" : false,
+  "publishable" : true,
+  "language" : [ "nl", "fr" ],
+  "mainTitle" : "Main title",
+  "mid" : "VPROWON_20001",
+  "urn" : "urn:vpro:media:program:12",
+  "embeddable" : true,
+  "type" : "BROADCAST",
+  "avType" : "VIDEO",
+  "publishStop" : 16725222000000,
+  "publishStart" : 0,
+  "version" : "5.12"
+}
