@@ -119,8 +119,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return null;
     }
 
-
-
+    @JsonIgnore
     default String getMainTitle() {
         return TextualObjects.get(getTitles(), TextualType.MAIN);
     }

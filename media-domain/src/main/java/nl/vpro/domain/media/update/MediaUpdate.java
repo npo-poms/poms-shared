@@ -26,6 +26,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -227,6 +228,7 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
     protected SortedSet<@NotNull @Valid PredictionUpdate> predictions;
 
     @Getter
+    @JsonIgnore
     boolean imported = false;
 
     @XmlTransient
@@ -346,6 +348,7 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
         setVersion(Version.parseIntegers(version));
     }
 
+    @JsonIgnore
     public boolean isValid() {
         return violations().isEmpty();
     }
@@ -941,11 +944,13 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
     }
 
     @Override
+    @JsonIgnore
     public BiFunction<String, TextualType, TitleUpdate> getTitleCreator() {
         return TitleUpdate::new;
     }
 
     @Override
+    @JsonIgnore
     public BiFunction<String, TextualType, DescriptionUpdate> getDescriptionCreator() {
         return DescriptionUpdate::new;
     }
