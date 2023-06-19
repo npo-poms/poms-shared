@@ -252,7 +252,7 @@ public final class Utils {
                 }
                 return fileInputStream;
             } else {
-                log.warn("File deleted already");
+                log.warn("File deleted already, do it can't be converted to an inputStream", new Exception());
                 return new ByteArrayInputStream("File deleted already".getBytes(StandardCharsets.UTF_8));
             }
         }
