@@ -477,6 +477,12 @@ public class TVATransformerTest {
 
         Program p2 = (Program) table.find("POW_04508476").get();
         assertThat(p2.getScheduleEvents()).hasSize(2);
+    }
+
+    @Test
+    public void bindincGenres() throws IOException, ParserConfigurationException, TransformerException, SAXException {
+        String xml = bindinc("bindinc/20230605120229000dayLAUN20230623.xml");
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
     }
 
@@ -498,8 +504,6 @@ public class TVATransformerTest {
         log.info("heimweh: {}", heimweh.getScheduleEvents());
         log.info("silence: {}", silence.getScheduleEvents());
         log.info("maestro: {}", maestro.getScheduleEvents());
-
-
     }
 
     @ParameterizedTest
@@ -594,11 +598,9 @@ public class TVATransformerTest {
 
     private String bindinc(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE);// TODO API-460
-        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
+        genreFunction.setMatchOnValuePrefix(BINDINC_GENRE_PREFIX);
 
-        genreFunction.setNotFound(NotFound.IGNORE);
-        genreFunction.setMatchOnValuePrefix("urn:bindinc:genre:");
-        genreFunction.setIgnore(new HashSet<>(Arrays.asList("urn:bindinc:genre:Overige")));
+        genreFunction.setIgnore(new HashSet<>(Arrays.asList(BINDINC_GENRE_PREFIX + "Overige")));
 
         Document channelMapping = createChannelMapping(ChannelIdType.BINDINC);
 

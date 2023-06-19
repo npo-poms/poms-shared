@@ -36,9 +36,9 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
     @Setter
     private NotFound notFound = NotFound.ASIS;
 
-
     /**
-     * For some use cases the TVA xmls are messy and the href can't be used. If you set this, the _name_ of the genre will be prefixed by this, and then matched.
+     * For some use cases the TVA xmls are messy and the href can't be used. If you set this, the <em>name</em> of the genre will be prefixed by this, and then matched (See e.g. {@link nl.vpro.media.tva.Constants#BINDINC_GENRE_PREFIX}).
+     *
      */
     @Getter
     @Setter

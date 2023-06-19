@@ -37,6 +37,10 @@ public class Constants {
 
     public final static String TVA_NAMESPACE = "urn:tva:metadata:2004";
 
+    /**
+     * In bindinc XML's genres are matched on name, and in the XSLT prefixed by this.
+     */
+    public final static String BINDINC_GENRE_PREFIX = "urn:bindinc:genre:";
 
     public enum ChannelIdType {
         MIS(Channel::misId),
