@@ -52,7 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Michiel Meeuwissen
  * @since 4.1
  */
-@SuppressWarnings("OptionalGetWithoutIsPresent")
+@SuppressWarnings({"OptionalGetWithoutIsPresent", "DataFlowIssue"})
 @Log4j2
 @Isolated("Because of the logger")
 public class TVATransformerTest {
@@ -499,7 +499,8 @@ public class TVATransformerTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-        "bindinc/20201208185718000dayTV0120201209.xml", "bindinc/20230605120229000dayLAUN20230623.xml"
+        "bindinc/20201208185718000dayTV0120201209.xml",
+        "bindinc/20230605120229000dayLAUN20230623.xml"
     })
     public void bindincGenres(String resource) throws IOException, ParserConfigurationException, TransformerException, SAXException {
         String xml = bindinc(resource);
