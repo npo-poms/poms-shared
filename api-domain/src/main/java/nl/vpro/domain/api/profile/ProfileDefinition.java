@@ -73,10 +73,10 @@ public class ProfileDefinition<T> implements DelegatingDisplayablePredicate<T>, 
 
     @Override
     public int compareTo(ProfileDefinition<T> o) {
-        // newest first
-        return o.getName().compareTo(o.getName());
+        return getName() == null ? (o.getName() == null ? 0 : 1) : getName().compareTo(o.getName());
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public boolean equals(Object o) {
         if(this == o) {
@@ -95,8 +95,7 @@ public class ProfileDefinition<T> implements DelegatingDisplayablePredicate<T>, 
 
     @Override
     public int hashCode() {
-        int result = getName() != null ? getName().hashCode() : 0;
-        return result;
+        return getName() != null ? getName().hashCode() : 0;
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {

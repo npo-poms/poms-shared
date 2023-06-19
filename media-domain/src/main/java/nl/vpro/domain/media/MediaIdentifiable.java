@@ -8,6 +8,8 @@ import java.util.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import nl.vpro.util.locker.ObjectLocker;
 
 /**
@@ -23,6 +25,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
     }
     List<String> getCrids();
 
+    @JsonIgnore
     default Optional<String> getMainIdentifier() {
         String mid = getMid();
         if (mid != null) {
@@ -36,6 +39,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
     }
 
     @Override
+    @JsonIgnore
     default String getCorrelationId() {
         return Optional.ofNullable(getCorrelation()).map(c -> c.id).orElse(null);
     }
@@ -46,6 +50,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
      * to (the first) {@link #getCrids()}.
      */
     @Override
+    @JsonIgnore
     default Correlation getCorrelation () {
         String mid = getMid();
         if (mid != null) {

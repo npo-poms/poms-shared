@@ -2,6 +2,7 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Range;
 
 import nl.vpro.util.Ranges;
@@ -34,6 +35,7 @@ public interface Embargo {
         return !inPublicationWindow(now);
     }
 
+    @JsonIgnore
     default boolean isUnderEmbargo() {
         return isUnderEmbargo(instant());
     }
@@ -92,6 +94,7 @@ public interface Embargo {
      * Whether this object is publishable.
      * This defaults to {@link #inPublicationWindow()}, but extensions may improve on this. E.g. {@code nl.vpro.domain.media.TrackableObject} also checks whether the object is deleted or not.
      */
+    @JsonIgnore
     default boolean isPublishable() {
         return inPublicationWindow();
     }

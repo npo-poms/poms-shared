@@ -36,6 +36,7 @@ public class TitleUpdate implements TypedText {
     private TitleUpdate() {
     }
 
+    @SuppressWarnings("ConfusingMainMethod")
     public static TitleUpdate main(String title) {
         return new TitleUpdate(title, TextualType.MAIN);
     }
@@ -71,8 +72,8 @@ public class TitleUpdate implements TypedText {
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-        if (parent instanceof MediaUpdate) {
-            this.media = (MediaUpdate) parent;
+        if (parent instanceof MediaUpdate parentu) {
+            this.media = parentu;
         }
     }
 
