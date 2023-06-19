@@ -303,6 +303,13 @@ public final class Utils {
         public String toString() {
             return file.toString();
         }
+
+        /**
+         * @since 7.6.2
+         */
+        public boolean isEmpty() {
+            return file.length() == 0;
+        }
     }
 }
 
