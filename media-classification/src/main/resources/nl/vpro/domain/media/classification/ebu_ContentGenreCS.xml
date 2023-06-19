@@ -319,7 +319,8 @@
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.4.14">
           <Name xml:lang="nl">Sport - informatie</Name>
-          <Reference>urn:tva:metadata:cs:2004:0414</Reference>
+          <Reference>urn:tva:
+            metadata:cs:2004:0414</Reference>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.4.15">
