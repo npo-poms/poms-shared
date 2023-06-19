@@ -1,0 +1,1583 @@
+﻿<TVAMain xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" publisher="media-press.tv" xmlns="urn:tva:metadata:2004">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://media-press.tv/325718267">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Programme non communiqué]]></Title>
+          <Title type="originalLanguage"><![CDATA[To Be Announced]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Notre rédaction s'efforce de vous fournir un aperçu aussi précis que possible des programmes des chaînes de télévision. Néanmoins, il arrive de temps en temps qu'au moment de la date limite de rédaction, aucune information sur les programmes n'est disponible pour les différents programmes de la chaîne. Pour savoir ce qui est diffusé, nous vous recommandons de consulter le site web de la chaîne de télévision.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Malheureusement, aucune information sur les programmes n'était disponible auprès de la chaîne au moment de la mise sous presse. Pour savoir ce qui est diffusé, nous vous recommandons de consulter le site web de la chaîne de télévision.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Le programme à définir]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Programme selon annonce]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="FR"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:23" type="other">
+            <Name xml:lang="FR"><![CDATA[Programme selon annonce]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Duration>PT00H24M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325579431">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Le temps d'une histoire]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[A la veille de la Seconde Guerre mondiale, Nicholas Winton a sauvé 669 enfants des griffes du nazisme. Dans la capitale tchécoslovaque, alors qu¶il se préparait pour des vacances au ski, le jeune Nicholas Winton va monter une extraordinaire opération de sauvetage menacés par les nazis. Depuis sa chambre d¶hôtel, il organise le départ d¶enfants juifs vers l'Angleterre et il se fait faussaire quand les autorisations et visas lui manquent. Pourtant, Nicholas Winton va taire cette histoire pendant 50 ans, jusqu¶au jour où son épouse, en rangeant son grenier, découvre un étrange carnet oublié... A côté de documents d'archives, le documentaire s'appuie sur des dessins inspirés par les documents d'époque. Il contient les témoignages des enfants sauvés, aujourd'hui plus qu'octogénaires, ainsi que la rencontre de Nicholas Winton en 1988 avec plusieurs d'entre eux. . Réalisation : Frédéric Tonolli Production : No School Productions / Upside Télévision / Nola Films]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Jeune banquier à la City de Londres, Nicholas Winton se prépare à passer les vacances de Noël 1938 au ski lorsqu'un ami l'appelle au secours de Prague. Dans la capitale tchécoslovaque, le jeune Nicholas Winton va organiser une extraordinaire opération de sauvetage d'enfants juifs menacés par les nazis. De sa chambre d'hôtel, il met en place le départ de trains vers l'Angleterre et se fait faussaire quand les autorisations et les visas lui manquent. 669 enfants à bord de 8 trains rejoignent Londres où les attendent des familles d'accueil. Voici l'histoire de ce héros discret.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Il ne s'est jamais considéré comme un héros. Pourtant, à la veille de la Seconde Guerre mondiale il a sauvé 669 enfants.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Documentaire]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="FR"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:12" type="other">
+            <Name xml:lang="FR"><![CDATA[Documentaire]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:12" type="other">
+            <Name xml:lang="FR"><![CDATA[Doc Histoire]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.rtbf.be/emission/le-temps-d-une-histoire</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H57M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325579418">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Le Tour de France dans toutes ses étapes]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Le Tour de France, une passion française : depuis sa naissance, en 1903, le Tour de France est un miroir de l'Histoire de ce pays et de ses habitants. Il redessine les frontières, participe au développement de l'industrie, à l'évolution du territoire, à l'essor du tourisme de masse et de la consommation à grande échelle. Comment un événement sportif est-il devenu, à ce point, partie prenante de notre destin commun ? À l'occasion du départ de la 110e édition, c'est cette réalité que ce documentaire souhaite mettre en image. Un film de Jean-Louis Pérez]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Le Tour de France, une passion française : depuis sa naissance, en 1903, le Tour de France est un miroir de l'Histoire du pays et de ses habitants. Il redessine les frontières, participe au développement de l'industrie, à l'évolution du territoire, à l'essor du tourisme de masse et de la consommation à grande échelle. Comment un évènement sportif est-il devenu, à ce point, partie prenante de notre destin commun ? À l'occasion du départ de la 110 ème édition, c'est cette réalité que ce documentaire souhaite mettre en image.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Le Tour de France, une passion française : depuis sa naissance, en 1903, le Tour de France est un miroir de l'Histoire du pays et de ses habitants.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Cyclisme]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.8">
+            <Name xml:lang="FR"><![CDATA[Cyclisme]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="FR"><![CDATA[Cyclisme]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:12" type="other">
+            <Name xml:lang="FR"><![CDATA[Doc Histoire]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2022</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT01H42M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325578497">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Quel temps pour la planète]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Découvrez, en 11 minutes et 30 secondes, les phénomènes de la météo, l'avenir du climat chez nous et à l'autre bout du monde grâce à des initiatives positives, des personnes engagées mais aussi des idées innovantes et durables.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Découvrez, en 11 minutes et 30 secondes, les phénomènes de la météo, l'avenir du climat chez nous et à l'autre bout du monde grâce à des initiatives positives, des personnes engagées mais aussi des idées innovantes et durables.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Science]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.8">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:7" type="other">
+            <Name xml:lang="FR"><![CDATA[Science]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Météo]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H11M</Duration>
+          <TotalEpisodes>250</TotalEpisodes>
+          <EpisodeNumber>121</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537737">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo 19h25]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Tout au long de la journée, retrouvez les prévisions météorologiques nationales et les bons conseils pour ne pas être surpris par le temps.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Tout au long de la journée, retrouvez les prévisions météorologiques nationales et les bons conseils pour ne pas être surpris par le temps.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Prévisions météorologiques]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.12">
+            <Name xml:lang="FR"><![CDATA[Informations]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:26" type="other">
+            <Name xml:lang="FR"><![CDATA[Prévisions météorologiques]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Météo]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H07M</Duration>
+          <TotalEpisodes>365</TotalEpisodes>
+          <EpisodeNumber>174</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537736">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Le 8-9]]></Title>
+          <Title type="originalLanguage"><![CDATA[Le 8/9]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Humour, info régionale, nationale et internationale, invités, météo, info-services, billets d'humeur... Avec: Christophe Grandjean pour le grand journal de 8h, le billet d'humeur de Jérôme De Warzée à 8h20 et le journal régional à 8h30. A partir de 8h35, vos chroniqueurs préférés se succèdent : Sara de Paduwa, Thierry Luthers, Julie Compagnon, Cathy Immelen, David Jeanmotte, Sarah Visse et Jean-Luc Fonck. Et chaque jour, un invité qui fait l'actualité culturelle et Le qui ka?]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Humour, info régionale, nationale et internationale, invités, météo, info-services, billets d'humeur... Au sommaire, le grand journal de 8h, le billet d'humeur de Jérôme De Warzée, le journal régional, les chroniques, l'interview d'un invité qui fait l'actualité culturelle et...Le qui ka?]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Humour, info régionale, nationale et internationale, invités, météo, info-services, billets d'humeur...]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Magazine info]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.8">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="FR"><![CDATA[Magazine info]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="FR"><![CDATA[Divertissement]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT01H00M</Duration>
+          <TotalEpisodes>264</TotalEpisodes>
+          <EpisodeNumber>121</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537735">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[C'est vous qui le dites]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Le rendez-vous interactif et piquant de VivaCité est diffusé chaque matin sur La Une. Au menu: humour, réactivité, débat et mauvaise foi autour d'un sujet d'actualité.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Le rendez-vous interactif et piquant de VivaCité est diffusé chaque matin sur La Une. Au menu: humour, réactivité, débat et mauvaise foi autour d'un sujet d'actualité.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Actualités]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.8">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:10" type="other">
+            <Name xml:lang="FR"><![CDATA[Actualités]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:6" type="other">
+            <Name xml:lang="FR"><![CDATA[Autres]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT01H32M</Duration>
+          <TotalEpisodes>200</TotalEpisodes>
+          <EpisodeNumber>116</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537734">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo 12h50]]></Title>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Prévisions météorologiques]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.12">
+            <Name xml:lang="FR"><![CDATA[Informations]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:26" type="other">
+            <Name xml:lang="FR"><![CDATA[Prévisions météorologiques]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Météo]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+          <TotalEpisodes>365</TotalEpisodes>
+          <EpisodeNumber>174</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537733">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo 20h00]]></Title>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Prévisions météorologiques]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.12">
+            <Name xml:lang="FR"><![CDATA[Informations]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:26" type="other">
+            <Name xml:lang="FR"><![CDATA[Prévisions météorologiques]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Météo]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H06M</Duration>
+          <TotalEpisodes>365</TotalEpisodes>
+          <EpisodeNumber>174</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537732">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Demain nous appartient]]></Title>
+          <Title type="originalLanguage"><![CDATA[Tomorrow is Ours]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[A Sète, ville portuaire du sud-est de la France, les destins de plusieurs familles s'entremêlent. Entre rumeurs, infidélités, vols, disparations mystérieuses, et meurtres, rien n'épargne les Delcourt, Lazzari, Vallorta et Moreno. Mais ces habitants partagent aussi des moments de joie avec des retrouvailles, des romances et autres heureux événements qui viennent leur redonner le sourire. Une des rares séries françaises à compter plus de 1000 épisodes, "Demain nous appartient" aborde autant les sujets légers que graves, tout en cherchant à coller aux thèmes qui font l'actualité.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Ce feuilleton qui se déroule à Sète et dans sa région raconte l'histoire de six familles, véritables clans qui se détestent, déchirés par la haine, les passions amoureuses tumultueuses, les intrigues politiques peu reluisantes et les désirs de vengeance...]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Agatha a Aurore dans le viseur. Martin sort de l'hôpital. Un squatteur investit le Spoon. La journée de rêve de Jordan part en fumée.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Série dramatique]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="FR"><![CDATA[Série dramatique]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Demain_nous_appartient</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2022</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+          <TotalEpisodes>239</TotalEpisodes>
+          <EpisodeNumber>195</EpisodeNumber>
+          <Season>6</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537731">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Météo 13h30]]></Title>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Prévisions météorologiques]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.12">
+            <Name xml:lang="FR"><![CDATA[Informations]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:26" type="other">
+            <Name xml:lang="FR"><![CDATA[Prévisions météorologiques]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Météo]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H03M</Duration>
+          <TotalEpisodes>365</TotalEpisodes>
+          <EpisodeNumber>174</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537730">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[JT 13h]]></Title>
+          <Title type="originalLanguage"><![CDATA[JT de 13H]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Tous les jours, le JT de 13h vous informe de l'actualité et des faits de société, politiques, économiques, culturels et sportifs.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Tous les jours, le JT de 13h vous informe de l'actualité et des faits de société, politiques, économiques, culturels et sportifs.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Nieuwsbulletin]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="FR"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="FR"><![CDATA[Nieuwsbulletin]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="FR"><![CDATA[Journal Télévisé]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H28M</Duration>
+          <TotalEpisodes>365</TotalEpisodes>
+          <EpisodeNumber>174</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537729">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Euromillions]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Retrouvez les tirages de l'Euromillions.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Retrouvez les tirages de l'Euromillions.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Overige]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.7">
+            <Name xml:lang="FR"><![CDATA[Overige]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:7" type="other">
+            <Name xml:lang="FR"><![CDATA[Overige]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:7" type="other">
+            <Name xml:lang="FR"><![CDATA[Loterie]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://nl.wikipedia.org/wiki/EuroMillions</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H06M</Duration>
+          <TotalEpisodes>104</TotalEpisodes>
+          <EpisodeNumber>50</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537728">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Journal belge]]></Title>
+          <Title type="originalLanguage"><![CDATA[JT 19h30]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Tous les jours, le JT de 19h30 informe de l'actualité et des faits de société, politiques, économiques, culturels et sportifs.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Tous les jours, le JT de 19h30 informe de l'actualité et des faits de société, politiques, économiques, culturels et sportifs.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="FR"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="FR"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="FR"><![CDATA[Journal Télévisé]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H40M</Duration>
+          <TotalEpisodes>365</TotalEpisodes>
+          <EpisodeNumber>174</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537727">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Les Feux de l'amour]]></Title>
+          <Title type="originalLanguage"><![CDATA[The Young and the Restless]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Episode 6346]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[La famille Abbott, installée à Genoa City, dans le Wisconsin, possède une immense fortune et une gigantesque entreprise. Les luttes de pouvoir et les trahisons au sein même du clan sont monnaie courante. Leur ennemi de toujours, l'industriel Victor Newman, ne fait rien pour leur faciliter la tâche, bien au contraire. D'alliances en ruptures, les illusions de chacun se heurtent à l'hostilité, à la jalousie et à la haine des autres. Entre amour et pouvoir, le choix est souvent celui de la puissance. Un Soap Opera mondialement célèbre, produit et diffusé depuis plus de quarante ans aux Etats-Unis ! A ce jour, une trentaine de pays différents diffusent le feuilleton chaque jour, et c'est en France que le feuilleton réalise ses meilleures audiences, juste derrière les Etats-Unis.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[William annonce à Lily qu'il compte mettre l'accent sur les héros du quotidien et non plus sur les criminels. Jordan en veut à Faith au sujet de l'alcool qu'elle n'a pas voulu voler au Society. Cette dernière se décide donc à en voler chez sa mère...]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[La famille Abbott, installée à Genoa City, dans le Wisconsin, possède une immense fortune. Les luttes de pouvoir au sein même du clan sont monnaie courante.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Soap]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="FR"><![CDATA[Soap]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://en.wikipedia.org/wiki/The_Young_and_the_Restless</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="US" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2020</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H48M</Duration>
+          <TotalEpisodes>250</TotalEpisodes>
+          <EpisodeNumber>228</EpisodeNumber>
+          <Season>24</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537726">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Le 6-8]]></Title>
+          <Title type="originalLanguage"><![CDATA[Le 6/8]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Rythmée par l'info-trafic et la météo, l'émission animée par Sara De Paduwa accueille chaque matin une bande sympathique pour des chroniques variées. Très interactive, avec des interventions en direct par téléphone et par sms, l'émission comportera de l'info à 6h00 et à 7h00, le rappel des titres à 6h30 et 7h30 et le journal des sports à 7h20, de l'info-trafic toutes les 10 minutes présentée sur une carte interactive par Marjorie Billo. Mais aussi des reportages et chaque jour, 3 chroniques de la vie quotidienne: les Buzz (Tom Salbeth), Nos amis les animaux… (Bénédicte Flament), Sexo (Iv Psalti), On s'bouge ! (Gilles Goetgebeur), Beauté, mode & bien-être (Valérie Kinzounza), La télé d'avant (Pascal Michel), G testé pour vous (Ophélie Fontana), People (Johanna Pires), Enfants (Delphine Simon), Sport extrêmes (David Bertrand), Un p'tit bout d'histoire (Eddy Przybylski ), News musicales (Bruno Tummers).]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Le 6-8 est la matinale qui vous réveille en images ! Rythmée par l'info-trafic et la météo, l'émission animée par Sara De Paduwa accueille chaque matin une bande sympathique pour des chroniques variées.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Rythmée par l'info-trafic et la météo, l'émission animée par Sara De Paduwa accueille chaque matin une bande sympathique pour des chroniques variées.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Magazine info]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.8">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="FR"><![CDATA[Magazine info]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:6" type="other">
+            <Name xml:lang="FR"><![CDATA[Autres]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT02H00M</Duration>
+          <TotalEpisodes>245</TotalEpisodes>
+          <EpisodeNumber>121</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537725">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Une brique dans le ventre]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Cédric et Virginie nous font découvrir la rénovation très écologique d'une maison de rangée située à Bruxelles. L'idée principale était d'avoir une maison durable et esthétique. Pour ce faire, les propriétaires ont privilégié les matériaux durables et le circulaire. Résultat, une ambiance chaleureuse avec des matériaux renouvelables et des éléments de récupération. Un pari réussi pour le couple ! Savoir-Faire : Noir Artist - œuvres originales d'un artiste plasticien qui s'inspire de la nature Direction Liège pour découvrir un artiste peintre muraliste. Noir Artist est un plasticien qui s'inspire de la nature. Peinture murale, peinture sur toile, fresque dans des magasins ou chez des particuliers, Noir travaille avec des nuances de noir qui révèlent sa signature. Découverte d'œuvres originales inspirées par la nature. Week-end Vosges : Cabanes insolites - Les Nids des Vosges- construites par un Belge Petit vous rêviez d'avoir une cabane perchée dans les arbres ? Aujourd'hui grâce à un Belge, il est possible d'y passez la nuit. Les Nids des Vosges vous propose un grand choix de cabanes pour vous permettre de trouver celle qui vous convient. Luxueuse avec un bain finlandais chauffé à 37°, familiale avec des ponts suspendus ou relaxante avec son dôme transparent pour observer les étoiles, il y en a pour tous les goûts. Le décor est toujours en perpétuel changement grâce aux saisons mais été comme hiver, le charme est au rendez-vous ! Il y a un truc : Transformation d'un ancien tiroir d'imprimerie Amandine et Robert transforment un ancien tiroir d'imprimerie en une jolie table où mettre ses souvenirs de vacances. Préparez un pistolet à peinture et c'est parti !]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Cédric Wautier et Virginie Jacobs visitent de nouvelles habitations insolites en Belgique comme à l'étranger. Comme toujours, ces découvertes de maisons, appartements et lofts de tous budgets, sont l'occasion de prodiguer des conseils juridiques, pratiques, techniques, énergétiques et esthétiques.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Visite de logements, conseils juridiques, pratiques, techniques, énergétiques et esthétiques, "trucs" de bricolage...un magazine de l'habitat complet et passionnant.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Huizenprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="FR"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="FR"><![CDATA[Huizenprogramma]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.facebook.com/unebriquedansleventre/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2022</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/325537724">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Alors on sort ?]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[ "Alors on sort?" est le nouvel agenda culturel quotidien de La Une diffusé après le JT de 13h00 et avant le 19h30. Joëlle Scoriels fait découvrir tous les principaux concerts, spectacles et visites virtuelles de l'actualité culturelle en Belgique. Un bain de culture varié et animé!]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[ "Alors on sort ? " est le nouvel agenda culturel quotidien de La Une diffusé après le JT de 13h00 et avant le 19h30, présenté par Joëlle Scoriels.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Kunstprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.16">
+            <Name xml:lang="FR"><![CDATA[Kunst en cultuur]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:14" type="other">
+            <Name xml:lang="FR"><![CDATA[Kunstprogramma]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="FR"><![CDATA[Mag Culture]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://www.rtbf.be/emission/alors-on-sort</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H06M</Duration>
+          <TotalEpisodes>195</TotalEpisodes>
+          <EpisodeNumber>120</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/324803889">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Ici tout commence]]></Title>
+          <Title type="originalLanguage"><![CDATA[Where It All Begins]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[L'institut Auguste Armand est l'une des meilleures écoles de cuisine de France. Excellence, rigueur et discipline sont de mise dans cet établissement géré par une équipe de professionnels talentueux, reconnus et respectés. Un lieu clos qui va être le théâtre d'histoires d'amour contrariées et complexes, mais aussi de rivalités et de trahisons. Mais pour Maxime Delcourt et le reste des élèves de cette école prestigieuse, l'objectif est clair : devenir les futurs chefs étoilés de la gastronomie française. Et rien n'entachera leur motivation.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[L'institut Auguste Armand est l'une des meilleures écoles de cuisine de France. Ce lieu clos est le théâtre d'histoires d'amour contrariées, de rivalités et de trahisons. Mais pour Maxime Delcourt et le reste des élèves, l'objectif est clair : devenir les futurs chefs étoilés de la gastronomie française.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[A l'Institut, les recherches pour retrouver Axel s'intensifient. A l'hôpital, Vic prétend être la petite-amie d'Enzo. Les rescapés du train peinent à panser leurs blessures.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Série dramatique]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="FR"><![CDATA[Série dramatique]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1585162284" />
+              <Character>
+                <mpeg7:GivenName>Anaïs Grimbert</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="499777725" />
+              <Character>
+                <mpeg7:GivenName>Salomé Dekens</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="2115101797" />
+              <Character>
+                <mpeg7:GivenName>Guillaume Devaut</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="662189286" />
+              <Character>
+                <mpeg7:GivenName>Théo Teyssier</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1808041909" />
+              <Character>
+                <mpeg7:GivenName>Axel Teyssier</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Ici_tout_commence</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2022</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+          <TotalEpisodes>263</TotalEpisodes>
+          <EpisodeNumber>219</EpisodeNumber>
+          <Season>3</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/324802600">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Demain nous appartient]]></Title>
+          <Title type="originalLanguage"><![CDATA[Tomorrow is Ours]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[A Sète, ville portuaire du sud-est de la France, les destins de plusieurs familles s'entremêlent. Entre rumeurs, infidélités, vols, disparations mystérieuses, et meurtres, rien n'épargne les Delcourt, Lazzari, Vallorta et Moreno. Mais ces habitants partagent aussi des moments de joie avec des retrouvailles, des romances et autres heureux événements qui viennent leur redonner le sourire. Une des rares séries françaises à compter plus de 1000 épisodes, "Demain nous appartient" aborde autant les sujets légers que graves, tout en cherchant à coller aux thèmes qui font l'actualité.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Ce feuilleton qui se déroule à Sète et dans sa région raconte l'histoire de six familles, véritables clans qui se détestent, déchirés par la haine, les passions amoureuses tumultueuses, les intrigues politiques peu reluisantes et les désirs de vengeance...]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Une arrestation tourne au drame. Aurore démasque son ravisseur. Bruno joue à l'entremetteur pour Nathan. Un couple mythique est de retour à Sète.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Série dramatique]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="FR"><![CDATA[Série dramatique]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Demain_nous_appartient</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H26M</Duration>
+          <TotalEpisodes>239</TotalEpisodes>
+          <EpisodeNumber>194</EpisodeNumber>
+          <Season>6</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/318071089">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[OpinionS : Ecolo]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Des partis politiques et des associations syndicales et patronales discutent de différents enjeux sociétaux.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Des partis politiques et des associations syndicales et patronales discutent de différents enjeux sociétaux.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Politique]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.8">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="FR"><![CDATA[Politique]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="FR"><![CDATA[Information]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2023</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H11M</Duration>
+          <TotalEpisodes>5</TotalEpisodes>
+          <EpisodeNumber>3</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/282170076">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Jardins et loisirs : été]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[La rose occupe une place particulière dans les jardins. Chaque jardinier a une relation particulière avec un rosier dont il apprécie la silhouette, la forme des fleurs, la couleur et le parfum. Parmi les reportages proposés Le Jardin du Théâtre des Minuits En Val de Loire, une troupe de théâtre a aménagé un jardin qui permet des levers de rideaux. Lieu de spectacles et d'expositions, le grand terrain rassemble les créations du rosiériste André Eve. Les comédiens-jardiniers ont eu la belle idée de planter chaque obtention en compagnie des rosiers qui ont été croisés pour lui donner naissance.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[La rose occupe une place particulière dans les jardins. Chaque jardinier a une relation particulière avec un rosier dont il apprécie la silhouette, la forme des fleurs, la couleur et le parfum.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[La rose occupe une place particulière dans les jardins. Chaque jardinier a une relation particulière avec un rosier dont il apprécie la silhouette, la forme des fleurs, la couleur et le parfum.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Temps libre + Hobby]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.8">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:19" type="other">
+            <Name xml:lang="FR"><![CDATA[Temps libre + Hobby]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:19" type="other">
+            <Name xml:lang="FR"><![CDATA[Mag Nature / Envir.]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2022</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H21M</Duration>
+          <TotalEpisodes>11</TotalEpisodes>
+          <EpisodeNumber>6</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/274130439">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Chiens et chats sans collier]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Elancé, court sur pattes, à poils ras ou long, plutôt dynamique ou flemmard....On dit souvent que les maitres choisissent un animal de compagnie qui leur ressemble.... Mais qu'est ce qui fait qu'un jour notre monde bascule et que nous tombons sous le charme d'une petite boule de poils en particulier ? Parfois, c'est simplement un regard, un feeling, une histoire. Parfois, il faut juste être au bon endroit, au bon moment pour que la magie opère. Du moins, c'est ce que le petit Thor espère. Arrivé au refuge dans la matinée, il vit très mal sa séparation avec son ancien propriétaire. Ensemble, ils n'avaient pas la vie facile et logeaient dans une voiture. Le propriétaire a décidé de confier son chien à Sans Collier pour lui offrir un meilleur avenir... De son coté, Valérie, atteinte de la maladie de Parkinson depuis 12 ans, se met à la recherche d'un animal de compagnie pour l'accompagner dans sa maladie et l'aider à progresser. Une histoire qui émeut Marilys, la nouvelle recrue, qui va tout faire pour lui trouver le chien dont elle a besoin. Du coté des chats, une belle histoire d'amour naitra entre Chipie et Michel, malgré les réticences de sa compagne... Mais avec un peu de ténacité, parfois, on obtient ce que l'on veut !]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Plongée dans la vie intense et palpitante d'un refuge pour chiens et chats. Au fil des abandons, des adoptions, de séances de rééducation, de sauvetages, nous apprenons à connaitre le quotidien bouillonnant des soigneurs animaliers de Sans Collier, ainsi que les histoires fortes des pensionnaires .]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Plongée dans la vie intense et palpitante d'un refuge pour chiens et chats. Au fil des abandons, des adoptions, de séances de rééducation, de sauvetages, nous apprenons à connaitre le quotidien bouillonnant des soigneurs animaliers de Sans Collier, ainsi que les histoires fortes des pensionnaires .]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Realityprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="FR"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="FR"><![CDATA[Realityprogramma]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:Pour tous">
+              <mpeg7:Name xml:lang="NL">Pour tous</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="BE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2022</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H28M</Duration>
+          <TotalEpisodes>8</TotalEpisodes>
+          <EpisodeNumber>2</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/261080412">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Affaire conclue, tout le monde a quelque chose à vendre]]></Title>
+          <Title type="originalLanguage"><![CDATA[Affaire conclue]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[L'émission à succès animée par Sophie Davant permet, à qui le veut, de proposer un objet qu'il souhaite vendre. Une fois retenu, l'objet est expertisé par un spécialiste et proposé aux enchères à des acheteurs, qui sont au nombre de 5 et varient selon les émissions.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[L'émission à succès animée par Sophie Davant permet, à qui le veut, de proposer un objet qu'il souhaite vendre. Une fois retenu, l'objet est expertisé par un spécialiste et proposé aux enchères à des acheteurs, qui sont au nombre de 5 et varient selon les émissions.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Temps libre + Hobby]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.8">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:19" type="other">
+            <Name xml:lang="FR"><![CDATA[Temps libre + Hobby]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Affaire_conclue</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H45M</Duration>
+          <TotalEpisodes>321</TotalEpisodes>
+          <EpisodeNumber>68</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/261080369">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Affaire conclue, tout le monde a quelque chose à vendre]]></Title>
+          <Title type="originalLanguage"><![CDATA[Affaire conclue]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[L'émission à succès animée par Sophie Davant permet, à qui le veut, de proposer un objet qu'il souhaite vendre. Une fois retenu, l'objet est expertisé par un spécialiste et proposé aux enchères à des acheteurs, qui sont au nombre de 5 et varient selon les émissions.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[L'émission à succès animée par Sophie Davant permet, à qui le veut, de proposer un objet qu'il souhaite vendre. Une fois retenu, l'objet est expertisé par un spécialiste et proposé aux enchères à des acheteurs, qui sont au nombre de 5 et varient selon les émissions.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Temps libre + Hobby]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.8">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:19" type="other">
+            <Name xml:lang="FR"><![CDATA[Temps libre + Hobby]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:8" type="other">
+            <Name xml:lang="FR"><![CDATA[Magazine]]></Name>
+          </Genre>
+          <Language>FR</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://fr.wikipedia.org/wiki/Affaire_conclue</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="FR" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H45M</Duration>
+          <TotalEpisodes>321</TotalEpisodes>
+          <EpisodeNumber>67</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/249687372">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Soko Kitzbühel]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Abschied]]></Title>
+          <Title xml:lang="FR" type="OriginalEpisodeTitle"><![CDATA[Abschied]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Plastisch chirurg Reinhard Endacher had valium in z'n bloed toen hij omkwam bij een auto-ongeluk. Zijn collega Bernadette Trelli kan hem het geneesmiddel ongemerkt hebben toegediend, omdat Endacher haar niet langer in zijn privé-kliniek wilde hebben.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Alors que Steffi examine le cadavre du docteur Endacher, elle se rend compte que son accident de voiture n'était pas si accidentel puiqu'il avait ingéré une grosse dose d'anxiolytiques. Les deux principales suspectes semblent être sa collègue, qu'il s'apprêtait à renvoyer, et son assistante...]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Plastisch chirurg Reinhard Endacher had valium in zijn bloed toen hij omkwam bij een auto-ongeluk. Zijn collega Bernadette Trelli geldt als verdachte, omdat Endacher haar niet langer in zijn privé-kliniek wilde laten werken.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Misdaadserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="FR"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:12" type="other">
+            <Name xml:lang="FR"><![CDATA[Misdaadserie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:10">
+              <mpeg7:Name xml:lang="NL">10</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="256097192" />
+              <Character>
+                <mpeg7:GivenName>Lukas Roither</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1561337246" />
+              <Character>
+                <mpeg7:GivenName>Nina Pokorny</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1369876684" />
+              <Character>
+                <mpeg7:GivenName>Vera Schönberg</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1482103124" />
+              <Character>
+                <mpeg7:GivenName>Hannes Kofler</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1729397319" />
+              <Character>
+                <mpeg7:GivenName>Kroisleitner</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/SOKO_Kitzb%C3%BChel</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="AT" />
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H50M</Duration>
+          <TotalEpisodes>13</TotalEpisodes>
+          <EpisodeNumber>13</EpisodeNumber>
+          <Season>20</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/249687047">
+        <BasicDescription>
+          <Title xml:lang="FR" type="main"><![CDATA[Soko Kitzbühel]]></Title>
+          <Title xml:lang="FR" type="EpisodeTitle"><![CDATA[Start Up]]></Title>
+          <Title xml:lang="FR" type="OriginalEpisodeTitle"><![CDATA[Start Up]]></Title>
+          <Synopsis xml:lang="FR" length="long"><![CDATA[Kroisi participe à un concours télévisé de la meilleure invention, où il se retrouve en compétition contre Tim Trebo, un jeune entrepreneur ambitieux et vaniteux. Kroisi va remporter le prix en présentant au jury une crèche de Noël à monter en famille. N'acceptant pas sa défaite qu'il estime injuste, Tim va se faire remarquer lors d'un cocktail au restaurant de Hannes en invectivant l'un des membres du jury, Klaus Holaus, qui l'a humilié en public. Le lendemain, Tim Trebo est retrouvé mort, écrasé par une barre d'haltère dans la salle de gym de sa villa de location.]]></Synopsis>
+          <Synopsis xml:lang="FR" length="medium"><![CDATA[Kroisi participe à un concours télévisé de la meilleure invention, où il se retrouve en compétition contre Tim Trebo, un jeune entrepreneur ambitieux et vaniteux. Kroisi va remporter le prix en présentant au jury une crèche de Noël à monter en famille...]]></Synopsis>
+          <Synopsis xml:lang="FR" length="short"><![CDATA[Het Kitz4Future-evenement loopt uit op de dood van de ambitieuze ondernemer Tim Trebo. Hij had veel vijanden, want hij was bereid om over lijken te gaan om zijn doelen te bereiken. Ondertussen zoekt Nina weer toenadering tot haar moeder Barbara.]]></Synopsis>
+          <OtherTextElement xml:lang="FR" type="PoProgType"><![CDATA[Misdaadserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="FR"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:12" type="other">
+            <Name xml:lang="FR"><![CDATA[Misdaadserie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:5" type="other">
+            <Name xml:lang="FR"><![CDATA[Série]]></Name>
+          </Genre>
+          <ParentalGuidance>
+            <mpeg7:ParentalRating href="urn:po:metadata:cs:NicamParentalRatingCS:2007:10">
+              <mpeg7:Name xml:lang="NL">10</mpeg7:Name>
+            </mpeg7:ParentalRating>
+          </ParentalGuidance>
+          <Language>FR</Language>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="256097192" />
+              <Character>
+                <mpeg7:GivenName>Lukas Roither</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1561337246" />
+              <Character>
+                <mpeg7:GivenName>Nina Pokorny</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1369876684" />
+              <Character>
+                <mpeg7:GivenName>Vera Schönberg</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1482103124" />
+              <Character>
+                <mpeg7:GivenName>Hannes Kofler</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1729397319" />
+              <Character>
+                <mpeg7:GivenName>Kroisleitner</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/SOKO_Kitzb%C3%BChel</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="AT" />
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H43M</Duration>
+          <TotalEpisodes>13</TotalEpisodes>
+          <EpisodeNumber>12</EpisodeNumber>
+          <Season>20</Season>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable />
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="LAUN" start="2023-06-23T05:59:00+02:00" end="2023-06-24T00:23:00+02:00">
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537726" />
+          <ProgramURL>dvb://1.1.LAUN;658449603@2023-06-23T05:59:00+02:00--PT02H01M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411949</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T05:59:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT02H01M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537736" />
+          <ProgramURL>dvb://1.1.LAUN;658449621@2023-06-23T08:00:00+02:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411982</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T08:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+          <Premiere value="true" />
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537735" />
+          <ProgramURL>dvb://1.1.LAUN;658449618@2023-06-23T09:00:00+02:00--PT01H32M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411976</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T09:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H32M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/282170076" />
+          <ProgramURL>dvb://1.1.LAUN;658958869@2023-06-23T10:32:00+02:00--PT00H22M00S</ProgramURL>
+          <InstanceMetadataId>imi:1256693516</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T10:32:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H22M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325718267" />
+          <ProgramURL>dvb://1.1.LAUN;658958870@2023-06-23T10:54:00+02:00--PT00H24M00S</ProgramURL>
+          <InstanceMetadataId>imi:1256693517</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T10:54:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H24M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/324802600" />
+          <ProgramURL>dvb://1.1.LAUN;658449596@2023-06-23T11:18:00+02:00--PT00H34M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411942</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T11:18:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H34M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537727" />
+          <ProgramURL>dvb://1.1.LAUN;658449604@2023-06-23T11:52:00+02:00--PT00H49M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411950</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T11:52:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H49M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325578497" />
+          <ProgramURL>dvb://1.1.LAUN;658449071@2023-06-23T12:41:00+02:00--PT00H11M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411958</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T12:41:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537734" />
+          <ProgramURL>dvb://1.1.LAUN;658449617@2023-06-23T12:52:00+02:00--PT00H06M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411974</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T12:52:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H06M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537730" />
+          <ProgramURL>dvb://1.1.LAUN;658449611@2023-06-23T12:58:00+02:00--PT00H28M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411960</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T12:58:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H28M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537724" />
+          <ProgramURL>dvb://1.1.LAUN;658449598@2023-06-23T13:26:00+02:00--PT00H07M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411944</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T13:26:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537731" />
+          <ProgramURL>dvb://1.1.LAUN;658449612@2023-06-23T13:33:00+02:00--PT00H03M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411962</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T13:33:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/261080369" />
+          <ProgramURL>dvb://1.1.LAUN;658449619@2023-06-23T13:36:00+02:00--PT00H47M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411978</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T13:36:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H47M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/261080412" />
+          <ProgramURL>dvb://1.1.LAUN;658449605@2023-06-23T14:23:00+02:00--PT00H47M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411951</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T14:23:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H47M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/249687047" />
+          <ProgramURL>dvb://1.1.LAUN;658449606@2023-06-23T15:10:00+02:00--PT00H48M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411952</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T15:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H48M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/249687372" />
+          <ProgramURL>dvb://1.1.LAUN;658449600@2023-06-23T15:58:00+02:00--PT00H52M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411946</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T15:58:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H52M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537725" />
+          <ProgramURL>dvb://1.1.LAUN;658449601@2023-06-23T16:50:00+02:00--PT00H56M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411947</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T16:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H56M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/274130439" />
+          <ProgramURL>dvb://1.1.LAUN;658449620@2023-06-23T17:46:00+02:00--PT00H28M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411980</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T17:46:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H28M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/324803889" />
+          <ProgramURL>dvb://1.1.LAUN;658449602@2023-06-23T18:14:00+02:00--PT00H32M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411948</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T18:14:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H32M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537732" />
+          <ProgramURL>dvb://1.1.LAUN;658449613@2023-06-23T18:46:00+02:00--PT00H32M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411964</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T18:46:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H32M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537724" />
+          <ProgramURL>dvb://1.1.LAUN;658449597@2023-06-23T19:18:00+02:00--PT00H04M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411943</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T19:18:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H04M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537737" />
+          <ProgramURL>dvb://1.1.LAUN;658449622@2023-06-23T19:22:00+02:00--PT00H08M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411984</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T19:22:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H08M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537728" />
+          <ProgramURL>dvb://1.1.LAUN;658449607@2023-06-23T19:30:00+02:00--PT00H40M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411953</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T19:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H40M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537733" />
+          <ProgramURL>dvb://1.1.LAUN;658449614@2023-06-23T20:10:00+02:00--PT00H07M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411965</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T20:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H07M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325579418" />
+          <ProgramURL>dvb://1.1.LAUN;658449599@2023-06-23T20:17:00+02:00--PT01H42M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411945</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T20:17:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H42M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537729" />
+          <ProgramURL>dvb://1.1.LAUN;658449610@2023-06-23T21:59:00+02:00--PT00H09M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411957</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T21:59:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H09M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325579431" />
+          <ProgramURL>dvb://1.1.LAUN;658449623@2023-06-23T22:08:00+02:00--PT01H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411985</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T22:08:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H00M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/318071089" />
+          <ProgramURL>dvb://1.1.LAUN;658449072@2023-06-23T23:08:00+02:00--PT00H12M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411970</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T23:08:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H12M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325578497" />
+          <ProgramURL>dvb://1.1.LAUN;658449074@2023-06-23T23:20:00+02:00--PT00H11M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411987</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T23:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537733" />
+          <ProgramURL>dvb://1.1.LAUN;658449615@2023-06-23T23:31:00+02:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411967</InstanceMetadataId>
+          <PublishedStartTime>2023-06-23T23:31:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537728" />
+          <ProgramURL>dvb://1.1.LAUN;658449608@2023-06-23T23:36:00+02:00--PT00H33M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411954</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-23T23:36:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H33M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325578497" />
+          <ProgramURL>dvb://1.1.LAUN;658449073@2023-06-24T00:09:00+02:00--PT00H11M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411972</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-24T00:09:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H11M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537733" />
+          <ProgramURL>dvb://1.1.LAUN;658449616@2023-06-24T00:20:00+02:00--PT00H03M00S</ProgramURL>
+          <InstanceMetadataId>imi:1255411969</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-24T00:20:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H03M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/325537728" />
+          <ProgramURL>dvb://1.1.LAUN;658449609@2023-06-24T00:23:00+02:00--PT00H00M</ProgramURL>
+          <InstanceMetadataId>imi:1255411956</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2023-06-24T00:23:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H00M</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="256097192">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Jakob</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">Seeböck</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1561337246">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Julia</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">Cencig</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1369876684">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Andrea</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">L'Arronge</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1482103124">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Heinz</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">Marecek</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1729397319">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Ferry</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">Oellinger</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1585162284">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Julie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">Sassoust</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="499777725">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Aurélie</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">Pons</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="2115101797">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Bruno</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">Putzulu</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="662189286">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Khaled</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">Alouach</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1808041909">
+        <mpeg7:GivenName xml:lang="FR" initial=" ">Thomas</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="FR">Da Costa</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>
