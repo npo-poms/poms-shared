@@ -95,15 +95,11 @@ public class EpgGenreFunction extends ExtensionFunctionDefinition {
                     } else {
                         log.debug(iea.getMessage());
                     }
-                    switch(notFound) {
-                        case FATAL:
-                            throw iea;
-                        case ASIS:
-                             return new StringValue(epgValue);
-                        case IGNORE:
-                        default:
-                            return new StringValue("");
-                    }
+                    return switch (notFound) {
+                        case FATAL -> throw iea;
+                        case ASIS -> new StringValue(epgValue);
+                        default -> new StringValue("");
+                    };
                 }
 
             }

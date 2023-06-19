@@ -77,47 +77,27 @@ public class MisGenreFunction extends ExtensionFunctionDefinition {
 
     @Nullable
     private MisGenreType toMisGenreType(String misInput) {
-        switch(misInput.toUpperCase()) {
-            case "AMUSEMENT":
-                return MisGenreType.ENTERTAINMENT;
-            case "ANIMATIE":
-                return MisGenreType.CARTOON;
-            case "COMEDY":
-                return MisGenreType.COMEDY;
-            case "DOCUMENTAIRE":
-                return MisGenreType.DOCUMENTARY;
-            case "EDUCATIEF":
-                return MisGenreType.EDUCATION;
-            case "EROTIEK":
-                return MisGenreType.EROTICA;
-            case "FILM":
-                return MisGenreType.MOVIE;
-            case "INFORMATIEF":
-                return MisGenreType.INFORMATIVE;
-            case "JEUGD":
-                return MisGenreType.YOUTH;
-            case "KUNST/CULTUUR":
-                return MisGenreType.ART_CULTURE;
-            case "MISDAAD":
-                return MisGenreType.CRIME;
-            case "MUZIEK":
-                return MisGenreType.MUSIC;
-            case "NATUUR":
-                return MisGenreType.NATURE;
-            case "NIEUWS/ACTUALITEITEN":
-                return MisGenreType.NEWS;
-            case "OVERIGE":
-                return MisGenreType.OTHER;
-            case "RELIGIEUS":
-                return MisGenreType.RELIGIOUS;
-            case "SERIE/SOAP":
-                return MisGenreType.SERIES_SOAP;
-            case "SPORT":
-                return MisGenreType.SPORT;
-            case "WETENSCHAP":
-                return MisGenreType.SCIENCE;
-            default:
-                return null;
-        }
+        return switch (misInput.toUpperCase()) {
+            case "AMUSEMENT" -> MisGenreType.ENTERTAINMENT;
+            case "ANIMATIE" -> MisGenreType.CARTOON;
+            case "COMEDY" -> MisGenreType.COMEDY;
+            case "DOCUMENTAIRE" -> MisGenreType.DOCUMENTARY;
+            case "EDUCATIEF" -> MisGenreType.EDUCATION;
+            case "EROTIEK" -> MisGenreType.EROTICA;
+            case "FILM" -> MisGenreType.MOVIE;
+            case "INFORMATIEF" -> MisGenreType.INFORMATIVE;
+            case "JEUGD" -> MisGenreType.YOUTH;
+            case "KUNST/CULTUUR" -> MisGenreType.ART_CULTURE;
+            case "MISDAAD" -> MisGenreType.CRIME;
+            case "MUZIEK" -> MisGenreType.MUSIC;
+            case "NATUUR" -> MisGenreType.NATURE;
+            case "NIEUWS/ACTUALITEITEN" -> MisGenreType.NEWS;
+            case "OVERIGE" -> MisGenreType.OTHER;
+            case "RELIGIEUS" -> MisGenreType.RELIGIOUS;
+            case "SERIE/SOAP" -> MisGenreType.SERIES_SOAP;
+            case "SPORT" -> MisGenreType.SPORT;
+            case "WETENSCHAP" -> MisGenreType.SCIENCE;
+            default -> null;
+        };
     }
 }

@@ -35,9 +35,9 @@ public abstract class AbstractValidValueFunction extends ExtensionFunctionDefini
 
     static final TriPredicate<Class<?>, String, Object> warn = (clazz, propertyName, value) -> {
         if (MediaObject.class.equals(clazz)) {
-            if ("email".equals(propertyName) && value instanceof List) {
+            if ("email".equals(propertyName) && value instanceof List list) {
                 boolean warn = false;
-                for (Object e : (List) value) {
+                for (Object e : list) {
                     if (!IGNORE_EMAILS.contains(e)) {
                         warn = true;
                         break;

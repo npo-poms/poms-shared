@@ -68,16 +68,13 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
 
                     log.warn("No (WON/PD/NEBO) broadcaster for value '{}'", value);
 
-                    switch (notFound) {
-                        case ASIS:
+                    return switch (notFound) {
+                        case ASIS ->
                             /* will go wrong in hibernate then, but with catchable error */
-                            return new StringValue(value);
-                        case IGNORE:
-                            return new StringValue("");
-                        case FATAL:
-                        default:
-                            throw new IllegalArgumentException("No such broadcaster " + value);
-                    }
+                            new StringValue(value);
+                        case IGNORE -> new StringValue("");
+                        default -> throw new IllegalArgumentException("No such broadcaster " + value);
+                    };
 
                 }
             }
