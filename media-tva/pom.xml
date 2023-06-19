@@ -58,6 +58,11 @@
       <artifactId>jakarta.el</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
 </project>

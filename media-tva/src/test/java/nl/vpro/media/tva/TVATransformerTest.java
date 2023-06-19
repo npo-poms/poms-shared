@@ -1,6 +1,6 @@
 package nl.vpro.media.tva;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import net.sf.saxon.TransformerFactoryImpl;
 import net.sf.saxon.expr.XPathContext;
 import net.sf.saxon.lib.ExtensionFunctionCall;
@@ -23,7 +23,11 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.test.appender.ListAppender;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.Isolated;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.Document;
@@ -48,13 +52,24 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Michiel Meeuwissen
  * @since 4.1
  */
-@SuppressWarnings({"OptionalGetWithoutIsPresent", "DataFlowIssue"})
-@Slf4j
+@SuppressWarnings("OptionalGetWithoutIsPresent")
+@Log4j2
+@Isolated("Because of the logger")
 public class TVATransformerTest {
     final EpgGenreFunction genreFunction = new EpgGenreFunction();
 
+    static ListAppender appender = new ListAppender("List");
+
+    static {
+        var loggerContext = LoggerContext.getContext(false);
+        appender.start();
+        loggerContext.getConfiguration().addLoggerAppender(loggerContext.getRootLogger(), appender);
+
+    }
+
     @BeforeEach
     public void init() {
+        appender.clear();
         genreFunction.setNotFound(NotFound.FATAL);
     }
 
@@ -455,6 +470,9 @@ public class TVATransformerTest {
                 assertThat(c.getRole()).isNotNull();
             }
         }
+
+        // No such term with reference urn:bindinc:genre:AmusementCHANGED
+        assertThat(appender.getEvents().stream().filter(e ->  e.getLevel().compareTo(Level.WARN) <= 0)).hasSize(1);
     }
 
     @Test
@@ -479,11 +497,15 @@ public class TVATransformerTest {
         assertThat(p2.getScheduleEvents()).hasSize(2);
     }
 
-    @Test
-    public void bindincGenres() throws IOException, ParserConfigurationException, TransformerException, SAXException {
-        String xml = bindinc("bindinc/20230605120229000dayLAUN20230623.xml");
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "bindinc/20201208185718000dayTV0120201209.xml", "bindinc/20230605120229000dayLAUN20230623.xml"
+    })
+    public void bindincGenres(String resource) throws IOException, ParserConfigurationException, TransformerException, SAXException {
+        String xml = bindinc(resource);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
 
+        assertThat(appender.getEvents().stream().filter(e ->  e.getLevel().compareTo(Level.WARN) <= 0)).isEmpty();
     }
 
     @Test
