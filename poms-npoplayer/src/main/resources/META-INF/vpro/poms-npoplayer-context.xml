@@ -12,14 +12,15 @@
     <constructor-arg value="${npoplayerapi-rs.apikey}"/>
   </bean>
 
-  <bean  id="npoPlayerApiClientBuilder"
-         autowire-candidate="false"
-         class="nl.vpro.npoplayer.NPOPlayerApiClient"
-         factory-method="builderWithoutMBean"> <!-- spring can register implicitly -->
+  <bean
+    id="npoPlayerApiClientBuilder"
+    autowire-candidate="false"
+    class="nl.vpro.npoplayer.NPOPlayerApiClient"
+    factory-method="builderWithoutMBean"> <!-- spring can register implicitly -->
   </bean>
+
   <bean
     id="npoPlayerApiClient"
-    class="nl.vpro.npoplayer.NPOPlayerApiClient"
     factory-bean="npoPlayerApiClientBuilder"
     factory-method="build"
   />
