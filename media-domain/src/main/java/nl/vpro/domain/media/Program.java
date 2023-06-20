@@ -35,7 +35,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
  * A program can have a {@link nl.vpro.domain.media.ProgramType} when it's a movie or strand
  * program. A strand programs has the ability to become an episode of other strand programs
  * as opposed to strand groups.
- *
+ * <p>
  * Another important distinction is that only programs may contain {@link Segment}s. Also they themselves know of their segments,
  * and the XML and JSON representations on programs normally contain all their segments too.
  *

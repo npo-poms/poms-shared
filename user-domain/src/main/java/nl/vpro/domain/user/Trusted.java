@@ -14,7 +14,7 @@ import static nl.vpro.domain.Roles.SYSTEM_ROLE;
 
 /**
  * Representation of a 'trusted' user. Such a user needs not to exist in signon system (i.e. keycloak).
- *
+ * <p>
  * Instances of this are only done explicitly in java.
  *
  * @author Michiel Meeuwissen

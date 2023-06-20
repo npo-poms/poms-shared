@@ -17,7 +17,7 @@ public interface NEPItemizeService extends  AutoCloseable {
 
     /**
      * NEP provides one service for two basicly different things.
-     *
+     * <p>
      * This itemizes a media with a certain MID
      * @since 5.10
      */
@@ -26,7 +26,7 @@ public interface NEPItemizeService extends  AutoCloseable {
 
     /**
      * NEP provides one service for two basicly different things.
-     *
+     * <p>
      * This grabs a frame from a MID, on a certain offset
      * @since 5.10
      */
@@ -35,7 +35,7 @@ public interface NEPItemizeService extends  AutoCloseable {
 
     /**
      * NEP provides one service for two basicly different things.
-     *
+     * <p>
      * This itemizes a piece of a live stream
      * @since 5.10
      */
@@ -44,7 +44,7 @@ public interface NEPItemizeService extends  AutoCloseable {
 
     /**
      * NEP provides one service for two basicly different things.
-     *
+     * <p>
      * This grabs a frame from a live stream, on a certain instant in time
      * @since 5.10
      */

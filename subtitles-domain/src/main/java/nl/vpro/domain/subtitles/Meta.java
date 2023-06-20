@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  *
  * Sometimes a subtitles may contain some information about the whole thing, not associated to one specific cue.
- *
+ * <p>
  * These can be stored during parsing in these {@link Meta} objects.
- *
+ * <p>
  * The could be published in elasticsearch as kind of cue;
  *
  * @author Michiel Meeuwissen

@@ -20,9 +20,9 @@ import nl.vpro.domain.Xmlns;
 
 /**
  * Some textual values can have multiple types, and are stored in the same collection.
- *
+ * <p>
  * E.g. main titles, sub titles.
- *
+ * <p>
  *
  */
 @XmlEnum

@@ -640,7 +640,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
 
     /**
      * This calls tries to perform the quite complicated task to combine 'truthiness' as elasticsearch does.
-     *
+     * <p>
      * if there are only 'must' clauses, this is quite simple.
      *
      */

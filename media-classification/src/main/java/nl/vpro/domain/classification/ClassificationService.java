@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Access to the possible 'term ids', and {@link Term}, which is basicly used to define the possible 'genres' in POMs
- *
+ * <p>
  *
  * @author Michiel Meeuwissen
  * @since 3.2

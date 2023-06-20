@@ -4,7 +4,7 @@ import java.time.Instant;
 
 /**
  * An 'changeable' object represent an entity that has {@link #getCreationInstant()}  and {@link #getLastModifiedInstant()}.
- *
+ * <p>
  * Also, it (optionally) can keep track whether it thinks currently {@link #hasChanges()}.
  *
  * @author Michiel Meeuwissen

@@ -175,7 +175,7 @@ public class MediaObjectOwnableLists {
 
     /**
      * Expands the incoming value to contain values for all given owners.
-     *
+     * <p>
      * NOTE: This methods _modifies_ the incoming list.
      */
     protected static <OL extends MediaObjectOwnableList<OL, I>, I extends MediaObjectOwnableListItem<I, OL>>
