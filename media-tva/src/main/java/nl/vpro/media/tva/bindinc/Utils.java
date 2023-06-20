@@ -6,14 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,12 +53,11 @@ public final class Utils {
     /**
      * Can be used as an argument to {@link nl.vpro.media.tva.saxon.extension.EpgGenreFunction#setIgnore(Set)}
      */
-    public static final Set<String> BINDINC_GENRE_IGNORE = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+    public static final Set<String> BINDINC_GENRE_IGNORE = Set.of(
         BINDINC_GENRE_PREFIX + "Overige",
         BINDINC_GENRE_PREFIX + "Radio",
         BINDINC_GENRE_PREFIX + "Magazine"
-    )));
-
+    );
 
 
     private static final Pattern FILE_NAME = Pattern.compile("(?:.*/)?(.*)day(.*?)([0-9]{8})\\.(?:.*\\.)?xml");
@@ -70,11 +67,11 @@ public final class Utils {
     private static final DateTimeFormatter TIMESTAMP = new DateTimeFormatterBuilder().appendPattern("yyyyMMddHHmmss").appendValue(ChronoField.MILLI_OF_SECOND, 3).toFormatter();
 
     public static  Optional<BindincFile> parseFileName(String fileName) {
-        BindincFile.Builder builder = BindincFile.builder();
+        final BindincFile.Builder builder = BindincFile.builder();
         if (fileName == null){
             return Optional.empty();
         }
-        Matcher matcher = FILE_NAME.matcher(fileName);
+        final Matcher matcher = FILE_NAME.matcher(fileName);
         if (matcher.matches()) {
             try {
                 builder.timestamp(LocalDateTime.parse(matcher.group(1), TIMESTAMP));
@@ -191,21 +188,24 @@ public final class Utils {
     }
 
 
+    @SuppressWarnings("unused")
     public static class Converters implements TypeConverters {
-        final ConcurrentMap<String, List<Temp>> TEMPS = new ConcurrentHashMap<>();
+        /**
+         * correlation id -> list of temp files, of which only the latest one will be used
+         */
+        static final Map<String, List<Temp>> TEMPS = new ConcurrentHashMap<>();
 
 
         /**
-         * Converts input stream to a {@link Temp} object. Stores the inputstream as a temporary file.
+         * Converts input stream to a {@link Temp} object. Stores the {@link InputStream} as a temporary file.
          * <p>
-         * All these objects will be administrated on correlation id. If one of them is used, (because it is converted to an inputstream {@link #convertToInputStream(Temp, Exchange)},
-         * then all temp files for some correlation id will be deleted.
+         * All these objects will be administrated on correlation id. If one of them is used (because it is converted to an {@link InputStream} {@link #convertToInputStream(Temp, Exchange)}), then all temp files for some correlation id will be deleted.
          */
         @Converter
         public Temp convertToTemp(InputStream inputStream, Exchange exchange) throws IOException {
+            final String correlation = exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class);
             return correlation(
-                new Temp(inputStream, exchange.getIn().getHeader(Exchange.FILE_NAME, String.class)),
-                exchange
+                new Temp(inputStream, exchange.getIn().getHeader(Exchange.FILE_NAME, String.class), correlation)
             );
         }
 
@@ -221,39 +221,45 @@ public final class Utils {
         public Temp convertToTemp(GenericFile<File> file, Exchange exchange) throws IOException {
             File f = file.getFile();
             if (f.exists()) {
+                final String correlation = exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class);
                 return correlation(
-                    new Temp(f, exchange.getIn().getHeader(Exchange.FILE_NAME, String.class)),
-                    exchange);
+                    new Temp(f, exchange.getIn().getHeader(Exchange.FILE_NAME, String.class), correlation));
             } else {
                 log.info("{} doesn't exist", f);
                 return null;
             }
         }
-        private Temp correlation(Temp temp, Exchange exchange) {
-            String correlation = exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class);
-            TEMPS.computeIfAbsent(correlation, (c) -> new ArrayList<>()).add(temp);
-            return temp;
+
+        private Temp correlation(Temp temp) {
+            synchronized (TEMPS) {
+                TEMPS.computeIfAbsent(temp.getCorrelation(), (c) -> new ArrayList<>()).add(temp);
+                return temp;
+            }
         }
+
         @Converter
         public InputStream convertToInputStream(
             Temp temp, Exchange exchange) throws FileNotFoundException {
-            if (temp.file.exists()) {
-                final FileInputStream fileInputStream = new FileInputStream(temp.file);
-                List<Temp> temps = TEMPS.remove(exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class));
-                if (temps != null) {
-                    temps.forEach(t -> {
-                        if (!Objects.equals(t.file, temp.file)) {
-                            log.info("Deleting aggregated file {} ({} will be used)", t.file, temp.file);
-                            t.deleteFile();
-                        }
-                    });
+            // Temporary file object for given correlation id is getting used. Produce the input stream and delete all other temp files for this correlation id.
+            synchronized (TEMPS) {
+                if (temp.file.exists()) {
+                    final FileInputStream fileInputStream = new FileInputStream(temp.file);
+                    List<Temp> temps = TEMPS.remove(exchange.getIn().getHeader(Exchange.CORRELATION_ID, String.class));
+                    if (temps != null) {
+                        temps.forEach(t -> {
+                            if (!Objects.equals(t.file, temp.file)) {
+                                log.info("Deleting aggregated file {} ({} will be used)", t.file, temp.file);
+                                t.deleteFile();
+                            }
+                        });
+                    } else {
+                        log.info("No {} found on exchange", Exchange.CORRELATION_ID);
+                    }
+                    return fileInputStream;
                 } else {
-                    log.info("No {} found on exchange", Exchange.CORRELATION_ID);
+                    log.warn("File of {}  deleted already, so it can't be converted to an inputStream", temp, new Exception());
+                    return new ByteArrayInputStream("File deleted already".getBytes(StandardCharsets.UTF_8));
                 }
-                return fileInputStream;
-            } else {
-                log.warn("File deleted already, do it can't be converted to an inputStream", new Exception());
-                return new ByteArrayInputStream("File deleted already".getBytes(StandardCharsets.UTF_8));
             }
         }
     }
@@ -261,15 +267,20 @@ public final class Utils {
     /**
      * Used for aggregation of GenericFiles. See {@link Converters#convertToTemp(InputStream, Exchange)}
      */
+    @Getter
     public static class Temp  {
         final File file;
-        private  Temp(@NonNull File source, @NonNull String filename) throws IOException {
-            file = createTempFile(filename);
+        final Instant created = Instant.now();
+        final String correlation;
+        private  Temp(@NonNull File source, @NonNull String filename, @NonNull String correlation) throws IOException {
+            this.file = createTempFile(filename);
+            this.correlation = correlation;
             Files.copy(source.toPath(), file.toPath(), REPLACE_EXISTING, COPY_ATTRIBUTES);
         }
 
-        private  Temp(@NonNull InputStream in, @NonNull String filename) throws IOException {
-            file = createTempFile(filename);
+        private  Temp(@NonNull InputStream in, @NonNull String filename, @NonNull  String correlation) throws IOException {
+            this.file = createTempFile(filename);
+            this.correlation = correlation;
             try (FileOutputStream out = new FileOutputStream(file)) {
                 IOUtils.copy(in, out);
             }
@@ -288,7 +299,7 @@ public final class Utils {
         }
 
         private static File createTempFile(@NonNull  String filename) throws IOException {
-            File file;
+            final File file;
             if (filename != null) {
                 final String[] split = filename.split("/");
                 file = File.createTempFile("tmp", "-" + split[split.length - 1]);
@@ -301,7 +312,7 @@ public final class Utils {
         }
         @Override
         public String toString() {
-            return file.toString();
+            return file.toString() + " created " + created +  " (" + correlation + ")";
         }
 
         /**
