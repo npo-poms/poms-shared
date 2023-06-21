@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -258,7 +257,7 @@ public final class Utils {
                     return fileInputStream;
                 } else {
                     log.warn("File of {}  deleted already, so it can't be converted to an inputStream", temp, new Exception());
-                    return new ByteArrayInputStream("File deleted already".getBytes(StandardCharsets.UTF_8));
+                    throw new  IllegalStateException("File deleted already");
                 }
             }
         }
