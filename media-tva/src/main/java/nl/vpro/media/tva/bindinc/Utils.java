@@ -256,7 +256,7 @@ public final class Utils {
                     }
                     return fileInputStream;
                 } else {
-                    log.warn("File of {}  deleted already, so it can't be converted to an inputStream", temp, new Exception());
+                    log.warn("File of {}  deleted already , so it can't be converted to an inputStream {}", temp, Arrays.asList(temp.deletedBy), new Exception());
                     throw new  IllegalStateException("File deleted already");
                 }
             }
@@ -271,6 +271,7 @@ public final class Utils {
         final File file;
         final Instant created = Instant.now();
         final String correlation;
+        StackTraceElement[] deletedBy;
         private  Temp(@NonNull File source, @NonNull String filename, @NonNull String correlation) throws IOException {
             this.file = createTempFile(filename);
             this.correlation = correlation;
@@ -289,6 +290,7 @@ public final class Utils {
             if (file.exists()) {
                 if (file.delete()) {
                     log.debug("Deleted {}", file);
+                    deletedBy = Thread.currentThread().getStackTrace();
                 } else {
                     log.warn("File {} could not be deleted", file);
                 }
