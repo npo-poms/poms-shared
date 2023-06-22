@@ -57,6 +57,7 @@
         <Reference>urn:tva:metadata:cs:2004:0199</Reference>
         <Reference>urn:mis:genre:YOUTH</Reference>
         <Reference>urn:bindinc:genre:Jeugd</Reference>
+        <Reference>urn:bindinc:genre:Emission jeunesse</Reference><!-- API-589 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.1.2">
           <Name xml:lang="nl">Film</Name>
@@ -142,6 +143,7 @@
         <Reference>urn:bindinc:genre:Film</Reference>
         <Reference>urn:bindinc:genre:Téléfilm</Reference> <!-- API-534 -->
         <Reference>urn:bindinc:genre:Court métrage</Reference> <!-- API-534 -->
+        <Reference>urn:bindinc:genre:Fernsehfilm</Reference><!-- API-589 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">
           <Name xml:lang="nl">Komisch</Name>
@@ -316,6 +318,7 @@
         <Reference>urn:mis:genre:SPORT</Reference>
         <Reference>urn:bindinc:genre:Sport</Reference>
         <Reference>urn:bindinc:genre:Cyclisme</Reference>
+        <Reference>urn:bindinc:genre:Athlétisme</Reference><!-- API-589 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.4.14">
           <Name xml:lang="nl">Sport - informatie</Name>
@@ -349,6 +352,8 @@
         <Reference>urn:bindinc:genre:Musica</Reference>
         <Reference>urn:bindinc:genre:Musique</Reference>
         <Reference>urn:bindinc:genre:Music</Reference> <!--API-534 -->
+        <Reference>urn:bindinc:genre:Musik</Reference> <!--API-589 -->
+
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.5.16">
           <Name xml:lang="nl">Klassiek</Name>
@@ -434,6 +439,7 @@
         <Reference>urn:bindinc:genre:Divertissement</Reference><!-- API-534 -->
         <Reference>urn:bindinc:genre:Entretien</Reference><!-- API-534 -->
         <Reference>urn:bindinc:genre:Théâtre</Reference><!-- API-589 -->
+        <Reference>urn:bindinc:genre:Unterhaltung</Reference><!-- API-589 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.6.5">
           <Name xml:lang="nl">Muziek</Name>
@@ -493,6 +499,7 @@
         <Reference>urn:bindinc:genre:Info</Reference><!-- API-534 -->
         <Reference>urn:bindinc:genre:Informations</Reference><!-- API-534 -->
         <Reference>urn:bindinc:genre:Magazine</Reference><!-- API-589 -->
+        <Reference>urn:bindinc:genre:İnfo</Reference><!-- API-589 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.7.19">
           <Name xml:lang="nl">Spel/quiz</Name>
@@ -504,12 +511,14 @@
           <Reference>urn:tva:metadata:cs:2004:0721</Reference>
           <Reference>urn:bindinc:genre:Nieuws/Actualiteiten</Reference>
           <Reference>urn:mis:genre:NEWS</Reference>
+          <Reference>urn:bindinc:genre:Nachrichten</Reference><!-- API-589 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.22">
           <Name xml:lang="nl">Gezondheid/opvoeding</Name>
           <Reference>urn:tva:metadata:cs:2004:0722</Reference>
           <Reference>urn:mis:genre:HEALTH</Reference>
+          <Reference>urn:bindinc:genre:Gesundheit + Medizin</Reference><!-- API-589 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.23">
@@ -588,7 +597,8 @@
         <Term termID="3.0.1.7.66">
           <Name xml:lang="nl">Debat</Name>
           <Reference>urn:tva:metadata:cs:2004:0766</Reference>
-         <FirstVersionDate>2021-04-01</FirstVersionDate>
+          <Reference>urn:bindinc:genre:Discussion</Reference><!-- API-589 -->
+          <FirstVersionDate>2021-04-01</FirstVersionDate>
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.67">
@@ -675,6 +685,7 @@
           <Reference>urn:tva:metadata:cs:2004:0829</Reference>
           <Reference>urn:mis:genre:DOCUMENTARY</Reference>
           <Reference>urn:bindinc:genre:Nature + Voyage</Reference><!-- API-534 -->
+          <Reference>urn:bindinc:genre:Natur + Reisen</Reference><!-- API-589 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.8.30">
