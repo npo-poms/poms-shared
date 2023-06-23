@@ -20,11 +20,9 @@ import javax.xml.bind.annotation.XmlType;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlType(propOrder = {
-    "mid",
-    "age"
+    "mid"
 })
 @JsonTypeName("tokenRequest")
 public class TokenRequest {
     String mid;
-    Integer age;
 }

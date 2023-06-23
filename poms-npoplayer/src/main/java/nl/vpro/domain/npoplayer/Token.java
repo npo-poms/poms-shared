@@ -15,16 +15,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = {
     "iat",
     "sub",
-    "iss",
-    "cip",
-    "age"
+    "iss"
 })
 @JsonTypeName("response")
 public class Token {
     Long iat;
     String sub;
     String iss;
-    String cip;
-    Integer age;
 }
 
