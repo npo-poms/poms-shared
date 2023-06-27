@@ -144,6 +144,7 @@
         <Reference>urn:bindinc:genre:Téléfilm</Reference> <!-- API-534 -->
         <Reference>urn:bindinc:genre:Court métrage</Reference> <!-- API-534 -->
         <Reference>urn:bindinc:genre:Fernsehfilm</Reference><!-- API-589 -->
+        <Reference>urn:bindinc:genre:Filmcinema</Reference><!-- API-589 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">
           <Name xml:lang="nl">Komisch</Name>
@@ -319,6 +320,8 @@
         <Reference>urn:bindinc:genre:Sport</Reference>
         <Reference>urn:bindinc:genre:Cyclisme</Reference>
         <Reference>urn:bindinc:genre:Athlétisme</Reference><!-- API-589 -->
+        <Reference>urn:bindinc:genre:Sportmotorisé</Reference><!-- API-589 -->
+        <Reference>urn:bindinc:genre:Sportextrême</Reference><!-- API-589 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.4.14">
           <Name xml:lang="nl">Sport - informatie</Name>
@@ -440,6 +443,7 @@
         <Reference>urn:bindinc:genre:Entretien</Reference><!-- API-534 -->
         <Reference>urn:bindinc:genre:Théâtre</Reference><!-- API-589 -->
         <Reference>urn:bindinc:genre:Unterhaltung</Reference><!-- API-589 -->
+        <Reference>urn:bindinc:genre:Divertimento</Reference><!-- API-589 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.6.5">
           <Name xml:lang="nl">Muziek</Name>
@@ -473,6 +477,7 @@
           <Name xml:lang="en">Event (coverage of)</Name>
           <Reference>urn:tva:metadata:cs:2004:0641</Reference>
           <Reference>urn:ebu:3.1.9</Reference>
+          <Reference>urn:bindinc:genre:Evento</Reference><!-- API-589, just guessing-->
           <FirstVersionDate>2021-04-01</FirstVersionDate>
           <ValidityFlag>1</ValidityFlag>
         </Term>
@@ -519,6 +524,7 @@
           <Reference>urn:tva:metadata:cs:2004:0722</Reference>
           <Reference>urn:mis:genre:HEALTH</Reference>
           <Reference>urn:bindinc:genre:Gesundheit + Medizin</Reference><!-- API-589 -->
+          <Reference>urn:bindinc:genre:Sanita+Medicina</Reference><!-- API-589 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.23">
@@ -534,12 +540,14 @@
           <Reference>urn:bindinc:genre:Kunst/Cultuur</Reference><!-- API-534 -->
           <Reference>urn:bindinc:genre:Culture</Reference><!-- API-534 -->
           <Reference>urn:bindinc:genre:Arts</Reference><!-- API-534 -->
+          <Reference>urn:bindinc:genre:Cultura</Reference><!-- API-589 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.25">
           <Name xml:lang="nl">Natuur</Name>
           <Reference>urn:tva:metadata:cs:2004:0725</Reference>
           <Reference>urn:mis:genre:NATURE</Reference>
+          <Reference>urn:bindinc:genre:Natura+Viaggio</Reference><!-- API-589 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.26">
@@ -605,6 +613,7 @@
           <Name xml:lang="nl">Interviewprogramma/hosted show</Name>
           <Reference>urn:tva:metadata:cs:2004:0767</Reference>
           <Reference>urn:bindinc:genre:Talkshow</Reference> <!-- API-534 -->
+          <Reference>urn:bindinc:genre:Conversación</Reference><!-- API-589 -->
           <FirstVersionDate>2021-04-01</FirstVersionDate>
           <ValidityFlag>1</ValidityFlag>
         </Term>
@@ -632,6 +641,7 @@
         <Reference>urn:tva:metadata:cs:2004:08</Reference>
         <Reference>urn:tva:metadata:cs:2004:0899</Reference>
         <Reference>urn:mis:genre:DOCUMENTARY</Reference>
+        <Reference>urn:bindinc:genre:Belgesel</Reference><!-- API-589  (turks)-->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.8.4">
           <Name xml:lang="nl">Sport</Name>
@@ -714,6 +724,8 @@
         <ValidityFlag>1</ValidityFlag>
         <Reference>urn:tva:metadata:cs:2004:40</Reference>
         <Reference>urn:tva:metadata:cs:2004:4099</Reference>
+        <Reference>urn:bindinc:genre:Divertimento</Reference><!-- API-589, im just guessing.-->
+
         <Term termID="3.0.1.40.58">
           <Name xml:lang="nl">(sub)culturen</Name>
           <Reference>urn:tva:metadata:cs:2004:4058</Reference>
