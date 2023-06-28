@@ -144,7 +144,7 @@
         <Reference>urn:bindinc:genre:Téléfilm</Reference> <!-- API-534 -->
         <Reference>urn:bindinc:genre:Court métrage</Reference> <!-- API-534 -->
         <Reference>urn:bindinc:genre:Fernsehfilm</Reference><!-- API-589 -->
-        <Reference>urn:bindinc:genre:Filmcinema</Reference><!-- API-589 -->
+        <Reference>urn:bindinc:genre:Film cinema</Reference><!-- API-589 -->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">
           <Name xml:lang="nl">Komisch</Name>
@@ -517,6 +517,7 @@
           <Reference>urn:bindinc:genre:Nieuws/Actualiteiten</Reference>
           <Reference>urn:mis:genre:NEWS</Reference>
           <Reference>urn:bindinc:genre:Nachrichten</Reference><!-- API-589 -->
+          <Reference>urn:bindinc:genre:Notizie</Reference><!-- API-589 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.22">
@@ -524,7 +525,7 @@
           <Reference>urn:tva:metadata:cs:2004:0722</Reference>
           <Reference>urn:mis:genre:HEALTH</Reference>
           <Reference>urn:bindinc:genre:Gesundheit + Medizin</Reference><!-- API-589 -->
-          <Reference>urn:bindinc:genre:Sanita+Medicina</Reference><!-- API-589 -->
+          <Reference>urn:bindinc:genre:Sanita + Medicina</Reference><!-- API-589 -->
           <ValidityFlag>1</ValidityFlag>
         </Term>
         <Term termID="3.0.1.7.23">
