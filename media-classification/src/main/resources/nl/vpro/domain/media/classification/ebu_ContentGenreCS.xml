@@ -145,6 +145,7 @@
         <Reference>urn:bindinc:genre:Court métrage</Reference> <!-- API-534 -->
         <Reference>urn:bindinc:genre:Fernsehfilm</Reference><!-- API-589 -->
         <Reference>urn:bindinc:genre:Film cinema</Reference><!-- API-589 -->
+        <Reference>urn:bindinc:genre:Película</Reference><!-- API-589, spanish-->
         <ValidityFlag>1</ValidityFlag>
         <Term termID="3.0.1.2.9">
           <Name xml:lang="nl">Komisch</Name>
