@@ -26,7 +26,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -79,6 +79,12 @@ import nl.vpro.xml.bind.*;
 @Slf4j
 @XmlTransient
 @ValidEmbargo(groups = WarningValidatorGroup.class)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = ProgramUpdate.class, name = "programUpdate"),
+    @JsonSubTypes.Type(value = GroupUpdate.class, name = "groupUpdate"),
+    @JsonSubTypes.Type(value = SegmentUpdate.class, name = "segmentUpdate") }
+)
 public abstract sealed class  MediaUpdate<M extends MediaObject>
     implements
     MutableEmbargo<MediaUpdate<M>>,

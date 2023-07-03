@@ -2,8 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 
 import javax.validation.ConstraintViolation;
 import javax.xml.XMLConstants;
@@ -16,6 +15,7 @@ import org.junit.jupiter.api.*;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -87,6 +87,12 @@ public class MediaUpdateTest {
         );
 
         assertThat(update.violations()).isEmpty();
+    }
+
+    @Test
+    public void polyMorphJson() throws IOException {
+        assertThat(Jackson2Mapper.getInstance()
+            .readValue(getClass().getResourceAsStream("/program-from-update-with-everything.json"), MediaUpdate.class)).isInstanceOf(ProgramUpdate.class);
     }
 
     @Test

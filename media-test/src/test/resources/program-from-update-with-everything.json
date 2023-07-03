@@ -1,4 +1,5 @@
 {
+  "objectType" : "programUpdate",
   "broadcaster" : [ "BNN", "AVRO" ],
   "portal" : [ "3VOOR12_GRONINGEN", "STERREN24" ],
   "exclusive" : [ {
@@ -236,6 +237,7 @@
     "value" : "VPROWON_30004"
   } ],
   "segments" : [ {
+    "objectType" : "segmentUpdate",
     "broadcaster" : [ "BNN", "AVRO" ],
     "portal" : [ "3VOOR12_GRONINGEN", "STERREN24" ],
     "exclusive" : [ {
@@ -443,9 +445,9 @@
     "urn" : "urn:vpro:media:segment:12",
     "embeddable" : true,
     "midRef" : "VPROWON_20001",
+    "avType" : "VIDEO",
     "publishStop" : 16725222000000,
-    "publishStart" : 0,
-    "avType" : "VIDEO"
+    "publishStart" : 0
   } ],
   "mediaType" : "BROADCAST",
   "language" : [ "nl", "fr" ],
@@ -453,8 +455,8 @@
   "urn" : "urn:vpro:media:program:12",
   "embeddable" : true,
   "type" : "BROADCAST",
+  "avType" : "VIDEO",
   "publishStop" : 16725222000000,
   "publishStart" : 0,
-  "version" : "5.12",
-  "avType" : "VIDEO"
+  "version" : "5.12"
 }
