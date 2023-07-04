@@ -22,18 +22,20 @@ import static nl.vpro.rs.media.MediaBackendRestService.ID;
 public interface AuthorityRestService {
 
     @DELETE
-    @Path("{id:.*}")
+    @Path("{supplier:(rcrs)}/{id:.*}")
     @Produces(MediaType.TEXT_PLAIN)
     Response deleteMedia(
+        @Encoded @PathParam("supplier") final String supplier,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(ERRORS) String errors
     );
 
 
     @POST
-    @Path("")
+    @Path("{supplier:(rcrs)}")
     @Produces(MediaType.TEXT_PLAIN)
     Response update(
+        @Encoded @PathParam("supplier") final String supplier,
         @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(ERRORS) String errors
     );
