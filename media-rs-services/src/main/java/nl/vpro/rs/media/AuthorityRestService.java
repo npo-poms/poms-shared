@@ -25,7 +25,7 @@ public interface AuthorityRestService {
 
 
     @DELETE
-    @Path("{supplier:(rcrs)}/{id:.*}")
+    @Path("{supplier}/{id:.*}")
     @Produces(MediaType.TEXT_PLAIN)
     Response deleteMedia(
         @Encoded @PathParam("supplier") final UpdateSupplier supplier,
@@ -35,7 +35,7 @@ public interface AuthorityRestService {
 
 
     @POST
-    @Path("{supplier:(rcrs)}")
+    @Path("{supplier}")
     @Produces(MediaType.TEXT_PLAIN)
     Response update(
         @Encoded @PathParam("supplier") final UpdateSupplier supplier,
