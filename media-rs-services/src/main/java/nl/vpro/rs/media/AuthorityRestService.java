@@ -8,19 +8,19 @@ import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelate
 
 import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.UpdateSupplier;
-import nl.vpro.jmx.Description;
 
 import static nl.vpro.rs.media.MediaBackendRestService.ERRORS;
 import static nl.vpro.rs.media.MediaBackendRestService.ID;
 
 /**
  * See <a href="https://jira.vpro.nl/browse/MSE-5484">MSE-5484</a>, <a href="https://publiekeomroep.atlassian.net/browse/P0MS-8">POMS-8</a>
+ * <p>
+ * Interface for the 'authority' services on <a href="https://api.poms.omroep.nl/authority">media backend</a>
  * @author Michiel Meeuwissen
  * @since 7.7
  */
 @Path("/authority")
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-@Description("Services on https://api.poms.omroep.nl/authority")
 public interface AuthorityRestService {
 
 
