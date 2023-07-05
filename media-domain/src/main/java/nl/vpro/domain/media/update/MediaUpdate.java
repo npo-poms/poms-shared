@@ -722,6 +722,7 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
      * @since 5.6
      */
     @Override
+    @JsonIgnore
     public final MediaType getMediaType() {
         SubMediaType subMediaType = getType();
         return subMediaType == null ? null : subMediaType.getMediaType();
