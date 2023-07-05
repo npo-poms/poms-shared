@@ -6,6 +6,8 @@ package nl.vpro.domain.media.update;
 
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.util.IntegerVersion;
@@ -49,6 +51,7 @@ import nl.vpro.util.IntegerVersion;
         "asset",
         "poSeriesID"
     })
+@JsonTypeName("groupUpdate")
 public final class GroupUpdate extends MediaUpdate<Group> {
 
 

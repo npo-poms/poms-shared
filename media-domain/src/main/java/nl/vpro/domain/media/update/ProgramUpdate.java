@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.util.IntegerVersion;
@@ -58,6 +60,7 @@ import nl.vpro.util.IntegerVersion;
     "episodeOf",
     "segments"
 })
+@JsonTypeName("programUpdate")
 public final class ProgramUpdate extends MediaUpdate<Program> {
 
     private SortedSet<@NotNull @Valid SegmentUpdate> segments;

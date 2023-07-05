@@ -156,6 +156,14 @@ public interface MediaTestDataBuilder<
     }
 
     /**
+     * {@link #constrained()}, and also fill fields that are not actually required <em>yet</em>, but give worning here and there if not filled.
+     */
+    default T strictlyConstrained() {
+        return constrained()
+            .ageRating(AgeRating.ALL);
+    }
+
+    /**
      * Fills all required fields besides 'id' (which is filled by persistence layer).
      * <p>
      * This should be used in tests which tests the persistence layer itself.
@@ -997,8 +1005,13 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withScheduleEvent(LocalDateTime localDateTime) {
-            return scheduleEvent(Channel.NED1, localDateTime, Duration.ofMinutes(30L));
+            return withScheduleEvent(Channel.NED1, localDateTime);
         }
+
+        public ProgramTestDataBuilder withScheduleEvent(Channel channel, LocalDateTime localDateTime) {
+            return scheduleEvent(channel, localDateTime, Duration.ofMinutes(30L));
+        }
+
 
         public ProgramTestDataBuilder withScheduleEvent(int year, int month, int day, int hour, int minutes, Function<ScheduleEvent, ScheduleEvent> merger) {
             return withScheduleEvent(LocalDateTime.of(year, month, day, hour, minutes), merger);

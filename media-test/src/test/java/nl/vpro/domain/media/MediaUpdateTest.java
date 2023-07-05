@@ -2,8 +2,8 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
+import java.time.LocalDateTime;
 
 import javax.validation.ConstraintViolation;
 import javax.xml.XMLConstants;
@@ -16,6 +16,7 @@ import org.junit.jupiter.api.*;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -87,6 +88,56 @@ public class MediaUpdateTest {
         );
 
         assertThat(update.violations()).isEmpty();
+    }
+
+
+     @Test
+     public void withConstrainedJson() throws Exception {
+
+         Jackson2TestUtil.roundTripAndSimilar(
+             Jackson2Mapper.getInstance(), ProgramUpdate.create(MediaTestDataBuilder.broadcast().constrained()
+                 .id(1L)
+                 .mid("mid_1")
+                 .withScheduleEvent(Channel.RAD1, LocalDateTime.of(2023, 6, 5, 10, 30))
+                 .build()), """
+                 {
+                     "objectType" : "programUpdate",
+                     "broadcaster" : [ "BNN", "AVRO" ],
+                     "title" : [ {
+                       "value" : "Main title",
+                       "type" : "MAIN"
+                     }, {
+                       "value" : "Short title",
+                       "type" : "SHORT"
+                     }, {
+                       "value" : "Episode title MIS",
+                       "type" : "SUB"
+                     } ],
+                     "duration" : "P0DT2H0M0.000S",
+                      "scheduleEvents" : [ {
+                           "start" : "2023-06-05T10:30:00+02:00",
+                           "guideDay" : "2023-06-05",
+                           "duration" : "P0DT0H30M0.000S",
+                           "channel" : "RAD1"
+                         } ],
+                     "mid" : "mid_1",
+                     "urn" : "urn:vpro:media:program:1",
+                     "embeddable" : true,
+                     "type" : "BROADCAST",
+                     "avType" : "VIDEO"
+                   }
+                 """);
+
+
+
+
+    }
+
+
+    @Test
+    public void polyMorphJson() throws IOException {
+        assertThat(Jackson2Mapper.getInstance()
+            .readValue(getClass().getResourceAsStream("/program-from-update-with-everything.json"), MediaUpdate.class)).isInstanceOf(ProgramUpdate.class);
     }
 
     @Test

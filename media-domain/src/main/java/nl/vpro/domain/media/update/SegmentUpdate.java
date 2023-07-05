@@ -18,6 +18,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import nl.vpro.domain.Child;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
@@ -70,6 +72,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 })
 @SegmentUpdate.Valid
 @Slf4j
+@JsonTypeName("segmentUpdate")
 public final class SegmentUpdate extends MediaUpdate<Segment>
     implements Comparable<SegmentUpdate>, Child<ProgramUpdate> {
 
