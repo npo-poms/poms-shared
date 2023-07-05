@@ -14,6 +14,7 @@ import static nl.vpro.rs.media.MediaBackendRestService.ERRORS;
 import static nl.vpro.rs.media.MediaBackendRestService.ID;
 
 /**
+ * See <a href="https://jira.vpro.nl/browse/MSE-5484">MSE-5484</a>, <a href="https://publiekeomroep.atlassian.net/browse/P0MS-8">POMS-8</a>
  * @author Michiel Meeuwissen
  * @since 7.7
  */
