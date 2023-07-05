@@ -49,6 +49,13 @@ public class Roles {
     public static final String SUPERADMIN_ROLE = ROLE + SUPERADMIN;
 
 
+
+    /**
+     * An authority may do very specific things, like creating broadcasts for radio channels. See {@link nl.vpro.domain.media.update.UpdateSupplier}.
+     */
+    public static final String AUTHORITY = MEDIA + "AUTHORITY";
+    public static final String AUTHORITY_ROLE = ROLE + AUTHORITY;
+
     /**
      * This is a system role which is assigned to one user which may do stuff 'on behalf' of other users.  See the RunAs-services.
      */
