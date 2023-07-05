@@ -161,6 +161,9 @@ public class AssemblageConfig implements Serializable {
     @lombok.Builder.Default
     Predicate<MediaObject> deleteBroadcasters = alwaysFalse();
 
+    @lombok.Builder.Default
+    Function<MediaObject, Optional<String>> publishImmediately = Functions.always(Optional.empty());
+
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -224,6 +227,7 @@ public class AssemblageConfig implements Serializable {
             requireIncomingMid,
             markForDeleteOnly,
             deleteBroadcasters,
+            publishImmediately,
             logger);
     }
 
