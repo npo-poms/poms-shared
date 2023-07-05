@@ -19,7 +19,6 @@ import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import nl.vpro.domain.bind.PublicationFilter;
-import nl.vpro.jackson2.Jackson2Mapper;
 
 
 /**
@@ -38,7 +37,7 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
     private static final long serialVersionUID = 6335921198095424865L;
 
     static {
-        Jackson2Mapper.addFilter("publicationFilter", new PublicationFilter());
+        PublicationFilter.install();
     }
 
     @Id
