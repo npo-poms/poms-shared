@@ -7,18 +7,11 @@ import java.net.URI;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.Credits;
-import nl.vpro.domain.media.Person;
-import nl.vpro.domain.media.RoleType;
-import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.domain.media.*;
+import nl.vpro.validation.WeakWarningValidatorGroup;
 
 
 /**
@@ -37,17 +30,17 @@ public class PersonUpdate extends CreditsUpdate {
 
     @XmlAttribute
     @Getter
-    @NotNull(groups = WarningValidatorGroup.class)
+    @NotNull(groups = WeakWarningValidatorGroup.class)
     private String gtaaUri;
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
     @Getter
-    @Null(groups = WarningValidatorGroup.class)
+    @Null(groups = WeakWarningValidatorGroup.class)
     protected String givenName;
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
     @Getter
-    @Null(groups = WarningValidatorGroup.class)
+    @Null(groups = WeakWarningValidatorGroup.class)
     protected String familyName;
 
     public PersonUpdate(String gtaaUri, RoleType role) {
