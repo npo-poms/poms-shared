@@ -86,7 +86,7 @@ public interface MediaBackendRestService {
     String ID_DESCRIPTION = "The 'mediaobject id'. May be a MID, an database id, or a crid";
 
     String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitly followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
-    String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated duration parsing, against the XSD. If this is false, your input will still be validated, but using so-called java bean validation only. This will give no line and column number information, but is otherwise more complete.";
+    String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated during parsing, against the XSD. If this is false, your input will still be validated, but using so-called java bean validation only. This will give no line and column number information, but is otherwise more complete.";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously. These errors may relate to authorization, or to database related problems.";
     String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRIDs in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed.";
     String STEAL_CRIDS_DESCRIPTION = "When set to true, and you submit an object with both CRID and mid (or you used lookupcrid=false, and generate a mid), and the CRID existed already for a different mid, then this CRID will be (if allowed) removed from the old object.";

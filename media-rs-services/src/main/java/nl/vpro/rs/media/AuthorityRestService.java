@@ -8,6 +8,7 @@ import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelate
 
 import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.UpdateSupplier;
+import nl.vpro.validation.ValidationLevel;
 
 import static nl.vpro.rs.media.MediaBackendRestService.*;
 
@@ -21,6 +22,12 @@ import static nl.vpro.rs.media.MediaBackendRestService.*;
 @Path("/authority")
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public interface AuthorityRestService {
+
+    String VALIDATION_LEVEL = "validationLevel";
+
+    String VALIDATION_LEVEL_DESCRIPTION = """
+    The level of validation errors that will be fatal, and lead to bad requests.
+    """;
 
 
 
@@ -41,7 +48,7 @@ public interface AuthorityRestService {
         @Encoded @PathParam("supplier") final UpdateSupplier supplier,
         @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(ERRORS) String errors,
-        @QueryParam(VALIDATE_INPUT) @DefaultValue("true") Boolean validateInput
+        @QueryParam(VALIDATION_LEVEL) @DefaultValue("WARNING") ValidationLevel level
     );
 
 }
