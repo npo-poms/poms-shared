@@ -9,8 +9,7 @@ import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelate
 import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.UpdateSupplier;
 
-import static nl.vpro.rs.media.MediaBackendRestService.ERRORS;
-import static nl.vpro.rs.media.MediaBackendRestService.ID;
+import static nl.vpro.rs.media.MediaBackendRestService.*;
 
 /**
  * See <a href="https://jira.vpro.nl/browse/MSE-5484">MSE-5484</a>, <a href="https://publiekeomroep.atlassian.net/browse/P0MS-8">POMS-8</a>
@@ -41,7 +40,8 @@ public interface AuthorityRestService {
     Response update(
         @Encoded @PathParam("supplier") final UpdateSupplier supplier,
         @XopWithMultipartRelated MediaUpdate<?> update,
-        @QueryParam(ERRORS) String errors
+        @QueryParam(ERRORS) String errors,
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("true") Boolean validateInput
     );
 
 }
