@@ -997,8 +997,13 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withScheduleEvent(LocalDateTime localDateTime) {
-            return scheduleEvent(Channel.NED1, localDateTime, Duration.ofMinutes(30L));
+            return withScheduleEvent(Channel.NED1, localDateTime);
         }
+
+        public ProgramTestDataBuilder withScheduleEvent(Channel channel, LocalDateTime localDateTime) {
+            return scheduleEvent(channel, localDateTime, Duration.ofMinutes(30L));
+        }
+
 
         public ProgramTestDataBuilder withScheduleEvent(int year, int month, int day, int hour, int minutes, Function<ScheduleEvent, ScheduleEvent> merger) {
             return withScheduleEvent(LocalDateTime.of(year, month, day, hour, minutes), merger);
