@@ -439,7 +439,6 @@
       "urn" : "urn:vpro:media:image:3"
     } ],
     "start" : "P0DT0H0M0.000S",
-    "mediaType" : "SEGMENT",
     "language" : [ "nl", "fr" ],
     "mid" : "VPROWON_12345_1",
     "urn" : "urn:vpro:media:segment:12",
@@ -449,7 +448,6 @@
     "publishStop" : 16725222000000,
     "publishStart" : 0
   } ],
-  "mediaType" : "BROADCAST",
   "language" : [ "nl", "fr" ],
   "mid" : "VPROWON_20001",
   "urn" : "urn:vpro:media:program:12",

@@ -96,6 +96,8 @@ public class MediaUpdateTest {
 
          Jackson2TestUtil.roundTripAndSimilar(
              Jackson2Mapper.getInstance(), ProgramUpdate.create(MediaTestDataBuilder.broadcast().constrained()
+                 .id(1L)
+                 .mid("mid_1")
                  .withScheduleEvent(Channel.RAD1, LocalDateTime.of(2023, 6, 5, 10, 30))
                  .build()), """
                  {
@@ -118,7 +120,7 @@ public class MediaUpdateTest {
                            "duration" : "P0DT0H30M0.000S",
                            "channel" : "RAD1"
                          } ],
-                     "mid" : "VPROWON_12346",
+                     "mid" : "mid_1",
                      "urn" : "urn:vpro:media:program:1",
                      "embeddable" : true,
                      "type" : "BROADCAST",
