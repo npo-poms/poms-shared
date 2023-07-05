@@ -94,8 +94,8 @@ public class MediaUpdateTest {
      @Test
      public void withConstrainedJson() {
 
-         Jackson2TestUtil.roundTripAndSimilar(
-             Jackson2Mapper.getInstance(), ProgramUpdate.create(MediaTestDataBuilder.broadcast().constrained()
+         ProgramUpdate rounded = Jackson2TestUtil.roundTripAndSimilar(
+             Jackson2Mapper.getStrictInstance(), ProgramUpdate.create(MediaTestDataBuilder.broadcast().constrained()
                  .id(1L)
                  .mid("mid_1")
                  .ageRating(AgeRating.ALL)
@@ -130,10 +130,10 @@ public class MediaUpdateTest {
                     }"
                  """);
 
+         assertThat(rounded.getAgeRating()).isEqualTo(AgeRating.ALL);
 
 
-
-    }
+     }
 
 
     @Test

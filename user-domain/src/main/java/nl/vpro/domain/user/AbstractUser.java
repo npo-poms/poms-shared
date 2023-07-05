@@ -104,7 +104,6 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         if (this.principalId == null) {
             log.warn("Create used without principal id: {}", this);
         }
-
     }
 
 

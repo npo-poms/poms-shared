@@ -27,6 +27,8 @@ public interface AuthorityRestService {
 
     String VALIDATION_LEVEL_DESCRIPTION = """
     The level of validation errors that will be fatal, and lead to bad requests.
+
+    Validation is done always on every level, and be reported via response headers if (non fatal) errors are found.
     """;
 
 
