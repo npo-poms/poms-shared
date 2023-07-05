@@ -1,5 +1,17 @@
 {
   "objectType" : "programUpdate",
+  "mid" : "VPROWON_20001",
+  "type" : "BROADCAST",
+  "avType" : "VIDEO",
+  "publishStart" : 0,
+  "publishStop" : 16725222000000,
+  "urn" : "urn:vpro:media:program:12",
+  "embeddable" : true,
+  "episodeOf" : [ {
+    "position" : 1,
+    "highlighted" : false,
+    "value" : "VPROWON_30004"
+  } ],
   "broadcaster" : [ "BNN", "AVRO" ],
   "portal" : [ "3VOOR12_GRONINGEN", "STERREN24" ],
   "exclusive" : [ {
@@ -43,9 +55,8 @@
     "value" : "Episode description MIS",
     "type" : "EPISODE"
   } ],
-  "tag" : [ "tag1", "tag2", "tag3" ],
-  "country" : [ "GB", "US" ],
   "genre" : [ "3.0.1.7.21", "3.0.1.8.25" ],
+  "tag" : [ "tag1", "tag2", "tag3" ],
   "intentions" : [ "ACTIVATING", "INFORM_INDEPTH" ],
   "targetGroups" : [ "ADULTS" ],
   "geoLocations" : [ {
@@ -57,6 +68,7 @@
   }, {
     "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/29064"
   } ],
+  "country" : [ "GB", "US" ],
   "avAttributes" : {
     "bitrate" : 1000000,
     "avFileFormat" : "M4V",
@@ -73,40 +85,6 @@
   },
   "releaseYear" : 2004,
   "duration" : "P0DT2H0M0.000S",
-  "credits" : [ {
-    "person" : {
-      "role" : "DIRECTOR",
-      "gtaaUri" : "http://gtaa/1234"
-    }
-  }, {
-    "person" : {
-      "givenName" : "Hans",
-      "familyName" : "Goedkoop",
-      "role" : "PRESENTER"
-    }
-  }, {
-    "person" : {
-      "givenName" : "Meta",
-      "familyName" : "de Vries",
-      "role" : "PRESENTER"
-    }
-  }, {
-    "person" : {
-      "givenName" : "Claire",
-      "familyName" : "Holt",
-      "role" : "ACTOR"
-    }
-  }, {
-    "name" : {
-      "role" : "COMPOSER",
-      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
-    }
-  }, {
-    "person" : {
-      "role" : "SUBJECT",
-      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
-    }
-  } ],
   "memberOf" : [ {
     "position" : 1,
     "highlighted" : false,
@@ -124,12 +102,6 @@
   "contentRating" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
   "email" : [ "info@npo.nl", "programma@avro.nl" ],
   "website" : [ "http://www.omroep.nl/programma/journaal", "http://tegenlicht.vpro.nl/afleveringen/222555" ],
-  "twitterref" : [ "#vpro", "@twitter" ],
-  "prediction" : [ {
-    "platform" : "INTERNETVOD"
-  }, {
-    "platform" : "TVVOD"
-  } ],
   "locations" : [ {
     "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
     "avAttributes" : {
@@ -160,35 +132,6 @@
       "avFileFormat" : "UNKNOWN"
     },
     "urn" : "urn:vpro:media:location:11"
-  } ],
-  "scheduleEvents" : [ {
-    "start" : "1970-01-01T01:00:00.100+01:00",
-    "guideDay" : "1969-12-31",
-    "duration" : "P0DT0H0M0.200S",
-    "titles" : [ {
-      "value" : "Main ScheduleEvent Title",
-      "type" : "MAIN"
-    } ],
-    "descriptions" : [ {
-      "value" : "Main ScheduleEvent Description",
-      "type" : "MAIN"
-    } ],
-    "channel" : "NED3"
-  }, {
-    "start" : "1970-01-04T01:00:00.300+01:00",
-    "guideDay" : "1970-01-03",
-    "duration" : "P0DT0H0M0.050S",
-    "channel" : "NED3"
-  }, {
-    "start" : "1970-01-09T01:00:00.350+01:00",
-    "guideDay" : "1970-01-08",
-    "duration" : "P0DT0H0M0.250S",
-    "channel" : "HOLL"
-  }, {
-    "start" : "1970-01-11T01:00:00.600+01:00",
-    "guideDay" : "1970-01-10",
-    "duration" : "P0DT0H0M0.200S",
-    "channel" : "CONS"
   } ],
   "relation" : [ {
     "type" : "THESAURUS",
@@ -231,13 +174,85 @@
     "highlighted" : false,
     "urn" : "urn:vpro:media:image:3"
   } ],
-  "episodeOf" : [ {
-    "position" : 1,
-    "highlighted" : false,
-    "value" : "VPROWON_30004"
+  "credits" : [ {
+    "person" : {
+      "role" : "DIRECTOR",
+      "gtaaUri" : "http://gtaa/1234"
+    }
+  }, {
+    "person" : {
+      "givenName" : "Hans",
+      "familyName" : "Goedkoop",
+      "role" : "PRESENTER"
+    }
+  }, {
+    "person" : {
+      "givenName" : "Meta",
+      "familyName" : "de Vries",
+      "role" : "PRESENTER"
+    }
+  }, {
+    "person" : {
+      "givenName" : "Claire",
+      "familyName" : "Holt",
+      "role" : "ACTOR"
+    }
+  }, {
+    "name" : {
+      "role" : "COMPOSER",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
+    }
+  }, {
+    "person" : {
+      "role" : "SUBJECT",
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
+    }
+  } ],
+  "language" : [ "nl", "fr" ],
+  "twitterref" : [ "#vpro", "@twitter" ],
+  "prediction" : [ {
+    "platform" : "INTERNETVOD"
+  }, {
+    "platform" : "TVVOD"
+  } ],
+  "version" : "5.12",
+  "scheduleEvents" : [ {
+    "start" : "1970-01-01T01:00:00.100+01:00",
+    "guideDay" : "1969-12-31",
+    "duration" : "P0DT0H0M0.200S",
+    "titles" : [ {
+      "value" : "Main ScheduleEvent Title",
+      "type" : "MAIN"
+    } ],
+    "descriptions" : [ {
+      "value" : "Main ScheduleEvent Description",
+      "type" : "MAIN"
+    } ],
+    "channel" : "NED3"
+  }, {
+    "start" : "1970-01-04T01:00:00.300+01:00",
+    "guideDay" : "1970-01-03",
+    "duration" : "P0DT0H0M0.050S",
+    "channel" : "NED3"
+  }, {
+    "start" : "1970-01-09T01:00:00.350+01:00",
+    "guideDay" : "1970-01-08",
+    "duration" : "P0DT0H0M0.250S",
+    "channel" : "HOLL"
+  }, {
+    "start" : "1970-01-11T01:00:00.600+01:00",
+    "guideDay" : "1970-01-10",
+    "duration" : "P0DT0H0M0.200S",
+    "channel" : "CONS"
   } ],
   "segments" : [ {
     "objectType" : "segmentUpdate",
+    "mid" : "VPROWON_12345_1",
+    "avType" : "VIDEO",
+    "publishStart" : 0,
+    "publishStop" : 16725222000000,
+    "urn" : "urn:vpro:media:segment:12",
+    "embeddable" : true,
     "broadcaster" : [ "BNN", "AVRO" ],
     "portal" : [ "3VOOR12_GRONINGEN", "STERREN24" ],
     "exclusive" : [ {
@@ -281,9 +296,8 @@
       "value" : "Episode description MIS",
       "type" : "EPISODE"
     } ],
-    "tag" : [ "tag1", "tag2", "tag3" ],
-    "country" : [ "GB", "US" ],
     "genre" : [ "3.0.1.7.21", "3.0.1.8.25" ],
+    "tag" : [ "tag1", "tag2", "tag3" ],
     "intentions" : [ "ACTIVATING", "INFORM_INDEPTH" ],
     "targetGroups" : [ "ADULTS" ],
     "geoLocations" : [ {
@@ -295,6 +309,7 @@
     }, {
       "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/29064"
     } ],
+    "country" : [ "GB", "US" ],
     "avAttributes" : {
       "bitrate" : 1000000,
       "avFileFormat" : "M4V",
@@ -311,40 +326,6 @@
     },
     "releaseYear" : 2004,
     "duration" : "P0DT0H1M40.000S",
-    "credits" : [ {
-      "person" : {
-        "role" : "DIRECTOR",
-        "gtaaUri" : "http://gtaa/1234"
-      }
-    }, {
-      "person" : {
-        "givenName" : "Hans",
-        "familyName" : "Goedkoop",
-        "role" : "PRESENTER"
-      }
-    }, {
-      "person" : {
-        "givenName" : "Meta",
-        "familyName" : "de Vries",
-        "role" : "PRESENTER"
-      }
-    }, {
-      "person" : {
-        "givenName" : "Claire",
-        "familyName" : "Holt",
-        "role" : "ACTOR"
-      }
-    }, {
-      "name" : {
-        "role" : "COMPOSER",
-        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
-      }
-    }, {
-      "person" : {
-        "role" : "SUBJECT",
-        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
-      }
-    } ],
     "memberOf" : [ {
       "position" : 1,
       "highlighted" : false,
@@ -362,10 +343,6 @@
     "contentRating" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
     "email" : [ "info@npo.nl", "programma@avro.nl" ],
     "website" : [ "http://www.omroep.nl/programma/journaal", "http://tegenlicht.vpro.nl/afleveringen/222555" ],
-    "twitterref" : [ "#vpro", "@twitter" ],
-    "prediction" : [ {
-      "platform" : "INTERNETVOD"
-    } ],
     "locations" : [ {
       "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
       "avAttributes" : {
@@ -438,23 +415,46 @@
       "highlighted" : false,
       "urn" : "urn:vpro:media:image:3"
     } ],
-    "start" : "P0DT0H0M0.000S",
+    "credits" : [ {
+      "person" : {
+        "role" : "DIRECTOR",
+        "gtaaUri" : "http://gtaa/1234"
+      }
+    }, {
+      "person" : {
+        "givenName" : "Hans",
+        "familyName" : "Goedkoop",
+        "role" : "PRESENTER"
+      }
+    }, {
+      "person" : {
+        "givenName" : "Meta",
+        "familyName" : "de Vries",
+        "role" : "PRESENTER"
+      }
+    }, {
+      "person" : {
+        "givenName" : "Claire",
+        "familyName" : "Holt",
+        "role" : "ACTOR"
+      }
+    }, {
+      "name" : {
+        "role" : "COMPOSER",
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/51771"
+      }
+    }, {
+      "person" : {
+        "role" : "SUBJECT",
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
+      }
+    } ],
     "language" : [ "nl", "fr" ],
-    "mid" : "VPROWON_12345_1",
-    "urn" : "urn:vpro:media:segment:12",
-    "embeddable" : true,
-    "midRef" : "VPROWON_20001",
-    "avType" : "VIDEO",
-    "publishStop" : 16725222000000,
-    "publishStart" : 0
-  } ],
-  "language" : [ "nl", "fr" ],
-  "mid" : "VPROWON_20001",
-  "urn" : "urn:vpro:media:program:12",
-  "embeddable" : true,
-  "type" : "BROADCAST",
-  "avType" : "VIDEO",
-  "publishStop" : 16725222000000,
-  "publishStart" : 0,
-  "version" : "5.12"
+    "twitterref" : [ "#vpro", "@twitter" ],
+    "prediction" : [ {
+      "platform" : "INTERNETVOD"
+    } ],
+    "start" : "P0DT0H0M0.000S",
+    "midRef" : "VPROWON_20001"
+  } ]
 }

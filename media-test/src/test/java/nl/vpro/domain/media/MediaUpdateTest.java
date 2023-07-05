@@ -92,40 +92,42 @@ public class MediaUpdateTest {
 
 
      @Test
-     public void withConstrainedJson() throws Exception {
+     public void withConstrainedJson() {
 
          Jackson2TestUtil.roundTripAndSimilar(
              Jackson2Mapper.getInstance(), ProgramUpdate.create(MediaTestDataBuilder.broadcast().constrained()
                  .id(1L)
                  .mid("mid_1")
+                 .ageRating(AgeRating.ALL)
                  .withScheduleEvent(Channel.RAD1, LocalDateTime.of(2023, 6, 5, 10, 30))
                  .build()), """
                  {
-                     "objectType" : "programUpdate",
-                     "broadcaster" : [ "BNN", "AVRO" ],
-                     "title" : [ {
-                       "value" : "Main title",
-                       "type" : "MAIN"
-                     }, {
-                       "value" : "Short title",
-                       "type" : "SHORT"
-                     }, {
-                       "value" : "Episode title MIS",
-                       "type" : "SUB"
-                     } ],
-                     "duration" : "P0DT2H0M0.000S",
+                      "objectType" : "programUpdate",
+                      "mid" : "mid_1",
+                      "type" : "BROADCAST",
+                      "avType" : "VIDEO",
+                      "urn" : "urn:vpro:media:program:1",
+                      "embeddable" : true,
+                      "broadcaster" : [ "BNN", "AVRO" ],
+                      "title" : [ {
+                        "value" : "Main title",
+                        "type" : "MAIN"
+                      }, {
+                        "value" : "Short title",
+                        "type" : "SHORT"
+                      }, {
+                        "value" : "Episode title MIS",
+                        "type" : "SUB"
+                      } ],
+                      "duration" : "P0DT2H0M0.000S",
+                      "ageRating" : "ALL",
                       "scheduleEvents" : [ {
-                           "start" : "2023-06-05T10:30:00+02:00",
-                           "guideDay" : "2023-06-05",
-                           "duration" : "P0DT0H30M0.000S",
-                           "channel" : "RAD1"
-                         } ],
-                     "mid" : "mid_1",
-                     "urn" : "urn:vpro:media:program:1",
-                     "embeddable" : true,
-                     "type" : "BROADCAST",
-                     "avType" : "VIDEO"
-                   }
+                        "start" : "2023-06-05T10:30:00+02:00",
+                        "guideDay" : "2023-06-05",
+                        "duration" : "P0DT0H30M0.000S",
+                        "channel" : "RAD1"
+                      } ]
+                    }"
                  """);
 
 
