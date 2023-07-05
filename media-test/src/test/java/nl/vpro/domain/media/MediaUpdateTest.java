@@ -127,7 +127,7 @@ public class MediaUpdateTest {
                         "duration" : "P0DT0H30M0.000S",
                         "channel" : "RAD1"
                       } ]
-                    }"
+                    }
                  """);
 
          assertThat(rounded.getAgeRating()).isEqualTo(AgeRating.ALL);
