@@ -156,6 +156,14 @@ public interface MediaTestDataBuilder<
     }
 
     /**
+     * {@link #constrained()}, and also fill fields that are not actually required <em>yet</em>, but give worning here and there if not filled.
+     */
+    default T strictlyConstrained() {
+        return constrained()
+            .ageRating(AgeRating.ALL);
+    }
+
+    /**
      * Fills all required fields besides 'id' (which is filled by persistence layer).
      * <p>
      * This should be used in tests which tests the persistence layer itself.
