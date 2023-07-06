@@ -21,16 +21,16 @@ public class TextMatcherJsonTest {
     public void testGetValueJson() throws Exception {
         TextMatcher in = new TextMatcher("title");
         StringWriter writer = new StringWriter();
-        Jackson2Mapper.INSTANCE.writeValue(writer, in);
+        Jackson2Mapper.getInstance().writeValue(writer, in);
 
         assertThat(writer.toString()).isEqualTo("\"title\"");
-        TextMatcher out = Jackson2Mapper.INSTANCE.readValue(new StringReader(writer.toString()), TextMatcher.class);
+        TextMatcher out = Jackson2Mapper.getInstance().readValue(new StringReader(writer.toString()), TextMatcher.class);
         assertThat(out.getValue()).isEqualTo("title");
     }
 
     @Test
     public void testGetValueFromJson() throws Exception {
-        TextMatcher matcher = Jackson2Mapper.INSTANCE.readValue("\"title\"", TextMatcher.class);
+        TextMatcher matcher = Jackson2Mapper.getInstance().readValue("\"title\"", TextMatcher.class);
 
         assertThat(matcher).isEqualTo(new TextMatcher("title"));
     }
@@ -39,17 +39,17 @@ public class TextMatcherJsonTest {
     public void testGetValueJsonInverse() throws Exception {
         TextMatcher in = new TextMatcher("title", Match.NOT);
         StringWriter writer = new StringWriter();
-        Jackson2Mapper.INSTANCE.writeValue(writer, in);
+        Jackson2Mapper.getInstance().writeValue(writer, in);
 
         assertThat(writer.toString()).isEqualTo("{\"value\":\"title\",\"match\":\"NOT\"}");
-        TextMatcher out = Jackson2Mapper.INSTANCE.readValue(new StringReader(writer.toString()), TextMatcher.class);
+        TextMatcher out = Jackson2Mapper.getInstance().readValue(new StringReader(writer.toString()), TextMatcher.class);
         assertThat(out.getValue()).isEqualTo("title");
         assertThat(out.getMatch()).isEqualTo(Match.NOT);
     }
 
     @Test
     public void testGetValueFromJsonInverse() throws Exception {
-        TextMatcher matcher = Jackson2Mapper.INSTANCE.readValue("{\"value\":\"title\",\"match\":\"not\"}", TextMatcher.class); // lowercase 'not' is working too!
+        TextMatcher matcher = Jackson2Mapper.getInstance().readValue("{\"value\":\"title\",\"match\":\"not\"}", TextMatcher.class); // lowercase 'not' is working too!
 
         assertThat(matcher).isEqualTo(new TextMatcher("title", Match.NOT));
     }

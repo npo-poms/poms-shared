@@ -43,6 +43,7 @@ import nl.vpro.xml.bind.ZonedLocalDateXmlAdapter;
         "start",
         "guideDay",
         "duration",
+        "repeat",
         "titles",
         "descriptions"
         })
