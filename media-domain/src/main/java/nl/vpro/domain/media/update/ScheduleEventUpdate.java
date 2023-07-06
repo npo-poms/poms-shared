@@ -30,8 +30,7 @@ import nl.vpro.domain.*;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.*;
-import nl.vpro.xml.bind.InstantXmlAdapter;
-import nl.vpro.xml.bind.ZonedLocalDateXmlAdapter;
+import nl.vpro.xml.bind.*;
 
 /**
  * @see nl.vpro.domain.media.update
@@ -91,10 +90,11 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
      */
     @Embedded
     @XmlElement
-    protected Repeat repeat;
+    protected RepeatUpdate repeat;
 
 
     @XmlElement(required = true)
+    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     private Duration duration;
@@ -136,7 +136,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         this.start = start;
         this.guideDay = guideDay;
         this.duration = duration;
-        this.repeat = repeat;
+        this.repeat = RepeatUpdate.of(repeat);
         this.titles = titles;
         this.descriptions = descriptions;
         this.parent = media;
@@ -183,7 +183,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
             event.setMidRef(parent.getMid());
         }
         event.setGuideDate(this.guideDay);
-        event.setRepeat(this.repeat);
+        event.setRepeat(RepeatUpdate.asRepeat(this.repeat));
         TextualObjects.copyAndRemove(this, event, ownerType);
         return event;
     }
