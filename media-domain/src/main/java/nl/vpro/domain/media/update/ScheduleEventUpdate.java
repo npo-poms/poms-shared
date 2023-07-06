@@ -95,7 +95,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
-    @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
+    @JsonSerialize(using = DurationToJsonTimestamp.XmlSerializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     private Duration duration;
 
