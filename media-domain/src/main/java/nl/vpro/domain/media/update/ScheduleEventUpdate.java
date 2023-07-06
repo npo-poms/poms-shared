@@ -80,9 +80,9 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
      */
     @XmlElement(required = false)
     @XmlSchemaType(name = "date")
-    @XmlJavaTypeAdapter(ZonedLocalDateXmlAdapter.class)
+    @XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
     @JsonDeserialize(using = StringZonedLocalDateToJsonTimestamp.Deserializer.class)
-    @JsonSerialize(using = StringZonedLocalDateToJsonTimestamp.Serializer.class)
+    //    @JsonSerialize(using = StringZonedLocalDateToJsonTimestamp.Serializer.class) Serializing as millis is too silly.
     private LocalDate guideDay;
 
     /**

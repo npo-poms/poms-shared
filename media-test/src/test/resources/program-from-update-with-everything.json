@@ -217,9 +217,10 @@
   } ],
   "version" : "5.12",
   "scheduleEvents" : [ {
-    "start" : "1970-01-01T01:00:00.100+01:00",
+    "channel" : "NED3",
+    "start" : 100,
+    "duration" : 200,
     "guideDay" : "1969-12-31",
-    "duration" : "P0DT0H0M0.200S",
     "titles" : [ {
       "value" : "Main ScheduleEvent Title",
       "type" : "MAIN"
@@ -227,23 +228,31 @@
     "descriptions" : [ {
       "value" : "Main ScheduleEvent Description",
       "type" : "MAIN"
-    } ],
-    "channel" : "NED3"
+    } ]
   }, {
-    "start" : "1970-01-04T01:00:00.300+01:00",
-    "guideDay" : "1970-01-03",
-    "duration" : "P0DT0H0M0.050S",
-    "channel" : "NED3"
+    "channel" : "NED3",
+    "start" : 259200300,
+    "duration" : 50,
+    "repeat" : {
+      "isRerun" : true
+    },
+    "guideDay" : "1970-01-03"
   }, {
-    "start" : "1970-01-09T01:00:00.350+01:00",
-    "guideDay" : "1970-01-08",
-    "duration" : "P0DT0H0M0.250S",
-    "channel" : "HOLL"
+    "channel" : "HOLL",
+    "start" : 691200350,
+    "duration" : 250,
+    "repeat" : {
+      "isRerun" : true
+    },
+    "guideDay" : "1970-01-08"
   }, {
-    "start" : "1970-01-11T01:00:00.600+01:00",
-    "guideDay" : "1970-01-10",
-    "duration" : "P0DT0H0M0.200S",
-    "channel" : "CONS"
+    "channel" : "CONS",
+    "start" : 864000600,
+    "duration" : 200,
+    "repeat" : {
+      "isRerun" : true
+    },
+    "guideDay" : "1970-01-10"
   } ],
   "segments" : [ {
     "objectType" : "segmentUpdate",

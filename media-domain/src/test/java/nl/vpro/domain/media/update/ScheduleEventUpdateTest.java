@@ -41,7 +41,7 @@ class ScheduleEventUpdateTest {
                       "value" : "herhaling",
                       "isRerun" : true
                     },
-                    "guideDay" : 1503871200000,
+                    "guideDay" : '2017-08-28',
                     "titles" : [ {
                       "value" : "test",
                       "type" : "MAIN"
@@ -70,6 +70,28 @@ class ScheduleEventUpdateTest {
         assertThat(scheduleEventUpdate.getDuration()).isEqualTo(Duration.ofMinutes(30));
         assertThat(scheduleEventUpdate.getGuideDay()).isEqualTo(LocalDate.of(2023, 6, 5));
         assertThat(scheduleEventUpdate.getStart()).isEqualTo(of(2023, 6, 5, 10, 30).atZone(Schedule.ZONE_ID).toInstant());
+
+    }
+
+    /**
+     */
+    @Test
+    public void parseMillis() throws JsonProcessingException {
+        ScheduleEventUpdate scheduleEventUpdate = Jackson2Mapper.getStrictInstance().readValue("""
+           {
+                    "channel" : "_10TB",
+                    "start" : 1503928260000,
+                    "duration" : 600000,
+                    "repeat" : {
+                      "value" : "herhaling",
+                      "isRerun" : true
+                    },
+                    "guideDay" : 1503871200000
+           }
+             """, ScheduleEventUpdate.class);
+        assertThat(scheduleEventUpdate.getDuration()).isEqualTo(Duration.ofMinutes(10));
+        assertThat(scheduleEventUpdate.getGuideDay()).isEqualTo(LocalDate.of(2017, 8, 28));
+        assertThat(scheduleEventUpdate.getStart()).isEqualTo(of(2017, 8, 28, 15, 51).atZone(Schedule.ZONE_ID).toInstant());
 
     }
 
