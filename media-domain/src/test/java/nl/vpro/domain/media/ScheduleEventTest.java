@@ -69,15 +69,20 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel.NED1)
             .duration(Duration.ofMinutes(10))
+            .repeat(Repeat.rerun("herhaling"))
             .build();
 
         Jackson2TestUtil.roundTripAndSimilar(e, """
             {
-              "channel" : "NED1",
-              "start" : 1503928260000,
-              "guideDay" : 1503871200000
-            ,  "duration" : 600000
-            }""");
+               "channel" : "NED1",
+               "start" : 1503928260000,
+               "guideDay" : 1503871200000,
+               "duration" : 600000,
+               "repeat" : {
+                 "value" : "herhaling",
+                 "isRerun" : true
+               }
+             }""");
     }
 
 

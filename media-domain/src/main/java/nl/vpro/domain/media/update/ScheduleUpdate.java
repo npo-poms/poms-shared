@@ -28,6 +28,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * @see nl.vpro.domain.media.update
  */
 @XmlAccessorType(XmlAccessType.NONE)
+
 public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
 
 

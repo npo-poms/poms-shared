@@ -4,14 +4,14 @@
  */
 package nl.vpro.domain.media.update;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.*;
 import java.util.*;
 import java.util.function.BiFunction;
 
+import javax.persistence.Embedded;
 import javax.validation.Valid;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -21,12 +21,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Range;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.xml.bind.*;
+import nl.vpro.jackson2.*;
+import nl.vpro.xml.bind.InstantXmlAdapter;
+import nl.vpro.xml.bind.ZonedLocalDateXmlAdapter;
 
 /**
  * @see nl.vpro.domain.media.update
@@ -41,6 +46,16 @@ import nl.vpro.xml.bind.*;
         "titles",
         "descriptions"
         })
+
+@JsonPropertyOrder({
+    "channel",
+    "start",
+    "guideDate",
+    "duration",
+    "repeat",
+    "avAttributes",
+    "offset",
+})
 @Getter
 @Setter
 @Slf4j
@@ -56,20 +71,33 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant start;
-
-    @XmlElement(required = true)
-    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
-    private Duration duration;
-
 
     /**
      * @since 5.9
      */
     @XmlElement(required = false)
     @XmlSchemaType(name = "date")
-    @XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
+    @XmlJavaTypeAdapter(ZonedLocalDateXmlAdapter.class)
+    @JsonDeserialize(using = StringZonedLocalDateToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringZonedLocalDateToJsonTimestamp.Serializer.class)
     private LocalDate guideDay;
+
+    /**
+     * @since 7.7
+     */
+    @Embedded
+    @XmlElement
+    protected Repeat repeat;
+
+
+    @XmlElement(required = true)
+    @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
+    private Duration duration;
+
 
     @Valid
     private SortedSet<TitleUpdate> titles;
@@ -99,11 +127,17 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         @NonNull Instant start,
         LocalDate guideDay,
         Duration  duration,
+        Repeat repeat,
+        @Singular SortedSet<TitleUpdate> titles,
+        @Singular SortedSet<DescriptionUpdate> descriptions,
         ProgramUpdate media) {
         this.channel = channel;
         this.start = start;
         this.guideDay = guideDay;
         this.duration = duration;
+        this.repeat = repeat;
+        this.titles = titles;
+        this.descriptions = descriptions;
         this.parent = media;
     }
 
@@ -112,6 +146,9 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
             event.getStartInstant(),
             event.getGuideDate(),
             event.getDuration(),
+            event.getRepeat(),
+            null,
+            null,
             null
         );
 
@@ -145,6 +182,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
             event.setMidRef(parent.getMid());
         }
         event.setGuideDate(this.guideDay);
+        event.setRepeat(this.repeat);
         TextualObjects.copyAndRemove(this, event, ownerType);
         return event;
     }
