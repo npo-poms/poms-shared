@@ -349,6 +349,7 @@
       <xs:element name="start" type="xs:dateTime" form="qualified"/>
       <xs:element name="guideDay" type="xs:date" minOccurs="0" form="qualified" />
       <xs:element name="duration" type="xs:duration" form="qualified"/>
+      <xs:element name="repeat" type="repeatType" minOccurs="0"/>
       <xs:element name="titles" minOccurs="0" form="qualified">
         <xs:complexType>
           <xs:sequence>
@@ -367,6 +368,14 @@
     </xs:sequence>
     <xs:attribute name="channel" type="media:channelEnum" use="required"/>
     <xs:attribute name="net" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="repeatType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="isRerun" type="xs:boolean" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
   <xs:complexType name="relationUpdateType">
