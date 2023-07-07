@@ -13,6 +13,7 @@ import java.util.function.BiFunction;
 
 import javax.persistence.Embedded;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -62,6 +63,7 @@ import nl.vpro.xml.bind.*;
 public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, TextualObjectUpdate<TitleUpdate, DescriptionUpdate, ScheduleEventUpdate>, Child<MediaUpdate<?>> {
 
     @XmlAttribute(required = true)
+    @NotNull
     private Channel channel;
 
     @XmlAttribute
@@ -73,6 +75,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @NotNull
     private Instant start;
 
     /**
@@ -97,6 +100,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = DurationToJsonTimestamp.XmlSerializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
+    @NotNull(message = "duration is required")
     private Duration duration;
 
 

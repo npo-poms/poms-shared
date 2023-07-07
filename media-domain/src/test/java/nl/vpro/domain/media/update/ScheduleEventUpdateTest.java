@@ -1,7 +1,12 @@
 package nl.vpro.domain.media.update;
 
-import java.time.Duration;
-import java.time.LocalDate;
+import lombok.extern.log4j.Log4j2;
+
+import java.time.*;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.groups.Default;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +19,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import static java.time.LocalDateTime.of;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Log4j2
 class ScheduleEventUpdateTest {
 
     /**
@@ -48,6 +54,18 @@ class ScheduleEventUpdateTest {
                     } ]
                   }
             """);
+    }
+
+    @Test
+    public void validate() {
+        ScheduleEventUpdate noDuration = ScheduleEventUpdate.builder()
+            .channel(Channel.RAD1)
+            .start(Instant.now())
+            .build();
+        Set<? extends ConstraintViolation<?>> result = Validation.validate(noDuration, Default.class);
+        log.info("{}", result);
+        assertThat(result).hasSize(1);
+        assertThat(result.iterator().next().getMessage()).isEqualTo("duration is required");
     }
 
 
