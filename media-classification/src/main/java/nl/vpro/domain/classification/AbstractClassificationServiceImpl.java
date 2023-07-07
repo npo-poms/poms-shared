@@ -223,7 +223,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
     @Override
     public String toString() {
-        return toString(getTermsMap());
+        return toString(terms);
     }
 
     protected String toString(Map<TermId, Term> map) {
