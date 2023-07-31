@@ -116,9 +116,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             logger.info("Specified age rating {} is not supported for audio, and will be ignored", restrictions.getAgeRating());
         }
 
-        // These should not be needed
-        metaData.put("broadcaster", "VPRO");
-        metaData.put("title", "should not be needed");
 
         HttpRequest ingestRequest = ingest(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(metaData)));
         HttpResponse<byte[]> ingest = client.send(ingestRequest,
@@ -215,7 +212,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     String pathForIngestMultipart(String mid) {
-        return "ingest/" + mid + "/multipart";
+        return "ingest/" + mid + "/multipart-assetonly";
     }
 
     String forPath(String path) {
