@@ -1,5 +1,6 @@
 package nl.vpro.sourcingservice;
 
+import io.micrometer.core.instrument.logging.LoggingMeterRegistry;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
@@ -46,7 +47,8 @@ class AudioSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.audio.token"),
             mock(UserService.class),
             100_000_000,
-            "m.meeuwissen.vpro@gmail.com"
+            "m.meeuwissen.vpro@gmail.com",
+            new LoggingMeterRegistry()
         );
     }
 
