@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import nl.vpro.domain.user.UserService;
 
 
+/**
+ * @implNote See {@link AbstractSourcingServiceImpl}
+ */
 @Log4j2
 public class AudioSourcingServiceImpl extends  AbstractSourcingServiceImpl implements AudioSourcingService {
 

@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Value;
 import nl.vpro.domain.user.UserService;
 
 
+/**
+ * Video part of sourcing service. This is currently not used, as poms interfaces with NEP directly for that.
+ * @implNote See {@link AbstractSourcingServiceImpl}
+ */
 @Log4j2
 public class VideoSourcingServiceImpl extends  AbstractSourcingServiceImpl implements VideoSourcingService {
 

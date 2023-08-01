@@ -26,6 +26,13 @@ import nl.vpro.util.FileSizeFormatter;
 import nl.vpro.util.InputStreamChunk;
 
 
+/**
+ * Straight forward client for some relevant parts of the
+ * sourcing services (
+ * '<a href="https://test.sourcing-audio.cdn.npoaudio.nl/api/documentation">audio</a>'
+ * '<a href="https://test.sourcing-video.cdn.npoaudio.nl/api/documentation">video</a>').
+ *
+ */
 @Log4j2
 public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
@@ -163,12 +170,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     private UploadResponse uploadFinish(SimpleLogger logger, String mid, AtomicLong uploaded) throws IOException, InterruptedException {
-        MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
+        final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "finish");
 
-        HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
+        final HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
 
-        JsonNode node = MAPPER.readTree(finish.body());
+        final JsonNode node = MAPPER.readTree(finish.body());
 
         logger.info("finish: {} ({}) {}", node.get("status").textValue(), finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded));
         JsonNode bodyNode = MAPPER.readTree(finish.body());
