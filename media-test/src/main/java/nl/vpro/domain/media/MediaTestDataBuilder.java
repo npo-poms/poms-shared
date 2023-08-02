@@ -152,7 +152,23 @@ public interface MediaTestDataBuilder<
     default T constrained() {
         return constrainedNew()
             .withId()
-            .withMid();
+            .withMid()
+            ;
+    }
+
+    /**
+     * Creates an object that can be inserted into the database without furhter adue
+     */
+    default T constrainedDb() {
+        T t =  constrained()
+            .withFixedDates()
+            .withCreatedBy()
+            .withLastModifiedBy()
+            ;
+        t.build().acceptChanges(); // triggers calc32 and things like that. (seems like a hack)
+        t.build().getCorrelation(); // (seems like a hack)
+
+        return t;
     }
 
     /**
