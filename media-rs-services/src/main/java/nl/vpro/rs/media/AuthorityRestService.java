@@ -37,7 +37,7 @@ public interface AuthorityRestService {
     @Path("{supplier}/{id:.*}")
     @Produces(MediaType.TEXT_PLAIN)
     Response deleteMedia(
-        @Encoded @PathParam("supplier") final UpdateSupplier supplier,
+        @PathParam("supplier") final UpdateSupplier supplier,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(ERRORS) String errors
     );
@@ -47,7 +47,7 @@ public interface AuthorityRestService {
     @Path("{supplier}")
     @Produces(MediaType.TEXT_PLAIN)
     Response update(
-        @Encoded @PathParam("supplier") final UpdateSupplier supplier,
+        @PathParam("supplier") final UpdateSupplier supplier,
         @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(ERRORS) String errors,
         @QueryParam(VALIDATION_LEVEL) @DefaultValue("WARNING") ValidationLevel level

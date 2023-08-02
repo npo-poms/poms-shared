@@ -60,7 +60,7 @@ class AudioSourcingServiceImplTest {
 
         Restrictions restrictions = new Restrictions();
         restrictions.setGeoRestriction(GeoRestriction.builder().region(Region.NL).build());
-        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_A20023529", restrictions, Files.size(file), Files.newInputStream(file), null);
+        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_T20017820", restrictions, Files.size(file), Files.newInputStream(file), null);
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
