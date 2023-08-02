@@ -121,7 +121,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
     /**
-     * We keep track of a CRC32 hash to determin if an object is 'changed', in the sense that
+     * We keep track of a CRC32 hash to determine whether an object is 'changed', in the sense that
      * it would need republication.
      */
     protected CRC32 calcCRC32() {
