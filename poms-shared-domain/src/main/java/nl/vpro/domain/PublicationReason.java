@@ -168,12 +168,18 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         return new PublicationReason(reasonAndDate[0], instant);
     }
 
-    public static PublicationReason[] parseList(String string, String logContext) {
+    /**
+     * @param string The string to parse
+     * @param logContext Something which will be added to the warnings in the log if something is odd. This may give some context to the person encountering the issue.
+     */
+    public static PublicationReason[] parseList(
+        final String string,
+        final String logContext) {
         List<PublicationReason> result = new ArrayList<>();
         if (string != null && !string.isEmpty()) {
             for (var s : string.split(RECORD_SPLITTER)) {
                 try {
-                    result.add(parseOne(s, logContext));
+                    result.add(parseOne(s, logContext + "(" + string + " )"));
                 } catch(Exception e) {
                     log.warn("{} Couldn't parse {}: {} {}", logContext, s, e.getClass().getName(), e.getMessage());
                 }
