@@ -368,17 +368,19 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         }
     }
 
+    /**
+     * @TODO Equals is not always transitive?
+     */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Prediction)) {
+        if (!(o instanceof Prediction other)) {
             return false;
         }
-        Prediction other = (Prediction) o;
         if (platform == null || other.platform == null) {
             return other == this;
         }
         return Objects.equals(platform, other.platform) &&
-            (getParent() == null || other.getParent() ==null || Objects.equals(getParent(), other.getParent()));
+            (getParent() == null || other.getParent() == null || Objects.equals(getParent(), other.getParent()));
     }
 
     public boolean fieldEquals(Prediction prediction) {
@@ -416,7 +418,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public String toString() {
         return
-            "Prediction{id=" + id + ",platform=" + platform  + ", issueDate=" + issueDate + ", state=" + state + ", encryption=" + encryption + "}";
+            "Prediction{id=" + id + ",platform=" + platform  + ", issueDate=" + issueDate + ", state=" + state + ", encryption=" + encryption  + (mediaObject == null ? "" : ", parent=" + mediaObject) + "}";
     }
 
 

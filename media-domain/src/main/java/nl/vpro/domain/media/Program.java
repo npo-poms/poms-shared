@@ -141,6 +141,11 @@ public final class Program extends MediaObject {
     }
 
 
+    public Program(String mid) {
+        this(mid, -1);
+    }
+
+
     public Program(long id) {
         super(id);
     }
