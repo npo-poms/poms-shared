@@ -70,11 +70,18 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
                .encryption(prediction.getEncryption());
     }
 
+    /**
+     * Copies the values of this prediction update to the given prediction (and returns it)
+     * <p>
+     * This implies that {@link Prediction#setPlannedAvailability(boolean)} is set to true. because {@link PredictionUpdate} only represents planned availabilities.
+     * @return the given prediction (after changes were applied)
+     */
     public Prediction toPrediction(Prediction prediction) {
         prediction.setPlatform(platform);
         prediction.setPublishStartInstant(publishStart);
         prediction.setPublishStopInstant(publishStop);
         prediction.setEncryption(encryption);
+        prediction.setPlannedAvailability(true);
         return prediction;
     }
 
