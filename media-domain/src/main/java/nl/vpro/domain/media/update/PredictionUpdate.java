@@ -19,6 +19,8 @@ import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
+ * The update representation of a planned prediction.
+ *
  * @author Michiel Meeuwissen
  * @since 5.6
  * @see nl.vpro.domain.media.update
