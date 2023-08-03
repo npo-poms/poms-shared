@@ -107,7 +107,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("R2SJ")
-    R2SJ(AUDIO, 2014) { // voorheen radio 6?
+    R2SJ(AUDIO, "https://www.nporadio2.nl/soulenjazz",  2014) { // voorheen radio 6?
         @Override
         public String toString() {
             return "Radio 2 Soul & Jazz";
