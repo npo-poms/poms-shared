@@ -55,7 +55,9 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
 
     @Test
     public void toRecordsWithMerge() {
-        String records = PublicationReason.toRecords(reasons,
+        String records = PublicationReason.toRecords(
+            Instant.EPOCH,
+            reasons,
             1000,
             "mid_123",
             true
@@ -66,7 +68,9 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
 
     @Test
     public void toRecords() {
-        String records = PublicationReason.toRecords(reasons,
+        String records = PublicationReason.toRecords(
+            Instant.EPOCH,
+            reasons,
             1000,
             "mid_123",
             false
@@ -80,7 +84,9 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
 
     @Test
     public void toRecordsWithMax() {
-        String records = PublicationReason.toRecords(reasons,
+        String records = PublicationReason.toRecords(
+            Instant.EPOCH,
+            reasons,
             8,
             "mid_123",
             false

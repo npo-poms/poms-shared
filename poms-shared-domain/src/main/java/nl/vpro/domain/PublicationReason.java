@@ -33,7 +33,7 @@ import static java.util.Comparator.*;
  * <p>
  * Resulting in two reason in the api, where the strings are joined with a string representing the mechanism and a timestamp. (The two fields in {@link PublicationReason}).
  *  Encoded  {@code republication|<some string>␟1686051496927}
- * and {@code republication|<some other string>␟1686051496927} (constructed with {@link #toRecord()}).
+ * and {@code republication|<some other string>␟1686051496927} (constructed with {@link #toRecord(Instant)}).
  * <p>
  *  While transferring multiple such reasons to the publisher multiple of such string representations are joined with {@link #RECORD_SPLITTER}.
  * </p>
@@ -111,8 +111,8 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         return new PublicationReason(parentReason(value), getPublishDate());
     }
 
-    public String toRecord() {
-        return value + FIELD_SPLITTER + (publishDate == null ? "" : publishDate.toEpochMilli());
+    public String toRecord(Instant now) {
+        return value + FIELD_SPLITTER + (publishDate == null ? now.toEpochMilli() : publishDate.toEpochMilli());
     }
 
     @Override
@@ -125,7 +125,7 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         return "parent: " + reason;
     }
 
-    public static String toRecords(List<PublicationReason> reasons, long maxLength, String mid, boolean mergeDuplicates) {
+    public static String toRecords(Instant now, List<PublicationReason> reasons, long maxLength, String mid, boolean mergeDuplicates) {
         StringBuilder builder = new StringBuilder();
         PublicationReason prevReason = null;
         for (PublicationReason reason : reasons) {
@@ -137,7 +137,7 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
                     log.warn("The list seems to be ordered wrong");
                 }
                 if (mergeDuplicates && Objects.equals(prevReason.getValue(), reason.getValue())) {
-                    builder.delete(builder.length() - prevReason.toRecord().length(), builder.length());
+                    builder.delete(builder.length() - prevReason.toRecord(now).length(), builder.length());
                     needsSplitter = false;
 
                 }
@@ -145,7 +145,7 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
             if (needsSplitter){
                 builder.append(RECORD_SPLITTER);
             }
-            String s = reason.toRecord();
+            String s = reason.toRecord(now);
             builder.append(s);
             prevReason = reason;
             if (builder.length() >= maxLength) {
