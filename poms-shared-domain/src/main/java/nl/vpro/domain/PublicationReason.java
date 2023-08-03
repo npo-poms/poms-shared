@@ -156,30 +156,30 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         return builder.toString();
     }
 
-    public static PublicationReason parseOne(final String string) {
+    public static PublicationReason parseOne(final String string, String logContext) {
         final String[] reasonAndDate = string.split(FIELD_SPLITTER, 2);
         final Instant instant;
         if (reasonAndDate.length > 1 && reasonAndDate[1].length() > 0) {
             instant = Instant.ofEpochMilli(Long.parseLong(reasonAndDate[1]));
         } else {
-            log.warn("No time found in '{}'. Creating a publication reason without publish date", string);
+            log.warn("{} No time found in '{}'. Creating a publication reason without publish date", logContext, string);
             instant = null;
         }
         return new PublicationReason(reasonAndDate[0], instant);
     }
 
-    public static PublicationReason[] parseList(String string) {
+    public static PublicationReason[] parseList(String string, String logContext) {
         List<PublicationReason> result = new ArrayList<>();
         if (string != null && !string.isEmpty()) {
             for (var s : string.split(RECORD_SPLITTER)) {
                 try {
-                    result.add(parseOne(s));
+                    result.add(parseOne(s, logContext));
                 } catch(Exception e) {
-                    log.warn("Couldn't parse {}: {} {}", s, e.getClass().getName(), e.getMessage());
+                    log.warn("{} Couldn't parse {}: {} {}", logContext, s, e.getClass().getName(), e.getMessage());
                 }
             }
         } else {
-            log.warn("No reasons found in {}", string);
+            log.warn("{} No reasons found in {}", logContext, string);
         }
         return result.toArray(PublicationReason[]::new);
     }
