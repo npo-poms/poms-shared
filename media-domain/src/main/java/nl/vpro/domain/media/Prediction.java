@@ -358,6 +358,9 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @Override
     public int compareTo(@NonNull Prediction o) {
+        if (o == null){
+            throw new NullPointerException("Cannot compare to null");
+        }
         if (platform == null) {
             return o == null ? 0 : o.platform == null ? 0 : 1;
         } else {
@@ -375,7 +378,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
             return other == this;
         }
         return Objects.equals(platform, other.platform) &&
-            Objects.equals(getParent(), other.getParent());
+            (getParent() == null || other.getParent() ==null || Objects.equals(getParent(), other.getParent()));
     }
 
     public boolean fieldEquals(Prediction prediction) {
@@ -387,7 +390,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @Override
     public int hashCode() {
-        return platform.hashCode();
+        return platform == null ? 0 : platform.hashCode();
     }
 
     @Override
