@@ -63,7 +63,7 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
     }
 
     public static PredictionUpdate.Builder builderOf(Prediction prediction) {
-        assert prediction.isPlannedAvailability();
+        assert prediction.isPlannedAvailability() : "The representation of an unplanned availability is simply the _absence_ of it in the list of prediction of a mediaobject. Following is not planned: "+ prediction;
         return PredictionUpdate.builder()
                .platform(prediction.getPlatform())
                .publishStart(prediction.getPublishStartInstant())
