@@ -63,6 +63,7 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
     }
 
     public static PredictionUpdate.Builder builderOf(Prediction prediction) {
+        assert prediction.isPlannedAvailability();
         return PredictionUpdate.builder()
                .platform(prediction.getPlatform())
                .publishStart(prediction.getPublishStartInstant())
