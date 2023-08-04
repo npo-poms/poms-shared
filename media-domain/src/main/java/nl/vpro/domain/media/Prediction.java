@@ -23,8 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Child;
-import nl.vpro.domain.MutableEmbargo;
+import nl.vpro.domain.*;
 import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -369,7 +368,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     /**
-     * @TODO Equals is not always transitive?
+     * @TODO Equals is not always transitive?, because of null-ness of parent,
      */
     @Override
     public boolean equals(Object o) {
@@ -402,8 +401,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         plannedAvailability = from.plannedAvailability;
         platform = from.platform;
         authority = from.authority;
-        publishStart = from.publishStart;
-        publishStop = from.publishStop;
+        Embargos.copy(from, this);
         issueDate = from.issueDate;
     }
 
