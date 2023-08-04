@@ -39,7 +39,7 @@ public class PredictionTest  implements ComparableTheory<Prediction> {
         Prediction p2 =  Prediction.announced().platform(Platform.INTERNETVOD).parent(new Program()).build();
         assertThat(p1).isEqualTo(p2);
         p1.setParent(new Program());
-        assertThat(p1).isEqualTo(p2);
+        assertThat(p1).isNotEqualTo(p2);
     }
 
 
