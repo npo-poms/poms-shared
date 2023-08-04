@@ -52,13 +52,13 @@ public class ImageStream implements AutoCloseable {
 
     protected boolean closed;
 
-    protected ImageStream(InputStream stream, Instant lastModified) {
+    protected ImageStream(@NonNull InputStream stream, Instant lastModified) {
         this.stream = stream;
         this.lastModified = lastModified;
         this.length = -1;
     }
 
-    public ImageStream(InputStream stream, long length, Instant lastModified) {
+    public ImageStream(@NonNull InputStream stream, long length, Instant lastModified) {
         this(stream, length, lastModified, null,  null, null, null);
     }
 
@@ -103,7 +103,7 @@ public class ImageStream implements AutoCloseable {
 
     @lombok.Builder(builderMethodName = "imageStreamBuilder")
     protected ImageStream(
-        @NonNull InputStream stream,
+        @Nullable InputStream stream,
         @Min(0) long length,
         @Nullable Instant lastModified,
         @Nullable String contentType,
@@ -155,7 +155,7 @@ public class ImageStream implements AutoCloseable {
         return stream;
     }
 
-    public ImageStream withMetaData(BackendImageMetadata<?> metaData) {
+    public ImageStream withMetaData(BackendImageMetadata<?> metaData) throws IOException {
 
         return ImageStream.imageStreamBuilder()
             .stream(stream)

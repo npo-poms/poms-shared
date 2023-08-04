@@ -58,7 +58,8 @@ public class ReusableImageStream extends ImageStream {
 
     @lombok.Builder
     private ReusableImageStream(
-        @NonNull InputStream stream,
+        @Nullable InputStream stream,
+        @Nullable Path file,
         @Min(0) long length,
         @Nullable Instant lastModified,
         @Nullable String contentType,
@@ -66,6 +67,8 @@ public class ReusableImageStream extends ImageStream {
         @Nullable URI url,
         @Nullable ThrowingRunnable<IOException> onClose) {
         super(stream, length, lastModified, contentType, etag, url, onClose);
+        this.file  = file;
+        assert stream != null || file != null;
     }
 
     public ReusableImageStream(ImageStream stream) throws IOException {
@@ -137,9 +140,10 @@ public class ReusableImageStream extends ImageStream {
     }
 
      @Override
-     public ReusableImageStream withMetaData(BackendImageMetadata<?> metaData) {
+     public ReusableImageStream withMetaData(BackendImageMetadata<?> metaData) throws IOException {
          ReusableImageStream reusableImageStream = ReusableImageStream.builder()
              .stream(stream)
+             .file(file)
              .url(url)
              .onClose(onClose)
              .length(length)
@@ -147,7 +151,7 @@ public class ReusableImageStream extends ImageStream {
              .contentType(metaData.getMimeType())
              .lastModified(lastModified == null ? metaData.getLastModifiedInstant() : lastModified)
              .build();
-         reusableImageStream.file = file;
+
          return reusableImageStream;
      }
 
