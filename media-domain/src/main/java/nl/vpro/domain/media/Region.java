@@ -49,11 +49,11 @@ public enum Region implements Displayable {
      * @deprecated Not supported by VMV
      */
     @Deprecated
-    @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not supported by the NPO player)")
+    @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not supported by the NPO player). It may be supported by redirect service though.")
     BENELUX("Benelux") {
         @Override
         public boolean display() {
-            return false;
+            return true;
         }
     },
 
