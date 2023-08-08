@@ -19,7 +19,7 @@ public enum Platform implements Displayable {
     /**
      * Visible on internet. May also be used for audio?
      */
-    INTERNETVOD(true, "Beschikbaar op internet") {
+    INTERNETVOD(true, "Internet") {
         @Override
         public boolean matches(Platform platform) {
             return platform == null || super.matches(platform);
@@ -29,7 +29,7 @@ public enum Platform implements Displayable {
     /**
      *
      */
-    TVVOD(true, "Beschikbaar voor kabelaars"),
+    TVVOD(true, "Kabelaars"),
 
     /**
      * NLZiet,platform "extra" in cooperation with dutch commercial broadcasters
