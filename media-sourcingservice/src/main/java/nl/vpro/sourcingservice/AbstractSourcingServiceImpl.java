@@ -47,7 +47,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private String baseUrl;
 
 
-
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
     private final String callbackBaseUrl;
@@ -82,7 +81,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         ingest(logger, mid, getFileName(mid), restrictions);
 
-        uploadStart(logger, mid, fileSize, errors);
+        uploadStart(logger, mid, fileSize, errors, restrictions);
 
         AtomicLong uploaded = new AtomicLong(0);
         while(uploaded.get() < fileSize) {
@@ -107,12 +106,30 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     private void ingest(SimpleLogger logger, String mid, String filename, Restrictions restrictions) throws IOException, InterruptedException {
-        final ObjectNode metaData = MAPPER.createObjectNode();
+
+        final ObjectNode metaData = metadata(logger, mid, filename, restrictions);
+
+        HttpRequest ingestRequest = ingest(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(metaData)));
+        HttpResponse<byte[]> ingest = client.send(ingestRequest,
+            HttpResponse.BodyHandlers.ofByteArray());
+        meter("ingest", ingest);
+
+        if (ingest.statusCode() > 299) {
+            throw new IllegalArgumentException(ingestRequest + ":" + ingest.statusCode() + ":" + new String(ingest.body()));
+        }
+        IngestResponse response = MAPPER.readValue(ingest.body(), IngestResponse.class);
+        logger.info("ingest {}", response);
+    }
+
+    private ObjectNode metadata(SimpleLogger logger, String mid, String filename, Restrictions restrictions) {
+         final ObjectNode metaData = MAPPER.createObjectNode();
         metaData.put("mid", mid);
         metaData.put("callback_url", getCallbackUrl(mid));
 
-        // I don't get the point of this
-        metaData.put("filename", filename);
+        if (filename != null) {
+            // I don't get the point of this
+            metaData.put("filename", filename);
+        }
 
         if (restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().getPlatform() == Platform.INTERNETVOD) {
             GeoRestriction geoRestriction = restrictions.getGeoRestriction();
@@ -132,31 +149,23 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (restrictions.getAgeRating() != null && restrictions.getAgeRating() != AgeRating.ALL) {
             logger.info("Specified age rating {} is not supported for audio, and will be ignored", restrictions.getAgeRating());
         }
-
-
-        HttpRequest ingestRequest = ingest(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(metaData)));
-        HttpResponse<byte[]> ingest = client.send(ingestRequest,
-            HttpResponse.BodyHandlers.ofByteArray());
-        meter("ingest", ingest);
-
-        if (ingest.statusCode() > 299) {
-            throw new IllegalArgumentException(ingestRequest + ":" + ingest.statusCode() + ":" + new String(ingest.body()));
-        }
-        IngestResponse response = MAPPER.readValue(ingest.body(), IngestResponse.class);
-        logger.info("ingest {}", response);
+        return metaData;
     }
 
-    private void uploadStart(SimpleLogger logger, String mid, long fileSize, @Nullable String errors) throws IOException, InterruptedException {
+    private void uploadStart(SimpleLogger logger, String mid, long fileSize, @Nullable String errors, Restrictions restrictions) throws IOException, InterruptedException {
 
         final String email = Optional.ofNullable(errors)
             .orElse(
                 userService.currentUser().map(User::getEmail)
                     .orElse(defaultEmail)
             );
-        MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
+        final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "start");
         if (email != null) {
             body.add("email", email);
+        }
+        if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
+            body.add("region",  restrictions.getGeoRestriction().getRegion().name());
         }
         body.add("file_size", String.valueOf(fileSize));
         HttpRequest multipart = multipart(mid, body);
@@ -209,12 +218,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     protected void meter(String name, HttpResponse<?> response) {
         meterRegistry.counter("sourcing." + implName() + "." + name , "status", String.valueOf(response.statusCode())).increment();
-
     }
 
     protected String getCallbackUrl(String mid) {
         return callbackBaseUrl.formatted(mid);
-
     }
 
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
