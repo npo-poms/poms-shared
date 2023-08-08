@@ -50,7 +50,12 @@ public enum Region implements Displayable {
      */
     @Deprecated
     @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not supported by the NPO player)")
-    BENELUX("Benelux"),
+    BENELUX("Benelux") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    },
 
     /**
      * Europe

@@ -13,6 +13,7 @@ import nl.vpro.i18n.Displayable;
 /**
  * @author Michiel Meeuwissen
  */
+@Getter
 @XmlEnum
 @XmlType(name = "platformTypeEnum")
 public enum Platform implements Displayable {
@@ -49,7 +50,6 @@ public enum Platform implements Displayable {
     };
 
 
-    @Getter
     private final boolean streamingPlatform;
 
     @Getter
