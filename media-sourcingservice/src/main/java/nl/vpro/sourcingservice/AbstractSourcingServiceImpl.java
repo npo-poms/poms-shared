@@ -79,16 +79,18 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
        Restrictions restrictions,
        final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
 
-       //
-       ingest(logger, mid, getFileName(mid), restrictions);
+       final AtomicLong uploaded = new AtomicLong(0);
+       try (inputStream) {
+           ingest(logger, mid, getFileName(mid), restrictions);
 
-       uploadStart(logger, mid, fileSize, errors, restrictions);
+           uploadStart(logger, mid, fileSize, errors, restrictions);
 
-       AtomicLong uploaded = new AtomicLong(0);
-       while(uploaded.get() < fileSize) {
-           uploadChunk(logger, mid, inputStream, uploaded, restrictions);
+
+           while (uploaded.get() < fileSize) {
+               uploadChunk(logger, mid, inputStream, uploaded, restrictions);
+
+           }
        }
-       inputStream.close();
        assert uploaded.get() == fileSize;
 
        return uploadFinish(logger, mid, uploaded, restrictions);
