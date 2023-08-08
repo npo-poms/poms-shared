@@ -55,7 +55,9 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
 
     @Test
     public void toRecordsWithMerge() {
-        String records = PublicationReason.toRecords(reasons,
+        String records = PublicationReason.toRecords(
+            Instant.EPOCH,
+            reasons,
             1000,
             "mid_123",
             true
@@ -66,21 +68,25 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
 
     @Test
     public void toRecords() {
-        String records = PublicationReason.toRecords(reasons,
+        String records = PublicationReason.toRecords(
+            Instant.EPOCH,
+            reasons,
             1000,
             "mid_123",
             false
         );
         assertThat(records).isEqualTo("a␟1␞a␟2␞b␟3␞b␟4␞a␟5␞c␟6");
 
-        List<PublicationReason> roundTrip = List.of(PublicationReason.parseList(records));
+        List<PublicationReason> roundTrip = List.of(PublicationReason.parseList(records, "test"));
         assertThat(roundTrip).containsExactlyElementsOf(reasons);
     }
 
 
     @Test
     public void toRecordsWithMax() {
-        String records = PublicationReason.toRecords(reasons,
+        String records = PublicationReason.toRecords(
+            Instant.EPOCH,
+            reasons,
             8,
             "mid_123",
             false

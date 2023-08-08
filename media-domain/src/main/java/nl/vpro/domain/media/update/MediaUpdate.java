@@ -698,8 +698,7 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
 
         List<CreditsUpdate> creditsUpdates = new ArrayList<>();
         for (Credits credit: credits) {
-            if (credit instanceof Person) {
-                Person p = (Person) credit;
+            if (credit instanceof Person p) {
                 if (p.getGtaaUri() != null && isBefore(5, 12)) {
                     continue;
                 }

@@ -19,6 +19,8 @@ import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
+ * The update representation of a planned prediction.
+ *
  * @author Michiel Meeuwissen
  * @since 5.6
  * @see nl.vpro.domain.media.update
@@ -63,6 +65,7 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
     }
 
     public static PredictionUpdate.Builder builderOf(Prediction prediction) {
+        assert prediction.isPlannedAvailability() : "The representation of an unplanned availability is simply the _absence_ of it in the list of prediction of a mediaobject. Following is not planned: "+ prediction;
         return PredictionUpdate.builder()
                .platform(prediction.getPlatform())
                .publishStart(prediction.getPublishStartInstant())
@@ -70,11 +73,18 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
                .encryption(prediction.getEncryption());
     }
 
+    /**
+     * Copies the values of this prediction update to the given prediction (and returns it)
+     * <p>
+     * This implies that {@link Prediction#setPlannedAvailability(boolean)} is set to true. because {@link PredictionUpdate} only represents planned availabilities.
+     * @return the given prediction (after changes were applied)
+     */
     public Prediction toPrediction(Prediction prediction) {
         prediction.setPlatform(platform);
         prediction.setPublishStartInstant(publishStart);
         prediction.setPublishStopInstant(publishStop);
         prediction.setEncryption(encryption);
+        prediction.setPlannedAvailability(true);
         return prediction;
     }
 

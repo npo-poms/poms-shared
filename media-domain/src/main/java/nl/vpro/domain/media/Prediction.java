@@ -23,8 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Child;
-import nl.vpro.domain.MutableEmbargo;
+import nl.vpro.domain.*;
 import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -358,6 +357,9 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @Override
     public int compareTo(@NonNull Prediction o) {
+        if (o == null){
+            throw new NullPointerException("Cannot compare to null");
+        }
         if (platform == null) {
             return o == null ? 0 : o.platform == null ? 0 : 1;
         } else {
@@ -365,17 +367,19 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         }
     }
 
+    /**
+     * @TODO Equals is not always transitive?, because of null-ness of parent,
+     */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Prediction)) {
+        if (!(o instanceof Prediction other)) {
             return false;
         }
-        Prediction other = (Prediction) o;
         if (platform == null || other.platform == null) {
             return other == this;
         }
         return Objects.equals(platform, other.platform) &&
-            Objects.equals(getParent(), other.getParent());
+            (getParent() == null || other.getParent() == null || Objects.equals(getParent(), other.getParent()));
     }
 
     public boolean fieldEquals(Prediction prediction) {
@@ -387,7 +391,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @Override
     public int hashCode() {
-        return platform.hashCode();
+        return platform == null ? 0 : platform.hashCode();
     }
 
     @Override
@@ -397,8 +401,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         plannedAvailability = from.plannedAvailability;
         platform = from.platform;
         authority = from.authority;
-        publishStart = from.publishStart;
-        publishStop = from.publishStop;
+        Embargos.copy(from, this);
         issueDate = from.issueDate;
     }
 
@@ -413,7 +416,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public String toString() {
         return
-            "Prediction{id=" + id + ",platform=" + platform  + ", issueDate=" + issueDate + ", state=" + state + ", encryption=" + encryption + "}";
+            "Prediction{id=" + id + ",platform=" + platform  + ", issueDate=" + issueDate + ", state=" + state + ", encryption=" + encryption  + (mediaObject == null ? "" : ", parent=" + mediaObject) + "}";
     }
 
 

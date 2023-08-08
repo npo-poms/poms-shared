@@ -86,6 +86,9 @@ public class Headers {
 
     public static final String NPO_SUBTITLES_OFFSET_HEADER = "X-subtitles-offset";
 
+    public static final String NPO_MID                     = X_NPO + "-mid";
+
+
 }
 
 

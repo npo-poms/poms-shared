@@ -71,12 +71,18 @@ public interface MediaIdentifiable extends MidIdentifiable {
     class Correlation implements Serializable, ObjectLocker.DefinesType {
         @Serial
         private static final long serialVersionUID = -8973548054279104343L;
+
         final String id;
         final Type type;
 
         public Correlation(@NonNull String id, @NonNull Type type) {
             this.id = id;
             this.type = type;
+        }
+
+        private Correlation() {
+            this.id = null;
+            this.type = Type.NO_LOCK;
         }
 
         public static Correlation mid(String mid) {
@@ -106,7 +112,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
             return type + ":" + id;
         }
 
-        public static final Correlation NO_LOCK = new Correlation(null, Type.NO_LOCK);
+        public static final Correlation NO_LOCK = new Correlation();
 
         @Override
         public boolean equals(Object o) {
@@ -121,7 +127,7 @@ public interface MediaIdentifiable extends MidIdentifiable {
 
         @Override
         public int hashCode() {
-            int result = id.hashCode();
+            int result = id == null ? 0 : id.hashCode();
             result = 31 * result + type.hashCode();
             return result;
         }
