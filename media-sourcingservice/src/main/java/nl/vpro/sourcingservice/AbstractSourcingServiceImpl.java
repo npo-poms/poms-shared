@@ -86,12 +86,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
        AtomicLong uploaded = new AtomicLong(0);
        while(uploaded.get() < fileSize) {
-           uploadChunk(logger, mid, inputStream, uploaded);
+           uploadChunk(logger, mid, inputStream, uploaded, restrictions);
        }
        inputStream.close();
        assert uploaded.get() == fileSize;
 
-       return uploadFinish(logger, mid, uploaded);
+       return uploadFinish(logger, mid, uploaded, restrictions);
    }
 
 
@@ -166,10 +166,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (email != null) {
             body.add("email", email);
         }
-        if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
-            logger.info("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
-            body.add("region",  restrictions.getGeoRestriction().getRegion().name());
-        }
+
+        addRegion(logger, body, restrictions);
+
         body.add("file_size", String.valueOf(fileSize));
         HttpRequest multipart = multipart(mid, body);
         HttpResponse<String> start = client.send(multipart, HttpResponse.BodyHandlers.ofString());
@@ -182,11 +181,20 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback_url={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, getCallbackUrl(mid).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));
     }
 
-    private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded) throws IOException, InterruptedException {
+    private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
+        if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
+            logger.info("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
+            body.add("region",  restrictions.getGeoRestriction().getRegion().name());
+        }
+    }
+
+    private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded, Restrictions restrictions) throws IOException, InterruptedException {
         InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream);
         MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "transfer")
             .addStream("file_chunk", "part", () -> chunkStream);
+
+        addRegion(logger, body, restrictions);
         HttpRequest transferRequest = multipart(mid, body);
         HttpResponse<String> transfer = client.send(
             transferRequest, HttpResponse.BodyHandlers.ofString());
@@ -197,9 +205,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         logger.info("transfer: {} ({}) {}", node.get("status").textValue(), transfer.statusCode(), FileSizeFormatter.DEFAULT.format(l));
     }
 
-    private UploadResponse uploadFinish(SimpleLogger logger, String mid, AtomicLong uploaded) throws IOException, InterruptedException {
+    private UploadResponse uploadFinish(SimpleLogger logger, String mid, AtomicLong uploaded, Restrictions restrictions) throws IOException, InterruptedException {
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "finish");
+
+        addRegion(logger, body, restrictions);
 
         final HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
         meter("finish", finish);
