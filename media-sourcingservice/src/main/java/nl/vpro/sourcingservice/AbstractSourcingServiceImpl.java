@@ -186,10 +186,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
         if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
             if (Arrays.stream(Region.RESTRICTED_REGIONS).anyMatch(r -> r == restrictions.getGeoRestriction().getRegion())) {
-                logger.info("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
+                logger.info("Sending with region {}", restrictions.getGeoRestriction().getRegion().name());
                 body.add("region", restrictions.getGeoRestriction().getRegion().name());
             } else {
-                logger.warn("Ignored geo restriction {}", restrictions.getGeoRestriction());
+                logger.warn("Ignored region {}", restrictions.getGeoRestriction());
             }
         }
     }
