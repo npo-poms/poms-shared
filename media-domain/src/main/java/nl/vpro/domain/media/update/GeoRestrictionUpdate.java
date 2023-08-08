@@ -56,6 +56,13 @@ public class GeoRestrictionUpdate implements Comparable<GeoRestrictionUpdate> {
     public GeoRestrictionUpdate() {
     }
 
+    public static GeoRestrictionUpdate of(Region region, Platform platform) {
+        GeoRestrictionUpdate update = new GeoRestrictionUpdate();
+        update.setRegion(region);
+        update.setPlatform(platform);
+        return update;
+    }
+
     public GeoRestrictionUpdate(GeoRestriction restriction) {
         this.start = restriction.getStart();
         this.stop = restriction.getStop();
