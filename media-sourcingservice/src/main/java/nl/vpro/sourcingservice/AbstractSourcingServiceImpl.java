@@ -79,18 +79,19 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
        Restrictions restrictions,
        final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
 
-        ingest(logger, mid, getFileName(mid), restrictions);
+       //
+       ingest(logger, mid, getFileName(mid), restrictions);
 
-        uploadStart(logger, mid, fileSize, errors, restrictions);
+       uploadStart(logger, mid, fileSize, errors, restrictions);
 
-        AtomicLong uploaded = new AtomicLong(0);
-        while(uploaded.get() < fileSize) {
-            uploadChunk(logger, mid, inputStream, uploaded);
-        }
-        inputStream.close();
-        assert uploaded.get() == fileSize;
+       AtomicLong uploaded = new AtomicLong(0);
+       while(uploaded.get() < fileSize) {
+           uploadChunk(logger, mid, inputStream, uploaded);
+       }
+       inputStream.close();
+       assert uploaded.get() == fileSize;
 
-        return uploadFinish(logger, mid, uploaded);
+       return uploadFinish(logger, mid, uploaded);
    }
 
 
@@ -143,6 +144,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 if (geoRestriction.willBeUnderEmbargo()) {
                     logger.warn("Specified geo restriction {} will be under embargo. This is not yet supported", geoRestriction);
                 }
+                logger.info("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
                 metaData.put("geo_restriction", restrictions.getGeoRestriction().getRegion().name());
             }
         }
@@ -165,6 +167,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             body.add("email", email);
         }
         if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
+            logger.info("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
             body.add("region",  restrictions.getGeoRestriction().getRegion().name());
         }
         body.add("file_size", String.valueOf(fileSize));
