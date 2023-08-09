@@ -66,7 +66,7 @@ public enum Region implements Displayable {
     EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba"),
 
 
-    /** 
+    /**
      * It can be handy to have a region value that effectively doesn't restrict anything. This way there is no need for n
      * null checks and things like that.
      * @since 7.6
@@ -81,6 +81,9 @@ public enum Region implements Displayable {
 
 
     ;
+
+    public static final Region[] RESTRICTED_REGIONS = {NL, NLBES, NLALL, EUROPE, EU};
+
 
 
 

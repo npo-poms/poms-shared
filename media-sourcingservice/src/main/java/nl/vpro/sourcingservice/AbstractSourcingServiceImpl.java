@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.*;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -47,7 +48,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private String baseUrl;
 
 
-
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
     private final String callbackBaseUrl;
@@ -77,21 +77,23 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
    public UploadResponse upload(
        SimpleLogger logger,
        final String mid,
-       Restrictions restrictions,
+       @Nullable Restrictions restrictions,
        final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
 
-        ingest(logger, mid, getFileName(mid), restrictions);
+       final AtomicLong uploaded = new AtomicLong(0);
+       try (inputStream) {
+           ingest(logger, mid, getFileName(mid), restrictions);
 
-        uploadStart(logger, mid, fileSize, errors);
+           uploadStart(logger, mid, fileSize, errors, restrictions);
 
-        AtomicLong uploaded = new AtomicLong(0);
-        while(uploaded.get() < fileSize) {
-            uploadChunk(logger, mid, inputStream, uploaded);
-        }
-        inputStream.close();
-        assert uploaded.get() == fileSize;
 
-        return uploadFinish(logger, mid, uploaded);
+           while (uploaded.get() < fileSize) {
+               uploadChunk(logger, mid, inputStream, uploaded, restrictions);
+           }
+       }
+       assert uploaded.get() == fileSize;
+
+       return uploadFinish(logger, mid, uploaded, restrictions);
    }
 
 
@@ -107,32 +109,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     private void ingest(SimpleLogger logger, String mid, String filename, Restrictions restrictions) throws IOException, InterruptedException {
-        final ObjectNode metaData = MAPPER.createObjectNode();
-        metaData.put("mid", mid);
-        metaData.put("callback_url", getCallbackUrl(mid));
 
-        // I don't get the point of this
-        metaData.put("filename", filename);
-
-        if (restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().getPlatform() == Platform.INTERNETVOD) {
-            GeoRestriction geoRestriction = restrictions.getGeoRestriction();
-            if (geoRestriction.isUnderEmbargo()) {
-                if (geoRestriction.willBePublished()) {
-                    logger.warn("Specified geo restriction {} is under embargo, but will not be. This is not yet supported", geoRestriction);
-                } else {
-                    logger.info("Specified geo restriction {} is under embargo", geoRestriction);
-                }
-            } else {
-                if (geoRestriction.willBeUnderEmbargo()) {
-                    logger.warn("Specified geo restriction {} will be under embargo. This is not yet supported", geoRestriction);
-                }
-                metaData.put("geo_restriction", restrictions.getGeoRestriction().getRegion().name());
-            }
-        }
-        if (restrictions.getAgeRating() != null && restrictions.getAgeRating() != AgeRating.ALL) {
-            logger.info("Specified age rating {} is not supported for audio, and will be ignored", restrictions.getAgeRating());
-        }
-
+        final ObjectNode metaData = metadata(logger, mid, filename, restrictions);
 
         HttpRequest ingestRequest = ingest(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(metaData)));
         HttpResponse<byte[]> ingest = client.send(ingestRequest,
@@ -146,18 +124,53 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         logger.info("ingest {}", response);
     }
 
-    private void uploadStart(SimpleLogger logger, String mid, long fileSize, @Nullable String errors) throws IOException, InterruptedException {
+    private ObjectNode metadata(SimpleLogger logger, String mid, String filename, Restrictions restrictions) {
+         final ObjectNode metaData = MAPPER.createObjectNode();
+        metaData.put("mid", mid);
+        metaData.put("callback_url", getCallbackUrl(mid));
+
+        if (filename != null) {
+            // I don't get the point of this
+            metaData.put("filename", filename);
+        }
+
+        if (restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().getPlatform() == Platform.INTERNETVOD) {
+            GeoRestriction geoRestriction = restrictions.getGeoRestriction();
+            if (geoRestriction.isUnderEmbargo()) {
+                if (geoRestriction.willBePublished()) {
+                    logger.warn("Specified geo restriction {} is under embargo, but will not be. This is not yet supported", geoRestriction);
+                } else {
+                    logger.info("Specified geo restriction {} is under embargo", geoRestriction);
+                }
+            } else {
+                if (geoRestriction.willBeUnderEmbargo()) {
+                    logger.warn("Specified geo restriction {} will be under embargo. This is not yet supported", geoRestriction);
+                }
+                logger.info("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
+                metaData.put("geo_restriction", restrictions.getGeoRestriction().getRegion().name());
+            }
+        }
+        if (restrictions.getAgeRating() != null && restrictions.getAgeRating() != AgeRating.ALL) {
+            logger.info("Specified age rating {} is not supported for audio, and will be ignored", restrictions.getAgeRating());
+        }
+        return metaData;
+    }
+
+    private void uploadStart(SimpleLogger logger, String mid, long fileSize, @Nullable String errors, Restrictions restrictions) throws IOException, InterruptedException {
 
         final String email = Optional.ofNullable(errors)
             .orElse(
                 userService.currentUser().map(User::getEmail)
                     .orElse(defaultEmail)
             );
-        MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
+        final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "start");
         if (email != null) {
             body.add("email", email);
         }
+
+        addRegion(logger, body, restrictions);
+
         body.add("file_size", String.valueOf(fileSize));
         HttpRequest multipart = multipart(mid, body);
         HttpResponse<String> start = client.send(multipart, HttpResponse.BodyHandlers.ofString());
@@ -170,11 +183,24 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback_url={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, getCallbackUrl(mid).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));
     }
 
-    private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded) throws IOException, InterruptedException {
+    private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
+        if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
+            if (Arrays.stream(Region.RESTRICTED_REGIONS).anyMatch(r -> r == restrictions.getGeoRestriction().getRegion())) {
+                logger.info("Sending with region {}", restrictions.getGeoRestriction().getRegion().name());
+                body.add("region", restrictions.getGeoRestriction().getRegion().name());
+            } else {
+                logger.warn("Ignored region {}", restrictions.getGeoRestriction());
+            }
+        }
+    }
+
+    private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded, Restrictions restrictions) throws IOException, InterruptedException {
         InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream);
         MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "transfer")
             .addStream("file_chunk", "part", () -> chunkStream);
+
+        addRegion(logger, body, restrictions);
         HttpRequest transferRequest = multipart(mid, body);
         HttpResponse<String> transfer = client.send(
             transferRequest, HttpResponse.BodyHandlers.ofString());
@@ -185,9 +211,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         logger.info("transfer: {} ({}) {}", node.get("status").textValue(), transfer.statusCode(), FileSizeFormatter.DEFAULT.format(l));
     }
 
-    private UploadResponse uploadFinish(SimpleLogger logger, String mid, AtomicLong uploaded) throws IOException, InterruptedException {
+    private UploadResponse uploadFinish(SimpleLogger logger, String mid, AtomicLong uploaded, Restrictions restrictions) throws IOException, InterruptedException {
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "finish");
+
+        addRegion(logger, body, restrictions);
 
         final HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
         meter("finish", finish);
@@ -209,12 +237,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     protected void meter(String name, HttpResponse<?> response) {
         meterRegistry.counter("sourcing." + implName() + "." + name , "status", String.valueOf(response.statusCode())).increment();
-
     }
 
     protected String getCallbackUrl(String mid) {
         return callbackBaseUrl.formatted(mid);
-
     }
 
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
