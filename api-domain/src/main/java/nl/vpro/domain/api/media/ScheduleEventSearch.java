@@ -27,12 +27,12 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 /**
  * @author rico
  */
+@Getter
 @XmlType(name = "scheduleEventSearchType", propOrder = {"begin", "end", "channel", "net", "rerun"})
 @EqualsAndHashCode(callSuper = true, exclude = {"begin", "end"})
 public class ScheduleEventSearch extends RangeMatcher<Instant, ScheduleEvent> {
 
     @XmlElement
-    @Getter
     @Setter
     private Channel channel;
 
