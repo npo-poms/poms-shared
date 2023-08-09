@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -84,7 +85,7 @@ public enum AgeRating implements Displayable, XmlValued {
 
 
     public static AgeRating xmlValueOf(String text) {
-        if (text == null || text.length() == 0) {
+        if (text == null || text.isEmpty()) {
             return null;
         }
         if (Character.isDigit(text.charAt(0))) {
@@ -120,8 +121,8 @@ public enum AgeRating implements Displayable, XmlValued {
     }
 
     @Override
-    public Optional<String> getIcon() {
-        return Optional.of("/kijkwijzer/icons/agerating/" + getXmlValue().toLowerCase() + ".svg");
+    public Optional<URI> getIcon() {
+        return Optional.of(URI.create("/kijkwijzer/icons/agerating/" + getXmlValue().toLowerCase() + ".svg"));
     }
     @Override
     public Optional<String> getIconClass() {

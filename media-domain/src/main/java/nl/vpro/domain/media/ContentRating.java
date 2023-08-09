@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.net.URI;
 import java.util.*;
 
 import javax.xml.bind.annotation.XmlEnum;
@@ -67,8 +68,8 @@ public enum ContentRating implements Displayable {
 
 
     @Override
-    public Optional<String> getIcon() {
-        return Optional.of("/kijkwijzer/icons/contentrating/" + name().toLowerCase() + ".svg");
+    public Optional<URI> getIcon() {
+        return Optional.of(URI.create("/kijkwijzer/icons/contentrating/" + name().toLowerCase() + ".svg"));
     }
     @Override
     public Optional<String> getIconClass() {
