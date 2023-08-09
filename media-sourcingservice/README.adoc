@@ -31,6 +31,7 @@ Code has no form of validation. If I send an empty ingest request, I'll simply c
 "file_size": {
 "description": "description",
 "type": "string"
+}
 ----
 
 
@@ -43,7 +44,7 @@ This does it. Client generation is not useable for this api
 
 == Direct implementation
 
-So, we'll keep it simple, and this will be our approach
+So, we'll keep it simple, and the following will be our approach
 
 There are only 2 calls of importance for now
 
@@ -52,7 +53,7 @@ There are only 2 calls of importance for now
 * talks to our backend api (it shouldn't)
 * it registers a 'callback_url'  (I don't see the point)
 
-/ingest/<mid>/multipart
+/ingest/<mid>/multipart[-assetonly]
 
 -  uploads the actual file, via 3 or more https multipart (!) posts.
 
@@ -60,9 +61,22 @@ We now are implementing it just with an `java.net.http.HttpClient`. See `nl.vpro
 
 If you try this, the last call will fail notifying us that no callback_url was available.
 
+When using the `-assetonly` variant the only feedback to POMS seems to be a call on /exists. This is acceptable, but uncomfortable (and superflouous), because we have 3 environments and there are only 2 for the sourcing service which are tightly linked to production and acceptation environments. Hence, the full route can't be made working fulling on the test environment.
+
+== GEO restrictions
+
+Georestictions (on region) can be supplied and should end up in the 'redirect service'. Oddly, that can happen on both the ingest and the -assetonly endpoints. For now it is supplied on all these, but I could not confirm that it actually works yet.
+
+== Other type of restrictions
 
 
+We also could have other restrictions, like 'portal' restrictions and age restrictions.
 
+=== Portal-restrictions
+Portal restrictions  hard to enforce. Perhaps the redirect service could do something with content security policies. It always used to be just meta-data. If a certain poms item has a portal restriction, but is used elsewhere, that only human interactions could resolve that.
+
+=== Age restrictions
+Age restrictions could have influence on the time of the day that something is playable. E.g. if content is not suitable for children, it could only be viewed or listened after 19:00. This is not implemented yet, at least not in the redirect service or sourcing service (which are responsible for audio)
 
 
 
