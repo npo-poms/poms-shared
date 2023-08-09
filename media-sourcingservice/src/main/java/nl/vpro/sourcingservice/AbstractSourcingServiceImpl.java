@@ -82,10 +82,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
        final AtomicLong uploaded = new AtomicLong(0);
        try (inputStream) {
-           ingest(logger, mid, getFileName(mid), restrictions);
+
+           // this is not needed (as I've tested)
+           //ingest(logger, mid, getFileName(mid), restrictions);
 
            uploadStart(logger, mid, fileSize, errors, restrictions);
-
 
            while (uploaded.get() < fileSize) {
                uploadChunk(logger, mid, inputStream, uploaded, restrictions);
