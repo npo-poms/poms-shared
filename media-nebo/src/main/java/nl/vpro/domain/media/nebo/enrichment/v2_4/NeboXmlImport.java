@@ -8,6 +8,8 @@
 
 package nl.vpro.domain.media.nebo.enrichment.v2_4;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.Program;
@@ -33,6 +35,7 @@ import nl.vpro.domain.media.nebo.base.ImportType;
  * &lt;/complexType>
  * </pre>
  */
+@Getter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
         "aflevering"
@@ -55,10 +58,6 @@ public class NeboXmlImport {
 
     public NeboXmlImport(Program program) {
         this.aflevering = new AfleveringType(program);
-    }
-
-    public AfleveringType getAflevering() {
-        return aflevering;
     }
 
 
