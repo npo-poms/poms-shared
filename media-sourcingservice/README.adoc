@@ -53,6 +53,8 @@ There are only 2 calls of importance for now
 * talks to our backend api (it shouldn't)
 * it registers a 'callback_url'  (I don't see the point)
 
+This calls seems not to be essential. We get NEP callbacks also without it (at least when using -assetonly)
+
 /ingest/<mid>/multipart[-assetonly]
 
 -  uploads the actual file, via 3 or more https multipart (!) posts.
