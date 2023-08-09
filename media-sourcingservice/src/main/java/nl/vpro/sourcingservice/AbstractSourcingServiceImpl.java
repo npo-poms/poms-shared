@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.*;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -76,19 +77,19 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
    public UploadResponse upload(
        SimpleLogger logger,
        final String mid,
-       Restrictions restrictions,
+       @Nullable Restrictions restrictions,
        final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
 
        final AtomicLong uploaded = new AtomicLong(0);
        try (inputStream) {
-           ingest(logger, mid, getFileName(mid), restrictions);
+
+           // this is not needed (as I've tested)
+           //ingest(logger, mid, getFileName(mid), restrictions);
 
            uploadStart(logger, mid, fileSize, errors, restrictions);
 
-
            while (uploaded.get() < fileSize) {
                uploadChunk(logger, mid, inputStream, uploaded, restrictions);
-
            }
        }
        assert uploaded.get() == fileSize;
@@ -185,8 +186,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
         if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
-            logger.info("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
-            body.add("region",  restrictions.getGeoRestriction().getRegion().name());
+            if (Arrays.stream(Region.RESTRICTED_REGIONS).anyMatch(r -> r == restrictions.getGeoRestriction().getRegion())) {
+                logger.info("Sending with region {}", restrictions.getGeoRestriction().getRegion().name());
+                body.add("region", restrictions.getGeoRestriction().getRegion().name());
+            } else {
+                logger.warn("Ignored region {}", restrictions.getGeoRestriction());
+            }
         }
     }
 

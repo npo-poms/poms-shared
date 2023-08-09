@@ -41,7 +41,7 @@ import static nl.vpro.poms.shared.Headers.NPO_DISPATCHED_TO;
 import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
 
 /**
- * See also https://jira.vpro.nl/browse/MSE-4435
+ * See also <a href="https://jira.vpro.nl/browse/MSE-4435">JIRA</a>
  * @author Michiel Meeuwissen
  * @since 5.6
  */
@@ -130,8 +130,14 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             return itemize(
                 NEPItemizeRequest.builder()
                     .identifier(channel)
-                    .starttime(NEPItemizeRequest.fromInstant(start).orElseThrow(IllegalArgumentException::new))
-                    .endtime(NEPItemizeRequest.fromInstant(end).orElseThrow(IllegalArgumentException::new))
+                    .starttime(
+                        NEPItemizeRequest.fromInstant(start)
+                            .orElseThrow(IllegalArgumentException::new)
+                    )
+                    .endtime(
+                        NEPItemizeRequest.fromInstant(end)
+                            .orElseThrow(IllegalArgumentException::new)
+                    )
                     .max_bitrate(max_bitrate)
                     .build(),
                 itemizeLiveUrl,

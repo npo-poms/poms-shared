@@ -6,10 +6,16 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
+import java.net.URI;
+import java.util.Optional;
+
 import javax.xml.bind.annotation.XmlEnum;
 
 import org.apache.commons.lang3.StringUtils;
+import org.meeuw.i18n.countries.Country;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
+import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.i18n.Displayable;
 
@@ -20,14 +26,18 @@ import nl.vpro.i18n.Displayable;
 @Getter
 @XmlEnum
 //@XmlJavaTypeAdapter(value = RegionAdapter.class)
-public enum Region implements Displayable {
-
+public enum Region implements Displayable, org.meeuw.i18n.regions.Region {
 
     /**
      * Netherlands
      */
     @XmlDocumentation("Means that this object can only be played in the Netherlands")
-    NL("Nederland"),
+    NL("Nederland") {
+        @Override
+        public Optional<URI> getIcon() {
+            return Country.of(CountryCode.NL).getIcon();
+        }
+    },
 
     /**
      * Netherlands and communities in the Caribbean
@@ -49,23 +59,34 @@ public enum Region implements Displayable {
      * @deprecated Not supported by VMV
      */
     @Deprecated
-    @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not supported by the NPO player)")
-    BENELUX("Benelux"),
+    @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not supported by the NPO player). It may be supported by redirect service though.")
+    BENELUX("Benelux") {
+        @Override
+        public boolean display() {
+            return true;
+        }
+    },
 
     /**
      * Europe
      * @since 5.6
      */
     @XmlDocumentation("Means that this object can only be played in Europe")
-    EUROPE("Europa"),
+    EUROPE("Europa") {
+
+    },
 
     /**
      * European Union incl. BES-gemeentes, Curaçao, Sint Maarten en Aruba
      * @since 5.6
      */
-    @XmlDocumentation("European Union incl. BES gemeentes, Curaçao, St. Maarten en Aruba")
-    EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba"),
-
+    @XmlDocumentation("European Union incl. BES-gemeentes, Curaçao, Sint Maarten en Aruba")
+    EU("De EU inclusief de BES-gemeenten, Curaçao, Sint Maarten en Aruba") {
+        @Override
+        public Optional<URI> getIcon() {
+            return Country.of(CountryCode.EU).getIcon();
+        }
+    },
 
     /**
      * It can be handy to have a region value that effectively doesn't restrict anything. This way there is no need for
@@ -109,4 +130,23 @@ public enum Region implements Displayable {
 
      }
 
+    @Override
+    public String getCode() {
+        return name();
+    }
+
+    @Override
+    public Type getType() {
+        return Type.UNDEFINED;
+    }
+
+    @Override
+    public String getName() {
+        return displayName;
+    }
+
+    @Override
+    public Optional<URI> getIcon() {
+        return Displayable.super.getIcon();
+    }
 }
