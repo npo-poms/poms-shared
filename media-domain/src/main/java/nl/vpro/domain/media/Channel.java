@@ -29,7 +29,7 @@ public enum Channel implements Displayable, XmlValued {
     NED1(VIDEO, "https://www.npostart.nl/live/npo-1", 1951) {
         @Override
         public String toString() {
-            return "Nederland 1";
+            return "NPO 1";
         }
 
         @Override
@@ -48,7 +48,7 @@ public enum Channel implements Displayable, XmlValued {
     NED2(VIDEO,  "https://www.npostart.nl/live/npo-2", 1964) {
         @Override
         public String toString() {
-            return "Nederland 2";
+            return "NPO 2";
         }
 
         @Override
@@ -66,7 +66,7 @@ public enum Channel implements Displayable, XmlValued {
     NED3(VIDEO, 1988) {
         @Override
         public String toString() {
-            return "Nederland 3 & Zapp";
+            return "NPO 3";
         }
 
         @Override
