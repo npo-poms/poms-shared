@@ -169,12 +169,12 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public String streamAccessLive(String channel, String ip, Duration duration) throws NEPException {
+    public Optional<String> streamAccessLive(String channel, String ip, Duration duration) throws NEPException {
         return samService.get().streamAccessLive(channel, ip, duration);
     }
 
     @Override
-    public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) throws NEPException {
+    public Optional<String> streamAccessMid(String mid, boolean drm, String ip, Duration duration) throws NEPException {
         return samService.get().streamAccessMid(mid, drm, ip, duration);
     }
 

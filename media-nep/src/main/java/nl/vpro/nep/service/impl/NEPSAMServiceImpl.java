@@ -3,8 +3,7 @@ package nl.vpro.nep.service.impl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
@@ -107,7 +106,7 @@ public class NEPSAMServiceImpl implements NEPSAMService{
     }
 
     @Override
-    public String streamAccessLive(String channel,  String ip, Duration duration) throws NEPException {
+    public Optional<String> streamAccessLive(String channel,  String ip, Duration duration) throws NEPException {
         try {
             AccessApi streamApiLive  = getStreamApi(baseUrlLive, authenticatorLive);
 
@@ -116,14 +115,14 @@ public class NEPSAMServiceImpl implements NEPSAMService{
             log.debug("Using profile {}", profile);
             StreamAccessResponseItem streamAccessResponseItem = streamApiLive.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerLive, platformLive,  profile, channel, request);
             Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
-            return (String) attributes.get("url");
+            return Optional.of((String) attributes.get("url"));
         } catch (Exception e) {
             throw new NEPException(e, e.getMessage());
         }
     }
 
     @Override
-    public String streamAccessMid(String mid, boolean drm, String ip, Duration duration) throws NEPException {
+    public Optional<String> streamAccessMid(String mid, boolean drm, String ip, Duration duration) throws NEPException {
         try {
             AccessApi streamApiMid = getStreamApi(baseUrlMid, authenticatorMid);
 
@@ -133,7 +132,7 @@ public class NEPSAMServiceImpl implements NEPSAMService{
             log.debug("Using profile {}", profile);
             StreamAccessResponseItem streamAccessResponseItem = streamApiMid.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerMid, platformMid,  profile, mid, request);
             Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
-            return (String) attributes.get("url");
+            return Optional.of((String) attributes.get("url"));
         } catch (Exception e) {
             throw new NEPException(e, e.getMessage());
         }

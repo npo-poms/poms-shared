@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
 
-import nl.vpro.nep.service.exception.NEPException;
-
 import org.junit.jupiter.api.Test;
+
+import nl.vpro.nep.service.exception.NEPException;
 
 
 /**
@@ -40,7 +40,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
     @Test
     public void streamUrlForMid() throws NEPException {
-        String streamUrl = impl.streamAccessMid("VPWON_1271554", true, "145.58.169.92", null);
+        String streamUrl = impl.streamAccessMid("VPWON_1271554", true, "145.58.169.92", null).orElseThrow();
         log.info("{}", streamUrl);
 
     }
@@ -48,7 +48,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
     @Test
     public void streamUrlForLive() throws NEPException {
-        String streamUrl = impl.streamAccessLive("npo-1dvr", "145.58.169.92", Duration.ofHours(24));
+        String streamUrl = impl.streamAccessLive("npo-1dvr", "145.58.169.92", Duration.ofHours(24)).orElseThrow();
         log.info("{}", streamUrl);
 
     }
