@@ -13,13 +13,14 @@ import nl.vpro.i18n.Displayable;
 /**
  * @author Michiel Meeuwissen
  */
+@Getter
 @XmlEnum
 @XmlType(name = "platformTypeEnum")
 public enum Platform implements Displayable {
     /**
      * Visible on internet. May also be used for audio?
      */
-    INTERNETVOD(true, "Beschikbaar op internet") {
+    INTERNETVOD(true, "Internet") {
         @Override
         public boolean matches(Platform platform) {
             return platform == null || super.matches(platform);
@@ -29,7 +30,7 @@ public enum Platform implements Displayable {
     /**
      *
      */
-    TVVOD(true, "Beschikbaar voor kabelaars"),
+    TVVOD(true, "Kabelaars"),
 
     /**
      * NLZiet,platform "extra" in cooperation with dutch commercial broadcasters
@@ -49,7 +50,6 @@ public enum Platform implements Displayable {
     };
 
 
-    @Getter
     private final boolean streamingPlatform;
 
     @Getter
