@@ -84,7 +84,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
 
     @lombok.Builder(builderClassName = "Builder")
     private RecursiveMemberRef(
-        @NonNull String childMid,
+        @Nullable String childMid,
         @NonNull String parentMid,
         @NonNull MediaType parentType,
         Integer index,
@@ -106,7 +106,8 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
     }
 
 
-    private static RecursiveMemberRef.Builder builderOf(String childMid, MediaObject parent, Set<StackElement> memberStack) {
+    private static RecursiveMemberRef.Builder builderOf(
+        @Nullable String childMid, MediaObject parent, Set<StackElement> memberStack) {
         RecursiveMemberRef.Builder builder =  RecursiveMemberRef.builder()
             .childMid(childMid);
 
@@ -296,7 +297,7 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         return result;
     }
 
-    private static class StackElement {
+    protected static class StackElement {
         private final String child;
         private final String parent;
         private final MemberRefType type;
