@@ -41,7 +41,8 @@ public enum Platform implements Displayable {
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
      *  Zie <a href="https://jira.vpro.nl/browse/MSE-2742">MSE-2742</a> Blijkbaar nooit gebruikt.
      */
-    @Deprecated
+
+    @SuppressWarnings("DeprecatedIsStillUsed") @Deprecated
     NPOPLUSVOD(false, "NPO Plus") {
         @Override
         public boolean display() {
