@@ -20,6 +20,7 @@ import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.nep.sam.api.AccessApi;
+import nl.vpro.nep.sam.invoker.ApiException;
 import nl.vpro.nep.sam.model.*;
 import nl.vpro.nep.service.NEPSAMService;
 import nl.vpro.nep.service.exception.NEPException;
@@ -130,10 +131,16 @@ public class NEPSAMServiceImpl implements NEPSAMService{
             StreamAccessItem request = createStreamAccessItem(ip, duration);
             String profile = drm ? drmProfileMid : noDrmProfileMid;
             log.debug("Using profile {}", profile);
-            StreamAccessResponseItem streamAccessResponseItem = streamApiMid.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerMid, platformMid,  profile, mid, request);
+            StreamAccessResponseItem streamAccessResponseItem = streamApiMid.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerMid, platformMid, profile, mid, request);
             Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
             return Optional.of((String) attributes.get("url"));
+        } catch (ApiException e) {
+            if (e.getCode() == 404) {
+                return Optional.empty();
+            }
+            throw new NEPException(e, e.getResponseBody());
         } catch (Exception e) {
+
             throw new NEPException(e, e.getMessage());
         }
     }
