@@ -12,6 +12,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.*;
 
