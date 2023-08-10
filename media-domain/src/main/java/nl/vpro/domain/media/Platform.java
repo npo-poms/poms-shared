@@ -33,7 +33,7 @@ public enum Platform implements Displayable {
     TVVOD(true, "Kabelaars"),
 
     /**
-     * NLZiet,platform "extra" in cooperation with dutch commercial broadcasters
+     * NLZiet,platform "extra" in cooperation with Dutch commercial broadcasters
      */
     PLUSVOD(true, "Nlziet/NPO Start Plus"),
 
