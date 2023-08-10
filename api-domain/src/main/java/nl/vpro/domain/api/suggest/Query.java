@@ -4,7 +4,13 @@
  */
 package nl.vpro.domain.api.suggest;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+
 import java.util.Date;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,15 +21,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Roelof Jan Koekoek
  * @since 3.2
  */
+@Log4j2
 public class Query {
 
+    @Getter
     @JsonProperty
     private String text;
 
+    @Getter
+    @Setter
     @JsonProperty
     private String profile;
 
     @JsonProperty
+    @Getter
+    @Setter
+    // Why not Instant?
     private Date sortDate = new Date();
 
     @JsonProperty
@@ -45,9 +58,11 @@ public class Query {
         this(text, null);
     }
 
-    public static String queryId(String text, String profile) {
-        if(profile != null && !profile.isEmpty()) {
+    public static String queryId(String text, @Nullable String profile) {
+        if (profile != null && !profile.isEmpty()) {
             return profile + "||" + text;
+        } else {
+            log.warn("See NPA-637. This doesn't work.");
         }
 
         return text;
@@ -58,32 +73,11 @@ public class Query {
         return queryId(text, profile);
     }
 
-
-    public String getText() {
-        return text;
-    }
-
     public void setText(String text) {
         this.text = cleanUp(text);
     }
 
-    public String getProfile() {
-        return profile;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
-    public Date getSortDate() {
-        return sortDate;
-    }
-
-    public void setSortDate(Date sortDate) {
-        this.sortDate = sortDate;
-    }
-
-    private String cleanUp(String input) {
+    private static String cleanUp(String input) {
         return input.toLowerCase().replaceAll("[^\\p{IsAlphabetic}|\\d]+", " ").trim();
     }
 }
