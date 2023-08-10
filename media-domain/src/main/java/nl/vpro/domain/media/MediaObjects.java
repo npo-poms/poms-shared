@@ -369,18 +369,10 @@ public class MediaObjects {
         StringBuilder sb = new StringBuilder();
         if (media.getAgeRating() != null) {
             switch (media.getAgeRating()) {
-                case _6:
-                    sb.append('2');
-                    break;
-                case _9:
-                    sb.append('5');
-                    break;
-                case _12:
-                    sb.append('3');
-                    break;
-                case _16:
-                    sb.append('4');
-                    break;
+                case _6 -> sb.append('2');
+                case _9 -> sb.append('5');
+                case _12 -> sb.append('3');
+                case _16 -> sb.append('4');
             }
         }
 
@@ -390,7 +382,7 @@ public class MediaObjects {
             }
         }
 
-        return sb.length() > 0 ? sb.toString() : null;
+        return !sb.isEmpty() ? sb.toString() : null;
     }
 
     public static Long idFromUrn(String urn) {
@@ -428,8 +420,7 @@ public class MediaObjects {
                     matchBroadcasters(broadcasterService, memberRef.getGroup(), handled);
                 }
             }
-            if (mediaObject instanceof Program) {
-                Program p = (Program) mediaObject;
+            if (mediaObject instanceof Program p) {
                 for (MemberRef memberRef : p.getEpisodeOf()) {
                     if (memberRef.getGroup() != null) {
                         matchBroadcasters(broadcasterService, memberRef.getGroup(), handled);
@@ -440,7 +431,7 @@ public class MediaObjects {
     }
 
     public static void removeLocations(@NonNull MediaObject mediaObject) {
-        while (mediaObject.getLocations().size() > 0) {
+        while (!mediaObject.getLocations().isEmpty()) {
             mediaObject.removeLocation(mediaObject.getLocations().first());
         }
     }
@@ -456,16 +447,15 @@ public class MediaObjects {
     public static Instant getSortInstant(@NonNull MediaObject mo) {
         if (mo instanceof Group) {
             return mo.sortInstant;
-        } else if (mo instanceof Segment) {
-            Segment segment = (Segment) mo;
+        } else if (mo instanceof Segment segment) {
             if (segment.parent != null) {
                 return getSortInstant(segment.parent);
             }
         }
         Instant date = null;
-        if (mo instanceof Program) {
-            Program p = (Program) mo;
-            if (p.scheduleEvents != null && p.scheduleEvents.size() > 0) {
+        if (mo instanceof Program p) {
+
+            if (p.scheduleEvents != null && !p.scheduleEvents.isEmpty()) {
                 List<ScheduleEvent> list = new ArrayList<>(p.scheduleEvents);
                 list.sort(Collections.reverseOrder());
                 date = list.stream()
@@ -477,7 +467,7 @@ public class MediaObjects {
             }
         }
         if (date == null) {
-            if (mo.predictions != null && mo.predictions.size() > 0) {
+            if (mo.predictions != null && !mo.predictions.isEmpty()) {
                 for (Prediction p : mo.predictions) {
                     if (p.getPublishStartInstant() != null && (date == null || p.getPublishStartInstant().isBefore(date))) {
                         date = p.getPublishStartInstant();
@@ -1204,7 +1194,7 @@ public class MediaObjects {
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
                         .findFirst();
-                    if (!matchingLocation.isPresent()) {
+                    if (matchingLocation.isEmpty()) {
                         log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, mediaObject.mid);
                         prediction.setState(Prediction.State.REVOKED);
                         markForRepublication(mediaObject, "realized prediction");
