@@ -1,7 +1,7 @@
 package nl.vpro.validation;
 
 /**
- * Marks a javax.constraint as only relevant for the database layer.
+ * Marks a {@code javax.constraint} as only relevant for the database layer.
  * <p>
  *
  * @author Michiel Meeuwissen

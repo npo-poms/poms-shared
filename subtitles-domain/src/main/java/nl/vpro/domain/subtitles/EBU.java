@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 /**
- * Code borrowed from https://github.com/JDaren/subtitleConverter
+ * Code borrowed from <a href="https://github.com/JDaren/subtitleConverter">JDaren@github</a>
  * <p>
  * Adapted so it returns a stream of our {@link Cue} objects
  * @author Michiel Meeuwissen

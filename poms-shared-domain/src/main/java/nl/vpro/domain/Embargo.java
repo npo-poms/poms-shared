@@ -83,11 +83,7 @@ public interface Embargo {
             return false;
         }
         Instant start = getPublishStartInstant();
-        if (start != null && start.isAfter(now)) {
-            return false;
-        }
-
-        return true;
+        return start == null || !start.isAfter(now);
     }
 
     /**

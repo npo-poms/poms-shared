@@ -1,10 +1,5 @@
 package nl.vpro.domain.subtitles;
 
-/**
- * @author Michiel Meeuwissen
- * @since 4.8
- */
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 

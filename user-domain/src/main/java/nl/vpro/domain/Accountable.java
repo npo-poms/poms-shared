@@ -15,5 +15,4 @@ public interface Accountable extends Changeable {
     Editor getLastModifiedBy();
     void setLastModifiedBy(Editor lastModifiedBy);
 
-
 }

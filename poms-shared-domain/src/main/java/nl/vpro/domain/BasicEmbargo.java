@@ -11,12 +11,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
+@Getter
 public class BasicEmbargo implements MutableEmbargo<BasicEmbargo> {
     @Nullable
-    @Getter
     private Instant publishStartInstant;
+
     @Nullable
-    @Getter
     private Instant publishStopInstant;
 
     public BasicEmbargo(@Nullable Instant publishStartInstant, @Nullable Instant publishStopInstant) {

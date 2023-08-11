@@ -36,13 +36,13 @@ public class OwnableLists {
      * Return the element to display
      * @param ownableSet the collection of all the sets
      * @param owner to match
-     * @param <T>
+     * @param <T> Type of the elements
      * @return the element matching the given owner or the one to display if nothing matches.
      */
     public static <T extends Ownable> Optional<T> filterByOwnerOrFirst(@Nullable SortedSet<T> ownableSet, @NonNull OwnerType owner){
         Optional<T> filtered = filterByOwner(ownableSet, owner);
 
-        if (! filtered.isPresent() && ! ownableSet.isEmpty()) {
+        if (filtered.isEmpty() && ownableSet != null && ! ownableSet.isEmpty()) {
             return Optional.of(ownableSet.first());
         }
         return filtered;
@@ -51,7 +51,7 @@ public class OwnableLists {
      * Return the element to display
      * @param ownableSet the collection of all the sets
      * @param owner to match
-     * @param <T>
+     * @param <T> Type of the elements
      * @return the element matching the given owner or the one to display if nothing matches.
      */
     public static <T extends Ownable> Optional<T>  filterByOwner(@Nullable Collection<T> ownableSet, @NonNull OwnerType owner){

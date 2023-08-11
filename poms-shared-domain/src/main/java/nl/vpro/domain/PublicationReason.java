@@ -131,7 +131,7 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         for (PublicationReason reason : reasons) {
 
 
-            boolean needsSplitter = builder.length() > 0;
+            boolean needsSplitter = !builder.isEmpty();
             if (prevReason != null) {
                 if (DateUtils.isAfter(prevReason.publishDate, reason.publishDate)) {
                     log.warn("The list seems to be ordered wrong");
@@ -159,7 +159,7 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
     public static PublicationReason parseOne(final String string, String logContext) {
         final String[] reasonAndDate = string.split(FIELD_SPLITTER, 2);
         final Instant instant;
-        if (reasonAndDate.length > 1 && reasonAndDate[1].length() > 0) {
+        if (reasonAndDate.length > 1 && !reasonAndDate[1].isEmpty()) {
             instant = Instant.ofEpochMilli(Long.parseLong(reasonAndDate[1]));
         } else {
             log.warn("{} No time found in '{}'. Creating a publication reason without publish date", logContext, string);

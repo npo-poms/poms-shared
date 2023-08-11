@@ -14,10 +14,6 @@ import nl.vpro.domain.support.License;
 public class LicenseValidator implements ConstraintValidator<LicenseId, String> {
 
     @Override
-    public void initialize(LicenseId license) {
-    }
-
-    @Override
     public boolean isValid(String id, ConstraintValidatorContext constraintValidatorContext) {
         return Arrays.stream(License.values()).anyMatch(l -> l.getId().equals(id));
     }

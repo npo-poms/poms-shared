@@ -11,9 +11,6 @@ import nl.vpro.domain.Embargo;
  */
 public class EmbargoValidator implements ConstraintValidator<ValidEmbargo, Embargo> {
 
-    @Override
-    public void initialize(ValidEmbargo publishable) {
-    }
 
     @Override
     public boolean isValid(Embargo value, ConstraintValidatorContext constraintValidatorContext) {
