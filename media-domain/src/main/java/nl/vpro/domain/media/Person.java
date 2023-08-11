@@ -22,6 +22,7 @@ import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.jackson2.Views;
 import nl.vpro.validation.NoHtml;
 
+@Getter
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "personType",
@@ -60,7 +61,6 @@ public class Person extends Credits implements PersonInterface {
 
     @NoHtml
     @XmlElement
-    @Getter
     @Setter
     protected String givenName;
 
