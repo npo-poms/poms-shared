@@ -43,7 +43,12 @@ public enum OwnerType implements Displayable {
      * @deprecated NEBO doesn't exist any more
      */
     @Deprecated
-    NEBO("Nebo"),
+    NEBO("Nebo") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    },
 
     /**
      * MSE-3358
@@ -100,7 +105,12 @@ public enum OwnerType implements Displayable {
      * @deprecated Use {@link #BEELDENGELUID}
      */
     @Deprecated
-    IMMIX("Immix"),
+    IMMIX("Immix") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    },
 
 
     /**
@@ -116,7 +126,12 @@ public enum OwnerType implements Displayable {
      * @deprecated  Radiobox is replaced by Prepr. See {@link #AUTHORITY}
      */
     @Deprecated
-    RADIOBOX("Radiobox 2"),
+    RADIOBOX("Radiobox 2") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    },
 
     /**
      * @since 5.3
