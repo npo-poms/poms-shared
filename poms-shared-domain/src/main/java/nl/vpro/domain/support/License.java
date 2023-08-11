@@ -102,7 +102,7 @@ public class License implements Displayable, Serializable { // Not an enum, beca
     private static final License[] ALL;
 
     static {
-        List<License> alls = new ArrayList<>();
+        final List<License> alls = new ArrayList<>();
         for(Field field : License.class.getDeclaredFields()) {
             if (Modifier.isStatic(field.getModifiers()) && License.class.isAssignableFrom(field.getType())) {
                 try {

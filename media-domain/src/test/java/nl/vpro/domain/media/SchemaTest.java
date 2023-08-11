@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,7 @@ import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.subtitles.SubtitlesWorkflow;
+import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 
@@ -153,6 +155,12 @@ public class SchemaTest extends AbstractSchemaTest {
     }
 
     @Test
+    public void testLicense() {
+        //testMediaEnum("targetGroupEnum", TargetGroupType.class);
+    }
+
+
+    @Test
     public void testWorkflow() {
         testSharedEnum("workflowEnumType", Workflow.class);
     }
@@ -165,6 +173,14 @@ public class SchemaTest extends AbstractSchemaTest {
     @Test
     public void testSubtitlesWorkflow() {
         testSharedEnum("subtitlesWorkflowEnum", SubtitlesWorkflow.class);
+    }
+
+    @Test
+    public void testLicenseEnum() {
+        testEnum("/nl/vpro/domain/media/vproShared.xsd", "licenseEnum",
+            () -> Arrays.stream(License.values())
+                .filter(License::display)
+                .map(License::getId).toList());
     }
 
     protected <T extends Enum<T>> void testMediaEnum(String enumTypeName, Class<T> enumClass)  {

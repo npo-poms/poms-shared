@@ -658,19 +658,6 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:simpleType name="license">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="COPYRIGHTED"/>
-      <xs:enumeration value="PUBLIC_DOMAIN"/>
-      <xs:enumeration value="CC_BY"/>
-      <xs:enumeration value="CC_BY_SA"/>
-      <xs:enumeration value="CC_BY_ND"/>
-      <xs:enumeration value="CC_BY_NC"/>
-      <xs:enumeration value="CC_BY_NC_SA"/>
-      <xs:enumeration value="CC_BY_NC_ND"/>
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:complexType name="groupTableType">
     <xs:sequence>
       <xs:element ref="group" minOccurs="1" maxOccurs="unbounded"/>
