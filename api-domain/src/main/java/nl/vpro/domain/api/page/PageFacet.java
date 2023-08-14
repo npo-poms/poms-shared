@@ -32,9 +32,4 @@ public class PageFacet extends TextFacet<PageSearch, Page> {
     public PageSearch getFilter() {
         return this.filter;
     }
-
-    @Override
-    public void setFilter(PageSearch filter) {
-        this.filter = filter;
-    }
 }
