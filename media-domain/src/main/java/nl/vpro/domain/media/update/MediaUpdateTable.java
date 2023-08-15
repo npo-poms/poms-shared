@@ -110,9 +110,13 @@ public class MediaUpdateTable implements Iterable<MediaUpdate<?>>, Streamable<Me
         return result;
     }
 
+    public int size() {
+        return getProgramTable().size() + getGroupTable().size();
+    }
+
     @Override
     public Stream<MediaUpdate<?>> stream() {
-        return StreamSupport.stream(Spliterators.spliterator(iterator(), getProgramTable().size() + getGroupTable().size(), Spliterator.ORDERED), false);
+        return StreamSupport.stream(Spliterators.spliterator(iterator(), size(), Spliterator.ORDERED), false);
     }
 
     @NonNull

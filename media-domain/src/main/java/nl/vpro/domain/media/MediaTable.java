@@ -342,9 +342,13 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
         return clone;
     }
 
+    public int size() {
+        return getProgramTable().size() + getGroupTable().size();
+    }
+
     @Override
     public Stream<MediaObject> stream() {
-        return StreamSupport.stream(Spliterators.spliterator(iterator(), getProgramTable().size() + getGroupTable().size(), Spliterator.ORDERED), false);
+        return StreamSupport.stream(Spliterators.spliterator(iterator(), size(), Spliterator.ORDERED), false);
     }
 
 }
