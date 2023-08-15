@@ -91,10 +91,10 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
      * @since 5.9
      */
     public MediaTable add(MediaObject mo) {
-        if (mo instanceof Program) {
-            return addProgram((Program) mo);
-        } else if (mo instanceof Group) {
-            return addGroup((Group) mo);
+        if (mo instanceof Program program) {
+            return addProgram(program);
+        } else if (mo instanceof Group group) {
+            return addGroup(group);
         } else {
             log.warn("Could not add {}", mo);
             return this;

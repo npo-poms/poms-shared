@@ -2,14 +2,15 @@ package nl.vpro.domain.media.update;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.media.MediaTable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.google.common.collect.Iterators;
+
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
@@ -31,7 +32,7 @@ import nl.vpro.domain.media.support.OwnerType;
         "schedule"}
         )
 @XmlAccessorType(XmlAccessType.NONE)
-public class MediaUpdateTable {
+public class MediaUpdateTable implements Iterable<MediaUpdate<?>> {
 
     @XmlElementWrapper(name = "programTable")
     @XmlElement(name = "program")
@@ -50,6 +51,20 @@ public class MediaUpdateTable {
 
     public void addPrograms(Collection<ProgramUpdate> values) {
         programTable.addAll(values);
+    }
+
+    /**
+     * @since 7.7
+     */
+    public MediaUpdateTable add(MediaUpdate<?> mo) {
+        if (mo instanceof ProgramUpdate program) {
+            getProgramTable().add(program);
+        } else if (mo instanceof GroupUpdate group) {
+            getGroupTable().add(group);
+        } else {
+            throw new IllegalArgumentException();
+        }
+        return this;
     }
 
     public void add(MediaUpdateTable table) {
@@ -91,4 +106,13 @@ public class MediaUpdateTable {
         }
         return result;
     }
+
+   @NonNull
+   @Override
+   public Iterator<MediaUpdate<?>> iterator() {
+       return Iterators.concat(
+           getProgramTable().listIterator(),
+           getGroupTable().listIterator()
+       );
+   }
 }
