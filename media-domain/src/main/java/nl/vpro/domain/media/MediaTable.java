@@ -7,6 +7,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -14,6 +16,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.math.abstractalgebra.Streamable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -38,7 +41,7 @@ import static nl.vpro.domain.media.MediaObjects.deepCopy;
 @lombok.Builder
 @AllArgsConstructor
 @Slf4j
-public class MediaTable implements Iterable<MediaObject>, Serializable {
+public class MediaTable implements Iterable<MediaObject>, Serializable, Streamable<MediaObject> {
 
     @Serial
     private static final long serialVersionUID = 4054512453318247403L;
@@ -282,7 +285,7 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
                 Program clone = null;
 
                 for (Program program : programs) {
-                    if (program.getCrids().size() > 0
+                    if (!program.getCrids().isEmpty()
                         && StringUtils.isNotEmpty(scheduleEvent.getUrnRef())
                         && program.getCrids().contains(scheduleEvent.getUrnRef())) {
 
@@ -337,6 +340,11 @@ public class MediaTable implements Iterable<MediaObject>, Serializable {
         }
 
         return clone;
+    }
+
+    @Override
+    public Stream<MediaObject> stream() {
+        return StreamSupport.stream(Spliterators.spliterator(iterator(), getProgramTable().size() + getGroupTable().size(), Spliterator.ORDERED), false);
     }
 
 }

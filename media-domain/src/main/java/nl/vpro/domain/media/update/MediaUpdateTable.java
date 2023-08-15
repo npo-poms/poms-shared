@@ -3,14 +3,17 @@ package nl.vpro.domain.media.update;
 import lombok.Data;
 
 import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.math.abstractalgebra.Streamable;
 
 import com.google.common.collect.Iterators;
 
-import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.MediaTable;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
@@ -32,7 +35,7 @@ import nl.vpro.domain.media.support.OwnerType;
         "schedule"}
         )
 @XmlAccessorType(XmlAccessType.NONE)
-public class MediaUpdateTable implements Iterable<MediaUpdate<?>> {
+public class MediaUpdateTable implements Iterable<MediaUpdate<?>>, Streamable<MediaUpdate<?>> {
 
     @XmlElementWrapper(name = "programTable")
     @XmlElement(name = "program")
@@ -107,7 +110,12 @@ public class MediaUpdateTable implements Iterable<MediaUpdate<?>> {
         return result;
     }
 
-   @NonNull
+    @Override
+    public Stream<MediaUpdate<?>> stream() {
+        return StreamSupport.stream(Spliterators.spliterator(iterator(), getProgramTable().size() + getGroupTable().size(), Spliterator.ORDERED), false);
+    }
+
+    @NonNull
    @Override
    public Iterator<MediaUpdate<?>> iterator() {
        return Iterators.concat(
