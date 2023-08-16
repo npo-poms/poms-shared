@@ -18,7 +18,7 @@ public class LocationValidator implements ConstraintValidator<Location, String> 
         }
 
         try {
-            java.net.URI uri = new java.net.URI(nl.vpro.domain.media.Location.sanitizedProgramUrl(value));
+            java.net.URI uri = new java.net.URI(value);
             if (uri.getScheme() == null || uri.getHost() == null) {
                 return false;
             }

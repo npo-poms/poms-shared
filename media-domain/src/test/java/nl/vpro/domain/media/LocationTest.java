@@ -200,7 +200,28 @@ public class LocationTest implements BasicObjectTheory<Location> {
                 </ns3:avAttributes>
                 <ns3:duration>PT30.000S</ns3:duration>
             </location>"""), Location.class);
-        System.out.println(Jackson2Mapper.getInstance().writeValueAsString(new Location[] {loc}));
+        Jackson2TestUtil.assertThatJson(loc).isSimilarTo("""
+            {
+              "programUrl" : "http://adaptive.npostreaming.nl/u/npo/promo/2P0803MO_PODIUMWI/2P0803MO_PODIUMWI.ism",
+              "avAttributes" : {
+                "avFileFormat" : "HASP",
+                "videoAttributes" : { }
+              },
+              "owner" : "BROADCASTER",
+              "creationDate" : 1425669724051,
+              "workflow" : "PUBLISHED",
+              "duration" : 30000,
+              "lastModified" : 1425669724457,
+              "urn" : "urn:vpro:media:location:52286162"
+            }
+            """);
+        //System.out.println(Jackson2Mapper.getInstance().writeValueAsString(new Location[] {loc}));
+    }
+
+    @Test
+    public void sanitize() {
+        assertThat(Location.sanitizedProgramUrl("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen")).isEqualTo("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie+eegie+sanie+-+Onze+eigen+dingen");
+
     }
 
     @Test

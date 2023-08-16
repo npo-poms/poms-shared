@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import nl.vpro.domain.media.Location;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LocationValidatorTest {
@@ -18,23 +20,22 @@ public class LocationValidatorTest {
     public void testValidation1() {
         String programUrl = "http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=";
         assertThat(validator.isValid(programUrl, null)).isTrue();
-
-
     }
 
 
     @Test
     public void testValidation2() {
         String programUrl = "http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen";
-        assertThat(validator.isValid(programUrl, null)).isTrue();
+        assertThat(validator.isValid(programUrl, null)).isFalse();
+        String sanitized = Location.sanitizedProgramUrl(programUrl);
+        assertThat(validator.isValid(sanitized, null)).isTrue();
+
     }
 
 
     @Test
     public void testValidationNull() {
         assertThat(validator.isValid(null, null)).isTrue();
-
-
     }
 
 
@@ -52,8 +53,15 @@ public class LocationValidatorTest {
     }
 
     @Test
+    public void testValidationContainsSpaces() {
+        String programUrl = "https://download.omroep.nl/vpro/algemeen/3VOOR12/demachine/De Machine_AFL_90.mp3";
+        assertThat(validator.isValid(programUrl, null)).isFalse();
+    }
+
+
+    @Test
     public void testValidation() {
-        assertThat(validator.isValid("http://download.omroep.nl/secure/04435df317c88b95083691e5868bfaa6/52bea4ee/portal/radiomanager/hours_archive/radio5/2013/12/25/[Radio 5] Logging Radio 5 20131225 1000.mp3", null)).isTrue();
+        assertThat(validator.isValid("http://download.omroep.nl/secure/04435df317c88b95083691e5868bfaa6/52bea4ee/portal/radiomanager/hours_archive/radio5/2013/12/25/[Radio 5] Logging Radio 5 20131225 1000.mp3", null)).isFalse();
     }
 
     @Test

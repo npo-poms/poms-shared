@@ -5,19 +5,18 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serial;
 import java.io.Serializable;
 import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.*;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -31,6 +30,7 @@ import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.util.URLPathEncode;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 import static nl.vpro.domain.Changeables.instant;
@@ -74,15 +74,37 @@ public class Location extends PublishableObject<Location>
 
     private static final String BASE_URN = "urn:vpro:media:location:";
 
+    private static final Pattern URL_PATTERN = Pattern.compile("^(https?://)(.*?/)(.*)(\\?.*?)");
+
     public static String sanitizedProgramUrl(String value) {
         if (value == null) {
             return null;
         }
-        String[] parts = value.trim().split("/", 4);
-        if (parts.length == 4) {
-            parts[3] = URLEncoder.encode(parts[3], StandardCharsets.UTF_8);
+        Matcher matcher = URL_PATTERN.matcher(value);
+        if (matcher.matches()) {
+            String scheme = matcher.group(1);
+            String host = matcher.group(2);
+            String path = matcher.group(3);
+            String query = matcher.groupCount() > 3 ? matcher.group(4) : "";
+            if (query != null) {
+                StringBuilder builder = new StringBuilder();
+                String[] queryParts = query.split("&");
+                for (String queryPart : queryParts) {
+                    String[] keyValue = queryPart.split("=", 2);
+                    if (keyValue.length == 2) {
+                        if (!builder.isEmpty()) {
+                            builder.append("&");
+                        }
+                        builder.append(keyValue[0]).append("=").append(URLPathEncode.encode(keyValue[1]));
+                    }
+                }
+                query = builder.toString();
+            }
+            value =  scheme + host + path + query;
+        } else {
+            log.warn("Don't know how to sanitize {}", value);
         }
-        return StringUtils.join(parts, "/");
+        return value;
     }
 
     @Column(nullable = false)
