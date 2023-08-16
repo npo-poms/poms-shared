@@ -116,15 +116,16 @@ public class MediaUpdateTable implements Iterable<MediaUpdate<?>>, Streamable<Me
 
     @Override
     public Stream<MediaUpdate<?>> stream() {
-        return StreamSupport.stream(Spliterators.spliterator(iterator(), size(), Spliterator.ORDERED), false);
+        return StreamSupport.stream(
+            Spliterators.spliterator(iterator(), size(), Spliterator.ORDERED), false);
     }
 
     @NonNull
    @Override
    public Iterator<MediaUpdate<?>> iterator() {
        return Iterators.concat(
-           getProgramTable().listIterator(),
-           getGroupTable().listIterator()
+           getGroupTable().listIterator(), // first the groups, because they probably are referenced by program, so if this is used for sending the complete table, this is handy
+           getProgramTable().listIterator()
        );
    }
 }
