@@ -41,6 +41,8 @@ import static java.util.Objects.requireNonNullElseGet;
 import static nl.vpro.domain.Changeables.instant;
 
 /**
+ * A location is a wrapper around a {@link #getProgramUrl() url} together with some metadata about it, and basically should be somehow actually playable. It may e.g. represent a downloadable MP3 file. But it can also represent an url with a scheme that can only be understood by a specific NPO player.
+ * <p>
  * A {@link MediaObject} can have more than one location which should differ in URL and
  * owner.
  * <p/>
