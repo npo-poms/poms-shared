@@ -236,9 +236,6 @@ public class LocationTest implements BasicObjectTheory<Location> {
                 int number = Integer.parseInt(split[0]);
                 String sanitized = Location.sanitizedProgramUrl(split[1]);
 
-
-
-
                 if (! split[1].equals(sanitized)) {
                     System.out.printf("insert into temp_location values (%d, %d, '%s', '%s')\n", count.incrementAndGet(), number, split[1], sanitized);
                 }

@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +36,8 @@ import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
+import static java.util.Objects.requireNonNullElse;
+import static java.util.Objects.requireNonNullElseGet;
 import static nl.vpro.domain.Changeables.instant;
 
 /**
@@ -102,7 +105,6 @@ public class Location extends PublishableObject<Location>
                 fragment= URLDecoder.decode(fragment.substring(1), StandardCharsets.UTF_8);
             }
             return new URI(scheme, host, path, query, fragment ).toASCIIString();
-
         } else {
             throw new IllegalArgumentException("Don't know how to sanitize " +  value);
         }
@@ -125,9 +127,11 @@ public class Location extends PublishableObject<Location>
     @XmlTransient
     protected MediaObject mediaObject;
 
+    @Getter
     @XmlElement
     protected String subtitles;
 
+    @Getter
     @Column(name = "`start_offset`")
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
@@ -136,6 +140,7 @@ public class Location extends PublishableObject<Location>
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     protected Duration offset;
 
+    @Getter
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -153,11 +158,16 @@ public class Location extends PublishableObject<Location>
     @XmlTransient
     protected Long neboId;
 
+    @Getter
     @Column(length = 100, updatable = false, nullable = true)
     @Enumerated(EnumType.STRING)
     @XmlAttribute
     protected Platform platform;
 
+    /**
+     * See {@link MediaObject#isLocationAuthorityUpdate}
+     */
+    @Getter
     @XmlTransient
     private boolean authorityUpdate = false;
 
@@ -186,7 +196,7 @@ public class Location extends PublishableObject<Location>
     }
 
 
-    private Location(String programUrl, OwnerType owner, AVAttributes avAttributes, Duration duration, Platform platform) {
+    private Location(String programUrl, @NonNull OwnerType owner, AVAttributes avAttributes, Duration duration, Platform platform) {
         this.programUrl = programUrl == null ? null : programUrl.trim();
         this.owner = owner;
         this.avAttributes = getDefaultAVAttributes(avAttributes, this.programUrl);
@@ -239,11 +249,8 @@ public class Location extends PublishableObject<Location>
         }
         this.publishStart = publishStart;
         this.publishStop = publishStop;
-        if (workflow != null) {
-            this.workflow = workflow;
-        } else {
-            this.workflow = Workflow.PUBLISHED; // doesn't need its own
-        }
+        // doesn't need its own
+        this.workflow = requireNonNullElse(workflow, Workflow.PUBLISHED);
         this.creationInstant = creationDate == null ? Changeables.instant() : creationDate;
     }
 
@@ -316,10 +323,6 @@ public class Location extends PublishableObject<Location>
         }
 
         return to;
-    }
-
-    public Platform getPlatform() {
-        return platform;
     }
 
     public void setPlatform(Platform platform) {
@@ -403,27 +406,15 @@ public class Location extends PublishableObject<Location>
         return "urn:vpro:media:location:";
     }
 
-    public String getSubtitles() {
-        return subtitles;
-    }
-
     public Location setSubtitles(String subtitles) {
         this.subtitles = subtitles;
         return this;
-    }
-    public Duration getOffset() {
-        return offset;
     }
 
 
     public Location setOffset(Duration offset) {
         this.offset = offset;
         return this;
-    }
-
-
-    public Duration getDuration() {
-        return duration;
     }
 
     public void setDuration(Duration duration) {
@@ -534,13 +525,6 @@ public class Location extends PublishableObject<Location>
             && avAttributes.getVideoAttributes() != null
             && avAttributes.getVideoAttributes().getHorizontalSize() != null
             && avAttributes.getVideoAttributes().getVerticalSize() != null;
-    }
-
-    /**
-     * See {@link MediaObject#isLocationAuthorityUpdate}
-     */
-    public boolean isAuthorityUpdate() {
-        return authorityUpdate;
     }
 
     public void setAuthorityUpdate(Boolean ceresUpdate) {
@@ -675,11 +659,10 @@ public class Location extends PublishableObject<Location>
     }
 
     private static AVAttributes getDefaultAVAttributes(AVAttributes avAttributes, String programUrl) {
-        if(avAttributes == null) {
-            return new AVAttributes(AVFileFormat.forProgramUrl(programUrl));
-        } else {
-            return avAttributes;
-        }
+        return requireNonNullElseGet(
+            avAttributes,
+            () -> new AVAttributes(AVFileFormat.forProgramUrl(programUrl))
+        );
     }
 
     @Override
@@ -824,6 +807,7 @@ public class Location extends PublishableObject<Location>
         }
     }
 
+    @Getter
     public static class IllegalAuthorityRecord extends IllegalStateException {
         @Serial
         private static final long serialVersionUID = -162376436758135168L;
@@ -832,9 +816,6 @@ public class Location extends PublishableObject<Location>
         public IllegalAuthorityRecord(String id, String s) {
             super(s);
             this.id = id;
-        }
-        public String getId() {
-            return id;
         }
     }
 
