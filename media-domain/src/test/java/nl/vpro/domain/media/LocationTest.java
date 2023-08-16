@@ -8,10 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
-import java.io.StringReader;
+import java.io.*;
+import java.net.http.HttpClient;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.validation.*;
 import javax.validation.groups.Default;
@@ -221,7 +223,27 @@ public class LocationTest implements BasicObjectTheory<Location> {
     @Test
     public void sanitize() {
         assertThat(Location.sanitizedProgramUrl("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen")).isEqualTo("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie+eegie+sanie+-+Onze+eigen+dingen");
+    }
 
+    @Disabled
+    @Test
+    public void sanitizeAll() throws IOException {
+        HttpClient client = HttpClient.newBuilder().build();
+        try (InputStream inputStream = new FileInputStream(new File("/Users/michiel/npo/media/main/issues/MSE-5/MSE-5292/MSE-5292.csv"))) {
+            final AtomicInteger count = new AtomicInteger();
+            new BufferedReader(new InputStreamReader(inputStream)).lines().forEach(line -> {
+                String[] split = line.split("\\t");
+                int number = Integer.parseInt(split[0]);
+                String sanitized = Location.sanitizedProgramUrl(split[1]);
+
+
+
+
+                if (! split[1].equals(sanitized)) {
+                    System.out.printf("insert into temp_location values (%d, %d, '%s', '%s')\n", count.incrementAndGet(), number, split[1], sanitized);
+                }
+            });
+        }
     }
 
     @Test

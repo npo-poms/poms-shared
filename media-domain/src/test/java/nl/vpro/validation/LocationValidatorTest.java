@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import nl.vpro.domain.media.Location;
 
@@ -16,16 +18,27 @@ public class LocationValidatorTest {
     LocationValidator validator = new LocationValidator();
 
 
-    @Test
-    public void testValidation1() {
-        String programUrl = "http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=";
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=",
+        "sub+http://npo.npoplus.nl/video/MXF/VPWON_1245461",
+        "mp3://moby.vpro.nl/data/pac01/mp3/17560686/17560686.mp3"
+    })
+    public void testValidation1(String programUrl) {
         assertThat(validator.isValid(programUrl, null)).isTrue();
+        assertThat(Location.sanitizedProgramUrl(programUrl)).isEqualTo(programUrl);
     }
 
 
-    @Test
-    public void testValidation2() {
-        String programUrl = "http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen";
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+        "http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen",
+        "mp3://moby.vpro.nl/data/pac01/mp3/17560686/17560686.mp3"
+    }
+    )
+    public void sanitizable(String programUrl) {
+
         assertThat(validator.isValid(programUrl, null)).isFalse();
         String sanitized = Location.sanitizedProgramUrl(programUrl);
         assertThat(validator.isValid(sanitized, null)).isTrue();

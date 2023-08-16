@@ -1,10 +1,13 @@
 package nl.vpro.domain.media;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.net.URI;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Comparator;
@@ -30,7 +33,6 @@ import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.util.URLPathEncode;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 import static nl.vpro.domain.Changeables.instant;
@@ -74,37 +76,37 @@ public class Location extends PublishableObject<Location>
 
     private static final String BASE_URN = "urn:vpro:media:location:";
 
-    private static final Pattern URL_PATTERN = Pattern.compile("^(https?://)(.*?/)(.*)(\\?.*?)");
+    private static final Pattern URL_PATTERN = Pattern.compile("^([a-zA-Z0-9+]+)://([^/?]+)(/.*?)?(\\?.*)?(#.*)?");
 
+    @SneakyThrows
     public static String sanitizedProgramUrl(String value) {
         if (value == null) {
             return null;
         }
+
         Matcher matcher = URL_PATTERN.matcher(value);
         if (matcher.matches()) {
-            String scheme = matcher.group(1);
+            String scheme = matcher.group(1).toLowerCase();
             String host = matcher.group(2);
             String path = matcher.group(3);
-            String query = matcher.groupCount() > 3 ? matcher.group(4) : "";
-            if (query != null) {
-                StringBuilder builder = new StringBuilder();
-                String[] queryParts = query.split("&");
-                for (String queryPart : queryParts) {
-                    String[] keyValue = queryPart.split("=", 2);
-                    if (keyValue.length == 2) {
-                        if (!builder.isEmpty()) {
-                            builder.append("&");
-                        }
-                        builder.append(keyValue[0]).append("=").append(URLPathEncode.encode(keyValue[1]));
-                    }
-                }
-                query = builder.toString();
+            if (path != null) {
+                path = URLDecoder.decode(path, StandardCharsets.UTF_8);
             }
-            value =  scheme + host + path + query;
+            String query =  matcher.group(4);
+            if (query != null) {
+                query = URLDecoder.decode(query.substring(1), StandardCharsets.UTF_8);
+            }
+
+            String fragment =  matcher.group(5);
+            if (fragment != null) {
+                fragment= URLDecoder.decode(fragment.substring(1), StandardCharsets.UTF_8);
+            }
+            return new URI(scheme, host, path, query, fragment ).toASCIIString();
+
         } else {
-            log.warn("Don't know how to sanitize {}", value);
+            throw new IllegalArgumentException("Don't know how to sanitize " +  value);
         }
-        return value;
+       // return value;
     }
 
     @Column(nullable = false)
