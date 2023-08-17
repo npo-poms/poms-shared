@@ -18,6 +18,8 @@ import org.checkerframework.checker.nullness.qual.PolyNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.*;
+
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.PomsValidatorGroup;
@@ -31,6 +33,7 @@ import nl.vpro.validation.PomsValidatorGroup;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI, name = "string")
+@JsonFormat(shape = JsonFormat.Shape.STRING)
 public class Email implements Serializable, Supplier<String>, MutableOwnable, Updatable<Email> {
 
     @Serial
@@ -47,6 +50,7 @@ public class Email implements Serializable, Supplier<String>, MutableOwnable, Up
     @javax.validation.constraints.Email(
         message = "{nl.vpro.constraints.Email.message}",
         groups = PomsValidatorGroup.class)
+    @JsonValue
     private String email;
 
     @XmlTransient
@@ -58,6 +62,7 @@ public class Email implements Serializable, Supplier<String>, MutableOwnable, Up
     public Email() {
     }
 
+    @JsonCreator
     public Email(@NonNull String email) {
         this(email, OwnerType.BROADCASTER);
     }
