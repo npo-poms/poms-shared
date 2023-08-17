@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import javax.persistence.*;
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -29,7 +30,7 @@ import nl.vpro.validation.PomsValidatorGroup;
 @Table(name = "mediaobject_email")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "emailType")
+@XmlType(namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI, name = "string")
 public class Email implements Serializable, Supplier<String>, MutableOwnable, Updatable<Email> {
 
     @Serial
