@@ -232,6 +232,11 @@
       <artifactId>spring-beans</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <profiles>
     <profile>
