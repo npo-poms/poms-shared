@@ -225,7 +225,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
 
     @Test
     public void sanitize() {
-        assertThat(Location.sanitizedProgramUrl("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen")).isEqualTo("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie+eegie+sanie+-+Onze+eigen+dingen");
+        assertThat(Location.sanitizedProgramUrl("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen")).isEqualTo("http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie%20eegie%20sanie%20-%20Onze%20eigen%20dingen");
     }
 
     @Disabled

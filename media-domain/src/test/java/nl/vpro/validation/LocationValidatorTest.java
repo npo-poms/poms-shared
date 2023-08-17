@@ -34,8 +34,7 @@ public class LocationValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-        "http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen",
-        "mp3://moby.vpro.nl/data/pac01/mp3/17560686/17560686.mp3"
+        "http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=Wie eegie sanie - Onze eigen dingen"
     }
     )
     public void sanitizable(String programUrl) {

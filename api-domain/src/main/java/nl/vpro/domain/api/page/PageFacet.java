@@ -32,4 +32,10 @@ public class PageFacet extends TextFacet<PageSearch, Page> {
     public PageSearch getFilter() {
         return this.filter;
     }
+
+    @SuppressWarnings("RedundantMethodOverride") // It is not redundant, it is needed for JAXB
+    @Override
+    public void setFilter(PageSearch filter) {
+        this.filter = filter;
+    }
 }
