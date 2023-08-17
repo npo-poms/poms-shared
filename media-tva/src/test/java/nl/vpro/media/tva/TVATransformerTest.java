@@ -670,7 +670,8 @@ public class TVATransformerTest {
             new MisGenreFunction(),
             genreFunction,
             new HtmlStripperFunction(),
-            new ValidListValueFunction()
+            new ValidListValueFunction(),
+            new ValidValueFunction()
             )
         );
         FACTORY.setConfiguration(configuration);

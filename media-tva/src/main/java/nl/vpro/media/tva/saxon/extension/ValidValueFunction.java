@@ -1,20 +1,18 @@
 package nl.vpro.media.tva.saxon.extension;
 
-import java.util.Arrays;
-
 /**
  * @author Michiel Meeuwissen
- * @since 5.11
+ * @since 7.7
  */
-public class ValidListValueFunction extends AbstractValidValueFunction {
+public class ValidValueFunction extends AbstractValidValueFunction {
 
     @Override
     protected String getFunctionName() {
-        return "validListValue";
+        return "validValue";
     }
 
     @Override
     protected Object getValue(String value) {
-        return Arrays.asList(value);
+        return value;
     }
 }
