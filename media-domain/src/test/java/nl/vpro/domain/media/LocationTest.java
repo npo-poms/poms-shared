@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
@@ -21,6 +22,7 @@ import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.*;
 import org.meeuw.util.test.BasicObjectTheory;
+import org.postgresql.core.Utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -29,6 +31,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.validation.PomsValidatorGroup;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static nl.vpro.domain.Changeables.CLOCK;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -228,19 +231,38 @@ public class LocationTest implements BasicObjectTheory<Location> {
     @Disabled
     @Test
     public void sanitizeAll() throws IOException {
+        String dir = "/Users/michiel/npo/media/main/issues/MSE-5/MSE-5292/";
         HttpClient client = HttpClient.newBuilder().build();
-        try (InputStream inputStream = new FileInputStream(new File("/Users/michiel/npo/media/main/issues/MSE-5/MSE-5292/MSE-5292.csv"))) {
+        try (InputStream inputStream = new FileInputStream(new File(dir + "MSE-5292.csv"));
+             OutputStream outputStream = new FileOutputStream(new File(dir + "insert_locations.sql"))) {
             final AtomicInteger count = new AtomicInteger();
+            outputStream.write("insert into temp_location values ".getBytes(UTF_8));
             new BufferedReader(new InputStreamReader(inputStream)).lines().forEach(line -> {
                 String[] split = line.split("\\t");
                 int number = Integer.parseInt(split[0]);
                 String sanitized = Location.sanitizedProgramUrl(split[1]);
 
                 if (! split[1].equals(sanitized)) {
-                    System.out.printf("insert into temp_location values (%d, %d, '%s', '%s')\n", count.incrementAndGet(), number, split[1], sanitized);
+                    try {
+                        if (count.get() > 0) {
+                            outputStream.write(",\n".getBytes(UTF_8));
+                        }
+                        outputStream.write("(%d, %d, '%s', '%s')"
+                            .formatted( count.incrementAndGet(), number, escapeLiteral(split[1]), escapeLiteral(sanitized)).getBytes(UTF_8));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
+            outputStream.write("\n;".getBytes(UTF_8));
+
         }
+    }
+    @SneakyThrows
+    private String escapeLiteral(String s) {
+        StringBuilder escapedSanitize = new StringBuilder();
+        Utils.escapeLiteral(escapedSanitize, s, true);
+        return escapedSanitize.toString();
     }
 
     @Test

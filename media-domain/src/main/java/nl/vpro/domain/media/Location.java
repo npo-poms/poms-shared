@@ -106,7 +106,7 @@ public class Location extends PublishableObject<Location>
             if (fragment != null) {
                 fragment= URLDecoder.decode(fragment.substring(1), StandardCharsets.UTF_8);
             }
-            return new URI(scheme, host, path, query, fragment ).toASCIIString();
+            return new URI(scheme, host, path, query, fragment ).normalize().toASCIIString();
         } else {
             throw new IllegalArgumentException("Don't know how to sanitize " +  value);
         }

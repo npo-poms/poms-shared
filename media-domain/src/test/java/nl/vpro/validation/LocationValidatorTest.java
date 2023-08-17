@@ -22,7 +22,8 @@ public class LocationValidatorTest {
     @ValueSource(strings = {
         "http://cgi.omroep.nl/cgi-bin/streams?/tv/human/humandonderdag/bb.20040701.rm?title=",
         "sub+http://npo.npoplus.nl/video/MXF/VPWON_1245461",
-        "mp3://moby.vpro.nl/data/pac01/mp3/17560686/17560686.mp3"
+        "mp3://moby.vpro.nl/data/pac01/mp3/17560686/17560686.mp3",
+        "http://download.omroep.nl/vpro/algemeen/vpronl/radio/ovt/FRAGMENT%20OVT%20-%20WILHELMIENTJE%20LANS-GERRIT%20'34.mp3"
     })
     public void testValidation1(String programUrl) {
         assertThat(validator.isValid(programUrl, null)).isTrue();
