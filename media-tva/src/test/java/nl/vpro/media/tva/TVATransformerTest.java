@@ -273,7 +273,7 @@ public class TVATransformerTest {
         }
         {
             Optional<MediaObject> byCrid = table.findByCrid("crid://npo/programmagegevens/1000741903668");
-            assertThat(byCrid.get().getEmail()).contains("bla@rkk.nl");
+            assertThat(byCrid.get().getEmail().stream().map(Email::get).toList()).contains("bla@rkk.nl");
         }
 
     }

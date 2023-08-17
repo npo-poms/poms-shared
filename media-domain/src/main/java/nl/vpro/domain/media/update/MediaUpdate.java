@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.*;
 import javax.validation.groups.Default;
 import javax.xml.bind.Marshaller;
@@ -330,7 +331,6 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
         this.releaseYear = mediaobject.getReleaseYear();
         this.ageRating = mediaobject.getAgeRating();
         this.contentRatings = mediaobject.getContentRatings();
-        this.email = mediaobject.getEmail();
 
         this.images = toList(
             mediaobject.getImages(),
@@ -368,6 +368,8 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
         this.memberOf = toSet(mediaobject.getMemberOf(), MemberRefUpdate::create);
         this.websites = toList(mediaobject.getWebsites(), Website::get);
         this.twitterrefs= toList(mediaobject.getTwitterRefs(), TwitterRef::get);
+        this.email = toList(mediaobject.getEmail(), nl.vpro.domain.media.Email::get);
+
 
         this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == owner && ! l.isDeleted(), LocationUpdate::new);
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
@@ -489,7 +491,6 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
         media.setReleaseYear(releaseYear);
         media.setAgeRating(ageRating);
         media.setContentRatings(contentRatings);
-        media.setEmail(email);
 
         // images have owner
 
@@ -542,7 +543,7 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
 
         returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
         returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
-
+        returnObject.setEmail(toList(email, (e) -> new nl.vpro.domain.media.Email(e, owner)));
         if(intentions != null) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getIntentions(), toIntentions(intentions, owner));
         } else {

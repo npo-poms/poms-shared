@@ -477,14 +477,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Enumerated(value = EnumType.STRING)
     protected List<@NotNull ContentRating> contentRatings;
 
-    @ElementCollection
+
+    @OneToMany(targetEntity = Email.class, orphanRemoval = true, cascade = {ALL})
+    @JoinColumn(name = "mediaobject_id", nullable = true)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @StringList(maxLength = 255)
-    protected List<@NotNull
-    @Email(
-        message = "{nl.vpro.constraints.Email.message}",
-        groups = PomsValidatorGroup.class) String> email;
+    protected List<@NotNull @Valid Email> email;
 
     @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -686,8 +684,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getGroup(), ref.getNumber(), ref.getOwner()));
         this.ageRating = source.ageRating;
         source.getContentRatings().forEach(this::addContentRating);
-        source.getEmail().forEach(this::addEmail);
-        source.getWebsites().forEach(website -> this.addWebsite(Website.copy(website)));
+        source.getEmail().forEach(e ->
+            this.getEmail().add(new Email(e.get(), e.getOwner()))
+        );
+        source.getWebsites().forEach(website ->
+            this.addWebsite(Website.copy(website))
+        );
         source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
@@ -1835,23 +1837,29 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @XmlElement()
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<String> getEmail() {
+    public List<Email> getEmail() {
         if (email == null) {
             email = new ArrayList<>();
         }
         return email;
     }
 
-    public void setEmail(List<String> email) {
+    public void setEmail(List<Email> email) {
         this.email = updateList(this.email, email);
     }
 
     @Nullable
     public String getMainEmail() {
-        return getFromList(email);
+        return Optional.ofNullable(getFromList(email)).map(Email::get).orElse(null);
     }
 
+
     public MediaObject addEmail(String email) {
+        return addEmail(email, OwnerType.BROADCASTER);
+    }
+
+
+    public MediaObject addEmail(String email, OwnerType owner) {
         if (StringUtils.isBlank(email)) {
             return this;
         }
@@ -1861,12 +1869,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
 
         email = email.trim();
-        if (!this.email.contains(email)) {
-            this.email.add(email);
+
+        Email proposal = new Email(email, owner);
+        if (!this.email.contains(proposal)) {
+            this.email.add(proposal);
         }
 
         return this;
     }
+
+
 
     @Override
     @XmlElement(name = "website")

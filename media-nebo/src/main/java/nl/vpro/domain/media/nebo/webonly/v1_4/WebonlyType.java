@@ -140,9 +140,9 @@ public class WebonlyType {
     }
 
     public void setEmail(String value) {
-        List<String> emails = program.getEmail();
-        emails.remove(value);
-        emails.add(0, value);
+        List<Email> emails = program.getEmail();
+        emails.removeIf(e -> e.get().equals(value));
+        emails.add(0, new Email(value));
     }
 
     public String getNicamcodes() {

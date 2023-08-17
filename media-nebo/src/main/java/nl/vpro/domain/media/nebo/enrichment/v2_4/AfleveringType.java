@@ -197,8 +197,8 @@ public class AfleveringType {
     public void setMail(String value) {
         if (StringUtils.isNotBlank(value)) {
             // make sure the email is present, and the first one
-            program.getEmail().remove(value);
-            program.getEmail().add(0, value);
+            program.getEmail().removeIf(v -> v.get().equals(value));
+            program.getEmail().add(0, new Email(value));
         }
     }
 

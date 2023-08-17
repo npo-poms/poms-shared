@@ -72,7 +72,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(pu.fetch().getCredits()).containsExactly(new Person("Mark", "Rutte", RoleType.GUEST));
 
         pu.setEmail("test@example.com");
-        assertThat(pu.fetch().getEmail()).containsExactly("test@example.com");
+        assertThat(pu.fetch().getEmail().stream().map(Email::get).toList()).containsExactly("test@example.com");
 
         pu.setWebsites("https://meeuw.org");
         assertThat(pu.fetch().getWebsites()).containsExactly(new Website("https://meeuw.org", OwnerType.BROADCASTER));

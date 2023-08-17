@@ -67,10 +67,10 @@ public class CollectionUtils {
 
     @Nullable
     protected static <E> E getFromList(@Nullable List<@NonNull E> list) {
-        if (list != null && list.size() > 0) {
-            return list.get(0);
-        } else {
+        if (list == null || list.isEmpty()) {
             return null;
+        } else {
+            return list.get(0);
         }
     }
 

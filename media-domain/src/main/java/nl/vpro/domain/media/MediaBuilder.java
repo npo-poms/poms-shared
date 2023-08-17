@@ -11,7 +11,6 @@ import java.time.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -681,7 +680,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B emails(String... emails) {
-        mediaObject().getEmail().addAll(Arrays.asList(emails));
+        mediaObject().getEmail().addAll(Arrays.stream(emails)
+                .map(Email::new)
+                .toList());
         return (B)this;
     }
 
@@ -696,7 +697,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         mediaObject().getWebsites().addAll(
             Arrays.stream(websites)
                 .map(Website::new)
-                .collect(Collectors.toList()));
+                .toList());
         return (B) this;
     }
 
