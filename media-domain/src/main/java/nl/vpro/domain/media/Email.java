@@ -5,12 +5,15 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.PolyNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -54,20 +57,20 @@ public class Email implements Serializable, Supplier<String>, MutableOwnable, Up
     public Email() {
     }
 
-    public Email(String email) {
+    public Email(@NonNull String email) {
         this(email, OwnerType.BROADCASTER);
     }
 
-    public Email(String email, OwnerType owner) {
+    public Email(@NonNull String email, @NonNull OwnerType owner) {
         this.email = email;
         this.owner = owner;
     }
 
-    public Email(Email source) {
-        this(source.getEmail(), source.owner);
+    public Email(@NonNull Email source) {
+        this(source.email, source.owner);
     }
 
-    public static Email copy(Email source) {
+    public static @PolyNull Email copy(@PolyNull Email source) {
         if(source == null) {
             return null;
         }
@@ -82,44 +85,23 @@ public class Email implements Serializable, Supplier<String>, MutableOwnable, Up
         owner = from.owner;
     }
 
-    /**
-     * Checks for database identity or object identity if one side of the comparison can
-     * not supply a database identity. It is advised to override this method with a more
-     * accurate test which should not rely on database identity. You can rely on this
-     * criterion when equality can not be deducted programmatic and a real and final
-     * check is in need of human interaction. In essence this check then states that two
-     * objects are supposed to be different if they can't supply the same database Id.
-     *
-     * @param object the object to compare with
-     * @return true if both objects are equal
-     */
     @Override
-    public boolean equals(Object object) {
-        if(object == null) {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        if(this.getClass() != object.getClass()) {
-            return false;
-        }
+        Email email1 = (Email) o;
 
-        Email that = (Email)object;
-
-
-        return this.email == null ? that.email == null : this.email.equals(that.email);
+        if (!Objects.equals(email, email1.email)) return false;
+        return owner == email1.owner;
     }
 
     @Override
     public int hashCode() {
-
-
-        if(email != null) {
-            return email.hashCode();
-        }
-
-        return System.identityHashCode(this);
+        int result = email != null ? email.hashCode() : 0;
+        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        return result;
     }
-
 
     @Override
     public String get() {
