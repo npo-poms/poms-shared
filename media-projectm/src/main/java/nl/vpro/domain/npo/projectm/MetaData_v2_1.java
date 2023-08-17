@@ -3,9 +3,8 @@ package nl.vpro.domain.npo.projectm;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.function.Supplier;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -15,9 +14,7 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.npo.projectm.metadata.v2_1.*;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.BroadcasterService;
-import nl.vpro.domain.user.ServiceLocator;
+import nl.vpro.domain.user.*;
 import nl.vpro.util.TextUtil;
 import nl.vpro.xml.util.XmlUtils;
 
@@ -45,7 +42,7 @@ public class MetaData_v2_1 {
         aflevering.setOrti(getTitle(program, TextualType.ORIGINAL));
         aflevering.setAfltitel(getTitle(program, TextualType.SUB));
         aflevering.setMail(firstOrNull(program.getEmail()));
-        aflevering.setWebs(firstOrNullWebsite(program.getWebsites()));
+        aflevering.setWebs(firstOrNull(program.getWebsites()));
         aflevering.setTwitteraccount(TwitterRef.getValueOrNull(MediaObjects.getTwitterAccount(program)));
         aflevering.setTwitterhashtag(TwitterRef.getValueOrNull(MediaObjects.getTwitterHash(program)));
         aflevering.setGenre(getGenre(program));
@@ -92,7 +89,7 @@ public class MetaData_v2_1 {
         serie.setIcon(getIcon(group));
         serie.setOrti(getTitle(group, TextualType.ORIGINAL));
         serie.setMail(firstOrNull(group.getEmail()));
-        serie.setWebs(firstOrNullWebsite(group.getWebsites()));
+        serie.setWebs(firstOrNull(group.getWebsites()));
         serie.setTwitteraccount(TwitterRef.getValueOrNull(MediaObjects.getTwitterAccount(group)));
         serie.setTwitterhashtag(TwitterRef.getValueOrNull(MediaObjects.getTwitterHash(group)));
         serie.setGenre(getGenre(group));
@@ -109,7 +106,7 @@ public class MetaData_v2_1 {
     }
 
     protected static String getIcon(MediaObject media) {
-        if (media.getImages().size() == 0) {
+        if (media.getImages().isEmpty()) {
             return null;
         }
 
@@ -133,13 +130,9 @@ public class MetaData_v2_1 {
         Title description = media.findTitle(type);
         return description != null ? description.get() : null;
     }
-    protected static String firstOrNull(Collection<?> col) {
+    protected static String firstOrNull(Collection<? extends Supplier<String>> col) {
         if (col == null || col.isEmpty()) return null;
-        return String.valueOf(col.iterator().next());
-    }
-    protected static String firstOrNullWebsite(Collection<Website> col) {
-        if (col == null || col.isEmpty()) return null;
-        return col.iterator().next().getUrl();
+        return col.iterator().next().get();
     }
 
     protected static String getGenre(MediaObject mediaObject) {
