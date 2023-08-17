@@ -25,6 +25,8 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.PomsValidatorGroup;
 
 /**
+ * Wrapper for email, also keeping track of the owner (which currently is not yet exposed in API's).
+ *
  * @since 7.7
  */
 
