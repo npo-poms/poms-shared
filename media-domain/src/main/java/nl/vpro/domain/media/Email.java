@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
@@ -35,6 +37,7 @@ import nl.vpro.domain.media.support.OwnerType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(namespace = XMLConstants.W3C_XML_SCHEMA_NS_URI, name = "string")
 @JsonFormat(shape = JsonFormat.Shape.STRING)
+@Valid
 public class Email implements Serializable, Supplier<String>, MutableOwnable, Updatable<Email> {
 
     @Serial
@@ -46,6 +49,8 @@ public class Email implements Serializable, Supplier<String>, MutableOwnable, Up
     private long id;
 
     @XmlValue
+    @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}")
+    @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     @Getter
     @Setter
     @javax.validation.constraints.Email(

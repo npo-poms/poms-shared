@@ -3,6 +3,7 @@ package nl.vpro.domain.media.update;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
+import java.util.function.Function;
 
 import javax.validation.*;
 import javax.validation.executable.ExecutableValidator;
@@ -111,6 +112,22 @@ public class Validation {
 
     public static <T> Set<ConstraintViolation<T>> validateProperty(T object, String propertyName) {
         return validateProperty(object,  propertyName,Default.class, PomsValidatorGroup.class, WarningValidatorGroup.class);
+    }
+
+    public static <T, E> Set<ConstraintViolation<E>> validateCollectionProperty(T object, Function<T, Collection<E>> getter) {
+        Set<ConstraintViolation<E>> result = new LinkedHashSet<>();
+        for (E e : getter.apply(object)) {
+            Set<ConstraintViolation<E>> violations = validate(e);
+            result.addAll(violations);
+        }
+        return result;
+    }
+
+    public static <T, E> void throwingValidateCollectionProperty(T object, Function<T, Collection<E>> getter) throws ConstraintViolationException {
+        Set<ConstraintViolation<E>> validate = validateCollectionProperty(object, getter);
+         if (!validate.isEmpty()) {
+            throw new ConstraintViolationException(validate);
+        }
     }
 
     public static <T> Set<ConstraintViolation<T>> validate(T object, Class<?>... groups) {

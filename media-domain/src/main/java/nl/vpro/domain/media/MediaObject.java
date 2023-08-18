@@ -481,7 +481,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JoinColumn(name = "mediaobject_id", nullable = true)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<@NotNull @Valid Email> email;
+    protected @Valid List<@NotNull @Valid Email> email;
 
     @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -490,7 +490,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         nullable = true // Did I mention that hibernate sucks?
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<@NotNull @Valid Website> websites;
+    protected @Valid List<@NotNull @Valid Website> websites;
 
     @OneToMany(cascade = ALL, targetEntity = TwitterRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -1890,6 +1890,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject setWebsites(List<Website> websites) {
+        //this.websites = websites;
         this.websites = updateList(this.websites, websites);
         return this;
     }

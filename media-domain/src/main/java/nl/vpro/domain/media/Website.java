@@ -10,10 +10,8 @@ import java.util.function.Supplier;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
-import javax.validation.groups.Default;
 import javax.xml.bind.annotation.*;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -32,6 +30,7 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
     private static final long serialVersionUID = 6568968749798696389L;
 
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlTransient
     private Long id;
@@ -46,7 +45,7 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
         mustHaveScheme = true,
         minHostParts = 2,
         message = "{nl.vpro.constraints.URI}",
-        groups = {Default.class, nl.vpro.validation.PomsValidatorGroup.class}
+        groups = {nl.vpro.validation.PomsValidatorGroup.class}
     )
     private String url;
 
@@ -80,10 +79,6 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
         return new Website(source);
     }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
 
     /**
      * Under normal operation this should not be used!
@@ -159,10 +154,7 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-            .append("id", id)
-            .append("url", url)
-            .toString();
+        return owner + ":"+ url;
     }
 
 }
