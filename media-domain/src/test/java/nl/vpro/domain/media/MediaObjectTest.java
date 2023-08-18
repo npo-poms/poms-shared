@@ -25,12 +25,12 @@ import org.meeuw.i18n.regions.RegionService;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.update.Validation;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static nl.vpro.domain.ValidationTestHelper.dbValidate;
-import static nl.vpro.domain.ValidationTestHelper.validate;
+import static nl.vpro.domain.ValidationTestHelper.*;
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static nl.vpro.domain.media.support.OwnerType.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,6 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MediaObjectTest {
     @BeforeAll
     public static void init() {
+        Locales.setDefault(Locales.NETHERLANDISH);
 
     }
     @Test
@@ -599,7 +600,7 @@ public class MediaObjectTest {
         p.setType(ProgramType.CLIP);
         p.addRelation(r);
 
-        Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
+        Set<ConstraintViolation<Program>> constraintViolations = validate(p, false);
         assertThat(constraintViolations).hasSize(1);
         assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("must contain a valid URI (: isn't)");
         log.info("{}", constraintViolations);
@@ -626,6 +627,56 @@ public class MediaObjectTest {
         p.getWebsites().get(0).setUrl("www.kro-ncrv.nl/kruispunt");
         validate(p, true, 1);
     }
+    @Test
+    public void testWebsiteValidationProperty() {
+        Program p = new Program();
+        p.getWebsites().add(new Website("bla"));
+        {
+            Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "websites", true);
+            assertThat(constraintViolations).hasSize(1);
+            assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+        }
+    }
+
+    @Test
+    public void testTwitterRefValidationProperty() {
+        Program p = new Program();
+        p.getTwitterRefs().add(new TwitterRef("aa"));
+        Set<ConstraintViolation<Program>> validate = validate(p, true);
+        assertThat(validate.stream().filter(c -> c.getPropertyPath().toString().equals("twitterRefs[0].value"))).hasSize(1);
+        {
+            Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "twitterRefs", true);
+            assertThat(constraintViolations).hasSize(1);
+            assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+        }
+    }
+
+
+
+    @Test
+    public void testEmailValidation() {
+        Program p = new Program();
+        p.setType(ProgramType.BROADCAST);
+        p.setAVType(AVType.MIXED);
+        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
+
+        p.getEmail().add(new Email("bla"));
+        Validation.getValidator().validateValue(Email.class, "email", "bla");
+        Set<ConstraintViolation<Program>> constraintViolations = validate(p, false);
+        assertThat(constraintViolations).hasSize(1);
+        assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("'bla' is geen goed email-adres");
+    }
+
+    @Test
+    public void testEmailPropertyValidation() {
+        Program p = new Program();
+        p.getEmail().add(new Email("bla"));
+         Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "email", true);
+        assertThat(constraintViolations).hasSize(1);
+        assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+    }
+
 
     @Test
     public void sortDate() {

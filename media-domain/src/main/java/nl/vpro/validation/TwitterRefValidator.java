@@ -18,14 +18,16 @@ public class TwitterRefValidator implements ConstraintValidator<TwitterRef , nl.
     public boolean isValid(nl.vpro.domain.media.TwitterRef twitterRef, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
 
-        if(twitterRef.getValue() == null) {
+        String validatedValue = twitterRef.getValue();
+        if(validatedValue == null) {
             context.buildConstraintViolationWithTemplate("{nl.vpro.constraints.NotNull}")
                 .addPropertyNode("value")
                 .addConstraintViolation();
             return false;
         }
 
-        final Matcher matcher = PATTERN.matcher(twitterRef.getValue());
+
+        final Matcher matcher = PATTERN.matcher(validatedValue);
         if(!matcher.find()) {
             context.buildConstraintViolationWithTemplate("{nl.vpro.constraints.twitterRefs.Pattern}")
                 .addPropertyNode("value")

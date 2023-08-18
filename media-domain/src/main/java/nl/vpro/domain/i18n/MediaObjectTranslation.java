@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.*;
+import nl.vpro.domain.media.Email;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;

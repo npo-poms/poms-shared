@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import javax.persistence.*;
+import javax.validation.groups.Default;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 
@@ -21,7 +22,6 @@ import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.validation.PomsValidatorGroup;
 
 /**
  * Wrapper for email, also keeping track of the owner (which currently is not yet exposed in API's).
@@ -50,7 +50,7 @@ public class Email implements Serializable, Supplier<String>, MutableOwnable, Up
     @Setter
     @javax.validation.constraints.Email(
         message = "{nl.vpro.constraints.Email.message}",
-        groups = PomsValidatorGroup.class)
+        groups = Default.class)
     @JsonValue
     private String email;
 

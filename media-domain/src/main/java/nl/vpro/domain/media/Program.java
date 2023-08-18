@@ -175,7 +175,7 @@ public final class Program extends MediaObject {
     }
 
     public boolean hasScheduleEvents() {
-        return scheduleEvents != null && scheduleEvents.size() > 0;
+        return scheduleEvents != null && !scheduleEvents.isEmpty();
     }
 
     @XmlElementWrapper(name = "scheduleEvents")

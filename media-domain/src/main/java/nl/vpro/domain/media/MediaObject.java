@@ -245,7 +245,6 @@ import static nl.vpro.domain.media.MediaObject.*;
     + "or publishStart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
     + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))")
 @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
-
 @Slf4j
 public abstract class MediaObject extends PublishableObject<MediaObject>
     implements Media<MediaObject> {
@@ -1837,7 +1836,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @XmlElement()
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<Email> getEmail() {
+    public List<@Valid Email> getEmail() {
         if (email == null) {
             email = new ArrayList<>();
         }
@@ -1878,13 +1877,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return this;
     }
 
-
-
     @Override
     @XmlElement(name = "website")
     @JsonProperty("websites")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<Website> getWebsites() {
+    public List<@Valid Website> getWebsites() {
         if (websites == null) {
             websites = new ArrayList<>();
         }
