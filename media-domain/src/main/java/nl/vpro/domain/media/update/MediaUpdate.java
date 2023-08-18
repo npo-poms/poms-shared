@@ -144,7 +144,7 @@ import nl.vpro.xml.bind.*;
     "relations",
     "images"}
 )
-@MainTitle
+@MainTitle(groups = WarningValidatorGroup.class)
 public abstract sealed class  MediaUpdate<M extends MediaObject>
     implements
     MutableEmbargo<MediaUpdate<M>>,
