@@ -53,7 +53,7 @@ public class SegmentUpdateTest extends MediaUpdateTest {
         assertThat(rounded.isStandalone()).isTrue();
 
         assertThat(update.violations()).isEmpty();
-        assertThat(update.violations(WarningValidatorGroup.class)).hasSize(1);
+        assertThat(update.violations(WarningValidatorGroup.class)).hasSize(2); // about main title, about duration
 
         update.setMidRef(null);
         assertThat(update.violations()).hasSize(1);
