@@ -17,6 +17,9 @@ import nl.vpro.domain.media.support.TextualType;
  *
  * @author Michiel Meeuwissen
  * @since 5.1
+ * @param <T> The type of the title
+ * @param <D> The type of the description
+ * @param <TO> The type of the object itself
  */
 public interface TextualObject<
     T extends OwnedText,
