@@ -680,7 +680,7 @@ public class MediaObjectTest {
     @Disabled("""
         This one than does fail.
         Honestly, it seems like a bug in hibernate validator.
-
+        (https://hibernate.atlassian.net/browse/HV-1791?)
     """)
     public void testWebsiteValidationProperty() {
         Program p = new Program();
