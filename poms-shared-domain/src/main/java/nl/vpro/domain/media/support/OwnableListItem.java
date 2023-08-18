@@ -3,7 +3,7 @@ package nl.vpro.domain.media.support;
 import nl.vpro.domain.Child;
 
 /**
- * An item in a {@link OwnableList}, that is it is a {@link Child} of that.
+ * An item in a {@link OwnableList}, that is, it is a {@link Child} of that.
  * <p>
  * It also is {@link Comparable}, though this is not actually essential,
  *

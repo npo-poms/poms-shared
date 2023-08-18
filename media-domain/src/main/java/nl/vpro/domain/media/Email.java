@@ -12,7 +12,6 @@ import javax.persistence.*;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.PolyNull;
 import org.hibernate.annotations.Cache;
@@ -118,9 +117,7 @@ public class Email implements Serializable, Supplier<String>, MutableOwnable, Up
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-            .append("mail", email)
-            .toString();
+        return owner + ":"+ email;
     }
 
 }
