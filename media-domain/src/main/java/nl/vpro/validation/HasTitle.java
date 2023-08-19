@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Checks if the validated {@link TextualObjectUpdate} has a title of the given {@link #type()}.
+ * Checks if the validated {@link TextualObjectUpdate} has at least one of title of the given {@link #type() types}.
  * @since 7.7
  */
 @Target({ METHOD, FIELD, PARAMETER, TYPE_USE })
@@ -29,9 +29,9 @@ public @interface HasTitle {
     Class<? extends Payload>[] payload() default {};
 
 	/**
-	 * The type of the title to require. Defaults to {@link TextualType#SUB}
+	 * The types of the title to require at least one of. Defaults to { {@link TextualType#SUB}, {@link TextualType#MAIN} }
 	 */
-    TextualType[] type() default TextualType.SUB;
+    TextualType[] type() default {TextualType.SUB, TextualType.MAIN};
 
 	/**
 	 * Defines several {@link HasTitle} constraints on the same element.
