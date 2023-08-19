@@ -43,6 +43,7 @@ public enum TextualType {
     LONG,
 
     SHORT,
+
     /**
      * A sub text. This may be the descriptive title of a broadcast if it is an episode of a series.
      */

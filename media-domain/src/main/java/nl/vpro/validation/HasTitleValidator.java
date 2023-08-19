@@ -14,6 +14,7 @@ import nl.vpro.domain.TextualObjects;
 
 /**
  * @since 7.7
+ * @see HasTitle
  */
 public class HasTitleValidator implements ConstraintValidator<HasTitle, TextualObjectUpdate<?, ?, ?>> {
 
