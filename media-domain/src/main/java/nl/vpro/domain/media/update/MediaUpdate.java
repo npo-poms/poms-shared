@@ -145,7 +145,7 @@ import nl.vpro.xml.bind.*;
     "relations",
     "images"}
 )
-@HasTitle(groups = WarningValidatorGroup.class, type = TextualType.SUB)
+@HasTitle(groups = WeakWarningValidatorGroup.class, type = TextualType.SUB)
 @HasTitle(groups = WarningValidatorGroup.class, type = TextualType.MAIN)
 public abstract sealed class  MediaUpdate<M extends MediaObject>
     implements
