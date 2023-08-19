@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Checks if the validated {@link TextualObjectUpdate} has a title of the given type.
+ * Checks if the validated {@link TextualObjectUpdate} has a title of the given {@link #type()}.
  * @since 7.7
  */
 @Target({ METHOD, FIELD, PARAMETER, TYPE_USE })
@@ -35,11 +35,11 @@ public @interface HasTitle {
 
 
 	/**
-	 * Defines several {@code @URI} constraints on the same element.
+	 * Defines several {@link HasTitle} constraints on the same element.
 	 *
 	 * @see HasTitle
 	 */
-@Target({ METHOD, FIELD, PARAMETER, TYPE_USE })
+	@Target({ METHOD, FIELD, PARAMETER, TYPE_USE })
 	@Retention(RUNTIME)
 	@Documented
 	@interface List {
