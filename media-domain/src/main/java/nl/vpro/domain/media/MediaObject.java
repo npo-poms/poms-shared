@@ -479,7 +479,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @OneToMany(targetEntity = Email.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
-    @OrderColumn(name = "list_index", nullable = false)
+    @OrderColumn(name = "list_index", nullable = true /* hibernate sucks */)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected @Valid List<@NotNull @Valid Email> email;
 
