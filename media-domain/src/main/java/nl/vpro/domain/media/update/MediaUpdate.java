@@ -145,9 +145,11 @@ import nl.vpro.xml.bind.*;
     "relations",
     "images"}
 )
-@HasTitle(groups = WeakWarningValidatorGroup.class, type = TextualType.SUB)
-@HasTitle(groups = WarningValidatorGroup.class, type = TextualType.MAIN)
-public abstract sealed class  MediaUpdate<M extends MediaObject>
+@HasTitle(
+    groups = WeakWarningValidatorGroup.class,
+    type = {TextualType.SUB, TextualType.MAIN}
+)
+public abstract sealed class MediaUpdate<M extends MediaObject>
     implements
     MutableEmbargo<MediaUpdate<M>>,
     TextualObjectUpdate<TitleUpdate, DescriptionUpdate,  MediaUpdate<M>>,

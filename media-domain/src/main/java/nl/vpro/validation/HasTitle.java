@@ -31,8 +31,7 @@ public @interface HasTitle {
 	/**
 	 * The type of the title to require. Defaults to {@link TextualType#SUB}
 	 */
-    TextualType type() default TextualType.SUB;
-
+    TextualType[] type() default TextualType.SUB;
 
 	/**
 	 * Defines several {@link HasTitle} constraints on the same element.

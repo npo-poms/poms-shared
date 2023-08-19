@@ -33,9 +33,6 @@ public class HasTitleValidator implements ConstraintValidator<HasTitle, TextualO
             return true;
         }
 
-        if (StringUtils.isEmpty(TextualObjects.get(value.getTitles(), annotation.type()))) {
-            return false;
-        }
-        return true;
+        return !StringUtils.isEmpty(TextualObjects.get(value.getTitles(), annotation.type()));
     }
 }
