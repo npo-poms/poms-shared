@@ -15,13 +15,13 @@ import nl.vpro.domain.TextualObjects;
 /**
  * @since 7.7
  */
-public class TitleValidator implements ConstraintValidator<Title, TextualObjectUpdate<?, ?, ?>> {
+public class HasTitleValidator implements ConstraintValidator<HasTitle, TextualObjectUpdate<?, ?, ?>> {
 
 
-    Title annotation;
+    HasTitle annotation;
 
 	@Override
-    public void initialize(Title constraintAnnotation) {
+    public void initialize(HasTitle constraintAnnotation) {
         this.annotation = constraintAnnotation;
 	}
 

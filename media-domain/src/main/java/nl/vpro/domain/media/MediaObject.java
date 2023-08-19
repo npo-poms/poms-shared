@@ -47,7 +47,6 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.*;

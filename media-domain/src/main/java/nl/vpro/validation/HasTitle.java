@@ -16,10 +16,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Target({ METHOD, FIELD, PARAMETER, TYPE_USE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = TitleValidator.class)
+@Constraint(validatedBy = HasTitleValidator.class)
 @Documented
-@Repeatable(Title.List.class)
-public @interface Title {
+@Repeatable(HasTitle.List.class)
+public @interface HasTitle {
     String message() default "{nl.vpro.constraints.maintitle}";
 
     Class<?>[] groups() default {};
@@ -32,12 +32,12 @@ public @interface Title {
 	/**
 	 * Defines several {@code @URI} constraints on the same element.
 	 *
-	 * @see Title
+	 * @see HasTitle
 	 */
 @Target({ METHOD, FIELD, PARAMETER, TYPE_USE })
 	@Retention(RUNTIME)
 	@Documented
 	@interface List {
-		Title[] value();
+		HasTitle[] value();
 	}
 }

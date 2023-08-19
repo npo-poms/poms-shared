@@ -45,7 +45,7 @@ import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
-import nl.vpro.validation.Title;
+import nl.vpro.validation.HasTitle;
 import nl.vpro.xml.bind.*;
 
 
@@ -145,8 +145,8 @@ import nl.vpro.xml.bind.*;
     "relations",
     "images"}
 )
-@Title(groups = WarningValidatorGroup.class, type = TextualType.SUB)
-@Title(groups = WarningValidatorGroup.class, type = TextualType.MAIN)
+@HasTitle(groups = WarningValidatorGroup.class, type = TextualType.SUB)
+@HasTitle(groups = WarningValidatorGroup.class, type = TextualType.MAIN)
 public abstract sealed class  MediaUpdate<M extends MediaObject>
     implements
     MutableEmbargo<MediaUpdate<M>>,
