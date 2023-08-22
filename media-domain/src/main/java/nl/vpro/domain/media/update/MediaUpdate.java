@@ -195,7 +195,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
     protected String mid;
 
-    @Deprecated
+    @Deprecated(since = "7.7")
     @Pattern(regexp = "^urn:vpro:media:(?:group|program|segment):[0-9]+$")
     protected String urn;
 
@@ -819,7 +819,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     /**
      * @deprecated Refer to existing media by {@link #setMid(String) mid} instead.
      */
-    @Deprecated
+    @Deprecated(since = "7.7")
     public void setUrn(String s) {
         this.urn = s;
     }
