@@ -808,8 +808,6 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         this.isDeleted = !isDeleted ? null : true;
     }
 
-
-
     @XmlAttribute
     @Deprecated
     public String getUrn() {
@@ -918,7 +916,6 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         return broadcasters;
     }
 
-
     public void setBroadcasters(List<String> broadcasters) {
         this.broadcasters = broadcasters;
     }
@@ -991,6 +988,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         }
         return titles;
     }
+
     @Override
     public void setTitles(SortedSet<TitleUpdate> titles) {
         this.titles = titles;
