@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
@@ -50,7 +51,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
-    private final String callbackBaseUrl;
+    private final String callbackBaseUrl; // this seems not to get called?
     private final String token;
     private final UserService<?> userService;
     private final int chunkSize;
@@ -135,7 +136,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private ObjectNode metadata(SimpleLogger logger, String mid, String filename, Restrictions restrictions) {
          final ObjectNode metaData = MAPPER.createObjectNode();
         metaData.put("mid", mid);
-        metaData.put("callback_url", getCallbackUrl(mid));
+        String callbackUrl = getCallbackUrl(mid);
+        if (StringUtils.isNotBlank(callbackUrl)) {
+            metaData.put("callback_url", callbackUrl);
+        }
 
         if (filename != null) {
             // I don't get the point of this
