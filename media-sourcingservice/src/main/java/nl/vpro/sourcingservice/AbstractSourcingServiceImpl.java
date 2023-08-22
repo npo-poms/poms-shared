@@ -58,7 +58,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private final MeterRegistry meterRegistry;
 
-    AbstractSourcingServiceImpl(String baseUrl,  String callbackBaseUrl, String token, UserService<?> userService, int chunkSize, String defaultEmail, MeterRegistry meterRegistry) {
+    AbstractSourcingServiceImpl(
+        String baseUrl,
+        String callbackBaseUrl,
+        String token,
+        UserService<?> userService,
+        int chunkSize,
+        String defaultEmail,
+        MeterRegistry meterRegistry) {
         this.baseUrl = baseUrl;
 
         this.callbackBaseUrl = callbackBaseUrl;

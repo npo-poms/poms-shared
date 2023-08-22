@@ -9,7 +9,6 @@ import java.util.function.Supplier;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.Cache;
@@ -19,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.validation.PomsValidatorGroup;
 
 /**
  * @author Michiel Meeuwissen
@@ -53,11 +51,6 @@ public class TwitterRef implements Serializable, Supplier<String>, MutableOwnabl
 
     @Column(nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
-    @Pattern(
-        message = "{nl.vpro.constraints.twitterRefs.Pattern}",
-        regexp="^[@#][A-Za-z0-9_]{1,139}$",
-        groups={PomsValidatorGroup.class}
-    )
     @XmlValue
     @JsonProperty("value")
     @Getter

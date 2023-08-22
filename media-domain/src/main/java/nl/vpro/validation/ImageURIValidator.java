@@ -19,6 +19,7 @@ public class ImageURIValidator implements ConstraintValidator<ImageURI, String> 
             return true;
         }
 
+
         Matcher matcher = Image.SERVER_URI_PATTERN.matcher(imageUri);
         return matcher.find();
     }

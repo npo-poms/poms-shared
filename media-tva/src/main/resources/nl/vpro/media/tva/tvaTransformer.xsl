@@ -766,7 +766,7 @@
     <!-- <email> -->
     <xsl:for-each
         select="tva:BasicDescription/tva:RelatedMaterial[tva:HowRelated/@href = 'urn:bds:metadata:cs:EmailRationaleCS:2007:1']">
-      <xsl:if test="vpro:validListValue('nl.vpro.domain.media.MediaObject', 'email', normalize-space(tva:MediaLocator/mpeg7:MediaUri))">
+      <xsl:if test="vpro:validValue('nl.vpro.domain.media.Email', 'email', normalize-space(tva:MediaLocator/mpeg7:MediaUri))">
         <xsl:element name="email">
           <xsl:value-of select="normalize-space(tva:MediaLocator/mpeg7:MediaUri)"/>
         </xsl:element>

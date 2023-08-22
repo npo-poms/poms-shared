@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.*;
 import javax.validation.groups.Default;
 import javax.xml.bind.Marshaller;
@@ -44,6 +45,7 @@ import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
+import nl.vpro.validation.HasTitle;
 import nl.vpro.xml.bind.*;
 
 
@@ -143,7 +145,11 @@ import nl.vpro.xml.bind.*;
     "relations",
     "images"}
 )
-public abstract sealed class  MediaUpdate<M extends MediaObject>
+@HasTitle(
+    groups = WeakWarningValidatorGroup.class,
+    type = {TextualType.SUB, TextualType.MAIN}
+)
+public abstract sealed class MediaUpdate<M extends MediaObject>
     implements
     MutableEmbargo<MediaUpdate<M>>,
     TextualObjectUpdate<TitleUpdate, DescriptionUpdate,  MediaUpdate<M>>,
@@ -189,6 +195,7 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
 
     protected String mid;
 
+    @Deprecated
     @Pattern(regexp = "^urn:vpro:media:(?:group|program|segment):[0-9]+$")
     protected String urn;
 
@@ -330,7 +337,6 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
         this.releaseYear = mediaobject.getReleaseYear();
         this.ageRating = mediaobject.getAgeRating();
         this.contentRatings = mediaobject.getContentRatings();
-        this.email = mediaobject.getEmail();
 
         this.images = toList(
             mediaobject.getImages(),
@@ -368,6 +374,8 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
         this.memberOf = toSet(mediaobject.getMemberOf(), MemberRefUpdate::create);
         this.websites = toList(mediaobject.getWebsites(), Website::get);
         this.twitterrefs= toList(mediaobject.getTwitterRefs(), TwitterRef::get);
+        this.email = toList(mediaobject.getEmail(), nl.vpro.domain.media.Email::get);
+
 
         this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == owner && ! l.isDeleted(), LocationUpdate::new);
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
@@ -489,7 +497,6 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
         media.setReleaseYear(releaseYear);
         media.setAgeRating(ageRating);
         media.setContentRatings(contentRatings);
-        media.setEmail(email);
 
         // images have owner
 
@@ -542,7 +549,7 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
 
         returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
         returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
-
+        returnObject.setEmail(toList(email, (e) -> new nl.vpro.domain.media.Email(e, owner)));
         if(intentions != null) {
             MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getIntentions(), toIntentions(intentions, owner));
         } else {
@@ -802,11 +809,17 @@ public abstract sealed class  MediaUpdate<M extends MediaObject>
     }
 
 
+
     @XmlAttribute
+    @Deprecated
     public String getUrn() {
         return urn;
     }
 
+    /**
+     * @deprecated Refer to existing media by {@link #setMid(String) mid} instead.
+     */
+    @Deprecated
     public void setUrn(String s) {
         this.urn = s;
     }

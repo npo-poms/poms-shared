@@ -245,7 +245,6 @@ import static nl.vpro.domain.media.MediaObject.*;
     + "or publishStart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
     + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))")
 @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
-
 @Slf4j
 public abstract class MediaObject extends PublishableObject<MediaObject>
     implements Media<MediaObject> {
@@ -477,14 +476,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Enumerated(value = EnumType.STRING)
     protected List<@NotNull ContentRating> contentRatings;
 
-    @ElementCollection
-    @OrderColumn(name = "list_index", nullable = false)
+
+    @OneToMany(targetEntity = Email.class, orphanRemoval = true, cascade = {ALL})
+    @JoinColumn(name = "mediaobject_id", nullable = true)
+    @OrderColumn(name = "list_index", nullable = true /* hibernate sucks */)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @StringList(maxLength = 255)
-    protected List<@NotNull
-    @Email(
-        message = "{nl.vpro.constraints.Email.message}",
-        groups = PomsValidatorGroup.class) String> email;
+    protected @Valid List<@NotNull @Valid Email> email;
 
     @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -493,7 +490,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         nullable = true // Did I mention that hibernate sucks?
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<@NotNull @Valid Website> websites;
+    protected @Valid List<@NotNull @Valid Website> websites;
 
     @OneToMany(cascade = ALL, targetEntity = TwitterRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -686,8 +683,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getGroup(), ref.getNumber(), ref.getOwner()));
         this.ageRating = source.ageRating;
         source.getContentRatings().forEach(this::addContentRating);
-        source.getEmail().forEach(this::addEmail);
-        source.getWebsites().forEach(website -> this.addWebsite(Website.copy(website)));
+        source.getEmail().forEach(e ->
+            this.getEmail().add(new Email(e.get(), e.getOwner()))
+        );
+        source.getWebsites().forEach(website ->
+            this.addWebsite(Website.copy(website))
+        );
         source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
@@ -1835,23 +1836,29 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @XmlElement()
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<String> getEmail() {
+    public List<@Valid Email> getEmail() {
         if (email == null) {
             email = new ArrayList<>();
         }
         return email;
     }
 
-    public void setEmail(List<String> email) {
+    public void setEmail(List<Email> email) {
         this.email = updateList(this.email, email);
     }
 
     @Nullable
     public String getMainEmail() {
-        return getFromList(email);
+        return Optional.ofNullable(getFromList(email)).map(Email::get).orElse(null);
     }
 
+
     public MediaObject addEmail(String email) {
+        return addEmail(email, OwnerType.BROADCASTER);
+    }
+
+
+    public MediaObject addEmail(String email, OwnerType owner) {
         if (StringUtils.isBlank(email)) {
             return this;
         }
@@ -1861,8 +1868,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
 
         email = email.trim();
-        if (!this.email.contains(email)) {
-            this.email.add(email);
+
+        Email proposal = new Email(email, owner);
+        if (!this.email.contains(proposal)) {
+            this.email.add(proposal);
         }
 
         return this;
@@ -1872,7 +1881,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlElement(name = "website")
     @JsonProperty("websites")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<Website> getWebsites() {
+    public List<@Valid Website> getWebsites() {
         if (websites == null) {
             websites = new ArrayList<>();
         }
@@ -1881,6 +1890,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject setWebsites(List<Website> websites) {
+        //this.websites = websites;
         this.websites = updateList(this.websites, websites);
         return this;
     }

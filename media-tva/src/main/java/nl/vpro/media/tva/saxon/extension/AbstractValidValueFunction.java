@@ -16,10 +16,12 @@ import net.sf.saxon.value.SequenceType;
 import java.util.*;
 
 import javax.validation.*;
+import javax.validation.groups.Default;
 
 import org.meeuw.functional.TriPredicate;
 
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.validation.PomsValidatorGroup;
 
 /**
  * @author Michiel Meeuwissen
@@ -107,5 +109,8 @@ public abstract class AbstractValidValueFunction extends ExtensionFunctionDefini
 
     protected abstract Object getValue(String value);
 
-    protected abstract Class<?>[] validationGroups();
+
+    protected Class<?>[] validationGroups() {
+        return new Class<?>[]{PomsValidatorGroup.class, Default.class};
+    }
 }

@@ -25,12 +25,12 @@ import org.meeuw.i18n.regions.RegionService;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.update.Validation;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static nl.vpro.domain.ValidationTestHelper.dbValidate;
-import static nl.vpro.domain.ValidationTestHelper.validate;
+import static nl.vpro.domain.ValidationTestHelper.*;
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static nl.vpro.domain.media.support.OwnerType.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,6 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MediaObjectTest {
     @BeforeAll
     public static void init() {
+        Locales.setDefault(Locales.NETHERLANDISH);
 
     }
     @Test
@@ -538,7 +539,7 @@ public class MediaObjectTest {
         Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
 
         assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.language.message}");
-        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("zz is an invalid ISO 639 language code");
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("zz is een ongeldige ISO639 taalcode");
         assertThat(constraintViolations).hasSize(1);
 
     }
@@ -558,9 +559,9 @@ public class MediaObjectTest {
 
 
         assertThat(constraintViolations.get(0).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.language.message}");
-        assertThat(constraintViolations.get(0).getMessage()).isEqualTo("nl_XX is an invalid ISO 639 language code");
+        assertThat(constraintViolations.get(0).getMessage()).isEqualTo("nl_XX is een ongeldige ISO639 taalcode");
         assertThat(constraintViolations.get(1).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.region.message}");
-        assertThat(constraintViolations.get(1).getMessage()).isEqualTo("nl_XX is not a valid region");
+        assertThat(constraintViolations.get(1).getMessage()).isEqualTo("nl_XX is geen geldig gebied");
         assertThat(constraintViolations).hasSize(2);
     }
 
@@ -599,9 +600,9 @@ public class MediaObjectTest {
         p.setType(ProgramType.CLIP);
         p.addRelation(r);
 
-        Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
+        Set<ConstraintViolation<Program>> constraintViolations = validate(p, false);
         assertThat(constraintViolations).hasSize(1);
-        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("must contain a valid URI (: isn't)");
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("moet geldige url bevatten (':' dat niet)");
         log.info("{}", constraintViolations);
     }
 
@@ -626,6 +627,71 @@ public class MediaObjectTest {
         p.getWebsites().get(0).setUrl("www.kro-ncrv.nl/kruispunt");
         validate(p, true, 1);
     }
+
+
+    /**
+     * @see #testWebsiteValidationProperty()
+     */
+    @Test
+    @Disabled
+    public void testTwitterRefValidationProperty() {
+        Program p = new Program();
+        p.getTwitterRefs().add(new TwitterRef("aa"));
+        Set<ConstraintViolation<Program>> validate = validate(p, true);
+        assertThat(validate.stream().filter(c -> c.getPropertyPath().toString().equals("twitterRefs[0].value"))).hasSize(1);
+        {
+            Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "twitterRefs", true);
+            assertThat(constraintViolations).hasSize(1);
+            assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+        }
+    }
+
+
+
+    @Test
+    public void testEmailValidation() {
+        Program p = new Program();
+        p.setType(ProgramType.BROADCAST);
+        p.setAVType(AVType.MIXED);
+        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
+
+        p.getEmail().add(new Email("bla"));
+        Validation.getValidator().validateValue(Email.class, "email", "bla");
+        Set<ConstraintViolation<Program>> constraintViolations = validate(p, false);
+        assertThat(constraintViolations).hasSize(1);
+        assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("'bla' is geen goed email-adres");
+    }
+
+    @Test
+    @Disabled("""
+    This seems to work by chance, because email contains the validatable property 'email'.
+    Honestly, it seems like a bug in hibernate validator.
+    """)
+    public void testEmailPropertyValidation() {
+        Program p = new Program();
+        p.getEmail().add(new Email("bla"));
+         Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "email", true);
+        assertThat(constraintViolations).hasSize(1);
+        assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+    }
+
+    @Test
+    @Disabled("""
+        This one than does fail.
+        Honestly, it seems like a bug in hibernate validator.
+        (https://hibernate.atlassian.net/browse/HV-1791?)
+    """)
+    public void testWebsiteValidationProperty() {
+        Program p = new Program();
+        p.getWebsites().add(new Website("bla"));
+        {
+            Set<ConstraintViolation<Program>> constraintViolations = validateProperty(p, "websites", true);
+            assertThat(constraintViolations).hasSize(1);
+            assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
+        }
+    }
+
 
     @Test
     public void sortDate() {

@@ -3,8 +3,24 @@ package nl.vpro.domain.media.update;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
+import java.util.function.Function;
 
 import javax.validation.*;
+import javax.validation.executable.ExecutableValidator;
+import javax.validation.groups.Default;
+import javax.validation.metadata.BeanDescriptor;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.hibernate.validator.HibernateValidator;
+import org.hibernate.validator.messageinterpolation.ExpressionLanguageFeatureLevel;
+
+import com.google.common.cache.*;
+
+import nl.vpro.i18n.Locales;
+import nl.vpro.validation.PomsValidatorGroup;
+import nl.vpro.validation.WarningValidatorGroup;
+
+import static javax.validation.Validation.byProvider;
 
 /**
  * @author Michiel Meeuwissen
@@ -13,15 +29,25 @@ import javax.validation.*;
 @Slf4j
 public class Validation {
 
-    static final Validator VALIDATOR;
+    private static final LoadingCache<Locale, Validator> VALIDATORS = CacheBuilder
+        .newBuilder().build(new CacheLoader<>() {
+            @Override
+            public @NonNull Validator load(@NonNull Locale key) throws Exception {
+                return Validation.createValidator(key);
+            }
+        });
 
-    static {
+
+
+    private static Validator createValidator(Locale locale) {
         Validator validator;
         Locale defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US);
         try (
-            ValidatorFactory factory = javax.validation.Validation
-                .buildDefaultValidatorFactory()) {
+            ValidatorFactory factory = byProvider(HibernateValidator.class)
+                .configure()
+                .defaultLocale(locale)
+                .customViolationExpressionLanguageFeatureLevel(ExpressionLanguageFeatureLevel.DEFAULT ) // makes ${validatedValue} work for custom violations
+                .buildValidatorFactory()) {
             validator = factory.getValidator();
         } catch (ValidationException ve) {
             log.info(ve.getClass().getName() + " " + ve.getMessage());
@@ -35,17 +61,80 @@ public class Validation {
             Locale.setDefault(defaultLocale);
         }
         if (validator == null) {
-            log.info("No validator could be constructed. javax.validation will be disabled");
+            log.info("No validator could be constructed for ({}). javax.validation will be disabled", locale);
+            return new Validator() {
+                @Override
+                public <T> Set<ConstraintViolation<T>> validate(T object, Class<?>... groups) {
+                    return Collections.emptySet();
+                }
+
+                @Override
+                public <T> Set<ConstraintViolation<T>> validateProperty(T object, String propertyName, Class<?>... groups) {
+                    return Collections.emptySet();
+                }
+
+                @Override
+                public <T> Set<ConstraintViolation<T>> validateValue(Class<T> beanType, String propertyName, Object value, Class<?>... groups) {
+                    return Collections.emptySet();
+                }
+
+                @Override
+                public BeanDescriptor getConstraintsForClass(Class<?> clazz) {
+                    return null;
+                }
+
+                @Override
+                public <T> T unwrap(Class<T> type) {
+                    throw new ValidationException();
+                }
+
+                @Override
+                public ExecutableValidator forExecutables() {
+                    return null;
+                }
+            };
         }
-        VALIDATOR = validator;
+        return validator;
+    }
+
+    public static Validator getValidator() {
+        return getValidator(Locales.getDefault());
+    }
+
+    public static Validator getValidator(Locale locale) {
+        return VALIDATORS.getUnchecked(locale);
+    }
+
+
+    public static <T> Set<ConstraintViolation<T>> validate(T object) {
+        return validate(object, Default.class, PomsValidatorGroup.class);
+    }
+
+    public static <T> Set<ConstraintViolation<T>> validateProperty(T object, String propertyName) {
+        return validateProperty(object,  propertyName,Default.class, PomsValidatorGroup.class, WarningValidatorGroup.class);
+    }
+
+    public static <T, E> Set<ConstraintViolation<E>> validateCollectionProperty(T object, Function<T, Collection<E>> getter) {
+        Set<ConstraintViolation<E>> result = new LinkedHashSet<>();
+        for (E e : getter.apply(object)) {
+            Set<ConstraintViolation<E>> violations = validate(e);
+            result.addAll(violations);
+        }
+        return result;
+    }
+
+    public static <T, E> void throwingValidateCollectionProperty(T object, Function<T, Collection<E>> getter) throws ConstraintViolationException {
+        Set<ConstraintViolation<E>> validate = validateCollectionProperty(object, getter);
+         if (!validate.isEmpty()) {
+            throw new ConstraintViolationException(validate);
+        }
     }
 
     public static <T> Set<ConstraintViolation<T>> validate(T object, Class<?>... groups) {
-        if (VALIDATOR != null) {
-            return VALIDATOR.validate(object, groups);
-        } else {
-            log.info("Cannot validate since no validator available");
-            return Collections.emptySet();
-        }
+        return getValidator().validate(object, groups);
+    }
+
+    public static <T> Set<ConstraintViolation<T>> validateProperty(T object, String propertyName, Class<?>... groups) {
+      return getValidator().validateProperty(object, propertyName, groups);
     }
 }

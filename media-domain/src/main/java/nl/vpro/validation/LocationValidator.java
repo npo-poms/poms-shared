@@ -15,7 +15,7 @@ public class LocationValidator implements ConstraintValidator<Location, String> 
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         if(value == null) {
             return true;
-        }
+            }
 
         try {
             java.net.URI uri = new java.net.URI(value);

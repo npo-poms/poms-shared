@@ -8,41 +8,45 @@ import java.io.Serializable;
 import java.util.function.Supplier;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.validation.*;
+import nl.vpro.validation.URI;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "websiteType")
+@Valid
 public class Website implements UpdatableIdentifiable<Long, Website>, Serializable, Supplier<String>, MutableOwnable {
 
     @Serial
     private static final long serialVersionUID = 6568968749798696389L;
 
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlTransient
     private Long id;
 
-    @URI(
-        mustHaveScheme = true,
-        minHostParts = 2,
-        message = "{nl.vpro.constraints.URI}",
-        groups = WarningValidatorGroup.class)
+
     @XmlValue
     @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}")
     @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     @Getter
     @Setter
+    @URI(
+        mustHaveScheme = true,
+        minHostParts = 2,
+        message = "{nl.vpro.constraints.URI}",
+        groups = {nl.vpro.validation.PomsValidatorGroup.class}
+    )
     private String url;
 
     @XmlTransient
@@ -75,15 +79,11 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
         return new Website(source);
     }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
 
     /**
      * Under normal operation this should not be used!
      * <p/>
-     * While testing it sometimes comes in handy to be able to set an Id to simulate
+     * While testing, it sometimes comes in handy to be able to set an Id to simulate
      * a persisted object.
      *
      * @param id
@@ -154,10 +154,7 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-            .append("id", id)
-            .append("url", url)
-            .toString();
+        return owner + ":"+ url;
     }
 
 }

@@ -51,7 +51,7 @@ public class StringListValidator implements ConstraintValidator<StringList, Coll
                 appendError(message, i, "value does not match {pattern}");
             }
         }
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(message.toString()).addConstraintViolation();
             return false;
@@ -59,7 +59,7 @@ public class StringListValidator implements ConstraintValidator<StringList, Coll
         return true;
     }
     private void appendError(StringBuilder message, int i, String template) {
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             message.append("\n");
         }
         message.append('[').append(i).append("] ").append(template);
