@@ -49,12 +49,14 @@ The github build can be done locally with 'https://github.com/nektos/act[act]'. 
 
 
 |===
-|poms shared  | java
-
-|5.x | java 8
-|6.x  | java 8
-|7.x  | java 11
-|>= 7.7  | java 17
+|poms shared  | java | remarks
+| 4.x | java 8 |
+|5.x | java 8 |
+|6.x  | java 8 | openshift
+|7.x  | java 11 |"
+|>= 7.7  | java 17 | august 2023
+| 8.x?| javax - > jakarta  | late 2023
+| 9.x? | java 21 | early 2024
 |===
 
 
