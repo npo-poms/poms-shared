@@ -92,7 +92,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            uploadStart(logger, mid, fileSize, errors, restrictions);
 
            while (uploaded.get() < fileSize) {
-               uploadChunk(logger, mid, inputStream, uploaded, restrictions);
+               uploadChunk(logger, mid, inputStream, uploaded, restrictions, fileSize);
            }
        }
        assert uploaded.get() == fileSize;
@@ -193,12 +193,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 logger.info("Sending with region {}", restrictions.getGeoRestriction().getRegion().name());
                 body.add("region", restrictions.getGeoRestriction().getRegion().name());
             } else {
-                logger.warn("Ignored region {}", restrictions.getGeoRestriction());
+                logger.warn("Ign ored region {}", restrictions.getGeoRestriction());
             }
         }
     }
 
-    private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded, Restrictions restrictions) throws IOException, InterruptedException {
+    private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded, Restrictions restrictions, long total) throws IOException, InterruptedException {
         try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "transfer")
@@ -212,11 +212,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
             long l = uploaded.addAndGet(chunkStream.getCount());
             JsonNode node = MAPPER.readTree(transfer.body());
-            logger.info("{} transfer: {} ({}) {}",
+            logger.info("{} transfer: {} ({}) {}/{}",
                 mid,
                 node.get("status").textValue(),
                 transfer.statusCode(),
-                FileSizeFormatter.DEFAULT.format(l));
+                FileSizeFormatter.DEFAULT.format(l),
+                FileSizeFormatter.DEFAULT.format(total)
+            );
         }
     }
 
