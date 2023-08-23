@@ -575,7 +575,8 @@ public interface MediaBackendRestService {
     @POST
     @Operation(tags = {"media",   "streams"},
         summary = "Upload a video",
-        description = " "
+        description = "This is not supported.",
+        hidden = true
     )
     @Path("upload/{mid:[^/]+?}/passthrough")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
