@@ -44,7 +44,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         MAPPER.registerModule( new JavaTimeModule());
     }
 
-    private final HttpClient client = HttpClient.newHttpClient();
+    private final HttpClient client = HttpClient
+        .newBuilder()
+        .build();
     private String baseUrl;
 
 
@@ -78,11 +80,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
        SimpleLogger logger,
        final String mid,
        @Nullable Restrictions restrictions,
-       final long fileSize, InputStream inputStream, String errors) throws IOException, InterruptedException {
+       final long fileSize,
+       InputStream inputStream,
+       String errors) throws IOException, InterruptedException {
 
        final AtomicLong uploaded = new AtomicLong(0);
        try (inputStream) {
-
            // this is not needed (as I've tested)
            //ingest(logger, mid, getFileName(mid), restrictions);
 
@@ -196,20 +199,25 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded, Restrictions restrictions) throws IOException, InterruptedException {
-        InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream);
-        MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-            .add("upload_phase", "transfer")
-            .addStream("file_chunk", "part", () -> chunkStream);
+        try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
+            MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
+                .add("upload_phase", "transfer")
+                .addStream("file_chunk", "part", () -> chunkStream);
 
-        addRegion(logger, body, restrictions);
-        HttpRequest transferRequest = multipart(mid, body);
-        HttpResponse<String> transfer = client.send(
-            transferRequest, HttpResponse.BodyHandlers.ofString());
-        meter("transfer", transfer);
+            addRegion(logger, body, restrictions);
+            HttpRequest transferRequest = multipart(mid, body);
+            HttpResponse<String> transfer = client.send(
+                transferRequest, HttpResponse.BodyHandlers.ofString());
+            meter("transfer", transfer);
 
-        long l = uploaded.addAndGet(chunkStream.getCount());
-        JsonNode node = MAPPER.readTree(transfer.body());
-        logger.info("transfer: {} ({}) {}", node.get("status").textValue(), transfer.statusCode(), FileSizeFormatter.DEFAULT.format(l));
+            long l = uploaded.addAndGet(chunkStream.getCount());
+            JsonNode node = MAPPER.readTree(transfer.body());
+            logger.info("{} transfer: {} ({}) {}",
+                mid,
+                node.get("status").textValue(),
+                transfer.statusCode(),
+                FileSizeFormatter.DEFAULT.format(l));
+        }
     }
 
     private UploadResponse uploadFinish(SimpleLogger logger, String mid, AtomicLong uploaded, Restrictions restrictions) throws IOException, InterruptedException {
@@ -223,7 +231,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         final JsonNode node = MAPPER.readTree(finish.body());
 
-        logger.info("finish: {} ({}) {}", node.get("status").textValue(), finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded));
+        logger.info("{} finish: {} ({}) {}", mid, node.get("status").textValue(), finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded));
         JsonNode bodyNode = MAPPER.readTree(finish.body());
         return new UploadResponse(
             mid,
@@ -247,7 +255,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
         return request(pathForIngestMultipart(mid))
             .header("Content-Type", body.contentType())
-            .POST(body).build();
+            .POST(body)
+            .build();
     }
 
 
