@@ -53,7 +53,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
-    private final String callbackBaseUrl;
+    private final String callbackBaseUrl; // this seems not to get called?
     private final String token;
     private final UserService<?> userService;
     private final int chunkSize;
@@ -61,7 +61,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private final MeterRegistry meterRegistry;
 
-    AbstractSourcingServiceImpl(String baseUrl,  String callbackBaseUrl, String token, UserService<?> userService, int chunkSize, String defaultEmail, MeterRegistry meterRegistry) {
+    AbstractSourcingServiceImpl(
+        String baseUrl,
+        String callbackBaseUrl,
+        String token,
+        UserService<?> userService,
+        int chunkSize,
+        String defaultEmail,
+        MeterRegistry meterRegistry) {
         this.baseUrl = baseUrl;
 
         this.callbackBaseUrl = callbackBaseUrl;
@@ -132,7 +139,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private ObjectNode metadata(SimpleLogger logger, String mid, String filename, Restrictions restrictions) {
          final ObjectNode metaData = MAPPER.createObjectNode();
         metaData.put("mid", mid);
-        metaData.put("callback_url", getCallbackUrl(mid));
+        String callbackUrl = getCallbackUrl(mid);
+        if (StringUtils.isNotBlank(callbackUrl)) {
+            metaData.put("callback_url", callbackUrl);
+        }
 
         if (filename != null) {
             // I don't get the point of this
