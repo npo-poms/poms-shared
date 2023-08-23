@@ -184,7 +184,18 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             throw new IllegalArgumentException(multipart + ": " + start.statusCode() + ":" + start.body());
         }
         JsonNode node = MAPPER.readTree(start.body());
-        logger.info("start: {} ({}) filesize: {},  response: {}, email={}, callback_url={}", node.get("status").textValue(), start.statusCode(), FileSizeFormatter.DEFAULT.format(fileSize), node.get("response").textValue(), email, getCallbackUrl(mid).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@"));
+        String callBackUrl = getCallbackUrl(mid).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@");
+        if (StringUtils.isNotBlank(callBackUrl)) {
+            callBackUrl = ", %s".formatted(callBackUrl);
+        }
+        logger.info("start: {} ({}) filesize: {},  response: {}, email={}{}",
+            node.get("status").textValue(),
+            start.statusCode(),
+            FileSizeFormatter.DEFAULT.format(fileSize),
+            node.get("response").textValue(),
+            email,
+            callBackUrl
+        );
     }
 
     private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
