@@ -63,7 +63,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     AbstractSourcingServiceImpl(
         String baseUrl,
-        String callbackBaseUrl,
+        @Nullable String callbackBaseUrl,
         String token,
         UserService<?> userService,
         int chunkSize,
@@ -272,8 +272,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         meterRegistry.counter("sourcing." + implName() + "." + name , "status", String.valueOf(response.statusCode())).increment();
     }
 
+    @Nullable
     protected String getCallbackUrl(String mid) {
-        return callbackBaseUrl.formatted(mid);
+        return callbackBaseUrl == null ? null : callbackBaseUrl.formatted(mid);
     }
 
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {

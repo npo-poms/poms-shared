@@ -19,7 +19,7 @@ public class AudioSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
 
     public AudioSourcingServiceImpl(
         @Value("${sourcingservice.audio.baseUrl}") String audioBaseUrl,
-        @Value("${sourcingservice.callbackBaseUrl:}") String callbackBaseUrl,
+        @Value("${sourcingservice.callbackBaseUrl:#{null}") String callbackBaseUrl,
         @Value("${sourcingservice.audio.token}") String audioToken,
         UserService<?> userService,
         @Value("${sourcingservice.chunkSize:10000000}") int chunkSize,
