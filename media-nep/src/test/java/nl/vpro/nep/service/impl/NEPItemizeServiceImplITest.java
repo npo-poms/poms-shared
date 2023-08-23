@@ -113,13 +113,13 @@ public class NEPItemizeServiceImplITest {
 
     }
 
-    @Test
     @Order(20)
+    @RepeatedTest(3)
     public void grabScreen() throws Exception {
         try (NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES)) {
             File out = File.createTempFile("test", ".jpg");
             Map<String, String> headers = new HashMap<>();
-            itemizer.grabScreenLive("npo-1dvr", Instant.now().truncatedTo(ChronoUnit.SECONDS).minus(Duration.ofMinutes(1)), headers::put, Files.newOutputStream(out.toPath()));
+            itemizer.grabScreenLive("npo-1dvr", Instant.now().truncatedTo(ChronoUnit.SECONDS).minus(Duration.ofMinutes(2)), headers::put, Files.newOutputStream(out.toPath()));
             log.info("Created {} bytes {} (found headers {})", out.length(), out, headers);
         }
     }

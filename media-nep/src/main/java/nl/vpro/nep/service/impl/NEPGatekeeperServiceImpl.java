@@ -15,7 +15,6 @@ import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -83,11 +82,11 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
     private HttpClientContext clientContext;
 
     @Getter
-    private Duration connectTimeout;
+    private final Duration connectTimeout;
     @Getter
-    private Duration connectionRequestTimeout;
+    private final Duration connectionRequestTimeout;
     @Getter
-    private Duration socketTimeout;
+    private final Duration socketTimeout;
 
     @Getter
     private int pageSize = 200;
@@ -200,7 +199,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         AtomicLong totalSize = new AtomicLong(-1);
 
         URIBuilder finalBuilder = builder;
-        Supplier<Iterator<WorkflowExecution>> getter = new Supplier<Iterator<WorkflowExecution>>() {
+        Supplier<Iterator<WorkflowExecution>> getter = new Supplier<>() {
             String next = finalBuilder.toString();
 
             @Override
@@ -214,7 +213,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
                             WorkflowList list = MAPPER.readValue(execute.getEntity().getContent(), WorkflowList.class);
                             List<WorkflowExecution> workflowExecutions = list.getWorkflowExecutions().stream()
                                 .filter((we) -> from == null || we.getStartTime().isAfter(from))
-                                .collect(Collectors.toList());
+                                .toList();
                             totalSize.set(list.getTotalResults());
                             if (list.getNext() != null && workflowExecutions.size() == list.getWorkflowExecutions().size()) {
                                 next = list.getNext().getHref();
@@ -254,15 +253,18 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
             throw new NEPException(e, e.getMessage());
         }
         try (CloseableHttpResponse closeableHttpResponse = executeGet(builder.toString())) {
-            switch(closeableHttpResponse.getStatusLine().getStatusCode()) {
-                case HttpStatus.SC_OK:
+            switch (closeableHttpResponse.getStatusLine().getStatusCode()) {
+                case HttpStatus.SC_OK -> {
                     return Optional.of(MAPPER.readValue(closeableHttpResponse.getEntity().getContent(), WorkflowExecution.class));
-                case HttpStatus.SC_NOT_FOUND:
+                }
+                case HttpStatus.SC_NOT_FOUND -> {
                     return Optional.empty();
-                default:
+                }
+                default -> {
                     StringWriter w = new StringWriter();
                     IOUtils.copy(closeableHttpResponse.getEntity().getContent(), w, StandardCharsets.UTF_8);
                     throw new IllegalStateException(closeableHttpResponse.getStatusLine() + ":" + w.toString());
+                }
             }
         }
     }
