@@ -199,6 +199,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String callBackUrl = getCallbackUrl(mid);
         if (StringUtils.isNotBlank(callBackUrl)) {
             callBackUrl = ", %s".formatted(callBackUrl).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@");
+        } else {
+            callBackUrl = "";
         }
         logger.info("start: {} ({}) filesize: {},  response: {}, email={}{}",
             node.get("status").textValue(),
