@@ -53,6 +53,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
+    @Nullable
     private final String callbackBaseUrl; // this seems not to get called?
     private final String token;
     private final UserService<?> userService;
@@ -195,9 +196,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             throw new IllegalArgumentException(multipart + ": " + start.statusCode() + ":" + start.body());
         }
         JsonNode node = MAPPER.readTree(start.body());
-        String callBackUrl = getCallbackUrl(mid).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@");
+        String callBackUrl = getCallbackUrl(mid);
         if (StringUtils.isNotBlank(callBackUrl)) {
-            callBackUrl = ", %s".formatted(callBackUrl);
+            callBackUrl = ", %s".formatted(callBackUrl).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@");
         }
         logger.info("start: {} ({}) filesize: {},  response: {}, email={}{}",
             node.get("status").textValue(),
