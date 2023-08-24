@@ -53,6 +53,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
+    @Nullable
     private final String callbackBaseUrl; // this seems not to get called?
     private final String token;
     private final UserService<?> userService;
@@ -63,7 +64,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     AbstractSourcingServiceImpl(
         String baseUrl,
-        String callbackBaseUrl,
+        @Nullable String callbackBaseUrl,
         String token,
         UserService<?> userService,
         int chunkSize,
@@ -195,9 +196,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             throw new IllegalArgumentException(multipart + ": " + start.statusCode() + ":" + start.body());
         }
         JsonNode node = MAPPER.readTree(start.body());
-        String callBackUrl = getCallbackUrl(mid).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@");
+        String callBackUrl = getCallbackUrl(mid);
         if (StringUtils.isNotBlank(callBackUrl)) {
-            callBackUrl = ", %s".formatted(callBackUrl);
+            callBackUrl = ", %s".formatted(callBackUrl).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@");
         }
         logger.info("start: {} ({}) filesize: {},  response: {}, email={}{}",
             node.get("status").textValue(),
@@ -272,8 +273,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         meterRegistry.counter("sourcing." + implName() + "." + name , "status", String.valueOf(response.statusCode())).increment();
     }
 
+    @Nullable
     protected String getCallbackUrl(String mid) {
-        return callbackBaseUrl.formatted(mid);
+        return callbackBaseUrl == null ? null : callbackBaseUrl.formatted(mid);
     }
 
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
