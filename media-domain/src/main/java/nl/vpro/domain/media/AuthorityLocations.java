@@ -548,12 +548,12 @@ public class AuthorityLocations {
 
 
 
-    private final HttpClient client = HttpClient.newBuilder()
+    private static final HttpClient client = HttpClient.newBuilder()
         .followRedirects(HttpClient.Redirect.ALWAYS)
         .connectTimeout(Duration.ofSeconds(3))
         .build();
 
-    private OptionalLong getBytesize(String locationUrl) {
+    public static OptionalLong getBytesize(String locationUrl) {
         HttpRequest head = HttpRequest.newBuilder()
 
             .uri(URI.create(locationUrl))
