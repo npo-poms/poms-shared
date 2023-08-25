@@ -2,6 +2,7 @@ package nl.vpro.sourcingservice;
 
 import io.github.yskszk63.jnhttpmultipartformdatabodypublisher.MultipartFormDataBodyPublisher;
 import io.micrometer.core.instrument.MeterRegistry;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
@@ -47,6 +48,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private final HttpClient client = HttpClient
         .newBuilder()
+        .version(HttpClient.Version.HTTP_1_1) // GOAWAY trouble?
         .build();
     private String baseUrl;
 
@@ -70,7 +72,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         int chunkSize,
         String defaultEmail,
         MeterRegistry meterRegistry) {
-        this.baseUrl = baseUrl;
+        this.baseUrl = baseUrl.replaceAll("([^/])$","$1/");
 
         this.callbackBaseUrl = callbackBaseUrl;
         this.token = token;
@@ -121,6 +123,17 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         return MAPPER.readValue(statusResponse.body(), StatusResponse.class);
     }
 
+    @Override
+    public DeleteResponse delete(String mid, int daysBeforeHardDelete) throws IOException, InterruptedException {
+        final HttpRequest statusRequest = deleteRequest(mid, daysBeforeHardDelete);
+        final HttpResponse<String> statusResponse = client.send(statusRequest, HttpResponse.BodyHandlers.ofString());
+        meter("status.delete", statusResponse);
+        if (statusResponse.statusCode() > 299) {
+            throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
+        }
+        return MAPPER.readValue(statusResponse.body(), DeleteResponse.class);
+    }
+
     private void ingest(SimpleLogger logger, String mid, String filename, Restrictions restrictions) throws IOException, InterruptedException {
 
         final ObjectNode metaData = metadata(logger, mid, filename, restrictions);
@@ -162,7 +175,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 if (geoRestriction.willBeUnderEmbargo()) {
                     logger.warn("Specified geo restriction {} will be under embargo. This is not yet supported", geoRestriction);
                 }
-                logger.info("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
+                logger.debug("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
                 metaData.put("geo_restriction", restrictions.getGeoRestriction().getRegion().name());
             }
         }
@@ -213,19 +226,20 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
         if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
             if (Arrays.stream(Region.RESTRICTED_REGIONS).anyMatch(r -> r == restrictions.getGeoRestriction().getRegion())) {
-                logger.info("Sending with region {}", restrictions.getGeoRestriction().getRegion().name());
+                logger.debug("Sending with region {}", restrictions.getGeoRestriction().getRegion().name());
                 body.add("region", restrictions.getGeoRestriction().getRegion().name());
             } else {
-                logger.warn("Ign ored region {}", restrictions.getGeoRestriction());
+                logger.warn("Ignored region {}", restrictions.getGeoRestriction());
             }
         }
     }
 
     private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded, Restrictions restrictions, long total) throws IOException, InterruptedException {
+        int partNumber = 0;
         try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "transfer")
-                .addStream("file_chunk", "part", () -> chunkStream);
+                .addStream("file_chunk", "part" + (partNumber++), () -> chunkStream);
 
             addRegion(logger, body, restrictions);
             HttpRequest transferRequest = multipart(mid, body);
@@ -289,13 +303,24 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     protected HttpRequest ingest(HttpRequest.BodyPublisher body) {
         return request("ingest")
             .header("Content-Type", "application/json")
-            .POST(body).build();
+            .POST(body)
+            .build();
     }
 
 
     protected HttpRequest statusRequest(String mid) {
-            return request("ingest/" + mid + "/status")
-                .GET().build();
+        return request("ingest/" + mid + "/status")
+            .GET().build();
+    }
+
+
+    @SneakyThrows
+    protected HttpRequest deleteRequest(String mid, int daysBeforeHardDelete) {
+            ObjectNode node = MAPPER.createObjectNode();
+            node.put("days_before_hard_delete", daysBeforeHardDelete);
+            return request("ingest/" + mid + "/delete")
+                .POST(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(node)))
+                .build();
     }
 
     protected HttpRequest.Builder request(String path) {

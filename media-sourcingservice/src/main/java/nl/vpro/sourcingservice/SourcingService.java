@@ -21,6 +21,12 @@ public interface SourcingService {
 
     StatusResponse status(String mid) throws IOException, InterruptedException;
 
+
+    DeleteResponse delete(String mid, int daysBeforeHardDelete) throws IOException, InterruptedException;
+
+
+
+
     /**
      * A string which can be used to show where this implementation will upload to.
      */
