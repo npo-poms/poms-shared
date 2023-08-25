@@ -170,7 +170,11 @@ public class AuthorityLocations {
         Location authorityLocation = getOrCreateAuthorityLocation(avType, mediaObject, platform, encryption, "For " + encryption, locationPredicate);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
-            updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes(pubOptie).orElseThrow(() -> new RuntimeException("not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
+            AVAttributes avAttributes = getAVAttributes(pubOptie).orElseThrow(() -> new RuntimeException("not found nep puboptie"));
+            if (avAttributes.getAvFileFormat() != AVFileFormat.HASP) {
+                getBytesize(authorityLocation.getProgramUrl()).ifPresent(avAttributes::setByteSize);
+            }
+            updateLocationAndPredictions(authorityLocation, mediaObject, platform, avAttributes, OwnerType.AUTHORITY, new HashSet<>(), now);
         }
 
         //MSE-3992
@@ -212,34 +216,14 @@ public class AuthorityLocations {
         }
     }
 
-    HttpClient client = HttpClient.newBuilder()
-        .followRedirects(HttpClient.Redirect.ALWAYS)
-        .connectTimeout(Duration.ofSeconds(3))
-        .build();
+
+
     private Location getOrCreateAuthorityLocation(AVType avType, MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate) {
         String locationUrl;
-        Long byteSize = null;
         if (avType == AVType.VIDEO) {
             locationUrl = createLocationVideoUrl(mediaObject, platform, encryption, "nep");
         } else {
             locationUrl = String.format(audioTemplate, mediaObject.getMid());
-            HttpRequest head = HttpRequest.newBuilder()
-
-                .uri(URI.create(locationUrl))
-                .method("HEAD", HttpRequest.BodyPublishers.noBody())
-                .build(); // .HEAD() in java 18
-            try {
-                HttpResponse<Void> send = client.send(head, HttpResponse.BodyHandlers.discarding());
-                if (send.statusCode() == 200) {
-                    byteSize = send.headers().firstValue("Content-Length").map(Long::valueOf).orElse(null);
-                } else {
-                    log.warn("HEAD {} returned {}", locationUrl, send.statusCode());
-                }
-            } catch (IOException | InterruptedException e) {
-                log.warn(e.getMessage(), e);
-            }
-
-
         }
         if (locationUrl == null) {
             return null;
@@ -280,9 +264,6 @@ public class AuthorityLocations {
             }
             authorityLocation.setPlatform(platform);
             authorityLocation.setOwner(OwnerType.AUTHORITY);
-        }
-        if (byteSize != null) {
-            authorityLocation.setByteSize(byteSize);
         }
         Instant streamingOffline =  mediaObject.getStreamingPlatformStatus().getOffline(authorityLocation.hasDrm());
         return authorityLocation;
@@ -557,11 +538,40 @@ public class AuthorityLocations {
         } else {
             String[] split = config.split(",", 2);
 
-            return Optional.of(AVAttributes.builder()
-                .avFileFormat(AVFileFormat.valueOf(split[0]))
-                .bitrate(split.length > 1 ? Integer.valueOf(split[1]) : null)
-                .build());
+            AVFileFormat avFileFormat = AVFileFormat.valueOf(split[0]);
+            AVAttributes.Builder builder = AVAttributes.builder()
+                .avFileFormat(avFileFormat)
+                .bitrate(split.length > 1 ? Integer.valueOf(split[1]) : null);
+
+
+            return Optional.of(builder.build());
         }
+    }
+
+
+
+    private final HttpClient client = HttpClient.newBuilder()
+        .followRedirects(HttpClient.Redirect.ALWAYS)
+        .connectTimeout(Duration.ofSeconds(3))
+        .build();
+
+    private OptionalLong getBytesize(String locationUrl) {
+        HttpRequest head = HttpRequest.newBuilder()
+
+            .uri(URI.create(locationUrl))
+            .method("HEAD", HttpRequest.BodyPublishers.noBody())
+            .build(); // .HEAD() in java 18
+        try {
+            HttpResponse<Void> send = client.send(head, HttpResponse.BodyHandlers.discarding());
+            if (send.statusCode() == 200) {
+                return send.headers().firstValueAsLong("Content-Length");
+            } else {
+                log.warn("HEAD {} returned {}", locationUrl, send.statusCode());
+            }
+        } catch (IOException | InterruptedException e) {
+            log.warn(e.getMessage(), e);
+        }
+        return OptionalLong.empty();
     }
 
     @AllArgsConstructor
