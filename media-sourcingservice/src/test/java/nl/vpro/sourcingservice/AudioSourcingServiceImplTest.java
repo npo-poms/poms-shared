@@ -48,9 +48,9 @@ class AudioSourcingServiceImplTest {
         ((HttpBearerAuth) apiClient.getAuthentication("bearerAuth")).setBearerToken(PROPERTIES.getProperty("token"));
 */
         impl = new AudioSourcingServiceImpl(
-            PROPERTIES.getProperty("sourcingservice.audio.baseUrl"),
+            PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://test.sourcing-audio.cdn.npoaudio.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
-            PROPERTIES.getProperty("sourcingservice.audio.token"),
+            PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             mock(UserService.class),
             10 * 1024 * 1024,
             "m.meeuwissen.vpro@gmail.com",
