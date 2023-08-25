@@ -25,8 +25,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.update.UploadResponse;
-import nl.vpro.domain.user.User;
-import nl.vpro.domain.user.UserService;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileSizeFormatter;
 import nl.vpro.util.InputStreamChunk;
@@ -59,7 +57,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     @Nullable
     private final String callbackBaseUrl; // this seems not to get called?
     private final String token;
-    private final UserService<?> userService;
     private final int chunkSize;
     private final String defaultEmail;
 
@@ -69,7 +66,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String baseUrl,
         @Nullable String callbackBaseUrl,
         String token,
-        UserService<?> userService,
         int chunkSize,
         String defaultEmail,
         MeterRegistry meterRegistry) {
@@ -77,7 +73,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         this.callbackBaseUrl = callbackBaseUrl;
         this.token = token;
-        this.userService = userService;
         this.chunkSize = chunkSize;
         this.defaultEmail = defaultEmail;
         this.meterRegistry = meterRegistry;
@@ -186,13 +181,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         return metaData;
     }
 
-    private void uploadStart(SimpleLogger logger, String mid, long fileSize, @Nullable String errors, Restrictions restrictions) throws IOException, InterruptedException {
+    private void uploadStart(
+        final SimpleLogger logger,
+        final String mid,
+        final long fileSize,
+        final @Nullable String errors,
+        final Restrictions restrictions) throws IOException, InterruptedException {
 
-        final String email = Optional.ofNullable(errors)
-            .orElse(
-                userService.currentUser().map(User::getEmail)
-                    .orElse(defaultEmail)
-            );
+        final String email = Optional.ofNullable(errors).orElse(defaultEmail);
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add("upload_phase", "start");
         if (email != null) {
@@ -236,13 +232,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     private void uploadChunk(
-        SimpleLogger logger,
-        String mid,
-        InputStream inputStream,
-        AtomicLong uploaded,
-        Restrictions restrictions,
-        long total,
-        AtomicInteger partNumber) throws IOException, InterruptedException {
+        final SimpleLogger logger,
+        final String mid,
+        final InputStream inputStream,
+        final AtomicLong uploaded,
+        final Restrictions restrictions,
+        final long total,
+        final AtomicInteger partNumber) throws IOException, InterruptedException {
         try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "transfer")

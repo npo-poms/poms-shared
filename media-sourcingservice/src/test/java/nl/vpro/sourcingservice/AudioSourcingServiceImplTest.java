@@ -14,14 +14,12 @@ import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.GeoRestriction;
 import nl.vpro.domain.media.Region;
-import nl.vpro.domain.user.UserService;
 import nl.vpro.logging.simple.Log4j2SimpleLogger;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 import nl.vpro.util.FileSizeFormatter;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
-import static org.mockito.Mockito.mock;
 
 @Log4j2
 class AudioSourcingServiceImplTest {
@@ -51,7 +49,6 @@ class AudioSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://test.sourcing-audio.cdn.npoaudio.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
-            mock(UserService.class),
             10 * 1024 * 1024,
             "m.meeuwissen.vpro@gmail.com",
             new LoggingMeterRegistry()

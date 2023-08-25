@@ -12,10 +12,7 @@ import java.util.Properties;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.domain.user.UserService;
 import nl.vpro.logging.simple.Log4j2SimpleLogger;
-
-import static org.mockito.Mockito.mock;
 
 @Log4j2
 class VideoSourcingServiceImplTest {
@@ -43,7 +40,6 @@ class VideoSourcingServiceImplTest {
             "https://test.sourcing-video.cdn.npoaudio.nl/",
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.video.token"),
-            mock(UserService.class),
             100_000_000,
             "m.meeuwissen.vpro@gmail.com",
             new LoggingMeterRegistry()

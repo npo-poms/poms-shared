@@ -7,8 +7,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
-import nl.vpro.domain.user.UserService;
-
 
 /**
  * @implNote See {@link AbstractSourcingServiceImpl}
@@ -22,12 +20,11 @@ public class AudioSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
         @NonNull @Value("${sourcingservice.audio.baseUrl}") String audioBaseUrl,
         @Value("${sourcingservice.callbackBaseUrl:#{null}}") String callbackBaseUrl,
         @NonNull @Value("${sourcingservice.audio.token}") String audioToken,
-        UserService<?> userService,
         @Value("${sourcingservice.chunkSize:10000000}") int chunkSize,
         @Value("${sourcingservice.defaultEmail:#{null}}") String defaultEmail,
         MeterRegistry meterRegistry
        ) {
-        super(audioBaseUrl, callbackBaseUrl, audioToken,  userService, chunkSize, defaultEmail, meterRegistry);
+        super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, meterRegistry);
     }
 
     @Override
