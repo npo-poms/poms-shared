@@ -9,9 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.net.http.*;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import static nl.vpro.domain.Changeables.instant;
 
 /**
- * Utilities related to poms 'authorative locations'. I.e. {@link MediaObject#getLocations() locations} that are implicitly added (because of some notification from an external system, currently NEP), with {@link OwnerType owner} {@link OwnerType#AUTHORITY}
+ * Utilities related to poms 'authoritative locations'. I.e. {@link MediaObject#getLocations() locations} that are implicitly added (because of some notification from an external system, currently NEP), with {@link OwnerType owner} {@link OwnerType#AUTHORITY}
  *
  * @author Michiel Meeuwissen
  * @since 5.7
@@ -164,7 +165,11 @@ public class AuthorityLocations {
         Location authorityLocation = getOrCreateAuthorityLocation(avType, mediaObject, platform, encryption, "For " + encryption, locationPredicate);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
-            updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes(pubOptie).orElseThrow(() -> new RuntimeException("not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
+            AVAttributes avAttributes = getAVAttributes(pubOptie).orElseThrow(() -> new RuntimeException("not found nep puboptie"));
+            if (avAttributes.getAvFileFormat() != AVFileFormat.HASP) {
+                getBytesize(authorityLocation.getProgramUrl()).ifPresent(avAttributes::setByteSize);
+            }
+            updateLocationAndPredictions(authorityLocation, mediaObject, platform, avAttributes, OwnerType.AUTHORITY, new HashSet<>(), now);
         }
 
         //MSE-3992
@@ -530,6 +535,32 @@ public class AuthorityLocations {
                 .bitrate(split.length > 1 ? Integer.valueOf(split[1]) : null)
                 .build());
         }
+    }
+
+
+
+    private final HttpClient client = HttpClient.newBuilder()
+        .followRedirects(HttpClient.Redirect.ALWAYS)
+        .connectTimeout(Duration.ofSeconds(3))
+        .build();
+
+    private OptionalLong getBytesize(String locationUrl) {
+        HttpRequest head = HttpRequest.newBuilder()
+
+            .uri(URI.create(locationUrl))
+            .method("HEAD", HttpRequest.BodyPublishers.noBody())
+            .build(); // .HEAD() in java 18
+        try {
+            HttpResponse<Void> send = client.send(head, HttpResponse.BodyHandlers.discarding());
+            if (send.statusCode() == 200) {
+                return send.headers().firstValueAsLong("Content-Length");
+            } else {
+                log.warn("HEAD {} returned {}", locationUrl, send.statusCode());
+            }
+        } catch (IOException | InterruptedException e) {
+            log.warn(e.getMessage(), e);
+        }
+        return OptionalLong.empty();
     }
 
     @AllArgsConstructor
