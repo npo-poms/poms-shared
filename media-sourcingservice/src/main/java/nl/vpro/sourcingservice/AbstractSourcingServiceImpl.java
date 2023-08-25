@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.http.*;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.lang3.StringUtils;
@@ -47,6 +48,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private final HttpClient client = HttpClient
         .newBuilder()
+        .version(HttpClient.Version.HTTP_1_1) // GOAWAY trouble?
         .build();
     private String baseUrl;
 
@@ -70,7 +72,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         int chunkSize,
         String defaultEmail,
         MeterRegistry meterRegistry) {
-        this.baseUrl = baseUrl;
+        this.baseUrl = baseUrl.replaceAll("([^/])$","$1/");
 
         this.callbackBaseUrl = callbackBaseUrl;
         this.token = token;
@@ -99,9 +101,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            //ingest(logger, mid, getFileName(mid), restrictions);
 
            uploadStart(logger, mid, fileSize, errors, restrictions);
-
+           AtomicInteger partNumber = new AtomicInteger(1);
            while (uploaded.get() < fileSize) {
-               uploadChunk(logger, mid, inputStream, uploaded, restrictions, fileSize);
+               uploadChunk(logger, mid, inputStream, uploaded, restrictions, fileSize, partNumber);
            }
        }
        assert uploaded.get() == fileSize;
@@ -162,7 +164,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 if (geoRestriction.willBeUnderEmbargo()) {
                     logger.warn("Specified geo restriction {} will be under embargo. This is not yet supported", geoRestriction);
                 }
-                logger.info("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
+                logger.debug("Sending with geo restriction {}", restrictions.getGeoRestriction().getRegion().name());
                 metaData.put("geo_restriction", restrictions.getGeoRestriction().getRegion().name());
             }
         }
@@ -215,19 +217,26 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
         if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
             if (Arrays.stream(Region.RESTRICTED_REGIONS).anyMatch(r -> r == restrictions.getGeoRestriction().getRegion())) {
-                logger.info("Sending with region {}", restrictions.getGeoRestriction().getRegion().name());
+                logger.debug("Sending with region {}", restrictions.getGeoRestriction().getRegion().name());
                 body.add("region", restrictions.getGeoRestriction().getRegion().name());
             } else {
-                logger.warn("Ign ored region {}", restrictions.getGeoRestriction());
+                logger.warn("Ignored region {}", restrictions.getGeoRestriction());
             }
         }
     }
 
-    private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded, Restrictions restrictions, long total) throws IOException, InterruptedException {
+    private void uploadChunk(
+        SimpleLogger logger,
+        String mid,
+        InputStream inputStream,
+        AtomicLong uploaded,
+        Restrictions restrictions,
+        long total,
+        AtomicInteger partNumber) throws IOException, InterruptedException {
         try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "transfer")
-                .addStream("file_chunk", "part", () -> chunkStream);
+                .addStream("file_chunk", "part" + (partNumber.getAndIncrement()), () -> chunkStream);
 
             addRegion(logger, body, restrictions);
             HttpRequest transferRequest = multipart(mid, body);
@@ -291,13 +300,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     protected HttpRequest ingest(HttpRequest.BodyPublisher body) {
         return request("ingest")
             .header("Content-Type", "application/json")
-            .POST(body).build();
+            .POST(body)
+            .build();
     }
 
 
     protected HttpRequest statusRequest(String mid) {
-            return request("ingest/" + mid + "/status")
-                .GET().build();
+        return request("ingest/" + mid + "/status")
+            .GET().build();
     }
 
     protected HttpRequest.Builder request(String path) {
