@@ -246,7 +246,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "transfer")
-                .addStream("file_chunk", "part" + (partNumber.getAndIncrement()), () -> chunkStream);
+                .addStream(
+                    "file_chunk",
+                    "part" + (partNumber.getAndIncrement()), () -> chunkStream);
 
             addRegion(logger, body, restrictions);
             HttpRequest transferRequest = multipart(mid, body);
