@@ -13,7 +13,6 @@ import java.net.http.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -187,7 +186,6 @@ public class AuthorityLocations {
                 .needed(false)
                 .program(mediaObject)
                 .reason("NEP status is " + streamingPlatformStatus + " but no existing locations or predictions matched")
-                .extraTasks(null)
                 .build();
         }
 
@@ -583,7 +581,5 @@ public class AuthorityLocations {
         final String reason;
         final List<Location> locations;
         final AVType avType;
-        @lombok.Builder.Default
-        CompletableFuture<?> extraTasks = CompletableFuture.completedFuture(null);
     }
 }
