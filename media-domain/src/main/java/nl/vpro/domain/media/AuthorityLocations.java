@@ -14,7 +14,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -137,7 +136,7 @@ public class AuthorityLocations {
                 } else {
                     // None or Null
                     if (existingPredictionForPlatform.getEncryption() != Encryption.DRM) {
-                        createDrmImplicitly(avType, mediaObject, platform, authorityLocations, locationPredicate, now, null);
+                        createDrmImplicitly(avType, mediaObject, platform, authorityLocations, locationPredicate, now);
                         if (authorityLocations.isEmpty()) {
                             return AuthorityLocations.RealizeResult.builder()
                                 .needed(false)
@@ -168,7 +167,7 @@ public class AuthorityLocations {
                 .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform)
                 .build();
         }
-        Location authorityLocation = getOrCreateAuthorityLocation(avType, mediaObject, platform, encryption, "For " + encryption, locationPredicate, null);
+        Location authorityLocation = getOrCreateAuthorityLocation(avType, mediaObject, platform, encryption, "For " + encryption, locationPredicate);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
             updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes(pubOptie).orElseThrow(() -> new RuntimeException("not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
@@ -176,7 +175,7 @@ public class AuthorityLocations {
 
         //MSE-3992
         if (encryption != Encryption.DRM) {
-            createDrmImplicitly(avType, mediaObject, platform, authorityLocations, locationPredicate, now, null);
+            createDrmImplicitly(avType, mediaObject, platform, authorityLocations, locationPredicate, now);
         }
 
         if (authorityLocations.isEmpty()) {
@@ -201,10 +200,9 @@ public class AuthorityLocations {
         Platform platform,
         List<Location> authorityLocations,
         Predicate<Location> locationPredicate,
-        Instant now,
-        Consumer<Runnable> extra) {
+        Instant now) {
         if (avType == AVType.VIDEO) {
-            Location authorityLocation2 = getOrCreateAuthorityLocation(avType, mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate, extra);
+            Location authorityLocation2 = getOrCreateAuthorityLocation(avType, mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
             if (authorityLocation2 != null) {
                 authorityLocations.add(authorityLocation2);
                 updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("Not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
@@ -218,7 +216,7 @@ public class AuthorityLocations {
         .followRedirects(HttpClient.Redirect.ALWAYS)
         .connectTimeout(Duration.ofSeconds(3))
         .build();
-    private Location getOrCreateAuthorityLocation(AVType avType, MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate, Consumer<Runnable> consumer) {
+    private Location getOrCreateAuthorityLocation(AVType avType, MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate) {
         String locationUrl;
         Long byteSize = null;
         if (avType == AVType.VIDEO) {
