@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.http.*;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.lang3.StringUtils;
@@ -101,9 +102,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            //ingest(logger, mid, getFileName(mid), restrictions);
 
            uploadStart(logger, mid, fileSize, errors, restrictions);
-
+           AtomicInteger partNumber = new AtomicInteger(1);
            while (uploaded.get() < fileSize) {
-               uploadChunk(logger, mid, inputStream, uploaded, restrictions, fileSize);
+               uploadChunk(logger, mid, inputStream, uploaded, restrictions, fileSize, partNumber);
            }
        }
        assert uploaded.get() == fileSize;
@@ -234,12 +235,18 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
     }
 
-    private void uploadChunk(SimpleLogger logger, String mid, InputStream inputStream, AtomicLong uploaded, Restrictions restrictions, long total) throws IOException, InterruptedException {
-        int partNumber = 0;
+    private void uploadChunk(
+        SimpleLogger logger,
+        String mid,
+        InputStream inputStream,
+        AtomicLong uploaded,
+        Restrictions restrictions,
+        long total,
+        AtomicInteger partNumber) throws IOException, InterruptedException {
         try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add("upload_phase", "transfer")
-                .addStream("file_chunk", "part" + (partNumber++), () -> chunkStream);
+                .addStream("file_chunk", "part" + (partNumber.getAndIncrement()), () -> chunkStream);
 
             addRegion(logger, body, restrictions);
             HttpRequest transferRequest = multipart(mid, body);
