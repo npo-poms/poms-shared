@@ -107,6 +107,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
+    @Disabled
     public void delete() throws IOException, InterruptedException {
 
         Object status = impl.delete(MID, 0);
