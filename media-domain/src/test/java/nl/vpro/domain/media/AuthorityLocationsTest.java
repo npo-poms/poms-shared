@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 public class AuthorityLocationsTest {
 
-    AuthorityLocations locations = new AuthorityLocations();
+    AuthorityLocations locations = new AuthorityLocations(null);
 
 
     @Test
@@ -131,7 +131,6 @@ public class AuthorityLocationsTest {
         assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("https://entry.cdn.npoaudio.nl/handle/MID-123.mp3");
         assertThat(program.getLocations().first().getOwner()).isEqualTo(OwnerType.AUTHORITY);
         assertThat(program.getLocations().first().getAvFileFormat()).isEqualTo(AVFileFormat.MP3);
-
     }
 
 }
