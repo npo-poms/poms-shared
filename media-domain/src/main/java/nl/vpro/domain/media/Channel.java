@@ -474,7 +474,7 @@ public enum Channel implements Displayable, XmlValued {
     EEN_(VIDEO, 1953) {
         @Override
         public String toString() {
-            return "E\u00E9n";
+            return "Eén";
         }
     },
 
@@ -572,7 +572,7 @@ public enum Channel implements Displayable, XmlValued {
     SUDW {
         @Override
         public String toString() {
-            return "SWF Baden-W\u00FCrttemberg";
+            return "SWF Baden-Württemberg";
 
         }
     },
