@@ -107,7 +107,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("R2SJ")
-    R2SJ(AUDIO, "https://www.nporadio2.nl/soulenjazz",  2014) { // voorheen radio 6?
+    SENJ(AUDIO, Range.atLeast(Year.of(2014)), "https://www.nporadio2.nl/soulenjazz"   , true) { // voorheen radio 6?
         @Override
         public String toString() {
             return "Radio 2 Soul & Jazz";
@@ -130,7 +130,7 @@ public enum Channel implements Displayable, XmlValued {
 
 
     @XmlEnumValue("R3AL")
-    R3AL(AUDIO, null, null, true) {
+    R3AL(AUDIO, Range.atMost(Year.of(2022)), "https://www.npo3fm.nl/kx/programmas/kx-alternative", true) {
         @Override
         public String toString() {
             return "NPO 3FM KX Alternative";
@@ -138,7 +138,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("R3KX")
-    R3KX(AUDIO, Range.atLeast(Year.of(2005)), null, true) {
+    KXFM(AUDIO, Range.atLeast(Year.of(2005)), "https://www.npo3fm.nl/kx", true) {
         @Override
         public String toString() {
             return "NPO 3FM KX Radio";
@@ -176,7 +176,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("R5ST")
-    R5ST(AUDIO, null, null, true) {
+    STNL(AUDIO, Range.atLeast(Year.of(2010)), "https://www.nporadio5.nl/sterrennl/online-radio-luisteren/", true) {
         @Override
         public String toString() {
             return "NPO Radio 5 Sterren NL";
