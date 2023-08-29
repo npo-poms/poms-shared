@@ -109,14 +109,17 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
     @Override
-    public StatusResponse status(String mid) throws IOException, InterruptedException {
+    public Optional<StatusResponse> status(String mid) throws IOException, InterruptedException {
         final HttpRequest statusRequest = statusRequest(mid);
         final HttpResponse<String> statusResponse = client.send(statusRequest, HttpResponse.BodyHandlers.ofString());
         meter("status", statusResponse);
+        if (statusResponse.statusCode() >= 400 && statusResponse.statusCode() < 500) {
+            return Optional.empty();
+        }
         if (statusResponse.statusCode() > 299) {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
-        return MAPPER.readValue(statusResponse.body(), StatusResponse.class);
+        return Optional.of(MAPPER.readValue(statusResponse.body(), StatusResponse.class));
     }
 
     @Override
