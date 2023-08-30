@@ -83,7 +83,8 @@ public interface MediaBackendRestService {
 
     // some descriptions for common query and path parameters
     String MID_DESCRIPTION = "The 'mediaobject id'. For program sometimes referred to as 'prid' for series/seasons as 'srid'";
-    String ID_DESCRIPTION = "The 'mediaobject id'. May be a MID, an database id, or a crid";
+    String ID_DESCRIPTION = "The 'mediaobject id'. May be a MID, a database id, or a crid";
+    String ID_DESCRIPTION_2 = "The 'mediaobject id'. May be a MID or a crid";
 
     String FOLLOW_DESCRIPTION = "Whether 'merges' need to be implicitly followed. If your ask or do an operation on an object that is merged to another object, it will do it on that other object";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated during parsing, against the XSD. If this is false, your input will still be validated, but using so-called java bean validation only. This will give no line and column number information, but is otherwise more complete.";
