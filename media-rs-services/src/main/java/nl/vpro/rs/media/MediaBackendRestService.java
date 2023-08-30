@@ -87,6 +87,7 @@ public interface MediaBackendRestService {
 
     /**
      * Like {@link #ID_DESCRIPTION}, but without the 'database id' part.
+     * @since 7.7.0
      */
     String ID_DESCRIPTION_2 = "The 'mediaobject id'. May be a MID or a crid";
 
