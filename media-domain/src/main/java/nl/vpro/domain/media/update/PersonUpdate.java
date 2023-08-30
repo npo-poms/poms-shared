@@ -5,8 +5,7 @@ import lombok.ToString;
 
 import java.net.URI;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+import javax.validation.constraints.*;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Xmlns;
@@ -31,6 +30,7 @@ public class PersonUpdate extends CreditsUpdate {
     @XmlAttribute
     @Getter
     @NotNull(groups = WeakWarningValidatorGroup.class)
+    @nl.vpro.validation.URI(schemes = {"http", "https"}, mustHaveScheme = true, hosts = {"data.beeldengeluid.nl"}, patterns = {"http://data\\.beeldengeluid\\.nl/gtaa/\\d+"})
     private String gtaaUri;
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
