@@ -57,7 +57,7 @@ public interface AuthorityRestService {
     @GET
     @Path("{supplier}/${id:.*}")
     @Produces({MediaType.APPLICATION_JSON, APPLICATION_XML})
-    MediaUpdate<?> update(
+    MediaUpdate<?> get(
         @PathParam("supplier") final UpdateSupplier supplier,
         @Encoded @PathParam(ID) final String id);
 
