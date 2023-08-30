@@ -25,14 +25,13 @@ import org.meeuw.i18n.regions.RegionService;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.update.Validation;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.ValidationTestHelper.*;
-import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static nl.vpro.domain.media.support.OwnerType.*;
+import static nl.vpro.domain.media.update.Validation.getValidator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.BDDAssertions.within;
@@ -510,7 +509,7 @@ public class MediaObjectTest {
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
-        Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
+        Set<ConstraintViolation<Program>> constraintViolations = getValidator().validate(p);
         assertThat(constraintViolations).hasSize(1);
     }
 
@@ -521,7 +520,7 @@ public class MediaObjectTest {
         p.setAVType(AVType.MIXED);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setMid("foo/bar");
-        Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
+        Set<ConstraintViolation<Program>> constraintViolations = getValidator().validate(p);
         assertThat(constraintViolations).hasSize(1);
         assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.mid}");
     }
@@ -536,7 +535,7 @@ public class MediaObjectTest {
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setLanguages(Arrays.asList(new Locale("ZZ"), Locales.DUTCH));
 
-        Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
+        Set<ConstraintViolation<Program>> constraintViolations = getValidator().validate(p);
 
         assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.language.message}");
         assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("zz is een ongeldige ISO639 taalcode");
@@ -553,7 +552,7 @@ public class MediaObjectTest {
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setLanguages(Arrays.asList(Locales.NETHERLANDISH, new Locale("nl", "XX")));
 
-        List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(validator.validate(p));
+        List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(getValidator().validate(p));
         Comparator<ConstraintViolation<Program>> comparing = Comparator.comparing(c -> c.getPropertyPath().toString());
         constraintViolations.sort(comparing.thenComparing(ConstraintViolation::getMessageTemplate));
 
@@ -576,7 +575,7 @@ public class MediaObjectTest {
             p.setAVType(AVType.MIXED);
             p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
             p.addCountry(c);
-            List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(validator.validate(p));
+            List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(getValidator().validate(p));
             if (constraintViolations.isEmpty()) {
                 valid.add(c);
             } else {
@@ -656,7 +655,7 @@ public class MediaObjectTest {
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
 
         p.getEmail().add(new Email("bla"));
-        Validation.getValidator().validateValue(Email.class, "email", "bla");
+        getValidator(Locales.NETHERLANDISH).validateValue(Email.class, "email", "bla");
         Set<ConstraintViolation<Program>> constraintViolations = validate(p, false);
         assertThat(constraintViolations).hasSize(1);
         assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.Email.message}");
