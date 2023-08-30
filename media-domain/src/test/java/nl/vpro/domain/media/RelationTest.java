@@ -18,6 +18,7 @@ import org.meeuw.util.test.ComparableTheory;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.*;
+import static nl.vpro.domain.media.update.Validation.getValidator;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -64,7 +65,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     @Test
     public void testDefinitionValidation() {
         Relation r = new Relation();
-        Set<ConstraintViolation<Relation>> constraintViolations = validator.validate(r);
+        Set<ConstraintViolation<Relation>> constraintViolations = getValidator().validate(r);
 
         assertThat(constraintViolations).hasSize(1);
     }
@@ -73,7 +74,7 @@ public class RelationTest implements ComparableTheory<Relation> {
     public void testURIValidation() {
         Relation r = new Relation(getDefinition());
         r.setUriRef(":");
-        Set<ConstraintViolation<Relation>> constraintViolations = validator.validate(r);
+        Set<ConstraintViolation<Relation>> constraintViolations = getValidator().validate(r);
 
         assertThat(constraintViolations).hasSize(1);
     }
