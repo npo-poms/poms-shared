@@ -30,7 +30,7 @@ public class PersonUpdate extends CreditsUpdate {
     @XmlAttribute
     @Getter
     @NotNull(groups = WeakWarningValidatorGroup.class)
-    @nl.vpro.validation.URI(schemes = {"http", "https"}, mustHaveScheme = true, hosts = {"data.beeldengeluid.nl"}, patterns = {"http://data\\.beeldengeluid\\.nl/gtaa/\\d+"})
+    @nl.vpro.validation.URI(schemes = {"http"}, mustHaveScheme = true, hosts = {"data.beeldengeluid.nl"}, patterns = {"http://data\\.beeldengeluid\\.nl/gtaa/\\d+"})
     private String gtaaUri;
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
