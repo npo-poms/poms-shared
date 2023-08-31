@@ -1,10 +1,11 @@
 package nl.vpro.domain.user;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 
 import java.security.Principal;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 
 import javax.security.enterprise.CallerPrincipal;
 
@@ -15,13 +16,14 @@ import org.slf4j.MDC;
 import nl.vpro.i18n.Locales;
 
 import static nl.vpro.logging.mdc.MDCConstants.USER_NAME;
+import static nl.vpro.logging.simple.Log4j2SimpleLogger.simple;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
  * @since ...
  */
-@Slf4j
+@Log4j2
 class UserServiceTest {
 
     private final UserService<User> userService = new UserService<User>() {
@@ -130,7 +132,7 @@ class UserServiceTest {
                     Thread.sleep(100);
                     assertThat(Locales.getDefault().getLanguage()).isEqualTo("zh");
                     return "hoi";
-                }, log));
+                }, simple(log)));
 
             }
         }
