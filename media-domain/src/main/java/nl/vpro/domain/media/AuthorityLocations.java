@@ -9,11 +9,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.net.http.*;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -25,7 +28,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import static nl.vpro.domain.Changeables.instant;
 
 /**
- * Utilities related to poms 'authorative locations'. I.e. {@link MediaObject#getLocations() locations} that are implicitly added (because of some notification from an external system, currently NEP), with {@link OwnerType owner} {@link OwnerType#AUTHORITY}
+ * Utilities related to poms 'authoritative locations'. I.e. {@link MediaObject#getLocations() locations} that are implicitly added (because of some notification from an external system, currently NEP), with {@link OwnerType owner} {@link OwnerType#AUTHORITY}
  *
  * @author Michiel Meeuwissen
  * @since 5.7
@@ -34,10 +37,12 @@ import static nl.vpro.domain.Changeables.instant;
 public class AuthorityLocations {
 
 
-    @Value("${authority.locations.audioTemplate:https://entry.cdn.npoaudio.nl/handle/%s.mp3}")
-    private String audioTemplate = "https://entry.cdn.npoaudio.nl/handle/%s.mp3";
 
-    public AuthorityLocations() {
+    private final String audioTemplate;
+
+    @Inject
+    public AuthorityLocations(@Value("${authority.locations.audioTemplate:https://entry.cdn.npoaudio.nl/handle/%s.mp3}") String audioTemplate) {
+        this.audioTemplate = audioTemplate == null ? "https://entry.cdn.npoaudio.nl/handle/%s.mp3" : audioTemplate;
     }
 
 
@@ -164,7 +169,11 @@ public class AuthorityLocations {
         Location authorityLocation = getOrCreateAuthorityLocation(avType, mediaObject, platform, encryption, "For " + encryption, locationPredicate);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
-            updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes(pubOptie).orElseThrow(() -> new RuntimeException("not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
+            AVAttributes avAttributes = getAVAttributes(pubOptie).orElseThrow(() -> new RuntimeException("not found nep puboptie"));
+            if (avAttributes.getAvFileFormat() != AVFileFormat.HASP) {
+                getBytesize(authorityLocation.getProgramUrl()).ifPresent(avAttributes::setByteSize);
+            }
+            updateLocationAndPredictions(authorityLocation, mediaObject, platform, avAttributes, OwnerType.AUTHORITY, new HashSet<>(), now);
         }
 
         //MSE-3992
@@ -204,6 +213,8 @@ public class AuthorityLocations {
             log.debug("DRM only supported for video");
         }
     }
+
+
 
     private Location getOrCreateAuthorityLocation(AVType avType, MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate) {
         String locationUrl;
@@ -260,7 +271,7 @@ public class AuthorityLocations {
 
 
     @NonNull
-    private Location createLocation(final MediaObject mediaObject, final Prediction prediction, final String locationUrl){
+    private static Location createLocation(final MediaObject mediaObject, final Prediction prediction, final String locationUrl){
         Location platformAuthorityLocation = new Location(locationUrl, OwnerType.AUTHORITY, prediction.getPlatform());
         platformAuthorityLocation.setPublishStartInstant(prediction.getPublishStartInstant());
         platformAuthorityLocation.setPublishStopInstant(prediction.getPublishStopInstant());
@@ -305,7 +316,7 @@ public class AuthorityLocations {
      *
      * @param pubOptie Originally we got notifies with different puboptions. Now we get from NEP, and pubotion then is 'nep'.
      */
-    private String createLocationVideoUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
+    private static String createLocationVideoUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
         String baseUrl = getBaseUrl(platform, encryption, pubOptie, program.getStreamingPlatformStatus());
         if (baseUrl == null) {
             return null;
@@ -314,7 +325,7 @@ public class AuthorityLocations {
     }
 
 
-    private String getBaseUrl(Platform platform, Encryption encryption, String publicationOption, StreamingStatus status) {
+    private static String getBaseUrl(Platform platform, Encryption encryption, String publicationOption, StreamingStatus status) {
         if ("nep".equals(publicationOption)) {
             if (! status.matches(encryption)) {
                 log.debug("{} does not match {}", status, encryption);
@@ -432,7 +443,7 @@ public class AuthorityLocations {
         }
     }
 
-    private  List<Location> getAuthorityLocationsForPlatform(MediaObject mediaObject, Platform platform){
+    private  static List<Location> getAuthorityLocationsForPlatform(MediaObject mediaObject, Platform platform){
         return mediaObject.getLocations().stream()
             .filter(l -> l.getOwner() == OwnerType.AUTHORITY && l.getPlatform() == platform)
             .collect(Collectors.toList());
@@ -525,11 +536,40 @@ public class AuthorityLocations {
         } else {
             String[] split = config.split(",", 2);
 
-            return Optional.of(AVAttributes.builder()
-                .avFileFormat(AVFileFormat.valueOf(split[0]))
-                .bitrate(split.length > 1 ? Integer.valueOf(split[1]) : null)
-                .build());
+            AVFileFormat avFileFormat = AVFileFormat.valueOf(split[0]);
+            AVAttributes.Builder builder = AVAttributes.builder()
+                .avFileFormat(avFileFormat)
+                .bitrate(split.length > 1 ? Integer.valueOf(split[1]) : null);
+
+
+            return Optional.of(builder.build());
         }
+    }
+
+
+
+    private static final HttpClient client = HttpClient.newBuilder()
+        .followRedirects(HttpClient.Redirect.ALWAYS)
+        .connectTimeout(Duration.ofSeconds(3))
+        .build();
+
+    public static OptionalLong getBytesize(String locationUrl) {
+        HttpRequest head = HttpRequest.newBuilder()
+
+            .uri(URI.create(locationUrl))
+            .method("HEAD", HttpRequest.BodyPublishers.noBody())
+            .build(); // .HEAD() in java 18
+        try {
+            HttpResponse<Void> send = client.send(head, HttpResponse.BodyHandlers.discarding());
+            if (send.statusCode() == 200) {
+                return send.headers().firstValueAsLong("Content-Length");
+            } else {
+                log.warn("HEAD {} returned {}", locationUrl, send.statusCode());
+            }
+        } catch (IOException | InterruptedException e) {
+            log.warn(e.getMessage(), e);
+        }
+        return OptionalLong.empty();
     }
 
     @AllArgsConstructor
@@ -541,7 +581,5 @@ public class AuthorityLocations {
         final String reason;
         final List<Location> locations;
         final AVType avType;
-        @lombok.Builder.Default
-        CompletableFuture<?> extraTasks = CompletableFuture.completedFuture(null);
     }
 }

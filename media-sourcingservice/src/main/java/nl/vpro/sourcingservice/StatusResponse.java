@@ -20,7 +20,7 @@ public class StatusResponse  extends AbstractResponse {
     }
 
     @Data
-    static class Response {
+    public static class Response {
         private String id;
         private String current_status;
         private String original_filename;

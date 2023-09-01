@@ -10,6 +10,7 @@ import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.UpdateSupplier;
 import nl.vpro.validation.ValidationLevel;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 import static nl.vpro.rs.media.MediaBackendRestService.*;
 
 /**
@@ -52,6 +53,13 @@ public interface AuthorityRestService {
         @QueryParam(ERRORS) String errors,
         @QueryParam(VALIDATION_LEVEL) @DefaultValue("WARNING") ValidationLevel level
     );
+
+    @GET
+    @Path("{supplier}/${id:.*}")
+    @Produces({MediaType.APPLICATION_JSON, APPLICATION_XML})
+    MediaUpdate<?> get(
+        @PathParam("supplier") final UpdateSupplier supplier,
+        @Encoded @PathParam(ID) final String id);
 
 }
 

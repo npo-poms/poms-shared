@@ -14,11 +14,13 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.*;
-import org.slf4j.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import nl.vpro.domain.Roles;
 import nl.vpro.i18n.Locales;
 import nl.vpro.logging.mdc.MDCConstants;
+import nl.vpro.logging.simple.SimpleLogger;
 
 import static nl.vpro.logging.mdc.MDCConstants.ON_BEHALF_OF;
 
@@ -159,28 +161,28 @@ public interface UserService<T extends User> {
     }
 
     /**
-     * Defaulting version of {@link #async(Callable, Logger, ExecutorService)}, where the executor service is {@link #ASYNC_EXECUTOR}
+     * Defaulting version of {@link #async(Callable, SimpleLogger, ExecutorService)}, where the executor service is {@link #ASYNC_EXECUTOR}
      *
      * @param logger If not <code>null</code> catch exceptions and log as error.
      * @since 5.6
      */
-    default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
+    default <R> CompletableFuture<R> async(Callable<R> callable, SimpleLogger logger) {
         return async(callable, logger, ASYNC_EXECUTOR);
     }
 
     /**
-     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean, boolean)} )}) in CompletableFuture#supplyAsync.
+     * Submits callable (wrapped by {@link #wrap(Callable, SimpleLogger, Boolean, boolean)} )}) in CompletableFuture#supplyAsync.
      * <p>
      * This makes sure that the job is running as the current user, and for example also that the current MDC is copied to the other thread.
      * <p>
-     * Note that if you use {@link CompletableFuture#thenAccept(Consumer)} or something similar that these will not be run in the same context. You can wrapp those with {@link #wrap(Callable, Logger, Boolean, boolean)} yourself.
+     * Note that if you use {@link CompletableFuture#thenAccept(Consumer)} or something similar that these will not be run in the same context. You can wrapp those with {@link #wrap(Callable, SimpleLogger, Boolean, boolean)} yourself.
      *
      * @param callable The job to run asynchronously
      * @param logger If not <code>null</code> catch exceptions and log as error.
      *
      * @since 5.16
      */
-    default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger, ExecutorService executor) {
+    default <R> CompletableFuture<R> async(Callable<R> callable, SimpleLogger logger, ExecutorService executor) {
         Callable<R> wrapped =  wrap(callable, logger, true, true); // Current MDC will be copied and stored  and restores just before calling the unwrapped callable
         Supplier<R> supplier  = () -> {
             try {
@@ -200,20 +202,20 @@ public interface UserService<T extends User> {
      * @param logger If not <code>null</code> catch exceptions and log as error.
      * @since 5.6
      */
-    default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable, Logger logger) {
+    default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable, SimpleLogger logger) {
         return executorService.submit(
             wrap(callable, logger, null, true)
         );
     }
 
     /**
-     * Wraps a callable for use by e.g. {@link #submit(ExecutorService, Callable, Logger)} and {@link #async(Callable, Logger)}. This means that current user and {@link MDC} will be restored
+     * Wraps a callable for use by e.g. {@link #submit(ExecutorService, Callable, SimpleLogger)} and {@link #async(Callable, SimpleLogger)}. This means that current user and {@link MDC} will be restored
      * before {@link Callable#call()}
      * @since 5.6
      */
     default <R> Callable<R> wrap(
         @NonNull  Callable<R> callable,
-        @Nullable Logger logger,
+        @Nullable SimpleLogger logger,
         @Nullable Boolean throwExceptions,
         boolean clearMDC) {
 

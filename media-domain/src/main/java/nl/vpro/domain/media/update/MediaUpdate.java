@@ -23,8 +23,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.nullness.qual.*;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
 
 import com.fasterxml.jackson.annotation.*;
@@ -159,7 +158,10 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
 
     @SuppressWarnings("unchecked")
-    public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType owner) {
+    public static <M extends MediaObject> @PolyNull MediaUpdate<M> create(@PolyNull M object, OwnerType owner) {
+        if (object == null) {
+            return null;
+        }
         MediaUpdate<M> created;
         if (object instanceof Program) {
             created = (MediaUpdate<M>) ProgramUpdate.create((Program) object, owner);
@@ -172,13 +174,15 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         return created;
     }
 
-    public static <M extends MediaObject> MediaUpdate<M> create(M object) {
+    public static <M extends MediaObject> @PolyNull MediaUpdate<M> create(@PolyNull M object) {
         return create(object, OwnerType.BROADCASTER);
     }
 
-    public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType owner, IntegerVersion version) {
+    public static <M extends MediaObject> @PolyNull MediaUpdate<M> create(@PolyNull M object, OwnerType owner, IntegerVersion version) {
         MediaUpdate<M> update = create(object, owner);
-        update.setVersion(version);
+        if (update != null) {
+            update.setVersion(version);
+        }
         return update;
     }
 

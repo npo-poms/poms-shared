@@ -116,4 +116,24 @@ public class NEPGatekeeperServiceImplITest {
     }
 
 
+    @Disabled
+    @Test
+    public void hackTranscode() {
+        // This is a broadcast, cannot be done via poms SYS-1178
+        WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
+            .mid("NCRV_1410751")
+            .filename("npoweb-vpro/digitaal@vpro.nl/NCRV_1410751.mp4")
+            .encryption(EncryptionType.NONE)
+            .priority(PriorityType.NORMAL)
+            .platforms(Collections.singletonList("internetvod"))
+            .build();
+        try {
+            WorkflowExecution result = gatekeeperService.transcode(request);
+            log.info("Result {}", result);
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+
+    }
+
 }

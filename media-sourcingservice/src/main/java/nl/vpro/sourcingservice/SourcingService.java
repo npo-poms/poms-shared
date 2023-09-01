@@ -2,6 +2,7 @@ package nl.vpro.sourcingservice;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -19,7 +20,13 @@ public interface SourcingService {
         @Nullable String errors) throws IOException, InterruptedException;
 
 
-    StatusResponse status(String mid) throws IOException, InterruptedException;
+    Optional<StatusResponse> status(String mid) throws IOException, InterruptedException;
+
+
+    DeleteResponse delete(String mid, int daysBeforeHardDelete) throws IOException, InterruptedException;
+
+
+
 
     /**
      * A string which can be used to show where this implementation will upload to.

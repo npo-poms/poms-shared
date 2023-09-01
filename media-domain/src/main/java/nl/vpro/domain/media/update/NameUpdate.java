@@ -25,6 +25,7 @@ public class NameUpdate extends CreditsUpdate {
 
     @XmlAttribute(required = true)
     @Getter
+    @nl.vpro.validation.URI(schemes = {"http"}, mustHaveScheme = true, hosts = {"data.beeldengeluid.nl"}, patterns = {"http://data\\.beeldengeluid\\.nl/gtaa/\\d+"})
     private String gtaaUri;
 
     public NameUpdate(String gtaaUri, RoleType role) {

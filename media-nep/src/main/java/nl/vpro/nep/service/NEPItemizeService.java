@@ -55,11 +55,10 @@ public interface NEPItemizeService extends  AutoCloseable {
     String getMidItemizerString();
 
     default String getItemizerString(Configuration configuration) {
-        switch (configuration) {
-            case LIVE: return getLiveItemizerString();
-            default:
-            case MID: return getMidItemizerString();
-        }
+        return switch (configuration) {
+            case LIVE -> getLiveItemizerString();
+            default -> getMidItemizerString();
+        };
     }
 
     ItemizerStatusResponse getLiveItemizerJobStatus(String jobId);
@@ -67,11 +66,10 @@ public interface NEPItemizeService extends  AutoCloseable {
     ItemizerStatusResponse getMidItemizerJobStatus(String jobId);
 
     default ItemizerStatusResponse getItemizerJobStatus(Configuration configuration, String jobId) {
-        switch (configuration) {
-            case LIVE: return getLiveItemizerJobStatus(jobId);
-            default:
-            case MID: return getMidItemizerJobStatus(jobId);
-        }
+        return switch (configuration) {
+            case LIVE -> getLiveItemizerJobStatus(jobId);
+            default -> getMidItemizerJobStatus(jobId);
+        };
     }
 
     /**
