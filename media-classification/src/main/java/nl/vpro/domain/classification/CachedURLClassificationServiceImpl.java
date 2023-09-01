@@ -25,7 +25,7 @@ public class CachedURLClassificationServiceImpl extends URLClassificationService
 
     @Inject
     public CachedURLClassificationServiceImpl(
-        @Named("npo-pageupdate-api.baseUrl") String url) {
+        @Named("npo-pages_publisher.baseUrl") String url) {
         this(URI.create(url + (url.endsWith("/") ? "": "/") + "schema/classification/"));
     }
 
