@@ -15,6 +15,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.media.broadcaster.BroadcasterServiceImpl;
 
 /**
+ * Extends {@link BroadcasterServiceImpl} but adds some overrides for bindinc.
  * @author Michiel Meeuwissen
  * @since 5.33
  */
@@ -33,8 +34,8 @@ public class BindincBroadcasterService extends BroadcasterServiceImpl {
     }
 
     @Inject
-    public BindincBroadcasterService(@Value("${broadcasters.repository.location}") String resource) {
-        super(resource, false, true);
+    public BindincBroadcasterService(@Value("${broadcasters.repository.location}") String configFile) {
+        super(configFile, false, true);
     }
 
     @Override

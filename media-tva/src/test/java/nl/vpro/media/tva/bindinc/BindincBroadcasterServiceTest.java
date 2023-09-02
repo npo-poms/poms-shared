@@ -30,7 +30,7 @@ class BindincBroadcasterServiceTest {
         stubFor(get(urlPathEqualTo("/broadcasters/whats_on")).willReturn(okForContentType("text/plain", IOUtils.toString(Objects.requireNonNull(getClass().getResourceAsStream("/broadcasters.mis.properties")), StandardCharsets.UTF_8))));
 
 
-        BindincBroadcasterService bs = new BindincBroadcasterService(wiremock.getHttpBaseUrl()  + "/broadcasters/");
+        BindincBroadcasterService bs = new BindincBroadcasterService(wiremock.getHttpBaseUrl()  + "/broadcasters");
 
         assertThat(bs.find("BNNVARA")).isNotNull();
 
