@@ -133,22 +133,20 @@ public class AuthorityLocations {
                         .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
                         .build();
                 } else {
-                    // None or Null
-                    if (existingPredictionForPlatform.getEncryption() != Encryption.DRM) {
-                        createDrmImplicitly(avType, mediaObject, platform, authorityLocations, locationPredicate, now);
-                        if (authorityLocations.isEmpty()) {
-                            return AuthorityLocations.RealizeResult.builder()
-                                .needed(false)
-                                .program(mediaObject)
-                                .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
-                                .build();
-                        } else {
-                             return AuthorityLocations.RealizeResult.builder()
-                                .needed(true)
-                                .program(mediaObject)
-                                .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
-                                .build();
-                        }
+                    // DRM
+                    createDrmImplicitly(avType, mediaObject, platform, authorityLocations, locationPredicate, now);
+                    if (authorityLocations.isEmpty()) {
+                        return RealizeResult.builder()
+                            .needed(false)
+                            .program(mediaObject)
+                            .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
+                            .build();
+                    } else {
+                         return RealizeResult.builder()
+                            .needed(true)
+                            .program(mediaObject)
+                            .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
+                            .build();
                     }
 
                 }
