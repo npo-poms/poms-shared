@@ -42,7 +42,7 @@ public class BroadcasterServiceImpl implements BroadcasterService {
         @Named("broadcasters.repository.location") String configFile,
         @Named("broadcasters.repository.async") boolean async,
         @Named("broadcasters.repository.needsOtherIDs") boolean needsOtherIds) {
-        if (! configFile.startsWith("/")) {
+        if (! configFile.endsWith("/") && configFile.startsWith("http")) {
             configFile += "/";
         }
         this.displayNameResource = getURLResource(configFile, async);
