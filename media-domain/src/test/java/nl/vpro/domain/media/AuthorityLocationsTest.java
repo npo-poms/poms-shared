@@ -8,6 +8,8 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import nl.vpro.domain.media.support.OwnerType;
 
@@ -133,4 +135,12 @@ public class AuthorityLocationsTest {
         assertThat(program.getLocations().first().getAvFileFormat()).isEqualTo(AVFileFormat.MP3);
     }
 
+
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+        https://entry.cdn.npoaudio.nl/handle/WO_VPRO_20039564.mp3,  0
+        """)
+    public void size(String url, long size) {
+        assertThat(AuthorityLocations.getBytesize(url).getAsLong()).isEqualTo(157808848L);
+    }
 }
