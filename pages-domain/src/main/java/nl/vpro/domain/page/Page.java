@@ -184,6 +184,8 @@ public class Page implements MutableEmbargo<Page> {
 
     protected Instant lastPublished;
 
+    protected List<Credits> credits;
+
 
     public Page() {
     }

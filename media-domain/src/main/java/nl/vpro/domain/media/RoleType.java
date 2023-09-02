@@ -8,6 +8,9 @@ import javax.xml.bind.annotation.XmlEnum;
 
 import nl.vpro.i18n.*;
 
+/**
+ * How {@link Credits persons} are related to {@link MediaObject media objects}, what their relation is to some media.
+ */
 @XmlEnum
 public enum RoleType  implements Displayable {
 
@@ -35,12 +38,12 @@ public enum RoleType  implements Displayable {
      */
     SIDEKICK("Sidekick", "Sidekick", "Sidekick"),
     /**
-     * https://jira.vpro.nl/browse/MSE-4371
+     * <a href="https://jira.vpro.nl/browse/MSE-4371">jira</a>
      * @since 5.11
      */
     SUBJECT("Onderwerp", "Onderwerp", "Onderwerp"),
     /**
-     * See https://jira.vpro.nl/browse/MSE-4371
+     * See <a href="https://jira.vpro.nl/browse/MSE-4371">jira</a>
      * @since 5.11
      */
     PARTICIPANT("Deelnemer", "Deelname", "Deelnemer"),
