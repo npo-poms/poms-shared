@@ -8,7 +8,7 @@
   xmlns:vpro="urn:vpro:saxon"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/1999/XSL/Transform"
   xsi:schemaLocation="urn:vpro:media:2009 https://poms.omroep.nl/schema/vproMedia.xsd
-                      urn:tva:metadata:2004 ://www.broadcastingdata.com/dataimport/tva/new/v13_am1/tva_metadata_v13_am1.xsd"
+                      urn:tva:metadata:2004 http://www.broadcastingdata.com/dataimport/tva/new/v13_am1/tva_metadata_v13_am1.xsd"
   exclude-result-prefixes="tva mpeg7 xsi vpro xsd"
   version="2.0">
 
