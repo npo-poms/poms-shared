@@ -26,7 +26,6 @@ import nl.vpro.domain.user.BroadcasterService;
 @Slf4j
 public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
 
-
     @Getter
     @Setter
     private NotFound notFound = NotFound.ASIS;
@@ -66,7 +65,7 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
                         return new StringValue(broadcaster.getId());
                     }
 
-                    log.warn("No (WON/PD/NEBO) broadcaster for value '{}'", value);
+                    log.warn("No (WON/PD/NEBO) broadcaster for value '{}' in {}", value, broadcasterService);
 
                     return switch (notFound) {
                         case ASIS ->

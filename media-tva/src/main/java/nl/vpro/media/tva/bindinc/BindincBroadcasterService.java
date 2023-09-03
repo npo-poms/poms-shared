@@ -64,4 +64,9 @@ public class BindincBroadcasterService extends BroadcasterServiceImpl {
         return f;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " (overriding: " + bindincOverride.keySet() + ")";
+    }
+
 }

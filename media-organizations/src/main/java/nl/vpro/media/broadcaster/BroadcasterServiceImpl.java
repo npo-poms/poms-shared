@@ -98,7 +98,7 @@ public class BroadcasterServiceImpl implements BroadcasterService {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "[" + displayNameResource.getUrl() + (misResource != null ? "(/mis,whatson)" : "") + "]";
+        return getClass().getSimpleName() + "[" + displayNameResource.getUrl() + (misResource != null ? "(/mis,whatson)" : "") + "]  " + getRepository().size() + " broadcasters";
     }
 
     Map<String, Broadcaster> getRepository() {
