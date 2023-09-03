@@ -71,7 +71,7 @@ public class BroadcasterServiceImplTest {
 
     @Test
     public void string() {
-        assertThat(broadcasterService.toString()).isEqualTo("BroadcasterServiceImpl[classpath:/broadcasters.properties]");
+        assertThat(broadcasterService.toString()).isEqualTo("BroadcasterServiceImpl[classpath:/broadcasters.properties]  63 broadcasters");
 
     }
 
