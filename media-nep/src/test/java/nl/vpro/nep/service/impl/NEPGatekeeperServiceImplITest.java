@@ -34,9 +34,10 @@ public class NEPGatekeeperServiceImplITest {
 
     @Test
     public void test() throws NEPException {
-        @NonNull Iterator<WorkflowExecution> i = gatekeeperService.getTranscodeStatuses(null, null, Instant.now().minus(Duration.ofHours(20)), 200L);
+        @NonNull Iterator<WorkflowExecution> i = gatekeeperService.getTranscodeStatuses(null, null, Instant.now().minus(Duration.ofHours(20)), 1000L);
         while (i.hasNext()) {
-            log.info("{}", i.next());
+            WorkflowExecution workflowExecution = i.next();
+            log.info("{}", workflowExecution);
         }
 
     }
@@ -121,8 +122,8 @@ public class NEPGatekeeperServiceImplITest {
     public void hackTranscode() {
         // This is a broadcast, cannot be done via poms SYS-1178
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
-            .mid("NCRV_1410751")
-            .filename("npoweb-vpro/digitaal@vpro.nl/NCRV_1410751.mp4")
+            .mid("WO_HUMAN_10971551")
+            .filename("npoweb-vpro/digitaal@vpro.nl/WO_HUMAN_10971551.m4v")
             .encryption(EncryptionType.NONE)
             .priority(PriorityType.NORMAL)
             .platforms(Collections.singletonList("internetvod"))
