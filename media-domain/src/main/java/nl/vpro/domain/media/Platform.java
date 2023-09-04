@@ -40,7 +40,7 @@ public enum Platform implements Displayable {
     /**
      * NLZiet,platform "extra" in cooperation with Dutch commercial broadcasters
      */
-    PLUSVOD(true, "Nlziet/NPO Start Plus", VIDEO),
+    PLUSVOD(true, "Nlziet/NPO Plus", VIDEO),
 
     /**
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
