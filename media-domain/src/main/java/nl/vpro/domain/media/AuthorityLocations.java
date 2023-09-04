@@ -75,7 +75,6 @@ public class AuthorityLocations {
      */
     public AuthorityLocations.RealizeResult realizeStreamingPlatformIfNeeded(
         @NonNull MediaObject mediaObject,
-        @NonNull AVType avType,
         @NonNull Platform platform,
         @NonNull Predicate<Location> locationPredicate,
         @NonNull Instant now) {
@@ -83,7 +82,7 @@ public class AuthorityLocations {
             return cannotRealize(mediaObject, now);
         }
 
-        return realizeStreamingPlatformIfNeededAudioAndVideo(avType, mediaObject, platform, locationPredicate, now);
+        return realizeStreamingPlatformIfNeededAudioAndVideo(mediaObject, platform, locationPredicate, now);
      }
 
     AuthorityLocations.RealizeResult cannotRealize(
@@ -98,16 +97,16 @@ public class AuthorityLocations {
 
 
     private AuthorityLocations.RealizeResult realizeStreamingPlatformIfNeededAudioAndVideo(
-        @NonNull AVType avType,
         @NonNull MediaObject mediaObject,
         @NonNull Platform platform,
         @NonNull Predicate<Location> locationPredicate,
         @NonNull Instant now) {
-        final String pubOptie =   avType == AVType.VIDEO ? "nep" : "nepaudio";
+
         if (platform == Platform.INTERNETVOD) {
             Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
             log.debug("Webonly : {}", webonly);
         }
+        final String pubOptie =   platform == Platform.INTERNETVOD ? "nep" : "nepaudio";
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         Encryption encryption;
 
@@ -134,7 +133,7 @@ public class AuthorityLocations {
                         .build();
                 } else {
                     // DRM
-                    createDrmImplicitly(avType, mediaObject, platform, authorityLocations, locationPredicate, now);
+                    createDrmImplicitly(mediaObject, platform, authorityLocations, locationPredicate, now);
                     if (authorityLocations.isEmpty()) {
                         return RealizeResult.builder()
                             .needed(false)
@@ -164,7 +163,7 @@ public class AuthorityLocations {
                 .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform)
                 .build();
         }
-        Location authorityLocation = getOrCreateAuthorityLocation(avType, mediaObject, platform, encryption, "For " + encryption, locationPredicate);
+        Location authorityLocation = getOrCreateAuthorityLocation(mediaObject, platform, encryption, "For " + encryption, locationPredicate);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
             AVAttributes avAttributes = getAVAttributes(pubOptie).orElseThrow(() -> new RuntimeException("not found nep puboptie"));
@@ -176,7 +175,7 @@ public class AuthorityLocations {
 
         //MSE-3992
         if (encryption != Encryption.DRM) {
-            createDrmImplicitly(avType, mediaObject, platform, authorityLocations, locationPredicate, now);
+            createDrmImplicitly(mediaObject, platform, authorityLocations, locationPredicate, now);
         }
 
         if (authorityLocations.isEmpty()) {
@@ -195,28 +194,23 @@ public class AuthorityLocations {
     }
 
     private void createDrmImplicitly(
-        AVType avType,
         MediaObject mediaObject,
         Platform platform,
         List<Location> authorityLocations,
         Predicate<Location> locationPredicate,
         Instant now) {
-        if (avType == AVType.VIDEO) {
-            Location authorityLocation2 = getOrCreateAuthorityLocation(avType, mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
-            if (authorityLocation2 != null) {
-                authorityLocations.add(authorityLocation2);
-                updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("Not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
-            }
-        } else {
-            log.debug("DRM only supported for video");
+        Location authorityLocation2 = getOrCreateAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
+        if (authorityLocation2 != null) {
+            authorityLocations.add(authorityLocation2);
+            updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("Not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
         }
     }
 
 
 
-    private Location getOrCreateAuthorityLocation(AVType avType, MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate) {
+    private Location getOrCreateAuthorityLocation(MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate) {
         String locationUrl;
-        if (avType == AVType.VIDEO) {
+        if (platform != Platform.INTERNETAOD) {
             locationUrl = createLocationVideoUrl(mediaObject, platform, encryption, "nep");
         } else {
             locationUrl = String.format(audioTemplate, mediaObject.getMid());
@@ -415,7 +409,7 @@ public class AuthorityLocations {
      * <p>
      * This is not always the case, this method can correct that.
      */
-    public  Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
+    public  Optional<Prediction>  createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
         String audioPrefix = getAudioPrefix();
         Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream()
             .filter(l -> Platform.INTERNETVOD.matches(l.getPlatform())) // l == null || l == internetvod

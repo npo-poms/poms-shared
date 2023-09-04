@@ -558,6 +558,7 @@
     <xs:sequence/>
     <xs:attribute name="withDrm" type="streamingStatusValue"/>
     <xs:attribute name="withoutDrm" type="streamingStatusValue"/>
+    <xs:attribute name="audio" type="streamingStatusValue"/>
   </xs:complexType>
 
   <xs:simpleType name="textualTypeEnum">
@@ -980,6 +981,7 @@
   <xs:simpleType name="platformTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="INTERNETVOD"/>
+      <xs:enumeration value="INTERNETAOD"/>
       <xs:enumeration value="TVVOD"/>
       <xs:enumeration value="PLUSVOD"/>
       <xs:enumeration value="NPOPLUSVOD"/>
