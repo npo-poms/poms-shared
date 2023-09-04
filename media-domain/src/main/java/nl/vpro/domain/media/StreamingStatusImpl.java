@@ -42,16 +42,36 @@ public class StreamingStatusImpl implements StreamingStatus {
     @XmlAttribute
     Value withoutDrm = Value.UNSET;
 
+    /**
+     * @deprecated This was never used
+     */
     @Getter
     @Setter
     @Column(name="streamingplatformstatus_withdrm_offline")
+    @Deprecated
     Instant withDrmOffline = null;
 
+
+    /**
+     * @deprecated This was never used
+     */
     @Getter
     @Setter
     @Column(name="streamingplatformstatus_withoutdrm_offline")
+    @Deprecated
     Instant withoutDrmOffline = null;
 
+
+    /**
+         * Audio is currently always without DRM.
+     * @since 7.7
+     */
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING)
+    @Column(name="streamingplatformstatus_audio")
+    @XmlAttribute
+    Value audio = Value.UNSET;
 
     public StreamingStatusImpl() {
     }
@@ -97,9 +117,7 @@ public class StreamingStatusImpl implements StreamingStatus {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof StreamingStatus)) return false;
-
-        StreamingStatus that = (StreamingStatus) o;
+        if (!(o instanceof StreamingStatus that)) return false;
 
         if (withDrm != that.getWithDrm()) return false;
         return withoutDrm == that.getWithoutDrm();

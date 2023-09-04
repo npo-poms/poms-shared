@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.annotations.Beta;
+
 import nl.vpro.i18n.Displayable;
 
 import static nl.vpro.domain.media.AVType.AUDIO;
@@ -23,14 +25,23 @@ import static nl.vpro.domain.media.AVType.VIDEO;
 @XmlType(name = "platformTypeEnum")
 public enum Platform implements Displayable {
     /**
-     * Visible on internet. May also be used for audio?
+     * Visible on internet.
+     * <p>
+     * For audio see {@link #INTERNETAOD}
      */
-    INTERNETVOD(true, "Internet", AUDIO, VIDEO) {
+    INTERNETVOD(true, "Internet/NPO Start", VIDEO) {
         @Override
         public boolean matches(Platform platform) {
             return platform == null || super.matches(platform);
         }
     },
+
+    /**
+     * Audible on internet.
+     * @since 7.7
+     */
+    @Beta
+    INTERNETAOD(true, "Internet", AUDIO),
 
     /**
      *
