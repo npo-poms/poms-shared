@@ -1,8 +1,7 @@
 package nl.vpro.domain.media;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -13,6 +12,7 @@ import java.net.http.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -25,7 +25,10 @@ import org.springframework.beans.factory.annotation.Value;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
 
+import static java.net.http.HttpRequest.BodyPublishers.noBody;
+import static java.net.http.HttpResponse.BodyHandlers.discarding;
 import static nl.vpro.domain.Changeables.instant;
+import static nl.vpro.domain.media.Encryption.DRM;
 
 /**
  * Utilities related to poms 'authoritative locations'. I.e. {@link MediaObject#getLocations() locations} that are implicitly added (because of some notification from an external system, currently NEP), with {@link OwnerType owner} {@link OwnerType#AUTHORITY}
@@ -36,53 +39,72 @@ import static nl.vpro.domain.Changeables.instant;
 @Slf4j
 public class AuthorityLocations {
 
+    /**
+     * @since 7.7
+     */
+    public enum StreamType {
+        VOD(AVType.VIDEO, true),
+        AOD(AVType.AUDIO, false);
+
+        @Getter
+        final AVType defaultAVType;
+
+        final boolean supportsDRM;
+
+        StreamType(AVType defaultAVType, boolean supportsDRM) {
+            this.defaultAVType = defaultAVType;
+            this.supportsDRM = supportsDRM;
+        }
+
+        public boolean supportsDRM() {
+            return supportsDRM;
+        }
+    }
 
 
     private final String audioTemplate;
 
     @Inject
-    public AuthorityLocations(@Value("${authority.locations.audioTemplate:https://entry.cdn.npoaudio.nl/handle/%s.mp3}") String audioTemplate) {
+    public AuthorityLocations(
+        @Value("${authority.locations.audioTemplate:https://entry.cdn.npoaudio.nl/handle/%s.mp3}") String audioTemplate) {
         this.audioTemplate = audioTemplate == null ? "https://entry.cdn.npoaudio.nl/handle/%s.mp3" : audioTemplate;
     }
 
 
-    /**
-     * This will be called if for a certain platform and 'puboptie' a 'notify' is received. E.g. a 'projecm' notify message would trigger this.
-     * TODO I think this is not used any more, we receive notification from NEP (which we assign 'pubOptie=nep')
-     *
-     */
-    public Program realize(
-        @NonNull Program program,
-        @NonNull Platform platform,
-        @NonNull String pubOptie,
-        @NonNull OwnerType owner,
-        @NonNull Set<OwnerType> replaces) {
-        final Prediction prediction = program.getPrediction(platform);
-        final StreamingStatus streamingStatus = program.getStreamingPlatformStatus();
-
-        Encryption encryption;
-        if (prediction != null) {
-            encryption = prediction.getEncryption();
-        }  else {
-            log.warn("Realizing without prediction");
-            encryption = StreamingStatus.preferredEncryption(streamingStatus);
-        }
-        return addLocation(program, platform, encryption, pubOptie, owner, replaces);
-    }
 
     /**
      * This will be called per platform if an NEP notify is received.
      */
     public AuthorityLocations.RealizeResult realizeStreamingPlatformIfNeeded(
         @NonNull MediaObject mediaObject,
-        @NonNull Platform platform,
-        @NonNull Predicate<Location> locationPredicate,
-        @NonNull Instant now) {
-        if (mediaObject.getAVType() == null) {
-            return cannotRealize(mediaObject, now);
-        }
+        @NonNull Platform platform) {
+        final Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
+        log.debug("Webonly : {}", webonly);
 
-        return realizeStreamingPlatformIfNeededAudioAndVideo(mediaObject, platform, locationPredicate, now);
+        final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
+
+
+        if (existingPredictionForPlatform == null) {
+            log.debug("No prediction found for platform {} in {} ", platform, mediaObject);
+            return RealizeResult.builder()
+                .needed(false)
+                .program(mediaObject)
+                .reason("NEP status is " + mediaObject.getStreamingPlatformStatus() + " but no prediction found for platform " + platform)
+                .build();
+        } else {
+            Optional<RealizeResult> realizeResult = checkExistingPrediction(existingPredictionForPlatform, mediaObject, platform);
+            if (realizeResult.isPresent()) { // no need to realize
+                return realizeResult.get();
+            }
+        }
+        final List<Location> authorityLocations = getOrCreateAuthorityLocations(mediaObject, existingPredictionForPlatform.getEncryption());
+
+
+        return RealizeResult.builder()
+            .needed(true)
+            .locations(authorityLocations)
+            .program(mediaObject)
+            .build();
      }
 
     AuthorityLocations.RealizeResult cannotRealize(
@@ -96,135 +118,79 @@ public class AuthorityLocations {
     }
 
 
-    private AuthorityLocations.RealizeResult realizeStreamingPlatformIfNeededAudioAndVideo(
-        @NonNull MediaObject mediaObject,
-        @NonNull Platform platform,
-        @NonNull Predicate<Location> locationPredicate,
-        @NonNull Instant now) {
 
-        if (platform == Platform.INTERNETVOD) {
-            Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
-            log.debug("Webonly : {}", webonly);
-        }
-        final String pubOptie =   platform == Platform.INTERNETVOD ? "nep" : "nepaudio";
-        final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
-        Encryption encryption;
-
+    private Optional<AuthorityLocations.RealizeResult> checkExistingPrediction(Prediction  existingPredictionForPlatform, MediaObject mediaObject, Platform platform) {
         final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
+        final Encryption encryption = existingPredictionForPlatform.getEncryption();
 
-        final List<Location> authorityLocations = new ArrayList<>();
-        if (existingPredictionForPlatform != null) {
-            if (!existingPredictionForPlatform.isPlannedAvailability()) {
-                log.debug("Can't realize {} for {} because no availability planned", mediaObject, platform);
-                existingPredictionForPlatform.setState(Prediction.State.NOT_ANNOUNCED);
-                return AuthorityLocations.RealizeResult.builder()
+        if (!existingPredictionForPlatform.isPlannedAvailability()) {
+            log.debug("Can't realize {} for {} because no availability planned", mediaObject, platform);
+            existingPredictionForPlatform.setState(Prediction.State.NOT_ANNOUNCED);
+            return Optional.of(AuthorityLocations.RealizeResult.builder()
+                .needed(false)
+                .program(mediaObject)
+                .reason("NEP status is " + streamingPlatformStatus + " but no availability planned ")
+                .build());
+        }
+        if (!streamingPlatformStatus.matches(encryption)) {
+            if (encryption != null && encryption != Encryption.NONE) {
+                log.debug("Can't realize {} for {} because incorrect encryption", mediaObject, platform);
+                // DRM
+                return Optional.of(AuthorityLocations.RealizeResult.builder()
                     .needed(false)
                     .program(mediaObject)
-                    .reason("NEP status is " + streamingPlatformStatus + " but no availability planned ")
-                    .build();
+                    .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
+                    .build());
             }
-            if (!streamingPlatformStatus.matches(existingPredictionForPlatform.getEncryption())) {
-                log.debug("Can't realize {} for {} because incorrect encryption", mediaObject, platform);
-                if (existingPredictionForPlatform.getEncryption() != Encryption.NONE) {
-                    return AuthorityLocations.RealizeResult.builder()
-                        .needed(false)
-                        .program(mediaObject)
-                        .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
-                        .build();
-                } else {
-                    // DRM
-                    createDrmImplicitly(mediaObject, platform, authorityLocations, locationPredicate, now);
-                    if (authorityLocations.isEmpty()) {
-                        return RealizeResult.builder()
-                            .needed(false)
-                            .program(mediaObject)
-                            .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
-                            .build();
-                    } else {
-                         return RealizeResult.builder()
-                            .needed(true)
-                            .program(mediaObject)
-                            .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
-                            .build();
-                    }
+        }
+        // no realize
+        return Optional.empty();
+    }
 
+
+    private List<Location> getOrCreateAuthorityLocations(MediaObject mediaObject, Encryption encryption) {
+
+        final List<Location> result = new ArrayList<>();
+        final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
+
+        if (streamingPlatformStatus.hasAudio() && ! (encryption == DRM)) {
+            String locationUrl = String.format(audioTemplate, mediaObject.getMid());
+            Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, Platform.INTERNETAOD, locationUrl, "nepaudio");
+            log.debug("matched {}", authorityLocation);
+            result.add(authorityLocation);
+        }
+        if (streamingPlatformStatus.hasDrm() || encryption == DRM) {
+            for (Platform platform: Platform.values()) {
+                Prediction prediction = mediaObject.getPrediction(platform);
+                if (prediction != null && prediction.isPlannedAvailability()) { // drms are always made
+                    String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, DRM, "nep");
+                    Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
+                    log.debug("matched {}", authorityLocation);
+                    result.add(authorityLocation);
+                }
+
+            }
+        }
+        if (streamingPlatformStatus.hasWithoutDrm()) {
+            for (Platform platform: Platform.values()) {
+                Prediction prediction = mediaObject.getPrediction(platform);
+                if (prediction != null && prediction.isPlannedAvailability() && (prediction.getEncryption() == null || prediction.getEncryption() == Encryption.NONE)) {
+                    String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, Encryption.NONE, "nep");
+                    Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
+                    log.debug("matched {}", authorityLocation);
+                    result.add(authorityLocation);
                 }
             }
-            encryption = existingPredictionForPlatform.getEncryption();
-            if (encryption == null) {
-                encryption = StreamingStatus.preferredEncryption(streamingPlatformStatus);
-                log.info("Existing prediction {} has no encryption, falling back to {} ", existingPredictionForPlatform, encryption);
-            }
-        } else {
-            log.debug("No prediction found for platform {} in {} ", platform, mediaObject);
-            return AuthorityLocations.RealizeResult.builder()
-                .needed(false)
-                .program(mediaObject)
-                .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform)
-                .build();
-        }
-        Location authorityLocation = getOrCreateAuthorityLocation(mediaObject, platform, encryption, "For " + encryption, locationPredicate);
-        if (authorityLocation != null) {
-            authorityLocations.add(authorityLocation);
-            AVAttributes avAttributes = getAVAttributes(pubOptie).orElseThrow(() -> new RuntimeException("not found nep puboptie"));
-            if (avAttributes.getAvFileFormat() != AVFileFormat.HASP) {
-                getBytesize(authorityLocation.getProgramUrl()).ifPresent(avAttributes::setByteSize);
-            }
-            updateLocationAndPredictions(authorityLocation, mediaObject, platform, avAttributes, OwnerType.AUTHORITY, new HashSet<>(), now);
         }
 
-        //MSE-3992
-        if (encryption != Encryption.DRM) {
-            createDrmImplicitly(mediaObject, platform, authorityLocations, locationPredicate, now);
-        }
 
-        if (authorityLocations.isEmpty()) {
-            return AuthorityLocations.RealizeResult.builder()
-                .needed(false)
-                .program(mediaObject)
-                .reason("NEP status is " + streamingPlatformStatus + " but no existing locations or predictions matched")
-                .build();
-        }
+        //Instant streamingOffline =  mediaObject.getStreamingPlatformStatus().getOffline(authorityLocation.hasDrm());
+        return result;
 
-        return RealizeResult.builder()
-            .needed(true)
-            .locations(authorityLocations)
-            .program(mediaObject)
-            .build();
     }
 
-    private void createDrmImplicitly(
-        MediaObject mediaObject,
-        Platform platform,
-        List<Location> authorityLocations,
-        Predicate<Location> locationPredicate,
-        Instant now) {
-        Location authorityLocation2 = getOrCreateAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
-        if (authorityLocation2 != null) {
-            authorityLocations.add(authorityLocation2);
-            updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("Not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>(), now);
-        }
-    }
-
-
-
-    private Location getOrCreateAuthorityLocation(MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate) {
-        String locationUrl;
-        if (platform != Platform.INTERNETAOD) {
-            locationUrl = createLocationVideoUrl(mediaObject, platform, encryption, "nep");
-        } else {
-            locationUrl = String.format(audioTemplate, mediaObject.getMid());
-        }
-        if (locationUrl == null) {
-            return null;
-            // I think this cannot happen
-        }
-
-        // Checks if this exact url is available already with correct owner?
+    private Location findCreateOrUpdateAutorityLocation(MediaObject mediaObject, Platform platform, String locationUrl, String pubOption) {
         Location authorityLocation = mediaObject.findLocation(locationUrl, OwnerType.AUTHORITY);
-        final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
-
-        // What if only owner is wrong?
         if (authorityLocation == null) {
             authorityLocation = mediaObject.findLocation(locationUrl);
             if (authorityLocation != null) {
@@ -232,53 +198,20 @@ public class AuthorityLocations {
                 authorityLocation.setOwner(OwnerType.AUTHORITY);
             }
         }
-
         if (authorityLocation == null) {
-            // no, just check platform then.
-            authorityLocation = getAuthorityLocationsForPlatform(mediaObject, platform).stream()
-                .filter(l -> getEncryptionFromProgramUrl(l) == encryption)
-                .filter(locationPredicate)
-                .findFirst().
-                orElse(null);
+            addLocation(mediaObject, platform, locationUrl, pubOption, OwnerType.AUTHORITY, new HashSet<>());
+            authorityLocation = mediaObject.findLocation(locationUrl, OwnerType.AUTHORITY);
         }
-        if (authorityLocation == null) {
-            authorityLocation = createLocation(mediaObject, existingPredictionForPlatform, locationUrl);
-            log.info("Creating new streaming platform location {} {} for mediaObject {} because {}", locationUrl, platform, mediaObject.getMid(), reason);
-            Embargos.copy(existingPredictionForPlatform, authorityLocation);
-        } else {
-            if (!locationUrl.equals(authorityLocation.getProgramUrl())) {
-                log.info("Updating location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
-                authorityLocation.setProgramUrl(locationUrl);
-            } else {
-                log.debug("Location {} {} for mediaObject {} already exists", locationUrl, platform, mediaObject.getMid());
-            }
-            authorityLocation.setPlatform(platform);
-            authorityLocation.setOwner(OwnerType.AUTHORITY);
-        }
-        Instant streamingOffline =  mediaObject.getStreamingPlatformStatus().getOffline(authorityLocation.hasDrm());
         return authorityLocation;
-
     }
 
-
-
-    @NonNull
-    private static Location createLocation(final MediaObject mediaObject, final Prediction prediction, final String locationUrl){
-        Location platformAuthorityLocation = new Location(locationUrl, OwnerType.AUTHORITY, prediction.getPlatform());
-        platformAuthorityLocation.setPublishStartInstant(prediction.getPublishStartInstant());
-        platformAuthorityLocation.setPublishStopInstant(prediction.getPublishStopInstant());
-        mediaObject.addLocation(platformAuthorityLocation);
-        return platformAuthorityLocation;
-    }
-
-
-    private Program addLocation(
-        @NonNull Program program,
+    private MediaObject addLocation(
+        @NonNull MediaObject program,
         @NonNull Platform platform,
-        Encryption encryption,
-        @NonNull String pubOptie, OwnerType owner,
+        String locationUrl,
+        @NonNull String pubOptie,
+        OwnerType owner,
         @NonNull Set<OwnerType> replaces) {
-        final String locationUrl = createLocationVideoUrl(program, platform, encryption, pubOptie);
         if (locationUrl == null) {
             return program;
         }
@@ -308,27 +241,17 @@ public class AuthorityLocations {
      *
      * @param pubOptie Originally we got notifies with different puboptions. Now we get from NEP, and pubotion then is 'nep'.
      */
-    private static String createLocationVideoUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
-        String baseUrl = getBaseUrl(platform, encryption, pubOptie, program.getStreamingPlatformStatus());
-        if (baseUrl == null) {
-            return null;
-        }
-        return baseUrl + program.getMid();
+    private static String createLocationVideoUrl(StreamingStatus streamingStatus,  String mid, Platform platform, Encryption encryption, String pubOptie) {
+        String baseUrl = getBaseVideoUrl(platform, encryption, pubOptie);
+        return baseUrl + mid;
     }
 
 
-    private static String getBaseUrl(Platform platform, Encryption encryption, String publicationOption, StreamingStatus status) {
+    private static @NonNull String getBaseVideoUrl(Platform platform, Encryption encryption, String publicationOption) {
         if ("nep".equals(publicationOption)) {
-            if (! status.matches(encryption)) {
-                log.debug("{} does not match {}", status, encryption);
-                return null;
-            }
-            boolean drm = encryption == Encryption.DRM;
+            boolean drm = encryption == DRM;
             String scheme = drm ? "npo+drm" : "npo";
             return scheme + "://" + platform.name().toLowerCase() + ".omroep.nl/";
-        } else if (platform == Platform.INTERNETVOD && "adaptive".equals(publicationOption)) {
-            // https://jira.vpro.nl/browse/MSE-1516
-            return "odip+http://odi.omroep.nl/video/" + publicationOption + "/";
         } else if (platform == Platform.INTERNETVOD) {
             return "odi+http://odi.omroep.nl/video/" + publicationOption + "/";
         } else if (platform == Platform.PLUSVOD) {
@@ -342,7 +265,7 @@ public class AuthorityLocations {
 
 
     private Location createOrFindLocation(
-        @NonNull Program program,
+        @NonNull MediaObject program,
         @NonNull String locationUrl,
         @NonNull OwnerType owner,
         @NonNull Platform platform) {
@@ -365,7 +288,10 @@ public class AuthorityLocations {
 
 
 
-    public void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate, Instant now){
+    public void removeLocationForPlatformIfNeeded(MediaObject mediaObject,
+                                                  Platform platform,
+                                                  Predicate<Location> locationPredicate,
+                                                  Instant now ){
         final List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
@@ -375,24 +301,36 @@ public class AuthorityLocations {
                 log.info("Skipped for consideration {}", existingPlatformLocation);
                 continue;
             }
-             if (! encryptions.contains(getEncryptionFromProgramUrl(existingPlatformLocation))) {
-                 mediaObject.removeLocation(existingPlatformLocation);
-                 log.info("Removing {}", existingPlatformLocation);
+            if (isAudioUrl(existingPlatformLocation)) {
+                if (! streamingPlatformStatus.hasAudio() || !  encryptions.contains(Encryption.NONE)) {
+                    mediaObject.removeLocation(existingPlatformLocation);
+                    log.info("Removing {}", existingPlatformLocation);
+                }
+                continue;
             } else {
-                 log.debug("Letting {}", existingPlatformLocation);
-             }
-
+                if (!encryptions.contains(getVideoEncryptionFromProgramUrl(existingPlatformLocation))) {
+                    mediaObject.removeLocation(existingPlatformLocation);
+                    log.info("Removing {}", existingPlatformLocation);
+                } else {
+                    log.debug("Letting {}", existingPlatformLocation);
+                }
+            }
         }
         updatePredictionStates(mediaObject, platform, now);
     }
 
-    private static Encryption getEncryptionFromProgramUrl(Location location) {
+    private static Encryption getVideoEncryptionFromProgramUrl(Location location) {
         String url = location.getProgramUrl();
         if (url.startsWith("npo+drm")) {
-            return Encryption.DRM;
+            return DRM;
         } else {
             return Encryption.NONE;
         }
+    }
+
+    private  boolean isAudioUrl(Location location) {
+        String url = location.getProgramUrl();
+        return url.matches(audioTemplate.formatted(".*"));
     }
 
 
@@ -400,39 +338,36 @@ public class AuthorityLocations {
         URI uri = URI.create(String.format(audioTemplate, "MID"));
         return uri.getScheme() + "://" + uri.getHost();
     }
+
+
     /**
-     * Creates a prediction because of a NEP notification.
-     * <p>
-     * If a mediaobject has INTERNETVOD locations (which are not deleted) (which were not created because of NEP)
-     * <p>
-     * then we need to have INTERNETVOD prediction which can be set to 'REALIZED'.
-     * <p>
-     * This is not always the case, this method can correct that.
+     * Sometimes a {@link MediaObject mediaobject} already has locations, but no prediction which belongs to that.
+     * This implicitly creates it then.
      */
-    public  Optional<Prediction>  createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
-        String audioPrefix = getAudioPrefix();
-        Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream()
-            .filter(l -> Platform.INTERNETVOD.matches(l.getPlatform())) // l == null || l == internetvod
-            .filter(l -> ! l.getProgramUrl().startsWith("npo:")) // not created because of NEP itself.
-            .filter(l -> ! l.getProgramUrl().startsWith(audioPrefix)) // not created because of NEP itself.
-            .filter(l -> ! l.isDeleted())// ignore deleted of course
-            .collect(Collectors.toSet());
-        Prediction existingPrediction = mediaObject.getPrediction(Platform.INTERNETVOD);
-        if (existingPrediction == null && ! existingWebonlyLocations.isEmpty()) {
-            // yes, no prediction found, but one is expected because there are matching locations
-            Prediction prediction = mediaObject.findOrCreatePrediction(Platform.INTERNETVOD);
-            prediction.setPlannedAvailability(true);
-            prediction.setEncryption(null);
-
-            Iterator<Location> i = existingWebonlyLocations.iterator();
-            Location first = i.next();
-            Embargos.copyIfLessRestrictedOrTargetUnset(first, prediction);
-            i.forEachRemaining((l) -> Embargos.copyIfLessRestricted(l, prediction));
-
-            return Optional.of(prediction);
-        } else {
-            return Optional.ofNullable(existingPrediction);
+    Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
+        final Prediction existingPrediction = mediaObject.getPrediction(Platform.INTERNETVOD);
+        if (existingPrediction == null) {
+            final String audioPrefix = this.getAudioPrefix();
+            final Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream().filter(
+                    (l) -> Platform.INTERNETVOD.matches(l.getPlatform()))
+                .filter((l) -> !l.getProgramUrl().startsWith("npo:")) // ignore locations though that are made because of notify itself
+                .filter((l) -> !l.getProgramUrl().startsWith(audioPrefix)) // also valid for this one, this is AOD
+                .filter((l) -> !l.isDeleted()) // deleted, so assume they shouldn't have existing in the first place
+                .collect(Collectors.toSet());
+            if (!existingWebonlyLocations.isEmpty()) {
+                Prediction prediction = mediaObject.findOrCreatePrediction(Platform.INTERNETVOD);
+                prediction.setPlannedAvailability(true);
+                prediction.setEncryption((Encryption) null);
+                Iterator<Location> i = existingWebonlyLocations.iterator();
+                Location first = (Location) i.next();
+                Embargos.copyIfLessRestrictedOrTargetUnset(first, prediction);
+                i.forEachRemaining((l) -> {
+                    Embargos.copyIfLessRestricted(l, prediction);
+                });
+                return Optional.of(prediction);
+            }
         }
+        return Optional.ofNullable(existingPrediction);
     }
 
     private  static List<Location> getAuthorityLocationsForPlatform(MediaObject mediaObject, Platform platform){
@@ -440,7 +375,6 @@ public class AuthorityLocations {
             .filter(l -> l.getOwner() == OwnerType.AUTHORITY && l.getPlatform() == platform)
             .collect(Collectors.toList());
     }
-
 
     /**
      * After locations are added or removed, this may have effect on the state of the {@link MediaObject#getPredictions() prediction records}
@@ -495,9 +429,10 @@ public class AuthorityLocations {
     }
 
 
-    private static Optional<AVAttributes> getAVAttributes(String pubOption, String overrideFile) {
-
-        Properties properties = new Properties();
+    private static Optional<AVAttributes> getAVAttributes(
+        String pubOption,
+        String overrideFile) {
+        final Properties properties = new Properties();
         try {
             properties.load(AuthorityLocations.class.getResourceAsStream("/authority.puboptions.properties"));
             if (StringUtils.isNotBlank(overrideFile)) {
@@ -538,21 +473,25 @@ public class AuthorityLocations {
         }
     }
 
-
-
-    private static final HttpClient client = HttpClient.newBuilder()
+    /**
+     * Client used for {@link #getBytesize(String)}
+     */
+    private static final HttpClient CLIENT = HttpClient.newBuilder()
         .followRedirects(HttpClient.Redirect.ALWAYS)
         .connectTimeout(Duration.ofSeconds(3))
         .build();
 
+    /**
+     * Executes a HEAD request to determine the bytes size of given URL. For mp3's and such.
+     * @since 7.7
+     */
     public static OptionalLong getBytesize(String locationUrl) {
-        HttpRequest head = HttpRequest.newBuilder()
-
+        final HttpRequest head = HttpRequest.newBuilder()
             .uri(URI.create(locationUrl))
-            .method("HEAD", HttpRequest.BodyPublishers.noBody())
+            .method("HEAD", noBody())
             .build(); // .HEAD() in java 18
         try {
-            HttpResponse<Void> send = client.send(head, HttpResponse.BodyHandlers.discarding());
+            final HttpResponse<Void> send = CLIENT.send(head, discarding());
             if (send.statusCode() == 200) {
                 return send.headers().firstValueAsLong("Content-Length");
             } else {
@@ -573,5 +512,12 @@ public class AuthorityLocations {
         final String reason;
         final List<Location> locations;
         final AVType avType;
+
+        public static class Builder {
+            public Builder loggingReason(String reason, Consumer<String> logger) {
+                logger.accept(reason);
+                return reason(reason);
+            }
+        }
     }
 }

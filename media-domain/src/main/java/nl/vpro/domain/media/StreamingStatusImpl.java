@@ -63,26 +63,28 @@ public class StreamingStatusImpl implements StreamingStatus {
 
 
     /**
-         * Audio is currently always without DRM.
+     * Audio is currently always without DRM.
      * @since 7.7
      */
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
-    @Column(name="streamingplatformstatus_audio")
+    @Column(name="streamingplatformstatus_audio_withoutdrm")
     @XmlAttribute
-    Value audio = Value.UNSET;
+    Value audioWithoutDrm = Value.UNSET;
 
     public StreamingStatusImpl() {
     }
 
 
-    public StreamingStatusImpl(
+    StreamingStatusImpl(
         Value withDrm,
-        Value withoutDrm
+        Value withoutDrm,
+        Value audioWithoutDrm
     ) {
         this.withDrm = withDrm;
         this.withoutDrm = withoutDrm;
+        this.audioWithoutDrm = audioWithoutDrm;
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -90,12 +92,14 @@ public class StreamingStatusImpl implements StreamingStatus {
         Value withDrm,
         Instant withDrmOffline,
         Value withoutDrm,
-        Instant withoutDrmOffline
+        Instant withoutDrmOffline,
+        Value audioWithoutDrm
     ) {
         this.withDrm = withDrm;
         this.withDrmOffline = withDrmOffline;
         this.withoutDrm = withoutDrm;
         this.withoutDrmOffline = withoutDrmOffline;
+        this.audioWithoutDrm = audioWithoutDrm;
     }
 
     public void set(boolean drm, Value value) {
@@ -120,15 +124,20 @@ public class StreamingStatusImpl implements StreamingStatus {
         if (!(o instanceof StreamingStatus that)) return false;
 
         if (withDrm != that.getWithDrm()) return false;
-        return withoutDrm == that.getWithoutDrm();
+        if (withoutDrm != that.getWithoutDrm()) return false;
+        return audioWithoutDrm == that.getAudioWithoutDrm();
     }
 
 
     @Override
     public String toString() {
         return withDrm + (withDrmOffline != null ? ("(-" + withDrmOffline + ")") : "") +  "_" +
-            withoutDrm + (withoutDrmOffline != null ? ("(-" + withoutDrmOffline + ")") : "");
+            withoutDrm + (withoutDrmOffline != null ? ("(-" + withoutDrmOffline + ")") : "") +
+            (audioWithoutDrm == Value.ONLINE ? "_A:" + audioWithoutDrm : "");
     }
+
+
+
 
     protected void calcCRC32(CRC32 result) {
          if (getWithDrm() != null) {
@@ -147,6 +156,9 @@ public class StreamingStatusImpl implements StreamingStatus {
             }
         } else {
             result.update(0);
+        }
+        if (audioWithoutDrm != null) {
+            result.update(this.getAudioWithoutDrm().ordinal());
         }
     }
 

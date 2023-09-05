@@ -22,10 +22,15 @@ public enum AVType implements Displayable {
             return "Video";
         }
     },
+    /**
+     * For groups this means that it contains both audio and video.
+     * <p>
+     * For a playable object, it may mean that it contains both audio and video {@link Location locations}. They should represent the same content though. E.g. 'visual radio'.
+     */
     MIXED {
         @Override
         public String getDisplayName() {
-            return "Afwisselend";
+            return "Afwisselend/Beide";
         }
     };
 

@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -31,7 +30,7 @@ public class AuthorityLocationsTest {
         program.setMid("mid_1234");
         program.setStreamingPlatformStatus(withDrm(unset()));
 
-        locations.realize(program, Platform.INTERNETVOD, "nep", OwnerType.BROADCASTER, new HashSet<>());
+        locations.realizeStreamingPlatformIfNeeded(program, Platform.INTERNETVOD);
 
         assertThat(program.getStreamingPlatformStatus()).isEqualTo(withDrm(unset()));
         assertThat(program.getLocations()).isNotEmpty();
@@ -44,7 +43,7 @@ public class AuthorityLocationsTest {
         Program program = new Program();
         program.setMid("mid_1234");
         program.setStreamingPlatformStatus(withoutDrm(unset()));
-        locations.realize(program, Platform.PLUSVOD, "nep", OwnerType.BROADCASTER, new HashSet<>());
+        //locations.realize(program, Platform.PLUSVOD, "nep", OwnerType.BROADCASTER, new HashSet<>());
 
         assertThat(program.getStreamingPlatformStatus()).isEqualTo(withoutDrm(unset()));
         assertThat(program.getLocations()).isNotEmpty();
@@ -104,9 +103,7 @@ public class AuthorityLocationsTest {
 
         log.info("{}", locations.realizeStreamingPlatformIfNeeded(
             program,
-            Platform.INTERNETVOD,
-            (l) -> true,
-            Instant.now()
+            Platform.INTERNETVOD
         ));
         log.info("{}", program);
         assertThat(program.getLocations().stream().map(Location::getProgramUrl)).contains("npo://internetvod.omroep.nl/MID-123");
@@ -123,10 +120,7 @@ public class AuthorityLocationsTest {
 
         log.info("{}", locations.realizeStreamingPlatformIfNeeded(
             program,
-            Platform.INTERNETAOD,
-            (l) -> true,
-            Instant.now()
-        ));
+            Platform.INTERNETVOD));
         log.info("{}", program);
         assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("https://entry.cdn.npoaudio.nl/handle/MID-123.mp3");
         assertThat(program.getLocations().first().getOwner()).isEqualTo(OwnerType.AUTHORITY);
