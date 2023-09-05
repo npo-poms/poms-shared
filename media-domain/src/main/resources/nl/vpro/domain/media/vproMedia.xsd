@@ -3273,8 +3273,8 @@
      <xs:sequence/>
      <xs:attribute name="withDrm" type="streamingStatusValue"/>
      <xs:attribute name="withoutDrm" type="streamingStatusValue"/>
-     <xs:attribute name="audio" type="streamingStatusValue"/>
-  </xs:complexType>
+     <xs:attribute name="audioWithoutDrm" type="streamingStatusValue"/>
+   </xs:complexType>
 
 
   <xs:simpleType name="streamingStatusValue">

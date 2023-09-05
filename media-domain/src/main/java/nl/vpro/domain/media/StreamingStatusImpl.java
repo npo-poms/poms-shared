@@ -157,7 +157,7 @@ public class StreamingStatusImpl implements StreamingStatus {
         } else {
             result.update(0);
         }
-        if (audioWithoutDrm != null) {
+        if (audioWithoutDrm != null && audioWithoutDrm != Value.UNSET) {
             result.update(this.getAudioWithoutDrm().ordinal());
         }
     }
