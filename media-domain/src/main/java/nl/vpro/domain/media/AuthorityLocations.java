@@ -70,8 +70,8 @@ public class AuthorityLocations {
     public AuthorityLocations(
         @Value("${authority.locations.audioTemplate:https://entry.cdn.npoaudio.nl/handle/%s.mp3}") String audioTemplate) {
         this.audioTemplate = audioTemplate == null ? "https://entry.cdn.npoaudio.nl/handle/%s.mp3" : audioTemplate;
-        URI uri = URI.create(String.format(audioTemplate, "MID"));
-        audioPrefix =  uri.getScheme() + "://" + uri.getHost();
+        URI uri = URI.create(String.format(this.audioTemplate, "MID"));
+        this.audioPrefix =  uri.getScheme() + "://" + uri.getHost();
     }
 
 
