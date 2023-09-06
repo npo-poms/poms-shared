@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
 
-import static nl.vpro.domain.media.StreamingStatus.*;
+import static nl.vpro.domain.media.StreamingStatus.Value;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -77,7 +77,10 @@ public class AuthorityLocationsTest {
             Platform.INTERNETVOD
         ));
         log.info("{}", program);
-        assertThat(program.getLocations().stream().map(Location::getProgramUrl)).contains("npo://internetvod.omroep.nl/MID-123");
+        assertThat(program.getLocations()).hasSize(1);
+        Location first = program.getLocations().first();
+        assertThat(first.getProgramUrl()).contains("npo://internetvod.omroep.nl/MID-123");
+        assertThat(first.getAuthority()).isEqualTo(Authority.USER);// This seems incorrect!
     }
 
 
@@ -94,10 +97,11 @@ public class AuthorityLocationsTest {
             Platform.INTERNETVOD
         ));
         log.info("{}", program);
+        assertThat(program.getLocations()).hasSize(1);
         assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("https://entry.cdn.npoaudio.nl/handle/MID-123.mp3");
         assertThat(program.getLocations().first().getOwner()).isEqualTo(OwnerType.AUTHORITY);
         assertThat(program.getLocations().first().getAvFileFormat()).isEqualTo(AVFileFormat.MP3);
-
+        assertThat(program.getLocations().first().getAuthority()).isEqualTo(Authority.USER);// This seems incorrect!
     }
 
 }

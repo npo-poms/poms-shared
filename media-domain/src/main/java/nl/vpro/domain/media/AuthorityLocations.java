@@ -40,6 +40,10 @@ import static nl.vpro.domain.media.Encryption.DRM;
 public class AuthorityLocations {
 
     /**
+     * These are the relevant 'stream types' that are relevant for POMS.
+     * Basically it is like {@link AVType} but it is more about {@link Location}. For now only used to pass the information
+     * about the CDN notification around. It would make sense to something like in {@link Location}or {@link AVAttributes} as well.
+     *
      * @since 7.7
      */
     public enum StreamType {
