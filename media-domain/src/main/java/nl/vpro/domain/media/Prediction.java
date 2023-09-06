@@ -191,7 +191,9 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         Authority authority,
         State state,
         Encryption encryption,
-        MediaObject parent) {
+        MediaObject parent,
+        Long id) {
+        this.id = id;
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
@@ -428,6 +430,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         }
         this.plannedAvailability = true;
     }
+
 
 
 }

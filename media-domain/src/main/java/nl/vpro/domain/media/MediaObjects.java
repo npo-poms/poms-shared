@@ -1173,8 +1173,7 @@ public class MediaObjects {
     protected static void correctPrediction(Prediction prediction, MediaObject mediaObject) {
         if (autoCorrectPredictions) {
             switch (prediction.getState()) {
-                case ANNOUNCED:
-                case REVOKED:
+                case ANNOUNCED, REVOKED -> {
                     for (Location location : mediaObject.getLocations()) {
                         if (
                             //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
@@ -1187,8 +1186,8 @@ public class MediaObjects {
                             break;
                         }
                     }
-                    break;
-                case REALIZED:
+                }
+                case REALIZED -> {
                     // Are there any 'REALIZED' prediction without locations that can be played anyway?
                     Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
@@ -1199,9 +1198,8 @@ public class MediaObjects {
                         prediction.setState(Prediction.State.REVOKED);
                         markForRepublication(mediaObject, "realized prediction");
                     }
-                    break;
-                default:
-                    log.debug("Ignoring prediction {}", prediction);
+                }
+                default -> log.debug("Ignoring prediction {}", prediction);
             }
         }
     }

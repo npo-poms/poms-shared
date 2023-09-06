@@ -70,7 +70,14 @@ public class AuthorityLocationsTest {
         program.setMid("MID-123");
         program.setAVType(AVType.VIDEO);
         program.setStreamingPlatformStatus(StreamingStatusImpl.builder().withoutDrm(Value.ONLINE).build());
-        program.getPredictions().add(Prediction.builder().encryption(Encryption.NONE).platform(Platform.INTERNETVOD).build());
+        program.getPredictions().add(
+            Prediction.builder()
+                .encryption(Encryption.NONE)
+                .platform(Platform.INTERNETVOD)
+                .authority(Authority.USER)
+                .id(1L)
+                .build()
+        );
 
         log.info("{}", locations.realizeStreamingPlatformIfNeeded(
             program,
@@ -80,7 +87,7 @@ public class AuthorityLocationsTest {
         assertThat(program.getLocations()).hasSize(1);
         Location first = program.getLocations().first();
         assertThat(first.getProgramUrl()).contains("npo://internetvod.omroep.nl/MID-123");
-        assertThat(first.getAuthority()).isEqualTo(Authority.USER);// This seems incorrect!
+        assertThat(first.getAuthority()).isEqualTo(Authority.USER);
     }
 
 
@@ -90,7 +97,12 @@ public class AuthorityLocationsTest {
         program.setMid("MID-123");
         program.setAVType(AVType.AUDIO);
         program.setStreamingPlatformStatus(StreamingStatusImpl.builder().audioWithoutDrm(Value.ONLINE).build());
-        program.getPredictions().add(Prediction.builder().encryption(Encryption.NONE).platform(Platform.INTERNETVOD).build());
+        program.getPredictions().add(
+            Prediction.builder()
+                .encryption(Encryption.NONE)
+                .platform(Platform.INTERNETVOD)
+                .id(1L)
+                .build());
 
         log.info("{}", locations.realizeStreamingPlatformIfNeeded(
             program,

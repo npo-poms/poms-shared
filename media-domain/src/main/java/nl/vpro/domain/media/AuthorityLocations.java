@@ -279,7 +279,7 @@ public class AuthorityLocations {
             Prediction prediction = program.getPrediction(platform);
             if (prediction.isNew()) {
                 program.getPrediction(platform).setAuthority(Authority.SYSTEM);
-                log.info("Created {}", prediction);
+                log.info("Found new prediction, so made it SYSTEM {}", prediction);
             }
         } else {
             log.debug("updating location {} {} for mediaObject {}", locationUrl, owner, program.getMid());
