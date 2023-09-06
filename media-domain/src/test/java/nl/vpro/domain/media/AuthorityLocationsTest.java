@@ -34,6 +34,8 @@ public class AuthorityLocationsTest {
         assertThat(program.getStreamingPlatformStatus()).isEqualTo(withDrm(unset()));
         assertThat(program.getLocations()).isNotEmpty();
         assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("npo+drm://internetvod.omroep.nl/mid_1234");
+        assertThat(program.getLocations().first().getAuthority()).isEqualTo(Authority.SYSTEM);
+        assertThat(program.getLocations().first().getOwner()).isEqualTo(OwnerType.BROADCASTER); // why?
         assertThat(program.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.REALIZED);
     }
 
@@ -47,6 +49,8 @@ public class AuthorityLocationsTest {
         assertThat(program.getStreamingPlatformStatus()).isEqualTo(withoutDrm(unset()));
         assertThat(program.getLocations()).isNotEmpty();
         assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("npo://plusvod.omroep.nl/mid_1234");
+        assertThat(program.getLocations().first().getAuthority()).isEqualTo(Authority.SYSTEM);
+        assertThat(program.getLocations().first().getOwner()).isEqualTo(OwnerType.BROADCASTER); // why?
         assertThat(program.getPrediction(Platform.PLUSVOD).getState()).isEqualTo(Prediction.State.REALIZED);
     }
 
@@ -108,7 +112,10 @@ public class AuthorityLocationsTest {
             Instant.now()
         ));
         log.info("{}", program);
-        assertThat(program.getLocations().stream().map(Location::getProgramUrl)).contains("npo://internetvod.omroep.nl/MID-123");
+        assertThat(program.getLocations()).hasSize(1);
+        Location first = program.getLocations().first();
+        assertThat(first.getProgramUrl()).contains("npo://internetvod.omroep.nl/MID-123");
+        assertThat(first.getAuthority()).isEqualTo(Authority.USER);// This seems incorrect!
     }
 
 
@@ -131,7 +138,7 @@ public class AuthorityLocationsTest {
         assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("https://entry.cdn.npoaudio.nl/handle/MID-123.mp3");
         assertThat(program.getLocations().first().getOwner()).isEqualTo(OwnerType.AUTHORITY);
         assertThat(program.getLocations().first().getAvFileFormat()).isEqualTo(AVFileFormat.MP3);
-
+        assertThat(program.getLocations().first().getAuthority()).isEqualTo(Authority.USER);// This seems incorrect!
     }
 
 }
