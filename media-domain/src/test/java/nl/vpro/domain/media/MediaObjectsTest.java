@@ -402,8 +402,9 @@ public class MediaObjectsTest {
         assertThat( existing.findLocation("ccc").getAvAttributes().getVideoAttributes()).withFailMessage("Removing deleted VideoAttributes failed").isNull();
     }
 
-    @SuppressWarnings({"ResultOfMethodCallIgnored", "NewClassNamingConvention"})
-    public static class Playability {
+    @Nested
+    @SuppressWarnings({"ResultOfMethodCallIgnored"})
+    static class Playability {
 
         @BeforeAll
         static void init (){

@@ -2125,8 +2125,20 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         this.predictionsForXml = predictions;
     }
 
-    public Prediction getPrediction(Platform platform) {
+    /**
+     * Like {@link #getPrediction(Platform)} will also implicitly correct the {@link Prediction#getState() prediction state} if that happens to be not consistent with the {@link #getLocations() locations}.
+     * <p>
+     */
+    Prediction getPredictionWithoutFixing(Platform platform) {
         return MediaObjects.getPrediction(platform, predictions);
+    }
+
+    /**
+     *
+     * @see #getPredictionWithoutFixing(Platform)
+     */
+    public Prediction getPrediction(Platform platform) {
+        return MediaObjects.getPrediction(platform, getPredictions());
     }
 
     /**

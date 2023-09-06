@@ -276,7 +276,7 @@ public class AuthorityLocations {
             log.info("Creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());
             location = new Location(locationUrl, owner, platform);
             program.addLocation(location);
-            Prediction prediction = program.getPrediction(platform);
+            Prediction prediction = program.getPredictionWithoutFixing(platform);
             if (prediction.isNew()) {
                 program.getPrediction(platform).setAuthority(Authority.SYSTEM);
                 log.info("Found new prediction, so made it SYSTEM {}", prediction);
