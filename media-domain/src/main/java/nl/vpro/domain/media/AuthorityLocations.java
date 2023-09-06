@@ -207,7 +207,7 @@ public class AuthorityLocations {
             }
         }
         if (authorityLocation == null) {
-            addLocation(mediaObject, platform, locationUrl, pubOption, OwnerType.AUTHORITY, new HashSet<>());
+            addLocation(mediaObject, platform, locationUrl, pubOption, OwnerType.AUTHORITY);
             authorityLocation = mediaObject.findLocation(locationUrl, OwnerType.AUTHORITY);
         }
         return authorityLocation;
@@ -218,15 +218,14 @@ public class AuthorityLocations {
         @NonNull Platform platform,
         String locationUrl,
         @NonNull String pubOptie,
-        OwnerType owner,
-        @NonNull Set<OwnerType> replaces) {
+        OwnerType owner) {
         if (locationUrl == null) {
             return program;
         }
         Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
         if (avAttributes.isPresent()) {
             Location location = createOrFindLocation(program, locationUrl, owner, platform);
-            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces, instant());
+            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, instant());
         } else {
             log.warn("Puboption {} is explicitly ignored, not adding location for {}", pubOptie, program);
         }
@@ -234,13 +233,8 @@ public class AuthorityLocations {
     }
 
 
-    private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Set<OwnerType> replaces, Instant now) {
+    private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Instant now) {
         location.setAvAttributes(avAttributes);
-        if (replaces != null) {
-            if (replaces.contains(location.getOwner())) {
-                location.setOwner(owner);
-            }
-        }
         updatePredictionStates(program, platform, now);
     }
 
