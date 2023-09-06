@@ -63,11 +63,15 @@ public class AuthorityLocations {
 
 
     private final String audioTemplate;
+    @Getter(AccessLevel.PRIVATE)
+    private final String audioPrefix;
 
     @Inject
     public AuthorityLocations(
         @Value("${authority.locations.audioTemplate:https://entry.cdn.npoaudio.nl/handle/%s.mp3}") String audioTemplate) {
         this.audioTemplate = audioTemplate == null ? "https://entry.cdn.npoaudio.nl/handle/%s.mp3" : audioTemplate;
+        URI uri = URI.create(String.format(audioTemplate, "MID"));
+        audioPrefix =  uri.getScheme() + "://" + uri.getHost();
     }
 
 
@@ -330,15 +334,13 @@ public class AuthorityLocations {
 
     private  boolean isAudioUrl(Location location) {
         String url = location.getProgramUrl();
-        return url.matches(audioTemplate.formatted(".*"));
+        return url.startsWith(getAudioPrefix());
     }
 
-
-    private String getAudioPrefix() {
-        URI uri = URI.create(String.format(audioTemplate, "MID"));
-        return uri.getScheme() + "://" + uri.getHost();
+    private  boolean isVideoUrl(Location location) {
+        String url = location.getProgramUrl();
+        return url.startsWith("npo");
     }
-
 
     /**
      * Sometimes a {@link MediaObject mediaobject} already has locations, but no prediction which belongs to that.
@@ -350,9 +352,9 @@ public class AuthorityLocations {
             final String audioPrefix = this.getAudioPrefix();
             final Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream().filter(
                     (l) -> Platform.INTERNETVOD.matches(l.getPlatform()))
-                .filter((l) -> !l.getProgramUrl().startsWith("npo:")) // ignore locations though that are made because of notify itself
-                .filter((l) -> !l.getProgramUrl().startsWith(audioPrefix)) // also valid for this one, this is AOD
-                .filter((l) -> !l.isDeleted()) // deleted, so assume they shouldn't have existing in the first place
+                .filter((l) -> ! isVideoUrl(l)) // ignore locations though that are made because of notify itself
+                .filter((l) -> ! isAudioUrl(l)) // also valid for this one, this is AOD
+                .filter((l) -> ! l.isDeleted()) // deleted, so assume they shouldn't have existing in the first place
                 .collect(Collectors.toSet());
             if (!existingWebonlyLocations.isEmpty()) {
                 Prediction prediction = mediaObject.findOrCreatePrediction(Platform.INTERNETVOD);
