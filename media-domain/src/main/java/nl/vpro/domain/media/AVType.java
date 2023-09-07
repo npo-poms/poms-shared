@@ -30,7 +30,7 @@ public enum AVType implements Displayable {
     MIXED {
         @Override
         public String getDisplayName() {
-            return "Afwisselend/Beide";
+            return "Afwisselend";
         }
     };
 

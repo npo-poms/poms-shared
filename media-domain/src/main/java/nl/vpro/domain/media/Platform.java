@@ -28,7 +28,7 @@ public enum Platform implements Displayable {
      * <p>
      * For audio see {@link #INTERNETAOD}
      */
-    INTERNETVOD(true, "Internet/NPO Start", true, AUDIO, VIDEO, MIXED) {
+    INTERNETVOD(true, "Internet/NPO Start", true, AUDIO, VIDEO) {
         @Override
         public boolean matches(Platform platform) {
             return platform == null || super.matches(platform);
@@ -39,12 +39,12 @@ public enum Platform implements Displayable {
     /**
      *
      */
-    TVVOD(true, "Kabelaars", true, VIDEO, MIXED),
+    TVVOD(true, "Kabelaars", true, VIDEO),
 
     /**
      * NLZiet,platform "extra" in cooperation with Dutch commercial broadcasters
      */
-    PLUSVOD(true, "Nlziet/NPO Plus", true, VIDEO, MIXED),
+    PLUSVOD(true, "Nlziet/NPO Plus", true, VIDEO),
 
     /**
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
@@ -52,7 +52,7 @@ public enum Platform implements Displayable {
      */
 
     @SuppressWarnings("DeprecatedIsStillUsed") @Deprecated
-    NPOPLUSVOD(false, "NPO Plus", true, VIDEO, MIXED) {
+    NPOPLUSVOD(false, "NPO Plus", true, VIDEO) {
         @Override
         public boolean display() {
             return false;
