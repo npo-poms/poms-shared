@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 
+import nl.vpro.domain.Changeables;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
 
@@ -225,16 +226,27 @@ public class AuthorityLocations {
         Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
         if (avAttributes.isPresent()) {
             Location location = createOrFindLocation(program, locationUrl, owner, platform);
-            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, instant());
+            updateLocationAndPredictions(
+                location,
+                program,
+                platform,
+                avAttributes.get(),
+                owner,
+                new HashSet<>(),
+                instant())
+            ;
         } else {
             log.warn("Puboption {} is explicitly ignored, not adding location for {}", pubOptie, program);
         }
         return program;
     }
 
-
-    private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Instant now) {
+    private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Set<OwnerType> replaces, Instant now) {
         location.setAvAttributes(avAttributes);
+        if (replaces != null && replaces.contains(location.getOwner())) {
+            location.setOwner(owner);
+        }
+
         updatePredictionStates(program, platform, now);
     }
 
@@ -254,22 +266,32 @@ public class AuthorityLocations {
             boolean drm = encryption == DRM;
             String scheme = drm ? "npo+drm" : "npo";
             return scheme + "://" + platform.name().toLowerCase() + ".omroep.nl/";
+        } else if (platform == Platform.INTERNETVOD && "adaptive".equals(publicationOption)) {
+            return "odip+http://odi.omroep.nl/video/" + publicationOption + "/";
         } else if (platform == Platform.INTERNETVOD) {
             return "odi+http://odi.omroep.nl/video/" + publicationOption + "/";
         } else if (platform == Platform.PLUSVOD) {
             return "sub+http://npo.npoplus.nl/video/" + publicationOption + "/";
         } else if (platform == Platform.TVVOD) {
             return "sub+http://tvvod.omroep.nl/video/" + publicationOption + "/";
+        } else {
+            throw new UnsupportedOperationException("Unsupported platform " + platform + " with puboption " + publicationOption);
         }
-
-        throw new UnsupportedOperationException("Unsupported platform " + platform + " with puboption " + publicationOption);
     }
 
+      private Location createOrFindLocation(
+        @NonNull MediaObject program,
+        @NonNull String locationUrl,
+        @NonNull OwnerType owner,
+        @NonNull Platform platform) {
+          return createOrFindLocation(program, locationUrl, owner, new HashSet<>(), platform);
+      }
 
     private Location createOrFindLocation(
         @NonNull MediaObject program,
         @NonNull String locationUrl,
         @NonNull OwnerType owner,
+        @NonNull Set<OwnerType> replaces,
         @NonNull Platform platform) {
         Location location = program.findLocation(locationUrl);
         if (location == null) {
@@ -290,10 +312,11 @@ public class AuthorityLocations {
 
 
 
-    public void removeLocationForPlatformIfNeeded(MediaObject mediaObject,
-                                                  Platform platform,
-                                                  Predicate<Location> locationPredicate,
-                                                  Instant now ){
+    public void removeLocationForPlatformIfNeeded(
+        @NonNull final MediaObject mediaObject,
+        Platform platform,
+        Predicate<Location> locationPredicate,
+        Instant now ){
         final List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         final StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
@@ -320,6 +343,32 @@ public class AuthorityLocations {
         }
         updatePredictionStates(mediaObject, platform, now);
     }
+
+
+    public Program addVideoLocation(@NonNull Program program, @NonNull Platform platform, Encryption encryption, @NonNull String pubOptie, OwnerType owner, @NonNull Set<OwnerType> replaces) {
+        String locationUrl = this.createLocationVideoUrl(program, platform, encryption, pubOptie);
+        if (locationUrl == null) {
+            return program;
+        } else {
+            Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
+            if (avAttributes.isPresent()) {
+                Location location = this.createOrFindLocation(program, locationUrl, owner, platform);
+                this.updateLocationAndPredictions(
+                    location,
+                    program, platform,
+                    avAttributes.get(),
+                    owner,
+                    replaces,
+                    Changeables.instant()
+                );
+            } else {
+                log.warn("Puboption {} is explicitly ignored, not adding location for {}", pubOptie, program);
+            }
+
+            return program;
+        }
+    }
+
 
     private static Encryption getVideoEncryptionFromProgramUrl(Location location) {
         String url = location.getProgramUrl();
@@ -370,7 +419,8 @@ public class AuthorityLocations {
         return Optional.ofNullable(existingPrediction);
     }
 
-    private  static List<Location> getAuthorityLocationsForPlatform(MediaObject mediaObject, Platform platform){
+    private  static List<Location> getAuthorityLocationsForPlatform(
+        final @NonNull MediaObject mediaObject, Platform platform){
         return mediaObject.getLocations().stream()
             .filter(l -> l.getOwner() == OwnerType.AUTHORITY && l.getPlatform() == platform)
             .collect(Collectors.toList());
@@ -502,6 +552,14 @@ public class AuthorityLocations {
         }
         return OptionalLong.empty();
     }
+
+     private String createLocationVideoUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
+        String baseUrl = this.getBaseVideoUrl(platform, encryption, pubOptie);
+        return baseUrl == null ? null : baseUrl + program.getMid();
+    }
+
+
+
 
     @AllArgsConstructor
     @lombok.Builder
