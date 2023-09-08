@@ -24,6 +24,7 @@ public class MediaAssertions extends Assertions {
         return mediaAssertThat(actual);
     }
 
+
     public static LocationAssert locationAssertThat(Location actual) {
         return new LocationAssert(actual);
     }
