@@ -15,8 +15,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import com.google.common.io.Files;
-
+import static java.nio.file.Files.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -24,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
+@SuppressWarnings({"DataFlowIssue", "ResultOfMethodCallIgnored"})
 @Slf4j
 public class ClassificationServiceImplTest {
 
@@ -98,7 +98,7 @@ public class ClassificationServiceImplTest {
 
     @Test
     public void testMultipleDirectoryScanWatcher() throws IOException, InterruptedException {
-        File dir = Files.createTempDir();
+        File dir = createTempDirectory("classifications").toFile();
 
         ClassificationServiceImpl classificationService = ClassificationServiceImpl.fromFiles(dir);
 
@@ -117,7 +117,7 @@ public class ClassificationServiceImplTest {
 
         for (int i = 0 ; i < 300 ; i++) {
             System.out.print('.');
-            if(classificationService.values().size() > 0) {
+            if(!classificationService.values().isEmpty()) {
                 break;
             }
             Thread.sleep(1000);
