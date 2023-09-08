@@ -180,13 +180,13 @@
 
   <twitter type="ACCOUNT">@twitter</twitter>
 
-  <prediction state="ANNOUNCED">INTERNETVOD</prediction>
+  <prediction state="REALIZED">INTERNETVOD</prediction>
 
   <prediction state="ANNOUNCED">TVVOD</prediction>
 
   <locations>
 
-    <location owner="BROADCASTER" workflow="PUBLISHED" urn="urn:vpro:media:location:6">
+    <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:6">
 
       <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
 
@@ -204,7 +204,7 @@
 
     </location>
 
-    <location owner="BROADCASTER" workflow="PUBLISHED" urn="urn:vpro:media:location:7">
+    <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:7">
 
       <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
 
@@ -218,7 +218,7 @@
 
     </location>
 
-    <location owner="BROADCASTER" workflow="PUBLISHED" urn="urn:vpro:media:location:8">
+    <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:8">
 
       <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
 
@@ -234,7 +234,7 @@
 
     </location>
 
-    <location owner="BROADCASTER" workflow="PUBLISHED" urn="urn:vpro:media:location:11">
+    <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:11">
 
       <programUrl>http://www.vpro.nl/location/1</programUrl>
 
@@ -536,11 +536,11 @@
 
       <twitter type="ACCOUNT">@twitter</twitter>
 
-      <prediction state="ANNOUNCED">INTERNETVOD</prediction>
+      <prediction state="REALIZED">INTERNETVOD</prediction>
 
       <locations>
 
-        <location owner="BROADCASTER" workflow="PUBLISHED" urn="urn:vpro:media:location:6">
+        <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:6">
 
           <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
 
@@ -558,7 +558,7 @@
 
         </location>
 
-        <location owner="BROADCASTER" workflow="PUBLISHED" urn="urn:vpro:media:location:7">
+        <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:7">
 
           <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
 
@@ -572,7 +572,7 @@
 
         </location>
 
-        <location owner="BROADCASTER" workflow="PUBLISHED" urn="urn:vpro:media:location:8">
+        <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:8">
 
           <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
 
@@ -588,7 +588,7 @@
 
         </location>
 
-        <location owner="BROADCASTER" workflow="PUBLISHED" urn="urn:vpro:media:location:11">
+        <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:11">
 
           <programUrl>http://www.vpro.nl/location/1</programUrl>
 
