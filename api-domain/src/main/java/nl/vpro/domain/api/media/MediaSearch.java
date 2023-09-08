@@ -164,6 +164,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
      * @deprecated For json backwards compatibility
      */
     @JsonSetter
+    @Deprecated
     public void setSortDate(DateRangeMatcherList sortDate) {
         this.sortDates = sortDate;
     }
