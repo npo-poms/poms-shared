@@ -183,6 +183,12 @@ public class SchemaTest extends AbstractSchemaTest {
                 .map(License::getId).toList());
     }
 
+
+    @Test
+    public void testPlatform() {
+        testMediaEnum("platformTypeEnum", Platform.class);
+    }
+
     protected <T extends Enum<T>> void testMediaEnum(String enumTypeName, Class<T> enumClass)  {
         testEnum("/nl/vpro/domain/media/vproMedia.xsd", enumTypeName, enumClass);
     }

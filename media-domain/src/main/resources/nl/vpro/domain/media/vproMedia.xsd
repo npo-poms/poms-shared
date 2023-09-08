@@ -355,7 +355,6 @@
   <xs:simpleType name="platformTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="INTERNETVOD"/>
-      <xs:enumeration value="INTERNETAOD"/>
       <xs:enumeration value="TVVOD"/>
       <xs:enumeration value="PLUSVOD"/>
       <xs:enumeration value="NPOPLUSVOD"/>
