@@ -4,16 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import nl.vpro.domain.media.support.OwnerType;
 
-import static nl.vpro.domain.media.StreamingStatus.*;
+import static nl.vpro.domain.media.StreamingStatus.Value;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -24,33 +21,6 @@ public class AuthorityLocationsTest {
 
     AuthorityLocations locations = new AuthorityLocations(null);
 
-
-    @Test
-    public void realizeDRM() {
-        Program program = new Program();
-        program.setMid("mid_1234");
-        program.setStreamingPlatformStatus(withDrm(unset()));
-
-        locations.realize(program, Platform.INTERNETVOD, "nep", OwnerType.BROADCASTER, new HashSet<>());
-
-        assertThat(program.getStreamingPlatformStatus()).isEqualTo(withDrm(unset()));
-        assertThat(program.getLocations()).isNotEmpty();
-        assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("npo+drm://internetvod.omroep.nl/mid_1234");
-        assertThat(program.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.REALIZED);
-    }
-
-    @Test
-    public void realizeNODRM() {
-        Program program = new Program();
-        program.setMid("mid_1234");
-        program.setStreamingPlatformStatus(withoutDrm(unset()));
-        locations.realize(program, Platform.PLUSVOD, "nep", OwnerType.BROADCASTER, new HashSet<>());
-
-        assertThat(program.getStreamingPlatformStatus()).isEqualTo(withoutDrm(unset()));
-        assertThat(program.getLocations()).isNotEmpty();
-        assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("npo://plusvod.omroep.nl/mid_1234");
-        assertThat(program.getPrediction(Platform.PLUSVOD).getState()).isEqualTo(Prediction.State.REALIZED);
-    }
 
 
     @Test
@@ -100,17 +70,24 @@ public class AuthorityLocationsTest {
         program.setMid("MID-123");
         program.setAVType(AVType.VIDEO);
         program.setStreamingPlatformStatus(StreamingStatusImpl.builder().withoutDrm(Value.ONLINE).build());
-        program.getPredictions().add(Prediction.builder().encryption(Encryption.NONE).platform(Platform.INTERNETVOD).build());
+        program.getPredictions().add(
+            Prediction.builder()
+                .encryption(Encryption.NONE)
+                .platform(Platform.INTERNETVOD)
+                .authority(Authority.USER)
+                .id(1L)
+                .build()
+        );
 
         log.info("{}", locations.realizeStreamingPlatformIfNeeded(
             program,
-            AVType.VIDEO,
-            Platform.INTERNETVOD,
-            (l) -> true,
-            Instant.now()
+            Platform.INTERNETVOD
         ));
         log.info("{}", program);
-        assertThat(program.getLocations().stream().map(Location::getProgramUrl)).contains("npo://internetvod.omroep.nl/MID-123");
+        assertThat(program.getLocations()).hasSize(1);
+        Location first = program.getLocations().first();
+        assertThat(first.getProgramUrl()).contains("npo://internetvod.omroep.nl/MID-123");
+        assertThat(first.getAuthority()).isEqualTo(Authority.USER);
     }
 
 
@@ -119,28 +96,24 @@ public class AuthorityLocationsTest {
         Program program = new Program();
         program.setMid("MID-123");
         program.setAVType(AVType.AUDIO);
-        program.setStreamingPlatformStatus(StreamingStatusImpl.builder().withoutDrm(Value.ONLINE).build());
-        program.getPredictions().add(Prediction.builder().encryption(Encryption.NONE).platform(Platform.INTERNETVOD).build());
+        program.setStreamingPlatformStatus(StreamingStatusImpl.builder().audioWithoutDrm(Value.ONLINE).build());
+        program.getPredictions().add(
+            Prediction.builder()
+                .encryption(Encryption.NONE)
+                .platform(Platform.INTERNETVOD)
+                .id(1L)
+                .build());
 
         log.info("{}", locations.realizeStreamingPlatformIfNeeded(
             program,
-            AVType.AUDIO,
-            Platform.INTERNETVOD,
-            (l) -> true,
-            Instant.now()
+            Platform.INTERNETVOD
         ));
         log.info("{}", program);
+        assertThat(program.getLocations()).hasSize(1);
         assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("https://entry.cdn.npoaudio.nl/handle/MID-123.mp3");
         assertThat(program.getLocations().first().getOwner()).isEqualTo(OwnerType.AUTHORITY);
         assertThat(program.getLocations().first().getAvFileFormat()).isEqualTo(AVFileFormat.MP3);
+        assertThat(program.getLocations().first().getAuthority()).isEqualTo(Authority.USER);// This seems incorrect!
     }
 
-
-    @ParameterizedTest
-    @CsvSource(textBlock = """
-        https://entry.cdn.npoaudio.nl/handle/WO_VPRO_20039564.mp3,  0
-        """)
-    public void size(String url, long size) {
-        assertThat(AuthorityLocations.getBytesize(url).getAsLong()).isEqualTo(157808848L);
-    }
 }

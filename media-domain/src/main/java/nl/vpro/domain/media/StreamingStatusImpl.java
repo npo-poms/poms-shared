@@ -42,27 +42,49 @@ public class StreamingStatusImpl implements StreamingStatus {
     @XmlAttribute
     Value withoutDrm = Value.UNSET;
 
+    /**
+     * @deprecated This was never used
+     */
     @Getter
     @Setter
     @Column(name="streamingplatformstatus_withdrm_offline")
+    @Deprecated
     Instant withDrmOffline = null;
 
+
+    /**
+     * @deprecated This was never used
+     */
     @Getter
     @Setter
     @Column(name="streamingplatformstatus_withoutdrm_offline")
+    @Deprecated
     Instant withoutDrmOffline = null;
 
+
+    /**
+     * Audio is currently always without DRM.
+     * @since 7.7
+     */
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING)
+    @Column(name="streamingplatformstatus_audio_withoutdrm")
+    @XmlAttribute
+    Value audioWithoutDrm = Value.UNSET;
 
     public StreamingStatusImpl() {
     }
 
 
-    public StreamingStatusImpl(
+    StreamingStatusImpl(
         Value withDrm,
-        Value withoutDrm
+        Value withoutDrm,
+        Value audioWithoutDrm
     ) {
         this.withDrm = withDrm;
         this.withoutDrm = withoutDrm;
+        this.audioWithoutDrm = audioWithoutDrm;
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -70,12 +92,14 @@ public class StreamingStatusImpl implements StreamingStatus {
         Value withDrm,
         Instant withDrmOffline,
         Value withoutDrm,
-        Instant withoutDrmOffline
+        Instant withoutDrmOffline,
+        Value audioWithoutDrm
     ) {
         this.withDrm = withDrm;
         this.withDrmOffline = withDrmOffline;
         this.withoutDrm = withoutDrm;
         this.withoutDrmOffline = withoutDrmOffline;
+        this.audioWithoutDrm = audioWithoutDrm;
     }
 
     public void set(boolean drm, Value value) {
@@ -97,20 +121,23 @@ public class StreamingStatusImpl implements StreamingStatus {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof StreamingStatus)) return false;
-
-        StreamingStatus that = (StreamingStatus) o;
+        if (!(o instanceof StreamingStatus that)) return false;
 
         if (withDrm != that.getWithDrm()) return false;
-        return withoutDrm == that.getWithoutDrm();
+        if (withoutDrm != that.getWithoutDrm()) return false;
+        return audioWithoutDrm == that.getAudioWithoutDrm();
     }
 
 
     @Override
     public String toString() {
         return withDrm + (withDrmOffline != null ? ("(-" + withDrmOffline + ")") : "") +  "_" +
-            withoutDrm + (withoutDrmOffline != null ? ("(-" + withoutDrmOffline + ")") : "");
+            withoutDrm + (withoutDrmOffline != null ? ("(-" + withoutDrmOffline + ")") : "") +
+            (audioWithoutDrm == Value.ONLINE ? "_A:" + audioWithoutDrm : "");
     }
+
+
+
 
     protected void calcCRC32(CRC32 result) {
          if (getWithDrm() != null) {
@@ -129,6 +156,9 @@ public class StreamingStatusImpl implements StreamingStatus {
             }
         } else {
             result.update(0);
+        }
+        if (audioWithoutDrm != null && audioWithoutDrm != Value.UNSET) {
+            result.update(this.getAudioWithoutDrm().ordinal());
         }
     }
 

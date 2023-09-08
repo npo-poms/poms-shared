@@ -2,12 +2,12 @@ package nl.vpro.domain.media;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.bind.annotation.XmlType;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.i18n.Displayable;
 import nl.vpro.i18n.Dutch;
@@ -33,44 +33,58 @@ public interface StreamingStatus extends Serializable, Displayable {
     }
 
     static StreamingStatusImpl unset() {
-        return new StreamingStatusImpl(Value.UNSET, Value.UNSET);
+        return new StreamingStatusImpl(Value.UNSET, Value.UNSET, Value.UNSET);
     }
 
     static StreamingStatusImpl withDrm(StreamingStatus existing) {
-        return new StreamingStatusImpl(Value.ONLINE, existing.getWithoutDrm());
+        return new StreamingStatusImpl(Value.ONLINE, existing.getWithoutDrm(), existing.getAudioWithoutDrm());
+    }
+
+    static StreamingStatusImpl withAudio(StreamingStatus existing) {
+        return new StreamingStatusImpl(existing.getWithDrm(), existing.getWithoutDrm(), Value.ONLINE);
     }
 
     static StreamingStatusImpl withoutDrm(StreamingStatus existing) {
-        return new StreamingStatusImpl(existing.getWithDrm(), Value.ONLINE);
+        return new StreamingStatusImpl(existing.getWithDrm(), Value.ONLINE, existing.getAudioWithoutDrm());
     }
 
     static StreamingStatusImpl withAndWithoutDrm() {
-        return new StreamingStatusImpl(Value.ONLINE, Value.ONLINE);
+        return new StreamingStatusImpl(Value.ONLINE, Value.ONLINE, Value.UNSET);
     }
 
     static StreamingStatusImpl offline() {
-        return new StreamingStatusImpl(Value.OFFLINE, Value.OFFLINE);
+        return new StreamingStatusImpl(Value.OFFLINE, Value.OFFLINE, Value.OFFLINE);
     }
 
     static StreamingStatusImpl offlineDrm(StreamingStatus existing) {
-        return new StreamingStatusImpl(Value.OFFLINE, existing.getWithoutDrm());
+        return new StreamingStatusImpl(Value.OFFLINE, existing.getWithoutDrm(), existing.getAudioWithoutDrm());
     }
 
     static StreamingStatusImpl offlineWithoutDrm(StreamingStatus existing) {
-        return new StreamingStatusImpl(existing.getWithDrm(), Value.OFFLINE);
+        return new StreamingStatusImpl(existing.getWithDrm(), Value.OFFLINE, existing.getAudioWithoutDrm());
     }
 
     static List<StreamingStatusImpl> availableStatuses() {
-        return Arrays.asList(withDrm(offline()), withDrm(unset()), withoutDrm(offline()), withoutDrm(unset()), withAndWithoutDrm());
+        return Arrays.asList(
+            withDrm(offline()),
+            withDrm(unset()),
+            withoutDrm(offline()),
+            withoutDrm(unset()),
+            withAndWithoutDrm(),
+            StreamingStatus.withAudio(unset())
+        );
     }
 
     static List<StreamingStatusImpl> notAvailableStatuses() {
-        return Arrays.asList(unset(), offline());
+        return Arrays.asList(
+            unset(),
+            offline()
+        );
     }
 
 
     default ReadonlyStreamingStatus copy() {
-        return new ReadonlyStreamingStatus(getWithDrm(), getWithDrmOffline(),  getWithoutDrm(), getWithoutDrmOffline());
+        return new ReadonlyStreamingStatus(getWithDrm(), getWithDrmOffline(),  getWithoutDrm(), getWithoutDrmOffline(), getAudioWithoutDrm());
     }
 
 
@@ -81,6 +95,8 @@ public interface StreamingStatus extends Serializable, Displayable {
     Instant getWithDrmOffline();
 
     Instant getWithoutDrmOffline();
+
+    Value getAudioWithoutDrm();
 
     @NonNull
     static StreamingStatus copy(StreamingStatus of) {
@@ -101,13 +117,33 @@ public interface StreamingStatus extends Serializable, Displayable {
         return getWithoutDrm() == Value.ONLINE;
     }
 
-    default boolean isAvailable() {
+    default boolean hasAudio() {
+        return getAudioWithoutDrm() == Value.ONLINE;
+    }
+
+    /**
+     * @since 7.7
+     */
+    default boolean hasPublishedVideo() {
         return (hasDrm() && online(getWithDrmOffline())) || (hasWithoutDrm() && online(getWithoutDrmOffline()));
+    }
+
+    /**
+     * @since 7.7
+     */
+    default boolean hasVideo() {
+        return hasDrm() || hasWithoutDrm();
+    }
+
+
+    default boolean isAvailable() {
+        return hasVideo() || hasAudio();
     }
 
     static boolean online(Instant offline) {
         return offline == null || offline.isAfter(instant());
     }
+
 
     static Encryption preferredEncryption(StreamingStatus streamingStatus) {
         if (streamingStatus == null || streamingStatus.hasWithoutDrm()) {
@@ -120,12 +156,12 @@ public interface StreamingStatus extends Serializable, Displayable {
     }
 
     /**
-     * Matches with an encryption.
+     * Matches with configured encryption in a {@link Prediction}
      */
-    default boolean matches(Encryption encryption) {
+    default boolean matches(@Nullable Encryption encryption) {
         return
-            (encryption == null && (hasDrm() || hasWithoutDrm())) ||
-                (encryption == Encryption.DRM && hasDrm()) ||
+            (encryption == null && (hasAudio() || hasVideo())) || // no explitit
+                (hasDrm()) ||
                 (encryption == Encryption.NONE && hasWithoutDrm());
     }
 
@@ -148,7 +184,6 @@ public interface StreamingStatus extends Serializable, Displayable {
             builder.append("Beschikbaar");
             String postFix = "";
             if (onDvrWithDrm()) {
-
                 builder.append(connector)
                     .append("in DVR window");
                 builder.append(" tot ")
@@ -162,8 +197,13 @@ public interface StreamingStatus extends Serializable, Displayable {
             if (hasWithoutDrm()) {
                 builder.append(connector).append("zonder");
                 postFix = " DRM";
+                connector = " en ";
             }
             builder.append(postFix);
+
+            if (hasAudio()) {
+                builder.append(connector).append("op audio CDN");
+            }
         } else {
             builder.append("Niet beschikbaar");
         }
@@ -190,39 +230,33 @@ public interface StreamingStatus extends Serializable, Displayable {
         }
 
         switch (getWithDrm()) {
-            case OFFLINE:
-            case UNSET: {
+            case OFFLINE, UNSET -> {
                 switch (getWithoutDrm()) {
-                    case OFFLINE:
-                    case UNSET:
+                    case OFFLINE, UNSET -> {
                         return Arrays.asList();
-                    case ONLINE:
-                        switch (e) {
-                            case DRM:
-                                return Arrays.asList();
-                            case NONE:
-                                return Arrays.asList(
-                                    Encryption.NONE);
-
-                        }
+                    }
+                    case ONLINE -> {
+                        return switch (e) {
+                            case DRM -> Arrays.asList();
+                            case NONE -> Arrays.asList(
+                                Encryption.NONE);
+                        };
+                    }
                 }
             }
-            case ONLINE: {
+            case ONLINE -> {
                 switch (getWithoutDrm()) {
-                    case OFFLINE:
-                    case UNSET:
+                    case OFFLINE, UNSET -> {
                         return Arrays.asList(Encryption.DRM);
-                    case ONLINE:
-                        switch (e) {
-                            case DRM:
-                                return Arrays.asList(Encryption.DRM);
-                            case NONE:
-                                return Arrays.asList(Encryption.DRM, Encryption.NONE);
-
-                        }
+                    }
+                    case ONLINE -> {
+                        return switch (e) {
+                            case DRM -> Arrays.asList(Encryption.DRM);
+                            case NONE -> Arrays.asList(Encryption.DRM, Encryption.NONE);
+                        };
+                    }
                 }
             }
-
         }
         throw new IllegalStateException();
 
@@ -233,6 +267,20 @@ public interface StreamingStatus extends Serializable, Displayable {
             return getWithDrmOffline();
         } else {
             return getWithoutDrmOffline();
+        }
+    }
+
+    default Optional<AVType> expectedAVType() {
+        if (getWithDrm() == Value.ONLINE || getWithoutDrm() == Value.ONLINE) {
+            if (getAudioWithoutDrm() == Value.ONLINE) {
+                return Optional.of(AVType.MIXED);
+            } else {
+                return Optional.of(AVType.VIDEO);
+            }
+        } else if (getAudioWithoutDrm() == Value.ONLINE) {
+            return Optional.of(AVType.AUDIO);
+        } else {
+            return Optional.empty();
         }
     }
 

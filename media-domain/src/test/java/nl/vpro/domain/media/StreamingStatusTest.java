@@ -34,7 +34,7 @@ public class StreamingStatusTest {
         status.setWithDrm(StreamingStatus.Value.ONLINE);
 
         JAXBTestUtil.roundTripAndSimilar(status,
-            "<streamingStatus withDrm=\"ONLINE\" withoutDrm=\"UNSET\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>\n");
+            "<streamingStatus withDrm=\"ONLINE\" withoutDrm=\"UNSET\" audioWithoutDrm=\"UNSET\" xmlns=\"urn:vpro:media:2009\"  />\n");
     }
 
     @Test

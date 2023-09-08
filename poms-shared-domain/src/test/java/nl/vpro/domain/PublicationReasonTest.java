@@ -45,12 +45,12 @@ class PublicationReasonTest implements ComparableTheory<PublicationReason> {
             }""");
     }
     static List<PublicationReason> reasons = List.of(
-                new PublicationReason("a", ofEpochMilli(1)),
-                new PublicationReason("a", ofEpochMilli(2)),
-                new PublicationReason("b", ofEpochMilli(3)),
-                new PublicationReason("b", ofEpochMilli(4)),
-                new PublicationReason("a", ofEpochMilli(5)),
-                new PublicationReason("c", ofEpochMilli(6))
+        new PublicationReason("a", ofEpochMilli(1)),
+        new PublicationReason("a", ofEpochMilli(2)),
+        new PublicationReason("b", ofEpochMilli(3)),
+        new PublicationReason("b", ofEpochMilli(4)),
+        new PublicationReason("a", ofEpochMilli(5)),
+        new PublicationReason("c", ofEpochMilli(6))
     );
 
     @Test

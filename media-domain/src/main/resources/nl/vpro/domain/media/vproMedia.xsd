@@ -358,6 +358,8 @@
       <xs:enumeration value="TVVOD"/>
       <xs:enumeration value="PLUSVOD"/>
       <xs:enumeration value="NPOPLUSVOD"/>
+
+
     </xs:restriction>
   </xs:simpleType>
 
@@ -3267,10 +3269,11 @@
   </xs:simpleType>
 
    <xs:complexType name="streamingStatus">
-    <xs:sequence/>
-    <xs:attribute name="withDrm" type="streamingStatusValue"/>
-    <xs:attribute name="withoutDrm" type="streamingStatusValue"/>
-  </xs:complexType>
+     <xs:sequence/>
+     <xs:attribute name="withDrm" type="streamingStatusValue"/>
+     <xs:attribute name="withoutDrm" type="streamingStatusValue"/>
+     <xs:attribute name="audioWithoutDrm" type="streamingStatusValue"/>
+   </xs:complexType>
 
 
   <xs:simpleType name="streamingStatusValue">

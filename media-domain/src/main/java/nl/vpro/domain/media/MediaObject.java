@@ -2125,6 +2125,18 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         this.predictionsForXml = predictions;
     }
 
+    /**
+     * Like {@link #getPrediction(Platform)} but without also implicitly correcting the {@link Prediction#getState() prediction state} if that happens to be not consistent with the {@link #getLocations() locations}. In other words this just returns the requested prediction without side effects.
+     * <p>
+     */
+    Prediction getPredictionWithoutFixing(Platform platform) {
+        return MediaObjects.getPrediction(platform, predictions);
+    }
+
+    /**
+     * Returns the prediction for given {@link Platform}. As a side effect the state of this prediction may also be implicitly corrected if that happens to be not consistent with the {@link #getLocations() locations}. In other words this returns the requested prediction, but also ensures that the prediction state is consistent with the locations.
+     * @see #getPredictionWithoutFixing(Platform)
+     */
     public Prediction getPrediction(Platform platform) {
         return MediaObjects.getPrediction(platform, getPredictions());
     }

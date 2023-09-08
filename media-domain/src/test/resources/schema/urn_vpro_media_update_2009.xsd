@@ -5,7 +5,7 @@
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn_vpro_shared_2009.xsd"/>
 
-  <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="https://www.w3.org/2005/05/xmlmime"/>
+  <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
   <xs:element name="geoLocation" type="geoLocationUpdateType"/>
 
   <xs:element name="group" type="groupUpdateType"/>

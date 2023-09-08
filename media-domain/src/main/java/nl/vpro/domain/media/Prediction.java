@@ -36,6 +36,7 @@ import static nl.vpro.domain.Changeables.instant;
  * <p>
  * Also, it contains information about the embargo restrictions for that platform.
  * <p>
+ * There may be an {@link #getEncryption() encryption} associated. If set then the prediction will only be valid for the platform and that given prediction. If not set, normally both encrypted and non-encrypted locations will be present.
  *
  *
  * @author Michiel Meeuwissen
@@ -190,7 +191,9 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         Authority authority,
         State state,
         Encryption encryption,
-        MediaObject parent) {
+        MediaObject parent,
+        Long id) {
+        this.id = id;
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
@@ -282,6 +285,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     public boolean isNew() {
         return id == null;
     }
+
 
     @Override
     public Instant getPublishStartInstant() {
@@ -426,6 +430,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         }
         this.plannedAvailability = true;
     }
+
 
 
 }

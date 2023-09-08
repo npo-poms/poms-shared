@@ -9,10 +9,11 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.annotations.Beta;
+
 import nl.vpro.i18n.Displayable;
 
-import static nl.vpro.domain.media.AVType.AUDIO;
-import static nl.vpro.domain.media.AVType.VIDEO;
+import static nl.vpro.domain.media.AVType.*;
 
 
 /**
@@ -23,24 +24,27 @@ import static nl.vpro.domain.media.AVType.VIDEO;
 @XmlType(name = "platformTypeEnum")
 public enum Platform implements Displayable {
     /**
-     * Visible on internet. May also be used for audio?
+     * Visible on internet.
+     * <p>
+     * For audio see {@link #INTERNETAOD}
      */
-    INTERNETVOD(true, "Internet", AUDIO, VIDEO) {
+    INTERNETVOD(true, "Internet/NPO Start", true, AUDIO, VIDEO) {
         @Override
         public boolean matches(Platform platform) {
             return platform == null || super.matches(platform);
         }
     },
 
+
     /**
      *
      */
-    TVVOD(true, "Kabelaars", VIDEO),
+    TVVOD(true, "Kabelaars", true, VIDEO),
 
     /**
      * NLZiet,platform "extra" in cooperation with Dutch commercial broadcasters
      */
-    PLUSVOD(true, "Nlziet/NPO Plus", VIDEO),
+    PLUSVOD(true, "Nlziet/NPO Plus", true, VIDEO),
 
     /**
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
@@ -48,12 +52,23 @@ public enum Platform implements Displayable {
      */
 
     @SuppressWarnings("DeprecatedIsStillUsed") @Deprecated
-    NPOPLUSVOD(false, "NPO Plus", VIDEO) {
+    NPOPLUSVOD(false, "NPO Plus", true, VIDEO) {
         @Override
         public boolean display() {
             return false;
         }
     };
+
+    /**
+     * Audible on internet. For now this just is {@link #INTERNETVOD}, assuming that even if some object has both audio and video, it should make no difference for the availability on a certain platform.
+     * <p>
+     * Having this a proper enum would also require large amounts of republication, so for now we at least postpone that.
+     * @since 7.7
+     */
+    @Beta
+    //INTERNETAOD(true, "Internet/audio", false, AUDIO, MIXED),
+    public static final Platform INTERNETAOD = INTERNETVOD;
+
 
 
     private final boolean streamingPlatform;
@@ -64,9 +79,13 @@ public enum Platform implements Displayable {
     private final Set<AVType> avTypes;
 
 
-    Platform(boolean streamingPlatform, String displayName, AVType... avTypes) {
+    private final boolean encryptionIsPossible;
+
+
+    Platform(boolean streamingPlatform, String displayName, boolean encryptionIsPossible, AVType... avTypes) {
         this.streamingPlatform = streamingPlatform;
         this.displayName = displayName;
+        this.encryptionIsPossible = encryptionIsPossible;
         this.avTypes = Set.of(avTypes);
     }
 
@@ -74,8 +93,17 @@ public enum Platform implements Displayable {
         if (StringUtils.isEmpty(id)) {
             return null;
         }
+        return get(id);
+    }
+
+
+    public static Platform get(String id) {
+        if ("INTERNETAOD".equals(id)) {
+            return INTERNETAOD;
+        }
         return valueOf(id);
     }
+
 
     /**
      * @since 5.6.2

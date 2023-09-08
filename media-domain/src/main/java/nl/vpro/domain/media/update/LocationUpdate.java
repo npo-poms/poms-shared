@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -29,6 +29,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
 
 /**
+ *
  * @see nl.vpro.domain.media.update
  * @see Location
  */
@@ -51,20 +52,28 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         return new LocationUpdate(copy);
     }
 
+    @Getter
+    @Setter
     @XmlElement(required = true)
     @nl.vpro.validation.Location
     @NotNull
     private String programUrl;
 
+    @Getter
+    @Setter
     @XmlElement(required = true)
     @NotNull
     @Valid
     private AVAttributesUpdate avAttributes;
 
+    @Getter
+    @Setter
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     private Duration offset;
 
+    @Getter
+    @Setter
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     private Duration duration;
@@ -83,6 +92,8 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant publishStop;
 
+    @Getter
+    @Setter
     @XmlAttribute
     private String urn;
 
@@ -130,49 +141,8 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         result.setOffset(offset);
         result.setUrn(urn);
         result.setCreationInstant(null);
+        result.setPlatform(Platform.INTERNETVOD);
         return result;
-    }
-
-    public AVAttributesUpdate getAvAttributes() {
-        return avAttributes;
-    }
-
-    public void setAvAttributes(AVAttributesUpdate avAttributes) {
-        this.avAttributes = avAttributes;
-    }
-
-    public Duration getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
-
-    public Duration getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Duration offset) {
-        this.offset = offset;
-    }
-
-    public String getProgramUrl() {
-        return programUrl;
-    }
-
-    public void setProgramUrl(String programUrl) {
-        this.programUrl = programUrl;
-    }
-
-
-
-    public String getUrn() {
-        return urn;
-    }
-
-    public void setUrn(String urn) {
-        this.urn = urn;
     }
 
     @Override

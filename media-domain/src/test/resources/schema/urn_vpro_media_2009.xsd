@@ -558,6 +558,7 @@
     <xs:sequence/>
     <xs:attribute name="withDrm" type="streamingStatusValue"/>
     <xs:attribute name="withoutDrm" type="streamingStatusValue"/>
+    <xs:attribute name="audioWithoutDrm" type="streamingStatusValue"/>
   </xs:complexType>
 
   <xs:simpleType name="textualTypeEnum">

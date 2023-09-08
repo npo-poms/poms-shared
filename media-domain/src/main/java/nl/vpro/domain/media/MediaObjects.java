@@ -26,6 +26,8 @@ import com.google.common.collect.*;
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.update.GroupUpdate;
+import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
@@ -48,6 +50,30 @@ public class MediaObjects {
     private MediaObjects() {
         // No instances, static utility functions only
     }
+
+
+    /**
+     * A predicate on {@link Class} to determine if it represents some poms group. That is {@link Group} or {@link GroupUpdate}
+     * @since 7.7
+     */
+    public  static final Predicate<Class<?>> GROUPS = c ->
+        Group.class.isAssignableFrom(c) || GroupUpdate.class.isAssignableFrom(c);
+
+
+    /**
+     * A predicate on {@link Class} to determine if it represents some poms media boject. That is {@link MediaObject} or {@link MediaUpdate}
+     * @since 7.7
+     */
+    public static final Predicate<Class<?>> ANY_MEDIA = c ->
+        (MediaObject.class.isAssignableFrom(c) || MediaUpdate.class.isAssignableFrom(c));
+
+
+    /**
+     * Any {@link #ANY_MEDIA any media} that is not {@link #GROUPS a group}.
+     * @since 7.7
+     */
+    public static final Predicate<Class<?>> NO_GROUPS = ANY_MEDIA.and(GROUPS.negate());
+
 
     public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
         return first == second ||
@@ -1173,8 +1199,7 @@ public class MediaObjects {
     protected static void correctPrediction(Prediction prediction, MediaObject mediaObject) {
         if (autoCorrectPredictions) {
             switch (prediction.getState()) {
-                case ANNOUNCED:
-                case REVOKED:
+                case ANNOUNCED, REVOKED -> {
                     for (Location location : mediaObject.getLocations()) {
                         if (
                             //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
@@ -1187,8 +1212,8 @@ public class MediaObjects {
                             break;
                         }
                     }
-                    break;
-                case REALIZED:
+                }
+                case REALIZED -> {
                     // Are there any 'REALIZED' prediction without locations that can be played anyway?
                     Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
@@ -1199,9 +1224,8 @@ public class MediaObjects {
                         prediction.setState(Prediction.State.REVOKED);
                         markForRepublication(mediaObject, "realized prediction");
                     }
-                    break;
-                default:
-                    log.debug("Ignoring prediction {}", prediction);
+                }
+                default -> log.debug("Ignoring prediction {}", prediction);
             }
         }
     }
