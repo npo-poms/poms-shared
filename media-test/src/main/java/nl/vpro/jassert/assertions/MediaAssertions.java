@@ -20,6 +20,10 @@ public class MediaAssertions extends Assertions {
         return new MediaAssert(actual);
     }
 
+    public static MediaAssert assertThat(MediaObject  actual) {
+        return mediaAssertThat(actual);
+    }
+
     public static LocationAssert locationAssertThat(Location actual) {
         return new LocationAssert(actual);
     }
