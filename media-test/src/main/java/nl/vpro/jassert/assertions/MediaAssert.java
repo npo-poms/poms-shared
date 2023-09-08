@@ -86,19 +86,25 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
     public MediaAssert isVideo() {
         isNotNull();
-        assertThat((Object) actual.getAVType()).isEqualTo(AVType.VIDEO);
+        hasAVType(AVType.VIDEO);
         return myself;
     }
 
     public MediaAssert isAudio() {
         isNotNull();
-        assertThat((Object) actual.getAVType()).isEqualTo(AVType.AUDIO);
+        hasAVType(AVType.AUDIO);
         return myself;
     }
 
     public MediaAssert isMixed() {
         isNotNull();
-        assertThat((Object) actual.getAVType()).isEqualTo(AVType.MIXED);
+        hasAVType(AVType.MIXED);
+        return myself;
+    }
+
+    public MediaAssert hasAVType(AVType avType) {
+        isNotNull();
+        assertThat((Object) actual.getAVType()).isEqualTo(avType);
         return myself;
     }
 
