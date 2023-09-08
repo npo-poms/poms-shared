@@ -123,6 +123,7 @@ public class ReusableImageStream extends ImageStream {
     }
 
     @Override
+    @Deprecated(forRemoval = true, since = "4.1")
     protected void finalize() throws Throwable {
         super.finalize();
         close();
