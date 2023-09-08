@@ -51,12 +51,27 @@ public class MediaObjects {
         // No instances, static utility functions only
     }
 
+
+    /**
+     * A predicate on {@link Class} to determine if it represents some poms group. That is {@link Group} or {@link GroupUpdate}
+     * @since 7.7
+     */
     public  static final Predicate<Class<?>> GROUPS = c ->
         Group.class.isAssignableFrom(c) || GroupUpdate.class.isAssignableFrom(c);
 
+
+    /**
+     * A predicate on {@link Class} to determine if it represents some poms media boject. That is {@link MediaObject} or {@link MediaUpdate}
+     * @since 7.7
+     */
     public static final Predicate<Class<?>> ANY_MEDIA = c ->
         (MediaObject.class.isAssignableFrom(c) || MediaUpdate.class.isAssignableFrom(c));
 
+
+    /**
+     * Any {@link #ANY_MEDIA any media} that is not {@link #GROUPS a group}.
+     * @since 7.7
+     */
     public static final Predicate<Class<?>> NO_GROUPS = ANY_MEDIA.and(GROUPS.negate());
 
 
