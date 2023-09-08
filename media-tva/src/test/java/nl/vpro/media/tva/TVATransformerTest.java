@@ -216,7 +216,7 @@ public class TVATransformerTest {
         assertThat(table.getGroupTable()).hasSize(2);
 
         assertThat(table.getGroupTable().get(0).getType()).isEqualTo(GroupType.SEASON);
-        assertThat(table.getGroupTable().get(0).getAVType()).isEqualTo(AVType.VIDEO);
+        assertThat((Object) table.getGroupTable().get(0).getAVType()).isEqualTo(AVType.VIDEO);
         assertThat(table.getGroupTable().get(0).getBroadcasters().get(0).getId()).isEqualTo("EO");
         assertThat(table.getGroupTable().get(0).getMainDescription()).isEqualTo("Dit is de seizoensbeschrijving");
         assertThat(table.getGroupTable().get(0).getMainTitle()).isEqualTo("SERIE TITEL");
@@ -224,7 +224,7 @@ public class TVATransformerTest {
 
 
         assertThat(table.getGroupTable().get(1).getType()).isEqualTo(GroupType.SERIES);
-        assertThat(table.getGroupTable().get(1).getAVType()).isEqualTo(AVType.VIDEO);
+        assertThat((Object) table.getGroupTable().get(1).getAVType()).isEqualTo(AVType.VIDEO);
         assertThat(table.getGroupTable().get(1).getBroadcasters().get(0).getId()).isEqualTo("EO");
         assertThat(table.getGroupTable().get(1).getMainDescription()).isEqualTo("Dit is de Seriesbeschrijving");
         assertThat(table.getGroupTable().get(1).getMainTitle()).isEqualTo("IK BEN EEN MOEDERSERIE");
