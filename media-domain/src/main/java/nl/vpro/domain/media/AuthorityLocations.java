@@ -442,7 +442,7 @@ public class AuthorityLocations {
             return false;
         }
         boolean changes = false;
-        Prediction prediction = MediaObjects.getPrediction(platform, mediaObject.getPredictions());
+        final Prediction prediction = MediaObjects.getPrediction(platform, mediaObject.getPredictions());
         if (prediction != null) {
             Prediction.State requiredState = prediction.isPlannedAvailability() ? Prediction.State.ANNOUNCED : Prediction.State.NOT_ANNOUNCED;
 
@@ -451,9 +451,9 @@ public class AuthorityLocations {
 
                 if (locationPlatform == null) {
                     log.debug("Location has no explicit platform");
-                    // this might be a good idea?
-                    //log.debug("Location has no explicit platform. Taking it {} implicitly", Platform.INTERNETVOD);
-                    //locationPlatform = Platform.INTERNETVOD;
+                    // e.g. we used to not create PREPR sources with explicit PLATFORM, and then at least in test/acc the prediction state remained 'ANNOUCNED'
+                    log.debug("Location has no explicit platform. Taking it {} implicitly", Platform.INTERNETVOD);
+                    locationPlatform = Platform.INTERNETVOD;
                 }
                 if (locationPlatform == platform) {
                     if (location.isPublishable(now) && ! location.isDeleted()) {
