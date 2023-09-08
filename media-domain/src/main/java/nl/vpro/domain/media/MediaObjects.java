@@ -26,6 +26,8 @@ import com.google.common.collect.*;
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.update.GroupUpdate;
+import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
@@ -48,6 +50,15 @@ public class MediaObjects {
     private MediaObjects() {
         // No instances, static utility functions only
     }
+
+    public  static final Predicate<Class<?>> GROUPS = c ->
+        Group.class.isAssignableFrom(c) || GroupUpdate.class.isAssignableFrom(c);
+
+    public static final Predicate<Class<?>> ANY_MEDIA = c ->
+        (MediaObject.class.isAssignableFrom(c) || MediaUpdate.class.isAssignableFrom(c));
+
+    public static final Predicate<Class<?>> NO_GROUPS = ANY_MEDIA.and(GROUPS.negate());
+
 
     public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
         return first == second ||
