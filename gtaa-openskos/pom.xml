@@ -26,8 +26,8 @@
        <artifactId>spring-oxm</artifactId>
      </dependency>
     <dependency>
-      <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock-jre8-standalone</artifactId>
+      <groupId>org.wiremock</groupId>
+      <artifactId>wiremock-standalone</artifactId>
     </dependency>
     <dependency>
       <groupId>jakarta.ws.rs</groupId>
