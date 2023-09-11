@@ -383,10 +383,6 @@ public enum MediaType implements Displayable {
             return new MediaType[]{MediaType.ALBUM};
         }
 
-        @Override
-        public boolean hasSegments() {
-            return false;
-        }
 
         @Override
         public ProgramType getSubType() {
@@ -480,12 +476,6 @@ public enum MediaType implements Displayable {
             return "Promo";
         }
 
-        @Override
-        public boolean hasSegments() {
-            return false;
-        }
-
-
 
         @Override
         public ProgramType getSubType() {
@@ -568,15 +558,22 @@ public enum MediaType implements Displayable {
     }
 
     /**
+     * @since 7.8
+     */
+    public boolean canBeCreatedByNormalUsers() {
+        return ! isAbstract() && getSubType().canBeCreatedByNormalUsers();
+    }
+
+    /**
      * @since 5.11
      */
     public boolean canHaveScheduleEvents() {
-        return getSubType() != null && getSubType().canHaveScheduleEvents();
+        return ! isAbstract() && getSubType().canHaveScheduleEvents();
     }
 
 
     public final boolean hasEpisodeOf() {
-        return getSubType() != null && getSubType().hasEpisodeOf();
+        return ! isAbstract()  && getSubType().hasEpisodeOf();
     }
 
     public MediaType[] preferredEpisodeOfTypes() {
@@ -699,11 +696,20 @@ public enum MediaType implements Displayable {
     }
 
     /**
-     * Returns all 'leaf' mediaTypes. That are all non abstract instances, that actually have a certain {@link #getSubType()}.
+     * @since 7.8
+     */
+    public boolean isAbstract() {
+        return getSubType() == null;
+    }
+
+    /**
+     * Returns all 'leaf' mediaTypes. That are all non-{@link #isAbstract()abstract} instances, that actually have a certain {@link #getSubType()}.
      * @since 5.8
      */
     public static MediaType[] leafValues() {
-        return Arrays.stream(values()).filter(f -> f.getSubType() != null).toArray(MediaType[]::new);
+        return Arrays.stream(values())
+            .filter(f -> ! f.isAbstract())
+            .toArray(MediaType[]::new);
     }
     /**
      * @since 5.8

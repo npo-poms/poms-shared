@@ -17,43 +17,43 @@ import javax.xml.bind.annotation.XmlType;
 public enum ProgramType implements SubMediaType {
 
 
-    BROADCAST(MediaType.BROADCAST, true),
+    BROADCAST(MediaType.BROADCAST, true, false),
 
-    MOVIE(MediaType.MOVIE, true),
+    MOVIE(MediaType.MOVIE, true, false),
 
-    TRAILER(MediaType.TRAILER),
+    TRAILER(MediaType.TRAILER, false, true),
 
-    CLIP(MediaType.CLIP),
+    CLIP(MediaType.CLIP, false, true),
 
-    STRAND(MediaType.STRAND, true),
+    STRAND(MediaType.STRAND, true, false),
 
-    TRACK(MediaType.TRACK),
+    TRACK(MediaType.TRACK, false, true),
 
-    VISUALRADIO(MediaType.VISUALRADIO),
+    VISUALRADIO(MediaType.VISUALRADIO, true, true),
 
     /**
      * @since 2.1
      */
-    RECORDING(MediaType.RECORDING),
+    RECORDING(MediaType.RECORDING, false, true),
 
-    PROMO(MediaType.PROMO);
+    PROMO(MediaType.PROMO, false, false);
 
     public static final String URN_PREFIX = "urn:vpro:media:program:";
 
     private final MediaType mediaType;
     private final boolean hasEpisodeOf;
+    private final boolean canBeCreatedByNormalUsers;
 
-    ProgramType(MediaType mediaType, boolean hasEpisodeOf) {
+    ProgramType(MediaType mediaType, boolean hasEpisodeOf, boolean canBeCreatedByNormalUsers) {
         this.mediaType = mediaType;
         this.hasEpisodeOf = hasEpisodeOf;
+        this.canBeCreatedByNormalUsers = canBeCreatedByNormalUsers;
         if (mediaType == null){
             throw new IllegalStateException();
         }
     }
 
-    ProgramType(MediaType mediaType) {
-        this(mediaType, false);
-    }
+
 
 
     public String value() {
@@ -82,6 +82,11 @@ public enum ProgramType implements SubMediaType {
     @Override
     public boolean canHaveScheduleEvents() {
         return EPISODES.contains(this);
+    }
+
+    @Override
+    public boolean canBeCreatedByNormalUsers() {
+        return canBeCreatedByNormalUsers;
     }
 
     public static final Set<ProgramType> EPISODES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(

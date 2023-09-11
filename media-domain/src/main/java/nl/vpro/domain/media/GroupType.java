@@ -6,7 +6,6 @@
 package nl.vpro.domain.media;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,15 +20,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "groupTypeEnum")
 public enum GroupType implements SubMediaType {
 
-    SERIES(MediaType.SERIES, true),
-    SEASON(MediaType.SEASON, true),
-    UMBRELLA(MediaType.UMBRELLA, false),
+    SERIES(MediaType.SERIES, true, true /* seems doubtfull */),
+    SEASON(MediaType.SEASON, true, true /* seems questionable */),
+    UMBRELLA(MediaType.UMBRELLA, false, true),
     @Deprecated   // MSE-1453
-    ARCHIVE(MediaType.ARCHIVE),
-    COLLECTION(MediaType.COLLECTION),
-    PLAYLIST(MediaType.PLAYLIST),
-    ALBUM(MediaType.ALBUM),
-    STRAND(MediaType.STRAND);
+    ARCHIVE(MediaType.ARCHIVE, false, false /* since it is deprecated */),
+    COLLECTION(MediaType.COLLECTION, false, true),
+    PLAYLIST(MediaType.PLAYLIST, false, true),
+    ALBUM(MediaType.ALBUM, false, true),
+    STRAND(MediaType.STRAND, false, true);
 
     public static final String URN_PREFIX = "urn:vpro:media:group:";
 
@@ -37,13 +36,14 @@ public enum GroupType implements SubMediaType {
 
     private final boolean canContainEpisodes;
 
-    GroupType(MediaType mediaType) {
-        this(mediaType, false);
-    }
+    private final boolean canBeCreatedByNormalUsers;
 
-    GroupType(MediaType mediaType, boolean canContainEpisodes) {
+
+
+    GroupType(MediaType mediaType, boolean canContainEpisodes, boolean canBeCreatedByNormalUsers) {
         this.mediaType = mediaType;
         this.canContainEpisodes = canContainEpisodes;
+        this.canBeCreatedByNormalUsers = canBeCreatedByNormalUsers;
         if (mediaType == null) {
             throw new IllegalStateException();
         }
@@ -67,13 +67,16 @@ public enum GroupType implements SubMediaType {
         return canContainEpisodes;
     }
 
+    @Override
+    public boolean canBeCreatedByNormalUsers() {
+        return canBeCreatedByNormalUsers;
+    }
+
     public static final Set<GroupType> EPISODE_CONTAINERS;
     static {
-        EPISODE_CONTAINERS = Collections.unmodifiableSet(
-            Arrays.stream(GroupType.values())
-                .filter(GroupType::canContainEpisodes)
-                .collect(Collectors.toSet())
-        );
+        EPISODE_CONTAINERS = Arrays.stream(GroupType.values())
+            .filter(GroupType::canContainEpisodes)
+            .collect(Collectors.toUnmodifiableSet());
     }
 
 }

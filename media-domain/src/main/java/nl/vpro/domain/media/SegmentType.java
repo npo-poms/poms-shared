@@ -38,6 +38,12 @@ public enum SegmentType implements SubMediaType {
     public String getUrnPrefix() {
         return URN_PREFIX;
     }
+
+    @Override
+    public boolean canBeCreatedByNormalUsers() {
+        return true;
+    }
+
     @Override
     public MediaType getMediaType() {
         return mediaType;
