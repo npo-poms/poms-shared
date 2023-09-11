@@ -20,9 +20,10 @@ public interface SubMediaType {
         return false;
     }
 
-
     default boolean canHaveScheduleEvents() {
         return false;
     }
+
+    boolean canBeCreatedByNormalUsers();
 
 }
