@@ -174,7 +174,7 @@ public class OpenskosRepository implements GTAARepository {
                                 throw new GTAAConflict(body.toString());
                             }
                         default:
-                            StringWriter writer = new StringWriter();
+                            final StringWriter writer = new StringWriter();
                             if (postRdf != null) {
                                 writer.append("Request:\n");
                                 JAXB.marshal(postRdf.rdf, writer);
