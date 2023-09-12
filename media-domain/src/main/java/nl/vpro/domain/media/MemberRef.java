@@ -433,6 +433,9 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @XmlAttribute(name = "index")
     @XmlSchemaType(name = "nonNegativeInteger")
     public Integer getNumber() {
+        if (group instanceof Group g && ! g.isOrdered()) {
+            return null;
+        }
         return number;
     }
 
