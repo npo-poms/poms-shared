@@ -637,7 +637,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B memberOf(@NonNull MediaObject media, Integer number) throws CircularReferenceException {
-        mediaObject().createMemberOf(media, number, null);
+        MemberRef ref = mediaObject().createMemberOf(media, number, null);
         return (B) this;
     }
 

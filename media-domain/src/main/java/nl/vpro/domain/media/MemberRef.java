@@ -97,6 +97,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Setter(AccessLevel.PACKAGE)
     private Long id;
 
     @ManyToOne(optional = false)
