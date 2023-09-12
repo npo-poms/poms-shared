@@ -151,9 +151,9 @@ public class OpenskosRepository implements GTAARepository {
         template.setErrorHandler(new ResponseErrorHandler() {
             @Override
             public boolean hasError(@NonNull ClientHttpResponse response) throws IOException {
-                boolean hasError = ! response.getStatusCode().is2xxSuccessful();
+                final boolean hasError = ! response.getStatusCode().is2xxSuccessful();
                 if (hasError) {
-                    log.warn("{}", response);
+                    log.warn("{} has error: {}", template, response.getStatusCode());
                 } else {
                     Post_RDF.remove();
                 }
@@ -162,9 +162,9 @@ public class OpenskosRepository implements GTAARepository {
 
             @Override
             public void handleError(@NonNull ClientHttpResponse response) throws IOException {
-                StringWriter body = new StringWriter();
+                final StringWriter body = new StringWriter();
                 IOUtils.copy(response.getBody(), body, StandardCharsets.UTF_8);
-                RDFPost postRdf = Post_RDF.get();
+                final RDFPost postRdf = Post_RDF.get();
                 try {
                     switch (response.getStatusCode()) {
                         case CONFLICT:
@@ -485,11 +485,11 @@ public class OpenskosRepository implements GTAARepository {
     @SneakyThrows
     @Nullable
     private String encode(@Nullable String u) {
-        return u == null ? null : URLEncoder.encode(u, "ASCII");
+        return u == null ? null : URLEncoder.encode(u, StandardCharsets.US_ASCII);
     }
 
     /**
-     * http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/apidoc/index.html#api-FindConcept-FindConcepts
+     * <a href="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/apidoc/index.html#api-FindConcept-FindConcepts">see at pictura</a>
      */
     @Override
     public List<Description> findPersons(String input, Integer max) {
@@ -653,12 +653,18 @@ public class OpenskosRepository implements GTAARepository {
                 transformer.transform(source, result);
                 return new DOMSource(result.getNode());
             } catch (TransformerException e) {
-                throw new XmlMappingException(e.getMessage(), e) {
-                    @Serial
-                    private static final long serialVersionUID = -4299814482145831053L;
-                };
+                  throw new WrappedTransformerException(e);
             }
 
+        }
+    }
+
+    public static class  WrappedTransformerException extends XmlMappingException implements Serializable {
+        @Serial
+        private static final long serialVersionUID = -4299814482145831053L;
+
+        WrappedTransformerException(TransformerException e) {
+            super(e.getMessage(), e);
         }
     }
 
