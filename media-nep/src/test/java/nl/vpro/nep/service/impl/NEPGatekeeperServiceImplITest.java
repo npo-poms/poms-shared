@@ -42,7 +42,7 @@ public class NEPGatekeeperServiceImplITest {
 
     }
 
-    String mid = "WO_VPRO_352116";
+    String mid = "POMS_VPRO_139817";
 
     @Test
     public void transcode() {
@@ -51,7 +51,7 @@ public class NEPGatekeeperServiceImplITest {
             .encryption(EncryptionType.NONE)
             .priority(PriorityType.LOW)
             .platforms(Collections.singletonList("internetvod"))
-            .file(gatekeeperService.getFtpUserName(), "WO_VPRO_783763_2018-11-12T133004122_geldig.mp4")
+            .file(gatekeeperService.getFtpUserName(), "digitaal@vpro.nl/test.mp4")
             .build()
             ;
 
@@ -92,8 +92,9 @@ public class NEPGatekeeperServiceImplITest {
 
     @Test
     public void getStatuses() throws IOException, NEPException {
-        File file = new File("/Users/michiel/npo/media/trunk/player7.404");
+
         List<String> mids = new ArrayList<>();
+    /*    File file = new File("/Users/michiel/npo/media/trunk/player7.404");
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
             String line = reader.readLine();
@@ -103,7 +104,7 @@ public class NEPGatekeeperServiceImplITest {
                 line = reader.readLine();
             }
         }
-
+*/
 
         AtomicLong count = new AtomicLong(0);
         gatekeeperService.getTranscodeStatuses(null, null, null,  null).forEachRemaining((we)
