@@ -26,6 +26,8 @@
       <groupId>nl.vpro.subtitles</groupId>
       <artifactId>subtitles-domain</artifactId>
     </dependency>
+
+    <!-- just for @NoCache annotation -->
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-core-spi</artifactId>
