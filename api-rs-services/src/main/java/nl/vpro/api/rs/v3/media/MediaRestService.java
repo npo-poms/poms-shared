@@ -69,7 +69,7 @@ public interface MediaRestService {
      * <p>
      * This only gives examples. It doesn't allow for any filtering, and is not fit for much data. See e.g. {@link #find(MediaForm, String, String, Long, Integer)} for a better use case.
      * <p>
-     * If you need huge amount of data use {@link #iterate(MediaForm, String, String, Long, Integer)} or {@link #changes(String, String, Long, String, String, Integer, Deletes, Tail, String)}.
+     * If you need huge amount of data use {@link #iterate(MediaForm, String, String, Long, Integer)} or {@link #changes(String, String, Long, String, Order, Integer, Deletes, Tail, String)}.
      *
      * @param offset the first result. Note that this cannot be too big!
      */
