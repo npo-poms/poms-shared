@@ -58,6 +58,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class TVATransformerTest {
     final EpgGenreFunction genreFunction = new EpgGenreFunction();
 
+
     static ListAppender appender = new ListAppender("List");
 
     static {
@@ -80,6 +81,7 @@ public class TVATransformerTest {
 
     @Test
     public void transform() throws TransformerException, ParserConfigurationException, SAXException, IOException {
+        genreFunction.setNotFound(NotFound.ASIS);
         String xml = transform("pd/pd/NED320150805P.xml");
         similar(xml,
             """

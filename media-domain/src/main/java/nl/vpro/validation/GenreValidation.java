@@ -21,7 +21,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface GenreValidation {
 
-    String message() default "Not a valid genre";
+    String message() default  "{nl.vpro.constraints.genre}";
 
     Class<?>[] groups() default {};
 
