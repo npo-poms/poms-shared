@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -89,14 +90,16 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
        @Nullable Restrictions restrictions,
        final long fileSize,
        InputStream inputStream,
-       String errors) throws IOException, InterruptedException {
+       String errors,
+       Consumer<Phase> phase) throws IOException, InterruptedException {
 
        final AtomicLong uploaded = new AtomicLong(0);
        try (inputStream) {
            // this is not needed (as I've tested)
            //ingest(logger, mid, getFileName(mid), restrictions);
-
+           phase.accept(Phase.START);
            uploadStart(logger, mid, fileSize, errors, restrictions);
+           phase.accept(Phase.UPLOAD);
            AtomicInteger partNumber = new AtomicInteger(1);
            while (uploaded.get() < fileSize) {
                uploadChunk(logger, mid, inputStream, uploaded, restrictions, fileSize, partNumber);
@@ -104,6 +107,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
        }
        assert uploaded.get() == fileSize;
 
+       phase.accept(Phase.FINISH);
        return uploadFinish(logger, mid, uploaded, restrictions);
    }
 
