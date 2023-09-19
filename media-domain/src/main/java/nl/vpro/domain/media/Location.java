@@ -34,6 +34,7 @@ import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.util.HttpConnectionUtils;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 import static java.util.Objects.requireNonNullElse;
@@ -312,8 +313,10 @@ public class Location extends PublishableObject<Location>
             if(to.getOwner() != null && !Objects.equals(owner, to.getOwner())) {
                 log.info("Updating owner of {} {} -> {}", to, to.getOwner(), owner);
             }
-
-            to.setProgramUrl(from.getProgramUrl());
+            boolean newProgramUrl = !Objects.equals(from.getProgramUrl(), to.getProgramUrl());
+            if (newProgramUrl) {
+                to.setProgramUrl(from.getProgramUrl());
+            }
             to.setDuration(from.getDuration());
             to.setOffset(from.getOffset());
             to.setSubtitles(from.getSubtitles());
@@ -321,6 +324,10 @@ public class Location extends PublishableObject<Location>
             to.setPublishStopInstant(from.getPublishStopInstant());
 
             to.setAvAttributes(AVAttributes.update(from.getAvAttributes(), to.getAvAttributes()));
+
+            if (newProgramUrl && from.getByteSize() == null) {
+                HttpConnectionUtils.getOptionalByteSize(to.getProgramUrl()).ifPresent(to::setByteSize);
+            }
 
         } else {
             to = null;
@@ -657,7 +664,8 @@ public class Location extends PublishableObject<Location>
     }
 
     private void tryToSetAvFileFormatBasedOnProgramUrl() {
-        if(avAttributes != null && (avAttributes.getAvFileFormat() == null || avAttributes.getAvFileFormat().equals(AVFileFormat.UNKNOWN))) {
+        if(avAttributes != null &&
+            (avAttributes.getAvFileFormat() == null || avAttributes.getAvFileFormat().equals(AVFileFormat.UNKNOWN))) {
             avAttributes.setAvFileFormat(AVFileFormat.forProgramUrl(programUrl));
         }
     }
