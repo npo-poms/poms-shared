@@ -294,6 +294,7 @@ public class AuthorityLocations {
         if (location == null) {
             log.info("Creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());
             location = new Location(locationUrl, owner, platform);
+            getBytesize(locationUrl).ifPresent(location::setByteSize);
             program.addLocation(location);
             Prediction prediction = program.getPredictionWithoutFixing(platform);
             if (prediction.isNew()) {
