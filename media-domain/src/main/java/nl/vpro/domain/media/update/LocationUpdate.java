@@ -24,6 +24,7 @@ import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.util.HttpConnectionUtils;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -130,6 +131,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         duration = location.getDuration();
         Embargos.copy(location, this);
         urn = location.getUrn();
+
     }
 
     public Location toLocation(OwnerType ownerType) {
@@ -142,6 +144,9 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         result.setUrn(urn);
         result.setCreationInstant(null);
         result.setPlatform(Platform.INTERNETVOD);
+        if (programUrl != null && result.getByteSize() == null){
+            HttpConnectionUtils.getOptionalByteSize(programUrl).ifPresent(result::setByteSize);
+        }
         return result;
     }
 
@@ -166,7 +171,6 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     @Override
     public Instant getPublishStartInstant() {
         return publishStart;
-
     }
 
     @NonNull
@@ -179,7 +183,6 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     @Override
     public Instant getPublishStopInstant() {
         return publishStop;
-
     }
 
     @NonNull
@@ -187,6 +190,5 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     public LocationUpdate setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
         return this;
-
     }
 }
