@@ -44,10 +44,7 @@ public class MediaUpdateTest {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
     }
 
-    @BeforeEach
-    public void disableHeader() {
-        LocationUpdate.ENABLED.set(false);
-    }
+
 
     @Test
     public void withEverything1() throws Exception {
