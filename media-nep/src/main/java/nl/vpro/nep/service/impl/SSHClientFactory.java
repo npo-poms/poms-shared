@@ -6,12 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import net.schmizz.keepalive.KeepAliveProvider;
 import net.schmizz.sshj.DefaultConfig;
 import net.schmizz.sshj.SSHClient;
-import net.schmizz.sshj.common.*;
+import net.schmizz.sshj.common.Buffer;
+import net.schmizz.sshj.common.SecurityUtils;
 
 import java.io.IOException;
 import java.security.PublicKey;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Base64;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
@@ -52,7 +54,7 @@ final class SSHClientFactory {
 
                 } else {
                     try {
-                        byte[] keyBytes = Base64.decode(hostKey);
+                        byte[] keyBytes = Base64.getDecoder().decode(hostKey);
                         PublicKey key = new Buffer.PlainBuffer(keyBytes).readPublicKey();
                         String fingerPrint = SecurityUtils.getFingerprint(key);
                         log.info("Validating {} with fingerprint {}", host, fingerPrint);
