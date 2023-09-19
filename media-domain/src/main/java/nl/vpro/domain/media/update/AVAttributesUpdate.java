@@ -101,7 +101,7 @@ public class AVAttributesUpdate {
     }
 
     AVAttributes toAvAttributes() {
-        AVAttributes result = new AVAttributes(bitrate, avFileFormat);
+        final AVAttributes result = new AVAttributes(bitrate, avFileFormat);
         result.setByteSize(byteSize);
         if(audioAttributes != null) {
             result.setAudioAttributes(audioAttributes.toAudioAttributes());

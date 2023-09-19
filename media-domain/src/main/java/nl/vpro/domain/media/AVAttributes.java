@@ -29,6 +29,7 @@ public class AVAttributes implements Serializable {
     @Serial
     private static final long serialVersionUID = 1651506882422062995L;
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlTransient
@@ -48,10 +49,12 @@ public class AVAttributes implements Serializable {
     @Enumerated(EnumType.STRING)
     private AVFileFormat avFileFormat;
 
+    @Getter
     @XmlElement
     @OneToOne(optional = true, orphanRemoval = true, cascade = CascadeType.ALL)
     private AudioAttributes audioAttributes;
 
+    @Getter
     @XmlElement
     @OneToOne(optional = true, orphanRemoval = true, cascade = CascadeType.ALL)
     private VideoAttributes videoAttributes;
@@ -63,7 +66,7 @@ public class AVAttributes implements Serializable {
         this.avFileFormat = avFileFormat;
     }
 
-    public AVAttributes(Integer bitrate, AVFileFormat avFileFormat) {
+    public AVAttributes(@Nullable Integer bitrate, AVFileFormat avFileFormat) {
         this.bitrate = bitrate;
         this.avFileFormat = avFileFormat;
     }
@@ -121,10 +124,6 @@ public class AVAttributes implements Serializable {
         return to;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     /**
      * Returns the associated bitrate (or <code>null</code> if unknown)
      */
@@ -147,17 +146,9 @@ public class AVAttributes implements Serializable {
         return this;
     }
 
-    public AudioAttributes getAudioAttributes() {
-        return audioAttributes;
-    }
-
     public AVAttributes setAudioAttributes(AudioAttributes audioAttributes) {
         this.audioAttributes = audioAttributes;
         return this;
-    }
-
-    public VideoAttributes getVideoAttributes() {
-        return videoAttributes;
     }
 
     public AVAttributes setVideoAttributes(VideoAttributes videoAttributes) {

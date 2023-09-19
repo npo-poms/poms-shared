@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
-import java.net.http.*;
-import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.function.Consumer;
@@ -25,9 +23,8 @@ import org.springframework.beans.factory.annotation.Value;
 import nl.vpro.domain.Changeables;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.util.HttpConnectionUtils;
 
-import static java.net.http.HttpRequest.BodyPublishers.noBody;
-import static java.net.http.HttpResponse.BodyHandlers.discarding;
 import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.media.Encryption.DRM;
 
@@ -524,33 +521,11 @@ public class AuthorityLocations {
     }
 
     /**
-     * Client used for {@link #getBytesize(String)}
-     */
-    private static final HttpClient CLIENT = HttpClient.newBuilder()
-        .followRedirects(HttpClient.Redirect.ALWAYS)
-        .connectTimeout(Duration.ofSeconds(3))
-        .build();
-
-    /**
      * Executes a HEAD request to determine the bytes size of given URL. For mp3's and such.
      * @since 7.7
      */
     public static OptionalLong getBytesize(String locationUrl) {
-        final HttpRequest head = HttpRequest.newBuilder()
-            .uri(URI.create(locationUrl))
-            .method("HEAD", noBody())
-            .build(); // .HEAD() in java 18
-        try {
-            final HttpResponse<Void> send = CLIENT.send(head, discarding());
-            if (send.statusCode() == 200) {
-                return send.headers().firstValueAsLong("Content-Length");
-            } else {
-                log.warn("HEAD {} returned {}", locationUrl, send.statusCode());
-            }
-        } catch (IOException | InterruptedException e) {
-            log.warn(e.getMessage(), e);
-        }
-        return OptionalLong.empty();
+        return HttpConnectionUtils.getOptionalByteSize(locationUrl);
     }
 
      private String createLocationVideoUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {

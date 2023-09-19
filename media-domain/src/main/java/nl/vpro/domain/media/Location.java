@@ -236,17 +236,19 @@ public class Location extends PublishableObject<Location>
         Instant publishStart,
         Instant publishStop,
         Workflow workflow,
-        Instant creationDate
+        Instant creationDate,
+        Long byteSize
     ) {
         this(programUrl, owner == null ? OwnerType.BROADCASTER : owner, avAttributes, duration, platform);
 
-        if (bitrate != null || avFileFormat != null || audioAttributes != null || videoAttributes != null) {
+        if (bitrate != null || avFileFormat != null || audioAttributes != null || videoAttributes != null || byteSize != null) {
             this.avAttributes = AVAttributes
                 .builder()
                 .bitrate(bitrate == null ? this.avAttributes.getBitrate() : bitrate)
                 .avFileFormat(avFileFormat == null ? this.avAttributes.getAvFileFormat() : avFileFormat)
                 .audioAttributes(audioAttributes == null ? this.avAttributes.getAudioAttributes() : audioAttributes)
                 .videoAttributes(videoAttributes == null ? this.avAttributes.getVideoAttributes() : videoAttributes)
+                .byteSize(byteSize == null ? this.avAttributes.getByteSize() : byteSize)
                 .build();
         }
         this.publishStart = publishStart;
