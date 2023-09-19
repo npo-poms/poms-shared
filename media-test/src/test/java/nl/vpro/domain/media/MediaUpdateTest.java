@@ -21,6 +21,7 @@ import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.HttpConnectionUtils;
 import nl.vpro.util.Version;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,6 +44,11 @@ public class MediaUpdateTest {
 
     static {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
+    }
+
+    @BeforeEach
+    public void disableHEAD() {
+        HttpConnectionUtils.ENABLED.set(false);
     }
 
     @Test

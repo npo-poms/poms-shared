@@ -144,7 +144,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         result.setUrn(urn);
         result.setCreationInstant(null);
         result.setPlatform(Platform.INTERNETVOD);
-        if (programUrl != null && result.getByteSize() == null){
+        if (programUrl != null && result.getByteSize() == null) {
             HttpConnectionUtils.getOptionalByteSize(programUrl).ifPresent(result::setByteSize);
         }
         return result;
