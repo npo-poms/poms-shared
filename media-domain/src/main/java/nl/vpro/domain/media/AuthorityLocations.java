@@ -537,18 +537,26 @@ public class AuthorityLocations {
      * @since 7.7
      */
     public static OptionalLong getBytesize(String locationUrl) {
-        final HttpRequest head = HttpRequest.newBuilder()
-            .uri(URI.create(locationUrl))
-            .method("HEAD", noBody())
-            .build(); // .HEAD() in java 18
+        if (locationUrl == null ) {
+            return OptionalLong.empty();
+        }
         try {
+            final URI uri = URI.create(locationUrl);
+            final String scheme = uri.getScheme();
+            if (!("http".equals(scheme) || "https".equals(scheme))) {
+                return OptionalLong.empty();
+            }
+            final HttpRequest head = HttpRequest.newBuilder()
+                .uri(URI.create(locationUrl))
+                .method("HEAD", noBody())
+                .build(); // .HEAD() in java 18
             final HttpResponse<Void> send = CLIENT.send(head, discarding());
             if (send.statusCode() == 200) {
                 return send.headers().firstValueAsLong("Content-Length");
             } else {
                 log.warn("HEAD {} returned {}", locationUrl, send.statusCode());
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException | IllegalArgumentException e) {
             log.warn(e.getMessage(), e);
         }
         return OptionalLong.empty();

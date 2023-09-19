@@ -38,6 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 public class ProgramUpdateTest extends MediaUpdateTest {
 
+
     @Test
     public void create() {
         MediaUpdate<Program> pu = MediaUpdate.create(
