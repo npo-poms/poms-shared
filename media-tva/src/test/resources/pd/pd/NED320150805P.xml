@@ -19,9 +19,6 @@
           <Genre href="urn:tva:metadata:cs:2004:0111" type="secondary">
             <Name xml:lang="NL">Animatie</Name>
           </Genre>
-          <Genre href="urn:tva:metadata:cs:2004:NIEUWGENRE" type="secondary">
-            <Name xml:lang="NL">Nieuw Genre</Name>
-          </Genre>
           <Genre href="urn:po:metadata:cs:NicamWarningCS:2007:h">
             <Name xml:lang="NL">Drugs</Name>
           </Genre>
