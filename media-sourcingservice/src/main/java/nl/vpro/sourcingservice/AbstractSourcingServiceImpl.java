@@ -223,7 +223,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             FileSizeFormatter.DEFAULT.format(fileSize),
             node.get("response").textValue(),
             email,
-            callBackUrl
+            (callBackUrl== null ? "" : callBackUrl)
         );
     }
 
