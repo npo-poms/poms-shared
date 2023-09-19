@@ -16,8 +16,7 @@ import org.junit.jupiter.api.*;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
-import nl.vpro.domain.media.update.MediaUpdate;
-import nl.vpro.domain.media.update.ProgramUpdate;
+import nl.vpro.domain.media.update.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -43,6 +42,11 @@ public class MediaUpdateTest {
 
     static {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
+    }
+
+    @BeforeEach
+    public void disableHeader() {
+        LocationUpdate.ENABLED.set(false);
     }
 
     @Test

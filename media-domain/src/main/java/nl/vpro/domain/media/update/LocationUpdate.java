@@ -132,6 +132,8 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         urn = location.getUrn();
     }
 
+    public static ThreadLocal<Boolean> ENABLED = ThreadLocal.withInitial(() -> true);
+
     public Location toLocation(OwnerType ownerType) {
         Location result = new Location(
             programUrl,
@@ -142,7 +144,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         result.setUrn(urn);
         result.setCreationInstant(null);
         result.setPlatform(Platform.INTERNETVOD);
-        if (programUrl != null && result.getByteSize() == null){
+        if (programUrl != null && result.getByteSize() == null && ENABLED.get()){
             AuthorityLocations.getBytesize(programUrl).ifPresent(result::setByteSize);
         }
         return result;
