@@ -81,7 +81,7 @@ public class AuthorityLocations {
     /**
      * This will be called per platform if an NEP notify is received.
      */
-    public AuthorityLocations.RealizeResult realizeStreamingPlatformIfNeeded(
+    public RealizeResult realizeStreamingPlatformIfNeeded(
         @NonNull MediaObject mediaObject,
         @NonNull Platform platform) {
         final Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
@@ -112,17 +112,6 @@ public class AuthorityLocations {
             .program(mediaObject)
             .build();
      }
-
-    AuthorityLocations.RealizeResult cannotRealize(
-        @NonNull MediaObject mediaObject,
-        @NonNull Instant now) {
-        return AuthorityLocations.RealizeResult.builder()
-            .needed(false)
-            .program(mediaObject)
-            .reason("Only audio and video media objects currently can be realized. This one is " + mediaObject.getAVType())
-            .build();
-    }
-
 
 
     private Optional<AuthorityLocations.RealizeResult> checkExistingPrediction(Prediction  existingPredictionForPlatform, MediaObject mediaObject, Platform platform) {
@@ -276,13 +265,13 @@ public class AuthorityLocations {
         }
     }
 
-      private Location createOrFindLocation(
+    private Location createOrFindLocation(
         @NonNull MediaObject program,
         @NonNull String locationUrl,
         @NonNull OwnerType owner,
         @NonNull Platform platform) {
-          return createOrFindLocation(program, locationUrl, owner, new HashSet<>(), platform);
-      }
+        return createOrFindLocation(program, locationUrl, owner, new HashSet<>(), platform);
+    }
 
     private Location createOrFindLocation(
         @NonNull MediaObject program,
