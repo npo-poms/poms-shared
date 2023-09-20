@@ -22,6 +22,7 @@ import org.junit.jupiter.api.parallel.Isolated;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.regions.RegionService;
 
+import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
@@ -45,6 +46,7 @@ public class MediaObjectTest {
     @BeforeAll
     public static void init() {
         Locales.setDefault(Locales.NETHERLANDISH);
+        ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
 
     }
     @Test
@@ -608,6 +610,7 @@ public class MediaObjectTest {
     @Test
     public void testWebsiteValidation() {
         Program p = new Program();
+        p.addGenre(new Genre("3.0.1.1.4"));
         p.setType(ProgramType.BROADCAST);
         p.addWebsite(new Website("bla"));
         p.setAVType(AVType.AUDIO);
@@ -625,6 +628,26 @@ public class MediaObjectTest {
 
         p.getWebsites().get(0).setUrl("www.kro-ncrv.nl/kruispunt");
         validate(p, true, 1);
+    }
+
+    @Test
+    public void testHasGenreValidation() {
+        Program p = new Program();
+        p.setType(ProgramType.STRAND);
+        assertThat(p.getMediaType().requiresGenre()).isFalse();
+        p.setAVType(AVType.AUDIO);
+        p.setAgeRating(AgeRating.ALL);
+        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
+        validate(p, true, 0);
+
+        p.setType(ProgramType.BROADCAST);
+
+        validate(p, true, 1);
+
+        p.addGenre(new Genre("3.0.1.1.4"));
+
+        validate(p, true, 0);
+
     }
 
 

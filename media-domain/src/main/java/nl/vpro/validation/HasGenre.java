@@ -7,7 +7,7 @@ import javax.validation.Payload;
 
 import nl.vpro.domain.media.MediaIdentifiable;
 
-import static java.lang.annotation.ElementType.TYPE_USE;
+import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @since 7.8
  * @author Michiel Meeuwissen
  */
-@Target({  TYPE_USE })
+@Target({  TYPE })
 @Retention(RUNTIME)
 @Constraint(validatedBy = HasGenreValidator.class)
 @Documented
