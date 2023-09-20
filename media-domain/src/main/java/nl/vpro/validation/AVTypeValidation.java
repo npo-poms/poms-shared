@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023 All rights reserved
+ * VPRO The Netherlands
+ */
 package nl.vpro.validation;
 
 import java.lang.annotation.*;
@@ -9,8 +13,11 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * Not all {@link nl.vpro.domain.media.AVType av-types} are valid for all {@link nl.vpro.domain.media.MediaObject mediaobjects}.
+ *
  * @author Michiel Meeuwissen
- * @since 3.2
+ * @since 7.8
+ * @see nl.vpro.domain.media.AVType#test(Object)
  */
 
 @Target({TYPE})

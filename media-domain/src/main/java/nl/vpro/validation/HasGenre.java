@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023 All rights reserved
+ * VPRO The Netherlands
+ */
 package nl.vpro.validation;
 
 import java.lang.annotation.*;

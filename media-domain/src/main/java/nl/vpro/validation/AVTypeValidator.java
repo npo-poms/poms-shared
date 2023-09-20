@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 All rights reserved
+ * Copyright (C) 2023 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.validation;
@@ -11,6 +11,10 @@ import javax.validation.ConstraintValidatorContext;
 
 import nl.vpro.domain.media.*;
 
+/**
+ * @since 7.8
+ * @see AVTypeValidation
+ */
 @Slf4j
 public class AVTypeValidator implements ConstraintValidator<AVTypeValidation, MediaIdentifiable> {
 
