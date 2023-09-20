@@ -519,7 +519,7 @@ public class MediaObjectTest {
     public void testMidValidation() {
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
-        p.setAVType(AVType.MIXED);
+        p.setAVType(AVType.VIDEO);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setMid("foo/bar");
         Set<ConstraintViolation<Program>> constraintViolations = getValidator().validate(p);
@@ -533,7 +533,7 @@ public class MediaObjectTest {
     public void testLanguageValidation() {
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
-        p.setAVType(AVType.MIXED);
+        p.setAVType(AVType.VIDEO);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setLanguages(Arrays.asList(new Locale("ZZ"), Locales.DUTCH));
 
@@ -550,7 +550,7 @@ public class MediaObjectTest {
         Program p = new Program();
 
         p.setType(ProgramType.BROADCAST);
-        p.setAVType(AVType.MIXED);
+        p.setAVType(AVType.VIDEO);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setLanguages(Arrays.asList(Locales.NETHERLANDISH, new Locale("nl", "XX")));
 
@@ -574,7 +574,7 @@ public class MediaObjectTest {
             Program p = new Program();
 
             p.setType(ProgramType.BROADCAST);
-            p.setAVType(AVType.MIXED);
+            p.setAVType(AVType.VIDEO);
             p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
             p.addCountry(c);
             List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(getValidator().validate(p));
@@ -689,7 +689,7 @@ public class MediaObjectTest {
     public void testEmailValidation() {
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
-        p.setAVType(AVType.MIXED);
+        p.setAVType(AVType.VIDEO);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
 
         p.getEmail().add(new Email("bla"));
