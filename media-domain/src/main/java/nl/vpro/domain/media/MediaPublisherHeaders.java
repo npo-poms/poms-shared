@@ -1,14 +1,14 @@
 package nl.vpro.domain.media;
 
-import java.util.Collection;
-
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import nl.vpro.i18n.Displayable;
+import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.PolyNull;
+
+import nl.vpro.i18n.Displayable;
 
 
 /**
@@ -34,6 +34,11 @@ public interface MediaPublisherHeaders {
     @Slf4j
     enum Destination implements Displayable {
         ElasticSearch("NPO Frontend API"),
+        /**
+         * Deprected see PMP-74
+         * @deprecated
+         */
+        @Deprecated
         PROJECTM("Project M")
         ;
 
