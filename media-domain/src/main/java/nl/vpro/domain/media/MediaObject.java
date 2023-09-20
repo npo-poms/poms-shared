@@ -249,6 +249,7 @@ import static nl.vpro.domain.media.MediaObject.*;
 @HasGenre(
     groups = WarningValidatorGroup.class
 )
+@AVTypeValidation
 public abstract class MediaObject extends PublishableObject<MediaObject>
     implements Media<MediaObject> {
     // permits Program, Group, Segment, MediaObject$HibernateBasicProxy {

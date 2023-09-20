@@ -151,6 +151,7 @@ import nl.vpro.xml.bind.*;
 @HasGenre(
     groups = WarningValidatorGroup.class
 )
+@AVTypeValidation
 public abstract sealed class MediaUpdate<M extends MediaObject>
     implements
     MutableEmbargo<MediaUpdate<M>>,

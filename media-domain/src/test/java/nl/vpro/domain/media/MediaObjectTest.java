@@ -651,6 +651,21 @@ public class MediaObjectTest {
     }
 
 
+    @Test
+    public void getAVTypeValidation() {
+        Program p = new Program();
+        p.setType(ProgramType.TRACK);
+        p.setAVType(AVType.AUDIO);
+        p.setAgeRating(AgeRating.ALL);
+        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
+        validate(p, true, 0);
+
+        p.setAVType(AVType.MIXED);
+        validate(p, true, 1);
+    }
+
+
+
     /**
      * @see #testWebsiteValidationProperty()
      */
