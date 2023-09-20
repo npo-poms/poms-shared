@@ -107,6 +107,11 @@ public enum MediaType implements Displayable {
             return true;
         }
 
+        @Override
+        public boolean requiresGenre() {
+            return true;
+        }
+
 
     },
     CLIP(Program.class) {
@@ -123,6 +128,10 @@ public enum MediaType implements Displayable {
         @Override
         public ProgramType getSubType() {
             return ProgramType.CLIP;
+        }
+        @Override
+        public boolean requiresGenre() {
+            return true;
         }
 
 
@@ -153,7 +162,10 @@ public enum MediaType implements Displayable {
         @Override
         public ProgramType getSubType() {
             return ProgramType.TRAILER;
-
+        }
+        @Override
+        public boolean requiresGenre() {
+            return true;
         }
 
 
@@ -700,6 +712,10 @@ public enum MediaType implements Displayable {
      */
     public boolean isAbstract() {
         return getSubType() == null;
+    }
+
+    public boolean requiresGenre() {
+        return false;
     }
 
     /**
