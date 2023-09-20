@@ -30,8 +30,7 @@ public class HasGenreValidator implements ConstraintValidator<HasGenre, MidIdent
 
     @Override
     public boolean isValid(MidIdentifiable hasType, ConstraintValidatorContext context) {
-        boolean requiresGenre = hasType.getMediaType().requiresGenre();
-
+        boolean requiresGenre = hasType != null && hasType.getMediaType() != null &&  hasType.getMediaType().requiresGenre();
         if (requiresGenre) {
             try {
                 Collection<?> genres = (Collection<?>) hasType.getClass().getMethod("getGenres").invoke(hasType);
