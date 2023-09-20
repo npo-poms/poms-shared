@@ -23,7 +23,9 @@ public interface MediaIdentifiable extends MidIdentifiable {
     default Long getId() {
         return null;
     }
-    List<String> getCrids();
+    default List<String> getCrids() {
+        return Collections.emptyList();
+    }
 
     @JsonIgnore
     default Optional<String> getMainIdentifier() {

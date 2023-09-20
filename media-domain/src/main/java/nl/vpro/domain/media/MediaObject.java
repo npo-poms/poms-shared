@@ -246,6 +246,7 @@ import static nl.vpro.domain.media.MediaObject.*;
     + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))")
 @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
 @Slf4j
+@HasGenre
 public abstract class MediaObject extends PublishableObject<MediaObject>
     implements Media<MediaObject> {
     // permits Program, Group, Segment, MediaObject$HibernateBasicProxy {
@@ -1133,6 +1134,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonSerialize(using = GenreSortedSet.Serializer.class)
     @JsonDeserialize(using = GenreSortedSet.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @HasGenre
     public SortedSet<Genre> getGenres() {
         if (genres == null) {
             genres = new TreeSet<>();

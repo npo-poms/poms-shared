@@ -148,6 +148,9 @@ import nl.vpro.xml.bind.*;
     groups = WeakWarningValidatorGroup.class,
     type = {TextualType.SUB, TextualType.MAIN}
 )
+@HasGenre(
+    groups = WeakWarningValidatorGroup.class
+)
 public abstract sealed class MediaUpdate<M extends MediaObject>
     implements
     MutableEmbargo<MediaUpdate<M>>,
