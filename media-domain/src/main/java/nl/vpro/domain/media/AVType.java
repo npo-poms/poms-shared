@@ -53,6 +53,11 @@ public enum AVType implements Displayable, Predicate<Object> {
 
     @Override
     public boolean test(Object mediaObject) {
+        if (mediaObject instanceof Class<?> clazz) {
+            return predicate.test(clazz);
+        }
+
+
         return mediaObject != null && predicate.test(mediaObject.getClass());
     }
 
