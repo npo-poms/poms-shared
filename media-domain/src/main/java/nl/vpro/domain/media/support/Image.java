@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006/2007 All rights reserved
+ * Copyright (C) 2006/2007 Licensed under the Apache License, Version 2.0
  * VPRO The Netherlands
  * Creation date 15-nov-2006.
  */

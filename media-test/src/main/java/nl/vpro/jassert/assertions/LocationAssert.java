@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 All rights reserved
+ * Copyright (C) 2012 Licensed under the Apache License, Version 2.0
  * VPRO The Netherlands
  */
 package nl.vpro.jassert.assertions;

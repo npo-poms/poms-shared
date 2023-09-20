@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 All rights reserved VPRO The Netherlands
+ * Copyright (C) 2008 Licensed under the Apache License, Version 2.0 VPRO The Netherlands
  */
 package nl.vpro.domain.media;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 All rights reserved
+ * Copyright (C) 2023 Licensed under the Apache License, Version 2.0
  * VPRO The Netherlands
  */
 package nl.vpro.domain.convert;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 All rights reserved
+ * Copyright (C) 2013 Licensed under the Apache License, Version 2.0
  * VPRO The Netherlands
  */
 package nl.vpro.domain.constraint;
@@ -18,6 +18,6 @@ public interface FieldConstraint<T> extends Constraint<T> {
         result.addAll(Constraint.super.getDefaultBundleKey());
         return result;
     }
- 
+
 
 }
