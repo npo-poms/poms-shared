@@ -16,6 +16,7 @@ import nl.vpro.domain.media.MidIdentifiable;
 /**
  * @since 7.8
  * @see HasGenre
+ * @author Michiel Meeuwissen
  */
 @Slf4j
 public class HasGenreValidator implements ConstraintValidator<HasGenre, MidIdentifiable> {

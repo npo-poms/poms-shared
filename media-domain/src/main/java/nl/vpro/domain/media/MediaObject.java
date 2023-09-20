@@ -1136,7 +1136,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonSerialize(using = GenreSortedSet.Serializer.class)
     @JsonDeserialize(using = GenreSortedSet.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @HasGenre
     public SortedSet<Genre> getGenres() {
         if (genres == null) {
             genres = new TreeSet<>();
