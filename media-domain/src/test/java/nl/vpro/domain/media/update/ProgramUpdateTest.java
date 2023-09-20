@@ -146,7 +146,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setBroadcasters("KRNC");
         update.setMainTitle("hoi");
         update.setType(ProgramType.CLIP);
-        update.setAVType(AVType.MIXED);
+        update.setAVType(AVType.VIDEO);
         update.getLocations().add(location);
         Set<? extends ConstraintViolation<MediaUpdate<? extends Program>>> errors = update.violations();
         log.info(ConstraintViolations.humanReadable(errors));
@@ -159,7 +159,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = ProgramUpdate.create();
         update.setBroadcasters("VPRO");
         update.setType(ProgramType.CLIP);
-        update.setAVType(AVType.MIXED);
+        update.setAVType(AVType.VIDEO);
 
         Set<? extends ConstraintViolation<MediaUpdate<? extends Program>>> errors = update.violations();
         log.info(ConstraintViolations.humanReadable(errors));
@@ -171,7 +171,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setBroadcasters("VPRO");
         update.setType(ProgramType.CLIP);
-        update.setAVType(AVType.MIXED);
+        update.setAVType(AVType.VIDEO);
         update.addTitle("bla", TextualType.MAIN);
         TitleUpdate main = update.getTitles().first();
         Field field = TitleUpdate.class.getDeclaredField("type");
