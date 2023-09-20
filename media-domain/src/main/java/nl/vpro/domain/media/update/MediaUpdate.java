@@ -149,7 +149,7 @@ import nl.vpro.xml.bind.*;
     type = {TextualType.SUB, TextualType.MAIN}
 )
 @HasGenre(
-    groups = WeakWarningValidatorGroup.class
+    groups = WarningValidatorGroup.class
 )
 public abstract sealed class MediaUpdate<M extends MediaObject>
     implements
