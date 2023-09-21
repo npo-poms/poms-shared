@@ -45,7 +45,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     static ProgramBuilder broadcast() {
         return program()
             .type(ProgramType.BROADCAST)
-            .audioOrVideo();
+            .video();
     }
 
     static ProgramBuilder movie() {
@@ -57,7 +57,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     static ProgramBuilder clip() {
         return program()
             .type(ProgramType.CLIP)
-            .audioOrVideo();
+            .video();
     }
 
     static ProgramBuilder program(Program program) {
@@ -474,7 +474,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     default B avAttributes(AVAttributes avAttribute) {
         mediaObject().setAvAttributes(avAttribute);
         return (B)this;
-
     }
 
     @SuppressWarnings("unchecked")
@@ -854,7 +853,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
      default B audioOrVideo() {
         return
             ageRatingAllIfUnset()
-                .avType(AVType.MIXED);
+                .avType(this instanceof GroupBuilder ? AVType.MIXED : null);
     }
     /**
      * Makes a (deep) copy of this builder. This returns a new instance on which you can make changes without affecting the original one.
