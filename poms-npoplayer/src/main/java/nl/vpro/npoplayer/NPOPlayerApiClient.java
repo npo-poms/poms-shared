@@ -20,6 +20,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
 import nl.vpro.api.client.resteasy.AbstractApiClient;
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.rs.npoplayer.NPOPlayerApiRestService;
 import nl.vpro.util.ConfigUtils;
 import nl.vpro.util.Env;
@@ -74,6 +75,7 @@ public class NPOPlayerApiClient extends AbstractApiClient {
         Duration countWindow,
         Integer bucketCount,
         Duration warnThreshold,
+        Level warnLevel,
         List<Locale> acceptableLanguages,
         MediaType accept,
         MediaType contentType,
@@ -98,6 +100,7 @@ public class NPOPlayerApiClient extends AbstractApiClient {
             countWindow,
             bucketCount,
             warnThreshold,
+            warnLevel,
             acceptableLanguages,
             accept,
             contentType,
