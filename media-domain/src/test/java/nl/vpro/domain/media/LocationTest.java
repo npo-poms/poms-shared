@@ -233,8 +233,8 @@ public class LocationTest implements BasicObjectTheory<Location> {
     public void sanitizeAll() throws IOException {
         String dir = "/Users/michiel/npo/media/main/issues/MSE-5/MSE-5292/";
         HttpClient client = HttpClient.newBuilder().build();
-        try (InputStream inputStream = new FileInputStream(new File(dir + "MSE-5292.csv"));
-             OutputStream outputStream = new FileOutputStream(new File(dir + "insert_locations.sql"))) {
+        try (InputStream inputStream = new FileInputStream(dir + "MSE-5292.csv");
+             OutputStream outputStream = new FileOutputStream(dir + "insert_locations.sql")) {
             final AtomicInteger count = new AtomicInteger();
             outputStream.write("insert into temp_location values ".getBytes(UTF_8));
             new BufferedReader(new InputStreamReader(inputStream)).lines().forEach(line -> {
