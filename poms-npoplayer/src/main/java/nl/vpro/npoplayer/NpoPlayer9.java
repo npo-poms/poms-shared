@@ -19,6 +19,9 @@ import javax.xml.bind.DatatypeConverter;
 import nl.vpro.domain.npoplayer.TokenRequest;
 import nl.vpro.domain.npoplayer.TokenResponse;
 
+/**
+ * See https://docs.npoplayer.nl/
+ */
 @Slf4j
 public class NpoPlayer9 {
 

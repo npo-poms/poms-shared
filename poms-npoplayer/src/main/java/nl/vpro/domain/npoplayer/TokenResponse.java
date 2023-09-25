@@ -1,6 +1,6 @@
 package nl.vpro.domain.npoplayer;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -9,6 +9,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
+ * Player 9 just needs a server side generated jws token.
+ * <p>
+ * This wraps it together with the original mid
+ *
  * @author Michiel Meeuwissen
  * @since 7.8
  */
