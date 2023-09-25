@@ -1,13 +1,13 @@
-package nl.vpro.npoplayer;
+package nl.vpro.npoplayer9;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.math.time.TestClock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class NpoPlayer9Test {
+class NpoPlayerTest {
 
-    NpoPlayer9 npoPlayer9 = new NpoPlayer9(
+    NpoPlayer npoPlayer9 = new NpoPlayer(
         "vpro",
         "mynicekeymynicekeymynicekeymynicekey")
         .withClock(TestClock.twentyTwenty());

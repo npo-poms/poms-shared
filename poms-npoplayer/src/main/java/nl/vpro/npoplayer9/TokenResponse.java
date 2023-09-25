@@ -1,4 +1,4 @@
-package nl.vpro.domain.npoplayer;
+package nl.vpro.npoplayer9;
 
 import lombok.Data;
 

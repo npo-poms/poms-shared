@@ -8,6 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.npoplayer.*;
+import nl.vpro.npoplayer9.*;
 
 /**
  * This is a rest service definition which can be used to server for the NPO Player 8 and 9.
@@ -36,7 +37,7 @@ public interface NPOPlayerRestService {
      * See <a href="https://docs.npoplayer.nl/implementation/create-a-jwt/">documentation of npo player 9</a>
      * player 9
      *<p>
-     * Just performs the server side generation of the token. Implementation could user {@link nl.vpro.npoplayer.NpoPlayer9}.
+     * Just performs the server side generation of the token. Implementation could user {@link NpoPlayer}.
      */
     @POST
     @Path("/token")
