@@ -4,17 +4,13 @@
  */
 package nl.vpro.rs.npoplayer;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.npoplayer.*;
 
 /**
+ * This is a wrapper around the NPO Player 8 and 9 API.
  * @author r.jansen
  * @since 5.10
  */
@@ -23,11 +19,19 @@ import nl.vpro.domain.npoplayer.*;
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public interface NPOPlayerRestService {
 
+    /**
+     * player 8.
+     */
     @POST
     @Path("/request")
+    @Deprecated
     PlayerResponse forMid(PlayerRequest request);
 
+    /**
+     * See <a href="https://docs.npoplayer.nl/implementation/create-a-jwt/">documentation of npo player 9</a>
+     * player 9
+     */
     @POST
     @Path("/token")
-    public PlayerResponse token(@Context HttpServletRequest request, TokenRequest tokenRequest);
+    TokenResponse token(TokenRequest tokenRequest);
 }

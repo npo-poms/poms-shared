@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     "subtitles"
 })
 @JsonTypeName("styling")
+@Deprecated
 public class NPOPlayerStyling {
     NPOPlayerSubtitlesStyling subtitles;
 }

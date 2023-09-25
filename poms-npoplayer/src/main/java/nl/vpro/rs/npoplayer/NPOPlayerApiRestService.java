@@ -17,6 +17,7 @@ import nl.vpro.domain.npoplayer.NPOPlayerApiResponse;
 @Path("/")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
+@Deprecated
 public interface NPOPlayerApiRestService {
 
     @POST

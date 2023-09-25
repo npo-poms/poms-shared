@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
     "embedUrl",
     "embedCode"
 })
+@Deprecated
 public class NPOPlayerApiResponse {
     private String token;
     private String embedUrl;

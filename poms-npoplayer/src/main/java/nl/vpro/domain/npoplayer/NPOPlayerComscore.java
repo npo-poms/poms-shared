@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     "npoLoginId"
 })
 @JsonTypeName("comscore")
+@Deprecated
 public class NPOPlayerComscore {
     String npoIngelogd;
     String npoLogintype;

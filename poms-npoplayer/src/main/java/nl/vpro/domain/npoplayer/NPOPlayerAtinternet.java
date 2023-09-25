@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 })
 @JsonTypeName("smarttag")
+@Deprecated
 public class NPOPlayerAtinternet {
     String siteId;
 }

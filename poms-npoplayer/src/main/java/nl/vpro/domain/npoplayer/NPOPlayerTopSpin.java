@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     "profileId"
 })
 @JsonTypeName("comscore")
+@Deprecated
 public class NPOPlayerTopSpin {
     String partyId;
     String profileId;

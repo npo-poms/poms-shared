@@ -32,6 +32,7 @@ import nl.vpro.util.TimeUtils;
     "noAds",
     "subtitleLanguage"
 })
+@Deprecated
 public class NPOPlayerApiRequest {
     String id;
     String elementId;

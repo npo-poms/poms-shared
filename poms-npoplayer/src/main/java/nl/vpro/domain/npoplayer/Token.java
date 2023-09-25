@@ -1,11 +1,11 @@
 package nl.vpro.domain.npoplayer;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
 import lombok.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @XmlRootElement
 @Data
@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
     "iss"
 })
 @JsonTypeName("response")
+@Deprecated
 public class Token {
     Long iat;
     String sub;

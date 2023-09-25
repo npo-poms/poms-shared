@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     "embedCode"
 })
 @JsonTypeName("response")
+@Deprecated
 public class PlayerResponse {
     private String mid;
     private String token;
