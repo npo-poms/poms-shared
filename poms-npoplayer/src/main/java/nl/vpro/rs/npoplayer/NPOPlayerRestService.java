@@ -11,9 +11,9 @@ import nl.vpro.domain.npoplayer.*;
 import nl.vpro.npoplayer9.*;
 
 /**
- * This is a rest service definition which can be used to server for the NPO Player 8 and 9.
+ * This is a rest service definition which can be used to serve for the NPO
  * <p>
- * The player 8 stuff is derpecated and will soon e removed.
+ * The player 8 stuff is deprecated and will soon e removed.
  * This service is e.g. implemented in <a href="https://rs.vpro.nl/v3/docs/api/#/npoplayer">vproapi</a>
  *
  * @author r.jansen
@@ -37,7 +37,7 @@ public interface NPOPlayerRestService {
      * See <a href="https://docs.npoplayer.nl/implementation/create-a-jwt/">documentation of npo player 9</a>
      * player 9
      *<p>
-     * Just performs the server side generation of the token. Implementation could user {@link NpoPlayer}.
+     * Just performs the server side generation of the token. Implementation could use {@link NpoPlayer}.
      */
     @POST
     @Path("/token")

@@ -9,13 +9,14 @@ import java.time.Clock;
 
 import javax.crypto.SecretKey;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
- * See <a href="https://docs.npoplayer.nl/">npoplayer doc</a>
+ * See <a href="https://docs.npoplayer.nl/">npoplayer doc</a>. Just contains the code to perform the server side jwt generation.
  * @author Michiel Meeuwissen
- * @since 7.8.0
+ * @since 7.8
  */
 @Slf4j
 public class NpoPlayer {
@@ -25,7 +26,9 @@ public class NpoPlayer {
     private final Clock clock;
 
     @Inject
-    public NpoPlayer(@NonNull String issuer, @NonNull String signingKey) {
+    public NpoPlayer(
+        @Named("npoplayerapi.issuer") @NonNull String issuer,
+        @Named("npoplayerapi.secretKey") @NonNull String signingKey) {
         this(Clock.systemUTC(), issuer, signingKey);
     }
 
