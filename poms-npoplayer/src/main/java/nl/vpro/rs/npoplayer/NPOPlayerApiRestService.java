@@ -13,10 +13,12 @@ import nl.vpro.domain.npoplayer.NPOPlayerApiResponse;
 /**
  * @author r.jansen
  * @since 5.10
+ * @deprecated This is player 8
  */
 @Path("/")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
+@Deprecated
 public interface NPOPlayerApiRestService {
 
     @POST

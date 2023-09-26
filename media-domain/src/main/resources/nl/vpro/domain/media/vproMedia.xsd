@@ -1055,10 +1055,18 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-       <xs:enumeration value="EUROPE">
+      <xs:enumeration value="EUROPE">
         <xs:annotation>
           <xs:documentation>
             New in 5.6. Europa in breedste zin van het woord
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
+      <xs:enumeration value="UNIVERSE">
+        <xs:annotation>
+          <xs:documentation>
+            New in 7.7. Explicitly no geo-restriction
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>

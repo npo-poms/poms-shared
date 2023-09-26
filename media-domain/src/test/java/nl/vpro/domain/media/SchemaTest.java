@@ -155,6 +155,11 @@ public class SchemaTest extends AbstractSchemaTest {
     }
 
     @Test
+    public void testRegion() {
+        testMediaEnum("geoRestrictionEnum", Region.class);
+    }
+
+    @Test
     public void testLicense() {
         //testMediaEnum("targetGroupEnum", TargetGroupType.class);
     }

@@ -24,17 +24,19 @@ public class PictureTag extends SourcesTag implements DynamicAttributes {
         writer.print("<picture");
         appendAttributes(writer,
             dynamicAttributes.entrySet().stream()
+                .filter(e -> e.getKey() != null)
                 .filter(e -> ! e.getKey().startsWith("img."))
                 .collect(Collectors.toMap(
                     Map.Entry::getKey,
                     Map.Entry::getValue,
-                    (x, y) ->y,
+                    (x, y) -> y,
                     LinkedHashMap::new)
                 )
         );
 
         writer.print(">");
         append(picture, dynamicAttributes.entrySet().stream()
+            .filter(e -> e.getKey() != null)
             .filter(e -> e.getKey().startsWith("img."))
             .collect(Collectors.toMap(
                 e -> e.getKey().substring(4),

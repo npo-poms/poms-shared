@@ -17,6 +17,7 @@ import nl.vpro.npoplayer.NPOPlayerApiClient;
  */
 @Named
 @Slf4j
+@Deprecated
 public class NPOPlayerApiServiceImpl implements NPOPlayerApiService {
     private final NPOPlayerApiClient client;
 

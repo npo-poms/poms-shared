@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     "color"
 })
 @JsonTypeName("subtitles")
+@Deprecated
 public class NPOPlayerSubtitlesStyling {
     String font;
     String size;

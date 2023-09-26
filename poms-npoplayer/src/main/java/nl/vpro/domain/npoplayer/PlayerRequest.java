@@ -43,6 +43,7 @@ import nl.vpro.jackson2.DurationToSecondsFloatTimestamp;
     "share"
 })
 @JsonTypeName("request")
+@Deprecated
 public class PlayerRequest {
     String mid;
     String id;

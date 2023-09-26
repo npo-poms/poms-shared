@@ -26,14 +26,18 @@ import nl.vpro.util.ConfigUtils;
 import nl.vpro.util.Env;
 
 /**
- * This basicly does this:
+ * This createsa resteasy client using {@link nl.vpro.rs.npoplayer.NPOPlayerRestService}.
+ * <p>
+ * This basically does this:
  * <pre>{@code curl -H'ApiKey: <your key>' https://start-player-api.npo.nl/video/VPWON_1262643/init -d '{"id":"__vpronpoplayer__0","stylesheet":"https://files.vpro.nl/npoplayer/8/controls.css","autoplay":true}'
  * }
  * </pre>
  * @author r.jansen
  * @since 5.10
+ * @deprecated This is player 8
  */
 @Named
+@Deprecated
 public class NPOPlayerApiClient extends AbstractApiClient {
     private final static String APIKEYHEADER = "ApiKey";
     private final String apiKey;
