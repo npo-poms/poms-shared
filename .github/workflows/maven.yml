@@ -35,7 +35,7 @@ jobs:
           gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
       - name: Build and deploy with Maven (Linux, java 17)
         run:  mvn -ntp  -B -P"deploy,ossrh,npm" -U -fae deploy
-        if: runner.os == 'Linux' && runner.java == '17'
+        if: runner.os == 'Linux' && matrix.java == '17'
         env:
           SONATYPE_USERNAME: vpro
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
