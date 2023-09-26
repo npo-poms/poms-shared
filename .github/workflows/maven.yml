@@ -58,13 +58,13 @@ jobs:
           files: "**/target/surefire-reports/*.xml"
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.7.0
+        uses: EnricoMi/publish-unit-test-result-action@v2.10.0
         if: always() && runner.os == 'Linux'
         with:
           junit_files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish Unit Test Results (Windows)
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2.7.0
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2.10.0
         if: always()  && runner.os == 'Windows'
         with:
           junit_files: "**/target/surefire-reports/*.xml"

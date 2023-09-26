@@ -38,7 +38,7 @@ jobs:
           SONATYPE_USERNAME: vpro
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD}}
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.2.0
+        uses: EnricoMi/publish-unit-test-result-action@v2.10.0
         if: (success() || failure())
         with:
           junit_files: "**/target/surefire-reports/*.xml"
