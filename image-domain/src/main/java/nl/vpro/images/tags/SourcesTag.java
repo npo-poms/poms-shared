@@ -52,14 +52,14 @@ public class SourcesTag extends SimpleTagSupport implements DynamicAttributes {
             writer.append(String.format(" height='%d'", picture.getHeight()));
         }
         appendAttributes(writer, dynAttributes);
-        writer.append(String.format(" src='%s'", escape(picture.getImageSrc())));
+        writer.append(" src='%s'".formatted(escape(picture.getImageSrc())));
         writer.append(" />");
 
     }
 
     protected void appendAttributes(Writer writer, Map<String, Object> attributes) throws IOException {
         for (Map.Entry<String, Object> a : attributes.entrySet()) {
-            writer.append(String.format(" %s='%s'", a.getKey(), escape(a.getValue())));
+            writer.append(" %s='%s'".formatted(a.getKey(), escape(a.getValue())));
         }
     }
     String escape(Object s) {
@@ -68,7 +68,9 @@ public class SourcesTag extends SimpleTagSupport implements DynamicAttributes {
 
     @Override
     public void setDynamicAttribute(String uri, String localName, Object value) {
-        dynamicAttributes.put(localName, value);
+        if (localName != null) {
+            dynamicAttributes.put(localName, value);
+        }
     }
 
 
