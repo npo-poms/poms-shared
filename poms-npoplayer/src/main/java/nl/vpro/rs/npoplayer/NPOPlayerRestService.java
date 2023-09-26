@@ -11,10 +11,12 @@ import nl.vpro.domain.npoplayer.*;
 import nl.vpro.npoplayer9.*;
 
 /**
- * This is a rest service definition which can be used to serve for the NPO
+ * This is a rest service definition which can be used to serve for the NPO player.
  * <p>
  * The player 8 stuff is deprecated and will soon e removed.
- * This service is e.g. implemented in <a href="https://rs.vpro.nl/v3/docs/api/#/npoplayer">vproapi</a>
+ * This service is implemented in <a href="https://rs.vpro.nl/v3/docs/api/#/npoplayer">vproapi</a> (and as far as we know, nowhere else).
+ * <p>
+ * Implementation could profit from {@link NpoPlayer}.
  *
  * @author r.jansen
  * @since 5.10

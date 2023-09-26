@@ -14,7 +14,7 @@ import javax.inject.Named;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
- * See <a href="https://docs.npoplayer.nl/">npoplayer doc</a>. Just contains the code to perform the server side jwt generation.
+ * See <a href="https://docs.npoplayer.nl/">npoplayer doc</a>. Just contains the code and credentials to perform the server side jwt generation.
  * @author Michiel Meeuwissen
  * @since 7.8
  */
