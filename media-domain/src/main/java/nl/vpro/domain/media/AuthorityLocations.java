@@ -211,6 +211,9 @@ public class AuthorityLocations {
             addLocation(mediaObject, platform, locationUrl, pubOption, OwnerType.AUTHORITY);
             authorityLocation = mediaObject.findLocation(locationUrl, OwnerType.AUTHORITY);
         }
+        if (authorityLocation != null && authorityLocation.getByteSize() == null) {
+            getBytesize(locationUrl).ifPresent(authorityLocation::setByteSize);
+        }
         return authorityLocation;
     }
 
@@ -306,6 +309,9 @@ public class AuthorityLocations {
             }
         } else {
             log.debug("updating location {} {} for mediaObject {}", locationUrl, owner, program.getMid());
+            if (location.getByteSize() == null) {
+                getBytesize(locationUrl).ifPresent(location::setByteSize);
+            }
             location.setPlatform(platform);
         }
         return location;
