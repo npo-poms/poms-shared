@@ -541,6 +541,10 @@ public enum MediaType implements Displayable {
     }
 
 
+    /**
+     * @see #defaultAVType()
+     * @see #setType(MediaObject)
+     */
     public final MediaObject getMediaInstance() {
         try {
             if (constructor == null) {
@@ -548,6 +552,7 @@ public enum MediaType implements Displayable {
             }
             MediaObject o = (MediaObject) constructor.newInstance();
             setType(o);
+            o.setAVType(defaultAVType());
             return o;
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
             throw new RuntimeException("For " + this + " ", e);
@@ -716,6 +721,20 @@ public enum MediaType implements Displayable {
 
     public boolean requiresGenre() {
         return false;
+    }
+
+    /**
+     * @since 7.8
+     */
+    public AVType defaultAVType() {
+
+        if (AVType.MIXED.test(clazz)) {
+            return AVType.MIXED;
+        }
+        if (AVType.VIDEO.test(clazz)) {
+            return AVType.VIDEO;
+        }
+        return AVType.AUDIO;
     }
 
     /**
