@@ -49,7 +49,7 @@ jobs:
           GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
       - name: Build with Maven (Other os)
         run: mvn -ntp -B  -U -fae package
-        if: ! (runner.os == 'Linux' && matrix.java == '17')
+        if: ${{ ! runner.os == 'Linux' && matrix.java == '17' }}
         continue-on-error: true
       - name: Publish to codecov
         uses: codecov/codecov-action@v3
