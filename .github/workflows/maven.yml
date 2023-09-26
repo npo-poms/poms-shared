@@ -13,8 +13,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest]
-        java: [17, 21-ea]
-        #java: [17]
+        java: [17 ]
+        include:
+          - os: ubuntu-latest
+            java: 21-ea
     runs-on: ${{ matrix.os }}
     steps:
       - name: Cancel previous Action
