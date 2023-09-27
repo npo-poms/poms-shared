@@ -27,9 +27,9 @@
   </properties>
 
    <scm>
+     <url>https://github.com/npo-poms/poms-shared.git</url>
      <connection>scm:git:${project.scm.url}</connection>
      <developerConnection>scm:git:${project.scm.url}</developerConnection>
-     <url>https://github.com/npo-poms/poms-shared.git</url>
      <tag>HEAD</tag>
   </scm>
 
