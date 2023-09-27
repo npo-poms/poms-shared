@@ -1,11 +1,13 @@
 package nl.vpro.npoplayer9;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Date;
 import java.time.Clock;
+import java.time.temporal.ChronoUnit;
 
 import javax.crypto.SecretKey;
 import javax.inject.Inject;
@@ -47,12 +49,12 @@ public class NpoPlayer {
 
     public String token(@NonNull String mid) {
         // TODO: as yet untested with a real player.
-        SecretKey secretKey = Keys.hmacShaKeyFor(signingKey.getBytes());
+        final SecretKey secretKey = Keys.hmacShaKeyFor(signingKey.getBytes());
         return Jwts.builder()
             .setSubject(mid)
-            .setIssuedAt(Date.from(clock.instant()))
+            .setIssuedAt(Date.from(clock.instant().truncatedTo(ChronoUnit.SECONDS)))
             .setIssuer(issuer)
-            .signWith(secretKey)
+            .signWith(secretKey, SignatureAlgorithm.HS256)
             .compact();
     }
 

@@ -28,13 +28,18 @@ public class TokenResponse {
     private final String mid;
     private final String token;
     private final String key;
+    private final String analyticsKey;
+
+    private final String endpoint;
 
     @lombok.Builder
     @JsonCreator
-    private TokenResponse(String mid, String token, String key) {
+    private TokenResponse(String mid, String token, String key, String analyticsKey, String endpoint) {
         this.mid = mid;
         this.token = token;
         this.key = key;
+        this.analyticsKey = analyticsKey;
+        this.endpoint = endpoint;
     }
 
 }
