@@ -15,7 +15,7 @@ class NpoPlayerTest {
     @Test
     public void test() {
         String token = npoPlayer9.token("mid_123");
-        assertThat(token).isEqualTo("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODIyMjY0MDAsInN1YiI6Im1pZF8xMjMiLCJpc3MiOiJ2cHJvIn0.pUr8qDYd9hqc-zf8ftBk0aTAQpvgrnImU4Yom_G07p4");
+        assertThat(token).isEqualTo("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWRfMTIzIiwiaWF0IjoxNTgyMjI2NDAwLCJpc3MiOiJ2cHJvIn0.LeCe3rFb_tgYxndgEl_jSyUfT7okfNsYQ83FzylcSh0");
     }
 
 }

@@ -48,7 +48,6 @@ public class NpoPlayer {
     }
 
     public String token(@NonNull String mid) {
-        // TODO: as yet untested with a real player.
         final SecretKey secretKey = Keys.hmacShaKeyFor(signingKey.getBytes());
         return Jwts.builder()
             .setSubject(mid)
