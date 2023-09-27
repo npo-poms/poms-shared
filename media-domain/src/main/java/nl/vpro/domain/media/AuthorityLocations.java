@@ -256,7 +256,7 @@ public class AuthorityLocations {
     /**
      * Create a new location url. Doesn't change the mediaobject.
      *
-     * @param pubOptie Originally we got notifies with different puboptions. Now we get from NEP, and pubotion then is 'nep'.
+     * @param pubOptie Originally we got notifies with different puboptions. Now we get from NEP, and puboption then is 'nep'.
      */
     private static String createLocationVideoUrl(StreamingStatus streamingStatus,  String mid, Platform platform, Encryption encryption, String pubOptie) {
         String baseUrl = getBaseVideoUrl(platform, encryption, pubOptie);

@@ -786,6 +786,9 @@ public class MediaObjects {
                 Location locationToUpdate = mediaToUpdate.findLocation(incomingLocation.getProgramUrl());
                 if(locationToUpdate == null) {
                     mediaToUpdate.addLocation(incomingLocation);
+                    if (incomingLocation.getByteSize() == null) {
+                        AuthorityLocations.getBytesize(incomingLocation.getProgramUrl()).ifPresent(incomingLocation::setByteSize);
+                    }
                 } else {
                     boolean update = true;
                     if (locationToUpdate.getOwner() != owner) {
@@ -803,6 +806,9 @@ public class MediaObjects {
                         locationToUpdate.setSubtitles(incomingLocation.getSubtitles());
                         Embargos.copy(incomingLocation, locationToUpdate);
                         mergeAvAttributes(incomingLocation, locationToUpdate);
+                        if (locationToUpdate.getByteSize() == null) {
+                            AuthorityLocations.getBytesize(locationToUpdate.getProgramUrl()).ifPresent(locationToUpdate::setByteSize);
+                        }
                         if (DELETES.contains(incomingLocation.getWorkflow())) {
                             locationToUpdate.setWorkflow(FOR_DELETION);
                         } else {
@@ -838,21 +844,21 @@ public class MediaObjects {
 
 
     public static void mergeAvAttributes(Location incomingLocation, Location locationToUpdate) {
-        AVAttributes incomingAttributes = incomingLocation.getAvAttributes();
-        AVAttributes attributesToUpdate = locationToUpdate.getAvAttributes();
+        final AVAttributes incomingAttributes = incomingLocation.getAvAttributes();
+        final AVAttributes attributesToUpdate = locationToUpdate.getAvAttributes();
 
-        if(incomingAttributes != null && attributesToUpdate != null) {
+        if (incomingAttributes != null && attributesToUpdate != null) {
             attributesToUpdate.setAvFileFormat(incomingAttributes.getAvFileFormat());
             attributesToUpdate.setBitrate(incomingAttributes.getBitrate());
 
             mergeAudioAttributes(incomingAttributes, attributesToUpdate);
             mergeVideoAttributes(incomingAttributes, attributesToUpdate);
 
-        } else if(incomingAttributes != null) {
+        } else if (incomingAttributes != null) {
 
             locationToUpdate.setAvAttributes(incomingAttributes);
 
-        } else if(attributesToUpdate != null) {
+        } else if (attributesToUpdate != null) {
 
             locationToUpdate.setAvAttributes(null);
 
