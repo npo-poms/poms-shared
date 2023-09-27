@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * Player 9 just needs a server side generated jws token.
  * <p>
- * This wraps it together with the original mid
+ * This wraps it together with the original mid, and possibly also with the 'bitmovin key'.
  *
  * @author Michiel Meeuwissen
  * @since 7.8
@@ -20,18 +20,21 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Data
 @XmlType(propOrder = {
     "mid",
-    "token"
+    "token",
+    "key"
 })
 @JsonTypeName("tokenResponse")
 public class TokenResponse {
     private final String mid;
     private final String token;
+    private final String key;
 
     @lombok.Builder
     @JsonCreator
-    public TokenResponse(String mid, String token) {
+    private TokenResponse(String mid, String token, String key) {
         this.mid = mid;
         this.token = token;
+        this.key = key;
     }
 
 }
