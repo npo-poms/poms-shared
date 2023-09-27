@@ -553,7 +553,7 @@ public class AuthorityLocations {
                 return OptionalLong.empty();
             }
             final HttpRequest head = HttpRequest.newBuilder()
-                .uri(URI.create(locationUrl))
+                .uri(uri)
                 .method("HEAD", noBody())
                 .build(); // .HEAD() in java 18
             final HttpResponse<Void> send = CLIENT.send(head, discarding());
