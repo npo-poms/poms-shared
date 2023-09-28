@@ -5,9 +5,9 @@ import org.meeuw.math.time.TestClock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class NpoPlayerTest {
+class TokenFactoryTest {
 
-    NpoPlayer npoPlayer9 = new NpoPlayer(
+    TokenFactory npoPlayer9 = new TokenFactory(
         "vpro",
         "3777217A25432A462D4A614E635266556A586E3272357538782F413F4428472B")
         .withClock(TestClock.twentyTwenty());

@@ -16,7 +16,7 @@ import nl.vpro.npoplayer9.*;
  * The player 8 stuff is deprecated and will soon e removed.
  * This service is implemented in <a href="https://rs.vpro.nl/v3/docs/api/#/npoplayer">vproapi</a> (and as far as we know, nowhere else).
  * <p>
- * Implementation could profit from {@link NpoPlayer}.
+ * Implementation could profit from {@link TokenFactory}.
  *
  * @author r.jansen
  * @since 5.10
@@ -39,7 +39,7 @@ public interface NPOPlayerRestService {
      * See <a href="https://docs.npoplayer.nl/implementation/create-a-jwt/">documentation of npo player 9</a>
      * player 9
      *<p>
-     * Just performs the server side generation of the token. Implementation could use {@link NpoPlayer}.
+     * Just performs the server side generation of the token. Implementation could use {@link TokenFactory}.
      */
     @POST
     @Path("/token")

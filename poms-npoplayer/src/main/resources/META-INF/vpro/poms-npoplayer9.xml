@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+">
 
   <bean class="java.lang.String" id="npoplayerapi.secretKey" >
-     <constructor-arg value="${npoplayerapi.secretKey}"/>
+    <constructor-arg value="${npoplayerapi.secretKey}"/>
   </bean>
 
   <bean class="java.lang.String" id="npoplayerapi.issuer">
     <constructor-arg value="${npoplayerapi.issuer}"/>
   </bean>
 
-  <bean class="nl.vpro.npoplayer9.NpoPlayer" />
+  <bean class="nl.vpro.npoplayer9.NpoPlayer" id="npoPlayer">
+    <constructor-arg name="tokenFactory">
+      <bean class="nl.vpro.npoplayer9.TokenFactory"/>
+    </constructor-arg>
+    <constructor-arg name="bitmovinKey" value="${npoplayerapi.bitmovinKey}"/>
+    <constructor-arg name="analyticsKey" value="${npoplayerapi.analyticsKey}"/>
+    <constructor-arg name="endpoint" value="${npoplayerapi.endpoint}"/>
+  </bean>
+
+  <bean class="nl.vpro.npoplayer9.NpoPlayer" id="npoPlayer2">
+    <constructor-arg name="tokenFactory">
+      <bean class="nl.vpro.npoplayer9.TokenFactory">
+        <constructor-arg name="issuer" ref="npoplayerapi.issuer"/>
+        <constructor-arg name="signingKey" value="${npoplayerapi.secretKey2:#{null}}"/>
+      </bean>
+    </constructor-arg>
+    <constructor-arg name="bitmovinKey" value="${npoplayerapi.bitmovinKey}"/>
+    <constructor-arg name="analyticsKey" value="${npoplayerapi.analyticsKey}"/>
+    <constructor-arg name="endpoint" value="${npoplayerapi.endpoint2:#{null}}"/>
+  </bean>
+
 
 </beans>
