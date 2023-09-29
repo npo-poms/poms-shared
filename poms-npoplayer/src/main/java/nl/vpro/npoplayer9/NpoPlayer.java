@@ -4,7 +4,8 @@ import lombok.Getter;
 
 /**
  * Wraps a {@link TokenFactory} with some additional configuration.
- *
+ * @since 7.8
+ * @author Michiel Meeuwissen
  */
 @Getter
 public class NpoPlayer {

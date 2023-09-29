@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 /**
  * Token request for NPO Player 9 endpoint. Just does jwt signing
  * @author r.jansen
+ * @since 7.8
  */
 @XmlRootElement
 @Data
