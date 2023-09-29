@@ -21,8 +21,10 @@
       <artifactId>vpro-shared-test</artifactId>
     </dependency>
     <dependency>
+      <!-- deprecated -->
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-client-resteasy</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId>
