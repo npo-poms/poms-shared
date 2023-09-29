@@ -9,13 +9,13 @@ class TokenFactoryTest {
 
     TokenFactory npoPlayer9 = new TokenFactory(
         "vpro",
-        "3777217A25432A462D4A614E635266556A586E3272357538782F413F4428472B")
+        "123123123123123123123123123123123123123123123")
         .withClock(TestClock.twentyTwenty());
 
     @Test
     public void test() {
         String token = npoPlayer9.token("mid_123");
-        assertThat(token).isEqualTo("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWRfMTIzIiwiaWF0IjoxNTgyMjI2NDAwLCJpc3MiOiJ2cHJvIn0.LeCe3rFb_tgYxndgEl_jSyUfT7okfNsYQ83FzylcSh0");
+        assertThat(token).isEqualTo("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWRfMTIzIiwiaWF0IjoxNTgyMjI2NDAwLCJpc3MiOiJ2cHJvIn0.8tPo7XlEWpvtChBZgx8WOalprRHqypSoQsCyY2baB1w");
     }
 
 }
