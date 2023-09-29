@@ -7,17 +7,20 @@ See also link:https://docs.npoplayer.nl[docs]
 The needed backend for NPO Player 9 just involves calculating a JWT-token.
 [source, java]
 ----
+import nl.vpro.npoplayer9.*;
+import org.meeuw.math.time.TestClock;
+...
+
  TokenFactory npoPlayer9 = new TokenFactory(
-        "vpro",
-        "123123123123123123123123123123123123123123123")
-        .withClock(TestClock.twentyTwenty());
+     "vpro",
+     "123123123123123123123123123123123123123123123"
+).withClock(TestClock.twentyTwenty());
 
 String token = npoPlayer9.token("mid_123");
 assertThat(token).isEqualTo("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWRfMTIzIiwiaWF0IjoxNTgyMjI2NDAwLCJpc3MiOiJ2cHJvIn0.8tPo7XlEWpvtChBZgx8WOalprRHqypSoQsCyY2baB1w");
-    }
 ----
 
-There is also also `NpoPlayer` class that wraps such a factory with some extra information that needs configuration.
+There is also a link:src/main/java/nl/vpro/npoplayer9/NpoPlayer.java[`NpoPlayer`] class that wraps such a factory with some extra information that needs configuration.
 
 A link:src/main/resources/META-INF/vpro/poms-npoplayer9.xml[Spring configuration file] is provided to arrange this as injectable spring beans.
 
