@@ -2,6 +2,10 @@ package nl.vpro.npoplayer9;
 
 import lombok.Getter;
 
+/**
+ * Wraps a {@link TokenFactory} with some additional configuration.
+ *
+ */
 @Getter
 public class NpoPlayer {
 
@@ -27,6 +31,10 @@ public class NpoPlayer {
             .endpoint(endpoint)
             .build();
     }
+
+    /**
+     * It's possible that this player is not available, because the configuration is not complete.
+     */
 
     public boolean isAvailable() {
         return endpoint != null;

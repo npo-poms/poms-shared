@@ -19,6 +19,8 @@ assertThat(token).isEqualTo("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaWRfMTIzIiwiaWF0Ij
 
 There is also also `NpoPlayer` class that wraps such a factory with some extra information that needs configuration.
 
+A link:src/main/resources/META-INF/vpro/poms-npoplayer9.xml[Spring configuration file] is provided to arrange this as injectable spring beans.
+
 === Previous versions
 
 Support for previous versions is deprecated.

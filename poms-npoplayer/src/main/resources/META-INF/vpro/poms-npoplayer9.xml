@@ -22,6 +22,12 @@
     <constructor-arg name="endpoint" value="${npoplayerapi.endpoint}"/>
   </bean>
 
+  <!--
+   A second player can be configured, with different keys and endpoint.
+   This player on default is not available.
+   This can the player on a different OTAP environment. Test/acceptance environments of poms can show
+   both the player on acc.npoplayer.nl and prod.npoplayer.nl (see media.properties)
+  -->
   <bean class="nl.vpro.npoplayer9.NpoPlayer" id="npoPlayer2">
     <constructor-arg name="tokenFactory">
       <bean class="nl.vpro.npoplayer9.TokenFactory">
