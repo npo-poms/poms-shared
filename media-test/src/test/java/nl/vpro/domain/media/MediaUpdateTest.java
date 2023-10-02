@@ -263,9 +263,15 @@ public class MediaUpdateTest {
     @Test
     public void testWithWarning() {
         ProgramUpdate update = ProgramUpdate.create(
-            MediaBuilder.program().build()
+            MediaBuilder.program()
+                .subTitle("bla")
+                .build()
         );
         for (ConstraintViolation<?> v : update.warningViolations()) {
+            log.info("{}: {}", v.getPropertyPath(), v.getMessage());
+        }
+
+        for (ConstraintViolation<?> v : update.violations()) {
             log.info("{}: {}", v.getPropertyPath(), v.getMessage());
         }
     }

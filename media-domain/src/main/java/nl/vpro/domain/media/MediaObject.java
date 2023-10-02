@@ -249,6 +249,15 @@ import static nl.vpro.domain.media.MediaObject.*;
 @HasGenre(
     groups = WarningValidatorGroup.class
 )
+@HasTitle(
+    groups = PomsValidatorGroup.class,
+    message = "{nl.vpro.constraints.hassubormaintitle}",
+    type = {TextualType.SUB, TextualType.MAIN}
+)
+@HasTitle(
+    groups = WarningValidatorGroup.class,
+    type = {TextualType.MAIN}
+)
 @AVTypeValidation
 public abstract class MediaObject extends PublishableObject<MediaObject>
     implements Media<MediaObject> {

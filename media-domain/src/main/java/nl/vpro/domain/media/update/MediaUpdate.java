@@ -145,8 +145,13 @@ import nl.vpro.xml.bind.*;
     "images"}
 )
 @HasTitle(
-    groups = WeakWarningValidatorGroup.class,
+    groups = PomsValidatorGroup.class,
+    message = "{nl.vpro.constraints.hassubormaintitle}",
     type = {TextualType.SUB, TextualType.MAIN}
+)
+@HasTitle(
+    groups = WarningValidatorGroup.class,
+    type = {TextualType.MAIN}
 )
 @HasGenre(
     groups = WarningValidatorGroup.class
