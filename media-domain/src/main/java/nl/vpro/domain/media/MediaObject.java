@@ -262,7 +262,7 @@ import static nl.vpro.domain.media.MediaObject.*;
 public abstract class MediaObject extends PublishableObject<MediaObject>
     implements Media<MediaObject> {
     // permits Program, Group, Segment, MediaObject$HibernateBasicProxy {
-    //hibernate will make a HibernateBasicProxy, which is not permitted (nor avaiable)
+    //hibernate will make a HibernateBasicProxy, which is not permitted (nor available)
 
 
     public static final String DELETED_FILTER = "deletedFilter";
@@ -722,7 +722,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public void setMid(String mid) {
-        if (mid == null || mid.length() == 0) {
+        if (mid == null || mid.isEmpty()) {
             this.mid = null;
             return;
         }
@@ -1666,7 +1666,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public boolean isMember() {
-        return memberOf != null && memberOf.size() > 0;
+        return memberOf != null && !memberOf.isEmpty();
     }
 
     public boolean isMemberOf(MediaObject owner) {
@@ -1804,6 +1804,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     @XmlElement()
+    @Nullable
     public AgeRating getAgeRating() {
         return ageRating;
     }
