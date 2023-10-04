@@ -56,7 +56,7 @@
   <releaseYear>2004</releaseYear>
   <duration>P0DT2H0M0.000S</duration>
   <credits>
-    <person gtaaUri="http://gtaa/1234" role="DIRECTOR"/>
+    <person gtaaUri="http://data.beeldengeluid.nl/gtaa/1234" role="DIRECTOR"/>
     <person role="PRESENTER">
       <givenName>Hans</givenName>
       <familyName>Goedkoop</familyName>
@@ -229,7 +229,7 @@
       <releaseYear>2004</releaseYear>
       <duration>P0DT0H1M40.000S</duration>
       <credits>
-        <person gtaaUri="http://gtaa/1234" role="DIRECTOR"/>
+        <person gtaaUri="http://data.beeldengeluid.nl/gtaa/1234" role="DIRECTOR"/>
         <person role="PRESENTER">
           <givenName>Hans</givenName>
           <familyName>Goedkoop</familyName>

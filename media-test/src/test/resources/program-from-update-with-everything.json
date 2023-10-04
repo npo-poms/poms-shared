@@ -177,7 +177,7 @@
   "credits" : [ {
     "person" : {
       "role" : "DIRECTOR",
-      "gtaaUri" : "http://gtaa/1234"
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/1234"
     }
   }, {
     "person" : {
@@ -427,7 +427,7 @@
     "credits" : [ {
       "person" : {
         "role" : "DIRECTOR",
-        "gtaaUri" : "http://gtaa/1234"
+        "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/1234"
       }
     }, {
       "person" : {

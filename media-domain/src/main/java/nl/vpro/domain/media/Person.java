@@ -225,11 +225,9 @@ public class Person extends Credits implements PersonInterface {
         if(super.equals(o)) {
             return true;
         }
-        if(!(o instanceof Person)) {
+        if(!(o instanceof Person person)) {
             return false;
         }
-
-        Person person = (Person)o;
 
         if (! Objects.equals(role, person.role)) {
             return false;

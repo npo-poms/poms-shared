@@ -466,7 +466,7 @@ public interface MediaTestDataBuilder<
                 .givenName("Bregtje")
                 .familyName("van der Haak")
                 .role(RoleType.DIRECTOR)
-                .gtaaUri("http://gtaa/1234")
+                .gtaaUri("http://data.beeldengeluid.nl/gtaa/1234")
                 .build(),
             Person.builder()
                 .givenName("Hans")
