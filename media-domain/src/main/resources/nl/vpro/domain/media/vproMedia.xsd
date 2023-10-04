@@ -437,6 +437,7 @@
       <xs:enumeration value="AUDIO"/>
       <xs:enumeration value="VIDEO"/>
       <xs:enumeration value="MIXED"/>
+      <xs:enumeration value="UNKNOWN"/>
     </xs:restriction>
   </xs:simpleType>
 

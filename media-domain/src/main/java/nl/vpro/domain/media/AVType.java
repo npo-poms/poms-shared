@@ -30,6 +30,20 @@ public enum AVType implements Displayable, Predicate<Object> {
             return "Video";
         }
     },
+
+    /**
+     * @since 7.8
+     */
+    UNKNOWN(ANY_MEDIA) {
+        @Override
+        public String getDisplayName() {
+            return "Onbekend";
+        }
+        @Override
+        public boolean display() {
+            return false;
+        }
+    },
     /**
      * For groups this means that it contains both audio and video.
      */

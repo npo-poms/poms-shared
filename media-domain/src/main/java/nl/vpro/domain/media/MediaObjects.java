@@ -61,7 +61,7 @@ public class MediaObjects {
 
 
     /**
-     * A predicate on {@link Class} to determine if it represents some poms media boject. That is {@link MediaObject} or {@link MediaUpdate}
+     * A predicate on {@link Class} to determine if it represents some poms media object. That is {@link MediaObject} or {@link MediaUpdate}
      * @since 7.7
      */
     public static final Predicate<Class<?>> ANY_MEDIA = c ->

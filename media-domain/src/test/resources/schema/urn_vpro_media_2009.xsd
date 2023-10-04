@@ -1110,6 +1110,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="AUDIO"/>
       <xs:enumeration value="VIDEO"/>
+      <xs:enumeration value="UNKNOWN"/>
       <xs:enumeration value="MIXED"/>
     </xs:restriction>
   </xs:simpleType>

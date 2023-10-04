@@ -181,6 +181,11 @@ public class SchemaTest extends AbstractSchemaTest {
     }
 
     @Test
+    public void testAVType() {
+        testMediaEnum("avTypeEnum", AVType.class);
+    }
+
+    @Test
     public void testLicenseEnum() {
         testEnum("/nl/vpro/domain/media/vproShared.xsd", "licenseEnum",
             () -> Arrays.stream(License.values())
