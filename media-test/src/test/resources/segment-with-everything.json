@@ -466,7 +466,7 @@
     "givenName" : "Bregtje",
     "familyName" : "van der Haak",
     "role" : "DIRECTOR",
-    "gtaaUri" : "http://gtaa/1234",
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/1234",
     "name" : "van der Haak, Bregtje"
   }, {
     "objectType" : "person",
