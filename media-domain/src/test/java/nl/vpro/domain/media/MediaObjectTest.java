@@ -603,7 +603,7 @@ public class MediaObjectTest {
 
         Set<ConstraintViolation<Program>> constraintViolations = validate(p, false);
         assertThat(constraintViolations).hasSize(1);
-        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("moet geldige url bevatten (':' dat niet)");
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("moet geldige url bevatten (':' is dat niet)");
         log.info("{}", constraintViolations);
     }
 
