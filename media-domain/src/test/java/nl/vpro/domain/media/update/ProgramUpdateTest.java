@@ -167,7 +167,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testIsValidForTitles2() throws NoSuchFieldException, IllegalAccessException {
+    public void testInvalidBecauseTypeofTitleIsNull() throws NoSuchFieldException, IllegalAccessException {
         ProgramUpdate update = programUpdate();
         update.setBroadcasters("VPRO");
         update.setType(ProgramType.CLIP);
@@ -180,7 +180,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         Set<? extends ConstraintViolation<MediaUpdate<? extends Program>>> errors = update.violations();
         log.info(ConstraintViolations.humanReadable(errors));
-        assertThat(errors).hasSize(1);
+        assertThat(errors).hasSize(2); // there is no sub or main title, and the type of the existing title is null.
     }
 
     @SuppressWarnings("deprecation")

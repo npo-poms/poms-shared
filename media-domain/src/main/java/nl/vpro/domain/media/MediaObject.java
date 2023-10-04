@@ -342,7 +342,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
     // hibernates on merge first merges an object without titles.
     @Valid
-    @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}", groups=PomsValidatorGroup.class)
+    @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}", groups=RedundantValidatorGroup.class)
     protected Set<@NotNull Title> titles;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade=ALL)

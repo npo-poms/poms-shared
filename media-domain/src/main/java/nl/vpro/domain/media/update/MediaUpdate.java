@@ -994,7 +994,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     @Valid
     @NotNull
     @NonNull
-    @Size(min = 1)
+    @Size(min = 1, groups = RedundantValidatorGroup.class)
     public SortedSet<TitleUpdate> getTitles() {
         if (titles == null) {
             titles = new TreeSet<>();
