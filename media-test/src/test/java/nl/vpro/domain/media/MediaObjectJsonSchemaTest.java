@@ -47,6 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Roelof Jan Koekoek
  * @since 1.7
  */
+@SuppressWarnings("DataFlowIssue")
 @Slf4j
 public class MediaObjectJsonSchemaTest {
 
@@ -966,7 +967,7 @@ public class MediaObjectJsonSchemaTest {
                 "givenName" : "Bregtje",
                 "familyName" : "van der Haak",
                 "role" : "DIRECTOR",
-                "gtaaUri" : "http://gtaa/1234"
+                "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/1234"
               }, {
                 "objectType" : "person",
                 "givenName" : "Hans",
