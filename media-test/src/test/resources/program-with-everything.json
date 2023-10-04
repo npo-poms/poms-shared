@@ -928,7 +928,7 @@
       "givenName" : "Bregtje",
       "familyName" : "van der Haak",
       "role" : "DIRECTOR",
-      "gtaaUri" : "http://gtaa/1234"
+      "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/1234"
     }, {
       "objectType" : "person",
       "givenName" : "Hans",
@@ -964,7 +964,7 @@
     "givenName" : "Bregtje",
     "familyName" : "van der Haak",
     "role" : "DIRECTOR",
-    "gtaaUri" : "http://gtaa/1234"
+    "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/1234"
   }, {
     "objectType" : "person",
     "givenName" : "Hans",
