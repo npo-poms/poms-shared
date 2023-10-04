@@ -553,8 +553,8 @@
 
   <xs:complexType name="personType">
     <xs:sequence>
-      <xs:element type="xs:string" name="givenName"/>
-      <xs:element type="xs:string" name="familyName"/>
+      <xs:element type="xs:string" name="givenName" />
+      <xs:element type="xs:string" name="familyName" />
     </xs:sequence>
     <xs:attribute type="roleType" name="role" use="required"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>

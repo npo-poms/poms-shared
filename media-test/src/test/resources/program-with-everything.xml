@@ -186,7 +186,7 @@
 
   <credits>
 
-    <person gtaaUri="http://gtaa/1234" role="DIRECTOR">
+    <person gtaaUri="http://data.beeldengeluid.nl/gtaa/1234" role="DIRECTOR">
 
       <givenName>Bregtje</givenName>
 
@@ -734,7 +734,7 @@
 
       <credits>
 
-        <person gtaaUri="http://gtaa/1234" role="DIRECTOR">
+        <person gtaaUri="http://data.beeldengeluid.nl/gtaa/1234" role="DIRECTOR">
 
           <givenName>Bregtje</givenName>
 
