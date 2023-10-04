@@ -1407,7 +1407,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
     @Override
     public String toString() {
-        return (isDeleted == Boolean.TRUE ? "DELETED:" : "") + getClass().getSimpleName() + "[" + getType() + ":" + mid + ":" + getMainTitle() + "]";
+        return (isDeleted == Boolean.TRUE ? "DELETED:" : "") + getClass().getSimpleName() + "[" + getType() + ":" + (mid == null ? "<no mid>" : mid) + ":" + Optional.ofNullable(getMainTitle()).orElse("<no main title>") + "]";
     }
 
     void afterUnmarshal(Unmarshaller u, Object parent) {

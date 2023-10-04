@@ -183,6 +183,20 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(errors).hasSize(2); // there is no sub or main title, and the type of the existing title is null.
     }
 
+    @Test
+    public void testInvalidBecauseNoSubOrMain() throws NoSuchFieldException, IllegalAccessException {
+        ProgramUpdate update = programUpdate();
+        update.setBroadcasters("VPRO");
+        update.setType(ProgramType.CLIP);
+        update.setAVType(AVType.VIDEO);
+        update.addTitle("bla", TextualType.SHORT);
+
+
+        Set<? extends ConstraintViolation<MediaUpdate<? extends Program>>> errors = update.violations();
+        log.info(ConstraintViolations.humanReadable(errors));
+        assertThat(errors).hasSize(1);
+    }
+
     @SuppressWarnings("deprecation")
     @Test
     public void testFetchForOwner() {
