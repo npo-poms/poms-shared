@@ -250,7 +250,7 @@
 
       <media:credits>
 
-        <media:person gtaaUri="http://gtaa/1234" role="DIRECTOR">
+        <media:person gtaaUri="http://data.beeldengeluid.nl/gtaa/1234" role="DIRECTOR">
 
           <media:givenName>Bregtje</media:givenName>
 
@@ -798,7 +798,7 @@
 
           <media:credits>
 
-            <media:person gtaaUri="http://gtaa/1234" role="DIRECTOR">
+            <media:person gtaaUri="http://data.beeldengeluid.nl/gtaa/1234" role="DIRECTOR">
 
               <media:givenName>Bregtje</media:givenName>
 
