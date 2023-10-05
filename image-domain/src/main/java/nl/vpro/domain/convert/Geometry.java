@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.convert;
 
+import lombok.Getter;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -21,6 +23,7 @@ public class Geometry {
 
     private Dimension dimension;
 
+    @Getter
     private Set<Modifier> modifier;
 
     private Geometry() {
@@ -124,10 +127,6 @@ public class Geometry {
         }
 
         return sb.toString();
-    }
-
-    public Set<Modifier> getModifier() {
-        return modifier;
     }
 
     public String offset() {

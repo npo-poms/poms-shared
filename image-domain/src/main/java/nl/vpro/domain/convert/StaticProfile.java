@@ -27,8 +27,7 @@ public interface StaticProfile extends ParameterizedProfile<StaticProfile.Static
 
     @Override
     default Dimension convertedDimension(Object s, Dimension in) {
-        if (s instanceof StaticConversion) {
-            StaticConversion staticConversion = (StaticConversion) s;
+        if (s instanceof StaticConversion staticConversion) {
             return staticConversion.dimensionConversion.apply(in);
         }
         return in;

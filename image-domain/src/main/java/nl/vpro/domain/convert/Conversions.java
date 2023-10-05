@@ -33,9 +33,9 @@ public class Conversions {
         try (InputStream resourceAsStream = Conversions.class.getResourceAsStream("/image-conversions.properties")) {
             Properties properties = new OrderedProperties();
             properties.load(resourceAsStream);
-            properties.entrySet().forEach((e) -> {
-                String k = e.getKey().toString();
-                String v = e.getValue().toString();
+            properties.forEach((key, value) -> {
+                String k = key.toString();
+                String v = value.toString();
                 try {
                     mapping.put(
                         new ImageSource.Key(k),
