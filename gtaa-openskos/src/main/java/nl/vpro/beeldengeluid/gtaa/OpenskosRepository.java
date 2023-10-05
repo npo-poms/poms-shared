@@ -288,6 +288,7 @@ public class OpenskosRepository implements GTAARepository {
                     // See MSE-3366
                     log.warn("Retrying label on 409 Conflict: \"{}\"", prefLabel + postFix);
                     response = postRDF(prefLabel + postFix, notes, creator, scheme);
+                    meterRegistry.counter("gtaa.submit", "retry", "true", "status", response.getStatusCode().toString()).increment();
                     break;
                 } catch (GTAAConflict ex2) {
                     /* The version with "." already exists too */
@@ -483,7 +484,9 @@ public class OpenskosRepository implements GTAARepository {
 
         Post_RDF.set(new RDFPost(prefLabel, rdf));
         // Beware parameter ordering is relevant
-        String encodedKey = Stream.of(gtaaKey.split(":", 2)).map(this::encode).collect(Collectors.joining(":"));
+        String encodedKey = Stream.of(gtaaKey.split(":", 2))
+            .map(this::encode)
+            .collect(Collectors.joining(":"));
         //String encodedKey = encode(gtaaKey);
 
         return template.postForEntity(
