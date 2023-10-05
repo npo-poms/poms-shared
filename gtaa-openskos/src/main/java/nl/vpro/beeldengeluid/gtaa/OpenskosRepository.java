@@ -118,8 +118,7 @@ public class OpenskosRepository implements GTAARepository {
     @Setter
     private String oai = "oai-pmh";
 
-
-    private MeterRegistry meterRegistry;
+    private final MeterRegistry meterRegistry;
 
     @Inject
     public OpenskosRepository(
