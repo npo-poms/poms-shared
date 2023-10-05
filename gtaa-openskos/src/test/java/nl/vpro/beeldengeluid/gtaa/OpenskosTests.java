@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 public class OpenskosTests {
     static OpenskosRepository create(String uri) {
-        OpenskosRepository repo = new OpenskosRepository(uri + "/", "");
+        OpenskosRepository repo = new OpenskosRepository(uri + "/", "", null);
         repo.init();
         return repo;
     }

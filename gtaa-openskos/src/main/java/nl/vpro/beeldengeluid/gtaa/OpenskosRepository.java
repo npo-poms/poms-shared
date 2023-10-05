@@ -4,6 +4,8 @@
  */
 package nl.vpro.beeldengeluid.gtaa;
 
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.logging.LoggingMeterRegistry;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.ws.rs.core.Context;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXB;
@@ -41,7 +44,8 @@ import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.XmlMappingException;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.client.*;
+import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import nl.vpro.domain.gtaa.*;
@@ -56,7 +60,7 @@ import nl.vpro.w3.rdf.RDF;
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
 /**
- * See http://editor.openskos.org/apidoc/index.html ?
+ * See <a href="http://editor.openskos.org/apidoc/index.html">okpenskos</a> ?
  *
  * @author Roelof Jan Koekoek
  * @since 3.7
@@ -114,12 +118,18 @@ public class OpenskosRepository implements GTAARepository {
     @Setter
     private String oai = "oai-pmh";
 
+
+    private MeterRegistry meterRegistry;
+
+    @Inject
     public OpenskosRepository(
         @Value("${gtaa.baseUrl}")
         @NonNull String baseUrl,
         @Value("${gtaa.key}")
-        @NonNull String key) {
-        this(baseUrl, key, null, null, null, null, 1);
+        @NonNull String key,
+        @Nullable MeterRegistry meterRegistry) {
+        this(baseUrl, key, null, null, null, null, 1,
+            meterRegistry);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -130,8 +140,8 @@ public class OpenskosRepository implements GTAARepository {
         @Nullable String personsSpec,
         @Nullable String geoLocationsSpec,
         @Nullable String tenant,
-        int retries
-        ) {
+        int retries,
+        @Nullable MeterRegistry meterRegistry) {
         this.gtaaUrl = baseUrl;
         this.gtaaKey = key;
         this.template = createTemplateIfNull(template);
@@ -139,10 +149,12 @@ public class OpenskosRepository implements GTAARepository {
         this.personsSpec = StringUtils.isEmpty(personsSpec) ? Scheme.person.getSpec() : personsSpec;
         this.geoLocationsSpec = StringUtils.isEmpty(geoLocationsSpec) ? Scheme.geographicname.getSpec() : geoLocationsSpec;
         this.retries = retries;
+        this.meterRegistry = meterRegistry == null ? new LoggingMeterRegistry(log::info) : meterRegistry;
         if (instance != null) {
             log.warn("There is already an openskos repository");
         }
         instance = this;
+
     }
 
 
@@ -253,7 +265,8 @@ public class OpenskosRepository implements GTAARepository {
             creator,
             thesaurusObject.getObjectType()
         );
-        return (T) GTAAConcepts.toConcept(description).orElseThrow(() -> new IllegalStateException("Could not convert " + description));
+        return (T) GTAAConcepts.toConcept(description)
+            .orElseThrow(() -> new IllegalStateException("Could not convert " + description));
 
     }
 
@@ -265,7 +278,9 @@ public class OpenskosRepository implements GTAARepository {
         RuntimeException rte = null;
         try {
             response = postRDF(prefLabel, notes, creator, scheme);
+            meterRegistry.counter("gtaa.submit", "status", response.getStatusCode().toString()).increment();
         } catch (GTAAConflict ex) {
+            meterRegistry.counter("gtaa.submit", "status", "CONFLICT").increment();
             String postFix = ".";
             while (postFix.length() <= retries) {
                 try {
@@ -345,7 +360,7 @@ public class OpenskosRepository implements GTAARepository {
     private CountedIterator<Record> getUpdates(@NonNull Instant from, @NonNull Instant until, @Nullable String spec) {
 
         final AtomicLong totalSize = new AtomicLong(-1L);
-        Supplier<Iterator<Record>> getter = new Supplier<Iterator<Record>>() {
+        Supplier<Iterator<Record>> getter = new Supplier<>() {
             @Nullable
             ListRecord listRecord = null;
 
@@ -377,7 +392,7 @@ public class OpenskosRepository implements GTAARepository {
 
                 if (totalSize.get() < 0) {
                     if (listRecord.getResumptionToken() != null
-                            && listRecord.getResumptionToken().getCompleteListSize() != null) {
+                        && listRecord.getResumptionToken().getCompleteListSize() != null) {
                         totalSize.set(listRecord.getResumptionToken().getCompleteListSize());
                     } else {
                         totalSize.set(0L);
@@ -510,6 +525,8 @@ public class OpenskosRepository implements GTAARepository {
     protected <T> T getForPath(final String path, final Class<T> tClass) {
         String url = gtaaUrl + path;
         log.info("Calling gtaa {}", url);
+        meterRegistry.counter("gtaa.get", "path", path).increment();
+
         try {
             ResponseEntity<T> entity = template.getForEntity(url, tClass);
             return entity.getStatusCode().is2xxSuccessful() ? entity.getBody() : null;
@@ -555,22 +572,28 @@ public class OpenskosRepository implements GTAARepository {
         String url = gtaaUrl + "api/find-concepts?id=" + id;
         try {
             RDF rdf = template.getForObject(url, RDF.class);
+            meterRegistry.counter("gtaa.retrieve", "id", id).increment();
+
             List<Description> descriptions = descriptions(rdf);
             return descriptions.stream().findFirst();
         } catch (GTAAError e) {
-            switch(e.getStatusCode()) {
-                case 500:
-                    // It is odd that openskos issues an internal server error for what basically is a 404
-                    if(NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
-                        return Optional.empty();
+
+            meterRegistry.counter("gtaa.retrieve.error", "id", id, "status", String.valueOf(e.getStatusCode())).increment();
+
+            // It is odd that openskos issues an internal server error for what basically is a 404
+            return switch (e.getStatusCode()) {
+                case 500 -> {
+                    if (NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
+                        yield Optional.empty();
                     }
                     throw e;
-                case 404:
-                    return Optional.empty();
-                default:
+                }
+                case 404 -> Optional.empty();
+                default -> {
                     log.error("Unexpected error doing call to openskos for item id {}: {}: {}", id, url, e.getResponseBodyAsString(), e);
                     throw e;
-            }
+                }
+            };
         }
     }
 
@@ -579,9 +602,13 @@ public class OpenskosRepository implements GTAARepository {
         String url = gtaaUrl + "api/find-concepts?id=" + id;
         try {
             RDF rdf = template.getForObject(url, RDF.class);
+            meterRegistry.counter("gtaa.get", "id", id).increment();
+
             List<Description> descriptions = descriptions(rdf);
             return descriptions.stream().findFirst().flatMap(GTAAConcepts::toConcept);
         } catch (GTAAError clientError) {
+            meterRegistry.counter("gtaa.get.error", "id", id, "status", String.valueOf(clientError.getStatusCode())).increment();
+
             if (clientError.getStatusCode() == HttpStatus.NOT_FOUND.value()) {
                 return Optional.empty();
             }

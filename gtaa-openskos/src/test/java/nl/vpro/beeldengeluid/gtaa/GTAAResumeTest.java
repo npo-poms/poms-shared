@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GTAAResumeTest {
 
-    private OpenskosRepository gtaaRepository = new OpenskosRepository("", "") {
+    private OpenskosRepository gtaaRepository = new OpenskosRepository("", "", null) {
         @Override
         protected <T> T getForPath(final String path, final Class<T> tClass) {
             if (path.contains("resumptionToken")) {
