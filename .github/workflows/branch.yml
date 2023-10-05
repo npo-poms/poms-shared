@@ -20,7 +20,7 @@ jobs:
           token: '${{ secrets.GITHUB_TOKEN  }}'
       - name: Release branch with Maven
         # We are in a kind of hybrid situation
-        # For the trunk we use 'CI friendly' versioning (using 'revision' and 'changelist' properties).
+        # For main we use 'CI friendly' versioning (using 'revision' and 'changelist' properties).
         # For release branches this is overridden by the release:branch plugin
         run: |
           VERSION=`mvn -B help:evaluate -Dexpression=project.version -q -DforceStdout`
