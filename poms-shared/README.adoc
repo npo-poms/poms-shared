@@ -8,6 +8,7 @@ Related to commons http X-headers, and configuration for OTAP in NPO specific de
 
 == Some resources
 
+=== logos, favicons
 The jar artifact of this module contains the NPO logo. As an SVG and as favicon. Can be served via servlet 3 (because they are in `META-INF/resources`). Also wrapped in simple tags
 
 [source, html]
@@ -26,5 +27,9 @@ The jar artifact of this module contains the NPO logo. As an SVG and as favicon.
 ...
 <npo:logo />
 </html>
-
 ----
+
+=== urls
+
+There is also a link:src/main/resources/poms-urls.properties[poms-urls.properties] Which can be used as a (spring) property configuration, to have acces to relevant base urls.
+
