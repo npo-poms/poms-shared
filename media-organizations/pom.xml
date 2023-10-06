@@ -29,9 +29,14 @@
       <artifactId>jakarta.annotation-api</artifactId>
       <optional>true</optional>
     </dependency>
-    <dependency>
+   <!-- <dependency>
       <groupId>org.wiremock</groupId>
       <artifactId>wiremock-standalone</artifactId>
+    </dependency>-->
+    <dependency>
+      <groupId>com.github.tomakehurst</groupId>
+      <artifactId>wiremock-jre8-standalone</artifactId>
     </dependency>
+
   </dependencies>
 </project>
