@@ -26,7 +26,7 @@ public interface SourcingService {
         long fileSize,
         InputStream inputStream,
         @Nullable String errors,
-        Consumer<Phase> phase) throws IOException, InterruptedException;
+        Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException;
 
     default UploadResponse upload(
         SimpleLogger logger,
@@ -35,7 +35,7 @@ public interface SourcingService {
         long fileSize,
         InputStream inputStream,
         @Nullable String errors
-    ) throws IOException, InterruptedException {
+    ) throws IOException, InterruptedException, SourcingServiceException {
         return upload(logger, mid, restrictions, fileSize, inputStream, errors, (p) -> {});
     }
 

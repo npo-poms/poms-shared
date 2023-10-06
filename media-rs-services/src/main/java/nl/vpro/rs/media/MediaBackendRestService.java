@@ -538,7 +538,7 @@ public interface MediaBackendRestService {
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
         @QueryParam(ERRORS) String errors,
-        @Context HttpServletResponse response) throws IOException, InterruptedException;
+        @Context HttpServletResponse response) throws IOException, InterruptedException, SourcingServiceException;
 
 
     @POST
@@ -593,7 +593,7 @@ public interface MediaBackendRestService {
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
         @QueryParam(ERRORS) String errors,
-        @Context HttpServletResponse response) throws IOException, InterruptedException;
+        @Context HttpServletResponse response) throws IOException, InterruptedException, SourcingServiceException, nl.vpro.sourcingservice.SourcingServiceException;
 
     @GET
     @Path("{entity:(media|program|segment)}/{mid:.*}/transcodingstatus")

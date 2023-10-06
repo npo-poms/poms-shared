@@ -26,6 +26,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.update.UploadResponse;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileSizeFormatter;
 import nl.vpro.util.InputStreamChunk;
@@ -36,10 +37,26 @@ import nl.vpro.util.InputStreamChunk;
  * sourcing services (
  * '<a href="https://test.sourcing-audio.cdn.npoaudio.nl/api/documentation">audio</a>'
  * '<a href="https://test.sourcing-video.cdn.npoaudio.nl/api/documentation">video</a>').
+ *  <p>
+ * <a href='https://sourcing-service.acc.metadata.bijnpo.nl/docs#endpoints-POSTapi-ingest--assetIngest--multipart-assetonly'>version 2</a>
  *
  */
 @Log4j2
 public abstract class AbstractSourcingServiceImpl implements SourcingService {
+
+    /***
+     * Field in the body parameter json.
+     * Currently unused, I don't know what kind of checksum is expected.
+     */
+    private static final String CHECKSUM     = "checksum";
+
+    /***
+     * Field in the body parameter json.
+     */
+    private static final String FILE_SIZE    = "file_size";
+    private static final String FILE_CHUNK   = "file_chunk";
+    private static final String UPLOAD_PHASE = "upload_phase";
+
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
     static {
@@ -50,8 +67,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         .newBuilder()
         .version(HttpClient.Version.HTTP_1_1) // GOAWAY trouble?
         .build();
-    private String baseUrl;
 
+    private String baseUrl;
 
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
@@ -91,7 +108,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
        final long fileSize,
        InputStream inputStream,
        String errors,
-       Consumer<Phase> phase) throws IOException, InterruptedException {
+       Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException {
 
        final AtomicLong uploaded = new AtomicLong(0);
        try (inputStream) {
@@ -100,7 +117,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            phase.accept(Phase.START);
            uploadStart(logger, mid, fileSize, errors, restrictions);
            phase.accept(Phase.UPLOAD);
-           AtomicInteger partNumber = new AtomicInteger(1);
+           final AtomicInteger partNumber = new AtomicInteger(1);
            while (uploaded.get() < fileSize) {
                uploadChunk(logger, mid, inputStream, uploaded, restrictions, fileSize, partNumber);
            }
@@ -123,7 +140,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (statusResponse.statusCode() > 299) {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
-        return Optional.of(MAPPER.readValue(statusResponse.body(), StatusResponse.class));
+        return Optional.of(
+            MAPPER.readValue(statusResponse.body(), StatusResponse.class)
+        );
     }
 
     @Override
@@ -197,14 +216,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         final String email = Optional.ofNullable(errors).orElse(defaultEmail);
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-            .add("upload_phase", "start");
+            .add(UPLOAD_PHASE, "start");
         if (email != null) {
             body.add("email", email);
         }
 
         addRegion(logger, body, restrictions);
 
-        body.add("file_size", String.valueOf(fileSize));
+        body.add(FILE_SIZE, String.valueOf(fileSize));
         HttpRequest multipart = multipart(mid, body);
         HttpResponse<String> start = client.send(multipart, HttpResponse.BodyHandlers.ofString());
         meter("multipart", start);
@@ -217,14 +236,18 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (StringUtils.isNotBlank(callBackUrl)) {
             callBackUrl = ", %s".formatted(callBackUrl).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@");
         }
-        logger.info("start: {} ({}) filesize: {},  response: {}, email={}{}",
-            node.get("status").textValue(),
-            start.statusCode(),
-            FileSizeFormatter.DEFAULT.format(fileSize),
-            node.get("response").textValue(),
-            email,
-            (callBackUrl== null ? "" : callBackUrl)
-        );
+        boolean  success = start.statusCode() >= 200 && start.statusCode() < 300 ;
+        logger.log(success ? Level.INFO : Level.ERROR, "start: {} ({}) filesize: {},  response: {}, email={}{}",
+                node.get("status").textValue(),
+                start.statusCode(),
+                FileSizeFormatter.DEFAULT.format(fileSize),
+                node.get("response").textValue(),
+                email,
+                (callBackUrl == null ? "" : callBackUrl)
+            );
+        if (! success){
+            throw new RuntimeException();
+        }
     }
 
     private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
@@ -245,12 +268,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final AtomicLong uploaded,
         final Restrictions restrictions,
         final long total,
-        final AtomicInteger partNumber) throws IOException, InterruptedException {
+        final AtomicInteger partNumber) throws IOException, InterruptedException, SourcingServiceException {
         try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-                .add("upload_phase", "transfer")
+                .add(UPLOAD_PHASE, "transfer")
                 .addStream(
-                    "file_chunk",
+                    FILE_CHUNK,
                     "part" + (partNumber.getAndIncrement()), () -> chunkStream);
 
             addRegion(logger, body, restrictions);
@@ -259,21 +282,27 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 transferRequest, HttpResponse.BodyHandlers.ofString());
             meter("transfer", transfer);
 
-            long l = uploaded.addAndGet(chunkStream.getCount());
-            JsonNode node = MAPPER.readTree(transfer.body());
-            logger.info("{} transfer: {} ({}) {}/{}",
+            long currentCount = uploaded.addAndGet(chunkStream.getCount());
+            final JsonNode node = MAPPER.readTree(transfer.body());
+            final boolean  success = transfer.statusCode() >= 200 && transfer.statusCode() < 300 ;
+
+            final String status = Optional.ofNullable(node.get("status")).map(JsonNode::textValue).orElse("<no status>");
+            logger.log(success ? Level.INFO : Level.ERROR, "{} transfer: {} ({}) {}/{}",
                 mid,
-                node.get("status").textValue(),
+                status,
                 transfer.statusCode(),
-                FileSizeFormatter.DEFAULT.format(l),
+                FileSizeFormatter.DEFAULT.format(currentCount),
                 FileSizeFormatter.DEFAULT.format(total)
             );
+            if (! success){
+                throw new SourcingServiceException(transfer.statusCode(), node);
+            }
         }
     }
 
     private UploadResponse uploadFinish(SimpleLogger logger, String mid, AtomicLong uploaded, Restrictions restrictions) throws IOException, InterruptedException {
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
-            .add("upload_phase", "finish");
+            .add(UPLOAD_PHASE, "finish");
 
         addRegion(logger, body, restrictions);
 
@@ -281,14 +310,17 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         meter("finish", finish);
 
         final JsonNode node = MAPPER.readTree(finish.body());
+        final String status = Optional.ofNullable(node.get("status")).map(JsonNode::textValue).orElse("<no status>");
+        final String response = Optional.ofNullable(node.get("response")).map(JsonNode::textValue).orElse("<no response>");
 
-        logger.info("{} finish: {} ({}) {}", mid, node.get("status").textValue(), finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded));
+        final boolean  success = finish.statusCode() >= 200 && finish.statusCode() < 300 ;
+        logger.log(success?  Level.INFO : Level.ERROR, "{} finish: {} ({}) {} {}", mid, status, finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded), MAPPER.writeValueAsString(node));
         JsonNode bodyNode = MAPPER.readTree(finish.body());
         return new UploadResponse(
             mid,
             finish.statusCode(),
-            bodyNode.get("status").textValue(),
-            bodyNode.get("response").textValue(),
+            status,
+            response,
             uploaded.get()
         );
     }

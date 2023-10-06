@@ -46,10 +46,10 @@ class AudioSourcingServiceImplTest {
         ((HttpBearerAuth) apiClient.getAuthentication("bearerAuth")).setBearerToken(PROPERTIES.getProperty("token"));
 */
         impl = new AudioSourcingServiceImpl(
-            PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://test.sourcing-audio.cdn.npoaudio.nl/"),
+            PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://sourcing-service.acc.metadata.bijnpo.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
-            10 * 1024 * 1024,
+            5 * 1000 * 1024,
             "m.meeuwissen.vpro@gmail.com",
             new LoggingMeterRegistry()
         );
@@ -59,7 +59,7 @@ class AudioSourcingServiceImplTest {
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void uploadAudio() throws IOException, InterruptedException {
         Instant start = Instant.now();
-        Path file = Paths.get(System.getProperty("user.home") , "samples", "sample-big.mp3");
+        Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
 
         Restrictions restrictions = new Restrictions();
         restrictions.setGeoRestriction(GeoRestriction.builder().region(Region.NL).build());
