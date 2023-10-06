@@ -1,7 +1,6 @@
 package nl.vpro.npoplayer9;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 import lombok.ToString;
@@ -55,10 +54,10 @@ public class TokenFactory {
     public String token(@NonNull String mid) {
         final SecretKey secretKey = Keys.hmacShaKeyFor(signingKey.getBytes());
         return Jwts.builder()
-            .setSubject(mid)
-            .setIssuedAt(Date.from(clock.instant().truncatedTo(ChronoUnit.SECONDS)))
-            .setIssuer(issuer)
-            .signWith(secretKey, SignatureAlgorithm.HS256)
+            .subject(mid)
+            .issuedAt(Date.from(clock.instant().truncatedTo(ChronoUnit.SECONDS)))
+            .issuer(issuer)
+            .signWith(secretKey, Jwts.SIG.HS256)
             .compact();
     }
 }

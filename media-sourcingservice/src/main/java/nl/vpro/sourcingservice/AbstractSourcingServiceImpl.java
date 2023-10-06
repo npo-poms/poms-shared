@@ -45,13 +45,13 @@ import nl.vpro.util.InputStreamChunk;
 public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     /***
-     * Field in the body parameter json.
+     * Field in the multipart body
      * Currently unused, I don't know what kind of checksum is expected.
      */
     private static final String CHECKSUM     = "checksum";
 
     /***
-     * Field in the body parameter json.
+     * Field in the multipart body
      */
     private static final String FILE_SIZE    = "file_size";
     private static final String FILE_CHUNK   = "file_chunk";

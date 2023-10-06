@@ -1,14 +1,13 @@
 package nl.vpro.nep.service.impl;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 
-import java.security.Key;
 import java.time.Duration;
 import java.time.Instant;
 
-import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.SecretKey;
 import javax.xml.bind.DatatypeConverter;
 
 import org.junit.jupiter.api.Test;
@@ -37,13 +36,14 @@ public class NEPSAMAuthenticatorTest {
         WireMockRuntimeInfo wireMockRuntimeInfo) {
 
         //The JWT signature algorithm we will be using to sign the token
-        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobar");
-        Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+
+        final SecretKey secretKey = Keys.hmacShaKeyFor(apiKeySecretBytes);
+
 
         String token = Jwts.builder()
-            .signWith(signingKey, signatureAlgorithm)
-            .setExpiration(DateUtils.toDate(Instant.now().plus(Duration.ofDays(14))))
+            .signWith(secretKey, Jwts.SIG.HS256)
+            .expiration(DateUtils.toDate(Instant.now().plus(Duration.ofDays(14))))
             .compact();
 
         WireMock.stubFor(post(urlEqualTo("/v2/token"))
