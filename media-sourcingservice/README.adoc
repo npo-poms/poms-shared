@@ -3,6 +3,9 @@
 
 See https://test.sourcing-audio.cdn.npoaudio.nl/api/documentation#/
 
+See https://sourcing-service.acc.metadata.bijnpo.nl/docs#endpoints-POSTapi-ingest--assetIngest--multipart-assetonly (version 2)
+
+
 And also https://publiekeomroep.atlassian.net/wiki/spaces/TTA/pages/2911207501/Sourcing+Service+documentatie
 
 
