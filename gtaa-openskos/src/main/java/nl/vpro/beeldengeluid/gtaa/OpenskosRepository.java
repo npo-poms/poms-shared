@@ -60,7 +60,7 @@ import nl.vpro.w3.rdf.RDF;
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
 /**
- * See <a href="http://editor.openskos.org/apidoc/index.html">okpenskos</a> ?
+ * See <a href="http://editor.openskos.org/apidoc/index.html">openskos</a> ?
  *
  * @author Roelof Jan Koekoek
  * @since 3.7
