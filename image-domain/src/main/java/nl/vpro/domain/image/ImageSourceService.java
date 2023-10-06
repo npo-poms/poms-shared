@@ -56,6 +56,7 @@ public class ImageSourceService {
         services.forEach(creator -> {
             try {
                 for (ImageSource.Key key : Conversions.MAPPING.keySet()) {
+                    log.debug("{}", key);
                     if (getTypeOf(creator).isAssignableFrom(sourceObject.getClass())) {
                         Optional<ImageSource> image = creator.createFor(sourceObject, metadata, key);
                         if (image.isPresent()) {

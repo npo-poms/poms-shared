@@ -52,8 +52,8 @@ public interface ImageMetadata extends Metadata {
         if (wrapped == null) {
             return null;
         } else {
-            if (wrapped instanceof  ImageMetadata) {
-                return (ImageMetadata) wrapped;
+            if (wrapped instanceof  ImageMetadata imageMetadata) {
+                return imageMetadata;
             } else {
                 return new Wrapper<>(wrapped);
             }
@@ -65,8 +65,8 @@ public interface ImageMetadata extends Metadata {
         if (wrapped == null) {
             return null;
         } else {
-            if (wrapped instanceof  ImageMetadata) {
-                return (ImageMetadata) wrapped;
+            if (wrapped instanceof  ImageMetadata imageMetadata) {
+                return imageMetadata;
             } else {
                 return new Wrapper<>(wrapped);
             }

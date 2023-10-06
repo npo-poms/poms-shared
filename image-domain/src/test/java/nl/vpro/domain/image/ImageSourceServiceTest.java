@@ -25,7 +25,6 @@ class ImageSourceServiceTest {
         DIMENSIONS.put(ImageSource.Type.MOBILE, Dimension.of(200, 200));
         DIMENSIONS.put(ImageSource.Type.LARGE, Dimension.of(300, 300));
 
-
         ImageUrlServiceHolder.setInstance(new AbsoluteImageUrlServiceImpl("https://images.poms.omroep.nl/"));
     }
 
@@ -192,8 +191,10 @@ class ImageSourceServiceTest {
         image.setCreationInstant(Instant.ofEpochMilli(1675851618171L));
         image.setId(123L);
 
-        log.info("{}", Jackson2Mapper.getInstance().writeValueAsString(image));
-        assertThatJson(Jackson2Mapper.getModelInstance(), ImageMetadata.of(image))
+        log.info("{}", Jackson2Mapper.getPrettyInstance().writeValueAsString(image));
+        ImageMetadata imageMetadata = ImageMetadata.of(image);
+        imageMetadata.getSourceSet().forEach((k, v) -> log.info("{} {}", k, v));
+        assertThatJson(Jackson2Mapper.getModelInstance(), imageMetadata)
             .withoutRemarshalling()
             .isSimilarTo("""
                 {
