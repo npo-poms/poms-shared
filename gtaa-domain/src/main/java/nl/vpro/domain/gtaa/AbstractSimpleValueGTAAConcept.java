@@ -19,7 +19,16 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
-public sealed class AbstractSimpleValueGTAAConcept extends AbstractGTAAConcept permits GTAAClassification, GTAAGenre, GTAAGeographicName, GTAAMaker, GTAAName, GTAATopic, GTAATopicBandG {
+public sealed class AbstractSimpleValueGTAAConcept extends AbstractGTAAConcept
+    permits
+    GTAAClassification,
+    GTAAGenre,
+    GTAAGeographicName,
+    GTAAMaker,
+    GTAAName,
+    GTAATopic,
+    GTAATopicBandG,
+    GTAAGenreFilmMuseum {
 
     @Serial
     private static final long serialVersionUID = 2951729766344371699L;
