@@ -5,6 +5,8 @@
 
   <xs:element name="genre" type="tns:genreType"/>
 
+  <xs:element name="genreFilmMuseum" type="tns:genreFilmMuseumType"/>
+
   <xs:element name="geographicName" type="tns:geographicNameType"/>
 
   <xs:element name="maker" type="tns:makerType"/>
@@ -119,6 +121,17 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
+  <xs:complexType name="genreFilmMuseumType" final="extension restriction">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute ref="tns:id"/>
+    <xs:attribute ref="tns:status"/>
+    <xs:attribute ref="tns:lastModified"/>
+  </xs:complexType>
+
   <xs:complexType name="newPersonType" final="extension restriction">
     <xs:sequence>
       <xs:element name="givenName" type="xs:string" minOccurs="0"/>
@@ -157,15 +170,16 @@
       <xs:enumeration value="maker"/>
       <xs:enumeration value="genre"/>
       <xs:enumeration value="name"/>
+      <xs:enumeration value="genreFilmMuseum"/>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:attribute name="id" type="xs:string"/>
 
-  <xs:attribute name="lastModified" type="xs:string"/>
+  <xs:attribute name="lastModified" type="xs:dateTime"/>
 
   <xs:attribute name="objectType" type="tns:scheme"/>
 
-  <xs:attribute name="status" type="xs:string"/>
+  <xs:attribute name="status" type="tns:status"/>
 </xs:schema>
 

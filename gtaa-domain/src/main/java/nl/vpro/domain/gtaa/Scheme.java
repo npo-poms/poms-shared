@@ -38,7 +38,7 @@ public enum Scheme implements Displayable {
 
     name("Namen", "http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen"),
 
-    genreFilmMuseum("Genre van Eye", "http://data.beeldengeluid.nl/gtaa/Genre_FilmMuseum", "genre filmmuseum", "genres filmmuseum")
+    genrefilmmuseum("Genre van Filmmuseum Eye", "http://data.beeldengeluid.nl/gtaa/Genre_FilmMuseum", "genre filmmuseum", "genres filmmuseum")
     ;
 
 
@@ -84,8 +84,6 @@ public enum Scheme implements Displayable {
         if (annotation != null) {
             log.info("Registering {}", gtaaClass);
             annotation.value().implementation = (Class<? extends GTAAConcept>) gtaaClass;
-        } else {
-
         }
     }
 

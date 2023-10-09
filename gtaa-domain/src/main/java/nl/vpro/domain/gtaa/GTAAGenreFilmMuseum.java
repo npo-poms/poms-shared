@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.w3.rdf.Description;
 
-@GTAAScheme(Scheme.genre)
+@GTAAScheme(Scheme.genrefilmmuseum)
 @XmlType(name = "genreFilmMuseumType",
     propOrder = {
         "name",

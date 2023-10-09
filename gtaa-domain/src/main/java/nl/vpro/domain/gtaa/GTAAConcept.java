@@ -32,7 +32,7 @@ import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
         @JsonSubTypes.Type(value = GTAAMaker.class),
         @JsonSubTypes.Type(value = GTAAName.class),
         @JsonSubTypes.Type(value = GTAAClassification.class),
-
+        @JsonSubTypes.Type(value = GTAAGenreFilmMuseum.class)
     })
 
 public sealed interface GTAAConcept permits AbstractGTAAConcept {
