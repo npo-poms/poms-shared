@@ -20,7 +20,7 @@ import nl.vpro.w3.rdf.Description;
         "redirectedFrom"
     }
 )
-@XmlRootElement(name = "genre")
+@XmlRootElement(name = "genreFilmMuseum")
 @Schema(name = "GTAAGenre_FilmMuseum")
 public final class GTAAGenreFilmMuseum extends AbstractSimpleValueGTAAConcept {
 
