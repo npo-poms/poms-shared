@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.time.Instant;
 import java.util.TreeSet;
@@ -66,10 +69,19 @@ public final class Group extends MediaObject {
     @Column(nullable = false)
     @NotNull Boolean isOrdered = true;
 
+
+    /**
+     * Not persistent, never filled? What is this, should it not be dropped?
+     */
+    @XmlAttribute
+    @Getter
+    @Setter
     private Long defaultElement;
 
     @Column
     @XmlElement
+    @Getter
+    @Setter
     private String poSequenceInformation;
 
     public Group() {
@@ -143,7 +155,6 @@ public final class Group extends MediaObject {
         return super.createMember(member, number, owner);
     }
 
-
     MemberRef createEpisode(Program episode, Integer episodeNumber, OwnerType owner) {
         return episode.createEpisodeOf(this, episodeNumber, owner);
     }
@@ -152,7 +163,6 @@ public final class Group extends MediaObject {
     protected String getUrnPrefix() {
         return GroupType.URN_PREFIX;
     }
-
 
     @Override // to make it public
     public void setSortInstant(Instant date) {
@@ -168,7 +178,6 @@ public final class Group extends MediaObject {
     @Override
     public void setMediaType(MediaType type) {
         setType((GroupType) type.getSubType());
-
     }
 
     public void setType(GroupType type) {
@@ -191,23 +200,6 @@ public final class Group extends MediaObject {
 
     public void setOrdered(Boolean ordered) {
         isOrdered = ordered;
-    }
-
-    @XmlAttribute
-    public Long getDefaultElement() {
-        return defaultElement;
-    }
-
-    public void setDefaultElement(Long defaultElement) {
-        this.defaultElement = defaultElement;
-    }
-
-    public String getPoSequenceInformation() {
-        return poSequenceInformation;
-    }
-
-    public void setPoSequenceInformation(String poSequenceInformation) {
-        this.poSequenceInformation = poSequenceInformation;
     }
 
     public String getPoSeriesID() {
