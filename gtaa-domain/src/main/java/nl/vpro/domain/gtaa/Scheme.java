@@ -38,7 +38,12 @@ public enum Scheme implements Displayable {
 
     name("Namen", "http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen"),
 
-    genrefilmmuseum("Genre van Filmmuseum Eye", "http://data.beeldengeluid.nl/gtaa/Genre_FilmMuseum", "genre filmmuseum", "genres filmmuseum")
+    genrefilmmuseum("Genre van Filmmuseum Eye", "http://data.beeldengeluid.nl/gtaa/Genre_FilmMuseum", "genre filmmuseum", "genres filmmuseum") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    }
     ;
 
     static {
