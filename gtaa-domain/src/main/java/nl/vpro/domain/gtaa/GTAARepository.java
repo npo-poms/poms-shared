@@ -54,6 +54,15 @@ public interface GTAARepository {
         public SchemeOrNot(Scheme scheme) {
             this(scheme.getUrl());
         }
+
+        public static SchemeOrNot of(Scheme scheme) {
+            return new SchemeOrNot(scheme);
+        }
+
+        public SchemeOrNot not() {
+            return new SchemeOrNot(scheme, ! not);
+        }
+
         @Override
         public String toString() {
             return (not ? "!" : "") + scheme;
