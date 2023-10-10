@@ -41,8 +41,6 @@ public enum Scheme implements Displayable {
     genrefilmmuseum("Genre van Filmmuseum Eye", "http://data.beeldengeluid.nl/gtaa/Genre_FilmMuseum", "genre filmmuseum", "genres filmmuseum")
     ;
 
-
-
     static {
         GTAAConceptIdResolver.init();
     }

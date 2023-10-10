@@ -170,7 +170,7 @@
       <xs:enumeration value="maker"/>
       <xs:enumeration value="genre"/>
       <xs:enumeration value="name"/>
-      <xs:enumeration value="genreFilmMuseum"/>
+      <xs:enumeration value="genrefilmmuseum"/>
     </xs:restriction>
   </xs:simpleType>
 
