@@ -76,12 +76,11 @@ public enum Scheme implements Displayable {
         return Scheme.valueOf(objectType);
     }
 
-    @SuppressWarnings("unchecked")
-    static void init(Class<?> gtaaClass) {
+    static void init(Class<? extends GTAAConcept> gtaaClass) {
         GTAAScheme annotation = gtaaClass.getAnnotation(GTAAScheme.class);
         if (annotation != null) {
             log.info("Registering {}", gtaaClass);
-            annotation.value().implementation = (Class<? extends GTAAConcept>) gtaaClass;
+            annotation.value().implementation = gtaaClass;
         }
     }
 
@@ -119,12 +118,9 @@ public enum Scheme implements Displayable {
         return ArrayUtils.addAll(classes(), GTAANewPerson.class, GTAANewGenericConcept.class);
     }
 
-    /**
-     * // doens't work
-     * See https://docs.jboss.org/resteasy/docs/3.5.1.Final/userguide/html/StringConverter.html
-     */
     public static Scheme fromString(String value) {
-        return ofUrl(value).orElseGet(() -> Scheme.valueOf(value));
+        return ofUrl(value)
+            .orElseGet(() -> Scheme.valueOf(value));
     }
 
     /**

@@ -18,10 +18,11 @@ public class GTAAConceptIdResolver extends TypeIdResolverBase {
         init();
     }
 
+    @SuppressWarnings("unchecked")
     static void init() {
         if (! inited) {
             for (JsonSubTypes.Type type : GTAAConcept.class.getAnnotation(JsonSubTypes.class).value()) {
-                Scheme.init(type.value());
+                Scheme.init((Class<? extends GTAAConcept>) type.value());
             }
             inited = true;
         }
