@@ -4,17 +4,18 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author Roelof Jan Koekoek
  */
+@Getter
 @XmlType(name = "changesType", propOrder = {"changes"})
 @XmlRootElement(name = "changes")
 public class Changes {
@@ -22,10 +23,6 @@ public class Changes {
     @XmlElement(name = "change")
     @JsonProperty("changes")
     private List<MediaChange> changes;
-
-    public List<MediaChange> getChanges() {
-        return changes;
-    }
 
     public void setChanges(List<MediaChange> changes) {
         this.changes = changes;

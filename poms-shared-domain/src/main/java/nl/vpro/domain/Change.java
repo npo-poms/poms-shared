@@ -7,6 +7,8 @@ import java.time.Instant;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -70,6 +72,13 @@ public abstract class Change<T>  {
 
     public boolean isTail() {
         return tail != null ? tail : false;
+    }
+
+    /**
+     * @since 7.9
+     */
+    public static boolean isTail(@Nullable Change<?> t) {
+        return t != null && t.isTail();
     }
 
     public boolean isNotSkipped() {
