@@ -89,6 +89,11 @@ public class Headers {
     public static final String NPO_MID                     = X_NPO + "-mid";
 
 
+    /**
+     * Effective hibernate filters
+     */
+    public static final String FILTERS                      = "X-Filters";
+
 }
 
 
