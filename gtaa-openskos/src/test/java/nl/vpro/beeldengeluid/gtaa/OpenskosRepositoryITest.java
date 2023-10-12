@@ -124,7 +124,7 @@ public class OpenskosRepositoryITest {
     @MethodSource("envs")
     public void testFindPerson(Env env) {
         OpenskosRepository impl = getRealInstance(env);
-        List<Description> persons = impl.findPersons("johan c", 100);
+        List<Description> persons = impl.findPersons("Mies Bouwman", 100);
         assertThat(persons).isNotEmpty();
         assertThat(persons.get(0).getStatus()).isNotNull();
         for (Description person : persons)  {
