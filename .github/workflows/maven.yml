@@ -16,7 +16,7 @@ jobs:
         java: [ 17 ]
         include:
           - os: ubuntu-latest
-            java: 21-ea
+            java: 21
     runs-on: ${{ matrix.os }}
     steps:
       - name: Cancel previous Action
