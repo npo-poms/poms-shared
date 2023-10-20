@@ -68,3 +68,10 @@ For `main` we use link:https://maven.apache.org/maven-ci-friendly.html['CI frien
 For release branches this is overridden by the release:branch plugin
 
 This means that open pull requests (on `main`) will result in artifacts on sonatype snapshots that have the name of the branch in their version.  They can be used in associated merge requests in other projects (likely one of the poms projects in the VPRO gitlab repository)
+
+
+== Releasing
+
+Make sure SNAPSHOT are resolved. Furthermore, it's similar to as described in https://github.com/npo-poms/poms-parent/blob/main/RELEASE.adoc:[poms parent].
+
+See https://github.com/npo-poms/poms-parent/actions[actions]
