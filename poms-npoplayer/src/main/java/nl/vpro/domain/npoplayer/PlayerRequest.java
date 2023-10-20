@@ -4,21 +4,19 @@
  */
 package nl.vpro.domain.npoplayer;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Duration;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.jackson2.DurationToSecondsFloatTimestamp;
+import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
  * This wraps {@link NPOPlayerApiRequest}. It is a bit simpler and support nicer java types.
@@ -30,6 +28,7 @@ import nl.vpro.jackson2.DurationToSecondsFloatTimestamp;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
     "mid",
     "id",
@@ -38,9 +37,15 @@ import nl.vpro.jackson2.DurationToSecondsFloatTimestamp;
     "startAt",
     "endAt",
     "noAds",
+    "hasAdConsent",
     "subtitleLanguage",
+    "sterReferralUrl",
+    "sterSiteId",
+    "sterIdentifier",
+    "pageUrl",
     "atInternetSiteId",
-    "share"
+    "share",
+    "encryption"
 })
 @JsonTypeName("request")
 public class PlayerRequest {
@@ -52,10 +57,12 @@ public class PlayerRequest {
 
     @JsonSerialize(using= DurationToSecondsFloatTimestamp.Serializer.class)
     @JsonDeserialize(using= DurationToSecondsFloatTimestamp.Deserializer.class)
+    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     Duration startAt;
 
     @JsonSerialize(using= DurationToSecondsFloatTimestamp.Serializer.class)
     @JsonDeserialize(using= DurationToSecondsFloatTimestamp.Deserializer.class)
+    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     Duration endAt;
 
     Boolean noAds;

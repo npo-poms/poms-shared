@@ -29,6 +29,10 @@
       <artifactId>jakarta.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-xml</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
