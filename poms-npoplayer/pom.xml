@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>${revision}${changelist}</version>
+    <version>7.7.2-SNAPSHOT</version>
   </parent>
 
   <artifactId>poms-npoplayer</artifactId>
@@ -21,10 +21,8 @@
       <artifactId>vpro-shared-test</artifactId>
     </dependency>
     <dependency>
-      <!-- deprecated -->
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-client-resteasy</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId>
@@ -32,12 +30,8 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-jackson</artifactId>
-    </dependency>
-      <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-impl</artifactId>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-xml</artifactId>
     </dependency>
   </dependencies>
 
