@@ -8,8 +8,9 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 /**
  * @author r.jansen
  */
+@Deprecated
 public class NPOPlayerDomainSerializeTest {
-    @SuppressWarnings("deprecation")
+
     @Test
     public void testJSON() {
         NPOPlayerApiRequest request = NPOPlayerApiRequest.builder()

@@ -10,6 +10,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 /**
  * @author r.jansen
  */
+@Deprecated
 public class PlayerDomainSerializeTest {
 
     PlayerRequest playerRequest = PlayerRequest.builder()
