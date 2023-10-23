@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>7.7.2-SNAPSHOT</version>
+    <version>7.10-SNAPSHOT</version>
   </parent>
 
   <artifactId>poms-npoplayer</artifactId>
@@ -30,8 +30,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>nl.vpro.shared</groupId>
-      <artifactId>vpro-shared-xml</artifactId>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-jackson</artifactId>
+    </dependency>
+      <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
     </dependency>
   </dependencies>
 

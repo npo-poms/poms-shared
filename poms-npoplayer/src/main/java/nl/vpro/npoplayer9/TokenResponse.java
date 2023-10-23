@@ -2,9 +2,6 @@ package nl.vpro.npoplayer9;
 
 import lombok.Data;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -16,20 +13,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * @author Michiel Meeuwissen
  * @since 7.8
  */
-@XmlRootElement
 @Data
-@XmlType(propOrder = {
-    "mid",
-    "token",
-    "key"
-})
 @JsonTypeName("tokenResponse")
 public class TokenResponse {
     private final String mid;
     private final String token;
     private final String key;
     private final String analyticsKey;
-
     private final String endpoint;
 
     @lombok.Builder

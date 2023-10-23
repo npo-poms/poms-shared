@@ -55,7 +55,10 @@ public class TokenFactory {
         final SecretKey secretKey = Keys.hmacShaKeyFor(signingKey.getBytes());
         return Jwts.builder()
             .subject(mid)
-            .issuedAt(Date.from(clock.instant().truncatedTo(ChronoUnit.SECONDS)))
+            .issuedAt(
+                Date.from(
+                    clock.instant().truncatedTo(ChronoUnit.SECONDS))
+            )
             .issuer(issuer)
             .signWith(secretKey, Jwts.SIG.HS256)
             .compact();
