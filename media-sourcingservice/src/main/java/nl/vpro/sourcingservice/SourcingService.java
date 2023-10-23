@@ -41,6 +41,11 @@ public interface SourcingService {
         @Nullable String errors,
         Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException;
 
+    /**
+     * Defaulting version of {@link #upload(SimpleLogger, String, Restrictions, long, InputStream, String, Consumer<Phase>)}.
+     * @deprecated
+     */
+    @Deprecated
     default UploadResponse upload(
         SimpleLogger logger,
         String mid,
@@ -56,8 +61,6 @@ public interface SourcingService {
 
 
     DeleteResponse delete(String mid, int daysBeforeHardDelete) throws IOException, InterruptedException;
-
-
 
 
     /**

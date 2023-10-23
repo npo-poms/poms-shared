@@ -88,7 +88,10 @@ class AudioSourcingServiceImplTest {
         impl.upload(logger, MID, restrictions,
             Files.size(file),
             cachingInputStream,
-            "m.meeuwissen.vpro@gmail.com"
+            "m.meeuwissen.vpro@gmail.com",
+            (p) -> {
+                logger.info("Phase {}", p);
+            }
         );
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
