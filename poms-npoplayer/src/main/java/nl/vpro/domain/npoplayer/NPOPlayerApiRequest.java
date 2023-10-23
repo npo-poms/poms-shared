@@ -4,12 +4,7 @@
  */
 package nl.vpro.domain.npoplayer;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import lombok.*;
 
 import nl.vpro.util.TimeUtils;
 
@@ -18,20 +13,10 @@ import nl.vpro.util.TimeUtils;
  * @author r.jansen
  * @since 5.10
  */
-@XmlRootElement
 @Data
 @lombok.Builder(builderClassName = "Builder")
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlType(propOrder = {
-    "id",
-    "stylesheet",
-    "autoplay",
-    "startAt",
-    "endAt",
-    "noAds",
-    "subtitleLanguage"
-})
 @Deprecated
 public class NPOPlayerApiRequest {
     String id;

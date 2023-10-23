@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Disabled("Tests running server")
 @Slf4j
+@Deprecated
 public class NPOPlayerApiClientTest {
 
     NPOPlayerApiClient client;
