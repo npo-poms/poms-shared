@@ -17,9 +17,6 @@ import nl.vpro.domain.media.Region;
 import nl.vpro.logging.simple.Log4j2SimpleLogger;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
-import nl.vpro.util.FileSizeFormatter;
-
-import static nl.vpro.i18n.MultiLanguageString.en;
 
 @Log4j2
 class AudioSourcingServiceImplTest {
@@ -49,7 +46,7 @@ class AudioSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://sourcing-service.acc.metadata.bijnpo.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
-            5 * 1000 * 1024,
+            100 * 1000 * 1024,
             "m.meeuwissen.vpro@gmail.com",
             new LoggingMeterRegistry()
         );
@@ -58,40 +55,23 @@ class AudioSourcingServiceImplTest {
     @Test
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void uploadAudio() throws IOException, InterruptedException {
-        Instant start = Instant.now();
-        Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
+        final Instant start = Instant.now();
+        final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample-big.mp3");
 
-        Restrictions restrictions = new Restrictions();
+        final Restrictions restrictions = new Restrictions();
         restrictions.setGeoRestriction(GeoRestriction.builder().region(Region.NL).build());
-        SimpleLogger logger = Log4j2SimpleLogger.simple(log);
-        FileCachingInputStream cachingInputStream = FileCachingInputStream.builder()
+        final SimpleLogger logger = Log4j2SimpleLogger.simple(log);
+        final FileCachingInputStream cachingInputStream = FileCachingInputStream.builder()
             .input(Files.newInputStream(file))
             .noProgressLogging()
             .startImmediately(true)
-            .batchConsumer(fci -> {
-                if (fci.isReady()) {
-
-                    if (fci.getException().isEmpty()) {
-                        logger.info(en("Uploading ready ({} bytes)")
-                            .nl("Uploaden klaar ({} bytes)")
-                            .slf4jArgs(FileSizeFormatter.DEFAULT.format(fci.getCount())).build());
-                    } else {
-                        logger.warn(en("Upload error: {}")
-                            .nl("Upload fout: {}")
-                            .slf4jArgs(fci.getException().get().getMessage()).build());
-                    }
-                } else {
-                    //logger.debug("Uploaded {}", c.getCount());
-                }
-            })
+            .batchConsumer(SourcingService.loggingConsumer(logger))
             .build();
         impl.upload(logger, MID, restrictions,
             Files.size(file),
             cachingInputStream,
             "m.meeuwissen.vpro@gmail.com",
-            (p) -> {
-                logger.info("Phase {}", p);
-            }
+            SourcingService.phaseLogger(logger)
         );
         log.info("Took {}", Duration.between(start, Instant.now()));
     }

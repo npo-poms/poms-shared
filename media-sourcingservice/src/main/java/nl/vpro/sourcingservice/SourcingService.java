@@ -9,6 +9,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.util.FileCachingInputStream;
+import nl.vpro.util.FileSizeFormatter;
+
+import static nl.vpro.i18n.MultiLanguageString.en;
 
 public interface SourcingService {
 
@@ -26,7 +30,7 @@ public interface SourcingService {
      * Upload an (audio) asset to the NEP CDN
      * @param logger a logger to log progress to, may be showing to gui users too
      * @param mid the associated mid to upload the asset for
-     * @param restrictions (geo) restriction may apply to this asset.
+     * @param restrictions (geo) restriction which may apply to this asset.
      * @param fileSize The Sourcing service needs to know beforehand how big the asset will be.
      * @param inputStream The inputStream for the asset. Will be implicitly closed when consumed (or when an exception occurs)
      * @param errors email address to associate with mishaps
@@ -67,5 +71,32 @@ public interface SourcingService {
      * A string which can be used to show where this implementation will upload to.
      */
     String getUploadString();
+
+
+    /**
+     * a Consumer for {@link FileCachingInputStream} which logs progress to the logger, interpreting the inputstream as 'upload'.
+     */
+    static Consumer<FileCachingInputStream> loggingConsumer(final SimpleLogger logger) {
+        return fci -> {
+            if (fci.isReady()) {
+                if (fci.getException().isEmpty()) {
+                    logger.info(en("Uploading ready ({} bytes)")
+                        .nl("Uploaden klaar ({} bytes)")
+                        .slf4jArgs(FileSizeFormatter.DEFAULT.format(fci.getCount())).build());
+                } else {
+                    logger.warn(en("Upload error: {}")
+                        .nl("Upload fout: {}")
+                        .slf4jArgs(fci.getException().get().getMessage()).build());
+                }
+            }
+        };
+    }
+    static Consumer<Phase> phaseLogger(final SimpleLogger logger) {
+        return phase -> {
+            logger.info(en("Phase {}")
+                .nl("Fase {}")
+                .slf4jArgs(phase).build());
+        };
+    }
 
 }

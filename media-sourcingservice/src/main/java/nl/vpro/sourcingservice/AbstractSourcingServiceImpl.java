@@ -115,6 +115,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            // this is not needed (as I've tested)
            //ingest(logger, mid, getFileName(mid), restrictions);
            phase.accept(Phase.START);
+           logger.info("Uploading {} B", fileSize);
            uploadStart(logger, mid, fileSize, errors, restrictions);
            phase.accept(Phase.UPLOAD);
            final AtomicInteger partNumber = new AtomicInteger(1);
