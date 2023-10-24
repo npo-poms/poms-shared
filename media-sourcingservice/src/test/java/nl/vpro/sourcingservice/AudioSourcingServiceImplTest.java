@@ -19,6 +19,9 @@ import nl.vpro.logging.simple.Log4j2SimpleLogger;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 
+import static nl.vpro.sourcingservice.SourcingService.loggingConsumer;
+import static nl.vpro.sourcingservice.SourcingService.phaseLogger;
+
 @Log4j2
 class AudioSourcingServiceImplTest {
 
@@ -47,7 +50,7 @@ class AudioSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://sourcing-service.acc.metadata.bijnpo.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
-            100 * 1000 * 1024,
+            50 * 1000 * 1024,
             "m.meeuwissen.vpro@gmail.com",
             new LoggingMeterRegistry()
         );
@@ -73,17 +76,14 @@ class AudioSourcingServiceImplTest {
             null,
             cachingInputStream,
             "m.meeuwissen.vpro@gmail.com",
-            SourcingService.phaseLogger(logger)
+            phaseLogger(logger)
         );
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
-
-
     @Test
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void status() throws IOException, InterruptedException {
-
         Object status = impl.status(MID);;
         log.info("Status {}", status);
     }
