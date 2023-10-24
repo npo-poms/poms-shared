@@ -41,12 +41,13 @@ public interface SourcingService {
         String mid,
         @Nullable Restrictions restrictions,
         long fileSize,
+        byte @Nullable[] checksum,
         InputStream inputStream,
         @Nullable String errors,
         Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException;
 
     /**
-     * Defaulting version of {@link #upload(SimpleLogger, String, Restrictions, long, InputStream, String, Consumer<Phase>)}.
+     * Defaulting version of {@link #upload(SimpleLogger, String, Restrictions, long, byte[], InputStream, String, Consumer<Phase>)}.
      * @deprecated
      */
     @Deprecated
@@ -58,7 +59,7 @@ public interface SourcingService {
         InputStream inputStream,
         @Nullable String errors
     ) throws IOException, InterruptedException, SourcingServiceException {
-        return upload(logger, mid, restrictions, fileSize, inputStream, errors, (p) -> {});
+        return upload(logger, mid, restrictions, fileSize, null, inputStream, errors, (p) -> {});
     }
 
     Optional<StatusResponse> status(String mid) throws IOException, InterruptedException;

@@ -7,8 +7,11 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.net.URI;
 import java.net.http.*;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -46,7 +49,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     /***
      * Field in the multipart body
-     * Currently unused, I don't know what kind of checksum is expected.
      */
     private static final String CHECKSUM     = "checksum";
 
@@ -100,23 +102,35 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     protected abstract String getFileName(String mid);
 
 
+   @SneakyThrows
    @Override
    public UploadResponse upload(
        SimpleLogger logger,
        final String mid,
        @Nullable Restrictions restrictions,
        final long fileSize,
+       byte @Nullable[]  checksum,
        InputStream inputStream,
        String errors,
        Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException {
 
        final AtomicLong uploaded = new AtomicLong(0);
-       try (inputStream) {
+       MessageDigest digester;
+       if (checksum == null) {
+            digester = MessageDigest.getInstance("MD5");
+            inputStream = new DigestInputStream(inputStream, digester);
+            logger.info("Determining MD5 checksum on the fly");
+       } else {
+           digester = null;
+       }
+       final InputStream finalInputStream = inputStream;
+       try (finalInputStream) {
+
            // this is not needed (as I've tested)
            //ingest(logger, mid, getFileName(mid), restrictions);
            phase.accept(Phase.START);
            logger.info("Uploading {} B", fileSize);
-           uploadStart(logger, mid, fileSize, errors, restrictions);
+           uploadStart(logger, mid, fileSize, checksum, errors, restrictions);
            phase.accept(Phase.UPLOAD);
            final AtomicInteger partNumber = new AtomicInteger(1);
            while (uploaded.get() < fileSize) {
@@ -124,9 +138,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            }
        }
        assert uploaded.get() == fileSize;
+       if (checksum == null) {
+           checksum = digester.digest();
+       }
+       assert checksum != null;
 
        phase.accept(Phase.FINISH);
-       return uploadFinish(logger, mid, uploaded, restrictions);
+       return uploadFinish(logger, mid, uploaded, checksum, restrictions);
    }
 
 
@@ -212,6 +230,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final SimpleLogger logger,
         final String mid,
         final long fileSize,
+        final byte@Nullable[] checksum,
         final @Nullable String errors,
         final Restrictions restrictions) throws IOException, InterruptedException {
 
@@ -301,9 +320,18 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
     }
 
-    private UploadResponse uploadFinish(SimpleLogger logger, String mid, AtomicLong uploaded, Restrictions restrictions) throws IOException, InterruptedException {
+    private UploadResponse uploadFinish(
+        SimpleLogger logger,
+        String mid,
+        AtomicLong uploaded,
+        byte [] checksum,
+        Restrictions restrictions) throws IOException, InterruptedException {
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add(UPLOAD_PHASE, "finish");
+
+        String checksumAsString = new BigInteger(1, checksum).toString(16);
+        logger.info("Checksum {}", checksumAsString);
+        body.add(CHECKSUM, checksumAsString);
 
         addRegion(logger, body, restrictions);
 
