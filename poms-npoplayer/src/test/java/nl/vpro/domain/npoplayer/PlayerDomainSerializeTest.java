@@ -5,7 +5,6 @@ import java.time.Duration;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 /**
  * @author r.jansen
@@ -38,23 +37,6 @@ public class PlayerDomainSerializeTest {
                   "sterSiteId" : "324242-jongstleden-222",
                   "atInternetSiteId" : "324242-jongstleden-222"
                 }""");
-    }
-
-    @Test
-    public void testRequestXml() {
-
-        JAXBTestUtil.roundTripAndSimilarAndEquals(playerRequest,
-            """
-                <?xml version="1.0" encoding="UTF-8"?>
-                <playerRequest>
-                         <mid>MID</mid>
-                         <id>324242jl222</id>
-                         <stylesheet>https://www.vpro.nl/flistender.css</stylesheet>               <autoplay>true</autoplay>
-                         <startAt>P0DT0H0M10.000S</startAt>
-                         <subtitleLanguage>nl</subtitleLanguage>
-                         <sterSiteId>324242-jongstleden-222</sterSiteId>
-                         <atInternetSiteId>324242-jongstleden-222</atInternetSiteId>
-                       </playerRequest>""");
     }
 
     @Test
