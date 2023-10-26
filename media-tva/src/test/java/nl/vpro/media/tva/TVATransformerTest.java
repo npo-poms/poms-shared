@@ -39,9 +39,11 @@ import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.update.Validation;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
 import nl.vpro.media.tva.saxon.extension.*;
+import nl.vpro.validation.ValidationLevel;
 
 import static nl.vpro.media.tva.Constants.*;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.similar;
@@ -90,7 +92,7 @@ public class TVATransformerTest {
                                   publicationTime="2015-08-03T17:40:17.040+02:00"
                                   version="300">
                    <programTable>
-                      <program workflow="FOR_REPUBLICATION"
+                      <program workflow="FOR REPUBLICATION"
                                mid="POW_00252645"
                                type="BROADCAST"
                                avType="VIDEO"
@@ -119,7 +121,7 @@ public class TVATransformerTest {
                          <descendantOf type="SERIES" midRef="POW_00818820"/>
                          <episodeOf type="SEASON" midRef="POW_00252644" index="1"/>
                       </program>
-                      <program workflow="FOR_REPUBLICATION"
+                      <program workflow="FOR REPUBLICATION"
                                mid="POW_00252645_1"
                                type="BROADCAST"
                                avType="VIDEO"
@@ -148,7 +150,7 @@ public class TVATransformerTest {
                       <group type="SEASON"
                              avType="VIDEO"
                              mid="POW_00252644"
-                             workflow="FOR_REPUBLICATION">
+                             workflow="FOR REPUBLICATION">
                          <broadcaster id="EO">EO</broadcaster>
                          <title type="MAIN" owner="MIS">SERIE TITEL</title>
                          <title type="ORIGINAL" owner="MIS">ICH BIN EIN SEIZON</title>
@@ -159,7 +161,7 @@ public class TVATransformerTest {
                       <group type="SERIES"
                              avType="VIDEO"
                              mid="POW_00818820"
-                             workflow="FOR_REPUBLICATION">
+                             workflow="FOR REPUBLICATION">
                          <broadcaster id="EO">EO</broadcaster>
                          <title type="MAIN" owner="MIS">IK BEN EEN MOEDERSERIE</title>
                          <description type="MAIN" owner="MIS">Dit is de Seriesbeschrijving</description>
@@ -290,10 +292,27 @@ public class TVATransformerTest {
     }
 
     @Test
-    public void oddLanguage() throws IOException, ParserConfigurationException, SAXException, TransformerException {
-        String xml = transform("pd/pd/HOLL20151005P.xml"); // This acually came in on dev and didn't work.
+    public void oddLanguageJw() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        String xml = transform("pd/pd/HOLL20151005P.xml"); // This actually came in on dev and didn't work.
+        // the odd language
         //System.out.println(xml);
         MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+        table.getProgramTable().forEach(p -> {
+            log.info("{}: {}", p.getMid(), p.getLanguages());
+        });
+
+        validate(table);
+    }
+
+
+    @Test
+    public void oddLanguageSH() throws IOException, ParserConfigurationException, SAXException, TransformerException {
+        String xml = transform("pd/pd/NED220231027P.xml");
+        //System.out.println(xml);
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+        table.getProgramTable().forEach(p -> {
+            log.info("{}: {}", p.getMid(), p.getLanguages());
+        });
 
         validate(table);
     }
@@ -706,7 +725,7 @@ public class TVATransformerTest {
             createChannelMapping(Constants.ChannelIdType.PD));
         transformer.setParameter(
             XSL_PARAM_WORKFLOW,
-            Workflow.FOR_REPUBLICATION.name()
+            Workflow.FOR_REPUBLICATION.getXmlValue()
         );
         configure.accept(transformer);
         return transformer;
@@ -721,25 +740,24 @@ public class TVATransformerTest {
     }
 
     private void validate(MediaTable o) {
-        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-            Validator validator = factory.getValidator();
-            JAXB.marshal(o, OutputStream.nullOutputStream()); // just marshall it once to ensure getTitles is called....
-            //JAXB.marshal(o, System.out);
-            Set<ConstraintViolation<MediaTable>> validate = validator.validate(o);
-            for (ConstraintViolation<MediaTable> cv : validate) {
+        Validator validator = Validation.getValidator();
+        JAXB.marshal(o, OutputStream.nullOutputStream()); // just marshall it once to ensure getTitles is called....
+        //JAXB.marshal(o, System.out);
+        Set<ConstraintViolation<MediaTable>> validate = validator.validate(o, ValidationLevel.WEAK_WARNING.getClasses());
+        for (ConstraintViolation<MediaTable> cv : validate) {
+            log.warn("{}: {}", cv.getPropertyPath(), cv.getMessage());
+        }
+        assertThat(validator.validate(o, ValidationLevel.POMS.getClasses())).isEmpty();
+
+        for (MediaObject program : o) {
+            //program.getTitles();
+            //System.out.println("" + program.getBroadcasters());
+            Set<ConstraintViolation<MediaObject>> constraintViolations = validator.validate(program, ValidationLevel.POMS.getClasses());
+            for (ConstraintViolation<MediaObject> cv : constraintViolations) {
                 log.warn(cv.getMessage());
             }
-            assertThat(validator.validate(o)).isEmpty();
-
-            for (MediaObject program : o) {
-                //program.getTitles();
-                //System.out.println("" + program.getBroadcasters());
-                Set<ConstraintViolation<MediaObject>> constraintViolations = validator.validate(program);
-                for (ConstraintViolation<MediaObject> cv : constraintViolations) {
-                    log.warn(cv.getMessage());
-                }
-                assertThat(constraintViolations).isEmpty();
-            }
+            assertThat(constraintViolations).isEmpty();
         }
+
     }
 }

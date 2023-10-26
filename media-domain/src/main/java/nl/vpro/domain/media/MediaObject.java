@@ -404,8 +404,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<
-        @PomsValidCountry
-        @Language(mayContainCountry = true)
+        @PomsValidCountry(groups = WarningValidatorGroup.class)
+        @Language(mayContainCountry = true, groups = WarningValidatorGroup.class)
         Locale> languages;
 
     @Enumerated(EnumType.STRING)
