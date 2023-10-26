@@ -775,9 +775,18 @@
     <!-- <website> -->
     <xsl:for-each
         select="tva:BasicDescription/tva:RelatedMaterial[tva:HowRelated/@href = 'urn:bds:metadata:cs:WebsiteRationaleCS:2007:1']">
-      <xsl:element name="website">
-        <xsl:value-of select="tva:MediaLocator/mpeg7:MediaUri"/>
-      </xsl:element>
+      <xsl:for-each select="tva:MediaLocator/mpeg7:MediaUri">
+        <xsl:element name="website">
+          <xsl:choose>
+            <xsl:when test="contains(text(), ':')"> <!-- very minimal fixing of invalid urls -->
+              <xsl:value-of select="text()"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>https://</xsl:text><xsl:value-of select="text()"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:element>
+      </xsl:for-each>
     </xsl:for-each>
 
     <!-- twitter -->

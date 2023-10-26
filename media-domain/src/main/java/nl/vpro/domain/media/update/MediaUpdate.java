@@ -17,7 +17,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.*;
-import javax.validation.groups.Default;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -44,7 +43,6 @@ import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
-import nl.vpro.validation.HasTitle;
 import nl.vpro.xml.bind.*;
 
 
@@ -443,9 +441,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
     public Set<? extends ConstraintViolation<MediaUpdate<? extends M>>> violations(Class<?>... groups) {
         if (groups.length == 0) {
-            groups = new Class<?>[]{
-                Default.class, PomsValidatorGroup.class
-            };
+            groups = Validation.DEFAULT_GROUPS;
         }
         mediaObjectToValidate = null;
         Set<? extends ConstraintViolation<MediaUpdate<? extends M>>> result = Validation.validate(this, groups);

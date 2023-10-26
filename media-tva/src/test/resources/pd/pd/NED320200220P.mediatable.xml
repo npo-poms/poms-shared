@@ -3,7 +3,7 @@
                   publicationTime="2020-06-17T10:39:59.402+02:00"
                   version="300">
    <programTable>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04113118"
                type="BROADCAST"
                avType="VIDEO"
@@ -21,7 +21,7 @@
          <descendantOf type="SEASON" midRef="POW_04112692"/>
          <episodeOf type="SEASON" midRef="POW_04112692" index="426"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00163270"
                type="BROADCAST"
                avType="VIDEO"
@@ -49,7 +49,7 @@
          <descendantOf type="SERIES" midRef="POW_00818800"/>
          <episodeOf type="SEASON" midRef="POW_00163215" index="32"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00930015"
                type="BROADCAST"
                avType="VIDEO"
@@ -77,7 +77,7 @@
          <descendantOf type="SERIES" midRef="POW_00980920"/>
          <episodeOf type="SEASON" midRef="POW_00929913" index="36"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1312940"
                type="BROADCAST"
                avType="VIDEO"
@@ -104,7 +104,7 @@
          <descendantOf type="SERIES" midRef="VPWON_1247335"/>
          <episodeOf type="SEASON" midRef="VPWON_1312927" index="40"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04185585"
                type="BROADCAST"
                avType="VIDEO"
@@ -132,7 +132,7 @@
          <descendantOf type="SERIES" midRef="POW_03068578"/>
          <episodeOf type="SEASON" midRef="POW_04185566" index="19"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2138060"
                type="BROADCAST"
                avType="VIDEO"
@@ -165,7 +165,7 @@
          <descendantOf type="SERIES" midRef="AT_2121097"/>
          <episodeOf type="SEASON" midRef="AT_2125605" index="16"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="KN_1712648"
                type="BROADCAST"
                avType="VIDEO"
@@ -194,7 +194,7 @@
          <descendantOf type="SERIES" midRef="KN_1703632"/>
          <episodeOf type="SEASON" midRef="KN_1712577" index="11"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2138061"
                type="BROADCAST"
                avType="VIDEO"
@@ -227,7 +227,7 @@
          <descendantOf type="SERIES" midRef="AT_2121097"/>
          <episodeOf type="SEASON" midRef="AT_2125605" index="16"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2135311"
                type="BROADCAST"
                avType="VIDEO"
@@ -280,7 +280,7 @@
          <descendantOf type="SERIES" midRef="AT_2063294"/>
          <episodeOf type="SEASON" midRef="AT_2063296" index="21"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2135312"
                type="BROADCAST"
                avType="VIDEO"
@@ -333,7 +333,7 @@
          <descendantOf type="SERIES" midRef="AT_2063294"/>
          <episodeOf type="SEASON" midRef="AT_2063296" index="22"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2138062"
                type="BROADCAST"
                avType="VIDEO"
@@ -366,7 +366,7 @@
          <descendantOf type="SERIES" midRef="AT_2121097"/>
          <episodeOf type="SEASON" midRef="AT_2125605" index="16"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00791080"
                type="BROADCAST"
                avType="VIDEO"
@@ -394,7 +394,7 @@
          <descendantOf type="SERIES" midRef="POW_00890582"/>
          <episodeOf type="SEASON" midRef="POW_00791054" index="24"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2138063"
                type="BROADCAST"
                avType="VIDEO"
@@ -427,7 +427,7 @@
          <descendantOf type="SERIES" midRef="AT_2121097"/>
          <episodeOf type="SEASON" midRef="AT_2125605" index="16"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04513095"
                type="BROADCAST"
                avType="VIDEO"
@@ -454,7 +454,7 @@
          <descendantOf type="SERIES" midRef="POW_04582617"/>
          <episodeOf type="SEASON" midRef="POW_04513082" index="13"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2138064"
                type="BROADCAST"
                avType="VIDEO"
@@ -487,7 +487,7 @@
          <descendantOf type="SERIES" midRef="AT_2121097"/>
          <episodeOf type="SEASON" midRef="AT_2125605" index="16"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03877098"
                type="BROADCAST"
                avType="VIDEO"
@@ -516,7 +516,7 @@
          <descendantOf type="SERIES" midRef="POW_00824308"/>
          <episodeOf type="SEASON" midRef="POW_03877093" index="5"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2138065"
                type="BROADCAST"
                avType="VIDEO"
@@ -549,7 +549,7 @@
          <descendantOf type="SERIES" midRef="AT_2121097"/>
          <episodeOf type="SEASON" midRef="AT_2125605" index="16"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_02521113"
                type="BROADCAST"
                avType="VIDEO"
@@ -577,7 +577,7 @@
          <descendantOf type="SERIES" midRef="POW_00890542"/>
          <episodeOf type="SEASON" midRef="POW_02521078" index="19"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_01047440"
                type="BROADCAST"
                avType="VIDEO"
@@ -605,7 +605,7 @@
          <descendantOf type="SERIES" midRef="POW_01047543"/>
          <episodeOf type="SEASON" midRef="POW_01046861" index="26"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00815915"
                type="BROADCAST"
                avType="VIDEO"
@@ -634,7 +634,7 @@
          <descendantOf type="SERIES" midRef="POW_00822800"/>
          <episodeOf type="SEASON" midRef="POW_00815880" index="35"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04525289"
                type="BROADCAST"
                avType="VIDEO"
@@ -661,7 +661,7 @@
          <descendantOf type="SERIES" midRef="POW_04574076"/>
          <episodeOf type="SEASON" midRef="POW_04525267" index="22"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03806515"
                type="BROADCAST"
                avType="VIDEO"
@@ -703,7 +703,7 @@
          <descendantOf type="SERIES" midRef="POW_03806522"/>
          <episodeOf type="SEASON" midRef="POW_03806511" index="4"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03040697"
                type="BROADCAST"
                avType="VIDEO"
@@ -733,7 +733,7 @@
          <descendantOf type="SERIES" midRef="POW_03164061"/>
          <episodeOf type="SEASON" midRef="POW_03040667" index="30"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00384907"
                type="BROADCAST"
                avType="VIDEO"
@@ -761,7 +761,7 @@
          <descendantOf type="SERIES" midRef="POW_00823480"/>
          <episodeOf type="SEASON" midRef="POW_00384899" index="8"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03471008"
                type="BROADCAST"
                avType="VIDEO"
@@ -789,7 +789,7 @@
          <descendantOf type="SERIES" midRef="POW_03430705"/>
          <episodeOf type="SEASON" midRef="POW_03470984" index="24"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03427502"
                type="BROADCAST"
                avType="VIDEO"
@@ -817,7 +817,7 @@
          <descendantOf type="SERIES" midRef="POW_01047543"/>
          <episodeOf type="SEASON" midRef="POW_03427467" index="22"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="KN_1712598"
                type="BROADCAST"
                avType="VIDEO"
@@ -843,7 +843,7 @@
          <descendantOf type="SERIES" midRef="KN_1674156"/>
          <episodeOf type="SEASON" midRef="KN_1712142" index="34"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03430028"
                type="BROADCAST"
                avType="VIDEO"
@@ -871,7 +871,7 @@
          <descendantOf type="SERIES" midRef="POW_03430041"/>
          <episodeOf type="SEASON" midRef="POW_03429987" index="41"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_01050875"
                type="BROADCAST"
                avType="VIDEO"
@@ -906,7 +906,7 @@
          <descendantOf type="SERIES" midRef="POW_00890545"/>
          <episodeOf type="SEASON" midRef="POW_01050841" index="34"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04096163"
                type="BROADCAST"
                avType="VIDEO"
@@ -934,7 +934,7 @@
          <descendantOf type="SERIES" midRef="POW_04439800"/>
          <episodeOf type="SEASON" midRef="POW_04096138" index="24"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03498603"
                type="BROADCAST"
                avType="VIDEO"
@@ -963,7 +963,7 @@
          <descendantOf type="SERIES" midRef="POW_03438910"/>
          <episodeOf type="SEASON" midRef="POW_03498568" index="35"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03745329"
                type="BROADCAST"
                avType="VIDEO"
@@ -991,7 +991,7 @@
          <descendantOf type="SERIES" midRef="POW_03745355"/>
          <episodeOf type="SEASON" midRef="POW_03745328" index="1"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03309801"
                type="BROADCAST"
                avType="VIDEO"
@@ -1019,7 +1019,7 @@
          <descendantOf type="SERIES" midRef="POW_00890621"/>
          <episodeOf type="SEASON" midRef="POW_03309781" index="7"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03317971"
                type="BROADCAST"
                avType="VIDEO"
@@ -1047,7 +1047,7 @@
          <descendantOf type="SERIES" midRef="POW_03382279"/>
          <episodeOf type="SEASON" midRef="POW_03317942" index="21"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1300187"
                type="BROADCAST"
                avType="VIDEO"
@@ -1070,13 +1070,13 @@
          <releaseYear>2015</releaseYear>
          <duration>PT00H10M47S</duration>
          <ageRating>ALL</ageRating>
-         <website>www.sesamstraat.nl</website>
+         <website>https://www.sesamstraat.nl</website>
          <twitter type="HASHTAG">#sesamstraat</twitter>
          <descendantOf type="SEASON" midRef="VPWON_1300156"/>
          <descendantOf type="SERIES" midRef="VPWON_1247336"/>
          <episodeOf type="SEASON" midRef="VPWON_1300156" index="135"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00435171"
                type="BROADCAST"
                avType="VIDEO"
@@ -1104,7 +1104,7 @@
          <descendantOf type="SERIES" midRef="POW_00890602"/>
          <episodeOf type="SEASON" midRef="POW_00435138" index="33"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03877018"
                type="BROADCAST"
                avType="VIDEO"
@@ -1133,7 +1133,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_03877047"/>
          <episodeOf type="SEASON" midRef="POW_03876980" index="24"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00435118"
                type="BROADCAST"
                avType="VIDEO"
@@ -1161,7 +1161,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00890603"/>
          <episodeOf type="SEASON" midRef="POW_00435067" index="34"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03600605"
                type="BROADCAST"
                avType="VIDEO"
@@ -1188,7 +1188,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_03600759"/>
          <episodeOf type="SEASON" midRef="POW_03600599" index="6"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00751345"
                type="BROADCAST"
                avType="VIDEO"
@@ -1216,7 +1216,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00872680"/>
          <episodeOf type="SEASON" midRef="POW_00751302" index="30"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00252699"
                type="BROADCAST"
                avType="VIDEO"
@@ -1244,7 +1244,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00818820"/>
          <episodeOf type="SEASON" midRef="POW_00252687" index="10"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00474631"
                type="BROADCAST"
                avType="VIDEO"
@@ -1272,7 +1272,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00890543"/>
          <episodeOf type="SEASON" midRef="POW_00474545" index="7"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_01003174"
                type="BROADCAST"
                avType="VIDEO"
@@ -1308,7 +1308,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_01003366"/>
          <episodeOf type="SEASON" midRef="POW_01003140" index="34"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2138534"
                type="BROADCAST"
                avType="VIDEO"
@@ -1379,7 +1379,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="AT_2048907"/>
          <episodeOf type="SEASON" midRef="AT_2027949" index="8"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_03430081"
                type="BROADCAST"
                avType="VIDEO"
@@ -1408,7 +1408,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_03430143"/>
          <episodeOf type="SEASON" midRef="POW_03430057" index="17"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00804046"
                type="BROADCAST"
                avType="VIDEO"
@@ -1437,7 +1437,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00892940"/>
          <episodeOf type="SEASON" midRef="POW_00804016" index="11"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="KN_1712597"
                type="BROADCAST"
                avType="VIDEO"
@@ -1463,7 +1463,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="KN_1674156"/>
          <episodeOf type="SEASON" midRef="KN_1712142" index="33"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_01003252"
                type="BROADCAST"
                avType="VIDEO"
@@ -1497,7 +1497,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00890546"/>
          <episodeOf type="SEASON" midRef="POW_01003234" index="18"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="KN_1712771"
                type="BROADCAST"
                avType="VIDEO"
@@ -1525,7 +1525,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="KN_1712770"/>
          <episodeOf type="SEASON" midRef="KN_1712769" index="1"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00089129"
                type="BROADCAST"
                avType="VIDEO"
@@ -1551,7 +1551,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00816642"/>
          <episodeOf type="SEASON" midRef="POW_00089119" index="8"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1312995"
                type="BROADCAST"
                avType="VIDEO"
@@ -1578,7 +1578,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VPWON_1247335"/>
          <episodeOf type="SEASON" midRef="VPWON_1312953" index="42"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00240578"
                type="BROADCAST"
                avType="VIDEO"
@@ -1606,7 +1606,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00816641"/>
          <episodeOf type="SEASON" midRef="POW_00240526" index="45"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00441381"
                type="BROADCAST"
                avType="VIDEO"
@@ -1637,7 +1637,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00890560"/>
          <episodeOf type="SEASON" midRef="POW_00441125" index="6"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04525290"
                type="BROADCAST"
                avType="VIDEO"
@@ -1664,7 +1664,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_04574076"/>
          <episodeOf type="SEASON" midRef="POW_04525267" index="23"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04525291"
                type="BROADCAST"
                avType="VIDEO"
@@ -1691,7 +1691,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_04574076"/>
          <episodeOf type="SEASON" midRef="POW_04525267" index="24"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04133268"
                type="BROADCAST"
                avType="VIDEO"
@@ -1718,7 +1718,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_04133296"/>
          <episodeOf type="SEASON" midRef="POW_04133217" index="51"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_00474232"
                type="BROADCAST"
                avType="VIDEO"
@@ -1753,7 +1753,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_00890623"/>
          <episodeOf type="SEASON" midRef="POW_00474205" index="8"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_01098945"
                type="BROADCAST"
                avType="VIDEO"
@@ -1797,7 +1797,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_01099374"/>
          <episodeOf type="SEASON" midRef="POW_01098927" index="12"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1307726"
                type="BROADCAST"
                avType="VIDEO"
@@ -1833,7 +1833,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VPWON_1249361"/>
          <episodeOf type="SEASON" midRef="VPWON_1307693" index="33"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04429338"
                type="BROADCAST"
                avType="VIDEO"
@@ -1862,7 +1862,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="POW_04425970"/>
          <episodeOf type="SEASON" midRef="POW_04429318" index="20"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2128795"
                type="BROADCAST"
                avType="VIDEO"
@@ -1906,7 +1906,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="AT_2035122"/>
          <episodeOf type="SEASON" midRef="AT_2120977" index="83"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="KN_1712549"
                type="BROADCAST"
                avType="VIDEO"
@@ -2032,12 +2032,12 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
             </person>
          </credits>
          <ageRating>ALL</ageRating>
-         <website>www.spangas.nl</website>
+         <website>https://www.spangas.nl</website>
          <descendantOf type="SEASON" midRef="KN_1709499"/>
          <descendantOf type="SERIES" midRef="KN_1676932"/>
          <episodeOf type="SEASON" midRef="KN_1709499" index="113"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1305858"
                type="BROADCAST"
                avType="VIDEO"
@@ -2070,7 +2070,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VPWON_1257901"/>
          <episodeOf type="SEASON" midRef="VPWON_1305823" index="35"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1307727"
                type="BROADCAST"
                avType="VIDEO"
@@ -2106,7 +2106,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VPWON_1249361"/>
          <episodeOf type="SEASON" midRef="VPWON_1307693" index="34"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2133060"
                type="BROADCAST"
                avType="VIDEO"
@@ -2139,7 +2139,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="AT_2037172"/>
          <episodeOf type="SEASON" midRef="AT_2133014" index="7"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1307082"
                type="BROADCAST"
                avType="VIDEO"
@@ -2172,7 +2172,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VPWON_1298270"/>
          <episodeOf type="SEASON" midRef="VPWON_1307071" index="6"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="AT_2128796"
                type="BROADCAST"
                avType="VIDEO"
@@ -2220,7 +2220,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="AT_2035122"/>
          <episodeOf type="SEASON" midRef="AT_2120977" index="84"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="KN_1712550"
                type="BROADCAST"
                avType="VIDEO"
@@ -2330,12 +2330,12 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
             </person>
          </credits>
          <ageRating>ALL</ageRating>
-         <website>www.spangas.nl</website>
+         <website>https://www.spangas.nl</website>
          <descendantOf type="SEASON" midRef="KN_1709499"/>
          <descendantOf type="SERIES" midRef="KN_1676932"/>
          <episodeOf type="SEASON" midRef="KN_1709499" index="114"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1283388"
                type="BROADCAST"
                avType="VIDEO"
@@ -2362,7 +2362,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VPWON_1256937"/>
          <episodeOf type="SEASON" midRef="VPWON_1283337" index="4000"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="POW_04501889"
                type="BROADCAST"
                avType="VIDEO"
@@ -2385,14 +2385,14 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <duration>PT00H20M00S</duration>
          <ageRating>6</ageRating>
          <contentRating>GEWELD</contentRating>
-         <website>www.jeugdjournaal.nl</website>
+         <website>https://www.jeugdjournaal.nl</website>
          <twitter type="ACCOUNT">@jeugdjournaal</twitter>
          <twitter type="HASHTAG">#jeugdjournaal</twitter>
          <descendantOf type="SEASON" midRef="20Jeugd1900"/>
          <descendantOf type="SERIES" midRef="NOSJeugdjournaal"/>
          <episodeOf type="SEASON" midRef="20Jeugd1900" index="51"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="BV_101396829"
                type="BROADCAST"
                avType="VIDEO"
@@ -2420,7 +2420,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="BNN_101378960"/>
          <episodeOf type="SEASON" midRef="BV_101396774" index="5"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="KN_1712056"
                type="BROADCAST"
                avType="VIDEO"
@@ -2475,7 +2475,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="KN_1678993"/>
          <episodeOf type="SEASON" midRef="KN_1712040" index="6"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1308519"
                type="BROADCAST"
                avType="VIDEO"
@@ -2508,7 +2508,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VPWON_1308512"/>
          <episodeOf type="SEASON" midRef="VPWON_1308513" index="6"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="BV_101396686"
                type="BROADCAST"
                avType="VIDEO"
@@ -2555,7 +2555,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VARA_101378105"/>
          <episodeOf type="SEASON" midRef="BV_101396684" index="6"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1316948"
                type="BROADCAST"
                avType="VIDEO"
@@ -2581,7 +2581,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <ageRating>ALL</ageRating>
          <contentRating>GROF_TAALGEBRUIK</contentRating>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="BV_101396067"
                type="BROADCAST"
                avType="VIDEO"
@@ -2614,7 +2614,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VARA_101377717"/>
          <episodeOf type="SEASON" midRef="BV_101396041" index="109"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="KN_1712056"
                type="BROADCAST"
                avType="VIDEO"
@@ -2669,7 +2669,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="KN_1678993"/>
          <episodeOf type="SEASON" midRef="KN_1712040" index="6"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="VPWON_1308519"
                type="BROADCAST"
                avType="VIDEO"
@@ -2702,7 +2702,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VPWON_1308512"/>
          <episodeOf type="SEASON" midRef="VPWON_1308513" index="6"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="BV_101396067"
                type="BROADCAST"
                avType="VIDEO"
@@ -2735,7 +2735,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VARA_101377717"/>
          <episodeOf type="SEASON" midRef="BV_101396041" index="109"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="BV_101396686"
                type="BROADCAST"
                avType="VIDEO"
@@ -2782,7 +2782,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VARA_101378105"/>
          <episodeOf type="SEASON" midRef="BV_101396684" index="6"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="BV_101396067"
                type="BROADCAST"
                avType="VIDEO"
@@ -2815,7 +2815,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
          <descendantOf type="SERIES" midRef="VARA_101377717"/>
          <episodeOf type="SEASON" midRef="BV_101396041" index="109"/>
       </program>
-      <program workflow="FOR_REPUBLICATION"
+      <program workflow="FOR REPUBLICATION"
                mid="BV_101396067"
                type="BROADCAST"
                avType="VIDEO"
@@ -2853,14 +2853,14 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_04112692"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NOS">NOS</broadcaster>
          <title type="MAIN" owner="MIS">Tekst-TV</title>
       </group>
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00163215"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="VPRO">VPRO</broadcaster>
          <title type="MAIN" owner="MIS">Pingu</title>
          <title type="ORIGINAL" owner="MIS">Pingu</title>
@@ -2871,7 +2871,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00929913"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Olly, het kleine witte busje</title>
          <title type="ORIGINAL" owner="MIS">Olly, the little white van</title>
@@ -2882,7 +2882,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1312927"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Sesamstraat</title>
          <description type="MAIN" owner="MIS">Programma voor peuters en kleuters. De bekendste straat van Nederland! Pino, Ieniemienie, Purk en Tommie beleven nieuwe avonturen.</description>
@@ -2892,7 +2892,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_04185566"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Bing</title>
          <title type="ORIGINAL" owner="MIS">Bing</title>
@@ -2903,7 +2903,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2125605"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Vrolijk programma voor kleuters. Fenna Ramos woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -2912,7 +2912,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="KN_1712577"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Vos en Haas</title>
          <title type="ORIGINAL" owner="MIS">VOS EN HAAS</title>
@@ -2923,7 +2923,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2125605"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Vrolijk programma voor kleuters. Fenna Ramos woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -2932,7 +2932,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2063296"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Rintje</title>
          <description type="MAIN" owner="MIS">Het stoere, lieve en ondernemende hondje Rintje, uit de populaire kinderboeken van Sieb Posthuma, komt tot leven in een animatieserie. Met een oor in de lucht en zijn neus omhoog ontdekt deze foxterriër de wereld. Voor het eerst naar school, jarig zijn, bij oma slapen, naar de dokter gaan.</description>
@@ -2941,7 +2941,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2063296"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Rintje</title>
          <description type="MAIN" owner="MIS">Het stoere, lieve en ondernemende hondje Rintje, uit de populaire kinderboeken van Sieb Posthuma, komt tot leven in een animatieserie. Met een oor in de lucht en zijn neus omhoog ontdekt deze foxterriër de wereld. Voor het eerst naar school, jarig zijn, bij oma slapen, naar de dokter gaan.</description>
@@ -2950,7 +2950,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2125605"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Vrolijk programma voor kleuters. Fenna Ramos woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -2959,7 +2959,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00791054"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Mike de ridder</title>
          <title type="ORIGINAL" owner="MIS">Mike the knight</title>
@@ -2970,7 +2970,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2125605"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Vrolijk programma voor kleuters. Fenna Ramos woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -2979,7 +2979,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_04513082"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Casper en Emma</title>
          <title type="ORIGINAL" owner="MIS">Kasper og Petra</title>
@@ -2990,7 +2990,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2125605"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Vrolijk programma voor kleuters. Fenna Ramos woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -2999,7 +2999,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03877093"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="VPRO">VPRO</broadcaster>
          <title type="MAIN" owner="MIS">Buurman en Buurman hebben een nieuw huis</title>
          <title type="ORIGINAL" owner="MIS">Pat a Mat znovu v akci</title>
@@ -3010,7 +3010,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2125605"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Vrolijk programma voor kleuters. Fenna Ramos woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -3019,7 +3019,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_02521078"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Shaun het schaap</title>
          <title type="ORIGINAL" owner="MIS">Shaun the sheep serie 5</title>
@@ -3030,7 +3030,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_01046861"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="VPRO">VPRO</broadcaster>
          <title type="MAIN" owner="MIS">Masha's sprookjes</title>
          <title type="ORIGINAL" owner="MIS">Masha's tales</title>
@@ -3041,7 +3041,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00815880"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Smurfen</title>
          <title type="ORIGINAL" owner="MIS">The Smurfs</title>
@@ -3051,7 +3051,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_04525267"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Bernard</title>
          <title type="ORIGINAL" owner="MIS">Bernard</title>
@@ -3062,7 +3062,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03806511"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">De tafel van K3</title>
          <title type="ORIGINAL" owner="MIS">De tafel van K3</title>
@@ -3073,7 +3073,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03040667"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Bollie &amp; Billie</title>
          <title type="ORIGINAL" owner="MIS">Bobby &amp; Bill</title>
@@ -3084,7 +3084,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00384899"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="VPRO">VPRO</broadcaster>
          <title type="MAIN" owner="MIS">Heuvelland Ziekenhuis</title>
          <title type="ORIGINAL" owner="MIS">Hilltop Hospital</title>
@@ -3095,7 +3095,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03470984"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Inui</title>
          <title type="ORIGINAL" owner="MIS">Inui</title>
@@ -3106,7 +3106,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03427467"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Masha en de beer</title>
          <title type="ORIGINAL" owner="MIS">Masha and the bear</title>
@@ -3117,7 +3117,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="KN_1712142"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Kindertijd</title>
          <title type="ORIGINAL" owner="MIS">KINDERTIJD</title>
@@ -3128,7 +3128,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03429987"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Nelli en Nora</title>
          <title type="ORIGINAL" owner="MIS">Nelly and Nora</title>
@@ -3139,7 +3139,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_01050841"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRO">KRO</broadcaster>
          <title type="MAIN" owner="MIS">Pieter Konijn</title>
          <title type="ORIGINAL" owner="MIS">Peter Rabbit series 2</title>
@@ -3150,7 +3150,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_04096138"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Maan en ik</title>
          <title type="ORIGINAL" owner="MIS">Moon and me</title>
@@ -3161,7 +3161,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03498568"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Nijntjes avonturen, groot en klein</title>
          <title type="ORIGINAL" owner="MIS">Nijntjes avonturen, groot en klein</title>
@@ -3172,7 +3172,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03745328"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Rita &amp; Krokodil</title>
          <title type="ORIGINAL" owner="MIS">Rita &amp; Crocodile</title>
@@ -3183,7 +3183,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03309781"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Bumba bravo Babilu</title>
          <title type="ORIGINAL" owner="MIS">Bumba bravo Babilu</title>
@@ -3194,7 +3194,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03317942"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">TwiniPop</title>
          <title type="ORIGINAL" owner="MIS">TwiniPop</title>
@@ -3205,7 +3205,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1300156"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Sesamstraat 10 voor...</title>
          <description type="MAIN" owner="MIS">Een verzameling filmpjes van bepaalde Sesamstraatfiguren.</description>
@@ -3215,7 +3215,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00435138"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Joe &amp; Jack</title>
          <title type="ORIGINAL" owner="MIS">Joe &amp; Jack</title>
@@ -3226,7 +3226,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03876980"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">No-No</title>
          <title type="ORIGINAL" owner="MIS">No-No</title>
@@ -3237,7 +3237,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00435067"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Raad eens hoeveel ik van je hou</title>
          <title type="ORIGINAL" owner="MIS">Guess how much I love you</title>
@@ -3248,7 +3248,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03600599"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Ziggy en de Zootram</title>
          <title type="ORIGINAL" owner="MIS">Ziggy and the Zootram</title>
@@ -3259,7 +3259,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00751302"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Tip de muis</title>
          <title type="ORIGINAL" owner="MIS">Tip the mouse</title>
@@ -3270,7 +3270,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00252687"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Angelina Ballerina</title>
          <title type="ORIGINAL" owner="MIS">Angelina Ballerina</title>
@@ -3281,7 +3281,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00474545"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Babar en de belevenissen van Badou</title>
          <title type="ORIGINAL" owner="MIS">Babar and the adventures of Badou</title>
@@ -3292,7 +3292,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_01003140"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Heidi</title>
          <title type="ORIGINAL" owner="MIS">Heidi</title>
@@ -3303,7 +3303,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2027949"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Mega Mindy</title>
          <description type="MAIN" owner="MIS">Ergens in een doorsnee provinciestadje op een klein politiebureau werkt Mieke. Een onopvallend meisje waar niemand echt naar omkijkt. Haar baas, commissaris Migrain, en haar knappe collega Toby slagen er maar niet in ook maar één misdaad doortastend op te lossen. Dat komt vooral door de domheid van de commissaris, maar gelukkig voor de twee mislukte speurders verschijnt op het cruciale moment telkens de superheldin Mega Mindy ten tonele. Eigenlijk is dat Mieke, maar dat weet niemand... of althans bijna niemand...</description>
@@ -3312,7 +3312,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_03430057"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Grizzy en de lemmingen</title>
          <title type="ORIGINAL" owner="MIS">Grizzy and the lemmings</title>
@@ -3323,7 +3323,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00804016"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Calimero</title>
          <title type="ORIGINAL" owner="MIS">Calimero</title>
@@ -3334,7 +3334,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="KN_1712142"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Kindertijd</title>
          <title type="ORIGINAL" owner="MIS">KINDERTIJD</title>
@@ -3345,7 +3345,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_01003234"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Maya de Bij</title>
          <title type="ORIGINAL" owner="MIS">Maya the bee</title>
@@ -3356,7 +3356,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="KN_1712769"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Woezel &amp; Pip</title>
          <title type="ORIGINAL" owner="MIS">WOEZEL &amp; PIP</title>
@@ -3367,7 +3367,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00089119"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Barbapapa</title>
          <title type="ORIGINAL" owner="MIS">Barbapapa</title>
@@ -3378,7 +3378,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1312953"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Sesamstraat</title>
          <description type="MAIN" owner="MIS">Programma voor peuters en kleuters. De bekendste straat van Nederland! Pino, Ieniemienie, Purk en Tommie beleven nieuwe avonturen.</description>
@@ -3388,7 +3388,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00240526"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Olivia</title>
          <title type="ORIGINAL" owner="MIS">Olivia</title>
@@ -3399,7 +3399,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00441125"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Peter Pan</title>
          <title type="ORIGINAL" owner="MIS">Peter Pan</title>
@@ -3410,7 +3410,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_04525267"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Bernard</title>
          <title type="ORIGINAL" owner="MIS">Bernard</title>
@@ -3421,7 +3421,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_04525267"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Bernard</title>
          <title type="ORIGINAL" owner="MIS">Bernard</title>
@@ -3432,7 +3432,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_04133217"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Machtige Mike</title>
          <title type="ORIGINAL" owner="MIS">Mighty Mike</title>
@@ -3443,7 +3443,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_00474205"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">De dodelijkste 60</title>
          <title type="ORIGINAL" owner="MIS">Deadly 60</title>
@@ -3454,7 +3454,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_01098927"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Peperbollen</title>
          <title type="ORIGINAL" owner="MIS">Die Pfefferkörner</title>
@@ -3465,7 +3465,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1307693"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Beste Vrienden Quiz</title>
          <description type="MAIN" owner="MIS">Een spannende kennisquiz waarin twee teams van 'beste vrienden' tegen elkaar spelen. Het winnende team mag de volgende dag terugkomen en de strijd aangaan met een nieuw team. Ze spelen om een geldbedrag waarvan ze de helft doneren aan een eigen gekozen goed doel en de andere helft zelf mogen houden. De beste teams strijden aan het einde van het seizoen om de titel 'De Beste Vrienden van 2020' en winnen een dagje uit met Bart en Tonnie.</description>
@@ -3475,7 +3475,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="POW_04429318"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Lucas etc.</title>
          <title type="ORIGINAL" owner="MIS">Lucas etc.</title>
@@ -3486,7 +3486,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2120977"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Brugklas</title>
          <description type="MAIN" owner="MIS">De eerste scripted-reality jeugdserie in Nederland, waarin een vaste groep leerlingen gevolgd wordt tijdens het eerste jaar van de middelbare school. Voor schoolgaande kinderen met herkenbare en aangrijpende verhalen.</description>
@@ -3496,7 +3496,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="KN_1709499"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">SpangaS</title>
          <title type="ORIGINAL" owner="MIS">SPANGAS</title>
@@ -3507,7 +3507,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1305823"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Checkpoint</title>
          <description type="MAIN" owner="MIS">Een avontuurlijk testprogramma voor kinderen.</description>
@@ -3517,7 +3517,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1307693"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Beste Vrienden Quiz</title>
          <description type="MAIN" owner="MIS">Een spannende kennisquiz waarin twee teams van 'beste vrienden' tegen elkaar spelen. Het winnende team mag de volgende dag terugkomen en de strijd aangaan met een nieuw team. Ze spelen om een geldbedrag waarvan ze de helft doneren aan een eigen gekozen goed doel en de andere helft zelf mogen houden. De beste teams strijden aan het einde van het seizoen om de titel 'De Beste Vrienden van 2020' en winnen een dagje uit met Bart en Tonnie.</description>
@@ -3527,7 +3527,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2133014"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Jill</title>
          <description type="MAIN" owner="MIS">Jill Schirnhofer tekent al van jongs af aan. Haar tekeningen en illustraties in geheel eigen stijl en kleuren zijn inmiddels razend populair. In het programma geeft Jill ook jou alle tips &amp; tricks om zelf aan de slag te gaan. Tekenen, knutselen, mode en kokkerellen staan centraal in het vrolijke en creatieve programma.</description>
@@ -3537,7 +3537,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1307071"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Van Vader naar Moeder</title>
          <description type="MAIN" owner="MIS">Tatum Dagelet gaat op pad met kinderen van gescheiden ouders. Ze rijdt kinderen van de ene ouder naar de andere en praat met ze over hoe het is als je ouders gescheiden zijn.</description>
@@ -3547,7 +3547,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="AT_2120977"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Brugklas</title>
          <description type="MAIN" owner="MIS">De eerste scripted-reality jeugdserie in Nederland, waarin een vaste groep leerlingen gevolgd wordt tijdens het eerste jaar van de middelbare school. Voor schoolgaande kinderen met herkenbare en aangrijpende verhalen.</description>
@@ -3557,7 +3557,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="KN_1709499"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">SpangaS</title>
          <title type="ORIGINAL" owner="MIS">SPANGAS</title>
@@ -3568,7 +3568,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1283337"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Het Klokhuis</title>
          <description type="MAIN" owner="MIS">Jeugdprogramma dat kinderen tussen de negen en twaalf jaar informeert over de wereld om hen heen, in de breedste zin van het woord.</description>
@@ -3578,7 +3578,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="20Jeugd1900"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NOS">NOS</broadcaster>
          <title type="MAIN" owner="MIS">NOS Jeugdjournaal</title>
          <title type="ORIGINAL" owner="MIS">NOS Jeugdjournaal</title>
@@ -3588,7 +3588,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="BV_101396774"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">First Dates</title>
          <title type="ORIGINAL" owner="MIS">First Dates VJ 2020 NL</title>
@@ -3599,7 +3599,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="KN_1712040"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Keuringsdienst van Waarde</title>
          <title type="ORIGINAL" owner="MIS">KEURINGSDIENST VAN WAARDE</title>
@@ -3610,7 +3610,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1308513"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Gefileerd</title>
          <description type="MAIN" owner="MIS">De vraag naar lekker en goedkoop voedsel neemt toe. Maar wie betaalt hiervoor de echte prijs? Vijf foodies de kans om onder leiding van chef-kok Joris Bijdendijk een viergangendiner te bereiden. Jennifer Hoffman reist met de twintigers naar Thailand waar ze aan den lijve ondervinden hoe kip, garnalen, rijst en vis worden geproduceerd.</description>
@@ -3620,7 +3620,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="BV_101396684"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">Rambam</title>
          <title type="ORIGINAL" owner="MIS">Rambam VJ 2020</title>
@@ -3631,7 +3631,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="BV_101396041"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Wereld Draait Door</title>
          <title type="ORIGINAL" owner="MIS">De Wereld Draait Door VJ 2020</title>
@@ -3642,7 +3642,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="KN_1712040"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Keuringsdienst van Waarde</title>
          <title type="ORIGINAL" owner="MIS">KEURINGSDIENST VAN WAARDE</title>
@@ -3653,7 +3653,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="VPWON_1308513"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Gefileerd</title>
          <description type="MAIN" owner="MIS">De vraag naar lekker en goedkoop voedsel neemt toe. Maar wie betaalt hiervoor de echte prijs? Vijf foodies de kans om onder leiding van chef-kok Joris Bijdendijk een viergangendiner te bereiden. Jennifer Hoffman reist met de twintigers naar Thailand waar ze aan den lijve ondervinden hoe kip, garnalen, rijst en vis worden geproduceerd.</description>
@@ -3663,7 +3663,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="BV_101396041"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Wereld Draait Door</title>
          <title type="ORIGINAL" owner="MIS">De Wereld Draait Door VJ 2020</title>
@@ -3674,7 +3674,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="BV_101396684"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">Rambam</title>
          <title type="ORIGINAL" owner="MIS">Rambam VJ 2020</title>
@@ -3685,7 +3685,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="BV_101396041"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Wereld Draait Door</title>
          <title type="ORIGINAL" owner="MIS">De Wereld Draait Door VJ 2020</title>
@@ -3696,7 +3696,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SEASON"
              avType="VIDEO"
              mid="BV_101396041"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Wereld Draait Door</title>
          <title type="ORIGINAL" owner="MIS">De Wereld Draait Door S15 VJ 2020</title>
@@ -3707,7 +3707,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00818800"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="VPRO">VPRO</broadcaster>
          <title type="MAIN" owner="MIS">Pingu</title>
          <description type="MAIN" owner="MIS">Kleianimatieserie over de kleine pinguïn Pingu.</description>
@@ -3715,7 +3715,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00980920"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Olly, het kleine witte busje</title>
          <description type="MAIN" owner="MIS">Olly het dappere busje beleeft allerlei spannende avonturen met zijn trouwe vriend Stan.</description>
@@ -3723,7 +3723,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1247335"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Sesamstraat</title>
          <description type="MAIN" owner="MIS">De bekendste straat van Nederland! Pino, Ieniemienie, Purk en Tommie beleven nieuwe avonturen.</description>
@@ -3731,7 +3731,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03068578"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Bing</title>
          <description type="MAIN" owner="MIS">Bing is een driejarig konijntje vol energie. Hij is speels en geniet volop van de wereld om zich heen.</description>
@@ -3739,7 +3739,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2121097"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Zin in Zappelin is een vrolijk programma voor kleuters dat gepresenteerd wordt door Fenna Ramos. Fenna woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -3747,7 +3747,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="KN_1703632"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Vos en Haas</title>
          <description type="MAIN" owner="MIS">Vos en Haas leven met hun vrienden Uil, Ever en Pluim in het bos. Daar beleven ze vrolijke en fantasierijke avonturen. Problemen lossen ze (de gevoelige, vriendelijke haas en de goedgehumeurde grote vos) altijd op een originele en creatieve manier op.</description>
@@ -3755,7 +3755,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2121097"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Zin in Zappelin is een vrolijk programma voor kleuters dat gepresenteerd wordt door Fenna Ramos. Fenna woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -3763,7 +3763,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2063294"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Rintje</title>
          <description type="MAIN" owner="MIS">Het stoere, lieve en ondernemende hondje Rintje, uit de populaire kinderboeken van Sieb Posthuma, komt tot leven in een animatieserie. Met een oor in de lucht en zijn neus omhoog ontdekt deze foxterriër de wereld. Voor het eerst naar school, jarig zijn, bij oma slapen, naar de dokter gaan.</description>
@@ -3771,7 +3771,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2063294"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Rintje</title>
          <description type="MAIN" owner="MIS">Het stoere, lieve en ondernemende hondje Rintje, uit de populaire kinderboeken van Sieb Posthuma, komt tot leven in een animatieserie. Met een oor in de lucht en zijn neus omhoog ontdekt deze foxterriër de wereld. Voor het eerst naar school, jarig zijn, bij oma slapen, naar de dokter gaan.</description>
@@ -3779,7 +3779,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2121097"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Zin in Zappelin is een vrolijk programma voor kleuters dat gepresenteerd wordt door Fenna Ramos. Fenna woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -3787,7 +3787,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890582"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Mike de ridder</title>
          <description type="MAIN" owner="MIS">Animatieserie over de tienjarige Mike die graag ridder wil worden.</description>
@@ -3795,7 +3795,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2121097"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Zin in Zappelin is een vrolijk programma voor kleuters dat gepresenteerd wordt door Fenna Ramos. Fenna woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -3803,7 +3803,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_04582617"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Casper en Emma</title>
          <description type="MAIN" owner="MIS">De serie draait om de twee 5-jarigen Casper en Emma die voor het eerst naar de basisschool gaan. Ze hebben allebei een knuffel: Caspers knuffel heet Welpje en Emma's knuffel heet Mevrouw Konijn. Deze knuffels kunnen praten! Casper en Emma nemen hun knuffels overal mee naar toe.</description>
@@ -3811,7 +3811,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2121097"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Zin in Zappelin is een vrolijk programma voor kleuters dat gepresenteerd wordt door Fenna Ramos. Fenna woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -3819,7 +3819,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00824308"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="VPRO">VPRO</broadcaster>
          <title type="MAIN" owner="MIS">Buurman en Buurman</title>
          <description type="MAIN" owner="MIS">Poppenanimatieserie over twee buurmannen die samen allerlei klusjes doen in en rondom het huis. Ze beginnen altijd vol enthousiasme, maar helaas gaan de klussen op één of andere manier altijd de mist in...</description>
@@ -3827,7 +3827,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2121097"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Zin in Zappelin</title>
          <description type="MAIN" owner="MIS">Zin in Zappelin is een vrolijk programma voor kleuters dat gepresenteerd wordt door Fenna Ramos. Fenna woont samen met haar beste vriend en knuffel Zappie in een zappelin. Overal waar Fenna is, is Zappie ook. De hele dag door beleeft Fenna avonturen, vertelt ze verhalen, speelt ze spelletjes en kookt, knutselt en zingt ze vanuit haar woonkamer, slaapkamer of moestuin voor de allerkleinste kijkers.</description>
@@ -3835,7 +3835,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890542"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Shaun het schaap</title>
          <description type="MAIN" owner="MIS">Animatieserie over het slimme schaapje Shaun, dat allerlei avonturen beleeft op de boerderij.</description>
@@ -3843,7 +3843,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_01047543"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="VPRO">VPRO</broadcaster>
          <title type="MAIN" owner="MIS">Masha</title>
          <description type="MAIN" owner="MIS">Animatieserie over het meisje Masha.</description>
@@ -3851,7 +3851,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00822800"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Smurfen</title>
          <description type="MAIN" owner="MIS">De belevenissen van alle Smurfen in het Smurfendorp.</description>
@@ -3859,7 +3859,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_04574076"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Bernard</title>
          <description type="MAIN" owner="MIS">Animatieserie over de ijbeer Bernard.</description>
@@ -3867,7 +3867,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03806522"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">De tafel van K3</title>
          <description type="MAIN" owner="MIS">De K3'tjes nodigen kinderen uit om vragen te stellen. Hanne, Klaasje en Marthe gaan samen met een bijzondere gast op zoek naar de antwoorden.</description>
@@ -3875,7 +3875,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03164061"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Bollie &amp; Billie</title>
          <description type="MAIN" owner="MIS">Animatieserie over de avonturen van het jongetje Bollie en zijn hond Billie.</description>
@@ -3883,7 +3883,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00823480"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="VPRO">VPRO</broadcaster>
          <title type="MAIN" owner="MIS">Heuvelland Ziekenhuis</title>
          <description type="MAIN" owner="MIS">Kleianimatieserie waarin het ziekenhuis centraal staat. Dokter Max, Zuster Kitty, Dokter Ad, Chirurg Sally en de ziekenautobestuurders maken elke dag weer ontroerende en spannende dingen mee.</description>
@@ -3891,7 +3891,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03430705"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Inui</title>
          <description type="MAIN" owner="MIS">Inui, een klein Inuit-meisje, woont ergens in de poolcirkel en voor haar is er genoeg sneeuw omdat de temperatuur zelden boven het vriespunt komt.</description>
@@ -3899,7 +3899,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_01047543"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Masha</title>
          <description type="MAIN" owner="MIS">Animatieserie over het meisje Masha.</description>
@@ -3907,7 +3907,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="KN_1674156"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Kindertijd</title>
          <description type="MAIN" owner="MIS">Een gevarieerd kinderprogramma.</description>
@@ -3915,7 +3915,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03430041"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Nelli en Nora</title>
          <description type="MAIN" owner="MIS">Nelli en Nora zijn twee zusjes die graag buiten spelen en altijd in grappige situaties terechtkomen.</description>
@@ -3923,7 +3923,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890545"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRO">KRO</broadcaster>
          <title type="MAIN" owner="MIS">Pieter Konijn</title>
          <description type="MAIN" owner="MIS">Animatieserie over de avonturen van Pieter Konijn.</description>
@@ -3931,7 +3931,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_04439800"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Maan en ik</title>
          <description type="MAIN" owner="MIS">Animatieserie waarin de maan verhaaltjes vertelt en een poppenhuis tot leven komt.</description>
@@ -3939,7 +3939,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03438910"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Nijntje</title>
          <description type="MAIN" owner="MIS">Avonturen van nijntje en haar vriendjes.</description>
@@ -3947,7 +3947,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03745355"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Rita &amp; Krokodil</title>
          <description type="MAIN" owner="MIS">Rita is een vastberaden kleuter met een altijd hongerig vriendje, Krokodil. Hij woont in de badkuip, maar zeer waarschijnlijk bestaat hij enkel in de fantasie van Rita. Het zou kunnen dat Rita en Krokodil eigenlijk niet veel verder komen dan de tuin van oma of onder het vloerkleed in haar kamer. Rita's fantasie brengt hen echter overal waar ze maar willen. Met Krokodil in de buurt is er altijd wat te beleven.</description>
@@ -3955,7 +3955,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890621"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Bumba</title>
          <description type="MAIN" owner="MIS">Maak kennis met het nieuwe vriendje van Bumba, de kleine peuter Babilu! Babilu leert al spelenderwijs omgaan met situaties die voor de allerkleinsten heel herkenbaar zijn. Dit gaat natuurlijk gepaard met veel grappige momenten!</description>
@@ -3963,7 +3963,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03382279"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">TwiniPop</title>
          <description type="MAIN" owner="MIS">Twini is een klein meisje dat gek is op dansen. In het theater oefent ze met haar zus nieuwe dansjes, terwijl kleine broer Toni kattenkwaad uithaalt.</description>
@@ -3971,7 +3971,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1247336"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Sesamstraat 10 voor...</title>
          <description type="MAIN" owner="MIS">Een verzameling filmpjes van bepaalde Sesamstraatfiguren.</description>
@@ -3979,7 +3979,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890602"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Joe &amp; Jack</title>
          <description type="MAIN" owner="MIS">Animatieserie over het vierjarige jongetje Joe en zijn kat Jack.</description>
@@ -3987,7 +3987,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03877047"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">NoNo</title>
          <description type="MAIN" owner="MIS">No-No is een vogelbekdier dat elke dag wakker wordt met een nieuw idee. Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij genoeg vriendjes die hem willen helpen!</description>
@@ -3995,7 +3995,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890603"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Raad eens hoeveel ik van je hou</title>
          <description type="MAIN" owner="MIS">Hazeltje en Grote Haas willen elkaar graag laten zien hoeveel ze van elkaar houden. Telkens als Hazeltje iets bedacht heeft, doet Grote Haas daar nog een schepje bovenop.</description>
@@ -4003,14 +4003,14 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03600759"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Ziggy en de Zootram</title>
       </group>
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00872680"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Tip de muis</title>
          <description type="MAIN" owner="MIS">Animatieserie over een klein muisje dat allerlei avonturen beleeft in het bos.</description>
@@ -4018,7 +4018,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00818820"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Angelina Ballerina</title>
          <description type="MAIN" owner="MIS">Animatieserie over de kleine muis Angelina die graag prima ballerina wil worden.</description>
@@ -4026,7 +4026,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890543"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Babar en de belevenissen van Badou</title>
          <description type="MAIN" owner="MIS">Animatieserie over de achtjarige Badou, de kleinzoon van olifantenkoning Babar, die allerlei avonturen beleeft in en rondom het paleis van zijn opa.</description>
@@ -4034,7 +4034,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_01003366"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Heidi</title>
          <description type="MAIN" owner="MIS">Animatieserie over de avonturen die het meisje Heidi beleeft in de Zwitserse Alpen.</description>
@@ -4042,7 +4042,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2048907"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Mega Mindy</title>
          <description type="MAIN" owner="MIS">Ergens in een doorsnee provinciestadje op een klein politiebureau werkt Mieke. Een onopvallend meisje waar niemand echt naar omkijkt. Haar baas, commissaris Migrain, en haar knappe collega Toby slagen er maar niet in ook maar één misdaad doortastend op te lossen. Dat komt vooral door de domheid van de commissaris, maar gelukkig voor de twee mislukte speurders verschijnt op het cruciale moment telkens de superheldin Mega Mindy ten tonele. Eigenlijk is dat Mieke, maar dat weet niemand... of althans bijna niemand...</description>
@@ -4050,7 +4050,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_03430143"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Grizzy en de lemmingen</title>
          <description type="MAIN" owner="MIS">Grizzy wil niets liever dan rustig wonen in het huis van de boswachter, maar helaas komen de Lemmingen zijn rust verstoren.</description>
@@ -4058,7 +4058,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00892940"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Calimero</title>
          <description type="MAIN" owner="MIS">Avonturen van het kleine zwarte kippenkuiken, met op zijn kop een halve eierdop.</description>
@@ -4066,7 +4066,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="KN_1674156"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Kindertijd</title>
          <description type="MAIN" owner="MIS">Een gevarieerd kinderprogramma.</description>
@@ -4074,7 +4074,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890546"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Maya de bij</title>
          <description type="MAIN" owner="MIS">Animatieserie over het vrolijke bijtje Maya, dat samen met haar vriendje Willy allerlei spannende avonturen beleeft.</description>
@@ -4082,7 +4082,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="KN_1712770"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Woezel &amp; Pip</title>
          <description type="MAIN" owner="MIS">De hondenvriendjes Woezel &amp; Pip beleven allerlei avonturen in en rond het huis.</description>
@@ -4090,7 +4090,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00816642"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Barbapapa</title>
          <description type="MAIN" owner="MIS">Barbapapa en Barbamama zijn hele bijzondere wezens. Net als hun kinderen kunnen zij zich in elke gewenste vorm veranderen en daardoor beleven ze allerlei spannende avonturen.</description>
@@ -4098,7 +4098,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1247335"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Sesamstraat</title>
          <description type="MAIN" owner="MIS">De bekendste straat van Nederland! Pino, Ieniemienie, Purk en Tommie beleven nieuwe avonturen.</description>
@@ -4106,7 +4106,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00816641"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Olivia</title>
          <description type="MAIN" owner="MIS">Animatieserie over het varkentje Olivia. Ze is pas zes jaar maar denkt dat ze de hele wereld aankan en probeert elke dag nieuwe dingen uit.</description>
@@ -4114,7 +4114,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890560"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Peter Pan</title>
          <description type="MAIN" owner="MIS">Animatieserie waarin Peter Pan het samen met zijn vrienden opneemt tegen Kapitein Haak.</description>
@@ -4122,7 +4122,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_04574076"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Bernard</title>
          <description type="MAIN" owner="MIS">Animatieserie over de ijbeer Bernard.</description>
@@ -4130,7 +4130,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_04574076"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Bernard</title>
          <description type="MAIN" owner="MIS">Animatieserie over de ijbeer Bernard.</description>
@@ -4138,14 +4138,14 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_04133296"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Mighty Mike</title>
       </group>
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_00890623"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">De dodelijkste 60</title>
          <description type="MAIN" owner="MIS">Volg Steve Backshall op zijn zoektocht naar de 60 dodelijkste dieren op aarde.</description>
@@ -4153,7 +4153,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_01099374"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Peperbollen</title>
          <description type="MAIN" owner="MIS">Een groepje kinderen dat zich de Peperbollen noemt bestrijdt misdaad en onrecht in Hamburg.</description>
@@ -4161,7 +4161,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1249361"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Beste Vrienden Quiz</title>
          <description type="MAIN" owner="MIS">Quiz waarin twee teams van vrienden uit groep 7 of 8 tegen elkaar spelen. Het winnende team komt de volgende dag terug. De beste teams van het seizoen spelen in de laatste twee weken om de titel 'Beste Vrienden'. De vriendenteams spelen dagelijks om een geldbedrag. De ene helft is voor het goede doel: hun verre vrienden. De andere helft mogen ze zelf houden. De winnaars komen de volgende dag terug.</description>
@@ -4169,14 +4169,14 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="POW_04425970"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Lucas</title>
       </group>
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2035122"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Brugklas</title>
          <description type="MAIN" owner="MIS">De eerste scripted-reality jeugdserie in Nederland, waarin een vaste groep leerlingen gevolgd wordt tijdens het eerste jaar van de middelbare school. Voor schoolgaande kinderen met herkenbare en aangrijpende verhalen.</description>
@@ -4184,7 +4184,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="KN_1676932"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">SpangaS</title>
          <description type="MAIN" owner="MIS">In deze jeugddramaserie draait het om de levens van leerlingen die iedere dag van alles meemaken en met elkaar meeleven in vreugde en verdriet.</description>
@@ -4192,7 +4192,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1257901"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Checkpoint</title>
          <description type="MAIN" owner="MIS">Een avontuurlijk testprogramma voor kinderen.</description>
@@ -4200,7 +4200,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1249361"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Beste Vrienden Quiz</title>
          <description type="MAIN" owner="MIS">Quiz waarin twee teams van vrienden uit groep 7 of 8 tegen elkaar spelen. Het winnende team komt de volgende dag terug. De beste teams van het seizoen spelen in de laatste twee weken om de titel 'Beste Vrienden'. De vriendenteams spelen dagelijks om een geldbedrag. De ene helft is voor het goede doel: hun verre vrienden. De andere helft mogen ze zelf houden. De winnaars komen de volgende dag terug.</description>
@@ -4208,7 +4208,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2037172"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Jill</title>
          <description type="MAIN" owner="MIS">Jill Schirnhofer tekent al van jongs af aan. Haar tekeningen en illustraties in geheel eigen stijl en kleuren zijn inmiddels razend populair. In het programma geeft Jill ook jou alle tips &amp; tricks om zelf aan de slag te gaan. Tekenen, knutselen, mode en kokkerellen staan centraal in het vrolijke en creatieve programma.</description>
@@ -4216,7 +4216,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1298270"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Van Vader naar Moeder</title>
          <description type="MAIN" owner="MIS">Tatum Dagelet gaat op pad met kinderen van gescheiden ouders. Ze rijdt een kind van de ene ouder naar de andere, en praat met ze over hoe het is als je ouders gescheiden zijn.</description>
@@ -4224,7 +4224,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="AT_2035122"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="AVTR">AVTR</broadcaster>
          <title type="MAIN" owner="MIS">Brugklas</title>
          <description type="MAIN" owner="MIS">De eerste scripted-reality jeugdserie in Nederland, waarin een vaste groep leerlingen gevolgd wordt tijdens het eerste jaar van de middelbare school. Voor schoolgaande kinderen met herkenbare en aangrijpende verhalen.</description>
@@ -4232,7 +4232,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="KN_1676932"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">SpangaS</title>
          <description type="MAIN" owner="MIS">In deze jeugddramaserie draait het om de levens van leerlingen die iedere dag van alles meemaken en met elkaar meeleven in vreugde en verdriet.</description>
@@ -4240,7 +4240,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1256937"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NTR">NTR</broadcaster>
          <title type="MAIN" owner="MIS">Het Klokhuis</title>
          <description type="MAIN" owner="MIS">Jeugdprogramma dat kinderen tussen de negen en twaalf jaar informeert over de wereld om hen heen, in de breedste zin van het woord.</description>
@@ -4248,7 +4248,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="NOSJeugdjournaal"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="NOS">NOS</broadcaster>
          <title type="MAIN" owner="MIS">NOS Jeugdjournaal</title>
          <description type="MAIN" owner="MIS">Het laatste nieuws uit binnen- en buitenland en het weer, speciaal voor de jonge kijker.</description>
@@ -4256,7 +4256,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="BNN_101378960"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">First Dates</title>
          <description type="MAIN" owner="MIS">Het First Dates restaurant zit vol met singles op hun eerste afspraak. De kijker krijgt de kans hun eerste en vaak ongemakkelijke gesprek te volgen.</description>
@@ -4264,7 +4264,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="KN_1678993"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Keuringsdienst van Waarde</title>
          <description type="MAIN" owner="MIS">In dit programma staat centraal wat fabrikanten ons als consumenten vertellen. Klopt het wat ze claimen en wat ze ons in reclames verkopen? Verslaggevers Teun van de Keuken, Sofie van den Enk, Daan Nieber, Ersin Kiris, Marijn Frank en Maarten Remmers nemen de telefoon ter hand en bellen er actief op los. Ze stellen simpele vragen en krijgen de meest verbazingwekkende antwoorden op food, non-food en nieuwsgerelateerde kwesties. Prikkelend, onderzoekend en vasthoudend. Keuringsdienst van Waarde: simpele vragen,verbazingwekkende antwoorden.</description>
@@ -4272,7 +4272,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1308512"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Gefileerd</title>
          <description type="MAIN" owner="MIS">Programma over de herkomst van voedsel. Weet de consument wat hij eet? Vijf foodies reizen naar Thailand om te ondervinden hoe kip, garnalen, rijst en vis worden geproduceerd.</description>
@@ -4280,7 +4280,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VARA_101378105"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">Rambam</title>
          <description type="MAIN" owner="MIS">Rambam onderzoekt op eigenzinnige wijze zaken waar een luchtje aan zit. Als er misstanden aan het licht komen, slaan de makers van Rambam altijd met ongelijke munt terug.</description>
@@ -4288,7 +4288,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VARA_101377717"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Wereld Draait Door</title>
          <description type="MAIN" owner="MIS">Liveprogramma vanuit Amsterdam met actuele gasten uit de politiek, wetenschap, sport, cultuur en media. Met optredens, opmerkelijke tv-fragmenten en LuckyTV.</description>
@@ -4296,7 +4296,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="KN_1678993"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="KRNC">KRNC</broadcaster>
          <title type="MAIN" owner="MIS">Keuringsdienst van Waarde</title>
          <description type="MAIN" owner="MIS">In dit programma staat centraal wat fabrikanten ons als consumenten vertellen. Klopt het wat ze claimen en wat ze ons in reclames verkopen? Verslaggevers Teun van de Keuken, Sofie van den Enk, Daan Nieber, Ersin Kiris, Marijn Frank en Maarten Remmers nemen de telefoon ter hand en bellen er actief op los. Ze stellen simpele vragen en krijgen de meest verbazingwekkende antwoorden op food, non-food en nieuwsgerelateerde kwesties. Prikkelend, onderzoekend en vasthoudend. Keuringsdienst van Waarde: simpele vragen,verbazingwekkende antwoorden.</description>
@@ -4304,7 +4304,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VPWON_1308512"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="EO">EO</broadcaster>
          <title type="MAIN" owner="MIS">Gefileerd</title>
          <description type="MAIN" owner="MIS">Programma over de herkomst van voedsel. Weet de consument wat hij eet? Vijf foodies reizen naar Thailand om te ondervinden hoe kip, garnalen, rijst en vis worden geproduceerd.</description>
@@ -4312,7 +4312,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VARA_101377717"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Wereld Draait Door</title>
          <description type="MAIN" owner="MIS">Liveprogramma vanuit Amsterdam met actuele gasten uit de politiek, wetenschap, sport, cultuur en media. Met optredens, opmerkelijke tv-fragmenten en LuckyTV.</description>
@@ -4320,7 +4320,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VARA_101378105"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">Rambam</title>
          <description type="MAIN" owner="MIS">Rambam onderzoekt op eigenzinnige wijze zaken waar een luchtje aan zit. Als er misstanden aan het licht komen, slaan de makers van Rambam altijd met ongelijke munt terug.</description>
@@ -4328,7 +4328,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VARA_101377717"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Wereld Draait Door</title>
          <description type="MAIN" owner="MIS">Liveprogramma vanuit Amsterdam met actuele gasten uit de politiek, wetenschap, sport, cultuur en media. Met optredens, opmerkelijke tv-fragmenten en LuckyTV.</description>
@@ -4336,7 +4336,7 @@ Hij weet niet zo goed wat hij met al die ideeën moet, maar gelukkig heeft hij g
       <group type="SERIES"
              avType="VIDEO"
              mid="VARA_101377717"
-             workflow="FOR_REPUBLICATION">
+             workflow="FOR REPUBLICATION">
          <broadcaster id="BV">BV</broadcaster>
          <title type="MAIN" owner="MIS">De Wereld Draait Door</title>
          <description type="MAIN" owner="MIS">Liveprogramma vanuit Amsterdam met actuele gasten uit de politiek, wetenschap, sport, cultuur en media. Met optredens, opmerkelijke tv-fragmenten en LuckyTV.</description>
