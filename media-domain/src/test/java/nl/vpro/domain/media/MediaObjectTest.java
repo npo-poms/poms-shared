@@ -29,6 +29,7 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.validation.ValidationLevel;
 
 import static nl.vpro.domain.ValidationTestHelper.*;
 import static nl.vpro.domain.media.support.OwnerType.*;
@@ -534,10 +535,12 @@ public class MediaObjectTest {
         Program p = new Program();
         p.setType(ProgramType.BROADCAST);
         p.setAVType(AVType.VIDEO);
+        p.getGenres().add( new Genre("3.0.1.7.21"));
+        p.setAgeRating(AgeRating.ALL);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setLanguages(Arrays.asList(new Locale("ZZ"), Locales.DUTCH));
 
-        Set<ConstraintViolation<Program>> constraintViolations = getValidator().validate(p);
+        Set<ConstraintViolation<Program>> constraintViolations = getValidator().validate(p, ValidationLevel.WARNING.getClasses());
 
         assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.language.message}");
         assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("zz is een ongeldige ISO639 taalcode");
@@ -551,10 +554,12 @@ public class MediaObjectTest {
 
         p.setType(ProgramType.BROADCAST);
         p.setAVType(AVType.VIDEO);
+        p.setAgeRating(AgeRating.ALL);
+        p.getGenres().add(new Genre("3.0.1.7.21"));
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setLanguages(Arrays.asList(Locales.NETHERLANDISH, new Locale("nl", "XX")));
 
-        List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(getValidator().validate(p));
+        List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(getValidator().validate(p, ValidationLevel.WARNING.getClasses()));
         Comparator<ConstraintViolation<Program>> comparing = Comparator.comparing(c -> c.getPropertyPath().toString());
         constraintViolations.sort(comparing.thenComparing(ConstraintViolation::getMessageTemplate));
 
