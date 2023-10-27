@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import javax.validation.Valid;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -51,11 +52,11 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
 
     @XmlElementWrapper(name = "programTable")
     @XmlElement(name = "program")
-    protected List<Program> programTable;
+    protected List<@Valid Program> programTable;
 
     @XmlElementWrapper(name = "groupTable")
     @XmlElement(name = "group")
-    protected List<Group> groupTable;
+    protected List<@Valid Group> groupTable;
 
     @XmlElement
     @Getter

@@ -17,8 +17,7 @@ import org.hibernate.validator.messageinterpolation.ExpressionLanguageFeatureLev
 import com.google.common.cache.*;
 
 import nl.vpro.i18n.Locales;
-import nl.vpro.validation.PomsValidatorGroup;
-import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.validation.*;
 
 import static javax.validation.Validation.byProvider;
 
@@ -37,6 +36,8 @@ public class Validation {
             }
         });
 
+
+    public static final Class<?>[] DEFAULT_GROUPS = ValidationLevel.POMS.getClasses();
 
 
     private static Validator createValidator(Locale locale) {
@@ -107,7 +108,7 @@ public class Validation {
 
 
     public static <T> Set<ConstraintViolation<T>> validate(T object) {
-        return validate(object, Default.class, PomsValidatorGroup.class);
+        return validate(object, DEFAULT_GROUPS);
     }
 
     public static <T> Set<ConstraintViolation<T>> validateProperty(T object, String propertyName) {
