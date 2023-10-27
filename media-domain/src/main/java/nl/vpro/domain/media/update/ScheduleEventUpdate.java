@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hibernate.validator.constraints.time.DurationMin;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -101,6 +102,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @JsonSerialize(using = DurationToJsonTimestamp.XmlSerializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @NotNull(message = "duration is required")
+    @DurationMin
     private Duration duration;
 
 

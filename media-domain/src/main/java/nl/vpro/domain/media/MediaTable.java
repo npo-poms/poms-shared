@@ -60,10 +60,12 @@ public class MediaTable implements Iterable<MediaObject>, Serializable, Streamab
     @XmlElement
     @Getter
     @Setter
+    @Valid
     protected LocationTable locationTable;
 
     @XmlElement
     @Setter
+    @Valid
     protected Schedule schedule;
 
     @XmlAttribute

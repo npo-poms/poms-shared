@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -39,13 +40,14 @@ public class MediaUpdateTable implements Iterable<MediaUpdate<?>>, Streamable<Me
 
     @XmlElementWrapper(name = "programTable")
     @XmlElement(name = "program")
-    List<ProgramUpdate> programTable = new ArrayList<>();
+    List<@Valid ProgramUpdate> programTable = new ArrayList<>();
 
     @XmlElementWrapper(name = "groupTable")
     @XmlElement(name = "group")
-    List<GroupUpdate> groupTable = new ArrayList<>();
+    List<@Valid GroupUpdate> groupTable = new ArrayList<>();
 
     @XmlElement
+    @Valid
     ScheduleUpdate schedule = null;
 
     public void addGroups(Collection<GroupUpdate> values) {

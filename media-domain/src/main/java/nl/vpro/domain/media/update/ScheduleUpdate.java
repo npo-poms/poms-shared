@@ -5,6 +5,7 @@ import lombok.*;
 import java.time.*;
 import java.util.*;
 
+import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -33,7 +34,7 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
 
 
     @XmlTransient // See property
-    protected SortedSet<ScheduleEventUpdate> scheduleEvents;
+    protected SortedSet<@Valid ScheduleEventUpdate> scheduleEvents;
 
     @XmlAttribute
     @Getter

@@ -19,6 +19,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+import org.hibernate.validator.constraints.time.DurationMin;
 import org.meeuw.functional.TriFunction;
 
 import com.fasterxml.jackson.annotation.*;
@@ -128,6 +129,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @DurationMin // negative durations don't make sense
     protected Duration duration;
 
     protected String imi;

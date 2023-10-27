@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.meeuw.util.test.ComparableTheory;
 
 import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.media.update.Validation;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -184,6 +185,15 @@ public class ScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
         assertThat(target.getGuideDate().toString()).isEqualTo("1970-01-01");
     }
+
+
+    @Test
+    public void validation() {
+        ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.EPOCH, Duration.ofMillis(-110));
+        assertThat(Validation.getValidator().validate(target)).hasSize(1);
+    }
+
+
     @Override
     public Arbitrary<? extends ScheduleEvent> datapoints() {
         return Arbitraries.of(

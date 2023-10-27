@@ -13,10 +13,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "locationTableType",
@@ -28,9 +26,9 @@ public class LocationTable implements Serializable {
     private static final long serialVersionUID = 7215068410057727467L;
 
     @XmlElement(name = "location")
-    protected List<Location> locations;
+    protected List<@Valid Location> locations;
     @XmlElement(name = "scheduleEvent")
-    protected List<ScheduleEvent> scheduleEvents;
+    protected List<@Valid ScheduleEvent> scheduleEvents;
 
 
     public List<Location> getLocations() {
