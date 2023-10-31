@@ -82,6 +82,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private final MeterRegistry meterRegistry;
 
+
+    /**
+     * Whether to determin checksum of incoming stream
+     */
     private final boolean checkChecksum;
 
 
@@ -100,7 +104,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         this.chunkSize = chunkSize;
         this.defaultEmail = defaultEmail;
         this.meterRegistry = meterRegistry;
-        this.checkChecksum = checkChecksum == null || checkChecksum;
+        this.checkChecksum = checkChecksum != null && checkChecksum;
     }
 
 

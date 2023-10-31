@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
 import java.nio.file.*;
-import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Properties;
@@ -52,14 +51,14 @@ class AudioSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             50 * 1000 * 1024,
             "m.meeuwissen.vpro@gmail.com",
-            null,
+            true,
             new LoggingMeterRegistry()
         );
     }
 
     @Test
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
-    public void uploadAudio() throws IOException, InterruptedException, NoSuchAlgorithmException {
+    public void uploadAudio() throws IOException, InterruptedException {
         final Instant start = Instant.now();
         final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample-big.mp3");
 
@@ -74,7 +73,7 @@ class AudioSourcingServiceImplTest {
             .build();
         impl.upload(logger, MID, restrictions,
             Files.size(file),
-            null,
+            new byte[] {1, 2, 3},
             cachingInputStream,
             "m.meeuwissen.vpro@gmail.com",
             phaseLogger(logger)
