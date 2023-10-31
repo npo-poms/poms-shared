@@ -82,12 +82,16 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private final MeterRegistry meterRegistry;
 
+    private final boolean checkChecksum;
+
+
     AbstractSourcingServiceImpl(
         String baseUrl,
         @Nullable String callbackBaseUrl,
         String token,
         int chunkSize,
         String defaultEmail,
+        Boolean checkChecksum,
         MeterRegistry meterRegistry) {
         this.baseUrl = baseUrl.replaceAll("([^/])$","$1/");
 
@@ -96,6 +100,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         this.chunkSize = chunkSize;
         this.defaultEmail = defaultEmail;
         this.meterRegistry = meterRegistry;
+        this.checkChecksum = checkChecksum == null || checkChecksum;
     }
 
 
@@ -115,17 +120,19 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
        Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException {
 
        final AtomicLong uploaded = new AtomicLong(0);
+
+
        MessageDigest digester;
-       if (checksum == null) {
-            digester = MessageDigest.getInstance("MD5");
-            inputStream = new DigestInputStream(inputStream, digester);
-            logger.info("Determining MD5 checksum on the fly");
+       if (checkChecksum && checksum != null) {
+           digester = MessageDigest.getInstance("MD5");
+           inputStream = new DigestInputStream(inputStream, digester);
+           logger.info("Determining MD5 checksum on the fly");
        } else {
            digester = null;
        }
+
        final InputStream finalInputStream = inputStream;
        try (finalInputStream) {
-
            // this is not needed (as I've tested)
            //ingest(logger, mid, getFileName(mid), restrictions);
            phase.accept(Phase.START);
@@ -138,13 +145,17 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            }
        }
        assert uploaded.get() == fileSize;
-       if (checksum == null) {
-           checksum = digester.digest();
-       }
-       assert checksum != null;
+
 
        phase.accept(Phase.FINISH);
-       return uploadFinish(logger, mid, uploaded, checksum, restrictions);
+       if (checkChecksum && checksum != null)  {
+           byte[] determinedChecksum = digester.digest();
+           if (determinedChecksum != checksum) {
+               throw new IllegalArgumentException("Illegal checksum");
+           }
+       }
+
+       return uploadFinish(logger, mid, uploaded, restrictions);
    }
 
 
@@ -240,6 +251,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (email != null) {
             body.add("email", email);
         }
+        if (checksum != null) {
+            String checksumAsString = new BigInteger(1, checksum).toString(16);
+            logger.info("Checksum {}", checksumAsString);
+            body.add(CHECKSUM, checksumAsString);
+        }
 
         addRegion(logger, body, restrictions);
 
@@ -324,14 +340,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         SimpleLogger logger,
         String mid,
         AtomicLong uploaded,
-        byte [] checksum,
         Restrictions restrictions) throws IOException, InterruptedException {
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add(UPLOAD_PHASE, "finish");
 
-        String checksumAsString = new BigInteger(1, checksum).toString(16);
-        logger.info("Checksum {}", checksumAsString);
-        body.add(CHECKSUM, checksumAsString);
+
 
         addRegion(logger, body, restrictions);
 

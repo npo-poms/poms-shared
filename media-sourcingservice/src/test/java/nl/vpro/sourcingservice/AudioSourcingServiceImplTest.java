@@ -52,6 +52,7 @@ class AudioSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             50 * 1000 * 1024,
             "m.meeuwissen.vpro@gmail.com",
+            null,
             new LoggingMeterRegistry()
         );
     }

@@ -22,9 +22,10 @@ public class AudioSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
         @NonNull @Value("${sourcingservice.audio.token}") String audioToken,
         @Value("${sourcingservice.chunkSize:10000000}") int chunkSize,
         @Value("${sourcingservice.defaultEmail:#{null}}") String defaultEmail,
+        @Value("${sourcingservice.checkChecksum:#{null}}") Boolean checkChecksum,
         MeterRegistry meterRegistry
        ) {
-        super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, meterRegistry);
+        super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, checkChecksum, meterRegistry);
     }
 
     @Override

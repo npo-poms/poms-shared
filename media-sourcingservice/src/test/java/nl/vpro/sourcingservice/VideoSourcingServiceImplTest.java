@@ -42,6 +42,7 @@ class VideoSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.video.token"),
             100_000_000,
             "m.meeuwissen.vpro@gmail.com",
+            null,
             new LoggingMeterRegistry()
         );
     }
