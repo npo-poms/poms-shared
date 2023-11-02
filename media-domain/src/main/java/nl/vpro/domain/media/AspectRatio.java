@@ -51,7 +51,7 @@ public enum AspectRatio implements XmlValued {
         if (w == null || h == null) {
             return null;
         }
-        int gcd = (int) gcd(w, h);
+        int gcd = gcd(w, h);
         if (gcd == 0) return null;
         int aw = w / gcd;
         int ah = h / gcd;
