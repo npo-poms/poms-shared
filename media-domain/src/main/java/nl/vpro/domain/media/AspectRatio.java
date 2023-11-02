@@ -1,11 +1,15 @@
 package nl.vpro.domain.media;
 
+import javax.xml.bind.annotation.XmlEnumValue;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import javax.xml.bind.annotation.XmlEnumValue;
+
 import nl.vpro.domain.XmlValued;
 import nl.vpro.domain.media.bind.AspectRatioToString;
-import org.checkerframework.checker.nullness.qual.Nullable;
+
 import static org.meeuw.math.IntegerUtils.gcd;
 
 @JsonSerialize(using = AspectRatioToString.Serializer.class)
@@ -24,7 +28,14 @@ public enum AspectRatio implements XmlValued {
         public String toString() {
             return "xCIF";
         }
-    };
+    },
+
+    /**
+     * @since 7.10
+     */
+    @XmlEnumValue("9:16")
+    _9x16(9, 16);
+
 
     private final int w;
     private final int h;
@@ -56,7 +67,7 @@ public enum AspectRatio implements XmlValued {
      * @since 1.8
      */
     public static AspectRatio fromString(String s) {
-        if (s == null || s.length() == 0) return null;
+        if (s == null || s.isEmpty()) return null;
         String[] split = s.split("\\s*[^\\d]\\s*", 2);
         return fromDimension(
             Integer.parseInt(split[0].trim()),
