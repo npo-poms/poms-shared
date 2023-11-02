@@ -612,6 +612,7 @@
       <xs:enumeration value="4:3"/>
       <xs:enumeration value="16:9"/>
       <xs:enumeration value="xCIF"/>
+      <xs:enumeration value="9:16"/>
     </xs:restriction>
   </xs:simpleType>
 
