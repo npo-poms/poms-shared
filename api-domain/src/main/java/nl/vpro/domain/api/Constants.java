@@ -16,7 +16,7 @@ public class Constants {
     }
 
 
-    public static final int MAX_RESULTS = 240;
+    public static final int MAX_RESULTS = 500;
 
     public static final int DEFAULT_MAX_RESULTS = 10;
 
