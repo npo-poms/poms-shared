@@ -26,6 +26,7 @@ public class Constants {
 
 
     public static final String OFFSET = "offset";
+    public static final String OFFSET_MESSAGE = "An offset is supported. Default is 0. It cannot be very big, so it cannot be used to iterate over all results. Use iterate call (backed by a cursor) for that";
     public static final String ZERO = "0";
     public static final String MAX = "max";
     public static final String ASC = "asc";
