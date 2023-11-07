@@ -1,7 +1,6 @@
 package nl.vpro.nep.service.impl;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.sftp.*;
 
@@ -55,8 +54,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
      */
     private Duration sftpTimeout = Duration.ofSeconds(5);
 
-    @Getter
-    @Setter
     private int  batchSize = 1024 * 1024 * 5;
 
 
@@ -66,7 +63,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         @Value("${nep.gatekeeper-upload.username}") String username,
         @Value("${nep.gatekeeper-upload.password}") String password,
         @Value("${nep.gatekeeper-upload.hostkey}") String hostKey,
-        @Value("${nep.gatekeeper-upload.batchSize:5242880}") int batchSize
+        @Value("${nep.gatekeeper-upload.batchSize:52428800}") int batchSize
 
     ) {
         this.sftpHost = sftpHost;
@@ -254,6 +251,16 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     @ManagedAttribute
     public void setSftpTimeout(String sftpTimeout) {
         this.sftpTimeout = TimeUtils.parseDuration(sftpTimeout).orElseThrow(couldNotParse(sftpTimeout));
+    }
+
+    @ManagedAttribute
+    public int getBatchSize() {
+        return batchSize;
+    }
+
+    @ManagedAttribute
+    public void setBatchSize(int batchSize) {
+        this.batchSize = batchSize;
     }
 
     private Supplier<IllegalArgumentException> couldNotParse(String string){
