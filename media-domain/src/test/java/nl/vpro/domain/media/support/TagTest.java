@@ -7,7 +7,7 @@ package nl.vpro.domain.media.support;
 import net.jqwik.api.*;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.ComparableTheory;
+import org.meeuw.theories.ComparableTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

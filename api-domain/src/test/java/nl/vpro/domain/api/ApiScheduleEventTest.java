@@ -13,7 +13,7 @@ import java.util.List;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.ComparableTheory;
+import org.meeuw.theories.ComparableTheory;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 

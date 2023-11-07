@@ -5,7 +5,7 @@ import net.jqwik.api.*;
 import net.jqwik.api.arbitraries.IntegerArbitrary;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.ComparableTheory;
+import org.meeuw.theories.ComparableTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

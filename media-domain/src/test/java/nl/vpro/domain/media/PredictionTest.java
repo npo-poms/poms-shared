@@ -10,7 +10,7 @@ import net.jqwik.api.Arbitrary;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.ComparableTheory;
+import org.meeuw.theories.ComparableTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

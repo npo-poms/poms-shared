@@ -206,7 +206,7 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
             // proxy's...
             this.mediaClass = Program.class.getName();
             SortedSet<ScheduleEvent> scheduleEvents = ((Program) media).getScheduleEvents();
-            if(scheduleEvents.size() > 0) {
+            if(!scheduleEvents.isEmpty()) {
                 this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, false).orElse(null);
                 this.firstScheduleEventNoRerun = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, true).orElse(null);
                 this.lastScheduleEvent= ScheduleEvents.getLastScheduleEvent(scheduleEvents, false).orElse(null);
@@ -337,16 +337,16 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
     public static final List<String> FIELD_NAMES;
     private static final  List<Field> FIELDS;
     static {
-        FIELDS = Collections.unmodifiableList(Arrays.stream(MediaListItem.class.getDeclaredFields()).filter(
-                (f) -> {
-                    f.setAccessible(true);
-                    return ! Modifier.isStatic(f.getModifiers());
-                })
-            .collect(Collectors.toList()));
-        FIELD_NAMES = Collections.unmodifiableList(FIELDS.stream()
+        FIELDS = Arrays.stream(MediaListItem.class.getDeclaredFields()).filter(
+            (f) -> {
+                f.setAccessible(true);
+                return !Modifier.isStatic(f.getModifiers());
+            }).toList();
+        FIELD_NAMES = FIELDS.stream()
             .map(Field::getName)
-            .collect(Collectors.toList()));
+            .toList();
     }
+
     private static Object toRecordObject(Object o) {
         if (o == null) {
             return "";

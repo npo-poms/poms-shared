@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.ComparableTheory;
+import org.meeuw.theories.ComparableTheory;
 
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.update.Validation;

@@ -13,7 +13,7 @@ import javax.validation.ConstraintViolation;
 import javax.xml.bind.util.JAXBSource;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.ComparableTheory;
+import org.meeuw.theories.ComparableTheory;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
