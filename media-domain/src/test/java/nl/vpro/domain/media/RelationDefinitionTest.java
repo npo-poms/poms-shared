@@ -12,7 +12,7 @@ import javax.validation.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.BasicObjectTheory;
+import org.meeuw.theories.BasicObjectTheory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

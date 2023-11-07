@@ -21,7 +21,7 @@ import javax.validation.groups.Default;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.*;
-import org.meeuw.util.test.BasicObjectTheory;
+import org.meeuw.theories.BasicObjectTheory;
 import org.postgresql.core.Utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

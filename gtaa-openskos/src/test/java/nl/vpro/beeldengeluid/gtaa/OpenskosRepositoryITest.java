@@ -17,6 +17,7 @@ import nl.vpro.util.Env;
 import nl.vpro.w3.rdf.Description;
 
 import static nl.vpro.beeldengeluid.gtaa.OpenskosTests.getRealInstance;
+import static nl.vpro.domain.gtaa.Scheme.genrefilmmuseum;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -186,6 +187,20 @@ public class OpenskosRepositoryITest {
         Optional<GTAAConcept> person = impl.get("http://data.beeldengeluid.nl/gtaa/1234567890123456789012345678901234567890");
         log.info("person: {}", person);
         assertThat(person).isEmpty();
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("envs")
+    public void testFindEyeGenre(Env env) {
+        OpenskosRepository impl = getRealInstance(env);
+        List<Description> concepts = impl.findForSchemes("science", 100, GTAARepository.SchemeOrNot.of(genrefilmmuseum));
+        assertThat(concepts).isNotEmpty();
+        assertThat(concepts.get(0).getStatus()).isNotNull();
+        for (Description concept : concepts) {
+            log.info("{}", concept);
+
+        }
     }
 
 

@@ -7,7 +7,7 @@ package nl.vpro.domain.media;
 import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
-import org.meeuw.util.test.BasicObjectTheory;
+import org.meeuw.theories.BasicObjectTheory;
 
 /**
  * @author Roelof Jan Koekoek

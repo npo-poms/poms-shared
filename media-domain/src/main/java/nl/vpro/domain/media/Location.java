@@ -544,17 +544,25 @@ public class Location extends PublishableObject<Location>
 
     @Override
     public Instant getPublishStartInstant() {
+        Instant own = getOwnPublicStartInstant();
         if(hasPlatform() && mediaObject != null) {
             try {
                 Prediction record = getAuthorityRecord(false);
                 if (record != null) {
-                    return record.getPublishStartInstant();
+                    Instant recordPublishStart = record.getPublishStartInstant();
+                    if (recordPublishStart != null) {
+                        return own == null ? recordPublishStart : own.isAfter(recordPublishStart) ? own : recordPublishStart;
+                    }
                 }
             } catch (IllegalAuthorityRecord iea) {
                 log.debug(iea.getMessage());
             }
         }
 
+        return own;
+    }
+
+    public Instant getOwnPublicStartInstant() {
         return super.getPublishStartInstant();
     }
 
@@ -567,9 +575,6 @@ public class Location extends PublishableObject<Location>
 
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
-                if (hasPlatform()) {
-                    getAuthorityRecord().setPublishStartInstant(publishStart);
-                }
                 mediaObject.realizePrediction(this);
             }
 
@@ -582,6 +587,7 @@ public class Location extends PublishableObject<Location>
     }
 
 
+
     /**
      * The publish stop of a location is rather complicated:
      * 1. It is the offline date of the corresponding streaming platform status if that is available.
@@ -591,6 +597,7 @@ public class Location extends PublishableObject<Location>
     @Override
     @Nullable
     public Instant getPublishStopInstant() {
+        Instant own = getOwnPublicStartInstant();
         if(hasPlatform() && mediaObject != null) {
             Instant streamingOffline = onStreaming() && mediaObject.getStreamingPlatformStatus() != null ? mediaObject.getStreamingPlatformStatus().getOffline(hasDrm()) : null;
             try {
@@ -609,6 +616,11 @@ public class Location extends PublishableObject<Location>
 
         return super.getPublishStopInstant();
     }
+
+    public Instant getOwnPublicStopInstant() {
+        return super.getPublishStopInstant();
+    }
+
 
     @NonNull
     @Override

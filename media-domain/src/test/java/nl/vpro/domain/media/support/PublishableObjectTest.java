@@ -10,7 +10,7 @@ import java.io.Serial;
 import java.time.Instant;
 
 import org.junit.jupiter.api.Assumptions;
-import org.meeuw.util.test.BasicObjectTheory;
+import org.meeuw.theories.BasicObjectTheory;
 
 import static nl.vpro.domain.media.support.Workflow.*;
 import static nl.vpro.test.jqwik.HamcrestAssumptions.*;

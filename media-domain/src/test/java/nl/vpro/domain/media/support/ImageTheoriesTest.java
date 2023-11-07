@@ -13,7 +13,7 @@ import java.io.Writer;
 import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.BasicObjectTheory;
+import org.meeuw.theories.BasicObjectTheory;
 
 import nl.vpro.domain.image.ImageType;
 
