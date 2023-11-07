@@ -4,7 +4,7 @@ import net.jqwik.api.Arbitraries;
 import net.jqwik.api.Arbitrary;
 
 import org.junit.jupiter.api.Test;
-import org.meeuw.util.test.BasicObjectTheory;
+import org.meeuw.theories.BasicObjectTheory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
