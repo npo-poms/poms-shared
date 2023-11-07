@@ -121,7 +121,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
        byte @Nullable[]  checksum,
        InputStream inputStream,
        String errors,
-       Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException {
+       Consumer<Phase> phase) throws SourcingServiceException {
 
        final AtomicLong uploaded = new AtomicLong(0);
 
