@@ -118,7 +118,77 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 .nl("Uploaden naar {}:{}")
                 .slf4jArgs(sftpHost, nepFile)
         );
-        return IOUtils.copy(incomingStream, OutputStream.nullOutputStream());
+        try(
+            final SSHClientFactory.ClientHolder client = createClient();
+            final SFTPClient sftp = client.get().newSFTPClient()
+        ) {
+            sftp.getSFTPEngine().setTimeoutMs((int) sftpTimeout.toMillis());
+            final int split  = nepFile.lastIndexOf('/');
+            if (split > 0) {
+                sftp.mkdirs(nepFile.substring(0, split));
+            }
+            if (! replaces) {
+                if (!checkExistence(logger, sftp, nepFile, size)) {
+                    return -1;
+                }
+            }
+            try (
+                final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
+                final OutputStream out = handle.new RemoteFileOutputStream()
+            ) {
+                final byte[] buffer = new byte[batchSize];
+                long prevBatchCount = -1;
+                long batchCount = 0;
+                long numberOfBytes = 0;
+                int n;
+                while (IOUtils.EOF != (n = incomingStream.read(buffer))) {
+                    if (n == 0) {
+                        log.debug("InputStream#read(buffer) gave zero bytes.");
+                        continue;
+                    }
+                    out.write(buffer, 0, n);
+                    numberOfBytes += n;
+
+                    batchCount = numberOfBytes / (batchSize * infoBatch);
+                    if (prevBatchCount != batchCount) {
+                        prevBatchCount = batchCount;
+                        final Duration duration = Duration.between(start, Instant.now());
+
+                        // updating spans in ngToast doesn't work...
+                        logger.info(
+                            en("Uploaded {}/{} to {}:{} ({})")
+                                .nl("Geüpload {}/{} naar {}:{} ({})")
+                                .slf4jArgs(
+                                    FORMATTER.format(numberOfBytes),
+                                    FORMATTER.format(size),
+                                    sftpHost, nepFile,
+                                    FORMATTER.formatSpeed(numberOfBytes, duration)
+                                )
+                        );
+                    } else {
+                        log.debug("Uploaded {}/{} bytes to NEP", FORMATTER.format(numberOfBytes), FORMATTER.format(size));
+                    }
+                }
+                final Duration duration = Duration.between(start, Instant.now());
+                logger.info(
+                    en("Ready uploading {}/{} (took {}, {})")
+                        .nl("Klaar met uploaden van {}/{} (kostte: {}, {})")
+                        .slf4jArgs(
+                            FORMATTER.format(numberOfBytes),
+                            FORMATTER.format(size),
+                            duration,
+                            FORMATTER.formatSpeed(numberOfBytes, duration))
+                );
+                return numberOfBytes;
+            } catch (SFTPException sftpException) {
+                Throwable e = sftpException;
+                if (sftpException.getCause() != null) {
+                    e = sftpException.getCause();
+                }
+                logger.info("error from sftp: {}", e.getMessage(), e);
+                throw sftpException;
+            }
+        }
     }
 
     private boolean checkExistence(
@@ -190,7 +260,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         return () -> new IllegalArgumentException("could not parse " + string);
     }
 
-    synchronized SSHClientFactory.ClientHolder createClient() throws IOException {
+    protected synchronized SSHClientFactory.ClientHolder createClient() throws IOException {
 
         SSHClientFactory.ClientHolder client = SSHClientFactory.create(
             hostKey,
@@ -201,8 +271,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
         client.get().setTimeout((int) socketTimeout.toMillis());
         client.get().setConnectTimeout((int) connectTimeout.toMillis());
-        client.get().useCompression();
-
 
         log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport());
         return client;
