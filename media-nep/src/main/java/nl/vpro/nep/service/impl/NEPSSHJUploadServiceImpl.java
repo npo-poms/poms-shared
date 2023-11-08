@@ -80,7 +80,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             properties.getProperty("nep.gatekeeper-upload.username"),
             properties.getProperty("nep.gatekeeper-upload.password"),
             properties.getProperty("nep.gatekeeper-upload.hostkey"),
-            NumberUtils.toInt(properties.getProperty("nep.gatekeeper-upload.batchSize"), 5242880)
+            NumberUtils.toInt(properties.getProperty("nep.gatekeeper-upload.batchSize"), 52428800)
         );
     }
 
@@ -106,7 +106,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         final boolean replaces) throws IOException {
 
         final Instant start = Instant.now();
-        final long infoBatch = 10;
+        final long infoBatch = 1;
 
 
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
