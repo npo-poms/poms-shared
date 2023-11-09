@@ -187,7 +187,7 @@ public class Roles {
 
     public static final Set<String> RECOGNIZED;
     static {
-        Set<String> recognized = new HashSet<>();
+        final Set<String> recognized = new HashSet<>();
         try {
             for (Field f : Roles.class.getDeclaredFields()) {
                 if (Modifier.isStatic(f.getModifiers()) && Modifier.isPublic(f.getModifiers()) && f.getType().equals(String.class)) {
