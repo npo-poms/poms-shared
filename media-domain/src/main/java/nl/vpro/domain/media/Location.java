@@ -547,7 +547,7 @@ public class Location extends PublishableObject<Location>
     public void setAuthorityUpdate(Boolean ceresUpdate) {
         this.authorityUpdate = ceresUpdate;
     }
-
+/*  MSE-5644
     @Override
     public Instant getPublishStartInstant() {
         Instant own = getOwnPublicStartInstant();
@@ -566,7 +566,24 @@ public class Location extends PublishableObject<Location>
         }
 
         return own;
+    }*/
+
+    @Override
+    public Instant getPublishStartInstant() {
+        if(hasPlatform() && mediaObject != null) {
+            try {
+                Prediction record = getAuthorityRecord(false);
+                if (record != null) {
+                    return record.getPublishStartInstant();
+                }
+            } catch (IllegalAuthorityRecord iea) {
+                log.debug(iea.getMessage());
+            }
+        }
+
+        return super.getPublishStartInstant();
     }
+
 
     public Instant getOwnPublicStartInstant() {
         return super.getPublishStartInstant();
