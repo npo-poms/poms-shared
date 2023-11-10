@@ -175,11 +175,9 @@ public class Location extends PublishableObject<Location>
     private boolean authorityUpdate = false;
 
     @XmlTransient
-    @Transient // TODO: make these columns
     private Integer statusCode;
 
     @XmlTransient
-    @Transient
     private Instant lastStatusChange;
 
     public Location() {
