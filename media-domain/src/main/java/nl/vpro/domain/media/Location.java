@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
-import lombok.SneakyThrows;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
@@ -157,6 +156,7 @@ public class Location extends PublishableObject<Location>
     @NonNull
     protected OwnerType owner = OwnerType.BROADCASTER;
 
+
     @Column(nullable = true)
     @XmlTransient
     protected Long neboId;
@@ -168,15 +168,26 @@ public class Location extends PublishableObject<Location>
     protected Platform platform;
 
     /**
-     * See {@link MediaObject#isLocationAuthorityUpdate}
+     * Note that this {@link XmlTransient} and hence <em>not available in frontend api</em>
+     * @see MediaObject#isLocationAuthorityUpdate
      */
     @Getter
     @XmlTransient
     private boolean authorityUpdate = false;
 
+    /**
+     *  Note that this {@link XmlTransient} and hence <em>not available in frontend api</em>
+     */
+    @Getter
+    @Setter
     @XmlTransient
     private Integer statusCode;
 
+    /**
+     *  Note that this {@link XmlTransient} and hence <em>not available in frontend api</em>
+     */
+    @Getter
+    @Setter
     @XmlTransient
     private Instant lastStatusChange;
 
@@ -596,8 +607,12 @@ public class Location extends PublishableObject<Location>
 
             super.setPublishStartInstant(publishStart);
 
+
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
+                if (hasPlatform()) { ///remove for MSE-5644
+                    getAuthorityRecord().setPublishStartInstant(publishStart);
+                }
                 mediaObject.realizePrediction(this);
             }
 
@@ -652,7 +667,7 @@ public class Location extends PublishableObject<Location>
 
             super.setPublishStopInstant(publishStop);
             if (mediaObject != null) {
-                if (hasPlatform()) {
+                if (hasPlatform()) { /// ///remove for MSE-5644
                     getAuthorityRecord().setPublishStopInstant(publishStop);
                 }
                 mediaObject.realizePrediction(this);

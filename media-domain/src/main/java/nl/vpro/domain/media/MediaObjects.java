@@ -994,7 +994,7 @@ public class MediaObjects {
     }
 
     /**
-     * Whether this mediaobject is playable in a NPO player.
+     * Whether this media object is playable in a NPO player.
      * @since 5.11
      */
     public static boolean isPlayable(MediaObject media) {
@@ -1002,9 +1002,11 @@ public class MediaObjects {
             return false;
         }
         // TODO, it seems that this is enough (at least for video?)
+
         return media.getStreamingPlatformStatus().isAvailable();
         // but why not this?
-        //return media.getStreamingPlatformStatus().isAvailable() && Optional.ofNullable(media.getPrediction(Platform.INTERNETVOD)).map(p -> p.inPublicationWindow(Instant.now())).orElse(false);
+        //return Optional.ofNullable(media.getPrediction(Platform.INTERNETVOD))
+        //            .map(p -> p.inPublicationWindow(Instant.now())).orElse(false);
     }
 
 
