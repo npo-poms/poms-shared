@@ -51,7 +51,7 @@ public interface Embargo {
 
 
     /**
-     * Is now published, but will not any more be at some point in the future
+     * Is now published, but will not anymore be at some point in the future
      */
     default boolean willBeUnderEmbargo() {
         return willBeUnderEmbargo(instant());
@@ -63,14 +63,14 @@ public interface Embargo {
     }
 
     /**
-     * Is now under embargo, but will not any more be at some point in the future
+     * Is now under embargo, but will not anymore be at some point in the future
      */
     default boolean willBePublished() {
         return willBePublished(instant());
     }
 
     default boolean willBePublished(Instant now) {
-        return isUnderEmbargo(now) && (getPublishStartInstant() != null && now.isBefore(getPublishStartInstant()));
+        return isConsiderableForPublication() && isUnderEmbargo(now) && (getPublishStartInstant() != null && now.isBefore(getPublishStartInstant()));
     }
 
     default boolean inPublicationWindow() {
@@ -88,11 +88,16 @@ public interface Embargo {
 
     /**
      * Whether this object is publishable.
-     * This defaults to {@link #inPublicationWindow()}, but extensions may improve on this. E.g. {@code nl.vpro.domain.media.TrackableObject} also checks whether the object is deleted or not.
+     * This defaults to {@link #inPublicationWindow()}, but extensions may improve on this. E.g. {@code nl.vpro.domain.media.TrackableObject} also checks whether the object is deleted or not (by overriding {@link #isConsiderableForPublication()}
      */
     @JsonIgnore
     default boolean isPublishable() {
-        return inPublicationWindow();
+        return isConsiderableForPublication() && inPublicationWindow();
+    }
+
+    @JsonIgnore
+    default boolean isConsiderableForPublication() {
+        return true;
     }
 
 }

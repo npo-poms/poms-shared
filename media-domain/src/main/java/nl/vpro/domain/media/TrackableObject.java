@@ -23,10 +23,19 @@ public interface TrackableObject extends Trackable, Embargo {
     /**
      * Whether this object could be  publicly visible in the API.
      * <p>
-     * This returns <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
+     * This returns <code>false</code> if the workflow explicitly indicates that it is not (like 'DELETED', 'MERGED')
      * and otherwise it depends on {@link #inPublicationWindow(Instant)}
      */
     default boolean isPublishable(Instant now) {
+        if (! isConsiderableForPublication()) {
+            return false;
+        }
+        return inPublicationWindow(now) &&
+            (getParent() == null || getParent().isPublishable(now));
+    }
+
+    @Override
+    default boolean isConsiderableForPublication() {
         Workflow workflow = getWorkflow();
         if(isMerged() ||
             Workflow.FOR_DELETION == workflow ||
@@ -36,7 +45,6 @@ public interface TrackableObject extends Trackable, Embargo {
             // These kind of objects are explicitly not publishable.
             return false;
         }
-
         if(Workflow.FOR_PUBLICATION.equals(workflow)
             || Workflow.FOR_REPUBLICATION.equals(workflow)
             || Workflow.PUBLISHED.equals(workflow)
@@ -44,12 +52,11 @@ public interface TrackableObject extends Trackable, Embargo {
             || Workflow.PARENT_REVOKED.equals(workflow)
             || Workflow.MERGED.equals(workflow)
             || workflow == null /* may happen when property filtering active NPA-493 */) {
-
-            return inPublicationWindow(now) &&
-                (getParent() == null || getParent().isPublishable(now));
+            return true;
         }
-
         LoggerFactory.getLogger(getClass()).error("Unexpected state of {}. Workflow: {}. Supposing this is not publishable for now", this, workflow);
+
+
         return false;
     }
 
@@ -67,7 +74,7 @@ public interface TrackableObject extends Trackable, Embargo {
     }
 
     /**
-     * If the sub class supports being merged, this can be overriden.
+     * If the subclass supports being merged, this can be overriden.
      *
      */
     default boolean isMerged() {
