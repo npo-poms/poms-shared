@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
-import lombok.SneakyThrows;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
@@ -157,6 +156,7 @@ public class Location extends PublishableObject<Location>
     @NonNull
     protected OwnerType owner = OwnerType.BROADCASTER;
 
+
     @Column(nullable = true)
     @XmlTransient
     protected Long neboId;
@@ -168,11 +168,28 @@ public class Location extends PublishableObject<Location>
     protected Platform platform;
 
     /**
-     * See {@link MediaObject#isLocationAuthorityUpdate}
+     * Note that this {@link XmlTransient} and hence <em>not available in frontend api</em>
+     * @see MediaObject#isLocationAuthorityUpdate
      */
     @Getter
     @XmlTransient
     private boolean authorityUpdate = false;
+
+    /**
+     *  Note that this {@link XmlTransient} and hence <em>not available in frontend api</em>
+     */
+    @Getter
+    @Setter
+    @XmlTransient
+    private Integer statusCode;
+
+    /**
+     *  Note that this {@link XmlTransient} and hence <em>not available in frontend api</em>
+     */
+    @Getter
+    @Setter
+    @XmlTransient
+    private Instant lastStatusChange;
 
     public Location() {
     }
@@ -541,6 +558,26 @@ public class Location extends PublishableObject<Location>
     public void setAuthorityUpdate(Boolean ceresUpdate) {
         this.authorityUpdate = ceresUpdate;
     }
+/*  MSE-5644
+    @Override
+    public Instant getPublishStartInstant() {
+        Instant own = getOwnPublicStartInstant();
+        if(hasPlatform() && mediaObject != null) {
+            try {
+                Prediction record = getAuthorityRecord(false);
+                if (record != null) {
+                    Instant recordPublishStart = record.getPublishStartInstant();
+                    if (recordPublishStart != null) {
+                        return own == null ? recordPublishStart : own.isAfter(recordPublishStart) ? own : recordPublishStart;
+                    }
+                }
+            } catch (IllegalAuthorityRecord iea) {
+                log.debug(iea.getMessage());
+            }
+        }
+
+        return own;
+    }*/
 
     @Override
     public Instant getPublishStartInstant() {
@@ -558,6 +595,11 @@ public class Location extends PublishableObject<Location>
         return super.getPublishStartInstant();
     }
 
+
+    public Instant getOwnPublicStartInstant() {
+        return super.getPublishStartInstant();
+    }
+
     @NonNull
     @Override
     public Location setPublishStartInstant(Instant publishStart) {
@@ -565,9 +607,10 @@ public class Location extends PublishableObject<Location>
 
             super.setPublishStartInstant(publishStart);
 
+
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
-                if (hasPlatform()) {
+                if (hasPlatform()) { ///remove for MSE-5644
                     getAuthorityRecord().setPublishStartInstant(publishStart);
                 }
                 mediaObject.realizePrediction(this);
@@ -582,15 +625,17 @@ public class Location extends PublishableObject<Location>
     }
 
 
+
     /**
      * The publish stop of a location is rather complicated:
      * 1. It is the offline date of the corresponding streaming platform status if that is available.
      * 2. It not, then it is the offline date of the corresponding authority record.
-     * 3. It that too is not available then it will fall back to it's own field {@link PublishableObject#getPublishStopInstant()}
+     * 3. It that too is not available then it will fall back to its own field {@link PublishableObject#getPublishStopInstant()}
      */
     @Override
     @Nullable
     public Instant getPublishStopInstant() {
+        Instant own = getOwnPublicStartInstant();
         if(hasPlatform() && mediaObject != null) {
             Instant streamingOffline = onStreaming() && mediaObject.getStreamingPlatformStatus() != null ? mediaObject.getStreamingPlatformStatus().getOffline(hasDrm()) : null;
             try {
@@ -610,6 +655,11 @@ public class Location extends PublishableObject<Location>
         return super.getPublishStopInstant();
     }
 
+    public Instant getOwnPublicStopInstant() {
+        return super.getPublishStopInstant();
+    }
+
+
     @NonNull
     @Override
     public Location setPublishStopInstant(Instant publishStop) {
@@ -617,7 +667,7 @@ public class Location extends PublishableObject<Location>
 
             super.setPublishStopInstant(publishStop);
             if (mediaObject != null) {
-                if (hasPlatform()) {
+                if (hasPlatform()) { /// ///remove for MSE-5644
                     getAuthorityRecord().setPublishStopInstant(publishStop);
                 }
                 mediaObject.realizePrediction(this);

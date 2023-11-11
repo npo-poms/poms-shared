@@ -2080,6 +2080,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     /**
      * Returns (a copy of, since you have no business setting it) the {@link StreamingStatus}.
+     * <p>
+     * Note that this field is {@link XmlTransient} and not included in the json view or xml view. It is only used on
+     * the server side, and <em>not available in the frontend api!</em>
      * @since 5.11
      */
     public StreamingStatus getStreamingPlatformStatus() {

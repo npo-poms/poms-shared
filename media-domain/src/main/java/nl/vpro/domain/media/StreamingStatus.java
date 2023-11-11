@@ -262,6 +262,9 @@ public interface StreamingStatus extends Serializable, Displayable {
 
     }
 
+    /**
+     * Never coming in anymore
+     */
     @Deprecated
     default Instant getOffline(boolean drm) {
         if (drm) {

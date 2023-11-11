@@ -126,10 +126,9 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
     }
 
     public static String toRecords(Instant now, List<PublicationReason> reasons, long maxLength, String mid, boolean mergeDuplicates) {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         PublicationReason prevReason = null;
         for (PublicationReason reason : reasons) {
-
 
             boolean needsSplitter = !builder.isEmpty();
             if (prevReason != null) {
