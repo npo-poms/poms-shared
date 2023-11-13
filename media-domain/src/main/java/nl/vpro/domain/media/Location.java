@@ -643,7 +643,7 @@ public class Location extends PublishableObject<Location>
             }
         }
 
-        return super.getPublishStopInstant();
+        return own;
     }
 
     public Instant getOwnPublicStopInstant() {
