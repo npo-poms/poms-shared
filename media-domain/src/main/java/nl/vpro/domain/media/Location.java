@@ -622,7 +622,7 @@ public class Location extends PublishableObject<Location>
     @Override
     @Nullable
     public Instant getPublishStopInstant() {
-        Instant own = getOwnPublicStartInstant();
+        Instant own = getOwnPublicStopInstant();
         if(hasPlatform() && mediaObject != null) {
             try {
                 Prediction record = getAuthorityRecord(false);

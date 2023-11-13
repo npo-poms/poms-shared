@@ -888,13 +888,29 @@ public class MediaObjectTest {
         l1.setPublishStopInstant(Instant.ofEpochMilli(10));
 
 
-
-
         Prediction plus = target.getPrediction(Platform.PLUSVOD);
         assertThat(plus).isNotNull();
         assertThat(plus.getState()).isEqualTo(Prediction.State.REALIZED);
-        assertThat(plus.getPublishStartInstant()).isEqualTo(Instant.ofEpochMilli(5));
-        assertThat(plus.getPublishStopInstant()).isEqualTo(Instant.ofEpochMilli(10));
+        assertThat(plus.getPublishStartInstant()).isNull();
+        assertThat(plus.getPublishStopInstant()).isNull();
+
+        // set also constraint on prediction, but wider
+        target.getPrediction(Platform.PLUSVOD).setPublishStopInstant(Instant.ofEpochMilli(4));
+        target.getPrediction(Platform.PLUSVOD).setPublishStopInstant(Instant.ofEpochMilli(11));
+
+        assertThat(l1.getPublishStartInstant().toEpochMilli()).isEqualTo(5);
+        assertThat(l1.getPublishStopInstant().toEpochMilli()).isEqualTo(10);
+
+        // now try narrower
+        target.getPrediction(Platform.PLUSVOD).setPublishStartInstant(Instant.ofEpochMilli(6));
+        target.getPrediction(Platform.PLUSVOD).setPublishStopInstant(Instant.ofEpochMilli(9));
+
+        assertThat(l1.getPublishStartInstant().toEpochMilli()).isEqualTo(6);
+        assertThat(l1.getPublishStopInstant().toEpochMilli()).isEqualTo(9);
+
+
+
+
     }
 
     @Test
