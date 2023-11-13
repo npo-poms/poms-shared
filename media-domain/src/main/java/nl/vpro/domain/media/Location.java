@@ -558,7 +558,11 @@ public class Location extends PublishableObject<Location>
     public void setAuthorityUpdate(Boolean ceresUpdate) {
         this.authorityUpdate = ceresUpdate;
     }
-/*  MSE-5644
+
+
+    /**
+     * For location it is true that it cannot have a wider embargo than its associated platform
+     */
     @Override
     public Instant getPublishStartInstant() {
         Instant own = getOwnPublicStartInstant();
@@ -567,8 +571,14 @@ public class Location extends PublishableObject<Location>
                 Prediction record = getAuthorityRecord(false);
                 if (record != null) {
                     Instant recordPublishStart = record.getPublishStartInstant();
-                    if (recordPublishStart != null) {
-                        return own == null ? recordPublishStart : own.isAfter(recordPublishStart) ? own : recordPublishStart;
+                    if (recordPublishStart == null) {
+                        return own;
+                    }  else {
+                        if (own == null || recordPublishStart.isAfter(own)) {
+                            return recordPublishStart;
+                        } else {
+                            return own;
+                        }
                     }
                 }
             } catch (IllegalAuthorityRecord iea) {
@@ -577,24 +587,7 @@ public class Location extends PublishableObject<Location>
         }
 
         return own;
-    }*/
-
-    @Override
-    public Instant getPublishStartInstant() {
-        if(hasPlatform() && mediaObject != null) {
-            try {
-                Prediction record = getAuthorityRecord(false);
-                if (record != null) {
-                    return record.getPublishStartInstant();
-                }
-            } catch (IllegalAuthorityRecord iea) {
-                log.debug(iea.getMessage());
-            }
-        }
-
-        return super.getPublishStartInstant();
     }
-
 
     public Instant getOwnPublicStartInstant() {
         return super.getPublishStartInstant();
@@ -606,13 +599,8 @@ public class Location extends PublishableObject<Location>
         if (! Objects.equals(this.publishStart, publishStart)) {
 
             super.setPublishStartInstant(publishStart);
-
-
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
-                if (hasPlatform()) { ///remove for MSE-5644
-                    getAuthorityRecord().setPublishStartInstant(publishStart);
-                }
                 mediaObject.realizePrediction(this);
             }
 
@@ -627,25 +615,28 @@ public class Location extends PublishableObject<Location>
 
 
     /**
-     * The publish stop of a location is rather complicated:
-     * 1. It is the offline date of the corresponding streaming platform status if that is available.
-     * 2. It not, then it is the offline date of the corresponding authority record.
-     * 3. It that too is not available then it will fall back to its own field {@link PublishableObject#getPublishStopInstant()}
+     * The publishstop of a location is  complicated:
+     * 1. It is the offline date of the corresponding authority record (platform)
+     * 2. It that too is not available then it will fall back to its own field {@link PublishableObject#getPublishStopInstant()}
      */
     @Override
     @Nullable
     public Instant getPublishStopInstant() {
         Instant own = getOwnPublicStartInstant();
         if(hasPlatform() && mediaObject != null) {
-            Instant streamingOffline = onStreaming() && mediaObject.getStreamingPlatformStatus() != null ? mediaObject.getStreamingPlatformStatus().getOffline(hasDrm()) : null;
             try {
                 Prediction record = getAuthorityRecord(false);
                 if (record != null) {
                     Instant fromAuthorityRecord = record.getPublishStopInstant();
-                    if (fromAuthorityRecord == null || (streamingOffline != null && fromAuthorityRecord.isAfter(streamingOffline))) {
-                        return streamingOffline;
+                    if (fromAuthorityRecord == null) {
+                        return own;
+                    } else {
+                        if (own == null || fromAuthorityRecord.isBefore(own)) {
+                            return fromAuthorityRecord;
+                        } else {
+                            return own;
+                        }
                     }
-                    return fromAuthorityRecord;
                 }
             } catch (IllegalAuthorityRecord iea) {
                 log.debug(iea.getMessage());
@@ -667,9 +658,6 @@ public class Location extends PublishableObject<Location>
 
             super.setPublishStopInstant(publishStop);
             if (mediaObject != null) {
-                if (hasPlatform()) { /// ///remove for MSE-5644
-                    getAuthorityRecord().setPublishStopInstant(publishStop);
-                }
                 mediaObject.realizePrediction(this);
             }
 
