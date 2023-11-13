@@ -1,16 +1,12 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.time.Instant;
 import java.util.zip.CRC32;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -46,9 +42,9 @@ public class StreamingStatusImpl implements StreamingStatus {
      * @deprecated This was never used
      */
     @Getter
-    @Setter
-    @Column(name="streamingplatformstatus_withdrm_offline")
+    @Setter(AccessLevel.PRIVATE)
     @Deprecated
+    @Transient
     Instant withDrmOffline = null;
 
 
@@ -56,9 +52,9 @@ public class StreamingStatusImpl implements StreamingStatus {
      * @deprecated This was never used
      */
     @Getter
-    @Setter
-    @Column(name="streamingplatformstatus_withoutdrm_offline")
+    @Setter(AccessLevel.PRIVATE)
     @Deprecated
+    @Transient
     Instant withoutDrmOffline = null;
 
 
