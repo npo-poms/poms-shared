@@ -344,7 +344,10 @@ class MediaObjectsPlayabilityTest {
     @Test
     void isPlayable() {
         // this is a bit strange, this call just looks at streaming status:
-        assertThat(MediaObjects.isPlayable(nowCases().findFirst().map(a -> (MediaObject) a.get()[1]).orElseThrow(RuntimeException::new))).isFalse();
+        assertThat(MediaObjects.isPlayable(nowCases()
+            .findFirst()
+            .map(a -> (MediaObject) a.get()[1]).orElseThrow(RuntimeException::new))
+        ).isFalse();
     }
 
     @ParameterizedTest
@@ -427,7 +430,7 @@ class MediaObjectsPlayabilityTest {
                     log.error(e.getMessage(), e);
                 }
             });
-            assertThat(count.get()).isEqualTo(16);
+            assertThat(count.get()).isEqualTo(15);
         } finally {
             DEFAULT_CONSIDER_JSON_INCLUDE.remove();
             PublicationFilter.ENABLED.remove();

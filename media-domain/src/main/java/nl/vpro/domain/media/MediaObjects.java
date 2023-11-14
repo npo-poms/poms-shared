@@ -1002,12 +1002,17 @@ public class MediaObjects {
         if (media == null) {
             return false;
         }
-        // TODO, it seems that this is enough (at least for video?)
+        boolean selfIsPlayable = ! nowPlayable(media).isEmpty();
+        if (selfIsPlayable) {
+            return true;
+        }
 
-        return media.getStreamingPlatformStatus().isAvailable();
-        // but why not this?
-        //return Optional.ofNullable(media.getPrediction(Platform.INTERNETVOD))
-        //            .map(p -> p.inPublicationWindow(Instant.now())).orElse(false);
+        // this could only work on backend.
+        if (media instanceof Segment segment) {
+            return isPlayable(segment.getParent());
+        } else {
+            return false;
+        }
     }
 
 
@@ -1124,12 +1129,27 @@ public class MediaObjects {
      * @since 5.31
      */
     public static Optional<Range<Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        List<Location> locations = mediaObject.getLocations().stream().filter(l -> platform.matches(l.getPlatform())).toList();
+        List<Location> locations = mediaObject.getLocations().stream()
+            .filter(l -> platform.matches(l.getPlatform()))
+            .filter(MediaObjects::locationFilter)
+            .toList();
         if (locations.isEmpty()) {
             // no locations. Maybe,  there really are none, or perhaps they are not published
             // we can juse look at the prediction record
             Prediction prediction = mediaObject.getPrediction(platform);
-            return prediction == null ? Optional.empty() : Optional.of(prediction.asRange());
+            if (prediction == null) {
+                return Optional.empty();
+            } else {
+                Range<Instant> range = prediction.asRange();
+                if (range.contains(instant())) {
+                    // no playable locations, but still the prediction is not under embargo
+                    // this means that the available locations are unfit because of ::locationFilter
+                    return Optional.empty();
+
+                } else {
+                    return Optional.of(range);
+                }
+            }
         } else {
             // we found relevant locations. So, it is playable in the span of their ranges (unless they don't overlap, but that cannot be covered by a single range)
             Range<Instant> result = null;
@@ -1250,6 +1270,7 @@ public class MediaObjects {
                     Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                        .filter(MediaObjects::locationFilter)
                         .findFirst();
                     if (matchingLocation.isEmpty()) {
                         log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, mediaObject.mid);
