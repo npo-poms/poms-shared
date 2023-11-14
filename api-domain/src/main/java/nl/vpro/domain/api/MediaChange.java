@@ -139,7 +139,6 @@ public class MediaChange extends Change<MediaObject> {
             }
         }
         setSkipped(skipped);
-        this.sequence = sequence;
     }
 
     private MediaChange(Long sequence, Long revision, String mid, MediaObject media, Boolean deleted) {
