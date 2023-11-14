@@ -1022,7 +1022,9 @@ public class MediaObjects {
      */
     public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return  mediaObject.getLocations()
-            .stream().anyMatch(
+            .stream()
+            .filter(MediaObjects::locationFilter)
+            .anyMatch(
                 l -> platform.matches(l.getPlatform()) && l.inPublicationWindow()
         );
     }
@@ -1034,6 +1036,7 @@ public class MediaObjects {
     public static Set<Platform> nowPlayable(@NonNull MediaObject mediaObject) {
         return Arrays.stream(Platform.values())
             .filter(p -> nowPlayable(p, mediaObject))
+
             .collect(Collectors.toCollection(TreeSet::new));
     }
 

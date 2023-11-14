@@ -38,7 +38,7 @@ import static nl.vpro.domain.media.Platform.INTERNETVOD;
 import static nl.vpro.domain.media.Platform.PLUSVOD;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SuppressWarnings({"ResultOfMethodCallIgnored"})
+@SuppressWarnings({"ResultOfMethodCallIgnored", "DataFlowIssue"})
 @Log4j2
 class MediaObjectsPlayabilityTest {
 
@@ -343,11 +343,10 @@ class MediaObjectsPlayabilityTest {
 
     @Test
     void isPlayable() {
-        // this is a bit strange, this call just looks at streaming status:
         assertThat(MediaObjects.isPlayable(nowCases()
             .findFirst()
             .map(a -> (MediaObject) a.get()[1]).orElseThrow(RuntimeException::new))
-        ).isFalse();
+        ).isTrue();
     }
 
     @ParameterizedTest
@@ -412,16 +411,17 @@ class MediaObjectsPlayabilityTest {
                     ObjectNode result = Jackson2Mapper.getInstance().createObjectNode();
                     result.put("description", description);
                     ExpectedPlatforms expectedPlatforms = (ExpectedPlatforms) a.get()[2];
-                    result.put("publishedNowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedNow()));
-                    result.put("publishedWasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWas()));
-                    result.put("publishedWillExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWillBe()));
-                    result.put("nowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getNow()));
-                    result.put("wasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getWas()));
-                    result.put("willExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getWillBe()));
-                    result.put("ranges", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(expectedPlatforms.getLongRanges()));
+                    result.set("publishedNowExpectedPlatforms",
+                            Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedNow()));
+                    result.set("publishedWasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWas()));
+                    result.set("publishedWillExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getPublishedWillBe()));
+                    result.set("nowExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getNow()));
+                    result.set("wasExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getWas()));
+                    result.set("willExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getWillBe()));
+                    result.set("ranges", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(expectedPlatforms.getLongRanges()));
 
-                    result.put("publishedMediaObject", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(a.get()[1]));
-                    result.put("mediaObject", Jackson2Mapper.getPrettyInstance().valueToTree(a.get()[1]));
+                    result.set("publishedMediaObject", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(a.get()[1]));
+                    result.set("mediaObject", Jackson2Mapper.getPrettyInstance().valueToTree(a.get()[1]));
 
                     try (OutputStream outputStream = Files.newOutputStream(file.toPath())) {
                         Jackson2Mapper.getPrettyPublisherInstance().writer().writeValue(outputStream, result);
