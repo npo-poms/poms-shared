@@ -7,4 +7,5 @@
   <xs:import namespace="urn:vpro:media:2009" schemaLocation="vproMedia.xsd"/>
   <xs:import namespace="urn:vpro:media:update:2009" schemaLocation="update/vproMediaUpdate.xsd"/>
   <xs:import namespace="urn:vpro:media:search:2012" schemaLocation="search/vproMediaSearch.xsd"/>
+  <xs:import namespace="urn:vpro:gtaa:2017" schemaLocation="https://publish.pages.omroep.nl/schema/urn%3Avpro%3Agtaa%3A2017"/>
 </xs:schema>
