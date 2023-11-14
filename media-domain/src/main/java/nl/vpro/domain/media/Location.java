@@ -359,7 +359,7 @@ public class Location extends PublishableObject<Location>
         this.platform = platform;
 
         if (platform != null && this.mediaObject != null) {
-            Prediction record = getAuthorityRecord(false);
+            Prediction record = getPrediction(false);
             if (record != null) {
                 // in sync so we can query this class its fields on publishables
                 if (record.getAuthority() == Authority.USER) {
@@ -525,7 +525,7 @@ public class Location extends PublishableObject<Location>
     }
 
     @Nullable
-    Prediction getAuthorityRecord(boolean create) {
+    Prediction getPrediction(boolean create) {
         if (hasPlatform()) {
             if (mediaObject == null) {
                 throw new IllegalStateException("Location does not have a parent mediaobject");
@@ -546,8 +546,12 @@ public class Location extends PublishableObject<Location>
         }
     }
 
-    Prediction getAuthorityRecord() {
-        return getAuthorityRecord(true);
+    /**
+     * Returns the {@link Prediction} that is associated with the parent {@link MediaObject} for the same {@link #getPlatform()}.
+     * If it is not available, it will be created.
+     */
+    Prediction getPrediction() {
+        return getPrediction(true);
     }
 
     public boolean hasVideoSizing() {
@@ -563,14 +567,15 @@ public class Location extends PublishableObject<Location>
 
 
     /**
-     * For location it is true that it cannot have a wider embargo than its associated platform
+     * For a Location it is true that it cannot have a wider embargo than its {@link #getPrediction() associated platform}
+     * @see #getOwnPublishStartInstant() for the (settable) value that is not constrainted by {@link #getPrediction()}
      */
     @Override
     public Instant getPublishStartInstant() {
         Instant own = getOwnPublishStartInstant();
         if(hasPlatform() && mediaObject != null) {
             try {
-                Prediction record = getAuthorityRecord(false);
+                Prediction record = getPrediction(false);
                 if (record != null) {
                     Instant recordPublishStart = record.getPublishStartInstant();
                     if (recordPublishStart == null) {
@@ -620,9 +625,9 @@ public class Location extends PublishableObject<Location>
 
 
     /**
-     * The publishstop of a location is  complicated:
-     * 1. It is the offline date of the corresponding authority record (platform)
-     * 2. It that too is not available then it will fall back to its own field {@link PublishableObject#getPublishStopInstant()}
+     * The publishstop of a location is can be restricted by the {@link #getPrediction() associated platform}.
+     * <p>
+     * @see getOwnPublishStopInstant() for the (settable) value that is not constrainted by {@link #getPrediction()}
      */
     @Override
     @Nullable
@@ -630,7 +635,7 @@ public class Location extends PublishableObject<Location>
         Instant own = getOwnPublishStopInstant();
         if(hasPlatform() && mediaObject != null) {
             try {
-                Prediction record = getAuthorityRecord(false);
+                Prediction record = getPrediction(false);
                 if (record != null) {
                     Instant fromAuthorityRecord = record.getPublishStopInstant();
                     if (fromAuthorityRecord == null) {
@@ -688,7 +693,7 @@ public class Location extends PublishableObject<Location>
         if (platform == null) {
             return Authority.USER;
         }
-        return getAuthorityRecord().getAuthority();
+        return getPrediction().getAuthority();
     }
 
     /**
@@ -744,7 +749,7 @@ public class Location extends PublishableObject<Location>
         if (parent instanceof MediaObject) {
             this.mediaObject = (MediaObject) parent;
             try {
-                Prediction locationAuthorityRecord = getAuthorityRecord(false);
+                Prediction locationAuthorityRecord = getPrediction(false);
                 if (locationAuthorityRecord != null) {
                     locationAuthorityRecord.setPublishStartInstant(publishStart);
                     locationAuthorityRecord.setPublishStopInstant(publishStop);
@@ -806,7 +811,7 @@ public class Location extends PublishableObject<Location>
             // unknown
             return false;
         }
-        Prediction record = getAuthorityRecord(false);
+        Prediction record = getPrediction(false);
         return record != null && record.getAuthority() == Authority.SYSTEM;
     }
 

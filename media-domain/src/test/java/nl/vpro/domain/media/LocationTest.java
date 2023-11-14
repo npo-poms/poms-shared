@@ -95,7 +95,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
         location.setParent(program);
         location.setPlatform(Platform.INTERNETVOD);
 
-        assertThat(location.getAuthorityRecord()).isSameAs(pred);
+        assertThat(location.getPrediction()).isSameAs(pred);
     }
 
     @Test

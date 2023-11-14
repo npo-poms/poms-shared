@@ -807,8 +807,8 @@ public class MediaObjectTest {
 
         Prediction record = program.getPrediction(Platform.INTERNETVOD);
         assertThat(record).isNotNull();
-        assertThat(record).isSameAs(program.getLocations().first().getAuthorityRecord());
-        assertThat(record).isSameAs(program.getLocations().last().getAuthorityRecord());
+        assertThat(record).isSameAs(program.getLocations().first().getPrediction());
+        assertThat(record).isSameAs(program.getLocations().last().getPrediction());
     }
 
 
