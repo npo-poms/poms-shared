@@ -1708,8 +1708,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
         for (MemberRef memberRef : memberOf) {
             if (owner.equals(memberRef.getGroup())) {
-                if (number == null && memberRef.getNumber() == null
-                    || number != null && number.equals(memberRef.getNumber())) {
+                if ((number == null && memberRef.getNumber() == null)
+                    || (number != null && number.equals(memberRef.getNumber()))) {
 
                     return memberRef;
                 }
