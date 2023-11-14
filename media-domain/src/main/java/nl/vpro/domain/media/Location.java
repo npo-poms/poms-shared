@@ -28,12 +28,14 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Range;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.util.HttpConnectionUtils;
+import nl.vpro.util.Ranges;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 import static java.util.Objects.requireNonNullElse;
@@ -565,7 +567,7 @@ public class Location extends PublishableObject<Location>
      */
     @Override
     public Instant getPublishStartInstant() {
-        Instant own = getOwnPublicStartInstant();
+        Instant own = getOwnPublishStartInstant();
         if(hasPlatform() && mediaObject != null) {
             try {
                 Prediction record = getAuthorityRecord(false);
@@ -589,7 +591,10 @@ public class Location extends PublishableObject<Location>
         return own;
     }
 
-    public Instant getOwnPublicStartInstant() {
+    /**
+     * @since 7.10
+     */
+    public Instant getOwnPublishStartInstant() {
         return super.getPublishStartInstant();
     }
 
@@ -622,7 +627,7 @@ public class Location extends PublishableObject<Location>
     @Override
     @Nullable
     public Instant getPublishStopInstant() {
-        Instant own = getOwnPublicStopInstant();
+        Instant own = getOwnPublishStopInstant();
         if(hasPlatform() && mediaObject != null) {
             try {
                 Prediction record = getAuthorityRecord(false);
@@ -646,7 +651,10 @@ public class Location extends PublishableObject<Location>
         return own;
     }
 
-    public Instant getOwnPublicStopInstant() {
+    /**
+     * @since 7.10
+     */
+    public Instant getOwnPublishStopInstant() {
         return super.getPublishStopInstant();
     }
 
@@ -667,6 +675,13 @@ public class Location extends PublishableObject<Location>
         }
 
         return this;
+    }
+
+    /**
+     * @since 7.10
+     */
+    public Range<Instant> getOwnPublicationRange() {
+        return Ranges.closedOpen(getOwnPublishStartInstant(), getOwnPublishStopInstant());
     }
 
     public Authority getAuthority() {
