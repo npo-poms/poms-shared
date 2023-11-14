@@ -8,7 +8,7 @@
   "willExpectedPlatforms" : [ ],
   "ranges" : {
     "INTERNETVOD" : [ null, 1635253190000 ],
-    "PLUSVOD" : [ null, null ]
+    "PLUSVOD" : [ null, 1635253190000 ]
   },
   "publishedMediaObject" : {
     "objectType" : "program",
@@ -22,6 +22,7 @@
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
+      "publishStop" : 1635253190000,
       "platform" : "PLUSVOD"
     } ],
     "locations" : [ ]
@@ -38,6 +39,7 @@
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
+      "publishStop" : 1635253190000,
       "platform" : "PLUSVOD"
     } ],
     "locations" : [ {

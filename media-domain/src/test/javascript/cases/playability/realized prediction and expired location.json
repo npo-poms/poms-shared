@@ -24,7 +24,16 @@
       "state" : "REALIZED",
       "platform" : "PLUSVOD"
     } ],
-    "locations" : [ ]
+    "locations" : [ {
+      "programUrl" : "https://bla.com/foobar-plusvod.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "MP4"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "PUBLISHED",
+      "platform" : "PLUSVOD"
+    } ]
   },
   "mediaObject" : {
     "objectType" : "program",
@@ -41,6 +50,15 @@
       "platform" : "PLUSVOD"
     } ],
     "locations" : [ {
+      "programUrl" : "https://bla.com/foobar-plusvod.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "MP4"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "PUBLISHED",
+      "platform" : "PLUSVOD"
+    }, {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
         "avFileFormat" : "MP4"
