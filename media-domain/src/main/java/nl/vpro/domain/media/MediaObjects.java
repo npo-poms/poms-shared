@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.time.*;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -1016,14 +1015,14 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        return  mediaObject.getLocations()
-            .stream().anyMatch(
-                l -> platform.matches(l.getPlatform()) && l.inPublicationWindow()
+        return playabilityCheck(platform, mediaObject,
+            prediction -> platform != Platform.INTERNETVOD // for internetvod it seems the _only_ check currently is whether all locations are playable.
+                && prediction.getState() == Prediction.State.REALIZED && prediction.inPublicationWindow(),
+            Embargo::inPublicationWindow
         );
     }
 
     /**
-     * On which platform the given mediaobject is currently playable.
      * @since 5.31
      */
     public static Set<Platform> nowPlayable(@NonNull MediaObject mediaObject) {
@@ -1036,29 +1035,17 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean wasPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        if (nowPlayable(platform, mediaObject)) {
-            return false;
-        }
-        Optional<Prediction> prediction = mediaObject.getPredictions()
-            .stream()
-            .filter(p -> p.getPlatform() == platform)
-            .findFirst();
-        if (prediction.isPresent()) {
-            return prediction.get().getState() == Prediction.State.REVOKED;
-        } else { // may be the locations are visible (on the backend) but not yet published
-            return mediaObject.getLocations()
-                .stream()
-                .filter(l -> platform.matches(l.getPlatform()))
-                .anyMatch(Embargo::wasUnderEmbargo);
-        }
+        return playabilityCheck(platform, mediaObject,
+            prediction -> prediction.getState() == Prediction.State.REVOKED,
+            Embargo::wasUnderEmbargo
+        );
     }
 
     /**
      * @since 5.31
      */
     public static Set<Platform> wasPlayable(@NonNull MediaObject mediaObject) {
-        return Arrays.stream(Platform.values())
-            .filter(p -> wasPlayable(p, mediaObject))
+        return Arrays.stream(Platform.values()).filter(p -> wasPlayable(p, mediaObject))
             .collect(Collectors.toCollection(TreeSet::new));
     }
 
@@ -1067,44 +1054,21 @@ public class MediaObjects {
      * @since 5.31
      */
     public static boolean willBePlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        if (nowPlayable(platform, mediaObject)) {
-            return false;
-        }
-        Optional<Prediction> prediction = mediaObject.getPredictions()
-            .stream()
-            .filter(p -> p.getPlatform() == platform)
-            .findFirst();
-        if (prediction.isPresent()) {
-            return prediction.get().getState() == Prediction.State.ANNOUNCED;
-        } else { // may be the locations are visible (on the backend) but not yet published
-            return mediaObject.getLocations()
-                .stream()
-                .filter(l -> platform.matches(l.getPlatform()))
-                .anyMatch(Embargo::willBePublished);
-        }
+        return playabilityCheck(platform, mediaObject,
+            prediction -> prediction.getState() == Prediction.State.ANNOUNCED,
+            Embargo::willBePublished
+        );
     }
 
     /**
      * Determines for a certain {@link Platform}s and {@code MediaObject} when it might become playable.
      * @since 5.31
      */
-    public static Optional<LocalDateTime> willBePlayableAt(@NonNull Platform platform, @Nullable MediaObject mediaObject) {
-        if (mediaObject == null) {
-            return Optional.empty();
-        }
-        if (! willBePlayable(platform, mediaObject)) {
-            return Optional.empty();
-        }
-        Prediction pred = mediaObject.getPrediction(platform);
-        if (pred != null && pred.isPlannedAvailability()) {
-            if (pred.getPublishStartInstant() == null) {
-                return Optional.of(LocalDateTime.now().plus(Duration.ofDays(1000)).truncatedTo(ChronoUnit.DAYS));
-            } else {
-                return Optional.of(pred.getPublishStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime());
-            }
-        } else {
-            return Optional.empty();
-        }
+    public static Optional<LocalDateTime> willBePlayableAt(Platform platform, MediaObject mediaObject) {
+        return Optional.ofNullable(mediaObject).map(m -> m.getPrediction(platform))
+            .filter(Prediction::isPlannedAvailability)
+            .map(p -> p.getPublishStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime())
+            ;
     }
 
     /**
@@ -1124,25 +1088,10 @@ public class MediaObjects {
      * @since 5.31
      */
     public static Optional<Range<Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        List<Location> locations = mediaObject.getLocations().stream().filter(l -> platform.matches(l.getPlatform())).toList();
-        if (locations.isEmpty()) {
-            // no locations. Maybe,  there really are none, or perhaps they are not published
-            // we can juse look at the prediction record
-            Prediction prediction = mediaObject.getPrediction(platform);
-            return prediction == null ? Optional.empty() : Optional.of(prediction.asRange());
-        } else {
-            // we found relevant locations. So, it is playable in the span of their ranges (unless they don't overlap, but that cannot be covered by a single range)
-            Range<Instant> result = null;
-            for (Location location : locations) {
-                Range<Instant> range = location.asRange();
-                if (result == null) {
-                    result = range;
-                } else {
-                    result = result.span(range);
-                }
-            }
-            return Optional.of(result);
-        }
+        return playability(platform, mediaObject,
+            prediction -> platform != Platform.INTERNETVOD, // for internetvod _only_ check locations
+            MediaObjects::locationFilter
+        ).map(Embargo::asRange);
     }
 
     /**
@@ -1169,8 +1118,8 @@ public class MediaObjects {
     public static Map<Platform, Range<Instant>> playableRanges(@NonNull MediaObject mediaObject) {
         final Map<Platform, Range<Instant>> result = new TreeMap<>();
         Arrays.stream(Platform.values()).forEach(p ->
-            playableRange(p, mediaObject)
-                .ifPresent(r -> result.put(p, r)
+            playableRange(p, mediaObject).ifPresent(r ->
+                result.put(p, r)
             )
         );
         return Collections.unmodifiableMap(result);
@@ -1190,7 +1139,7 @@ public class MediaObjects {
      * Return {@code false} if the given location is not actually playable.
      * <p>
      * Either it is {@link Location#isDeleted()}, which may occur if dealing with unpublished data, or we're dealing
-     * with some legacy and the location has a format which is known not to be playable any-more (like WMV)
+     * with some legacy and the location has a format which is known not to be playable any more (like WMV)
      * @since 5.31
      */
     protected static boolean locationFilter(Location l) {
@@ -1217,7 +1166,37 @@ public class MediaObjects {
         }
         return true;
     }
+    /**
+     * @since 5.31
+     */
+    protected static boolean playabilityCheck(
+        final @NonNull Platform platform,
+        final @NonNull MediaObject mediaObject,
+        final @NonNull Predicate<Prediction> predictionPredicate,
+        final @NonNull Predicate<Location> locationPredicate) {
+        return playability(platform, mediaObject, predictionPredicate, locationPredicate).isPresent();
+    }
 
+    /**
+     * @since 5.31
+     */
+    protected static Optional<? extends Embargo> playability(
+        final @NonNull Platform platform,
+        final @NonNull MediaObject mediaObject,
+        final @NonNull Predicate<Prediction> predictionPredicate,
+        final @NonNull Predicate<Location> locationPredicate) {
+        final Optional<Prediction> matchedByPrediction = mediaObject.getPredictions().stream()
+            .filter(p -> platform.matches(p.getPlatform()) && predictionPredicate.test(p))
+            .findFirst();
+        if (matchedByPrediction.isPresent()) {
+            return matchedByPrediction;
+        }
+        // fall back to location only
+        return  mediaObject.getLocations().stream()
+            .filter(MediaObjects::locationFilter)
+            .filter(l -> platform.matches(l.getPlatform()) && locationPredicate.test(l))
+            .findFirst();
+    }
 
 
     public static boolean autoCorrectPredictions = true;
@@ -1245,8 +1224,6 @@ public class MediaObjects {
                 }
                 case REALIZED -> {
                     // Are there any 'REALIZED' prediction without locations that can be played anyway?
-                    // select *  from prediction p inner join location l on p.mediaobject_id = l.mediaobject_id and p.platform = l.platform and l.workflow = 'PUBLISHED' where p.state = 'REALIZED'  and l is null;
-                    // -> no
                     Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
