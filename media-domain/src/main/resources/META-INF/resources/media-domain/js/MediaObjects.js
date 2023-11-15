@@ -228,9 +228,8 @@ const nl_vpro_domain_media_MediaObjects = (function() {
             return  Object.values(platforms)
                 .map(platform =>
                     [platform, this.nowPlayableForPlatform(platform, mediaObject)])
-                .filter(
-                    ([platform, hasLocation]) => hasLocations)
-                .map(([platform, locations]) => platform);
+                .filter(([platform, hasLocation]) => hasLocation)
+                .map(([platform, hasLocation]) => platform);
         },
 
         /**
@@ -264,8 +263,31 @@ const nl_vpro_domain_media_MediaObjects = (function() {
                 .map(platform =>
                     [platform, this.wasPlayableForPlatform(platform, mediaObject)])
                 .filter(
-                    ([platform, hasLocation]) => hasLocations)
-                .map(([platform, locations]) => platform);
+                    ([platform, was]) => was)
+                .map(([platform, was]) => platform);
+        },
+
+        /**
+         *
+         * @param  {string} platform
+         * @param  {Object} mediaObject
+         * @return {boolean}
+         */
+        willBePlayableForPlatform: function (platform, mediaObject) {
+            if (this.nowPlayableForPlatform(platform, mediaObject)) {
+                return false;
+            }
+            const prediction = undefinedIsEmpty(mediaObject.predictions)
+                .filter(p => platformMatches(platform, p.platform))
+
+            if (prediction.length !== 0) {
+                return prediction[0].state === 'ANNOUNCED';
+            } else { // may be the locations are visible (on the backend) but not yet published
+                return undefinedIsEmpty(mediaObject.locations)
+                    .filter(l => platformMatches(platform, l.platform))
+                    .filter(willBePublished).length > 0;
+
+            }
         },
 
         /**
@@ -273,11 +295,13 @@ const nl_vpro_domain_media_MediaObjects = (function() {
          * @param  {Object} mediaObject
          * @return {array}  list of platforms the given mediaobject will be playable on
          */
-        willBePlayable: function (mediaObject) {
-            return playablePlatforms(mediaObject,
-                (platform, prediction) => prediction.state === this.State.ANNOUNCED,
-                (platform, location) => willBePublished(location)
-            );
+        willBePlayable: function ( mediaObject) {
+              return  Object.values(platforms)
+                .map(platform =>
+                    [platform, this.willBePlayableForPlatform(platform, mediaObject)])
+                .filter(
+                    ([platform, will]) => will)
+                .map(([platform, will]) => platform);
         },
 
 
