@@ -755,10 +755,10 @@ public class MediaObjectTest {
 
     @Test
     public void testAddLocationOnDuplicates() {
-        Location l1 = new Location("TEST_URL", OwnerType.NEBO);
+        Location l1 = new Location("http://TEST_URL", OwnerType.NEBO);
         l1.setAvAttributes(new AVAttributes(100000, AVFileFormat.WM));
 
-        Location l2 = new Location("TEST_URL", OwnerType.NEBO);
+        Location l2 = new Location("http://TEST_URL", OwnerType.NEBO);
         l2.setAvAttributes(new AVAttributes(110000, AVFileFormat.H264));
 
         Program p = MediaBuilder.program().build();
@@ -772,10 +772,10 @@ public class MediaObjectTest {
     @Test
     public void testAddLocationOnDuplicatesCollisions() {
         assertThatThrownBy(() -> {
-            Location l1 = new Location("TEST_URL", OwnerType.NEBO);
+            Location l1 = new Location("https://TEST_URL", OwnerType.NEBO);
             l1.setAvAttributes(new AVAttributes(100000, AVFileFormat.WM));
 
-            Location l2 = new Location("TEST_URL", OwnerType.MIS);
+            Location l2 = new Location("https://TEST_URL", OwnerType.MIS);
             l2.setAvAttributes(new AVAttributes(110000, AVFileFormat.H264));
 
             Program p = MediaBuilder.program().build();
@@ -792,8 +792,8 @@ public class MediaObjectTest {
         Program program = new Program(1L);
 
 
-        Location l1 = new Location("aaa", OwnerType.BROADCASTER);
-        Location l2 = new Location("bbb", OwnerType.BROADCASTER);
+        Location l1 = new Location("https://aaa", OwnerType.BROADCASTER);
+        Location l2 = new Location("http://bbb", OwnerType.BROADCASTER);
 
         program.addLocation(l1);
         program.addLocation(l2);
@@ -814,7 +814,7 @@ public class MediaObjectTest {
 
     @Test
     public void testAddLocationsOnlyUpdateCeresPredictions() {
-        Location l1 = new Location("aaa", OwnerType.BROADCASTER);
+        Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
 
         Program target = new Program(1L);
 
@@ -828,7 +828,7 @@ public class MediaObjectTest {
     @Test
     public void testAddLocationsOnlyUpdatePlatformPredictions() {
         Program target = new Program(1L);
-        Location l1 = new Location("aaa", OwnerType.BROADCASTER);
+        Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
 
         target.addLocation(l1);
 
@@ -879,7 +879,7 @@ public class MediaObjectTest {
         Program target = new Program(1L);
         target.findOrCreatePrediction(Platform.PLUSVOD);
 
-        Location l1 = new Location("aaa", OwnerType.BROADCASTER);
+        Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
 
         target.addLocation(l1);
 
@@ -1210,7 +1210,7 @@ public class MediaObjectTest {
         prediction.setAuthority(Authority.SYSTEM);
         prediction.setPublishStartInstant(Instant.now());
         program.setPredictions(Arrays.asList(prediction));
-        Location l1 = new Location("TEST_URL", OwnerType.AUTHORITY);
+        Location l1 = new Location("https://TEST_URL/foo.bar", OwnerType.AUTHORITY);
         l1.setPlatform(Platform.INTERNETVOD);
         program.addLocation(l1);
         assertNotNull(program.getLocation(l1));

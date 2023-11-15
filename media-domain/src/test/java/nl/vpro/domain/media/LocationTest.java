@@ -150,8 +150,8 @@ public class LocationTest implements BasicObjectTheory<Location> {
         }
 
         {
-            Location l1 = new Location("aaaa", OwnerType.BROADCASTER);
-            Location l2 = new Location("bbbb", OwnerType.MIS);
+            Location l1 = new Location("https://aaaa/1", OwnerType.BROADCASTER);
+            Location l2 = new Location("https://bbbb/2", OwnerType.MIS);
 
             assertThat(Location.PRESENTATION_ORDER.compare(l1, l2)).isLessThan(0);
             assertThat(Location.PRESENTATION_ORDER.compare(l2, l1)).isGreaterThan(0);
