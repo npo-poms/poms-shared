@@ -391,8 +391,12 @@ public class Location extends PublishableObject<Location>
 
     public String getScheme() {
         if (programUrl != null) {
-            URI asUri = URI.create(sanitizedProgramUrl(programUrl));
-            return asUri.getScheme();
+            try {
+                URI asUri = URI.create(sanitizedProgramUrl(programUrl));
+                return asUri.getScheme();
+            } catch (IllegalArgumentException iae) {
+                log.warn(iae.getMessage());
+            }
         }
         return null;
     }

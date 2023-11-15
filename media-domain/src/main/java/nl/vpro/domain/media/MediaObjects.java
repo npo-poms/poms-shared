@@ -1220,8 +1220,8 @@ public class MediaObjects {
         if (l.isDeleted()) {
             return false;
         }
-        String scheme = l.getScheme();
-        if (ACCEPTABLE_SCHEMES.contains(scheme)) {
+        final String scheme = l.getScheme();
+        if (scheme != null && ACCEPTABLE_SCHEMES.contains(scheme)) {
             log.debug("Matched {} on scheme {}", l, scheme);
             return true;
         }
