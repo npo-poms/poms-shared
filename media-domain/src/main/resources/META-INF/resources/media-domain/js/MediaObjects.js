@@ -5,13 +5,14 @@
  */
 const nl_vpro_domain_media_MediaObjects = (function() {
 
-    let clock = function() {
+    let clock = function () {
         return Date.now();
     }
 
     function debug() {
         // console && console.log.apply(null, arguments);
     }
+
     function info() {
         console && console.log.apply(null, arguments);
     }
@@ -27,45 +28,45 @@ const nl_vpro_domain_media_MediaObjects = (function() {
         const url = location.programUrl;
         if (url == null) return "UNKNOWN";
         const urlLowerCase = url.toLowerCase();
-        if(urlLowerCase.includes("adaptive")) {
+        if (urlLowerCase.includes("adaptive")) {
             return "HASP";
         }
-        if(urlLowerCase.includes("h264")) {
+        if (urlLowerCase.includes("h264")) {
             return "H264";
         }
-        if(urlLowerCase.includes("wmv") || urlLowerCase.includes("wvc1")) {
+        if (urlLowerCase.includes("wmv") || urlLowerCase.includes("wvc1")) {
             return "WM";
         }
-        if(urlLowerCase.startsWith("http://player.omroep.nl/")) {
+        if (urlLowerCase.startsWith("http://player.omroep.nl/")) {
             return "HTML";
         }
-        if(urlLowerCase.endsWith(".asf") ||
+        if (urlLowerCase.endsWith(".asf") ||
             urlLowerCase.endsWith(".wmv") ||
             urlLowerCase.endsWith(".wma") ||
             urlLowerCase.endsWith(".asx")) {
             return "WM";
         }
-        if(urlLowerCase.endsWith(".m4v") ||
+        if (urlLowerCase.endsWith(".m4v") ||
             urlLowerCase.endsWith(".m4a") ||
             urlLowerCase.endsWith(".mov") ||
             urlLowerCase.endsWith(".mp4")
-            ) {
+        ) {
             return "MP4";
         }
-        if(urlLowerCase.endsWith(".ra") ||
+        if (urlLowerCase.endsWith(".ra") ||
             urlLowerCase.endsWith(".rm") ||
             urlLowerCase.endsWith(".ram") ||
             urlLowerCase.endsWith(".smil")) {
             return "RM";
         }
-        if(urlLowerCase.endsWith(".mp3")) {
+        if (urlLowerCase.endsWith(".mp3")) {
             return "MP3";
         }
-        if(urlLowerCase.endsWith(".3gp") ||
+        if (urlLowerCase.endsWith(".3gp") ||
             urlLowerCase.endsWith(".3gpp")) {
             return "DGPP";
         }
-        if(urlLowerCase.endsWith(".flv") ||
+        if (urlLowerCase.endsWith(".flv") ||
             urlLowerCase.endsWith(".swf") ||
             urlLowerCase.endsWith(".f4v") ||
             urlLowerCase.endsWith(".f4p") ||
@@ -76,6 +77,7 @@ const nl_vpro_domain_media_MediaObjects = (function() {
         return "UNKNOWN";
 
     }
+
     const ACCEPTABLE_FORMATS = ["MP3", "MP4", "M4V", "H264"];
 
     const ACCEPTABLE_SCHEMES = ["npo+drm", "npo"];
@@ -113,20 +115,13 @@ const nl_vpro_domain_media_MediaObjects = (function() {
         return source === actual || (source === 'INTERNETVOD' && actual === undefined);
     }
 
-    /**
-     *
-     * @param {string} platform
-     * @param {Object} mediaObject
-     * @param {function} predictionPredicate Filter for the predictions
-     * @param {function} locationPredicate Filter for the location
-     * @return {boolean}
-     */
-    function playabilityCheck(platform, mediaObject,  predictionPredicate, locationPredicate) {
-        return playability(platform, mediaObject, predictionPredicate, locationPredicate) != null;
-    }
 
     function undefinedIsNull(arg) {
         return (typeof arg !== 'undefined') ? arg : null;
+    }
+
+    function undefinedIsEmpty(arg) {
+        return (typeof arg !== 'undefined') ? arg : [];
     }
 
     /**
@@ -165,7 +160,6 @@ const nl_vpro_domain_media_MediaObjects = (function() {
     }
 
 
-
     const platforms = Object.freeze({
         INTERNETVOD: "INTERNETVOD",
         TVVOD: "TVVOD",
@@ -179,17 +173,6 @@ const nl_vpro_domain_media_MediaObjects = (function() {
         REVOKED: "REVOKED"
     });
 
-    /**
-     *
-     * @param {Object} mediaObject
-     * @param {function} predictionPredicate Filter for the predictions
-     * @param {function} locationPredicate Filter for the location
-     * @return {array}   list of platforms
-     */
-    function playablePlatforms(mediaObject, predictionPredicate, locationPredicate) {
-        return Object.values(platforms)
-            .filter(p => playabilityCheck(p, mediaObject, predictionPredicate, locationPredicate));
-    }
 
     function inPublicationWindow(object) {
         const now = clock()
@@ -223,16 +206,52 @@ const nl_vpro_domain_media_MediaObjects = (function() {
        Platform:  platforms,
        State:  states,
 
+
+        /**
+         * @param {string} platform
+         * @param  {Object} mediaObject
+         * @return {boolean}
+         */
+        nowPlayableForPlatform: function (platform, mediaObject) {
+            return undefinedIsEmpty(mediaObject.locations)
+                .filter(locationFilter)
+                .filter(inPublicationWindow)
+                .filter(l => platformMatches(platform, l.platform)).length > 0;
+        },
+
         /**
          *
          * @param  {Object} mediaObject
          * @return {array}     list of platforms the given mediaobject is now playable on
          */
         nowPlayable: function (mediaObject) {
-            return playablePlatforms(mediaObject,
-                (platform, prediction) => platform !== this.Platform.INTERNETVOD && prediction.state === this.State.REALIZED && inPublicationWindow(prediction),
-                (platform, location) => inPublicationWindow(location)
-            );
+            return  Object.values(platforms)
+                .map(platform =>
+                    [platform, this.nowPlayableForPlatform(platform, mediaObject)])
+                .filter(
+                    ([platform, hasLocation]) => hasLocations)
+                .map(([platform, locations]) => platform);
+        },
+
+        /**
+         * @param  {string} platform
+         * @param  {Object} mediaObject
+         * @return {boolean}
+         */
+        wasPlayableForPlatform: function (platform, mediaObject) {
+            if (this.nowPlayableForPlatform(platform, mediaObject)) {
+                return false;
+            }
+            prediction = undefinedIsEmpty(mediaObject.predictions)
+                .filter(p => platformMatches(platform, p.platform))
+
+            if (prediction.length === 1) {
+                return prediction[0].state === 'REVOKED';
+            } else { // may be the locations are visible (on the backend) but not yet published
+                return undefinedIsEmpty(mediaObject.locations)
+                    .filter(l => platformMatches(platform, l.platform))
+                    .filter(wasUnderEmbargo).length > 0;
+            }
         },
 
         /**
@@ -240,11 +259,13 @@ const nl_vpro_domain_media_MediaObjects = (function() {
          * @param  {Object} mediaObject
          * @return {array}  list of platforms the given mediaobject is was playable on
          */
-        wasPlayable: function (mediaObject) {
-            return playablePlatforms(mediaObject,
-                (platform, prediction) => prediction.state === this.State.REVOKED,
-                (platform, location) => wasUnderEmbargo(location)
-            );
+        wasPlayable: function ( mediaObject) {
+             return  Object.values(platforms)
+                .map(platform =>
+                    [platform, this.wasPlayableForPlatform(platform, mediaObject)])
+                .filter(
+                    ([platform, hasLocation]) => hasLocations)
+                .map(([platform, locations]) => platform);
         },
 
         /**

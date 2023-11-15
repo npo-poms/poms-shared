@@ -56,10 +56,16 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlRootElement(name = "change")
 public class MediaChange extends Change<MediaObject> {
 
+
+    /**
+     * this use to represent  the sequence number in CouchDB. We're not using CouchDB anymore,
+     * it used to be the last publish time for a while, but that is not unique.
+     * <p>
+     * In 7.10 we'll try to store it in an extra field?
+     */
     @XmlAttribute
     @Getter
     @Setter
-    @Deprecated
     private Long sequence;
 
     @XmlAttribute
@@ -82,6 +88,10 @@ public class MediaChange extends Change<MediaObject> {
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     private Instant realPublishDate;
 
+
+    /**
+     * The reasons.
+     */
     @Getter
     @XmlElementWrapper
     @XmlElement(name = "reason")
@@ -102,9 +112,10 @@ public class MediaChange extends Change<MediaObject> {
         Boolean tail,
         @Nullable SortedSet<@NonNull PublicationReason> reasons,
         @Nullable List<@NonNull String> reasonsStrings,
-        boolean skipped) {
+        boolean skipped,
+        Long sequence) {
         this(
-            DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)),
+            sequence == null ? DateUtils.toLong(MediaSince.instant(Optional.ofNullable(publishDate).orElse(media == null ? null : media.getLastPublishedInstant()), since)) : sequence,
             revision,
             MediaSince.mid(mid, since),
             media,
