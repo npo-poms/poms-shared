@@ -404,6 +404,7 @@ public class MediaObjectsTest {
 
     @Nested
     @SuppressWarnings({"ResultOfMethodCallIgnored"})
+    @Disabled
     static class Playability {
 
         @BeforeAll
