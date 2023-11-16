@@ -164,10 +164,10 @@ public class Location extends PublishableObject<Location>
     protected Long neboId;
 
     @Getter
-    @Column(length = 100, updatable = false, nullable = true)
+    @Column(length = 100, updatable = false, nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute
-    protected Platform platform;
+    protected Platform platform  = Platform.INTERNETVOD;
 
     /**
      * Note that this {@link XmlTransient} and hence <em>not available in frontend api</em>
@@ -224,7 +224,7 @@ public class Location extends PublishableObject<Location>
         this.avAttributes = getDefaultAVAttributes(avAttributes, this.programUrl);
         this.workflow = Workflow.PUBLISHED;
         this.duration = duration;
-        this.platform = platform;
+        this.platform = platform == null ? Platform.INTERNETVOD : platform;
     }
 
     public static class Builder implements EmbargoBuilder<Builder> {
@@ -355,19 +355,10 @@ public class Location extends PublishableObject<Location>
         return to;
     }
 
-    public void setPlatform(Platform platform) {
+    public void setPlatform(@NonNull Platform platform) {
         this.platform = platform;
 
-        if (platform != null && this.mediaObject != null) {
-            Prediction record = getPrediction(false);
-            if (record != null) {
-                // in sync so we can query this class its fields on publishables
-                if (record.getAuthority() == Authority.USER) {
-                    Embargos.copyIfMoreRestricted(record, this);
-                } else {
-                    Embargos.copy(record, this);
-                }
-            }
+        if (this.mediaObject != null) {
             if (this.mediaObject.getLocations().contains(this)) {
                 if (isPublishable(instant())) {
                     this.mediaObject.realizePrediction(this);
@@ -429,10 +420,6 @@ public class Location extends PublishableObject<Location>
     @Override
     public void setParent(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
-        if (this.platform != null) {
-            // triggers resetting of publishStop/publishStart
-            this.setPlatform(this.platform);
-        }
     }
 
     @Override
@@ -517,6 +504,7 @@ public class Location extends PublishableObject<Location>
         return this;
     }
 
+    @Deprecated
     public boolean hasPlatform() {
         return platform != null;
     }
