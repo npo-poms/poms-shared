@@ -32,6 +32,7 @@ import nl.vpro.domain.subtitles.*;
 import nl.vpro.jmx.Description;
 import nl.vpro.poms.shared.Headers;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 import static nl.vpro.api.rs.subtitles.Constants.*;
 
@@ -117,14 +118,17 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("find")
+    @Produces({APPLICATION_XML, APPLICATION_JSON})
+    @Consumes({APPLICATION_XML, APPLICATION_JSON})
     MediaList<MediaListItem> find(
-        MediaForm form,
+        @Valid MediaForm form,
         @QueryParam("writable") @DefaultValue("false") boolean writable,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     );
 
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}")
+    @Produces({APPLICATION_XML, APPLICATION_JSON})
     MediaUpdate<?> getMedia(
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,

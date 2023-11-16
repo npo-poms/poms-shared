@@ -113,6 +113,7 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
     @XmlElement(name = "broadcaster")
     @Getter
     @Setter
+    @JsonProperty("broadcasters")
     private List<Broadcaster> broadcasters;
 
     @XmlElement(name = "tag")
@@ -147,6 +148,8 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
 
     @Getter
     @Setter
+    //@XmlElement("location") not backwards compatible!
+    @JsonProperty("locations")
     private SortedSet<Location> locations;
 
     @Getter
