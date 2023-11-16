@@ -687,10 +687,23 @@ public class Location extends PublishableObject<Location>
     }
 
     /**
+     * 'Own' embargo wrapped in a {@link Range}.
+     * <p>
+     * Note that this ensures that stop >= start
      * @since 7.10
+     * @see #asRange()
+     * @see #getOwnEmbargo()
      */
     public Range<Instant> getOwnPublicationRange() {
         return Ranges.closedOpen(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+    }
+
+    /**
+     * @since 7.10
+     * @see #getOwnPublicationRange()
+     */
+    public Embargo getOwnEmbargo() {
+        return Embargos.of(getOwnPublishStartInstant(), getOwnPublishStopInstant());
     }
 
     public Authority getAuthority() {
@@ -701,7 +714,7 @@ public class Location extends PublishableObject<Location>
     }
 
     /**
-     * Locations are basicly order on their programUrl
+     * Locations are basically order on their programUrl
      */
 
     @Override
