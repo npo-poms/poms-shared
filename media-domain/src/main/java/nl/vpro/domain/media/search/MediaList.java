@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import nl.vpro.domain.media.Member;
 
 /**
@@ -21,6 +24,15 @@ import nl.vpro.domain.media.Member;
     Member.class
 })
 @XmlAccessorType(XmlAccessType.PROPERTY)
+@JsonPropertyOrder(
+    {   "totalCount",
+        "size",
+        "offset",
+        "max",
+        "sort",
+        "order",
+        "items" }
+)
 public class MediaList<T> implements Iterable<T> {
 
     protected List<T> list;
@@ -81,6 +93,7 @@ public class MediaList<T> implements Iterable<T> {
     }
 
     @XmlElement(name = "item")
+    @JsonProperty("items")
     public List<T> getList() {
         return list;
     }
