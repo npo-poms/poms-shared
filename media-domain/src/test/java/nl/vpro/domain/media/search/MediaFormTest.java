@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Schedule;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 /**
@@ -13,16 +14,16 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  */
 public class MediaFormTest {
 
-
-
-    @Test
-    public void xml() {
-        MediaForm form = MediaForm.builder()
+    MediaForm form = MediaForm.builder()
             .asc(MediaSortField.lastModified)
             .broadcaster("VPRO")
             .quotedText("foobar")
             .max(1000)
             .build();
+
+    @Test
+    public void xml() {
+
         JAXBTestUtil.roundTripAndSimilar(form, """
                 <s:mediaForm xmlns:s="urn:vpro:media:search:2012" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:update="urn:vpro:media:update:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
                   <s:pager>
@@ -34,6 +35,25 @@ public class MediaFormTest {
                   <s:broadcaster>VPRO</s:broadcaster>
                   <s:text>"foobar"</s:text>
                 </s:mediaForm>"""
+            );
+    }
+
+
+    @Test
+    public void json() {
+
+        Jackson2TestUtil.roundTripAndSimilar(form, """
+                {
+                    "pager" : {
+                      "offset" : 0,
+                      "max" : 1000,
+                      "sort" : "lastModified",
+                      "order" : "ASC"
+                    },
+                    "broadcasters" : [ "VPRO" ],
+                    "text" : "\\"foobar\\""
+                  }
+                  """
             );
     }
 
