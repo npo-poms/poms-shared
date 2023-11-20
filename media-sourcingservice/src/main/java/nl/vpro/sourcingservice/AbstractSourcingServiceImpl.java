@@ -185,6 +185,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         body.addStream("file",  mid, () -> inputStream);
 
         HttpRequest.Builder post = uploadRequestBuilder
+            .header("Content-Type", body.contentType())
             .POST(body);
 
         HttpResponse<String> send = client.send(post.build(), HttpResponse.BodyHandlers.ofString());
