@@ -72,7 +72,7 @@ public class MediaListTest {
                         <s:sortDate>2012-08-02T17:41:25.885+02:00</s:sortDate>
                         <s:type>CLIP</s:type>
                         <s:publishStop>2012-08-02T17:41:25.885+02:00</s:publishStop>
-                        <s:locations owner="BROADCASTER" workflow="PUBLISHED" creationDate="2012-08-02T17:41:25.885+02:00">
+                        <s:locations owner="BROADCASTER" workflow="PUBLISHED" platform="INTERNETVOD" creationDate="2012-08-02T17:41:25.885+02:00">
                           <programUrl>http://www.vpro.nl/</programUrl>
                           <avAttributes>
                             <avFileFormat>UNKNOWN</avFileFormat>
@@ -120,7 +120,8 @@ public class MediaListTest {
                                 },
                                 "owner" : "BROADCASTER",
                                 "creationDate" : 1343922085885,
-                                "workflow" : "PUBLISHED"
+                                "workflow" : "PUBLISHED",
+                                "platform" : "INTERNETVOD"
                               } ],
                               "numberOfLocations" : 1,
                               "tags" : [ "bar", "foo" ],

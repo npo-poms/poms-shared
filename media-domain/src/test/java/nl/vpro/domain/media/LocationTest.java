@@ -183,7 +183,8 @@ public class LocationTest implements BasicObjectTheory<Location> {
               "creationDate" : 1425497262985,
               "lastModified" : 1425497263370,
               "workflow" : "PUBLISHED",
-              "urn" : "urn:vpro:media:location:52197707"
+              "urn" : "urn:vpro:media:location:52197707",
+              "platform" : "INTERNETVOD"
             } ]""";
 
         Location[] locations = Jackson2Mapper.getInstance().readValue(json, Location[].class);
@@ -217,7 +218,8 @@ public class LocationTest implements BasicObjectTheory<Location> {
               "workflow" : "PUBLISHED",
               "duration" : 30000,
               "lastModified" : 1425669724457,
-              "urn" : "urn:vpro:media:location:52286162"
+              "urn" : "urn:vpro:media:location:52286162",
+              "platform" : "INTERNETVOD"
             }
             """);
         //System.out.println(Jackson2Mapper.getInstance().writeValueAsString(new Location[] {loc}));
