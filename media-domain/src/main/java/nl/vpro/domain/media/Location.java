@@ -222,7 +222,7 @@ public class Location extends PublishableObject<Location>
         this.avAttributes = getDefaultAVAttributes(avAttributes, this.programUrl);
         this.workflow = Workflow.PUBLISHED;
         this.duration = duration;
-        this.platform = platform;
+        this.platform = platform == null ? Platform.INTERNETVOD : platform;
     }
 
     public static class Builder implements EmbargoBuilder<Builder> {
