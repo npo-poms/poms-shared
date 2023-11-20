@@ -882,83 +882,47 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void testWithLocations() {
         String expected = """
-            <?xml version="1.0" encoding="UTF-8"?><program xmlns="urn:vpro:media:2009" embeddable="true" urn="urn:vpro:media:program:100" xmlns:shared="urn:vpro:shared:2009">
-                 \s
-              <credits/>
-                 \s
-              <locations>
-                       \s
-                <location owner="BROADCASTER" workflow="PUBLISHED" creationDate="2016-03-04T15:45:00+01:00">
-                             \s
-                  <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
-                             \s
-                  <avAttributes>
-                                   \s
-                    <bitrate>1500</bitrate>
-                                   \s
-                    <avFileFormat>MP4</avFileFormat>
-                               \s
-                  </avAttributes>
-                             \s
-                  <offset>P0DT0H13M0.000S</offset>
-                             \s
-                  <duration>P0DT0H10M0.000S</duration>
-                         \s
-                </location>
-                       \s
-                <location owner="BROADCASTER" workflow="PUBLISHED" creationDate="2016-03-04T14:45:00+01:00">
-                             \s
-                  <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
-                             \s
-                  <avAttributes>
-                                   \s
-                    <bitrate>3000</bitrate>
-                                   \s
-                    <avFileFormat>WM</avFileFormat>
-                               \s
-                  </avAttributes>
-                         \s
-                </location>
-                       \s
-                <location owner="BROADCASTER" workflow="PUBLISHED" creationDate="2016-03-04T13:45:00+01:00">
-                             \s
-                  <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
-                             \s
-                  <avAttributes>
-                                   \s
-                    <bitrate>2000</bitrate>
-                                   \s
-                    <avFileFormat>WM</avFileFormat>
-                               \s
-                  </avAttributes>
-                             \s
-                  <duration>P0DT0H30M33.000S</duration>
-                         \s
-                </location>
-                       \s
-                <location owner="NEBO" workflow="PUBLISHED" creationDate="2016-03-04T12:45:00+01:00">
-                             \s
-                  <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>
-                             \s
-                  <avAttributes>
-                                   \s
-                    <bitrate>1000</bitrate>
-                                   \s
-                    <avFileFormat>HTML</avFileFormat>
-                               \s
-                  </avAttributes>
-                         \s
-                </location>
-                   \s
-              </locations>
-                 \s
-              <images/>
-                 \s
-              <scheduleEvents/>
-                 \s
-              <segments/>
-             \s
-            </program>
+            <?xml version="1.0" encoding="UTF-8"?>
+            <program xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" embeddable="true" urn="urn:vpro:media:program:100">
+                <credits/>
+                <prediction state="REALIZED">INTERNETVOD</prediction>
+                <locations>
+                  <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2016-03-04T15:45:00+01:00">
+                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
+                    <avAttributes>
+                      <bitrate>1500</bitrate>
+                      <avFileFormat>MP4</avFileFormat>
+                    </avAttributes>
+                    <offset>P0DT0H13M0.000S</offset>
+                    <duration>P0DT0H10M0.000S</duration>
+                  </location>
+                  <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2016-03-04T14:45:00+01:00">
+                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
+                    <avAttributes>
+                      <bitrate>3000</bitrate>
+                      <avFileFormat>WM</avFileFormat>
+                    </avAttributes>
+                  </location>
+                  <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2016-03-04T13:45:00+01:00">
+                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
+                    <avAttributes>
+                      <bitrate>2000</bitrate>
+                      <avFileFormat>WM</avFileFormat>
+                    </avAttributes>
+                    <duration>P0DT0H30M33.000S</duration>
+                  </location>
+                  <location owner="NEBO" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2016-03-04T12:45:00+01:00">
+                    <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>
+                    <avAttributes>
+                      <bitrate>1000</bitrate>
+                      <avFileFormat>HTML</avFileFormat>
+                    </avAttributes>
+                  </location>
+                </locations>
+                <images/>
+                <scheduleEvents/>
+                <segments/>
+              </program>
             """;
 
         Program program = program().id(100L).lean().withLocations().build();
@@ -1139,7 +1103,8 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void programWithEverything() throws IOException {
-        Program withEverything = MediaTestDataBuilder.program().withEverything()
+        Program withEverything = MediaTestDataBuilder.program()
+            .withEverything()
             .build();
         JAXBTestUtil.roundTripAndSimilar(withEverything, getClass().getResourceAsStream("/program-with-everything.xml"));
     }
