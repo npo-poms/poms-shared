@@ -572,7 +572,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonIgnore // Oh Jackson2...
     protected boolean isEmbeddable = true;
 
-    // The sortDate field is actually calculatable, but it can be a bit
+    // The sortDate field is actually calculable, but it can be a bit
     // expensive, so we cache its value in a persistent field.
     @Column(name = "sortdate", nullable = true, unique = false)
     protected Instant sortInstant;
@@ -2696,6 +2696,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * persisted separately.
      *
      * @since 1.5
+     * @see MediaObjects#getSortInstant(MediaObject)
      */
     @XmlAttribute(name = "sortDate", required = true)
     @JsonInclude(JsonInclude.Include.NON_NULL)
