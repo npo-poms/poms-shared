@@ -1,10 +1,12 @@
-package nl.vpro.sourcingservice;
+package nl.vpro.sourcingservice.v1;
 
 import lombok.Getter;
 import lombok.ToString;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import nl.vpro.sourcingservice.AbstractResponse;
 
 @Getter
 @ToString()

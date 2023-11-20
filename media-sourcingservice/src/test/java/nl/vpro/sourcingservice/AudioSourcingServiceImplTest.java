@@ -19,14 +19,13 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 
 import static nl.vpro.sourcingservice.SourcingService.loggingConsumer;
-import static nl.vpro.sourcingservice.SourcingService.phaseLogger;
 
 @Log4j2
 class AudioSourcingServiceImplTest {
 
     public static final Properties PROPERTIES = new Properties();
 
-    private static final String MID = "WO_VPRO_A20030747";
+    private static final String MID = "WO_VPRO_A20032725";
 
     static {
         try {
@@ -51,7 +50,7 @@ class AudioSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             50 * 1000 * 1024,
             "m.meeuwissen.vpro@gmail.com",
-            true,
+            2,
             new LoggingMeterRegistry()
         );
     }
@@ -60,7 +59,7 @@ class AudioSourcingServiceImplTest {
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void uploadAudio() throws IOException, InterruptedException {
         final Instant start = Instant.now();
-        final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample-big.mp3");
+        final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
 
         final Restrictions restrictions = new Restrictions();
         restrictions.setGeoRestriction(GeoRestriction.builder().region(Region.NL).build());
@@ -71,12 +70,10 @@ class AudioSourcingServiceImplTest {
             .startImmediately(true)
             .batchConsumer(loggingConsumer(logger))
             .build();
-        impl.upload(logger, MID, restrictions,
+        UploadResponse upload = impl.upload(logger, MID, restrictions,
             Files.size(file),
-            new byte[] {1, 2, 3},
             cachingInputStream,
-            "m.meeuwissen.vpro@gmail.com",
-            phaseLogger(logger)
+            "m.meeuwissen.vpro@gmail.com"
         );
         log.info("Took {}", Duration.between(start, Instant.now()));
     }

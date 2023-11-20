@@ -7,8 +7,8 @@ import java.util.function.Consumer;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.sourcingservice.v1.DeleteResponse;
 import nl.vpro.util.FileCachingInputStream;
 import nl.vpro.util.FileSizeFormatter;
 
@@ -18,12 +18,16 @@ public interface SourcingService {
 
     /**
      * Uploading to the sourcing service goes in these three phases.
+     * @deprecated Phases existed only in version 1
      */
+    @Deprecated
     enum Phase {
         START,
         UPLOAD,
         FINISH
     }
+
+
 
 
     /**
@@ -36,7 +40,8 @@ public interface SourcingService {
      * @param errors email address to associate with mishaps
      * @param phase a consumer which will be called when the {@link Phase 'phase'} of the upload process changes. Uploading to sourcing service ia a multistep process.
      */
-    UploadResponse upload(
+    @Deprecated
+    default UploadResponse upload(
         SimpleLogger logger,
         String mid,
         @Nullable Restrictions restrictions,
@@ -44,23 +49,23 @@ public interface SourcingService {
         byte @Nullable[] checksum,
         InputStream inputStream,
         @Nullable String errors,
-        Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException;
+        Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException {
+        return upload(logger, mid, restrictions, fileSize, inputStream, errors);
+    }
 
     /**
      * Defaulting version of {@link #upload(SimpleLogger, String, Restrictions, long, byte[], InputStream, String, Consumer<Phase>)}.
-     * @deprecated
      */
-    @Deprecated
-    default UploadResponse upload(
+    UploadResponse upload(
         SimpleLogger logger,
         String mid,
         @Nullable Restrictions restrictions,
         long fileSize,
         InputStream inputStream,
         @Nullable String errors
-    ) throws IOException, InterruptedException, SourcingServiceException {
-        return upload(logger, mid, restrictions, fileSize, null, inputStream, errors, (p) -> {});
-    }
+    ) throws IOException, InterruptedException, SourcingServiceException;
+
+
 
     Optional<StatusResponse> status(String mid) throws IOException, InterruptedException;
 
@@ -92,6 +97,11 @@ public interface SourcingService {
             }
         };
     }
+
+    /**
+     * phases are veriosn 1
+     */
+    @Deprecated
     static Consumer<Phase> phaseLogger(final SimpleLogger logger) {
         return phase -> {
             logger.info(en("Phase {}")

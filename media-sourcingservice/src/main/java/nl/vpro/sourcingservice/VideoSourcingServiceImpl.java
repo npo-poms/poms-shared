@@ -21,10 +21,11 @@ public class VideoSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
         @Value("${sourcingservice.video.token}") String audioToken,
         @Value("${sourcingservice.chunkSize:10000000}") int chunkSize,
         @Value("${sourcingservice.defaultEmail:#{null}}") String defaultEmail,
-        @Value("${sourcingservice.checkChecksum:#{null}}") Boolean checkChecksum,
+        @Value("${sourcingservice.version:#1}") int version,
+
         MeterRegistry meterRegistry
        ) {
-        super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, checkChecksum, meterRegistry);
+        super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, meterRegistry, version);
     }
 
     @Override

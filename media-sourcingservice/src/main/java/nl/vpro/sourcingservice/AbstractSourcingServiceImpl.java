@@ -10,8 +10,6 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.http.*;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,9 +26,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.update.UploadResponse;
+
 import nl.vpro.logging.simple.Level;
 import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.sourcingservice.v1.*;
 import nl.vpro.util.FileSizeFormatter;
 import nl.vpro.util.InputStreamChunk;
 
@@ -82,12 +81,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private final MeterRegistry meterRegistry;
 
-
     /**
      * Whether to determin checksum of incoming stream
      */
-    private final boolean checkChecksum;
 
+
+    int version = 2;
 
     AbstractSourcingServiceImpl(
         String baseUrl,
@@ -95,8 +94,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String token,
         int chunkSize,
         String defaultEmail,
-        Boolean checkChecksum,
-        MeterRegistry meterRegistry) {
+        MeterRegistry meterRegistry,
+        int version) {
         this.baseUrl = baseUrl.replaceAll("([^/])$","$1/");
 
         this.callbackBaseUrl = callbackBaseUrl;
@@ -104,16 +103,34 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         this.chunkSize = chunkSize;
         this.defaultEmail = defaultEmail;
         this.meterRegistry = meterRegistry;
-        this.checkChecksum = checkChecksum != null && checkChecksum;
+        this.version = version;
     }
 
 
     protected abstract String getFileName(String mid);
 
 
+    @Override
+    public UploadResponse upload(
+        SimpleLogger logger,
+        String mid,
+        @Nullable Restrictions restrictions,
+        long fileSize,
+        InputStream inputStream,
+        @Nullable String errors
+    ) throws IOException, InterruptedException, SourcingServiceException {
+        return switch (version) {
+            case 1 ->
+                uploadv1(logger, mid, restrictions, fileSize, null, inputStream, errors, SourcingService.phaseLogger(logger));
+            case 2 ->
+                uploadv2(logger, mid, restrictions, fileSize, inputStream, errors);
+            default -> throw new IllegalArgumentException("Unknown version " + version);
+        };
+    }
+
+
    @SneakyThrows
-   @Override
-   public UploadResponse upload(
+   protected UploadResponse uploadv1(
        SimpleLogger logger,
        final String mid,
        @Nullable Restrictions restrictions,
@@ -125,15 +142,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
        final AtomicLong uploaded = new AtomicLong(0);
 
-
-       MessageDigest digester;
-       if (checkChecksum && checksum != null) {
-           digester = MessageDigest.getInstance("MD5");
-           inputStream = new DigestInputStream(inputStream, digester);
-           logger.info("Determining MD5 checksum on the fly");
-       } else {
-           digester = null;
-       }
 
        final InputStream finalInputStream = inputStream;
        try (finalInputStream) {
@@ -152,14 +160,42 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
        phase.accept(Phase.FINISH);
-       if (checkChecksum && checksum != null)  {
-           byte[] determinedChecksum = digester.digest();
-           if (determinedChecksum != checksum) {
-               throw new IllegalArgumentException("Illegal checksum");
-           }
-       }
 
        return uploadFinish(logger, mid, uploaded, restrictions);
+   }
+
+    @SneakyThrows
+   protected UploadResponse uploadv2(
+       SimpleLogger logger,
+       final String mid,
+       @Nullable Restrictions restrictions,
+       final long fileSize,
+       final InputStream inputStream,
+       String errors) throws SourcingServiceException {
+
+
+        if (restrictions != null) {
+
+        }
+
+        HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
+
+
+        final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
+        body.addStream("file",  mid, () -> inputStream);
+
+        HttpRequest.Builder post = uploadRequestBuilder
+            .POST(body);
+
+        HttpResponse<String> send = client.send(post.build(), HttpResponse.BodyHandlers.ofString());
+
+
+//        assert uploaded.get() == fileSize;
+
+        JsonNode bodyNode = MAPPER.readTree(send.body());
+        log.info("{}", bodyNode);
+
+       return null;
    }
 
 
@@ -206,6 +242,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         logger.info("ingest {}", response);
     }
 
+    @Deprecated
     private ObjectNode metadata(SimpleLogger logger, String mid, String filename, Restrictions restrictions) {
          final ObjectNode metaData = MAPPER.createObjectNode();
         metaData.put("mid", mid);
@@ -241,6 +278,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         return metaData;
     }
 
+
+    @Deprecated
     private void uploadStart(
         final SimpleLogger logger,
         final String mid,
@@ -362,13 +401,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final boolean  success = finish.statusCode() >= 200 && finish.statusCode() < 300 ;
         logger.log(success?  Level.INFO : Level.ERROR, "{} finish: {} ({}) {} {}", mid, status, finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded), MAPPER.writeValueAsString(node));
         JsonNode bodyNode = MAPPER.readTree(finish.body());
-        return new UploadResponse(
+        return null;
+        /*return new UploadResponse(
             mid,
             finish.statusCode(),
             status,
             response,
             uploaded.get()
-        );
+        );*/
     }
 
     protected abstract String implName();
@@ -401,6 +441,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     protected HttpRequest statusRequest(String mid) {
         return request("ingest/" + mid + "/status")
             .GET().build();
+    }
+
+
+
+    protected HttpRequest.Builder uploadRequestBuilder(String mid) {
+        return request("ingest/" + mid + "/upload");
     }
 
 
