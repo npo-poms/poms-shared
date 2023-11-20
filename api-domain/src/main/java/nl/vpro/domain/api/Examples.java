@@ -28,7 +28,7 @@ public class Examples {
     public static final String FORM_XML = """
         <api:mediaForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
             <api:searches>
-                <api:text fuzziness="AUTO" match="SHOULD">bla</api:text>
+                <api:text fuzziness="AUTO" match="SHOULD">Argos</api:text>
             </api:searches>
         </api:mediaForm>""";
 
