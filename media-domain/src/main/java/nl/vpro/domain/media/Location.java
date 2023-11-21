@@ -28,12 +28,14 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Range;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.util.HttpConnectionUtils;
+import nl.vpro.util.Ranges;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 import static java.util.Objects.requireNonNullElse;
@@ -162,10 +164,10 @@ public class Location extends PublishableObject<Location>
     protected Long neboId;
 
     @Getter
-    @Column(length = 100, updatable = false, nullable = true)
+    @Column(length = 100, updatable = false, nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute
-    protected Platform platform;
+    protected Platform platform  = Platform.INTERNETVOD;
 
     /**
      * Note that this {@link XmlTransient} and hence <em>not available in frontend api</em>
@@ -222,7 +224,7 @@ public class Location extends PublishableObject<Location>
         this.avAttributes = getDefaultAVAttributes(avAttributes, this.programUrl);
         this.workflow = Workflow.PUBLISHED;
         this.duration = duration;
-        this.platform = platform;
+        this.platform = platform == null ? Platform.INTERNETVOD : platform;
     }
 
     public static class Builder implements EmbargoBuilder<Builder> {
@@ -353,19 +355,10 @@ public class Location extends PublishableObject<Location>
         return to;
     }
 
-    public void setPlatform(Platform platform) {
+    public void setPlatform(@NonNull Platform platform) {
         this.platform = platform;
 
-        if (platform != null && this.mediaObject != null) {
-            Prediction record = getAuthorityRecord(false);
-            if (record != null) {
-                // in sync so we can query this class its fields on publishables
-                if (record.getAuthority() == Authority.USER) {
-                    Embargos.copyIfMoreRestricted(record, this);
-                } else {
-                    Embargos.copy(record, this);
-                }
-            }
+        if (this.mediaObject != null) {
             if (this.mediaObject.getLocations().contains(this)) {
                 if (isPublishable(instant())) {
                     this.mediaObject.realizePrediction(this);
@@ -389,8 +382,12 @@ public class Location extends PublishableObject<Location>
 
     public String getScheme() {
         if (programUrl != null) {
-            URI asUri = URI.create(sanitizedProgramUrl(programUrl));
-            return asUri.getScheme();
+            try {
+                URI asUri = URI.create(sanitizedProgramUrl(programUrl));
+                return asUri.getScheme();
+            } catch (IllegalArgumentException iae) {
+                log.warn(iae.getMessage());
+            }
         }
         return null;
     }
@@ -423,10 +420,6 @@ public class Location extends PublishableObject<Location>
     @Override
     public void setParent(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
-        if (this.platform != null) {
-            // triggers resetting of publishStop/publishStart
-            this.setPlatform(this.platform);
-        }
     }
 
     @Override
@@ -511,6 +504,7 @@ public class Location extends PublishableObject<Location>
         return this;
     }
 
+    @Deprecated
     public boolean hasPlatform() {
         return platform != null;
     }
@@ -523,7 +517,7 @@ public class Location extends PublishableObject<Location>
     }
 
     @Nullable
-    Prediction getAuthorityRecord(boolean create) {
+    Prediction getPrediction(boolean create) {
         if (hasPlatform()) {
             if (mediaObject == null) {
                 throw new IllegalStateException("Location does not have a parent mediaobject");
@@ -544,8 +538,12 @@ public class Location extends PublishableObject<Location>
         }
     }
 
-    Prediction getAuthorityRecord() {
-        return getAuthorityRecord(true);
+    /**
+     * Returns the {@link Prediction} that is associated with the parent {@link MediaObject} for the same {@link #getPlatform()}.
+     * If it is not available, it will be created.
+     */
+    Prediction getPrediction() {
+        return getPrediction(true);
     }
 
     public boolean hasVideoSizing() {
@@ -558,17 +556,28 @@ public class Location extends PublishableObject<Location>
     public void setAuthorityUpdate(Boolean ceresUpdate) {
         this.authorityUpdate = ceresUpdate;
     }
-/*  MSE-5644
+
+
+    /**
+     * For a Location it is true that it cannot have a wider embargo than its {@link #getPrediction() associated platform}
+     * @see #getOwnPublishStartInstant() for the (settable) value that is not constrainted by {@link #getPrediction()}
+     */
     @Override
     public Instant getPublishStartInstant() {
-        Instant own = getOwnPublicStartInstant();
+        Instant own = getOwnPublishStartInstant();
         if(hasPlatform() && mediaObject != null) {
             try {
-                Prediction record = getAuthorityRecord(false);
+                Prediction record = getPrediction(false);
                 if (record != null) {
                     Instant recordPublishStart = record.getPublishStartInstant();
-                    if (recordPublishStart != null) {
-                        return own == null ? recordPublishStart : own.isAfter(recordPublishStart) ? own : recordPublishStart;
+                    if (recordPublishStart == null) {
+                        return own;
+                    }  else {
+                        if (own == null || recordPublishStart.isAfter(own)) {
+                            return recordPublishStart;
+                        } else {
+                            return own;
+                        }
                     }
                 }
             } catch (IllegalAuthorityRecord iea) {
@@ -577,26 +586,12 @@ public class Location extends PublishableObject<Location>
         }
 
         return own;
-    }*/
-
-    @Override
-    public Instant getPublishStartInstant() {
-        if(hasPlatform() && mediaObject != null) {
-            try {
-                Prediction record = getAuthorityRecord(false);
-                if (record != null) {
-                    return record.getPublishStartInstant();
-                }
-            } catch (IllegalAuthorityRecord iea) {
-                log.debug(iea.getMessage());
-            }
-        }
-
-        return super.getPublishStartInstant();
     }
 
-
-    public Instant getOwnPublicStartInstant() {
+    /**
+     * @since 7.10
+     */
+    public Instant getOwnPublishStartInstant() {
         return super.getPublishStartInstant();
     }
 
@@ -606,13 +601,8 @@ public class Location extends PublishableObject<Location>
         if (! Objects.equals(this.publishStart, publishStart)) {
 
             super.setPublishStartInstant(publishStart);
-
-
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
-                if (hasPlatform()) { ///remove for MSE-5644
-                    getAuthorityRecord().setPublishStartInstant(publishStart);
-                }
                 mediaObject.realizePrediction(this);
             }
 
@@ -627,35 +617,41 @@ public class Location extends PublishableObject<Location>
 
 
     /**
-     * The publish stop of a location is rather complicated:
-     * 1. It is the offline date of the corresponding streaming platform status if that is available.
-     * 2. It not, then it is the offline date of the corresponding authority record.
-     * 3. It that too is not available then it will fall back to its own field {@link PublishableObject#getPublishStopInstant()}
+     * The publishstop of a location is can be restricted by the {@link #getPrediction() associated platform}.
+     * <p>
+     * @see getOwnPublishStopInstant() for the (settable) value that is not constrainted by {@link #getPrediction()}
      */
     @Override
     @Nullable
     public Instant getPublishStopInstant() {
-        Instant own = getOwnPublicStartInstant();
+        Instant own = getOwnPublishStopInstant();
         if(hasPlatform() && mediaObject != null) {
-            Instant streamingOffline = onStreaming() && mediaObject.getStreamingPlatformStatus() != null ? mediaObject.getStreamingPlatformStatus().getOffline(hasDrm()) : null;
             try {
-                Prediction record = getAuthorityRecord(false);
+                Prediction record = getPrediction(false);
                 if (record != null) {
                     Instant fromAuthorityRecord = record.getPublishStopInstant();
-                    if (fromAuthorityRecord == null || (streamingOffline != null && fromAuthorityRecord.isAfter(streamingOffline))) {
-                        return streamingOffline;
+                    if (fromAuthorityRecord == null) {
+                        return own;
+                    } else {
+                        if (own == null || fromAuthorityRecord.isBefore(own)) {
+                            return fromAuthorityRecord;
+                        } else {
+                            return own;
+                        }
                     }
-                    return fromAuthorityRecord;
                 }
             } catch (IllegalAuthorityRecord iea) {
                 log.debug(iea.getMessage());
             }
         }
 
-        return super.getPublishStopInstant();
+        return own;
     }
 
-    public Instant getOwnPublicStopInstant() {
+    /**
+     * @since 7.10
+     */
+    public Instant getOwnPublishStopInstant() {
         return super.getPublishStopInstant();
     }
 
@@ -667,9 +663,6 @@ public class Location extends PublishableObject<Location>
 
             super.setPublishStopInstant(publishStop);
             if (mediaObject != null) {
-                if (hasPlatform()) { /// ///remove for MSE-5644
-                    getAuthorityRecord().setPublishStopInstant(publishStop);
-                }
                 mediaObject.realizePrediction(this);
             }
 
@@ -681,15 +674,35 @@ public class Location extends PublishableObject<Location>
         return this;
     }
 
+    /**
+     * 'Own' embargo wrapped in a {@link Range}.
+     * <p>
+     * Note that this ensures that stop >= start
+     * @since 7.10
+     * @see #asRange()
+     * @see #getOwnEmbargo()
+     */
+    public Range<Instant> getOwnPublicationRange() {
+        return Ranges.closedOpen(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+    }
+
+    /**
+     * @since 7.10
+     * @see #getOwnPublicationRange()
+     */
+    public Embargo getOwnEmbargo() {
+        return Embargos.of(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+    }
+
     public Authority getAuthority() {
         if (platform == null) {
             return Authority.USER;
         }
-        return getAuthorityRecord().getAuthority();
+        return getPrediction().getAuthority();
     }
 
     /**
-     * Locations are basicly order on their programUrl
+     * Locations are basically order on their programUrl
      */
 
     @Override
@@ -741,7 +754,7 @@ public class Location extends PublishableObject<Location>
         if (parent instanceof MediaObject) {
             this.mediaObject = (MediaObject) parent;
             try {
-                Prediction locationAuthorityRecord = getAuthorityRecord(false);
+                Prediction locationAuthorityRecord = getPrediction(false);
                 if (locationAuthorityRecord != null) {
                     locationAuthorityRecord.setPublishStartInstant(publishStart);
                     locationAuthorityRecord.setPublishStopInstant(publishStop);
@@ -803,7 +816,7 @@ public class Location extends PublishableObject<Location>
             // unknown
             return false;
         }
-        Prediction record = getAuthorityRecord(false);
+        Prediction record = getPrediction(false);
         return record != null && record.getAuthority() == Authority.SYSTEM;
     }
 

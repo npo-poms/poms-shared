@@ -328,7 +328,7 @@
   } ],
   "teletext" : 100,
   "predictions" : [ {
-    "state" : "ANNOUNCED",
+    "state" : "REALIZED",
     "platform" : "INTERNETVOD"
   } ],
   "locations" : [ {
@@ -342,6 +342,7 @@
     "workflow" : "PUBLISHED",
     "offset" : 780000,
     "duration" : 600000,
+    "platform" : "INTERNETVOD",
     "urn" : "urn:vpro:media:location:6"
   }, {
     "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
@@ -352,6 +353,7 @@
     "owner" : "BROADCASTER",
     "creationDate" : 1457099100000,
     "workflow" : "PUBLISHED",
+    "platform" : "INTERNETVOD",
     "urn" : "urn:vpro:media:location:7"
   }, {
     "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
@@ -363,6 +365,7 @@
     "creationDate" : 1457095500000,
     "workflow" : "PUBLISHED",
     "duration" : 1833000,
+    "platform" : "INTERNETVOD",
     "urn" : "urn:vpro:media:location:8"
   }, {
     "programUrl" : "http://player.omroep.nl/?aflID=4393288",
@@ -373,6 +376,7 @@
     "owner" : "NEBO",
     "creationDate" : 1457091900000,
     "workflow" : "PUBLISHED",
+    "platform" : "INTERNETVOD",
     "urn" : "urn:vpro:media:location:9"
   }, {
     "programUrl" : "http://www.npo.nl/location/2",
@@ -384,6 +388,7 @@
     "workflow" : "FOR_PUBLICATION",
     "offset" : 780000,
     "duration" : 600000,
+    "platform" : "INTERNETVOD",
     "urn" : "urn:vpro:media:location:10"
   }, {
     "programUrl" : "http://www.vpro.nl/location/1",
@@ -393,6 +398,7 @@
     "owner" : "BROADCASTER",
     "creationDate" : 1486291320000,
     "workflow" : "PUBLISHED",
+    "platform" : "INTERNETVOD",
     "urn" : "urn:vpro:media:location:11"
   } ],
   "relations" : [ {

@@ -531,17 +531,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition =
-        "workflow != 'DELETED' and ( "
-            + "(platform is null and  (publishStart is null or publishStart <= now())  and (publishStop is null or publishStop > now())) "
-            + " or "
-            + " ( not(platform is null)  " + "   and ( "
-            + "        select count(*) from prediction c where c.platform = platform and c.mediaobject_id = mediaobject_id and "
-            + "              (c.publishStart is null or c.publishStart <= now()) and (c.publishStop is null or c.publishStop > now()) "
-            + "       ) > 0)"
-            + ")"
-
+        "workflow = 'PUBLISHED'"
     )
-
     protected SortedSet<@NotNull @Valid Location> locations = new TreeSet<>();
 
 
@@ -680,7 +671,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getBroadcasters().forEach(this::addBroadcaster);
         source.getPortals().forEach(this::addPortal);
         source.getPortalRestrictions()
-                .forEach(restriction -> this.addPortalRestriction(PortalRestriction.copy(restriction)));
+            .forEach(restriction -> this.addPortalRestriction(PortalRestriction.copy(restriction)));
         source.getGeoRestrictions().forEach(restriction -> this.addGeoRestriction(GeoRestriction.copy(restriction)));
         TextualObjects.copy(source, this);
         source.getGenres().forEach(this::addGenre);

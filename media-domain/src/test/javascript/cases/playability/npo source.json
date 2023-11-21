@@ -30,7 +30,8 @@
       },
       "owner" : "AUTHORITY",
       "creationDate" : 1635253200000,
-      "workflow" : "PUBLISHED"
+      "workflow" : "PUBLISHED",
+      "platform" : "INTERNETVOD"
     } ]
   },
   "mediaObject" : {
@@ -54,7 +55,8 @@
       },
       "owner" : "AUTHORITY",
       "creationDate" : 1635253200000,
-      "workflow" : "PUBLISHED"
+      "workflow" : "PUBLISHED",
+      "platform" : "INTERNETVOD"
     } ]
   }
 }

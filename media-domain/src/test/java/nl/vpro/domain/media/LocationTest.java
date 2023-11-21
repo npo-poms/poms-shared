@@ -95,7 +95,7 @@ public class LocationTest implements BasicObjectTheory<Location> {
         location.setParent(program);
         location.setPlatform(Platform.INTERNETVOD);
 
-        assertThat(location.getAuthorityRecord()).isSameAs(pred);
+        assertThat(location.getPrediction()).isSameAs(pred);
     }
 
     @Test
@@ -150,8 +150,8 @@ public class LocationTest implements BasicObjectTheory<Location> {
         }
 
         {
-            Location l1 = new Location("aaaa", OwnerType.BROADCASTER);
-            Location l2 = new Location("bbbb", OwnerType.MIS);
+            Location l1 = new Location("https://aaaa/1", OwnerType.BROADCASTER);
+            Location l2 = new Location("https://bbbb/2", OwnerType.MIS);
 
             assertThat(Location.PRESENTATION_ORDER.compare(l1, l2)).isLessThan(0);
             assertThat(Location.PRESENTATION_ORDER.compare(l2, l1)).isGreaterThan(0);
@@ -183,7 +183,8 @@ public class LocationTest implements BasicObjectTheory<Location> {
               "creationDate" : 1425497262985,
               "lastModified" : 1425497263370,
               "workflow" : "PUBLISHED",
-              "urn" : "urn:vpro:media:location:52197707"
+              "urn" : "urn:vpro:media:location:52197707",
+              "platform" : "INTERNETVOD"
             } ]""";
 
         Location[] locations = Jackson2Mapper.getInstance().readValue(json, Location[].class);
@@ -217,7 +218,8 @@ public class LocationTest implements BasicObjectTheory<Location> {
               "workflow" : "PUBLISHED",
               "duration" : 30000,
               "lastModified" : 1425669724457,
-              "urn" : "urn:vpro:media:location:52286162"
+              "urn" : "urn:vpro:media:location:52286162",
+              "platform" : "INTERNETVOD"
             }
             """);
         //System.out.println(Jackson2Mapper.getInstance().writeValueAsString(new Location[] {loc}));

@@ -1,239 +1,120 @@
-<?xml version="1.0" encoding="UTF-8"?><s:item xmlns:s="urn:vpro:media:search:2012" mid="VPROWON_20001" avType="VIDEO" mediaType="nl.vpro.domain.media.Program" id="12" urn="urn:vpro:media:program:12" workflow="PUBLISHED" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:update="urn:vpro:media:update:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
+<?xml version="1.0" encoding="UTF-8"?><s:item xmlns:s="urn:vpro:media:search:2012" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:update="urn:vpro:media:update:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema" mid="VPROWON_20001" avType="VIDEO" mediaType="nl.vpro.domain.media.Program" id="12" urn="urn:vpro:media:program:12" workflow="PUBLISHED">
   <s:broadcaster id="BNN">BNN</s:broadcaster>
-
   <s:broadcaster id="AVRO">AVRO</s:broadcaster>
-
   <s:title>Main title</s:title>
-
   <s:subTitle>Episode title MIS</s:subTitle>
-
   <s:description>Main description</s:description>
-
   <s:creationDate>2015-03-06T00:00:00+01:00</s:creationDate>
-
   <s:lastModified>2015-03-06T01:00:00+01:00</s:lastModified>
-
   <s:createdBy>editor@vpro.nl</s:createdBy>
-
   <s:lastModifiedBy>editor@vpro.nl</s:lastModifiedBy>
-
   <s:sortDate>1970-01-01T01:00:00.100+01:00</s:sortDate>
-
   <s:type>BROADCAST</s:type>
-
   <s:publishStart>1970-01-01T01:00:00+01:00</s:publishStart>
-
   <s:publishStop>2500-01-01T00:00:00+01:00</s:publishStop>
-
   <s:lastPublished>2015-03-06T02:00:00+01:00</s:lastPublished>
-
   <s:firstScheduleEvent channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
     <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
-
     <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
-
     <textSubtitles>Teletekst ondertitels</textSubtitles>
-
     <textPage>888</textPage>
-
     <guideDay>1969-12-31+01:00</guideDay>
-
     <start>1970-01-01T01:00:00.100+01:00</start>
-
     <duration>P0DT0H0M0.200S</duration>
-
     <poProgID>VPROWON_20001</poProgID>
-
     <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>
-
     <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>
-
   </s:firstScheduleEvent>
-
   <s:firstScheduleEventNoRerun channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
     <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
-
     <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
-
     <textSubtitles>Teletekst ondertitels</textSubtitles>
-
     <textPage>888</textPage>
-
     <guideDay>1969-12-31+01:00</guideDay>
-
     <start>1970-01-01T01:00:00.100+01:00</start>
-
     <duration>P0DT0H0M0.200S</duration>
-
     <poProgID>VPROWON_20001</poProgID>
-
     <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>
-
     <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>
-
   </s:firstScheduleEventNoRerun>
-
   <s:lastScheduleEvent channel="CONS" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
     <repeat isRerun="true"/>
-
     <guideDay>1970-01-10+01:00</guideDay>
-
     <start>1970-01-11T01:00:00.600+01:00</start>
-
     <duration>P0DT0H0M0.200S</duration>
-
     <poProgID>VPROWON_20001</poProgID>
-
   </s:lastScheduleEvent>
-
   <s:lastScheduleEventNoRerun channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
     <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
-
     <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
-
     <textSubtitles>Teletekst ondertitels</textSubtitles>
-
     <textPage>888</textPage>
-
     <guideDay>1969-12-31+01:00</guideDay>
-
     <start>1970-01-01T01:00:00.100+01:00</start>
-
     <duration>P0DT0H0M0.200S</duration>
-
     <poProgID>VPROWON_20001</poProgID>
-
     <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>
-
     <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>
-
   </s:lastScheduleEventNoRerun>
-
   <s:sortDateScheduleEvent channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
     <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
-
     <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
-
     <textSubtitles>Teletekst ondertitels</textSubtitles>
-
     <textPage>888</textPage>
-
     <guideDay>1969-12-31+01:00</guideDay>
-
     <start>1970-01-01T01:00:00.100+01:00</start>
-
     <duration>P0DT0H0M0.200S</duration>
-
     <poProgID>VPROWON_20001</poProgID>
-
     <primaryLifestyle>Praktische Familiemensen</primaryLifestyle>
-
     <secondaryLifestyle>Zorgzame Duizendpoten</secondaryLifestyle>
-
   </s:sortDateScheduleEvent>
-
-  <s:locations owner="BROADCASTER" workflow="PUBLISHED" creationDate="2016-03-04T15:45:00+01:00" urn="urn:vpro:media:location:6">
-
+  <s:locations owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2016-03-04T15:45:00+01:00" urn="urn:vpro:media:location:6">
     <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
-
     <avAttributes>
-
       <bitrate>1500</bitrate>
-
       <avFileFormat>MP4</avFileFormat>
-
     </avAttributes>
-
     <offset>P0DT0H13M0.000S</offset>
-
     <duration>P0DT0H10M0.000S</duration>
-
   </s:locations>
-
-  <s:locations owner="BROADCASTER" workflow="PUBLISHED" creationDate="2016-03-04T14:45:00+01:00" urn="urn:vpro:media:location:7">
-
+  <s:locations owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2016-03-04T14:45:00+01:00" urn="urn:vpro:media:location:7">
     <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
-
     <avAttributes>
-
       <bitrate>3000</bitrate>
-
       <avFileFormat>WM</avFileFormat>
-
     </avAttributes>
-
   </s:locations>
-
-  <s:locations owner="BROADCASTER" workflow="PUBLISHED" creationDate="2016-03-04T13:45:00+01:00" urn="urn:vpro:media:location:8">
-
+  <s:locations owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2016-03-04T13:45:00+01:00" urn="urn:vpro:media:location:8">
     <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
-
     <avAttributes>
-
       <bitrate>2000</bitrate>
-
       <avFileFormat>WM</avFileFormat>
-
     </avAttributes>
-
     <duration>P0DT0H30M33.000S</duration>
-
   </s:locations>
-
-  <s:locations owner="NEBO" workflow="PUBLISHED" creationDate="2016-03-04T12:45:00+01:00" urn="urn:vpro:media:location:9">
-
+  <s:locations owner="NEBO" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2016-03-04T12:45:00+01:00" urn="urn:vpro:media:location:9">
     <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>
-
     <avAttributes>
-
       <bitrate>1000</bitrate>
-
       <avFileFormat>HTML</avFileFormat>
-
     </avAttributes>
-
   </s:locations>
-
-  <s:locations owner="NPO" workflow="FOR PUBLICATION" creationDate="2017-03-04T15:45:00+01:00" urn="urn:vpro:media:location:10">
-
+  <s:locations owner="NPO" platform="INTERNETVOD" workflow="FOR PUBLICATION" creationDate="2017-03-04T15:45:00+01:00" urn="urn:vpro:media:location:10">
     <programUrl>http://www.npo.nl/location/2</programUrl>
-
     <avAttributes>
-
       <avFileFormat>UNKNOWN</avFileFormat>
-
     </avAttributes>
-
     <offset>P0DT0H13M0.000S</offset>
-
     <duration>P0DT0H10M0.000S</duration>
-
   </s:locations>
-
-  <s:locations owner="BROADCASTER" workflow="PUBLISHED" creationDate="2017-02-05T11:42:00+01:00" urn="urn:vpro:media:location:11">
-
+  <s:locations owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" creationDate="2017-02-05T11:42:00+01:00" urn="urn:vpro:media:location:11">
     <programUrl>http://www.vpro.nl/location/1</programUrl>
-
     <avAttributes>
-
       <avFileFormat>UNKNOWN</avFileFormat>
-
     </avAttributes>
-
   </s:locations>
-
   <s:numberOfLocations>6</s:numberOfLocations>
-
   <s:tag>tag1</s:tag>
-
   <s:tag>tag2</s:tag>
-
   <s:tag>tag3</s:tag>
-
 </s:item>

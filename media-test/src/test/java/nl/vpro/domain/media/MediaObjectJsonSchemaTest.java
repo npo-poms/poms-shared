@@ -603,7 +603,32 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testLocations() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"locations\":[{\"programUrl\":\"2\",\"avAttributes\":{\"avFileFormat\":\"UNKNOWN\"},\"owner\":\"BROADCASTER\",\"creationDate\":1,\"workflow\":\"PUBLISHED\"}]}";
+        String expected = """
+                {
+                    "objectType" : "program",
+                    "urn" : "urn:vpro:media:program:100",
+                    "embeddable" : true,
+                    "broadcasters" : [ ],
+                    "genres" : [ ],
+                    "countries" : [ ],
+                    "languages" : [ ],
+                    "predictions" : [ {
+                      "state" : "REALIZED",
+                      "platform" : "INTERNETVOD"
+                    } ],
+                    "locations" : [ {
+                      "programUrl" : "2",
+                      "avAttributes" : {
+                        "avFileFormat" : "UNKNOWN"
+                      },
+                      "owner" : "BROADCASTER",
+                      "creationDate" : 1,
+                      "workflow" : "PUBLISHED",
+                      "platform" : "INTERNETVOD"
+                    } ]
+                  }
+
+            """;
 
         Location location = new Location("2", OwnerType.BROADCASTER);
         location.setCreationInstant(Instant.ofEpochMilli(1));
@@ -612,7 +637,20 @@ public class MediaObjectJsonSchemaTest {
         String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
-        Jackson2TestUtil.roundTripAndSimilar(location, "{\"programUrl\":\"2\",\"avAttributes\":{\"avFileFormat\":\"UNKNOWN\"},\"owner\":\"BROADCASTER\",\"creationDate\":1,\"workflow\":\"PUBLISHED\"}");
+        Jackson2TestUtil.roundTripAndSimilar(location,
+            """
+                {
+                   "programUrl" : "2",
+                   "avAttributes" : {
+                     "avFileFormat" : "UNKNOWN"
+                   },
+                   "owner" : "BROADCASTER",
+                   "creationDate" : 1,
+                   "workflow" : "PUBLISHED",
+                   "platform" : "INTERNETVOD"
+                 }
+                """);
+
     }
 
     @Test
@@ -643,149 +681,157 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testLanguages() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[{\"code\":\"nl\",\"value\":\"Nederlands\"}]}";
+                public void testLanguages() throws Exception {
+                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[{\"code\":\"nl\",\"value\":\"Nederlands\"}]}";
 
-        Program program = program().id(100L).lean().languages("nl").build();
+                    Program program = program().id(100L).lean().languages("nl").build();
 
-        String actual = toPublisherJson(program);
+                    String actual = toPublisherJson(program);
 
-        assertJsonEquals(expected, actual);
-    }
-
-
-    @Test
-    public void testCountries() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[{\"code\":\"NL\",\"value\":\"Nederland\"}],\"languages\":[]}";
-
-        Program program = program().id(100L).lean().countries("NL").build();
-
-        String actual = toPublisherJson(program);
-
-        assertJsonEquals(expected, actual);
-    }
+                    assertJsonEquals(expected, actual);
+                }
 
 
-    @Test
-    public void testAgeRating() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"16\"}";
+                @Test
+                public void testCountries() throws Exception {
+                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[{\"code\":\"NL\",\"value\":\"Nederland\"}],\"languages\":[]}";
 
-        Program program = program().id(100L).lean().ageRating(AgeRating._16).build();
+                    Program program = program().id(100L).lean().countries("NL").build();
 
-        String actual = toPublisherJson(program);
+                    String actual = toPublisherJson(program);
 
-        assertJsonEquals(expected, actual);
-    }
-
-    @Test
-    public void testAgeRatingAll() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"ALL\"}";
-
-        Program program = program().id(100L).lean().ageRating(AgeRating.ALL).build();
-
-        String actual = toPublisherJson(program);
-
-        assertJsonEquals(expected, actual);
-    }
+                    assertJsonEquals(expected, actual);
+                }
 
 
-    @Test
-    public void testAgeRatingUnknown() throws Exception {
-        String odd = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"17\"}";
+                @Test
+                public void testAgeRating() throws Exception {
+                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"16\"}";
 
-        Program program = Jackson2Mapper.getLenientInstance().readValue(odd, Program.class);
-        assertThat(program.getAgeRating()).isNull();
-    }
+                    Program program = program().id(100L).lean().ageRating(AgeRating._16).build();
 
+                    String actual = toPublisherJson(program);
 
-    @Test
-    public void testAspectRatio() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"avAttributes\":{\"videoAttributes\":{\"aspectRatio\":\"16:9\"}}}";
+                    assertJsonEquals(expected, actual);
+                }
 
-        Program program = program().id(100L).lean().aspectRatio(AspectRatio._16x9).build();
+                @Test
+                public void testAgeRatingAll() throws Exception {
+                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"ALL\"}";
 
-        String actual = toPublisherJson(program);
+                    Program program = program().id(100L).lean().ageRating(AgeRating.ALL).build();
 
-        assertJsonEquals(expected, actual);
-    }
+                    String actual = toPublisherJson(program);
 
-
-    @Test
-    public void testObjectType() throws IOException {
-        String expected = "{\"objectType\":\"group\",\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"isOrdered\":true}";
-        Group group = group().id(100L).lean().build();
-
-        String actual = toPublisherJson(group);
-        assertJsonEquals(expected, actual);
+                    assertJsonEquals(expected, actual);
+                }
 
 
-    }
+                @Test
+                public void testAgeRatingUnknown() throws Exception {
+                    String odd = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"17\"}";
 
-    @Test
-    public void testUnMarshalGroupWithoutObjectType()  {
-        assertThatThrownBy(() -> {
-            String expected = "{\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"isOrdered\":true}";
-
-            MediaObject mo = Jackson2Mapper.getInstance().readValue(expected, MediaObject.class);
-            log.info("{}", mo);
-        }).isInstanceOf(JsonMappingException.class);
+                    Program program = Jackson2Mapper.getLenientInstance().readValue(odd, Program.class);
+                    assertThat(program.getAgeRating()).isNull();
+                }
 
 
-    }
+                @Test
+                public void testAspectRatio() throws Exception {
+                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"avAttributes\":{\"videoAttributes\":{\"aspectRatio\":\"16:9\"}}}";
 
-    @Test
-    public void testWithLocations() {
-        String expected = """
-            {
-              "objectType" : "program",
-              "urn" : "urn:vpro:media:program:100",
-              "embeddable" : true,
-              "broadcasters" : [ ],
-              "genres" : [ ],
-              "countries" : [ ],
-              "languages" : [ ],
-              "locations" : [ {
-                "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
-                "avAttributes" : {
-                  "bitrate" : 1500,
-                  "avFileFormat" : "MP4"
-                },
-                "owner" : "BROADCASTER",
-                "creationDate" : 1457102700000,
-                "workflow" : "PUBLISHED",
-                "offset" : 780000,
-                "duration" : 600000,
-                "publishStart" : 1487244180000
-              }, {
-                "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
-                "avAttributes" : {
-                  "bitrate" : 3000,
-                  "avFileFormat" : "WM"
-                },
-                "owner" : "BROADCASTER",
-                "creationDate" : 1457099100000,
-                "workflow" : "PUBLISHED"
-              }, {
-                "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
-                "avAttributes" : {
-                  "bitrate" : 2000,
-                  "avFileFormat" : "WM"
-                },
-                "owner" : "BROADCASTER",
-                "creationDate" : 1457095500000,
-                "workflow" : "PUBLISHED",
-                "duration" : 1833000
-              }, {
-                "programUrl" : "http://player.omroep.nl/?aflID=4393288",
-                "avAttributes" : {
-                  "bitrate" : 1000,
-                  "avFileFormat" : "HTML"
-                },
-                "owner" : "NEBO",
-                "creationDate" : 1457091900000,
-                "workflow" : "PUBLISHED"
-              } ]
-            }""";
+                    Program program = program().id(100L).lean().aspectRatio(AspectRatio._16x9).build();
+
+                    String actual = toPublisherJson(program);
+
+                    assertJsonEquals(expected, actual);
+                }
+
+
+                @Test
+                public void testObjectType() throws IOException {
+                    String expected = "{\"objectType\":\"group\",\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"isOrdered\":true}";
+                    Group group = group().id(100L).lean().build();
+
+                    String actual = toPublisherJson(group);
+                    assertJsonEquals(expected, actual);
+
+
+                }
+
+                @Test
+                public void testUnMarshalGroupWithoutObjectType()  {
+                    assertThatThrownBy(() -> {
+                        String expected = "{\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"isOrdered\":true}";
+
+                        MediaObject mo = Jackson2Mapper.getInstance().readValue(expected, MediaObject.class);
+                        log.info("{}", mo);
+                    }).isInstanceOf(JsonMappingException.class);
+
+
+                }
+
+                @Test
+                public void testWithLocations() {
+                    String expected = """
+                        {
+                           "objectType" : "program",
+                           "urn" : "urn:vpro:media:program:100",
+                           "embeddable" : true,
+                           "broadcasters" : [ ],
+                           "genres" : [ ],
+                           "countries" : [ ],
+                           "languages" : [ ],
+                           "predictions" : [ {
+                             "state" : "REALIZED",
+                             "platform" : "INTERNETVOD"
+                           } ],
+                           "locations" : [ {
+                             "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
+                             "avAttributes" : {
+                               "bitrate" : 1500,
+                               "avFileFormat" : "MP4"
+                             },
+                             "owner" : "BROADCASTER",
+                             "creationDate" : 1457102700000,
+                             "workflow" : "PUBLISHED",
+                             "offset" : 780000,
+                             "duration" : 600000,
+                             "platform" : "INTERNETVOD",
+                             "publishStart" : 1487244180000
+                           }, {
+                             "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
+                             "avAttributes" : {
+                               "bitrate" : 3000,
+                               "avFileFormat" : "WM"
+                             },
+                             "owner" : "BROADCASTER",
+                             "creationDate" : 1457099100000,
+                             "workflow" : "PUBLISHED",
+                             "platform" : "INTERNETVOD"
+                           }, {
+                             "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
+                             "avAttributes" : {
+                               "bitrate" : 2000,
+                               "avFileFormat" : "WM"
+                             },
+                             "owner" : "BROADCASTER",
+                             "creationDate" : 1457095500000,
+                             "workflow" : "PUBLISHED",
+                             "duration" : 1833000,
+                             "platform" : "INTERNETVOD"
+                           }, {
+                             "programUrl" : "http://player.omroep.nl/?aflID=4393288",
+                             "avAttributes" : {
+                               "bitrate" : 1000,
+                               "avFileFormat" : "HTML"
+                             },
+                             "owner" : "NEBO",
+                             "creationDate" : 1457091900000,
+                             "workflow" : "PUBLISHED",
+                             "platform" : "INTERNETVOD"
+                           } ]
+                         }""";
 
         Program program = program().id(100L)
             .lean()

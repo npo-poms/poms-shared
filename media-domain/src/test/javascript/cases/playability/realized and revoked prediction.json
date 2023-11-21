@@ -1,5 +1,5 @@
 {
-  "description" : "realized and revoked prediction but no locations",
+  "description" : "realized and revoked prediction",
   "publishedNowExpectedPlatforms" : [ "PLUSVOD" ],
   "publishedWasExpectedPlatforms" : [ "INTERNETVOD" ],
   "publishedWillExpectedPlatforms" : [ ],
@@ -25,6 +25,16 @@
     }, {
       "state" : "REALIZED",
       "platform" : "PLUSVOD"
+    } ],
+    "locations" : [ {
+      "programUrl" : "https://bla.com/foobar-plusvod.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "MP4"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "PUBLISHED",
+      "platform" : "PLUSVOD"
     } ]
   },
   "mediaObject" : {
@@ -42,6 +52,16 @@
       "platform" : "INTERNETVOD"
     }, {
       "state" : "REALIZED",
+      "platform" : "PLUSVOD"
+    } ],
+    "locations" : [ {
+      "programUrl" : "https://bla.com/foobar-plusvod.mp4",
+      "avAttributes" : {
+        "avFileFormat" : "MP4"
+      },
+      "owner" : "BROADCASTER",
+      "creationDate" : 1635253200000,
+      "workflow" : "PUBLISHED",
       "platform" : "PLUSVOD"
     } ]
   }
