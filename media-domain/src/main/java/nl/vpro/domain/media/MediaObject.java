@@ -532,7 +532,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition =
         "workflow = 'PUBLISHED'"
-
     )
     protected SortedSet<@NotNull @Valid Location> locations = new TreeSet<>();
 
@@ -672,7 +671,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getBroadcasters().forEach(this::addBroadcaster);
         source.getPortals().forEach(this::addPortal);
         source.getPortalRestrictions()
-                .forEach(restriction -> this.addPortalRestriction(PortalRestriction.copy(restriction)));
+            .forEach(restriction -> this.addPortalRestriction(PortalRestriction.copy(restriction)));
         source.getGeoRestrictions().forEach(restriction -> this.addGeoRestriction(GeoRestriction.copy(restriction)));
         TextualObjects.copy(source, this);
         source.getGenres().forEach(this::addGenre);
