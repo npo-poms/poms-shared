@@ -4,17 +4,16 @@
  */
 package nl.vpro.domain.constraint.media;
 
-import nl.vpro.domain.media.Location;
-import nl.vpro.domain.media.MediaTestDataBuilder;
-import nl.vpro.domain.media.Platform;
-import nl.vpro.domain.media.Program;
+import java.io.StringReader;
+
+import javax.xml.bind.JAXB;
+
+import org.junit.jupiter.api.Test;
+
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.jupiter.api.Test;
-
-import javax.xml.bind.JAXB;
-import java.io.StringReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -54,7 +53,9 @@ public class HasLocationConstraintTest {
     public void testNoneTrue() {
         HasLocationConstraint constraint = new HasLocationConstraint();
         constraint.setPlatform("NONE");
-        Program program = MediaTestDataBuilder.program().authoritativeRecord(Platform.INTERNETVOD).locations(new Location("http://foo/bar", OwnerType.BROADCASTER)).build();
+        Location location = new Location("http://foo/bar", OwnerType.BROADCASTER);
+        location.setPlatform(null);
+        Program program = MediaTestDataBuilder.program().authoritativeRecord(Platform.INTERNETVOD).locations( location).build();
         assertThat(constraint.test(program)).isTrue();
     }
 
@@ -71,7 +72,12 @@ public class HasLocationConstraintTest {
     public void testPlatformFalse() {
         HasLocationConstraint constraint = new HasLocationConstraint();
         constraint.setPlatform(Platform.INTERNETVOD.name());
-        Program program = MediaTestDataBuilder.program().authoritativeRecord(Platform.INTERNETVOD).locations(new Location("http://foo/bar", OwnerType.BROADCASTER)).build();
+        Location location = new Location("http://foo/bar", OwnerType.BROADCASTER);
+        location.setPlatform(null);
+        Program program = MediaTestDataBuilder.program()
+            .authoritativeRecord(Platform.INTERNETVOD)
+            .locations( location)
+            .build();
         assertThat(constraint.test(program)).isFalse();
     }
 

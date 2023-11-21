@@ -17,6 +17,10 @@
     "creationDate" : 1635166800000,
     "embeddable" : true,
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "INTERNETVOD"
+    } ],
     "locations" : [ {
       "programUrl" : "https://bla.com/foobar.wmv",
       "avAttributes" : {
@@ -24,7 +28,8 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "PUBLISHED"
+      "workflow" : "PUBLISHED",
+      "platform" : "INTERNETVOD"
     } ]
   },
   "mediaObject" : {
@@ -37,6 +42,10 @@
     "creationDate" : 1635166800000,
     "embeddable" : true,
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REALIZED",
+      "platform" : "INTERNETVOD"
+    } ],
     "locations" : [ {
       "programUrl" : "https://bla.com/foobar.wmv",
       "avAttributes" : {
@@ -44,7 +53,8 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "PUBLISHED"
+      "workflow" : "PUBLISHED",
+      "platform" : "INTERNETVOD"
     } ]
   }
 }
