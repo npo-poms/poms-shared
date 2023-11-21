@@ -623,6 +623,41 @@ public class MediaObjects {
         media.setRepubDestinations(null);
     }
 
+    public static  Workflow setWorkflowPublished(@NonNull MediaObject media) {
+        Workflow previous = media.getWorkflow();
+        if(media.isMerged()) {
+            log.warn("Published a MERGED mediaobject {}. This is unexpected, it should have been revoked", media);
+            MediaObjectAccess.setWorkflow(media, Workflow.MERGED);
+        } else {
+            MediaObjectAccess.setWorkflow(media, Workflow.PUBLISHED);
+        }
+        MediaObjectAccess.setSubtitlesWorkflow(media,
+            MediaObjects.subtitlesMayBePublished(media) ? AvailableSubtitlesWorkflow.PUBLISHED : AvailableSubtitlesWorkflow.REVOKED);
+
+        setWorkflowPublishedSubObjects(media.getLocations());
+        setWorkflowPublishedSubObjects(media.getImages());
+        return previous;
+    }
+
+
+    private static void setWorkflowPublishedSubObjects(Collection<? extends PublishableObject<?>> publishables) {
+        for(PublishableObject<?> po : publishables) {
+            if(po.isPublishable(Instant.now())) {
+                PublishableObjectAccess.setWorkflow(po, Workflow.PUBLISHED);
+                continue;
+            } else {
+                if (! po.isDeleted()) {
+                    PublishableObjectAccess.setWorkflow(po, Workflow.REVOKED);
+                    continue;
+                }
+            }
+            if (! po.getWorkflow().isPublishable()) {
+                log.warn("Encountered unpublished workflow in {} (should this not be fixed?)", po);
+                //PublishableObjectAccess.markPublished(po); ??
+            }
+        }
+    }
+
 
     /**
      * Sets the workflow of the media object to the 'published' state version of the workflow ({@link Workflow#isPublishable()} ()}
