@@ -31,6 +31,8 @@ import nl.vpro.domain.media.update.GroupUpdate;
 import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
+import nl.vpro.logging.Slf4jHelper;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
@@ -1238,7 +1240,8 @@ public class MediaObjects {
         AVFileFormat.MP3,
         AVFileFormat.MP4,
         AVFileFormat.M4V,
-        AVFileFormat.H264
+        AVFileFormat.H264,
+        AVFileFormat.HASP
     );
 
     static final Set<String> ACCEPTABLE_SCHEMES = Set.of("npo+drm", "npo");
@@ -1311,7 +1314,11 @@ public class MediaObjects {
                         .filter(MediaObjects::locationFilter)
                         .findFirst();
                     if (matchingLocation.isEmpty()) {
-                        log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, mediaObject.mid);
+                        final List<Location> withoutFilter = mediaObject.getLocations().stream()
+                            .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
+                            .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                            .toList();
+                        Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Silently set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                         prediction.setState(Prediction.State.REVOKED);
                         markForRepublication(mediaObject, "realized prediction");
                     }
