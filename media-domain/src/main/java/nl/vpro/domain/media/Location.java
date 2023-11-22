@@ -619,7 +619,7 @@ public class Location extends PublishableObject<Location>
     /**
      * The publishstop of a location is can be restricted by the {@link #getPrediction() associated platform}.
      * <p>
-     * @see getOwnPublishStopInstant() for the (settable) value that is not constrainted by {@link #getPrediction()}
+     * @see #getOwnPublishStopInstant() getOwnPublishableInstant  for the (settable) value that is not constrainted by {@link #getPrediction()}
      */
     @Override
     @Nullable

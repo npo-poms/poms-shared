@@ -382,6 +382,8 @@ public class AuthorityLocations {
     /**
      * Sometimes a {@link MediaObject mediaobject} already has locations, but no prediction which belongs to that.
      * This implicitly creates it then.
+     * Existing embargos on the locations are copied to the prediction (least restricted)
+     *
      */
     Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
         final Prediction existingPrediction = mediaObject.getPrediction(Platform.INTERNETVOD);
@@ -396,12 +398,12 @@ public class AuthorityLocations {
             if (!existingWebonlyLocations.isEmpty()) {
                 Prediction prediction = mediaObject.findOrCreatePrediction(Platform.INTERNETVOD);
                 prediction.setPlannedAvailability(true);
-                prediction.setEncryption((Encryption) null);
+                prediction.setEncryption(null);
                 Iterator<Location> i = existingWebonlyLocations.iterator();
-                Location first = (Location) i.next();
-                Embargos.copyIfLessRestrictedOrTargetUnset(first, prediction);
+                Location first = i.next();
+                Embargos.copyIfLessRestrictedOrTargetUnset(first.getOwnEmbargo(), prediction);
                 i.forEachRemaining((l) -> {
-                    Embargos.copyIfLessRestricted(l, prediction);
+                    Embargos.copyIfLessRestricted(l.getOwnEmbargo(), prediction);
                 });
                 return Optional.of(prediction);
             }
