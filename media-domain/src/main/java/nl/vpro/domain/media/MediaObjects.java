@@ -29,6 +29,7 @@ import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.update.GroupUpdate;
 import nl.vpro.domain.media.update.MediaUpdate;
+import nl.vpro.domain.subtitles.SubtitlesWorkflow;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.logging.Slf4jHelper;
@@ -625,6 +626,10 @@ public class MediaObjects {
         media.setRepubDestinations(null);
     }
 
+
+    /**
+     * Sets the workflow of the mediaobject, and it's subobjects to appropriate value for current date.
+     */
     public static  Workflow setWorkflowPublished(@NonNull MediaObject media) {
         Workflow previous = media.getWorkflow();
         if(media.isMerged()) {
@@ -660,6 +665,18 @@ public class MediaObjects {
                 }
             }
         }
+    }
+
+    /**
+     * @since 7.10
+     */
+    public static boolean removeUnpublishedSubObjects(MediaObject media) {
+        boolean result = false;
+        result |= media.getAvailableSubtitles().removeIf(a -> a.getWorkflow() != SubtitlesWorkflow.PUBLISHED);
+        result |= media.getLocations().removeIf(l -> l.getWorkflow() != Workflow.PUBLISHED);
+        result |= media.getImages().removeIf(i -> i.getWorkflow() != Workflow.PUBLISHED);
+
+        return result;
     }
 
 
