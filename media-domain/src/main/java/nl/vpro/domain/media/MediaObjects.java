@@ -644,18 +644,20 @@ public class MediaObjects {
 
     private static void setWorkflowPublishedSubObjects(Collection<? extends PublishableObject<?>> publishables) {
         for(PublishableObject<?> po : publishables) {
-            if(po.isPublishable(Instant.now())) {
-                PublishableObjectAccess.setWorkflow(po, Workflow.PUBLISHED);
-                continue;
-            } else {
-                if (! po.isDeleted()) {
-                    PublishableObjectAccess.setWorkflow(po, Workflow.REVOKED);
+            if (po.isConsiderableForPublication()) {
+                if (po.isPublishable(Instant.now())) {
+                    PublishableObjectAccess.setWorkflow(po, Workflow.PUBLISHED);
                     continue;
+                } else {
+                    if (!po.isDeleted()) {
+                        PublishableObjectAccess.setWorkflow(po, Workflow.REVOKED);
+                        continue;
+                    }
                 }
-            }
-            if (! po.getWorkflow().isPublishable()) {
-                log.warn("Encountered unpublished workflow in {} (should this not be fixed?)", po);
-                //PublishableObjectAccess.markPublished(po); ??
+                if (!po.getWorkflow().isPublishable()) {
+                    log.warn("Encountered unpublished workflow in {} (should this not be fixed?)", po);
+                    //PublishableObjectAccess.markPublished(po); ??
+                }
             }
         }
     }

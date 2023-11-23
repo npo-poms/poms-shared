@@ -751,8 +751,8 @@ public class Location extends PublishableObject<Location>
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 
-        if (parent instanceof MediaObject) {
-            this.mediaObject = (MediaObject) parent;
+        if (parent instanceof MediaObject mo) {
+            this.mediaObject = mo;
             try {
                 Prediction locationAuthorityRecord = getPrediction(false);
                 if (locationAuthorityRecord != null) {
