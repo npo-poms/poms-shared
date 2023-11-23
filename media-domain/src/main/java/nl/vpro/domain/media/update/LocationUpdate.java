@@ -128,7 +128,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         avAttributes = ats == null ? null : new AVAttributesUpdate(ats);
         offset = location.getOffset();
         duration = location.getDuration();
-        Embargos.copy(location, this);
+        Embargos.copy(location.getOwnEmbargo(), this);
         urn = location.getUrn();
 
     }
@@ -148,7 +148,8 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
 
     @Override
     public int compareTo(LocationUpdate locationUpdate) {
-        return toLocation(OwnerType.BROADCASTER).compareTo(locationUpdate.toLocation(OwnerType.BROADCASTER));
+        return toLocation(OwnerType.BROADCASTER)
+            .compareTo(locationUpdate.toLocation(OwnerType.BROADCASTER));
     }
 
     @Override
