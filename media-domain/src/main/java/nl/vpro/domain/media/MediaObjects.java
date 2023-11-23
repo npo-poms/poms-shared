@@ -39,6 +39,7 @@ import nl.vpro.util.ObjectFilter;
 
 import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.PublicationReason.REASON_SPLITTER;
+import static nl.vpro.domain.media.CollectionUtils.removeIf;
 import static nl.vpro.domain.media.support.Workflow.*;
 
 
@@ -667,14 +668,16 @@ public class MediaObjects {
         }
     }
 
+
+
     /**
      * @since 7.10
      */
-    public static boolean removeUnpublishedSubObjects(MediaObject media) {
-        boolean result = false;
-        result |= media.getAvailableSubtitles().removeIf(a -> a.getWorkflow() != SubtitlesWorkflow.PUBLISHED);
-        result |= media.getLocations().removeIf(l -> l.getWorkflow() != Workflow.PUBLISHED);
-        result |= media.getImages().removeIf(i -> i.getWorkflow() != Workflow.PUBLISHED);
+    public static int removeUnpublishedSubObjects(MediaObject media) {
+        int result = 0;
+        result += removeIf(media.getAvailableSubtitles(), a -> a.getWorkflow() != SubtitlesWorkflow.PUBLISHED);
+        result += removeIf(media.getLocations(), l -> l.getWorkflow() != Workflow.PUBLISHED);
+        result += removeIf(media.getImages(), i -> i.getWorkflow() != Workflow.PUBLISHED);
 
         return result;
     }
