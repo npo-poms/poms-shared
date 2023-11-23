@@ -339,8 +339,8 @@ public class Location extends PublishableObject<Location>
             to.setDuration(from.getDuration());
             to.setOffset(from.getOffset());
             to.setSubtitles(from.getSubtitles());
-            to.setPublishStartInstant(from.getPublishStartInstant());
-            to.setPublishStopInstant(from.getPublishStopInstant());
+            to.setPublishStartInstant(from.getOwnPublishStartInstant());
+            to.setPublishStopInstant(from.getOwnPublishStopInstant());
 
             to.setAvAttributes(AVAttributes.update(from.getAvAttributes(), to.getAvAttributes()));
 
