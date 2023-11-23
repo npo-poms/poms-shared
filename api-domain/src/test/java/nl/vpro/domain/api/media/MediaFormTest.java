@@ -629,6 +629,25 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
         assertThat(rad1.equals(rad2)).isFalse();
     }
 
+    @Test
+    public void form() {
+        MediaForm form = new MediaForm();
+        MediaSearch search = MediaSearch.builder()
+            .locations(new TextMatcherList(Match.MUST, TextMatcher.must("https://radiobox2.*", StandardMatchType.WILDCARD)))
+            .build();
+        form.setSearches(search);
+        Jackson2TestUtil.roundTripAndSimilar(form, """
+            {
+              "searches" : {
+                "locations" : {
+                  "value" : "https://radiobox2.*",
+                  "matchType" : "WILDCARD"
+                }
+              }
+            }""");
+
+    }
+
     @Override
     public Arbitrary<? extends MediaForm> datapoints() {
         return Arbitraries.of(

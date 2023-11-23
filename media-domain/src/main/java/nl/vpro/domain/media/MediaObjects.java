@@ -29,8 +29,11 @@ import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.update.GroupUpdate;
 import nl.vpro.domain.media.update.MediaUpdate;
+import nl.vpro.domain.subtitles.SubtitlesWorkflow;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
+import nl.vpro.logging.Slf4jHelper;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
@@ -625,6 +628,59 @@ public class MediaObjects {
 
 
     /**
+     * Sets the workflow of the mediaobject, and it's subobjects to appropriate value for current date.
+     */
+    public static  Workflow setWorkflowPublished(@NonNull MediaObject media) {
+        Workflow previous = media.getWorkflow();
+        if(media.isMerged()) {
+            log.warn("Published a MERGED mediaobject {}. This is unexpected, it should have been revoked", media);
+            MediaObjectAccess.setWorkflow(media, Workflow.MERGED);
+        } else {
+            MediaObjectAccess.setWorkflow(media, Workflow.PUBLISHED);
+        }
+        MediaObjectAccess.setSubtitlesWorkflow(media,
+            MediaObjects.subtitlesMayBePublished(media) ? AvailableSubtitlesWorkflow.PUBLISHED : AvailableSubtitlesWorkflow.REVOKED);
+
+        setWorkflowPublishedSubObjects(media.getLocations());
+        setWorkflowPublishedSubObjects(media.getImages());
+        return previous;
+    }
+
+
+    private static void setWorkflowPublishedSubObjects(Collection<? extends PublishableObject<?>> publishables) {
+        for(PublishableObject<?> po : publishables) {
+            if (po.isConsiderableForPublication()) {
+                if (po.isPublishable(Instant.now())) {
+                    PublishableObjectAccess.setWorkflow(po, Workflow.PUBLISHED);
+                    continue;
+                } else {
+                    if (!po.isDeleted()) {
+                        PublishableObjectAccess.setWorkflow(po, Workflow.REVOKED);
+                        continue;
+                    }
+                }
+                if (!po.getWorkflow().isPublishable()) {
+                    log.warn("Encountered unpublished workflow in {} (should this not be fixed?)", po);
+                    //PublishableObjectAccess.markPublished(po); ??
+                }
+            }
+        }
+    }
+
+    /**
+     * @since 7.10
+     */
+    public static boolean removeUnpublishedSubObjects(MediaObject media) {
+        boolean result = false;
+        result |= media.getAvailableSubtitles().removeIf(a -> a.getWorkflow() != SubtitlesWorkflow.PUBLISHED);
+        result |= media.getLocations().removeIf(l -> l.getWorkflow() != Workflow.PUBLISHED);
+        result |= media.getImages().removeIf(i -> i.getWorkflow() != Workflow.PUBLISHED);
+
+        return result;
+    }
+
+
+    /**
      * Sets the workflow of the media object to the 'published' state version of the workflow ({@link Workflow#isPublishable()} ()}
      * <p>
      * And calls {@link #markPublished(MediaObject, Instant)}
@@ -1002,12 +1058,17 @@ public class MediaObjects {
         if (media == null) {
             return false;
         }
-        // TODO, it seems that this is enough (at least for video?)
+        boolean selfIsPlayable = ! nowPlayable(media).isEmpty();
+        if (selfIsPlayable) {
+            return true;
+        }
 
-        return media.getStreamingPlatformStatus().isAvailable();
-        // but why not this?
-        //return Optional.ofNullable(media.getPrediction(Platform.INTERNETVOD))
-        //            .map(p -> p.inPublicationWindow(Instant.now())).orElse(false);
+        // this could only work on backend.
+        if (media instanceof Segment segment) {
+            return isPlayable(segment.getParent());
+        } else {
+            return false;
+        }
     }
 
 
@@ -1017,7 +1078,9 @@ public class MediaObjects {
      */
     public static boolean nowPlayable(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
         return  mediaObject.getLocations()
-            .stream().anyMatch(
+            .stream()
+            .filter(MediaObjects::locationFilter)
+            .anyMatch(
                 l -> platform.matches(l.getPlatform()) && l.inPublicationWindow()
         );
     }
@@ -1029,6 +1092,7 @@ public class MediaObjects {
     public static Set<Platform> nowPlayable(@NonNull MediaObject mediaObject) {
         return Arrays.stream(Platform.values())
             .filter(p -> nowPlayable(p, mediaObject))
+
             .collect(Collectors.toCollection(TreeSet::new));
     }
 
@@ -1124,12 +1188,27 @@ public class MediaObjects {
      * @since 5.31
      */
     public static Optional<Range<Instant>> playableRange(@NonNull Platform platform, @NonNull MediaObject mediaObject) {
-        List<Location> locations = mediaObject.getLocations().stream().filter(l -> platform.matches(l.getPlatform())).toList();
+        List<Location> locations = mediaObject.getLocations().stream()
+            .filter(l -> platform.matches(l.getPlatform()))
+            .filter(MediaObjects::locationFilter)
+            .toList();
         if (locations.isEmpty()) {
             // no locations. Maybe,  there really are none, or perhaps they are not published
             // we can juse look at the prediction record
             Prediction prediction = mediaObject.getPrediction(platform);
-            return prediction == null ? Optional.empty() : Optional.of(prediction.asRange());
+            if (prediction == null) {
+                return Optional.empty();
+            } else {
+                Range<Instant> range = prediction.asRange();
+                if (range.contains(instant())) {
+                    // no playable locations, but still the prediction is not under embargo
+                    // this means that the available locations are unfit because of ::locationFilter
+                    return Optional.empty();
+
+                } else {
+                    return Optional.of(range);
+                }
+            }
         } else {
             // we found relevant locations. So, it is playable in the span of their ranges (unless they don't overlap, but that cannot be covered by a single range)
             Range<Instant> result = null;
@@ -1180,7 +1259,8 @@ public class MediaObjects {
         AVFileFormat.MP3,
         AVFileFormat.MP4,
         AVFileFormat.M4V,
-        AVFileFormat.H264
+        AVFileFormat.H264,
+        AVFileFormat.HASP
     );
 
     static final Set<String> ACCEPTABLE_SCHEMES = Set.of("npo+drm", "npo");
@@ -1197,8 +1277,8 @@ public class MediaObjects {
         if (l.isDeleted()) {
             return false;
         }
-        String scheme = l.getScheme();
-        if (ACCEPTABLE_SCHEMES.contains(scheme)) {
+        final String scheme = l.getScheme();
+        if (scheme != null && ACCEPTABLE_SCHEMES.contains(scheme)) {
             log.debug("Matched {} on scheme {}", l, scheme);
             return true;
         }
@@ -1250,9 +1330,14 @@ public class MediaObjects {
                     Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                        .filter(MediaObjects::locationFilter)
                         .findFirst();
                     if (matchingLocation.isEmpty()) {
-                        log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, mediaObject.mid);
+                        final List<Location> withoutFilter = mediaObject.getLocations().stream()
+                            .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
+                            .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                            .toList();
+                        Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Silently set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                         prediction.setState(Prediction.State.REVOKED);
                         markForRepublication(mediaObject, "realized prediction");
                     }

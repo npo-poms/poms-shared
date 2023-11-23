@@ -39,8 +39,8 @@ public enum OwnerType implements Displayable {
 
     /**
      * Represents Ownable data updated by NEBO batch updates. Before version 1.4 we did not distinguish between NEBO
-     * and Ceres as different sources. There might be legacy data incorrectly revering to NEBO as it's owner.
-     * @deprecated NEBO doesn't exist any more
+     * and Ceres as different sources. There might be legacy data incorrectly revering to NEBO as its owner.
+     * @deprecated NEBO doesn't exist anymore
      */
     @Deprecated
     NEBO("Nebo") {
@@ -114,10 +114,10 @@ public enum OwnerType implements Displayable {
 
 
     /**
-     * Represents ownable data from an otherwise unspecified authorative backend system. E.g. Prepr, NEP.
+     * Represents ownable data from an otherwise unspecified authoritative backend system. E.g. Prepr, NEP.
      * @since 5.2
      */
-    AUTHORITY("Autoratieve bron"),
+    AUTHORITY("Autoritatieve bron"),
 
     /**
      * Represents Ownable data from Radiobox. Radiobox delivers schedules and metadata for RAD1/2/3/4/5/6/FUNX

@@ -755,10 +755,10 @@ public class MediaObjectTest {
 
     @Test
     public void testAddLocationOnDuplicates() {
-        Location l1 = new Location("TEST_URL", OwnerType.NEBO);
+        Location l1 = new Location("http://TEST_URL", OwnerType.NEBO);
         l1.setAvAttributes(new AVAttributes(100000, AVFileFormat.WM));
 
-        Location l2 = new Location("TEST_URL", OwnerType.NEBO);
+        Location l2 = new Location("http://TEST_URL", OwnerType.NEBO);
         l2.setAvAttributes(new AVAttributes(110000, AVFileFormat.H264));
 
         Program p = MediaBuilder.program().build();
@@ -772,10 +772,10 @@ public class MediaObjectTest {
     @Test
     public void testAddLocationOnDuplicatesCollisions() {
         assertThatThrownBy(() -> {
-            Location l1 = new Location("TEST_URL", OwnerType.NEBO);
+            Location l1 = new Location("https://TEST_URL", OwnerType.NEBO);
             l1.setAvAttributes(new AVAttributes(100000, AVFileFormat.WM));
 
-            Location l2 = new Location("TEST_URL", OwnerType.MIS);
+            Location l2 = new Location("https://TEST_URL", OwnerType.MIS);
             l2.setAvAttributes(new AVAttributes(110000, AVFileFormat.H264));
 
             Program p = MediaBuilder.program().build();
@@ -792,8 +792,8 @@ public class MediaObjectTest {
         Program program = new Program(1L);
 
 
-        Location l1 = new Location("aaa", OwnerType.BROADCASTER);
-        Location l2 = new Location("bbb", OwnerType.BROADCASTER);
+        Location l1 = new Location("https://aaa", OwnerType.BROADCASTER);
+        Location l2 = new Location("http://bbb", OwnerType.BROADCASTER);
 
         program.addLocation(l1);
         program.addLocation(l2);
@@ -807,14 +807,14 @@ public class MediaObjectTest {
 
         Prediction record = program.getPrediction(Platform.INTERNETVOD);
         assertThat(record).isNotNull();
-        assertThat(record).isSameAs(program.getLocations().first().getAuthorityRecord());
-        assertThat(record).isSameAs(program.getLocations().last().getAuthorityRecord());
+        assertThat(record).isSameAs(program.getLocations().first().getPrediction());
+        assertThat(record).isSameAs(program.getLocations().last().getPrediction());
     }
 
 
     @Test
     public void testAddLocationsOnlyUpdateCeresPredictions() {
-        Location l1 = new Location("aaa", OwnerType.BROADCASTER);
+        Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
 
         Program target = new Program(1L);
 
@@ -828,7 +828,7 @@ public class MediaObjectTest {
     @Test
     public void testAddLocationsOnlyUpdatePlatformPredictions() {
         Program target = new Program(1L);
-        Location l1 = new Location("aaa", OwnerType.BROADCASTER);
+        Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
 
         target.addLocation(l1);
 
@@ -879,7 +879,7 @@ public class MediaObjectTest {
         Program target = new Program(1L);
         target.findOrCreatePrediction(Platform.PLUSVOD);
 
-        Location l1 = new Location("aaa", OwnerType.BROADCASTER);
+        Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
 
         target.addLocation(l1);
 
@@ -888,13 +888,29 @@ public class MediaObjectTest {
         l1.setPublishStopInstant(Instant.ofEpochMilli(10));
 
 
-
-
         Prediction plus = target.getPrediction(Platform.PLUSVOD);
         assertThat(plus).isNotNull();
         assertThat(plus.getState()).isEqualTo(Prediction.State.REALIZED);
-        assertThat(plus.getPublishStartInstant()).isEqualTo(Instant.ofEpochMilli(5));
-        assertThat(plus.getPublishStopInstant()).isEqualTo(Instant.ofEpochMilli(10));
+        assertThat(plus.getPublishStartInstant()).isNull();
+        assertThat(plus.getPublishStopInstant()).isNull();
+
+        // set also constraint on prediction, but wider
+        target.getPrediction(Platform.PLUSVOD).setPublishStopInstant(Instant.ofEpochMilli(4));
+        target.getPrediction(Platform.PLUSVOD).setPublishStopInstant(Instant.ofEpochMilli(11));
+
+        assertThat(l1.getPublishStartInstant().toEpochMilli()).isEqualTo(5);
+        assertThat(l1.getPublishStopInstant().toEpochMilli()).isEqualTo(10);
+
+        // now try narrower
+        target.getPrediction(Platform.PLUSVOD).setPublishStartInstant(Instant.ofEpochMilli(6));
+        target.getPrediction(Platform.PLUSVOD).setPublishStopInstant(Instant.ofEpochMilli(9));
+
+        assertThat(l1.getPublishStartInstant().toEpochMilli()).isEqualTo(6);
+        assertThat(l1.getPublishStopInstant().toEpochMilli()).isEqualTo(9);
+
+
+
+
     }
 
     @Test
@@ -1194,7 +1210,7 @@ public class MediaObjectTest {
         prediction.setAuthority(Authority.SYSTEM);
         prediction.setPublishStartInstant(Instant.now());
         program.setPredictions(Arrays.asList(prediction));
-        Location l1 = new Location("TEST_URL", OwnerType.AUTHORITY);
+        Location l1 = new Location("https://TEST_URL/foo.bar", OwnerType.AUTHORITY);
         l1.setPlatform(Platform.INTERNETVOD);
         program.addLocation(l1);
         assertNotNull(program.getLocation(l1));
