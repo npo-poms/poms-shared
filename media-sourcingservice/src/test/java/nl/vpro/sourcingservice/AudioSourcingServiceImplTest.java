@@ -25,7 +25,7 @@ class AudioSourcingServiceImplTest {
 
     public static final Properties PROPERTIES = new Properties();
 
-    private static final String MID = "WO_VPRO_A20032725";
+    private static final String MID = "WO_VPRO_A20032835";
 
     static {
         try {
@@ -72,7 +72,7 @@ class AudioSourcingServiceImplTest {
             .build();
         UploadResponse upload = impl.upload(logger, MID, restrictions,
             Files.size(file),
-            cachingInputStream,
+            Files.newInputStream(file),
             "m.meeuwissen.vpro@gmail.com"
         );
         log.info("Took {}", Duration.between(start, Instant.now()));
