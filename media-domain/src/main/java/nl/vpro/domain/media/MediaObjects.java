@@ -570,6 +570,7 @@ public class MediaObjects {
             media.setRepubDestinations(null);
             return true;
         } else {
+            // not published or publishable so no need for republication after change
             return false;
         }
     }
