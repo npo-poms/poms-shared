@@ -33,7 +33,6 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  *
  */
 @MappedSuperclass
-@EmbargoValidation(groups = {PomsValidatorGroup.class})
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "abstractPublishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
