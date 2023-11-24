@@ -10,7 +10,6 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
@@ -108,7 +107,7 @@ public class MediaObjectLocker {
         List<LockHolder<? extends Serializable>> collect = ObjectLocker.currentLocks()
             .stream()
             .filter(f -> f.key instanceof MediaIdentifiable.Correlation)
-            .collect(Collectors.toList());
+            .toList();
 
         assert collect.isEmpty() : "There is a lock " + collect + ": " + description;
     }
