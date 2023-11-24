@@ -22,7 +22,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.CollectionUtils;
 import nl.vpro.domain.media.TrackableObject;
-import nl.vpro.validation.EmbargoValidation;
+import nl.vpro.domain.validation.ValidEmbargo;
 import nl.vpro.validation.PomsValidatorGroup;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -35,7 +35,7 @@ import static nl.vpro.domain.media.support.Workflow.WITH_MEDIA_ACTIVATION;
  * @author roekoe
  */
 @MappedSuperclass
-@EmbargoValidation(groups = {PomsValidatorGroup.class})
+@ValidEmbargo(groups = {PomsValidatorGroup.class})
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
