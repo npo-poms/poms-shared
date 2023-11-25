@@ -31,15 +31,16 @@ public interface MediaPublisherHeaders {
     String PREVIOUS_PUBLISHDATE_HEADER = "previousPublishDate";
 
 
+    /**
+     * POMS used to support several 'destinations' when publishing. Corresponding to virtual topic in JMS.
+     * There were 'Couchdb', 2 versions of elasticsearch (during transition), 'projectm', and 1 or two others.
+     * <p>
+     * Nowadays, there is only one left, namely {@link #ElasticSearch}
+     * T
+     */
     @Slf4j
     enum Destination implements Displayable {
         ElasticSearch("NPO Frontend API"),
-        /**
-         * Deprected see PMP-74
-         * @deprecated
-         */
-        @Deprecated
-        PROJECTM("Project M")
         ;
 
 
