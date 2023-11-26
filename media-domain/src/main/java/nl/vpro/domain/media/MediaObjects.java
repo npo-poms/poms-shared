@@ -1030,8 +1030,8 @@ public class MediaObjects {
     }
 
     public static boolean revokeRelatedPublishables(MediaObject media, Instant now) {
-        boolean result = MediaObjects.revokeRelatedPublishables(media, media.getImages(), now, () -> {});
-        result &= MediaObjects.revokeRelatedPublishables(media, media.getLocations(), now, () -> AuthorityLocations.updatePredictionStates(media, now));
+        boolean result = revokeRelatedPublishables(media, media.getImages(), now, () -> {});
+        result &= revokeRelatedPublishables(media, media.getLocations(), now, () -> AuthorityLocations.updatePredictionStates(media, now));
         return result;
     }
 
