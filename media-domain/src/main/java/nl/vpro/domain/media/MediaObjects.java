@@ -1008,32 +1008,6 @@ public class MediaObjects {
         return o.getPersons();
     }
 
-    public static <T extends PublishableObject<?>> boolean revokeRelatedPublishables(MediaObject media, Collection<T> publishables, Instant now, Runnable callbackOnChange) {
-        boolean foundRevokedPublishable = false;
-        for(T publishable : publishables) {
-            if(CollectionUtils.inCollection(Workflow.REVOKES, publishable.getWorkflow())) {
-                continue;
-            }
-            if(!publishable.inPublicationWindow(now)) {
-                PublishableObjectAccess.setWorkflow(publishable, Workflow.REVOKED);
-                foundRevokedPublishable = true;
-            }
-        }
-
-        if(foundRevokedPublishable &&
-            media.getWorkflow() == Workflow.PUBLISHED &&
-            media.inPublicationWindow(now)) {
-            callbackOnChange.run();
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean revokeRelatedPublishables(MediaObject media, Instant now) {
-        boolean result = revokeRelatedPublishables(media, media.getImages(), now, () -> {});
-        result &= revokeRelatedPublishables(media, media.getLocations(), now, () -> AuthorityLocations.updatePredictionStates(media, now));
-        return result;
-    }
 
     public static Stream<GTAARecord> getGTAARecords(MediaObject media) {
         return Streams.concat(
