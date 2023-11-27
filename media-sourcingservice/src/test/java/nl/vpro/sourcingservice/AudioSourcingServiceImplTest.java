@@ -12,8 +12,6 @@ import java.util.Properties;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.domain.media.GeoRestriction;
-import nl.vpro.domain.media.Region;
 import nl.vpro.logging.simple.Log4j2SimpleLogger;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
@@ -25,7 +23,7 @@ class AudioSourcingServiceImplTest {
 
     public static final Properties PROPERTIES = new Properties();
 
-    private static final String MID = "WO_VPRO_A20032835";
+    private static final String MID = "POMS_VPRO_A20032953";
 
     static {
         try {
@@ -61,18 +59,16 @@ class AudioSourcingServiceImplTest {
         final Instant start = Instant.now();
         final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
 
-        final Restrictions restrictions = new Restrictions();
-        restrictions.setGeoRestriction(GeoRestriction.builder().region(Region.NL).build());
         final SimpleLogger logger = Log4j2SimpleLogger.simple(log);
         final FileCachingInputStream cachingInputStream = FileCachingInputStream.builder()
             .input(Files.newInputStream(file))
             .noProgressLogging()
-            .startImmediately(true)
+            .startImmediately(false)
             .batchConsumer(loggingConsumer(logger))
             .build();
-        UploadResponse upload = impl.upload(logger, MID, restrictions,
+        UploadResponse upload = impl.upload(logger, MID, null,
             Files.size(file),
-            Files.newInputStream(file),
+            cachingInputStream,
             "m.meeuwissen.vpro@gmail.com"
         );
         log.info("Took {}", Duration.between(start, Instant.now()));
@@ -81,7 +77,7 @@ class AudioSourcingServiceImplTest {
     @Test
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void status() throws IOException, InterruptedException {
-        Object status = impl.status(MID);;
+        Object status = impl.status(MID);
         log.info("Status {}", status);
     }
 

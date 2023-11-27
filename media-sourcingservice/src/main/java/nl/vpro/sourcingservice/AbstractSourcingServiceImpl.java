@@ -123,7 +123,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             case 1 ->
                 uploadv1(logger, mid, restrictions, fileSize, null, inputStream, errors, SourcingService.phaseLogger(logger));
             case 2 ->
-                uploadv2(logger, mid, restrictions, inputStream);
+                uploadv2(logger, mid, inputStream);
             default -> throw new IllegalArgumentException("Unknown version " + version);
         };
     }
@@ -168,19 +168,15 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
    protected UploadResponse uploadv2(
        SimpleLogger logger,
        final String mid,
-       @Nullable Restrictions restrictions,
        final InputStream inputStream) throws SourcingServiceException {
-
-
-        if (restrictions != null) {
-
-        }
 
         HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
-        body.addStream("file",  mid, () -> inputStream);
+        body.addStream("file",  mid,
+            () -> inputStream
+        );
 
         HttpRequest.Builder post = uploadRequestBuilder
             .header("Content-Type", body.contentType())
@@ -188,8 +184,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         HttpResponse<String> send = client.send(post.build(), HttpResponse.BodyHandlers.ofString());
 
-
-//        assert uploaded.get() == fileSize;
 
         JsonNode bodyNode = MAPPER.readTree(send.body());
         logger.info("{} {}", mid, bodyNode);
