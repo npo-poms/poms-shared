@@ -7,6 +7,7 @@ import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Getter
 @ToString(callSuper = true)
 public class StatusResponse extends AbstractResponse {
 
