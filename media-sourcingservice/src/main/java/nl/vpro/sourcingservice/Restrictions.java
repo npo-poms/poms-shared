@@ -6,6 +6,7 @@ import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.GeoRestriction;
 
 @Data
+@Deprecated
 public class Restrictions {
 
     GeoRestriction geoRestriction;

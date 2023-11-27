@@ -7,8 +7,8 @@ import java.util.function.Consumer;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.sourcingservice.v1.DeleteResponse;
 import nl.vpro.util.FileCachingInputStream;
 import nl.vpro.util.FileSizeFormatter;
 

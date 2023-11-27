@@ -20,16 +20,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.StreamReadFeature;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import nl.vpro.domain.media.*;
-
+import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.Level;
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.sourcingservice.v1.*;
+import nl.vpro.sourcingservice.v1.IngestResponse;
 import nl.vpro.util.FileSizeFormatter;
 import nl.vpro.util.InputStreamChunk;
 
@@ -60,8 +60,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectReader V2READER;
     static {
         MAPPER.registerModule( new JavaTimeModule());
+
+        V2READER = MAPPER.readerFor(nl.vpro.sourcingservice.v2.StatusResponse.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
     }
 
     private final HttpClient client = HttpClient
@@ -165,7 +168,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
    }
 
     @SneakyThrows
-   protected UploadResponse uploadv2(
+    protected UploadResponse uploadv2(
        SimpleLogger logger,
        final String mid,
        final InputStream inputStream) throws SourcingServiceException {
@@ -203,9 +206,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (statusResponse.statusCode() > 299) {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
-        return Optional.of(
-            MAPPER.readValue(statusResponse.body(), StatusResponse.class)
+
+        return Optional.of(switch(version) {
+            case 1 -> MAPPER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v1.StatusResponse.class).normalize();
+            default -> V2READER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v2.StatusResponse.class).normalize();
+            }
         );
+
     }
 
     @Override
@@ -216,9 +223,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (statusResponse.statusCode() > 299) {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
+
         return MAPPER.readValue(statusResponse.body(), DeleteResponse.class);
     }
 
+    @Deprecated
     private void ingest(SimpleLogger logger, String mid, String filename, Restrictions restrictions) throws IOException, InterruptedException {
 
         final ObjectNode metaData = metadata(logger, mid, filename, restrictions);
@@ -322,6 +331,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
     }
 
+    @Deprecated
     private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
         if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
             if (Arrays.stream(Region.RESTRICTED_REGIONS).anyMatch(r -> r == restrictions.getGeoRestriction().getRegion())) {
@@ -333,6 +343,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
     }
 
+
+    @Deprecated
     private void uploadChunk(
         final SimpleLogger logger,
         final String mid,
@@ -372,6 +384,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
     }
 
+    @Deprecated
     private UploadResponse uploadFinish(
         SimpleLogger logger,
         String mid,
@@ -394,14 +407,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final boolean  success = finish.statusCode() >= 200 && finish.statusCode() < 300 ;
         logger.log(success?  Level.INFO : Level.ERROR, "{} finish: {} ({}) {} {}", mid, status, finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded), MAPPER.writeValueAsString(node));
         JsonNode bodyNode = MAPPER.readTree(finish.body());
-        return null;
-        /*return new UploadResponse(
+        return new UploadResponse(
             mid,
             finish.statusCode(),
             status,
             response,
             uploaded.get()
-        );*/
+        );
     }
 
     protected abstract String implName();

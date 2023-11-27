@@ -12,6 +12,7 @@ import java.util.Properties;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.Log4j2SimpleLogger;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
@@ -77,7 +78,7 @@ class AudioSourcingServiceImplTest {
     @Test
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void status() throws IOException, InterruptedException {
-        Object status = impl.status(MID);
+        StatusResponse status = impl.status(MID).orElseThrow();
         log.info("Status {}", status);
     }
 
