@@ -73,11 +73,15 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private String baseUrl;
 
+    @Deprecated
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
     @Nullable
+    @Deprecated
     private final String callbackBaseUrl; // this seems not to get called?
     private final String token;
+
+    @Deprecated
     private final int chunkSize;
     private final String defaultEmail;
 
@@ -172,22 +176,24 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
        final String mid,
        final InputStream inputStream) throws SourcingServiceException {
 
-        HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
-
+        final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
         body.addStream("file",  mid,
             () -> inputStream
         );
 
-        HttpRequest.Builder post = uploadRequestBuilder
+        final HttpRequest post = uploadRequestBuilder
             .header("Content-Type", body.contentType())
-            .POST(body);
+            .POST(body)
+            .build();
 
-        HttpResponse<String> send = client.send(post.build(), HttpResponse.BodyHandlers.ofString());
+        logger.info("Posting audio for {} to {}", mid, post.uri());
+
+        final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
 
 
-        JsonNode bodyNode = MAPPER.readTree(send.body());
+        final JsonNode bodyNode = MAPPER.readTree(send.body());
         logger.info("{} {}", mid, bodyNode);
 
        return null;
@@ -206,6 +212,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
 
+        //noinspection SwitchStatementWithTooFewBranches
         return Optional.of(switch(version) {
             case 1 -> MAPPER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v1.StatusResponse.class).normalize();
             default -> V2READER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v2.StatusResponse.class).normalize();
@@ -426,6 +433,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         return callbackBaseUrl == null ? null : callbackBaseUrl.formatted(mid);
     }
 
+    @SneakyThrows
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
         return request(pathForIngestMultipart(mid))
             .header("Content-Type", body.contentType())
@@ -447,12 +455,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             .GET().build();
     }
 
-
-
     protected HttpRequest.Builder uploadRequestBuilder(String mid) {
         return request("ingest/" + mid + "/upload");
     }
-
 
     @SneakyThrows
     protected HttpRequest deleteRequest(String mid, int daysBeforeHardDelete) {
@@ -469,6 +474,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             .uri(URI.create(forPath(path)));
     }
 
+    @ManagedAttribute
     String pathForIngestMultipart(String mid) {
         return multipartPart.formatted(mid);
     }
