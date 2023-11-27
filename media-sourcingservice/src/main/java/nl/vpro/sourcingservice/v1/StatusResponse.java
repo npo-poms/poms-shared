@@ -13,6 +13,7 @@ import nl.vpro.util.DateUtils;
 
 @Getter
 @ToString()
+@Deprecated
 public class StatusResponse  extends AbstractResponse {
 
     final Response response;

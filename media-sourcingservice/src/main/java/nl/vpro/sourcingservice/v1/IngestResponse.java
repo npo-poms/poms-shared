@@ -9,6 +9,7 @@ import nl.vpro.sourcingservice.AbstractResponse;
 
 @Getter
 @ToString()
+@Deprecated
 public class IngestResponse extends AbstractResponse {
 
     final Response response;

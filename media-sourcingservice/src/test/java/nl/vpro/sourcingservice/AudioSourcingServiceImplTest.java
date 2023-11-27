@@ -58,13 +58,13 @@ class AudioSourcingServiceImplTest {
     @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void uploadAudio() throws IOException, InterruptedException {
         final Instant start = Instant.now();
-        final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
+        final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample-big.mp3");
 
         final SimpleLogger logger = Log4j2SimpleLogger.simple(log);
         final FileCachingInputStream cachingInputStream = FileCachingInputStream.builder()
             .input(Files.newInputStream(file))
             .noProgressLogging()
-            .startImmediately(false)
+            .startImmediately(true)
             .batchConsumer(loggingConsumer(logger))
             .build();
         UploadResponse upload = impl.upload(logger, MID, null,
@@ -72,7 +72,7 @@ class AudioSourcingServiceImplTest {
             cachingInputStream,
             "m.meeuwissen.vpro@gmail.com"
         );
-        log.info("Took {}", Duration.between(start, Instant.now()));
+        log.info("Took {} {}", Duration.between(start, Instant.now()), upload);
     }
 
     @Test
