@@ -63,7 +63,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private static final ObjectReader V2READER;
     static {
         MAPPER.registerModule( new JavaTimeModule());
-
         V2READER = MAPPER.readerFor(nl.vpro.sourcingservice.v2.StatusResponse.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
     }
 

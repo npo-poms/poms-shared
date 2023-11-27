@@ -49,7 +49,7 @@ class AudioSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             50 * 1000 * 1024,
             "m.meeuwissen.vpro@gmail.com",
-            2,
+            Integer.parseInt(PROPERTIES.getProperty("sourcingservice.version", "2")),
             new LoggingMeterRegistry()
         );
     }
@@ -85,7 +85,7 @@ class AudioSourcingServiceImplTest {
     @Test
     @Disabled
     public void delete() throws IOException, InterruptedException {
-        Object status = impl.delete(MID, 0);
+        DeleteResponse status = impl.delete(MID, 0);
         log.info("Status {}", status);
     }
 
