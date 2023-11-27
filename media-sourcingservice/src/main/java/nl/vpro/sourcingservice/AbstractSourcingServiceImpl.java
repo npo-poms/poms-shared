@@ -30,8 +30,7 @@ import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.Level;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.sourcingservice.v1.IngestResponse;
-import nl.vpro.util.FileSizeFormatter;
-import nl.vpro.util.InputStreamChunk;
+import nl.vpro.util.*;
 
 
 /**
@@ -195,8 +194,19 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         final JsonNode bodyNode = MAPPER.readTree(send.body());
         logger.info("{} {}", mid, bodyNode);
+        Long count = null;
+        if (inputStream instanceof FileCachingInputStream fc) {
+            count = fc.getCount();
+        }
 
-       return null;
+        return new UploadResponse(
+            mid,
+            send.statusCode(),
+            bodyNode.get("status").textValue(),
+            bodyNode.get("response").textValue(),
+            count
+        );
+
    }
 
 
