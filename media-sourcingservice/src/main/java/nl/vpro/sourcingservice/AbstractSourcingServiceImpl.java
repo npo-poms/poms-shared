@@ -181,12 +181,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
-        body.addStream("file",  mid,
-            () -> inputStream
+        body.addStream("file",  getFileName(mid),
+            () -> inputStream,
+            "application/octet-stream"
         );
 
         final HttpRequest post = uploadRequestBuilder
-            .header("Content-Type", body.contentType())
             .POST(body)
             .build();
 
