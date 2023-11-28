@@ -1,12 +1,14 @@
 package nl.vpro.sourcingservice;
 
 import lombok.Getter;
+import lombok.ToString;
 
 import java.io.Serial;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
 
+@ToString
 @Getter
 public class SourcingServiceException extends RuntimeException {
     @Serial

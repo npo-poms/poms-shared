@@ -22,16 +22,13 @@ public class AudioSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
         @NonNull @Value("${sourcingservice.audio.token}") String audioToken,
         @Value("${sourcingservice.chunkSize:10000000}") int chunkSize,
         @Value("${sourcingservice.defaultEmail:#{null}}") String defaultEmail,
-        @Value("${sourcingservice.checkChecksum:#{null}}") Boolean checkChecksum,
+        @Value("${sourcingservice.version:1}") int version,
         MeterRegistry meterRegistry
        ) {
-        super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, checkChecksum, meterRegistry);
+        super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, meterRegistry, version);
     }
 
-    @Override
-    protected String getFileName(String mid) {
-        return mid + ".mp3";
-    }
+
 
     @Override
     protected String implName() {

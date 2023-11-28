@@ -2,14 +2,15 @@ package nl.vpro.sourcingservice;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Getter
-@ToString()
-public class StatusResponse  extends AbstractResponse {
+@ToString(callSuper = true)
+public class StatusResponse extends AbstractResponse {
+
 
     final Response response;
 
@@ -20,29 +21,19 @@ public class StatusResponse  extends AbstractResponse {
     }
 
     @Data
+    @Builder
     public static class Response {
-        private String id;
-        private String current_status;
-        private String original_filename;
-        private String stored_filename;
-        private String filename;
-        private String asset_status;
-        // silly that 1. time can't be parsed by default parser
-        // 2. time seems to be in UTC, but doesn't indicate.
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime created_at;
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime filesent_at;
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime streamstatus_updated;
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime published_at;
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime to_be_deleted_at;
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-        private LocalDateTime deleted_at;
 
-        private JsonNode latest_notify_event;
-
+        Instant created_at;
+        Instant deleted_at;
+        Instant hard_delete_at;
+        Instant filesent_at;
+        Instant streamstatus_updated;
+        Instant published_at;
+        String status;
+        String filename;
+        String original_filename;
+        String mid;
     }
+
 }

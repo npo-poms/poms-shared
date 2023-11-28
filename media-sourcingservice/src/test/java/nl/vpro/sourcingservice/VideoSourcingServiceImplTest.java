@@ -42,7 +42,7 @@ class VideoSourcingServiceImplTest {
             PROPERTIES.getProperty("sourcingservice.video.token"),
             100_000_000,
             "m.meeuwissen.vpro@gmail.com",
-            null,
+            2,
             new LoggingMeterRegistry()
         );
     }
@@ -53,7 +53,7 @@ class VideoSourcingServiceImplTest {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "test.mp4");
 
-        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_20057921", null, Files.size(file), null, Files.newInputStream(file), null,   (p) -> {
+        impl.upload(Log4j2SimpleLogger.simple(log), "WO_VPRO_20057921", null, Files.size(file), null, null, Files.newInputStream(file), null,   (p) -> {
             log.info("Phase {}", p);
         });
         log.info("Took {}", Duration.between(start, Instant.now()));

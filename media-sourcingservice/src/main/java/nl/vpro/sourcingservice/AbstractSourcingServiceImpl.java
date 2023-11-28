@@ -10,8 +10,6 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.http.*;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,8 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.StreamReadFeature;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -31,8 +29,8 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.update.UploadResponse;
 import nl.vpro.logging.simple.Level;
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.util.FileSizeFormatter;
-import nl.vpro.util.InputStreamChunk;
+import nl.vpro.sourcingservice.v1.IngestResponse;
+import nl.vpro.util.*;
 
 
 /**
@@ -61,8 +59,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectReader V2READER;
+    private static final ObjectReader JSONREADER;
     static {
         MAPPER.registerModule( new JavaTimeModule());
+        V2READER = MAPPER.readerFor(nl.vpro.sourcingservice.v2.StatusResponse.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
+        JSONREADER = MAPPER.readerFor(ObjectNode.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
+
     }
 
     private final HttpClient client = HttpClient
@@ -72,22 +75,25 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private String baseUrl;
 
+    @Deprecated
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
     @Nullable
+    @Deprecated
     private final String callbackBaseUrl; // this seems not to get called?
     private final String token;
+
     private final int chunkSize;
     private final String defaultEmail;
 
     private final MeterRegistry meterRegistry;
 
-
     /**
      * Whether to determin checksum of incoming stream
      */
-    private final boolean checkChecksum;
 
+
+    int version = 2;
 
     AbstractSourcingServiceImpl(
         String baseUrl,
@@ -95,8 +101,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String token,
         int chunkSize,
         String defaultEmail,
-        Boolean checkChecksum,
-        MeterRegistry meterRegistry) {
+        MeterRegistry meterRegistry,
+        int version) {
         this.baseUrl = baseUrl.replaceAll("([^/])$","$1/");
 
         this.callbackBaseUrl = callbackBaseUrl;
@@ -104,16 +110,38 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         this.chunkSize = chunkSize;
         this.defaultEmail = defaultEmail;
         this.meterRegistry = meterRegistry;
-        this.checkChecksum = checkChecksum != null && checkChecksum;
+        this.version = version;
     }
 
 
-    protected abstract String getFileName(String mid);
+    protected  String getFileName(String mid, String mimeType) {
+        AVFileFormat fileFormat = AVFileFormat.forMimeType(mimeType).orElseThrow();
+        return mid + "." + fileFormat.name().toLowerCase();
+    }
+
+
+    @Override
+    public UploadResponse upload(
+        SimpleLogger logger,
+        String mid,
+        @Nullable Restrictions restrictions,
+        long fileSize,
+        String contentType,
+        InputStream inputStream,
+        @Nullable String errors
+    ) throws IOException, InterruptedException, SourcingServiceException {
+        return switch (version) {
+            case 1 ->
+                uploadv1(logger, mid, restrictions, fileSize, null, inputStream, errors, SourcingService.phaseLogger(logger));
+            case 2 ->
+                uploadv2(logger, mid, contentType, inputStream);
+            default -> throw new IllegalArgumentException("Unknown version " + version);
+        };
+    }
 
 
    @SneakyThrows
-   @Override
-   public UploadResponse upload(
+   protected UploadResponse uploadv1(
        SimpleLogger logger,
        final String mid,
        @Nullable Restrictions restrictions,
@@ -125,15 +153,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
        final AtomicLong uploaded = new AtomicLong(0);
 
-
-       MessageDigest digester;
-       if (checkChecksum && checksum != null) {
-           digester = MessageDigest.getInstance("MD5");
-           inputStream = new DigestInputStream(inputStream, digester);
-           logger.info("Determining MD5 checksum on the fly");
-       } else {
-           digester = null;
-       }
 
        final InputStream finalInputStream = inputStream;
        try (finalInputStream) {
@@ -152,14 +171,71 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
        phase.accept(Phase.FINISH);
-       if (checkChecksum && checksum != null)  {
-           byte[] determinedChecksum = digester.digest();
-           if (determinedChecksum != checksum) {
-               throw new IllegalArgumentException("Illegal checksum");
-           }
-       }
 
        return uploadFinish(logger, mid, uploaded, restrictions);
+   }
+
+    @SneakyThrows
+    protected UploadResponse uploadv2(
+       SimpleLogger logger,
+       final String mid,
+       final String contentType,
+       final InputStream inputStream) throws SourcingServiceException {
+
+        final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
+
+        final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
+        final String fileName = getFileName(mid, contentType);
+        body.addChannel("file",  fileName,
+            () -> WrappedReadableChannel
+                .builder()
+                .inputStream(inputStream)
+                .batchSize((long) chunkSize)
+                .consumer(l -> logger.info(() -> "Uploaded %s to %s".formatted(FileSizeFormatter.DEFAULT.format(l), baseUrl)))
+                .build(),
+            contentType
+        );
+
+        final HttpRequest post = uploadRequestBuilder
+            .POST(body)
+            .build();
+
+        logger.info("Posting {} for {} to {}", fileName, mid, post.uri());
+
+        final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
+
+
+        final boolean  success = send.statusCode() >= 200 && send.statusCode() < 300 ;
+        Long count = null;
+        if (inputStream instanceof FileCachingInputStream fc) {
+            count = fc.getCount();
+        }
+
+        String status = null;
+        String response = null;
+        try {
+            final JsonNode bodyNode = JSONREADER.readTree(send.body());
+            logger.info("{} {}", mid, bodyNode);
+
+            status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
+            response = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
+        } catch (Exception e) {
+            if (success) {
+                logger.error(e.getMessage(), e);
+            }
+        }
+
+        logger.log(success?  Level.INFO : Level.ERROR,
+            "{} uploaded: {} ({}) {} {}", mid, status, send.statusCode(), FileSizeFormatter.DEFAULT.format(count), send.body());
+
+
+        return new UploadResponse(
+            mid,
+            send.statusCode(),
+            status,
+            response,
+            count);
+
    }
 
 
@@ -174,9 +250,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (statusResponse.statusCode() > 299) {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
-        return Optional.of(
-            MAPPER.readValue(statusResponse.body(), StatusResponse.class)
+
+        //noinspection SwitchStatementWithTooFewBranches
+        return Optional.of(switch(version) {
+            case 1 -> MAPPER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v1.StatusResponse.class).normalize();
+            default -> V2READER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v2.StatusResponse.class).normalize();
+            }
         );
+
     }
 
     @Override
@@ -187,9 +268,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (statusResponse.statusCode() > 299) {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
-        return MAPPER.readValue(statusResponse.body(), DeleteResponse.class);
+
+        return JSONREADER.readValue(statusResponse.body(), DeleteResponse.class);
     }
 
+    @Deprecated
     private void ingest(SimpleLogger logger, String mid, String filename, Restrictions restrictions) throws IOException, InterruptedException {
 
         final ObjectNode metaData = metadata(logger, mid, filename, restrictions);
@@ -202,10 +285,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (ingest.statusCode() > 299) {
             throw new IllegalArgumentException(ingestRequest + ":" + ingest.statusCode() + ":" + new String(ingest.body()));
         }
-        IngestResponse response = MAPPER.readValue(ingest.body(), IngestResponse.class);
+        IngestResponse response = JSONREADER.readValue(ingest.body(), IngestResponse.class);
         logger.info("ingest {}", response);
     }
 
+    @Deprecated
     private ObjectNode metadata(SimpleLogger logger, String mid, String filename, Restrictions restrictions) {
          final ObjectNode metaData = MAPPER.createObjectNode();
         metaData.put("mid", mid);
@@ -241,6 +325,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         return metaData;
     }
 
+
+    @Deprecated
     private void uploadStart(
         final SimpleLogger logger,
         final String mid,
@@ -271,7 +357,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (start.statusCode() > 299) {
             throw new IllegalArgumentException(multipart + ": " + start.statusCode() + ":" + start.body());
         }
-        JsonNode node = MAPPER.readTree(start.body());
+        JsonNode node = JSONREADER.readTree(start.body());
         String callBackUrl = getCallbackUrl(mid);
         if (StringUtils.isNotBlank(callBackUrl)) {
             callBackUrl = ", %s".formatted(callBackUrl).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@");
@@ -290,6 +376,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
     }
 
+    @Deprecated
     private void addRegion(SimpleLogger logger, MultipartFormDataBodyPublisher body, Restrictions restrictions) {
         if (restrictions != null && restrictions.getGeoRestriction() != null && restrictions.getGeoRestriction().inPublicationWindow()) {
             if (Arrays.stream(Region.RESTRICTED_REGIONS).anyMatch(r -> r == restrictions.getGeoRestriction().getRegion())) {
@@ -301,6 +388,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
     }
 
+
+    @Deprecated
     private void uploadChunk(
         final SimpleLogger logger,
         final String mid,
@@ -323,7 +412,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             meter("transfer", transfer);
 
             long currentCount = uploaded.addAndGet(chunkStream.getCount());
-            final JsonNode node = MAPPER.readTree(transfer.body());
+            final JsonNode node = JSONREADER.readTree(transfer.body());
             final boolean  success = transfer.statusCode() >= 200 && transfer.statusCode() < 300 ;
 
             final String status = Optional.ofNullable(node.get("status")).map(JsonNode::textValue).orElse("<no status>");
@@ -340,6 +429,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
     }
 
+    @Deprecated
     private UploadResponse uploadFinish(
         SimpleLogger logger,
         String mid,
@@ -355,13 +445,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
         meter("finish", finish);
 
-        final JsonNode node = MAPPER.readTree(finish.body());
+        final JsonNode node = JSONREADER.readTree(finish.body());
         final String status = Optional.ofNullable(node.get("status")).map(JsonNode::textValue).orElse("<no status>");
         final String response = Optional.ofNullable(node.get("response")).map(JsonNode::textValue).orElse("<no response>");
 
         final boolean  success = finish.statusCode() >= 200 && finish.statusCode() < 300 ;
         logger.log(success?  Level.INFO : Level.ERROR, "{} finish: {} ({}) {} {}", mid, status, finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded), MAPPER.writeValueAsString(node));
-        JsonNode bodyNode = MAPPER.readTree(finish.body());
+        JsonNode bodyNode = JSONREADER.readTree(finish.body());
         return new UploadResponse(
             mid,
             finish.statusCode(),
@@ -382,6 +472,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         return callbackBaseUrl == null ? null : callbackBaseUrl.formatted(mid);
     }
 
+    @SneakyThrows
     protected HttpRequest multipart(String mid, MultipartFormDataBodyPublisher body) {
         return request(pathForIngestMultipart(mid))
             .header("Content-Type", body.contentType())
@@ -403,6 +494,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             .GET().build();
     }
 
+    protected HttpRequest.Builder uploadRequestBuilder(String mid) {
+        return request("ingest/" + mid + "/upload");
+    }
 
     @SneakyThrows
     protected HttpRequest deleteRequest(String mid, int daysBeforeHardDelete) {
@@ -419,6 +513,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             .uri(URI.create(forPath(path)));
     }
 
+    @ManagedAttribute
     String pathForIngestMultipart(String mid) {
         return multipartPart.formatted(mid);
     }
