@@ -115,7 +115,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
 
-    protected abstract String getFileName(String mid);
+    protected abstract String getFileName(String mid, String mimeType);
 
 
     @Override
@@ -124,6 +124,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String mid,
         @Nullable Restrictions restrictions,
         long fileSize,
+        String contentType,
         InputStream inputStream,
         @Nullable String errors
     ) throws IOException, InterruptedException, SourcingServiceException {
@@ -131,7 +132,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             case 1 ->
                 uploadv1(logger, mid, restrictions, fileSize, null, inputStream, errors, SourcingService.phaseLogger(logger));
             case 2 ->
-                uploadv2(logger, mid, inputStream);
+                uploadv2(logger, mid, contentType, inputStream);
             default -> throw new IllegalArgumentException("Unknown version " + version);
         };
     }
@@ -176,39 +177,52 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     protected UploadResponse uploadv2(
        SimpleLogger logger,
        final String mid,
+       final String contentType,
        final InputStream inputStream) throws SourcingServiceException {
 
         final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
-        body.addStream("file",  getFileName(mid),
-            () -> inputStream,
-            "application/octet-stream"
+        body.addChannel("file",  getFileName(mid, contentType),
+            () -> WrappedReadableChannel
+                .builder()
+                .inputStream(inputStream).batchSize(5L * 1024 * 1024)
+                .consumer(l -> logger.info("Uploaded {}", FileSizeFormatter.DEFAULT.format(l)))
+                .build(),
+            contentType
         );
 
         final HttpRequest post = uploadRequestBuilder
             .POST(body)
             .build();
 
-        logger.info("Posting audio for {} to {}", mid, post.uri());
+        logger.info("Posting {} for {} to {}", contentType, mid, post.uri());
 
         final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
 
 
         final JsonNode bodyNode = JSONREADER.readTree(send.body());
         logger.info("{} {}", mid, bodyNode);
+
         Long count = null;
         if (inputStream instanceof FileCachingInputStream fc) {
             count = fc.getCount();
         }
 
+
+        final String status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
+        final String response = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
+        final boolean  success = send.statusCode() >= 200 && send.statusCode() < 300 ;
+        logger.log(success?  Level.INFO : Level.ERROR,
+            "{} uploaded: {} ({}) {} {}", mid, status, send.statusCode(), FileSizeFormatter.DEFAULT.format(count), MAPPER.writeValueAsString(bodyNode));
+
+
         return new UploadResponse(
             mid,
             send.statusCode(),
-            bodyNode.get("status").textValue(),
-            bodyNode.get("response").textValue(),
-            count
-        );
+            status,
+            response,
+            count);
 
    }
 
