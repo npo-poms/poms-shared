@@ -29,7 +29,7 @@ public class VideoSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
     }
 
     @Override
-    protected String getFileName(String mid) {
+    protected String getFileName(String mid, String mimetype) {
         return mid + ".mp4";
     }
 
