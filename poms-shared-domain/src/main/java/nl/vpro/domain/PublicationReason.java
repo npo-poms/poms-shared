@@ -219,7 +219,16 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         return result;
     }
 
+    /**
+     * Known reasons for publication.
+     * <p>
+     * @since 7.10 (in {@code nl.vpro.domain.media.PublicationUpdate} before)
+     */
     public static abstract class Reasons {
+        private Reasons() {
+            // no instances. Just a constants holder
+        }
+
         public static final String DIRECT              = "direct";
         public static final String NOTIFY_ONLINE       = "notify online";
         public static final String NOTIFY_OFFLINE      = "notify offline";
