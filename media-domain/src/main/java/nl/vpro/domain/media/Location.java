@@ -201,7 +201,7 @@ public class Location extends PublishableObject<Location>
     }
 
     public Location(String programUrl, OwnerType owner) {
-        this(programUrl, owner, (Platform) null);
+        this(programUrl, owner, Platform.INTERNETVOD);
     }
 
     public Location(String programUrl, OwnerType owner, Platform platform) {

@@ -1242,6 +1242,7 @@ public class MediaObjects {
         AVFileFormat.MPEG2
     );
 
+    // every location with this scheme is considered playable
     static final Set<String> ACCEPTABLE_SCHEMES = Set.of("npo+drm", "npo");
 
 
@@ -1270,7 +1271,7 @@ public class MediaObjects {
         if (format != null && format != AVFileFormat.UNKNOWN) {
             boolean acceptable = ACCEPTABLE_FORMATS.contains(format);
             if (!acceptable) {
-                log.debug("Ignoring {}", l);
+                log.debug("Ignoring {} since {} not in {}", l, format, ACCEPTABLE_FORMATS);
                 return false;
             }
         }
@@ -1287,6 +1288,7 @@ public class MediaObjects {
      */
     protected static void correctPrediction(Prediction prediction, MediaObject mediaObject) {
         if (autoCorrectPredictions) {
+            Instant now = instant();
             switch (prediction.getState()) {
                 case ANNOUNCED, REVOKED -> {
                     for (Location location : mediaObject.getLocations()) {

@@ -877,20 +877,21 @@ public class MediaObjectTest {
     @Test
     public void testAddLocationsOnPredictionUpdate() {
         Program target = new Program(1L);
-        target.findOrCreatePrediction(Platform.PLUSVOD);
+        target.findOrCreatePrediction(Platform.PLUSVOD).setPlannedAvailability(true);
 
         Location l1 = new Location("http://aaa", OwnerType.BROADCASTER);
-
-        target.addLocation(l1);
-
+        l1.setAvFileFormat(AVFileFormat.HASP);
         l1.setPlatform(Platform.PLUSVOD);
         l1.setPublishStartInstant(Instant.ofEpochMilli(5));
         l1.setPublishStopInstant(Instant.ofEpochMilli(10));
 
+        target.addLocation(l1);
+
 
         Prediction plus = target.getPrediction(Platform.PLUSVOD);
         assertThat(plus).isNotNull();
-        assertThat(plus.getState()).isEqualTo(Prediction.State.REALIZED);
+        assertThat(plus.isPlannedAvailability()).isTrue();
+        assertThat(plus.getState()).isEqualTo(Prediction.State.ANNOUNCED);
         assertThat(plus.getPublishStartInstant()).isNull();
         assertThat(plus.getPublishStopInstant()).isNull();
 
@@ -907,9 +908,6 @@ public class MediaObjectTest {
 
         assertThat(l1.getPublishStartInstant().toEpochMilli()).isEqualTo(6);
         assertThat(l1.getPublishStopInstant().toEpochMilli()).isEqualTo(9);
-
-
-
 
     }
 
