@@ -191,7 +191,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 .builder()
                 .inputStream(inputStream)
                 .batchSize((long) chunkSize)
-                .consumer(l -> logger.info(() -> "Uploaded %s".formatted(FileSizeFormatter.DEFAULT.format(l))))
+                .consumer(l -> logger.info(() -> "Uploaded %s to %s".formatted(FileSizeFormatter.DEFAULT.format(l), baseUrl)))
                 .build(),
             contentType
         );
@@ -205,20 +205,28 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
 
 
-        final JsonNode bodyNode = JSONREADER.readTree(send.body());
-        logger.info("{} {}", mid, bodyNode);
-
+        final boolean  success = send.statusCode() >= 200 && send.statusCode() < 300 ;
         Long count = null;
         if (inputStream instanceof FileCachingInputStream fc) {
             count = fc.getCount();
         }
 
+        String status = null;
+        String response = null;
+        try {
+            final JsonNode bodyNode = JSONREADER.readTree(send.body());
+            logger.info("{} {}", mid, bodyNode);
 
-        final String status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
-        final String response = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
-        final boolean  success = send.statusCode() >= 200 && send.statusCode() < 300 ;
+            status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
+            response = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
+        } catch (Exception e) {
+            if (success) {
+                logger.error(e.getMessage(), e);
+            }
+        }
+
         logger.log(success?  Level.INFO : Level.ERROR,
-            "{} uploaded: {} ({}) {} {}", mid, status, send.statusCode(), FileSizeFormatter.DEFAULT.format(count), MAPPER.writeValueAsString(bodyNode));
+            "{} uploaded: {} ({}) {} {}", mid, status, send.statusCode(), FileSizeFormatter.DEFAULT.format(count), send.body());
 
 
         return new UploadResponse(
