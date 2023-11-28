@@ -28,10 +28,7 @@ public class AudioSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
         super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, meterRegistry, version);
     }
 
-    @Override
-    protected String getFileName(String mid, String mimetype) {
-        return mid + ".mp3";
-    }
+
 
     @Override
     protected String implName() {

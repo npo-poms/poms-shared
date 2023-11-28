@@ -83,7 +83,6 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private final String callbackBaseUrl; // this seems not to get called?
     private final String token;
 
-    @Deprecated
     private final int chunkSize;
     private final String defaultEmail;
 
@@ -115,7 +114,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
 
-    protected abstract String getFileName(String mid, String mimeType);
+    protected  String getFileName(String mid, String mimeType) {
+        AVFileFormat fileFormat = AVFileFormat.forMimeType(mimeType).orElseThrow();
+        return mid + "." + fileFormat.name().toLowerCase();
+    }
 
 
     @Override
@@ -183,10 +185,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpRequest.Builder uploadRequestBuilder = uploadRequestBuilder(mid);
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
-        body.addChannel("file",  getFileName(mid, contentType),
+        final String fileName = getFileName(mid, contentType);
+        body.addChannel("file",  fileName,
             () -> WrappedReadableChannel
                 .builder()
-                .inputStream(inputStream).batchSize(5L * 1024 * 1024)
+                .inputStream(inputStream)
+                .batchSize((long) chunkSize)
                 .consumer(l -> logger.info(() -> "Uploaded %s".formatted(FileSizeFormatter.DEFAULT.format(l))))
                 .build(),
             contentType
@@ -196,7 +200,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             .POST(body)
             .build();
 
-        logger.info("Posting {} for {} to {}", contentType, mid, post.uri());
+        logger.info("Posting {} for {} to {}", fileName, mid, post.uri());
 
         final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
 
