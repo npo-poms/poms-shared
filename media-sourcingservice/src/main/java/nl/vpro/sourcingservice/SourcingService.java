@@ -46,11 +46,12 @@ public interface SourcingService {
         String mid,
         @Nullable Restrictions restrictions,
         long fileSize,
+        String contentType,
         byte @Nullable[] checksum,
         InputStream inputStream,
         @Nullable String errors,
         Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException {
-        return upload(logger, mid, restrictions, fileSize, inputStream, errors);
+        return upload(logger, mid, restrictions, fileSize, contentType, inputStream, errors);
     }
 
     /**
@@ -61,7 +62,8 @@ public interface SourcingService {
         String mid,
         @Nullable Restrictions restrictions,
         long fileSize,
-        InputStream inputStream,
+        String mimeType,
+        InputStream contentType,
         @Nullable String errors
     ) throws IOException, InterruptedException, SourcingServiceException;
 
@@ -86,8 +88,8 @@ public interface SourcingService {
         return fci -> {
             if (fci.isReady()) {
                 if (fci.getException().isEmpty()) {
-                    logger.info(en("Uploading ready ({} bytes)")
-                        .nl("Uploaden klaar ({} bytes)")
+                    logger.info(en("Uploading ready ({})")
+                        .nl("Uploaden klaar ({})")
                         .slf4jArgs(FileSizeFormatter.DEFAULT.format(fci.getCount())).build());
                 } else {
                     logger.warn(en("Upload error: {}")
