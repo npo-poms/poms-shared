@@ -60,9 +60,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final ObjectReader V2READER;
+    private static final ObjectReader JSONREADER;
     static {
         MAPPER.registerModule( new JavaTimeModule());
         V2READER = MAPPER.readerFor(nl.vpro.sourcingservice.v2.StatusResponse.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
+        JSONREADER = MAPPER.readerFor(ObjectNode.class).with(StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION);
+
     }
 
     private final HttpClient client = HttpClient
@@ -192,7 +195,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
 
 
-        final JsonNode bodyNode = MAPPER.readTree(send.body());
+        final JsonNode bodyNode = JSONREADER.readTree(send.body());
         logger.info("{} {}", mid, bodyNode);
         Long count = null;
         if (inputStream instanceof FileCachingInputStream fc) {
@@ -240,7 +243,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
 
-        return MAPPER.readValue(statusResponse.body(), DeleteResponse.class);
+        return JSONREADER.readValue(statusResponse.body(), DeleteResponse.class);
     }
 
     @Deprecated
@@ -256,7 +259,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (ingest.statusCode() > 299) {
             throw new IllegalArgumentException(ingestRequest + ":" + ingest.statusCode() + ":" + new String(ingest.body()));
         }
-        IngestResponse response = MAPPER.readValue(ingest.body(), IngestResponse.class);
+        IngestResponse response = JSONREADER.readValue(ingest.body(), IngestResponse.class);
         logger.info("ingest {}", response);
     }
 
@@ -328,7 +331,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         if (start.statusCode() > 299) {
             throw new IllegalArgumentException(multipart + ": " + start.statusCode() + ":" + start.body());
         }
-        JsonNode node = MAPPER.readTree(start.body());
+        JsonNode node = JSONREADER.readTree(start.body());
         String callBackUrl = getCallbackUrl(mid);
         if (StringUtils.isNotBlank(callBackUrl)) {
             callBackUrl = ", %s".formatted(callBackUrl).replaceAll("^(.*://)(.*?:).*?@", "$1$2xxxx@");
@@ -383,7 +386,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             meter("transfer", transfer);
 
             long currentCount = uploaded.addAndGet(chunkStream.getCount());
-            final JsonNode node = MAPPER.readTree(transfer.body());
+            final JsonNode node = JSONREADER.readTree(transfer.body());
             final boolean  success = transfer.statusCode() >= 200 && transfer.statusCode() < 300 ;
 
             final String status = Optional.ofNullable(node.get("status")).map(JsonNode::textValue).orElse("<no status>");
@@ -416,13 +419,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
         meter("finish", finish);
 
-        final JsonNode node = MAPPER.readTree(finish.body());
+        final JsonNode node = JSONREADER.readTree(finish.body());
         final String status = Optional.ofNullable(node.get("status")).map(JsonNode::textValue).orElse("<no status>");
         final String response = Optional.ofNullable(node.get("response")).map(JsonNode::textValue).orElse("<no response>");
 
         final boolean  success = finish.statusCode() >= 200 && finish.statusCode() < 300 ;
         logger.log(success?  Level.INFO : Level.ERROR, "{} finish: {} ({}) {} {}", mid, status, finish.statusCode(), FileSizeFormatter.DEFAULT.format(uploaded), MAPPER.writeValueAsString(node));
-        JsonNode bodyNode = MAPPER.readTree(finish.body());
+        JsonNode bodyNode = JSONREADER.readTree(finish.body());
         return new UploadResponse(
             mid,
             finish.statusCode(),
