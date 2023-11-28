@@ -55,7 +55,7 @@ public interface SourcingService {
     }
 
     /**
-     * Defaulting version of {@link #upload(SimpleLogger, String, Restrictions, long, byte[], InputStream, String, Consumer<Phase>)}.
+     * Defaulting version of {@link #upload(SimpleLogger, String, Restrictions, long, String, byte[], InputStream, String, Consumer<Phase>)}.
      */
     UploadResponse upload(
         SimpleLogger logger,
