@@ -522,7 +522,7 @@ public class Location extends PublishableObject<Location>
             if (mediaObject == null) {
                 throw new IllegalStateException("Location does not have a parent mediaobject");
             }
-            final Prediction existing = mediaObject.getPrediction(platform);
+            final Prediction existing = mediaObject.getPredictionWithoutFixing(platform);
             if (create) {
                 final Prediction rec = mediaObject.findOrCreatePrediction(platform);
                 if (existing == null) {
