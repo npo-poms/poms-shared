@@ -218,4 +218,66 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         result = 31 * result + (publishDate != null ? publishDate.hashCode() : 0);
         return result;
     }
+
+    public static abstract class Reasons {
+        public static final String DIRECT              = "direct";
+        public static final String NOTIFY_ONLINE       = "notify online";
+        public static final String NOTIFY_OFFLINE      = "notify offline";
+
+        /**
+         * Republished because received a restriction xml for the object.
+         */
+        public static final String RESTRICTION         = "restriction";
+
+        /**
+         * Republished because embargo (activation/deactivation) on one (or more) of the restrictions
+         */
+        public static final String RESTRICTIONS        = "restrictions";
+
+        public static final String NOTIFY              = "notify";
+
+        public static final String SORT_DATE           = "sortdate";
+        public static final String PUBLICATION         = "publication";
+        public static final String REPUBLICATION       = "republication";
+        public static final String EMBARGO_PUBLISH     = "embargo publication";
+        public static final String EMBARGO_REVOKE      = "embargo revoke";
+        public static final String DELETION            = "deletion";
+        public static final String NO_SCHEDULE_EVENTS = "no scheduleevents left";
+        public static final String SCHEDULE_EVENT      = "scheduleevent";
+
+        public static final String IMAGE_EMBARGO       = "image embargo";
+        public static final String PARENT_REVOKED      = "parent revoked";
+        public static final String PARENT_PUBLISHED    = "parent published";
+
+        public static final String AVAILABLE_SUBTITLES = "available subtitles";
+
+        public static final String MERGED              = "merged %s>%s";
+        public static final String PARENT_MERGED       = "parent merged >%s";
+
+        public static final String EXPLICIT            = "explicit fill";
+
+        public static final String UNDELETED_PROGRAM_IMPORTER = "Undeleted by program importer";
+
+        public static final String SEGMENT = "segment change";
+
+        public static final String LOCATION_REVOKE = "location revoke";
+        public static final String LOCATION_PUBLISH = "location publish";
+
+        public static final String RCRS                 = "rcrs";
+
+        public static final String TYPE_CHANGED = "type of parent changed";
+        public static final String NUMBER_CHANGED = "number changed";
+
+        public static final String REALIZED_PREDICTION = "realized prediction";
+        public static final String REVOKED_PREDICTION = "revoked prediction";
+
+
+        /**
+         * type:mid:reason
+         */
+        public static final String REPUBLISHING_DESCENDANTS_TEMPLATE = "republishing descendants of %s:%s:%s";
+
+
+        public static final String NEP_EXISTS = "nep notify for non existing object";
+    }
 }

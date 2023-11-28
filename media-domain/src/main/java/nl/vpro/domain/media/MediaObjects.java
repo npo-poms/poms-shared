@@ -1299,7 +1299,7 @@ public class MediaObjects {
                         ) {
                             log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), mediaObject.mid);
                             prediction.setState(Prediction.State.REALIZED);
-                            markForRepublication(mediaObject, "realized prediction");
+                            markForRepublication(mediaObject, PublicationReason.Reasons.REALIZED_PREDICTION);
                             break;
                         }
                     }
@@ -1322,7 +1322,7 @@ public class MediaObjects {
                             .toList();
                         Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Silently set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                         prediction.setState(Prediction.State.REVOKED);
-                        markForRepublication(mediaObject, "revoked prediction");
+                        markForRepublication(mediaObject, PublicationReason.Reasons.REVOKED_PREDICTION);
                     }
                 }
                 default -> log.debug("Ignoring prediction {}", prediction);
