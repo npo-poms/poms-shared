@@ -82,14 +82,14 @@ public interface SourcingService {
 
 
     /**
-     * a Consumer for {@link FileCachingInputStream} which logs progress to the logger, interpreting the inputstream as 'upload'.
+     * a Consumer for {@link FileCachingInputStream} which logs progress to the logger, interpreting the inputstream as 'receive'.
      */
     static Consumer<FileCachingInputStream> loggingConsumer(final SimpleLogger logger) {
         return fci -> {
             if (fci.isReady()) {
                 if (fci.getException().isEmpty()) {
-                    logger.info(en("Uploading ready ({})")
-                        .nl("Uploaden klaar ({})")
+                    logger.info(en("Received {}")
+                        .nl("Ontvangen {}")
                         .slf4jArgs(FileSizeFormatter.DEFAULT.format(fci.getCount())).build());
                 } else {
                     logger.warn(en("Upload error: {}")
