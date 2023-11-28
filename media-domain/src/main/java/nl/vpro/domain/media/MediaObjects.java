@@ -1238,7 +1238,8 @@ public class MediaObjects {
         AVFileFormat.MP4,
         AVFileFormat.M4V,
         AVFileFormat.H264,
-        AVFileFormat.HASP
+        AVFileFormat.HASP,
+        AVFileFormat.MPEG2
     );
 
     static final Set<String> ACCEPTABLE_SCHEMES = Set.of("npo+drm", "npo");
@@ -1293,7 +1294,9 @@ public class MediaObjects {
                             //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
                             location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                                && prediction.inPublicationWindow(instant())) {
+                                && location.inPublicationWindow(instant())
+                                && locationFilter(location)
+                        ) {
                             log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), mediaObject.mid);
                             prediction.setState(Prediction.State.REALIZED);
                             markForRepublication(mediaObject, "realized prediction");
@@ -1305,9 +1308,11 @@ public class MediaObjects {
                     // Are there any 'REALIZED' prediction without locations that can be played anyway?
                     // select *  from prediction p inner join location l on p.mediaobject_id = l.mediaobject_id and p.platform = l.platform and l.workflow = 'PUBLISHED' where p.state = 'REALIZED'  and l is null;
                     // -> no
+
                     Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                        .filter(l -> l.inPublicationWindow(instant()))
                         .filter(MediaObjects::locationFilter)
                         .findFirst();
                     if (matchingLocation.isEmpty()) {
@@ -1317,7 +1322,7 @@ public class MediaObjects {
                             .toList();
                         Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Silently set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                         prediction.setState(Prediction.State.REVOKED);
-                        markForRepublication(mediaObject, "realized prediction");
+                        markForRepublication(mediaObject, "revoked prediction");
                     }
                 }
                 default -> log.debug("Ignoring prediction {}", prediction);
