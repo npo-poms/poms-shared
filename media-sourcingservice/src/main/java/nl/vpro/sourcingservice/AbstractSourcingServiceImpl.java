@@ -187,7 +187,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             () -> WrappedReadableChannel
                 .builder()
                 .inputStream(inputStream).batchSize(5L * 1024 * 1024)
-                .consumer(l -> logger.info("Uploaded {}", FileSizeFormatter.DEFAULT.format(l)))
+                .consumer(l -> logger.info(() -> "Uploaded %s".formatted(FileSizeFormatter.DEFAULT.format(l))))
                 .build(),
             contentType
         );
