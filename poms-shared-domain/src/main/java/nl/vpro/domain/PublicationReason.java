@@ -277,8 +277,8 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
         public static final String TYPE_CHANGED = "type of parent changed";
         public static final String NUMBER_CHANGED = "number changed";
 
-        public static final String REALIZED_PREDICTION = "realized prediction";
-        public static final String REVOKED_PREDICTION = "revoked prediction";
+        public static final String REALIZED_PREDICTION = "realized prediction %s";
+        public static final String REVOKED_PREDICTION = "revoked prediction %s";
 
 
         /**
