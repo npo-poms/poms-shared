@@ -354,36 +354,45 @@ public class Location extends PublishableObject<Location>
         return to;
     }
 
+
+
     public boolean headRequest() {
+        return headRequest(Duration.ofDays(1));
+    }
+
+    /**
+     * Executes a head request on the current location (if that seems possible), and updates some fields if needed
+     * @since 7.10
+     */
+    public boolean headRequest(Duration age) {
         if (programUrl != null) {
             String scheme = getScheme();
             if (scheme != null && (scheme.startsWith("http") || scheme.equals("https"))) {
-                return HttpConnectionUtils.headRequest(programUrl, (response, exception) -> {
-                    if (response != null) {
-                        boolean changes = false;
-                        if (statusCode == null || statusCode != response.statusCode()) {
-                            setStatusCode(response.statusCode());
-                            setLastStatusChange(Instant.now());
-                            changes = true;
-                        }
-                        if (response.statusCode() == 200) {
-                            OptionalLong byteSize = response.headers().firstValueAsLong("Content-Length");
-                            if (byteSize.isPresent() && !Objects.equals(byteSize.getAsLong(), getByteSize())) {
-                                this.setByteSize(byteSize.getAsLong());
+                if (lastStatusChange == null || lastStatusChange.isBefore(Instant.now().minus(age))) {
+                    return HttpConnectionUtils.headRequest(programUrl, (response, exception) -> {
+                        if (response != null) {
+                            boolean changes = false;
+                            if (statusCode == null || statusCode != response.statusCode()) {
+                                setStatusCode(response.statusCode());
+                                setLastStatusChange(Instant.now());
                                 changes = true;
                             }
+                            if (response.statusCode() == 200) {
+                                OptionalLong byteSize = response.headers().firstValueAsLong("Content-Length");
+                                if (byteSize.isPresent() && !Objects.equals(byteSize.getAsLong(), getByteSize())) {
+                                    this.setByteSize(byteSize.getAsLong());
+                                    changes = true;
+                                }
+                            }
+                            return changes;
+                        } else {
+                            return false;
                         }
-                        return changes;
-                    } else {
-                        return false;
-                    }
-                });
-            } else {
-                return false;
+                    });
+                }
             }
-        } else {
-            return false;
         }
+        return false;
     }
 
 
