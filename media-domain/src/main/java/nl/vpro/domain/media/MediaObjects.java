@@ -849,10 +849,7 @@ public class MediaObjects {
                 Location locationToUpdate = mediaToUpdate.findLocation(incomingLocation.getProgramUrl());
                 if(locationToUpdate == null) {
                     mediaToUpdate.addLocation(incomingLocation);
-                    if (incomingLocation.getByteSize() == null) {
-                        AuthorityLocations.getBytesize(incomingLocation.getProgramUrl()).ifPresent(incomingLocation::setByteSize);
-                    }
-
+                    incomingLocation.headRequest();
                 } else {
                     boolean update = true;
                     if (locationToUpdate.getOwner() != owner) {
@@ -870,9 +867,7 @@ public class MediaObjects {
                         locationToUpdate.setSubtitles(incomingLocation.getSubtitles());
                         Embargos.copy(incomingLocation, locationToUpdate);
                         mergeAvAttributes(incomingLocation, locationToUpdate);
-                        if (locationToUpdate.getByteSize() == null) {
-                            AuthorityLocations.getBytesize(locationToUpdate.getProgramUrl()).ifPresent(locationToUpdate::setByteSize);
-                        }
+                        locationToUpdate.headRequest();
                         if (DELETES.contains(incomingLocation.getWorkflow())) {
                             locationToUpdate.setWorkflow(FOR_DELETION);
                         } else {

@@ -365,7 +365,7 @@ public class Location extends PublishableObject<Location>
      * @since 7.10
      */
     public boolean headRequest(Duration age) {
-        if (programUrl != null) {
+        if (programUrl != null && isPublishable()) {
             String scheme = getScheme();
             if (scheme != null && (scheme.startsWith("http") || scheme.equals("https"))) {
                 if (lastStatusChange == null || lastStatusChange.isBefore(Instant.now().minus(age))) {

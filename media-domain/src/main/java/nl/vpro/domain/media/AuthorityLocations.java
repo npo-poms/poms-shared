@@ -283,7 +283,7 @@ public class AuthorityLocations {
         if (location == null) {
             log.info("Creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());
             location = new Location(locationUrl, owner, platform);
-            getBytesize(locationUrl).ifPresent(location::setByteSize);
+            location.headRequest();
             program.addLocation(location);
             Prediction prediction = program.getPredictionWithoutFixing(platform);
             if (prediction.isNew()) {
@@ -292,9 +292,7 @@ public class AuthorityLocations {
             }
         } else {
             log.debug("updating location {} {} for mediaObject {}", locationUrl, owner, program.getMid());
-            if (location.getByteSize() == null) {
-                getBytesize(locationUrl).ifPresent(location::setByteSize);
-            }
+            location.headRequest();
             location.setPlatform(platform);
         }
         return location;
