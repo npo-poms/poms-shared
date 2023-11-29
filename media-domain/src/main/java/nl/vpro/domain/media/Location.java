@@ -368,13 +368,13 @@ public class Location extends PublishableObject<Location>
         if (programUrl != null && isPublishable()) {
             String scheme = getScheme();
             if (scheme != null && (scheme.startsWith("http") || scheme.equals("https"))) {
-                if (lastStatusChange == null || lastStatusChange.isBefore(Instant.now().minus(age))) {
+                if (lastStatusChange == null || lastStatusChange.isBefore(instant().minus(age))) {
                     return HttpConnectionUtils.headRequest(programUrl, (response, exception) -> {
                         if (response != null) {
                             boolean changes = false;
                             if (statusCode == null || statusCode != response.statusCode()) {
                                 setStatusCode(response.statusCode());
-                                setLastStatusChange(Instant.now());
+                                setLastStatusChange(instant());
                                 changes = true;
                             }
                             if (response.statusCode() == 200) {
