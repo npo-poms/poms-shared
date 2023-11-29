@@ -187,7 +187,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
         final String fileName = getFileName(mid, contentType);
         body.addChannel("file",  fileName,
-            () -> WrappedReadableChannel
+            () -> WrappedReadableByteChannel
                 .builder()
                 .inputStream(inputStream)
                 .batchSize((long) chunkSize)
