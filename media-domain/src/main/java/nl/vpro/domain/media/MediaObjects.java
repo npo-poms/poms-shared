@@ -564,7 +564,9 @@ public class MediaObjects {
         @NonNull MediaObject media,
         String reason,
         Object... args) {
-        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(instant())) {
+
+        Workflow workflow = media.getWorkflow();
+        if ((Workflow.MERGED.equals(workflow) || Workflow.PUBLISHED.equals(workflow) || FOR_REPUBLICATION.equals(workflow)) && media.inPublicationWindow(instant())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             appendReason(media, reason, args);
             media.setRepubDestinations(null);
@@ -1297,7 +1299,6 @@ public class MediaObjects {
                             location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
                                 && location.inPublicationWindow(instant())
-                                && locationFilter(location)
                         ) {
                             log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), mediaObject.mid);
                             prediction.setState(Prediction.State.REALIZED);
@@ -1315,7 +1316,6 @@ public class MediaObjects {
                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
                         .filter(l -> l.inPublicationWindow(instant()))
-                        .filter(MediaObjects::locationFilter)
                         .findFirst();
                     if (matchingLocation.isEmpty()) {
                         final List<Location> withoutFilter = mediaObject.getLocations().stream()
