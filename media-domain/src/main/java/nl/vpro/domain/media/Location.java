@@ -10,8 +10,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -344,8 +343,8 @@ public class Location extends PublishableObject<Location>
 
             to.setAvAttributes(AVAttributes.update(from.getAvAttributes(), to.getAvAttributes()));
 
-            if (newProgramUrl && from.getByteSize() == null) {
-                HttpConnectionUtils.getOptionalByteSize(to.getProgramUrl()).ifPresent(to::setByteSize);
+            if (newProgramUrl) {
+                to.headRequest();
             }
 
         } else {
@@ -354,6 +353,39 @@ public class Location extends PublishableObject<Location>
 
         return to;
     }
+
+    public boolean headRequest() {
+        if (programUrl != null) {
+            String scheme = getScheme();
+            if (scheme != null && (scheme.startsWith("http") || scheme.equals("https"))) {
+                return HttpConnectionUtils.headRequest(programUrl, (response, exception) -> {
+                    if (response != null) {
+                        boolean changes = false;
+                        if (statusCode == null || statusCode != response.statusCode()) {
+                            setStatusCode(response.statusCode());
+                            setLastStatusChange(Instant.now());
+                            changes = true;
+                        }
+                        if (response.statusCode() == 200) {
+                            OptionalLong byteSize = response.headers().firstValueAsLong("Content-Length");
+                            if (byteSize.isPresent() && !Objects.equals(byteSize.getAsLong(), getByteSize())) {
+                                this.setByteSize(byteSize.getAsLong());
+                                changes = true;
+                            }
+                        }
+                        return changes;
+                    } else {
+                        return false;
+                    }
+                });
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
 
     public void setPlatform(@NonNull Platform platform) {
         this.platform = platform;
