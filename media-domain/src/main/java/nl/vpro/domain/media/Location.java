@@ -363,6 +363,7 @@ public class Location extends PublishableObject<Location>
     /**
      * Executes a head request on the current location (if that seems possible), and updates some fields if needed
      * @since 7.10
+     * @return Whether changes were made
      */
     public boolean headRequest(Duration age) {
         if (programUrl != null && isPublishable()) {
