@@ -120,9 +120,11 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
     protected  String getFileName(String mid, String mimeType) {
-        AVFileFormat fileFormat = AVFileFormat.forMimeType(mimeType).orElseThrow();
+        AVFileFormat fileFormat = AVFileFormat.forMimeType(mimeType).orElse(defaultFormat());
         return mid + "." + fileFormat.name().toLowerCase();
     }
+
+    protected abstract AVFileFormat defaultFormat();
 
 
     @Override

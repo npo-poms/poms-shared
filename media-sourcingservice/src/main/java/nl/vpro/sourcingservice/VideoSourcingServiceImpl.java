@@ -5,6 +5,8 @@ import lombok.extern.log4j.Log4j2;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import nl.vpro.domain.media.AVFileFormat;
+
 
 /**
  * Video part of sourcing service. This is currently not used, as poms interfaces with NEP directly for that.
@@ -28,6 +30,11 @@ public class VideoSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
         super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, meterRegistry, version);
     }
 
+
+    @Override
+    protected AVFileFormat defaultFormat() {
+        return AVFileFormat.MP4;
+    }
 
     @Override
     protected String implName() {

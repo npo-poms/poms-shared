@@ -12,14 +12,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 @XmlType(name = "avFileFormatEnum")
 public enum AVFileFormat {
-    // Beware that the ordering of enum values is relevant with respect to player stream selection!
+
 
     HASP,  // Html Adaptive Streaming Platform
     H264,  // H264 On NPO streaming platform
     MP4,   // MPEG-4 media
     M4A,   // MPEG-4 audio (please use MP4 instead)
     M4V,   // MPEG-4 video (please use MP4 instead)
-    MP3,   // MPEG-3 media
+    MP3("audio/mpeg"),   // MPEG-3 media
     WVC1,  // Windows Video Codec 9
     WM,    // Windows Media
     WMP,   // Windows Media Player (please use WM instead)
@@ -38,14 +38,28 @@ public enum AVFileFormat {
     HTML,  // HTML embeddable player
     UNKNOWN;
 
+    private final String[] mimeTypes;
+
+    AVFileFormat(String... mimeTypes) {
+        this.mimeTypes = mimeTypes;
+    }
+
     public static Optional<AVFileFormat> forMimeType(String mimetype) {
         if (mimetype == null) {
             return Optional.empty();
         }
         try {
+
             String[] split = mimetype.split("/", 2);
             return Optional.of(AVFileFormat.valueOf(split[1].toUpperCase()));
         } catch (IllegalArgumentException iae) {
+            for (AVFileFormat format : AVFileFormat.values()) {
+                for (String mt : format.mimeTypes) {
+                    if (mimetype.equalsIgnoreCase(mt)) {
+                        return Optional.of(format);
+                    }
+                }
+            }
             return Optional.empty();
         }
     }

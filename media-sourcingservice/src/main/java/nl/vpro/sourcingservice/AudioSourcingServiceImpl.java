@@ -7,6 +7,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
+import nl.vpro.domain.media.AVFileFormat;
+
 
 /**
  * @implNote See {@link AbstractSourcingServiceImpl}
@@ -29,6 +31,10 @@ public class AudioSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
     }
 
 
+    @Override
+    protected AVFileFormat defaultFormat() {
+        return AVFileFormat.MP3;
+    }
 
     @Override
     protected String implName() {
