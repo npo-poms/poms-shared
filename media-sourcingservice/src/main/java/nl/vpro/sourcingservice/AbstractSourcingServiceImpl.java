@@ -48,13 +48,17 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     /***
      * Field in the multipart body
      */
+    @Deprecated
     private static final String CHECKSUM     = "checksum";
 
     /***
      * Field in the multipart body
      */
+    @Deprecated
     private static final String FILE_SIZE    = "file_size";
+    @Deprecated
     private static final String FILE_CHUNK   = "file_chunk";
+    @Deprecated
     private static final String UPLOAD_PHASE = "upload_phase";
 
 
@@ -84,6 +88,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     private final String token;
 
     private final int chunkSize;
+    @Deprecated
     private final String defaultEmail;
 
     private final MeterRegistry meterRegistry;
