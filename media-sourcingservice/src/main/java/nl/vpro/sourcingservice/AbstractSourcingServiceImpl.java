@@ -61,6 +61,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     @Deprecated
     private static final String UPLOAD_PHASE = "upload_phase";
 
+    private static final String FILE   = "file";
+
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final ObjectReader V2READER;
@@ -193,7 +195,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher();
         final String fileName = getFileName(mid, contentType);
-        body.addChannel("file",  fileName,
+        body.addChannel(FILE,  fileName,
             () -> WrappedReadableByteChannel
                 .builder()
                 .inputStream(inputStream)
@@ -204,7 +206,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         );
 
         final HttpRequest post = uploadRequestBuilder
+            .header("Content-Type", body.contentType())
             .POST(body)
+
             .build();
 
         logger.info("Posting {} for {} to {}", fileName, mid, post.uri());
@@ -218,18 +222,26 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             count = fc.getCount();
         }
 
-        String status = null;
-        String response = null;
+        String status ;
+        String response ;
         try {
             final JsonNode bodyNode = JSONREADER.readTree(send.body());
             logger.info("{} {}", mid, bodyNode);
 
             status = Optional.ofNullable(bodyNode.get("status")).map(JsonNode::textValue).orElse("<no status>");
             response = Optional.ofNullable(bodyNode.get("response")).map(JsonNode::textValue).orElse("<no response>");
+            if (!success) {
+                throw new SourcingServiceException(send.statusCode(), bodyNode);
+            }
+        } catch (SourcingServiceException sse) {
+            throw sse;
         } catch (Exception e) {
             if (success) {
                 logger.error(e.getMessage(), e);
             }
+            status = null;
+            response = null;
+
         }
 
         logger.log(success?  Level.INFO : Level.ERROR,
