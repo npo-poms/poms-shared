@@ -72,7 +72,7 @@ class WiremockAudioSourcingServiceImplTest {
         log.info("Took {} {}", Duration.between(start, Instant.now()), upload);
 
         List<ServeEvent> allServeEvents = getAllServeEvents();
-        ServeEvent serveEvent = allServeEvents.get(0);
+        ServeEvent serveEvent = allServeEvents.get(allServeEvents.size() -1);
         assertThat(serveEvent.getRequest().isMultipart()).isTrue();
         log.info(serveEvent.getRequest().getHeaders());
         String boundary = serveEvent.getRequest().getHeader("Content-Type").split("boundary=")[1];

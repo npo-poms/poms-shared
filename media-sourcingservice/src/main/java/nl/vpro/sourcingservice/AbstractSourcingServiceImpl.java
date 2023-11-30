@@ -138,7 +138,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String contentType,
         InputStream inputStream,
         @Nullable String errors
-    ) throws IOException, InterruptedException, SourcingServiceException {
+    ) throws SourcingServiceException {
         return switch (version) {
             case 1 ->
                 uploadv1(logger, mid, restrictions, fileSize, null, inputStream, errors, SourcingService.phaseLogger(logger));
