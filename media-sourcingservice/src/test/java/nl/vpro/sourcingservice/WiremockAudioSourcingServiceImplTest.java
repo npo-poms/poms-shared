@@ -76,16 +76,15 @@ class WiremockAudioSourcingServiceImplTest {
         assertThat(serveEvent.getRequest().isMultipart()).isTrue();
         log.info(serveEvent.getRequest().getHeaders());
         String boundary = serveEvent.getRequest().getHeader("Content-Type").split("boundary=")[1];
-        assertThat(allServeEvents.get(0).getRequest().getBodyAsString()).isEqualToIgnoringWhitespace(
+        assertThat(serveEvent.getRequest().getBodyAsString()).isEqualToNormalizingNewlines(
+                """
+                    --%s
+                    Content-Disposition: form-data; name="file"; filename="mid.mp3"
+                    Content-Type: audio/mp3
 
-            """
-                --%s\r
-                Content-Disposition: form-data; name="file"; filename="mid.mp3"\r
-                Content-Type: audio/mp3\r
-                \r
-                foobar
-                --%s--
-                """.formatted(boundary, boundary)
+                    foobar
+                    --%s--
+                    """.formatted(boundary, boundary)
 
         );
 
