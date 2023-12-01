@@ -15,7 +15,8 @@ import org.junit.jupiter.api.Test;
 import nl.vpro.logging.simple.Log4j2SimpleLogger;
 
 @Log4j2
-class VideoSourcingServiceImplTest {
+@Disabled("This does actual stuff, need actual token. Furthermore, we don't use this")
+class VideoSourcingServiceImplITest {
 
     public static final Properties PROPERTIES = new Properties();
 
@@ -48,7 +49,6 @@ class VideoSourcingServiceImplTest {
     }
 
     @Test
-    @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void uploadVideo() throws IOException, InterruptedException {
         Instant start = Instant.now();
         Path file = Paths.get(System.getProperty("user.home") , "samples", "test.mp4");
@@ -61,7 +61,6 @@ class VideoSourcingServiceImplTest {
 
 
     @Test
-    @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void status() throws IOException, InterruptedException {
 
         Object status = impl.status("WO_VPRO_20057921");
