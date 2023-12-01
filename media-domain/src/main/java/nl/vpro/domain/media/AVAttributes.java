@@ -106,16 +106,34 @@ public class AVAttributes implements Serializable {
     }
 
     public static AVAttributes update(AVAttributes from, AVAttributes to) {
+
+        return update(from, to, true);
+    }
+
+    public static AVAttributes update(AVAttributes from, AVAttributes to, boolean overwrite) {
         if(from != null) {
             if(to == null) {
                 to = new AVAttributes();
             }
+            if (overwrite || to.getByteSize() == null) {
+                to.setByteSize(from.getByteSize());
+            }
+            if (overwrite || to.getAvFileFormat() == null) {
+                to.setAvFileFormat(from.getAvFileFormat());
+            }
+            if (overwrite || to.getBitrate() == null) {
+                to.setBitrate(from.getBitrate());
+            }
 
-            to.setAvFileFormat(from.getAvFileFormat());
-            to.setBitrate(from.getBitrate());
-
-            to.setAudioAttributes(AudioAttributes.update(from.getAudioAttributes(), to.getAudioAttributes()));
-            to.setVideoAttributes(VideoAttributes.update(from.getVideoAttributes(), to.getVideoAttributes()));
+            to.setAudioAttributes(
+                AudioAttributes.update(
+                    from.getAudioAttributes(), to.getAudioAttributes(), overwrite
+                )
+            );
+            to.setVideoAttributes(
+                VideoAttributes.update(
+                    from.getVideoAttributes(), to.getVideoAttributes(), overwrite)
+            );
 
         } else {
             to = null;
