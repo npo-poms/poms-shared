@@ -28,6 +28,9 @@ public class Changeables {
         return CLOCK.get();
     }
 
+    /**
+     * Shortcut to {@link #clock()}.{@link Clock#instant() instant()}
+     */
     public static Instant instant() {
         return clock().instant();
     }
@@ -35,6 +38,9 @@ public class Changeables {
     private Changeables() {
     }
 
+    /**
+     * Calls both {@link Changeable#setLastModifiedInstant(Instant)} and {@link Changeable#setCreationInstant(Instant)}. The second one only if presently unset.
+     */
     public static void fillFor(@NonNull Changeable accountable, @NonNull Instant now) {
         accountable.setLastModifiedInstant(now);
         if (accountable.getCreationInstant() == null) {
@@ -42,7 +48,7 @@ public class Changeables {
         }
     }
 
-     public static void copyFrom(@NonNull Changeable source, @NonNull Changeable target) {
+    public static void copyFrom(@NonNull Changeable source, @NonNull Changeable target) {
         target.setLastModifiedInstant(source.getLastModifiedInstant());
         target.setCreationInstant(source.getCreationInstant());
     }
