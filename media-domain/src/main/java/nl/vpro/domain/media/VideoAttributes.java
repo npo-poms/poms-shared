@@ -92,16 +92,29 @@ public class VideoAttributes implements Serializable {
     }
 
     public static VideoAttributes update(VideoAttributes from, VideoAttributes to) {
+        return update(from, to, true);
+    }
+
+    public static VideoAttributes update(VideoAttributes from, VideoAttributes to, boolean overwrite) {
         if(from != null) {
             if(to == null) {
                 to = new VideoAttributes();
             }
-
-            to.setAspectRatio(from.getAspectRatio());
-            to.setHorizontalSize(from.getHorizontalSize());
-            to.setVerticalSize(from.getVerticalSize());
-            to.setVideoCoding(from.getVideoCoding());
-
+            if (overwrite || to.getColor() == null) {
+                to.setColor(from.getColor());
+            }
+            if (overwrite || to.getVideoCoding() == null) {
+                to.setVideoCoding(from.getVideoCoding());
+            }
+            if (overwrite || to.getAspectRatio() == null) {
+                to.setAspectRatio(from.getAspectRatio());
+            }
+            if (overwrite || to.getHorizontalSize() == null) {
+                to.setHorizontalSize(from.getHorizontalSize());
+            }
+            if (overwrite || to.getVerticalSize() == null) {
+                to.setVerticalSize(from.getVerticalSize());
+            }
         } else {
             to = null;
         }

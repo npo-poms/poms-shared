@@ -1,19 +1,23 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Locale;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import nl.vpro.domain.media.bind.LocaleCodeAdapter;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import nl.vpro.domain.media.bind.LocaleCodeAdapter;
 
 @Entity(name = "audioattributes")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -83,14 +87,23 @@ public class AudioAttributes implements Serializable {
     }
 
     public static AudioAttributes update(AudioAttributes from, AudioAttributes to) {
+        return update(from, to, true);
+    }
+    public static AudioAttributes update(AudioAttributes from, AudioAttributes to, boolean overwrite) {
         if(from != null) {
             if(to == null) {
                 to = new AudioAttributes();
             }
 
-            to.setAudioCoding(from.getAudioCoding());
-            to.setLanguage(from.getLanguage());
-            to.setNumberOfChannels(from.getNumberOfChannels());
+            if (overwrite || to.getAudioCoding() == null) {
+                to.setAudioCoding(from.getAudioCoding());
+            }
+            if (overwrite || to.getNumberOfChannels() == null) {
+                to.setNumberOfChannels(from.getNumberOfChannels());
+            }
+            if (overwrite || to.getLanguage() == null) {
+                to.setLanguage(from.getLanguage());
+            }
 
         } else {
             to = null;

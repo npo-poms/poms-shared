@@ -228,7 +228,11 @@ public class AuthorityLocations {
     }
 
     private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Set<OwnerType> replaces, Instant now) {
-        location.setAvAttributes(avAttributes);
+        if (location.getAvAttributes()  == null) {
+            location.setAvAttributes(avAttributes);
+        } else {
+            AVAttributes.update(avAttributes, location.getAvAttributes(), false);
+        }
         if (replaces != null && replaces.contains(location.getOwner())) {
             location.setOwner(owner);
         }
