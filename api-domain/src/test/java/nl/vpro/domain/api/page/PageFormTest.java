@@ -140,7 +140,7 @@ public class PageFormTest {
                 }
             }
             """;
-        PageForm form = Jackson2Mapper.INSTANCE.readValue(new StringReader(json), PageForm.class);
+        PageForm form = Jackson2Mapper.getInstance().readValue(new StringReader(json), PageForm.class);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         JAXB.marshal(form, out);
@@ -169,7 +169,7 @@ public class PageFormTest {
     @Test
     public void toXmlValidated() throws IOException, JAXBException {
         String json = "{\"searches\":{\"types\":[\"PLAYER\"]},\"sort\":{\"sortDate\":\"DESC\"},\"facets\":{\"keywords\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24},\"genres\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24},\"sections\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24}},\"mediaForm\":{\"facets\":{\"avTypes\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24}},\"highlight\":false},\"highlight\":false}";
-        PageForm form = Jackson2Mapper.INSTANCE.readValue(new StringReader(json), PageForm.class);
+        PageForm form = Jackson2Mapper.getInstance().readValue(new StringReader(json), PageForm.class);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         JAXB.marshal(form, out);

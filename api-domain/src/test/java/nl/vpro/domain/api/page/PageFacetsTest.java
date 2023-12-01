@@ -22,17 +22,19 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class PageFacetsTest {
 
+    Jackson2Mapper INSTANCE = Jackson2Mapper.getInstance();
+
     @Test
     public void testDateRangeWithPresetWhenNoArray() throws Exception {
         Reader reader = new StringReader("{\"sortDates\" : \"LAST_YEAR\"}");
-        PageFacets facets = Jackson2Mapper.INSTANCE.readValue(reader, PageFacets.class);
+        PageFacets facets = INSTANCE.readValue(reader, PageFacets.class);
         assertThat(facets.getSortDates().getRanges()).containsOnly(DateRangePreset.LAST_YEAR);
     }
 
     @Test
     public void testDateRangeCustomWhenNoArray() throws Exception {
         Reader reader = new StringReader("{\"sortDates\" : {\"name\":\"My range\",\"begin\":100,\"end\":200}}");
-        PageFacets facets = Jackson2Mapper.INSTANCE.readValue(reader, PageFacets.class);
+        PageFacets facets = INSTANCE.readValue(reader, PageFacets.class);
         assertThat(facets.getSortDates().getRanges()).containsOnly(new DateRangeFacetItem("My range", Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)));
     }
 
@@ -40,7 +42,7 @@ public class PageFacetsTest {
     @Test
     public void testSectionFacets() throws Exception {
         Reader reader = new StringReader("{\"sections\" : {}}");
-        PageFacets facets = Jackson2Mapper.INSTANCE.readValue(reader, PageFacets.class);
+        PageFacets facets = INSTANCE.readValue(reader, PageFacets.class);
         System.out.println(facets.getSections());
     }
 }
