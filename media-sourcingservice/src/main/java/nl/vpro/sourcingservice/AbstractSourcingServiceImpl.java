@@ -559,6 +559,16 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     @ManagedAttribute
+    public int getVersion() {
+        return version;
+    }
+
+    @ManagedAttribute
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    @ManagedAttribute
     public String getMultipartPart() {
         return multipartPart;
     }
