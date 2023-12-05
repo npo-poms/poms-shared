@@ -304,7 +304,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
      *
      * If all locations will be revoked before the registered publishstop in the restriction, then this will retunr the lastest valut of that.
      */
-    @XmlAttribute
+    @XmlAttribute(name = "publishStop")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
