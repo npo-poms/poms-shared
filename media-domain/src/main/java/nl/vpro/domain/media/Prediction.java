@@ -22,10 +22,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Range;
 
 import nl.vpro.domain.*;
 import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.util.Ranges;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.EnumType.STRING;
@@ -338,10 +340,39 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         return result;
     }
 
+    /**
+     * @since 7.10
+     */
+    public Instant getOwnPublishStartInstant() {
+        return publishStart;
+    }
 
+    /**
+     * @since 7.10
+     */
     public Instant getOwnPublishStopInstant() {
         return publishStop;
     }
+
+    /**
+     * 'Own' embargo wrapped in a {@link Range}.
+     * <p>
+     * Note that this ensures that stop >= start
+     * @since 7.10
+     * @see #asRange()
+     * @see #getOwnEmbargo()
+     */
+    public Range<Instant> getOwnPublicationRange() {
+        return Ranges.closedOpen(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+    }
+    /**
+     * @since 7.10
+     * @see #getOwnPublicationRange()
+     */
+    public Embargo getOwnEmbargo() {
+        return Embargos.of(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+    }
+
 
 
     @NonNull

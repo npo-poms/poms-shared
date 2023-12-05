@@ -870,7 +870,8 @@ public class MediaObjectTest {
 
         program.setPredictions(Arrays.asList(new Prediction(Platform.INTERNETVOD, Prediction.State.ANNOUNCED)));
 
-        assertThat(program.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.ANNOUNCED);
+        assertThat(program.getPrediction(Platform.INTERNETVOD).getState())
+            .isEqualTo(Prediction.State.ANNOUNCED);
     }
 
 
@@ -891,9 +892,10 @@ public class MediaObjectTest {
         Prediction plus = target.getPrediction(Platform.PLUSVOD);
         assertThat(plus).isNotNull();
         assertThat(plus.isPlannedAvailability()).isTrue();
-        assertThat(plus.getState()).isEqualTo(Prediction.State.ANNOUNCED);
+        assertThat(plus.getState()).isEqualTo(Prediction.State.REVOKED);
         assertThat(plus.getPublishStartInstant()).isNull();
-        assertThat(plus.getPublishStopInstant()).isNull();
+        assertThat(plus.getOwnPublishStopInstant()).isNull();
+        assertThat(plus.getPublishStopInstant()).isEqualTo(Instant.ofEpochMilli(10));
 
         // set also constraint on prediction, but wider
         target.getPrediction(Platform.PLUSVOD).setPublishStopInstant(Instant.ofEpochMilli(4));

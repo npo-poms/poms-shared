@@ -2130,6 +2130,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     public void setPredictions(Collection<Prediction> predictions) {
         this.predictions = updateSortedSet(this.predictions, predictions);
+        for (Prediction p : this.predictions) {
+            p.setParent(this);
+        }
         this.predictionsForXml = null;
     }
 
