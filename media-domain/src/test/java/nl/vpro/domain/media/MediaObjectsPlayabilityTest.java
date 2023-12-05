@@ -173,7 +173,7 @@ class MediaObjectsPlayabilityTest {
                     A_INTERNETVOD,
                     A_NONE,
                     mapRanges(INTERNETVOD, null, expired)
-                ).withPublished(A_NONE, A_NONE, A_NONE)
+                )
             ),
             Arguments.of(
                 "just a legacy windows media location",
@@ -228,16 +228,23 @@ class MediaObjectsPlayabilityTest {
             Arguments.of(
                 "an expired location with explicit INTERNETVOD",
                 fixed()
-                    .locations(Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(expired).build())
+                    .locations(
+                        Location.builder()
+                            .platform(INTERNETVOD)
+                            .programUrl("https://bla.com/foobar.mp4")
+                            .publishStop(expired)
+                            .build()
+                    )
                     .build(),
-                expected(A_NONE, A_INTERNETVOD, A_NONE, mapRanges(INTERNETVOD, null, expired)).withPublished(A_NONE, A_NONE, A_NONE)
+                expected(A_NONE, A_INTERNETVOD, A_NONE, mapRanges(INTERNETVOD, null, expired)
+                ).withPublished(A_NONE, A_INTERNETVOD, A_NONE)
             ),
             Arguments.of(
                 "an expired location with explicit INTERNETVOD",
                 fixed()
                     .locations(Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(expired).build())
                     .build(),
-                expected(A_NONE, A_INTERNETVOD, A_NONE, mapRanges(INTERNETVOD, null, expired)).withPublished(A_NONE, A_NONE, A_NONE)
+                expected(A_NONE, A_INTERNETVOD, A_NONE, mapRanges(INTERNETVOD, null, expired))
             ),
             Arguments.of(
                 "an expired location with explicit PLUSVOD",
@@ -245,14 +252,22 @@ class MediaObjectsPlayabilityTest {
                     //.predictions(Prediction.builder().publishStop(expired).platform(PLUSVOD).build())
                     .locations(Location.builder().platform(PLUSVOD).publishStop(expired).programUrl("https://bla.com/foobar.mp4").build())
                     .build(),
-                expected(A_NONE, A_PLUSVOD, A_NONE, mapRanges(PLUSVOD, null, expired))
-                    .withPublished(A_NONE, A_NONE, A_NONE)
+                expected(A_NONE, A_PLUSVOD, A_NONE,
+                    mapRanges(PLUSVOD, null, expired)
+                ).withPublished(A_NONE, A_PLUSVOD, A_NONE)
             ),
             Arguments.of(
                 "realized prediction",
                 fixed()
-                    .locations(Location.builder().platform(null).programUrl("https://download.omroep.nl/vpro/algemeen/yous_yay_newemotions/yous_yay_johan fretz.mp3").build())
-                    .predictions(Prediction.realized().platform(INTERNETVOD).build())
+                    .locations(
+                        Location.builder()
+                            .platform(null)
+                            .programUrl("https://download.omroep.nl/vpro/algemeen/yous_yay_newemotions/yous_yay_johan fretz.mp3")
+                            .build()
+                    )
+                    .predictions(
+                        Prediction.realized().platform(INTERNETVOD).build()
+                    )
                     .build(),
                 expected(A_INTERNETVOD, A_NONE, A_NONE, mapRanges(INTERNETVOD, null, null))
             ),
@@ -266,7 +281,7 @@ class MediaObjectsPlayabilityTest {
                 expected(A_PLUSVOD, A_INTERNETVOD, A_NONE,
                     mapRanges(INTERNETVOD, null, expired,
                         PLUSVOD, null, null)
-                ).withPublished(A_PLUSVOD, A_NONE, A_NONE)
+                )
             ),
             Arguments.of(
                 "revoked prediction and expired location", // if the expired location is visible it can be used
@@ -285,7 +300,7 @@ class MediaObjectsPlayabilityTest {
                         INTERNETVOD, null, expired,
                         PLUSVOD, null, expired
                     ))
-                    .withPublished(A_NONE, A_PLUSVOD, A_NONE)
+                    .withPublished(A_NONE, A_BOTH, A_NONE)
             ),
             Arguments.of(
                 "revoked prediction but no locations",

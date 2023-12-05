@@ -241,6 +241,7 @@ const nl_vpro_domain_media_MediaObjects = (function() {
             if (this.nowPlayableForPlatform(platform, mediaObject)) {
                 return false;
             }
+            console.log(mediaObject);
             prediction = undefinedIsEmpty(mediaObject.predictions)
                 .filter(p => platformMatches(platform, p.platform))
 
@@ -259,6 +260,7 @@ const nl_vpro_domain_media_MediaObjects = (function() {
          * @return {array}  list of platforms the given mediaobject is was playable on
          */
         wasPlayable: function ( mediaObject) {
+            console.log(mediaObject);
              return  Object.values(platforms)
                 .map(platform =>
                     [platform, this.wasPlayableForPlatform(platform, mediaObject)])

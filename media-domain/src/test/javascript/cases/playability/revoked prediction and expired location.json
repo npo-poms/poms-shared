@@ -1,7 +1,7 @@
 {
   "description" : "revoked prediction and expired location",
   "publishedNowExpectedPlatforms" : [ ],
-  "publishedWasExpectedPlatforms" : [ "PLUSVOD" ],
+  "publishedWasExpectedPlatforms" : [ "INTERNETVOD", "PLUSVOD" ],
   "publishedWillExpectedPlatforms" : [ ],
   "nowExpectedPlatforms" : [ ],
   "wasExpectedPlatforms" : [ "INTERNETVOD", "PLUSVOD" ],
