@@ -546,6 +546,9 @@ public class Location extends PublishableObject<Location>
         return this;
     }
 
+    /**
+     * @deprecated We filled to platform for every location, so this is now always true (though december 2023 these changes are not yet all published!)
+     */
     @Deprecated
     public boolean hasPlatform() {
         return platform != null;
