@@ -60,7 +60,7 @@ import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
-import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.*;
 import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
@@ -339,7 +339,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<@NotNull GeoRestriction> geoRestrictions;
 
-    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = {ALL})
+    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
     // hibernates on merge first merges an object without titles.
@@ -353,13 +353,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<@NotNull Description> descriptions;
 
-    @ManyToMany(cascade = {ALL})
+    @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH}) // todo since the genre table only contains 1 field, namely the id, which is already in the mediaobject_genre table, this odd.
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected Set<@NotNull Genre> genres;
 
-    @ManyToMany(cascade = {ALL})
+    @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
