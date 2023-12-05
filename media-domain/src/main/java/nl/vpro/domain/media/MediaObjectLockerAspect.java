@@ -26,16 +26,19 @@ import nl.vpro.util.locker.ObjectLocker;
  */
 @Aspect
 @Slf4j
-// DeclarePrecedence not supported by spring AOP, this is just extended in media project with a spring @Order annotation in stead.
+// DeclarePrecedence not supported by spring AOP, this is just extended in media project with a spring @Order annotation instead.
 //@DeclarePrecedence("nl.vpro.domain.media.MediaObjectLockerAspect, org.springframework.transaction.aspectj.AnnotationTransactionAspect, *")
 public abstract class MediaObjectLockerAspect  {
 
 
+    abstract String getCorrelationId(String mid);
+
+
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
-        Object media = joinPoint.getArgs()[annotation.argNumber()];
-        String method = annotation.method();
-        MediaIdentifiable.Correlation correlation = getCorrelation(method, media);
+        final Object media = joinPoint.getArgs()[annotation.argNumber()];
+        final String method = annotation.method();
+        final MediaIdentifiable.Correlation correlation = getCorrelation(method, media);
 
         String reason = annotation.reason();
 
@@ -91,7 +94,7 @@ public abstract class MediaObjectLockerAspect  {
         }
         if (StringUtils.isNotBlank(method)) {
             try {
-                Method m = object.getClass().getMethod(method);
+                final Method m = object.getClass().getMethod(method);
                 return MediaIdentifiable.Correlation.mid(StringUtils.trim((String) m.invoke(object)));
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 log.error(e.getMessage(), e);
@@ -102,11 +105,11 @@ public abstract class MediaObjectLockerAspect  {
                 return  MediaIdentifiable.Correlation.mid(object.toString());
             }
             if (object instanceof MediaIdentifiable mediaIdentifiable) {
-                MediaIdentifiable.Correlation correlation = mediaIdentifiable.getCorrelation();
+                final MediaIdentifiable.Correlation correlation = mediaIdentifiable.getCorrelation();
                 if (correlation == null || correlation.getType() == MediaIdentifiable.Correlation.Type.HASH) {
                     boolean warn = true;
-                    if (object instanceof MediaObject) {
-                        if (((MediaObject) object).getId() == null) {
+                    if (object instanceof MediaObject mediaObject) {
+                        if (mediaObject.getId() == null) {
                             warn = false;
                         }
                     }
