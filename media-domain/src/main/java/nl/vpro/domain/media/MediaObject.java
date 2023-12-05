@@ -62,6 +62,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.Changeables.instant;
+import static nl.vpro.domain.Embargos.unrestricted;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
 import static nl.vpro.domain.media.MediaObject.*;
@@ -72,8 +73,8 @@ import static nl.vpro.domain.media.MediaObject.*;
  * Media objects are the most central objects of POMS. A media object  represents one document of meta-information, with all titles, descriptions, tags and
  * all other fields that are associated with 'media' in general.
  * <p>
- * Also {@link Group}s are an extension, which implies e.g. that things like a {@link GroupType#PLAYLIST} may themselves have similar meta data, though they
- * basicly represent groups of other {@link MediaObject}s, and are not themselves associated with actual audio or video.
+ * Also {@link Group}s are an extension, which implies e.g. that things like a {@link GroupType#PLAYLIST} may themselves have similar metadata, though they
+ * basically represent groups of other {@link MediaObject}s, and are not themselves associated with actual audio or video.
  * <p>
  * But also {@link Program}s themselves can function as a group and therefor have 'members' (e.g. such a member may be a {@link ProgramType#PROMO}).
  * <p>
@@ -298,7 +299,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // Improvement: cache configuration can be put in a hibernate-config.xml. See
     // https://docs.jboss.org/hibernate/orm/4.0/devguide/en-US/html/ch06.html
     @StringList(maxLength = 255)
-    protected List<@NotNull @CRID  String> crids;
+    protected List<@NotNull @CRID String> crids;
 
     @ManyToMany
     @OrderColumn(name = "list_index",
@@ -2098,6 +2099,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (predictions == null) {
             predictions = new TreeSet<>();
         }
+        // make sure for every location there is a prediction!
+        getLocations().stream()
+            .filter(Location::hasPlatform)
+            .map(Location::getPlatform)
+            .sorted()
+            .distinct()
+            .forEach(p -> findOrCreatePrediction(p, unrestricted(), true));
 
         // SEE https://jira.vpro.nl/browse/MSE-2313
         return new SortedSetSameElementWrapper<Prediction>(sorted(predictions)) {
@@ -2176,8 +2184,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
         Prediction prediction = getPrediction(platform);
         if (prediction == null) {
-            prediction = findOrCreatePrediction(platform, location);
-            prediction.setPlannedAvailability(true);
+            prediction = findOrCreatePrediction(platform, unrestricted(), true);
         }
         prediction.setState(Prediction.State.REALIZED);
 
@@ -2192,22 +2199,23 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public Prediction findOrCreatePrediction(Platform platform) {
-        return findOrCreatePrediction(platform, Embargos.unrestrictedInstance());
+        return findOrCreatePrediction(platform, unrestricted(), false);
     }
 
-    protected Prediction findOrCreatePrediction(Platform platform, Embargo embargo) {
-        Prediction prediction = getPrediction(platform);
+    protected Prediction findOrCreatePrediction(Platform platform, Embargo embargo, boolean planned) {
+        Prediction prediction = MediaObjects.getPrediction(platform, predictions);
         if (prediction == null) {
             log.debug("Creating prediction object for {}: {}", platform, this);
             prediction = new Prediction(platform);
             Embargos.copy(embargo, prediction);
-            prediction.setPlannedAvailability(false);
+            prediction.setPlannedAvailability(planned);
             prediction.setParent(this);
             prediction.setAuthority(Authority.USER);
             if (predictions == null) {
                 predictions = new TreeSet<>();
             }
             this.predictions.add(prediction);
+            this.predictionsForXml = null;
         }
         return prediction;
     }
