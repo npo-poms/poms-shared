@@ -112,11 +112,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     protected Instant publishStart;
 
-    @XmlAttribute
-    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-    @XmlSchemaType(name = "dateTime")
-    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+
+    @XmlTransient
     protected Instant publishStop;
 
     @NotNull
@@ -302,10 +299,50 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
 
+    /**
+     * Then this prediction will be revoked.
+     *
+     * If all locations will be revoked before the registered publishstop in the restriction, then this will retunr the lastest valut of that.
+     */
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @Override
     public Instant getPublishStopInstant() {
+        Instant result =  publishStop;
+        if (mediaObject != null && state == State.REALIZED) {
+            Instant latestLocation = Instant.MIN;
+            int foundLocations = 0;
+            for (Location l : mediaObject.getLocations()) {
+                if (l.getPlatform() == platform && l.getOwnEmbargo().isPublishable()) {
+                    foundLocations++;
+                    if (l.getOwnPublishStopInstant() == null) {
+                        latestLocation = null;
+                        break;
+                    } else if (l.getOwnPublishStopInstant().isAfter(latestLocation)) {
+                        latestLocation = l.getOwnPublishStopInstant();
+                    }
+                }
+            }
+            if (foundLocations > 0) {
+                if (result == null || (latestLocation != null && latestLocation.isBefore(result))) {
+                    result = latestLocation;
+                }
+            } else {
+                log.warn("{} is realized but no locations!", this);
+            }
+
+        }
+        return result;
+    }
+
+
+    public Instant getOwnPublishStopInstant() {
         return publishStop;
     }
+
 
     @NonNull
     @Override
