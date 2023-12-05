@@ -169,6 +169,13 @@ public class Embargos {
     public static MutableEmbargo<BasicEmbargo> unrestrictedInstance() {
         return new BasicEmbargo(null,  null);
     }
+
+    /**
+     * Just as {@link #unrestrictedInstance()}, but nicer for static imports (because in that case it doesn't show what Instance of)
+     */
+    public static MutableEmbargo<BasicEmbargo> unrestricted() {
+        return unrestrictedInstance();
+    }
     public static MutableEmbargo<BasicEmbargo> restrictedInstance() {
         return new BasicEmbargo(Instant.MAX, Instant.MIN);
     }
