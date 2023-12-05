@@ -44,11 +44,12 @@
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "platform" : "INTERNETVOD"
+      "platform" : "INTERNETVOD",
+      "publishStop" : 1635253190000
     }, {
       "state" : "REVOKED",
       "platform" : "PLUSVOD",
-      "publishStopInstant" : 1635253190000
+      "publishStop" : 1635253190000
     } ],
     "locations" : [ ]
   },
@@ -69,11 +70,12 @@
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "platform" : "INTERNETVOD"
+      "platform" : "INTERNETVOD",
+      "publishStop" : 1635253190000
     }, {
       "state" : "REVOKED",
       "platform" : "PLUSVOD",
-      "publishStopInstant" : 1635253190000
+      "publishStop" : 1635253190000
     } ],
     "locations" : [ {
       "programUrl" : "https://download.omroep.nl/vpro/algemeen/yous_yay_newemotions/yous_yay_johan fretz.mp3",

@@ -44,7 +44,7 @@
     "predictions" : [ {
       "state" : "REVOKED",
       "platform" : "PLUSVOD",
-      "publishStopInstant" : 1635253190000
+      "publishStop" : 1635253190000
     } ]
   },
   "mediaObject" : {
@@ -65,7 +65,7 @@
     "predictions" : [ {
       "state" : "REVOKED",
       "platform" : "PLUSVOD",
-      "publishStopInstant" : 1635253190000
+      "publishStop" : 1635253190000
     } ]
   }
 }
