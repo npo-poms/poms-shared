@@ -318,7 +318,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
             Instant latestLocation = Instant.MIN;
             int foundLocations = 0;
             for (Location l : mediaObject.getLocations()) {
-                if (l.getPlatform() == platform) {
+                if (platform.matches(l.getPlatform())) {
                     foundLocations++;
                     if (l.getOwnPublishStopInstant() == null) {
                         latestLocation = null;
