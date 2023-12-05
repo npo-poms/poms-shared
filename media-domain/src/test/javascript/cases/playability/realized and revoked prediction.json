@@ -18,6 +18,28 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "realized and revoked prediction",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
+    "expandedTitles" : [ {
+      "value" : "realized and revoked prediction",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "realized and revoked prediction",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "realized and revoked prediction",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "realized and revoked prediction",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
@@ -46,6 +68,11 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "realized and revoked prediction",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",

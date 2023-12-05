@@ -16,6 +16,28 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "an INTERNETVOD prediction but the location became unplayable",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
+    "expandedTitles" : [ {
+      "value" : "an INTERNETVOD prediction but the location became unplayable",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "an INTERNETVOD prediction but the location became unplayable",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "an INTERNETVOD prediction but the location became unplayable",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "an INTERNETVOD prediction but the location became unplayable",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REALIZED",
@@ -41,6 +63,11 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "an INTERNETVOD prediction but the location became unplayable",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REALIZED",
