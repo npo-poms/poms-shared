@@ -1,7 +1,7 @@
 {
   "description" : "an expired location with explicit INTERNETVOD",
   "publishedNowExpectedPlatforms" : [ ],
-  "publishedWasExpectedPlatforms" : [ ],
+  "publishedWasExpectedPlatforms" : [ "INTERNETVOD" ],
   "publishedWillExpectedPlatforms" : [ ],
   "nowExpectedPlatforms" : [ ],
   "wasExpectedPlatforms" : [ "INTERNETVOD" ],

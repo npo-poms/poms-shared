@@ -1,7 +1,7 @@
 {
   "description" : "an expired location with explicit PLUSVOD",
   "publishedNowExpectedPlatforms" : [ ],
-  "publishedWasExpectedPlatforms" : [ ],
+  "publishedWasExpectedPlatforms" : [ "PLUSVOD" ],
   "publishedWillExpectedPlatforms" : [ ],
   "nowExpectedPlatforms" : [ ],
   "wasExpectedPlatforms" : [ "PLUSVOD" ],
