@@ -1301,14 +1301,13 @@ public class MediaObjects {
                          continue;
                      }
                      hasLocations = true;
-                     if (! location.wasUnderEmbargo(now)) {
+                     if (location.isConsiderableForPublication() && ! location.wasUnderEmbargo(now)) {
                          allInPast = false;
                      }
                      if (
                          //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
-                         location.getPlatform() == prediction.getPlatform()
-                             && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                             && location.inPublicationWindow(instant())
+                             Workflow.PUBLICATIONS.contains(location.getWorkflow())
+                             && location.inPublicationWindow(now)
                      ) {
 
 
@@ -1337,7 +1336,7 @@ public class MediaObjects {
                  Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                      .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                      .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
-                     .filter(l -> l.inPublicationWindow(instant()))
+                     .filter(l -> l.inPublicationWindow(now))
                      .findFirst();
                  if (matchingLocation.isEmpty()) {
                      final List<Location> withoutFilter = mediaObject.getLocations().stream()
