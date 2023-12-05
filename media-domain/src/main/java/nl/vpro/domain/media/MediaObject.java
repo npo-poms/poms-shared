@@ -2100,7 +2100,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
 
         // SEE https://jira.vpro.nl/browse/MSE-2313
-        return new SortedSetSameElementWrapper<Prediction>(sorted(predictions)) {
+        return new SortedSetSameElementWrapper<>(sorted(predictions)) {
             @Override
             protected Prediction adapt(Prediction prediction) {
                 prediction.setParent(MediaObject.this);
