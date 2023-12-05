@@ -1294,11 +1294,13 @@ public class MediaObjects {
          switch (prediction.getState()) {
              case ANNOUNCED, REVOKED -> {
                  boolean allInPast = true;
+                 boolean hasLocations = false;
                  boolean realized = false;
                  for (Location location : mediaObject.getLocations()) {
                      if ( ! prediction.getPlatform().matches(location.getPlatform())) {
                          continue;
                      }
+                     hasLocations = true;
                      if (! location.wasUnderEmbargo(now)) {
                          allInPast = false;
                      }
@@ -1319,7 +1321,7 @@ public class MediaObjects {
                          break;
                      }
                  }
-                 if (! realized && allInPast && prediction.getState() == Prediction.State.ANNOUNCED) {
+                 if (hasLocations && ! realized && allInPast && prediction.getState() == Prediction.State.ANNOUNCED) {
                      log.info("Silently set state of {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, mediaObject.mid, realized, allInPast);
                      prediction.setState(Prediction.State.REVOKED);
                      if (republish) {
