@@ -43,7 +43,8 @@
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "platform" : "PLUSVOD"
+      "platform" : "PLUSVOD",
+      "publishStop" : 1635253190000
     } ],
     "locations" : [ ]
   },
@@ -64,7 +65,8 @@
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "platform" : "PLUSVOD"
+      "platform" : "PLUSVOD",
+      "publishStop" : 1635253190000
     } ],
     "locations" : [ {
       "programUrl" : "https://bla.com/foobar.mp4",

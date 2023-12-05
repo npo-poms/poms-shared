@@ -2218,9 +2218,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (prediction == null) {
             log.debug("Creating prediction object for {}: {}", platform, this);
             prediction = new Prediction(platform);
+            prediction.setParent(this);
             Embargos.copy(embargo, prediction);
             prediction.setPlannedAvailability(planned);
-            prediction.setParent(this);
             prediction.setAuthority(Authority.USER);
             if (predictions == null) {
                 predictions = new TreeSet<>();

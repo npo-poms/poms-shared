@@ -44,7 +44,8 @@
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "platform" : "INTERNETVOD"
+      "platform" : "INTERNETVOD",
+      "publishStop" : 1635253190000
     }, {
       "state" : "REALIZED",
       "platform" : "PLUSVOD"
@@ -77,7 +78,8 @@
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "platform" : "INTERNETVOD"
+      "platform" : "INTERNETVOD",
+      "publishStop" : 1635253190000
     }, {
       "state" : "REALIZED",
       "platform" : "PLUSVOD"

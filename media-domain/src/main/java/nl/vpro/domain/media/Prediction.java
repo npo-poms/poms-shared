@@ -312,11 +312,11 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public Instant getPublishStopInstant() {
         Instant result =  publishStop;
-        if (mediaObject != null && state == State.REALIZED) {
+        if (mediaObject != null) {
             Instant latestLocation = Instant.MIN;
             int foundLocations = 0;
             for (Location l : mediaObject.getLocations()) {
-                if (l.getPlatform() == platform && l.getOwnEmbargo().isPublishable()) {
+                if (l.getPlatform() == platform) {
                     foundLocations++;
                     if (l.getOwnPublishStopInstant() == null) {
                         latestLocation = null;
