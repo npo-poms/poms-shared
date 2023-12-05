@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -29,6 +30,8 @@ import nl.vpro.util.locker.ObjectLocker;
 // DeclarePrecedence not supported by spring AOP, this is just extended in media project with a spring @Order annotation in stead.
 //@DeclarePrecedence("nl.vpro.domain.media.MediaObjectLockerAspect, org.springframework.transaction.aspectj.AnnotationTransactionAspect, *")
 public abstract class MediaObjectLockerAspect  {
+
+    abstract Optional<String> getCorrelationId(String mid);
 
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
