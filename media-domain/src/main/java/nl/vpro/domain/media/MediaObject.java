@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.function.Consumer;import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
 import javax.persistence.Entity;
@@ -2099,20 +2099,30 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (predictions == null) {
             predictions = new TreeSet<>();
         }
+
+        final List<Prediction> implicitelyCreated = new ArrayList<>();
         // make sure for every location there is a prediction!
         getLocations().stream()
             .filter(Location::hasPlatform)
+            .filter(Location::isConsiderableForPublication)
             .map(Location::getPlatform)
             .sorted()
             .distinct()
-            .forEach(p -> findOrCreatePrediction(p, unrestricted(), true));
+            .forEach(p -> {
+                findOrCreatePrediction(p, unrestricted(), true, implicitelyCreated::add);
+                }
+            );
+        for (Prediction created : implicitelyCreated) {
+            log.info("Created prediction {} for {}", created, this);
+            MediaObjects.correctPrediction(created, this, false);
+        }
 
         // SEE https://jira.vpro.nl/browse/MSE-2313
         return new SortedSetSameElementWrapper<>(sorted(predictions)) {
             @Override
             protected Prediction adapt(Prediction prediction) {
                 prediction.setParent(MediaObject.this);
-                MediaObjects.correctPrediction(prediction, MediaObject.this);
+                MediaObjects.autoCorrectPrediction(prediction, MediaObject.this);
                 return prediction;
             }
         };
@@ -2184,9 +2194,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
         Prediction prediction = getPrediction(platform);
         if (prediction == null) {
-            prediction = findOrCreatePrediction(platform, unrestricted(), true);
+            findOrCreatePrediction(platform, unrestricted(), true, (c) -> {
+                MediaObjects.correctPrediction(c, this, false);
+            });
         }
-        prediction.setState(Prediction.State.REALIZED);
 
     }
 
@@ -2199,10 +2210,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public Prediction findOrCreatePrediction(Platform platform) {
-        return findOrCreatePrediction(platform, unrestricted(), false);
+        return findOrCreatePrediction(platform, unrestricted(), false, (c) -> {});
     }
 
-    protected Prediction findOrCreatePrediction(Platform platform, Embargo embargo, boolean planned) {
+    protected Prediction findOrCreatePrediction(Platform platform, Embargo embargo, boolean planned, Consumer<Prediction> onCreate) {
         Prediction prediction = MediaObjects.getPrediction(platform, predictions);
         if (prediction == null) {
             log.debug("Creating prediction object for {}: {}", platform, this);
@@ -2216,6 +2227,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             }
             this.predictions.add(prediction);
             this.predictionsForXml = null;
+            onCreate.accept(prediction);
         }
         return prediction;
     }

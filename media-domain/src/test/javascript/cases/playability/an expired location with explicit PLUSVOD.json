@@ -18,7 +18,33 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
+    "expandedTitles" : [ {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "PLUSVOD"
+    } ],
     "locations" : [ ]
   },
   "mediaObject" : {
@@ -30,7 +56,16 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "PLUSVOD"
+    } ],
     "locations" : [ {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {

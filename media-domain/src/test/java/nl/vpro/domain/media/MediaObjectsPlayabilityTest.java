@@ -163,7 +163,10 @@ class MediaObjectsPlayabilityTest {
             Arguments.of(
                 "just a legacy revoked location",
                 fixed()
-                    .locations(Location.builder().platform(null).programUrl("https://bla.com/revoke.foobar.mp4").publishStop(expired).build())
+                    .locations(Location.builder().platform(null)
+                        .programUrl("https://bla.com/revoke.foobar.mp4")
+                        .publishStop(expired)
+                        .build())
                     .build(),
                 expected(
                     A_NONE,
@@ -183,11 +186,23 @@ class MediaObjectsPlayabilityTest {
                 "a location with explicit INTERNETVOD",
                 fixed()
                     .locations(
-                        Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build(),
-                        Location.builder().platform(PLUSVOD).workflow(Workflow.DELETED).programUrl("https://bla.com/deleted.mp4").build()
+                        Location.builder()
+                            .platform(INTERNETVOD)
+                            .programUrl("https://bla.com/foobar.mp4")
+                            .build(),
+                        Location.builder()
+                            .platform(PLUSVOD)
+                            .workflow(Workflow.DELETED)
+                            .programUrl("https://bla.com/deleted.mp4")
+                            .build()
                     )
                     .build(),
-                expected(A_INTERNETVOD, A_NONE, A_NONE, mapRanges(INTERNETVOD, null, null))
+                expected(
+                    A_INTERNETVOD,
+                    A_NONE,
+                    A_NONE,
+                    mapRanges(INTERNETVOD, null, null)
+                )
             ),
             Arguments.of(
                 "an INTERNETVOD prediction but the location became unplayable",
@@ -307,7 +322,10 @@ class MediaObjectsPlayabilityTest {
                     .build(),
                 expected(A_INTERNETVOD, A_NONE, A_NONE, mapRanges(INTERNETVOD, null, null))
             )
-        );
+        ).peek(a -> {
+            MediaObject object = (MediaObject) a.get()[1];
+            object.setMainTitle((String) a.get()[0]);
+        });
     }
 
     static Map<Platform, Range<Instant>> mapRanges(Object... keyValues) {
@@ -334,7 +352,8 @@ class MediaObjectsPlayabilityTest {
     }
 
     public static Stream<Arguments> willCases() {
-        return examples().map(a -> Arguments.of(a.get()[0], a.get()[1], ((ExpectedPlatforms) a.get()[2]).getWillBe()));
+        return examples()
+            .map(a -> Arguments.of(a.get()[0], a.get()[1], ((ExpectedPlatforms) a.get()[2]).getWillBe()));
     }
 
     public static Stream<Arguments> ranges() {
@@ -372,10 +391,23 @@ class MediaObjectsPlayabilityTest {
     @ParameterizedTest
     @MethodSource("willCases")
     void willBePlayable(String description, MediaObject object, Platform[] expectedPlatforms) throws JsonProcessingException {
+        for (Platform platform : expectedPlatforms) {
+            assertThat(MediaObjects.willBePlayable(platform, object)).isTrue();
+        }
+        for (Platform platform : Stream.of(Platform.values()).filter(p -> !Arrays.asList(expectedPlatforms).contains(p)).toList()) {
+            assertThat(MediaObjects
+                .willBePlayable(platform, object))
+                .withFailMessage(() ->
+                    "Platform " + platform + " is not to be available in the future"
+                )
+                .isFalse();
+        }
         assertThat(MediaObjects.willBePlayable(object)).containsExactly(expectedPlatforms);
         // should still be valid if mediaobject gets published
         MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
-        assertThat(MediaObjects.willBePlayable(published)).containsExactly(expectedPlatforms);
+        assertThat(MediaObjects.willBePlayable(published))
+            .withFailMessage("after unmarshalling no " + Arrays.asList(expectedPlatforms))
+            .containsExactly(expectedPlatforms);
     }
 
     @ParameterizedTest

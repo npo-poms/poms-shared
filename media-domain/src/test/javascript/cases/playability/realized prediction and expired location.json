@@ -19,8 +19,33 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "realized prediction and expired location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
+    "expandedTitles" : [ {
+      "value" : "realized prediction and expired location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "realized prediction and expired location",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "realized prediction and expired location",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "realized prediction and expired location",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "INTERNETVOD"
+    }, {
       "state" : "REALIZED",
       "platform" : "PLUSVOD"
     } ],
@@ -44,8 +69,16 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "realized prediction and expired location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "INTERNETVOD"
+    }, {
       "state" : "REALIZED",
       "platform" : "PLUSVOD"
     } ],
