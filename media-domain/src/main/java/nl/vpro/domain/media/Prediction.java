@@ -438,18 +438,23 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     /**
-     * @TODO Equals is not always transitive?, because of null-ness of parent,
+     *
      */
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Prediction other)) {
             return false;
         }
+        return equalsIgnoreParent(other) && Objects.equals(getParent(), other.getParent());
+    }
+
+    public boolean equalsIgnoreParent(Prediction other) {
+
         if (platform == null || other.platform == null) {
             return other == this;
         }
-        return Objects.equals(platform, other.platform) &&
-            (getParent() == null || other.getParent() == null || Objects.equals(getParent(), other.getParent()));
+        return Objects.equals(platform, other.platform);
     }
 
     public boolean fieldEquals(Prediction prediction) {
