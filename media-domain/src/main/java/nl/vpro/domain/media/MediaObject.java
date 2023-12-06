@@ -341,7 +341,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<@NotNull GeoRestriction> geoRestrictions;
 
-    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
+    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = {ALL})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
     // hibernates on merge first merges an object without titles.
@@ -1998,7 +1998,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public List<MediaObject> findAncestry(MediaObject ancestor) {
-        List<MediaObject> ancestry = new ArrayList<>();
+        final List<MediaObject> ancestry = new ArrayList<>();
         findAncestry(ancestor, ancestry);
         return ancestry;
     }
