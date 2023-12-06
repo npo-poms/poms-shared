@@ -138,7 +138,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     public PublishableObject() {
     }
 
-    public PublishableObject(long id) {
+    public PublishableObject(Long id) {
         this.id = id;
     }
 

@@ -132,7 +132,7 @@ public final class Program extends MediaObject {
     private Boolean pdAuthorityImported;
 
     public Program() {
-        this(null, null);
+
     }
 
     public Program(String mid, long id) {
@@ -142,7 +142,8 @@ public final class Program extends MediaObject {
 
 
     public Program(String mid) {
-        this(mid, -1);
+        super();
+        this.mid = mid;
     }
 
 
