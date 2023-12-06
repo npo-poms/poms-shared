@@ -355,7 +355,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<@NotNull Description> descriptions;
 
-    @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH}) // todo since the genre table only contains 1 field, namely the id, which is already in the mediaobject_genre table, this odd.
+    @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH}) // todo since the genre table only contains 1 field, namely the id, which is already in the mediaobject_genre table, this is odd.
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
