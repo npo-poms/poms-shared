@@ -284,11 +284,17 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpRequest statusRequest = deleteRequest(mid, daysBeforeHardDelete);
         final HttpResponse<String> statusResponse = client.send(statusRequest, HttpResponse.BodyHandlers.ofString());
         meter("status.delete", statusResponse);
+        if (statusResponse.statusCode() == 404) {
+            return new DeleteResponse("not found", "Already deleted?");
+        }
         if (statusResponse.statusCode() > 299) {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
-
-        return JSONREADER.readValue(statusResponse.body(), DeleteResponse.class);
+        try {
+            return JSONREADER.readValue(statusResponse.body(), DeleteResponse.class);
+        } catch (Exception e) {
+            throw new SourcingServiceException(statusResponse.statusCode(), "Could not parse body of delete request " + statusResponse.body());
+        }
     }
 
     @Deprecated
@@ -523,6 +529,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             node.put("days_before_hard_delete", daysBeforeHardDelete);
             return request("ingest/" + mid + "/delete")
                 .POST(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(node)))
+                .header("Content-Type", "application/json")
                 .build();
     }
 
