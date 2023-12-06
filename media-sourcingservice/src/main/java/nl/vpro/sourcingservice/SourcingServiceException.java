@@ -23,4 +23,11 @@ public class SourcingServiceException extends RuntimeException {
         this.body = body;
         this.statusCode = statusCode;
     }
+
+
+    public SourcingServiceException(int statusCode, String body) {
+        super(body);
+        this.body = null;
+        this.statusCode = statusCode;
+    }
 }
