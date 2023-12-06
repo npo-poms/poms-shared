@@ -212,12 +212,11 @@ public class AuthorityLocations {
         }
         Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
         if (avAttributes.isPresent()) {
-            Location location = createOrFindLocation(program, locationUrl, owner, platform);
+            Location location = createOrFindLocation(program, locationUrl, owner, platform, avAttributes.get());
             updateLocationAndPredictions(
                 location,
                 program,
                 platform,
-                avAttributes.get(),
                 owner,
                 new HashSet<>(),
                 instant())
@@ -228,12 +227,7 @@ public class AuthorityLocations {
         return program;
     }
 
-    private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Set<OwnerType> replaces, Instant now) {
-        if (location.getAvAttributes()  == null) {
-            location.setAvAttributes(avAttributes);
-        } else {
-            AVAttributes.update(avAttributes, location.getAvAttributes(), false);
-        }
+    private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, OwnerType owner, Set<OwnerType> replaces, Instant now) {
         if (replaces != null && replaces.contains(location.getOwner())) {
             location.setOwner(owner);
         }
@@ -270,24 +264,17 @@ public class AuthorityLocations {
         }
     }
 
-    private Location createOrFindLocation(
-        @NonNull MediaObject program,
-        @NonNull String locationUrl,
-        @NonNull OwnerType owner,
-        @NonNull Platform platform) {
-        return createOrFindLocation(program, locationUrl, owner, new HashSet<>(), platform);
-    }
 
     private Location createOrFindLocation(
         @NonNull MediaObject program,
         @NonNull String locationUrl,
         @NonNull OwnerType owner,
-        @NonNull Set<OwnerType> replaces,
-        @NonNull Platform platform) {
+        @NonNull Platform platform,
+        @NonNull AVAttributes avAttributes) {
         Location location = program.findLocation(locationUrl);
         if (location == null) {
             log.info("Creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());
-            location = new Location(locationUrl, owner, platform);
+            location = new Location(locationUrl, owner, platform, avAttributes);
             location.headRequest();
             program.addLocation(location);
             Prediction prediction = program.getPredictionWithoutFixing(platform);
@@ -345,11 +332,11 @@ public class AuthorityLocations {
         } else {
             Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
             if (avAttributes.isPresent()) {
-                Location location = this.createOrFindLocation(program, locationUrl, owner, platform);
+                Location location = this.createOrFindLocation(program, locationUrl, owner, platform, avAttributes.get());
                 this.updateLocationAndPredictions(
                     location,
-                    program, platform,
-                    avAttributes.get(),
+                    program,
+                    platform,
                     owner,
                     replaces,
                     Changeables.instant()
