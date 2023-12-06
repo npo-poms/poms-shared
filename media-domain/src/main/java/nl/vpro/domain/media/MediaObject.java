@@ -2203,6 +2203,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             }
             MediaObjects.correctPrediction(prediction, this, false, Level.DEBUG, instant(), (ps, p) -> {});
         }
+    }
+
+    void correctPrediction(Platform platform) {
+        Prediction prediction = getPrediction(platform);
+        if (prediction != null) {
+            MediaObjects.correctPrediction(prediction, this, false, Level.DEBUG, instant(), (ps, p) -> {});
+        }
 
     }
 
@@ -2369,7 +2376,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     public boolean removeLocation(Location location) {
         if (locations != null && locations.remove(location)) {
             markCeresUpdate();
-            realizePrediction(location);
+            correctPrediction(location.getPlatform());
             return true;
         }
         return false;
@@ -2384,6 +2391,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
                 if (locationId.equals(location.getId())) {
                     iterator.remove();
                     markCeresUpdate();
+                    correctPrediction(location.getPlatform());
                     success = true;
                 }
             }
