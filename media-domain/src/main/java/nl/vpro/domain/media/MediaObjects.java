@@ -10,8 +10,7 @@ import java.io.*;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -1285,13 +1284,13 @@ public class MediaObjects {
      */
     protected static void autoCorrectPrediction(Prediction prediction, MediaObject mediaObject) {
         if (autoCorrectPredictions) {
-            correctPrediction(prediction, mediaObject, true);
+            correctPrediction(prediction, mediaObject, true, Level.INFO, instant(), (prevState, p) -> {});
         }
     }
 
-     protected static void correctPrediction(Prediction prediction, MediaObject mediaObject, boolean republish) {
-         final Instant now = instant();
-         switch (prediction.getState()) {
+     protected static void correctPrediction(Prediction prediction, MediaObject mediaObject, boolean republish, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
+         final Prediction.State prevState = prediction.getState();
+         switch (prevState) {
              case ANNOUNCED, REVOKED -> {
                  boolean allInPast = true;
                  boolean hasLocations = false;
@@ -1311,9 +1310,11 @@ public class MediaObjects {
                      ) {
 
 
-                         log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), mediaObject.mid);
+
                          prediction.setState(Prediction.State.REALIZED);
                          realized = true;
+                         Slf4jHelper.log(log, level, "Set state of {} from {} to REALIZED (by {}) of object {}", prediction, prevState, location.getProgramUrl(), mediaObject.mid);
+                         onChange.accept(prevState, prediction);
                          if (republish) {
                              markForRepublication(mediaObject, PublicationReason.Reasons.REALIZED_PREDICTION.formatted(prediction.getPlatform().name()));
                          }
@@ -1321,8 +1322,9 @@ public class MediaObjects {
                      }
                  }
                  if (hasLocations && ! realized && allInPast && prediction.getState() == Prediction.State.ANNOUNCED) {
-                     log.info("Silently set state of {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, mediaObject.mid, realized, allInPast);
                      prediction.setState(Prediction.State.REVOKED);
+                     Slf4jHelper.log(log, level, "Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
+                     onChange.accept(prevState, prediction);
                      if (republish) {
                          markForRepublication(mediaObject, PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name()));
                      }
@@ -1345,7 +1347,10 @@ public class MediaObjects {
                          .toList();
                      Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Silently set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                      prediction.setState(Prediction.State.REVOKED);
-                     markForRepublication(mediaObject, PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name()));
+                     onChange.accept(prevState, prediction);
+                     if (republish) {
+                         markForRepublication(mediaObject, PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name()));
+                     }
                  }
              }
              default -> log.debug("Ignoring prediction {}", prediction);

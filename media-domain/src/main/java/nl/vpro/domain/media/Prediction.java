@@ -304,7 +304,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     /**
      * Then this prediction will be revoked.
      *
-     * If all locations will be revoked before the registered publishstop in the restriction, then this will retunr the lastest valut of that.
+     * If all locations will be revoked before the registered publishstop in the restriction, then this will return the lastest valut of that.
      */
     @XmlAttribute(name = "publishStop")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -332,8 +332,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
                 if (result == null || (latestLocation != null && latestLocation.isBefore(result))) {
                     result = latestLocation;
                 }
-            } else {
-                log.warn("{} is realized but no locations!", this);
             }
 
         }
