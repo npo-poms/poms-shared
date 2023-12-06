@@ -118,7 +118,7 @@ public class AVAttributes implements Serializable {
             if (overwrite || to.getByteSize() == null) {
                 to.setByteSize(from.getByteSize());
             }
-            if (overwrite || to.getAvFileFormat() == null) {
+            if (overwrite || (to.getAvFileFormat() == null || (to.getAvFileFormat() == AVFileFormat.UNKNOWN && from.getAvFileFormat() != null))) {
                 to.setAvFileFormat(from.getAvFileFormat());
             }
             if (overwrite || to.getBitrate() == null) {
