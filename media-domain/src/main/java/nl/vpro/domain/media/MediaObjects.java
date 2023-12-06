@@ -1284,11 +1284,11 @@ public class MediaObjects {
      */
     protected static void autoCorrectPrediction(Prediction prediction, MediaObject mediaObject) {
         if (autoCorrectPredictions) {
-            correctPrediction(prediction, mediaObject, true, Level.INFO, instant(), (prevState, p) -> {});
+            correctPrediction(prediction, mediaObject, false, Level.INFO, instant(), (prevState, p) -> {});
         }
     }
 
-    protected static void correctPrediction(Prediction prediction, MediaObject mediaObject, boolean republish, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
+    protected static void correctPrediction(final Prediction prediction, MediaObject mediaObject, boolean republish, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
          final Prediction.State prevState = prediction.getState();
          switch (prevState) {
              case ANNOUNCED, REVOKED -> {
@@ -1343,7 +1343,7 @@ public class MediaObjects {
                          .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
                          .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
                          .toList();
-                     Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Silently set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
+                     Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                      prediction.setState(Prediction.State.REVOKED);
                      onChange.accept(prevState, prediction);
                      if (republish) {
