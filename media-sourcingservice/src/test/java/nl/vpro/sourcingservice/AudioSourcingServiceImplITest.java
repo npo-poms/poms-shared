@@ -8,8 +8,6 @@ import java.nio.file.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Properties;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -91,7 +89,7 @@ class AudioSourcingServiceImplITest {
 
     @Test
     public void delete() throws IOException, InterruptedException {
-        DeleteResponse status = impl.delete(MID, 0);
+        DeleteResponse status = impl.delete(MID, 1);
         log.info("Status {}", status);
     }
 
