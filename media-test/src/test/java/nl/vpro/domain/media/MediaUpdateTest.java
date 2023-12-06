@@ -46,6 +46,7 @@ public class MediaUpdateTest {
     }
 
     @Test
+    @Tag("withEverything")
     public void withEverything1() throws Exception {
 
         Program withEverything = MediaTestDataBuilder
@@ -143,6 +144,7 @@ public class MediaUpdateTest {
     }
 
     @Test
+    @Tag("withEverything")
     public void withEverything2() throws Exception {
         Assumptions.assumeTrue(rounded != null);
         MediaObject fetched = rounded.fetch(OwnerType.BROADCASTER);

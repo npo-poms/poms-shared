@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Value;
 import nl.vpro.domain.Changeables;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.util.HttpConnectionUtils;
 
 import static nl.vpro.domain.Changeables.instant;
@@ -435,37 +436,14 @@ public class AuthorityLocations {
         if (platform == null) {
             return false;
         }
-        boolean changes = false;
+        final boolean[] changes = new boolean[] {false};
         final Prediction prediction = MediaObjects.getPrediction(platform, mediaObject.getPredictions());
         if (prediction != null) {
-            Prediction.State requiredState = prediction.isPlannedAvailability() ? Prediction.State.ANNOUNCED : Prediction.State.NOT_ANNOUNCED;
-
-            for (Location location : mediaObject.getLocations()) {
-                Platform locationPlatform = location.getPlatform();
-
-                if (locationPlatform == null) {
-                    log.debug("Location has no explicit platform");
-                    // e.g. we used to not create PREPR sources with explicit PLATFORM, and then at least in test/acc the prediction state remained 'ANNOUCNED'
-                    log.debug("Location has no explicit platform. Taking it {} implicitly", Platform.INTERNETVOD);
-                    locationPlatform = Platform.INTERNETVOD;
-                }
-                if (locationPlatform == platform) {
-                    if (location.isPublishable(now) && ! location.isDeleted()) {
-                        requiredState = Prediction.State.REALIZED;
-                        break;
-                    }
-                    if (location.wasUnderEmbargo() || location.isDeleted()) {
-                        requiredState = Prediction.State.REVOKED;
-                    }
-                }
-            }
-            if (prediction.getState() != requiredState) {
-                log.info("Set state of {} {} {} -> {}", mediaObject.getMid(), prediction, prediction.getState(), requiredState);
-                prediction.setState(requiredState);
-                changes = true;
-            }
+            MediaObjects.correctPrediction(prediction, mediaObject, true, Level.DEBUG, now, (ps, p) -> {changes[0] = true;});
+        } else {
+            log.debug("No prediction for {} {}", platform, mediaObject);
         }
-        return changes;
+        return changes[0];
     }
 
     private static Optional<AVAttributes> getAVAttributes(String pubOption) {

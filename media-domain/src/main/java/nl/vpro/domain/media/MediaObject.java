@@ -11,7 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
-import java.util.function.Consumer;import java.util.stream.Collectors;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
 import javax.persistence.Entity;
@@ -55,6 +56,7 @@ import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
@@ -62,7 +64,6 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.CascadeType.*;
 import static nl.vpro.domain.Changeables.instant;
-import static nl.vpro.domain.Embargos.unrestricted;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
 import static nl.vpro.domain.media.MediaObject.*;
@@ -2100,8 +2101,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             predictions = new TreeSet<>();
         }
 
-        final List<Prediction> implicitelyCreated = new ArrayList<>();
-        // make sure for every location there is a prediction!
         getLocations().stream()
             .filter(Location::hasPlatform)
             .filter(Location::isConsiderableForPublication)
@@ -2109,14 +2108,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             .sorted()
             .distinct()
             .forEach(p -> {
-                findOrCreatePrediction(p, unrestricted(), true, implicitelyCreated::add);
+                findOrCreatePrediction(p, true, (created) -> {
+                    log.debug("Created prediction {} for {}", created, this);
+                });
                 }
             );
-        for (Prediction created : implicitelyCreated) {
-            log.info("Created prediction {} for {}", created, this);
-            MediaObjects.correctPrediction(created, this, false);
-        }
-
         // SEE https://jira.vpro.nl/browse/MSE-2313
         return new SortedSetSameElementWrapper<>(sorted(predictions)) {
             @Override
@@ -2130,9 +2126,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     public void setPredictions(Collection<Prediction> predictions) {
         this.predictions = updateSortedSet(this.predictions, predictions);
-        for (Prediction p : this.predictions) {
-            p.setParent(this);
-        }
         this.predictionsForXml = null;
     }
 
@@ -2197,8 +2190,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
         Prediction prediction = getPrediction(platform);
         if (prediction == null) {
-            findOrCreatePrediction(platform, unrestricted(), true, (c) -> {
-                MediaObjects.correctPrediction(c, this, false);
+            findOrCreatePrediction(platform, true, (c) -> {
+                MediaObjects.correctPrediction(c, this, false, Level.DEBUG, instant(), (ps, p) -> {});
             });
         }
 
@@ -2213,17 +2206,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public Prediction findOrCreatePrediction(Platform platform) {
-        return findOrCreatePrediction(platform, unrestricted(), false, (c) -> {});
+        return findOrCreatePrediction(platform, false, (c) -> {});
     }
 
-    protected Prediction findOrCreatePrediction(Platform platform, Embargo embargo, boolean planned, Consumer<Prediction> onCreate) {
+    protected Prediction findOrCreatePrediction(Platform platform, boolean planned, Consumer<Prediction> onCreate) {
         Prediction prediction = MediaObjects.getPrediction(platform, predictions);
         if (prediction == null) {
             log.debug("Creating prediction object for {}: {}", platform, this);
             prediction = new Prediction(platform);
-            prediction.setParent(this);
-            Embargos.copy(embargo, prediction);
             prediction.setPlannedAvailability(planned);
+            prediction.setParent(this);
             prediction.setAuthority(Authority.USER);
             if (predictions == null) {
                 predictions = new TreeSet<>();
@@ -3155,7 +3147,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
             (! inCollection(Workflow.PUBLICATIONS, workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
-            this.getMid() == null ? "<no mid>" : "\"" + this.getMid() + "\"",
+            this.getMid() == null ? ("<no mid @" + super.hashCode() + ">") : "\"" + this.getMid() + "\"",
             mainTitle,
             id
             );
