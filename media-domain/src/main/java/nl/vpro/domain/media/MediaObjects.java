@@ -1288,7 +1288,7 @@ public class MediaObjects {
         }
     }
 
-     protected static void correctPrediction(Prediction prediction, MediaObject mediaObject, boolean republish, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
+    protected static void correctPrediction(Prediction prediction, MediaObject mediaObject, boolean republish, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
          final Prediction.State prevState = prediction.getState();
          switch (prevState) {
              case ANNOUNCED, REVOKED -> {
@@ -1299,18 +1299,16 @@ public class MediaObjects {
                      if ( ! prediction.getPlatform().matches(location.getPlatform())) {
                          continue;
                      }
+                     if (location.isDeleted()) {
+                         continue;
+                     }
                      hasLocations = true;
                      if (location.isConsiderableForPublication() && ! location.wasUnderEmbargo(now)) {
                          allInPast = false;
                      }
-                     if (
-                         //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
-                             Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                             && location.inPublicationWindow(now)
+                     if (Workflow.PUBLICATIONS.contains(location.getWorkflow())
+                         && location.inPublicationWindow(now)
                      ) {
-
-
-
                          prediction.setState(Prediction.State.REALIZED);
                          realized = true;
                          Slf4jHelper.log(log, level, "Set state of {} from {} to REALIZED (by {}) of object {}", prediction, prevState, location.getProgramUrl(), mediaObject.mid);

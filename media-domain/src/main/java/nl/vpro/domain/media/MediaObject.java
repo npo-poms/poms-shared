@@ -2178,7 +2178,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     void realizePrediction(Location location) {
         if (locations == null || (!locations.contains(location) && findLocation(location.getId()) == null)) {
             throw new IllegalArgumentException(
-                    "Can only realize a prediction when accompanying locations is available. Location " + location
+                    "Can only realize a prediction when accompanying locations is unavailable. Location " + location
                             + " is not available in " + getMid() + " " + locations);
         }
 
@@ -2190,9 +2190,18 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
         Prediction prediction = getPrediction(platform);
         if (prediction == null) {
-            findOrCreatePrediction(platform, true, (c) -> {
-                MediaObjects.correctPrediction(c, this, false, Level.DEBUG, instant(), (ps, p) -> {});
-            });
+            if (! location.isDeleted()) {
+                log.debug("No prediction for {}", location);
+                findOrCreatePrediction(platform, true, (c) -> {
+                    MediaObjects.correctPrediction(c, this, false, Level.DEBUG, instant(), (ps, p) -> {
+                    });
+                });
+            }
+        } else {
+            if (!location.isDeleted()) {
+                prediction.setPlannedAvailability(true);
+            }
+            MediaObjects.correctPrediction(prediction, this, false, Level.DEBUG, instant(), (ps, p) -> {});
         }
 
     }
@@ -2352,10 +2361,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         } else {
             locations.add(location);
             location.setParent(this);
-            if (location.hasPlatform() && location.isPublishable(instant())) {
-                realizePrediction(location);
-            }
         }
+        realizePrediction(location);
         return this;
     }
 
