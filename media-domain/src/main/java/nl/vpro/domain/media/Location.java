@@ -203,6 +203,9 @@ public class Location extends PublishableObject<Location>
         this(programUrl, owner, Platform.INTERNETVOD);
     }
 
+    public Location(String programUrl, OwnerType owner, Platform platform, AVAttributes avAttributes) {
+        this(programUrl, owner, avAttributes, null, platform);
+    }
     public Location(String programUrl, OwnerType owner, Platform platform) {
         this(programUrl, owner, null, null, platform);
     }
