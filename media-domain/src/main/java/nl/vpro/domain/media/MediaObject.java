@@ -2369,6 +2369,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     public boolean removeLocation(Location location) {
         if (locations != null && locations.remove(location)) {
             markCeresUpdate();
+            realizePrediction(location);
             return true;
         }
         return false;
