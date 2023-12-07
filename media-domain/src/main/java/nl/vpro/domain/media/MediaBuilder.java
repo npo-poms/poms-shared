@@ -742,7 +742,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(Location... locations) {
         for(Location location : locations) {
-            mediaObject().addLocation(location);
+            mediaObject().getLocations().add(location);
         }
         return (B)this;
     }
@@ -750,7 +750,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(Iterable<Location> locations) {
         for(Location location : locations) {
-            mediaObject().addLocation(location);
+            mediaObject().getLocations().add(location);
         }
         return (B)this;
     }
@@ -758,7 +758,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(String... locations) {
         for (String location : locations) {
-            mediaObject().addLocation(new Location(location, OwnerType.BROADCASTER));
+            mediaObject().getLocations().add(new Location(location, OwnerType.BROADCASTER));
         }
         return (B) this;
     }
@@ -883,6 +883,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         protected String mid;
         protected boolean midSet = false;
 
+        protected boolean fixPredictions = false;
+
         protected AbstractBuilder(M m) {
             this.mediaObject = m;
             this.mid = m.getMid();
@@ -898,10 +900,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         @Valid
         M mediaObject;
 
+        public T fixPredictions() {
+            fixPredictions = true;
+            return (T) this;
+        }
+
         @Override
         public M build() {
             if (midSet) {
                 mediaObject.setMid(mid);
+            }
+            if (fixPredictions) {
+                mediaObject.correctPredictions();
             }
             return mediaObject;
         }

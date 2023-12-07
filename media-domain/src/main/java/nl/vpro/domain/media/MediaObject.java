@@ -2103,18 +2103,25 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             predictions = new TreeSet<>();
         }
 
+
+        // Implicitly create predictions for all platforms that have a location, but no prediction yet.
+        final Map<Platform, List<Location>> locations = new HashMap<>();
         getLocations().stream()
             .filter(Location::hasPlatform)
             .filter(Location::isConsiderableForPublication)
-            .map(Location::getPlatform)
-            .sorted()
-            .distinct()
-            .forEach(p -> {
-                findOrCreatePrediction(p, true, (created) -> {
-                    log.debug("Created prediction {} for {}", created, this);
-                });
+            .forEach(l -> {
+                locations.computeIfAbsent(l.getPlatform(), p -> new ArrayList<>()).add(l);
+            });
+        for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
+            findOrCreatePrediction(entry.getKey(), true, (created) -> {
+                log.info("Implicitly created prediction {} for {} ({})", created, this, entry.getValue());
+                for (Location l : entry.getValue()) {
+                    // make sure that such an implicit prediction is not more permissive then
+                    Embargos.copyIfLessRestrictedOrTargetUnset(l, created.getOwnEmbargo());
                 }
-            );
+            });
+        }
+
         // SEE https://jira.vpro.nl/browse/MSE-2313
         return new SortedSetSameElementWrapper<>(sorted(predictions)) {
             @Override
@@ -2160,7 +2167,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * Like {@link #getPrediction(Platform)} but without also implicitly correcting the {@link Prediction#getState() prediction state} if that happens to be not consistent with the {@link #getLocations() locations}. In other words this just returns the requested prediction without side effects.
      * <p>
      */
-    Prediction getPredictionWithoutFixing(Platform platform) {
+    public Prediction getPredictionWithoutFixing(Platform platform) {
         return MediaObjects.getPrediction(platform, predictions);
     }
 
@@ -2212,11 +2219,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     void correctPrediction(Platform platform) {
-        Prediction prediction = getPrediction(platform);
+        Prediction prediction = getPredictionWithoutFixing(platform);
         if (prediction != null) {
             MediaObjects.correctPrediction(prediction, this, Level.DEBUG, instant(), (ps, p) -> {});
         }
+    }
 
+    void correctPredictions() {
+        for (Platform p : Platform.values()) {
+            correctPrediction(p);
+        }
     }
 
     public boolean removePrediction(Platform platform) {
