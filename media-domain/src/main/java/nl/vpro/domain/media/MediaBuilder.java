@@ -113,6 +113,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
+    default B nullableId(Long id) {
+        mediaObject().setId(id);
+        return (B)this;
+    }
+
     default B withoutId() {
         mediaObject().setId(null);
         return (B) this;
