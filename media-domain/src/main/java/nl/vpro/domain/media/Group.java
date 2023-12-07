@@ -130,7 +130,10 @@ public final class Group extends MediaObject {
             throw new IllegalArgumentException("Can not add a member to an ordered group without supplying an ordering number.");
         }
 
-        if(member.equals(this) || member.hasDescendant(this)) {
+        if(member.equals(this)) {
+            throw CircularReferenceException.self(this, findAncestry(member));
+        }
+        if (member.hasDescendant(this)) {
             throw new CircularReferenceException(this, findAncestry(member));
         }
 
