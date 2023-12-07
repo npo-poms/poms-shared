@@ -2121,6 +2121,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
                 MediaObjects.autoCorrectPrediction(prediction, MediaObject.this);
                 return prediction;
             }
+            @Override
+            public boolean add(Prediction element) {
+                return super.add(adapt(element));
+            }
         };
     }
 
