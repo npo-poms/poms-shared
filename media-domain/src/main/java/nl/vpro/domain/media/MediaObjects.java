@@ -622,6 +622,7 @@ public class MediaObjects {
      * the last publish instant will be set, and the reason and destinations will be cleared.
      * <p>
      * The workflow itself will remain untouched, and would be set to {@link Workflow#PUBLISHED}, {@link Workflow#REVOKED} or {@link Workflow#MERGED}
+     * @see #setWorkflowPublished(MediaObject)
      */
     public static void markPublished(@NonNull MediaObject media, @NonNull Instant now) {
         media.setLastPublishedInstant(now);
@@ -631,7 +632,7 @@ public class MediaObjects {
 
 
     /**
-     * Sets the workflow of the mediaobject, and it's subobjects to appropriate value for current date.
+     * Sets the workflow of the mediaobject, and its subobjects to appropriate value for current date.
      */
     public static  Workflow setWorkflowPublished(@NonNull MediaObject media) {
         Workflow previous = media.getWorkflow();
@@ -1288,7 +1289,7 @@ public class MediaObjects {
         }
     }
 
-    protected static void correctPrediction(final Prediction prediction, MediaObject mediaObject, boolean republish, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
+    protected static void correctPrediction(final Prediction prediction, MediaObject mediaObject, boolean markForRepublicationOnChanges, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
          final Prediction.State prevState = prediction.getState();
          switch (prevState) {
              case ANNOUNCED, REVOKED -> {
@@ -1313,7 +1314,7 @@ public class MediaObjects {
                          realized = true;
                          Slf4jHelper.log(log, level, "Set state of {} from {} to REALIZED (by {}) of object {}", prediction, prevState, location.getProgramUrl(), mediaObject.mid);
                          onChange.accept(prevState, prediction);
-                         if (republish) {
+                         if (markForRepublicationOnChanges) {
                              markForRepublication(mediaObject, PublicationReason.Reasons.REALIZED_PREDICTION.formatted(prediction.getPlatform().name()));
                          }
                          break;
@@ -1323,7 +1324,7 @@ public class MediaObjects {
                      prediction.setState(Prediction.State.REVOKED);
                      Slf4jHelper.log(log, level, "Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
                      onChange.accept(prevState, prediction);
-                     if (republish) {
+                     if (markForRepublicationOnChanges) {
                          markForRepublication(mediaObject, PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name()));
                      }
                  }
@@ -1346,7 +1347,7 @@ public class MediaObjects {
                      Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                      prediction.setState(Prediction.State.REVOKED);
                      onChange.accept(prevState, prediction);
-                     if (republish) {
+                     if (markForRepublicationOnChanges) {
                          markForRepublication(mediaObject, PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name()));
                      }
                  }

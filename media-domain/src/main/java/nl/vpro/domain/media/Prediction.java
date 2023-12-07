@@ -258,9 +258,14 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
             .build();
     }
 
-    public static Prediction.Builder announced() {
-        return builder().state(State.ANNOUNCED);
+    public static Prediction.Builder announced(Platform platform) {
+        return announced().platform(platform).plannedAvailability(true);
     }
+
+    public static Prediction.Builder announced() {
+        return builder().plannedAvailability(true).state(State.ANNOUNCED);
+    }
+
     public static Prediction.Builder revoked() {
         return builder().state(State.REVOKED);
     }
