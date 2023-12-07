@@ -853,7 +853,7 @@ public class MediaObjectTest {
         program.setPredictions(Arrays.asList(Prediction.announced(Platform.INTERNETVOD).build()));
 
         assertThat(program.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.REALIZED);
-        assertThat(program.getWorkflow()).isEqualTo(Workflow.FOR_REPUBLICATION);
+        assertThat(program.getRepubReason()).isEqualTo("realized prediction INTERNETVOD");
 
     }
 
