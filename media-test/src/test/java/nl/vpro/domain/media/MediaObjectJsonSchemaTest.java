@@ -1102,6 +1102,8 @@ public class MediaObjectJsonSchemaTest {
         PublicationFilter.ENABLED.set(true);
         Program p = MediaTestDataBuilder
             .program()
+            .predictions(Platform.INTERNETVOD)
+            .correctPredictions()
             .locations(
                 Location.builder()
                     .programUrl("https://vpro.nl/foo.mp3")
@@ -1116,21 +1118,22 @@ public class MediaObjectJsonSchemaTest {
             .withoutRemarshalling()
             .isSimilarTo("""
                 {
-                  "objectType" : "program",
-                  "workflow" : "FOR_PUBLICATION",
-                  "sortDate" : 10,
-                  "creationDate" : 10,
-                  "embeddable" : true,
-                  "broadcasters" : [ ],
-                  "genres" : [ ],
-                  "countries" : [ ],
-                  "languages" : [ ],
-                  "locations" : [ ],
-                  "predictions" : [ {
-                      "state" : "REVOKED",
-                      "platform" : "INTERNETVOD"
-                   } ]
-                }""");
+                   "objectType" : "program",
+                   "workflow" : "FOR_PUBLICATION",
+                   "sortDate" : 10,
+                   "creationDate" : 10,
+                   "embeddable" : true,
+                   "broadcasters" : [ ],
+                   "genres" : [ ],
+                   "countries" : [ ],
+                   "languages" : [ ],
+                   "predictions" : [ {
+                     "state" : "REVOKED",
+                     "platform" : "INTERNETVOD",
+                     "publishStop" : -9990
+                   } ],
+                   "locations" : [ ]
+                 }""");
         PublicationFilter.ENABLED.remove();
     }
 
