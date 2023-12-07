@@ -2193,7 +2193,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             if (! location.isDeleted()) {
                 log.debug("No prediction for {}", location);
                 findOrCreatePrediction(platform, true, (c) -> {
-                    MediaObjects.correctPrediction(c, this, true, Level.DEBUG, instant(), (ps, p) -> {
+                    MediaObjects.correctPrediction(c, this, Level.DEBUG, instant(), (ps, p) -> {
                     });
                 });
             }
@@ -2201,14 +2201,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             if (!location.isDeleted()) {
                 prediction.setPlannedAvailability(true);
             }
-            MediaObjects.correctPrediction(prediction, this, true, Level.DEBUG, instant(), (ps, p) -> {});
+            MediaObjects.correctPrediction(prediction, this, Level.DEBUG, instant(), (ps, p) -> {});
         }
     }
 
     void correctPrediction(Platform platform) {
         Prediction prediction = getPrediction(platform);
         if (prediction != null) {
-            MediaObjects.correctPrediction(prediction, this, false, Level.DEBUG, instant(), (ps, p) -> {});
+            MediaObjects.correctPrediction(prediction, this, Level.DEBUG, instant(), (ps, p) -> {});
         }
 
     }
