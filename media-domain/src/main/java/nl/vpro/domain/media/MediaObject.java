@@ -1723,10 +1723,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
 
         if (this.equals(member)) {
-            throw CircularReferenceException.self(this, findAncestry(member));
+            throw CircularReferenceException.self(member, this, findAncestry(member));
         }
         if (this.hasAncestor(member)) {
-            throw new CircularReferenceException(this, findAncestry(member));
+            throw new CircularReferenceException(member, this, findAncestry(member));
         }
 
         if (member.memberOf == null) {

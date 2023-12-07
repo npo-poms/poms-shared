@@ -22,12 +22,12 @@ public class CircularReferenceException extends RuntimeException {
         familyTree.add(child);
     }
 
-    public CircularReferenceException(MediaObject child, List<MediaObject> ancestry) {
-        this("Circular reference: " + child + " has ancestors " + ancestry, child, ancestry);
+    public CircularReferenceException(MediaObject child, MediaObject parent,  List<MediaObject> ancestry) {
+        this("Circular reference: " + parent + " has ancestors " + ancestry + "", child, ancestry);
     }
 
-    public static CircularReferenceException self(MediaObject child, List<MediaObject> ancestry) {
-        return new CircularReferenceException("Can't make " + child + " member of itself", child, ancestry);
+    public static CircularReferenceException self(MediaObject child, MediaObject parent, List<MediaObject> ancestry) {
+        return new CircularReferenceException("Can't make " + child + " member of itself " + parent, child, ancestry);
     }
 
     public List<MediaObject> getFamilyTree() {
