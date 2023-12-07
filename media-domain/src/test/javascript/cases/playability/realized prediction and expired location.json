@@ -100,7 +100,7 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "PUBLISHED",
+      "workflow" : "REVOKED",
       "platform" : "INTERNETVOD",
       "publishStop" : 1635253190000
     } ]

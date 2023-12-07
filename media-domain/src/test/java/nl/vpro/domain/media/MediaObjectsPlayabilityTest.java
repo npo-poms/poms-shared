@@ -150,9 +150,12 @@ class MediaObjectsPlayabilityTest {
     public static final Platform[] A_BOTH = new Platform[]{INTERNETVOD, PLUSVOD};
 
     public static Supplier<MediaObject> supply(Supplier<MediaBuilder.ProgramBuilder>  builder) {
-        return () -> builder.get().build();
+        return () -> {
+            MediaObject m = builder.get().build();
+            MediaObjects.setWorkflowPublished(m);
+            return m;
+        };
     }
-
 
 
     public static Stream<Arguments> examples() {

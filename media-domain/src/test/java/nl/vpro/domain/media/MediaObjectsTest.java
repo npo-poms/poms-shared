@@ -4,40 +4,21 @@
  */
 package nl.vpro.domain.media;
 
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.time.*;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import javax.xml.bind.JAXB;
-
-import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.collect.Range;
-
-import nl.vpro.domain.bind.PublicationFilter;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
-import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.util.Ranges;
 
-import static nl.vpro.domain.Changeables.*;
-import static nl.vpro.domain.bind.AbstractJsonIterable.DEFAULT_CONSIDER_JSON_INCLUDE;
+import static nl.vpro.domain.Changeables.CLOCK;
+import static nl.vpro.domain.Changeables.clock;
 import static nl.vpro.domain.media.Platform.INTERNETVOD;
 import static nl.vpro.domain.media.Platform.PLUSVOD;
 import static nl.vpro.domain.media.Schedule.ZONE_ID;
@@ -52,8 +33,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SuppressWarnings({"deprecation", "OptionalGetWithoutIsPresent"})
 @Slf4j
 public class MediaObjectsTest {
-    static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
 
+    /**
+     * The current time in test cases, a fixed time in october 2021.
+     */
+    public static final Instant NOW = Instant.parse("2021-10-26T13:00:00Z");
+
+
+    /**
+     * Currently only sets the clock in {@link nl.vpro.domain.Changeable}, so automatic fields related to the current time get predictable values.
+     * @see #NOW
+     */
     @BeforeAll
     static void init() {
         log.info("Setting clock to {}", NOW);
