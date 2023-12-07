@@ -47,7 +47,6 @@ class MediaObjectsPlayabilityTest {
     static void init() {
         MediaObjectsTest.init();
         MediaObjects.autoCorrectPredictions = false;
-
     }
 
     @AfterAll
@@ -60,6 +59,7 @@ class MediaObjectsPlayabilityTest {
         return MediaBuilder
             .broadcast()
             .mid(mid)
+            .correctPredictions()
             .creationDate(instant().minus(Duration.ofDays(1)))
             .workflow(Workflow.PUBLISHED)
             ;
@@ -187,7 +187,12 @@ class MediaObjectsPlayabilityTest {
             Arguments.of(
                 "just a legacy windows media location",
                 supply(() -> fixed()
-                    .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.wmv").build())
+                    .locations(
+                        Location
+                            .builder()
+                            .platform(null)
+                            .programUrl("https://bla.com/foobar.wmv")
+                            .build())
                 ),
                 expected(A_NONE, A_NONE, A_NONE, mapRanges())
             ),

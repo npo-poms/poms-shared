@@ -2114,11 +2114,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             });
         for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
             findOrCreatePrediction(entry.getKey(), true, (created) -> {
-                log.info("Implicitly created prediction {} for {} ({})", created, this, entry.getValue());
                 for (Location l : entry.getValue()) {
                     // make sure that such an implicit prediction is not more permissive then
                     Embargos.copyIfLessRestrictedOrTargetUnset(l, created.getOwnEmbargo());
                 }
+                created.setState(Prediction.State.of(created));
+                log.info("Implicitly created prediction {} for {} ({})", created, this, entry.getValue());
             });
         }
 

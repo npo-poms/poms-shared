@@ -738,8 +738,13 @@ public class Location extends PublishableObject<Location>
      * @since 7.10
      * @see #getOwnPublicationRange()
      */
-    public Embargo getOwnEmbargo() {
-        return Embargos.of(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+    public MutableEmbargo<WrappedEmbargo> getOwnEmbargo() {
+        return Embargos.of(
+            this::getOwnPublishStartInstant,
+            this::setPublishStartInstant,
+            this::getOwnPublishStopInstant,
+            this::setPublishStopInstant
+        );
     }
 
     public Authority getAuthority() {
