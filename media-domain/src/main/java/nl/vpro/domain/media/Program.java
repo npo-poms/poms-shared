@@ -381,7 +381,7 @@ public final class Program extends MediaObject {
         }
 
         if(group.hasAncestor(this)) {
-            throw new CircularReferenceException(group, group.findAncestry(this));
+            throw new CircularReferenceException(this, group, group.findAncestry(this));
         }
 
         MemberRef memberRef = new MemberRef(this, group, episodeNr, owner);
