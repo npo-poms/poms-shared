@@ -383,8 +383,11 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
      * @since 7.10
      * @see #getOwnPublicationRange()
      */
-    public Embargo getOwnEmbargo() {
-        return Embargos.of(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+    public MutableEmbargo<?> getOwnEmbargo() {
+        return Embargos.of(
+            this::getOwnPublishStartInstant, this::setPublishStartInstant,
+            this::getOwnPublishStopInstant, this::setPublishStopInstant
+        );
     }
 
 

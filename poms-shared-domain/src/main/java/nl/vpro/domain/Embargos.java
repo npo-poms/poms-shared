@@ -2,6 +2,8 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -155,6 +157,15 @@ public class Embargos {
     public static MutableEmbargo<BasicEmbargo> of(final Instant start, final Instant stop) {
         return new BasicEmbargo(start, stop);
     }
+
+    public static MutableEmbargo<EmbargoWrapper> of(
+        Supplier<Instant> start,
+        Consumer<Instant> startSetter,
+        Supplier<Instant> stop,
+        Consumer<Instant> stopSetter) {
+        return new EmbargoWrapper(start, startSetter, stop, stopSetter);
+    }
+
 
      public static MutableEmbargo<BasicEmbargo> of(Range<Instant> range) {
         BasicEmbargo result = new BasicEmbargo(null, null);
