@@ -742,7 +742,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(Location... locations) {
         for(Location location : locations) {
-            mediaObject().getLocations().add(location);
+            mediaObject().addLocation(location, false);
         }
         return (B)this;
     }
@@ -750,7 +750,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(Iterable<Location> locations) {
         for(Location location : locations) {
-            mediaObject().getLocations().add(location);
+            mediaObject().addLocation(location, false);
         }
         return (B)this;
     }
@@ -758,7 +758,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(String... locations) {
         for (String location : locations) {
-            mediaObject().getLocations().add(new Location(location, OwnerType.BROADCASTER));
+            mediaObject().addLocation(new Location(location, OwnerType.BROADCASTER), false);
         }
         return (B) this;
     }

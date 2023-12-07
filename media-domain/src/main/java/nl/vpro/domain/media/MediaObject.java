@@ -537,7 +537,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     //@Filter(name = PUBLICATION_FILTER, condition = "workflow = 'PUBLISHED'") doesn't work
     @PublicationFilter
-    protected SortedSet<@NotNull @Valid Location> locations = new TreeSet<>();
+    protected SortedSet<@NotNull Location> locations = new TreeSet<>();
 
 
     @OneToMany(orphanRemoval = true, cascade= {ALL})
@@ -2362,6 +2362,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public MediaObject addLocation(Location location) {
+        return addLocation(location, true);
+    }
+
+    public MediaObject addLocation(Location location, boolean implicitRealize) {
         if (location == null || location.getProgramUrl() == null) {
             throw new IllegalArgumentException("Must supply a not null location with an url.");
         }
@@ -2388,7 +2392,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             locations.add(location);
             location.setParent(this);
         }
-        realizePrediction(location);
+        if (implicitRealize) {
+            realizePrediction(location);
+        }
         return this;
     }
 
