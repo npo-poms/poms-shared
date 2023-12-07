@@ -58,7 +58,7 @@ public interface MediaTestDataBuilder<
         .scopeNotes(Collections.singletonList("Nederland"))
         .build();
 
-    AtomicLong idBase = new AtomicLong(0L);
+    AtomicLong idBase = new AtomicLong(1_000_000L);
 
     AtomicLong midBase = new AtomicLong(12345L);
 

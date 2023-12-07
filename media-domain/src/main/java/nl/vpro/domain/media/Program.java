@@ -75,7 +75,7 @@ public final class Program extends MediaObject {
     @SortNatural
     // Caching doesn't work properly because ScheduleEventRepository may touch this
     // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid Set<@NotNull ScheduleEvent> scheduleEvents;
+    Set<@NotNull @Valid ScheduleEvent> scheduleEvents;
 
 
 

@@ -349,8 +349,8 @@ public class MediaObjects {
      * @since 5.11
      */
     public static SortedSet<ScheduleEvent> getScheduleEvents(MediaObject media) {
-        if (media instanceof Program) {
-            return ((Program) media).getScheduleEvents();
+        if (media instanceof Program program) {
+            return program.getScheduleEvents();
         } else {
             return new TreeSet<>();
         }

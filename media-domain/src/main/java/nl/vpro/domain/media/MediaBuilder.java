@@ -108,9 +108,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     @SuppressWarnings("unchecked")
-    default B id(Long id) {
+    default B id(long id) {
         mediaObject().setId(id);
         return (B)this;
+    }
+
+    default B withoutId() {
+        mediaObject().setId(null);
+        return (B) this;
     }
 
     B mid(String mid);
