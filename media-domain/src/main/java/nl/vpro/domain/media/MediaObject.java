@@ -3167,7 +3167,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
             (! inCollection(Workflow.PUBLICATIONS, workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
-            this.getMid() == null ? ("<no mid @" + super.hashCode() + ">") : "\"" + this.getMid() + "\"",
+            this.getMid() == null ? ("<no mid @" + superHashCode() + ">") : "\"" + this.getMid() + "\"",
             mainTitle,
             id
             );
