@@ -1743,9 +1743,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         @NonNull MediaObject group,
         Integer number,
         OwnerType owner) throws CircularReferenceException {
-        MemberRef ref = group.createMember(this, number, owner);
-        ref.setGroup(group);
-        return ref;
+        return group.createMember(this, number, owner);
+
     }
 
     boolean removeMemberOfRef(MediaObject reference) {
@@ -2875,8 +2874,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof MediaObject) {
-            return super.equals(o) || equalsOnMid((MediaObject) o);
+        if (o instanceof MediaObject mediaObject) {
+            return super.equals(o) || equalsOnMid(mediaObject);
         } else {
             return super.equals(o);
         }
