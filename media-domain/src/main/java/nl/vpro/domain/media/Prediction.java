@@ -67,6 +67,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlEnum
     @XmlType(name = "predictionStateEnum")
     public enum State implements Displayable {
+
         /**
          * This state should only be used for non-persistent Prediction objects (as they are used in the GUI)
          */
@@ -84,6 +85,18 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
         State(String displayName) {
             this.displayName = displayName;
+        }
+
+
+        public static State of(Embargo embargo) {
+            final Instant instant = instant();
+            if (embargo.inPublicationWindow(instant) ) {
+                return REALIZED;
+            }
+            if (embargo.wasUnderEmbargo(instant)) {
+                return REVOKED;
+            }
+            return ANNOUNCED;
         }
     }
 

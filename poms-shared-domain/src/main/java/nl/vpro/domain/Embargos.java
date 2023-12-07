@@ -158,12 +158,12 @@ public class Embargos {
         return new BasicEmbargo(start, stop);
     }
 
-    public static MutableEmbargo<EmbargoWrapper> of(
+    public static MutableEmbargo<WrappedEmbargo> of(
         Supplier<Instant> start,
         Consumer<Instant> startSetter,
         Supplier<Instant> stop,
         Consumer<Instant> stopSetter) {
-        return new EmbargoWrapper(start, startSetter, stop, stopSetter);
+        return new WrappedEmbargo(start, startSetter, stop, stopSetter);
     }
 
 

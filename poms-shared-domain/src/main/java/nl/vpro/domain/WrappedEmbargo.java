@@ -7,14 +7,14 @@ import java.util.function.Supplier;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-public class EmbargoWrapper implements MutableEmbargo<EmbargoWrapper> {
+public class WrappedEmbargo implements MutableEmbargo<WrappedEmbargo> {
 
     private final Supplier<Instant> start;
     private final Consumer<Instant> startSetter;
     private final Supplier<Instant> stop;
     private final Consumer<Instant> stopSetter;
 
-    public EmbargoWrapper(Supplier<Instant> start, Consumer<Instant> startSetter, Supplier<Instant> stop, Consumer<Instant> stopSetter) {
+    public WrappedEmbargo(Supplier<Instant> start, Consumer<Instant> startSetter, Supplier<Instant> stop, Consumer<Instant> stopSetter) {
         this.start = start;
         this.startSetter = startSetter;
         this.stop = stop;
@@ -32,13 +32,13 @@ public class EmbargoWrapper implements MutableEmbargo<EmbargoWrapper> {
     }
 
     @Override
-    public @NonNull EmbargoWrapper setPublishStartInstant(@Nullable Instant publishStart) {
+    public @NonNull WrappedEmbargo setPublishStartInstant(@Nullable Instant publishStart) {
         startSetter.accept(publishStart);
         return this;
     }
 
     @Override
-    public @NonNull EmbargoWrapper setPublishStopInstant(@Nullable Instant publishStop) {
+    public @NonNull WrappedEmbargo setPublishStopInstant(@Nullable Instant publishStop) {
         stopSetter.accept(publishStop);
         return this;
     }

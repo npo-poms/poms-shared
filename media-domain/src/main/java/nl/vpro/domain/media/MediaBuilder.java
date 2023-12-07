@@ -883,7 +883,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         protected String mid;
         protected boolean midSet = false;
 
-        protected boolean fixPredictions = false;
+        protected boolean correctPredictions = false;
 
         protected AbstractBuilder(M m) {
             this.mediaObject = m;
@@ -900,8 +900,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         @Valid
         M mediaObject;
 
-        public T fixPredictions() {
-            fixPredictions = true;
+        public T correctPredictions() {
+            correctPredictions = true;
             return (T) this;
         }
 
@@ -910,7 +910,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             if (midSet) {
                 mediaObject.setMid(mid);
             }
-            if (fixPredictions) {
+            if (correctPredictions) {
                 mediaObject.correctPredictions();
             }
             return mediaObject;
