@@ -955,7 +955,7 @@ public interface MediaTestDataBuilder<
             Group series = MediaTestDataBuilder.group()
                 .constrained()
                 .type(GroupType.SERIES)
-                .id(seriesId)
+                .nullableId(seriesId)
                 .withMid(midId)
                 .build();
 
@@ -973,7 +973,7 @@ public interface MediaTestDataBuilder<
             Group season = MediaTestDataBuilder.group()
                 .constrained()
                 .type(GroupType.SEASON)
-                .id(seasonId)
+                .nullableId(seasonId)
                 .withMid(midId)
                 .memberOf(series, 1)
                 .memberOf(segment, 2)
