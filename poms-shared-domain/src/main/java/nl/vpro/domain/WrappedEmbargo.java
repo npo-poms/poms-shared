@@ -7,6 +7,10 @@ import java.util.function.Supplier;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+/**
+ * Implementation of {@link MutableEmbargo} which wraps a {@link Supplier} and {@link Consumer} for the start and stop instant.
+ * @since 7.10
+ */
 public class WrappedEmbargo implements MutableEmbargo<WrappedEmbargo> {
 
     private final Supplier<Instant> start;
