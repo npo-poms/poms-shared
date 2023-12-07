@@ -426,7 +426,7 @@ public class AuthorityLocations {
         final boolean[] changes = new boolean[] {false};
         final Prediction prediction = MediaObjects.getPrediction(platform, mediaObject.getPredictions());
         if (prediction != null) {
-            MediaObjects.correctPrediction(prediction, mediaObject, true, Level.DEBUG, now, (ps, p) -> {changes[0] = true;});
+            MediaObjects.correctPrediction(prediction, mediaObject, Level.DEBUG, now, (ps, p) -> {changes[0] = true;});
         } else {
             log.debug("No prediction for {} {}", platform, mediaObject);
         }

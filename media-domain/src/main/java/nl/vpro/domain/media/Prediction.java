@@ -104,8 +104,12 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlAttribute
     @NotNull
     @Getter
-    @Setter
     protected State state = State.ANNOUNCED;
+
+
+    @Transient
+    @Getter
+    protected transient State previousState;
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -307,9 +311,10 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
 
     /**
-     * Then this prediction will be revoked.
-     *
-     * If all locations will be revoked before the registered publishstop in the restriction, then this will return the lastest valut of that.
+     * When this prediction will be revoked.
+     *<p>
+     * If all locations will be revoked before the {@link #getOwnPublishStopInstant() registered publishstop in} this prediction, then this method will return the latest value of that.
+     * @see #getOwnPublishStopInstant()
      */
     @XmlAttribute(name = "publishStop")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -344,6 +349,9 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     /**
+     * Returns the 'own' embargo start. Currently, always the same as {@link #getPublishStartInstant()}
+     * @see #getPublishStartInstant()
+     * @see #getOwnEmbargo()
      * @since 7.10
      */
     public Instant getOwnPublishStartInstant() {
@@ -351,6 +359,9 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     /**
+     * Returns the 'own' embargo stop. {@link #getPublishStopInstant()} may be restricted by available locations.
+     * @see #getPublishStopInstant()
+     * @see #getOwnEmbargo()
      * @since 7.10
      */
     public Instant getOwnPublishStopInstant() {
@@ -360,7 +371,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     /**
      * 'Own' embargo wrapped in a {@link Range}.
      * <p>
-     * Note that this ensures that stop >= start
      * @since 7.10
      * @see #asRange()
      * @see #getOwnEmbargo()
@@ -369,13 +379,13 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         return Ranges.closedOpen(getOwnPublishStartInstant(), getOwnPublishStopInstant());
     }
     /**
+     * An embargo object based on {@link #getOwnPublishStartInstant()} and {@link #getOwnPublishStopInstant()}
      * @since 7.10
      * @see #getOwnPublicationRange()
      */
     public Embargo getOwnEmbargo() {
         return Embargos.of(getOwnPublishStartInstant(), getOwnPublishStopInstant());
     }
-
 
 
     @NonNull
@@ -420,6 +430,15 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     public void setEncryption(Encryption encryption) {
         this.encryption = encryption;
+        invalidateXml();
+    }
+
+
+    public void setState(State state) {
+        if (previousState == null) {
+            previousState = this.state;
+        }
+        this.state = state;
         invalidateXml();
     }
 

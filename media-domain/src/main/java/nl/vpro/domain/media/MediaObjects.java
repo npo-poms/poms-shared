@@ -604,6 +604,17 @@ public class MediaObjects {
         }
     }
 
+    protected static void unappendReason(MediaObject media, Predicate<String> reason) {
+        final String existingReason = media.getRepubReason();
+        if (StringUtils.isNotBlank(existingReason)) {
+            // add via a set, to avoid appending a reason that is there already
+            TreeSet<String> set = Arrays.stream(existingReason.split(REASON_SPLITTER))
+                .collect(Collectors.toCollection(TreeSet::new));
+            set.removeIf(reason);
+            media.setRepubReason(String.join(REASON_SPLITTER, set));
+        }
+    }
+
     public static boolean markForUnDeletionIfNeeded(@NonNull MediaObject media, String reason) {
         if (CollectionUtils.inCollection(Workflow.DELETES, media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
@@ -1285,11 +1296,11 @@ public class MediaObjects {
      */
     protected static void autoCorrectPrediction(Prediction prediction, MediaObject mediaObject) {
         if (autoCorrectPredictions) {
-            correctPrediction(prediction, mediaObject, false, Level.INFO, instant(), (prevState, p) -> {});
+            correctPrediction(prediction, mediaObject, Level.INFO, instant(), (prevState, p) -> {});
         }
     }
 
-    protected static void correctPrediction(final Prediction prediction, MediaObject mediaObject, boolean markForRepublicationOnChanges, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
+    protected static void correctPrediction(final Prediction prediction, MediaObject mediaObject, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
          final Prediction.State prevState = prediction.getState();
          switch (prevState) {
              case ANNOUNCED, REVOKED -> {
@@ -1314,8 +1325,11 @@ public class MediaObjects {
                          realized = true;
                          Slf4jHelper.log(log, level, "Set state of {} from {} to REALIZED (by {}) of object {}", prediction, prevState, location.getProgramUrl(), mediaObject.mid);
                          onChange.accept(prevState, prediction);
-                         if (markForRepublicationOnChanges) {
-                             markForRepublication(mediaObject, PublicationReason.Reasons.REALIZED_PREDICTION.formatted(prediction.getPlatform().name()));
+                         String reason = PublicationReason.Reasons.REALIZED_PREDICTION.formatted(prediction.getPlatform().name());
+                         if (prediction.getPreviousState() == prediction.getState()) {
+                             unappendReason(mediaObject, (r) -> r.equals(reason));
+                         } else {
+                             appendReason(mediaObject, reason);
                          }
                          break;
                      }
@@ -1324,8 +1338,11 @@ public class MediaObjects {
                      prediction.setState(Prediction.State.REVOKED);
                      Slf4jHelper.log(log, level, "Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
                      onChange.accept(prevState, prediction);
-                     if (markForRepublicationOnChanges) {
-                         markForRepublication(mediaObject, PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name()));
+                     String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name());
+                     if (prediction.getPreviousState() == prediction.getState()) {
+                         unappendReason(mediaObject, (r) -> r.equals(reason));
+                     } else {
+                         appendReason(mediaObject, reason);
                      }
                  }
              }
@@ -1347,8 +1364,11 @@ public class MediaObjects {
                      Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                      prediction.setState(Prediction.State.REVOKED);
                      onChange.accept(prevState, prediction);
-                     if (markForRepublicationOnChanges) {
-                         markForRepublication(mediaObject, PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name()));
+                     String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name());
+                     if (prediction.getPreviousState() == prediction.getState()) {
+                         unappendReason(mediaObject, (r) -> r.equals(reason));
+                     } else {
+                         appendReason(mediaObject, reason);
                      }
                  }
              }
