@@ -134,7 +134,7 @@ public final class Group extends MediaObject {
             throw CircularReferenceException.self(member, this, findAncestry(member));
         }
         if (member.hasDescendant(this)) {
-            throw new CircularReferenceException(this, findAncestry(member));
+            throw new CircularReferenceException(member, this, findAncestry(member));
         }
 
         if(member.memberOf == null) {
