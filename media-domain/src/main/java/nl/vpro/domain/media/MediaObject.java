@@ -1722,7 +1722,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             throw new IllegalArgumentException("Must supply an ordering number.");
         }
 
-        if (this.equals(member) || this.hasAncestor(member)) {
+        if (this.equals(member)) {
+            throw CircularReferenceException.self(this, findAncestry(member));
+        }
+        if (this.hasAncestor(member)) {
             throw new CircularReferenceException(this, findAncestry(member));
         }
 
