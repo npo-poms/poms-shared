@@ -875,6 +875,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return new Editor(principalId, null, null, null, null);
     }
 
+    B correctPredictions();
+
 
 
     @ToString
@@ -900,6 +902,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         @Valid
         M mediaObject;
 
+        @Override
         public T correctPredictions() {
             correctPredictions = true;
             return (T) this;

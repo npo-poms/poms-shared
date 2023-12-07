@@ -885,6 +885,7 @@ public interface MediaTestDataBuilder<
                 .withWebsites()
                 .withWorkflow()
                 .withIds(ids)
+                .correctPredictions()
             ;
 
 
