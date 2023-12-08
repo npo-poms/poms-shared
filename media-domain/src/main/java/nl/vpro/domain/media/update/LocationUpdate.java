@@ -97,6 +97,11 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     @XmlAttribute
     private String urn;
 
+    @Getter
+    @Setter
+    @XmlAttribute
+    private Boolean delete;
+
     public LocationUpdate() {
     }
 
@@ -116,11 +121,32 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public LocationUpdate(String programUrl, Duration duration, Integer width, Integer height, Integer bitrate, AVFileFormat format) {
+    public LocationUpdate(
+        String programUrl,
+        Duration duration,
+        Integer width,
+        Integer height,
+        Integer bitrate,
+        AVFileFormat format,
+        String urn,
+        Instant publishStart,
+        Instant publishStop,
+        Boolean delete) {
         this(programUrl, duration, bitrate, format);
         this.avAttributes.setVideoAttributes(new VideoAttributesUpdate(width, height));
+        this.urn = urn;
+        this.publishStart = publishStart;
+        this.publishStop = publishStop;
+        this.delete = (delete == null || ! delete) ? null : delete;
     }
 
+
+    /**
+     * @since 7.10
+     */
+    public boolean forDeletion() {
+        return delete != null && delete;
+    }
 
     public LocationUpdate(Location location) {
         programUrl = location.getProgramUrl();
