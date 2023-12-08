@@ -23,11 +23,13 @@ import org.springframework.beans.factory.annotation.Value;
 import nl.vpro.domain.Changeables;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.logging.simple.Level;
 import nl.vpro.util.HttpConnectionUtils;
 
 import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.media.Encryption.DRM;
+import static nl.vpro.domain.media.Platform.INTERNETVOD;
 
 /**
  * Utilities related to poms 'authoritative locations'. I.e. {@link MediaObject#getLocations() locations} that are implicitly added (because of some notification from an external system, currently NEP), with {@link OwnerType owner} {@link OwnerType#AUTHORITY}
@@ -85,8 +87,10 @@ public class AuthorityLocations {
     public RealizeResult realizeStreamingPlatformIfNeeded(
         @NonNull MediaObject mediaObject,
         @NonNull Platform platform) {
-        final Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
-        log.debug("Webonly : {}", webonly);
+        if (platform == INTERNETVOD) {
+            final Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
+            log.debug("Webonly : {}", webonly);
+        }
 
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
 
@@ -106,7 +110,7 @@ public class AuthorityLocations {
         }
         final List<Location> authorityLocations = getOrCreateAuthorityLocations(mediaObject, existingPredictionForPlatform.getEncryption());
 
-
+        mediaObject.correctPredictions();
         return RealizeResult.builder()
             .needed(true)
             .locations(authorityLocations)
@@ -144,6 +148,13 @@ public class AuthorityLocations {
     }
 
 
+    private static void makeLocationPublishable(Location authorityLocation) {
+        authorityLocation.setPublishStopInstant(null);
+        if (authorityLocation.isDeleted()) {
+            authorityLocation.setWorkflow(Workflow.FOR_PUBLICATION);
+        }
+    }
+
     private List<Location> getOrCreateAuthorityLocations(MediaObject mediaObject, Encryption encryption) {
 
         final List<Location> result = new ArrayList<>();
@@ -153,6 +164,7 @@ public class AuthorityLocations {
             String locationUrl = String.format(audioTemplate, mediaObject.getMid());
             Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, Platform.INTERNETAOD, locationUrl, "nepaudio");
             log.debug("matched {}", authorityLocation);
+            makeLocationPublishable(authorityLocation);
             result.add(authorityLocation);
         }
         if (streamingPlatformStatus.hasDrm() || encryption == DRM) {
@@ -162,9 +174,9 @@ public class AuthorityLocations {
                     String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, DRM, "nep");
                     Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
                     log.debug("matched {}", authorityLocation);
+                    makeLocationPublishable(authorityLocation);
                     result.add(authorityLocation);
                 }
-
             }
         }
         if (streamingPlatformStatus.hasWithoutDrm()) {
@@ -174,6 +186,7 @@ public class AuthorityLocations {
                     String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, Encryption.NONE, "nep");
                     Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
                     log.debug("matched {}", authorityLocation);
+                    makeLocationPublishable(authorityLocation);
                     result.add(authorityLocation);
                 }
             }
@@ -251,9 +264,9 @@ public class AuthorityLocations {
             boolean drm = encryption == DRM;
             String scheme = drm ? "npo+drm" : "npo";
             return scheme + "://" + platform.name().toLowerCase() + ".omroep.nl/";
-        } else if (platform == Platform.INTERNETVOD && "adaptive".equals(publicationOption)) {
+        } else if (platform == INTERNETVOD && "adaptive".equals(publicationOption)) {
             return "odip+http://odi.omroep.nl/video/" + publicationOption + "/";
-        } else if (platform == Platform.INTERNETVOD) {
+        } else if (platform == INTERNETVOD) {
             return "odi+http://odi.omroep.nl/video/" + publicationOption + "/";
         } else if (platform == Platform.PLUSVOD) {
             return "sub+http://npo.npoplus.nl/video/" + publicationOption + "/";
@@ -308,13 +321,13 @@ public class AuthorityLocations {
             }
             if (isAudioUrl(existingPlatformLocation)) {
                 if (! streamingPlatformStatus.hasAudio() || !  encryptions.contains(Encryption.NONE)) {
-                    mediaObject.removeLocation(existingPlatformLocation);
+                    existingPlatformLocation.setWorkflow(Workflow.DELETED);
                     log.info("Removing {}", existingPlatformLocation);
                 }
                 continue;
             } else {
                 if (!encryptions.contains(getVideoEncryptionFromProgramUrl(existingPlatformLocation))) {
-                    mediaObject.removeLocation(existingPlatformLocation);
+                    existingPlatformLocation.setWorkflow(Workflow.DELETED);
                     log.info("Removing {}", existingPlatformLocation);
                 } else {
                     log.debug("Letting {}", existingPlatformLocation);
@@ -376,24 +389,24 @@ public class AuthorityLocations {
      *
      */
     Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
-        final Prediction existingPrediction = mediaObject.getPrediction(Platform.INTERNETVOD);
+        final Prediction existingPrediction = mediaObject.getPrediction(INTERNETVOD);
         if (existingPrediction == null) {
             final String audioPrefix = this.getAudioPrefix();
             final Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream().filter(
-                    (l) -> Platform.INTERNETVOD.matches(l.getPlatform()))
+                    (l) -> INTERNETVOD.matches(l.getPlatform()))
                 .filter((l) -> ! isVideoUrl(l)) // ignore locations though that are made because of notify itself
                 .filter((l) -> ! isAudioUrl(l)) // also valid for this one, this is AOD
                 .filter((l) -> ! l.isDeleted()) // deleted, so assume they shouldn't have existing in the first place
                 .collect(Collectors.toSet());
             if (!existingWebonlyLocations.isEmpty()) {
-                Prediction prediction = mediaObject.findOrCreatePrediction(Platform.INTERNETVOD);
+                Prediction prediction = mediaObject.findOrCreatePrediction(INTERNETVOD);
                 prediction.setPlannedAvailability(true);
                 prediction.setEncryption(null);
                 Iterator<Location> i = existingWebonlyLocations.iterator();
                 Location first = i.next();
-                Embargos.copyIfLessRestrictedOrTargetUnset(first.getOwnEmbargo(), prediction);
+                Embargos.copyIfLessRestrictedOrTargetUnset(first.getOwnEmbargo(), prediction.getOwnEmbargo());
                 i.forEachRemaining((l) -> {
-                    Embargos.copyIfLessRestricted(l.getOwnEmbargo(), prediction);
+                    Embargos.copyIfLessRestricted(l.getOwnEmbargo(), prediction.getOwnEmbargo());
                 });
                 return Optional.of(prediction);
             }
