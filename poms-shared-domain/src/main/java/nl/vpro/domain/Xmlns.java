@@ -9,6 +9,7 @@ import java.util.*;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
+import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -84,6 +85,11 @@ public final class Xmlns {
     public static final String MEDIA_I18N_NAMESPACE = "urn:vpro:media:i18n:2017";
 
     public static final String NEP_NOTIFY_NAMESPACE = "urn:vpro:media:notify:2017";
+
+    public static final QName NOTIFY = new QName(Xmlns.NEP_NOTIFY_NAMESPACE, "notify");
+
+    public static final QName NEP_STREAMSTATUS = new QName(null, "streamstatus");
+    public static final QName NEP_STREAMSTATUS_PRID = new QName(null, "prid");
 
     public static final String GTAA_NAMESPACE = "urn:vpro:gtaa:2017";
 
