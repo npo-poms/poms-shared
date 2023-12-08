@@ -25,6 +25,16 @@ public class Examples {
             }
         }""";
 
+    public static final String FORM_JSON_BROADCASTS = """
+         {
+             "searches" : {
+                 "types" : "BROADCAST",
+                 "avTypes": "VIDEO"
+             }
+
+        }
+        """;
+
     public static final String FORM_XML = """
         <api:mediaForm xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
             <api:searches>
