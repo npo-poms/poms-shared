@@ -13,11 +13,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.update.UploadResponse;
-import nl.vpro.logging.simple.Log4j2SimpleLogger;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.util.FileCachingInputStream;
 
-import static nl.vpro.logging.Log4j2Helper.slf4j;
+import static nl.vpro.logging.simple.Log4j2SimpleLogger.simple;
 import static nl.vpro.sourcingservice.SourcingService.loggingConsumer;
 
 @Log4j2
@@ -26,7 +25,7 @@ class AudioSourcingServiceImplITest {
 
     public static final Properties PROPERTIES = new Properties();
 
-    private static final String MID = "WO_VPRO_A20033263";
+    private static final String MID = "WO_VPRO_A20033640";
 
     static {
         try {
@@ -59,14 +58,14 @@ class AudioSourcingServiceImplITest {
     @Test
     public void uploadAudio() throws IOException {
         final Instant start = Instant.now();
-        final Path file = Paths.get(System.getProperty("user.home") , "samples", "De_Machine_AFL_129_Final.mp3");
+        final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.wav");
 
-        final SimpleLogger logger = Log4j2SimpleLogger.simple(log);
+        final SimpleLogger logger = simple(log);
         final FileCachingInputStream cachingInputStream = FileCachingInputStream.builder()
             .input(Files.newInputStream(file))
             .batchSize(50 * 1024 * 1024)
             .outputBuffer(50 * 1024 * 1024)
-            .logger(slf4j(log))
+            .simpleLogger(simple(log))
             .filePrefix("gui-upload-")
             .deleteTempFile(false)
             .startImmediately(true)
@@ -74,7 +73,7 @@ class AudioSourcingServiceImplITest {
             .build();
         final UploadResponse upload = impl.upload(logger, MID, null,
             Files.size(file),
-            "audio/mp3",
+            "audio/wav",
             cachingInputStream,
             "m.meeuwissen.vpro@gmail.com"
         );

@@ -17,6 +17,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tika.mime.MimeTypeException;
+import org.apache.tika.mime.MimeTypes;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
@@ -122,8 +124,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
     protected  String getFileName(String mid, String mimeType) {
-        AVFileFormat fileFormat = AVFileFormat.forMimeType(mimeType).orElse(defaultFormat());
-        return mid + "." + fileFormat.name().toLowerCase();
+        String ext;
+        try {
+            ext = MimeTypes.getDefaultMimeTypes().forName(mimeType).getExtension();
+        } catch (MimeTypeException e) {
+            log.warn(e.getMessage(), e);
+            ext = "." + defaultFormat().name().toLowerCase();
+        }
+        return mid + ext;
     }
 
     protected abstract AVFileFormat defaultFormat();
