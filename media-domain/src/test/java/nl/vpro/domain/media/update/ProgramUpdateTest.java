@@ -722,9 +722,15 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testGetLocations() {
         ProgramUpdate update = programUpdate();
         update.setLocations(new TreeSet<>(Collections.singletonList(
-            new LocationUpdate("rtsp:someurl",
-                Duration.ofSeconds(100),
-                320, 180, 1000000, AVFileFormat.M4V))));
+            LocationUpdate.builder()
+                .programUrl("rtsp:someurl")
+                .duration(Duration.ofSeconds(100))
+                .width(320)
+                .height(180)
+                .bitrate(1000000)
+                .format(AVFileFormat.M4V)
+                .build()
+        )));
 
         String expected = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
