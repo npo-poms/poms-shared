@@ -33,8 +33,7 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.image.MutableMetadata;
 import nl.vpro.domain.image.backend.BackendImage;
 import nl.vpro.domain.image.backend.BackendImageMetadata;
-import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
@@ -186,6 +185,10 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @XmlTransient
     private Instant creationDate;
 
+
+    @XmlAttribute
+    private Boolean delete;
+
     public ImageUpdate() {
     }
 
@@ -258,7 +261,8 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         String credits,
         Instant publishStart,
         Instant publishStop,
-        List<String> crids
+        List<String> crids,
+        Boolean delete
         ) {
         this.description = description;
         this.title = title;
@@ -277,6 +281,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.publishStartInstant = publishStart;
         this.publishStopInstant = publishStop;
         this.crids = crids == null ? null: new ArrayList<>(crids);
+        this.delete = delete == null || ! delete ? null : delete;
     }
 
 
@@ -324,6 +329,9 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         }
         result.setCrids(crids);
         Embargos.copy(this, result);
+        if (forDeletion()) {
+            PublishableObjectAccess.setWorkflow(result, Workflow.FOR_DELETION);
+        }
         return result;
     }
 
@@ -384,6 +392,10 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
      */
     public void setImage(String urn) {
         this.image = urn;
+    }
+
+    public boolean forDeletion() {
+        return delete != null && delete;
     }
 
     @Override
