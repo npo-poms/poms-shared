@@ -1,7 +1,7 @@
 {
   "description" : "revoked prediction and expired location",
   "publishedNowExpectedPlatforms" : [ ],
-  "publishedWasExpectedPlatforms" : [ "PLUSVOD" ],
+  "publishedWasExpectedPlatforms" : [ "INTERNETVOD", "PLUSVOD" ],
   "publishedWillExpectedPlatforms" : [ ],
   "nowExpectedPlatforms" : [ ],
   "wasExpectedPlatforms" : [ "INTERNETVOD", "PLUSVOD" ],
@@ -19,11 +19,37 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "revoked prediction and expired location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
+    "expandedTitles" : [ {
+      "value" : "revoked prediction and expired location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "revoked prediction and expired location",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "revoked prediction and expired location",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "revoked prediction and expired location",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "publishStop" : 1635253190000,
-      "platform" : "PLUSVOD"
+      "platform" : "INTERNETVOD",
+      "publishStop" : 1635253190000
+    }, {
+      "state" : "REVOKED",
+      "platform" : "PLUSVOD",
+      "publishStop" : 1635253190000
     } ],
     "locations" : [ ]
   },
@@ -36,11 +62,20 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "revoked prediction and expired location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "publishStop" : 1635253190000,
-      "platform" : "PLUSVOD"
+      "platform" : "INTERNETVOD",
+      "publishStop" : 1635253190000
+    }, {
+      "state" : "REVOKED",
+      "platform" : "PLUSVOD",
+      "publishStop" : 1635253190000
     } ],
     "locations" : [ {
       "programUrl" : "https://download.omroep.nl/vpro/algemeen/yous_yay_newemotions/yous_yay_johan fretz.mp3",
@@ -49,7 +84,7 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "PUBLISHED",
+      "workflow" : "REVOKED",
       "platform" : "INTERNETVOD",
       "publishStop" : 1635253190000
     } ]

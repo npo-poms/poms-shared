@@ -1136,43 +1136,48 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testLocations() {
+        final Instant now = Instant.now();
         Location expiredLocation =
             Location.builder()
                 .avAttributes(AVAttributes.builder().avFileFormat(AVFileFormat.H264).build())
                 .platform(Platform.INTERNETVOD)
                 .programUrl("https://www.vpro.nl/1")
+                .publishStop(now.minus(Duration.ofMinutes(1)))
                 .build();
-        expiredLocation.setPublishStopInstant(Instant.now().minus(Duration.ofMinutes(1)));
 
         Location publishedLocation =
             Location.builder()
                 .avAttributes(AVAttributes.builder().avFileFormat(AVFileFormat.H264).build())
                 //.platform(Platform.INTERNETVOD) //If you enable this, it will have the _same embargo_ ?? TODO?
                 .programUrl("https://www.vpro.nl/2")
+                .publishStop(now.plus(Duration.ofMinutes(10)))
                 .build();
-        publishedLocation.setPublishStopInstant(Instant.now().plus(Duration.ofMinutes(10)));
+        log.info("now {}", now);
+        log.info("expired {}", expiredLocation.getOwnPublishStopInstant());
+        log.info("future {}", publishedLocation.getOwnPublishStopInstant());
 
         assertThat(expiredLocation.getPublishStopInstant()).isNotNull();
-        assertThat(expiredLocation.getPublishStopInstant()).isBefore(Instant.now());
+        assertThat(expiredLocation.getPublishStopInstant()).isBefore(now);
 
         assertThat(publishedLocation.getPublishStopInstant()).isNotNull();
-        assertThat(publishedLocation.getPublishStopInstant()).isAfter(Instant.now());
+        assertThat(publishedLocation.getPublishStopInstant()).isAfter(now);
 
         ProgramUpdate clip = ProgramUpdate
             .create(
                 program(ProgramType.CLIP)
                     .clearBroadcasters()
                     .broadcasters("VPRO")
+                    //.predictions(Prediction.announced(Platform.INTERNETVOD).build())
                     .locations(
                         expiredLocation,
                         publishedLocation
                     )
             );
         assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); //Used to fail
-        assertThat(expiredLocation.getPublishStopInstant()).isBefore(Instant.now());
+        assertThat(expiredLocation.getPublishStopInstant()).isBefore(now);
 
         assertThat(publishedLocation.getPublishStopInstant()).isNotNull();
-        assertThat(publishedLocation.getPublishStopInstant()).isAfter(Instant.now());
+        assertThat(publishedLocation.getPublishStopInstant()).isAfter(now);
 
         ProgramUpdate rounded = JAXBTestUtil.roundTrip(clip);
 
@@ -1180,10 +1185,10 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         publishedLocation = rounded.getLocations().last().toLocation(OwnerType.BROADCASTER);
 
         assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); //Used to fail
-        assertThat(expiredLocation.getPublishStopInstant()).isBefore(Instant.now());
+        assertThat(expiredLocation.getPublishStopInstant()).isBefore(now);
 
         assertThat(publishedLocation.getPublishStopInstant()).isNotNull();
-        assertThat(publishedLocation.getPublishStopInstant()).isAfter(Instant.now());
+        assertThat(publishedLocation.getPublishStopInstant()).isAfter(now);
 
 
     }

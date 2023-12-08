@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.parallel.*;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -49,18 +50,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 @SuppressWarnings("DataFlowIssue")
 @Slf4j
+@Isolated
+@Execution(ExecutionMode.SAME_THREAD)
 public class MediaObjectJsonSchemaTest {
 
-    @BeforeAll
-    public static void before() {
+    @BeforeEach
+    public void before() {
         CLOCK.set(Clock.fixed(Instant.ofEpochMilli(10), Schedule.ZONE_ID));
         Locale.setDefault(Locales.DUTCH);
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
         MediaObjects.autoCorrectPredictions = false;
+        PublicationFilter.ENABLED.remove();
     }
 
-    @AfterAll
-    public static void cleanUp() {
+    @AfterEach
+    public void cleanUp() {
         CLOCK.remove();
     }
 
@@ -131,7 +135,11 @@ public class MediaObjectJsonSchemaTest {
     public void testMergedTo() throws Exception {
         String expected = "{\"objectType\":\"program\",\"workflow\":\"MERGED\",\"mergedTo\":\"MERGE_TARGET\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
-        Program program = program().lean().mergedTo(program().mid("MERGE_TARGET").build()).build();
+        Program program = program().lean()
+            .mergedTo(program()
+                .mid("MERGE_TARGET")
+                .build()
+            ).build();
         String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
@@ -156,8 +164,6 @@ public class MediaObjectJsonSchemaTest {
 
         assertJsonEquals(expected, actual);
     }
-
-
 
 
     @Test
@@ -220,8 +226,6 @@ public class MediaObjectJsonSchemaTest {
             .next()
             .getPlatform())
             .isEqualTo(Platform.INTERNETVOD);
-
-
     }
 
     @Test
@@ -681,99 +685,99 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-                public void testLanguages() throws Exception {
-                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[{\"code\":\"nl\",\"value\":\"Nederlands\"}]}";
+    public void testLanguages() throws Exception {
+        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[{\"code\":\"nl\",\"value\":\"Nederlands\"}]}";
 
-                    Program program = program().id(100L).lean().languages("nl").build();
+        Program program = program().id(100L).lean().languages("nl").build();
 
-                    String actual = toPublisherJson(program);
+        String actual = toPublisherJson(program);
 
-                    assertJsonEquals(expected, actual);
-                }
-
-
-                @Test
-                public void testCountries() throws Exception {
-                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[{\"code\":\"NL\",\"value\":\"Nederland\"}],\"languages\":[]}";
-
-                    Program program = program().id(100L).lean().countries("NL").build();
-
-                    String actual = toPublisherJson(program);
-
-                    assertJsonEquals(expected, actual);
-                }
+        assertJsonEquals(expected, actual);
+    }
 
 
-                @Test
-                public void testAgeRating() throws Exception {
-                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"16\"}";
+    @Test
+    public void testCountries() throws Exception {
+        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[{\"code\":\"NL\",\"value\":\"Nederland\"}],\"languages\":[]}";
 
-                    Program program = program().id(100L).lean().ageRating(AgeRating._16).build();
+        Program program = program().id(100L).lean().countries("NL").build();
 
-                    String actual = toPublisherJson(program);
+        String actual = toPublisherJson(program);
 
-                    assertJsonEquals(expected, actual);
-                }
-
-                @Test
-                public void testAgeRatingAll() throws Exception {
-                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"ALL\"}";
-
-                    Program program = program().id(100L).lean().ageRating(AgeRating.ALL).build();
-
-                    String actual = toPublisherJson(program);
-
-                    assertJsonEquals(expected, actual);
-                }
+        assertJsonEquals(expected, actual);
+    }
 
 
-                @Test
-                public void testAgeRatingUnknown() throws Exception {
-                    String odd = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"17\"}";
+    @Test
+    public void testAgeRating() throws Exception {
+        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"16\"}";
 
-                    Program program = Jackson2Mapper.getLenientInstance().readValue(odd, Program.class);
-                    assertThat(program.getAgeRating()).isNull();
-                }
+        Program program = program().id(100L).lean().ageRating(AgeRating._16).build();
 
+        String actual = toPublisherJson(program);
 
-                @Test
-                public void testAspectRatio() throws Exception {
-                    String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"avAttributes\":{\"videoAttributes\":{\"aspectRatio\":\"16:9\"}}}";
+        assertJsonEquals(expected, actual);
+    }
 
-                    Program program = program().id(100L).lean().aspectRatio(AspectRatio._16x9).build();
+    @Test
+    public void testAgeRatingAll() throws Exception {
+        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"ALL\"}";
 
-                    String actual = toPublisherJson(program);
+        Program program = program().id(100L).lean().ageRating(AgeRating.ALL).build();
 
-                    assertJsonEquals(expected, actual);
-                }
+        String actual = toPublisherJson(program);
 
-
-                @Test
-                public void testObjectType() throws IOException {
-                    String expected = "{\"objectType\":\"group\",\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"isOrdered\":true}";
-                    Group group = group().id(100L).lean().build();
-
-                    String actual = toPublisherJson(group);
-                    assertJsonEquals(expected, actual);
+        assertJsonEquals(expected, actual);
+    }
 
 
-                }
+    @Test
+    public void testAgeRatingUnknown() throws Exception {
+        String odd = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":\"17\"}";
 
-                @Test
-                public void testUnMarshalGroupWithoutObjectType()  {
-                    assertThatThrownBy(() -> {
-                        String expected = "{\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"isOrdered\":true}";
-
-                        MediaObject mo = Jackson2Mapper.getInstance().readValue(expected, MediaObject.class);
-                        log.info("{}", mo);
-                    }).isInstanceOf(JsonMappingException.class);
+        Program program = Jackson2Mapper.getLenientInstance().readValue(odd, Program.class);
+        assertThat(program.getAgeRating()).isNull();
+    }
 
 
-                }
+    @Test
+    public void testAspectRatio() throws Exception {
+        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"avAttributes\":{\"videoAttributes\":{\"aspectRatio\":\"16:9\"}}}";
 
-                @Test
-                public void testWithLocations() {
-                    String expected = """
+        Program program = program().id(100L).lean().aspectRatio(AspectRatio._16x9).build();
+
+        String actual = toPublisherJson(program);
+
+        assertJsonEquals(expected, actual);
+    }
+
+
+    @Test
+    public void testObjectType() throws IOException {
+        String expected = "{\"objectType\":\"group\",\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"isOrdered\":true}";
+        Group group = group().id(100L).lean().build();
+
+        String actual = toPublisherJson(group);
+        assertJsonEquals(expected, actual);
+
+
+    }
+
+    @Test
+    public void testUnMarshalGroupWithoutObjectType()  {
+        assertThatThrownBy(() -> {
+            String expected = "{\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"isOrdered\":true}";
+
+            MediaObject mo = Jackson2Mapper.getInstance().readValue(expected, MediaObject.class);
+            log.info("{}", mo);
+        }).isInstanceOf(JsonMappingException.class);
+
+
+    }
+
+    @Test
+    public void testWithLocations() {
+        String expected = """
                         {
                            "objectType" : "program",
                            "urn" : "urn:vpro:media:program:100",
@@ -931,17 +935,17 @@ public class MediaObjectJsonSchemaTest {
     @Test
     public void testUnMarshalWithFullGeoLocations() throws Exception {
         String geoLocationsJson = """
-                  {
-                    "owner":"BROADCASTER",
-                    "values": [{
-                      "name":"myName",
-                      "scopeNotes": ["myDescription"],
-                      "gtaaUri": "myuri",
-                      "gtaaStatus": "approved",
-                      "role":"RECORDED_IN"
-                    }]
-                  }\
-            """;
+          {
+            "owner":"BROADCASTER",
+            "values": [{
+              "name":"myName",
+              "scopeNotes": ["myDescription"],
+              "gtaaUri": "myuri",
+              "gtaaStatus": "approved",
+              "role":"RECORDED_IN"
+            }]
+          }
+          """;
 
         GeoLocations actualGeoLocations = Jackson2Mapper.getStrictInstance().readerFor(GeoLocations.class).readValue(new StringReader(geoLocationsJson));
         GeoLocation value = GeoLocation.builder()
@@ -1066,13 +1070,16 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void programWithEverything() throws Exception {
-        StringWriter programJson = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, UTF_8);
-        Program program =  MediaTestDataBuilder
+        final Program program =  MediaTestDataBuilder
                 .program()
                 .withEverything()
                 .build();
-        Program rounded  = Jackson2TestUtil.roundTripAndSimilarAndEquals(program, programJson.toString());
+
+        StringWriter programJson = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, UTF_8);
+
+        final Program rounded  = Jackson2TestUtil.roundTripAndSimilarAndEquals(program, programJson.toString());
+
         assertThat(rounded.getLocations().first().getId()).isEqualTo(6);
         assertThat(rounded.getMemberOf().first().getType()).isEqualTo(MediaType.SEASON);
     }
@@ -1095,8 +1102,13 @@ public class MediaObjectJsonSchemaTest {
         PublicationFilter.ENABLED.set(true);
         Program p = MediaTestDataBuilder
             .program()
+            .predictions(Platform.INTERNETVOD)
+            .correctPredictions()
             .locations(
-                Location.builder().programUrl("https://vpro.nl/foo.mp3").publishStop(instant().minusSeconds(10)).build(),
+                Location.builder()
+                    .programUrl("https://vpro.nl/foo.mp3")
+                    .publishStop(instant().minusSeconds(10))
+                    .build(),
                 Location.builder().programUrl("https://vpro.nl/bar.mp3").workflow(Workflow.DELETED).build(),
                 Location.builder().programUrl("https://vpro.nl/bar2.mp3").workflow(Workflow.FOR_DELETION).build()
             )
@@ -1106,19 +1118,23 @@ public class MediaObjectJsonSchemaTest {
             .withoutRemarshalling()
             .isSimilarTo("""
                 {
-                  "objectType" : "program",
-                  "workflow" : "FOR_PUBLICATION",
-                  "sortDate" : 10,
-                  "creationDate" : 10,
-                  "embeddable" : true,
-                  "broadcasters" : [ ],
-                  "genres" : [ ],
-                  "countries" : [ ],
-                  "languages" : [ ],
-                  "locations" : [ ]
-                }""");
+                   "objectType" : "program",
+                   "workflow" : "FOR_PUBLICATION",
+                   "sortDate" : 10,
+                   "creationDate" : 10,
+                   "embeddable" : true,
+                   "broadcasters" : [ ],
+                   "genres" : [ ],
+                   "countries" : [ ],
+                   "languages" : [ ],
+                   "predictions" : [ {
+                     "state" : "REVOKED",
+                     "platform" : "INTERNETVOD",
+                     "publishStop" : -9990
+                   } ],
+                   "locations" : [ ]
+                 }""");
         PublicationFilter.ENABLED.remove();
-
     }
 
 

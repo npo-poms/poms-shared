@@ -5,6 +5,7 @@ target
 *.ipr
 *.iws
 .jqwik-database
+jqwik-database
 dep
 /media-domain/package-lock.json
 /media-domain/node/

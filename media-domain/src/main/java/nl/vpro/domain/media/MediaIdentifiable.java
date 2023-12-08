@@ -54,11 +54,11 @@ public interface MediaIdentifiable extends MidIdentifiable {
     @Override
     @JsonIgnore
     default Correlation getCorrelation () {
-        String mid = getMid();
+        final String mid = getMid();
         if (mid != null) {
             return Correlation.mid(mid);
         }
-        List<String> crids = getCrids();
+        final List<String> crids = getCrids();
         if (crids != null && !crids.isEmpty()) {
             return Correlation.crid(crids.get(0));
         }

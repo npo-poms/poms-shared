@@ -10,8 +10,7 @@ import java.io.*;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -350,8 +349,8 @@ public class MediaObjects {
      * @since 5.11
      */
     public static SortedSet<ScheduleEvent> getScheduleEvents(MediaObject media) {
-        if (media instanceof Program) {
-            return ((Program) media).getScheduleEvents();
+        if (media instanceof Program program) {
+            return program.getScheduleEvents();
         } else {
             return new TreeSet<>();
         }
@@ -605,6 +604,17 @@ public class MediaObjects {
         }
     }
 
+    protected static void unappendReason(MediaObject media, Predicate<String> reason) {
+        final String existingReason = media.getRepubReason();
+        if (StringUtils.isNotBlank(existingReason)) {
+            // add via a set, to avoid appending a reason that is there already
+            TreeSet<String> set = Arrays.stream(existingReason.split(REASON_SPLITTER))
+                .collect(Collectors.toCollection(TreeSet::new));
+            set.removeIf(reason);
+            media.setRepubReason(String.join(REASON_SPLITTER, set));
+        }
+    }
+
     public static boolean markForUnDeletionIfNeeded(@NonNull MediaObject media, String reason) {
         if (CollectionUtils.inCollection(Workflow.DELETES, media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
@@ -623,6 +633,7 @@ public class MediaObjects {
      * the last publish instant will be set, and the reason and destinations will be cleared.
      * <p>
      * The workflow itself will remain untouched, and would be set to {@link Workflow#PUBLISHED}, {@link Workflow#REVOKED} or {@link Workflow#MERGED}
+     * @see #setWorkflowPublished(MediaObject)
      */
     public static void markPublished(@NonNull MediaObject media, @NonNull Instant now) {
         media.setLastPublishedInstant(now);
@@ -632,7 +643,7 @@ public class MediaObjects {
 
 
     /**
-     * Sets the workflow of the mediaobject, and it's subobjects to appropriate value for current date.
+     * Sets the workflow of the mediaobject, and its subobjects to appropriate value for current date.
      */
     public static  Workflow setWorkflowPublished(@NonNull MediaObject media) {
         Workflow previous = media.getWorkflow();
@@ -654,7 +665,7 @@ public class MediaObjects {
     private static void setWorkflowPublishedSubObjects(Collection<? extends PublishableObject<?>> publishables) {
         for(PublishableObject<?> po : publishables) {
             if (po.isConsiderableForPublication()) {
-                if (po.isPublishable(Instant.now())) {
+                if (po.isPublishable(instant())) {
                     PublishableObjectAccess.setWorkflow(po, Workflow.PUBLISHED);
                     continue;
                 } else {
@@ -1147,7 +1158,7 @@ public class MediaObjects {
     }
 
     /**
-     * Determines on which {@link Platform}s the given {@code MediaObject} will be playable.
+     * Determines on which {@link Platform}s the given {@code MediaObject} {@link #willBePlayable(Platform, MediaObject) will be playable}.
      * @since 5.31
      */
     public static Set<Platform> willBePlayable(@NonNull MediaObject mediaObject) {
@@ -1283,48 +1294,86 @@ public class MediaObjects {
      *  // TODO: I think is is a bit odd that this kind of logic happens here.
      *  It ensures consistency, that's the good thing, but it seems a patch any way!
      */
-    protected static void correctPrediction(Prediction prediction, MediaObject mediaObject) {
+    protected static void autoCorrectPrediction(Prediction prediction, MediaObject mediaObject) {
         if (autoCorrectPredictions) {
-            Instant now = instant();
-            switch (prediction.getState()) {
-                case ANNOUNCED, REVOKED -> {
-                    for (Location location : mediaObject.getLocations()) {
-                        if (
-                            //prediction.getPlatform().matches(location.getPlatform()) .. I think this would be better since it would match locations with (historically) _unfilled_ platform
-                            location.getPlatform() == prediction.getPlatform()
-                                && Workflow.PUBLICATIONS.contains(location.getWorkflow())
-                                && location.inPublicationWindow(instant())
-                        ) {
-                            log.info("Silently set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), mediaObject.mid);
-                            prediction.setState(Prediction.State.REALIZED);
-                            markForRepublication(mediaObject, PublicationReason.Reasons.REALIZED_PREDICTION.formatted(prediction.getPlatform().name()));
-                            break;
-                        }
-                    }
-                }
-                case REALIZED -> {
-                    // Are there any 'REALIZED' prediction without locations that can be played anyway?
-                    // select *  from prediction p inner join location l on p.mediaobject_id = l.mediaobject_id and p.platform = l.platform and l.workflow = 'PUBLISHED' where p.state = 'REALIZED'  and l is null;
-                    // -> no
-
-                    Optional<Location> matchingLocation = mediaObject.getLocations().stream()
-                        .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
-                        .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
-                        .filter(l -> l.inPublicationWindow(instant()))
-                        .findFirst();
-                    if (matchingLocation.isEmpty()) {
-                        final List<Location> withoutFilter = mediaObject.getLocations().stream()
-                            .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
-                            .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
-                            .toList();
-                        Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Silently set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
-                        prediction.setState(Prediction.State.REVOKED);
-                        markForRepublication(mediaObject, PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name()));
-                    }
-                }
-                default -> log.debug("Ignoring prediction {}", prediction);
-            }
+            correctPrediction(prediction, mediaObject, Level.INFO, instant(), (prevState, p) -> {});
         }
+    }
+
+    protected static void correctPrediction(final Prediction prediction, MediaObject mediaObject, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
+         final Prediction.State prevState = prediction.getState();
+         switch (prevState) {
+             case ANNOUNCED, REVOKED -> {
+                 boolean allInPast = true;
+                 boolean hasLocations = false;
+                 boolean realized = false;
+                 for (Location location : mediaObject.getLocations()) {
+                     if ( ! prediction.getPlatform().matches(location.getPlatform())) {
+                         continue;
+                     }
+                     if (location.isDeleted()) {
+                         continue;
+                     }
+                     hasLocations = true;
+                     if (location.isConsiderableForPublication() && ! location.wasUnderEmbargo(now)) {
+                         allInPast = false;
+                     }
+                     if (Workflow.PUBLICATIONS.contains(location.getWorkflow())
+                         && location.inPublicationWindow(now)
+                     ) {
+                         prediction.setState(Prediction.State.REALIZED);
+                         realized = true;
+                         Slf4jHelper.log(log, level, "Set state of {} from {} to REALIZED (by {}) of object {}", prediction, prevState, location.getProgramUrl(), mediaObject.mid);
+                         onChange.accept(prevState, prediction);
+                         String reason = PublicationReason.Reasons.REALIZED_PREDICTION.formatted(prediction.getPlatform().name());
+                         if (prediction.getPreviousState() == prediction.getState()) {
+                             unappendReason(mediaObject, (r) -> r.equals(reason));
+                         } else {
+                             appendReason(mediaObject, reason);
+                         }
+                         break;
+                     }
+                 }
+                 if (hasLocations && ! realized && allInPast && prediction.getState() == Prediction.State.ANNOUNCED) {
+                     prediction.setState(Prediction.State.REVOKED);
+                     Slf4jHelper.log(log, level, "Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
+                     onChange.accept(prevState, prediction);
+                     String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name());
+                     if (prediction.getPreviousState() == prediction.getState()) {
+                         unappendReason(mediaObject, (r) -> r.equals(reason));
+                     } else {
+                         appendReason(mediaObject, reason);
+                     }
+                 }
+             }
+             case REALIZED -> {
+                 // Are there any 'REALIZED' prediction without locations that can be played anyway?
+                 // select *  from prediction p inner join location l on p.mediaobject_id = l.mediaobject_id and p.platform = l.platform and l.workflow = 'PUBLISHED' where p.state = 'REALIZED'  and l is null;
+                 // -> no
+
+                 Optional<Location> matchingLocation = mediaObject.getLocations().stream()
+                     .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
+                     .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                     .filter(l -> l.inPublicationWindow(now))
+                     .findFirst();
+                 if (matchingLocation.isEmpty()) {
+                     final List<Location> withoutFilter = mediaObject.getLocations().stream()
+                         .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
+                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                         .toList();
+                     Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
+                     prediction.setState(Prediction.State.REVOKED);
+                     onChange.accept(prevState, prediction);
+                     String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name());
+                     if (prediction.getPreviousState() == prediction.getState()) {
+                         unappendReason(mediaObject, (r) -> r.equals(reason));
+                     } else {
+                         appendReason(mediaObject, reason);
+                     }
+                 }
+             }
+             default -> log.debug("Ignoring prediction {}", prediction);
+         }
     }
 
 }

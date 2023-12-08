@@ -1,7 +1,7 @@
 {
   "description" : "just a legacy revoked location",
   "publishedNowExpectedPlatforms" : [ ],
-  "publishedWasExpectedPlatforms" : [ ],
+  "publishedWasExpectedPlatforms" : [ "INTERNETVOD" ],
   "publishedWillExpectedPlatforms" : [ ],
   "nowExpectedPlatforms" : [ ],
   "wasExpectedPlatforms" : [ "INTERNETVOD" ],
@@ -18,7 +18,34 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "just a legacy revoked location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
+    "expandedTitles" : [ {
+      "value" : "just a legacy revoked location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "just a legacy revoked location",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "just a legacy revoked location",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "just a legacy revoked location",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "INTERNETVOD",
+      "publishStop" : 1635253190000
+    } ],
     "locations" : [ ]
   },
   "mediaObject" : {
@@ -30,7 +57,17 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "just a legacy revoked location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "INTERNETVOD",
+      "publishStop" : 1635253190000
+    } ],
     "locations" : [ {
       "programUrl" : "https://bla.com/revoke.foobar.mp4",
       "avAttributes" : {
@@ -38,7 +75,7 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "PUBLISHED",
+      "workflow" : "REVOKED",
       "platform" : "INTERNETVOD",
       "publishStop" : 1635253190000
     } ]

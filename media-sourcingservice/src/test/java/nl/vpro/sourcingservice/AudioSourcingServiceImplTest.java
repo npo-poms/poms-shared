@@ -90,6 +90,36 @@ class AudioSourcingServiceImplTest {
 
     }
 
+     @Test
+    public void delete() throws IOException, InterruptedException {
+        stubFor(post(UrlPattern.ANY).willReturn(ok()));
+        final Instant start = Instant.now();
+
+        try {
+            final DeleteResponse deleteResponse = impl.delete("my_mid", 1);
+
+            log.info("Took {}", Duration.between(start, Instant.now()));
+        } catch (SourcingServiceException se) {
+            log.info("Took {}", Duration.between(start, Instant.now()), se);
+        }
+
+        List<ServeEvent> allServeEvents = getAllServeEvents();
+        ServeEvent serveEvent = allServeEvents.get(allServeEvents.size() - 1);
+        assertThat(serveEvent.getRequest().getBodyAsString()).isEqualTo(
+            """
+                {"days_before_hard_delete":1}""");
+    }
+
+    @Test
+    public void delete404() throws IOException, InterruptedException {
+        stubFor(post(UrlPattern.ANY).willReturn(notFound()));
+        final Instant start = Instant.now();
+
+        final DeleteResponse deleteResponse = impl.delete("my_mid", 1);
+
+        assertThat(deleteResponse.getResponse()).isEqualTo("Already deleted?");
+    }
+
 
 
 }

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
@@ -55,12 +56,13 @@ import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
-import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.*;
 import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
@@ -72,8 +74,8 @@ import static nl.vpro.domain.media.MediaObject.*;
  * Media objects are the most central objects of POMS. A media object  represents one document of meta-information, with all titles, descriptions, tags and
  * all other fields that are associated with 'media' in general.
  * <p>
- * Also {@link Group}s are an extension, which implies e.g. that things like a {@link GroupType#PLAYLIST} may themselves have similar meta data, though they
- * basicly represent groups of other {@link MediaObject}s, and are not themselves associated with actual audio or video.
+ * Also {@link Group}s are an extension, which implies e.g. that things like a {@link GroupType#PLAYLIST} may themselves have similar metadata, though they
+ * basically represent groups of other {@link MediaObject}s, and are not themselves associated with actual audio or video.
  * <p>
  * But also {@link Program}s themselves can function as a group and therefor have 'members' (e.g. such a member may be a {@link ProgramType#PROMO}).
  * <p>
@@ -298,7 +300,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // Improvement: cache configuration can be put in a hibernate-config.xml. See
     // https://docs.jboss.org/hibernate/orm/4.0/devguide/en-US/html/ch06.html
     @StringList(maxLength = 255)
-    protected List<@NotNull @CRID  String> crids;
+    protected List<@NotNull @CRID String> crids;
 
     @ManyToMany
     @OrderColumn(name = "list_index",
@@ -353,13 +355,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<@NotNull Description> descriptions;
 
-    @ManyToMany(cascade = {ALL})
+    @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH}) // todo since the genre table only contains 1 field, namely the id, which is already in the mediaobject_genre table, this is odd.
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected Set<@NotNull Genre> genres;
 
-    @ManyToMany(cascade = {ALL})
+    @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
@@ -535,7 +537,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     //@Filter(name = PUBLICATION_FILTER, condition = "workflow = 'PUBLISHED'") doesn't work
     @PublicationFilter
-    protected SortedSet<@NotNull @Valid Location> locations = new TreeSet<>();
+    protected SortedSet<@NotNull Location> locations = new TreeSet<>();
 
 
     @OneToMany(orphanRemoval = true, cascade= {ALL})
@@ -1720,8 +1722,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             throw new IllegalArgumentException("Must supply an ordering number.");
         }
 
-        if (this.equals(member) || this.hasAncestor(member)) {
-            throw new CircularReferenceException(this, findAncestry(member));
+        if (this.equals(member)) {
+            throw CircularReferenceException.self(member, this, findAncestry(member));
+        }
+        if (this.hasAncestor(member)) {
+            throw new CircularReferenceException(member, this, findAncestry(member));
         }
 
         if (member.memberOf == null) {
@@ -1738,9 +1743,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         @NonNull MediaObject group,
         Integer number,
         OwnerType owner) throws CircularReferenceException {
-        MemberRef ref = group.createMember(this, number, owner);
-        ref.setGroup(group);
-        return ref;
+        return group.createMember(this, number, owner);
+
     }
 
     boolean removeMemberOfRef(MediaObject reference) {
@@ -1996,7 +2000,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public List<MediaObject> findAncestry(MediaObject ancestor) {
-        List<MediaObject> ancestry = new ArrayList<>();
+        final List<MediaObject> ancestry = new ArrayList<>();
         findAncestry(ancestor, ancestry);
         return ancestry;
     }
@@ -2099,15 +2103,45 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             predictions = new TreeSet<>();
         }
 
+
+
         // SEE https://jira.vpro.nl/browse/MSE-2313
-        return new SortedSetSameElementWrapper<Prediction>(sorted(predictions)) {
+        return new SortedSetSameElementWrapper<>(sorted(predictions)) {
             @Override
             protected Prediction adapt(Prediction prediction) {
                 prediction.setParent(MediaObject.this);
-                MediaObjects.correctPrediction(prediction, MediaObject.this);
+                MediaObjects.autoCorrectPrediction(prediction, MediaObject.this);
                 return prediction;
             }
+            @Override
+            public boolean add(Prediction element) {
+                return super.add(adapt(element));
+            }
         };
+    }
+
+   /**
+     * Implicitly create predictions for all platforms that have a location, but no prediction yet.
+     */
+    public void implicitPredictions() {
+        //
+        final Map<Platform, List<Location>> locations = new HashMap<>();
+        getLocations().stream()
+            .filter(Location::hasPlatform)
+            .filter(Location::isConsiderableForPublication)
+            .forEach(l -> {
+                locations.computeIfAbsent(l.getPlatform(), p -> new ArrayList<>()).add(l);
+            });
+        for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
+            findOrCreatePrediction(entry.getKey(), true, (created) -> {
+                for (Location l : entry.getValue()) {
+                    // make sure that such an implicit prediction is not more permissive then
+                    Embargos.copyIfLessRestrictedOrTargetUnset(l.getOwnEmbargo(), created.getOwnEmbargo());
+                }
+                created.setState(Prediction.State.of(created));
+                log.info("Implicitly created prediction {} for {} ({})", created, this, entry.getValue());
+            });
+        }
     }
 
     public void setPredictions(Collection<Prediction> predictions) {
@@ -2123,6 +2157,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonProperty("predictions")
     protected List<Prediction> getPredictionsForXml() {
         if (predictionsForXml == null) {
+            implicitPredictions();
             predictionsForXml = getPredictions().stream()
                 .filter(p -> p.isPlannedAvailability() && p.getState() != Prediction.State.NOT_ANNOUNCED)
                 .collect(Collectors.toList());
@@ -2140,7 +2175,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * Like {@link #getPrediction(Platform)} but without also implicitly correcting the {@link Prediction#getState() prediction state} if that happens to be not consistent with the {@link #getLocations() locations}. In other words this just returns the requested prediction without side effects.
      * <p>
      */
-    Prediction getPredictionWithoutFixing(Platform platform) {
+    public Prediction getPredictionWithoutFixing(Platform platform) {
         return MediaObjects.getPrediction(platform, predictions);
     }
 
@@ -2164,7 +2199,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     void realizePrediction(Location location) {
         if (locations == null || (!locations.contains(location) && findLocation(location.getId()) == null)) {
             throw new IllegalArgumentException(
-                    "Can only realize a prediction when accompanying locations is available. Location " + location
+                    "Can only realize a prediction when accompanying locations is unavailable. Location " + location
                             + " is not available in " + getMid() + " " + locations);
         }
 
@@ -2174,13 +2209,35 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             return;
         }
 
-        Prediction prediction = getPrediction(platform);
+        Prediction prediction = getPredictionWithoutFixing(platform);
         if (prediction == null) {
-            prediction = findOrCreatePrediction(platform, location);
-            prediction.setPlannedAvailability(true);
+            if (! location.isDeleted()) {
+                log.debug("No prediction for {}", location);
+                findOrCreatePrediction(platform, true, (c) -> {
+                    MediaObjects.correctPrediction(c, this, Level.DEBUG, instant(), (ps, p) -> {
+                    });
+                });
+            }
+        } else {
+            if (!location.isDeleted()) {
+                prediction.setPlannedAvailability(true);
+            }
+            MediaObjects.correctPrediction(prediction, this, Level.DEBUG, instant(), (ps, p) -> {});
         }
-        prediction.setState(Prediction.State.REALIZED);
+    }
 
+    void correctPrediction(Platform platform) {
+        Prediction prediction = getPredictionWithoutFixing(platform);
+        if (prediction != null) {
+            MediaObjects.correctPrediction(prediction, this, Level.DEBUG, instant(), (ps, p) -> {});
+        }
+    }
+
+    void correctPredictions() {
+        implicitPredictions();
+        for (Platform p : Platform.values()) {
+            correctPrediction(p);
+        }
     }
 
     public boolean removePrediction(Platform platform) {
@@ -2192,22 +2249,23 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public Prediction findOrCreatePrediction(Platform platform) {
-        return findOrCreatePrediction(platform, Embargos.unrestrictedInstance());
+        return findOrCreatePrediction(platform, false, (c) -> {});
     }
 
-    protected Prediction findOrCreatePrediction(Platform platform, Embargo embargo) {
-        Prediction prediction = getPrediction(platform);
+    protected Prediction findOrCreatePrediction(Platform platform, boolean planned, Consumer<Prediction> onCreate) {
+        Prediction prediction = MediaObjects.getPrediction(platform, predictions);
         if (prediction == null) {
             log.debug("Creating prediction object for {}: {}", platform, this);
             prediction = new Prediction(platform);
-            Embargos.copy(embargo, prediction);
-            prediction.setPlannedAvailability(false);
+            prediction.setPlannedAvailability(planned);
             prediction.setParent(this);
             prediction.setAuthority(Authority.USER);
             if (predictions == null) {
                 predictions = new TreeSet<>();
             }
             this.predictions.add(prediction);
+            this.predictionsForXml = null;
+            onCreate.accept(prediction);
         }
         return prediction;
     }
@@ -2312,6 +2370,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public MediaObject addLocation(Location location) {
+        return addLocation(location, true);
+    }
+
+    public MediaObject addLocation(Location location, boolean implicitRealize) {
         if (location == null || location.getProgramUrl() == null) {
             throw new IllegalArgumentException("Must supply a not null location with an url.");
         }
@@ -2337,9 +2399,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         } else {
             locations.add(location);
             location.setParent(this);
-            if (location.hasPlatform() && location.isPublishable(instant())) {
-                realizePrediction(location);
-            }
+        }
+        if (implicitRealize) {
+            realizePrediction(location);
         }
         return this;
     }
@@ -2347,6 +2409,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     public boolean removeLocation(Location location) {
         if (locations != null && locations.remove(location)) {
             markCeresUpdate();
+            correctPrediction(location.getPlatform());
             return true;
         }
         return false;
@@ -2361,6 +2424,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
                 if (locationId.equals(location.getId())) {
                     iterator.remove();
                     markCeresUpdate();
+                    correctPrediction(location.getPlatform());
                     success = true;
                 }
             }
@@ -2837,8 +2901,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof MediaObject) {
-            return super.equals(o) || equalsOnMid((MediaObject) o);
+        if (o instanceof MediaObject mediaObject) {
+            return super.equals(o) || equalsOnMid(mediaObject);
         } else {
             return super.equals(o);
         }
@@ -3132,7 +3196,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
             (! inCollection(Workflow.PUBLICATIONS, workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
-            this.getMid() == null ? "<no mid>" : "\"" + this.getMid() + "\"",
+            this.getMid() == null ? ("<no mid @" + superHashCode() + ">") : "\"" + this.getMid() + "\"",
             mainTitle,
             id
             );

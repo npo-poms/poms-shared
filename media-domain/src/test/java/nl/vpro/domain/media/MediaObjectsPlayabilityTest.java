@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,7 +39,7 @@ import static nl.vpro.domain.media.Platform.INTERNETVOD;
 import static nl.vpro.domain.media.Platform.PLUSVOD;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SuppressWarnings({"ResultOfMethodCallIgnored", "DataFlowIssue"})
+@SuppressWarnings({"ResultOfMethodCallIgnored", "DataFlowIssue", "unchecked"})
 @Log4j2
 class MediaObjectsPlayabilityTest {
 
@@ -46,7 +47,6 @@ class MediaObjectsPlayabilityTest {
     static void init() {
         MediaObjectsTest.init();
         MediaObjects.autoCorrectPredictions = false;
-
     }
 
     @AfterAll
@@ -59,6 +59,7 @@ class MediaObjectsPlayabilityTest {
         return MediaBuilder
             .broadcast()
             .mid(mid)
+            .correctPredictions()
             .creationDate(instant().minus(Duration.ofDays(1)))
             .workflow(Workflow.PUBLISHED)
             ;
@@ -148,114 +149,157 @@ class MediaObjectsPlayabilityTest {
     public static final Platform[] A_PLUSVOD = new Platform[]{PLUSVOD};
     public static final Platform[] A_BOTH = new Platform[]{INTERNETVOD, PLUSVOD};
 
+    public static Supplier<MediaObject> supply(Supplier<MediaBuilder.ProgramBuilder>  builder) {
+        return () -> {
+            MediaObject m = builder.get().build();
+            MediaObjects.setWorkflowPublished(m);
+            return m;
+        };
+    }
+
+
     public static Stream<Arguments> examples() {
         final Instant expired = instant().minusSeconds(10);
         return Stream.of(
             Arguments.of(
                 "just a legacy location",
-                fixed()
+                supply(() -> fixed()
                     .locations(
                         Location.builder().platform(null).programUrl("https://bla.com/foobar.mp4").build()
-                    )
-                    .build(),
+                    )),
                 expected(A_INTERNETVOD, A_NONE, A_NONE, mapRanges(INTERNETVOD, null, null))
             ),
             Arguments.of(
                 "just a legacy revoked location",
-                fixed()
-                    .locations(Location.builder().platform(null).programUrl("https://bla.com/revoke.foobar.mp4").publishStop(expired).build())
-                    .build(),
+                supply(() -> fixed()
+                    .locations(Location.builder().platform(null)
+                        .programUrl("https://bla.com/revoke.foobar.mp4")
+                        .publishStop(expired)
+                        .build())
+                ),
                 expected(
                     A_NONE,
                     A_INTERNETVOD,
                     A_NONE,
                     mapRanges(INTERNETVOD, null, expired)
-                ).withPublished(A_NONE, A_NONE, A_NONE)
+                )
             ),
             Arguments.of(
                 "just a legacy windows media location",
-                fixed()
-                    .locations(Location.builder().platform(null).programUrl("https://bla.com/foobar.wmv").build())
-                    .build(),
+                supply(() -> fixed()
+                    .locations(
+                        Location
+                            .builder()
+                            .platform(null)
+                            .programUrl("https://bla.com/foobar.wmv")
+                            .build())
+                ),
                 expected(A_NONE, A_NONE, A_NONE, mapRanges())
             ),
             Arguments.of(
                 "a location with explicit INTERNETVOD",
-                fixed()
+                supply(() -> fixed()
                     .locations(
-                        Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").build(),
-                        Location.builder().platform(PLUSVOD).workflow(Workflow.DELETED).programUrl("https://bla.com/deleted.mp4").build()
+                        Location.builder()
+                            .platform(INTERNETVOD)
+                            .programUrl("https://bla.com/foobar.mp4")
+                            .build(),
+                        Location.builder()
+                            .platform(PLUSVOD)
+                            .workflow(Workflow.DELETED)
+                            .programUrl("https://bla.com/deleted.mp4")
+                            .build()
                     )
-                    .build(),
-                expected(A_INTERNETVOD, A_NONE, A_NONE, mapRanges(INTERNETVOD, null, null))
+                ),
+                expected(
+                    A_INTERNETVOD,
+                    A_NONE,
+                    A_NONE,
+                    mapRanges(INTERNETVOD, null, null)
+                )
             ),
             Arguments.of(
                 "an INTERNETVOD prediction but the location became unplayable",
-                fixed("WO_AVRO_013701")
+                supply(() -> fixed("WO_AVRO_013701")
                     .locations(
                         Location.builder().platform(INTERNETVOD).programUrl("http://cgi.omroep.nl/cgi-bin/streams?/nps/cultura/CU_VrijdagvanVredenburg_181209b.wmv").build()
                     )
                     .predictions(Prediction.realized().platform(INTERNETVOD).build())
-                    .build(),
+                ),
                 expected(A_NONE, A_NONE, A_NONE, mapRanges())
             ),
             Arguments.of(
                 "a location with explicit PLUSVOD",
-                fixed()
+                supply(() -> fixed()
                     .locations(
                         Location.builder().platform(PLUSVOD).programUrl("https://bla.com/foobar.mp4").build(),
                         Location.builder().platform(PLUSVOD).workflow(Workflow.DELETED).programUrl("https://bla.com/deleted.mp4").build(),
                         Location.builder().platform(PLUSVOD).publishStop(expired).programUrl("https://bla.com/expired.mp4").build()
                     )
-                    .build(),
+                ),
                 expected(A_PLUSVOD, A_NONE, A_NONE, mapRanges(PLUSVOD, null, null))
             ),
             Arguments.of(
                 "an expired location with explicit INTERNETVOD",
-                fixed()
-                    .locations(Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(expired).build())
-                    .build(),
-                expected(A_NONE, A_INTERNETVOD, A_NONE, mapRanges(INTERNETVOD, null, expired)).withPublished(A_NONE, A_NONE, A_NONE)
+                supply(() -> fixed()
+                    .locations(
+                        Location.builder()
+                            .platform(INTERNETVOD)
+                            .programUrl("https://bla.com/foobar.mp4")
+                            .publishStop(expired)
+                            .build()
+                    )
+                ),
+                expected(A_NONE, A_INTERNETVOD, A_NONE, mapRanges(INTERNETVOD, null, expired)
+                )
             ),
             Arguments.of(
                 "an expired location with explicit INTERNETVOD",
-                fixed()
+                supply(() -> fixed()
                     .locations(Location.builder().platform(INTERNETVOD).programUrl("https://bla.com/foobar.mp4").publishStop(expired).build())
-                    .build(),
-                expected(A_NONE, A_INTERNETVOD, A_NONE, mapRanges(INTERNETVOD, null, expired)).withPublished(A_NONE, A_NONE, A_NONE)
+                ),
+                expected(A_NONE, A_INTERNETVOD, A_NONE, mapRanges(INTERNETVOD, null, expired))
             ),
             Arguments.of(
                 "an expired location with explicit PLUSVOD",
-                fixed()
+                supply(() -> fixed()
                     //.predictions(Prediction.builder().publishStop(expired).platform(PLUSVOD).build())
                     .locations(Location.builder().platform(PLUSVOD).publishStop(expired).programUrl("https://bla.com/foobar.mp4").build())
-                    .build(),
-                expected(A_NONE, A_PLUSVOD, A_NONE, mapRanges(PLUSVOD, null, expired))
-                    .withPublished(A_NONE, A_NONE, A_NONE)
+                ),
+                expected(A_NONE, A_PLUSVOD, A_NONE,
+                    mapRanges(PLUSVOD, null, expired)
+                )
             ),
             Arguments.of(
                 "realized prediction",
-                fixed()
-                    .locations(Location.builder().platform(null).programUrl("https://download.omroep.nl/vpro/algemeen/yous_yay_newemotions/yous_yay_johan fretz.mp3").build())
-                    .predictions(Prediction.realized().platform(INTERNETVOD).build())
-                    .build(),
+                supply(() -> fixed()
+                    .locations(
+                        Location.builder()
+                            .platform(null)
+                            .programUrl("https://download.omroep.nl/vpro/algemeen/yous_yay_newemotions/yous_yay_johan fretz.mp3")
+                            .build()
+                    )
+                    .predictions(
+                        Prediction.realized().platform(INTERNETVOD).build()
+                    )
+                ),
                 expected(A_INTERNETVOD, A_NONE, A_NONE, mapRanges(INTERNETVOD, null, null))
             ),
             Arguments.of(
                 "realized prediction and expired location",
-                fixed()
+                supply(() -> fixed()
                     .locations(Location.builder().platform(null).publishStop(expired).programUrl("https://bla.com/foobar.mp4").build())
                     .locations(Location.builder().platform(PLUSVOD).programUrl("https://bla.com/foobar-plusvod.mp4").build())
                     .predictions(Prediction.realized().platform(PLUSVOD).build())
-                    .build(),
+                ),
                 expected(A_PLUSVOD, A_INTERNETVOD, A_NONE,
                     mapRanges(INTERNETVOD, null, expired,
                         PLUSVOD, null, null)
-                ).withPublished(A_PLUSVOD, A_NONE, A_NONE)
+                )
             ),
             Arguments.of(
                 "revoked prediction and expired location", // if the expired location is visible it can be used
-                fixed()
+                supply(() -> fixed()
                     .locations(
                         Location.builder()
                             .platform(null)
@@ -264,37 +308,36 @@ class MediaObjectsPlayabilityTest {
                             .build()
                     )
                     .predictions(Prediction.revoked().publishStop(expired).platform(PLUSVOD).build())
-                    .build(),
+                ),
                 expected(A_NONE, A_BOTH, A_NONE,
                     mapRanges(
                         INTERNETVOD, null, expired,
                         PLUSVOD, null, expired
                     ))
-                    .withPublished(A_NONE, A_PLUSVOD, A_NONE)
             ),
             Arguments.of(
                 "revoked prediction but no locations",
-                fixed()
+                supply(() -> fixed()
                     .predictions(Prediction.revoked().publishStop(expired).platform(PLUSVOD).build())
-                    .build(),
+                ),
                 expected(A_NONE, A_PLUSVOD, A_NONE,
                     mapRanges(PLUSVOD, null, expired))
             ),
             Arguments.of(
                 "realized and revoked prediction",
-                fixed()
+                supply(() -> fixed()
                     .predictions(
                         Prediction.realized().platform(PLUSVOD).build(),
                         Prediction.revoked().platform(INTERNETVOD).build()
                     )
                     .locations(Location.builder().platform(PLUSVOD).programUrl("https://bla.com/foobar-plusvod.mp4").build())
-                    .build(),
+                ),
                 expected(A_PLUSVOD, A_INTERNETVOD, A_NONE, mapRanges(PLUSVOD, null, null))
             ),
             Arguments.of(
                 "npo source",
-                fixed()
-                    .predictions(
+                supply(() -> fixed()
+                        .predictions(
                         Prediction.realized().platform(INTERNETVOD).build()
                     )
                     .locations(
@@ -304,10 +347,18 @@ class MediaObjectsPlayabilityTest {
                             .owner(OwnerType.AUTHORITY)
                             .build()
                     )
-                    .build(),
+                ),
                 expected(A_INTERNETVOD, A_NONE, A_NONE, mapRanges(INTERNETVOD, null, null))
             )
-        );
+        ).peek(a -> {
+            Object[] objects = a.get();
+            Supplier<MediaObject> supplier = (Supplier<MediaObject>) objects[1];
+            objects[1] =  (Supplier<MediaObject>) () -> {
+                MediaObject mo = supplier.get();
+                mo.setMainTitle((String) objects[0]);
+                return mo;
+            };
+        });
     }
 
     static Map<Platform, Range<Instant>> mapRanges(Object... keyValues) {
@@ -334,7 +385,8 @@ class MediaObjectsPlayabilityTest {
     }
 
     public static Stream<Arguments> willCases() {
-        return examples().map(a -> Arguments.of(a.get()[0], a.get()[1], ((ExpectedPlatforms) a.get()[2]).getWillBe()));
+        return examples()
+            .map(a -> Arguments.of(a.get()[0], a.get()[1], ((ExpectedPlatforms) a.get()[2]).getWillBe()));
     }
 
     public static Stream<Arguments> ranges() {
@@ -345,13 +397,14 @@ class MediaObjectsPlayabilityTest {
     void isPlayable() {
         assertThat(MediaObjects.isPlayable(nowCases()
             .findFirst()
-            .map(a -> (MediaObject) a.get()[1]).orElseThrow(RuntimeException::new))
+            .map(a -> ((Supplier<MediaObject>) a.get()[1]).get()).orElseThrow(RuntimeException::new))
         ).isTrue();
     }
 
     @ParameterizedTest
     @MethodSource("nowCases")
-    void nowPlayable(String description, MediaObject object, Platform[] expectedPlatforms) throws JsonProcessingException {
+    void nowPlayable(String description, Supplier<MediaObject> supplier, Platform[] expectedPlatforms) throws JsonProcessingException {
+        MediaObject object = supplier.get();
         assertThat(MediaObjects.nowPlayable(object)).containsExactly(expectedPlatforms);
         // should still be valid if mediaobject gets published
         MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
@@ -361,7 +414,8 @@ class MediaObjectsPlayabilityTest {
 
     @ParameterizedTest
     @MethodSource("wasCases")
-    void wasPlayable(String description, MediaObject object, Platform[] expectedPlatforms) throws JsonProcessingException {
+    void wasPlayable(String description, Supplier<MediaObject> supplier, Platform[] expectedPlatforms) throws JsonProcessingException {
+        MediaObject object = supplier.get();
         assertThat(MediaObjects.wasPlayable(object)).containsExactly(expectedPlatforms);
         // should still be valid if mediaobject gets published
         MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
@@ -371,16 +425,31 @@ class MediaObjectsPlayabilityTest {
 
     @ParameterizedTest
     @MethodSource("willCases")
-    void willBePlayable(String description, MediaObject object, Platform[] expectedPlatforms) throws JsonProcessingException {
+    void willBePlayable(String description,  Supplier<MediaObject> supplier, Platform[] expectedPlatforms) throws JsonProcessingException {
+        MediaObject object = supplier.get();
+        for (Platform platform : expectedPlatforms) {
+            assertThat(MediaObjects.willBePlayable(platform, object)).isTrue();
+        }
+        for (Platform platform : Stream.of(Platform.values()).filter(p -> !Arrays.asList(expectedPlatforms).contains(p)).toList()) {
+            assertThat(MediaObjects
+                .willBePlayable(platform, object))
+                .withFailMessage(() ->
+                    "Platform " + platform + " is available in the future, but not expected to be: " + description
+                )
+                .isFalse();
+        }
         assertThat(MediaObjects.willBePlayable(object)).containsExactly(expectedPlatforms);
         // should still be valid if mediaobject gets published
         MediaObject published = Jackson2Mapper.getLenientInstance().treeToValue(Jackson2Mapper.getPublisherInstance().valueToTree(object), MediaObject.class);
-        assertThat(MediaObjects.willBePlayable(published)).containsExactly(expectedPlatforms);
+        assertThat(MediaObjects.willBePlayable(published))
+            .withFailMessage("after unmarshalling no " + Arrays.asList(expectedPlatforms))
+            .containsExactly(expectedPlatforms);
     }
 
     @ParameterizedTest
     @MethodSource("ranges")
-    void ranges(String description, MediaObject object, Map<Platform, Range<Instant>> ranges) {
+    void ranges(String description, Supplier<MediaObject> supplier, Map<Platform, Range<Instant>> ranges) {
+        MediaObject object = supplier.get();
         assertThat(MediaObjects.playableRanges(object)).isEqualTo(ranges);
     }
 
@@ -420,8 +489,9 @@ class MediaObjectsPlayabilityTest {
                     result.set("willExpectedPlatforms", Jackson2Mapper.getInstance().valueToTree(expectedPlatforms.getWillBe()));
                     result.set("ranges", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(expectedPlatforms.getLongRanges()));
 
-                    result.set("publishedMediaObject", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(a.get()[1]));
-                    result.set("mediaObject", Jackson2Mapper.getPrettyInstance().valueToTree(a.get()[1]));
+                    MediaObject mo = ((Supplier<MediaObject>) a.get()[1]).get();
+                    result.set("publishedMediaObject", Jackson2Mapper.getPrettyPublisherInstance().valueToTree(mo));
+                    result.set("mediaObject", Jackson2Mapper.getPrettyInstance().valueToTree(mo));
 
                     try (OutputStream outputStream = Files.newOutputStream(file.toPath())) {
                         Jackson2Mapper.getPrettyPublisherInstance().writer().writeValue(outputStream, result);

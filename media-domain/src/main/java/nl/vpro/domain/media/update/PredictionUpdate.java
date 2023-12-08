@@ -12,9 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.media.Encryption;
-import nl.vpro.domain.media.Platform;
-import nl.vpro.domain.media.Prediction;
+import nl.vpro.domain.media.*;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -68,8 +66,8 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
         assert prediction.isPlannedAvailability() : "The representation of an unplanned availability is simply the _absence_ of it in the list of prediction of a mediaobject. Following is not planned: "+ prediction;
         return PredictionUpdate.builder()
                .platform(prediction.getPlatform())
-               .publishStart(prediction.getPublishStartInstant())
-               .publishStop(prediction.getPublishStopInstant())
+               .publishStart(prediction.getOwnPublishStartInstant())
+               .publishStop(prediction.getOwnPublishStopInstant())
                .encryption(prediction.getEncryption());
     }
 

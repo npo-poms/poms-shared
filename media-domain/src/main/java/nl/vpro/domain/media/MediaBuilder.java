@@ -108,9 +108,19 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     @SuppressWarnings("unchecked")
-    default B id(Long id) {
+    default B id(long id) {
         mediaObject().setId(id);
         return (B)this;
+    }
+
+    default B nullableId(Long id) {
+        mediaObject().setId(id);
+        return (B)this;
+    }
+
+    default B withoutId() {
+        mediaObject().setId(null);
+        return (B) this;
     }
 
     B mid(String mid);
@@ -732,7 +742,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(Location... locations) {
         for(Location location : locations) {
-            mediaObject().addLocation(location);
+            mediaObject().addLocation(location, false);
         }
         return (B)this;
     }
@@ -740,7 +750,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(Iterable<Location> locations) {
         for(Location location : locations) {
-            mediaObject().addLocation(location);
+            mediaObject().addLocation(location, false);
         }
         return (B)this;
     }
@@ -748,7 +758,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(String... locations) {
         for (String location : locations) {
-            mediaObject().addLocation(new Location(location, OwnerType.BROADCASTER));
+            mediaObject().addLocation(new Location(location, OwnerType.BROADCASTER), false);
         }
         return (B) this;
     }
@@ -865,6 +875,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return new Editor(principalId, null, null, null, null);
     }
 
+    B correctPredictions();
+
 
 
     @ToString
@@ -872,6 +884,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         protected String mid;
         protected boolean midSet = false;
+
+        protected boolean correctPredictions = false;
 
         protected AbstractBuilder(M m) {
             this.mediaObject = m;
@@ -889,9 +903,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         M mediaObject;
 
         @Override
+        public T correctPredictions() {
+            correctPredictions = true;
+            return (T) this;
+        }
+
+        @Override
         public M build() {
             if (midSet) {
                 mediaObject.setMid(mid);
+            }
+            if (correctPredictions) {
+                mediaObject.correctPredictions();
             }
             return mediaObject;
         }

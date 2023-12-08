@@ -36,8 +36,8 @@ public class PublicationFilter extends SimpleBeanPropertyFilter {
     protected static boolean filter(Object pojo, SerializerProvider prov) {
         Class<?> activeView = prov.getActiveView();
         if (ENABLED.get() && Views.Publisher.class.isAssignableFrom(activeView)) {
-            if (pojo instanceof Embargo) {
-                return !((Embargo) pojo).isPublishable();
+            if (pojo instanceof Embargo embargo) {
+                return ! embargo.isPublishable();
             }
         }
         return false;

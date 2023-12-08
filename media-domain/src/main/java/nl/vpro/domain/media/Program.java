@@ -75,7 +75,7 @@ public final class Program extends MediaObject {
     @SortNatural
     // Caching doesn't work properly because ScheduleEventRepository may touch this
     // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid Set<@NotNull ScheduleEvent> scheduleEvents;
+    Set<@NotNull @Valid ScheduleEvent> scheduleEvents;
 
 
 
@@ -132,7 +132,7 @@ public final class Program extends MediaObject {
     private Boolean pdAuthorityImported;
 
     public Program() {
-        this(null, null);
+
     }
 
     public Program(String mid, long id) {
@@ -142,7 +142,8 @@ public final class Program extends MediaObject {
 
 
     public Program(String mid) {
-        this(mid, -1);
+        super();
+        this.mid = mid;
     }
 
 
@@ -380,7 +381,7 @@ public final class Program extends MediaObject {
         }
 
         if(group.hasAncestor(this)) {
-            throw new CircularReferenceException(group, group.findAncestry(this));
+            throw new CircularReferenceException(this, group, group.findAncestry(this));
         }
 
         MemberRef memberRef = new MemberRef(this, group, episodeNr, owner);

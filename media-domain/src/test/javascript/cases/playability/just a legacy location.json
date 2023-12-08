@@ -18,6 +18,28 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "just a legacy location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
+    "expandedTitles" : [ {
+      "value" : "just a legacy location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "just a legacy location",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "just a legacy location",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "just a legacy location",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REALIZED",
@@ -43,6 +65,11 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "just a legacy location",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REALIZED",

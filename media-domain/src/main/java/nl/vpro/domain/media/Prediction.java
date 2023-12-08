@@ -22,10 +22,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Range;
 
 import nl.vpro.domain.*;
 import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.util.Ranges;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.EnumType.STRING;
@@ -65,6 +67,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlEnum
     @XmlType(name = "predictionStateEnum")
     public enum State implements Displayable {
+
         /**
          * This state should only be used for non-persistent Prediction objects (as they are used in the GUI)
          */
@@ -82,6 +85,18 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
         State(String displayName) {
             this.displayName = displayName;
+        }
+
+
+        public static State of(Embargo embargo) {
+            final Instant instant = instant();
+            if (embargo.inPublicationWindow(instant) ) {
+                return REALIZED;
+            }
+            if (embargo.wasUnderEmbargo(instant)) {
+                return REVOKED;
+            }
+            return ANNOUNCED;
         }
     }
 
@@ -102,8 +117,12 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlAttribute
     @NotNull
     @Getter
-    @Setter
     protected State state = State.ANNOUNCED;
+
+
+    @Transient
+    @Getter
+    protected transient State previousState;
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -112,11 +131,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     protected Instant publishStart;
 
-    @XmlAttribute
-    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-    @XmlSchemaType(name = "dateTime")
-    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+
+    @XmlTransient
     protected Instant publishStop;
 
     @NotNull
@@ -259,9 +275,14 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
             .build();
     }
 
-    public static Prediction.Builder announced() {
-        return builder().state(State.ANNOUNCED);
+    public static Prediction.Builder announced(Platform platform) {
+        return announced().platform(platform).plannedAvailability(true);
     }
+
+    public static Prediction.Builder announced() {
+        return builder().plannedAvailability(true).state(State.ANNOUNCED);
+    }
+
     public static Prediction.Builder revoked() {
         return builder().state(State.REVOKED);
     }
@@ -302,10 +323,89 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
 
+    /**
+     * When this prediction will be revoked.
+     *<p>
+     * If all locations will be revoked before the {@link #getOwnPublishStopInstant() registered publishstop in} this prediction, then this method will return the latest value of that.
+     * @see #getOwnPublishStopInstant()
+     */
+    @XmlAttribute(name = "publishStop")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @Override
     public Instant getPublishStopInstant() {
+        Instant result =  publishStop;
+        if (mediaObject != null) {
+            Instant latestLocation = Instant.MIN;
+            int foundLocations = 0;
+            for (Location l : mediaObject.getLocations()) {
+                if (l.isDeleted()) {
+                    continue;
+                }
+                if (platform.matches(l.getPlatform())) {
+                    foundLocations++;
+                    if (l.getOwnPublishStopInstant() == null) {
+                        latestLocation = null;
+                        break;
+                    } else if (l.getOwnPublishStopInstant().isAfter(latestLocation)) {
+                        latestLocation = l.getOwnPublishStopInstant();
+                    }
+                }
+            }
+            if (foundLocations > 0) {
+                if (result == null || (latestLocation != null && latestLocation.isBefore(result))) {
+                    result = latestLocation;
+                }
+            }
+
+        }
+        return result;
+    }
+
+    /**
+     * Returns the 'own' embargo start. Currently, always the same as {@link #getPublishStartInstant()}
+     * @see #getPublishStartInstant()
+     * @see #getOwnEmbargo()
+     * @since 7.10
+     */
+    public Instant getOwnPublishStartInstant() {
+        return publishStart;
+    }
+
+    /**
+     * Returns the 'own' embargo stop. {@link #getPublishStopInstant()} may be restricted by available locations.
+     * @see #getPublishStopInstant()
+     * @see #getOwnEmbargo()
+     * @since 7.10
+     */
+    public Instant getOwnPublishStopInstant() {
         return publishStop;
     }
+
+    /**
+     * 'Own' embargo wrapped in a {@link Range}.
+     * <p>
+     * @since 7.10
+     * @see #asRange()
+     * @see #getOwnEmbargo()
+     */
+    public Range<Instant> getOwnPublicationRange() {
+        return Ranges.closedOpen(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+    }
+    /**
+     * An embargo object based on {@link #getOwnPublishStartInstant()} and {@link #getOwnPublishStopInstant()}
+     * @since 7.10
+     * @see #getOwnPublicationRange()
+     */
+    public MutableEmbargo<?> getOwnEmbargo() {
+        return Embargos.of(
+            this::getOwnPublishStartInstant, this::setPublishStartInstant,
+            this::getOwnPublishStopInstant, this::setPublishStopInstant
+        );
+    }
+
 
     @NonNull
     @Override
@@ -352,6 +452,15 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         invalidateXml();
     }
 
+
+    public void setState(State state) {
+        if (previousState == null) {
+            previousState = this.state;
+        }
+        this.state = state;
+        invalidateXml();
+    }
+
     protected void invalidateXml() {
         if (this.mediaObject != null) {
             this.mediaObject.predictionsForXml = null;
@@ -372,18 +481,23 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     /**
-     * @TODO Equals is not always transitive?, because of null-ness of parent,
+     *
      */
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Prediction other)) {
             return false;
         }
+        return equalsIgnoreParent(other) && Objects.equals(getParent(), other.getParent());
+    }
+
+    public boolean equalsIgnoreParent(Prediction other) {
+
         if (platform == null || other.platform == null) {
             return other == this;
         }
-        return Objects.equals(platform, other.platform) &&
-            (getParent() == null || other.getParent() == null || Objects.equals(getParent(), other.getParent()));
+        return Objects.equals(platform, other.platform);
     }
 
     public boolean fieldEquals(Prediction prediction) {

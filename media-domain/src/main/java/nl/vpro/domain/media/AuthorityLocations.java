@@ -23,10 +23,13 @@ import org.springframework.beans.factory.annotation.Value;
 import nl.vpro.domain.Changeables;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.logging.simple.Level;
 import nl.vpro.util.HttpConnectionUtils;
 
 import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.media.Encryption.DRM;
+import static nl.vpro.domain.media.Platform.INTERNETVOD;
 
 /**
  * Utilities related to poms 'authoritative locations'. I.e. {@link MediaObject#getLocations() locations} that are implicitly added (because of some notification from an external system, currently NEP), with {@link OwnerType owner} {@link OwnerType#AUTHORITY}
@@ -84,8 +87,10 @@ public class AuthorityLocations {
     public RealizeResult realizeStreamingPlatformIfNeeded(
         @NonNull MediaObject mediaObject,
         @NonNull Platform platform) {
-        final Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
-        log.debug("Webonly : {}", webonly);
+        if (platform == INTERNETVOD) {
+            final Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
+            log.debug("Webonly : {}", webonly);
+        }
 
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
 
@@ -105,7 +110,7 @@ public class AuthorityLocations {
         }
         final List<Location> authorityLocations = getOrCreateAuthorityLocations(mediaObject, existingPredictionForPlatform.getEncryption());
 
-
+        mediaObject.correctPredictions();
         return RealizeResult.builder()
             .needed(true)
             .locations(authorityLocations)
@@ -143,6 +148,13 @@ public class AuthorityLocations {
     }
 
 
+    private static void makeLocationPublishable(Location authorityLocation) {
+        authorityLocation.setPublishStopInstant(null);
+        if (authorityLocation.isDeleted()) {
+            authorityLocation.setWorkflow(Workflow.FOR_PUBLICATION);
+        }
+    }
+
     private List<Location> getOrCreateAuthorityLocations(MediaObject mediaObject, Encryption encryption) {
 
         final List<Location> result = new ArrayList<>();
@@ -152,6 +164,7 @@ public class AuthorityLocations {
             String locationUrl = String.format(audioTemplate, mediaObject.getMid());
             Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, Platform.INTERNETAOD, locationUrl, "nepaudio");
             log.debug("matched {}", authorityLocation);
+            makeLocationPublishable(authorityLocation);
             result.add(authorityLocation);
         }
         if (streamingPlatformStatus.hasDrm() || encryption == DRM) {
@@ -161,9 +174,9 @@ public class AuthorityLocations {
                     String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, DRM, "nep");
                     Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
                     log.debug("matched {}", authorityLocation);
+                    makeLocationPublishable(authorityLocation);
                     result.add(authorityLocation);
                 }
-
             }
         }
         if (streamingPlatformStatus.hasWithoutDrm()) {
@@ -173,6 +186,7 @@ public class AuthorityLocations {
                     String locationUrl = createLocationVideoUrl(mediaObject.getStreamingPlatformStatus(), mediaObject.getMid(), platform, Encryption.NONE, "nep");
                     Location authorityLocation = findCreateOrUpdateAutorityLocation(mediaObject, platform, locationUrl, "nep");
                     log.debug("matched {}", authorityLocation);
+                    makeLocationPublishable(authorityLocation);
                     result.add(authorityLocation);
                 }
             }
@@ -211,12 +225,11 @@ public class AuthorityLocations {
         }
         Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
         if (avAttributes.isPresent()) {
-            Location location = createOrFindLocation(program, locationUrl, owner, platform);
+            Location location = createOrFindLocation(program, locationUrl, owner, platform, avAttributes.get());
             updateLocationAndPredictions(
                 location,
                 program,
                 platform,
-                avAttributes.get(),
                 owner,
                 new HashSet<>(),
                 instant())
@@ -227,12 +240,7 @@ public class AuthorityLocations {
         return program;
     }
 
-    private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, AVAttributes avAttributes, OwnerType owner, Set<OwnerType> replaces, Instant now) {
-        if (location.getAvAttributes()  == null) {
-            location.setAvAttributes(avAttributes);
-        } else {
-            AVAttributes.update(avAttributes, location.getAvAttributes(), false);
-        }
+    private void updateLocationAndPredictions(Location location, MediaObject program, Platform platform, OwnerType owner, Set<OwnerType> replaces, Instant now) {
         if (replaces != null && replaces.contains(location.getOwner())) {
             location.setOwner(owner);
         }
@@ -256,9 +264,9 @@ public class AuthorityLocations {
             boolean drm = encryption == DRM;
             String scheme = drm ? "npo+drm" : "npo";
             return scheme + "://" + platform.name().toLowerCase() + ".omroep.nl/";
-        } else if (platform == Platform.INTERNETVOD && "adaptive".equals(publicationOption)) {
+        } else if (platform == INTERNETVOD && "adaptive".equals(publicationOption)) {
             return "odip+http://odi.omroep.nl/video/" + publicationOption + "/";
-        } else if (platform == Platform.INTERNETVOD) {
+        } else if (platform == INTERNETVOD) {
             return "odi+http://odi.omroep.nl/video/" + publicationOption + "/";
         } else if (platform == Platform.PLUSVOD) {
             return "sub+http://npo.npoplus.nl/video/" + publicationOption + "/";
@@ -269,24 +277,17 @@ public class AuthorityLocations {
         }
     }
 
-    private Location createOrFindLocation(
-        @NonNull MediaObject program,
-        @NonNull String locationUrl,
-        @NonNull OwnerType owner,
-        @NonNull Platform platform) {
-        return createOrFindLocation(program, locationUrl, owner, new HashSet<>(), platform);
-    }
 
     private Location createOrFindLocation(
         @NonNull MediaObject program,
         @NonNull String locationUrl,
         @NonNull OwnerType owner,
-        @NonNull Set<OwnerType> replaces,
-        @NonNull Platform platform) {
+        @NonNull Platform platform,
+        @NonNull AVAttributes avAttributes) {
         Location location = program.findLocation(locationUrl);
         if (location == null) {
             log.info("Creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());
-            location = new Location(locationUrl, owner, platform);
+            location = new Location(locationUrl, owner, platform, avAttributes);
             location.headRequest();
             program.addLocation(location);
             Prediction prediction = program.getPredictionWithoutFixing(platform);
@@ -320,13 +321,13 @@ public class AuthorityLocations {
             }
             if (isAudioUrl(existingPlatformLocation)) {
                 if (! streamingPlatformStatus.hasAudio() || !  encryptions.contains(Encryption.NONE)) {
-                    mediaObject.removeLocation(existingPlatformLocation);
+                    existingPlatformLocation.setWorkflow(Workflow.DELETED);
                     log.info("Removing {}", existingPlatformLocation);
                 }
                 continue;
             } else {
                 if (!encryptions.contains(getVideoEncryptionFromProgramUrl(existingPlatformLocation))) {
-                    mediaObject.removeLocation(existingPlatformLocation);
+                    existingPlatformLocation.setWorkflow(Workflow.DELETED);
                     log.info("Removing {}", existingPlatformLocation);
                 } else {
                     log.debug("Letting {}", existingPlatformLocation);
@@ -344,11 +345,11 @@ public class AuthorityLocations {
         } else {
             Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
             if (avAttributes.isPresent()) {
-                Location location = this.createOrFindLocation(program, locationUrl, owner, platform);
+                Location location = this.createOrFindLocation(program, locationUrl, owner, platform, avAttributes.get());
                 this.updateLocationAndPredictions(
                     location,
-                    program, platform,
-                    avAttributes.get(),
+                    program,
+                    platform,
                     owner,
                     replaces,
                     Changeables.instant()
@@ -388,24 +389,24 @@ public class AuthorityLocations {
      *
      */
     Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
-        final Prediction existingPrediction = mediaObject.getPrediction(Platform.INTERNETVOD);
+        final Prediction existingPrediction = mediaObject.getPrediction(INTERNETVOD);
         if (existingPrediction == null) {
             final String audioPrefix = this.getAudioPrefix();
             final Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream().filter(
-                    (l) -> Platform.INTERNETVOD.matches(l.getPlatform()))
+                    (l) -> INTERNETVOD.matches(l.getPlatform()))
                 .filter((l) -> ! isVideoUrl(l)) // ignore locations though that are made because of notify itself
                 .filter((l) -> ! isAudioUrl(l)) // also valid for this one, this is AOD
                 .filter((l) -> ! l.isDeleted()) // deleted, so assume they shouldn't have existing in the first place
                 .collect(Collectors.toSet());
             if (!existingWebonlyLocations.isEmpty()) {
-                Prediction prediction = mediaObject.findOrCreatePrediction(Platform.INTERNETVOD);
+                Prediction prediction = mediaObject.findOrCreatePrediction(INTERNETVOD);
                 prediction.setPlannedAvailability(true);
                 prediction.setEncryption(null);
                 Iterator<Location> i = existingWebonlyLocations.iterator();
                 Location first = i.next();
-                Embargos.copyIfLessRestrictedOrTargetUnset(first.getOwnEmbargo(), prediction);
+                Embargos.copyIfLessRestrictedOrTargetUnset(first.getOwnEmbargo(), prediction.getOwnEmbargo());
                 i.forEachRemaining((l) -> {
-                    Embargos.copyIfLessRestricted(l.getOwnEmbargo(), prediction);
+                    Embargos.copyIfLessRestricted(l.getOwnEmbargo(), prediction.getOwnEmbargo());
                 });
                 return Optional.of(prediction);
             }
@@ -435,37 +436,14 @@ public class AuthorityLocations {
         if (platform == null) {
             return false;
         }
-        boolean changes = false;
+        final boolean[] changes = new boolean[] {false};
         final Prediction prediction = MediaObjects.getPrediction(platform, mediaObject.getPredictions());
         if (prediction != null) {
-            Prediction.State requiredState = prediction.isPlannedAvailability() ? Prediction.State.ANNOUNCED : Prediction.State.NOT_ANNOUNCED;
-
-            for (Location location : mediaObject.getLocations()) {
-                Platform locationPlatform = location.getPlatform();
-
-                if (locationPlatform == null) {
-                    log.debug("Location has no explicit platform");
-                    // e.g. we used to not create PREPR sources with explicit PLATFORM, and then at least in test/acc the prediction state remained 'ANNOUCNED'
-                    log.debug("Location has no explicit platform. Taking it {} implicitly", Platform.INTERNETVOD);
-                    locationPlatform = Platform.INTERNETVOD;
-                }
-                if (locationPlatform == platform) {
-                    if (location.isPublishable(now) && ! location.isDeleted()) {
-                        requiredState = Prediction.State.REALIZED;
-                        break;
-                    }
-                    if (location.wasUnderEmbargo() || location.isDeleted()) {
-                        requiredState = Prediction.State.REVOKED;
-                    }
-                }
-            }
-            if (prediction.getState() != requiredState) {
-                log.info("Set state of {} {} {} -> {}", mediaObject.getMid(), prediction, prediction.getState(), requiredState);
-                prediction.setState(requiredState);
-                changes = true;
-            }
+            MediaObjects.correctPrediction(prediction, mediaObject, Level.DEBUG, now, (ps, p) -> {changes[0] = true;});
+        } else {
+            log.debug("No prediction for {} {}", platform, mediaObject);
         }
-        return changes;
+        return changes[0];
     }
 
     private static Optional<AVAttributes> getAVAttributes(String pubOption) {

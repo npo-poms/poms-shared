@@ -104,7 +104,7 @@ public class NotTest {
         assertThat(not.test(new Program())).isTrue();
         assertThat(not.testWithReason(new Program()).applies()).isTrue();
         assertThat(not.testWithReason(new Program()).getReason()).isEqualTo("Not");
-        assertThat(not.testWithReason(new Program()).getDescription(Locale.US)).isEqualTo("The value 'Program{mid=<no mid>, title=<no title> (not persistent)}' does not match Never matches");
+        assertThat(not.testWithReason(new Program("mid")).getDescription(Locale.US)).isEqualTo("The value 'Program{mid=\"mid\", title=<no title> (not persistent)}' does not match Never matches");
     }
 
     @Test

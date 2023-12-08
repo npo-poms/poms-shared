@@ -244,13 +244,7 @@ const nl_vpro_domain_media_MediaObjects = (function() {
             prediction = undefinedIsEmpty(mediaObject.predictions)
                 .filter(p => platformMatches(platform, p.platform))
 
-            if (prediction.length === 1) {
-                return prediction[0].state === 'REVOKED';
-            } else { // may be the locations are visible (on the backend) but not yet published
-                return undefinedIsEmpty(mediaObject.locations)
-                    .filter(l => platformMatches(platform, l.platform))
-                    .filter(wasUnderEmbargo).length > 0;
-            }
+            return prediction.length === 1 && prediction[0].state === 'REVOKED';
         },
 
         /**
@@ -280,14 +274,7 @@ const nl_vpro_domain_media_MediaObjects = (function() {
             const prediction = undefinedIsEmpty(mediaObject.predictions)
                 .filter(p => platformMatches(platform, p.platform))
 
-            if (prediction.length !== 0) {
-                return prediction[0].state === 'ANNOUNCED';
-            } else { // may be the locations are visible (on the backend) but not yet published
-                return undefinedIsEmpty(mediaObject.locations)
-                    .filter(l => platformMatches(platform, l.platform))
-                    .filter(willBePublished).length > 0;
-
-            }
+            return prediction.length !== 0 && prediction[0].state === 'ANNOUNCED';
         },
 
         /**

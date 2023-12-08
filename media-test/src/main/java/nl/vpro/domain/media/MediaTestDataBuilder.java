@@ -58,7 +58,7 @@ public interface MediaTestDataBuilder<
         .scopeNotes(Collections.singletonList("Nederland"))
         .build();
 
-    AtomicLong idBase = new AtomicLong(0L);
+    AtomicLong idBase = new AtomicLong(1_000_000L);
 
     AtomicLong midBase = new AtomicLong(12345L);
 
@@ -885,6 +885,7 @@ public interface MediaTestDataBuilder<
                 .withWebsites()
                 .withWorkflow()
                 .withIds(ids)
+                .correctPredictions()
             ;
 
 
@@ -955,7 +956,7 @@ public interface MediaTestDataBuilder<
             Group series = MediaTestDataBuilder.group()
                 .constrained()
                 .type(GroupType.SERIES)
-                .id(seriesId)
+                .nullableId(seriesId)
                 .withMid(midId)
                 .build();
 
@@ -973,7 +974,7 @@ public interface MediaTestDataBuilder<
             Group season = MediaTestDataBuilder.group()
                 .constrained()
                 .type(GroupType.SEASON)
-                .id(seasonId)
+                .nullableId(seasonId)
                 .withMid(midId)
                 .memberOf(series, 1)
                 .memberOf(segment, 2)

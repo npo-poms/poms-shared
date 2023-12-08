@@ -1,7 +1,7 @@
 {
   "description" : "an expired location with explicit PLUSVOD",
   "publishedNowExpectedPlatforms" : [ ],
-  "publishedWasExpectedPlatforms" : [ ],
+  "publishedWasExpectedPlatforms" : [ "PLUSVOD" ],
   "publishedWillExpectedPlatforms" : [ ],
   "nowExpectedPlatforms" : [ ],
   "wasExpectedPlatforms" : [ "PLUSVOD" ],
@@ -18,7 +18,34 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
+    "expandedTitles" : [ {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "PLUSVOD",
+      "publishStop" : 1635253190000
+    } ],
     "locations" : [ ]
   },
   "mediaObject" : {
@@ -30,7 +57,17 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "an expired location with explicit PLUSVOD",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
     "ageRating" : "ALL",
+    "predictions" : [ {
+      "state" : "REVOKED",
+      "platform" : "PLUSVOD",
+      "publishStop" : 1635253190000
+    } ],
     "locations" : [ {
       "programUrl" : "https://bla.com/foobar.mp4",
       "avAttributes" : {
@@ -38,7 +75,7 @@
       },
       "owner" : "BROADCASTER",
       "creationDate" : 1635253200000,
-      "workflow" : "PUBLISHED",
+      "workflow" : "REVOKED",
       "platform" : "PLUSVOD",
       "publishStop" : 1635253190000
     } ]

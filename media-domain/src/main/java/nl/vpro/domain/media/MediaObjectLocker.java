@@ -57,7 +57,6 @@ public class MediaObjectLocker {
         }
     }
 
-
     /**
      * Adding this annotation of a method with a {@link String} or {@link MediaIdentifiable} argument will 'lock' the identifier, and will make sure
      * that no other code doing the same will run simultaneously.
@@ -219,8 +218,8 @@ public class MediaObjectLocker {
         } else {
             return withObjectLock(lock, reason, callable, LOCKED_MEDIA,
                 (o1, o2) ->
-                    o1 instanceof MediaIdentifiable.Correlation &&
-                        Objects.equals(((MediaIdentifiable.Correlation) o1).getType(), o2.getType())
+                    o1 instanceof MediaIdentifiable.Correlation correlation &&
+                        Objects.equals(correlation.getType(), o2.getType())
             );
         }
     }

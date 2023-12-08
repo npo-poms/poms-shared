@@ -17,6 +17,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tika.mime.MimeTypeException;
+import org.apache.tika.mime.MimeTypes;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
@@ -122,8 +124,14 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
     protected  String getFileName(String mid, String mimeType) {
-        AVFileFormat fileFormat = AVFileFormat.forMimeType(mimeType).orElse(defaultFormat());
-        return mid + "." + fileFormat.name().toLowerCase();
+        String ext;
+        try {
+            ext = MimeTypes.getDefaultMimeTypes().forName(mimeType).getExtension();
+        } catch (MimeTypeException e) {
+            log.warn(e.getMessage(), e);
+            ext = "." + defaultFormat().name().toLowerCase();
+        }
+        return mid + ext;
     }
 
     protected abstract AVFileFormat defaultFormat();
@@ -284,11 +292,17 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final HttpRequest statusRequest = deleteRequest(mid, daysBeforeHardDelete);
         final HttpResponse<String> statusResponse = client.send(statusRequest, HttpResponse.BodyHandlers.ofString());
         meter("status.delete", statusResponse);
+        if (statusResponse.statusCode() == 404) {
+            return new DeleteResponse("not found", "Already deleted?");
+        }
         if (statusResponse.statusCode() > 299) {
             throw new IllegalArgumentException(statusRequest + ":" + statusResponse.statusCode() + ":" +  statusResponse.body());
         }
-
-        return JSONREADER.readValue(statusResponse.body(), DeleteResponse.class);
+        try {
+            return JSONREADER.readValue(statusResponse.body(), DeleteResponse.class);
+        } catch (Exception e) {
+            throw new SourcingServiceException(statusResponse.statusCode(), "Could not parse body of delete request " + statusResponse.body());
+        }
     }
 
     @Deprecated
@@ -523,6 +537,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             node.put("days_before_hard_delete", daysBeforeHardDelete);
             return request("ingest/" + mid + "/delete")
                 .POST(HttpRequest.BodyPublishers.ofByteArray(MAPPER.writeValueAsBytes(node)))
+                .header("Content-Type", "application/json")
                 .build();
     }
 

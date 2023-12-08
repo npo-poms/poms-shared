@@ -2,6 +2,8 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -156,6 +158,15 @@ public class Embargos {
         return new BasicEmbargo(start, stop);
     }
 
+    public static MutableEmbargo<WrappedEmbargo> of(
+        Supplier<Instant> start,
+        Consumer<Instant> startSetter,
+        Supplier<Instant> stop,
+        Consumer<Instant> stopSetter) {
+        return new WrappedEmbargo(start, startSetter, stop, stopSetter);
+    }
+
+
      public static MutableEmbargo<BasicEmbargo> of(Range<Instant> range) {
         BasicEmbargo result = new BasicEmbargo(null, null);
         result.set(range);
@@ -168,6 +179,13 @@ public class Embargos {
 
     public static MutableEmbargo<BasicEmbargo> unrestrictedInstance() {
         return new BasicEmbargo(null,  null);
+    }
+
+    /**
+     * Just as {@link #unrestrictedInstance()}, but nicer for static imports (because in that case it doesn't show what Instance of)
+     */
+    public static MutableEmbargo<BasicEmbargo> unrestricted() {
+        return unrestrictedInstance();
     }
     public static MutableEmbargo<BasicEmbargo> restrictedInstance() {
         return new BasicEmbargo(Instant.MAX, Instant.MIN);

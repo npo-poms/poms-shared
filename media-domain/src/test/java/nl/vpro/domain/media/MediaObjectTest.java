@@ -31,6 +31,7 @@ import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.validation.ValidationLevel;
 
+import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.ValidationTestHelper.*;
 import static nl.vpro.domain.media.support.OwnerType.*;
 import static nl.vpro.domain.media.update.Validation.getValidator;
@@ -739,7 +740,7 @@ public class MediaObjectTest {
     public void sortDate() {
         Program program = new Program();
         assertThat(program.getSortInstant()).isCloseTo(
-            Instant.now(), within(10, ChronoUnit.SECONDS));
+            instant(), within(10, ChronoUnit.SECONDS));
 
         Instant publishDate = Instant.ofEpochMilli(1344043500362L);
         program.setPublishStartInstant(publishDate);
@@ -849,11 +850,10 @@ public class MediaObjectTest {
 
 
         program.addLocation(l1);
-
-        program.setPredictions(Arrays.asList(new Prediction(Platform.INTERNETVOD, Prediction.State.ANNOUNCED)));
+        program.setPredictions(Arrays.asList(Prediction.announced(Platform.INTERNETVOD).build()));
 
         assertThat(program.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.REALIZED);
-        assertThat(program.getWorkflow()).isEqualTo(Workflow.FOR_REPUBLICATION);
+        assertThat(program.getRepubReason()).isEqualTo("realized prediction INTERNETVOD");
 
     }
 
@@ -870,7 +870,8 @@ public class MediaObjectTest {
 
         program.setPredictions(Arrays.asList(new Prediction(Platform.INTERNETVOD, Prediction.State.ANNOUNCED)));
 
-        assertThat(program.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.ANNOUNCED);
+        assertThat(program.getPrediction(Platform.INTERNETVOD).getState())
+            .isEqualTo(Prediction.State.ANNOUNCED);
     }
 
 
@@ -891,9 +892,10 @@ public class MediaObjectTest {
         Prediction plus = target.getPrediction(Platform.PLUSVOD);
         assertThat(plus).isNotNull();
         assertThat(plus.isPlannedAvailability()).isTrue();
-        assertThat(plus.getState()).isEqualTo(Prediction.State.ANNOUNCED);
+        assertThat(plus.getState()).isEqualTo(Prediction.State.REVOKED);
         assertThat(plus.getPublishStartInstant()).isNull();
-        assertThat(plus.getPublishStopInstant()).isNull();
+        assertThat(plus.getOwnPublishStopInstant()).isNull();
+        assertThat(plus.getPublishStopInstant()).isEqualTo(Instant.ofEpochMilli(10));
 
         // set also constraint on prediction, but wider
         target.getPrediction(Platform.PLUSVOD).setPublishStopInstant(Instant.ofEpochMilli(4));
@@ -1004,9 +1006,9 @@ public class MediaObjectTest {
     @Test
     public void testHash() {
         final Program program = MediaBuilder.program()
-            .lastModified(Instant.now())
+            .lastModified(instant())
             .creationInstant(Instant.ofEpochMilli(10000))
-            .lastPublished(Instant.now())
+            .lastPublished(instant())
             .id(1L)
             .build();
         program.acceptChanges();
@@ -1029,15 +1031,15 @@ public class MediaObjectTest {
     @Test
     public void testHasChanges() {
         final Program program = MediaBuilder.program()
-            .lastModified(Instant.now())
-            .lastPublished(Instant.now())
+            .lastModified(instant())
+            .lastPublished(instant())
             .id(1L)
             .build();
 
         assertThat(program.hasChanges()).isTrue();
         program.acceptChanges();
         assertThat(program.hasChanges()).isFalse();
-        program.setPublishStartInstant(Instant.now());
+        program.setPublishStartInstant(instant());
         assertThat(program.hasChanges()).isTrue();
         program.acceptChanges();
         assertThat(program.hasChanges()).isFalse();
@@ -1206,7 +1208,7 @@ public class MediaObjectTest {
         Program program = MediaBuilder.program().build();
         Prediction prediction = new Prediction(Platform.INTERNETVOD);
         prediction.setAuthority(Authority.SYSTEM);
-        prediction.setPublishStartInstant(Instant.now());
+        prediction.setPublishStartInstant(instant());
         program.setPredictions(Arrays.asList(prediction));
         Location l1 = new Location("https://TEST_URL/foo.bar", OwnerType.AUTHORITY);
         l1.setPlatform(Platform.INTERNETVOD);

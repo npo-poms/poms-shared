@@ -106,6 +106,10 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
         return id != null ? id.hashCode() : super.hashCode();
     }
 
+    protected final int superHashCode() {
+        return super.hashCode();
+    }
+
     @PostLoad
     @PostPersist
     void setPersisted() {

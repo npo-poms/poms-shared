@@ -18,11 +18,33 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "revoked prediction but no locations",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
+    "expandedTitles" : [ {
+      "value" : "revoked prediction but no locations",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    }, {
+      "value" : "revoked prediction but no locations",
+      "owner" : "NPO",
+      "type" : "MAIN"
+    }, {
+      "value" : "revoked prediction but no locations",
+      "owner" : "BROADCASTER",
+      "type" : "LEXICO"
+    }, {
+      "value" : "revoked prediction but no locations",
+      "owner" : "NPO",
+      "type" : "LEXICO"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "publishStop" : 1635253190000,
-      "platform" : "PLUSVOD"
+      "platform" : "PLUSVOD",
+      "publishStop" : 1635253190000
     } ]
   },
   "mediaObject" : {
@@ -34,11 +56,16 @@
     "sortDate" : 1635166800000,
     "creationDate" : 1635166800000,
     "embeddable" : true,
+    "titles" : [ {
+      "value" : "revoked prediction but no locations",
+      "owner" : "BROADCASTER",
+      "type" : "MAIN"
+    } ],
     "ageRating" : "ALL",
     "predictions" : [ {
       "state" : "REVOKED",
-      "publishStop" : 1635253190000,
-      "platform" : "PLUSVOD"
+      "platform" : "PLUSVOD",
+      "publishStop" : 1635253190000
     } ]
   }
 }

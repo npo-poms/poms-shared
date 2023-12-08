@@ -5,8 +5,7 @@
 package nl.vpro.domain.media.exceptions;
 
 import java.io.Serial;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import nl.vpro.domain.media.MediaObject;
 
@@ -17,13 +16,21 @@ public class CircularReferenceException extends RuntimeException {
 
     private final List<MediaObject> familyTree = new ArrayList<>();
 
-    public CircularReferenceException(MediaObject child, List<MediaObject> ancestry) {
-        super("Circular reference: " + child + " has ancestors " + ancestry);
+    private CircularReferenceException(String message, MediaObject child, List<MediaObject> ancestry) {
+        super(message);
         familyTree.addAll(ancestry);
         familyTree.add(child);
     }
 
+    public CircularReferenceException(MediaObject child, MediaObject parent,  List<MediaObject> ancestry) {
+        this("Circular reference: " + parent + " has ancestors " + ancestry + "", child, ancestry);
+    }
+
+    public static CircularReferenceException self(MediaObject child, MediaObject parent, List<MediaObject> ancestry) {
+        return new CircularReferenceException("Can't make " + child + " member of itself " + parent, child, ancestry);
+    }
+
     public List<MediaObject> getFamilyTree() {
-        return familyTree;
+        return Collections.unmodifiableList(familyTree);
     }
 }

@@ -203,6 +203,9 @@ public class Location extends PublishableObject<Location>
         this(programUrl, owner, Platform.INTERNETVOD);
     }
 
+    public Location(String programUrl, OwnerType owner, Platform platform, AVAttributes avAttributes) {
+        this(programUrl, owner, avAttributes, null, platform);
+    }
     public Location(String programUrl, OwnerType owner, Platform platform) {
         this(programUrl, owner, null, null, platform);
     }
@@ -546,6 +549,9 @@ public class Location extends PublishableObject<Location>
         return this;
     }
 
+    /**
+     * @deprecated We filled to platform for every location, so this is now always true (though december 2023 these changes are not yet all published!)
+     */
     @Deprecated
     public boolean hasPlatform() {
         return platform != null;
@@ -732,8 +738,13 @@ public class Location extends PublishableObject<Location>
      * @since 7.10
      * @see #getOwnPublicationRange()
      */
-    public Embargo getOwnEmbargo() {
-        return Embargos.of(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+    public MutableEmbargo<WrappedEmbargo> getOwnEmbargo() {
+        return Embargos.of(
+            this::getOwnPublishStartInstant,
+            this::setPublishStartInstant,
+            this::getOwnPublishStopInstant,
+            this::setPublishStopInstant
+        );
     }
 
     public Authority getAuthority() {
