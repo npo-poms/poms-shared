@@ -1371,8 +1371,11 @@ public class MediaObjects {
                          appendReason(mediaObject, reason);
                      }
                  }
+
              }
-             default -> log.debug("Ignoring prediction {}", prediction);
+             default -> {
+                 log.debug("Ignoring prediction {}", prediction);
+             }
          }
     }
 
