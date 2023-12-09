@@ -347,6 +347,7 @@
         <xs:documentation>
           If true, the location will be marked deleted.
         </xs:documentation>
+      </xs:annotation>
     </xs:attribute>
   </xs:complexType>
 
@@ -458,6 +459,7 @@
         <xs:documentation>
           If true, the image will be marked deleted.
         </xs:documentation>
+      </xs:annotation>
     </xs:attribute>
   </xs:complexType>
 
