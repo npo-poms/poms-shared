@@ -719,8 +719,8 @@ public class MediaObjects {
         }
     }
 
-
-    public static Prediction getPrediction(Platform platform, Collection<Prediction> preds) {
+    @Nullable
+    public static Prediction getPrediction(Platform platform, @Nullable Collection<Prediction> preds) {
         if (preds != null) {
             for (Prediction prediction : preds) {
                 if (Objects.equals(prediction.getPlatform(), platform)) {
