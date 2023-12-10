@@ -33,6 +33,8 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.sourcingservice.v1.IngestResponse;
 import nl.vpro.util.*;
 
+import static nl.vpro.i18n.MultiLanguageString.en;
+
 
 /**
  * Straight forward client for some relevant parts of the
@@ -189,7 +191,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            // this is not needed (as I've tested)
            //ingest(logger, mid, getFileName(mid), restrictions);
            phase.accept(Phase.START);
-           logger.info("Uploading {} B", fileSize);
+           logger.info(en("Uploading %d B")
+               .nl("Uploaden %d B").args(fileSize));
            uploadStart(logger, mid, fileSize, checksum, errors, restrictions);
            phase.accept(Phase.UPLOAD);
            final AtomicInteger partNumber = new AtomicInteger(1);
@@ -221,7 +224,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 .builder()
                 .inputStream(inputStream)
                 .batchSize((long) chunkSize)
-                .consumer(l -> logger.info(() -> "Uploaded %s to %s".formatted(FileSizeFormatter.DEFAULT.format(l), baseUrl)))
+                .consumer(l -> logger.info(
+                    en("Uploaded %s to %s")
+                        .nl("Geüpload %s naar %s")
+                        .args(FileSizeFormatter.DEFAULT.format(l), baseUrl)))
                 .build(),
             contentType
         );
