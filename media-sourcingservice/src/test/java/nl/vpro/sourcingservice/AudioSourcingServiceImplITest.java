@@ -73,7 +73,7 @@ class AudioSourcingServiceImplITest {
             .build();
         final UploadResponse upload = impl.upload(logger, MID, null,
             Files.size(file),
-            "audio/wav",
+            "audio/mpeg",
             cachingInputStream,
             "m.meeuwissen.vpro@gmail.com"
         );
