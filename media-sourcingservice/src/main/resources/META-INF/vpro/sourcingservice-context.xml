@@ -6,6 +6,31 @@
             https://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
+  <bean id="audioConfiguration" class="nl.vpro.sourcingservice.ConfigurationService">
+    <constructor-arg name="configuration1">
+      <bean class="nl.vpro.sourcingservice.Configuration">
+        <constructor-arg name="baseUrl" value="${sourcingservice.audio.baseUrl}" />
+        <constructor-arg name="callbackBaseUrl" value="#{null}"/>
+        <constructor-arg name="token" value="${sourcingservice.audio.token}"/>
+        <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
+        <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
+        <constructor-arg name="version" value="1"/>
+      </bean>
+    </constructor-arg>
+    <constructor-arg name="configuration2">
+      <bean class="nl.vpro.sourcingservice.Configuration">
+        <constructor-arg name="baseUrl" value="${sourcingservice.v2.baseUrl}"/>
+        <constructor-arg name="callbackBaseUrl" value="#{null}"/>
+        <constructor-arg name="token" value="${sourcingservice.v2.token}"/>
+        <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
+        <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
+        <constructor-arg name="version" value="2"/>
+      </bean>
+    </constructor-arg>
+    <constructor-arg name="version" value="1"/>
+  </bean>
   <bean class="nl.vpro.sourcingservice.AudioSourcingServiceImpl" />
+  <!--
   <bean class="nl.vpro.sourcingservice.VideoSourcingServiceImpl" />
+  -->
 </beans>

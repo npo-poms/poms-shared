@@ -24,7 +24,7 @@ class AudioSourcingServiceImplTest {
 
     public static final Properties PROPERTIES = new Properties();
 
-    private static final String MID = "WO_VPRO_A20033049";
+    private static final String MID = "WO_VPRO_A20033716";
 
     static {
         try {
@@ -43,13 +43,16 @@ class AudioSourcingServiceImplTest {
         apiClient.setBasePath("https://test.sourcing-audio.cdn.npoaudio.nl/");
         ((HttpBearerAuth) apiClient.getAuthentication("bearerAuth")).setBearerToken(PROPERTIES.getProperty("token"));
 */
-        impl = new AudioSourcingServiceImpl(
+        Configuration configuration = new Configuration(
             PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://sourcing-service.acc.metadata.bijnpo.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             50 * 1000 * 1024,
             "m.meeuwissen.vpro@gmail.com",
-            Integer.parseInt(PROPERTIES.getProperty("sourcingservice.version", "2")),
+            Integer.parseInt(PROPERTIES.getProperty("sourcingservice.version", "2"))
+        );
+        impl = new AudioSourcingServiceImpl(
+            () -> configuration,
             new LoggingMeterRegistry()
         );
     }
