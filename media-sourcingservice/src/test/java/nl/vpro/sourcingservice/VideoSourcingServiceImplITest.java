@@ -37,13 +37,16 @@ class VideoSourcingServiceImplITest {
         apiClient.setBasePath("https://test.sourcing-audio.cdn.npoaudio.nl/");
         ((HttpBearerAuth) apiClient.getAuthentication("bearerAuth")).setBearerToken(PROPERTIES.getProperty("token"));
 */
-        impl = new VideoSourcingServiceImpl(
+        Configuration configuration = new Configuration(
             "https://test.sourcing-video.cdn.npoaudio.nl/",
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.video.token"),
             100_000_000,
             "m.meeuwissen.vpro@gmail.com",
-            2,
+            2
+        );
+        impl = new VideoSourcingServiceImpl(
+            () -> configuration,
             new LoggingMeterRegistry()
         );
     }

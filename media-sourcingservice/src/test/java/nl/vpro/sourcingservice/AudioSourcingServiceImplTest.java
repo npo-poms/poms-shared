@@ -34,13 +34,16 @@ class AudioSourcingServiceImplTest {
 
     @BeforeEach
     public void setUp(WireMockRuntimeInfo wireMock) {
-        impl = new AudioSourcingServiceImpl(
+        Configuration configuration = new Configuration(
             wireMock.getHttpBaseUrl(),
             null,
             "token",
             1000,
             null,
-            2,
+            2
+        );
+        impl = new AudioSourcingServiceImpl(
+            () -> configuration,
             new LoggingMeterRegistry()
         );
     }

@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tika.mime.*;
@@ -82,45 +83,21 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         .version(HttpClient.Version.HTTP_1_1) // GOAWAY trouble?
         .build();
 
-    private String baseUrl;
+
 
     @Deprecated
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
-    @Nullable
-    @Deprecated
-    private final String callbackBaseUrl; // this seems not to get called?
-    private final String token;
-
-    private final int chunkSize;
-    @Deprecated
-    private final String defaultEmail;
+    private final Supplier<Configuration> configuration;
 
     private final MeterRegistry meterRegistry;
 
-    /**
-     * Whether to determin checksum of incoming stream
-     */
-
-
-    int version = 2;
-
     AbstractSourcingServiceImpl(
-        String baseUrl,
-        @Nullable String callbackBaseUrl,
-        String token,
-        int chunkSize,
-        String defaultEmail,
-        MeterRegistry meterRegistry,
-        int version) {
-        this.baseUrl = baseUrl.replaceAll("([^/])$","$1/");
+        Supplier<Configuration> configuration,
+        MeterRegistry meterRegistry) {
 
-        this.callbackBaseUrl = callbackBaseUrl;
-        this.token = token;
-        this.chunkSize = chunkSize;
-        this.defaultEmail = defaultEmail;
+        this.configuration = configuration;
         this.meterRegistry = meterRegistry;
-        this.version = version;
     }
 
 
@@ -161,13 +138,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String contentType,
         InputStream inputStream,
         @Nullable String errors
-    ) throws SourcingServiceException {
-        return switch (version) {
+    ) throws IOException, InterruptedException, SourcingServiceException {
+        return switch (configuration.get().version()) {
             case 1 ->
                 uploadv1(logger, mid, restrictions, fileSize, null, inputStream, errors, SourcingService.phaseLogger(logger));
             case 2 ->
                 uploadv2(logger, mid, contentType, inputStream);
-            default -> throw new IllegalArgumentException("Unknown version " + version);
+            default -> throw new IllegalArgumentException("Unknown version " + configuration.get().version());
         };
     }
 
@@ -223,11 +200,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             () -> WrappedReadableByteChannel
                 .builder()
                 .inputStream(inputStream)
-                .batchSize((long) chunkSize)
+                .batchSize((long) configuration.get().chunkSize())
                 .consumer(l -> logger.info(
                     en("Uploaded %s to %s")
                         .nl("Geüpload %s naar %s")
-                        .args(FileSizeFormatter.DEFAULT.format(l), baseUrl)))
+                        .args(FileSizeFormatter.DEFAULT.format(l), configuration.get().cleanBaseUrl()))
+                )
                 .build(),
             contentType
         );
@@ -298,7 +276,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
 
         //noinspection SwitchStatementWithTooFewBranches
-        return Optional.of(switch(version) {
+        return Optional.of(switch(configuration.get().version()) {
             case 1 -> MAPPER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v1.StatusResponse.class).normalize();
             default -> V2READER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v2.StatusResponse.class).normalize();
             }
@@ -387,7 +365,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final @Nullable String errors,
         final Restrictions restrictions) throws IOException, InterruptedException {
 
-        final String email = Optional.ofNullable(errors).orElse(defaultEmail);
+        final String email = Optional.ofNullable(errors).orElse(configuration.get().defaultEmail());
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add(UPLOAD_PHASE, "start");
         if (email != null) {
@@ -450,7 +428,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final Restrictions restrictions,
         final long total,
         final AtomicInteger partNumber) throws IOException, InterruptedException, SourcingServiceException {
-        try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
+        try (InputStreamChunk chunkStream = new InputStreamChunk(configuration.get().chunkSize(), inputStream)) {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add(UPLOAD_PHASE, "transfer")
                 .addStream(
@@ -521,7 +499,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @Nullable
     protected String getCallbackUrl(String mid) {
-        return callbackBaseUrl == null ? null : callbackBaseUrl.formatted(mid);
+        return configuration.get().callBackUrl(mid);
     }
 
     @SneakyThrows
@@ -562,7 +540,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     protected HttpRequest.Builder request(String path) {
         return HttpRequest.newBuilder()
-            .header("Authorization", "Bearer " + token)
+            .header("Authorization", "Bearer " + configuration.get().token())
             .uri(URI.create(forPath(path)));
     }
 
@@ -572,7 +550,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     String forPath(String path) {
-        return baseUrl + "api/" + path;
+        return configuration.get().cleanBaseUrl() + "api/" + path;
     }
 
 
@@ -584,23 +562,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @ManagedAttribute
     public String getBaseUrl() {
-        return baseUrl;
+        return configuration.get().cleanBaseUrl();
     }
 
-    @ManagedAttribute
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
-    @ManagedAttribute
-    public int getVersion() {
-        return version;
-    }
-
-    @ManagedAttribute
-    public void setVersion(int version) {
-        this.version = version;
-    }
 
     @ManagedAttribute
     public String getMultipartPart() {
