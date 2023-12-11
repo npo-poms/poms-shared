@@ -5,6 +5,14 @@
          "http://www.springframework.org/schema/beans
             https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+  <bean id="sourcingservice_v2_configuration" class="nl.vpro.sourcingservice.Configuration" autowire-candidate="false">
+    <constructor-arg name="baseUrl" value="${sourcingservice.v2.baseUrl}"/>
+    <constructor-arg name="callbackBaseUrl" value="#{null}"/>
+    <constructor-arg name="token" value="${sourcingservice.v2.token}"/>
+    <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
+    <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
+    <constructor-arg name="version" value="2"/>
+  </bean>
 
   <bean id="audioConfiguration" class="nl.vpro.sourcingservice.ConfigurationService">
     <constructor-arg name="configuration1">
@@ -17,20 +25,17 @@
         <constructor-arg name="version" value="1"/>
       </bean>
     </constructor-arg>
-    <constructor-arg name="configuration2">
-      <bean class="nl.vpro.sourcingservice.Configuration">
-        <constructor-arg name="baseUrl" value="${sourcingservice.v2.baseUrl}"/>
-        <constructor-arg name="callbackBaseUrl" value="#{null}"/>
-        <constructor-arg name="token" value="${sourcingservice.v2.token}"/>
-        <constructor-arg name="chunkSize" value="${sourcingservice.chunkSize:10000000}"/>
-        <constructor-arg name="defaultEmail" value="${sourcingservice.defaultEmail:#{null}}"/>
-        <constructor-arg name="version" value="2"/>
-      </bean>
-    </constructor-arg>
-    <constructor-arg name="version" value="1"/>
+    <constructor-arg name="configuration2" ref="sourcingservice_v2_configuration" />
+    <constructor-arg name="version" value="${sourcingservice.version:1}"/>
   </bean>
+
+  <bean id="videoConfiguration" class="nl.vpro.sourcingservice.ConfigurationService">
+    <constructor-arg name="configuration1" value="#{null}" />
+    <constructor-arg name="configuration2" ref="sourcingservice_v2_configuration" />
+    <constructor-arg name="version" value="${sourcingservice.version:1}"/>
+  </bean>
+
+
   <bean class="nl.vpro.sourcingservice.AudioSourcingServiceImpl" />
-  <!--
   <bean class="nl.vpro.sourcingservice.VideoSourcingServiceImpl" />
-  -->
-</beans>
+  </beans>

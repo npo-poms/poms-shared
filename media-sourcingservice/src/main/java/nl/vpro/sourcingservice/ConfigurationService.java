@@ -21,10 +21,6 @@ public class ConfigurationService implements Supplier<Configuration> {
         this.version = version;
     }
 
-    public void doSomething() {
-        System.out.println(configuration1);
-        System.out.println(configuration2);
-    }
 
     @Override
     public Configuration get() {
