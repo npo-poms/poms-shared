@@ -30,6 +30,7 @@ import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
 import nl.vpro.domain.subtitles.*;
 import nl.vpro.jmx.Description;
+import nl.vpro.metis.IdType;
 import nl.vpro.poms.shared.Headers;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
@@ -645,6 +646,21 @@ public interface MediaBackendRestService {
     @Produces(MediaType.TEXT_PLAIN)
     String createMid(
         @PathParam("type") nl.vpro.domain.media.MediaType mediaType);
+
+
+
+    /**
+     * @since 7.10
+     */
+    @GET
+    @Path("mid/{type:.*}/{broadcaster:.*}")
+    @Produces(MediaType.TEXT_PLAIN)
+    String createMid(
+        @PathParam("type") IdType idType,
+        @PathParam("broadcaster") String broadcaster,
+        @QueryParam("group") boolean group
+    );
+
 
 }
 
