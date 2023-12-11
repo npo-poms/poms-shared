@@ -44,19 +44,22 @@ class AudioSourcingServiceImplITest {
         apiClient.setBasePath("https://test.sourcing-audio.cdn.npoaudio.nl/");
         ((HttpBearerAuth) apiClient.getAuthentication("bearerAuth")).setBearerToken(PROPERTIES.getProperty("token"));
 */
-        impl = new AudioSourcingServiceImpl(
+        Configuration configuration = new Configuration(
             PROPERTIES.getProperty("sourcingservice.audio.baseUrl", "https://sourcing-service.acc.metadata.bijnpo.nl/"),
             PROPERTIES.getProperty("sourcingservice.callbackBaseUrl"),
             PROPERTIES.getProperty("sourcingservice.audio.token", "<token>"),
             50 * 1000 * 1024,
             "m.meeuwissen.vpro@gmail.com",
-            Integer.parseInt(PROPERTIES.getProperty("sourcingservice.version", "2")),
+            Integer.parseInt(PROPERTIES.getProperty("sourcingservice.version", "2"))
+        );
+        impl = new AudioSourcingServiceImpl(
+            () -> configuration,
             new LoggingMeterRegistry()
         );
     }
 
     @Test
-    public void uploadAudio() throws IOException {
+    public void uploadAudio() throws IOException, InterruptedException {
         final Instant start = Instant.now();
         final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.wav");
 
