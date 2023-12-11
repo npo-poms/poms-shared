@@ -27,6 +27,9 @@ public enum IdType {
      */
     POMS,
 
+    SRCS,
+
+    RCRS,
     /**
      * Voor PREPR
      */
