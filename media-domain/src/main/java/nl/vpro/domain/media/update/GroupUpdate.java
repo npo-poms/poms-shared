@@ -60,7 +60,7 @@ public final class GroupUpdate extends MediaUpdate<Group> {
     private Boolean ordered = true;
 
 
-    private GroupUpdate() {
+    public GroupUpdate() {
         super();
     }
 
