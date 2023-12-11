@@ -27,9 +27,16 @@ public enum IdType {
      */
     POMS,
 
+    /**
+     * Sourcing Service
+     */
     SRCS,
 
+    /**
+     * Voor RCRS. Radio content repository service (of zoiets?)
+     */
     RCRS,
+
     /**
      * Voor PREPR
      */
