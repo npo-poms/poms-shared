@@ -169,7 +169,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            //ingest(logger, mid, getFileName(mid), restrictions);
            phase.accept(Phase.START);
            logger.info(en("Uploading %d B")
-               .nl("Uploaden %d B").args(fileSize));
+               .nl("Uploaden %d B")
+               .formatted(fileSize)
+           );
            uploadStart(logger, mid, fileSize, checksum, errors, restrictions);
            phase.accept(Phase.UPLOAD);
            final AtomicInteger partNumber = new AtomicInteger(1);
@@ -204,7 +206,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
                 .consumer(l -> logger.info(
                     en("Uploaded %s to %s")
                         .nl("Geüpload %s naar %s")
-                        .args(FileSizeFormatter.DEFAULT.format(l), configuration.get().cleanBaseUrl()))
+                        .formatted(FileSizeFormatter.DEFAULT.format(l), configuration.get().cleanBaseUrl()))
                 )
                 .build(),
             contentType
@@ -216,7 +218,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
             .build();
 
-        logger.info("Posting {} for {} to {}", fileName, mid, post.uri());
+        logger.info(en("Posting {} for {} to {}")
+            .nl("Posting {} voor {} naar {}").slf4jArgs(fileName, mid, post.uri()));
 
         final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
 
