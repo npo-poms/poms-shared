@@ -141,6 +141,7 @@ public interface MediaBackendRestService {
     @Produces(MediaType.TEXT_PLAIN)
     boolean exists(
         @Encoded @PathParam(MID) String mid,
+        @QueryParam("requested") @DefaultValue("true") Boolean requested,
         @Context HttpServletResponse response);
 
     @DELETE
