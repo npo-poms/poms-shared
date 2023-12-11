@@ -69,7 +69,7 @@ class AudioSourcingServiceImplTest {
             .noProgressLogging()
             .batchSize(1024 * 1024)
             .startImmediately(false)
-            .batchConsumer(loggingConsumer(logger))
+            .batchConsumer(loggingConsumer(logger, "audio"))
             .build();
         final UploadResponse upload = impl.upload(logger, MID, null,
             Files.size(file),
