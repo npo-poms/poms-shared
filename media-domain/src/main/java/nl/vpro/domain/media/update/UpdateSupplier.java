@@ -1,7 +1,11 @@
 package nl.vpro.domain.media.update;
 
 
+import lombok.Getter;
+
 import com.google.common.annotations.Beta;
+
+import nl.vpro.metis.IdType;
 
 /**
  * An update supplier is an authoritative system - i.e. it is not a broadcaster - that supplies updates to POMS.
@@ -15,14 +19,22 @@ public enum UpdateSupplier {
     /**
      * See MSE-5484
      */
-    RCRS,
+    RCRS(IdType.RCRS),
 
 
     /**
      * I think we would like to do something similar for Sourcing Service
      */
     @Beta
-    SOURCING_SERVICE;
+    SOURCING_SERVICE(IdType.SRCS),
+
+    PREPR(IdType.PREPR);
+
+    @Getter
+    private final IdType idType;
 
 
+    UpdateSupplier(IdType idType) {
+        this.idType = idType;
+    }
 }
