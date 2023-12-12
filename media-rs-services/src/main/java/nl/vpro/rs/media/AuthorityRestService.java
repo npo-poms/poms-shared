@@ -68,11 +68,11 @@ public interface AuthorityRestService {
      * @since 7.10
      */
     @GET
-    @Path("{supplier}/{class}/{broadcaster:.*}")
+    @Path("{class}/{supplier}/{broadcaster:.*}")
     @Produces(MediaType.TEXT_PLAIN)
     String createMid(
-        @PathParam("supplier") final UpdateSupplier supplier,
         @PathParam("class") final IdClass idClass,
+        @PathParam("supplier") final UpdateSupplier supplier,
         @PathParam("broadcaster") String broadcaster
     );
 
