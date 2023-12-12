@@ -5,6 +5,16 @@ package nl.vpro.metis;
  */
 public enum IdClass {
 
-    prid,
-    srid
+    /**
+     * An ID form program object
+     */
+    PRID,
+    /**
+     * An ID for group (series) objects
+     */
+    SRID,
+    /**
+     * An ID for images.
+     */
+    IID
 }
