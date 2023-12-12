@@ -637,8 +637,8 @@ public interface MediaBackendRestService {
     @Path("mid/{type:.*}")
     @Produces(MediaType.TEXT_PLAIN)
     String createMid(
-        @PathParam("type") nl.vpro.domain.media.MediaType mediaType);
-
+        @PathParam("type") nl.vpro.domain.media.MediaType mediaType,
+        @QueryParam("register") Boolean register);
 
 
 }
