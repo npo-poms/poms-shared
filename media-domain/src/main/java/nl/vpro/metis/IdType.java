@@ -6,9 +6,13 @@ import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.Program;
 
 /**
-* @author Michiel Meeuwissen
-* @since 1.7
-*/
+ * Every 'mid' has a type (basically just a prefix).
+ *
+ * This may indicate what kind of thing it is. E.g. 'WO' for 'Web Only'.
+ * It also may indicate where it comes from. E.g. 'POMS' for POMS, 'SRCS' for Sourcing Service, 'RCRS' for Radio Content Repository Service.
+ * @author Michiel Meeuwissen
+ * @since 1.7
+ */
 public enum IdType {
     /**
      * WebOnly
