@@ -3266,10 +3266,17 @@
         </xs:annotation>
       </xs:enumeration>
 
-       <xs:enumeration value="XXXX">
+      <xs:enumeration value="XXXX">
         <xs:annotation>
           <xs:documentation>
             Test channel. This channel only exist for the sake of testing.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="XXXY">
+        <xs:annotation>
+          <xs:documentation>
+            Second test channel. This channel only exist for the sake of testing.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
