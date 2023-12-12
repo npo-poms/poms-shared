@@ -2788,6 +2788,18 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "TEST CHANNEL";
         }
+    },
+    /**
+     * This is not a real channel. It can be used for testing or mocking purposes.
+     *
+     * @since 7.10
+     */
+    @XmlEnumValue("XXXY")
+    XXXY() {
+        @Override
+        public String toString() {
+            return "TEST CHANNEL 2";
+        }
     }
     ;
     private final AVType avType;
