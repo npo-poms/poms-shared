@@ -19,6 +19,7 @@ public class BroadcasterValidator implements ConstraintValidator<BroadcasterVali
 
     private static boolean warned = false;
 
+    @SuppressWarnings("rawtypes")
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext constraintValidatorContext) {
 
