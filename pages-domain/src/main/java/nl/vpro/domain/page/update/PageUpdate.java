@@ -29,8 +29,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.page.PageType;
 import nl.vpro.domain.page.PageWorkflow;
 import nl.vpro.domain.page.util.Urls;
-import nl.vpro.domain.page.validation.ValidBroadcaster;
 import nl.vpro.domain.page.validation.ValidGenre;
+import nl.vpro.domain.user.validation.BroadcasterValidation;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.validation.*;
@@ -98,9 +98,8 @@ public class PageUpdate implements Serializable {
     @Size(min = 1)
     @XmlElement(name = "broadcaster", required = true)
     @JsonProperty("broadcasters")
-    @ValidBroadcaster
     @Setter
-    protected List<String> broadcasters;
+    protected List<@BroadcasterValidation String> broadcasters;
 
     @Valid
     @Getter
