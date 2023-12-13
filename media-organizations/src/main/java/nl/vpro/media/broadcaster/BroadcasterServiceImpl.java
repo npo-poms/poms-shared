@@ -87,16 +87,6 @@ public class BroadcasterServiceImpl implements BroadcasterService {
     }
 
     @Override
-    public Broadcaster update(Broadcaster organization) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void delete(Broadcaster organization) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public String toString() {
         return getClass().getSimpleName() + "[" + displayNameResource.getUrl() + (misResource != null ? "(/mis,whatson)" : "") + "]  " + getRepository().size() + " broadcasters";
     }
