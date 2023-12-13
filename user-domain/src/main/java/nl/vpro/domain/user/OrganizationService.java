@@ -17,8 +17,12 @@ public interface OrganizationService<T extends Organization> {
 
     List<T> findAll();
 
-    T update(T organization);
+    default T update(T organization) {
+        throw new UnsupportedOperationException();
+    }
 
-    void delete(T organization);
+    default void delete(T organization) {
+        throw new UnsupportedOperationException();
+    }
 
 }
