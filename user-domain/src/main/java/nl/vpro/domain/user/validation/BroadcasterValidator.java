@@ -2,7 +2,7 @@
  * Copyright (C) 2011 Licensed under the Apache License, Version 2.0
  * VPRO The Netherlands
  */
-package nl.vpro.validation;
+package nl.vpro.domain.user.validation;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +31,14 @@ public class BroadcasterValidator implements ConstraintValidator<BroadcasterVali
             return true;
         }
         warned = false;
+        if (value instanceof Iterable i) {
+            for (Object o : i) {
+                if (! isValid(o, constraintValidatorContext)) {
+                    return false;
+                }
+            }
+            return true;
+        }
         if (value instanceof Broadcaster b) {
             value  = b.getId();
         }
