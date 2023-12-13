@@ -261,6 +261,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     private List<
         @NotNull
         @Size(min = 2, max = 4, message = "2 < id < 5")
+        @BroadcasterValidation
         @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
             String> broadcasters;
 
