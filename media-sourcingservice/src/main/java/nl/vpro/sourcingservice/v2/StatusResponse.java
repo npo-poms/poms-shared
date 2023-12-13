@@ -3,15 +3,11 @@ package nl.vpro.sourcingservice.v2;
 import lombok.*;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import nl.vpro.domain.media.Schedule;
 import nl.vpro.sourcingservice.AbstractResponse;
-import nl.vpro.util.DateUtils;
 
 @Getter
 @ToString()
@@ -33,8 +29,7 @@ public class StatusResponse  extends AbstractResponse {
         Instant hard_delete_at;
         Instant filesent_at;
         Instant streamstatus_updated;
-        @JsonDeserialize(using = nl.vpro.jackson2.LocalDateTimeToJsonDateWithSpace.Deserializer.class)
-        LocalDateTime published_at;
+        Instant published_at;
         String status;
         String filename;
         String original_filename;
@@ -51,7 +46,7 @@ public class StatusResponse  extends AbstractResponse {
                   .created_at(response.getCreated_at())
                   .filesent_at(response.getFilesent_at())
                   .streamstatus_updated(response.getStreamstatus_updated())
-                  .published_at(DateUtils.toInstant(response.getPublished_at(), Schedule.ZONE_ID))
+                  .published_at(response.getPublished_at())
                   .deleted_at(response.getDeleted_at())
                   .build()
             );
