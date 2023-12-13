@@ -1,5 +1,6 @@
 package nl.vpro.rs.media;
 
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -73,7 +74,7 @@ public interface AuthorityRestService {
     String createMid(
         @PathParam("class") final IdClass idClass,
         @PathParam("supplier") final UpdateSupplier supplier,
-        @PathParam("broadcaster") String broadcaster
+        @Pattern(regexp ="^[A-Z][A-Z0-9]{2,5}$") @PathParam("broadcaster") String broadcaster
     );
 
 
