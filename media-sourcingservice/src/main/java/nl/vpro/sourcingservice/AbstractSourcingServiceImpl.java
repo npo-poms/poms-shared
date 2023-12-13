@@ -262,7 +262,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             status,
             response,
             count,
-            "2:"+ post.uri()
+            "2:"+  configuration.get().cleanBaseUrl()
             );
 
    }
@@ -493,7 +493,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             status,
             response,
             uploaded.get(),
-            "1:"+ multipart.uri()
+            "1:"+ configuration.get().cleanBaseUrl()
         );
     }
 
