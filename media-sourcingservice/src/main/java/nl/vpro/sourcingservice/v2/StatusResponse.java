@@ -33,8 +33,7 @@ public class StatusResponse  extends AbstractResponse {
         Instant hard_delete_at;
         Instant filesent_at;
         Instant streamstatus_updated;
-        @JsonDeserialize(using = nl.vpro.jackson2.LocalDateTimeToJsonDateWithSpace.Deserializer.class)
-        LocalDateTime published_at;
+        Instant published_at;
         String status;
         String filename;
         String original_filename;
