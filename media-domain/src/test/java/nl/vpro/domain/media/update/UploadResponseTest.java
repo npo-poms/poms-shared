@@ -9,7 +9,7 @@ class UploadResponseTest {
 
     @Test
     public void xml() {
-       UploadResponse response = new UploadResponse("mid_123", 200, "succes", "foobar", 1000L);
+       UploadResponse response = new UploadResponse("mid_123", 200, "succes", "foobar", 1000L, null);
 
         JAXBTestUtil.assertThatXml(response).noRoundTrip().isSimilarTo("""
             <uploadResponse statusCode="200" mid="mid_123" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
@@ -22,7 +22,7 @@ class UploadResponseTest {
 
     @Test
     public void json() {
-       UploadResponse response = new UploadResponse("mid_123", 200, "succes", "foobar", 1000L);
+       UploadResponse response = new UploadResponse("mid_123", 200, "succes", "foobar", 1000L, null);
 
         Jackson2TestUtil.assertThatJson(response).isSimilarTo("""
             {
