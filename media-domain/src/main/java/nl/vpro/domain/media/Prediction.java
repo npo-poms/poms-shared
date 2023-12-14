@@ -305,7 +305,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
 
-    @XmlAttribute
+    @XmlAttribute(name = "publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
