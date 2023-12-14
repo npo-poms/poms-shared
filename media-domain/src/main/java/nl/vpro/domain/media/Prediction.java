@@ -124,11 +124,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Getter
     protected transient State previousState;
 
-    @XmlAttribute
-    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-    @XmlSchemaType(name = "dateTime")
-    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+
+    @XmlTransient
     protected Instant publishStart;
 
 
@@ -308,9 +305,39 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
 
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @Override
     public Instant getPublishStartInstant() {
-        return publishStart;
+        Instant result =  publishStart;
+        if (mediaObject != null) {
+            Instant earliestLocation = Instant.MAX;
+            int foundLocations = 0;
+            for (Location l : mediaObject.getLocations()) {
+                if (l.isDeleted()) {
+                    continue;
+                }
+                if (platform.matches(l.getPlatform())) {
+                    foundLocations++;
+                    if (l.getOwnPublishStartInstant() == null) {
+                        earliestLocation = null;
+                        break;
+                    } else if (l.getOwnPublishStartInstant().isBefore(earliestLocation)) {
+                        earliestLocation = l.getOwnPublishStopInstant();
+                    }
+                }
+            }
+            if (foundLocations > 0) {
+                if (result == null || (earliestLocation != null && earliestLocation.isBefore(result))) {
+                    result = earliestLocation;
+                }
+            }
+
+        }
+        return result;
     }
 
 
