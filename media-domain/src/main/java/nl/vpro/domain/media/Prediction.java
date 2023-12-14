@@ -313,11 +313,17 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public Instant getPublishStartInstant() {
         Instant result =  publishStart;
-        if (mediaObject != null) {
+        if (mediaObject != null // can be determined
+            && result != null // already minimal!
+        ) {
             Instant earliestLocation = Instant.MAX;
             int foundLocations = 0;
             for (Location l : mediaObject.getLocations()) {
                 if (l.isDeleted()) {
+                    continue;
+                }
+                if (l.getOwnPublishStopInstant() != null && l.getOwnPublishStopInstant().isBefore(instant())) {
+                    // it was published earlier, but not anymore, so ignore this!
                     continue;
                 }
                 if (platform.matches(l.getPlatform())) {
@@ -331,7 +337,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
                 }
             }
             if (foundLocations > 0) {
-                if (result == null || (earliestLocation != null && earliestLocation.isBefore(result))) {
+                if (earliestLocation == null || earliestLocation.isBefore(result)) {
                     result = earliestLocation;
                 }
             }
