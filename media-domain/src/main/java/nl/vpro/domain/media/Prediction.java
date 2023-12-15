@@ -305,6 +305,11 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
 
+    /**
+     * Basically the start of a prediction is {@link #getOwnPublishStartInstant()}. If there are locations that are to be published earlier, they won't be published either.
+     * <p />
+     * If there are no locations, then the assumption is that the publish start is 'predicted' and around that time a notify from NEP fill follow.
+     */
     @XmlAttribute(name = "publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -313,8 +318,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public Instant getPublishStartInstant() {
         Instant result =  publishStart;
-        if (mediaObject != null // can be determined
-            && result != null // already minimal!
+        /*if (mediaObject != null // can be determined
         ) {
             Instant earliestLocation = Instant.MAX;
             int foundLocations = 0;
@@ -337,12 +341,12 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
                 }
             }
             if (foundLocations > 0) {
-                if (earliestLocation == null || earliestLocation.isBefore(result)) {
+                if (earliestLocation != null && earliestLocation.isAfter(result)) {
                     result = earliestLocation;
                 }
             }
 
-        }
+        }*/
         return result;
     }
 
