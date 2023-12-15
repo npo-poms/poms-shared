@@ -159,6 +159,7 @@
           <xsd:element name="sortDateScheduleEvent" type="scheduleEventType" minOccurs="0"/>
           <xsd:element name="locations" type="locationType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="numberOfLocations" type="xsd:int" minOccurs="0"/>
+          <xsd:element name="numberOfPublishedLocations" type="xsd:int" minOccurs="0"/>
           <xsd:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="image" type="tns:imageListItem" minOccurs="0"/>
           <xsd:element name="streamingPlatformStatus" type="streamingStatus" minOccurs="0"/>
