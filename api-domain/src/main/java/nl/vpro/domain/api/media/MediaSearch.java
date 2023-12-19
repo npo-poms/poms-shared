@@ -64,6 +64,7 @@ public class MediaSearch extends AbstractTextSearch<MediaObject>  {
     @Valid
     @Getter
     @Setter
+    @XmlDocumentation("To filter on av type (AUDIO/VIDEO)")
     private TextMatcherList avTypes;
 
     @Valid

@@ -1,16 +1,20 @@
 package nl.vpro.domain.api;
 
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
 /**
  * @author Michiel Meeuwissen
  * @since 2.3
  */
+@Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlTransient
 @EqualsAndHashCode
@@ -31,12 +35,9 @@ public abstract class AbstractMatcher<V> implements Matcher<V> {
         return match == null ? Match.MUST : match;
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
-    }
-
 
     @XmlAttribute(name = "match")
+    @XmlDocumentation("The match type. If not specified, the default is MUST. But it can also be SHOULD or NOT.")
     public Match getMatchAttribute() {
         return match == Match.MUST ? null : match;
     }
