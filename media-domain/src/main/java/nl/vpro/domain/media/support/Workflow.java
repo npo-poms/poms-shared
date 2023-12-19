@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.XmlValued;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.TrackableObject;
 import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
@@ -198,6 +199,14 @@ public enum Workflow implements Displayable, XmlValued {
     @Override
     public String getDisplayName() {
         return getDescription();
+    }
+
+    /**
+     * E.g. {@code #PUBLISHED::predicate} is a predicate on a {@link TrackableObject}.
+     */
+
+    public boolean predicate(TrackableObject publishableObject) {
+        return publishableObject.getWorkflow() == Workflow.this;
     }
 
 

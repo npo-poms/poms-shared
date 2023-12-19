@@ -15,10 +15,10 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tika.mime.MimeTypeException;
-import org.apache.tika.mime.MimeTypes;
+import org.apache.tika.mime.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
@@ -33,6 +33,8 @@ import nl.vpro.logging.simple.Level;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.sourcingservice.v1.IngestResponse;
 import nl.vpro.util.*;
+
+import static nl.vpro.i18n.MultiLanguageString.en;
 
 
 /**
@@ -81,55 +83,45 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         .version(HttpClient.Version.HTTP_1_1) // GOAWAY trouble?
         .build();
 
-    private String baseUrl;
+
 
     @Deprecated
     private String multipartPart = "ingest/%s/multipart-assetonly";
 
-    @Nullable
-    @Deprecated
-    private final String callbackBaseUrl; // this seems not to get called?
-    private final String token;
-
-    private final int chunkSize;
-    @Deprecated
-    private final String defaultEmail;
+    private final Supplier<Configuration> configuration;
 
     private final MeterRegistry meterRegistry;
 
-    /**
-     * Whether to determin checksum of incoming stream
-     */
-
-
-    int version = 2;
-
     AbstractSourcingServiceImpl(
-        String baseUrl,
-        @Nullable String callbackBaseUrl,
-        String token,
-        int chunkSize,
-        String defaultEmail,
-        MeterRegistry meterRegistry,
-        int version) {
-        this.baseUrl = baseUrl.replaceAll("([^/])$","$1/");
+        Supplier<Configuration> configuration,
+        MeterRegistry meterRegistry) {
 
-        this.callbackBaseUrl = callbackBaseUrl;
-        this.token = token;
-        this.chunkSize = chunkSize;
-        this.defaultEmail = defaultEmail;
+        this.configuration = configuration;
         this.meterRegistry = meterRegistry;
-        this.version = version;
     }
 
 
     protected  String getFileName(String mid, String mimeType) {
         String ext;
+        final String defaultExt = "." + defaultFormat().name().toLowerCase();
         try {
-            ext = MimeTypes.getDefaultMimeTypes().forName(mimeType).getExtension();
+
+            MimeType tika = MimeTypes.getDefaultMimeTypes().getRegisteredMimeType(mimeType);
+            if (tika== null) {
+                tika= MimeTypes.getDefaultMimeTypes().forName(mimeType);
+            }
+            if (!tika.getExtensions().isEmpty()) {
+                if (tika.getExtensions().contains(defaultExt)) {
+                    ext = defaultExt;
+                } else {
+                    ext = tika.getExtension();
+                }
+            } else {
+                ext = defaultExt;
+            }
         } catch (MimeTypeException e) {
             log.warn(e.getMessage(), e);
-            ext = "." + defaultFormat().name().toLowerCase();
+            ext = defaultExt;
         }
         return mid + ext;
     }
@@ -146,13 +138,13 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         String contentType,
         InputStream inputStream,
         @Nullable String errors
-    ) throws SourcingServiceException {
-        return switch (version) {
+    ) throws IOException, InterruptedException, SourcingServiceException {
+        return switch (configuration.get().version()) {
             case 1 ->
                 uploadv1(logger, mid, restrictions, fileSize, null, inputStream, errors, SourcingService.phaseLogger(logger));
             case 2 ->
                 uploadv2(logger, mid, contentType, inputStream);
-            default -> throw new IllegalArgumentException("Unknown version " + version);
+            default -> throw new IllegalArgumentException("Unknown version " + configuration.get().version());
         };
     }
 
@@ -176,7 +168,10 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
            // this is not needed (as I've tested)
            //ingest(logger, mid, getFileName(mid), restrictions);
            phase.accept(Phase.START);
-           logger.info("Uploading {} B", fileSize);
+           logger.info(en("Uploading %d B")
+               .nl("Uploaden %d B")
+               .formatted(fileSize)
+           );
            uploadStart(logger, mid, fileSize, checksum, errors, restrictions);
            phase.accept(Phase.UPLOAD);
            final AtomicInteger partNumber = new AtomicInteger(1);
@@ -207,8 +202,12 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             () -> WrappedReadableByteChannel
                 .builder()
                 .inputStream(inputStream)
-                .batchSize((long) chunkSize)
-                .consumer(l -> logger.info(() -> "Uploaded %s to %s".formatted(FileSizeFormatter.DEFAULT.format(l), baseUrl)))
+                .batchSize((long) configuration.get().chunkSize())
+                .consumer(l -> logger.info(
+                    en("Uploaded %s to %s")
+                        .nl("Geüpload %s naar %s")
+                        .formatted(FileSizeFormatter.DEFAULT.format(l), configuration.get().cleanBaseUrl()))
+                )
                 .build(),
             contentType
         );
@@ -219,7 +218,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
             .build();
 
-        logger.info("Posting {} for {} to {}", fileName, mid, post.uri());
+        logger.info(en("Posting {} for {} to {}")
+            .nl("Posting {} voor {} naar {}").slf4jArgs(fileName, mid, post.uri()));
 
         final HttpResponse<String> send = client.send(post, HttpResponse.BodyHandlers.ofString());
 
@@ -261,7 +261,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             send.statusCode(),
             status,
             response,
-            count);
+            count,
+            "2:"+  configuration.get().cleanBaseUrl()
+            );
 
    }
 
@@ -279,7 +281,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         }
 
         //noinspection SwitchStatementWithTooFewBranches
-        return Optional.of(switch(version) {
+        return Optional.of(switch(configuration.get().version()) {
             case 1 -> MAPPER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v1.StatusResponse.class).normalize();
             default -> V2READER.readValue(statusResponse.body(), nl.vpro.sourcingservice.v2.StatusResponse.class).normalize();
             }
@@ -368,7 +370,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final @Nullable String errors,
         final Restrictions restrictions) throws IOException, InterruptedException {
 
-        final String email = Optional.ofNullable(errors).orElse(defaultEmail);
+        final String email = Optional.ofNullable(errors).orElse(configuration.get().defaultEmail());
         final MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
             .add(UPLOAD_PHASE, "start");
         if (email != null) {
@@ -431,7 +433,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
         final Restrictions restrictions,
         final long total,
         final AtomicInteger partNumber) throws IOException, InterruptedException, SourcingServiceException {
-        try (InputStreamChunk chunkStream = new InputStreamChunk(chunkSize, inputStream)) {
+        try (InputStreamChunk chunkStream = new InputStreamChunk(configuration.get().chunkSize(), inputStream)) {
             MultipartFormDataBodyPublisher body = new MultipartFormDataBodyPublisher()
                 .add(UPLOAD_PHASE, "transfer")
                 .addStream(
@@ -474,8 +476,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
         addRegion(logger, body, restrictions);
-
-        final HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
+        HttpRequest multipart = multipart(mid, body);
+        final HttpResponse<String> finish = client.send(multipart, HttpResponse.BodyHandlers.ofString());
         meter("finish", finish);
 
         final JsonNode node = JSONREADER.readTree(finish.body());
@@ -490,7 +492,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             finish.statusCode(),
             status,
             response,
-            uploaded.get()
+            uploaded.get(),
+            "1:"+ configuration.get().cleanBaseUrl()
         );
     }
 
@@ -502,7 +505,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @Nullable
     protected String getCallbackUrl(String mid) {
-        return callbackBaseUrl == null ? null : callbackBaseUrl.formatted(mid);
+        return configuration.get().callBackUrl(mid);
     }
 
     @SneakyThrows
@@ -543,7 +546,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     protected HttpRequest.Builder request(String path) {
         return HttpRequest.newBuilder()
-            .header("Authorization", "Bearer " + token)
+            .header("Authorization", "Bearer " + configuration.get().token())
             .uri(URI.create(forPath(path)));
     }
 
@@ -553,7 +556,7 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     String forPath(String path) {
-        return baseUrl + "api/" + path;
+        return configuration.get().cleanBaseUrl() + "api/" + path;
     }
 
 
@@ -565,23 +568,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
     @ManagedAttribute
     public String getBaseUrl() {
-        return baseUrl;
+        return configuration.get().cleanBaseUrl();
     }
 
-    @ManagedAttribute
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
-    @ManagedAttribute
-    public int getVersion() {
-        return version;
-    }
-
-    @ManagedAttribute
-    public void setVersion(int version) {
-        this.version = version;
-    }
 
     @ManagedAttribute
     public String getMultipartPart() {

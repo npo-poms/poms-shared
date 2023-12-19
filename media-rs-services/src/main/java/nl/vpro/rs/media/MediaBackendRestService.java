@@ -141,6 +141,7 @@ public interface MediaBackendRestService {
     @Produces(MediaType.TEXT_PLAIN)
     boolean exists(
         @Encoded @PathParam(MID) String mid,
+        @QueryParam("registered") @DefaultValue("true") Boolean registered,
         @Context HttpServletResponse response);
 
     @DELETE
@@ -644,7 +645,9 @@ public interface MediaBackendRestService {
     @Path("mid/{type:.*}")
     @Produces(MediaType.TEXT_PLAIN)
     String createMid(
-        @PathParam("type") nl.vpro.domain.media.MediaType mediaType);
+        @PathParam("type") nl.vpro.domain.media.MediaType mediaType,
+        @QueryParam("register") Boolean register);
+
 
 }
 

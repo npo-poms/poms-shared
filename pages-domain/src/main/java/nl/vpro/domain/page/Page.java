@@ -138,50 +138,67 @@ public class Page implements MutableEmbargo<Page> {
     @Setter
     protected Portal portal;
 
+    @Setter
     @NotNull
     @Size(min = 1)
     @NoHtml
     protected String title;
 
+    @Setter
     @NoHtml
     protected String subtitle;
 
+    @Setter
     @NoHtml
     protected List<String> keywords;
 
+    @Setter
     @Valid
     protected SortedSet<Genre> genres;
 
+    @Setter
     @NoHtml
     protected String summary;
 
+    @Setter
     protected List<Paragraph> paragraphs;
 
+    @Setter
     protected List<String> tags;
 
+    @Setter
     protected Integer refCount;
 
+    @Setter
     protected List<Referral> referrals;
 
+    @Setter
     protected List<Link> links;
 
+    @Setter
     protected List<Embed> embeds;
 
+    @Setter
     protected List<String> statRefs;
 
+    @Setter
     protected List<Image> images;
 
+    @Setter
     @Valid
     protected SortedSet<Relation> relations;
 
+    @Setter
     protected Instant creationDate;
 
+    @Setter
     protected Instant lastModified;
 
     protected Instant publishStart;
 
     protected Instant publishStop;
 
+    @Setter
     protected Instant lastPublished;
 
     protected List<Credits> credits;
@@ -201,18 +218,10 @@ public class Page implements MutableEmbargo<Page> {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     @XmlElement(name = "subTitle")
     @JsonProperty("subTitle")
     public String getSubtitle() {
         return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
     }
 
     @XmlElement(name = "keyword")
@@ -223,11 +232,6 @@ public class Page implements MutableEmbargo<Page> {
     }
 
 
-
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
-    }
-
     @XmlElement(name = "genre")
     @JsonProperty("genres")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -235,18 +239,10 @@ public class Page implements MutableEmbargo<Page> {
         return genres;
     }
 
-    public void setGenres(SortedSet<Genre> genres) {
-        this.genres = genres;
-    }
-
     @XmlElement(name = "summary")
     @JsonProperty("summary")
     public String getSummary() {
         return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
     }
 
     @XmlElementWrapper(name = "paragraphs")
@@ -257,19 +253,11 @@ public class Page implements MutableEmbargo<Page> {
         return paragraphs;
     }
 
-    public void setParagraphs(List<Paragraph> paragraphs) {
-        this.paragraphs = paragraphs;
-    }
-
     @XmlElement(name = "tag")
     @JsonProperty("tags")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<String> getTags() {
         return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
     }
 
     @XmlAttribute
@@ -278,19 +266,11 @@ public class Page implements MutableEmbargo<Page> {
         return refCount;
     }
 
-    public void setRefCount(Integer refCount) {
-        this.refCount = refCount;
-    }
-
     @XmlElement(name = "referral")
     @JsonProperty("referrals")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Referral> getReferrals() {
         return referrals;
-    }
-
-    public void setReferrals(List<Referral> referrals) {
-        this.referrals = referrals;
     }
 
     public void add(Referral referral) {
@@ -308,10 +288,6 @@ public class Page implements MutableEmbargo<Page> {
         return links;
     }
 
-    public void setLinks(List<Link> links) {
-        this.links = links;
-    }
-
     public void add(Link link) {
         if (this.links == null) {
             this.links = new ArrayList<>();
@@ -325,10 +301,6 @@ public class Page implements MutableEmbargo<Page> {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Embed> getEmbeds() {
         return embeds;
-    }
-
-    public void setEmbeds(List<Embed> embeds) {
-        this.embeds = embeds;
     }
 
     public void add(Embed embed) {
@@ -346,20 +318,12 @@ public class Page implements MutableEmbargo<Page> {
         return statRefs;
     }
 
-    public void setStatRefs(List<String> statRefs) {
-        this.statRefs = statRefs;
-    }
-
     @XmlElementWrapper(name = "images")
     @XmlElement(name = "image")
     @JsonProperty("images")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Image> getImages() {
         return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
     }
 
 
@@ -373,10 +337,6 @@ public class Page implements MutableEmbargo<Page> {
         return relations;
     }
 
-    public void setRelations(SortedSet<Relation> relations) {
-        this.relations = relations;
-    }
-
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -387,10 +347,6 @@ public class Page implements MutableEmbargo<Page> {
         return lastModified;
     }
 
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -398,10 +354,6 @@ public class Page implements MutableEmbargo<Page> {
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     public Instant getCreationDate() {
         return creationDate;
-    }
-
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
     }
 
     @XmlAttribute
@@ -471,10 +423,6 @@ public class Page implements MutableEmbargo<Page> {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public Instant getLastPublished() {
         return lastPublished;
-    }
-
-    public void setLastPublished(Instant lastPublished) {
-        this.lastPublished = lastPublished;
     }
 
     @Override

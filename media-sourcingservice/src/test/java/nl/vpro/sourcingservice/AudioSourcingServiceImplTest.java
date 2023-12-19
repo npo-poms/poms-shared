@@ -30,20 +30,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 @WireMockTest
 class AudioSourcingServiceImplTest {
 
-
-
-
     AudioSourcingServiceImpl impl;
 
     @BeforeEach
     public void setUp(WireMockRuntimeInfo wireMock) {
-        impl = new AudioSourcingServiceImpl(
+        Configuration configuration = new Configuration(
             wireMock.getHttpBaseUrl(),
             null,
             "token",
             1000,
             null,
-            2,
+            2
+        );
+        impl = new AudioSourcingServiceImpl(
+            () -> configuration,
             new LoggingMeterRegistry()
         );
     }
@@ -61,11 +61,11 @@ class AudioSourcingServiceImplTest {
             .noProgressLogging()
             .batchSize(1024 * 1024)
             .startImmediately(false)
-            .batchConsumer(loggingConsumer(logger))
+            .batchConsumer(loggingConsumer(logger, "audio"))
             .build();
         final UploadResponse upload = impl.upload(logger, "mid", null,
             bytes.length,
-            "audio/mp3",
+            "audio/mpeg",
             cachingInputStream,
             "m.meeuwissen.vpro@gmail.com"
         );
@@ -80,7 +80,7 @@ class AudioSourcingServiceImplTest {
                 """
                     --%s
                     Content-Disposition: form-data; name="file"; filename="mid.mp3"
-                    Content-Type: audio/mp3
+                    Content-Type: audio/mpeg
 
                     foobar
                     --%s--

@@ -1,5 +1,6 @@
 package nl.vpro.rs.media;
 
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -8,10 +9,12 @@ import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelate
 
 import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.UpdateSupplier;
+import nl.vpro.metis.IdClass;
 import nl.vpro.validation.ValidationLevel;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_XML;
-import static nl.vpro.rs.media.MediaBackendRestService.*;
+import static nl.vpro.rs.media.MediaBackendRestService.ERRORS;
+import static nl.vpro.rs.media.MediaBackendRestService.ID;
 
 /**
  * See <a href="https://jira.vpro.nl/browse/MSE-5484">MSE-5484</a>, <a href="https://publiekeomroep.atlassian.net/browse/P0MS-8">POMS-8</a>
@@ -55,11 +58,25 @@ public interface AuthorityRestService {
     );
 
     @GET
-    @Path("{supplier}/${id:.*}")
+    @Path("{supplier}/{id:.*}")
     @Produces({MediaType.APPLICATION_JSON, APPLICATION_XML})
     MediaUpdate<?> get(
         @PathParam("supplier") final UpdateSupplier supplier,
         @Encoded @PathParam(ID) final String id);
+
+
+    /**
+     * @since 7.10
+     */
+    @GET
+    @Path("{class}/{supplier}/{broadcaster:.*}")
+    @Produces(MediaType.TEXT_PLAIN)
+    String createMid(
+        @PathParam("class") final IdClass idClass,
+        @PathParam("supplier") final UpdateSupplier supplier,
+        @Pattern(regexp ="^[A-Z][A-Z0-9]{2,5}$") @PathParam("broadcaster") String broadcaster
+    );
+
 
 }
 

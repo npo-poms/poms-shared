@@ -3,7 +3,9 @@ package nl.vpro.sourcingservice;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.log4j.Log4j2;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.function.Supplier;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.AVFileFormat;
 
@@ -18,16 +20,10 @@ public class VideoSourcingServiceImpl extends  AbstractSourcingServiceImpl imple
 
 
     public VideoSourcingServiceImpl(
-        @Value("${sourcingservice.video.baseUrl:#{null}") String audioBaseUrl,
-        @Value("${sourcingservice.callbackBaseUrl:#{null}}") String callbackBaseUrl,
-        @Value("${sourcingservice.video.token:#{null}") String audioToken,
-        @Value("${sourcingservice.chunkSize:10000000}") int chunkSize,
-        @Value("${sourcingservice.defaultEmail:#{null}}") String defaultEmail,
-        @Value("${sourcingservice.version:#1}") int version,
-
+        @NonNull Supplier<Configuration> configuration,
         MeterRegistry meterRegistry
        ) {
-        super(audioBaseUrl, callbackBaseUrl, audioToken, chunkSize, defaultEmail, meterRegistry, version);
+        super(configuration, meterRegistry);
     }
 
 

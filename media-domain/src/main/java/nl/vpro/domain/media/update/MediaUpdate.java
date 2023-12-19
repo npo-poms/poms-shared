@@ -38,6 +38,7 @@ import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
+import nl.vpro.domain.user.validation.BroadcasterValidation;
 import nl.vpro.domain.validation.ValidEmbargo;
 import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -261,6 +262,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     private List<
         @NotNull
         @Size(min = 2, max = 4, message = "2 < id < 5")
+        @BroadcasterValidation
         @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
             String> broadcasters;
 

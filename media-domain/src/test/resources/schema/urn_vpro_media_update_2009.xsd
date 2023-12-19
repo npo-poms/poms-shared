@@ -287,6 +287,7 @@
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="publishStop" type="xs:dateTime"/>
     <xs:attribute name="urn" type="xs:string"/>
+    <xs:attribute name="delete" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="scheduleEventUpdateType">
@@ -357,6 +358,7 @@
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="publishStop" type="xs:dateTime"/>
     <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
+    <xs:attribute name="delete" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="imageDataType">
@@ -597,6 +599,7 @@
       <xs:element name="status" type="xs:string" minOccurs="0"/>
       <xs:element name="response" type="xs:string" minOccurs="0"/>
       <xs:element name="bytes" type="xs:long" minOccurs="0"/>
+      <xs:element name="version" type="xs:string" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="statusCode" type="xs:int" use="required"/>
     <xs:attribute name="mid" type="xs:string"/>

@@ -42,6 +42,7 @@ public class Constants {
      */
     public final static String BINDINC_GENRE_PREFIX = "urn:bindinc:genre:";
 
+    @Getter
     public enum ChannelIdType {
         MIS(Channel::misId),
         PD(Channel::pdId),
@@ -51,7 +52,6 @@ public class Constants {
          */
         BINDINC(null);
 
-        @Getter
         final Function<Channel, String> method;
 
         ChannelIdType(Function<Channel, String> method) {

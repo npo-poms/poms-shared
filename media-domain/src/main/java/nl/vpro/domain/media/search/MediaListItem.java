@@ -58,6 +58,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "sortDateScheduleEvent",
             "locations",
             "numberOfLocations",
+            "numberOfPublishedLocations",
             "tags",
             "image",
             "streamingPlatformStatus"
@@ -155,6 +156,11 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
     @Getter
     @Setter
     private Integer numberOfLocations;
+
+
+    @Getter
+    @Setter
+    private Integer numberOfPublishedLocations;
 
     @Getter
     @Setter

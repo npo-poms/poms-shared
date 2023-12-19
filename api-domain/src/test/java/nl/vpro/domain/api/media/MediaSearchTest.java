@@ -455,5 +455,34 @@ public class MediaSearchTest {
         MediaForm form = Jackson2Mapper.getLenientInstance().readValue(json, MediaForm.class);
         assertThat(form.getSearches().getSortDates().get(0).getEnd()).isEqualTo(Instant.ofEpochMilli(1444255200000L));
     }
+
+
+    @Test
+    public void videoBroadcasters() {
+        MediaSearch in = new MediaSearch();
+        in.setTypes(new TextMatcherList(must("BROADCAST")));
+        in.setAvTypes(new TextMatcherList(must("VIDEO")));
+        MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
+            """
+                <?xml version="1.0" encoding="UTF-8"?><local:mediaSearch xmlns:local="uri:local" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                                        <api:types match="MUST">
+                                          <api:matcher>BROADCAST</api:matcher>
+                                        </api:types>
+                                        <api:avTypes match="MUST">
+                                          <api:matcher>VIDEO</api:matcher>
+                                        </api:avTypes>
+                                      </local:mediaSearch>""");
+        Jackson2TestUtil.roundTripAndSimilar(in,
+            """
+                {
+                    "types" : "BROADCAST",
+                    "avTypes" : "VIDEO"
+                  }
+                """);
+    }
+
+
 }
+
+
 
