@@ -37,11 +37,18 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     @Setter
     private String mediaRef;
 
+
+    @Getter
+    @Setter
+    @XmlAttribute
+    private Boolean delete;
+
     public static MemberRefUpdate create(MemberRef m) {
         return new MemberRefUpdate(
             m.getNumber(),
             m.getMediaRef(),
-            m.isHighlighted());
+            m.isHighlighted(),
+            false);
     }
 
     public MemberRefUpdate() {
@@ -53,14 +60,25 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     }
 
     @lombok.Builder
-    public MemberRefUpdate(
+    private MemberRefUpdate(
         Integer position,
         String mediaRef,
-        Boolean highlighted) {
+        Boolean highlighted,
+        Boolean delete) {
         this(position, mediaRef);
         this.highlighted = highlighted;
+        this.delete = (delete == null || ! delete) ? null : delete;
+
     }
 
+
+
+    /**
+     * @since 7.10
+     */
+    public boolean forDeletion() {
+        return delete != null && delete;
+    }
 
 
     public Boolean isHighlighted() {

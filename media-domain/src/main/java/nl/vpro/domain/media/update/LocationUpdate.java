@@ -121,7 +121,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public LocationUpdate(
+    private LocationUpdate(
         String programUrl,
         Duration duration,
         Integer width,
