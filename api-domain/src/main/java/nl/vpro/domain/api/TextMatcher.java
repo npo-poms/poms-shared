@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -82,6 +84,7 @@ public class TextMatcher extends AbstractTextMatcher<StandardMatchType> {
     }
 
     @Override
+    @XmlDocumentation("How to match. Defaults to TEXT")
     public StandardMatchType getMatchType() {
         return matchType == null ? DEFAULT_MATCHTYPE : matchType;
     }
@@ -99,8 +102,6 @@ public class TextMatcher extends AbstractTextMatcher<StandardMatchType> {
     @Override
     public TextMatcher toLowerCase() {
         return new TextMatcher(lowerCaseValue(), match, matchType);
-
     }
-
 
 }
