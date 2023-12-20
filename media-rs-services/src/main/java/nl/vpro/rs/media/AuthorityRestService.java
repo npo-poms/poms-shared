@@ -74,7 +74,7 @@ public interface AuthorityRestService {
     String createMid(
         @PathParam("class") final IdClass idClass,
         @PathParam("supplier") final UpdateSupplier supplier,
-        @Pattern(regexp ="^[A-Z][A-Z0-9]{2,5}$") @PathParam("broadcaster") String broadcaster
+        @Pattern(regexp ="^[A-Z][A-Z0-9]{1,5}$") @PathParam("broadcaster") String broadcaster
     );
 
 
