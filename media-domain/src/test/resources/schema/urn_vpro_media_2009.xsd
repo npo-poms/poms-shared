@@ -561,6 +561,19 @@
     <xs:attribute name="audioWithoutDrm" type="streamingStatusValue"/>
   </xs:complexType>
 
+  <xs:complexType name="standaloneMemberRefType">
+    <xs:sequence/>
+    <xs:attribute name="delete" type="xs:boolean"/>
+    <xs:attribute name="added" type="xs:string"/>
+    <xs:attribute name="childRef" type="xs:string"/>
+    <xs:attribute name="highlighted" type="xs:boolean"/>
+    <xs:attribute name="index" type="xs:int"/>
+    <xs:attribute name="midRef" type="xs:string"/>
+    <xs:attribute name="objectType" type="objectType"/>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+    <xs:attribute name="type" type="mediaTypeEnum"/>
+  </xs:complexType>
+
   <xs:simpleType name="textualTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="MAIN"/>
@@ -1156,6 +1169,13 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="NONE"/>
       <xs:enumeration value="DRM"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="objectType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="memberRef"/>
+      <xs:enumeration value="episodeRef"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
