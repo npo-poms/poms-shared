@@ -263,7 +263,6 @@
       <xs:extension base="xs:string">
         <xs:attribute name="position" type="xs:int"/>
         <xs:attribute name="highlighted" type="xs:boolean"/>
-        <xs:attribute name="delete" type="xs:boolean"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

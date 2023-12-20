@@ -8,6 +8,7 @@ import java.time.Instant;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * A representation of a memberRef also having a 'memberRef' attribute in the XML. A {@link MemberRef} doesn't have that
@@ -194,6 +196,8 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
     }
 
     @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     public Instant getAdded() {
         return added;
     }
