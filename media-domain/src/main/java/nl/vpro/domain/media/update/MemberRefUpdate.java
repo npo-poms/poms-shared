@@ -19,6 +19,7 @@ import nl.vpro.domain.media.support.OwnerType;
  * @see nl.vpro.domain.media.update
  * @see MemberRef
  */
+@Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberRefUpdateType")
 @XmlRootElement(name = "memberRef")
@@ -26,7 +27,6 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
 
     @XmlAttribute
     @Getter
-    @Setter
     private Integer position;
 
     @XmlAttribute(required = false)
@@ -34,14 +34,9 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
 
     @XmlValue
     @Getter
-    @Setter
     private String mediaRef;
 
 
-    @Getter
-    @Setter
-    @XmlAttribute
-    private Boolean delete;
 
     public static MemberRefUpdate create(MemberRef m) {
         return new MemberRefUpdate(
@@ -67,26 +62,12 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
         Boolean delete) {
         this(position, mediaRef);
         this.highlighted = highlighted;
-        this.delete = (delete == null || ! delete) ? null : delete;
 
-    }
-
-
-
-    /**
-     * @since 7.10
-     */
-    public boolean forDeletion() {
-        return delete != null && delete;
     }
 
 
     public Boolean isHighlighted() {
         return highlighted;
-    }
-
-    public void setHighlighted(Boolean highlighted) {
-        this.highlighted = highlighted;
     }
 
     public MemberRef toMemberRef(OwnerType type) {

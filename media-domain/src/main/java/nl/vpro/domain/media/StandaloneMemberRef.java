@@ -6,8 +6,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -19,7 +18,7 @@ import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
- * n representation of a memberRef also having a 'memberRef' attribute in the XML. A {@link MemberRef} doesn't have that
+ * A representation of a memberRef also having a 'memberRef' attribute in the XML. A {@link MemberRef} doesn't have that
  * because is always represented embedded in a {@link MediaObject}.
  * <p>
  * This object also has {@link #getObjectType()} to make it possible to distinguish {@link Program#getEpisodeOf()} from {@link MediaObject#getMemberOf()}.
@@ -27,6 +26,12 @@ import nl.vpro.domain.media.support.OwnerType;
  * The original and use case of this object is to be a standalone JSON representation of a 'memberref' relation in poms in ElasticSearch.
  * <p>
  * It is also annotated with {@code javax.persistence} annotations, which makes it possible to easily store this object in other databases too (though poms itself is <em>not</em> doing that).
+ * <p>
+ * There a several use cases for this class which <em>are</em> implemented:
+ * <ul>
+ *     <li>It is the json representation of a memberref of episoderef in separate elasticsearch</li>
+ *     <li>It serves as a standalone update object for both member and episode ref, in the broadcaster importers (by MSE-5199)</li>
+ * </ul>
  * <p>
  *
  * @author Michiel Meeuwissen
@@ -42,8 +47,10 @@ import nl.vpro.domain.media.support.OwnerType;
     "type",
     "index",
     "highlighted",
-    "objectType"
+    "objectType",
+    "delete"
 })
+@IdClass(StandaloneMemberRef.IdType.class)
 public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRelation {
     @Serial
     private static final long serialVersionUID = 0L;
@@ -68,6 +75,10 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
     @Id
     protected ObjectType objectType;
 
+    @Getter
+    @XmlAttribute
+    private Boolean delete;
+
     public StandaloneMemberRef() {
 
     }
@@ -81,7 +92,8 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
         String midRef,
         String childRef,
         OwnerType owner,
-        ObjectType objectType) {
+        ObjectType objectType,
+        Boolean delete) {
         this.added = added;
         this.highlighted = highlighted;
         this.type = type;
@@ -90,6 +102,7 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
         this.childRef = childRef;
         this.owner = owner;
         this.objectType = objectType;
+        this.delete = (delete == null || ! delete) ? null : delete;
     }
 
     public StandaloneMemberRef(String childRef, MemberRef ref, ObjectType objectType) {
@@ -131,12 +144,20 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
 
         public Builder episodeRef(MemberRef ref) {
             return _memberRef(ref)
-                .objectType(ObjectType.episodeRef);
+                .episodeRef();
         }
 
         public Builder memberRef(MemberRef ref) {
             return _memberRef(ref)
-                .objectType(ObjectType.memberRef);
+                .memberRef();
+        }
+
+        public Builder episodeRef() {
+            return objectType(ObjectType.episodeRef);
+        }
+
+        public Builder memberRef() {
+            return objectType(ObjectType.memberRef);
         }
 
         public Builder _memberRef(MemberRef ref) {
