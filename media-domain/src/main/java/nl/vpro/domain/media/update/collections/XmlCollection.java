@@ -11,6 +11,8 @@ import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import nl.vpro.domain.media.update.*;
 import nl.vpro.util.IntegerVersion;
 import nl.vpro.util.IntegerVersionSpecific;
@@ -43,7 +45,7 @@ public class XmlCollection<T> implements Iterable<T> , IntegerVersionSpecific {
     protected IntegerVersion version;
 
     @XmlAnyElement(lax = true)
-    @JsonProperty("items")
+    @JsonProperty("list")
     Collection<T> list;
 
     public XmlCollection() {
