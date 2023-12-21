@@ -117,9 +117,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     public LocationUpdate(String programUrl, Duration duration, Integer bitrate, AVFileFormat format) {
         this.duration = duration;
         this.programUrl = programUrl;
-        if (bitrate != null || format != null) {
-            this.avAttributes = new AVAttributesUpdate(format, bitrate);
-        }
+        this.avAttributes = new AVAttributesUpdate(format, bitrate);
     }
 
     @lombok.Builder(builderClassName = "Builder")

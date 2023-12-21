@@ -38,12 +38,17 @@ public class XmlCollectionTest {
 
     @Test
     public void json() {
-        XmlCollection<LocationUpdate> col = new XmlCollection<>(Arrays.asList(LocationUpdate.builder().programUrl("https://www.vpro.nl/bl").build()));
+        XmlCollection<LocationUpdate> col = new XmlCollection<>(Arrays.asList(LocationUpdate.builder()
+            .bitrate(1000)
+            .programUrl("https://www.vpro.nl/bl").build()));
 
         Jackson2TestUtil.roundTripAndSimilar(col,
             """
                 [ {
-                      "programUrl" : "https://www.vpro.nl/bl"
+                      "programUrl" : "https://www.vpro.nl/bl",
+                      "avAttributes" : {
+                            "bitrate" : 1000
+                          }
                     }
                 ]
                 """
