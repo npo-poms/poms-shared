@@ -101,6 +101,9 @@ public class MediaUpdateList<T> implements Iterable<T>, IntegerVersionSpecific {
     public int getSize() {
         return size();
     }
+    protected void setSize(int size) {
+        // for jackson
+    }
 
     @Override
     public String toString() {
@@ -120,8 +123,8 @@ public class MediaUpdateList<T> implements Iterable<T>, IntegerVersionSpecific {
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (parent != null) {
-            if (parent instanceof IntegerVersionSpecific) {
-                version = ((IntegerVersionSpecific) parent).getVersion();
+            if (parent instanceof IntegerVersionSpecific integerVersionSpecific) {
+                version = integerVersionSpecific.getVersion();
             }
         }
     }

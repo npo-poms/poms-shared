@@ -47,6 +47,8 @@ public interface TransactionService {
 
     <T> void executeInReadonlyTransaction(T argument, @NonNull Consumer<T> consumer);
 
+
+
     @Transactional(propagation = Propagation.NEVER)
     default void ensureNoTransaction() {
 

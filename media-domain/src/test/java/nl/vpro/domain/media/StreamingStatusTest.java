@@ -7,6 +7,7 @@ import javax.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,6 +36,23 @@ public class StreamingStatusTest {
 
         JAXBTestUtil.roundTripAndSimilar(status,
             "<streamingStatus withDrm=\"ONLINE\" withoutDrm=\"UNSET\" audioWithoutDrm=\"UNSET\" xmlns=\"urn:vpro:media:2009\"  />\n");
+    }
+
+
+    @Test
+    public void testMarshalJson() {
+        StreamingStatusImpl status = new StreamingStatusImpl();
+        status.setWithDrm(StreamingStatus.Value.ONLINE);
+
+        Jackson2TestUtil.roundTripAndSimilar(status,
+            """
+                {
+                    "withDrm" : "ONLINE",
+                    "withoutDrm" : "UNSET",
+                    "audioWithoutDrm" : "UNSET"
+                  }
+                """
+            );
     }
 
     @Test

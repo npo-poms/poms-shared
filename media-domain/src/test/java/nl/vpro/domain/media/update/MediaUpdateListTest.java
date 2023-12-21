@@ -19,6 +19,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -137,6 +138,85 @@ public class MediaUpdateListTest {
         assertEquals(1, list2.getList().get(0).getSegments().size());
         validate(writer.toString());
     }
+
+
+
+    @Test
+    public void marshalStringsJson() {
+        MediaUpdateList<String> xmlList = new MediaUpdateList<>("a", "b");
+
+        Jackson2TestUtil.assertThatJson(xmlList).isSimilarTo("""
+            {
+                 "offset" : 0,
+                 "totalCount" : 2,
+                 "item" : [ "a", "b" ],
+                 "size" : 2
+            }
+            """);
+
+    }
+
+
+    @Test
+    public void mediaUpdateListJson() throws IOException, SAXException {
+        Program program = MediaBuilder
+            .program(ProgramType.CLIP)
+            .  urn("urn:vpro:media:program:123")
+            .  avType(AVType.VIDEO)
+            .  mainTitle("hoi")
+            .  broadcasters("VPRO")
+            .  mid("POMS_1234")
+            .segments(
+                MediaBuilder.segment()
+                    .broadcasters("VPRO")
+                    .avType(AVType.VIDEO)
+                    .type(SegmentType.VISUALRADIOSEGMENT)
+                    .titles(new Title("segmenttitel", OwnerType.BROADCASTER, TextualType.MAIN))
+                    .start(Duration.ZERO)
+                    .build()
+            ).build();
+
+        assertThat(program.getMid()).isEqualTo("POMS_1234");
+        MediaUpdateList<ProgramUpdate> list = new MediaUpdateList<>(
+            ProgramUpdate.create(program));
+
+
+        Jackson2TestUtil.roundTripAndSimilar(list,
+            """
+                {
+                    "offset" : 0,
+                    "totalCount" : 1,
+                    "item" : [ {
+                      "mid" : "POMS_1234",
+                      "type" : "CLIP",
+                      "avType" : "VIDEO",
+                      "urn" : "urn:vpro:media:program:123",
+                      "embeddable" : true,
+                      "broadcaster" : [ "VPRO" ],
+                      "title" : [ {
+                        "value" : "hoi",
+                        "type" : "MAIN"
+                      } ],
+                      "segments" : [ {
+                        "objectType" : "segmentUpdate",
+                        "type" : "VISUALRADIOSEGMENT",
+                        "avType" : "VIDEO",
+                        "embeddable" : true,
+                        "broadcaster" : [ "VPRO" ],
+                        "title" : [ {
+                          "value" : "segmenttitel",
+                          "type" : "MAIN"
+                        } ],
+                        "start" : "P0DT0H0M0.000S",
+                        "midRef" : "POMS_1234"
+                      } ]
+                    } ],
+                    "size" : 1
+                  }
+                """);
+
+    }
+
 
 
     protected void validate(String string) throws SAXException, IOException {

@@ -618,10 +618,10 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
     }
 
-    MediaForm rad1 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
-    MediaForm rad1_2 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(1)).build()).build();
-    MediaForm rad1_3 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
-    MediaForm rad2 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD2).begin(Instant.ofEpochMilli(0)).build()).build();
+    MediaForm rad1 =   MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
+    MediaForm rad1_2 = MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(1)).build()).build();
+    MediaForm rad1_3 = MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
+    MediaForm rad2 =   MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD2).begin(Instant.ofEpochMilli(0)).build()).build();
 
     @Test
     public void API_593() {
@@ -646,6 +646,29 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
                 }
               }
             }""");
+
+    }
+
+
+    @Test
+    public void form2() {
+        MediaForm form = new MediaForm();
+        MediaSearch search = MediaSearch.builder()
+            .types(new TextMatcherList(Match.MUST, TextMatcher.should("BROADCAST"), TextMatcher.should("CLIP")))
+            .build();
+        form.setSearches(search);
+        Jackson2TestUtil.roundTripAndSimilar(form, """
+            {
+                 "searches" : {
+                   "types" : [ {
+                     "value" : "BROADCAST",
+                     "match" : "SHOULD"
+                   }, {
+                     "value" : "CLIP",
+                     "match" : "SHOULD"
+                   } ]
+                 }
+               }""");
 
     }
 
