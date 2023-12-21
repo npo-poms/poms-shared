@@ -521,4 +521,19 @@ public class Editor extends AbstractUser {
 
 
 
+    public  static Optional<String> getDomain(Editor editor) {
+        return getDomain(editor.getEmail());
+    }
+
+    public  static Optional<String> getDomain(String mail) {
+        int i = mail.indexOf('@');
+        if (i > 0) {
+            return Optional.of(mail.substring(i + 1));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+
+
 }

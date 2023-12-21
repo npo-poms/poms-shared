@@ -79,4 +79,15 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
         }
     }
 
+    default Optional<Broadcaster> findForDomain(String value)  {
+        for (Broadcaster b : findAll()) {
+            if (b != null) {
+                if (value.equalsIgnoreCase(b.domain)) {
+                    return Optional.of(b);
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
 }
