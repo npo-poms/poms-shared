@@ -1,6 +1,7 @@
 package nl.vpro.domain.media.update.collections;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -42,6 +43,7 @@ public class XmlCollection<T> implements Iterable<T> , IntegerVersionSpecific {
     protected IntegerVersion version;
 
     @XmlAnyElement(lax = true)
+    @JsonProperty("items")
     Collection<T> list;
 
     public XmlCollection() {
