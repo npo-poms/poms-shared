@@ -42,15 +42,12 @@ public class XmlCollectionTest {
 
         Jackson2TestUtil.roundTripAndSimilar(col,
             """
-                {
-                    "list" : [ {
-                      "programUrl" : "https://www.vpro.nl/bl",
-                      "avAttributes" : {
-                        "videoAttributes" : { }
-                      }
-                    } ]
-                  }
+                [ {
+                      "programUrl" : "https://www.vpro.nl/bl"
+                    }
+                ]
                 """
         );
+    }
 
 }
