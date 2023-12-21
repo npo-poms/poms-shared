@@ -8,6 +8,12 @@ import com.fasterxml.jackson.databind.*;
 
 import nl.vpro.domain.media.update.collections.XmlCollection;
 
+
+/**
+ * Justs arranges for {@link XmlCollection} to be serialized/deserialized as a json array.
+ * @since 7.10
+ * @author Michiel Meuwissen
+ */
 public class XmlCollections {
 
     public static class Serializer extends JsonSerializer<XmlCollection<?>> {
