@@ -17,19 +17,17 @@ import org.hibernate.annotations.*;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.user.Broadcaster;
 
+import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
+
 @Entity
 @IdClass(RelationDefinitionIdentifier.class)
 @FilterDefs({
-    @FilterDef(name = RelationDefinition.BROADCASTER_FILTER, parameters = {
-        @ParamDef(name = "broadcasters", type = "string")})
+    @FilterDef(name = BROADCASTER_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")})
 })
 @Filters({
-    @Filter(name = RelationDefinition.BROADCASTER_FILTER,
-        condition = "broadcaster in (:broadcasters)")
+    @Filter(name = BROADCASTER_FILTER, condition = "broadcaster in (:broadcasters)")
 })
 public class RelationDefinition implements Serializable, Identifiable<RelationDefinitionIdentifier> {
-
-    public static final String BROADCASTER_FILTER = "broadcasterFilter";
 
     @Serial
     private static final long serialVersionUID = -1658542635995973742L;
