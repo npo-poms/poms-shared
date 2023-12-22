@@ -67,6 +67,7 @@ import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
 import static nl.vpro.domain.media.MediaObject.*;
+import static nl.vpro.domain.media.RelationDefinition.BROADCASTER_FILTER;
 
 /**
  * Base objects for programs, groups and segments.
@@ -202,50 +203,27 @@ import static nl.vpro.domain.media.MediaObject.*;
     @JsonSubTypes.Type(value = Group.class, name = "group"),
     @JsonSubTypes.Type(value = Segment.class, name = "segment") }
 )
-// Improvement: Filters can be defined in hibernate-mapping in the hibernate-config.xml
-// See https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch19.html
-@FilterDef(name = "titleFilter", parameters = { @ParamDef(name = "title", type = "string") })
-@FilterDef(name = "typeFilter", parameters = { @ParamDef(name = "types", type = "string"),
-    @ParamDef(name = "segments", type = "boolean") })
-@FilterDef(name = "organizationFilter", parameters = { @ParamDef(name = "organizations", type = "string") })
-@FilterDef(name = "noBroadcast")
-@FilterDef(name = "hasLocations")
-@FilterDef(name = "noPlaylist")
-@FilterDef(name = "eventRange", parameters = { @ParamDef(name = "eventStart", type = "date"),
-    @ParamDef(name = "eventStop", type = "date") })
-@FilterDef(name = "creationRange", parameters = { @ParamDef(name = "creationStart", type = "date"),
-    @ParamDef(name = "creationStop", type = "date") })
-@FilterDef(name = "modifiedRange", parameters = { @ParamDef(name = "modifiedStart", type = "date"),
-    @ParamDef(name = "modifiedStop", type = "date") })
 @FilterDef(name = PUBLICATION_FILTER)
 @FilterDef(name = EMBARGO_FILTER, parameters = {
     @ParamDef(name = "broadcasters", type = "string") })
 @FilterDef(name = DELETED_FILTER)
-@FilterDef(name = "relationFilter", parameters = { @ParamDef(name = "broadcasters", type = "string") })
-@Filter(name = "titleFilter", condition = "0 < (select count(*) from title t where t.parent_id = id and lower(t.title) like :title)")
-@Filter(name = "typeFilter", condition = "(0 < (select count(*) from program p where p.id = id and p.type in (:types)))"
-    + " or (0 < (select count(*) from group_table g where g.id = id and g.type in (:types)))"
-    + " or (:segments and 0 < (select count(*) from segment s where s.id = id))")
-@Filter(name = ORGANIZATION_FILTER, condition = "0 < ("
-    + "(select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))"
-    + " + "
-    + "(select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:organizations))"
-    + " + "
-    + "(select count(*) from mediaobject_thirdparty o where o.mediaobject_id = id and o.thirdparties_id in (:organizations))"
-        + ")")
-@Filter(name = "noBroadcast", condition = "0 = (select count(*) from scheduleevent e where e.mediaobject_id = id)")
-@Filter(name = "hasLocations", condition = "0 < (select count(*) from location l where l.mediaobject_nid = id)")
-@Filter(name = "noPlaylist", condition = "0 = (select count(*) from group_table g, memberref mr where mr.member_id = id "
-    + "and g.id = mr.owner_id " + "and g.type = 'PLAYLIST')")
-@Filter(name = "eventRange", condition = ":eventStart <= (select min(e.start) from scheduleevent e where e.mediaobject_id = id) and "
-    + ":eventStop >= (select min(e.start) from scheduleevent e where e.mediaobject_id = id)")
-@Filter(name = "creationRange", condition = ":creationStart <= creationDate and :creationStop >= creationDate")
-@Filter(name = "modifiedRange", condition = ":modifiedStart <= lastModified and :modifiedStop >= lastModified")
+@FilterDef(name = BROADCASTER_FILTER, parameters = { @ParamDef(name = "broadcasters", type = "string") })
+@Filter(name = ORGANIZATION_FILTER, condition = """
+    0 < (
+    (select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))
+     +
+    (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:organizations))
+     +
+    (select count(*) from mediaobject_thirdparty o where o.mediaobject_id = id and o.thirdparties_id in (:organizations))
+    )
+    """
+)
 @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
     + "and (publishStop is null or publishStop > now())")
-@Filter(name = EMBARGO_FILTER, condition = "(publishStart is null "
-    + "or publishStart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
-    + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))")
+@Filter(name = EMBARGO_FILTER, condition = """
+    (publishStart is null or publishStart < now() or (select p.type from program p where p.id = id) != 'CLIP'
+    or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters)))
+    """)
 @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
 @Slf4j
 @HasGenre(
@@ -266,13 +244,29 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // permits Program, Group, Segment, MediaObject$HibernateBasicProxy {
     //hibernate will make a HibernateBasicProxy, which is not permitted (nor available)
 
-
+    /**
+     * Normal users normally have this filter enabled, and won't see deleted objected.
+     */
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
+    /**
+     * This filter is enabled during the publication process, things that are under embargo will not be queried.
+     */
     public static final String PUBLICATION_FILTER = "publicationFilter";
     public static final String INVERSE_PUBLICATION_FILTER = "inversePublicationFilter";
+
+    /**
+     * Normally on the poms backend things under embargo are visible. The exception are CLIPs of different broadcasters.
+     * They may not be visible by other people because they may contain the result of Wie is de Mol? or so.
+     */
     public static final String EMBARGO_FILTER = "embargoFilter";
     public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
+
+
+    /**
+     * This filter is enabled for 'third party users'. They may only see objects that are of one of their organizations
+     * ({@link Broadcaster broadcasters}, {@link Portal portals} or {@link ThirdParty third parties})
+     */
     public static final String ORGANIZATION_FILTER = "organizationFilter";
 
     @Serial
@@ -479,6 +473,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             + "or mediaobjec2_.publishstart is null " + "or mediaobjec2_.publishstart < now() "
             + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec2_.id and o.broadcasters_id in (:broadcasters)))"),
         @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
+
     @PublicationFilter
     protected Set<@NotNull @Valid MemberRef> memberOf;
 
