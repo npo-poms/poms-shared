@@ -66,7 +66,6 @@ import static javax.persistence.CascadeType.*;
 import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
-import static nl.vpro.domain.media.MediaObject.*;
 import static nl.vpro.domain.media.RelationDefinition.BROADCASTER_FILTER;
 
 /**
@@ -203,12 +202,12 @@ import static nl.vpro.domain.media.RelationDefinition.BROADCASTER_FILTER;
     @JsonSubTypes.Type(value = Group.class, name = "group"),
     @JsonSubTypes.Type(value = Segment.class, name = "segment") }
 )
-@FilterDef(name = PUBLICATION_FILTER)
-@FilterDef(name = EMBARGO_FILTER, parameters = {
+@FilterDef(name = MediaObjectFilters.PUBLICATION_FILTER)
+@FilterDef(name = MediaObjectFilters.EMBARGO_FILTER, parameters = {
     @ParamDef(name = "broadcasters", type = "string") })
-@FilterDef(name = DELETED_FILTER)
+@FilterDef(name = MediaObjectFilters.DELETED_FILTER)
 @FilterDef(name = BROADCASTER_FILTER, parameters = { @ParamDef(name = "broadcasters", type = "string") })
-@Filter(name = ORGANIZATION_FILTER, condition = """
+@Filter(name = MediaObjectFilters.ORGANIZATION_FILTER, condition = """
     0 < (
     (select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))
      +
@@ -218,13 +217,13 @@ import static nl.vpro.domain.media.RelationDefinition.BROADCASTER_FILTER;
     )
     """
 )
-@Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
+@Filter(name = MediaObjectFilters.PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
     + "and (publishStop is null or publishStop > now())")
-@Filter(name = EMBARGO_FILTER, condition = """
+@Filter(name = MediaObjectFilters.EMBARGO_FILTER, condition = """
     (publishStart is null or publishStart < now() or (select p.type from program p where p.id = id) != 'CLIP'
     or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters)))
     """)
-@Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
+@Filter(name = MediaObjectFilters.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
 @Slf4j
 @HasGenre(
     groups = WarningValidatorGroup.class
@@ -244,30 +243,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // permits Program, Group, Segment, MediaObject$HibernateBasicProxy {
     //hibernate will make a HibernateBasicProxy, which is not permitted (nor available)
 
-    /**
-     * Normal users normally have this filter enabled, and won't see deleted objected.
-     */
-    public static final String DELETED_FILTER = "deletedFilter";
-    public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
-    /**
-     * This filter is enabled during the publication process, things that are under embargo will not be queried.
-     */
-    public static final String PUBLICATION_FILTER = "publicationFilter";
-    public static final String INVERSE_PUBLICATION_FILTER = "inversePublicationFilter";
-
-    /**
-     * Normally on the poms backend things under embargo are visible. The exception are CLIPs of different broadcasters.
-     * They may not be visible by other people because they may contain the result of Wie is de Mol? or so.
-     */
-    public static final String EMBARGO_FILTER = "embargoFilter";
-    public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
-
-
-    /**
-     * This filter is enabled for 'third party users'. They may only see objects that are of one of their organizations
-     * ({@link Broadcaster broadcasters}, {@link Portal portals} or {@link ThirdParty third parties})
-     */
-    public static final String ORGANIZATION_FILTER = "organizationFilter";
 
     @Serial
     private static final long serialVersionUID = -9095662256792069374L;
@@ -320,7 +295,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
+    @Filter(name = MediaObjectFilters.PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
             + "and (stop is null or stop > now())")
     @PublicationFilter
     @Valid
@@ -329,7 +304,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "mediaobject_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
+    @Filter(name = MediaObjectFilters.PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
             + "and (stop is null or stop > now())")
     @PublicationFilter
     @Valid
@@ -466,13 +441,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // Before hibernate 5.2 we used Filter rather then FilterJoinTable.
     // It doesn't really make much sense.
     @FilterJoinTables({
-        @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec2_.mergedTo_id is null) and " + // MSE-3526                 // ?
+        @FilterJoinTable(name = MediaObjectFilters.PUBLICATION_FILTER, condition = "(" + "(mediaobjec2_.mergedTo_id is null) and " + // MSE-3526                 // ?
             "(mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now()) and "
             + "(mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now())" + ")"),
-        @FilterJoinTable(name = EMBARGO_FILTER, condition = "(mediaobjec2_2_.type != 'CLIP' "
+        @FilterJoinTable(name = MediaObjectFilters.EMBARGO_FILTER, condition = "(mediaobjec2_2_.type != 'CLIP' "
             + "or mediaobjec2_.publishstart is null " + "or mediaobjec2_.publishstart < now() "
             + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec2_.id and o.broadcasters_id in (:broadcasters)))"),
-        @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
+        @FilterJoinTable(name = MediaObjectFilters.DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
 
     @PublicationFilter
     protected Set<@NotNull @Valid MemberRef> memberOf;
@@ -551,7 +526,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         nullable = true // hibernate sucks
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
+    @Filter(name = MediaObjectFilters.PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
             + "and (publishStop is null or publishStop > now())")
     // @Field(name = "images", store=Store.YES, analyze = Analyze.NO,
     // bridge = @FieldBridge(impl = JsonBridge.class, params = @Parameter(name =

@@ -95,10 +95,10 @@ public final class Program extends MediaObject {
 
     // TODO: These filters are horrible
     @FilterJoinTables({
-        @FilterJoinTable(name = PUBLICATION_FILTER, condition =
+        @FilterJoinTable(name = MediaObjectFilters.PUBLICATION_FILTER, condition =
             "((mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now())" +
                 "and (mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now()))"),
-        @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))")
+        @FilterJoinTable(name = MediaObjectFilters.DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))")
     })
     Set<MemberRef> episodeOf = new TreeSet<>();
 
@@ -117,11 +117,11 @@ public final class Program extends MediaObject {
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // TODO: These filters are horrible
     @Filters({
-        @Filter(name = PUBLICATION_FILTER, condition =
+        @Filter(name = MediaObjectFilters.PUBLICATION_FILTER, condition =
             "((segments0_1_.publishstart is null or segments0_1_.publishstart < now())" +
                 "and (segments0_1_.publishstop is null or segments0_1_.publishstop > now()))"),
 
-        @Filter(name = DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
+        @Filter(name = MediaObjectFilters.DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
     })
 
     private Set<Segment> segments;
