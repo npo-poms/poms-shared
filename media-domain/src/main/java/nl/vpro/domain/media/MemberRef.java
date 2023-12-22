@@ -57,25 +57,25 @@ import static nl.vpro.domain.Changeables.instant;
  */
 @Entity
 @FilterDefs({
-    @FilterDef(name = MediaObject.INVERSE_PUBLICATION_FILTER),
-    @FilterDef(name = MediaObject.INVERSE_EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")}),
-    @FilterDef(name = MediaObject.INVERSE_DELETED_FILTER)
+    @FilterDef(name = MediaObjectFilters.INVERSE_PUBLICATION_FILTER),
+    @FilterDef(name = MediaObjectFilters.INVERSE_EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")}),
+    @FilterDef(name = MediaObjectFilters.INVERSE_DELETED_FILTER)
 })
 @Filters({
-    @Filter(name = MediaObject.INVERSE_PUBLICATION_FILTER, condition = "((  " +
+    @Filter(name = MediaObjectFilters.INVERSE_PUBLICATION_FILTER, condition = "((  " +
         "       (select m.publishStart from mediaobject m where m.id = member_id) is null " +
         "       or now() > (select m.publishStart from mediaobject m where m.id = member_id)" +
         "    ) and (" +
         "       (select m.publishStop from mediaobject m where m.id = member_id) is null " +
         "       or now() < (select m.publishStop from mediaobject m where m.id = member_id)" +
         "    ))"),
-    @Filter(name = MediaObject.INVERSE_EMBARGO_FILTER, condition = "(" +
+    @Filter(name = MediaObjectFilters.INVERSE_EMBARGO_FILTER, condition = "(" +
         "   (select m.publishStart from mediaobject m where m.id = member_id) is null " +
         "   or now() > (select m.publishStart from mediaobject m where m.id = member_id) " +
         "   or 'CLIP' != (select p.type from program p where p.id = member_id) " +
         "   or 0 < (select count(*) from mediaobject_broadcaster b where b.mediaobject_id = member_id and b.broadcasters_id in (:broadcasters))" +
         ")"),
-    @Filter(name = MediaObject.INVERSE_DELETED_FILTER, condition = "(select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')")})
+    @Filter(name = MediaObjectFilters.INVERSE_DELETED_FILTER, condition = "(select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')")})
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlType(name = "memberRefType")
