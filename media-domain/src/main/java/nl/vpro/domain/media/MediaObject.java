@@ -86,7 +86,7 @@ import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
  * <ol>
  *     <li>Be a full representation of meta data related to one entity</li>
  *     <li>Be also its database representation. Therefore e.g. {@link javax.persistence} annotations are present. These are optional, and are probably only relevant in the realm of 'poms backend application'</li>
- *     <li>Be also the XML/Json representation of most of this data. For a few fields it doesn't make sense to be exposed in that way, like for example the {@link Editor}s of  {@link Accountable}. For this the object is annoated with some annotation from {@link javax.xml} and {@link com.fasterxml.jackson}</li>
+ *     <li>Be also the XML/Json representation of most of this data. For a few fields it doesn't make sense to be exposed in that way, like for example the {@link Editor}s of  {@link Accountable}. For this the object is annotated with some annotation from {@link javax.xml} and {@link com.fasterxml.jackson}</li>
  *     <li>The JSON version is basically also the representation used in Elasticsearch (only with {@link Views.Publisher} enabled)</li>
  * </ol>
  *
@@ -204,17 +204,16 @@ import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
     @JsonSubTypes.Type(value = Segment.class, name = "segment") }
 )
 @FilterDef(name = PUBLICATION_FILTER)
-@FilterDef(name = EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string") })
-@FilterDef(name = DELETED_FILTER)
-@FilterDef(name = BROADCASTER_FILTER, parameters = { @ParamDef(name = "broadcasters", type = "string") })
-@Filter(name = ORGANIZATION_FILTER, condition = ORGANIZATION_FILTER_CONDITION)
 @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
     + "and (publishStop is null or publishStop > now())")
-@Filter(name = EMBARGO_FILTER, condition = """
-    (publishStart is null or publishStart < now() or (select p.type from program p where p.id = id) != 'CLIP'
-    or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters)))
-    """)
+@FilterDef(name = EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string") })
+@Filter(name = EMBARGO_FILTER, condition = EMBARGO_FILTER_CONDITION)
+@FilterDef(name = DELETED_FILTER)
 @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
+
+@FilterDef(name = BROADCASTER_FILTER, parameters = { @ParamDef(name = "broadcasters", type = "string") })
+@Filter(name = ORGANIZATION_FILTER, condition = ORGANIZATION_FILTER_CONDITION)
+
 @Slf4j
 @HasGenre(
     groups = WarningValidatorGroup.class
