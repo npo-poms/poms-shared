@@ -32,6 +32,22 @@ public class MediaObjectFilters {
      */
     public static final String ORGANIZATION_FILTER = "organizationFilter";
 
+
+    /**
+     * This is used to filter {@link RelationDefinition}, normal users only see the ones that are associated to their broadcaster.
+     */
+    public static final String BROADCASTER_FILTER = "broadcasterFilter";
+
+    protected static final String ORGANIZATION_FILTER_CONDITION = """
+           0 < (
+    (select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))
+     +
+    (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:organizations))
+     +
+    (select count(*) from mediaobject_thirdparty o where o.mediaobject_id = id and o.thirdparties_id in (:organizations))
+    )
+        """;
+
     private MediaObjectFilters() {
         // no instances for this
     }
