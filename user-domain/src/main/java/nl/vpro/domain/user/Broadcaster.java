@@ -23,6 +23,9 @@ import com.google.common.collect.Range;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.util.Ranges;
 
+/**
+ * The most basic organizational entity at NPO is a broadcaster. People and content should always be associated with at least one broadcaster.
+ */
 @Entity
 @XmlType(name = "broadcasterType", namespace = Xmlns.MEDIA_NAMESPACE)
 @Cacheable
