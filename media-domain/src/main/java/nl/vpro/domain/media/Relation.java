@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
@@ -27,6 +29,7 @@ import nl.vpro.validation.URI;
  * Besides its definition it contains two field: A free form text field, and an uri field. One or both of them can be filled.
  *
  */
+@Setter
 @Entity
 @Cacheable
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -153,32 +156,16 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getText() {
         return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public RelationDefinition getDefinition() {
         return definition;
     }
 
-    public void setDefinition(RelationDefinition definition) {
-        this.definition = definition;
-    }
-
     public String getUriRef() {
         return uriRef;
-    }
-
-    public void setUriRef(String uriRef) {
-        this.uriRef = uriRef;
     }
 
     @XmlAttribute(required = true)

@@ -20,14 +20,16 @@ import nl.vpro.domain.user.Broadcaster;
 @Entity
 @IdClass(RelationDefinitionIdentifier.class)
 @FilterDefs({
-    @FilterDef(name = "broadcasterFilter", parameters = {
+    @FilterDef(name = RelationDefinition.BROADCASTER_FILTER, parameters = {
         @ParamDef(name = "broadcasters", type = "string")})
 })
 @Filters({
-    @Filter(name = "broadcasterFilter",
+    @Filter(name = RelationDefinition.BROADCASTER_FILTER,
         condition = "broadcaster in (:broadcasters)")
 })
 public class RelationDefinition implements Serializable, Identifiable<RelationDefinitionIdentifier> {
+
+    public static final String BROADCASTER_FILTER = "broadcasterFilter";
 
     @Serial
     private static final long serialVersionUID = -1658542635995973742L;
