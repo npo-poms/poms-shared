@@ -21,12 +21,8 @@ import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
 
 @Entity
 @IdClass(RelationDefinitionIdentifier.class)
-@FilterDefs({
-    @FilterDef(name = BROADCASTER_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")})
-})
-@Filters({
-    @Filter(name = BROADCASTER_FILTER, condition = "broadcaster in (:broadcasters)")
-})
+@FilterDef(name = BROADCASTER_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")})
+@Filter(name = BROADCASTER_FILTER, condition = "broadcaster in (:broadcasters)")
 public class RelationDefinition implements Serializable, Identifiable<RelationDefinitionIdentifier> {
 
     @Serial
