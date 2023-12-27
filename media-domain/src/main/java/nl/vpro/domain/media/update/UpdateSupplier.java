@@ -28,7 +28,9 @@ public enum UpdateSupplier {
     @Beta
     SOURCING_SERVICE(IdType.SRCS),
 
-    PREPR(IdType.PREPR);
+    PREPR(IdType.PREPR),
+
+    PROMO(null);
 
     @Getter
     private final IdType idType;
