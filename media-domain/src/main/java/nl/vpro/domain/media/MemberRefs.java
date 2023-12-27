@@ -19,10 +19,10 @@ public class MemberRefs {
     }
 
     public static List<MediaObject> listOwners(final List<MemberRef> memberRefs) {
-        return new AbstractList<MediaObject>() {
+        return new AbstractList<>() {
             @Override
             public MediaObject get(int index) {
-                return  memberRefs.get(index).getGroup();
+                return memberRefs.get(index).getGroup();
             }
 
             @Override
@@ -34,10 +34,10 @@ public class MemberRefs {
 
 
     public static List<MediaObject> listMembers(final List<MemberRef> memberRefs) {
-        return new AbstractList<MediaObject>() {
+        return new AbstractList<>() {
             @Override
             public MediaObject get(int index) {
-                return  memberRefs.get(index).getMember();
+                return memberRefs.get(index).getMember();
             }
 
             @Override
