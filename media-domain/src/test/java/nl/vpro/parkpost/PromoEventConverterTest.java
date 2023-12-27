@@ -9,11 +9,10 @@ import javax.xml.bind.JAXB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.Relation;
-import nl.vpro.domain.media.RelationDefinition;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.update.ProgramUpdate;
+import nl.vpro.domain.user.ServiceLocator;
 import nl.vpro.parkpost.promo.bind.PromoEvent;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,6 +36,7 @@ public class PromoEventConverterTest {
         event.setPromotedProgramProductCode("VPROWON_12345");
         event.setPromoType(ProductCode.Type.P);
         event.setProgramTitle("Program Title");
+        ServiceLocator.setBroadcasterService("VPRO");
     }
 
     @Test
