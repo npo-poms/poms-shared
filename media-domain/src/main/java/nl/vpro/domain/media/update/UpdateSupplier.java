@@ -28,8 +28,15 @@ public enum UpdateSupplier {
     @Beta
     SOURCING_SERVICE(IdType.SRCS),
 
+
+    /**
+     * Only used for metis.
+     */
     PREPR(IdType.PREPR),
 
+    /**
+     * @since 7.10 (using web services earlies)
+     */
     PROMO(null);
 
     @Getter
