@@ -57,6 +57,8 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
     }
 
     /**
+     * Just try to find the broadcaster using all available ids.
+     * First using @{link #find(String)}, then {@link #findForWhatsOnId(String)}, then {@link #findForMisId(String)}, then {@link #findForNeboId(String)
      * @since 5.13
      */
     default Optional<Broadcaster> findForIds(String value) {
