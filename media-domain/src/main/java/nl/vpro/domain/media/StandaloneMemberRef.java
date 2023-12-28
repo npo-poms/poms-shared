@@ -49,8 +49,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "type",
     "index",
     "highlighted",
-    "objectType",
-    "delete"
+    "objectType"
 })
 @IdClass(StandaloneMemberRef.IdType.class)
 public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRelation {
@@ -77,9 +76,6 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
     @Id
     protected ObjectType objectType;
 
-    @Getter
-    @XmlAttribute
-    private Boolean delete;
 
     public StandaloneMemberRef() {
 
@@ -93,18 +89,16 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
         Integer index,
         String midRef,
         String childRef,
-        OwnerType owner,
-        ObjectType objectType,
-        Boolean delete) {
+        OwnerType ownerType,
+        ObjectType objectType) {
         this.added = added;
         this.highlighted = highlighted;
         this.type = type;
         this.index = index;
         this.midRef = midRef;
         this.childRef = childRef;
-        this.owner = owner;
+        this.owner = ownerType;
         this.objectType = objectType;
-        this.delete = (delete == null || ! delete) ? null : delete;
     }
 
     public StandaloneMemberRef(String childRef, MemberRef ref, ObjectType objectType) {
@@ -169,7 +163,7 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
                     .type(ref.getType())
                     .midRef(ref.getMidRef())
                     .index(ref.getNumber())
-                    .owner(ref.getOwner())
+                    .ownerType(ref.getOwner())
                 ;
         }
     }
