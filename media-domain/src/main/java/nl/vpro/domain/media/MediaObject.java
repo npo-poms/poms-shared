@@ -210,19 +210,18 @@ import static nl.vpro.domain.media.MediaObjectFilters.*;
 
 // hibernate filtering
 @FilterDef(name = PUBLICATION_FILTER)
-@Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
-    + "and (publishStop is null or publishStop > now())")
+@Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_PUBLISHABLES)
 
 @FilterDef(name = EMBARGO_FILTER, parameters = {@ParamDef(name = PARAMETER_BROADCASTERS, type = "string") })
 @Filter(name = EMBARGO_FILTER, condition = EMBARGO_FILTER_CONDITION)
 
 @FilterDef(name = DELETED_FILTER)
-@Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
+@Filter(name = DELETED_FILTER, condition = DELETED_FILTER_CONDITION)
 
 @FilterDef(name = ORGANIZATION_FILTER, parameters = { @ParamDef(name = PARAMETER_ORGANIZATIONS, type = "string") })
 @Filter(name = ORGANIZATION_FILTER, condition = ORGANIZATION_FILTER_CONDITION)
 
-// logging
+// logging. We stick to slf4j in the domain classes for now. Most projects use @Log4j2.
 @Slf4j
 
 // validation
@@ -294,8 +293,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
-            + "and (stop is null or stop > now())")
+    @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_RESTRICTIONS)
     @PublicationFilter
     @Valid
     protected List<@NotNull PortalRestriction> portalRestrictions;
@@ -303,8 +301,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "mediaobject_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
-            + "and (stop is null or stop > now())")
+    @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_RESTRICTIONS)
     @PublicationFilter
     @Valid
     protected Set<@NotNull GeoRestriction> geoRestrictions;
@@ -520,8 +517,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         nullable = true // hibernate sucks
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
-            + "and (publishStop is null or publishStop > now())")
+    @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_PUBLISHABLES)
     // @Field(name = "images", store=Store.YES, analyze = Analyze.NO,
     // bridge = @FieldBridge(impl = JsonBridge.class, params = @Parameter(name =
     // "class", value = "[Lnl.vpro.domain.media.support.Image;")))

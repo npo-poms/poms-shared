@@ -42,8 +42,7 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
         return new MemberRefUpdate(
             m.getNumber(),
             m.getMediaRef(),
-            m.isHighlighted(),
-            false);
+            m.isHighlighted());
     }
 
     public MemberRefUpdate() {
@@ -58,11 +57,9 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     private MemberRefUpdate(
         Integer position,
         String mediaRef,
-        Boolean highlighted,
-        Boolean delete) {
+        Boolean highlighted) {
         this(position, mediaRef);
         this.highlighted = highlighted;
-
     }
 
 
