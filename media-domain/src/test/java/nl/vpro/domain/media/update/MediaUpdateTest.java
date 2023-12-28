@@ -4,9 +4,19 @@
  */
 package nl.vpro.domain.media.update;
 
+import org.junit.jupiter.api.BeforeEach;
+
 import nl.vpro.domain.media.AVFileFormat;
+import nl.vpro.domain.user.ServiceLocator;
 
 public abstract class MediaUpdateTest {
+
+
+    @BeforeEach
+    public void setup() {
+        ServiceLocator.setBroadcasterService("KRNC", "MAX", "EO", "VPRO");
+    }
+
 
 
 
