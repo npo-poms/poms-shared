@@ -17,7 +17,7 @@ import nl.vpro.parkpost.ProductCode;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
- * See https://jira.vpro.nl/browse/MSE-1324 and test case with binding example
+ * See <a href="https://jira.vpro.nl/browse/MSE-1324">MSE-1324</a> and test case with binding example
  *
  * @author Roelof Jan Koekoek
  * @since 1.8
@@ -89,6 +89,8 @@ public class PromoEvent {
     @XmlSchemaType(name = "dateTime")
     private Instant placingWindowEnd;
 
+
+    @Deprecated
     @XmlElementWrapper(name = "Files")
     @XmlElement(name = "File")
     private List<File> files;

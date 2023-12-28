@@ -32,6 +32,8 @@ public class PromoEventConverter {
 
     public static final String RELATION_REFERRER = "PROMO_REFERRER";
 
+
+    @Deprecated
     private static final Set<String> IGNORE_EXTENSIONS = new HashSet<>(Arrays.asList("ismv", "ismc"));
 
     private PromoEventConverter() {
@@ -100,6 +102,7 @@ public class PromoEventConverter {
 
 
 
+    @Deprecated
     private static void addLocations(PromoEvent event, ProgramUpdate result, String locationBaseUrl) {
         SortedSet<LocationUpdate> locations = new TreeSet<>();
         if (event.getFiles() != null && !event.getFiles().isEmpty()) {
