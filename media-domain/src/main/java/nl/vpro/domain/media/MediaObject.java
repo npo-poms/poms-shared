@@ -67,7 +67,6 @@ import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
 import static nl.vpro.domain.media.MediaObjectFilters.*;
-import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
 
 /**
  * Base objects for programs, groups and segments.
@@ -94,9 +93,14 @@ import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
  * @author roekoe
  */
 @SuppressWarnings("WSReferenceInspection")
+
+// jpa
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable
+
+// binding
+//   binding xml
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({ Program.class, Group.class, Segment.class })
 @XmlType(name = "baseMediaType",
@@ -137,7 +141,7 @@ import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
         "_Relations",
         "images"
     })
-
+//   binding json
 @JsonPropertyOrder({ "objectType",
     /* xml attributes */
     "mid",
@@ -203,21 +207,26 @@ import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
     @JsonSubTypes.Type(value = Group.class, name = "group"),
     @JsonSubTypes.Type(value = Segment.class, name = "segment") }
 )
+
+// hibernate filtering
 @FilterDef(name = PUBLICATION_FILTER)
 @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
     + "and (publishStop is null or publishStop > now())")
-@FilterDef(name = EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string") })
+
+@FilterDef(name = EMBARGO_FILTER, parameters = {@ParamDef(name = PARAMETER_BROADCASTERS, type = "string") })
 @Filter(name = EMBARGO_FILTER, condition = EMBARGO_FILTER_CONDITION)
+
 @FilterDef(name = DELETED_FILTER)
 @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
 
-@FilterDef(name = BROADCASTER_FILTER, parameters = { @ParamDef(name = "broadcasters", type = "string") })
+@FilterDef(name = ORGANIZATION_FILTER, parameters = { @ParamDef(name = PARAMETER_ORGANIZATIONS, type = "string") })
 @Filter(name = ORGANIZATION_FILTER, condition = ORGANIZATION_FILTER_CONDITION)
 
+// logging
 @Slf4j
-@HasGenre(
-    groups = WarningValidatorGroup.class
-)
+
+// validation
+@HasGenre(groups = WarningValidatorGroup.class)
 @HasTitle(
     groups = PomsValidatorGroup.class,
     message = "{nl.vpro.constraints.hassubormaintitle}",
@@ -426,20 +435,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     //@SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
-    // Improvement: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
 
-    // Before hibernate 5.2 we used Filter rather then FilterJoinTable.
+    // Before hibernate 5.2 we used Filter rather than FilterJoinTable.
     // It doesn't really make much sense.
-    @FilterJoinTables({
-        @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec2_.mergedTo_id is null) and " + // MSE-3526                 // ?
-            "(mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now()) and "
-            + "(mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now())" + ")"),
-        @FilterJoinTable(name = EMBARGO_FILTER, condition = "(mediaobjec2_2_.type != 'CLIP' "
-            + "or mediaobjec2_.publishstart is null " + "or mediaobjec2_.publishstart < now() "
-            + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec2_.id and o.broadcasters_id in (:broadcasters)))"),
-        @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
 
     @PublicationFilter
+    @Filter(name = MR_DELETED_FILTER, condition = MR_DELETED_FILTER_CONDITION)
+    @Filter(name = MR_EMBARGO_FILTER, condition = MR_EMBARGO_FILTER_CONDITION)
+    @Filter(name = MR_PUBLICATION_FILTER, condition = MR_PUBLICATION_FILTER_CONDITION)
     protected Set<@NotNull @Valid MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
@@ -479,6 +482,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<@NotNull @Valid TwitterRef> twitterRefs;
 
+    @Setter
     protected Short teletext;
 
     @XmlElement
@@ -596,7 +600,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Setter(AccessLevel.PACKAGE)
     private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.NONE;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
     // also we got odd NPE's from PersistentBag otherwise.
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
@@ -1888,11 +1892,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return teletext;
     }
 
-    public void setTeletext(Short teletext) {
-        this.teletext = teletext;
-    }
-
-
 
     public Boolean hasSubtitles() {
         return isHasSubtitles();
@@ -1907,7 +1906,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
     protected Boolean isHasSubtitles() {
         try {
-            List<AvailableSubtitles> list = getAvailableSubtitles();
+            final List<AvailableSubtitles> list = getAvailableSubtitles();
 
             if (list == null || list.isEmpty()) {
                 return false;

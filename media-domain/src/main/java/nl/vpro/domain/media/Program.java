@@ -26,6 +26,8 @@ import nl.vpro.domain.user.*;
 
 import static javax.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
+import static nl.vpro.domain.media.MediaObjectFilters.*;
+import static nl.vpro.domain.media.MediaObjectFilters.MR_EMBARGO_FILTER_CONDITION;
 
 /**
  * The main feature that distinguishes a Program from a generic media entity is its ability
@@ -92,14 +94,9 @@ public final class Program extends MediaObject {
     })
     @SortNatural
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-
-    // TODO: These filters are horrible
-    @FilterJoinTables({
-        @FilterJoinTable(name = MediaObjectFilters.PUBLICATION_FILTER, condition =
-            "((mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now())" +
-                "and (mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now()))"),
-        @FilterJoinTable(name = MediaObjectFilters.DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))")
-    })
+    @Filter(name = MR_DELETED_FILTER, condition = MR_DELETED_FILTER_CONDITION)
+    @Filter(name = MR_EMBARGO_FILTER, condition = MR_EMBARGO_FILTER_CONDITION)
+    @Filter(name = MR_PUBLICATION_FILTER, condition = MR_PUBLICATION_FILTER_CONDITION)
     Set<MemberRef> episodeOf = new TreeSet<>();
 
     @Size.List({@Size(max = 255), @Size(min = 1)})
@@ -116,13 +113,10 @@ public final class Program extends MediaObject {
     })
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // TODO: These filters are horrible
-    @Filters({
-        @Filter(name = MediaObjectFilters.PUBLICATION_FILTER, condition =
-            "((segments0_1_.publishstart is null or segments0_1_.publishstart < now())" +
-                "and (segments0_1_.publishstop is null or segments0_1_.publishstop > now()))"),
-
-        @Filter(name = MediaObjectFilters.DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
-    })
+    @Filter(name = MediaObjectFilters.PUBLICATION_FILTER, condition =
+        "((segments0_1_.publishstart is null or segments0_1_.publishstart < now())" +
+            "and (segments0_1_.publishstop is null or segments0_1_.publishstop > now()))")
+    @Filter(name = MediaObjectFilters.DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
 
     private Set<Segment> segments;
 
