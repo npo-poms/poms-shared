@@ -270,6 +270,9 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
         return result;
     }
 
+    /**
+     * Whether this object represents a member or an episode reference.
+     */
     public enum ObjectType {
         memberRef,
         episodeRef

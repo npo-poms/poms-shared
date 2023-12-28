@@ -107,17 +107,16 @@ public final class Program extends MediaObject {
     @NotNull(message = "no program type given")
     private ProgramType type;
 
-    @OneToMany(mappedBy = "parent", orphanRemoval = false) // no implicit orphan removal, the segment my be subject to 'stealing'.
+    @OneToMany(mappedBy = "parent", orphanRemoval = false) // no implicit orphan removal, the segment may be subject to 'stealing'.
     @org.hibernate.annotations.Cascade({
         org.hibernate.annotations.CascadeType.ALL
     })
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // TODO: These filters are horrible
-    @Filter(name = MediaObjectFilters.PUBLICATION_FILTER, condition =
+    @Filter(name = PUBLICATION_FILTER, condition =
         "((segments0_1_.publishstart is null or segments0_1_.publishstart < now())" +
             "and (segments0_1_.publishstop is null or segments0_1_.publishstop > now()))")
-    @Filter(name = MediaObjectFilters.DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
-
+    @Filter(name = DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
     private Set<Segment> segments;
 
     @XmlTransient

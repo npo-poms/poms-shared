@@ -24,6 +24,10 @@ public class MediaObjectFilters {
      * Normal users normally have this filter enabled, and won't see deleted objects.
      */
     public static final String DELETED_FILTER = "deletedFilter";
+    public static final String DELETED_FILTER_CONDITION = """
+            (workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)
+        """;
+
     public static final String MR_DELETED_FILTER = "mrDeletedFilter";
     public static final String MR_DELETED_FILTER_CONDITION =
         """
@@ -36,6 +40,21 @@ public class MediaObjectFilters {
      */
 
     public static final String PUBLICATION_FILTER = "publicationFilter";
+
+    public static final String PUBLICATION_FILTER_CONDITION_RESTRICTIONS =
+        """
+        (start is null or start <= now())
+         and
+        (stop is null or stop > now())
+        """;
+
+
+     public static final String PUBLICATION_FILTER_CONDITION_PUBLISHABLES =
+        """
+        (publishStart is null or publishStart <= now())
+        and
+        (publishStop is null or publishStop > now())
+        """;
 
     /**
      * This filter is enabled during the publication process, things that are under embargo will not be queried (MemberRef version)

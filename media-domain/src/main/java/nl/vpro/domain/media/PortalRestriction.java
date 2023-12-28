@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Setter;
+
 import java.io.Serial;
 import java.time.Instant;
 
@@ -23,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import nl.vpro.domain.user.Portal;
 
+@Setter
 @Entity
 @Table
 @Cacheable
@@ -84,10 +87,6 @@ public class PortalRestriction extends Restriction<PortalRestriction> {
 
     public Portal getPortal() {
         return portal;
-    }
-
-    public void setPortal(Portal portal) {
-        this.portal = portal;
     }
 
     @XmlAttribute(name = "portalId")
