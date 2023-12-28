@@ -89,7 +89,7 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
         Integer index,
         String midRef,
         String childRef,
-        OwnerType owner,
+        OwnerType ownerType,
         ObjectType objectType) {
         this.added = added;
         this.highlighted = highlighted;
@@ -97,7 +97,7 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
         this.index = index;
         this.midRef = midRef;
         this.childRef = childRef;
-        this.owner = owner;
+        this.owner = ownerType;
         this.objectType = objectType;
     }
 
@@ -163,7 +163,7 @@ public class StandaloneMemberRef implements Serializable, Ownable, ParentChildRe
                     .type(ref.getType())
                     .midRef(ref.getMidRef())
                     .index(ref.getNumber())
-                    .owner(ref.getOwner())
+                    .ownerType(ref.getOwner())
                 ;
         }
     }
