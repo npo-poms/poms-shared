@@ -18,10 +18,11 @@ import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.user.Broadcaster;
 
 import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
+import static nl.vpro.domain.media.MediaObjectFilters.PARAMETER_BROADCASTERS;
 
 @Entity
 @IdClass(RelationDefinitionIdentifier.class)
-@FilterDef(name = BROADCASTER_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")})
+@FilterDef(name = BROADCASTER_FILTER, parameters = {@ParamDef(name = PARAMETER_BROADCASTERS, type = "string")})
 @Filter(name = BROADCASTER_FILTER, condition = "broadcaster in (:broadcasters)")
 public class RelationDefinition implements Serializable, Identifiable<RelationDefinitionIdentifier> {
 
