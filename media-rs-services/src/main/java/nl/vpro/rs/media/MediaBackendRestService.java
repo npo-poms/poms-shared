@@ -314,7 +314,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("10") final Integer max,
-        @QueryParam(ORDER) @DefaultValue("ASC") final String order,
+        @QueryParam(ORDER) @DefaultValue("ASC") final Pager.Direction order,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner,
         @QueryParam(DELETES) Boolean  deleted
@@ -326,7 +326,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("10") final Integer max,
-        @QueryParam(ORDER) @DefaultValue("ASC") final String order,
+        @QueryParam(ORDER) @DefaultValue("ASC") final Pager.Direction order,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(DELETES) Boolean  deleted
     ) throws IOException;
