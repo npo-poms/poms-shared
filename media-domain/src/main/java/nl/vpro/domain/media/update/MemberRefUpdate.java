@@ -19,6 +19,7 @@ import nl.vpro.domain.media.support.OwnerType;
  * @see nl.vpro.domain.media.update
  * @see MemberRef
  */
+@Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberRefUpdateType")
 @XmlRootElement(name = "memberRef")
@@ -26,7 +27,6 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
 
     @XmlAttribute
     @Getter
-    @Setter
     private Integer position;
 
     @XmlAttribute(required = false)
@@ -34,8 +34,9 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
 
     @XmlValue
     @Getter
-    @Setter
     private String mediaRef;
+
+
 
     public static MemberRefUpdate create(MemberRef m) {
         return new MemberRefUpdate(
@@ -53,7 +54,7 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     }
 
     @lombok.Builder
-    public MemberRefUpdate(
+    private MemberRefUpdate(
         Integer position,
         String mediaRef,
         Boolean highlighted) {
@@ -62,13 +63,8 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     }
 
 
-
     public Boolean isHighlighted() {
         return highlighted;
-    }
-
-    public void setHighlighted(Boolean highlighted) {
-        this.highlighted = highlighted;
     }
 
     public MemberRef toMemberRef(OwnerType type) {

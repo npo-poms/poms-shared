@@ -18,6 +18,4 @@ public interface SubtitlesMetadata {
     Duration getOffset();
     Integer getCueCount();
     SubtitlesWorkflow getWorkflow();
-
-
 }

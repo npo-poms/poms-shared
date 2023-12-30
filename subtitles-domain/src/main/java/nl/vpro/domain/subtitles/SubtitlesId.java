@@ -13,6 +13,7 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.i18n.Locales;
 import nl.vpro.xml.bind.LocaleAdapter;
 
 import static nl.vpro.i18n.Locales.DUTCH;
@@ -21,6 +22,7 @@ import static nl.vpro.i18n.Locales.DUTCH;
  * @author Michiel Meeuwissen
  * @since 4.7.7
  */
+@Setter
 @XmlRootElement(name = "id")
 @XmlAccessorType(XmlAccessType.NONE)
 public class SubtitlesId implements Serializable, Comparable<SubtitlesId> {
@@ -30,18 +32,15 @@ public class SubtitlesId implements Serializable, Comparable<SubtitlesId> {
 
     @XmlAttribute
     @Getter
-    @Setter
     private String mid;
 
     @XmlAttribute
     @Getter
-    @Setter
     private SubtitlesType type = SubtitlesType.CAPTION;
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @Getter
-    @Setter
     @Schema(implementation = String.class, type = "string")
     private Locale language;
 
@@ -51,6 +50,19 @@ public class SubtitlesId implements Serializable, Comparable<SubtitlesId> {
 
     public static SubtitlesId of(String mid, Locale language, SubtitlesType type) {
         return new SubtitlesId(mid, language, type);
+    }
+
+    public static SubtitlesId of(String stringRep) {
+        String[] parts = stringRep.split("\t", 3);
+        if (parts.length == 3) {
+            return SubtitlesId.builder()
+                .mid(parts[0])
+                .type(SubtitlesType.valueOf(parts[1]))
+                .language(Locales.ofString(parts[2]))
+                .build();
+        } else {
+            throw new IllegalArgumentException("Cannot parse " + stringRep);
+        }
     }
 
     public SubtitlesId()  {
@@ -98,7 +110,6 @@ public class SubtitlesId implements Serializable, Comparable<SubtitlesId> {
             .thenComparing(SubtitlesId::getType)
             .thenComparing(p->p.getLanguage().toString())
             .compare(this, o);
-
     }
 
 }

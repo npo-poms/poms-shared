@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 
 
@@ -16,9 +18,11 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name = "memberUpdate")
 public class MemberUpdate {
 
+    @Setter
     @XmlAttribute
     private Integer position;
 
+    @Setter
     @XmlAttribute(required = true)
     Boolean highlighted = false;
 
@@ -37,10 +41,6 @@ public class MemberUpdate {
         return position;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
-    }
-
     public MediaUpdate<?> getMediaUpdate() {
         return mediaUpdate;
     }
@@ -48,10 +48,6 @@ public class MemberUpdate {
 
     public Boolean isHighlighted() {
         return highlighted;
-    }
-
-    public void setHighlighted(Boolean highlighted) {
-        this.highlighted = highlighted;
     }
 
     @Override

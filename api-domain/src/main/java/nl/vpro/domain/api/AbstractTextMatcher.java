@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
 import com.google.common.annotations.Beta;
 
@@ -25,6 +26,7 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
     public static final Match DEFAULT_MATCH = Match.MUST;
 
     @XmlValue
+    @XmlDocumentation("The value to match on. This is a string, but the interpretation of this string depends on the matchType.")
     protected String value;
 
     public AbstractTextMatcher(String value) {
@@ -89,11 +91,9 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
         if(this == o) {
             return true;
         }
-        if(!(o instanceof AbstractTextMatcher)) {
+        if(!(o instanceof AbstractTextMatcher<?> matcher)) {
             return false;
         }
-
-        AbstractTextMatcher<?> matcher = (AbstractTextMatcher)o;
 
         return value == null ? matcher.getValue() == null : value.equals(matcher.getValue()) && getMatch() == matcher.getMatch();
 

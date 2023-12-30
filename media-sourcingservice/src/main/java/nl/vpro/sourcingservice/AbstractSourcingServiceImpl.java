@@ -261,7 +261,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             send.statusCode(),
             status,
             response,
-            count);
+            count,
+            "2:"+  configuration.get().cleanBaseUrl()
+            );
 
    }
 
@@ -474,8 +476,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
 
 
         addRegion(logger, body, restrictions);
-
-        final HttpResponse<String> finish = client.send(multipart(mid, body), HttpResponse.BodyHandlers.ofString());
+        HttpRequest multipart = multipart(mid, body);
+        final HttpResponse<String> finish = client.send(multipart, HttpResponse.BodyHandlers.ofString());
         meter("finish", finish);
 
         final JsonNode node = JSONREADER.readTree(finish.body());
@@ -490,7 +492,8 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
             finish.statusCode(),
             status,
             response,
-            uploaded.get()
+            uploaded.get(),
+            "1:"+ configuration.get().cleanBaseUrl()
         );
     }
 

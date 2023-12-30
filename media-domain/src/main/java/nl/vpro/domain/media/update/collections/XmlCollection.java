@@ -1,6 +1,7 @@
 package nl.vpro.domain.media.update.collections;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -10,6 +11,10 @@ import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.media.bind.XmlCollections;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.util.IntegerVersion;
 import nl.vpro.util.IntegerVersionSpecific;
@@ -33,6 +38,8 @@ import nl.vpro.util.IntegerVersionSpecific;
     String.class
 })
 @XmlAccessorType(XmlAccessType.NONE)
+@JsonSerialize(using = XmlCollections.Serializer.class)
+@JsonDeserialize(using = XmlCollections.Deserializer.class)
 public class XmlCollection<T> implements Iterable<T> , IntegerVersionSpecific {
 
 

@@ -27,6 +27,7 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
@@ -617,10 +618,10 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
 
     }
 
-    MediaForm rad1 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
-    MediaForm rad1_2 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(1)).build()).build();
-    MediaForm rad1_3 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
-    MediaForm rad2 =  MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD2).begin(Instant.ofEpochMilli(0)).build()).build();
+    MediaForm rad1 =   MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
+    MediaForm rad1_2 = MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(1)).build()).build();
+    MediaForm rad1_3 = MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD1).begin(Instant.ofEpochMilli(0)).build()).build();
+    MediaForm rad2 =   MediaFormBuilder.form().scheduleEvents(ScheduleEventSearch.builder().channel(Channel.RAD2).begin(Instant.ofEpochMilli(0)).build()).build();
 
     @Test
     public void API_593() {
@@ -645,6 +646,50 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
                 }
               }
             }""");
+
+    }
+
+
+    @Test
+    public void form2() {
+        MediaForm form = new MediaForm();
+        MediaSearch search = MediaSearch.builder()
+            .types(new TextMatcherList(Match.MUST, TextMatcher.should("BROADCAST"), TextMatcher.should("CLIP")))
+            .build();
+        form.setSearches(search);
+        Jackson2TestUtil.roundTripAndSimilar(form, """
+            {
+                 "searches" : {
+                   "types" : [ {
+                     "value" : "BROADCAST",
+                     "match" : "SHOULD"
+                   }, {
+                     "value" : "CLIP",
+                     "match" : "SHOULD"
+                   } ]
+                 }
+               }""");
+
+    }
+
+
+    @Test
+    public void formxml() {
+        MediaForm form = new MediaForm();
+        MediaSearch search = MediaSearch.builder()
+            .locations(new TextMatcherList(Match.MUST, TextMatcher.must("https://radiobox2.*", StandardMatchType.WILDCARD)))
+            .build();
+        form.setSearches(search);
+        JAXBTestUtil.roundTripAndSimilar(form, """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+             <api:mediaForm xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                  <api:searches>
+                      <api:locations match="MUST">
+                          <api:matcher matchType="WILDCARD">https://radiobox2.*</api:matcher>
+                      </api:locations>
+                  </api:searches>
+              </api:mediaForm>
+              """);
 
     }
 

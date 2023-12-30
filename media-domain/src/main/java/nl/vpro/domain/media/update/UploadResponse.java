@@ -25,12 +25,15 @@ public class UploadResponse {
 
     Long bytes;
 
-    public UploadResponse(String mid, int statusCode, String status, String response, Long bytes) {
+    String version;
+
+    public UploadResponse(String mid, int statusCode, String status, String response, Long bytes, String version) {
         this.statusCode = statusCode;
         this.status = status;
         this.response = response;
         this.mid = mid;
         this.bytes = bytes;
+        this.version = version;
     }
     private UploadResponse() {
 

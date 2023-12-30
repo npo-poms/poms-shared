@@ -69,9 +69,16 @@ public class ServiceLocator  {
         serviceLocator.broadcasterService = () -> broadcasterService;
     }
 
+    /**
+     * Just sets up a broadcasters service that recognizes the given broadcasters. Mainly useful in test cases.
+     */
     public static void setBroadcasterService(String... broadcasters) {
         setBroadcasterService(new BroadcasterServiceImpl(broadcasters));
     }
+
+    /**
+     * Just sets up a broadcasters service that recognizes the given broadcasters. Mainly useful in test cases.
+     */
     public static void setBroadcasterService(Broadcaster... broadcasters) {
         setBroadcasterService(new BroadcasterServiceImpl(broadcasters));
     }

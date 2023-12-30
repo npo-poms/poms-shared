@@ -6,7 +6,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.*;
 
 /**
- * This combines a MemberRef with MediaObject. This represents a member 'form the other side'.
+ * This combines a MemberRef with MediaObject. This represents a member 'from the other side'.
  * Because:
  * - The XML representation of a MemberRef does only make sense as a sub XML of its parent.
  * @author Michiel Meeuwissen

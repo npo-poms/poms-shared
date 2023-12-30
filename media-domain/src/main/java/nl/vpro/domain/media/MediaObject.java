@@ -66,7 +66,7 @@ import static javax.persistence.CascadeType.*;
 import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
-import static nl.vpro.domain.media.MediaObject.*;
+import static nl.vpro.domain.media.MediaObjectFilters.*;
 
 /**
  * Base objects for programs, groups and segments.
@@ -85,7 +85,7 @@ import static nl.vpro.domain.media.MediaObject.*;
  * <ol>
  *     <li>Be a full representation of meta data related to one entity</li>
  *     <li>Be also its database representation. Therefore e.g. {@link javax.persistence} annotations are present. These are optional, and are probably only relevant in the realm of 'poms backend application'</li>
- *     <li>Be also the XML/Json representation of most of this data. For a few fields it doesn't make sense to be exposed in that way, like for example the {@link Editor}s of  {@link Accountable}. For this the object is annoated with some annotation from {@link javax.xml} and {@link com.fasterxml.jackson}</li>
+ *     <li>Be also the XML/Json representation of most of this data. For a few fields it doesn't make sense to be exposed in that way, like for example the {@link Editor}s of  {@link Accountable}. For this the object is annotated with some annotation from {@link javax.xml} and {@link com.fasterxml.jackson}</li>
  *     <li>The JSON version is basically also the representation used in Elasticsearch (only with {@link Views.Publisher} enabled)</li>
  * </ol>
  *
@@ -93,9 +93,14 @@ import static nl.vpro.domain.media.MediaObject.*;
  * @author roekoe
  */
 @SuppressWarnings("WSReferenceInspection")
+
+// jpa
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable
+
+// binding
+//   binding xml
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({ Program.class, Group.class, Segment.class })
 @XmlType(name = "baseMediaType",
@@ -136,7 +141,7 @@ import static nl.vpro.domain.media.MediaObject.*;
         "_Relations",
         "images"
     })
-
+//   binding json
 @JsonPropertyOrder({ "objectType",
     /* xml attributes */
     "mid",
@@ -202,55 +207,25 @@ import static nl.vpro.domain.media.MediaObject.*;
     @JsonSubTypes.Type(value = Group.class, name = "group"),
     @JsonSubTypes.Type(value = Segment.class, name = "segment") }
 )
-// Improvement: Filters can be defined in hibernate-mapping in the hibernate-config.xml
-// See https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch19.html
-@FilterDef(name = "titleFilter", parameters = { @ParamDef(name = "title", type = "string") })
-@FilterDef(name = "typeFilter", parameters = { @ParamDef(name = "types", type = "string"),
-    @ParamDef(name = "segments", type = "boolean") })
-@FilterDef(name = "organizationFilter", parameters = { @ParamDef(name = "organizations", type = "string") })
-@FilterDef(name = "noBroadcast")
-@FilterDef(name = "hasLocations")
-@FilterDef(name = "noPlaylist")
-@FilterDef(name = "eventRange", parameters = { @ParamDef(name = "eventStart", type = "date"),
-    @ParamDef(name = "eventStop", type = "date") })
-@FilterDef(name = "creationRange", parameters = { @ParamDef(name = "creationStart", type = "date"),
-    @ParamDef(name = "creationStop", type = "date") })
-@FilterDef(name = "modifiedRange", parameters = { @ParamDef(name = "modifiedStart", type = "date"),
-    @ParamDef(name = "modifiedStop", type = "date") })
+
+// hibernate filtering
 @FilterDef(name = PUBLICATION_FILTER)
-@FilterDef(name = EMBARGO_FILTER, parameters = {
-    @ParamDef(name = "broadcasters", type = "string") })
+@Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_PUBLISHABLES)
+
+@FilterDef(name = EMBARGO_FILTER, parameters = {@ParamDef(name = PARAMETER_BROADCASTERS, type = "string") })
+@Filter(name = EMBARGO_FILTER, condition = EMBARGO_FILTER_CONDITION)
+
 @FilterDef(name = DELETED_FILTER)
-@FilterDef(name = "relationFilter", parameters = { @ParamDef(name = "broadcasters", type = "string") })
-@Filter(name = "titleFilter", condition = "0 < (select count(*) from title t where t.parent_id = id and lower(t.title) like :title)")
-@Filter(name = "typeFilter", condition = "(0 < (select count(*) from program p where p.id = id and p.type in (:types)))"
-    + " or (0 < (select count(*) from group_table g where g.id = id and g.type in (:types)))"
-    + " or (:segments and 0 < (select count(*) from segment s where s.id = id))")
-@Filter(name = ORGANIZATION_FILTER, condition = "0 < ("
-    + "(select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))"
-    + " + "
-    + "(select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:organizations))"
-    + " + "
-    + "(select count(*) from mediaobject_thirdparty o where o.mediaobject_id = id and o.thirdparties_id in (:organizations))"
-        + ")")
-@Filter(name = "noBroadcast", condition = "0 = (select count(*) from scheduleevent e where e.mediaobject_id = id)")
-@Filter(name = "hasLocations", condition = "0 < (select count(*) from location l where l.mediaobject_nid = id)")
-@Filter(name = "noPlaylist", condition = "0 = (select count(*) from group_table g, memberref mr where mr.member_id = id "
-    + "and g.id = mr.owner_id " + "and g.type = 'PLAYLIST')")
-@Filter(name = "eventRange", condition = ":eventStart <= (select min(e.start) from scheduleevent e where e.mediaobject_id = id) and "
-    + ":eventStop >= (select min(e.start) from scheduleevent e where e.mediaobject_id = id)")
-@Filter(name = "creationRange", condition = ":creationStart <= creationDate and :creationStop >= creationDate")
-@Filter(name = "modifiedRange", condition = ":modifiedStart <= lastModified and :modifiedStop >= lastModified")
-@Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
-    + "and (publishStop is null or publishStop > now())")
-@Filter(name = EMBARGO_FILTER, condition = "(publishStart is null "
-    + "or publishStart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
-    + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))")
-@Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
+@Filter(name = DELETED_FILTER, condition = DELETED_FILTER_CONDITION)
+
+@FilterDef(name = ORGANIZATION_FILTER, parameters = { @ParamDef(name = PARAMETER_ORGANIZATIONS, type = "string") })
+@Filter(name = ORGANIZATION_FILTER, condition = ORGANIZATION_FILTER_CONDITION)
+
+// logging. We stick to slf4j in the domain classes for now. Most projects use @Log4j2.
 @Slf4j
-@HasGenre(
-    groups = WarningValidatorGroup.class
-)
+
+// validation
+@HasGenre(groups = WarningValidatorGroup.class)
 @HasTitle(
     groups = PomsValidatorGroup.class,
     message = "{nl.vpro.constraints.hassubormaintitle}",
@@ -266,14 +241,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // permits Program, Group, Segment, MediaObject$HibernateBasicProxy {
     //hibernate will make a HibernateBasicProxy, which is not permitted (nor available)
 
-
-    public static final String DELETED_FILTER = "deletedFilter";
-    public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
-    public static final String PUBLICATION_FILTER = "publicationFilter";
-    public static final String INVERSE_PUBLICATION_FILTER = "inversePublicationFilter";
-    public static final String EMBARGO_FILTER = "embargoFilter";
-    public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
-    public static final String ORGANIZATION_FILTER = "organizationFilter";
 
     @Serial
     private static final long serialVersionUID = -9095662256792069374L;
@@ -326,8 +293,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
-            + "and (stop is null or stop > now())")
+    @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_RESTRICTIONS)
     @PublicationFilter
     @Valid
     protected List<@NotNull PortalRestriction> portalRestrictions;
@@ -335,8 +301,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "mediaobject_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
-            + "and (stop is null or stop > now())")
+    @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_RESTRICTIONS)
     @PublicationFilter
     @Valid
     protected Set<@NotNull GeoRestriction> geoRestrictions;
@@ -467,19 +432,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     //@SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
-    // Improvement: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
 
-    // Before hibernate 5.2 we used Filter rather then FilterJoinTable.
+    // Before hibernate 5.2 we used Filter rather than FilterJoinTable.
     // It doesn't really make much sense.
-    @FilterJoinTables({
-        @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec2_.mergedTo_id is null) and " + // MSE-3526                 // ?
-            "(mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now()) and "
-            + "(mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now())" + ")"),
-        @FilterJoinTable(name = EMBARGO_FILTER, condition = "(mediaobjec2_2_.type != 'CLIP' "
-            + "or mediaobjec2_.publishstart is null " + "or mediaobjec2_.publishstart < now() "
-            + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec2_.id and o.broadcasters_id in (:broadcasters)))"),
-        @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
+
     @PublicationFilter
+    @Filter(name = MR_DELETED_FILTER, condition = MR_DELETED_FILTER_CONDITION)
+    @Filter(name = MR_EMBARGO_FILTER, condition = MR_EMBARGO_FILTER_CONDITION)
+    @Filter(name = MR_PUBLICATION_FILTER, condition = MR_PUBLICATION_FILTER_CONDITION)
     protected Set<@NotNull @Valid MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
@@ -519,6 +479,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<@NotNull @Valid TwitterRef> twitterRefs;
 
+    @Setter
     protected Short teletext;
 
     @XmlElement
@@ -556,8 +517,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         nullable = true // hibernate sucks
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
-            + "and (publishStop is null or publishStop > now())")
+    @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_PUBLISHABLES)
     // @Field(name = "images", store=Store.YES, analyze = Analyze.NO,
     // bridge = @FieldBridge(impl = JsonBridge.class, params = @Parameter(name =
     // "class", value = "[Lnl.vpro.domain.media.support.Image;")))
@@ -636,7 +596,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Setter(AccessLevel.PACKAGE)
     private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.NONE;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
     // also we got odd NPE's from PersistentBag otherwise.
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
@@ -1928,11 +1888,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return teletext;
     }
 
-    public void setTeletext(Short teletext) {
-        this.teletext = teletext;
-    }
-
-
 
     public Boolean hasSubtitles() {
         return isHasSubtitles();
@@ -1947,7 +1902,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
     protected Boolean isHasSubtitles() {
         try {
-            List<AvailableSubtitles> list = getAvailableSubtitles();
+            final List<AvailableSubtitles> list = getAvailableSubtitles();
 
             if (list == null || list.isEmpty()) {
                 return false;

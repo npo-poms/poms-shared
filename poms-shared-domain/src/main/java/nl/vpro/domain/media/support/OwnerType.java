@@ -5,6 +5,8 @@ import java.util.*;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+import org.checkerframework.checker.nullness.qual.PolyNull;
+
 import nl.vpro.domain.Xmlns;
 import nl.vpro.i18n.Displayable;
 
@@ -200,4 +202,13 @@ public enum OwnerType implements Displayable {
      */
     public static final List<OwnerType> ENTRIES = Collections.unmodifiableList(Arrays.asList(BROADCASTER, NPO));
 
+
+    @PolyNull
+    public static OwnerType valueOfNullable(@PolyNull String value){
+        if (value == null) {
+            return null;
+        }
+        return valueOf(value);
+
+    }
 }

@@ -10,6 +10,7 @@ import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.media.update.LocationUpdate;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,6 +34,25 @@ public class XmlCollectionTest {
         XmlCollection<LocationUpdate> rounded = assertThatXml(col).isSimilarTo(expected).get();
         assertThat(rounded).isEqualTo(col);
 
+    }
+
+    @Test
+    public void json() {
+        XmlCollection<LocationUpdate> col = new XmlCollection<>(Arrays.asList(LocationUpdate.builder()
+            .bitrate(1000)
+            .programUrl("https://www.vpro.nl/bl").build()));
+
+        Jackson2TestUtil.roundTripAndSimilar(col,
+            """
+                [ {
+                      "programUrl" : "https://www.vpro.nl/bl",
+                      "avAttributes" : {
+                            "bitrate" : 1000
+                          }
+                    }
+                ]
+                """
+        );
     }
 
 }

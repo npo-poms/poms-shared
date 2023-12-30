@@ -60,6 +60,7 @@ public class SchemaTest extends AbstractSchemaTest {
             LocationUpdate.class,
             StreamingStatusImpl.class,
             UploadResponse.class,
+            StandaloneMemberRef.class,
             //
             TranscodeRequest.class,
             TranscodeStatus.class,

@@ -34,6 +34,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static java.util.Comparator.comparing;
 import static nl.vpro.domain.Changeables.instant;
+import static nl.vpro.domain.media.MediaObjectFilters.*;
 
 /**
  * <p>
@@ -56,26 +57,20 @@ import static nl.vpro.domain.Changeables.instant;
  * @see Program#episodeOf
  */
 @Entity
-@FilterDefs({
-    @FilterDef(name = MediaObject.INVERSE_PUBLICATION_FILTER),
-    @FilterDef(name = MediaObject.INVERSE_EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")}),
-    @FilterDef(name = MediaObject.INVERSE_DELETED_FILTER)
-})
-@Filters({
-    @Filter(name = MediaObject.INVERSE_PUBLICATION_FILTER, condition = "((  " +
-        "       (select m.publishStart from mediaobject m where m.id = member_id) is null " +
-        "       or now() > (select m.publishStart from mediaobject m where m.id = member_id)" +
-        "    ) and (" +
-        "       (select m.publishStop from mediaobject m where m.id = member_id) is null " +
-        "       or now() < (select m.publishStop from mediaobject m where m.id = member_id)" +
-        "    ))"),
-    @Filter(name = MediaObject.INVERSE_EMBARGO_FILTER, condition = "(" +
-        "   (select m.publishStart from mediaobject m where m.id = member_id) is null " +
-        "   or now() > (select m.publishStart from mediaobject m where m.id = member_id) " +
-        "   or 'CLIP' != (select p.type from program p where p.id = member_id) " +
-        "   or 0 < (select count(*) from mediaobject_broadcaster b where b.mediaobject_id = member_id and b.broadcasters_id in (:broadcasters))" +
-        ")"),
-    @Filter(name = MediaObject.INVERSE_DELETED_FILTER, condition = "(select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')")})
+
+@FilterDef(name = MR_PUBLICATION_FILTER)
+@Filter(name = MR_PUBLICATION_FILTER, condition = MR_PUBLICATION_FILTER_CONDITION)
+
+@FilterDef(name = MR_EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")})
+@Filter(name = MR_EMBARGO_FILTER, condition = MR_EMBARGO_FILTER_CONDITION)
+
+@FilterDef(name = MR_DELETED_FILTER)
+@Filter(name = MR_DELETED_FILTER, condition =
+    """
+     (select m.workflow from mediaobject m where m.id = owner_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')
+     AND
+     (select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')
+     """)
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlType(name = "memberRefType")
@@ -100,6 +95,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Setter(AccessLevel.PACKAGE)
     private Long id;
 
+    @Setter
     @ManyToOne(optional = false)
     @JsonBackReference
     protected MediaObject member;
@@ -268,10 +264,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     public MediaObject getMember() {
         return member;
-    }
-
-    public void setMember(MediaObject member) {
-        this.member = member;
     }
 
     /**
@@ -621,6 +613,9 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
         if (id != null) {
             builder.append("id", id);
+        }
+        if (getGroup() != null) {
+            builder.append("group", getGroup().getMainIdentifier().orElseGet(() -> getGroup().toString()));
         }
         if (getUrnRef()  != null) {
             builder.append("urnRef", getUrnRef());

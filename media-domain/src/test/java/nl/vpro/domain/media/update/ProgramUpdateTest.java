@@ -141,6 +141,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         LocationUpdate location = LocationUpdate.builder()
             .programUrl("http:invalide.url")
             //.programUrl(null)
+            .duration(Duration.ofMinutes(1))
             .build();
         ProgramUpdate update = ProgramUpdate.create();
         update.setBroadcasters("KRNC");

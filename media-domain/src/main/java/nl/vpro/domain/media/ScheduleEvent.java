@@ -41,12 +41,8 @@ import static nl.vpro.domain.TextualObjects.sorted;
 @Entity
 @IdClass(ScheduleEventIdentifier.class)
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@FilterDefs({
-    @FilterDef(name = MediaObject.DELETED_FILTER),
-})
-@Filters({
-    @Filter(name = MediaObject.DELETED_FILTER, condition = "(select m.workflow from mediaobject m where m.id = mediaobject_id and m.mergedTo_id is null) NOT IN ('MERGED', 'DELETED')")
-})
+@FilterDef(name = MediaObjectFilters.DELETED_FILTER)
+@Filter(name = MediaObjectFilters.DELETED_FILTER, condition = "(select m.workflow from mediaobject m where m.id = mediaobject_id and m.mergedTo_id is null) NOT IN ('MERGED', 'DELETED')")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventType", propOrder = {
     "titles",

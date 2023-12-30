@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.update.*;
+import nl.vpro.domain.user.*;
 import nl.vpro.parkpost.promo.bind.File;
 import nl.vpro.parkpost.promo.bind.PromoEvent;
 
@@ -31,6 +32,8 @@ public class PromoEventConverter {
 
     public static final String RELATION_REFERRER = "PROMO_REFERRER";
 
+
+    @Deprecated
     private static final Set<String> IGNORE_EXTENSIONS = new HashSet<>(Arrays.asList("ismv", "ismc"));
 
     private PromoEventConverter() {
@@ -53,8 +56,17 @@ public class PromoEventConverter {
         // volgens NEP is event.getOrderCode() unieker
         result.setPublishStartInstant(event.getPlacingWindowStart());
         result.setPublishStopInstant(event.getPlacingWindowEnd());
+
         if (StringUtils.isNotBlank(event.getBroadcaster())) {
-            result.setBroadcasters(Arrays.asList(event.getBroadcaster()));
+            BroadcasterService broadcasterService = ServiceLocator.getBroadcasterService();
+
+            // I don't know what exactly has been consented, but it seems that codes are not conform ours.
+            Optional<Broadcaster> forIds = broadcasterService.findForIds(event.getBroadcaster());
+            if (forIds.isPresent()) {
+                result.setBroadcasters(forIds.get().getId());
+            } else {
+                log.warn("No broadcaster found for {} (Ignored)", event.getBroadcaster());
+            }
         }
 
         String programPrid = event.getPromotedProgramProductCode();
@@ -90,6 +102,7 @@ public class PromoEventConverter {
 
 
 
+    @Deprecated
     private static void addLocations(PromoEvent event, ProgramUpdate result, String locationBaseUrl) {
         SortedSet<LocationUpdate> locations = new TreeSet<>();
         if (event.getFiles() != null && !event.getFiles().isEmpty()) {

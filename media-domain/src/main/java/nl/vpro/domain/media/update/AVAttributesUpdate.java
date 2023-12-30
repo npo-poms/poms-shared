@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.*;
 import nl.vpro.domain.media.AVAttributes;
 import nl.vpro.domain.media.AVFileFormat;
 
+@Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "avAtributeUpdateType", propOrder = {
     "bitrate",
@@ -27,29 +28,24 @@ public class AVAttributesUpdate {
     @XmlElement
     @Min(0L)
     @Getter
-    @Setter
     private Integer bitrate;
 
     @XmlElement
     @Min(0L)
     @Getter
-    @Setter
     private Long byteSize;
 
     @XmlElement
     @Getter
-    @Setter
     private AVFileFormat avFileFormat;
 
     @XmlElement
     @Getter
-    @Setter
     @Valid
     private AudioAttributesUpdate audioAttributes;
 
     @XmlElement
     @Getter
-    @Setter
     @Valid
     private VideoAttributesUpdate videoAttributes;
 

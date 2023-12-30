@@ -124,11 +124,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Getter
     protected transient State previousState;
 
-    @XmlAttribute
-    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-    @XmlSchemaType(name = "dateTime")
-    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+
+    @XmlTransient
     protected Instant publishStart;
 
 
@@ -308,9 +305,49 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
 
+    /**
+     * Basically the start of a prediction is {@link #getOwnPublishStartInstant()}. If there are locations that are to be published earlier, they won't be published either.
+     * <p />
+     * If there are no locations, then the assumption is that the publish start is 'predicted' and around that time a notify from NEP fill follow.
+     */
+    @XmlAttribute(name = "publishStart")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @Override
     public Instant getPublishStartInstant() {
-        return publishStart;
+        Instant result =  publishStart;
+        /*if (mediaObject != null // can be determined
+        ) {
+            Instant earliestLocation = Instant.MAX;
+            int foundLocations = 0;
+            for (Location l : mediaObject.getLocations()) {
+                if (l.isDeleted()) {
+                    continue;
+                }
+                if (l.getOwnPublishStopInstant() != null && l.getOwnPublishStopInstant().isBefore(instant())) {
+                    // it was published earlier, but not anymore, so ignore this!
+                    continue;
+                }
+                if (platform.matches(l.getPlatform())) {
+                    foundLocations++;
+                    if (l.getOwnPublishStartInstant() == null) {
+                        earliestLocation = null;
+                        break;
+                    } else if (l.getOwnPublishStartInstant().isBefore(earliestLocation)) {
+                        earliestLocation = l.getOwnPublishStopInstant();
+                    }
+                }
+            }
+            if (foundLocations > 0) {
+                if (earliestLocation != null && earliestLocation.isAfter(result)) {
+                    result = earliestLocation;
+                }
+            }
+
+        }*/
+        return result;
     }
 
 

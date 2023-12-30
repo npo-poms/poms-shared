@@ -121,7 +121,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public LocationUpdate(
+    private LocationUpdate(
         String programUrl,
         Duration duration,
         Integer width,
@@ -133,7 +133,12 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
         Instant publishStop,
         Boolean delete) {
         this(programUrl, duration, bitrate, format);
-        this.avAttributes.setVideoAttributes(new VideoAttributesUpdate(width, height));
+        if (width != null || height != null) {
+            if (this.avAttributes == null) {
+                this.avAttributes = new AVAttributesUpdate();
+            }
+            this.avAttributes.setVideoAttributes(new VideoAttributesUpdate(width, height));
+        }
         this.urn = urn;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
