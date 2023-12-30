@@ -1,5 +1,7 @@
 package nl.vpro.poms.shared;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.13
@@ -93,6 +95,12 @@ public class Headers {
      * Effective hibernate filters
      */
     public static final String FILTERS                      = "X-Filters";
+
+
+    public static String escapeHeaderValue(String value) {
+        return StringEscapeUtils.escapeJava(value);
+    }
+
 
 }
 
