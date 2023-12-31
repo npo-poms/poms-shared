@@ -359,10 +359,6 @@ public class MediaForm {
         return pager;
     }
 
-    public Collection<String> getBroadcasters() {
-        return broadcasters;
-    }
-
 
     public boolean hasBroadcasters() {
         return has(broadcasters);

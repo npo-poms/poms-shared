@@ -97,6 +97,7 @@ public class Headers {
     public static final String FILTERS                      = "X-Filters";
 
 
+    // TODO, should header values not be escaped according to srfc2231
     public static String escapeHeaderValue(String value) {
         return StringEscapeUtils.escapeJava(value);
     }
