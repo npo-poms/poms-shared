@@ -2188,7 +2188,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
     }
 
-    void correctPredictions() {
+    public void correctPredictions() {
         implicitPredictions();
         for (Platform p : Platform.values()) {
             correctPrediction(p);
