@@ -23,19 +23,35 @@ import javax.xml.bind.annotation.*;
 @ToString
 @Data
 public class MoveAction {
+    /**
+     * @since 7.10.1
+     */
+    public enum Type {
+        REFERENCE,
+        NUMBER,
+        INDEX
+    }
+
+    @XmlAttribute(name = "type")
+    Type type = null;
+
+
+    public Type getEffectiveType() {
+        return type == null ? Type.INDEX : type;
+    }
 
     /**
-     * The id of the object to move from
+     * The {@link #getType()} of the object to move from
      */
     @XmlElement(required = true)
-    private Long from;
+    private String from;
 
 
     /**
-     * The id of the object to move to
+     * The {@link #getType()} of the object to move from
      */
     @XmlElement(required = true)
-    private Long to;
+    private String to;
 
 
 }
