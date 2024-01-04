@@ -581,9 +581,10 @@
 
   <xs:complexType name="moveActionType">
     <xs:sequence>
-      <xs:element name="from" type="xs:int"/>
-      <xs:element name="to" type="xs:int"/>
+      <xs:element name="from" type="xs:string"/>
+      <xs:element name="to" type="xs:string"/>
     </xs:sequence>
+    <xs:attribute name="type" type="type"/>
   </xs:complexType>
 
   <xs:complexType name="bulkUpdateType">
@@ -671,6 +672,14 @@
     <xs:attribute name="position" type="xs:int"/>
     <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
   </xs:complexType>
+
+  <xs:simpleType name="type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="REFERENCE"/>
+      <xs:enumeration value="NUMBER"/>
+      <xs:enumeration value="INDEX"/>
+    </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="priorityType">
     <xs:restriction base="xs:string">
