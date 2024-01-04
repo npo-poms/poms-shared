@@ -24,11 +24,18 @@ import javax.xml.bind.annotation.*;
 @Data
 public class MoveAction {
 
+    /**
+     * The id of the object to move from
+     */
     @XmlElement(required = true)
-    private Integer from;
+    private Long from;
 
+
+    /**
+     * The id of the object to move to
+     */
     @XmlElement(required = true)
-    private Integer to;
+    private Long to;
 
 
 }
