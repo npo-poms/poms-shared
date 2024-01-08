@@ -990,8 +990,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject addTitle(Title title) {
-        this.titles = addTo(titles, title);
         removeTitle(OwnerType.TEMPORARY, title.getType());
+        this.titles = addTo(titles, title);
         return this;
     }
 
@@ -1011,15 +1011,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject addTitle(@NonNull String title, @NonNull OwnerType owner, @NonNull TextualType type) {
+        removeTitle(OwnerType.TEMPORARY, type);
         final Title existingTitle = findTitle(owner, type);
         if (existingTitle != null) {
             existingTitle.set(title);
         } else {
             this.addTitle(getOwnedTitleCreator().apply(title, owner, type));
         }
-
-        removeTitle(OwnerType.TEMPORARY, type);
-
         return this;
     }
 
@@ -1055,8 +1053,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject addDescription(Description description) {
-        this.descriptions = addTo(descriptions, description);
         removeDescription(OwnerType.TEMPORARY, description.getType());
+        this.descriptions = addTo(descriptions, description);
         return this;
     }
 
@@ -1090,6 +1088,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Override
     public MediaObject addDescription(@Nullable String description, @NonNull OwnerType owner, @NonNull TextualType type) {
         if (description != null) {
+            removeDescription(OwnerType.TEMPORARY, type);
             final Description existingDescription = findDescription(owner, type);
 
             if (existingDescription != null) {
@@ -1097,7 +1096,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             } else {
                 this.addDescription(getOwnedDescriptionCreator().apply(description, owner, type));
             }
-            removeDescription(OwnerType.TEMPORARY, type);
         }
         return this;
     }

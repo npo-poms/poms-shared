@@ -40,10 +40,10 @@ public interface TextualObject<
     }
 
     default TO addTitle(@NonNull String title, @NonNull  OwnerType owner, @NonNull  TextualType type) {
+        removeTitle(OwnerType.TEMPORARY, type);
         T t = getOwnedTitleCreator().apply(title, owner, type);
         SortedSet<T> titles = getTitles();
         getTitles().add(t);
-        removeTitle(OwnerType.TEMPORARY, type);
         return self();
     }
 
@@ -112,9 +112,9 @@ public interface TextualObject<
 
     default TO addDescription(@Nullable String description, @NonNull OwnerType owner, @NonNull TextualType type) {
         if (StringUtils.isNotEmpty(description)) {
+            removeDescription(OwnerType.TEMPORARY, type);
             D d = getOwnedDescriptionCreator().apply(description, owner, type);
             getDescriptions().add(d);
-            removeDescription(OwnerType.TEMPORARY, type);
         }
 
         return self();
