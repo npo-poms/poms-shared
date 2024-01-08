@@ -138,7 +138,15 @@ public enum OwnerType implements Displayable {
     /**
      * @since 5.3
      */
-    BEELDENGELUID("Beeld & Geluid")
+    BEELDENGELUID("Beeld & Geluid"),
+
+
+    /**
+     * This textual value is created temporarily, and may be discarded as soon something better is available.
+     * It should probably only exist on unpublished objects.
+     * 7.10
+     */
+    TEMPORARY("Tijdelijk"),
 
     ;
     private final String displayName;
