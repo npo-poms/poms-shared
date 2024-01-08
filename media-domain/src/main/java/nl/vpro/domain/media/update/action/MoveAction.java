@@ -23,10 +23,13 @@ import javax.xml.bind.annotation.*;
 @ToString
 @Data
 public class MoveAction {
+
+
     /**
      * What the 'from' and 'to' properties of the actions are referring to.
      * @since 7.10.1
      */
+    @XmlType(name = "moveActionTypeType")
     public enum Type {
         /**
          * A reference to a mediaobject. MID, crid, or id.
