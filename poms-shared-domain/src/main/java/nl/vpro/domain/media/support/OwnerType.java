@@ -144,7 +144,7 @@ public enum OwnerType implements Displayable {
     /**
      * This textual value is created temporarily, and may be discarded as soon something better is available.
      * It should probably only exist on unpublished objects.
-     * 7.10
+     * @since 7.10
      */
     TEMPORARY("Tijdelijk"),
 
