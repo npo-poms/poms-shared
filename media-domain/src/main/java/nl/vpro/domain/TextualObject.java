@@ -43,6 +43,7 @@ public interface TextualObject<
         T t = getOwnedTitleCreator().apply(title, owner, type);
         SortedSet<T> titles = getTitles();
         getTitles().add(t);
+        removeTitle(OwnerType.TEMPORARY, type);
         return self();
     }
 
@@ -113,7 +114,9 @@ public interface TextualObject<
         if (StringUtils.isNotEmpty(description)) {
             D d = getOwnedDescriptionCreator().apply(description, owner, type);
             getDescriptions().add(d);
+            removeDescription(OwnerType.TEMPORARY, type);
         }
+
         return self();
     }
 
