@@ -72,6 +72,7 @@
       <xs:enumeration value="AUTHORITY"/>
       <xs:enumeration value="RADIOBOX"/>
       <xs:enumeration value="BEELDENGELUID"/>
+      <xs:enumeration value="TEMPORARY"/>
     </xs:restriction>
   </xs:simpleType>
 
