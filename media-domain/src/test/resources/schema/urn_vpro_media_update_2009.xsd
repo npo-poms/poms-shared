@@ -584,7 +584,7 @@
       <xs:element name="from" type="xs:string"/>
       <xs:element name="to" type="xs:string"/>
     </xs:sequence>
-    <xs:attribute name="type" type="type"/>
+    <xs:attribute name="type" type="moveActionTypeType"/>
   </xs:complexType>
 
   <xs:complexType name="bulkUpdateType">
@@ -673,7 +673,7 @@
     <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
   </xs:complexType>
 
-  <xs:simpleType name="type">
+  <xs:simpleType name="moveActionTypeType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="REFERENCE"/>
       <xs:enumeration value="NUMBER"/>

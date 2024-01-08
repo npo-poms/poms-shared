@@ -610,7 +610,34 @@
       <xs:element name="from" type="xs:int" minOccurs="1" form="qualified"/>
       <xs:element name="to" type="xs:int" minOccurs="1" form="qualified"/>
     </xs:sequence>
+    <xs:attribute name="type" type="moveActionTypeType"/>
   </xs:complexType>
+
+  <xs:simpleType name="moveActionTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="REFERENCE">
+        <xs:annotation>
+          <xs:documentation>
+            'from' and 'to' refer to mediaobjects in the list by reference (e.g. mid).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NUMBER">
+        <xs:annotation>
+          <xs:documentation>
+            Would refer to the number in the memberref object (presently unsupported)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="INDEX">
+        <xs:annotation>
+            <xs:documentation>
+              'from' and 'to' refer to the index (offset 0) of the mediaobject in the list.
+            </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
 
   <xs:complexType name="predictionUpdateType">
     <xs:simpleContent>

@@ -23,9 +23,12 @@ import javax.xml.bind.annotation.*;
 @ToString
 @Data
 public class MoveAction {
+
+
     /**
      * @since 7.10.1
      */
+    @XmlType(name = "moveActionTypeType")
     public enum Type {
         REFERENCE,
         NUMBER,
