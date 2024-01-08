@@ -990,8 +990,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject addTitle(Title title) {
-        removeTitle(OwnerType.TEMPORARY, title.getType());
-        this.titles = addTo(titles, title);
+        if (title != null) {
+            removeTitle(OwnerType.TEMPORARY, title.getType());
+            this.titles = addTo(titles, title);
+        }
         return this;
     }
 
@@ -1053,8 +1055,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject addDescription(Description description) {
-        removeDescription(OwnerType.TEMPORARY, description.getType());
-        this.descriptions = addTo(descriptions, description);
+        if (description != null) {
+            removeDescription(OwnerType.TEMPORARY, description.getType());
+            this.descriptions = addTo(descriptions, description);
+        }
         return this;
     }
 
