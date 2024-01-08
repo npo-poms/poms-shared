@@ -1017,6 +1017,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             this.addTitle(getOwnedTitleCreator().apply(title, owner, type));
         }
 
+        removeTitle(OwnerType.TEMPORARY, type);
+
         return this;
     }
 
@@ -1093,6 +1095,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             } else {
                 this.addDescription(getOwnedDescriptionCreator().apply(description, owner, type));
             }
+            removeDescription(OwnerType.TEMPORARY, type);
         }
         return this;
     }
