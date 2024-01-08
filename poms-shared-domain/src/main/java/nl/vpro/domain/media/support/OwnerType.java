@@ -146,7 +146,12 @@ public enum OwnerType implements Displayable {
      * It should probably only exist on unpublished objects.
      * @since 7.10
      */
-    TEMPORARY("Tijdelijk"),
+    TEMPORARY("Tijdelijk") {
+        @Override
+        public boolean display() {
+            return false;
+        }
+    }
 
     ;
     private final String displayName;
