@@ -165,6 +165,12 @@ public interface MediaTestDataBuilder<
             .withCreatedBy()
             .withLastModifiedBy()
             ;
+        t.build().locations.forEach(l ->  {
+            l.setCreationInstant(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).plusHours(1).toInstant());
+            l.setLastModifiedInstant(l.getCreationInstant());
+            l.setCreatedBy(vproEditor());
+            l.setLastModifiedBy(vproEditor());
+        });
         t.build().acceptChanges(); // triggers calc32 and things like that. (seems like a hack)
         t.build().getCorrelation(); // (seems like a hack)
 

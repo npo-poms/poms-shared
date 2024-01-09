@@ -349,6 +349,9 @@ public class Location extends PublishableObject<Location>
             if (newProgramUrl) {
                 to.headRequest();
             }
+            if (from.getWorkflow() != null) {
+                to.setWorkflow(from.getWorkflow());
+            }
 
         } else {
             to = null;

@@ -33,6 +33,7 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.image.MutableMetadata;
 import nl.vpro.domain.image.backend.BackendImage;
 import nl.vpro.domain.image.backend.BackendImageMetadata;
+import nl.vpro.domain.media.Deletable;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -65,7 +66,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 })
 @Slf4j
 @Getter
-public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata<ImageUpdate> {
+public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata<ImageUpdate>, Deletable {
 
     @XmlAttribute(required = true)
     @NotNull
@@ -394,6 +395,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
         this.image = urn;
     }
 
+    @Override
     public boolean forDeletion() {
         return delete != null && delete;
     }
