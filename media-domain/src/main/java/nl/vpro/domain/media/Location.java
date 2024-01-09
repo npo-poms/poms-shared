@@ -80,7 +80,7 @@ public class Location extends PublishableObject<Location>
     @Serial
     private static final long serialVersionUID = -140942203904508506L;
 
-    private static final String BASE_URN = "urn:vpro:media:location:";
+    public static final String BASE_URN = "urn:vpro:media:location:";
 
     private static final Pattern URL_PATTERN = Pattern.compile("^([a-zA-Z0-9+]+)://([^/?]+)(/.*?)?(\\?.*)?(#.*)?");
 
