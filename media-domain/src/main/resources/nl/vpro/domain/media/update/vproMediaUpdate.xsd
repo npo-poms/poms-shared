@@ -607,8 +607,8 @@
 
   <xs:complexType name="moveActionType">
     <xs:sequence>
-      <xs:element name="from" type="xs:int" minOccurs="1" form="qualified"/>
-      <xs:element name="to" type="xs:int" minOccurs="1" form="qualified"/>
+      <xs:element name="from" type="xs:string" minOccurs="1" form="qualified"/>
+      <xs:element name="to" type="xs:string" minOccurs="1" form="qualified"/>
     </xs:sequence>
     <xs:attribute name="type" type="moveActionTypeType"/>
   </xs:complexType>
