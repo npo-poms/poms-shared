@@ -42,7 +42,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "duration"
         })
 @EqualsAndHashCode
-public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbargo<LocationUpdate> {
+public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbargo<LocationUpdate>, Deletable {
 
 
     public static LocationUpdate copy(LocationUpdate copy) {
@@ -149,6 +149,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, MutableEmbarg
     /**
      * @since 7.10
      */
+    @Override
     public boolean forDeletion() {
         return delete != null && delete;
     }
