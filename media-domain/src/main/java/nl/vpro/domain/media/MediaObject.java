@@ -991,7 +991,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Override
     public MediaObject addTitle(Title title) {
         if (title != null) {
-            removeTitle(OwnerType.TEMPORARY, title.getType());
+            if (title.getOwner() != OwnerType.TEMPORARY) {
+                removeTitle(OwnerType.TEMPORARY, title.getType());
+            }
             this.titles = addTo(titles, title);
         }
         return this;
@@ -1013,7 +1015,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject addTitle(@NonNull String title, @NonNull OwnerType owner, @NonNull TextualType type) {
-        removeTitle(OwnerType.TEMPORARY, type);
+        if (owner != OwnerType.TEMPORARY) {
+            removeTitle(OwnerType.TEMPORARY, type);
+        }
         final Title existingTitle = findTitle(owner, type);
         if (existingTitle != null) {
             existingTitle.set(title);
@@ -1056,7 +1060,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Override
     public MediaObject addDescription(Description description) {
         if (description != null) {
-            removeDescription(OwnerType.TEMPORARY, description.getType());
+            if (description.getOwner() != OwnerType.TEMPORARY) {
+                removeDescription(OwnerType.TEMPORARY, description.getType());
+            }
             this.descriptions = addTo(descriptions, description);
         }
         return this;
@@ -1092,7 +1098,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Override
     public MediaObject addDescription(@Nullable String description, @NonNull OwnerType owner, @NonNull TextualType type) {
         if (description != null) {
-            removeDescription(OwnerType.TEMPORARY, type);
+            if (owner != OwnerType.TEMPORARY) {
+                removeDescription(OwnerType.TEMPORARY, type);
+            }
             final Description existingDescription = findDescription(owner, type);
 
             if (existingDescription != null) {
