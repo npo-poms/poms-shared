@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -57,6 +59,7 @@ public final class GroupUpdate extends MediaUpdate<Group> {
 
     private GroupType groupType;
 
+    @Setter
     private Boolean ordered = true;
 
 
@@ -133,10 +136,6 @@ public final class GroupUpdate extends MediaUpdate<Group> {
     @XmlAttribute
     public Boolean isOrdered() {
         return ordered;
-    }
-
-    public void setOrdered(Boolean ordered) {
-        this.ordered = ordered;
     }
 
 
