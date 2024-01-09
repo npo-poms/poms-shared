@@ -9,12 +9,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.XmlValued;
 import nl.vpro.domain.media.bind.AspectRatioToString;
+import nl.vpro.i18n.Displayable;
 
 import static org.meeuw.math.IntegerUtils.gcd;
 
 @JsonSerialize(using = AspectRatioToString.Serializer.class)
 @JsonDeserialize(using = AspectRatioToString.Deserializer.class)
-public enum AspectRatio implements XmlValued {
+public enum AspectRatio implements XmlValued, Displayable {
 
     @XmlEnumValue("4:3")
     _4x3(4, 3),
@@ -23,10 +24,14 @@ public enum AspectRatio implements XmlValued {
     _16x9(16, 9),
 
     @XmlEnumValue("xCIF")
-    _xCIF(352, 288) {
+    _xCIF(352, 288) { // == 11x9
         @Override
         public String toString() {
             return "xCIF";
+        }
+        @Override
+        public boolean display() {
+            return false;
         }
     },
 
@@ -41,7 +46,7 @@ public enum AspectRatio implements XmlValued {
     private final int h;
 
     AspectRatio(int w, int h) {
-        int gcd = (int) gcd(w, h);
+        int gcd = gcd(w, h);
         this.w = w / gcd;
         this.h = h / gcd;
     }
@@ -77,6 +82,11 @@ public enum AspectRatio implements XmlValued {
     @Override
     public String toString() {
         return w + ":" + h;
+    }
+
+    @Override
+    public String getDisplayName() {
+        return toString();
     }
 
 }
