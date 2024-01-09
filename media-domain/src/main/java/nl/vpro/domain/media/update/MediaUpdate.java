@@ -74,6 +74,7 @@ import nl.vpro.xml.bind.*;
  * @see MediaObject
  */
 
+@SuppressWarnings("LombokSetterMayBeUsed")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j

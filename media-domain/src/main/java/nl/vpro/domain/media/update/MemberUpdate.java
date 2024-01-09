@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 import javax.xml.bind.annotation.*;
@@ -16,6 +17,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberUpdateType")
 @XmlRootElement(name = "memberUpdate")
+@EqualsAndHashCode
 public class MemberUpdate {
 
     @Setter
