@@ -29,10 +29,9 @@ public interface EntityType {
 
         AllMedia(MediaType type) {
             this.mediaType = type;
-
         }
 
-        public static AllMedia valueOf(Class type) {
+        public static AllMedia valueOf(Class<?> type) {
             if (nl.vpro.domain.media.Program.class.isAssignableFrom(type)) return program;
             if (ProgramUpdate.class.isAssignableFrom(type)) return program;
             if (nl.vpro.domain.media.Group.class.isAssignableFrom(type)) return group;
