@@ -52,6 +52,8 @@ public class Roles {
 
     /**
      * An authority may do very specific things, like creating broadcasts for radio channels. See {@link nl.vpro.domain.media.update.UpdateSupplier}.
+     * <p>
+     * Basically it is a superuser too, but it may be restricted to certain aspects.
      */
     public static final String AUTHORITY = MEDIA + "AUTHORITY";
     public static final String AUTHORITY_ROLE = ROLE + AUTHORITY;
