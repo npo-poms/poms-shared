@@ -35,7 +35,7 @@ public enum UpdateSupplier {
     PREPR(IdType.PREPR),
 
     /**
-     * @since 7.10 (using web services earlies)
+     * @since 7.10 (using web services earlier)
      */
     PROMO(null);
 
