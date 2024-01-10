@@ -214,7 +214,39 @@ public class MediaObjectJsonSchemaTest {
         String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
+    }
 
+    @Test
+    public void testUnmarshalPredictions() throws JsonProcessingException {
+        String input = """
+            {
+              "objectType" : "program",
+              "mid" : "MID_123",
+              "workflow" : "FOR_PUBLICATION",
+              "sortDate" : 1425596400000,
+              "creationDate" : 1425596400000,
+              "lastModified" : 1425600000000,
+              "embeddable" : true,
+              "predictions" : [ {
+                  "state" : "REALIZED",
+                  "platform" : "INTERNETVOD"
+                } ],
+              "locations" : [ {
+                "programUrl" : "https://www.vpro.nl",
+                "avAttributes" : {
+                  "avFileFormat" : "UNKNOWN"
+                },
+                "owner" : "BROADCASTER",
+                "creationDate" : 1636131600000,
+                "workflow" : "PUBLISHED",
+                "platform" : "INTERNETVOD"
+              } ],
+              "publishDate" : 1425603600000
+            }
+        """;
+        Program program = Jackson2Mapper.getLenientInstance().readerFor(Program.class).readValue(input);
+        assertThat(program.getPredictions()).hasSize(1);
+        assertThat(program.getPredictionsForXml()).hasSize(1);
     }
 
     @Test
