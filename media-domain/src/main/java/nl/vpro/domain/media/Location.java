@@ -231,6 +231,7 @@ public class Location extends PublishableObject<Location>
 
     public static class Builder implements EmbargoBuilder<Builder> {
 
+
     }
     /**
      * Unset some default values, to ensure that round tripping will result same object
@@ -259,7 +260,8 @@ public class Location extends PublishableObject<Location>
         Instant publishStop,
         Workflow workflow,
         Instant creationDate,
-        Long byteSize
+        Long byteSize,
+        long id
     ) {
         this(programUrl, owner == null ? OwnerType.BROADCASTER : owner, avAttributes, duration, platform);
 
@@ -278,6 +280,7 @@ public class Location extends PublishableObject<Location>
         // doesn't need its own
         this.workflow = requireNonNullElse(workflow, Workflow.PUBLISHED);
         this.creationInstant = creationDate == null ? Changeables.instant() : creationDate;
+        this.id = id;
     }
 
     public Location(Location source) {
