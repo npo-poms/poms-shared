@@ -261,7 +261,7 @@ public class Location extends PublishableObject<Location>
         Workflow workflow,
         Instant creationDate,
         Long byteSize,
-        long id
+        Long id
     ) {
         this(programUrl, owner == null ? OwnerType.BROADCASTER : owner, avAttributes, duration, platform);
 
