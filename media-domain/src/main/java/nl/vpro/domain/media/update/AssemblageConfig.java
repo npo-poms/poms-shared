@@ -165,6 +165,10 @@ public class AssemblageConfig implements Serializable {
     Function<MediaObject, Optional<String>> publishImmediately = Functions.always(Optional.empty());
 
 
+    @lombok.Builder.Default
+    Predicate<MediaObject> implicitUndelete = alwaysTrue();
+
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     transient SimpleLogger logger;
@@ -228,6 +232,7 @@ public class AssemblageConfig implements Serializable {
             markForDeleteOnly,
             deleteBroadcasters,
             publishImmediately,
+            implicitUndelete,
             logger);
     }
 
