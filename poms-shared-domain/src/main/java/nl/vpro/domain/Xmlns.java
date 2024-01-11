@@ -64,7 +64,7 @@ public final class Xmlns {
 
 
     public static final String MEDIA_SUBTITLES_NAMESPACE = "urn:vpro:media:subtitles:2009";
-    public static final URL MEDIA_SUBTITLES_XSD = getResource("/schema/urn_vpro_media_subtitles_2009.xsd");
+    public static final URL MEDIA_SUBTITLES_XSD = getResource("/xsds/media_subtitles_2009.xsd");
 
     public static final String PAGE_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:page:2013";
     public static final URL    PAGE_CONSTRAINT_XSD = getResource("/xsds/api_constraint_page_2013.xsd");
