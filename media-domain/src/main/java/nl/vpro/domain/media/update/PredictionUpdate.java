@@ -8,10 +8,14 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.media.*;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -31,7 +35,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlRootElement(name = "prediction")
 @lombok.Builder
 @lombok.AllArgsConstructor
-public class PredictionUpdate implements Comparable<PredictionUpdate> {
+public class PredictionUpdate implements Comparable<PredictionUpdate>, MutableEmbargo {
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -93,5 +97,29 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
     @Override
     public int compareTo(PredictionUpdate o) {
         return platform.compareTo(o.getPlatform());
+    }
+
+    @Override
+    public Instant getPublishStartInstant() {
+        return publishStart;
+    }
+
+    @Override
+    public Instant getPublishStopInstant() {
+        return publishStop;
+    }
+
+    @NonNull
+    @Override
+    public PredictionUpdate setPublishStartInstant(@Nullable Instant publishStart) {
+        setPublishStart(publishStart);
+        return this;
+    }
+
+    @NonNull
+    @Override
+    public PredictionUpdate setPublishStopInstant(@Nullable Instant publishStop) {
+        setPublishStop(publishStop);
+        return this;
     }
 }
