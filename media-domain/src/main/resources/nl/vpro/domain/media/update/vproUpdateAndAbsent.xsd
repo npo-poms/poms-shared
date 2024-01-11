@@ -3,4 +3,5 @@
 >
   <xs:include schemaLocation="../absentnamespace.xsd"/>
   <xs:import namespace="urn:vpro:media:update:2009" schemaLocation="vproMediaUpdate.xsd"/>
+  <xs:import namespace="urn:vpro:media:subtitles:2009" schemaLocation="/xsds/urn_vpro_media_subtitles_2009.xsd" />
 </xs:schema>
