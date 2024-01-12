@@ -12,6 +12,7 @@ import javax.ws.rs.core.*;
 
 import nl.vpro.domain.page.PageIdMatch;
 import nl.vpro.domain.page.update.PageUpdate;
+import nl.vpro.domain.page.update.PageUpdateList;
 import nl.vpro.jmx.Description;
 
 /**
@@ -40,6 +41,15 @@ public interface PageUpdateRestService {
         @NotNull @Valid PageUpdate update,
         @QueryParam(WAIT) Boolean wait
     );
+
+
+    @POST
+    @Path("")
+    Response multiSave(
+        @NotNull @Valid PageUpdateList update,
+        @QueryParam(WAIT) Boolean wait
+    );
+
 
     @DELETE
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
