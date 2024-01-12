@@ -53,7 +53,7 @@ public interface PageUpdateRestService {
     @DELETE
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("")
-    Response delete(
+    DeleteResult delete(
         @QueryParam("url") @NotNull String url,
         @QueryParam("batch")  Boolean batch,
         @QueryParam("max") Integer max,
