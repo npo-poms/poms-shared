@@ -53,7 +53,7 @@ public class DeleteResultTest {
     }
 
     @Test
-    public void xmlWithUnCpompleteFeuture() {
+    public void xmlWithUnCompleteFuture() {
         DeleteResult result = DeleteResult.builder()
             .count(100)
             .duration(Duration.ofMillis(123))
