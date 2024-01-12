@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.util.*;
 import java.util.stream.Stream;
 
+import javax.validation.Valid;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
@@ -49,7 +50,7 @@ public class XmlCollection<T> implements Iterable<T> , IntegerVersionSpecific {
     protected IntegerVersion version;
 
     @XmlAnyElement(lax = true)
-    Collection<T> list;
+    Collection<@Valid T> list;
 
     public XmlCollection() {
 
