@@ -62,9 +62,11 @@
     <module>media-nep</module>
     <module>media-sourcingservice</module>
     <module>media-projectm</module>
-    <module>media-nebo</module>
     <module>media-npo</module>
     <module>media-tva</module>
+    <!--
+    <module>media-nebo</module>
+    -->
 
 
   </modules>

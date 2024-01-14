@@ -185,7 +185,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         @Nullable Instant from,
         @Nullable Long limit) throws NEPException {
         final int batchSize = pageSize;
-        URIBuilder builder = null;
+        URIBuilder builder;
         try {
             builder = new URIBuilder(getWorkflowsEndPoint());
         } catch (URISyntaxException e) {

@@ -64,6 +64,7 @@ public final class Xmlns {
 
 
     public static final String MEDIA_SUBTITLES_NAMESPACE = "urn:vpro:media:subtitles:2009";
+    public static final URL MEDIA_SUBTITLES_XSD = getResource("/xsds/media_subtitles_2009.xsd");
 
     public static final String PAGE_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:page:2013";
     public static final URL    PAGE_CONSTRAINT_XSD = getResource("/xsds/api_constraint_page_2013.xsd");
@@ -86,9 +87,9 @@ public final class Xmlns {
 
     public static final String NEP_NOTIFY_NAMESPACE = "urn:vpro:media:notify:2017";
 
-    public static final QName NOTIFY = new QName(Xmlns.NEP_NOTIFY_NAMESPACE, "notify");
+    public static final QName NOTIFY                = new QName(Xmlns.NEP_NOTIFY_NAMESPACE, "notify");
 
-    public static final QName NEP_STREAMSTATUS = new QName(null, "streamstatus");
+    public static final QName NEP_STREAMSTATUS      = new QName(null, "streamstatus");
     public static final QName NEP_STREAMSTATUS_PRID = new QName(null, "prid");
 
     public static final String GTAA_NAMESPACE = "urn:vpro:gtaa:2017";
