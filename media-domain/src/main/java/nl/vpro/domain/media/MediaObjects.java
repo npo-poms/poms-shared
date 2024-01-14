@@ -48,6 +48,7 @@ import static nl.vpro.domain.media.support.Workflow.*;
  * See {@link TextualObjects}, and {@link Embargos} for methods like this (because media objects are {@link TextualObject} and {@link MutableEmbargo}
  * @since 1.5
  */
+@SuppressWarnings("UnusedReturnValue")
 @Slf4j
 public class MediaObjects {
 
@@ -576,6 +577,11 @@ public class MediaObjects {
         }
     }
 
+    /**
+     * If the media object is not yet deleted, it will be marked {@link Worklow#FOR_DELETION} and the reason will be appended.
+     * If the object is already {@link Workflow#DELETES} nothing will happen.
+     */
+    @SuppressWarnings("UnusedReturnValue")
     public static boolean markForDeletionIfNeeded(
         @NonNull MediaObject media,
         @Pattern(regexp= "[a-z, ]+", flags = {Pattern.Flag.CASE_INSENSITIVE}) String reason) {
@@ -984,7 +990,7 @@ public class MediaObjects {
             }
         }
         // Not directly found, so it is indirect
-        List<MemberRef> proposal = null; // we want the shortest
+        @Nullable List<MemberRef> proposal = null; // we want the shortest
         for (MemberRef ref : getMemberRefs(child)) {
             MediaObject c = descendants.get(ref.getMidRef());
             if (c != null) {

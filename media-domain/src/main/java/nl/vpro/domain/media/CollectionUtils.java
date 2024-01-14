@@ -127,7 +127,7 @@ public class CollectionUtils {
 
     /**
      * Like {@link Collection#removeIf(Predicate)} but returns the number of removed items.
-     * TODO it seems odd that we would be the first to wan this? Guava?
+     * TODO it seems odd that we would be the first to want this? Guava?
      * @since 7.10
      */
     public static <E> int removeIf(Collection<E> collection, Predicate<? super E> filter) {
