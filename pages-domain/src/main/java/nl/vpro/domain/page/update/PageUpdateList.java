@@ -5,11 +5,13 @@ import java.util.*;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 @XmlRootElement(name = "pages")
 public class PageUpdateList implements Iterable<PageUpdate> {
 
     @XmlElement(name = "page")
-    private Collection<@Valid PageUpdate> list;
+    private Collection<@Valid @NonNull PageUpdate> list;
 
 
     public PageUpdateList(){
@@ -29,6 +31,7 @@ public class PageUpdateList implements Iterable<PageUpdate> {
     }
 
     @Override
+    @NonNull
     public Iterator<PageUpdate> iterator() {
         return list.iterator();
     }
