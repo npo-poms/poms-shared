@@ -161,6 +161,7 @@ public abstract class Mappings implements BiFunction<String, SchemaType, File>, 
         }
         if (!fileWithDocumentation.exists()) {
             Class<?>[] classes = MAPPING.get(namespace);
+
             if (classes == null) {
                 throw new NotFoundException(namespace, "No classes found for " + namespace);
             }
