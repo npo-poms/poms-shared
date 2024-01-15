@@ -463,7 +463,7 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return new ToStringBuilder(this)
             .appendSuper(super.toString())
             .append("owner", owner)

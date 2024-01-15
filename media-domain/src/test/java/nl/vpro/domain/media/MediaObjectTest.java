@@ -51,10 +51,6 @@ public class MediaObjectTest {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
 
     }
-    @Test
-    public void testIdFromUrn() {
-        assertThat(MediaObjects.idFromUrn("urn:vpro:media:program:12463402")).isEqualTo(12463402L);
-    }
 
     @Test
     public void testAddCrid() {

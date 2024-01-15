@@ -119,7 +119,7 @@ public class CollectionUtils {
      *
      * @since 7.2
      */
-    public static <P> boolean inCollection(Collection<P> col, P element) {
+    public static <P> boolean inCollection(@NonNull Collection<@NonNull P> col, @Nullable P element) {
         return element != null && col.contains(element);
     }
 

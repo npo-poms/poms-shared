@@ -825,7 +825,7 @@ public class Location extends PublishableObject<Location>
     }
 
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
             .append("id", id)
             .append("format", avAttributes != null ? avAttributes.getAvFileFormat() : null)
