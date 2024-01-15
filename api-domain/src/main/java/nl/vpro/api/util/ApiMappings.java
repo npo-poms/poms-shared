@@ -32,10 +32,10 @@ import static nl.vpro.domain.Xmlns.*;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
+@Getter
 @Slf4j
 public class ApiMappings extends Mappings {
 
-    @Getter
     final URI pomsLocation;
 
     @Inject
