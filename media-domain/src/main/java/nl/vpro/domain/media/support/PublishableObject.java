@@ -18,14 +18,15 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.*;
-import nl.vpro.domain.media.CollectionUtils;
 import nl.vpro.domain.media.TrackableObject;
 import nl.vpro.domain.validation.ValidEmbargo;
 import nl.vpro.validation.PomsValidatorGroup;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static nl.vpro.domain.media.CollectionUtils.inCollection;
 import static nl.vpro.domain.media.support.Workflow.WITH_MEDIA_ACTIVATION;
 
 /**
@@ -143,7 +144,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
     public boolean isActivation(Instant now) {
-        return isPublishable(now) && CollectionUtils.inCollection(WITH_MEDIA_ACTIVATION, workflow);
+        return isPublishable(now) && inCollection(WITH_MEDIA_ACTIVATION, workflow);
     }
 
     public boolean isDeactivation(Instant now) {
@@ -173,10 +174,11 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
     public boolean isDeleted() {
-        return Workflow.DELETES.contains(workflow);
+        return inCollection(Workflow.DELETES, workflow);
     }
 
     @Override
+    @NonNull
     public String toString() {
         return new ToStringBuilder(this)
             .appendSuper(super.toString())

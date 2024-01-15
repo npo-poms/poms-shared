@@ -66,6 +66,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @XmlEnum
     @XmlType(name = "predictionStateEnum")
+    @Getter
     public enum State implements Displayable {
 
         /**
@@ -80,7 +81,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         REALIZED("Gerealiseerd"),
         REVOKED("Teruggetrokken");
 
-        @Getter
         private final String displayName;
 
         State(String displayName) {
@@ -88,7 +88,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         }
 
 
-        public static State of(Embargo embargo) {
+        public static State of(@NonNull Embargo embargo) {
             final Instant instant = instant();
             if (embargo.inPublicationWindow(instant) ) {
                 return REALIZED;

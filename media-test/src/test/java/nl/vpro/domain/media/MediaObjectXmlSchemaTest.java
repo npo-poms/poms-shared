@@ -281,7 +281,17 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testPredictions() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><prediction state=\"REVOKED\">INTERNETVOD</prediction><locations/><images/><scheduleEvents/><segments/></program>";
+        String expected = """
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <program embeddable="true"  xmlns="urn:vpro:media:2009">
+           <credits/>
+           <prediction state="REVOKED">INTERNETVOD</prediction>
+           <locations/>
+           <images/>
+           <scheduleEvents/>
+           <segments/>
+        </program>
+        """;
 
         Program program = program().lean().build();
 
@@ -299,8 +309,7 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(program);
 
-        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.hasDifferences(), diff.toString() + " " + actual);
+        assertThatXml(actual).isSimilarTo(expected);
     }
 
     @Test

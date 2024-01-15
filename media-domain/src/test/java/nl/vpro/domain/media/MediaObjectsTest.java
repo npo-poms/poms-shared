@@ -56,6 +56,12 @@ public class MediaObjectsTest {
     }
 
     @Test
+    public void testIdFromUrn() {
+        assertThat(MediaObjects.idFromUrn("urn:vpro:media:program:12463402")).isEqualTo(12463402L);
+    }
+
+
+    @Test
     public void sortDate() {
         Program program = new Program();
         assertThat(Math.abs(MediaObjects.getSortInstant(program).toEpochMilli() - clock().millis())).isLessThan(10000);

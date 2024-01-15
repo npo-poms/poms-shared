@@ -22,7 +22,7 @@ import nl.vpro.domain.constraint.LocalizedString;
 import nl.vpro.domain.gtaa.Scheme;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.page.Page;
-import nl.vpro.domain.page.update.PageUpdate;
+import nl.vpro.domain.page.update.*;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesType;
 
@@ -64,7 +64,7 @@ public class ApiMappings extends Mappings {
             MediaResult.class
         });
         MAPPING.put(PAGE_NAMESPACE, new Class[]{Page.class});
-        MAPPING.put(PAGEUPDATE_NAMESPACE, new Class[]{PageUpdate.class, ImageType.class});
+        MAPPING.put(PAGEUPDATE_NAMESPACE, new Class[]{PageUpdate.class, ImageType.class, SaveResultList.class, DeleteResult.class});
         MAPPING.put(Xmlns.MEDIA_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.media.Filter.class});
         MAPPING.put(Xmlns.PAGE_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.page.Filter.class});
         MAPPING.put(Xmlns.CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class,  LocalizedString.class,
