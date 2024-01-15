@@ -173,5 +173,13 @@
       <xs:enumeration value="DELETED"/>
     </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="pageIdMatch">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="URL"/>
+      <xs:enumeration value="CRID"/>
+      <xs:enumeration value="BOTH"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
 

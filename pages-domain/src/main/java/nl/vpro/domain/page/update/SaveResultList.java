@@ -1,22 +1,33 @@
 package nl.vpro.domain.page.update;
 
-import java.util.List;
+import java.util.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.media.update.collections.XmlCollection;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 @XmlSeeAlso(SaveResult.class)
 @XmlRootElement(name = "saveResults")
-public class SaveResultList extends XmlCollection<SaveResult> {
+public class SaveResultList implements Iterable<SaveResult> {
+
+    @XmlElement(name = "saveResult")
+    private Collection<@Valid @NonNull SaveResult> list;
+
 
     public SaveResultList(){
 
     }
 
     public SaveResultList(List<SaveResult> list) {
-        super(list);
+        this.list = list;
+    }
+
+
+    @Override
+    @NonNull
+    public Iterator<SaveResult> iterator() {
+        return list.iterator();
     }
 
 

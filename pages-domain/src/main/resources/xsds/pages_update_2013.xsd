@@ -5,9 +5,15 @@
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="https://poms.omroep.nl/schema/vproShared.xsd"/>
 
+  <xs:element name="deleteresult" type="tns:deleteResult"/>
+
   <xs:element name="image" type="tns:imageUpdateType"/>
 
   <xs:element name="page" type="tns:pageUpdateType"/>
+
+  <xs:element name="saveResult" type="tns:saveResult"/>
+
+  <xs:element name="saveResults" type="tns:saveResultList"/>
 
   <xs:complexType name="pageUpdateType">
     <xs:sequence>
@@ -106,6 +112,34 @@
         <xs:attribute name="type" type="xs:string" use="required"/>
         <xs:attribute name="broadcaster" type="xs:string" use="required"/>
         <xs:attribute name="uriRef" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="saveResultList">
+    <xs:sequence>
+      <xs:element ref="tns:saveResult" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="saveResult">
+    <xs:sequence>
+      <xs:element name="replaces" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="success" type="xs:boolean" use="required"/>
+    <xs:attribute name="creationDate" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="deleteResult">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="count" type="xs:int"/>
+        <xs:attribute name="notallowedCount" type="xs:int"/>
+        <xs:attribute name="alreadyDeletedCount" type="xs:int"/>
+        <xs:attribute name="success" type="xs:boolean" use="required"/>
+        <xs:attribute name="duration" type="xs:duration"/>
+        <xs:attribute name="match" type="page:pageIdMatch"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
