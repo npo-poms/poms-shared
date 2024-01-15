@@ -1364,7 +1364,7 @@ public class MediaObjects {
                      Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                      prediction.setState(Prediction.State.REVOKED);
                      onChange.accept(prevState, prediction);
-                     String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name());
+                     String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(Optional.ofNullable(prediction.getPlatform()).map(Platform::name).orElse("<NULL>"));
                      if (prediction.getPreviousState() == prediction.getState()) {
                          unappendReason(mediaObject, (r) -> r.equals(reason));
                      } else {
