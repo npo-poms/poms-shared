@@ -1,23 +1,23 @@
 package nl.vpro.domain.page.update;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.media.update.collections.XmlCollection;
-
-@XmlSeeAlso(PageUpdate.class)
 @XmlRootElement(name = "pages")
-public class PageUpdateList extends XmlCollection<PageUpdate> {
+public class PageUpdateList implements Iterable<PageUpdate> {
+
+    @XmlElement(name = "page")
+    private Collection<@Valid PageUpdate> list;
+
 
     public PageUpdateList(){
 
     }
 
     public PageUpdateList(List<PageUpdate> list) {
-        super(list);
+        this.list = list;
     }
 
     public static PageUpdateList of(List<PageUpdateBuilder> list) {
@@ -26,5 +26,10 @@ public class PageUpdateList extends XmlCollection<PageUpdate> {
 
     public static PageUpdateList of(PageUpdateBuilder... list) {
         return of(Arrays.asList(list));
+    }
+
+    @Override
+    public Iterator<PageUpdate> iterator() {
+        return list.iterator();
     }
 }
