@@ -5,8 +5,6 @@
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn_vpro_shared_2009.xsd"/>
 
-  <xs:import schemaLocation="absentnamespace.xsd"/>
-
   <xs:element name="deleteresult" type="tns:deleteResult"/>
 
   <xs:element name="image" type="tns:imageUpdateType"/>
@@ -127,11 +125,9 @@
   </xs:complexType>
 
   <xs:complexType name="saveResultList">
-    <xs:complexContent>
-      <xs:extension base="collectionType">
-        <xs:sequence/>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence>
+      <xs:element ref="tns:saveResult" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="saveResult">
