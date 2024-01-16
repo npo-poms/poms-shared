@@ -492,7 +492,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Transient
     @Nullable
-    Collection<@NonNull @Valid Prediction> predictionsForXml;
+    transient Collection<@NonNull @Valid Prediction> predictionsForXml;
 
     @OneToMany(cascade = ALL, mappedBy = "mediaObject", orphanRemoval = true)
     @SortNatural
