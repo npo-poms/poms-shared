@@ -40,6 +40,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.annotations.Beta;
+import com.google.common.collect.Collections2;
 import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
@@ -491,7 +492,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Transient
     @Nullable
-    List<@NonNull @Valid Prediction> predictionsForXml;
+    transient Collection<@NonNull @Valid Prediction> predictionsForXml;
 
     @OneToMany(cascade = ALL, mappedBy = "mediaObject", orphanRemoval = true)
     @SortNatural
@@ -2070,7 +2071,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @NonNull
     public SortedSet<Prediction> getPredictions() {
         if (predictions == null) {
-            predictions = new TreeSet<>();
+            if (predictionsForXml != null) {
+                predictions = new TreeSet<>(predictionsForXml);
+            } else {
+                predictions = new TreeSet<>();
+            }
         }
 
 
@@ -2094,14 +2099,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * Implicitly create predictions for all platforms that have a location, but no prediction yet.
      */
     public void implicitPredictions() {
-        //
         final Map<Platform, List<Location>> locations = new HashMap<>();
         getLocations().stream()
             .filter(Location::hasPlatform)
             .filter(Location::isConsiderableForPublication)
-            .forEach(l -> {
-                locations.computeIfAbsent(l.getPlatform(), p -> new ArrayList<>()).add(l);
-            });
+            .forEach(l ->
+                locations.computeIfAbsent(
+                    l.getPlatform(),
+                    p -> new ArrayList<>()
+                ).add(l)
+            );
         for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
             findOrCreatePrediction(entry.getKey(), true, (created) -> {
                 for (Location l : entry.getValue()) {
@@ -2125,20 +2132,18 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlElement(name = "prediction")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("predictions")
-    protected List<Prediction> getPredictionsForXml() {
+    protected Collection<Prediction> getPredictionsForXml() {
         if (predictionsForXml == null) {
             implicitPredictions();
-            predictionsForXml = getPredictions().stream()
-                .filter(p -> p.isPlannedAvailability() && p.getState() != Prediction.State.NOT_ANNOUNCED)
-                .collect(Collectors.toList());
+            predictionsForXml = Collections2.filter(getPredictions(), p -> p.isPlannedAvailability() && p.getState() != Prediction.State.NOT_ANNOUNCED);
+
         }
         return predictionsForXml;
     }
 
     protected void setPredictionsForXml(List<Prediction> predictions) {
-        // called by jackson
-        this.predictions =  new TreeSet<>(predictions);
-        this.predictionsForXml = predictions;
+        // not call be jackson any more?
+        this.setPredictions(predictions);
     }
 
     /**
@@ -2232,9 +2237,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             prediction.setAuthority(Authority.USER);
             if (predictions == null) {
                 predictions = new TreeSet<>();
+                this.predictionsForXml = null;
             }
             this.predictions.add(prediction);
-            this.predictionsForXml = null;
             onCreate.accept(prediction);
         }
         return prediction;
@@ -3139,6 +3144,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
 
     @Override
+    @NonNull
     public final String toString() {
         String mainTitle;
         try {
