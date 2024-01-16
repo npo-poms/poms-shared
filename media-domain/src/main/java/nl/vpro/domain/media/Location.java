@@ -364,7 +364,10 @@ public class Location extends PublishableObject<Location>
     }
 
 
-
+    /**
+     * Defaulting version of {@link #headRequest(Duration)} (1 day)
+     * @since 7.10
+     */
     public boolean headRequest() {
         return headRequest(Duration.ofDays(1));
     }
@@ -373,6 +376,7 @@ public class Location extends PublishableObject<Location>
      * Executes a head request on the current location (if that seems possible), and updates some fields if needed
      * @since 7.10
      * @return Whether changes were made
+     * @param age The age of the last status change, if it is younger, no request will be made
      */
     public boolean headRequest(Duration age) {
         if (programUrl != null && isPublishable()) {
