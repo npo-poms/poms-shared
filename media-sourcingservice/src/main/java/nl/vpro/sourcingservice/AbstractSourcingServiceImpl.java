@@ -545,12 +545,9 @@ public abstract class AbstractSourcingServiceImpl implements SourcingService {
     }
 
     protected HttpRequest.Builder request(String path) {
-        String token = configuration.get().token();
-        if (token == null) {
-            throw new IllegalStateException();
-        }
         return HttpRequest.newBuilder()
-            .header("Authorization", "Bearer " + token)
+            .header("Authorization", "Bearer " +
+                Optional.ofNullable(configuration.get().token()).orElseThrow(() -> new IllegalStateException("No token configured")))
             .uri(URI.create(forPath(path)));
     }
 
