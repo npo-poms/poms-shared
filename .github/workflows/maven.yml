@@ -14,6 +14,7 @@ jobs:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest]
         java: [ 17 ]
+        # also check (once) on latest LTE (not 17 anymore)
         include:
           - os: ubuntu-latest
             java: 21
@@ -58,13 +59,13 @@ jobs:
           files: "**/target/surefire-reports/*.xml"
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2.11.0
+        uses: EnricoMi/publish-unit-test-result-action@v2.12.0
         if: always() && runner.os == 'Linux'
         with:
           junit_files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
       - name: Publish Unit Test Results (Windows)
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2.10.0
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2.12.0
         if: always()  && runner.os == 'Windows'
         with:
           junit_files: "**/target/surefire-reports/*.xml"
