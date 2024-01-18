@@ -108,7 +108,7 @@ public class AssemblageConfig implements Serializable {
     BiPredicate<MediaObject, AssemblageConfig> inferDurationFromScheduleEvents = biAlwaysFalse();
 
     @lombok.Builder.Default
-    boolean locationsUpdate = false;
+    boolean locationsUpdate = true;
 
     @lombok.Builder.Default
     Steal stealMids = Steal.NO;
