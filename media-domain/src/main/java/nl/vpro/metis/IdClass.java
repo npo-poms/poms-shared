@@ -12,10 +12,12 @@ public enum IdClass {
      * An ID form program object
      */
     PRID,
+
     /**
      * An ID for group (series) objects
      */
     SRID,
+
     /**
      * An ID for images.
      */
