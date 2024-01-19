@@ -160,7 +160,7 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
-    ) throws IOException;
+    );
 
     @POST
     @Path("{entity:(media|segment|program|group)}")
@@ -211,7 +211,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
-    ) throws IOException;
+    );
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id:.*}/image")
@@ -237,7 +237,7 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
 
-    ) throws IOException;
+    );
 
     @GET
     @Path("{entity:(media|program|group|segment)}/{id}/members")
@@ -250,7 +250,7 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner,
         @QueryParam(DELETES) Boolean  deleted
-    ) throws IOException;
+    );
 
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}/members/full")
@@ -262,7 +262,7 @@ public interface MediaBackendRestService {
         @QueryParam(ORDER) @DefaultValue("ASC") final Pager.Direction order,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(DELETES) Boolean  deleted
-    ) throws IOException;
+    );
 
     @PUT
     @Path("{entity:(media|program|group|segment)}/{id:.*}/members")
@@ -318,7 +318,7 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner,
         @QueryParam(DELETES) Boolean  deleted
-    ) throws IOException;
+    );
 
     @GET
     @Path("group/{id:.*}/episodes/full")
@@ -329,7 +329,7 @@ public interface MediaBackendRestService {
         @QueryParam(ORDER) @DefaultValue("ASC") final Pager.Direction order,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(DELETES) Boolean  deleted
-    ) throws IOException;
+    );
 
     @PUT
     @Path("{entity:(media|group)}/{id:.*}/episodes")
@@ -348,7 +348,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(DELETES) Boolean  deleted
-    ) throws IOException;
+    );
 
     @POST
     @Path("program/{id:.*}/episodeOf")
