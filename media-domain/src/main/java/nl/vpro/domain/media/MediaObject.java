@@ -384,6 +384,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Nullable
     protected AVType avType = null;
 
+    @Setter
     @OneToOne(orphanRemoval = true, cascade = {ALL})
     protected AVAttributes avAttributes;
 
@@ -1345,10 +1346,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlElement
     public AVAttributes getAvAttributes() {
         return avAttributes;
-    }
-
-    public void setAvAttributes(AVAttributes avAttributes) {
-        this.avAttributes = avAttributes;
     }
 
     @XmlElement()

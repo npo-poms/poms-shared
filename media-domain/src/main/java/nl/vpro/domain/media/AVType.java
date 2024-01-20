@@ -12,12 +12,17 @@ import static nl.vpro.domain.media.MediaObjects.ANY_MEDIA;
 import static nl.vpro.domain.media.MediaObjects.GROUPS;
 
 
+/**
+ * Audio/Video type.
+ */
 @XmlEnum
 @XmlType(name = "avTypeEnum")
 public enum AVType implements Displayable, Predicate<Object> {
 
 
-
+    /**
+     * Representing media with no video.
+     */
     AUDIO(ANY_MEDIA) {
         @Override
         public String getDisplayName() {
@@ -32,6 +37,7 @@ public enum AVType implements Displayable, Predicate<Object> {
     },
 
     /**
+     * It is (as yet) unknown if the object will be {@link #VIDEO} or {@link #AUDIO}
      * @since 7.8
      */
     UNKNOWN(ANY_MEDIA) {
@@ -45,7 +51,7 @@ public enum AVType implements Displayable, Predicate<Object> {
         }
     },
     /**
-     * For groups this means that it contains both audio and video.
+     * For groups this means that its members can be both {@link #AUDIO audio} and {@link #VIDEO video}.
      */
     MIXED(GROUPS) {
         @Override

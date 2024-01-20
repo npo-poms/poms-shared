@@ -25,7 +25,7 @@ class AudioSourcingServiceImplITest {
 
     public static final Properties PROPERTIES = new Properties();
 
-    private static final String MID = "WO_VPRO_A20033640";
+    private static final String MID = "WO_VPRO_A20036163";
 
     static {
         try {

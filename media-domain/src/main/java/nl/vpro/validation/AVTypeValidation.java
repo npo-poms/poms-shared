@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Not all {@link nl.vpro.domain.media.AVType av-types} are valid for all {@link nl.vpro.domain.media.MediaObject mediaobjects}.
+ * Not all {@link nl.vpro.domain.media.AVType audio/video types} are valid for all {@link nl.vpro.domain.media.MediaObject mediaobjects}.
  *
  * @author Michiel Meeuwissen
  * @since 7.8
