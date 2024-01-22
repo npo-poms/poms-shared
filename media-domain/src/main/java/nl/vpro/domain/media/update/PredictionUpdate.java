@@ -62,6 +62,10 @@ public class PredictionUpdate implements Comparable<PredictionUpdate>, MutableEm
     public PredictionUpdate() {
     }
 
+    /**
+     * A very common case is to provide internetvod.
+     * @since 7.10
+     */
     public static PredictionUpdate internetvod() {
         return PredictionUpdate.builder()
             .platform(Platform.INTERNETVOD)
