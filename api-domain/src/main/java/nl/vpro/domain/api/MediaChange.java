@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Change;
 import nl.vpro.domain.PublicationReason;
-import nl.vpro.domain.media.CollectionUtils;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -119,7 +118,7 @@ public class MediaChange extends Change<MediaObject> {
             revision,
             MediaSince.mid(mid, since),
             media,
-            deleted == null ? media == null ? null : CollectionUtils.inCollection(Workflow.PUBLISHED_AS_DELETED, media.getWorkflow()) : deleted
+            deleted == null ? media == null ? null : Workflow.PUBLISHED_AS_DELETED.contains(media.getWorkflow()) : deleted
         );
         setPublishDate(MediaSince.instant(publishDate, since));
         setTail(tail);

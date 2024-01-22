@@ -3158,7 +3158,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             if (thisId != null) {
                 id = ", id=[" + this.getId() + "]"; // bracket then signal that not yet persistent
             } else {
-                if (inCollection(Workflow.API, workflow)) {
+                if (Workflow.API.contains(workflow)) {
                     // probably testing ES or so.
                     id = "";
                 } else {
