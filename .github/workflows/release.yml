@@ -30,7 +30,7 @@ jobs:
           token: '${{ secrets.GITHUB_TOKEN  }}'
       - name: Release
         run: |
-          mvn --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare
+          mvn -U --batch-mode  -Darguments=-DskipTests  -DpushChanges=false release:prepare
           git push --atomic -v --follow-tags
           mvn -Pdeploy,ossrh --batch-mode -Darguments=-DskipTests release:perform
         env:
