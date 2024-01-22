@@ -79,14 +79,12 @@ public class MediaSince implements Comparable<MediaSince> {
             .thenComparing(MediaSince::getMid, Comparator.nullsFirst(naturalOrder())).compare(this, o);
     }
 
-
     /**
      * @since 7.11
      */
     public boolean isAfter(MediaSince other) {
         return compareTo(other) > 0;
     }
-
 
     /**
      * @since 7.11
