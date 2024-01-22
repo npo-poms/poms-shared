@@ -232,7 +232,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     }
 
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return new ToStringBuilder(this)
             .appendSuper(super.toString())
             .append("id", id)
