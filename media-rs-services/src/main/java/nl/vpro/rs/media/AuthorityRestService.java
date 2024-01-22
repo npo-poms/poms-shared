@@ -3,7 +3,6 @@ package nl.vpro.rs.media;
 import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
 
@@ -41,7 +40,7 @@ public interface AuthorityRestService {
     @DELETE
     @Path("{supplier}/{id:.*}")
     @Produces(MediaType.TEXT_PLAIN)
-    Response deleteMedia(
+    String deleteMedia(
         @PathParam("supplier") final UpdateSupplier supplier,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(ERRORS) String errors
@@ -51,7 +50,7 @@ public interface AuthorityRestService {
     @POST
     @Path("{supplier}")
     @Produces(MediaType.TEXT_PLAIN)
-    Response update(
+    String update(
         @PathParam("supplier") final UpdateSupplier supplier,
         @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(ERRORS) String errors,
