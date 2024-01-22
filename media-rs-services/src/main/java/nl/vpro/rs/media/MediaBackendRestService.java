@@ -347,7 +347,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(DELETES) Boolean  deleted
-    ) throws IOException;
+    );
 
     @POST
     @Path("program/{id:.*}/episodeOf")
