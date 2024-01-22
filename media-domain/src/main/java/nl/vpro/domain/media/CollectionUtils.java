@@ -119,15 +119,46 @@ public class CollectionUtils {
      *
      * @since 7.2
      */
-    public static <P> boolean inCollection(Collection<P> col, P element) {
+    public static <P> boolean inCollection(@NonNull Collection<@NonNull P> col, @Nullable P element) {
         return element != null && col.contains(element);
+    }
+
+
+    /**
+     * Wraps the given set in a new set, with the same elements.
+     * <p>
+     * The only difference will be that its {@link Set#contains(Object)} will simply return {@code false} if the argument is {@code null}.
+     * @since 7.10
+     */
+    public static <P> Set<@NonNull P> nullSafeSet(@NonNull final Set<@NonNull P> set) {
+        return new AbstractSet<P>() {
+            @Override
+            public @NonNull Iterator<P> iterator() {
+                return set.iterator();
+            }
+
+            @Override
+            public int size() {
+                return set.size();
+            }
+
+            @Override
+            public boolean add(@NonNull P o) {
+                return set.add(o);
+            }
+
+            @Override
+            public boolean contains(@Nullable Object o) {
+                return o != null && set.contains(o);
+            }
+        };
     }
 
 
 
     /**
      * Like {@link Collection#removeIf(Predicate)} but returns the number of removed items.
-     * TODO it seems odd that we would be the first to wan this? Guava?
+     * TODO it seems odd that we would be the first to want this? Guava?
      * @since 7.10
      */
     public static <E> int removeIf(Collection<E> collection, Predicate<? super E> filter) {

@@ -19,12 +19,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.XmlValued;
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.MediaObject;
-import nl.vpro.domain.media.TrackableObject;
+import nl.vpro.domain.media.*;
 import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 import static java.util.Collections.unmodifiableSet;
+import static nl.vpro.domain.media.CollectionUtils.nullSafeSet;
 
 /**
  * <p>The workflow status for publishable items.</p>
@@ -95,79 +95,79 @@ public enum Workflow implements Displayable, XmlValued {
 
 
 
-    public static final Set<Workflow> WITH_MEDIA_ACTIVATION = Set.of(
+    public static final Set<Workflow> WITH_MEDIA_ACTIVATION = nullSafeSet(Set.of(
         FOR_PUBLICATION,
         PARENT_REVOKED,
         REVOKED
-    );
+    ));
 
 
 
-    public static final Set<Workflow> PUBLICATIONS = Set.of(
+    public static final Set<Workflow> PUBLICATIONS = nullSafeSet(Set.of(
         PUBLISHED,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    );
+    ));
 
     /**
      * The workflows that are considered 'deleted'. I.e {@link #DELETED} and {@link #FOR_DELETION}
      */
-    public static final Set<Workflow> DELETES = Set.of(
+    public static final Set<Workflow> DELETES = nullSafeSet(Set.of(
         FOR_DELETION,
         DELETED
-    );
+    ));
 
 
     /**
-     * The workflows that are considered 'deleted' in the frontend. I.e {@link #DELETED} and {@link #FOR_DELETION},
+     * The workflows that are considered 'deleted' in the frontend. I.e. {@link #DELETED} and {@link #FOR_DELETION},
      * but also {@link #REVOKED}, {@link #PARENT_REVOKED} and {@link #MERGED}.
      */
-    public static final Set<Workflow> PUBLISHED_AS_DELETED = Set.of(
+    public static final Set<Workflow> PUBLISHED_AS_DELETED = nullSafeSet(Set.of(
         FOR_DELETION,
         DELETED,
         MERGED,
         PARENT_REVOKED,
         REVOKED
-    );
+    ));
 
     /**
      * The workflows that are allowable in ES. So not the 'FOR_' workflows.
      */
-    public static final Set<Workflow> API = Set.of(
+    public static final Set<Workflow> API = nullSafeSet(Set.of(
         DELETED,
         MERGED,
         PARENT_REVOKED,
         REVOKED,
         PUBLISHED
-    );
+    ));
 
     public static final Set<Workflow> AS_DELETED_IN_API =
-        PUBLISHED_AS_DELETED.stream()
+        nullSafeSet(PUBLISHED_AS_DELETED.stream()
             .filter(Workflow::isPublishable)
-            .collect(Collectors.toUnmodifiableSet()
-    );
+            .collect(Collectors.toUnmodifiableSet())
+        );
 
 
-    public static final Set<Workflow> REVOKES = Set.of(
+    public static final Set<Workflow> REVOKES = nullSafeSet(Set.of(
         FOR_DELETION,
         DELETED,
         REVOKED,
         PARENT_REVOKED,
         MERGED
-    );
+    ));
 
     public static final Set<Workflow> REVOKES_OR_IGNORE;
     static {
         Set<Workflow> list = new TreeSet<>(REVOKES);
         list.add(Workflow.IGNORE);
-        REVOKES_OR_IGNORE = unmodifiableSet(list);
+        REVOKES_OR_IGNORE = nullSafeSet(unmodifiableSet(list));
     }
 
-    public static final Set<Workflow> NEEDWORK = Set.of(
+    public static final Set<Workflow> NEEDWORK = nullSafeSet(Set.of(
         FOR_DELETION,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    );
+    ));
 
     private final String description;
 
