@@ -116,8 +116,11 @@ public class CollectionUtils {
      * <p>
      * Mainly because link java 9's Immutable lists resulting from things as {@link List#of()} throw exception if called with {@code null}
      * (Things like {@link Collections#unmodifiableList(List)} didn't behave like that).
+     * <p>
+     * Note that the sets in e.g. {@link nl.vpro.domain.media.support.Workflow} are not wrapped with {@link #nullSafeSet(Set)} and don't need this anymore.
      *
      * @since 7.2
+     * @see #nullSafeSet(Set)
      */
     public static <P> boolean inCollection(@NonNull Collection<@NonNull P> col, @Nullable P element) {
         return element != null && col.contains(element);

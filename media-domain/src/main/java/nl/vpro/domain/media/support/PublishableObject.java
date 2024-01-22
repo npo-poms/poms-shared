@@ -26,7 +26,6 @@ import nl.vpro.domain.validation.ValidEmbargo;
 import nl.vpro.validation.PomsValidatorGroup;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static nl.vpro.domain.media.CollectionUtils.inCollection;
 import static nl.vpro.domain.media.support.Workflow.WITH_MEDIA_ACTIVATION;
 
 /**
@@ -144,7 +143,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
     public boolean isActivation(Instant now) {
-        return isPublishable(now) && inCollection(WITH_MEDIA_ACTIVATION, workflow);
+        return isPublishable(now) && WITH_MEDIA_ACTIVATION.contains(workflow);
     }
 
     public boolean isDeactivation(Instant now) {
@@ -174,7 +173,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
     public boolean isDeleted() {
-        return inCollection(Workflow.DELETES, workflow);
+        return Workflow.DELETES.contains(workflow);
     }
 
     @Override

@@ -78,7 +78,7 @@ public abstract class PublishableListItem<S extends PublishableListItem<S>> impl
 
     @XmlAttribute(name = "deleted")
     public Boolean getDeletedAttributeValue() {
-        return CollectionUtils.inCollection(Workflow.DELETES, workflow) ? Boolean.TRUE : null;
+        return Workflow.DELETES.contains(workflow) ? Boolean.TRUE : null;
     }
 
     public void setDeletedAttributeValue(Boolean deleted) {

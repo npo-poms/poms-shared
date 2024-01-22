@@ -68,6 +68,7 @@ import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
 import static nl.vpro.domain.media.MediaObjectFilters.*;
+import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
 
 /**
  * Base objects for programs, groups and segments.
@@ -3167,7 +3168,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             }
         }
         return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
-            (! inCollection(Workflow.PUBLICATIONS, workflow) ? workflow + ":" : "" ),
+            (! PUBLICATIONS.contains(workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
             this.getMid() == null ? ("<no mid @" + superHashCode() + ">") : "\"" + this.getMid() + "\"",
             mainTitle,
