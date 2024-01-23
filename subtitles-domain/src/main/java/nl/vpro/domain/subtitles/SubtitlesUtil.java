@@ -74,18 +74,16 @@ public class SubtitlesUtil {
         Duration offset = subtitles.getOffset();
 
         Function<TimeLine, Duration> offsetGuesser = guessOffset ? new DefaultOffsetGuesser(subtitles.getCreationInstant()) : timeLine -> Duration.ZERO;
-        switch (content.getFormat()) {
-            case TT888:
-                return ParseResult.of(TT888.parse(mid, offset, offsetGuesser, content.asStream(), getCharset(content.getCharset(),  TT888.CHARSET)));
-            case WEBVTT:
-                return WEBVTTandSRT.parseWEBVTT(mid, offset, content.asStream(), getCharset(content.getCharset(), WEBVTTandSRT.VTT_CHARSET));
-            case SRT:
-                return ParseResult.of(WEBVTTandSRT.parseSRT(mid, offset, content.asStream(), getCharset(content.getCharset(), WEBVTTandSRT.SRT_CHARSET)));
-            case EBU:
-                return ParseResult.of(EBU.parse(mid, offset, offsetGuesser, content.asStream()));
-            default:
-                throw new IllegalArgumentException("Not supported format " + content.getFormat());
-        }
+        return switch (content.getFormat()) {
+            case TT888 ->
+                ParseResult.of(TT888.parse(mid, offset, offsetGuesser, content.asStream(), getCharset(content.getCharset(), TT888.CHARSET)));
+            case WEBVTT ->
+                WEBVTTandSRT.parseWEBVTT(mid, offset, content.asStream(), getCharset(content.getCharset(), WEBVTTandSRT.VTT_CHARSET));
+            case SRT ->
+                ParseResult.of(WEBVTTandSRT.parseSRT(mid, offset, content.asStream(), getCharset(content.getCharset(), WEBVTTandSRT.SRT_CHARSET)));
+            case EBU -> ParseResult.of(EBU.parse(mid, offset, offsetGuesser, content.asStream()));
+            default -> throw new IllegalArgumentException("Not supported format " + content.getFormat());
+        };
     }
 
 

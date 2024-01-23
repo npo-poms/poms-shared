@@ -88,12 +88,14 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     protected String mid;
 
 
+    @Setter
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute
     @Id
     private SubtitlesType type = SubtitlesType.CAPTION;
 
+    @Setter
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @Id
@@ -108,6 +110,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Duration offset;
 
+    @Setter
     @Column(nullable = false)
     private Integer cueCount;
 
@@ -314,16 +317,8 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
         return type;
     }
 
-    public void setType(SubtitlesType type) {
-        this.type = type;
-    }
-
     public Locale getLanguage() {
         return language;
-    }
-
-    public void setLanguage(Locale language) {
-        this.language = language;
     }
 
     @XmlAttribute
@@ -342,10 +337,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
             }
         }
         return cueCount;
-    }
-
-    public void setCueCount(Integer cueCount) {
-        this.cueCount = cueCount;
     }
 
     public SubtitlesMetadata getMetadata() {
