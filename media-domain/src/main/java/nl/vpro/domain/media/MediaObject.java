@@ -597,7 +597,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Setter(AccessLevel.PACKAGE)
     private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.NONE;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
     // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
     // also we got odd NPE's from PersistentBag otherwise.
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
