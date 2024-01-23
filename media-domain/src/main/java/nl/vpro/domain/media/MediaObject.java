@@ -262,6 +262,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Getter
     protected Integer version;
 
+    @Setter
     @ElementCollection
     @Column(name = "crids", nullable = false, unique = true) // TODO, rename to 'crid'.
     @OrderColumn(name = "list_index", nullable = false)
@@ -271,6 +272,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @StringList(maxLength = 255)
     protected List<@NotNull @CRID String> crids;
 
+    @Setter
     @ManyToMany
     @OrderColumn(name = "list_index",
         nullable = false)
@@ -292,6 +294,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<@NotNull  ThirdParty> thirdParties;
 
+    @Setter
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -300,6 +303,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected List<@NotNull PortalRestriction> portalRestrictions;
 
+    @Setter
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "mediaobject_id")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -357,6 +361,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @SortNatural
     protected SortedSet<@NotNull TargetGroups> targetGroups;
 
+    @Setter
     protected String source;
 
     @ElementCollection
@@ -389,6 +394,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @OneToOne(orphanRemoval = true, cascade = {ALL})
     protected AVAttributes avAttributes;
 
+    @Setter
     @Column(name = "releaseDate")
     protected Short releaseYear;
 
@@ -510,6 +516,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<@NotNull @Valid Relation> relations;
 
+    @Setter
     @OneToMany(
         orphanRemoval = true,
             mappedBy = "mediaObject",
@@ -558,6 +565,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Setter(AccessLevel.PROTECTED)
     protected String repubDestinations;
 
+    @Setter
     @Column(nullable = false)
     @JsonIgnore // Oh Jackson2...
     private Boolean locationAuthorityUpdate = false;
@@ -717,10 +725,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return crids;
     }
 
-    public void setCrids(List<@CRID String> crids) {
-        this.crids = crids;
-    }
-
     public MediaObject addCrid(@CRID String crid) {
         if (StringUtils.isNotBlank(crid)) {
             crid = crid.trim();
@@ -761,10 +765,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             broadcasters = new ArrayList<>();
         }
         return broadcasters;
-    }
-
-    public void setBroadcasters(List<Broadcaster> broadcasters) {
-        this.broadcasters = broadcasters;
     }
 
     public MediaObject addBroadcaster(@lombok.NonNull Broadcaster broadcaster) {
@@ -876,10 +876,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return this.portalRestrictions;
     }
 
-    public void setPortalRestrictions(List<PortalRestriction> portalRestrictions) {
-        this.portalRestrictions = portalRestrictions;
-    }
-
     public boolean removePortalRestriction(PortalRestriction restriction) {
         if (this.portalRestrictions != null) {
             return this.portalRestrictions.remove(restriction);
@@ -921,10 +917,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             geoRestrictions = new TreeSet<>();
         }
         return sorted(geoRestrictions);
-    }
-
-    public void setGeoRestrictions(Set<GeoRestriction> geoRestrictions) {
-        this.geoRestrictions = geoRestrictions;
     }
 
     @Nullable
@@ -1258,10 +1250,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return source;
     }
 
-    public void setSource(String source) {
-        this.source = source;
-    }
-
 
     /**
      * The production location
@@ -1352,10 +1340,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlElement()
     public Short getReleaseYear() {
         return releaseYear;
-    }
-
-    public void setReleaseYear(Short releaseYear) {
-        this.releaseYear = releaseYear;
     }
 
     @XmlElement()
@@ -2516,10 +2500,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return images;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
-
     @Nullable
     public Image getImage(Image image) {
         if (images != null) {
@@ -2662,10 +2642,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      */
     public boolean isLocationAuthorityUpdate() {
         return locationAuthorityUpdate;
-    }
-
-    public void setLocationAuthorityUpdate(Boolean ceresUpdate) {
-        this.locationAuthorityUpdate = ceresUpdate;
     }
 
     @NonNull
