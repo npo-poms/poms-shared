@@ -429,8 +429,14 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
      * @see #getOwnEmbargo()
      */
     public Range<Instant> getOwnPublicationRange() {
-        return Ranges.closedOpen(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+        try {
+            return Ranges.closedOpen(getOwnPublishStartInstant(), getOwnPublishStopInstant());
+        } catch (IllegalArgumentException iae) {
+            log.error("For {} {} - {} is not a valid range", this, getOwnPublishStartInstant(), getOwnPublishStopInstant());
+            return Ranges.closedOpen(null, getOwnPublishStopInstant());
+        }
     }
+
     /**
      * An embargo object based on {@link #getOwnPublishStartInstant()} and {@link #getOwnPublishStopInstant()}
      * @since 7.10

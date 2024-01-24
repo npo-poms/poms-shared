@@ -28,7 +28,12 @@ public interface Embargo {
      * Returns this embargo object as a guava {@link Range} object.
      */
     default Range<Instant> asRange() {
-        return Ranges.closedOpen(getPublishStartInstant(), getPublishStopInstant());
+        try {
+             return Ranges.closedOpen(getPublishStartInstant(), getPublishStopInstant());
+        } catch (IllegalArgumentException iae) {
+            // publish stop may be before publish start, this is invalid. This should be as restricted as meant.
+            return Ranges.closedOpen(null, getPublishStopInstant());
+        }
     }
 
     default boolean isUnderEmbargo(Instant now) {
