@@ -1903,7 +1903,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlAttribute(name = "hasSubtitles")
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
     protected Boolean isHasSubtitles() {
-        if (mid == null || isSerializing())  {
+        if (isSerializing())  {
             return null;
         }
         try {

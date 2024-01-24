@@ -144,7 +144,8 @@ public class MediaObjectXmlSchemaTest {
             </program>
             """;
 
-        Program program = program().lean().withSubtitles().build();
+        Program program = program().lean()
+            .withSubtitles().build();
         Program rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
         assertThat(rounded.hasSubtitles()).isTrue();
     }

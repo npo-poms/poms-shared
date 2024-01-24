@@ -324,7 +324,8 @@ public interface MediaTestDataBuilder<
     AvailableSubtitles DUTCH_CAPTION = AvailableSubtitles.builder().language(Locales.DUTCH).type(SubtitlesType.CAPTION).build();
 
     default T withDutchCaptions() {
-        mediaObject().getAvailableSubtitles().add(DUTCH_CAPTION);
+        mediaObject()
+            .getAvailableSubtitles().add(DUTCH_CAPTION);
         return (T) this;
     }
     default T withSubtitles() {
