@@ -1890,8 +1890,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
 
-    public Boolean hasSubtitles() {
-        return isHasSubtitles();
+    public boolean hasSubtitles() {
+        Boolean isHasSubtitles = isHasSubtitles();
+        return isHasSubtitles != null && isHasSubtitles;
     }
 
     public Boolean isDubbed() {

@@ -203,6 +203,7 @@ public class MediaObjectsTest {
     @Test
     public void hasSubtitles_NoSubs() {
         final Program program = MediaBuilder.program()
+            .mid("program_123")
             .build();
         assertFalse(program.hasSubtitles());
     }
@@ -210,7 +211,9 @@ public class MediaObjectsTest {
     @Test
     public void hasSubtitles_Translation() {
 
-        final Program program = MediaBuilder.program().build();
+        final Program program = MediaBuilder.program()
+            .mid("program_123")
+            .build();
         program.getAvailableSubtitles().add(AvailableSubtitles.builder().language(Locales.DUTCH).type(SubtitlesType.TRANSLATION).build());
         assertFalse(program.hasSubtitles());
     }
@@ -218,6 +221,7 @@ public class MediaObjectsTest {
     @Test
     public void hasSubtitles_DutchCaption() {
         final Program program = MediaBuilder.program()
+            .mid("program_123")
             .build();
         program.getAvailableSubtitles().add(AvailableSubtitles.builder().language(Locales.DUTCH).type(SubtitlesType.CAPTION).build());
         assertTrue(program.hasSubtitles());
