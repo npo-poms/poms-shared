@@ -180,6 +180,11 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
      */
     protected abstract String getUrnPrefix();
 
+
+    protected boolean isSerializing() {
+        return false;
+    }
+
     // can be resolved if indeed no need to override any more
     private void setUnrecognizedUrn(String urn) {
         throw new IllegalArgumentException("The urn " + urn + " is not valid for objects with urns " + getUrnPrefix());
@@ -224,6 +229,9 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getLastPublishedInstant() {
+        if (isSerializing()) {
+            return null;
+        }
         return lastPublished;
     }
 

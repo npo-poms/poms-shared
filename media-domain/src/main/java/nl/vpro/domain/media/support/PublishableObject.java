@@ -108,7 +108,19 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         return dataAsString.getBytes(encoding);
     }
 
+    private static final ThreadLocal<Boolean> SERIALIZING = ThreadLocal.withInitial(() -> false);
+    /**
+     * Whether currently serializing for CRC calculation. Some derivative getter may return {@link null} (or some other constant) if this is {@code true}
+     * @since 7.11
+     */
+    @Override
+    protected boolean isSerializing() {
+        return SERIALIZING.get();
+    }
+
+
     protected byte[] serializeForCalcCRC32() {
+        SERIALIZING.set(true);
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
              OutputStreamWriter writer = new OutputStreamWriter(baos, UTF_8)
         ) {
@@ -117,6 +129,8 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         } catch (IOException ioException) {
             log.warn("{}", ioException.getMessage(), ioException);
             return new byte[0];
+        } finally {
+            SERIALIZING.set(false);
         }
     }
 

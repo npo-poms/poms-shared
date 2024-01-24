@@ -40,6 +40,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.annotations.Beta;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Collections2;
 import com.neovisionaries.i18n.CountryCode;
 
@@ -94,7 +95,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
  *
  * @author roekoe
  */
-@SuppressWarnings("WSReferenceInspection")
+@SuppressWarnings({"WSReferenceInspection", "JpaDataSourceORMInspection"})
 
 // jpa
 @Entity
@@ -607,13 +608,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Setter(AccessLevel.PACKAGE)
     private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.NONE;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
     // also we got odd NPE's from PersistentBag otherwise. (2023-01: seems still relevant. I think it occurs when you _change_ a type)
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
     @OrderBy("language, type")
     @Setter
     private List<@NonNull AvailableSubtitles> availableSubtitles;
+
 
     @Embedded()
     @XmlTransient
@@ -1899,8 +1901,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlAttribute(name = "hasSubtitles")
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
     protected Boolean isHasSubtitles() {
-        if (mid == null)  {
-            return false;
+        if (mid == null || isSerializing())  {
+            return null;
         }
         try {
             final List<AvailableSubtitles> list = getAvailableSubtitles();
@@ -3085,7 +3087,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
-    // Overridden to give access to test
+    @VisibleForTesting
     protected byte[] serializeForCalcCRC32() {
         return super.serializeForCalcCRC32();
     }
@@ -3093,7 +3095,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Override
     protected CRC32 calcCRC32() {
         CRC32 result = super.calcCRC32();
-        // Some fields not appearing in XML, but which _are_ relevant changess
+        // Some fields not appearing in XML, but which _are_ relevant changes
         if (streamingPlatformStatus != null) {
             streamingPlatformStatus.calcCRC32(result);
         }
