@@ -1,5 +1,6 @@
 package nl.vpro.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.time.Instant;
@@ -12,6 +13,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @since 5.3
  */
 @Getter
+@EqualsAndHashCode
 public class BasicEmbargo implements MutableEmbargo<BasicEmbargo> {
     @Nullable
     private Instant publishStartInstant;

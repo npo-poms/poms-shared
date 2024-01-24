@@ -32,7 +32,7 @@ public interface Embargo {
              return Ranges.closedOpen(getPublishStartInstant(), getPublishStopInstant());
         } catch (IllegalArgumentException iae) {
             // publish stop may be before publish start, this is invalid. This should be as restricted as meant.
-            return Ranges.closedOpen(null, getPublishStopInstant());
+            return Ranges.closedOpen(getPublishStartInstant(), getPublishStartInstant());
         }
     }
 

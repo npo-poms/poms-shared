@@ -138,6 +138,9 @@ public class Embargos {
 
     public static Embargo readyOnly(final Instant start, final Instant stop) {
         return new Embargo() {
+
+            private final Instant finalStop = stop == null || start == null ?
+                stop : stop.isBefore(start) ? start : stop;
             @Override
             public Instant getPublishStartInstant() {
                 return start;
@@ -145,7 +148,7 @@ public class Embargos {
             }
             @Override
             public Instant getPublishStopInstant() {
-                return stop;
+                return finalStop;
             }
             @Override
             public String toString() {
@@ -192,14 +195,15 @@ public class Embargos {
     }
 
     public static boolean equals(Embargo e1, Embargo e2) {
-         return Objects.equals(e1.getPublishStartInstant(), e2.getPublishStartInstant()) &&
-             Objects.equals(e1.getPublishStopInstant(), e2.getPublishStopInstant());
+         return
+             Objects.equals(e1.getPublishStartInstant(), e2.getPublishStartInstant()) &&
+                 Objects.equals(e1.getPublishStopInstant(), e2.getPublishStopInstant());
     }
 
     public static String toString(Embargo embargo) {
         Instant start = embargo.getPublishStartInstant();
         Instant stop = embargo.getPublishStopInstant();
-        return "[" + (start == null ? "" : start) + "-" + (stop == null ? "" : stop) + "]";
+        return "[" + (start == null ? "-∞" : start) + ".." + (stop == null ? "+∞" : stop) + "]";
     }
 
 

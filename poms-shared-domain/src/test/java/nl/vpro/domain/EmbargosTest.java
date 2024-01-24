@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class EmbargosTest {
 
-
     @Test
     public void unrestricted() {
         MutableEmbargo<BasicEmbargo> unrestrictedInstant = Embargos.unrestrictedInstance();
