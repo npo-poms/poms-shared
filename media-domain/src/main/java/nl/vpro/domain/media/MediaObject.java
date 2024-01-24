@@ -611,6 +611,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @ElementCollection(fetch = FetchType.LAZY)
     // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
     // also we got odd NPE's from PersistentBag otherwise. (2023-01: seems still relevant. I think it occurs when you _change_ a type)
+    // NOTE: I think this may be fixed with the 'isSerializable' in hasSubtitles.
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
     @OrderBy("language, type")
     @Setter
