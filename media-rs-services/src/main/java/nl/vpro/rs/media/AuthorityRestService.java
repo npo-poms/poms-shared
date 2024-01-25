@@ -6,6 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
 
+import nl.vpro.domain.media.AVType;
 import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.UpdateSupplier;
 import nl.vpro.metis.IdClass;
@@ -74,7 +75,8 @@ public interface AuthorityRestService {
     String createMid(
         @PathParam("class") final IdClass idClass,
         @PathParam("supplier") final UpdateSupplier supplier,
-        @Pattern(regexp =BROADCASTER_PATTERN) @PathParam("broadcaster") String broadcaster
+        @Pattern(regexp =BROADCASTER_PATTERN) @PathParam("broadcaster") String broadcaster,
+        @QueryParam("avType")AVType avType
     );
 
 
