@@ -367,8 +367,8 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
     @Override
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         super.afterUnmarshal(unmarshaller, parent);
-        if(parent instanceof Program) {
-            this.parent = (Program)parent;
+        if(parent instanceof Program program) {
+            this.parent = program;
             this.urnRef = null;
             this.midRef = null;
         }
