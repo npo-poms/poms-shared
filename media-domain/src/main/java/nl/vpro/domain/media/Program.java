@@ -443,7 +443,7 @@ public final class Program extends MediaObject {
 
     @Override
     public void setMediaType(MediaType type) {
-        setType((ProgramType) type.getSubType());
+        setType(type == null ? null : (ProgramType) type.getSubType());
     }
 
     public void setType(ProgramType type) {
