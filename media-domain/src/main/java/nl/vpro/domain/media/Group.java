@@ -57,6 +57,7 @@ public final class Group extends MediaObject {
     }
 
 
+    @Setter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull
@@ -180,11 +181,7 @@ public final class Group extends MediaObject {
 
     @Override
     public void setMediaType(MediaType type) {
-        setType((GroupType) type.getSubType());
-    }
-
-    public void setType(GroupType type) {
-        this.type = type;
+        setType(type == null ? null : (GroupType) type.getSubType());
     }
 
     public boolean isEpisodesLocked() {

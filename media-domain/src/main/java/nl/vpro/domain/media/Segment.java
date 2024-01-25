@@ -353,7 +353,7 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
 
     @Override
     public void setMediaType(MediaType type) {
-        setType((SegmentType) type.getSubType());
+        setType(type == null ? null : (SegmentType) type.getSubType());
     }
 
     public void setType(SegmentType segmentType) {

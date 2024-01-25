@@ -102,6 +102,7 @@ public final class Program extends MediaObject {
     @Size.List({@Size(max = 255), @Size(min = 1)})
     private String poProgType;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "no program type given")
@@ -444,10 +445,6 @@ public final class Program extends MediaObject {
     @Override
     public void setMediaType(MediaType type) {
         setType(type == null ? null : (ProgramType) type.getSubType());
-    }
-
-    public void setType(ProgramType type) {
-        this.type = type;
     }
 
     @XmlElementWrapper(name = "segments")
