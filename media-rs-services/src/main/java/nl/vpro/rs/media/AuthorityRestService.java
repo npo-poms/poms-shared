@@ -3,10 +3,10 @@ package nl.vpro.rs.media;
 import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
 
+import nl.vpro.domain.media.AVType;
 import nl.vpro.domain.media.update.MediaUpdate;
 import nl.vpro.domain.media.update.UpdateSupplier;
 import nl.vpro.metis.IdClass;
@@ -41,7 +41,7 @@ public interface AuthorityRestService {
     @DELETE
     @Path("{supplier}/{id:.*}")
     @Produces(MediaType.TEXT_PLAIN)
-    Response deleteMedia(
+    String deleteMedia(
         @PathParam("supplier") final UpdateSupplier supplier,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(ERRORS) String errors
@@ -51,7 +51,7 @@ public interface AuthorityRestService {
     @POST
     @Path("{supplier}")
     @Produces(MediaType.TEXT_PLAIN)
-    Response update(
+    String update(
         @PathParam("supplier") final UpdateSupplier supplier,
         @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(ERRORS) String errors,
@@ -75,10 +75,10 @@ public interface AuthorityRestService {
     String createMid(
         @PathParam("class") final IdClass idClass,
         @PathParam("supplier") final UpdateSupplier supplier,
-        @Pattern(regexp =BROADCASTER_PATTERN) @PathParam("broadcaster") String broadcaster
+        @Pattern(regexp =BROADCASTER_PATTERN) @PathParam("broadcaster") String broadcaster,
+        @QueryParam("avType")AVType avType
     );
 
 
 }
-
 
