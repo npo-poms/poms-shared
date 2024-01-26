@@ -58,7 +58,7 @@ class AudioSourcingServiceImplTest {
     }
 
     @Test
-    //@Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
+    @Disabled("This does actual stuff, need actual token. Add wiremock version to test our part isolated, as soon as we understand how it should react")
     public void uploadAudio() throws IOException, InterruptedException {
         final Instant start = Instant.now();
         final Path file = Paths.get(System.getProperty("user.home") , "samples", "sample.mp3");
