@@ -13,7 +13,7 @@
     for poms-shared project, we arranged dynamic versioning
      a pull request will be published with the associated branch name in the artifact version (see .github/workflows/pull-request.yml)
   -->
-  <version>7.10.4-SNAPSHOT</version>
+  <version>7.10.4</version>
   <artifactId>poms-shared-parent</artifactId>
   <packaging>pom</packaging>
 
@@ -31,7 +31,7 @@
      <url>https://github.com/npo-poms/poms-shared.git</url>
      <connection>scm:git:${project.scm.url}</connection>
      <developerConnection>scm:git:${project.scm.url}</developerConnection>
-     <tag>HEAD</tag>
+     <tag>REL-7.10.4</tag>
   </scm>
 
 
