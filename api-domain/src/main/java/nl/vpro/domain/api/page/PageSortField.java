@@ -1,7 +1,7 @@
 package nl.vpro.domain.api.page;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * @author Michiel Meeuwissen
@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 @XmlType(name = "pageSortTypeEnum")
 public enum PageSortField {
-    sortDate, 
-    lastModified, 
-    lastPublished, 
+    sortDate,
+    lastModified,
+    lastPublished,
     creationDate
 }

@@ -7,12 +7,12 @@ import java.io.Serial;
 import java.time.Instant;
 import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.*;
@@ -24,7 +24,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.*;
 
-import static javax.persistence.CascadeType.MERGE;
+import static jakarta.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.MediaObjectFilters.*;
 import static nl.vpro.domain.media.MediaObjectFilters.MR_EMBARGO_FILTER_CONDITION;

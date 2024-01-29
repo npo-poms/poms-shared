@@ -4,10 +4,10 @@
  */
 package nl.vpro.rs.pages.update;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 
 import nl.vpro.domain.page.PageIdMatch;
 import nl.vpro.domain.page.update.*;

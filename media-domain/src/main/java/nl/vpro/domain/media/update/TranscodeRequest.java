@@ -5,8 +5,8 @@ import lombok.*;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.i18n.Displayable;

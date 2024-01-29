@@ -6,8 +6,8 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.Embeddable;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.Repeat;
 

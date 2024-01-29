@@ -13,8 +13,8 @@
 )
 package nl.vpro.domain.media.update.collections;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlSchema;
+import jakarta.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlSchema;
 
 import nl.vpro.domain.Xmlns;
 /*

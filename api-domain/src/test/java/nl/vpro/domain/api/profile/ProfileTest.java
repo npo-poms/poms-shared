@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.function.Predicate;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

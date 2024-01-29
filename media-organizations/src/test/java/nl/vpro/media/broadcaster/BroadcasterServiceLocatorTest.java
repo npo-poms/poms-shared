@@ -1,6 +1,6 @@
 package nl.vpro.media.broadcaster;
 
-import javax.inject.Provider;
+import jakarta.inject.Provider;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.jupiter.api.Test;

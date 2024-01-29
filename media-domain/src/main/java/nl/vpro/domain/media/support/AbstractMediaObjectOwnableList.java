@@ -1,13 +1,12 @@
 package nl.vpro.domain.media.support;
 
 
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
 import lombok.*;
 
 import java.io.Serial;
 import java.util.*;
-
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -16,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.MediaObject;
 
-import static javax.persistence.CascadeType.ALL;
+import static jakarta.persistence.CascadeType.ALL;
 
 
 /**

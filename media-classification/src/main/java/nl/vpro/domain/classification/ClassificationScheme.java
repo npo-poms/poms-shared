@@ -9,7 +9,7 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 

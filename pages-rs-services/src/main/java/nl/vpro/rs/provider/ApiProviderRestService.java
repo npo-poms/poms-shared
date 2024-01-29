@@ -1,7 +1,7 @@
 package nl.vpro.rs.provider;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.page.Page;

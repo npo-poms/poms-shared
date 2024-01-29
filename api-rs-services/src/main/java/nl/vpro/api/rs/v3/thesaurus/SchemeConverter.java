@@ -1,6 +1,6 @@
 package nl.vpro.api.rs.v3.thesaurus;
 
-import javax.ws.rs.ext.ParamConverter;
+import jakarta.ws.rs.ext.ParamConverter;
 
 import nl.vpro.domain.gtaa.Scheme;
 

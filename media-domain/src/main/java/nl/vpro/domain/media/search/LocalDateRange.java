@@ -9,7 +9,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.chrono.ChronoLocalDate;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "localdateRangeType", propOrder = {

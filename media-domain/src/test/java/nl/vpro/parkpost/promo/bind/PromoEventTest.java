@@ -6,7 +6,7 @@ package nl.vpro.parkpost.promo.bind;
 
 import java.io.*;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 import org.xmlunit.builder.DiffBuilder;

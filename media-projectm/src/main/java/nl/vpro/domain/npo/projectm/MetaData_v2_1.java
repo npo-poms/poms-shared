@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.util.*;
 import java.util.function.Supplier;
 
-import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.datatype.XMLGregorianCalendar;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.classification.TermId;

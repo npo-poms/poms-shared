@@ -10,7 +10,7 @@ import lombok.Setter;
 
 import java.time.Duration;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -57,7 +57,7 @@ public class DurationRangeInterval implements RangeFacet<Duration> {
         return interval == null ? null : interval.getValue();
     }
 
-    @javax.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
+    @jakarta.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
     protected void setIntervalString(String value) {
         this.interval = new Interval(ParsedInterval.parse(value));
     }

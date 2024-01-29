@@ -4,8 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.*;
 
-import javax.xml.bind.JAXB;
-import javax.xml.datatype.*;
+import jakarta.xml.bind.JAXB;
+import jakarta.xml.datatype.*;
 
 import org.junit.jupiter.api.Test;
 

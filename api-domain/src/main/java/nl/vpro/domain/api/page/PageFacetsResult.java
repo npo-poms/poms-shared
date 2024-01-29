@@ -9,9 +9,9 @@ import nl.vpro.domain.api.DateFacetResultItem;
 import nl.vpro.domain.api.MultipleFacetsResult;
 import nl.vpro.domain.api.TermFacetResultItem;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 

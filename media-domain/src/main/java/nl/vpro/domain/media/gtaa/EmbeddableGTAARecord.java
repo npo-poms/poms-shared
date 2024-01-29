@@ -10,7 +10,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  *

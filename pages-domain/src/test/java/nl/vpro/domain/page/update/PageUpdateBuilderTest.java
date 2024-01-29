@@ -9,7 +9,7 @@ import java.io.Writer;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

@@ -6,9 +6,9 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.TreeSet;
 
-import javax.xml.bind.JAXB;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Validator;
+import jakarta.xml.bind.JAXB;
+import jakarta.xml.transform.stream.StreamSource;
+import jakarta.xml.validation.Validator;
 
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;

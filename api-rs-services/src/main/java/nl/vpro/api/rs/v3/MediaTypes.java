@@ -2,7 +2,7 @@ package nl.vpro.api.rs.v3;
 
 import java.util.Map;
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 
 import com.google.common.collect.ImmutableMap;
 

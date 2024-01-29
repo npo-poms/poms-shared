@@ -4,8 +4,8 @@ import lombok.*;
 
 import java.util.function.Supplier;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 import nl.vpro.validation.NoHtml;
 

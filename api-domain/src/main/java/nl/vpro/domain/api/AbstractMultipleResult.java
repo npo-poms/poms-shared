@@ -4,7 +4,7 @@ import java.util.AbstractList;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 import nl.vpro.domain.constraint.DisplayablePredicate;
 import nl.vpro.domain.constraint.PredicateTestResult;

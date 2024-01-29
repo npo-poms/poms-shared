@@ -15,8 +15,8 @@ import net.sf.saxon.value.SequenceType;
 
 import java.util.*;
 
-import javax.validation.*;
-import javax.validation.groups.Default;
+import jakarta.validation.*;
+import jakarta.validation.groups.Default;
 
 import org.meeuw.functional.TriPredicate;
 

@@ -3,9 +3,9 @@ package nl.vpro.domain.page.update;
 import java.io.IOException;
 import java.io.StringReader;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.xml.bind.JAXB;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

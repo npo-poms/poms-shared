@@ -9,8 +9,8 @@ import net.jqwik.api.Arbitrary;
 
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.xml.bind.util.JAXBSource;
+import jakarta.validation.ConstraintViolation;
+import jakarta.xml.bind.util.JAXBSource;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.theories.ComparableTheory;

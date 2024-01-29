@@ -1,16 +1,16 @@
 package nl.vpro.services.jpa;
 
+import jakarta.transaction.Transactional;
+
 import java.util.concurrent.Callable;
 import java.util.function.*;
-
-import javax.transaction.Transactional;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.stereotype.Service;
 
 import nl.vpro.services.TransactionService;
 
-import static javax.transaction.Transactional.TxType.*;
+import static jakarta.transaction.Transactional.TxType.*;
 
 @Service("jpaTransactionService")
 public class JpaTransactionServiceImpl implements TransactionService {

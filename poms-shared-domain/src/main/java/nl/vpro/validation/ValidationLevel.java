@@ -2,7 +2,7 @@ package nl.vpro.validation;
 
 import lombok.Getter;
 
-import javax.validation.groups.Default;
+import jakarta.validation.groups.Default;
 
 import nl.vpro.i18n.Displayable;
 

@@ -8,7 +8,7 @@ import net.jqwik.api.*;
 
 import java.util.Set;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

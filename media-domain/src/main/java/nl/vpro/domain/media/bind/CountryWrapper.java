@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
 
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.meeuw.i18n.regions.Region;
 import org.meeuw.i18n.regions.RegionService;

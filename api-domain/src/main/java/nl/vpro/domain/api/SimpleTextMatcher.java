@@ -7,8 +7,8 @@ package nl.vpro.domain.api;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.constraints.Pattern;
+import jakarta.xml.bind.annotation.*;
 
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
 

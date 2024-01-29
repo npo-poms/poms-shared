@@ -12,7 +12,7 @@ import java.time.Instant;
 import java.util.Base64;
 import java.util.List;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

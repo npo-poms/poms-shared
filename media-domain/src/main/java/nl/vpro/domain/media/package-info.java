@@ -12,6 +12,6 @@
 )
 package nl.vpro.domain.media;
 
-import javax.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNs;
 
 import nl.vpro.domain.Xmlns;

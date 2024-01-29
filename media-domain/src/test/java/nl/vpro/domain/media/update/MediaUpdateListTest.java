@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.time.Duration;
 
-import javax.xml.bind.JAXB;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Validator;
+import jakarta.xml.bind.JAXB;
+import jakarta.xml.transform.stream.StreamSource;
+import jakarta.xml.validation.Validator;
 
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;

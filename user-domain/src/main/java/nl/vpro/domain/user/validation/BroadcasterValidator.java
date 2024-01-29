@@ -6,8 +6,8 @@ package nl.vpro.domain.user.validation;
 
 import lombok.extern.slf4j.Slf4j;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 import nl.vpro.domain.user.*;
 

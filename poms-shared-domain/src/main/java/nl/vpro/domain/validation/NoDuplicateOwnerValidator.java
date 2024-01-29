@@ -3,8 +3,8 @@ package nl.vpro.domain.validation;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;

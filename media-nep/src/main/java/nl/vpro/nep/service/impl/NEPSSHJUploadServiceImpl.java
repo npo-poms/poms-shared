@@ -11,8 +11,8 @@ import java.util.EnumSet;
 import java.util.Properties;
 import java.util.function.Supplier;
 
-import javax.annotation.PreDestroy;
-import javax.inject.Inject;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;

@@ -4,7 +4,7 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 @Getter
 @XmlRootElement(name = "uploadResponse")

@@ -2,7 +2,7 @@ package nl.vpro.domain.constraint.media;
 
 import java.time.Instant;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

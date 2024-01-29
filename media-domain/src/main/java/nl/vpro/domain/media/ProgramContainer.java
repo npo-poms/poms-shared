@@ -6,8 +6,8 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 @XmlRootElement
 @XmlType(propOrder = {"program"})

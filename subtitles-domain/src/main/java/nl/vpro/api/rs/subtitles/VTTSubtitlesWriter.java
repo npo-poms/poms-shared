@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.ws.rs.Produces;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.ext.Provider;
 
 import nl.vpro.domain.subtitles.*;
 

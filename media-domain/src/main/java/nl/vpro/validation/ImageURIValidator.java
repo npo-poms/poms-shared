@@ -6,8 +6,8 @@ package nl.vpro.validation;
 
 import java.util.regex.Matcher;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 import nl.vpro.domain.media.support.Image;
 

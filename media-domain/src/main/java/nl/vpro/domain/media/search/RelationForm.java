@@ -1,6 +1,6 @@
 package nl.vpro.domain.media.search;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.RelationDefinition;
 

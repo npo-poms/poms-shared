@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.groups.Default;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.groups.Default;
 
 import nl.vpro.domain.media.update.Validation;
 import nl.vpro.validation.PomsValidatorGroup;

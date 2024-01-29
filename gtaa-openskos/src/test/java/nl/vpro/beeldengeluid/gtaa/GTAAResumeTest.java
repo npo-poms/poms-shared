@@ -1,6 +1,6 @@
 package nl.vpro.beeldengeluid.gtaa;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

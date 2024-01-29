@@ -1,7 +1,7 @@
 package nl.vpro.domain.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 import nl.vpro.domain.Embargo;
 

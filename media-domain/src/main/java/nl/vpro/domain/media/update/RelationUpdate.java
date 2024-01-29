@@ -5,7 +5,7 @@
 package nl.vpro.domain.media.update;
 
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

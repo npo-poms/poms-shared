@@ -6,8 +6,8 @@ package nl.vpro.domain.constraint;
 
 import java.util.*;
 
-import javax.el.ELContext;
-import javax.xml.bind.annotation.*;
+import jakarta.el.ELContext;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.i18n.Displayable;
 

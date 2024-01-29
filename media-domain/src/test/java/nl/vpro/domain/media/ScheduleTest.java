@@ -9,7 +9,7 @@ import java.io.StringWriter;
 import java.time.*;
 import java.util.Arrays;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.*;
 

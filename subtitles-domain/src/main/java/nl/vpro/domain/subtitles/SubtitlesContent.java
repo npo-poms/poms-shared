@@ -7,8 +7,8 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * The subtitles as a String (to parse this use {@link SubtitlesUtil#parse(nl.vpro.domain.subtitles.Subtitles, boolean)}

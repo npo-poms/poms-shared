@@ -7,9 +7,9 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.activation.DataHandler;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
+import jakarta.activation.DataHandler;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "imageDataType",

@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.time.Duration;
 import java.util.regex.Pattern;
 
-import javax.xml.bind.annotation.XmlValue;
+import jakarta.xml.bind.annotation.XmlValue;
 
 /**
  * @author Michiel Meeuwissen

@@ -8,6 +8,6 @@
 ) package nl.vpro.domain.media.bind;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNs;
 
 import nl.vpro.domain.Xmlns;

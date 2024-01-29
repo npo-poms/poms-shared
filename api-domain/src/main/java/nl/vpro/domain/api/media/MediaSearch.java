@@ -11,8 +11,8 @@ import java.time.Instant;
 import java.util.*;
 import java.util.function.*;
 
-import javax.validation.Valid;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.Valid;
+import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;

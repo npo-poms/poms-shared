@@ -4,8 +4,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Locale;
 
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlValue;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlValue;
 
 import nl.vpro.domain.classification.Term;
 

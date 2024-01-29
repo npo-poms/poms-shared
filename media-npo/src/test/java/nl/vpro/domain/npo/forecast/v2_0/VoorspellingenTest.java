@@ -2,7 +2,7 @@ package nl.vpro.domain.npo.forecast.v2_0;
 
 import java.io.InputStream;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import nl.vpro.domain.npo.AuthorityPlatform;
 import org.junit.jupiter.api.Test;

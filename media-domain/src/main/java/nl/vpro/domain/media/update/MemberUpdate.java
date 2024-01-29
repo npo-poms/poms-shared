@@ -7,7 +7,7 @@ package nl.vpro.domain.media.update;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 
 /**

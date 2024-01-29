@@ -9,4 +9,4 @@
 )
 package nl.vpro.media.odi.util;
 
-import javax.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNs;

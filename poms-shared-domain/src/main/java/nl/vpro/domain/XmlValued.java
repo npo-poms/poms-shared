@@ -1,6 +1,6 @@
 package nl.vpro.domain;
 
-import javax.xml.bind.annotation.XmlEnumValue;
+import jakarta.xml.bind.annotation.XmlEnumValue;
 
 /**
  * An enum can be made to extend this, which indicates that an extra method will be present {@link #getXmlValue()} which

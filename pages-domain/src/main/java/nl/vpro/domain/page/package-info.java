@@ -9,7 +9,7 @@
 )
 package nl.vpro.domain.page;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlSchema;
+import jakarta.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlSchema;
 
 import nl.vpro.domain.Xmlns;

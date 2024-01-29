@@ -5,7 +5,7 @@ import lombok.*;
 import java.net.URI;
 import java.util.UUID;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.gtaa.AbstractGTAAObject;
 import nl.vpro.openarchives.oai.Label;

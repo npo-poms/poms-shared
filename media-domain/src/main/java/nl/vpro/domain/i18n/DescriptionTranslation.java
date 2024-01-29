@@ -5,9 +5,9 @@ import lombok.Setter;
 
 import java.io.Serial;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 import nl.vpro.domain.AbstractOwnedTextEntity;
 import nl.vpro.domain.media.support.OwnerType;

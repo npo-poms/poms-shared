@@ -4,8 +4,8 @@ package nl.vpro.domain.page;
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

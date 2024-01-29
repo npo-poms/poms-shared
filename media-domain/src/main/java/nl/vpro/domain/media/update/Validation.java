@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 import java.util.function.Function;
 
-import javax.validation.*;
-import javax.validation.executable.ExecutableValidator;
-import javax.validation.groups.Default;
-import javax.validation.metadata.BeanDescriptor;
+import jakarta.validation.*;
+import jakarta.validation.executable.ExecutableValidator;
+import jakarta.validation.groups.Default;
+import jakarta.validation.metadata.BeanDescriptor;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.validator.HibernateValidator;

@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.ext.*;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.ext.*;
 
 /**
  * Unused I tried to support also urls on schemes argument. It's hard...

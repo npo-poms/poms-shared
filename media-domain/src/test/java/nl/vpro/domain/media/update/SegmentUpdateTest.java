@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.StringReader;
 import java.time.Duration;
 
-import javax.xml.bind.*;
-import javax.xml.parsers.ParserConfigurationException;
+import jakarta.xml.bind.*;
+import jakarta.xml.parsers.ParserConfigurationException;
 
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;

@@ -1,7 +1,7 @@
 package nl.vpro.api.rs.subtitles;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.ext.Provider;
 
 import nl.vpro.domain.subtitles.SubtitlesFormat;
 

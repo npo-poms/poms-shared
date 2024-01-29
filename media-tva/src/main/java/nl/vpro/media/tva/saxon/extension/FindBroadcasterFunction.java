@@ -14,7 +14,7 @@ import net.sf.saxon.om.*;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;

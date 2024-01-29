@@ -1,17 +1,17 @@
 package nl.vpro.nep.service.impl;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.ws.rs.client.Client;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.ws.rs.client.Client;
 
 import org.apache.http.HttpHeaders;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -158,11 +158,11 @@ public class NEPSAMServiceImpl implements NEPSAMService{
     }
 
     static StreamAccessItem createStreamAccessItem(String ip, Duration duration) {
-        StreamAccessItem item = new StreamAccessItem().data(new ApiObject().type("access"));
-        Map<String, Object> attributes = new HashMap<>();
-        attributes.put("viewer", "pomsgui");
-        attributes.put("ip", ip);
-        attributes.put("duration", duration == null ? null : duration.toString());
+        StreamAccessItem item = new StreamAccessItem().data(new StreamAccessItemData());
+        StreamAccessAttributes attributes = new StreamAccessAttributes();
+        attributes.setViewer("pomsgui");
+        attributes.setIp(ip);
+        attributes.setDuration(duration == null ? null : (int) duration.toMillis() / 1000 );
         item.getData().setAttributes(attributes);
         return item;
     }

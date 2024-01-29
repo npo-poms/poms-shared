@@ -6,8 +6,8 @@ import java.io.Serial;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.Entity;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.Entity;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

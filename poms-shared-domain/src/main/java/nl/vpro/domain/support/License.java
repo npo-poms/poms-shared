@@ -9,8 +9,8 @@ import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.util.*;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.*;
 

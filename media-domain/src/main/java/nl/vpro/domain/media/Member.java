@@ -3,7 +3,7 @@ package nl.vpro.domain.media;
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * This combines a MemberRef with MediaObject. This represents a member 'from the other side'.

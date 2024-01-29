@@ -7,9 +7,9 @@ import java.io.Serial;
 import java.net.URI;
 import java.util.*;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

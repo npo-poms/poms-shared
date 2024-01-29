@@ -6,8 +6,8 @@ import java.io.Serial;
 import java.time.Instant;
 import java.util.zip.CRC32;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * The streaming stati are currently stored as fields of the {@link MediaObject}.

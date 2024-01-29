@@ -39,12 +39,12 @@
         <dependencies>
           <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
+            <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
             <version>${hibernate.version}</version>
           </dependency>
           <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
+            <artifactId>hibernate-core-jakarta</artifactId>
             <version>${hibernate.version}</version>
           </dependency>
           <dependency>
@@ -165,7 +165,7 @@
       Nicer would be to drop it altogether
       -->
       <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
+      <artifactId>hibernate-core-jakarta</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>

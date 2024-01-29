@@ -3,7 +3,7 @@ package nl.vpro.domain.media.nebo.base;
 import java.io.StringReader;
 import java.time.Duration;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

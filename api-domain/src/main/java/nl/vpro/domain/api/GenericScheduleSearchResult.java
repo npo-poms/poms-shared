@@ -2,7 +2,7 @@ package nl.vpro.domain.api;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.api.media.MediaFacetsResult;
 

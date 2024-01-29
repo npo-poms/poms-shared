@@ -14,9 +14,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;

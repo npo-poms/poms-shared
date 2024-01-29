@@ -4,7 +4,7 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.Objects;
 
-import javax.validation.constraints.Positive;
+import jakarta.validation.constraints.Positive;
 
 import org.apache.commons.lang3.StringUtils;
 

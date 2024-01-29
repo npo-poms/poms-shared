@@ -3,9 +3,9 @@ package nl.vpro.domain.api.page;
 import java.io.*;
 import java.time.LocalDateTime;
 
-import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBException;
-import javax.xml.transform.stream.StreamSource;
+import jakarta.xml.bind.JAXB;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.transform.stream.StreamSource;
 
 import org.junit.jupiter.api.Test;
 import org.xmlunit.builder.DiffBuilder;

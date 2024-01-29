@@ -14,6 +14,6 @@
 )
 package nl.vpro.domain.i18n;
 
-import javax.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNs;
 
 import nl.vpro.domain.Xmlns;

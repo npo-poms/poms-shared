@@ -4,8 +4,8 @@ import java.io.StringReader;
 import java.util.Collections;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.xml.bind.JAXB;
+import jakarta.inject.Inject;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -11,7 +11,7 @@
 )
 package nl.vpro.rs.thesaurus.update;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
+import jakarta.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNsForm;
 
 import nl.vpro.domain.Xmlns;

@@ -7,8 +7,8 @@ package nl.vpro.domain.api;
 import java.util.*;
 import java.util.function.Predicate;
 
-import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.validation.Valid;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 /**
  * @author rico

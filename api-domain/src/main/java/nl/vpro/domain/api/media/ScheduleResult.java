@@ -1,7 +1,7 @@
 package nl.vpro.domain.api.media;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.ApiScheduleEvent;
 import nl.vpro.domain.api.Result;

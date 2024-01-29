@@ -2,8 +2,8 @@ package nl.vpro.domain.media.bind;
 
 import java.util.*;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.junit.jupiter.api.*;
 import org.meeuw.i18n.countries.Country;

@@ -4,10 +4,10 @@
  */
 package nl.vpro.rs.thesaurus.update;
 
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.*;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
 
 import nl.vpro.domain.gtaa.GTAANewPerson;
 import nl.vpro.domain.gtaa.GTAANewGenericConcept;

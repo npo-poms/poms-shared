@@ -10,10 +10,10 @@ package nl.vpro.domain.media.nebo.shared;
 
 import java.util.*;
 
-import javax.xml.bind.annotation.*;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.datatype.DatatypeConfigurationException;
+import jakarta.xml.datatype.DatatypeFactory;
+import jakarta.xml.datatype.XMLGregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

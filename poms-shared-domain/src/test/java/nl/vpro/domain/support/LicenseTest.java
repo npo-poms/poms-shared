@@ -6,9 +6,9 @@ import lombok.Data;
 import java.io.StringReader;
 import java.util.Set;
 
-import javax.validation.*;
-import javax.xml.bind.JAXB;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.validation.*;
+import jakarta.xml.bind.JAXB;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import org.junit.jupiter.api.Test;
 

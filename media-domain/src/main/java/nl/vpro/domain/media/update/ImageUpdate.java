@@ -12,14 +12,14 @@ import java.time.Instant;
 import java.util.*;
 import java.util.stream.Stream;
 
-import javax.activation.DataHandler;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.activation.DataHandler;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;

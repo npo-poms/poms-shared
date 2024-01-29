@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.Base64;
 import java.util.function.Supplier;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHeaders;

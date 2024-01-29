@@ -3,9 +3,9 @@ package nl.vpro.rs.media;
 import java.io.InputStream;
 import java.time.Duration;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import static nl.vpro.rs.media.MediaBackendRestService.ERRORS;
 

@@ -7,7 +7,7 @@ package nl.vpro.media.odi.util;
 import java.net.*;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 

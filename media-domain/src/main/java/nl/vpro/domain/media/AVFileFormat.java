@@ -2,8 +2,8 @@ package nl.vpro.domain.media;
 
 import java.util.Optional;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * See also nl/vpro/domain/media/vproMedia.xsd . Don't forget to keep that file into sync with this.

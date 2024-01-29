@@ -4,8 +4,8 @@
  */
 package nl.vpro.domain.api;
 
-import javax.validation.Valid;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.Valid;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.api.media.MediaFacet;
 import nl.vpro.domain.api.page.PageFacet;

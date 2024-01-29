@@ -7,7 +7,7 @@ package nl.vpro.domain.api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

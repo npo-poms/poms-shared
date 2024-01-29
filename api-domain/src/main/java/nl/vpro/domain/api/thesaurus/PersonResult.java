@@ -2,8 +2,8 @@ package nl.vpro.domain.api.thesaurus;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 
 import nl.vpro.domain.gtaa.GTAAPerson;
 

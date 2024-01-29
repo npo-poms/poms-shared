@@ -3,6 +3,10 @@
  */
 package nl.vpro.domain.user;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,11 +14,6 @@ import java.io.Serial;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Comparator;
-
-import javax.persistence.*;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -157,7 +156,7 @@ public class Broadcaster extends Organization {
 
     @Override
     @Size(min = 2, max = 4, message = "2 < id < 5")
-    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
+    @jakarta.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
     public String getId() {
         return super.getId();
     }

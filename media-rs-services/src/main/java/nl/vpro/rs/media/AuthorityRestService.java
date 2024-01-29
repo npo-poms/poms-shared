@@ -1,8 +1,8 @@
 package nl.vpro.rs.media;
 
-import javax.validation.constraints.Pattern;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.validation.constraints.Pattern;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
 

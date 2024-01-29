@@ -8,9 +8,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.constraint.EnumConstraint;
 import nl.vpro.domain.media.Channel;

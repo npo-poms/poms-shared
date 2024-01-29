@@ -16,9 +16,9 @@ import java.time.Instant;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.validation.*;
-import javax.validation.groups.Default;
-import javax.xml.bind.JAXB;
+import jakarta.validation.*;
+import jakarta.validation.groups.Default;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.*;
 import org.meeuw.theories.BasicObjectTheory;

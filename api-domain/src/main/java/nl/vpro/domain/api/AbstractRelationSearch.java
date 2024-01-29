@@ -5,8 +5,8 @@ import lombok.*;
 import java.util.Collections;
 import java.util.Iterator;
 
-import javax.validation.Valid;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.Valid;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;

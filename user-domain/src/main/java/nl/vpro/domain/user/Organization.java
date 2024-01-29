@@ -5,14 +5,14 @@
 package nl.vpro.domain.user;
 
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.annotation.*;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -54,7 +54,7 @@ public abstract class Organization implements Serializable, Identifiable<String>
 
     @Override
     @Size(min = 1, max = 255, message = "2 < id < 256")
-    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,}", message = "type should conform to: [A-Z0-9_-]{2,}")
+    @jakarta.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,}", message = "type should conform to: [A-Z0-9_-]{2,}")
     public String getId() {
         return id;
     }

@@ -8,7 +8,7 @@ import lombok.*;
 
 import java.io.Serial;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 
 @Entity

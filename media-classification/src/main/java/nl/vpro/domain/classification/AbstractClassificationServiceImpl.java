@@ -4,15 +4,16 @@
  */
 package nl.vpro.domain.classification;
 
+import jakarta.annotation.PreDestroy;
+import jakarta.xml.bind.JAXB;
+
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.annotation.PreDestroy;
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXB;
 import javax.xml.parsers.*;
 import javax.xml.transform.dom.DOMSource;
 

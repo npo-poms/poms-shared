@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media.support;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @see TextualType

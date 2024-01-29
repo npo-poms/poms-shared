@@ -9,7 +9,7 @@ import lombok.ToString;
 import java.net.URI;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import nl.vpro.domain.media.Location;
 import nl.vpro.media.odi.LocationProducer;

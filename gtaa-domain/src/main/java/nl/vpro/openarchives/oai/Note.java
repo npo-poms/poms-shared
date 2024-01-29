@@ -4,13 +4,10 @@
  */
 package nl.vpro.openarchives.oai;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Data;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlValue;
 
 /**
  * @author Michiel Meeuwissen

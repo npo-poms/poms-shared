@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Transient;
-import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Pattern;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

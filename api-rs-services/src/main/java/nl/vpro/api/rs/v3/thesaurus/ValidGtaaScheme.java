@@ -2,8 +2,8 @@ package nl.vpro.api.rs.v3.thesaurus;
 
 import java.lang.annotation.*;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 /**
  * @author Michiel Meeuwissen

@@ -6,8 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.Duration;
 
-import javax.annotation.PreDestroy;
-import javax.inject.Named;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;

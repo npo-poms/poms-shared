@@ -4,8 +4,8 @@ import nl.vpro.domain.constraint.AbstractOr;
 import nl.vpro.domain.constraint.Constraint;
 import nl.vpro.domain.page.Page;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
 import java.util.List;
 
 /**

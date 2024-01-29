@@ -9,6 +9,6 @@
 )
 package nl.vpro.domain.media.support;
 
-import javax.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNs;
 
 import nl.vpro.domain.Xmlns;

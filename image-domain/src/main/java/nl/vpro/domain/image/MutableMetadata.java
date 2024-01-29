@@ -3,7 +3,7 @@ package nl.vpro.domain.image;
 import java.time.Instant;
 import java.util.Objects;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 
 import org.apache.commons.lang3.StringUtils;
 

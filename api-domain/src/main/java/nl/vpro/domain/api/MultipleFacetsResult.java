@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * Used on fields that may return multiple facets e.g., relations. The field name does not suffice in these cases.

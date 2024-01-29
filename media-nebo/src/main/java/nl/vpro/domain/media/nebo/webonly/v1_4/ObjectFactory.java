@@ -8,11 +8,11 @@
 
 package nl.vpro.domain.media.nebo.webonly.v1_4;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlElementDecl;
-import javax.xml.bind.annotation.XmlRegistry;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.namespace.QName;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlElementDecl;
+import jakarta.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.datatype.DatatypeConfigurationException;
+import jakarta.xml.namespace.QName;
 
 import nl.vpro.domain.media.nebo.shared.StreamType;
 import nl.vpro.domain.media.nebo.shared.StreamsType;

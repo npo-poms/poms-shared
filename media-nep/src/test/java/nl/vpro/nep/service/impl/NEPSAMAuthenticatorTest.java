@@ -2,13 +2,13 @@ package nl.vpro.nep.service.impl;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.xml.bind.DatatypeConverter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
 import java.time.Instant;
 
 import javax.crypto.SecretKey;
-import javax.xml.bind.DatatypeConverter;
 
 import org.junit.jupiter.api.Test;
 

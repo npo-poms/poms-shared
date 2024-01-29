@@ -4,8 +4,8 @@
  */
 package nl.vpro.domain.api.subtitles;
 
-import javax.validation.Valid;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.Valid;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 

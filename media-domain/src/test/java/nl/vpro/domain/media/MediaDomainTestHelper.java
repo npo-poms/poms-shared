@@ -9,12 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 import java.util.*;
 
-import javax.validation.ConstraintViolation;
-import javax.xml.bind.*;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Validator;
-import javax.xml.validation.*;
+import jakarta.validation.ConstraintViolation;
+import jakarta.xml.bind.*;
+import jakarta.xml.transform.Source;
+import jakarta.xml.transform.stream.StreamSource;
+import jakarta.xml.validation.Validator;
+import jakarta.xml.validation.*;
 
 import org.xml.sax.SAXException;
 

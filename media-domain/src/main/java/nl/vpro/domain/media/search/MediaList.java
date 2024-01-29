@@ -3,7 +3,7 @@ package nl.vpro.domain.media.search;
 import java.util.*;
 import java.util.stream.Stream;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

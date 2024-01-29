@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import nl.vpro.domain.Mappings;
 import nl.vpro.domain.Xmlns;

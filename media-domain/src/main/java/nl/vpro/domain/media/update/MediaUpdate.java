@@ -13,14 +13,14 @@ import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.*;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.*;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.*;
 import org.meeuw.i18n.regions.bind.jaxb.Code;
@@ -264,7 +264,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
         @NotNull
         @Size(min = 2, max = 4, message = "2 < id < 5")
         @BroadcasterValidation
-        @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
+        @jakarta.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
             String> broadcasters;
 
     private List<@NotNull String> portals;

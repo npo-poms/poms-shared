@@ -2,7 +2,7 @@ package nl.vpro.domain.media.bind;
 
 import java.util.Optional;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.meeuw.i18n.regions.Region;
 

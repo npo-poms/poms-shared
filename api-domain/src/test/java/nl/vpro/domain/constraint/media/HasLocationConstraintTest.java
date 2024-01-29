@@ -6,7 +6,7 @@ package nl.vpro.domain.constraint.media;
 
 import java.io.StringReader;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

@@ -7,7 +7,7 @@ package nl.vpro.domain.media.update.action;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Roelof Jan Koekoek

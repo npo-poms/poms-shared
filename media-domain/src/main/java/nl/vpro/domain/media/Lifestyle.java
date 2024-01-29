@@ -3,9 +3,9 @@ package nl.vpro.domain.media;
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.i18n.Displayable;
 

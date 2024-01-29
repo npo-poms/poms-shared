@@ -7,9 +7,9 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.AVAttributes;
 import nl.vpro.domain.media.AVFileFormat;

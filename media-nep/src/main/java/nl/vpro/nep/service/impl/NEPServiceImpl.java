@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.*;
 
-import javax.annotation.PreDestroy;
-import javax.inject.*;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;

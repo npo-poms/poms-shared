@@ -10,7 +10,7 @@ package nl.vpro.domain.media.nebo.webonly.v1_4;
 
 import java.math.BigInteger;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 
 /**

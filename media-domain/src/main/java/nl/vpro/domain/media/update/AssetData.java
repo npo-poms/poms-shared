@@ -7,9 +7,9 @@ package nl.vpro.domain.media.update;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.activation.DataHandler;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
+import jakarta.activation.DataHandler;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Roelof Jan Koekoek

@@ -3,9 +3,9 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.xml.bind.annotation.XmlAttribute;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.xml.bind.annotation.XmlAttribute;
 
 import nl.vpro.domain.media.*;
 

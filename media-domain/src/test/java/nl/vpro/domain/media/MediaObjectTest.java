@@ -13,8 +13,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.validation.ConstraintViolation;
-import javax.xml.bind.JAXB;
+import jakarta.validation.ConstraintViolation;
+import jakarta.xml.bind.JAXB;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;

@@ -5,8 +5,8 @@ import lombok.ToString;
 
 import java.net.URI;
 
-import javax.validation.constraints.*;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.constraints.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;

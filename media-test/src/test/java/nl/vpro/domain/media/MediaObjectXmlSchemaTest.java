@@ -12,12 +12,12 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.*;
-import javax.xml.bind.util.JAXBSource;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Validator;
-import javax.xml.validation.*;
+import jakarta.xml.bind.*;
+import jakarta.xml.bind.util.JAXBSource;
+import jakarta.xml.transform.Source;
+import jakarta.xml.transform.stream.StreamSource;
+import jakarta.xml.validation.Validator;
+import jakarta.xml.validation.*;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.*;

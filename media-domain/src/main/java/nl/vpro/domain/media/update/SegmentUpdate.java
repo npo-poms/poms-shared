@@ -9,11 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.annotation.*;
 import java.util.Objects;
 
-import javax.validation.*;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.validation.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;

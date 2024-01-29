@@ -2,9 +2,9 @@ package nl.vpro.domain.media;
 
 import java.lang.annotation.*;
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+import jakarta.validation.constraints.NotNull;
 
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.ValidCountry;

@@ -2,7 +2,7 @@ package nl.vpro.media.odi.handler;
 
 import lombok.ToString;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;

@@ -9,7 +9,7 @@ import lombok.Getter;
 import java.net.URI;
 import java.util.Optional;
 
-import javax.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnum;
 
 import org.apache.commons.lang3.StringUtils;
 import org.meeuw.i18n.countries.Country;

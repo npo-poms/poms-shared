@@ -7,8 +7,8 @@ import lombok.Singular;
 import java.net.URI;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Michiel Meeuwissen
