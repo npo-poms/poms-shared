@@ -5,7 +5,7 @@
             @XmlNs(prefix = "shared", namespaceURI = Xmlns.SHARED_NAMESPACE)
 
 },
-        elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED
+        elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED
 )
 package nl.vpro.domain.page;
 

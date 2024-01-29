@@ -2,7 +2,7 @@ package nl.vpro.domain.page;
 
 import java.time.LocalDateTime;
 
-import jakarta.xml.transform.stream.StreamSource;
+import javax.xml.transform.stream.StreamSource;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

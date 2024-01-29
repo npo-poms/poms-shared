@@ -4,13 +4,13 @@
  */
 package nl.vpro.domain.media.update;
 
+import jakarta.xml.bind.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.StringReader;
 import java.time.Duration;
 
-import jakarta.xml.bind.*;
-import jakarta.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;

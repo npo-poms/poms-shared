@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.*;
 import java.util.function.Function;
 
-import jakarta.xml.parsers.*;
+import javax.xml.parsers.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.w3c.dom.Document;

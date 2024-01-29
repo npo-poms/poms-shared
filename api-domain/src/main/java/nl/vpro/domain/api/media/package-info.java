@@ -5,8 +5,8 @@
         @XmlNs(prefix = "media", namespaceURI = Xmlns.MEDIA_NAMESPACE),
         @XmlNs(prefix = "shared", namespaceURI = Xmlns.SHARED_NAMESPACE)
     },
-    elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
-    attributeFormDefault = javax.xml.bind.annotation.XmlNsForm.UNQUALIFIED
+    elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED,
+    attributeFormDefault = jakarta.xml.bind.annotation.XmlNsForm.UNQUALIFIED
 )
 package nl.vpro.domain.api.media;
 

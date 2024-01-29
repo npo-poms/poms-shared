@@ -11,8 +11,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
-import jakarta.management.MalformedObjectNameException;
-import jakarta.management.ObjectName;
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

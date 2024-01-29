@@ -14,10 +14,10 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.xml.XMLConstants;
 import jakarta.xml.bind.*;
 import jakarta.xml.bind.util.JAXBSource;
-import jakarta.xml.transform.Source;
-import jakarta.xml.transform.stream.StreamSource;
-import jakarta.xml.validation.Validator;
-import jakarta.xml.validation.*;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Validator;
+import javax.xml.validation.*;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.*;
@@ -1089,7 +1089,7 @@ public class MediaObjectXmlSchemaTest {
             </segment>""";
         assertThatThrownBy(() -> {
             Segment unmarshal = JAXB.unmarshal(new StringReader(example), Segment.class);
-        }).isInstanceOf(javax.xml.bind.DataBindingException.class).hasMessageContaining("An invalid XML character");
+        }).isInstanceOf(jakarta.xml.bind.DataBindingException.class).hasMessageContaining("An invalid XML character");
 
     }
 

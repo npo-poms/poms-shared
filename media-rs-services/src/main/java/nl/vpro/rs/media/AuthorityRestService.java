@@ -12,7 +12,7 @@ import nl.vpro.domain.media.update.UpdateSupplier;
 import nl.vpro.metis.IdClass;
 import nl.vpro.validation.ValidationLevel;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_XML;
+import static jakarta.ws.rs.core.MediaType.APPLICATION_XML;
 import static nl.vpro.rs.media.MediaBackendRestService.ERRORS;
 import static nl.vpro.rs.media.MediaBackendRestService.ID;
 

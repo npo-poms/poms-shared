@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import jakarta.xml.bind.JAXB;
 import jakarta.xml.bind.JAXBException;
-import jakarta.xml.transform.stream.StreamSource;
+import javax.xml.transform.stream.StreamSource;
 
 import org.junit.jupiter.api.Test;
 import org.xmlunit.builder.DiffBuilder;

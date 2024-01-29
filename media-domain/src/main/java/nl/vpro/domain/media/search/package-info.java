@@ -27,7 +27,7 @@
             )
         },
     namespace = Xmlns.SEARCH_NAMESPACE,
-    elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED
+    elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED
 )
 package nl.vpro.domain.media.search;
 

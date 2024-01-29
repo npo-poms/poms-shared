@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 
 import jakarta.validation.*;
 import jakarta.xml.bind.JAXB;
-import jakarta.xml.parsers.ParserConfigurationException;
-import jakarta.xml.transform.*;
-import jakarta.xml.transform.stream.StreamResult;
-import jakarta.xml.transform.stream.StreamSource;
+import javax.xml.parsers .ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;

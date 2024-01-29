@@ -19,7 +19,7 @@ import com.google.common.cache.*;
 import nl.vpro.i18n.Locales;
 import nl.vpro.validation.*;
 
-import static javax.validation.Validation.byProvider;
+import static jakarta.validation.Validation.byProvider;
 
 /**
  * @author Michiel Meeuwissen
@@ -62,7 +62,7 @@ public class Validation {
             Locale.setDefault(defaultLocale);
         }
         if (validator == null) {
-            log.info("No validator could be constructed for ({}). javax.validation will be disabled", locale);
+            log.info("No validator could be constructed for ({}). jakarta.validation will be disabled", locale);
             return new Validator() {
                 @Override
                 public <T> Set<ConstraintViolation<T>> validate(T object, Class<?>... groups) {
