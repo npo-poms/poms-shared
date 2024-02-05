@@ -252,6 +252,7 @@ public class Image extends PublishableObject<Image>
         String credits,
         License license,
         String source,
+        String sourceName,
         Integer height,
         Integer width,
         java.time.Duration offset,
@@ -269,6 +270,7 @@ public class Image extends PublishableObject<Image>
         this.credits = credits;
         this.license = license;
         this.source = source;
+        this.sourceName = sourceName;
         this.height = height;
         this.width = width;
         this.offset = offset;
