@@ -11,6 +11,8 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.support.License;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.validation.WeakWarningValidatorGroup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,7 +45,7 @@ public class ImageUpdateTest {
 
     @Test
     public void json() {
-         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
+        ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
         update.setLicense(License.CC_BY);
         update.setSourceName("placeholdit");
         update.setCredits(getClass().getName());
@@ -61,6 +63,12 @@ public class ImageUpdateTest {
               "type" : "PICTURE",
               "highlighted" : false
             }""");
+
+        assertThat(update.violations(WarningValidatorGroup.class)).isEmpty();
+
+        assertThat(update.violations(WeakWarningValidatorGroup.class)).isNotEmpty();
+        log.info("v:{}", update.violations(WeakWarningValidatorGroup.class));
+
     }
 
 
