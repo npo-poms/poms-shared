@@ -172,7 +172,7 @@ public class Image extends PublishableObject<Image>
 
     @URI()
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
-    @NotNull(groups = {WarningValidatorGroup.class})
+    @NotNull(groups = {WeakWarningValidatorGroup.class})
     @Getter
     private String source;
 
