@@ -1227,7 +1227,7 @@ public class MediaObjects {
                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
                         .findFirst();
                     if (matchingLocation.isEmpty()) {
-                        log.info("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, mediaObject.mid);
+                        log.debug("Silently set state of {} to REVOKED of object {} (no matching locations found)", prediction, mediaObject.mid);
                         prediction.setState(Prediction.State.REVOKED);
                         markForRepublication(mediaObject, "realized prediction");
                     }
