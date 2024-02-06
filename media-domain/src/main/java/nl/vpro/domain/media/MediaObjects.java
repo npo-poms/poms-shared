@@ -1301,10 +1301,10 @@ public class MediaObjects {
     }
 
     protected static void correctPrediction(final Prediction prediction, MediaObject mediaObject, Level level, Instant now, BiConsumer<Prediction.State, Prediction> onChange) {
-         final Prediction.State prevState = prediction.getState();
-         switch (prevState) {
-             case ANNOUNCED, REVOKED -> {
-                 boolean allInPast = true;
+        final Prediction.State prevState = prediction.getState();
+        switch (prevState) {
+            case ANNOUNCED, REVOKED -> {
+                boolean allInPast = true;
                  boolean hasLocations = false;
                  boolean realized = false;
                  for (Location location : mediaObject.getLocations()) {
@@ -1318,7 +1318,7 @@ public class MediaObjects {
                      if (location.isConsiderableForPublication() && ! location.wasUnderEmbargo(now)) {
                          allInPast = false;
                      }
-                     if (Workflow.PUBLICATIONS.contains(location.getWorkflow())
+                     if (Workflow.PUBLICATIONS_OR_NULL.contains(location.getWorkflow())
                          && location.inPublicationWindow(now)
                      ) {
                          prediction.setState(Prediction.State.REALIZED);
@@ -1336,7 +1336,7 @@ public class MediaObjects {
                  }
                  if (hasLocations && ! realized && allInPast && prediction.getState() == Prediction.State.ANNOUNCED) {
                      prediction.setState(Prediction.State.REVOKED);
-                     Slf4jHelper.log(log, level, "Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
+                         Slf4jHelper.log(log, level, "Set state of {} from {} to REVOKED of object {} (realized: {}, all in past: {})", prediction, prevState, mediaObject.mid, realized, allInPast);
                      onChange.accept(prevState, prediction);
                      String reason = PublicationReason.Reasons.REVOKED_PREDICTION.formatted(prediction.getPlatform().name());
                      if (prediction.getPreviousState() == prediction.getState()) {
@@ -1353,13 +1353,13 @@ public class MediaObjects {
 
                  Optional<Location> matchingLocation = mediaObject.getLocations().stream()
                      .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
-                     .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                     .filter(l -> l.getWorkflow() == null ||  PUBLICATIONS_OR_NULL.contains(l.getWorkflow()))
                      .filter(l -> l.inPublicationWindow(now))
                      .findFirst();
                  if (matchingLocation.isEmpty()) {
                      final List<Location> withoutFilter = mediaObject.getLocations().stream()
                          .filter(l -> prediction.getPlatform().matches(l.getPlatform()))
-                         .filter(l -> Workflow.PUBLICATIONS.contains(l.getWorkflow()))
+                         .filter(l -> PUBLICATIONS_OR_NULL.contains(l.getWorkflow()))
                          .toList();
                      Slf4jHelper.log(log, withoutFilter.isEmpty() ? Level.INFO: Level.WARN, "Set state of {} to REVOKED of object {} (no matching locations found {})", prediction, mediaObject.mid, withoutFilter.isEmpty() ? "" : "(ignored: %s)".formatted(withoutFilter));
                      prediction.setState(Prediction.State.REVOKED);
