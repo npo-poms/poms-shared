@@ -109,6 +109,12 @@ public enum Workflow implements Displayable, XmlValued {
         FOR_REPUBLICATION
     ));
 
+    public static final Set<Workflow> PUBLICATIONS_OR_NULL = nullSafeSet(Set.of(
+        PUBLISHED,
+        FOR_PUBLICATION,
+        FOR_REPUBLICATION
+    ), true);
+
     /**
      * The workflows that are considered 'deleted'. I.e {@link #DELETED} and {@link #FOR_DELETION}
      */
@@ -139,7 +145,7 @@ public enum Workflow implements Displayable, XmlValued {
         PARENT_REVOKED,
         REVOKED,
         PUBLISHED
-    ));
+    ), true);
 
     public static final Set<Workflow> AS_DELETED_IN_API =
         nullSafeSet(PUBLISHED_AS_DELETED.stream()

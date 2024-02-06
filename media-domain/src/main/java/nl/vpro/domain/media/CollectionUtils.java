@@ -134,6 +134,10 @@ public class CollectionUtils {
      * @since 7.10
      */
     public static <P> Set<@NonNull P> nullSafeSet(@NonNull final Set<@NonNull P> set) {
+        return nullSafeSet(set, false);
+    }
+
+    public static <P> Set<@NonNull P> nullSafeSet(@NonNull final Set<@NonNull P> set, boolean containsNull) {
         return new AbstractSet<P>() {
             @Override
             public @NonNull Iterator<P> iterator() {
@@ -152,7 +156,7 @@ public class CollectionUtils {
 
             @Override
             public boolean contains(@Nullable Object o) {
-                return o != null && set.contains(o);
+                return (o == null && containsNull) || (o != null && set.contains(o));
             }
         };
     }
