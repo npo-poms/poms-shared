@@ -2141,6 +2141,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected void setPredictionsForXml(List<Prediction> predictions) {
         // not call be jackson anymore?
         this.setPredictions(predictions);
+        this.predictionsForXml = predictions;
     }
 
     /**
