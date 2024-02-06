@@ -130,11 +130,17 @@ public class CollectionUtils {
     /**
      * Wraps the given set in a new set, with the same elements.
      * <p>
-     * The only difference will be that its {@link Set#contains(Object)} will simply return {@code false} if the argument is {@code null}.
+     * The only difference will be that its {@link Set#contains(Object)} will simply return {@code false} if the argument is {@code null}. Unless the given set argument itself contains {@code null}, then also this set will contain it.
      * @since 7.10
      */
     public static <P> Set<@NonNull P> nullSafeSet(@NonNull final Set<@NonNull P> set) {
-        return nullSafeSet(set, false);
+        boolean containsNull = false;
+        try {
+            containsNull = set.contains(null);
+        } catch (NullPointerException npe) {
+            // ignore
+        }
+        return nullSafeSet(set, containsNull);
     }
 
     public static <P> Set<@NonNull P> nullSafeSet(@NonNull final Set<@NonNull P> set, boolean containsNull) {
