@@ -48,10 +48,6 @@
       <artifactId>media-test</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.inject</groupId>
-      <artifactId>javax.inject</artifactId>
-    </dependency>
-    <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-rs</artifactId>
     </dependency>
