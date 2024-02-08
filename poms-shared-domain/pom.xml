@@ -107,5 +107,10 @@
       <version>1.1.1.Final</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>org.meeuw.math</groupId>
+      <artifactId>mihxil-theories</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
