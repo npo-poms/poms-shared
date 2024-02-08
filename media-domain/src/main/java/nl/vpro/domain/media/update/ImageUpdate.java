@@ -127,9 +127,13 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
 
     private String credits;
 
+
+    /**
+     * An URL describing where the image originates from.
+     */
     @URI(mustHaveScheme = true, minHostParts = 2, groups = {PomsValidatorGroup.class})
     @XmlElement
-    @NotNull(groups = {WarningValidatorGroup.class})
+    @NotNull(groups = {WeakWarningValidatorGroup.class})
     @Setter
     private String source;
 

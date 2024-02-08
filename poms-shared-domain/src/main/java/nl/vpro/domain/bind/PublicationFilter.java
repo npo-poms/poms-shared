@@ -13,7 +13,7 @@ import nl.vpro.jackson2.Views;
 /**
  * This jackson filter is enabled when using poms domain classes.
  * <p>
- * The idea is that it makes it possible ot marshall objects that are under embargo, when using the {@link Views.Publisher} view.
+ * The idea is that it makes it possible to marshall objects that are under embargo, when using the {@link Views.Publisher} view.
  * <p>
  * In poms this is arranged via hibernate filters, but this could be an alternative, since we publish JSON basically.
  * <p>

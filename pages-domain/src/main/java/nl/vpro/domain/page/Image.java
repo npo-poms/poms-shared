@@ -54,7 +54,7 @@ public class Image implements Metadata {
 
     @URI()
     @XmlElement
-    @NotNull(groups = {WarningValidatorGroup.class})
+    @NotNull(groups = {WeakWarningValidatorGroup.class})
     private String source;
 
     @XmlElement

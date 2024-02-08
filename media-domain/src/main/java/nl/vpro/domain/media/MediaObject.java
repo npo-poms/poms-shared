@@ -2073,8 +2073,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return new SortedSetSameElementWrapper<>(sorted(predictions)) {
             @Override
             protected Prediction adapt(Prediction prediction) {
-                prediction.setParent(MediaObject.this);
-                MediaObjects.autoCorrectPrediction(prediction, MediaObject.this);
+                if (predictionsForXml == null) {
+                    prediction.setParent(MediaObject.this);
+                    MediaObjects.autoCorrectPrediction(prediction, MediaObject.this);
+                }
                 return prediction;
             }
             @Override
@@ -2085,19 +2087,20 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
    /**
-     * Implicitly create predictions for all platforms that have a location, but no prediction yet.
-     */
-    public void implicitPredictions() {
+    * Implicitly create predictions for all platforms that have a location, but no prediction yet.
+    */
+   public void implicitPredictions() {
         final Map<Platform, List<Location>> locations = new HashMap<>();
-        getLocations().stream()
-            .filter(Location::hasPlatform)
-            .filter(Location::isConsiderableForPublication)
-            .forEach(l ->
-                locations.computeIfAbsent(
-                    l.getPlatform(),
-                    p -> new ArrayList<>()
-                ).add(l)
-            );
+       getLocations().stream()
+           .filter(Location::hasPlatform)
+                .filter(Location::isConsiderableForPublication)
+                .forEach(l ->
+                    locations.computeIfAbsent(
+                        l.getPlatform(),
+                        p -> new ArrayList<>()
+                    ).add(l)
+                );
+
         for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
             findOrCreatePrediction(entry.getKey(), true, (created) -> {
                 for (Location l : entry.getValue()) {
@@ -2124,15 +2127,21 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected Collection<Prediction> getPredictionsForXml() {
         if (predictionsForXml == null) {
             implicitPredictions();
-            predictionsForXml = Collections2.filter(getPredictions(), p -> p.isPlannedAvailability() && p.getState() != Prediction.State.NOT_ANNOUNCED);
+            if (predictions != null) {
+                predictionsForXml = Collections2.filter(getPredictions(), p -> p.isPlannedAvailability() && p.getState() != Prediction.State.NOT_ANNOUNCED);
+            } else {
+                predictions = new TreeSet<>();
+                predictionsForXml = predictions;
+            }
 
         }
         return predictionsForXml;
     }
 
     protected void setPredictionsForXml(List<Prediction> predictions) {
-        // not call be jackson any more?
+        // not call be jackson anymore?
         this.setPredictions(predictions);
+        this.predictionsForXml = predictions;
     }
 
     /**
