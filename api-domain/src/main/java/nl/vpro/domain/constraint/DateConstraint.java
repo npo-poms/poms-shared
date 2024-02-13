@@ -3,8 +3,8 @@ package nl.vpro.domain.constraint;
 import java.time.Instant;
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;

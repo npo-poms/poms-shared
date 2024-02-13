@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.Serial;
 import java.util.Objects;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;

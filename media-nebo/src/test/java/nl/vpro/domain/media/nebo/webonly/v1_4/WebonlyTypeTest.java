@@ -6,7 +6,7 @@ import java.io.*;
 import java.time.Duration;
 import java.util.Arrays;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;

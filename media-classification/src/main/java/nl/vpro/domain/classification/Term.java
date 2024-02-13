@@ -10,9 +10,9 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.*;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.xml.bind.LocalDateXmlAdapter;
 import nl.vpro.xml.bind.ZeroOneBooleanAdapter;

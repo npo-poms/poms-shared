@@ -1,4 +1,4 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = Namespaces.RDF,
+@jakarta.xml.bind.annotation.XmlSchema(namespace = Namespaces.RDF,
     elementFormDefault = XmlNsForm.QUALIFIED,
     attributeFormDefault = XmlNsForm.QUALIFIED,
     xmlns = {
@@ -12,8 +12,8 @@
     }
 ) package nl.vpro.w3.rdf;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
+import jakarta.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNsForm;
 
 import nl.vpro.openarchives.oai.Namespaces;
 

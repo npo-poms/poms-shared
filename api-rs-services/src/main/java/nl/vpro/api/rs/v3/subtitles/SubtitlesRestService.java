@@ -4,10 +4,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Locale;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 
 import nl.vpro.domain.api.subtitles.SubtitlesForm;
 import nl.vpro.domain.api.subtitles.SubtitlesSearchResult;

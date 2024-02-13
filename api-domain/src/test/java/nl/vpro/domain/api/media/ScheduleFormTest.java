@@ -3,7 +3,7 @@ package nl.vpro.domain.api.media;
 import java.io.IOException;
 import java.io.StringReader;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

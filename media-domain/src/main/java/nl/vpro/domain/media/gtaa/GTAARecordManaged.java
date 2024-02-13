@@ -3,7 +3,7 @@ package nl.vpro.domain.media.gtaa;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlAttribute;
 
 /**
  * @author Michiel Meeuwissen

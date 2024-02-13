@@ -9,8 +9,8 @@ import lombok.Getter;
 
 import java.io.Serial;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 @EqualsAndHashCode

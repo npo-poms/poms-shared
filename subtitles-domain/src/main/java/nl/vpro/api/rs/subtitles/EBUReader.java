@@ -4,8 +4,8 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.util.Iterator;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.ext.Provider;
 
 import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.EBU;

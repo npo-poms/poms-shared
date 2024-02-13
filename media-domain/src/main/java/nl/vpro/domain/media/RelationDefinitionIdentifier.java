@@ -5,9 +5,9 @@ import java.io.Serializable;
 
 import java.util.Comparator;
 
-import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Embeddable
 public class RelationDefinitionIdentifier implements Serializable, Comparable<RelationDefinitionIdentifier> {

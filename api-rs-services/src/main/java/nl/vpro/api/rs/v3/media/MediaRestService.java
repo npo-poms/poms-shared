@@ -4,10 +4,10 @@
  */
 package nl.vpro.api.rs.v3.media;
 
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 
 import org.jboss.resteasy.annotations.cache.NoCache;
 

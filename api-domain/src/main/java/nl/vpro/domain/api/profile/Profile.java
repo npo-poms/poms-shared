@@ -11,10 +11,10 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.time.Instant;
 
-import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXB;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.ws.rs.core.Response;
+import jakarta.xml.bind.JAXB;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

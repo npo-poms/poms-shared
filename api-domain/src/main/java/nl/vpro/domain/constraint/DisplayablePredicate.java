@@ -3,7 +3,7 @@ package nl.vpro.domain.constraint;
 import java.util.*;
 import java.util.function.Predicate;
 
-import javax.el.ELContext;
+import jakarta.el.ELContext;
 
 import org.apache.commons.lang3.StringUtils;
 

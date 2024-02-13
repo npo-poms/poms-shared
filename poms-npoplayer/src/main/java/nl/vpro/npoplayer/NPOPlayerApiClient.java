@@ -4,16 +4,16 @@
  */
 package nl.vpro.npoplayer;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.ws.rs.client.ClientRequestFilter;
+import jakarta.ws.rs.core.MediaType;
+
 import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.ws.rs.client.ClientRequestFilter;
-import javax.ws.rs.core.MediaType;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -50,7 +50,7 @@ public class NPOPlayerApiClient extends AbstractApiClient {
     }
 
     @SuppressWarnings("SpringAutowiredFieldsWarningInspection")
-    public static class Builder implements javax.inject.Provider<NPOPlayerApiClient> {
+    public static class Builder implements jakarta.inject.Provider<NPOPlayerApiClient> {
         @Inject
         @Named("npoplayerapi-rs.url")
         String baseUrl;

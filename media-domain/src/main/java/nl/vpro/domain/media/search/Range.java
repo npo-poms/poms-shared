@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Michiel Meeuwissen

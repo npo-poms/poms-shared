@@ -1,12 +1,13 @@
 package nl.vpro.domain.media.search;
 
+import jakarta.xml.bind.JAXB;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.TreeSet;
 
-import javax.xml.bind.JAXB;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Validator;
 

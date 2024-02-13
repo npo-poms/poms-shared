@@ -4,8 +4,8 @@ package nl.vpro.domain.api.media;
 import java.util.*;
 import java.util.function.Predicate;
 
-import javax.validation.Valid;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.Valid;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;

@@ -3,7 +3,7 @@ package nl.vpro.domain.page.update;
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

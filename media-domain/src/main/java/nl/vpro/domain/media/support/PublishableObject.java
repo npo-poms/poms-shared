@@ -12,10 +12,10 @@ import java.nio.charset.Charset;
 import java.time.Instant;
 import java.util.zip.CRC32;
 
-import javax.persistence.*;
-import javax.xml.bind.JAXB;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.*;
+import jakarta.xml.bind.JAXB;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.checkerframework.checker.nullness.qual.NonNull;

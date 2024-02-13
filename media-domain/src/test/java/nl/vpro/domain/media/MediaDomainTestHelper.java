@@ -4,16 +4,15 @@
  */
 package nl.vpro.domain.media;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.xml.bind.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
 
-import javax.validation.ConstraintViolation;
-import javax.xml.bind.*;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Validator;
 import javax.xml.validation.*;
 
 import org.xml.sax.SAXException;

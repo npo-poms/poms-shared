@@ -6,6 +6,10 @@ package nl.vpro.beeldengeluid.gtaa;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.logging.LoggingMeterRegistry;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Context;
+import jakarta.xml.bind.JAXB;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,11 +26,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.ws.rs.core.Context;
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXB;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
@@ -177,7 +177,8 @@ public class OpenskosRepository implements GTAARepository {
                 IOUtils.copy(response.getBody(), body, StandardCharsets.UTF_8);
                 final RDFPost postRdf = Post_RDF.get();
                 try {
-                    switch (response.getStatusCode()) {
+
+                    switch ((HttpStatus) response.getStatusCode()) {
                         case CONFLICT:
                             throw new GTAAConflict("Conflicting or duplicate label: " + postRdf.prefLabel + ": " + body);
                         case BAD_REQUEST:
@@ -193,7 +194,7 @@ public class OpenskosRepository implements GTAARepository {
                             writer.append("Response:\n");
                             writer.append(body.toString());
                             throw new GTAAError(
-                                response.getRawStatusCode(),
+                                response.getStatusCode().value(),
                                 body.toString(),
                                 "For " + gtaaUrl + " " +
                                 response.getStatusCode() + " " + response.getStatusText() + " " + writer);

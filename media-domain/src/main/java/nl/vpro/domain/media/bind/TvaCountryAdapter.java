@@ -1,6 +1,6 @@
 package nl.vpro.domain.media.bind;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import nl.vpro.domain.media.TvaCountry;
 

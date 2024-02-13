@@ -79,7 +79,7 @@
     <dependency>
       <!-- just added to avoid compile warnings, because dependecies (media-domain) have this optional dependency too -->
       <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
+      <artifactId>hibernate-core-jakarta</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>

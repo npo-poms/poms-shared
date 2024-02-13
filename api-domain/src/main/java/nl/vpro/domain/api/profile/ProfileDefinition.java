@@ -9,8 +9,8 @@ import lombok.Setter;
 
 import java.time.Instant;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.constraint.*;

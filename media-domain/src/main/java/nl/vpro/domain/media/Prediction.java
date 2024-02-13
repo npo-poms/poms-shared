@@ -1,5 +1,10 @@
 package nl.vpro.domain.media;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -8,12 +13,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.Cache;
@@ -30,7 +29,7 @@ import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.Ranges;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
-import static javax.persistence.EnumType.STRING;
+import static jakarta.persistence.EnumType.STRING;
 import static nl.vpro.domain.Changeables.instant;
 
 /**

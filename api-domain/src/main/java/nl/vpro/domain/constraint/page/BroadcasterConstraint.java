@@ -4,10 +4,10 @@
  */
 package nl.vpro.domain.constraint.page;
 
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.constraint.AbstractTextConstraint;
 import nl.vpro.domain.page.Page;
@@ -33,7 +33,7 @@ public class BroadcasterConstraint extends AbstractTextConstraint<Page> {
 
     @Override
     @Size(min = 1, max = 255, message = "2 < id < 256")
-    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,}", message = "type should conform to: [A-Z0-9_-]{2,}")
+    @jakarta.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,}", message = "type should conform to: [A-Z0-9_-]{2,}")
     public void setValue(String v) {
         super.setValue(v);
     }

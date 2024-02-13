@@ -2,7 +2,7 @@ package nl.vpro.domain.i18n;
 
 import lombok.ToString;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import nl.vpro.domain.media.UpdatableIdentifiable;
 
@@ -12,7 +12,7 @@ import nl.vpro.domain.media.UpdatableIdentifiable;
  */
 @Entity
 @ToString(callSuper = true)
-public class WebsiteTranslation extends TextTranslation 
+public class WebsiteTranslation extends TextTranslation
     implements UpdatableIdentifiable<Long, WebsiteTranslation> {
 
 

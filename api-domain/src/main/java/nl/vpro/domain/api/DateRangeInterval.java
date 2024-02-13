@@ -15,10 +15,10 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.WeekFields;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -86,7 +86,7 @@ public class DateRangeInterval implements RangeFacet<Instant> {
         return interval.getValue();
     }
 
-    @javax.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
+    @jakarta.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
     protected void setIntervalString(String value) {
         this.interval = new Interval(ParsedInterval.parse(value));
     }

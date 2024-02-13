@@ -6,9 +6,9 @@ package nl.vpro.domain.user;
 
 import java.io.Serial;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Entity;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.persistence.Cacheable;
+import jakarta.persistence.Entity;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.Xmlns;
 

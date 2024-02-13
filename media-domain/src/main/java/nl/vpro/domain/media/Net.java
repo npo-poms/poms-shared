@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlValue;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.XmlValue;
 
 import nl.vpro.i18n.Displayable;
 
@@ -20,7 +20,7 @@ public class Net implements Displayable, Serializable, Comparable<Net> {
 
     @Id
     @NotNull(message = "type is required")
-    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,12}", message = "type should conform to: [A-Z0-9_-]{2,12}")
+    @jakarta.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,12}", message = "type should conform to: [A-Z0-9_-]{2,12}")
     @XmlValue
     private String id;
 

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.BooleanSupplier;
 
-import javax.el.*;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.el.*;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.*;
 

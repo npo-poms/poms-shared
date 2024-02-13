@@ -3,17 +3,17 @@
  * <p>
  * {@code MediaObject}s are (partially) internationizable. Fields like titles and descriptions are basically in Dutch, but translations can be provided for other languages.
  */
-@javax.xml.bind.annotation.XmlSchema(namespace = Xmlns.MEDIA_I18N_NAMESPACE,
+@jakarta.xml.bind.annotation.XmlSchema(namespace = Xmlns.MEDIA_I18N_NAMESPACE,
     xmlns=
         {
             @XmlNs(prefix = "mediai18n",       namespaceURI = Xmlns.MEDIA_I18N_NAMESPACE)
 
         },
-    elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
-    attributeFormDefault = javax.xml.bind.annotation.XmlNsForm.UNQUALIFIED
+    elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED,
+    attributeFormDefault = jakarta.xml.bind.annotation.XmlNsForm.UNQUALIFIED
 )
 package nl.vpro.domain.i18n;
 
-import javax.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNs;
 
 import nl.vpro.domain.Xmlns;

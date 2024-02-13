@@ -7,8 +7,8 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.w3.rdf.Description;
 

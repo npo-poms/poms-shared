@@ -2,8 +2,8 @@ package nl.vpro.domain.constraint.media;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
 
 import nl.vpro.domain.constraint.AbstractAnd;
 import nl.vpro.domain.constraint.Constraint;

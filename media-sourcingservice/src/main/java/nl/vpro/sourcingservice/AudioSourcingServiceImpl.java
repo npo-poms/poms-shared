@@ -5,8 +5,8 @@ import lombok.extern.log4j.Log4j2;
 
 import java.util.function.Supplier;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.jmx.export.annotation.ManagedResource;

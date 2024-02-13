@@ -3,7 +3,7 @@ package nl.vpro.domain.api;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlAttribute;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

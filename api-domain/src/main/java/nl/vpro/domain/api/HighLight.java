@@ -3,7 +3,7 @@ package nl.vpro.domain.api;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Michiel Meeuwissen

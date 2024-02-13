@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 

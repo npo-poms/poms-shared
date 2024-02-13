@@ -3,7 +3,7 @@ package nl.vpro.domain.page;
 import java.io.IOException;
 import java.io.StringReader;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
 import org.junit.jupiter.api.Test;
 

@@ -3,8 +3,8 @@ package nl.vpro.domain.page;
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.media.RelationDefinitionIdentifier;
@@ -24,7 +24,7 @@ public class RelationDefinition implements Serializable, Identifiable<RelationDe
     }
 
     @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
-    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
+    @jakarta.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
     private String type;
 
     @Id

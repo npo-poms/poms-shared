@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.time.LocalDate;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Disabled;

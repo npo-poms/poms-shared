@@ -13,15 +13,16 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.Identifiable;
 
+@Getter
 @MappedSuperclass
 @XmlAccessorType(XmlAccessType.FIELD)
 @Slf4j
@@ -32,20 +33,16 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
 
     @Id
     @Column(name = "principalid")
-    @Getter
     @NonNull
     protected String principalId;
 
-    @Getter
     @Setter
     protected String givenName;
 
-    @Getter
     @Setter
     protected String familyName;
 
     @Column(nullable = false)
-    @Getter
     @Setter
     protected String displayName;
 
@@ -54,7 +51,6 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         flags = {Pattern.Flag.CASE_INSENSITIVE}
     )
 
-    @Getter
     @Setter
     protected String email;
 
@@ -62,15 +58,12 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
      * The number of times this user was reported as 'logged in' since the 5.12 release.
      */
     @Column
-    @Getter
     protected Instant lastLogin;
 
     @Column(name = "creationDate", nullable = false)
-    @Getter
     protected Instant creationInstant;
 
     @Column
-    @Getter
     @Min(value = 0)
     protected Integer loginCount = 0;
 

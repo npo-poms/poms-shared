@@ -6,7 +6,7 @@ package nl.vpro.domain.media.search;
 
 import java.time.Instant;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

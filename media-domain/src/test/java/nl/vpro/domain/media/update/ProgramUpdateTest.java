@@ -13,8 +13,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
-import javax.validation.ConstraintViolation;
-import javax.xml.bind.JAXB;
+import jakarta.validation.ConstraintViolation;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

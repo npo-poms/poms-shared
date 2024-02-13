@@ -1,4 +1,4 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = Namespaces.DC_TERMS,
+@jakarta.xml.bind.annotation.XmlSchema(namespace = Namespaces.DC_TERMS,
     elementFormDefault = XmlNsForm.QUALIFIED,
     attributeFormDefault = XmlNsForm.QUALIFIED,
     xmlns = {
@@ -12,8 +12,8 @@
     }
 ) package nl.vpro.dublincore.terms;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
+import jakarta.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNsForm;
 
 import nl.vpro.openarchives.oai.Namespaces;
 

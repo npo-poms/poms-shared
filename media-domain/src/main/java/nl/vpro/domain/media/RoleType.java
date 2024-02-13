@@ -4,7 +4,7 @@ import lombok.Getter;
 
 import java.util.Optional;
 
-import javax.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnum;
 
 import nl.vpro.i18n.*;
 

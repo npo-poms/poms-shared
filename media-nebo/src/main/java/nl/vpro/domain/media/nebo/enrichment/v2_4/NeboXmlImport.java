@@ -10,7 +10,7 @@ package nl.vpro.domain.media.nebo.enrichment.v2_4;
 
 import lombok.Getter;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.nebo.base.ImportType;

@@ -8,9 +8,9 @@ import lombok.Data;
 import lombok.ToString;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 @ToString

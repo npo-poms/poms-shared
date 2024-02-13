@@ -3,8 +3,8 @@ package nl.vpro.domain.subtitles;
 
 import lombok.Getter;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.i18n.Displayable;

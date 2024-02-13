@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.MediaIdentifiable;

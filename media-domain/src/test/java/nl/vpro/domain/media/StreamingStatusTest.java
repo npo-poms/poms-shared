@@ -3,7 +3,7 @@ package nl.vpro.domain.media;
 import java.io.StringReader;
 import java.time.LocalDate;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

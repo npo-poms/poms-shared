@@ -7,8 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.DynamicAttributes;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.tagext.DynamicAttributes;
 
 import nl.vpro.domain.image.Picture;
 

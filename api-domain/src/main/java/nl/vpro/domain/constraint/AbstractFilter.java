@@ -7,7 +7,7 @@ package nl.vpro.domain.constraint;
 import java.io.IOException;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;

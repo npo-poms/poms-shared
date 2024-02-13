@@ -7,10 +7,10 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.function.Supplier;
 
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import jakarta.xml.bind.annotation.*;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;

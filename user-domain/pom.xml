@@ -34,7 +34,7 @@
         <dependencies>
           <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
+            <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
             <version>${hibernate.version}</version>
           </dependency>
           <dependency>

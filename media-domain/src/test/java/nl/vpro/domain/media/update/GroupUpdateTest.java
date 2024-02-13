@@ -9,7 +9,7 @@ import java.io.StringReader;
 import java.util.Collections;
 import java.util.TreeSet;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

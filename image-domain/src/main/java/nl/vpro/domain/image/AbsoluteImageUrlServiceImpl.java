@@ -1,9 +1,9 @@
 package nl.vpro.domain.image;
 
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Implementation of {@link ImageUrlService} that can only be configured with an absolute base url.

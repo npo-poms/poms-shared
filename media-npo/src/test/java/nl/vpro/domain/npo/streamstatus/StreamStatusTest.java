@@ -6,11 +6,11 @@ import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 
-import javax.validation.ValidatorFactory;
-import javax.xml.bind.*;
+import jakarta.validation.ValidatorFactory;
+import jakarta.xml.bind.*;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

@@ -1,6 +1,8 @@
 package nl.vpro.domain.subtitles;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +12,6 @@ import java.util.Comparator;
 import java.util.Locale;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.i18n.Locales;
 import nl.vpro.xml.bind.LocaleAdapter;

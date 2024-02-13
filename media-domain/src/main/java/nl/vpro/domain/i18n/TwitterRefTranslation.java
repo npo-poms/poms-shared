@@ -2,7 +2,7 @@ package nl.vpro.domain.i18n;
 
 import lombok.ToString;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 /**
  * @author Michiel Meeuwissen

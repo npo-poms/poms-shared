@@ -10,7 +10,7 @@ import lombok.Getter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

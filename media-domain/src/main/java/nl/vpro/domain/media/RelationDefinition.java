@@ -6,9 +6,9 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.checkerframework.checker.nullness.qual.NonNull;

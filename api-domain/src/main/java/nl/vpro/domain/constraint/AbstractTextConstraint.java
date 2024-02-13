@@ -7,9 +7,9 @@ package nl.vpro.domain.constraint;
 import java.util.Locale;
 import java.util.Objects;
 
-import javax.el.ELContext;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlValue;
+import jakarta.el.ELContext;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlValue;
 
 
 /**

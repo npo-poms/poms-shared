@@ -2,9 +2,9 @@ package nl.vpro.domain.api;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.constraint.DisplayablePredicate;
 import nl.vpro.domain.media.MediaObject;

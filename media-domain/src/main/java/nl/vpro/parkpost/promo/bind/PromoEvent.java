@@ -10,8 +10,8 @@ import lombok.Setter;
 import java.time.Instant;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.parkpost.ProductCode;
 import nl.vpro.xml.bind.InstantXmlAdapter;

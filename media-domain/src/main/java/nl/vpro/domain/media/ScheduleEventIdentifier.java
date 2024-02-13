@@ -9,7 +9,7 @@ import java.time.Instant;
 import java.util.Comparator;
 import java.util.Objects;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import nl.vpro.util.TimeUtils;
 

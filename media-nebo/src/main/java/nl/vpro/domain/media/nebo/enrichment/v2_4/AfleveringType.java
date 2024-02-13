@@ -10,7 +10,7 @@ package nl.vpro.domain.media.nebo.enrichment.v2_4;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
 

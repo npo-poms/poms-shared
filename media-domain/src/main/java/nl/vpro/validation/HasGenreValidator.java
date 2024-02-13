@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
 import nl.vpro.domain.media.MidIdentifiable;
 

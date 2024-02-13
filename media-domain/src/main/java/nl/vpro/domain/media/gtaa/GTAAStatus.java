@@ -2,7 +2,7 @@ package nl.vpro.domain.media.gtaa;
 
 import lombok.Getter;
 
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.i18n.Displayable;

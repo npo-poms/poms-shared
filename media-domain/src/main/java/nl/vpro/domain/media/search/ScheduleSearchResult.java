@@ -6,7 +6,7 @@ package nl.vpro.domain.media.search;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.media.ScheduleEvent;
 

@@ -2,8 +2,8 @@ package nl.vpro.api.rs.subtitles;
 
 import java.util.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.MultivaluedMap;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.ws.rs.core.MultivaluedMap;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.PeekingIterator;

@@ -4,12 +4,12 @@
  */
 package nl.vpro.api.rs.v3.page;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
 import org.jboss.resteasy.annotations.cache.NoCache;

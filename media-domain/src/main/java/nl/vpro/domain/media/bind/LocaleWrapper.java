@@ -2,7 +2,7 @@ package nl.vpro.domain.media.bind;
 
 import java.util.Locale;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

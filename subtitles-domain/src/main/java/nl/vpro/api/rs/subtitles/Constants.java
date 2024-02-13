@@ -4,7 +4,7 @@
  */
 package nl.vpro.api.rs.subtitles;
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 
 /**
 

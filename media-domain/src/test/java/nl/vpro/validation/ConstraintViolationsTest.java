@@ -2,9 +2,9 @@ package nl.vpro.validation;
 
 import java.util.Collection;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.Test;
 

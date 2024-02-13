@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import javax.xml.bind.annotation.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
+import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;

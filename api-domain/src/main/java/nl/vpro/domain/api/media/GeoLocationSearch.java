@@ -5,7 +5,7 @@ import lombok.*;
 import java.net.URI;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 

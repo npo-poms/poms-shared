@@ -70,7 +70,7 @@ $(jaxb):
 	$(get) -DgroupId=com.sun.xml.bind -DartifactId=jaxb-core -Dversion=$(V) -Dpackaging=jar
 
 $(jaxbapi):
-	$(get) -DgroupId=javax.xml.bind -DartifactId=jaxb-api -Dversion=$(VB) -Dpackaging=jar
+	$(get) -DgroupId=jakarta.xml.bind -DartifactId=jaxb-api -Dversion=$(VB) -Dpackaging=jar
 
 $(jaxbimpl):
 	$(get) -DgroupId=com.sun.xml.bind -DartifactId=jaxb-impl -Dversion=$(V) -Dpackaging=jar

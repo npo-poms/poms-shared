@@ -11,8 +11,8 @@ import java.util.EnumSet;
 import java.util.Properties;
 import java.util.function.*;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;

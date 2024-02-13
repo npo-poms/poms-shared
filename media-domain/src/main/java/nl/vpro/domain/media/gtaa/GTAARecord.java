@@ -7,7 +7,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

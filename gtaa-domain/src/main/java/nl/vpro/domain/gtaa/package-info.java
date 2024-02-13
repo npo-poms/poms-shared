@@ -1,7 +1,7 @@
 /**
  * See https://docs.google.com/document/d/16L_Gp2awzwa3GHOPNIcK-9LNB0iMZgif-JUfFCMOkkg/edit?pref=2&pli=1}
  */
-@javax.xml.bind.annotation.XmlSchema(namespace = Xmlns.GTAA_NAMESPACE,
+@jakarta.xml.bind.annotation.XmlSchema(namespace = Xmlns.GTAA_NAMESPACE,
     xmlns = {
         @XmlNs(prefix = "rdf",      namespaceURI = Namespaces.RDF),
         @XmlNs(prefix = "skos",     namespaceURI = Namespaces.SKOS),
@@ -13,14 +13,14 @@
 
 
     },
-    elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+    elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED,
     attributeFormDefault = XmlNsForm.QUALIFIED
 )
 
 package nl.vpro.domain.gtaa;
 
-import javax.xml.bind.annotation.XmlNs;
-import javax.xml.bind.annotation.XmlNsForm;
+import jakarta.xml.bind.annotation.XmlNs;
+import jakarta.xml.bind.annotation.XmlNsForm;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.openarchives.oai.Namespaces;

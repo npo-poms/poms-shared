@@ -2,9 +2,9 @@ package nl.vpro.domain.media;
 
 import java.time.LocalDate;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.xml.bind.JAXB;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

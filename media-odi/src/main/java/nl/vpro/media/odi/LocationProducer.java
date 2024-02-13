@@ -6,8 +6,8 @@ package nl.vpro.media.odi;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotNull;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.NotNull;
 
 import nl.vpro.domain.media.Location;
 import nl.vpro.media.odi.util.LocationResult;

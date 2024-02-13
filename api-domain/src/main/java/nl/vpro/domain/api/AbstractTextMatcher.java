@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.api;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.*;
 import org.checkerframework.checker.nullness.qual.Nullable;

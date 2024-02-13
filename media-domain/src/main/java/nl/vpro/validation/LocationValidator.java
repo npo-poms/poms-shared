@@ -2,8 +2,8 @@ package nl.vpro.validation;
 
 import java.net.URISyntaxException;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * @author Michiel Meeuwissen

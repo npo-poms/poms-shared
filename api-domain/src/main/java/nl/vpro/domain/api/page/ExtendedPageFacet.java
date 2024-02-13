@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.api.page;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.api.ExtendedTextFacet;
 import nl.vpro.domain.api.FacetOrder;

@@ -5,8 +5,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.SortedMap;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * If not using spring for ehcache configuration, this can be used to cache 5 minutes (or some other interval).

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.apache.http.client.utils.DateUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;

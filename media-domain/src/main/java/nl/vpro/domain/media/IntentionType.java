@@ -1,7 +1,7 @@
 package nl.vpro.domain.media;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 import nl.vpro.i18n.Displayable;
 

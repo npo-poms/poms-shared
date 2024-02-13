@@ -1,8 +1,8 @@
 package nl.vpro.domain.image.backend;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
-import javax.validation.groups.Default;
+import jakarta.validation.groups.Default;
 
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 import org.junit.jupiter.api.Test;

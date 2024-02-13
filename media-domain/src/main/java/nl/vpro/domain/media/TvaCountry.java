@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.neovisionaries.i18n.CountryCode;
 

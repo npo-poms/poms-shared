@@ -11,7 +11,7 @@ package nl.vpro.domain.media.nebo.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.Program;

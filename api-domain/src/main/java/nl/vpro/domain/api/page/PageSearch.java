@@ -6,8 +6,8 @@ import java.time.Instant;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import javax.validation.Valid;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.Valid;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 

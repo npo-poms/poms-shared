@@ -11,7 +11,7 @@ import java.io.Writer;
 import java.time.Instant;
 import java.util.Arrays;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 

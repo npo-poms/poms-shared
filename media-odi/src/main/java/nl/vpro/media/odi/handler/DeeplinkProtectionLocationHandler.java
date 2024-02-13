@@ -14,8 +14,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 import nl.vpro.domain.media.Location;
 import nl.vpro.media.odi.LocationProducer;

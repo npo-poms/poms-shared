@@ -1,6 +1,6 @@
 package nl.vpro.domain.constraint;
 
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
 * @author Michiel Meeuwissen

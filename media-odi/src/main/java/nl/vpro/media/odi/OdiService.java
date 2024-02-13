@@ -4,7 +4,7 @@
  */
 package nl.vpro.media.odi;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.MediaObject;

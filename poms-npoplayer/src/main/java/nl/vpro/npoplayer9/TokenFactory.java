@@ -1,7 +1,9 @@
 package nl.vpro.npoplayer9;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +13,6 @@ import java.time.Clock;
 import java.time.temporal.ChronoUnit;
 
 import javax.crypto.SecretKey;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

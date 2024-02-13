@@ -7,8 +7,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.function.Function;
 
-import javax.el.ELContext;
-import javax.el.ExpressionFactory;
+import jakarta.el.ELContext;
+import jakarta.el.ExpressionFactory;
 
 /**
  * @author Michiel Meeuwissen
@@ -59,7 +59,7 @@ class DisplayablePredicates {
     }
 
     public static <T> OrPredicateTestResult or(AbstractOr<T> constraint, T value, List<PredicateTestResult>  results) {
-        if (results.size() == 0) {
+        if (results.isEmpty()) {
             return new OrPredicateTestResult(constraint, value, false, Collections.singletonList("orwithoutpredicates"), Collections.emptyList());
         }
         boolean applies = false;
@@ -98,7 +98,7 @@ class DisplayablePredicates {
     static ELContext createELContext(ExpressionFactory factory) {
         if (CONSTRUCTOR == null) {
             try {
-                Class<? extends ELContext> clazz = (Class<? extends ELContext>) Class.forName("javax.el.StandardELContext");
+                Class<? extends ELContext> clazz = (Class<? extends ELContext>) Class.forName("jakarta.el.StandardELContext");
                 Constructor<? extends ELContext> constructor = clazz.getConstructor(ExpressionFactory.class);
                 CONSTRUCTOR = (f) -> {
                     try {

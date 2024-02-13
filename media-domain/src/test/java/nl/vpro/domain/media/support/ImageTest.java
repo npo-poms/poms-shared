@@ -3,7 +3,7 @@ package nl.vpro.domain.media.support;
 import java.time.LocalDate;
 import java.util.Set;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
 import org.junit.jupiter.api.Test;
 

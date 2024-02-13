@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
 /**
  * @author Michiel Meeuwissen

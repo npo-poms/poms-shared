@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 import java.util.function.Function;
 
-import javax.validation.*;
-import javax.validation.executable.ExecutableValidator;
-import javax.validation.groups.Default;
-import javax.validation.metadata.BeanDescriptor;
+import jakarta.validation.*;
+import jakarta.validation.executable.ExecutableValidator;
+import jakarta.validation.groups.Default;
+import jakarta.validation.metadata.BeanDescriptor;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.validator.HibernateValidator;
@@ -19,7 +19,7 @@ import com.google.common.cache.*;
 import nl.vpro.i18n.Locales;
 import nl.vpro.validation.*;
 
-import static javax.validation.Validation.byProvider;
+import static jakarta.validation.Validation.byProvider;
 
 /**
  * @author Michiel Meeuwissen
@@ -62,7 +62,7 @@ public class Validation {
             Locale.setDefault(defaultLocale);
         }
         if (validator == null) {
-            log.info("No validator could be constructed for ({}). javax.validation will be disabled", locale);
+            log.info("No validator could be constructed for ({}). jakarta.validation will be disabled", locale);
             return new Validator() {
                 @Override
                 public <T> Set<ConstraintViolation<T>> validate(T object, Class<?>... groups) {

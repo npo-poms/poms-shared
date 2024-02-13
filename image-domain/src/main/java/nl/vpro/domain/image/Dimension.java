@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.io.Serial;
 
-import javax.validation.constraints.Positive;
+import jakarta.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

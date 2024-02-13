@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.time.LocalDateTime;
 
-import javax.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolation;
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.*;
 

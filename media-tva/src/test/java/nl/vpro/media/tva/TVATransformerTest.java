@@ -15,9 +15,9 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import javax.validation.*;
-import javax.xml.bind.JAXB;
-import javax.xml.parsers.ParserConfigurationException;
+import jakarta.validation.*;
+import jakarta.xml.bind.JAXB;
+import javax.xml.parsers .ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;

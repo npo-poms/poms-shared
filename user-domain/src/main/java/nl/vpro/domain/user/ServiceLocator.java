@@ -2,8 +2,8 @@ package nl.vpro.domain.user;
 
 import java.util.*;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 

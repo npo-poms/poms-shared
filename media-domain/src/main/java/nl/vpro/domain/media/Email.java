@@ -8,12 +8,12 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.Size;
-import javax.validation.groups.Default;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.groups.Default;
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.PolyNull;
@@ -53,7 +53,7 @@ public class Email implements Serializable, Supplier<String>, MutableOwnable, Up
     @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     @Getter
     @Setter
-    @javax.validation.constraints.Email(
+    @jakarta.validation.constraints.Email(
         message = "{nl.vpro.constraints.Email.message}",
         groups = Default.class)
     @JsonValue

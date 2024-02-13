@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.Xmlns;
 

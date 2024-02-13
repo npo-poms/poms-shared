@@ -4,8 +4,8 @@
  */
 package nl.vpro.rs.npoplayer;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 
 import nl.vpro.domain.npoplayer.*;
 import nl.vpro.npoplayer9.*;

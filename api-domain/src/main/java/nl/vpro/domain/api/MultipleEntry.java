@@ -2,7 +2,7 @@ package nl.vpro.domain.api;
 
 import lombok.Data;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 

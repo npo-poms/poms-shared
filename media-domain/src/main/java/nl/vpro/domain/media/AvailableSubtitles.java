@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Locale;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.subtitles.SubtitlesWorkflow;

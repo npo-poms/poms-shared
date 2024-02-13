@@ -2,7 +2,7 @@ package nl.vpro.domain.media.nebo.sync;
 
 import java.util.Date;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Danny

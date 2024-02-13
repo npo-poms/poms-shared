@@ -1,5 +1,6 @@
 package nl.vpro.domain;
 
+import jakarta.xml.bind.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.*;
 import javax.xml.transform.Result;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMResult;

@@ -6,7 +6,7 @@ package nl.vpro.media.odi.util;
 
 import lombok.ToString;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;

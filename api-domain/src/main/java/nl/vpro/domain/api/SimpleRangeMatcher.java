@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.api;
 
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Michiel Meeuwissen

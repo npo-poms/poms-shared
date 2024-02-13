@@ -2,8 +2,8 @@ package nl.vpro.domain.page;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.URI;

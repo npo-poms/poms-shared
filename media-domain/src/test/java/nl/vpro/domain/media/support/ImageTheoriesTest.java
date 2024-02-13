@@ -10,7 +10,7 @@ import net.jqwik.api.Arbitrary;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 import org.meeuw.theories.BasicObjectTheory;

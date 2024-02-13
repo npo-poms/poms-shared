@@ -12,12 +12,12 @@ import java.io.*;
 import java.net.URI;
 import java.time.Instant;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.functional.ThrowAnySupplier;

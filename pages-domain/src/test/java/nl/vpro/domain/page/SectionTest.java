@@ -6,7 +6,7 @@ package nl.vpro.domain.page;
 
 import java.util.Set;
 
-import javax.validation.*;
+import jakarta.validation.*;
 
 import org.junit.jupiter.api.*;
 
