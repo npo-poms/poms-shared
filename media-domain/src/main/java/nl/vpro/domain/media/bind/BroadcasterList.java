@@ -3,13 +3,10 @@ package nl.vpro.domain.media.bind;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.*;
 
 import nl.vpro.domain.bind.AbstractJsonIterable;
 import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * Might not be needed.
@@ -33,7 +30,7 @@ public class BroadcasterList {
 
         @Override
         protected Broadcaster deserializeValue(JsonNode node, DeserializationContext ctxt) throws IOException {
-            return Jackson2Mapper.getInstance().readerFor(Broadcaster.class).readValue(node);
+            return  ctxt.getParser().getCodec().treeToValue(node, Broadcaster.class);
         }
     }
 }

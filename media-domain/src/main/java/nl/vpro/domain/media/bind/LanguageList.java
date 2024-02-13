@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.util.Locale;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.*;
 
 import nl.vpro.domain.bind.AbstractJsonIterable;
-import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * Might not be needed.
@@ -33,7 +30,7 @@ public class LanguageList {
 
         @Override
         protected Locale deserializeValue(JsonNode node, DeserializationContext ctxt) throws IOException {
-            LocaleWrapper wrapper = Jackson2Mapper.getInstance().readerFor(LocaleWrapper.class).readValue(node);
+            LocaleWrapper wrapper = ctxt.getParser().getCodec().treeToValue(node, LocaleWrapper.class);
             return wrapper.getLocale();
         }
     }
