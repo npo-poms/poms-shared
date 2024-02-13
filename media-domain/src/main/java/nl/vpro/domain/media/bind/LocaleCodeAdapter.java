@@ -13,11 +13,9 @@ import nl.vpro.i18n.LocalizedString;
  */
 public class LocaleCodeAdapter extends XmlAdapter<String, Locale> {
 
-
     @Override
     public Locale unmarshal(String v) {
         return LocalizedString.adapt(v);
-
     }
 
     @Override

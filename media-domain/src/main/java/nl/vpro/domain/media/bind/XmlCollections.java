@@ -26,7 +26,7 @@ public class XmlCollections {
 
 
         @Override
-        public XmlCollection<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+        public XmlCollection<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
             List<?> values = jsonParser.readValueAs(List.class);
             return  new XmlCollection<>(values);
         }

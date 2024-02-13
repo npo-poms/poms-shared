@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
@@ -42,17 +41,19 @@ public class GenreSortedSet {
 
         @Override
         public Iterable<Genre> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-            if (jp.getCodec() == null) {
+            ObjectCodec codec = jp.getCodec();
+            if (codec == null) {
                 // In org/ektorp/impl/QueryResultParser.java#parseRows(JsonParser jp) it does row.doc.traverse()
                 // traverse() gives a new JsonParser, but without the original Codec. Seems a bug. But this work around it.
                 jp.setCodec(Jackson2Mapper.getInstance());
+                codec = jp.getCodec();
             }
 
             final SortedSet<Genre> types = new TreeSet<>();
 
             final ArrayNode array = jp.readValueAs(ArrayNode.class);
             for (JsonNode jsonNode : array) {
-                Genre type = Jackson2Mapper.getInstance().readerFor(Genre.class).readValue(jsonNode);
+                Genre type = codec.treeToValue(jsonNode, Genre.class);
                 types.add(type);
             }
             return types;

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.*;
 
 import nl.vpro.domain.bind.AbstractJsonIterable;
-import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * Might not be needed.
@@ -44,7 +43,7 @@ public class CountryCodeList {
                 return null;
             }
             try {
-                CountryWrapper wrapper = Jackson2Mapper.getInstance().readerFor(CountryWrapper.class).readValue(node);
+                CountryWrapper wrapper = ctxt.getParser().getCodec().treeToValue(node, CountryWrapper.class);
                 return wrapper == null ? null : wrapper.getCode();
 
             } catch (Exception e) {

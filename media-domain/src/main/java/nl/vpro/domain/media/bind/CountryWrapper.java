@@ -1,5 +1,6 @@
 package nl.vpro.domain.media.bind;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
@@ -20,6 +21,7 @@ import nl.vpro.i18n.Locales;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
+@Getter
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "countryType", propOrder = {"name"})
 @JsonPropertyOrder({"code", "value"})
@@ -52,10 +54,6 @@ public class CountryWrapper {
     @JsonProperty("value")
     public void setName(String name) {
         // i hate jaxb
-    }
-
-    public Region getCode() {
-        return code;
     }
 
     @Override
