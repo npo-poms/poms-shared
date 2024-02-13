@@ -3,7 +3,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>${revision}${changelist}</version>
+    <version>7.11.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>poms-shared-domain</artifactId>
