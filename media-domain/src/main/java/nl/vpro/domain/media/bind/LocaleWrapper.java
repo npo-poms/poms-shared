@@ -16,7 +16,9 @@ import nl.vpro.i18n.LocalizedString;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "languageType",
     propOrder = {"name"})
-@JsonPropertyOrder({"code", "value"})
+@JsonPropertyOrder(
+    {"code", "value"}
+)
 public class LocaleWrapper {
 
 
@@ -38,6 +40,7 @@ public class LocaleWrapper {
     public String getName() {
         return locale == null ? "" : locale.getDisplayLanguage(NL);
     }
+    @JsonProperty("value")
     public void setName(String name) {
         // I hate jaxb
 

@@ -70,6 +70,7 @@ import nl.vpro.domain.user.Organization;
 @ToString
 public class MediaForm {
 
+    @Getter
     @XmlElement(required = true)
     @Valid
     private MediaPager pager = new MediaPager();
@@ -80,6 +81,7 @@ public class MediaForm {
     @JsonProperty("broadcasters")
     private Collection<String> broadcasters;
 
+    @Getter
     @Setter
     @XmlElement(name = "portal")
     @JsonProperty("portals")
@@ -89,6 +91,7 @@ public class MediaForm {
      * To search on any of the organizations (so both broadcasters and portals)
      * This is needed because if you use 'broadcasters' and 'portals' seperately, that will result in an AND.
      */
+    @Getter
     @Setter
     @XmlElement(name = "organization")
     @JsonProperty("organizations")
@@ -99,6 +102,7 @@ public class MediaForm {
     private boolean writable = false;
     */
 
+    @Getter
     @XmlElement
     private String text;
 
@@ -111,6 +115,7 @@ public class MediaForm {
     @JsonProperty("types")
     private Collection<MediaType> types;
 
+    @Getter
     @XmlElement
     protected Short releaseYear;
 
@@ -137,10 +142,20 @@ public class MediaForm {
     @XmlElement
     private Boolean noPlaylist;
 
+    /**
+     * -- GETTER --
+     *
+     */
+    @Getter
     @Setter
     @XmlElement
     private InstantRange sortRange;
 
+    /**
+     * -- GETTER --
+     *  Searches only in 'first showing' event
+     */
+    @Getter
     @XmlElement
     private InstantRange eventRange;
 
@@ -161,6 +176,7 @@ public class MediaForm {
     @Setter
     private EditorSearch createdBy;
 
+    @Getter
     @Setter
     @XmlElement
     private InstantRange creationRange;
@@ -170,10 +186,16 @@ public class MediaForm {
     @Setter
     private EditorSearch lastModifiedBy;
 
+    @Getter
     @Setter
     @XmlElement
     private InstantRange lastModifiedRange;
 
+    /**
+     * -- GETTER --
+     *  Searches in all available events.
+     */
+    @Getter
     @Setter
     @XmlElement
     private InstantRange scheduleEventRange;
@@ -183,11 +205,13 @@ public class MediaForm {
     @Setter
     private InstantRange lastPublishedRange;
 
+    @Getter
     @Setter
     @XmlElement(name = "tag")
     @JsonProperty("tags")
     private Collection<String> tags;
 
+    @Getter
     @Setter
     @XmlElement
     private AVType avType;
@@ -227,6 +251,7 @@ public class MediaForm {
     @XmlElement
     private Boolean findDeleted;
 
+    @Getter
     @Setter
     @XmlElement(name = "excludedMid")
     @JsonProperty("excludedMids")
@@ -355,29 +380,13 @@ public class MediaForm {
         }
     }
 
-    public MediaPager getPager() {
-        return pager;
-    }
-
-    public Collection<String> getBroadcasters() {
-        return broadcasters;
-    }
-
 
     public boolean hasBroadcasters() {
         return has(broadcasters);
     }
 
-    public Collection<String> getPortals() {
-        return portals;
-    }
-
     public boolean hasPortals() {
         return has(portals);
-    }
-
-    public String getText() {
-        return text;
     }
 
     public MediaForm setText(String text) {
@@ -428,10 +437,6 @@ public class MediaForm {
     public MediaForm setReleaseYear(Short s) {
         releaseYear = s;
         return this;
-    }
-
-    public Short getReleaseYear() {
-        return releaseYear;
     }
 
     public boolean hasReleaseDate() {
@@ -527,24 +532,10 @@ public class MediaForm {
         this.noCredits = noCredits;
     }
 
-    /**
-     * @since 3.4
-     */
-    public InstantRange getSortRange() {
-        return sortRange;
-    }
-
     public boolean hasSortRange() {
         return sortRange != null && sortRange.hasValues();
     }
 
-
-    /**
-     * Searches only in 'first showing' event
-     */
-    public InstantRange getEventRange() {
-        return eventRange;
-    }
 
     public boolean hasEventRange() {
         return eventRange != null && eventRange.hasValues();
@@ -563,10 +554,6 @@ public class MediaForm {
         return createdBy != null && StringUtils.isNotBlank(createdBy.getText());
     }
 
-    public InstantRange getCreationRange() {
-        return creationRange;
-    }
-
     public boolean hasCreationRange() {
         return creationRange != null && creationRange.hasValues();
     }
@@ -575,35 +562,16 @@ public class MediaForm {
         return lastModifiedBy != null && StringUtils.isNotBlank(lastModifiedBy.getText());
     }
 
-    public InstantRange getLastModifiedRange() {
-        return lastModifiedRange;
-    }
-
     public boolean hasModifiedRange() {
         return lastModifiedRange != null && lastModifiedRange.hasValues();
-    }
-
-    /**
-     * Searches in all available events.
-     */
-    public InstantRange getScheduleEventRange() {
-        return scheduleEventRange;
     }
 
     public boolean hasScheduleEventRange() {
         return scheduleEventRange != null && scheduleEventRange.hasValues();
     }
 
-    public Collection<Organization> getOrganizations() {
-        return organizations;
-    }
-
     public boolean hasOrganizations() {
         return organizations != null;
-    }
-
-    public Collection<String> getTags() {
-        return tags;
     }
 
     public boolean hasTags() {
@@ -614,10 +582,6 @@ public class MediaForm {
         return streamingPlatformStatuses != null && !streamingPlatformStatuses.isEmpty();
     }
 
-
-    public AVType getAvType() {
-        return avType;
-    }
 
     @Deprecated
     public boolean isNotAnEpisode() {
@@ -631,10 +595,6 @@ public class MediaForm {
 
     public boolean isFindDeleted() {
         return findDeleted == null || findDeleted;
-    }
-
-    public Collection<String> getExcludedMids() {
-        return excludedMids;
     }
 
     public boolean hasExcludedMids() {
