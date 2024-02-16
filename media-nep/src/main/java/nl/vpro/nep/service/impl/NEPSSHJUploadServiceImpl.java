@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.EnumSet;
 import java.util.Properties;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Supplier;
 
 import jakarta.annotation.PreDestroy;
@@ -126,9 +127,11 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             }
             if (! replaces) {
                 if (!checkExistence(logger, sftp, nepFile, size)) {
+                    log.info("File {} already exists, not replacing", nepFile);
                     return -1;
                 }
             }
+            long numberOfBytes = 0;
             try (
                 final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
                 final OutputStream out = handle.new RemoteFileOutputStream()
@@ -136,7 +139,6 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 final byte[] buffer = new byte[batchSize];
                 long prevBatchCount = -1;
                 long batchCount = 0;
-                long numberOfBytes = 0;
                 int n;
                 while (IOUtils.EOF != (n = incomingStream.read(buffer))) {
                     if (n == 0) {
@@ -176,18 +178,29 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                             duration,
                             FORMATTER.formatSpeed(numberOfBytes, duration))
                 );
+                assert  handle.length() == numberOfBytes;
                 return numberOfBytes;
             } catch (SFTPException sftpException) {
                 Throwable e = sftpException;
                 if (sftpException.getCause() != null) {
                     e = sftpException.getCause();
                 }
-                logger.info("error from sftp: {}", e.getMessage(), e);
+                logger.warn("error from sftp: {}", e.getMessage(), e);
+                if (e instanceof TimeoutException) {
+                    if (numberOfBytes == size) {
+                        log.info("But the number of transferred bytes is correct. So we assume it is ok");
+                        return numberOfBytes;
+                    }
+                }
                 throw sftpException;
             }
         }
     }
 
+    /**
+     * Checks whether the file is already existing on the remote end, and has the expected size.
+     * @return false if the file is already there and has the expected size, true if it is not there or has a different size.
+     */
     private boolean checkExistence(
         SimpleLogger logger,
         SFTPClient sftp,
