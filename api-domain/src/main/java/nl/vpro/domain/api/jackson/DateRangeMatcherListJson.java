@@ -1,19 +1,13 @@
 package nl.vpro.domain.api.jackson;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 
-import nl.vpro.domain.api.DateRangeMatcher;
-import nl.vpro.domain.api.DateRangeMatcherList;
-import nl.vpro.domain.api.Match;
-import nl.vpro.domain.api.MatcherList;
-import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.domain.api.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -63,11 +57,11 @@ public class DateRangeMatcherListJson {
                 List<DateRangeMatcher> list = new ArrayList<>();
                 if (jsonNode.has(VALUE)) {
                     for (JsonNode child : jsonNode.get(VALUE)) {
-                        DateRangeMatcher dm = Jackson2Mapper.getInstance().readValue(child.traverse(), DateRangeMatcher.class);
+                        DateRangeMatcher dm = jp.getCodec().readValue(child.traverse(), DateRangeMatcher.class);
                         list.add(dm);
                     }
                 } else {
-                    list.add(Jackson2Mapper.getInstance().readValue(jsonNode.traverse(), DateRangeMatcher.class));
+                    list.add(jp.getCodec().readValue(jsonNode.traverse(), DateRangeMatcher.class));
                 }
                 return new DateRangeMatcherList(list, match);
             } else if (jp.getParsingContext().inArray()) {
