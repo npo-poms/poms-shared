@@ -7,23 +7,17 @@ package nl.vpro.domain.api.jackson;
 import java.io.IOException;
 import java.time.Duration;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.TreeNode;
+import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
+import com.fasterxml.jackson.databind.node.*;
 
 import nl.vpro.domain.api.*;
-import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.3
  */
 public class DurationRangeFacetsToJson {
-    private static final ObjectMapper mapper = Jackson2Mapper.getInstance();
 
     private DurationRangeFacetsToJson() {
     }
@@ -46,17 +40,17 @@ public class DurationRangeFacetsToJson {
         public DurationRangeFacets<?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
             DurationRangeFacets<?> result = new DurationRangeFacets<>();
 
-            TreeNode treeNode = mapper.readTree(jp);
+            TreeNode treeNode = jp.getCodec().readTree(jp);
             if(treeNode instanceof ArrayNode arrayNode) {
                 for(JsonNode jsonNode : arrayNode) {
                     if(jsonNode.isTextual()) {
                         result.addRanges(new DurationRangeInterval(jsonNode.textValue()));
                     } else {
-                        result.addRanges(mapper.readValue(jsonNode.toString(), DurationRangeFacetItem.class));
+                        result.addRanges(jp.getCodec().readValue(jsonNode.traverse(), DurationRangeFacetItem.class));
                     }
                 }
             } else if(treeNode instanceof ObjectNode) {
-                result.addRanges(mapper.readValue((treeNode).toString(), DurationRangeFacetItem.class));
+                result.addRanges(jp.getCodec().readValue(treeNode.traverse(), DurationRangeFacetItem.class));
             } else if(treeNode instanceof TextNode) {
                 result.addRanges(new DurationRangeInterval(((TextNode)treeNode).textValue()));
             } else {

@@ -11,6 +11,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.annotations.Beta;
 
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -59,10 +60,12 @@ public class PictureMetadata extends MetadataWrapper implements Picture, ImageMe
         return wrapped.getAreaOfInterest();
     }
 
+    private static final ObjectMapper MAPPER = Jackson2Mapper.getInstance();
+
     @Override
     public String toString() {
         try {
-            return Jackson2Mapper.getInstance().writeValueAsString(this);
+            return MAPPER.writeValueAsString(this);
         } catch (JsonProcessingException e) {
             return super.toString();
         }

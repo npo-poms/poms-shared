@@ -10,6 +10,7 @@ import java.time.Duration;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 
@@ -67,10 +68,13 @@ public class LetterBoxRegistration implements Serializable {
         this.errors = errors;
     }
 
+
+    private static final ObjectMapper MAPPER = Jackson2Mapper.getInstance();
+
     @Override
     public String toString() {
         try {
-            return Jackson2Mapper.getInstance().writeValueAsString(this);
+            return MAPPER.writeValueAsString(this);
         } catch (JsonProcessingException e) {
             log.error(e.getMessage(), e);
             return e.getMessage();

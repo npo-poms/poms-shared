@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.*;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.media.DurationRangeMatcher;
-import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * @author Michiel Meeuwissen
@@ -54,11 +53,11 @@ public class DurationRangeMatcherListJson {
                 List<DurationRangeMatcher> list = new ArrayList<>();
                 if (jsonNode.has("value")) {
                     for (JsonNode child : jsonNode.get("value")) {
-                        DurationRangeMatcher dm = Jackson2Mapper.getInstance().readValue(child.traverse(), DurationRangeMatcher.class);
+                        DurationRangeMatcher dm = jp.getCodec().readValue(child.traverse(), DurationRangeMatcher.class);
                         list.add(dm);
                     }
                 } else {
-                    list.add(Jackson2Mapper.getInstance().readValue(jsonNode.traverse(), DurationRangeMatcher.class));
+                    list.add(jp.getCodec().readValue(jsonNode.traverse(), DurationRangeMatcher.class));
                 }
                 return new DurationRangeMatcherList(list, match);
             } else if (jp.getParsingContext().inArray()) {
