@@ -168,6 +168,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                         log.debug("Uploaded {}/{} bytes to NEP", FORMATTER.format(numberOfBytes), FORMATTER.format(size));
                     }
                 }
+                out.flush();
                 final Duration duration = Duration.between(start, Instant.now());
                 logger.info(
                     en("Ready uploading {}/{} (took {}, {})")
@@ -178,6 +179,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                             duration,
                             FORMATTER.formatSpeed(numberOfBytes, duration))
                 );
+
                 assert  handle.length() == numberOfBytes;
                 return numberOfBytes;
             } catch (SFTPException sftpException) {
