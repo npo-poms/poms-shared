@@ -181,6 +181,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 );
 
                 assert  handle.length() == numberOfBytes;
+                assert  numberOfBytes == size;
+
                 return numberOfBytes;
             } catch (SFTPException sftpException) {
                 Throwable e = sftpException;
