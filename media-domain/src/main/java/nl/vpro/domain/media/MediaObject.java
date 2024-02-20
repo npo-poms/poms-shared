@@ -1269,7 +1269,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return countries;
     }
 
-    public void setCountries(List<org.meeuw.i18n.regions.Region> countries) {
+    public void setCountries(List<? extends org.meeuw.i18n.regions.Region> countries) {
         this.countries = updateList(this.countries, countries);
     }
 

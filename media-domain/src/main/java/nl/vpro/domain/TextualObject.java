@@ -53,7 +53,7 @@ public interface TextualObject<
      * Sets title if already set, otherwise {@link #addTitle(String, OwnerType owner, TextualType)}
      * @since 5.11
      */
-    default void setTitle(String title, @NonNull OwnerType owner, @NonNull TextualType type) {
+    default void setTitle(@NonNull String title, @NonNull OwnerType owner, @NonNull TextualType type) {
         if (getTitles() != null) {
             for (T t : getTitles()) {
                 if (t.getType() == type && t.getOwner() == owner) {
