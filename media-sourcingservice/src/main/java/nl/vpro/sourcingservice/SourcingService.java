@@ -29,38 +29,21 @@ public interface SourcingService {
 
 
 
-
-    /**
+ 
+     /**
      * Upload an (audio) asset to the NEP CDN
      * @param logger a logger to log progress to, may be showing to gui users too
      * @param mid the associated mid to upload the asset for
      * @param fileSize The Sourcing service needs to know beforehand how big the asset will be.
      * @param inputStream The inputStream for the asset. Will be implicitly closed when consumed (or when an exception occurs)
      * @param errors email address to associate with mishaps
-     * @param phase a consumer which will be called when the {@link Phase 'phase'} of the upload process changes. Uploading to sourcing service ia a multistep process.
-     */
-    @Deprecated
-    default UploadResponse upload(
-        SimpleLogger logger,
-        String mid,
-        long fileSize,
-        String contentType,
-        byte @Nullable[] checksum,
-        InputStream inputStream,
-        @Nullable String errors,
-        Consumer<Phase> phase) throws IOException, InterruptedException, SourcingServiceException {
-        return upload(logger, mid, fileSize, contentType, inputStream, errors);
-    }
-
-    /**
-     * Defaulting version of {@link #upload(SimpleLogger, String, long, String, byte[], InputStream, String, Consumer<Phase>)}.
      */
     UploadResponse upload(
         SimpleLogger logger,
         String mid,
         long fileSize,
         String mimeType,
-        InputStream contentType,
+        InputStream inputStream,
         @Nullable String errors
     ) throws IOException, InterruptedException, SourcingServiceException;
 
