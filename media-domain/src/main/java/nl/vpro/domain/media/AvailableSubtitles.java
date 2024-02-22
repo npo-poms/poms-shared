@@ -21,7 +21,7 @@ import static java.util.Comparator.nullsLast;
 
 
 /**
- * This is kind of strange, this table is has only a few fields of Subtitles, and is then in {@link MediaObject} mapped with @CollectionTable.
+ * This is kind of strange, this table has only a few fields of Subtitles, and is then in {@link MediaObject} mapped with @CollectionTable.
  */
 @Embeddable
 @Cacheable

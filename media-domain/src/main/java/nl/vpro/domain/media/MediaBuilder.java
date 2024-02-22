@@ -72,6 +72,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return group().type(type);
     }
 
+    static GroupBuilder season() {
+        return group(GroupType.SEASON);
+    }
+    static GroupBuilder series() {
+        return group(GroupType.SERIES);
+    }
+
     static GroupBuilder group(Group group) {
         return new GroupBuilder(group);
     }
