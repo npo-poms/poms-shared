@@ -70,6 +70,10 @@ public class MediaObjectAccess {
         o.mid = mid;
     }
 
+    public static void setExternalVersion(MediaObject o , String v) {
+        o.externalVersion = v;
+    }
+
     public static void setPdAuthorityImported(Program p, boolean pdAuthorityImported) {
         p.setPdAuthorityImported(pdAuthorityImported);;
     }
@@ -92,6 +96,9 @@ public class MediaObjectAccess {
     public  static boolean getCorrelationForSegmentDefault() {
         return Segment.defaultCorrelation;
     }
+
+
+
 
 
 

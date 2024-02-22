@@ -263,6 +263,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Getter
     protected Integer version;
 
+    /**
+     * Version as known in an external system where this object is originated from. In Berlijn a monotonic increasing integer.
+     */
+    @MonotonicNonNull
+    @Getter
+    protected String externalVersion;
+
     @Setter
     @ElementCollection
     @Column(name = "crids", nullable = false, unique = true) // TODO, rename to 'crid'.
