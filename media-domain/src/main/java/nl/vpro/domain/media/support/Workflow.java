@@ -85,7 +85,7 @@ public enum Workflow implements Displayable, XmlValued {
      * Normal users should not see these entities.
      * <p>
      * This is also used if an authoritative system sends or refers to an object that is not in our system. It is then 'temporarily' created in this state.
-     * If at a later time metadata comes in, it will be implicitly undeleted, and the until then invisible data of it will become available. See als {@link OwnerType#TEMPORARY}.
+     * If at a later time metadata comes in, it will be implicitly undeleted, and the until then invisible data of it will become available (e.g. just the streaming status, a schedule event or member). See als {@link OwnerType#TEMPORARY}.
      */
     DELETED("Verwijderd"),
     /**
