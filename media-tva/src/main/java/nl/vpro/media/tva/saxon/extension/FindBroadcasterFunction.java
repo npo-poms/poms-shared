@@ -61,7 +61,12 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
 
                     String value = si.next().getStringValue().trim().toUpperCase();
                     Broadcaster broadcaster = broadcasterService.findForIds(value).orElse(null);
+
+
                     if (broadcaster != null) {
+                        if (! broadcaster.getWhatsOnId().equalsIgnoreCase(value)) {
+                            log.warn("Broadcaster {} did not match on whatson id {}", broadcaster, value);
+                        }
                         return new StringValue(broadcaster.getId());
                     }
 
