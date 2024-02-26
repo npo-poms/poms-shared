@@ -221,22 +221,22 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
      * The mid of the parent program. If the segment is sent as a standalone object, this can also be a crid.
      */
     @XmlTransient
-    @JsonIgnore
     public void setMidRef(String string) {
         this.midRef = string;
     }
+    @JsonIgnore
     public String getMidRef() {
         return midRef;
     }
 
 
-    // TODO Jackson gets confused if we make these methods non-public.
     @XmlAttribute(name = "midRef")
-    public void setMidRefAttribute(String string) {
+    void setMidRefAttribute(String string) {
         setMidRef(string);
     }
 
-    public String getMidRefAttribute() {
+    @XmlAttribute(name = "midRef")
+    String getMidRefAttribute() {
         if (parent != null) {
             return parent.getMid();
         }

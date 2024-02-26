@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SegmentUpdateTest extends MediaUpdateTest {
 
     @Test
-    public void testCreate() {
+    public void xml() {
         SegmentUpdate update = SegmentUpdate.create();
         update.setAVType(AVType.VIDEO);
         update.setMainTitle("main title");
@@ -56,8 +56,23 @@ public class SegmentUpdateTest extends MediaUpdateTest {
             assertThat(update.violations()).isEmpty();
             assertThat(update.violations(WarningValidatorGroup.class)).hasSize(1); // about duration
 
-
         }
+
+        update.setMidRef(null);
+        assertThat(update.violations()).hasSize(1);
+        log.info("{}", update.violations());
+    }
+    @Test
+    public void json() {
+        SegmentUpdate update = SegmentUpdate.create();
+        update.setAVType(AVType.VIDEO);
+        update.setMainTitle("main title");
+        update.setVersion(null);
+        update.setStart(Duration.ofMillis(100));
+        update.setMidRef("MID_123");
+        update.setAgeRating(AgeRating.ALL);
+        update.setBroadcasters("VPRO");
+
         {
             SegmentUpdate rounded = Jackson2TestUtil.roundTripAndSimilar(update,
                 """
@@ -84,9 +99,7 @@ public class SegmentUpdateTest extends MediaUpdateTest {
 
 
         }
-        update.setMidRef(null);
-        assertThat(update.violations()).hasSize(1);
-        log.info("{}", update.violations());
+
 
     }
 
