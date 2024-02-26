@@ -4,19 +4,20 @@
  */
 package nl.vpro.domain.media.update;
 
-import jakarta.xml.bind.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.StringReader;
 import java.time.Duration;
 
 import javax.xml.parsers.ParserConfigurationException;
+import jakarta.xml.bind.*;
 
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import nl.vpro.domain.media.AVType;
 import nl.vpro.domain.media.AgeRating;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.validation.WarningValidatorGroup;
 
@@ -47,18 +48,45 @@ public class SegmentUpdateTest extends MediaUpdateTest {
                 <start>P0DT0H0M0.100S</start>
             </segment>
             """;
+        {
+            SegmentUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
+            assertThat(update.isStandalone()).isTrue();
+            assertThat(rounded.isStandalone()).isTrue();
 
-        SegmentUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
-        assertThat(update.isStandalone()).isTrue();
-        assertThat(rounded.isStandalone()).isTrue();
+            assertThat(update.violations()).isEmpty();
+            assertThat(update.violations(WarningValidatorGroup.class)).hasSize(1); // about duration
 
-        assertThat(update.violations()).isEmpty();
-        assertThat(update.violations(WarningValidatorGroup.class)).hasSize(1); // about duration
 
+        }
+        {
+            SegmentUpdate rounded = Jackson2TestUtil.roundTripAndSimilar(update,
+                """
+                    {
+                      "objectType" : "segmentUpdate",
+                      "avType" : "VIDEO",
+                      "embeddable" : true,
+                      "broadcaster" : [ "VPRO" ],
+                      "title" : [ {
+                        "value" : "main title",
+                        "type" : "MAIN"
+                      } ],
+                      "ageRating" : "ALL",
+                      "start" : "P0DT0H0M0.100S",
+                       "midRef" : "MID_123"
+
+                    }
+                    """);
+            assertThat(update.isStandalone()).isTrue();
+            assertThat(rounded.isStandalone()).isTrue();
+
+            assertThat(update.violations()).isEmpty();
+            assertThat(update.violations(WarningValidatorGroup.class)).hasSize(1); // about duration
+
+
+        }
         update.setMidRef(null);
         assertThat(update.violations()).hasSize(1);
         log.info("{}", update.violations());
-
 
     }
 

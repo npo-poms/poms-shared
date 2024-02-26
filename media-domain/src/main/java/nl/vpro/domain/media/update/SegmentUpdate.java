@@ -18,7 +18,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.Xmlns;
@@ -221,6 +221,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
      * The mid of the parent program. If the segment is sent as a standalone object, this can also be a crid.
      */
     @XmlTransient
+    @JsonIgnore
     public void setMidRef(String string) {
         this.midRef = string;
     }
@@ -228,12 +229,14 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         return midRef;
     }
 
+
+    // TODO Jackson gets confused if we make these methods non-public.
     @XmlAttribute(name = "midRef")
-    void setMidRefAttribute(String string) {
+    public void setMidRefAttribute(String string) {
         setMidRef(string);
     }
 
-    String getMidRefAttribute() {
+    public String getMidRefAttribute() {
         if (parent != null) {
             return parent.getMid();
         }
