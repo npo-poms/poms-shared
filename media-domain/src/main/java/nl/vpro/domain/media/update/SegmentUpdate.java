@@ -217,6 +217,9 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     }
 
 
+    /**
+     * The mid of the parent program. If the segment is sent as a standalone object, this can also be a crid.
+     */
     @XmlTransient
     public void setMidRef(String string) {
         this.midRef = string;
@@ -226,11 +229,11 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     }
 
     @XmlAttribute(name = "midRef")
-    public void setMidRefAttribute(String string) {
+    void setMidRefAttribute(String string) {
         setMidRef(string);
     }
 
-    public String getMidRefAttribute() {
+    String getMidRefAttribute() {
         if (parent != null) {
             return parent.getMid();
         }
