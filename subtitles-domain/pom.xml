@@ -108,11 +108,5 @@
       <artifactId>swagger-annotations</artifactId>
       <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>nl.vpro.media</groupId>
-      <artifactId>media-domain</artifactId>
-      <version>8.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
   </dependencies>
 </project>
