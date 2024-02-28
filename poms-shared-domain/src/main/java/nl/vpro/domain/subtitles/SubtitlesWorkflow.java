@@ -58,7 +58,14 @@ public enum SubtitlesWorkflow {
     /**
      * Could not be published because of some error
      */
-    PUBLISH_ERROR
+    PUBLISH_ERROR,
+
+
+    /**
+     *
+     * @since 7.11
+     */
+    NOT_AVAILABLE
     ;
 
 
