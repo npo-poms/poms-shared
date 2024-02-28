@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.io.Serial;
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Locale;
 
@@ -26,7 +27,7 @@ import static java.util.Comparator.nullsLast;
 @XmlAccessorType(XmlAccessType.NONE)
 @Entity
 @IdClass(SubtitlesId.class)
-public class AvailableSubtitles implements Identifiable<Long>, Comparable<AvailableSubtitles> {
+public class AvailableSubtitles implements Identifiable<Long>, Comparable<AvailableSubtitles>, Serializable {
 
     @Serial
     private static final long serialVersionUID = 0L;

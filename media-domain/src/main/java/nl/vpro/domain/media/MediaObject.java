@@ -726,11 +726,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * This is kind of a hack.  May be it is better to have the workflow in AvailableSubtitles also.
      */
     @XmlElement(name = "availableSubtitles")
-    public List<AvailableSubtitles> getAvailableSubtitles() {
+    public SortedSet<AvailableSubtitles> getAvailableSubtitles() {
         if (availableSubtitles == null) {
             availableSubtitles = new TreeSet<>();
         }
-        return new ArrayList<>(availableSubtitles);
+        return availableSubtitles;
     }
 
     @Override
@@ -1923,13 +1923,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             return null;
         }
         try {
-            final List<AvailableSubtitles> list = getAvailableSubtitles();
+            final Collection<AvailableSubtitles> list = getAvailableSubtitles();
 
             if (list == null || list.isEmpty()) {
                 return false;
             }
-            List<AvailableSubtitles> copy = new ArrayList<>(getAvailableSubtitles());
-            return copy
+
+            return list
                 .stream()
                 .filter(sub -> {
                     if (sub == null ) {

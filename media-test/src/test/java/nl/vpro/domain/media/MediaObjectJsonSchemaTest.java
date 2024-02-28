@@ -1021,10 +1021,13 @@ public class MediaObjectJsonSchemaTest {
 
     	Program out = Jackson2TestUtil.roundTripAndSimilar(program, pretty(media));
         assertEquals(2, out.getAvailableSubtitles().size());
-        assertEquals("nl", out.getAvailableSubtitles().get(0).getLanguage().toString());
-        assertEquals(SubtitlesType.CAPTION, out.getAvailableSubtitles().get(0).getType());
-        assertEquals("nl", out.getAvailableSubtitles().get(1).getLanguage().toString());
-        assertEquals(SubtitlesType.TRANSLATION, out.getAvailableSubtitles().get(1).getType());
+
+        List<AvailableSubtitles> availableSubtitles = new ArrayList<>(out.getAvailableSubtitles());
+        assertEquals("nl", availableSubtitles.get(0).getLanguage().toString());
+        assertEquals(SubtitlesType.CAPTION, availableSubtitles.get(0).getType());
+
+        assertEquals("nl", availableSubtitles.get(1).getLanguage().toString());
+        assertEquals(SubtitlesType.TRANSLATION, availableSubtitles.get(1).getType());
 
     }
 	private String pretty(ObjectNode node) throws JsonProcessingException {
