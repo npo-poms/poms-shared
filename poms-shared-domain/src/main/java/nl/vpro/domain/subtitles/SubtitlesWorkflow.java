@@ -62,7 +62,8 @@ public enum SubtitlesWorkflow {
 
 
     /**
-     *
+     * The subtitles are not available in POMS. But the player probably does have them?
+     * This is missed opportunity, but that's how it is.
      * @since 7.11
      */
     NOT_AVAILABLE
