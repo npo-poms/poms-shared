@@ -1,17 +1,13 @@
 package nl.vpro.domain.gtaa;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-
+import jakarta.xml.bind.annotation.*;
 import java.io.Serial;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
-
-import jakarta.xml.bind.annotation.*;
-
-import org.meeuw.i18n.regions.Region;
-
 import nl.vpro.w3.rdf.Description;
+import org.meeuw.i18n.regions.Region;
 
 @GTAAScheme(Scheme.geographicname)
 @XmlType(
@@ -25,7 +21,7 @@ import nl.vpro.w3.rdf.Description;
 @XmlRootElement(name = "geographicName")
 @XmlAccessorType(XmlAccessType.NONE)
 @Schema(name = "GTAAGeographicName")
-public final class GTAAGeographicName extends AbstractSimpleValueGTAAConcept implements Region {
+public final class GTAAGeographicName extends AbstractSimpleValueGTAAConcept {
 
     @Serial
     private static final long serialVersionUID = 2600104116644142067L;
@@ -44,14 +40,30 @@ public final class GTAAGeographicName extends AbstractSimpleValueGTAAConcept imp
         fill(description, answer);
         return answer;
     }
-
-    @Override
-    public String getCode() {
-        return getId().toString();
+    
+    
+    public Code toCode() {
+        return new Code();
     }
 
-    @Override
-    public Type getType() {
-        return Type.UNDEFINED;
+  
+    
+    public class Code implements Region {
+
+        @Override
+        public String getCode() {
+            return GTAAGeographicName.this.getId().toString();
+        }
+
+        @Override
+        public Type getType() {
+            return Type.UNDEFINED;
+        }
+
+        @Override
+        public String getName() {
+            return GTAAGeographicName.this.getName();
+        }
     }
+
 }

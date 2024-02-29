@@ -22,7 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @WireMockTest
-
 @Slf4j
 class GTAAGeographicNameProviderTest {
 
@@ -35,7 +34,7 @@ class GTAAGeographicNameProviderTest {
                 .willReturn(okXml(f("all-geo-updates.xml"))));
 
 
-        assertThat(RegionService.getInstance().values(GTAAGeographicName.class)
+        assertThat(RegionService.getInstance().values(GTAAGeographicName.Code.class)
             .limit(100)).hasSize(100);
 
     }
@@ -52,7 +51,7 @@ class GTAAGeographicNameProviderTest {
         assertThat(optionalRegion).isPresent();
 
         Region region = optionalRegion.get();
-        assertThat(region).isInstanceOf(GTAAGeographicName.class);
+        assertThat(region).isInstanceOf(GTAAGeographicName.Code.class);
     }
 
 
