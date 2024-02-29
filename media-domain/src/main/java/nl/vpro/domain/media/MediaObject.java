@@ -733,6 +733,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return availableSubtitles;
     }
 
+    public void setAvailableSubtitles(SortedSet<AvailableSubtitles> incoming)  {
+        this.availableSubtitles = (SortedSet<AvailableSubtitles>) updateSortedSet(this.availableSubtitles, incoming);
+    }
+
     @Override
     @XmlElement(name = "crid")
     @JsonProperty("crids")

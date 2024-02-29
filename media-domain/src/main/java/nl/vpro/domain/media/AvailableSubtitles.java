@@ -43,6 +43,7 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
     private Long id;
 
     @Column
+    @Getter
     private String mid;
 
     @XmlJavaTypeAdapter(LocaleAdapter.class)
@@ -86,7 +87,8 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
     }
 
     @lombok.Builder
-    private AvailableSubtitles(Locale language, SubtitlesType type, SubtitlesWorkflow workflow) {
+    private AvailableSubtitles(String mid, Locale language, SubtitlesType type, SubtitlesWorkflow workflow) {
+        this.mid = mid;
         this.language = language;
         this.type = type;
         this.workflow = workflow;
