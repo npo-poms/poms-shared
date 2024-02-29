@@ -935,6 +935,7 @@
       <xs:enumeration value="10TB"/>
       <xs:enumeration value="SPID"/>
       <xs:enumeration value="PRMT"/>
+      <xs:enumeration value="BLND"/>
       <xs:enumeration value="XXXX"/>
       <xs:enumeration value="XXXY"/>
     </xs:restriction>
