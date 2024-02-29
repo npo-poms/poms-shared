@@ -4,22 +4,19 @@
  */
 package nl.vpro.domain.media.update;
 
-import lombok.extern.slf4j.Slf4j;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.lang.annotation.*;
+import static java.lang.annotation.ElementType.TYPE_USE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.util.Objects;
-
 import javax.validation.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
@@ -27,9 +24,8 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.util.IntegerVersion;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
-
-import static java.lang.annotation.ElementType.TYPE_USE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @see nl.vpro.domain.media.update
@@ -78,6 +74,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
     private SegmentType segmentType;
 
+    @Setter
     private java.time.Duration start;
 
     private String midRef;
@@ -203,10 +200,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         return start;
     }
 
-    public void setStart(java.time.Duration start) {
-        this.start = start;
-    }
-
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE, required = true)
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
@@ -230,6 +223,8 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         setMidRef(string);
     }
 
+
+    @JsonProperty("midRef")
     public String getMidRefAttribute() {
         if (parent != null) {
             return parent.getMid();
