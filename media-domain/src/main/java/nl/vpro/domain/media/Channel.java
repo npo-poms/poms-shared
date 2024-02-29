@@ -2778,6 +2778,19 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     /**
+     * @since 7.11
+     */
+
+    @XmlEnumValue("BLND")
+    BLND(AUDIO, "https://npoblend.nl", 2024) {
+        @Override
+        public String toString() {
+            return "NPO Blend";
+        }
+
+    },
+
+    /**
      * This is not a real channel. It can be used for testing or mocking purposes.
      *
      * @since 5.15
