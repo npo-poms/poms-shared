@@ -3267,6 +3267,14 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      
+      <xs:enumeration value="BLND">
+        <xs:annotation>
+          <xs:documentation>
+            NPO BLend
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
 
       <xs:enumeration value="XXXX">
         <xs:annotation>
