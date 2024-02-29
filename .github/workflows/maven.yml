@@ -20,7 +20,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Cancel previous Action
-        uses: styfle/cancel-workflow-action@0.12.0
+        uses: styfle/cancel-workflow-action@0.12.1
         continue-on-error: true # for act
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3.13.0
@@ -69,7 +69,3 @@ jobs:
         with:
           junit_files: "**/target/surefire-reports/*.xml"
           check_name: Tests results java ${{ matrix.java }}, os ${{ matrix.os }}
-
-
-
-
