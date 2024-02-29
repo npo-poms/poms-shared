@@ -539,7 +539,7 @@ public class MediaObjectTest {
 
         Set<ConstraintViolation<Program>> constraintViolations = getValidator().validate(p, ValidationLevel.WARNING.getClasses());
 
-        assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.language.message}");
+        assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{org.meeuw.i18n.languages.validation.language.message}");
         assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("zz is een ongeldige ISO639 taalcode");
         assertThat(constraintViolations).hasSize(1);
 
@@ -561,11 +561,9 @@ public class MediaObjectTest {
         constraintViolations.sort(comparing.thenComparing(ConstraintViolation::getMessageTemplate));
 
 
-        assertThat(constraintViolations.get(0).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.language.message}");
-        assertThat(constraintViolations.get(0).getMessage()).isEqualTo("nl_XX is een ongeldige ISO639 taalcode");
-        assertThat(constraintViolations.get(1).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.region.message}");
-        assertThat(constraintViolations.get(1).getMessage()).isEqualTo("nl_XX is geen geldig gebied");
-        assertThat(constraintViolations).hasSize(2);
+        assertThat(constraintViolations.get(0).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.region.message}");
+        assertThat(constraintViolations.get(0).getMessage()).isEqualTo("nl_XX is geen geldig gebied");
+        assertThat(constraintViolations).hasSize(1);
     }
 
     @Test
