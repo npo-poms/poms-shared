@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.*;
@@ -78,6 +79,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
     private SegmentType segmentType;
 
+    @Setter
     private java.time.Duration start;
 
     private String midRef;
@@ -203,10 +205,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         return start;
     }
 
-    public void setStart(java.time.Duration start) {
-        this.start = start;
-    }
-
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE, required = true)
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
@@ -230,6 +228,8 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         setMidRef(string);
     }
 
+
+    @JsonProperty("midRef")
     public String getMidRefAttribute() {
         if (parent != null) {
             return parent.getMid();
