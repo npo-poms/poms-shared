@@ -42,12 +42,18 @@ public final class GTAAGeographicName extends AbstractSimpleValueGTAAConcept {
     }
     
     
+    /**
+     * @since 8.0
+     */
     public Code toCode() {
         return new Code();
     }
 
-  
-    
+
+    /**
+     * @since 8.0
+     */
+
     public class Code implements Region {
 
         @Override

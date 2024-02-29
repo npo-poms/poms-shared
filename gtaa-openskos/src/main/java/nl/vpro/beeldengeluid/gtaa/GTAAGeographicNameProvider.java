@@ -48,7 +48,9 @@ public class GTAAGeographicNameProvider implements RegionProvider<Code> {
     @Override
     public Optional<Code> getByCode(@NonNull String code, boolean lenient) {
         try {
-            return getInstance().get(code).filter(p -> p instanceof GTAAGeographicName).map(p -> (GTAAGeographicName) p).map(GTAAGeographicName::toCode);
+            return getInstance()
+                .get(code)
+                .filter(p -> p instanceof GTAAGeographicName).map(p -> (GTAAGeographicName) p).map(GTAAGeographicName::toCode);
         } catch (IllegalStateException  illegalStateException) {
             return Optional.empty();
         }
