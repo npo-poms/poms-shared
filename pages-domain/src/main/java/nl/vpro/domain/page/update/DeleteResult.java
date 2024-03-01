@@ -20,7 +20,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
-@XmlRootElement(name = "deleteresult")
+@XmlRootElement(name = "deleteResult")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 @Slf4j
