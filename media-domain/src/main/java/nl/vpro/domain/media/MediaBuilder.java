@@ -370,6 +370,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return mainTitle(title.apply(mediaObject().getMainTitle()));
     }
 
+    /**
+     * @since 7.11
+     */
+    default boolean hasMainTitle() {
+        return mediaObject().getMainTitle() != null;
+    }
+
     default B subTitle(String title, @NonNull OwnerType owner) {
         if (StringUtils.isNotEmpty(title)) {
             return titles(new Title(title, owner, TextualType.SUB));
