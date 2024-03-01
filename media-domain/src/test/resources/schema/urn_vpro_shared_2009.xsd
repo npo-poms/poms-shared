@@ -109,6 +109,7 @@
       <xs:enumeration value="REVOKED"/>
       <xs:enumeration value="DELETED"/>
       <xs:enumeration value="FOR DELETION"/>
+      <xs:enumeration value="TEMPORARY"/>
     </xs:restriction>
   </xs:simpleType>
 
