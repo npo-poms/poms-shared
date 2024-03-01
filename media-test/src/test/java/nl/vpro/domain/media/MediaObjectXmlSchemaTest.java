@@ -107,8 +107,8 @@ public class MediaObjectXmlSchemaTest {
     public void testAvailableSubtitles() {
         String expected = """
             <program embeddable="true" hasSubtitles="true" mid="MID_000001" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
-                <availableSubtitles language="nl" type="CAPTION"/>
-                <availableSubtitles language="nl" type="TRANSLATION"/>
+                <availableSubtitles language="nl" type="CAPTION" />
+                <availableSubtitles language="nl" type="TRANSLATION" />
                 <credits/>
                 <locations/>
                 <images/>
@@ -135,7 +135,7 @@ public class MediaObjectXmlSchemaTest {
     public void testHasSubtitles() {
         String expected = """
             <program embeddable="true" hasSubtitles="true" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
-                <availableSubtitles language="nl" type="CAPTION"/>
+                <availableSubtitles language="nl" type="CAPTION" />
                 <credits/>
                 <locations/>
                 <images/>

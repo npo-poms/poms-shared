@@ -67,7 +67,7 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter
-    private SubtitlesWorkflow workflow = SubtitlesWorkflow.NOT_AVAILABLE;
+    private SubtitlesWorkflow workflow = null;
 
     public AvailableSubtitles() {
 

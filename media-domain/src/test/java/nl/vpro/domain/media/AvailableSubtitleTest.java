@@ -15,10 +15,10 @@ public class AvailableSubtitleTest {
         JAXBTestUtil.roundTripAndSimilar(AvailableSubtitles.builder()
                 .language(Locale.ENGLISH)
                 .type(SubtitlesType.TRANSLATION)
-                .workflow(SubtitlesWorkflow.NOT_AVAILABLE)
+                .workflow(SubtitlesWorkflow.MISSING)
                 .build(),
             """
-                <local:availableSubtitles language="en" type="TRANSLATION" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:local="uri:local" workflow="NOT_AVAILABLE" />
+                <local:availableSubtitles language="en" type="TRANSLATION" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:local="uri:local" workflow="MISSING" />
                 """);
     }
 
