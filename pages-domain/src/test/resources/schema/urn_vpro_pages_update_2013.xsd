@@ -5,7 +5,7 @@
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn_vpro_shared_2009.xsd"/>
 
-  <xs:element name="deleteResult" type="tns:deleteResult"/>
+  <xs:element name="deleteresult" type="tns:deleteResult"/>
 
   <xs:element name="image" type="tns:imageUpdateType"/>
 
@@ -13,7 +13,7 @@
 
   <xs:element name="pages" type="tns:pageUpdateList"/>
 
-  <xs:element name="saveResult" type="tns:saveResult"/>
+  <xs:element name="saveresult" type="tns:saveResult"/>
 
   <xs:element name="saveResults" type="tns:saveResultList"/>
 
@@ -139,7 +139,7 @@
     <xs:attribute name="creationDate" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="deleteResult">
+  <xs:complexType name="deleteresult">
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="count" type="xs:int"/>

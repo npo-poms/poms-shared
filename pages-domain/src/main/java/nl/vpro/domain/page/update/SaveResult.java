@@ -16,7 +16,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * @author Michiel Meeuwissen
  * @since 5.13
  */
-@XmlRootElement(name = "saveResult")
+@XmlRootElement(name = "saveresult")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 @Slf4j
