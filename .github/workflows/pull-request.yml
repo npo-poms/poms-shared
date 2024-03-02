@@ -9,7 +9,7 @@ run-name: build pull request ${{  github.ref_name }}
 # then it will be built and published as 6.1.foobar-SNAPSHOT
 on:
   pull_request:
-    branches: [main]
+    branches: [main, REL-*]
   workflow_dispatch:
 
 
