@@ -16,7 +16,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * @author Michiel Meeuwissen
  * @since 5.13
  */
-@XmlRootElement(name = "saveresult")
+@XmlRootElement(name = "saveResult")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 @Slf4j
@@ -40,7 +40,7 @@ public class SaveResult {
 
 
 
-    private SaveResult() {
+    SaveResult() {
         this.future = CompletableFuture.completedFuture(null);
         // just for silly jaxb
     }

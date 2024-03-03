@@ -11,10 +11,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  * @since 8.0
  */
 @XmlSeeAlso(SaveResult.class)
-@XmlRootElement(name = "saveresults")
+@XmlRootElement(name = "saveResults")
 public class SaveResultList implements Iterable<SaveResult> {
 
-    @XmlElement(name = "saveresult")
+    @XmlElement(name = "saveResult")
     private Collection<@Valid @NonNull SaveResult> list;
 
 
