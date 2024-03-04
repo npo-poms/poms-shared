@@ -15,7 +15,7 @@ import nl.vpro.domain.media.AVFileFormat;
  * @implNote See {@link AbstractSourcingServiceImpl}
  */
 @Log4j2
-public class VideoSourcingServiceImpl extends  AbstractSourcingServiceImpl implements VideoSourcingService {
+public class VideoSourcingServiceImpl extends AbstractSourcingServiceImpl implements VideoSourcingService {
 
 
 

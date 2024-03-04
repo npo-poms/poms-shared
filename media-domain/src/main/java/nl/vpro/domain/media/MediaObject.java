@@ -4,38 +4,6 @@
  */
 package nl.vpro.domain.media;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.extern.slf4j.Slf4j;
-
-import java.io.Serial;
-import java.time.Instant;
-import java.util.*;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.zip.CRC32;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.OrderBy;
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.annotation.*;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.*;
-import org.meeuw.functional.TriFunction;
-import org.meeuw.i18n.countries.Country;
-import org.meeuw.i18n.regions.RegionService;
-import org.meeuw.i18n.regions.validation.Language;
-
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -43,14 +11,37 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Collections2;
 import com.neovisionaries.i18n.CountryCode;
-
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.OrderBy;
+import static jakarta.persistence.CascadeType.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serial;
+import java.time.Instant;
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.zip.CRC32;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.domain.*;
+import static nl.vpro.domain.Changeables.instant;
+import static nl.vpro.domain.TextualObjects.sorted;
 import nl.vpro.domain.bind.CollectionOfPublishable;
 import nl.vpro.domain.image.ImageType;
+import static nl.vpro.domain.media.CollectionUtils.*;
+import static nl.vpro.domain.media.MediaObjectFilters.*;
 import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
+import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.*;
 import nl.vpro.domain.validation.NoDuplicateOwner;
@@ -63,13 +54,16 @@ import nl.vpro.util.*;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
-
-import static jakarta.persistence.CascadeType.*;
-import static nl.vpro.domain.Changeables.instant;
-import static nl.vpro.domain.TextualObjects.sorted;
-import static nl.vpro.domain.media.CollectionUtils.*;
-import static nl.vpro.domain.media.MediaObjectFilters.*;
-import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.*;
+import org.meeuw.functional.TriFunction;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.languages.validation.Language;
+import org.meeuw.i18n.regions.RegionService;
 
 /**
  * Base objects for programs, groups and segments.
@@ -262,6 +256,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Transient // Remove for MSE-3753
     @Getter
     protected Integer version;
+
+    /**
+     * Version as known in an external system where this object is originated from. In Berlijn a monotonic increasing integer.
+     */
+    @MonotonicNonNull
+    @Getter
+    protected String externalVersion;
 
     @Setter
     @ElementCollection
@@ -1269,7 +1270,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return countries;
     }
 
-    public void setCountries(List<org.meeuw.i18n.regions.Region> countries) {
+    public void setCountries(List<? extends org.meeuw.i18n.regions.Region> countries) {
         this.countries = updateList(this.countries, countries);
     }
 

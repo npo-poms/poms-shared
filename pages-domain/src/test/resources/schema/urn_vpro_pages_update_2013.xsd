@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:pages:update:2013" xmlns:shared="urn:vpro:shared:2009" xmlns:tns="urn:vpro:pages:update:2013" xmlns:page="urn:vpro:pages:2013" xmlns:pageUpdate="urn:vpro:pages:update:2013" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:pages:update:2013"
+           xmlns:shared="urn:vpro:shared:2009" xmlns:tns="urn:vpro:pages:update:2013" xmlns:page="urn:vpro:pages:2013"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xs:import namespace="urn:vpro:pages:2013" schemaLocation="urn_vpro_pages_2013.xsd"/>
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn_vpro_shared_2009.xsd"/>
 
-  <xs:element name="deleteresult" type="tns:deleteResult"/>
+  <xs:element name="deleteResult" type="tns:deleteResult"/>
 
   <xs:element name="image" type="tns:imageUpdateType"/>
 

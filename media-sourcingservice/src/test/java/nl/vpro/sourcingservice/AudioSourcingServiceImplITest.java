@@ -74,7 +74,7 @@ class AudioSourcingServiceImplITest {
             .startImmediately(true)
             .batchConsumer(loggingConsumer(logger, "audio"))
             .build();
-        final UploadResponse upload = impl.upload(logger, MID, null,
+        final UploadResponse upload = impl.upload(logger, MID,
             Files.size(file),
             "audio/mpeg",
             cachingInputStream,

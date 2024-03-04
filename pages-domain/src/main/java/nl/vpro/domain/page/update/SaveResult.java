@@ -40,7 +40,7 @@ public class SaveResult {
 
 
 
-    private SaveResult() {
+    SaveResult() {
         this.future = CompletableFuture.completedFuture(null);
         // just for silly jaxb
     }

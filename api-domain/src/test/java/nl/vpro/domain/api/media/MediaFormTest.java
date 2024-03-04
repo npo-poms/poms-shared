@@ -425,28 +425,23 @@ public class MediaFormTest implements BasicObjectTheory<MediaForm> {
                     "durations" : [ {
                         "name" : "0-5m",
                         "begin" : 1,
-                        "end" : 300000,
-                        "inclusiveEnd" : true
+                        "end" : 300000
                     }, {
                         "name" : "5-10m",
                         "begin" : 300001,
-                        "end" : 600000,
-                        "inclusiveEnd" : true
+                        "end" : 600000
                     }, {
                         "name" : "10m-30m",
                         "begin" : 600001,
-                        "end" : 1800000,
-                        "inclusiveEnd" : true
+                        "end" : 1800000
                     }, {
                         "name" : "30m-60m",
                         "begin" : 1800001,
-                        "end" : 3600000,
-                        "inclusiveEnd" : true
+                        "end" : 3600000
                     }, {
                         "name" : "60m-∞",
                         "begin" : 3600001,
-                        "end" : 14400000,
-                        "inclusiveEnd" : true
+                        "end" : 14400000
                     } ]
                 }
             }

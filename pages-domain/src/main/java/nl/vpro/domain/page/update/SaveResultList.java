@@ -7,6 +7,9 @@ import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+/**
+ * @since 8.0
+ */
 @XmlSeeAlso(SaveResult.class)
 @XmlRootElement(name = "saveResults")
 public class SaveResultList implements Iterable<SaveResult> {

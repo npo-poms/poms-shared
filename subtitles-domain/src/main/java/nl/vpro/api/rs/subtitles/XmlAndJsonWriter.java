@@ -14,6 +14,8 @@ import jakarta.ws.rs.ext.MessageBodyWriter;
 import jakarta.ws.rs.ext.Provider;
 import jakarta.xml.bind.JAXB;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import nl.vpro.domain.subtitles.StandaloneCue;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -39,11 +41,14 @@ public class XmlAndJsonWriter implements MessageBodyWriter<Iterator<StandaloneCu
 
     }
 
+    private static final ObjectMapper MAPPER = Jackson2Mapper.getInstance();
+
+
     @Override
     public void writeTo(Iterator<StandaloneCue> cueIterator, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
         Subtitles subtitles = Subtitles.from(cueIterator);
         if (MediaType.APPLICATION_JSON_TYPE.isCompatible(mediaType)) {
-            Jackson2Mapper.getInstance().writeValue(entityStream, subtitles);
+            MAPPER.writeValue(entityStream, subtitles);
         } else if (MediaType.APPLICATION_XML_TYPE.isCompatible(mediaType)) {
             JAXB.marshal(subtitles, entityStream);
         }

@@ -10,6 +10,7 @@ import jakarta.xml.bind.annotation.XmlEnumValue;
  *
  * @author Michiel Meeuwissen
  * @since 5.5
+ * @see JsonProperties
  */
 public interface XmlValued {
 

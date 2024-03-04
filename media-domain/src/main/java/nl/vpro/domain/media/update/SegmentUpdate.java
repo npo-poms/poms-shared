@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.*;
@@ -18,7 +19,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.Xmlns;
@@ -78,6 +79,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
     private SegmentType segmentType;
 
+    @Setter
     private java.time.Duration start;
 
     private String midRef;
@@ -203,10 +205,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         return start;
     }
 
-    public void setStart(java.time.Duration start) {
-        this.start = start;
-    }
-
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE, required = true)
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
@@ -217,20 +215,26 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     }
 
 
+    /**
+     * The mid of the parent program. If the segment is sent as a standalone object, this can also be a crid.
+     */
     @XmlTransient
     public void setMidRef(String string) {
         this.midRef = string;
     }
+    @JsonIgnore
     public String getMidRef() {
         return midRef;
     }
 
+
     @XmlAttribute(name = "midRef")
-    public void setMidRefAttribute(String string) {
+    void setMidRefAttribute(String string) {
         setMidRef(string);
     }
 
-    public String getMidRefAttribute() {
+    @JsonProperty("midRef")
+    String getMidRefAttribute() {
         if (parent != null) {
             return parent.getMid();
         }
