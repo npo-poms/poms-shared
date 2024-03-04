@@ -4,19 +4,12 @@
  */
 package nl.vpro.domain.api.jackson;
 
-import java.io.IOException;
-import java.time.Instant;
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.TreeNode;
+import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
-
+import java.io.IOException;
+import java.time.Instant;
 import nl.vpro.domain.api.*;
-import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * @author Roelof Jan Koekoek
@@ -43,36 +36,41 @@ public class DateRangeFacetsToJson {
 
         @Override
         public DateRangeFacets<?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-            final ObjectMapper mapper = Jackson2Mapper.getLenientInstance();
-
+            
             DateRangeFacets<?> result = new DateRangeFacets<>();
 
-            TreeNode treeNode = jp.getCodec().readTree(jp);
+            JsonNode treeNode = jp.readValueAsTree();
             if(treeNode instanceof ArrayNode arrayNode) {
                 for(JsonNode jsonNode : arrayNode) {
-                    if(jsonNode.isTextual()) {
-                        try {
-                            result.addRanges(DateRangePreset.valueOf(jsonNode.textValue()));
-                        } catch(IllegalArgumentException e) {
-                            result.addRanges(new DateRangeInterval(jsonNode.textValue()));
-                        }
-                    } else {
-                        result.addRanges(mapper.readValue(jsonNode.toString(), DateRangeFacetItem.class));
-                    }
-                }
-            } else if(treeNode instanceof ObjectNode) {
-                result.addRanges(mapper.readValue((treeNode).toString(), DateRangeFacetItem.class));
-            } else if(treeNode instanceof TextNode) {
-                try {
-                    result.addRanges(DateRangePreset.valueOf(((TextNode)treeNode).asText()));
-                } catch(IllegalArgumentException e) {
-                    result.addRanges(new DateRangeInterval(((TextNode)treeNode).textValue()));
+                    result.addRanges(parse(jp.getCodec(), jsonNode));
                 }
             } else {
-                throw new IllegalArgumentException("Unsupported node: " + treeNode.toString());
+                result.addRanges(parse(jp.getCodec(), treeNode));
             }
-
             return result;
         }
     }
+    
+    private static RangeFacet<Instant> parseAsText(String text) {
+        try {
+            return DateRangePreset.valueOf(text);
+        } catch(IllegalArgumentException e) {
+            return new DateRangeInterval(text);
+        }
+    }
+    
+    private static RangeFacet<Instant> parseNode(ObjectCodec codec, JsonNode node) throws IOException {
+        try (JsonParser parser = node.traverse(codec)) {
+            return parser.readValueAs(DateRangeFacetItem.class);   
+        }
+    }
+    
+    private static  RangeFacet<Instant> parse(ObjectCodec codec, JsonNode jsonNode) throws IOException {
+        if(jsonNode.isTextual()) {
+            return parseAsText(jsonNode.textValue());
+        } else {
+            return parseNode(codec, jsonNode);
+        }
+    }
+    
 }

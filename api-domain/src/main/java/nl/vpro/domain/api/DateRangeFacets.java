@@ -22,12 +22,14 @@ import nl.vpro.domain.api.jackson.DateRangeFacetsToJson;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
+@Setter
+@Getter
 @XmlType(name = "dateRangeFacetsType", propOrder = {
     "ranges"})
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonSerialize(using = DateRangeFacetsToJson.Serializer.class)
 @JsonDeserialize(using = DateRangeFacetsToJson.Deserializer.class)
-public class DateRangeFacets<T extends AbstractSearch> extends AbstractFacet<T> implements Facet<T> {
+public class DateRangeFacets<T extends AbstractSearch<?>> extends AbstractFacet<T> implements Facet<T> {
 
     @XmlElements({
         @XmlElement(name = "interval", type = DateRangeInterval.class),
@@ -35,8 +37,6 @@ public class DateRangeFacets<T extends AbstractSearch> extends AbstractFacet<T> 
         @XmlElement(name = "range", type = DateRangeFacetItem.class)
     })
     @JsonIgnore
-    @Getter
-    @Setter
     private List<RangeFacet<Instant>> ranges;
 
     public DateRangeFacets() {
@@ -51,7 +51,7 @@ public class DateRangeFacets<T extends AbstractSearch> extends AbstractFacet<T> 
 
     @SafeVarargs
     public final void addRanges(RangeFacet<Instant>... ranges) {
-        if(this.ranges == null) {
+       if(this.ranges == null) {
             this.ranges = new ArrayList<>(ranges.length);
         }
 
