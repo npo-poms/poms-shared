@@ -41,9 +41,10 @@ public class DateRangeFacetsToJson {
 
     public static class Deserializer extends JsonDeserializer<DateRangeFacets<?>> {
 
+        private static final ObjectMapper mapper = Jackson2Mapper.getLenientInstance();
         @Override
         public DateRangeFacets<?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-            final ObjectMapper mapper = Jackson2Mapper.getLenientInstance();
+
 
             DateRangeFacets<?> result = new DateRangeFacets<>();
 
