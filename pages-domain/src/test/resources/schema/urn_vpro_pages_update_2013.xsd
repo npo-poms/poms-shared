@@ -5,7 +5,7 @@
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn_vpro_shared_2009.xsd"/>
 
-  <xs:element name="deleteresult" type="tns:deleteResult"/>
+  <xs:element name="deleteResult" type="tns:deleteResult"/>
 
   <xs:element name="image" type="tns:imageUpdateType"/>
 
