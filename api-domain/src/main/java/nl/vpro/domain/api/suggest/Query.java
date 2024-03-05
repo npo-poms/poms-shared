@@ -62,7 +62,7 @@ public class Query {
         if (profile != null && !profile.isEmpty()) {
             return profile + "||" + text;
         } else {
-            log.warn("See NPA-637. This doesn't work.");
+            log.debug("See NPA-637. This doesn't work.");
         }
 
         return text;
