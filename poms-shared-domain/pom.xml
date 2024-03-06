@@ -102,15 +102,14 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>org.jboss.spec.javax.transaction</groupId>
-      <artifactId>jboss-transaction-api_1.2_spec</artifactId>
-      <version>1.1.1.Final</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.meeuw.math</groupId>
       <artifactId>mihxil-theories</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 </project>
