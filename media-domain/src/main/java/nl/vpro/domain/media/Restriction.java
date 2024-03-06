@@ -25,7 +25,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @ValidEmbargo
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)
-abstract public class Restriction<T extends Restriction<T>> extends DomainObject implements MutableEmbargo<T> {
+abstract public class Restriction<T extends Restriction<T>> extends DomainObject implements MutableEmbargo<T> { // Child<MediaObject>
 
     @Serial
     private static final long serialVersionUID = 4916863601110482209L;

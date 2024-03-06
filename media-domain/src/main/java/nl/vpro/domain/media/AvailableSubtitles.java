@@ -12,8 +12,8 @@ import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.subtitles.SubtitlesType;
-import nl.vpro.domain.subtitles.SubtitlesWorkflow;
+import nl.vpro.domain.Identifiable;
+import nl.vpro.domain.subtitles.*;
 import nl.vpro.xml.bind.LocaleAdapter;
 
 import static java.util.Comparator.comparing;
@@ -21,14 +21,13 @@ import static java.util.Comparator.nullsLast;
 
 
 /**
- * This is kind of strange, this table has only a few fields of Subtitles, and is then in {@link MediaObject} mapped with @CollectionTable.
- */
-@Embeddable
-@Cacheable
+ * Sub field of mediaobject indicating whether subtitles for a certain language are available
+*/
 @XmlType(name="availableSubtitlesType")
 @XmlAccessorType(XmlAccessType.NONE)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class AvailableSubtitles implements Serializable, Comparable<AvailableSubtitles> {
+@Entity
+@IdClass(SubtitlesId.class)
+public class AvailableSubtitles implements Identifiable<Long>, Comparable<AvailableSubtitles>, Serializable {
 
     @Serial
     private static final long serialVersionUID = 0L;
@@ -38,12 +37,22 @@ public class AvailableSubtitles implements Serializable, Comparable<AvailableSub
             comparing(AvailableSubtitles::getLanguage, comparing(Locale::toLanguageTag))
                 .thenComparing(AvailableSubtitles::getType, Comparator.naturalOrder()));
 
+    @Id
+    @Getter
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column
+    @Getter
+    private String mid;
+
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @XmlAttribute
     @Getter
     @Setter(AccessLevel.PRIVATE)
     @EqualsAndHashCode.Include
     @Schema(implementation = String.class, type="string")
+    @Column
     private Locale language;
 
     @Enumerated(EnumType.STRING)
@@ -51,7 +60,9 @@ public class AvailableSubtitles implements Serializable, Comparable<AvailableSub
     @Getter
     @Setter(AccessLevel.PRIVATE)
     @EqualsAndHashCode.Include
+    @Column
     private SubtitlesType type;
+
 
     @Enumerated(EnumType.STRING)
     @Getter
@@ -76,7 +87,8 @@ public class AvailableSubtitles implements Serializable, Comparable<AvailableSub
     }
 
     @lombok.Builder
-    private AvailableSubtitles(Locale language, SubtitlesType type, SubtitlesWorkflow workflow) {
+    private AvailableSubtitles(String mid, Locale language, SubtitlesType type, SubtitlesWorkflow workflow) {
+        this.mid = mid;
         this.language = language;
         this.type = type;
         this.workflow = workflow;

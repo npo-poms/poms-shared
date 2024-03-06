@@ -41,8 +41,8 @@ public class CollectionUtils {
 
     @SuppressWarnings("unchecked")
     static <T extends Comparable<?>> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
-        if (toUpdate != null && toUpdate == values) {
-            return toUpdate;
+        if (toUpdate == values && toUpdate instanceof SortedSet<?> sortedSet) {
+            return (SortedSet<T>) sortedSet;
         }
         if (toUpdate == null) {
             toUpdate = new TreeSet<>();

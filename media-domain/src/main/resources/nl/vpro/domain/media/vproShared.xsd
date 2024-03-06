@@ -45,6 +45,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="TEMPORARY"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -148,6 +149,7 @@
       <xs:enumeration value="FOR_REPUBLICATION"/>
       <xs:enumeration value="PUBLISHED"/>
       <xs:enumeration value="PUBLISH_ERROR"/>
+      <xs:enumeration value="MISSING"/>
     </xs:restriction>
   </xs:simpleType>
 

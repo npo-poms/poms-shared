@@ -92,7 +92,14 @@ public enum Workflow implements Displayable, XmlValued {
      * The entity is scheduled for deletion.
      */
     @XmlEnumValue("FOR DELETION")
-    FOR_DELETION("Wordt verwijderd", DELETED)
+    FOR_DELETION("Wordt verwijderd", DELETED),
+
+
+    /**
+     * @since 7.11
+     */
+    @XmlEnumValue("TEMPORARY")
+    TEMPORARY("Tijdelijk")
 
     ;
 
@@ -123,7 +130,8 @@ public enum Workflow implements Displayable, XmlValued {
      */
     public static final Set<Workflow> DELETES = nullSafeSet(Set.of(
         FOR_DELETION,
-        DELETED
+        DELETED,
+        TEMPORARY
     ));
 
 
@@ -136,7 +144,8 @@ public enum Workflow implements Displayable, XmlValued {
         DELETED,
         MERGED,
         PARENT_REVOKED,
-        REVOKED
+        REVOKED,
+        TEMPORARY
     ));
 
     /**

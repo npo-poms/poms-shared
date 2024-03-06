@@ -58,7 +58,15 @@ public enum SubtitlesWorkflow {
     /**
      * Could not be published because of some error
      */
-    PUBLISH_ERROR
+    PUBLISH_ERROR,
+
+
+    /**
+     * The subtitles are not available in POMS. But the player probably does have them?
+     * This is missed opportunity, but that's how it is.
+     * @since 7.11
+     */
+    MISSING
     ;
 
 

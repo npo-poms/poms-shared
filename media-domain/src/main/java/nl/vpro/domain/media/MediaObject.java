@@ -314,6 +314,17 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<@NotNull GeoRestriction> geoRestrictions;
 
+
+    /**
+     * There seems to be a difference between {@link #ageRating} and {@link #ageRestriction}.
+     * @since 7.11
+     */
+    @Enumerated(EnumType.STRING)
+    @Setter
+    @Getter
+    @Beta
+    protected AgeRating ageRestriction;
+
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = {ALL})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
@@ -609,14 +620,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Setter(AccessLevel.PACKAGE)
     private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.NONE;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
-    // also we got odd NPE's from PersistentBag otherwise. (2023-01: seems still relevant. I think it occurs when you _change_ a type)
-    // NOTE: I think this may be fixed with the 'isSerializable' in hasSubtitles.
-    @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
+
+    @OneToMany(cascade = ALL, orphanRemoval = true)
+    @JoinColumn(name = "mediaobject_id")
     @OrderBy("language, type")
     @Setter
-    private List<@NonNull AvailableSubtitles> availableSubtitles;
+    private SortedSet<@NonNull AvailableSubtitles> availableSubtitles;
 
 
     @Embedded()
@@ -711,11 +720,15 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * This is kind of a hack.  May be it is better to have the workflow in AvailableSubtitles also.
      */
     @XmlElement(name = "availableSubtitles")
-    public List<AvailableSubtitles> getAvailableSubtitles() {
+    public SortedSet<AvailableSubtitles> getAvailableSubtitles() {
         if (availableSubtitles == null) {
-            availableSubtitles = new ArrayList<>();
+            availableSubtitles = new TreeSet<>();
         }
         return availableSubtitles;
+    }
+
+    public void setAvailableSubtitles(SortedSet<AvailableSubtitles> incoming)  {
+        this.availableSubtitles = (SortedSet<AvailableSubtitles>) updateSortedSet(this.availableSubtitles, incoming);
     }
 
     @Override
@@ -1908,13 +1921,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             return null;
         }
         try {
-            final List<AvailableSubtitles> list = getAvailableSubtitles();
+            final Collection<AvailableSubtitles> list = getAvailableSubtitles();
 
             if (list == null || list.isEmpty()) {
                 return false;
             }
-            List<AvailableSubtitles> copy = new ArrayList<>(getAvailableSubtitles());
-            return copy
+
+            return list
                 .stream()
                 .filter(sub -> {
                     if (sub == null ) {
