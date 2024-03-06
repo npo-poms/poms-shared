@@ -107,5 +107,10 @@
       <version>1.1.1.Final</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 </project>

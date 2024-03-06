@@ -24,6 +24,7 @@ import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
+import nl.vpro.domain.subtitles.SubtitlesWorkflow;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.*;
 import nl.vpro.i18n.Locales;
@@ -321,7 +322,11 @@ public interface MediaTestDataBuilder<
         return mainTitle(mainTitle);
     }
 
-    AvailableSubtitles DUTCH_CAPTION = AvailableSubtitles.builder().language(Locales.DUTCH).type(SubtitlesType.CAPTION).build();
+    AvailableSubtitles DUTCH_CAPTION = AvailableSubtitles.builder()
+        .language(Locales.DUTCH)
+        .type(SubtitlesType.CAPTION)
+        .workflow(SubtitlesWorkflow.PUBLISHED)
+        .build();
 
     default T withDutchCaptions() {
         mediaObject()

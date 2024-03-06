@@ -94,6 +94,7 @@
       <xs:enumeration value="FOR_REPUBLICATION"/>
       <xs:enumeration value="PUBLISHED"/>
       <xs:enumeration value="PUBLISH_ERROR"/>
+      <xs:enumeration value="MISSING"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -108,6 +109,7 @@
       <xs:enumeration value="REVOKED"/>
       <xs:enumeration value="DELETED"/>
       <xs:enumeration value="FOR DELETION"/>
+      <xs:enumeration value="TEMPORARY"/>
     </xs:restriction>
   </xs:simpleType>
 

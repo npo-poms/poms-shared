@@ -25,15 +25,15 @@ public class MediaObjectFilters {
      */
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String DELETED_FILTER_CONDITION = """
-            (workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)
+            (workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED', 'TEMPORARY') and mergedTo_id is null)
         """;
 
     public static final String MR_DELETED_FILTER = "mrDeletedFilter";
     public static final String MR_DELETED_FILTER_CONDITION =
         """
-     (select m.workflow from mediaobject m where m.id = owner_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')
+     (select m.workflow from mediaobject m where m.id = owner_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED', 'TEMPORARY')
      AND
-     (select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')
+     (select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED', 'TEMPORARY')
      """;
     /**
      * This filter is enabled during the publication process, things that are under embargo will not be queried.
