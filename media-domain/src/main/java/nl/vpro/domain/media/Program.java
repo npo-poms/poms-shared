@@ -73,7 +73,9 @@ public final class Program extends MediaObject {
     }
 
 
-    @OneToMany(mappedBy = "mediaObject", orphanRemoval = true, cascade={MERGE})
+    @OneToMany(mappedBy = "mediaObject",
+        orphanRemoval = false, // When true, 'hijacking' events doesn't work properly. (see RCRS integeration test in api-tests)
+        cascade={MERGE})
     @SortNatural
     // Caching doesn't work properly because ScheduleEventRepository may touch this
     // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
