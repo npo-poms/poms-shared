@@ -2802,7 +2802,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="R2SJ"/>
+      <xs:enumeration value="SENJ"/>
       <xs:enumeration value="RAD3">
         <xs:annotation>
           <xs:documentation>
@@ -2810,7 +2810,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="R3KX"/>
+      <xs:enumeration value="KXFM"/>
       <xs:enumeration value="R3AL"/>
       <xs:enumeration value="RAD4">
         <xs:annotation>
@@ -2827,7 +2827,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="R5ST"/>
+      <xs:enumeration value="STNL"/>
       <xs:enumeration value="RAD6">
         <xs:annotation>
           <xs:documentation>
@@ -3267,7 +3267,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      
+
       <xs:enumeration value="BLND">
         <xs:annotation>
           <xs:documentation>

@@ -635,14 +635,14 @@
       <xs:enumeration value="NED3"/>
       <xs:enumeration value="RAD1"/>
       <xs:enumeration value="RAD2"/>
-      <xs:enumeration value="R2SJ"/>
+      <xs:enumeration value="SENJ"/>
       <xs:enumeration value="RAD3"/>
       <xs:enumeration value="R3AL"/>
-      <xs:enumeration value="R3KX"/>
+      <xs:enumeration value="KXFM"/>
       <xs:enumeration value="RAD4"/>
       <xs:enumeration value="R4CO"/>
       <xs:enumeration value="RAD5"/>
-      <xs:enumeration value="R5ST"/>
+      <xs:enumeration value="STNL"/>
       <xs:enumeration value="RAD6"/>
       <xs:enumeration value="RTL4"/>
       <xs:enumeration value="RTL5"/>
