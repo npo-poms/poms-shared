@@ -29,7 +29,7 @@ public enum Channel implements Displayable, XmlValued {
     NED1(VIDEO, "https://www.npostart.nl/live/npo-1", 1951) {
         @Override
         public String toString() {
-            return "Nederland 1";
+            return "NPO 1";
         }
 
         @Override
@@ -48,7 +48,7 @@ public enum Channel implements Displayable, XmlValued {
     NED2(VIDEO,  "https://www.npostart.nl/live/npo-2", 1964) {
         @Override
         public String toString() {
-            return "Nederland 2";
+            return "NPO 2";
         }
 
         @Override
@@ -66,7 +66,7 @@ public enum Channel implements Displayable, XmlValued {
     NED3(VIDEO, 1988) {
         @Override
         public String toString() {
-            return "Nederland 3 & Zapp";
+            return "NPO 3";
         }
 
         @Override
@@ -106,8 +106,8 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
-    @XmlEnumValue("R2SJ")
-    R2SJ(AUDIO, 2014) { // voorheen radio 6?
+    @XmlEnumValue("SENJ")
+    SENJ(AUDIO, Range.atLeast(Year.of(2014)), "https://www.nporadio2.nl/soulenjazz"   , true) { // voorheen radio 6?
         @Override
         public String toString() {
             return "Radio 2 Soul & Jazz";
@@ -130,7 +130,7 @@ public enum Channel implements Displayable, XmlValued {
 
 
     @XmlEnumValue("R3AL")
-    R3AL(AUDIO, null, null, true) {
+    R3AL(AUDIO, Range.atMost(Year.of(2022)), "https://www.npo3fm.nl/kx/programmas/kx-alternative", true) {
         @Override
         public String toString() {
             return "NPO 3FM KX Alternative";
@@ -138,7 +138,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("R3KX")
-    R3KX(AUDIO, Range.atLeast(Year.of(2005)), null, true) {
+    R3KX(AUDIO, Range.atLeast(Year.of(2005)), "https://www.npo3fm.nl/kx", true) {
         @Override
         public String toString() {
             return "NPO 3FM KX Radio";
@@ -175,8 +175,8 @@ public enum Channel implements Displayable, XmlValued {
 
     },
 
-    @XmlEnumValue("R5ST")
-    R5ST(AUDIO, null, null, true) {
+    @XmlEnumValue("STNL")
+    STNL(AUDIO, Range.atLeast(Year.of(2010)), "https://www.nporadio5.nl/sterrennl/online-radio-luisteren/", true) {
         @Override
         public String toString() {
             return "NPO Radio 5 Sterren NL";
@@ -474,7 +474,7 @@ public enum Channel implements Displayable, XmlValued {
     EEN_(VIDEO, 1953) {
         @Override
         public String toString() {
-            return "E\u00E9n";
+            return "Eén";
         }
     },
 
@@ -572,7 +572,7 @@ public enum Channel implements Displayable, XmlValued {
     SUDW {
         @Override
         public String toString() {
-            return "SWF Baden-W\u00FCrttemberg";
+            return "SWF Baden-Württemberg";
 
         }
     },
@@ -2778,6 +2778,19 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     /**
+     * @since 7.11
+     */
+
+    @XmlEnumValue("BLND")
+    BLND(AUDIO, "https://npoblend.nl", 2024) {
+        @Override
+        public String toString() {
+            return "NPO Blend";
+        }
+
+    },
+
+    /**
      * This is not a real channel. It can be used for testing or mocking purposes.
      *
      * @since 5.15
@@ -2787,6 +2800,18 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "TEST CHANNEL";
+        }
+    },
+    /**
+     * This is not a real channel. It can be used for testing or mocking purposes.
+     *
+     * @since 7.10
+     */
+    @XmlEnumValue("XXXY")
+    XXXY() {
+        @Override
+        public String toString() {
+            return "TEST CHANNEL 2";
         }
     }
     ;
