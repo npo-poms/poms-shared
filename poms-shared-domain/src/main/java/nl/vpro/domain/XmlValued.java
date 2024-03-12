@@ -14,5 +14,11 @@ import javax.xml.bind.annotation.XmlEnumValue;
  */
 @Deprecated
 public interface XmlValued extends nl.vpro.util.XmlValued {
-
+    /**
+     *
+     * @since 5.20.2
+     */
+    static <E extends Enum<E> & nl.vpro.util.XmlValued> E valueOfXml(E[] values, String value) {
+        return nl.vpro.util.XmlValued.valueOfXml(values, value);
+    }
 }
