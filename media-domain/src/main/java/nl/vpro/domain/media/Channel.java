@@ -2921,13 +2921,17 @@ public enum Channel implements Displayable, XmlValued {
     }
 
     public static Channel[] split(String channels) {
-        final String[] values = channels.split("\\s*,\\s*");
         List<Channel> result = new ArrayList<>();
-        for(String value : values) {
-            if(Character.isDigit(value.charAt(0))) {
-                value = "_" + value;
+
+        if (channels != null && !channels.isBlank()) {
+            final String[] values = channels.split("\\s*,\\s*");
+
+            for (String value : values) {
+                if (Character.isDigit(value.charAt(0))) {
+                    value = "_" + value;
+                }
+                result.add(Channel.valueOf(value));
             }
-            result.add(Channel.valueOf(value));
         }
         return result.toArray(new Channel[0]);
     }
