@@ -9,8 +9,6 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
-import org.meeuw.i18n.regions.Region;
-
 import nl.vpro.w3.rdf.Description;
 
 @GTAAScheme(Scheme.geographicname)
@@ -25,7 +23,7 @@ import nl.vpro.w3.rdf.Description;
 @XmlRootElement(name = "geographicName")
 @XmlAccessorType(XmlAccessType.NONE)
 @Schema(name = "GTAAGeographicName")
-public final class GTAAGeographicName extends AbstractSimpleValueGTAAConcept implements Region {
+public final class GTAAGeographicName extends AbstractSimpleValueGTAAConcept {
 
     @Serial
     private static final long serialVersionUID = 2600104116644142067L;
@@ -45,13 +43,4 @@ public final class GTAAGeographicName extends AbstractSimpleValueGTAAConcept imp
         return answer;
     }
 
-    @Override
-    public String getCode() {
-        return getId().toString();
-    }
-
-    @Override
-    public Type getType() {
-        return Type.UNDEFINED;
-    }
 }
