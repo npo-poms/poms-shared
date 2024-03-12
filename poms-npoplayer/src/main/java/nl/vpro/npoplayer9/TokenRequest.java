@@ -4,9 +4,9 @@
  */
 package nl.vpro.npoplayer9;
 
-import lombok.*;
+import lombok.Data;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.*;
 
 /**
  * Token request for NPO Player 9 endpoint. Just does jwt signing
@@ -17,4 +17,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("tokenRequest")
 public class TokenRequest {
     private final String mid;
+
+    @JsonCreator
+    public TokenRequest(@JsonProperty("mid") String mid) {
+        this.mid = mid;
+    }
 }
