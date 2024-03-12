@@ -211,10 +211,7 @@ public final class Utils {
     }
 
     @SuppressWarnings("unused")
-
     public static class Converters implements TypeConverters {
-
-
         /**
          * Converts input stream to a {@link Temp} object. Stores the {@link InputStream} as a temporary file.
          * <p>
