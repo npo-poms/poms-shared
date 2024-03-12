@@ -2924,12 +2924,10 @@ public enum Channel implements Displayable, XmlValued {
         final String[] values = channels.split("\\s*,\\s*");
         List<Channel> result = new ArrayList<>();
         for(String value : values) {
-            if (! value.isBlank()) {
-                if (Character.isDigit(value.charAt(0))) {
-                    value = "_" + value;
-                }
-                result.add(Channel.valueOf(value));
+            if(Character.isDigit(value.charAt(0))) {
+                value = "_" + value;
             }
+            result.add(Channel.valueOf(value));
         }
         return result.toArray(new Channel[0]);
     }
