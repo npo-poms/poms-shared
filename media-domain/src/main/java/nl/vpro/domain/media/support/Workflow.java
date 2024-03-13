@@ -96,6 +96,9 @@ public enum Workflow implements Displayable, XmlValued {
 
 
     /**
+     * The complete object is temporary. It is not published, and probably does not yet contain useful metadata. It is expected that that will follow
+     * in which case the workflow probably will change to {@link #FOR_PUBLICATION}. This may e.g. be a group with members, but which does not itself already
+     * have metadata (like a title). It may e.g. also be a program for which a NEP notify was received but no futer meta data yet.
      * @since 7.11
      */
     @XmlEnumValue("TEMPORARY")
