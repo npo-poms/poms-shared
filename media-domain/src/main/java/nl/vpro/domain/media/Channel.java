@@ -110,7 +110,7 @@ public enum Channel implements Displayable, XmlValued {
     SENJ(AUDIO, Range.atLeast(Year.of(2014)), "https://www.nporadio2.nl/soulenjazz"   , true) { // voorheen radio 6?
         @Override
         public String toString() {
-            return "Radio 2 Soul & Jazz";
+            return "NPO Soul & Jazz";
         }
     },
 
@@ -141,7 +141,7 @@ public enum Channel implements Displayable, XmlValued {
     KXFM(AUDIO, Range.atLeast(Year.of(2005)), "https://www.npo3fm.nl/kx", true) {
         @Override
         public String toString() {
-            return "NPO 3FM KX Radio";
+            return "NPO Campus Radio";
         }
     },
 
@@ -179,7 +179,7 @@ public enum Channel implements Displayable, XmlValued {
     STNL(AUDIO, Range.atLeast(Year.of(2010)), "https://www.nporadio5.nl/sterrennl/online-radio-luisteren/", true) {
         @Override
         public String toString() {
-            return "NPO Radio 5 Sterren NL";
+            return "NPO Sterren NL";
         }
     },
 
