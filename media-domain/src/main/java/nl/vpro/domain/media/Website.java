@@ -38,7 +38,6 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
 
     @XmlValue
     @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}")
-    @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     @Getter
     @Setter
     @URI(
