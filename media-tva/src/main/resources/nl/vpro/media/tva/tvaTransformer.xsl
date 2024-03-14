@@ -533,6 +533,10 @@
               <xsl:when test="lower-case(./@type) = 'originalepisodetitle'">
                 <xsl:comment>Found originalepisodetitle <xsl:value-of select="."/> (what's that)</xsl:comment>
               </xsl:when>
+              <xsl:when test="lower-case(./@type) = 'emissiontitle'">
+                <xsl:comment>Found emissionTitle <xsl:value-of select="."/> (what's that)</xsl:comment>
+              </xsl:when>
+
               <xsl:otherwise>
                 <title type="KENNIKNIET-{@type}"> <!-- trigger an unmarshall error -->
                   <xsl:value-of select="normalize-space(text())"/>
