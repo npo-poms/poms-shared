@@ -169,6 +169,13 @@ public class AssemblageConfig implements Serializable {
     Predicate<MediaObject> implicitUndelete = alwaysTrue();
 
 
+    @lombok.Builder.Default
+    UnaryOperator<String> cleaner  = null;
+
+    @lombok.Builder.Default
+    UnaryOperator<String> multilineCleaner =  null;
+
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     transient SimpleLogger logger;
@@ -233,6 +240,8 @@ public class AssemblageConfig implements Serializable {
             deleteBroadcasters,
             publishImmediately,
             implicitUndelete,
+            cleaner,
+            multilineCleaner,
             logger);
     }
 
