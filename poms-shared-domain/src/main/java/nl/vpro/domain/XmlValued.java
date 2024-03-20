@@ -10,34 +10,15 @@ import javax.xml.bind.annotation.XmlEnumValue;
  *
  * @author Michiel Meeuwissen
  * @since 5.5
+ * @deprecated use {@link nl.vpro.util.XmlValued}
  */
-public interface XmlValued {
-
-    default String getXmlValue() {
-        if (this instanceof Enum) {
-            Class<?> enumClass = getClass();
-            String name = ((Enum<?>) this).name();
-            try {
-                XmlEnumValue xmlValue = enumClass.getField(name).getAnnotation(XmlEnumValue.class);
-                return xmlValue.value();
-            } catch (NoSuchFieldException | NullPointerException e) {
-                return name;
-            }
-        }
-        throw new UnsupportedOperationException("Only supported for enums");
-    }
-
+@Deprecated
+public interface XmlValued extends nl.vpro.util.XmlValued {
     /**
      *
      * @since 5.20.2
      */
-    static <E extends Enum<E> & XmlValued> E valueOfXml(E[] values, String value) {
-        for (E v : values) {
-            if (v.getXmlValue().equals(value)) {
-                return v;
-            }
-        }
-        throw new IllegalArgumentException("No constant with xml value " + value);
+    static <E extends Enum<E> & nl.vpro.util.XmlValued> E valueOfXml(E[] values, String value) {
+        return nl.vpro.util.XmlValued.valueOfXml(values, value);
     }
-
 }
