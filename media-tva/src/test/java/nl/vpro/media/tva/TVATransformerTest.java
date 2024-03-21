@@ -15,12 +15,13 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import jakarta.validation.*;
-import jakarta.xml.bind.JAXB;
-import javax.xml.parsers .ParserConfigurationException;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
+import jakarta.xml.bind.JAXB;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
@@ -45,9 +46,9 @@ import nl.vpro.i18n.Locales;
 import nl.vpro.media.tva.saxon.extension.*;
 import nl.vpro.validation.ValidationLevel;
 
+import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;
 import static nl.vpro.media.tva.Constants.*;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.similar;
-import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
@@ -590,6 +591,7 @@ public class TVATransformerTest {
     }
 
     @Test
+    @Disabled("File was not chekced in?")
     public void missingTitleType() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         String xml = bindinc("bindinc/20240313075603000dayARD_20240402.xml");
 //        log.info(xml);
