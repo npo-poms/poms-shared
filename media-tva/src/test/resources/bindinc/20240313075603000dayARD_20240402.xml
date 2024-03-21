@@ -1,0 +1,2302 @@
+﻿<TVAMain xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" publisher="media-press.tv" xmlns="urn:tva:metadata:2004">
+  <ProgramDescription>
+    <ProgramInformationTable>
+      <ProgramInformation programId="crid://media-press.tv/47918595">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Verrückt nach Meer]]></Title>
+          <Title type="originalLanguage"><![CDATA[Verrückt nach Meer - Vom Wasser aus die Welt entdecken]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Überraschung auf dem Atlantik]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Überraschung auf dem Atlantik]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De Grand Lady zet koers richting Europa. Passagier Torsten viert zijn verjaardag met zijn vrouw Iris. Ondertussen krijgt Bernd een vreemd verzoek van de voXXclub.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De Grand Lady zet koers richting Europa. Passagier Torsten viert zijn verjaardag met zijn vrouw Iris. Ondertussen krijgt Bernd een vreemd verzoek van de voXXclub.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Realityprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:16" type="other">
+            <Name xml:lang="NL"><![CDATA[Realityprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="622807613" />
+              <Character>
+                <mpeg7:GivenName>Self</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="307955662" />
+              <Character>
+                <mpeg7:GivenName>Self</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="535899529" />
+              <Character>
+                <mpeg7:GivenName>Self</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="849272084" />
+              <Character>
+                <mpeg7:GivenName>Self</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="125308305" />
+              <Character>
+                <mpeg7:GivenName>Self</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://de.wikipedia.org/wiki/Verr%C3%BCckt_nach_Meer</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2016</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H50M</Duration>
+          <TotalEpisodes>50</TotalEpisodes>
+          <EpisodeNumber>48</EpisodeNumber>
+          <Season>5</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/43727531">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Hubert und Staller]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Bis zum letzten Tropfen]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Bis zum letzten Tropfen]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[In het bloedtransfusiecentrum overlijdt een oudere mevrouw, omdat ze teveel bloed verloren heeft. Al snel blijkt dat er moord in het spel is en komt haar enige erfgename Sabrina Rattlinger als verdachte in het vizier van de politie.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[In een kliniek voor bloedtransfusies overlijdt een oudere mevrouw, omdat ze teveel bloed verloren heeft. Al snel blijkt dat het om moord gaat. Haar enige erfgename Sabrina komt al snel in beeld als verdachte.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Misdaadserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:12" type="other">
+            <Name xml:lang="NL"><![CDATA[Misdaadserie]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="2112775384" />
+              <Character>
+                <mpeg7:GivenName>Franz Hubert</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:COMPOSER">
+              <PersonNameIDRef ref="2028234053" />
+              <Character>
+                <mpeg7:GivenName>Siggi Baumegger</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1170865959" />
+              <Character>
+                <mpeg7:GivenName>Johannes Staller</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1571912809" />
+              <Character>
+                <mpeg7:GivenName>Reimund Girwidz</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1904992375" />
+              <Character>
+                <mpeg7:GivenName>Dr. Anja Licht</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1882685517" />
+              <Character>
+                <mpeg7:GivenName>Sonja Wirth</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.daserste.de/unterhaltung/serie/heiter-bis-toedlich-hubert-und-staller/index.html</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2015</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H47M</Duration>
+          <TotalEpisodes>16</TotalEpisodes>
+          <EpisodeNumber>16</EpisodeNumber>
+          <Season>4</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361222956">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Report München]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De in Duitsland wonende psycholoog Ahmed Mansour wordt oftewel gezien al verlicht persoon of als islamhater en ophitser. Hij is als zoon van een Palestijn in Israel geboren en voert campagne tegen het antisemitisme, en het extremisme, waarschuwt voor de politieke islam, kritiseert de migratiepolitiek in Duitsland. Hij heeft heel veel vijanden en wordt in Duitsland 24 uur per dag bewaakt. De journalisten van report München hebben hem maandenlang exclusief op de voet kunnen volgen. ]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Reportage over psycholoog en islamcriticus Ahmed Mansour. Hij waarschuwt voor de politieke islam en wordt sindsdien 24 uur per dag bewaakt.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="9999693213890" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.br.de/fernsehen/das-erste/sendungen/report-muenchen/index.html</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361221987">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[WaPo Bodensee]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Ganovenehre]]></Title>
+          <Title xml:lang="NL" type="OriginalEpisodeTitle"><![CDATA[Ganovenehre]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De 23-jarige Ben Müller bestuurt een boot vol explosieven en wordt gearresteerd. Vlak voor zijn arrestatie gooit hij zijn mobiele telefoon in het water. Sindsdien zwijgt hij. De politie ontdekt dat de explosieven bestemd zijn voor een bankoverval.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De 23-jarige Ben Müller bestuurt een boot vol explosieven en wordt gearresteerd. Vlak voor zijn arrestatie gooit hij zijn mobiele telefoon in het water. Sindsdien zwijgt hij. De politie ontdekt dat de explosieven bestemd zijn voor een bankoverval.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Misdaadserie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:12" type="other">
+            <Name xml:lang="NL"><![CDATA[Misdaadserie]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="900424575" />
+              <Character>
+                <mpeg7:GivenName>Nele Fehrenbach</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1189508153" />
+              <Character>
+                <mpeg7:GivenName>Paul Schott</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="177147645" />
+              <Character>
+                <mpeg7:GivenName>Julia Demmler</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1155495641" />
+              <Character>
+                <mpeg7:GivenName>Jakob Frings</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1423084805" />
+              <Character>
+                <mpeg7:GivenName>Mechthild Fehrenbach</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://de.wikipedia.org/wiki/WaPo_Bodensee</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H55M</Duration>
+          <TotalEpisodes>14</TotalEpisodes>
+          <EpisodeNumber>9</EpisodeNumber>
+          <Season>6</Season>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361221962">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Wer weiss denn sowas?]]></Title>
+          <Title type="originalLanguage"><![CDATA[Wer weiß denn sowas?]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Bernhard Hoëcker en Elton beantwoorden met de hulp van een beroemde gast de grappige en verrassende vragen van Kai Pflaume.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Bernhard Hoëcker en Elton beantwoorden met de hulp van een beroemde gast de grappige en verrassende vragen van Kai Pflaume.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Spel]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="NL"><![CDATA[Spel]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://de.wikipedia.org/wiki/Wer_wei%C3%9F_denn_sowas%3F</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H50M</Duration>
+          <TotalEpisodes>133</TotalEpisodes>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361221511">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Morgenmagazin]]></Title>
+          <Title type="originalLanguage"><![CDATA[ZDF-Morgenmagazin]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Ochtendmagazine met alle actuele onderwerpen van de dag.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Ochtendmagazine met alle actuele onderwerpen van de dag.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Actualiteiten]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:13" type="other">
+            <Name xml:lang="NL"><![CDATA[Actualiteiten]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.daserste.de/information/politik-weltgeschehen/morgenmagazin/index.html</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT04H00M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361220989">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Rote Rosen]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Belevenissen van drie generaties, (on)beantwoorde liefdes, verbluffende carrières, stekeligheden en romantische momenten.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Belevenissen van drie generaties, (on)beantwoorde liefdes, verbluffende carrières, stekeligheden en romantische momenten.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Soap]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="NL"><![CDATA[Soap]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="813476291" />
+              <Character>
+                <mpeg7:GivenName>Jördis Kilic</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="2013812535" />
+              <Character>
+                <mpeg7:GivenName>Klaas Jäger</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="498412680" />
+              <Character>
+                <mpeg7:GivenName>Moran Kilic</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1944291907" />
+              <Character>
+                <mpeg7:GivenName>Franka Böttcher</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="824979394" />
+              <Character>
+                <mpeg7:GivenName>Gunter Flickenschild</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.daserste.de/unterhaltung/soaps-telenovelas/rote-rosen/index.html</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H50M</Duration>
+          <EpisodeNumber>3953</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361220793">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Wer weiss denn sowas?]]></Title>
+          <Title type="originalLanguage"><![CDATA[Wer weiß denn sowas?]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Bernhard Hoëcker en Elton beantwoorden met de hulp van een beroemde gast de grappige en verrassende vragen van Kai Pflaume.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Bernhard Hoëcker en Elton beantwoorden met de hulp van een beroemde gast de grappige en verrassende vragen van Kai Pflaume.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Spel]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="NL"><![CDATA[Spel]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://de.wikipedia.org/wiki/Wer_wei%C3%9F_denn_sowas%3F</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H45M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202101">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Sportschau: DFB-Pokal]]></Title>
+          <Title type="originalLanguage"><![CDATA[DFB-Pokal]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[1. FC Saarbrücken - 1. FC Kaiserslautern]]></Title>
+          <Title xml:lang="DE" type="emissionTitle"><![CDATA[Sportschau: DFB-Pokal]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Liveverslag van de halve finale 1. FC Saarbrücken - 1. FC Kaiserslautern in de DFB-Pokal.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Liveverslag van de halve finale 1. FC Saarbrücken - 1. FC Kaiserslautern in de DFB-Pokal.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Rechtstreeks verslag/Verslag]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Sport]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:28" type="other">
+            <Name xml:lang="NL"><![CDATA[Rechtstreeks verslag/Verslag]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://en.wikipedia.org/wiki/DFB-Pokal</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT02H45M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202100">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Wetter]]></Title>
+          <Title type="originalLanguage"><![CDATA[Wetter vor acht]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het weer van de dag en de vooruitzichten voor de komende nacht en de volgende dagen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het weer van de dag en de vooruitzichten voor de komende nacht en de volgende dagen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Weerbericht]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:11" type="other">
+            <Name xml:lang="NL"><![CDATA[Weerbericht]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.daserste.de/wetter/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202099">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Brisant]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Boulevardmagazine met een onderhoudende mix van actuele gebeurtenissen en nieuws over beroemdheden.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Boulevardmagazine met een onderhoudende mix van actuele gebeurtenissen en nieuws over beroemdheden.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Amusement]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.mdr.de/brisant/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H45M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202098">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Meister des alltags]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Twee teams strijden tegen elkaar en moeten vragen over verschillende categorieën beantwoorden.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Twee teams strijden tegen elkaar en moeten vragen over verschillende categorieën beantwoorden.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Spel]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.9">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="NL"><![CDATA[Spel]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://de.wikipedia.org/wiki/Meister_des_Alltags</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202097">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Mit Wetter]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202095">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Wirtschaft vor acht]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Economisch nieuws.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Economisch nieuws.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Businessprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:17" type="other">
+            <Name xml:lang="NL"><![CDATA[Businessprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:tva:metadata:cs:TVARoleCS:2004:V721">
+              <PersonNameIDRef ref="99991708529447" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202094">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Mit Wetter]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H10M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202093">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Buffet]]></Title>
+          <Title type="originalLanguage"><![CDATA[ARD-Buffet]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Leben & genießen]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Tips van de redactie en experts over voeding en gezondheid, het huishouden en de tuin, waarbij een recept dat in de studio wordt klaargemaakt niet ontbreekt.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Tips van de redactie en experts over voeding en gezondheid, het huishouden en de tuin, waarbij een recept dat in de studio wordt klaargemaakt niet ontbreekt.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Amusement]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Amusement]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.swr.de/buffet/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H45M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202092">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Mit Wetter]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H10M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202091">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202090">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Mit Wetter]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H10M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202088">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Mittagsmagazin]]></Title>
+          <Title type="originalLanguage"><![CDATA[ARD-Mittagsmagazin]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Mit Tagesschau]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Nieuws en actualiteiten uit de politiek, economie, beurs, sport en cultuur.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Nieuws en actualiteiten uit de politiek, economie, beurs, sport en cultuur.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Informatief programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:21" type="other">
+            <Name xml:lang="NL"><![CDATA[Informatief programma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.br-online.de/mittagsmagazin/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT01H50M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202087">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Mit Wetter]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202086">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202085">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H10M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202084">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Mit Wetter]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202083">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Mit Wetter]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H15M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361202082">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Tagesschau]]></Title>
+          <Title xml:lang="DE" type="EpisodeTitle"><![CDATA[Mit Wetter]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het belangrijkste nieuws van de dag, evenals reportages en achtergrondinformatie over actuele onderwerpen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Nieuwsprogramma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.20">
+            <Name xml:lang="NL"><![CDATA[Nieuws/Actualiteiten]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:15" type="other">
+            <Name xml:lang="NL"><![CDATA[Nieuwsprogramma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Tagesschau_(ARD)</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H10M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/361174794">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Sturm der Liebe]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Het wel en wee en relaties van mensen rondom het vijfsterrenhotel "Fürstenhof" in Beieren.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Het wel en wee en relaties van mensen rondom het vijfsterrenhotel "Fürstenhof" in Beieren.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Soap]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.5">
+            <Name xml:lang="NL"><![CDATA[Serie]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:4" type="other">
+            <Name xml:lang="NL"><![CDATA[Soap]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1799804364" />
+              <Character>
+                <mpeg7:GivenName>Werner Saalfeld</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1531886477" />
+              <Character>
+                <mpeg7:GivenName>Hildegard Sonnbichler</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1070315363" />
+              <Character>
+                <mpeg7:GivenName>Alfons Sonnbichler</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="1302448927" />
+              <Character>
+                <mpeg7:GivenName>Christoph Saalfeld</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="176695980" />
+              <Character>
+                <mpeg7:GivenName>Alexandra Schwarzbach</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://de.wikipedia.org/wiki/Sturm_der_Liebe</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H50M</Duration>
+          <EpisodeNumber>4229</EpisodeNumber>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/360283834">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[ARD Wissen: Superstoff Testosteron - Mehr Kraft, mehr Lust, mehr Glück?]]></Title>
+          <Title type="originalLanguage"><![CDATA[Superstoff Testosteron - Mehr Kraft, mehr Lust, mehr Glück?]]></Title>
+          <Title xml:lang="DE" type="emissionTitle"><![CDATA[ARD Wissen: Superstoff Testosteron - Mehr Kraft, mehr Lust, mehr Glück?]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Testosteron is het mannelijk hormoon en volgens het clichébeeld zou het de man dominant en agressief maken. Bij de mens blijkt dit veel genuanceerder te liggen dan bij muizen. Het hormoon speelt ook een rol bij de mentale en fysieke gezondheid, vitaliteit en levenskwaliteit. In deze documentaire worden twee mannen gevolgd die op natuurlijke wijze hun testosteronspiegel omhoog willen krijgen.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Documentaire over de invloed van testosteron op de kwaliteit van het leven. Het hormoon beïnvloedt de psyche en het lichaam. Het zorgt voor vitaliteit en prestaties. Bij twee mannen wordt getest of ze op natuurlijke wijze hun testosteronniveau kunnen verhogen.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Documentaire]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.10">
+            <Name xml:lang="NL"><![CDATA[Wetenschap]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:12" type="other">
+            <Name xml:lang="NL"><![CDATA[Documentaire]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="99991174256561" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="99991166008117" />
+            </CreditsItem>
+          </CreditsList>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/359433187">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[ARD Wissen: Superstoff Östrogen - Mehr Power, mehr Balance, mehr Spaß?]]></Title>
+          <Title type="originalLanguage"><![CDATA[Superstoff Östrogen - Mehr Power, mehr Balance, mehr Spaß?]]></Title>
+          <Title xml:lang="DE" type="emissionTitle"><![CDATA[ARD Wissen: Superstoff Östrogen - Mehr Power, mehr Balance, mehr Spaß?]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Oestrogenen zijn de belangrijkste vrouwelijke hormonen. Ze zijn noodzakelijk voor de vruchtbaarheid, maar ze hebben veel meer functies. Ze worden in de eierstokken geproduceerd, maar ze zijn op meer dan 400 plekken in het lichaam actief. Ze helpen bij de groei van spieren en botten. Maar de oestrogenenspiegel schommelt tijdens de menstruatie cyclus. Gevolgen zijn wisselingen in gemoedsgesteldheid en vreetbuien. Nieuw onderzoek in de sportwetenschappen heeft aangetoond dat vrouwen hun cyclus kunnen gebruiken om krachtiger en evenwichtiger te worden. ]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Oestrogeen zorgt ervoor dat spieren groeien en botten sterk worden. De oestrogeenspiegels fluctueren sterk tijdens de menstruatiecyclus. Onderzoek in de sportwetenschap laat zien hoe vrouwen hun cyclus kunnen gebruiken om meer kracht en balans te bereiken.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Reportage]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.10">
+            <Name xml:lang="NL"><![CDATA[Wetenschap]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:9" type="other">
+            <Name xml:lang="NL"><![CDATA[Reportage]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2024</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H30M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/352571774">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Wissen vor acht - Natur]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Thomas D., zanger van "Die Fantastischen Vier" en milieuactivist, beantwoordt vragen over inheemse planten en dieren.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Thomas D., zanger van "Die Fantastischen Vier" en milieuactivist, beantwoordt vragen over inheemse planten en dieren.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Informatief programma]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.11">
+            <Name xml:lang="NL"><![CDATA[Informatief]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:21" type="other">
+            <Name xml:lang="NL"><![CDATA[Informatief programma]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.daserste.de/information/wissen-kultur/wissen-vor-acht-natur/index.html</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2021</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT00H05M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/1453248">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Ein Vater zum Verlieben]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[Als de Berlijnse familievader en zakenman Richard Brosche erachter komt dat hij op Mallorca een buitenechtelijke tienerdochter heeft, gaat hij op zoek naar haar. De zoektocht verandert zijn hele leven.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[De Berlijnse zakenman en vader Richard Brosche is met stomheid geslagen als hij erachter komt dat hij op Mallorca een tweede, buitenechtelijke tienerdochter heeft.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Komedie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL"><![CDATA[Film]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:7" type="other">
+            <Name xml:lang="NL"><![CDATA[Komedie]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="99991742574418" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="9999169995640" />
+            </CreditsItem>
+            <CreditsItem role="ASSISTANT_DIRECTOR">
+              <PersonNameIDRef ref="601355624" />
+              <Character>
+                <mpeg7:GivenName>assistant director</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:COMPOSER">
+              <PersonNameIDRef ref="1700659934" />
+              <Character>
+                <mpeg7:GivenName>sound mixer</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="999911030779" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="99991490390464" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="9999780643469" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="99991944136596" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>https://de.wikipedia.org/wiki/Ein_Vater_zum_Verlieben#:~:text=Ein%20Vater%20zum%20Verlieben%20ist,Oktober%202001%20in%20der%20ARD.</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>2001</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT01H28M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+      <ProgramInformation programId="crid://media-press.tv/1293695">
+        <BasicDescription>
+          <Title xml:lang="DE" type="main"><![CDATA[Männer und andere Katastrophen]]></Title>
+          <Synopsis xml:lang="NL" length="long"><![CDATA[De onhandige studente Judith wordt door financiële problemen en pech achtervolgd. Het babysitten bij haar zuster Rebecca eindigt met een totaal geruïneerde woning en een vernield schilderij van haar vader.]]></Synopsis>
+          <Synopsis xml:lang="NL" length="short"><![CDATA[Judith wordt door pech achtervolgd. Babysitten bij haar zus loopt uit op een geruïneerd huis en vervolgens verliest ze ook nog haar vriend en haar baan. Haar buurman Leo ontfermt zich over Judith.]]></Synopsis>
+          <OtherTextElement xml:lang="NL" type="PoProgType"><![CDATA[Romantische komedie]]></OtherTextElement>
+          <Genre href="urn:tva:metadata:cs:2004:2.4">
+            <Name xml:lang="NL"><![CDATA[Film]]></Name>
+          </Genre>
+          <Genre href="urn:po:metadata:cs:GenreCS:2009:19" type="other">
+            <Name xml:lang="NL"><![CDATA[Romantische komedie]]></Name>
+          </Genre>
+          <Language>DE</Language>
+          <Subtitling href="urn:bds:metadata:cs:SubtitlingCS:2007:TeletextSubtitles">
+            <Name xml:lang="NL"><![CDATA[Teletekst ondertitels]]></Name>
+          </Subtitling>
+          <CreditsList>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="99991215555712" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:DIRECTOR">
+              <PersonNameIDRef ref="99991345662070" />
+            </CreditsItem>
+            <CreditsItem role="ASSISTANT_DIRECTOR">
+              <PersonNameIDRef ref="155301288" />
+              <Character>
+                <mpeg7:GivenName>assistant director</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="MAKEUP">
+              <PersonNameIDRef ref="2122270802" />
+              <Character>
+                <mpeg7:GivenName>makeup artist</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="PRODUCTION_MANAGEMENT">
+              <PersonNameIDRef ref="2010375695" />
+              <Character>
+                <mpeg7:GivenName>unit manager</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:COMPOSER">
+              <PersonNameIDRef ref="486644006" />
+              <Character>
+                <mpeg7:GivenName>sound mixer</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="99991847509914" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:COMPOSER">
+              <PersonNameIDRef ref="506981248" />
+              <Character>
+                <mpeg7:GivenName>sound</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="9999212250946" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:COMPOSER">
+              <PersonNameIDRef ref="917433978" />
+              <Character>
+                <mpeg7:GivenName>sound editor</mpeg7:GivenName>
+              </Character>
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="9999532058025" />
+            </CreditsItem>
+            <CreditsItem role="urn:mpeg:mpeg7:cs:RoleCS:2001:ACTOR">
+              <PersonNameIDRef ref="99991255299026" />
+            </CreditsItem>
+          </CreditsList>
+          <RelatedMaterial>
+            <HowRelated href="urn:bds:metadata:cs:WebsiteRationaleCS:2007:1">
+              <Name xml:lang="EN"><![CDATA[DefaultUrl]]></Name>
+            </HowRelated>
+            <MediaLocator>
+              <mpeg7:MediaUri>http://www.imdb.com/title/tt0165398/</mpeg7:MediaUri>
+            </MediaLocator>
+          </RelatedMaterial>
+          <ProductionLocationList>
+            <ProductionLocation code="DE" />
+          </ProductionLocationList>
+          <ReleaseInformation>
+            <ReleaseDate>
+              <Year>1999</Year>
+            </ReleaseDate>
+          </ReleaseInformation>
+          <Duration>PT01H28M</Duration>
+        </BasicDescription>
+      </ProgramInformation>
+    </ProgramInformationTable>
+    <GroupInformationTable />
+    <ProgramLocationTable>
+      <Schedule serviceIDRef="ARD_" start="2024-04-02T05:00:00+02:00" end="2024-04-03T05:00:00+02:00">
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361221511" />
+          <ProgramURL>dvb://1.1.ARD_;756553120@2024-04-02T05:00:00+01:00--PT04H00M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172052</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T05:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT04H00M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202097" />
+          <ProgramURL>dvb://1.1.ARD_;756553109@2024-04-02T09:00:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172023</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T09:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/43727531" />
+          <ProgramURL>dvb://1.1.ARD_;756553129@2024-04-02T09:05:00+01:00--PT00H50M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172064</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T09:05:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M00S</PublishedDuration>
+          <Repeat value="true" />
+          <Last value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202087" />
+          <ProgramURL>dvb://1.1.ARD_;756553111@2024-04-02T09:55:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172027</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T09:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202098" />
+          <ProgramURL>dvb://1.1.ARD_;756553138@2024-04-02T10:00:00+01:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172073</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T10:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361220793" />
+          <ProgramURL>dvb://1.1.ARD_;756553135@2024-04-02T10:30:00+01:00--PT00H45M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172070</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T10:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H45M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202093" />
+          <ProgramURL>dvb://1.1.ARD_;756553137@2024-04-02T11:15:00+01:00--PT00H45M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172072</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T11:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H45M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202090" />
+          <ProgramURL>dvb://1.1.ARD_;756553112@2024-04-02T12:00:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172030</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T12:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202088" />
+          <ProgramURL>dvb://1.1.ARD_;756553123@2024-04-02T12:10:00+01:00--PT01H50M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172058</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T12:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H50M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202082" />
+          <ProgramURL>dvb://1.1.ARD_;756553113@2024-04-02T14:00:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172033</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T14:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361220989" />
+          <ProgramURL>dvb://1.1.ARD_;756553126@2024-04-02T14:10:00+01:00--PT00H50M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172061</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T14:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202094" />
+          <ProgramURL>dvb://1.1.ARD_;756553114@2024-04-02T15:00:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172037</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T15:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361174794" />
+          <ProgramURL>dvb://1.1.ARD_;756553121@2024-04-02T15:10:00+01:00--PT00H50M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172055</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T15:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202092" />
+          <ProgramURL>dvb://1.1.ARD_;756553115@2024-04-02T16:00:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172040</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T16:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/47918595" />
+          <ProgramURL>dvb://1.1.ARD_;756553139@2024-04-02T16:10:00+01:00--PT00H50M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172074</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T16:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202083" />
+          <ProgramURL>dvb://1.1.ARD_;756553116@2024-04-02T17:00:00+01:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172043</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T17:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202099" />
+          <ProgramURL>dvb://1.1.ARD_;756553140@2024-04-02T17:15:00+01:00--PT00H45M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172075</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T17:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H45M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361221962" />
+          <ProgramURL>dvb://1.1.ARD_;756553136@2024-04-02T18:00:00+01:00--PT00H50M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172071</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T18:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H50M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361221987" />
+          <ProgramURL>dvb://1.1.ARD_;756553127@2024-04-02T18:50:00+01:00--PT00H55M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172062</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T18:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H55M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/352571774" />
+          <ProgramURL>dvb://1.1.ARD_;756553124@2024-04-02T19:45:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172059</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T19:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202100" />
+          <ProgramURL>dvb://1.1.ARD_;756553133@2024-04-02T19:50:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172068</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T19:50:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202095" />
+          <ProgramURL>dvb://1.1.ARD_;756553142@2024-04-02T19:55:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172077</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T19:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202084" />
+          <ProgramURL>dvb://1.1.ARD_;756553117@2024-04-02T20:00:00+01:00--PT00H15M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172046</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T20:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H15M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202101" />
+          <ProgramURL>dvb://1.1.ARD_;756553128@2024-04-02T20:15:00+01:00--PT02H45M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172063</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T20:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT02H45M00S</PublishedDuration>
+          <Live value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361222956" />
+          <ProgramURL>dvb://1.1.ARD_;756553130@2024-04-02T23:00:00+01:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172065</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T23:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/359433187" />
+          <ProgramURL>dvb://1.1.ARD_;756553131@2024-04-02T23:30:00+01:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172066</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-02T23:30:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202085" />
+          <ProgramURL>dvb://1.1.ARD_;756553107@2024-04-03T00:00:00+01:00--PT00H10M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172021</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-03T00:00:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H10M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/1453248" />
+          <ProgramURL>dvb://1.1.ARD_;756553134@2024-04-03T00:10:00+01:00--PT01H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172069</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <AspectRatio type="original">16:9</AspectRatio>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-03T00:10:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H30M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202086" />
+          <ProgramURL>dvb://1.1.ARD_;756553118@2024-04-03T01:40:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172048</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-03T01:40:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/1293695" />
+          <ProgramURL>dvb://1.1.ARD_;756553125@2024-04-03T01:45:00+01:00--PT01H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172060</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-03T01:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT01H30M00S</PublishedDuration>
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/360283834" />
+          <ProgramURL>dvb://1.1.ARD_;756553122@2024-04-03T03:15:00+01:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172057</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-03T03:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/359433187" />
+          <ProgramURL>dvb://1.1.ARD_;756553132@2024-04-03T03:45:00+01:00--PT00H30M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172067</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-03T03:45:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H30M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202099" />
+          <ProgramURL>dvb://1.1.ARD_;756553141@2024-04-03T04:15:00+01:00--PT00H40M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172076</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-03T04:15:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H40M00S</PublishedDuration>
+          <Repeat value="true" />
+        </ScheduleEvent>
+        <ScheduleEvent>
+          <Program crid="crid://media-press.tv/361202091" />
+          <ProgramURL>dvb://1.1.ARD_;756553119@2024-04-03T04:55:00+01:00--PT00H05M00S</ProgramURL>
+          <InstanceMetadataId>imi:1423172049</InstanceMetadataId>
+          <InstanceDescription>
+            <AVAttributes>
+              <AudioAttributes>
+                <NumOfChannels>2</NumOfChannels>
+              </AudioAttributes>
+              <VideoAttributes>
+                <Scan>interlaced</Scan>
+                <HorizontalSize>1920</HorizontalSize>
+                <VerticalSize>1080</VerticalSize>
+                <FrameRate>25</FrameRate>
+              </VideoAttributes>
+            </AVAttributes>
+          </InstanceDescription>
+          <PublishedStartTime>2024-04-03T04:55:00+02:00</PublishedStartTime>
+          <PublishedDuration>PT00H05M00S</PublishedDuration>
+        </ScheduleEvent>
+      </Schedule>
+    </ProgramLocationTable>
+    <CreditsInformationTable>
+      <PersonName personNameId="2112775384">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Christian</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Tramitz</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1170865959">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Helmfried</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">von Lüttichau</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1571912809">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Michael</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Brandner</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1904992375">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Karin</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Thaler</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1882685517">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Annett</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Fleischer</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="2028234053">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Gerd</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Ekken-Gerdes</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="813476291">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Diana</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Staehly</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="2013812535">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Sebastian</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Deyle</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="498412680">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Yunus</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Cumartpay</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1944291907">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Birthe</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Wolter</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="824979394">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Hermann</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Toelcke</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1799804364">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Dirk</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Galuba</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1531886477">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Antje</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Hagen</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1070315363">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Sepp</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Schauer</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1302448927">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Dieter</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Bach</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="176695980">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Daniela</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Kiefer</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="622807613">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Andrea</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Aschenbrenner</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="307955662">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Hans-Jörg</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Aschenbrenner</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="535899529">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Christian</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Baumann</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="849272084">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Torsten</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Bungart</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="125308305">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Andrea</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Eibach</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="900424575">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Floriane</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Daniel</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1189508153">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Tim</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Wilde</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="177147645">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Wendy</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Güntensperger</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1155495641">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Max</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">König</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1423084805">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Diana</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Körner</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991708529447">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Markus</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Gürne</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999693213890">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Claudia</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Schick</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991742574418">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Dieter</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Pfaff</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="999911030779">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Rita</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Russek</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991490390464">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Johanna</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Klante</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999780643469">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Simone</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Thomalla</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991944136596">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Camilla</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Renschke</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999169995640">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Sigi</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Rothemund</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="601355624">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Jörg</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Slotty</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="1700659934">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Wolff-Dietrich</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Peters-Valerius</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991215555712">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Heike</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Makatsch</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991847509914">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Dominic</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Raacke</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999212250946">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Ulrike</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Folkerts</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="9999532058025">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Irm</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Hermann</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991255299026">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Steffen</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Wink</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991345662070">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Ulli</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Baumann</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="155301288">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Uschi</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Pflüger</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="2122270802">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Silke</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Lisku</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="2010375695">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Norbert</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Ranft</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="486644006">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Jörg</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Höhne</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="506981248">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Kai</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Lüde</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="917433978">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Robin</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Pohle</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991174256561">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Nina</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Chmielewski</mpeg7:FamilyName>
+      </PersonName>
+      <PersonName personNameId="99991166008117">
+        <mpeg7:GivenName xml:lang="NL" initial=" ">Carsten</mpeg7:GivenName>
+        <mpeg7:FamilyName xml:lang="NL">Schollmann</mpeg7:FamilyName>
+      </PersonName>
+    </CreditsInformationTable>
+  </ProgramDescription>
+</TVAMain>

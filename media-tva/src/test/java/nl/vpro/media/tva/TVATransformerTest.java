@@ -591,7 +591,6 @@ public class TVATransformerTest {
     }
 
     @Test
-    @Disabled("File was not chekced in?")
     public void missingTitleType() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         String xml = bindinc("bindinc/20240313075603000dayARD_20240402.xml");
 //        log.info(xml);
