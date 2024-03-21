@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.*;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.meeuw.i18n.regions.Region;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,7 +30,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "geoLocationType", propOrder = {"name", "scopeNotes", "gtaaUri", "gtaaStatus", "role"})
-public class GeoLocation extends DomainObject implements MediaObjectOwnableListItem<GeoLocation, GeoLocations>, Region, GTAARecordManaged {
+public class GeoLocation extends DomainObject implements MediaObjectOwnableListItem<GeoLocation, GeoLocations>, GTAARecordManaged {
 
     @Serial
     private static final long serialVersionUID = -1000438762907228547L;
@@ -178,13 +177,4 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         return new GeoLocation(this, parent);
     }
 
-    @Override
-    public String getCode() {
-        return getGtaaUri();
-    }
-
-    @Override
-    public Type getType() {
-        return Type.UNDEFINED;
-    }
 }
