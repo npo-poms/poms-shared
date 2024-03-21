@@ -883,6 +883,7 @@
       <xs:enumeration value="FUNU"/>
       <xs:enumeration value="FUNG"/>
       <xs:enumeration value="FUNF"/>
+      <xs:enumeration value="FUNO"/>
       <xs:enumeration value="CLAS"/>
       <xs:enumeration value="BEL1"/>
       <xs:enumeration value="BEL2"/>
