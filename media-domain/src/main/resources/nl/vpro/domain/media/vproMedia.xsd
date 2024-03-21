@@ -3098,6 +3098,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="FUNO">
+         <xs:annotation>
+          <xs:documentation>
+            FunX Afro
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="CLAS">
         <xs:annotation>
           <xs:documentation>
