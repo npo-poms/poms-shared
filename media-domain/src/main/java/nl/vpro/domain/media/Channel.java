@@ -2241,7 +2241,7 @@ public enum Channel implements Displayable, XmlValued {
 
 
     @XmlEnumValue("FUND")
-    FUND(AUDIO, null, null, true)  {
+    FUND(AUDIO, Range.atMost(Year.of(2020)), null, true)  {
         @Override
         public String toString() {
             return "FunX Dance";
@@ -2263,10 +2263,10 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
     @XmlEnumValue("FUNJ")
-    FUNJ(AUDIO, null, null, true)  {
+    FUNJ(AUDIO, Range.atMost(Year.of(2023)), null, true)  {
         @Override
         public String toString() {
-            return "FunX Raggae";
+            return "FunX Reggae";
         }
     },
     @XmlEnumValue("FUNS")
@@ -2310,6 +2310,17 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "FunX Fissa";
+        }
+    },
+
+    /**
+     * @since 7.11
+     */
+    @XmlEnumValue("FUNO")
+    FUNO(AUDIO, null, "https://www.funx.nl/afro/online-radio-luisteren", true)  {
+        @Override
+        public String toString() {
+            return "FunX Afro";
         }
     },
 
