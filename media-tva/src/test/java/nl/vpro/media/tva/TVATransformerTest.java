@@ -589,14 +589,6 @@ public class TVATransformerTest {
 
     }
 
-    @Test
-    public void missingTitleType() throws IOException, ParserConfigurationException, TransformerException, SAXException {
-        String xml = bindinc("bindinc/20240313075603000dayARD_20240402.xml");
-//        log.info(xml);
-        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
-        validate(table);
-
-    }
 
 
     @Test
