@@ -149,44 +149,43 @@ public class Page implements MutableEmbargo<Page> {
     protected String subtitle;
 
     @Setter
-    @NoHtml
-    protected List<String> keywords;
+    protected List<@NoHtml String> keywords;
 
     @Setter
     @Valid
-    protected SortedSet<Genre> genres;
+    protected SortedSet<@Valid Genre> genres;
 
     @Setter
-    @NoHtml
+    @NoHtml(aggressive = false)
     protected String summary;
 
     @Setter
-    protected List<Paragraph> paragraphs;
+    protected List<@Valid Paragraph> paragraphs;
 
     @Setter
-    protected List<String> tags;
+    protected List<@NoHtml String> tags;
 
     @Setter
     protected Integer refCount;
 
     @Setter
-    protected List<Referral> referrals;
+    protected List<@Valid Referral> referrals;
 
     @Setter
-    protected List<Link> links;
+    protected List<@Valid Link> links;
 
     @Setter
-    protected List<Embed> embeds;
+    protected List<@Valid Embed> embeds;
 
     @Setter
     protected List<String> statRefs;
 
     @Setter
-    protected List<Image> images;
+    protected List<@Valid Image> images;
 
     @Setter
     @Valid
-    protected SortedSet<Relation> relations;
+    protected SortedSet<@Valid Relation> relations;
 
     @Setter
     protected Instant creationDate;
@@ -201,7 +200,7 @@ public class Page implements MutableEmbargo<Page> {
     @Setter
     protected Instant lastPublished;
 
-    protected List<Credits> credits;
+    protected List<@Valid Credits> credits;
 
 
     public Page() {

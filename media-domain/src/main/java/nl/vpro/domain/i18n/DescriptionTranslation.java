@@ -18,13 +18,13 @@ import nl.vpro.domain.media.support.TextualType;
  * @since 5.1
  */
 // it's in super
+@Setter
 @Entity
 public class DescriptionTranslation extends AbstractOwnedTextEntity<DescriptionTranslation, MediaObjectTranslation> {
 
     @Serial
     private static final long serialVersionUID = 8768731191821945231L;
     @Getter
-    @Setter
     @ManyToOne
     @NotNull
     MediaObjectTranslation parent;

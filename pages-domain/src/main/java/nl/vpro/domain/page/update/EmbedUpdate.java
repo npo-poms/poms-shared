@@ -52,7 +52,7 @@ public class EmbedUpdate implements Serializable {
     @Setter
     private String title;
 
-    @NoHtml
+    @NoHtml(aggressive = false)
     @Getter
     @Setter
     private String description;

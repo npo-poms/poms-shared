@@ -43,7 +43,7 @@ public class Image implements Metadata {
     private String title;
 
     @XmlElement
-    @NoHtml
+    @NoHtml(aggressive = false)
     @JsonProperty
     private String description;
 

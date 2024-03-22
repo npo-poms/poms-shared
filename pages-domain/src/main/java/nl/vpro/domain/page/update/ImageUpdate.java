@@ -71,7 +71,7 @@ public class ImageUpdate implements Serializable {
     private String title;
 
     @XmlElement
-    @NoHtml
+    @NoHtml(aggressive = false)
     private String description;
 
 

@@ -75,7 +75,7 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
 
     @XmlValue
     @Size(max = 255)
-    @NoHtml
+    @NoHtml(aggressive = false)
     private String text;
 
 

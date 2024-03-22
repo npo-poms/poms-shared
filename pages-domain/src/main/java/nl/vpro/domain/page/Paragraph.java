@@ -23,7 +23,7 @@ public class Paragraph {
     @NoHtml
     private String title;
 
-    @NoHtml
+    @NoHtml(aggressive = false)
     private String body;
 
     @Valid
