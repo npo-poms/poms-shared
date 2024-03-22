@@ -120,7 +120,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, MutableMetadata
     @Setter
     private Integer width;
 
-    @NoHtml
+    @NoHtml(aggressive = false)
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
     @Setter

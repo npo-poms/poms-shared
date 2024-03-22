@@ -20,7 +20,7 @@ import nl.vpro.validation.NoHtml;
 public class TextTranslation implements Supplier<String> {
 
     @Column(nullable = false)
-    @NoHtml
+    @NoHtml(aggressive = false)
     protected String value;
 
     @Id

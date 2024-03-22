@@ -65,7 +65,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
-    @NoHtml
+    @NoHtml(aggressive = true)
     @JsonProperty("value")
     @XmlValue
     protected String value;

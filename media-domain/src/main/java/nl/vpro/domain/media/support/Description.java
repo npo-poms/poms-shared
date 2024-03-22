@@ -43,7 +43,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
 
     @Column(nullable = false)
     @NotNull(message = "description not set")
-    @NoHtml
+    @NoHtml(aggressive = false)
     @XmlValue
     @JsonProperty("value")
     @Size.List({

@@ -25,7 +25,7 @@ import nl.vpro.validation.NoHtml;
 public class TitleUpdate implements TypedText {
 
     @XmlValue
-    @NoHtml
+    @NoHtml(aggressive = false)
     private String value;
 
     @NotNull

@@ -33,7 +33,7 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity<
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
-    @NoHtml
+    @NoHtml(aggressive = false)
     @XmlValue
     protected String value;
 

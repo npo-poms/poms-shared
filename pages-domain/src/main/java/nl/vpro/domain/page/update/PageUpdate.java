@@ -121,9 +121,8 @@ public class PageUpdate implements Serializable {
 
     @XmlElement(name = "keyword")
     @JsonProperty("keywords")
-    @NoHtmlList
     @Setter
-    protected List<String> keywords;
+    protected List<@NoHtml String> keywords;
 
     @NoHtml
     @Getter
@@ -140,9 +139,8 @@ public class PageUpdate implements Serializable {
     @XmlElement(name = "tag")
     @JsonProperty("tags")
     //@Pattern("(?i)[a-z]")
-    @NoHtmlList
     @Setter
-    protected List<String> tags;
+    protected List<@NoHtml String> tags;
 
 
     @XmlElement(name = "genre")
@@ -166,10 +164,9 @@ public class PageUpdate implements Serializable {
 
     @XmlElement(name = "statRef")
     @JsonProperty("statRefs")
-    @NoHtmlList
     @Getter
     @Setter
-    private List<String> statRefs;
+    private List<@NoHtml String> statRefs;
 
     @XmlElement(name = "image")
     @JsonProperty("images")
