@@ -26,7 +26,12 @@ public interface UserRepository<T extends User> {
 
     void delete(OrganizationEditor<? extends Organization> join);
 
-    List<? extends T> findUsers(String name, int max);
+    default List<? extends T> findUsers(String name, int max) {
+        return list().stream()
+            .filter(u -> u.getDisplayName().toLowerCase().contains(name))
+            .limit(max)
+            .toList();
+    }
 
     List<? extends T> list();
 
