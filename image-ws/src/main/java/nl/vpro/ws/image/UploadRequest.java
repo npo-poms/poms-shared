@@ -7,8 +7,8 @@ package nl.vpro.ws.image;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.activation.DataHandler;
-import javax.xml.bind.annotation.*;
+import jakarta.activation.DataHandler;
+import jakarta.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.support.OwnerType;

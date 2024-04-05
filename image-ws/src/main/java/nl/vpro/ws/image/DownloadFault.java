@@ -6,7 +6,7 @@ package nl.vpro.ws.image;
 
 import lombok.Getter;
 
-import javax.xml.ws.WebFault;
+import jakarta.xml.ws.WebFault;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
