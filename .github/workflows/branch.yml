@@ -12,7 +12,7 @@ jobs:
       MAVEN_OPTS: '-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn'
     steps:
       - uses: actions/checkout@v4
-      - uses: oleksiyrudenko/gha-git-credentials@v2.1.1
+      - uses: oleksiyrudenko/gha-git-credentials@v2.1.2
         with:
           global: true
           name: 'github $GITHUB_ACTOR'
@@ -36,6 +36,3 @@ jobs:
           mvn -B versions:set-property -Dproperty=revision -DnewVersion=$DEVELOPMENT_REVISION
           git commit -am "Updated revision to ${DEVELOPMENT_REVISION} for next development iteration"
           git push origin main
-
-
-

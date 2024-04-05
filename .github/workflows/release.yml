@@ -22,7 +22,7 @@ jobs:
           server-password: SONATYPE_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
           gpg-passphrase: GPG_SECRET_KEY_PASSPHRASE
-      - uses: oleksiyrudenko/gha-git-credentials@v2.1.1
+      - uses: oleksiyrudenko/gha-git-credentials@v2.1.2
         with:
           global: true
           name: 'github $GITHUB_ACTOR'
