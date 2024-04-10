@@ -1,5 +1,6 @@
 package nl.vpro.sourcingservice;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 import org.springframework.jmx.export.annotation.ManagedAttribute;
@@ -8,27 +9,20 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 @ManagedResource
 public class ConfigurationService implements Supplier<Configuration> {
 
-    private final Configuration configuration1;
-    private final Configuration configuration2;
+    private final Configuration[] configurations;
     private int version;
 
     public ConfigurationService(
-        Configuration configuration1,
-        Configuration configuration2,
-        int version) {
-        this.configuration1 = configuration1;
-        this.configuration2 = configuration2;
+        int version,
+        Configuration... configurations) {
+        this.configurations = configurations;
         this.version = version;
     }
 
-    public void doSomething() {
-        System.out.println(configuration1);
-        System.out.println(configuration2);
-    }
 
     @Override
     public Configuration get() {
-        return version == 1 ? configuration1 : configuration2;
+        return Arrays.stream(configurations).filter(c -> c.version() == version).findFirst().orElseThrow();
     }
 
     @ManagedAttribute
