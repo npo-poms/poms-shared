@@ -6,7 +6,7 @@ import jakarta.xml.bind.annotation.XmlEnumValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.XmlValued;
+import nl.vpro.util.XmlValued;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 

@@ -7,7 +7,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.XmlValued;
+import nl.vpro.util.XmlValued;
 import nl.vpro.domain.media.bind.AspectRatioToString;
 import nl.vpro.i18n.Displayable;
 

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.annotations.Beta;
 
-import nl.vpro.domain.XmlValued;
+import nl.vpro.util.XmlValued;
 import nl.vpro.domain.media.bind.AgeRatingToString;
 import nl.vpro.i18n.Displayable;
 

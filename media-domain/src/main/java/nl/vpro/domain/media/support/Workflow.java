@@ -7,7 +7,8 @@ package nl.vpro.domain.media.support;
 
 import lombok.Getter;
 
-import java.util.*;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import jakarta.xml.bind.annotation.*;
@@ -17,11 +18,12 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.XmlValued;
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.TrackableObject;
 import nl.vpro.i18n.Displayable;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
+import nl.vpro.util.XmlValued;
 
 import static java.util.Collections.unmodifiableSet;
 import static nl.vpro.domain.media.CollectionUtils.nullSafeSet;
@@ -190,6 +192,7 @@ public enum Workflow implements Displayable, XmlValued {
         FOR_REPUBLICATION
     ));
 
+    @Getter
     private final String description;
 
     /**
@@ -221,10 +224,6 @@ public enum Workflow implements Displayable, XmlValued {
     @NonNull
     public Workflow getPublishedAs() {
         return publishedAs;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     @Override

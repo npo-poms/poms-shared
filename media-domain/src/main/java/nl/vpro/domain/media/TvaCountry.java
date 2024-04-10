@@ -1,9 +1,8 @@
 package nl.vpro.domain.media;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.MissingResourceException;
+import lombok.Getter;
+
+import java.util.*;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -19,6 +18,7 @@ import nl.vpro.domain.media.bind.TvaCountryAdapter;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
+@Getter
 @XmlJavaTypeAdapter(value = TvaCountryAdapter.class)
 public enum TvaCountry {
     AD("AD", "Andorrees", "Andorrese", "Andorrese"),
@@ -182,10 +182,6 @@ public enum TvaCountry {
         this.dutchCommonGenderAdjective = dutchCommonGenderAdjective;
     }
 
-    public String getIsoCode() {
-        return isoCode;
-    }
-
 
     public String getIso3Code() {
         try {
@@ -210,18 +206,6 @@ public enum TvaCountry {
             }
             throw iae;
         }
-    }
-
-    public String getDutchCountryName() {
-        return dutchCountryName;
-    }
-
-    public String getDutchNeuterAdjective() {
-        return dutchNeuterAdjective;
-    }
-
-    public String getDutchCommonGenderAdjective() {
-        return dutchCommonGenderAdjective;
     }
 
     public static List<TvaCountry> valueOf(List<String> values) {
