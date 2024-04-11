@@ -14,10 +14,16 @@ import net.sf.saxon.om.*;
 import net.sf.saxon.value.SequenceType;
 import net.sf.saxon.value.StringValue;
 
+import java.util.*;
+
 import javax.inject.Inject;
 
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
+import nl.vpro.logging.Slf4jHelper;
+
+import static nl.vpro.logging.simple.Level.DEBUG;
+import static nl.vpro.logging.simple.Level.WARN;
 
 /**
  * @author Roelof Jan Koekoek
@@ -31,6 +37,8 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
     private NotFound notFound = NotFound.ASIS;
 
     private final BroadcasterService broadcasterService;
+
+    private static final Set<String> warned = Collections.synchronizedSet(new HashSet<>());
 
     @Inject
     public FindBroadcasterFunction(BroadcasterService broadcasterService) {
@@ -65,7 +73,7 @@ public class FindBroadcasterFunction extends ExtensionFunctionDefinition {
 
                     if (broadcaster != null) {
                         if (! broadcaster.getWhatsOnId().equalsIgnoreCase(value)) {
-                            log.warn("Broadcaster {} did not match on whatson id {}", broadcaster, value);
+                            Slf4jHelper.log(log, warned.add(broadcaster.getId()) ? WARN : DEBUG, "Broadcaster {} did not match on whatson id {}", broadcaster, value);
                         }
                         return new StringValue(broadcaster.getId());
                     }
