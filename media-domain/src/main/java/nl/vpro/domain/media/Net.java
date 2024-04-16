@@ -9,11 +9,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlValue;
 
+import nl.vpro.domain.Identifiable;
 import nl.vpro.i18n.Displayable;
 
 
 @Entity
-public class Net implements Displayable, Serializable, Comparable<Net> {
+public class Net implements Displayable, Serializable, Comparable<Net>, Identifiable<String> {
 
     @Serial
     private static final long serialVersionUID = -5278065987837127858L;
