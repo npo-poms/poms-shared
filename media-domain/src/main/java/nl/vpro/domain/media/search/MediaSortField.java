@@ -1,6 +1,5 @@
 package nl.vpro.domain.media.search;
 
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import nl.vpro.domain.media.*;
@@ -27,8 +26,8 @@ public enum MediaSortField implements SortField {
     type(Type.STRING, null),
     mediaType(Type.STRING) {
         @Override
-        public Optional<String> derivedFrom() {
-            return Optional.of("type");
+        public String[] derivedFrom() {
+            return new String[] {"type"};
         }
         @Override
         public String nulls() {
@@ -36,7 +35,12 @@ public enum MediaSortField implements SortField {
         }
     },
 
-    sortDate(INSTANT, "sortInstant", "sortDate"),
+    sortDate(INSTANT, "sortInstant", null) {
+        @Override
+        public String[] derivedFrom() {
+            return new String[] {"creationInstant"};
+        }
+    },
     lastModified(INSTANT),
     creationDate(INSTANT, "creationInstant", "creationDate"),
     publishStop(INSTANT),
@@ -55,7 +59,7 @@ public enum MediaSortField implements SortField {
     /**
      * @since 7.12
      */
-    publishedLocations(Type.COUNT, "locations", "publishedLocationCount") {
+    publishedLocations(Type.COUNT, "locations", "locationPublishedCount") {
         @Override
         public Predicate<?> predicate() {
             return i -> ((Location) i).isPublishable();
@@ -80,12 +84,28 @@ public enum MediaSortField implements SortField {
     /**
      * @since 7.12
      */
-    publishedImagesCount(Type.COUNT, "images", "publishedImagesCount") {
+    publishedImagesCount(Type.COUNT, "images", "imagesPublishedCount") {
         @Override
         public Predicate<?> predicate() {
             return i -> ((Image) i).isPublishable();
         }
     },
+     /**
+     * @since 7.12
+     */
+     imagesWithoutCreditsCount(Type.COUNT, "images", "imagesWithoutCreditsCount") {
+         private boolean missingCredits(Image img) {
+             return img.getCredits() == null || img.getCredits().trim().isEmpty() || img.getLicense() == null || img.getSource() == null || img.getSource().trim().isEmpty();
+         }
+         @Override
+         public Predicate<?> predicate() {
+             return i -> {
+                Image img = (Image) i;
+                return img.isPublishable() && missingCredits(img);
+
+             };
+         }
+     },
 
     firstScheduleEvent(INSTANT, null ),
     firstScheduleEventNoRerun(INSTANT, null),
@@ -132,8 +152,8 @@ public enum MediaSortField implements SortField {
         return sortField;
     }
 
-    public Optional<String> derivedFrom() {
-        return Optional.empty();
+    public String[] derivedFrom() {
+        return new String[] {};
     }
 
     public Predicate<?> predicate() {
