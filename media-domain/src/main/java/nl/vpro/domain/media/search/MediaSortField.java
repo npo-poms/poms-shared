@@ -5,6 +5,7 @@ import lombok.Getter;
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.support.OwnerType;
 
+import static nl.vpro.domain.media.search.MediaSortField.MapType.*;
 import static nl.vpro.domain.media.search.SortField.Type.INSTANT;
 
 /**
@@ -15,17 +16,19 @@ public enum MediaSortField implements SortField {
 
 
 
-    sortTitle(Type.STRING, false),
-    sortTitle_NPO(Type.STRING, false),
+    sortTitle(Type.STRING, NONE),
+    sortTitle_NPO(Type.STRING, NONE),
 
 
     mid(Type.STRING),
-    type(Type.STRING),
-    mediaType(Type.STRING, null, null, MediaType.MEDIA.name(), "type"),
 
-    sortDate(INSTANT, "sortInstant", "sortDate", null, null),
+    @Deprecated
+    type(Type.STRING),
+    mediaType(Type.STRING, null, null, MediaType.MEDIA.name(), "type", SIMPLE),
+
+    sortDate(INSTANT, "sortInstant", "sortDate", null, null, SIMPLE),
     lastModified(INSTANT),
-    creationDate(INSTANT, "creationInstant", "creationDate", null, null),
+    creationDate(INSTANT, "creationInstant", "creationDate", null, null, SIMPLE),
     publishStop(INSTANT),
     publishStart(INSTANT),
     lastPublished(INSTANT),
@@ -34,19 +37,26 @@ public enum MediaSortField implements SortField {
     lastModifiedBy(Type.STRING),
     createdBy(Type.STRING),
 
-    locations(Type.LONG, "locations", "locationCount", null, null),
+    /**
+     * Sort on location count
+     */
+    locations(Type.LONG, "locations", "locationCount", null, null, COUNT),
 
-    memberofCount(Type.LONG, false),
-    episodeofCount(Type.LONG, false),
-    scheduleEventsCount(Type.LONG, false),
+    memberofCount(Type.LONG, "memberOf", null, "0", null, COUNT),
+    episodeofCount(Type.LONG, "episodeOf", null, "0", null, NONE),
+    scheduleEventsCount(Type.LONG, "scheduleEvents", null, "0", null, NONE),
 
-    firstScheduleEvent(INSTANT, false),
-    firstScheduleEventNoRerun(INSTANT, false),
-    lastScheduleEvent(INSTANT, false),
-    lastScheduleEventNoRerun(INSTANT, false)
-
-
+    firstScheduleEvent(INSTANT, NONE),
+    firstScheduleEventNoRerun(INSTANT, NONE),
+    lastScheduleEvent(INSTANT, NONE),
+    lastScheduleEventNoRerun(INSTANT, NONE)
     ;
+
+    public enum MapType {
+        SIMPLE,
+        NONE,
+        COUNT
+    }
 
 
     private final Type t;
@@ -55,28 +65,28 @@ public enum MediaSortField implements SortField {
     private final String nulls;
     private final String derivedFrom;
     @Getter
-    private final boolean autoMappable ;
+    private final MapType mapType;
 
-    MediaSortField(Type type, boolean autoMappable) {
+    MediaSortField(Type type, MapType mapType) {
         t = type;
         property = name();
         sortField = name();
         nulls = type == INSTANT ? NULL_INSTANT : null;
         derivedFrom = null;
-        this.autoMappable = autoMappable;
+        this.mapType = mapType;
     }
      MediaSortField(Type type) {
-        this(type, true);
+        this(type, SIMPLE);
     }
 
 
-    MediaSortField(Type type, String property, String sortField, String nulls, String derivedFrom) {
+    MediaSortField(Type type, String property, String sortField, String nulls, String derivedFrom, MapType mapType) {
         this.t = type;
         this.property = property == null ? name() : property;
         this.sortField = sortField == null ? name() : sortField;
         this.nulls = nulls == null ? (type == INSTANT ? NULL_INSTANT : null) : nulls;
         this.derivedFrom = derivedFrom;
-        autoMappable = true;
+        this.mapType = mapType;
     }
     @Override
     public Type type() {
