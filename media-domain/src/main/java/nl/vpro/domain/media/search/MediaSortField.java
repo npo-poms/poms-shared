@@ -1,11 +1,12 @@
 package nl.vpro.domain.media.search;
 
-import lombok.Getter;
+import java.util.Optional;
+import java.util.function.Predicate;
 
-import nl.vpro.domain.media.MediaType;
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
 
-import static nl.vpro.domain.media.search.MediaSortField.MapType.*;
 import static nl.vpro.domain.media.search.SortField.Type.INSTANT;
 
 /**
@@ -16,19 +17,28 @@ public enum MediaSortField implements SortField {
 
 
 
-    sortTitle(Type.STRING, NONE),
-    sortTitle_NPO(Type.STRING, NONE),
+    sortTitle(Type.STRING, null),
+    sortTitle_NPO(Type.STRING, null),
 
 
     mid(Type.STRING),
 
     @Deprecated
-    type(Type.STRING),
-    mediaType(Type.STRING, null, null, MediaType.MEDIA.name(), "type", SIMPLE),
+    type(Type.STRING, null),
+    mediaType(Type.STRING) {
+        @Override
+        public Optional<String> derivedFrom() {
+            return Optional.of("type");
+        }
+        @Override
+        public String nulls() {
+            return MediaType.MEDIA.name();
+        }
+    },
 
-    sortDate(INSTANT, "sortInstant", "sortDate", null, null, SIMPLE),
+    sortDate(INSTANT, "sortInstant", "sortDate"),
     lastModified(INSTANT),
-    creationDate(INSTANT, "creationInstant", "creationDate", null, null, SIMPLE),
+    creationDate(INSTANT, "creationInstant", "creationDate"),
     publishStop(INSTANT),
     publishStart(INSTANT),
     lastPublished(INSTANT),
@@ -40,53 +50,72 @@ public enum MediaSortField implements SortField {
     /**
      * Sort on location count
      */
-    locations(Type.LONG, "locations", "locationCount", null, null, COUNT),
+    locations(Type.COUNT, "locations", "locationCount"),
 
-    memberofCount(Type.LONG, "memberOf", null, "0", null, COUNT),
-    episodeofCount(Type.LONG, "episodeOf", null, "0", null, NONE),
-    scheduleEventsCount(Type.LONG, "scheduleEvents", null, "0", null, NONE),
+    /**
+     * @since 7.12
+     */
+    publishedLocations(Type.COUNT, "locations", "publishedLocationCount") {
+        @Override
+        public Predicate<?> predicate() {
+            return i -> ((Location) i).isPublishable();
+        }
+    },
 
-    firstScheduleEvent(INSTANT, NONE),
-    firstScheduleEventNoRerun(INSTANT, NONE),
-    lastScheduleEvent(INSTANT, NONE),
-    lastScheduleEventNoRerun(INSTANT, NONE)
+    memberofCount(Type.COUNT, "memberOf", null),
+    episodeofCount(Type.COUNT, "episodeOf", null) {
+        @Override
+        public Class<? extends MediaObject> forClass() {
+            return Program.class;
+        }
+    },
+    scheduleEventsCount(Type.COUNT, "scheduleEvents", null) {
+        @Override
+        public Class<? extends MediaObject> forClass() {
+            return Program.class;
+        }
+    },
+    imagesCount(Type.COUNT, "images", "imagesCount"),
+
+    /**
+     * @since 7.12
+     */
+    publishedImagesCount(Type.COUNT, "images", "publishedImagesCount") {
+        @Override
+        public Predicate<?> predicate() {
+            return i -> ((Image) i).isPublishable();
+        }
+    },
+
+    firstScheduleEvent(INSTANT, null ),
+    firstScheduleEventNoRerun(INSTANT, null),
+    lastScheduleEvent(INSTANT, null),
+    lastScheduleEventNoRerun(INSTANT, null)
     ;
 
-    public enum MapType {
-        SIMPLE,
-        NONE,
-        COUNT
-    }
+
 
 
     private final Type t;
     private final String property;
     private final String sortField;
-    private final String nulls;
-    private final String derivedFrom;
-    @Getter
-    private final MapType mapType;
 
-    MediaSortField(Type type, MapType mapType) {
+
+    MediaSortField(Type type) {
         t = type;
         property = name();
         sortField = name();
-        nulls = type == INSTANT ? NULL_INSTANT : null;
-        derivedFrom = null;
-        this.mapType = mapType;
     }
-     MediaSortField(Type type) {
-        this(type, SIMPLE);
+    MediaSortField(Type type, String property) {
+        this(type, property, null);
+
     }
 
 
-    MediaSortField(Type type, String property, String sortField, String nulls, String derivedFrom, MapType mapType) {
+    MediaSortField(Type type, String property, String sortField) {
         this.t = type;
-        this.property = property == null ? name() : property;
+        this.property = property;
         this.sortField = sortField == null ? name() : sortField;
-        this.nulls = nulls == null ? (type == INSTANT ? NULL_INSTANT : null) : nulls;
-        this.derivedFrom = derivedFrom;
-        this.mapType = mapType;
     }
     @Override
     public Type type() {
@@ -103,16 +132,18 @@ public enum MediaSortField implements SortField {
         return sortField;
     }
 
-    @Override
-    public String nulls() {
-        return nulls;
+    public Optional<String> derivedFrom() {
+        return Optional.empty();
     }
 
-
-
-    public String derivedFrom() {
-        return derivedFrom;
+    public Predicate<?> predicate() {
+        return null;
     }
+
+    public Class<? extends MediaObject> forClass() {
+        return MediaObject.class;
+    }
+
 
 
     public static MediaSortField valueOfNullable(String string) {

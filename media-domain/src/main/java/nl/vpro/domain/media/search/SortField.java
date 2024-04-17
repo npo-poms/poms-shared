@@ -14,11 +14,19 @@ public interface SortField {
     Type type();
 
     default String nulls() {
-        return type() == Type.INSTANT ? NULL_INSTANT : null;
+        return switch(type()) {
+            case INSTANT -> NULL_INSTANT;
+            case COUNT -> "0";
+            case STRING -> "";
+        };
     }
 
+    /**
+     * The associated property or <code>null</code> if there is none (this field will require manual mapping)
+     *
+     */
     default String property() {
-        return name();
+        return null;
     }
 
     default String sortField() {
@@ -27,7 +35,7 @@ public interface SortField {
 
     enum Type {
         STRING,
-        LONG,
+        COUNT,
         INSTANT
     }
 }
