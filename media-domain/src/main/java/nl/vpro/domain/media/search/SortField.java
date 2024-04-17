@@ -6,21 +6,28 @@ package nl.vpro.domain.media.search;
  */
 public interface SortField {
 
+    String NULL_INSTANT = "1970-01-01T00:00:00Z";
+
 
     String name();
 
     Type type();
 
-    default String field() {
+    default String nulls() {
+        return type() == Type.INSTANT ? NULL_INSTANT : null;
+    }
+
+    default String property() {
         return name();
     }
 
-     default String sortField() {
+    default String sortField() {
         return name();
     }
 
     enum Type {
         STRING,
-        LONG
+        LONG,
+        INSTANT
     }
 }
