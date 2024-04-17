@@ -5,8 +5,8 @@ package nl.vpro.domain.media.search;
  * @since 5.0
  */
 public enum LocationSortField implements SortField {
-    lastModified(Type.LONG),
-    creationDate(Type.LONG)
+    lastModified(Type.INSTANT),
+    creationDate(Type.INSTANT)
     ;
 
     private final Type type;
