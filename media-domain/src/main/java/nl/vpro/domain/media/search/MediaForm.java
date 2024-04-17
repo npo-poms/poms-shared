@@ -18,6 +18,8 @@ import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.media.*;
@@ -73,6 +75,7 @@ public class MediaForm {
     @Getter
     @XmlElement(required = true)
     @Valid
+    @NonNull
     private MediaPager pager = new MediaPager();
 
     @Setter
@@ -603,6 +606,10 @@ public class MediaForm {
 
     public boolean hasIds() {
         return has(ids);
+    }
+
+    public boolean hasSort() {
+        return pager.getSort() != null;
     }
 
     private static boolean isEmpty(Collection<?> collection) {
