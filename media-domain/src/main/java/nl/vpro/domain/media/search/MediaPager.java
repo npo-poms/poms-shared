@@ -14,11 +14,11 @@ import static nl.vpro.domain.Xmlns.SEARCH_NAMESPACE;
 @SuppressWarnings("WSReferenceInspection")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaPagerType", namespace = SEARCH_NAMESPACE, propOrder = {
-        "offset",
-        "max",
-        "sort",
-        "order"
-        })
+    "offset",
+    "max",
+    "sort",
+    "order"
+})
 public class MediaPager extends Pager<MediaSortField> {
 
     @lombok.Builder
