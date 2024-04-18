@@ -32,10 +32,10 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class InstantRange implements Range<Instant> {
 
     @XmlElement
-    private RangeValue<Instant> start;
+    private Value start;
 
     @XmlElement
-    private RangeValue<Instant> stop;
+    private Value stop;
 
     public InstantRange() {
     }
