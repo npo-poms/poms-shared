@@ -43,8 +43,19 @@ public enum MediaSortField implements SortField {
     },
     lastModified(INSTANT),
     creationDate(INSTANT, "creationInstant", "creationDate"),
-    publishStop(INSTANT),
-    publishStart(INSTANT),
+    publishStop(INSTANT) {
+        @Override
+        public String nulls() {
+            return MAX_INSTANT;
+        }
+
+    },
+    publishStart(INSTANT) {
+        @Override
+        public String nulls() {
+            return MIN_INSTANT;
+        }
+    },
     lastPublished(INSTANT),
 
 

@@ -7,6 +7,8 @@ package nl.vpro.domain.media.search;
 public interface SortField {
 
     String NULL_INSTANT = "1970-01-01T00:00:00Z";
+    String MIN_INSTANT = "1900-01-01T00:00:00Z";
+    String MAX_INSTANT = "2500-01-01T00:00:00Z";
 
 
     String name();
