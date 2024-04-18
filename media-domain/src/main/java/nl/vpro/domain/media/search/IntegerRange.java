@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.*;
 public class IntegerRange implements Range<Long> {
 
     @XmlElement
-    private RangeValue<Long> start;
+    private Value start;
 
     @XmlElement
-    private RangeValue<Long> stop;
+    private Value stop;
 
     public IntegerRange() {
     }
