@@ -72,7 +72,7 @@ public enum MediaSortField implements SortField {
      */
     publishedLocations(Type.COUNT, "locations", "locationPublishedCount") {
         @Override
-        public Predicate<?> predicate() {
+        public Predicate<Object> predicate() {
             return i -> ((Location) i).isPublishable();
         }
     },
@@ -97,7 +97,7 @@ public enum MediaSortField implements SortField {
      */
     publishedImagesCount(Type.COUNT, "images", "imagesPublishedCount") {
         @Override
-        public Predicate<?> predicate() {
+        public Predicate<Object> predicate() {
             return i -> ((Image) i).isPublishable();
         }
     },
@@ -109,7 +109,7 @@ public enum MediaSortField implements SortField {
              return img.getCredits() == null || img.getCredits().trim().isEmpty() || img.getLicense() == null || img.getSource() == null || img.getSource().trim().isEmpty();
          }
          @Override
-         public Predicate<?> predicate() {
+         public Predicate<Object> predicate() {
              return i -> {
                 Image img = (Image) i;
                 return img.isPublishable() && missingCredits(img);
@@ -167,7 +167,7 @@ public enum MediaSortField implements SortField {
         return new String[] {};
     }
 
-    public Predicate<?> predicate() {
+    public Predicate<Object> predicate() {
         return null;
     }
 
