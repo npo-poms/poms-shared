@@ -7,10 +7,11 @@ package nl.vpro.domain.media.search;
 import lombok.Data;
 import lombok.ToString;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 @XmlTransient
 @ToString
@@ -58,6 +59,10 @@ public abstract class Pager<S extends SortField> {
 
     public boolean hasOffset() {
         return offset != null && offset != 0;
+    }
+
+    public Integer getOffsetAsInteger() {
+        return offset == null ? null : offset.intValue();
     }
 
 }
