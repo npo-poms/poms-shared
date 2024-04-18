@@ -11,21 +11,25 @@ import javax.xml.bind.annotation.*;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public interface Range<T extends Comparable<T>, S extends Range.RangeValue<T>> extends Predicate<T> {
+public interface Range<T extends Comparable<T>> extends Predicate<T> {
 
-    S getStart();
-    void setStart(S start);
+    Range.RangeValue<T> getStart();
+    default void setStart(Range.RangeValue<T> start) {
+        throw  new UnsupportedOperationException();
+    }
 
-    S getStop();
-    void setStop(S  stop);
+    Range.RangeValue<T> getStop();
+    default void setStop(Range.RangeValue<T>  stop) {
+        throw new UnsupportedOperationException();
+    }
 
     default T getStartValue() {
-        S start = getStart();
+         Range.RangeValue<T> start = getStart();
         return start == null ? null : start.get();
     }
 
     default T getStopValue() {
-        S stop= getStop();
+         Range.RangeValue<T> stop= getStop();
         return stop == null ? null : stop.get();
     }
 
@@ -34,7 +38,7 @@ public interface Range<T extends Comparable<T>, S extends Range.RangeValue<T>> e
         return testStart(other) && testStop(other);
     }
     default boolean testStart(T other) {
-        S  start = getStart();
+         Range.RangeValue<T>  start = getStart();
         if (start == null || start.get() == null) {
             return true;
         }
@@ -46,7 +50,7 @@ public interface Range<T extends Comparable<T>, S extends Range.RangeValue<T>> e
     }
 
     default boolean testStop(T other) {
-        S stop = getStop();
+         Range.RangeValue<T> stop = getStop();
         if (stop == null || stop.get() == null) {
             return true;
         }

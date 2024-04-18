@@ -20,13 +20,13 @@ import javax.xml.bind.annotation.*;
 @Data
 @AllArgsConstructor
 @Builder(builderClassName = "Builder")
-public class LocalDateRange implements Range<ChronoLocalDate, LocalDateRange.Value> {
+public class LocalDateRange implements Range<ChronoLocalDate> {
 
     @XmlElement
-    private Value start;
+    private RangeValue<ChronoLocalDate> start;
 
     @XmlElement
-    private Value stop;
+    private RangeValue<ChronoLocalDate> stop;
 
     public LocalDateRange() {
     }
