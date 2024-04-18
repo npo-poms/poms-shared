@@ -63,6 +63,9 @@ public abstract class Pager<S extends SortField> {
         return offset != null && offset != 0;
     }
 
+    /**
+     * @since 7.11
+     */
     public Integer getOffsetAsInteger() {
         return offset == null ? null : offset.intValue();
     }
