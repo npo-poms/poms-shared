@@ -64,6 +64,9 @@ public interface StreamingStatus extends Serializable, Displayable {
         return new StreamingStatusImpl(existing.getWithDrm(), Value.OFFLINE, existing.getAudioWithoutDrm());
     }
 
+    /**
+     * All possible {@link StreamingStatus streaming stati} where at least one aspect is 'online'.
+     */
     static List<StreamingStatusImpl> availableStatuses() {
         return Arrays.asList(
             withDrm(offline()),
@@ -71,7 +74,7 @@ public interface StreamingStatus extends Serializable, Displayable {
             withoutDrm(offline()),
             withoutDrm(unset()),
             withAndWithoutDrm(),
-            StreamingStatus.withAudio(unset())
+            withAudio(unset())
         );
     }
 
