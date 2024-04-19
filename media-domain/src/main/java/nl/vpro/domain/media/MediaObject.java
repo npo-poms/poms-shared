@@ -3187,9 +3187,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             );
     }
 
+    @PreUpdate
     @PrePersist
-    protected void prepersist() {
-        getSortInstant(); // sortdate must be calculated for it to be properly indexed by hibernate search
+    protected void preUpdate() {
+        Instant instant = getSortInstant(); // sortdate must be calculated for it to be properly indexed by hibernate search
+        log.debug("Found sortdate for {} ->  {}", instant);
     }
 
 }
