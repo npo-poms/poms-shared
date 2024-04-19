@@ -1,5 +1,6 @@
 package nl.vpro.domain.media.search;
 
+import java.util.Set;
 import java.util.function.Predicate;
 
 import nl.vpro.domain.media.*;
@@ -26,7 +27,7 @@ public enum MediaSortField implements SortField {
     type(Type.STRING, null),
     mediaType(Type.STRING) {
         @Override
-        public String[] derivedFrom() {
+        public String[] derivedFrom(Class<? extends MediaObject> clazz) {
             return new String[] {"type"};
         }
         @Override
@@ -37,8 +38,19 @@ public enum MediaSortField implements SortField {
 
     sortDate(INSTANT, "sortInstant", null) {
         @Override
-        public String[] derivedFrom() {
-            return new String[] {"creationInstant"};
+        public String[] derivedFrom(Class<? extends MediaObject> clazz) {
+            if (clazz.equals(Program.class)) {
+                return new String[]{"scheduleEvents", "creationInstant"};
+            } else if (clazz.equals(Segment.class)) {
+                return new String[]{"parent"};
+            } else {
+                return super.derivedFrom(clazz);
+            }
+        }
+        @Override
+        public Set<Class<? extends MediaObject>> forClasses() {
+            return Set.of(Program.class, Segment.class, Group.class);
+
         }
     },
     lastModified(INSTANT),
@@ -80,14 +92,14 @@ public enum MediaSortField implements SortField {
     memberofCount(Type.COUNT, "memberOf", null),
     episodeofCount(Type.COUNT, "episodeOf", null) {
         @Override
-        public Class<? extends MediaObject> forClass() {
-            return Program.class;
+        public Set<Class<? extends MediaObject>> forClasses() {
+            return Set.of(Program.class);
         }
     },
     scheduleEventsCount(Type.COUNT, "scheduleEvents", null) {
         @Override
-        public Class<? extends MediaObject> forClass() {
-            return Program.class;
+        public Set<Class<? extends MediaObject>> forClasses() {
+            return Set.of(Program.class);
         }
     },
     imagesCount(Type.COUNT, "images", "imagesCount"),
@@ -163,18 +175,16 @@ public enum MediaSortField implements SortField {
         return sortField;
     }
 
-    public String[] derivedFrom() {
+    public String[] derivedFrom(Class<? extends MediaObject> clazz) {
         return new String[] {};
+    }
+    public Set<Class<? extends MediaObject>> forClasses() {
+        return Set.of(MediaObject.class);
     }
 
     public Predicate<Object> predicate() {
         return null;
     }
-
-    public Class<? extends MediaObject> forClass() {
-        return MediaObject.class;
-    }
-
 
 
     public static MediaSortField valueOfNullable(String string) {
