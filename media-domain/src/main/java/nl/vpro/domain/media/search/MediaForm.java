@@ -252,6 +252,7 @@ public class MediaForm {
 
     @Setter
     @XmlElement
+    @Getter
     private Boolean findDeleted;
 
     @Getter

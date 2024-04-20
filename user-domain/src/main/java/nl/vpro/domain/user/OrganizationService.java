@@ -15,6 +15,8 @@ public interface OrganizationService<T extends Organization> {
      */
     T find(String id);
 
+
+
     List<T> findAll();
 
     default T update(T organization) {
