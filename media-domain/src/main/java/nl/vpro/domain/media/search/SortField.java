@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.search;
 
+import java.util.Optional;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.0
@@ -15,11 +17,11 @@ public interface SortField {
 
     Type type();
 
-    default String nulls() {
+    default Optional<String> nulls() {
         return switch(type()) {
-            case INSTANT -> NULL_INSTANT;
-            case COUNT -> "0";
-            case STRING -> "";
+            case INSTANT -> Optional.of(NULL_INSTANT);
+            case COUNT -> Optional.of("0");
+            case STRING -> Optional.empty();
         };
     }
 

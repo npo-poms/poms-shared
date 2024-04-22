@@ -1,5 +1,6 @@
 package nl.vpro.domain.media.search;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -31,8 +32,8 @@ public enum MediaSortField implements SortField {
             return new String[] {"type"};
         }
         @Override
-        public String nulls() {
-            return MediaType.MEDIA.name();
+        public Optional<String> nulls() {
+            return Optional.of(MediaType.MEDIA.name());
         }
     },
 
@@ -57,15 +58,15 @@ public enum MediaSortField implements SortField {
     creationDate(INSTANT, "creationInstant", "creationDate"),
     publishStop(INSTANT) {
         @Override
-        public String nulls() {
-            return MAX_INSTANT;
+        public Optional<String> nulls() {
+            return Optional.of(MAX_INSTANT);
         }
 
     },
     publishStart(INSTANT) {
         @Override
-        public String nulls() {
-            return MIN_INSTANT;
+        public Optional<String> nulls() {
+            return Optional.of(MIN_INSTANT);
         }
     },
     lastPublished(INSTANT),
