@@ -1,7 +1,6 @@
 package nl.vpro.domain.media.search;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
@@ -12,6 +11,8 @@ import nl.vpro.domain.support.License;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@lombok.Builder
 public class ImageListItem extends PublishableListItem<ImageListItem> {
     private String title;
 
