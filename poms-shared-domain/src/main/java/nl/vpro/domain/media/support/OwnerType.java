@@ -179,7 +179,11 @@ public enum OwnerType implements Displayable {
         return isDeprecated;
     }
 
-    public static Comparator<OwnerType> comparator(OwnerType... order) {
+    /**
+     * A comparator that prefers the given owner types.
+     */
+
+    public static Comparator<OwnerType> comparator(final OwnerType... order) {
         final List<OwnerType> list = Arrays.asList(order);
         return new Comparator<OwnerType>() {
             @Override
@@ -197,7 +201,9 @@ public enum OwnerType implements Displayable {
     }
 
     public static OwnerType[] after(OwnerType ownerType) {
-        return Arrays.stream(OwnerType.values()).filter(ot -> ot.ordinal() >= ownerType.ordinal()).toArray(OwnerType[]::new);
+        return Arrays.stream(OwnerType.values())
+            .filter(ot -> ot.ordinal() >= ownerType.ordinal())
+            .toArray(OwnerType[]::new);
     }
     public static OwnerType last() {
         return OwnerType.values()[OwnerType.values().length - 1];
