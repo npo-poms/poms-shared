@@ -361,7 +361,7 @@ public class TextualObjects {
             T incomingTitle = incomingMedia.findTitle(owner, type);
             T titleToUpdate = mediaToUpdate.findTitle(owner, type);
 
-            if (titleToUpdate == null && incomingTitle != null && similarOwnerTypes.length > 0) {
+            if (titleToUpdate == null && incomingTitle != null) {
                 for (OwnerType similar : similarOwnerTypes) {
                     T otherTitle = mediaToUpdate.findTitle(similar, type);
                     if (otherTitle != null) {

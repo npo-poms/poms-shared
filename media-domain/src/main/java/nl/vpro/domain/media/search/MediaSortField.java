@@ -18,8 +18,8 @@ public enum MediaSortField implements SortField {
 
 
 
-    sortTitle(Type.STRING, null),
-    sortTitle_NPO(Type.STRING, null),
+    sortTitle(Type.STRING, null, "titles.main"),
+    sortTitle_NPO(Type.STRING, null, "titles_NPO.main"),
 
 
     mid(Type.STRING),
