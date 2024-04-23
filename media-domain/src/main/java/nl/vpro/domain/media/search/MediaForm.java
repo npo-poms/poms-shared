@@ -629,6 +629,14 @@ public class MediaForm {
         }
     }
 
+    /**
+     * @return The classes that are represented by the types in this form.
+     * @since 8.0
+     */
+    public Collection<Class<? extends MediaObject>> getClasses() {
+        return MediaType.getClasses(hasTypes() ? getTypes() : null);
+    }
+
     void beforeUnmarshal(Unmarshaller u, Object parent) {
         if (! isNotAnEpisode()) {
             this.notAnEpisode = null;
