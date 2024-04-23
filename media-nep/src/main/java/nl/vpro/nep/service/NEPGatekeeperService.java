@@ -19,7 +19,7 @@ import nl.vpro.nep.service.exception.NEPException;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public interface NEPGatekeeperService extends  AutoCloseable{
+public interface NEPGatekeeperService extends  AutoCloseable {
 
     @NonNull
     WorkflowExecution transcode(
