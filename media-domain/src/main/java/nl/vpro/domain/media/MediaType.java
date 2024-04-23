@@ -756,6 +756,7 @@ public enum MediaType implements Displayable {
     /**
      * @since 2.1
      */
+    @NonNull
     public static Set<Class<? extends MediaObject>> getClasses(Collection<MediaType> types) {
         if(types == null) {
             return Set.of(Program.class, Group.class, Segment.class);

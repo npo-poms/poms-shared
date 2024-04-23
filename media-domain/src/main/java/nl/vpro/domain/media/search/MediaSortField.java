@@ -24,6 +24,10 @@ public enum MediaSortField implements SortField {
 
     mid(Type.STRING),
 
+
+    /**
+     * @deprecated use {@link #mediaType} instead
+     */
     @Deprecated
     type(Type.STRING, null),
     mediaType(Type.STRING) {
