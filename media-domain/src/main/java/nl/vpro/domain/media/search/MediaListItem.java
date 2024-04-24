@@ -383,6 +383,9 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
         return o.toString();
     }
 
+    /**
+     * Represent this item as a (CSV) record. That is an object array with {@link String strings} and {@link Number numbers}
+     */
     public Object[] asRecord() {
         return FIELDS.stream().map(f ->{
             try {
