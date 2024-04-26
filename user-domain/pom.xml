@@ -26,7 +26,7 @@
             <phase>generate-sources</phase>
             <configuration>
               <processors>
-                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+                <processor>org.hibernate.processor.HibernateProcessor</processor>
               </processors>
             </configuration>
           </execution>
@@ -34,7 +34,7 @@
         <dependencies>
           <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
             <version>${hibernate.version}</version>
           </dependency>
           <dependency>
