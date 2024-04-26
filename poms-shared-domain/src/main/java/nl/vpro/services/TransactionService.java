@@ -39,9 +39,7 @@ public interface TransactionService {
 
     <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier);
 
-    default void executeInReadonlyTransaction(@NonNull ThrowAnyRunnable runnable) {
-        executeInReadonlyTransaction((Runnable) runnable);
-    }
+    void executeInReadonlyTransaction(@NonNull ThrowAnyRunnable runnable);
 
     void executeInReadonlyTransaction(@NonNull Runnable runnable);
 

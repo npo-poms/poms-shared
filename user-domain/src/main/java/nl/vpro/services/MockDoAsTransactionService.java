@@ -8,6 +8,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.functional.ThrowAnyRunnable;
 
 import nl.vpro.domain.user.Trusted;
 
@@ -44,6 +45,11 @@ public class MockDoAsTransactionService extends MockTransactionService implement
 
     @Override
     public void executeInReadonlyTransaction(@NonNull Trusted user, @NonNull Runnable runnable) {
+        runnable.run();
+    }
+
+    @Override
+    public void executeInReadonlyTransaction(@NonNull Trusted user, @NonNull ThrowAnyRunnable runnable) {
         runnable.run();
     }
 

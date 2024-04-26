@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.functional.ThrowAnyRunnable;
 
 
 public class MockTransactionService implements TransactionService {
@@ -52,6 +53,12 @@ public class MockTransactionService implements TransactionService {
     public <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier) {
         readonly();
         return supplier.get();
+    }
+
+    @Override
+    public void executeInReadonlyTransaction(@NonNull ThrowAnyRunnable runnable) {
+        readonly();
+        runnable.run();
     }
 
     @Override

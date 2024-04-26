@@ -1,11 +1,10 @@
 package nl.vpro.services;
 
 import java.util.concurrent.Callable;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.functional.ThrowAnyRunnable;
 
 import nl.vpro.domain.user.Trusted;
 
@@ -29,6 +28,9 @@ public interface DoAsTransactionService extends TransactionService {
 
 
     void executeInReadonlyTransaction(@NonNull Trusted user, @NonNull  Runnable runnable);
+
+    void executeInReadonlyTransaction(@NonNull Trusted user, @NonNull ThrowAnyRunnable runnable);
+
 
     <T> void executeInReadonlyTransaction(@NonNull Trusted user, T argument, @NonNull  Consumer<T> consumer);
 

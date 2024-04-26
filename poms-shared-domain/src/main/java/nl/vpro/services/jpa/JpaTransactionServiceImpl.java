@@ -6,6 +6,7 @@ import java.util.function.*;
 import javax.transaction.Transactional;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.functional.ThrowAnyRunnable;
 import org.springframework.stereotype.Service;
 
 import nl.vpro.services.TransactionService;
@@ -63,6 +64,12 @@ public class JpaTransactionServiceImpl implements TransactionService {
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public void executeInReadonlyTransaction(@NonNull ThrowAnyRunnable runnable) {
+        runnable.run();
     }
 
     @Override

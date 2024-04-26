@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.functional.ThrowAnyRunnable;
 
 import nl.vpro.domain.user.Trusted;
 
@@ -68,6 +69,11 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     public <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier) {
         return doAsTransactionService.getInReadonlyTransaction(user, supplier);
 
+    }
+
+    @Override
+    public void executeInReadonlyTransaction(@NonNull ThrowAnyRunnable runnable) {
+        doAsTransactionService.executeInReadonlyTransaction(user, runnable);
     }
 
     @Override
