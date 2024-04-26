@@ -1,12 +1,10 @@
 package nl.vpro.services;
 
 import java.util.concurrent.Callable;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
+import java.util.function.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.meeuw.functional.ThrowAnyRunnable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +38,10 @@ public interface TransactionService {
     <T> T executeInReadonlyTransaction(@NonNull Callable<T> callable) throws Exception;
 
     <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier);
+
+    default void executeInReadonlyTransaction(@NonNull ThrowAnyRunnable runnable) {
+        executeInReadonlyTransaction((Runnable) runnable);
+    }
 
     void executeInReadonlyTransaction(@NonNull Runnable runnable);
 
