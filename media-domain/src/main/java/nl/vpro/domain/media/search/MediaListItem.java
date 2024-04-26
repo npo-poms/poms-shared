@@ -82,7 +82,7 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant lastPublished;
 
-    @XmlAttribute(name = "mediaClass")
+    @XmlAttribute(name = "mediaType")
     @Getter
     @Setter
     private String mediaClass;
@@ -213,7 +213,7 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
 
         if(media instanceof Program) {
             // proxy's...
-            this.mediaClass = Program.class.getSimpleName();
+            this.mediaClass = Program.class.getName();
             SortedSet<ScheduleEvent> scheduleEvents = ((Program) media).getScheduleEvents();
             if(!scheduleEvents.isEmpty()) {
                 this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, false).orElse(null);
@@ -223,9 +223,9 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
                 this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(scheduleEvents).orElse(null);
             }
         } else if(media instanceof Group) {
-            this.mediaClass = Group.class.getSimpleName();
+            this.mediaClass = Group.class.getName();
         } else if(media instanceof Segment) {
-            this.mediaClass = Segment.class.getSimpleName();
+            this.mediaClass = Segment.class.getName();
         } else {
             this.mediaClass = getClass().getName();
         }
