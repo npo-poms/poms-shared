@@ -19,8 +19,7 @@ import jakarta.xml.bind.annotation.*;
 @Data
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder")
-
-public class IntegerRange implements Range<Long, IntegerRange.Value> {
+public class IntegerRange implements Range<Long> {
 
     @XmlElement
     private Value start;
@@ -29,6 +28,23 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
     private Value stop;
 
     public IntegerRange() {
+    }
+
+
+
+    public Range<Integer> toInt() {
+        return new Range<Integer>() {
+            @Override
+            public RangeValue<Integer> getStart() {
+                return start == null ? null : new IntValue(start);
+            }
+
+            @Override
+            public RangeValue<Integer> getStop() {
+                return stop == null ? null : new IntValue(stop);
+            }
+        };
+
     }
 
     @Override
@@ -134,6 +150,23 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
                  .inclusive(false)
                  .build();
         }
+    }
+
+    public static class IntValue extends Range.RangeValue<Integer> {
+
+        private final RangeValue<Long> value;
+
+        public IntValue(RangeValue<Long> value) {
+            this.value = value;
+            this.inclusive = value.inclusive;
+        }
+
+        @Override
+        public Integer getValue() {
+            return value == null || value.getValue() == null ? null : value.getValue().intValue();
+        }
+
+
     }
 
 }

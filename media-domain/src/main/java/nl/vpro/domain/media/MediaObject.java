@@ -2105,20 +2105,20 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         };
     }
 
-   /**
-    * Implicitly create predictions for all platforms that have a location, but no prediction yet.
-    */
-   public void implicitPredictions() {
+    /**
+     * Implicitly create predictions for all platforms that have a location, but no prediction yet.
+     */
+    public void implicitPredictions() {
         final Map<Platform, List<Location>> locations = new HashMap<>();
-       getLocations().stream()
-           .filter(Location::hasPlatform)
-                .filter(Location::isConsiderableForPublication)
-                .forEach(l ->
+        getLocations().stream()
+            .filter(Location::hasPlatform)
+            .filter(Location::isConsiderableForPublication)
+            .forEach(l ->
                     locations.computeIfAbsent(
                         l.getPlatform(),
                         p -> new ArrayList<>()
                     ).add(l)
-                );
+            );
 
         for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
             findOrCreatePrediction(entry.getKey(), true, (created) -> {
@@ -3185,6 +3185,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             mainTitle,
             id
             );
+    }
+
+    @PreUpdate
+    @PrePersist
+    protected void preUpdate() {
+        Instant instant = getSortInstant(); // sortdate must be calculated for it to be properly indexed by hibernate search
+        log.debug("Found sortdate for {} ->  {}", mid, instant);
     }
 
 }

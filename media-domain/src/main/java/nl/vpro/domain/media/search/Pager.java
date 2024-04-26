@@ -12,6 +12,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 @XmlTransient
 @ToString
 @Data
@@ -58,6 +61,13 @@ public abstract class Pager<S extends SortField> {
 
     public boolean hasOffset() {
         return offset != null && offset != 0;
+    }
+
+    /**
+     * @since 7.11
+     */
+    public Integer getOffsetAsInteger() {
+        return offset == null ? null : offset.intValue();
     }
 
 }

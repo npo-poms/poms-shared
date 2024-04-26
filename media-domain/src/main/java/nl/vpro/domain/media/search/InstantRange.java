@@ -29,7 +29,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Data
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder")
-public class InstantRange implements Range<Instant, InstantRange.Value> {
+public class InstantRange implements Range<Instant> {
 
     @XmlElement
     private Value start;
@@ -76,7 +76,7 @@ public class InstantRange implements Range<Instant, InstantRange.Value> {
     @Data
     @EqualsAndHashCode(callSuper = true)
     @XmlType(name = "dateRangeValueType")
-    public static class Value extends Range.RangeValue<Instant> {
+    public static class Value extends RangeValue<Instant> {
 
         @XmlValue
         @XmlJavaTypeAdapter(value = InstantXmlAdapter.class)

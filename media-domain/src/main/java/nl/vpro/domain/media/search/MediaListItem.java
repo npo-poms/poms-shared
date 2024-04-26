@@ -360,29 +360,30 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
         if (o == null) {
             return "";
         }
-        if (o instanceof Collection) {
-            return ((Collection<?>) o).stream().map( e -> toRecordObject(e).toString()).collect(Collectors.joining(", "));
+        if (o instanceof Collection<?> co) {
+            return co.stream().map( e -> toRecordObject(e).toString()).collect(Collectors.joining(", "));
         }
-        if (o instanceof ScheduleEvent) {
-            return ((ScheduleEvent) o).getId().toString();
+        if (o instanceof ScheduleEvent se) {
+            return se.getId().toString();
         }
-        if (o instanceof Location) {
-            Location l = (Location) o;
+        if (o instanceof Location l) {
             return l.getOwner() + ":" + l.getPlatform() + ":" + l.getProgramUrl();
         }
-        if (o instanceof ImageListItem) {
-            ImageListItem i = (ImageListItem) o;
+        if (o instanceof ImageListItem i) {
             return i.getImageUri() + ":" + i.getLicense();
         }
         if (o instanceof Number || o instanceof Boolean || o.getClass().isPrimitive()) {
             return o;
         }
-        if (o instanceof Organization) {
-            return ((Organization) o).getId();
+        if (o instanceof Organization org) {
+            return org.getId();
         }
         return o.toString();
     }
 
+    /**
+     * Represent this item as a (CSV) record. That is an object array with {@link String strings} and {@link Number numbers}
+     */
     public Object[] asRecord() {
         return FIELDS.stream().map(f ->{
             try {

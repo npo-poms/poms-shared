@@ -1,5 +1,6 @@
 package nl.vpro.domain.media.support;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,13 @@ public class OwnerTypeTest {
     @Test
     public void deprecated() {
         assertThat(OwnerType.IMMIX.isDeprecated()).isTrue();
+    }
+
+    @Test
+    public void after() {
+        assertThat(OwnerType.after((OwnerType.BROADCASTER))).isEqualTo(OwnerType.values());
+        assertThat(OwnerType.after((OwnerType.NEBO))).isEqualTo(Arrays.asList(OwnerType.values()).subList(1, OwnerType.values().length).toArray());
+
     }
 
 }
