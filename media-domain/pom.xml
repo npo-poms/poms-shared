@@ -38,12 +38,12 @@
         </executions>
         <dependencies>
           <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
             <version>${hibernate.version}</version>
           </dependency>
           <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
           </dependency>
@@ -164,8 +164,8 @@
       This dependency is afaik only relevant for annotations, hence it can be optional
       Nicer would be to drop it altogether
       -->
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core-jakarta</artifactId>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -235,6 +235,10 @@
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-i18n</artifactId>
     </dependency>
   </dependencies>
   <profiles>
