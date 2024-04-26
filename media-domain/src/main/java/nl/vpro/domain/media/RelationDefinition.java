@@ -20,9 +20,10 @@ import nl.vpro.domain.user.Broadcaster;
 import static nl.vpro.domain.media.MediaObjectFilters.BROADCASTER_FILTER;
 import static nl.vpro.domain.media.MediaObjectFilters.PARAMETER_BROADCASTERS;
 
+@Getter
 @Entity
 @IdClass(RelationDefinitionIdentifier.class)
-@FilterDef(name = BROADCASTER_FILTER, parameters = {@ParamDef(name = PARAMETER_BROADCASTERS, type = "string")})
+@FilterDef(name = BROADCASTER_FILTER, parameters = {@ParamDef(name = PARAMETER_BROADCASTERS, type = String.class)})
 @Filter(name = BROADCASTER_FILTER, condition = "broadcaster in (:broadcasters)")
 public class RelationDefinition implements Serializable, Identifiable<RelationDefinitionIdentifier> {
 
@@ -39,17 +40,14 @@ public class RelationDefinition implements Serializable, Identifiable<RelationDe
     @Id
     @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
     @Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
-    @Getter
     private String type;
 
     @Id
     @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
     @Size(min = 1)
-    @Getter
     @Setter
     private String broadcaster;
 
-    @Getter
     @Setter
     private String displayText;
 

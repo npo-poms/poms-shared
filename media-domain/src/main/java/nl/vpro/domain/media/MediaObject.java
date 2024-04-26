@@ -87,7 +87,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
  * The purpose of a mediaobject is
  * <ol>
  *     <li>Be a full representation of meta data related to one entity</li>
- *     <li>Be also its database representation. Therefore e.g. {@link javax.persistence} annotations are present. These are optional, and are probably only relevant in the realm of 'poms backend application'</li>
+ *     <li>Be also its database representation. Therefore e.g. {@link jakarta.persistence} annotations are present. These are optional, and are probably only relevant in the realm of 'poms backend application'</li>
  *     <li>Be also the XML/Json representation of most of this data. For a few fields it doesn't make sense to be exposed in that way, like for example the {@link Editor}s of  {@link Accountable}. For this the object is annotated with some annotation from {@link javax.xml} and {@link com.fasterxml.jackson}</li>
  *     <li>The JSON version is basically also the representation used in Elasticsearch (only with {@link Views.Publisher} enabled)</li>
  * </ol>
@@ -215,13 +215,13 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
 @FilterDef(name = PUBLICATION_FILTER)
 @Filter(name = PUBLICATION_FILTER, condition = PUBLICATION_FILTER_CONDITION_PUBLISHABLES)
 
-@FilterDef(name = EMBARGO_FILTER, parameters = {@ParamDef(name = PARAMETER_BROADCASTERS, type = "string") })
+@FilterDef(name = EMBARGO_FILTER, parameters = {@ParamDef(name = PARAMETER_BROADCASTERS, type = String.class) })
 @Filter(name = EMBARGO_FILTER, condition = EMBARGO_FILTER_CONDITION)
 
 @FilterDef(name = DELETED_FILTER)
 @Filter(name = DELETED_FILTER, condition = DELETED_FILTER_CONDITION)
 
-@FilterDef(name = ORGANIZATION_FILTER, parameters = { @ParamDef(name = PARAMETER_ORGANIZATIONS, type = "string") })
+@FilterDef(name = ORGANIZATION_FILTER, parameters = { @ParamDef(name = PARAMETER_ORGANIZATIONS, type = String.class) })
 @Filter(name = ORGANIZATION_FILTER, condition = ORGANIZATION_FILTER_CONDITION)
 
 // logging. We stick to slf4j in the domain classes for now. Most projects use @Log4j2.

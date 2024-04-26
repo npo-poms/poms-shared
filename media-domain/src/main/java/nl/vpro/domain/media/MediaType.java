@@ -497,6 +497,11 @@ public enum MediaType implements Displayable {
 
     };
 
+    /**
+     *
+     */
+    public static final Set<MediaType> VISUALS = Set.of(VISUALRADIO, VISUALRADIOSEGMENT);
+
 
     @Override
     public String toString() {
