@@ -102,7 +102,7 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         }
         this.displayName = displayName;
         if (this.principalId == null) {
-            log.warn("Create used without principal id: {}", this);
+            log.warn("Create user without principal id: {}", this);
         }
     }
 
