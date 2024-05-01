@@ -144,15 +144,15 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Setter(AccessLevel.PACKAGE)
     private MemberRefType refType;
 
-    @Column(nullable = false, name="creationDate")
+    @Column(nullable = true, name="creationDate")
     @Getter
     @Setter
     protected Instant creationInstant = Changeables.instant();
 
-    @Column(nullable = false, name="lastModified")
+    @Column(nullable = true, name="lastModified")
     protected Instant lastModified;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "createdby_principalid")
     @XmlTransient
     @Getter
@@ -160,7 +160,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     protected Editor createdBy;
 
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "lastmodifiedby_principalid")
     @XmlTransient
     @Getter
