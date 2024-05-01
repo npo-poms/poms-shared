@@ -60,9 +60,9 @@ public enum OwnerType implements Displayable {
 
     /**
     /**
-     * Represents Ownable data updated by MIS via TVAnytime deliveries
+     * Represents Ownable data updated by MIS via TVAnytime deliveries. Whatson/Berlijn route.
      */
-    MIS("MIS"),
+    MIS("WhatsOn"),
 
     /**
      * Represents Ownable data updated by CERES via predict, metadata, notify or revoke file delivery. It is possible
@@ -97,6 +97,7 @@ public enum OwnerType implements Displayable {
      * meta-data in Poms and will later on be updated by sources more upstream.
      *
      * @since 1.4
+     * @deprecated  Not used any more since ~ 2016?
      */
     WHATS_ON("Whats'On"),
 
