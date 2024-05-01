@@ -25,9 +25,10 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Identifiable;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -85,7 +86,7 @@ import static nl.vpro.domain.media.MediaObjectFilters.*;
     "episodeOf",
     "segmentOf"
 })
-public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable, RecursiveParentChildRelation {
+public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable, RecursiveParentChildRelation, Accountable {
 
     @Serial
     private static final long serialVersionUID = -2247469313512827819L;
@@ -142,6 +143,32 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private MemberRefType refType;
+
+    @Column(nullable = false, name="creationDate")
+    @Getter
+    @Setter
+    protected Instant creationInstant = Changeables.instant();
+
+    @Column(nullable = false, name="lastModified")
+    @Getter
+    @Setter
+    protected Instant lastModifiedInstant;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "createdby_principalid")
+    @XmlTransient
+    @Getter
+    @Setter
+    protected Editor createdBy;
+
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "lastmodifiedby_principalid")
+    @XmlTransient
+    @Getter
+    @Setter
+    protected Editor lastModifiedBy;
+
 
     public MemberRef() {
     }
