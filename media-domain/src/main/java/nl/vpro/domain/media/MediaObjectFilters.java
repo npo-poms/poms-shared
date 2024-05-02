@@ -61,8 +61,7 @@ public class MediaObjectFilters {
      */
     public static final String MR_PUBLICATION_FILTER = "mrPublicationFilter";
 
-    public static final String MR_PUBLICATION_FILTER_CONDITION =
-        """
+    public static final String MR_PUBLICATION_FILTER_CONDITION = """
         (
               (
                (select m.publishStart from mediaobject m where m.id = member_id) is null
@@ -81,7 +80,7 @@ public class MediaObjectFilters {
                 or now() < (select m.publishStop from mediaobject m where m.id = owner_id)
               )
        )
-        """;
+       """;
 
     /**
      * Normally on the poms backend things under embargo are visible. The exception are CLIPs of different broadcasters.
