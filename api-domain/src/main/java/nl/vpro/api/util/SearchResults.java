@@ -6,6 +6,7 @@ package nl.vpro.api.util;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
@@ -27,7 +28,7 @@ public class SearchResults {
     private SearchResults() {
     }
 
-    public static <M> List<M> unwrap(final SearchResult<M> wrapped) {
+    public static <M extends Serializable> List<M> unwrap(final SearchResult<M> wrapped) {
         return new AbstractList<M>() {
             @Override
             public M get(int index) {

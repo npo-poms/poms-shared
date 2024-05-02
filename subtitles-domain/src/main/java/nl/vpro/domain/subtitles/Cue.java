@@ -1,14 +1,11 @@
 package nl.vpro.domain.subtitles;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
+import java.io.Serializable;
 import java.time.Duration;
 
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlValue;
+import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,7 +25,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 @ToString(of = {"parent", "sequence", "identifier", "content"})
 @EqualsAndHashCode
 @Getter
-public class Cue {
+public class Cue implements Serializable {
 
     /**
      * The MID of the parent media object

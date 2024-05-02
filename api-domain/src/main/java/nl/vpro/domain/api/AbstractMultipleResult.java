@@ -1,5 +1,6 @@
 package nl.vpro.domain.api;
 
+import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -13,7 +14,7 @@ import nl.vpro.domain.constraint.PredicateTestResult;
  * @author Michiel Meeuwissen
  * @since 4.7
  */
-public abstract class AbstractMultipleResult<M> extends Result<MultipleEntry<M>> {
+public abstract class AbstractMultipleResult<M extends Serializable> extends Result<MultipleEntry<M>> {
 
     @XmlTransient
     protected final BiFunction<String, M, MultipleEntry<M>> producer;

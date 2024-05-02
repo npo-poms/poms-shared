@@ -3,6 +3,7 @@ package nl.vpro.domain.page;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
 
@@ -84,7 +85,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "lastModified"
     })
 @EqualsAndHashCode
-public class Page implements MutableEmbargo<Page> {
+public class Page implements MutableEmbargo<Page>, Serializable {
 
     public static PageBuilder builder() {
         return new PageBuilder(new Page());

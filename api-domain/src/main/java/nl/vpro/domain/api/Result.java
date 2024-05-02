@@ -6,6 +6,7 @@ package nl.vpro.domain.api;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.*;
@@ -30,7 +31,7 @@ import nl.vpro.domain.page.Page;
 @XmlSeeAlso({Page.class, Program.class, Group.class, Segment.class, ApiScheduleEvent.class, Suggestion.class})
 @JsonPropertyOrder({"total", "totalQualifier", "offset", "max", "items"})
 @EqualsAndHashCode
-public class Result<T> implements Iterable<T> {
+public class Result<T extends Serializable> implements Iterable<T>, Serializable {
 
     @XmlAttribute
     protected Long total;
@@ -123,7 +124,7 @@ public class Result<T> implements Iterable<T> {
         return items == null ? Stream.of() : items.stream();
     }
 
-    public static <T> Collector<T, List<T>, Result<T>> collector() {
+    public static <T extends Serializable> Collector<T, List<T>, Result<T>> collector() {
         return new Collector<T, List<T>, Result<T>>() {
             @Override
             public Supplier<List<T>> supplier() {

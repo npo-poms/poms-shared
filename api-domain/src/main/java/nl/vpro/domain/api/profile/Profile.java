@@ -7,8 +7,7 @@ package nl.vpro.domain.api.profile;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
 import java.time.Instant;
 
 import jakarta.ws.rs.core.Response;
@@ -35,7 +34,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "profileType", propOrder = {"pageProfile", "mediaProfile"})
 @JsonSerialize(using = Profile.Serializer.class)
-public class Profile implements Comparable<Profile> {
+public class Profile implements Comparable<Profile>, Serializable {
 
     @XmlAttribute
     @XmlJavaTypeAdapter(value = InstantXmlAdapter.class)

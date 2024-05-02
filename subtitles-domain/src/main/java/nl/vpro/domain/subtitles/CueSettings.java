@@ -3,6 +3,8 @@ package nl.vpro.domain.subtitles;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -17,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 @Data
 @XmlJavaTypeAdapter(CueSettings.Adapter.class)
 @EqualsAndHashCode
-public class CueSettings {
+public class CueSettings implements Serializable {
 
     /**
      *

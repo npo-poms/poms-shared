@@ -2,6 +2,8 @@ package nl.vpro.domain.api;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -16,7 +18,7 @@ import nl.vpro.domain.constraint.PredicateTestResult;
 @Data
 @XmlType(propOrder = {"id", "result", "error", "reason"})
 @JsonPropertyOrder({"id", "result", "error", "reason"})
-public class MultipleEntry<T> {
+public class MultipleEntry<T> implements Serializable {
 
     @XmlElement
     private String id;

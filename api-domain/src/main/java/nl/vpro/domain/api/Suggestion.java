@@ -7,6 +7,8 @@ package nl.vpro.domain.api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 @AllArgsConstructor
-public class Suggestion {
+public class Suggestion implements Serializable  {
 
     @XmlValue
     @JsonProperty("text")

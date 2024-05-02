@@ -1,8 +1,10 @@
 package nl.vpro.domain.gtaa;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
@@ -35,7 +37,7 @@ import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
         @JsonSubTypes.Type(value = GTAAGenreFilmMuseum.class)
     })
 
-public sealed interface GTAAConcept permits AbstractGTAAConcept {
+public sealed interface GTAAConcept extends Serializable permits AbstractGTAAConcept {
 
 
     URI getId();

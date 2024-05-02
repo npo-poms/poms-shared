@@ -7,19 +7,15 @@ package nl.vpro.domain.api;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.*;
 
-import nl.vpro.domain.media.Group;
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.Segment;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.page.Page;
 
 /**
@@ -29,7 +25,7 @@ import nl.vpro.domain.page.Page;
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"score", "highlights", "result"})
-public class SearchResultItem<T> {
+public class SearchResultItem<T extends Serializable> implements Serializable {
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
     @JsonSubTypes({

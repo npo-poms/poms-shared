@@ -1,6 +1,7 @@
 package nl.vpro.domain.api;
 
 
+import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import jakarta.xml.bind.annotation.*;
 @XmlType(name = "searchResultType")
 @XmlSeeAlso({SearchResultItem.class})
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SearchResult<S> extends Result<SearchResultItem<? extends S>> {
+public class SearchResult<S extends Serializable> extends Result<SearchResultItem<? extends S>> {
 
 
     public SearchResult() {

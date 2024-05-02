@@ -7,6 +7,7 @@ package nl.vpro.domain.api.profile;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 import jakarta.xml.bind.Unmarshaller;
@@ -21,7 +22,7 @@ import nl.vpro.domain.constraint.*;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "profileDefinitionType", propOrder = {"filter"})
-public class ProfileDefinition<T> implements DelegatingDisplayablePredicate<T>, Comparable<ProfileDefinition<T>> {
+public class ProfileDefinition<T> implements DelegatingDisplayablePredicate<T>, Comparable<ProfileDefinition<T>>, Serializable {
 
     @XmlTransient
     @Getter
