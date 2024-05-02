@@ -31,7 +31,7 @@ import nl.vpro.domain.page.Page;
 @XmlSeeAlso({Page.class, Program.class, Group.class, Segment.class, ApiScheduleEvent.class, Suggestion.class})
 @JsonPropertyOrder({"total", "totalQualifier", "offset", "max", "items"})
 @EqualsAndHashCode
-public class Result<T extends Serializable> implements Iterable<T>, Serializable {
+public class Result<T> implements Iterable<T>, Serializable {
 
     @XmlAttribute
     protected Long total;

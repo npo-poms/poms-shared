@@ -25,7 +25,7 @@ import nl.vpro.domain.page.Page;
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"score", "highlights", "result"})
-public class SearchResultItem<T extends Serializable> implements Serializable {
+public class SearchResultItem<T> implements Serializable {
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
     @JsonSubTypes({
