@@ -22,7 +22,7 @@ import nl.vpro.validation.NoHtml;
 @MappedSuperclass
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlTransient
-public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity<T, P>, P> extends AbstractOwnedText<T> {
+public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity<T, P>, P> extends AbstractOwnedText<T> implements Child<P> {
 
     @Serial
     private static final long serialVersionUID = -4621135759610402997L;
@@ -69,11 +69,6 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity<
     void setId(Long id) {
         this.id = id;
     }
-
-    public abstract P getParent();
-
-    public abstract  void setParent(@NotNull P  parent);
-
 
     @SuppressWarnings({"unchecked"})
     @Override

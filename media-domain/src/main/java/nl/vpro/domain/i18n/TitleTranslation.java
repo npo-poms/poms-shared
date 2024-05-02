@@ -17,6 +17,8 @@ import nl.vpro.domain.media.support.TextualType;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
+@Setter
+@Getter
 @Entity
 // it's in super
 public class TitleTranslation extends AbstractOwnedTextEntity<TitleTranslation, MediaObjectTranslation> {
@@ -24,8 +26,6 @@ public class TitleTranslation extends AbstractOwnedTextEntity<TitleTranslation, 
     @Serial
     private static final long serialVersionUID = -4636628305739242913L;
 
-    @Getter
-    @Setter
     @ManyToOne
     @NotNull
     MediaObjectTranslation parent;
