@@ -144,17 +144,15 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Setter(AccessLevel.PACKAGE)
     private MemberRefType refType;
 
-    @Column(nullable = false, name="creationDate")
+    @Column(nullable = true, name="creationDate")
     @Getter
     @Setter
     protected Instant creationInstant = Changeables.instant();
 
-    @Column(nullable = false, name="lastModified")
-    @Getter
-    @Setter
-    protected Instant lastModifiedInstant;
+    @Column(nullable = true, name="lastModified")
+    protected Instant lastModified;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "createdby_principalid")
     @XmlTransient
     @Getter
@@ -162,7 +160,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     protected Editor createdBy;
 
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "lastmodifiedby_principalid")
     @XmlTransient
     @Getter
@@ -442,6 +440,16 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         typeOfGroup = type;
     }
 
+    @Override
+    public void setLastModifiedInstant(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    @Override
+    public Instant getLastModifiedInstant() {
+        return this.lastModified;
+    }
+
     boolean isValid() {
         return member != null
             && group != null
@@ -548,8 +556,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @JsonManagedReference
     public RecursiveMemberRef getSegmentOf() {
         if (segmentOf == null) {
-            if (group != null && group instanceof Segment) {
-                segmentOf = RecursiveMemberRef.ofSegment((Segment) group);
+            if (group != null && group instanceof Segment segment) {
+                segmentOf = RecursiveMemberRef.ofSegment((segment));
             }
         }
         return segmentOf;
