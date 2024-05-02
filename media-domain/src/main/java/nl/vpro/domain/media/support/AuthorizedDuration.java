@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.support;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Duration;
@@ -41,6 +43,7 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
+@Schema(implementation = Long.class, type = "long")
 public class AuthorizedDuration implements Serializable, TemporalAmount {
 
     @Serial
