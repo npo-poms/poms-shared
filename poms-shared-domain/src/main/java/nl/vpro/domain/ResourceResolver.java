@@ -12,6 +12,7 @@ import java.util.TreeMap;
 
 import javax.xml.XMLConstants;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
@@ -56,7 +57,15 @@ public class ResourceResolver implements LSResourceResolver {
         return Collections.unmodifiableMap(MAP);
     }
 
-    public static URL resolveToURL(String namespaceURI) {
+
+    /**
+     * Resolve namespace to a URL representing the XSD. These are normally 'jar' urls, not exposable.
+     *
+     * @param namespaceURI The uri of the namespace or {@code null} for the absent namespace
+     * @return null if no XSD is found for the namespace
+     *
+     */
+    public static URL resolveToURL(@Nullable String namespaceURI) {
         if (namespaceURI == null) {
             return Xmlns.ABSENT_XSD;
         }
