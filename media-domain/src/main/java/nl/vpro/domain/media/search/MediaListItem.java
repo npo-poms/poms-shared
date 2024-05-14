@@ -211,10 +211,10 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
         this.portals = Collections.unmodifiableList(media.getPortals());
         this.thirdParties = Collections.unmodifiableList(media.getThirdParties());
 
-        if(media instanceof Program) {
+        if(media instanceof Program program) {
             // proxy's...
             this.mediaClass = Program.class.getName();
-            SortedSet<ScheduleEvent> scheduleEvents = ((Program) media).getScheduleEvents();
+            SortedSet<ScheduleEvent> scheduleEvents = program.getScheduleEvents();
             if(!scheduleEvents.isEmpty()) {
                 this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, false).orElse(null);
                 this.firstScheduleEventNoRerun = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, true).orElse(null);
@@ -236,15 +236,12 @@ public class MediaListItem extends PublishableListItem<MediaListItem> implements
         this.tags = media.getTags();
 
         this.lastPublished = media.getLastPublishedInstant();
-
-
     }
 
     @Override
     public String getUrn() {
         return (mediaType == null ? "null" : mediaType.getSubType().getUrnPrefix()) + id;
     }
-
 
     @Override
     public Instant getLastPublished() {
