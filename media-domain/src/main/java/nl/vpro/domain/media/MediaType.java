@@ -756,16 +756,15 @@ public enum MediaType implements Displayable {
     /**
      * @since 2.1
      */
-    @NonNull
-    public static Set<Class<? extends MediaObject>> getClasses(Collection<MediaType> types) {
+    public static Class<?>[] getClasses(Collection<MediaType> types) {
         if(types == null) {
-            return Set.of(Program.class, Group.class, Segment.class);
+            return new Class<?>[]{Program.class, Group.class, Segment.class};
         } else {
-            Set<Class<? extends MediaObject>> c = new HashSet<>();
+            Set<Class<?>> c = new HashSet<>();
             for(MediaType type : types) {
                 c.add(type.getMediaObjectClass());
             }
-            return Collections.unmodifiableSet(c);
+            return c.toArray(new Class<?>[0]);
         }
     }
 
