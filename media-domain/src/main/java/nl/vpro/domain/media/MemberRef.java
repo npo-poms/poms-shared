@@ -62,7 +62,7 @@ import static nl.vpro.domain.media.MediaObjectFilters.*;
 @FilterDef(name = MR_PUBLICATION_FILTER)
 @Filter(name = MR_PUBLICATION_FILTER, condition = MR_PUBLICATION_FILTER_CONDITION)
 
-@FilterDef(name = MR_EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type=String.class)})
+@FilterDef(name = MR_EMBARGO_FILTER, parameters = {@ParamDef(name = PARAMETER_BROADCASTERS, type =  String.class)})
 @Filter(name = MR_EMBARGO_FILTER, condition = MR_EMBARGO_FILTER_CONDITION)
 
 @FilterDef(name = MR_DELETED_FILTER)
