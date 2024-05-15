@@ -5,8 +5,7 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.Locale;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -50,7 +49,6 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
     @XmlAttribute
     @Getter
     @Setter(AccessLevel.PRIVATE)
-    @EqualsAndHashCode.Include
     @Schema(implementation = String.class, type="string")
     @Column
     private Locale language;
@@ -59,7 +57,6 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
     @XmlAttribute
     @Getter
     @Setter(AccessLevel.PRIVATE)
-    @EqualsAndHashCode.Include
     @Column
     private SubtitlesType type;
 
@@ -113,5 +110,27 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
     @Override
     public String toString() {
         return language + ":" + type + (workflow != null   ? (":"+ workflow) : "");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o instanceof AvailableSubtitles that) {
+            if (id != null && that.id != null) {
+                return Objects.equals(id, that.id);
+            } else {
+                return Objects.equals(mid, that.mid) && language.equals(that.language) && type == that.type;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mid == null ? 0 : mid.hashCode();
+        result = 31 * result + language.hashCode();
+        result = 31 * result + type.hashCode();
+        return result;
     }
 }
