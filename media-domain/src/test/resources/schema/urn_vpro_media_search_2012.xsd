@@ -204,13 +204,9 @@
       <xsd:enumeration value="lastModifiedBy"/>
       <xsd:enumeration value="createdBy"/>
       <xsd:enumeration value="locations"/>
-      <xsd:enumeration value="publishedLocations"/>
       <xsd:enumeration value="memberofCount"/>
       <xsd:enumeration value="episodeofCount"/>
       <xsd:enumeration value="scheduleEventsCount"/>
-      <xsd:enumeration value="imagesCount"/>
-      <xsd:enumeration value="publishedImagesCount"/>
-      <xsd:enumeration value="imagesWithoutCreditsCount"/>
       <xsd:enumeration value="firstScheduleEvent"/>
       <xsd:enumeration value="firstScheduleEventNoRerun"/>
       <xsd:enumeration value="lastScheduleEvent"/>
