@@ -37,7 +37,6 @@ public class MoveAction {
         REFERENCE,
         /**
          * The number of the memberref
-         * TODO: as yet supported
          */
         NUMBER,
 
