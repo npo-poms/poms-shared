@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.media.update.action;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.xml.bind.annotation.*;
 
@@ -22,8 +21,14 @@ import javax.xml.bind.annotation.*;
     })
 @ToString
 @Data
+@lombok.Builder
+@AllArgsConstructor
 public class MoveAction {
 
+
+    MoveAction() {
+
+    }
 
     /**
      * What the 'from' and 'to' properties of the actions are referring to.
@@ -35,8 +40,15 @@ public class MoveAction {
          * A reference to a mediaobject. MID, crid, or id.
          */
         REFERENCE,
+
         /**
-         * The number of the memberref
+         * The id of the memberref itself
+         * @since 7.12
+         */
+        REF_ID,
+
+        /**
+         * The number in the member ref (unsupported as yet)
          */
         NUMBER,
 
