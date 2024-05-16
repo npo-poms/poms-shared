@@ -670,6 +670,7 @@
       <xs:element name="mediaUpdate" type="xs:anyType" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="position" type="xs:int"/>
+    <xs:attribute name="id" type="xs:long"/>
     <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
   </xs:complexType>
 
