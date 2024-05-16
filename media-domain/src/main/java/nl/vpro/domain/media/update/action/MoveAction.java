@@ -26,7 +26,7 @@ import jakarta.xml.bind.annotation.*;
 public class MoveAction {
 
 
-    MoveAction() {
+    public MoveAction() {
 
     }
 
