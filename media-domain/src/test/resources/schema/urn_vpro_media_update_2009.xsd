@@ -676,6 +676,7 @@
   <xs:simpleType name="moveActionTypeType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="REFERENCE"/>
+      <xs:enumeration value="REF_ID"/>
       <xs:enumeration value="NUMBER"/>
       <xs:enumeration value="INDEX"/>
     </xs:restriction>
