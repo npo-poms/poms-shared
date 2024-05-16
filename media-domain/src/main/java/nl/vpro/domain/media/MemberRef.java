@@ -25,10 +25,9 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.*;
+import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -86,7 +85,7 @@ import static nl.vpro.domain.media.MediaObjectFilters.*;
     "episodeOf",
     "segmentOf"
 })
-public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable, RecursiveParentChildRelation, Accountable {
+public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable, RecursiveParentChildRelation {
 
     @Serial
     private static final long serialVersionUID = -2247469313512827819L;
@@ -143,30 +142,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private MemberRefType refType;
-
-    @Column(nullable = true, name="creationDate")
-    @Getter
-    @Setter
-    protected Instant creationInstant = Changeables.instant();
-
-    @Column(nullable = true, name="lastModified")
-    protected Instant lastModified;
-
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "createdby_principalid")
-    @XmlTransient
-    @Getter
-    @Setter
-    protected Editor createdBy;
-
-
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "lastmodifiedby_principalid")
-    @XmlTransient
-    @Getter
-    @Setter
-    protected Editor lastModifiedBy;
-
 
     public MemberRef() {
     }
@@ -440,16 +415,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         typeOfGroup = type;
     }
 
-    @Override
-    public void setLastModifiedInstant(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    @Override
-    public Instant getLastModifiedInstant() {
-        return this.lastModified;
-    }
-
     boolean isValid() {
         return member != null
             && group != null
@@ -556,8 +521,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @JsonManagedReference
     public RecursiveMemberRef getSegmentOf() {
         if (segmentOf == null) {
-            if (group != null && group instanceof Segment segment) {
-                segmentOf = RecursiveMemberRef.ofSegment((segment));
+            if (group != null && group instanceof Segment) {
+                segmentOf = RecursiveMemberRef.ofSegment((Segment) group);
             }
         }
         return segmentOf;
