@@ -650,6 +650,19 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     String correlationId;
 
 
+    /**
+     * See MSE-5755. Whether HD should be available for {@link Platform#INTERNETVOD} users (npostart/non-subscribers for npoplus)
+     * @since 7.13
+     */
+    @Column
+    @Getter
+    @Setter
+    @XmlAttribute
+    @Beta
+    private Boolean hdAvailableForInternetVod = null;
+
+
+
     public MediaObject() {
     }
 
