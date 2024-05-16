@@ -659,7 +659,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Setter
     @XmlAttribute
     @Beta
-    private Boolean hdAvailableForInternetVod = null;
+    private Boolean adoptQualityFromPlus = null;
 
 
 
