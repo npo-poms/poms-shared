@@ -267,7 +267,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|group|segment)}/{id:.*}/members")
     @Produces(MediaType.WILDCARD)
     Response moveMembers(
-        MoveAction move,
+        @Valid MoveAction move,
         @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoSegments entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
@@ -334,7 +334,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|group)}/{id:.*}/episodes")
     @Produces(MediaType.WILDCARD)
     Response moveEpisodes(
-        MoveAction move,
+        @Valid MoveAction move,
         @PathParam(ENTITY) @DefaultValue("group") final EntityType.Group entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
