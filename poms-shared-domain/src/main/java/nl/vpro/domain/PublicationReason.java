@@ -265,28 +265,30 @@ public class PublicationReason implements Serializable, Comparable<PublicationRe
 
         public static final String EXPLICIT            = "explicit fill";
 
-        public static final String UNDELETED_PROGRAM_IMPORTER = "Undeleted by program importer";
+        public static final String UNDELETED_PROGRAM_IMPORTER
+                                                       = "Undeleted by program importer";
 
-        public static final String SEGMENT = "segment change";
+        public static final String SEGMENT             = "segment change";
 
-        public static final String LOCATION_REVOKE = "location revoke";
-        public static final String LOCATION_PUBLISH = "location publish";
+        public static final String LOCATION_REVOKE     = "location revoke";
+        public static final String LOCATION_PUBLISH    = "location publish";
 
-        public static final String RCRS                 = "rcrs";
+        public static final String RCRS                = "rcrs";
 
-        public static final String TYPE_CHANGED = "type of parent changed";
-        public static final String NUMBER_CHANGED = "number changed";
+        public static final String TYPE_CHANGED        = "type of parent changed";
+        public static final String NUMBER_CHANGED      = "number changed";
 
         public static final String REALIZED_PREDICTION = "realized prediction %s";
-        public static final String REVOKED_PREDICTION = "revoked prediction %s";
+        public static final String REVOKED_PREDICTION  = "revoked prediction %s";
 
 
         /**
          * type:mid:reason
          */
-        public static final String REPUBLISHING_DESCENDANTS_TEMPLATE = "republishing descendants of %s:%s:%s";
+        public static final String REPUBLISHING_DESCENDANTS_TEMPLATE
+                                                       = "republishing descendants of %s:%s:%s";
 
 
-        public static final String NEP_EXISTS = "nep notify for non existing object";
+        public static final String NEP_NON_EXISTS      = "nep notify for non existing object";
     }
 }

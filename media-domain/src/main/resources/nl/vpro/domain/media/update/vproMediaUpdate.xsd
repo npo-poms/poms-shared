@@ -625,7 +625,14 @@
       <xs:enumeration value="NUMBER">
         <xs:annotation>
           <xs:documentation>
-            Would refer to the number in the memberref object (presently unsupported)
+            Would refer to the number in the memberref object
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="REF_IDF">
+        <xs:annotation>
+          <xs:documentation>
+            Refers to the id of the memberref object
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
