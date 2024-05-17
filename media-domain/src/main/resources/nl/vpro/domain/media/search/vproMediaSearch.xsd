@@ -208,8 +208,8 @@
     <xsd:complexContent>
       <xsd:extension base="publishableListItem">
         <xsd:sequence>
-          <xsd:element name="broadcaster" type="media:organizationType"  minOccurs="0" maxOccurs="unbounded"/>
-          <xsd:element name="title" type="xsd:string" minOccurs="0"/> <!-- actually title is required, but there seem to be few exceptions, see MSE-5318 -->
+         <xsd:element name="broadcaster" type="media:organizationType" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="title" type="xsd:string" minOccurs="0"/>
           <xsd:element name="subTitle" type="xsd:string" minOccurs="0"/>
           <xsd:element name="description" type="xsd:string" minOccurs="0"/>
           <xsd:element name="creationDate" type="xsd:dateTime" />
@@ -226,9 +226,9 @@
           <xsd:element name="lastScheduleEvent" type="media:scheduleEventType" minOccurs="0"/>
           <xsd:element name="lastScheduleEventNoRerun" type="media:scheduleEventType" minOccurs="0"/>
           <xsd:element name="sortDateScheduleEvent" type="media:scheduleEventType" minOccurs="0"/>
-
           <xsd:element name="locations" type="media:locationType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="numberOfLocations" type="xsd:int" minOccurs="0"/>
+          <xsd:element name="numberOfPublishedLocations" type="xsd:int" minOccurs="0"/>
           <xsd:element name="tag" type="media:tagType" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="image" type="imageListItem" minOccurs="0"/>
           <xsd:element name="streamingPlatformStatus" type="media:streamingStatus" minOccurs="0"/>
