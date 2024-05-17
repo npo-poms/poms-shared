@@ -12,12 +12,11 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.xml.XMLConstants;
-import jakarta.xml.bind.*;
-import jakarta.xml.bind.util.JAXBSource;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Validator;
 import javax.xml.validation.*;
+import jakarta.xml.bind.*;
+import jakarta.xml.bind.util.JAXBSource;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.*;
@@ -1157,6 +1156,44 @@ public class MediaObjectXmlSchemaTest {
 
         Source streamSource = new StreamSource(new ByteArrayInputStream(out.toByteArray()));
         xsdValidator.validate(streamSource);
+    }
+
+    @Test
+
+    public void MSE_5778() {
+        String segmentXml = """
+            <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+            <segment xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" midRef="RBX_NCRV_720421" type="SEGMENT" urnRef="urn:vpro:media:program:57740391" avType="AUDIO" embeddable="true" mid="RBX_NCRV_1467358" sortDate="2015-07-22T19:00:00+02:00" workflow="PUBLISHED" creationDate="2015-07-22T20:14:22.655+02:00" lastModified="2015-07-22T20:14:22.800+02:00" publishDate="2024-04-03T18:54:04.320+02:00" urn="urn:vpro:media:segment:59275771">
+                <crid>crid://item.radiobox2/302512</crid>
+                <broadcaster id="NCRV">NCRV</broadcaster>
+                <title owner="RADIOBOX" type="MAIN">19.30 Toi toi voor Paul Komen</title>
+                <description owner="RADIOBOX" type="MAIN">In de Abdijkerk in het Groningse Aduard staat vanavond de smaak van Emmy Verhey centraal. Op het programma: Messiaen, Ravel, Dvorak en Loevendie. Nata Tsvereli, Christophe Weidmann en Amparo Lacruz zijn van de partij, evenals pianist Paul Komen. Hem spreken wij vlak voor aanvang.</description>
+                <tag>passaggio</tag>
+                <duration>P0DT0H3M0.000S</duration>
+                <credits/>
+                <descendantOf urnRef="urn:vpro:media:group:33293178" midRef="POMS_S_NCRV_444205" type="SERIES"/>
+                <descendantOf urnRef="urn:vpro:media:program:57740391" midRef="RBX_NCRV_720421" type="BROADCAST"/>
+                <locations/>
+                <images>
+                    <shared:image owner="RADIOBOX" type="PICTURE" highlighted="false" workflow="PUBLISHED" creationDate="2015-07-22T20:14:22.549+02:00" lastModified="2015-07-22T20:14:22.658+02:00" urn="urn:vpro:media:image:59275773">
+                        <shared:title>Paul Komen</shared:title>
+                        <shared:imageUri>urn:vpro:image:633687</shared:imageUri>
+                        <shared:height>262</shared:height>
+                        <shared:width>230</shared:width>
+                    </shared:image>
+                </images>
+                <segmentOf midRef="RBX_NCRV_720421" type="BROADCAST">
+                    <episodeOf midRef="POMS_S_NCRV_444205" type="SERIES" index="49"/>
+                </segmentOf>
+                <start>P0DT0H54M27.000S</start>
+            </segment>
+            """;
+
+        //[org.xml.sax.SAXParseException; lineNumber: 6; columnNumber: 273; An invalid XML character (Unicode: 0xf) was found in the element content of the document.]
+        assertThatThrownBy( () -> JAXB.unmarshal(new StringReader(segmentXml), Segment.class)).isInstanceOf(DataBindingException.class);
+
+
+
     }
 
     protected String toXml(Object o) throws JAXBException {
