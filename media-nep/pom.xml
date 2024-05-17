@@ -103,11 +103,12 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
-      <version>1.6.10</version>
+      <version>1.6.14</version>
       <optional>true</optional>
     </dependency>
     <dependency>

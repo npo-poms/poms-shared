@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
-import lombok.EqualsAndHashCode;
-import lombok.Setter;
+import lombok.*;
 
 import jakarta.xml.bind.annotation.*;
 
@@ -23,6 +22,11 @@ public class MemberUpdate {
     @Setter
     @XmlAttribute
     private Integer position;
+
+    @Setter
+    @Getter
+    @XmlAttribute
+    private Long id;
 
     @Setter
     @XmlAttribute(required = true)
