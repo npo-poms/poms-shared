@@ -16,6 +16,9 @@ import static nl.vpro.domain.media.MediaObjects.GROUPS;
 
 /**
  * Audio/Video type.
+ * <p/>
+ * This implements {@link #test Predicate} to be able to check whether this av-type would be applicable for the given object.
+ * E.g. {@link #AUDIO} would not be applicable for a {@link MediaObject} of {@link MediaUpdate} object with the type {@link MediaType#VISUALRADIO}, because that would already imply that it must be {@link #VIDEO}.
  */
 @XmlEnum
 @XmlType(name = "avTypeEnum")
@@ -83,7 +86,7 @@ public enum AVType implements Displayable, Predicate<Object> {
      * {@inheritDoc}
      * <p>
      * In this case checks whether the given object may have this AVType.
-     * @param mediaObject the object to check. A {@link Class}, a {@link MediaObject} or a {@link MediaUpdate}.
+     * @param mediaObject the object to check. A {@link Class}, a {@link MediaObject}  a {@link MediaUpdate} or a {@link MediaType} (returning {@code false} for all other cases)
      * @see MediaObjects#GROUPS
      * @see MediaObjects#NO_GROUPS
      */
