@@ -69,6 +69,7 @@ import static nl.vpro.domain.Changeables.instant;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
 import static nl.vpro.domain.media.MediaObjectFilters.*;
+import static nl.vpro.domain.media.support.Workflow.DELETES;
 import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
 
 /**
@@ -2109,28 +2110,33 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * Implicitly create predictions for all platforms that have a location, but no prediction yet.
      */
     public void implicitPredictions() {
-        final Map<Platform, List<Location>> locations = new HashMap<>();
-        getLocations().stream()
-            .filter(Location::hasPlatform)
-            .filter(Location::isConsiderableForPublication)
-            .forEach(l ->
+        if (! DELETES.contains(workflow)) {
+            final Map<Platform, List<Location>> locations = new HashMap<>();
+            getLocations().stream()
+                .filter(Location::hasPlatform)
+                .filter(Location::isConsiderableForPublication)
+                .forEach(l ->
                     locations.computeIfAbsent(
                         l.getPlatform(),
                         p -> new ArrayList<>()
                     ).add(l)
-            );
+                );
 
-        for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
-            findOrCreatePrediction(entry.getKey(), true, (created) -> {
-                for (Location l : entry.getValue()) {
-                    // make sure that such an implicit prediction is not more permissive then
-                    Embargos.copyIfLessRestrictedOrTargetUnset(l.getOwnEmbargo(), created.getOwnEmbargo());
-                }
-                created.setState(Prediction.State.of(created));
-                log.info("Implicitly created prediction {} for {} ({})", created, this, entry.getValue());
-            });
+            for (Map.Entry<Platform, List<Location>> entry : locations.entrySet()) {
+                findOrCreatePrediction(entry.getKey(), true, (created) -> {
+                    for (Location l : entry.getValue()) {
+                        // make sure that such an implicit prediction is not more permissive then
+                        Embargos.copyIfLessRestrictedOrTargetUnset(l.getOwnEmbargo(), created.getOwnEmbargo());
+                    }
+                    created.setState(Prediction.State.of(created));
+                    log.info("Implicitly created prediction {} for {} ({})", created, this, entry.getValue());
+                });
+            }
+        } else {
+            log.debug("Not creating implicit predictions for {} because it is deleted", this);
         }
     }
+
 
     public void setPredictions(Collection<Prediction> predictions) {
         this.predictions = updateSortedSet(this.predictions, predictions);
