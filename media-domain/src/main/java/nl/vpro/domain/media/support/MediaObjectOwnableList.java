@@ -12,11 +12,16 @@ import nl.vpro.domain.media.MediaObject;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public interface MediaObjectOwnableList<THIS extends MediaObjectOwnableList<THIS, I>, I extends MediaObjectOwnableListItem<I, THIS>>  extends OwnableList<THIS, I>, Child<MediaObject>,
-    Serializable, Identifiable<Long>, Cloneable {
+public interface MediaObjectOwnableList<
+    THIS extends MediaObjectOwnableList<THIS, I>,
+    I extends MediaObjectOwnableListItem<I, THIS>>
+    extends
+    OwnableList<THIS, I>,
+    Child<MediaObject>,
+    Serializable,
+    Identifiable<Long>, Cloneable {
 
     THIS clone();
-
 
 }
 
