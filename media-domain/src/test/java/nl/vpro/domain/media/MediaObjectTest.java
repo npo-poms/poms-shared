@@ -1239,4 +1239,18 @@ public class MediaObjectTest {
 
     }
 
+    @Test
+    public void oddChars() {
+        Segment mo = new Segment();
+        mo.setMainDescription("In de Abdijkerk in het Groningse Aduard staat vanavond de smaak van Emmy Verhey centraal. Op het programma: Messiaen, Ravel, Dvorak en Loevendie. Nata Tsvereli, Christophe Weidmann en Amparo Lacruz zijn van de partij, evenals pianist Paul Komen. Hem spreken wij vlak voor aanvang.");
+
+        Set<ConstraintViolation<Segment>> constraintViolations = getValidator().validate(mo);
+        log.info("{}", constraintViolations);
+
+        Segment rounded = JAXBTestUtil.roundTrip(mo);
+        JAXB.marshal(mo, System.out);
+        log.info("{}", rounded.getMainDescription());
+
+    }
+
 }
