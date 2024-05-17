@@ -7,16 +7,13 @@ package nl.vpro.domain.api.media;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.functional.ReasonedPredicate;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.*;
 import nl.vpro.util.CloseableIterator;
 import nl.vpro.util.FilteringIterator;
 
@@ -38,7 +35,7 @@ public interface MediaService extends MediaProvider {
         boolean withSequences,
         Deletes deletes,
         Tail tails,
-        Predicate<MediaChange> reasonFilter) throws ProfileNotFoundException;
+        ReasonedPredicate<MediaChange> reasonFilter) throws ProfileNotFoundException;
 
     @Override
     <T extends MediaObject> T findByMid(boolean loadDeleted, String mid);

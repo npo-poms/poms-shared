@@ -5,9 +5,9 @@
 package nl.vpro.domain.api.media;
 
 import java.time.Instant;
-import java.util.function.Predicate;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.functional.ReasonedPredicate;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.profile.ProfileDefinition;
@@ -42,7 +42,7 @@ public interface MediaRepository extends MediaLoader, Redirector {
         @Nullable final Integer max,
         @Nullable Deletes deletes,
         @Nullable final Tail tail,
-        @Nullable final Predicate<MediaChange> filter
+        @Nullable final ReasonedPredicate<MediaChange> filter
     );
 
     CloseableIterator<MediaObject> iterate(ProfileDefinition<MediaObject> profile, MediaForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
