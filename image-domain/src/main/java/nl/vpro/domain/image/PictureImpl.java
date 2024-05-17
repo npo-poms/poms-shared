@@ -55,6 +55,8 @@ public class PictureImpl implements Picture {
 
     private static final ObjectMapper MAPPER = Jackson2Mapper.getInstance();
 
+    static final ObjectMapper MODEL = Jackson2Mapper.getModelInstance();
+
     @Override
     public String toString() {
         try {

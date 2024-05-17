@@ -18,6 +18,9 @@ import nl.vpro.jackson2.Jackson2Mapper;
  * @since 5.12
  */
 public class GenreSortedSet {
+
+    private static final ObjectMapper MAPPER = Jackson2Mapper.getInstance();
+
     public static class Serializer extends JsonSerializer<SortedSet<Genre>> {
 
         @Override
@@ -45,7 +48,7 @@ public class GenreSortedSet {
             if (codec == null) {
                 // In org/ektorp/impl/QueryResultParser.java#parseRows(JsonParser jp) it does row.doc.traverse()
                 // traverse() gives a new JsonParser, but without the original Codec. Seems a bug. But this work around it.
-                jp.setCodec(Jackson2Mapper.getInstance());
+                jp.setCodec(MAPPER);
                 codec = jp.getCodec();
             }
 

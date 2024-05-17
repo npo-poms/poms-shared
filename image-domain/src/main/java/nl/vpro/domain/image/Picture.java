@@ -2,15 +2,14 @@ package nl.vpro.domain.image;
 
 import lombok.Data;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.annotations.Beta;
-
-import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
  * A 'picture' view on {@link ImageMetadata}. Mainly target at filling HTML picture elements.
@@ -74,7 +73,7 @@ public interface Picture {
      */
     @JsonIgnore
     default JsonNode getJson() {
-        return Jackson2Mapper.getModelInstance().valueToTree(this);
+        return PictureImpl.MODEL.valueToTree(this);
     }
 
 }

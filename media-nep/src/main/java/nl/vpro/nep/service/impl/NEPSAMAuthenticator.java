@@ -76,13 +76,15 @@ public class NEPSAMAuthenticator implements Supplier<String> {
         return "Bearer " + this.loginResponse.getToken();
     }
 
+    private static final ObjectMapper LENIENT = Jackson2Mapper.getLenientInstance();
+
     protected void authenticate() throws IOException {
         try(CloseableHttpClient httpClient = HttpClients.custom()
             .build()) {
             String playerUrl = baseUrl + "/v2/token";
             HttpClientContext clientContext = HttpClientContext.create();
 
-            String json = Jackson2Mapper.getLenientInstance().writeValueAsString(loginRequest);
+            String json = LENIENT.writeValueAsString(loginRequest);
             StringEntity entity = new StringEntity(json, JSON);
             HttpPost httpPost = new HttpPost(playerUrl);
             httpPost.addHeader(new BasicHeader(HttpHeaders.ACCEPT, JSON.toString()));

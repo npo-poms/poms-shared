@@ -30,6 +30,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.nep.domain.*;
@@ -95,13 +96,15 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         }
     }
 
+    private static final ObjectMapper LENIENT = Jackson2Mapper.getLenientInstance();
+
     protected NEPItemizeResponse itemize(@NonNull NEPItemizeRequest request, String itemizeUrl, Supplier<String> itemizeKey) throws NEPException {
         String playerUrl = itemizeUrl + "/api/itemizer/job";
         log.info("Itemizing {} @ {}", request, playerUrl);
         HttpClientContext clientContext = HttpClientContext.create();
-        String json = null;
+        String json;
         try {
-            json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
+            json = LENIENT.writeValueAsString(request);
         } catch (JsonProcessingException e) {
             throw new NEPException(e, e.getMessage());
         }
