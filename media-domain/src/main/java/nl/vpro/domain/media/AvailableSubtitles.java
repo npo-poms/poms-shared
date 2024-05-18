@@ -25,7 +25,6 @@ import static java.util.Comparator.nullsLast;
 @XmlType(name="availableSubtitlesType")
 @XmlAccessorType(XmlAccessType.NONE)
 @Entity
-@IdClass(SubtitlesId.class)
 public class AvailableSubtitles implements Identifiable<Long>, Comparable<AvailableSubtitles>, Serializable {
 
     @Serial

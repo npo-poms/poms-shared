@@ -15,9 +15,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
-import jakarta.persistence.OrderBy;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -629,7 +627,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
-    @OrderBy("language, type")
+    @SortNatural
     private SortedSet<@NonNull AvailableSubtitles> availableSubtitles;
 
 

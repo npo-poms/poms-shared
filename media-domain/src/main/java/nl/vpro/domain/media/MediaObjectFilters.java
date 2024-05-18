@@ -24,6 +24,7 @@ public class MediaObjectFilters {
      * Normal users normally have this filter enabled, and won't see deleted objects.
      */
     public static final String DELETED_FILTER = "deletedFilter";
+    public static final String SE_DELETED_FILTER = "seDeletedFilter";
     public static final String DELETED_FILTER_CONDITION = """
             (workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED', 'TEMPORARY') and mergedTo_id is null)
         """;
