@@ -6,8 +6,9 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>${revision}${changelist}</version>
-  </parent>
+     <version>${revision}${changelist}</version>
+
+  </parent> 
 
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-domain</artifactId>

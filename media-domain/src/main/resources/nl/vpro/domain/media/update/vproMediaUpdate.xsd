@@ -583,6 +583,7 @@
     </xs:sequence>
     <xs:attribute name="position" type="xs:integer"/>
     <xs:attribute name="highlighted" type="xs:boolean"/>
+    <xs:attribute name="id" type="xs:long"/>
   </xs:complexType>
 
   <xs:element name="list">
@@ -629,7 +630,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="REF_IDF">
+      <xs:enumeration value="REF_ID">
         <xs:annotation>
           <xs:documentation>
             Refers to the id of the memberref object

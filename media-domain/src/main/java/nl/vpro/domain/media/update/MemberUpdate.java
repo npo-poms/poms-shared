@@ -25,6 +25,10 @@ public class MemberUpdate {
     private Integer position;
 
     @Setter
+    @XmlAttribute
+    private Long id;
+
+    @Setter
     @XmlAttribute(required = true)
     Boolean highlighted = false;
 
