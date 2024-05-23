@@ -652,6 +652,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     /**
      * See MSE-5755. Whether HD should be available for {@link Platform#INTERNETVOD} users (npostart/non-subscribers for npoplus)
+     * <p>
+     * This can essentially have three values: {@code true}, {@code false} and {@code null}..
      * @since 7.13
      */
     @Column
