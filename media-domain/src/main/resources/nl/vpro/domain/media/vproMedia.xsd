@@ -320,6 +320,17 @@
     <xs:attribute type="xs:boolean" name="hasSubtitles" use="optional" default="false"/>
     <xs:attributeGroup ref="shared:publishableAttributesGroup"/>
     <xs:attribute type="midType" name="mergedTo" use="optional"/>
+    <xs:attribute name="adoptQualityFromPlus" type="xs:boolean" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          This attribute is used to indicate whether a program/segment is available in HD quality for internet VOD. For
+          groups this indicates the default value for its members/episodes.
+
+          This is an experimental feature which is/will be used in 2024 for the player.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+
   </xs:complexType>
 
   <xs:attributeGroup name="restrictionAttributesGroup">

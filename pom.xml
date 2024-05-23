@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>7.11.1</version>
+    <version>7.11.2</version>
   </parent>
 
   <name>poms shared</name>
@@ -13,14 +13,14 @@
     for poms-shared project, we arranged dynamic versioning
      a pull request will be published with the associated branch name in the artifact version (see .github/workflows/pull-request.yml)
   -->
-  <version>7.12.1-SNAPSHOT</version>
+  <version>${revision}${changelist}</version>
   <artifactId>poms-shared-parent</artifactId>
   <packaging>pom</packaging>
 
   <description>Domain classes and utilities for NPO POMS projects.</description>
 
   <properties>
-    <revision>7.11</revision>
+    <revision>7.12.0</revision>
     <changelist>-SNAPSHOT</changelist>
     <poms.shared.version>${project.version}</poms.shared.version>
     <java.version>17</java.version>

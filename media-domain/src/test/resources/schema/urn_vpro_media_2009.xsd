@@ -106,6 +106,7 @@
             </xs:complexType>
           </xs:element>
         </xs:sequence>
+        <xs:attribute name="adoptQualityFromPlus" type="xs:boolean"/>
         <xs:attribute name="avType" type="avTypeEnum" use="required"/>
         <xs:attribute name="embeddable" type="xs:boolean" use="required"/>
         <xs:attribute name="hasSubtitles" type="xs:boolean"/>
