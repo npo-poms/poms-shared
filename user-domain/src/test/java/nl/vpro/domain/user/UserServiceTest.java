@@ -82,12 +82,6 @@ class UserServiceTest {
         }
 
         @Override
-        public User authenticate(String principalId, String password) {
-            return null;
-
-        }
-
-        @Override
         public Optional<User> authenticate(String principalId) {
             return Optional.empty();
 

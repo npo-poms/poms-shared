@@ -57,6 +57,7 @@ public class BroadcasterEditor implements OrganizationEditor<Broadcaster> {
         this.employee = isEmployee;
         this.active = isEmployee;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

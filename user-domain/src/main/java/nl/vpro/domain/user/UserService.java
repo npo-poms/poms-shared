@@ -108,8 +108,6 @@ public interface UserService<T extends User> {
 
     Optional<T> currentUser();
 
-    T authenticate(String principalId, String password);
-
     Optional<T> authenticate(String principalId);
 
     /**
