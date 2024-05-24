@@ -160,6 +160,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
     "publishStop",
     "urn",
     "embeddable",
+    "adoptQualityFromPlus",
     /* xml elements */
     "episodeOf",
     "crids",
