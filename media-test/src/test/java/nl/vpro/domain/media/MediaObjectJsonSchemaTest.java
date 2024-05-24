@@ -74,9 +74,14 @@ public class MediaObjectJsonSchemaTest {
     public void testMidAndType() {
         String expected = "{\"objectType\":\"program\",\"mid\":\"MID_000001\",  \"type\" : \"CLIP\", \"embeddable\":true,\"broadcasters\":[],\"genres\":[], \"countries\":[],\"languages\":[]}";
 
-        Program program = program().lean().type(ProgramType.CLIP).mid("MID_000001").build();
+        Program program = program()
+            .lean()
+            .type(ProgramType.CLIP)
+            .mid("MID_000001")
+            .build();
         Jackson2TestUtil.roundTripAndSimilarAndEquals(program, expected);
     }
+
 
 
 
@@ -1241,6 +1246,32 @@ public class MediaObjectJsonSchemaTest {
               } ]
             }""");
 
+    }
+
+
+    @Test
+    public void testAdopt() {
+        String expected = """
+            {
+              "objectType" : "program",
+              "mid" : "MID_000001",
+              "type" : "CLIP",
+              "embeddable" : true,
+              "adoptQualityFromPlus" : true,
+              "broadcasters" : [ ],
+              "genres" : [ ],
+              "countries" : [ ],
+              "languages" : [ ]
+            }
+            """;
+
+        Program program = program()
+            .lean()
+            .type(ProgramType.CLIP)
+            .mid("MID_000001")
+            .build();
+        program.setAdoptQualityFromPlus(true);
+        Jackson2TestUtil.roundTripAndSimilarAndEquals(program, expected);
     }
 
     private String toJson(Jackson2Mapper mapper, MediaObject program) throws IOException {
