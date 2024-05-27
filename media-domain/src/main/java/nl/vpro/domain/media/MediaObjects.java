@@ -664,6 +664,14 @@ public class MediaObjects {
 
         setWorkflowPublishedSubObjects(media.getLocations());
         setWorkflowPublishedSubObjects(media.getImages());
+        for (AvailableSubtitles as : media.getAvailableSubtitles()) {
+            var workflow = as.getWorkflow();
+            if (workflow == SubtitlesWorkflow.FOR_PUBLICATION || workflow == SubtitlesWorkflow.FOR_REPUBLICATION) {
+                as.setWorkflow(SubtitlesWorkflow.PUBLISHED);
+            } else if (workflow == SubtitlesWorkflow.FOR_DELETION) {
+                as.setWorkflow(SubtitlesWorkflow.DELETED);
+            }
+        }
         return previous;
     }
 
