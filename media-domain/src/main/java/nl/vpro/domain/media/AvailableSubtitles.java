@@ -40,10 +40,6 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    @Getter
-    private String mid;
-
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @XmlAttribute
     @Getter
@@ -83,8 +79,7 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
     }
 
     @lombok.Builder
-    private AvailableSubtitles(String mid, Locale language, SubtitlesType type, SubtitlesWorkflow workflow) {
-        this.mid = mid;
+    private AvailableSubtitles(Locale language, SubtitlesType type, SubtitlesWorkflow workflow) {
         this.language = language;
         this.type = type;
         this.workflow = workflow == null ? SubtitlesWorkflow.FOR_PUBLICATION : workflow;
@@ -118,7 +113,7 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
             if (id != null && that.id != null) {
                 return Objects.equals(id, that.id);
             } else {
-                return Objects.equals(mid, that.mid) && language.equals(that.language) && type == that.type;
+                return language.equals(that.language) && type == that.type;
             }
         } else {
             return false;
@@ -127,8 +122,7 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
 
     @Override
     public int hashCode() {
-        int result = mid == null ? 0 : mid.hashCode();
-        result = 31 * result + language.hashCode();
+        int result = language.hashCode();
         result = 31 * result + type.hashCode();
         return result;
     }
