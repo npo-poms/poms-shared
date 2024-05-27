@@ -137,9 +137,10 @@ public class ReusableImageStream extends ImageStream {
 
     @Override
     public void close() throws IOException {
+        getHash();
         super.close();
         if (file != null) {
-            getHash();
+
             Files.deleteIfExists(file);
             PathUtils.cancelDeleteOnExit(file);
             file = null;
