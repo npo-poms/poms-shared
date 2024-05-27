@@ -20,7 +20,7 @@ import static java.util.Comparator.nullsLast;
 
 
 /**
- * Sub field of mediaobject indicating whether subtitles for a certain language are available
+ * Sub-field of {@link MediaObject} indicating whether subtitles for a certain language are available
 */
 @XmlType(name="availableSubtitlesType")
 @XmlAccessorType(XmlAccessType.NONE)
@@ -88,7 +88,7 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
         this.mid = mid;
         this.language = language;
         this.type = type;
-        this.workflow = workflow;
+        this.workflow = workflow == null ? SubtitlesWorkflow.FOR_PUBLICATION : workflow;
 
     }
 

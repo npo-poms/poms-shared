@@ -578,7 +578,7 @@ public class MediaObjects {
     }
 
     /**
-     * If the media object is not yet deleted, it will be marked {@link Worklow#FOR_DELETION} and the reason will be appended.
+     * If the media object is not yet deleted, it will be marked {@link Workflow#FOR_DELETION} and the reason will be appended.
      * If the object is already {@link Workflow#DELETES} nothing will happen.
      */
     @SuppressWarnings("UnusedReturnValue")
@@ -659,11 +659,10 @@ public class MediaObjects {
         } else {
             MediaObjectAccess.setWorkflow(media, Workflow.PUBLISHED);
         }
-        MediaObjectAccess.setSubtitlesWorkflow(media,
-            MediaObjects.subtitlesMayBePublished(media) ? AvailableSubtitlesWorkflow.PUBLISHED : AvailableSubtitlesWorkflow.REVOKED);
 
         setWorkflowPublishedSubObjects(media.getLocations());
         setWorkflowPublishedSubObjects(media.getImages());
+        setWorkflowPublishedAvailableSubtitles(MediaObjects.subtitlesMayBePublished(media) , media.getAvailableSubtitles());
         return previous;
     }
 
@@ -688,6 +687,17 @@ public class MediaObjects {
         }
     }
 
+     private static void setWorkflowPublishedAvailableSubtitles(boolean subtitlesMayBePUblished, Collection<? extends AvailableSubtitles> publishables) {
+         for(AvailableSubtitles po : publishables) {
+            if (SubtitlesWorkflow.NEEDS_WORK.contains(po.getWorkflow())) {
+                po.setWorkflow(po.getWorkflow().getDest());
+            }
+            if (! subtitlesMayBePUblished && po.getWorkflow() == SubtitlesWorkflow.PUBLISHED) {
+                log.warn("Subtitels published for unpublised media {}", po);
+            }
+        }
+    }
+
 
 
     /**
@@ -695,7 +705,7 @@ public class MediaObjects {
      */
     public static int removeUnpublishedSubObjects(MediaObject media) {
         int result = 0;
-        result += removeIf(media.getAvailableSubtitles(), a -> a.getWorkflow() != SubtitlesWorkflow.PUBLISHED);
+        result += removeIf(media.getAvailableSubtitles(), a -> a.getWorkflow() == null || ! SubtitlesWorkflow.IN_API.contains(a.getWorkflow()));
         result += removeIf(media.getLocations(), l -> l.getWorkflow() != Workflow.PUBLISHED);
         result += removeIf(media.getImages(), i -> i.getWorkflow() != Workflow.PUBLISHED);
 

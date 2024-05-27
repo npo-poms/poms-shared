@@ -27,11 +27,6 @@ public class MediaObjectAccess {
         object.setRepubDate(repubDate);
     }
 
-    public static void setSubtitlesWorkflow(MediaObject object, AvailableSubtitlesWorkflow subtitlesWorkflow) {
-        object.setSubtitlesWorkflow(subtitlesWorkflow);
-    }
-
-
     public static void setWorkflow(MediaObject object, Workflow workflow) {
         setWorkflow(object, workflow, null);
     }
@@ -41,10 +36,6 @@ public class MediaObjectAccess {
         PublishableObjectAccess.setWorkflow(object, workflow);
         MediaObjects.appendReason(object, reason);
         object.setRepubDestinations(null);
-    }
-
-    public static AvailableSubtitlesWorkflow getSubtitlesWorkflow(MediaObject object) {
-        return object.getSubtitlesWorkflow();
     }
 
     public static void setStreamingPlatformStatus(MediaObject object, StreamingStatusImpl status) {

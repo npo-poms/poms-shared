@@ -616,18 +616,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     /**
      * If this is set to false, then that indicates that the sort date was set
-     * _explictely_ (JAXB unmarshalling), and no other setters can invalidate
+     * _explicitly_ (JAXB unmarshalling), and no other setters can invalidate
      * that.
      */
     @Transient
     private boolean sortDateInvalidatable = true;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @Getter(AccessLevel.PACKAGE)
-    @Setter(AccessLevel.PACKAGE)
-    private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.NONE;
-
 
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
