@@ -138,7 +138,10 @@ public interface MediaTestDataBuilder<
     }
 
     default T valid() {
-        return constrained();
+        return constrained()
+            .withGenres()
+            .withAgeRating()
+            ;
     }
 
     default T validNew() {
