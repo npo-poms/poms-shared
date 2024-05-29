@@ -146,10 +146,17 @@ public class Roles {
 
 
     /**
-     * Allowed to create promos {@link ProgramType#PROMO}
+     * Allowed to create promos {@code ProgramType.PROMO}
      */
     public static final String PROMO = MEDIA + "PROMO";
     public static final String PROMO_ROLE = ROLE + PROMO;
+
+
+    /**
+     *  See MSE-5755. Users may set fields specific for (tests) of the player.
+     */
+    public static final String PLAYER = MEDIA + "PLAYER";
+    public static final String PLAYER_ROLE = ROLE + PLAYER;
 
 
     /**
@@ -164,6 +171,8 @@ public class Roles {
      */
     public static final String TVVOD = API + "TVVOD";
     public static final String TVVOD_ROLE = ROLE + TVVOD;
+
+
 
     /**
      * This is role is only assigned by the security for the frontend api, and is only used when checking access to frontend api calls.

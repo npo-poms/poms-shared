@@ -15,9 +15,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
-import jakarta.persistence.OrderBy;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -160,6 +158,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
     "publishStop",
     "urn",
     "embeddable",
+    "adoptQualityFromPlus",
     /* xml elements */
     "episodeOf",
     "crids",
@@ -615,22 +614,15 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     /**
      * If this is set to false, then that indicates that the sort date was set
-     * _explictely_ (JAXB unmarshalling), and no other setters can invalidate
+     * _explicitly_ (JAXB unmarshalling), and no other setters can invalidate
      * that.
      */
     @Transient
     private boolean sortDateInvalidatable = true;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @Getter(AccessLevel.PACKAGE)
-    @Setter(AccessLevel.PACKAGE)
-    private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.NONE;
-
-
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
-    @OrderBy("language, type")
+    @SortNatural
     private SortedSet<@NonNull AvailableSubtitles> availableSubtitles;
 
 
@@ -648,6 +640,22 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlTransient
     @Beta()
     String correlationId;
+
+
+    /**
+     * See MSE-5755. Whether HD should be available for {@link Platform#INTERNETVOD} users (npostart/non-subscribers for npoplus)
+     * <p>
+     * This can essentially have three values: {@code true}, {@code false} and {@code null}.
+     * For groups this only provides a default for its episodes/members. This default will be evaluated at the moment that it is notified for online by NEP.
+     * @since 7.13
+     */
+    @Column
+    @Getter
+    @Setter
+    @XmlAttribute
+    @Beta
+    private Boolean adoptQualityFromPlus = null;
+
 
 
     public MediaObject() {

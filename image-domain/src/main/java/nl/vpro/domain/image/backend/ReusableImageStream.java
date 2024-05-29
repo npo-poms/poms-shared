@@ -43,6 +43,8 @@ public class ReusableImageStream extends ImageStream {
 
     private Path file = null;
 
+    private byte[] hash;
+
 
     public ReusableImageStream(InputStream stream) {
         this(stream, null);
@@ -99,6 +101,10 @@ public class ReusableImageStream extends ImageStream {
         if (closed) {
             throw new IOException("Stream closed");
         }
+        return getStreamWithoutCheck();
+    }
+
+    private synchronized  InputStream getStreamWithoutCheck() {
         try {
             Path file = getFile();
             assert Files.exists(file) : "File " + file + " didn't get created";
@@ -133,6 +139,7 @@ public class ReusableImageStream extends ImageStream {
     public void close() throws IOException {
         super.close();
         if (file != null) {
+            getHash();
             Files.deleteIfExists(file);
             PathUtils.cancelDeleteOnExit(file);
             file = null;
@@ -184,7 +191,7 @@ public class ReusableImageStream extends ImageStream {
         } else {
             try {
                 InputStream stream1 = getStream();
-                BufferedImage read = ImageIO.read(getStream());
+                BufferedImage read = ImageIO.read(stream1);
                 if (read != null) {
                     image.setWidth(read.getWidth());
                     image.setHeight(read.getHeight());
@@ -197,27 +204,30 @@ public class ReusableImageStream extends ImageStream {
         }
     }
 
-    public byte[] getHash() throws IOException {
-        final InputStream is = getStream();
-        MessageDigest m;
-        try {
-            m = MessageDigest.getInstance(HASH_ALGORITHM);
-        } catch (NoSuchAlgorithmException e) {
-            // cannot occur, SHA1 is supported
-            throw new IllegalStateException();
+    public synchronized  byte[] getHash() throws IOException {
+        if (hash == null) {
+            final InputStream is = getStreamWithoutCheck();
+            MessageDigest m;
+            try {
+                m = MessageDigest.getInstance(HASH_ALGORITHM);
+            } catch (NoSuchAlgorithmException e) {
+                // cannot occur, SHA1 is supported
+                throw new IllegalStateException();
+            }
+            m.reset();
+            final byte[] buffer = new byte[BUFFER_SIZE];
+            long total = 0L;
+            int i = is.read(buffer, 0, BUFFER_SIZE);
+            while (i != -1) {
+                total += i;
+                m.update(buffer, 0, i);
+                i = is.read(buffer, 0, BUFFER_SIZE);
+            }
+            final byte[] result = m.digest();
+            log.debug("Found hash based on {} bytes: {}", total, result);
+            hash = result;
         }
-        m.reset();
-        final byte[] buffer = new byte[BUFFER_SIZE];
-        long total = 0L;
-        int i = is.read(buffer, 0, BUFFER_SIZE);
-        while (i != -1) {
-            total += i;
-            m.update(buffer, 0, i);
-            i = is.read(buffer, 0, BUFFER_SIZE);
-        }
-        final byte[] result = m.digest();
-        log.debug("Found hash based on {} bytes: {}", total, result);
-        return result;
+        return hash;
     }
 
     public synchronized void copy() throws IOException {
