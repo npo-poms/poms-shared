@@ -877,7 +877,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
      default B audioOrVideo() {
         return
             ageRatingAllIfUnset()
-                .avType(this instanceof GroupBuilder ? AVType.MIXED : null);
+                .avType(this instanceof GroupBuilder ? AVType.MIXED : AVType.UNKNOWN);
     }
     /**
      * Makes a (deep) copy of this builder. This returns a new instance on which you can make changes without affecting the original one.
