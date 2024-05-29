@@ -921,11 +921,9 @@ public interface MediaTestDataBuilder<
 
         ProgramTestDataBuilder() {
             super();
-            avType(AVType.UNKNOWN);
         }
         ProgramTestDataBuilder(Program program) {
             super(program);
-            avType(AVType.UNKNOWN);
         }
         @Override
         public ProgramTestDataBuilder withEverything() {
@@ -1197,12 +1195,10 @@ public interface MediaTestDataBuilder<
 
         SegmentTestDataBuilder() {
             super();
-            avType(AVType.UNKNOWN);
         }
 
         SegmentTestDataBuilder(Segment segment) {
             super(segment);
-            avType(AVType.UNKNOWN);
         }
 
 
