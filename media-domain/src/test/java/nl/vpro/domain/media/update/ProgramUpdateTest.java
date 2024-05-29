@@ -315,11 +315,11 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetAVType() {
         ProgramUpdate update = programUpdate();
-        update.setAVType(AVType.MIXED);
+        update.setAVType(AVType.VIDEO);
 
         String expected = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-            <program avType="MIXED" embeddable="true" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
+            <program avType="VIDEO" embeddable="true" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:media="urn:vpro:media:2009">
                 <geoLocations/>
                 <topics/>
                 <credits/>
