@@ -921,9 +921,11 @@ public interface MediaTestDataBuilder<
 
         ProgramTestDataBuilder() {
             super();
+            avType(AVType.UNKNOWN);
         }
         ProgramTestDataBuilder(Program program) {
             super(program);
+            avType(AVType.UNKNOWN);
         }
         @Override
         public ProgramTestDataBuilder withEverything() {
