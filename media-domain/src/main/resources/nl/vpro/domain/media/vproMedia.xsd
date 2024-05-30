@@ -84,7 +84,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="programType">
+  <xs:complexType name="programType" final="extension restriction">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
@@ -550,8 +550,8 @@
 
   <xs:complexType name="personType">
     <xs:sequence>
-      <xs:element type="xs:string" name="givenName"/>
-      <xs:element type="xs:string" name="familyName"/>
+      <xs:element type="xs:string" name="givenName" />
+      <xs:element type="xs:string" name="familyName" />
     </xs:sequence>
     <xs:attribute type="roleType" name="role" use="required"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>
@@ -626,7 +626,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="segmentType">
+  <xs:complexType name="segmentType" final="extension restriction">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
@@ -657,19 +657,6 @@
       <xs:element ref="shared:image" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
-
-  <xs:simpleType name="license">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="COPYRIGHTED"/>
-      <xs:enumeration value="PUBLIC_DOMAIN"/>
-      <xs:enumeration value="CC_BY"/>
-      <xs:enumeration value="CC_BY_SA"/>
-      <xs:enumeration value="CC_BY_ND"/>
-      <xs:enumeration value="CC_BY_NC"/>
-      <xs:enumeration value="CC_BY_NC_SA"/>
-      <xs:enumeration value="CC_BY_NC_ND"/>
-    </xs:restriction>
-  </xs:simpleType>
 
   <xs:complexType name="groupTableType">
     <xs:sequence>
@@ -846,7 +833,7 @@
     <xs:attribute name="type" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="groupType">
+  <xs:complexType name="groupType" final="extension restriction">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
@@ -1066,7 +1053,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-       <xs:enumeration value="EUROPE">
+      <xs:enumeration value="EUROPE">
         <xs:annotation>
           <xs:documentation>
             New in 5.6. Europa in breedste zin van het woord
@@ -2802,7 +2789,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="R2SJ"/>
+      <xs:enumeration value="SENJ"/>
       <xs:enumeration value="RAD3">
         <xs:annotation>
           <xs:documentation>
@@ -2810,7 +2797,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="R3KX"/>
+      <xs:enumeration value="KXFM"/>
       <xs:enumeration value="R3AL"/>
       <xs:enumeration value="RAD4">
         <xs:annotation>
@@ -2827,7 +2814,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="R5ST"/>
+      <xs:enumeration value="STNL"/>
       <xs:enumeration value="RAD6">
         <xs:annotation>
           <xs:documentation>
@@ -3098,6 +3085,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="FUNO">
+         <xs:annotation>
+          <xs:documentation>
+            FunX Afro
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="CLAS">
         <xs:annotation>
           <xs:documentation>
@@ -3260,10 +3254,33 @@
         </xs:annotation>
       </xs:enumeration>
 
-       <xs:enumeration value="XXXX">
+      <xs:enumeration value="PRMT">
+        <xs:annotation>
+          <xs:documentation>
+            Paramount Nederland
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
+      <xs:enumeration value="BLND">
+        <xs:annotation>
+          <xs:documentation>
+            NPO BLend
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
+      <xs:enumeration value="XXXX">
         <xs:annotation>
           <xs:documentation>
             Test channel. This channel only exist for the sake of testing.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="XXXY">
+        <xs:annotation>
+          <xs:documentation>
+            Second test channel. This channel only exist for the sake of testing.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
