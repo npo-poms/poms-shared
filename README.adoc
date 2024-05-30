@@ -14,6 +14,12 @@ These are also used by the API clients.
 See also https://github.com/npo-poms/poms-parent[poms parent]
 
 
+[NOTE]
+--
+This branch is currently maintained for VPRO Cinema backend, which runs on old spring/old java/old generally versions.
+--
+
+
 == build
 
 This is automaticly build on github.
