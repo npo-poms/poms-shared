@@ -106,11 +106,11 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
-    @XmlEnumValue("R2SJ")
-    R2SJ(AUDIO, 2014) { // voorheen radio 6?
+    @XmlEnumValue("SENJ")
+    SENJ(AUDIO, Range.atLeast(Year.of(2014)), "https://www.nporadio2.nl/soulenjazz"   , true) { // voorheen radio 6?
         @Override
         public String toString() {
-            return "Radio 2 Soul & Jazz";
+            return "NPO Soul & Jazz";
         }
     },
 
@@ -130,18 +130,18 @@ public enum Channel implements Displayable, XmlValued {
 
 
     @XmlEnumValue("R3AL")
-    R3AL(AUDIO, null, null, true) {
+    R3AL(AUDIO, Range.atMost(Year.of(2022)), "https://www.npo3fm.nl/kx/programmas/kx-alternative", true) {
         @Override
         public String toString() {
             return "NPO 3FM KX Alternative";
         }
     },
 
-    @XmlEnumValue("R3KX")
-    R3KX(AUDIO, Range.atLeast(Year.of(2005)), null, true) {
+    @XmlEnumValue("KXFM")
+    KXFM(AUDIO, Range.atLeast(Year.of(2005)), "https://www.npo3fm.nl/kx", true) {
         @Override
         public String toString() {
-            return "NPO 3FM KX Radio";
+            return "NPO Campus Radio";
         }
     },
 
@@ -175,11 +175,11 @@ public enum Channel implements Displayable, XmlValued {
 
     },
 
-    @XmlEnumValue("R5ST")
-    R5ST(AUDIO, null, null, true) {
+    @XmlEnumValue("STNL")
+    STNL(AUDIO, Range.atLeast(Year.of(2010)), "https://www.nporadio5.nl/sterrennl/online-radio-luisteren/", true) {
         @Override
         public String toString() {
-            return "NPO Radio 5 Sterren NL";
+            return "NPO Sterren NL";
         }
     },
 
@@ -474,7 +474,7 @@ public enum Channel implements Displayable, XmlValued {
     EEN_(VIDEO, 1953) {
         @Override
         public String toString() {
-            return "E\u00E9n";
+            return "Eén";
         }
     },
 
@@ -572,7 +572,7 @@ public enum Channel implements Displayable, XmlValued {
     SUDW {
         @Override
         public String toString() {
-            return "SWF Baden-W\u00FCrttemberg";
+            return "SWF Baden-Württemberg";
 
         }
     },
@@ -2241,7 +2241,7 @@ public enum Channel implements Displayable, XmlValued {
 
 
     @XmlEnumValue("FUND")
-    FUND(AUDIO, null, null, true)  {
+    FUND(AUDIO, Range.atMost(Year.of(2020)), null, true)  {
         @Override
         public String toString() {
             return "FunX Dance";
@@ -2263,10 +2263,10 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
     @XmlEnumValue("FUNJ")
-    FUNJ(AUDIO, null, null, true)  {
+    FUNJ(AUDIO, Range.atMost(Year.of(2023)), null, true)  {
         @Override
         public String toString() {
-            return "FunX Raggae";
+            return "FunX Reggae";
         }
     },
     @XmlEnumValue("FUNS")
@@ -2310,6 +2310,17 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "FunX Fissa";
+        }
+    },
+
+    /**
+     * @since 7.11
+     */
+    @XmlEnumValue("FUNO")
+    FUNO(AUDIO, null, "https://www.funx.nl/afro/online-radio-luisteren", true)  {
+        @Override
+        public String toString() {
+            return "FunX Afro";
         }
     },
 
@@ -2463,7 +2474,7 @@ public enum Channel implements Displayable, XmlValued {
     BRNL(VIDEO, "https://classica.stingray.com", 1995) {
         @Override
         public String toString() {
-            return "Stringray brava";
+            return "Stringray Classica";
         }
     },
     @XmlEnumValue("BRHD")
@@ -2759,11 +2770,35 @@ public enum Channel implements Displayable, XmlValued {
      * @since 5.30
      */
     @XmlEnumValue("SPID")
-    SPID(VIDEO, "https://www.spiketv.nl/", 2015) {
+    SPID(VIDEO, Range.closed(Year.of(2014), Year.of(2022)), "https://www.spiketv.nl/", null) {
         @Override
         public String toString() {
             return "Spike Nederland";
         }
+    },
+
+    /**
+     * @since 7.3
+     */
+    @XmlEnumValue("PRMT")
+    PRMT(VIDEO, "https://www.paramountnetwork.nl/", 2022) {
+        @Override
+        public String toString() {
+            return "Paramount Network Nederland";
+        }
+    },
+
+    /**
+     * @since 7.11
+     */
+
+    @XmlEnumValue("BLND")
+    BLND(AUDIO, "https://npoblend.nl", 2024) {
+        @Override
+        public String toString() {
+            return "NPO Blend";
+        }
+
     },
 
     /**
@@ -2776,6 +2811,18 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "TEST CHANNEL";
+        }
+    },
+    /**
+     * This is not a real channel. It can be used for testing or mocking purposes.
+     *
+     * @since 7.10
+     */
+    @XmlEnumValue("XXXY")
+    XXXY() {
+        @Override
+        public String toString() {
+            return "TEST CHANNEL 2";
         }
     }
     ;
