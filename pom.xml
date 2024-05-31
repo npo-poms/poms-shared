@@ -8,7 +8,7 @@
   </parent>
 
   <name>poms shared</name>
-  <version>6.0.5-SNAPSHOT</version>
+  <version>6.0.5</version>
   <artifactId>poms-shared-parent</artifactId>
   <packaging>pom</packaging>
 
@@ -23,7 +23,7 @@
      <connection>scm:git:${project.scm.url}</connection>
      <developerConnection>scm:git:${project.scm.url}</developerConnection>
      <url>https://github.com/npo-poms/poms-shared.git</url>
-     <tag>REL-6.0-SNAPSHOT</tag>
+     <tag>REL-6.0.5</tag>
   </scm>
 
 
