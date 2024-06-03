@@ -99,6 +99,7 @@ public enum OwnerType implements Displayable {
      * @since 1.4
      * @deprecated  Not used any more since ~ 2016?
      */
+    @Deprecated
     WHATS_ON("Whats'On"),
 
     /**
