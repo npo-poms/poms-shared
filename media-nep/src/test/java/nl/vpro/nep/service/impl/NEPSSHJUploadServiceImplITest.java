@@ -3,8 +3,11 @@ package nl.vpro.nep.service.impl;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
+import net.schmizz.sshj.common.StreamCopier;
 import net.schmizz.sshj.sftp.RemoteResourceInfo;
 import net.schmizz.sshj.sftp.SFTPClient;
+import net.schmizz.sshj.xfer.FileSystemFile;
+import net.schmizz.sshj.xfer.TransferListener;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -15,13 +18,17 @@ import java.util.List;
 import java.util.concurrent.*;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import nl.vpro.i18n.Locales;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
+import nl.vpro.test.jupiter.TimingExtension;
 import nl.vpro.util.FileCachingInputStream;
+import nl.vpro.util.FileSizeFormatter;
 
 import static nl.vpro.util.FileCachingInputStream.throttle;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
  * @author Michiel Meeuwissen
@@ -29,6 +36,7 @@ import static nl.vpro.util.FileCachingInputStream.throttle;
  */
 @Slf4j
 @Disabled("Actual uploading, needs local file")
+@ExtendWith(TimingExtension.class)
 public class NEPSSHJUploadServiceImplITest {
 
     SimpleLogger simpleLogger = Slf4jSimpleLogger.of(log);
@@ -102,9 +110,50 @@ public class NEPSSHJUploadServiceImplITest {
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
+
+    @Test
+    public void uploadHugeSshjScpFileTransfer() throws Exception {
+          final File file = new File(files[0]);
+          FileCachingInputStream in = FileCachingInputStream.builder()
+              .input(new FileInputStream(file))
+              .downloadFirst(false)
+              .batchSize(impl.getBatchSize())
+              .progressLoggingBatch(50)
+              .logger(log)
+              .build();
+          String filename = "test.1235";
+        try (SSHClient ssh = impl.createClient().get()) {
+            var scp = ssh.newSCPFileTransfer();
+            scp.setTransferListener(new TransferListener() {
+                @Override
+                public TransferListener directory(String name) {
+                    return this;
+                }
+                long lastLog = 0;
+                @Override
+                public StreamCopier.Listener file(String name, long size) {
+                    return l -> {
+                        if (l - lastLog > 10_000_000) {
+                            lastLog = l;
+                            log.info("{}/{}",
+                                FileSizeFormatter.SI.format(l),
+                                FileSizeFormatter.SI.format(file.length())
+                            );
+                        }
+                    };
+                }
+            });
+
+            scp.upload(
+                new FileSystemFile(in.getTempFile().toFile()), "/" + filename
+            );
+        }
+    }
+
     @Test
     @SneakyThrows
     public void async() {
+        assumeTrue(files.length % 2 == 0);
         List<ForkJoinTask<?>> tasks = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             tasks.add(ForkJoinPool.commonPool().submit(upload(new File(files[i % 2]), "test." + i)));
