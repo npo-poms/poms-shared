@@ -189,7 +189,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 if (sftpException.getCause() != null) {
                     e = sftpException.getCause();
                 }
-                logger.warn("error from sftp: {}", e.getMessage(), e);
+                logger.warn("error from sftp: {} {}", nepFile, e.getMessage(), e);
                 if (e instanceof TimeoutException) {
                     if (numberOfBytes == size) {
                         log.info("But the number of transferred bytes is correct. So we assume it is ok");
