@@ -12,11 +12,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.ForkJoinTask;
+import java.util.concurrent.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import nl.vpro.i18n.Locales;
 import nl.vpro.logging.simple.SimpleLogger;
@@ -30,7 +28,7 @@ import static nl.vpro.util.FileCachingInputStream.throttle;
  * @since 5.5
  */
 @Slf4j
-//@Ignore("Actuall uploading")
+@Disabled("Actual uploading, needs local file")
 public class NEPSSHJUploadServiceImplITest {
 
     SimpleLogger simpleLogger = Slf4jSimpleLogger.of(log);
@@ -40,7 +38,7 @@ public class NEPSSHJUploadServiceImplITest {
     Instant start = Instant.now();
 
 
-    private final String[] files = new String[] {"/Users/michiel/samples/huge.mxf"};
+    private final String[] files = new String[] {"/Users/michiel/samples/PieterWinsemius_nieuw.mp3"};
     //, "/Users/michiel/npo/media/huge2.mp4"};
 
 
@@ -92,7 +90,7 @@ public class NEPSSHJUploadServiceImplITest {
         InputStream fileInputStream = Files.newInputStream(file.toPath());
         try (FileCachingInputStream in = FileCachingInputStream.builder()
             .input(fileInputStream)
-            .downloadFirst(false)
+            .downloadFirst(true)
             .batchSize(impl.getBatchSize())
             .progressLoggingBatch(50)
             .logger(log)
@@ -137,5 +135,12 @@ public class NEPSSHJUploadServiceImplITest {
             }
             log.info("Took {}", Duration.between(start, Instant.now()));
         };
+    }
+
+
+    @AfterAll
+    public static void shutdown() {
+        log.info("Shutting down");
+        ForkJoinPool.commonPool().awaitQuiescence(10, TimeUnit.SECONDS);
     }
 }
