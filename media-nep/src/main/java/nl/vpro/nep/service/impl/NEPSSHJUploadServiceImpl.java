@@ -120,7 +120,9 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             final SSHClientFactory.ClientHolder client = createClient();
             final SFTPClient sftp = client.get().newSFTPClient()
         ) {
-            sftp.getSFTPEngine().setTimeoutMs((int) sftpTimeout.toMillis());
+            var engine = sftp.getSFTPEngine();
+            engine.setTimeoutMs((int) sftpTimeout.toMillis());
+
             final int split  = nepFile.lastIndexOf('/');
             if (split > 0) {
                 sftp.mkdirs(nepFile.substring(0, split));
@@ -134,7 +136,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             long numberOfBytes = 0;
             try (
                 final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
-                final OutputStream out = handle.new RemoteFileOutputStream()
+                final RemoteFile.RemoteFileOutputStream out = handle.new RemoteFileOutputStream()
             ) {
                 final byte[] buffer = new byte[batchSize];
                 long prevBatchCount = -1;

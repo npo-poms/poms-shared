@@ -19,6 +19,8 @@ import java.util.concurrent.*;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import nl.vpro.i18n.Locales;
 import nl.vpro.logging.simple.SimpleLogger;
@@ -111,8 +113,9 @@ public class NEPSSHJUploadServiceImplITest {
     }
 
 
-    @Test
-    public void uploadHugeSshjScpFileTransfer() throws Exception {
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    public void uploadHugeSshjSftpFileTransfer(boolean preserveAttributes) throws Exception {
           final File file = new File(files[0]);
           FileCachingInputStream in = FileCachingInputStream.builder()
               .input(new FileInputStream(file))
@@ -123,28 +126,11 @@ public class NEPSSHJUploadServiceImplITest {
               .build();
           String filename = "test.1235";
         try (SSHClient ssh = impl.createClient().get()) {
-            var scp = ssh.newSCPFileTransfer();
-            scp.setTransferListener(new TransferListener() {
-                @Override
-                public TransferListener directory(String name) {
-                    return this;
-                }
-                long lastLog = 0;
-                @Override
-                public StreamCopier.Listener file(String name, long size) {
-                    return l -> {
-                        if (l - lastLog > 10_000_000) {
-                            lastLog = l;
-                            log.info("{}/{}",
-                                FileSizeFormatter.SI.format(l),
-                                FileSizeFormatter.SI.format(file.length())
-                            );
-                        }
-                    };
-                }
-            });
-
-            scp.upload(
+            var scp = ssh.newSFTPClient();
+            var filet = scp.getFileTransfer();
+            filet.setPreserveAttributes(preserveAttributes);
+            filet.setTransferListener(new Listener(file.length()));
+            filet.upload(
                 new FileSystemFile(in.getTempFile().toFile()), "/" + filename
             );
         }
@@ -192,4 +178,31 @@ public class NEPSSHJUploadServiceImplITest {
         log.info("Shutting down");
         ForkJoinPool.commonPool().awaitQuiescence(10, TimeUnit.SECONDS);
     }
+
+    public static class Listener implements TransferListener {
+
+        private final String fileSize;
+
+        public Listener(long size) {
+            this.fileSize = FileSizeFormatter.SI.format(size);
+        }
+
+        @Override
+        public TransferListener directory(String name) {
+            return this;
+        }
+        long lastLog = 0;
+        @Override
+        public StreamCopier.Listener file(String name, long size) {
+            return l -> {
+                if (l - lastLog > 10_000_000) {
+                    lastLog = l;
+                    log.info("{}/{}",
+                        FileSizeFormatter.SI.format(l),
+                        fileSize
+                    );
+                }
+            };
+        }
+    };
 }
