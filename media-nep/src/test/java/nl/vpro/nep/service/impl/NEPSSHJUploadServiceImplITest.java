@@ -17,14 +17,12 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import nl.vpro.i18n.Locales;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
-import nl.vpro.test.jupiter.TimingExtension;
 import nl.vpro.util.FileCachingInputStream;
 
 import static nl.vpro.util.FileCachingInputStream.throttle;
@@ -36,7 +34,6 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
  */
 @Slf4j
 @Disabled("Actual uploading, needs local file")
-@ExtendWith(TimingExtension.class)
 public class NEPSSHJUploadServiceImplITest {
 
     SimpleLogger simpleLogger = Slf4jSimpleLogger.of(log);
