@@ -2,9 +2,14 @@ package nl.vpro.nep.service.impl;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import net.schmizz.sshj.common.StreamCopier;
 import net.schmizz.sshj.sftp.*;
+import net.schmizz.sshj.xfer.FileSystemFile;
+import net.schmizz.sshj.xfer.TransferListener;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.EnumSet;
@@ -12,8 +17,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Supplier;
 
-import javax.annotation.PreDestroy;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -55,7 +59,9 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
      */
     private Duration sftpTimeout = Duration.ofSeconds(5);
 
-    private int  batchSize = 1024 * 1024 * 5;
+    private int batchSize = 1024 * 1024 * 5;
+
+    private boolean preserveAttributes = false;
 
 
     @Inject
@@ -91,13 +97,14 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, sftpHost, hostKey);
     }
 
-    @PreDestroy
-    public void destroy() {
-
-    }
 
     private static final FileSizeFormatter FORMATTER = FileSizeFormatter.DEFAULT;
 
+
+    /**
+     * See MSE-5800. This below implementation will always result in file attributes to be set. Which as of 2024-06-04 suddenly seems to be a problem.
+     * Using {@link #upload(SimpleLogger, String, Long, Path, boolean)} this is worked around (unless #{preserveAttributes} is set to true)
+     */
     @Override
     public long upload(
         final @NonNull SimpleLogger logger,
@@ -109,33 +116,16 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         final Instant start = Instant.now();
         final long infoBatch = 1;
 
-
-        log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
-        logger.info(
-            en("Uploading to {}:{}")
-                .nl("Uploaden naar {}:{}")
-                .slf4jArgs(sftpHost, nepFile)
-        );
-        try(
+        try (
             final SSHClientFactory.ClientHolder client = createClient();
             final SFTPClient sftp = client.get().newSFTPClient()
         ) {
-            var engine = sftp.getSFTPEngine();
-            engine.setTimeoutMs((int) sftpTimeout.toMillis());
-
-            final int split  = nepFile.lastIndexOf('/');
-            if (split > 0) {
-                sftp.mkdirs(nepFile.substring(0, split));
-            }
-            if (! replaces) {
-                if (!checkExistence(logger, sftp, nepFile, size)) {
-                    log.info("File {} already exists, not replacing", nepFile);
-                    return -1;
-                }
+            if (!setup(sftp, logger, nepFile, size, replaces)) {
+                return -1;
             }
             long numberOfBytes = 0;
             try (
-                final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
+                final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE), null);
                 final RemoteFile.RemoteFileOutputStream out = handle.new RemoteFileOutputStream()
             ) {
                 final byte[] buffer = new byte[batchSize];
@@ -182,8 +172,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                             FORMATTER.formatSpeed(numberOfBytes, duration))
                 );
 
-                assert  handle.length() == numberOfBytes;
-                assert  numberOfBytes == size;
+                assert handle.length() == numberOfBytes;
+                assert numberOfBytes == size;
 
                 return numberOfBytes;
             } catch (SFTPException sftpException) {
@@ -203,8 +193,84 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         }
     }
 
+    @Override
+    public long upload(
+        final @NonNull SimpleLogger logger,
+        final @NonNull String nepFile,
+        final @NonNull Long size,
+        final @NonNull Path incomingStream,
+        final boolean replaces) throws IOException {
+
+
+        try (final Listener listener = new NEPSSHJUploadServiceImpl.Listener(logger, size)) {
+            try (
+
+                final SSHClientFactory.ClientHolder client = createClient();
+                final SFTPClient sftp = client.get().newSFTPClient()
+            ) {
+                if (!setup(sftp, logger, nepFile, size, replaces)) {
+                    return -1;
+                }
+
+                try (var holder = createClient();
+                     var ssh = holder.get()) {
+                    var scp = ssh.newSFTPClient();
+                    var filet = scp.getFileTransfer();
+                    filet.setPreserveAttributes(preserveAttributes);
+                    filet.setTransferListener(listener);
+                    filet.upload(
+                        new FileSystemFile(incomingStream.toFile()), nepFile
+                    );
+                }
+
+
+            } catch (SFTPException sftpException) {
+                Throwable e = sftpException;
+                if (sftpException.getCause() != null) {
+                    e = sftpException.getCause();
+                }
+                logger.warn("error from sftp: {} {}", nepFile, e.getMessage(), e);
+                if (e instanceof TimeoutException) {
+                    if (listener.numberOfBytes == size) {
+                        log.info("But the number of transferred bytes is correct. So we assume it is ok");
+                        return listener.numberOfBytes;
+                    }
+                }
+                throw sftpException;
+            }
+            return listener.numberOfBytes;
+        }
+    }
+
+
+    private boolean setup(SFTPClient sftp, SimpleLogger logger, String nepFile, long size, boolean replaces) throws IOException {
+
+        log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
+        logger.info(
+            en("Uploading to {}:{}")
+                .nl("Uploaden naar {}:{}")
+                .slf4jArgs(sftpHost, nepFile)
+        );
+        var engine = sftp.getSFTPEngine();
+        engine.setTimeoutMs((int) sftpTimeout.toMillis());
+
+        final int split = nepFile.lastIndexOf('/');
+        if (split > 0) {
+            sftp.mkdirs(nepFile.substring(0, split));
+        }
+        if (!replaces) {
+            if (!checkExistence(logger, sftp, nepFile, size)) {
+                log.info("File {} already exists, not replacing", nepFile);
+                return false;
+
+            }
+        }
+        return true;
+    }
+
     /**
      * Checks whether the file is already existing on the remote end, and has the expected size.
+     *
      * @return false if the file is already there and has the expected size, true if it is not there or has a different size.
      */
     private boolean checkExistence(
@@ -282,7 +348,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         this.batchSize = batchSize;
     }
 
-    private Supplier<IllegalArgumentException> couldNotParse(String string){
+    private Supplier<IllegalArgumentException> couldNotParse(String string) {
         return () -> new IllegalArgumentException("could not parse " + string);
     }
 
@@ -300,9 +366,53 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
         log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport());
         return client;
-
     }
 
 
+    public class Listener implements TransferListener, AutoCloseable {
 
+        private long numberOfBytes;
+        private final String fileSize;
+        private final SimpleLogger logger;
+
+        public Listener(SimpleLogger logger, long size) {
+            numberOfBytes = size;
+            this.logger = logger;
+            this.fileSize = FORMATTER.format(size);
+        }
+
+        @Override
+        public TransferListener directory(String name) {
+            return this;
+        }
+
+        long lastLog = 0;
+
+        @Override
+        public StreamCopier.Listener file(String name, long size) {
+            return l -> {
+                numberOfBytes = size;
+                if (l - lastLog > 10_000_000) {
+                    log();
+                }
+            };
+        }
+
+        public void log() {
+            lastLog = numberOfBytes;
+            logger.info("{}/{}",
+                FORMATTER.format(numberOfBytes),
+                fileSize
+            );
+        }
+
+        @Override
+        public void close() {
+            if (lastLog != numberOfBytes) {
+                log();
+            }
+        }
+    }
 }
+
+
