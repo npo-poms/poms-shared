@@ -192,7 +192,10 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         final @NonNull Path incomingStream,
         final boolean replaces) throws IOException {
 
-
+        logger.info(
+            en("Uploading temp file {}")
+                .nl("Uploaden tijdelijk bestand")
+                .slf4jArgs(incomingStream));
         try (final Listener listener = new NEPSSHJUploadServiceImpl.Listener(logger, nepFile, size)) {
             try (
 
