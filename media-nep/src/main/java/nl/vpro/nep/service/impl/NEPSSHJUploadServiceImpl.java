@@ -17,7 +17,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Supplier;
 
-import jakarta.inject.Inject;
+import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
