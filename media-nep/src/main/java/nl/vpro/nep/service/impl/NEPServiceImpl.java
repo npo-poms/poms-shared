@@ -3,6 +3,7 @@ package nl.vpro.nep.service.impl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
@@ -141,6 +142,12 @@ public class NEPServiceImpl implements NEPService {
     public long upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull InputStream stream, boolean replaces) throws IOException {
         return nepftpUploadService.get().upload(logger, nepFile, size, stream, replaces);
     }
+
+    @Override
+    public long upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull Path stream, boolean replaces) throws IOException {
+        return nepftpUploadService.get().upload(logger, nepFile, size, stream, replaces);
+    }
+
 
     @Override
     public String getUploadString() {

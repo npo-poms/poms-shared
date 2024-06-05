@@ -3,11 +3,9 @@ package nl.vpro.nep.service.impl;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
-import net.schmizz.sshj.common.StreamCopier;
 import net.schmizz.sshj.sftp.RemoteResourceInfo;
 import net.schmizz.sshj.sftp.SFTPClient;
 import net.schmizz.sshj.xfer.FileSystemFile;
-import net.schmizz.sshj.xfer.TransferListener;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -15,7 +13,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinTask;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +26,6 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.test.jupiter.TimingExtension;
 import nl.vpro.util.FileCachingInputStream;
-import nl.vpro.util.FileSizeFormatter;
 
 import static nl.vpro.util.FileCachingInputStream.throttle;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
@@ -93,6 +91,26 @@ public class NEPSSHJUploadServiceImplITest {
     }
 
     @Test
+    public void uploadHugeWithFile() throws Exception {
+        File file = new File(files[0]);
+        String filename = "test.1235";
+        InputStream fileInputStream = Files.newInputStream(file.toPath());
+
+        try (FileCachingInputStream in = FileCachingInputStream.builder()
+            .input(fileInputStream)
+            .downloadFirst(false)
+            .batchSize(impl.getBatchSize())
+            .progressLoggingBatch(50)
+            .logger(log)
+            //.batchSize(5000)
+            .batchConsumer(throttle(Duration.ofMillis(10)))
+            .build()) {
+            impl.upload(simpleLogger, filename, file.length(), in.getTempFile(), true);
+        }
+        log.info("Took {}", Duration.between(start, Instant.now()));
+    }
+
+    @Test
     public void uploadHugeWithCaching() throws Exception {
         Locales.setDefault(Locales.DUTCH);
         File file = new File(files[0]);
@@ -100,7 +118,7 @@ public class NEPSSHJUploadServiceImplITest {
         InputStream fileInputStream = Files.newInputStream(file.toPath());
         try (FileCachingInputStream in = FileCachingInputStream.builder()
             .input(fileInputStream)
-            .downloadFirst(true)
+            .downloadFirst(false)
             .batchSize(impl.getBatchSize())
             .progressLoggingBatch(50)
             .logger(log)
@@ -129,7 +147,7 @@ public class NEPSSHJUploadServiceImplITest {
             var scp = ssh.newSFTPClient();
             var filet = scp.getFileTransfer();
             filet.setPreserveAttributes(preserveAttributes);
-            filet.setTransferListener(new Listener(file.length()));
+            filet.setTransferListener(impl.new Listener(Slf4jSimpleLogger.of(log), file.length()));
             filet.upload(
                 new FileSystemFile(in.getTempFile().toFile()), "/" + filename
             );
@@ -173,36 +191,4 @@ public class NEPSSHJUploadServiceImplITest {
     }
 
 
-    @AfterAll
-    public static void shutdown() {
-        log.info("Shutting down");
-        ForkJoinPool.commonPool().awaitQuiescence(10, TimeUnit.SECONDS);
-    }
-
-    public static class Listener implements TransferListener {
-
-        private final String fileSize;
-
-        public Listener(long size) {
-            this.fileSize = FileSizeFormatter.SI.format(size);
-        }
-
-        @Override
-        public TransferListener directory(String name) {
-            return this;
-        }
-        long lastLog = 0;
-        @Override
-        public StreamCopier.Listener file(String name, long size) {
-            return l -> {
-                if (l - lastLog > 10_000_000) {
-                    lastLog = l;
-                    log.info("{}/{}",
-                        FileSizeFormatter.SI.format(l),
-                        fileSize
-                    );
-                }
-            };
-        }
-    };
 }
