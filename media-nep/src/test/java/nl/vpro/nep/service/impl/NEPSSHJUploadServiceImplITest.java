@@ -144,7 +144,7 @@ public class NEPSSHJUploadServiceImplITest {
             var scp = ssh.newSFTPClient();
             var filet = scp.getFileTransfer();
             filet.setPreserveAttributes(preserveAttributes);
-            filet.setTransferListener(impl.new Listener(Slf4jSimpleLogger.of(log), file.length()));
+            filet.setTransferListener(impl.new Listener(Slf4jSimpleLogger.of(log), filename, file.length()));
             filet.upload(
                 new FileSystemFile(in.getTempFile().toFile()), "/" + filename
             );

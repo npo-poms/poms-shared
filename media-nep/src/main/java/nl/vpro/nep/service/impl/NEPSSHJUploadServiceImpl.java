@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.util.EnumSet;
 import java.util.Properties;
 import java.util.concurrent.TimeoutException;
+import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
 import javax.inject.Inject;
@@ -161,21 +162,11 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                     }
                 }
                 out.flush();
-                final Duration duration = Duration.between(start, Instant.now());
-                logger.info(
-                    en("Ready uploading {}/{} (took {}, {})")
-                        .nl("Klaar met uploaden van {}/{} (kostte: {}, {})")
-                        .slf4jArgs(
-                            FORMATTER.format(numberOfBytes),
-                            FORMATTER.format(size),
-                            duration,
-                            FORMATTER.formatSpeed(numberOfBytes, duration))
-                );
-
                 assert handle.length() == numberOfBytes;
                 assert numberOfBytes == size;
 
-                return numberOfBytes;
+                final long finalNumberOfBytes = numberOfBytes;
+                return setdown(start, () -> finalNumberOfBytes, size, logger);
             } catch (SFTPException sftpException) {
                 Throwable e = sftpException;
                 if (sftpException.getCause() != null) {
@@ -202,7 +193,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         final boolean replaces) throws IOException {
 
 
-        try (final Listener listener = new NEPSSHJUploadServiceImpl.Listener(logger, size)) {
+        try (final Listener listener = new NEPSSHJUploadServiceImpl.Listener(logger, nepFile, size)) {
             try (
 
                 final SSHClientFactory.ClientHolder client = createClient();
@@ -233,12 +224,11 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 if (e instanceof TimeoutException) {
                     if (listener.numberOfBytes == size) {
                         log.info("But the number of transferred bytes is correct. So we assume it is ok");
-                        return listener.numberOfBytes;
                     }
                 }
                 throw sftpException;
             }
-            return listener.numberOfBytes;
+            return setdown(listener.start, () -> listener.numberOfBytes, size, logger);
         }
     }
 
@@ -266,6 +256,22 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             }
         }
         return true;
+    }
+
+    private long setdown(Instant start, LongSupplier numberOfBytesSup, long size, SimpleLogger logger) {
+        final Duration duration = Duration.between(start, Instant.now());
+        long numberOfBytes = numberOfBytesSup.getAsLong();
+        assert numberOfBytes == size;
+        logger.info(
+            en("Ready uploading {}/{} (took {}, {})")
+                        .nl("Klaar met uploaden van {}/{} (kostte: {}, {})")
+                .slf4jArgs(
+                    FORMATTER.format(numberOfBytes),
+                    FORMATTER.format(size),
+                    duration,
+                    FORMATTER.formatSpeed(numberOfBytes, duration))
+        );
+        return numberOfBytes;
     }
 
     /**
@@ -374,11 +380,18 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         private long numberOfBytes;
         private final String fileSize;
         private final SimpleLogger logger;
+        private final String nepFile;
+        final Instant start = Instant.now();
 
-        public Listener(SimpleLogger logger, long size) {
+        long prevBatchCount = -1;
+        long batchCount = 0;
+
+
+        public Listener(SimpleLogger logger, String nepFile, long size) {
             numberOfBytes = size;
             this.logger = logger;
             this.fileSize = FORMATTER.format(size);
+            this.nepFile = nepFile;
         }
 
         @Override
@@ -391,19 +404,35 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         @Override
         public StreamCopier.Listener file(String name, long size) {
             return l -> {
-                numberOfBytes = size;
-                if (l - lastLog > 10_000_000) {
-                    log();
-                }
+                numberOfBytes = l;
+                log();
             };
         }
 
         public void log() {
             lastLog = numberOfBytes;
-            logger.info("{}/{}",
-                FORMATTER.format(numberOfBytes),
-                fileSize
-            );
+            final long infoBatch = 1;
+
+
+             batchCount = numberOfBytes / (batchSize * infoBatch);
+            if (prevBatchCount != batchCount) {
+                prevBatchCount = batchCount;
+                final Duration duration = Duration.between(start, Instant.now());
+
+                // updating spans in ngToast doesn't work...
+                logger.info(
+                    en("Uploaded {}/{} to {}:{} ({})")
+                        .nl("Geüpload {}/{} naar {}:{} ({})")
+                        .slf4jArgs(
+                            FORMATTER.format(numberOfBytes),
+                            fileSize,
+                            sftpHost, nepFile,
+                            FORMATTER.formatSpeed(numberOfBytes, duration)
+                        )
+                );
+            } else {
+                log.debug("Uploaded {}/{} bytes to NEP", FORMATTER.format(numberOfBytes), fileSize);
+            }
         }
 
         @Override
