@@ -716,7 +716,7 @@ public class MediaObjects {
             for (Segment segment : program.getSegments()) {
                 result += removeUnpublishedSubObjects(segment);
             }
-            result += removeIf(((Program) media).getEpisodeOf(), m -> m.getGroup().getWorkflow() != Workflow.PUBLISHED);
+            result += removeIf(program.getEpisodeOf(), m -> m.getGroup().getWorkflow() != Workflow.PUBLISHED);
         }
 
         return result;
