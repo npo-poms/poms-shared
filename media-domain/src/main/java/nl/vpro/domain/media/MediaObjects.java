@@ -662,7 +662,7 @@ public class MediaObjects {
 
         setWorkflowPublishedSubObjects(media.getLocations());
         setWorkflowPublishedSubObjects(media.getImages());
-        setWorkflowPublishedAvailableSubtitles(MediaObjects.subtitlesMayBePublished(media) , media.getAvailableSubtitles());
+        setWorkflowPublishedAvailableSubtitles(media);
         return previous;
     }
 
@@ -687,13 +687,13 @@ public class MediaObjects {
         }
     }
 
-     private static void setWorkflowPublishedAvailableSubtitles(boolean subtitlesMayBePUblished, Collection<? extends AvailableSubtitles> publishables) {
-         for(AvailableSubtitles po : publishables) {
-            if (SubtitlesWorkflow.NEEDS_WORK.contains(po.getWorkflow())) {
-                po.setWorkflow(po.getWorkflow().getDest());
+     private static void setWorkflowPublishedAvailableSubtitles(MediaObject media) {
+         for(AvailableSubtitles availableSubtitles : media.getAvailableSubtitles()) {
+            if (SubtitlesWorkflow.NEEDS_WORK.contains(availableSubtitles.getWorkflow())) {
+                availableSubtitles.setWorkflow(availableSubtitles.getWorkflow().getDest());
             }
-            if (! subtitlesMayBePUblished && po.getWorkflow() == SubtitlesWorkflow.PUBLISHED) {
-                log.warn("Subtitels published for unpublised media {}", po);
+            if (! subtitlesMayBePublished( media) && availableSubtitles.getWorkflow() == SubtitlesWorkflow.PUBLISHED) {
+                log.warn("Subtitles {} published for unpublished media {}", availableSubtitles, media);
             }
         }
     }
