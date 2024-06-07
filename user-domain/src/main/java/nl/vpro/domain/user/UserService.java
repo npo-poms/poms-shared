@@ -315,6 +315,19 @@ public interface UserService<T extends User> {
         @Override
         public abstract void close();
 
+        public Logout<S> withUser(S user) {
+            return new Logout<>() {
+                {
+                    setUser(user);
+                }
+
+                @Override
+                public void close() {
+                    Logout.this.close();
+                }
+            };
+        }
+
 
         public void setUser(S user) {
             if (this.user != null) {
