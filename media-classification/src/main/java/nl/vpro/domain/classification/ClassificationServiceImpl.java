@@ -223,6 +223,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
             }
         }, pollIntervalInMillis, pollIntervalInMillis, TimeUnit.MILLISECONDS);
     }
+
     private void watchOnADecentFileSystem(final File directory) throws IOException {
         final Path watchedPath = Paths.get(directory.getAbsolutePath());
         final WatchService watcher = watchedPath.getFileSystem().newWatchService();
@@ -234,24 +235,30 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         );
         Callable<Void> callable = () -> {
             log.info("Watching " + directory);
+            Thread.currentThread().setName("Watcher for " + directory);
             while (true) {
                 try {
                     WatchKey key = watcher.take();
-                    for (WatchEvent<?> event : key.pollEvents()) {
-                        if (String.valueOf(event.context()).endsWith(".xml")) {
-                            log.info(event.kind() + " " + event.context());
-                            List<InputSource> sources = getSources(false);
-                            if (sources != null) {
-                                ClassificationServiceImpl.this.terms = readTerms(sources);
+                    try {
+                        for (WatchEvent<?> event : key.pollEvents()) {
+                            if (String.valueOf(event.context()).endsWith(".xml")) {
+                                log.info(event.kind() + " " + event.context());
+                                List<InputSource> sources = getSources(false);
+                                if (sources != null) {
+                                    ClassificationServiceImpl.this.terms = readTerms(sources);
+                                }
+                                break;
+                            } else {
+                                log.debug("Ignored {} {}", event.kind(), event.context());
                             }
-                            break;
-                        } else {
-                            log.debug("Ignored {} {}", event.kind(), event.context());
                         }
+                    } catch (Exception e) {
+                        log.error(e.getMessage(), e);
+                    } finally {
+                        key.reset();
                     }
-                    key.reset();
                 } catch (InterruptedException e) {
-                    log.info("Interrupted watcher");
+                    log.info("Interrupted watcher for " + directory);
                     Thread.currentThread().interrupt();
                     break;
                 }
