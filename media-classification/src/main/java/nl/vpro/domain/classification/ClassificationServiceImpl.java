@@ -5,16 +5,18 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.xml.sax.InputSource;
+
+import nl.vpro.util.DirectoryWatcher;
 
 import static java.util.Objects.requireNonNull;
 
@@ -194,7 +196,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                 try {
                     watchOnADecentFileSystem(directory);
                 } catch (IOException e) {
-                    log.warn(e.getMessage());
+                    log.error(e.getClass() + " " + e.getMessage(), e);
                     pollingWatchDirectory(directory);
                 }
             }
@@ -225,47 +227,19 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
     }
 
     private void watchOnADecentFileSystem(final File directory) throws IOException {
+
         final Path watchedPath = Paths.get(directory.getAbsolutePath());
-        final WatchService watcher = watchedPath.getFileSystem().newWatchService();
-        watchedPath.register(
-            watcher,
-            StandardWatchEventKinds.ENTRY_CREATE,
-            StandardWatchEventKinds.ENTRY_MODIFY,
-            StandardWatchEventKinds.ENTRY_DELETE
-        );
-        Callable<Void> callable = () -> {
-            log.info("Watching " + directory);
-            Thread.currentThread().setName("Watcher for " + directory);
-            while (true) {
+        DirectoryWatcher watcher = new DirectoryWatcher(watchedPath, (f) -> {
+            log.info("Found change in {}", f);
+            List<InputSource> sources = getSources(false);
+            if (sources != null) {
                 try {
-                    WatchKey key = watcher.take();
-                    try {
-                        for (WatchEvent<?> event : key.pollEvents()) {
-                            if (String.valueOf(event.context()).endsWith(".xml")) {
-                                log.info(event.kind() + " " + event.context());
-                                List<InputSource> sources = getSources(false);
-                                if (sources != null) {
-                                    ClassificationServiceImpl.this.terms = readTerms(sources);
-                                }
-                                break;
-                            } else {
-                                log.debug("Ignored {} {}", event.kind(), event.context());
-                            }
-                        }
-                    } catch (Exception e) {
-                        log.error(e.getMessage(), e);
-                    } finally {
-                        key.reset();
-                    }
-                } catch (InterruptedException e) {
-                    log.info("Interrupted watcher for " + directory);
-                    Thread.currentThread().interrupt();
-                    break;
+                    ClassificationServiceImpl.this.terms = readTerms(sources);
+                } catch (ParserConfigurationException e) {
+                    log.error(e.getMessage(), e);
                 }
             }
-            return null;
-        };
-        executorService.submit(callable);
+        }, (f) -> f.getFileName().toString().endsWith(".xml"));
     }
 
     @Override

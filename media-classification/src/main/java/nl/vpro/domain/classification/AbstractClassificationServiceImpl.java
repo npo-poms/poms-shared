@@ -4,9 +4,6 @@
  */
 package nl.vpro.domain.classification;
 
-import jakarta.annotation.PreDestroy;
-import jakarta.xml.bind.JAXB;
-
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
@@ -16,6 +13,8 @@ import java.util.stream.Collectors;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.*;
 import javax.xml.transform.dom.DOMSource;
+import jakarta.annotation.PreDestroy;
+import jakarta.xml.bind.JAXB;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -156,6 +155,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
     protected SortedMap<TermId, Term> readTerms(Iterable<InputSource> streams) throws ParserConfigurationException {
         SortedMap<TermId, Term> result = new TreeMap<>();
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);//"http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
         factory.setNamespaceAware(true);
         final DocumentBuilder  builder = factory.newDocumentBuilder();
