@@ -96,7 +96,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
                 throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
             }
 
-            this.loginResponse = Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), LoginResponse.class);
+            this.loginResponse = LENIENT.readValue(response.getEntity().getContent(), LoginResponse.class);
             this.responseInstant = Instant.now();
             log.info("Acquired {} (expires {})", this.loginResponse, getExpiration());
         }
