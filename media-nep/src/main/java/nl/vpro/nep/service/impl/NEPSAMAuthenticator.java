@@ -45,6 +45,8 @@ import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
 @Slf4j
 @ManagedResource
 public class NEPSAMAuthenticator implements Supplier<String> {
+
+    private static final Jackson2Mapper LENIENT = Jackson2Mapper.getLenientInstance();
     private final LoginRequest loginRequest;
     @VisibleForTesting
     LoginResponse loginResponse;
