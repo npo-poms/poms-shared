@@ -10,10 +10,19 @@ interface OrganizationRepository {
 
     <T extends Organization> List<T> findAll(Class<T> clazz);
 
+    /**
+     * @return {@code null} if the entity does not exist
+     */
     <T extends Organization> T get(String id, Class<T> clazz);
 
+    /**
+     * TODO: what should this do if not found?
+     */
     <T extends Organization> T getByProperty(String property, String value, Class<T> clazz);
 
+    /**
+     * TODO: what should this do if not found?
+     */
     <T extends Organization> T getByPropertyIgnoreCase(String property, String value, Class<T> clazz);
 
     <T extends Organization> T merge(T broadcaster);
