@@ -76,8 +76,8 @@ public enum MediaSortField implements SortField {
     lastPublished(INSTANT),
 
 
-    lastModifiedBy(Type.STRING),
-    createdBy(Type.STRING),
+    lastModifiedBy(Type.STRING, null, null),
+    createdBy(Type.STRING, null, null),
 
     /**
      * Sort on location count
