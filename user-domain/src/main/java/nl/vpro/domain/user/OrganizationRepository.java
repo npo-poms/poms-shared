@@ -16,12 +16,12 @@ interface OrganizationRepository {
     <T extends Organization> T get(String id, Class<T> clazz);
 
     /**
-     * TODO: what should this do if not found?
+     * @return {@code null} if the entity cannot be found
      */
     <T extends Organization> T getByProperty(String property, String value, Class<T> clazz);
 
     /**
-     * TODO: what should this do if not found?
+     * @return {@code null} if the entity cannot be found
      */
     <T extends Organization> T getByPropertyIgnoreCase(String property, String value, Class<T> clazz);
 
