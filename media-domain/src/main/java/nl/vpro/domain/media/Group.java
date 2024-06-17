@@ -71,14 +71,6 @@ public final class Group extends MediaObject {
     @NotNull Boolean isOrdered = true;
 
 
-    /**
-     * Not persistent, never filled? What is this, should it not be dropped?
-     */
-    @XmlAttribute
-    @Getter
-    @Setter
-    private Long defaultElement;
-
     @Column
     @XmlElement
     @Getter
@@ -115,7 +107,6 @@ public final class Group extends MediaObject {
         this.type = source.type;
         this.isOrdered = source.isOrdered;
         this.episodesLocked = source.episodesLocked;
-        this.defaultElement = source.defaultElement;
         this.poSequenceInformation = source.poSequenceInformation;
     }
 
