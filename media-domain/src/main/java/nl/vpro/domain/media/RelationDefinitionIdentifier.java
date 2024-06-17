@@ -1,15 +1,16 @@
 package nl.vpro.domain.media;
 
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
-
 import java.util.Comparator;
 
-import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-@Embeddable
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 public class RelationDefinitionIdentifier implements Serializable, Comparable<RelationDefinitionIdentifier> {
 
     @Serial
@@ -19,6 +20,7 @@ public class RelationDefinitionIdentifier implements Serializable, Comparable<Re
     @Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
     private String type;
 
+    @Setter
     @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
     private String broadcaster;
 
@@ -30,7 +32,7 @@ public class RelationDefinitionIdentifier implements Serializable, Comparable<Re
         this.broadcaster = broadcaster;
     }
 
-    public String getType() {
+    public @NonNull String getType() {
         return type;
     }
 
@@ -38,12 +40,8 @@ public class RelationDefinitionIdentifier implements Serializable, Comparable<Re
         this.type = type.toUpperCase();
     }
 
-    public String getBroadcaster() {
+    public @NonNull String getBroadcaster() {
         return broadcaster;
-    }
-
-    public void setBroadcaster(String broadcaster) {
-        this.broadcaster = broadcaster;
     }
 
     @Override
