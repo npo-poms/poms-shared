@@ -15,7 +15,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -1355,7 +1354,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @XmlAttribute(name = "avType", required = true)
     @JsonProperty("avType")
-    @Nullable
+    @NonNull
     public AVType getAVType() {
         return avType;
     }
