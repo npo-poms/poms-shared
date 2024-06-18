@@ -709,14 +709,14 @@ public class MediaObjects {
         result += removeIf(media.getLocations(), l -> l.getWorkflow() != Workflow.PUBLISHED);
         result += removeIf(media.getImages(), i -> i.getWorkflow() != Workflow.PUBLISHED);
 
-        result += removeIf(media.getMemberOf(), m -> m.getGroup().getWorkflow() != Workflow.PUBLISHED);
+        result += removeIf(media.getMemberOf(), m -> ! m.getGroup().isPublishable());
 
         if (media instanceof Program program) {
             result += removeIf(program.getSegments(), i -> i.getWorkflow() != Workflow.PUBLISHED);
             for (Segment segment : program.getSegments()) {
                 result += removeUnpublishedSubObjects(segment);
             }
-            result += removeIf(program.getEpisodeOf(), m -> m.getGroup().getWorkflow() != Workflow.PUBLISHED);
+            result += removeIf(program.getEpisodeOf(), m -> ! m.getGroup().isPublishable());
         }
 
         return result;
