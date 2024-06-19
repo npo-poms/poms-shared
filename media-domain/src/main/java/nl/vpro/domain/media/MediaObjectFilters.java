@@ -24,11 +24,19 @@ public class MediaObjectFilters {
      * Normal users normally have this filter enabled, and won't see deleted objects.
      */
     public static final String DELETED_FILTER = "deletedFilter";
+    /**
+     * deleted filter for '{@link ScheduleEvent schedule events}'
+     * @see Program#scheduleEvents
+     */
     public static final String SE_DELETED_FILTER = "seDeletedFilter";
     public static final String DELETED_FILTER_CONDITION = """
             (workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED', 'TEMPORARY') and mergedTo_id is null)
         """;
 
+    /**
+     * deleted filter for '{@link MemberRef member refs}'
+     * @see MediaObject#memberOf
+     */
     public static final String MR_DELETED_FILTER = "mrDeletedFilter";
     public static final String MR_DELETED_FILTER_CONDITION =
         """
@@ -82,7 +90,7 @@ public class MediaObjectFilters {
                 or now() < (select m.publishStop from mediaobject m where m.id = owner_id)
               )
        )
-        """;
+       """;
 
     /**
      * Normally on the poms backend things under embargo are visible. The exception are CLIPs of different broadcasters.
@@ -132,7 +140,7 @@ public class MediaObjectFilters {
      +
     (select count(*) from mediaobject_thirdparty o where o.mediaobject_id = id and o.thirdparties_id in (:organizations))
     )
-        """;
+    """;
     /**
      * This is used to filter {@link RelationDefinition}, normal users only see the ones that are associated to their broadcaster.
      */
