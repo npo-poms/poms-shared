@@ -2,7 +2,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xmlns="http://java.sun.com/xml/ns/javaee"
               xsi:schemaLocation="
-              http://java.sun.com/xml/ns/javaee https://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-fragment_3_0.xsd"
+              http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd"
               id="media-domain-kijkwijzer" version="3.0">
   <name>media_domain_kijkwijzer</name>
   <distributable />
