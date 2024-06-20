@@ -34,6 +34,6 @@ jobs:
           git push --atomic -v --follow-tags
           mvn -Pdeploy,ossrh --batch-mode -Darguments=-DskipTests release:perform
         env:
-          SONATYPE_USERNAME: vpro
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_SECRET_KEY_PASSPHRASE: ${{ secrets.GPG_SECRET_KEY_PASSPHRASE }}
