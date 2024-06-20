@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>7.2.2</version>
+    <version>7.2.4</version>
   </parent>
 
   <name>poms shared</name>
