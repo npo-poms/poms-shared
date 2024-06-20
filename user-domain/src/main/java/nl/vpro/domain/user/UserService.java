@@ -110,16 +110,20 @@ public interface UserService<T extends User> {
 
     /**
      * Searches users in the local database
+     * @throws UnsupportedOperationException if not implementable
      */
     List<? extends T> findUsers(String name, int limit);
 
     /**
-     * Updates a user in the local database
+     * Updates a user in the local database. If there is no database in the application, it may simply return the argument.
      */
-    T update(T user);
+    default T update(T user) {
+        return user;
+    }
 
     /**
      * Deletes user from the local database
+     * @throws UnsupportedOperationException if not implementable
      */
     void delete(T object);
 
