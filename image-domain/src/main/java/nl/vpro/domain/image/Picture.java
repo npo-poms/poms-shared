@@ -35,10 +35,11 @@ public interface Picture {
     /**
      * The sources of this picture. Keys are the type, values are srcset values. A list of urls with indicators when to use.
      */
-    @JsonIgnore
+    //@JsonIgnore
     Map<String, String> getSources();
 
     @JsonProperty("sources")
+    @JsonIgnore
     default List<Source> getSourcesList() {
         return getSources().entrySet().stream().map(e -> new Source(e.getKey(), e.getValue())).collect(Collectors.toList());
     }
