@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>7.2.6-SNAPSHOT</version>
+    <version>7.2.6</version>
   </parent>
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-nep</artifactId>
