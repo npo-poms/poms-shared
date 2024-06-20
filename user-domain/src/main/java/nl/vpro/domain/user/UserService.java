@@ -54,6 +54,8 @@ public interface UserService<T extends User> {
     /**
      * Do as a certain user, the 'lastlogin' of the user will be updated, unless that already happend
      * less that {@code loginAfter} ago, or the implementation doesn't persist the user at all (e.g. in the frontend api)
+     * @param loginAfter If the user logged in less than this time ago, the last login will not be updated.
+     *                   If {@code null} the last login will never be updated, if {@link Duration#ZERO} it will always be updated.
      */
     <S> S doAs(String principalId, Duration loginAfter, Callable<S> handler) throws Exception;
 
