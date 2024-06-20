@@ -7,6 +7,7 @@ package nl.vpro.domain.user;
 import lombok.Getter;
 
 import java.security.Principal;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
@@ -42,7 +43,12 @@ public interface UserService<T extends User> {
     boolean needsUpdate(T oldUser, T newUser);
 
 
-    <S> S doAs(String principalId, Callable<S> handler) throws Exception;
+    default <S> S doAs(String principalId, Callable<S> handler) throws Exception {
+        return doAs(principalId, null, handler);
+    }
+
+    <S> S doAs(String principalId, Duration loginAfter, Callable<S> handler) throws Exception;
+
 
     /**
      *  Do as a certain user, without the need to be logged in already.
