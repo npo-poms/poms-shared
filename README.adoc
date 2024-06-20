@@ -57,7 +57,7 @@ The github build can be done locally with 'https://github.com/nektos/act[act]'. 
 |7.2   | java 11 | used by VPRO magnolia (which is currently classified as abandon ware)
 |>= 7.7  | java 17 | august 2023
 | 7.11-SNAPSHOT branch | latest javax branch. Minor releases can be made from this. >= 7.12 must be branched from this, not from main | february 2024
-| 7.12-SNAPSHOT branch | may 2024 used for poms 7.12 released. Doesn't contain some changed related to hibernate-search upgrade (media sort field methods) 
+| 7.12-SNAPSHOT branch | used for poms 7.12 released. Doesn't contain some changed related to hibernate-search upgrade (media sort field methods) | may 2024
 | 8.x?| javax - > jakarta  | february 2024
 | 8.2| hibernate 6  | may 2024, hibernate is only an optional dependency (only the annotations are used in this project)
 | 9.x | java 21 | early 2024
