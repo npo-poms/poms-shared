@@ -3,6 +3,7 @@ package nl.vpro.domain.user;
 import lombok.extern.log4j.Log4j2;
 
 import java.security.Principal;
+import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
@@ -26,89 +27,75 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Log4j2
 class UserServiceTest {
 
-    private final UserService<User> userService = new UserService<User>() {
+    private final UserService<User> userService = new UserService<>() {
         @Override
         public boolean needsUpdate(User oldUser, User newUser) {
             return false;
-
         }
 
         @Override
-        public <S> S doAs(String principalId, Callable<S> handler) throws Exception {
+        public <S> S doAs(String principalId, Duration duration, Callable<S> handler) throws Exception {
             return null;
-
         }
 
         @Override
         public <S> S systemDoAs(String principalId, Callable<S> handler) throws Exception {
             return null;
-
         }
 
         @Override
         public User get(Principal authentication) {
             return null;
-
         }
 
         @Override
         public Optional<User> get(@NonNull String id) {
             return Optional.empty();
-
         }
 
         @Override
         public List<? extends User> findUsers(String name, int limit) {
             return null;
-
         }
 
         @Override
         public User update(User user) {
             return null;
-
         }
 
         @Override
         public void delete(User object) {
             log.info("--");
-
         }
 
         @Override
         public Optional<User> currentUser() {
             return Optional.empty();
-
         }
 
         @Override
         public Optional<User> authenticate(String principalId) {
             return Optional.empty();
-
         }
 
         @Override
         public boolean currentUserHasRole(Collection<String> roles) {
             return false;
-
         }
 
         @Override
         public Principal getAuthentication() {
             return new CallerPrincipal("foobar");
-
         }
 
         @Override
         public void restoreAuthentication(Principal authentication) {
             log.info("--");
-
         }
 
         @Override
         public void dropAuthentication() {
             log.info("--");
-
         }
     };
 
