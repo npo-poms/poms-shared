@@ -13,6 +13,11 @@ These are also used by the API clients.
 
 See also https://github.com/npo-poms/poms-parent[poms parent]
 
+[NOTE]
+====
+This branched is maintained for VPRO magnolia CMS. It is still java 11/javax. And some e.g. 'Picture' feature was never updated, and nobody wants to test changes. So we keep it as is.
+====
+
 
 == build
 
