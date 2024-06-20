@@ -43,10 +43,18 @@ public interface UserService<T extends User> {
     boolean needsUpdate(T oldUser, T newUser);
 
 
+    /**
+     * Do as a certain user, the 'lastlogin' of the user will <em>not</em> be updated
+     * @see #doAs(String, Duration, Callable)
+     */
     default <S> S doAs(String principalId, Callable<S> handler) throws Exception {
         return doAs(principalId, null, handler);
     }
 
+    /**
+     * Do as a certain user, the 'lastlogin' of the user will be updated, unless that already happend
+     * less that {@code loginAfter} ago, or the implementation doesn't persist the user at all (e.g. in the frontend api)
+     */
     <S> S doAs(String principalId, Duration loginAfter, Callable<S> handler) throws Exception;
 
 
