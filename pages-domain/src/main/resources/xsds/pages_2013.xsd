@@ -179,6 +179,7 @@
       <xs:enumeration value="URL"/>
       <xs:enumeration value="CRID"/>
       <xs:enumeration value="BOTH"/>
+      <xs:enumeration value="AUTOMATIC"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
