@@ -9,7 +9,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.espertech.esper.client.UpdateListener;
+import com.espertech.esper.runtime.client.UpdateListener;
 
 import nl.vpro.esper.listener.EventLogger;
 import nl.vpro.esper.service.EventServiceProvider;

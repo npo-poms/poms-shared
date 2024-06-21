@@ -25,7 +25,7 @@ import nl.vpro.domain.media.support.OwnerType;
 
 
 /**
- * A group represents a collection of other {@link MediaObject}s. They may contain similar meta data, but their main goal is to work
+ * A group represents a collection of other {@link MediaObject}s. They may contain similar metadata, but their main goal is to work
  * as a container. It may e.g. represent a {@link GroupType#SERIES}, {@link GroupType#SEASON}, {@link GroupType#ALBUM} or {@link GroupType#PLAYLIST}
  *
  */
@@ -48,7 +48,7 @@ public final class Group extends MediaObject {
     }
 
     /**
-     * Unset some default values, to ensure that roundtripping will result same object
+     * Unset some default values, to ensure that round-tripping will result same object
      * @since 5.11
      */
     @JsonCreator
@@ -70,14 +70,6 @@ public final class Group extends MediaObject {
     @Column(nullable = false)
     @NotNull Boolean isOrdered = true;
 
-
-    /**
-     * Not persistent, never filled? What is this, should it not be dropped?
-     */
-    @XmlAttribute
-    @Getter
-    @Setter
-    private Long defaultElement;
 
     @Column
     @XmlElement
@@ -115,7 +107,6 @@ public final class Group extends MediaObject {
         this.type = source.type;
         this.isOrdered = source.isOrdered;
         this.episodesLocked = source.episodesLocked;
-        this.defaultElement = source.defaultElement;
         this.poSequenceInformation = source.poSequenceInformation;
     }
 

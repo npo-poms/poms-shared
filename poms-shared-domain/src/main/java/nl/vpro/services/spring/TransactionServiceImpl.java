@@ -1,53 +1,59 @@
 package nl.vpro.services.spring;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.Callable;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
+
+import jakarta.transaction.Transactional;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import nl.vpro.services.TransactionService;
 
+import static jakarta.transaction.Transactional.TxType.REQUIRED;
+import static jakarta.transaction.Transactional.TxType.REQUIRES_NEW;
+
+@Slf4j
 @Service("transactionService")
 public class TransactionServiceImpl implements TransactionService {
 
+
+
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW , rollbackFor = {Exception.class})
+    @Transactional(value = REQUIRES_NEW , rollbackOn = {Exception.class})
     public <T> T executeInNewTransaction(@NonNull Callable<T> callable) throws Exception {
         return callable.call();
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {Exception.class})
+    @Transactional(value = REQUIRES_NEW, rollbackOn = {Exception.class})
     public <T> T getInNewTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    @Transactional(value = REQUIRED, rollbackOn = {Exception.class})
     public <T> T getInTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(REQUIRES_NEW)
     public void executeInNewTransaction(@NonNull Runnable runnable) {
         runnable.run();
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(REQUIRES_NEW)
     public <T, S> T executeInNewTransaction(S argument, @NonNull Function<S, T> function) {
         return function.apply(argument);
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(REQUIRES_NEW)
     public <T> void executeInNewTransaction(T argument, @NonNull Consumer<T> consumer) {
         consumer.accept(argument);
 
@@ -55,28 +61,30 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    @Transactional(REQUIRES_NEW)
     public <T> T executeInReadonlyTransaction(@NonNull Callable<T> callable) throws Exception {
         readonly();
         return callable.call();
     }
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    @Transactional(REQUIRES_NEW)
     public <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier) {
         readonly();
         return supplier.get();
     }
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    @Transactional(REQUIRES_NEW)
     public void executeInReadonlyTransaction(@NonNull Runnable runnable) {
+        //assert entityManagerFactory.unwrap(org.hibernate.SessionFactory.class).getCurrentSession() != null;
         readonly();
         runnable.run();
     }
 
+
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    @Transactional(REQUIRES_NEW)
     public <T, S> T executeInReadonlyTransaction(S argument, @NonNull Function<S, T> function) {
         readonly();
         return function.apply(argument);
@@ -84,7 +92,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public <T> void executeInReadonlyTransaction(T argument, @NonNull Consumer<T> consumer) {
         readonly();
         consumer.accept(argument);
@@ -94,7 +102,7 @@ public class TransactionServiceImpl implements TransactionService {
         try {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         } catch (org.springframework.transaction.NoTransactionException ignored) {
-
+            log.debug("No transaction");
         }
     }
 }

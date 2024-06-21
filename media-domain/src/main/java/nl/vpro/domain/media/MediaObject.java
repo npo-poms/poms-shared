@@ -1354,7 +1354,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @XmlAttribute(name = "avType", required = true)
     @JsonProperty("avType")
-    @Nullable
+    @NonNull
     public AVType getAVType() {
         return avType;
     }

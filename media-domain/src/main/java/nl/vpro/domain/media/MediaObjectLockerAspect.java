@@ -35,6 +35,10 @@ public abstract class MediaObjectLockerAspect  {
     abstract Optional<String> getCorrelationId(String mid);
 
 
+    private MediaIdentifiable.Correlation lockForMid(String mid) {
+        return  MediaIdentifiable.Correlation.mid(getCorrelationId(mid).orElse(mid));
+    }
+
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
         final Object media = joinPoint.getArgs()[annotation.argNumber()];
@@ -89,21 +93,23 @@ public abstract class MediaObjectLockerAspect  {
 
 
 
-    protected static MediaIdentifiable.Correlation getCorrelation(String method, Object object) {
+    protected  MediaIdentifiable.Correlation getCorrelation(String method, Object object) {
         if (object == null) {
             return MediaIdentifiable.Correlation.NO_LOCK;
         }
         if (StringUtils.isNotBlank(method)) {
             try {
                 final Method m = object.getClass().getMethod(method);
-                return MediaIdentifiable.Correlation.mid(StringUtils.trim((String) m.invoke(object)));
+                return lockForMid(StringUtils.trim((String) m.invoke(object)));
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 log.error(e.getMessage(), e);
                 throw new IllegalStateException();
             }
         } else {
             if (object instanceof CharSequence) {
-                return  MediaIdentifiable.Correlation.mid(object.toString());
+                return lockForMid(
+                    object.toString()
+                );
             }
             if (object instanceof MediaIdentifiable mediaIdentifiable) {
                 final MediaIdentifiable.Correlation correlation = mediaIdentifiable.getCorrelation();

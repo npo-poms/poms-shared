@@ -61,6 +61,7 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
     @ManyToOne(targetEntity = Program.class, optional = false)
     Program parent;
 
+    @Setter
     @Column(nullable = false)
     @NotNull(message = "start property is required")
     private java.time.Duration start;
@@ -82,13 +83,14 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
     @Enumerated(EnumType.STRING)
     private OwnerType owner;
 
+    @Setter
     @Transient
     private RecursiveMemberRef segmentOf;
 
     public Segment() {
     }
 
-    public Segment(Program program, String midRef, java.time.Duration start, AuthorizedDuration duration) {
+    public Segment(@NonNull Program program, String midRef, java.time.Duration start, AuthorizedDuration duration) {
         this.start = start;
         this.duration = duration;
         avType = program.getAVType();
@@ -266,12 +268,8 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
-    public java.time.Duration getStart() {
+    public java.time.@NonNull Duration getStart() {
         return start;
-    }
-
-    public void setStart(java.time.Duration start) {
-        this.start = start;
     }
 
     @Override
@@ -420,7 +418,4 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
         return segmentOf;
     }
 
-    public void setSegmentOf(RecursiveMemberRef parentRef) {
-        this.segmentOf = parentRef;
-    }
 }

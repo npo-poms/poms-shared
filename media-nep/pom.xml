@@ -54,6 +54,12 @@
      <dependency>
        <groupId>io.openapitools.jackson.dataformat</groupId>
        <artifactId>jackson-dataformat-hal</artifactId>
+       <exclusions>
+         <exclusion>
+           <groupId>com.fasterxml.jackson.jaxrs</groupId>
+           <artifactId>jackson-jaxrs-json-provider</artifactId><!-- we need com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider -->
+         </exclusion>
+       </exclusions>
      </dependency>
 
     <dependency>

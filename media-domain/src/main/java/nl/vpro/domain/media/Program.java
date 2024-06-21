@@ -116,10 +116,20 @@ public final class Program extends MediaObject {
     })
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // TODO: These filters are horrible
-    @Filter(name = PUBLICATION_FILTER, condition =
-        "((segments0_1_.publishstart is null or segments0_1_.publishstart < now())" +
-            "and (segments0_1_.publishstop is null or segments0_1_.publishstop > now()))")
-    @Filter(name = DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
+    @Filter(name = PUBLICATION_FILTER,
+        deduceAliasInjectionPoints = false,
+        aliases = {
+            @SqlFragmentAlias(alias = "segment", table = "MediaObject")
+        },
+        condition =
+        "(({segment}.publishstart is null or {segment}.publishstart < now())" +
+            "and ({segment}.publishstop is null or {segment}.publishstop > now()))")
+    @Filter(name = DELETED_FILTER,
+        aliases = {
+            @SqlFragmentAlias(alias = "segment", table = "MediaObject")
+        },
+        deduceAliasInjectionPoints = false,
+        condition = "({segment}.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and ({segment}.mergedTo_id is null))")
     private Set<Segment> segments;
 
     @XmlTransient

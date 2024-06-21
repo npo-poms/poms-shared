@@ -3,10 +3,10 @@ package nl.vpro.services;
 import java.util.concurrent.Callable;
 import java.util.function.*;
 
+import jakarta.transaction.Transactional;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.functional.ThrowAnyRunnable;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Please note that transactions are only rolled back in case of a runtime exception
@@ -39,6 +39,7 @@ public interface TransactionService {
 
     <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier);
 
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
     default void executeInReadonlyTransaction(@NonNull ThrowAnyRunnable runnable) {
         executeInReadonlyTransaction((Runnable) runnable);
     }
@@ -51,7 +52,7 @@ public interface TransactionService {
 
 
 
-    @Transactional(propagation = Propagation.NEVER)
+    @Transactional(Transactional.TxType.NEVER)
     default void ensureNoTransaction() {
 
     }

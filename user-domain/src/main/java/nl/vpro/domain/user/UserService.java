@@ -7,6 +7,7 @@ package nl.vpro.domain.user;
 import lombok.Getter;
 
 import java.security.Principal;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
@@ -42,7 +43,23 @@ public interface UserService<T extends User> {
     boolean needsUpdate(T oldUser, T newUser);
 
 
-    <S> S doAs(String principalId, Callable<S> handler) throws Exception;
+    /**
+     * Do as a certain user, the 'lastlogin' of the user will <em>not</em> be updated
+     * @see #doAs(String, Duration, Callable)
+     */
+    default <S> S doAs(String principalId, Callable<S> handler) throws Exception {
+        return doAs(principalId, null, handler);
+    }
+
+    /**
+     * Do as a certain user, the 'lastlogin' of the user will be updated, unless that already happend
+     * less that {@code loginAfter} ago, or the implementation doesn't persist the user at all (e.g. in the frontend api)
+     * @param loginAfter If the user logged in less than this time ago, the last login will not be updated.
+     *                   If {@code null} the last login will never be updated, if {@link Duration#ZERO} it will always be updated.
+     * @since 8.1.1
+     */
+    <S> S doAs(String principalId, Duration loginAfter, Callable<S> handler) throws Exception;
+
 
     /**
      *  Do as a certain user, without the need to be logged in already.
@@ -52,8 +69,10 @@ public interface UserService<T extends User> {
      /**
       * Default implementation without consideration of the roles. This can be overridden.
       */
-    default Logout<T> systemAuthenticate(Trusted trustedSourceToken) {
-        authenticate(trustedSourceToken.getPrincipal());
+     Logout<T> systemAuthenticate(Trusted trustedSourceToken);
+     // THIS used to be the deafult implementation, but that seems to have broken @Transactional on overriding methods.
+     /* {
+        Optional<T> user = authenticate(trustedSourceToken.getPrincipal());
         Logout<T> logout = new Logout<T>() {
             @Override
             public void close() {
@@ -62,7 +81,7 @@ public interface UserService<T extends User> {
         };
         logout.setUser(currentUser().orElseThrow(IllegalStateException::new));
         return logout;
-    }
+    }*/
 
     /**
      * From a principal object creates the user if not exists and returns it.
@@ -93,16 +112,20 @@ public interface UserService<T extends User> {
 
     /**
      * Searches users in the local database
+     * @throws UnsupportedOperationException if not implementable
      */
     List<? extends T> findUsers(String name, int limit);
 
     /**
-     * Updates a user in the local database
+     * Updates a user in the local database. If there is no database in the application, it may simply return the argument.
      */
-    T update(T user);
+    default T update(T user) {
+        return user;
+    }
 
     /**
      * Deletes user from the local database
+     * @throws UnsupportedOperationException if not implementable
      */
     void delete(T object);
 
