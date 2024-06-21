@@ -44,6 +44,11 @@ class UserServiceTest {
         }
 
         @Override
+        public Logout<User> systemAuthenticate(Trusted trustedSourceToken) {
+            return null;
+        }
+
+        @Override
         public User get(Principal authentication) {
             return null;
         }

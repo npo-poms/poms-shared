@@ -69,8 +69,10 @@ public interface UserService<T extends User> {
      /**
       * Default implementation without consideration of the roles. This can be overridden.
       */
-    default Logout<T> systemAuthenticate(Trusted trustedSourceToken) {
-        authenticate(trustedSourceToken.getPrincipal());
+     Logout<T> systemAuthenticate(Trusted trustedSourceToken);
+     // THIS used to be the deafult implementation, but that seems to have broken @Transactional on overriding methods.
+     /* {
+        Optional<T> user = authenticate(trustedSourceToken.getPrincipal());
         Logout<T> logout = new Logout<T>() {
             @Override
             public void close() {
@@ -79,7 +81,7 @@ public interface UserService<T extends User> {
         };
         logout.setUser(currentUser().orElseThrow(IllegalStateException::new));
         return logout;
-    }
+    }*/
 
     /**
      * From a principal object creates the user if not exists and returns it.
