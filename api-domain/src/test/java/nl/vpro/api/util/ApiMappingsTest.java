@@ -70,6 +70,10 @@ public class ApiMappingsTest {
         testNamespace(createMappings(), Xmlns.CONSTRAINT_NAMESPACE);
     }
 
+
+    /**
+     * @TODO Tested xsd is in pages-domain
+     */
     @Test
     public void testPageSchema() {
         testNamespace(createMappings(), Xmlns.PAGE_NAMESPACE);
