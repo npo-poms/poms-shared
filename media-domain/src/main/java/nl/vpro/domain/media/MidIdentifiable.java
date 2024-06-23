@@ -19,6 +19,12 @@ public interface MidIdentifiable extends Identifiable<Long> {
     MediaType getMediaType();
 
 
+    /**
+     * {@code MedioObject}s can be {@link MediaObjectLocker locked}, normally on their {@link MediaObject#getMid()}, but
+     * in this context we think of it as {@link #getCorrelation()}.  In some cases thi is not the same as the {@code mid} itself.
+     * e.g. if there is no {@code mid} filled in yet, or if the object is a {@link Segment} (which is correlated with its parent instead)
+     * @see #getCorrelation()
+     */
     default String getCorrelationId() {
         return getCorrelation().id;
     }
@@ -26,7 +32,7 @@ public interface MidIdentifiable extends Identifiable<Long> {
     /**
 
      */
-    default MediaIdentifiable.Correlation getCorrelation () {
+    default MediaIdentifiable.Correlation getCorrelation() {
         String mid = getMid();
         if (mid != null) {
             return MediaIdentifiable.Correlation.mid(mid);
