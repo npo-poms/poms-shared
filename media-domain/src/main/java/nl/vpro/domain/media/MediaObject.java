@@ -465,9 +465,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // It doesn't really make much sense.
 
     @PublicationFilter
-    @Filter(name = MR_DELETED_FILTER, condition = MR_DELETED_FILTER_CONDITION)
-    @Filter(name = MR_EMBARGO_FILTER, condition = MR_EMBARGO_FILTER_CONDITION)
-    @Filter(name = MR_PUBLICATION_FILTER, condition = MR_PUBLICATION_FILTER_CONDITION)
+    @FilterJoinTable(
+        name = MR_DELETED_FILTER, condition = MR_DELETED_FILTER_CONDITION)
+    @FilterJoinTable(name = MR_EMBARGO_FILTER, condition = MR_EMBARGO_FILTER_CONDITION)
+    @FilterJoinTable(name = MR_PUBLICATION_FILTER, condition = MR_PUBLICATION_FILTER_CONDITION)
     protected Set<@NotNull @Valid MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)

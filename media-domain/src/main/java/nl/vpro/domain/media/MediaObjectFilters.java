@@ -39,7 +39,7 @@ public class MediaObjectFilters {
      */
     public static final String MR_DELETED_FILTER = "mrDeletedFilter";
     public static final String MR_DELETED_FILTER_CONDITION =
-        """
+     """
      (select m.workflow from mediaobject m where m.id = owner_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED', 'TEMPORARY')
      AND
      (select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED', 'TEMPORARY')
@@ -111,7 +111,7 @@ public class MediaObjectFilters {
     public static final String MR_EMBARGO_FILTER = "mrEmbargoFilter";
 
     public static final String MR_EMBARGO_FILTER_CONDITION =
-            """
+        """
         ((
            (select m.publishStart from mediaobject m where m.id = owner_id) is null
            or now() > (select m.publishStart from mediaobject m where m.id = owner_id)
