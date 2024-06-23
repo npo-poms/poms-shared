@@ -461,14 +461,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
 
-    // Before hibernate 5.2 we used Filter rather than FilterJoinTable.
-    // It doesn't really make much sense.
 
     @PublicationFilter
-    @FilterJoinTable(
+    @Filter(
         name = MR_DELETED_FILTER, condition = MR_DELETED_FILTER_CONDITION)
-    @FilterJoinTable(name = MR_EMBARGO_FILTER, condition = MR_EMBARGO_FILTER_CONDITION)
-    @FilterJoinTable(name = MR_PUBLICATION_FILTER, condition = MR_PUBLICATION_FILTER_CONDITION)
+    @Filter(name = MR_EMBARGO_FILTER, condition = MR_EMBARGO_FILTER_CONDITION)
+    @Filter(name = MR_PUBLICATION_FILTER, condition = MR_PUBLICATION_FILTER_CONDITION)
     protected Set<@NotNull @Valid MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
