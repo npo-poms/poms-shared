@@ -1608,6 +1608,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public SortedSet<DescendantRef> getDescendantOf() {
+        if (isSerializing()) {
+            return null;
+        }
         if (descendantOf == null) {
             descendantOf = new TreeSet<>();
             for (MediaObject media : getAncestors()) {
