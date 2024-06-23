@@ -110,7 +110,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
     private static final ThreadLocal<Boolean> SERIALIZING = ThreadLocal.withInitial(() -> false);
     /**
-     * Whether currently serializing for CRC calculation. Some derivative getter may return {@link null} (or some other constant) if this is {@code true}
+     * Whether currently serializing for {@link #calcCRC32() CRC calculation}. Some derivative getters may return {@code null} (or some other constant) if this is {@code true}
      * @since 7.11
      */
     @Override
@@ -135,8 +135,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
     /**
-     * We keep track of a CRC32 hash to determine whether an object is 'changed', in the sense that
-     * it would need republication.
+     * We keep track of a CRC32 hash to determine whether an object is 'changed', in the sense that it would need republication.
      */
     protected CRC32 calcCRC32() {
         byte[] serialized = serializeForCalcCRC32();
