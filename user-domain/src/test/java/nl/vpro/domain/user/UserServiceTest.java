@@ -53,6 +53,7 @@ class UserServiceTest {
             return null;
         }
 
+
         @Override
         public Optional<User> get(@NonNull String id) {
             return Optional.empty();

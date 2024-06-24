@@ -94,7 +94,9 @@ public interface UserService<T extends User> {
      * @since 8.2
      */
 
-    boolean recognized(java.security.Principal authentication);
+    default boolean recognized(java.security.Principal authentication) {
+        return false;
+    }
 
     Optional<T> get(@NonNull String id);
 
