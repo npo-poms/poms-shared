@@ -229,7 +229,9 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
     private void watchOnADecentFileSystem(final File directory) throws IOException {
 
         final Path watchedPath = Paths.get(directory.getAbsolutePath());
-        DirectoryWatcher watcher = new DirectoryWatcher(watchedPath, (f) -> {
+        DirectoryWatcher watcher = DirectoryWatcher.builder()
+            .directory(watchedPath)
+            .pathConsumer((f) -> {
             log.info("Found change in {}", f);
             List<InputSource> sources = getSources(false);
             if (sources != null) {
@@ -239,7 +241,8 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                     log.error(e.getMessage(), e);
                 }
             }
-        }, (f) -> f.getFileName().toString().endsWith(".xml"));
+            }).filter((f) -> f.getFileName().toString().endsWith(".xml"))
+            .build();
     }
 
     @Override
