@@ -17,6 +17,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import com.fasterxml.jackson.annotation.*;
 
+import static nl.vpro.domain.media.support.PublishableObject.SERIALIZING;
+
 /**
  * @since 5.13
  */
@@ -216,8 +218,11 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
         MediaObject group = ref.getGroup();
         if (group != null) {
             SortedSet<MemberRef> memberOf = group.getMemberOf();
+
             Set<StackElement> stack = new LinkedHashSet<>();
-            stack.add(new StackElement(ref.getChildMid(), ref.getParentMid(), ref.getRefType(), ref.getNumber()));
+            if (! SERIALIZING.get()) {
+                stack.add(new StackElement(ref.getChildMid(), ref.getParentMid(), ref.getRefType(), ref.getNumber()));
+            }
             return of(memberOf, stack, MemberRefType.memberOf);
         } else {
             return Collections.emptySortedSet();
@@ -230,10 +235,12 @@ public class RecursiveMemberRef implements Serializable, RecursiveParentChildRel
      */
     public static SortedSet<RecursiveMemberRef> episodeOfs(MemberRef ref) {
         MediaObject group = ref.getGroup();
-        if (group instanceof Program) {
-            SortedSet<MemberRef> episodeOf = ((Program) group).getEpisodeOf();
+        if (group instanceof Program program) {
+            SortedSet<MemberRef> episodeOf = program.getEpisodeOf();
             Set<StackElement> stack = new LinkedHashSet<>();
-            stack.add(new StackElement(ref.getChildMid(), ref.getParentMid(), ref.getRefType(), ref.getNumber()));
+            if (! SERIALIZING.get()) {
+                stack.add(new StackElement(ref.getChildMid(), ref.getParentMid(), ref.getRefType(), ref.getNumber()));
+            }
             return of(episodeOf, stack, MemberRefType.episodeOf);
         } else {
             return Collections.emptySortedSet();

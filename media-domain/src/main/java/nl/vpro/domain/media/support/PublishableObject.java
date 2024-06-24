@@ -108,7 +108,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         return dataAsString.getBytes(encoding);
     }
 
-    private static final ThreadLocal<Boolean> SERIALIZING = ThreadLocal.withInitial(() -> false);
+    public static final ThreadLocal<Boolean> SERIALIZING = ThreadLocal.withInitial(() -> false);
     /**
      * Whether currently serializing for {@link #calcCRC32() CRC calculation}. Some derivative getters may return {@code null} (or some other constant) if this is {@code true}
      * @since 7.11
