@@ -453,8 +453,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     boolean isValid() {
         return member != null
             && group != null
-            && !(group instanceof Group
-            && ((Group) group).isOrdered() && (number == null || number < 1));
+            && !(group instanceof Group g && g.isOrdered() && (number == null || number < 1));
     }
 
     @XmlAttribute(name = "index")
@@ -574,11 +573,9 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
             return true;
         }
 
-        if(!(object instanceof MemberRef)) {
+        if(!(object instanceof MemberRef that)) {
             return false;
         }
-
-        MemberRef that = (MemberRef)object;
 
         // Jaxb does not initialise the owner but a reference to the owner
         return memberEqualsOnRef(that)
@@ -638,8 +635,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-        if(parent instanceof MediaObject) {
-            this.member = (MediaObject)parent;
+        if(parent instanceof MediaObject mediaObject) {
+            this.member = mediaObject;
         }
     }
 
