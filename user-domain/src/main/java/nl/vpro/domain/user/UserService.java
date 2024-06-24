@@ -89,6 +89,13 @@ public interface UserService<T extends User> {
      */
     T get(java.security.Principal authentication);
 
+    /**
+     * Whether {@link #get(java.security.Principal)} can handle this principal
+     * @since 8.2
+     */
+
+    boolean recognized(java.security.Principal authentication);
+
     Optional<T> get(@NonNull String id);
 
     /**
