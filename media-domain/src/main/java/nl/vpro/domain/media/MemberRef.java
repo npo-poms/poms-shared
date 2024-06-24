@@ -117,9 +117,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @Transient
     protected MediaType typeOfGroup;
 
+    @Setter
     @Min(0)
     protected Integer number;
 
+    @Setter
     @Column(nullable = false, updatable = false)
     protected Instant added;
 
@@ -381,7 +383,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
             return null;
         }
 
-        if(group != null && group.getCrids().size() > 0) {
+        if(group != null && !group.getCrids().isEmpty()) {
             return group.getCrids().get(0);
         }
 
@@ -465,10 +467,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         return number;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -476,10 +474,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getAdded() {
         return added;
-    }
-
-    public void setAdded(Instant added) {
-        this.added = added;
     }
 
     @XmlAttribute(required = true)
@@ -687,19 +681,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     private boolean memberEqualsOnCrid(MediaObject thatMember) {
-        if(member.getCrids().isEmpty() || thatMember.getCrids().isEmpty()) {
-            return false;
-        }
-
-        for(String memberCrid : member.getCrids()) {
-            for(String thatCrid : thatMember.getCrids()) {
-                if(thatCrid.equals(memberCrid)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        return MediaObjects.equalsOnCrid(member, thatMember);
     }
 
     @PrePersist
