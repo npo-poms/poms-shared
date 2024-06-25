@@ -58,7 +58,7 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
         return builder().workflow(null).creationDate((Instant) null).build();
     }
 
-    @ManyToOne(targetEntity = Program.class, optional = false)
+    @ManyToOne(targetEntity = Program.class, optional = false, fetch = FetchType.LAZY)
     Program parent;
 
     @Setter

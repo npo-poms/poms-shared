@@ -585,7 +585,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonIgnore // Oh Jackson2...
     private Boolean locationAuthorityUpdate = false;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @Nullable
     private MediaObject mergedTo;
 

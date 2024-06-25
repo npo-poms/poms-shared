@@ -97,11 +97,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     private Long id;
 
     @Setter
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JsonBackReference
     protected MediaObject member;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name="owner_id")
     protected MediaObject group;
 
