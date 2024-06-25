@@ -16,7 +16,7 @@ import nl.vpro.nep.service.exception.NEPException;
 public interface NEPItemizeService extends  AutoCloseable {
 
     /**
-     * NEP provides one service for two basicly different things.
+     * NEP provides one service for two basically different things.
      * <p>
      * This itemizes a media with a certain MID
      * @since 5.10

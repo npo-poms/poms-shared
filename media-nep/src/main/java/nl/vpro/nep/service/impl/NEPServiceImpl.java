@@ -6,8 +6,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Iterator;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.*;
 
 import jakarta.annotation.PreDestroy;
@@ -15,6 +14,8 @@ import jakarta.inject.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+import com.google.common.util.concurrent.RateLimiter;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.domain.*;
@@ -24,6 +25,7 @@ import nl.vpro.nep.service.exception.NEPException;
 import nl.vpro.util.FileMetadata;
 
 /**
+ * Implements all available NEP services (via {@link NEPService}. Also,  it may add rate capping. (See MSE-5795).
  * @author Michiel Meeuwissen
  * @since 5.6
  */
@@ -37,6 +39,9 @@ public class NEPServiceImpl implements NEPService {
     private final Provider<NEPItemizeService> itemizeService;
     private final Provider<NEPSAMService> samService;
     private final Provider<NEPPlayerTokenService> tokenService;
+    private final Supplier<String> currentBroadcaster;
+
+    private final Map<String, Map<RateRapType, RateLimiter>>  rateLimiters = new HashMap<>();
 
     @Inject
     public NEPServiceImpl(
@@ -46,6 +51,7 @@ public class NEPServiceImpl implements NEPService {
         @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService,
         @Named("NEPSAMService") Provider<NEPSAMService> samService,
         @Named("NEPTokenService") Provider<NEPPlayerTokenService> tokenService
+        //@Named("currentBroadcaster") Supplier<String> currentBroadcaster
         ) {
         this.gatekeeperService = gatekeeperService;
         this.nepftpUploadService = nepftpUploadService;
@@ -53,6 +59,7 @@ public class NEPServiceImpl implements NEPService {
         this.itemizeService = itemizeService;
         this.samService = samService;
         this.tokenService = tokenService;
+        this.currentBroadcaster = null;
     }
 
     @Override
