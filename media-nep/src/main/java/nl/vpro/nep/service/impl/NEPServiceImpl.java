@@ -6,7 +6,8 @@ import java.io.*;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Optional;
 import java.util.function.*;
 
 import jakarta.annotation.PreDestroy;
@@ -14,8 +15,6 @@ import jakarta.inject.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-
-import com.google.common.util.concurrent.RateLimiter;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.domain.*;
@@ -39,9 +38,6 @@ public class NEPServiceImpl implements NEPService {
     private final Provider<NEPItemizeService> itemizeService;
     private final Provider<NEPSAMService> samService;
     private final Provider<NEPPlayerTokenService> tokenService;
-    private final Supplier<String> currentBroadcaster;
-
-    private final Map<String, Map<RateRapType, RateLimiter>>  rateLimiters = new HashMap<>();
 
     @Inject
     public NEPServiceImpl(
@@ -50,16 +46,13 @@ public class NEPServiceImpl implements NEPService {
         @Named("NEPDownloadService") Provider<NEPDownloadService> nepftpDownloadService,
         @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService,
         @Named("NEPSAMService") Provider<NEPSAMService> samService,
-        @Named("NEPTokenService") Provider<NEPPlayerTokenService> tokenService
-        //@Named("currentBroadcaster") Supplier<String> currentBroadcaster
-        ) {
+        @Named("NEPTokenService") Provider<NEPPlayerTokenService> tokenService     ) {
         this.gatekeeperService = gatekeeperService;
         this.nepftpUploadService = nepftpUploadService;
         this.nepftpDownloadService = nepftpDownloadService;
         this.itemizeService = itemizeService;
         this.samService = samService;
         this.tokenService = tokenService;
-        this.currentBroadcaster = null;
     }
 
     @Override

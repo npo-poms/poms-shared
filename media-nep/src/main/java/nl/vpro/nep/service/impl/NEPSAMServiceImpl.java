@@ -1,22 +1,23 @@
 package nl.vpro.nep.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.time.Duration;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Supplier;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.ws.rs.client.Client;
-import lombok.extern.slf4j.Slf4j;
-
-import java.time.Duration;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 import org.apache.http.HttpHeaders;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.nep.sam.api.AccessApi;
@@ -53,6 +54,10 @@ public class NEPSAMServiceImpl implements NEPSAMService{
     private final Duration socketTimeout = Duration.ofMillis(1000);
 
     Client httpClient = null;
+
+    AccessApi accessApi;
+
+
 
     @Inject
     public NEPSAMServiceImpl(
@@ -115,8 +120,8 @@ public class NEPSAMServiceImpl implements NEPSAMService{
             String profile = drmProfileLive;
             log.debug("Using profile {}", profile);
             StreamAccessResponseItem streamAccessResponseItem = streamApiLive.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerLive, platformLive,  profile, channel, request);
-            Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
-            return Optional.of((String) attributes.get("url"));
+            return getUrl(streamAccessResponseItem);
+
         } catch (Exception e) {
             throw new NEPException(e, e.getMessage());
         }
@@ -132,8 +137,9 @@ public class NEPSAMServiceImpl implements NEPSAMService{
             String profile = drm ? drmProfileMid : noDrmProfileMid;
             log.debug("Using profile {}", profile);
             StreamAccessResponseItem streamAccessResponseItem = streamApiMid.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(providerMid, platformMid, profile, mid, request);
-            Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
-            return Optional.of((String) attributes.get("url"));
+
+            return getUrl(streamAccessResponseItem);
+
         } catch (ApiException e) {
             if (e.getCode() == 404) {
                 return Optional.empty();
@@ -143,6 +149,16 @@ public class NEPSAMServiceImpl implements NEPSAMService{
 
             throw new NEPException(e, e.getMessage());
         }
+    }
+
+    private Optional<String> getUrl(StreamAccessResponseItem streamAccessResponseItem) {
+        if (streamAccessResponseItem.getData() == null) {
+            return Optional.empty();
+        }
+        if (streamAccessResponseItem.getData().getAttributes() == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(streamAccessResponseItem.getData().getAttributes().getUrl());
     }
 
     @Override
@@ -168,11 +184,15 @@ public class NEPSAMServiceImpl implements NEPSAMService{
     }
 
     private AccessApi getStreamApi(String baseUrl, Supplier<String> authenticator) {
-        AccessApi streamApi = new AccessApi();
-        streamApi.getApiClient().addDefaultHeader(HttpHeaders.AUTHORIZATION, authenticator.get());
-        streamApi.getApiClient().setBasePath(baseUrl);
-        streamApi.getApiClient().setHttpClient(getHttpClient());
-        return streamApi;
+        if (accessApi == null) {
+            ResteasyProviderFactory factor = ResteasyProviderFactory.getInstance();
+            var configuration = factor.getConfiguration();
+            AccessApi streamApi = new AccessApi();
+            streamApi.getApiClient().addDefaultHeader(HttpHeaders.AUTHORIZATION, authenticator.get());
+            streamApi.getApiClient().setHttpClient(getHttpClient());
+            accessApi = streamApi;
+        }
+        return accessApi;
     }
 
     private synchronized Client getHttpClient() {

@@ -77,6 +77,11 @@ components:
               type: object
               description: 'Extra options passed to the response. Ex. if DAI is enabled or not, default: {}'
 
+            # added by michiel
+            token:
+              type: string
+              description: ''
+
     StreamResponseCollection:
       type: object
       properties:
