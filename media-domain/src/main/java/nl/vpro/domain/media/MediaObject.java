@@ -459,9 +459,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JoinTable(name = "mediaobject_memberof", inverseJoinColumns = @JoinColumn(name = "id"))
     //@SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-
-
-
     @PublicationFilter
     @Filter(
         name = MR_DELETED_FILTER, condition = MR_DELETED_FILTER_CONDITION)
