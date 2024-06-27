@@ -69,7 +69,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     @XmlSchemaType(name = "dateTime")
     @Getter
     @Setter
-    protected Instant creationInstant = Instant.now();
+    protected Instant creationInstant = null;
 
 
     @Column(nullable = false, name = "lastModified")
@@ -79,7 +79,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     @XmlSchemaType(name = "dateTime")
     @Getter
     @Setter
-    protected Instant lastModifiedInstant = Instant.now();
+    protected Instant lastModifiedInstant = null;
 
     @Id
     @XmlAttribute(required = true)

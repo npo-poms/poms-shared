@@ -45,7 +45,7 @@ public class SubtitlesTest {
     @Test
     public void testUnmarshallFromXml()  {
         String xml =
-            "<subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\" creationDate=\"1970-01-01T01:00:00+01:00\" lastModified=\"1970-01-01T01:00:00+01:00\" type=\"CAPTION\" xml:lang=\"nl-NL\"  owner=\"BROADCASTER\" workflow=\"FOR_PUBLICATION\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
+            "<subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\"  type=\"CAPTION\" xml:lang=\"nl-NL\"  owner=\"BROADCASTER\" workflow=\"FOR_PUBLICATION\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
                 "    <content format=\"WEBVTT\">" + Base64.getEncoder().encodeToString("Ondertiteling tekst".getBytes()) + "</content>\n" +
                 "</subtitles>";
 
@@ -56,6 +56,8 @@ public class SubtitlesTest {
         assertThat(subtitles.getMid()).isEqualTo("VPRO_1234");
         assertThat(subtitles.getOffset()).isEqualTo(Duration.ofMillis(120000));
         assertThat(new String(subtitles.getContent().getValue(), UTF_8)).isEqualTo("Ondertiteling tekst");
+        assertThat(subtitles.getLastModifiedInstant()).isNull();
+        assertThat(subtitles.getCreationInstant()).isNull();
     }
 
     @Test
