@@ -45,9 +45,10 @@ public class SubtitlesTest {
     @Test
     public void testUnmarshallFromXml()  {
         String xml =
-            "<subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\"  type=\"CAPTION\" xml:lang=\"nl-NL\"  owner=\"BROADCASTER\" workflow=\"FOR_PUBLICATION\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
-                "    <content format=\"WEBVTT\">" + Base64.getEncoder().encodeToString("Ondertiteling tekst".getBytes()) + "</content>\n" +
-                "</subtitles>";
+            """
+            <subtitles mid="VPRO_1234" offset="P0DT0H2M0.000S"  type="CAPTION" xml:lang="nl-NL"  owner="BROADCASTER" workflow="FOR_PUBLICATION" xmlns="urn:vpro:media:subtitles:2009">
+                <content format="WEBVTT">%s</content>
+           </subtitles>""".formatted( Base64.getEncoder().encodeToString("Ondertiteling tekst".getBytes()));
 
         StringReader reader = new StringReader(xml);
 
