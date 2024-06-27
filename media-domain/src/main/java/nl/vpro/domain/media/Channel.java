@@ -2459,7 +2459,7 @@ public enum Channel implements Displayable, XmlValued {
     SBS9(VIDEO, 2015) {
         @Override
         public String toString() {
-            return "SBS 9";
+            return "ViaPlay TV"; // since 2024
         }
     },
 
