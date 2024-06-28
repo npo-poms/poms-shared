@@ -22,11 +22,6 @@
               <goal>process</goal>
             </goals>
             <phase>generate-sources</phase>
-            <configuration>
-              <processors>
-                <processor>org.hibernate.processor.HibernateProcessor</processor>
-              </processors>
-            </configuration>
           </execution>
         </executions>
         <dependencies>
