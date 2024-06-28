@@ -112,6 +112,11 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "NPO Soul & Jazz";
         }
+
+        @Override
+        public String pdId() {
+            return "R2SJ";
+        }
     },
 
     @XmlEnumValue("RAD3")
