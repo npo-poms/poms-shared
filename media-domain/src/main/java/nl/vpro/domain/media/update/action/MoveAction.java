@@ -59,7 +59,7 @@ public class MoveAction {
     }
 
     @XmlAttribute(name = "type")
-    Type type = null;
+    Type type;
 
 
     public Type getEffectiveType() {
