@@ -202,8 +202,8 @@ public final class Segment extends MediaObject implements Comparable<Segment>, C
 
     @Override
     public void setParent(Program parent) {
-        if(parent == null) {
-            throw new IllegalArgumentException();
+        if(parent == null && this.parent != null) {
+            throw new IllegalArgumentException("Cannot set parent to null");
         }
         this.parent = parent;
         invalidateSortDate();
