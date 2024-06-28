@@ -75,7 +75,7 @@ public class Changeables {
 
 
     /**
-     * Used by implementations of {@code org.hibernate.Interceptor}
+     * Used by implementations of {@code org.hibernate.Interceptor}. Fills {@link Changeable#setLastModifiedInstant(Instant)} and {@link Changeable#setCreationInstant(Instant)} (if needed).
      * @since 5.11
      */
     public static boolean updateEntity(

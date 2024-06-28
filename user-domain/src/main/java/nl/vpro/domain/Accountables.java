@@ -32,7 +32,8 @@ public class Accountables {
 
 
     /**
-     * Used by implementations of {@link org.hibernate.Interceptor}
+     * Used by implementations of {@link org.hibernate.Interceptor}. Fills in {@link Accountable#setCreatedBy(Editor)} and {@link Accountable#setLastModifiedBy(Editor)}, in
+     * addition to {@link Changeables#updateEntity(Changeable, boolean, String, String, Object[], String[])}.
      */
     public static boolean updateEntity(
         @NonNull Editor user,
