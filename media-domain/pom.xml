@@ -31,8 +31,8 @@
             <configuration>
               <processors>
                 <!-- https://stackoverflow.com/questions/31805327/how-to-cohexist-lombok-and-jpametalmodel-processors-with-maven -->
-                <processor>org.hibernate.processor.HibernateProcessor</processor>
-                <!--processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor-->
+                <!--processor>org.hibernate.processor.HibernateProcessor</processor-->
+                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
                 <processor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
               </processors>
               <optionMap>

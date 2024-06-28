@@ -24,6 +24,7 @@ public class DescriptionTranslation extends AbstractOwnedTextEntity<DescriptionT
 
     @Serial
     private static final long serialVersionUID = 8768731191821945231L;
+
     @Getter
     @ManyToOne
     @NotNull
