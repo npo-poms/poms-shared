@@ -24,11 +24,6 @@
               <goal>process</goal>
             </goals>
             <phase>generate-sources</phase>
-            <configuration>
-              <processors>
-                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
-              </processors>
-            </configuration>
           </execution>
         </executions>
         <dependencies>
