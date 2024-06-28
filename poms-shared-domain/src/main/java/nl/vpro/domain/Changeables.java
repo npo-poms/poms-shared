@@ -21,7 +21,7 @@ public class Changeables {
      * Returns the clock that is for determining default creation dates and such things. Also, it used by {@link Embargo}.
      * <p>
      * The clock is a Thread local, and normally is just {@link Clock#systemUTC()}, but e.g. during testing it may be some
-     * other clock implementation (like {@link Clock#fixed(Instant, ZoneId)}.
+     * other clock implementation (like {@link Clock#fixed(Instant, ZoneId)}, or {@link org.meeuw.math.time.TestClock}).
      * @since 5.31
      */
     public static Clock clock() {
