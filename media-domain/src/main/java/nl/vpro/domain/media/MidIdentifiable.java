@@ -16,6 +16,9 @@ public interface MidIdentifiable extends Identifiable<Long> {
 
     String getMid();
 
+    /**
+     * The {@link MediaType} of the poms object. E.g. {@link MediaType#BROADCAST} or {@link MediaType#SERIES}.
+     */
     MediaType getMediaType();
 
 
