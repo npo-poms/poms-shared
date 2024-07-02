@@ -13,6 +13,8 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.validation.NoHtml;
 
 /**
+ *
+ * An {@link AbstractOwnedTextEntity} with no constraint on the length of the value.
  * @author Michiel Meeuwissen
  * @since 8.2
  */
