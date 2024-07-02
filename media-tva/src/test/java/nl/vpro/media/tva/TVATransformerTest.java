@@ -649,6 +649,22 @@ public class TVATransformerTest {
 
     }
 
+    @Test
+    public void _101schedule() throws IOException, ParserConfigurationException, TransformerException, SAXException {
+        String xml = transform("pd/pd/101_20240714P.xml");
+        log.info("{}", xml);
+        MediaTable table = JAXB.unmarshal(new StringReader(xml), MediaTable.class);
+
+        validate(table);
+
+        for (Program p : table.getProgramTable()) {
+            p.getEpisodeOf().stream().map(r -> r.getMidRef()).forEach(
+                r -> assertThat(table.getGroup(r)).isNotNull()
+            );
+
+        }
+    }
+
 
     private String bindinc(String resource) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         genreFunction.setNotFound(NotFound.IGNORE);// TODO API-460
