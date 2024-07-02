@@ -13,8 +13,7 @@ import jakarta.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.AbstractOwnedTextEntity;
-import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.ScheduleEvent;
 
 /**
@@ -27,7 +26,7 @@ import nl.vpro.domain.media.ScheduleEvent;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventTitle", namespace = Xmlns.MEDIA_NAMESPACE)
 @JsonPropertyOrder({"value", "owner", "type"})
-public class ScheduleEventTitle extends AbstractOwnedTextEntity<ScheduleEventTitle, ScheduleEvent> {
+public class ScheduleEventTitle extends AbstractTitleEntity<ScheduleEventTitle, ScheduleEvent> {
 
     @Serial
     private static final long serialVersionUID = -445917594010977511L;
