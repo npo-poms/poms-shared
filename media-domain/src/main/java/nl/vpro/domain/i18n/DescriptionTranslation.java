@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import nl.vpro.domain.AbstractDescriptionEntity;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
@@ -30,8 +32,8 @@ public class DescriptionTranslation extends AbstractDescriptionEntity<Descriptio
     @NotNull
     MediaObjectTranslation parent;
 
-    public DescriptionTranslation(MediaObjectTranslation parent, String title, OwnerType owner, TextualType type) {
-        super(title, owner, type);
+    public DescriptionTranslation(MediaObjectTranslation parent, @NonNull String description, OwnerType owner, TextualType type) {
+        super(description, owner, type);
         this.parent = parent;
     }
 

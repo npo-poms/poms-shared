@@ -30,7 +30,7 @@ public class TitleTranslation extends AbstractTitleEntity<TitleTranslation, Medi
     @NotNull
     MediaObjectTranslation parent;
 
-    public TitleTranslation(MediaObjectTranslation parent, String title, OwnerType owner, TextualType type) {
+    public TitleTranslation(MediaObjectTranslation parent, @NotNull String title, OwnerType owner, TextualType type) {
         super(title, owner, type);
         this.parent = parent;
     }

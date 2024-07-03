@@ -36,7 +36,7 @@ public abstract class AbstractTitleEntity<T extends AbstractTitleEntity<T, P>, P
     protected String value;
 
 
-    protected AbstractTitleEntity(String value, OwnerType owner, TextualType type) {
+    protected AbstractTitleEntity(@NotNull String value, OwnerType owner, TextualType type) {
         super(owner, type);
         this.value = value;
     }

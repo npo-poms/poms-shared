@@ -7,17 +7,16 @@ import java.io.Serial;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.*;
+import nl.vpro.domain.AbstractTitleEntity;
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.ScheduleEvent;
 
 /**
- * See https://jira.vpro.nl/browse/MSE-3524
+ * See <a href="https://jira.vpro.nl/browse/MSE-3524">MSE-3524</a>
  * @author Michiel Meeuwissen
  * @since 5.1
  */

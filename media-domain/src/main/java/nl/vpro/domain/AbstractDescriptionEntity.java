@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.validation.NoHtml;
@@ -36,7 +38,7 @@ public abstract class AbstractDescriptionEntity<T extends AbstractDescriptionEnt
     protected String value;
 
 
-    protected AbstractDescriptionEntity(String value, OwnerType owner, TextualType type) {
+    protected AbstractDescriptionEntity(@NonNull String value, OwnerType owner, TextualType type) {
         super(owner, type);
         this.value = value;
     }
