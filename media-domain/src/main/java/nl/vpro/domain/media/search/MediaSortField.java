@@ -90,7 +90,7 @@ public enum MediaSortField implements SortField {
     publishedLocations(Type.COUNT, "locations", "locationPublishedCount") {
         @Override
         public Predicate<Object> predicate() {
-            return i -> ((Location) i).isPublishable();
+            return i -> ((Location) i).isConsiderableForPublication();
         }
     },
 
@@ -115,7 +115,7 @@ public enum MediaSortField implements SortField {
     publishedImagesCount(Type.COUNT, "images", "imagesPublishedCount") {
         @Override
         public Predicate<Object> predicate() {
-            return i -> ((Image) i).isPublishable();
+            return i -> ((Image) i).isConsiderableForPublication();
         }
     },
      /**
@@ -129,7 +129,7 @@ public enum MediaSortField implements SortField {
          public Predicate<Object> predicate() {
              return i -> {
                 Image img = (Image) i;
-                return img.isPublishable() && missingCredits(img);
+                return img.isConsiderableForPublication() && missingCredits(img);
 
              };
          }
