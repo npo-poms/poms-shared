@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -96,6 +95,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @NotNull
     protected Instant start;
 
+
+    protected Instant effectiveStart;
+
     @ManyToOne
     @Valid
     protected Net net;
@@ -129,6 +131,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     protected Duration duration;
 
     protected String imi;
+
+    protected String guci;
 
     @Transient
     protected String urnRef;
@@ -206,7 +210,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Instant start,
         @NonNull  Duration duration,
         @Nullable Program media) {
-        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null, null, null, null);
+        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null, null, null, null, null, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -225,7 +229,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @Singular Set<ScheduleEventDescription> descriptions,
         @Nullable AVAttributes avAttributes,
         @Nullable String textPage,
-        @Nullable String textSubtitles
+        @Nullable String textSubtitles,
+        @Nullable String guci,
+        @Nullable Instant effectiveStart
         ) {
         this.channel = channel;
         this.net = net;
@@ -252,6 +258,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.avAttributes = avAttributes;
         this.textPage = textPage;
         this.textSubtitles = textSubtitles;
+        this.guci = guci;
+        this.effectiveStart = effectiveStart;
         setParent(media);
     }
 
