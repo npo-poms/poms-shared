@@ -12,7 +12,7 @@
   <description>
     The classes needed for the 'classification' service used in POMS.
     This os based on ClassificationScheme xml's as provided by EBU.
-    It at the moment is only used for genres, but it could in principle accomodate other types of classification based on
+    It at the moment is only used for genres, but it could in principle accommodate other types of classification based on
     a fixed list.
   </description>
 
@@ -72,7 +72,6 @@
      <dependency>
       <groupId>org.glassfish.jaxb</groupId>
       <artifactId>jaxb-runtime</artifactId>
-       <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
