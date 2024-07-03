@@ -16,8 +16,16 @@
       <artifactId>media-domain</artifactId>
     </dependency>
     <dependency>
+      <groupId>nl.vpro.media</groupId>
+      <artifactId>media-classification</artifactId>
+    </dependency>
+    <dependency>
       <groupId>nl.vpro.subtitles</groupId>
       <artifactId>subtitles-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-log4j2</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
