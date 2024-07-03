@@ -39,8 +39,4 @@ public class TitleTranslation extends AbstractTitleEntity<TitleTranslation, Medi
     }
 
 
-    @Override
-    public boolean mayContainNewLines() {
-        return false;
-    }
 }

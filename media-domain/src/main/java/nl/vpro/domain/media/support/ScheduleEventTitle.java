@@ -21,6 +21,7 @@ import nl.vpro.domain.media.ScheduleEvent;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
+@Setter
 @Entity
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
@@ -32,7 +33,6 @@ public class ScheduleEventTitle extends AbstractTitleEntity<ScheduleEventTitle, 
     private static final long serialVersionUID = -445917594010977511L;
 
     @Getter
-    @Setter
     @ManyToOne
     @NotNull
     @JoinColumns({
@@ -54,8 +54,4 @@ public class ScheduleEventTitle extends AbstractTitleEntity<ScheduleEventTitle, 
     public ScheduleEventTitle() {
     }
 
-    @Override
-    public boolean mayContainNewLines() {
-        return false;
-    }
 }

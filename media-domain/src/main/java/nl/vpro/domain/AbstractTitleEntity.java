@@ -29,7 +29,7 @@ public abstract class AbstractTitleEntity<T extends AbstractTitleEntity<T, P>, P
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
     @Size.List({
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
-        @Size(min = 255, message = "{nl.vpro.constraints.text.Size.max}"),
+        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}"),
     })
     @NoHtml(aggressive = false)
     @XmlValue
@@ -53,6 +53,12 @@ public abstract class AbstractTitleEntity<T extends AbstractTitleEntity<T, P>, P
     @Override
     public void set(String value) {
         this.value = value;
+    }
+
+
+    @Override
+    public boolean mayContainNewLines() {
+        return false;
     }
 
 }
