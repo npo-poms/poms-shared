@@ -63,6 +63,8 @@
     <module>media-projectm</module>
     <module>media-npo</module>
     <module>media-tva</module>
+    <module>media-berlijn</module>
+
   </modules>
 
   <build>

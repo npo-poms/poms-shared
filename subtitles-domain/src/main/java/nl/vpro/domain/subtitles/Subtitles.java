@@ -1,9 +1,6 @@
 package nl.vpro.domain.subtitles;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import jakarta.xml.bind.annotation.*;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +11,9 @@ import java.time.Instant;
 import java.util.*;
 
 import javax.xml.XMLConstants;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.io.IOUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -381,6 +381,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     public int hashCode() {
         return mid != null ? mid.hashCode() : 0;
     }
+
 
 
 }

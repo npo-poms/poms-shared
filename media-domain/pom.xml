@@ -120,6 +120,11 @@
       <artifactId>media-classification</artifactId>
     </dependency>
     <dependency>
+      <groupId>nl.vpro.subtitles</groupId>
+      <artifactId>subtitles-domain</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions-countries</artifactId>
     </dependency>
