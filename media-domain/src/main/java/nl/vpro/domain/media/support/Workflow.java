@@ -131,7 +131,7 @@ public enum Workflow implements Displayable, XmlValued {
     ), true);
 
     /**
-     * The workflows that are considered 'deleted'. I.e. {@link #DELETED} and {@link #FOR_DELETION}
+     * The workflows that are considered 'deleted'. I.e. {@link #DELETED}, {@link #FOR_DELETION} and {@link #TEMPORARY}
      * Not {@link #REVOKED}
      */
     public static final Set<Workflow> DELETES = nullSafeSet(Set.of(
