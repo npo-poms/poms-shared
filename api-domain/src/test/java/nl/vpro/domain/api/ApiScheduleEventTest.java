@@ -40,91 +40,101 @@ public class ApiScheduleEventTest implements ComparableTheory<ScheduleEvent> {
 
         Jackson2TestUtil.assertThatJson(json)
             .isSimilarTo("""
-                {
-                  "channel" : "NED3",
-                  "start" : 100,
-                  "guideDay" : -90000000,
-                  "duration" : 200,
-                  "midRef" : "VPROWON_12345",
-                  "poProgID" : "VPROWON_12345",
-                  "textSubtitles" : "Teletekst ondertitels",
-                  "textPage" : "888",
-                  "primaryLifestyle" : {
-                    "value" : "Praktische Familiemensen"
-                  },
-                  "secondaryLifestyle" : {
-                    "value" : "Zorgzame Duizendpoten"
-                  },
-                  "media" : {
-                    "objectType" : "program",
-                    "mid" : "VPROWON_12345",
-                    "workflow" : "FOR_PUBLICATION",
-                    "sortDate" : 100,
-                    "creationDate" : 1409733642642,
-                    "embeddable" : true,
-                    "broadcasters" : [ ],
-                    "genres" : [ ],
-                    "countries" : [ ],
-                    "languages" : [ ],
-                    "scheduleEvents" : [ {
-                      "titles" : [ {
-                        "value" : "Main ScheduleEvent Title",
-                        "owner" : "BROADCASTER",
-                        "type" : "MAIN"
-                      } ],
-                      "descriptions" : [ {
-                        "value" : "Main ScheduleEvent Description",
-                        "owner" : "BROADCASTER",
-                        "type" : "MAIN"
-                      } ],
-                      "channel" : "NED3",
-                      "start" : 100,
-                      "guideDay" : -90000000,
-                      "duration" : 200,
-                      "midRef" : "VPROWON_12345",
-                      "poProgID" : "VPROWON_12345",
-                      "textSubtitles" : "Teletekst ondertitels",
-                      "textPage" : "888",
-                      "primaryLifestyle" : {
-                        "value" : "Praktische Familiemensen"
-                      },
-                      "secondaryLifestyle" : {
-                        "value" : "Zorgzame Duizendpoten"
-                      }
-                    }, {
-                      "channel" : "NED3",
-                      "start" : 259200300,
-                      "guideDay" : 169200000,
-                      "duration" : 50,
-                      "midRef" : "VPROWON_12345",
-                      "poProgID" : "VPROWON_12345",
-                      "repeat" : {
-                        "isRerun" : true
-                      },
-                      "net" : "ZAPP"
-                    }, {
-                      "channel" : "HOLL",
-                      "start" : 691200350,
-                      "guideDay" : 601200000,
-                      "duration" : 250,
-                      "midRef" : "VPROWON_12345",
-                      "poProgID" : "VPROWON_12345",
-                      "repeat" : {
-                        "isRerun" : true
-                      }
-                    }, {
-                      "channel" : "CONS",
-                      "start" : 864000600,
-                      "guideDay" : 774000000,
-                      "duration" : 200,
-                      "midRef" : "VPROWON_12345",
-                      "poProgID" : "VPROWON_12345",
-                      "repeat" : {
-                        "isRerun" : true
-                      }
-                    } ]
-                  }
-                }""");
+{
+  "titles" : [ {
+    "value" : "Main ScheduleEvent Title",
+    "owner" : "BROADCASTER",
+    "type" : "MAIN"
+  } ],
+  "descriptions" : [ {
+    "value" : "Main ScheduleEvent Description",
+    "owner" : "BROADCASTER",
+    "type" : "MAIN"
+  } ],
+  "channel" : "NED3",
+  "start" : 100,
+  "guideDay" : -90000000,
+  "duration" : 200,
+  "midRef" : "VPROWON_12345",
+  "poProgID" : "VPROWON_12345",
+  "textSubtitles" : "Teletekst ondertitels",
+  "textPage" : "888",
+  "primaryLifestyle" : {
+    "value" : "Praktische Familiemensen"
+  },
+  "secondaryLifestyle" : {
+    "value" : "Zorgzame Duizendpoten"
+  },
+  "media" : {
+    "objectType" : "program",
+    "mid" : "VPROWON_12345",
+    "workflow" : "FOR_PUBLICATION",
+    "sortDate" : 100,
+    "creationDate" : 1409733642642,
+    "embeddable" : true,
+    "broadcasters" : [ ],
+    "genres" : [ ],
+    "countries" : [ ],
+    "languages" : [ ],
+    "scheduleEvents" : [ {
+      "titles" : [ {
+        "value" : "Main ScheduleEvent Title",
+        "owner" : "BROADCASTER",
+        "type" : "MAIN"
+      } ],
+      "descriptions" : [ {
+        "value" : "Main ScheduleEvent Description",
+        "owner" : "BROADCASTER",
+        "type" : "MAIN"
+      } ],
+      "channel" : "NED3",
+      "start" : 100,
+      "guideDay" : -90000000,
+      "duration" : 200,
+      "midRef" : "VPROWON_12345",
+      "poProgID" : "VPROWON_12345",
+      "textSubtitles" : "Teletekst ondertitels",
+      "textPage" : "888",
+      "primaryLifestyle" : {
+        "value" : "Praktische Familiemensen"
+      },
+      "secondaryLifestyle" : {
+        "value" : "Zorgzame Duizendpoten"
+      }
+    }, {
+      "channel" : "NED3",
+      "start" : 259200300,
+      "guideDay" : 169200000,
+      "duration" : 50,
+      "midRef" : "VPROWON_12345",
+      "poProgID" : "VPROWON_12345",
+      "repeat" : {
+        "isRerun" : true
+      },
+      "net" : "ZAPP"
+    }, {
+      "channel" : "HOLL",
+      "start" : 691200350,
+      "guideDay" : 601200000,
+      "duration" : 250,
+      "midRef" : "VPROWON_12345",
+      "poProgID" : "VPROWON_12345",
+      "repeat" : {
+        "isRerun" : true
+      }
+    }, {
+      "channel" : "CONS",
+      "start" : 864000600,
+      "guideDay" : 774000000,
+      "duration" : 200,
+      "midRef" : "VPROWON_12345",
+      "poProgID" : "VPROWON_12345",
+      "repeat" : {
+        "isRerun" : true
+      }
+    } ]
+  }
+}""");
     }
 
     @Test
@@ -138,6 +148,8 @@ public class ApiScheduleEventTest implements ComparableTheory<ScheduleEvent> {
         String expected = """
             <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <api:scheduleItem channel="NED3" midRef="VPROWON_12345" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009">
+                <media:title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</media:title>
+                <media:description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</media:description>
                 <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
                 <media:textPage>888</media:textPage>
                 <media:guideDay>1969-12-31+01:00</media:guideDay>
