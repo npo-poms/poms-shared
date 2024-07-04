@@ -555,6 +555,24 @@ public class TextualObjects {
         forUpdate(from.getDescriptions(), (t) -> to.setDescription(t.get(), t.getType()), () -> to.setDescriptions(null));
     }
 
+    /**
+     * Copies all titles and descriptions from one {@link TextualObjectUpdate} to a {@link TextualObject}.
+     * Then, remove all titles and descriptions (of the given owner) which were not in the source object.
+     *
+     * @since 8.2
+     */
+    public static <
+        T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
+        T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>
+        >
+    void copyAndRemove(
+        TO1 from,
+        TO2 to) {
+        copy(from, to);
+        retainAll(to.getTitles(), from.getTitles());
+        retainAll(to.getDescriptions(), from.getDescriptions());
+    }
+
 
 
     /**

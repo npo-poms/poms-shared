@@ -113,6 +113,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     protected Repeat repeat;
 
     @Setter
+    @Deprecated
     protected String memberOf;
 
     @Setter
@@ -154,6 +155,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Setter
     @Enumerated(EnumType.STRING)
+    @Deprecated
     protected ScheduleEventType type;
 
     @Setter
@@ -292,8 +294,16 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     public ScheduleEvent(ScheduleEvent source, Program parent) {
         this.channel = source.channel;
-        this.net = source.net;
         this.start = source.start;
+        copyFrom(source);
+        this.mediaObject = parent;
+    }
+
+    /**
+     * @since 8.2
+     */
+    public void copyFrom(ScheduleEvent source) {
+        this.net = source.net;
         this.guideDay = source.guideDay;
         this.repeat = Repeat.copy(source.repeat);
         this.memberOf = source.memberOf;
@@ -303,14 +313,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.offset = source.offset;
         this.duration = source.duration;
         this.imi = source.imi;
-        this.urnRef = source.urnRef;
+        this.guci = source.guci;
         this.type = source.type;
         this.primaryLifestyle = Lifestyle.copy(source.primaryLifestyle);
         this.secondaryLifestyle = SecondaryLifestyle.copy(source.secondaryLifestyle);
-        this.midRef = source.midRef;
         this.poSeriesID = source.poSeriesID;
-
-        this.mediaObject = parent;
+        this.effectiveStart = source.effectiveStart;
+        TextualObjects.copyAndRemove(source, this);
     }
 
     public static ScheduleEvent copy(ScheduleEvent source) {
@@ -380,7 +389,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
 
+    /**
+     * @deprecated Last non null value is from 2015
+     */
     @XmlElement
+    @Deprecated
     public String getMemberOf() {
         return memberOf;
     }
@@ -553,6 +566,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @XmlAttribute
+    @Deprecated
     public ScheduleEventType getType() {
         return type;
     }

@@ -752,6 +752,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return crids;
     }
 
+    /**
+     * Adds crid to mediaobject unless it already has it.
+     * @param crid A calid crid.
+     */
     public MediaObject addCrid(@CRID String crid) {
         if (StringUtils.isNotBlank(crid)) {
             crid = crid.trim();
