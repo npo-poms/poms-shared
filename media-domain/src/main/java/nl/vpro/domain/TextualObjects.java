@@ -508,7 +508,7 @@ public class TextualObjects {
     }
 
     /**
-     * From a collection of {@link OwnedText}'s remove all all elements with certain owner, which are not in the source collection of {@link TypedText}'s.
+     * From a collection of {@link OwnedText}'s remove all elements with certain owner, which are not in the source collection of {@link TypedText}'s.
      *
      * @param collection The collection to remove objects from
      * @param toRetain   The collection of texts which are to be retained in collection

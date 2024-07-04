@@ -303,6 +303,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
      * @since 8.2
      */
     public void copyFrom(ScheduleEvent source) {
+        copyFrom(source, null);
+    }
+
+    /**
+     * @since 8.2
+     */
+    public void copyFrom(ScheduleEvent source, @Nullable OwnerType ownerType) {
         this.net = source.net;
         this.guideDay = source.guideDay;
         this.repeat = Repeat.copy(source.repeat);
@@ -319,7 +326,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.secondaryLifestyle = SecondaryLifestyle.copy(source.secondaryLifestyle);
         this.poSeriesID = source.poSeriesID;
         this.effectiveStart = source.effectiveStart;
-        TextualObjects.copyAndRemove(source, this);
+        if (ownerType == null) {
+            TextualObjects.copyAndRemove(source, this);
+        } else {
+            TextualObjects.copyAndRemove(source, this, ownerType);
+
+        }
     }
 
     public static ScheduleEvent copy(ScheduleEvent source) {
