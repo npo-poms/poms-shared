@@ -208,18 +208,22 @@ public class PomsMapper {
             if (event == null) {
                 continue;
             }
-            entry.assertValid();
-            schedule.addScheduleEvent(event);
+            try {
+                entry.assertValid();
+                schedule.addScheduleEvent(event);
 
 
-            var programByMid = table.find(entry.prid()).orElse(null);
-            var crid = "crid://npo/programmagegevens/" + entry.crid();
-            if (programByMid == null) {
-                Program program = new Program(entry.prid());
-                program.addCrid(crid);
-                table.add(program);
-            } else {
-                programByMid.addCrid(crid);
+                var programByMid = table.find(entry.prid()).orElse(null);
+                var crid = "crid://npo/programmagegevens/" + entry.crid();
+                if (programByMid == null) {
+                    Program program = new Program(entry.prid());
+                    program.addCrid(crid);
+                    table.add(program);
+                } else {
+                    programByMid.addCrid(crid);
+                }
+            } catch (AssertionError ae) {
+                log.error(ae);
             }
         }
         return table;

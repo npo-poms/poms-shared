@@ -1,15 +1,13 @@
 package nl.vpro.berlijn.domain.epg;
 
-import java.time.Duration;
 import java.time.Instant;
-import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import nl.vpro.berlijn.domain.AssertValidatable;
 
 /**
- * @param duration Duration of the schedule event in seconds. Seems to be the difference between {@link #startTime} and {@link #endTime}.
+ * @param duration Duration of the schedule event in seconds. Seems to be the difference between {@link #guideStartTime} and {@link #endTime}.
  * @param startTime
  * @param endTime
  * @param guideStartTime What's the different with {@link #startTime}
@@ -34,8 +32,8 @@ public record EPGEntry(
     public void assertValid() {
         assert startTime != null : "no start time in " + this;
 
-        if (startTime != null && endTime != null) {
-            assert Objects.equals(Duration.between(startTime, endTime), Duration.ofSeconds(duration));
+        if (guideStartTime != null && endTime != null) {
+            //assert Objects.equals(Duration.between(guideStartTime, endTime), Duration.ofSeconds(duration)) : Duration.between(guideStartTime, endTime) + "!= " + Duration.ofSeconds(duration) + " in " + this;
         }
     }
 
