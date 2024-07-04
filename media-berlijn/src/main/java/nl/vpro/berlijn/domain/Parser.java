@@ -49,6 +49,7 @@ public class Parser {
     }
 
     private Parser() {
+
     }
 
     @Value("${berlijn.lenient:false}")
