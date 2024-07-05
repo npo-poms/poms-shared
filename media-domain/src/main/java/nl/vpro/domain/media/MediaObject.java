@@ -259,9 +259,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected String mid;
 
     //@Version
-    @Transient // Remove for MSE-3753
     @Getter
-    protected Integer version;
+    protected Integer version = 0;
 
     /**
      * Version as known in an external system where this object is originated from. In Berlijn a monotonic increasing integer.
@@ -404,9 +403,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         Locale> languages;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = true)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
     @Nullable
+    @Basic
     protected AVType avType = null;
 
     @Setter
@@ -3208,6 +3208,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @PrePersist
     protected void preUpdate() {
         Instant instant = getSortInstant(); // sortdate must be calculated for it to be properly indexed by hibernate search
+
         log.debug("Found sortdate for {} ->  {}", mid, instant);
     }
 

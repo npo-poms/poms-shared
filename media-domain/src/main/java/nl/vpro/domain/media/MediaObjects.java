@@ -879,6 +879,15 @@ public class MediaObjects {
     }
 
 
+    /**
+     * Copies locations from one mediaobject to another.
+     *
+     * @param incomingMedia
+     * @param mediaToUpdate
+     * @param owns
+     * @param owner
+     * @param steal
+     */
     public static <T extends MediaObject>  void  updateLocationsForOwner(T incomingMedia, T mediaToUpdate, Predicate<Ownable> owns, OwnerType owner, boolean steal) {
         for(Location incomingLocation : incomingMedia.getLocations()) {
 
@@ -912,6 +921,8 @@ public class MediaObjects {
                         }
                     }
                 }
+            } else {
+                log.debug("Not owning incoming location {}", incomingLocation);
             }
         }
     }
