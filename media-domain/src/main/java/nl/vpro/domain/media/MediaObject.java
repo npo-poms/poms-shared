@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
 import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Version;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -258,8 +259,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @MonotonicNonNull
     protected String mid;
 
-    //@Version
-    @Transient // Remove for MSE-3753
+    @Version
     @Getter
     protected Integer version;
 
@@ -404,9 +404,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         Locale> languages;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = true)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
     @Nullable
+    @Basic
     protected AVType avType = null;
 
     @Setter
