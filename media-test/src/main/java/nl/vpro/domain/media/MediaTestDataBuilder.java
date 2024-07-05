@@ -137,24 +137,35 @@ public interface MediaTestDataBuilder<
         return creationDate((Instant) null).workflow(null);
     }
 
+    /**
+     * Fills in the fields that are desired, and will issue warnings if not filled.
+     * These may become required.
+     */
+    default T desiredFields() {
+        return withGenres()
+            .withAgeRating()
+            .mainTitle("Main title")
+            .withBroadcasters();
+
+    }
+
     default T valid() {
         return validNew()
             .constrained()
-
             ;
     }
 
     default T validNew() {
         return constrainedNew()
-            .withGenres()
-            .withAgeRating();
+            .desiredFields()
+            ;
 
     }
 
     /**
      * Created an object with all required fields filled. This is used in tests which want a complete and valid object, but don't have an actual persistence layer.
      * <p>
-     * Note that this also includes the {@link PublishableObject#getId()}, which normally is filled by a sequence on the database so you should persist objects like this. Use {@link #dbConstrained()} then.
+     * Note that this also includes the {@link PublishableObject#getId()}, which normally is filled by a sequence on the database, so you should persist objects like this. Use {@link #dbConstrained()} then.
      */
     default T constrained() {
         return constrainedNew()
@@ -164,7 +175,7 @@ public interface MediaTestDataBuilder<
     }
 
     /**
-     * Creates an object that can be inserted into the database without furhter adue
+     * Creates an object that can be inserted into the database without further adue
      */
     default T constrainedDb() {
         T t =  constrained()
@@ -189,7 +200,8 @@ public interface MediaTestDataBuilder<
      */
     default T strictlyConstrained() {
         return constrained()
-            .ageRating(AgeRating.ALL);
+            .desiredFields()
+            ;
     }
 
     /**
