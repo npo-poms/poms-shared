@@ -43,7 +43,9 @@ public enum IdType {
 
     /**
      * Voor PREPR
+     * @deprecated
      */
+    @Deprecated
     PREPR;
 
     public static IdType of(@Nullable MediaType pomsType) {
