@@ -879,6 +879,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             ageRatingAllIfUnset()
                 .avType(this instanceof GroupBuilder ? AVType.MIXED : AVType.UNKNOWN);
     }
+
+
     /**
      * Makes a (deep) copy of this builder. This returns a new instance on which you can make changes without affecting the original one.
      */
@@ -1113,6 +1115,19 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return (T) this;
         }
 
+        public  T prediction(Platform platform, Encryption encryption) {
+            return predictions(Prediction.builder().platform(platform).encryption(encryption).build());
+        }
+
+        /**
+         * Plan availability for {@link Platform#INTERNETVOD} (with or without DRM)
+         */
+        public T plannedAvailability() {
+            return prediction(Platform.INTERNETVOD, null);
+        }
+
+
+
         @Override
         public Program build() {
             super.build();
@@ -1201,6 +1216,31 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         public T type(SegmentType segmentType) {
             mediaObject().setType(segmentType);
             return (T) this;
+        }
+
+
+        @SuppressWarnings("unchecked")
+        public T predictions(Prediction... predictions) {
+            if(predictions == null || predictions.length == 0) {
+                mediaObject().getPredictions().clear();
+            } else {
+                for(Prediction pred : predictions) {
+                    pred.setParent(mediaObject);
+                    mediaObject().getPredictions().add(pred);
+                }
+            }
+            return (T) this;
+        }
+
+        public  T prediction(Platform platform, Encryption encryption) {
+            return predictions(Prediction.builder().platform(platform).encryption(encryption).build());
+        }
+
+        /**
+         * Plan availability for {@link Platform#INTERNETVOD} (with or without DRM)
+         */
+        public T plannedAvailability() {
+            return prediction(Platform.INTERNETVOD, null);
         }
     }
 
