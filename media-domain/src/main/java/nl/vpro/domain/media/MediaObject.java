@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
 import jakarta.persistence.ForeignKey;
-import jakarta.persistence.Version;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -259,9 +258,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @MonotonicNonNull
     protected String mid;
 
-    @Version
+    //@Version
     @Getter
-    protected Integer version;
+    protected Integer version = 0;
 
     /**
      * Version as known in an external system where this object is originated from. In Berlijn a monotonic increasing integer.
@@ -3209,6 +3208,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @PrePersist
     protected void preUpdate() {
         Instant instant = getSortInstant(); // sortdate must be calculated for it to be properly indexed by hibernate search
+
         log.debug("Found sortdate for {} ->  {}", mid, instant);
     }
 
