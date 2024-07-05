@@ -7,33 +7,31 @@ import java.io.Serial;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.AbstractOwnedTextEntity;
+import nl.vpro.domain.AbstractTitleEntity;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.ScheduleEvent;
 
 /**
- * See https://jira.vpro.nl/browse/MSE-3524
+ * See <a href="https://jira.vpro.nl/browse/MSE-3524">MSE-3524</a>
  * @author Michiel Meeuwissen
  * @since 5.1
  */
+@Setter
 @Entity
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventTitle", namespace = Xmlns.MEDIA_NAMESPACE)
 @JsonPropertyOrder({"value", "owner", "type"})
-public class ScheduleEventTitle extends AbstractOwnedTextEntity<ScheduleEventTitle, ScheduleEvent> {
+public class ScheduleEventTitle extends AbstractTitleEntity<ScheduleEventTitle, ScheduleEvent> {
 
     @Serial
     private static final long serialVersionUID = -445917594010977511L;
 
     @Getter
-    @Setter
     @ManyToOne
     @NotNull
     @JoinColumns({
@@ -55,8 +53,4 @@ public class ScheduleEventTitle extends AbstractOwnedTextEntity<ScheduleEventTit
     public ScheduleEventTitle() {
     }
 
-    @Override
-    public boolean mayContainNewLines() {
-        return false;
-    }
 }

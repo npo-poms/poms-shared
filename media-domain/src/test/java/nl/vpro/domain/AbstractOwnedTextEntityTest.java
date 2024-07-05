@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AbstractOwnedTextEntityTest {
 
-    static class OwnedTextEntity extends AbstractOwnedTextEntity<OwnedTextEntity, Serializable> {
+    static class OwnedTextEntity extends AbstractTitleEntity<OwnedTextEntity, Serializable> {
 
         @Serial
         private static final long serialVersionUID = -4862022349042021564L;

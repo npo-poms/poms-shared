@@ -7,13 +7,11 @@ import java.io.Serial;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.AbstractOwnedTextEntity;
+import nl.vpro.domain.AbstractDescriptionEntity;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.ScheduleEvent;
 
@@ -27,7 +25,7 @@ import nl.vpro.domain.media.ScheduleEvent;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventDescription", namespace = Xmlns.MEDIA_NAMESPACE)
 @JsonPropertyOrder({"value", "owner", "type"})
-public class ScheduleEventDescription extends AbstractOwnedTextEntity<ScheduleEventDescription, ScheduleEvent> {
+public class ScheduleEventDescription extends AbstractDescriptionEntity<ScheduleEventDescription, ScheduleEvent> {
 
     @Serial
     private static final long serialVersionUID = -5439283140517618047L;

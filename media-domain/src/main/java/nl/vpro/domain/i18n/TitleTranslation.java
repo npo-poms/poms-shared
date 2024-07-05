@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
-import nl.vpro.domain.AbstractOwnedTextEntity;
+import nl.vpro.domain.AbstractTitleEntity;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 
@@ -21,7 +21,7 @@ import nl.vpro.domain.media.support.TextualType;
 @Getter
 @Entity
 // it's in super
-public class TitleTranslation extends AbstractOwnedTextEntity<TitleTranslation, MediaObjectTranslation> {
+public class TitleTranslation extends AbstractTitleEntity<TitleTranslation, MediaObjectTranslation> {
 
     @Serial
     private static final long serialVersionUID = -4636628305739242913L;
@@ -30,7 +30,7 @@ public class TitleTranslation extends AbstractOwnedTextEntity<TitleTranslation, 
     @NotNull
     MediaObjectTranslation parent;
 
-    public TitleTranslation(MediaObjectTranslation parent, String title, OwnerType owner, TextualType type) {
+    public TitleTranslation(MediaObjectTranslation parent, @NotNull String title, OwnerType owner, TextualType type) {
         super(title, owner, type);
         this.parent = parent;
     }
@@ -39,8 +39,4 @@ public class TitleTranslation extends AbstractOwnedTextEntity<TitleTranslation, 
     }
 
 
-    @Override
-    public boolean mayContainNewLines() {
-        return false;
-    }
 }

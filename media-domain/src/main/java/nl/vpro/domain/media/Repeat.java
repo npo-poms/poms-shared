@@ -1,14 +1,13 @@
 package nl.vpro.domain.media;
 
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlType;
-import jakarta.xml.bind.annotation.XmlValue;
-import jakarta.persistence.Embeddable;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,6 +24,7 @@ public class Repeat implements Serializable {
     @Serial
     private static final long serialVersionUID = -5535721887986056773L;
 
+    @Setter
     @Column(name = "reruntext")
     @XmlValue
     protected String value;
@@ -76,10 +76,6 @@ public class Repeat implements Serializable {
 
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 
     public boolean isRerun() {

@@ -126,4 +126,6 @@ public class AvailableSubtitles implements Identifiable<Long>, Comparable<Availa
         result = 31 * result + type.hashCode();
         return result;
     }
+
+
 }

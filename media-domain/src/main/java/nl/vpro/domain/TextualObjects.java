@@ -508,7 +508,7 @@ public class TextualObjects {
     }
 
     /**
-     * From a collection of {@link OwnedText}'s remove all all elements with certain owner, which are not in the source collection of {@link TypedText}'s.
+     * From a collection of {@link OwnedText}'s remove all elements with certain owner, which are not in the source collection of {@link TypedText}'s.
      *
      * @param collection The collection to remove objects from
      * @param toRetain   The collection of texts which are to be retained in collection
@@ -553,6 +553,24 @@ public class TextualObjects {
         @NonNull TO2 to) {
         forUpdate(from.getTitles(), (t) -> to.setTitle(t.get(), t.getType()), () -> to.setTitles(null));
         forUpdate(from.getDescriptions(), (t) -> to.setDescription(t.get(), t.getType()), () -> to.setDescriptions(null));
+    }
+
+    /**
+     * Copies all titles and descriptions from one {@link TextualObjectUpdate} to a {@link TextualObject}.
+     * Then, remove all titles and descriptions (of the given owner) which were not in the source object.
+     *
+     * @since 8.2
+     */
+    public static <
+        T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
+        T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>
+        >
+    void copyAndRemove(
+        TO1 from,
+        TO2 to) {
+        copy(from, to);
+        retainAll(to.getTitles(), from.getTitles());
+        retainAll(to.getDescriptions(), from.getDescriptions());
     }
 
 

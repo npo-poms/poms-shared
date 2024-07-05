@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import lombok.Setter;
 import lombok.Singular;
 
 import java.io.Serial;
@@ -7,7 +8,6 @@ import java.io.Serializable;
 import java.time.*;
 import java.util.*;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -96,6 +96,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @NotNull
     protected Instant start;
 
+
+    protected Instant effectiveStart;
+
+    @Setter
     @ManyToOne
     @Valid
     protected Net net;
@@ -104,32 +108,44 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Convert(converter = LocalDateToDateConverter.class)
     protected LocalDate guideDay;
 
+    @Setter
     @Embedded
     protected Repeat repeat;
 
+    @Setter
+    @Deprecated
     protected String memberOf;
 
+    @Setter
     @OneToOne(orphanRemoval = true, cascade = ALL)
     protected AVAttributes avAttributes;
 
+    @Setter
     protected String textSubtitles;
 
+    @Setter
     protected String textPage;
 
+    @Setter
     @Column(name = "start_offset")
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     protected Duration offset;
 
+    @Setter
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @DurationMin // negative durations don't make sense
     protected Duration duration;
 
+    @Setter
     protected String imi;
 
+    protected String guci;
+
+    @Setter
     @Transient
     protected String urnRef;
 
@@ -137,22 +153,28 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @JsonBackReference
     protected Program mediaObject;
 
+    @Setter
     @Enumerated(EnumType.STRING)
+    @Deprecated
     protected ScheduleEventType type;
 
+    @Setter
     @Embedded
     @Column(name = "primary")
     @XmlElement
     protected Lifestyle primaryLifestyle;
 
+    @Setter
     @Embedded
     @Column(name = "secondary")
     @XmlElement
     protected SecondaryLifestyle secondaryLifestyle;
 
+    @Setter
     @Transient
     protected String midRef;
 
+    @Setter
     protected String poSeriesID;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
@@ -206,7 +228,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Instant start,
         @NonNull  Duration duration,
         @Nullable Program media) {
-        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null, null, null, null);
+        this(channel, net, guideDay, start, duration, null, media, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -225,7 +247,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @Singular Set<ScheduleEventDescription> descriptions,
         @Nullable AVAttributes avAttributes,
         @Nullable String textPage,
-        @Nullable String textSubtitles
+        @Nullable String textSubtitles,
+        @Nullable String guci,
+        @Nullable Instant effectiveStart,
+        @Nullable Duration offset
         ) {
         this.channel = channel;
         this.net = net;
@@ -252,6 +277,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.avAttributes = avAttributes;
         this.textPage = textPage;
         this.textSubtitles = textSubtitles;
+        this.guci = guci;
+        this.effectiveStart = effectiveStart;
+        if (effectiveStart != null && offset == null) {
+            this.offset = Duration.between(start, effectiveStart);
+        } else {
+            this.offset = offset;
+        }
         setParent(media);
     }
 
@@ -262,8 +294,23 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     public ScheduleEvent(ScheduleEvent source, Program parent) {
         this.channel = source.channel;
-        this.net = source.net;
         this.start = source.start;
+        copyFrom(source);
+        this.mediaObject = parent;
+    }
+
+    /**
+     * @since 8.2
+     */
+    public void copyFrom(ScheduleEvent source) {
+        copyFrom(source, null);
+    }
+
+    /**
+     * @since 8.2
+     */
+    public void copyFrom(ScheduleEvent source, @Nullable OwnerType ownerType) {
+        this.net = source.net;
         this.guideDay = source.guideDay;
         this.repeat = Repeat.copy(source.repeat);
         this.memberOf = source.memberOf;
@@ -273,14 +320,18 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.offset = source.offset;
         this.duration = source.duration;
         this.imi = source.imi;
-        this.urnRef = source.urnRef;
+        this.guci = source.guci;
         this.type = source.type;
         this.primaryLifestyle = Lifestyle.copy(source.primaryLifestyle);
         this.secondaryLifestyle = SecondaryLifestyle.copy(source.secondaryLifestyle);
-        this.midRef = source.midRef;
         this.poSeriesID = source.poSeriesID;
+        this.effectiveStart = source.effectiveStart;
+        if (ownerType == null) {
+            TextualObjects.copyAndRemove(source, this);
+        } else {
+            TextualObjects.copyAndRemove(source, this, ownerType);
 
-        this.mediaObject = parent;
+        }
     }
 
     public static ScheduleEvent copy(ScheduleEvent source) {
@@ -339,9 +390,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return repeat;
     }
 
-    public void setRepeat(Repeat value) {
-        this.repeat = value;
-    }
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public boolean isRerun() {
@@ -353,13 +401,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
 
+    /**
+     * @deprecated Last non null value is from 2015
+     */
     @XmlElement
+    @Deprecated
     public String getMemberOf() {
         return memberOf;
-    }
-
-    public void setMemberOf(String value) {
-        this.memberOf = value;
     }
 
     /**
@@ -370,26 +418,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return avAttributes;
     }
 
-    public void setAvAttributes(AVAttributes value) {
-        this.avAttributes = value;
-    }
-
     @XmlElement
     public String getTextSubtitles() {
         return textSubtitles;
     }
 
-    public void setTextSubtitles(String value) {
-        this.textSubtitles = value;
-    }
-
     @XmlElement
     public String getTextPage() {
         return textPage;
-    }
-
-    public void setTextPage(String textPage) {
-        this.textPage = textPage;
     }
 
 
@@ -455,10 +491,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return offset;
     }
 
-    public void setOffset(Duration offset) {
-        this.offset = offset;
-    }
-
 
     /**
      * @since 4.3
@@ -468,10 +500,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @JsonIgnore
     public Duration getDuration() {
         return duration;
-    }
-
-    public void setDuration(Duration value) {
-        this.duration = value;
     }
 
     @XmlAttribute
@@ -493,17 +521,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return net;
     }
 
-    public void setNet(Net net) {
-        this.net = net;
-    }
-
     @XmlAttribute
     public String getImi() {
         return imi;
-    }
-
-    public void setImi(String value) {
-        this.imi = value;
     }
 
     @XmlAttribute(required = true)
@@ -514,20 +534,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return urnRef;
     }
 
-    public void setUrnRef(String value) {
-        this.urnRef = value;
-    }
-
     @XmlAttribute(required = true)
     public String getMidRef() {
         if (this.midRef == null && mediaObject != null) {
             return mediaObject.getMid();
         }
         return midRef;
-    }
-
-    public void setMidRef(String midRef) {
-        this.midRef = midRef;
     }
 
     @Override
@@ -566,12 +578,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @XmlAttribute
+    @Deprecated
     public ScheduleEventType getType() {
         return type;
-    }
-
-    public void setType(ScheduleEventType type) {
-        this.type = type;
     }
 
     @XmlElement
@@ -586,10 +595,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlTransient
     public String getPoSeriesID() {
         return poSeriesID;
-    }
-
-    public void setPoSeriesID(String poSeriesID) {
-        this.poSeriesID = poSeriesID;
     }
 
     @XmlElement(name = "poSeriesID")
@@ -612,16 +617,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return primaryLifestyle;
     }
 
-    public void setPrimaryLifestyle(Lifestyle primaryLifestyle) {
-        this.primaryLifestyle = primaryLifestyle;
-    }
-
     public SecondaryLifestyle getSecondaryLifestyle() {
         return secondaryLifestyle;
-    }
-
-    public void setSecondaryLifestyle(SecondaryLifestyle secondaryLifestyle) {
-        this.secondaryLifestyle = secondaryLifestyle;
     }
 
     @Override

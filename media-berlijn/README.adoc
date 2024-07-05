@@ -1,0 +1,5 @@
+= JSON bindings for NPO metadata messages
+
+Poms consumes several topics from the provided kafka bus. This replaces e.g. the XML shipments from What's on.
+
+These are json-bindings, using Jackson. Together with some utilities. Like e.g. a tool to parse the dumps of the intellij kafka plugin, and a mapper utility to map to POMS objects.
