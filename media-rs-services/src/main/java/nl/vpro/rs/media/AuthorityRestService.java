@@ -27,7 +27,7 @@ import static nl.vpro.rs.media.MediaBackendRestService.ID;
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public interface AuthorityRestService {
 
-    String BROADCASTER_PATTERN = "^[A-Z][A-Z0-9]{1,5}$";
+    String BROADCASTER_PATTERN = "^[A-Z0-9]{2,6}$";
     String VALIDATION_LEVEL = "validationLevel";
 
     String VALIDATION_LEVEL_DESCRIPTION = """
