@@ -100,6 +100,10 @@ public class License implements Displayable, Serializable { // Not an enum, beca
     public static final License CC_BY_NC_ND_4_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_4.0", "https://creativecommons.org/licenses/by-nc-nd/4.0/");
     public static final License USA_GOV = new License("United States Government Work", "http://www.usa.gov/copyright.shtml");
 
+
+    public static final License CC_MARK = new License("Geen copyright", "https://creativecommons.org/publicdomain/mark/1.0");
+
+
     private static final License[] ALL;
 
     static {
