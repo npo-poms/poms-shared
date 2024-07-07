@@ -101,6 +101,9 @@ public class License implements Displayable, Serializable { // Not an enum, beca
     public static final License USA_GOV = new License("United States Government Work", "http://www.usa.gov/copyright.shtml");
 
 
+    /**
+     * @since 8.2
+     */
     public static final License CC_MARK = new License("Geen copyright", "https://creativecommons.org/publicdomain/mark/1.0");
 
 
