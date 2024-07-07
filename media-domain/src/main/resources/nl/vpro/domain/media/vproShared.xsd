@@ -164,6 +164,7 @@
       <xs:enumeration value="CC_BY_NC_SA"/>
       <xs:enumeration value="CC_BY_NC_ND"/>
       <xs:enumeration value="USA_GOV"/>
+      <xs:enumeration value="CC_MARK"/>
     </xs:restriction>
   </xs:simpleType>
 
