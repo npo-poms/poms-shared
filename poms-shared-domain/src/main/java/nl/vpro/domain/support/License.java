@@ -1,7 +1,6 @@
 package nl.vpro.domain.support;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -13,6 +12,7 @@ import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.*;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -100,11 +100,18 @@ public class License implements Displayable, Serializable { // Not an enum, beca
     public static final License CC_BY_NC_ND_4_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_4.0", "https://creativecommons.org/licenses/by-nc-nd/4.0/");
     public static final License USA_GOV = new License("United States Government Work", "http://www.usa.gov/copyright.shtml");
 
-
     /**
      * @since 8.2
      */
     public static final License CC_MARK = new License("Geen copyright", "https://creativecommons.org/publicdomain/mark/1.0");
+
+    /**
+     * @since 8.2
+     */
+    public static final License PIXABAY= new License("Pixabay", "https://pixabay.com/nl/service/license-summary/");
+    static {
+        PIXABAY.display = false;
+    }
 
 
     private static final License[] ALL;
@@ -116,8 +123,10 @@ public class License implements Displayable, Serializable { // Not an enum, beca
                 try {
                     License license = (License) field.get(null);
                     license.id = field.getName();
-                    if (field.getName().endsWith("0")) {
+                    if (field.getAnnotation(Deprecated.class) != null) {
                         license.display = false;
+                        license.deprecated = true;
+
                     }
                     alls.add(license);
                 } catch (Exception ignored ) {
@@ -154,6 +163,10 @@ public class License implements Displayable, Serializable { // Not an enum, beca
 
     @Transient
     private boolean display = true;
+
+    @Transient
+    @Getter
+    private boolean deprecated = false;
 
     public License (){}
 

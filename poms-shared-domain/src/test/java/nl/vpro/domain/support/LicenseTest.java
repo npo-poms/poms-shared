@@ -2,6 +2,7 @@ package nl.vpro.domain.support;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.StringReader;
 import java.util.Set;
@@ -18,6 +19,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Log4j2
 public class LicenseTest {
 
     @Test
@@ -29,6 +31,19 @@ public class LicenseTest {
     @Test
     public void allsShouldReturnLicenseId() {
         assertThat(License.values()[0].getId()).isEqualTo("COPYRIGHTED");
+
+        for (License l : License.values()) {
+            if (l.display()) {
+                log.info(l.getId() + " " + l.getDisplayName() + ":" + l.getUrl());
+                assertThat(l.isDeprecated()).isFalse();
+            } else {
+                if (l.getId().endsWith("0")) {
+                    assertThat(l.isDeprecated()).isTrue();
+                } else {
+                    log.info("HIDDEN " + l.getId() + " " + l.getDisplayName() + ":" + l.getUrl());
+                }
+            }
+        }
 
     }
 
