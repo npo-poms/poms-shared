@@ -22,19 +22,59 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
 
     String getImageUri();
 
+    /**
+     *
+     */
     String getDate();
 
+    /**
+     * @see #getType()
+     */
     void setType(@NotNull ImageType type);
+
+    /**
+     * @see #getTitle()
+     */
     void setTitle(@NotNull @Size(max = 255, min = 1) String title);
+
+    /**
+     * @see #getDescription()
+     */
     void setDescription(String description);
+
+    /**
+     * @see #getSource()
+     */
     void setSource(@NotNull String source);
+    /**
+     * @see #getSourceName() ()
+     */
     void setSourceName(@NotNull String sourceName);
 
+    /**
+     * @see #getLicense()
+     */
     void setLicense(@NotNull License license);
 
+    /**
+     * @see #getCredits() ()
+     */
     void setCredits(@NoHtml @NotNull String credits);
+
+    /**
+     * @see #getHeight()
+     */
     void setHeight(@Positive Integer height);
+
+    /**
+     * @see #getWidth()
+     */
     void setWidth(@Positive Integer width);
+
+    /**
+     * @see #getDate()
+     * @see #setDate(Instant)
+     */
     void setDate(String date);
 
     default void setDate(Instant instant) {
@@ -46,6 +86,9 @@ public interface MutableMetadata<T extends MutableMetadata<T>>  extends MutableE
     }
 
 
+    /**
+     * @see #getLastModifiedInstant()
+     */
     void setLastModifiedInstant(Instant lastModified);
 
     default ChangeReport copyFrom(Metadata image) {

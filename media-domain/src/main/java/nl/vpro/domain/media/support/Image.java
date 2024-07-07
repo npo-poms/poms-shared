@@ -337,7 +337,7 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(@NonNull String title) {
         if(title != null && title.length() > 255) {
             title = title.substring(0, 255);
         }
@@ -346,7 +346,7 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public void setLicense(License license) {
+    public void setLicense(@NonNull License license) {
         this.license = license;
     }
     @Override
@@ -354,11 +354,11 @@ public class Image extends PublishableObject<Image>
         this.description = description;
     }
     @Override
-    public void setSource(String source) {
+    public void setSource(@NonNull String source) {
         this.source = source;
     }
     @Override
-    public void setSourceName(String sourceName) {
+    public void setSourceName(@NonNull String sourceName) {
         this.sourceName = sourceName;
     }
 
@@ -421,7 +421,7 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public void setCredits(String credits) {
+    public void setCredits(@NonNull String credits) {
         this.credits = !StringUtils.isBlank(credits) ? credits : null;
     }
 

@@ -21,6 +21,7 @@ import nl.vpro.validation.URI;
  *
  * @author Michiel Meeuwissen
  * @since 5.13
+ * @see ImageMetadata
  */
 public interface Metadata extends Trackable {
 
@@ -49,7 +50,7 @@ public interface Metadata extends Trackable {
 
 
     /**
-     * The license for the image.
+     * The {@link License license} for the image.
      */
     License getLicense();
 

@@ -11,15 +11,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.annotations.Beta;
 
+import nl.vpro.jackson2.Jackson2Mapper;
+
 /**
  * A 'picture' view on {@link ImageMetadata}. Mainly target at filling HTML picture elements.
  * <p>
  * It contains metadata relevant to the image itself, which could depend on what image actually is presented.
-
+ * @see PictureMetadata
  */
 @Beta
 public interface Picture {
 
+    /**
+     * Straightforward wrapper around a 'scrSet' and a 'type', basically to accomodate {@link #getSourcesList()}
+     */
     @Data
     class Source {
         final String type;
@@ -33,13 +38,21 @@ public interface Picture {
 
     /**
      * The sources of this picture. Keys are the type, values are srcset values. A list of urls with indicators when to use.
+     * @see #getSourcesList()
      */
     @JsonIgnore
     Map<String, String> getSources();
 
+
+    /**
+     * {@link #getSources()}, but presented as a list of {@link Source sources}.
+     * Javascipt developers find it easier to loop over list rather than objects in json, so this is the view actually in the json representation of a {@code Picture}
+     */
     @JsonProperty("sources")
     default List<Source> getSourcesList() {
-        return getSources().entrySet().stream().map(e -> new Source(e.getKey(), e.getValue())).collect(Collectors.toList());
+        return getSources().entrySet().stream()
+            .map(e -> new Source(e.getKey(), e.getValue()))
+            .collect(Collectors.toList());
     }
 
     /**
@@ -70,6 +83,7 @@ public interface Picture {
 
     /**
      * A JSON Presentation of this picture.
+     * @see Jackson2Mapper#getModelInstance()
      */
     @JsonIgnore
     default JsonNode getJson() {

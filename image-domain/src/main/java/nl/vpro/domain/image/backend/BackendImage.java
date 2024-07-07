@@ -19,6 +19,7 @@ import jakarta.validation.constraints.*;
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.functional.ThrowAnySupplier;
 
@@ -234,7 +235,7 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(@NonNull String title) {
         if(title == null || title.length() < 255) {
             this.title = title;
         } else {
@@ -252,7 +253,7 @@ public class BackendImage extends AbstractPublishableObject<BackendImage> implem
     }
 
     @Override
-    public void setLicense(License license) {
+    public void setLicense(@NonNull License license) {
         this.license = license;
     }
 

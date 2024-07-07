@@ -9,6 +9,8 @@ import nl.vpro.jackson2.Views;
 
 /**
  *  An extended version of {@link nl.vpro.domain.image.Metadata}. Most noticeably, it adds {@link #getSourceSet()} which may be calculated from other properties.
+ * @see Picture
+ * @see PictureMetadata
  */
 public interface ImageMetadata extends Metadata {
 

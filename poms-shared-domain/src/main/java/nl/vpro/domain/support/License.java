@@ -27,6 +27,7 @@ import nl.vpro.i18n.Displayable;
 import nl.vpro.validation.LicenseId;
 
 /**
+ * Image license information. Possible values are available as a list of static contants.
  * @author Michiel Meeuwissen
  * @since 5.0
  */
