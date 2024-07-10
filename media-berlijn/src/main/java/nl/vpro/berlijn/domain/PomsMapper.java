@@ -138,6 +138,10 @@ public class PomsMapper {
                 .map(l -> new Locale(l.language().code()))
                 .collect(Collectors.toList()));
 
+        streamNullable(contents.signLanguages()).map(SignLanguage::type).forEach(lc -> {
+            mo.getLanguages().add(lc.toLocale());
+        });
+
         mapAvailableSubtitles(contents, mo);
         optionalSynopsisToDescription(ofNullable(contents.synopsis()), mo);
     }
@@ -262,16 +266,7 @@ public class PomsMapper {
                     .build()
             ).collect(Collectors.toCollection(TreeSet::new));
 
-         /**
-        streamNullable(contents.signLanguages())
-            .map(l ->
-                AvailableSubtitles.builder()
-                    .language(Locale.of(l.type().code(), l.language().getCode()))
-                    .type(l.translation() ? SubtitlesType.TRANSLATION : SubtitlesType.CAPTION)
-                    .workflow(SubtitlesWorkflow.MISSING)
-                    .build()
-            ).forEach(incomingSubtitles::add);
-**/
+
 
          // if we actually _have_ the subtitles they overrule this, so write those back.
         subtitlesService.list(contents.prid())
