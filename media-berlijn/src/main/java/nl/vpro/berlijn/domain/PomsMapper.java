@@ -126,12 +126,15 @@ public class PomsMapper {
             person.setFamilyName(c.person().familyName());
             person.setGivenName(c.person().givenName());
 
-            //person.getId();
+            if (c.person().id() != null) {
+                person.setExternalId("berlijn:" + c.person().id());
+            }
             return person;
         }).collect(Collectors.toList()));
 
         mo.setCountries(ofNullable(contents.productionCountry()).stream().toList());
 
+        mo.setIsDubbed(false);
         mo.setLanguages(
             streamNullable(contents.languages())
                 .filter(l -> l.language() != null)

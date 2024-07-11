@@ -76,6 +76,12 @@ public class Person extends Credits implements PersonInterface {
     @Setter
     protected EmbeddablePerson gtaaInfo;
 
+    @XmlTransient
+    @Getter
+    @Setter
+    protected String externalId;
+
+
     public Person() {
     }
 
