@@ -250,8 +250,8 @@ public class TextualObjects {
         if (set == null) {
             return null;
         }
-        if (set instanceof SortedSet) {
-            return (SortedSet) set;
+        if (set instanceof SortedSet sortedSet) {
+            return sortedSet;
         } else {
             return ResortedSortedSet.of(set);
         }
