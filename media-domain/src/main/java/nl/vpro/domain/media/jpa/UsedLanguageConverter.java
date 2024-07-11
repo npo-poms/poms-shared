@@ -10,11 +10,16 @@ import nl.vpro.i18n.Locales;
 public class UsedLanguageConverter implements AttributeConverter<UsedLanguage, String> {
     @Override
     public String convertToDatabaseColumn(UsedLanguage attribute) {
-        return attribute.locale().toLanguageTag();
+        return attribute.locale().toLanguageTag() + (attribute.usage() == UsedLanguage.Usage.AUDIODESCRIPTION ? "" : ":" + attribute.usage());
     }
 
     @Override
     public UsedLanguage convertToEntityAttribute(String dbData) {
-        return UsedLanguage.of(Locales.ofString(dbData));
+        String[] split = dbData.split(":", 2);
+        if (split.length == 1) {
+            return UsedLanguage.of(Locales.ofString(dbData));
+        } else {
+            return new UsedLanguage(Locales.ofString(split[0]), UsedLanguage.Usage.valueOf(split[1]));
+        }
     }
 }

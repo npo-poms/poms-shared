@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import jakarta.xml.bind.annotation.XmlType;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.languages.LanguageCode;
 import org.meeuw.i18n.languages.validation.Language;
 
@@ -21,8 +22,8 @@ import nl.vpro.validation.WarningValidatorGroup;
 public record UsedLanguage (
     @PomsValidCountry(groups = WarningValidatorGroup.class)
     @Language(mayContainCountry = true, groups = WarningValidatorGroup.class)
-    Locale locale,
-    Usage usage) implements Displayable, Serializable {
+    @NonNull Locale locale,
+    @NonNull Usage usage) implements Displayable, Serializable {
 
     public static UsedLanguage of(Locale locale) {
         return new UsedLanguage(locale, Usage.AUDIODESCRIPTION);
