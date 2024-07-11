@@ -8,7 +8,7 @@ public record Language(
 ) {
 
 
-    enum Usage {
+    public enum Usage {
         audiodescription,
         dubbed,
         supplemental
