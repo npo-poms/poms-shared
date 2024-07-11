@@ -140,7 +140,7 @@ public class PomsMapper {
                         mo.setIsDubbed(true);
                     }
                 })
-                .map(l -> new UsedLanguage(l.language().toLocale(), UsedLanguage.Usage.valueOf(l.usage().name().toUpperCase())))
+                .map(l -> new UsedLanguage(l.language().toLocale(), UsedLanguage.usageOf(l.usage())))
                 .collect(Collectors.toList()));
 
 

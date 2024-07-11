@@ -50,6 +50,13 @@ public record UsedLanguage (
         return LocalizedString.of(locale().getDisplayName(locale), locale);
     }
 
+    public static Usage usageOf(Enum<?> value) {
+        if (value == null) {
+            return Usage.AUDIODESCRIPTION;
+        }
+        return Usage.valueOf(value.name().toUpperCase());
+    }
+
 
     public enum Usage {
         /**
