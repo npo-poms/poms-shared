@@ -310,10 +310,14 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         return parent == null;
     }
 
+    /**
+     * Correlation (for locking not aggregating!)
+     */
     @Override
     public Correlation getCorrelation() {
         return Correlation.mid(getMidRefAttribute());
     }
+
     @Target({TYPE_USE})
     @Retention(RUNTIME)
     @Constraint(validatedBy = Validator.class)
