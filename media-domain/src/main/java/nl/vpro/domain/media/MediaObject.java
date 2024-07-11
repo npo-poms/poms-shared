@@ -31,7 +31,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.functional.TriFunction;
 import org.meeuw.i18n.countries.Country;
-import org.meeuw.i18n.languages.validation.Language;
 import org.meeuw.i18n.regions.RegionService;
 
 import com.fasterxml.jackson.annotation.*;
@@ -48,6 +47,7 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
+import nl.vpro.domain.media.jpa.UsedLanguageConverter;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.*;
@@ -397,10 +397,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<
-        @PomsValidCountry(groups = WarningValidatorGroup.class)
-        @Language(mayContainCountry = true, groups = WarningValidatorGroup.class)
-        Locale> languages;
+    @Schema(implementation = String.class, type = "string")
+    @Convert(converter = UsedLanguageConverter.class)
+    protected List<@Valid UsedLanguage> languages;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = true)
@@ -1183,7 +1182,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      */
     @Override
     public void setTags(Set<Tag> tags) {
-        this.tags = (SortedSet) updateSortedSet(this.tags, tags);
+        this.tags = updateSortedSet(this.tags, tags);
     }
 
     //region GeoLocations logic
@@ -1315,7 +1314,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (countries == null) {
             countries = new ArrayList<>();
         }
-
         if (!countries.contains(country)) {
             countries.add(country);
         }
@@ -1323,24 +1321,29 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @XmlElement(name = "language")
-    @XmlJavaTypeAdapter(value = LocaleAdapter.class)
+    @XmlJavaTypeAdapter(value = UsedLanguageAdapter.class)
     @JsonProperty("languages")
     @JsonSerialize(using = LanguageList.Serializer.class)
     @JsonDeserialize(using = LanguageList.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Schema(implementation = String.class, type = "string")
-    public List<Locale> getLanguages() {
+    public List<UsedLanguage> getLanguages() {
         if (languages == null) {
             languages = new ArrayList<>();
         }
         return languages;
     }
 
-    public void setLanguages(List<Locale> languages) {
+
+    public void setLanguages(List<UsedLanguage> languages) {
         this.languages = updateList(this.languages, languages);
     }
 
-    public MediaObject addLanguage(@lombok.NonNull Locale language) {
+
+    /**
+     * @since 8.2
+     */
+    public MediaObject addLanguage(@NonNull UsedLanguage language) {
         if (languages == null) {
             languages = new ArrayList<>();
         }
@@ -1350,6 +1353,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
 
         return this;
+    }
+
+    public MediaObject addLanguage(@NonNull Locale language) {
+        return addLanguage(new UsedLanguage(language, UsedLanguage.Usage.AUDIODESCRIPTION));
     }
 
     @XmlAttribute(name = "avType", required = true)

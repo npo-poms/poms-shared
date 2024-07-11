@@ -535,7 +535,7 @@ public class MediaObjectTest {
         p.getGenres().add( new Genre("3.0.1.7.21"));
         p.setAgeRating(AgeRating.ALL);
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
-        p.setLanguages(Arrays.asList(new Locale("ZZ"), Locales.DUTCH));
+        p.setLanguages(UsedLanguage.asList(new Locale("ZZ"), Locales.DUTCH));
 
         Set<ConstraintViolation<Program>> constraintViolations = getValidator().validate(p, ValidationLevel.WARNING.getClasses());
 
@@ -554,7 +554,7 @@ public class MediaObjectTest {
         p.setAgeRating(AgeRating.ALL);
         p.getGenres().add(new Genre("3.0.1.7.21"));
         p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
-        p.setLanguages(Arrays.asList(Locales.NETHERLANDISH, new Locale("nl", "XX")));
+        p.setLanguages(UsedLanguage.asList(Locales.NETHERLANDISH, new Locale("nl", "XX")));
 
         List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(getValidator().validate(p, ValidationLevel.WARNING.getClasses()));
         Comparator<ConstraintViolation<Program>> comparing = Comparator.comparing(c -> c.getPropertyPath().toString());

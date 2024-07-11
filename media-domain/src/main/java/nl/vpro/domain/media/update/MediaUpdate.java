@@ -33,6 +33,7 @@ import nl.vpro.domain.*;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.TwitterRef;
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.bind.UsedLanguageAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
@@ -224,7 +225,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
     List<org.meeuw.i18n.regions.@NotNull @PomsValidCountry Region> countries;
 
-    List<@NotNull Locale> languages;
+    List<@NotNull @Valid UsedLanguage> languages;
 
     AVAttributesUpdate avAttributes;
 
@@ -1075,14 +1076,14 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "language")
-    @XmlJavaTypeAdapter(value = LocaleAdapter.class)
-    public List<Locale> getLanguages() {
+    @XmlJavaTypeAdapter(value = UsedLanguageAdapter.class)
+    public List<UsedLanguage> getLanguages() {
          if (languages == null) {
             languages = new ArrayList<>();
          }
         return languages;
     }
-    public void setLanguages(List<Locale> languages) {
+    public void setLanguages(List<UsedLanguage> languages) {
         this.languages = languages;
     }
 

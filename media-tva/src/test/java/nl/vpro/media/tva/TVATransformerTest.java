@@ -34,8 +34,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import com.neovisionaries.i18n.LanguageCode;
-
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.*;
@@ -50,6 +48,7 @@ import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;
 import static nl.vpro.media.tva.Constants.*;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.similar;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.meeuw.i18n.languages.ISO_639_1_Code.cs;
 
 /**
  * @author Michiel Meeuwissen
@@ -208,7 +207,7 @@ public class TVATransformerTest {
 
         assertThat(program.getMainTitle()).isEqualTo("SERIE TITEL");
         assertThat(program.getMainDescription()).isEqualTo("IK BEN DE LANGE BESCHRIJVING");
-        assertThat(program.getLanguages()).containsExactly(LanguageCode.cs.toLocale());
+        assertThat(program.getLanguages()).containsExactly(UsedLanguage.of(cs));
         assertThat(TextualObjects.getDescription(program, TextualType.KICKER)).isEqualTo("Dit is de kicker");
         assertThat(program.getContentRatings()).containsExactly(ContentRating.DRUGS_EN_ALCOHOL, ContentRating.GROF_TAALGEBRUIK);
         assertThat(program.getAgeRating()).isEqualTo(AgeRating.ALL);
@@ -416,10 +415,10 @@ public class TVATransformerTest {
                 assertThat(titles.get(1).get()).isEqualTo("Hördur - zwischen den Welten");
             }
             if ("POW_00163247".equals(program.getMid())) {
-                assertThat(program.getLanguages()).containsExactly(new Locale("zxx"));
+                assertThat(program.getLanguages()).containsExactly(UsedLanguage.of("zxx"));
             }
             if ("POW_00995211".equals((program.getMid()))) {
-                assertThat(program.getLanguages()).containsExactly(new Locale("und"));
+                assertThat(program.getLanguages()).containsExactly(UsedLanguage.of("und"));
             }
         }
         validate(table);

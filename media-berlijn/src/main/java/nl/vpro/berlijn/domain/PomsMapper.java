@@ -20,6 +20,7 @@ import nl.vpro.berlijn.domain.epg.EPGContents;
 import nl.vpro.berlijn.domain.epg.EPGEntry;
 import nl.vpro.berlijn.domain.productmetadata.Genre;
 import nl.vpro.berlijn.domain.productmetadata.*;
+import nl.vpro.berlijn.domain.productmetadata.Language;
 import nl.vpro.domain.TextualObject;
 import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.classification.Term;
@@ -134,12 +135,18 @@ public class PomsMapper {
         mo.setLanguages(
             streamNullable(contents.languages())
                 .filter(l -> l.language() != null)
-                .filter(l -> l.usage() == null) // TODO
-                .map(l -> new Locale(l.language().code()))
+                .peek(l -> {
+                    if (l.usage() == Language.Usage.dubbed) {
+                        mo.setIsDubbed(true);
+                    }
+                })
+                .map(l -> new UsedLanguage(l.language().toLocale(), UsedLanguage.Usage.valueOf(l.usage().name().toUpperCase())))
                 .collect(Collectors.toList()));
 
+
+
         streamNullable(contents.signLanguages()).map(SignLanguage::type).forEach(lc -> {
-            mo.getLanguages().add(lc.toLocale());
+            mo.getLanguages().add(new UsedLanguage(lc.toLocale(), UsedLanguage.Usage.SIGNING));
         });
 
         mapAvailableSubtitles(contents, mo);

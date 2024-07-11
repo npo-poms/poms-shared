@@ -400,6 +400,7 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="code" type="xs:string"/>
+        <xs:attribute name="usage" type="usage"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1046,6 +1047,15 @@
       <xs:enumeration value="SUBJECT"/>
       <xs:enumeration value="PRODUCED_IN"/>
       <xs:enumeration value="UNDEFINED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="usage">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AUDIODESCRIPTION"/>
+      <xs:enumeration value="DUBBED"/>
+      <xs:enumeration value="SUPPLEMENTAL"/>
+      <xs:enumeration value="SIGNING"/>
     </xs:restriction>
   </xs:simpleType>
 
