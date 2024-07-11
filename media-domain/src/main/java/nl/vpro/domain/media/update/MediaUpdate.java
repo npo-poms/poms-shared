@@ -166,19 +166,21 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
 
 
-    @SuppressWarnings("unchecked")
     public static <M extends MediaObject> @PolyNull MediaUpdate<M> create(@PolyNull M object, OwnerType owner) {
         if (object == null) {
             return null;
         }
         MediaUpdate<M> created;
-        if (object instanceof Program) {
-            created = (MediaUpdate<M>) ProgramUpdate.create((Program) object, owner);
-        } else if (object instanceof Group) {
-            created = (MediaUpdate<M>) GroupUpdate.create((Group) object, owner);
+        if (object instanceof Program program) {
+            created = (MediaUpdate<M>) ProgramUpdate.create(program, owner);
+        } else if (object instanceof Group group) {
+            created = (MediaUpdate<M>) GroupUpdate.create(group, owner);
+        } else if (object instanceof  Segment segment) {
+            created = (MediaUpdate<M>) SegmentUpdate.create(segment, owner);
         } else {
-            created = (MediaUpdate<M>) SegmentUpdate.create((Segment) object, owner);
+            throw new IllegalArgumentException("%s should be Program Group or Segment".formatted(object));
         }
+
 
         return created;
     }
