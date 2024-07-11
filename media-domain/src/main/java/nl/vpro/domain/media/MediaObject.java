@@ -348,13 +348,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected Set<@NotNull Genre> genres;
+    protected SortedSet<@NotNull Genre> genres;
 
     @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
-    protected Set<@NotNull Tag> tags;
+    protected SortedSet<@NotNull Tag> tags;
 
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
@@ -511,7 +511,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected Boolean isDubbed;
 
     @OneToMany(orphanRemoval = true, mappedBy = "mediaObject", cascade={ALL})
-    protected Set<@NonNull @Valid Prediction> predictions;
+    protected SortedSet<@NonNull @Valid Prediction> predictions;
 
     @Transient
     @Nullable
@@ -599,7 +599,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // clients working in a detached environment.
     @Transient
     @Nullable
-    Set<DescendantRef> descendantOf;
+    SortedSet<DescendantRef> descendantOf;
 
     /**
      * If this is set to true, then that indicates that something is changed in
@@ -1183,7 +1183,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      */
     @Override
     public void setTags(Set<Tag> tags) {
-        this.tags = updateSortedSet(this.tags, tags);
+        this.tags = (SortedSet) updateSortedSet(this.tags, tags);
     }
 
     //region GeoLocations logic

@@ -40,9 +40,9 @@ public class CollectionUtils {
     }
 
     @SuppressWarnings("unchecked")
-    static <T extends Comparable<?>> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
-        if (toUpdate == values && toUpdate instanceof SortedSet<?> sortedSet) {
-            return (SortedSet<T>) sortedSet;
+    static <T extends Comparable<?>> SortedSet<T> updateSortedSet(SortedSet<T> toUpdate, Collection<T> values) {
+        if (toUpdate == values) {
+            return toUpdate;
         }
         if (toUpdate == null) {
             toUpdate = new TreeSet<>();
