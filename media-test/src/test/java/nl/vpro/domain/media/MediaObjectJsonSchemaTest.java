@@ -998,33 +998,33 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testAvailableSubtitles() throws Exception {
-    	ObjectNode media = JsonNodeFactory.instance.objectNode();
-    	media.put("objectType", "program");
-    	media.put("urn", "urn:vpro:media:program:100");
-    	media.put("embeddable", true);
-    	media.put("hasSubtitles", true);
-    	media.set("broadcasters", JsonNodeFactory.instance.arrayNode());
-    	media.set("genres", JsonNodeFactory.instance.arrayNode());
-    	media.set("countries", JsonNodeFactory.instance.arrayNode());
-    	media.set("languages", JsonNodeFactory.instance.arrayNode());
-    	ArrayNode subs = JsonNodeFactory.instance.arrayNode();
-    	ObjectNode subNLC = JsonNodeFactory.instance.objectNode();
-    	subNLC.put("type", "CAPTION");
-    	subNLC.put("language", "nl");
-    	subs.add(subNLC);
-    	ObjectNode subNLT = JsonNodeFactory.instance.objectNode();
-    	subNLT.put("type", "TRANSLATION");
-    	subNLT.put("language", "nl");
-    	subs.add(subNLT);
-    	media.set("availableSubtitles", subs);
+        ObjectNode media = JsonNodeFactory.instance.objectNode();
+        media.put("objectType", "program");
+        media.put("urn", "urn:vpro:media:program:100");
+        media.put("embeddable", true);
+        media.put("hasSubtitles", true);
+        media.set("broadcasters", JsonNodeFactory.instance.arrayNode());
+        media.set("genres", JsonNodeFactory.instance.arrayNode());
+        media.set("countries", JsonNodeFactory.instance.arrayNode());
+        media.set("languages", JsonNodeFactory.instance.arrayNode());
+        ArrayNode subs = JsonNodeFactory.instance.arrayNode();
+        ObjectNode subNLC = JsonNodeFactory.instance.objectNode();
+        subNLC.put("type", "CAPTION");
+        subNLC.put("language", "nl");
+        subs.add(subNLC);
+        ObjectNode subNLT = JsonNodeFactory.instance.objectNode();
+        subNLT.put("type", "TRANSLATION");
+        subNLT.put("language", "nl");
+        subs.add(subNLT);
+        media.set("availableSubtitles", subs);
 
-    	Program program = program().id(100L).lean().build();
-    	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
+        Program program = program().id(100L).lean().build();
+        program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.CAPTION));
-    	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
+        program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.TRANSLATION));
 
-    	Program out = Jackson2TestUtil.roundTripAndSimilar(program, pretty(media));
+        Program out = Jackson2TestUtil.roundTripAndSimilar(program, pretty(media));
         assertEquals(2, out.getAvailableSubtitles().size());
 
         List<AvailableSubtitles> availableSubtitles = new ArrayList<>(out.getAvailableSubtitles());
@@ -1035,10 +1035,10 @@ public class MediaObjectJsonSchemaTest {
         assertEquals(SubtitlesType.TRANSLATION, availableSubtitles.get(1).getType());
 
     }
-	private String pretty(ObjectNode node) throws JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
+    private String pretty(ObjectNode node) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
         return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(node);
-	}
+    }
 
     @Test
     public void testWithCredits() {
