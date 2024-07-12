@@ -866,7 +866,7 @@ public class MediaObjectXmlSchemaTest {
     public void testLanguages() {
         Program program = program().withLanguages().build();
 
-        Program result = JAXBTestUtil.roundTripContains(program, "<language code=\"nl\">Nederlands</language>");
+        Program result = JAXBTestUtil.roundTripContains(program, "<language code=\"nl\" usage=\"DUBBED\">Nederlands</language>");
 
         assertThat(result.getLanguages()).hasSize(2);
     }

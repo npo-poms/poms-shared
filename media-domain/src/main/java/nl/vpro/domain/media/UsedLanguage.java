@@ -5,13 +5,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import jakarta.persistence.*;
-import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.languages.LanguageCode;
 import org.meeuw.i18n.languages.validation.Language;
 
-import nl.vpro.i18n.*;
+import nl.vpro.i18n.Displayable;
+import nl.vpro.i18n.LocalizedString;
 import nl.vpro.validation.WarningValidatorGroup;
 
 /**
