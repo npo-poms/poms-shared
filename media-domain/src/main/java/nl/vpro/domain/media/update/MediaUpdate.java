@@ -36,6 +36,7 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.update.bind.LanguageList;
 import nl.vpro.domain.media.update.bind.UsedLanguageUpdateAdapter;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
@@ -45,7 +46,8 @@ import nl.vpro.i18n.validation.MustDisplay;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.*;
 import nl.vpro.validation.*;
-import nl.vpro.xml.bind.*;
+import nl.vpro.xml.bind.DurationXmlAdapter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 
 /**
@@ -1077,6 +1079,8 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "language")
     @XmlJavaTypeAdapter(value = UsedLanguageUpdateAdapter.class)
+    @JsonSerialize(using = LanguageList.Serializer.class)
+    @JsonDeserialize(using = LanguageList.Deserializer.class)
     public List<UsedLanguage> getLanguages() {
          if (languages == null) {
             languages = new ArrayList<>();

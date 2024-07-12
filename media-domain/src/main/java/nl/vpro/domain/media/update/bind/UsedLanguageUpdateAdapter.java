@@ -71,6 +71,7 @@ public class UsedLanguageUpdateAdapter extends XmlAdapter<UsedLanguageUpdateAdap
             return super.getCode();
         }
 
+        @JsonProperty("value")
         public void setCode(Locale code) {
             super.setCode(code);
         }
