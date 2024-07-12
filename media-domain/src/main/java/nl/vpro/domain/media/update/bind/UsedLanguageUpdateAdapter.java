@@ -47,51 +47,32 @@ public class UsedLanguageUpdateAdapter extends XmlAdapter<UsedLanguageUpdateAdap
     @JsonPropertyOrder(
         {"usage", "value"}
     )
-    public static class Wrapper {
+    public static class Wrapper extends UsedLanguage.AbstractWrapper {
 
-
-        private Locale code;
-
-        private UsedLanguage.Usage usage;
 
         public Wrapper() {
+
         }
 
-        public Wrapper(String code){
-            this.code = new Locale(code);
-            this.usage = null;
+        public Wrapper(String code) {
+            super(code);
         }
 
         public Wrapper(UsedLanguage language) {
-            this.code = language == null ? null : language.code();
-            this.usage = language == null || language.usage() == null || language.usage() == UsedLanguage.Usage.AUDIODESCRIPTION ?  null : language.usage();
+            super(language);
         }
 
 
+        @Override
         @XmlValue
         @XmlJavaTypeAdapter(LocaleAdapter.class)
         @JsonProperty("value")
         public Locale getCode() {
-            return code;
+            return super.getCode();
         }
-        @JsonProperty("value")
+
         public void setCode(Locale code) {
-            this.code = code;
-
-        }
-
-        public UsedLanguage getUsedLanguage() {
-            return code == null ? null : (usage == null ? UsedLanguage.of(code) : new UsedLanguage(code, usage));
-        }
-
-
-        @XmlAttribute
-        public UsedLanguage.Usage getUsage() {
-            return usage == null || usage == UsedLanguage.Usage.AUDIODESCRIPTION ? null : usage;
-        }
-
-        public void setUsage(UsedLanguage.Usage usage) {
-            this.usage = usage;
+            super.setCode(code);
         }
 
     }

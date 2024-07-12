@@ -87,7 +87,7 @@ public class MediaUpdateTest {
         update.setVersion(Version.of(5, 12));
         log.info("{}", update.getVersion());
         rounded = Jackson2TestUtil.roundTripAndSimilar(
-            Jackson2Mapper.getInstance(),
+            Jackson2Mapper.getPrettyInstance(),
             update,
             getClass().getResourceAsStream("/program-from-update-with-everything.json")
 

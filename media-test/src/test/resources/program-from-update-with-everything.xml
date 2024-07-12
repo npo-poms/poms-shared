@@ -1,663 +1,332 @@
-<?xml version="1.0" encoding="UTF-8"?><program xmlns="urn:vpro:media:2009" type="BROADCAST" avType="VIDEO" embeddable="true" mid="VPROWON_20001" sortDate="1970-01-01T01:00:00.100+01:00" workflow="FOR PUBLICATION" publishStart="1970-01-01T01:00:00+01:00" publishStop="2500-01-01T00:00:00+01:00" urn="urn:vpro:media:program:12" xmlns:shared="urn:vpro:shared:2009">
-
+<?xml version="1.0" encoding="UTF-8"?><program xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" type="BROADCAST" avType="VIDEO" embeddable="true" mid="VPROWON_20001" sortDate="1970-01-01T01:00:00.100+01:00" workflow="FOR PUBLICATION" publishStart="1970-01-01T01:00:00+01:00" publishStop="2500-01-01T00:00:00+01:00" urn="urn:vpro:media:program:12">
   <broadcaster id="BNN">BNN</broadcaster>
-
   <broadcaster id="AVRO">AVRO</broadcaster>
-
   <portal id="3VOOR12_GRONINGEN"/>
-
   <portal id="STERREN24"/>
-
   <exclusive portalId="STERREN24"/>
-
   <exclusive portalId="3VOOR12_GRONINGEN" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
   <region regionId="NL" platform="INTERNETVOD"/>
-
   <region regionId="BENELUX" platform="INTERNETVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
   <region regionId="NL" platform="TVVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
   <title owner="BROADCASTER" type="MAIN">Main title</title>
-
   <title owner="BROADCASTER" type="SHORT">Short title</title>
-
   <title owner="BROADCASTER" type="SUB">Episode title MIS</title>
-
   <description owner="BROADCASTER" type="MAIN">Main description</description>
-
   <description owner="BROADCASTER" type="SHORT">Short description</description>
-
   <description owner="BROADCASTER" type="EPISODE">Episode description MIS</description>
-
   <genre id="3.0.1.7.21">
-
     <term>Informatief</term>
-
     <term>Nieuws/actualiteiten</term>
-
   </genre>
-
   <genre id="3.0.1.8.25">
-
     <term>Documentaire</term>
-
     <term>Natuur</term>
-
   </genre>
-
   <tag>tag1</tag>
-
   <tag>tag2</tag>
-
   <tag>tag3</tag>
-
   <intentions owner="BROADCASTER">
-
     <intention>ACTIVATING</intention>
-
     <intention>INFORM_INDEPTH</intention>
-
   </intentions>
-
   <targetGroups owner="BROADCASTER">
-
     <targetGroup>ADULTS</targetGroup>
-
   </targetGroups>
-
   <geoLocations owner="BROADCASTER">
-
     <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/31299" role="SUBJECT"/>
-
   </geoLocations>
-
   <topics owner="BROADCASTER">
-
     <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/25890"/>
-
     <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/29064"/>
-
   </topics>
-
   <country code="GB">Verenigd Koninkrijk</country>
-
   <country code="US">Verenigde Staten</country>
-
-  <language code="nl">Nederlands</language>
-
   <language code="fr">Frans</language>
-
+  <language code="nl" usage="DUBBED">Nederlands</language>
   <avAttributes>
-
     <bitrate>1000000</bitrate>
-
     <avFileFormat>M4V</avFileFormat>
-
     <videoAttributes width="640" heigth="320">
-
       <color>BLACK AND WHITE</color>
-
       <videoCoding>VCODEC</videoCoding>
-
     </videoAttributes>
-
     <audioAttributes>
-
       <numberOfChannels>2</numberOfChannels>
-
       <audioCoding>ACODEC</audioCoding>
-
     </audioAttributes>
-
   </avAttributes>
-
   <releaseYear>2004</releaseYear>
-
   <duration>P0DT2H0M0.000S</duration>
-
   <credits>
-
     <person gtaaUri="http://data.beeldengeluid.nl/gtaa/1234" role="DIRECTOR"/>
-
     <person role="PRESENTER">
-
       <givenName>Hans</givenName>
-
       <familyName>Goedkoop</familyName>
-
     </person>
-
     <person role="PRESENTER">
-
       <givenName>Meta</givenName>
-
       <familyName>de Vries</familyName>
-
     </person>
-
     <person role="ACTOR">
-
       <givenName>Claire</givenName>
-
       <familyName>Holt</familyName>
-
     </person>
-
     <name gtaaUri="http://data.beeldengeluid.nl/gtaa/51771" role="COMPOSER"/>
-
     <person gtaaUri="http://data.beeldengeluid.nl/gtaa/149017" role="SUBJECT"/>
-
   </credits>
-
   <descendantOf midRef="VPROWON_20003"/>
-
   <descendantOf midRef="VPROWON_20005"/>
-
   <descendantOf midRef="VPROWON_30004"/>
-
   <memberOf highlighted="false" midRef="VPROWON_20003" index="1"/>
-
   <memberOf highlighted="false" midRef="VPROWON_20005" index="2"/>
-
   <memberOf highlighted="false" midRef="VPROWON_20005" index="3"/>
-
   <ageRating>12</ageRating>
-
   <contentRating>ANGST</contentRating>
-
   <contentRating>DRUGS_EN_ALCOHOL</contentRating>
-
   <email>info@npo.nl</email>
-
   <email>programma@avro.nl</email>
-
   <website>http://www.omroep.nl/programma/journaal</website>
-
   <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>
-
   <twitter type="HASHTAG">#vpro</twitter>
-
   <twitter type="ACCOUNT">@twitter</twitter>
-
   <prediction state="REALIZED">INTERNETVOD</prediction>
-
   <prediction state="ANNOUNCED">TVVOD</prediction>
-
   <locations>
-
     <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:6">
-
       <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
-
       <avAttributes>
-
         <bitrate>1500</bitrate>
-
         <avFileFormat>MP4</avFileFormat>
-
       </avAttributes>
-
       <offset>P0DT0H13M0.000S</offset>
-
       <duration>P0DT0H10M0.000S</duration>
-
     </location>
-
     <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:7">
-
       <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
-
       <avAttributes>
-
         <bitrate>3000</bitrate>
-
         <avFileFormat>WM</avFileFormat>
-
       </avAttributes>
-
     </location>
-
     <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:8">
-
       <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
-
       <avAttributes>
-
         <bitrate>2000</bitrate>
-
         <avFileFormat>WM</avFileFormat>
-
       </avAttributes>
-
       <duration>P0DT0H30M33.000S</duration>
-
     </location>
-
     <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:11">
-
       <programUrl>http://www.vpro.nl/location/1</programUrl>
-
       <avAttributes>
-
         <avFileFormat>UNKNOWN</avFileFormat>
-
       </avAttributes>
-
     </location>
-
   </locations>
-
   <relation broadcaster="AVRO" type="THESAURUS">synoniem</relation>
-
   <relation broadcaster="EO" type="KOOR">Ulfts Mannenkoor</relation>
-
   <relation broadcaster="VPRO" type="ARTIST">Marco Borsato</relation>
-
   <relation uriRef="http://www.bluenote.com/" broadcaster="VPRO" type="LABEL">Blue Note</relation>
-
   <images>
-
     <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="PUBLISHED" urn="urn:vpro:media:image:2">
-
       <shared:title>Eerste plaatje met credits</shared:title>
-
       <shared:imageUri>urn:vpro:image:11234</shared:imageUri>
-
       <shared:credits>CREDITS</shared:credits>
-
       <shared:source>https://www.vpro.nl</shared:source>
-
       <shared:license>PUBLIC_DOMAIN</shared:license>
-
     </shared:image>
-
     <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="PUBLISHED" urn="urn:vpro:media:image:3">
-
       <shared:title>Tweede plaatje met credits</shared:title>
-
       <shared:imageUri>urn:vpro:image:15678</shared:imageUri>
-
       <shared:credits>CREDITS</shared:credits>
-
       <shared:source>https://www.vpro.nl</shared:source>
-
       <shared:license>PUBLIC_DOMAIN</shared:license>
-
     </shared:image>
-
   </images>
-
   <scheduleEvents>
-
     <scheduleEvent channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
       <title owner="BROADCASTER" type="MAIN">Main ScheduleEvent Title</title>
-
       <description owner="BROADCASTER" type="MAIN">Main ScheduleEvent Description</description>
-
       <guideDay>1969-12-31+01:00</guideDay>
-
       <start>1970-01-01T01:00:00.100+01:00</start>
-
       <duration>P0DT0H0M0.200S</duration>
-
       <poProgID>VPROWON_20001</poProgID>
-
     </scheduleEvent>
-
     <scheduleEvent channel="NED3" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
       <repeat isRerun="true"/>
-
       <guideDay>1970-01-03+01:00</guideDay>
-
       <start>1970-01-04T01:00:00.300+01:00</start>
-
       <duration>P0DT0H0M0.050S</duration>
-
       <poProgID>VPROWON_20001</poProgID>
-
     </scheduleEvent>
-
     <scheduleEvent channel="HOLL" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
       <repeat isRerun="true"/>
-
       <guideDay>1970-01-08+01:00</guideDay>
-
       <start>1970-01-09T01:00:00.350+01:00</start>
-
       <duration>P0DT0H0M0.250S</duration>
-
       <poProgID>VPROWON_20001</poProgID>
-
     </scheduleEvent>
-
     <scheduleEvent channel="CONS" midRef="VPROWON_20001" urnRef="urn:vpro:media:program:12">
-
       <repeat isRerun="true"/>
-
       <guideDay>1970-01-10+01:00</guideDay>
-
       <start>1970-01-11T01:00:00.600+01:00</start>
-
       <duration>P0DT0H0M0.200S</duration>
-
       <poProgID>VPROWON_20001</poProgID>
-
     </scheduleEvent>
-
   </scheduleEvents>
-
   <episodeOf highlighted="false" midRef="VPROWON_30004" index="1"/>
-
   <segments>
-
     <segment midRef="VPROWON_20001" type="SEGMENT" urnRef="urn:vpro:media:program:12" avType="VIDEO" embeddable="true" mid="VPROWON_12345_1" sortDate="1970-01-01T01:00:00.100+01:00" workflow="FOR PUBLICATION" publishStart="1970-01-01T01:00:00+01:00" publishStop="2500-01-01T00:00:00+01:00" urn="urn:vpro:media:segment:12">
-
       <broadcaster id="BNN">BNN</broadcaster>
-
       <broadcaster id="AVRO">AVRO</broadcaster>
-
       <portal id="3VOOR12_GRONINGEN"/>
-
       <portal id="STERREN24"/>
-
       <exclusive portalId="STERREN24"/>
-
       <exclusive portalId="3VOOR12_GRONINGEN" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
       <region regionId="NL" platform="INTERNETVOD"/>
-
       <region regionId="BENELUX" platform="INTERNETVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
       <region regionId="NL" platform="TVVOD" start="1970-01-01T01:00:00+01:00" stop="1970-01-01T01:01:40+01:00"/>
-
       <title owner="BROADCASTER" type="MAIN">Main title</title>
-
       <title owner="BROADCASTER" type="SHORT">Short title</title>
-
       <title owner="BROADCASTER" type="SUB">Episode title MIS</title>
-
       <description owner="BROADCASTER" type="MAIN">Main description</description>
-
       <description owner="BROADCASTER" type="SHORT">Short description</description>
-
       <description owner="BROADCASTER" type="EPISODE">Episode description MIS</description>
-
       <genre id="3.0.1.7.21">
-
         <term>Informatief</term>
-
         <term>Nieuws/actualiteiten</term>
-
       </genre>
-
       <genre id="3.0.1.8.25">
-
         <term>Documentaire</term>
-
         <term>Natuur</term>
-
       </genre>
-
       <tag>tag1</tag>
-
       <tag>tag2</tag>
-
       <tag>tag3</tag>
-
       <intentions owner="BROADCASTER">
-
         <intention>ACTIVATING</intention>
-
         <intention>INFORM_INDEPTH</intention>
-
       </intentions>
-
       <targetGroups owner="BROADCASTER">
-
         <targetGroup>ADULTS</targetGroup>
-
       </targetGroups>
-
       <geoLocations owner="BROADCASTER">
-
         <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/31299" role="SUBJECT"/>
-
       </geoLocations>
-
       <topics owner="BROADCASTER">
-
         <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/25890"/>
-
         <topic gtaaUri="http://data.beeldengeluid.nl/gtaa/29064"/>
-
       </topics>
-
       <country code="GB">Verenigd Koninkrijk</country>
-
       <country code="US">Verenigde Staten</country>
-
-      <language code="nl">Nederlands</language>
-
       <language code="fr">Frans</language>
-
+      <language code="nl" usage="DUBBED">Nederlands</language>
       <avAttributes>
-
         <bitrate>1000000</bitrate>
-
         <avFileFormat>M4V</avFileFormat>
-
         <videoAttributes width="640" heigth="320">
-
           <color>BLACK AND WHITE</color>
-
           <videoCoding>VCODEC</videoCoding>
-
         </videoAttributes>
-
         <audioAttributes>
-
           <numberOfChannels>2</numberOfChannels>
-
           <audioCoding>ACODEC</audioCoding>
-
         </audioAttributes>
-
       </avAttributes>
-
       <releaseYear>2004</releaseYear>
-
       <duration>P0DT0H1M40.000S</duration>
-
       <credits>
-
         <person gtaaUri="http://data.beeldengeluid.nl/gtaa/1234" role="DIRECTOR"/>
-
         <person role="PRESENTER">
-
           <givenName>Hans</givenName>
-
           <familyName>Goedkoop</familyName>
-
         </person>
-
         <person role="PRESENTER">
-
           <givenName>Meta</givenName>
-
           <familyName>de Vries</familyName>
-
         </person>
-
         <person role="ACTOR">
-
           <givenName>Claire</givenName>
-
           <familyName>Holt</familyName>
-
         </person>
-
         <name gtaaUri="http://data.beeldengeluid.nl/gtaa/51771" role="COMPOSER"/>
-
         <person gtaaUri="http://data.beeldengeluid.nl/gtaa/149017" role="SUBJECT"/>
-
       </credits>
-
       <descendantOf urnRef="urn:vpro:media:program:12" midRef="VPROWON_20001" type="BROADCAST"/>
-
       <descendantOf midRef="VPROWON_20010"/>
-
       <descendantOf midRef="VPROWON_20012"/>
-
       <memberOf highlighted="false" midRef="VPROWON_20010" index="1"/>
-
       <memberOf highlighted="false" midRef="VPROWON_20012" index="2"/>
-
       <memberOf highlighted="false" midRef="VPROWON_20012" index="3"/>
-
       <ageRating>12</ageRating>
-
       <contentRating>ANGST</contentRating>
-
       <contentRating>DRUGS_EN_ALCOHOL</contentRating>
-
       <email>info@npo.nl</email>
-
       <email>programma@avro.nl</email>
-
       <website>http://www.omroep.nl/programma/journaal</website>
-
       <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>
-
       <twitter type="HASHTAG">#vpro</twitter>
-
       <twitter type="ACCOUNT">@twitter</twitter>
-
       <prediction state="REALIZED">INTERNETVOD</prediction>
-
       <locations>
-
         <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:6">
-
           <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>
-
           <avAttributes>
-
             <bitrate>1500</bitrate>
-
             <avFileFormat>MP4</avFileFormat>
-
           </avAttributes>
-
           <offset>P0DT0H13M0.000S</offset>
-
           <duration>P0DT0H10M0.000S</duration>
-
         </location>
-
         <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:7">
-
           <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>
-
           <avAttributes>
-
             <bitrate>3000</bitrate>
-
             <avFileFormat>WM</avFileFormat>
-
           </avAttributes>
-
         </location>
-
         <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:8">
-
           <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>
-
           <avAttributes>
-
             <bitrate>2000</bitrate>
-
             <avFileFormat>WM</avFileFormat>
-
           </avAttributes>
-
           <duration>P0DT0H30M33.000S</duration>
-
         </location>
-
         <location owner="BROADCASTER" platform="INTERNETVOD" workflow="PUBLISHED" urn="urn:vpro:media:location:11">
-
           <programUrl>http://www.vpro.nl/location/1</programUrl>
-
           <avAttributes>
-
             <avFileFormat>UNKNOWN</avFileFormat>
-
           </avAttributes>
-
         </location>
-
       </locations>
-
       <relation broadcaster="AVRO" type="THESAURUS">synoniem</relation>
-
       <relation broadcaster="EO" type="KOOR">Ulfts Mannenkoor</relation>
-
       <relation broadcaster="VPRO" type="ARTIST">Marco Borsato</relation>
-
       <relation uriRef="http://www.bluenote.com/" broadcaster="VPRO" type="LABEL">Blue Note</relation>
-
       <images>
-
         <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="PUBLISHED" urn="urn:vpro:media:image:2">
-
           <shared:title>Eerste plaatje met credits</shared:title>
-
           <shared:imageUri>urn:vpro:image:11234</shared:imageUri>
-
           <shared:credits>CREDITS</shared:credits>
-
           <shared:source>https://www.vpro.nl</shared:source>
-
           <shared:license>PUBLIC_DOMAIN</shared:license>
-
         </shared:image>
-
         <shared:image owner="BROADCASTER" type="PICTURE" highlighted="false" workflow="PUBLISHED" urn="urn:vpro:media:image:3">
-
           <shared:title>Tweede plaatje met credits</shared:title>
-
           <shared:imageUri>urn:vpro:image:15678</shared:imageUri>
-
           <shared:credits>CREDITS</shared:credits>
-
           <shared:source>https://www.vpro.nl</shared:source>
-
           <shared:license>PUBLIC_DOMAIN</shared:license>
-
         </shared:image>
-
       </images>
-
       <segmentOf midRef="VPROWON_20001" type="BROADCAST">
-
         <memberOf midRef="VPROWON_20003" index="1"/>
-
         <memberOf midRef="VPROWON_20005" index="2"/>
-
         <memberOf midRef="VPROWON_20005" index="3"/>
-
         <episodeOf midRef="VPROWON_30004" index="1"/>
-
       </segmentOf>
-
       <start>P0DT0H0M0.000S</start>
-
     </segment>
-
   </segments>
-
 </program>

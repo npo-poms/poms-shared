@@ -1,9 +1,6 @@
 package nl.vpro.domain.media.bind;
 
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Locale;
 
 import jakarta.xml.bind.annotation.*;
@@ -50,47 +47,34 @@ public class UsedLanguageAdapter extends XmlAdapter<UsedLanguageAdapter.Wrapper,
     @JsonPropertyOrder(
         {"code", "usage", "value"}
     )
-    public static class Wrapper {
-
-
-        @XmlJavaTypeAdapter(LocaleAdapter.class)
-        @JsonProperty
-        @XmlAttribute
-        @Getter
-        @Setter
-        private Locale code;
-
-        private UsedLanguage.Usage usage;
+    public static class Wrapper extends UsedLanguage.AbstractWrapper {
 
         public Wrapper() {
         }
 
         public Wrapper(UsedLanguage language) {
-            this.code = language == null ? null : language.code();
-            this.usage = language == null || language.usage() == null || language.usage() == UsedLanguage.Usage.AUDIODESCRIPTION ?  null : language.usage();
+            super(language);
         }
-
-
-        public UsedLanguage getUsedLanguage() {
-            return code == null ? null : (usage == null ? UsedLanguage.of(code) : new UsedLanguage(code, usage));
-        }
-
-
-        @XmlAttribute
-        public UsedLanguage.Usage getUsage() {
-            return usage == null || usage == UsedLanguage.Usage.AUDIODESCRIPTION ? null : usage;
-        }
-
 
         @XmlValue
         @JsonProperty
         public String getValue() {
-            return code.getDisplayLanguage(Locales.DUTCH);
+            return getCode().getDisplayLanguage(Locales.DUTCH);
         }
 
         public void setValue(String ignored) {
             // jaxb
         }
+
+        @Override
+        @XmlAttribute
+        @XmlJavaTypeAdapter(LocaleAdapter.class)
+        @JsonProperty("code")
+        public Locale getCode() {
+            return super.getCode();
+        }
+
+
 
     }
 }

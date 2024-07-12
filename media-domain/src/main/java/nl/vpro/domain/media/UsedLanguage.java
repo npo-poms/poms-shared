@@ -1,12 +1,13 @@
 package nl.vpro.domain.media;
 
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import jakarta.persistence.*;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.meeuw.i18n.languages.LanguageCode;
@@ -99,6 +100,48 @@ public record UsedLanguage (
          */
         SIGNING
     }
+
+    @XmlTransient
+    public static abstract class AbstractWrapper {
+
+
+        protected Locale code;
+
+        @Setter
+        protected UsedLanguage.Usage usage;
+
+        public AbstractWrapper() {
+        }
+
+        public AbstractWrapper(String code){
+            this.code = new Locale(code);
+            this.usage = null;
+        }
+
+        public AbstractWrapper(UsedLanguage language) {
+            this.code = language == null ? null : language.code();
+            this.usage = language == null || language.usage() == null || language.usage() == UsedLanguage.Usage.AUDIODESCRIPTION ?  null : language.usage();
+        }
+
+
+        public Locale getCode() {
+            return code;
+        }
+        public void setCode(Locale code) {
+            this.code = code;
+
+        }
+        public UsedLanguage getUsedLanguage() {
+            return code == null ? null : (usage == null ? UsedLanguage.of(code) : new UsedLanguage(code, usage));
+        }
+
+        @XmlAttribute
+        public UsedLanguage.Usage getUsage() {
+            return usage == null || usage == UsedLanguage.Usage.AUDIODESCRIPTION ? null : usage;
+        }
+
+    }
+
 
 
 }
