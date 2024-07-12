@@ -209,9 +209,10 @@
     }
   } ],
   "language" : [ {
-    "value" : "nl"
-  }, {
     "value" : "fr"
+  }, {
+    "usage" : "DUBBED",
+    "value" : "nl"
   } ],
   "twitterref" : [ "#vpro", "@twitter" ],
   "prediction" : [ {
@@ -463,9 +464,10 @@
       }
     } ],
     "language" : [ {
-      "value" : "nl"
-    }, {
       "value" : "fr"
+    }, {
+      "usage" : "DUBBED",
+      "value" : "nl"
     } ],
     "twitterref" : [ "#vpro", "@twitter" ],
     "prediction" : [ {
