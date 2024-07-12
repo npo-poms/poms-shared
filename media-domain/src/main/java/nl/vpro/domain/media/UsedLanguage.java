@@ -132,7 +132,10 @@ public record UsedLanguage (
 
         }
         public UsedLanguage getUsedLanguage() {
-            return code == null ? null : (usage == null ? UsedLanguage.of(code) : new UsedLanguage(code, usage));
+            if (code == null) {
+                throw new IllegalStateException();
+            }
+            return  (usage == null ? UsedLanguage.of(code) : new UsedLanguage(code, usage));
         }
 
         @XmlAttribute

@@ -1,6 +1,5 @@
 package nl.vpro.domain.media.update;
 
-import jakarta.xml.bind.JAXB;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -8,6 +7,7 @@ import java.time.Duration;
 
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Validator;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
@@ -24,6 +24,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
 
 /**
  * @author Michiel Meeuwissen
@@ -166,12 +167,14 @@ public class MediaUpdateListTest {
             .  mainTitle("hoi")
             .  broadcasters("VPRO")
             .  mid("POMS_1234")
-            .segments(
+            .  languages(nl)
+            .  segments(
                 MediaBuilder.segment()
                     .broadcasters("VPRO")
                     .avType(AVType.VIDEO)
                     .type(SegmentType.VISUALRADIOSEGMENT)
                     .titles(new Title("segmenttitel", OwnerType.BROADCASTER, TextualType.MAIN))
+                    .languages(nl)
                     .start(Duration.ZERO)
                     .build()
             ).build();
@@ -184,35 +187,41 @@ public class MediaUpdateListTest {
         Jackson2TestUtil.roundTripAndSimilar(list,
             """
                 {
-                    "offset" : 0,
-                    "totalCount" : 1,
-                    "item" : [ {
-                      "mid" : "POMS_1234",
-                      "type" : "CLIP",
-                      "avType" : "VIDEO",
-                      "urn" : "urn:vpro:media:program:123",
-                      "embeddable" : true,
-                      "broadcaster" : [ "VPRO" ],
-                      "title" : [ {
-                        "value" : "hoi",
-                        "type" : "MAIN"
-                      } ],
-                      "segments" : [ {
-                        "objectType" : "segmentUpdate",
-                        "type" : "VISUALRADIOSEGMENT",
-                        "avType" : "VIDEO",
-                        "embeddable" : true,
-                        "broadcaster" : [ "VPRO" ],
-                        "title" : [ {
-                          "value" : "segmenttitel",
-                          "type" : "MAIN"
-                        } ],
-                        "start" : "P0DT0H0M0.000S",
-                        "midRef" : "POMS_1234"
-                      } ]
-                    } ],
-                    "size" : 1
-                  }
+                     "offset" : 0,
+                     "totalCount" : 1,
+                     "item" : [ {
+                       "mid" : "POMS_1234",
+                       "type" : "CLIP",
+                       "avType" : "VIDEO",
+                       "urn" : "urn:vpro:media:program:123",
+                       "embeddable" : true,
+                       "broadcaster" : [ "VPRO" ],
+                       "title" : [ {
+                         "value" : "hoi",
+                         "type" : "MAIN"
+                       } ],
+                       "language" : [ {
+                         "value" : "nl"
+                       } ],
+                       "segments" : [ {
+                         "objectType" : "segmentUpdate",
+                         "type" : "VISUALRADIOSEGMENT",
+                         "avType" : "VIDEO",
+                         "embeddable" : true,
+                         "broadcaster" : [ "VPRO" ],
+                         "title" : [ {
+                           "value" : "segmenttitel",
+                           "type" : "MAIN"
+                         } ],
+                         "language" : [ {
+                         "value" : "nl"
+                       } ],
+                         "start" : "P0DT0H0M0.000S",
+                         "midRef" : "POMS_1234"
+                       } ]
+                     } ],
+                     "size" : 1
+                   }
                 """);
 
     }

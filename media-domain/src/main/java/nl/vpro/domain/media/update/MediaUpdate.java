@@ -1087,6 +1087,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
          }
         return languages;
     }
+
     public void setLanguages(List<UsedLanguage> languages) {
         this.languages = languages;
     }
