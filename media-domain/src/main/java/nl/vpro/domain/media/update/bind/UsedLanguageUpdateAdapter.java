@@ -1,8 +1,5 @@
-package nl.vpro.domain.media.bind;
+package nl.vpro.domain.media.update.bind;
 
-
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Locale;
 
@@ -16,15 +13,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.UsedLanguage;
 import nl.vpro.domain.media.update.MediaUpdate;
-import nl.vpro.i18n.Locales;
 import nl.vpro.xml.bind.LocaleAdapter;
 
 /**
- * Representation of a {@link UsedLanguage} for normal mediaobject. This includes the name of the language (in dutch) as {@link XmlValue}.
+ * Used in {@link nl.vpro.domain.media.update.MediaUpdate}, which has a slightly different representation of {@link UsedLanguage}
  * @author Michiel Meeuwissen
  * @since 8.2
  */
-public class UsedLanguageAdapter extends XmlAdapter<UsedLanguageAdapter.Wrapper, UsedLanguage> {
+public class UsedLanguageUpdateAdapter extends XmlAdapter<UsedLanguageUpdateAdapter.Wrapper, UsedLanguage> {
 
 
     @Override
@@ -45,19 +41,15 @@ public class UsedLanguageAdapter extends XmlAdapter<UsedLanguageAdapter.Wrapper,
     @XmlAccessorType(XmlAccessType.NONE)
     @XmlType(name = "languageType",
         propOrder = {""},
-        namespace = Xmlns.MEDIA_NAMESPACE
+        namespace = Xmlns.UPDATE_NAMESPACE
+
     )
     @JsonPropertyOrder(
-        {"code", "usage", "value"}
+        {"usage", "value"}
     )
     public static class Wrapper {
 
 
-        @XmlJavaTypeAdapter(LocaleAdapter.class)
-        @JsonProperty
-        @XmlAttribute
-        @Getter
-        @Setter
         private Locale code;
 
         private UsedLanguage.Usage usage;
@@ -65,11 +57,28 @@ public class UsedLanguageAdapter extends XmlAdapter<UsedLanguageAdapter.Wrapper,
         public Wrapper() {
         }
 
+        public Wrapper(String code){
+            this.code = new Locale(code);
+            this.usage = null;
+        }
+
         public Wrapper(UsedLanguage language) {
             this.code = language == null ? null : language.code();
             this.usage = language == null || language.usage() == null || language.usage() == UsedLanguage.Usage.AUDIODESCRIPTION ?  null : language.usage();
         }
 
+
+        @XmlValue
+        @XmlJavaTypeAdapter(LocaleAdapter.class)
+        @JsonProperty("value")
+        public Locale getCode() {
+            return code;
+        }
+        @JsonProperty("value")
+        public void setCode(Locale code) {
+            this.code = code;
+
+        }
 
         public UsedLanguage getUsedLanguage() {
             return code == null ? null : (usage == null ? UsedLanguage.of(code) : new UsedLanguage(code, usage));
@@ -79,17 +88,6 @@ public class UsedLanguageAdapter extends XmlAdapter<UsedLanguageAdapter.Wrapper,
         @XmlAttribute
         public UsedLanguage.Usage getUsage() {
             return usage == null || usage == UsedLanguage.Usage.AUDIODESCRIPTION ? null : usage;
-        }
-
-
-        @XmlValue
-        @JsonProperty
-        public String getValue() {
-            return code.getDisplayLanguage(Locales.DUTCH);
-        }
-
-        public void setValue(String ignored) {
-            // jaxb
         }
 
     }

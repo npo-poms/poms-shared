@@ -400,7 +400,7 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="code" type="xs:string"/>
-        <xs:attribute name="usage" type="usage"/>
+        <xs:attribute name="usage" type="languageUsageEnum"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -1050,7 +1050,7 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="usage">
+  <xs:simpleType name="languageUsageEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="AUDIODESCRIPTION"/>
       <xs:enumeration value="DUBBED"/>

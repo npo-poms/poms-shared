@@ -66,7 +66,7 @@
       <xs:element name="description" type="descriptionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="country" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="intentions" minOccurs="0">
         <xs:complexType>
@@ -190,6 +190,14 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="type" type="media:textualTypeEnum" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="languageType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="usage" type="media:languageUsageEnum"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -408,7 +416,7 @@
       <xs:element name="description" type="descriptionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="country" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="intentions" minOccurs="0">
         <xs:complexType>
@@ -499,7 +507,7 @@
       <xs:element name="description" type="descriptionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="country" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="intentions" minOccurs="0">
         <xs:complexType>

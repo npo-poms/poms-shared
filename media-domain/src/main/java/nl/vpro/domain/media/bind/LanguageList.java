@@ -9,7 +9,7 @@ import nl.vpro.domain.bind.AbstractJsonIterable;
 import nl.vpro.domain.media.UsedLanguage;
 
 /**
- * Might not be needed.
+ * Might not be needed. It seems that the only thing is currently arranges is that the empy list causes [].
  * @author Michiel Meeuwissen
  * @since 5.12
  */
@@ -22,7 +22,7 @@ public class LanguageList {
 
         @Override
         protected void serializeValue(UsedLanguage value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
-            jgen.writeObject(new UsedLanguageWrapper(value));
+            jgen.writeObject(new UsedLanguageAdapter.Wrapper(value));
         }
     }
 
@@ -30,7 +30,7 @@ public class LanguageList {
 
         @Override
         protected UsedLanguage deserializeValue(JsonNode node, DeserializationContext ctxt) throws IOException {
-            UsedLanguageWrapper wrapper = ctxt.getParser().getCodec().treeToValue(node, UsedLanguageWrapper.class);
+            UsedLanguageAdapter.Wrapper wrapper = ctxt.getParser().getCodec().treeToValue(node, UsedLanguageAdapter.Wrapper.class);
             return wrapper.getUsedLanguage();
         }
     }

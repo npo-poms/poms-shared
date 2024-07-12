@@ -173,7 +173,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="language" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="language" type="languageType" form="qualified" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
             Languages somehow associated with this item. This does not refer to the used language in the meta fields of this object. They should be in dutch. Only supported if version &gt;= 5.0.
@@ -760,6 +760,15 @@
     </xs:sequence>
     <xs:attribute name="statusCode" type="xs:int" use="required"/>
     <xs:attribute name="mid" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="languageType">
+    <xs:simpleContent>
+      <xs:pattern value="(\w){2,4}(-\w{2}(-\w+)?)?" />
+      <xs:extension base="xs:string">
+        <xs:attribute name="usage" type="media:languageUsageEnum"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
 

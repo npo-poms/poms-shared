@@ -208,7 +208,11 @@
       "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
     }
   } ],
-  "language" : [ "nl", "fr" ],
+  "language" : [ {
+    "value" : "nl"
+  }, {
+    "value" : "fr"
+  } ],
   "twitterref" : [ "#vpro", "@twitter" ],
   "prediction" : [ {
     "platform" : "INTERNETVOD"
@@ -458,7 +462,11 @@
         "gtaaUri" : "http://data.beeldengeluid.nl/gtaa/149017"
       }
     } ],
-    "language" : [ "nl", "fr" ],
+    "language" : [ {
+      "value" : "nl"
+    }, {
+      "value" : "fr"
+    } ],
     "twitterref" : [ "#vpro", "@twitter" ],
     "prediction" : [ {
       "platform" : "INTERNETVOD"

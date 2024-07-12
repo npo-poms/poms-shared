@@ -1232,16 +1232,17 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute type="languageCodeType" name="code"/>
+        <xs:attribute type="languageUsageEnum" name="usage"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
 
   <xs:simpleType name="languageCodeType">
     <xs:restriction base="xs:string">
-      <xs:pattern value="(\w){2,4}">
+      <xs:pattern value="(\w){2,4}(-\w{2}(-\w+)?)?">
         <xs:annotation>
           <xs:documentation>
-            ISO 639-1 language code.
+            ISO 639-1 or ISO 639-3 language code, possibly with postfixing region and variant.
           </xs:documentation>
         </xs:annotation>
       </xs:pattern>
@@ -3333,4 +3334,14 @@
       <xs:enumeration value="DRM"/>
     </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="languageUsageEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AUDIODESCRIPTION"/>
+      <xs:enumeration value="DUBBED"/>
+      <xs:enumeration value="SUPPLEMENTAL"/>
+      <xs:enumeration value="SIGNING"/>
+    </xs:restriction>
+  </xs:simpleType>
+
 </xs:schema>

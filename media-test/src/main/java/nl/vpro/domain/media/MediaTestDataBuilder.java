@@ -33,6 +33,7 @@ import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.NPO;
 import static nl.vpro.domain.media.support.Workflow.MERGED;
 import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
+import static org.meeuw.i18n.languages.ISO_639_1_Code.nl;
 
 @SuppressWarnings({"unchecked", "deprecation", "UnusedReturnValue"})
 @CanIgnoreReturnValue
@@ -443,7 +444,7 @@ public interface MediaTestDataBuilder<
     }
 
     default T withLanguages() {
-        return languages("nl", "fr");
+        return languages( "fr").languages(UsedLanguage.dubbed(nl));
     }
 
 

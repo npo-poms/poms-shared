@@ -17,6 +17,7 @@ import jakarta.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.meeuw.i18n.languages.LanguageCode;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -487,6 +488,22 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
         return (B)this;
     }
+
+    default B languages(LanguageCode... languages) {
+        for(LanguageCode language : languages) {
+            mediaObject().addLanguage(UsedLanguage.of(language));
+        }
+        return (B)this;
+    }
+
+    @SuppressWarnings("unchecked")
+    default B languages(UsedLanguage... languages) {
+        for(UsedLanguage language : languages) {
+            mediaObject().addLanguage(language);
+        }
+        return (B)this;
+    }
+
 
     @SuppressWarnings("unchecked")
     default B avType(AVType type) {

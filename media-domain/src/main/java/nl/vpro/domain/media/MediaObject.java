@@ -47,7 +47,6 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.jpa.UsedLanguageConverter;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.*;
@@ -394,17 +393,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
 
     @ElementCollection
-    @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Schema(implementation = String.class, type = "string")
-    @Convert(converter = UsedLanguageConverter.class)
     protected List<@Valid UsedLanguage> languages;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = true)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
-    @Nullable
     @Basic
     protected AVType avType = null;
 
@@ -1321,11 +1316,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @XmlElement(name = "language")
-    @XmlJavaTypeAdapter(value = UsedLanguageAdapter.class)
+    @XmlJavaTypeAdapter(UsedLanguageAdapter.class)
     @JsonProperty("languages")
     @JsonSerialize(using = LanguageList.Serializer.class)
     @JsonDeserialize(using = LanguageList.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+
     @Schema(implementation = String.class, type = "string")
     public List<UsedLanguage> getLanguages() {
         if (languages == null) {

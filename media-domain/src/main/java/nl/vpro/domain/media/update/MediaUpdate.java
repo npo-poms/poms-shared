@@ -33,10 +33,10 @@ import nl.vpro.domain.*;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.TwitterRef;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.bind.UsedLanguageAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.update.bind.UsedLanguageUpdateAdapter;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.validation.BroadcasterValidation;
@@ -1076,7 +1076,7 @@ public abstract sealed class MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "language")
-    @XmlJavaTypeAdapter(value = UsedLanguageAdapter.class)
+    @XmlJavaTypeAdapter(value = UsedLanguageUpdateAdapter.class)
     public List<UsedLanguage> getLanguages() {
          if (languages == null) {
             languages = new ArrayList<>();
