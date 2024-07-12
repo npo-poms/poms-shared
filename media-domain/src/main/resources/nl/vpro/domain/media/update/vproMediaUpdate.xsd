@@ -764,11 +764,11 @@
 
   <xs:complexType name="languageType">
     <xs:simpleContent>
-      <xs:pattern value="(\w){2,4}(-\w{2}(-\w+)?)?" />
       <xs:extension base="xs:string">
         <xs:attribute name="usage" type="media:languageUsageEnum"/>
       </xs:extension>
     </xs:simpleContent>
+
   </xs:complexType>
 
 
