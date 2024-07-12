@@ -104,8 +104,8 @@
       <media:source>Naar het gelijknamige boek van W.F. Hermans</media:source>
       <media:country code="GB">Verenigd Koninkrijk</media:country>
       <media:country code="US">Verenigde Staten</media:country>
-      <media:language code="nl">Nederlands</media:language>
       <media:language code="fr">Frans</media:language>
+      <media:language code="nl" usage="DUBBED">Nederlands</media:language>
       <media:availableSubtitles language="nl" type="CAPTION"/>
       <media:avAttributes>
         <media:bitrate>1000000</media:bitrate>
@@ -378,8 +378,8 @@
           <media:source>Naar het gelijknamige boek van W.F. Hermans</media:source>
           <media:country code="GB">Verenigd Koninkrijk</media:country>
           <media:country code="US">Verenigde Staten</media:country>
-          <media:language code="nl">Nederlands</media:language>
           <media:language code="fr">Frans</media:language>
+          <media:language code="nl" usage="DUBBED">Nederlands</media:language>
           <media:availableSubtitles language="nl" type="CAPTION"/>
           <media:avAttributes>
             <media:bitrate>1000000</media:bitrate>
