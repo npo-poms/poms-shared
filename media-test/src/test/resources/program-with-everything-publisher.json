@@ -247,11 +247,12 @@
     "value" : "Verenigde Staten"
   } ],
   "languages" : [ {
-    "code" : "nl",
-    "value" : "Nederlands"
-  }, {
     "code" : "fr",
     "value" : "Frans"
+  }, {
+    "code" : "nl",
+    "usage" : "DUBBED",
+    "value" : "Nederlands"
   } ],
   "availableSubtitles" : [ {
     "language" : "nl",
@@ -796,11 +797,12 @@
       "value" : "Verenigde Staten"
     } ],
     "languages" : [ {
-      "code" : "nl",
-      "value" : "Nederlands"
-    }, {
       "code" : "fr",
       "value" : "Frans"
+    }, {
+      "code" : "nl",
+      "usage" : "DUBBED",
+      "value" : "Nederlands"
     } ],
     "availableSubtitles" : [ {
       "language" : "nl",
