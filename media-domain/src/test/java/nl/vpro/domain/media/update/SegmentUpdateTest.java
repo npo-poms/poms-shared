@@ -86,8 +86,9 @@ public class SegmentUpdateTest extends MediaUpdateTest {
                         "type" : "MAIN"
                       } ],
                       "ageRating" : "ALL",
+                      "language" : [ ],
                       "start" : "P0DT0H0M0.100S",
-                       "midRef" : "MID_123"
+                      "midRef" : "MID_123"
 
                     }
                     """);
