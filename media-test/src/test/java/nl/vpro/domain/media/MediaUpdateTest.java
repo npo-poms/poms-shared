@@ -127,6 +127,7 @@ public class MediaUpdateTest {
                         } ],
                         "duration" : "P0DT2H0M0.000S",
                         "ageRating" : "ALL",
+                        "language" : [ ],
                         "scheduleEvents" : [ {
                           "channel" : "RAD1",
                           "start" : 1685953800000,
