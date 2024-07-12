@@ -90,5 +90,9 @@ public class UsedLanguageUpdateAdapter extends XmlAdapter<UsedLanguageUpdateAdap
             return usage == null || usage == UsedLanguage.Usage.AUDIODESCRIPTION ? null : usage;
         }
 
+        public void setUsage(UsedLanguage.Usage usage) {
+            this.usage = usage;
+        }
+
     }
 }

@@ -5,13 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.time.LocalDateTime;
 
-import jakarta.validation.ConstraintViolation;
 import javax.xml.XMLConstants;
-import jakarta.xml.bind.JAXB;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.*;
+import jakarta.validation.ConstraintViolation;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.jupiter.api.*;
+import org.meeuw.i18n.languages.ISO_639_1_Code;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
@@ -56,9 +57,13 @@ public class MediaUpdateTest {
             .build();
 
 
+        assertThat(withEverything.getLanguages()).contains(UsedLanguage.dubbed(ISO_639_1_Code.nl));
         ProgramUpdate update = ProgramUpdate.create(withEverything, OwnerType.BROADCASTER);
         update.setVersion(Version.of(5, 12));
         log.info("{}", update.getVersion());
+        assertThat(update.getLanguages()).contains(UsedLanguage.dubbed(ISO_639_1_Code.nl));
+
+
 
         rounded = JAXBTestUtil.roundTripAndValidateAndSimilar(update,
             getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"),
