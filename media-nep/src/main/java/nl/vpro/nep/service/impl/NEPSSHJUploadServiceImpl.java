@@ -1,6 +1,7 @@
 package nl.vpro.nep.service.impl;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.common.StreamCopier;
 import net.schmizz.sshj.sftp.*;
@@ -29,8 +30,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPUploadService;
-import nl.vpro.util.FileSizeFormatter;
-import nl.vpro.util.TimeUtils;
+import nl.vpro.util.*;
 
 import static nl.vpro.i18n.MultiLanguageString.en;
 
@@ -106,8 +106,41 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
      * See MSE-5800. This below implementation will always result in file attributes to be set. Which as of 2024-06-04 suddenly seems to be a problem.
      * Using {@link #upload(SimpleLogger, String, Long, Path, boolean)} this is worked around (unless #{preserveAttributes} is set to true)
      */
+    @SneakyThrows
     @Override
     public long upload(
+        final @NonNull SimpleLogger logger,
+        final @NonNull String nepFile,
+        final @NonNull Long size,
+        final @NonNull InputStream incomingStream,
+        final boolean replaces) throws IOException {
+        if (incomingStream instanceof FileCachingInputStream caching) {
+            final Path path = caching.getTempFile();
+            if (path != null) {
+                logger.info("Implicitly using temp file (MSE-5800)");
+                caching.getFuture().get();
+                return upload(logger, nepFile, size,  path , replaces);
+            }
+        }
+        if (preserveAttributes) {
+            logger.warn("Trying streaming. See MSE-5800");
+            return upload_streaming(logger, nepFile, size, incomingStream, replaces);
+        } else {
+            logger.info("Implicitly using temp file (MSE-5800)");
+            try (FileCachingInputStream fileCachingInputStream = FileCachingInputStream
+                .builder()
+                .startImmediately(true)
+                .input(incomingStream)
+                .downloadFirst(true)
+                .build()
+            ) {
+                return upload(logger, nepFile, size,  fileCachingInputStream.getTempFile() , replaces);
+
+            }
+        }
+
+    }
+    private long upload_streaming(
         final @NonNull SimpleLogger logger,
         final @NonNull String nepFile,
         final @NonNull Long size,
