@@ -32,21 +32,33 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public <T> T getInNewTransaction(@NonNull  Supplier<T> supplier) {
+    public <T> T executeInTransaction(@NonNull Callable<T> callable) {
+        return doAsTransactionService.executeInTransaction(user, callable);
+    }
+
+
+    @Override
+    public <T> T getInNewTransaction(@NonNull Supplier<T> supplier) {
         return doAsTransactionService.getInNewTransaction(user, supplier);
     }
 
 
     @Override
-    public <T> T getInTransaction(@NonNull  Supplier<T> supplier) {
+    public <T> T getInTransaction(@NonNull Supplier<T> supplier) {
         return doAsTransactionService.getInTransaction(user, supplier);
     }
 
 
     @Override
-    public void executeInNewTransaction(@NonNull  Runnable runnable) {
+    public void executeInNewTransaction(@NonNull Runnable runnable) {
         doAsTransactionService.executeInNewTransaction(user, runnable);
     }
+
+    @Override
+    public void executeInTransaction(@NonNull Runnable runnable) {
+        doAsTransactionService.executeInTransaction(user, runnable);
+    }
+
 
     @Override
     public <T, S> T executeInNewTransaction(S argument, @NonNull Function<S, T> function) {
@@ -56,7 +68,6 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     @Override
     public <T> void executeInNewTransaction(T argument, @NonNull Consumer<T> consumer) {
         doAsTransactionService.executeInNewTransaction(user, argument, consumer);
-
     }
 
     @Override
@@ -67,7 +78,6 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     @Override
     public <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier) {
         return doAsTransactionService.getInReadonlyTransaction(user, supplier);
-
     }
 
     @Override
@@ -83,7 +93,6 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     @Override
     public <T> void executeInReadonlyTransaction(T argument, @NonNull Consumer<T> consumer) {
         doAsTransactionService.executeInReadonlyTransaction(user, argument, consumer);
-
     }
 
     @Override

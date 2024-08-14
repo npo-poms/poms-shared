@@ -22,12 +22,23 @@ public class MockDoAsTransactionService extends MockTransactionService implement
     }
 
     @Override
+    @SneakyThrows
+    public <T> T executeInTransaction(@NonNull Trusted user, @NonNull Callable<T> callable) {
+        return callable.call();
+    }
+
+    @Override
     public <T, S> T executeInNewTransaction(@NonNull Trusted user, S argument, @NonNull Function<S, T> function) {
         return function.apply(argument);
     }
 
     @Override
     public void executeInNewTransaction(@NonNull Trusted user, @NonNull Runnable runnable) {
+        runnable.run();
+    }
+
+    @Override
+    public void executeInTransaction(@NonNull Trusted user, @NonNull Runnable runnable) {
         runnable.run();
     }
 

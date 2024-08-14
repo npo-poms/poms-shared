@@ -18,10 +18,13 @@ public interface DoAsTransactionService extends TransactionService {
 
     <T> T executeInNewTransaction(@NonNull Trusted user, @NonNull Callable<T> callable);
 
+    <T> T executeInTransaction(@NonNull Trusted user, @NonNull Callable<T> callable);
+
     <T, S> T executeInNewTransaction(@NonNull Trusted user, S argument, @NonNull  Function<S, T> function);
 
     void executeInNewTransaction(@NonNull Trusted user, @NonNull  Runnable runnable);
 
+    void executeInTransaction(@NonNull Trusted user, @NonNull  Runnable runnable);
 
     <T> T executeInReadonlyTransaction(@NonNull Trusted user, @NonNull  Callable<T> callable);
 
