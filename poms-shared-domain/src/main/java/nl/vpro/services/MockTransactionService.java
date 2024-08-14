@@ -16,6 +16,11 @@ public class MockTransactionService implements TransactionService {
     }
 
     @Override
+    public <T> T executeInTransaction(@NonNull Callable<T> callable) throws Exception {
+        return callable.call();
+    }
+
+    @Override
     public <T> T getInNewTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
     }
@@ -25,6 +30,10 @@ public class MockTransactionService implements TransactionService {
         return supplier.get();
     }
 
+    @Override
+    public void executeInTransaction(@NonNull Runnable runnable) {
+        runnable.run();
+    }
 
     @Override
     public void executeInNewTransaction(@NonNull Runnable runnable) {

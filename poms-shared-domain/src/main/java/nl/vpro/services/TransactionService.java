@@ -17,12 +17,27 @@ import org.meeuw.functional.ThrowAnyRunnable;
  */
 public interface TransactionService {
     /**
-     * Run callable in new transaction. Transaction is rolled back ONLY in case of a runtime exception
+     * Run callable in new transaction. Transaction is rolled back ONLY in case of an exception
      * @param callable The jobs to be processed in the new transaction
      * @return The result of the callable
      * @throws Exception The exception thrown by the callable
      */
     <T> T executeInNewTransaction(@NonNull Callable<T> callable) throws Exception;
+
+
+    /**
+     * Run callable in transaction (creating a new one if there is none only). Transaction is rolled back ONLY in case of a runtime exception
+     * @param callable The jobs to be processed in transaction
+     * @return The result of the callable
+     * @throws Exception The exception thrown by the callable
+     * @since 8.3
+     */
+    <T> T executeInTransaction(@NonNull Callable<T> callable) throws Exception;
+
+    /**
+     * @since 8.3
+     */
+    void executeInTransaction(@NonNull Runnable runnable);
 
     <T> T getInNewTransaction(@NonNull Supplier<T> supplier);
 

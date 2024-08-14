@@ -1,9 +1,9 @@
 package nl.vpro.services.jpa;
 
-import jakarta.transaction.Transactional;
-
 import java.util.concurrent.Callable;
 import java.util.function.*;
+
+import jakarta.transaction.Transactional;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,12 @@ public class JpaTransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    @Transactional(value = REQUIRED, rollbackOn = {Exception.class})
+    public <T> T executeInTransaction(@NonNull Callable<T> callable) throws Exception {
+        return callable.call();
+    }
+
+    @Override
     @Transactional(value = REQUIRES_NEW, rollbackOn = {Exception.class})
     public <T> T getInNewTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
@@ -36,6 +42,13 @@ public class JpaTransactionServiceImpl implements TransactionService {
     @Override
     @Transactional(REQUIRES_NEW)
     public void executeInNewTransaction(@NonNull Runnable runnable) {
+        runnable.run();
+    }
+
+
+    @Override
+    @Transactional(REQUIRED)
+    public void executeInTransaction(@NonNull Runnable runnable) {
         runnable.run();
     }
 

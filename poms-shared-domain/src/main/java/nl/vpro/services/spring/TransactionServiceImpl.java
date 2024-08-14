@@ -29,6 +29,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    @Transactional(value = REQUIRED , rollbackOn = {Exception.class})
+    public <T> T executeInTransaction(@NonNull Callable<T> callable) throws Exception {
+        return callable.call();
+    }
+
+    @Override
     @Transactional(value = REQUIRES_NEW, rollbackOn = {Exception.class})
     public <T> T getInNewTransaction(@NonNull Supplier<T> supplier) {
         return supplier.get();
@@ -43,6 +49,12 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional(REQUIRES_NEW)
     public void executeInNewTransaction(@NonNull Runnable runnable) {
+        runnable.run();
+    }
+
+    @Override
+    @Transactional(REQUIRED)
+    public void executeInTransaction(@NonNull Runnable runnable) {
         runnable.run();
     }
 
