@@ -5,7 +5,16 @@ import java.util.List;
 
 public record AvailabilityPeriod(
     List<GeoIp> geoip,
+
+
     Encryption[] encryption,
+
     Instant stop,
-    Instant start) {
+    Instant start,
+
+
+    //  suddenly new August 2024
+
+    GeoIp geoIpRestriction,
+    boolean drm) {
 }
