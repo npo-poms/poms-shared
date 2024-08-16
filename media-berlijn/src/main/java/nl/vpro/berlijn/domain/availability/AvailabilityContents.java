@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import nl.vpro.berlijn.domain.AssertValidatable;
 
@@ -40,7 +41,14 @@ public record AvailabilityContents(
     Restrictions restrictions,
     Boolean revoked,
     Instant revokedTimestamp,
-    LocalDate date
+    LocalDate date,
+
+    /**
+     * What's this?
+     */
+    JsonNode revoke
+
+
 ) implements AssertValidatable {
     @Override
     public void assertValid() {
