@@ -11,7 +11,7 @@ import nl.vpro.domain.media.MediaType;
 
 @JsonIgnoreProperties({
     "type", //
-    "metadata" // just contains things we're not insterested in
+    "metadata" // just contains things we're not interested in
 })
 public record Availability(
     String version, // assert 1.0?
